@@ -3,6 +3,17 @@
    version = "1.0">
    <Group
       location = "container:"
+      name = "Sample">
+      <Group
+         location = "container:"
+         name = "Plugin">
+         <FileRef
+            location = "group:AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
+      location = "container:"
       name = "DocumentKit">
    </Group>
    <Group

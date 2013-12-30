@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "group:Artsmesh/Artsmesh.xcodeproj">
-   </FileRef>
+   <Group
+      location = "container:"
+      name = "DocumentKit">
+   </Group>
+   <Group
+      location = "container:"
+      name = "Utilities">
+      <FileRef
+         location = "group:AMLogger/AMLogger.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMTaskLauncher/AMTaskLauncher.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "UI">
+      <FileRef
+         location = "group:Artsmesh/Artsmesh.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Plugins">
+      <Group
+         location = "container:"
+         name = "Package">
+      </Group>
+      <Group
+         location = "container:"
+         name = "Module">
+      </Group>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Core Service">
+      <FileRef
+         location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMPluginLoader/AMPluginLoader.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMPreferenceManager/AMPreferenceManager.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Database">
+   </Group>
 </Workspace>

@@ -18,6 +18,11 @@
 		37FCB8D918710C3C00C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB8B818710C3C00C1FD1B /* Cocoa.framework */; };
 		37FCB8E118710C3C00C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB8DF18710C3C00C1FD1B /* InfoPlist.strings */; };
 		37FCB8E318710C3C00C1FD1B /* ArtsmeshTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB8E218710C3C00C1FD1B /* ArtsmeshTests.m */; };
+		37FCB92518710DFF00C1FD1B /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB92418710DFF00C1FD1B /* AMPreferenceManager.framework */; };
+		37FCB99818710E9C00C1FD1B /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB99618710E9C00C1FD1B /* AMNotificationManager.framework */; };
+		37FCB99918710E9C00C1FD1B /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB99718710E9C00C1FD1B /* AMPluginLoader.framework */; };
+		37FCB9D318710F3900C1FD1B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9D218710F3900C1FD1B /* AMTaskLauncher.framework */; };
+		37FCBA0F18710FA000C1FD1B /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCBA0E18710FA000C1FD1B /* AMLogger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +55,12 @@
 		37FCB8DE18710C3C00C1FD1B /* ArtsmeshTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArtsmeshTests-Info.plist"; sourceTree = "<group>"; };
 		37FCB8E018710C3C00C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FCB8E218710C3C00C1FD1B /* ArtsmeshTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArtsmeshTests.m; sourceTree = "<group>"; };
+		37FCB92418710DFF00C1FD1B /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMPreferenceManager.framework"; sourceTree = "<group>"; };
+		37FCB99618710E9C00C1FD1B /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMNotificationManager.framework"; sourceTree = "<group>"; };
+		37FCB99718710E9C00C1FD1B /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMPluginLoader.framework"; sourceTree = "<group>"; };
+		37FCB9D218710F3900C1FD1B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMTaskLauncher.framework"; sourceTree = "<group>"; };
+		37FCBA0C18710F6B00C1FD1B /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMLogger.framework; path = ../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
+		37FCBA0E18710FA000C1FD1B /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMLogger.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +68,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37FCBA0F18710FA000C1FD1B /* AMLogger.framework in Frameworks */,
+				37FCB9D318710F3900C1FD1B /* AMTaskLauncher.framework in Frameworks */,
+				37FCB99818710E9C00C1FD1B /* AMNotificationManager.framework in Frameworks */,
+				37FCB99918710E9C00C1FD1B /* AMPluginLoader.framework in Frameworks */,
+				37FCB92518710DFF00C1FD1B /* AMPreferenceManager.framework in Frameworks */,
 				37FCB8B918710C3C00C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +111,12 @@
 		37FCB8B718710C3C00C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37FCBA0E18710FA000C1FD1B /* AMLogger.framework */,
+				37FCBA0C18710F6B00C1FD1B /* AMLogger.framework */,
+				37FCB9D218710F3900C1FD1B /* AMTaskLauncher.framework */,
+				37FCB99618710E9C00C1FD1B /* AMNotificationManager.framework */,
+				37FCB99718710E9C00C1FD1B /* AMPluginLoader.framework */,
+				37FCB92418710DFF00C1FD1B /* AMPreferenceManager.framework */,
 				37FCB8B818710C3C00C1FD1B /* Cocoa.framework */,
 				37FCB8D718710C3C00C1FD1B /* XCTest.framework */,
 				37FCB8BA18710C3C00C1FD1B /* Other Frameworks */,
@@ -385,6 +407,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Artsmesh/Artsmesh-Prefix.pch";
 				INFOPLIST_FILE = "Artsmesh/Artsmesh-Info.plist";
@@ -398,6 +424,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Artsmesh/Artsmesh-Prefix.pch";
 				INFOPLIST_FILE = "Artsmesh/Artsmesh-Info.plist";

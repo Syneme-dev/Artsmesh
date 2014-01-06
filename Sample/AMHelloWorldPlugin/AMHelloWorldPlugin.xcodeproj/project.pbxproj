@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37C2315F187A89A000554AFD /* PluginPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2315E187A89A000554AFD /* PluginPrincipal.m */; };
+		37C23161187A89D600554AFD /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C23160187A89D600554AFD /* AMPluginLoader.framework */; };
 		37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCBA1C187111F300C1FD1B /* Cocoa.framework */; };
 		37FCBA27187111F300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCBA25187111F300C1FD1B /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37C2315D187A89A000554AFD /* PluginPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPrincipal.h; sourceTree = "<group>"; };
+		37C2315E187A89A000554AFD /* PluginPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPrincipal.m; sourceTree = "<group>"; };
+		37C23160187A89D600554AFD /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-drnphvtbgrdcmveenynyldmyyfof/Build/Products/Debug/AMPluginLoader.framework"; sourceTree = "<group>"; };
 		37FCBA19187111F300C1FD1B /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMHelloWorldPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCBA1C187111F300C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCBA1F187111F300C1FD1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -27,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C23161187A89D600554AFD /* AMPluginLoader.framework in Frameworks */,
 				37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +60,7 @@
 		37FCBA1B187111F300C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37C23160187A89D600554AFD /* AMPluginLoader.framework */,
 				37FCBA1C187111F300C1FD1B /* Cocoa.framework */,
 				37FCBA1E187111F300C1FD1B /* Other Frameworks */,
 			);
@@ -74,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				37FCBA23187111F300C1FD1B /* Supporting Files */,
+				37C2315D187A89A000554AFD /* PluginPrincipal.h */,
+				37C2315E187A89A000554AFD /* PluginPrincipal.m */,
 			);
 			path = AMHelloWorldPlugin;
 			sourceTree = "<group>";
@@ -150,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C2315F187A89A000554AFD /* PluginPrincipal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +249,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-drnphvtbgrdcmveenynyldmyyfof/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMHelloWorldPlugin/AMHelloWorldPlugin-Prefix.pch";
 				INFOPLIST_FILE = "AMHelloWorldPlugin/AMHelloWorldPlugin-Info.plist";
@@ -252,6 +266,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-drnphvtbgrdcmveenynyldmyyfof/Build/Products/Debug",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMHelloWorldPlugin/AMHelloWorldPlugin-Prefix.pch";
 				INFOPLIST_FILE = "AMHelloWorldPlugin/AMHelloWorldPlugin-Info.plist";
@@ -280,6 +298,7 @@
 				37FCBA2D187111F300C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

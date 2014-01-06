@@ -4,11 +4,14 @@
    <Group
       location = "container:"
       name = "Sample">
+      <FileRef
+         location = "group:Sample/DemoUI/DemoUI.xcodeproj">
+      </FileRef>
       <Group
          location = "container:"
          name = "Plugin">
          <FileRef
-            location = "group:AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj">
+            location = "group:Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj">
          </FileRef>
       </Group>
    </Group>

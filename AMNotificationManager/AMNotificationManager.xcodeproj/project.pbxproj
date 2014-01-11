@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37EF81851880CC0300FE7944 /* AMNotificationMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EF81831880CC0300FE7944 /* AMNotificationMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37EF81861880CC0300FE7944 /* AMNotificationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EF81841880CC0300FE7944 /* AMNotificationMessage.m */; };
+		37EF81871880CC0300FE7944 /* AMNotificationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EF81841880CC0300FE7944 /* AMNotificationMessage.m */; };
+		37EF81891880CE5F00FE7944 /* AMNotificationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB97818710E8600C1FD1B /* AMNotificationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37FCB96C18710E8600C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB96B18710E8600C1FD1B /* Cocoa.framework */; };
 		37FCB97618710E8600C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB97418710E8600C1FD1B /* InfoPlist.strings */; };
 		37FCB97A18710E8600C1FD1B /* AMNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB97918710E8600C1FD1B /* AMNotificationManager.m */; };
@@ -28,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37EF81831880CC0300FE7944 /* AMNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNotificationMessage.h; sourceTree = "<group>"; };
+		37EF81841880CC0300FE7944 /* AMNotificationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNotificationMessage.m; sourceTree = "<group>"; };
 		37FCB96818710E8600C1FD1B /* AMNotificationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMNotificationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB96B18710E8600C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCB96E18710E8600C1FD1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -112,6 +118,8 @@
 				37FCB97818710E8600C1FD1B /* AMNotificationManager.h */,
 				37FCB97918710E8600C1FD1B /* AMNotificationManager.m */,
 				37FCB97218710E8600C1FD1B /* Supporting Files */,
+				37EF81831880CC0300FE7944 /* AMNotificationMessage.h */,
+				37EF81841880CC0300FE7944 /* AMNotificationMessage.m */,
 			);
 			path = AMNotificationManager;
 			sourceTree = "<group>";
@@ -151,6 +159,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EF81891880CE5F00FE7944 /* AMNotificationManager.h in Headers */,
+				37EF81851880CC0300FE7944 /* AMNotificationMessage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EF81861880CC0300FE7944 /* AMNotificationMessage.m in Sources */,
 				37FCB97A18710E8600C1FD1B /* AMNotificationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EF81871880CC0300FE7944 /* AMNotificationMessage.m in Sources */,
 				37FCB98D18710E8600C1FD1B /* AMNotificationManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +460,7 @@
 				37FCB99218710E8600C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37FCB99318710E8600C1FD1B /* Build configuration list for PBXNativeTarget "AMNotificationManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +469,7 @@
 				37FCB99518710E8600C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

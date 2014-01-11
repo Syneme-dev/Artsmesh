@@ -10,4 +10,24 @@
 
 @implementation AMPluginLoader
 
++(AMPluginLoader *)defaultShared{
+    return nil;
+}
+
+-(id) init{
+    return nil;
+}
+
+-(NSArray *)getPluginPreferenceList{
+    return nil;
+}
+
+-(NSArray *)getPluginList{
+    return nil;
+}
+
+-(void)loadPlugin:(NSDictionary *) pluginInfo{
+    return ;
+}
+
 @end

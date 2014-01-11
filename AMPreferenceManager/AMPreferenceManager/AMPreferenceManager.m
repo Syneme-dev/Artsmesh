@@ -10,4 +10,8 @@
 
 @implementation AMPreferenceManager
 
++(AMPreferenceManager *)defaultShared{
+    return nil;
+}
+
 @end

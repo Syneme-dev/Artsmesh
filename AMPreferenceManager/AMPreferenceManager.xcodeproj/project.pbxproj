@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37EF81881880CE4900FE7944 /* AMPreferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB90618710D3100C1FD1B /* AMPreferenceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37FCB8FA18710D3100C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB8F918710D3100C1FD1B /* Cocoa.framework */; };
 		37FCB90418710D3100C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB90218710D3100C1FD1B /* InfoPlist.strings */; };
 		37FCB90818710D3100C1FD1B /* AMPreferenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB90718710D3100C1FD1B /* AMPreferenceManager.m */; };
@@ -151,6 +152,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EF81881880CE4900FE7944 /* AMPreferenceManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +450,7 @@
 				37FCB92018710D3100C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37FCB92118710D3100C1FD1B /* Build configuration list for PBXNativeTarget "AMPreferenceManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +459,7 @@
 				37FCB92318710D3100C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

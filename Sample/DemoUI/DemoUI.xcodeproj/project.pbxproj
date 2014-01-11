@@ -416,7 +416,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/skyjia/Workspaces/Farefore/Artsmesh/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -433,7 +433,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/skyjia/Workspaces/Farefore/Artsmesh/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

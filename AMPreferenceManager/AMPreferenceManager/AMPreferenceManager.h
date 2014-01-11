@@ -10,5 +10,6 @@
 
 @interface AMPreferenceManager : NSObject
 
++(AMPreferenceManager *)defaultShared;
 
 @end

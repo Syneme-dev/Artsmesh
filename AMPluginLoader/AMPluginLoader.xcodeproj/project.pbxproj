@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA61D187BA35000EBAB18 /* AMPluginProtocol.h */; };
+		376AA620187BA37A00EBAB18 /* AMModulePluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA61F187BA37A00EBAB18 /* AMModulePluginProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		376AA622187BA39900EBAB18 /* AMPackagePluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA621187BA39900EBAB18 /* AMPackagePluginProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37C2315C187A895400554AFD /* AMPluginPrincipalProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 37C2315B187A895400554AFD /* AMPluginPrincipalProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37C23162187A8AB400554AFD /* AMPluginLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB94018710E6200C1FD1B /* AMPluginLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37FCB93418710E6200C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93318710E6200C1FD1B /* Cocoa.framework */; };
 		37FCB93E18710E6200C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB93C18710E6200C1FD1B /* InfoPlist.strings */; };
 		37FCB94218710E6200C1FD1B /* AMPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB94118710E6200C1FD1B /* AMPluginLoader.m */; };
@@ -28,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		376AA61D187BA35000EBAB18 /* AMPluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPluginProtocol.h; sourceTree = "<group>"; };
+		376AA61F187BA37A00EBAB18 /* AMModulePluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMModulePluginProtocol.h; sourceTree = "<group>"; };
+		376AA621187BA39900EBAB18 /* AMPackagePluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPackagePluginProtocol.h; sourceTree = "<group>"; };
+		37C2315B187A895400554AFD /* AMPluginPrincipalProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPluginPrincipalProtocol.h; sourceTree = "<group>"; };
 		37FCB93018710E6200C1FD1B /* AMPluginLoader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMPluginLoader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB93318710E6200C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCB93618710E6200C1FD1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,9 +118,13 @@
 		37FCB93918710E6200C1FD1B /* AMPluginLoader */ = {
 			isa = PBXGroup;
 			children = (
+				376AA61D187BA35000EBAB18 /* AMPluginProtocol.h */,
+				376AA61F187BA37A00EBAB18 /* AMModulePluginProtocol.h */,
+				376AA621187BA39900EBAB18 /* AMPackagePluginProtocol.h */,
 				37FCB94018710E6200C1FD1B /* AMPluginLoader.h */,
 				37FCB94118710E6200C1FD1B /* AMPluginLoader.m */,
 				37FCB93A18710E6200C1FD1B /* Supporting Files */,
+				37C2315B187A895400554AFD /* AMPluginPrincipalProtocol.h */,
 			);
 			path = AMPluginLoader;
 			sourceTree = "<group>";
@@ -151,6 +164,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C23162187A8AB400554AFD /* AMPluginLoader.h in Headers */,
+				376AA620187BA37A00EBAB18 /* AMModulePluginProtocol.h in Headers */,
+				376AA622187BA39900EBAB18 /* AMPackagePluginProtocol.h in Headers */,
+				376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */,
+				37C2315C187A895400554AFD /* AMPluginPrincipalProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +466,7 @@
 				37FCB95A18710E6200C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37FCB95B18710E6200C1FD1B /* Build configuration list for PBXNativeTarget "AMPluginLoaderTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +475,7 @@
 				37FCB95D18710E6200C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,4 +10,10 @@
 
 @interface AMPluginLoader : NSObject
 
++(AMPluginLoader *)defaultShared;
+
+-(NSArray *)getPluginPreferenceList;
+-(NSArray *)getPluginList;
+-(void)loadPlugin:(NSDictionary *) pluginInfo;
+
 @end

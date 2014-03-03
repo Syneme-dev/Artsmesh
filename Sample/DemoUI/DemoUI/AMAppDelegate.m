@@ -13,7 +13,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self loadPlugins];
-    // Insert code here to initialize your application
 }
 
 - (NSArray*)loadPlugins
@@ -22,7 +21,6 @@
 	NSArray *allPlugins = [main pathsForResourcesOfType:@"bundle" inDirectory:@"../PlugIns"];
 	NSMutableArray *availablePlugins = [NSMutableArray array];
 	id plugin = nil;
-    NSLog(@"xx");
 	NSBundle *pluginBundle = nil;
 	for (NSString *path in allPlugins) {
 		pluginBundle = [NSBundle bundleWithPath:path];

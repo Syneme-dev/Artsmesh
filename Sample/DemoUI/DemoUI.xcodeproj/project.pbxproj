@@ -21,6 +21,7 @@
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
 		AF9A5CB418C446150078D125 /* AMHelloWorldPlugin.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
 		AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
+		AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */,
 				AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +70,7 @@
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMHelloWorldPlugin.xcodeproj; path = Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj; sourceTree = "<group>"; };
+		AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UserGroupModule.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,18 +95,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		376E047F187A9B380081DBA6 /* Plugins */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Plugins;
-			sourceTree = "<group>";
-		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */,
 				AF9A5CB318C446150078D125 /* Plugin */,
-				376E047F187A9B380081DBA6 /* Plugins */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -425,10 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";
@@ -442,10 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";

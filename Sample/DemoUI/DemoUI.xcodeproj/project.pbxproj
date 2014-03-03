@@ -19,7 +19,8 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
-		AF0903D218C07232003FC11C /* AMHelloWorldPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */; };
+		AF9A5CB418C446150078D125 /* AMHelloWorldPlugin.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
+		AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AF0903D218C07232003FC11C /* AMHelloWorldPlugin.bundle in CopyFiles */,
+				AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +67,7 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
-		AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMHelloWorldPlugin.bundle; sourceTree = "<group>"; };
+		AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMHelloWorldPlugin.xcodeproj; path = Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +102,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */,
+				AF9A5CB318C446150078D125 /* Plugin */,
 				376E047F187A9B380081DBA6 /* Plugins */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
@@ -180,6 +181,15 @@
 				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF9A5CB318C446150078D125 /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */,
+			);
+			name = Plugin;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
+				AF9A5CB418C446150078D125 /* AMHelloWorldPlugin.xcodeproj in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,

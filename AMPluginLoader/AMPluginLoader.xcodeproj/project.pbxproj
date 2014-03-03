@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA61D187BA35000EBAB18 /* AMPluginProtocol.h */; };
+		376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA61D187BA35000EBAB18 /* AMPluginProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		376AA620187BA37A00EBAB18 /* AMModulePluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA61F187BA37A00EBAB18 /* AMModulePluginProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		376AA622187BA39900EBAB18 /* AMPackagePluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 376AA621187BA39900EBAB18 /* AMPackagePluginProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37C2315C187A895400554AFD /* AMPluginPrincipalProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 37C2315B187A895400554AFD /* AMPluginPrincipalProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,10 +164,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */,
 				37C23162187A8AB400554AFD /* AMPluginLoader.h in Headers */,
 				376AA620187BA37A00EBAB18 /* AMModulePluginProtocol.h in Headers */,
 				376AA622187BA39900EBAB18 /* AMPackagePluginProtocol.h in Headers */,
-				376AA61E187BA35000EBAB18 /* AMPluginProtocol.h in Headers */,
 				37C2315C187A895400554AFD /* AMPluginPrincipalProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

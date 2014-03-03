@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AMPluginLoader/AMPluginPrincipalProtocol.h>
+#import <AMPluginLoader/AMPluginProtocol.h>
+#import <AMPluginLoader/AMModulePluginProtocol.h>
 
-@interface PluginPrincipal : NSObject
+@interface PluginPrincipal : NSObject<AMModulePlugin>
 @end

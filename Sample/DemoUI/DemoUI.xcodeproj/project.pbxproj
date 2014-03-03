@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		376E047B187A9A400081DBA6 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 376E047A187A9A400081DBA6 /* AMPluginLoader.framework */; };
-		376E0481187A9C3B0081DBA6 /* AMHelloWorldPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 376E0480187A9C3B0081DBA6 /* AMHelloWorldPlugin.bundle */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2317C187A8FFD00554AFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2317B187A8FFD00554AFD /* main.m */; };
@@ -20,6 +19,7 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
+		AF0903D218C07232003FC11C /* AMHelloWorldPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				376E0481187A9C3B0081DBA6 /* AMHelloWorldPlugin.bundle in CopyFiles */,
+				AF0903D218C07232003FC11C /* AMHelloWorldPlugin.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		376E047A187A9A400081DBA6 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
-		376E0480187A9C3B0081DBA6 /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = AMHelloWorldPlugin.bundle; path = /Users/skyjia/Workspaces/Farefore/Artsmesh/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle; sourceTree = "<absolute>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -67,6 +66,7 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMHelloWorldPlugin.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,6 @@
 		376E047F187A9B380081DBA6 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				376E0480187A9C3B0081DBA6 /* AMHelloWorldPlugin.bundle */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -102,6 +101,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				AF0903D118C07232003FC11C /* AMHelloWorldPlugin.bundle */,
 				376E047F187A9B380081DBA6 /* Plugins */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,

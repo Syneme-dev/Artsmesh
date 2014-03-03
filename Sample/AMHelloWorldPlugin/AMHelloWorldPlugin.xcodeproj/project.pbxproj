@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		37C2315F187A89A000554AFD /* PluginPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2315E187A89A000554AFD /* PluginPrincipal.m */; };
-		37EF818B1880D20900FE7944 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EF818A1880D20900FE7944 /* AMPluginLoader.framework */; };
 		37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCBA1C187111F300C1FD1B /* Cocoa.framework */; };
 		37FCBA27187111F300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCBA25187111F300C1FD1B /* InfoPlist.strings */; };
+		AF9A5CAC18C438BC0078D125 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		37C2315D187A89A000554AFD /* PluginPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPrincipal.h; sourceTree = "<group>"; };
 		37C2315E187A89A000554AFD /* PluginPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPrincipal.m; sourceTree = "<group>"; };
-		37EF818A1880D20900FE7944 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		37FCBA19187111F300C1FD1B /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMHelloWorldPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCBA1C187111F300C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCBA1F187111F300C1FD1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -25,6 +24,7 @@
 		37FCBA24187111F300C1FD1B /* AMHelloWorldPlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMHelloWorldPlugin-Info.plist"; sourceTree = "<group>"; };
 		37FCBA26187111F300C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FCBA28187111F300C1FD1B /* AMHelloWorldPlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMHelloWorldPlugin-Prefix.pch"; sourceTree = "<group>"; };
+		AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37EF818B1880D20900FE7944 /* AMPluginLoader.framework in Frameworks */,
+				AF9A5CAC18C438BC0078D125 /* AMPluginLoader.framework in Frameworks */,
 				37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,7 +60,7 @@
 		37FCBA1B187111F300C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				37EF818A1880D20900FE7944 /* AMPluginLoader.framework */,
+				AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */,
 				37FCBA1C187111F300C1FD1B /* Cocoa.framework */,
 				37FCBA1E187111F300C1FD1B /* Other Frameworks */,
 			);
@@ -252,6 +252,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMHelloWorldPlugin/AMHelloWorldPlugin-Prefix.pch";
@@ -269,6 +270,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DerivedData/Artsmesh/Build/Products/Debug",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMHelloWorldPlugin/AMHelloWorldPlugin-Prefix.pch";

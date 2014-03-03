@@ -7,13 +7,6 @@
       <FileRef
          location = "group:Sample/DemoUI/DemoUI.xcodeproj">
       </FileRef>
-      <Group
-         location = "container:"
-         name = "Plugin">
-         <FileRef
-            location = "group:Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj">
-         </FileRef>
-      </Group>
    </Group>
    <Group
       location = "container:"

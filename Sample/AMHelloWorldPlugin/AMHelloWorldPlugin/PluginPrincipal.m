@@ -10,4 +10,43 @@
 
 @implementation PluginPrincipal
 
+# pragma mark
+# pragma mark General
+
+-(id)init
+{
+    NSLog(@"HelloWorldPlugin is loaded.");
+    return self;
+}
+
+-(NSString *) displayName
+{
+    return @"HelloWorldPlugin";
+}
+
+# pragma mark
+# pragma mark Notification
+
+-(NSString *) registerAllMessageTypes
+{
+    //TODO:
+    return @"??";
+}
+
+# pragma mark
+# pragma mark Preference
+
+-(void) loadPreference
+{
+    //TODO:
+}
+-(void) savePreference:(NSDictionary *)pref
+{
+    //TODO:
+}
+-(void) registerPreference
+{
+    //TODO:
+}
+
 @end

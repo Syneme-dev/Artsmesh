@@ -39,6 +39,9 @@
       <Group
          location = "container:"
          name = "Module">
+         <FileRef
+            location = "group:UserGroupModule/UserGroupModule.xcodeproj">
+         </FileRef>
       </Group>
    </Group>
    <Group

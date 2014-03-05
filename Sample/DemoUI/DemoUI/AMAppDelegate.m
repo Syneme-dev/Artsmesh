@@ -13,6 +13,11 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self loadPlugins];
+    [self maxSizeWindow];
+}
+-(void)maxSizeWindow{
+    NSRect screenSize = [[NSScreen mainScreen] frame];
+    [self.window setFrame:screenSize display:YES ];
 }
 
 - (NSArray*)loadPlugins

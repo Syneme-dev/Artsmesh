@@ -22,6 +22,7 @@
 		AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
 		AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */; };
 		AFC188CD18C6F09200E03010 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */; };
+		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AMHelloWorldPlugin.xcodeproj; path = Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj; sourceTree = "<group>"; };
 		AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UserGroupModule.bundle; sourceTree = "<group>"; };
 		AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
+		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				37C23187187A8FFD00554AFD /* Images.xcassets */,
 				37C23176187A8FFD00554AFD /* Supporting Files */,
+				AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */,
+				AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
+				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

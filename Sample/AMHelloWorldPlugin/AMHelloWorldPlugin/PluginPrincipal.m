@@ -8,6 +8,7 @@
 
 #import <AMNotificationManager/AMNotificationManager.h>
 #import "PluginPrincipal.h"
+#import "HelloWorldViewController.h"
 
 
 @implementation PluginPrincipal
@@ -22,6 +23,7 @@
     [self listenFunctionOne];
     return self;
 }
+
 
 -(NSString *) displayName
 {
@@ -41,14 +43,17 @@
 # pragma mark
 # pragma mark Preference
 
+//invoke when show??
 -(void) loadPreference
 {
-    //TODO:
+    //Note:option implement. If bind to UI ,you can have no code here.
 }
+//invoke when editing on preference panel.
 -(void) savePreference:(NSDictionary *)pref
 {
-    //TODO:
+    //Note:option implement. If bind to UI ,you can have no code here.
 }
+//when application launch ,register for default value.
 -(void) registerPreference
 {
     //TODO:
@@ -70,6 +75,10 @@
 -(void) onFunctionOneInvoked{
     //Do what you want when received message;
 
+}
+-(NSViewController *) createMainView{
+    HelloWorldViewController *viewController=[[HelloWorldViewController alloc] initWithNibName:@"HelloWorldView" bundle:nil];
+    return viewController;
 }
 
 @end

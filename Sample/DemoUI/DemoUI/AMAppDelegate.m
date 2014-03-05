@@ -7,6 +7,8 @@
 //
 
 #import "AMAppDelegate.h"
+#import <AMPluginLoader/AMPluginProtocol.h>
+#import "HelloWorldConst.h"
 
 @implementation AMAppDelegate
 
@@ -35,8 +37,24 @@
 		[availablePlugins addObject:plugin];
 		plugin = nil;
 		pluginBundle = nil;
+        
+       
 	}
 	return availablePlugins;
+}
+
+
+//TODO:delete code
+-(void) onShowUserListButtonClick
+{
+    NSDictionary *pluginList; // read from global var.
+    NSBundle *userPlugin=pluginList[HelloWorldPluginName];
+    Class principalClass = [userPlugin principalClass];
+    if([principalClass conformsToProtocol: @protocol(AMPlugin)]){
+        NSViewController *ctl= [principalClass createMainView];
+    }
+    
+    
 }
 
 @end

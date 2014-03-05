@@ -12,6 +12,9 @@
 		37FCBA27187111F300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCBA25187111F300C1FD1B /* InfoPlist.strings */; };
 		AF9A5CAC18C438BC0078D125 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */; };
 		AFA5B6D018C6BBD3004EEA35 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5B6CF18C6BBD3004EEA35 /* AMNotificationManager.framework */; };
+		AFC188D418C6F87300E03010 /* HelloWorldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC188D318C6F87300E03010 /* HelloWorldView.xib */; };
+		AFC188D718C701DE00E03010 /* HelloWorldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D618C701DE00E03010 /* HelloWorldViewController.m */; };
+		AFC188DA18C7079900E03010 /* HelloWorldConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AFC188D818C7071000E03010 /* HelloWorldConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,10 @@
 		37FCBA28187111F300C1FD1B /* AMHelloWorldPlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMHelloWorldPlugin-Prefix.pch"; sourceTree = "<group>"; };
 		AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		AFA5B6CF18C6BBD3004EEA35 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
+		AFC188D318C6F87300E03010 /* HelloWorldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelloWorldView.xib; sourceTree = "<group>"; };
+		AFC188D518C701DE00E03010 /* HelloWorldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldViewController.h; sourceTree = "<group>"; };
+		AFC188D618C701DE00E03010 /* HelloWorldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloWorldViewController.m; sourceTree = "<group>"; };
+		AFC188D818C7071000E03010 /* HelloWorldConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +94,10 @@
 				37FCBA23187111F300C1FD1B /* Supporting Files */,
 				37C2315D187A89A000554AFD /* PluginPrincipal.h */,
 				37C2315E187A89A000554AFD /* PluginPrincipal.m */,
+				AFC188D318C6F87300E03010 /* HelloWorldView.xib */,
+				AFC188D518C701DE00E03010 /* HelloWorldViewController.h */,
+				AFC188D618C701DE00E03010 /* HelloWorldViewController.m */,
+				AFC188D818C7071000E03010 /* HelloWorldConst.h */,
 			);
 			path = AMHelloWorldPlugin;
 			sourceTree = "<group>";
@@ -103,6 +114,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		AFC188D918C7079100E03010 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC188DA18C7079900E03010 /* HelloWorldConst.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		37FCBA18187111F300C1FD1B /* AMHelloWorldPlugin */ = {
 			isa = PBXNativeTarget;
@@ -111,6 +133,7 @@
 				37FCBA15187111F300C1FD1B /* Sources */,
 				37FCBA16187111F300C1FD1B /* Frameworks */,
 				37FCBA17187111F300C1FD1B /* Resources */,
+				AFC188D918C7079100E03010 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -152,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC188D418C6F87300E03010 /* HelloWorldView.xib in Resources */,
 				37FCBA27187111F300C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC188D718C701DE00E03010 /* HelloWorldViewController.m in Sources */,
 				37C2315F187A89A000554AFD /* PluginPrincipal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,4 +28,6 @@
 -(void) savePreference:(NSDictionary *)pref;
 -(void) registerPreference;
 
+-(NSViewController *)createMainView;
+
 @end

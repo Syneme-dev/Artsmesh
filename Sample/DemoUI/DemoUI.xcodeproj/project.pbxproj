@@ -18,11 +18,10 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
-		AF9A5CB418C446150078D125 /* AMHelloWorldPlugin.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
-		AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */; };
 		AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */; };
 		AFC188CD18C6F09200E03010 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
+		AFC188DC18C7099800E03010 /* AMHelloWorldPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFC188DB18C7099800E03010 /* AMHelloWorldPlugin.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +32,6 @@
 			remoteGlobalIDString = 37C2316B187A8FFD00554AFD;
 			remoteInfo = DemoUI;
 		};
-		AF37B78718C4607500140FD7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 37FCBA19187111F300C1FD1B;
-			remoteInfo = AMHelloWorldPlugin;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,8 +41,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				AFC188DC18C7099800E03010 /* AMHelloWorldPlugin.bundle in CopyFiles */,
 				AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */,
-				AF9A5CB518C446280078D125 /* AMHelloWorldPlugin.xcodeproj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,11 +68,12 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
-		AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AMHelloWorldPlugin.xcodeproj; path = Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj; sourceTree = "<group>"; };
 		AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UserGroupModule.bundle; sourceTree = "<group>"; };
 		AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
+		AFC188DB18C7099800E03010 /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMHelloWorldPlugin.bundle; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle; sourceTree = "<group>"; };
+		AFC188DD18C70A0A00E03010 /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelloWorldConst.h; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle/Contents/Headers/HelloWorldConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +101,9 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				AFC188DD18C70A0A00E03010 /* HelloWorldConst.h */,
+				AFC188DB18C7099800E03010 /* AMHelloWorldPlugin.bundle */,
 				AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */,
-				AF9A5CB318C446150078D125 /* Plugin */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -191,23 +185,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AF37B78418C4607500140FD7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF37B78818C4607500140FD7 /* AMHelloWorldPlugin.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AF9A5CB318C446150078D125 /* Plugin */ = {
-			isa = PBXGroup;
-			children = (
-				AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */,
-			);
-			name = Plugin;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -273,12 +250,6 @@
 			mainGroup = 37C23163187A8FFD00554AFD;
 			productRefGroup = 37C2316D187A8FFD00554AFD /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = AF37B78418C4607500140FD7 /* Products */;
-					ProjectRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				37C2316B187A8FFD00554AFD /* DemoUI */,
@@ -287,23 +258,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		AF37B78818C4607500140FD7 /* AMHelloWorldPlugin.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = AMHelloWorldPlugin.bundle;
-			remoteRef = AF37B78718C4607500140FD7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		37C2316A187A8FFD00554AFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
-				AF9A5CB418C446150078D125 /* AMHelloWorldPlugin.xcodeproj in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,

@@ -11,4 +11,5 @@
 #import <AMPluginLoader/AMModulePluginProtocol.h>
 
 @interface PluginPrincipal : NSObject<AMModulePlugin>
+
 @end

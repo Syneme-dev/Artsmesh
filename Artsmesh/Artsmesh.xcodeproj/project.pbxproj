@@ -225,7 +225,7 @@
 				ORGANIZATIONNAME = "Sky JIA";
 				TargetAttributes = {
 					37FCB8D518710C3C00C1FD1B = {
-						TestTargetID = 37FCB8B418710C3C00C1FD1B;
+						TestTargetID = 37FCB8B418710C3C00C1FD1B /* Artsmesh */;
 					};
 				};
 			};

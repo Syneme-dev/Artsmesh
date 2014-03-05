@@ -32,7 +32,7 @@
 			remoteGlobalIDString = 37C2316B187A8FFD00554AFD;
 			remoteInfo = DemoUI;
 		};
-		AF9A5D5618C4507C0078D125 /* PBXContainerItemProxy */ = {
+		AF37B78718C4607500140FD7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */;
 			proxyType = 2;
@@ -186,6 +186,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AF37B78418C4607500140FD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF37B78818C4607500140FD7 /* AMHelloWorldPlugin.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AF9A5CB318C446150078D125 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,14 +201,6 @@
 			);
 			name = Plugin;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		AF9A5D5318C4507C0078D125 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF9A5D5718C4507C0078D125 /* AMHelloWorldPlugin.bundle */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,7 +253,7 @@
 				ORGANIZATIONNAME = Artsmesh;
 				TargetAttributes = {
 					37C2318C187A8FFD00554AFD = {
-						TestTargetID = 37C2316B187A8FFD00554AFD;
+						TestTargetID = 37C2316B187A8FFD00554AFD /* DemoUI */;
 					};
 				};
 			};
@@ -270,7 +270,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AF9A5D5318C4507C0078D125 /* Products */;
+					ProductGroup = AF37B78418C4607500140FD7 /* Products */;
 					ProjectRef = AF9A5CB218C446150078D125 /* AMHelloWorldPlugin.xcodeproj */;
 				},
 			);
@@ -283,11 +283,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AF9A5D5718C4507C0078D125 /* AMHelloWorldPlugin.bundle */ = {
+		AF37B78818C4607500140FD7 /* AMHelloWorldPlugin.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = AMHelloWorldPlugin.bundle;
-			remoteRef = AF9A5D5618C4507C0078D125 /* PBXContainerItemProxy */;
+			remoteRef = AF37B78718C4607500140FD7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

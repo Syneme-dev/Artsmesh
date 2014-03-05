@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
+#import <AMNotificationManager/AMNotificationManager.h>
 #import "PluginPrincipal.h"
+
 
 @implementation PluginPrincipal
 
@@ -16,6 +18,7 @@
 -(id)init
 {
     NSLog(@"HelloWorldPlugin is loaded.");
+    [self registerAllMessageTypes];
     return self;
 }
 
@@ -30,6 +33,7 @@
 -(NSString *) registerAllMessageTypes
 {
     //TODO:
+    [AMN_NOTIFICATION_MANAGER registerMessageType:self withTypeName:AMN_MESHER_STARTED];
     return @"??";
 }
 
@@ -47,6 +51,23 @@
 -(void) registerPreference
 {
     //TODO:
+}
+
+-(void)LinstenFunctionOne{
+
+    [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_MESHER_STARTED callback:@selector(onFunctionOneInvoked)];
+}
+
+-(void) FunctionOneInvoke
+{
+
+    AMNotificationMessage *message=[AMN_NOTIFICATION_MANAGER createMessageWithHeader:nil withBody:nil];
+    [AMN_NOTIFICATION_MANAGER postMessage:message withTypeName:AMN_MESHER_STARTED];
+}
+
+-(void) onFunctionOneInvoked{
+    //Do what you want when received message;
+
 }
 
 @end

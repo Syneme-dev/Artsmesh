@@ -15,11 +15,12 @@
 		37FCB93418710E6200C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93318710E6200C1FD1B /* Cocoa.framework */; };
 		37FCB93E18710E6200C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB93C18710E6200C1FD1B /* InfoPlist.strings */; };
 		37FCB94218710E6200C1FD1B /* AMPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB94118710E6200C1FD1B /* AMPluginLoader.m */; };
-		37FCB94918710E6200C1FD1B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB94818710E6200C1FD1B /* XCTest.framework */; };
 		37FCB94A18710E6200C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93318710E6200C1FD1B /* Cocoa.framework */; };
 		37FCB94D18710E6200C1FD1B /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93018710E6200C1FD1B /* AMPluginLoader.framework */; };
-		37FCB95318710E6200C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB95118710E6200C1FD1B /* InfoPlist.strings */; };
-		37FCB95518710E6200C1FD1B /* AMPluginLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB95418710E6200C1FD1B /* AMPluginLoaderTests.m */; };
+		AFD2DA3F18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFD2DA3B18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist */; };
+		AFD2DA4018C6CF0C00427B41 /* AMPluginLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2DA3C18C6CF0C00427B41 /* AMPluginLoaderTests.m */; };
+		AFD2DA4118C6CF0C00427B41 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD2DA3D18C6CF0C00427B41 /* InfoPlist.strings */; };
+		AFD2DA4318C6CF3D00427B41 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD2DA4218C6CF3D00427B41 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +49,10 @@
 		37FCB94018710E6200C1FD1B /* AMPluginLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMPluginLoader.h; sourceTree = "<group>"; };
 		37FCB94118710E6200C1FD1B /* AMPluginLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMPluginLoader.m; sourceTree = "<group>"; };
 		37FCB94718710E6200C1FD1B /* AMPluginLoaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMPluginLoaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37FCB94818710E6200C1FD1B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		37FCB95018710E6200C1FD1B /* AMPluginLoaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMPluginLoaderTests-Info.plist"; sourceTree = "<group>"; };
-		37FCB95218710E6200C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37FCB95418710E6200C1FD1B /* AMPluginLoaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMPluginLoaderTests.m; sourceTree = "<group>"; };
+		AFD2DA3B18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AMPluginLoaderTests-Info.plist"; sourceTree = "<group>"; };
+		AFD2DA3C18C6CF0C00427B41 /* AMPluginLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPluginLoaderTests.m; sourceTree = "<group>"; };
+		AFD2DA3E18C6CF0C00427B41 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFD2DA4218C6CF3D00427B41 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD2DA4318C6CF3D00427B41 /* XCTest.framework in Frameworks */,
 				37FCB93418710E6200C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,7 +70,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB94A18710E6200C1FD1B /* Cocoa.framework in Frameworks */,
-				37FCB94918710E6200C1FD1B /* XCTest.framework in Frameworks */,
 				37FCB94D18710E6200C1FD1B /* AMPluginLoader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,8 +80,8 @@
 		37FCB92618710E6200C1FD1B = {
 			isa = PBXGroup;
 			children = (
+				AFD2DA3A18C6CF0C00427B41 /* AMPluginLoaderTests */,
 				37FCB93918710E6200C1FD1B /* AMPluginLoader */,
-				37FCB94E18710E6200C1FD1B /* AMPluginLoaderTests */,
 				37FCB93218710E6200C1FD1B /* Frameworks */,
 				37FCB93118710E6200C1FD1B /* Products */,
 			);
@@ -98,8 +99,8 @@
 		37FCB93218710E6200C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFD2DA4218C6CF3D00427B41 /* XCTest.framework */,
 				37FCB93318710E6200C1FD1B /* Cocoa.framework */,
-				37FCB94818710E6200C1FD1B /* XCTest.framework */,
 				37FCB93518710E6200C1FD1B /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -139,22 +140,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		37FCB94E18710E6200C1FD1B /* AMPluginLoaderTests */ = {
+		AFD2DA3A18C6CF0C00427B41 /* AMPluginLoaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				37FCB95418710E6200C1FD1B /* AMPluginLoaderTests.m */,
-				37FCB94F18710E6200C1FD1B /* Supporting Files */,
+				AFD2DA3B18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist */,
+				AFD2DA3C18C6CF0C00427B41 /* AMPluginLoaderTests.m */,
+				AFD2DA3D18C6CF0C00427B41 /* InfoPlist.strings */,
 			);
 			path = AMPluginLoaderTests;
-			sourceTree = "<group>";
-		};
-		37FCB94F18710E6200C1FD1B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB95018710E6200C1FD1B /* AMPluginLoaderTests-Info.plist */,
-				37FCB95118710E6200C1FD1B /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +214,7 @@
 				ORGANIZATIONNAME = Artsmesh;
 				TargetAttributes = {
 					37FCB94618710E6200C1FD1B = {
-						TestTargetID = 37FCB92F18710E6200C1FD1B;
+						TestTargetID = 37FCB92F18710E6200C1FD1B /* AMPluginLoader */;
 					};
 				};
 			};
@@ -248,6 +241,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD2DA3F18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist in Resources */,
+				AFD2DA4118C6CF0C00427B41 /* InfoPlist.strings in Resources */,
 				37FCB93E18710E6200C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +251,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37FCB95318710E6200C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB94218710E6200C1FD1B /* AMPluginLoader.m in Sources */,
+				AFD2DA4018C6CF0C00427B41 /* AMPluginLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +270,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37FCB95518710E6200C1FD1B /* AMPluginLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,10 +292,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		37FCB95118710E6200C1FD1B /* InfoPlist.strings */ = {
+		AFD2DA3D18C6CF0C00427B41 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				37FCB95218710E6200C1FD1B /* en */,
+				AFD2DA3E18C6CF0C00427B41 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -383,6 +377,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMPluginLoader/AMPluginLoader-Prefix.pch";
@@ -398,6 +396,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMPluginLoader/AMPluginLoader-Prefix.pch";

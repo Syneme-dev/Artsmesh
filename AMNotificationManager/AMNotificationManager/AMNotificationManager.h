@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 Artsmesh. All rights reserved.
 //
 
+#define AMN_NOTIFICATION_MANAGER [AMNotificationManager defaultShared]
 #import <Foundation/Foundation.h>
 #import "AMNotificationMessage.h"
+
+static NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
 
 @interface AMNotificationManager : NSObject
 

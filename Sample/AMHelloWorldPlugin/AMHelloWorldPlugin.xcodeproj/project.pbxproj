@@ -11,6 +11,7 @@
 		37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCBA1C187111F300C1FD1B /* Cocoa.framework */; };
 		37FCBA27187111F300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCBA25187111F300C1FD1B /* InfoPlist.strings */; };
 		AF9A5CAC18C438BC0078D125 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */; };
+		AFA5B6D018C6BBD3004EEA35 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5B6CF18C6BBD3004EEA35 /* AMNotificationManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		37FCBA26187111F300C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FCBA28187111F300C1FD1B /* AMHelloWorldPlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMHelloWorldPlugin-Prefix.pch"; sourceTree = "<group>"; };
 		AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		AFA5B6CF18C6BBD3004EEA35 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA5B6D018C6BBD3004EEA35 /* AMNotificationManager.framework in Frameworks */,
 				AF9A5CAC18C438BC0078D125 /* AMPluginLoader.framework in Frameworks */,
 				37FCBA1D187111F300C1FD1B /* Cocoa.framework in Frameworks */,
 			);
@@ -60,6 +63,7 @@
 		37FCBA1B187111F300C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFA5B6CF18C6BBD3004EEA35 /* AMNotificationManager.framework */,
 				AF9A5CA918C437CF0078D125 /* AMPluginLoader.framework */,
 				37FCBA1C187111F300C1FD1B /* Cocoa.framework */,
 				37FCBA1E187111F300C1FD1B /* Other Frameworks */,

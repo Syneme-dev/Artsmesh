@@ -17,10 +17,10 @@
 		37FCB94218710E6200C1FD1B /* AMPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB94118710E6200C1FD1B /* AMPluginLoader.m */; };
 		37FCB94A18710E6200C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93318710E6200C1FD1B /* Cocoa.framework */; };
 		37FCB94D18710E6200C1FD1B /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB93018710E6200C1FD1B /* AMPluginLoader.framework */; };
+		AFC188CE18C6F26700E03010 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD2DA4218C6CF3D00427B41 /* XCTest.framework */; };
+		AFC188CF18C6F29B00E03010 /* AMPluginLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2DA3C18C6CF0C00427B41 /* AMPluginLoaderTests.m */; };
 		AFD2DA3F18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFD2DA3B18C6CF0C00427B41 /* AMPluginLoaderTests-Info.plist */; };
-		AFD2DA4018C6CF0C00427B41 /* AMPluginLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD2DA3C18C6CF0C00427B41 /* AMPluginLoaderTests.m */; };
 		AFD2DA4118C6CF0C00427B41 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD2DA3D18C6CF0C00427B41 /* InfoPlist.strings */; };
-		AFD2DA4318C6CF3D00427B41 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD2DA4218C6CF3D00427B41 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFD2DA4318C6CF3D00427B41 /* XCTest.framework in Frameworks */,
 				37FCB93418710E6200C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC188CE18C6F26700E03010 /* XCTest.framework in Frameworks */,
 				37FCB94A18710E6200C1FD1B /* Cocoa.framework in Frameworks */,
 				37FCB94D18710E6200C1FD1B /* AMPluginLoader.framework in Frameworks */,
 			);
@@ -262,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB94218710E6200C1FD1B /* AMPluginLoader.m in Sources */,
-				AFD2DA4018C6CF0C00427B41 /* AMPluginLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFC188CF18C6F29B00E03010 /* AMPluginLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +335,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Debug;

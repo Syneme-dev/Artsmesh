@@ -33,7 +33,6 @@
 
 -(NSString *) registerAllMessageTypes
 {
-    //TODO:
     [AMN_NOTIFICATION_MANAGER registerMessageType:self withTypeName:AMN_MESHER_STARTED];
     //TODO: the register message method may be useless.
     return @"??";

@@ -19,12 +19,12 @@
 # pragma mark
 # pragma mark Notification
 
--(NSString *) registerAllMessageTypes;
+-(void) registerAllMessageListeners;
 
 # pragma mark
 # pragma mark Preference
 
--(void) loadPreference;
+-(NSDictionary *) loadPreference;
 -(void) savePreference:(NSDictionary *)pref;
 -(void) registerPreference;
 

@@ -21,12 +21,12 @@
     return nil;
 }
 
--(void)registerMessageType:(id)sender withTypeName:(NSString*)typeName{
-    
-}
--(void)unregisterMessageType:(id)sender withTypeName:(NSString*)typeName{
-    
-}
+//-(void)registerMessageTypeWithName:(NSString*)typeName sender:(id)sender{
+//    
+//}
+//-(void)unregisterMessageTypeWithName:(NSString*)typeName sender:(id)sender{
+//    
+//}
 -(void)listenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel{
     
 }

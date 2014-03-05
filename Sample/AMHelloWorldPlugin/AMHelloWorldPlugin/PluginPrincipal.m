@@ -19,8 +19,7 @@
 -(id)init
 {
     NSLog(@"HelloWorldPlugin is loaded.");
-    [self registerAllMessageTypes];
-    [self listenFunctionOne];
+    [self registerAllMessageListeners];
     return self;
 }
 
@@ -33,20 +32,22 @@
 # pragma mark
 # pragma mark Notification
 
--(NSString *) registerAllMessageTypes
+-(void) registerAllMessageListeners
 {
-    [AMN_NOTIFICATION_MANAGER registerMessageType:self withTypeName:AMN_MESHER_STARTED];
+    
+    [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_MESHER_STARTED callback:@selector(onFunctionOneInvoked)];
     //TODO: the register message method may be useless.
-    return @"??";
+
 }
 
 # pragma mark
 # pragma mark Preference
 
-//invoke when show??
--(void) loadPreference
+//invoke when show to UI.
+-(NSDictionary *) loadPreference
 {
     //Note:option implement. If bind to UI ,you can have no code here.
+    return nil;
 }
 //invoke when editing on preference panel.
 -(void) savePreference:(NSDictionary *)pref
@@ -59,17 +60,14 @@
     //TODO:
 }
 
--(void)listenFunctionOne{
 
-    [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_MESHER_STARTED callback:@selector(onFunctionOneInvoked)];
-}
 
 //Click an button to invoke this method.
 -(void) FunctionOneInvoke
 {
 
     AMNotificationMessage *message=[AMN_NOTIFICATION_MANAGER createMessageWithHeader:nil withBody:nil];
-    [AMN_NOTIFICATION_MANAGER postMessage:message withTypeName:AMN_MESHER_STARTED];
+    [AMN_NOTIFICATION_MANAGER postMessage:message withTypeName:AMN_MESHER_STARTED sender:self];
 }
 
 -(void) onFunctionOneInvoked{

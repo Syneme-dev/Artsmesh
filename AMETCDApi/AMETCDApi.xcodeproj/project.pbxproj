@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D47008CA18C725E000B92F9A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C918C725E000B92F9A /* Cocoa.framework */; };
+		D47008D418C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008D218C725E000B92F9A /* InfoPlist.strings */; };
+		D47008DF18C725E000B92F9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008DE18C725E000B92F9A /* XCTest.framework */; };
+		D47008E018C725E000B92F9A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C918C725E000B92F9A /* Cocoa.framework */; };
+		D47008E318C725E000B92F9A /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C618C725E000B92F9A /* AMETCDApi.framework */; };
+		D47008E918C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008E718C725E000B92F9A /* InfoPlist.strings */; };
+		D47008EB18C725E000B92F9A /* AMETCDApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008EA18C725E000B92F9A /* AMETCDApiTests.m */; };
+		D47008F818C7265400B92F9A /* AMETCDApi.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCDApi.h */; };
+		D47008F918C7265400B92F9A /* AMETCDApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCDApi.m */; };
+		D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDCURDResult.h */; };
+		D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F718C7265400B92F9A /* AMETCDCURDResult.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D47008E118C725E000B92F9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D47008BD18C725E000B92F9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D47008C518C725E000B92F9A;
+			remoteInfo = AMETCDApi;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D47008C618C725E000B92F9A /* AMETCDApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMETCDApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D47008C918C725E000B92F9A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D47008CC18C725E000B92F9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D47008CD18C725E000B92F9A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D47008CE18C725E000B92F9A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D47008D118C725E000B92F9A /* AMETCDApi-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMETCDApi-Info.plist"; sourceTree = "<group>"; };
+		D47008D318C725E000B92F9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D47008D518C725E000B92F9A /* AMETCDApi-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMETCDApi-Prefix.pch"; sourceTree = "<group>"; };
+		D47008DD18C725E000B92F9A /* AMETCDApiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMETCDApiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D47008DE18C725E000B92F9A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D47008E618C725E000B92F9A /* AMETCDApiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMETCDApiTests-Info.plist"; sourceTree = "<group>"; };
+		D47008E818C725E000B92F9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D47008EA18C725E000B92F9A /* AMETCDApiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMETCDApiTests.m; sourceTree = "<group>"; };
+		D47008F418C7265400B92F9A /* AMETCDApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDApi.h; sourceTree = "<group>"; };
+		D47008F518C7265400B92F9A /* AMETCDApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDApi.m; sourceTree = "<group>"; };
+		D47008F618C7265400B92F9A /* AMETCDCURDResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDCURDResult.h; sourceTree = "<group>"; };
+		D47008F718C7265400B92F9A /* AMETCDCURDResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDCURDResult.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D47008C218C725E000B92F9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008CA18C725E000B92F9A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D47008DA18C725E000B92F9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008E018C725E000B92F9A /* Cocoa.framework in Frameworks */,
+				D47008DF18C725E000B92F9A /* XCTest.framework in Frameworks */,
+				D47008E318C725E000B92F9A /* AMETCDApi.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D47008BC18C725E000B92F9A = {
+			isa = PBXGroup;
+			children = (
+				D47008CF18C725E000B92F9A /* AMETCDApi */,
+				D47008E418C725E000B92F9A /* AMETCDApiTests */,
+				D47008C818C725E000B92F9A /* Frameworks */,
+				D47008C718C725E000B92F9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D47008C718C725E000B92F9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D47008C618C725E000B92F9A /* AMETCDApi.framework */,
+				D47008DD18C725E000B92F9A /* AMETCDApiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D47008C818C725E000B92F9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D47008C918C725E000B92F9A /* Cocoa.framework */,
+				D47008DE18C725E000B92F9A /* XCTest.framework */,
+				D47008CB18C725E000B92F9A /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D47008CB18C725E000B92F9A /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D47008CC18C725E000B92F9A /* Foundation.framework */,
+				D47008CD18C725E000B92F9A /* CoreData.framework */,
+				D47008CE18C725E000B92F9A /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D47008CF18C725E000B92F9A /* AMETCDApi */ = {
+			isa = PBXGroup;
+			children = (
+				D47008F418C7265400B92F9A /* AMETCDApi.h */,
+				D47008F518C7265400B92F9A /* AMETCDApi.m */,
+				D47008F618C7265400B92F9A /* AMETCDCURDResult.h */,
+				D47008F718C7265400B92F9A /* AMETCDCURDResult.m */,
+				D47008D018C725E000B92F9A /* Supporting Files */,
+			);
+			path = AMETCDApi;
+			sourceTree = "<group>";
+		};
+		D47008D018C725E000B92F9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D47008D118C725E000B92F9A /* AMETCDApi-Info.plist */,
+				D47008D218C725E000B92F9A /* InfoPlist.strings */,
+				D47008D518C725E000B92F9A /* AMETCDApi-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D47008E418C725E000B92F9A /* AMETCDApiTests */ = {
+			isa = PBXGroup;
+			children = (
+				D47008EA18C725E000B92F9A /* AMETCDApiTests.m */,
+				D47008E518C725E000B92F9A /* Supporting Files */,
+			);
+			path = AMETCDApiTests;
+			sourceTree = "<group>";
+		};
+		D47008E518C725E000B92F9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D47008E618C725E000B92F9A /* AMETCDApiTests-Info.plist */,
+				D47008E718C725E000B92F9A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D47008C318C725E000B92F9A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008F818C7265400B92F9A /* AMETCDApi.h in Headers */,
+				D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D47008C518C725E000B92F9A /* AMETCDApi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D47008EE18C725E000B92F9A /* Build configuration list for PBXNativeTarget "AMETCDApi" */;
+			buildPhases = (
+				D47008C118C725E000B92F9A /* Sources */,
+				D47008C218C725E000B92F9A /* Frameworks */,
+				D47008C318C725E000B92F9A /* Headers */,
+				D47008C418C725E000B92F9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMETCDApi;
+			productName = AMETCDApi;
+			productReference = D47008C618C725E000B92F9A /* AMETCDApi.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D47008DC18C725E000B92F9A /* AMETCDApiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D47008F118C725E000B92F9A /* Build configuration list for PBXNativeTarget "AMETCDApiTests" */;
+			buildPhases = (
+				D47008D918C725E000B92F9A /* Sources */,
+				D47008DA18C725E000B92F9A /* Frameworks */,
+				D47008DB18C725E000B92F9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D47008E218C725E000B92F9A /* PBXTargetDependency */,
+			);
+			name = AMETCDApiTests;
+			productName = AMETCDApiTests;
+			productReference = D47008DD18C725E000B92F9A /* AMETCDApiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D47008BD18C725E000B92F9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "王 为";
+				TargetAttributes = {
+					D47008DC18C725E000B92F9A = {
+						TestTargetID = D47008C518C725E000B92F9A;
+					};
+				};
+			};
+			buildConfigurationList = D47008C018C725E000B92F9A /* Build configuration list for PBXProject "AMETCDApi" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D47008BC18C725E000B92F9A;
+			productRefGroup = D47008C718C725E000B92F9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D47008C518C725E000B92F9A /* AMETCDApi */,
+				D47008DC18C725E000B92F9A /* AMETCDApiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D47008C418C725E000B92F9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008D418C725E000B92F9A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D47008DB18C725E000B92F9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008E918C725E000B92F9A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D47008C118C725E000B92F9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */,
+				D47008F918C7265400B92F9A /* AMETCDApi.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D47008D918C725E000B92F9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47008EB18C725E000B92F9A /* AMETCDApiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D47008E218C725E000B92F9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D47008C518C725E000B92F9A /* AMETCDApi */;
+			targetProxy = D47008E118C725E000B92F9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D47008D218C725E000B92F9A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D47008D318C725E000B92F9A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D47008E718C725E000B92F9A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D47008E818C725E000B92F9A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D47008EC18C725E000B92F9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D47008ED18C725E000B92F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D47008EF18C725E000B92F9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";
+				INFOPLIST_FILE = "AMETCDApi/AMETCDApi-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D47008F018C725E000B92F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";
+				INFOPLIST_FILE = "AMETCDApi/AMETCDApi-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D47008F218C725E000B92F9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMETCDApi.framework/Versions/A/AMETCDApi";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AMETCDApiTests/AMETCDApiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D47008F318C725E000B92F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMETCDApi.framework/Versions/A/AMETCDApi";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";
+				INFOPLIST_FILE = "AMETCDApiTests/AMETCDApiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D47008C018C725E000B92F9A /* Build configuration list for PBXProject "AMETCDApi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D47008EC18C725E000B92F9A /* Debug */,
+				D47008ED18C725E000B92F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D47008EE18C725E000B92F9A /* Build configuration list for PBXNativeTarget "AMETCDApi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D47008EF18C725E000B92F9A /* Debug */,
+				D47008F018C725E000B92F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D47008F118C725E000B92F9A /* Build configuration list for PBXNativeTarget "AMETCDApiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D47008F218C725E000B92F9A /* Debug */,
+				D47008F318C725E000B92F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D47008BD18C725E000B92F9A /* Project object */;
+}

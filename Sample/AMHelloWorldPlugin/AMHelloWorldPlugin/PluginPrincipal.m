@@ -19,6 +19,7 @@
 {
     NSLog(@"HelloWorldPlugin is loaded.");
     [self registerAllMessageTypes];
+    [self listenFunctionOne];
     return self;
 }
 
@@ -34,6 +35,7 @@
 {
     //TODO:
     [AMN_NOTIFICATION_MANAGER registerMessageType:self withTypeName:AMN_MESHER_STARTED];
+    //TODO: the register message method may be useless.
     return @"??";
 }
 
@@ -53,11 +55,12 @@
     //TODO:
 }
 
--(void)LinstenFunctionOne{
+-(void)listenFunctionOne{
 
     [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_MESHER_STARTED callback:@selector(onFunctionOneInvoked)];
 }
 
+//Click an button to invoke this method.
 -(void) FunctionOneInvoke
 {
 

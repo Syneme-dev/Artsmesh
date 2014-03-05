@@ -213,7 +213,7 @@
 				ORGANIZATIONNAME = Artsmesh;
 				TargetAttributes = {
 					37FCB97E18710E8600C1FD1B = {
-						TestTargetID = 37FCB96718710E8600C1FD1B /* AMNotificationManager */;
+						TestTargetID = 37FCB96718710E8600C1FD1B;
 					};
 				};
 			};

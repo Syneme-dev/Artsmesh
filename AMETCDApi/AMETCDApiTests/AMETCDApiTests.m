@@ -39,13 +39,89 @@
     service.serverPort = 7001;
     
     [service stopETCD];
+    [service startETCD ];
     
+    NSString* keyString = @"/message";
+    NSString* valueString = @"hello world!";
     
-    [service startETCD  ];
+    AMETCDCURDResult* res = [service setKey: keyString withValue:valueString];
+    if(res.errorRes == YES)
+    {
+        XCTFail(@"set key failed! error info: %@ \"%s\"\n",
+                res.errDescription,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
     
-    AMETCDCURDResult* res = [service  getKey:@"/message"];
+    res = [service  getKey:keyString];
+    if(res.errorRes == YES)
+    {
+        XCTFail(@"get key failed! error info: %@ \"%s\"\n",
+                res.errDescription,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
     
-    res = [service setKey:@"/message" withValue:@"hello"];
+    if (![res.node.value isEqualToString: valueString])
+    {
+        XCTFail(@"get key failed! set=%@ actual=%@ \"%s\"\n",
+                valueString ,
+                res.node.value,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    int nowIndex = res.node.createdIndex;
+    int actualIndex = 0;
+    res = [service watchKey:keyString fromIndex:nowIndex acturalIndex:&actualIndex timeout:0];
+    if(res.errorRes == YES)
+    {
+        XCTFail(@"wait key failed! error info: %@ \"%s\"\n",
+                res.errDescription,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    if (![res.node.value isEqualToString: valueString])
+    {
+        XCTFail(@"wait key failed! set=%@ actual=%@ \"%s\"\n",
+                valueString ,
+                res.node.value,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service deleteKey:keyString];
+    if(res.errorRes == YES)
+    {
+        XCTFail(@"delete key failed! error info: %@ \"%s\"\n",
+                res.errDescription,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service getKey:keyString];
+    if(res.errorRes == NO)
+    {
+        XCTFail(@"delete key failed! key still exist:%@ \"%s\"\n",
+                res.node.value,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
     
     
     [service stopETCD];

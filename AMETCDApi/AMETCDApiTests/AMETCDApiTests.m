@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "AMETCDService.h"
+#import "AMETCDCURDResult.h"
 
 @interface AMETCDApiTests : XCTestCase
 
@@ -28,7 +30,16 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+   // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    AMETCDService* service  = [[AMETCDService alloc] init];
+    service.nodeIp = @"192.168.1.106";
+    [service startETCD  ];
+    
+    AMETCDCURDResult* res = [service setKey:@"/message" withValue:@"hello"];
+    res = [service  getKey:@"/message"];
+    
+    
+    [service stopETCD];
 }
 
 @end

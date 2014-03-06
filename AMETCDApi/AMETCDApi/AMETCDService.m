@@ -6,18 +6,82 @@
 //  Copyright (c) 2014 王 为. All rights reserved.
 //
 
-#import "AMETCDApi.h"
+#import "AMETCDService.h"
 
-@implementation AMETCDApi
+@implementation AMETCDService
+{
+    NSTask* _etcdTask;
+}
+
+
+-(id)init
+{
+    if(self = [super init])
+    {
+        NSHost* host = [NSHost currentHost];
+        self.nodeIp = [host address];
+        self.serverPort = 7001;
+        self.clientPort = 4001;
+        self.leaderAddr = nil;
+        
+        self.nodeName = [host name];
+    }
+    
+    return self;
+}
+
+
+-(BOOL)startETCD
+{
+    if(_etcdTask != nil)
+    {
+        return YES;
+    }
+    
+    _etcdTask = [[NSTask alloc] init];
+//    NSBundle* mainBundle = [NSBundle mainBundle];
+//    _etcdTask.launchPath = [mainBundle pathForAuxiliaryExecutable:@"etcd"];
+    
+    _etcdTask.launchPath = @"/usr/bin/etcd";
+    
+    NSString* peerAddr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort];
+    NSString* addr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort];
+    NSString* dataDir = self.nodeName;
+    NSString* etcdName = self.nodeName;
+    
+    NSString* leaderAddr;
+    if(self.leaderAddr != nil)
+    {
+        leaderAddr = [NSString stringWithFormat:@"-peers:%@", self.leaderAddr];
+    }
+    else
+    {
+        leaderAddr = @"";
+    }
+    
+    NSString* args = [NSString stringWithFormat:@" -peer-addr %@ -addr %@ -data-dir %@ -name %@ %@", peerAddr, addr, dataDir, etcdName, leaderAddr];
+    
+    _etcdTask.arguments = @[args];
+    [_etcdTask launch];
+
+    
+    return YES;
+}
+
+
+-(void)stopETCD
+{
+    [_etcdTask terminate];
+    
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
+    _etcdTask = nil;
+}
+
 
 -(AMETCDCURDResult*)getKey:(NSString*)key
 {
-    if(self.serverAddr == nil)
-    {
-        [NSException raise:@"invalid Oper" format:@"server is not set!"];
-    }
-    
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.serverAddr, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -37,13 +101,8 @@
 
 -(AMETCDCURDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 {
-    if(self.serverAddr == nil)
-    {
-        [NSException raise:@"invalid Oper" format:@"server is not set!"];
-    }
-    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.serverAddr, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
     NSMutableData* httpBody = [self createSetKeyHttpBody:@"value" withValue:value];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
@@ -78,14 +137,9 @@
 {
     
    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
-    
-    if(self.serverAddr == nil)
-    {
-        [NSException raise:@"invalid Oper" format:@"server is not set!"];
-    }
 
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@?wait=true&waitIndex=%d", self.serverAddr, key, index_in];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@?wait=true&waitIndex=%d", self.nodeIp, key, index_in];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
 
     
@@ -130,13 +184,7 @@
 -(AMETCDCURDResult*)deleteKey: (NSString*) key
 {
     //curl -L http://127.0.0.1:4001/v2/keys/message -XDELETE
-    
-    if(self.serverAddr == nil)
-    {
-        [NSException raise:@"invalid Oper" format:@"server is not set!"];
-    }
-    
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.serverAddr, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     

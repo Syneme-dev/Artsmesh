@@ -14,8 +14,8 @@
 		D47008E318C725E000B92F9A /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C618C725E000B92F9A /* AMETCDApi.framework */; };
 		D47008E918C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008E718C725E000B92F9A /* InfoPlist.strings */; };
 		D47008EB18C725E000B92F9A /* AMETCDApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008EA18C725E000B92F9A /* AMETCDApiTests.m */; };
-		D47008F818C7265400B92F9A /* AMETCDApi.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCDApi.h */; };
-		D47008F918C7265400B92F9A /* AMETCDApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCDApi.m */; };
+		D47008F818C7265400B92F9A /* AMETCDService.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCDService.h */; };
+		D47008F918C7265400B92F9A /* AMETCDService.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCDService.m */; };
 		D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDCURDResult.h */; };
 		D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F718C7265400B92F9A /* AMETCDCURDResult.m */; };
 /* End PBXBuildFile section */
@@ -29,6 +29,18 @@
 			remoteInfo = AMETCDApi;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D47008FE18C7274100B92F9A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D47008C618C725E000B92F9A /* AMETCDApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMETCDApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,10 +56,12 @@
 		D47008E618C725E000B92F9A /* AMETCDApiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMETCDApiTests-Info.plist"; sourceTree = "<group>"; };
 		D47008E818C725E000B92F9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D47008EA18C725E000B92F9A /* AMETCDApiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMETCDApiTests.m; sourceTree = "<group>"; };
-		D47008F418C7265400B92F9A /* AMETCDApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDApi.h; sourceTree = "<group>"; };
-		D47008F518C7265400B92F9A /* AMETCDApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDApi.m; sourceTree = "<group>"; };
+		D47008F418C7265400B92F9A /* AMETCDService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDService.h; sourceTree = "<group>"; };
+		D47008F518C7265400B92F9A /* AMETCDService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDService.m; sourceTree = "<group>"; };
 		D47008F618C7265400B92F9A /* AMETCDCURDResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDCURDResult.h; sourceTree = "<group>"; };
 		D47008F718C7265400B92F9A /* AMETCDCURDResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDCURDResult.m; sourceTree = "<group>"; };
+		D47008FC18C7272E00B92F9A /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
+		D4E2E4CC18C8512D0037159B /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +128,8 @@
 		D47008CF18C725E000B92F9A /* AMETCDApi */ = {
 			isa = PBXGroup;
 			children = (
-				D47008F418C7265400B92F9A /* AMETCDApi.h */,
-				D47008F518C7265400B92F9A /* AMETCDApi.m */,
+				D47008F418C7265400B92F9A /* AMETCDService.h */,
+				D47008F518C7265400B92F9A /* AMETCDService.m */,
 				D47008F618C7265400B92F9A /* AMETCDCURDResult.h */,
 				D47008F718C7265400B92F9A /* AMETCDCURDResult.m */,
 				D47008D018C725E000B92F9A /* Supporting Files */,
@@ -126,6 +140,7 @@
 		D47008D018C725E000B92F9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D47008FC18C7272E00B92F9A /* etcd */,
 				D47008D118C725E000B92F9A /* AMETCDApi-Info.plist */,
 				D47008D218C725E000B92F9A /* InfoPlist.strings */,
 				D47008D518C725E000B92F9A /* AMETCDApi-Prefix.pch */,
@@ -145,6 +160,7 @@
 		D47008E518C725E000B92F9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4E2E4CC18C8512D0037159B /* etcd */,
 				D47008E618C725E000B92F9A /* AMETCDApiTests-Info.plist */,
 				D47008E718C725E000B92F9A /* InfoPlist.strings */,
 			);
@@ -158,7 +174,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D47008F818C7265400B92F9A /* AMETCDApi.h in Headers */,
+				D47008F818C7265400B92F9A /* AMETCDService.h in Headers */,
 				D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +190,7 @@
 				D47008C218C725E000B92F9A /* Frameworks */,
 				D47008C318C725E000B92F9A /* Headers */,
 				D47008C418C725E000B92F9A /* Resources */,
+				D47008FE18C7274100B92F9A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -259,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */,
-				D47008F918C7265400B92F9A /* AMETCDApi.m in Sources */,
+				D47008F918C7265400B92F9A /* AMETCDService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +475,7 @@
 				D47008F018C725E000B92F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D47008F118C725E000B92F9A /* Build configuration list for PBXNativeTarget "AMETCDApiTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +484,7 @@
 				D47008F318C725E000B92F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,10 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "AMETCDCURDResult.h"
 
-@interface AMETCDApi : NSObject
+@interface AMETCDService : NSObject
 
-@property NSString* serverAddr;
+@property NSString* leaderAddr;
+@property NSString* nodeIp;
+@property int serverPort;
+@property int clientPort;
+@property NSString* nodeName;
 
+//If we don't assign parameters, the command will be:
+//etcd  -peer-addr 192.168.1.101:7001
+//      -addr 192.168.1.101:4001
+//      -data-dir machineName
+//      -name machienName
+-(id)init;
+
+-(BOOL)startETCD;
+
+-(void)stopETCD;
 
 -(AMETCDCURDResult*)getKey:(NSString*)key;
 
@@ -24,10 +38,5 @@
                      timeout:(int)seconds;
 
 -(AMETCDCURDResult*)deleteKey: (NSString*) Key;
-
-
-
-
-
 
 @end

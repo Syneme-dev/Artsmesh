@@ -9,6 +9,8 @@
 #import "AMAppDelegate.h"
 #import <AMPluginLoader/AMPluginProtocol.h>
 #import "HelloWorldConst.h"
+#import "AMPanelViewController.h"
+#import "AMPanelView.h"
 
 @implementation AMAppDelegate
 
@@ -16,10 +18,18 @@
 {
     [self loadPlugins];
     [self maxSizeWindow];
+    [self showTestPanel];
 }
 -(void)maxSizeWindow{
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
+}
+-(void)showTestPanel{
+     NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMPanelViewController *panelViewController=[ [AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    panelViewController.view.frame =NSMakeRect(10.0f,screenSize.size.height-300-30,300, 300);
+    [self.window.contentView addSubview:panelViewController.view];
+
 }
 
 - (NSArray*)loadPlugins

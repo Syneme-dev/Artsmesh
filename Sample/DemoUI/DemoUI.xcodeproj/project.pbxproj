@@ -19,6 +19,9 @@
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
 		AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */; };
+		AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */; };
+		AF9B4E7218C8279D00EEBD6C /* AMPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9B4E7118C8279D00EEBD6C /* AMPanelView.m */; };
+		AF9B4E7518C829AE00EEBD6C /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */; };
 		AFC188CD18C6F09200E03010 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
 		AFC188DC18C7099800E03010 /* AMHelloWorldPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFC188DB18C7099800E03010 /* AMHelloWorldPlugin.bundle */; };
@@ -69,11 +72,16 @@
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UserGroupModule.bundle; sourceTree = "<group>"; };
+		AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
+		AF9B4E7018C8279D00EEBD6C /* AMPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelView.h; sourceTree = "<group>"; };
+		AF9B4E7118C8279D00EEBD6C /* AMPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelView.m; sourceTree = "<group>"; };
+		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
+		AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
 		AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
 		AFC188DB18C7099800E03010 /* AMHelloWorldPlugin.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMHelloWorldPlugin.bundle; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle; sourceTree = "<group>"; };
-		AFC188DD18C70A0A00E03010 /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelloWorldConst.h; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle/Contents/Headers/HelloWorldConst.h; sourceTree = "<group>"; };
+		AFC188DD18C70A0A00E03010 /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldConst.h; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMHelloWorldPlugin.bundle/Contents/Headers/HelloWorldConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +159,11 @@
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 				AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */,
 				AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */,
+				AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */,
+				AF9B4E7018C8279D00EEBD6C /* AMPanelView.h */,
+				AF9B4E7118C8279D00EEBD6C /* AMPanelView.m */,
+				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
+				AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -265,6 +278,7 @@
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
+				AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 			);
@@ -285,7 +299,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF9B4E7518C829AE00EEBD6C /* AMPanelViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
+				AF9B4E7218C8279D00EEBD6C /* AMPanelView.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 			);

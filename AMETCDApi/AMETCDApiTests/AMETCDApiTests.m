@@ -31,12 +31,21 @@
 - (void)testExample
 {
    // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+   
+    
     AMETCDService* service  = [[AMETCDService alloc] init];
-    service.nodeIp = @"192.168.1.106";
+    service.nodeIp = @"192.168.1.101";
+    service.clientPort = 4001;
+    service.serverPort = 7001;
+    
+    [service stopETCD];
+    
+    
     [service startETCD  ];
     
-    AMETCDCURDResult* res = [service setKey:@"/message" withValue:@"hello"];
-    res = [service  getKey:@"/message"];
+    AMETCDCURDResult* res = [service  getKey:@"/message"];
+    
+    res = [service setKey:@"/message" withValue:@"hello"];
     
     
     [service stopETCD];

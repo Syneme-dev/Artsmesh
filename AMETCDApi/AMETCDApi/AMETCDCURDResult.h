@@ -21,6 +21,7 @@
 
 @end
 
+
 @interface AMETCDCURDResult : NSObject
 
 @property NSString* action;

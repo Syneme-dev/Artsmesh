@@ -74,6 +74,8 @@
         node.value = [[nodeObj valueForKey:@"valuse"] stringValue];
         node.createdIndex = [[nodeObj valueForKey:@"createdIndex"] intValue];
         node.modifiedIndex = [[nodeObj valueForKey:@"modifiedIndex"] intValue];
+        node.ttl = [[nodeObj valueForKey:@"ttl"]intValue];
+        node.expiration = [[nodeObj valueForKey:@"expiration"] stringValue];
     }
     else
     {

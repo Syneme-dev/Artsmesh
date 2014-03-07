@@ -8,39 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-
-//{
-//    "action": "set",
-//    "node": {
-//        "createdIndex": 7,
-//        "key": "/foo",
-//        "modifiedIndex": 7,
-//        "value": "bar"
-//    },
-//    "prevNode": {
-//        "createdIndex": 6,
-//        "key": "/foo",
-//        "modifiedIndex": 6,
-//        "value": "bar"
-//    }
-//}
-
 @interface AMETCDNode : NSObject
 
-@property int createdIndex;
 @property NSString* key;
-@property int modifiedIndex;
 @property NSString* value;
+@property int createdIndex;
+@property int modifiedIndex;
+@property NSString* expiration;
+@property int ttl;
+@property BOOL isDir;
+@property NSArray* nodes;
 
 @end
 
 @interface AMETCDCURDResult : NSObject
 
-@property BOOL errorRes;
-@property NSString* errDescription;
 @property NSString* action;
 @property AMETCDNode* node;
 @property AMETCDNode* prevNode;
+@property int errCode;
+@property NSString* errMessage;
+@property NSString* cause;
 
 -(id)initWithData: (NSData*)data;
 

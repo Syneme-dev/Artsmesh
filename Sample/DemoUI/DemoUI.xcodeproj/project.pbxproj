@@ -18,6 +18,8 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
+		AF00D42718C9B055004DE9E6 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D42518C9B055004DE9E6 /* AMNotificationManager.framework */; };
+		AF00D42818C9B055004DE9E6 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D42618C9B055004DE9E6 /* AMPreferenceManager.framework */; };
 		AF9A5D5218C44E180078D125 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */; };
 		AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */; };
 		AF9B4E7218C8279D00EEBD6C /* AMPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9B4E7118C8279D00EEBD6C /* AMPanelView.m */; };
@@ -71,6 +73,8 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		AF00D42518C9B055004DE9E6 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
+		AF00D42618C9B055004DE9E6 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		AF9A5D5118C44E180078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UserGroupModule.bundle; sourceTree = "<group>"; };
 		AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
 		AF9B4E7018C8279D00EEBD6C /* AMPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelView.h; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF00D42718C9B055004DE9E6 /* AMNotificationManager.framework in Frameworks */,
+				AF00D42818C9B055004DE9E6 /* AMPreferenceManager.framework in Frameworks */,
 				AFC188CD18C6F09200E03010 /* AMPluginLoader.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
 			);
@@ -131,6 +137,8 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF00D42518C9B055004DE9E6 /* AMNotificationManager.framework */,
+				AF00D42618C9B055004DE9E6 /* AMPreferenceManager.framework */,
 				AFC188CC18C6F09200E03010 /* AMPluginLoader.framework */,
 				37C2316F187A8FFD00554AFD /* Cocoa.framework */,
 				37C2318E187A8FFD00554AFD /* XCTest.framework */,

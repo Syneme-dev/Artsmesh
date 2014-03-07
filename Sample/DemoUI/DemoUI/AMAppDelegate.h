@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 
 #define AM_APPDELEGATE (AMAppDelegate*)[NSApp delegate]
 @interface AMAppDelegate : NSObject <NSApplicationDelegate,AMPluginAppDelegate>

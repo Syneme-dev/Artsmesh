@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
+
+#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPluginLoader/AMPluginProtocol.h>
+#import <AMNotificationManager/AMNotificationManager.h>
+#import <AMPreferenceManager/AMPreferenceManager.h>
 #import "HelloWorldConst.h"
 #import "AMPanelViewController.h"
-#import "AMPanelView.h"
 
 @implementation AMAppDelegate
 
@@ -66,5 +69,14 @@
     
     
 }
+
+- (AMNotificationManager *)sharedNotificationManager {
+    return [AMNotificationManager defaultShared];
+}
+
+- (AMPreferenceManager *)sharedPreferenceManger {
+    return [AMPreferenceManager defaultShared];
+}
+
 
 @end

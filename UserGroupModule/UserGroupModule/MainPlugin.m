@@ -14,24 +14,28 @@
 # pragma mark
 # pragma mark General
 
--(id)init
-{
-    NSLog(@"UserGroupPlugin is loaded.");
-    return self;
-}
+
 
 -(NSString *) displayName
 {
     return @"User Group";
 }
 
+- (void)registerAllMessageListeners {
+
+}
+
+- (NSViewController *)createMainView {
+    return nil;
+}
+
+
 # pragma mark
 # pragma mark Notification
 
--(NSString *) registerAllMessageTypes
+-(void) registerAllMessageTypes
 {
     //TODO:
-    return @"??";
 }
 
 # pragma mark

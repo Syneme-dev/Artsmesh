@@ -10,8 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <AMPluginLoader/AMPluginProtocol.h>
 #import <AMPluginLoader/AMModulePluginProtocol.h>
-@interface MainPlugin : NSObject<AMModulePlugin>
 
+@interface MainPlugin : NSObject <AMModulePlugin>
 
 
 @end

@@ -12,6 +12,9 @@
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
 		AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9A5D4118C44D1C0078D125 /* MainPlugin.m */; };
 		AF9A5D4418C44D440078D125 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */; };
+		AFE3499A18C9BAA100E247B9 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE3499918C9BAA100E247B9 /* MainView.xib */; };
+		AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AFE3499B18C9BABC00E247B9 /* MainViewController.h */; };
+		AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE3499C18C9BABC00E247B9 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		AF9A5D4018C44D1C0078D125 /* MainPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPlugin.h; path = UserGroupModule/MainPlugin.h; sourceTree = "<group>"; };
 		AF9A5D4118C44D1C0078D125 /* MainPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPlugin.m; path = UserGroupModule/MainPlugin.m; sourceTree = "<group>"; };
 		AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		AFE3499918C9BAA100E247B9 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		AFE3499B18C9BABC00E247B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		AFE3499C18C9BABC00E247B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,9 @@
 		AF9A5D2218C44CD10078D125 = {
 			isa = PBXGroup;
 			children = (
+				AFE3499B18C9BABC00E247B9 /* MainViewController.h */,
+				AFE3499C18C9BABC00E247B9 /* MainViewController.m */,
+				AFE3499918C9BAA100E247B9 /* MainView.xib */,
 				AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */,
 				AF9A5D4018C44D1C0078D125 /* MainPlugin.h */,
 				AF9A5D4118C44D1C0078D125 /* MainPlugin.m */,
@@ -107,6 +116,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */,
 				AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */,
+				AFE3499A18C9BAA100E247B9 /* MainView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */,
+				AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

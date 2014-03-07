@@ -17,19 +17,19 @@
 # pragma mark
 # pragma mark General
 
--(id)init:(id<AMPluginAppDelegate> )amAppDelegateProtocol;
+
+-(NSString *) displayName
 {
+    return @"HelloWorldPlugin";
+}
+
+- (id)init:(id <AMPluginAppDelegate>)amAppDelegateProtocol bundle:(NSBundle *)bundle {
     NSLog(@"HelloWorldPlugin is loaded.");
     [self registerAllMessageListeners];
     [self registerPreference];
     return self;
 }
 
-
--(NSString *) displayName
-{
-    return @"HelloWorldPlugin";
-}
 
 # pragma mark
 # pragma mark Notification

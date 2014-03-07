@@ -14,11 +14,14 @@
 #import <AMPreferenceManager/AMPreferenceManager.h>
 #import "HelloWorldConst.h"
 #import "AMPanelViewController.h"
+#import "UserGroupModuleConst.h"
+
+static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self loadPlugins];
+    allPlugins = [self loadPlugins];
     [self showDefaultWindow];
     [self showTestPanel];   //TODO:to be deleted as test code.
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
@@ -55,44 +58,40 @@
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
+
+    id userPluginClass = allPlugins[UserGroupPluginName];
+
+    NSViewController *userGroupViewController = [userPluginClass createMainView];
+    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 300 - 30, 300, 300);
+    [self.window.contentView addSubview:userGroupViewController.view];
 }
 
 - (void)showTestPanel {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 300 - 30, 300, 300);
+    panelViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 300, 300);
     [self.window.contentView addSubview:panelViewController.view];
 }
 
-- (NSArray *)loadPlugins {
+- (NSMutableDictionary *)loadPlugins {
     NSBundle *main = [NSBundle mainBundle];
     NSArray *allPlugins = [main pathsForResourcesOfType:@"bundle" inDirectory:@"../PlugIns"];
-    NSMutableArray *availablePlugins = [NSMutableArray array];
+    NSMutableDictionary *availablePlugins = [NSMutableDictionary dictionaryWithCapacity:10];
     id plugin = nil;
+    NSString *pluginName = nil;
     NSBundle *pluginBundle = nil;
     for (NSString *path in allPlugins) {
         pluginBundle = [NSBundle bundleWithPath:path];
         [pluginBundle load];
         Class principalClass = [pluginBundle principalClass];
-        plugin = [[principalClass alloc] init:self];
-        [availablePlugins addObject:plugin];
+        pluginName = [[principalClass alloc] displayName];
+        plugin = [[principalClass alloc] init:self bundle:pluginBundle];
+        [availablePlugins setObject:plugin forKey:pluginName];
+        pluginName = nil;
         plugin = nil;
         pluginBundle = nil;
     }
     return availablePlugins;
-}
-
-
-//TODO:delete code
-- (void)onShowUserListButtonClick {
-    NSDictionary *pluginList; // read from global var.
-    NSBundle *userPlugin = pluginList[HelloWorldPluginName];
-    Class principalClass = [userPlugin principalClass];
-    if ([principalClass conformsToProtocol:@protocol(AMPlugin)]) {
-        NSViewController *ctl = [principalClass createMainView];
-    }
-
-
 }
 
 - (AMNotificationManager *)sharedNotificationManager {

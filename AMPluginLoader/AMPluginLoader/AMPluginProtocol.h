@@ -20,7 +20,7 @@
 # pragma mark
 # pragma mark Notification
 
--(id)init:(id<AMPluginAppDelegate> )amAppDelegateProtocol;
+-(id)init:(id<AMPluginAppDelegate> )amAppDelegateProtocol bundle:(NSBundle *)bundle;
 
 -(void) registerAllMessageListeners;
 

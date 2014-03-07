@@ -30,7 +30,8 @@
 
 -(AMETCDResult*)getKey:(NSString*)key;
 
--(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
+-(AMETCDResult*)setKey:(NSString*)key
+             withValue:(NSString*)value;
 
 -(AMETCDResult*)watchKey:(NSString*)key
                    fromIndex:(int)index_in
@@ -38,6 +39,11 @@
                      timeout:(int)seconds;
 
 -(AMETCDResult*)deleteKey: (NSString*) Key;
+
+-(AMETCDResult*)createDir:(NSString*)dirPath;
+
+-(AMETCDResult*)deleteDir:(NSString*)dirPath
+                recursive:(BOOL)b;
 
 
 @end

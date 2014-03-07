@@ -166,7 +166,7 @@
     
     if(seconds == 0)
     {
-        [request setTimeoutInterval: 3600];
+        [request setTimeoutInterval: 3600*100];
     }
     else
     {
@@ -217,6 +217,76 @@
     AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
     return result;
     
+}
+
+
+-(AMETCDResult*)createDir:(NSString*)dirPath
+{
+    NSString* headerfield = @"application/x-www-form-urlencoded";
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
+                         self.nodeIp,
+                         self.clientPort,
+                         dirPath];
+    NSMutableData* httpBody = [self createSetKeyHttpBody:@"dir" withValue:@"true"];
+    NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"PUT"];
+    [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headerDictionary];
+    [request setHTTPBody: httpBody];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    //Log
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    
+    return [[AMETCDResult alloc] initWithData:returnData];
+
+}
+
+-(AMETCDResult*)deleteDir:(NSString*)dirPath
+                recursive:(BOOL)bRecursive
+{
+    //curl -L http://127.0.0.1:4001/v2/keys/dir?recursive=true -XDELETE
+    
+    NSString* urlStr;
+    if(bRecursive == YES)
+    {
+        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
+                         self.nodeIp,
+                         self.clientPort,
+                         dirPath];
+    }
+    else
+    {
+        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?dir=true",
+                   self.nodeIp,
+                   self.clientPort,
+                   dirPath];
+
+    }
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
+    return result;
 }
 
 

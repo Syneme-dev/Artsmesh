@@ -32,7 +32,6 @@
 {
    // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
    
-    
     AMETCD* service  = [[AMETCD alloc] init];
     service.nodeIp = @"127.0.0.1";
     service.clientPort = 4001;
@@ -44,6 +43,8 @@
     NSString* keyString = @"/message";
     NSString* valueString = @"hello world!";
     
+    
+    //Test1 setKey
     AMETCDResult* res = [service setKey: keyString withValue:valueString];
     if(res.errCode != 0)
     {
@@ -55,6 +56,7 @@
         return;
     }
     
+    //Test2 getKey and setKey
     res = [service  getKey:keyString];
     if(res.errCode != 0)
     {
@@ -77,6 +79,8 @@
         return;
     }
     
+    
+    //Test3 watchKey
     int nowIndex = res.node.createdIndex;
     int actualIndex = 0;
     res = [service watchKey:keyString fromIndex:nowIndex acturalIndex:&actualIndex timeout:0];
@@ -101,6 +105,7 @@
         return;
     }
     
+    //Test4 deleteKey
     res = [service deleteKey:keyString];
     if(res.errCode != 0)
     {
@@ -113,7 +118,7 @@
     }
     
     res = [service getKey:keyString];
-    if(res.errCode != 0)
+    if(res.errCode == 0)
     {
         XCTFail(@"delete key failed! key still exist:%@ \"%s\"\n",
                 res.node.value,
@@ -123,6 +128,55 @@
         return;
     }
     
+    
+    //Test5 CreateDir
+    NSString* dirPath = @"/dir_1";
+    res = [service createDir:dirPath];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"create dir failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service getKey:dirPath];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"create dir failed! didn't get the dir %@ :\"%s\"\n",
+                dirPath,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    //Test6 delete dir
+    res = [service deleteDir:dirPath recursive:YES];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"create dir failed! didn't get the dir %@ :\"%s\"\n",
+                dirPath,
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service getKey:dirPath];
+    if(res.errCode == 0)
+    {
+        XCTFail(@"delete dir failed! the dir still exist :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+
+    
+    
+
     
     [service stopETCD];
 }

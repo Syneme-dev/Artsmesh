@@ -136,15 +136,15 @@
         
         
         // first error procedure:
-        id errCode = [objects valueForKey:@"errCode"];
+        id errCode = [objects valueForKey:@"errorCode"];
         if(errCode != nil)
         {
             id message = [objects valueForKey:@"message"];
             id cause = [objects valueForKey:@"cause"];
             
-            self.errCode = [errCode integerValue];
-            self.errMessage = [message stringValue];
-            self.cause = [cause stringValue];
+            self.errCode = [errCode intValue];
+            self.errMessage = message;
+            self.cause = cause;
             
             return self;
         }

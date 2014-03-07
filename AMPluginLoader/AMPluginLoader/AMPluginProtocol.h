@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMPluginAppDelegateProtocol.h"
 
 @protocol AMPlugin <NSObject>
 
@@ -18,6 +19,8 @@
 
 # pragma mark
 # pragma mark Notification
+
+-(id)init:(id<AMPluginAppDelegate> )amAppDelegateProtocol;
 
 -(void) registerAllMessageListeners;
 

@@ -43,7 +43,7 @@
 		pluginBundle = [NSBundle bundleWithPath:path];
 		[pluginBundle load];
 		Class principalClass = [pluginBundle principalClass];
-		plugin = [[principalClass alloc] init];
+		plugin = [[principalClass alloc] init:self];
 		[availablePlugins addObject:plugin];
 		plugin = nil;
 		pluginBundle = nil;

@@ -7,6 +7,7 @@
 //
 
 #import <AMNotificationManager/AMNotificationManager.h>
+#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "PluginPrincipal.h"
 #import "HelloWorldViewController.h"
 
@@ -16,7 +17,7 @@
 # pragma mark
 # pragma mark General
 
--(id)init
+-(id)init:(id<AMPluginAppDelegate> )amAppDelegateProtocol;
 {
     NSLog(@"HelloWorldPlugin is loaded.");
     [self registerAllMessageListeners];
@@ -34,10 +35,7 @@
 
 -(void) registerAllMessageListeners
 {
-    
     [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_MESHER_STARTED callback:@selector(onFunctionOneInvoked)];
-    //TODO: the register message method may be useless.
-
 }
 
 # pragma mark

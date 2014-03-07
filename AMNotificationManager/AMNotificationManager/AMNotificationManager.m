@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Artsmesh. All rights reserved.
 //
 
+#import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMNotificationManager.h"
 
 @implementation AMNotificationManager

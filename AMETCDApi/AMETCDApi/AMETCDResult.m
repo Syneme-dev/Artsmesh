@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 王 为. All rights reserved.
 //
 
-#import "AMETCDCURDResult.h"
+#import "AMETCDResult.h"
 
 @implementation AMETCDNode
 @end
 
-@implementation AMETCDCURDResult
+@implementation AMETCDResult
 
 
 //Normal Format:

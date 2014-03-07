@@ -22,7 +22,7 @@
 @end
 
 
-@interface AMETCDCURDResult : NSObject
+@interface AMETCDResult : NSObject
 
 @property NSString* action;
 @property AMETCDNode* node;

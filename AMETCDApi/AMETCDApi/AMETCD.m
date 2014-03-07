@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 王 为. All rights reserved.
 //
 
-#import "AMETCDService.h"
+#import "AMETCD.h"
 
-@implementation AMETCDService
+@implementation AMETCD
 {
     NSTask* _etcdTask;
 }
@@ -82,7 +82,7 @@
 }
 
 
--(AMETCDCURDResult*)getKey:(NSString*)key
+-(AMETCDResult*)getKey:(NSString*)key
 {
     NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
                          self.nodeIp,
@@ -100,12 +100,12 @@
     NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", resultLog);
     
-    AMETCDCURDResult* result = [[AMETCDCURDResult alloc] initWithData:returnData];
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
     return result;
 }
 
 
--(AMETCDCURDResult*)setKey:(NSString*)key withValue:(NSString*)value;
+-(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
     NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
@@ -132,13 +132,13 @@
     NSLog(@"%@\n", resultLog);
 
 
-    return [[AMETCDCURDResult alloc] initWithData:returnData];
+    return [[AMETCDResult alloc] initWithData:returnData];
     
 }
 
 
 
--(AMETCDCURDResult*)watchKey:(NSString*)key
+-(AMETCDResult*)watchKey:(NSString*)key
                    fromIndex:(int)index_in
                 acturalIndex:(int*)index_out
                      timeout:(int)seconds
@@ -179,7 +179,7 @@
     NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", resultLog);
     
-    AMETCDCURDResult* result = [[AMETCDCURDResult alloc] initWithData:returnData];
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
     
     if(result != nil && result.node != nil)
     {
@@ -194,7 +194,7 @@
 }
 
 
--(AMETCDCURDResult*)deleteKey: (NSString*) key
+-(AMETCDResult*)deleteKey: (NSString*) key
 {
     //curl -L http://127.0.0.1:4001/v2/keys/message -XDELETE
     NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
@@ -213,7 +213,7 @@
     NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", resultLog);
     
-    AMETCDCURDResult* result = [[AMETCDCURDResult alloc] initWithData:returnData];
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
     return result;
     
 }

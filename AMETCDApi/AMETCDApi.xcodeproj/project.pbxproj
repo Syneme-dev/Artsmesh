@@ -14,10 +14,10 @@
 		D47008E318C725E000B92F9A /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C618C725E000B92F9A /* AMETCDApi.framework */; };
 		D47008E918C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008E718C725E000B92F9A /* InfoPlist.strings */; };
 		D47008EB18C725E000B92F9A /* AMETCDApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008EA18C725E000B92F9A /* AMETCDApiTests.m */; };
-		D47008F818C7265400B92F9A /* AMETCDService.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCDService.h */; };
-		D47008F918C7265400B92F9A /* AMETCDService.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCDService.m */; };
-		D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDCURDResult.h */; };
-		D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F718C7265400B92F9A /* AMETCDCURDResult.m */; };
+		D47008F818C7265400B92F9A /* AMETCD.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCD.h */; };
+		D47008F918C7265400B92F9A /* AMETCD.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCD.m */; };
+		D47008FA18C7265400B92F9A /* AMETCDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDResult.h */; };
+		D47008FB18C7265400B92F9A /* AMETCDResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F718C7265400B92F9A /* AMETCDResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,10 +56,10 @@
 		D47008E618C725E000B92F9A /* AMETCDApiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMETCDApiTests-Info.plist"; sourceTree = "<group>"; };
 		D47008E818C725E000B92F9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D47008EA18C725E000B92F9A /* AMETCDApiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMETCDApiTests.m; sourceTree = "<group>"; };
-		D47008F418C7265400B92F9A /* AMETCDService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDService.h; sourceTree = "<group>"; };
-		D47008F518C7265400B92F9A /* AMETCDService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDService.m; sourceTree = "<group>"; };
-		D47008F618C7265400B92F9A /* AMETCDCURDResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDCURDResult.h; sourceTree = "<group>"; };
-		D47008F718C7265400B92F9A /* AMETCDCURDResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDCURDResult.m; sourceTree = "<group>"; };
+		D47008F418C7265400B92F9A /* AMETCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCD.h; sourceTree = "<group>"; };
+		D47008F518C7265400B92F9A /* AMETCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCD.m; sourceTree = "<group>"; };
+		D47008F618C7265400B92F9A /* AMETCDResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDResult.h; sourceTree = "<group>"; };
+		D47008F718C7265400B92F9A /* AMETCDResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDResult.m; sourceTree = "<group>"; };
 		D47008FC18C7272E00B92F9A /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
 		D4E2E4CC18C8512D0037159B /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,10 +128,10 @@
 		D47008CF18C725E000B92F9A /* AMETCDApi */ = {
 			isa = PBXGroup;
 			children = (
-				D47008F418C7265400B92F9A /* AMETCDService.h */,
-				D47008F518C7265400B92F9A /* AMETCDService.m */,
-				D47008F618C7265400B92F9A /* AMETCDCURDResult.h */,
-				D47008F718C7265400B92F9A /* AMETCDCURDResult.m */,
+				D47008F418C7265400B92F9A /* AMETCD.h */,
+				D47008F518C7265400B92F9A /* AMETCD.m */,
+				D47008F618C7265400B92F9A /* AMETCDResult.h */,
+				D47008F718C7265400B92F9A /* AMETCDResult.m */,
 				D47008D018C725E000B92F9A /* Supporting Files */,
 			);
 			path = AMETCDApi;
@@ -174,8 +174,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D47008F818C7265400B92F9A /* AMETCDService.h in Headers */,
-				D47008FA18C7265400B92F9A /* AMETCDCURDResult.h in Headers */,
+				D47008F818C7265400B92F9A /* AMETCD.h in Headers */,
+				D47008FA18C7265400B92F9A /* AMETCDResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,8 +275,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D47008FB18C7265400B92F9A /* AMETCDCURDResult.m in Sources */,
-				D47008F918C7265400B92F9A /* AMETCDService.m in Sources */,
+				D47008FB18C7265400B92F9A /* AMETCDResult.m in Sources */,
+				D47008F918C7265400B92F9A /* AMETCD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

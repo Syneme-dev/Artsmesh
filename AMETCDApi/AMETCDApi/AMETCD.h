@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMETCDCURDResult.h"
+#import "AMETCDResult.h"
 
-@interface AMETCDService : NSObject
+@interface AMETCD : NSObject
 
 @property NSString* leaderAddr;
 @property NSString* nodeIp;
@@ -28,15 +28,16 @@
 
 -(void)stopETCD;
 
--(AMETCDCURDResult*)getKey:(NSString*)key;
+-(AMETCDResult*)getKey:(NSString*)key;
 
--(AMETCDCURDResult*)setKey:(NSString*)key withValue:(NSString*)value;
+-(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 
--(AMETCDCURDResult*)watchKey:(NSString*)key
+-(AMETCDResult*)watchKey:(NSString*)key
                    fromIndex:(int)index_in
                 acturalIndex:(int*)index_out
                      timeout:(int)seconds;
 
--(AMETCDCURDResult*)deleteKey: (NSString*) Key;
+-(AMETCDResult*)deleteKey: (NSString*) Key;
+
 
 @end

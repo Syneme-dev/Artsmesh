@@ -45,5 +45,13 @@
 -(AMETCDResult*)deleteDir:(NSString*)dirPath
                 recursive:(BOOL)b;
 
+-(AMETCDResult*)listDir:(NSString*)dirPath
+              recursive:(BOOL)bRecursive;
+
+
+-(AMETCDResult*)watchDir:(NSString*)dirPath
+               fromIndex:(int)index_in
+            acturalIndex:(int*)index_out
+                 timeout:(int)seconds;
 
 @end

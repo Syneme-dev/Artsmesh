@@ -289,6 +289,95 @@
     return result;
 }
 
+-(AMETCDResult*)listDir:(NSString*)dirPath
+              recursive:(BOOL)bRecursive;
+{
+    NSString* urlStr;
+    if(bRecursive == YES)
+    {
+        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
+                   self.nodeIp,
+                   self.clientPort,
+                   dirPath];
+    }
+    else
+    {
+        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
+                   self.nodeIp,
+                   self.clientPort,
+                   dirPath];
+    }
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
+    return result;
+}
+
+
+-(AMETCDResult*)watchDir:(NSString*)dirPath
+               fromIndex:(int)index_in
+            acturalIndex:(int*)index_out
+                 timeout:(int)seconds
+{
+    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
+    
+    NSString* headerfield = @"application/x-www-form-urlencoded";
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true&wait=true&waitIndex=%d",
+                         self.nodeIp,
+                         self.clientPort,
+                         dirPath,
+                         index_in];
+    NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"GET"];
+    [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headerDictionary];
+    
+    if(seconds == 0)
+    {
+        [request setTimeoutInterval: 3600*100];
+    }
+    else
+    {
+        [request setTimeoutInterval:seconds];
+    }
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    //Log will remove
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
+    
+    if(result != nil && result.node != nil)
+    {
+        *index_out = result.node.createdIndex;
+    }
+    else
+    {
+        *index_out = -1;
+    }
+    
+    return result;
+}
+
+
 
 -(NSMutableData*)createSetKeyHttpBody: (NSString*)key withValue:(NSString*)val
 {

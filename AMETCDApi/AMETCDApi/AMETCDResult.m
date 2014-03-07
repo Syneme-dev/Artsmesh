@@ -95,6 +95,9 @@
             
             node.nodes = nodes;
         }
+        
+        node.createdIndex = [[nodeObj valueForKey:@"createdIndex"] intValue];
+        node.modifiedIndex = [[nodeObj valueForKey:@"modifiedIndex"] intValue];
     }
     
     return node;

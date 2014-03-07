@@ -173,9 +173,99 @@
         [service stopETCD];
         return;
     }
-
     
+    //Test7 listDir
+    NSString* dir1 = @"/dir1/";
+    NSString* dir1_dir1 = @"/dir1/dir1/";
+    NSString* dir1_key1 = @"/dir1_key1";
+    NSString* dir1_value1 = @"/dir1__value1";
+    NSString* dir1_dir1_key1 = @"/dir1/dir1/key1";
+    NSString* dir1_dir1_value1 = @"/dir1/dir1/value1";
+    NSString* dir1_dir1_key2 = @"/dir1/dir1/key2";
+    NSString* dir1_dir1_value2 = @"/dir1/dir1/value2";
     
+    res = [service deleteDir:dir1 recursive:YES];
+    
+    res = [service createDir:dir1];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service createDir:dir1_dir1];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service setKey:dir1_key1 withValue:dir1_value1];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service setKey:dir1_dir1_key1 withValue:dir1_dir1_value1];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service setKey:dir1_dir1_key2 withValue:dir1_dir1_value2];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    res = [service listDir:dir1 recursive:YES];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! create failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    int watchDirIndex = res.node.modifiedIndex;
+    int watchDirActIndex = 0;
+    res = [service watchDir:dir1 fromIndex:watchDirIndex acturalIndex:&watchDirActIndex timeout:0];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"list dir failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    if(watchDirIndex != watchDirActIndex)
+    {
+        XCTFail(@"watch index is not equal to actually index:\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
 
     
     [service stopETCD];

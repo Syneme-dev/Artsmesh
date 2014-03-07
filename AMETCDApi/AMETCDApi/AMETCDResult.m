@@ -65,17 +65,17 @@
 -(AMETCDNode*) recursivelyParseNode:(id)nodeObj
 {
     AMETCDNode* node = [[AMETCDNode alloc]init];
-    node.key = [[nodeObj valueForKey:@"key"] stringValue];
+    node.key = [nodeObj valueForKey:@"key"];
     
     id isDir = [nodeObj valueForKey:@"dir"];
     if ( isDir == nil)
     {
         //a node
-        node.value = [[nodeObj valueForKey:@"valuse"] stringValue];
+        node.value = [nodeObj valueForKey:@"value"];
         node.createdIndex = [[nodeObj valueForKey:@"createdIndex"] intValue];
         node.modifiedIndex = [[nodeObj valueForKey:@"modifiedIndex"] intValue];
         node.ttl = [[nodeObj valueForKey:@"ttl"]intValue];
-        node.expiration = [[nodeObj valueForKey:@"expiration"] stringValue];
+        node.expiration = [nodeObj valueForKey:@"expiration"];
     }
     else
     {
@@ -104,6 +104,8 @@
 {
     if(self = [super init])
     {
+        self.errCode = 0;
+        
         if(data == nil)
         {
             self.errCode = -1;
@@ -151,7 +153,7 @@
         id action = [objects valueForKey:@"action"];
         if(action != nil)
         {
-            self.action = [action stringValue];
+            self.action = action;
             
             id node_obj = [objects valueForKey:@"node"];
             if(node_obj != nil)

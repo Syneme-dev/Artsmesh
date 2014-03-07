@@ -7,8 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "AMETCDService.h"
-#import "AMETCDCURDResult.h"
+#import "AMETCD.h"
+#import "AMETCDResult.h"
 
 @interface AMETCDApiTests : XCTestCase
 
@@ -33,8 +33,8 @@
    // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
    
     
-    AMETCDService* service  = [[AMETCDService alloc] init];
-    service.nodeIp = @"192.168.1.101";
+    AMETCD* service  = [[AMETCD alloc] init];
+    service.nodeIp = @"127.0.0.1";
     service.clientPort = 4001;
     service.serverPort = 7001;
     
@@ -44,11 +44,11 @@
     NSString* keyString = @"/message";
     NSString* valueString = @"hello world!";
     
-    AMETCDCURDResult* res = [service setKey: keyString withValue:valueString];
-    if(res.errorRes == YES)
+    AMETCDResult* res = [service setKey: keyString withValue:valueString];
+    if(res.errCode != 0)
     {
         XCTFail(@"set key failed! error info: %@ \"%s\"\n",
-                res.errDescription,
+                res.errMessage,
                 __PRETTY_FUNCTION__);
         
         [service stopETCD];
@@ -56,10 +56,10 @@
     }
     
     res = [service  getKey:keyString];
-    if(res.errorRes == YES)
+    if(res.errCode != 0)
     {
         XCTFail(@"get key failed! error info: %@ \"%s\"\n",
-                res.errDescription,
+                res.errMessage,
                 __PRETTY_FUNCTION__);
         
         [service stopETCD];
@@ -80,10 +80,10 @@
     int nowIndex = res.node.createdIndex;
     int actualIndex = 0;
     res = [service watchKey:keyString fromIndex:nowIndex acturalIndex:&actualIndex timeout:0];
-    if(res.errorRes == YES)
+    if(res.errCode != 0)
     {
         XCTFail(@"wait key failed! error info: %@ \"%s\"\n",
-                res.errDescription,
+                res.errMessage,
                 __PRETTY_FUNCTION__);
         
         [service stopETCD];
@@ -102,10 +102,10 @@
     }
     
     res = [service deleteKey:keyString];
-    if(res.errorRes == YES)
+    if(res.errCode != 0)
     {
         XCTFail(@"delete key failed! error info: %@ \"%s\"\n",
-                res.errDescription,
+                res.errMessage,
                 __PRETTY_FUNCTION__);
         
         [service stopETCD];
@@ -113,7 +113,7 @@
     }
     
     res = [service getKey:keyString];
-    if(res.errorRes == NO)
+    if(res.errCode != 0)
     {
         XCTFail(@"delete key failed! key still exist:%@ \"%s\"\n",
                 res.node.value,

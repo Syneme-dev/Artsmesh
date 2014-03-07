@@ -105,6 +105,7 @@
 }
 
 
+
 -(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
@@ -127,7 +128,7 @@
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request
                                                returningResponse:nil error:nil];
     
-    //Log will remove
+    //Log
     NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", resultLog);
 

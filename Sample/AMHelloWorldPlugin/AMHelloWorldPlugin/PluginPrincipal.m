@@ -21,6 +21,7 @@
 {
     NSLog(@"HelloWorldPlugin is loaded.");
     [self registerAllMessageListeners];
+    [self registerPreference];
     return self;
 }
 

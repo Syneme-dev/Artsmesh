@@ -23,6 +23,9 @@
       location = "container:"
       name = "Utilities">
       <FileRef
+         location = "group:UIFramewrok/UIFramewrok.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:AMLogger/AMLogger.xcodeproj">
       </FileRef>
       <FileRef

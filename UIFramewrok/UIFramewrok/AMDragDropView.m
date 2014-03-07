@@ -1,14 +1,14 @@
 //
-//  AMPanelView.m
-//  DemoUI
+//  AMDragDropView.m
+//  UIFramewrok
 //
-//  Created by xujian on 3/6/14.
+//  Created by xujian on 3/7/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMPanelView.h"
+#import "AMDragDropView.h"
 
-@implementation AMPanelView
+@implementation AMDragDropView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -19,9 +19,10 @@
     return self;
 }
 
+
 - (void)drawRect:(NSRect)dirtyRect
 {
-   [[NSColor colorWithCalibratedRed:(48+12)/255.0f green:(64+11)/255.0f blue:(80+14)/255.0f alpha:1.0f] set];
+    [[NSColor colorWithCalibratedRed:(48+12)/255.0f green:(64+11)/255.0f blue:(80+14)/255.0f alpha:1.0f] set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 	

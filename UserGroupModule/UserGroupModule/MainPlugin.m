@@ -21,6 +21,11 @@
     return @"User Group";
 }
 
+- (id)init:(id <AMPluginAppDelegate>)amAppDelegateProtocol {
+    return self;
+}
+
+
 - (void)registerAllMessageListeners {
 
 }

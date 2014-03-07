@@ -47,6 +47,9 @@
          location = "container:"
          name = "Module">
          <FileRef
+            location = "group:AMETCDApi/AMETCDApi.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:UserGroupModule/UserGroupModule.xcodeproj">
          </FileRef>
       </Group>

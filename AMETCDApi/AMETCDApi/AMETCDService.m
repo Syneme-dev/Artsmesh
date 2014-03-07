@@ -72,16 +72,22 @@
 -(void)stopETCD
 {
     [_etcdTask terminate];
+    [_etcdTask waitUntilExit];
     
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
+    
+    sleep(1);
     _etcdTask = nil;
 }
 
 
 -(AMETCDCURDResult*)getKey:(NSString*)key
 {
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
+                         self.nodeIp,
+                         self.clientPort,
+                         key];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -102,7 +108,10 @@
 -(AMETCDCURDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
+                         self.nodeIp,
+                         self.clientPort,
+                         key];
     NSMutableData* httpBody = [self createSetKeyHttpBody:@"value" withValue:value];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
@@ -139,7 +148,11 @@
    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
 
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@?wait=true&waitIndex=%d", self.nodeIp, key, index_in];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?wait=true&waitIndex=%d",
+                         self.nodeIp,
+                         self.clientPort,
+                         key,
+                         index_in];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
 
     
@@ -184,7 +197,10 @@
 -(AMETCDCURDResult*)deleteKey: (NSString*) key
 {
     //curl -L http://127.0.0.1:4001/v2/keys/message -XDELETE
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@/v2/keys/%@", self.nodeIp, key];
+    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
+                         self.nodeIp,
+                         self.clientPort,
+                         key];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     

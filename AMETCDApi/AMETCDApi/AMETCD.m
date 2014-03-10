@@ -11,6 +11,8 @@
 @implementation AMETCD
 {
     NSTask* _etcdTask;
+    
+    NSString* _artsmeshRootKey;
 }
 
 
@@ -25,6 +27,7 @@
         self.leaderAddr = nil;
         
         self.nodeName = [host name];
+        _artsmeshRootKey = @"/artsmesh";
     }
     
     return self;
@@ -71,6 +74,7 @@
 
 -(void)stopETCD
 {
+    [self deleteDir:@"/" recursive:YES];
     [_etcdTask terminate];
     [_etcdTask waitUntilExit];
     
@@ -82,16 +86,49 @@
 }
 
 
--(AMETCDResult*)getKey:(NSString*)key
+-(NSString*)rootKey
 {
     NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
                          self.nodeIp,
                          self.clientPort,
-                         key];
+                         _artsmeshRootKey];
+    
+    return urlStr;
+}
+
+
+-(NSMutableString*)getRequestURL:(NSString*)key withParams:(NSString*)params
+{
+    NSMutableString* requestURL = [NSMutableString stringWithString:[self rootKey]];
+    
+    if ([key hasPrefix:@"/"])
+    {
+        [requestURL appendString:key];
+    }
+    else
+    {
+        [requestURL appendString:@"/"];
+        [requestURL appendString:key];
+    }
+    
+    if (params != nil)
+    {
+        [requestURL appendString:@"?"];
+        [requestURL appendString:params];
+    }
+    
+    return requestURL;
+}
+
+
+
+-(AMETCDResult*)getKey:(NSString*)key
+{
+    NSMutableString* requestURL = [self getRequestURL:key withParams:nil];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setURL:[NSURL URLWithString:requestURL]];
     [request setHTTPMethod:@"GET"];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request
@@ -109,10 +146,9 @@
 -(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         key];
+    
+    NSString* urlStr  = [self getRequestURL:key withParams:nil];
+    
     NSMutableData* httpBody = [self createSetKeyHttpBody:@"value" withValue:value];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
@@ -148,14 +184,17 @@
     
    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
 
+//    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?wait=true&waitIndex=%d",
+//                         self.nodeIp,
+//                         self.clientPort,
+//                         key,
+//                         index_in];
+    
+    NSString* params = [NSString stringWithFormat:@"wait=true&waitIndex=%d", index_in];
+    NSString* urlStr = [self getRequestURL:key withParams:params];
+    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?wait=true&waitIndex=%d",
-                         self.nodeIp,
-                         self.clientPort,
-                         key,
-                         index_in];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
-
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -198,10 +237,7 @@
 -(AMETCDResult*)deleteKey: (NSString*) key
 {
     //curl -L http://127.0.0.1:4001/v2/keys/message -XDELETE
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         key];
+    NSString* urlStr  = [self getRequestURL:key withParams:nil];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -222,17 +258,14 @@
 
 -(AMETCDResult*)createDir:(NSString*)dirPath
 {
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
+    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath];
     NSMutableData* httpBody = [self createSetKeyHttpBody:@"dir" withValue:@"true"];
+    
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
     [request setURL:[NSURL URLWithString:urlStr]];
     [request setHTTPMethod:@"PUT"];
     [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
@@ -256,23 +289,8 @@
 {
     //curl -L http://127.0.0.1:4001/v2/keys/dir?recursive=true -XDELETE
     
-    NSString* urlStr;
-    if(bRecursive == YES)
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath];
-    }
-    else
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?dir=true",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-
-    }
-    
+    NSString* params = bRecursive ? @"recursive=true" : @"dir=true";
+    NSString* urlStr = [self getRequestURL:dirPath withParams:params];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -292,21 +310,8 @@
 -(AMETCDResult*)listDir:(NSString*)dirPath
               recursive:(BOOL)bRecursive;
 {
-    NSString* urlStr;
-    if(bRecursive == YES)
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-    }
-    else
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-    }
+    NSString* params = bRecursive ? @"recursive=true" : nil;
+    NSString* urlStr = [self getRequestURL:dirPath withParams:params ];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -331,12 +336,10 @@
 {
     // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
     
-    NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true&wait=true&waitIndex=%d",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath,
-                         index_in];
+    NSString* params = [NSString stringWithFormat:@"recursive=true&wait=true&waitIndex=%d", index_in];
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:params];
+    
+     NSString* headerfield = @"application/x-www-form-urlencoded";
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
     

@@ -30,6 +30,9 @@
 //will kill and running etcd instance and run ours
 -(void)stopETCD;
 
+//get the cluster's leader
+-(NSString*)getLeader;
+
 //get a key command
 //the result is in AMETCDResult, see the AMETCDResult to
 //know the result structure

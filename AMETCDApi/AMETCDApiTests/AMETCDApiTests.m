@@ -266,6 +266,29 @@
         [service stopETCD];
         return;
     }
+    
+    //Test8 leader
+    NSString* leader = [service getLeader];
+    if(leader == nil)
+    {
+        XCTFail(@"get leader failed:\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+
+    }
+    
+    if([leader isEqualToString:@""])
+    {
+        XCTFail(@"get leader failed:\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        [service stopETCD];
+        return;
+    }
+    
+    NSLog(@"leader is:%@", leader);
 
     
     [service stopETCD];

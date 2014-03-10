@@ -122,6 +122,28 @@
 
 
 
+-(NSString*)getLeader
+{
+    NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/v2/leader",
+                             self.nodeIp,
+                             self.clientPort];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:requestURL]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    return resultLog;
+}
+
+
+
 -(AMETCDResult*)getKey:(NSString*)key
 {
     NSMutableString* requestURL = [self getRequestURL:key withParams:nil];

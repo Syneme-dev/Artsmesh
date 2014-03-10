@@ -183,12 +183,6 @@
 {
     
    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
-
-//    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?wait=true&waitIndex=%d",
-//                         self.nodeIp,
-//                         self.clientPort,
-//                         key,
-//                         index_in];
     
     NSString* params = [NSString stringWithFormat:@"wait=true&waitIndex=%d", index_in];
     NSString* urlStr = [self getRequestURL:key withParams:params];

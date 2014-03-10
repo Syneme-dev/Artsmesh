@@ -14,9 +14,9 @@
 		D47008E318C725E000B92F9A /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C618C725E000B92F9A /* AMETCDApi.framework */; };
 		D47008E918C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008E718C725E000B92F9A /* InfoPlist.strings */; };
 		D47008EB18C725E000B92F9A /* AMETCDApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008EA18C725E000B92F9A /* AMETCDApiTests.m */; };
-		D47008F818C7265400B92F9A /* AMETCD.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCD.h */; };
+		D47008F818C7265400B92F9A /* AMETCD.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F418C7265400B92F9A /* AMETCD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D47008F918C7265400B92F9A /* AMETCD.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F518C7265400B92F9A /* AMETCD.m */; };
-		D47008FA18C7265400B92F9A /* AMETCDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDResult.h */; };
+		D47008FA18C7265400B92F9A /* AMETCDResult.h in Headers */ = {isa = PBXBuildFile; fileRef = D47008F618C7265400B92F9A /* AMETCDResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D47008FB18C7265400B92F9A /* AMETCDResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D47008F718C7265400B92F9A /* AMETCDResult.m */; };
 /* End PBXBuildFile section */
 

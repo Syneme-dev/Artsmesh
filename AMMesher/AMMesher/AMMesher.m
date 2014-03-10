@@ -54,6 +54,11 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [self stop];
+}
+
 -(BOOL)start
 {
     if(self.state != MESHER_STATE_STOP)

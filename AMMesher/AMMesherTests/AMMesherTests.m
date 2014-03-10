@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "AMMesher.h"
 
 @interface AMMesherTests : XCTestCase
 
@@ -28,7 +29,11 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    AMMesher* mesher = [[AMMesher alloc] init];
+    [mesher browseLocalMesher];
+    
+    sleep(10);
 }
 
 @end

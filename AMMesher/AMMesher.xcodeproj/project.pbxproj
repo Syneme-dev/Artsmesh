@@ -15,7 +15,7 @@
 		269E910B18CD51EE00974445 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90EE18CD51EE00974445 /* AMMesher.framework */; };
 		269E911118CD51EE00974445 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 269E910F18CD51EE00974445 /* InfoPlist.strings */; };
 		269E911318CD51EE00974445 /* AMMesherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 269E911218CD51EE00974445 /* AMMesherTests.m */; };
-		269E911E18CD62E700974445 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E911C18CD626D00974445 /* AMETCDApi.framework */; };
+		D4EAA56918CD822900A927DF /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EAA56818CD822900A927DF /* AMETCDApi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		269E910E18CD51EE00974445 /* AMMesherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMMesherTests-Info.plist"; sourceTree = "<group>"; };
 		269E911018CD51EE00974445 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		269E911218CD51EE00974445 /* AMMesherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMMesherTests.m; sourceTree = "<group>"; };
-		269E911C18CD626D00974445 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
+		D4EAA56818CD822900A927DF /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = "../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/AMETCDApi.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				269E911E18CD62E700974445 /* AMETCDApi.framework in Frameworks */,
+				D4EAA56918CD822900A927DF /* AMETCDApi.framework in Frameworks */,
 				269E90F218CD51EE00974445 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,7 +92,7 @@
 		269E90F018CD51EE00974445 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				269E911C18CD626D00974445 /* AMETCDApi.framework */,
+				D4EAA56818CD822900A927DF /* AMETCDApi.framework */,
 				269E90F118CD51EE00974445 /* Cocoa.framework */,
 				269E910618CD51EE00974445 /* XCTest.framework */,
 				269E90F318CD51EE00974445 /* Other Frameworks */,
@@ -372,6 +372,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -391,6 +392,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -460,6 +462,7 @@
 				269E911818CD51EE00974445 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		269E911918CD51EE00974445 /* Build configuration list for PBXNativeTarget "AMMesherTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +471,7 @@
 				269E911B18CD51EE00974445 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

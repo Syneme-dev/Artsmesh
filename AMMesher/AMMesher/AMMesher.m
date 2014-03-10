@@ -61,20 +61,6 @@
         return NO;
     }
     
-    if([_meshers count] != 0)
-    {
-        if(YES == [self joinLocalMesher:0])
-        {
-            self.state = MESHER_STATE_JOINED;
-            return YES;
-        }
-        else
-        {
-            self.state = MESHER_STATE_ERROR;
-            return NO;
-        }
-    }
-    
     self.state = MESHER_STATE_PUBLISHING;
     [self publishLocalMesher];
     
@@ -105,7 +91,7 @@
     }
     
     _netServiceBrowser.delegate = self;
-    [_netServiceBrowser searchForServicesOfType:@"_artsmesh._tcp" inDomain:@""];
+    [_netServiceBrowser searchForServicesOfType:@"_artsmesh._tcp." inDomain:@""];
     
     return YES;
 }
@@ -265,12 +251,6 @@
         return;
     }
     
-    if ([_meshers count] == 0)
-    {
-        self.state = MESHER_STATE_ERROR;
-        return;
-    }
-    
     if(YES == [self joinLocalMesher:0])
     {
         self.state = MESHER_STATE_JOINED;
@@ -279,9 +259,6 @@
     {
         self.state = MESHER_STATE_ERROR;
     }
-    
-    // Let delegate know about failure
-    //[delegate serverFailed:self reason:@"Failed to publish service via Bonjour (duplicate server name?)"];
 }
 
 - (void) netServiceDidPublish:(NSNetService *)sender
@@ -297,6 +274,7 @@
 {
     [self stopETCD];
     self.state = MESHER_STATE_STOP;
+    
     NSLog(@" >> netServiceDidStop: %@", [sender name]);
 }
 

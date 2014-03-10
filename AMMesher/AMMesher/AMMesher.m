@@ -33,6 +33,7 @@
 {
     NSNetServiceBrowser*  _netServiceBrowser;
     NSNetService* _myMesher;
+    NSMutableArray* _meshers;
     AMETCD* _etcd;
     
     int _servicePort;
@@ -43,9 +44,10 @@
 {
     if(self = [super init])
     {
-        self.meshers = [[NSMutableArray alloc]init];
-        self.mesherState = MESHER_STATE_STOP;
-    
+        _meshers = [[NSMutableArray alloc]init];
+        self.state = MESHER_STATE_STOP;
+        
+        [self browseLocalMesher];
         _servicePort = 7001;
     }
     
@@ -54,38 +56,43 @@
 
 -(BOOL)start
 {
-    if(self.mesherState >= MESHER_STATE_START)
+    if(self.state != MESHER_STATE_STOP)
     {
         return NO;
     }
     
-    if(![self browseLocalMesher])
+    if([_meshers count] != 0)
     {
-        return NO;
+        if(YES == [self joinLocalMesher:0])
+        {
+            self.state = MESHER_STATE_JOINED;
+            return YES;
+        }
+        else
+        {
+            self.state = MESHER_STATE_ERROR;
+            return NO;
+        }
     }
     
-    self.mesherState = MESHER_STATE_START;
+    self.state = MESHER_STATE_PUBLISHING;
+    [self publishLocalMesher];
     
     return YES;
+
 }
 
 -(void)stop
 {
     [self stopBrowser];
     [self unpublishLocalMesher];
-    [self stopETCD];
     
-    self.mesherState = MESHER_STATE_STOP;
+    self.state = MESHER_STATE_STOP;
 }
 
 
 -(BOOL)browseLocalMesher
 {
-    if(self.mesherState != MESHER_STATE_START)
-    {
-        return NO;
-    }
-    
     if(_netServiceBrowser != nil)
     {
         [self stopBrowser];
@@ -115,7 +122,7 @@
     [_netServiceBrowser stop];
     _netServiceBrowser = nil;
     
-    [self.meshers removeAllObjects];
+    [_meshers removeAllObjects];
 }
 
 
@@ -141,35 +148,16 @@
 
 -(BOOL)joinLocalMesher:(int) index
 {
-    if(self.mesherState < MESHER_STATE_START)
+    if(index >= [_meshers count])
     {
         return NO;
     }
     
-    if(index >= [self.meshers count])
-    {
-        return NO;
-    }
-    
-    if(self.mesherState == MESHER_STATE_HOSTING)
-    {
-        [self unpublishLocalMesher];
-        [self stopETCD];
-    }
-    else if(self.mesherState == MESHER_STATE_JOINED)
-    {
-        [self stopETCD];
-    }
-    
-    self.mesherState = MESHER_STATE_START;
-    
-    NSNetService* service = [self.meshers objectAtIndex:index];
+    NSNetService* service = [_meshers objectAtIndex:index];
     
     NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", service.hostName, (long)service.port];
+    [self stopETCD];
     [self startETCD:leaderAddr];
-    
-    _servicePort = _etcd.serverPort;
-    self.mesherState = MESHER_STATE_JOINED;
 
     return YES;
 }
@@ -177,38 +165,14 @@
 
 -(BOOL)publishLocalMesher
 {
-    if(self.mesherState < MESHER_STATE_START)
-    {
-        return NO;
-    }
-    
-    if(self.mesherState == MESHER_STATE_JOINED)
-    {
-        [self stopETCD];
-    }
-    else if(self.mesherState == MESHER_STATE_HOSTING)
-    {
-        [self unpublishLocalMesher];
-        [self stopETCD];
-    }
-    
-    self.mesherState = MESHER_STATE_START;
-  
-    [self startETCD:nil];
-    
-    NSHost* host = [NSHost currentHost];
-    NSString* mesherName = [NSString stringWithFormat:@"%@'s mesher", [host name]];
-    
     // create new instance of netService
  	_myMesher = [[NSNetService alloc] initWithDomain:@""
                                                 type:@"_artsmesh._tcp."
-                                                name:mesherName
+                                                name:@"Artsmesh-Mesher-Service"
                                                 port:_servicePort];
 	if (_myMesher == nil)
     {
-        [self stopETCD];
-        self.mesherState = MESHER_STATE_START;
-        return NO;
+        [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
     }
     
     // Add service to current run loop
@@ -221,30 +185,19 @@
     // Publish the service
 	[_myMesher publish];
     
-    self.mesherState = MESHER_STATE_HOSTING;
+    //[self startETCD:nil];
+    
     return YES;
 }
 
 - (void) unpublishLocalMesher
 {
-    if(self.mesherState != MESHER_STATE_HOSTING)
-    {
-        return;
-    }
-    
     if (_myMesher)
     {
 		[_myMesher stop];
 		[_myMesher removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 		_myMesher = nil;
 	}
-}
-
-
-// Sort servers array by service names
-- (void) sortServers
-{
-    [self.meshers sortUsingSelector:@selector(localizedCaseInsensitiveCompareByName:)];
 }
 
 
@@ -257,20 +210,15 @@
                 moreComing:(BOOL)moreServicesComing
 {
     // Make sure that we don't have such service already (why would this happen? not sure)
-    if ( ! [self.meshers containsObject:netService] ) {
+    if ( ! [_meshers containsObject:netService] ) {
         // Add it to our list
-        [self.meshers addObject:netService];
+        [_meshers addObject:netService];
     }
     
     // If more entries are coming, no need to update UI just yet
     if ( moreServicesComing ) {
         return;
     }
-    
-    // Sort alphabetically and let our delegate know
-    [self sortServers];
-    
-    [self.delegate updateServerList];
 }
 
 
@@ -280,18 +228,31 @@
                moreComing:(BOOL)moreServicesComing
 {
     // Remove from list
-    [self.meshers removeObject:netService];
+    [_meshers removeObject:netService];
     
     // If more entries are coming, no need to update UI just yet
     if ( moreServicesComing ) {
         return;
     }
     
-    // Sort alphabetically and let our delegate know
-    [self sortServers];
-    
-    [self.delegate updateServerList];
+    if ([_meshers count] > 0)
+    {
+        if(YES == [self joinLocalMesher:0])
+        {
+            self.state = MESHER_STATE_JOINED;
+        }
+        else
+        {
+            self.state = MESHER_STATE_ERROR;
+        }
+    }
+    else
+    {
+        self.state = MESHER_STATE_PUBLISHING;
+        [self publishLocalMesher];
+    }
 }
+
 
 #pragma mark -
 #pragma mark NSNetService Delegate Method Implementations
@@ -304,12 +265,20 @@
         return;
     }
     
-    // Stop etcd
-    [_etcd stopETCD];
-    _etcd = nil;
+    if ([_meshers count] == 0)
+    {
+        self.state = MESHER_STATE_ERROR;
+        return;
+    }
     
-    // Stop Bonjour
-    [self unpublishLocalMesher];
+    if(YES == [self joinLocalMesher:0])
+    {
+        self.state = MESHER_STATE_JOINED;
+    }
+    else
+    {
+        self.state = MESHER_STATE_ERROR;
+    }
     
     // Let delegate know about failure
     //[delegate serverFailed:self reason:@"Failed to publish service via Bonjour (duplicate server name?)"];
@@ -317,11 +286,17 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
+    [self stopETCD];
+    [self startETCD:nil];
+    self.state = MESHER_STATE_PUBLISHED;
+    
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);
 }
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
+    [self stopETCD];
+    self.state = MESHER_STATE_STOP;
     NSLog(@" >> netServiceDidStop: %@", [sender name]);
 }
 

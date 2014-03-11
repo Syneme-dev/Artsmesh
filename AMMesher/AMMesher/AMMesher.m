@@ -10,6 +10,49 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+@implementation NSData (Additions)
+
+- (int)port
+{
+    int port;
+    struct sockaddr *addr;
+    
+    addr = (struct sockaddr *)[self bytes];
+    if(addr->sa_family == AF_INET)
+        // IPv4 family
+        port = ntohs(((struct sockaddr_in *)addr)->sin_port);
+    else if(addr->sa_family == AF_INET6)
+        // IPv6 family
+        port = ntohs(((struct sockaddr_in6 *)addr)->sin6_port);
+    else
+        // The family is neither IPv4 nor IPv6. Can't handle.
+        port = 0;
+    
+    return port;
+}
+
+
+- (NSString *)host
+{
+    struct sockaddr *addr = (struct sockaddr *)[self bytes];
+    if(addr->sa_family == AF_INET) {
+        char *address =
+        inet_ntoa(((struct sockaddr_in *)addr)->sin_addr);
+        if (address)
+            return [NSString stringWithCString: address];
+    }
+    else if(addr->sa_family == AF_INET6) {
+        struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)addr;
+        char straddr[INET6_ADDRSTRLEN];
+        inet_ntop(AF_INET6, &(addr6->sin6_addr), straddr,
+                  sizeof(straddr));
+        return [NSString stringWithCString: straddr];
+    }
+    return nil;
+}
+
+@end
+
 
 #pragma mark -
 #pragma mark NSNetService (BrowserViewControllerAdditions)
@@ -243,7 +286,7 @@
     // create new instance of netService
  	_myMesher = [[NSNetService alloc] initWithDomain:@""
                                                 type:@"_artsmesh._tcp."
-                                                name:_myServiceIp
+                                                name:@"artsmesh-mesher-service"
                                                 port:7001];
 	if (_myMesher == nil)
     {
@@ -363,8 +406,13 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.name, (long)sender.port];
-    [self startETCD:leaderAddr];
+    for (NSData* data in sender.addresses)
+    {
+        NSString* str = [data host];
+    }
+    
+//    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.name, (long)sender.port];
+//    [self startETCD:leaderAddr];
     
     self.mesherName = sender.hostName;
     self.state = MESHER_STATE_JOINED;

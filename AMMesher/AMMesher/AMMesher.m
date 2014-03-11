@@ -215,7 +215,7 @@
     // Make sure that we don't have such service already (why would this happen? not sure)
     if ( ! [_meshers containsObject:netService] ) {
         // Add it to our list
-        [_meshers addObject:netService];
+        [netService resolveWithTimeout:5.0];
     }
     
     // If more entries are coming, no need to update UI just yet
@@ -286,5 +286,20 @@
     
     NSLog(@" >> netServiceDidStop: %@", [sender name]);
 }
+
+// Called if we weren't able to resolve net service
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
+{
+    NSLog(@"service:%@ can not be resloved!\n", sender.name);
+}
+
+
+// Called when net service has been successfully resolved
+- (void)netServiceDidResolveAddress:(NSNetService *)sender
+{
+    NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
+    [_meshers addObject:sender];
+}
+
 
 @end

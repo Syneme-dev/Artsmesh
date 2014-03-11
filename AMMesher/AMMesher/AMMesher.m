@@ -7,6 +7,8 @@
 //
 
 #import "AMMesher.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 
 #pragma mark -
@@ -36,7 +38,65 @@
     NSMutableArray* _meshers;
     AMETCD* _etcd;
     
-    int _servicePort;
+    int _myServicePort;
+    NSString* _myServiceIp;
+}
+
+
++ (BOOL)isValidIpv4:(NSString *)ip {
+    const char *utf8 = [ip UTF8String];
+    
+    // Check valid IPv4.
+    struct in_addr dst;
+    int success = inet_pton(AF_INET, utf8, &(dst.s_addr));
+    return (success == 1);
+}
+
+
++ (BOOL)isValidIpv6:(NSString *)ip {
+    const char *utf8 = [ip UTF8String];
+    
+    // Check valid IPv6.
+    struct in6_addr dst6;
+    int success = inet_pton(AF_INET6, utf8, &dst6);
+    
+    return (success == 1);
+}
+
+
++(NSString*)getIpv4Addr
+{
+    NSHost* host = [NSHost currentHost];
+    for(NSString* addr in host.addresses)
+    {
+        if([AMMesher isValidIpv4:addr])
+        {
+            if(![addr isEqualToString:@"127.0.0.1"])
+            {
+                return addr;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
++(NSString*)getIpv6Addr
+{
+    NSHost* host = [NSHost currentHost];
+    for(NSString* addr in host.addresses)
+    {
+        if([AMMesher isValidIpv6:addr])
+        {
+            if(![addr isEqualToString:@"::1"])
+            {
+                return addr;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 
@@ -48,7 +108,8 @@
         self.state = MESHER_STATE_STOP;
         
         [self browseLocalMesher];
-        _servicePort = 7001;
+        _myServicePort = 7001;
+        _myServiceIp = [AMMesher getIpv4Addr];
         
         [AMETCD clearETCD];
     }
@@ -141,10 +202,12 @@
     {
         _etcd = [[AMETCD alloc] init];
         _etcd.leaderAddr = hostAddr;
+        _etcd.nodeIp = _myServiceIp;
+        _etcd.clientPort = 4001;
+        _etcd.serverPort = 7001;
         
         [_etcd startETCD];
-        
-        _servicePort = _etcd.serverPort;
+
     }
 }
 
@@ -180,8 +243,8 @@
     // create new instance of netService
  	_myMesher = [[NSNetService alloc] initWithDomain:@""
                                                 type:@"_artsmesh._tcp."
-                                                name:@"Artsmesh-Mesher-Service"
-                                                port:_servicePort];
+                                                name:_myServiceIp
+                                                port:7001];
 	if (_myMesher == nil)
     {
         [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
@@ -300,7 +363,7 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.hostName, (long)sender.port];
+    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.name, (long)sender.port];
     [self startETCD:leaderAddr];
     
     self.mesherName = sender.hostName;

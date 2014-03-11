@@ -77,11 +77,17 @@
     //we should find etcd file and delete it
     //[self deleteDir:@"/" recursive:YES];
     
+    [AMETCD clearETCD];
+    _etcdTask = nil;
+}
+
++(void)clearETCD
+{
+    //TODO:
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
     sleep(1);
-    
-    _etcdTask = nil;
+
 }
 
 

@@ -30,6 +30,9 @@
 //will kill and running etcd instance and run ours
 -(void)stopETCD;
 
+//will remove all the etcd data, make sure etce clean next time
++(void)clearETCD;
+
 //get the cluster's leader
 -(NSString*)getLeader;
 

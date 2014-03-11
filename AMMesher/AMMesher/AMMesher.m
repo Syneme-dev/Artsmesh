@@ -140,6 +140,8 @@
     [self unpublishLocalMesher];
     self.mesherName = @"";
     
+    [self stopETCD];
+    
     self.state = MESHER_STATE_STOP;
 }
 

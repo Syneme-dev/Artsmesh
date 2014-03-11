@@ -157,11 +157,20 @@
     }
     
     NSNetService* service = [_meshers objectAtIndex:index];
-    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", service.hostName, (long)service.port];
-    [self startETCD:leaderAddr];
+    if(service.hostName == nil)
+    {
+        service.delegate  = self;
+        [service resolveWithTimeout:5.0];
+        self.state = MESHER_STATE_JOINING;
+    }
+    else
+    {
+        NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", service.hostName, (long)service.port];
+        [self startETCD:leaderAddr];
+        
+        self.mesherName = service.hostName;
+    }
     
-    self.mesherName = service.hostName;
-
     return YES;
 }
 
@@ -215,7 +224,7 @@
     // Make sure that we don't have such service already (why would this happen? not sure)
     if ( ! [_meshers containsObject:netService] ) {
         // Add it to our list
-        [netService resolveWithTimeout:5.0];
+        [_meshers addObject:netService];
     }
     
     // If more entries are coming, no need to update UI just yet
@@ -260,15 +269,8 @@
     {
         return;
     }
-    
-    if(YES == [self joinLocalMesher:0])
-    {
-        self.state = MESHER_STATE_JOINED;
-    }
-    else
-    {
-        self.state = MESHER_STATE_ERROR;
-    }
+
+    [self joinLocalMesher:0];
 }
 
 - (void) netServiceDidPublish:(NSNetService *)sender
@@ -282,8 +284,6 @@
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
-    self.state = MESHER_STATE_STOP;
-    
     NSLog(@" >> netServiceDidStop: %@", [sender name]);
 }
 
@@ -291,6 +291,7 @@
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
     NSLog(@"service:%@ can not be resloved!\n", sender.name);
+    self.state = MESHER_STATE_ERROR;
 }
 
 
@@ -298,7 +299,12 @@
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
-    [_meshers addObject:sender];
+    
+    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.hostName, (long)sender.port];
+    [self startETCD:leaderAddr];
+    
+    self.mesherName = sender.hostName;
+    self.state = MESHER_STATE_JOINED;
 }
 
 

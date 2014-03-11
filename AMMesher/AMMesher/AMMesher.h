@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMETCDApi/AMETCD.h"
 
 #define MESHER_STATE_ERROR         -1
 #define MESHER_STATE_STOP           0
@@ -24,7 +25,6 @@
 // * MESHER_STATE_JOINING, event host quit, to MESHER_STATE_PUBLISHING, event publish_error, to MESHER_STATE_JOINING, event join_ok, to MESHER_STATE_JOINED
 // * MESHER_STATE_JOINING, event host quit, to MESHER_STATE_PUBLISHING, event publish_error, to MESHER_STATE_JOINING, event join_error, to MESHER_STATE_ERROR
 
-
 @class AMMesher;
 
 @protocol MesherDelegate
@@ -35,10 +35,13 @@
 @interface AMMesher : NSObject<NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 @property int state; // 0 stop, 1 started, 2 joined, 3 hosting, 4 electing, -1 error
+@property NSString* mesherName;
 
 //LAN
 -(BOOL)start;
 -(void)stop;
+
+-(AMETCD*)getETCDRef;
 
 //TODO
 //communicate with WLAN mesher

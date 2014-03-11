@@ -13,5 +13,14 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property AMMesher* mesher;
+@property (weak) IBOutlet NSTextField *etcdLeader;
+@property (weak) IBOutlet NSTextField *key;
+@property (weak) IBOutlet NSTextField *key_value;
+@property (weak) IBOutlet NSTextField *errorMsg;
+
+- (IBAction)getValue:(id)sender;
+- (IBAction)setValue:(id)sender;
+
+- (IBAction)getETCDLeader:(id)sender;
 
 @end

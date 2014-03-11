@@ -15,6 +15,8 @@
 		2684482E18CE89CD00072F59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2684482C18CE89CD00072F59 /* MainMenu.xib */; };
 		2684483018CE89CD00072F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2684482F18CE89CD00072F59 /* Images.xcassets */; };
 		2684484818CE89E700072F59 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90EE18CD51EE00974445 /* AMMesher.framework */; };
+		2684484A18CEAADC00072F59 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2684484918CEAADC00072F59 /* AMETCDApi.framework */; };
+		2684484B18CEAC0B00072F59 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2684484918CEAADC00072F59 /* AMETCDApi.framework */; };
 		269E90F218CD51EE00974445 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90F118CD51EE00974445 /* Cocoa.framework */; };
 		269E90FC18CD51EE00974445 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 269E90FA18CD51EE00974445 /* InfoPlist.strings */; };
 		269E910018CD51EE00974445 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 269E90FF18CD51EE00974445 /* AMMesher.m */; };
@@ -23,7 +25,6 @@
 		269E910B18CD51EE00974445 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90EE18CD51EE00974445 /* AMMesher.framework */; };
 		269E911118CD51EE00974445 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 269E910F18CD51EE00974445 /* InfoPlist.strings */; };
 		269E911318CD51EE00974445 /* AMMesherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 269E911218CD51EE00974445 /* AMMesherTests.m */; };
-		D4EAA56918CD822900A927DF /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EAA56818CD822900A927DF /* AMETCDApi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		2684482A18CE89CD00072F59 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2684482D18CE89CD00072F59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2684482F18CE89CD00072F59 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2684484918CEAADC00072F59 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		269E90EE18CD51EE00974445 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E90F118CD51EE00974445 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		269E90F418CD51EE00974445 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,7 +64,6 @@
 		269E910E18CD51EE00974445 /* AMMesherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMMesherTests-Info.plist"; sourceTree = "<group>"; };
 		269E911018CD51EE00974445 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		269E911218CD51EE00974445 /* AMMesherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMMesherTests.m; sourceTree = "<group>"; };
-		D4EAA56818CD822900A927DF /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = "../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/AMETCDApi.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2684484A18CEAADC00072F59 /* AMETCDApi.framework in Frameworks */,
 				2684484818CE89E700072F59 /* AMMesher.framework in Frameworks */,
 				2684481C18CE89CD00072F59 /* Cocoa.framework in Frameworks */,
 			);
@@ -79,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4EAA56918CD822900A927DF /* AMETCDApi.framework in Frameworks */,
+				2684484B18CEAC0B00072F59 /* AMETCDApi.framework in Frameworks */,
 				269E90F218CD51EE00974445 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,7 +147,7 @@
 		269E90F018CD51EE00974445 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D4EAA56818CD822900A927DF /* AMETCDApi.framework */,
+				2684484918CEAADC00072F59 /* AMETCDApi.framework */,
 				269E90F118CD51EE00974445 /* Cocoa.framework */,
 				269E910618CD51EE00974445 /* XCTest.framework */,
 				269E90F318CD51EE00974445 /* Other Frameworks */,
@@ -416,6 +418,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesherTestUI/AMMesherTestUI-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -433,6 +439,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesherTestUI/AMMesherTestUI-Prefix.pch";
 				INFOPLIST_FILE = "AMMesherTestUI/AMMesherTestUI-Info.plist";

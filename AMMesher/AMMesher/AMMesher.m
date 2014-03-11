@@ -7,7 +7,7 @@
 //
 
 #import "AMMesher.h"
-#import "AMETCDApi/AMETCD.h"
+
 
 #pragma mark -
 #pragma mark NSNetService (BrowserViewControllerAdditions)
@@ -49,6 +49,8 @@
         
         [self browseLocalMesher];
         _servicePort = 7001;
+        
+        [AMETCD clearETCD];
     }
     
     return self;
@@ -77,8 +79,15 @@
 {
     [self stopBrowser];
     [self unpublishLocalMesher];
+    self.mesherName = @"";
     
     self.state = MESHER_STATE_STOP;
+}
+
+
+-(AMETCD*)getETCDRef
+{
+    return _etcd;
 }
 
 
@@ -128,13 +137,15 @@
 
 -(void)startETCD:(NSString*)hostAddr;
 {
-    _etcd = [[AMETCD alloc] init];
-    _etcd.leaderAddr = hostAddr;
-    
-    [_etcd stopETCD];
-    [_etcd startETCD];
-    
-    _servicePort = _etcd.serverPort;
+    if(_etcd == nil)
+    {
+        _etcd = [[AMETCD alloc] init];
+        _etcd.leaderAddr = hostAddr;
+        
+        [_etcd startETCD];
+        
+        _servicePort = _etcd.serverPort;
+    }
 }
 
 
@@ -146,9 +157,10 @@
     }
     
     NSNetService* service = [_meshers objectAtIndex:index];
-    
     NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", service.hostName, (long)service.port];
     [self startETCD:leaderAddr];
+    
+    self.mesherName = service.hostName;
 
     return YES;
 }
@@ -226,16 +238,9 @@
         return;
     }
     
-    if ([_meshers count] > 0)
+    if(YES == [self joinLocalMesher:0])
     {
-        if(YES == [self joinLocalMesher:0])
-        {
-            self.state = MESHER_STATE_JOINED;
-        }
-        else
-        {
-            self.state = MESHER_STATE_ERROR;
-        }
+        self.state = MESHER_STATE_JOINED;
     }
     else
     {
@@ -270,13 +275,13 @@
 {
     [self startETCD:nil];
     self.state = MESHER_STATE_PUBLISHED;
+    self.mesherName = [[NSHost currentHost] name];
     
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);
 }
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
-    [self stopETCD];
     self.state = MESHER_STATE_STOP;
     
     NSLog(@" >> netServiceDidStop: %@", [sender name]);

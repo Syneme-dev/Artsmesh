@@ -27,7 +27,8 @@
         self.leaderAddr = nil;
         
         self.nodeName = [host name];
-        _artsmeshRootKey = @"/artsmesh";
+        //_artsmeshRootKey = @"/artsmesh";
+        _artsmeshRootKey = @"";
     }
     
     return self;
@@ -94,7 +95,7 @@
 -(NSString*)rootKey
 {
     NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
+                         self.nodeName,
                          self.clientPort,
                          _artsmeshRootKey];
     
@@ -130,7 +131,7 @@
 -(NSString*)getLeader
 {
     NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/v2/leader",
-                             self.nodeIp,
+                             self.nodeName,
                              self.clientPort];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

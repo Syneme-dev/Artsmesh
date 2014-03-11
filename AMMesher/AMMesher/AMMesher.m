@@ -10,50 +10,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-@implementation NSData (Additions)
-
-- (int)port
-{
-    int port;
-    struct sockaddr *addr;
-    
-    addr = (struct sockaddr *)[self bytes];
-    if(addr->sa_family == AF_INET)
-        // IPv4 family
-        port = ntohs(((struct sockaddr_in *)addr)->sin_port);
-    else if(addr->sa_family == AF_INET6)
-        // IPv6 family
-        port = ntohs(((struct sockaddr_in6 *)addr)->sin6_port);
-    else
-        // The family is neither IPv4 nor IPv6. Can't handle.
-        port = 0;
-    
-    return port;
-}
-
-
-- (NSString *)host
-{
-    struct sockaddr *addr = (struct sockaddr *)[self bytes];
-    if(addr->sa_family == AF_INET) {
-        char *address =
-        inet_ntoa(((struct sockaddr_in *)addr)->sin_addr);
-        if (address)
-            return [NSString stringWithCString: address];
-    }
-    else if(addr->sa_family == AF_INET6) {
-        struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)addr;
-        char straddr[INET6_ADDRSTRLEN];
-        inet_ntop(AF_INET6, &(addr6->sin6_addr), straddr,
-                  sizeof(straddr));
-        return [NSString stringWithCString: straddr];
-    }
-    return nil;
-}
-
-@end
-
-
 #pragma mark -
 #pragma mark NSNetService (BrowserViewControllerAdditions)
 
@@ -84,7 +40,6 @@
     int _myServicePort;
     NSString* _myServiceIp;
 }
-
 
 + (BOOL)isValidIpv4:(NSString *)ip {
     const char *utf8 = [ip UTF8String];
@@ -406,16 +361,45 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    for (NSData* data in sender.addresses)
+    char addressBuffer[INET6_ADDRSTRLEN];
+    
+    for (NSData *data in sender.addresses)
     {
-        NSString* str = [data host];
+        memset(addressBuffer, 0, INET6_ADDRSTRLEN);
+        
+        typedef union {
+            struct sockaddr sa;
+            struct sockaddr_in ipv4;
+            struct sockaddr_in6 ipv6;
+        } ip_socket_address;
+        
+        ip_socket_address *socketAddress = (ip_socket_address *)[data bytes];
+        
+        if (socketAddress && (socketAddress->sa.sa_family == AF_INET || socketAddress->sa.sa_family == AF_INET6))
+        {
+            const char *addressStr = inet_ntop(
+                                               socketAddress->sa.sa_family,
+                                               (socketAddress->sa.sa_family == AF_INET ? (void *)&(socketAddress->ipv4.sin_addr) : (void *)&(socketAddress->ipv6.sin6_addr)),
+                                               addressBuffer,
+                                               sizeof(addressBuffer));
+            
+            //int port = ntohs(socketAddress->sa.sa_family == AF_INET ? socketAddress->ipv4.sin_port : socketAddress->ipv6.sin6_port);
+            
+            NSString* hostIp = [NSString stringWithCString:addressBuffer encoding:NSUTF8StringEncoding];
+            if([AMMesher isValidIpv4:hostIp])
+            {
+                //ipv4
+                NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", hostIp, (long)sender.port];
+                [self startETCD:leaderAddr];
+                
+                self.mesherName = sender.hostName;
+                self.state = MESHER_STATE_JOINED;
+                return;
+            }
+        }
     }
     
-//    NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", sender.name, (long)sender.port];
-//    [self startETCD:leaderAddr];
-    
-    self.mesherName = sender.hostName;
-    self.state = MESHER_STATE_JOINED;
+    self.state = MESHER_STATE_ERROR;
 }
 
 

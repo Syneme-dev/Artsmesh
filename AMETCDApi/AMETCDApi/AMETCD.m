@@ -7,6 +7,8 @@
 //
 
 #import "AMETCD.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 @implementation AMETCD
 {
@@ -16,16 +18,73 @@
 }
 
 
++ (BOOL)isValidIpv4:(NSString *)ip {
+    const char *utf8 = [ip UTF8String];
+    
+    // Check valid IPv4.
+    struct in_addr dst;
+    int success = inet_pton(AF_INET, utf8, &(dst.s_addr));
+    return (success == 1);
+}
+
+
++ (BOOL)isValidIpv6:(NSString *)ip {
+    const char *utf8 = [ip UTF8String];
+    
+    // Check valid IPv6.
+    struct in6_addr dst6;
+    int success = inet_pton(AF_INET6, utf8, &dst6);
+    
+    return (success == 1);
+}
+
+
++(NSString*)getIpv4Addr
+{
+    NSHost* host = [NSHost currentHost];
+    for(NSString* addr in host.addresses)
+    {
+        if([AMETCD isValidIpv4:addr])
+        {
+            if(![addr isEqualToString:@"127.0.0.1"])
+            {
+                return addr;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
++(NSString*)getIpv6Addr
+{
+    NSHost* host = [NSHost currentHost];
+    for(NSString* addr in host.addresses)
+    {
+        if([AMETCD isValidIpv6:addr])
+        {
+            if(![addr isEqualToString:@"::1"])
+            {
+                return addr;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
 -(id)init
 {
     if(self = [super init])
     {
-        NSHost* host = [NSHost currentHost];
-        self.nodeIp = [host address];
+        self.nodeIp = [AMETCD getIpv4Addr];
         self.serverPort = 7001;
         self.clientPort = 4001;
         self.leaderAddr = nil;
         
+        NSHost* host = [NSHost currentHost];
         self.nodeName = [host name];
         //_artsmeshRootKey = @"/artsmesh";
         _artsmeshRootKey = @"";
@@ -48,24 +107,29 @@
     
     _etcdTask.launchPath = @"/usr/bin/etcd";
     
-    NSString* peerAddr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort];
-    NSString* addr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort];
-    NSString* dataDir = self.nodeName;
-    NSString* etcdName = self.nodeName;
-    
-    NSString* leaderAddr;
+    NSArray* argArry;
     if(self.leaderAddr != nil)
     {
-        leaderAddr = [NSString stringWithFormat:@"-peers:%@", self.leaderAddr];
+        argArry = [NSArray arrayWithObjects:
+                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort],
+                   @"-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort],
+                   @"-data-dir", self.nodeName,
+                   @"-name", self.nodeName,
+                   @"-peers", self.leaderAddr,
+                   nil];
     }
     else
     {
-        leaderAddr = @"";
+        argArry = [NSArray arrayWithObjects:
+                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort],
+                   @"-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort],
+                   @"-data-dir", self.nodeName,
+                   @"-name", self.nodeName,
+                   nil];
     }
     
-    NSString* args = [NSString stringWithFormat:@" -peer-addr %@ -addr %@ -data-dir %@ -name %@ %@", peerAddr, addr, dataDir, etcdName, leaderAddr];
-    
-    _etcdTask.arguments = @[args];
+
+    _etcdTask.arguments = argArry;
     [_etcdTask launch];
     
     

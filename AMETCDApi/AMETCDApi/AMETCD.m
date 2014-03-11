@@ -66,22 +66,18 @@
     
     _etcdTask.arguments = @[args];
     [_etcdTask launch];
-
+    
     
     return YES;
 }
 
-
 -(void)stopETCD
 {
     [self deleteDir:@"/" recursive:YES];
-    [_etcdTask terminate];
-    [_etcdTask waitUntilExit];
-    
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
-    
     sleep(1);
+    
     _etcdTask = nil;
 }
 

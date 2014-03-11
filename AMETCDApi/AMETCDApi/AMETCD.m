@@ -152,6 +152,11 @@
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
     sleep(1);
+    
+    
+    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:imageDir error:nil];
 
 }
 

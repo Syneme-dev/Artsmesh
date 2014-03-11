@@ -73,7 +73,10 @@
 
 -(void)stopETCD
 {
-    [self deleteDir:@"/" recursive:YES];
+    //we can not use this method, because we are still in etcd,
+    //we should find etcd file and delete it
+    //[self deleteDir:@"/" recursive:YES];
+    
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
     sleep(1);

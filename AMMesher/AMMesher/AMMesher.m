@@ -131,6 +131,7 @@
     _etcd = [[AMETCD alloc] init];
     _etcd.leaderAddr = hostAddr;
     
+    [_etcd stopETCD];
     [_etcd startETCD];
     
     _servicePort = _etcd.serverPort;
@@ -147,7 +148,6 @@
     NSNetService* service = [_meshers objectAtIndex:index];
     
     NSString* leaderAddr = [NSString stringWithFormat:@"%@:%ld", service.hostName, (long)service.port];
-    [self stopETCD];
     [self startETCD:leaderAddr];
 
     return YES;
@@ -268,7 +268,6 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    [self stopETCD];
     [self startETCD:nil];
     self.state = MESHER_STATE_PUBLISHED;
     

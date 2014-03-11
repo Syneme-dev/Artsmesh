@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2684481C18CE89CD00072F59 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90F118CD51EE00974445 /* Cocoa.framework */; };
+		2684482218CE89CD00072F59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2684482018CE89CD00072F59 /* InfoPlist.strings */; };
+		2684482418CE89CD00072F59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684482318CE89CD00072F59 /* main.m */; };
+		2684482818CE89CD00072F59 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2684482618CE89CD00072F59 /* Credits.rtf */; };
+		2684482B18CE89CD00072F59 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684482A18CE89CD00072F59 /* AppDelegate.m */; };
+		2684482E18CE89CD00072F59 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2684482C18CE89CD00072F59 /* MainMenu.xib */; };
+		2684483018CE89CD00072F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2684482F18CE89CD00072F59 /* Images.xcassets */; };
+		2684484818CE89E700072F59 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90EE18CD51EE00974445 /* AMMesher.framework */; };
 		269E90F218CD51EE00974445 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90F118CD51EE00974445 /* Cocoa.framework */; };
 		269E90FC18CD51EE00974445 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 269E90FA18CD51EE00974445 /* InfoPlist.strings */; };
 		269E910018CD51EE00974445 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 269E90FF18CD51EE00974445 /* AMMesher.m */; };
@@ -29,6 +37,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2684481B18CE89CD00072F59 /* AMMesherTestUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMMesherTestUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2684481F18CE89CD00072F59 /* AMMesherTestUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMMesherTestUI-Info.plist"; sourceTree = "<group>"; };
+		2684482118CE89CD00072F59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2684482318CE89CD00072F59 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2684482518CE89CD00072F59 /* AMMesherTestUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMMesherTestUI-Prefix.pch"; sourceTree = "<group>"; };
+		2684482718CE89CD00072F59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2684482918CE89CD00072F59 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2684482A18CE89CD00072F59 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2684482D18CE89CD00072F59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2684482F18CE89CD00072F59 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		269E90EE18CD51EE00974445 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		269E90F118CD51EE00974445 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		269E90F418CD51EE00974445 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,6 +66,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2684481818CE89CD00072F59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2684484818CE89E700072F59 /* AMMesher.framework in Frameworks */,
+				2684481C18CE89CD00072F59 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		269E90EA18CD51EE00974445 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -70,11 +97,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2684481D18CE89CD00072F59 /* AMMesherTestUI */ = {
+			isa = PBXGroup;
+			children = (
+				2684482918CE89CD00072F59 /* AppDelegate.h */,
+				2684482A18CE89CD00072F59 /* AppDelegate.m */,
+				2684482C18CE89CD00072F59 /* MainMenu.xib */,
+				2684482F18CE89CD00072F59 /* Images.xcassets */,
+				2684481E18CE89CD00072F59 /* Supporting Files */,
+			);
+			path = AMMesherTestUI;
+			sourceTree = "<group>";
+		};
+		2684481E18CE89CD00072F59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2684481F18CE89CD00072F59 /* AMMesherTestUI-Info.plist */,
+				2684482018CE89CD00072F59 /* InfoPlist.strings */,
+				2684482318CE89CD00072F59 /* main.m */,
+				2684482518CE89CD00072F59 /* AMMesherTestUI-Prefix.pch */,
+				2684482618CE89CD00072F59 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		269E90E418CD51EE00974445 = {
 			isa = PBXGroup;
 			children = (
 				269E90F718CD51EE00974445 /* AMMesher */,
 				269E910C18CD51EE00974445 /* AMMesherTests */,
+				2684481D18CE89CD00072F59 /* AMMesherTestUI */,
 				269E90F018CD51EE00974445 /* Frameworks */,
 				269E90EF18CD51EE00974445 /* Products */,
 			);
@@ -85,6 +137,7 @@
 			children = (
 				269E90EE18CD51EE00974445 /* AMMesher.framework */,
 				269E910518CD51EE00974445 /* AMMesherTests.xctest */,
+				2684481B18CE89CD00072F59 /* AMMesherTestUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +214,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		2684481A18CE89CD00072F59 /* AMMesherTestUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2684484618CE89CD00072F59 /* Build configuration list for PBXNativeTarget "AMMesherTestUI" */;
+			buildPhases = (
+				2684481718CE89CD00072F59 /* Sources */,
+				2684481818CE89CD00072F59 /* Frameworks */,
+				2684481918CE89CD00072F59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMMesherTestUI;
+			productName = AMMesherTestUI;
+			productReference = 2684481B18CE89CD00072F59 /* AMMesherTestUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 		269E90ED18CD51EE00974445 /* AMMesher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 269E911618CD51EE00974445 /* Build configuration list for PBXNativeTarget "AMMesher" */;
@@ -217,6 +287,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 269E90E418CD51EE00974445;
 			productRefGroup = 269E90EF18CD51EE00974445 /* Products */;
@@ -225,11 +296,23 @@
 			targets = (
 				269E90ED18CD51EE00974445 /* AMMesher */,
 				269E910418CD51EE00974445 /* AMMesherTests */,
+				2684481A18CE89CD00072F59 /* AMMesherTestUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2684481918CE89CD00072F59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2684482218CE89CD00072F59 /* InfoPlist.strings in Resources */,
+				2684483018CE89CD00072F59 /* Images.xcassets in Resources */,
+				2684482818CE89CD00072F59 /* Credits.rtf in Resources */,
+				2684482E18CE89CD00072F59 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		269E90EC18CD51EE00974445 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +332,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2684481718CE89CD00072F59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2684482B18CE89CD00072F59 /* AppDelegate.m in Sources */,
+				2684482418CE89CD00072F59 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		269E90E918CD51EE00974445 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +368,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2684482018CE89CD00072F59 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2684482118CE89CD00072F59 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2684482618CE89CD00072F59 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2684482718CE89CD00072F59 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		2684482C18CE89CD00072F59 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2684482D18CE89CD00072F59 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		269E90FA18CD51EE00974445 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,6 +411,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2684484218CE89CD00072F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMMesherTestUI/AMMesherTestUI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AMMesherTestUI/AMMesherTestUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2684484318CE89CD00072F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMMesherTestUI/AMMesherTestUI-Prefix.pch";
+				INFOPLIST_FILE = "AMMesherTestUI/AMMesherTestUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		269E911418CD51EE00974445 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -446,6 +592,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2684484618CE89CD00072F59 /* Build configuration list for PBXNativeTarget "AMMesherTestUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2684484218CE89CD00072F59 /* Debug */,
+				2684484318CE89CD00072F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		269E90E818CD51EE00974445 /* Build configuration list for PBXProject "AMMesher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

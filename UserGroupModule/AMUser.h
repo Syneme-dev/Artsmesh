@@ -13,7 +13,6 @@
 @property NSString* name;
 @property NSMutableArray* children;
 
-+ (AMUser *)rootItem;
 - (NSInteger)numberOfChildren;
 - (AMUser *)childAtIndex:(NSUInteger)n;
 

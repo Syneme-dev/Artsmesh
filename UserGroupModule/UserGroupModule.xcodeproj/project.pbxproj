@@ -7,21 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2673DE0218CFF1CA001E436F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2673DE0118CFF1CA001E436F /* AMETCDApi.framework */; };
 		2673DE0918CFF540001E436F /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2673DE0718CFF540001E436F /* AMUser.h */; };
 		2673DE0A18CFF540001E436F /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2673DE0818CFF540001E436F /* AMUser.m */; };
 		AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
 		AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9A5D4118C44D1C0078D125 /* MainPlugin.m */; };
-		AF9A5D4418C44D440078D125 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */; };
 		AFE3499A18C9BAA100E247B9 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE3499918C9BAA100E247B9 /* MainView.xib */; };
 		AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AFE3499B18C9BABC00E247B9 /* MainViewController.h */; };
 		AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE3499C18C9BABC00E247B9 /* MainViewController.m */; };
+		D4CEE40B18D03CD700F7429B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
+		D4CEE41118D03CD700F7429B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4CEE40F18D03CD700F7429B /* InfoPlist.strings */; };
+		D4CEE41318D03CD700F7429B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEE41218D03CD700F7429B /* main.m */; };
+		D4CEE41718D03CD700F7429B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D4CEE41518D03CD700F7429B /* Credits.rtf */; };
+		D4CEE41A18D03CD700F7429B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEE41918D03CD700F7429B /* AppDelegate.m */; };
+		D4CEE41D18D03CD700F7429B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4CEE41B18D03CD700F7429B /* MainMenu.xib */; };
+		D4CEE41F18D03CD700F7429B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4CEE41E18D03CD700F7429B /* Images.xcassets */; };
+		D4CEE43918D03ED400F7429B /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */; };
+		D4CEE43D18D03EE000F7429B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43C18D03EE000F7429B /* AMMesher.framework */; };
+		D4CEE43F18D0408700F7429B /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43E18D0408700F7429B /* AMPluginLoader.framework */; };
+		D4CEE44018D0423B00F7429B /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */; };
+		D4CEE44118D0426C00F7429B /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */; };
+		D4CEE44218D0426F00F7429B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43C18D03EE000F7429B /* AMMesher.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D4CEE43818D03ECA00F7429B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D4CEE43918D03ED400F7429B /* UserGroupModule.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		2673DE0118CFF1CA001E436F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		2673DE0718CFF540001E436F /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		2673DE0818CFF540001E436F /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
@@ -35,10 +58,22 @@
 		AF9A5D3A18C44CD10078D125 /* UserGroupModule-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserGroupModule-Prefix.pch"; sourceTree = "<group>"; };
 		AF9A5D4018C44D1C0078D125 /* MainPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPlugin.h; path = UserGroupModule/MainPlugin.h; sourceTree = "<group>"; };
 		AF9A5D4118C44D1C0078D125 /* MainPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPlugin.m; path = UserGroupModule/MainPlugin.m; sourceTree = "<group>"; };
-		AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		AFE3499918C9BAA100E247B9 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		AFE3499B18C9BABC00E247B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		AFE3499C18C9BABC00E247B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		D4CEE40A18D03CD700F7429B /* UserGroupUITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserGroupUITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4CEE40E18D03CD700F7429B /* UserGroupUITest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UserGroupUITest-Info.plist"; sourceTree = "<group>"; };
+		D4CEE41018D03CD700F7429B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4CEE41218D03CD700F7429B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4CEE41418D03CD700F7429B /* UserGroupUITest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserGroupUITest-Prefix.pch"; sourceTree = "<group>"; };
+		D4CEE41618D03CD700F7429B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D4CEE41818D03CD700F7429B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D4CEE41918D03CD700F7429B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D4CEE41C18D03CD700F7429B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D4CEE41E18D03CD700F7429B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = "../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/AMETCDApi.framework"; sourceTree = "<group>"; };
+		D4CEE43C18D03EE000F7429B /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = "../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/AMMesher.framework"; sourceTree = "<group>"; };
+		D4CEE43E18D0408700F7429B /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = "../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/AMPluginLoader.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,9 +81,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2673DE0218CFF1CA001E436F /* AMETCDApi.framework in Frameworks */,
-				AF9A5D4418C44D440078D125 /* AMPluginLoader.framework in Frameworks */,
+				D4CEE44218D0426F00F7429B /* AMMesher.framework in Frameworks */,
+				D4CEE44118D0426C00F7429B /* AMETCDApi.framework in Frameworks */,
 				AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4CEE40718D03CD700F7429B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4CEE44018D0423B00F7429B /* AMETCDApi.framework in Frameworks */,
+				D4CEE43F18D0408700F7429B /* AMPluginLoader.framework in Frameworks */,
+				D4CEE43D18D03EE000F7429B /* AMMesher.framework in Frameworks */,
+				D4CEE40B18D03CD700F7429B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +113,7 @@
 				AF9A5D4018C44D1C0078D125 /* MainPlugin.h */,
 				AF9A5D4118C44D1C0078D125 /* MainPlugin.m */,
 				AF9A5D3418C44CD10078D125 /* UserGroupModule */,
+				D4CEE40C18D03CD700F7429B /* UserGroupUITest */,
 				AF9A5D2D18C44CD10078D125 /* Frameworks */,
 				AF9A5D2C18C44CD10078D125 /* Products */,
 			);
@@ -76,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */,
+				D4CEE40A18D03CD700F7429B /* UserGroupUITest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,8 +131,9 @@
 		AF9A5D2D18C44CD10078D125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2673DE0118CFF1CA001E436F /* AMETCDApi.framework */,
-				AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */,
+				D4CEE43E18D0408700F7429B /* AMPluginLoader.framework */,
+				D4CEE43C18D03EE000F7429B /* AMMesher.framework */,
+				D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */,
 				AF9A5D2E18C44CD10078D125 /* Cocoa.framework */,
 				AF9A5D3018C44CD10078D125 /* Other Frameworks */,
 			);
@@ -115,6 +164,30 @@
 				AF9A5D3618C44CD10078D125 /* UserGroupModule-Info.plist */,
 				AF9A5D3718C44CD10078D125 /* InfoPlist.strings */,
 				AF9A5D3A18C44CD10078D125 /* UserGroupModule-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D4CEE40C18D03CD700F7429B /* UserGroupUITest */ = {
+			isa = PBXGroup;
+			children = (
+				D4CEE41818D03CD700F7429B /* AppDelegate.h */,
+				D4CEE41918D03CD700F7429B /* AppDelegate.m */,
+				D4CEE41B18D03CD700F7429B /* MainMenu.xib */,
+				D4CEE41E18D03CD700F7429B /* Images.xcassets */,
+				D4CEE40D18D03CD700F7429B /* Supporting Files */,
+			);
+			path = UserGroupUITest;
+			sourceTree = "<group>";
+		};
+		D4CEE40D18D03CD700F7429B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4CEE40E18D03CD700F7429B /* UserGroupUITest-Info.plist */,
+				D4CEE40F18D03CD700F7429B /* InfoPlist.strings */,
+				D4CEE41218D03CD700F7429B /* main.m */,
+				D4CEE41418D03CD700F7429B /* UserGroupUITest-Prefix.pch */,
+				D4CEE41518D03CD700F7429B /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,6 +226,24 @@
 			productReference = AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		D4CEE40918D03CD700F7429B /* UserGroupUITest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4CEE43618D03CD700F7429B /* Build configuration list for PBXNativeTarget "UserGroupUITest" */;
+			buildPhases = (
+				D4CEE40618D03CD700F7429B /* Sources */,
+				D4CEE40718D03CD700F7429B /* Frameworks */,
+				D4CEE40818D03CD700F7429B /* Resources */,
+				D4CEE43818D03ECA00F7429B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UserGroupUITest;
+			productName = UserGroupUITest;
+			productReference = D4CEE40A18D03CD700F7429B /* UserGroupUITest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,6 +259,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = AF9A5D2218C44CD10078D125;
 			productRefGroup = AF9A5D2C18C44CD10078D125 /* Products */;
@@ -175,6 +267,7 @@
 			projectRoot = "";
 			targets = (
 				AF9A5D2A18C44CD10078D125 /* UserGroupModule */,
+				D4CEE40918D03CD700F7429B /* UserGroupUITest */,
 			);
 		};
 /* End PBXProject section */
@@ -186,6 +279,17 @@
 			files = (
 				AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */,
 				AFE3499A18C9BAA100E247B9 /* MainView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4CEE40818D03CD700F7429B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4CEE41118D03CD700F7429B /* InfoPlist.strings in Resources */,
+				D4CEE41F18D03CD700F7429B /* Images.xcassets in Resources */,
+				D4CEE41718D03CD700F7429B /* Credits.rtf in Resources */,
+				D4CEE41D18D03CD700F7429B /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +306,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4CEE40618D03CD700F7429B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4CEE41A18D03CD700F7429B /* AppDelegate.m in Sources */,
+				D4CEE41318D03CD700F7429B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -211,6 +324,30 @@
 				AF9A5D3818C44CD10078D125 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D4CEE40F18D03CD700F7429B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4CEE41018D03CD700F7429B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D4CEE41518D03CD700F7429B /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4CEE41618D03CD700F7429B /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		D4CEE41B18D03CD700F7429B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4CEE41C18D03CD700F7429B /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -292,6 +429,7 @@
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";
@@ -310,6 +448,7 @@
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";
@@ -317,6 +456,44 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		D4CEE43218D03CD700F7429B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UserGroupUITest/UserGroupUITest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "UserGroupUITest/UserGroupUITest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D4CEE43318D03CD700F7429B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UserGroupUITest/UserGroupUITest-Prefix.pch";
+				INFOPLIST_FILE = "UserGroupUITest/UserGroupUITest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -340,6 +517,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D4CEE43618D03CD700F7429B /* Build configuration list for PBXNativeTarget "UserGroupUITest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4CEE43218D03CD700F7429B /* Debug */,
+				D4CEE43318D03CD700F7429B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MainViewController : NSViewController
+@interface MainViewController : NSViewController <NSOutlineViewDataSource>
+@property (weak) IBOutlet NSOutlineView *userGroupTree;
+@property (weak) IBOutlet NSTextField *clusterLeader;
+
 
 @end

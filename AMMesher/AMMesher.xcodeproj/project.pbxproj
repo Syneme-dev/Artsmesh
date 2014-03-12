@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2673DDFC18CFDFEE001E436F /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 269E90FE18CD51EE00974445 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2684481C18CE89CD00072F59 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269E90F118CD51EE00974445 /* Cocoa.framework */; };
 		2684482218CE89CD00072F59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2684482018CE89CD00072F59 /* InfoPlist.strings */; };
 		2684482418CE89CD00072F59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684482318CE89CD00072F59 /* main.m */; };
@@ -210,6 +211,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2673DDFC18CFDFEE001E436F /* AMMesher.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +611,7 @@
 				2684484318CE89CD00072F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		269E90E818CD51EE00974445 /* Build configuration list for PBXProject "AMMesher" */ = {
 			isa = XCConfigurationList;

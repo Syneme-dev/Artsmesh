@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2684484F18CF275700072F59 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2684484E18CF275700072F59 /* UserGroupModule.bundle */; };
+		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
+		26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2317C187A8FFD00554AFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2317B187A8FFD00554AFD /* main.m */; };
@@ -44,12 +47,16 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				2684484F18CF275700072F59 /* UserGroupModule.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2684484E18CF275700072F59 /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = UserGroupModule.bundle; path = /Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug/UserGroupModule.bundle; sourceTree = "<absolute>"; };
+		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
+		26ED34C718CFDFB200E1B791 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -87,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */,
+				26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */,
 				D447827618CD6B6800D72C9F /* UIFramewrok.framework in Frameworks */,
 				D447827418CD6B6200D72C9F /* AMPreferenceManager.framework in Frameworks */,
 				D447827218CD6B5E00D72C9F /* AMPluginLoader.framework in Frameworks */,
@@ -110,6 +119,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				2684484E18CF275700072F59 /* UserGroupModule.bundle */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
@@ -131,6 +141,8 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26ED34C718CFDFB200E1B791 /* AMMesher.framework */,
+				26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */,
 				D447827518CD6B6800D72C9F /* UIFramewrok.framework */,
 				D447827318CD6B6200D72C9F /* AMPreferenceManager.framework */,
 				D447827118CD6B5E00D72C9F /* AMPluginLoader.framework */,

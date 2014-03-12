@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2673DE0218CFF1CA001E436F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2673DE0118CFF1CA001E436F /* AMETCDApi.framework */; };
+		2673DE0918CFF540001E436F /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2673DE0718CFF540001E436F /* AMUser.h */; };
+		2673DE0A18CFF540001E436F /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2673DE0818CFF540001E436F /* AMUser.m */; };
 		AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2673DE0118CFF1CA001E436F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
+		2673DE0718CFF540001E436F /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
+		2673DE0818CFF540001E436F /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 		AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserGroupModule.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A5D2E18C44CD10078D125 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -40,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2673DE0218CFF1CA001E436F /* AMETCDApi.framework in Frameworks */,
 				AF9A5D4418C44D440078D125 /* AMPluginLoader.framework in Frameworks */,
 				AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */,
 			);
@@ -51,6 +58,8 @@
 		AF9A5D2218C44CD10078D125 = {
 			isa = PBXGroup;
 			children = (
+				2673DE0718CFF540001E436F /* AMUser.h */,
+				2673DE0818CFF540001E436F /* AMUser.m */,
 				AFE3499B18C9BABC00E247B9 /* MainViewController.h */,
 				AFE3499C18C9BABC00E247B9 /* MainViewController.m */,
 				AFE3499918C9BAA100E247B9 /* MainView.xib */,
@@ -74,6 +83,7 @@
 		AF9A5D2D18C44CD10078D125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2673DE0118CFF1CA001E436F /* AMETCDApi.framework */,
 				AF9A5D4318C44D440078D125 /* AMPluginLoader.framework */,
 				AF9A5D2E18C44CD10078D125 /* Cocoa.framework */,
 				AF9A5D3018C44CD10078D125 /* Other Frameworks */,
@@ -116,6 +126,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2673DE0918CFF540001E436F /* AMUser.h in Headers */,
 				AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */,
 				AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */,
 			);
@@ -186,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */,
+				2673DE0A18CFF540001E436F /* AMUser.m in Sources */,
 				AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +291,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";
@@ -296,6 +309,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";

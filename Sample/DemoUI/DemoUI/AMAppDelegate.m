@@ -15,10 +15,17 @@
 #import "HelloWorldConst.h"
 #import "AMPanelViewController.h"
 #import "UserGroupModuleConst.h"
+#import "AMMesher/AMMesher.h"
+#import "AMETCDApi/AMETCD.h"
+#import "AMETCDApi/AMETCDResult.h"
 
 static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate
+{
+    AMMesher* _globalMesher;
+    AMETCD* _globalETCD;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
@@ -39,6 +46,17 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
+    
+    _globalMesher = [[AMMesher alloc] init];
+    [_globalMesher start];
+    
+    _globalETCD = [_globalMesher getETCDRef];
+    
+    [_globalMesher addObserver:self
+                    forKeyPath:@"mesherName"
+                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                       context:Nil];
+    
 }
 
 - (void)showPreferencePanel {
@@ -58,13 +76,20 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
-
-    id userPluginClass = allPlugins[UserGroupPluginName];
-
-    NSViewController *userGroupViewController = [userPluginClass createMainView];
-    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 300 - 30, 300, 300);
-    [self.window.contentView addSubview:userGroupViewController.view];
+    [self loadUserGroupPanel];
+    
+    
 }
+
+-(void)loadUserGroupPanel{
+    NSRect screenSize = [[NSScreen mainScreen] frame];
+    id userPluginClass = allPlugins[UserGroupPluginName];
+    NSViewController *userGroupViewController = [userPluginClass createMainView];
+    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 300, 500);
+    [self.window.contentView addSubview:userGroupViewController.view];
+    
+}
+
 
 - (void)showTestPanel {
     NSRect screenSize = [[NSScreen mainScreen] frame];
@@ -100,6 +125,25 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (AMPreferenceManager *)sharedPreferenceManger {
     return [AMPreferenceManager defaultShared];
+}
+
+
+#pragma mark -
+#pragma mark KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath
+                     ofObject:(id)object
+                       change:(NSDictionary *)change
+                      context:(void *)context
+{
+    if([keyPath isEqualToString:@"mesherName"]){
+        NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
+        NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+        
+        self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];
+        return;
+    }
+    
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 

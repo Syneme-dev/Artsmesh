@@ -214,7 +214,14 @@
     NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", resultLog);
     
-    return resultLog;
+    if([resultLog hasPrefix:@"http://"])
+    {
+        return [resultLog substringFromIndex:7];
+    }
+    else
+    {
+        return resultLog;
+    }
 }
 
 

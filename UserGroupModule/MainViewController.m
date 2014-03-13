@@ -95,13 +95,25 @@
        }
        
        AMUser* newUser = [[AMUser alloc]initWithName:name isGroup:YES];
-       [self.userGroupTreeController addObject:newUser];
+       
+       NSUInteger indexes[1];
+       indexes[0] = [self.groups count];
+       NSIndexPath* indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:1];
+
+       [self.userGroupTreeController insertObject:newUser atArrangedObjectIndexPath:indexPath];
+       
+       
+     //  [self.userGroupTreeController addObject:newUser];
        [self.createGroupNameField setStringValue:@""];
 
    }
 }
 
 - (IBAction)deleteGroup:(id)sender {
+    if([self.groups count] == 1)
+    {
+        return;
+    }
     
     id selectedItem = [self.userGroupTreeView itemAtRow:[self.userGroupTreeView selectedRow]];
 
@@ -160,7 +172,7 @@
 
 -(BOOL)validateGroupNode:(id)node
 {
-    return [(AMUser*)node isLeaf];
+    return ![(AMUser*)node isLeaf];
 }
 
 @end

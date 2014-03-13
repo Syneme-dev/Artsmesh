@@ -30,7 +30,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
-    [self showTestPanel];   //TODO:to be deleted as test code.
+   // [self showTestPanel];   //TODO:to be deleted as test code.
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];

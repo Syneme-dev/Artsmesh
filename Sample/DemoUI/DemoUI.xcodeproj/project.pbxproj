@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		268E7DD718D183F600B0F710 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DD618D183F600B0F710 /* AMWindow.m */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
@@ -27,7 +28,6 @@
 		D447827218CD6B5E00D72C9F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827118CD6B5E00D72C9F /* AMPluginLoader.framework */; };
 		D447827418CD6B6200D72C9F /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827318CD6B6200D72C9F /* AMPreferenceManager.framework */; };
 		D447827618CD6B6800D72C9F /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827518CD6B6800D72C9F /* UIFramewrok.framework */; };
-		D4CEE40518D03C5A00F7429B /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4CEE40418D03C5900F7429B /* UserGroupModule.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,13 +47,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D4CEE40518D03C5A00F7429B /* UserGroupModule.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		268E7DD518D183F600B0F710 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
+		268E7DD618D183F600B0F710 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26ED34C718CFDFB200E1B791 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +178,8 @@
 				AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */,
+				268E7DD518D183F600B0F710 /* AMWindow.h */,
+				268E7DD618D183F600B0F710 /* AMWindow.m */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9B4E7518C829AE00EEBD6C /* AMPanelViewController.m in Sources */,
+				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,

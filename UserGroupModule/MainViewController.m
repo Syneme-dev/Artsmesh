@@ -57,9 +57,15 @@
              {
                  [self createDefaultGroup:etcd];
              }
-   
-             dispatch_async(dispatch_get_main_queue(), ^{
-             });
+             
+             int actIndex = 0;
+             res = [etcd watchDir:@"/Groups" fromIndex:2 acturalIndex:&actIndex timeout:0];
+             
+             while (1) {
+                 res = [etcd watchDir:@"/Groups" fromIndex:actIndex+1 acturalIndex:&actIndex timeout:0];
+             }
+             
+             
          });
 }
 
@@ -70,9 +76,8 @@
 
 -(void)createDefaultGroup:(AMETCD*)etcd;
 {
-//    AMUser* artsmeshGroup = [[AMUser alloc] initWithName:@"Artsmesh" isGroup:YES ];
-//    [_rootUser.children addObject:artsmeshGroup];
-//    [self.userGroupTree reloadData];
+    [etcd createDir:@"/Groups"];
+    [etcd createDir:@"/Groups/Artsmesh"];
 }
 
 - (IBAction)createNewGroup:(id)sender {
@@ -96,17 +101,56 @@
 
 - (IBAction)deleteGroup:(id)sender {
     
-    long index = self.userGroupTreeView.selectedRow;
-    if(index > 0)
+    id selectedItem = [self.userGroupTreeView itemAtRow:[self.userGroupTreeView selectedRow]];
+
+    if(selectedItem && [self validateGroupNode:selectedItem])
     {
-        AMUser* group = [self.groups objectAtIndex:index];
-        if(group)
+        [self.userGroupTreeController remove:selectedItem];
+    }
+    
+}
+
+- (IBAction)setUserName:(id)sender {
+    NSString* name = [sender stringValue];
+    
+    if (![name isEqualToString:@""])
+    {
+        if([self validateUserName:name])
         {
-            if([group.children count] == 0)
-            {
-                [self.userGroupTreeController remove:group];
-            }
+            AMUser* me = [[AMUser alloc] initWithName:name isGroup:NO];
+            
+            AMUser* artsmesh = [self.groups objectAtIndex:0];
+            
+            [artsmesh.children addObject:me];
+            [self.userGroupTreeView reloadData];
         }
     }
+    
 }
+
+-(BOOL)validateUserName:(NSString*)name
+{
+    if([self.groups count] != 0)
+    {
+        AMUser* artmeshGroup = [self.groups objectAtIndex:0];
+        
+        for(AMUser* user in artmeshGroup.children)
+        {
+            if([user.name isEqualToString:name])
+            {
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(BOOL)validateGroupNode:(id)node
+{
+    return ![(AMUser*)node isLeaf];
+}
+
 @end

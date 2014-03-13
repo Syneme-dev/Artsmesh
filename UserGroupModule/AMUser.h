@@ -13,6 +13,7 @@
 @property NSString* name;
 @property NSMutableArray* children;
 @property BOOL isLeaf;
+@property AMUser* parent;
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
 
@@ -21,6 +22,8 @@
 -(NSInteger)countOfChildren;
 
 -(AMUser*)objectInChildrenAtIndex:(NSUInteger)index;
+
+-(void)addChildrenObject:(AMUser *)object;
 
 -(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index;
 

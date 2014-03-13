@@ -15,6 +15,7 @@
     if(self = [super init])
     {
         self.name = name;
+        self.parent = nil;
         if(bGroup)
         {
             self.children = [[NSMutableArray alloc] init];
@@ -48,7 +49,9 @@
 -(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index
 {
     if (self.children != nil) {
+        [self willChangeValueForKey:@"children"];
         [self.children insertObject:object atIndex:index ];
+        [self didChangeValueForKey:@"children"];
     }
 }
 
@@ -56,7 +59,9 @@
 {
     if(self.children != nil)
     {
+        [self willChangeValueForKey:@"children"];
         [self.children removeObjectAtIndex:index];
+        [self didChangeValueForKey:@"children"];
     }
         
 }
@@ -65,7 +70,19 @@
 {
     if(self.children != nil)
     {
+        [self willChangeValueForKey:@"children"];
         [self.children replaceObjectAtIndex:index withObject:object  ];
+        [self didChangeValueForKey:@"children"];
+    }
+}
+
+-(void)addChildrenObject:(AMUser *)object
+{
+    if(self.children != nil)
+    {
+        [self willChangeValueForKey:@"children"];
+        [self.children addObject:object  ];
+        [self didChangeValueForKey:@"children"];
     }
 }
 

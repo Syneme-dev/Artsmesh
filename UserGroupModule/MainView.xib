@@ -131,7 +131,7 @@
                 <string>name</string>
             </declaredKeys>
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.groups" id="veC-fh-vR1"/>
+                <binding destination="-2" name="contentArray" keyPath="self.groups" id="SjX-XT-L87"/>
             </connections>
         </treeController>
     </objects>

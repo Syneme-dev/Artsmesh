@@ -17,6 +17,8 @@
 @implementation MainViewController
 {
     AMUser* _artsmeshGroup;
+    NSString* _myName;
+    
 }
 
 
@@ -113,19 +115,27 @@
 - (IBAction)setUserName:(id)sender {
     NSString* name = [sender stringValue];
     
-    if (![name isEqualToString:@""])
+    if (![name isEqualToString:@""] && ![name isEqualToString:_myName])
     {
         if([self validateUserName:name])
         {
             AMUser* me = [[AMUser alloc] initWithName:name isGroup:NO];
             
-            AMUser* artsmesh = [self.groups objectAtIndex:0];
+            NSUInteger indexes[2];
+            indexes[0]= 0;
+            indexes[1] = 0;
             
-            [artsmesh.children addObject:me];
-            [self.userGroupTreeView reloadData];
+            NSIndexPath* indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+            if (_myName != nil)
+            {
+                [self.userGroupTreeController removeObjectAtArrangedObjectIndexPath:indexPath];
+            }
+            
+            [self.userGroupTreeController insertObject:me atArrangedObjectIndexPath:indexPath];
+            
+            _myName = name;
         }
     }
-    
 }
 
 -(BOOL)validateUserName:(NSString*)name
@@ -150,7 +160,7 @@
 
 -(BOOL)validateGroupNode:(id)node
 {
-    return ![(AMUser*)node isLeaf];
+    return [(AMUser*)node isLeaf];
 }
 
 @end

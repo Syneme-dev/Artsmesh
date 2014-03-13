@@ -25,10 +25,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        self.userGroups = [[NSMutableArray alloc] init];
+        self.groups = [[NSMutableArray alloc] init];
         
         _artsmeshGroup = [[AMUser alloc]initWithName:@"Artsmesh" isGroup:YES];
-        [self.userGroups addObject:_artsmeshGroup];
+        [self.groups addObject:_artsmeshGroup];
         
         [self loadGroups];
     }
@@ -59,7 +59,6 @@
              }
    
              dispatch_async(dispatch_get_main_queue(), ^{
-                 self.clusterLeader.stringValue = leader;
              });
          });
 }
@@ -81,7 +80,7 @@
     
    if (![name isEqualToString:@""])
    {
-       for (AMUser* group in self.userGroups)
+       for (AMUser* group in self.groups)
        {
            if ( [group.name isEqualToString:name ] ) {
                return;
@@ -97,10 +96,10 @@
 
 - (IBAction)deleteGroup:(id)sender {
     
-    long index = self.userGroupTree.selectedRow;
+    long index = self.userGroupTreeView.selectedRow;
     if(index > 0)
     {
-        AMUser* group = [self.userGroups objectAtIndex:index];
+        AMUser* group = [self.groups objectAtIndex:index];
         if(group)
         {
             if([group.children count] == 0)

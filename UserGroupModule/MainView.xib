@@ -6,10 +6,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
-                <outlet property="clusterLeader" destination="0Ti-67-ff8" id="pg1-ta-tjq"/>
                 <outlet property="createGroupNameField" destination="COu-bM-c49" id="59l-yT-K33"/>
-                <outlet property="userGroupTree" destination="TXa-iM-wat" id="O3I-mu-T3Y"/>
                 <outlet property="userGroupTreeController" destination="6vf-v0-eax" id="EUK-Cu-Cb6"/>
+                <outlet property="userGroupTreeView" destination="TXa-iM-wat" id="x7h-nf-n4J"/>
                 <outlet property="view" destination="1" id="Xvt-jb-IGB"/>
             </connections>
         </customObject>
@@ -20,14 +19,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcg-pd-zSt">
-                    <rect key="frame" x="12" y="72" width="340" height="282"/>
+                    <rect key="frame" x="12" y="72" width="340" height="317"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" ambiguous="YES" misplaced="YES" id="sjG-dp-fUb">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="282"/>
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="317"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="1HA-LV-3kk" id="TXa-iM-wat">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="282"/>
+                                <rect key="frame" x="0.0" y="0.0" width="340" height="317"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,7 +63,7 @@
                     </scroller>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UcB-S1-Uuo">
-                    <rect key="frame" x="13" y="362" width="78" height="17"/>
+                    <rect key="frame" x="10" y="402" width="78" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Your Name:" id="DOP-ts-Cyy">
                         <font key="font" metaFont="system"/>
@@ -73,30 +72,12 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0a-RN-8FO">
-                    <rect key="frame" x="151" y="362" width="201" height="22"/>
+                    <rect key="frame" x="151" y="397" width="201" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="qDw-dK-L1K">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ti-67-ff8">
-                    <rect key="frame" x="149" y="401" width="205" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Mfd-R2-KKd">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mmc-9a-mDW">
-                    <rect key="frame" x="13" y="401" width="106" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cluster Leader:" id="bvz-6W-uLV">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-hJ-w5d">
@@ -147,7 +128,7 @@
                 <string>name</string>
             </declaredKeys>
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.userGroups" id="axS-HS-nWl"/>
+                <binding destination="-2" name="contentArray" keyPath="self.groups" id="veC-fh-vR1"/>
             </connections>
         </treeController>
     </objects>

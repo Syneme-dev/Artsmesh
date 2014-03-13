@@ -24,33 +24,33 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            AMETCD* etcd = [[AMETCD alloc] init];
-            etcd.clientPort = 4001;
-            
-            NSString* leader = @"";
-            while ([leader isEqualToString: @""]) {
-                leader = [etcd getLeader];
-            }
-            
-            AMETCDResult* res = [etcd listDir:@"/groups" recursive:YES];
-            if(res.errCode == 0)
-            {
-                [self loadGroups: res];
-            }
-            else
-            {
-                [self loadGroups: res];
-                //[self createNewGroups:etcd];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.clusterLeader.stringValue = leader;
-                // [self.userGroupTree reloadData];
-                
-            });
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            
+//            AMETCD* etcd = [[AMETCD alloc] init];
+//            etcd.clientPort = 4001;
+//            
+//            NSString* leader = @"";
+//            while ([leader isEqualToString: @""]) {
+//                leader = [etcd getLeader];
+//            }
+//            
+//            AMETCDResult* res = [etcd listDir:@"/groups" recursive:YES];
+//            if(res.errCode == 0)
+//            {
+//                [self loadGroups: res];
+//            }
+//            else
+//            {
+//                [self loadGroups: res];
+//                //[self createNewGroups:etcd];
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.clusterLeader.stringValue = leader;
+//                // [self.userGroupTree reloadData];
+//                
+//            });
+//        });
     }
     
     return self;

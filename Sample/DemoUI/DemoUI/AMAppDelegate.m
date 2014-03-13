@@ -85,7 +85,7 @@ static NSMutableDictionary *allPlugins = nil;
     NSRect screenSize = [[NSScreen mainScreen] frame];
     id userPluginClass = allPlugins[UserGroupPluginName];
     NSViewController *userGroupViewController = [userPluginClass createMainView];
-    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 300, 500);
+    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 365, 430);
     [self.window.contentView addSubview:userGroupViewController.view];
     
 }

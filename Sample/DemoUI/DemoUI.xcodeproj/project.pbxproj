@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		268E7DD718D183F600B0F710 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DD618D183F600B0F710 /* AMWindow.m */; };
+		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
+		268E7DDB18D1861300B0F710 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDA18D1861300B0F710 /* AMPluginLoader.framework */; };
+		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
+		268E7DDF18D1861A00B0F710 /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */; };
+		268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DE418D1864700B0F710 /* UserGroupModule.bundle */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
@@ -24,10 +29,6 @@
 		AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */; };
 		AF9B4E7518C829AE00EEBD6C /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
-		D447827018CD6B5A00D72C9F /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447826F18CD6B5A00D72C9F /* AMNotificationManager.framework */; };
-		D447827218CD6B5E00D72C9F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827118CD6B5E00D72C9F /* AMPluginLoader.framework */; };
-		D447827418CD6B6200D72C9F /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827318CD6B6200D72C9F /* AMPreferenceManager.framework */; };
-		D447827618CD6B6800D72C9F /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D447827518CD6B6800D72C9F /* UIFramewrok.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +57,13 @@
 /* Begin PBXFileReference section */
 		268E7DD518D183F600B0F710 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
 		268E7DD618D183F600B0F710 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
+		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
+		268E7DDA18D1861300B0F710 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
+		268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramewrok.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramewrok.framework; sourceTree = "<group>"; };
+		268E7DE018D1861C00B0F710 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMLogger.framework; path = ../../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
+		268E7DE218D1861F00B0F710 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMTaskLauncher.framework; path = ../../AMTaskLauncher/build/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
+		268E7DE418D1864700B0F710 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = UserGroupModule.bundle; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UserGroupModule.bundle; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26ED34C718CFDFB200E1B791 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +96,6 @@
 		D447827518CD6B6800D72C9F /* UIFramewrok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramewrok.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/UIFramewrok.framework"; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
-		D4CEE40418D03C5900F7429B /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = UserGroupModule.bundle; path = "/Users/ww/Library/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug/UserGroupModule.bundle"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,12 +103,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				268E7DDF18D1861A00B0F710 /* UIFramewrok.framework in Frameworks */,
+				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
+				268E7DDB18D1861300B0F710 /* AMPluginLoader.framework in Frameworks */,
+				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
 				26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */,
 				26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */,
-				D447827618CD6B6800D72C9F /* UIFramewrok.framework in Frameworks */,
-				D447827418CD6B6200D72C9F /* AMPreferenceManager.framework in Frameworks */,
-				D447827218CD6B5E00D72C9F /* AMPluginLoader.framework in Frameworks */,
-				D447827018CD6B5A00D72C9F /* AMNotificationManager.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +128,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				D4CEE40418D03C5900F7429B /* UserGroupModule.bundle */,
+				268E7DE418D1864700B0F710 /* UserGroupModule.bundle */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
@@ -142,6 +150,12 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				268E7DE218D1861F00B0F710 /* AMTaskLauncher.framework */,
+				268E7DE018D1861C00B0F710 /* AMLogger.framework */,
+				268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */,
+				268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */,
+				268E7DDA18D1861300B0F710 /* AMPluginLoader.framework */,
+				268E7DD818D1861000B0F710 /* AMNotificationManager.framework */,
 				26ED34C718CFDFB200E1B791 /* AMMesher.framework */,
 				26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */,
 				D447827518CD6B6800D72C9F /* UIFramewrok.framework */,

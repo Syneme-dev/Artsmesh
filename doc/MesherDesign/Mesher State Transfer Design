@@ -1,0 +1,10 @@
+1. First, Mesher is at STOP state.
+2. when state event happen, to SEARCH state 
+3. in the SEARCH state the mesher searching if there is a Mesher in the LAN. if yes, to JOINNING state, if no, to COMPLETING state.
+3. when Mesher is at JOINING state, it will resolve the service ip and port, if succeeded, to JOINED state, if failed, back to SEARCHING state.
+4. in the COMPLETING state, the Mesher will complete for hosting the Mesher, only one will succeeded. if succeeded, to PUBLISHING state, if failed go back to SEARCHING state.
+5. in PUBLISHING state, the mesher will publish the service, it should be succeeded. if succeeded, go to PUBLISHED state. if failed, remove the host condition. go back to SEARCHING state.
+6. in JOINRD state, if the service host is quit. will goto SEARCHING state.
+7. in every state, can goto STOP state if stop event happen.
+
+you can see the state transfer graph at the repository.

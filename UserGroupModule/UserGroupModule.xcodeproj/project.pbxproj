@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2673DE0918CFF540001E436F /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2673DE0718CFF540001E436F /* AMUser.h */; };
 		2673DE0A18CFF540001E436F /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2673DE0818CFF540001E436F /* AMUser.m */; };
+		268E7DEC18D1AD5400B0F710 /* AMUserGroupTreeController.h in Headers */ = {isa = PBXBuildFile; fileRef = 268E7DEA18D1AD5400B0F710 /* AMUserGroupTreeController.h */; };
+		268E7DED18D1AD5400B0F710 /* AMUserGroupTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DEB18D1AD5400B0F710 /* AMUserGroupTreeController.m */; };
 		AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
@@ -47,6 +49,8 @@
 /* Begin PBXFileReference section */
 		2673DE0718CFF540001E436F /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		2673DE0818CFF540001E436F /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
+		268E7DEA18D1AD5400B0F710 /* AMUserGroupTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTreeController.h; sourceTree = "<group>"; };
+		268E7DEB18D1AD5400B0F710 /* AMUserGroupTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTreeController.m; sourceTree = "<group>"; };
 		AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 		AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserGroupModule.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A5D2E18C44CD10078D125 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -104,6 +108,8 @@
 		AF9A5D2218C44CD10078D125 = {
 			isa = PBXGroup;
 			children = (
+				268E7DEA18D1AD5400B0F710 /* AMUserGroupTreeController.h */,
+				268E7DEB18D1AD5400B0F710 /* AMUserGroupTreeController.m */,
 				2673DE0718CFF540001E436F /* AMUser.h */,
 				2673DE0818CFF540001E436F /* AMUser.m */,
 				AFE3499B18C9BABC00E247B9 /* MainViewController.h */,
@@ -202,6 +208,7 @@
 				2673DE0918CFF540001E436F /* AMUser.h in Headers */,
 				AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */,
 				AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */,
+				268E7DEC18D1AD5400B0F710 /* AMUserGroupTreeController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				268E7DED18D1AD5400B0F710 /* AMUserGroupTreeController.m in Sources */,
 				AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */,
 				2673DE0A18CFF540001E436F /* AMUser.m in Sources */,
 				AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */,
@@ -525,6 +533,7 @@
 				D4CEE43318D03CD700F7429B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -25,9 +25,15 @@ static NSMutableDictionary *allPlugins = nil;
 {
     AMMesher* _globalMesher;
     AMETCD* _globalETCD;
+    NSMutableArray* _viewControllers;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    //to hold all the view controllers, if here don't keep, will not be
+    //able to response event
+    _viewControllers = [[NSMutableArray alloc] init];
+    
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
    // [self showTestPanel];   //TODO:to be deleted as test code.
@@ -87,6 +93,8 @@ static NSMutableDictionary *allPlugins = nil;
     NSViewController *userGroupViewController = [userPluginClass createMainView];
     userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 365, 430);
     [self.window.contentView addSubview:userGroupViewController.view];
+    
+    [_viewControllers addObject:userGroupViewController];
     
 }
 

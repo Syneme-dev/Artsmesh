@@ -12,8 +12,26 @@
 
 @property NSString* name;
 @property NSMutableArray* children;
+@property BOOL isLeaf;
 
-- (NSInteger)numberOfChildren;
-- (AMUser *)childAtIndex:(NSUInteger)n;
+-(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
+
+
+//for Cocoa bandings by outlineView must compliant with KVC
+-(NSInteger)countOfChildren;
+
+-(AMUser*)objectInChildrenAtIndex:(NSUInteger)index;
+
+-(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index;
+
+-(void)removeObjectFromChildrenAtIndex:(NSUInteger)index;
+
+-(void)replaceObjectInChildrenAtIndex:(NSUInteger)index withObject:(id)object;
+
+
+
+
+
+
 
 @end

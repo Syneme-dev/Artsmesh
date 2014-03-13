@@ -7,8 +7,8 @@
 //
 
 #import "MainViewController.h"
-#import "AMEtcdApi/AMETCD.h"
 #import "AMUser.h"
+#import "AMEtcdApi/AMETCD.h"
 
 @interface MainViewController ()
 
@@ -16,7 +16,7 @@
 
 @implementation MainViewController
 {
-    AMUser* _rootUser;
+    AMUser* _artsmeshGroup;
 }
 
 
@@ -24,98 +24,90 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            
-//            AMETCD* etcd = [[AMETCD alloc] init];
-//            etcd.clientPort = 4001;
-//            
-//            NSString* leader = @"";
-//            while ([leader isEqualToString: @""]) {
-//                leader = [etcd getLeader];
-//            }
-//            
-//            AMETCDResult* res = [etcd listDir:@"/groups" recursive:YES];
-//            if(res.errCode == 0)
-//            {
-//                [self loadGroups: res];
-//            }
-//            else
-//            {
-//                [self loadGroups: res];
-//                //[self createNewGroups:etcd];
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.clusterLeader.stringValue = leader;
-//                // [self.userGroupTree reloadData];
-//                
-//            });
-//        });
+        
+        self.userGroups = [[NSMutableArray alloc] init];
+        
+        _artsmeshGroup = [[AMUser alloc]initWithName:@"Artsmesh" isGroup:YES];
+        [self.userGroups addObject:_artsmeshGroup];
+        
+        [self loadGroups];
     }
     
     return self;
 }
 
--(void)loadGroups:(AMETCDResult*)res
+-(void)loadGroups
 {
-    _rootUser = [[AMUser alloc] init];
-    _rootUser.name = @"Groups";
-    
-    AMUser* group1 = [[AMUser alloc] init];
-    group1.name = @"artsmesh";
-    
-    AMUser* group2 = [[AMUser alloc] init];
-    group2.name = @"artsmesh2";
-    
-    AMUser* user1 = [[AMUser alloc] init];
-    user1.name = @"use1";
-    AMUser* user2 = [[AMUser alloc] init];
-    user2.name = @"use2";
-    AMUser* user3 = [[AMUser alloc] init];
-    user3.name = @"use3";
-    AMUser* user4 = [[AMUser alloc] init];
-    user4.name = @"use4";
-    
-    group1.children = [[NSMutableArray alloc] init];
-    group2.children = [[NSMutableArray alloc] init];
-    
-    [group1.children addObject:user1];
-    [group1.children addObject:user2];
-    [group2.children addObject:user3];
-    [group2.children addObject:user4];
-    
-    _rootUser.children = [[NSMutableArray alloc] init];
-    [_rootUser.children addObject:group1];
-    [_rootUser.children addObject:group2];
+         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+   
+             AMETCD* etcd = [[AMETCD alloc] init];
+             etcd.clientPort = 4001;
+   
+             NSString* leader = @"";
+             while ([leader isEqualToString: @""]) {
+                 leader = [etcd getLeader];
+             }
+   
+             AMETCDResult* res = [etcd listDir:@"/groups" recursive:YES];
+             if(res.errCode == 0)
+             {
+                 [self parseGroupResult: res];
+             }
+             else
+             {
+                 [self createDefaultGroup:etcd];
+             }
+   
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 self.clusterLeader.stringValue = leader;
+             });
+         });
 }
 
--(void)createNewGroups:(AMETCD*)etcd
+-(void)parseGroupResult:(AMETCDResult*)res
 {
-    [etcd createDir:@"/Groups"];
-    [etcd createDir:@"/Groups/Artsmesh"];
+    
 }
 
-
-#pragma mark -
-#pragma mark NSOutlineViewDataSource
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
-    return (item == nil) ? 1 : [item numberOfChildren];
+-(void)createDefaultGroup:(AMETCD*)etcd;
+{
+//    AMUser* artsmeshGroup = [[AMUser alloc] initWithName:@"Artsmesh" isGroup:YES ];
+//    [_rootUser.children addObject:artsmeshGroup];
+//    [self.userGroupTree reloadData];
 }
 
+- (IBAction)createNewGroup:(id)sender {
+    NSString* name = [self.createGroupNameField stringValue];
+    
+   if (![name isEqualToString:@""])
+   {
+       for (AMUser* group in self.userGroups)
+       {
+           if ( [group.name isEqualToString:name ] ) {
+               return;
+           }
+       }
+       
+       AMUser* newUser = [[AMUser alloc]initWithName:name isGroup:YES];
+       [self.userGroupTreeController addObject:newUser];
+       [self.createGroupNameField setStringValue:@""];
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    return (item == nil) ? YES : ([item numberOfChildren] != -1);
+   }
 }
 
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    return (item == nil) ? _rootUser : [(AMUser *)item childAtIndex:index];
+- (IBAction)deleteGroup:(id)sender {
+    
+    long index = self.userGroupTree.selectedRow;
+    if(index > 0)
+    {
+        AMUser* group = [self.userGroups objectAtIndex:index];
+        if(group)
+        {
+            if([group.children count] == 0)
+            {
+                [self.userGroupTreeController remove:group];
+            }
+        }
+    }
 }
-
-
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
-    return (item == nil) ? _rootUser.name : [item name];
-}
-
 @end

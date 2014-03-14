@@ -62,10 +62,6 @@
         {
             [self parseGroupResult: res];
         }
-        else
-        {
-            [NSException raise:@"etcd error!" format:@"can not create groups in etcd!"];
-        }
         
         //this must return right now because we have set etcd before
         int actIndex = 0;

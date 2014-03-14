@@ -10,6 +10,9 @@
 #import "AMUser.h"
 #import "AMEtcdApi/AMETCD.h"
 
+#define ROOT_KEY @"/Groups"
+#define DEFAULT_GROUP @"Artsmesh"
+
 @interface MainViewController ()
 
 @end
@@ -19,6 +22,7 @@
     AMUser* _artsmeshGroup;
     AMUser* _currentUser;
     AMETCD* _etcd;
+    BOOL _listeningEtcd;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,6 +33,7 @@
         self.groups = [[NSMutableArray alloc] init];
         _currentUser = nil;
         _etcd  = [[AMETCD alloc] init];
+        _listeningEtcd = YES;
     
         [self loadGroups];
     }
@@ -36,39 +41,151 @@
     return self;
 }
 
+-(void)dealloc
+{
+    _listeningEtcd = NO;
+}
+
 -(void)loadGroups
 {
-         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-   
-             NSString* leader = @"";
-             while ([leader isEqualToString: @""]) {
-                 leader = [_etcd getLeader];
-             }
-             
-             [self createDefaultGroup:_etcd];
-   
-             AMETCDResult* res = [_etcd listDir:@"/Groups" recursive:YES];
-             if(res.errCode == 0)
-             {
-                 [self parseGroupResult: res];
-             }
-             else
-             {
-                 [NSException raise:@"etcd error!" format:@"can not create groups in etcd!"];
-             }
-             
-             int actIndex = 0;
-             res = [_etcd watchDir:@"/Groups" fromIndex:2 acturalIndex:&actIndex timeout:0];
-             
-             while (1) {
-                 res = [_etcd watchDir:@"/Groups" fromIndex:actIndex+1 acturalIndex:&actIndex timeout:0];
-             }
-         });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString* leader = @"";
+        while ([leader isEqualToString: @""]) {
+            leader = [_etcd getLeader];
+        }
+        
+        [self createDefaultGroup:_etcd];
+        
+        AMETCDResult* res = [_etcd listDir:ROOT_KEY recursive:YES];
+        if(res.errCode == 0)
+        {
+            [self parseGroupResult: res];
+        }
+        else
+        {
+            [NSException raise:@"etcd error!" format:@"can not create groups in etcd!"];
+        }
+        
+        //this must return right now because we have set etcd before
+        int actIndex = 0;
+        res = [_etcd watchDir:ROOT_KEY fromIndex:2 acturalIndex:&actIndex timeout:0];
+        
+        while (_listeningEtcd) {
+            res = [_etcd watchDir:ROOT_KEY fromIndex:actIndex+1 acturalIndex:&actIndex timeout:0];
+            if(res.errCode == 0)
+            {
+                NSString* action = res.action;
+                NSArray* names = [res.node.key pathComponents];
+                NSString* groupName = [names objectAtIndex:2];
+                NSString* userName = nil;
+                if([names count] >= 4 )
+                {
+                    userName = [names objectAtIndex:3];
+                }
+                
+                //There are 4 situations: group+new group+delete
+                //user+new, user+delete,
+                if(userName == nil)//group
+                {
+                    AMUser* group = [self groupByName:groupName];
+                    
+                    if([action isEqualToString:@"delete"]) //group + delete
+                    {
+                        if(group != nil)
+                        {
+                            [self removeGroupsObject:group];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.userGroupTreeView reloadData];
+                            });
+                        }
+                    }
+                    else //group+add
+                    {
+                        if(group == nil)
+                        {
+                            AMUser* newGroup = [[AMUser alloc] initWithName:groupName isGroup:YES];
+                            [self addGroupsObject:newGroup];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.userGroupTreeView reloadData];
+                            });
+                        }
+                    }
+                }
+                else //user
+                {
+                    AMUser* group = [self groupByName:groupName];
+                    if([action isEqualToString:@"delete"])//user + delete
+                    {
+                        if (group != nil)
+                        {
+                            AMUser* user = [self userByName:userName inGroup:group];
+                            if(user != nil)
+                            {
+                                [group removeChildrenObject:user];
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.userGroupTreeView reloadData];
+                                });
+                            }
+                        }
+                    }
+                    else //user+ add
+                    {
+                        if(group != nil)
+                        {
+                            AMUser* user = [self userByName:userName inGroup:group];
+                            if(user == nil)
+                            {
+                                AMUser* newUser = [[AMUser alloc] initWithName:userName isGroup:NO];
+                                [group addChildrenObject:newUser];
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.userGroupTreeView reloadData];
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
+
+
+-(AMUser*)userByName:(NSString*)uname inGroup:(AMUser*)group
+{
+    for (AMUser* u in group.children)
+    {
+        if([uname isEqualToString:u.name])
+        {
+            return u;
+        }
+    }
+    
+    return nil;
+}
+
+-(AMUser*)groupByName:(NSString*)gname
+{
+    for (int i = 0; i < [self.groups count]; i++)
+    {
+        AMUser* group = [self objectInGroupsAtIndex:i];
+        if ([gname isEqualToString:group.name])
+        {
+            return group;
+        }
+    }
+    
+    return nil;
+}
+
 
 -(void)parseGroupResult:(AMETCDResult*)res
 {
-    if ([res.node.key isEqualToString:@"/Groups"])
+    if ([res.node.key isEqualToString:ROOT_KEY])
     {
         //every one in res.node.nodes is a group
         for(AMETCDNode* groupNode in res.node.nodes)
@@ -98,38 +215,36 @@
 
 -(void)createDefaultGroup:(AMETCD*)etcd;
 {
-    [etcd createDir:@"/Groups"];
-    [etcd createDir:@"/Groups/Artsmesh"];
-//    
-//    _artsmeshGroup = [[AMUser alloc]initWithName:@"Artsmesh" isGroup:YES];
-//    [self.groups addObject:_artsmeshGroup];
+    [etcd createDir:ROOT_KEY];
+    [etcd createDir: [NSString stringWithFormat:@"%@/%@", ROOT_KEY, DEFAULT_GROUP]];
 }
 
-- (IBAction)createNewGroup:(id)sender {
-    NSString* name = [self.createGroupNameField stringValue];
+- (IBAction)createNewGroup:(id)sender
+{
+    NSString* newGroupName = [self.createGroupNameField stringValue];
     
-   if (![name isEqualToString:@""])
-   {
-       for (AMUser* group in self.groups)
-       {
-           if ( [group.name isEqualToString:name ] ) {
-               return;
-           }
-       }
-       
-       AMUser* newUser = [[AMUser alloc]initWithName:name isGroup:YES];
-       
-       NSUInteger indexes[1];
-       indexes[0] = [self.groups count];
-       NSIndexPath* indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:1];
+    if ([newGroupName isEqualToString:@""])
+    {
+        return;
+    }
+    
+//    if(_currentUser == nil)
+//    {
+//        //must set user name first
+//        return;
+//    }
+    
+    for (AMUser* group in self.groups)
+    {
+        if ( [group.name isEqualToString:newGroupName ] )
+        {
+            return;
+        }
+    }
+    
+    NSString* newGroupKeyPath = [NSString stringWithFormat:@"%@/%@", ROOT_KEY, newGroupName ];
+   [_etcd createDir:newGroupKeyPath];
 
-       [self.userGroupTreeController insertObject:newUser atArrangedObjectIndexPath:indexPath];
-       
-       
-     //  [self.userGroupTreeController addObject:newUser];
-       [self.createGroupNameField setStringValue:@""];
-
-   }
 }
 
 - (IBAction)deleteGroup:(id)sender {
@@ -139,55 +254,108 @@
     }
     
     id selectedItem = [self.userGroupTreeView itemAtRow:[self.userGroupTreeView selectedRow]];
-
+    
     if(selectedItem && [self validateGroupNode:selectedItem])
     {
-        [self.userGroupTreeController remove:selectedItem];
+        NSTreeNode* node = selectedItem;
+        AMUser* delgroup = node.representedObject;
+        
+        if([delgroup.name isEqualToString:DEFAULT_GROUP])
+        {
+            //artsmesh group can not be deleted.
+            return;
+        }
+        
+        NSString* delGroupKeyPath = [NSString stringWithFormat:@"%@/%@", ROOT_KEY, delgroup.name ];
+        [_etcd deleteDir:delGroupKeyPath recursive:NO];
     }
     
 }
 
 - (IBAction)setUserName:(id)sender {
-    NSString* name = [sender stringValue];
     
-//    if (![name isEqualToString:@""] && ![name isEqualToString:_myName])
-//    {
-//        if([self validateUserName:name])
-//        {
-//            AMUser* me = [[AMUser alloc] initWithName:name isGroup:NO];
-//            
-//            NSUInteger indexes[2];
-//            indexes[0]= 0;
-//            indexes[1] = 0;
-//            
-//            NSIndexPath* indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
-//            if (_myName != nil)
-//            {
-//                [self.userGroupTreeController removeObjectAtArrangedObjectIndexPath:indexPath];
-//            }
-//            
-//            [self.userGroupTreeController insertObject:me atArrangedObjectIndexPath:indexPath];
-//            
-//            _myName = name;
-//        }
-//    }
-}
-
--(BOOL)validateUserName:(NSString*)name
-{
-    if([self.groups count] != 0)
+    NSString* newName = [sender stringValue];
+    if([newName isEqualToString:@""])
     {
-        AMUser* artmeshGroup = [self.groups objectAtIndex:0];
-        
-        for(AMUser* user in artmeshGroup.children)
+        return;
+    }
+    
+    if(_currentUser == nil)
+    {
+        //first time set user name, add to Artsmesh
+        if([self validateUserName:newName inGroup:DEFAULT_GROUP])
         {
-            if([user.name isEqualToString:name])
+            NSString* userKey = [NSString stringWithFormat:@"%@/%@/%@",
+                                 ROOT_KEY,
+                                 [self objectInGroupsAtIndex:0].name,
+                                 newName];
+            
+            //for now value is the same with the key, later will be useful
+            AMETCDResult* res = [_etcd setKey:userKey withValue:newName];
+            if (res.errCode == 0)
             {
-                return NO;
+                _currentUser  = [[AMUser alloc] initWithName:newName isGroup:NO];
+                _currentUser.parent = [self objectInGroupsAtIndex:0];
+            }
+            else
+            {
+                //TODO: notify set falied!
             }
         }
         
-        return YES;
+        return;
+    }
+    else
+    {
+        if([newName isEqualToString:_currentUser.name])
+        {
+            return;
+        }
+        
+        NSString* userOldKey = [NSString stringWithFormat:@"%@/%@/%@",
+                                ROOT_KEY,
+                                _currentUser.parent.name,
+                                _currentUser.name];
+        NSString* userNewKey = [NSString stringWithFormat:@"%@/%@/%@",
+                                ROOT_KEY,
+                                _currentUser.parent.name,
+                                newName];
+        
+        AMETCDResult* res = [_etcd deleteKey:userOldKey];
+        res = [_etcd setKey:userNewKey withValue:userNewKey];
+        if (res.errCode == 0)
+        {
+            _currentUser.name = newName;
+        }
+        else
+        {
+            //TODO: notify set falied!
+        }
+    }
+}
+
+-(BOOL)validateUserName:(NSString*)name inGroup:(NSString*)groupName
+{
+    //check if there already the same user name in the group
+    if([self.groups count] == 0)
+    {
+        return NO;
+    }
+    
+    for (AMUser* group in self.groups)
+    {
+        if([groupName isEqualToString:group.name])
+        {
+            for(AMUser* user in group.children)
+            {
+                if([user.name isEqualToString:name])
+                {
+                    return NO;
+                }
+            }
+            
+            return YES;
+        }
     }
     
     return NO;
@@ -238,6 +406,13 @@
 {
     [self willChangeValueForKey:@"groups"];
     [self.groups removeObjectAtIndex:index];
+    [self didChangeValueForKey:@"groups"];
+}
+
+-(void)removeGroupsObject:(AMUser *)object
+{
+    [self willChangeValueForKey:@"groups"];
+    [self.groups removeObject:object];
     [self didChangeValueForKey:@"groups"];
 }
 

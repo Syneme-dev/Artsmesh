@@ -468,7 +468,7 @@
     
     if(result != nil && result.node != nil)
     {
-        *index_out = result.node.createdIndex;
+        *index_out = (result.node.modifiedIndex > result.node.createdIndex )? result.node.modifiedIndex : result.node.createdIndex ;
     }
     else
     {

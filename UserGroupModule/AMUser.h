@@ -29,6 +29,8 @@
 
 -(void)removeObjectFromChildrenAtIndex:(NSUInteger)index;
 
+-(void)removeChildrenObject:(AMUser*)object;
+
 -(void)replaceObjectInChildrenAtIndex:(NSUInteger)index withObject:(id)object;
 
 @end

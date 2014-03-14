@@ -28,6 +28,6 @@
 -(void)insertObject:(AMUser *)object inGroupsAtIndex:(NSUInteger)index;
 -(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object;
 -(void)removeObjectFromGroupsAtIndex:(NSUInteger)index;
-
+-(void)removeGroupsObject:(AMUser *)object;
 
 @end

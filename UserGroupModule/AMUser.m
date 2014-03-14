@@ -86,6 +86,16 @@
     }
 }
 
+-(void)removeChildrenObject:(AMUser*)object
+{
+    if(self.children != nil)
+    {
+        [self willChangeValueForKey:@"children"];
+        [self.children removeObject:object  ];
+        [self didChangeValueForKey:@"children"];
+    }
+}
+
 //- (id)valueForUndefinedKey:(NSString *)key
 //{
 //    NSLog(@"%@\n", key);

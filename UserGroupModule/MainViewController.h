@@ -19,6 +19,7 @@
 - (IBAction)createNewGroup:(id)sender;
 - (IBAction)deleteGroup:(id)sender;
 - (IBAction)setUserName:(id)sender;
+- (IBAction)joinGroup:(id)sender;
 
 
 //KVO things

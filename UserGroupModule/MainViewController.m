@@ -334,6 +334,48 @@
     }
 }
 
+- (IBAction)joinGroup:(id)sender
+{
+    long index = [self.userGroupTreeView selectedRow];
+    if (index == -1)
+    {
+        return;
+    }
+    
+    if( _currentUser == nil)
+    {
+        return;
+    }
+    
+    id selectedItem = [self.userGroupTreeView itemAtRow:index];
+    
+    if(selectedItem && [self validateGroupNode:selectedItem])
+    {
+        NSTreeNode* node = selectedItem;
+        AMUser* joinGroup = node.representedObject;
+        AMUser* curGroup = _currentUser.parent;
+        
+        if([curGroup.name isEqualToString:joinGroup.name])
+        {
+            return;
+        }
+        
+        NSString* removePath = [NSString stringWithFormat:@"%@/%@/%@", ROOT_KEY, curGroup.name, _currentUser.name ];
+        NSString* addPath = [NSString stringWithFormat:@"%@/%@/%@", ROOT_KEY, joinGroup.name, _currentUser.name];
+        
+        AMETCDResult* res = [_etcd deleteKey:removePath];
+        if(res.errCode == 0)
+        {
+            [_etcd setKey:addPath withValue:addPath];
+        }
+        else
+        {
+          //TODO:error
+        }
+    }
+}
+
+
 -(BOOL)validateUserName:(NSString*)name inGroup:(NSString*)groupName
 {
     //check if there already the same user name in the group

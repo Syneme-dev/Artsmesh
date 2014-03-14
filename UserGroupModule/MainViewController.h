@@ -21,6 +21,8 @@
 - (IBAction)setUserName:(id)sender;
 - (IBAction)joinGroup:(id)sender;
 
+-(void)StopEverything;
+
 
 //KVO things
 -(NSUInteger)countOfGroups;

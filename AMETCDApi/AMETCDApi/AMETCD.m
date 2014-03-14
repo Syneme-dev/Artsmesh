@@ -154,9 +154,9 @@
     sleep(1);
     
     
-    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:imageDir error:nil];
+//    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    [fileManager removeItemAtPath:imageDir error:nil];
 
 }
 

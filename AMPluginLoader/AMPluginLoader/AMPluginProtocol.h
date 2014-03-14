@@ -16,6 +16,7 @@
 # pragma mark General
 
 -(NSString *) displayName;
+-(BOOL)canQuit;
 
 # pragma mark
 # pragma mark Notification

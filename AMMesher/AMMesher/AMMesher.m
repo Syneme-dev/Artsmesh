@@ -109,7 +109,7 @@
         _myServicePort = 7001;
         _myServiceIp = [AMMesher getIpv4Addr];
         
-        [AMETCD clearETCD];
+        //[AMETCD clearETCD];
     }
     
     return self;

@@ -88,6 +88,8 @@
         self.nodeName = [host name];
         //_artsmeshRootKey = @"/artsmesh";
         _artsmeshRootKey = @"";
+        
+        [AMETCD clearETCD];
     }
     
     return self;
@@ -163,8 +165,7 @@
 
 -(NSString*)rootKey
 {
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeName,
+    NSString* urlStr  = [NSString stringWithFormat:@"http://127.0.0.1:%d/v2/keys%@",
                          self.clientPort,
                          _artsmeshRootKey];
     
@@ -172,7 +173,7 @@
 }
 
 
--(NSMutableString*)getRequestURL:(NSString*)key withParams:(NSString*)params
+-(NSMutableString*)getRequestURL:(NSString*)key withParams: (NSString*)params
 {
     NSMutableString* requestURL = [NSMutableString stringWithString:[self rootKey]];
     

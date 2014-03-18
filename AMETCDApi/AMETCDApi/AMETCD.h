@@ -14,11 +14,7 @@
 @property NSString* serverIp;
 @property int serverPort;
 
-
-
 -(id)initWithService:(NSString*)serverIP port:(int)port;
-
-
 
 //get the cluster's leader
 -(NSString*)getLeader;

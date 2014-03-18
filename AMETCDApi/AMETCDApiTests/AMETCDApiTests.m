@@ -9,8 +9,12 @@
 #import <XCTest/XCTest.h>
 #import "AMETCD.h"
 #import "AMETCDResult.h"
+#import "AMNetworkUtils/AMNetworkUtils.h"
 
 @interface AMETCDApiTests : XCTestCase
+{
+    NSTask* _etcdTask;
+}
 
 @end
 
@@ -20,10 +24,25 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    if(_etcdTask != nil)
+    {
+        return;
+    }
+    
+    _etcdTask = [[NSTask alloc] init];
+    _etcdTask.launchPath = @"/usr/bin/etcd";
+    //_etcdTask.arguments = nil;
+    
+    [_etcdTask launch];
 }
 
 - (void)tearDown
 {
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
+    sleep(1);
+    _etcdTask = nil;
+    
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
@@ -32,17 +51,10 @@
 {
    // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
    
-    AMETCD* service  = [[AMETCD alloc] init];
-    service.nodeIp = @"127.0.0.1";
-    service.clientPort = 4001;
-    service.serverPort = 7001;
-    
-    [service stopETCD];
-    [service startETCD ];
+    AMETCD* service  = [[AMETCD alloc] initWithService:@"127.0.0.1" port:4001];
     
     NSString* keyString = @"/message";
     NSString* valueString = @"hello world!";
-    
     
     //Test1 setKey
     AMETCDResult* res = [service setKey: keyString withValue:valueString];
@@ -51,8 +63,6 @@
         XCTFail(@"set key failed! error info: %@ \"%s\"\n",
                 res.errMessage,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
         return;
     }
     
@@ -63,8 +73,6 @@
         XCTFail(@"get key failed! error info: %@ \"%s\"\n",
                 res.errMessage,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
         return;
     }
     
@@ -74,8 +82,6 @@
                 valueString ,
                 res.node.value,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
         return;
     }
     
@@ -89,8 +95,7 @@
         XCTFail(@"wait key failed! error info: %@ \"%s\"\n",
                 res.errMessage,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+    
         return;
     }
     
@@ -100,8 +105,7 @@
                 valueString ,
                 res.node.value,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+    
         return;
     }
     
@@ -112,8 +116,7 @@
         XCTFail(@"delete key failed! error info: %@ \"%s\"\n",
                 res.errMessage,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+    
         return;
     }
     
@@ -123,8 +126,7 @@
         XCTFail(@"delete key failed! key still exist:%@ \"%s\"\n",
                 res.node.value,
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+    
         return;
     }
     
@@ -136,8 +138,7 @@
     {
         XCTFail(@"create dir failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -148,7 +149,6 @@
                 dirPath,
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
     }
     
@@ -160,7 +160,6 @@
                 dirPath,
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
     }
     
@@ -169,8 +168,6 @@
     {
         XCTFail(@"delete dir failed! the dir still exist :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
         return;
     }
     
@@ -191,8 +188,6 @@
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
         return;
     }
     
@@ -202,7 +197,6 @@
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
     }
     
@@ -211,8 +205,7 @@
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -221,8 +214,7 @@
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -231,8 +223,7 @@
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -241,8 +232,7 @@
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -253,8 +243,7 @@
     {
         XCTFail(@"list dir failed! :\"%s\"\n",
                 __PRETTY_FUNCTION__);
-        
-        [service stopETCD];
+
         return;
     }
     
@@ -263,7 +252,6 @@
         XCTFail(@"watch index is not equal to actually index:\"%s\"\n",
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
     }
     
@@ -274,7 +262,6 @@
         XCTFail(@"get leader failed:\"%s\"\n",
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
 
     }
@@ -284,14 +271,11 @@
         XCTFail(@"get leader failed:\"%s\"\n",
                 __PRETTY_FUNCTION__);
         
-        [service stopETCD];
         return;
     }
     
     NSLog(@"leader is:%@", leader);
 
-    
-    [service stopETCD];
 }
 
 @end

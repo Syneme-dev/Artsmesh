@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2692CE4D18D81661006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE4C18D81661006501C4 /* AMNetworkUtils.framework */; };
+		2692CE5418D8170D006501C4 /* etcd in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2692CE5018D81702006501C4 /* etcd */; };
+		2692CE5518D8170D006501C4 /* etcdctl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2692CE5118D81702006501C4 /* etcdctl */; };
 		D47008CA18C725E000B92F9A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008C918C725E000B92F9A /* Cocoa.framework */; };
 		D47008D418C725E000B92F9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47008D218C725E000B92F9A /* InfoPlist.strings */; };
 		D47008DF18C725E000B92F9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47008DE18C725E000B92F9A /* XCTest.framework */; };
@@ -31,6 +34,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2692CE4E18D816CC006501C4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				2692CE5418D8170D006501C4 /* etcd in CopyFiles */,
+				2692CE5518D8170D006501C4 /* etcdctl in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D47008FE18C7274100B92F9A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2692CE4C18D81661006501C4 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
+		2692CE5018D81702006501C4 /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
+		2692CE5118D81702006501C4 /* etcdctl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcdctl; sourceTree = "<group>"; };
 		D47008C618C725E000B92F9A /* AMETCDApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMETCDApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47008C918C725E000B92F9A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D47008CC18C725E000B92F9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2692CE4D18D81661006501C4 /* AMNetworkUtils.framework in Frameworks */,
 				D47008CA18C725E000B92F9A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2692CE4F18D81702006501C4 /* etcd */ = {
+			isa = PBXGroup;
+			children = (
+				2692CE5018D81702006501C4 /* etcd */,
+				2692CE5118D81702006501C4 /* etcdctl */,
+			);
+			path = etcd;
+			sourceTree = "<group>";
+		};
 		D47008BC18C725E000B92F9A = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +135,7 @@
 		D47008C818C725E000B92F9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2692CE4C18D81661006501C4 /* AMNetworkUtils.framework */,
 				D47008C918C725E000B92F9A /* Cocoa.framework */,
 				D47008DE18C725E000B92F9A /* XCTest.framework */,
 				D47008CB18C725E000B92F9A /* Other Frameworks */,
@@ -151,6 +179,7 @@
 		D47008E418C725E000B92F9A /* AMETCDApiTests */ = {
 			isa = PBXGroup;
 			children = (
+				2692CE4F18D81702006501C4 /* etcd */,
 				D47008EA18C725E000B92F9A /* AMETCDApiTests.m */,
 				D47008E518C725E000B92F9A /* Supporting Files */,
 			);
@@ -208,6 +237,7 @@
 				D47008D918C725E000B92F9A /* Sources */,
 				D47008DA18C725E000B92F9A /* Frameworks */,
 				D47008DB18C725E000B92F9A /* Resources */,
+				2692CE4E18D816CC006501C4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -392,6 +422,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";
@@ -407,6 +441,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDApi/AMETCDApi-Prefix.pch";

@@ -11,27 +11,14 @@
 
 @interface AMETCD : NSObject
 
-@property NSString* leaderAddr;
-@property NSString* nodeIp;
+@property NSString* serverIp;
 @property int serverPort;
-@property int clientPort;
-@property NSString* nodeName;
 
 
-//the default ip is host ip,
-//client port:4001
-//server port: 7001
--(id)init;
 
-//now assume that etcd is in folder /usr/bin/etcd
-//will be modified when we designed the physic file path
--(BOOL)startETCD;
+-(id)initWithService:(NSString*)serverIP port:(int)port;
 
-//will kill and running etcd instance and run ours
--(void)stopETCD;
 
-//will remove all the etcd data, make sure etce clean next time
-+(void)clearETCD;
 
 //get the cluster's leader
 -(NSString*)getLeader;

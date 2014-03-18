@@ -31,6 +31,9 @@
       <FileRef
          location = "group:AMTaskLauncher/AMTaskLauncher.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:AMNetworkUtils/AMNetworkUtils.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "container:"

@@ -12,164 +12,26 @@
 
 @implementation AMETCD
 {
-    NSTask* _etcdTask;
-    
-    NSString* _artsmeshRootKey;
 }
 
-
-+ (BOOL)isValidIpv4:(NSString *)ip {
-    const char *utf8 = [ip UTF8String];
-    
-    // Check valid IPv4.
-    struct in_addr dst;
-    int success = inet_pton(AF_INET, utf8, &(dst.s_addr));
-    return (success == 1);
-}
-
-
-+ (BOOL)isValidIpv6:(NSString *)ip {
-    const char *utf8 = [ip UTF8String];
-    
-    // Check valid IPv6.
-    struct in6_addr dst6;
-    int success = inet_pton(AF_INET6, utf8, &dst6);
-    
-    return (success == 1);
-}
-
-
-+(NSString*)getIpv4Addr
-{
-    NSHost* host = [NSHost currentHost];
-    for(NSString* addr in host.addresses)
-    {
-        if([AMETCD isValidIpv4:addr])
-        {
-            if(![addr isEqualToString:@"127.0.0.1"])
-            {
-                return addr;
-            }
-        }
-    }
-    
-    return nil;
-}
-
-
-+(NSString*)getIpv6Addr
-{
-    NSHost* host = [NSHost currentHost];
-    for(NSString* addr in host.addresses)
-    {
-        if([AMETCD isValidIpv6:addr])
-        {
-            if(![addr isEqualToString:@"::1"])
-            {
-                return addr;
-            }
-        }
-    }
-    
-    return nil;
-}
-
-
--(id)init
+-(id)initWithService:(NSString*)serverIP port:(int)port
 {
     if(self = [super init])
     {
-        self.nodeIp = [AMETCD getIpv4Addr];
-        self.serverPort = 7001;
-        self.clientPort = 4001;
-        self.leaderAddr = nil;
-        
-        NSHost* host = [NSHost currentHost];
-        self.nodeName = [host name];
-        //_artsmeshRootKey = @"/artsmesh";
-        _artsmeshRootKey = @"";
-        
-        [AMETCD clearETCD];
+        self.serverIp = serverIP;
+        self.serverPort = port;
     }
     
     return self;
 }
 
 
--(BOOL)startETCD
-{
-    if(_etcdTask != nil)
-    {
-        return YES;
-    }
-    
-    _etcdTask = [[NSTask alloc] init];
-//    NSBundle* mainBundle = [NSBundle mainBundle];
-//    _etcdTask.launchPath = [mainBundle pathForAuxiliaryExecutable:@"etcd"];
-    
-    _etcdTask.launchPath = @"/usr/bin/etcd";
-    
-    NSArray* argArry;
-    if(self.leaderAddr != nil)
-    {
-        argArry = [NSArray arrayWithObjects:
-                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort],
-                   @"-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort],
-                   @"-data-dir", self.nodeName,
-                   @"-name", self.nodeName,
-                   @"-peers", self.leaderAddr,
-                   nil];
-    }
-    else
-    {
-        argArry = [NSArray arrayWithObjects:
-                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort],
-                   @"-addr", [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort],
-                   @"-data-dir", self.nodeName,
-                   @"-name", self.nodeName,
-                   nil];
-    }
-    
-
-    _etcdTask.arguments = argArry;
-    [_etcdTask launch];
-    
-    
-    return YES;
-}
-
--(void)stopETCD
-{
-    //we can not use this method, because we are still in etcd,
-    //we should find etcd file and delete it
-    //[self deleteDir:@"/" recursive:YES];
-    
-    [AMETCD clearETCD];
-    _etcdTask = nil;
-}
-
-+(void)clearETCD
-{
-    //TODO:
-    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
-    sleep(1);
-    
-    
-//    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    [fileManager removeItemAtPath:imageDir error:nil];
-
-}
-
 
 -(NSString*)rootKey
 {
-    NSString* urlStr  = [NSString stringWithFormat:@"http://127.0.0.1:%d/v2/keys%@",
-                         self.clientPort,
-                         _artsmeshRootKey];
-    
-    return urlStr;
+    return [NSString stringWithFormat:@"http://%@:%d/v2/keys",
+                         self.serverIp,
+                         self.serverPort];
 }
 
 
@@ -197,12 +59,11 @@
 }
 
 
-
 -(NSString*)getLeader
 {
     NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/v2/leader",
-                             self.nodeName,
-                             self.clientPort];
+                             self.serverIp,
+                             self.serverPort];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     

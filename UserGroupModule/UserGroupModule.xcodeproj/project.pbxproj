@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2673DE0918CFF540001E436F /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2673DE0718CFF540001E436F /* AMUser.h */; };
 		2673DE0A18CFF540001E436F /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2673DE0818CFF540001E436F /* AMUser.m */; };
+		2692CE5718D81B34006501C4 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE5618D81B34006501C4 /* AMETCDApi.framework */; };
+		2692CE5918D81B3B006501C4 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE5818D81B3B006501C4 /* AMMesher.framework */; };
+		2692CE5B18D81B4C006501C4 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE5A18D81B4C006501C4 /* AMPluginLoader.framework */; };
 		AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
@@ -27,8 +30,6 @@
 		D4CEE43D18D03EE000F7429B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43C18D03EE000F7429B /* AMMesher.framework */; };
 		D4CEE43F18D0408700F7429B /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43E18D0408700F7429B /* AMPluginLoader.framework */; };
 		D4CEE44018D0423B00F7429B /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */; };
-		D4CEE44118D0426C00F7429B /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */; };
-		D4CEE44218D0426F00F7429B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CEE43C18D03EE000F7429B /* AMMesher.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,9 @@
 /* Begin PBXFileReference section */
 		2673DE0718CFF540001E436F /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		2673DE0818CFF540001E436F /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
+		2692CE5618D81B34006501C4 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
+		2692CE5818D81B3B006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
+		2692CE5A18D81B4C006501C4 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../AMPluginLoader/build/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 		AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserGroupModule.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A5D2E18C44CD10078D125 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -81,8 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4CEE44218D0426F00F7429B /* AMMesher.framework in Frameworks */,
-				D4CEE44118D0426C00F7429B /* AMETCDApi.framework in Frameworks */,
+				2692CE5B18D81B4C006501C4 /* AMPluginLoader.framework in Frameworks */,
+				2692CE5918D81B3B006501C4 /* AMMesher.framework in Frameworks */,
+				2692CE5718D81B34006501C4 /* AMETCDApi.framework in Frameworks */,
 				AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +136,9 @@
 		AF9A5D2D18C44CD10078D125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2692CE5A18D81B4C006501C4 /* AMPluginLoader.framework */,
+				2692CE5818D81B3B006501C4 /* AMMesher.framework */,
+				2692CE5618D81B34006501C4 /* AMETCDApi.framework */,
 				D4CEE43E18D0408700F7429B /* AMPluginLoader.framework */,
 				D4CEE43C18D03EE000F7429B /* AMMesher.framework */,
 				D4CEE43A18D03EDD00F7429B /* AMETCDApi.framework */,
@@ -430,6 +438,7 @@
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
+					/Users/weiwang/src/Artsmesh/AMPluginLoader/build/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";
@@ -449,6 +458,7 @@
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
+					/Users/weiwang/src/Artsmesh/AMPluginLoader/build/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UserGroupModule/UserGroupModule-Prefix.pch";

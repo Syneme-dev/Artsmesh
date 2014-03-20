@@ -50,8 +50,6 @@
         NSString* userKeyPath = [NSString stringWithFormat:@"%@/%@%/@", ROOT_KEY, _currentUser.parent.name, _currentUser.name];
         [_etcd deleteKey:userKeyPath];
     }
-    
-    [_etcd stopETCD];
 }
 
 -(void)loadGroups

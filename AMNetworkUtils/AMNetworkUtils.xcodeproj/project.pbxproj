@@ -16,6 +16,8 @@
 		2692CE1118D7CEC8006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */; };
 		2692CE1318D7CEC8006501C4 /* AMNetworkUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */; };
 		2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		2692CE0E18D7CEC8006501C4 /* AMNetworkUtilsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMNetworkUtilsTests-Info.plist"; sourceTree = "<group>"; };
 		2692CE1018D7CEC8006501C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNetworkUtilsTests.m; sourceTree = "<group>"; };
+		26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 		2692CDF718D7CEC8006501C4 /* AMNetworkUtils */ = {
 			isa = PBXGroup;
 			children = (
+				26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */,
+				26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */,
 				2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */,
 				2692CDFF18D7CEC8006501C4 /* AMNetworkUtils.m */,
 				2692CDF818D7CEC8006501C4 /* Supporting Files */,
@@ -153,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */,
+				26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */,
 				2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +460,7 @@
 				2692CE1818D7CEC8006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2692CE1918D7CEC8006501C4 /* Build configuration list for PBXNativeTarget "AMNetworkUtilsTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +469,7 @@
 				2692CE1B18D7CEC8006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

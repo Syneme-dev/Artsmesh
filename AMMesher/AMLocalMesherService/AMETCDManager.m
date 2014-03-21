@@ -14,9 +14,9 @@
     NSTask* _etcdTask;
 }
 
--(void)startService:(NSDictionary*)params reply:(void(^)(NSString*))reply
+-(void)startETCD:(NSDictionary*)params
 {
-    [self stopService];
+    [self stopETCD];
     
     _etcdTask = [[NSTask alloc] init];
     NSBundle* mainBundle = [NSBundle mainBundle];
@@ -64,7 +64,7 @@
     [_etcdTask launch];
 }
 
--(void)stopService
+-(void)stopETCD
 {
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
@@ -72,11 +72,5 @@
     _etcdTask = nil;
 }
 
--(void)clearAllData
-{
-    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:imageDir error:nil];
-}
 
 @end

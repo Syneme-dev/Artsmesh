@@ -45,6 +45,10 @@ static NSMutableDictionary *allPlugins = nil;
 {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
+    
+    [_globalMesher stopMesher];
+    
+    
 }
 
 - (void)connectMesher {

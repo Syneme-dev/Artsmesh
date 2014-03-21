@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "AMUser.h"
 #import "AMEtcdApi/AMETCD.h"
+#import "AMUserGroupServer.h"
 
 #define ROOT_KEY @"/Groups"
 #define DEFAULT_GROUP @"Artsmesh"

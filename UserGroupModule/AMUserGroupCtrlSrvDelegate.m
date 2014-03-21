@@ -7,23 +7,23 @@
 //
 
 #import "AMUserGroupCtrlSrvDelegate.h"
-#import "AMUserGroupServer.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMNetworkUtils/JSONKit.h"
 
 @implementation AMUserGroupCtrlSrvDelegate
-{
-    AMUserGroupServer* server;
-}
 
--(id)initWithDataSource:(AMUserGroupServer*)s
+-(id)initWithDataModel:(AMUserGroupModel*) m
+            withServer:(AMUserGroupServer*) s
 {
     if(self = [super init])
     {
-        server = s;
+        self.model = m;
+        self.server = s;
     }
     
     return self;
 }
+
 
 // /Ctrl/Register?username=kkk&dataport=12345&ctrlport=54321
 // /Ctrl/Unregister?username=uuu
@@ -48,39 +48,42 @@ withFilterContext:(id)filterContext
     NSArray* pathArray = [requestPath componentsSeparatedByString:@"/"];
     NSArray* keyvalues = [query componentsSeparatedByString:@"&"];
     
-    if([pathArray count] < 2)
+    if([pathArray count] < 3)
     {
         return;
     }
     
-    if(![pathArray[0] isEqualToString:@"Ctrl"])
+    if(![pathArray[1] isEqualToString:@"Ctrl"])
     {
         return;
     }
     
-    if([pathArray[1] isEqualToString:@"Register"])
+    if([pathArray[2] isEqualToString:@"Register"])
     {
         if([self registerUser:keyvalues])
         {
-            [server sendCtrlData:[@"ok" dataUsingEncoding:NSUTF8StringEncoding] toAddress:address];
+            [self.server sendCtrlData:[@"/Register?return=ok" dataUsingEncoding:NSUTF8StringEncoding] toAddress:address];
         }
         else
         {
-            [server sendCtrlData:[@"failed" dataUsingEncoding:NSUTF8StringEncoding] toAddress:address];
+            [self.server sendCtrlData:[@"/Register?return=failed" dataUsingEncoding:NSUTF8StringEncoding] toAddress:address];
         }
         
         return;
     }
     
-    if([pathArray[1] isEqualToString:@"Unregister"])
+    if([pathArray[2] isEqualToString:@"Unregister"])
     {
         [self unregisterUser:keyvalues];
+        return;
     }
     
-    if([pathArray[1] isEqualToString:@"GetGroupList"])
+    if([pathArray[2] isEqualToString:@"GetGroups"])
     {
         NSData* data = [self getGroups];
-        [server sendCtrlData: data toAddress:address];
+        [self.server sendCtrlData: data toAddress:address];
+        
+        return;
     }
         
 }
@@ -89,8 +92,10 @@ withFilterContext:(id)filterContext
 {
     NSMutableString* response = [[NSMutableString alloc] init];
     
+    [response appendString:@"/Ctrl/GetGroups?value="];
+    
     int index = 0;
-    for(NSString* key in server.groups)
+    for(NSString* key in self.model.groups)
     {
         if (index > 0)
         {
@@ -98,7 +103,7 @@ withFilterContext:(id)filterContext
         }
         
         NSString* gname = [NSString stringWithFormat:@"groupname=%@", key ];
-        NSDictionary* group = [server.groups objectForKey:key];
+        NSDictionary* group = [self.model.groups objectForKey:key];
         NSString* gDesc = [group objectForKey:@"description"];
         NSString* gDescStr = [NSString stringWithFormat:@"description=%@", gDesc];
         
@@ -130,7 +135,7 @@ withFilterContext:(id)filterContext
         return;
     }
 
-    [server.users removeObjectForKey:userName];
+    [self.model.users removeObjectForKey:userName];
     
     return;
 }
@@ -155,7 +160,7 @@ withFilterContext:(id)filterContext
         return NO;
     }
     
-    NSMutableDictionary* exitUser = [server.users objectForKey:userName];
+    NSMutableDictionary* exitUser = [self.model.users objectForKey:userName];
     if(exitUser != nil)
     {
         return NO;
@@ -163,7 +168,7 @@ withFilterContext:(id)filterContext
     
     [userMeta setObject:[NSData data] forKey:@"lastActiveTime"];
     
-    [server.users setObject:userMeta forKey:userName];
+    [self.model.users setObject:userMeta forKey:userName];
     return YES;
 }
 

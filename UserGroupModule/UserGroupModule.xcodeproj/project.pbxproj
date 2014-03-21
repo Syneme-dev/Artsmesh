@@ -21,6 +21,10 @@
 		26EE8B7C18DBAB5C008262F8 /* AMUserGroupDataDeletage.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B7A18DBAB5C008262F8 /* AMUserGroupDataDeletage.h */; };
 		26EE8B7D18DBAB5C008262F8 /* AMUserGroupDataDeletage.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B7B18DBAB5C008262F8 /* AMUserGroupDataDeletage.m */; };
 		26EE8B8318DBB3D2008262F8 /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EE8B8218DBB3D2008262F8 /* AMPluginLoader.framework */; };
+		26EE8BC618DBD907008262F8 /* AMUserGroupClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8BC418DBD907008262F8 /* AMUserGroupClient.h */; };
+		26EE8BC718DBD907008262F8 /* AMUserGroupClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BC518DBD907008262F8 /* AMUserGroupClient.m */; };
+		26EE8BCA18DBF638008262F8 /* AMUserGroupModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8BC818DBF638008262F8 /* AMUserGroupModel.h */; };
+		26EE8BCB18DBF638008262F8 /* AMUserGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BC918DBF638008262F8 /* AMUserGroupModel.m */; };
 		AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9A5D2F18C44CD10078D125 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		AF9A5D3918C44CD10078D125 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF9A5D3718C44CD10078D125 /* InfoPlist.strings */; };
@@ -55,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2653BC8618DC0E07004707B5 /* AMUserGroupServerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMUserGroupServerDelegate.h; sourceTree = "<group>"; };
 		2673DE0718CFF540001E436F /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		2673DE0818CFF540001E436F /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		2692CE5618D81B34006501C4 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
@@ -70,6 +75,11 @@
 		26EE8B7A18DBAB5C008262F8 /* AMUserGroupDataDeletage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupDataDeletage.h; sourceTree = "<group>"; };
 		26EE8B7B18DBAB5C008262F8 /* AMUserGroupDataDeletage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupDataDeletage.m; sourceTree = "<group>"; };
 		26EE8B8218DBB3D2008262F8 /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		26EE8BC418DBD907008262F8 /* AMUserGroupClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupClient.h; sourceTree = "<group>"; };
+		26EE8BC518DBD907008262F8 /* AMUserGroupClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupClient.m; sourceTree = "<group>"; };
+		26EE8BC818DBF638008262F8 /* AMUserGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupModel.h; sourceTree = "<group>"; };
+		26EE8BC918DBF638008262F8 /* AMUserGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupModel.m; sourceTree = "<group>"; };
+		26EE8BD018DBFBB8008262F8 /* AMUserGroupClientDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMUserGroupClientDelegate.h; sourceTree = "<group>"; };
 		AF00D42918C9B55A004DE9E6 /* UserGroupModuleConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 		AF9A5D2B18C44CD10078D125 /* UserGroupModule.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserGroupModule.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9A5D2E18C44CD10078D125 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -129,14 +139,20 @@
 		AF9A5D2218C44CD10078D125 = {
 			isa = PBXGroup;
 			children = (
+				26EE8BD018DBFBB8008262F8 /* AMUserGroupClientDelegate.h */,
+				2653BC8618DC0E07004707B5 /* AMUserGroupServerDelegate.h */,
+				26EE8BC818DBF638008262F8 /* AMUserGroupModel.h */,
+				26EE8BC918DBF638008262F8 /* AMUserGroupModel.m */,
+				26EE8BC418DBD907008262F8 /* AMUserGroupClient.h */,
+				26EE8BC518DBD907008262F8 /* AMUserGroupClient.m */,
+				26EE8B6E18DBA534008262F8 /* AMUserGroupServer.h */,
+				26EE8B6F18DBA534008262F8 /* AMUserGroupServer.m */,
 				26EE8B7618DBAB24008262F8 /* AMUserGroupCtrlSrvDelegate.h */,
 				26EE8B7718DBAB24008262F8 /* AMUserGroupCtrlSrvDelegate.m */,
 				26EE8B7A18DBAB5C008262F8 /* AMUserGroupDataDeletage.h */,
 				26EE8B7B18DBAB5C008262F8 /* AMUserGroupDataDeletage.m */,
 				26EE8B6C18DBA534008262F8 /* AMUserGroupHeader.h */,
 				26EE8B6D18DBA534008262F8 /* AMUserGroupHeader.m */,
-				26EE8B6E18DBA534008262F8 /* AMUserGroupServer.h */,
-				26EE8B6F18DBA534008262F8 /* AMUserGroupServer.m */,
 				2673DE0718CFF540001E436F /* AMUser.h */,
 				2673DE0818CFF540001E436F /* AMUser.m */,
 				AFE3499B18C9BABC00E247B9 /* MainViewController.h */,
@@ -239,7 +255,9 @@
 			files = (
 				26EE8B7018DBA534008262F8 /* AMUserGroupHeader.h in Headers */,
 				26EE8B7818DBAB24008262F8 /* AMUserGroupCtrlSrvDelegate.h in Headers */,
+				26EE8BC618DBD907008262F8 /* AMUserGroupClient.h in Headers */,
 				26EE8B7218DBA534008262F8 /* AMUserGroupServer.h in Headers */,
+				26EE8BCA18DBF638008262F8 /* AMUserGroupModel.h in Headers */,
 				2673DE0918CFF540001E436F /* AMUser.h in Headers */,
 				26EE8B7C18DBAB5C008262F8 /* AMUserGroupDataDeletage.h in Headers */,
 				AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */,
@@ -343,12 +361,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */,
+				26EE8BCB18DBF638008262F8 /* AMUserGroupModel.m in Sources */,
 				26EE8B7318DBA534008262F8 /* AMUserGroupServer.m in Sources */,
 				26EE8B7918DBAB24008262F8 /* AMUserGroupCtrlSrvDelegate.m in Sources */,
 				26EE8B7118DBA534008262F8 /* AMUserGroupHeader.m in Sources */,
 				2673DE0A18CFF540001E436F /* AMUser.m in Sources */,
 				26EE8B7D18DBAB5C008262F8 /* AMUserGroupDataDeletage.m in Sources */,
 				AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */,
+				26EE8BC718DBD907008262F8 /* AMUserGroupClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

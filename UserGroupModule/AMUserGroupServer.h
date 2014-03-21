@@ -8,18 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class AMUserGroupCtrlSrvDelegate;
+@class AMUserGroupDataDeletage;
 
-@class AMUser;
 @interface AMUserGroupServer : NSObject
 
-@property int ctrlPort;
-@property int dataPort;
+@property int listenPort;
 
-@property NSMutableDictionary* groups;
-@property NSMutableDictionary* users;
-@property NSMutableDictionary* myself;
-
--(void)sendCtrlData:(NSData*)data toAddress:address;
 -(BOOL)startServer;
 -(void)stopServer;
 

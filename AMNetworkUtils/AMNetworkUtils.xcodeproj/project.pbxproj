@@ -20,6 +20,8 @@
 		26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */; };
 		26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26EE8B8118DBB23E008262F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B7F18DBB23E008262F8 /* GCDAsyncSocket.m */; };
+		26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8BD118DC0AB3008262F8 /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BD218DC0AB3008262F8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		26EE8B7F18DBB23E008262F8 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		26EE8BD118DC0AB3008262F8 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		26EE8BD218DC0AB3008262F8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 		2692CDF718D7CEC8006501C4 /* AMNetworkUtils */ = {
 			isa = PBXGroup;
 			children = (
+				26EE8BD118DC0AB3008262F8 /* JSONKit.h */,
+				26EE8BD218DC0AB3008262F8 /* JSONKit.m */,
 				26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */,
 				26EE8B7F18DBB23E008262F8 /* GCDAsyncSocket.m */,
 				26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */,
@@ -166,6 +172,7 @@
 			files = (
 				2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */,
 				26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */,
+				26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */,
 				26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +274,7 @@
 			files = (
 				26EE8B8118DBB23E008262F8 /* GCDAsyncSocket.m in Sources */,
 				26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */,
+				26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */,
 				2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

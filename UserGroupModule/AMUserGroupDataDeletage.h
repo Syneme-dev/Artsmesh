@@ -7,9 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-@class AMUserGroupServer;
+#import "AMUserGroupModel.h"
+#import "AMUserGroupServer.h"
+
 @interface AMUserGroupDataDeletage : NSObject
 
--(id)initWithDataSource:(AMUserGroupServer*)server;
+@property AMUserGroupModel* model;
+@property AMUserGroupServer* server;
+
+-(id)initWithDataModel:(AMUserGroupModel*) m
+            withServer:(AMUserGroupServer*) s;
 
 @end

@@ -15,6 +15,7 @@
     if(self = [super init])
     {
         self.name = name;
+        
         self.parent = nil;
         if(bGroup)
         {

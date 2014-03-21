@@ -7,41 +7,35 @@
 //
 
 #import "AMUserGroupServer.h"
-#import "AMUser.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMNetworkUtils/JSONKit.h"
 #import "AMUserGroupCtrlSrvDelegate.h"
 #import "AMUserGroupDataDeletage.h"
+#import "AMUserGroupModel.h"
 
 @implementation AMUserGroupServer
 {
-    GCDAsyncUdpSocket *ctrlSocket;
-    GCDAsyncUdpSocket *dataSocket;
-    
-    BOOL isCtrlSrvRunning;
-    BOOL isDataSrvRunning;
-    AMUserGroupCtrlSrvDelegate* ctrlDelegate;
-    AMUserGroupDataDeletage* dataDelegate;
-    
+    GCDAsyncUdpSocket *listenSocket;
+    BOOL isRunning;
 }
 
 -(id)init
 {
     if(self = [super init])
     {
-        isCtrlSrvRunning = NO;
-        isDataSrvRunning = NO;
-        self.myself = [[NSMutableDictionary alloc] init];
-        self.groups = [[NSMutableDictionary alloc] init];
-        self.users = [[NSMutableDictionary alloc] init];
-        self.ctrlPort = 7001;
-        self.dataPort = 4001;
-        ctrlDelegate = [[AMUserGroupCtrlSrvDelegate alloc] initWithDataSource:self];
-        dataDelegate = [[AMUserGroupDataDeletage alloc] initWithDataSource:self];
-        ctrlSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:ctrlDelegate delegateQueue:dispatch_get_main_queue()];
-        dataSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:dataDelegate delegateQueue:dispatch_get_main_queue()];
+        isRunning = NO;
+        self.listenPort = 7001;
     }
     
     return self;
+}
+
+-(void)createSocket:(AMUserGroupCtrlSrvDelegate*) ctrlDel
+   withDataDeletage:(AMUserGroupDataDeletage*)dataDel
+{
+    listenSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:ctrlDel delegateQueue:dispatch_get_main_queue()];
+    
+    dataSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:dataDel delegateQueue:dispatch_get_main_queue()];
 }
 
 -(BOOL)startServer
@@ -63,9 +57,6 @@
 {
     [self stopCtrlServer];
     [self stopDataServer];
-    
-    [self.users removeAllObjects];
-    [self.groups removeAllObjects];
 }
 
 -(BOOL)startCtrlServer
@@ -77,20 +68,20 @@
     
     NSError *error = nil;
     
-    if (![ctrlSocket bindToPort:self.ctrlPort error:&error])
+    if (![listenSocket bindToPort:self.listenPort error:&error])
     {
         NSLog(@"Error starting server (bind): %@", error);
         return NO;
     }
-    if (![ctrlSocket beginReceiving:&error])
+    if (![listenSocket beginReceiving:&error])
     {
-        [ctrlSocket close];
+        [listenSocket close];
         
         NSLog(@"Error starting server (recv): %@", error);
         return NO;
     }
     
-    NSLog(@"Udp Echo server started on port %hu", [ctrlSocket localPort]);
+    NSLog(@"Udp Echo server started on port %hu", [listenSocket localPort]);
     isCtrlSrvRunning = YES;
     
     return YES;
@@ -99,12 +90,12 @@
 
 -(void)stopCtrlServer
 {
-    [ctrlSocket close];
+    [listenSocket close];
     
     NSLog(@"Stopped Ctrl server");
     isCtrlSrvRunning = NO;
     
-    ctrlSocket = nil;
+    listenSocket = nil;
 }
 
 
@@ -117,7 +108,7 @@
     
     NSError *error = nil;
     
-    if (![dataSocket bindToPort:self.ctrlPort error:&error])
+    if (![dataSocket bindToPort:self.listenPort error:&error])
     {
         NSLog(@"Error starting server (bind): %@", error);
         return NO;
@@ -149,7 +140,7 @@
 
 -(void)sendCtrlData:(NSData*)data toAddress:address
 {
-    [ctrlSocket sendData:data toAddress:address withTimeout:-1 tag:0];
+    [listenSocket sendData:data toAddress:address withTimeout:-1 tag:0];
 }
 
 

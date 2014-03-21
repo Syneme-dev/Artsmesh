@@ -46,7 +46,7 @@ static NSMutableDictionary *allPlugins = nil;
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
     
-    [_globalMesher stopMesher];
+    [_globalMesher stopLocalMesher];
     
     
 }
@@ -59,7 +59,7 @@ static NSMutableDictionary *allPlugins = nil;
     //TODO:
     
     _globalMesher = [[AMMesher alloc] init];
-    [_globalMesher kickoffMesherProcess];
+    [_globalMesher startLoalMesher];
 //
 //    _globalETCD = [_globalMesher getETCDRef];
 //    

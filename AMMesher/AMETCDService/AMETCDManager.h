@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMLocalMesherInterface.h"
+#import "AMETCDServiceInterface.h"
 
-@interface AMETCDManager : NSObject<AMLocalMesherInterface>
+@interface AMETCDManager : NSObject<AMETCDServiceInterface>
 
 @end

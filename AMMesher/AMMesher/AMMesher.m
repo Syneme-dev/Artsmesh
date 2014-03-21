@@ -10,7 +10,7 @@
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
-#import "AMLocalMesherInterface.h"
+#import "AMETCDServiceInterface.h"
 
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
@@ -151,7 +151,7 @@
 -(void)startLocalMesherService
 {
     _myLocalMesherInterface= [NSXPCInterface interfaceWithProtocol:
-                                         @protocol(AMLocalMesherInterface)];
+                                         @protocol(AMETCDServiceInterface)];
     
    _myLocalMehserConnection =    [[NSXPCConnection alloc]
                                         initWithServiceName:@"AM.AMLocalMesherService"];

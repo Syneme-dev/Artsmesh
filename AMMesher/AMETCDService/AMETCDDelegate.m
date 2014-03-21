@@ -1,20 +1,20 @@
 //
-//  AMLocalMesherDelegate.m
+//  AMListenerDelegate.m
 //  AMMesher
 //
-//  Created by Wei Wang on 3/18/14.
+//  Created by Wei Wang on 3/22/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMLocalMesherDelegate.h"
-#import "AMLocalMesherInterface.h"
+#import "AMETCDDelegate.h"
+#import "AMETCDServiceInterface.h"
 #import "AMETCDManager.h"
 
-@implementation AMLocalMesherDelegate
+@implementation AMETCDDelegate
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection
 {
-    NSXPCInterface* interface = [NSXPCInterface interfaceWithProtocol:@protocol(AMLocalMesherInterface)];
+    NSXPCInterface* interface = [NSXPCInterface interfaceWithProtocol:@protocol(AMETCDServiceInterface)];
     
     newConnection.exportedInterface = interface;
     newConnection.exportedObject = [[AMETCDManager alloc] init];

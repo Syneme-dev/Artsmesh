@@ -8,21 +8,17 @@
 
 #import "AMUserGroupClient.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
-#import "AMUserGroupModel.h"
 
 @implementation AMUserGroupClient
 {
     GCDAsyncUdpSocket *udpSocket;
-    AMUserGroupModel* model;
 }
 
 
--(id)initWithDataModel:(AMUserGroupModel*)m
+-(id)init
 {
     if(self = [super init])
     {
-        model = m;
-        
         udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
         
         NSError *error = nil;
@@ -54,11 +50,29 @@
     [self sendRequest:requestData toAddr:serverAddr ];
 }
 
+-(void)RegsterUser:(NSData*)serverAddr name:(NSString*)userName withPort:(int)port
+{
+    NSString* reqStr = [NSString stringWithFormat:@"/Ctrl/RegsterUser?username=%@&port=%d", userName, port];
+    [self sendRequest:[reqStr dataUsingEncoding:NSUTF8StringEncoding] toAddr:serverAddr ];
+}
+
+-(void)UnregisterUser:(NSData*)serverAddr name:(NSString*)userName
+{
+    NSString* reqStr = [NSString stringWithFormat:@"/Ctrl/UnregsterUser?username=%@", userName];
+    [self sendRequest:[reqStr dataUsingEncoding:NSUTF8StringEncoding] toAddr:serverAddr ];
+}
+
 
 -(void)sendRequest:(NSData*)data
             toAddr:(NSData*)addr
 {
     [udpSocket sendData:data toAddress:addr withTimeout:-1 tag:0];
+}
+
+-(void)sendUserInfo:(NSData*)serverAddr userInfo:(NSString*)userInfo
+{
+    NSString* reqStr = [NSString stringWithFormat:@"/Ctrl/UnregsterUser?username=%@", userInfo];
+    [self sendRequest:[reqStr dataUsingEncoding:NSUTF8StringEncoding] toAddr:serverAddr ];
 }
 
 
@@ -77,46 +91,67 @@
 withFilterContext:(id)filterContext
 {
 	NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
     NSLog(@"%@", response);
-	
-	NSURL* url = [NSURL URLWithString:response];
-    if(url == nil)
+    
+    NSError *jsonParsingError = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:data
+                                                 options:0
+                                                   error:&jsonParsingError];
+    if(jsonParsingError != nil)
     {
         return;
     }
     
-    NSString* requestPath = url.path;
-    NSString* query = url.query;
-    
-    NSArray* pathArray = [requestPath componentsSeparatedByString:@"/"];
-    NSArray* keyvalues = [query componentsSeparatedByString:@"&"];
-    
-    if([pathArray count] < 3)
+    if(![objects isKindOfClass:[NSDictionary class]])
     {
         return;
     }
     
-    if(![pathArray[1] isEqualToString:@"Ctrl"])
-    {
-        return;
-    }
+    NSDictionary* resDic = objects;
     
-    if([pathArray[2] isEqualToString:@"Register"])
+    for (NSString* key in resDic)
     {
-        
-        return;
-    }
-    
-    if([pathArray[2] isEqualToString:@"GetGroups"])
-    {
-        if (self.delegate)
+        NSArray* requestPaths = [key componentsSeparatedByString:@"/"];
+       
+        if(requestPaths == nil)
         {
-            [self.delegate didGetGroups:response];
+            return;
         }
-        return;
+        
+        if ([requestPaths count] < 4)
+        {
+            return;
+        }
+        
+        if(![[requestPaths objectAtIndex:3] isEqualToString:@"Results"])
+        {
+            return;
+        }
+        
+        if([requestPaths[2] isEqualToString:@"GetGroups"])
+        {
+            if (self.delegate)
+            {
+                [self.delegate didGetGroups:[resDic objectForKey:key]];
+            }
+        }
+        
+        if([requestPaths[2] isEqualToString:@"GetUsers"])
+        {
+            if (self.delegate)
+            {
+                [self.delegate didGetUsers:[resDic objectForKey:key]];
+            }
+        }
+        
+        if([requestPaths[2] isEqualToString:@"RegsterUser"])
+        {
+            if (self.delegate)
+            {
+                [self.delegate didRegsterUser:[resDic objectForKey:key]];
+            }
+        }
     }
-	
 }
 
 

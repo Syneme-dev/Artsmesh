@@ -16,10 +16,7 @@
 
 -(void)startService:(NSDictionary*)params reply:(void(^)(NSString*))reply
 {
-    if(_etcdTask != nil)
-    {
-        return;
-    }
+    [self stopService];
     
     _etcdTask = [[NSTask alloc] init];
     NSBundle* mainBundle = [NSBundle mainBundle];

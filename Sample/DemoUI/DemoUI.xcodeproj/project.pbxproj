@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
+		2653BC8718DC6589004707B5 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		268E7DD718D183F600B0F710 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DD618D183F600B0F710 /* AMWindow.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		268E7DDF18D1861A00B0F710 /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */; };
 		268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DE418D1864700B0F710 /* UserGroupModule.bundle */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
-		26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2317C187A8FFD00554AFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2317B187A8FFD00554AFD /* main.m */; };
@@ -97,11 +97,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2653BC8718DC6589004707B5 /* AMMesher.framework in Frameworks */,
 				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
 				268E7DDF18D1861A00B0F710 /* UIFramewrok.framework in Frameworks */,
 				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
 				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
-				26ED34C818CFDFB200E1B791 /* AMMesher.framework in Frameworks */,
 				26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
 			);

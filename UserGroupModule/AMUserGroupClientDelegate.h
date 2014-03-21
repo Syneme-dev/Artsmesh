@@ -10,6 +10,10 @@
 
 @protocol AMUserGroupClientDelegate <NSObject>
 
--(void)didGetGroups:(NSString*)res;
+-(void)didGetGroups:(id)res;
+
+-(void)didGetUsers:(id)res;
+
+-(void)didRegsterUser:(id)res;
 
 @end

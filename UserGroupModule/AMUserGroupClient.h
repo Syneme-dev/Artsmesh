@@ -14,15 +14,15 @@
 
 @property id<AMUserGroupClientDelegate> delegate;
 
--(id)initWithDataModel:(AMUserGroupModel*)model;
-
 -(void)getGroups:(NSData*)serverAddr;
 
 -(void)getUsers:(NSData*)serverAddr;
 
--(void)sendMyInfo;
+-(void)RegsterUser:(NSData*)serverAddr name:(NSString*)userName withPort:(int)port;
 
--(void)sendRequest:(NSData*)data
-            toAddr:(NSData*)addr;
+-(void)UnregisterUser:(NSData*)serverAddr name:(NSString*)userName;
+
+-(void)sendUserInfo:(NSData*)serverAddr userInfo:(NSString*)userInfo;
+
 
 @end

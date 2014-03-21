@@ -85,4 +85,17 @@
     return newDateString;
 }
 
+
++(NSData*)addressFromIpAndPort:(NSString*)ipStr
+                          port:(int)p
+{
+    struct sockaddr_in ip;
+    ip.sin_family = AF_INET;
+    ip.sin_port = htons(p);
+    inet_pton(AF_INET, [ipStr cStringUsingEncoding:NSUTF8StringEncoding], &ip.sin_addr);
+    
+    return [NSData dataWithBytes:&ip length:sizeof(ip)];
+}
+
+
 @end

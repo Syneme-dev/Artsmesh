@@ -16,15 +16,15 @@
 #import "AMPanelViewController.h"
 #import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
-#import "AMETCDApi/AMETCD.h"
-#import "AMETCDApi/AMETCDResult.h"
+//#import "AMETCDApi/AMETCD.h"
+//#import "AMETCDApi/AMETCDResult.h"
 
 static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate
 {
     AMMesher* _globalMesher;
-    AMETCD* _globalETCD;
+//    AMETCD* _globalETCD;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -55,14 +55,14 @@ static NSMutableDictionary *allPlugins = nil;
     //TODO:
     
     _globalMesher = [[AMMesher alloc] init];
-    [_globalMesher start];
-    
-    _globalETCD = [_globalMesher getETCDRef];
-    
-    [_globalMesher addObserver:self
-                    forKeyPath:@"mesherName"
-                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                       context:Nil];
+    [_globalMesher kickoffMesherProcess];
+//
+//    _globalETCD = [_globalMesher getETCDRef];
+//    
+//    [_globalMesher addObserver:self
+//                    forKeyPath:@"mesherName"
+//                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//                       context:Nil];
     
 }
 
@@ -83,7 +83,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
-    [self loadUserGroupPanel];
+    //[self loadUserGroupPanel];
     
     
 }

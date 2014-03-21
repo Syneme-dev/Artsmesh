@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
-		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; };
+		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
-		2692CD8B18D7C31B006501C4 /* AMMesher-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8918D7C31B006501C4 /* AMMesher-Prefix.pch */; };
 		2692CDAB18D7C3FD006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDB118D7C3FD006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CDAF18D7C3FD006501C4 /* InfoPlist.strings */; };
 		2692CDB318D7C3FD006501C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CDB218D7C3FD006501C4 /* main.m */; };
@@ -271,7 +270,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */,
-				2692CD8B18D7C31B006501C4 /* AMMesher-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +675,7 @@
 				2692CD7C18D7C2A2006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2692CDD118D7C3FE006501C4 /* Build configuration list for PBXNativeTarget "AMMesherTest" */ = {
 			isa = XCConfigurationList;
@@ -685,6 +684,7 @@
 				2692CDD318D7C3FE006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2692CE3318D7DB95006501C4 /* Build configuration list for PBXNativeTarget "AMLocalMesherService" */ = {
 			isa = XCConfigurationList;
@@ -693,6 +693,7 @@
 				2692CE3518D7DB95006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

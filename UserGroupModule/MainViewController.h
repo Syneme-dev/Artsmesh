@@ -8,16 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMUserGroupClientDelegate.h"
+#import "AMUserGroupServerDelegate.h"
 
 @class AMUser;
 
-@interface MainViewController : NSViewController <NSOutlineViewDataSource,NSOutlineViewDelegate, AMUserGroupClientDelegate>
+@interface MainViewController : NSViewController <AMUserGroupClientDelegate, AMUserGroupServerDelegate>
 
 @property (weak) IBOutlet NSOutlineView *userGroupTreeView;
 @property (weak) IBOutlet NSTextField *createGroupNameField;
 @property (strong) IBOutlet NSTreeController *userGroupTreeController;
 
-//@property NSMutableArray* groups;
+@property NSMutableArray* outlineUserNodes;
 
 - (IBAction)setUserName:(id)sender;
 - (IBAction)joinGroup:(id)sender;

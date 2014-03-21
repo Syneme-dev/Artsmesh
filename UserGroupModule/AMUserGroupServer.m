@@ -8,10 +8,6 @@
 
 #import "AMUserGroupServer.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
-#import "AMNetworkUtils/JSONKit.h"
-#import "AMUserGroupCtrlSrvDelegate.h"
-#import "AMUserGroupDataDeletage.h"
-#import "AMUserGroupModel.h"
 
 @implementation AMUserGroupServer
 {
@@ -25,43 +21,16 @@
     {
         isRunning = NO;
         self.listenPort = 7001;
+        listenSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
     
     return self;
 }
 
--(void)createSocket:(AMUserGroupCtrlSrvDelegate*) ctrlDel
-   withDataDeletage:(AMUserGroupDataDeletage*)dataDel
-{
-    listenSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:ctrlDel delegateQueue:dispatch_get_main_queue()];
-    
-    dataSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:dataDel delegateQueue:dispatch_get_main_queue()];
-}
 
 -(BOOL)startServer
 {
-    if(![self startCtrlServer])
-    {
-        return NO;
-    }
-    
-    if([self startDataServer])
-    {
-        return NO;
-    }
-    
-    return YES;
-}
-
--(void)stopServer
-{
-    [self stopCtrlServer];
-    [self stopDataServer];
-}
-
--(BOOL)startCtrlServer
-{
-    if(isCtrlSrvRunning)
+    if(isRunning)
     {
         return YES;
     }
@@ -82,66 +51,142 @@
     }
     
     NSLog(@"Udp Echo server started on port %hu", [listenSocket localPort]);
-    isCtrlSrvRunning = YES;
+    isRunning = YES;
     
     return YES;
 }
 
-
--(void)stopCtrlServer
+-(void)stopServer
 {
     [listenSocket close];
     
-    NSLog(@"Stopped Ctrl server");
-    isCtrlSrvRunning = NO;
-    
+    NSLog(@"Stopped server");
+    isRunning = NO;
     listenSocket = nil;
 }
 
 
--(BOOL)startDataServer
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+   didReceiveData:(NSData *)data
+      fromAddress:(NSData *)address
+withFilterContext:(id)filterContext
 {
-    if(isCtrlSrvRunning)
+	NSString *urlStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", urlStr);
+	
+	NSURL* url = [NSURL URLWithString:urlStr];
+    if(url == nil)
     {
-        return YES;
+        return;
     }
     
-    NSError *error = nil;
+    NSString* requestPath = url.path;
+    NSString* query = url.query;
     
-    if (![dataSocket bindToPort:self.listenPort error:&error])
+    NSArray* pathArray = [requestPath componentsSeparatedByString:@"/"];
+    NSArray* keyvalues = [query componentsSeparatedByString:@"&"];
+    
+    if([pathArray count] < 3)
     {
-        NSLog(@"Error starting server (bind): %@", error);
-        return NO;
+        return;
     }
-    if (![dataSocket beginReceiving:&error])
+    
+    if(![pathArray[1] isEqualToString:@"Ctrl"])
     {
-        [dataSocket close];
+        return;
+    }
+    
+    if([pathArray[2] isEqualToString:@"RegsterUser"])
+    {
+        if(self.delegate)
+        {
+            NSMutableDictionary* user = [[NSMutableDictionary alloc] init];
+            
+            for (NSString* keyVal in keyvalues)
+            {
+                NSArray* tempArr = [keyVal componentsSeparatedByString:@"="];
+                if([tempArr count] < 2)
+                {
+                    return;
+                }
+               
+                [user setObject:tempArr[1] forKey:tempArr[0]];
+            }
+            
+            NSString* name = [user objectForKey:@"username"];
+            int port = [[user objectForKey:@"port"] intValue];
+            
+            if (name == nil || port <=0 )
+            {
+                return;
+            }
+
+            [self.delegate RegisterUserHandler:sock
+                                   fromAddress:address
+                                   withRequest:requestPath
+                                      username:name
+                                       usePort:port];
+        }
         
-        NSLog(@"Error starting server (recv): %@", error);
-        return NO;
+        return;
     }
     
-    NSLog(@"Udp Echo server started on port %hu", [dataSocket localPort]);
-    isCtrlSrvRunning = YES;
+    if([pathArray[2] isEqualToString:@"Unregister"])
+    {
+        if(self.delegate)
+        {
+            NSMutableDictionary* user = [[NSMutableDictionary alloc] init];
+            
+            for (NSString* keyVal in keyvalues)
+            {
+                NSArray* tempArr = [keyVal componentsSeparatedByString:@"="];
+                if([tempArr count] < 1)
+                {
+                    return;
+                }
+                
+                [user setObject:tempArr[1] forKey:tempArr[0]];
+            }
+            
+            NSString* name = [user objectForKey:@"username"];
+            
+            if (name == nil)
+            {
+                return;
+            }
+            
+            [self.delegate UnregisterUserHandler:sock
+                                   fromAddress:address
+                                   withRequest:requestPath
+                                      username:name];
+        }
+    }
     
-    return YES;
+    if([pathArray[2] isEqualToString:@"GetGroups"])
+    {
+        if(self.delegate)
+        {
+            [self.delegate GetGroupsHandler:sock
+                                fromAddress:address
+                                withRequest:requestPath];
+        }
+        
+        return;
+    }
+    
+    if([pathArray[2] isEqualToString:@"GetUsers"])
+    {
+        if(self.delegate)
+        {
+            [self.delegate GetUsersHandler:sock
+                                fromAddress:address
+                                withRequest:requestPath];
+        }
+        
+        return;
+    }
 }
 
--(void)stopDataServer
-{
-    [dataSocket close];
-    
-    NSLog(@"Stopped Data server");
-    isDataSrvRunning = NO;
-    
-    dataSocket = nil;
-}
-
-
--(void)sendCtrlData:(NSData*)data toAddress:address
-{
-    [listenSocket sendData:data toAddress:address withTimeout:-1 tag:0];
-}
 
 
 @end

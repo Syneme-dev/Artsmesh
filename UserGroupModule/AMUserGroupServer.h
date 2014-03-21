@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMUserGroupServerDelegate.h"
 
-@class AMUserGroupCtrlSrvDelegate;
-@class AMUserGroupDataDeletage;
 
 @interface AMUserGroupServer : NSObject
 
 @property int listenPort;
+@property id<AMUserGroupServerDelegate> delegate;
+
 
 -(BOOL)startServer;
 -(void)stopServer;

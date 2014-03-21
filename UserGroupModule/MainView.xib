@@ -8,7 +8,6 @@
             <connections>
                 <outlet property="createGroupNameField" destination="COu-bM-c49" id="59l-yT-K33"/>
                 <outlet property="userGroupTreeController" destination="6vf-v0-eax" id="EUK-Cu-Cb6"/>
-                <outlet property="userGroupTreeView" destination="TXa-iM-wat" id="x7h-nf-n4J"/>
                 <outlet property="view" destination="1" id="Xvt-jb-IGB"/>
             </connections>
         </customObject>
@@ -44,9 +43,6 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                        <connections>
-                                            <binding destination="6vf-v0-eax" name="value" keyPath="arrangedObjects.name" id="SjZ-My-THl"/>
-                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
                             </outlineView>
@@ -149,9 +145,6 @@
             <declaredKeys>
                 <string>name</string>
             </declaredKeys>
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.groups" id="SjX-XT-L87"/>
-            </connections>
         </treeController>
     </objects>
 </document>

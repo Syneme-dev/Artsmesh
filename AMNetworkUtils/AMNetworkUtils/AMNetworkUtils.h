@@ -22,4 +22,7 @@
 
 +(NSString*)getCurrentTimeString;
 
++(NSData*)addressFromIpAndPort:(NSString*)ipStr
+                          port:(int)p;
+
 @end

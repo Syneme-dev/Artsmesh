@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2653BC8A18DC72F8004707B5 /* AMLocalMesherService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2653BC8918DC72F8004707B5 /* AMLocalMesherService.m */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
@@ -74,8 +73,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2653BC8818DC72F8004707B5 /* AMLocalMesherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalMesherService.h; sourceTree = "<group>"; };
-		2653BC8918DC72F8004707B5 /* AMLocalMesherService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalMesherService.m; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -242,8 +239,6 @@
 				2692CE3618D7DBCA006501C4 /* AMLocalMesherInterface.h */,
 				2692CE3718D7DBF1006501C4 /* AMLocalMesherDelegate.h */,
 				2692CE3818D7DBF1006501C4 /* AMLocalMesherDelegate.m */,
-				2653BC8818DC72F8004707B5 /* AMLocalMesherService.h */,
-				2653BC8918DC72F8004707B5 /* AMLocalMesherService.m */,
 			);
 			path = AMLocalMesherService;
 			sourceTree = "<group>";
@@ -421,7 +416,6 @@
 				2692CE3918D7DBF1006501C4 /* AMLocalMesherDelegate.m in Sources */,
 				2692CE3218D7DB95006501C4 /* main.m in Sources */,
 				2692CE3C18D7DC19006501C4 /* AMETCDManager.m in Sources */,
-				2653BC8A18DC72F8004707B5 /* AMLocalMesherService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,10 @@
 
 @protocol AMLocalMesherInterface <NSObject>
 
--(void)startSvc:(NSDictionary*)params reply:(void(^)(NSString*))reply;
+-(void)startService:(NSDictionary*)params reply:(void(^)(NSString*))reply;
 
--(void)stopSvc;
+-(void)stopService;
+
+-(void)clearAllData;
 
 @end

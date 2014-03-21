@@ -7,12 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMLocalMesherInterface.h"
 
-
-@interface AMETCDManager : NSObject
-
--(void)startETCD:(NSDictionary*)params;
-
--(void)stopETCD;
+@interface AMETCDManager : NSObject<AMLocalMesherInterface>
 
 @end

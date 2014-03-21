@@ -55,7 +55,14 @@ static NSMutableDictionary *allPlugins = nil;
     //TODO:
     
     _globalMesher = [[AMMesher alloc] init];
-    [_globalMesher startLocalMesherService];
+    [_globalMesher kickoffMesherProcess];
+//
+//    _globalETCD = [_globalMesher getETCDRef];
+//    
+//    [_globalMesher addObserver:self
+//                    forKeyPath:@"mesherName"
+//                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//                       context:Nil];
     
 }
 

@@ -8,25 +8,16 @@
 
 #import "AMLocalMesherDelegate.h"
 #import "AMLocalMesherInterface.h"
-#import "AMLocalMesherService.h"
+#import "AMETCDManager.h"
 
 @implementation AMLocalMesherDelegate
-{
-    AMLocalMesherService* _service;
-}
-
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection
 {
-    if (_service == nil)
-    {
-        _service = [[AMLocalMesherService alloc] init];
-    }
-    
     NSXPCInterface* interface = [NSXPCInterface interfaceWithProtocol:@protocol(AMLocalMesherInterface)];
     
     newConnection.exportedInterface = interface;
-    newConnection.exportedObject = _service;
+    newConnection.exportedObject = [[AMETCDManager alloc] init];
     
     [newConnection resume];
     

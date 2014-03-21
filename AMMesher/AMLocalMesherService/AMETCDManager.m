@@ -72,11 +72,4 @@
     _etcdTask = nil;
 }
 
--(void)clearAllData
-{
-    NSString *imageDir = [NSString stringWithFormat:@"%@", [NSHost currentHost].name];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:imageDir error:nil];
-}
-
 @end

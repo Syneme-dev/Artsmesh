@@ -178,7 +178,6 @@
     if(_myLocalMehserConnection)
     {
         [_myLocalMehserConnection.remoteObjectProxy stopService];
-        [_myLocalMehserConnection.remoteObjectProxy clearAllData];
     }
 }
 

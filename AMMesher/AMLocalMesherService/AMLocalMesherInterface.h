@@ -14,6 +14,5 @@
 
 -(void)stopService;
 
--(void)clearAllData;
 
 @end

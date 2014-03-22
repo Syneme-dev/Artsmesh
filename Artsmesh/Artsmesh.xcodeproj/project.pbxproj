@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2623DDC518DD120F00BF982F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		37FCB8B518710C3C00C1FD1B /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB8B818710C3C00C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCB8BB18710C3C00C1FD1B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -59,7 +60,7 @@
 		37FCB99618710E9C00C1FD1B /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMNotificationManager.framework"; sourceTree = "<group>"; };
 		37FCB99718710E9C00C1FD1B /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMPluginLoader.framework"; sourceTree = "<group>"; };
 		37FCB9D218710F3900C1FD1B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMTaskLauncher.framework"; sourceTree = "<group>"; };
-		37FCBA0C18710F6B00C1FD1B /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = AMLogger.framework; path = ../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
+		37FCBA0C18710F6B00C1FD1B /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		37FCBA0E18710FA000C1FD1B /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Artsmesh-cczeaxpkxexsuoanhtxrsbyogfob/Build/Products/Debug/AMLogger.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +120,7 @@
 				37FCB92418710DFF00C1FD1B /* AMPreferenceManager.framework */,
 				37FCB8B818710C3C00C1FD1B /* Cocoa.framework */,
 				37FCB8D718710C3C00C1FD1B /* XCTest.framework */,
+				2623DDC518DD120F00BF982F /* Foundation.framework */,
 				37FCB8BA18710C3C00C1FD1B /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -495,6 +497,7 @@
 				37FCB8E818710C3C00C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37FCB8E918710C3C00C1FD1B /* Build configuration list for PBXNativeTarget "ArtsmeshTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +506,7 @@
 				37FCB8EB18710C3C00C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

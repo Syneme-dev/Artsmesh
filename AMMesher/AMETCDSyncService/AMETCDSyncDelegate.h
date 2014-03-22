@@ -1,5 +1,5 @@
 //
-//  AMETCDServiceInterface.h
+//  AMETCDSyncDelegate.h
 //  AMMesher
 //
 //  Created by Wei Wang on 3/22/14.
@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol AMETCDServiceInterface <NSObject>
-
--(void)startService:(NSDictionary*)params;
-
--(void)stopService;
+@interface AMETCDSyncDelegate : NSObject<NSXPCListenerDelegate>
 
 @end

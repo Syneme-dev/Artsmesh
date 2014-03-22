@@ -30,7 +30,7 @@
                                   @protocol(AMETCDServiceInterface)];
         
         _myLocalMehserConnection =    [[NSXPCConnection alloc]
-                                       initWithServiceName:@"AM.AMLocalMesherService"];
+                                       initWithServiceName:@"AM.AMETCDService"];
         
         _myLocalMehserConnection.interruptionHandler = ^{
             NSLog(@"XPC connection was interrupted.");
@@ -69,9 +69,7 @@
 
 -(void)startETCD
 {
-    [_myLocalMehserConnection.remoteObjectProxy startService:nil reply:^(NSString *string) {
-        NSLog(@"Did receive from XPC Service: %@", string);
-    }];
+    [_myLocalMehserConnection.remoteObjectProxy startService:nil];
 }
 
 -(void)stopETCD
@@ -92,13 +90,21 @@
 {
     if ([keyPath isEqualToString:@"state"])
     {
-//        Class classInfo = (Class)CFBridgingRelease(context);
-//        NSString * className = [NSString stringWithCString:object_getClassName(classInfo)
-//                                                  encoding:NSUTF8StringEncoding];
-//        NSLog(@" >> class: %@, Age changed", className);
+        int oldState = [[change objectForKey:@"old"] intValue];
+        int newState = [[change objectForKey:@"new"] intValue];
         
-        NSLog(@" old state is %@", [change objectForKey:@"old"]);
-        NSLog(@" new state is %@", [change objectForKey:@"new"]);
+        NSLog(@" old state is %d", oldState);
+        NSLog(@" new state is %d", newState);
+        
+        if(newState == 4)//JOINED
+        {
+            //startWatchLeader
+        }
+        else
+        {
+            //stopWatchLeader
+        }
+    
     }
     else
     {

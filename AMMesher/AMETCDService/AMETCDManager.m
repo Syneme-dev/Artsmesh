@@ -14,7 +14,7 @@
     NSTask* _etcdTask;
 }
 
--(void)startService:(NSDictionary*)params reply:(void(^)(NSString*))reply
+-(void)startService:(NSDictionary*)params
 {
     [self stopService];
     

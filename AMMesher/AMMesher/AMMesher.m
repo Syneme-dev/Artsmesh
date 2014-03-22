@@ -10,14 +10,18 @@
 #import "AMETCDServiceInterface.h"
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
+#import "AMETCDSyncInterface.h"
 
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
     
-    NSXPCInterface* _myLocalMesherInterface;
-    NSXPCConnection* _myLocalMehserConnection;
+    NSXPCInterface* _myETCDService;
+    NSXPCConnection* _myETCDServiceConnection;
+    
+    NSXPCInterface* _myETCDSyncService;
+    NSXPCConnection* _myETCDSyncServiceConnection;
 }
 
 -(id)init
@@ -25,26 +29,52 @@
     if (self = [super init])
     {
         _elector = [[AMLeaderElecter alloc] init];
-        
-        _myLocalMesherInterface= [NSXPCInterface interfaceWithProtocol:
-                                  @protocol(AMETCDServiceInterface)];
-        
-        _myLocalMehserConnection =    [[NSXPCConnection alloc]
-                                       initWithServiceName:@"AM.AMETCDService"];
-        
-        _myLocalMehserConnection.interruptionHandler = ^{
-            NSLog(@"XPC connection was interrupted.");
-        };
-        
-        _myLocalMehserConnection.invalidationHandler = ^{
-            NSLog(@"XPC connection was invalidated.");
-        };
-        
-        _myLocalMehserConnection.remoteObjectInterface = _myLocalMesherInterface;
-        [_myLocalMehserConnection resume];
+        [self initETCDConnection];
+        [self initETDCSyncConnetion];
     }
     
     return self;
+}
+
+-(void)initETCDConnection
+{
+    _myETCDService= [NSXPCInterface interfaceWithProtocol:
+                     @protocol(AMETCDServiceInterface)];
+    
+    _myETCDServiceConnection =    [[NSXPCConnection alloc]
+                                   initWithServiceName:@"AM.AMETCDService"];
+    
+    _myETCDServiceConnection.interruptionHandler = ^{
+        NSLog(@"XPC connection was interrupted.");
+    };
+    
+    _myETCDServiceConnection.invalidationHandler = ^{
+        NSLog(@"XPC connection was invalidated.");
+    };
+    
+    _myETCDServiceConnection.remoteObjectInterface = _myETCDService;
+    [_myETCDServiceConnection resume];
+
+}
+
+-(void)initETDCSyncConnetion
+{
+    _myETCDSyncService= [NSXPCInterface interfaceWithProtocol:
+                     @protocol(AMETCDSyncInterface)];
+    
+    _myETCDSyncServiceConnection =    [[NSXPCConnection alloc]
+                                   initWithServiceName:@"AM.AMETCDSyncService"];
+    
+    _myETCDSyncServiceConnection.interruptionHandler = ^{
+        NSLog(@"XPC connection was interrupted.");
+    };
+    
+    _myETCDSyncServiceConnection.invalidationHandler = ^{
+        NSLog(@"XPC connection was invalidated.");
+    };
+    
+    _myETCDSyncServiceConnection.remoteObjectInterface = _myETCDSyncService;
+    [_myETCDSyncServiceConnection resume];
 }
 
 
@@ -69,15 +99,30 @@
 
 -(void)startETCD
 {
-    [_myLocalMehserConnection.remoteObjectProxy startService:nil];
+    [_myETCDServiceConnection.remoteObjectProxy startService:nil];
 }
 
 -(void)stopETCD
 {
-    if(_myLocalMehserConnection)
+    if(_myETCDServiceConnection)
     {
-        [_myLocalMehserConnection.remoteObjectProxy stopService];
+        [_myETCDServiceConnection.remoteObjectProxy stopService];
     }
+}
+
+-(void)startSyncETCD
+{
+    [_myETCDSyncServiceConnection.remoteObjectProxy setTestIntVal:1 ];
+    
+    sleep(3);
+   [ _myETCDSyncServiceConnection.remoteObjectProxy getTestIntVal:^(int a){
+       NSLog(@"the etst state is %d", a);
+   }];
+}
+
+-(void)stopSyncETCD
+{
+    
 }
 
 
@@ -96,15 +141,14 @@
         NSLog(@" old state is %d", oldState);
         NSLog(@" new state is %d", newState);
         
-        if(newState == 4)//JOINED
+        if(newState == 2)//JOINED
         {
-            //startWatchLeader
+            [self startSyncETCD];
         }
         else
         {
-            //stopWatchLeader
+            [self stopSyncETCD];
         }
-    
     }
     else
     {
@@ -114,8 +158,6 @@
                               context:context];
     }
 }
-
-
 
 
 @end

@@ -13,6 +13,7 @@
 		2623DDE118DD123900BF982F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDE018DD123900BF982F /* main.m */; };
 		2623DDEA18DD12BF00BF982F /* AMETCDSyncDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDE918DD12BF00BF982F /* AMETCDSyncDelegate.m */; };
 		2623DDEE18DD136200BF982F /* AMETCDSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDED18DD136200BF982F /* AMETCDSyncService.m */; };
+		2623DDF018DD18F800BF982F /* AM.AMETCDSyncService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2623DDD718DD123900BF982F /* AM.AMETCDSyncService.xpc */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
@@ -33,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2623DDF118DD18FB00BF982F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2692CD4918D7C2A2006501C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2623DDD618DD123900BF982F;
+			remoteInfo = AMETCDSyncService;
+		};
 		26B328DF18DCFFCB00E7F617 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2692CD4918D7C2A2006501C4 /* Project object */;
@@ -49,6 +57,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
+				2623DDF018DD18F800BF982F /* AM.AMETCDSyncService.xpc in CopyFiles */,
 				26B328DB18DCFFA400E7F617 /* AM.AMETCDService.xpc in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +319,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2623DDF218DD18FB00BF982F /* PBXTargetDependency */,
 				26B328E018DCFFCB00E7F617 /* PBXTargetDependency */,
 			);
 			name = AMMesher;
@@ -424,6 +434,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2623DDF218DD18FB00BF982F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2623DDD618DD123900BF982F /* AMETCDSyncService */;
+			targetProxy = 2623DDF118DD18FB00BF982F /* PBXContainerItemProxy */;
+		};
 		26B328E018DCFFCB00E7F617 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 26B328CC18DCFF8D00E7F617 /* AMETCDService */;

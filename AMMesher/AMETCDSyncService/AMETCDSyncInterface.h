@@ -10,6 +10,10 @@
 
 @protocol AMETCDSyncInterface <NSObject>
 
+-(void)setTestIntVal:(int)s;
+
+-(void)getTestIntVal:(void(^)(int))reply;
+
 -(void)startSync:(NSString*)leaderAddr;
 
 -(void)stopSync;

@@ -26,7 +26,7 @@
     {
         _allMesherServices = [[NSMutableArray alloc]init];
         self.state = MESHER_STATE_STOP;
-        self.servicePort = 0;
+        self.mesherPort = 0;
         
         [self browseLocalMesher];
     }
@@ -79,7 +79,7 @@
  	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
-                                                       port:(self.servicePort==0)?4001:self.servicePort];
+                                                       port:(self.mesherPort==0)?4001:self.mesherPort];
 	if (_myMesherService == nil)
     {
         [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
@@ -115,7 +115,7 @@
     }
     else
     {
-        self.mesherName = service.hostName;
+        self.mesherHost = service.hostName;
         self.state = MESHER_STATE_JOINED;
     }
 }
@@ -125,7 +125,7 @@
 {
     [self stopBrowser];
     [self unpublishLocalMesher];
-    self.mesherName = @"";
+    self.mesherHost = @"";
     
     self.state = MESHER_STATE_STOP;
 }
@@ -185,7 +185,8 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    self.mesherName = sender.hostName;
+    self.mesherHost = sender.hostName;
+    self.mesherPort = sender.port;
     self.state = MESHER_STATE_JOINED;
 }
 
@@ -206,8 +207,10 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
+    self.mesherHost = [[NSHost currentHost] name];
+    self.mesherPort = sender.port;
+    
     self.state = MESHER_STATE_PUBLISHED;
-    self.mesherName = [[NSHost currentHost] name];
     
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);
 }

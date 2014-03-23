@@ -28,8 +28,8 @@
 @interface AMLeaderElecter : NSObject<NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 @property int state; // 0 stop, 1 started, 2 joined, 3 hosting, 4 electing, -1 error
-@property NSString* mesherName;
-@property int servicePort;
+@property NSString* mesherHost;
+@property int mesherPort;
 
 -(void)kickoffElectProcess;
 -(void)stopElect;

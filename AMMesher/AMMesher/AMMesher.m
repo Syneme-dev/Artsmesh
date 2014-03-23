@@ -10,7 +10,6 @@
 #import "AMETCDServiceInterface.h"
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
-#import "AMETCDSyncInterface.h"
 
 
 @implementation AMMesher
@@ -20,8 +19,6 @@
     NSXPCInterface* _myETCDService;
     NSXPCConnection* _myETCDServiceConnection;
     
-    NSXPCInterface* _myETCDSyncService;
-    NSXPCConnection* _myETCDSyncServiceConnection;
 }
 
 -(id)init
@@ -30,7 +27,6 @@
     {
         _elector = [[AMLeaderElecter alloc] init];
         [self initETCDConnection];
-        [self initETDCSyncConnetion];
     }
     
     return self;
@@ -55,26 +51,6 @@
     _myETCDServiceConnection.remoteObjectInterface = _myETCDService;
     [_myETCDServiceConnection resume];
 
-}
-
--(void)initETDCSyncConnetion
-{
-    _myETCDSyncService= [NSXPCInterface interfaceWithProtocol:
-                     @protocol(AMETCDSyncInterface)];
-    
-    _myETCDSyncServiceConnection =    [[NSXPCConnection alloc]
-                                   initWithServiceName:@"AM.AMETCDSyncService"];
-    
-    _myETCDSyncServiceConnection.interruptionHandler = ^{
-        NSLog(@"XPC connection was interrupted.");
-    };
-    
-    _myETCDSyncServiceConnection.invalidationHandler = ^{
-        NSLog(@"XPC connection was invalidated.");
-    };
-    
-    _myETCDSyncServiceConnection.remoteObjectInterface = _myETCDSyncService;
-    [_myETCDSyncServiceConnection resume];
 }
 
 
@@ -110,21 +86,6 @@
     }
 }
 
--(void)startSyncETCD
-{
-    [_myETCDSyncServiceConnection.remoteObjectProxy setTestIntVal:1 ];
-    
-    sleep(3);
-   [ _myETCDSyncServiceConnection.remoteObjectProxy getTestIntVal:^(int a){
-       NSLog(@"the etst state is %d", a);
-   }];
-}
-
--(void)stopSyncETCD
-{
-    
-}
-
 
 #pragma mark -
 #pragma mark KVO
@@ -141,13 +102,20 @@
         NSLog(@" old state is %d", oldState);
         NSLog(@" new state is %d", newState);
         
-        if(newState == 2)//JOINED
+        if(newState == 2)//Published
         {
-            [self startSyncETCD];
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+            //I'm the mesher start control service:
+            //start etcd
+            //
         }
-        else
+        else if(newState == 4)//Joined
         {
-            [self stopSyncETCD];
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+            
+            //look up how many users are there
+            //if 2 start manual watch
+            //if 3 tell the leader
         }
     }
     else

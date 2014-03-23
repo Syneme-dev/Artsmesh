@@ -109,13 +109,24 @@
 
 
 
--(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
+-(AMETCDResult*)setKey:(NSString*)key
+             withValue:(NSString*)value
+               ttl:(int)ttl
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
     
     NSString* urlStr  = [self getRequestURL:key withParams:nil];
     
-    NSMutableData* httpBody = [self createSetKeyHttpBody:@"value" withValue:value];
+    
+    NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
+    [bodyDic setObject:value forKey:@"value"];
+    
+    if (ttl > 0)
+    {
+        [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
+    
+    NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
     
@@ -221,7 +232,11 @@
     NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
     
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSMutableData* httpBody = [self createSetKeyHttpBody:@"dir" withValue:@"true"];
+    
+    NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
+    [bodyDic setObject:@"true" forKey:@"dir"];
+    
+    NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
     
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
@@ -357,20 +372,27 @@
 }
 
 
-
--(NSMutableData*)createSetKeyHttpBody: (NSString*)key withValue:(NSString*)val
+-(NSMutableData*)createSetKeyHttpBody: (NSDictionary*) keyVals
 {
     NSMutableData* body = [NSMutableData data];
-    
-    key = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    key = [key stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-    key = [key stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-    
-    val = [val stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    val = [val stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-    val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-    
-    [body appendData:[[NSString stringWithFormat:@"%@=%@", key, val] dataUsingEncoding:NSUTF8StringEncoding]];
+    for (NSString* k in keyVals)
+    {
+        if([body length] > 0)
+        {
+            [body appendData:[@"&" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        NSString* v = [keyVals objectForKey:k];
+        NSString* key = [k stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        key = [key stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+        key = [key stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+        
+        NSString* val = [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        val = [val stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+        val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+        
+        [body appendData:[[NSString stringWithFormat:@"%@=%@", key, val] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
     
     return body;
 }

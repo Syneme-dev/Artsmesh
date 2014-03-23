@@ -57,7 +57,7 @@
     NSString* valueString = @"hello world!";
     
     //Test1 setKey
-    AMETCDResult* res = [service setKey: keyString withValue:valueString];
+    AMETCDResult* res = [service setKey:keyString withValue:valueString ttl:0];
     if(res.errCode != 0)
     {
         XCTFail(@"set key failed! error info: %@ \"%s\"\n",
@@ -200,7 +200,7 @@
         return;
     }
     
-    res = [service setKey:dir1_key1 withValue:dir1_value1];
+    res = [service setKey:dir1_key1 withValue:dir1_value1 ttl:0];
     if(res.errCode != 0)
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
@@ -209,7 +209,7 @@
         return;
     }
     
-    res = [service setKey:dir1_dir1_key1 withValue:dir1_dir1_value1];
+    res = [service setKey:dir1_dir1_key1 withValue:dir1_dir1_value1 ttl:0];
     if(res.errCode != 0)
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
@@ -218,7 +218,7 @@
         return;
     }
     
-    res = [service setKey:dir1_dir1_key2 withValue:dir1_dir1_value2];
+    res = [service setKey:dir1_dir1_key2 withValue:dir1_dir1_value2 ttl:0];
     if(res.errCode != 0)
     {
         XCTFail(@"list dir failed! create failed! :\"%s\"\n",
@@ -275,7 +275,49 @@
     }
     
     NSLog(@"leader is:%@", leader);
+    
+    //Test8 TTL
+    NSString* ttlKey = @"ttlk";
+    NSString* ttlVal = @"ttlv";
+    
+    res = [service setKey:ttlKey withValue:ttlVal ttl:5];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"setKey failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        return;
+    }
+    
+    res = [service getKey:ttlKey];
+    if(res.errCode != 0)
+    {
+        XCTFail(@"getKey failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        return;
+    }
+    
+    if (![res.node.value isEqualToString:ttlVal])
+    {
+        XCTFail(@"getkey is no equan to setkey failed! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        return;
+    }
+    
+    sleep(8);
+    
+    res = [service getKey:ttlKey];
+    if(res.errCode == 0)
+    {
+        XCTFail(@"the key is still live! :\"%s\"\n",
+                __PRETTY_FUNCTION__);
+        
+        return;
+    }
 
+    
 }
 
 @end

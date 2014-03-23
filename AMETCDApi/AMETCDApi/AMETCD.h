@@ -26,7 +26,8 @@
 
 //set a key
 -(AMETCDResult*)setKey:(NSString*)key
-             withValue:(NSString*)value;
+             withValue:(NSString*)value
+               ttl:(int)ttl;
 
 //wait the key changing until timeout
 //the index_in is the global index we want to wait

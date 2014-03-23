@@ -29,8 +29,10 @@
     NSString* etcdDataDir = [tempPath stringByAppendingPathComponent:
                              [NSString stringWithFormat:@"%@-%@", hostName, curTime]];
     
-    id serverPort = [params objectForKey:@"etcdServrePort"];
-    id clientPort = [params objectForKey:@"etcdClientPort"];
+    NSString* serverPort = [params objectForKey:@"etcdServrePort"];
+    NSString* clientPort = [params objectForKey:@"etcdClientPort"];
+    NSString* peers = [params objectForKey:@"peers"];
+    
     
     int isport;
     int icport;
@@ -53,12 +55,27 @@
     }
     
     
-    NSArray* argArry = [NSArray arrayWithObjects:
-                        @"-peer-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], isport],
-                        @"-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], icport],
-                        @"-data-dir", etcdDataDir,
-                        @"-name", hostName,
-                        nil];
+    NSArray* argArry;
+    
+    if(peers != nil && ![peers isEqualToString:@""])
+    {
+        argArry = [NSArray arrayWithObjects:
+                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], isport],
+                   @"-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], icport],
+                   @"-data-dir", etcdDataDir,
+                   @"-name", hostName,
+                   @"-peers", peers,
+                   nil];
+    }
+    else
+    {
+        argArry = [NSArray arrayWithObjects:
+                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], isport],
+                   @"-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], icport],
+                   @"-data-dir", etcdDataDir,
+                   @"-name", hostName,
+                   nil];
+    }
     
     _etcdTask.arguments = argArry;
     [_etcdTask launch];

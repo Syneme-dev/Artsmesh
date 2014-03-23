@@ -14,7 +14,7 @@
 
 -(void)getTestIntVal:(void(^)(int))reply;
 
--(void)startSync:(NSString*)leaderAddr;
+-(void)startSync:(NSString*)ip port:(int)p;
 
 -(void)stopSync;
 

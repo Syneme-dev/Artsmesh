@@ -19,6 +19,7 @@
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
+		26A8783118DE6C1E00D77593 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		26B328CE18DCFF8D00E7F617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD9418D7C37A006501C4 /* Foundation.framework */; };
 		26B328D418DCFF8D00E7F617 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B328D218DCFF8D00E7F617 /* InfoPlist.strings */; };
 		26B328D718DCFF8D00E7F617 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328D618DCFF8D00E7F617 /* main.m */; };
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26A8783118DE6C1E00D77593 /* AMETCDApi.framework in Frameworks */,
 				2623DDD818DD123900BF982F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +480,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDSyncService/AMETCDSyncService-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -495,6 +501,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDSyncService/AMETCDSyncService-Prefix.pch";
 				INFOPLIST_FILE = "AMETCDSyncService/AMETCDSyncService-Info.plist";
@@ -662,6 +672,7 @@
 				2623DDE418DD123900BF982F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2692CD4C18D7C2A2006501C4 /* Build configuration list for PBXProject "AMMesher" */ = {
 			isa = XCConfigurationList;

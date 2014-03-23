@@ -341,6 +341,22 @@
 }
 
 
+-(void)syncResult:(AMETCDResult*)res
+{
+    if(res.errCode != 0)
+    {
+        return;
+    }
+    
+    [self syncNode:res.node];
+}
+
+-(void)syncNode:(AMETCDNode*)node
+{
+    
+}
+
+
 
 -(NSMutableData*)createSetKeyHttpBody: (NSString*)key withValue:(NSString*)val
 {

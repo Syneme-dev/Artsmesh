@@ -68,4 +68,8 @@
             acturalIndex:(int*)index_out
                  timeout:(int)seconds;
 
+
+//save a AMETCDResult to ETCD
+-(void)syncResult:(AMETCDResult*)res;
+
 @end

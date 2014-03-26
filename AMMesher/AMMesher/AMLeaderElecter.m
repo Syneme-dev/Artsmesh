@@ -8,6 +8,7 @@
 
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
+#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
@@ -64,11 +65,6 @@
 
 -(void)kickoffElectProcess
 {
-    if(self.state != MESHER_STATE_STOP)
-    {
-        return;
-    }
-    
     self.state = MESHER_STATE_PUBLISHING;
     [self publishLocalMesher];
 }
@@ -178,6 +174,8 @@
     {
         return;
     }
+    
+    [self kickoffElectProcess];
 }
 
 // Called when net service has been successfully resolved
@@ -187,6 +185,20 @@
     
     self.mesherHost = sender.hostName;
     self.mesherPort = sender.port;
+    
+    for(NSData* addr in sender.addresses)
+    {
+        if([GCDAsyncUdpSocket isIPv4Address:addr])
+        {
+            NSString* mesherAddr = [GCDAsyncUdpSocket hostFromAddress:addr];
+            if(![mesherAddr hasPrefix:@"127"])
+            {
+                self.mesherIp = mesherAddr;
+                break;
+            }
+        }
+    }
+    
     self.state = MESHER_STATE_JOINED;
 }
 
@@ -209,6 +221,19 @@
 {
     self.mesherHost = [[NSHost currentHost] name];
     self.mesherPort = sender.port;
+    
+    NSArray* addrs = [[NSHost currentHost] addresses];
+    for(NSString* addr in addrs)
+    {
+        if([AMNetworkUtils isValidIpv4:addr])
+        {
+            if(![addr hasPrefix:@"127"])
+            {
+                self.mesherIp = addr;
+                break;
+            }
+        }
+    }
     
     self.state = MESHER_STATE_PUBLISHED;
     

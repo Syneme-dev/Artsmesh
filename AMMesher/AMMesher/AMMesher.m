@@ -109,8 +109,8 @@
             NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             //I'm the mesher start control service:
             
-            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, _elector.mesherPort];
-            NSString* _addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, ETCDClientPort];
+            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, _elector.mesherPort];
+            NSString* _addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, ETCDClientPort];
     
             NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
             
@@ -126,7 +126,7 @@
             
             NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDServerPort];
             NSString* _addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDClientPort];
-            NSString* _peers = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, _elector.mesherPort];
+            NSString* _peers = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, _elector.mesherPort];
             
             
             NSMutableDictionary* params = [[NSMutableDictionary alloc] init];

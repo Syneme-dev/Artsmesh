@@ -35,13 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2623DDF118DD18FB00BF982F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2692CD4918D7C2A2006501C4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2623DDD618DD123900BF982F;
-			remoteInfo = AMETCDSyncService;
-		};
 		26B328DF18DCFFCB00E7F617 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2692CD4918D7C2A2006501C4 /* Project object */;
@@ -321,7 +314,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2623DDF218DD18FB00BF982F /* PBXTargetDependency */,
 				26B328E018DCFFCB00E7F617 /* PBXTargetDependency */,
 			);
 			name = AMMesher;
@@ -436,11 +428,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2623DDF218DD18FB00BF982F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2623DDD618DD123900BF982F /* AMETCDSyncService */;
-			targetProxy = 2623DDF118DD18FB00BF982F /* PBXContainerItemProxy */;
-		};
 		26B328E018DCFFCB00E7F617 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 26B328CC18DCFF8D00E7F617 /* AMETCDService */;

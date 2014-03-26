@@ -11,12 +11,14 @@
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
+#import "AMETCDApi/AMETCD.h"
 
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
-    
+    AMETCD* _etcdApi;
+
     NSXPCInterface* _myETCDService;
     NSXPCConnection* _myETCDServiceConnection;
     
@@ -82,6 +84,11 @@
 
 -(void)stopETCD
 {
+    if(_etcdApi!=nil)
+    {
+        [_etcdApi removePeers:[AMNetworkUtils getHostName]];
+    }
+    
     if(_myETCDServiceConnection)
     {
         [_myETCDServiceConnection.remoteObjectProxy stopService];
@@ -114,11 +121,15 @@
     
             NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
             
-            
             [params setObject:_peer_addr forKey:@"-peer-addr"];
             [params setObject:_addr forKey:@"-addr"];
             
             [self startETCD:params];
+            
+            _etcdApi = [[AMETCD alloc]init];
+            _etcdApi.serverIp = _elector.mesherIp;
+            _etcdApi.clientPort = ETCDClientPort;
+            _etcdApi.serverPort = _elector.mesherPort;
         }
         else if(newState == 4)//Joined
         {
@@ -136,6 +147,11 @@
             [params setObject:_peers forKey:@"-peers"];
             
             [self startETCD:params];
+            
+            _etcdApi = [[AMETCD alloc]init];
+            _etcdApi.serverIp = [AMNetworkUtils getHostIpv4Addr];
+            _etcdApi.clientPort = ETCDClientPort;
+            _etcdApi.serverPort = ETCDServerPort;
         }
     }
     else

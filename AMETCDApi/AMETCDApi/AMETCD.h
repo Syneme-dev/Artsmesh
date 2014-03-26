@@ -13,8 +13,9 @@
 
 @property NSString* serverIp;
 @property int serverPort;
+@property int clientPort;
 
--(id)initWithService:(NSString*)serverIP port:(int)port;
+-(id)initWithService:(NSString*)serverIP serverPort:(int)sp clientPort:(int)cp ;
 
 //get the cluster's leader
 -(NSString*)getLeader;
@@ -70,7 +71,8 @@
                  timeout:(int)seconds;
 
 
-//save a AMETCDResult to ETCD
--(void)syncResult:(AMETCDResult*)res;
+//remove peers
+-(void)removePeers:(NSString*)peerName;
+
 
 @end

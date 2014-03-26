@@ -14,12 +14,13 @@
 {
 }
 
--(id)initWithService:(NSString*)serverIP port:(int)port
+-(id)initWithService:(NSString*)serverIP serverPort:(int)sp clientPort:(int)cp
 {
     if(self = [super init])
     {
         self.serverIp = serverIP;
-        self.serverPort = port;
+        self.serverPort = sp;
+        self.clientPort = cp;
     }
     
     return self;
@@ -31,7 +32,7 @@
 {
     return [NSString stringWithFormat:@"http://%@:%d/v2/keys",
                          self.serverIp,
-                         self.serverPort];
+                         self.clientPort];
 }
 
 
@@ -63,7 +64,7 @@
 {
     NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/v2/leader",
                              self.serverIp,
-                             self.serverPort];
+                             self.clientPort];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -356,20 +357,29 @@
 }
 
 
--(void)syncResult:(AMETCDResult*)res
+-(void)removePeers:(NSString*)peerName
 {
-    if(res.errCode != 0)
-    {
-        return;
-    }
+    //http://127.0.0.1:7001/remove/node1 -X DELETE
     
-    [self syncNode:res.node];
+    
+    NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/remove/%@",
+                             self.serverIp,
+                             self.serverPort,
+                             peerName];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:requestURL]];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
 }
 
--(void)syncNode:(AMETCDNode*)node
-{
-    
-}
 
 
 -(NSMutableData*)createSetKeyHttpBody: (NSDictionary*) keyVals

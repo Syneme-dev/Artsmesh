@@ -79,7 +79,7 @@
  	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
-                                                       port:(self.mesherPort==0)?4001:self.mesherPort];
+                                                       port:(self.mesherPort==0)?7001:self.mesherPort];
 	if (_myMesherService == nil)
     {
         [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];

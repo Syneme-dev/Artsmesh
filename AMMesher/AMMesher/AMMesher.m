@@ -10,6 +10,7 @@
 #import "AMETCDServiceInterface.h"
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
+#import "AMNetworkUtils/AMNetworkUtils.h"
 
 
 @implementation AMMesher
@@ -26,6 +27,8 @@
     if (self = [super init])
     {
         _elector = [[AMLeaderElecter alloc] init];
+        _elector.mesherPort = ETCDServerPort;
+        
         [self initETCDConnection];
     }
     
@@ -56,7 +59,6 @@
 
 -(void)startLoalMesher
 {
-    [self startETCD];
     [_elector kickoffElectProcess];
     
     [_elector addObserver:self forKeyPath:@"state"
@@ -73,9 +75,9 @@
 }
 
 
--(void)startETCD
+-(void)startETCD:(NSDictionary*)params
 {
-    [_myETCDServiceConnection.remoteObjectProxy startService:nil];
+    [_myETCDServiceConnection.remoteObjectProxy startService:params];
 }
 
 -(void)stopETCD
@@ -106,16 +108,34 @@
         {
             NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             //I'm the mesher start control service:
-            //start etcd
-            //
+            
+            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, _elector.mesherPort];
+            NSString* _addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, ETCDClientPort];
+    
+            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+            
+            
+            [params setObject:_peer_addr forKey:@"-peer-addr"];
+            [params setObject:_addr forKey:@"-addr"];
+            
+            [self startETCD:params];
         }
         else if(newState == 4)//Joined
         {
             NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             
-            //look up how many users are there
-            //if 2 start manual watch
-            //if 3 tell the leader
+            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDServerPort];
+            NSString* _addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDClientPort];
+            NSString* _peers = [NSString stringWithFormat:@"%@:%d", _elector.mesherHost, _elector.mesherPort];
+            
+            
+            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+            
+            [params setObject:_peer_addr forKey:@"-peer-addr"];
+            [params setObject:_addr forKey:@"-addr"];
+            [params setObject:_peers forKey:@"-peers"];
+            
+            [self startETCD:params];
         }
     }
     else

@@ -22,62 +22,65 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     _etcdTask.launchPath = [mainBundle pathForAuxiliaryExecutable:@"etcd"];
     
-    
     NSString* tempPath = NSTemporaryDirectory();
     NSString* curTime = [AMNetworkUtils getCurrentTimeString];
     NSString* hostName = [AMNetworkUtils getHostName];
-    NSString* etcdDataDir = [tempPath stringByAppendingPathComponent:
-                             [NSString stringWithFormat:@"%@-%@", hostName, curTime]];
+
     
-    NSString* serverPort = [params objectForKey:@"etcdServrePort"];
-    NSString* clientPort = [params objectForKey:@"etcdClientPort"];
-    NSString* peers = [params objectForKey:@"peers"];
+    NSString* _peer_addr = [params objectForKey:@"-peer-addr"];
+    NSString* _addr = [params objectForKey:@"-addr"];
+    NSString* _name = [NSString stringWithFormat:@"%@-%@", hostName, curTime];
+    NSString* _data_dir = [tempPath stringByAppendingPathComponent:
+                           [NSString stringWithFormat:@"%@-%@", hostName, curTime]];
+    NSString* _peers = [params objectForKey:@"-peers"];
+    NSString* _peer_heartbeat_interval = [params objectForKey:@"-peer-heartbeat-interval"];
+    NSString* _peer_election_timeout = [params objectForKey:@"-peer-election-timeout"];
     
     
-    int isport;
-    int icport;
-    if(serverPort == nil)
+    if(_peer_addr == nil)
     {
-        isport = 7001;
-    }
-    else
-    {
-        isport = [serverPort intValue];
+        _peer_addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], 7001];
     }
     
-    if(clientPort == nil)
+    if(_addr == nil)
     {
-        icport = 4001;
-    }
-    else
-    {
-        icport = [clientPort  intValue];
+        _addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], 4001];
     }
     
     
-    NSArray* argArry;
+    NSMutableArray* paramsArry = [[NSMutableArray alloc] init];
     
-    if(peers != nil && ![peers isEqualToString:@""])
+    [paramsArry addObject:@"-peer-addr"];
+    [paramsArry addObject:_peer_addr];
+    
+    [paramsArry addObject:@"-addr"];
+    [paramsArry addObject:_addr];
+
+    [paramsArry addObject:@"-data-dir"];
+    [paramsArry addObject:_data_dir];
+
+    [paramsArry addObject:@"-name"];
+    [paramsArry addObject:_name];
+    
+    if(_peer_heartbeat_interval)
     {
-        argArry = [NSArray arrayWithObjects:
-                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], isport],
-                   @"-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], icport],
-                   @"-data-dir", etcdDataDir,
-                   @"-name", hostName,
-                   @"-peers", peers,
-                   nil];
+        [paramsArry addObject:@"-peer-heartbeat-interval"];
+        [paramsArry addObject:_peer_heartbeat_interval];
     }
-    else
+
+    if(_peer_election_timeout)
     {
-        argArry = [NSArray arrayWithObjects:
-                   @"-peer-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], isport],
-                   @"-addr", [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], icport],
-                   @"-data-dir", etcdDataDir,
-                   @"-name", hostName,
-                   nil];
+        [paramsArry addObject:@"-peer-election-timeout"];
+        [paramsArry addObject:_peer_election_timeout];
     }
     
-    _etcdTask.arguments = argArry;
+    if (_peers)
+    {
+        [paramsArry addObject:@"-peers"];
+        [paramsArry addObject:_peers];
+    }
+
+    _etcdTask.arguments = paramsArry;
     [_etcdTask launch];
 }
 

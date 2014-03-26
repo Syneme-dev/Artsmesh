@@ -29,7 +29,7 @@
     
     NSString* _peer_addr = [params objectForKey:@"-peer-addr"];
     NSString* _addr = [params objectForKey:@"-addr"];
-    NSString* _name = [NSString stringWithFormat:@"%@-%@", hostName, curTime];
+    NSString* _name = [NSString stringWithFormat:@"%@", hostName];
     NSString* _data_dir = [tempPath stringByAppendingPathComponent:
                            [NSString stringWithFormat:@"%@-%@", hostName, curTime]];
     NSString* _peers = [params objectForKey:@"-peers"];

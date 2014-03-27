@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMOutlineUserNode : NSObject
+@interface AMUser : NSObject
 
 @property NSString* name;
 @property NSMutableArray* children;
 @property BOOL isLeaf;
-@property AMOutlineUserNode* parent;
+@property AMUser* parent;
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
 
@@ -21,15 +21,15 @@
 //for Cocoa bandings by outlineView must compliant with KVC
 -(NSInteger)countOfChildren;
 
--(AMOutlineUserNode*)objectInChildrenAtIndex:(NSUInteger)index;
+-(AMUser*)objectInChildrenAtIndex:(NSUInteger)index;
 
--(void)addChildrenObject:(AMOutlineUserNode *)object;
+-(void)addChildrenObject:(AMUser *)object;
 
--(void)insertObject:(AMOutlineUserNode *)object inChildrenAtIndex:(NSUInteger)index;
+-(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index;
 
 -(void)removeObjectFromChildrenAtIndex:(NSUInteger)index;
 
--(void)removeChildrenObject:(AMOutlineUserNode*)object;
+-(void)removeChildrenObject:(AMUser*)object;
 
 -(void)replaceObjectInChildrenAtIndex:(NSUInteger)index withObject:(id)object;
 

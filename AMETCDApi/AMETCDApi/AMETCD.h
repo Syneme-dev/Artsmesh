@@ -47,7 +47,7 @@
 
 //create a dir, if the dir is exist, the return
 //resule errCode will not be 0
--(AMETCDResult*)createDir:(NSString*)dirPath;
+-(AMETCDResult*)createDir:(NSString*)dirPath ttl:(int)ttl;
 
 //delete a dir. if the recursive is NO, only
 //delete empty dir, if the recursive is YES

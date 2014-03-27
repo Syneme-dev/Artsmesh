@@ -60,9 +60,7 @@ static NSMutableDictionary *allPlugins = nil;
     
     _globalMesher = [[AMMesher alloc] init];
     [_globalMesher startLoalMesher];
-//
-//    _globalETCD = [_globalMesher getETCDRef];
-//    
+   
 //    [_globalMesher addObserver:self
 //                    forKeyPath:@"mesherName"
 //                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -87,7 +85,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
-    //[self loadUserGroupPanel];
+    [self loadUserGroupPanel];
     
     
 }

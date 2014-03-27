@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="createGroupNameField" destination="COu-bM-c49" id="59l-yT-K33"/>
                 <outlet property="userGroupTreeController" destination="6vf-v0-eax" id="EUK-Cu-Cb6"/>
+                <outlet property="userGroupTreeView" destination="TXa-iM-wat" id="x7h-nf-n4J"/>
                 <outlet property="view" destination="1" id="Xvt-jb-IGB"/>
             </connections>
         </customObject>
@@ -43,6 +44,9 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="6vf-v0-eax" name="value" keyPath="arrangedObjects.name" id="SjZ-My-THl"/>
+                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
                             </outlineView>
@@ -145,6 +149,9 @@
             <declaredKeys>
                 <string>name</string>
             </declaredKeys>
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="self.groups" id="SjX-XT-L87"/>
+            </connections>
         </treeController>
     </objects>
 </document>

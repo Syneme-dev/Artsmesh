@@ -219,21 +219,10 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    self.mesherHost = [[NSHost currentHost] name];
+    self.mesherHost = [AMNetworkUtils getHostName];
     self.mesherPort = sender.port;
     
-    NSArray* addrs = [[NSHost currentHost] addresses];
-    for(NSString* addr in addrs)
-    {
-        if([AMNetworkUtils isValidIpv4:addr])
-        {
-            if(![addr hasPrefix:@"127"])
-            {
-                self.mesherIp = addr;
-                break;
-            }
-        }
-    }
+    self.mesherIp = [AMNetworkUtils getHostIpv4Addr];
     
     self.state = MESHER_STATE_PUBLISHED;
     

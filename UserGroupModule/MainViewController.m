@@ -7,296 +7,450 @@
 //
 
 #import "MainViewController.h"
-#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
-#import "AMNetworkUtils/JSONKit.h"
-#import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMOutlineUserNode.h"
-
-#import "AMUserGroupServer.h"
-#import "AMUserGroupClient.h"
-#import "AMUserGroupModel.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-
+#import "AMUser.h"
+#import "AMEtcdApi/AMETCD.h"
 
 #define ROOT_KEY @"/Groups"
 #define DEFAULT_GROUP @"Artsmesh"
 
+@interface MainViewController ()
+
+@end
+
 @implementation MainViewController
 {
-    AMUserGroupModel* _model;
-    AMUserGroupServer* _server;
-    AMUserGroupClient* _client;
-    
-    //dispatch_queue_t _mySerialModeOpQueue;
-    
-    NSString* _myName;
-    NSString* _myGroup;
-    int _myPort;
-    
-    NSTimer *_heartbeatTimer;
+    AMUser* _artsmeshGroup;
+    AMUser* _currentUser;
+    AMETCD* _etcd;
+    BOOL _listeningEtcd;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        _model = [[AMUserGroupModel alloc]init];
-        _server = [[AMUserGroupServer alloc] init];
-        _client = [[AMUserGroupClient alloc] init];
+    if (self) {
         
-        //_mySerialModeOpQueue = dispatch_queue_create("artsmesh.usergroup.model.queue", NULL);
-        
-        _client.delegate = self;
-        _server.delegate = self;
-        
-        [_model.myself setObject:@(4001) forKey:@"port"];
-        [_model.myself setObject:@"Artsmesh" forKey:@"groupname"];
-        
-        [_server startServer];
-        
-        if(![self findMesherService])
-        {
-            NSMutableDictionary* group1 = [[NSMutableDictionary alloc]init];
-            [group1 setObject:@"Artsmesh" forKey:@"groupname"];
-            [group1 setObject:@"This is default group" forKey:@"description"];
-            
-            NSMutableDictionary* group2 = [[NSMutableDictionary alloc]init];
-            [group2 setObject:@"Performance" forKey:@"groupname"];
-            [group2 setObject:@"This is a created group" forKey:@"description"];
-            
-            [_model.groups setObject:group1 forKey:@"Artsmesh"];
-            [_model.groups setObject:group2 forKey:@"Performance"];
-        }
-        
-        [_client getGroups:_model.serverAddr];
-        [_client getUsers: _model.serverAddr];
-        
-        self.outlineUserNodes = [[NSMutableArray alloc] init];
+        self.groups = [[NSMutableArray alloc] init];
+        _currentUser = nil;
+        _etcd  = [[AMETCD alloc] init];
+        _listeningEtcd = YES;
+    
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(getUserGroupSuccess) name:@"AMNotify_getUserGroupSuccess" object:nil];
     }
     
     return self;
 }
 
--(BOOL)findMesherService
-{
-    //get the server's ip and port and set it to model
-    _model.serverAddr = [AMNetworkUtils addressFromIpAndPort:@"127.0.0.1" port:7001];
-    
-    return NO;
-}
-
-
-
 -(void)StopEverything
 {
-}
-
-- (IBAction)setUserName:(id)sender
-{
-    if(_myName == nil)
-    {
-        [_model.myself setObject:@"test" forKey:@"username"];
-        [_client RegsterUser:_model.serverAddr name:@"test" withPort:4001];
-    }
-    else
-    {
-        
-    }
-}
-
-- (IBAction)joinGroup:(id)sender
-{
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//     _listeningEtcd = NO;
+//    
+//    if(_currentUser)
+//    {
+//        NSString* userKeyPath = [NSString stringWithFormat:@"%@/%@%/@", ROOT_KEY, _currentUser.parent.name, _currentUser.name];
+//        [_etcd deleteKey:userKeyPath];
+//    }
+//    
+//    [_etcd stopETCD];
 }
 
-
--(void)unregisterUser
+-(void)getUserGroupSuccess
 {
-    [_heartbeatTimer invalidate];
-    [_client UnregisterUser:_model.serverAddr name: [_model.myself objectForKey:@"username"]];
-}
-
-
--(void)sendEveryOneMyself
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        for(NSString* key in _model.users)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+        AMETCDResult* res = [_etcd listDir:ROOT_KEY recursive:YES];
+        if(res.errCode == 0)
         {
-            NSDictionary* user = [_model.users objectForKey:key];
-            
-            NSString* ip = [user objectForKey:@"ip"];
-            int port = [[user objectForKey:@"port"] intValue];
-            
-            if(ip != nil && port >=0)
+            [self parseGroupResult: res];
+        }
+        
+        //this must return right now because we have set etcd before
+        int actIndex = 0;
+        res = [_etcd watchDir:ROOT_KEY fromIndex:2 acturalIndex:&actIndex timeout:0];
+        
+        while (_listeningEtcd) {
+            res = [_etcd watchDir:ROOT_KEY fromIndex:actIndex+1 acturalIndex:&actIndex timeout:0];
+            if(res.errCode == 0)
             {
-                NSData* address = [AMNetworkUtils addressFromIpAndPort:ip port:port];
-                NSString* userInfo = [_model.myself JSONString];
+                NSString* action = res.action;
+                NSArray* names = [res.node.key pathComponents];
+                NSString* groupName = [names objectAtIndex:2];
+                NSString* userName = nil;
+                if([names count] >= 4 )
+                {
+                    userName = [names objectAtIndex:3];
+                }
                 
-                [_client sendUserInfo:address userInfo:userInfo];
+                //There are 4 situations: group+new group+delete
+                //user+new, user+delete,
+                if(userName == nil)//group
+                {
+                    AMUser* group = [self groupByName:groupName];
+                    
+                    if([action isEqualToString:@"delete"]) //group + delete
+                    {
+                        if(group != nil)
+                        {
+                            [self removeGroupsObject:group];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.userGroupTreeView reloadData];
+                            });
+                        }
+                    }
+                    else //group+add
+                    {
+                        if(group == nil)
+                        {
+                            AMUser* newGroup = [[AMUser alloc] initWithName:groupName isGroup:YES];
+                            [self addGroupsObject:newGroup];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.userGroupTreeView reloadData];
+                            });
+                        }
+                    }
+                }
+                else //user
+                {
+                    AMUser* group = [self groupByName:groupName];
+                    if([action isEqualToString:@"delete"])//user + delete
+                    {
+                        if (group != nil)
+                        {
+                            AMUser* user = [self userByName:userName inGroup:group];
+                            if(user != nil)
+                            {
+                                [group removeChildrenObject:user];
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.userGroupTreeView reloadData];
+                                });
+                            }
+                        }
+                    }
+                    else //user+ add
+                    {
+                        if(group != nil)
+                        {
+                            AMUser* user = [self userByName:userName inGroup:group];
+                            if(user == nil)
+                            {
+                                AMUser* newUser = [[AMUser alloc] initWithName:userName isGroup:NO];
+                                [group addChildrenObject:newUser];
+                                
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self.userGroupTreeView reloadData];
+                                });
+                            }
+                        }
+                    }
+                }
             }
         }
     });
 }
 
 
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+-(AMUser*)userByName:(NSString*)uname inGroup:(AMUser*)group
 {
-    if ([item isKindOfClass:[NSDictionary class]]) {
-        return YES;
-    }else {
+    for (AMUser* u in group.children)
+    {
+        if([uname isEqualToString:u.name])
+        {
+            return u;
+        }
+    }
+    
+    return nil;
+}
+
+-(AMUser*)groupByName:(NSString*)gname
+{
+    for (int i = 0; i < [self.groups count]; i++)
+    {
+        AMUser* group = [self objectInGroupsAtIndex:i];
+        if ([gname isEqualToString:group.name])
+        {
+            return group;
+        }
+    }
+    
+    return nil;
+}
+
+
+-(void)parseGroupResult:(AMETCDResult*)res
+{
+    if ([res.node.key isEqualToString:ROOT_KEY])
+    {
+        //every one in res.node.nodes is a group
+        for(AMETCDNode* groupNode in res.node.nodes)
+        {
+            if(groupNode.isDir)
+            {
+                NSString* groupName = [groupNode.key lastPathComponent];
+                
+                AMUser* group = [[AMUser alloc] initWithName:groupName isGroup:YES];
+                [self addGroupsObject:group];
+                
+                for (AMETCDNode* userNode in groupNode.nodes)
+                {
+                    NSString* userName = [userNode.key lastPathComponent];
+                    AMUser* user = [[AMUser alloc] initWithName:userName isGroup:NO];
+                    user.parent = group;
+                    [group addChildrenObject:user];
+                }
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.userGroupTreeView reloadData];
+        });
+    }
+}
+
+
+- (IBAction)createNewGroup:(id)sender
+{
+    NSString* newGroupName = [self.createGroupNameField stringValue];
+    
+    if ([newGroupName isEqualToString:@""])
+    {
+        return;
+    }
+    
+//    if(_currentUser == nil)
+//    {
+//        //must set user name first
+//        return;
+//    }
+    
+    for (AMUser* group in self.groups)
+    {
+        if ( [group.name isEqualToString:newGroupName ] )
+        {
+            return;
+        }
+    }
+    
+//    NSString* newGroupKeyPath = [NSString stringWithFormat:@"%@/%@", ROOT_KEY, newGroupName ];
+//   [_etcd createDir:newGroupKeyPath];
+
+}
+
+- (IBAction)deleteGroup:(id)sender {
+    if([self.groups count] == 1)
+    {
+        return;
+    }
+    
+    id selectedItem = [self.userGroupTreeView itemAtRow:[self.userGroupTreeView selectedRow]];
+    
+    if(selectedItem && [self validateGroupNode:selectedItem])
+    {
+        NSTreeNode* node = selectedItem;
+        AMUser* delgroup = node.representedObject;
+        
+        if([delgroup.name isEqualToString:DEFAULT_GROUP])
+        {
+            //artsmesh group can not be deleted.
+            return;
+        }
+        
+        NSString* delGroupKeyPath = [NSString stringWithFormat:@"%@/%@", ROOT_KEY, delgroup.name ];
+        [_etcd deleteDir:delGroupKeyPath recursive:NO];
+    }
+    
+}
+
+- (IBAction)setUserName:(id)sender {
+    
+//    NSString* newName = [sender stringValue];
+//    if([newName isEqualToString:@""])
+//    {
+//        return;
+//    }
+//    
+//    if(_currentUser == nil)
+//    {
+//        //first time set user name, add to Artsmesh
+//        if([self validateUserName:newName inGroup:DEFAULT_GROUP])
+//        {
+//            NSString* userKey = [NSString stringWithFormat:@"%@/%@/%@",
+//                                 ROOT_KEY,
+//                                 [self objectInGroupsAtIndex:0].name,
+//                                 newName];
+//            
+//            //for now value is the same with the key, later will be useful
+//            AMETCDResult* res = [_etcd setKey:userKey withValue:newName];
+//            if (res.errCode == 0)
+//            {
+//                _currentUser  = [[AMUser alloc] initWithName:newName isGroup:NO];
+//                _currentUser.parent = [self objectInGroupsAtIndex:0];
+//            }
+//            else
+//            {
+//                //TODO: notify set falied!
+//            }
+//        }
+//        
+//        return;
+//    }
+//    else
+//    {
+//        if([newName isEqualToString:_currentUser.name])
+//        {
+//            return;
+//        }
+//        
+//        NSString* userOldKey = [NSString stringWithFormat:@"%@/%@/%@",
+//                                ROOT_KEY,
+//                                _currentUser.parent.name,
+//                                _currentUser.name];
+//        NSString* userNewKey = [NSString stringWithFormat:@"%@/%@/%@",
+//                                ROOT_KEY,
+//                                _currentUser.parent.name,
+//                                newName];
+//        
+//        AMETCDResult* res = [_etcd deleteKey:userOldKey];
+//        res = [_etcd setKey:userNewKey withValue:userNewKey];
+//        if (res.errCode == 0)
+//        {
+//            _currentUser.name = newName;
+//        }
+//        else
+//        {
+//            //TODO: notify set falied!
+//        }
+//    }
+}
+
+- (IBAction)joinGroup:(id)sender
+{
+//    long index = [self.userGroupTreeView selectedRow];
+//    if (index == -1)
+//    {
+//        return;
+//    }
+//    
+//    if( _currentUser == nil)
+//    {
+//        return;
+//    }
+//    
+//    id selectedItem = [self.userGroupTreeView itemAtRow:index];
+//    
+//    if(selectedItem && [self validateGroupNode:selectedItem])
+//    {
+//        NSTreeNode* node = selectedItem;
+//        AMUser* joinGroup = node.representedObject;
+//        AMUser* curGroup = _currentUser.parent;
+//        
+//        if([curGroup.name isEqualToString:joinGroup.name])
+//        {
+//            return;
+//        }
+//        
+//        NSString* removePath = [NSString stringWithFormat:@"%@/%@/%@", ROOT_KEY, curGroup.name, _currentUser.name ];
+//        NSString* addPath = [NSString stringWithFormat:@"%@/%@/%@", ROOT_KEY, joinGroup.name, _currentUser.name];
+//        
+//        AMETCDResult* res = [_etcd deleteKey:removePath];
+//        if(res.errCode == 0)
+//        {
+//            [_etcd setKey:addPath withValue:addPath];
+//        }
+//        else
+//        {
+//          //TODO:error
+//        }
+//    }
+}
+
+
+-(BOOL)validateUserName:(NSString*)name inGroup:(NSString*)groupName
+{
+    //check if there already the same user name in the group
+    if([self.groups count] == 0)
+    {
         return NO;
     }
+    
+    for (AMUser* group in self.groups)
+    {
+        if([groupName isEqualToString:group.name])
+        {
+            for(AMUser* user in group.children)
+            {
+                if([user.name isEqualToString:name])
+                {
+                    return NO;
+                }
+            }
+            
+            return YES;
+        }
+    }
+    
+    return NO;
 }
+
+-(BOOL)validateGroupNode:(id)node
+{
+    return ![(AMUser*)node isLeaf];
+}
+
 
 
 #pragma mark -
-#pragma mark AMUserGroupServerDelegate
+#pragma mark KVO
 
-
--(void)GetGroupsHandler:(GCDAsyncUdpSocket*)sock
-            fromAddress:(NSData *)address
-            withRequest:(NSString*)request
+-(NSUInteger)countOfGroups
 {
-    NSString* resKey = [NSString stringWithFormat:@"%@/Results",request];
-    NSMutableDictionary* retDic = [[NSMutableDictionary alloc] init];
-    [retDic setObject:_model.groups forKey:resKey];
-    
-    NSString* retString = [retDic JSONString];
-    NSLog(@"group list json is:%@", retString);
-    
-    [sock sendData:  [retString dataUsingEncoding:NSUTF8StringEncoding]
-         toAddress:address withTimeout:-1 tag:0];
+    return [self.groups count];
 }
 
-
--(void)GetUsersHandler:(GCDAsyncUdpSocket*)sock
-           fromAddress:(NSData *)address
-           withRequest:(NSString*)request
+-(AMUser*)objectInGroupsAtIndex:(NSUInteger)index
 {
-    NSString* resKey = [NSString stringWithFormat:@"%@/Results",request];
-    NSMutableDictionary* retDic = [[NSMutableDictionary alloc] init];
-    [retDic setObject:_model.users forKey:resKey];
-    
-    NSString* retString = [retDic JSONString];
-    NSLog(@"user list json is:%@", retString);
-    
-    [sock sendData:  [retString dataUsingEncoding:NSUTF8StringEncoding]
-         toAddress:address withTimeout:-1 tag:0];
-
+    return [self.groups objectAtIndex:index];
 }
 
-
--(void)RegisterUserHandler:(GCDAsyncUdpSocket*)sock
-               fromAddress:(NSData *)address
-               withRequest:(NSString*)request
-                  username:(NSString*)name
-                   usePort:(int)port
+-(void)addGroupsObject:(AMUser *)object
 {
-    NSString* resKey = [NSString stringWithFormat:@"%@/Results",request];
-    NSMutableDictionary* retDic = [[NSMutableDictionary alloc] init];
-    
-    id exist = [_model.users objectForKey:name];
-    if(exist != nil)
-    {
-        [retDic setObject:@"already used" forKey:resKey];
-    }
-    else
-    {
-        NSMutableDictionary* user = [[NSMutableDictionary alloc] init];
-        [user setObject:@"username" forKey:name];
-        [user setObject:@"port" forKey:@(port)];
-        [user setObject:[GCDAsyncUdpSocket hostFromAddress:address] forKey:@"ip"];
-        
-        [_model.users setObject:user forKey:name];
-        
-        [retDic setObject:@"ok" forKey:resKey];
-    }
-    
-    NSString* retString = [retDic JSONString];
-    NSLog(@"user list json is:%@", retString);
-    
-    [sock sendData:  [retString dataUsingEncoding:NSUTF8StringEncoding]
-         toAddress:address withTimeout:-1 tag:0];
+    [self willChangeValueForKey:@"groups"];
+    [self.groups addObject:object];
+    [self didChangeValueForKey:@"groups"];
 }
 
-
--(void)UnregisterUserHandler:(GCDAsyncUdpSocket*)sock
-                 fromAddress:(NSData *)address
-                 withRequest:(NSString*)request
-                    username:(NSString*)name
+-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
 {
-    id exist = [_model.users objectForKey:name];
-    if(exist == nil)
-    {
-        NSLog(@"no user to remove");
-    }
-    else
-    {
-        [_model.users removeObjectForKey:name];
-        NSLog(@"remove user : %@\n", name);
-    }
+    [self willChangeValueForKey:@"groups"];
+    [self.groups replaceObjectAtIndex:index withObject:object ];
+    [self didChangeValueForKey:@"groups"];
 }
 
-
-#pragma mark -
-#pragma mark AMUserGroupClientDelegate
--(void)didGetGroups:(id)groupsObject
+-(void)insertObject:(AMUser *)object inGroupsAtIndex:(NSUInteger)index
 {
-    if(![groupsObject isKindOfClass:[NSDictionary class]])
-    {
-        return;
-    }
-    
-    NSDictionary* groups = groupsObject;
-    
-    for(NSString* key in groups)
-    {
-        NSString* groupname = key;
-        NSDictionary* groupObj = [groups objectForKey:key];
-        
-        [_model.groups setObject:groupObj forKey:groupname];
-    }
+    [self willChangeValueForKey:@"groups"];
+    [self.groups insertObject:object atIndex:index];
+    [self didChangeValueForKey:@"groups"];
 }
 
--(void)didGetUsers:(id)userObject
+-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index
 {
-    if(![userObject isKindOfClass:[NSDictionary class]])
-    {
-        return;
-    }
-    
-    NSDictionary* users = userObject;
-    
-    for(NSString* key in users)
-    {
-        NSString* groupname = key;
-        NSDictionary* groupObj = [users objectForKey:key];
-        
-        [_model.users setObject:groupObj forKey:groupname];
-    }
-
+    [self willChangeValueForKey:@"groups"];
+    [self.groups removeObjectAtIndex:index];
+    [self didChangeValueForKey:@"groups"];
 }
 
--(void)didRegsterUser:(id)res
+-(void)removeGroupsObject:(AMUser *)object
 {
-    if ([res isEqualToString:@"ok"])
-    {
-        NSLog(@"Register ok");
-        
-        [self sendEveryOneMyself];
-        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                          target:self
-                                                        selector:@selector(sendEveryOneMyself)
-                                                        userInfo:nil
-                                                         repeats:YES];
-        
-    }
+    [self willChangeValueForKey:@"groups"];
+    [self.groups removeObject:object];
+    [self didChangeValueForKey:@"groups"];
 }
-
-
 
 @end

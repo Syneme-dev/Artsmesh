@@ -6,16 +6,15 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMOutlineUserNode.h"
+#import "AMUser.h"
 
-@implementation AMOutlineUserNode
+@implementation AMUser
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup
 {
     if(self = [super init])
     {
         self.name = name;
-        
         self.parent = nil;
         if(bGroup)
         {
@@ -37,7 +36,7 @@
     return (self.children == nil)? -1 : [self.children count];
 }
 
--(AMOutlineUserNode*)objectInChildrenAtIndex:(NSUInteger)index
+-(AMUser*)objectInChildrenAtIndex:(NSUInteger)index
 {
     if(self.children == nil)
     {
@@ -47,7 +46,7 @@
     return [self.children objectAtIndex:index];
 }
 
--(void)insertObject:(AMOutlineUserNode *)object inChildrenAtIndex:(NSUInteger)index
+-(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index
 {
     if (self.children != nil) {
         [self willChangeValueForKey:@"children"];
@@ -77,7 +76,7 @@
     }
 }
 
--(void)addChildrenObject:(AMOutlineUserNode *)object
+-(void)addChildrenObject:(AMUser *)object
 {
     if(self.children != nil)
     {
@@ -87,7 +86,7 @@
     }
 }
 
--(void)removeChildrenObject:(AMOutlineUserNode*)object
+-(void)removeChildrenObject:(AMUser*)object
 {
     if(self.children != nil)
     {

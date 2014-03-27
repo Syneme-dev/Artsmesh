@@ -10,7 +10,8 @@
 
 @protocol AMETCDServiceInterface <NSObject>
 
--(void)startService:(NSDictionary*)params;
+-(void)startService:(NSDictionary*)params reply:(void (^)(id))reply;
+
 
 -(void)stopService;
 

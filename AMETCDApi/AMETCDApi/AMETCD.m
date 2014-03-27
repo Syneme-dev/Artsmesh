@@ -228,7 +228,7 @@
 }
 
 
--(AMETCDResult*)createDir:(NSString*)dirPath
+-(AMETCDResult*)createDir:(NSString*)dirPath ttl:(int)ttl
 {
     NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
     
@@ -236,6 +236,11 @@
     
     NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
     [bodyDic setObject:@"true" forKey:@"dir"];
+
+    if (ttl > 0)
+    {
+        [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
     
     NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
     

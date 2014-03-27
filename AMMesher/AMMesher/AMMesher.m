@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMMesher.h"
-#import "AMETCDServiceInterface.h"
+#import "AMMesher.h""
 #import "AMMesherPreference.h"
+#import "AMETCDServiceInterface.h"
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMETCDApi/AMETCD.h"
@@ -18,44 +18,61 @@
 {
     AMLeaderElecter* _elector;
     AMETCD* _etcdApi;
+    BOOL _isETCDInit;
+    NSTimer* _heartbeatTimer;
 
     NSXPCInterface* _myETCDService;
     NSXPCConnection* _myETCDServiceConnection;
     
 }
 
+dispatch_queue_t _mesher_serial_queue = NULL;
+
++(dispatch_queue_t) mesher_serial_queue
+{
+    if(_mesher_serial_queue == NULL)
+    {
+        _mesher_serial_queue = dispatch_queue_create("mesher_queue", NULL);
+    }
+    
+    return _mesher_serial_queue;
+}
+
 -(id)init
 {
     if (self = [super init])
     {
+        _isETCDInit =NO;
+        
+        //Init Mesher Elector
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = ETCDServerPort;
         
-        [self initETCDConnection];
+        //init self information
+        self.myGroupName = @"Artsmesh";
+        self.myUserName = [AMNetworkUtils getHostName];
+        self.myIp = [AMNetworkUtils getHostIpv4Addr];
+        self.myStatus = @"Online";
+        self.myDomain = @"CCOM";
+        self.myDescription = @"I'm a Developer";
+        
+        //Init ETCDService
+        _myETCDService= [NSXPCInterface interfaceWithProtocol: @protocol(AMETCDServiceInterface)];
+        _myETCDServiceConnection = [[NSXPCConnection alloc] initWithServiceName:@"AM.AMETCDService"];
+        
+        _myETCDServiceConnection.interruptionHandler = ^{
+            NSLog(@"XPC connection was interrupted.");
+        };
+        
+        _myETCDServiceConnection.invalidationHandler = ^{
+            NSLog(@"XPC connection was invalidated.");
+        };
+        
+        _myETCDServiceConnection.remoteObjectInterface = _myETCDService;
+        [_myETCDServiceConnection resume];
     }
     
     return self;
-}
-
--(void)initETCDConnection
-{
-    _myETCDService= [NSXPCInterface interfaceWithProtocol:
-                     @protocol(AMETCDServiceInterface)];
-    
-    _myETCDServiceConnection =    [[NSXPCConnection alloc]
-                                   initWithServiceName:@"AM.AMETCDService"];
-    
-    _myETCDServiceConnection.interruptionHandler = ^{
-        NSLog(@"XPC connection was interrupted.");
-    };
-    
-    _myETCDServiceConnection.invalidationHandler = ^{
-        NSLog(@"XPC connection was invalidated.");
-    };
-    
-    _myETCDServiceConnection.remoteObjectInterface = _myETCDService;
-    [_myETCDServiceConnection resume];
-
 }
 
 
@@ -65,11 +82,13 @@
     
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                  context:CFBridgingRetain([_elector class])];
+                  context:nil];
 }
 
 -(void)stopLocalMesher
 {
+    //Should firstly clear all the operation in GCD, by there is way
+    //to cancel the operation. So will change to NSOperations later.
     [self stopETCD];
     [_elector stopElect];
     
@@ -79,8 +98,69 @@
 
 -(void)startETCD:(NSDictionary*)params
 {
-    [_myETCDServiceConnection.remoteObjectProxy startService:params];
+    [_myETCDServiceConnection.remoteObjectProxy
+     startService:params
+     reply:^(id object){
+         
+         //add the data init process into mesher queue.
+         dispatch_async([AMMesher mesher_serial_queue], ^{
+             if(!_isETCDInit)
+             {
+                 _etcdApi = [[AMETCD alloc]init];
+                 _etcdApi.serverIp = [AMNetworkUtils getHostIpv4Addr];
+                 _etcdApi.clientPort = ETCDClientPort;
+                 _etcdApi.serverPort = ETCDServerPort;
+                 
+                 NSString* leader = nil;
+                 while (leader == nil)
+                 {
+                     leader = [_etcdApi getLeader];
+                 }
+                 
+                 AMETCDResult* res = [_etcdApi createDir:@"/Groups/" ttl:0];
+                 if(res.errCode != 0)
+                 {
+                     [NSException raise:@"Can not init ETCD Data" format:@""];
+                 }
+                 
+                 res = [_etcdApi createDir:@"/Groups/Artsmesh/" ttl:0];
+                 if(res.errCode != 0)
+                 {
+                     [NSException raise:@"Can not init ETCD Data" format:@""];
+                 }
+                 
+                 res = [_etcdApi createDir:@"/Groups/Artsmesh/Users/" ttl:0];
+                 if(res.errCode != 0)
+                 {
+                     [NSException raise:@"Can not init ETCD Data" format:@""];
+                 }
+                 
+                 res = [_etcdApi createDir:@"/Mesher/" ttl:0];
+                 if(res.errCode != 0)
+                 {
+                     [NSException raise:@"Can not init ETCD Data" format:@""];
+                 }
+                 
+                 res = [_etcdApi createDir:@"/Mesher/Leader" ttl:0];
+                 if(res.errCode != 0)
+                 {
+                     [NSException raise:@"Can not init ETCD Data" format:@""];
+                 }
+                 
+                 _isETCDInit = YES;
+                 [self updateMySelf];
+             }
+         });
+     }];
+    
+    _heartbeatTimer =  [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                        target:self
+                                                      selector:@selector(updateMySelf)
+                                                      userInfo:nil
+                                                       repeats:YES];
+    
 }
+
 
 -(void)stopETCD
 {
@@ -93,6 +173,55 @@
     {
         [_myETCDServiceConnection.remoteObjectProxy stopService];
     }
+}
+
+
+-(void) updateMySelf
+{
+    if(_isETCDInit == NO)
+    {
+        return;
+    }
+    
+    //this operation should always be in the mehser queue.
+    dispatch_async([AMMesher mesher_serial_queue], ^{
+        
+        AMETCDResult* res = nil;
+        NSString* myUserDir = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/", self.myUserName];
+        res = [_etcdApi createDir:myUserDir ttl:10];
+        if(res.errCode != 0)
+        {
+            [NSException raise:@"Can not init ETCD Data" format:@""];
+        }
+        
+        NSString* myUserIp = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/IP", self.myUserName];
+        res = [_etcdApi setKey:myUserIp withValue:self.myIp ttl:10];
+        if(res.errCode != 0)
+        {
+            [NSException raise:@"Can not init ETCD Data" format:@""];
+        }
+        
+        NSString* myDomain = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/Domain", self.myUserName];
+        res = [_etcdApi setKey:myDomain withValue:self.myDomain ttl:10];
+        if(res.errCode != 0)
+        {
+            [NSException raise:@"Can not init ETCD Data" format:@""];
+        }
+        
+        NSString* myStatus = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/Status", self.myUserName];
+        res = [_etcdApi setKey:myStatus withValue:self.myStatus ttl:10];
+        if(res.errCode != 0)
+        {
+            [NSException raise:@"Can not init ETCD Data" format:@""];
+        }
+        
+        NSString* myDiscription = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/Discription", self.myUserName];
+        res = [_etcdApi setKey:myDiscription withValue:self.myDescription ttl:10];
+        if(res.errCode != 0)
+        {
+            [NSException raise:@"Can not init ETCD Data" format:@""];
+        }
+    });
 }
 
 
@@ -113,10 +242,10 @@
         
         if(newState == 2)//Published
         {
-            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             //I'm the mesher start control service:
             
-            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, _elector.mesherPort];
+            NSString* _peer_addr = [NSString stringWithFormat:@"%@:%ld", _elector.mesherIp, _elector.mesherPort];
             NSString* _addr = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, ETCDClientPort];
     
             NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -125,19 +254,14 @@
             [params setObject:_addr forKey:@"-addr"];
             
             [self startETCD:params];
-            
-            _etcdApi = [[AMETCD alloc]init];
-            _etcdApi.serverIp = _elector.mesherIp;
-            _etcdApi.clientPort = ETCDClientPort;
-            _etcdApi.serverPort = _elector.mesherPort;
         }
         else if(newState == 4)//Joined
         {
-            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
             NSString* _peer_addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDServerPort];
             NSString* _addr = [NSString stringWithFormat:@"%@:%d", [AMNetworkUtils getHostIpv4Addr], ETCDClientPort];
-            NSString* _peers = [NSString stringWithFormat:@"%@:%d", _elector.mesherIp, _elector.mesherPort];
+            NSString* _peers = [NSString stringWithFormat:@"%@:%ld", _elector.mesherIp, _elector.mesherPort];
             
             
             NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -147,11 +271,6 @@
             [params setObject:_peers forKey:@"-peers"];
             
             [self startETCD:params];
-            
-            _etcdApi = [[AMETCD alloc]init];
-            _etcdApi.serverIp = [AMNetworkUtils getHostIpv4Addr];
-            _etcdApi.clientPort = ETCDClientPort;
-            _etcdApi.serverPort = ETCDServerPort;
         }
     }
     else

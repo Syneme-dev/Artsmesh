@@ -8,34 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
-		2623DDD818DD123900BF982F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD9418D7C37A006501C4 /* Foundation.framework */; };
-		2623DDDE18DD123900BF982F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2623DDDC18DD123900BF982F /* InfoPlist.strings */; };
-		2623DDE118DD123900BF982F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDE018DD123900BF982F /* main.m */; };
-		2623DDEA18DD12BF00BF982F /* AMETCDSyncDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDE918DD12BF00BF982F /* AMETCDSyncDelegate.m */; };
-		2623DDEE18DD136200BF982F /* AMETCDSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623DDED18DD136200BF982F /* AMETCDSyncService.m */; };
-		2623DDF018DD18F800BF982F /* AM.AMETCDSyncService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2623DDD718DD123900BF982F /* AM.AMETCDSyncService.xpc */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
-		26A8783118DE6C1E00D77593 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		26B328CE18DCFF8D00E7F617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD9418D7C37A006501C4 /* Foundation.framework */; };
 		26B328D418DCFF8D00E7F617 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26B328D218DCFF8D00E7F617 /* InfoPlist.strings */; };
 		26B328D718DCFF8D00E7F617 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328D618DCFF8D00E7F617 /* main.m */; };
-		26B328DB18DCFFA400E7F617 /* AM.AMETCDService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26B328CD18DCFF8D00E7F617 /* AM.AMETCDService.xpc */; };
 		26B328E318DD001500E7F617 /* AMETCDDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328E218DD001500E7F617 /* AMETCDDelegate.m */; };
 		26B328ED18DD00D300E7F617 /* etcd in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26B328E918DD00C900E7F617 /* etcd */; };
 		26B328EE18DD00D300E7F617 /* etcdctl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26B328EA18DD00C900E7F617 /* etcdctl */; };
 		26B328F118DD00E100E7F617 /* AMETCDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328F018DD00E100E7F617 /* AMETCDManager.m */; };
-		26B328F218DD01CD00E7F617 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
 		26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26B328F318DD028F00E7F617 /* AMLeaderElecter.h */; };
 		26B328F618DD028F00E7F617 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328F418DD028F00E7F617 /* AMLeaderElecter.m */; };
 		26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */ = {isa = PBXBuildFile; fileRef = 26B328F718DD03DB00E7F617 /* AMMesherPreference.h */; };
+		D4D35FC218E42F70005C5F1A /* AM.AMETCDService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26B328CD18DCFF8D00E7F617 /* AM.AMETCDService.xpc */; };
+		D4D35FC418E43018005C5F1A /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		26B328DF18DCFFCB00E7F617 /* PBXContainerItemProxy */ = {
+		D4D35FC018E42F6A005C5F1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2692CD4918D7C2A2006501C4 /* Project object */;
 			proxyType = 1;
@@ -51,8 +44,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
-				2623DDF018DD18F800BF982F /* AM.AMETCDSyncService.xpc in CopyFiles */,
-				26B328DB18DCFFA400E7F617 /* AM.AMETCDService.xpc in CopyFiles */,
+				D4D35FC218E42F70005C5F1A /* AM.AMETCDService.xpc in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,16 +63,6 @@
 
 /* Begin PBXFileReference section */
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
-		2623DDD718DD123900BF982F /* AM.AMETCDSyncService.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AM.AMETCDSyncService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
-		2623DDDB18DD123900BF982F /* AMETCDSyncService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMETCDSyncService-Info.plist"; sourceTree = "<group>"; };
-		2623DDDD18DD123900BF982F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2623DDDF18DD123900BF982F /* AMETCDSyncService-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMETCDSyncService-Prefix.pch"; sourceTree = "<group>"; };
-		2623DDE018DD123900BF982F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2623DDE818DD12BF00BF982F /* AMETCDSyncDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDSyncDelegate.h; sourceTree = "<group>"; };
-		2623DDE918DD12BF00BF982F /* AMETCDSyncDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDSyncDelegate.m; sourceTree = "<group>"; };
-		2623DDEB18DD131900BF982F /* AMETCDSyncInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMETCDSyncInterface.h; sourceTree = "<group>"; };
-		2623DDEC18DD136200BF982F /* AMETCDSyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDSyncService.h; sourceTree = "<group>"; };
-		2623DDED18DD136200BF982F /* AMETCDSyncService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDSyncService.m; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,18 +91,10 @@
 		26B328F318DD028F00E7F617 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26B328F418DD028F00E7F617 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26B328F718DD03DB00E7F617 /* AMMesherPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherPreference.h; sourceTree = "<group>"; };
+		D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../AMNetworkUtils/build/Release/AMNetworkUtils.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2623DDD418DD123900BF982F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				26A8783118DE6C1E00D77593 /* AMETCDApi.framework in Frameworks */,
-				2623DDD818DD123900BF982F /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2692CD4E18D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26B328F218DD01CD00E7F617 /* AMNetworkUtils.framework in Frameworks */,
+				D4D35FC418E43018005C5F1A /* AMNetworkUtils.framework in Frameworks */,
 				26B328CE18DCFF8D00E7F617 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,36 +117,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2623DDD918DD123900BF982F /* AMETCDSyncService */ = {
-			isa = PBXGroup;
-			children = (
-				2623DDE818DD12BF00BF982F /* AMETCDSyncDelegate.h */,
-				2623DDE918DD12BF00BF982F /* AMETCDSyncDelegate.m */,
-				2623DDEB18DD131900BF982F /* AMETCDSyncInterface.h */,
-				2623DDEC18DD136200BF982F /* AMETCDSyncService.h */,
-				2623DDED18DD136200BF982F /* AMETCDSyncService.m */,
-				2623DDE018DD123900BF982F /* main.m */,
-				2623DDDA18DD123900BF982F /* Supporting Files */,
-			);
-			path = AMETCDSyncService;
-			sourceTree = "<group>";
-		};
-		2623DDDA18DD123900BF982F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2623DDDB18DD123900BF982F /* AMETCDSyncService-Info.plist */,
-				2623DDDC18DD123900BF982F /* InfoPlist.strings */,
-				2623DDDF18DD123900BF982F /* AMETCDSyncService-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		2692CD4818D7C2A2006501C4 = {
 			isa = PBXGroup;
 			children = (
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
 				26B328CF18DCFF8D00E7F617 /* AMETCDService */,
-				2623DDD918DD123900BF982F /* AMETCDSyncService */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,
 				2692CD5318D7C2A2006501C4 /* Products */,
 			);
@@ -183,7 +132,6 @@
 			children = (
 				2692CD5218D7C2A2006501C4 /* AMMesher.framework */,
 				26B328CD18DCFF8D00E7F617 /* AM.AMETCDService.xpc */,
-				2623DDD718DD123900BF982F /* AM.AMETCDSyncService.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,6 +139,7 @@
 		2692CD5418D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */,
 				2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */,
 				2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */,
 				2692CD5518D7C2A2006501C4 /* Cocoa.framework */,
@@ -284,23 +233,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2623DDD618DD123900BF982F /* AMETCDSyncService */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2623DDE218DD123900BF982F /* Build configuration list for PBXNativeTarget "AMETCDSyncService" */;
-			buildPhases = (
-				2623DDD318DD123900BF982F /* Sources */,
-				2623DDD418DD123900BF982F /* Frameworks */,
-				2623DDD518DD123900BF982F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AMETCDSyncService;
-			productName = AMETCDSyncService;
-			productReference = 2623DDD718DD123900BF982F /* AM.AMETCDSyncService.xpc */;
-			productType = "com.apple.product-type.bundle";
-		};
 		2692CD5118D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2692CD7A18D7C2A2006501C4 /* Build configuration list for PBXNativeTarget "AMMesher" */;
@@ -314,7 +246,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				26B328E018DCFFCB00E7F617 /* PBXTargetDependency */,
+				D4D35FC118E42F6A005C5F1A /* PBXTargetDependency */,
 			);
 			name = AMMesher;
 			productName = AMMesher;
@@ -363,20 +295,11 @@
 			targets = (
 				2692CD5118D7C2A2006501C4 /* AMMesher */,
 				26B328CC18DCFF8D00E7F617 /* AMETCDService */,
-				2623DDD618DD123900BF982F /* AMETCDSyncService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2623DDD518DD123900BF982F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2623DDDE18DD123900BF982F /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2692CD5018D7C2A2006501C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -396,16 +319,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2623DDD318DD123900BF982F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2623DDE118DD123900BF982F /* main.m in Sources */,
-				2623DDEE18DD136200BF982F /* AMETCDSyncService.m in Sources */,
-				2623DDEA18DD12BF00BF982F /* AMETCDSyncDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2692CD4D18D7C2A2006501C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,22 +341,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		26B328E018DCFFCB00E7F617 /* PBXTargetDependency */ = {
+		D4D35FC118E42F6A005C5F1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 26B328CC18DCFF8D00E7F617 /* AMETCDService */;
-			targetProxy = 26B328DF18DCFFCB00E7F617 /* PBXContainerItemProxy */;
+			targetProxy = D4D35FC018E42F6A005C5F1A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2623DDDC18DD123900BF982F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2623DDDD18DD123900BF982F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		2692CD8C18D7C325006501C4 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -463,44 +368,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2623DDE318DD123900BF982F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMETCDSyncService/AMETCDSyncService-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMETCDSyncService/AMETCDSyncService-Info.plist";
-				MACH_O_TYPE = mh_execute;
-				PRODUCT_NAME = "AM.$(TARGET_NAME:rfc1034identifier)";
-				WRAPPER_EXTENSION = xpc;
-			};
-			name = Debug;
-		};
-		2623DDE418DD123900BF982F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMETCDSyncService/AMETCDSyncService-Prefix.pch";
-				INFOPLIST_FILE = "AMETCDSyncService/AMETCDSyncService-Info.plist";
-				MACH_O_TYPE = mh_execute;
-				PRODUCT_NAME = "AM.$(TARGET_NAME:rfc1034identifier)";
-				WRAPPER_EXTENSION = xpc;
-			};
-			name = Release;
-		};
 		2692CD7818D7C2A2006501C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -618,6 +485,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/AMNetworkUtils/build/Release,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDService/AMETCDService-Prefix.pch";
@@ -639,6 +507,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/AMNetworkUtils/build/Release,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMETCDService/AMETCDService-Prefix.pch";
@@ -652,15 +521,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2623DDE218DD123900BF982F /* Build configuration list for PBXNativeTarget "AMETCDSyncService" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2623DDE318DD123900BF982F /* Debug */,
-				2623DDE418DD123900BF982F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2692CD4C18D7C2A2006501C4 /* Build configuration list for PBXProject "AMMesher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

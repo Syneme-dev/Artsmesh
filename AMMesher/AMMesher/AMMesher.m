@@ -117,31 +117,31 @@ dispatch_queue_t _mesher_serial_queue = NULL;
                      leader = [_etcdApi getLeader];
                  }
                  
-                 AMETCDResult* res = [_etcdApi createDir:@"/Groups/" ttl:0];
+                 AMETCDResult* res = [_etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
                  if(res.errCode != 0)
                  {
                      [NSException raise:@"Can not init ETCD Data" format:@""];
                  }
                  
-                 res = [_etcdApi createDir:@"/Groups/Artsmesh/" ttl:0];
+                 res = [_etcdApi setDir:@"/Groups/Artsmesh/" ttl:0 prevExist:NO];
                  if(res.errCode != 0)
                  {
                      [NSException raise:@"Can not init ETCD Data" format:@""];
                  }
                  
-                 res = [_etcdApi createDir:@"/Groups/Artsmesh/Users/" ttl:0];
+                 res = [_etcdApi setDir:@"/Groups/Artsmesh/Users/" ttl:0 prevExist:NO];
                  if(res.errCode != 0)
                  {
                      [NSException raise:@"Can not init ETCD Data" format:@""];
                  }
                  
-                 res = [_etcdApi createDir:@"/Mesher/" ttl:0];
+                 res = [_etcdApi setDir:@"/Mesher/" ttl:0 prevExist:NO];
                  if(res.errCode != 0)
                  {
                      [NSException raise:@"Can not init ETCD Data" format:@""];
                  }
                  
-                 res = [_etcdApi createDir:@"/Mesher/Leader" ttl:0];
+                 res = [_etcdApi setDir:@"/Mesher/Leader" ttl:0 prevExist:NO];
                  if(res.errCode != 0)
                  {
                      [NSException raise:@"Can not init ETCD Data" format:@""];
@@ -188,10 +188,14 @@ dispatch_queue_t _mesher_serial_queue = NULL;
         
         AMETCDResult* res = nil;
         NSString* myUserDir = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/", self.myUserName];
-        res = [_etcdApi createDir:myUserDir ttl:10];
+        res = [_etcdApi setDir:myUserDir ttl:10 prevExist:YES];
         if(res.errCode != 0)
         {
-            [NSException raise:@"Can not init ETCD Data" format:@""];
+            res = [_etcdApi setDir:myUserDir ttl:10 prevExist:NO];
+            if(res.errCode != 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
         }
         
         NSString* myUserIp = [NSString stringWithFormat:@"/Groups/Artsmesh/Users/%@/IP", self.myUserName];

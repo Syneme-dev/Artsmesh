@@ -228,7 +228,7 @@
 }
 
 
--(AMETCDResult*)createDir:(NSString*)dirPath ttl:(int)ttl
+-(AMETCDResult*)setDir:(NSString*)dirPath ttl:(int)ttl prevExist:(BOOL)bUpdate
 {
     NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
     
@@ -240,6 +240,11 @@
     if (ttl > 0)
     {
         [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
+    
+    if(bUpdate == YES)
+    {
+        [bodyDic setObject:@"true" forKey:@"prevExist"];
     }
     
     NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];

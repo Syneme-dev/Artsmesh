@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class AMGroup;
 @interface AMUser : NSObject
 
 @property NSString* name;
 @property NSString* groupName;
-@property NSString* groupDomain;
 @property NSString* domain;
 @property NSString* description;
 @property NSString* status;
-@property int ttl;
+@property NSString* ip;
+@property NSString* foafUrl;
+
+@property AMGroup* group;
 
 @end

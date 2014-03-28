@@ -1,14 +1,14 @@
 //
-//  AMUser.m
+//  AMUserGroupOutlineNode.m
 //  UserGroupModule
 //
 //  Created by Wei Wang on 3/12/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMUser.h"
+#import "AMUserGroupOutlineNode.h"
 
-@implementation AMUser
+@implementation AMUserGroupOutlineNode
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup
 {
@@ -36,7 +36,7 @@
     return (self.children == nil)? -1 : [self.children count];
 }
 
--(AMUser*)objectInChildrenAtIndex:(NSUInteger)index
+-(AMUserGroupOutlineNode*)objectInChildrenAtIndex:(NSUInteger)index
 {
     if(self.children == nil)
     {
@@ -46,7 +46,7 @@
     return [self.children objectAtIndex:index];
 }
 
--(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index
+-(void)insertObject:(AMUserGroupOutlineNode *)object inChildrenAtIndex:(NSUInteger)index
 {
     if (self.children != nil) {
         [self willChangeValueForKey:@"children"];
@@ -76,7 +76,7 @@
     }
 }
 
--(void)addChildrenObject:(AMUser *)object
+-(void)addChildrenObject:(AMUserGroupOutlineNode *)object
 {
     if(self.children != nil)
     {
@@ -86,7 +86,7 @@
     }
 }
 
--(void)removeChildrenObject:(AMUser*)object
+-(void)removeChildrenObject:(AMUserGroupOutlineNode*)object
 {
     if(self.children != nil)
     {

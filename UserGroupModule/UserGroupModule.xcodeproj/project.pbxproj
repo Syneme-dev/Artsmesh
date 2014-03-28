@@ -14,8 +14,8 @@
 		AFE3499A18C9BAA100E247B9 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE3499918C9BAA100E247B9 /* MainView.xib */; };
 		AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AFE3499B18C9BABC00E247B9 /* MainViewController.h */; };
 		AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE3499C18C9BABC00E247B9 /* MainViewController.m */; };
-		D4232A0618E2E9BE00505805 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = D4232A0418E2E9BE00505805 /* AMUser.h */; };
-		D4232A0718E2E9BE00505805 /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4232A0518E2E9BE00505805 /* AMUser.m */; };
+		D4232A0618E2E9BE00505805 /* AMUserGroupOutlineNode.h in Headers */ = {isa = PBXBuildFile; fileRef = D4232A0418E2E9BE00505805 /* AMUserGroupOutlineNode.h */; };
+		D4232A0718E2E9BE00505805 /* AMUserGroupOutlineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D4232A0518E2E9BE00505805 /* AMUserGroupOutlineNode.m */; };
 		D4CEE40B18D03CD700F7429B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A5D2E18C44CD10078D125 /* Cocoa.framework */; };
 		D4CEE41118D03CD700F7429B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4CEE40F18D03CD700F7429B /* InfoPlist.strings */; };
 		D4CEE41318D03CD700F7429B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEE41218D03CD700F7429B /* main.m */; };
@@ -63,8 +63,8 @@
 		AFE3499918C9BAA100E247B9 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		AFE3499B18C9BABC00E247B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		AFE3499C18C9BABC00E247B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		D4232A0418E2E9BE00505805 /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
-		D4232A0518E2E9BE00505805 /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
+		D4232A0418E2E9BE00505805 /* AMUserGroupOutlineNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupOutlineNode.h; sourceTree = "<group>"; };
+		D4232A0518E2E9BE00505805 /* AMUserGroupOutlineNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupOutlineNode.m; sourceTree = "<group>"; };
 		D4CEE40A18D03CD700F7429B /* UserGroupUITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserGroupUITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4CEE40E18D03CD700F7429B /* UserGroupUITest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UserGroupUITest-Info.plist"; sourceTree = "<group>"; };
 		D4CEE41018D03CD700F7429B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		AF9A5D2218C44CD10078D125 = {
 			isa = PBXGroup;
 			children = (
-				D4232A0418E2E9BE00505805 /* AMUser.h */,
-				D4232A0518E2E9BE00505805 /* AMUser.m */,
+				D4232A0418E2E9BE00505805 /* AMUserGroupOutlineNode.h */,
+				D4232A0518E2E9BE00505805 /* AMUserGroupOutlineNode.m */,
 				AFE3499B18C9BABC00E247B9 /* MainViewController.h */,
 				AFE3499C18C9BABC00E247B9 /* MainViewController.m */,
 				AFE3499918C9BAA100E247B9 /* MainView.xib */,
@@ -207,7 +207,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4232A0618E2E9BE00505805 /* AMUser.h in Headers */,
+				D4232A0618E2E9BE00505805 /* AMUserGroupOutlineNode.h in Headers */,
 				AFE3499D18C9BABC00E247B9 /* MainViewController.h in Headers */,
 				AF00D42B18C9B590004DE9E6 /* UserGroupModuleConst.h in Headers */,
 			);
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4232A0718E2E9BE00505805 /* AMUser.m in Sources */,
+				D4232A0718E2E9BE00505805 /* AMUserGroupOutlineNode.m in Sources */,
 				AF9A5D4218C44D1C0078D125 /* MainPlugin.m in Sources */,
 				AFE3499E18C9BABC00E247B9 /* MainViewController.m in Sources */,
 			);

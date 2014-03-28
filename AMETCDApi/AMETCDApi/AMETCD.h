@@ -62,6 +62,9 @@
 -(AMETCDResult*)listDir:(NSString*)dirPath
               recursive:(BOOL)bRecursive;
 
+//watch a dir
+-(AMETCDResult*)watchDir:(NSString*)dirPath
+                 timeout:(int)seconds;
 
 //watch a dir
 //the index meaning is the same as watch a key

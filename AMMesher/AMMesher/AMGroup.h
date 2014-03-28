@@ -13,6 +13,10 @@
 @property NSString* name;
 @property NSString* domain;
 @property NSString* description;
-@property int ttl;
+@property NSString* m2mIp; //mesher to mesher ip
+@property NSString* m2mPort;
+@property NSString* foafUrl;
+
+@property NSMutableArray* users;
 
 @end

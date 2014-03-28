@@ -10,15 +10,37 @@
 
 
 @interface AMMesher : NSObject
+{
+    NSString* myGroupName;
+    NSString* myUserName;
+    NSString* myDomain;
+    NSString* myDescription;
+    NSString* myStatus;
+    NSString* myIp;
+    NSMutableArray* groups;
+}
 
-@property NSString* myGroupName;
-@property NSString* myUserName;
-@property NSString* myDomain;
-@property NSString* myDescription;
-@property NSString* myStatus;
-@property NSString* myIp;
+-(NSString*)myGroupName;
+-(void)setMyGroupName:(NSString*)name;
 
-+(dispatch_queue_t) mesher_serial_queue;
+-(NSString*)myUserName;
+-(void)setMyUserName;
+
+-(NSString*)myDomain;
+-(void)setMyDomain;
+
+-(NSString*)myDescription;
+-(void)setMyDescription;
+
+-(NSString*)myStatus;
+-(void)getMyStatus;
+
+-(NSString*)myIp;
+-(void)setMyIP;
+
++(dispatch_queue_t) get_mesher_serial_query_queue;
++(dispatch_queue_t) get_mesher_serial_update_queue;
+
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
 

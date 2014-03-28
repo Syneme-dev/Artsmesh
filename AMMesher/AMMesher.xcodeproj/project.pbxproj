@@ -23,6 +23,10 @@
 		26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26B328F318DD028F00E7F617 /* AMLeaderElecter.h */; };
 		26B328F618DD028F00E7F617 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B328F418DD028F00E7F617 /* AMLeaderElecter.m */; };
 		26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */ = {isa = PBXBuildFile; fileRef = 26B328F718DD03DB00E7F617 /* AMMesherPreference.h */; };
+		D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4C18E4F6FA008AB820 /* AMGroup.h */; };
+		D48F3E5118E4F6FA008AB820 /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4D18E4F6FA008AB820 /* AMGroup.m */; };
+		D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4E18E4F6FA008AB820 /* AMUser.h */; };
+		D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4F18E4F6FA008AB820 /* AMUser.m */; };
 		D4D35FC218E42F70005C5F1A /* AM.AMETCDService.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26B328CD18DCFF8D00E7F617 /* AM.AMETCDService.xpc */; };
 		D4D35FC418E43018005C5F1A /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +95,10 @@
 		26B328F318DD028F00E7F617 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26B328F418DD028F00E7F617 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26B328F718DD03DB00E7F617 /* AMMesherPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherPreference.h; sourceTree = "<group>"; };
+		D48F3E4C18E4F6FA008AB820 /* AMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroup.h; sourceTree = "<group>"; };
+		D48F3E4D18E4F6FA008AB820 /* AMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroup.m; sourceTree = "<group>"; };
+		D48F3E4E18E4F6FA008AB820 /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
+		D48F3E4F18E4F6FA008AB820 /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../AMNetworkUtils/build/Release/AMNetworkUtils.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +171,10 @@
 		2692CD5B18D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXGroup;
 			children = (
+				D48F3E4C18E4F6FA008AB820 /* AMGroup.h */,
+				D48F3E4D18E4F6FA008AB820 /* AMGroup.m */,
+				D48F3E4E18E4F6FA008AB820 /* AMUser.h */,
+				D48F3E4F18E4F6FA008AB820 /* AMUser.m */,
 				2692CD8018D7C2D3006501C4 /* AMMesher.h */,
 				2692CD8118D7C2D3006501C4 /* AMMesher.m */,
 				26B328F318DD028F00E7F617 /* AMLeaderElecter.h */,
@@ -226,7 +238,9 @@
 			files = (
 				26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */,
 				2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */,
+				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,
 				26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */,
+				D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */,
 				2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */,
+				D48F3E5118E4F6FA008AB820 /* AMGroup.m in Sources */,
 				26B328F618DD028F00E7F617 /* AMLeaderElecter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  AMUser.h
+//  AMUserGroupOutlineNode.h
 //  UserGroupModule
 //
 //  Created by Wei Wang on 3/12/14.
@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMUser : NSObject
+@interface AMUserGroupOutlineNode : NSObject
 
 @property NSString* name;
 @property NSMutableArray* children;
 @property BOOL isLeaf;
-@property AMUser* parent;
+@property AMUserGroupOutlineNode* parent;
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
 
@@ -21,15 +21,15 @@
 //for Cocoa bandings by outlineView must compliant with KVC
 -(NSInteger)countOfChildren;
 
--(AMUser*)objectInChildrenAtIndex:(NSUInteger)index;
+-(AMUserGroupOutlineNode*)objectInChildrenAtIndex:(NSUInteger)index;
 
--(void)addChildrenObject:(AMUser *)object;
+-(void)addChildrenObject:(AMUserGroupOutlineNode *)object;
 
--(void)insertObject:(AMUser *)object inChildrenAtIndex:(NSUInteger)index;
+-(void)insertObject:(AMUserGroupOutlineNode *)object inChildrenAtIndex:(NSUInteger)index;
 
 -(void)removeObjectFromChildrenAtIndex:(NSUInteger)index;
 
--(void)removeChildrenObject:(AMUser*)object;
+-(void)removeChildrenObject:(AMUserGroupOutlineNode*)object;
 
 -(void)replaceObjectInChildrenAtIndex:(NSUInteger)index withObject:(id)object;
 

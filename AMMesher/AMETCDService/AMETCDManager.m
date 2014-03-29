@@ -64,7 +64,7 @@
     
     if(_peer_heartbeat_interval)
     {
-        [paramsArry addObject:@"-peer-heartbeat-interval"];
+        [paramsArry addObject:@"-peer-heartbeat-timeout"];
         [paramsArry addObject:_peer_heartbeat_interval];
     }
 

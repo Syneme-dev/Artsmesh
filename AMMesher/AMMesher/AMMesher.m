@@ -193,8 +193,8 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             
             [params setObject:_peer_addr forKey:@"-peer-addr"];
             [params setObject:_addr forKey:@"-addr"];
-            [params setObject:[NSString stringWithFormat:@"%d", 500] forKey:@"-peer-heartbeat-timeout"];
-            [params setObject:[NSString stringWithFormat:@"%d", 2000] forKey:@"-peer-election-timeout"];
+            [params setObject:[NSString stringWithFormat:@"%d", ETCD_HeartbeatTimeout] forKey:@"-peer-heartbeat-interval"];
+            [params setObject:[NSString stringWithFormat:@"%d", ETCD_ElectionTimeout] forKey:@"-peer-election-timeout"];
             
             _etcdParams = params;
             [self startETCD:_etcdParams];
@@ -213,8 +213,8 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             [params setObject:_peer_addr forKey:@"-peer-addr"];
             [params setObject:_addr forKey:@"-addr"];
             [params setObject:_peers forKey:@"-peers"];
-            [params setObject:[NSString stringWithFormat:@"%d", 500] forKey:@"-peer-heartbeat-timeout"];
-            [params setObject:[NSString stringWithFormat:@"%d", 2000] forKey:@"-peer-election-timeout"];
+            [params setObject:[NSString stringWithFormat:@"%d", ETCD_HeartbeatTimeout] forKey:@"-peer-heartbeat-interval"];
+            [params setObject:[NSString stringWithFormat:@"%d", ETCD_ElectionTimeout] forKey:@"-peer-election-timeout"];
             
             _etcdParams = params;
             [self startETCD:_etcdParams];
@@ -391,6 +391,12 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
 {
     //this operation should always be in the mehser queue.
     dispatch_async([AMMesher get_mesher_serial_update_queue], ^{
+        
+        NSString* leader = nil;
+        while (leader == nil)
+        {
+            leader = [_etcdApi getLeader];
+        }
         
         int retryLeft = 3;
         

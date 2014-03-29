@@ -8,3 +8,6 @@
 
 #define ETCDServerPort 17001
 #define ETCDClientPort 14001
+
+#define ETCD_HeartbeatTimeout 200
+#define ETCD_ElectionTimeout 10000

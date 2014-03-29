@@ -131,7 +131,7 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
      startService:params
      reply:^(id object){
          [self initMesherDataIntoETCD];
-         [self updateMySelf];
+         [self initMySelf];
          [self getUserGroupData];
      }];
     
@@ -384,12 +384,133 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
                 }
             }
         }
-        
-         _isETCDInit = YES;
     });
 }
 
--(void) updateMySelf
+-(void) initMySelf
+{
+    //this operation should always be in the mehser queue.
+    dispatch_async([AMMesher get_mesher_serial_update_queue], ^{
+        
+        int retryLeft = 3;
+        
+        AMETCDResult* res = nil;
+        NSString* myUserDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", self.myGroupName,self.myUserName];
+        res = [_etcdApi setDir:myUserDir ttl:30 prevExist:NO];
+        if(res.errCode != 0)
+        {
+            while(retryLeft != 0)
+            {
+                res = [_etcdApi setDir:myUserDir ttl:30 prevExist:NO];
+                if(res.errCode == 0)
+                {
+                    retryLeft = 3;
+                    break;
+                }
+                
+                retryLeft--;
+            }
+            
+            if(retryLeft == 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
+        }
+        
+        NSString* ip = [NSString stringWithFormat:@"/Groups/%@/Users/%@/ip",self.myGroupName, self.myUserName];
+        res = [_etcdApi setKey:ip withValue:self.myIp ttl:0];
+        if(res.errCode != 0)
+        {
+            while(retryLeft != 0)
+            {
+                res = [_etcdApi setKey:ip withValue:self.myIp ttl:0];
+                if(res.errCode == 0)
+                {
+                    retryLeft = 3;
+                    break;
+                }
+                
+                retryLeft--;
+            }
+            
+            if(retryLeft == 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
+        }
+        
+        NSString* domain = [NSString stringWithFormat:@"/Groups/%@/Users/%@/domain", self.myGroupName,self.myUserName];
+        res = [_etcdApi setKey:domain withValue:self.myDomain ttl:0];
+        if(res.errCode != 0)
+        {
+            while(retryLeft != 0)
+            {
+                res = [_etcdApi setKey:domain withValue:self.myDomain ttl:0];
+                if(res.errCode == 0)
+                {
+                    retryLeft = 3;
+                    break;
+                }
+                
+                retryLeft--;
+            }
+            
+            if(retryLeft == 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
+        }
+        
+        NSString* status = [NSString stringWithFormat:@"/Groups/%@/Users/%@/status", self.myGroupName, self.myUserName];
+        res = [_etcdApi setKey:status withValue:self.myStatus ttl:0];
+        if(res.errCode != 0)
+        {
+            while(retryLeft != 0)
+            {
+                res = [_etcdApi setKey:status withValue:self.myStatus ttl:0];
+                if(res.errCode == 0)
+                {
+                    retryLeft = 3;
+                    break;
+                }
+                
+                retryLeft--;
+            }
+            
+            if(retryLeft == 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
+        }
+        
+        NSString* dis = [NSString stringWithFormat:@"/Groups/%@/Users/%@/description", self.myGroupName, self.myUserName];
+        res = [_etcdApi setKey:dis withValue:self.myDescription ttl:0];
+        if(res.errCode != 0)
+        {
+            while(retryLeft != 0)
+            {
+                res = [_etcdApi setKey:dis withValue:self.myDescription ttl:0];
+                if(res.errCode == 0)
+                {
+                    retryLeft = 3;
+                    break;
+                }
+                
+                retryLeft--;
+            }
+            
+            if(retryLeft == 0)
+            {
+                [NSException raise:@"Can not init ETCD Data" format:@""];
+            }
+        }
+        
+    _isETCDInit = YES;
+    });
+}
+
+
+-(void)updateMySelf
 {
     if(_isETCDInit == NO)
     {
@@ -409,94 +530,6 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             while(retryLeft != 0)
             {
                 res = [_etcdApi setDir:myUserDir ttl:30 prevExist:YES];
-                if(res.errCode == 0)
-                {
-                    retryLeft = 3;
-                    break;
-                }
-                
-                retryLeft--;
-            }
-            
-            if(retryLeft == 0)
-            {
-                [NSException raise:@"Can not init ETCD Data" format:@""];
-            }
-        }
-        
-        NSString* ip = [NSString stringWithFormat:@"/Groups/%@/Users/%@/ip",self.myGroupName, self.myUserName];
-        res = [_etcdApi setKey:ip withValue:self.myIp ttl:30];
-        if(res.errCode != 0)
-        {
-            while(retryLeft != 0)
-            {
-                res = [_etcdApi setKey:ip withValue:self.myIp ttl:30];
-                if(res.errCode == 0)
-                {
-                    retryLeft = 3;
-                    break;
-                }
-                
-                retryLeft--;
-            }
-            
-            if(retryLeft == 0)
-            {
-                [NSException raise:@"Can not init ETCD Data" format:@""];
-            }
-        }
-        
-        NSString* domain = [NSString stringWithFormat:@"/Groups/%@/Users/%@/domain", self.myGroupName,self.myUserName];
-        res = [_etcdApi setKey:domain withValue:self.myDomain ttl:30];
-        if(res.errCode != 0)
-        {
-            while(retryLeft != 0)
-            {
-                res = [_etcdApi setKey:domain withValue:self.myDomain ttl:30];
-                if(res.errCode == 0)
-                {
-                    retryLeft = 3;
-                    break;
-                }
-                
-                retryLeft--;
-            }
-            
-            if(retryLeft == 0)
-            {
-                [NSException raise:@"Can not init ETCD Data" format:@""];
-            }
-        }
-        
-        NSString* status = [NSString stringWithFormat:@"/Groups/%@/Users/%@/status", self.myGroupName, self.myUserName];
-        res = [_etcdApi setKey:status withValue:self.myStatus ttl:30];
-        if(res.errCode != 0)
-        {
-            while(retryLeft != 0)
-            {
-                res = [_etcdApi setKey:status withValue:self.myStatus ttl:30];
-                if(res.errCode == 0)
-                {
-                    retryLeft = 3;
-                    break;
-                }
-                
-                retryLeft--;
-            }
-            
-            if(retryLeft == 0)
-            {
-                [NSException raise:@"Can not init ETCD Data" format:@""];
-            }
-        }
-        
-        NSString* dis = [NSString stringWithFormat:@"/Groups/%@/Users/%@/description", self.myGroupName, self.myUserName];
-        res = [_etcdApi setKey:dis withValue:self.myDescription ttl:30];
-        if(res.errCode != 0)
-        {
-            while(retryLeft != 0)
-            {
-                res = [_etcdApi setKey:dis withValue:self.myDescription ttl:30];
                 if(res.errCode == 0)
                 {
                     retryLeft = 3;

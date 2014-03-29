@@ -26,10 +26,12 @@
 {
     AMLeaderElecter* _elector;
     AMETCD* _etcdApi;
-    BOOL _isETCDInit;
     NSTimer* _heartbeatTimer;
+    
+    BOOL _isETCDInit;
     BOOL _isRunning;
     BOOL _isLeader;
+    NSDictionary* _etcdParams;
 
     NSXPCInterface* _myETCDService;
     NSXPCConnection* _myETCDServiceConnection;
@@ -191,8 +193,11 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             
             [params setObject:_peer_addr forKey:@"-peer-addr"];
             [params setObject:_addr forKey:@"-addr"];
+            [params setObject:[NSString stringWithFormat:@"%d", 500] forKey:@"-peer-heartbeat-timeout"];
+            [params setObject:[NSString stringWithFormat:@"%d", 2000] forKey:@"-peer-election-timeout"];
             
-            [self startETCD:params];
+            _etcdParams = params;
+            [self startETCD:_etcdParams];
         }
         else if(newState == 4)//Joined
         {
@@ -208,8 +213,11 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             [params setObject:_peer_addr forKey:@"-peer-addr"];
             [params setObject:_addr forKey:@"-addr"];
             [params setObject:_peers forKey:@"-peers"];
+            [params setObject:[NSString stringWithFormat:@"%d", 500] forKey:@"-peer-heartbeat-timeout"];
+            [params setObject:[NSString stringWithFormat:@"%d", 2000] forKey:@"-peer-election-timeout"];
             
-            [self startETCD:params];
+            _etcdParams = params;
+            [self startETCD:_etcdParams];
         }
     }
     else
@@ -243,6 +251,8 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
                 leader = [_etcdApi getLeader];
             }
             
+            int retryTimes = 0;
+            
             //For all these public resource, we need a distribute lock, etcd api
             AMETCDResult* res = [_etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
             if(res.errCode != 0)
@@ -253,7 +263,20 @@ dispatch_queue_t _mesher_serial_query_queue = NULL;
             res = [_etcdApi setDir:@"/Groups/Artsmesh/" ttl:0 prevExist:NO];
             if(res.errCode != 0)
             {
-                [NSException raise:@"Can not init ETCD Data" format:@""];
+                while (retryTimes < 3)
+                {
+                    res = [_etcdApi setDir:@"/Groups/Artsmesh/" ttl:0 prevExist:NO];
+                    if(res.errCode == 0)
+                    {
+                        retryTimes = 0;
+                        break;
+                    }
+                }
+                
+                //[self stopETCD];
+                //self startETCD:<#(NSDictionary *)#>
+                
+                //[NSException raise:@"Can not init ETCD Data" format:@""];
             }
             
             res = [_etcdApi setDir:@"/Groups/Artsmesh/Users/" ttl:0 prevExist:NO];

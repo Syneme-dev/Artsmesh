@@ -29,6 +29,7 @@ NSOperationQueue* _etcdOperQueue = nil;
 
     BOOL _isMesher;
     BOOL _etcdIsRunning;
+    BOOL _isErr;
 }
 
 
@@ -206,6 +207,9 @@ NSOperationQueue* _etcdOperQueue = nil;
     }
     else
     {
+        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+        
+        _isErr = YES;
         _etcdIsRunning = NO;
     }
 }

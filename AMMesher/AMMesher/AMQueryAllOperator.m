@@ -58,6 +58,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryAllOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }

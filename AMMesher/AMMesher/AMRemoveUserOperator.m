@@ -37,7 +37,7 @@
     }
     
     return self;
-
+    
 }
 
 -(void)main
@@ -63,6 +63,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(RemoveUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -72,7 +73,7 @@
     NSString* groupUsersDir = [NSString stringWithFormat:@"/Groups/%@/Users", _groupname];
     for (; retry < 3; retry++)
     {
-       // if(self.isCancelled){return;}
+        // if(self.isCancelled){return;}
         
         AMETCDResult* res = [_etcdApi listDir:groupUsersDir recursive:NO];
         if(res != nil && res.errCode == 0)
@@ -92,6 +93,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(RemoveUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -112,6 +114,7 @@
             if (retry == 3)
             {
                 _isResultOK = NO;
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(RemoveUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
         }

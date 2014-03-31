@@ -76,6 +76,7 @@
             if (retry == 3)
             {
                 _isResultOK = NO;
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
         }
@@ -97,6 +98,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -117,6 +119,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -137,6 +140,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -157,6 +161,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -176,6 +181,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }

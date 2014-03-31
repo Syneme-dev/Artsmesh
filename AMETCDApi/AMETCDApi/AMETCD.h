@@ -11,24 +11,14 @@
 
 @interface AMETCD : NSObject
 
-@property NSString* leaderAddr;
-@property NSString* nodeIp;
+@property NSString* serverIp;
 @property int serverPort;
 @property int clientPort;
-@property NSString* nodeName;
 
+-(id)initWithService:(NSString*)serverIP serverPort:(int)sp clientPort:(int)cp ;
 
-//the default ip is host ip,
-//client port:4001
-//server port: 7001
--(id)init;
-
-//now assume that etcd is in folder /usr/bin/etcd
-//will be modified when we designed the physic file path
--(BOOL)startETCD;
-
-//will kill and running etcd instance and run ours
--(void)stopETCD;
+//get the cluster's leader
+-(NSString*)getLeader;
 
 //get a key command
 //the result is in AMETCDResult, see the AMETCDResult to
@@ -37,7 +27,8 @@
 
 //set a key
 -(AMETCDResult*)setKey:(NSString*)key
-             withValue:(NSString*)value;
+             withValue:(NSString*)value
+               ttl:(int)ttl;
 
 //wait the key changing until timeout
 //the index_in is the global index we want to wait
@@ -56,7 +47,7 @@
 
 //create a dir, if the dir is exist, the return
 //resule errCode will not be 0
--(AMETCDResult*)createDir:(NSString*)dirPath;
+-(AMETCDResult*)setDir:(NSString*)dirPath ttl:(int)ttl prevExist:(BOOL)bUpdate;
 
 //delete a dir. if the recursive is NO, only
 //delete empty dir, if the recursive is YES
@@ -71,6 +62,9 @@
 -(AMETCDResult*)listDir:(NSString*)dirPath
               recursive:(BOOL)bRecursive;
 
+//watch a dir
+-(AMETCDResult*)watchDir:(NSString*)dirPath
+                 timeout:(int)seconds;
 
 //watch a dir
 //the index meaning is the same as watch a key
@@ -78,5 +72,10 @@
                fromIndex:(int)index_in
             acturalIndex:(int*)index_out
                  timeout:(int)seconds;
+
+
+//remove peers
+-(void)removePeers:(NSString*)peerName;
+
 
 @end

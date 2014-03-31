@@ -7,91 +7,95 @@
 //
 
 #import "AMETCD.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 @implementation AMETCD
 {
-    NSTask* _etcdTask;
 }
 
-
--(id)init
+-(id)initWithService:(NSString*)serverIP serverPort:(int)sp clientPort:(int)cp
 {
     if(self = [super init])
     {
-        NSHost* host = [NSHost currentHost];
-        self.nodeIp = [host address];
-        self.serverPort = 7001;
-        self.clientPort = 4001;
-        self.leaderAddr = nil;
-        
-        self.nodeName = [host name];
+        self.serverIp = serverIP;
+        self.serverPort = sp;
+        self.clientPort = cp;
     }
     
     return self;
 }
 
 
--(BOOL)startETCD
+
+-(NSString*)rootKey
 {
-    if(_etcdTask != nil)
+    return [NSString stringWithFormat:@"http://%@:%d/v2/keys",
+                         self.serverIp,
+                         self.clientPort];
+}
+
+
+-(NSMutableString*)getRequestURL:(NSString*)key withParams: (NSString*)params
+{
+    NSMutableString* requestURL = [NSMutableString stringWithString:[self rootKey]];
+    
+    if ([key hasPrefix:@"/"])
     {
-        return YES;
-    }
-    
-    _etcdTask = [[NSTask alloc] init];
-//    NSBundle* mainBundle = [NSBundle mainBundle];
-//    _etcdTask.launchPath = [mainBundle pathForAuxiliaryExecutable:@"etcd"];
-    
-    _etcdTask.launchPath = @"/usr/bin/etcd";
-    
-    NSString* peerAddr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.serverPort];
-    NSString* addr = [NSString stringWithFormat:@"%@:%d", self.nodeIp, self.clientPort];
-    NSString* dataDir = self.nodeName;
-    NSString* etcdName = self.nodeName;
-    
-    NSString* leaderAddr;
-    if(self.leaderAddr != nil)
-    {
-        leaderAddr = [NSString stringWithFormat:@"-peers:%@", self.leaderAddr];
+        [requestURL appendString:key];
     }
     else
     {
-        leaderAddr = @"";
+        [requestURL appendString:@"/"];
+        [requestURL appendString:key];
     }
     
-    NSString* args = [NSString stringWithFormat:@" -peer-addr %@ -addr %@ -data-dir %@ -name %@ %@", peerAddr, addr, dataDir, etcdName, leaderAddr];
+    if (params != nil)
+    {
+        [requestURL appendString:@"?"];
+        [requestURL appendString:params];
+    }
     
-    _etcdTask.arguments = @[args];
-    [_etcdTask launch];
-
-    
-    return YES;
+    return requestURL;
 }
 
 
--(void)stopETCD
+-(NSString*)getLeader
 {
-    [_etcdTask terminate];
-    [_etcdTask waitUntilExit];
+    NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/v2/leader",
+                             self.serverIp,
+                             self.clientPort];
     
-    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"etcd", nil]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    sleep(1);
-    _etcdTask = nil;
+    [request setURL:[NSURL URLWithString:requestURL]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    if([resultLog hasPrefix:@"http://"])
+    {
+        return [resultLog substringFromIndex:7];
+    }
+    else
+    {
+        return resultLog;
+    }
 }
+
 
 
 -(AMETCDResult*)getKey:(NSString*)key
 {
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         key];
+    NSMutableString* requestURL = [self getRequestURL:key withParams:nil];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setURL:[NSURL URLWithString:requestURL]];
     [request setHTTPMethod:@"GET"];
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request
@@ -106,14 +110,24 @@
 
 
 
--(AMETCDResult*)setKey:(NSString*)key withValue:(NSString*)value;
+-(AMETCDResult*)setKey:(NSString*)key
+             withValue:(NSString*)value
+               ttl:(int)ttl
 {
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         key];
-    NSMutableData* httpBody = [self createSetKeyHttpBody:@"value" withValue:value];
+    
+    NSString* urlStr  = [self getRequestURL:key withParams:nil];
+    
+    
+    NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
+    [bodyDic setObject:value forKey:@"value"];
+    
+    if (ttl > 0)
+    {
+        [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
+    
+    NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
     
@@ -138,7 +152,6 @@
 }
 
 
-
 -(AMETCDResult*)watchKey:(NSString*)key
                    fromIndex:(int)index_in
                 acturalIndex:(int*)index_out
@@ -147,15 +160,12 @@
 {
     
    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
-
+    
+    NSString* params = [NSString stringWithFormat:@"wait=true&waitIndex=%d", index_in];
+    NSString* urlStr = [self getRequestURL:key withParams:params];
+    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?wait=true&waitIndex=%d",
-                         self.nodeIp,
-                         self.clientPort,
-                         key,
-                         index_in];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
-
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -198,10 +208,7 @@
 -(AMETCDResult*)deleteKey: (NSString*) key
 {
     //curl -L http://127.0.0.1:4001/v2/keys/message -XDELETE
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         key];
+    NSString* urlStr  = [self getRequestURL:key withParams:nil];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -220,19 +227,30 @@
 }
 
 
--(AMETCDResult*)createDir:(NSString*)dirPath
+-(AMETCDResult*)setDir:(NSString*)dirPath ttl:(int)ttl prevExist:(BOOL)bUpdate
 {
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
+    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath];
-    NSMutableData* httpBody = [self createSetKeyHttpBody:@"dir" withValue:@"true"];
+    
+    NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
+    [bodyDic setObject:@"true" forKey:@"dir"];
+
+    if (ttl > 0)
+    {
+        [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
+    
+    if(bUpdate == YES)
+    {
+        [bodyDic setObject:@"true" forKey:@"prevExist"];
+    }
+    
+    NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
+    
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
     [request setURL:[NSURL URLWithString:urlStr]];
     [request setHTTPMethod:@"PUT"];
     [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
@@ -256,23 +274,8 @@
 {
     //curl -L http://127.0.0.1:4001/v2/keys/dir?recursive=true -XDELETE
     
-    NSString* urlStr;
-    if(bRecursive == YES)
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath];
-    }
-    else
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?dir=true",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-
-    }
-    
+    NSString* params = bRecursive ? @"recursive=true" : @"dir=true";
+    NSString* urlStr = [self getRequestURL:dirPath withParams:params];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -292,21 +295,8 @@
 -(AMETCDResult*)listDir:(NSString*)dirPath
               recursive:(BOOL)bRecursive;
 {
-    NSString* urlStr;
-    if(bRecursive == YES)
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-    }
-    else
-    {
-        urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@",
-                   self.nodeIp,
-                   self.clientPort,
-                   dirPath];
-    }
+    NSString* params = bRecursive ? @"recursive=true" : nil;
+    NSString* urlStr = [self getRequestURL:dirPath withParams:params ];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
@@ -325,18 +315,14 @@
 
 
 -(AMETCDResult*)watchDir:(NSString*)dirPath
-               fromIndex:(int)index_in
-            acturalIndex:(int*)index_out
                  timeout:(int)seconds
 {
     // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
     
+    NSString* params = [NSString stringWithFormat:@"recursive=true&wait=true"];
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:params];
+    
     NSString* headerfield = @"application/x-www-form-urlencoded";
-    NSString* urlStr  = [NSString stringWithFormat:@"http://%@:%d/v2/keys%@?recursive=true&wait=true&waitIndex=%d",
-                         self.nodeIp,
-                         self.clientPort,
-                         dirPath,
-                         index_in];
     NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
     
     
@@ -349,7 +335,49 @@
     
     if(seconds == 0)
     {
-        [request setTimeoutInterval: 3600*100];
+        [request setTimeoutInterval: 30];
+    }
+    else
+    {
+        [request setTimeoutInterval:seconds];
+    }
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    //Log will remove
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    AMETCDResult* result = [[AMETCDResult alloc] initWithData:returnData];
+    return result;
+}
+
+
+-(AMETCDResult*)watchDir:(NSString*)dirPath
+               fromIndex:(int)index_in
+            acturalIndex:(int*)index_out
+                 timeout:(int)seconds
+{
+    // http://127.0.0.1:4001/v2/keys/foo?wait=true&waitIndex=7'
+    
+    NSString* params = [NSString stringWithFormat:@"recursive=true&wait=true&waitIndex=%d", index_in];
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:params];
+    
+     NSString* headerfield = @"application/x-www-form-urlencoded";
+    NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"GET"];
+    [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headerDictionary];
+    
+    if(seconds == 0)
+    {
+        [request setTimeoutInterval: 30];
     }
     else
     {
@@ -367,7 +395,7 @@
     
     if(result != nil && result.node != nil)
     {
-        *index_out = result.node.createdIndex;
+        *index_out = (result.node.modifiedIndex > result.node.createdIndex )? result.node.modifiedIndex : result.node.createdIndex ;
     }
     else
     {
@@ -378,20 +406,52 @@
 }
 
 
+-(void)removePeers:(NSString*)peerName
+{
+    //http://127.0.0.1:7001/remove/node1 -X DELETE
+    
+    
+    NSString* requestURL =  [NSString stringWithFormat:@"http://%@:%d/remove/%@",
+                             self.serverIp,
+                             self.serverPort,
+                             peerName];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    [request setURL:[NSURL URLWithString:requestURL]];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+}
 
--(NSMutableData*)createSetKeyHttpBody: (NSString*)key withValue:(NSString*)val
+
+
+-(NSMutableData*)createSetKeyHttpBody: (NSDictionary*) keyVals
 {
     NSMutableData* body = [NSMutableData data];
-    
-    key = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    key = [key stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-    key = [key stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-    
-    val = [val stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    val = [val stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
-    val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-    
-    [body appendData:[[NSString stringWithFormat:@"%@=%@", key, val] dataUsingEncoding:NSUTF8StringEncoding]];
+    for (NSString* k in keyVals)
+    {
+        if([body length] > 0)
+        {
+            [body appendData:[@"&" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        NSString* v = [keyVals objectForKey:k];
+        NSString* key = [k stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        key = [key stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+        key = [key stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+        
+        NSString* val = [v stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        val = [val stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+        val = [val stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+        
+        [body appendData:[[NSString stringWithFormat:@"%@=%@", key, val] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
     
     return body;
 }

@@ -12,6 +12,9 @@
 static NSBundle *defaultBundle = nil;
 
 @implementation MainPlugin
+{
+    MainViewController* _mainViewController;
+}
 
 
 # pragma mark
@@ -21,6 +24,16 @@ static NSBundle *defaultBundle = nil;
 
 - (NSString *)displayName {
     return @"Groups";
+}
+
+-(BOOL)canQuit
+{
+    if(_mainViewController)
+    {
+        [_mainViewController StopEverything];
+    }
+    
+    return YES;
 }
 
 - (id)init:(id <AMPluginAppDelegate>)amAppDelegateProtocol bundle:(NSBundle *)bundle {
@@ -35,8 +48,8 @@ static NSBundle *defaultBundle = nil;
 }
 
 - (NSViewController *)createMainView {
-    MainViewController *viewController = [[MainViewController alloc] initWithNibName:@"MainView" bundle:defaultBundle];
-    return viewController;
+    _mainViewController = [[MainViewController alloc] initWithNibName:@"MainView" bundle:defaultBundle];
+    return _mainViewController;
 }
 
 

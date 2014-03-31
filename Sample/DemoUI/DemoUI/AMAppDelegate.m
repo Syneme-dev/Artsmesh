@@ -15,15 +15,24 @@
 #import "HelloWorldConst.h"
 #import "AMPanelViewController.h"
 #import "UserGroupModuleConst.h"
+#import "AMMesher/AMMesher.h"
+#import "AMETCDPreferenceViewController.h"
+#import "AMUserViewController.h"
+
 
 static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate
+{
+    AMMesher* _globalMesher;
+//    AMETCD* _globalETCD;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
-    [self showTestPanel];   //TODO:to be deleted as test code.
+   // [self showTestPanel];   //TODO:to be deleted as test code.
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
@@ -33,12 +42,31 @@ static NSMutableDictionary *allPlugins = nil;
     [self writePluginDataToMesher];
 }
 
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
+    id userPluginClass = allPlugins[UserGroupPluginName];
+    [userPluginClass canQuit];
+    
+    [_globalMesher stopLocalMesher];
+    
+    
+}
+
 - (void)connectMesher {
     //TODO:
 }
 
 - (void)startMesher {
     //TODO:
+    
+    _globalMesher = [[AMMesher alloc] init];
+    [_globalMesher startLoalMesher];
+   
+//    [_globalMesher addObserver:self
+//                    forKeyPath:@"mesherName"
+//                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//                       context:Nil];
+    
 }
 
 - (void)showPreferencePanel {
@@ -58,19 +86,43 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
+    [self loadUserGroupPanel];
+    [self showTestPanel];
+    [self loadETCDPreferencePanel];
+    [self loadUserPanel];
+    
+    
+}
 
+-(void)loadUserGroupPanel{
+    NSRect screenSize = [[NSScreen mainScreen] frame];
     id userPluginClass = allPlugins[UserGroupPluginName];
-
     NSViewController *userGroupViewController = [userPluginClass createMainView];
-    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 300 - 30, 300, 300);
+    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 365, 430);
     [self.window.contentView addSubview:userGroupViewController.view];
 }
 
-- (void)showTestPanel {
+-(void)loadETCDPreferencePanel{
     NSRect screenSize = [[NSScreen mainScreen] frame];
-    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 300, 300);
-    [self.window.contentView addSubview:panelViewController.view];
+    AMETCDPreferenceViewController *etcdPreference = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    etcdPreference.view.frame = NSMakeRect(410.0f, screenSize.size.height - 700 - 30, 600, 300);
+    [self.window.contentView addSubview:etcdPreference.view];
+}
+
+-(void)loadUserPanel
+{
+    NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
+    userViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 400, 300);
+    [self.window.contentView addSubview:userViewController.view];
+    
+}
+
+
+- (void)showTestPanel {
+    
+    
+    
 }
 
 - (NSMutableDictionary *)loadPlugins {
@@ -100,6 +152,25 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (AMPreferenceManager *)sharedPreferenceManger {
     return [AMPreferenceManager defaultShared];
+}
+
+
+#pragma mark -
+#pragma mark KVO
+-(void)observeValueForKeyPath:(NSString *)keyPath
+                     ofObject:(id)object
+                       change:(NSDictionary *)change
+                      context:(void *)context
+{
+    if([keyPath isEqualToString:@"mesherName"]){
+        NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
+        NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
+        
+        self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];
+        return;
+    }
+    
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 

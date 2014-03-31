@@ -9,37 +9,19 @@
 #import <Foundation/Foundation.h>
 
 
-@interface AMMesher : NSObject
-{
-    NSString* myGroupName;
-    NSString* myUserName;
-    NSString* myDomain;
-    NSString* myDescription;
-    NSString* myStatus;
-    NSString* myIp;
-    NSMutableArray* groups;
-}
+@protocol AMMesherOperationProtocol;
+@interface AMMesher : NSObject<AMMesherOperationProtocol>
 
--(NSString*)myGroupName;
--(void)setMyGroupName:(NSString*)name;
+@property  (atomic) NSString* myGroupName;
+@property  (atomic) NSString* myUserName;
+@property  (atomic) NSString* myDomain;
+@property  (atomic) NSString* myDescription;
+@property  (atomic) NSString* myStatus;
+@property  (atomic) NSString* myIp;
 
--(NSString*)myUserName;
--(void)setMyUserName;
+@property  (atomic) NSMutableArray* groups;
 
--(NSString*)myDomain;
--(void)setMyDomain;
-
--(NSString*)myDescription;
--(void)setMyDescription;
-
--(NSString*)myStatus;
--(void)getMyStatus;
-
--(NSString*)myIp;
--(void)setMyIP;
-
-+(dispatch_queue_t) get_mesher_serial_query_queue;
-+(dispatch_queue_t) get_mesher_serial_update_queue;
++(NSOperationQueue*)sharedEtcdOperQueue;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;

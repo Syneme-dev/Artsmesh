@@ -93,7 +93,6 @@
 }
 
 
-
 -(void)joinLocalMesher:(int) index
 {
     if(index >= [_allMesherServices count])

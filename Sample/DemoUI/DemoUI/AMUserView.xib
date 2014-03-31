@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMUserViewController">
             <connections>
                 <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>

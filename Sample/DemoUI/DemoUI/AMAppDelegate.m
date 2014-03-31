@@ -17,6 +17,7 @@
 #import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
 #import "AMETCDPreferenceViewController.h"
+#import "AMUserViewController.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -88,6 +89,7 @@ static NSMutableDictionary *allPlugins = nil;
     [self loadUserGroupPanel];
     [self showTestPanel];
     [self loadETCDPreferencePanel];
+    [self loadUserPanel];
     
     
 }
@@ -103,16 +105,21 @@ static NSMutableDictionary *allPlugins = nil;
 -(void)loadETCDPreferencePanel{
     NSRect screenSize = [[NSScreen mainScreen] frame];
     AMETCDPreferenceViewController *etcdPreference = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    etcdPreference.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 600, 300);
+    etcdPreference.view.frame = NSMakeRect(410.0f, screenSize.size.height - 700 - 30, 600, 300);
     [self.window.contentView addSubview:etcdPreference.view];
+}
+
+-(void)loadUserPanel
+{
+    NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
+    userViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 400, 300);
+    [self.window.contentView addSubview:userViewController.view];
+    
 }
 
 
 - (void)showTestPanel {
-    NSRect screenSize = [[NSScreen mainScreen] frame];
-    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 400, 300);
-    [self.window.contentView addSubview:panelViewController.view];
     
     
     

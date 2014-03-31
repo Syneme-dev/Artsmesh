@@ -29,10 +29,11 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
-		AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */; };
+		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
+		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,13 +100,15 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
-		AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
+		AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserView.xib; sourceTree = "<group>"; };
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
+		D41155E718E9539B00C84092 /* AMUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserViewController.h; sourceTree = "<group>"; };
+		D41155E818E9539B00C84092 /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserViewController.m; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,7 +199,7 @@
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 				AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */,
 				AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */,
-				AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */,
+				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				268E7DD518D183F600B0F710 /* AMWindow.h */,
@@ -204,6 +207,8 @@
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
 				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
+				D41155E718E9539B00C84092 /* AMUserViewController.h */,
+				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -321,7 +326,7 @@
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				2692DB8B18E91D7100553924 /* etcd in Resources */,
-				AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */,
+				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 			);
@@ -344,6 +349,7 @@
 			files = (
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

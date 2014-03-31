@@ -16,6 +16,7 @@
 		268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DE418D1864700B0F710 /* UserGroupModule.bundle */; };
 		2692DB8B18E91D7100553924 /* etcd in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
 		2692DB8C18E91D7A00553924 /* etcd in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
+		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
@@ -75,6 +76,7 @@
 		268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramewrok.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramewrok.framework; sourceTree = "<group>"; };
 		268E7DE418D1864700B0F710 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = UserGroupModule.bundle; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UserGroupModule.bundle; sourceTree = "<group>"; };
 		2692DB8A18E91D7100553924 /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
+		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26ED34C718CFDFB200E1B791 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,7 @@
 				AF9B4E7418C829AE00EEBD6C /* AMPanelViewController.m */,
 				268E7DD518D183F600B0F710 /* AMWindow.h */,
 				268E7DD618D183F600B0F710 /* AMWindow.m */,
+				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
+				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				2692DB8B18E91D7100553924 /* etcd in Resources */,
 				AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */,

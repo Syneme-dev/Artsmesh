@@ -86,6 +86,7 @@ static NSMutableDictionary *allPlugins = nil;
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
     [self loadUserGroupPanel];
+    [self showTestPanel];
     
     
 }
@@ -102,8 +103,14 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showTestPanel {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 300, 300);
+    panelViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 400, 300);
     [self.window.contentView addSubview:panelViewController.view];
+    
+    
+    NSRect screenSize2 = [[NSScreen mainScreen] frame];
+    AMPanelViewController *panelViewController2 = [[AMPanelViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    panelViewController.view.frame = NSMakeRect(410.0f, screenSize2.size.height - 300 - 30, 400, 300);
+    [self.window.contentView addSubview:panelViewController2.view];
 }
 
 - (NSMutableDictionary *)loadPlugins {

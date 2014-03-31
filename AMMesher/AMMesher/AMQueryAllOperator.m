@@ -16,6 +16,7 @@
     AMETCD* _etcdApi;
 }
 
+
 -(id)initWithParameter:(NSString*)hostAddr
             serverPort:(NSString*)cp
               delegate:(id<AMMesherOperationProtocol>)delegate
@@ -102,6 +103,7 @@
                     
                     AMUser* newUser = [[AMUser alloc] init];
                     newUser.name = [pathes objectAtIndex:4];
+                    newUser.groupName = newGroup.name;
                     
                     for (AMETCDNode* userPorpertyNode in userNode.nodes)
                     {

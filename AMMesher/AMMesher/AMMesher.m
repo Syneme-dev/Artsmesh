@@ -25,9 +25,10 @@ NSOperationQueue* _etcdOperQueue = nil;
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
-    NSTimer* _heartbeatTimer;
+    NSTimer* _ttlTimer;
 
     BOOL _isMesher;
+    BOOL _etcdIsRunning;
 }
 
 
@@ -49,6 +50,7 @@ NSOperationQueue* _etcdOperQueue = nil;
     if (self = [super init])
     {
         _isMesher = NO;
+        _etcdIsRunning = NO;
     
         self.myGroupName = @"Artsmesh";
         self.myUserName = [AMNetworkUtils getHostName];
@@ -86,45 +88,6 @@ NSOperationQueue* _etcdOperQueue = nil;
 }
 
 
-#pragma mark -
-#pragma mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([keyPath isEqualToString:@"state"])
-    {
-        int oldState = [[change objectForKey:@"old"] intValue];
-        int newState = [[change objectForKey:@"new"] intValue];
-        
-        NSLog(@" old state is %d", oldState);
-        NSLog(@" new state is %d", newState);
-        
-        if(newState == 2)//Published
-        {
-            _isMesher = YES;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
-            
-            [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
-        
-        }
-        else if(newState == 4)//Joined
-        {
-            _isMesher = NO;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
-            
-            [self startMesheeLaunchProcess];
-        }
-    }
-    else
-    {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
-    }
-}
 
 
 -(void)startMesherLaunchProcess
@@ -155,9 +118,16 @@ NSOperationQueue* _etcdOperQueue = nil;
     
     [addSelfOper addDependency:etcdInitOper];
     
+    AMQueryAllOperator* queryOper = [[AMQueryAllOperator alloc] initWithParameter:self.myIp
+                                                                       serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
+                                                                         delegate:self];
+    
+    [queryOper addDependency:addSelfOper];
+    
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
 -(void)startMesheeLaunchProcess
@@ -185,6 +155,88 @@ NSOperationQueue* _etcdOperQueue = nil;
 }
 
 
+#pragma mark -
+#pragma mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([keyPath isEqualToString:@"state"])
+    {
+        int oldState = [[change objectForKey:@"old"] intValue];
+        int newState = [[change objectForKey:@"new"] intValue];
+        
+        NSLog(@" old state is %d", oldState);
+        NSLog(@" new state is %d", newState);
+        
+        if(newState == 2)//Published
+        {
+            _isMesher = YES;
+            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            
+            [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
+            
+        }
+        else if(newState == 4)//Joined
+        {
+            _isMesher = NO;
+            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            
+            [self startMesheeLaunchProcess];
+        }
+    }
+    else
+    {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+    }
+}
 
+
+#pragma mark -
+#pragma mark AMMesherOperationProtocol
+- (void)ETCDLauncherDidFinish:(AMETCDLauncher *)launcher;
+{
+    if (launcher.isResultOK)
+    {
+        _etcdIsRunning = YES;
+    }
+    else
+    {
+        _etcdIsRunning = NO;
+    }
+}
+
+
+- (void)ETCDInitializerDidFinish:(AMETCDInitializer *)initializer
+{
+    
+}
+
+- (void)AddUserOperatorDidFinish:(AMAddUserOperator *)addOper
+{
+
+}
+
+- (void)RemoveUserOperatorDidFinish:(AMRemoveUserOperator *)removeOper
+{
+    
+}
+
+- (void)UpdateUserOperatorDidFinish:(AMUpdateUserOperator *)UpdataOper
+{
+    
+}
+
+- (void)QueryAllOperatorDidFinish:(AMQueryAllOperator *)queryOper
+{
+    if(queryOper.isResultOK)
+    {
+        self.groups = queryOper.usergroups;
+    }
+}
 
 @end

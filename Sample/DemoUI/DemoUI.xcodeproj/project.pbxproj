@@ -30,9 +30,9 @@
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
 		AF9B4E6F18C826ED00EEBD6C /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */; };
-		AF9B4E7518C829AE00EEBD6C /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9B4E7418C829AE00EEBD6C /* AMUserViewController.m */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
+		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,11 +101,11 @@
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
-		AF9B4E7418C829AE00EEBD6C /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserViewController.m; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
+		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,7 +198,7 @@
 				AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */,
 				AF9B4E6E18C826ED00EEBD6C /* AMPanelView.xib */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
-				AF9B4E7418C829AE00EEBD6C /* AMUserViewController.m */,
+				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				268E7DD518D183F600B0F710 /* AMWindow.h */,
 				268E7DD618D183F600B0F710 /* AMWindow.m */,
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
@@ -342,8 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF9B4E7518C829AE00EEBD6C /* AMUserViewController.m in Sources */,
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
+				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

@@ -32,7 +32,6 @@ static NSMutableDictionary *allPlugins = nil;
     
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
-   // [self showTestPanel];   //TODO:to be deleted as test code.
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
@@ -46,10 +45,7 @@ static NSMutableDictionary *allPlugins = nil;
 {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    
     [_globalMesher stopLocalMesher];
-    
-    
 }
 
 - (void)connectMesher {
@@ -86,44 +82,52 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)showDefaultWindow {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     [self.window setFrame:screenSize display:YES ];
-    [self loadUserGroupPanel];
-    [self showTestPanel];
+    [self loadGroupsPanel];
     [self loadETCDPreferencePanel];
     [self loadUserPanel];
-    
-    
 }
 
--(void)loadUserGroupPanel{
-    NSRect screenSize = [[NSScreen mainScreen] frame];
+
+-(void)loadGroupsPanel{
+     NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMPanelViewController *groupViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    groupViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 720 - 60, 300.0f, 400.0f);
+    [self.window.contentView addSubview:groupViewController.view];
+    [groupViewController.titleView setStringValue:@"Groups"];
     id userPluginClass = allPlugins[UserGroupPluginName];
     NSViewController *userGroupViewController = [userPluginClass createMainView];
-    userGroupViewController.view.frame = NSMakeRect(10.0f, screenSize.size.height - 500 - 30, 365, 430);
-    [self.window.contentView addSubview:userGroupViewController.view];
+    userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
+    [groupViewController.view addSubview:userGroupViewController.view];
 }
 
 -(void)loadETCDPreferencePanel{
     NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMPanelViewController *preViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    
+    [self.window.contentView addSubview:preViewController.view];
+    [preViewController.titleView setStringValue:@"Preference"];
+    preViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 720 - 60, 600.0f, 720.0f);
+
+    
+    
     AMETCDPreferenceViewController *etcdPreference = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    etcdPreference.view.frame = NSMakeRect(410.0f, screenSize.size.height - 700 - 30, 600, 300);
-    [self.window.contentView addSubview:etcdPreference.view];
+    etcdPreference.view.frame = NSMakeRect(0,360, 600, 300);
+    [preViewController.view addSubview:etcdPreference.view];
 }
 
 -(void)loadUserPanel
 {
     NSRect screenSize = [[NSScreen mainScreen] frame];
+    AMPanelViewController *userPanelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    userPanelViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 300 - 60, 300.0f, 300.0f);
+    [self.window.contentView addSubview:userPanelViewController.view];
+    [userPanelViewController.titleView setStringValue:@"User"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
-    userViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 300 - 30, 400, 300);
-    [self.window.contentView addSubview:userViewController.view];
+    userViewController.view.frame = NSMakeRect(0,0, 400, 300);
+    [userPanelViewController.view addSubview:userViewController.view];
     
 }
 
-
-- (void)showTestPanel {
-    
-    
-    
-}
 
 - (NSMutableDictionary *)loadPlugins {
     NSBundle *main = [NSBundle mainBundle];

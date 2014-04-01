@@ -16,6 +16,7 @@
     AMETCD* _etcdApi;
 }
 
+
 -(id)initWithParameter:(NSString*)hostAddr
             serverPort:(NSString*)cp
               delegate:(id<AMMesherOperationProtocol>)delegate
@@ -39,6 +40,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Querying user group information...");
+    
     int retry = 0;
     
     NSString* rootDir = @"/Groups/";
@@ -57,6 +60,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryAllOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -102,6 +106,7 @@
                     
                     AMUser* newUser = [[AMUser alloc] init];
                     newUser.name = [pathes objectAtIndex:4];
+                    newUser.groupName = newGroup.name;
                     
                     for (AMETCDNode* userPorpertyNode in userNode.nodes)
                     {

@@ -47,6 +47,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Updating user information...");
+    
     int retry = 0;
     
     NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];
@@ -69,6 +71,7 @@
             if (retry == 3)
             {
                 _isResultOK = NO;
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UpdateUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
         }

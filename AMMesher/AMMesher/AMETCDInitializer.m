@@ -35,6 +35,8 @@
 {
     if(self.isCancelled){return;}
     
+    NSLog(@"Initializing ETCD data...");
+    
     int retry = 0;
     for (; retry < 3; retry++)
     {
@@ -50,6 +52,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -68,6 +71,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -86,6 +90,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -104,6 +109,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }

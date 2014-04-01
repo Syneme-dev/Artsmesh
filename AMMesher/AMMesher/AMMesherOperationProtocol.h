@@ -14,6 +14,8 @@
 @class AMRemoveUserOperator;
 @class AMUpdateUserOperator;
 @class AMQueryAllOperator;
+@class AMUserTTLOperator;
+
 
 @protocol AMMesherOperationProtocol <NSObject>
 
@@ -23,5 +25,6 @@
 - (void)RemoveUserOperatorDidFinish:(AMRemoveUserOperator *)removeOper;
 - (void)UpdateUserOperatorDidFinish:(AMUpdateUserOperator *)UpdataOper;
 - (void)QueryAllOperatorDidFinish:(AMQueryAllOperator *)queryOper;
+- (void)UserTTLOperatorDidFinish:(AMUserTTLOperator *)queryOper;
 
 @end

@@ -47,6 +47,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Updating user information...");
+    
     int retry = 0;
     
     NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];

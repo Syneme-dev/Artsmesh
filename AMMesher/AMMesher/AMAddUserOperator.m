@@ -56,6 +56,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Adding User...");
+    
     int retry = 0;
     
     NSString* myGroupDir = [NSString stringWithFormat:@"/Groups/%@/", _groupname];

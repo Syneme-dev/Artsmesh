@@ -19,6 +19,7 @@
 #import "AMQueryAllOperator.h"
 #import "AMRemoveUserOperator.h"
 #import "AMUserTTLOperator.h"
+#import "AMETCDKiller.h"
 
 
 NSOperationQueue* _etcdOperQueue = nil;
@@ -91,6 +92,17 @@ NSOperationQueue* _etcdOperQueue = nil;
     }
     
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+    AMRemoveUserOperator* removeOper = [[AMRemoveUserOperator alloc]
+                                        initWithParameter:self.myIp
+                                        serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
+                                        username:self.myUserName
+                                        groupname:self.myGroupName
+                                        delegate:self];
+    [removeOper start];
+    
+    AMETCDKiller* etcdKiller = [[AMETCDKiller alloc] init];
+    [etcdKiller start];
+    
     
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
@@ -186,7 +198,7 @@ NSOperationQueue* _etcdOperQueue = nil;
 
 
 #pragma mark -
-#pragma mark KVO
+#pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath
                        ofObject:(id)object
                          change:(NSDictionary *)change
@@ -251,7 +263,12 @@ NSOperationQueue* _etcdOperQueue = nil;
 
 - (void)ETCDInitializerDidFinish:(AMETCDInitializer *)initializer
 {
-    
+    if(!initializer.isResultOK)
+    {
+        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+        
+        _isErr = YES;
+    }
 }
 
 - (void)AddUserOperatorDidFinish:(AMAddUserOperator *)addOper
@@ -266,6 +283,12 @@ NSOperationQueue* _etcdOperQueue = nil;
         _ttlTimer  = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
                                                       target:self selector:@selector(setUserTTL)
                                                     userInfo:nil repeats:YES];
+    }
+    else
+    {
+        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+        
+        _isErr = YES;
     }
 }
 
@@ -284,6 +307,12 @@ NSOperationQueue* _etcdOperQueue = nil;
     if(queryOper.isResultOK)
     {
         self.groups = queryOper.usergroups;
+    }
+    else
+    {
+        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+        
+        _isErr = YES;
     }
 }
 

@@ -40,6 +40,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Querying user group information...");
+    
     int retry = 0;
     
     NSString* rootDir = @"/Groups/";

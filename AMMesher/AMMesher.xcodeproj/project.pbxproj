@@ -34,6 +34,8 @@
 		D48F3E5118E4F6FA008AB820 /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4D18E4F6FA008AB820 /* AMGroup.m */; };
 		D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4E18E4F6FA008AB820 /* AMUser.h */; };
 		D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4F18E4F6FA008AB820 /* AMUser.m */; };
+		D4E3B76718EA82ED0088752C /* AMETCDKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E3B76518EA82ED0088752C /* AMETCDKiller.h */; };
+		D4E3B76818EA82ED0088752C /* AMETCDKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E3B76618EA82ED0088752C /* AMETCDKiller.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +88,8 @@
 		D48F3E4E18E4F6FA008AB820 /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		D48F3E4F18E4F6FA008AB820 /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		D4D35FC318E43018005C5F1A /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../AMNetworkUtils/build/Release/AMNetworkUtils.framework; sourceTree = "<group>"; };
+		D4E3B76518EA82ED0088752C /* AMETCDKiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDKiller.h; sourceTree = "<group>"; };
+		D4E3B76618EA82ED0088752C /* AMETCDKiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDKiller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 				26E4092618E7DA2F00004450 /* AMQueryAllOperator.m */,
 				D41155EA18E95B5A00C84092 /* AMUserTTLOperator.h */,
 				D41155EB18E95B5A00C84092 /* AMUserTTLOperator.m */,
+				D4E3B76518EA82ED0088752C /* AMETCDKiller.h */,
+				D4E3B76618EA82ED0088752C /* AMETCDKiller.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -214,6 +220,7 @@
 				26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */,
 				2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */,
 				26E4091B18E7CDE600004450 /* AMAddUserOperator.h in Headers */,
+				D4E3B76718EA82ED0088752C /* AMETCDKiller.h in Headers */,
 				26E4092718E7DA2F00004450 /* AMQueryAllOperator.h in Headers */,
 				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,
 				26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */,
@@ -298,6 +305,7 @@
 				26E4092818E7DA2F00004450 /* AMQueryAllOperator.m in Sources */,
 				26B328F618DD028F00E7F617 /* AMLeaderElecter.m in Sources */,
 				26E4091C18E7CDE600004450 /* AMAddUserOperator.m in Sources */,
+				D4E3B76818EA82ED0088752C /* AMETCDKiller.m in Sources */,
 				26E4092C18E7DA4700004450 /* AMUpdateUserOperator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

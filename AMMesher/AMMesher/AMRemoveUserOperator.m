@@ -44,8 +44,9 @@
 {
     if (self.isCancelled){return;}
     
-    int retry = 0;
+    NSLog(@"Removing user...");
     
+    int retry = 0;
     
     NSString* myUserDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];
     

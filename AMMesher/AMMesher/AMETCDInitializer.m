@@ -35,6 +35,8 @@
 {
     if(self.isCancelled){return;}
     
+    NSLog(@"Initializing ETCD data...");
+    
     int retry = 0;
     for (; retry < 3; retry++)
     {

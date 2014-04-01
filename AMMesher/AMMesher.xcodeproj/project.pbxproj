@@ -190,8 +190,8 @@
 				26E4092618E7DA2F00004450 /* AMQueryAllOperator.m */,
 				D41155EA18E95B5A00C84092 /* AMUserTTLOperator.h */,
 				D41155EB18E95B5A00C84092 /* AMUserTTLOperator.m */,
-				D4E3B76518EA82ED0088752C /* AMETCDKiller.h */,
 				D4E3B76618EA82ED0088752C /* AMETCDKiller.m */,
+				D4E3B76518EA82ED0088752C /* AMETCDKiller.h */,
 			);
 			name = Operations;
 			sourceTree = "<group>";

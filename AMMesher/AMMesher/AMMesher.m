@@ -20,6 +20,7 @@
 #import "AMRemoveUserOperator.h"
 #import "AMUserTTLOperator.h"
 #import "AMETCDKiller.h"
+#import "AMETCDApi/AMETCD.h"
 
 
 NSOperationQueue* _etcdOperQueue = nil;
@@ -86,6 +87,8 @@ NSOperationQueue* _etcdOperQueue = nil;
 
 -(void)stopLocalMesher
 {
+    _etcdIsRunning = NO;
+    
     if(_ttlTimer)
     {
         [_ttlTimer invalidate];
@@ -306,12 +309,78 @@ NSOperationQueue* _etcdOperQueue = nil;
 {
     if(queryOper.isResultOK)
     {
-        self.groups = queryOper.usergroups;
+        @synchronized(self)
+        {
+            self.groups = queryOper.usergroups;
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           
+            AMETCD* etcdApi = [[AMETCD alloc] init];
+            etcdApi.serverIp = self.myIp;
+            etcdApi.clientPort = Preference_ETCDClientPort;
+            
+            int index = 2;
+            int actIndex = 0;
+            while (_etcdIsRunning)
+            {
+                AMETCDResult* res = [etcdApi watchDir:@"/Groups"
+                                            fromIndex:index
+                                         acturalIndex:&actIndex
+                                              timeout:5];
+                if(res.errCode != 0)
+                {
+                    continue;
+                }
+                
+                index = actIndex + 1;
+                
+                if([res.action isEqualTo:@"update"])
+                {
+                    continue;
+                }
+                
+                NSArray* keypathes = [res.node.key componentsSeparatedByString:@"/"];
+                if([keypathes count] < 5)
+                {
+                    continue;
+                }
+                
+                NSString* modifyGroupName = [keypathes objectAtIndex:2];
+                NSString* modifyUserName = [keypathes objectAtIndex:4];
+                NSString* modifyUserProperty = nil;
+                NSString* modifyUserPropertyVal = nil;
+                
+                if ([keypathes count] == 6)
+                {
+                    modifyUserProperty = [keypathes  objectAtIndex:5];
+                    modifyUserPropertyVal = res.node.value;
+                }
+                
+                @synchronized(self)
+                {
+                    for (AMGroup* group in self.groups)
+                    {
+                        if([group.name isEqualTo:modifyGroupName])
+                        {
+                            for (AMUser* user in group.users)
+                            {
+                                user.name = modifyUserName;
+                                
+                                if(modifyUserProperty != nil)
+                                {
+                                    [user setValue:modifyUserPropertyVal forKeyPath:modifyUserProperty];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
     else
     {
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        
         _isErr = YES;
     }
 }

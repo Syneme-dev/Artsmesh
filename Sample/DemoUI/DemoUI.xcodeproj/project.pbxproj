@@ -10,6 +10,7 @@
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		262021F718EAE5BA00811E4E /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262021F618EAE5BA00811E4E /* AMUserGroupView.xib */; };
 		262021FA18EAE64100811E4E /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262021F918EAE64100811E4E /* AMUserGroupViewController.m */; };
+		262021FD18EAEE7700811E4E /* AMUserGroupOutlineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 262021FC18EAEE7700811E4E /* AMUserGroupOutlineNode.m */; };
 		2653BC8718DC6589004707B5 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		268E7DD718D183F600B0F710 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DD618D183F600B0F710 /* AMWindow.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
@@ -76,6 +77,8 @@
 		262021F618EAE5BA00811E4E /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
 		262021F818EAE64100811E4E /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		262021F918EAE64100811E4E /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
+		262021FB18EAEE7700811E4E /* AMUserGroupOutlineNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupOutlineNode.h; sourceTree = "<group>"; };
+		262021FC18EAEE7700811E4E /* AMUserGroupOutlineNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupOutlineNode.m; sourceTree = "<group>"; };
 		268E7DD518D183F600B0F710 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
 		268E7DD618D183F600B0F710 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				262021F818EAE64100811E4E /* AMUserGroupViewController.h */,
 				262021F918EAE64100811E4E /* AMUserGroupViewController.m */,
+				262021FB18EAEE7700811E4E /* AMUserGroupOutlineNode.h */,
+				262021FC18EAEE7700811E4E /* AMUserGroupOutlineNode.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 			files = (
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				262021FD18EAEE7700811E4E /* AMUserGroupOutlineNode.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,

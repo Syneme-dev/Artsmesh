@@ -23,8 +23,6 @@
 #import "AMETCDApi/AMETCD.h"
 
 
-NSOperationQueue* _etcdOperQueue = nil;
-
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
@@ -35,17 +33,36 @@ NSOperationQueue* _etcdOperQueue = nil;
     BOOL _isErr;
 }
 
++(id)sharedAMMesher
+{
+    static AMMesher* sharedMesher = nil;
+    
+    @synchronized(self)
+    {
+        if (sharedMesher == nil)
+        {
+            sharedMesher = [[self alloc] init];
+        }
+    }
+    
+    return sharedMesher;
+}
 
 +(NSOperationQueue*)sharedEtcdOperQueue;
 {
-    if (!_etcdOperQueue)
+    static NSOperationQueue* etcdOperQueue = nil;
+    
+    @synchronized(self)
     {
-        _etcdOperQueue = [[NSOperationQueue alloc] init];
-        _etcdOperQueue.name = @"ETCD Operation Queue";
-        _etcdOperQueue.maxConcurrentOperationCount = 2;
+        if (!etcdOperQueue)
+        {
+            etcdOperQueue = [[NSOperationQueue alloc] init];
+            etcdOperQueue.name = @"ETCD Operation Queue";
+            etcdOperQueue.maxConcurrentOperationCount = 2;
+        }
     }
     
-    return _etcdOperQueue;
+    return etcdOperQueue;
 }
 
 -(id)init

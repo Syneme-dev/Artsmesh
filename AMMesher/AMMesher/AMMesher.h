@@ -21,7 +21,7 @@
 
 @property  (atomic) NSMutableArray* groups;
 
-+(NSOperationQueue*)sharedEtcdOperQueue;
++(id)sharedAMMesher;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;

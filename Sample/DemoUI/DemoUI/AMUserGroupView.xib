@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserGroupViewController">
             <connections>
+                <outlet property="treeViewController" destination="u0D-Lj-5gf" id="15I-rZ-3ig"/>
+                <outlet property="userGroupOutline" destination="vcz-fd-kzK" id="yRF-tB-qQW"/>
                 <outlet property="view" destination="5d4-5O-feO" id="qB8-O0-9Hr"/>
             </connections>
         </customObject>
@@ -41,6 +43,9 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <connections>
+                                            <binding destination="u0D-Lj-5gf" name="value" keyPath="arrangedObjects.name" id="3XY-lj-SDq"/>
+                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
                             </outlineView>
@@ -118,5 +123,14 @@
                 </button>
             </subviews>
         </customView>
+        <treeController objectClassName="AMUserGroupOutlineNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="u0D-Lj-5gf">
+            <declaredKeys>
+                <string>name</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="self.groups" id="ozq-Pm-A7M"/>
+            </connections>
+        </treeController>
+        <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>
     </objects>
 </document>

@@ -8,6 +8,22 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class AMUserGroupOutlineNode;
 @interface AMUserGroupViewController : NSViewController
+
+@property (weak) IBOutlet NSOutlineView *userGroupOutline;
+
+@property (strong) IBOutlet NSTreeController *treeViewController;
+
+
+@property NSMutableArray* groups;
+//KVO things
+-(NSUInteger)countOfGroups;
+-(AMUserGroupOutlineNode*)objectInGroupsAtIndex:(NSUInteger)index;
+-(void)addGroupsObject:(AMUserGroupOutlineNode *)object;
+-(void)insertObject:(AMUserGroupOutlineNode *)object inGroupsAtIndex:(NSUInteger)index;
+-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object;
+-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index;
+-(void)removeGroupsObject:(AMUserGroupOutlineNode *)object;
 
 @end

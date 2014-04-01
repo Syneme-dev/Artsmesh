@@ -56,6 +56,8 @@
 {
     if (self.isCancelled){return;}
     
+    NSLog(@"Adding User...");
+    
     int retry = 0;
     
     NSString* myGroupDir = [NSString stringWithFormat:@"/Groups/%@/", _groupname];
@@ -76,6 +78,7 @@
             if (retry == 3)
             {
                 _isResultOK = NO;
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
         }
@@ -97,6 +100,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -117,6 +121,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -137,6 +142,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -157,6 +163,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
@@ -176,6 +183,7 @@
         if (retry == 3)
         {
             _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }

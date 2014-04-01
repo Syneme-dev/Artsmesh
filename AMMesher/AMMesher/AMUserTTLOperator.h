@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMMesherOperationProtocol.h"
 
 @interface AMUserTTLOperator : NSOperation
+
+@property id <AMMesherOperationProtocol> delegate;
+@property (readonly) BOOL isResultOK;
+
+
+-(id)initWithParameter:(NSString*)hostAddr
+            serverPort:(NSString*)cp
+              username:(NSString*)username
+             groupname:(NSString*)groupname
+               ttltime:(int)ttltime
+              delegate:(id<AMMesherOperationProtocol>)delegate;
 
 @end

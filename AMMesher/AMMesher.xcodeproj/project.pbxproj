@@ -171,6 +171,7 @@
 		26E4092D18E7DA5200004450 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				266D029F18E8F7AF00DF33F0 /* AMMesherOperationProtocol.h */,
 				26E4091118E7BE1A00004450 /* AMETCDLauncher.h */,
 				26E4091218E7BE1A00004450 /* AMETCDLauncher.m */,
 				26E4091518E7C99800004450 /* AMETCDInitializer.h */,
@@ -183,7 +184,6 @@
 				26E4092A18E7DA4700004450 /* AMUpdateUserOperator.m */,
 				26E4092518E7DA2F00004450 /* AMQueryAllOperator.h */,
 				26E4092618E7DA2F00004450 /* AMQueryAllOperator.m */,
-				266D029F18E8F7AF00DF33F0 /* AMMesherOperationProtocol.h */,
 				D41155EA18E95B5A00C84092 /* AMUserTTLOperator.h */,
 				D41155EB18E95B5A00C84092 /* AMUserTTLOperator.m */,
 			);

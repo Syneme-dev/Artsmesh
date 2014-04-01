@@ -18,6 +18,7 @@
 #import "AMUpdateUserOperator.h"
 #import "AMQueryAllOperator.h"
 #import "AMRemoveUserOperator.h"
+#import "AMUserTTLOperator.h"
 
 
 NSOperationQueue* _etcdOperQueue = nil;
@@ -45,13 +46,13 @@ NSOperationQueue* _etcdOperQueue = nil;
     return _etcdOperQueue;
 }
 
-
 -(id)init
 {
     if (self = [super init])
     {
         _isMesher = NO;
         _etcdIsRunning = NO;
+        _isErr = NO;
     
         self.myGroupName = @"Artsmesh";
         self.myUserName = [AMNetworkUtils getHostName];
@@ -84,6 +85,13 @@ NSOperationQueue* _etcdOperQueue = nil;
 
 -(void)stopLocalMesher
 {
+    if(_ttlTimer)
+    {
+        [_ttlTimer invalidate];
+    }
+    
+    [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
+    
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
 }
@@ -99,11 +107,11 @@ NSOperationQueue* _etcdOperQueue = nil;
                                                                        peers:nil
                                                            heartbeatInterval:[NSString stringWithFormat:@"%d",Preference_ETCD_HeartbeatTimeout]
                                                              electionTimeout:[NSString stringWithFormat:@"%d",Preference_ETCD_ElectionTimeout]
-                                                                    delegate:nil];
+                                                                    delegate:self];
     
     AMETCDInitializer* etcdInitOper = [[AMETCDInitializer alloc] initWithEtcdServer:self.myIp
                                                                                port:[NSString stringWithFormat:@"%d",Preference_ETCDClientPort]
-                                                                           delegate:nil];
+                                                                           delegate:self];
     
     [etcdInitOper addDependency:etcdLauncher];
     
@@ -115,7 +123,7 @@ NSOperationQueue* _etcdOperQueue = nil;
                                                                            userip:self.myIp
                                                                        userStatus:self.myStatus
                                                                   userDiscription:self.myDescription
-                                                                         delegate:nil];
+                                                                         delegate:self];
     
     [addSelfOper addDependency:etcdInitOper];
     
@@ -153,6 +161,27 @@ NSOperationQueue* _etcdOperQueue = nil;
                                                                          delegate:self];
     
     [addSelfOper addDependency:etcdLauncher];
+    
+    AMQueryAllOperator* queryOper = [[AMQueryAllOperator alloc] initWithParameter:self.myIp
+                                                                       serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
+                                                                         delegate:self];
+    
+    [queryOper addDependency:addSelfOper];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
+    [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
+}
+
+-(void)setUserTTL
+{
+    AMUserTTLOperator* userTTLOper = [[AMUserTTLOperator alloc] initWithParameter:self.myIp
+                                                                serverPort:[NSString stringWithFormat:@"%d",Preference_ETCDClientPort]
+                                                                  username:self.myUserName
+                                                                 groupname:self.myGroupName
+                                                                   ttltime:Preference_User_TTL
+                                                                  delegate:self];
+    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
 }
 
 
@@ -176,15 +205,20 @@ NSOperationQueue* _etcdOperQueue = nil;
             _isMesher = YES;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
-            
+            if(!_etcdIsRunning)
+            {
+                [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
+            }
         }
         else if(newState == 4)//Joined
         {
             _isMesher = NO;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            [self startMesheeLaunchProcess];
+            if(!_etcdIsRunning)
+            {
+                [self performSelectorOnMainThread:@selector(startMesheeLaunchProcess) withObject:nil waitUntilDone:NO];
+            }
         }
     }
     else
@@ -222,7 +256,17 @@ NSOperationQueue* _etcdOperQueue = nil;
 
 - (void)AddUserOperatorDidFinish:(AMAddUserOperator *)addOper
 {
-
+    if (addOper.isResultOK)
+    {
+        if(_ttlTimer != nil)
+        {
+            [_ttlTimer invalidate];
+        }
+        
+        _ttlTimer  = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
+                                                      target:self selector:@selector(setUserTTL)
+                                                    userInfo:nil repeats:YES];
+    }
 }
 
 - (void)RemoveUserOperatorDidFinish:(AMRemoveUserOperator *)removeOper
@@ -241,6 +285,12 @@ NSOperationQueue* _etcdOperQueue = nil;
     {
         self.groups = queryOper.usergroups;
     }
+}
+
+
+-(void)UserTTLOperatorDidFinish:(AMUserTTLOperator *)queryOper
+{
+    
 }
 
 @end

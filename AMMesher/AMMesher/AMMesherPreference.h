@@ -12,6 +12,9 @@
 #define Preference_ETCD_HeartbeatTimeout 200
 #define Preference_ETCD_ElectionTimeout 10000
 
+#define Preference_User_TTL             30
+#define Preference_User_TTL_Interval    10
+
 #define Preference_MyDomain             @"CCOM"
 #define Preference_MyDescription        @"I'm a Mac Developer"
 #define Preference_MyStatus             @"Online"

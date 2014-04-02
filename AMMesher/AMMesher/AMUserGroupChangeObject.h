@@ -14,6 +14,6 @@
 @property NSString* groupName;
 @property NSString* userName;
 @property NSDictionary* oldProperties;
-@property NSDictionary* newProperties;
+@property NSDictionary* currentProperties;
 
 @end

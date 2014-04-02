@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-
+@protocol UserGroupChangeHandler;
 @protocol AMMesherOperationProtocol;
+
 @interface AMMesher : NSObject<AMMesherOperationProtocol>
 
 @property  (atomic) NSString* myGroupName;
@@ -25,5 +26,15 @@
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
+
+-(void)addUserGroupObserver:(id)observer;
+-(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)observer;
+
+@end
+
+@protocol UserGroupChangeHandler <NSObject>
+
+-(void)handleUserGroupChange:(NSArray*)groups;
+-(void)handleUserGroupQueryFinished:(NSArray *)groups;
 
 @end

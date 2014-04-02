@@ -27,6 +27,7 @@
 {
     AMLeaderElecter* _elector;
     NSTimer* _ttlTimer;
+    NSMutableArray* _userGroupChangeObservers;
 
     BOOL _isMesher;
     BOOL _etcdIsRunning;
@@ -84,10 +85,10 @@
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = Preference_ETCDServerPort;
         
+        _userGroupChangeObservers = [[NSMutableArray alloc] init];
+        
         //init group information
        // groups = [[NSMutableArray alloc] init];
-    
-        
     }
     
     return self;
@@ -95,6 +96,8 @@
 
 -(void)startLoalMesher
 {
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"AM_UserGroupChanged_Notification" object:self];
+    
     [_elector kickoffElectProcess];
     
     [_elector addObserver:self forKeyPath:@"state"
@@ -126,6 +129,9 @@
     
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
+    
+    
+    [_userGroupChangeObservers removeAllObjects];
 }
 
 
@@ -214,6 +220,35 @@
                                                                    ttltime:Preference_User_TTL
                                                                   delegate:self];
     [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+}
+
+
+#pragma mark -
+#pragma   mark UserGroupObserver Methods
+
+-(void)addUserGroupObserver:(id)observer
+{
+    [_userGroupChangeObservers addObject:observer];
+}
+
+
+-(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)observer
+{
+    [_userGroupChangeObservers  removeObject:observer];
+}
+
+-(void)notifyUserGroupChanged
+{
+    for(id<UserGroupChangeHandler> handler in _userGroupChangeObservers)
+    {
+        NSArray* g;
+        @synchronized(self)
+        {
+            g = [self.groups copy];
+        }
+        
+        [handler handleUserGroupChange:g];
+    }
 }
 
 
@@ -331,6 +366,8 @@
             self.groups = queryOper.usergroups;
         }
         
+        [self notifyUserGroupChanged];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
            
             AMETCD* etcdApi = [[AMETCD alloc] init];
@@ -392,6 +429,8 @@
                         }
                     }
                 }
+                
+                [self notifyUserGroupChanged];
             }
         });
     }
@@ -405,7 +444,7 @@
 
 -(void)UserTTLOperatorDidFinish:(AMUserTTLOperator *)queryOper
 {
-    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"AM_UserGroupChanged_Notification" object:self];
 }
 
 @end

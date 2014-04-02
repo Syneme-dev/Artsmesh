@@ -26,7 +26,8 @@ static NSMutableDictionary *allPlugins = nil;
 @implementation AMAppDelegate
 {
     AMMesher* _globalMesher;
-//    AMETCD* _globalETCD;
+    AMUserGroupViewController* _userGroupViewController;
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -40,6 +41,8 @@ static NSMutableDictionary *allPlugins = nil;
     [self startMesher];
     [self connectMesher];
     [self writePluginDataToMesher];
+    
+    [_globalMesher addUserGroupObserver:_userGroupViewController];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification
@@ -58,11 +61,6 @@ static NSMutableDictionary *allPlugins = nil;
     
     _globalMesher = [[AMMesher alloc] init];
     [_globalMesher startLoalMesher];
-   
-//    [_globalMesher addObserver:self
-//                    forKeyPath:@"mesherName"
-//                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                       context:Nil];
     
 }
 
@@ -96,9 +94,9 @@ static NSMutableDictionary *allPlugins = nil;
     [self.window.contentView addSubview:preViewController.view];
     [preViewController.titleView setStringValue:@"Groups"];
     
-    AMUserGroupViewController* userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
-    userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
-    [preViewController.view addSubview:userGroupViewController.view];
+    _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
+    _userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
+    [preViewController.view addSubview:_userGroupViewController.view];
 }
 
 -(void)loadETCDPreferencePanel{

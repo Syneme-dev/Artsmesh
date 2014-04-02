@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2611FA2B18EBBD2400A1940D /* AMUserGroupChangeObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2611FA2918EBBD2400A1940D /* AMUserGroupChangeObject.h */; };
+		2611FA2C18EBBD2400A1940D /* AMUserGroupChangeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2611FA2A18EBBD2400A1940D /* AMUserGroupChangeObject.m */; };
 		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2611FA2918EBBD2400A1940D /* AMUserGroupChangeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupChangeObject.h; sourceTree = "<group>"; };
+		2611FA2A18EBBD2400A1940D /* AMUserGroupChangeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupChangeObject.m; sourceTree = "<group>"; };
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		266D029F18E8F7AF00DF33F0 /* AMMesherOperationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMMesherOperationProtocol.h; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +207,8 @@
 				D48F3E4D18E4F6FA008AB820 /* AMGroup.m */,
 				D48F3E4E18E4F6FA008AB820 /* AMUser.h */,
 				D48F3E4F18E4F6FA008AB820 /* AMUser.m */,
+				2611FA2918EBBD2400A1940D /* AMUserGroupChangeObject.h */,
+				2611FA2A18EBBD2400A1940D /* AMUserGroupChangeObject.m */,
 			);
 			name = UserGroup;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 				26E4091B18E7CDE600004450 /* AMAddUserOperator.h in Headers */,
 				D4E3B76718EA82ED0088752C /* AMETCDKiller.h in Headers */,
 				26E4092718E7DA2F00004450 /* AMQueryAllOperator.h in Headers */,
+				2611FA2B18EBBD2400A1940D /* AMUserGroupChangeObject.h in Headers */,
 				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,
 				26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */,
 				26E4092B18E7DA4700004450 /* AMUpdateUserOperator.h in Headers */,
@@ -306,6 +313,7 @@
 				26B328F618DD028F00E7F617 /* AMLeaderElecter.m in Sources */,
 				26E4091C18E7CDE600004450 /* AMAddUserOperator.m in Sources */,
 				D4E3B76818EA82ED0088752C /* AMETCDKiller.m in Sources */,
+				2611FA2C18EBBD2400A1940D /* AMUserGroupChangeObject.m in Sources */,
 				26E4092C18E7DA4700004450 /* AMUpdateUserOperator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

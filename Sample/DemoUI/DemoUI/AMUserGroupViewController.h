@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @class AMUserGroupOutlineNode;
-@interface AMUserGroupViewController : NSViewController
+@protocol UserGroupChangeHandler;
+
+
+@interface AMUserGroupViewController : NSViewController<UserGroupChangeHandler>
 
 @property (weak) IBOutlet NSOutlineView *userGroupOutline;
 

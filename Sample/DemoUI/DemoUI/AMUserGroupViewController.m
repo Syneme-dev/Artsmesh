@@ -8,6 +8,7 @@
 
 #import "AMUserGroupViewController.h"
 #import "AMUserGroupOutlineNode.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMUserGroupViewController ()
 
@@ -21,7 +22,31 @@
     if (self) {
         // Initialization code here.
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userGroupChanged:)
+                                                 name:@"AM_UserGroupChanged_Notification"
+                                               object:nil];
+    
     return self;
+}
+
+
+-(void)userGroupChanged:(NSNotification *) notification
+{
+    NSLog(@"notification received!");
+}
+
+
+-(void)clearEveryThing
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+-(void)handleUserGroupChange:(NSArray *)groups
+{
+    
 }
 
 
@@ -45,7 +70,8 @@
     [self didChangeValueForKey:@"groups"];
 }
 
--(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
+-(void)
+:(NSUInteger)index withObject:(id)object
 {
     [self willChangeValueForKey:@"groups"];
     [self.groups replaceObjectAtIndex:index withObject:object ];
@@ -70,6 +96,13 @@
 {
     [self willChangeValueForKey:@"groups"];
     [self.groups removeObject:object];
+    [self didChangeValueForKey:@"groups"];
+}
+
+-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
+{
+    [self willChangeValueForKey:@"groups"];
+    [self.groups replaceObjectAtIndex:index withObject:object];
     [self didChangeValueForKey:@"groups"];
 }
 

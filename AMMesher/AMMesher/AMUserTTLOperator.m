@@ -35,6 +35,8 @@
         _ttltime = ttltime;
 
         _isResultOK = NO;
+        
+        self.delegate = delegate;
 
     }
     return self;

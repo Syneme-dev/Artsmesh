@@ -9,8 +9,6 @@
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMGroup.h"
-#import "AMUser.h"
 #import "AMMesherOperationProtocol.h"
 #import "AMETCDLauncher.h"
 #import "AMETCDInitializer.h"
@@ -21,17 +19,21 @@
 #import "AMUserTTLOperator.h"
 #import "AMETCDKiller.h"
 #import "AMETCDApi/AMETCD.h"
+#import "AMGroup.h"
+#import "AMUser.h"
+#import "AMUserGroupNode.h"
 
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
     NSTimer* _ttlTimer;
-    NSMutableArray* _userGroupChangeObservers;
 
     BOOL _isMesher;
     BOOL _etcdIsRunning;
     BOOL _isErr;
+    
+    NSMutableArray* _userGroupChangeHandlers;
 }
 
 +(id)sharedAMMesher
@@ -59,7 +61,7 @@
         {
             etcdOperQueue = [[NSOperationQueue alloc] init];
             etcdOperQueue.name = @"ETCD Operation Queue";
-            etcdOperQueue.maxConcurrentOperationCount = 2;
+            etcdOperQueue.maxConcurrentOperationCount = 1;
         }
     }
     
@@ -85,10 +87,9 @@
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = Preference_ETCDServerPort;
         
-        _userGroupChangeObservers = [[NSMutableArray alloc] init];
+        _userGroups = [[NSMutableArray alloc] init];
+        _userGroupChangeHandlers = [[NSMutableArray alloc] init];
         
-        //init group information
-       // groups = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -130,8 +131,6 @@
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
     
-    
-    [_userGroupChangeObservers removeAllObjects];
 }
 
 
@@ -165,16 +164,10 @@
     
     [addSelfOper addDependency:etcdInitOper];
     
-    AMQueryAllOperator* queryOper = [[AMQueryAllOperator alloc] initWithParameter:self.myIp
-                                                                       serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
-                                                                         delegate:self];
-    
-    [queryOper addDependency:addSelfOper];
-    
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
+
 }
 
 -(void)startMesheeLaunchProcess
@@ -200,15 +193,10 @@
     
     [addSelfOper addDependency:etcdLauncher];
     
-    AMQueryAllOperator* queryOper = [[AMQueryAllOperator alloc] initWithParameter:self.myIp
-                                                                       serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
-                                                                         delegate:self];
-    
-    [queryOper addDependency:addSelfOper];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
     [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
+   
 }
 
 -(void)setUserTTL
@@ -222,34 +210,85 @@
     [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
 }
 
-
-#pragma mark -
-#pragma   mark UserGroupObserver Methods
-
--(void)addUserGroupObserver:(id)observer
+-(void)queryUserGroups
 {
-    [_userGroupChangeObservers addObject:observer];
+    AMQueryAllOperator* queryOper = [[AMQueryAllOperator alloc] initWithParameter:self.myIp
+                                                                       serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
+                                                                         delegate:self];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
-
--(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)observer
+-(void)startWatchingUserGroups
 {
-    [_userGroupChangeObservers  removeObject:observer];
-}
-
--(void)notifyUserGroupChanged
-{
-    for(id<UserGroupChangeHandler> handler in _userGroupChangeObservers)
+    static dispatch_queue_t _groupWatchQueue = nil;
+    if (_groupWatchQueue ==nil)
     {
-        NSArray* g;
-        @synchronized(self)
-        {
-            g = [self.groups copy];
-        }
-        
-        [handler handleUserGroupChange:g];
+        _groupWatchQueue = dispatch_queue_create("_groupWatchQueue", DISPATCH_QUEUE_PRIORITY_DEFAULT);
     }
+    
+    dispatch_async(_groupWatchQueue, ^{
+        
+        AMETCD* etcdApi = [[AMETCD alloc] init];
+        etcdApi.serverIp = self.myIp;
+        etcdApi.clientPort = Preference_ETCDClientPort;
+        
+        int index = 2;
+        int actIndex = 0;
+        while (_etcdIsRunning)
+        {
+            AMETCDResult* res = [etcdApi watchDir:@"/Groups" fromIndex:index
+                                     acturalIndex:&actIndex timeout:5];
+            if(res.errCode != 0)
+            {
+                continue;
+            }
+            
+            index = actIndex + 1;
+            
+            if([res.action isEqualTo:@"update"])
+            {
+                NSLog(@"ttl info no change");
+                continue;
+            }
+            
+            NSArray* keypathes = [res.node.key componentsSeparatedByString:@"/"];
+            if([keypathes count] < 3)
+            {
+                continue;
+            }
+            
+            //have changed
+            AMQueryAllOperator* queryOper =[[AMQueryAllOperator alloc] initWithParameter:self.myIp
+                                                                              serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
+                                                                                delegate:self];
+            [[AMMesher sharedEtcdOperQueue ] addOperation:queryOper];
+        }
+    });
+    
 }
+
+
+//-(void)addUserGroupObserver:(id<UserGroupChangeHandler>)handler
+//{
+//    [_userGroupChangeHandlers addObject:handler ];
+//}
+//
+//-(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)handler
+//{
+//    if (_userGroupChangeHandlers != nil)
+//    {
+//        [_userGroupChangeHandlers removeObject:handler];
+//    }
+//}
+//
+//-(void)notifyUserGroupChangeHandlers:(NSArray*)userGroups
+//{
+//    for(id<UserGroupChangeHandler> handler in _userGroupChangeHandlers)
+//    {
+//        [handler handleUserGroupChange:userGroups];
+//    }
+//}
 
 
 #pragma mark -
@@ -326,6 +365,7 @@
     }
 }
 
+
 - (void)AddUserOperatorDidFinish:(AMAddUserOperator *)addOper
 {
     if (addOper.isResultOK)
@@ -334,6 +374,9 @@
         {
             [_ttlTimer invalidate];
         }
+        
+        [self queryUserGroups];
+        [self startWatchingUserGroups];
         
         _ttlTimer  = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
                                                       target:self selector:@selector(setUserTTL)
@@ -346,6 +389,7 @@
         _isErr = YES;
     }
 }
+
 
 - (void)RemoveUserOperatorDidFinish:(AMRemoveUserOperator *)removeOper
 {
@@ -363,76 +407,12 @@
     {
         @synchronized(self)
         {
-            self.groups = queryOper.usergroups;
+            [self willChangeValueForKey:@"userGroups"];
+            self.userGroups = queryOper.usergroups;
+            [self didChangeValueForKey:@"userGroups"];
         }
         
-        [self notifyUserGroupChanged];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-           
-            AMETCD* etcdApi = [[AMETCD alloc] init];
-            etcdApi.serverIp = self.myIp;
-            etcdApi.clientPort = Preference_ETCDClientPort;
-            
-            int index = 2;
-            int actIndex = 0;
-            while (_etcdIsRunning)
-            {
-                AMETCDResult* res = [etcdApi watchDir:@"/Groups"
-                                            fromIndex:index
-                                         acturalIndex:&actIndex
-                                              timeout:5];
-                if(res.errCode != 0)
-                {
-                    continue;
-                }
-                
-                index = actIndex + 1;
-                
-                if([res.action isEqualTo:@"update"])
-                {
-                    continue;
-                }
-                
-                NSArray* keypathes = [res.node.key componentsSeparatedByString:@"/"];
-                if([keypathes count] < 5)
-                {
-                    continue;
-                }
-                
-                NSString* modifyGroupName = [keypathes objectAtIndex:2];
-                NSString* modifyUserName = [keypathes objectAtIndex:4];
-                NSString* modifyUserProperty = nil;
-                NSString* modifyUserPropertyVal = nil;
-                
-                if ([keypathes count] == 6)
-                {
-                    modifyUserProperty = [keypathes  objectAtIndex:5];
-                    modifyUserPropertyVal = res.node.value;
-                }
-                
-                @synchronized(self)
-                {
-                    for (AMGroup* group in self.groups)
-                    {
-                        if([group.name isEqualTo:modifyGroupName])
-                        {
-                            for (AMUser* user in group.users)
-                            {
-                                user.name = modifyUserName;
-                                
-                                if(modifyUserProperty != nil)
-                                {
-                                    [user setValue:modifyUserPropertyVal forKeyPath:modifyUserProperty];
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                [self notifyUserGroupChanged];
-            }
-        });
+        //[self notifyUserGroupChangeHandlers:queryOper.usergroups];
     }
     else
     {
@@ -444,7 +424,64 @@
 
 -(void)UserTTLOperatorDidFinish:(AMUserTTLOperator *)queryOper
 {
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"AM_UserGroupChanged_Notification" object:self];
+
 }
+
+#pragma mark -
+#pragma mark KVO
+
+-(NSUInteger)countOfGroups
+{
+    return [self.userGroups count];
+}
+
+-(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index
+{
+    return [self.userGroups objectAtIndex:index];
+}
+
+-(void)addGroupsObject:(AMUserGroupNode *)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups addObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)
+:(NSUInteger)index withObject:(id)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups replaceObjectAtIndex:index withObject:object ];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups insertObject:object atIndex:index];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups removeObjectAtIndex:index];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)removeGroupsObject:(AMUserGroupNode *)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups removeObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups replaceObjectAtIndex:index withObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
 
 @end

@@ -41,15 +41,14 @@ static NSMutableDictionary *allPlugins = nil;
     [self startMesher];
     [self connectMesher];
     [self writePluginDataToMesher];
-    
-    [_globalMesher addUserGroupObserver:_userGroupViewController];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification
 {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    [_globalMesher stopLocalMesher];
+    
+    [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 
 - (void)connectMesher {
@@ -59,9 +58,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)startMesher {
     //TODO:
     
-    _globalMesher = [[AMMesher alloc] init];
-    [_globalMesher startLoalMesher];
-    
+    [[AMMesher sharedAMMesher] startLoalMesher];
 }
 
 - (void)showPreferencePanel {

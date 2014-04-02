@@ -10,5 +10,15 @@
 
 @implementation AMUser
 
+-(id)initWithName:(NSString*)name
+{
+    if (self = [super initWithName:name isGroup:NO])
+    {
+        
+    }
+    
+    return self;
+}
+
 
 @end

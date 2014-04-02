@@ -57,44 +57,28 @@
     if (self.isCancelled){return;}
     
     NSLog(@"Adding User...");
-    
     int retry = 0;
     
-    NSString* myGroupDir = [NSString stringWithFormat:@"/Groups/%@/", _groupname];
-    AMETCDResult* res = [_etcdApi listDir:myGroupDir recursive:NO];
-    if (res.errCode !=0 )
+    
+    NSString* userDirKey = [NSString stringWithFormat:@"/Groups/%@/Users/%@", _groupname, _username];
+    AMETCDResult* res = [_etcdApi setDir:userDirKey ttl:30 prevExist:NO];
+    if (res.errCode != 0 )
     {
         for (; retry < 3; retry++)
         {
-            if(self.isCancelled){return;}
-            
-            AMETCDResult* res = [_etcdApi setDir:myGroupDir ttl:0 prevExist:NO];
-            if(res != nil && res.errCode == 0)
-            {
-                retry = 0;
-                break;
-            }
-            
-            if (retry == 3)
+            if(self.isCancelled)
             {
                 _isResultOK = NO;
                 [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
-        }
-    }
-   
-    NSString* myUserDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];
-    
-    for (; retry < 3; retry++)
-    {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setDir:myUserDir ttl:30 prevExist:NO];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
+            
+            AMETCDResult* res = [_etcdApi setDir:userDirKey ttl:30 prevExist:NO];
+            if(res.errCode == 0)
+            {
+                retry = 0;
+                break;
+            }
         }
         
         if (retry == 3)
@@ -105,7 +89,8 @@
         }
     }
     
-    NSString* myip = [NSString stringWithFormat:@"%@/ip", myUserDir];
+    
+    NSString* myip = [NSString stringWithFormat:@"%@/ip", userDirKey];
 
     for (; retry < 3; retry++)
     {
@@ -117,16 +102,16 @@
             retry = 0;
             break;
         }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
     }
     
-    NSString* domain = [NSString stringWithFormat:@"%@/domain", myUserDir];
+    if (retry == 3)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    NSString* domain = [NSString stringWithFormat:@"%@/domain", userDirKey];
     
     for (; retry < 3; retry++)
     {
@@ -138,17 +123,16 @@
             retry = 0;
             break;
         }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+    }
+    if (retry == 3)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
-    NSString* status = [NSString stringWithFormat:@"%@/status", myUserDir];
     
+    NSString* status = [NSString stringWithFormat:@"%@/status", userDirKey];
     for (; retry < 3; retry++)
     {
         if(self.isCancelled){return;}
@@ -159,33 +143,33 @@
             retry = 0;
             break;
         }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
     }
     
-    NSString* dis = [NSString stringWithFormat:@"%@/description", myUserDir];
+    if (retry == 3)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    NSString* desc = [NSString stringWithFormat:@"%@/description", userDirKey];
+    
     for (; retry < 3; retry++)
     {
         if(self.isCancelled){return;}
         
-        AMETCDResult* res = [_etcdApi setKey:dis withValue:_userDiscription ttl:0];
+        AMETCDResult* res = [_etcdApi setKey:desc withValue:_userDiscription ttl:0];
         if(res != nil && res.errCode == 0)
         {
             retry = 0;
             break;
         }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+    }
+    if (retry == 3)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
     _isResultOK = YES;
@@ -193,5 +177,6 @@
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AddUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
 
 }
+
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMUserGroupNode.h"
 
-@class AMGroup;
-@interface AMUser : NSObject
+@interface AMUser : AMUserGroupNode
+
+-(id)initWithName:(NSString*)name;
 
 @property NSString* name;
 @property NSString* groupName;
@@ -18,7 +20,5 @@
 @property NSString* status;
 @property NSString* ip;
 @property NSString* foafUrl;
-
-@property AMGroup* group;
 
 @end

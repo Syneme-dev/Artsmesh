@@ -62,13 +62,13 @@
             retry = 0;
             break;
         }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UserTTLOperatorDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+    }
+    
+    if (retry == 3)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UserTTLOperatorDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
     _isResultOK = YES;

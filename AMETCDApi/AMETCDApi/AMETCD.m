@@ -269,6 +269,40 @@
 
 }
 
+-(AMETCDResult*)createInOrderDir:(NSString*)dirPath withttl:(int)ttl
+{
+    NSString* urlStr  = [self getRequestURL:dirPath withParams:nil];
+    
+    NSString* headerfield = @"application/x-www-form-urlencoded";
+    
+    NSMutableDictionary* bodyDic = [[NSMutableDictionary alloc] init];
+    [bodyDic setObject:@"true" forKey:@"dir"];
+    
+    if (ttl > 0)
+    {
+        [bodyDic setObject:[NSString stringWithFormat:@"%d", ttl] forKey:@"ttl"];
+    }
+    
+    NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
+    
+    NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlStr]];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
+    [request setAllHTTPHeaderFields:headerDictionary];
+    [request setHTTPBody: httpBody];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    //Log
+    NSString* resultLog = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@\n", resultLog);
+    
+    return [[AMETCDResult alloc] initWithData:returnData];
+}
+
 -(AMETCDResult*)deleteDir:(NSString*)dirPath
                 recursive:(BOOL)bRecursive
 {

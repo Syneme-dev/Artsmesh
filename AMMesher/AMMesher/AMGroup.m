@@ -10,4 +10,14 @@
 
 @implementation AMGroup
 
+-(id)initWithName:(NSString*)name
+{
+    if (self = [super initWithName:name isGroup:YES])
+    {
+        
+    }
+    
+    return self;
+}
+
 @end

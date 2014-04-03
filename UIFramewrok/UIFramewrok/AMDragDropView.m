@@ -22,11 +22,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-//    [[NSColor colorWithCalibratedRed:(48+12)/255.0f green:(64+11)/255.0f blue:(80+14)/255.0f alpha:1.0f] set];
-//    NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
-	
-    // Drawing code here.
 }
 
 
@@ -49,6 +45,14 @@
     NSPoint thisOrigin = [self frame].origin;
     thisOrigin.x += (-self.lastDragLocation.x + newDragLocation.x);
     thisOrigin.y += (-self.lastDragLocation.y + newDragLocation.y);
+    
+    NSRect  screenFrame = [[NSScreen mainScreen] frame];
+    NSRect  windowFrame = [self frame];
+    // Don't let window get dragged up under the top bar
+        if( (thisOrigin.y+windowFrame.size.height+40) > (screenFrame.origin.y+screenFrame.size.height) ){
+           thisOrigin.y=screenFrame.origin.y + (screenFrame.size.height-windowFrame.size.height)-40.0f;
+        }
+
     [self setFrameOrigin:thisOrigin];
     self.lastDragLocation = newDragLocation;
 }

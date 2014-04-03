@@ -154,6 +154,11 @@ static NSMutableDictionary *allPlugins = nil;
     return [AMPreferenceManager defaultShared];
 }
 
+- (IBAction)mesh:(id)sender {
+    
+    NSLog(@"start mesh");
+}
+
 
 #pragma mark -
 #pragma mark KVO

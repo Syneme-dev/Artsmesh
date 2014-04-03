@@ -1,5 +1,5 @@
 //
-//  AMAddUserOperator.h
+//  AMLaunchETCDOperation.h
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
@@ -9,20 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "AMMesherOperationProtocol.h"
 
-@interface AMAddUserOperator : NSOperation
+@interface AMLaunchETCDOperation : NSOperation
 
 @property id <AMMesherOperationProtocol> delegate;
 @property (readonly) BOOL isResultOK;
 
 -(id)initWithParameter:(NSString*)hostAddr
             serverPort:(NSString*)cp
-              username:(NSString*)username
-             groupname:(NSString*)groupname
-            userdomain:(NSString*)userdomain
-                userip:(NSString*)userip
-            userStatus:(NSString*)userStatus
-       userDiscription:(NSString*)userDiscription
+            clientPort:(NSString*)sp
+                 peers:(NSString*)peers
+     heartbeatInterval:(NSString*)hbInterval
+       electionTimeout:(NSString*)elecTimeout
               delegate:(id<AMMesherOperationProtocol>)delegate;
 
 @end
-

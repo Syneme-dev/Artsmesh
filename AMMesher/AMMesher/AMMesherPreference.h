@@ -18,3 +18,7 @@
 #define Preference_MyDomain             @"CCOM"
 #define Preference_MyDescription        @"I'm a Mac Developer"
 #define Preference_MyStatus             @"Online"
+
+
+#define Preference_ArtsmeshIO_IP    @"123.124.145.254"
+#define Preference_ArtsmeshIO_Port  14001

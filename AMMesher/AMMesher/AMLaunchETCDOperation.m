@@ -1,16 +1,16 @@
 //
-//  AMETCDLauncher.m
+//  AMLaunchETCDOperation.m
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMETCDLauncher.h"
+#import "AMLaunchETCDOperation.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMETCDApi/AMETCD.h"
 
-@implementation AMETCDLauncher
+@implementation AMLaunchETCDOperation
 {
     NSMutableArray*  _parameters;
     AMETCD* _etcdAPi;
@@ -110,7 +110,7 @@
         _isResultOK = NO;
     }
     
-    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDLauncherDidFinish:) withObject:self waitUntilDone:NO];
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(LanchETCDOperationDidFinish:) withObject:self waitUntilDone:NO];
 }
 
 @end

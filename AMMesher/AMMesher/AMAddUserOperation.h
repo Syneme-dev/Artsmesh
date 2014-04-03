@@ -1,5 +1,5 @@
 //
-//  AMUpdateUserOperator.h
+//  AMAddUserOperation.h
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AMMesherOperationProtocol.h"
 
-@interface AMUpdateUserOperator : NSOperation
+@interface AMAddUserOperation : NSOperation
 
 @property id <AMMesherOperationProtocol> delegate;
 @property (readonly) BOOL isResultOK;
@@ -18,7 +18,9 @@
             serverPort:(NSString*)cp
               username:(NSString*)username
              groupname:(NSString*)groupname
-     changedProperties:(NSDictionary*)keyvalues
+        userProperties:(NSDictionary*)properties
+                   ttl:(int)ttl
               delegate:(id<AMMesherOperationProtocol>)delegate;
 
 @end
+

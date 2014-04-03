@@ -1,5 +1,5 @@
 //
-//  AMETCDInitializer.h
+//  AMQueryGroupsOperation.h
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "AMMesherOperationProtocol.h"
 
-@interface AMETCDInitializer : NSOperation
+@interface AMQueryGroupsOperation : NSOperation
 
 @property id <AMMesherOperationProtocol> delegate;
 @property (readonly) BOOL isResultOK;
+@property NSMutableArray* usergroups;
 
--(id)initWithEtcdServer:(NSString*)etcdAddr
-              port:(NSString*)cp
+
+-(id)initWithParameter:(NSString*)hostAddr
+            serverPort:(NSString*)cp
               delegate:(id<AMMesherOperationProtocol>)delegate;
 
 @end

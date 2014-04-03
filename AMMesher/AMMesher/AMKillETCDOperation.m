@@ -1,14 +1,14 @@
 //
-//  AMETCDKiller.m
+//  AMKillETCDOperation.m
 //  AMMesher
 //
 //  Created by 王 为 on 4/1/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMETCDKiller.h"
+#import "AMKillETCDOperation.h"
 
-@implementation AMETCDKiller
+@implementation AMKillETCDOperation
 
 -(void)main
 {

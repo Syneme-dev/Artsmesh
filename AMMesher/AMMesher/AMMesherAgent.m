@@ -18,7 +18,11 @@
 {
     NSMutableArray* _usersFromArtsmeshIO;
     NSMutableArray* _groupFromArtsmeshIO;
-    NSTimer* _uploadInfoTimer;
+    
+    NSMutableArray* _usersToArtsmeshIO;
+    NSMutableArray* _groupToArtsmeshIO;
+    
+    NSTimer* _pushTTLTimer;
 }
 
 
@@ -28,6 +32,8 @@
     {
         _usersFromArtsmeshIO = [[NSMutableArray alloc] init];
         _groupFromArtsmeshIO = [[NSMutableArray alloc] init];
+        _usersToArtsmeshIO = [[NSMutableArray alloc] init];
+        _groupToArtsmeshIO =[[NSMutableArray alloc] init];
     }
     
     return self;
@@ -36,18 +42,124 @@
 
 -(void)goOnline
 {
+    [self syncLocalUserGroup];
+    [self pushUserGroupCache];
+    [self getUserGroupOnline];
     
     
-    _uploadInfoTimer = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
-                                                        target:self selector:@selector(uploadGroupInfo) userInfo:nil repeats:YES];
 }
 
 -(void)goOffline
 {
-    [_uploadInfoTimer invalidate];
+    [_pushTTLTimer invalidate];
 }
 
--(void)getGroupInfo
+-(void)syncLocalUserGroup
+{
+    @synchronized(self)
+    {
+        [_groupToArtsmeshIO removeAllObjects];
+        [_usersToArtsmeshIO removeAllObjects];
+        
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        @synchronized(mesher)
+        {
+            for(AMGroup* group in mesher.userGroups)
+            {
+                if ([group.name isEqualToString:@"Artsmesh"])
+                {
+                    for(AMUser* user in group.children)
+                    {
+                        AMUser* globUser = [user copy];
+                        globUser.name = [NSString stringWithFormat:@"%@.%@", user.name, user.domain];
+                        [_usersToArtsmeshIO addObject:globUser];
+                    }
+                }
+                else
+                {
+                    AMGroup* globGroup = [group copyWithoutUsers];
+                    globGroup.name = [NSString stringWithFormat:@"%@.%@", group.name, group.domain];
+                    [_groupToArtsmeshIO addObject:globGroup];
+                }
+            }
+        }
+    }
+}
+
+-(void)pushUserGroupCache
+{
+    @synchronized(self)
+    {
+        for ( AMUser* user in _usersToArtsmeshIO)
+        {
+            NSDictionary* properties = [user fieldsAndValue];
+            
+            
+            AMAddUserOperation* addOper = [[AMAddUserOperation alloc]
+                                           initWithParameter:Preference_ArtsmeshIO_IP
+                                           serverPort:Preference_ArtsmeshIO_Port
+                                           username:user.name
+                                           groupname:user.groupName
+                                           userProperties:properties
+                                           ttl:Preference_User_TTL
+                                           delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:addOper];
+        }
+        
+        for( AMGroup* group in _groupToArtsmeshIO)
+        {
+            NSDictionary* properties = [group fieldsAndValue];
+            
+            AMAddGroupOperation* addOper = [[AMAddGroupOperation alloc]
+                                            initWithParameter:Preference_ArtsmeshIO_IP
+                                            serverPort:Preference_ArtsmeshIO_Port
+                                            groupname:group.name
+                                            groupProperties:properties
+                                            ttl:Preference_User_TTL
+                                            delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:addOper];
+        }
+    }
+    
+    _pushTTLTimer = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
+                                                     target:self
+                                                   selector:@selector(setUserGroupTTL)
+                                                   userInfo:nil repeats:YES];
+}
+
+-(void)setUserGroupTTL
+{
+    @synchronized(self)
+    {
+        for ( AMUser* user in _usersToArtsmeshIO)
+        {
+            AMUserTTLOperation* ttlOper = [[AMUserTTLOperation alloc]
+                                           initWithParameter:Preference_ArtsmeshIO_IP
+                                           serverPort:Preference_ArtsmeshIO_Port
+                                           username:user.name
+                                           groupname:user.groupName
+                                           ttltime:Preference_User_TTL
+                                           delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:ttlOper];
+        }
+        
+        for( AMGroup* group in _groupToArtsmeshIO)
+        {
+            AMGroupTTLOperation* ttlOper = [[AMGroupTTLOperation alloc]
+                                            initWithParameter:Preference_ArtsmeshIO_IP
+                                            serverPort:Preference_ArtsmeshIO_Port
+                                            groupname:group.name ttltime:Preference_User_TTL
+                                            delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:ttlOper];
+        }
+    }
+}
+
+-(void)getUserGroupOnline
 {
     AMQueryGroupsOperation* queryOper = [[AMQueryGroupsOperation alloc]
                                          initWithParameter: Preference_ArtsmeshIO_IP
@@ -57,26 +169,183 @@
     [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
--(void)uploadGroupInfo
+-(void)syncOnlineGroup:(NSMutableArray*)onlineGroups
 {
-    NSArray* groups = [[AMMesher sharedAMMesher] userGroups];
-    
-    for(AMGroup* group in groups)
+    //delete operation
+    for (int i = 0; i < [_groupFromArtsmeshIO count]; i++)
     {
-        if ([group.name isEqualToString:@"Artsmesh"])
+        BOOL shouldBeDelete = YES;
+        AMGroup* cacheGroup = [_groupFromArtsmeshIO objectAtIndex:i];
+        
+        for (AMGroup* onlineGroup in onlineGroups)
         {
-            //upload every user
-            for(AMUser* user in group.children)
+            if ([onlineGroup.name isEqualToString:cacheGroup.name])
             {
-            
+                shouldBeDelete = NO;
+                break;
             }
         }
-        else
+        
+        if (shouldBeDelete)
         {
-            //upload GroupName
+            [_groupFromArtsmeshIO removeObject:cacheGroup];
+            
+            AMDeleteGroupOperation* delOper = [[AMDeleteGroupOperation alloc]
+                                               initWithParameter:Preference_ArtsmeshIO_IP
+                                               serverPort:Preference_ArtsmeshIO_Port
+                                               groupname:cacheGroup.name
+                                               delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:delOper];
+        }
+    }
+    
+    //add operation
+    for (AMGroup* onlineGroup in onlineGroups)
+    {
+        BOOL shouldAdd = YES;
+        for (int i = 0; i < [_groupFromArtsmeshIO count]; i++)
+        {
+            AMGroup* cacheGroup = [_groupFromArtsmeshIO objectAtIndex:i];
+            if ([cacheGroup.name isEqualToString:onlineGroup.name])
+            {
+                shouldAdd = NO;
+                break;
+            }
+        }
+        
+        if (shouldAdd)
+        {
+            [_groupFromArtsmeshIO addObject:onlineGroup];
+            
+            AMAddGroupOperation* addGroupOper = [[AMAddGroupOperation alloc]
+                                                 initWithParameter:Preference_ArtsmeshIO_IP
+                                                 serverPort:Preference_ArtsmeshIO_Port
+                                                 groupname:onlineGroup.name
+                                                 groupProperties:[onlineGroup fieldsAndValue]
+                                                 ttl:Preference_User_TTL
+                                                 delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:addGroupOper];
+        }
+    }
+    
+    //update operation
+    for (AMGroup* onlineGroup in onlineGroups)
+    {
+        for (int i = 0; i < [_groupFromArtsmeshIO count]; i++)
+        {
+            AMGroup* cacheGroup = [_groupFromArtsmeshIO objectAtIndex:i];
+            if ([cacheGroup.name isEqualToString:onlineGroup.name])
+            {
+                NSMutableDictionary* updateProperties = [[NSMutableDictionary alloc] init];
+                BOOL isEqual = [cacheGroup isEqualToGroup:onlineGroup differentFields:updateProperties];
+                if (!isEqual)
+                {
+                    AMUpdateGroupOperation* updateOper = [[AMUpdateGroupOperation alloc]
+                                                          initWithParameter:Preference_ArtsmeshIO_IP
+                                                          serverPort:Preference_ArtsmeshIO_Port
+                                                          groupname:onlineGroup.name
+                                                          groupProperties:updateProperties
+                                                          delegate:self];
+                    
+                    [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
+                }
+            }
         }
     }
 }
+
+-(void)syncOnlineUsers:(NSMutableArray*)onlineUsers
+{
+    //delete operation
+    for (int i = 0; i < [_usersFromArtsmeshIO count]; i++)
+    {
+        BOOL shouldBeDelete = YES;
+        AMUser* cacheUser = [_usersFromArtsmeshIO objectAtIndex:i];
+        
+        for (AMUser* onlineUser in onlineUsers)
+        {
+            if ([onlineUser.name isEqualToString:cacheUser.name])
+            {
+                shouldBeDelete = NO;
+                break;
+            }
+        }
+        
+        if (shouldBeDelete)
+        {
+            [_usersFromArtsmeshIO removeObject:cacheUser];
+            
+            AMDeleteUserOperation* delOper = [[AMDeleteUserOperation alloc]
+                                               initWithParameter:Preference_ArtsmeshIO_IP
+                                               serverPort:Preference_ArtsmeshIO_Port
+                                               username:cacheUser.name
+                                               groupname:cacheUser.groupName
+                                               delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:delOper];
+        }
+    }
+    
+    //add operation
+    for (AMUser* onlineUser in onlineUsers)
+    {
+        BOOL shouldAdd = YES;
+        for (int i = 0; i < [_usersFromArtsmeshIO count]; i++)
+        {
+            AMUser* cacheUser = [_usersFromArtsmeshIO objectAtIndex:i];
+            if ([cacheUser.name isEqualToString:onlineUser.name])
+            {
+                shouldAdd = NO;
+                break;
+            }
+        }
+        
+        if (shouldAdd)
+        {
+            [_usersFromArtsmeshIO addObject:onlineUser];
+            
+            AMAddUserOperation* addOper = [[AMAddUserOperation alloc]
+                                                initWithParameter:Preference_ArtsmeshIO_IP
+                                                serverPort:Preference_ArtsmeshIO_Port
+                                                username:onlineUser.name
+                                                groupname:onlineUser.groupName
+                                                userProperties:[onlineUser fieldsAndValue]
+                                                ttl:Preference_User_TTL
+                                                delegate:self];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:addOper];
+        }
+    }
+    
+    //update operation
+    for (AMUser* onlineUser in onlineUsers)
+    {
+        for (int i = 0; i < [_usersFromArtsmeshIO count]; i++)
+        {
+            AMUser* cacheUser = [_usersFromArtsmeshIO objectAtIndex:i];
+            if ([cacheUser.name isEqualToString:onlineUser.name])
+            {
+                NSMutableDictionary* updateProperties = [[NSMutableDictionary alloc] init];
+                BOOL isEqual = [cacheUser isEqualToUser: onlineUser differentFields:updateProperties];
+                if (!isEqual)
+                {
+                    AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc]
+                                                         initWithParameter:Preference_ArtsmeshIO_IP
+                                                         serverPort:Preference_ArtsmeshIO_Port
+                                                         username:onlineUser.name
+                                                         groupname:onlineUser.groupName
+                                                         changedProperties:updateProperties
+                                                         delegate:self];
+                    
+                    [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
+                }
+            }
+        }
+    }
+}
+
 
 #pragma mark -
 #pragma mark AMMesherOperationProtocol
@@ -115,48 +384,20 @@
     AMQueryGroupsOperation* queryOper = (AMQueryGroupsOperation*)oper;
     if (queryOper.isResultOK)
     {
-        for(AMGroup* group in queryOper.usergroups)
+        @synchronized(self)
         {
-            if ([group.name isEqualToString:@"Artsmesh"])
+            [self syncOnlineGroup:queryOper.usergroups];
+            
+            for (int i=0; i< [queryOper.usergroups count]; i++)
             {
-                BOOL isExist = NO;
-                for(AMUser* user in _usersFromArtsmeshIO)
+                AMGroup* group = [queryOper.usergroups objectAtIndex:i];
+                if ([group.name isEqualToString:@"Artsmesh"])
                 {
-                    //
-                }
-            }
-            else
-            {
-                BOOL isExist = NO;
-                for(AMGroup* myGroup in _groupFromArtsmeshIO)
-                {
-                    if([myGroup.name isEqualToString:group.name])
-                    {
-                        isExist = YES;
-                        NSMutableArray* differentFields = [[NSMutableArray alloc] init];
-                        if ([myGroup isEqualToGroup:group differentFields:differentFields])
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            //updata group in local
-                            //add update operation
-                            
-                        }
-                    }
-                    
-                    if(isExist == NO)
-                    {
-                        //add group in local
-                        //add group operation
-                    }
+                    [self syncOnlineUsers:group.children];
                 }
             }
         }
     }
-    
-    
     
 }
 

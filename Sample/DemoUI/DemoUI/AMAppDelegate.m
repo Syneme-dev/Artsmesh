@@ -76,8 +76,12 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (void)showDefaultWindow {
+    
     NSRect screenSize = [[NSScreen mainScreen] frame];
-    [self.window setFrame:screenSize display:YES ];
+    //Note:code make the window max size.
+//    [self.window setFrame:screenSize display:YES ];
+    float appleMenuBarHeight=20.0f;
+    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height-appleMenuBarHeight)];
     [self loadGroupsPanel];
     [self loadETCDPreferencePanel];
     [self loadUserPanel];

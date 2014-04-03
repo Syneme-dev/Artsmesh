@@ -83,5 +83,18 @@
     return fieldsAndValueDic;
 }
 
+-(AMUser*)copyUser
+{
+    AMUser* newUser = [[AMUser alloc] initWithName:self.name];
+    newUser.groupName = self.groupName;
+    newUser.domain = self.domain;
+    newUser.description = self.description;
+    newUser.status = self.status;
+    newUser.foafUrl = self.foafUrl;
+    newUser.ip  = self.ip;
+    
+    return newUser;
+}
+
 
 @end

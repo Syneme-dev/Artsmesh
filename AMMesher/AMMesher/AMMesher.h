@@ -21,11 +21,16 @@
 
 @property (atomic) NSMutableArray* userGroups;
 
+@property BOOL isEtcdRunning;
+@property BOOL isMesher;
+@property BOOL isErr;
+
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
+-(void)goOnline;
 
 
 @end

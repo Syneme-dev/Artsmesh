@@ -23,5 +23,6 @@
 
 -(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
 -(NSDictionary*)fieldsAndValue;
+-(AMUser*)copyUser;
 
 @end

@@ -673,6 +673,7 @@
         </window>
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
+                <outlet property="mesherButton" destination="kpx-e9-fyr" id="Pzw-P7-0n5"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

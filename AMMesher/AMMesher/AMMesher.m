@@ -21,12 +21,6 @@
     AMLeaderElecter* _elector;
     AMMesherAgent* _agent;
     NSTimer* _ttlTimer;
-
-    BOOL _isMesher;
-    BOOL _etcdIsRunning;
-    BOOL _isErr;
-    
-    NSMutableArray* _userGroupChangeHandlers;
 }
 
 +(id)sharedAMMesher
@@ -65,9 +59,9 @@
 {
     if (self = [super init])
     {
-        _isMesher = NO;
-        _etcdIsRunning = NO;
-        _isErr = NO;
+        self.isMesher = NO;
+        self.isEtcdRunning = NO;
+        self.isErr = NO;
     
         self.myGroupName = @"Artsmesh";
         self.myUserName = [AMNetworkUtils getHostName];
@@ -83,7 +77,6 @@
         _agent = [[AMMesherAgent alloc] init];
         
         _userGroups = [[NSMutableArray alloc] init];
-        _userGroupChangeHandlers = [[NSMutableArray alloc] init];
         
     }
     
@@ -92,8 +85,6 @@
 
 -(void)startLoalMesher
 {
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"AM_UserGroupChanged_Notification" object:self];
-    
     [_elector kickoffElectProcess];
     
     [_elector addObserver:self forKeyPath:@"state"
@@ -103,7 +94,7 @@
 
 -(void)stopLocalMesher
 {
-    _etcdIsRunning = NO;
+    self.isEtcdRunning = NO;
     
     if(_ttlTimer)
     {
@@ -125,10 +116,13 @@
     
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
-    
 }
 
 
+-(void)goOnline
+{
+    [_agent goOnline];
+}
 
 
 -(void)startMesherLaunchProcess
@@ -286,7 +280,7 @@
         
         int index = 2;
         int actIndex = 0;
-        while (_etcdIsRunning)
+        while (_isEtcdRunning)
         {
             AMETCDResult* res = [etcdApi watchDir:@"/Groups" fromIndex:index
                                      acturalIndex:&actIndex timeout:5];
@@ -337,7 +331,7 @@
             _isMesher = YES;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            if(!_etcdIsRunning)
+            if(!_isEtcdRunning)
             {
                 [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
             }
@@ -347,7 +341,7 @@
             _isMesher = NO;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            if(!_etcdIsRunning)
+            if(!_isEtcdRunning)
             {
                 [self performSelectorOnMainThread:@selector(startMesheeLaunchProcess) withObject:nil waitUntilDone:NO];
             }
@@ -375,14 +369,14 @@
     AMLaunchETCDOperation* lancher = (AMLaunchETCDOperation*)oper;
     if (lancher.isResultOK)
     {
-        _etcdIsRunning = YES;
+        self.isEtcdRunning = YES;
     }
     else
     {
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
         
-        _isErr = YES;
-        _etcdIsRunning = NO;
+        self.isErr = YES;
+        self.isEtcdRunning = NO;
     }
 }
 
@@ -398,7 +392,7 @@
     {
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
         
-        _isErr = YES;
+        self.isErr = YES;
     }
 }
 
@@ -421,14 +415,16 @@
         [self startWatchingUserGroups];
         
         _ttlTimer  = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
-                                                      target:self selector:@selector(setUserTTL)
-                                                    userInfo:nil repeats:YES];
+                                                      target:self
+                                                    selector:@selector(setUserTTL)
+                                                    userInfo:nil
+                                                     repeats:YES];
     }
     else
     {
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
         
-        _isErr = YES;
+        self.isErr = YES;
     }
 }
 
@@ -459,13 +455,11 @@
             self.userGroups = queryOper.usergroups;
             [self didChangeValueForKey:@"userGroups"];
         }
-        
-        //[self notifyUserGroupChangeHandlers:queryOper.usergroups];
     }
     else
     {
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        _isErr = YES;
+        self.isErr = YES;
     }
 }
 
@@ -504,13 +498,13 @@
     [self didChangeValueForKey:@"userGroups"];
 }
 
--(void)
-:(NSUInteger)index withObject:(id)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups replaceObjectAtIndex:index withObject:object ];
-    [self didChangeValueForKey:@"userGroups"];
-}
+//-(void)
+//:(NSUInteger)index withObject:(id)object
+//{
+//    [self willChangeValueForKey:@"userGroups"];
+//    [self.userGroups replaceObjectAtIndex:index withObject:object ];
+//    [self didChangeValueForKey:@"userGroups"];
+//}
 
 -(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index
 {

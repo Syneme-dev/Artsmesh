@@ -14,5 +14,6 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTextField *mesherName;
 - (IBAction)mesh:(id)sender;
+@property (weak) IBOutlet NSButton *mesherButton;
 
 @end

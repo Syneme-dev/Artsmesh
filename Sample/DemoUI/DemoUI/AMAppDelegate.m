@@ -59,6 +59,7 @@ static NSMutableDictionary *allPlugins = nil;
     //TODO:
     
     [[AMMesher sharedAMMesher] startLoalMesher];
+    
 }
 
 - (void)showPreferencePanel {
@@ -150,17 +151,19 @@ static NSMutableDictionary *allPlugins = nil;
     return availablePlugins;
 }
 
-- (AMNotificationManager *)sharedNotificationManager {
+- (AMNotificationManager *)sharedNotificationManager
+{
     return [AMNotificationManager defaultShared];
 }
 
-- (AMPreferenceManager *)sharedPreferenceManger {
+- (AMPreferenceManager *)sharedPreferenceManger
+{
     return [AMPreferenceManager defaultShared];
 }
 
-- (IBAction)mesh:(id)sender {
-    
-    NSLog(@"start mesh");
+- (IBAction)mesh:(id)sender
+{
+    [[AMMesher sharedAMMesher] goOnline];
 }
 
 
@@ -171,7 +174,8 @@ static NSMutableDictionary *allPlugins = nil;
                        change:(NSDictionary *)change
                       context:(void *)context
 {
-    if([keyPath isEqualToString:@"mesherName"]){
+    if([keyPath isEqualToString:@"mesherName"])
+    {
         NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
         NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
         

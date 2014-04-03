@@ -70,7 +70,7 @@
                 {
                     for(AMUser* user in group.children)
                     {
-                        AMUser* globUser = [user copy];
+                        AMUser* globUser = [user copyUser];
                         globUser.name = [NSString stringWithFormat:@"%@.%@", user.name, user.domain];
                         [_usersToArtsmeshIO addObject:globUser];
                     }

@@ -12,6 +12,7 @@
 #import "AMGroup.h"
 #import "AMMesher.h"
 #import "AMMesherPreference.h"
+#import "AMMesherOperationHeader.h"
 
 @implementation AMMesherAgent
 {
@@ -35,13 +36,25 @@
 
 -(void)goOnline
 {
-   _uploadInfoTimer = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
-                                                       target:self selector:@selector(uploadGroupInfo) userInfo:nil repeats:YES];
+    
+    
+    _uploadInfoTimer = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
+                                                        target:self selector:@selector(uploadGroupInfo) userInfo:nil repeats:YES];
 }
 
 -(void)goOffline
 {
     [_uploadInfoTimer invalidate];
+}
+
+-(void)getGroupInfo
+{
+    AMQueryGroupsOperation* queryOper = [[AMQueryGroupsOperation alloc]
+                                         initWithParameter: Preference_ArtsmeshIO_IP
+                                         serverPort:Preference_ArtsmeshIO_Port
+                                         delegate:self];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
 -(void)uploadGroupInfo
@@ -64,5 +77,103 @@
         }
     }
 }
+
+#pragma mark -
+#pragma mark AMMesherOperationProtocol
+- (void)LanchETCDOperationDidFinish:(NSOperation *)oper
+{
+    
+}
+
+- (void)InitETCDOperationDidFinish:(NSOperation *)oper
+{
+    
+}
+
+- (void)AddGroupOperationDidFinish:(NSOperation*)oper
+{
+    
+}
+
+- (void)DeleteGroupOperationDidFinish:(NSOperation*)oper
+{
+    
+}
+
+- (void)UpdateGroupOperationDidFinish:(NSOperation*)oper
+{
+    
+}
+
+- (void)QueryGroupsOperationDidFinish:(NSOperation *)oper
+{
+    if (![oper isKindOfClass:[AMQueryGroupsOperation class]])
+    {
+        return ;
+    }
+    
+    AMQueryGroupsOperation* queryOper = (AMQueryGroupsOperation*)oper;
+    if (queryOper.isResultOK)
+    {
+        for(AMGroup* group in queryOper.usergroups)
+        {
+            if ([group.name isEqualToString:@"Artsmesh"])
+            {
+                BOOL isExist = NO;
+                for(AMUser* user in _usersFromArtsmeshIO)
+                {
+                    //
+                }
+            }
+            else
+            {
+                BOOL isExist = NO;
+                for(AMGroup* myGroup in _groupFromArtsmeshIO)
+                {
+                    if([myGroup.name isEqualToString:group.name])
+                    {
+                        isExist = YES;
+                        NSMutableArray* differentFields = [[NSMutableArray alloc] init];
+                        if ([myGroup isEqualToGroup:group differentFields:differentFields])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            //updata group in local
+                            //add update operation
+                            
+                        }
+                    }
+                    
+                    if(isExist == NO)
+                    {
+                        //add group in local
+                        //add group operation
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+}
+
+- (void)AddUserOperationDidFinish:(NSOperation *)oper
+{
+    
+}
+
+- (void)DeleteUserOperationDidFinish:(NSOperation *)oper
+{
+    
+}
+
+- (void)UpdateUserOperationDidFinish:(NSOperation *)oper
+{
+    
+}
+
 
 @end

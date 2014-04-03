@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMMesherAgent : NSObject
+@protocol AMMesherOperationProtocol;
+@interface AMMesherAgent : NSObject<AMMesherOperationProtocol>
 
 -(void)goOnline;
 

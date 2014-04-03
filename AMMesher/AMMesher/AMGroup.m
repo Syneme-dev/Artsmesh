@@ -20,4 +20,19 @@
     return self;
 }
 
+
+
+
+-(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableArray*)fields
+{
+    [AMGroup compareField:self withGroup:group withFiledName:@"name" differentFields:fields];
+    [AMGroup compareField:self withGroup:group withFiledName:@"domain" differentFields:fields];
+    [AMGroup compareField:self withGroup:group withFiledName:@"description" differentFields:fields];
+    [AMGroup compareField:self withGroup:group withFiledName:@"m2mIp" differentFields:fields];
+    [AMGroup compareField:self withGroup:group withFiledName:@"m2mPort" differentFields:fields];
+    [AMGroup compareField:self withGroup:group withFiledName:@"foafUrl" differentFields:fields];
+    
+    return [fields count] == 0;
+}
+
 @end

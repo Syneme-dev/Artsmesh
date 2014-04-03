@@ -21,4 +21,4 @@
 
 
 #define Preference_ArtsmeshIO_IP    @"123.124.145.254"
-#define Preference_ArtsmeshIO_Port  14001
+#define Preference_ArtsmeshIO_Port  @"14001"

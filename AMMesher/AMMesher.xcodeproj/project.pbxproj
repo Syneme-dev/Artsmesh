@@ -46,6 +46,8 @@
 		D4E13C6518ECFAA1003E7F7E /* AMUpdateGroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E13C6318ECFAA1003E7F7E /* AMUpdateGroupOperation.m */; };
 		D4E13C6818ED0038003E7F7E /* AMGroupTTLOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E13C6618ED0038003E7F7E /* AMGroupTTLOperation.h */; };
 		D4E13C6918ED0038003E7F7E /* AMGroupTTLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E13C6718ED0038003E7F7E /* AMGroupTTLOperation.m */; };
+		D4E13C6A18ED3D15003E7F7E /* AMMesherOperationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 266D029F18E8F7AF00DF33F0 /* AMMesherOperationProtocol.h */; };
+		D4E13C6B18ED3D19003E7F7E /* AMMesherOperationHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E13C5518ECF101003E7F7E /* AMMesherOperationHeader.h */; };
 		D4E3B76718EA82ED0088752C /* AMKillETCDOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E3B76518EA82ED0088752C /* AMKillETCDOperation.h */; };
 		D4E3B76818EA82ED0088752C /* AMKillETCDOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E3B76618EA82ED0088752C /* AMKillETCDOperation.m */; };
 /* End PBXBuildFile section */
@@ -256,6 +258,8 @@
 				D4E13C5C18ECF251003E7F7E /* AMAddGroupOperation.h in Headers */,
 				26E4091F18E7D5F500004450 /* AMDeleteUserOperation.h in Headers */,
 				264C748518EBF0AC00DC00DA /* AMUserGroupNode.h in Headers */,
+				D4E13C6B18ED3D19003E7F7E /* AMMesherOperationHeader.h in Headers */,
+				D4E13C6A18ED3D15003E7F7E /* AMMesherOperationProtocol.h in Headers */,
 				D4E13C6418ECFAA1003E7F7E /* AMUpdateGroupOperation.h in Headers */,
 				D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */,
 				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,

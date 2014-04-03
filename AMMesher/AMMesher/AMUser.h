@@ -21,4 +21,6 @@
 @property NSString* ip;
 @property NSString* foafUrl;
 
+-(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableArray*)fields;
+
 @end

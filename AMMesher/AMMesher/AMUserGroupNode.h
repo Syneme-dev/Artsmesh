@@ -16,6 +16,10 @@
 @property AMUserGroupNode* parent;
 
 -(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
++(BOOL)compareField:(AMUserGroupNode*)node1
+          withGroup:(AMUserGroupNode*)node2
+      withFiledName:(NSString*)fieldname
+    differentFields:(NSMutableArray*)fields;
 
 //for Cocoa bandings by outlineView must compliant with KVC
 -(NSInteger)countOfChildren;

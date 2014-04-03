@@ -18,6 +18,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
+#import "AMUserGroupViewController.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -25,7 +26,8 @@ static NSMutableDictionary *allPlugins = nil;
 @implementation AMAppDelegate
 {
     AMMesher* _globalMesher;
-//    AMETCD* _globalETCD;
+    AMUserGroupViewController* _userGroupViewController;
+
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -45,7 +47,8 @@ static NSMutableDictionary *allPlugins = nil;
 {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    [_globalMesher stopLocalMesher];
+    
+    [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 
 - (void)connectMesher {
@@ -55,14 +58,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)startMesher {
     //TODO:
     
-    _globalMesher = [[AMMesher alloc] init];
-    [_globalMesher startLoalMesher];
-   
-//    [_globalMesher addObserver:self
-//                    forKeyPath:@"mesherName"
-//                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                       context:Nil];
-    
+    [[AMMesher sharedAMMesher] startLoalMesher];
 }
 
 - (void)showPreferencePanel {
@@ -94,14 +90,14 @@ static NSMutableDictionary *allPlugins = nil;
 
 -(void)loadGroupsPanel{
      NSRect screenSize = [[NSScreen mainScreen] frame];
-    AMPanelViewController *groupViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    groupViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 720 - 60, 300.0f, 400.0f);
-    [self.window.contentView addSubview:groupViewController.view];
-    [groupViewController.titleView setStringValue:@"Groups"];
-    id userPluginClass = allPlugins[UserGroupPluginName];
-    NSViewController *userGroupViewController = [userPluginClass createMainView];
-    userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
-    [groupViewController.view addSubview:userGroupViewController.view];
+    AMPanelViewController *preViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    preViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 720 - 60, 300.0f, 400.0f);
+    [self.window.contentView addSubview:preViewController.view];
+    [preViewController.titleView setStringValue:@"Groups"];
+    
+    _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
+    _userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
+    [preViewController.view addSubview:_userGroupViewController.view];
 }
 
 -(void)loadETCDPreferencePanel{

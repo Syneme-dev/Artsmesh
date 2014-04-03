@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
+		264C748518EBF0AC00DC00DA /* AMUserGroupNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 264C748318EBF0AC00DC00DA /* AMUserGroupNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		264C748618EBF0AC00DC00DA /* AMUserGroupNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 264C748418EBF0AC00DC00DA /* AMUserGroupNode.m */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CD8018D7C2D3006501C4 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2692CD8318D7C2D3006501C4 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CD8118D7C2D3006501C4 /* AMMesher.m */; };
@@ -30,9 +32,9 @@
 		26E4092C18E7DA4700004450 /* AMUpdateUserOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E4092A18E7DA4700004450 /* AMUpdateUserOperator.m */; };
 		D41155EC18E95B5A00C84092 /* AMUserTTLOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = D41155EA18E95B5A00C84092 /* AMUserTTLOperator.h */; };
 		D41155ED18E95B5A00C84092 /* AMUserTTLOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155EB18E95B5A00C84092 /* AMUserTTLOperator.m */; };
-		D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4C18E4F6FA008AB820 /* AMGroup.h */; };
+		D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4C18E4F6FA008AB820 /* AMGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D48F3E5118E4F6FA008AB820 /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4D18E4F6FA008AB820 /* AMGroup.m */; };
-		D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4E18E4F6FA008AB820 /* AMUser.h */; };
+		D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = D48F3E4E18E4F6FA008AB820 /* AMUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4F18E4F6FA008AB820 /* AMUser.m */; };
 		D4E3B76718EA82ED0088752C /* AMETCDKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E3B76518EA82ED0088752C /* AMETCDKiller.h */; };
 		D4E3B76818EA82ED0088752C /* AMETCDKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E3B76618EA82ED0088752C /* AMETCDKiller.m */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
+		264C748318EBF0AC00DC00DA /* AMUserGroupNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupNode.h; sourceTree = "<group>"; };
+		264C748418EBF0AC00DC00DA /* AMUserGroupNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupNode.m; sourceTree = "<group>"; };
 		266D029F18E8F7AF00DF33F0 /* AMMesherOperationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMMesherOperationProtocol.h; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -203,6 +207,8 @@
 				D48F3E4D18E4F6FA008AB820 /* AMGroup.m */,
 				D48F3E4E18E4F6FA008AB820 /* AMUser.h */,
 				D48F3E4F18E4F6FA008AB820 /* AMUser.m */,
+				264C748318EBF0AC00DC00DA /* AMUserGroupNode.h */,
+				264C748418EBF0AC00DC00DA /* AMUserGroupNode.m */,
 			);
 			name = UserGroup;
 			sourceTree = "<group>";
@@ -215,6 +221,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				26E4091F18E7D5F500004450 /* AMRemoveUserOperator.h in Headers */,
+				264C748518EBF0AC00DC00DA /* AMUserGroupNode.h in Headers */,
+				D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */,
+				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,
 				26E4091318E7BE1A00004450 /* AMETCDLauncher.h in Headers */,
 				D41155EC18E95B5A00C84092 /* AMUserTTLOperator.h in Headers */,
 				26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */,
@@ -222,10 +231,8 @@
 				26E4091B18E7CDE600004450 /* AMAddUserOperator.h in Headers */,
 				D4E3B76718EA82ED0088752C /* AMETCDKiller.h in Headers */,
 				26E4092718E7DA2F00004450 /* AMQueryAllOperator.h in Headers */,
-				D48F3E5018E4F6FA008AB820 /* AMGroup.h in Headers */,
 				26B328F918DD03DB00E7F617 /* AMMesherPreference.h in Headers */,
 				26E4092B18E7DA4700004450 /* AMUpdateUserOperator.h in Headers */,
-				D48F3E5218E4F6FA008AB820 /* AMUser.h in Headers */,
 				26E4091718E7C99800004450 /* AMETCDInitializer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				264C748618EBF0AC00DC00DA /* AMUserGroupNode.m in Sources */,
 				26E4092018E7D5F500004450 /* AMRemoveUserOperator.m in Sources */,
 				D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */,
 				26E4091418E7BE1A00004450 /* AMETCDLauncher.m in Sources */,

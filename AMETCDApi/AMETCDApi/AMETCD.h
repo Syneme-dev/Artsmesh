@@ -49,6 +49,11 @@
 //resule errCode will not be 0
 -(AMETCDResult*)setDir:(NSString*)dirPath ttl:(int)ttl prevExist:(BOOL)bUpdate;
 
+
+//create dir like: /Users/1 , /Users/2 /Users/4...
+-(AMETCDResult*)createInOrderDir:(NSString*)dirPath withttl:(int)ttl;
+
+
 //delete a dir. if the recursive is NO, only
 //delete empty dir, if the recursive is YES
 //will delete any dir, except the root dir

@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
+@protocol UserGroupChangeHandler;
 @protocol AMMesherOperationProtocol;
+@class AMUserGroupNode;
+
 @interface AMMesher : NSObject<AMMesherOperationProtocol>
 
 @property  (atomic) NSString* myGroupName;
@@ -19,11 +21,31 @@
 @property  (atomic) NSString* myStatus;
 @property  (atomic) NSString* myIp;
 
-@property  (atomic) NSMutableArray* groups;
+@property (atomic) NSMutableArray* userGroups;
 
-+(NSOperationQueue*)sharedEtcdOperQueue;
++(id)sharedAMMesher;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
 
+//-(void)addUserGroupObserver:(id<UserGroupChangeHandler>)handler;
+//-(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)handler;
+
+////KVO things
+//-(NSUInteger)countOfGroups;
+//-(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index;
+//-(void)addGroupsObject:(AMUserGroupNode *)object;
+//-(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index;
+//-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object;
+//-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index;
+//-(void)removeGroupsObject:(AMUserGroupNode *)object;
+
 @end
+
+@protocol UserGroupChangeHandler <NSObject>
+
+-(void)handleUserGroupChange:(NSArray*)userGroups;
+
+@end
+
+

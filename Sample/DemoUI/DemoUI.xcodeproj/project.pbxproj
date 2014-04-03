@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
+		262021F718EAE5BA00811E4E /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262021F618EAE5BA00811E4E /* AMUserGroupView.xib */; };
+		262021FA18EAE64100811E4E /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262021F918EAE64100811E4E /* AMUserGroupViewController.m */; };
 		2653BC8718DC6589004707B5 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C718CFDFB200E1B791 /* AMMesher.framework */; };
 		268E7DD718D183F600B0F710 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 268E7DD618D183F600B0F710 /* AMWindow.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		268E7DDF18D1861A00B0F710 /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */; };
-		268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DE418D1864700B0F710 /* UserGroupModule.bundle */; };
 		2692DB8B18E91D7100553924 /* etcd in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
 		2692DB8C18E91D7A00553924 /* etcd in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
@@ -65,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				268E7DE518D1864700B0F710 /* UserGroupModule.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,12 +73,14 @@
 
 /* Begin PBXFileReference section */
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		262021F618EAE5BA00811E4E /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
+		262021F818EAE64100811E4E /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
+		262021F918EAE64100811E4E /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
 		268E7DD518D183F600B0F710 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
 		268E7DD618D183F600B0F710 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		268E7DDE18D1861A00B0F710 /* UIFramewrok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramewrok.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramewrok.framework; sourceTree = "<group>"; };
-		268E7DE418D1864700B0F710 /* UserGroupModule.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = UserGroupModule.bundle; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UserGroupModule.bundle; sourceTree = "<group>"; };
 		2692DB8A18E91D7100553924 /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
@@ -144,11 +146,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		262021F418EAE56200811E4E /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
+				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
+				37C23184187A8FFD00554AFD /* MainMenu.xib */,
+				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
+				262021F618EAE5BA00811E4E /* AMUserGroupView.xib */,
+			);
+			name = Panels;
+			sourceTree = "<group>";
+		};
+		262021F518EAE58400811E4E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D41155E718E9539B00C84092 /* AMUserViewController.h */,
+				D41155E818E9539B00C84092 /* AMUserViewController.m */,
+				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
+				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
+				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
+				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
+				262021F818EAE64100811E4E /* AMUserGroupViewController.h */,
+				262021F918EAE64100811E4E /* AMUserGroupViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
 				2692DB8A18E91D7100553924 /* etcd */,
-				268E7DE418D1864700B0F710 /* UserGroupModule.bundle */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
@@ -196,24 +224,16 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
-				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
+				262021F518EAE58400811E4E /* Controllers */,
+				262021F418EAE56200811E4E /* Panels */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
-				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				37C23187187A8FFD00554AFD /* Images.xcassets */,
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 				AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */,
 				AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */,
-				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
-				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
-				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				268E7DD518D183F600B0F710 /* AMWindow.h */,
 				268E7DD618D183F600B0F710 /* AMWindow.m */,
-				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
-				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
-				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
-				D41155E718E9539B00C84092 /* AMUserViewController.h */,
-				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 			);
 			path = DemoUI;
 			sourceTree = "<group>";
@@ -337,6 +357,7 @@
 				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
+				262021F718EAE5BA00811E4E /* AMUserGroupView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +383,7 @@
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
+				262021FA18EAE64100811E4E /* AMUserGroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

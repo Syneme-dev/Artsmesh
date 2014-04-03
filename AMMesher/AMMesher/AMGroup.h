@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMUserGroupNode.h"
 
-@interface AMGroup : NSObject
+@interface AMGroup : AMUserGroupNode
+
+-(id)initWithName:(NSString*)name;
 
 @property NSString* name;
 @property NSString* domain;
@@ -16,7 +19,5 @@
 @property NSString* m2mIp; //mesher to mesher ip
 @property NSString* m2mPort;
 @property NSString* foafUrl;
-
-@property NSMutableArray* users;
 
 @end

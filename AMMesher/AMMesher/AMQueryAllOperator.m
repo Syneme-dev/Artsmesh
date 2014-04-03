@@ -81,7 +81,7 @@
         }
         
         AMGroup* newGroup = [[AMGroup alloc] init];
-        newGroup.users = [[NSMutableArray alloc] init];
+        newGroup.children = [[NSMutableArray alloc] init];
         newGroup.name = [pathes objectAtIndex:2];
         
         for (AMETCDNode* groupPropertyNode in groupNode.nodes)
@@ -120,8 +120,8 @@
                         [newUser setValue:userPorpertyNode.value forKey:userProperty];
                     }
                     
-                    newUser.group = newGroup;
-                    [newGroup.users addObject:newUser];
+                    newUser.parent = newGroup;
+                    [newGroup.children addObject:newUser];
                 }
             }
             else

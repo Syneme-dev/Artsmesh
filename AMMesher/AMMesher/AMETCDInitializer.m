@@ -37,86 +37,129 @@
     
     NSLog(@"Initializing ETCD data...");
     
-    int retry = 0;
-    for (; retry < 3; retry++)
+    int ret = [self createDir:@"/Groups/"];
+    if (ret != 0)
     {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
-        }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+
+    ret = [self createDir:@"/Groups/Artsmesh/"];
+    if (ret != 0)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
-    for (; retry < 3; retry++)
+    ret = [self createDir:@"/Groups/Performance/"];
+    if (ret != 0)
     {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setDir:@"/Groups/Artsmesh/" ttl:0 prevExist:NO];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
-        }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
-    for (; retry < 3; retry++)
+    ret = [self createDir:@"/Groups/Artsmesh/Users/"];
+    if (ret != 0)
     {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setDir:@"/Groups/Artsmesh/Users/" ttl:0 prevExist:NO];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
-        }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
-    for (; retry < 3; retry++)
+    ret = [self createDir:@"/Groups/Performance/Users/"];
+    if (ret != 0)
     {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setKey:@"/Groups/Artsmesh/description/" withValue:@"This is default group" ttl:0];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
-        }
-        
-        if (retry == 3)
-        {
-            _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    ret = [self createKey:@"/Groups/Artsmesh/description" withValue:@"this is chat group"];
+    if (ret != 0)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    ret = [self createKey:@"/Groups/Performance/description" withValue:@"this is chat group"];
+    if (ret != 0)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    ret = [self createKey:@"/Groups/Artsmesh/name" withValue:@"Artsmesh"];
+    if (ret != 0)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
+    }
+    
+    ret = [self createKey:@"/Groups/Performance/name" withValue:@"CCOMPref"];
+    if (ret != 0)
+    {
+        _isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+        return;
     }
     
     _isResultOK = YES;
-    
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(ETCDInitializerDidFinish:) withObject:self waitUntilDone:NO];
+}
+
+//0 succeeded 1 canceled -1 error
+-(int)createDir:(NSString*)dirPath
+{
+    AMETCDResult* res = [_etcdApi setDir:dirPath ttl:0 prevExist:NO];
+
+    if(res.errCode != 0)
+    {
+        int retry = 0;
+        for (; retry < 3; retry++)
+        {
+            if(self.isCancelled){return 1;}
+            
+            AMETCDResult* res = [_etcdApi setDir:dirPath ttl:0 prevExist:NO];
+            if(res != nil && res.errCode == 0)
+            {
+                return 0;
+            }
+        }
+        
+        return -1;
+    }
+    
+    return 0;
+}
+
+-(int)createKey:(NSString*)keyPath withValue:(NSString*)val
+{
+    
+    AMETCDResult* res = [_etcdApi setKey:keyPath withValue:val ttl:0];
+    if(res.errCode != 0)
+    {
+        int retry = 0;
+        for (; retry < 3; retry++)
+        {
+            if(self.isCancelled){return 1;}
+            
+            AMETCDResult* res = [_etcdApi setKey:keyPath withValue:val ttl:0];
+            if(res != nil && res.errCode == 0)
+            {
+                return 0;
+            }
+        }
+        
+        return -1;
+    }
+    
+    return 0;
 }
 
 @end

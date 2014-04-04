@@ -45,9 +45,9 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSPoint windowLocaion=[theEvent locationInWindow];
+    NSPoint windowLocation=[theEvent locationInWindow];
     //TODO:fix a bug only the top bar can be drag ,but not the full background.
-    if(windowLocaion.y<740.f)
+    if(windowLocation.y<740.f)
     {
         return;
     }
@@ -58,9 +58,9 @@
 {
     NSPoint currentLocation;
     NSPoint newOrigin;
-    NSPoint windowLocaion=[theEvent locationInWindow];
+    NSPoint windowLocation=[theEvent locationInWindow];
     //TODO:fix a bug only the top bar can be drag ,but not the full background.
-    if(windowLocaion.y<740.f)
+    if(windowLocation.y<740.f)
     {
         return;
     }

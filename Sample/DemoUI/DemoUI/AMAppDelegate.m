@@ -23,16 +23,15 @@
 
 static NSMutableDictionary *allPlugins = nil;
 
-@implementation AMAppDelegate
-{
-    AMMesher* _globalMesher;
-    AMUserGroupViewController* _userGroupViewController;
+@implementation AMAppDelegate {
+    AMMesher *_globalMesher;
+    AMUserGroupViewController *_userGroupViewController;
     NSView *_containerView;
 
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
+
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
@@ -44,11 +43,10 @@ static NSMutableDictionary *allPlugins = nil;
     [self writePluginDataToMesher];
 }
 
--(void)applicationWillTerminate:(NSNotification *)notification
-{
+- (void)applicationWillTerminate:(NSNotification *)notification {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    
+
     [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 
@@ -58,9 +56,9 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-    
+
     [[AMMesher sharedAMMesher] startLoalMesher];
-    
+
 }
 
 - (void)showPreferencePanel {
@@ -78,56 +76,53 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (void)showDefaultWindow {
-    
+
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
     [self.window setFrame:screenSize display:YES ];
-    float appleMenuBarHeight=20.0f;
-    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height-appleMenuBarHeight)];
-//    [self.window.contentView setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height-appleMenuBarHeight)];
-//    [self.window.contentView setFrameSize:NSMakeSize(10000.0f, screenSize.size.height-appleMenuBarHeight)];
-    NSScrollView *scrollView=[[self.window.contentView subviews] objectAtIndex:0];
-    _containerView=[[NSView alloc]initWithFrame:NSMakeRect(0, 800,10000.0f, 800.0f)];
+    float appleMenuBarHeight = 20.0f;
+    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - appleMenuBarHeight)];
+    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, 800, 10000.0f, 800.0f)];
     [scrollView setDocumentView:_containerView];
     [self loadGroupsPanel];
-    [self loadETCDPreferencePanel];
+    [self loadPreferencePanel];
     [self loadUserPanel];
 }
 
 
--(void)loadGroupsPanel{
-     NSRect screenSize = [[NSScreen mainScreen] frame];
+- (void)loadGroupsPanel {
+    NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 720 - 60, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
-    _userGroupViewController.view.frame = NSMakeRect(0,0, 300, 380);
+    _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
     [panelViewController.view addSubview:_userGroupViewController.view];
     [panelViewController.titleView setStringValue:@"Groups"];
     [_containerView addSubview:panelViewController.view];
 }
 
--(void)loadETCDPreferencePanel{
+- (void)loadPreferencePanel {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *preViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     [_containerView addSubview:preViewController.view];
     [preViewController.titleView setStringValue:@"Preference"];
     preViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 720 - 60, 600.0f, 720.0f);
-    AMETCDPreferenceViewController *etcdPreference = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    etcdPreference.view.frame = NSMakeRect(0,360, 600, 300);
-    [preViewController.view addSubview:etcdPreference.view];
+    AMETCDPreferenceViewController *preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    preferenceViewController.view.frame = NSMakeRect(0, 360, 600, 300);
+    [preViewController.view addSubview:preferenceViewController.view];
 }
 
--(void)loadUserPanel
-{
+- (void)loadUserPanel {
     NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *userPanelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     userPanelViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 300 - 60, 300.0f, 300.0f);
     [_containerView addSubview:userPanelViewController.view];
     [userPanelViewController.titleView setStringValue:@"User"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
-    userViewController.view.frame = NSMakeRect(0,0, 400, 300);
+    userViewController.view.frame = NSMakeRect(0, 0, 400, 300);
     [userPanelViewController.view addSubview:userViewController.view];
-    
+
 }
 
 
@@ -152,37 +147,32 @@ static NSMutableDictionary *allPlugins = nil;
     return availablePlugins;
 }
 
-- (AMNotificationManager *)sharedNotificationManager
-{
+- (AMNotificationManager *)sharedNotificationManager {
     return [AMNotificationManager defaultShared];
 }
 
-- (AMPreferenceManager *)sharedPreferenceManger
-{
+- (AMPreferenceManager *)sharedPreferenceManger {
     return [AMPreferenceManager defaultShared];
 }
 
-- (IBAction)mesh:(id)sender
-{
+- (IBAction)mesh:(id)sender {
     [[AMMesher sharedAMMesher] goOnline];
 }
 
 
 #pragma mark -
 #pragma mark KVO
--(void)observeValueForKeyPath:(NSString *)keyPath
-                     ofObject:(id)object
-                       change:(NSDictionary *)change
-                      context:(void *)context
-{
-    if([keyPath isEqualToString:@"mesherName"])
-    {
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if ([keyPath isEqualToString:@"mesherName"]) {
         NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
         NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
         self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];
         return;
     }
-    
+
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 

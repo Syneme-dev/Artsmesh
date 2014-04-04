@@ -15,7 +15,7 @@
 #define Preference_User_TTL             30
 #define Preference_User_TTL_Interval    10
 
-#define Preference_MyDomain             @"CCOM"
+#define Preference_MyDomain             @"CCOM2"
 #define Preference_MyDescription        @"I'm a Mac Developer"
 #define Preference_MyStatus             @"Online"
 

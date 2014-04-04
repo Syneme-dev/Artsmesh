@@ -135,19 +135,19 @@
     NSString* election = [NSString stringWithFormat:@"%d",Preference_ETCD_ElectionTimeout];
     
     NSMutableDictionary* userProperties = [[NSMutableDictionary alloc] init];
-    [userProperties setObject:@"CCOM" forKey:@"domain"];
+    [userProperties setObject:Preference_MyDomain forKey:@"domain"];
     [userProperties setObject:@"i'm a Mac developer" forKey:@"description"];
     [userProperties setObject:@"online" forKey:@"status"];
     [userProperties setObject:ip forKey:@"ip"];
     
     NSString* artsmeshGroup = @"Artsmesh";
     NSMutableDictionary* artsmeshGroupProperties = [[NSMutableDictionary alloc] init];
-    [artsmeshGroupProperties setObject:@"CCOM" forKey:@"domain"];
+    [artsmeshGroupProperties setObject:Preference_MyDomain forKey:@"domain"];
     [artsmeshGroupProperties setObject:@"this is artsmesh" forKey:@"description"];
     
     NSString* performGroup = @"Perform";
     NSMutableDictionary* performGroupProperties = [[NSMutableDictionary alloc] init];
-    [performGroupProperties setObject:@"CCOM" forKey:@"domain"];
+    [performGroupProperties setObject:Preference_MyDomain forKey:@"domain"];
     [performGroupProperties setObject:@"this is perform group" forKey:@"description"];
 
 
@@ -210,7 +210,7 @@
     NSString* election = [NSString stringWithFormat:@"%d",Preference_ETCD_ElectionTimeout];
     
     NSMutableDictionary* userProperties = [[NSMutableDictionary alloc] init];
-    [userProperties setObject:@"CCOM" forKey:@"domain"];
+    [userProperties setObject:Preference_MyDomain forKey:@"domain"];
     [userProperties setObject:@"i'm a Mac developer" forKey:@"description"];
     [userProperties setObject:@"online" forKey:@"status"];
     [userProperties setObject:ip forKey:@"ip"];

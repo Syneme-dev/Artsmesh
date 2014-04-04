@@ -52,22 +52,27 @@
     
     NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];
 
-    for (retry = 0; retry < 3; retry++)
+    //BOOL isExist = YES;
+    AMETCDResult* res = [_etcdApi setDir:userDir ttl:_ttltime prevExist:YES];
+    if (res.errCode != 0)
     {
-        if(self.isCancelled){return;}
-        
-        AMETCDResult* res = [_etcdApi setDir:userDir ttl:_ttltime prevExist:YES];
-        if(res != nil && res.errCode == 0)
+        for (retry = 0; retry < 3; retry++)
         {
-            retry = 0;
-            break;
+            if(self.isCancelled){return;}
+            
+            AMETCDResult* res = [_etcdApi setDir:userDir ttl:_ttltime prevExist:YES];
+            if(res != nil && res.errCode == 0)
+            {
+                retry = 0;
+                break;
+            }
         }
-    }
-    
-    if (retry == 3)
-    {
-        _isResultOK = NO;
-        return;
+        
+        if (retry == 3)
+        {
+            _isResultOK = NO;
+            return;
+        }
     }
     
     _isResultOK = YES;

@@ -171,6 +171,8 @@
 
 -(void)syncOnlineGroup:(NSMutableArray*)onlineGroups
 {
+    AMMesher* instance = [AMMesher sharedAMMesher];
+    
     //delete operation
     for (int i = 0; i < [_groupFromArtsmeshIO count]; i++)
     {
@@ -189,10 +191,11 @@
         if (shouldBeDelete)
         {
             [_groupFromArtsmeshIO removeObject:cacheGroup];
+        
             
             AMDeleteGroupOperation* delOper = [[AMDeleteGroupOperation alloc]
-                                               initWithParameter:Preference_ArtsmeshIO_IP
-                                               serverPort:Preference_ArtsmeshIO_Port
+                                               initWithParameter:instance.myIp
+                                               serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                groupname:cacheGroup.name
                                                delegate:self];
             
@@ -214,13 +217,23 @@
             }
         }
         
+        for (int i = 0; i < [_groupToArtsmeshIO count]; i++)
+        {
+            AMGroup* cacheGroup = [_groupToArtsmeshIO objectAtIndex:i];
+            if ([cacheGroup.name isEqualTo:onlineGroup.name])
+                {
+                    shouldAdd = NO;
+                    break;
+                }
+        }
+        
         if (shouldAdd)
         {
             [_groupFromArtsmeshIO addObject:onlineGroup];
             
             AMAddGroupOperation* addGroupOper = [[AMAddGroupOperation alloc]
-                                                 initWithParameter:Preference_ArtsmeshIO_IP
-                                                 serverPort:Preference_ArtsmeshIO_Port
+                                                 initWithParameter: instance.myIp
+                                                 serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                  groupname:onlineGroup.name
                                                  groupProperties:[onlineGroup fieldsAndValue]
                                                  ttl:Preference_User_TTL
@@ -236,6 +249,9 @@
         for (int i = 0; i < [_groupFromArtsmeshIO count]; i++)
         {
             AMGroup* cacheGroup = [_groupFromArtsmeshIO objectAtIndex:i];
+            
+           
+            
             if ([cacheGroup.name isEqualToString:onlineGroup.name])
             {
                 NSMutableDictionary* updateProperties = [[NSMutableDictionary alloc] init];
@@ -243,8 +259,8 @@
                 if (!isEqual)
                 {
                     AMUpdateGroupOperation* updateOper = [[AMUpdateGroupOperation alloc]
-                                                          initWithParameter:Preference_ArtsmeshIO_IP
-                                                          serverPort:Preference_ArtsmeshIO_Port
+                                                          initWithParameter:instance.myIp
+                                                          serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                           groupname:onlineGroup.name
                                                           groupProperties:updateProperties
                                                           delegate:self];
@@ -258,6 +274,8 @@
 
 -(void)syncOnlineUsers:(NSMutableArray*)onlineUsers
 {
+    AMMesher* instance = [AMMesher sharedAMMesher];
+    
     //delete operation
     for (int i = 0; i < [_usersFromArtsmeshIO count]; i++)
     {
@@ -272,14 +290,14 @@
                 break;
             }
         }
-        
+    
         if (shouldBeDelete)
         {
             [_usersFromArtsmeshIO removeObject:cacheUser];
             
             AMDeleteUserOperation* delOper = [[AMDeleteUserOperation alloc]
-                                               initWithParameter:Preference_ArtsmeshIO_IP
-                                               serverPort:Preference_ArtsmeshIO_Port
+                                               initWithParameter:instance.myIp
+                                               serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                username:cacheUser.name
                                                groupname:cacheUser.groupName
                                                delegate:self];
@@ -302,13 +320,23 @@
             }
         }
         
+        for (int i = 0; i < [_usersToArtsmeshIO count]; i++)
+        {
+             AMUser* cacheUser = [_usersToArtsmeshIO objectAtIndex:i];
+            if ([cacheUser.name isEqualTo:onlineUser.name])
+            {
+                shouldAdd = NO;
+                break;
+            }
+        }
+        
         if (shouldAdd)
         {
             [_usersFromArtsmeshIO addObject:onlineUser];
             
             AMAddUserOperation* addOper = [[AMAddUserOperation alloc]
-                                                initWithParameter:Preference_ArtsmeshIO_IP
-                                                serverPort:Preference_ArtsmeshIO_Port
+                                                initWithParameter:instance.myIp
+                                                serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                 username:onlineUser.name
                                                 groupname:onlineUser.groupName
                                                 userProperties:[onlineUser fieldsAndValue]
@@ -332,8 +360,8 @@
                 if (!isEqual)
                 {
                     AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc]
-                                                         initWithParameter:Preference_ArtsmeshIO_IP
-                                                         serverPort:Preference_ArtsmeshIO_Port
+                                                         initWithParameter:instance.myIp
+                                                         serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
                                                          username:onlineUser.name
                                                          groupname:onlineUser.groupName
                                                          changedProperties:updateProperties

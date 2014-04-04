@@ -46,7 +46,7 @@
 {
     if (self.isCancelled){return;}
     
-    NSLog(@"Adding Group...");
+    NSLog(@"Server:%@ Adding Group...", _etcdApi.serverIp);
     int retry = 0;
     
     NSString* groupDir = [NSString stringWithFormat:@"/Groups/%@/", _groupname];

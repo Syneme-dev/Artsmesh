@@ -52,7 +52,7 @@
         return;
     }
     
-    NSLog(@"Adding User...");
+    NSLog(@"Server:%@ Adding User...", _etcdApi.serverIp);
     int retry = 0;
 
     NSString* userDirKey = [NSString stringWithFormat:@"/Groups/%@/Users/%@", _groupname, _username];

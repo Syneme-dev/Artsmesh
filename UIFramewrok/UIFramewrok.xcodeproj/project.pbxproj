@@ -17,7 +17,7 @@
 		AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */; };
 		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; };
 		AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */; };
-		AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */; };
+		AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9DC78318E9643E0029DB97 /* BlueBackgroundView.m */; };
 		AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAA502218EC1375009286F4 /* AMMovableWindow.h */; };
 		AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAA502318EC1375009286F4 /* AMMovableWindow.m */; };
@@ -169,9 +169,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
-				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

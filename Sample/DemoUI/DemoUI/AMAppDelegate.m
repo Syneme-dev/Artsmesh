@@ -19,6 +19,8 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
 #import "AMUserGroupViewController.h"
+#import <UIFramewrok/BlueBackgroundView.h>
+
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -79,11 +81,12 @@ static NSMutableDictionary *allPlugins = nil;
 
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
-    [self.window setFrame:screenSize display:YES ];
+//    [self.window setFrame:screenSize display:YES ];
     float appleMenuBarHeight = 20.0f;
     [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, 800, 10000.0f, 800.0f)];
+    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y
+                                                              , 10000.0f, self.window.frame.size.height-40)];
     [scrollView setDocumentView:_containerView];
     [self loadGroupsPanel];
     [self loadPreferencePanel];
@@ -92,9 +95,8 @@ static NSMutableDictionary *allPlugins = nil;
 
 
 - (void)loadGroupsPanel {
-    NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 720 - 60, 300.0f, 400.0f);
+    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
     [panelViewController.view addSubview:_userGroupViewController.view];
@@ -103,20 +105,18 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (void)loadPreferencePanel {
-    NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *preViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     [_containerView addSubview:preViewController.view];
     [preViewController.titleView setStringValue:@"Preference"];
-    preViewController.view.frame = NSMakeRect(410.0f, screenSize.size.height - 720 - 60, 600.0f, 720.0f);
+    preViewController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
     AMETCDPreferenceViewController *preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, 360, 600, 300);
     [preViewController.view addSubview:preferenceViewController.view];
 }
 
 - (void)loadUserPanel {
-    NSRect screenSize = [[NSScreen mainScreen] frame];
     AMPanelViewController *userPanelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    userPanelViewController.view.frame = NSMakeRect(50.0f, screenSize.size.height - 300 - 60, 300.0f, 300.0f);
+    userPanelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10,  300.0f, 300.0f);
     [_containerView addSubview:userPanelViewController.view];
     [userPanelViewController.titleView setStringValue:@"User"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];

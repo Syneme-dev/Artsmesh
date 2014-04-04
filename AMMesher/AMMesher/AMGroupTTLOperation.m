@@ -1,25 +1,23 @@
 //
-//  AMUserTTLOperator.m
+//  AMGroupTTLOperation.m
 //  AMMesher
 //
-//  Created by 王 为 on 3/31/14.
+//  Created by 王 为 on 4/3/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMUserTTLOperator.h"
+#import "AMGroupTTLOperation.h"
 #import "AMETCDApi/AMETCD.h"
 
-@implementation AMUserTTLOperator
+@implementation AMGroupTTLOperation
 {
     AMETCD* _etcdApi;
-    NSString* _username;
     NSString* _groupname;
     int _ttltime;
 }
 
 -(id)initWithParameter:(NSString*)hostAddr
             serverPort:(NSString*)cp
-              username:(NSString*)username
              groupname:(NSString*)groupname
                ttltime:(int)ttltime
               delegate:(id<AMMesherOperationProtocol>)delegate
@@ -30,14 +28,12 @@
         _etcdApi.serverIp = hostAddr;
         _etcdApi.clientPort = [cp intValue];
         
-        _username = username;
         _groupname = groupname;
         _ttltime = ttltime;
-
         _isResultOK = NO;
         
         self.delegate = delegate;
-
+        
     }
     return self;
 }
@@ -50,9 +46,9 @@
     
     int retry = 0;
     
-    NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", _groupname, _username];
-
-    for (; retry < 3; retry++)
+    NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/", _groupname];
+    
+    for (retry = 0; retry < 3; retry++)
     {
         if(self.isCancelled){return;}
         
@@ -67,12 +63,11 @@
     if (retry == 3)
     {
         _isResultOK = NO;
-        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UserTTLOperatorDidFinish:) withObject:self waitUntilDone:NO];
         return;
     }
     
     _isResultOK = YES;
-    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UserTTLOperatorDidFinish:) withObject:self waitUntilDone:NO];
 }
+
 
 @end

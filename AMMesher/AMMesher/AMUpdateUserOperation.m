@@ -1,15 +1,16 @@
 //
-//  AMUpdateUserOperator.m
+//  AMUpdateUserOperation.m
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMUpdateUserOperator.h"
+#import "AMUpdateUserOperation.h"
 #import "AMETCDApi/AMETCD.h"
+#import "AMMesherOperationProtocol.h"
 
-@implementation AMUpdateUserOperator
+@implementation AMUpdateUserOperation
 {
     AMETCD* _etcdApi;
     NSString* _username;
@@ -57,7 +58,7 @@
         NSString* propertyVal = [_changedProperties objectForKey:key];
         NSString* propertyKey = [NSString stringWithFormat:@"%@/%@", userDir, key];
         
-        for (; retry < 3; retry++)
+        for (retry = 0; retry < 3; retry++)
         {
             if(self.isCancelled){return;}
             
@@ -71,19 +72,15 @@
             if (retry == 3)
             {
                 _isResultOK = NO;
-                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UpdateUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UpdateUserOperationDidFinish:) withObject:self waitUntilDone:NO];
                 return;
             }
         }
-        
     }
     
     _isResultOK = YES;
-    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UpdateUserOperatorDidFinish:) withObject:self waitUntilDone:NO];
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(UpdateUserOperationDidFinish:) withObject:self waitUntilDone:NO];
     
 }
-
-
-
 
 @end

@@ -1,5 +1,5 @@
 //
-//  AMETCDKiller.h
+//  AMKillETCDOperation.h
 //  AMMesher
 //
 //  Created by 王 为 on 4/1/14.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMETCDKiller : NSOperation
+@interface AMKillETCDOperation : NSOperation
 
 @end

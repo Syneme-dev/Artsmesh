@@ -651,7 +651,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -691,6 +691,7 @@
         </window>
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
+                <outlet property="mesherButton" destination="kpx-e9-fyr" id="Pzw-P7-0n5"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

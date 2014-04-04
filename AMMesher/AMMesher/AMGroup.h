@@ -20,4 +20,8 @@
 @property NSString* m2mPort;
 @property NSString* foafUrl;
 
+-(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
+-(AMGroup*)copyWithoutUsers;
+-(NSDictionary*)fieldsAndValue;
+
 @end

@@ -8,23 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class AMETCDLauncher;
-@class AMETCDInitializer;
-@class AMAddUserOperator;
-@class AMRemoveUserOperator;
-@class AMUpdateUserOperator;
-@class AMQueryAllOperator;
-@class AMUserTTLOperator;
-
-
 @protocol AMMesherOperationProtocol <NSObject>
 
-- (void)ETCDLauncherDidFinish:(AMETCDLauncher *)launcher;
-- (void)ETCDInitializerDidFinish:(AMETCDInitializer *)initializer;
-- (void)AddUserOperatorDidFinish:(AMAddUserOperator *)addOper;
-- (void)RemoveUserOperatorDidFinish:(AMRemoveUserOperator *)removeOper;
-- (void)UpdateUserOperatorDidFinish:(AMUpdateUserOperator *)UpdataOper;
-- (void)QueryAllOperatorDidFinish:(AMQueryAllOperator *)queryOper;
-- (void)UserTTLOperatorDidFinish:(AMUserTTLOperator *)queryOper;
+- (void)LanchETCDOperationDidFinish:(NSOperation *)oper;
+- (void)InitETCDOperationDidFinish:(NSOperation *)oper;
+
+- (void)AddGroupOperationDidFinish:(NSOperation*)oper;
+- (void)DeleteGroupOperationDidFinish:(NSOperation*)oper;
+- (void)UpdateGroupOperationDidFinish:(NSOperation*)oper;
+- (void)QueryGroupsOperationDidFinish:(NSOperation *)oper;
+- (void)AddUserOperationDidFinish:(NSOperation *)oper;
+- (void)DeleteUserOperationDidFinish:(NSOperation *)oper;
+- (void)UpdateUserOperationDidFinish:(NSOperation *)oper;
 
 @end

@@ -30,6 +30,40 @@
     return self;
 }
 
++(BOOL)compareField:(AMUserGroupNode*)node1
+          withGroup:(AMUserGroupNode*)node2
+      withFiledName:(NSString*)fieldname
+    differentFields:(NSMutableDictionary*)fieldsAndNewVal
+{
+    NSString* fieldVal1 = [node1 valueForKey:fieldname];
+    NSString* fieldVal2 = [node2 valueForKey:fieldname];
+    
+    if (fieldVal1 == nil && fieldVal2 == nil)
+    {
+        return YES;
+    }
+    
+    if (fieldVal1 == nil && fieldVal2 != nil)
+    {
+        [fieldsAndNewVal setObject:fieldVal2 forKey:fieldname];
+        return NO;
+    }
+    
+    if (fieldVal1 != nil && fieldVal2 == nil)
+    {
+        [fieldsAndNewVal setObject:fieldVal2 forKey:fieldname];
+        return NO;
+    }
+    
+    if (![fieldVal1 isEqualToString:fieldVal2])
+    {
+        [fieldsAndNewVal setObject:fieldVal2 forKey:fieldname];
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 #pragma mark -
 #pragma mark KVO

@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol UserGroupChangeHandler;
 @protocol AMMesherOperationProtocol;
 @class AMUserGroupNode;
 
@@ -23,22 +21,17 @@
 
 @property (atomic) NSMutableArray* userGroups;
 
+@property BOOL isEtcdRunning;
+@property BOOL isMesher;
+@property BOOL isErr;
+
 +(id)sharedAMMesher;
++(NSOperationQueue*)sharedEtcdOperQueue;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
+-(void)goOnline;
 
-//-(void)addUserGroupObserver:(id<UserGroupChangeHandler>)handler;
-//-(void)removeUserGroupObserver:(id<UserGroupChangeHandler>)handler;
-
-////KVO things
-//-(NSUInteger)countOfGroups;
-//-(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index;
-//-(void)addGroupsObject:(AMUserGroupNode *)object;
-//-(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index;
-//-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object;
-//-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index;
-//-(void)removeGroupsObject:(AMUserGroupNode *)object;
 
 @end
 

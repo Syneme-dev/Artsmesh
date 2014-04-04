@@ -60,6 +60,7 @@ static NSMutableDictionary *allPlugins = nil;
     //TODO:
     
     [[AMMesher sharedAMMesher] startLoalMesher];
+    
 }
 
 - (void)showPreferencePanel {
@@ -80,7 +81,7 @@ static NSMutableDictionary *allPlugins = nil;
     
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
-//    [self.window setFrame:screenSize display:YES ];
+    [self.window setFrame:screenSize display:YES ];
     float appleMenuBarHeight=20.0f;
     [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height-appleMenuBarHeight)];
 //    [self.window.contentView setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height-appleMenuBarHeight)];
@@ -151,12 +152,19 @@ static NSMutableDictionary *allPlugins = nil;
     return availablePlugins;
 }
 
-- (AMNotificationManager *)sharedNotificationManager {
+- (AMNotificationManager *)sharedNotificationManager
+{
     return [AMNotificationManager defaultShared];
 }
 
-- (AMPreferenceManager *)sharedPreferenceManger {
+- (AMPreferenceManager *)sharedPreferenceManger
+{
     return [AMPreferenceManager defaultShared];
+}
+
+- (IBAction)mesh:(id)sender
+{
+    [[AMMesher sharedAMMesher] goOnline];
 }
 
 
@@ -167,7 +175,8 @@ static NSMutableDictionary *allPlugins = nil;
                        change:(NSDictionary *)change
                       context:(void *)context
 {
-    if([keyPath isEqualToString:@"mesherName"]){
+    if([keyPath isEqualToString:@"mesherName"])
+    {
         NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
         NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
         self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];

@@ -15,6 +15,10 @@
 #define Preference_User_TTL             30
 #define Preference_User_TTL_Interval    10
 
-#define Preference_MyDomain             @"CCOM"
+#define Preference_MyDomain             @"CCOM2"
 #define Preference_MyDescription        @"I'm a Mac Developer"
 #define Preference_MyStatus             @"Online"
+
+
+#define Preference_ArtsmeshIO_IP    @"123.124.145.254"
+#define Preference_ArtsmeshIO_Port  @"14001"

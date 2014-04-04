@@ -1,17 +1,17 @@
 //
-//  AMQueryAllOperator.m
+//  AMQueryGroupsOperation.m
 //  AMMesher
 //
 //  Created by Wei Wang on 3/30/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMQueryAllOperator.h"
+#import "AMQueryGroupsOperation.h"
 #import "AMETCDApi/AMETCD.h"
 #import "AMUser.h"
 #import "AMGroup.h"
 
-@implementation AMQueryAllOperator
+@implementation AMQueryGroupsOperation
 {
     AMETCD* _etcdApi;
 }
@@ -46,9 +46,14 @@
     
     NSString* rootDir = @"/Groups/";
     
-    for (; retry < 3; retry++)
+    for (retry =0; retry < 3; retry++)
     {
-        if(self.isCancelled){return;}
+        if(self.isCancelled)
+        {
+            _isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryGroupsOperationDidFinish:) withObject:self waitUntilDone:NO];
+            return;
+        }
         
         AMETCDResult* res = [_etcdApi listDir:rootDir recursive:YES];
         if(res != nil && res.errCode == 0)
@@ -60,13 +65,13 @@
         if (retry == 3)
         {
             _isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryAllOperatorDidFinish:) withObject:self waitUntilDone:NO];
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryGroupsOperationDidFinish:) withObject:self waitUntilDone:NO];
             return;
         }
     }
     
     _isResultOK = YES;
-    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryAllOperatorDidFinish:) withObject:self waitUntilDone:NO];
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(QueryGroupsOperationDidFinish:) withObject:self waitUntilDone:NO];
 }
 
 

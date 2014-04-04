@@ -13,6 +13,8 @@
 #import "AMMesher.h"
 #import "AMMesherPreference.h"
 #import "AMMesherOperationHeader.h"
+#import "AMETCDApi/AMETCD.h"
+
 
 @implementation AMMesherAgent
 {
@@ -23,6 +25,7 @@
     NSMutableArray* _groupToArtsmeshIO;
     
     NSTimer* _pushTTLTimer;
+    BOOL _isOnline;
 }
 
 
@@ -34,6 +37,7 @@
         _groupFromArtsmeshIO = [[NSMutableArray alloc] init];
         _usersToArtsmeshIO = [[NSMutableArray alloc] init];
         _groupToArtsmeshIO =[[NSMutableArray alloc] init];
+        _isOnline = NO;
     }
     
     return self;
@@ -46,7 +50,46 @@
     [self pushUserGroupCache];
     [self getUserGroupOnline];
     
+    _isOnline = YES;
+
+    static dispatch_queue_t _onlineWatchQueue = nil;
+    if (_onlineWatchQueue ==nil)
+    {
+        _onlineWatchQueue = dispatch_queue_create("_onlineWatchQueue", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+    }
     
+//    dispatch_async(_onlineWatchQueue, ^{
+//        
+//        AMETCD* etcdApi = [[AMETCD alloc] init];
+//        etcdApi.serverIp = Preference_ArtsmeshIO_IP;
+//        etcdApi.clientPort = [Preference_ArtsmeshIO_Port intValue];
+//        
+//        int index = 2;
+//        int actIndex = 0;
+//        while (_isOnline)
+//        {
+//            AMETCDResult* res = [etcdApi watchDir:@"/Groups" fromIndex:index
+//                                     acturalIndex:&actIndex timeout:5];
+//            if(res.errCode != 0)
+//            {
+//                continue;
+//            }
+//            
+//            index = actIndex + 1;
+//            
+//            if([res.action isEqualTo:@"update"])
+//            {
+//                NSLog(@"ttl info no change");
+//                continue;
+//            }
+//            
+//            //have changed
+//            [self syncLocalUserGroup];
+//            [self pushUserGroupCache];
+//            [self getUserGroupOnline];
+//        }
+//    });
+//
 }
 
 -(void)goOffline

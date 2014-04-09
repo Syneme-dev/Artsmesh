@@ -9,19 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "AMUserGroupNode.h"
 
+@class AMETCDResult;
 @interface AMGroup : AMUserGroupNode
 
--(id)initWithName:(NSString*)name;
-
-@property NSString* name;
+@property NSString* fullname;
 @property NSString* domain;
 @property NSString* description;
 @property NSString* m2mIp; //mesher to mesher ip
 @property NSString* m2mPort;
 @property NSString* foafUrl;
 
--(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
--(AMGroup*)copyWithoutUsers;
--(NSDictionary*)fieldsAndValue;
+-(id)initWithName:(NSString*)name domain:(NSString*)domain;
+-(id)initWithFullName:(NSString*)fullname;
+
+//
+//-(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
+//-(AMGroup*)copyWithoutUsers;
+//-(NSDictionary*)fieldsAndValue;
 
 @end

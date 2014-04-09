@@ -11,9 +11,7 @@
 
 @interface AMUser : AMUserGroupNode
 
--(id)initWithName:(NSString*)name;
-
-@property NSString* name;
+@property NSString* fullname;
 @property NSString* groupName;
 @property NSString* domain;
 @property NSString* description;
@@ -21,8 +19,13 @@
 @property NSString* ip;
 @property NSString* foafUrl;
 
--(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
--(NSDictionary*)fieldsAndValue;
--(AMUser*)copyUser;
+
+-(id)initWithName:(NSString*)name domain:(NSString *)domain;
+-(id)initWithFullName:(NSString*)fullname;
+
+
+//-(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
+//-(NSDictionary*)fieldsAndValue;
+//-(AMUser*)copyUser;
 
 @end

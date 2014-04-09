@@ -7,38 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol AMMesherOperationProtocol;
-@class AMUserGroupNode;
+#import "AMETCDOperationHeader.h"
 
-@interface AMMesher : NSObject<AMMesherOperationProtocol>
-
-@property  (atomic) NSString* myGroupName;
-@property  (atomic) NSString* myUserName;
-@property  (atomic) NSString* myDomain;
-@property  (atomic) NSString* myDescription;
-@property  (atomic) NSString* myStatus;
-@property  (atomic) NSString* myIp;
+@interface AMMesher : NSObject<AMETCDOperationDelegate>
 
 @property (atomic) NSMutableArray* userGroups;
 
-@property BOOL isEtcdRunning;
-@property BOOL isMesher;
-@property BOOL isErr;
+@property BOOL isLeader;
+@property int etcdState; //0 stop, 1 running, 2 error
 
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;
 
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
--(void)goOnline;
 
-
-@end
-
-@protocol UserGroupChangeHandler <NSObject>
-
--(void)handleUserGroupChange:(NSArray*)userGroups;
-
-@end
+@end    
 
 

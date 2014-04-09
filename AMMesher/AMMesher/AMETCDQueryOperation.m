@@ -26,7 +26,12 @@
 
 -(void)main
 {
-    if (self.isCancelled){return;}
+    if (self.isCancelled)
+    {
+        self.isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
+        return;
+    }
     
     NSLog(@"Querying etcd...");
     

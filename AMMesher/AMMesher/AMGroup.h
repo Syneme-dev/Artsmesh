@@ -13,18 +13,16 @@
 @interface AMGroup : AMUserGroupNode
 
 @property NSString* fullname;
-@property NSString* domain;
 @property NSString* description;
-@property NSString* m2mIp; //mesher to mesher ip
-@property NSString* m2mPort;
-@property NSString* foafUrl;
+@property NSString* ip; //mesher to mesher ip
+@property NSString* port;
 
--(id)initWithName:(NSString*)name domain:(NSString*)domain;
--(id)initWithFullName:(NSString*)fullname;
+-(id)initWithName:(NSString*)name domain:(NSString*)domain  location:(NSString*)locaton;
 
-//
-//-(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
-//-(AMGroup*)copyWithoutUsers;
-//-(NSDictionary*)fieldsAndValue;
+-(void)updateGroup:(AMGroup*)group;
+
+
++(NSArray*)parseFullGroupName:(NSString*)fullName;
+
 
 @end

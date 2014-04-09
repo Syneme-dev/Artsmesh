@@ -7,12 +7,8 @@
 //
 
 #import "AMETCDDataSource.h"
-#import "AMETCDOperation.h"
-#import "AMETCDQueryOperation.h"
+#import "AMETCDOperationHeader.h"
 #import "AMMesher.h"
-#import "AMETCDOperationDelegate.h"
-#import "AMETCDWatchOperation.h"
-#import "AMETCDDestination.h"
 
 @implementation AMETCDDataSource
 {
@@ -71,7 +67,8 @@
         return;
     }
     
-    if([oper.operationType isEqualToString:@"query"] && oper.isResultOK == YES)
+    
+    if ([oper isKindOfClass:[AMETCDQueryOperation class]] && oper.isResultOK == YES)
     {
         @synchronized(self)
         {
@@ -84,7 +81,7 @@
         return;
     }
     
-    if([oper.operationType isEqualToString:@"watch"] && oper.isResultOK == YES)
+    if ([oper isKindOfClass:[AMETCDWatchOperation class]] && oper.isResultOK == YES)
     {
         AMETCDWatchOperation* watchOper = (AMETCDWatchOperation*)oper;
         _changeIndex =  watchOper.currentIndex + 1;
@@ -96,11 +93,11 @@
                 [dest handleWatchEtcdFinished:oper.operationResult source:self];
             }
         }
-
-        [self watch];
         
+        [self watch];
         return;
     }
+    
 }
 
 

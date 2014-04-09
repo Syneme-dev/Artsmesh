@@ -10,40 +10,42 @@
 
 @implementation AMUser
 
--(id)initWithName:(NSString*)name domain:(NSString *)domain
+-(id)initWithName:(NSString*)name domain:(NSString *)domain location:(NSString *)location
 {
-    if (self = [super initWithName:name isGroup:NO])
+    if (self = [super init])
     {
-        self.fullname = [NSString stringWithFormat:@"%@@%@", name, domain];
-        self.domain = domain;
+        self.isLeaf = YES;
+        self.children = nil;
+        self.parent = nil;
+        self.nodeName = name;
+        
+        self.fullname = [NSString stringWithFormat:@"%@@%@.%@", name, domain, location];
     }
     
     return self;
 }
 
--(id)initWithFullName:(NSString*)fullname
+
++(NSArray*)parseFullUserName:(NSString*)fullName
 {
-    NSArray* nameAndDomain = [fullname componentsSeparatedByString:@"@"];
-    if ([nameAndDomain count] < 1)
+    NSMutableArray* parts = [[NSMutableArray alloc] init];
+    NSArray* nameAndDomain = [fullName componentsSeparatedByString:@"@"];
+    [parts addObject:[nameAndDomain objectAtIndex:0]];
+    
+    if ([nameAndDomain count] > 1)
     {
-        return nil;
+        NSArray* domainAndLocation = [[nameAndDomain objectAtIndex:1] componentsSeparatedByString:@"."];
+        [parts addObject:[domainAndLocation objectAtIndex:0]];
+        
+        if ([domainAndLocation count] > 1)
+        {
+            [parts addObject:[domainAndLocation objectAtIndex:1]];
+        }
     }
     
-    NSString* name = [nameAndDomain objectAtIndex:0];
-    NSString* domain = nil;
-    if ([nameAndDomain count] == 2)
-    {
-        domain = [nameAndDomain objectAtIndex:1];
-    }
-    
-    if (self = [super initWithName:name isGroup:NO])
-    {
-        self.domain = domain;
-        self.fullname = fullname;
-    }
-    
-    return self;
+    return parts;
 }
+
 
 //-(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
 //{

@@ -8,6 +8,16 @@
 
 #import "AMETCDPeerDestination.h"
 
-@implementation AMETCDDestination
+@implementation AMETCDPeerDestination
+
+-(void)handleQueryEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
+{
+    
+}
+
+-(void)handleWatchEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
+{
+    
+}
 
 @end

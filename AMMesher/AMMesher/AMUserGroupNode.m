@@ -10,26 +10,6 @@
 
 @implementation AMUserGroupNode
 
--(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup
-{
-    if(self = [super init])
-    {
-        self.name = name;
-        self.parent = nil;
-        if(bGroup)
-        {
-            self.children = [[NSMutableArray alloc] init];
-            self.isLeaf = NO;
-        }
-        else
-        {
-            self.isLeaf = YES;
-        }
-    }
-    
-    return self;
-}
-
 +(BOOL)compareField:(AMUserGroupNode*)node1
           withGroup:(AMUserGroupNode*)node2
       withFiledName:(NSString*)fieldname

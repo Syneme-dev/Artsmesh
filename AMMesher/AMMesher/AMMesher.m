@@ -182,6 +182,7 @@
                           init];
         
         [_lanSource addDestination:_usergroupDest];
+        [_lanSource watch];
         
         
         NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",

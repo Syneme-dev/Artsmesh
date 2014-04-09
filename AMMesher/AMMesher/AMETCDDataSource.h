@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol AMETCDOperationDelegate;
+
 @class AMETCDDestination;
+
+@protocol AMETCDOperationDelegate;
 
 @interface AMETCDDataSource : NSObject<AMETCDOperationDelegate>
 

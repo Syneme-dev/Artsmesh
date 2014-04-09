@@ -13,7 +13,6 @@
 
 -(id)init:(NSString*)ip
      port:(NSString*)port
- delegate:(id<AMETCDOperationDelegate>)delegate
 {
     if (self = [super init])
     {

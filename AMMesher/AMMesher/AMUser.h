@@ -20,12 +20,9 @@
 @property NSString* foafUrl;
 
 
--(id)initWithName:(NSString*)name domain:(NSString *)domain;
--(id)initWithFullName:(NSString*)fullname;
+-(id)initWithName:(NSString*)name domain:(NSString *)domain location:(NSString *)location;
 
++(NSArray*)parseFullUserName:(NSString*)fullName;
 
-//-(BOOL)isEqualToUser:(AMUser*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal;
-//-(NSDictionary*)fieldsAndValue;
-//-(AMUser*)copyUser;
 
 @end

@@ -187,7 +187,7 @@
             self.isLeader = NO;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            if(!self.etcdState == 0)
+            if(self.etcdState == 0)
             {
                 [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
             }
@@ -249,7 +249,7 @@
         addUserOper.delegate = self;
         userTTLOper.delegate = self;
         
-        [addGroupOper addDependency:addGroupOper];
+        [addUserOper addDependency:addGroupOper];
         [userTTLOper addDependency:addUserOper];
         
         [[AMMesher sharedEtcdOperQueue] addOperation:addGroupOper];
@@ -274,8 +274,6 @@
                                                   userInfo:nil
                                                    repeats:NO];
     }
-    
-    
 }
 
 @end

@@ -24,10 +24,6 @@
 		D48F3E5318E4F6FA008AB820 /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F3E4F18E4F6FA008AB820 /* AMUser.m */; };
 		D4C3E88918F4DF36002AD7AC /* AMETCDArtsmeshIODestination.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C3E88318F4DF36002AD7AC /* AMETCDArtsmeshIODestination.h */; };
 		D4C3E88A18F4DF36002AD7AC /* AMETCDArtsmeshIODestination.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E88418F4DF36002AD7AC /* AMETCDArtsmeshIODestination.m */; };
-		D4C3E88B18F4DF36002AD7AC /* AMETCDLANDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C3E88518F4DF36002AD7AC /* AMETCDLANDestination.h */; };
-		D4C3E88C18F4DF36002AD7AC /* AMETCDLANDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E88618F4DF36002AD7AC /* AMETCDLANDestination.m */; };
-		D4C3E88D18F4DF36002AD7AC /* AMETCDPeerDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C3E88718F4DF36002AD7AC /* AMETCDPeerDestination.h */; };
-		D4C3E88E18F4DF36002AD7AC /* AMETCDPeerDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E88818F4DF36002AD7AC /* AMETCDPeerDestination.m */; };
 		D4C3E8A918F4DF50002AD7AC /* AMETCDAddGroupOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C3E88F18F4DF50002AD7AC /* AMETCDAddGroupOperation.h */; };
 		D4C3E8AA18F4DF50002AD7AC /* AMETCDAddGroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C3E89018F4DF50002AD7AC /* AMETCDAddGroupOperation.m */; };
 		D4C3E8AB18F4DF50002AD7AC /* AMETCDAddUserOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C3E89118F4DF50002AD7AC /* AMETCDAddUserOperation.h */; };
@@ -95,6 +91,7 @@
 		2692CD8D18D7C325006501C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2692CD9418D7C37A006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
+		26AC949918F67C5F0094C0DA /* AMETCDDataSourceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMETCDDataSourceHeader.h; sourceTree = "<group>"; };
 		26B328F318DD028F00E7F617 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26B328F418DD028F00E7F617 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26B328F718DD03DB00E7F617 /* AMMesherPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherPreference.h; sourceTree = "<group>"; };
@@ -104,10 +101,6 @@
 		D48F3E4F18E4F6FA008AB820 /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		D4C3E88318F4DF36002AD7AC /* AMETCDArtsmeshIODestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDArtsmeshIODestination.h; sourceTree = "<group>"; };
 		D4C3E88418F4DF36002AD7AC /* AMETCDArtsmeshIODestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDArtsmeshIODestination.m; sourceTree = "<group>"; };
-		D4C3E88518F4DF36002AD7AC /* AMETCDLANDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDLANDestination.h; sourceTree = "<group>"; };
-		D4C3E88618F4DF36002AD7AC /* AMETCDLANDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDLANDestination.m; sourceTree = "<group>"; };
-		D4C3E88718F4DF36002AD7AC /* AMETCDPeerDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPeerDestination.h; sourceTree = "<group>"; };
-		D4C3E88818F4DF36002AD7AC /* AMETCDPeerDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPeerDestination.m; sourceTree = "<group>"; };
 		D4C3E88F18F4DF50002AD7AC /* AMETCDAddGroupOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDAddGroupOperation.h; sourceTree = "<group>"; };
 		D4C3E89018F4DF50002AD7AC /* AMETCDAddGroupOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDAddGroupOperation.m; sourceTree = "<group>"; };
 		D4C3E89118F4DF50002AD7AC /* AMETCDAddUserOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDAddUserOperation.h; sourceTree = "<group>"; };
@@ -231,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				D4C3E89E18F4DF50002AD7AC /* AMETCDOperationHeader.h */,
+				26AC949918F67C5F0094C0DA /* AMETCDDataSourceHeader.h */,
 				D4C3E89D18F4DF50002AD7AC /* AMETCDOperationDelegate.h */,
 				D4C3E8C318F4DF5B002AD7AC /* AMETCDDataSource.h */,
 				D4C3E8C418F4DF5B002AD7AC /* AMETCDDataSource.m */,
@@ -238,10 +232,6 @@
 				D4C3E89818F4DF50002AD7AC /* AMETCDDestination.m */,
 				D4C3E88318F4DF36002AD7AC /* AMETCDArtsmeshIODestination.h */,
 				D4C3E88418F4DF36002AD7AC /* AMETCDArtsmeshIODestination.m */,
-				D4C3E88518F4DF36002AD7AC /* AMETCDLANDestination.h */,
-				D4C3E88618F4DF36002AD7AC /* AMETCDLANDestination.m */,
-				D4C3E88718F4DF36002AD7AC /* AMETCDPeerDestination.h */,
-				D4C3E88818F4DF36002AD7AC /* AMETCDPeerDestination.m */,
 				D4C3E8F718F4E8E1002AD7AC /* AMETCDDataDestination.h */,
 				D4C3E8F818F4E8E1002AD7AC /* AMETCDDataDestination.m */,
 				D4C3E89B18F4DF50002AD7AC /* AMETCDOperation.h */,
@@ -310,14 +300,12 @@
 				D4C3E8C518F4DF5B002AD7AC /* AMETCDDataSource.h in Headers */,
 				D4C3E8ED18F4E2A2002AD7AC /* AMETCDUserTTLOperation.h in Headers */,
 				D4C3E8BB18F4DF50002AD7AC /* AMETCDUpdateGroupOperation.h in Headers */,
-				D4C3E88B18F4DF36002AD7AC /* AMETCDLANDestination.h in Headers */,
 				D4C3E8F518F4E503002AD7AC /* AMETCDInitOperation.h in Headers */,
 				26B328F518DD028F00E7F617 /* AMLeaderElecter.h in Headers */,
 				D4C3E8B118F4DF50002AD7AC /* AMETCDDestination.h in Headers */,
 				2692CD8218D7C2D3006501C4 /* AMMesher.h in Headers */,
 				D4C3E8B818F4DF50002AD7AC /* AMETCDOperationHeader.h in Headers */,
 				D4C3E8AF18F4DF50002AD7AC /* AMETCDDeleteUserOperation.h in Headers */,
-				D4C3E88D18F4DF36002AD7AC /* AMETCDPeerDestination.h in Headers */,
 				D4C3E8AB18F4DF50002AD7AC /* AMETCDAddUserOperation.h in Headers */,
 				D4E3B76718EA82ED0088752C /* AMKillETCDOperation.h in Headers */,
 				D4C3E8EB18F4E2A2002AD7AC /* AMETCDGroupTTLOperation.h in Headers */,
@@ -412,11 +400,9 @@
 				D4C3E8FA18F4E8E1002AD7AC /* AMETCDDataDestination.m in Sources */,
 				D4C3E8B218F4DF50002AD7AC /* AMETCDDestination.m in Sources */,
 				D4E3B76818EA82ED0088752C /* AMKillETCDOperation.m in Sources */,
-				D4C3E88C18F4DF36002AD7AC /* AMETCDLANDestination.m in Sources */,
 				D4C3E8BA18F4DF50002AD7AC /* AMETCDQueryOperation.m in Sources */,
 				D4C3E8AA18F4DF50002AD7AC /* AMETCDAddGroupOperation.m in Sources */,
 				D4C3E8C218F4DF50002AD7AC /* AMETCDWatchOperation.m in Sources */,
-				D4C3E88E18F4DF36002AD7AC /* AMETCDPeerDestination.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

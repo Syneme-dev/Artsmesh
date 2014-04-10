@@ -10,15 +10,17 @@
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMETCDApi/AMETCD.h"
-#import "AMUserGroupNode.h"
 #import "AMGroup.h"
 #import "AMUser.h"
 #import "AMETCDOperationHeader.h"
+#import "AMETCDDataSourceHeader.h"
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
     AMETCDDataSource* _lanSource;
+    AMETCDDataSource* _AMIOSource;
+
     
     NSTimer* _userTTL;
 }
@@ -61,6 +63,7 @@
     {
         self.isLeader = NO;
         self.etcdState = 0;
+        self.groupsState  = 0;
         
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = [Preference_MyETCDServerPort intValue];
@@ -106,6 +109,17 @@
     
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
+}
+
+
+-(void)goOnline
+{
+    if(self.etcdState != 1 || self.groupsState != 0)
+    {
+        return;
+    }
+    
+    
 }
 
 -(void)launchETCD
@@ -214,6 +228,8 @@
             [NSException raise:@"etcd start error" format:nil];
             return;
         }
+        
+        self.etcdState = 1;
     
         NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
                                   Preference_MyUserName,

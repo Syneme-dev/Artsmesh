@@ -17,7 +17,7 @@
 #define Preference_MyETCDClientPort @"14001"
 
 #define Preference_MyETCDHeartbeatTimeout @"200"
-#define Preference_MyETCDElectionTimeout @"10000"
+#define Preference_MyETCDElectionTimeout @"5000"
 
 #define Preference_MyEtCDUserTTL                30
 #define Preference_MyECDUserTTLInterval         10

@@ -16,7 +16,8 @@
 @property (atomic) NSMutableArray* userGroups;
 
 @property BOOL isLeader;
-@property int etcdState; //0 stop, 1 running, 2 error
+@property int groupsState; //0 local, 1 online, 2 merged
+@property int etcdState;    //0 stop, 1 running, 2 error
 @property AMETCDDataDestination* usergroupDest;
 
 +(id)sharedAMMesher;

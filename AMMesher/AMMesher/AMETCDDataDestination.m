@@ -9,7 +9,6 @@
 #import "AMETCDDataDestination.h"
 #import "AMGroup.h"
 #import "AMUser.h"
-#import "AMETCDOperationHeader.h"
 
 @implementation AMETCDDataDestination
 
@@ -149,7 +148,6 @@
         [self didChangeValueForKey:@"userGroups"];
     }
 }
-
 
 
 -(void)handleWatchEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source

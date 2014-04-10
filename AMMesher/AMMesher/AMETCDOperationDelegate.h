@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMETCDOperation.h"
 
+@class AMETCDOperation;
 @protocol AMETCDOperationDelegate <NSObject>
 
 -(void)AMETCDOperationDidFinished:(AMETCDOperation*)oper;

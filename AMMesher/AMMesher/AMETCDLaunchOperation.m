@@ -55,7 +55,7 @@
             [self.parameters addObject:peers];
         }
         
-        self.etcdApi.serverPort = sp;
+        self.etcdApi.serverPort = [sp intValue];
         self.operationType = @"lanuch";
     }
     

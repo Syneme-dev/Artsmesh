@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMETCDOperationDelegate.h"
 
 
 @class AMETCDDestination;
-
-@protocol AMETCDOperationDelegate;
 
 @interface AMETCDDataSource : NSObject<AMETCDOperationDelegate>
 

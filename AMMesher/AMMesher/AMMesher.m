@@ -110,16 +110,25 @@
 
 -(void)launchETCD
 {
+    NSString* peers =nil;
+    
+    if (!self.isLeader)
+    {
+        peers = [NSString stringWithFormat:@"%@:%ld",  _elector.mesherIp, _elector.mesherPort];
+    }
+    
     AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
                                          initWithParameter:Preference_MyIp
                                          clientPort:Preference_MyETCDClientPort
                                          serverPort:Preference_MyETCDServerPort
-                                         peers:nil
+                                         peers:peers
                                          heartbeatInterval:Preference_MyETCDHeartbeatTimeout
                                          electionTimeout:Preference_MyETCDElectionTimeout];
     launchOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
+    
+
 }
 
 -(void)refreshMyTTL

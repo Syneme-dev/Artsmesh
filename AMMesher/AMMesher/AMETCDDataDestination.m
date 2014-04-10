@@ -184,9 +184,23 @@
                 AMGroup* newGroup = [[AMGroup alloc] initWithName:shortName domain:domain location:location];
                 @synchronized(self)
                 {
-                    [self willChangeValueForKey:@"userGroups"];
-                    [self.userGroups addObject:newGroup];
-                    [self didChangeValueForKey:@"userGroups"];
+                    BOOL shouldAdd = YES;
+                    for (int i = 0; i < [self.userGroups count]; i++)
+                    {
+                        AMGroup* group = [self.userGroups objectAtIndex:i];
+                        if ([group.fullname isEqualToString:groupName])
+                        {
+                            shouldAdd = NO;
+                            break;
+                        }
+                    }
+                    
+                    if (shouldAdd)
+                    {
+                        [self willChangeValueForKey:@"userGroups"];
+                        [self.userGroups addObject:newGroup];
+                        [self didChangeValueForKey:@"userGroups"];
+                    }
                 }
                 
                 return;

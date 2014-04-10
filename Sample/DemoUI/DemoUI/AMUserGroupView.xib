@@ -44,7 +44,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <connections>
-                                            <binding destination="u0D-Lj-5gf" name="value" keyPath="arrangedObjects.name" id="3XY-lj-SDq"/>
+                                            <binding destination="u0D-Lj-5gf" name="value" keyPath="arrangedObjects.nodeName" id="LJH-Uf-5g2"/>
                                         </connections>
                                     </tableColumn>
                                 </tableColumns>
@@ -81,10 +81,10 @@
         </customView>
         <treeController objectClassName="AMUserGroupNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="u0D-Lj-5gf">
             <declaredKeys>
-                <string>name</string>
+                <string>nodeName</string>
             </declaredKeys>
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.sharedMesher.userGroups" id="IKA-ls-8WN"/>
+                <binding destination="-2" name="contentArray" keyPath="self.sharedMesher.usergroupDest.userGroups" id="fRW-Tr-PA6"/>
             </connections>
         </treeController>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

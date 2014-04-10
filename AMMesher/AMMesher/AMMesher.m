@@ -19,7 +19,7 @@
 {
     AMLeaderElecter* _elector;
     AMETCDDataSource* _lanSource;
-    AMETCDDataDestination* _usergroupDest;
+    
     NSTimer* _userTTL;
 }
 
@@ -251,10 +251,10 @@
                                                  ip:Preference_MyIp
                                                port:Preference_MyETCDClientPort];
         
-        _usergroupDest = [[AMETCDDataDestination alloc]
+        self.usergroupDest = [[AMETCDDataDestination alloc]
                           init];
         
-        [_lanSource addDestination:_usergroupDest];
+        [_lanSource addDestination:self.usergroupDest];
         [_lanSource watch];
         
     }
@@ -268,56 +268,5 @@
     
     
 }
-
-
-#pragma mark -
-#pragma mark KVO
-
-
--(NSUInteger)countOfGroups
-{
-    return [self.userGroups count];
-}
-
--(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index
-{
-    return [self.userGroups objectAtIndex:index];
-}
-
--(void)addGroupsObject:(AMUserGroupNode *)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups addObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups insertObject:object atIndex:index];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)removeObjectFromGroupsAtIndex:(NSUInteger)index
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups removeObjectAtIndex:index];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)removeGroupsObject:(AMUserGroupNode *)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups removeObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups replaceObjectAtIndex:index withObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
 
 @end

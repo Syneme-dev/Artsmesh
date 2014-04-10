@@ -366,4 +366,55 @@
     }
 }
 
+#pragma mark -
+#pragma mark KVO
+
+
+-(NSUInteger)countOfGroups
+{
+    return [self.userGroups count];
+}
+
+-(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index
+{
+    return [self.userGroups objectAtIndex:index];
+}
+
+-(void)addGroupsObject:(AMUserGroupNode *)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups addObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups insertObject:object atIndex:index];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)removeObjectFromGroupsAtIndex:(NSUInteger)index
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups removeObjectAtIndex:index];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)removeGroupsObject:(AMUserGroupNode *)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups removeObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+-(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
+{
+    [self willChangeValueForKey:@"userGroups"];
+    [self.userGroups replaceObjectAtIndex:index withObject:object];
+    [self didChangeValueForKey:@"userGroups"];
+}
+
+
+
 @end

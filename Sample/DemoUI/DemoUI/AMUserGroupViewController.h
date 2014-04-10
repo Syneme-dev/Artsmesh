@@ -8,10 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol UserGroupChangeHandler;
 @class AMMesher;
 
-@interface AMUserGroupViewController : NSViewController<UserGroupChangeHandler >
+@interface AMUserGroupViewController : NSViewController
 
 @property (weak) IBOutlet NSOutlineView *userGroupOutline;
 

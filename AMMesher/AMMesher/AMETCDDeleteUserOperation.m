@@ -32,29 +32,19 @@
     
     NSLog(@"Removing user...");
     
-    int retry = 0;
     NSString* myUserDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", self.fullUserName, self.fullUserName];
     
-    for (retry=0; retry < 3; retry++)
+    AMETCDResult* res = [self.etcdApi deleteDir:myUserDir recursive:YES];
+    if (res.errCode == 0)
     {
-        AMETCDResult* res = [self.etcdApi deleteDir:myUserDir recursive:YES];
-        if(res != nil && res.errCode == 0)
-        {
-            retry = 0;
-            break;
-        }
-        
-        if (retry == 3)
-        {
-            self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        self.isResultOK = YES;
     }
-    
-    self.isResultOK = YES;
+    else
+    {
+        self.isResultOK = NO;
+    }
+
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-    
 }
 
 

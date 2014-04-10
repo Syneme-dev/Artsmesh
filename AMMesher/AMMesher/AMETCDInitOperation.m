@@ -8,6 +8,7 @@
 
 #import "AMETCDInitOperation.h"
 #import "AMETCDApi/AMETCD.h"
+#import "AMETCDOperationHeader.h"
 
 @implementation AMETCDInitOperation
 
@@ -35,7 +36,7 @@
             if(self.isCancelled)
             {
                 self.isResultOK = NO;
-                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(InitETCDOperationDidFinish:) withObject:self waitUntilDone:NO];
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
                 return;
             }
             
@@ -49,13 +50,13 @@
         if(retry == 3)
         {
             self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(InitETCDOperationDidFinish:) withObject:self waitUntilDone:NO];
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
             return;
         }
     }
     
     self.isResultOK = YES;
-    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(InitETCDOperationDidFinish:) withObject:self waitUntilDone:NO];
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
 }
 
 

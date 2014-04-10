@@ -46,9 +46,6 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-    id userPluginClass = allPlugins[UserGroupPluginName];
-    [userPluginClass canQuit];
-
     [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 

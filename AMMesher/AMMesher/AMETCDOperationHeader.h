@@ -24,4 +24,6 @@
 #import "AMETCDPeerDestination.h"
 #import "AMETCDDataDestination.h"
 #import "AMKillETCDOperation.h"
+#import "AMETCDUserTTLOperation.h"
+#import "AMETCDGroupTTLOperation.h"
 

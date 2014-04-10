@@ -21,7 +21,7 @@
     if (self = [super init:ip port:port])
     {
         self.fullGroupName = fullGroupName;
-        self.fullGroupName = fullGroupName;
+        self.fullUserName  = fullUserName;
         self.ttl = ttl;
     }
     

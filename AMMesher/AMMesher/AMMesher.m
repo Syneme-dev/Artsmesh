@@ -20,6 +20,7 @@
     AMLeaderElecter* _elector;
     AMETCDDataSource* _lanSource;
     AMETCDDataDestination* _usergroupDest;
+    NSTimer* _userTTL;
 }
 
 +(id)sharedAMMesher
@@ -47,7 +48,7 @@
         {
             etcdOperQueue = [[NSOperationQueue alloc] init];
             etcdOperQueue.name = @"ETCD Operation Queue";
-            etcdOperQueue.maxConcurrentOperationCount = 1;
+            //etcdOperQueue.maxConcurrentOperationCount = 1;
         }
     }
     
@@ -116,8 +117,33 @@
                                          peers:nil
                                          heartbeatInterval:Preference_MyETCDHeartbeatTimeout
                                          electionTimeout:Preference_MyETCDElectionTimeout];
+    launchOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
+}
+
+-(void)refreshMyTTL
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
+    NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
+                               Preference_DefaultGroupName,
+                               Preference_MyDomain,
+                               Preference_MyLocation];
+    
+    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                           initWithParameter:Preference_MyIp
+                                           port:Preference_MyETCDClientPort
+                                           fullUserName:fullUserName
+                                           fullGroupName:fullGroupName
+                                           ttl:Preference_MyEtCDUserTTL];
+    
+     userTTLOper.delegate = self;
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+    
 }
 
 
@@ -172,8 +198,55 @@
 #pragma mark AMETCDOperationDelegate
 -(void)AMETCDOperationDidFinished:(AMETCDOperation *)oper
 {
-    if(oper.isResultOK == YES && [oper.operationType isEqualToString:@"lanuch"])
+    if([oper isKindOfClass:[AMETCDLaunchOperation class]])
     {
+        if (oper.isResultOK == NO)
+        {
+            [NSException raise:@"etcd start error" format:nil];
+            return;
+        }
+    
+        NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                                  Preference_MyUserName,
+                                  Preference_MyDomain,
+                                  Preference_MyLocation];
+        NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
+                                  Preference_DefaultGroupName,
+                                  Preference_MyDomain,
+                                  Preference_MyLocation];
+        
+        AMETCDAddGroupOperation* addGroupOper = [[AMETCDAddGroupOperation alloc]
+                                                 initWithParameter:Preference_MyIp
+                                                 port:Preference_MyETCDClientPort
+                                                 fullGroupName:fullGroupName
+                                                 ttl:0];
+        
+        
+        AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
+                                               initWithParameter:Preference_MyIp
+                                               port:Preference_MyETCDClientPort
+                                               fullUserName:fullUserName
+                                               fullGroupName:fullGroupName
+                                               ttl:Preference_MyEtCDUserTTL];
+        
+        
+        AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                               initWithParameter:Preference_MyIp
+                                               port:Preference_MyETCDClientPort
+                                               fullUserName:fullUserName
+                                               fullGroupName:fullGroupName
+                                               ttl:Preference_MyEtCDUserTTL];
+        addGroupOper.delegate = self;
+        addUserOper.delegate = self;
+        userTTLOper.delegate = self;
+        
+        [addGroupOper addDependency:addGroupOper];
+        [userTTLOper addDependency:addUserOper];
+        
+        [[AMMesher sharedEtcdOperQueue] addOperation:addGroupOper];
+        [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
+        [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+        
         _lanSource = [[AMETCDDataSource alloc] init:@"lanSource"
                                                  ip:Preference_MyIp
                                                port:Preference_MyETCDClientPort];
@@ -184,25 +257,16 @@
         [_lanSource addDestination:_usergroupDest];
         [_lanSource watch];
         
-        
-        NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                  Preference_MyUserName,
-                                  Preference_MyDomain,
-                                  Preference_MyLocation];
-        NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
-                                  Preference_DefaultGroupName,
-                                  Preference_MyDomain,
-                                  Preference_MyLocation];
-        
-        AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
-                                               initWithParameter:Preference_MyIp
-                                               port:Preference_MyETCDClientPort
-                                               fullUserName:fullUserName
-                                               fullGroupName:fullGroupName
-                                               ttl:Preference_MyEtCDUserTTL];
-        
-        [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
     }
+    else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
+    {
+        _userTTL = [NSTimer scheduledTimerWithTimeInterval:Preference_MyECDUserTTLInterval
+                                                    target:self selector:@selector(refreshMyTTL)
+                                                  userInfo:nil
+                                                   repeats:NO];
+    }
+    
+    
 }
 
 

@@ -80,16 +80,20 @@
         return;
     }
     
-    if ([oper isKindOfClass:[AMETCDWatchOperation class]] && oper.isResultOK == YES)
+    if ([oper isKindOfClass:[AMETCDWatchOperation class]])
     {
         AMETCDWatchOperation* watchOper = (AMETCDWatchOperation*)oper;
-        _changeIndex =  watchOper.currentIndex + 1;
         
-        @synchronized(self)
+        if (watchOper.isResultOK == YES)
         {
-            for(AMETCDDestination* dest in self.destinations)
+            _changeIndex =  watchOper.currentIndex + 1;
+            
+            @synchronized(self)
             {
-                [dest handleWatchEtcdFinished:oper.operationResult source:self];
+                for(AMETCDDestination* dest in self.destinations)
+                {
+                    [dest handleWatchEtcdFinished:oper.operationResult source:self];
+                }
             }
         }
         

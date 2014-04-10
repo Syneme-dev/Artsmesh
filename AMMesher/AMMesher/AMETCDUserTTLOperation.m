@@ -8,6 +8,7 @@
 
 #import "AMETCDUserTTLOperation.h"
 #import "AMETCDApi/AMETCD.h"
+#import "AMETCDOperationDelegate.h"
 
 @implementation AMETCDUserTTLOperation
 
@@ -20,7 +21,7 @@
     if (self = [super init:ip port:port])
     {
         self.fullGroupName = fullGroupName;
-        self.fullUserName = fullGroupName;
+        self.fullUserName = fullUserName;
         self.ttl = ttl;
     }
     
@@ -29,38 +30,29 @@
 
 -(void)main
 {
-    if (self.isCancelled){return;}
+    if (self.isCancelled)
+    {
+        self.isResultOK = NO;
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
+        return;
+    }
     
     NSLog(@"Updating TTL information...");
     
-    int retry = 0;
-    
     NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", self.fullGroupName, self.fullUserName];
     
-    //BOOL isExist = YES;
     AMETCDResult* res = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:YES];
-    if (res.errCode != 0)
+    if (res.errCode == 0)
     {
-        for (retry = 0; retry < 3; retry++)
-        {
-            if(self.isCancelled){return;}
-            
-            AMETCDResult* res = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:YES];
-            if(res != nil && res.errCode == 0)
-            {
-                retry = 0;
-                break;
-            }
-        }
-        
-        if (retry == 3)
-        {
-            self.isResultOK = NO;
-            return;
-        }
+        self.isResultOK = YES;
+    }
+    else
+    {
+        self.isResultOK = NO;
     }
     
-    self.isResultOK = YES;
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
+    
 }
 
 

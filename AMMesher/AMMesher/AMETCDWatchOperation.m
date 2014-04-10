@@ -36,36 +36,21 @@
     
     NSLog(@"watch etcd...");
     
-    int retry = 0;
-    
     NSString* rootDir = @"/Groups/";
     
-    for (retry =0; retry < 3; retry++)
+    int actIndex;
+    self.operationResult= [self.etcdApi watchDir:rootDir fromIndex:self.expectedIndex acturalIndex:&actIndex timeout:5];
+    if(self.operationResult.errCode == 0)
     {
-        if(self.isCancelled)
-        {
-            self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
-        
-        int actIndex;
-        self.operationResult= [self.etcdApi watchDir:rootDir fromIndex:self.expectedIndex acturalIndex:&actIndex timeout:1];
-        if(self.operationResult.errCode == 0)
-        {
-            self.currentIndex = actIndex;
-            self.isResultOK = YES;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
+        self.isResultOK = YES;
+        self.currentIndex = actIndex;
     }
-    
-    if (retry == 3)
+    else
     {
         self.isResultOK = NO;
-        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-        return;
     }
+
+    [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
 }
 
 

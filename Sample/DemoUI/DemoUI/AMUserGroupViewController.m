@@ -34,6 +34,16 @@
 
 - (IBAction)goOnline:(id)sender
 {
-    [self.sharedMesher goOnline];
+    if ([[self.onlineButton title] isEqualToString:@"Online"])
+    {
+        [self.sharedMesher goOnline];
+        [self.onlineButton setTitle:@"Offline"];
+    }
+    else if([[self.onlineButton title] isEqualToString:@"Offline"])
+    {
+        [self.sharedMesher goOffline];
+        [self.onlineButton setTitle:@"Online"];
+    }
+    
 }
 @end

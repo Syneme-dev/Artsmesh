@@ -19,5 +19,6 @@
 @property (weak) AMMesher* sharedMesher;
 
 - (IBAction)goOnline:(id)sender;
+@property (weak) IBOutlet NSButton *onlineButton;
 
 @end

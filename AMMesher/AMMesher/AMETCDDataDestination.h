@@ -12,4 +12,6 @@
 
 @property (atomic) NSMutableArray* userGroups;
 
+-(void)clearUserGroup;
+
 @end

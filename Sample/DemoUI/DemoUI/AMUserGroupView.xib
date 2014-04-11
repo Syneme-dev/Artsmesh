@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserGroupViewController">
             <connections>
+                <outlet property="onlineButton" destination="qD4-ey-cpg" id="g6m-Pk-WCp"/>
                 <outlet property="treeViewController" destination="u0D-Lj-5gf" id="15I-rZ-3ig"/>
                 <outlet property="userGroupOutline" destination="vcz-fd-kzK" id="yRF-tB-qQW"/>
                 <outlet property="view" destination="5d4-5O-feO" id="qB8-O0-9Hr"/>

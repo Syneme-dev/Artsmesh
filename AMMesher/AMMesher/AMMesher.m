@@ -60,7 +60,6 @@
     {
         self.isLeader = NO;
         self.etcdState = 0;
-        self.groupsState  = 0;
         
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = [Preference_MyETCDServerPort intValue];
@@ -86,14 +85,21 @@
                               Preference_MyUserName,
                               Preference_MyDomain,
                               Preference_MyLocation];
+    
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-    AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
-                                        initWithParameter:Preference_MyIp
-                                          port:Preference_MyETCDClientPort
-                                          fullUserName:fullUserName];
+    
+    @synchronized(self)
+    {
+        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
+                                              initWithParameter:_dataSource.ip
+                                              port:_dataSource.port
+                                              fullUserName:fullUserName];
+        
+        [delOper start];
 
-    [delOper start];
-
+    }
+   
+    
     AMKillETCDOperation* etcdKiller = [[AMKillETCDOperation alloc] init];
     [etcdKiller start];
     
@@ -106,7 +112,7 @@
 
 -(void)goOnline
 {
-    if(self.etcdState != 1 || self.groupsState != 0)
+    if(self.etcdState != 1)
     {
         return;
     }
@@ -115,11 +121,35 @@
     
     @synchronized(self)
     {
+        [self.usergroupDest clearUserGroup];
+        
         [_dataSource stopWatch];
         _dataSource.ip   = Preference_ArtsmeshIO_IP;
         _dataSource.port = Preference_ArtsmeshIO_Port;
         [self addSelfToDataSource];
     }
+}
+
+-(void)goOffline
+{
+    if(self.etcdState != 1)
+    {
+        return;
+    }
+    
+    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
+    
+    @synchronized(self)
+    {
+        [self.usergroupDest clearUserGroup];
+        
+        [_dataSource stopWatch];
+        _dataSource.ip   = Preference_MyIp;
+        _dataSource.port = Preference_MyETCDClientPort;
+        [self addSelfToDataSource];
+    }
+
+
 }
 
 -(void)launchETCD

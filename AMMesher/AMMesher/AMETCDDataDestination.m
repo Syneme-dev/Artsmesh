@@ -22,6 +22,14 @@
     return self;
 }
 
+-(void)clearUserGroup
+{
+    @synchronized(self)
+    {
+        [self.userGroups removeAllObjects];
+    }
+}
+
 -(void)parseUserNode:(AMETCDNode*)userNode
 {
     NSArray* pathes = [userNode.key componentsSeparatedByString:@"/"];

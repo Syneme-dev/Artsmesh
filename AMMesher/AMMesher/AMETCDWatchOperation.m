@@ -36,7 +36,7 @@
     
     NSLog(@"watch etcd...");
     
-    NSString* rootDir = @"/Groups/";
+    NSString* rootDir = @"/Users/";
     
     int actIndex;
     self.operationResult= [self.etcdApi watchDir:rootDir fromIndex:self.expectedIndex acturalIndex:&actIndex timeout:5];

@@ -12,31 +12,34 @@
 
 @implementation AMGroup
 
--(id)initWithName:(NSString*)name domain:(NSString*)domain  location:(NSString*)location;
+-(id)init
 {
     if (self = [super init])
     {
         self.isLeaf = NO;
         self.children = [[NSMutableArray alloc] init];
         self.parent = nil;
-        self.nodeName = name;
-        
-        self.fullname = [NSString stringWithFormat:@"%@@%@.%@", name, domain, location];
     }
     
     return self;
 }
 
--(void)updateGroup:(AMGroup*)group
+-(NSString*)nodeName
 {
-    if(![group.fullname isEqualToString:self.fullname])
+    if (self.uniqueName == nil)
     {
-        return;
+        return @"default";
     }
     
-    self.description = group.description;
-    self.ip = group.ip;
-    self.port = group.port;
+//    NSArray* nameParts = [AMGroup parseFullGroupName:self.uniqueName];
+//    if (nameParts != nil && [nameParts count] >= 1)
+//    {
+//        return [nameParts objectAtIndex:0];
+//    }
+//    
+//    return @"default";
+    
+    return self.uniqueName;
 }
 
 +(NSArray*)parseFullGroupName:(NSString*)fullName

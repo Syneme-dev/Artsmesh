@@ -38,8 +38,8 @@
     NSLog(@"Server:%@ Adding User...", self.etcdApi.serverIp);
     int retry = 0;
     
-    NSString* userDirKey = [NSString stringWithFormat:@"/Groups/%@/Users/%@", self.fullGroupName, self.fullUserName];
-    AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:30 prevExist:NO];
+    NSString* userDirKey = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
+    AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
     if (res.errCode != 0 )
     {
         for (retry = 0; retry < 3; retry++)
@@ -51,10 +51,37 @@
                 return;
             }
             
-            AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:_ttl prevExist:NO];
+            AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
             if(res.errCode == 0)
             {
-                retry = 0;
+                break;
+            }
+        }
+        
+        if (retry == 3)
+        {
+            self.isResultOK = NO;
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
+            return;
+        }
+    }
+    
+    NSString* groupPropKey = [NSString stringWithFormat:@"%@GroupName", userDirKey ];
+    res = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
+    if (res.errCode != 0 )
+    {
+        for (retry = 0; retry < 3; retry++)
+        {
+            if(self.isCancelled)
+            {
+                self.isResultOK = NO;
+                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
+                return;
+            }
+            
+            res = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
+            if(res.errCode == 0)
+            {
                 break;
             }
         }

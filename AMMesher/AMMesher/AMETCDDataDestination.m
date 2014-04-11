@@ -22,100 +22,97 @@
     return self;
 }
 
-
--(AMUser*)parseUserNode:(AMETCDNode*)userNode
+-(void)parseUserNode:(AMETCDNode*)userNode
 {
     NSArray* pathes = [userNode.key componentsSeparatedByString:@"/"];
-    if ([pathes count] < 5)
-    {
-        return  nil;
-    }
     
-    NSString* fullUserName = [pathes objectAtIndex:4];
-    NSArray* userNameParts = [AMUser parseFullUserName:fullUserName];
-    if ([userNameParts count] < 3)
-    {
-        return nil;
-    }
-    NSString* shortUserName = [userNameParts objectAtIndex:0];
-    NSString* userDomain = [userNameParts objectAtIndex:1];
-    NSString* userLocation = [userNameParts objectAtIndex:2];
-    
-    AMUser* newUser = [[AMUser alloc] initWithName:shortUserName domain:userDomain location:userLocation];
-    
-    if (userNode.nodes != nil)
-    {
-        for (AMETCDNode* userFieldNode in userNode.nodes )
-        {
-            NSArray* pathes = [userFieldNode.key componentsSeparatedByString:@"/"];
-            if ([pathes count] < 6)
-            {
-                continue;
-            }
-            
-            if (!userFieldNode.isDir)
-            {
-                [newUser setValue:userFieldNode.value forKey:userFieldNode.key];
-            }
-        }
-    }
-    
-    return newUser;
-}
-
-
--(AMGroup*)parseGroupNode:(AMETCDNode*) groupNode
-{
-    NSArray* pathes = [groupNode.key componentsSeparatedByString:@"/"];
     if ([pathes count] < 3)
     {
-        return nil;
+        return;
     }
     
-    NSString* groupName = pathes[2];
-    NSArray* groupNameParts = [AMGroup parseFullGroupName:groupName];
-    if ([groupNameParts count] < 3)
+    if(![[pathes objectAtIndex:1] isEqualToString:@"Users"])
     {
-        return nil;
+        return;
     }
     
-    NSString* shortName = [groupNameParts objectAtIndex:0];
-    NSString* domain = [groupNameParts objectAtIndex:1];
-    NSString* location = [groupNameParts objectAtIndex:2];
+    NSString* uniqueUserName = [pathes objectAtIndex:2];
+    NSString* uniqueGroupName = @"Artsmesh";
     
-    AMGroup* newGroup = [[AMGroup alloc] initWithName:shortName domain:domain location:location];
-    for (AMETCDNode* groupPropertyNode in groupNode.nodes)
+    NSMutableDictionary* otherProps = [[NSMutableDictionary alloc] init];
+
+    
+    for (AMETCDNode* userPropNode in userNode.nodes)
     {
-        NSArray* pathes = [groupPropertyNode.key componentsSeparatedByString:@"/"];
-        if ([pathes count] < 4)
+        NSArray* userPropPathes = [userPropNode.key componentsSeparatedByString:@"/"];
+        if ([userPropPathes count] < 4)
         {
             continue;
         }
         
-        if (!groupPropertyNode.isDir)
+        NSString* userPropName = [userPropPathes objectAtIndex:3];
+        if ([userPropName isEqualToString:@"GroupName"])
         {
-            [newGroup setValue:groupPropertyNode.value forKey:groupPropertyNode.key];
+            uniqueGroupName  = userPropNode.value;
         }
-        
-        if ([[pathes objectAtIndex:3] isEqualToString:@"Users"])
+        else
         {
-            NSMutableArray* usersInGroup = [[NSMutableArray alloc] init];
-            
-            for (AMETCDNode* userNode in groupPropertyNode.nodes)
-            {
-                AMUser* newUser = [self parseUserNode:userNode];
-                
-                if (newUser != nil)
-                {
-                    [usersInGroup addObject:newUser];
-                }
-            }
+            [otherProps setObject:userPropNode.value forKey:userPropName];
         }
     }
+    
+    @synchronized(self)
+    {
+        [self willChangeValueForKey:@"userGroups"];
+        
+        BOOL shouldAddGroup= YES;
+        AMGroup* userIntoGroup = nil;
+        
+        for (int i = 0 ; i < [self.userGroups count]; i++)
+        {
+            AMGroup* existGroup = [self.userGroups objectAtIndex:i];
+            if([existGroup.uniqueName isEqualToString:uniqueGroupName])
+            {
+                shouldAddGroup  = NO;
+                userIntoGroup = existGroup;
+            }
+        }
+        
+        if (shouldAddGroup == YES)
+        {
+            userIntoGroup = [[AMGroup alloc] init];
+            userIntoGroup.uniqueName = uniqueGroupName;
 
-    return newGroup;
+            [self.userGroups addObject:userIntoGroup];
+        }
+        
+        AMUser* newUser = nil;
+        BOOL shouldAddUser = YES;
+        for (int i = 0; i < [userIntoGroup countOfChildren]; i++)
+        {
+            AMUser* existUser = [userIntoGroup.children objectAtIndex:i];
+            if ([existUser.uniqueName isEqualToString:uniqueUserName])
+            {
+                newUser = existUser;
+                shouldAddUser = NO;
+            }
+        }
+        if (shouldAddUser)
+        {
+            newUser = [[AMUser alloc] init];
+            newUser.uniqueName = uniqueUserName;
+            [userIntoGroup.children addObject:newUser];
+        }
+        
+        for(NSString* key in otherProps)
+        {
+            NSString* val = [otherProps objectForKey:key];
+            [newUser setValue: val forKeyPath:key];
+        }
+
+        [self didChangeValueForKey:@"userGroups"];
+    }
 }
-
 
 
 -(void)handleQueryEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
@@ -125,257 +122,100 @@
         return;
     }
     
-    if (res.node.nodes == nil || ![res.node.key isEqualToString:@"/Groups"])
+    if (res.node.nodes == nil || ![res.node.key isEqualToString:@"/Users"])
     {
         return;
     }
     
-    NSMutableArray* groups = [[NSMutableArray alloc] init];
-    for (AMETCDNode* groupNode in res.node.nodes)
+    for (AMETCDNode* userNode in res.node.nodes)
     {
-        AMGroup* newGroup = [self parseGroupNode: groupNode];
-        
-        if (newGroup != nil)
-        {
-            [groups addObject:newGroup  ];
-        }
-    }
-    
-    @synchronized(self)
-    {
-        [self willChangeValueForKey:@"userGroups"];
-        self.userGroups = groups;
-        [self didChangeValueForKey:@"userGroups"];
+        [self parseUserNode:userNode];
     }
 }
 
 
 -(void)handleWatchEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
 {
-    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
-    {
-        return;
-    }
-    
-    NSArray* pathes = [res.node.key componentsSeparatedByString:@"/"];
-    if ([pathes count] == 3)
-    {
-        if ([[pathes objectAtIndex:1] isEqualToString:@"Groups"])
-        {
-            //Group Operation
-            if ([res.action isEqualToString:@"update"])
-            {
-                //ttl
-                return;
-            }
-            
-            if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
-            {
-                //add Group
-                NSString* groupName = [pathes objectAtIndex:2];
-                NSArray* groupNameParts = [AMGroup parseFullGroupName:groupName];
-                
-                NSString* shortName = [groupNameParts objectAtIndex:0];
-                NSString* domain = [groupNameParts objectAtIndex:1];
-                NSString* location = [groupNameParts objectAtIndex:2];
-                
-                AMGroup* newGroup = [[AMGroup alloc] initWithName:shortName domain:domain location:location];
-                @synchronized(self)
-                {
-                    BOOL shouldAdd = YES;
-                    for (int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            shouldAdd = NO;
-                            break;
-                        }
-                    }
-                    
-                    if (shouldAdd)
-                    {
-                        [self willChangeValueForKey:@"userGroups"];
-                        [self.userGroups addObject:newGroup];
-                        [self didChangeValueForKey:@"userGroups"];
-                    }
-                }
-                
-                return;
-            }
-            
-            if([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expire"])
-            {
-                //delete Group
-                NSString* groupName = [pathes objectAtIndex:2];
-                @synchronized(self)
-                {
-                    for(int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            [self willChangeValueForKey:@"userGroups"];
-                            [self.userGroups removeObject:group];
-                            [self didChangeValueForKey:@"userGroups"];
-                            break;
-                        }
-                    }
-                }
-                
-                return;
-            }
-        }
-    }
-    
-    if ([pathes count] == 4)
-    {
-        if ([[pathes objectAtIndex:1] isEqualToString:@"Groups"])
-        {
-            //Group Operation
-            if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
-            {
-                //update Group Property
-                NSString* groupName = [pathes objectAtIndex:2];
-                NSString* groupProperyName = [pathes objectAtIndex:3];
-                @synchronized(self)
-                {
-                    for(int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            [self willChangeValueForKey:@"userGroups"];
-                            [group setValue:res.node.value forKey:groupProperyName];
-                            [self didChangeValueForKey:@"userGroups"];
-                            break;
-                        }
-                    }
-                }
-                
-                return;
-            }
-        }
-    }
-
-    
-    if ([pathes count] == 5)
-    {
-        if ([[pathes objectAtIndex:3] isEqualToString:@"Users"])
-        {
-            if ([res.action isEqualToString:@"update"])
-            {
-                //ttl
-                return;
-            }
-
-            if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
-            {
-                //add User
-                NSString* groupName = [pathes objectAtIndex:2];
-                NSString* userName = [pathes objectAtIndex:4];
-                
-                NSArray* userNameParts = [AMUser parseFullUserName:userName];
-                
-                NSString* shortName = [userNameParts objectAtIndex:0];
-                NSString* domain = [userNameParts objectAtIndex:1];
-                NSString* location = [userNameParts objectAtIndex:2];
-                
-                AMUser* newUser = [[AMUser alloc] initWithName:shortName domain:domain location:location];
-                @synchronized(self)
-                {
-                    for (int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            [self willChangeValueForKey:@"userGroups"];
-                            [group.children addObject:newUser];
-                            [self didChangeValueForKey:@"userGroups"];
-                        }
-                    }
-                }
-                
-                return;
-            }
-            
-            if ([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expire"])
-            {
-                //delete User
-                NSString* groupName = [pathes objectAtIndex:2];
-                NSString* userName = [pathes objectAtIndex:4];
-                
-                @synchronized(self)
-                {
-                    for (int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            AMGroup* group = [self.userGroups objectAtIndex:i];
-                            for (int j = 0 ; j < [group.children count]; j++)
-                            {
-                                AMUser* user = [group.children objectAtIndex:j];
-                                if ([user.fullname isEqualToString:userName])
-                                {
-                                    [self willChangeValueForKey:@"userGroups"];
-                                    [group.children removeObject:user];
-                                    [self didChangeValueForKey:@"userGroups"];
-                                    break;
-                                }
-                            }
-                            
-                            break;
-                        }
-                    }
-                }
-                
-                return;
-            }
-        }
-    }
-
-
-    if ([pathes count] == 6)
-    {
-        if ([[pathes objectAtIndex:3] isEqualToString:@"Users"])
-        {
-            if ([res.action isEqualToString:@"set"])
-            {
-                //update User
-                NSString* groupName = [pathes objectAtIndex:2];
-                NSString* userName = [pathes objectAtIndex:4];
-                NSString* userPropertyName = [pathes objectAtIndex:5];
-                
-                @synchronized(self)
-                {
-                    for (int i = 0; i < [self.userGroups count]; i++)
-                    {
-                        AMGroup* group = [self.userGroups objectAtIndex:i];
-                        if ([group.fullname isEqualToString:groupName])
-                        {
-                            AMGroup* group = [self.userGroups objectAtIndex:i];
-                            for (int j = 0 ; j < [group.children count]; j++)
-                            {
-                                AMUser* user = [group.children objectAtIndex:j];
-                                if ([user.fullname isEqualToString:userName])
-                                {
-                                    [self willChangeValueForKey:@"userGroups"];
-                                    [user setValue:res.node.value forKey:userPropertyName];
-                                    [self didChangeValueForKey:@"userGroups"];
-                                    break;
-                                }
-                            }
-                            
-                            break;
-                        }
-                    }
-                }
-                
-                return;
-            }
-        }
-    }
+//    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
+//    {
+//        return;
+//    }
+//    
+//    NSString* userName = nil;
+//    NSString* prevGroupName = nil;
+//    NSString* currGroupName = nil;
+//    NSMutableDictionary* otherProp = [[NSMutableDictionary alloc] init];
+//    
+//    NSArray* pathes = [res.node.key componentsSeparatedByString:@"/"];
+//    if ([pathes count] == 3)
+//    {
+//        if ([res.action isEqualToString:@"update"])
+//        {
+//            //ttl
+//            return;
+//        }
+//        
+//        if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
+//        {
+//            //add User, will not update until group is assigned
+//            return;
+//        }
+//        
+//        if([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expire"])
+//        {
+//            //delete user
+//            userName = [pathes objectAtIndex:2];
+//            
+//            @synchronized(self)
+//            {
+//                [self willChangeValueForKey:@"userGroups"];
+//                
+//                for(int i = 0; i < [self.userGroups count]; i++)
+//                {
+//                    AMGroup* existGroup = [self.userGroups objectAtIndex:i];
+//                    for(int j = 0; j < [existGroup.children count]; j++)
+//                    {
+//                        AMUser* existUser = [existGroup.children objectAtIndex:j];
+//                        if ([existUser.fullname isEqualToString:userName])
+//                        {
+//                            [existGroup.children removeObject:existUser];
+//                            break;
+//                        }
+//                    }
+//                    
+//                    if ([existGroup countOfChildren] == 0 && ![existGroup.fullname isEqualToString:@"Artsmesh"])
+//                    {
+//                        [self.userGroups removeObject:existGroup];
+//                    }
+//                }
+//                
+//                [self didChangeValueForKey:@"userGroups"];
+//            }
+//        }
+//        
+//    }
+//    else if ([pathes count] == 4)
+//    {
+//        userName = [pathes objectAtIndex:2];
+//        NSString* userChangedPropName = [pathes objectAtIndex:3];
+//        
+//        if ([userChangedPropName isEqualToString:@"GroupName"])
+//        {
+//            if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
+//            {
+//                //add User, will not update until group is assigned
+//                return;
+//            }
+//            else
+//            {
+//                //join another group
+//            }
+//        }
+//        else
+//        {
+//            //ordinary prop change
+//        }
+//    }
 }
 
 #pragma mark -

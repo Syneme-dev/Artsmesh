@@ -11,14 +11,12 @@
 @interface AMETCDUserTTLOperation : AMETCDOperation
 
 @property NSString* fullUserName;
-@property NSString* fullGroupName;
 @property int ttl;
 
 
 -(id)initWithParameter:(NSString*)ip
             port:(NSString*)port
               fullUserName:(NSString*)fullUserName
-             fullGroupName:(NSString*)fullGroupName
                    ttl:(int)ttl;
 
 @end

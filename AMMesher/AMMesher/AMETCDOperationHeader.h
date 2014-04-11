@@ -10,9 +10,6 @@
 #import "AMETCDOperation.h"
 #import "AMETCDQueryOperation.h"
 #import "AMETCDWatchOperation.h"
-#import "AMETCDAddGroupOperation.h"
-#import "AMETCDDeleteGroupOperation.h"
-#import "AMETCDUpdateGroupOperation.h"
 #import "AMETCDAddUserOperation.h"
 #import "AMETCDDeleteUserOperation.h"
 #import "AMETCDUpdateUserOperation.h"
@@ -20,6 +17,5 @@
 #import "AMETCDInitOperation.h"
 #import "AMKillETCDOperation.h"
 #import "AMETCDUserTTLOperation.h"
-#import "AMETCDGroupTTLOperation.h"
 
 

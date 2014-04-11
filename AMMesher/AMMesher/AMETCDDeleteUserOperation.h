@@ -11,13 +11,9 @@
 @interface AMETCDDeleteUserOperation : AMETCDOperation
 
 @property NSString* fullUserName;
-@property NSString* fullGroupName;
 
 -(id)initWithParameter:(NSString*)ip
                   port:(NSString*)port
-          fullUserName:(NSString*)fullUserName
-         fullGroupName:(NSString*)fullGroupName;
-
-
+          fullUserName:(NSString*)fullUserName;
 
 @end

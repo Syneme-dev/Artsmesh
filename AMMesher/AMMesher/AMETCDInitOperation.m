@@ -29,7 +29,7 @@
     
     NSLog(@"Initializing ETCD data...");
     
-    AMETCDResult* res = [self.etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
+    AMETCDResult* res = [self.etcdApi setDir:@"/Users/" ttl:0 prevExist:NO];
     if(res.errCode != 0)
     {
         int retry = 0;
@@ -42,35 +42,7 @@
                 return;
             }
             
-            res = [self.etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
-            if(res.errCode == 0)
-            {
-                break;
-            }
-        }
-        
-        if(retry == 3)
-        {
-            self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
-    }
-    
-    res = [self.etcdApi setDir:@"/Artsmesh/" ttl:0 prevExist:NO];
-    if(res.errCode != 0)
-    {
-        int retry = 0;
-        for (; retry < 3; retry++)
-        {
-            if(self.isCancelled)
-            {
-                self.isResultOK = NO;
-                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-                return;
-            }
-            
-            res = [self.etcdApi setDir:@"/Artsmesh/" ttl:0 prevExist:NO];
+            res = [self.etcdApi setDir:@"/Users/" ttl:0 prevExist:NO];
             if(res.errCode == 0)
             {
                 break;

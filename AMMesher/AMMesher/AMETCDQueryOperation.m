@@ -37,7 +37,7 @@
     
     int retry = 0;
     
-    NSString* rootDir = @"/Groups/";
+    NSString* rootDir = @"/Users/";
     
     for (retry =0; retry < 3; retry++)
     {

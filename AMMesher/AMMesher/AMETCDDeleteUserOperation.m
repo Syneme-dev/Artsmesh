@@ -15,12 +15,10 @@
 -(id)initWithParameter:(NSString*)ip
                   port:(NSString*)port
           fullUserName:(NSString*)fullUserName
-         fullGroupName:(NSString*)fullGroupName
 {
     if (self = [super init:ip port:port])
     {
         self.fullUserName = fullUserName;
-        self.fullGroupName = fullGroupName;
     }
     
     return self;
@@ -32,7 +30,7 @@
     
     NSLog(@"Removing user...");
     
-    NSString* myUserDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", self.fullUserName, self.fullUserName];
+    NSString* myUserDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     
     AMETCDResult* res = [self.etcdApi deleteDir:myUserDir recursive:YES];
     if (res.errCode == 0)

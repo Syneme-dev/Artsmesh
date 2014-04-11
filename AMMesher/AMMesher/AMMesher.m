@@ -90,16 +90,11 @@
                               Preference_MyUserName,
                               Preference_MyDomain,
                               Preference_MyLocation];
-    NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
-                               Preference_DefaultGroupName,
-                               Preference_MyDomain,
-                               Preference_MyLocation];
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
     AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
                                         initWithParameter:Preference_MyIp
                                           port:Preference_MyETCDClientPort
-                                          fullUserName:fullUserName
-                                          fullGroupName:fullGroupName];
+                                          fullUserName:fullUserName];
 
     [delOper start];
 
@@ -163,16 +158,11 @@
                               Preference_MyUserName,
                               Preference_MyDomain,
                               Preference_MyLocation];
-    NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
-                               Preference_DefaultGroupName,
-                               Preference_MyDomain,
-                               Preference_MyLocation];
     
     AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
                                            initWithParameter:Preference_MyIp
                                            port:Preference_MyETCDClientPort
                                            fullUserName:fullUserName
-                                           fullGroupName:fullGroupName
                                            ttl:Preference_MyEtCDUserTTL];
     
      userTTLOper.delegate = self;
@@ -247,23 +237,12 @@
                                   Preference_MyUserName,
                                   Preference_MyDomain,
                                   Preference_MyLocation];
-        NSString* fullGroupName = [NSString stringWithFormat:@"%@@%@.%@",
-                                  Preference_DefaultGroupName,
-                                  Preference_MyDomain,
-                                  Preference_MyLocation];
-        
-        AMETCDAddGroupOperation* addGroupOper = [[AMETCDAddGroupOperation alloc]
-                                                 initWithParameter:Preference_MyIp
-                                                 port:Preference_MyETCDClientPort
-                                                 fullGroupName:fullGroupName
-                                                 ttl:0];
-        
         
         AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
                                                initWithParameter:Preference_MyIp
                                                port:Preference_MyETCDClientPort
                                                fullUserName:fullUserName
-                                               fullGroupName:fullGroupName
+                                               fullGroupName:Preference_DefaultGroupName
                                                ttl:Preference_MyEtCDUserTTL];
         
         
@@ -271,16 +250,12 @@
                                                initWithParameter:Preference_MyIp
                                                port:Preference_MyETCDClientPort
                                                fullUserName:fullUserName
-                                               fullGroupName:fullGroupName
                                                ttl:Preference_MyEtCDUserTTL];
-        addGroupOper.delegate = self;
         addUserOper.delegate = self;
         userTTLOper.delegate = self;
         
-        [addUserOper addDependency:addGroupOper];
         [userTTLOper addDependency:addUserOper];
         
-        [[AMMesher sharedEtcdOperQueue] addOperation:addGroupOper];
         [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
         [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
         
@@ -307,7 +282,7 @@
                                   init];
             
             [_lanSource addDestination:self.usergroupDest];
-            [_lanSource watch];
+            //[_lanSource watch];
         }
         
         isSelfAdded = YES;

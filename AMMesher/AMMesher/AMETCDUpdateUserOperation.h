@@ -11,12 +11,10 @@
 @interface AMETCDUpdateUserOperation : AMETCDOperation
 
 @property NSString* fullUserName;
-@property NSString* fullGroupName;
 @property NSDictionary* properties;
 
 -(id)initWithParameter:(NSString*)ip
                   port:(NSString*)port
           fullUserName:(NSString*)fullUserName
-         fullGroupName:(NSString*)fullGroupName
         userProperties:(NSDictionary *)properties;
 @end

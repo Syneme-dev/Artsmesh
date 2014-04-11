@@ -15,12 +15,10 @@
 -(id)initWithParameter:(NSString*)ip
                   port:(NSString*)port
           fullUserName:(NSString*)fullUserName
-         fullGroupName:(NSString*)fullGroupName
         userProperties:(NSDictionary *)properties
 {
     if (self = [super init:ip port:port])
     {
-        self.fullGroupName = fullGroupName;
         self.fullUserName = fullUserName;
         self.properties = properties;
     }
@@ -37,7 +35,7 @@
     
     int retry = 0;
     
-    NSString* userDir = [NSString stringWithFormat:@"/Groups/%@/Users/%@/", self.fullUserName , self.fullUserName];
+    NSString* userDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     
     if (self.properties != nil)
     {
@@ -70,7 +68,6 @@
     
     self.isResultOK = YES;
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-    
 }
 
 

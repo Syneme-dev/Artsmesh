@@ -11,16 +11,15 @@
 
 @interface AMUser : AMUserGroupNode
 
-@property NSString* fullname;
-@property NSString* groupName;
+@property NSString* uniqueName;
 @property NSString* domain;
+@property NSString* location;
+@property NSString* groupName;
 @property NSString* description;
-@property NSString* status;
-@property NSString* ip;
-@property NSString* foafUrl;
 
+-(id)init;
 
--(id)initWithName:(NSString*)name domain:(NSString *)domain location:(NSString *)location;
+-(NSString*)nodeName;
 
 +(NSArray*)parseFullUserName:(NSString*)fullName;
 

@@ -120,6 +120,7 @@
     }
     
     
+    
 }
 
 -(void)launchETCD
@@ -272,15 +273,6 @@
         [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
         [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
         
-        _lanSource = [[AMETCDDataSource alloc] init:@"lanSource"
-                                                 ip:Preference_MyIp
-                                               port:Preference_MyETCDClientPort];
-        
-        self.usergroupDest = [[AMETCDDataDestination alloc]
-                          init];
-        
-        [_lanSource addDestination:self.usergroupDest];
-        [_lanSource watch];
         
     }
     else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
@@ -290,6 +282,27 @@
                                                   userInfo:nil
                                                    repeats:NO];
     }
+    else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
+    {
+        static BOOL isSelfAdded = NO;
+        
+        if (isSelfAdded == NO)
+        {
+            _lanSource = [[AMETCDDataSource alloc] init:@"lanSource"
+                                                     ip:Preference_MyIp
+                                                   port:Preference_MyETCDClientPort];
+            
+            self.usergroupDest = [[AMETCDDataDestination alloc]
+                                  init];
+            
+            [_lanSource addDestination:self.usergroupDest];
+            [_lanSource watch];
+        }
+        
+        isSelfAdded = YES;
+        
+    }
+    
 }
 
 @end

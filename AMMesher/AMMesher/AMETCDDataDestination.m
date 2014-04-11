@@ -340,7 +340,7 @@
     {
         if ([[pathes objectAtIndex:3] isEqualToString:@"Users"])
         {
-            if ([res.action isEqualToString:@"set"] && res.prevNode != nil)
+            if ([res.action isEqualToString:@"set"])
             {
                 //update User
                 NSString* groupName = [pathes objectAtIndex:2];

@@ -145,7 +145,14 @@
                                          electionTimeout:Preference_MyETCDElectionTimeout];
     launchOper.delegate = self;
     
+    AMETCDInitOperation* etcdInitOper = [[AMETCDInitOperation alloc]
+                                         initWithEtcdServer:Preference_MyIp
+                                         port:Preference_MyETCDClientPort];
+    etcdInitOper.delegate = self;
+    [etcdInitOper addDependency:launchOper];
+    
     [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
     
 
 }
@@ -226,7 +233,7 @@
 #pragma mark AMETCDOperationDelegate
 -(void)AMETCDOperationDidFinished:(AMETCDOperation *)oper
 {
-    if([oper isKindOfClass:[AMETCDLaunchOperation class]])
+    if([oper isKindOfClass:[AMETCDInitOperation class]])
     {
         if (oper.isResultOK == NO)
         {

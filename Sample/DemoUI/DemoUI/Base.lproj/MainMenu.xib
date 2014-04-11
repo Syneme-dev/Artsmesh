@@ -680,16 +680,37 @@
                         </scroller>
                     </scrollView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bA9-n0-vrx" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="660" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="688" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-PU-nyb">
+                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Users" id="6ZZ-YA-dZr"/>
+                            </imageView>
+                        </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUO-rc-KBh" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="619" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="647" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3PH-WD-Sgf">
+                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Groups" id="Q1o-Yv-zjM"/>
+                            </imageView>
+                        </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHT-Ro-Aab" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="578" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="606" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Zn-N4-RBZ">
+                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="RecentTags" id="S9w-KR-4r3"/>
+                            </imageView>
+                        </subviews>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTH-N1-xDZ">
                         <rect key="frame" x="430" y="742" width="160" height="17"/>
@@ -753,4 +774,9 @@
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
+    <resources>
+        <image name="Groups" width="40" height="40"/>
+        <image name="RecentTags" width="40" height="40"/>
+        <image name="Users" width="40" height="41"/>
+    </resources>
 </document>

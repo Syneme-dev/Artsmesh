@@ -140,11 +140,6 @@
         return;
     }
     
-    if (res.node.nodes == nil || ![res.node.key isEqualToString:@"/Users"])
-    {
-        return;
-    }
-    
     NSArray* resParts = [res.node.key componentsSeparatedByString:@"/"];
     if([resParts count ] == 3)
     {
@@ -256,15 +251,29 @@
                     [self.userGroups addObject:userIntoGroup];
                 }
                 
+                BOOL shouldAddUser = YES;
+                for (int i = 0; i < [userIntoGroup countOfChildren]; i++)
+                {
+                    AMUser* existUser = [userIntoGroup.children objectAtIndex:i];
+                    if ([existUser.uniqueName isEqualToString:uniqueUserName])
+                    {
+                        newUser = existUser;
+                        shouldAddUser = NO;
+                    }
+                }
+                
                 if (newUser == nil)
                 {
                     newUser = [[AMUser alloc] init];
                     newUser.uniqueName = uniqueUserName;
-                    
                 }
                 
-                [userIntoGroup.children addObject:newUser];
+                if (shouldAddUser)
+                {
+                    [userIntoGroup.children addObject:newUser];
+                }
                 
+            
                 [self didChangeValueForKey:@"userGroups"];
             }
             

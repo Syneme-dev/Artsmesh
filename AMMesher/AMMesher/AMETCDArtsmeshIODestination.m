@@ -50,9 +50,6 @@
     NSString* uniqueUserName = [pathes objectAtIndex:2];
     NSString* uniqueGroupName = @"Artsmesh";
     
-    NSMutableDictionary* otherProps = [[NSMutableDictionary alloc] init];
-    
-    
     for (AMETCDNode* userPropNode in userNode.nodes)
     {
         NSArray* userPropPathes = [userPropNode.key componentsSeparatedByString:@"/"];
@@ -66,18 +63,53 @@
         {
             uniqueGroupName  = userPropNode.value;
         }
-        else
-        {
-            [otherProps setObject:userPropNode.value forKey:userPropName];
-        }
     }
     
-//
+    AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
+                                           initWithParameter:self.ip
+                                           port:self.port
+                                           fullUserName:uniqueUserName
+                                           fullGroupName:uniqueGroupName
+                                           ttl:Preference_MyEtCDUserTTL];
     
-    
-    
-    
+    [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
+
    }
+
+
+-(void)handleWatchEtcdFinished:(AMETCDResult *)res source:(AMETCDDataSource *)source
+{
+    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
+    {
+        return;
+    }
+    
+    NSArray* resParts = [res.node.key componentsSeparatedByString:@"/"];
+    if([resParts count ] == 3)
+    {
+        //userOper
+        NSString* uniqueUserName = [resParts objectAtIndex:2];
+        if ([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expirated"])
+        {
+            
+            AMETCDDeleteUserOperation* delUserOper = [[AMETCDDeleteUserOperation alloc]
+                                                      initWithParameter:self.ip
+                                                      port:self.port
+                                                      fullUserName:uniqueUserName];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:delUserOper];
+        }
+        else if([res.action isEqualToString:@"update"])
+        {
+            AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                                   initWithParameter:self.ip
+                                                   port:self.port
+                                                   fullUserName:uniqueUserName
+                                                   ttl:Preference_MyEtCDUserTTL];
+            [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+        }
+    }
+}
 
 
 @end

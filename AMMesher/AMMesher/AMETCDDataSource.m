@@ -32,34 +32,9 @@
     return self;
 }
 
--(void)addUserToDataSource:(NSString*)fullUserName fullGroupName:(NSString*)groupName
-{
-    AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
-                                           initWithParameter:self.ip
-                                           port:self.port
-                                           fullUserName:fullUserName
-                                           fullGroupName:groupName
-                                           ttl:Preference_MyEtCDUserTTL];
-    
-    
-    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                           initWithParameter:self.ip
-                                           port:self.port
-                                           fullUserName:fullUserName
-                                           ttl:Preference_MyEtCDUserTTL];
-    addUserOper.delegate = self;
-    userTTLOper.delegate = self;
-    
-    [userTTLOper addDependency:addUserOper];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
-
-}
-
 -(void)watch
 {
-    AMETCDWatchOperation* watchOper = [[AMETCDWatchOperation alloc] init:self.ip port:self.port index:_changeIndex];
+    AMETCDWatchOperation* watchOper = [[AMETCDWatchOperation alloc] init:self.ip port:self.port path: @"/Users/" index:_changeIndex];
     watchOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];

@@ -94,63 +94,6 @@
         }
     }
     
-    NSString* groupKey = [NSString stringWithFormat:@"/Groups/%@", self.fullGroupName];
-    res = [self.etcdApi setDir:groupKey ttl:self.ttl prevExist:NO];
-    if (res.errCode != 0 && res.errCode != 102)
-    {
-        for (retry = 0; retry < 3; retry++)
-        {
-            if(self.isCancelled)
-            {
-                self.isResultOK = NO;
-                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-                return;
-            }
-            
-            res = [self.etcdApi setDir:groupKey ttl:self.ttl prevExist:NO];
-            if(res.errCode == 0 || res.errCode == 102)
-            {
-                break;
-            }
-        }
-        
-        if (retry == 3)
-        {
-            self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
-    }
-    
-    NSString* groupStateKey = [NSString stringWithFormat:@"/Groups/%@/State", self.fullGroupName];
-    res = [self.etcdApi setKey:groupStateKey withValue:@"offline" ttl:0];
-    if (res.errCode != 0 && res.errCode != 102)
-    {
-        for (retry = 0; retry < 3; retry++)
-        {
-            if(self.isCancelled)
-            {
-                self.isResultOK = NO;
-                [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-                return;
-            }
-            
-            res = [self.etcdApi setKey:groupStateKey withValue:@"offline" ttl:0];
-            if(res.errCode == 0 || res.errCode == 102)
-            {
-                break;
-            }
-        }
-        
-        if (retry == 3)
-        {
-            self.isResultOK = NO;
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
-            return;
-        }
-    }
-
-
     self.isResultOK = YES;
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
 }

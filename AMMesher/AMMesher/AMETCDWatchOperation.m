@@ -14,12 +14,14 @@
 
 -(id)init:(NSString*)ip
      port:(NSString*)port
+     path:(NSString *)path
     index:(int)index
 {
     if(self = [super init:ip port:port])
     {
         self.operationType = @"watch";
         self.expectedIndex = index;
+        self.path = path;
     }
     
     return self;
@@ -36,7 +38,7 @@
     
     NSLog(@"watch etcd...");
     
-    NSString* rootDir = @"/Users/";
+    NSString* rootDir = self.path;
     
     int actIndex;
     self.operationResult= [self.etcdApi watchDir:rootDir fromIndex:self.expectedIndex acturalIndex:&actIndex timeout:5];

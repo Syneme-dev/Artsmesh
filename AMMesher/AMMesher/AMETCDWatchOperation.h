@@ -12,9 +12,11 @@
 
 @property int currentIndex;
 @property int expectedIndex;
+@property NSString* path;
 
 -(id)init:(NSString*)ip
      port:(NSString*)port
+     path:(NSString*)path
     index:(int)index;
 
 @end

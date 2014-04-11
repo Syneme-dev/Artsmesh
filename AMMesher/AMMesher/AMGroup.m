@@ -31,14 +31,6 @@
         return @"default";
     }
     
-//    NSArray* nameParts = [AMGroup parseFullGroupName:self.uniqueName];
-//    if (nameParts != nil && [nameParts count] >= 1)
-//    {
-//        return [nameParts objectAtIndex:0];
-//    }
-//    
-//    return @"default";
-    
     return self.uniqueName;
 }
 

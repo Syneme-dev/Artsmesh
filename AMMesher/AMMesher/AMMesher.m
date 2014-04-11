@@ -282,7 +282,7 @@
                                   init];
             
             [_lanSource addDestination:self.usergroupDest];
-            //[_lanSource watch];
+            [_lanSource watch];
         }
         
         isSelfAdded = YES;

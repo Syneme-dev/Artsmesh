@@ -133,89 +133,77 @@
     }
 }
 
-
--(void)handleWatchEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
+-(void)handleWatchEtcdFinished:(AMETCDResult *)res source:(AMETCDDataSource *)source
 {
-//    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
-//    {
-//        return;
-//    }
-//    
-//    NSString* userName = nil;
-//    NSString* prevGroupName = nil;
-//    NSString* currGroupName = nil;
-//    NSMutableDictionary* otherProp = [[NSMutableDictionary alloc] init];
-//    
-//    NSArray* pathes = [res.node.key componentsSeparatedByString:@"/"];
-//    if ([pathes count] == 3)
-//    {
-//        if ([res.action isEqualToString:@"update"])
-//        {
-//            //ttl
-//            return;
-//        }
-//        
-//        if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
-//        {
-//            //add User, will not update until group is assigned
-//            return;
-//        }
-//        
-//        if([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expire"])
-//        {
-//            //delete user
-//            userName = [pathes objectAtIndex:2];
-//            
-//            @synchronized(self)
-//            {
-//                [self willChangeValueForKey:@"userGroups"];
-//                
-//                for(int i = 0; i < [self.userGroups count]; i++)
-//                {
-//                    AMGroup* existGroup = [self.userGroups objectAtIndex:i];
-//                    for(int j = 0; j < [existGroup.children count]; j++)
-//                    {
-//                        AMUser* existUser = [existGroup.children objectAtIndex:j];
-//                        if ([existUser.fullname isEqualToString:userName])
-//                        {
-//                            [existGroup.children removeObject:existUser];
-//                            break;
-//                        }
-//                    }
-//                    
-//                    if ([existGroup countOfChildren] == 0 && ![existGroup.fullname isEqualToString:@"Artsmesh"])
-//                    {
-//                        [self.userGroups removeObject:existGroup];
-//                    }
-//                }
-//                
-//                [self didChangeValueForKey:@"userGroups"];
-//            }
-//        }
-//        
-//    }
-//    else if ([pathes count] == 4)
-//    {
-//        userName = [pathes objectAtIndex:2];
-//        NSString* userChangedPropName = [pathes objectAtIndex:3];
-//        
-//        if ([userChangedPropName isEqualToString:@"GroupName"])
-//        {
-//            if ([res.action isEqualToString:@"set"] && res.prevNode == nil)
-//            {
-//                //add User, will not update until group is assigned
-//                return;
-//            }
-//            else
-//            {
-//                //join another group
-//            }
-//        }
-//        else
-//        {
-//            //ordinary prop change
-//        }
-//    }
+    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
+    {
+        return;
+    }
+    
+    if (res.node.nodes == nil || ![res.node.key isEqualToString:@"/Users"])
+    {
+        return;
+    }
+    
+    NSArray* resParts = [res.node.key componentsSeparatedByString:@"/"];
+    if([resParts count ] == 3)
+    {
+        //userOper
+        if ([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expirated"])
+        {
+            NSString* uniqueUserName = [resParts objectAtIndex:2];
+            @synchronized(self)
+            {
+                [self willChangeValueForKey:@"userGroups"];
+                
+                for (int i = 0; i < [self.userGroups count]; i++)
+                {
+                    AMGroup* existGroup = [self.userGroups objectAtIndex:i];
+                    
+                    for (int j = 0 ; j < [existGroup countOfChildren]; j++)
+                    {
+                        AMUser* existUser = [existGroup.children objectAtIndex:j];
+                        if ([existUser.uniqueName isEqualToString:uniqueUserName])
+                        {
+                            [existGroup.children removeObject:existUser];
+                            break;
+                        }
+                    }
+                    
+                    if ([existGroup countOfChildren] == 0)
+                    {
+                        [self.userGroups removeObject:existGroup];
+                    }
+                
+                }
+                
+                [self didChangeValueForKey:@"userGroups"];
+            }
+            
+            return;
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    if ([resParts count] == 4)
+    {
+        NSString* propName = [resParts objectAtIndex:3];
+        NSString* uniqueName = [resParts objectAtIndex:2];
+        
+        if ([propName isEqualToString:@"GroupName"])
+        {
+            
+            return;
+        }
+        else
+        {
+            //don't know how to change
+            return;
+        }
+    }
 }
 
 #pragma mark -

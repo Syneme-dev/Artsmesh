@@ -14,7 +14,6 @@
 @implementation AMETCDDataSource
 {
     int _changeIndex;
-    NSTimer* _queryTimer;
 }
 
 -(id)init:(NSString*)name ip:(NSString*)ip port:(NSString*)port
@@ -40,14 +39,6 @@
     [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];
 }
 
--(void)queryAll
-{
-    AMETCDQueryOperation* queryOper = [[AMETCDQueryOperation alloc] init:self.ip port:self.port];
-    queryOper.delegate = self;
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
-}
-
 -(void)addDestination:(AMETCDDestination*)dest
 {
     @synchronized(self)
@@ -55,9 +46,11 @@
         [self.destinations addObject:dest];
     }
     
-    [self queryAll];
+    AMETCDQueryOperation* queryOper = [[AMETCDQueryOperation alloc] init:self.ip port:self.port];
+    queryOper.delegate = self;
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
-
 
 -(void)removeDestination:(AMETCDDestination *)dest
 {
@@ -75,24 +68,16 @@
         return;
     }
     
-    if ([oper isKindOfClass:[AMETCDQueryOperation class]])
+    
+    if ([oper isKindOfClass:[AMETCDQueryOperation class]] && oper.isResultOK == YES)
     {
-        if(oper.isResultOK == YES)
+        @synchronized(self)
         {
-            @synchronized(self)
+            for(AMETCDDestination* dest in self.destinations)
             {
-                for(AMETCDDestination* dest in self.destinations)
-                {
-                    [dest handleQueryEtcdFinished:oper.operationResult source:self];
-                }
+                [dest handleQueryEtcdFinished:oper.operationResult source:self];
             }
         }
-        
-        _queryTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                       target:self
-                                                     selector:@selector(queryAll)
-                                                     userInfo:nil
-                                                      repeats:NO];
         
         return;
     }

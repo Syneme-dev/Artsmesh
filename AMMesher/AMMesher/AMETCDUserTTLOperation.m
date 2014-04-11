@@ -46,7 +46,15 @@
     }
     else
     {
-        self.isResultOK = NO;
+        AMETCDResult* res = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:NO];
+        if (res.errCode == 0)
+        {
+            self.isResultOK = YES;
+        }
+        else
+        {
+            self.isResultOK = NO;
+        }
     }
     
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];

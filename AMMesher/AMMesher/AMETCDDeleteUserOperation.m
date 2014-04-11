@@ -32,8 +32,8 @@
     
     NSString* myUserDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     
-    AMETCDResult* res = [self.etcdApi deleteDir:myUserDir recursive:YES];
-    if (res.errCode == 0)
+    self.operationResult = [self.etcdApi deleteDir:myUserDir recursive:YES];
+    if (self.operationResult.errCode == 0)
     {
         self.isResultOK = YES;
     }

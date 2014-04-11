@@ -13,10 +13,6 @@
 
 
 @implementation AMETCDDataSource
-{
-    int _changeIndex;
-    BOOL _watching;
-}
 
 -(id)init:(NSString*)name ip:(NSString*)ip port:(NSString*)port
 {
@@ -36,11 +32,11 @@
 
 -(void)watch
 {
-    AMETCDWatchOperation* watchOper = [[AMETCDWatchOperation alloc] init:self.ip port:self.port path: @"/Users/" index:_changeIndex];
-    watchOper.delegate = self;
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];
     _watching = YES;
+    
+    AMETCDQueryOperation* queryOper = [[AMETCDQueryOperation alloc] init:self.ip port:self.port];
+    queryOper.delegate = self;
+    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
 -(void)stopWatch
@@ -55,11 +51,6 @@
     {
         [self.destinations addObject:dest];
     }
-    
-    AMETCDQueryOperation* queryOper = [[AMETCDQueryOperation alloc] init:self.ip port:self.port];
-    queryOper.delegate = self;
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
 }
 
 -(void)removeDestination:(AMETCDDestination *)dest
@@ -78,7 +69,6 @@
         return;
     }
     
-    
     if ([oper isKindOfClass:[AMETCDQueryOperation class]] && oper.isResultOK == YES)
     {
         @synchronized(self)
@@ -87,8 +77,29 @@
             {
                 [dest handleQueryEtcdFinished:oper.operationResult source:self];
             }
+            
+            if (oper.operationResult.node != nil)
+            {
+                int modifyIndex = oper.operationResult.node.modifiedIndex;
+                int createIndex = oper.operationResult.node.createdIndex;
+                self.changeIndex = (modifyIndex > createIndex) ? modifyIndex : createIndex;
+                
+                if (oper.operationResult.node.nodes != nil)
+                {
+                    for (AMETCDNode* userNode in oper.operationResult.node.nodes)
+                    {
+                        self.changeIndex = self.changeIndex > userNode.modifiedIndex ? self.changeIndex: userNode.modifiedIndex;
+                        self.changeIndex = self.changeIndex > userNode.createdIndex ? self.changeIndex: userNode.createdIndex;
+                    }
+                }
+            }
         }
         
+        AMETCDWatchOperation* watchOper = [[AMETCDWatchOperation alloc] init:self.ip port:self.port path: @"/Users/" index:self.changeIndex];
+        watchOper.delegate = self;
+        [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];
+
+
         return;
     }
     
@@ -98,7 +109,7 @@
         
         if (watchOper.isResultOK == YES)
         {
-            _changeIndex =  watchOper.currentIndex + 1;
+            self.changeIndex =  self.changeIndex > (watchOper.currentIndex+1) ? (self.changeIndex) : (watchOper.currentIndex+1);
             
             @synchronized(self)
             {
@@ -109,9 +120,11 @@
             }
         }
         
-        if (_watching)
+        if (self.watching)
         {
-            [self watch];
+            AMETCDWatchOperation* watchOper = [[AMETCDWatchOperation alloc] init:self.ip port:self.port path: @"/Users/" index:self.changeIndex];
+            watchOper.delegate = self;
+            [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];
         }
         
         return;

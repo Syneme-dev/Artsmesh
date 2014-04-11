@@ -39,8 +39,8 @@
     int retry = 0;
     
     NSString* userDirKey = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
-    AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
-    if (res.errCode != 0 )
+    self.operationResult = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
+    if (self.operationResult.errCode != 0 )
     {
         for (retry = 0; retry < 3; retry++)
         {
@@ -51,8 +51,8 @@
                 return;
             }
             
-            AMETCDResult* res = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
-            if(res.errCode == 0)
+            self.operationResult = [self.etcdApi setDir:userDirKey ttl:self.ttl prevExist:NO];
+            if(self.operationResult.errCode == 0)
             {
                 break;
             }
@@ -67,8 +67,8 @@
     }
     
     NSString* groupPropKey = [NSString stringWithFormat:@"%@GroupName", userDirKey ];
-    res = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
-    if (res.errCode != 0 )
+    self.operationResult = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
+    if (self.operationResult.errCode != 0 )
     {
         for (retry = 0; retry < 3; retry++)
         {
@@ -79,8 +79,8 @@
                 return;
             }
             
-            res = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
-            if(res.errCode == 0)
+            self.operationResult = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
+            if(self.operationResult.errCode == 0)
             {
                 break;
             }

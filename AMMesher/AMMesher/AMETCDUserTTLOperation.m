@@ -39,15 +39,15 @@
     
     NSString* userDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     
-    AMETCDResult* res = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:YES];
-    if (res.errCode == 0)
+    self.operationResult = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:YES];
+    if (self.operationResult.errCode == 0)
     {
         self.isResultOK = YES;
     }
     else
     {
-        AMETCDResult* res = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:NO];
-        if (res.errCode == 0)
+        self.operationResult = [self.etcdApi setDir:userDir ttl:self.ttl prevExist:NO];
+        if (self.operationResult.errCode == 0)
         {
             self.isResultOK = YES;
         }

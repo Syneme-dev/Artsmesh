@@ -18,12 +18,13 @@
 @property NSString* ip;
 @property NSString* port;
 @property NSMutableArray* destinations;
+@property int changeIndex;
+@property BOOL watching;
 
 -(id)init:(NSString*)name ip:(NSString*)ip port:(NSString*)port;
 -(void)watch;
 -(void)stopWatch;
 -(void)addDestination:(AMETCDDestination*)dest;
 -(void)removeDestination:(AMETCDDestination *)dest;
--(void)addUserToDataSource:(NSString*)fullUserName fullGroupName:(NSString*)groupName;
 
 @end

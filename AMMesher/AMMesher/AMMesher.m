@@ -115,6 +115,7 @@
     
     @synchronized(self)
     {
+        [_dataSource stopWatch];
         _dataSource.ip   = Preference_ArtsmeshIO_IP;
         _dataSource.port = Preference_ArtsmeshIO_Port;
         [self addSelfToDataSource];
@@ -267,12 +268,10 @@
         
         @synchronized(self)
         {
-            _dataSource = [[AMETCDDataSource alloc] init:@"local source" ip:Preference_MyIp port:Preference_MyETCDClientPort];
+            _dataSource = [[AMETCDDataSource alloc] init:@"data source" ip:Preference_MyIp port:Preference_MyETCDClientPort];
             self.usergroupDest = [[AMETCDDataDestination alloc] init];
             
             [_dataSource addDestination:self.usergroupDest];
-            [_dataSource watch];
-            
             [self addSelfToDataSource];
         }
     }
@@ -282,6 +281,10 @@
                                                     target:self selector:@selector(refreshMyTTL)
                                                   userInfo:nil
                                                    repeats:NO];
+    }
+    else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
+    {
+        [_dataSource watch];
     }
 }
 

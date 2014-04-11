@@ -48,8 +48,8 @@
             {
                 if(self.isCancelled){return;}
                 
-                AMETCDResult* res = [self.etcdApi setKey:propertyKey withValue:propertyVal ttl:0];
-                if(res != nil && res.errCode == 0)
+                self.operationResult = [self.etcdApi setKey:propertyKey withValue:propertyVal ttl:0];
+                if(self.operationResult != nil && self.operationResult.errCode == 0)
                 {
                     retry = 0;
                     break;

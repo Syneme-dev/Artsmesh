@@ -17,7 +17,8 @@ static NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
 +(AMNotificationManager *)defaultShared;
 -(void)listenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel;
 -(void)unlistenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel;
--(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName sender:(id)sender;
+//-(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName sender:(id)sender;
 -(AMNotificationMessage*)createMessageWithHeader:(NSDictionary*)header withBody:(id)body;
+-(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName;
 
 @end

@@ -30,7 +30,7 @@
     NSLog(@"Initializing ETCD data...");
     
     AMETCDResult* res = [self.etcdApi setDir:@"/Users/" ttl:0 prevExist:NO];
-    if(res.errCode != 0)
+    if(res.errCode != 0 && res.errCode != 102)
     {
         int retry = 0;
         for (; retry < 3; retry++)
@@ -43,7 +43,7 @@
             }
             
             res = [self.etcdApi setDir:@"/Users/" ttl:0 prevExist:NO];
-            if(res.errCode == 0)
+            if(res.errCode == 0 || res.errCode == 102)
             {
                 break;
             }
@@ -58,7 +58,7 @@
     }
     
     res = [self.etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
-    if(res.errCode != 0)
+    if(res.errCode != 0 && res.errCode != 102)
     {
         int retry = 0;
         for (; retry < 3; retry++)
@@ -71,7 +71,7 @@
             }
             
             res = [self.etcdApi setDir:@"/Groups/" ttl:0 prevExist:NO];
-            if(res.errCode == 0)
+            if(res.errCode == 0 || res.errCode == 102)
             {
                 break;
             }

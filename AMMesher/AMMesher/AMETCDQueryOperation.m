@@ -33,7 +33,7 @@
         return;
     }
     
-    NSLog(@"Querying etcd...");
+     NSLog(@"Server:%@ Querying...", self.etcdApi.serverIp);
     
     int retry = 0;
     

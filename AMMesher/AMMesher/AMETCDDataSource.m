@@ -15,6 +15,7 @@
 @implementation AMETCDDataSource
 {
     int _changeIndex;
+    BOOL _watching;
 }
 
 -(id)init:(NSString*)name ip:(NSString*)ip port:(NSString*)port
@@ -22,6 +23,7 @@
     if (self = [super init])
     {
         _changeIndex = 2;
+        _watching = NO;
         
         self.name = name;
         self.ip = ip;
@@ -38,6 +40,13 @@
     watchOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:watchOper];
+    _watching = YES;
+}
+
+-(void)stopWatch
+{
+    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
+    _watching = NO;
 }
 
 -(void)addDestination:(AMETCDDestination*)dest
@@ -100,7 +109,11 @@
             }
         }
         
-        [self watch];
+        if (_watching)
+        {
+            [self watch];
+        }
+        
         return;
     }
     

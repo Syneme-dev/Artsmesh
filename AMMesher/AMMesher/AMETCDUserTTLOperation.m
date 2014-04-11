@@ -34,8 +34,8 @@
         [(NSObject *)self.delegate performSelectorOnMainThread:@selector(AMETCDOperationDidFinished:) withObject:self waitUntilDone:NO];
         return;
     }
-    
-    NSLog(@"Updating TTL information...");
+
+     NSLog(@"Server:%@ TTL user...", self.etcdApi.serverIp);
     
     NSString* userDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     

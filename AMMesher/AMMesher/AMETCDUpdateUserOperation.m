@@ -30,8 +30,8 @@
 -(void)main
 {
     if (self.isCancelled){return;}
-    
-    NSLog(@"Updating user information...");
+
+     NSLog(@"Server:%@ Updating user...", self.etcdApi.serverIp);
     
     int retry = 0;
     

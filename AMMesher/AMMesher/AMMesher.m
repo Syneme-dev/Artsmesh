@@ -115,9 +115,8 @@
     
     @synchronized(self)
     {
-        _dataSource = [[AMETCDDataSource alloc] init:@"artsmeshio source" ip:Preference_ArtsmeshIO_IP port:Preference_ArtsmeshIO_Port];
-        [_dataSource addDestination:self.usergroupDest];
-        [_dataSource watch];
+        _dataSource.ip   = Preference_ArtsmeshIO_IP;
+        _dataSource.port = Preference_ArtsmeshIO_Port;
         [self addSelfToDataSource];
     }
 }
@@ -191,16 +190,18 @@
                               Preference_MyDomain,
                               Preference_MyLocation];
     
-    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                           initWithParameter:Preference_MyIp
-                                           port:Preference_MyETCDClientPort
-                                           fullUserName:fullUserName
-                                           ttl:Preference_MyEtCDUserTTL];
-    
-     userTTLOper.delegate = self;
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
-    
+    @synchronized(self)
+    {
+        AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                               initWithParameter:_dataSource.ip
+                                               port:_dataSource.port
+                                               fullUserName:fullUserName
+                                               ttl:Preference_MyEtCDUserTTL];
+        
+        userTTLOper.delegate = self;
+        
+        [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+    }
 }
 
 #pragma mark -

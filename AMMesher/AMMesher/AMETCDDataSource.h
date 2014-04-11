@@ -21,6 +21,7 @@
 
 -(id)init:(NSString*)name ip:(NSString*)ip port:(NSString*)port;
 -(void)watch;
+-(void)stopWatch;
 -(void)addDestination:(AMETCDDestination*)dest;
 -(void)removeDestination:(AMETCDDestination *)dest;
 -(void)addUserToDataSource:(NSString*)fullUserName fullGroupName:(NSString*)groupName;

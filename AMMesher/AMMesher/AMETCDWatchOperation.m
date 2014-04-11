@@ -36,7 +36,7 @@
         return;
     }
     
-    NSLog(@"watch etcd...");
+     NSLog(@"Server:%@ watching...", self.etcdApi.serverIp);
     
     NSString* rootDir = self.path;
     

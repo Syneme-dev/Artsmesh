@@ -144,7 +144,7 @@
     if([resParts count ] == 3)
     {
         //userOper
-        if ([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expirated"])
+        if ([res.action isEqualToString:@"delete"] || [res.action isEqualToString:@"expire"])
         {
             NSString* uniqueUserName = [resParts objectAtIndex:2];
             @synchronized(self)

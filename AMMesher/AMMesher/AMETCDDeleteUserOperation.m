@@ -28,7 +28,7 @@
 {
     if (self.isCancelled){return;}
     
-    NSLog(@"Removing user...");
+     NSLog(@"Server:%@ Removing user...", self.etcdApi.serverIp);
     
     NSString* myUserDir = [NSString stringWithFormat:@"/Users/%@/", self.fullUserName];
     

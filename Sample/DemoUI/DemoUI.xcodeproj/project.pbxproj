@@ -293,26 +293,7 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AF74052018F7D93100B3C1DF /* Attachement.png */,
-				AF74052118F7D93100B3C1DF /* Edit.png */,
-				AF74052218F7D93100B3C1DF /* Favorite.png */,
-				AF74052318F7D93100B3C1DF /* Favorites.png */,
-				AF74052418F7D93100B3C1DF /* Groups.png */,
-				AF74052518F7D93100B3C1DF /* Home.png */,
-				AF74052618F7D93100B3C1DF /* IncomingTopic.png */,
-				AF74053B18F7D93100B3C1DF /* PublicTimeline.png */,
-				AF74053C18F7D93100B3C1DF /* RecentTags.png */,
-				AF74053D18F7D93100B3C1DF /* RepliesPost.png */,
-				AF74053E18F7D93200B3C1DF /* Reply.png */,
-				AF74053F18F7D93200B3C1DF /* ShareLocation.png */,
-				AF74054018F7D93200B3C1DF /* statusNet_Icon-16.png */,
-				AF74054118F7D93200B3C1DF /* statusNet_Icon-17.png */,
-				AF74054218F7D93200B3C1DF /* statusNet_Icon-18.png */,
-				AF74054318F7D93200B3C1DF /* statusNet_Icon-19.png */,
-				AF74054418F7D93200B3C1DF /* Trash.png */,
-				AF74054518F7D93200B3C1DF /* Users.png */,
 				AF8CE2B618F6870A003BB9D1 /* Resource */,
-				AF9DC78618E96AEB0029DB97 /* ken.png */,
 				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
 				37C2317B187A8FFD00554AFD /* main.m */,
@@ -343,6 +324,25 @@
 		AF8CE2B618F6870A003BB9D1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				AF9DC78618E96AEB0029DB97 /* ken.png */,
+				AF74052018F7D93100B3C1DF /* Attachement.png */,
+				AF74052118F7D93100B3C1DF /* Edit.png */,
+				AF74052218F7D93100B3C1DF /* Favorite.png */,
+				AF74052318F7D93100B3C1DF /* Favorites.png */,
+				AF74052418F7D93100B3C1DF /* Groups.png */,
+				AF74052518F7D93100B3C1DF /* Home.png */,
+				AF74052618F7D93100B3C1DF /* IncomingTopic.png */,
+				AF74053B18F7D93100B3C1DF /* PublicTimeline.png */,
+				AF74053C18F7D93100B3C1DF /* RecentTags.png */,
+				AF74053D18F7D93100B3C1DF /* RepliesPost.png */,
+				AF74053E18F7D93200B3C1DF /* Reply.png */,
+				AF74053F18F7D93200B3C1DF /* ShareLocation.png */,
+				AF74054018F7D93200B3C1DF /* statusNet_Icon-16.png */,
+				AF74054118F7D93200B3C1DF /* statusNet_Icon-17.png */,
+				AF74054218F7D93200B3C1DF /* statusNet_Icon-18.png */,
+				AF74054318F7D93200B3C1DF /* statusNet_Icon-19.png */,
+				AF74054418F7D93200B3C1DF /* Trash.png */,
+				AF74054518F7D93200B3C1DF /* Users.png */,
 				AF8CE2B718F68719003BB9D1 /* close.png */,
 				AF8CE2B818F68719003BB9D1 /* duplicate.png */,
 				AF8CE2B918F68719003BB9D1 /* fullscreen.png */,
@@ -626,13 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
-					/Users/xujian/Workspace/Artsmesh/UIFramewrok/build/Debug,
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";
@@ -646,13 +640,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Artsmesh-bsujtofhsmpgubeyhvtfdxglqzbj/Build/Products/Debug",
-					/Users/xujian/Workspace/Artsmesh/UIFramewrok/build/Debug,
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";

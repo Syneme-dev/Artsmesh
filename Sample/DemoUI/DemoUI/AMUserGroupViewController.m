@@ -32,4 +32,9 @@
 {
 }
 
+- (void)handleUserGroupChange:(NSArray *)userGroups {
+
+}
+
+
 @end

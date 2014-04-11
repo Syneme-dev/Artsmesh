@@ -117,7 +117,7 @@
 
 -(void)handleQueryEtcdFinished:(AMETCDResult*)res source:(AMETCDDataSource*)source
 {
-    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
+    if(res.errCode != 0 )
     {
         return;
     }
@@ -135,7 +135,7 @@
 
 -(void)handleWatchEtcdFinished:(AMETCDResult *)res source:(AMETCDDataSource *)source
 {
-    if(res.errCode != 0 || ![source.name isEqualToString:@"lanSource"])
+    if(res.errCode != 0 )
     {
         return;
     }

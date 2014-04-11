@@ -18,11 +18,11 @@
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
+    
     AMETCDDataSource* _lanSource;
     AMETCDDataSource* _AMIOSource;
-    AMETCDArtsmeshIODestination* _AMIODest;
-
     
+    AMETCDDataSource* _dataSource;
     NSTimer* _userTTL;
 }
 
@@ -115,11 +115,11 @@
         return;
     }
     
-    _AMIODest = [[AMETCDArtsmeshIODestination alloc] init];
-    _AMIODest.ip = Preference_ArtsmeshIO_IP;
-    _AMIODest.port = Preference_ArtsmeshIO_Port;
+//    _AMIODest = [[AMETCDArtsmeshIODestination alloc] init];
+//    _AMIODest.ip = Preference_ArtsmeshIO_IP;
+//    _AMIODest.port = Preference_ArtsmeshIO_Port;
+//    [_lanSource addDestination:_AMIODest];
     
-    [_lanSource addDestination:_AMIODest];
 }
 
 -(void)launchETCD
@@ -148,7 +148,6 @@
     
     [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
-    
 
 }
 
@@ -238,28 +237,14 @@
                                   Preference_MyDomain,
                                   Preference_MyLocation];
         
-        AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
-                                               initWithParameter:Preference_MyIp
-                                               port:Preference_MyETCDClientPort
-                                               fullUserName:fullUserName
-                                               fullGroupName:Preference_DefaultGroupName
-                                               ttl:Preference_MyEtCDUserTTL];
+        _dataSource = [[AMETCDDataSource alloc] init:@"local source" ip:Preference_MyIp port:Preference_MyETCDClientPort];
+        [_dataSource addUserToDataSource:fullUserName fullGroupName:Preference_DefaultGroupName];
         
+        self.usergroupDest = [[AMETCDDataDestination alloc] init];
         
-        AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                               initWithParameter:Preference_MyIp
-                                               port:Preference_MyETCDClientPort
-                                               fullUserName:fullUserName
-                                               ttl:Preference_MyEtCDUserTTL];
-        addUserOper.delegate = self;
-        userTTLOper.delegate = self;
-        
-        [userTTLOper addDependency:addUserOper];
-        
-        [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
-        [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
-        
-        
+        [_dataSource addDestination:self.usergroupDest];
+        [_dataSource watch];
+    
     }
     else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
     {
@@ -267,26 +252,6 @@
                                                     target:self selector:@selector(refreshMyTTL)
                                                   userInfo:nil
                                                    repeats:NO];
-    }
-    else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
-    {
-        static BOOL isSelfAdded = NO;
-        
-        if (isSelfAdded == NO)
-        {
-            _lanSource = [[AMETCDDataSource alloc] init:@"lanSource"
-                                                     ip:Preference_MyIp
-                                                   port:Preference_MyETCDClientPort];
-            
-            self.usergroupDest = [[AMETCDDataDestination alloc]
-                                  init];
-            
-            [_lanSource addDestination:self.usergroupDest];
-            [_lanSource watch];
-        }
-        
-        isSelfAdded = YES;
-        
     }
     
 }

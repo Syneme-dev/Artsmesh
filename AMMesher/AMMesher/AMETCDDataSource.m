@@ -9,6 +9,7 @@
 #import "AMETCDDestination.h"
 #import "AMMesher.h"
 #import "AMETCDOperationHeader.h"
+#import "AMMesherPreference.h"
 
 
 @implementation AMETCDDataSource
@@ -29,6 +30,31 @@
     }
     
     return self;
+}
+
+-(void)addUserToDataSource:(NSString*)fullUserName fullGroupName:(NSString*)groupName
+{
+    AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
+                                           initWithParameter:self.ip
+                                           port:self.port
+                                           fullUserName:fullUserName
+                                           fullGroupName:groupName
+                                           ttl:Preference_MyEtCDUserTTL];
+    
+    
+    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                           initWithParameter:self.ip
+                                           port:self.port
+                                           fullUserName:fullUserName
+                                           ttl:Preference_MyEtCDUserTTL];
+    addUserOper.delegate = self;
+    userTTLOper.delegate = self;
+    
+    [userTTLOper addDependency:addUserOper];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+
 }
 
 -(void)watch

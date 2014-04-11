@@ -23,5 +23,6 @@
 -(void)watch;
 -(void)addDestination:(AMETCDDestination*)dest;
 -(void)removeDestination:(AMETCDDestination *)dest;
+-(void)addUserToDataSource:(NSString*)fullUserName fullGroupName:(NSString*)groupName;
 
 @end

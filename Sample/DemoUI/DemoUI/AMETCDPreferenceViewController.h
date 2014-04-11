@@ -9,5 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMETCDPreferenceViewController : NSViewController
+@property (retain) IBOutlet NSTabView *tabs;
+
+- (IBAction)onETCDTabClick:(id)sender;
+- (IBAction)onJackServerTabClick:(id)sender;
+
 
 @end

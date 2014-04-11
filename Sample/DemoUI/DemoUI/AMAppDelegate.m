@@ -29,6 +29,7 @@ static NSMutableDictionary *allPlugins = nil;
     AMMesher *_globalMesher;
     AMUserGroupViewController *_userGroupViewController;
     NSView *_containerView;
+    AMETCDPreferenceViewController *preferenceViewController;
 
 }
 
@@ -105,13 +106,13 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (void)loadPreferencePanel {
-    AMPanelViewController *preViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    [_containerView addSubview:preViewController.view];
-    [preViewController.titleView setStringValue:@"Preference"];
-    preViewController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
-    AMETCDPreferenceViewController *preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    preferenceViewController.view.frame = NSMakeRect(0, 360, 600, 300);
-    [preViewController.view addSubview:preferenceViewController.view];
+    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:panelViewController.view];
+    [panelViewController.titleView setStringValue:@"Preference"];
+    panelViewController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
+    preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
+    [panelViewController.view addSubview:preferenceViewController.view];
 }
 
 - (void)loadUserPanel {

@@ -20,6 +20,7 @@
     AMLeaderElecter* _elector;
     AMETCDDataSource* _lanSource;
     AMETCDDataSource* _AMIOSource;
+    AMETCDArtsmeshIODestination* _AMIODest;
 
     
     NSTimer* _userTTL;
@@ -119,8 +120,11 @@
         return;
     }
     
+    _AMIODest = [[AMETCDArtsmeshIODestination alloc] init];
+    _AMIODest.ip = Preference_ArtsmeshIO_IP;
+    _AMIODest.port = Preference_ArtsmeshIO_Port;
     
-    
+    [_lanSource addDestination:_AMIODest];
 }
 
 -(void)launchETCD

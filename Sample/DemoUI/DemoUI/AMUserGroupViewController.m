@@ -32,4 +32,8 @@
 {
 }
 
+- (IBAction)goOnline:(id)sender
+{
+    [self.sharedMesher goOnline];
+}
 @end

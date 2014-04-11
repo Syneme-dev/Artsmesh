@@ -26,6 +26,8 @@
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
 
+-(void)goOnline;
+
 @end    
 
 

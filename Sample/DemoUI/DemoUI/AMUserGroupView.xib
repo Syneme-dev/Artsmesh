@@ -77,6 +77,17 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qD4-ey-cpg">
+                    <rect key="frame" x="6" y="2" width="81" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Online" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kMO-lp-tGb">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="goOnline:" target="-2" id="fGY-d2-1XS"/>
+                    </connections>
+                </button>
             </subviews>
         </customView>
         <treeController objectClassName="AMUserGroupNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="u0D-Lj-5gf">

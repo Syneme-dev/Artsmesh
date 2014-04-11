@@ -18,5 +18,6 @@
 
 @property (weak) AMMesher* sharedMesher;
 
+- (IBAction)goOnline:(id)sender;
 
 @end

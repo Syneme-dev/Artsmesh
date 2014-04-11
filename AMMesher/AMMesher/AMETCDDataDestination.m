@@ -174,7 +174,6 @@
                     {
                         [self.userGroups removeObject:existGroup];
                     }
-                
                 }
                 
                 [self didChangeValueForKey:@"userGroups"];
@@ -191,10 +190,83 @@
     if ([resParts count] == 4)
     {
         NSString* propName = [resParts objectAtIndex:3];
-        NSString* uniqueName = [resParts objectAtIndex:2];
+        NSString* uniqueUserName = [resParts objectAtIndex:2];
         
         if ([propName isEqualToString:@"GroupName"])
         {
+            NSString* uniqueGroupName  = res.node.value;
+            NSString* prevUniqueGroupName = nil;
+            
+            if (res.prevNode != nil)
+            {
+                prevUniqueGroupName = res.prevNode.value;
+            }
+            
+            @synchronized(self)
+            {
+                [self willChangeValueForKey:@"userGroups"];
+                
+                BOOL shouldAddGroup = YES;
+                
+                AMGroup* userIntoGroup = nil;
+                AMGroup* userLeaveGroup = nil;
+                AMUser* newUser = nil;
+                
+                for (int i = 0; i < [self.userGroups count]; i++)
+                {
+                    //find leave group and join group
+                    AMGroup* existGroup = [self.userGroups objectAtIndex:i];
+                    
+                    if ([existGroup.uniqueName isEqualToString:prevUniqueGroupName])
+                    {
+                        userLeaveGroup = existGroup;
+                    }
+                
+                    else if ([existGroup.uniqueName isEqualToString:uniqueGroupName])
+                    {
+                        shouldAddGroup = NO;
+                        userIntoGroup = existGroup;
+                    }
+                }
+                
+                if (userLeaveGroup != nil)
+                {
+                    //change group
+                    for (int j = 0; j < [userLeaveGroup countOfChildren]; j++)
+                    {
+                        AMUser* existUser = [userLeaveGroup.children objectAtIndex:j];
+                        if ([existUser.uniqueName isEqualToString:uniqueUserName])
+                        {
+                            newUser = existUser;
+                            [userLeaveGroup.children removeObject:existUser];
+                            break;
+                        }
+                    }
+                    
+                    if ([userLeaveGroup countOfChildren] == 0 && ![userLeaveGroup.uniqueName isEqualToString:@"Artsmesh"])
+                    {
+                        [self.userGroups removeObject:userLeaveGroup];
+                    }
+                }
+            
+                if (shouldAddGroup)
+                {
+                    userIntoGroup = [[AMGroup alloc] init];
+                    userIntoGroup.uniqueName = uniqueGroupName;
+                    [self.userGroups addObject:userIntoGroup];
+                }
+                
+                if (newUser == nil)
+                {
+                    newUser = [[AMUser alloc] init];
+                    newUser.uniqueName = uniqueUserName;
+                    
+                }
+                
+                [userIntoGroup.children addObject:newUser];
+                
+                [self didChangeValueForKey:@"userGroups"];
+            }
             
             return;
         }

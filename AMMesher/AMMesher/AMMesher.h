@@ -14,6 +14,7 @@
 @interface AMMesher : NSObject<AMETCDOperationDelegate>
 
 @property (atomic) NSMutableArray* userGroups;
+@property NSString* myGroupName;
 
 @property BOOL isLeader;
 @property int etcdState;    //0 stop, 1 running, 2 error

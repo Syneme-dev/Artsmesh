@@ -60,9 +60,11 @@
     {
         self.isLeader = NO;
         self.etcdState = 0;
+        self.myGroupName = Preference_DefaultGroupName;
         
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = [Preference_MyETCDServerPort intValue];
+        
         
         _userGroups = [[NSMutableArray alloc] init];
     }
@@ -172,6 +174,7 @@
                               Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
+    self.myGroupName = groupName;
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:groupName forKey:groupNameKey];
     
@@ -192,6 +195,7 @@
                               Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
+    self.myGroupName = groupName;
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:groupName forKey:groupNameKey];
     
@@ -212,6 +216,8 @@
                               Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
+    self.myGroupName = Preference_DefaultGroupName;
+    
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:@"Artsmesh" forKey:groupNameKey];
     
@@ -264,7 +270,7 @@
                                            initWithParameter: _dataSource.ip
                                            port:_dataSource.port
                                            fullUserName:fullUserName
-                                           fullGroupName:Preference_DefaultGroupName
+                                           fullGroupName:self.myGroupName
                                            ttl:Preference_MyEtCDUserTTL];
     
     AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]

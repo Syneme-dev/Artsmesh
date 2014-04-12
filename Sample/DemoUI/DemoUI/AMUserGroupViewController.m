@@ -74,6 +74,11 @@
     }
 }
 
+- (IBAction)quitGroup:(id)sender
+{
+    [[AMMesher sharedAMMesher] backToArtsmesh];
+}
+
 - (void)outlineViewSelectionIsChanging:(NSNotification *)notification
 {
     id selectedItem = [self.userGroupOutline itemAtRow:[self.userGroupOutline selectedRow]];

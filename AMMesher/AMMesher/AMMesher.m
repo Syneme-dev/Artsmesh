@@ -192,6 +192,26 @@
     [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
 }
 
+-(void)backToArtsmesh
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
+    
+    NSString* groupNameKey = @"GroupName";
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:@"Artsmesh" forKey:groupNameKey];
+    
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port: _dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+}
+
 -(void)launchETCD
 {
     NSString* peers =nil;

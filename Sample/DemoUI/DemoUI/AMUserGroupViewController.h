@@ -22,5 +22,6 @@
 - (IBAction)goOnline:(id)sender;
 - (IBAction)joinGroup:(id)sender;
 - (IBAction)createGroup:(id)sender;
+- (IBAction)quitGroup:(id)sender;
 
 @end

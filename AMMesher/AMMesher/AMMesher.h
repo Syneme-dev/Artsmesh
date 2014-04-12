@@ -27,6 +27,7 @@
 
 -(void)joinGroup:(NSString*)groupName;
 -(void)createGroup:(NSString*)groupName;
+-(void)backToArtsmesh;
 
 -(void)goOnline;
 -(void)goOffline;

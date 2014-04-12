@@ -7,11 +7,11 @@
 //
 
 #define Preference_DefaultGroupName     @"Artsmesh"
-#define Preference_MyUserName           @"www4"
+#define Preference_MyUserName           @"www"
 #define Preference_MyDomain             @"CCOM"
 #define Preference_MyLocation           @"Bejing"
 #define Preference_MyDescription        @"I'm a Mac Developer"
-#define Preference_MyIp                 @"192.168.1.124"
+#define Preference_MyIp                 @"192.168.1.101"
 
 #define Preference_MyETCDServerPort         @"17001"
 #define Preference_MyETCDClientPort         @"14001"

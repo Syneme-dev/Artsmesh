@@ -140,7 +140,6 @@
     
     @synchronized(self)
     {
-        
         NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
                                   Preference_MyUserName,
                                   Preference_MyDomain,

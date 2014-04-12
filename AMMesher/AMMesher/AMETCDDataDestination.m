@@ -173,7 +173,7 @@
                         }
                     }
                     
-                    if ([existGroup countOfChildren] == 0)
+                    if ([existGroup countOfChildren] == 0 && ![existGroup.uniqueName isEqualToString:@"Artsmesh"])
                     {
                         [self.userGroups removeObject:existGroup];
                     }
@@ -225,7 +225,7 @@
                         userLeaveGroup = existGroup;
                     }
                 
-                    else if ([existGroup.uniqueName isEqualToString:uniqueGroupName])
+                    if ([existGroup.uniqueName isEqualToString:uniqueGroupName])
                     {
                         shouldAddGroup = NO;
                         userIntoGroup = existGroup;

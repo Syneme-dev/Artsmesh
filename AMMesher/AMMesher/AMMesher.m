@@ -140,6 +140,19 @@
     
     @synchronized(self)
     {
+        
+        NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                                  Preference_MyUserName,
+                                  Preference_MyDomain,
+                                  Preference_MyLocation];
+        
+        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
+                                              initWithParameter:_dataSource.ip
+                                              port:_dataSource.port
+                                              fullUserName:fullUserName];
+        
+        [delOper start];
+
         [self.usergroupDest clearUserGroup];
         
         [_dataSource stopWatch];

@@ -109,7 +109,6 @@
     [_elector removeObserver:self forKeyPath:@"state"];
 }
 
-
 -(void)goOnline
 {
     if(self.etcdState != 1)
@@ -149,7 +148,48 @@
         [self addSelfToDataSource];
     }
 
+    
+}
 
+
+-(void)joinGroup:(NSString*)groupName
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
+    
+    NSString* groupNameKey = @"GroupName";
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:groupName forKey:groupNameKey];
+    
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port:_dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+}
+
+-(void)createGroup:(NSString*)groupName
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
+    
+    NSString* groupNameKey = @"GroupName";
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:groupName forKey:groupNameKey];
+    
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port: _dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
 }
 
 -(void)launchETCD
@@ -160,7 +200,7 @@
     {
         peers = [NSString stringWithFormat:@"%@:%ld",  _elector.mesherIp, _elector.mesherPort];
     }
-    
+
     AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
                                          initWithParameter:Preference_MyIp
                                          clientPort:Preference_MyETCDClientPort
@@ -195,7 +235,6 @@
                                            fullGroupName:Preference_DefaultGroupName
                                            ttl:Preference_MyEtCDUserTTL];
     
-    
     AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
                                            initWithParameter:Preference_MyIp
                                            port:Preference_MyETCDClientPort
@@ -205,13 +244,10 @@
     addUserOper.delegate = self;
     userTTLOper.delegate = self;
     
-    
-    
     [userTTLOper addDependency:addUserOper];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
-
 }
 
 -(void)refreshMyTTL
@@ -298,7 +334,10 @@
         
         @synchronized(self)
         {
-            _dataSource = [[AMETCDDataSource alloc] init:@"data source" ip:Preference_MyIp port:Preference_MyETCDClientPort];
+            _dataSource = [[AMETCDDataSource alloc]
+                           init:@"data source"
+                           ip:Preference_MyIp
+                           port:Preference_MyETCDClientPort];
             self.usergroupDest = [[AMETCDDataDestination alloc] init];
             
             [_dataSource addDestination:self.usergroupDest];
@@ -308,7 +347,8 @@
     else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
     {
         _userTTL = [NSTimer scheduledTimerWithTimeInterval:Preference_MyECDUserTTLInterval
-                                                    target:self selector:@selector(refreshMyTTL)
+                                                    target:self
+                                                  selector:@selector(refreshMyTTL)
                                                   userInfo:nil
                                                    repeats:NO];
     }

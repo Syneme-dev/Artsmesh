@@ -7,22 +7,22 @@
 //
 
 #define Preference_DefaultGroupName     @"Artsmesh"
-#define Preference_MyUserName           @"www"
+#define Preference_MyUserName           @"www4"
 #define Preference_MyDomain             @"CCOM"
 #define Preference_MyLocation           @"Bejing"
 #define Preference_MyDescription        @"I'm a Mac Developer"
-#define Preference_MyIp                 @"192.168.1.101"
+#define Preference_MyIp                 @"192.168.1.124"
 
-#define Preference_MyETCDServerPort @"17001"
-#define Preference_MyETCDClientPort @"14001"
+#define Preference_MyETCDServerPort         @"17001"
+#define Preference_MyETCDClientPort         @"14001"
 
-#define Preference_MyETCDHeartbeatTimeout @"200"
-#define Preference_MyETCDElectionTimeout @"5000"
+#define Preference_MyETCDHeartbeatTimeout   @"200"
+#define Preference_MyETCDElectionTimeout    @"5000"
 
 #define Preference_MyEtCDUserTTL                30
 #define Preference_MyECDUserTTLInterval         10
 
-#define Preference_ArtsmeshIO_IP    @"123.124.145.254"
-#define Preference_ArtsmeshIO_Port  @"14001"
+#define Preference_ArtsmeshIO_IP        @"123.124.145.254"
+#define Preference_ArtsmeshIO_Port      @"14001"
 
 

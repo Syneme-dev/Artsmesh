@@ -25,6 +25,9 @@
 -(void)startLoalMesher;
 -(void)stopLocalMesher;
 
+-(void)joinGroup:(NSString*)groupName;
+-(void)createGroup:(NSString*)groupName;
+
 -(void)goOnline;
 -(void)goOffline;
 

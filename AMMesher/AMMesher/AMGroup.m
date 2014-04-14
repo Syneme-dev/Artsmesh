@@ -7,88 +7,51 @@
 //
 
 #import "AMGroup.h"
+#import "AMETCDApi/AMETCD.h"
+#import "AMUser.h"
 
 @implementation AMGroup
 
--(id)initWithName:(NSString*)name
+-(id)init
 {
-    if (self = [super initWithName:name isGroup:YES])
+    if (self = [super init])
     {
-        
+        self.isLeaf = NO;
+        self.children = [[NSMutableArray alloc] init];
+        self.parent = nil;
     }
     
     return self;
 }
 
-
--(AMGroup*)copyWithoutUsers
+-(NSString*)nodeName
 {
-    AMGroup* newGroup = [[AMGroup alloc] init];
-    newGroup.name = [self.name copy];
-    newGroup.domain = [self.domain copy];
-    newGroup.description = [self.description copy];
-    newGroup.m2mIp = [self.m2mIp copy];
-    newGroup.m2mPort = [self.m2mPort copy];
-    newGroup.foafUrl = [self.foafUrl copy];
+    if (self.uniqueName == nil)
+    {
+        return @"default";
+    }
     
-    return newGroup;
+    return self.uniqueName;
 }
 
-
--(BOOL)isEqualToGroup:(AMGroup*)group differentFields:(NSMutableDictionary*)fieldsWithNewVal
++(NSArray*)parseFullGroupName:(NSString*)fullName
 {
-    [AMGroup compareField:self withGroup:group withFiledName:@"name" differentFields:fieldsWithNewVal];
-    [AMGroup compareField:self withGroup:group withFiledName:@"domain" differentFields:fieldsWithNewVal];
-    [AMGroup compareField:self withGroup:group withFiledName:@"description" differentFields:fieldsWithNewVal];
-    [AMGroup compareField:self withGroup:group withFiledName:@"m2mIp" differentFields:fieldsWithNewVal];
-    [AMGroup compareField:self withGroup:group withFiledName:@"m2mPort" differentFields:fieldsWithNewVal];
-    [AMGroup compareField:self withGroup:group withFiledName:@"foafUrl" differentFields:fieldsWithNewVal];
+    NSMutableArray* parts = [[NSMutableArray alloc] init];
+    NSArray* nameAndDomain = [fullName componentsSeparatedByString:@"@"];
+    [parts addObject:[nameAndDomain objectAtIndex:0]];
     
-    return [fieldsWithNewVal count] == 0;
+    if ([nameAndDomain count] > 1)
+    {
+        NSArray* domainAndLocation = [[nameAndDomain objectAtIndex:1] componentsSeparatedByString:@"."];
+        [parts addObject:[domainAndLocation objectAtIndex:0]];
+        
+        if ([domainAndLocation count] > 1)
+        {
+            [parts addObject:[domainAndLocation objectAtIndex:1]];
+        }
+    }
+    
+    return parts;
 }
-
--(NSDictionary*)fieldsAndValue
-{
-    NSMutableDictionary* fieldsAndValueDic = [[NSMutableDictionary alloc]init];
-    
-    NSString* val = [self valueForKey:@"name"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"name"];
-    }
-
-    val = [self valueForKey:@"domain"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"domain"];
-    }
-    
-    val = [self valueForKey:@"description"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"description"];
-    }
-    
-    val = [self valueForKey:@"m2mIp"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"m2mIp"];
-    }
-    
-    val = [self valueForKey:@"m2mPort"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"m2mPort"];
-    }
-    
-    val = [self valueForKey:@"foafUrl"];
-    if (val != nil)
-    {
-        [fieldsAndValueDic setObject:val forKey:@"foafUrl"];
-    }
-    
-    return fieldsAndValueDic;
-}
-
 
 @end

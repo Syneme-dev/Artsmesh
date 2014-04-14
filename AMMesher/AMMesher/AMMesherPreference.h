@@ -6,19 +6,23 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#define Preference_ETCDServerPort 17001
-#define Preference_ETCDClientPort 14001
-
-#define Preference_ETCD_HeartbeatTimeout 200
-#define Preference_ETCD_ElectionTimeout 10000
-
-#define Preference_User_TTL             30
-#define Preference_User_TTL_Interval    10
-
-#define Preference_MyDomain             @"CCOM2"
+#define Preference_DefaultGroupName     @"Artsmesh"
+#define Preference_MyUserName           @"www"
+#define Preference_MyDomain             @"CCOM"
+#define Preference_MyLocation           @"Bejing"
 #define Preference_MyDescription        @"I'm a Mac Developer"
-#define Preference_MyStatus             @"Online"
+#define Preference_MyIp                 @"192.168.1.101"
+
+#define Preference_MyETCDServerPort         @"17001"
+#define Preference_MyETCDClientPort         @"14001"
+
+#define Preference_MyETCDHeartbeatTimeout   @"200"
+#define Preference_MyETCDElectionTimeout    @"5000"
+
+#define Preference_MyEtCDUserTTL                30
+#define Preference_MyECDUserTTLInterval         10
+
+#define Preference_ArtsmeshIO_IP        @"123.124.145.254"
+#define Preference_ArtsmeshIO_Port      @"14001"
 
 
-#define Preference_ArtsmeshIO_IP    @"123.124.145.254"
-#define Preference_ArtsmeshIO_Port  @"14001"

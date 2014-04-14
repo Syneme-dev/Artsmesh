@@ -316,6 +316,8 @@
     [request setURL:[NSURL URLWithString:urlStr]];
     [request setHTTPMethod:@"DELETE"];
     
+    [request setTimeoutInterval:3];
+    
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request
                                                returningResponse:nil error:nil];
     

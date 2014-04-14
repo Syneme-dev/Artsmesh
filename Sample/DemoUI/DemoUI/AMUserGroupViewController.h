@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AMMesher/AMMesher.h>
 
 @class AMMesher;
 

@@ -45,6 +45,7 @@
     NSPoint thisOrigin = [self frame].origin;
     thisOrigin.x += (-self.lastDragLocation.x + newDragLocation.x);
     thisOrigin.y += (-self.lastDragLocation.y + newDragLocation.y);
+    NSRect  screenFrame = [[NSScreen mainScreen] frame];
     NSRect  windowFrame = [self.window frame];
     NSRect  viewFrame = [self frame];
     float topBarHeight=40.0f;

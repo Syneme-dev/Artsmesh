@@ -23,4 +23,11 @@
     return self;
 }
 
+- (IBAction)onETCDTabClick:(id)sender {
+    [self.tabs selectTabViewItemAtIndex:0];
+}
+
+- (IBAction)onJackServerTabClick:(id)sender {
+    [self.tabs selectTabViewItemAtIndex:1];
+}
 @end

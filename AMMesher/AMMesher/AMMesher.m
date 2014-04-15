@@ -86,9 +86,9 @@
 -(void)stopLocalMesher
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
     
@@ -127,8 +127,8 @@
         [self.usergroupDest clearUserGroup];
         
         [_dataSource stopWatch];
-        _dataSource.ip   = Preference_ArtsmeshIO_IP;
-        _dataSource.port = Preference_ArtsmeshIO_Port;
+        _dataSource.ip   = Preference_ETCD_ArtsmeshIO_IP;
+        _dataSource.port = Preference_ETCD_ArtsmeshIO_Port;
         [self addSelfToDataSource];
     }
 }
@@ -145,9 +145,9 @@
     @synchronized(self)
     {
         NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                  Preference_MyUserName,
-                                  Preference_MyDomain,
-                                  Preference_MyLocation];
+                                                            Preference_MyUserName,
+                                                            Preference_User_Domain,
+                                                            Preference_MyLocation];
         
         AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
                                               initWithParameter:_dataSource.ip
@@ -171,9 +171,9 @@
 -(void)joinGroup:(NSString*)groupName
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
     self.myGroupName = groupName;
@@ -192,9 +192,9 @@
 -(void)createGroup:(NSString*)groupName
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
     self.myGroupName = groupName;
@@ -213,9 +213,9 @@
 -(void)backToArtsmesh
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     NSString* groupNameKey = @"GroupName";
     self.myGroupName = Preference_DefaultGroupName;
@@ -264,9 +264,9 @@
 -(void)addSelfToDataSource
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
                                            initWithParameter: _dataSource.ip
@@ -293,9 +293,9 @@
 -(void)refreshMyTTL
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                              Preference_MyUserName,
-                              Preference_MyDomain,
-                              Preference_MyLocation];
+                                                        Preference_MyUserName,
+                                                        Preference_User_Domain,
+                                                        Preference_MyLocation];
     
     @synchronized(self)
     {

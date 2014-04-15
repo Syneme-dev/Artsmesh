@@ -21,7 +21,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
-                        <tabViewItem label="Tab" identifier="1" id="FOK-IR-y71">
+                        <tabViewItem label="ETCD" identifier="1" id="FOK-IR-y71">
                             <view key="view" ambiguous="YES" id="ENQ-Dc-Svi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +48,7 @@
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCDServerIP" id="uxp-sZ-RQ0"/>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ServerIP" id="Od2-ae-E8G"/>
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVX-Td-BMn">
@@ -69,13 +69,13 @@
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCDInstanceName" id="fx1-4Z-TFO"/>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_InstanceName" id="eYJ-Pf-5gI"/>
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syG-ce-LGf">
                                                 <rect key="frame" x="20" y="148" width="90" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CLIENT PORT:" id="MhR-6q-EcX">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CLIENT PORT" id="MhR-6q-EcX">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -84,7 +84,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VE5-kk-ybi">
                                                 <rect key="frame" x="20" y="108" width="92" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SERVER PORT:" id="Qee-gI-umA">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SERVER PORT" id="Qee-gI-umA">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -93,7 +93,7 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ol-TX-82N">
                                                 <rect key="frame" x="299" y="149" width="145" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="HEARTBEAT INTERVAL:" id="GTU-FA-pRa">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="HEARTBEAT INTERVAL" id="GTU-FA-pRa">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -102,25 +102,25 @@
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jOq-aY-cyE">
                                                 <rect key="frame" x="300" y="109" width="130" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ELECTION TIMEOUT:" id="oZZ-X3-7sK">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ELECTION TIMEOUT" id="oZZ-X3-7sK">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5c5-Rs-e8C">
-                                                <rect key="frame" x="20" y="68" width="184" height="17"/>
+                                                <rect key="frame" x="20" y="74" width="184" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MAX MACHINES IN CLUSTER:" id="TPO-pE-oaX">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Center Server" id="TPO-pE-oaX">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wv2-qz-zb6">
-                                                <rect key="frame" x="300" y="66" width="101" height="17"/>
+                                                <rect key="frame" x="300" y="72" width="120" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DROP OUT TTL:" id="CxR-Is-LIZ">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Center Server Port" id="CxR-Is-LIZ">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -135,7 +135,7 @@
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_key_ETCDClientPort" id="6nq-PM-BNh"/>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_key_ETCD_ClientPort" id="FRx-ig-c7V"/>
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s10-Jj-o3q">
@@ -159,17 +159,20 @@
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCDServerPort" id="RuZ-3h-e7F"/>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ServerPort" id="jvL-dq-OAc"/>
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pr8-qz-CNE">
-                                                <rect key="frame" x="210" y="63" width="55" height="22"/>
+                                                <rect key="frame" x="141" y="69" width="124" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="iHs-Md-f57">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ArtsmeshIOIP" id="xXC-fc-oO5"/>
+                                                </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tMt-qY-ZXi">
                                                 <rect key="frame" x="450" y="143" width="83" height="22"/>
@@ -184,13 +187,58 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4HH-JS-Ser">
-                                                <rect key="frame" x="450" y="63" width="83" height="22"/>
+                                                <rect key="frame" x="450" y="69" width="83" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="ZT0-3k-e96">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ArtsmeshIOPort" id="fb0-u4-l6X"/>
+                                                </connections>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-l7-J0H">
+                                                <rect key="frame" x="20" y="41" width="107" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MAX MACHINES " id="nHw-XJ-9T8">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MSs-RA-dGv">
+                                                <rect key="frame" x="300" y="39" width="101" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DROP OUT TTL" id="LYH-9W-cyD">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-dl-t9d">
+                                                <rect key="frame" x="141" y="36" width="124" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="iLM-S8-3qp">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_MaxNode" id="nDt-eY-irq"/>
+                                                </connections>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4O-yJ-Od7">
+                                                <rect key="frame" x="450" y="36" width="83" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="2K7-be-lew">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_User_TTL" id="gXk-f0-Was"/>
+                                                </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UcE-gC-5W7">
                                                 <rect key="frame" x="20" y="188" width="73" height="17"/>
@@ -210,7 +258,7 @@
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCDClientIP" id="ZpO-SM-G6P"/>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ClientIP" id="ixd-Ib-jiW"/>
                                                 </connections>
                                             </textField>
                                         </subviews>

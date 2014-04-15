@@ -45,15 +45,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D47008FE18C7274100B92F9A /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -219,7 +210,6 @@
 				D47008C218C725E000B92F9A /* Frameworks */,
 				D47008C318C725E000B92F9A /* Headers */,
 				D47008C418C725E000B92F9A /* Resources */,
-				D47008FE18C7274100B92F9A /* CopyFiles */,
 			);
 			buildRules = (
 			);

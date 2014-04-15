@@ -37,6 +37,7 @@ static NSMutableDictionary *allPlugins = nil;
 
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
+    [AMPreferenceManager registerPreference];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];

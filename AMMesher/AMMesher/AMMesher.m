@@ -5,22 +5,23 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
+
+#import "AMETCDOperationHeader.h"
+#import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
 #import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMMesherOperationHeader.h"
 #import "AMETCDApi/AMETCD.h"
 #import "AMGroup.h"
 #import "AMUser.h"
-#import "AMUserGroupNode.h"
-#import "AMMesherAgent.h"
+
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
-    AMMesherAgent* _agent;
-    NSTimer* _ttlTimer;
+    AMETCDDataSource* _dataSource;
+    NSTimer* _userTTL;
 }
 
 +(id)sharedAMMesher
@@ -48,7 +49,7 @@
         {
             etcdOperQueue = [[NSOperationQueue alloc] init];
             etcdOperQueue.name = @"ETCD Operation Queue";
-            etcdOperQueue.maxConcurrentOperationCount = 1;
+            //etcdOperQueue.maxConcurrentOperationCount = 1;
         }
     }
     
@@ -59,25 +60,15 @@
 {
     if (self = [super init])
     {
-        self.isMesher = NO;
-        self.isEtcdRunning = NO;
-        self.isErr = NO;
-    
-        self.myGroupName = @"Artsmesh";
-        self.myUserName = [AMNetworkUtils getHostName];
-        self.myDomain = Preference_MyDomain;
-        self.myDescription = Preference_MyDescription;
-        self.myStatus = Preference_MyStatus;
-        self.myIp = [AMNetworkUtils getHostIpv4Addr];
+        self.isLeader = NO;
+        self.etcdState = 0;
+        self.myGroupName = Preference_DefaultGroupName;
         
-        //Init Mesher Elector
         _elector = [[AMLeaderElecter alloc] init];
-        _elector.mesherPort = Preference_ETCDServerPort;
+        _elector.mesherPort = [Preference_MyETCDServerPort intValue];
         
-        _agent = [[AMMesherAgent alloc] init];
         
         _userGroups = [[NSMutableArray alloc] init];
-        
     }
     
     return self;
@@ -94,222 +85,231 @@
 
 -(void)stopLocalMesher
 {
-    self.isEtcdRunning = NO;
-    
-    if(_ttlTimer)
-    {
-        [_ttlTimer invalidate];
-    }
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
     
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-    AMDeleteUserOperation* removeOper = [[AMDeleteUserOperation alloc]
-                                        initWithParameter:self.myIp
-                                        serverPort:[NSString stringWithFormat:@"%d", Preference_ETCDClientPort]
-                                        username:self.myUserName
-                                        groupname:self.myGroupName
-                                        delegate:self];
-    [removeOper start];
+    
+    @synchronized(self)
+    {
+        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
+                                              initWithParameter:_dataSource.ip
+                                              port:_dataSource.port
+                                              fullUserName:fullUserName];
+        
+        [delOper start];
+
+    }
+   
     
     AMKillETCDOperation* etcdKiller = [[AMKillETCDOperation alloc] init];
     [etcdKiller start];
     
+    self.etcdState = 0;
     
     [_elector stopElect];
     [_elector removeObserver:self forKeyPath:@"state"];
 }
 
-
 -(void)goOnline
 {
-    [_agent goOnline];
+    if(self.etcdState != 1)
+    {
+        return;
+    }
+    
+    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
+    
+    @synchronized(self)
+    {
+        [self.usergroupDest clearUserGroup];
+        
+        [_dataSource stopWatch];
+        _dataSource.ip   = Preference_ArtsmeshIO_IP;
+        _dataSource.port = Preference_ArtsmeshIO_Port;
+        [self addSelfToDataSource];
+    }
+}
+
+-(void)goOffline
+{
+    if(self.etcdState != 1)
+    {
+        return;
+    }
+    
+    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
+    
+    @synchronized(self)
+    {
+        NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                                  Preference_MyUserName,
+                                  Preference_MyDomain,
+                                  Preference_MyLocation];
+        
+        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
+                                              initWithParameter:_dataSource.ip
+                                              port:_dataSource.port
+                                              fullUserName:fullUserName];
+        
+        [delOper start];
+
+        [self.usergroupDest clearUserGroup];
+        
+        [_dataSource stopWatch];
+        _dataSource.ip   = Preference_MyIp;
+        _dataSource.port = Preference_MyETCDClientPort;
+        [self addSelfToDataSource];
+    }
+
+    
 }
 
 
--(void)startMesherLaunchProcess
+-(void)joinGroup:(NSString*)groupName
 {
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
     
-    NSString* ip = self.myIp;
-    NSString* clientport = [NSString stringWithFormat:@"%d",Preference_ETCDClientPort];
-    NSString* serverport = [NSString stringWithFormat:@"%d",Preference_ETCDServerPort];
-    NSString* heartbeat = [NSString stringWithFormat:@"%d",Preference_ETCD_HeartbeatTimeout];
-    NSString* election = [NSString stringWithFormat:@"%d",Preference_ETCD_ElectionTimeout];
+    NSString* groupNameKey = @"GroupName";
+    self.myGroupName = groupName;
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:groupName forKey:groupNameKey];
     
-    NSMutableDictionary* userProperties = [[NSMutableDictionary alloc] init];
-    [userProperties setObject:Preference_MyDomain forKey:@"domain"];
-    [userProperties setObject:@"i'm a Mac developer" forKey:@"description"];
-    [userProperties setObject:@"online" forKey:@"status"];
-    [userProperties setObject:ip forKey:@"ip"];
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port:_dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
     
-    NSString* artsmeshGroup = @"Artsmesh";
-    NSMutableDictionary* artsmeshGroupProperties = [[NSMutableDictionary alloc] init];
-    [artsmeshGroupProperties setObject:Preference_MyDomain forKey:@"domain"];
-    [artsmeshGroupProperties setObject:@"this is artsmesh" forKey:@"description"];
-    
-    NSString* performGroup = @"Perform";
-    NSMutableDictionary* performGroupProperties = [[NSMutableDictionary alloc] init];
-    [performGroupProperties setObject:Preference_MyDomain forKey:@"domain"];
-    [performGroupProperties setObject:@"this is perform group" forKey:@"description"];
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+}
 
+-(void)createGroup:(NSString*)groupName
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
+    
+    NSString* groupNameKey = @"GroupName";
+    self.myGroupName = groupName;
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:groupName forKey:groupNameKey];
+    
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port: _dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
+    
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+}
 
-    AMLaunchETCDOperation* etcdLauncher = [[AMLaunchETCDOperation alloc] initWithParameter: ip
-                                                                  serverPort:serverport
-                                                                  clientPort:clientport
-                                                                       peers:nil
-                                                           heartbeatInterval:heartbeat
-                                                             electionTimeout:election
-                                                                    delegate:self];
+-(void)backToArtsmesh
+{
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
     
-    AMInitETCDOperation* etcdInitOper = [[AMInitETCDOperation alloc] initWithEtcdServer:ip
-                                                                               port:clientport
-                                                                           delegate:self];
+    NSString* groupNameKey = @"GroupName";
+    self.myGroupName = Preference_DefaultGroupName;
     
-    [etcdInitOper addDependency:etcdLauncher];
+    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
+    [userPropties setObject:@"Artsmesh" forKey:groupNameKey];
     
-    AMAddGroupOperation* addGroupOper = [[AMAddGroupOperation alloc] initWithParameter:ip
-                                                                            serverPort:clientport
-                                                                             groupname:artsmeshGroup
-                                                                       groupProperties:artsmeshGroupProperties
-                                                                                   ttl:0
-                                                                              delegate:self];
-    [addGroupOper addDependency:etcdInitOper];
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port: _dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:userPropties];
     
-    AMAddGroupOperation* addPerformGroupOper = [[AMAddGroupOperation alloc] initWithParameter:ip
-                                                                            serverPort:clientport
-                                                                             groupname:performGroup
-                                                                              groupProperties:performGroupProperties
-                                                                                          ttl:0
-                                                                                     delegate:self];
-    [addPerformGroupOper addDependency:etcdInitOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+}
+
+-(void)launchETCD
+{
+    NSString* peers =nil;
     
+    if (!self.isLeader)
+    {
+        peers = [NSString stringWithFormat:@"%@:%ld",  _elector.mesherIp, _elector.mesherPort];
+    }
+
+    AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
+                                         initWithParameter:Preference_MyIp
+                                         clientPort:Preference_MyETCDClientPort
+                                         serverPort:Preference_MyETCDServerPort
+                                         peers:peers
+                                         heartbeatInterval:Preference_MyETCDHeartbeatTimeout
+                                         electionTimeout:Preference_MyETCDElectionTimeout];
+    launchOper.delegate = self;
     
-    AMAddUserOperation* addSelfOper = [[AMAddUserOperation alloc] initWithParameter:ip
-                                                                         serverPort:clientport
-                                                                           username:self.myUserName
-                                                                          groupname:self.myGroupName
-                                                                     userProperties:userProperties
-                                                                                ttl:Preference_User_TTL
-                                                                           delegate:self];
+    AMETCDInitOperation* etcdInitOper = [[AMETCDInitOperation alloc]
+                                         initWithEtcdServer:Preference_MyIp
+                                         port:Preference_MyETCDClientPort];
+    etcdInitOper.delegate = self;
+    [etcdInitOper addDependency:launchOper];
     
-    [addSelfOper addDependency:addGroupOper];
-    [addSelfOper addDependency:addPerformGroupOper];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
+    [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:addGroupOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:addPerformGroupOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
 
 }
 
--(void)startMesheeLaunchProcess
+-(void)addSelfToDataSource
 {
-    NSString* ip = self.myIp;
-    NSString* clientport = [NSString stringWithFormat:@"%d",Preference_ETCDClientPort];
-    NSString* serverport = [NSString stringWithFormat:@"%d",Preference_ETCDServerPort];
-    NSString* heartbeat = [NSString stringWithFormat:@"%d",Preference_ETCD_HeartbeatTimeout];
-    NSString* election = [NSString stringWithFormat:@"%d",Preference_ETCD_ElectionTimeout];
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
     
-    NSMutableDictionary* userProperties = [[NSMutableDictionary alloc] init];
-    [userProperties setObject:Preference_MyDomain forKey:@"domain"];
-    [userProperties setObject:@"i'm a Mac developer" forKey:@"description"];
-    [userProperties setObject:@"online" forKey:@"status"];
-    [userProperties setObject:ip forKey:@"ip"];
+    AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
+                                           initWithParameter: _dataSource.ip
+                                           port:_dataSource.port
+                                           fullUserName:fullUserName
+                                           fullGroupName:self.myGroupName
+                                           ttl:Preference_MyEtCDUserTTL];
     
+    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                           initWithParameter:Preference_MyIp
+                                           port:Preference_MyETCDClientPort
+                                           fullUserName:fullUserName
+                                           ttl:Preference_MyEtCDUserTTL];
     
-    AMLaunchETCDOperation* etcdLauncher = [[AMLaunchETCDOperation alloc] initWithParameter: ip
-                                                                                serverPort:serverport
-                                                                                clientPort:clientport
-                                                                                     peers:nil
-                                                                         heartbeatInterval:heartbeat
-                                                                           electionTimeout:election
-                                                                                  delegate:self];
+    addUserOper.delegate = self;
+    userTTLOper.delegate = self;
     
-    AMAddUserOperation* addSelfOper = [[AMAddUserOperation alloc] initWithParameter:ip
-                                                                         serverPort:clientport
-                                                                           username:self.myUserName
-                                                                          groupname:self.myGroupName
-                                                                     userProperties:userProperties
-                                                                                ttl:Preference_User_TTL
-                                                                           delegate:self];
-    [addSelfOper addDependency:etcdLauncher];
-
+    [userTTLOper addDependency:addUserOper];
     
-    [[AMMesher sharedEtcdOperQueue] addOperation:etcdLauncher];
-    [[AMMesher sharedEtcdOperQueue] addOperation:addSelfOper];
-}
-
--(void)setUserTTL
-{
-    NSString* ip = self.myIp;
-    NSString* clientport = [NSString stringWithFormat:@"%d",Preference_ETCDClientPort];
-
-    AMUserTTLOperation* userTTLOper = [[AMUserTTLOperation alloc] initWithParameter:ip
-                                                                serverPort:clientport
-                                                                  username:self.myUserName
-                                                                 groupname:self.myGroupName
-                                                                   ttltime:Preference_User_TTL
-                                                                  delegate:self];
+    [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
 }
 
--(void)queryUserGroups
+-(void)refreshMyTTL
 {
-    NSString* ip = self.myIp;
-    NSString* clientport = [NSString stringWithFormat:@"%d",Preference_ETCDClientPort];
+    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                              Preference_MyUserName,
+                              Preference_MyDomain,
+                              Preference_MyLocation];
     
-    AMQueryGroupsOperation* queryOper = [[AMQueryGroupsOperation alloc] initWithParameter:ip
-                                                                       serverPort:clientport
-                                                                         delegate:self];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:queryOper];
-}
-
--(void)startWatchingUserGroups
-{
-    static dispatch_queue_t _groupWatchQueue = nil;
-    if (_groupWatchQueue ==nil)
+    @synchronized(self)
     {
-        _groupWatchQueue = dispatch_queue_create("_groupWatchQueue", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+        AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
+                                               initWithParameter:_dataSource.ip
+                                               port:_dataSource.port
+                                               fullUserName:fullUserName
+                                               ttl:Preference_MyEtCDUserTTL];
+        
+        userTTLOper.delegate = self;
+        
+        [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
     }
-    
-    dispatch_async(_groupWatchQueue, ^{
-        
-        AMETCD* etcdApi = [[AMETCD alloc] init];
-        etcdApi.serverIp = self.myIp;
-        etcdApi.clientPort = Preference_ETCDClientPort;
-        
-        int index = 2;
-        int actIndex = 0;
-        while (_isEtcdRunning)
-        {
-            AMETCDResult* res = [etcdApi watchDir:@"/Groups" fromIndex:index
-                                     acturalIndex:&actIndex timeout:5];
-            if(res.errCode != 0)
-            {
-                continue;
-            }
-            
-            index = actIndex + 1;
-            
-            if([res.action isEqualTo:@"update"])
-            {
-                NSLog(@"ttl info no change");
-                continue;
-            }
-            
-            NSArray* keypathes = [res.node.key componentsSeparatedByString:@"/"];
-            if([keypathes count] < 3)
-            {
-                continue;
-            }
-            
-            //have changed
-            [self queryUserGroups];
-        }
-    });
-    
 }
-
 
 #pragma mark -
 #pragma   mark KVO
@@ -328,22 +328,23 @@
         
         if(newState == 2)//Published
         {
-            _isMesher = YES;
+            self.isLeader = YES;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            if(!_isEtcdRunning)
+            if (self.etcdState == 0)
             {
-                [self performSelectorOnMainThread:@selector(startMesherLaunchProcess) withObject:nil waitUntilDone:NO];
+                [self performSelectorOnMainThread:@selector(launchETCD)
+                                       withObject:nil waitUntilDone:NO];
             }
         }
         else if(newState == 4)//Joined
         {
-            _isMesher = NO;
+            self.isLeader = NO;
             NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
             
-            if(!_isEtcdRunning)
+            if(self.etcdState == 0)
             {
-                [self performSelectorOnMainThread:@selector(startMesheeLaunchProcess) withObject:nil waitUntilDone:NO];
+                [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
             }
         }
     }
@@ -358,181 +359,43 @@
 
 
 #pragma mark -
-#pragma mark AMMesherOperationProtocol
-- (void)LanchETCDOperationDidFinish:(NSOperation *)oper
+#pragma mark AMETCDOperationDelegate
+-(void)AMETCDOperationDidFinished:(AMETCDOperation *)oper
 {
-    if (![oper isKindOfClass:[AMLaunchETCDOperation class]])
+    if([oper isKindOfClass:[AMETCDInitOperation class]])
     {
-        return;
-    }
-    
-    AMLaunchETCDOperation* lancher = (AMLaunchETCDOperation*)oper;
-    if (lancher.isResultOK)
-    {
-        self.isEtcdRunning = YES;
-    }
-    else
-    {
-        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        
-        self.isErr = YES;
-        self.isEtcdRunning = NO;
-    }
-}
-
-- (void)InitETCDOperationDidFinish:(NSOperation *)oper
-{
-    if (![oper isKindOfClass:[AMInitETCDOperation class]])
-    {
-        return;
-    }
-    
-    AMInitETCDOperation* initializer = (AMInitETCDOperation*)oper;
-    if(!initializer.isResultOK)
-    {
-        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        
-        self.isErr = YES;
-    }
-}
-
-- (void)AddUserOperationDidFinish:(NSOperation *)oper
-{
-    if (![oper isKindOfClass:[AMAddUserOperation class]])
-    {
-        return;
-    }
-    
-    AMAddGroupOperation* addOper = (AMAddGroupOperation*)oper;
-    if (addOper.isResultOK)
-    {
-        if(_ttlTimer != nil)
+        if (oper.isResultOK == NO)
         {
-            [_ttlTimer invalidate];
+            [NSException raise:@"etcd start error" format:nil];
+            return;
         }
         
-        [self queryUserGroups];
-        [self startWatchingUserGroups];
+        self.etcdState = 1;
         
-        _ttlTimer  = [NSTimer scheduledTimerWithTimeInterval:Preference_User_TTL_Interval
-                                                      target:self
-                                                    selector:@selector(setUserTTL)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    }
-    else
-    {
-        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        
-        self.isErr = YES;
-    }
-}
-
-- (void)DeleteUserOperationDidFinish:(NSOperation *)oper
-{
-    
-}
-
-- (void)UpdateUserOperationDidFinish:(NSOperation *)oper
-{
-    
-}
-
-- (void)QueryGroupsOperationDidFinish:(NSOperation *)oper
-{
-    if (![oper isKindOfClass:[AMQueryGroupsOperation class]])
-    {
-        return;
-    }
-    
-    AMQueryGroupsOperation* queryOper = (AMQueryGroupsOperation*)oper;
-    
-    if(queryOper.isResultOK)
-    {
         @synchronized(self)
         {
-            [self willChangeValueForKey:@"userGroups"];
-            self.userGroups = queryOper.usergroups;
-            [self didChangeValueForKey:@"userGroups"];
+            _dataSource = [[AMETCDDataSource alloc]
+                           init:@"data source"
+                           ip:Preference_MyIp
+                           port:Preference_MyETCDClientPort];
+            self.usergroupDest = [[AMETCDDataDestination alloc] init];
+            
+            [_dataSource addDestination:self.usergroupDest];
+            [self addSelfToDataSource];
         }
     }
-    else
+    else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
     {
-        [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-        self.isErr = YES;
+        _userTTL = [NSTimer scheduledTimerWithTimeInterval:Preference_MyECDUserTTLInterval
+                                                    target:self
+                                                  selector:@selector(refreshMyTTL)
+                                                  userInfo:nil
+                                                   repeats:NO];
+    }
+    else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
+    {
+        [_dataSource watch];
     }
 }
-
--(void)AddGroupOperationDidFinish:(NSOperation *)oper
-{
-    
-}
-
--(void)UpdateGroupOperationDidFinish:(NSOperation *)oper
-{
-    
-}
-
--(void)DeleteGroupOperationDidFinish:(NSOperation *)oper
-{
-    
-}
-
-#pragma mark -
-#pragma mark KVO
-
--(NSUInteger)countOfGroups
-{
-    return [self.userGroups count];
-}
-
--(AMUserGroupNode*)objectInGroupsAtIndex:(NSUInteger)index
-{
-    return [self.userGroups objectAtIndex:index];
-}
-
--(void)addGroupsObject:(AMUserGroupNode *)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups addObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
-//-(void)
-//:(NSUInteger)index withObject:(id)object
-//{
-//    [self willChangeValueForKey:@"userGroups"];
-//    [self.userGroups replaceObjectAtIndex:index withObject:object ];
-//    [self didChangeValueForKey:@"userGroups"];
-//}
-
--(void)insertObject:(AMUserGroupNode *)object inGroupsAtIndex:(NSUInteger)index
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups insertObject:object atIndex:index];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)removeObjectFromGroupsAtIndex:(NSUInteger)index
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups removeObjectAtIndex:index];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)removeGroupsObject:(AMUserGroupNode *)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups removeObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
--(void)replaceObjectInGroupsAtIndex:(NSUInteger)index withObject:(id)object
-{
-    [self willChangeValueForKey:@"userGroups"];
-    [self.userGroups replaceObjectAtIndex:index withObject:object];
-    [self didChangeValueForKey:@"userGroups"];
-}
-
 
 @end

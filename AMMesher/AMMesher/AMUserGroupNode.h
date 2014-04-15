@@ -10,12 +10,11 @@
 
 @interface AMUserGroupNode : NSObject
 
-@property NSString* name;
+@property NSString* nodeName;
 @property NSMutableArray* children;
-@property BOOL isLeaf;
 @property AMUserGroupNode* parent;
+@property BOOL isLeaf;
 
--(id)initWithName:(NSString*)name isGroup:(BOOL)bGroup;
 +(BOOL)compareField:(AMUserGroupNode*)node1
           withGroup:(AMUserGroupNode*)node2
       withFiledName:(NSString*)fieldname

@@ -763,6 +763,9 @@
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="mesh:" target="494" id="2Eo-iH-CUx"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -776,6 +779,7 @@
         </window>
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
+                <outlet property="mesherButton" destination="kwj-11-GIT" id="Twn-wM-8Zp"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

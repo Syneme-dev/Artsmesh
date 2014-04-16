@@ -27,6 +27,6 @@
 
 
 - (IBAction)closePanel:(id)sender {
-    [[self.view animator] setAlphaValue:0];
+    [self.view setHidden:YES];
 }
 @end

@@ -49,16 +49,13 @@
     NSRect  viewFrame = [self frame];
     float topBarHeight=40.0f;
     //Note: Don't let window get dragged up under the top bar
-//     self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10
-        if( (thisOrigin.y+viewFrame.size.height+topBarHeight+10) > (windowFrame.origin.y+windowFrame.size.height) ){
-//            return;
-thisOrigin.y=windowFrame.origin.y + (windowFrame.size.height-viewFrame.size.height)-topBarHeight-10;
+        if( (thisOrigin.y+viewFrame.size.height+topBarHeight) > (windowFrame.size.height) ){
+thisOrigin.y=(windowFrame.size.height-viewFrame.size.height)-topBarHeight;
         }
     
     float leftBarSpacing=30.0f;
-    if( (thisOrigin.x-40-leftBarSpacing) < (windowFrame.origin.x) ){
-        //            return;
-        thisOrigin.x=windowFrame.origin.x+40+leftBarSpacing;
+    if( (thisOrigin.x) < (40+leftBarSpacing) ){
+        thisOrigin.x=40+leftBarSpacing;
     }
 
     [self setFrameOrigin:thisOrigin];

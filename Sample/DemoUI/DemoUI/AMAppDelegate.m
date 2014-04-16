@@ -30,11 +30,14 @@ static NSMutableDictionary *allPlugins = nil;
     AMUserGroupViewController *_userGroupViewController;
     NSView *_containerView;
     AMETCDPreferenceViewController *preferenceViewController;
-
+    AMPanelViewController *preferencePanelController;
+    AMPanelViewController *userPanelController;
+    AMPanelViewController *groupsPanelController;
+    
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-
+    
     allPlugins = [self loadPlugins];
     [self showDefaultWindow];
     [AMPreferenceManager registerPreference];
@@ -50,7 +53,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationWillTerminate:(NSNotification *)notification {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-
+    
     [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 
@@ -60,9 +63,9 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-
+    
     [[AMMesher sharedAMMesher] startLoalMesher];
-
+    
 }
 
 - (void)showPreferencePanel {
@@ -76,11 +79,11 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)writePluginDataToMesher {
     //TODO:
-
+    
 }
 
 - (void)showDefaultWindow {
-
+    
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
     //[self.window setFrame:screenSize display:YES ];
@@ -97,34 +100,34 @@ static NSMutableDictionary *allPlugins = nil;
 
 
 - (void)loadGroupsPanel {
-    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
+    groupsPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    groupsPanelController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
-    [panelViewController.view addSubview:_userGroupViewController.view];
-    [panelViewController.titleView setStringValue:@"Groups"];
-    [_containerView addSubview:panelViewController.view];
+    [groupsPanelController.view addSubview:_userGroupViewController.view];
+    [groupsPanelController.titleView setStringValue:@"Groups"];
+    [_containerView addSubview:groupsPanelController.view];
 }
 
 - (void)loadPreferencePanel {
-    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    [_containerView addSubview:panelViewController.view];
-    [panelViewController.titleView setStringValue:@"Preference"];
-    panelViewController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
+    preferencePanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:preferencePanelController.view];
+    [preferencePanelController.titleView setStringValue:@"Preference"];
+    preferencePanelController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
-    [panelViewController.view addSubview:preferenceViewController.view];
+    [preferencePanelController.view addSubview:preferenceViewController.view];
 }
 
 - (void)loadUserPanel {
-    AMPanelViewController *userPanelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    userPanelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10,  300.0f, 300.0f);
-    [_containerView addSubview:userPanelViewController.view];
-    [userPanelViewController.titleView setStringValue:@"User"];
+    userPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    userPanelController.view.frame = NSMakeRect(70.0f,self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10,  300.0f, 300.0f);
+    [_containerView addSubview:userPanelController.view];
+    [userPanelController.titleView setStringValue:@"User"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     userViewController.view.frame = NSMakeRect(0, 0, 400, 300);
-    [userPanelViewController.view addSubview:userViewController.view];
-
+    [userPanelController.view addSubview:userViewController.view];
+    
 }
 
 
@@ -174,7 +177,7 @@ static NSMutableDictionary *allPlugins = nil;
         self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];
         return;
     }
-
+    
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 

@@ -24,4 +24,9 @@
     return self;
 }
 
+
+
+- (IBAction)closePanel:(id)sender {
+    [[self.view animator] setAlphaValue:0];
+}
 @end

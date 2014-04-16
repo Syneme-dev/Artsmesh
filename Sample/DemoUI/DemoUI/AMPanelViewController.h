@@ -13,6 +13,7 @@
 @property (strong) IBOutlet NSView *toolBarView;
 
 @property (weak) IBOutlet NSTextField *titleView;
+- (IBAction)closePanel:(id)sender;
 
 
 @end

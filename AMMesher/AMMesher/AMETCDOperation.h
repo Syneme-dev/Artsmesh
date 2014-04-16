@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AMETCDOperationDelegate;
 @class AMETCDResult;
 @class AMETCD;
 @protocol AMETCDOperationDelegate;
@@ -29,5 +30,12 @@
 -(id)init:(NSString*)ip
      port:(NSString*)port;
 
+
+@end
+
+
+@protocol AMETCDOperationDelegate <NSObject>
+
+-(void)AMETCDOperationDidFinished:(AMETCDOperation*)oper;
 
 @end

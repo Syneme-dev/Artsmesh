@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMETCDOperationDelegate.h"
+#import "AMETCDOperation.h"
 
 
 @class AMETCDDestination;

@@ -23,7 +23,6 @@
 		26F2BF3A18FCB5E900DD04A6 /* AMETCDLaunchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF2618FCB5E900DD04A6 /* AMETCDLaunchOperation.m */; };
 		26F2BF3B18FCB5E900DD04A6 /* AMETCDOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF2718FCB5E900DD04A6 /* AMETCDOperation.h */; };
 		26F2BF3C18FCB5E900DD04A6 /* AMETCDOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF2818FCB5E900DD04A6 /* AMETCDOperation.m */; };
-		26F2BF3D18FCB5E900DD04A6 /* AMETCDOperationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF2918FCB5E900DD04A6 /* AMETCDOperationDelegate.h */; };
 		26F2BF3E18FCB5E900DD04A6 /* AMETCDOperationHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF2A18FCB5E900DD04A6 /* AMETCDOperationHeader.h */; };
 		26F2BF3F18FCB5E900DD04A6 /* AMETCDQueryOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF2B18FCB5E900DD04A6 /* AMETCDQueryOperation.h */; };
 		26F2BF4018FCB5E900DD04A6 /* AMETCDQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF2C18FCB5E900DD04A6 /* AMETCDQueryOperation.m */; };
@@ -80,7 +79,6 @@
 		26F2BF2618FCB5E900DD04A6 /* AMETCDLaunchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDLaunchOperation.m; sourceTree = "<group>"; };
 		26F2BF2718FCB5E900DD04A6 /* AMETCDOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDOperation.h; sourceTree = "<group>"; };
 		26F2BF2818FCB5E900DD04A6 /* AMETCDOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDOperation.m; sourceTree = "<group>"; };
-		26F2BF2918FCB5E900DD04A6 /* AMETCDOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDOperationDelegate.h; sourceTree = "<group>"; };
 		26F2BF2A18FCB5E900DD04A6 /* AMETCDOperationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDOperationHeader.h; sourceTree = "<group>"; };
 		26F2BF2B18FCB5E900DD04A6 /* AMETCDQueryOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDQueryOperation.h; sourceTree = "<group>"; };
 		26F2BF2C18FCB5E900DD04A6 /* AMETCDQueryOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDQueryOperation.m; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				26F2BF2618FCB5E900DD04A6 /* AMETCDLaunchOperation.m */,
 				26F2BF2718FCB5E900DD04A6 /* AMETCDOperation.h */,
 				26F2BF2818FCB5E900DD04A6 /* AMETCDOperation.m */,
-				26F2BF2918FCB5E900DD04A6 /* AMETCDOperationDelegate.h */,
 				26F2BF2A18FCB5E900DD04A6 /* AMETCDOperationHeader.h */,
 				26F2BF2B18FCB5E900DD04A6 /* AMETCDQueryOperation.h */,
 				26F2BF2C18FCB5E900DD04A6 /* AMETCDQueryOperation.m */,
@@ -256,7 +253,6 @@
 				26F2BF4918FCB5F900DD04A6 /* AMKillETCDOperation.h in Headers */,
 				26F2BF4118FCB5E900DD04A6 /* AMETCDUpdateUserOperation.h in Headers */,
 				26F2BF3B18FCB5E900DD04A6 /* AMETCDOperation.h in Headers */,
-				26F2BF3D18FCB5E900DD04A6 /* AMETCDOperationDelegate.h in Headers */,
 				26F2BF6818FCB65400DD04A6 /* AMETCDDataDestination.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
 				26F2BF4518FCB5E900DD04A6 /* AMETCDWatchOperation.h in Headers */,

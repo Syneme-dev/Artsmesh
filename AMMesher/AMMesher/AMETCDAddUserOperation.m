@@ -8,7 +8,7 @@
 
 #import "AMETCDAddUserOperation.h"
 #import "AMETCDApi/AMETCD.h"
-#import "AMETCDOperationDelegate.h"
+#import "AMETCDOperation.h"
 
 @implementation AMETCDAddUserOperation
 

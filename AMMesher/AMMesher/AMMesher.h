@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMETCDOperationDelegate.h"
 
 @class AMETCDDataDestination;
-@protocol AMETCDOperationDelegate;
 
 @interface AMMesher : NSObject<AMETCDOperationDelegate>
 

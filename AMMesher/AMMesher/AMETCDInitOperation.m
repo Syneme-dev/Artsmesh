@@ -9,6 +9,7 @@
 #import "AMETCDInitOperation.h"
 #import "AMETCDApi/AMETCD.h"
 #import "AMETCDOperationHeader.h"
+#import "AMETCDOperationDelegate.h"
 
 @implementation AMETCDInitOperation
 

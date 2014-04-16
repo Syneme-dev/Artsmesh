@@ -5,7 +5,6 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-
 #import "AMETCDOperationHeader.h"
 #import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
@@ -238,7 +237,7 @@
     
     if (!self.isLeader)
     {
-        peers = [NSString stringWithFormat:@"%@:%ld",  _elector.mesherIp, _elector.mesherPort];
+        peers = [NSString stringWithFormat:@"%@:%d",  _elector.mesherIp, _elector.mesherPort];
     }
 
     AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
@@ -329,7 +328,7 @@
         if(newState == 2)//Published
         {
             self.isLeader = YES;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             
             if (self.etcdState == 0)
             {
@@ -340,7 +339,7 @@
         else if(newState == 4)//Joined
         {
             self.isLeader = NO;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             
             if(self.etcdState == 0)
             {

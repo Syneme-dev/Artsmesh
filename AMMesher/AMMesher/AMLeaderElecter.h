@@ -29,7 +29,7 @@
 
 @property int state; // 0 stop, 1 started, 2 joined, 3 hosting, 4 electing, -1 error
 @property NSString* mesherHost;
-@property long mesherPort;
+@property int mesherPort;
 @property NSString* mesherIp;
 
 -(void)kickoffElectProcess;

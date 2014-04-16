@@ -183,7 +183,7 @@
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
     self.mesherHost = sender.hostName;
-    self.mesherPort = sender.port;
+    self.mesherPort = (int)sender.port;
     
     for(NSData* addr in sender.addresses)
     {
@@ -219,7 +219,7 @@
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
     self.mesherHost = [AMNetworkUtils getHostName];
-    self.mesherPort = sender.port;
+    self.mesherPort = (int)sender.port;
     
     self.mesherIp = [AMNetworkUtils getHostIpv4Addr];
     

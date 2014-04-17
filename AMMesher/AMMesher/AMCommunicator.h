@@ -10,6 +10,7 @@
 
 @interface AMCommunicator : NSObject
 
+-(id)init:(NSString*)listenPort sendPort:(NSString*)sendPort;
 -(void)goOnlineCommand:(NSString*)ip port:(NSString*)port;
 -(void)joinGroupCommand:(NSString*)groupName ip:(NSString*)ip port:(NSString*)port;
 

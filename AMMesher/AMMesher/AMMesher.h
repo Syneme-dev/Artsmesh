@@ -13,11 +13,11 @@
 
 @interface AMMesher : NSObject<AMETCDOperationDelegate>
 
-@property (atomic) NSMutableArray* userGroups;
+@property AMETCDDataDestination* usergroupDest;
 @property NSString* myGroupName;
 @property BOOL isLeader;
 @property int etcdState;    //0 stop, 1 running, 2 error
-@property AMETCDDataDestination* usergroupDest;
+@property BOOL isOnline;
 
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;
@@ -26,9 +26,9 @@
 -(void)stopLocalMesher;
 
 -(void)joinGroup:(NSString*)groupName;
--(void)createGroup:(NSString*)groupName;
 -(void)backToArtsmesh;
 
+-(void)everyoneGoOnline;
 -(void)goOnline;
 -(void)goOffline;
 

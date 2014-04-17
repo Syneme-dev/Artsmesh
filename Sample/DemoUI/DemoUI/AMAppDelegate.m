@@ -158,7 +158,7 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (IBAction)mesh:(id)sender {
-    [[AMMesher sharedAMMesher] goOnline];
+    [[AMMesher sharedAMMesher] everyoneGoOnline];
 }
 
 

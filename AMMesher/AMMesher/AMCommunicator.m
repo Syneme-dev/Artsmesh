@@ -16,7 +16,7 @@
     GCDAsyncUdpSocket* _udpSendSocket;
 }
 
--(id)init:(NSString*)port
+-(id)init:(NSString*)listenPort sendPort:(NSString*)sendPort
 {
     if (self = [super init])
     {
@@ -25,7 +25,7 @@
                             delegateQueue:dispatch_get_main_queue()];
         
 		NSError *error = nil;
-		if (![_udpListenSocket bindToPort:[port intValue] error:&error])
+		if (![_udpListenSocket bindToPort:[listenPort intValue] error:&error])
 		{
 			return nil;
 		}
@@ -40,7 +40,7 @@
                           delegateQueue:dispatch_get_main_queue()];
         
         error = nil;
-		if (![_udpSendSocket bindToPort:[port intValue] error:&error])
+		if (![_udpSendSocket bindToPort:[sendPort intValue] error:&error])
 		{
 			return nil;
 		}
@@ -89,19 +89,24 @@ withFilterContext:(id)filterContext
 	if (msg)
 	{
 		NSArray* commandPathes = [msg componentsSeparatedByString:@"/"];
-        if ([commandPathes count] < 2)
+        if ([commandPathes count] < 3)
         {
             return;
         }
         
-        if ([[commandPathes objectAtIndex:1] isEqualToString:@"Command"])
+        if (![[commandPathes objectAtIndex:1] isEqualToString:@"AMMesher"])
         {
-            if ([commandPathes count] < 3)
+            return;
+        }
+        
+        if ([[commandPathes objectAtIndex:2] isEqualToString:@"Command"])
+        {
+            if ([commandPathes count] < 4)
             {
                 return;
             }
             
-            NSString* commandType = [commandPathes objectAtIndex:2];
+            NSString* commandType = [commandPathes objectAtIndex:3];
             if ([commandType hasPrefix:@"goOnline"])
             {
                 [[AMMesher sharedAMMesher] goOnline];

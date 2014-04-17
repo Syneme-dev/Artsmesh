@@ -5,7 +5,6 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-
 #import "AMETCDOperationHeader.h"
 #import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
@@ -15,6 +14,7 @@
 #import "AMETCDApi/AMETCD.h"
 #import "AMGroup.h"
 #import "AMUser.h"
+#import "AMCommunicator.h"
 
 
 @implementation AMMesher
@@ -22,6 +22,7 @@
     AMLeaderElecter* _elector;
     AMETCDDataSource* _dataSource;
     NSTimer* _userTTL;
+    AMCommunicator* _communicator;
 }
 
 +(id)sharedAMMesher
@@ -61,14 +62,13 @@
     if (self = [super init])
     {
         self.isLeader = NO;
+        self.isOnline = NO;
         self.etcdState = 0;
         self.myGroupName = Preference_DefaultGroupName;
         
         _elector = [[AMLeaderElecter alloc] init];
         _elector.mesherPort = [Preference_MyETCDServerPort intValue];
-        
-        
-        _userGroups = [[NSMutableArray alloc] init];
+        _communicator = [[AMCommunicator alloc] init:Preference_Communicate_ListenPort sendPort:Preferenve_Communicate_SendPort];
     }
     
     return self;
@@ -77,7 +77,6 @@
 -(void)startLoalMesher
 {
     [_elector kickoffElectProcess];
-    
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context:nil];
@@ -113,9 +112,31 @@
     [_elector removeObserver:self forKeyPath:@"state"];
 }
 
+-(void)everyoneGoOnline
+{
+    @synchronized(self.usergroupDest)
+    {
+        for (AMGroup* group in self.usergroupDest.userGroups)
+        {
+            if ([group.uniqueName isEqualToString:self.myGroupName])
+            {
+                for (AMUser* user in group.children)
+                {
+                    if (user.communicationIp != nil && user.communicationPort != nil)
+                    {
+                        [_communicator goOnlineCommand:user.communicationIp port:user.communicationPort];
+                    }
+                }
+            }
+        }
+    }
+    
+    [self goOffline];
+}
+
 -(void)goOnline
 {
-    if(self.etcdState != 1)
+    if(self.etcdState != 1 || self.isOnline == YES)
     {
         return;
     }
@@ -130,6 +151,8 @@
         _dataSource.ip   = Preference_ETCD_ArtsmeshIO_IP;
         _dataSource.port = Preference_ETCD_ArtsmeshIO_Port;
         [self addSelfToDataSource];
+        
+        self.isOnline = YES;
     }
 }
 
@@ -162,9 +185,9 @@
         _dataSource.ip   = Preference_MyIp;
         _dataSource.port = Preference_MyETCDClientPort;
         [self addSelfToDataSource];
+        
+        self.isOnline = NO;
     }
-
-    
 }
 
 
@@ -187,27 +210,8 @@
                                                  userProperties:userPropties];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
-}
-
--(void)createGroup:(NSString*)groupName
-{
-    NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
     
-    NSString* groupNameKey = @"GroupName";
     self.myGroupName = groupName;
-    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
-    [userPropties setObject:groupName forKey:groupNameKey];
-    
-    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
-                                                 initWithParameter:_dataSource.ip
-                                                 port: _dataSource.port
-                                                 fullUserName:fullUserName
-                                                 userProperties:userPropties];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
 }
 
 -(void)backToArtsmesh
@@ -230,6 +234,7 @@
                                                  userProperties:userPropties];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+    self.myGroupName = @"Artsmesh";
 }
 
 -(void)launchETCD
@@ -238,7 +243,7 @@
     
     if (!self.isLeader)
     {
-        peers = [NSString stringWithFormat:@"%@:%ld",  _elector.mesherIp, _elector.mesherPort];
+        peers = [NSString stringWithFormat:@"%@:%d",  _elector.mesherIp, _elector.mesherPort];
     }
 
     AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
@@ -275,6 +280,19 @@
                                            fullGroupName:self.myGroupName
                                            ttl:Preference_MyEtCDUserTTL];
     
+    NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
+    [properties setObject: Preference_Communicate_IP forKey:@"communicationIp"];
+    [properties setObject:Preference_Communicate_ListenPort forKey:@"communicationPort"];
+    [properties setObject:Preference_User_Description forKey:@"description"];
+    [properties setObject:Preference_MyLocation forKey:@"location"];
+    [properties setObject:Preference_User_Domain forKey:@"domain"];
+    
+    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                 initWithParameter:_dataSource.ip
+                                                 port:_dataSource.port
+                                                 fullUserName:fullUserName
+                                                 userProperties:properties];
+    
     AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
                                            initWithParameter:Preference_MyIp
                                            port:Preference_MyETCDClientPort
@@ -282,11 +300,14 @@
                                            ttl:Preference_MyEtCDUserTTL];
     
     addUserOper.delegate = self;
+    updateUserOper.delegate = self;
     userTTLOper.delegate = self;
     
-    [userTTLOper addDependency:addUserOper];
+    [updateUserOper addDependency:addUserOper];
+    [userTTLOper addDependency:updateUserOper];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
     [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
 }
 
@@ -329,7 +350,7 @@
         if(newState == 2)//Published
         {
             self.isLeader = YES;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             
             if (self.etcdState == 0)
             {
@@ -340,7 +361,7 @@
         else if(newState == 4)//Joined
         {
             self.isLeader = NO;
-            NSLog(@"Mesher is %@:%ld", _elector.mesherHost, _elector.mesherPort);
+            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
             
             if(self.etcdState == 0)
             {
@@ -394,7 +415,11 @@
     }
     else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
     {
-        [_dataSource watch];
+       [_dataSource watch];
+    }
+    else if([oper isKindOfClass:[AMETCDUpdateUserOperation class]])
+    {
+        
     }
 }
 

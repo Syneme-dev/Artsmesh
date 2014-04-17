@@ -16,6 +16,8 @@
 @property NSString* location;
 @property NSString* groupName;
 @property NSString* description;
+@property NSString* communicationIp;
+@property NSString* communicationPort;
 
 -(id)init;
 

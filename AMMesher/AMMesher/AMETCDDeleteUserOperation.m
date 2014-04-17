@@ -5,10 +5,9 @@
 //  Created by Wei Wang on 4/7/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-
+#import "AMETCDOperation.h"
 #import "AMETCDDeleteUserOperation.h"
 #import "AMETCDApi/AMETCD.h"
-#import "AMETCDOperationDelegate.h"
 
 @implementation AMETCDDeleteUserOperation
 

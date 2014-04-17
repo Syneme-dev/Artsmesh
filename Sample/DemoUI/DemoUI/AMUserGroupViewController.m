@@ -32,20 +32,6 @@
     
 }
 
-- (IBAction)goOnline:(id)sender
-{
-    if ([[self.onlineButton title] isEqualToString:@"Online"])
-    {
-        [self.sharedMesher goOnline];
-        [self.onlineButton setTitle:@"Offline"];
-    }
-    else if([[self.onlineButton title] isEqualToString:@"Offline"])
-    {
-        [self.sharedMesher goOffline];
-        [self.onlineButton setTitle:@"Online"];
-    }
-}
-
 - (IBAction)joinGroup:(id)sender
 {
     long index = [self.userGroupOutline selectedRow];

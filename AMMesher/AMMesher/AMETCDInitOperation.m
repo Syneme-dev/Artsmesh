@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
+#import "AMETCDOperation.h"
 #import "AMETCDInitOperation.h"
 #import "AMETCDApi/AMETCD.h"
 #import "AMETCDOperationHeader.h"

@@ -27,19 +27,14 @@ static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate {
     AMMesher *_globalMesher;
-    AMUserGroupViewController *_userGroupViewController;
-    NSView *_containerView;
-    AMETCDPreferenceViewController *preferenceViewController;
-    AMPanelViewController *preferencePanelController;
-    AMPanelViewController *userPanelController;
-    AMPanelViewController *groupsPanelController;
+    
     
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     allPlugins = [self loadPlugins];
-    [self showDefaultWindow];
+    [self.mainWindowController showDefaultWindow];
     [AMPreferenceManager registerPreference];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
@@ -82,53 +77,6 @@ static NSMutableDictionary *allPlugins = nil;
     
 }
 
-- (void)showDefaultWindow {
-    
-    NSRect screenSize = [[NSScreen mainScreen] frame];
-    //Note:code make the window max size.
-    //[self.window setFrame:screenSize display:YES ];
-    float appleMenuBarHeight = 20.0f;
-    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - appleMenuBarHeight)];
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y
-                                                              , 10000.0f, self.window.frame.size.height-40)];
-    [scrollView setDocumentView:_containerView];
-    [self loadGroupsPanel];
-    [self loadPreferencePanel];
-    [self loadUserPanel];
-}
-
-
-- (void)loadGroupsPanel {
-    groupsPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    groupsPanelController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
-    _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
-    _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
-    [groupsPanelController.view addSubview:_userGroupViewController.view];
-    [groupsPanelController.titleView setStringValue:@"Groups"];
-    [_containerView addSubview:groupsPanelController.view];
-}
-
-- (void)loadPreferencePanel {
-    preferencePanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    [_containerView addSubview:preferencePanelController.view];
-    [preferencePanelController.titleView setStringValue:@"Preference"];
-    preferencePanelController.view.frame = NSMakeRect(430.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-720.0f-10, 600.0f, 720.0f);
-    preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
-    [preferencePanelController.view addSubview:preferenceViewController.view];
-}
-
-- (void)loadUserPanel {
-    userPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    userPanelController.view.frame = NSMakeRect(70.0f,self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10,  300.0f, 300.0f);
-    [_containerView addSubview:userPanelController.view];
-    [userPanelController.titleView setStringValue:@"User"];
-    AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
-    userViewController.view.frame = NSMakeRect(0, 0, 400, 300);
-    [userPanelController.view addSubview:userViewController.view];
-    
-}
 
 
 - (NSMutableDictionary *)loadPlugins {
@@ -160,9 +108,6 @@ static NSMutableDictionary *allPlugins = nil;
     return [AMPreferenceManager defaultShared];
 }
 
-- (IBAction)mesh:(id)sender {
-    [[AMMesher sharedAMMesher] everyoneGoOnline];
-}
 
 
 #pragma mark -

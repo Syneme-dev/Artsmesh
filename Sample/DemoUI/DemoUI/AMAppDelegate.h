@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMMainWindowController.h"
 
 #define AM_APPDELEGATE (AMAppDelegate*)[NSApp delegate]
 @interface AMAppDelegate : NSObject <NSApplicationDelegate,AMPluginAppDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+//@property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTextField *mesherName;
-- (IBAction)mesh:(id)sender;
-@property (weak) IBOutlet NSButton *mesherButton;
+
+@property (weak) IBOutlet AMMainWindowController *mainWindowController;
 
 @end

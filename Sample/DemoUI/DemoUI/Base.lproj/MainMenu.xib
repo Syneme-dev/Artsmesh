@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -650,7 +650,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -659,18 +659,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="728"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="odj-kE-TsY">
-                            <rect key="frame" x="0.0" y="0.0" width="1200" height="713"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1200" height="728"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7i-di-ip4">
-                                    <rect key="frame" x="0.0" y="0.0" width="1617" height="713"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1617" height="728"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                         </clipView>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="V3V-By-qRD">
-                            <rect key="frame" x="0.0" y="713" width="1200" height="15"/>
+                            <rect key="frame" x="0.0" y="712" width="1200" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="d2O-Bj-e1n">
@@ -764,7 +764,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="mesh:" target="494" id="2Eo-iH-CUx"/>
+                            <action selector="mesh:" target="B30-a9-ZW1" id="nU0-Er-fia"/>
                         </connections>
                     </button>
                 </subviews>
@@ -779,8 +779,14 @@
         </window>
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
+                <outlet property="mainWindowController" destination="B30-a9-ZW1" id="n9f-pi-bPS"/>
                 <outlet property="mesherButton" destination="kwj-11-GIT" id="Twn-wM-8Zp"/>
                 <outlet property="window" destination="371" id="532"/>
+            </connections>
+        </customObject>
+        <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
+            <connections>
+                <outlet property="window" destination="371" id="BOz-Gb-G7x"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>

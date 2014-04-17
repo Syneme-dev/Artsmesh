@@ -39,7 +39,7 @@
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-    
+    float pixelHeightAdjustment=2;
     //Note: We're working only in the superview's coordinate space, so we always convert.
     NSPoint newDragLocation = [[self superview] convertPoint:[theEvent locationInWindow] fromView:nil];
     NSPoint thisOrigin = [self frame].origin;
@@ -49,8 +49,8 @@
     NSRect  viewFrame = [self frame];
     float topBarHeight=40.0f;
     //Note: Don't let window get dragged up under the top bar
-        if( (thisOrigin.y+viewFrame.size.height+topBarHeight) > (windowFrame.size.height) ){
-thisOrigin.y=(windowFrame.size.height-viewFrame.size.height)-topBarHeight;
+        if( (thisOrigin.y+viewFrame.size.height+topBarHeight) > (windowFrame.size.height+pixelHeightAdjustment) ){
+thisOrigin.y=(windowFrame.size.height-viewFrame.size.height)-topBarHeight+pixelHeightAdjustment;
         }
     
     float leftBarSpacing=30.0f;

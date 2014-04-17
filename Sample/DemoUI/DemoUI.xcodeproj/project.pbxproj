@@ -60,6 +60,7 @@
 		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
 		AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78018E963B40029DB97 /* AMPanelView.xib */; };
 		AF9DC78718E96AEB0029DB97 /* ken.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78618E96AEB0029DB97 /* ken.png */; };
+		AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB95D4718FFB61E00853263 /* AMMainWindowController.m */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
@@ -171,6 +172,8 @@
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
 		AF9DC78018E963B40029DB97 /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
 		AF9DC78618E96AEB0029DB97 /* ken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ken.png; sourceTree = "<group>"; };
+		AFB95D4618FFB61E00853263 /* AMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMainWindowController.h; sourceTree = "<group>"; };
+		AFB95D4718FFB61E00853263 /* AMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainWindowController.m; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
+				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
+				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,

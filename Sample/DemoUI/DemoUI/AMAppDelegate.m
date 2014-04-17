@@ -86,7 +86,7 @@ static NSMutableDictionary *allPlugins = nil;
     
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
-    //[self.window setFrame:screenSize display:YES ];
+    [self.window setFrame:screenSize display:YES ];
     float appleMenuBarHeight = 20.0f;
     [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
@@ -161,7 +161,7 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (IBAction)mesh:(id)sender {
-    [[AMMesher sharedAMMesher] goOnline];
+    [[AMMesher sharedAMMesher] everyoneGoOnline];
 }
 
 

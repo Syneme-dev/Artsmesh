@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
+#import "AMETCDOperation.h"
 #import "AMETCDWatchOperation.h"
-#import "AMETCDOperationDelegate.h"
 #import "AMETCDApi/AMETCD.h"
 
 @implementation AMETCDWatchOperation

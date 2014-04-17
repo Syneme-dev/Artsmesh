@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#define Preference_DefaultGroupName     @"Artsmesh"
-#define Preference_MyUserName           @"www"
-#define Preference_User_Domain             @"CCOM"
-#define Preference_MyLocation           @"Bejing"
-#define Preference_User_Description        @"I'm a Mac Developer"
-#define Preference_MyIp                 @"192.168.1.101"
+#define Preference_DefaultGroupName         @"Artsmesh"
+#define Preference_MyUserName               @"www"
+#define Preference_User_Domain              @"CCOM"
+#define Preference_MyLocation               @"Bejing"
+#define Preference_User_Description         @"I'm a Mac Developer"
+#define Preference_MyIp                     @"192.168.1.101"
 
 #define Preference_MyETCDServerPort         @"17001"
 #define Preference_MyETCDClientPort         @"14001"
@@ -24,5 +24,9 @@
 
 #define Preference_ETCD_ArtsmeshIO_IP        @"123.124.145.254"
 #define Preference_ETCD_ArtsmeshIO_Port      @"14001"
+
+#define Preference_Communicate_IP           @"192.168.1.101"
+#define Preference_Communicate_ListenPort   @"54321"
+#define Preferenve_Communicate_SendPort     @"12345"
 
 

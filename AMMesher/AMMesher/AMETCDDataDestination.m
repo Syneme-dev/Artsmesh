@@ -194,6 +194,7 @@
     {
         NSString* propName = [resParts objectAtIndex:3];
         NSString* uniqueUserName = [resParts objectAtIndex:2];
+        NSString* propVal = res.node.value;
         
         if ([propName isEqualToString:@"GroupName"])
         {
@@ -289,7 +290,22 @@
         }
         else
         {
-            //don't know how to change
+            @synchronized(self)
+            {
+                for (int i = 0; i < [self.userGroups count]; i++)
+                {
+                    AMGroup* existGroup = [self.userGroups objectAtIndex:i];
+                    for (int j = 0; j < [existGroup.children count]; j++)
+                    {
+                        AMUser* existUser = [existGroup.children objectAtIndex:j];
+                        if ([existUser.uniqueName isEqualToString:uniqueUserName])
+                        {
+                            [existUser setValue:propVal forKey:propName];
+                        }
+                    }
+                }
+            }
+            
             return;
         }
     }

@@ -28,5 +28,9 @@
 
 - (IBAction)closePanel:(id)sender {
     [self.view setHidden:YES];
+    //TODO:move right panel to left.
+//    NSPoint point=NSMakePoint(self.view.frame.origin.x+100.0, self.view.frame.origin.y);
+//    [self.view setFrameOrigin:point];
+    
 }
 @end

@@ -20,20 +20,20 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView focusRingType="none" fixedFrame="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
-                    <rect key="frame" x="5" y="51" width="289" height="304"/>
+                    <rect key="frame" x="0.0" y="51" width="300" height="307"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" focusRingType="none" ambiguous="YES" misplaced="YES" copiesOnScroll="NO" id="Pea-9b-WbH">
-                        <rect key="frame" x="0.0" y="0.0" width="289" height="304"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="307"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
-                                <rect key="frame" x="0.0" y="0.0" width="289" height="304"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="307"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="286" minWidth="16" maxWidth="1000" id="Heo-zb-RZP">
+                                    <tableColumn width="297" minWidth="16" maxWidth="1000" id="Heo-zb-RZP">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>

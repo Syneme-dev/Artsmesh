@@ -11,7 +11,7 @@
 #define Preference_User_Domain              @"CCOM"
 #define Preference_MyLocation               @"Bejing"
 #define Preference_User_Description         @"I'm a Mac Developer"
-#define Preference_MyIp                     @"192.168.10.103"
+#define Preference_MyIp                     @"192.168.10.107"
 
 #define Preference_MyETCDServerPort         @"17001"
 #define Preference_MyETCDClientPort         @"14001"

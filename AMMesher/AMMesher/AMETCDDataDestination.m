@@ -59,7 +59,7 @@
         }
         
         NSString* userPropName = [userPropPathes objectAtIndex:3];
-        if ([userPropName isEqualToString:@"GroupName"])
+        if ([userPropName isEqualToString:@"groupName"])
         {
             uniqueGroupName  = userPropNode.value;
         }
@@ -196,7 +196,7 @@
         NSString* uniqueUserName = [resParts objectAtIndex:2];
         NSString* propVal = res.node.value;
         
-        if ([propName isEqualToString:@"GroupName"])
+        if ([propName isEqualToString:@"groupName"])
         {
             NSString* uniqueGroupName  = res.node.value;
             NSString* prevUniqueGroupName = nil;

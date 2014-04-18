@@ -13,7 +13,6 @@
 @interface AMAppDelegate : NSObject <NSApplicationDelegate,AMPluginAppDelegate>
 
 //@property (assign) IBOutlet NSWindow *window;
-@property (weak) IBOutlet NSTextField *mesherName;
 
 @property (weak) IBOutlet AMMainWindowController *mainWindowController;
 

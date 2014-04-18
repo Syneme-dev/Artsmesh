@@ -198,7 +198,7 @@
                                                         Preference_User_Domain,
                                                         Preference_MyLocation];
     
-    NSString* groupNameKey = @"GroupName";
+    NSString* groupNameKey = @"groupName";
     self.myGroupName = groupName;
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:groupName forKey:groupNameKey];
@@ -221,7 +221,7 @@
                                                         Preference_User_Domain,
                                                         Preference_MyLocation];
     
-    NSString* groupNameKey = @"GroupName";
+    NSString* groupNameKey = @"groupName";
     self.myGroupName = Preference_DefaultGroupName;
     
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];

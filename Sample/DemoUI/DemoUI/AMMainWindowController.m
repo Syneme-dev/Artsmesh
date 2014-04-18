@@ -58,12 +58,9 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (IBAction)mesh:(id)sender {
-    
     [[AMMesher sharedAMMesher] everyoneGoOnline];
 }
 
@@ -84,9 +81,6 @@
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
-    [self loadFOAFPanel];
-    [self loadFOAFPanel];
-    [self loadFOAFPanel];
 }
 
 -(void)loadFOAFPanel{

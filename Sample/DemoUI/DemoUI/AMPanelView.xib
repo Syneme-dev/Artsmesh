@@ -30,33 +30,33 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EmI-FD-sW7" userLabel="tearoff">
-                            <rect key="frame" x="483" y="2" width="16" height="16"/>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="EmI-FD-sW7" userLabel="tearoff">
+                            <rect key="frame" x="467" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tearoff" id="fg8-Rb-LMw"/>
                         </imageView>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veg-la-FBt" userLabel="settings">
-                            <rect key="frame" x="503" y="2" width="16" height="16"/>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="veg-la-FBt" userLabel="settings">
+                            <rect key="frame" x="487" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="settings" id="br0-Vw-lhS"/>
                         </imageView>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axv-cy-elo" userLabel="duplicate">
-                            <rect key="frame" x="523" y="2" width="16" height="16"/>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="axv-cy-elo" userLabel="duplicate">
+                            <rect key="frame" x="507" y="0.0" width="21" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="duplicate" id="qw3-ve-JJ9"/>
                         </imageView>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YhX-GV-jNT" userLabel="fullscreen">
-                            <rect key="frame" x="543" y="2" width="16" height="16"/>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="YhX-GV-jNT" userLabel="fullscreen">
+                            <rect key="frame" x="532" y="2" width="19" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="fullscreen" id="TPW-Ka-805"/>
                         </imageView>
-                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UA2-Yj-7zc" userLabel="maxsize">
-                            <rect key="frame" x="563" y="2" width="16" height="16"/>
+                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="UA2-Yj-7zc" userLabel="maxsize">
+                            <rect key="frame" x="555" y="3" width="22" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="maxsize" id="Gwd-Sy-m8g"/>
                         </imageView>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
-                            <rect key="frame" x="583" y="2" width="16" height="16"/>
+                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
+                            <rect key="frame" x="581" y="2" width="18" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="mfq-Uw-HWT"/>

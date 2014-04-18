@@ -136,6 +136,7 @@
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
     [preferencePanelController.view addSubview:preferenceViewController.view];
+    [preferenceViewController loadSystemInfo];
 }
 
 - (void)loadUserPanel {

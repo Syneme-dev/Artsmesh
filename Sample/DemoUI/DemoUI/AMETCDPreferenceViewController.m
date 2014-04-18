@@ -7,6 +7,7 @@
 //
 
 #import "AMETCDPreferenceViewController.h"
+#import "AMNetworkUtils/AMNetworkUtils.h"
 
 @interface AMETCDPreferenceViewController ()
 
@@ -30,4 +31,31 @@
 - (IBAction)onJackServerTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];
 }
+
+-(void)loadSystemInfo
+{
+    NSString* machineName = [AMNetworkUtils getHostName];
+    self.myMachineNameField.stringValue = machineName;
+    
+    [self.myPrivateIpPopup removeAllItems];
+    NSArray* addresses = [NSHost currentHost].addresses;
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMNetworkUtils isValidIpv4:ipStr] || [AMNetworkUtils isValidIpv6:ipStr])
+        {
+            if ([ipStr hasPrefix:@"127"])
+            {
+                continue;
+            }
+            if ([ipStr hasPrefix:@"::"])
+            {
+                continue;
+            }
+            
+            [self.myPrivateIpPopup addItemWithTitle:ipStr];
+        }
+    }
+}
+
 @end

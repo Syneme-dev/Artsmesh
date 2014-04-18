@@ -11,8 +11,13 @@
 @interface AMETCDPreferenceViewController : NSViewController
 @property (retain) IBOutlet NSTabView *tabs;
 
+@property (weak) IBOutlet NSTextField *myMachineNameField;
+@property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
+
 - (IBAction)onETCDTabClick:(id)sender;
 - (IBAction)onJackServerTabClick:(id)sender;
+
+-(void)loadSystemInfo;
 
 
 @end

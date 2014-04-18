@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
             <connections>
+                <outlet property="myMachineNameField" destination="rRi-Xl-XEX" id="kz8-E2-D05"/>
+                <outlet property="myPrivateIpPopup" destination="eWX-mb-f8Z" id="ZaV-8y-usv"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
@@ -31,9 +33,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Cu-rN-wSK">
-                                                <rect key="frame" x="20" y="228" width="73" height="17"/>
+                                                <rect key="frame" x="20" y="228" width="115" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Server IP" id="IcW-0S-7Eh">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MY PUBLIC IP" id="IcW-0S-7Eh">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -47,9 +49,6 @@
                                                     <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ServerIP" id="Od2-ae-E8G"/>
-                                                </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVX-Td-BMn">
                                                 <rect key="frame" x="20" y="268" width="100" height="17"/>
@@ -68,9 +67,6 @@
                                                     <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_InstanceName" id="eYJ-Pf-5gI"/>
-                                                </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syG-ce-LGf">
                                                 <rect key="frame" x="20" y="148" width="90" height="17"/>
@@ -241,26 +237,29 @@
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UcE-gC-5W7">
-                                                <rect key="frame" x="20" y="188" width="73" height="17"/>
+                                                <rect key="frame" x="20" y="188" width="107" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Client IP" id="C17-Zb-gJE">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MY PRIVATE IP" id="C17-Zb-gJE">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIu-Nz-iWd">
-                                                <rect key="frame" x="141" y="185" width="392" height="22"/>
+                                            <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWX-mb-f8Z">
+                                                <rect key="frame" x="141" y="185" width="392" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="NB0-Zk-0iL">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                                </textFieldCell>
-                                                <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_ETCD_ClientIP" id="ixd-Ib-jiW"/>
-                                                </connections>
-                                            </textField>
+                                                <popUpButtonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="TSs-Ev-8UB">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" title="OtherViews" id="Jia-QI-7cs">
+                                                        <items>
+                                                            <menuItem title="Item 1" id="mDk-Jq-kfF"/>
+                                                            <menuItem title="Item 2" id="WQs-OX-i9V"/>
+                                                            <menuItem title="Item 3" id="ufY-th-AIv"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                            </popUpButton>
                                         </subviews>
                                     </customView>
                                 </subviews>

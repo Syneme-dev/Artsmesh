@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+
 @interface AMMainWindowController : NSWindowController
 - (IBAction)mesh:(id)sender;
-
-
 - (void)showDefaultWindow ;
 
 @end

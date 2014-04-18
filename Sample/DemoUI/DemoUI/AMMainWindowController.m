@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
+
+
 #import "AMMainWindowController.h"
 
 #import "AMMesher/AMMesher.h"
@@ -22,8 +24,10 @@
 #import "AMMesher/AMMesher.h"
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
+#import "AMSocialViewController.h"
 #import "AMUserGroupViewController.h"
 #import <UIFramewrok/BlueBackgroundView.h>
+
 
 #define UI_leftSidebarWidth 40.0f
 #define UI_panelSpacing 30.0f
@@ -41,9 +45,12 @@
     AMUserGroupViewController *_userGroupViewController;
     NSView *_containerView;
     AMETCDPreferenceViewController *preferenceViewController;
+    AMSocialViewController * socialViewController;
     AMPanelViewController *preferencePanelController;
     AMPanelViewController *userPanelController;
     AMPanelViewController *groupsPanelController;
+    AMPanelViewController *socialPanelController;
+//    WebView *webview;
     float containerWidth;
 }
 - (id)initWithWindow:(NSWindow *)window
@@ -81,21 +88,26 @@
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
+    //Note:using the following code to render FOAF panel.
+//    [self loadFOAFPanel];
 }
 
 -(void)loadFOAFPanel{
-    groupsPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    float panelHeight=400.0f;
-    groupsPanelController.view.frame = NSMakeRect(containerWidth,
+    socialPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    float panelHeight=720.0f;
+    socialPanelController.view.frame = NSMakeRect(containerWidth,
                                                   self.window.frame.size.height-UI_topbarHeight-
                                                   panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
-    _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
-    _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
-    [groupsPanelController.view addSubview:_userGroupViewController.view];
-    [groupsPanelController.titleView setStringValue:@"Groups"];
-    [_containerView addSubview:groupsPanelController.view];
-    containerWidth+=groupsPanelController.view.frame.size.width+UI_panelSpacing;
-
+    socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
+    socialViewController.view.frame = NSMakeRect(0, 20, 300, panelHeight-20-20);
+    [socialPanelController.view addSubview:socialViewController.view];
+    [socialPanelController.titleView setStringValue:@"Socials"];
+    [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
+    
+    [socialViewController.socialWebTab setDrawsBackground:NO];
+    [_containerView addSubview:socialPanelController.view];
+    containerWidth+=socialPanelController.view.frame.size.width+UI_panelSpacing;
+    [socialViewController loadPage];
 }
 
 

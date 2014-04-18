@@ -49,6 +49,7 @@
 		AF74056818F7D93200B3C1DF /* statusNet_Icon-19.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74054318F7D93200B3C1DF /* statusNet_Icon-19.png */; };
 		AF74056918F7D93200B3C1DF /* Trash.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74054418F7D93200B3C1DF /* Trash.png */; };
 		AF74056A18F7D93200B3C1DF /* Users.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74054518F7D93200B3C1DF /* Users.png */; };
+		AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF796F5B1900EE7D00C48C00 /* WebKit.framework */; };
 		AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */; };
 		AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B418F6848D003BB9D1 /* profile.png */; };
 		AF8CE2BD18F68719003BB9D1 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B718F68719003BB9D1 /* close.png */; };
@@ -62,6 +63,9 @@
 		AF9DC78718E96AEB0029DB97 /* ken.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78618E96AEB0029DB97 /* ken.png */; };
 		AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB95D4718FFB61E00853263 /* AMMainWindowController.m */; };
 		AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */; };
+		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
+		AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC77F8D1900C91A003543CF /* AMSocialViewController.m */; };
+		AFC77F901900CBFB003543CF /* web.css in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8F1900CBFB003543CF /* web.css */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
@@ -160,6 +164,7 @@
 		AF74054318F7D93200B3C1DF /* statusNet_Icon-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusNet_Icon-19.png"; path = "Resource/statusNet_Icon-19.png"; sourceTree = "<group>"; };
 		AF74054418F7D93200B3C1DF /* Trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Trash.png; path = Resource/Trash.png; sourceTree = "<group>"; };
 		AF74054518F7D93200B3C1DF /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Users.png; path = Resource/Users.png; sourceTree = "<group>"; };
+		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OnlineDot.png; path = Resource/OnlineDot.png; sourceTree = "<group>"; };
 		AF8CE2B418F6848D003BB9D1 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = Resource/profile.png; sourceTree = "<group>"; };
 		AF8CE2B718F68719003BB9D1 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Resource/close.png; sourceTree = "<group>"; };
@@ -176,6 +181,10 @@
 		AFB95D4718FFB61E00853263 /* AMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainWindowController.m; sourceTree = "<group>"; };
 		AFC188D018C6F4DA00E03010 /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AFC188D118C6F4DA00E03010 /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
+		AFC77F8A1900C80A003543CF /* AMSocialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSocialView.xib; sourceTree = "<group>"; };
+		AFC77F8C1900C91A003543CF /* AMSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSocialViewController.h; sourceTree = "<group>"; };
+		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
+		AFC77F8F1900CBFB003543CF /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = web.css; path = Resource/web.css; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */,
 				26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */,
 				AF48F43918EEAC4C006024CF /* UIFramewrok.framework in Frameworks */,
 				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
@@ -220,6 +230,7 @@
 				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
+				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -237,6 +248,8 @@
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
+				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
+				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -282,6 +295,7 @@
 		37C23171187A8FFD00554AFD /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF796F5B1900EE7D00C48C00 /* WebKit.framework */,
 				37C23172187A8FFD00554AFD /* AppKit.framework */,
 				37C23173187A8FFD00554AFD /* CoreData.framework */,
 				37C23174187A8FFD00554AFD /* Foundation.framework */,
@@ -309,6 +323,7 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AFC77F8F1900CBFB003543CF /* web.css */,
 				AF8CE2B618F6870A003BB9D1 /* Resource */,
 				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
@@ -471,7 +486,9 @@
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
 				AF8CE2BD18F68719003BB9D1 /* close.png in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
+				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AF74056618F7D93200B3C1DF /* statusNet_Icon-17.png in Resources */,
+				AFC77F901900CBFB003543CF /* web.css in Resources */,
 				AF74056918F7D93200B3C1DF /* Trash.png in Resources */,
 				AF74054B18F7D93200B3C1DF /* Home.png in Resources */,
 				AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */,
@@ -508,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
+				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,

@@ -131,7 +131,7 @@
         }
     }
     
-    [self goOffline];
+    [self goOnline];
 }
 
 -(void)goOnline

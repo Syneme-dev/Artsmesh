@@ -42,12 +42,19 @@
     for (int i = 0; i < [addresses count]; i++)
     {
         NSString* ipStr = [addresses objectAtIndex:i];
-        if ([AMNetworkUtils isValidIpv4:ipStr] || [AMNetworkUtils isValidIpv6:ipStr])
+        if ([AMNetworkUtils isValidIpv4:ipStr])
         {
             if ([ipStr hasPrefix:@"127"])
             {
                 continue;
             }
+            
+            [self.myPrivateIpPopup addItemWithTitle:ipStr];
+            [self.myPrivateIpPopup selectItemAtIndex:i];
+        }
+        
+        else if([AMNetworkUtils isValidIpv6:ipStr])
+        {
             if ([ipStr hasPrefix:@"::"])
             {
                 continue;

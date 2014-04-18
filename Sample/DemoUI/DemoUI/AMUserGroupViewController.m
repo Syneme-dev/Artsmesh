@@ -22,14 +22,17 @@
     if (self) {
         // Initialization code here.
         self.sharedMesher  =  [AMMesher sharedAMMesher];
+        
+        NSTextField *textField = self.createGroupTextField;
+        NSColor *insertionPointColor = [NSColor whiteColor];
+        NSTextView *fieldEditor = (NSTextView*)[textField.window
+                                                fieldEditor:YES
+                                                forObject:textField];
+        
+        fieldEditor.insertionPointColor = insertionPointColor;
     }
     
     return self;
-}
-
--(void)clearEveryThing
-{
-    
 }
 
 - (IBAction)joinGroup:(id)sender
@@ -53,7 +56,7 @@
 
 - (IBAction)createGroup:(id)sender
 {
-    NSString* createName = [self.createGroupName stringValue];
+    NSString* createName = [self.createGroupTextField stringValue];
     if (createName != nil && ![createName isEqualToString:@""])
     {
         [[AMMesher sharedAMMesher] joinGroup:createName];
@@ -65,18 +68,14 @@
     [[AMMesher sharedAMMesher] backToArtsmesh];
 }
 
-- (void)outlineViewSelectionIsChanging:(NSNotification *)notification
+- (IBAction)createGroupByEnter:(id)sender
 {
-    id selectedItem = [self.userGroupOutline itemAtRow:[self.userGroupOutline selectedRow]];
-    
-    if([selectedItem isLeaf])
+    NSString* createName = [self.createGroupTextField stringValue];
+    if (createName != nil && ![createName isEqualToString:@""])
     {
-        [self.joinGroupButton setEnabled:NO];
-    }
-    else
-    {
-        [self.joinGroupButton setEnabled:YES];
+        [[AMMesher sharedAMMesher] joinGroup:createName];
     }
 }
+
 
 @end

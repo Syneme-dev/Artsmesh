@@ -12,14 +12,14 @@
 
 @interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate>
 
+@property (weak) IBOutlet NSTextField *createGroupTextField;
 @property (weak) IBOutlet NSOutlineView *userGroupOutline;
 @property (strong) IBOutlet NSTreeController *treeViewController;
-@property (weak) IBOutlet NSButton *joinGroupButton;
 @property (weak) AMMesher* sharedMesher;
-@property (weak) IBOutlet NSTextField *createGroupName;
 
 - (IBAction)joinGroup:(id)sender;
 - (IBAction)createGroup:(id)sender;
 - (IBAction)quitGroup:(id)sender;
+- (IBAction)createGroupByEnter:(id)sender;
 
 @end

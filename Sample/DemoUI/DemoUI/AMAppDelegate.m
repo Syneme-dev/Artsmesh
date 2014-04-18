@@ -109,22 +109,4 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 
-
-#pragma mark -
-#pragma mark KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    if ([keyPath isEqualToString:@"mesherName"]) {
-        NSLog(@"Old Mesher is: %@\n", [change objectForKey:NSKeyValueChangeOldKey]);
-        NSLog(@"New Mesher is: %@\n", [change objectForKey:NSKeyValueChangeNewKey]);
-        self.mesherName.stringValue = [change objectForKey:NSKeyValueChangeNewKey];
-        return;
-    }
-    
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
-
 @end

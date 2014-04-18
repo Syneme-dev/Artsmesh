@@ -33,10 +33,8 @@
 }
 
 
-
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    ///Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug/DemoUI.app/Contents/Resources
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
     path=[path stringByAppendingString:@"/Contents/Resources/web.css"];

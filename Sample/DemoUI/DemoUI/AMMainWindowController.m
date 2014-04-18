@@ -35,6 +35,12 @@
 #define UI_topbarHeight 40.0f
 #define UI_panelPaddingBottom 10.0f
 #define UI_pixelHeightAdjustment 2.0f
+#define UI_panelTitlebarHeight 20.0f
+#define UI_panelContentPaddingBottom 20.0f
+#define UI_appleMenuBarHeight 20.0f
+
+
+
 @interface AMMainWindowController ()
 
 
@@ -50,7 +56,6 @@
     AMPanelViewController *userPanelController;
     AMPanelViewController *groupsPanelController;
     AMPanelViewController *socialPanelController;
-//    WebView *webview;
     float containerWidth;
 }
 - (id)initWithWindow:(NSWindow *)window
@@ -77,10 +82,9 @@
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
     //[self.window setFrame:screenSize display:YES ];
-    float appleMenuBarHeight = 20.0f;
-    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - appleMenuBarHeight)];
+    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - UI_appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-40)];
+    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-UI_topbarHeight)];
     [scrollView setDocumentView:_containerView];
     [self loadGroupsPanel];
     [self loadPreferencePanel];
@@ -99,7 +103,7 @@
                                                   self.window.frame.size.height-UI_topbarHeight-
                                                   panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
-    socialViewController.view.frame = NSMakeRect(0, 20, 300, panelHeight-20-20);
+    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth, panelHeight-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [socialPanelController.view addSubview:socialViewController.view];
     [socialPanelController.titleView setStringValue:@"Socials"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];

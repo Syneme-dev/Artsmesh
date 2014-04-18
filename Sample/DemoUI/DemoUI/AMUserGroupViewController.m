@@ -56,7 +56,7 @@
     NSString* createName = [self.createGroupName stringValue];
     if (createName != nil && ![createName isEqualToString:@""])
     {
-        [[AMMesher sharedAMMesher] createGroup:createName];
+        [[AMMesher sharedAMMesher] joinGroup:createName];
     }
 }
 

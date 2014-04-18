@@ -66,7 +66,7 @@
         }
     }
     
-    NSString* groupPropKey = [NSString stringWithFormat:@"%@GroupName", userDirKey ];
+    NSString* groupPropKey = [NSString stringWithFormat:@"%@groupName", userDirKey ];
     self.operationResult = [self.etcdApi setKey:groupPropKey withValue:self.fullGroupName ttl:0];
     if (self.operationResult.errCode != 0 )
     {

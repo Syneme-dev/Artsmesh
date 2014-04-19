@@ -15,14 +15,31 @@
 #import "AMGroup.h"
 #import "AMUser.h"
 #import "AMCommunicator.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
     AMETCDDataSource* _dataSource;
-    NSTimer* _userTTL;
     AMCommunicator* _communicator;
+    NSTimer* _userTTL;
+    
+    NSString* _nickName;
+    NSString* _domain;
+    NSString* _location;
+    NSString* _myStatus;
+    NSString* _privateIp;
+    NSString* _publicIp;
+    NSString* _etcdServerPort;
+    NSString* _etcdClientPort;
+    NSString* _etcdHeartbeatTimeout;
+    NSString* _etcdElectionTimeout;
+    NSString* _etcdUserTTL;
+    NSString* _artsmeshIOIp;
+    NSString* _artsmeshIOPort;
+    NSString* _machineName;
+    NSString* _maxNode;
 }
 
 +(id)sharedAMMesher
@@ -74,6 +91,26 @@
     return self;
 }
 
+-(void)getUserDefaults
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    _nickName =[defaults stringForKey:Preference_Key_User_NickName];
+    _domain =[defaults stringForKey:Preference_Key_User_Domain];
+    _location = [defaults stringForKey:Preference_Key_User_Location];
+    _myStatus = [defaults stringForKey:Preference_Key_User_Status];
+    _privateIp = [defaults stringForKey:Preference_Key_PrivateIP];
+    _publicIp = [defaults stringForKey:Preference_Key_PublicIP];
+    _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
+    _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
+    _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
+    _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
+    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_User_TTL];
+    _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
+    _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
+    _machineName = [defaults stringForKey:Preference_Key_MachineName];
+}
+
 -(void)startLoalMesher
 {
     [_elector kickoffElectProcess];
@@ -85,9 +122,9 @@
 -(void)stopLocalMesher
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
+                                                        _nickName,
+                                                        _domain,
+                                                        _location];
     
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
     
@@ -140,7 +177,7 @@
     {
         return;
     }
-    
+
     [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
     
     @synchronized(self)
@@ -148,8 +185,8 @@
         [self.usergroupDest clearUserGroup];
         
         [_dataSource stopWatch];
-        _dataSource.ip   = Preference_ETCD_ArtsmeshIO_IP;
-        _dataSource.port = Preference_ETCD_ArtsmeshIO_Port;
+        _dataSource.ip   = _artsmeshIOIp;
+        _dataSource.port = _artsmeshIOPort;
         [self addSelfToDataSource];
         
         self.isOnline = YES;
@@ -168,9 +205,9 @@
     @synchronized(self)
     {
         NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                            Preference_MyUserName,
-                                                            Preference_User_Domain,
-                                                            Preference_MyLocation];
+                                                            _nickName,
+                                                            _domain,
+                                                            _location];
         
         AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
                                               initWithParameter:_dataSource.ip
@@ -182,8 +219,8 @@
         [self.usergroupDest clearUserGroup];
         
         [_dataSource stopWatch];
-        _dataSource.ip   = Preference_MyIp;
-        _dataSource.port = Preference_MyETCDClientPort;
+        _dataSource.ip   = _privateIp;
+        _dataSource.port = _etcdClientPort;
         [self addSelfToDataSource];
         
         self.isOnline = NO;
@@ -194,9 +231,9 @@
 -(void)joinGroup:(NSString*)groupName
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
+                                                        _nickName,
+                                                        _domain,
+                                                        _location];
     
     NSString* groupNameKey = @"groupName";
     self.myGroupName = groupName;
@@ -217,9 +254,9 @@
 -(void)backToArtsmesh
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
+                                                        _nickName,
+                                                        _domain,
+                                                        _location];
     
     NSString* groupNameKey = @"groupName";
     self.myGroupName = Preference_DefaultGroupName;
@@ -239,25 +276,26 @@
 
 -(void)launchETCD
 {
-    NSString* peers =nil;
+    [self getUserDefaults];
     
+    NSString* peers =nil;
     if (!self.isLeader)
     {
         peers = [NSString stringWithFormat:@"%@:%d",  _elector.mesherIp, _elector.mesherPort];
     }
 
     AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
-                                         initWithParameter:Preference_MyIp
-                                         clientPort:Preference_MyETCDClientPort
-                                         serverPort:Preference_MyETCDServerPort
+                                         initWithParameter:_privateIp
+                                         clientPort:_etcdClientPort
+                                         serverPort:_etcdServerPort
                                          peers:peers
-                                         heartbeatInterval:Preference_MyETCDHeartbeatTimeout
-                                         electionTimeout:Preference_MyETCDElectionTimeout];
+                                         heartbeatInterval:_etcdHeartbeatTimeout
+                                         electionTimeout:_etcdElectionTimeout];
     launchOper.delegate = self;
     
     AMETCDInitOperation* etcdInitOper = [[AMETCDInitOperation alloc]
-                                         initWithEtcdServer:Preference_MyIp
-                                         port:Preference_MyETCDClientPort];
+                                         initWithEtcdServer:_privateIp
+                                         port:_etcdClientPort];
     etcdInitOper.delegate = self;
     [etcdInitOper addDependency:launchOper];
     
@@ -269,23 +307,23 @@
 -(void)addSelfToDataSource
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
+                                                        _nickName,
+                                                        _domain,
+                                                        _location];
     
     AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
                                            initWithParameter: _dataSource.ip
                                            port:_dataSource.port
                                            fullUserName:fullUserName
                                            fullGroupName:self.myGroupName
-                                           ttl:Preference_MyEtCDUserTTL];
+                                           ttl:[_etcdUserTTL intValue]];
     
     NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
     [properties setObject: Preference_Communicate_IP forKey:@"communicationIp"];
     [properties setObject:Preference_Communicate_ListenPort forKey:@"communicationPort"];
-    [properties setObject:Preference_User_Description forKey:@"description"];
-    [properties setObject:Preference_MyLocation forKey:@"location"];
-    [properties setObject:Preference_User_Domain forKey:@"domain"];
+    [properties setObject:_myStatus forKey:@"description"];
+    [properties setObject:_location forKey:@"location"];
+    [properties setObject:_domain forKey:@"domain"];
     
     AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
                                                  initWithParameter:_dataSource.ip
@@ -294,10 +332,10 @@
                                                  userProperties:properties];
     
     AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                           initWithParameter:Preference_MyIp
-                                           port:Preference_MyETCDClientPort
+                                           initWithParameter:_privateIp
+                                           port:_etcdClientPort
                                            fullUserName:fullUserName
-                                           ttl:Preference_MyEtCDUserTTL];
+                                           ttl:[_etcdUserTTL intValue]];
     
     addUserOper.delegate = self;
     updateUserOper.delegate = self;
@@ -314,9 +352,9 @@
 -(void)refreshMyTTL
 {
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
-                                                        Preference_MyUserName,
-                                                        Preference_User_Domain,
-                                                        Preference_MyLocation];
+                                                        _nickName,
+                                                        _domain,
+                                                        _location];
     
     @synchronized(self)
     {
@@ -324,7 +362,7 @@
                                                initWithParameter:_dataSource.ip
                                                port:_dataSource.port
                                                fullUserName:fullUserName
-                                               ttl:Preference_MyEtCDUserTTL];
+                                               ttl:[_etcdUserTTL intValue]];
         
         userTTLOper.delegate = self;
         
@@ -397,8 +435,8 @@
         {
             _dataSource = [[AMETCDDataSource alloc]
                            init:@"data source"
-                           ip:Preference_MyIp
-                           port:Preference_MyETCDClientPort];
+                           ip:_privateIp
+                           port:_etcdClientPort];
             self.usergroupDest = [[AMETCDDataDestination alloc] init];
             
             [_dataSource addDestination:self.usergroupDest];
@@ -407,7 +445,7 @@
     }
     else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
     {
-        _userTTL = [NSTimer scheduledTimerWithTimeInterval:Preference_MyECDUserTTLInterval
+        _userTTL = [NSTimer scheduledTimerWithTimeInterval:([_etcdUserTTL intValue]/3)
                                                     target:self
                                                   selector:@selector(refreshMyTTL)
                                                   userInfo:nil

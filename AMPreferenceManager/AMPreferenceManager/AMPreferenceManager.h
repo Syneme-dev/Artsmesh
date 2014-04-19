@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Artsmesh. All rights reserved.
 //
 
+#define Preference_Key_PrivateIP @"Preference_Key_PrivateIP"
+#define Preference_Key_PublicIP @"Preference_Key_PublicIP"
+#define Preference_Key_MachineName @"Preference_Key_MachineName"
 
 #define Preference_Key_ETCD_InstanceName @"Preference_Key_ETCD_InstanceName"
 #define Preference_Key_ETCD_ServerPort @"Preference_Key_ETCD_ServerPort"
@@ -29,9 +32,6 @@
 #define Preference_Key_User_Location @"Preference_Key_User_Location"
 #define Preference_Key_User_NickName @"Preference_Key_User_NickName"
 #define Preference_Key_User_FullName @"Preference_Key_User_FullName"
-
-
-
 
 
 #define Preference_ETCD_ClientIP @"localhost"

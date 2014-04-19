@@ -8,6 +8,7 @@
 
 #import "AMETCDPreferenceViewController.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMETCDPreferenceViewController ()
 
@@ -32,10 +33,19 @@
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
+- (IBAction)privateIpSelected:(id)sender {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
+    [defaults setObject:myPrivateIP forKey:Preference_Key_PrivateIP];
+}
+
 -(void)loadSystemInfo
 {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
     NSString* machineName = [AMNetworkUtils getHostName];
     self.myMachineNameField.stringValue = machineName;
+    [defaults setObject:machineName forKey:Preference_Key_MachineName];
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
@@ -51,6 +61,8 @@
             
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
             [self.myPrivateIpPopup selectItemAtIndex:i];
+            
+            [defaults setObject:ipStr forKey:Preference_Key_PrivateIP];
         }
         
         else if([AMNetworkUtils isValidIpv6:ipStr])

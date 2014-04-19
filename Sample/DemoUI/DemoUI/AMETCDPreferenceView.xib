@@ -259,6 +259,9 @@
                                                         </items>
                                                     </menu>
                                                 </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="privateIpSelected:" target="-2" id="Eco-HI-C51"/>
+                                                </connections>
                                             </popUpButton>
                                         </subviews>
                                     </customView>

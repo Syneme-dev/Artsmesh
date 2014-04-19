@@ -52,6 +52,7 @@
 		26F2BF6C18FCB65400DD04A6 /* AMETCDDataSourceHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF6518FCB65400DD04A6 /* AMETCDDataSourceHeader.h */; };
 		26F2BF6D18FCB65400DD04A6 /* AMETCDDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF6618FCB65400DD04A6 /* AMETCDDestination.h */; };
 		26F2BF6E18FCB65400DD04A6 /* AMETCDDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF6718FCB65400DD04A6 /* AMETCDDestination.m */; };
+		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		26F2BF6518FCB65400DD04A6 /* AMETCDDataSourceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDDataSourceHeader.h; sourceTree = "<group>"; };
 		26F2BF6618FCB65400DD04A6 /* AMETCDDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDDestination.h; sourceTree = "<group>"; };
 		26F2BF6718FCB65400DD04A6 /* AMETCDDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDDestination.m; sourceTree = "<group>"; };
+		D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */,
 				2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */,
 				2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */,
 				2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */,
@@ -144,6 +147,7 @@
 		2692CD5418D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */,
 				2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */,
 				2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */,
 				2692CD5518D7C2A2006501C4 /* Cocoa.framework */,

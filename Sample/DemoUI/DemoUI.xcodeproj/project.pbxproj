@@ -19,6 +19,8 @@
 		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
 		26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC21900D44D0083742E /* JoinGroup.png */; };
 		26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC41900D6EF0083742E /* CreateGroup.png */; };
+		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
+		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
@@ -130,6 +132,9 @@
 		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
 		26D2FFC21900D44D0083742E /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JoinGroup.png; path = Resource/JoinGroup.png; sourceTree = "<group>"; };
 		26D2FFC41900D6EF0083742E /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CreateGroup.png; path = Resource/CreateGroup.png; sourceTree = "<group>"; };
+		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
+		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
+		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
@@ -242,6 +247,7 @@
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
+				26E1E6A019023496000BF14C /* AMChatView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -261,6 +267,8 @@
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
+				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
+				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -511,6 +519,7 @@
 				AF74056118F7D93200B3C1DF /* RecentTags.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */,
+				26E1E6A119023496000BF14C /* AMChatView.xib in Resources */,
 				AF74054A18F7D93200B3C1DF /* Groups.png in Resources */,
 				AF8CE2BF18F68719003BB9D1 /* fullscreen.png in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
@@ -549,6 +558,7 @@
 				268E7DD718D183F600B0F710 /* AMWindow.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
+				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFC188D218C6F4DA00E03010 /* AMMaxSizeView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

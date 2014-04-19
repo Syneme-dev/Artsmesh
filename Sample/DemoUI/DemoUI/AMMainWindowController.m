@@ -27,6 +27,7 @@
 #import "AMSocialViewController.h"
 #import "AMUserGroupViewController.h"
 #import <UIFramewrok/BlueBackgroundView.h>
+#import "AMChatViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -56,6 +57,8 @@
     AMPanelViewController *userPanelController;
     AMPanelViewController *groupsPanelController;
     AMPanelViewController *socialPanelController;
+    AMChatViewController *chatViewController;
+    AMPanelViewController *chatPanelController;
     float containerWidth;
 }
 - (id)initWithWindow:(NSWindow *)window
@@ -89,6 +92,7 @@
     [self loadGroupsPanel];
     [self loadPreferencePanel];
     [self loadUserPanel];
+    [self loadChatPanel];
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
@@ -139,6 +143,19 @@
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
     
+}
+
+- (void)loadChatPanel {
+    chatPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:chatPanelController.view];
+    [chatPanelController.titleView setStringValue:@"Chat"];
+    chatPanelController.view.frame = NSMakeRect(
+                                                UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*2+UI_panelSpacing,
+                                                UI_panelPaddingBottom, 600.0f, 720.0f);
+    
+    chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
+    chatViewController.view.frame = NSMakeRect(0, 400, 600, 300);
+    [chatPanelController.view addSubview:chatViewController.view];
 }
 
 - (void)loadUserPanel {

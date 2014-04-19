@@ -19,6 +19,7 @@
 - (IBAction)privateIpSelected:(id)sender;
 
 -(void)loadSystemInfo;
+-(void)customPrefrence;
 
 
 @end

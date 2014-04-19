@@ -39,6 +39,29 @@
     [defaults setObject:myPrivateIP forKey:Preference_Key_PrivateIP];
 }
 
+-(void)customPrefrence
+{
+    
+    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
+    NSDictionary *attributes = [NSDictionary
+                                dictionaryWithObjectsAndKeys:
+                                [NSColor whiteColor], NSForegroundColorAttributeName,
+                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
+                                NSFontAttributeName, nil];
+    
+    for (int i = 0; i < [itemArray count]; i++)
+    {
+        NSMenuItem *item = [itemArray objectAtIndex:i];
+        
+        NSAttributedString *as = [[NSAttributedString alloc]
+                                  initWithString:[item title]
+                                  attributes:attributes];
+        
+        [item setAttributedTitle:as];
+    }
+
+}
+
 -(void)loadSystemInfo
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];

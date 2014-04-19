@@ -137,6 +137,8 @@
     preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
     [preferencePanelController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
+    [preferenceViewController customPrefrence];
+    
 }
 
 - (void)loadUserPanel {

@@ -21,5 +21,6 @@
 - (IBAction)createGroup:(id)sender;
 - (IBAction)quitGroup:(id)sender;
 - (IBAction)createGroupByEnter:(id)sender;
+- (IBAction)mergeGroup:(id)sender;
 
 @end

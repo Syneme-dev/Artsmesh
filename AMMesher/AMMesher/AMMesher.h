@@ -26,6 +26,7 @@
 -(void)stopLocalMesher;
 
 -(void)joinGroup:(NSString*)groupName;
+-(void)everyoneJoinGroup:(NSString*)groupName;
 -(void)backToArtsmesh;
 
 -(void)everyoneGoOnline;

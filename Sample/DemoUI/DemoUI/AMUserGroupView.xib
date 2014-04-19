@@ -51,7 +51,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DEo-U9-i6M">
-                                                        <rect key="frame" x="1" y="1" width="147" height="25"/>
+                                                        <rect key="frame" x="1" y="1" width="120" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="THk-Ce-Rip">
                                                             <font key="font" metaFont="system"/>
@@ -63,7 +63,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ajr-1P-LrG">
-                                                        <rect key="frame" x="150" y="2" width="25" height="24"/>
+                                                        <rect key="frame" x="120" y="2" width="25" height="24"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="GroupMessage" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="nSz-kR-bpN">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -74,7 +74,7 @@
                                                         </connections>
                                                     </button>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B9I-fw-ldj">
-                                                        <rect key="frame" x="180" y="2" width="25" height="24"/>
+                                                        <rect key="frame" x="150" y="2" width="25" height="24"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="JoinGroup" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="K93-Qk-2dy">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -85,8 +85,32 @@
                                                             <binding destination="dPi-04-sQ9" name="hidden" keyPath="objectValue.isLeaf" id="Xim-1Z-Ixl"/>
                                                         </connections>
                                                     </button>
-                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-91-lGf">
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cFx-cv-so2">
+                                                        <rect key="frame" x="180" y="2" width="25" height="24"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <buttonCell key="cell" type="smallSquare" title="J" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Xor-GR-hJg">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="joinGroup:" target="-2" id="R3V-bd-pW4"/>
+                                                            <binding destination="dPi-04-sQ9" name="hidden" keyPath="objectValue.isLeaf" id="qLt-bs-R8b"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRQ-ft-FD3">
                                                         <rect key="frame" x="210" y="2" width="25" height="24"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <buttonCell key="cell" type="smallSquare" title="M" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="1hq-el-d4M">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="mergeGroup:" target="-2" id="RkD-lj-Hfj"/>
+                                                            <binding destination="dPi-04-sQ9" name="hidden" keyPath="objectValue.isLeaf" id="fI2-tQ-arf"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-91-lGf">
+                                                        <rect key="frame" x="240" y="2" width="25" height="24"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="QuitGroup" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="KxH-IA-xsd">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

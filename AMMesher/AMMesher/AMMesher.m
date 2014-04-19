@@ -171,6 +171,28 @@
     [self goOnline];
 }
 
+-(void)everyoneJoinGroup:(NSString *)groupName
+{
+    @synchronized(self.usergroupDest)
+    {
+        for (AMGroup* group in self.usergroupDest.userGroups)
+        {
+            if ([group.uniqueName isEqualToString:self.myGroupName])
+            {
+                for (AMUser* user in group.children)
+                {
+                    if (user.communicationIp != nil && user.communicationPort != nil)
+                    {
+                        [_communicator joinGroupCommand:groupName
+                                                     ip:user.communicationIp
+                                                   port:user.communicationPort];
+                    }
+                }
+            }
+        }
+    }
+}
+
 -(void)goOnline
 {
     if(self.etcdState != 1 || self.isOnline == YES)
@@ -195,7 +217,7 @@
 
 -(void)goOffline
 {
-    if(self.etcdState != 1)
+    if(self.etcdState != 1 || self.isOnline == NO)
     {
         return;
     }
@@ -230,13 +252,17 @@
 
 -(void)joinGroup:(NSString*)groupName
 {
+    if([groupName isEqualToString:self.myGroupName])
+    {
+        return;
+    }
+    
     NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
                                                         _nickName,
                                                         _domain,
                                                         _location];
     
     NSString* groupNameKey = @"groupName";
-    self.myGroupName = groupName;
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:groupName forKey:groupNameKey];
     
@@ -247,7 +273,6 @@
                                                  userProperties:userPropties];
     
     [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
-    
     self.myGroupName = groupName;
 }
 

@@ -77,5 +77,25 @@
     }
 }
 
+- (IBAction)mergeGroup:(id)sender
+{
+    long index = [self.userGroupOutline selectedRow];
+    if (index == -1)
+    {
+        return;
+    }
+    
+//    id selectedItem = [self.userGroupOutline itemAtRow:index];
+//    if(selectedItem)
+//    {
+//        NSTreeNode* node = selectedItem;
+//        AMGroup* toJoinGroup = node.representedObject;
+//        NSString* groupName = toJoinGroup.uniqueName;
+//        
+//        [[AMMesher sharedAMMesher] :groupName];
+//    }
+
+}
+
 
 @end

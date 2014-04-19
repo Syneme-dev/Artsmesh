@@ -22,6 +22,22 @@
     return self;
 }
 
+-(NSArray*)getGroupUsers:(NSString*)groupName
+{
+    @synchronized(self)
+    {
+        for (AMGroup* group in self.userGroups)
+        {
+            if ([group.uniqueName isEqualToString:groupName])
+            {
+                return [group.children copy];
+            }
+        }
+    }
+    
+    return nil;
+}
+
 -(void)clearUserGroup
 {
     @synchronized(self)

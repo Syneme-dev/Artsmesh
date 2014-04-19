@@ -111,6 +111,11 @@
     _machineName = [defaults stringForKey:Preference_Key_MachineName];
 }
 
+-(NSArray*) myGroupUsers
+{
+    return [self.usergroupDest getGroupUsers:self.myGroupName];
+}
+
 -(void)startLoalMesher
 {
     [_elector kickoffElectProcess];

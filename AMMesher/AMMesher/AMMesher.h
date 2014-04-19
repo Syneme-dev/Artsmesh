@@ -19,6 +19,8 @@
 @property int etcdState;    //0 stop, 1 running, 2 error
 @property BOOL isOnline;
 
+@property (readonly) NSArray* myGroupUsers;
+
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;
 

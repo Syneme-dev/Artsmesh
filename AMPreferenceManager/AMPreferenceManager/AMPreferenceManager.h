@@ -8,11 +8,11 @@
 
 
 //General
-#define Preference_Key_General_MachineName          @"Preference_Key_MachineName"
-#define Preference_Key_General_PrivateIP            @"Preference_Key_PrivateIP"
-#define Preference_Key_General_PublicIP             @"Preference_Key_PublicIP"
-#define Preference_Key_General_ChatPort             @"Preference_Key_ChatPort"
-#define Preference_Key_General_ControlPort          @"Preference_Key_ControlPort"
+#define Preference_Key_General_MachineName          @"Preference_Key_General_MachineName"
+#define Preference_Key_General_PrivateIP            @"Preference_Key_General_PrivateIP"
+#define Preference_Key_General_PublicIP             @"Preference_Key_General_PublicIP"
+#define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
+#define Preference_Key_General_ControlPort          @"Preference_Key_General_ControlPort"
 #define Preference
 
 
@@ -24,7 +24,7 @@
 #define Preference_Key_ETCD_ArtsmeshIOIP            @"Preference_Key_ETCD_ArtsmeshIOIP"
 #define Preference_Key_ETCD_ArtsmeshIOPort          @"Preference_Key_ETCD_ArtsmeshIOPort"
 #define Preference_Key_ETCD_MaxNode                 @"Preference_Key_ETCD_MaxNode"
-#define Preference_Key_ETCD_UserTTLTimeout          @"Preference_Key_ETCD_User_TTL"
+#define Preference_Key_ETCD_UserTTLTimeout          @"Preference_Key_ETCD_UserTTLTimeout"
 
 
 //UserInfo

@@ -26,17 +26,21 @@
 }
 
 - (IBAction)onETCDTabClick:(id)sender {
-    [self.tabs selectTabViewItemAtIndex:0];
+    [self.tabs selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)onJackServerTabClick:(id)sender {
-    [self.tabs selectTabViewItemAtIndex:1];
+    [self.tabs selectTabViewItemAtIndex:2];
 }
 
 - (IBAction)privateIpSelected:(id)sender {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
-    [defaults setObject:myPrivateIP forKey:Preference_Key_PrivateIP];
+    [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+}
+
+- (IBAction)onGeneralClick:(id)sender {
+      [self.tabs selectTabViewItemAtIndex:0];
 }
 
 -(void)customPrefrence
@@ -68,7 +72,7 @@
     
     NSString* machineName = [AMNetworkUtils getHostName];
     self.myMachineNameField.stringValue = machineName;
-    [defaults setObject:machineName forKey:Preference_Key_MachineName];
+    [defaults setObject:machineName forKey:Preference_Key_General_MachineName];
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
@@ -85,7 +89,7 @@
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
             [self.myPrivateIpPopup selectItemAtIndex:i];
             
-            [defaults setObject:ipStr forKey:Preference_Key_PrivateIP];
+            [defaults setObject:ipStr forKey:Preference_Key_General_PrivateIP];
         }
         
         else if([AMNetworkUtils isValidIpv6:ipStr])

@@ -16,6 +16,8 @@
 
 - (IBAction)onETCDTabClick:(id)sender;
 - (IBAction)onJackServerTabClick:(id)sender;
+- (IBAction)onGeneralClick:(id)sender;
+
 - (IBAction)privateIpSelected:(id)sender;
 
 -(void)loadSystemInfo;

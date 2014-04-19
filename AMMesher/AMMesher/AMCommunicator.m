@@ -12,41 +12,25 @@
 
 @implementation AMCommunicator
 {
-    GCDAsyncUdpSocket* _udpListenSocket;
-    GCDAsyncUdpSocket* _udpSendSocket;
+    GCDAsyncUdpSocket* _controlSocket;
 }
 
--(id)init:(NSString*)listenPort sendPort:(NSString*)sendPort
+-(id)initWithPort:(NSString*)controlPort;
 {
     if (self = [super init])
     {
-        _udpListenSocket = [[GCDAsyncUdpSocket alloc]
+        _controlSocket = [[GCDAsyncUdpSocket alloc]
                             initWithDelegate:self
                             delegateQueue:dispatch_get_main_queue()];
         
 		NSError *error = nil;
-		if (![_udpListenSocket bindToPort:[listenPort intValue] error:&error])
+		if (![_controlSocket bindToPort:[controlPort intValue] error:&error])
 		{
 			return nil;
 		}
-		if (![_udpListenSocket beginReceiving:&error])
+		if (![_controlSocket beginReceiving:&error])
 		{
-			[_udpListenSocket close];
-			return nil;
-		}
-        
-        _udpSendSocket = [[GCDAsyncUdpSocket alloc]
-                          initWithDelegate:self
-                          delegateQueue:dispatch_get_main_queue()];
-        
-        error = nil;
-		if (![_udpSendSocket bindToPort:[sendPort intValue] error:&error])
-		{
-			return nil;
-		}
-		if (![_udpSendSocket beginReceiving:&error])
-		{
-			[_udpSendSocket close];
+			[_controlSocket close];
 			return nil;
 		}
     }
@@ -59,7 +43,7 @@
     NSString* msg = @"/AMMesher/Command/goOnline";
     NSData *data = [msg dataUsingEncoding:NSUTF8StringEncoding];
     
-    [_udpSendSocket sendData:data toHost:ip port:[port intValue] withTimeout:-1 tag:0];
+    [_controlSocket sendData:data toHost:ip port:[port intValue] withTimeout:-1 tag:0];
 }
 
 -(void)joinGroupCommand:(NSString*)groupName ip:(NSString*)ip port:(NSString*)port
@@ -67,7 +51,7 @@
     NSString* msg = [NSString stringWithFormat:@"/AMMesher/Command/joinGroup:%@", groupName];
     NSData *data = [msg dataUsingEncoding:NSUTF8StringEncoding];
     
-    [_udpSendSocket sendData:data toHost:ip port:[port intValue] withTimeout:-1 tag:0];
+    [_controlSocket sendData:data toHost:ip port:[port intValue] withTimeout:-1 tag:0];
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag

@@ -16,8 +16,10 @@
 @property NSString* location;
 @property NSString* groupName;
 @property NSString* description;
-@property NSString* communicationIp;
-@property NSString* communicationPort;
+@property NSString* publicIp;
+@property NSString* privateIp;
+@property NSString* chatPort;
+@property NSString* controlPort;
 
 -(id)init;
 

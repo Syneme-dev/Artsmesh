@@ -8,7 +8,6 @@
 #import "AMETCDOperationHeader.h"
 #import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
-#import "AMMesherPreference.h"
 #import "AMLeaderElecter.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMETCDApi/AMETCD.h"
@@ -40,6 +39,8 @@
     NSString* _artsmeshIOPort;
     NSString* _machineName;
     NSString* _maxNode;
+    NSString* _controlPort;
+    NSString* _chatPort;
 }
 
 +(id)sharedAMMesher
@@ -81,11 +82,7 @@
         self.isLeader = NO;
         self.isOnline = NO;
         self.etcdState = 0;
-        self.myGroupName = Preference_DefaultGroupName;
-        
-        _elector = [[AMLeaderElecter alloc] init];
-        _elector.mesherPort = [Preference_MyETCDServerPort intValue];
-        _communicator = [[AMCommunicator alloc] init:Preference_Communicate_ListenPort sendPort:Preferenve_Communicate_SendPort];
+        self.myGroupName = @"Artsmesh";
     }
     
     return self;
@@ -99,16 +96,18 @@
     _domain =[defaults stringForKey:Preference_Key_User_Domain];
     _location = [defaults stringForKey:Preference_Key_User_Location];
     _myStatus = [defaults stringForKey:Preference_Key_User_Status];
-    _privateIp = [defaults stringForKey:Preference_Key_PrivateIP];
-    _publicIp = [defaults stringForKey:Preference_Key_PublicIP];
+    _privateIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+    _publicIp = [defaults stringForKey:Preference_Key_General_PublicIP];
     _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
     _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
     _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
     _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
-    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_User_TTL];
+    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_UserTTLTimeout];
     _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
     _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
-    _machineName = [defaults stringForKey:Preference_Key_MachineName];
+    _machineName = [defaults stringForKey:Preference_Key_General_MachineName];
+    _controlPort = [defaults stringForKey:Preference_Key_General_ControlPort];
+    _chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
 }
 
 -(NSArray*) myGroupUsers
@@ -118,6 +117,12 @@
 
 -(void)startLoalMesher
 {
+    [self getUserDefaults];
+    
+    _elector = [[AMLeaderElecter alloc] init];
+    _elector.mesherPort = [_etcdServerPort intValue];
+    _communicator = [[AMCommunicator alloc] initWithPort:_controlPort];
+    
     [_elector kickoffElectProcess];
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -164,9 +169,9 @@
             {
                 for (AMUser* user in group.children)
                 {
-                    if (user.communicationIp != nil && user.communicationPort != nil)
+                    if (user.privateIp != nil && user.privateIp != nil)
                     {
-                        [_communicator goOnlineCommand:user.communicationIp port:user.communicationPort];
+                        [_communicator goOnlineCommand:user.privateIp port:user.controlPort];
                     }
                 }
             }
@@ -186,11 +191,11 @@
             {
                 for (AMUser* user in group.children)
                 {
-                    if (user.communicationIp != nil && user.communicationPort != nil)
+                    if (user.privateIp != nil && user.controlPort != nil)
                     {
                         [_communicator joinGroupCommand:groupName
-                                                     ip:user.communicationIp
-                                                   port:user.communicationPort];
+                                                     ip:user.privateIp
+                                                   port:user.controlPort];
                     }
                 }
             }
@@ -289,7 +294,7 @@
                                                         _location];
     
     NSString* groupNameKey = @"groupName";
-    self.myGroupName = Preference_DefaultGroupName;
+    self.myGroupName = @"Artsmesh";
     
     NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
     [userPropties setObject:@"Artsmesh" forKey:groupNameKey];
@@ -306,8 +311,6 @@
 
 -(void)launchETCD
 {
-    [self getUserDefaults];
-    
     NSString* peers =nil;
     if (!self.isLeader)
     {
@@ -349,11 +352,13 @@
                                            ttl:[_etcdUserTTL intValue]];
     
     NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
-    [properties setObject: Preference_Communicate_IP forKey:@"communicationIp"];
-    [properties setObject:Preference_Communicate_ListenPort forKey:@"communicationPort"];
-    [properties setObject:_myStatus forKey:@"description"];
-    [properties setObject:_location forKey:@"location"];
-    [properties setObject:_domain forKey:@"domain"];
+    [properties setObject: _privateIp forKey:@"privateIp"];
+    [properties setObject: _publicIp forKey:@"publicIp"];
+    [properties setObject: _controlPort forKey:@"controlPort"];
+    [properties setObject: _chatPort forKey:@"chatPort"];
+    [properties setObject: _myStatus forKey:@"description"];
+    [properties setObject: _location forKey:@"location"];
+    [properties setObject: _domain forKey:@"domain"];
     
     AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
                                                  initWithParameter:_dataSource.ip

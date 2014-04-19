@@ -38,7 +38,6 @@
 		26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */; };
 		26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4D18FCB61000DD04A6 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4E18FCB61000DD04A6 /* AMMesher.m */; };
-		26F2BF5418FCB61000DD04A6 /* AMMesherPreference.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4F18FCB61000DD04A6 /* AMMesherPreference.h */; };
 		26F2BF5B18FCB63100DD04A6 /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF5518FCB63100DD04A6 /* AMGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26F2BF5C18FCB63100DD04A6 /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF5618FCB63100DD04A6 /* AMGroup.m */; };
 		26F2BF5D18FCB63100DD04A6 /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF5718FCB63100DD04A6 /* AMUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,7 +94,6 @@
 		26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26F2BF4D18FCB61000DD04A6 /* AMMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesher.h; sourceTree = "<group>"; };
 		26F2BF4E18FCB61000DD04A6 /* AMMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMesher.m; sourceTree = "<group>"; };
-		26F2BF4F18FCB61000DD04A6 /* AMMesherPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherPreference.h; sourceTree = "<group>"; };
 		26F2BF5518FCB63100DD04A6 /* AMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroup.h; sourceTree = "<group>"; };
 		26F2BF5618FCB63100DD04A6 /* AMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroup.m; sourceTree = "<group>"; };
 		26F2BF5718FCB63100DD04A6 /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */,
 				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
 				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
-				26F2BF4F18FCB61000DD04A6 /* AMMesherPreference.h */,
 				26E4092E18E7DABB00004450 /* UserGroup */,
 				26E4092D18E7DA5200004450 /* Operations */,
 				2692CD5C18D7C2A2006501C4 /* Supporting Files */,
@@ -262,7 +259,6 @@
 				26F2BF4518FCB5E900DD04A6 /* AMETCDWatchOperation.h in Headers */,
 				26F2BF6D18FCB65400DD04A6 /* AMETCDDestination.h in Headers */,
 				26F2BF3F18FCB5E900DD04A6 /* AMETCDQueryOperation.h in Headers */,
-				26F2BF5418FCB61000DD04A6 /* AMMesherPreference.h in Headers */,
 				26F2BF3518FCB5E900DD04A6 /* AMETCDDeleteUserOperation.h in Headers */,
 				26F2BF6C18FCB65400DD04A6 /* AMETCDDataSourceHeader.h in Headers */,
 				26F2BF4318FCB5E900DD04A6 /* AMETCDUserTTLOperation.h in Headers */,

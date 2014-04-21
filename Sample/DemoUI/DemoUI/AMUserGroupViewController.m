@@ -98,4 +98,10 @@
 }
 
 
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+    
+}
+
+
 @end

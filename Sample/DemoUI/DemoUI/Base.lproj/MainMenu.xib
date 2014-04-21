@@ -678,7 +678,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bA9-n0-vrx" customClass="BlueBackgroundView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bA9-n0-vrx" userLabel="user" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="688" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -721,9 +721,18 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn">
-                        <rect key="frame" x="70" y="742" width="160" height="17"/>
+                        <rect key="frame" x="70" y="742" width="80" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH 2.4.1" id="eNi-as-Uyj">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH" id="eNi-as-Uyj">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf">
+                        <rect key="frame" x="147" y="742" width="120" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.0.0" id="DZC-sX-GBB">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -786,6 +795,7 @@
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
             <connections>
+                <outlet property="versionLabel" destination="2bQ-eS-vUf" id="46h-jo-WII"/>
                 <outlet property="window" destination="371" id="BOz-Gb-G7x"/>
             </connections>
         </customObject>

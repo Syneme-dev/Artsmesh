@@ -9,10 +9,7 @@
 
 
 #import "AMMainWindowController.h"
-
 #import "AMMesher/AMMesher.h"
-
-
 #import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPluginLoader/AMPluginProtocol.h>
@@ -79,6 +76,12 @@
     [[AMMesher sharedAMMesher] everyoneGoOnline];
 }
 
+-(void)loadVersion{
+    NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+    [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@.%@",shortVersion,buildVersion]];
+}
+
 
 - (void)showDefaultWindow {
     
@@ -89,15 +92,18 @@
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
     _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-UI_topbarHeight)];
     [scrollView setDocumentView:_containerView];
+    [self loadVersion];
     [self loadPreferencePanel];
     [self loadGroupsPanel];
     [self loadUserPanel];
-    [self loadChatPanel];
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
+    [self loadChatPanel];
+    
     //Note:using the following code to render FOAF panel.
-//    [self loadFOAFPanel];
+    [self loadFOAFPanel];
+   // [(NSView*)self.window.contentView sendSubviewToBack:scrollView];
 }
 
 -(void)loadFOAFPanel{
@@ -156,6 +162,8 @@
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     chatViewController.view.frame = NSMakeRect(0, 400, 600, 300);
     [chatPanelController.view addSubview:chatViewController.view];
+    
+    containerWidth+=chatPanelController.view.frame.size.width+UI_panelSpacing;
 }
 
 - (void)loadUserPanel {

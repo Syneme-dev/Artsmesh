@@ -13,5 +13,6 @@
 @interface AMMainWindowController : NSWindowController
 - (IBAction)mesh:(id)sender;
 - (void)showDefaultWindow ;
+@property (weak) IBOutlet NSTextField *versionLabel;
 
 @end

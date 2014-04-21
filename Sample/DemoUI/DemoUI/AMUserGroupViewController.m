@@ -85,15 +85,15 @@
         return;
     }
     
-//    id selectedItem = [self.userGroupOutline itemAtRow:index];
-//    if(selectedItem)
-//    {
-//        NSTreeNode* node = selectedItem;
-//        AMGroup* toJoinGroup = node.representedObject;
-//        NSString* groupName = toJoinGroup.uniqueName;
-//        
-//        [[AMMesher sharedAMMesher] :groupName];
-//    }
+    id selectedItem = [self.userGroupOutline itemAtRow:index];
+    if(selectedItem)
+    {
+        NSTreeNode* node = selectedItem;
+        AMGroup* toJoinGroup = node.representedObject;
+        NSString* groupName = toJoinGroup.uniqueName;
+        
+        [[AMMesher sharedAMMesher] everyoneJoinGroup:groupName];
+    }
 
 }
 

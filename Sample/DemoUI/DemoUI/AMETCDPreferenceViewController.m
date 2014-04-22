@@ -20,9 +20,37 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         // Initialization code here.
     }
     return self;
+}
+
+-(void)awakeFromNib{
+    [self changeTabTextColor:self.etcdTabButton];
+    [self changeTabTextColor:self.generalTabButton];
+    [self changeTabTextColor:self.jackServerTabButton];
+    
+    
+    [self changeTabTextColor:self.jackRouterTabButton];
+    [self changeTabTextColor:self.audioTabButton];
+    [self changeTabTextColor:self.videoTabButton];
+    [self changeTabTextColor:self.statusnetTabButton];
+}
+
+-(void)changeTabTextColor:(NSButton*) button{
+    //#b7b7b7
+    NSColor *color =
+    [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f];
+    NSMutableAttributedString *colorTitle =
+    [[NSMutableAttributedString alloc] initWithAttributedString:[button attributedTitle]];
+    NSRange titleRange = NSMakeRange(0, [colorTitle length]);
+    
+    [colorTitle addAttribute:NSForegroundColorAttributeName
+                       value:color
+                       range:titleRange];
+    
+    [button setAttributedTitle:colorTitle];
 }
 
 - (IBAction)onETCDTabClick:(id)sender {

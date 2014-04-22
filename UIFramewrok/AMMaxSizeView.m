@@ -8,6 +8,8 @@
 
 #import "AMMaxSizeView.h"
 
+#define UI_Color_gray [NSColor colorWithCalibratedRed:(38)/255.0f green:(38)/255.0f blue:(38)/255.0f alpha:1.0f]
+
 @implementation AMMaxSizeView
 
 - (id)initWithFrame:(NSRect)frame
@@ -22,7 +24,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     //Color RBG:333333
-    [[NSColor colorWithCalibratedRed:(38)/255.0f green:(38)/255.0f blue:(38)/255.0f alpha:1.0f] set];
+    [UI_Color_gray set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 }

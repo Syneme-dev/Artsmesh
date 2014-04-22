@@ -13,6 +13,14 @@
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;
 @property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
+@property (strong) IBOutlet NSButton *etcdTabButton;
+@property (strong) IBOutlet NSButton *generalTabButton;
+@property (strong) IBOutlet NSButton *jackServerTabButton;
+
+@property (strong) IBOutlet NSButton *jackRouterTabButton;
+@property (strong) IBOutlet NSButton *videoTabButton;
+@property (strong) IBOutlet NSButton *audioTabButton;
+@property (strong) IBOutlet NSButton *statusnetTabButton;
 
 - (IBAction)onETCDTabClick:(id)sender;
 - (IBAction)onJackServerTabClick:(id)sender;

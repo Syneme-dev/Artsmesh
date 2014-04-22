@@ -148,7 +148,6 @@
     [preferencePanelController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
-    
 }
 
 - (void)loadChatPanel {

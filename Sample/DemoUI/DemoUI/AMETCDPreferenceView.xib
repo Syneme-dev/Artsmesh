@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
             <connections>
+                <outlet property="audioTabButton" destination="niJ-06-bEy" id="4SE-HW-0Kd"/>
+                <outlet property="etcdTabButton" destination="AnG-eE-Jsk" id="Dxm-W5-vUn"/>
+                <outlet property="generalTabButton" destination="mvk-HX-fYa" id="1cE-ZS-hnU"/>
+                <outlet property="jackRouterTabButton" destination="vtg-zK-Gic" id="Mcj-vm-QCm"/>
+                <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
                 <outlet property="myPrivateIpPopup" destination="6jJ-Sr-xt6" id="Baf-8c-k7w"/>
+                <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
+                <outlet property="videoTabButton" destination="fqL-QQ-Ulv" id="USk-ju-JX0"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
         </customObject>
@@ -24,12 +31,11 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="1" id="Gpk-uP-4vN">
-                            <view key="view" ambiguous="YES" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                            <view key="view" id="Mp1-oa-ElH">
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="0.0" y="-20" width="600" height="320"/>
+                                        <rect key="frame" x="0.0" y="-320" width="600" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50L-fF-Ba4">
@@ -331,7 +337,7 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="3" id="Uhs-af-iDr">
-                            <view key="view" id="Dwd-l8-aCe">
+                            <view key="view" ambiguous="YES" id="Dwd-l8-aCe">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
@@ -343,77 +349,77 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AnG-eE-Jsk">
-                            <rect key="frame" x="151" y="2" width="60" height="17"/>
+                            <rect key="frame" x="239" y="-2" width="60" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="ETCD |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Pdx-pK-3xe">
+                            <buttonCell key="cell" type="inline" title="ETCD |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Pdx-pK-3xe">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onETCDTabClick:" target="-2" id="OF1-jS-8df"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4">
-                            <rect key="frame" x="196" y="2" width="120" height="17"/>
+                            <rect key="frame" x="253" y="-2" width="120" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
+                            <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic">
-                            <rect key="frame" x="295" y="2" width="120" height="17"/>
+                            <rect key="frame" x="329" y="-2" width="120" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="JACK ROUTER |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
+                            <buttonCell key="cell" type="inline" title="JACK ROUTER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onETCDTabClick:" target="-2" id="6cj-9v-GII"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv">
-                            <rect key="frame" x="407" y="2" width="60" height="17"/>
+                            <rect key="frame" x="431" y="-2" width="60" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="VIDEO |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="LOR-MN-C7f">
+                            <buttonCell key="cell" type="inline" title="VIDEO |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="LOR-MN-C7f">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onETCDTabClick:" target="-2" id="D3o-Ql-k8p"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy">
-                            <rect key="frame" x="459" y="2" width="60" height="17"/>
+                            <rect key="frame" x="475" y="-2" width="60" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="AUDIO |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
+                            <buttonCell key="cell" type="inline" title="AUDIO |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onETCDTabClick:" target="-2" id="TlH-da-bh8"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy">
-                            <rect key="frame" x="516" y="2" width="80" height="17"/>
+                            <rect key="frame" x="540" y="-2" width="60" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
+                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onETCDTabClick:" target="-2" id="0co-D1-swF"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa">
-                            <rect key="frame" x="62" y="2" width="86" height="17"/>
+                            <rect key="frame" x="175" y="-2" width="86" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="GENGERAL |" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
+                            <buttonCell key="cell" type="inline" title="GENGERAL |" bezelStyle="inline" alignment="right" inset="2" id="dbP-tn-JPE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>

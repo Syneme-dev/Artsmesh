@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMETCDOperationDelegate.h"
 
 @protocol AMETCDOperationDelegate;
 @class AMETCDResult;
 @class AMETCD;
-@protocol AMETCDOperationDelegate;
 
 @interface AMETCDOperation : NSOperation
 
@@ -34,8 +34,4 @@
 @end
 
 
-@protocol AMETCDOperationDelegate <NSObject>
 
--(void)AMETCDOperationDidFinished:(AMETCDOperation*)oper;
-
-@end

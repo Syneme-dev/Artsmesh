@@ -27,12 +27,9 @@ static NSMutableDictionary *allPlugins = nil;
 
 @implementation AMAppDelegate {
     AMMesher *_globalMesher;
-    
-    
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
     allPlugins = [self loadPlugins];
     [AMPreferenceManager registerPreference];
     [self.mainWindowController showDefaultWindow];
@@ -48,7 +45,6 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationWillTerminate:(NSNotification *)notification {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    
     [[AMMesher sharedAMMesher] stopLocalMesher];
 }
 
@@ -58,9 +54,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-    
     [[AMMesher sharedAMMesher] startLoalMesher];
-    
 }
 
 - (void)showPreferencePanel {

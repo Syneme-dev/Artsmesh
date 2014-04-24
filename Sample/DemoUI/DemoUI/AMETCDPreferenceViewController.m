@@ -9,6 +9,7 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import <UIFramewrok/AMButtonHandler.h>
 
 @interface AMETCDPreferenceViewController ()
 
@@ -27,31 +28,17 @@
 }
 
 -(void)awakeFromNib{
-    [self changeTabTextColor:self.etcdTabButton];
-    [self changeTabTextColor:self.generalTabButton];
-    [self changeTabTextColor:self.jackServerTabButton];
+    [AMButtonHandler changeTabTextColor:self.etcdTabButton toColor:UI_Color_b7b7b7];
     
-    
-    [self changeTabTextColor:self.jackRouterTabButton];
-    [self changeTabTextColor:self.audioTabButton];
-    [self changeTabTextColor:self.videoTabButton];
-    [self changeTabTextColor:self.statusnetTabButton];
+    [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_b7b7b7];
 }
 
--(void)changeTabTextColor:(NSButton*) button{
-    //#b7b7b7
-    NSColor *color =
-    [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f];
-    NSMutableAttributedString *colorTitle =
-    [[NSMutableAttributedString alloc] initWithAttributedString:[button attributedTitle]];
-    NSRange titleRange = NSMakeRange(0, [colorTitle length]);
-    
-    [colorTitle addAttribute:NSForegroundColorAttributeName
-                       value:color
-                       range:titleRange];
-    
-    [button setAttributedTitle:colorTitle];
-}
+
 
 - (IBAction)onETCDTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

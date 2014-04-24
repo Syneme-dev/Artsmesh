@@ -32,8 +32,6 @@
 }
 
 - (void)mouseDown:(NSEvent *) e {
-    
-    // Convert to superview's coordinate space
     self.lastDragLocation = [[self superview] convertPoint:[e locationInWindow] fromView:nil];
     
 }

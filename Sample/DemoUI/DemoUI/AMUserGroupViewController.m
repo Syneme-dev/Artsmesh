@@ -9,6 +9,7 @@
 #import "AMUserGroupViewController.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
+#import "AMUserGroupTableCellView.h"
 
 @interface AMUserGroupViewController ()
 
@@ -37,20 +38,20 @@
 
 - (IBAction)joinGroup:(id)sender
 {
-    long index = [self.userGroupOutline selectedRow];
-    if (index == -1)
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
     {
-        return;
-    }
-    
-    id selectedItem = [self.userGroupOutline itemAtRow:index];
-    if(selectedItem)
-    {
-        NSTreeNode* node = selectedItem;
-        AMGroup* toJoinGroup = node.representedObject;
-        NSString* groupName = toJoinGroup.uniqueName;
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
         
-        [[AMMesher sharedAMMesher] joinGroup:groupName];
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;
+            if ([node isKindOfClass:[AMGroup class]])
+            {
+                AMGroup* group = (AMGroup*)node;
+                NSString* groupName = group.uniqueName;
+                [[AMMesher sharedAMMesher] joinGroup:groupName];
+            }
+        }
     }
 }
 
@@ -65,7 +66,28 @@
 
 - (IBAction)quitGroup:(id)sender
 {
-    [[AMMesher sharedAMMesher] backToArtsmesh];
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
+    {
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
+        
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;
+            if ([node isKindOfClass:[AMGroup class]])
+            {
+                AMGroup* group = (AMGroup*)node;
+                NSString* groupName = group.uniqueName;
+                if ([groupName isEqualToString:@"Artsmesh"])
+                {
+                    return;
+                }
+                
+                [[AMMesher sharedAMMesher] backToArtsmesh];
+            }
+        }
+    }
+
+    
 }
 
 - (IBAction)createGroupByEnter:(id)sender
@@ -79,28 +101,22 @@
 
 - (IBAction)mergeGroup:(id)sender
 {
-    long index = [self.userGroupOutline selectedRow];
-    if (index == -1)
-    {
-        return;
-    }
     
-    id selectedItem = [self.userGroupOutline itemAtRow:index];
-    if(selectedItem)
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
     {
-        NSTreeNode* node = selectedItem;
-        AMGroup* toJoinGroup = node.representedObject;
-        NSString* groupName = toJoinGroup.uniqueName;
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
         
-        [[AMMesher sharedAMMesher] everyoneJoinGroup:groupName];
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;
+            if ([node isKindOfClass:[AMGroup class]])
+            {
+                AMGroup* group = (AMGroup*)node;
+                NSString* groupName = group.uniqueName;
+                [[AMMesher sharedAMMesher] everyoneJoinGroup:groupName];
+            }
+        }
     }
-
-}
-
-
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-    
 }
 
 

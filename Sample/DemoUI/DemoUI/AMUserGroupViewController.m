@@ -31,8 +31,6 @@
                                                 forObject:textField];
         
         fieldEditor.insertionPointColor = insertionPointColor;
-        
-        
     }
     
     return self;
@@ -119,12 +117,6 @@
             }
         }
     }
-}
-
-
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-    
 }
 
 

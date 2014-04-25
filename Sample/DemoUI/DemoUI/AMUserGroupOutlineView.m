@@ -26,5 +26,21 @@
     // Drawing code here.
 }
 
+-(void)expandAll
+{
+    [self expandItem:nil expandChildren:YES];
+}
+
+-(void)didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+{
+    [self performSelectorOnMainThread:@selector(expandAll) withObject:nil waitUntilDone:NO];
+}
+
+-(void)didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+{
+   [self performSelectorOnMainThread:@selector(expandAll) withObject:nil waitUntilDone:NO];
+}
+
+
 
 @end

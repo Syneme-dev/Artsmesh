@@ -30,6 +30,8 @@
                                                 forObject:textField];
         
         fieldEditor.insertionPointColor = insertionPointColor;
+        
+        
     }
     
     return self;

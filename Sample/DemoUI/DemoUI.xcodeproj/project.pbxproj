@@ -18,6 +18,8 @@
 		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
 		26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC21900D44D0083742E /* JoinGroup.png */; };
 		26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC41900D6EF0083742E /* CreateGroup.png */; };
+		26DA41BA1909E79200DC0DCC /* AMUserGroupOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41B91909E79200DC0DCC /* AMUserGroupOutlineView.m */; };
+		26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
@@ -129,6 +131,10 @@
 		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
 		26D2FFC21900D44D0083742E /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JoinGroup.png; path = Resource/JoinGroup.png; sourceTree = "<group>"; };
 		26D2FFC41900D6EF0083742E /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CreateGroup.png; path = Resource/CreateGroup.png; sourceTree = "<group>"; };
+		26DA41B81909E79200DC0DCC /* AMUserGroupOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupOutlineView.h; sourceTree = "<group>"; };
+		26DA41B91909E79200DC0DCC /* AMUserGroupOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupOutlineView.m; sourceTree = "<group>"; };
+		26DA41BB1909E7A600DC0DCC /* AMUserGroupTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableCellView.h; sourceTree = "<group>"; };
+		26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableCellView.m; sourceTree = "<group>"; };
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
@@ -269,6 +275,17 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		26DA41B71909E77500DC0DCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26DA41B81909E79200DC0DCC /* AMUserGroupOutlineView.h */,
+				26DA41B91909E79200DC0DCC /* AMUserGroupOutlineView.m */,
+				26DA41BB1909E7A600DC0DCC /* AMUserGroupTableCellView.h */,
+				26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +339,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
@@ -566,7 +584,9 @@
 			files = (
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
+				26DA41BA1909E79200DC0DCC /* AMUserGroupOutlineView.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,

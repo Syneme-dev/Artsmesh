@@ -30,38 +30,39 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="EmI-FD-sW7" userLabel="tearoff">
-                            <rect key="frame" x="467" y="2" width="16" height="16"/>
+                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EmI-FD-sW7" userLabel="tearoff">
+                            <rect key="frame" x="460" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tearoff" id="fg8-Rb-LMw"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_tear" id="fg8-Rb-LMw"/>
                         </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="veg-la-FBt" userLabel="settings">
-                            <rect key="frame" x="487" y="2" width="16" height="16"/>
+                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veg-la-FBt" userLabel="settings">
+                            <rect key="frame" x="480" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="settings" id="br0-Vw-lhS"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_setting" id="br0-Vw-lhS"/>
                         </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="axv-cy-elo" userLabel="duplicate">
-                            <rect key="frame" x="507" y="0.0" width="21" height="18"/>
+                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axv-cy-elo" userLabel="duplicate">
+                            <rect key="frame" x="500" y="1" width="21" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="duplicate" id="qw3-ve-JJ9"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_copy" id="qw3-ve-JJ9"/>
                         </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="YhX-GV-jNT" userLabel="fullscreen">
-                            <rect key="frame" x="532" y="2" width="19" height="16"/>
+                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YhX-GV-jNT" userLabel="fullscreen">
+                            <rect key="frame" x="525" y="2" width="19" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="fullscreen" id="TPW-Ka-805"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_fullScreen" id="TPW-Ka-805"/>
                         </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="UA2-Yj-7zc" userLabel="maxsize">
-                            <rect key="frame" x="555" y="3" width="22" height="15"/>
+                        <imageView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UA2-Yj-7zc" userLabel="maxsize">
+                            <rect key="frame" x="548" y="2" width="22" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="maxsize" id="Gwd-Sy-m8g"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_extend" id="Gwd-Sy-m8g"/>
                         </imageView>
-                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
-                            <rect key="frame" x="581" y="2" width="18" height="16"/>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
+                            <rect key="frame" x="578" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="16" id="mbC-zq-fMQ"/>
                                 <constraint firstAttribute="height" constant="16" id="mfq-Uw-HWT"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="close" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_close" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -71,21 +72,17 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="UA2-Yj-7zc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="1ad-gW-ht8"/>
-                        <constraint firstItem="UA2-Yj-7zc" firstAttribute="leading" secondItem="YhX-GV-jNT" secondAttribute="trailing" constant="4" id="8nL-DC-shj"/>
+                        <constraint firstItem="UA2-Yj-7zc" firstAttribute="leading" secondItem="YhX-GV-jNT" secondAttribute="trailing" constant="10" id="8nL-DC-shj"/>
                         <constraint firstItem="EmI-FD-sW7" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="94I-9x-gR5"/>
                         <constraint firstAttribute="height" constant="20" id="Drv-GT-vZ1"/>
-                        <constraint firstItem="axv-cy-elo" firstAttribute="leading" secondItem="veg-la-FBt" secondAttribute="trailing" constant="4" id="J9j-qh-9fc"/>
-                        <constraint firstItem="YhX-GV-jNT" firstAttribute="leading" secondItem="axv-cy-elo" secondAttribute="trailing" constant="4" id="JYi-f4-RLj"/>
-                        <constraint firstItem="EmI-FD-sW7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="ZR9-cQ-Ms2"/>
+                        <constraint firstItem="axv-cy-elo" firstAttribute="leading" secondItem="veg-la-FBt" secondAttribute="trailing" constant="10" id="J9j-qh-9fc"/>
+                        <constraint firstItem="YhX-GV-jNT" firstAttribute="leading" secondItem="axv-cy-elo" secondAttribute="trailing" constant="10" id="JYi-f4-RLj"/>
                         <constraint firstItem="PFq-T7-YMG" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cBq-Mq-Dzy"/>
                         <constraint firstItem="veg-la-FBt" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cmt-Nj-QY1"/>
-                        <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="1" id="fUz-xV-zi7"/>
+                        <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="4" id="fUz-xV-zi7"/>
                         <constraint firstItem="axv-cy-elo" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="lsE-Wd-fYa"/>
-                        <constraint firstItem="veg-la-FBt" firstAttribute="leading" secondItem="EmI-FD-sW7" secondAttribute="trailing" constant="4" id="mBY-ao-xzC"/>
-                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="UA2-Yj-7zc" secondAttribute="trailing" constant="4" id="mdf-6z-9D4"/>
-                        <constraint firstItem="axv-cy-elo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="qm9-jo-JEa"/>
-                        <constraint firstItem="YhX-GV-jNT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="tCo-Db-Yrp"/>
+                        <constraint firstItem="veg-la-FBt" firstAttribute="leading" secondItem="EmI-FD-sW7" secondAttribute="trailing" constant="10" id="mBY-ao-xzC"/>
+                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="UA2-Yj-7zc" secondAttribute="trailing" constant="10" id="mdf-6z-9D4"/>
                         <constraint firstItem="UA2-Yj-7zc" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="tzg-Xl-d9Y"/>
                         <constraint firstItem="YhX-GV-jNT" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="wAp-2p-rbg"/>
                     </constraints>
@@ -119,11 +116,11 @@
         </customView>
     </objects>
     <resources>
-        <image name="close" width="18" height="17"/>
-        <image name="duplicate" width="21" height="18"/>
-        <image name="fullscreen" width="19" height="16"/>
-        <image name="maxsize" width="22" height="15"/>
-        <image name="settings" width="16" height="16"/>
-        <image name="tearoff" width="16" height="16"/>
+        <image name="panel_close" width="15" height="15"/>
+        <image name="panel_copy" width="15" height="15"/>
+        <image name="panel_extend" width="15" height="15"/>
+        <image name="panel_fullScreen" width="15" height="15"/>
+        <image name="panel_setting" width="15" height="15"/>
+        <image name="panel_tear" width="15" height="15"/>
     </resources>
 </document>

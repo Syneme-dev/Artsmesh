@@ -68,7 +68,28 @@
 
 - (IBAction)quitGroup:(id)sender
 {
-    [[AMMesher sharedAMMesher] backToArtsmesh];
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
+    {
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
+        
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;
+            if ([node isKindOfClass:[AMGroup class]])
+            {
+                AMGroup* group = (AMGroup*)node;
+                NSString* groupName = group.uniqueName;
+                if ([groupName isEqualToString:@"Artsmesh"])
+                {
+                    return;
+                }
+                
+                [[AMMesher sharedAMMesher] backToArtsmesh];
+            }
+        }
+    }
+
+    
 }
 
 - (IBAction)createGroupByEnter:(id)sender

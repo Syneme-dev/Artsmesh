@@ -99,7 +99,7 @@
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
-    [self loadChatPanel];
+//    [self loadChatPanel];
     
     //Note:using the following code to render FOAF panel.
     [self loadFOAFPanel];

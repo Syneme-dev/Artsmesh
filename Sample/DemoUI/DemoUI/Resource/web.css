@@ -1,3 +1,4 @@
+
 #header{
 display:none;
 }
@@ -7,8 +8,13 @@ display:none;
 #content{
 width:300px !important;
 }
+
+#aside_primary{
+display:none;
+}
 #site_nav_local_views{
-display:none;}
+display:none;
+}
 #aside_primary_wrapper,#core,#wrap{
 width:300px !important;
 }

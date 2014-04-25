@@ -26,7 +26,7 @@
 
 
 -(void)loadPage{
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost/index.php"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost/index.php/main/login?fromMac=true"];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:baseURL]];
 
@@ -39,7 +39,12 @@
     NSString *path= [[NSBundle mainBundle] bundlePath];
     path=[path stringByAppendingString:@"/Contents/Resources/web.css"];
     self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-    
+    [self login:frame];
+}
+
+-(void)login:(WebFrame *)frame{
+          [frame.webView stringByEvaluatingJavaScriptFromString:
+           @"$('#nickname').val('xujian');$('#password').val('p@ssw0rd');$('#submit').click();" ];
 }
 
 

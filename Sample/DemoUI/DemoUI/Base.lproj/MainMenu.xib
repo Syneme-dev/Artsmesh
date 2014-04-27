@@ -707,7 +707,7 @@
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Zn-N4-RBZ">
                                 <rect key="frame" x="3" y="3" width="34" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="RecentTags" id="S9w-KR-4r3"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_setting" id="S9w-KR-4r3"/>
                             </imageView>
                         </subviews>
                     </customView>
@@ -803,7 +803,7 @@
     </objects>
     <resources>
         <image name="Groups" width="40" height="40"/>
-        <image name="RecentTags" width="40" height="40"/>
+        <image name="SideBar_setting" width="40" height="40"/>
         <image name="Users" width="40" height="41"/>
         <image name="meshButton" width="113" height="40"/>
     </resources>

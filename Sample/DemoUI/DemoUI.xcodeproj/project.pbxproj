@@ -58,6 +58,15 @@
 		AF74056A18F7D93200B3C1DF /* Users.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74054518F7D93200B3C1DF /* Users.png */; };
 		AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF796F5B1900EE7D00C48C00 /* WebKit.framework */; };
 		AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */; };
+		AF82E356190CAB630083487C /* FoundryMonoline-Bold.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */; };
+		AF82E357190CAB630083487C /* FoundryMonoline-Light.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */; };
+		AF82E358190CAB630083487C /* FoundryMonoline-Medium.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E342190CA81A0083487C /* FoundryMonoline-Medium.otf */; };
+		AF82E359190CAB630083487C /* FoundryMonoline-RegItalic.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E343190CA81A0083487C /* FoundryMonoline-RegItalic.otf */; };
+		AF82E35A190CAB630083487C /* FoundryMonoline-Regular.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E344190CA81A0083487C /* FoundryMonoline-Regular.otf */; };
+		AF82E35B190CAB630083487C /* FoundryMonoline-UltraLight.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E345190CA81A0083487C /* FoundryMonoline-UltraLight.otf */; };
+		AF82E35C190CAB630083487C /* KievitSlabOT-Light.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E346190CA81A0083487C /* KievitSlabOT-Light.otf */; };
+		AF82E35D190CAB630083487C /* KievitSlabOT-Thin.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */; };
+		AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E348190CA81A0083487C /* KievitSlabOT.otf */; };
 		AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */; };
 		AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B418F6848D003BB9D1 /* profile.png */; };
 		AF8CE2BD18F68719003BB9D1 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B718F68719003BB9D1 /* close.png */; };
@@ -120,13 +129,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		376E047C187A9B1E0081DBA6 /* CopyFiles */ = {
+		376E047C187A9B1E0081DBA6 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstPath = font;
+			dstSubfolderSpec = 7;
 			files = (
+				AF82E356190CAB630083487C /* FoundryMonoline-Bold.otf in Copy Files */,
+				AF82E357190CAB630083487C /* FoundryMonoline-Light.otf in Copy Files */,
+				AF82E358190CAB630083487C /* FoundryMonoline-Medium.otf in Copy Files */,
+				AF82E359190CAB630083487C /* FoundryMonoline-RegItalic.otf in Copy Files */,
+				AF82E35A190CAB630083487C /* FoundryMonoline-Regular.otf in Copy Files */,
+				AF82E35B190CAB630083487C /* FoundryMonoline-UltraLight.otf in Copy Files */,
+				AF82E35C190CAB630083487C /* KievitSlabOT-Light.otf in Copy Files */,
+				AF82E35D190CAB630083487C /* KievitSlabOT-Thin.otf in Copy Files */,
+				AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -194,6 +213,15 @@
 		AF74054518F7D93200B3C1DF /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Users.png; path = Resource/Users.png; sourceTree = "<group>"; };
 		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Artsmesh2Logo.icns; path = Resource/Artsmesh2Logo.icns; sourceTree = "<group>"; };
+		AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Bold.otf"; sourceTree = "<group>"; };
+		AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Light.otf"; sourceTree = "<group>"; };
+		AF82E342190CA81A0083487C /* FoundryMonoline-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Medium.otf"; sourceTree = "<group>"; };
+		AF82E343190CA81A0083487C /* FoundryMonoline-RegItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-RegItalic.otf"; sourceTree = "<group>"; };
+		AF82E344190CA81A0083487C /* FoundryMonoline-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Regular.otf"; sourceTree = "<group>"; };
+		AF82E345190CA81A0083487C /* FoundryMonoline-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-UltraLight.otf"; sourceTree = "<group>"; };
+		AF82E346190CA81A0083487C /* KievitSlabOT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KievitSlabOT-Light.otf"; sourceTree = "<group>"; };
+		AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KievitSlabOT-Thin.otf"; sourceTree = "<group>"; };
+		AF82E348190CA81A0083487C /* KievitSlabOT.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KievitSlabOT.otf; sourceTree = "<group>"; };
 		AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OnlineDot.png; path = Resource/OnlineDot.png; sourceTree = "<group>"; };
 		AF8CE2B418F6848D003BB9D1 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = Resource/profile.png; sourceTree = "<group>"; };
 		AF8CE2B718F68719003BB9D1 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Resource/close.png; sourceTree = "<group>"; };
@@ -375,6 +403,7 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AF82E33F190CA7FC0083487C /* font */,
 				AFB34F6C190A359600092E33 /* panelIcon */,
 				AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */,
 				AFC77F8F1900CBFB003543CF /* web.css */,
@@ -404,6 +433,23 @@
 				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF82E33F190CA7FC0083487C /* font */ = {
+			isa = PBXGroup;
+			children = (
+				AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */,
+				AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */,
+				AF82E342190CA81A0083487C /* FoundryMonoline-Medium.otf */,
+				AF82E343190CA81A0083487C /* FoundryMonoline-RegItalic.otf */,
+				AF82E344190CA81A0083487C /* FoundryMonoline-Regular.otf */,
+				AF82E345190CA81A0083487C /* FoundryMonoline-UltraLight.otf */,
+				AF82E346190CA81A0083487C /* KievitSlabOT-Light.otf */,
+				AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */,
+				AF82E348190CA81A0083487C /* KievitSlabOT.otf */,
+			);
+			name = font;
+			path = Resource/font;
 			sourceTree = "<group>";
 		};
 		AF8CE2B618F6870A003BB9D1 /* Resource */ = {
@@ -482,7 +528,7 @@
 				37C23168187A8FFD00554AFD /* Sources */,
 				37C23169187A8FFD00554AFD /* Frameworks */,
 				37C2316A187A8FFD00554AFD /* Resources */,
-				376E047C187A9B1E0081DBA6 /* CopyFiles */,
+				376E047C187A9B1E0081DBA6 /* Copy Files */,
 				2692DB8718E91D1900553924 /* CopyFiles */,
 				26F2BF7618FCC2BF00DD04A6 /* CopyFiles */,
 				AF7DF6E01904BFCA00554E6F /* ShellScript */,

@@ -19,6 +19,8 @@
 		AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */; };
 		AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */; };
 		AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7DF6E61904C26E00554E6F /* AMMaxSizeView.m */; };
+		AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF82E352190CA9680083487C /* AMFoundryFontView.h */; };
+		AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82E353190CA9680083487C /* AMFoundryFontView.m */; };
 		AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9DC78318E9643E0029DB97 /* BlueBackgroundView.m */; };
 		AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAA502218EC1375009286F4 /* AMMovableWindow.h */; };
@@ -57,6 +59,8 @@
 		AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMDragDropView.m; path = UIFramewrok/AMDragDropView.m; sourceTree = "<group>"; };
 		AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
 		AF7DF6E61904C26E00554E6F /* AMMaxSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMaxSizeView.m; sourceTree = "<group>"; };
+		AF82E352190CA9680083487C /* AMFoundryFontView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontView.h; path = UIFramewrok/AMFoundryFontView.h; sourceTree = "<group>"; };
+		AF82E353190CA9680083487C /* AMFoundryFontView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontView.m; path = UIFramewrok/AMFoundryFontView.m; sourceTree = "<group>"; };
 		AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlueBackgroundView.h; path = UIFramewrok/BlueBackgroundView.h; sourceTree = "<group>"; };
 		AF9DC78318E9643E0029DB97 /* BlueBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlueBackgroundView.m; path = UIFramewrok/BlueBackgroundView.m; sourceTree = "<group>"; };
 		AFAA502218EC1375009286F4 /* AMMovableWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMMovableWindow.h; path = UIFramewrok/AMMovableWindow.h; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				AF82E352190CA9680083487C /* AMFoundryFontView.h */,
+				AF82E353190CA9680083487C /* AMFoundryFontView.m */,
 				AFB34F6819065C1400092E33 /* AMButtonHandler.h */,
 				AFB34F6919065C1400092E33 /* AMButtonHandler.m */,
 				AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */,
@@ -183,6 +189,7 @@
 			files = (
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
+				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
@@ -288,6 +295,7 @@
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
+				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
 			);

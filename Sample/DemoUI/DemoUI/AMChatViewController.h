@@ -9,10 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 
-@interface AMChatViewController : NSViewController <GCDAsyncUdpSocketDelegate>
+@interface AMChatViewController : NSViewController
+    <GCDAsyncUdpSocketDelegate>
 
+@property (nonatomic) NSMutableArray *chatRecords;
 @property (weak) IBOutlet NSTextField *chatMsgField;
-@property (unsafe_unretained) IBOutlet NSTextView *msgHistory;
+@property (weak) IBOutlet NSTableView *tableView;
+
 
 - (IBAction)sendMsg:(id)sender;
 

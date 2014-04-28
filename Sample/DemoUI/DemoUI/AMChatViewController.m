@@ -11,9 +11,6 @@
 #import "AMMesher/AMUser.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 
-@interface AMChatViewController ()
-
-@end
 
 @implementation AMChatViewController
 {
@@ -25,6 +22,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _chatRecords = [[NSMutableArray alloc] init];
+        /*
+        [_chatRecords addObject: @{@"sender": @"Gao MIng", @"message" : @"hello, everyone", @"time" : @"10:28 PM"}];
+        [_chatRecords addObject: @{@"sender": @"Gao MIng", @"message" : @"hello, everyone", @"time" : @"10:28 PM"}];
+        [_chatRecords addObject: @{@"sender": @"Gao MIng", @"message" : @"hello, everyone", @"time" : @"10:28 PM"}];
+         */
+        
+        
         _socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self
                                                 delegateQueue:dispatch_get_main_queue()];
         
@@ -44,41 +49,6 @@
     return self;
 }
 
--(void) appendOutputTextLine:(NSString*)textLine
-{
-	[self appendOutputText:[NSString stringWithFormat:@"%@\r",textLine]];
-}
-
--(void) appendOutputText:(NSString*)text
-{
-	printf("%s",[text UTF8String]);
-	[self performSelectorOnMainThread:@selector(appendOutputTextOnMainThread:) withObject:text waitUntilDone:NO];
-}
-
--(void) appendOutputTextOnMainThread:(id)data
-{
-    NSString *text=data;
-	//[[[self.msgHistory  textStorage] mutableString] appendString:text];
-    
-    [self.msgHistory insertText:text];
-    
-    NSRange range;
-    range = NSMakeRange ([[self.msgHistory  string] length], 0);
-	
-    [self.msgHistory  scrollRangeToVisible: range];
-    
-    //NSColor * color = [NSColor colorWithDeviceRed:0.65 green:0.82 blue:0.86 alpha: 1.0];
-    NSColor * color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha: 1.0];
-    [self.msgHistory  setTextColor:color];
-    
-    NSFont*  oldFont = self.msgHistory.font;
-    
-    NSFont* font = [NSFont fontWithName:oldFont.fontName size: 20];
-    [self.msgHistory  setFont:font];
-    
-	   
-}
-
 - (IBAction)sendMsg:(id)sender
 {
     NSString* msg = [self.chatMsgField stringValue];
@@ -90,7 +60,10 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* nickName =[defaults stringForKey:Preference_Key_User_NickName];
     
-    NSData* msgData = [[NSString stringWithFormat:@"%@:%@", nickName, msg] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
+                    @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
+    
+//    NSData* msgData = [[NSString stringWithFormat:@"%@:%@", nickName, msg] dataUsingEncoding:NSUTF8StringEncoding];
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
     NSArray* users = mesher.myGroupUsers;
@@ -106,6 +79,12 @@
     }
     
     self.chatMsgField.stringValue = @"";
+    
+    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
+    [self willChangeValueForKey:@"chatRecords"];
+    [self.chatRecords addObject:chatRecord];
+    [self didChangeValueForKey:@"chatRecords"];
+    [self.tableView scrollToEndOfDocument:self];
 }
 
 
@@ -113,16 +92,7 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	if (!msg)
-        msg = @"Unknown message";
-    
-    NSString *host = nil;
-    uint16_t port = 0;
-    [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
- 
-    [self appendOutputTextLine: msg];
-    
-	NSLog(@"%@:%hu said: %@", host, port, msg);
+    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [self.chatRecords addObject:chatRecord];
 }
 @end

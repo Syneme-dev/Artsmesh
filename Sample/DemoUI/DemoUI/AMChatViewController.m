@@ -80,11 +80,7 @@
     
     self.chatMsgField.stringValue = @"";
     
-    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
-    [self willChangeValueForKey:@"chatRecords"];
-    [self.chatRecords addObject:chatRecord];
-    [self didChangeValueForKey:@"chatRecords"];
-    [self.tableView scrollToEndOfDocument:self];
+
 }
 
 
@@ -93,6 +89,9 @@
 withFilterContext:(id)filterContext
 {
     NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [self willChangeValueForKey:@"chatRecords"];
     [self.chatRecords addObject:chatRecord];
+    [self didChangeValueForKey:@"chatRecords"];
+    [self.tableView scrollToEndOfDocument:self];
 }
 @end

@@ -678,37 +678,200 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bA9-n0-vrx" userLabel="user" customClass="BlueBackgroundView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32k-JN-wvV" userLabel="user" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="688" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-PU-nyb">
-                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XvE-b0-PoG">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Users" id="6ZZ-YA-dZr"/>
-                            </imageView>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_user" imagePosition="only" alignment="center" alternateImage="SideBar_user_h" imageScaling="proportionallyDown" inset="2" id="kIr-Uy-6XX">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUO-rc-KBh" customClass="BlueBackgroundView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUd-73-Mf2" userLabel="group" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="647" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3PH-WD-Sgf">
-                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0X-Sn-eMy">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Groups" id="Q1o-Yv-zjM"/>
-                            </imageView>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_group" imagePosition="only" alignment="center" alternateImage="SideBar_group_h" imageScaling="proportionallyDown" inset="2" id="OmI-Rl-5Gt">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SHT-Ro-Aab" customClass="BlueBackgroundView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buw-IA-tqi" userLabel="setting" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="606" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Zn-N4-RBZ">
-                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-QB-zVc">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_setting" id="S9w-KR-4r3"/>
-                            </imageView>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_setting" imagePosition="only" alignment="center" alternateImage="SideBar_setting_h" imageScaling="proportionallyDown" inset="2" id="S1f-8S-GZt">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-oY-8if" userLabel="terminal" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="565" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJG-Ub-l3r">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_terminal" imagePosition="only" alignment="center" alternateImage="SideBar_terminal_h" imageScaling="proportionallyDown" inset="2" id="WvN-01-wQj">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K11-xs-VTh" userLabel="osc" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="524" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaV-lp-VWb">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_osc" imagePosition="only" alignment="center" alternateImage="SideBar_osc_h" imageScaling="proportionallyDown" inset="2" id="sib-zI-nF3">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fbs-7f-cN8" userLabel="chat" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="483" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVF-Uh-cQ1">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_chat" imagePosition="only" alignment="center" alternateImage="SideBar_chat_h" imageScaling="proportionallyDown" inset="2" id="lQW-aJ-qBA">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6xs-yK-Ik5" userLabel="mapview" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="442" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93e-xc-2Iy">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_mapView" imagePosition="only" alignment="center" alternateImage="SideBar_mapView_h" imageScaling="proportionallyDown" inset="2" id="V1K-Xo-Eeh">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Va6-5H-cZI" userLabel="oscrouter" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="401" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABf-qQ-aMa">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_route" imagePosition="only" alignment="center" alternateImage="SideBar_route_h" imageScaling="proportionallyDown" inset="2" id="0qA-F6-Tut">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WuP-WD-9Zs" userLabel="audiorouter" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="360" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4U-Ja-JOj">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_audioRoute" imagePosition="only" alignment="center" alternateImage="SideBar_audioRoute_h" imageScaling="proportionallyDown" inset="2" id="vw5-lg-jkq">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iFN-52-DX6" userLabel="videoRouter" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="319" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THJ-uh-qtg">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_videoRoute" imagePosition="only" alignment="center" alternateImage="SideBar_videoRoute_h" imageScaling="proportionallyDown" inset="2" id="ubV-u4-L8T">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-60-PDr" userLabel="clock" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="278" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-hS-yGJ">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_clock" imagePosition="only" alignment="center" alternateImage="SideBar_clock_h" imageScaling="proportionallyDown" inset="2" id="7Vb-MV-DO7">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rP7-nO-BJv" userLabel="movie" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="237" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0lw-BH-CMw">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_video" imagePosition="only" alignment="center" alternateImage="SideBar_video_h" imageScaling="proportionallyDown" inset="2" id="fiw-OQ-8E0">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-rY-rAF" userLabel="musicScore" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="196" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7E-ga-fmY">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_musicScore" imagePosition="only" alignment="center" alternateImage="SideBar_musicScore_h" imageScaling="proportionallyDown" inset="2" id="p1P-0A-8l3">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XK4-TL-O3D" userLabel="askKen" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="155" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="only" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTH-N1-xDZ">
@@ -802,9 +965,34 @@
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
     <resources>
-        <image name="Groups" width="40" height="40"/>
+        <image name="SideBar_askKen" width="40" height="40"/>
+        <image name="SideBar_askKen_h" width="40" height="40"/>
+        <image name="SideBar_audioRoute" width="40" height="40"/>
+        <image name="SideBar_audioRoute_h" width="40" height="40"/>
+        <image name="SideBar_chat" width="40" height="40"/>
+        <image name="SideBar_chat_h" width="40" height="40"/>
+        <image name="SideBar_clock" width="40" height="40"/>
+        <image name="SideBar_clock_h" width="40" height="40"/>
+        <image name="SideBar_group" width="40" height="40"/>
+        <image name="SideBar_group_h" width="40" height="40"/>
+        <image name="SideBar_mapView" width="40" height="40"/>
+        <image name="SideBar_mapView_h" width="40" height="40"/>
+        <image name="SideBar_musicScore" width="40" height="40"/>
+        <image name="SideBar_musicScore_h" width="40" height="40"/>
+        <image name="SideBar_osc" width="40" height="40"/>
+        <image name="SideBar_osc_h" width="40" height="40"/>
+        <image name="SideBar_route" width="40" height="40"/>
+        <image name="SideBar_route_h" width="40" height="40"/>
         <image name="SideBar_setting" width="40" height="40"/>
-        <image name="Users" width="40" height="41"/>
+        <image name="SideBar_setting_h" width="40" height="40"/>
+        <image name="SideBar_terminal" width="40" height="40"/>
+        <image name="SideBar_terminal_h" width="40" height="40"/>
+        <image name="SideBar_user" width="40" height="40"/>
+        <image name="SideBar_user_h" width="40" height="40"/>
+        <image name="SideBar_video" width="40" height="40"/>
+        <image name="SideBar_videoRoute" width="40" height="40"/>
+        <image name="SideBar_videoRoute_h" width="40" height="40"/>
+        <image name="SideBar_video_h" width="40" height="40"/>
         <image name="meshButton" width="113" height="40"/>
     </resources>
 </document>

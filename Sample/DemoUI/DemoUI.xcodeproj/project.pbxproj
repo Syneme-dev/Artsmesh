@@ -438,18 +438,10 @@
 			path = Resource/font;
 			sourceTree = "<group>";
 		};
-		AF82E35F190CB04C0083487C /* sidebarIcon */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = sidebarIcon;
-			path = Resource/sidebarIcon;
-			sourceTree = "<group>";
-		};
 		AF8CE2B618F6870A003BB9D1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				AF82E35F190CB04C0083487C /* sidebarIcon */,
+				AF9205401910B2F10051BE63 /* statusnetIcon */,
 				AF82E33F190CA7FC0083487C /* font */,
 				AFB34F6C190A359600092E33 /* panelIcon */,
 				26D2FFC41900D6EF0083742E /* CreateGroup.png */,
@@ -458,6 +450,14 @@
 				26D2FFBB1900D01A0083742E /* meshButton.png */,
 				26D2FFBC1900D01A0083742E /* QuitGroup.png */,
 				AF9DC78618E96AEB0029DB97 /* ken.png */,
+				AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		AF9205401910B2F10051BE63 /* statusnetIcon */ = {
+			isa = PBXGroup;
+			children = (
 				AF74052018F7D93100B3C1DF /* Attachement.png */,
 				AF74052118F7D93100B3C1DF /* Edit.png */,
 				AF74052218F7D93100B3C1DF /* Favorite.png */,
@@ -472,9 +472,8 @@
 				AF74054418F7D93200B3C1DF /* Trash.png */,
 				AF74054518F7D93200B3C1DF /* Users.png */,
 				AF8CE2B418F6848D003BB9D1 /* profile.png */,
-				AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */,
 			);
-			name = Resource;
+			name = statusnetIcon;
 			sourceTree = "<group>";
 		};
 		AFB34F6C190A359600092E33 /* panelIcon */ = {

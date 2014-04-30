@@ -19,6 +19,10 @@
     [colorTitle addAttribute:NSForegroundColorAttributeName
                        value:color
                        range:titleRange];
+    NSFont *font=[NSFont fontWithName: @"FoundryMonoline-Medium" size: button.font.pointSize];
+    [colorTitle addAttribute:NSFontAttributeName
+                       value:font
+                       range:titleRange];
     
     [button setAttributedTitle:colorTitle];
 }

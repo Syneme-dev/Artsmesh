@@ -37,7 +37,6 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
-		AF48F43918EEAC4C006024CF /* UIFramewrok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF48F43818EEAC4C006024CF /* UIFramewrok.framework */; };
 		AF74054618F7D93200B3C1DF /* Attachement.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052018F7D93100B3C1DF /* Attachement.png */; };
 		AF74054718F7D93200B3C1DF /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052118F7D93100B3C1DF /* Edit.png */; };
 		AF74054818F7D93200B3C1DF /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052218F7D93100B3C1DF /* Favorite.png */; };
@@ -64,6 +63,7 @@
 		AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E348190CA81A0083487C /* KievitSlabOT.otf */; };
 		AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */; };
 		AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B418F6848D003BB9D1 /* profile.png */; };
+		AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
 		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
 		AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78018E963B40029DB97 /* AMPanelView.xib */; };
 		AF9DC78718E96AEB0029DB97 /* ken.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78618E96AEB0029DB97 /* ken.png */; };
@@ -186,7 +186,6 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
-		AF48F43818EEAC4C006024CF /* UIFramewrok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramewrok.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramewrok.framework; sourceTree = "<group>"; };
 		AF74052018F7D93100B3C1DF /* Attachement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Attachement.png; path = Resource/Attachement.png; sourceTree = "<group>"; };
 		AF74052118F7D93100B3C1DF /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Edit.png; path = Resource/Edit.png; sourceTree = "<group>"; };
 		AF74052218F7D93100B3C1DF /* Favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Favorite.png; path = Resource/Favorite.png; sourceTree = "<group>"; };
@@ -213,6 +212,7 @@
 		AF82E348190CA81A0083487C /* KievitSlabOT.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KievitSlabOT.otf; sourceTree = "<group>"; };
 		AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OnlineDot.png; path = Resource/OnlineDot.png; sourceTree = "<group>"; };
 		AF8CE2B418F6848D003BB9D1 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = Resource/profile.png; sourceTree = "<group>"; };
+		AF9205411910B42D0051BE63 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserView.xib; sourceTree = "<group>"; };
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
 		AF9DC78018E963B40029DB97 /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
@@ -254,10 +254,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */,
 				D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */,
 				AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */,
 				26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */,
-				AF48F43918EEAC4C006024CF /* UIFramewrok.framework in Frameworks */,
 				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
 				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
 				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
@@ -349,9 +349,9 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF9205411910B42D0051BE63 /* UIFramework.framework */,
 				D432037B1901142E009BDE67 /* AMNetworkUtils.framework */,
 				26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */,
-				AF48F43818EEAC4C006024CF /* UIFramewrok.framework */,
 				2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */,
 				268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */,
 				268E7DD818D1861000B0F710 /* AMNotificationManager.framework */,
@@ -813,7 +813,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";
@@ -826,7 +829,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";

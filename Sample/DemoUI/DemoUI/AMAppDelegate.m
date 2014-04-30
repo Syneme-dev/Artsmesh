@@ -19,7 +19,7 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
 #import "AMUserGroupViewController.h"
-#import <UIFramewrok/BlueBackgroundView.h>
+#import <UIFramework/BlueBackgroundView.h>
 
 
 

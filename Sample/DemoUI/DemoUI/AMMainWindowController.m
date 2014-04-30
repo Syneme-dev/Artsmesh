@@ -23,7 +23,7 @@
 #import "AMUserViewController.h"
 #import "AMSocialViewController.h"
 #import "AMUserGroupViewController.h"
-#import <UIFramewrok/BlueBackgroundView.h>
+#import <UIFramework/BlueBackgroundView.h>
 #import "AMChatViewController.h"
 
 

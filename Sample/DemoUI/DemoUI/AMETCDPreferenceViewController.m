@@ -9,7 +9,7 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import <UIFramewrok/AMButtonHandler.h>
+#import <UIFramework/AMButtonHandler.h>
 
 @interface AMETCDPreferenceViewController ()
 

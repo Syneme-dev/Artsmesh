@@ -50,12 +50,12 @@
     NSView *_containerView;
     AMETCDPreferenceViewController *preferenceViewController;
     AMSocialViewController * socialViewController;
-    AMPanelViewController *preferencePanelController;
-    AMPanelViewController *userPanelController;
-    AMPanelViewController *groupsPanelController;
-    AMPanelViewController *socialPanelController;
+//    AMPanelViewController *preferencePanelController;
+//    AMPanelViewController *userPanelController;
+//    AMPanelViewController *groupsPanelController;
+//    AMPanelViewController *socialPanelController;
     AMChatViewController *chatViewController;
-    AMPanelViewController *chatPanelController;
+//    AMPanelViewController *chatPanelController;
     NSMutableDictionary *panelControllers;
     float containerWidth;
 }
@@ -84,6 +84,9 @@
     [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@.%@",shortVersion,buildVersion]];
 }
 
+-(void)awakeFromNib{
+
+}
 
 - (void)showDefaultWindow {
     
@@ -105,93 +108,120 @@
     
     //Note:using the following code to render FOAF panel.
     [self loadFOAFPanel];
-    [self createEmptyPanel:@"xxx"];
+    
+    
 }
 
--(void)createEmptyPanel:(NSString*)title{
-    AMPanelViewController *panelViewController=
-    [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    float panelHeight=720.0f;
-    panelViewController.view.frame = NSMakeRect(containerWidth,
-                                                  self.window.frame.size.height-UI_topbarHeight-
-                                                  panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
-    [panelViewController setTitle:title];
-    [_containerView addSubview:panelViewController.view];
-    containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
-    [panelControllers setObject:panelViewController forKey:title];
+-(void)createEmptyPanel:(NSString*) identifier withTitle:(NSString*)title{
+    if (panelControllers[identifier]!=nil) {
+        AMPanelViewController *panelViewController=panelControllers[identifier];
+        [panelViewController.view setHidden:NO];
+
+    }
+    else
+    {
+        AMPanelViewController *panelViewController=
+        [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+        float panelHeight=720.0f;
+        panelViewController.view.frame = NSMakeRect(containerWidth,
+                                                    self.window.frame.size.height-UI_topbarHeight-
+                                                    panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
+        [panelViewController setTitle:title];
+        [_containerView addSubview:panelViewController.view];
+        containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
+        [panelControllers setObject:panelViewController forKey:identifier];
+    }
+    
 
 }
 
 -(void)loadFOAFPanel{
-    socialPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     float panelHeight=720.0f;
-    socialPanelController.view.frame = NSMakeRect(containerWidth,
+    panelViewController.view.frame = NSMakeRect(containerWidth,
                                                   self.window.frame.size.height-UI_topbarHeight-
                                                   panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth, panelHeight-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
-    [socialPanelController.view addSubview:socialViewController.view];
-    [socialPanelController setTitle:@"SOCIAL"];
+    [panelViewController.view addSubview:socialViewController.view];
+    [panelViewController setTitle:@"SOCIAL"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
     
     [socialViewController.socialWebTab setDrawsBackground:NO];
-    [_containerView addSubview:socialPanelController.view];
-    containerWidth+=socialPanelController.view.frame.size.width+UI_panelSpacing;
+    [_containerView addSubview:panelViewController.view];
+    containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
+    [panelControllers setObject:panelViewController forKey:@"SOCIAL"];
 }
 
 
 
 - (void)loadGroupsPanel {
-    groupsPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    groupsPanelController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
+    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
-    [groupsPanelController.view addSubview:_userGroupViewController.view];
-    [groupsPanelController setTitle:@"GROUPS"];
-    [_containerView addSubview:groupsPanelController.view];
+    [panelViewController.view addSubview:_userGroupViewController.view];
+    [panelViewController setTitle:@"GROUPS"];
+    [_containerView addSubview:panelViewController.view];
+    [panelControllers setObject:panelViewController forKey:@"GROUPS"];
 }
 
 - (void)loadPreferencePanel {
-    preferencePanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    [_containerView addSubview:preferencePanelController.view];
-    [preferencePanelController.titleView setStringValue:@"PREFERENCE"];
-    preferencePanelController.view.frame = NSMakeRect(
+    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:panelViewController.view];
+    [panelViewController.titleView setStringValue:@"PREFERENCE"];
+    panelViewController.view.frame = NSMakeRect(
                                                       UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing,
                                                      UI_panelPaddingBottom, 600.0f, 720.0f);
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
-    [preferencePanelController.view addSubview:preferenceViewController.view];
+    [panelViewController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
+    [panelControllers setObject:panelViewController forKey:@"PREFERENCE"];
+
 }
 
 - (void)loadChatPanel {
-    chatPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    [_containerView addSubview:chatPanelController.view];
-    [chatPanelController setTitle:@"CHAT"];
-    chatPanelController.view.frame = NSMakeRect(
+    AMPanelViewController *panelViewController  = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:panelViewController.view];
+    [panelViewController setTitle:@"CHAT"];
+    panelViewController.view.frame = NSMakeRect(
                                                 UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*2+UI_panelSpacing,
                                                 UI_panelPaddingBottom, 600.0f, 720.0f);
     
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     chatViewController.view.frame = NSMakeRect(0, 400, 600, 300);
-    [chatPanelController.view addSubview:chatViewController.view];
+    [panelViewController.view addSubview:chatViewController.view];
     
-    containerWidth+=chatPanelController.view.frame.size.width+UI_panelSpacing;
+    containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
+     [panelControllers setObject:panelViewController forKey:@"CHAT"];
 }
 
 - (void)loadUserPanel {
     float panelHeight=300.0f;
-    userPanelController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    userPanelController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
+    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
                                                 panelHeight+UI_pixelHeightAdjustment,  UI_defaultPanelWidth, panelHeight);
-    [_containerView addSubview:userPanelController.view];
-    [userPanelController setTitle:@"USER"];
+    [_containerView addSubview:panelViewController.view];
+    [panelViewController setTitle:@"USER"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     userViewController.view.frame = NSMakeRect(0, 0, 300, 300);
-    [userPanelController.view addSubview:userViewController.view];
+    [panelViewController.view addSubview:userViewController.view];
+     [panelControllers setObject:panelViewController forKey:@"USER"];
     
 }
 
+- (IBAction)onSidebarItemClick:(NSButton *)sender {
+    if(sender.state==NSOnState)
+    {
+        [self createEmptyPanel:sender.identifier withTitle:sender.identifier];
+    }
+    else
+    {
+        AMPanelViewController* pannelViewController=panelControllers[sender.identifier];
+        [pannelViewController closePanel:nil];
+    }
+}
 @end

@@ -15,5 +15,6 @@
 @property (weak) IBOutlet NSTextField *titleView;
 - (IBAction)closePanel:(id)sender;
 
+-(void)setTitle:(NSString *)title;
 
 @end

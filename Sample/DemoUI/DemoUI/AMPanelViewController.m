@@ -18,13 +18,22 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-       
+        
         // Initialization code here.
     }
+   
+
     return self;
 }
 
+-(void)awakeFromNib
+{
+     [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
+}
 
+-(void)setTitle:(NSString *)title{
+    [self.titleView setStringValue:title];
+}
 
 - (IBAction)closePanel:(id)sender {
     [self.view setHidden:YES];

@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserViewController">
             <connections>
+                <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
             </connections>
         </customObject>

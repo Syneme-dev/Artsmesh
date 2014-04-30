@@ -23,4 +23,10 @@
     return self;
 }
 
+
+-(void)awakeFromNib
+{
+    [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
+}
+
 @end

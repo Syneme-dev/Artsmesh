@@ -9,5 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMUserViewController : NSViewController
+@property (strong) IBOutlet NSTextField *statusMessageLabel;
 
 @end

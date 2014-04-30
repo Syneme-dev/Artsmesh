@@ -56,12 +56,14 @@
     AMPanelViewController *socialPanelController;
     AMChatViewController *chatViewController;
     AMPanelViewController *chatPanelController;
+    NSMutableDictionary *panelControllers;
     float containerWidth;
 }
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
+        panelControllers=[[NSMutableDictionary alloc] init];
         // Initialization code here.
     }
     return self;
@@ -99,11 +101,25 @@
     containerWidth=
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
-//    [self loadChatPanel];
+    [self loadChatPanel];
     
     //Note:using the following code to render FOAF panel.
     [self loadFOAFPanel];
-   // [(NSView*)self.window.contentView sendSubviewToBack:scrollView];
+    [self createEmptyPanel:@"xxx"];
+}
+
+-(void)createEmptyPanel:(NSString*)title{
+    AMPanelViewController *panelViewController=
+    [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    float panelHeight=720.0f;
+    panelViewController.view.frame = NSMakeRect(containerWidth,
+                                                  self.window.frame.size.height-UI_topbarHeight-
+                                                  panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
+    [panelViewController setTitle:title];
+    [_containerView addSubview:panelViewController.view];
+    containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
+    [panelControllers setObject:panelViewController forKey:title];
+
 }
 
 -(void)loadFOAFPanel{

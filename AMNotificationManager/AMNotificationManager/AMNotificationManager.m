@@ -9,17 +9,30 @@
 #import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMNotificationManager.h"
 
+static id sharedManager = nil;
+
 @implementation AMNotificationManager
 
-
-
-
 +(AMNotificationManager *)defaultShared{
-    return nil;
+    return sharedManager;
 }
 
--(id) init{
-    return nil;
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [self defaultShared];
+}
+
+- (id)init
+{
+    return sharedManager;
+}
+
++ (void)initialize
+{
+    if (self == [AMNotificationManager class])
+    {
+        sharedManager = [[self alloc] init];
+    }
 }
 
 //-(void)registerMessageTypeWithName:(NSString*)typeName sender:(id)sender{

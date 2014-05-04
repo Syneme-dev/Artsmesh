@@ -102,7 +102,7 @@
             }
             
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
-           // [self.myPrivateIpPopup selectItemAtIndex:i];
+            [self.myPrivateIpPopup selectItemAtIndex:i];
             
             [defaults setObject:ipStr forKey:Preference_Key_General_PrivateIP];
         }

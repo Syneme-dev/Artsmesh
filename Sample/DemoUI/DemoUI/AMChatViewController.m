@@ -10,6 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMNotificationManager/AMNotificationManager.h"
 
 
 @implementation AMChatViewController
@@ -45,8 +46,16 @@
         if (![_socket beginReceiving:&error]) {
             NSLog(@"Error receiving: %@", error);
         }
+        
+        [[AMNotificationManager defaultShared] listenMessageType:self withTypeName:AMN_NEW_USER_JOINED callback:@selector(NewUserJoined:)];
     }
     return self;
+}
+
+-(void)NewUserJoined:(NSNotificationCenter*) notification
+{
+    NSLog(@"new user joined");
+    
 }
 
 - (IBAction)sendMsg:(id)sender

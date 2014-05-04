@@ -11,14 +11,15 @@
 #import "AMNotificationMessage.h"
 
 static NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
+static NSString* const AMN_NEW_USER_JOINED = @"AMN_NEW_USER_JOINED";
 
 @interface AMNotificationManager : NSObject
 
 +(AMNotificationManager *)defaultShared;
 -(void)listenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel;
--(void)unlistenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel;
-//-(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName sender:(id)sender;
+-(void)unlistenMessageType:(id)receiver;
 -(AMNotificationMessage*)createMessageWithHeader:(NSDictionary*)header withBody:(id)body;
--(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName;
+//-(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName source:(id)sender;
+-(void)postMessage:(NSDictionary*)parameters withTypeName:(NSString*)typeName source:(id)sender;
 
 @end

@@ -17,16 +17,6 @@ static id sharedManager = nil;
     return sharedManager;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self defaultShared];
-}
-
-- (id)init
-{
-    return sharedManager;
-}
-
 + (void)initialize
 {
     if (self == [AMNotificationManager class])
@@ -35,24 +25,28 @@ static id sharedManager = nil;
     }
 }
 
-//-(void)registerMessageTypeWithName:(NSString*)typeName sender:(id)sender{
-//    
-//}
-//-(void)unregisterMessageTypeWithName:(NSString*)typeName sender:(id)sender{
-//    
-//}
--(void)listenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel{
-    
+
+-(void)listenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel
+{
+    [[NSNotificationCenter defaultCenter] addObserver:receiver selector:sel name:typeName object:nil];
 }
--(void)unlistenMessageType:(id)receiver withTypeName:(NSString*)typeName callback:(SEL)sel{
-    
+
+-(void)unlistenMessageType:(id)receiver
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:receiver];
 }
--(void)postMessage:(AMNotificationMessage*)msg withTypeName:(NSString*)typeName{
-    
+
+-(void)postMessage:(NSDictionary*)parameters withTypeName:(NSString*)typeName source:(id)sender;
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        [[NSNotificationCenter defaultCenter] postNotificationName:typeName object:sender userInfo:parameters];
+    });
 }
 
 
--(AMNotificationMessage*)createMessageWithHeader:(NSDictionary*)header withBody:(id)body{
+-(AMNotificationMessage*)createMessageWithHeader:(NSDictionary*)header withBody:(id)body
+{
     return nil;
 }
 

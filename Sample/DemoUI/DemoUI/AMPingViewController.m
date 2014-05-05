@@ -28,7 +28,7 @@
         // Initialization code here.
     }
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadTable) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(reloadTable) userInfo:nil repeats:NO];
     
     return self;
 }
@@ -60,6 +60,24 @@
     {
         AMUser* user = [_myGroupUsers objectAtIndex:self.userTable.selectedRow];
         NSString* ip = user.publicIp;
+        
+        
+        NSTask *task = [[NSTask alloc] init];
+       // task.launchPath = @"/bin/bash";
+        task.launchPath = @"/sbin/ping";
+        //NSString *command = [NSString stringWithFormat:@"ping %@", ip];
+        //task.arguments = @[@"-c", command];
+        task.arguments = @[ip];
+        
+        NSPipe *pipe = [NSPipe pipe];
+        task.standardOutput = pipe;
+        task.standardError = pipe;
+        NSFileHandle *pipeToRead = [pipe fileHandleForReading];
+        [task launch];
+        
+        NSString *output = [[NSString alloc] initWithData: [pipeToRead readDataToEndOfFile]
+                                                 encoding: NSUTF8StringEncoding];
+        self.outputTextView.string = output;
     }
 }
 

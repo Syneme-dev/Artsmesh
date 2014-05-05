@@ -10,5 +10,6 @@
 
 @interface AMPingViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 @property (weak) IBOutlet NSTableView *userTable;
+@property (unsafe_unretained) IBOutlet NSTextView *outputTextView;
 
 @end

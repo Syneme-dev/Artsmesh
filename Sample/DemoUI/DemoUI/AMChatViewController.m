@@ -13,6 +13,12 @@
 #import "AMNotificationManager/AMNotificationManager.h"
 
 
+@interface AMChatViewController ()
+
+- (void)showChatRecord:(NSDictionary *)record;
+
+@end
+
 @implementation AMChatViewController
 {
     GCDAsyncUdpSocket *_socket;
@@ -55,7 +61,12 @@
 -(void)NewUserJoined:(NSNotificationCenter*) notification
 {
     NSLog(@"new user joined");
-    
+    NSDictionary *record = @{
+        @"sender"  : @"SYSTEM",
+        @"message" : @"WangHaiLei JOINED THE CONVERSATION",
+        @"time"    : [NSDate date]
+    };
+    [self showChatRecord:record];
 }
 
 - (IBAction)sendMsg:(id)sender
@@ -92,15 +103,19 @@
 
 }
 
+- (void)showChatRecord:(NSDictionary *)record
+{
+    [self willChangeValueForKey:@"chatRecords"];
+    [self.chatRecords addObject:record];
+    [self didChangeValueForKey:@"chatRecords"];
+    [self.tableView scrollToEndOfDocument:self];
+}
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
     NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [self willChangeValueForKey:@"chatRecords"];
-    [self.chatRecords addObject:chatRecord];
-    [self didChangeValueForKey:@"chatRecords"];
-    [self.tableView scrollToEndOfDocument:self];
+    [self showChatRecord:chatRecord];
 }
 @end

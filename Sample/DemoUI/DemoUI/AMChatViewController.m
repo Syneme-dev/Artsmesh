@@ -63,8 +63,9 @@
     NSLog(@"new user joined");
     NSDictionary *record = @{
         @"sender"  : @"SYSTEM",
-        @"message" : @"WangHaiLei JOINED THE CONVERSATION",
-        @"time"    : [NSDate date]
+        @"message" : [NSString stringWithFormat:@"%@ JOINED THE CONVERSATION",
+                      notification.userInfo[@"username"]],
+        @"time"    : notification.userInfo[@"time"]
     };
     [self showChatRecord:record];
 }

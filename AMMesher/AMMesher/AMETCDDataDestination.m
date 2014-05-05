@@ -305,7 +305,7 @@
                         
                         NSDictionary *params = @{
                                                  @"time"      : [NSDate date],
-                                                 @"username"  : newUser.uniqueName,
+                                                 @"username"  : newUser.nodeName,
                                                  };
                         
                         AMNotificationManager* notificationManager = [AMNotificationManager defaultShared];

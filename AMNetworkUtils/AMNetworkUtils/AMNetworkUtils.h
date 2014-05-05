@@ -14,8 +14,10 @@
 
 + (BOOL)isValidIpv6:(NSString *)ip;
 
+//return the first ipv4 address
 +(NSString*)getHostIpv4Addr;
 
+//return the first ipv6 address
 +(NSString*)getHostIpv6Addr;
 
 +(NSString*)getHostName;

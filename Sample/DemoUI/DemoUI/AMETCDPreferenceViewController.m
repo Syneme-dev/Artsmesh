@@ -48,10 +48,25 @@
     [self.tabs selectTabViewItemAtIndex:2];
 }
 
-- (IBAction)privateIpSelected:(id)sender {
+- (IBAction)privateIpSelected:(id)sender{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
     [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+}
+
+- (IBAction)useIpv6Checked:(id)sender
+{
+    NSButton* checkbtn = sender;
+    switch (checkbtn.state)
+    {
+        case 0:
+            [self loadIpv4];
+            break;
+            
+        default:
+            [self loadIpv6];
+            break;
+    }
 }
 
 - (IBAction)onGeneralClick:(id)sender {
@@ -81,13 +96,11 @@
 
 }
 
--(void)loadSystemInfo
+-(void)loadIpv4
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* machineName = [AMNetworkUtils getHostName];
-    self.myMachineNameField.stringValue = machineName;
-    [defaults setObject:machineName forKey:Preference_Key_General_MachineName];
+    NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+    BOOL ipSelected = NO;
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
@@ -102,20 +115,78 @@
             }
             
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
-            [self.myPrivateIpPopup selectItemAtIndex:i];
-            
-            [defaults setObject:ipStr forKey:Preference_Key_General_PrivateIP];
+            if ([ipStr isEqualToString:oldIp])
+            {
+                [self.myPrivateIpPopup selectItemAtIndex:i];
+                ipSelected = YES;
+            }
         }
-        
-        else if([AMNetworkUtils isValidIpv6:ipStr])
+    }
+    
+    if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
+    {
+        [self.myPrivateIpPopup selectItemAtIndex:0];
+        NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
+        [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+    }
+}
+
+-(void) loadIpv6
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+    BOOL ipSelected = NO;
+    
+    [self.myPrivateIpPopup removeAllItems];
+    NSArray* addresses = [NSHost currentHost].addresses;
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if([AMNetworkUtils isValidIpv6:ipStr])
         {
             if ([ipStr hasPrefix:@"::"])
             {
                 continue;
             }
             
+            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+            ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
+            
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
+            
+            if ([ipStr isEqualToString:oldIp])
+            {
+                [self.myPrivateIpPopup selectItemAtIndex:i];
+                ipSelected = YES;
+            }
         }
+    }
+    
+    if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
+    {
+        [self.myPrivateIpPopup selectItemAtIndex:0];
+        NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
+        [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+    }
+
+}
+
+-(void)loadSystemInfo
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL useIpv6 = [defaults boolForKey:Preference_Key_General_UseIpv6];
+    
+    NSString* machineName = [AMNetworkUtils getHostName];
+    self.myMachineNameField.stringValue = machineName;
+    [defaults setObject:machineName forKey:Preference_Key_General_MachineName];
+    
+    if (useIpv6)
+    {
+        [self loadIpv6];
+    }
+    else
+    {
+        [self loadIpv4];
     }
 }
 

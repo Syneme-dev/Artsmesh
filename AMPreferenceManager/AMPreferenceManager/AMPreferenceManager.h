@@ -13,7 +13,7 @@
 #define Preference_Key_General_PublicIP             @"Preference_Key_General_PublicIP"
 #define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
 #define Preference_Key_General_ControlPort          @"Preference_Key_General_ControlPort"
-#define Preference
+#define Preference_Key_General_UseIpv6              @"Preference_Key_General_UseIpv6"
 
 
 //ETCD
@@ -43,6 +43,7 @@
 #define Preference_General_PublicIP         @"127.0.0.1"
 #define Preference_General_ChatPort         @"9033"
 #define Preference_General_ControlPort      @"9357"
+
 
 
 #define Preference_ETCD_ServerPort          @"17001"

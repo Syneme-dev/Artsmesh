@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMPingViewController : NSViewController
+@interface AMPingViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@property (weak) IBOutlet NSTableView *userTable;
 
 @end

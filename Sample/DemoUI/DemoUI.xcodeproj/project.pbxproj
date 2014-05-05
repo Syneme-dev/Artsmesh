@@ -93,6 +93,7 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
+		D4ACE8641917627C004A907D /* AMPingUserTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE8631917627C004A907D /* AMPingUserTableCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +253,8 @@
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
+		D4ACE8621917627C004A907D /* AMPingUserTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingUserTableCellView.h; sourceTree = "<group>"; };
+		D4ACE8631917627C004A907D /* AMPingUserTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingUserTableCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +331,8 @@
 				26DA41B91909E79200DC0DCC /* AMUserGroupOutlineView.m */,
 				26DA41BB1909E7A600DC0DCC /* AMUserGroupTableCellView.h */,
 				26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */,
+				D4ACE8621917627C004A907D /* AMPingUserTableCellView.h */,
+				D4ACE8631917627C004A907D /* AMPingUserTableCellView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26DA41BA1909E79200DC0DCC /* AMUserGroupOutlineView.m in Sources */,
+				D4ACE8641917627C004A907D /* AMPingUserTableCellView.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,

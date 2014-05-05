@@ -298,14 +298,18 @@
                 if (shouldAddUser)
                 {
                     [userIntoGroup.children addObject:newUser];
-                    
-                    
+    
                     AMMesher* mesher = [AMMesher sharedAMMesher];
-                    
                     if ([userIntoGroup.uniqueName isEqualToString:mesher.myGroupName])
                     {
+                        
+                        NSDictionary *params = @{
+                                                 @"time"      : [NSDate date],
+                                                 @"username"  : newUser.uniqueName,
+                                                 };
+                        
                         AMNotificationManager* notificationManager = [AMNotificationManager defaultShared];
-                        [notificationManager postMessage:nil withTypeName:AMN_NEW_USER_JOINED source:nil];
+                        [notificationManager postMessage:params withTypeName:AMN_NEW_USER_JOINED source:nil];
                     }
                 }
                 

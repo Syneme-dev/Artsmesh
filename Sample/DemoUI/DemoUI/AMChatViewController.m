@@ -58,7 +58,7 @@
     return self;
 }
 
--(void)NewUserJoined:(NSNotificationCenter*) notification
+-(void)NewUserJoined:(NSNotification*) notification
 {
     NSLog(@"new user joined");
     NSDictionary *record = @{

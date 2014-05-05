@@ -25,6 +25,7 @@
 #import "AMUserGroupViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
 #import "AMChatViewController.h"
+#import "AMPingViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -55,6 +56,7 @@
 //    AMPanelViewController *groupsPanelController;
 //    AMPanelViewController *socialPanelController;
     AMChatViewController *chatViewController;
+    AMPingViewController *pingViewController;
 //    AMPanelViewController *chatPanelController;
     NSMutableDictionary *panelControllers;
     float containerWidth;
@@ -105,6 +107,7 @@
     UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
     +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
     [self loadChatPanel];
+    [self loadPingPanel];
     
     //Note:using the following code to render FOAF panel.
     [self loadFOAFPanel];
@@ -198,6 +201,24 @@
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
      [panelControllers setObject:panelViewController forKey:@"CHAT"];
 }
+
+-(void)loadPingPanel{
+    AMPanelViewController *panelViewController  = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [_containerView addSubview:panelViewController.view];
+    [panelViewController setTitle:@"PING"];
+    panelViewController.view.frame = NSMakeRect(
+                                                UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*2+UI_panelSpacing,
+                                                UI_panelPaddingBottom, 600.0f, 720.0f);
+    
+    pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
+    pingViewController.view.frame = NSMakeRect(0, 100, 600, 600);
+    [panelViewController.view addSubview:pingViewController.view];
+    
+    containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
+    [panelControllers setObject:panelViewController forKey:@"PING"];
+}
+
+
 
 - (void)loadUserPanel {
     float panelHeight=300.0f;

@@ -91,6 +91,8 @@
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
+		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
+		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +249,9 @@
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
+		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
+		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
+		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +293,7 @@
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
 				26E1E6A019023496000BF14C /* AMChatView.xib */,
+				D4ACE85D19175D09004A907D /* AMPingView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -309,6 +315,8 @@
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
 				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
 				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
+				D4ACE85F19175DC8004A907D /* AMPingViewController.h */,
+				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -608,6 +616,7 @@
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
 				AF74054818F7D93200B3C1DF /* Favorite.png in Resources */,
+				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
 				AFB34F8D190A35BF00092E33 /* Server_syphon.png in Resources */,
 				AFB34F84190A35BF00092E33 /* panel_close.png in Resources */,
@@ -673,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26DA41BA1909E79200DC0DCC /* AMUserGroupOutlineView.m in Sources */,

@@ -192,7 +192,7 @@
                                                 UI_panelPaddingBottom, 600.0f, 720.0f);
     
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
-    chatViewController.view.frame = NSMakeRect(0, 400, 600, 300);
+    chatViewController.view.frame = NSMakeRect(0, 100, 600, 600);
     [panelViewController.view addSubview:chatViewController.view];
     
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;

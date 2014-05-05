@@ -101,6 +101,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
     BOOL ipSelected = NO;
+    int popupIndex = 0;
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
@@ -117,9 +118,11 @@
             [self.myPrivateIpPopup addItemWithTitle:ipStr];
             if ([ipStr isEqualToString:oldIp])
             {
-                [self.myPrivateIpPopup selectItemAtIndex:i];
+                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
                 ipSelected = YES;
             }
+            
+            popupIndex++;
         }
     }
     
@@ -136,6 +139,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
     BOOL ipSelected = NO;
+    int popupIndex = 0;
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
@@ -156,9 +160,10 @@
             
             if ([ipStr isEqualToString:oldIp])
             {
-                [self.myPrivateIpPopup selectItemAtIndex:i];
+                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
                 ipSelected = YES;
             }
+            popupIndex ++;
         }
     }
     

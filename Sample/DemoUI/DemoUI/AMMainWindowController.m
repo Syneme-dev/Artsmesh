@@ -161,7 +161,8 @@
 
 - (void)loadGroupsPanel {
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
+   // panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
+    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
     [panelViewController.view addSubview:_userGroupViewController.view];
@@ -225,6 +226,10 @@
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
                                                 panelHeight+UI_pixelHeightAdjustment,  UI_defaultPanelWidth, panelHeight);
+    
+//  the following code for iMac
+//    panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
+//                                                  panelHeight - UI_panelTitlebarHeight,  UI_defaultPanelWidth, panelHeight);
     [_containerView addSubview:panelViewController.view];
     [panelViewController setTitle:@"USER"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];

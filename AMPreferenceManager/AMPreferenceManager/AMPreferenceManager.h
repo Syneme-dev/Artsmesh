@@ -36,6 +36,10 @@
 #define Preference_Key_User_Status              @"Preference_Key_User_Status"
 #define Preference_Key_User_Project             @"Preference_Key_User_Project"
 
+//StatusNest
+#define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
+#define Preference_Key_StatusNet_UserName       @"Preference_Key_StatusNet_UserName"
+#define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
 //Default Value
 #define Preference_General_MachineName      @"MyComputer"

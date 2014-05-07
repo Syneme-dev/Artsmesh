@@ -13,6 +13,7 @@
                 <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
                 <outlet property="myPrivateIpPopup" destination="6jJ-Sr-xt6" id="Baf-8c-k7w"/>
+                <outlet property="statusNetPostTestResult" destination="dlL-IG-Qwh" id="CEA-pF-YkR"/>
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
                 <outlet property="useIpv6Button" destination="azm-bA-5Wc" id="eoO-Um-nLy"/>
@@ -32,12 +33,11 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
-                            <view key="view" ambiguous="YES" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                            <view key="view" id="Mp1-oa-ElH">
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="0.0" y="-20" width="600" height="320"/>
+                                        <rect key="frame" x="0.0" y="-320" width="600" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50L-fF-Ba4">
@@ -353,7 +353,7 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
-                            <view key="view" id="343-FY-LyZ">
+                            <view key="view" ambiguous="YES" id="343-FY-LyZ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -381,6 +381,9 @@
                                                         <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                                                     </allowedInputSourceLocales>
                                                 </secureTextFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_StatusNet_Password" id="dLJ-jK-vzK"/>
+                                                </connections>
                                             </secureTextField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeO-DS-oBV">
                                                 <rect key="frame" x="87" y="220" width="56" height="17"/>
@@ -407,6 +410,9 @@
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="statusNetTest:" target="-2" id="YL5-Hn-hRZ"/>
+                                                </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-IG-Qwh">
                                                 <rect key="frame" x="266" y="119" width="244" height="17"/>
@@ -425,6 +431,9 @@
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_StatusNet_UserName" id="8OT-g8-Peu"/>
+                                                </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-lY-JpS">
                                                 <rect key="frame" x="159" y="258" width="349" height="22"/>
@@ -434,6 +443,9 @@
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_StatusNet_URL" id="wIr-ia-4Bp"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </customView>

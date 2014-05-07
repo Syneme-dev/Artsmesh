@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
+		2624CABD191A33FA007EED09 /* AMStatusNetModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8B18E91D7100553924 /* etcd in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
@@ -151,6 +152,7 @@
 
 /* Begin PBXFileReference section */
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
+		2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMStatusNetModule.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMStatusNetModule.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8A18E91D7100553924 /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2624CABD191A33FA007EED09 /* AMStatusNetModule.framework in Frameworks */,
 				AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */,
 				D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */,
 				AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */,
@@ -372,6 +375,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */,
 				AF9205411910B42D0051BE63 /* UIFramework.framework */,
 				D432037B1901142E009BDE67 /* AMNetworkUtils.framework */,
 				26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */,
@@ -844,6 +848,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -860,6 +865,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

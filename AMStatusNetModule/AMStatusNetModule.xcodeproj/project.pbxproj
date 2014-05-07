@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2624CA91191A2D94007EED09 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2624CA90191A2D94007EED09 /* Cocoa.framework */; };
+		2624CA9B191A2D94007EED09 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2624CA99191A2D94007EED09 /* InfoPlist.strings */; };
+		2624CA9F191A2D94007EED09 /* AMStatusNetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 2624CA9E191A2D94007EED09 /* AMStatusNetModule.m */; };
+		2624CABB191A3383007EED09 /* AMStatusNetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 2624CA9D191A2D94007EED09 /* AMStatusNetModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2624CA8D191A2D94007EED09 /* AMStatusNetModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMStatusNetModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2624CA90191A2D94007EED09 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2624CA93191A2D94007EED09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2624CA94191A2D94007EED09 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2624CA95191A2D94007EED09 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2624CA98191A2D94007EED09 /* AMStatusNetModule-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMStatusNetModule-Info.plist"; sourceTree = "<group>"; };
+		2624CA9A191A2D94007EED09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2624CA9C191A2D94007EED09 /* AMStatusNetModule-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMStatusNetModule-Prefix.pch"; sourceTree = "<group>"; };
+		2624CA9D191A2D94007EED09 /* AMStatusNetModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMStatusNetModule.h; sourceTree = "<group>"; };
+		2624CA9E191A2D94007EED09 /* AMStatusNetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetModule.m; sourceTree = "<group>"; };
+		2624CAA5191A2D94007EED09 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2624CA89191A2D94007EED09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2624CA91191A2D94007EED09 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2624CA83191A2D94007EED09 = {
+			isa = PBXGroup;
+			children = (
+				2624CA96191A2D94007EED09 /* AMStatusNetModule */,
+				2624CA8F191A2D94007EED09 /* Frameworks */,
+				2624CA8E191A2D94007EED09 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2624CA8E191A2D94007EED09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2624CA8D191A2D94007EED09 /* AMStatusNetModule.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2624CA8F191A2D94007EED09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2624CA90191A2D94007EED09 /* Cocoa.framework */,
+				2624CAA5191A2D94007EED09 /* XCTest.framework */,
+				2624CA92191A2D94007EED09 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2624CA92191A2D94007EED09 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2624CA93191A2D94007EED09 /* Foundation.framework */,
+				2624CA94191A2D94007EED09 /* CoreData.framework */,
+				2624CA95191A2D94007EED09 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2624CA96191A2D94007EED09 /* AMStatusNetModule */ = {
+			isa = PBXGroup;
+			children = (
+				2624CA9D191A2D94007EED09 /* AMStatusNetModule.h */,
+				2624CA9E191A2D94007EED09 /* AMStatusNetModule.m */,
+				2624CA97191A2D94007EED09 /* Supporting Files */,
+			);
+			path = AMStatusNetModule;
+			sourceTree = "<group>";
+		};
+		2624CA97191A2D94007EED09 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2624CA98191A2D94007EED09 /* AMStatusNetModule-Info.plist */,
+				2624CA99191A2D94007EED09 /* InfoPlist.strings */,
+				2624CA9C191A2D94007EED09 /* AMStatusNetModule-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2624CA8A191A2D94007EED09 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2624CABB191A3383007EED09 /* AMStatusNetModule.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2624CA8C191A2D94007EED09 /* AMStatusNetModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2624CAB5191A2D94007EED09 /* Build configuration list for PBXNativeTarget "AMStatusNetModule" */;
+			buildPhases = (
+				2624CA88191A2D94007EED09 /* Sources */,
+				2624CA89191A2D94007EED09 /* Frameworks */,
+				2624CA8A191A2D94007EED09 /* Headers */,
+				2624CA8B191A2D94007EED09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMStatusNetModule;
+			productName = AMStatusNetModule;
+			productReference = 2624CA8D191A2D94007EED09 /* AMStatusNetModule.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2624CA84191A2D94007EED09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = AM;
+			};
+			buildConfigurationList = 2624CA87191A2D94007EED09 /* Build configuration list for PBXProject "AMStatusNetModule" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2624CA83191A2D94007EED09;
+			productRefGroup = 2624CA8E191A2D94007EED09 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2624CA8C191A2D94007EED09 /* AMStatusNetModule */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2624CA8B191A2D94007EED09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2624CA9B191A2D94007EED09 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2624CA88191A2D94007EED09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2624CA9F191A2D94007EED09 /* AMStatusNetModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2624CA99191A2D94007EED09 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2624CA9A191A2D94007EED09 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2624CAB3191A2D94007EED09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2624CAB4191A2D94007EED09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2624CAB6191A2D94007EED09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNetModule/AMStatusNetModule-Prefix.pch";
+				INFOPLIST_FILE = "AMStatusNetModule/AMStatusNetModule-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		2624CAB7191A2D94007EED09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNetModule/AMStatusNetModule-Prefix.pch";
+				INFOPLIST_FILE = "AMStatusNetModule/AMStatusNetModule-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2624CA87191A2D94007EED09 /* Build configuration list for PBXProject "AMStatusNetModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2624CAB3191A2D94007EED09 /* Debug */,
+				2624CAB4191A2D94007EED09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2624CAB5191A2D94007EED09 /* Build configuration list for PBXNativeTarget "AMStatusNetModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2624CAB6191A2D94007EED09 /* Debug */,
+				2624CAB7191A2D94007EED09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2624CA84191A2D94007EED09 /* Project object */;
+}

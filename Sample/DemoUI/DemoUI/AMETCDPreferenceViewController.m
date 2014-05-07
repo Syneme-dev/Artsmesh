@@ -10,6 +10,7 @@
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMStatusNetModule/AMStatusNetModule.h"
 
 @interface AMETCDPreferenceViewController ()
 
@@ -71,6 +72,29 @@
             [self loadIpv6];
             break;
     }
+}
+
+- (IBAction)statusNetTest:(id)sender {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
+    
+    AMStatusNetModule* statusNetMod = [[AMStatusNetModule alloc] init];
+    BOOL res = [statusNetMod postMessageToStatusNet:@"This is a test message send from Artsmesh through API"
+                                   urlAddress:statusNetURL
+                                 withUserName:username
+                                 withPassword:password];
+    
+    if (res)
+    {
+        self.statusNetPostTestResult.stringValue = @"Post Succeeded!";
+    }
+    else
+    {
+        self.statusNetPostTestResult.stringValue = @"Post Failed!";
+    }
+    
 }
 
 - (IBAction)onGeneralClick:(id)sender {

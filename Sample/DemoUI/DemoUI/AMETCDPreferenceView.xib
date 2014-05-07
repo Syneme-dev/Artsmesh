@@ -136,12 +136,12 @@
                                             <popUpButton focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
                                                 <rect key="frame" x="133" y="193" width="400" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="kXj-kD-xSH">
+                                                <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" selectedItem="oJk-sL-JYx" id="kXj-kD-xSH">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" title="OtherViews" id="NuT-og-gxa">
                                                         <items>
-                                                            <menuItem title="Item 1" id="oJk-sL-JYx"/>
+                                                            <menuItem title="Item 1" state="on" id="oJk-sL-JYx"/>
                                                             <menuItem title="Item 2" id="DaG-8A-meK"/>
                                                             <menuItem title="Item 3" id="GBT-Jz-5DZ"/>
                                                         </items>

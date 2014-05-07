@@ -45,6 +45,9 @@ static void *PingKVOContext;
               forKeyPath:@"usergroupDest.userGroups"
                  options:0
                  context:&PingKVOContext];
+    
+    NSColor *color = [NSColor whiteColor];
+    [self.outputTextView setTextColor:color];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

@@ -36,6 +36,10 @@
     [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_b7b7b7];
     [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_b7b7b7];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_b7b7b7];
+    
+    [AMButtonHandler changeTabTextColor:self.useIpv6Button toColor:UI_Color_b7b7b7];
+    
+    [self resetPopupItems];
 }
 
 
@@ -136,6 +140,9 @@
         NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
         [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
     }
+    
+    [self resetPopupItems];
+
 }
 
 -(void) loadIpv6
@@ -177,7 +184,31 @@
         NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
         [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
     }
+    
+    [self resetPopupItems];
+}
 
+-(void)resetPopupItems
+{
+    //self.myPrivateIpPopup
+    
+    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
+    int i;
+    NSDictionary *attributes = [NSDictionary
+                                dictionaryWithObjectsAndKeys:
+                                [NSColor whiteColor], NSForegroundColorAttributeName,
+                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
+                                NSFontAttributeName, nil];
+    
+    for (i = 0; i < [itemArray count]; i++) {
+        NSMenuItem *item = [itemArray objectAtIndex:i];
+        
+        NSAttributedString *as = [[NSAttributedString alloc]
+                                  initWithString:[item title]
+                                  attributes:attributes];
+        
+        [item setAttributedTitle:as];
+    }
 }
 
 -(void)loadSystemInfo

@@ -13,6 +13,7 @@
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;
 @property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
+@property (weak) IBOutlet NSButton *useIpv6Button;
 
 @property (strong) IBOutlet NSButton *etcdTabButton;
 @property (strong) IBOutlet NSButton *generalTabButton;

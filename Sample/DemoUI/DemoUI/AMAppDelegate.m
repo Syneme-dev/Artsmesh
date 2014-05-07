@@ -25,9 +25,7 @@
 
 static NSMutableDictionary *allPlugins = nil;
 
-@implementation AMAppDelegate {
-    AMMesher *_globalMesher;
-}
+@implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];

@@ -26,6 +26,7 @@
 - (IBAction)onETCDTabClick:(id)sender;
 - (IBAction)onJackServerTabClick:(id)sender;
 - (IBAction)onGeneralClick:(id)sender;
+- (IBAction)onStatusNetClick:(id)sender;
 
 - (IBAction)privateIpSelected:(id)sender;
 - (IBAction)useIpv6Checked:(id)sender;

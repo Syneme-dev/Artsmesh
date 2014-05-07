@@ -73,6 +73,10 @@
       [self.tabs selectTabViewItemWithIdentifier:@"0"];
 }
 
+- (IBAction)onStatusNetClick:(id)sender {
+     [self.tabs selectTabViewItemWithIdentifier:@"6"];
+}
+
 -(void)customPrefrence
 {
     

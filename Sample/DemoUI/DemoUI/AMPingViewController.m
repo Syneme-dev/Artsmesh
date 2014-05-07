@@ -12,6 +12,13 @@
 #import "AMMesher/AMUser.h"
 
 @interface AMPingViewController ()
+{
+    NSTask *_task;
+    NSFileHandle *_pipeIn;
+}
+
+- (void)runTask:(NSString *)command;
+- (void)cancelTask;
 
 @end
 
@@ -60,25 +67,51 @@
     {
         AMUser* user = [_myGroupUsers objectAtIndex:self.userTable.selectedRow];
         NSString* ip = user.publicIp;
-        
-        
-        NSTask *task = [[NSTask alloc] init];
-       // task.launchPath = @"/bin/bash";
-        task.launchPath = @"/sbin/ping";
-        //NSString *command = [NSString stringWithFormat:@"ping %@", ip];
-        //task.arguments = @[@"-c", command];
-        task.arguments = @[ip];
-        
-        NSPipe *pipe = [NSPipe pipe];
-        task.standardOutput = pipe;
-        task.standardError = pipe;
-        NSFileHandle *pipeToRead = [pipe fileHandleForReading];
-        [task launch];
-        
-        NSString *output = [[NSString alloc] initWithData: [pipeToRead readDataToEndOfFile]
-                                                 encoding: NSUTF8StringEncoding];
-        self.outputTextView.string = output;
+        NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+        [self runTask:pingCommand];
     }
+}
+
+- (void)cancelTask
+{
+    if (_task) {
+        @try {
+            _pipeIn.readabilityHandler = nil;
+            [_task interrupt];
+        }
+        @catch (NSException *exception) {
+            // ignore
+        }
+        @finally {
+            _task = nil;
+            _pipeIn = nil;
+        }
+    }
+}
+
+- (void)runTask:(NSString *)command
+{
+    [self cancelTask];
+    self.outputTextView.string = @"";
+    
+    _task = [[NSTask alloc] init];
+    _task.launchPath = @"/bin/bash";
+    _task.arguments = @[@"-c", command];
+    
+    NSPipe *pipe = [NSPipe pipe];
+    _task.standardOutput = pipe;
+    _task.standardError = pipe;
+    [_task launch];
+    
+    _pipeIn = [pipe fileHandleForReading];
+    NSMutableString *content = [[NSMutableString alloc] init];
+    AMPingViewController * __weak weakSelf = self;
+    _pipeIn.readabilityHandler = ^ (NSFileHandle *fh) {
+        NSData *data = [fh availableData];
+        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        AMPingViewController *strongSelf = weakSelf;
+        strongSelf.outputTextView.string = content;
+    };
 }
 
 @end

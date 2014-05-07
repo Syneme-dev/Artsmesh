@@ -42,7 +42,7 @@ static void *PingKVOContext;
 - (void)awakeFromNib
 {
     [_mesher addObserver:self
-              forKeyPath:@"myGroupUsers"
+              forKeyPath:@"usergroupDest.userGroups"
                  options:0
                  context:&PingKVOContext];
 }

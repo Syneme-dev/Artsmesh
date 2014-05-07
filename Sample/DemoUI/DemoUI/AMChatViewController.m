@@ -11,6 +11,7 @@
 #import "AMMesher/AMUser.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNotificationManager/AMNotificationManager.h"
+#import "AMStatusNetModule/AMStatusNetModule.h"
 
 
 @interface AMChatViewController ()
@@ -68,6 +69,58 @@
         @"time"    : notification.userInfo[@"time"]
     };
     [self showChatRecord:record];
+}
+
+- (IBAction)postChat:(id)sender
+{
+    if ([sender isKindOfClass:[NSButton class]])
+    {
+        NSButton* clickBtn = sender;
+        if ([clickBtn.superview isKindOfClass:[NSTableCellView class]])
+        {
+            NSString* senderName;
+            NSString* sendTime;
+            NSString* message;
+            
+            NSTableCellView* tableCellView = clickBtn.superview;
+            for (NSView* view in tableCellView.subviews)
+            {
+                if ([view isKindOfClass:[NSTextField class]])
+                {
+                    NSTextField* tf = view;
+                    switch (tf.tag)
+                    {
+                        case 0:
+                            senderName = tf.stringValue;
+                            break;
+                        case 1:
+                            sendTime = tf.stringValue;
+                            break;
+                        case 2:
+                            message = tf.stringValue;
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+            NSString* status = [NSString stringWithFormat:@"%@ said: %@ at %@ in group", senderName, message, sendTime];
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            NSString* statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
+            NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+            NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
+            
+            AMStatusNetModule* statusNetMod = [[AMStatusNetModule alloc] init];
+            BOOL res = [statusNetMod postMessageToStatusNet:status
+                                                 urlAddress:statusNetURL
+                                               withUserName:username
+                                               withPassword:password];
+            if (res)
+            {
+                [clickBtn setEnabled:NO];;
+            }
+        }
+    }
 }
 
 - (IBAction)sendMsg:(id)sender

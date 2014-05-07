@@ -16,7 +16,7 @@
 @property (weak) IBOutlet NSTextField *chatMsgField;
 @property (weak) IBOutlet NSTableView *tableView;
 
-
+- (IBAction)postChat:(id)sender;
 - (IBAction)sendMsg:(id)sender;
 
 @end

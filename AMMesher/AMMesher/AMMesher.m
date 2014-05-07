@@ -112,7 +112,8 @@
 
 -(NSArray*) myGroupUsers
 {
-    return [self.usergroupDest getGroupUsers:self.myGroupName];
+    NSArray *users = [self.usergroupDest getGroupUsers:self.myGroupName];
+    return users ? users : @[];
 }
 
 -(void)startLoalMesher

@@ -11,10 +11,14 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
 
+static void *PingKVOContext;
+
 @interface AMPingViewController ()
 {
     NSTask *_task;
     NSFileHandle *_pipeIn;
+    AMMesher *_mesher;
+    NSArray *_myGroupUsers;
 }
 
 - (void)runTask:(NSString *)command;
@@ -23,53 +27,62 @@
 @end
 
 @implementation AMPingViewController
-{
-    NSTimer* timer;
-    NSArray* _myGroupUsers;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+        _mesher = [AMMesher sharedAMMesher];
+        _myGroupUsers = _mesher.myGroupUsers;
     }
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(reloadTable) userInfo:nil repeats:NO];
     
     return self;
 }
 
--(void)reloadTable
+- (void)awakeFromNib
 {
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    _myGroupUsers = mesher.myGroupUsers;
+    [_mesher addObserver:self
+              forKeyPath:@"myGroupUsers"
+                 options:0
+                 context:&PingKVOContext];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (context != &PingKVOContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+    
+    _myGroupUsers = _mesher.myGroupUsers;
     [self.userTable reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    return [mesher.myGroupUsers count];
+    return [_myGroupUsers count];
 }
 
 - (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 
     NSTableCellView *result = [tableView makeViewWithIdentifier:[tableColumn identifier] owner:nil];
     
-    AMUser* user = [_myGroupUsers objectAtIndex:row];
+    AMUser* user = _myGroupUsers[row];
     [result.textField setStringValue:user.nodeName];
     return result;
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    if(_myGroupUsers)
-    {
-        AMUser* user = [_myGroupUsers objectAtIndex:self.userTable.selectedRow];
-        NSString* ip = user.publicIp;
-        NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@", ip];
-        [self runTask:pingCommand];
-    }
+    AMUser* user = _myGroupUsers[self.userTable.selectedRow];
+    NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
+                                user.publicIp];
+    [self runTask:pingCommand];
 }
 
 - (void)cancelTask

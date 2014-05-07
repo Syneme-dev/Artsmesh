@@ -41,11 +41,11 @@
 
 
 - (IBAction)onETCDTabClick:(id)sender {
-    [self.tabs selectTabViewItemAtIndex:1];
+    [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
 
 - (IBAction)onJackServerTabClick:(id)sender {
-    [self.tabs selectTabViewItemAtIndex:2];
+    [self.tabs selectTabViewItemWithIdentifier:@"2"];
 }
 
 - (IBAction)privateIpSelected:(id)sender{
@@ -70,7 +70,7 @@
 }
 
 - (IBAction)onGeneralClick:(id)sender {
-      [self.tabs selectTabViewItemAtIndex:0];
+      [self.tabs selectTabViewItemWithIdentifier:@"0"];
 }
 
 -(void)customPrefrence

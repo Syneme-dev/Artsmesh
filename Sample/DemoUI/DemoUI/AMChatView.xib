@@ -45,11 +45,11 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView id="nkY-vF-pq6">
+                                            <tableCellView id="nkY-vF-pq6" customClass="AMChatTableCellView">
                                                 <rect key="frame" x="1" y="1" width="531" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-wF-DBE">
+                                                    <textField identifier="sender" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-wF-DBE">
                                                         <rect key="frame" x="1" y="62" width="379" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sender" id="aMI-1R-Kas">
@@ -61,7 +61,7 @@
                                                             <binding destination="nkY-vF-pq6" name="value" keyPath="objectValue.sender" id="sXm-90-xS7"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-yM-cWZ">
+                                                    <textField identifier="message" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-yM-cWZ">
                                                         <rect key="frame" x="3" y="2" width="377" height="52"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="ync-DS-aRJ">
@@ -73,7 +73,7 @@
                                                             <binding destination="nkY-vF-pq6" name="value" keyPath="objectValue.message" id="CgN-ne-fE1"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-q5-i1h">
+                                                    <textField identifier="sendTime" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-q5-i1h">
                                                         <rect key="frame" x="448" y="70" width="81" height="23"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="10:38 AM" id="Zuj-c4-Alu">
@@ -86,7 +86,7 @@
                                                             <binding destination="nkY-vF-pq6" name="value" keyPath="objectValue.time" id="9yS-T6-QIu"/>
                                                         </connections>
                                                     </textField>
-                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-9z-gft">
+                                                    <button identifier="post" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-9z-gft">
                                                         <rect key="frame" x="486" y="9" width="41" height="46"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" title="btn" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cgr-fC-3KC">

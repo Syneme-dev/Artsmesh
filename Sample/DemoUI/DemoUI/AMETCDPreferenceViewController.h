@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
 @property (weak) IBOutlet NSButton *useIpv6Button;
 @property (weak) IBOutlet NSTextField *statusNetPostTestResult;
+@property (weak) IBOutlet NSButton *testStatusNetPost;
 
 @property (strong) IBOutlet NSButton *etcdTabButton;
 @property (strong) IBOutlet NSButton *generalTabButton;

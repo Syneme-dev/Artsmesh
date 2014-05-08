@@ -39,6 +39,7 @@
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_b7b7b7];
     
     [AMButtonHandler changeTabTextColor:self.useIpv6Button toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_b7b7b7];
     
     [self resetPopupItems];
 }

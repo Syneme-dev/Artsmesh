@@ -10,19 +10,18 @@
 #import "AMPingUserTableCellView.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
+#import "AMTaskLauncher/AMShellTask.h"
 
 static void *PingKVOContext;
 
 @interface AMPingViewController ()
 {
-    NSTask *_task;
-    NSFileHandle *_pipeIn;
+    AMShellTask *_task;
     AMMesher *_mesher;
     NSArray *_myGroupUsers;
 }
 
-- (void)runTask:(NSString *)command;
-- (void)cancelTask;
+- (void)runCommand:(NSString *)command;
 
 @end
 
@@ -85,44 +84,20 @@ static void *PingKVOContext;
     AMUser* user = _myGroupUsers[self.userTable.selectedRow];
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 user.publicIp];
-    [self runTask:pingCommand];
+    [self runCommand:pingCommand];
 }
 
-- (void)cancelTask
+- (void)runCommand:(NSString *)command
 {
-    if (_task) {
-        @try {
-            _pipeIn.readabilityHandler = nil;
-            [_task interrupt];
-        }
-        @catch (NSException *exception) {
-            // ignore
-        }
-        @finally {
-            _task = nil;
-            _pipeIn = nil;
-        }
-    }
-}
-
-- (void)runTask:(NSString *)command
-{
-    [self cancelTask];
+    if (_task)
+        [_task cancel];
     self.outputTextView.string = @"";
-    
-    _task = [[NSTask alloc] init];
-    _task.launchPath = @"/bin/bash";
-    _task.arguments = @[@"-c", command];
-    
-    NSPipe *pipe = [NSPipe pipe];
-    _task.standardOutput = pipe;
-    _task.standardError = pipe;
+    _task = [[AMShellTask alloc] initWithCommand:command];
     [_task launch];
-    
-    _pipeIn = [pipe fileHandleForReading];
+    NSFileHandle *inputStream = [_task fileHandlerForReading];
     NSMutableString *content = [[NSMutableString alloc] init];
     AMPingViewController * __weak weakSelf = self;
-    _pipeIn.readabilityHandler = ^ (NSFileHandle *fh) {
+    inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
         NSData *data = [fh availableData];
         [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
         AMPingViewController *strongSelf = weakSelf;

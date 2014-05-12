@@ -15,6 +15,7 @@
 		37FCB9C718710F2A00C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9C518710F2A00C1FD1B /* InfoPlist.strings */; };
 		37FCB9C918710F2A00C1FD1B /* AMTaskLauncherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB9C818710F2A00C1FD1B /* AMTaskLauncherTests.m */; };
 		CE153B03191E5C7200E53250 /* AMShellTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CE153B02191E5C7200E53250 /* AMShellTask.m */; };
+		CE4A728A192066D8007E0E96 /* AMShellTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CE153AFE191E5C2300E53250 /* AMShellTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4A728A192066D8007E0E96 /* AMShellTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

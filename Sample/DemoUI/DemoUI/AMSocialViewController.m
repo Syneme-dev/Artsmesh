@@ -26,7 +26,7 @@
 
 
 -(void)loadPage{
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost/index.php/main/login?fromMac=true"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://artsmesh.io/main/login?fromMac=true"];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:baseURL]];
 

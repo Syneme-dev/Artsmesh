@@ -41,6 +41,10 @@
     NSString* _maxNode;
     NSString* _controlPort;
     NSString* _chatPort;
+    
+    
+    NSTimer* _holePunchingTimer;
+    NSTimer* _chatPeerTimer;
 }
 
 +(id)sharedAMMesher

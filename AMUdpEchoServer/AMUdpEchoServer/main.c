@@ -50,6 +50,12 @@ void echomsg( int sd ) {
 /* server main routine */
 
 int main(int argc, char *argv[]) {
+    if(argc < 2)
+    {
+        printf("please use like: UdpEchoServer <port>");
+        return 0;
+    }
+    
     int ld;
     struct sockaddr_in skaddr;
     int length;

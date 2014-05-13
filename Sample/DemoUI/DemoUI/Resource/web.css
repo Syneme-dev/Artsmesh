@@ -6,7 +6,7 @@ display:none;
 display:none;
 }
 #content{
-width:300px !important;
+width:600px !important;
 }
 
 #aside_primary{
@@ -16,7 +16,7 @@ display:none;
 display:none;
 }
 #aside_primary_wrapper,#core,#wrap{
-width:300px !important;
+width:600px !important;
 }
 
 #content h1{

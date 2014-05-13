@@ -143,9 +143,9 @@
     float panelHeight=720.0f;
     panelViewController.view.frame = NSMakeRect(containerWidth,
                                                   self.window.frame.size.height-UI_topbarHeight-
-                                                  panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
+                                                  panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth*2, panelHeight);
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
-    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth, panelHeight-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
+    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelHeight-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [panelViewController.view addSubview:socialViewController.view];
     [panelViewController setTitle:@"SOCIAL"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];

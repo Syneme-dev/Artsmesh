@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
@@ -21,40 +21,18 @@
                     <rect key="frame" x="0.0" y="578" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">
                             <rect key="frame" x="10" y="2" width="180" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="176" id="wyr-qz-tC2"/>
+                            </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="title" id="cD7-bR-cVw">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="EmI-FD-sW7" userLabel="tearoff">
-                            <rect key="frame" x="455" y="3" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_tear" id="fg8-Rb-LMw"/>
-                        </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="veg-la-FBt" userLabel="settings">
-                            <rect key="frame" x="480" y="3" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_setting" id="br0-Vw-lhS"/>
-                        </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="axv-cy-elo" userLabel="duplicate">
-                            <rect key="frame" x="505" y="3" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_copy" id="qw3-ve-JJ9"/>
-                        </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="YhX-GV-jNT" userLabel="fullscreen">
-                            <rect key="frame" x="530" y="3" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_fullScreen" id="TPW-Ka-805"/>
-                        </imageView>
-                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="UA2-Yj-7zc" userLabel="maxsize">
-                            <rect key="frame" x="555" y="3" width="15" height="15"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="panel_extend" id="Gwd-Sy-m8g"/>
-                        </imageView>
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
                             <rect key="frame" x="580" y="2" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -62,29 +40,91 @@
                                 <constraint firstAttribute="width" constant="16" id="mbC-zq-fMQ"/>
                                 <constraint firstAttribute="height" constant="16" id="mfq-Uw-HWT"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_close" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
-                                <behavior key="behavior" lightByContents="YES"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_close" imagePosition="only" alignment="center" alternateImage="panel_close_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
                                 <action selector="closePanel:" target="-2" id="910-zG-81m"/>
                             </connections>
                         </button>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diy-MI-ZVa" userLabel="close">
+                            <rect key="frame" x="555" y="3" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="86O-dp-YtL"/>
+                                <constraint firstAttribute="height" constant="16" id="hdT-4v-8Hc"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_extend" imagePosition="only" alignment="center" alternateImage="panel_extend_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ulN-Zp-EUV">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="close">
+                            <rect key="frame" x="530" y="3" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="LXV-ht-Glr"/>
+                                <constraint firstAttribute="height" constant="16" id="eeV-YW-YAA"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_fullScreen" imagePosition="only" alignment="center" alternateImage="panel_fullScreen_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-Xz-G6O" userLabel="close">
+                            <rect key="frame" x="505" y="3" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="QOS-vJ-yE2"/>
+                                <constraint firstAttribute="width" constant="16" id="hmN-Qg-gAa"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_copy" imagePosition="only" alignment="center" alternateImage="panel_copy_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ETH-2v-v8R">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="close">
+                            <rect key="frame" x="480" y="3" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="6IB-zO-ZHV"/>
+                                <constraint firstAttribute="width" constant="16" id="WhD-gs-7Ag"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_setting" imagePosition="only" alignment="center" alternateImage="panel_setting_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="QyP-Ov-VrK">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W15-SQ-vxR" userLabel="close">
+                            <rect key="frame" x="455" y="3" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="Ltx-ur-kvI"/>
+                                <constraint firstAttribute="height" constant="16" id="e5O-As-6gv"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_tear" imagePosition="only" alignment="center" alternateImage="panel_tear_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="wy1-bq-6vy">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="UA2-Yj-7zc" firstAttribute="leading" secondItem="YhX-GV-jNT" secondAttribute="trailing" constant="10" id="8nL-DC-shj"/>
-                        <constraint firstItem="EmI-FD-sW7" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="94I-9x-gR5"/>
+                        <constraint firstAttribute="trailing" secondItem="W15-SQ-vxR" secondAttribute="trailing" constant="130" id="8ay-mo-jHV"/>
+                        <constraint firstItem="42T-8I-slY" firstAttribute="leading" secondItem="W15-SQ-vxR" secondAttribute="trailing" constant="10" symbolic="YES" id="BkE-wX-XV3"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="diy-MI-ZVa" secondAttribute="top" id="D8X-KD-Q4c"/>
                         <constraint firstAttribute="height" constant="20" id="Drv-GT-vZ1"/>
-                        <constraint firstItem="axv-cy-elo" firstAttribute="leading" secondItem="veg-la-FBt" secondAttribute="trailing" constant="10" id="J9j-qh-9fc"/>
-                        <constraint firstItem="YhX-GV-jNT" firstAttribute="leading" secondItem="axv-cy-elo" secondAttribute="trailing" constant="10" id="JYi-f4-RLj"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="42T-8I-slY" secondAttribute="top" id="Nqg-pH-RFK"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="centerY" secondItem="dZ9-KQ-hje" secondAttribute="centerY" id="OLc-B5-2uX"/>
                         <constraint firstItem="PFq-T7-YMG" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cBq-Mq-Dzy"/>
-                        <constraint firstItem="veg-la-FBt" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cmt-Nj-QY1"/>
                         <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="4" id="fUz-xV-zi7"/>
-                        <constraint firstItem="axv-cy-elo" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="lsE-Wd-fYa"/>
-                        <constraint firstItem="veg-la-FBt" firstAttribute="leading" secondItem="EmI-FD-sW7" secondAttribute="trailing" constant="10" id="mBY-ao-xzC"/>
-                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="UA2-Yj-7zc" secondAttribute="trailing" constant="10" id="mdf-6z-9D4"/>
-                        <constraint firstItem="UA2-Yj-7zc" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="tzg-Xl-d9Y"/>
-                        <constraint firstItem="YhX-GV-jNT" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="wAp-2p-rbg"/>
+                        <constraint firstItem="diy-MI-ZVa" firstAttribute="leading" secondItem="XMe-0f-woX" secondAttribute="trailing" constant="10" symbolic="YES" id="iuY-zd-Bov"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="PFq-T7-YMG" secondAttribute="top" id="pP3-kg-Hrm"/>
+                        <constraint firstItem="dZ9-KQ-hje" firstAttribute="leading" secondItem="fvD-YA-Ec9" secondAttribute="leading" constant="12" id="sO1-G2-RMk"/>
+                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="diy-MI-ZVa" secondAttribute="trailing" constant="10" symbolic="YES" id="sdK-C4-kXJ"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="OB6-Xz-G6O" secondAttribute="top" id="thS-ar-CBY"/>
+                        <constraint firstItem="OB6-Xz-G6O" firstAttribute="leading" secondItem="42T-8I-slY" secondAttribute="trailing" constant="10" symbolic="YES" id="vbd-Mw-da9"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="XMe-0f-woX" secondAttribute="top" id="xEW-Rr-TFp"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="vIZ-or-1gE" userLabel="LeftBottom" customClass="BlueBackgroundView">
@@ -117,10 +157,16 @@
     </objects>
     <resources>
         <image name="panel_close" width="15" height="15"/>
+        <image name="panel_close_h" width="15" height="15"/>
         <image name="panel_copy" width="15" height="15"/>
+        <image name="panel_copy_h" width="15" height="15"/>
         <image name="panel_extend" width="15" height="15"/>
+        <image name="panel_extend_h" width="15" height="15"/>
         <image name="panel_fullScreen" width="15" height="15"/>
+        <image name="panel_fullScreen_h" width="15" height="15"/>
         <image name="panel_setting" width="15" height="15"/>
+        <image name="panel_setting_h" width="15" height="15"/>
         <image name="panel_tear" width="15" height="15"/>
+        <image name="panel_tear_h" width="15" height="15"/>
     </resources>
 </document>

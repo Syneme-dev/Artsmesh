@@ -15,6 +15,7 @@
 #import "AMUser.h"
 #import "AMCommunicator.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMHolePunchingClient.h"
 
 
 @implementation AMMesher
@@ -22,6 +23,8 @@
     AMLeaderElecter* _elector;
     AMETCDDataSource* _dataSource;
     AMCommunicator* _communicator;
+    AMHolePunchingClient* _holePunchingClient;
+    
     NSTimer* _userTTL;
     
     NSString* _nickName;
@@ -41,6 +44,7 @@
     NSString* _maxNode;
     NSString* _controlPort;
     NSString* _chatPort;
+    NSString* _chatPortMap;
     
     
     NSTimer* _holePunchingTimer;
@@ -92,6 +96,11 @@
     return self;
 }
 
+-(NSString*)myUniqueName
+{
+    return [NSString stringWithFormat:@"%@@%@.%@", _nickName, _domain, _location];
+}
+
 -(void)getUserDefaults
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -118,6 +127,11 @@
 {
     NSArray *users = [self.usergroupDest getGroupUsers:self.myGroupName];
     return users ? users : @[];
+}
+
+-(AMHolePunchingClient*)holePunchingClient
+{
+    return _holePunchingClient;
 }
 
 -(void)startLoalMesher
@@ -228,6 +242,23 @@
         
         self.isOnline = YES;
     }
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    _chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    
+    _holePunchingClient = [[AMHolePunchingClient alloc] initWithPort:_chatPort
+                                                              server: @"123.124.145.254"
+                                                          serverPort:@"22250"];
+    
+    [_holePunchingClient addObserver:self forKeyPath:@"myPublicIp"
+                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                  context:nil];
+    
+    [_holePunchingClient addObserver:self forKeyPath:@"myChatPortMap"
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                             context:nil];
+    
+    [_holePunchingClient startHolePunching];
 }
 
 -(void)goOffline
@@ -417,42 +448,94 @@
                          change:(NSDictionary *)change
                         context:(void *)context
 {
-    if ([keyPath isEqualToString:@"state"])
+    if ([object isEqualTo:_elector])
     {
-        int oldState = [[change objectForKey:@"old"] intValue];
-        int newState = [[change objectForKey:@"new"] intValue];
-        
-        NSLog(@" old state is %d", oldState);
-        NSLog(@" new state is %d", newState);
-        
-        if(newState == 2)//Published
+        if ([keyPath isEqualToString:@"state"])
         {
-            self.isLeader = YES;
-            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+            int oldState = [[change objectForKey:@"old"] intValue];
+            int newState = [[change objectForKey:@"new"] intValue];
             
-            if (self.etcdState == 0)
+            NSLog(@" old state is %d", oldState);
+            NSLog(@" new state is %d", newState);
+            
+            if(newState == 2)//Published
             {
-                [self performSelectorOnMainThread:@selector(launchETCD)
-                                       withObject:nil waitUntilDone:NO];
+                self.isLeader = YES;
+                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                
+                if (self.etcdState == 0)
+                {
+                    [self performSelectorOnMainThread:@selector(launchETCD)
+                                           withObject:nil waitUntilDone:NO];
+                }
+            }
+            else if(newState == 4)//Joined
+            {
+                self.isLeader = NO;
+                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                
+                if(self.etcdState == 0)
+                {
+                    [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
+                }
             }
         }
-        else if(newState == 4)//Joined
+        else
         {
-            self.isLeader = NO;
-            NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
-            
-            if(self.etcdState == 0)
-            {
-                [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
-            }
+            [super observeValueForKeyPath:keyPath
+                                 ofObject:object
+                                   change:change
+                                  context:context];
         }
     }
-    else
+    else if([object isEqualTo:_holePunchingClient])
     {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
+        if([keyPath isEqualTo:@"myPublicIp"])
+        {
+            _publicIp = [[change objectForKey:@"new"] stringValue];
+            
+            NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                                      _nickName,
+                                      _domain,
+                                      _location];
+            
+            NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
+            [properties setObject: _publicIp forKey:@"publicIp"];
+            
+            AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                         initWithParameter:_dataSource.ip
+                                                         port:_dataSource.port
+                                                         fullUserName:fullUserName
+                                                         userProperties:properties];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+        }
+        else if([keyPath isEqualToString:@"myChatPortMap"])
+        {
+            _chatPortMap = [[change objectForKey:@"new"] stringValue];
+            NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
+                                      _nickName,
+                                      _domain,
+                                      _location];
+            
+            NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
+            [properties setObject: _chatPortMap forKey:@"chatPortMap"];
+            
+            AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
+                                                         initWithParameter:_dataSource.ip
+                                                         port:_dataSource.port
+                                                         fullUserName:fullUserName
+                                                         userProperties:properties];
+            
+            [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+        }
+        else
+        {
+            [super observeValueForKeyPath:keyPath
+                                 ofObject:object
+                                   change:change
+                                  context:context];
+        }
     }
 }
 

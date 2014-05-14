@@ -13,6 +13,7 @@
 
 @protocol AMETCDOperationDelegate;
 @class AMETCDDataDestination;
+@class AMHolePunchingClient;
 
 @interface AMMesher : NSObject<AMETCDOperationDelegate>
 
@@ -22,7 +23,9 @@
 @property int etcdState;    //0 stop, 1 running, 2 error
 @property BOOL isOnline;
 
+@property (readonly) NSString* myUniqueName;
 @property (readonly) NSArray* myGroupUsers;
+@property (readonly) AMHolePunchingClient* holePunchingClient;
 
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;

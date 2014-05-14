@@ -48,4 +48,23 @@
 }
 
 
+- (IBAction)onFOAFTabClick:(id)sender{
+    [self.tabs selectTabViewItemWithIdentifier:@"1"];
+}
+
+
+
+- (IBAction)onBlogTabClick:(id)sender{
+[self.tabs selectTabViewItemWithIdentifier:@"2"];
+}
+
+- (IBAction)onUpButtonClick:(id)sender{
+
+}
+
+- (IBAction)onAddFieldButtonClick:(id)sender{
+
+}
+
+
 @end

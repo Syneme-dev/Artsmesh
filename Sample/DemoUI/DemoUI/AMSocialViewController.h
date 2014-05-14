@@ -15,4 +15,10 @@
 
 -(void)loadPage;
 
+@property (retain) IBOutlet NSTabView *tabs;
+- (IBAction)onFOAFTabClick:(id)sender;
+- (IBAction)onBlogTabClick:(id)sender;
+- (IBAction)onUpButtonClick:(id)sender;
+- (IBAction)onAddFieldButtonClick:(id)sender;
+
 @end

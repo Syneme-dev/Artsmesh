@@ -8,36 +8,122 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMSocialViewController">
             <connections>
                 <outlet property="socialWebTab" destination="DgC-PZ-wvC" id="tls-wJ-YT6"/>
+                <outlet property="tabs" destination="Teu-tF-YMH" id="Ew1-Rz-ODl"/>
                 <outlet property="view" destination="c22-O7-iKe" id="mNj-Bf-7dn"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="wm1-QX-Rcf" customClass="BlueBackgroundView">
-                    <rect key="frame" x="0.0" y="280" width="300" height="1"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="58Q-Tv-Pho">
+                    <rect key="frame" x="0.0" y="280" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="upTab">
+                            <rect key="frame" x="420" y="3" width="40" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="inline" title="UP  |  " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onUpButtonClick:" target="-2" id="CXM-03-1tJ"/>
+                            </connections>
+                        </button>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-KA-g0x" userLabel="addFieldTab">
+                            <rect key="frame" x="536" y="3" width="60" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="inline" title="ADD FIELD" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onUpButtonClick:" target="-2" id="3AG-6l-MQY"/>
+                            </connections>
+                        </button>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vp-YEP" userLabel="foafTab">
+                            <rect key="frame" x="460" y="3" width="40" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="inline" title="INFO  |   " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onFOAFTabClick:" target="-2" id="XRD-iZ-lBn"/>
+                            </connections>
+                        </button>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-Ok-SRS" userLabel="blogTab">
+                            <rect key="frame" x="500" y="3" width="40" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="inline" title="BLOG  |  " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="nWI-6M-Rzz">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onBlogTabClick:" target="-2" id="mpP-TY-gk9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="596-bz-avC"/>
+                    </constraints>
                 </customView>
-                <webView translatesAutoresizingMaskIntoConstraints="NO" id="DgC-PZ-wvC">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="280"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
-                        <nil key="identifier"/>
-                    </webPreferences>
-                </webView>
+                <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="m8b-GU-d0s" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-tF-YMH">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="FOAF" identifier="1" id="cpT-dg-QgQ">
+                            <view key="view" id="faL-kg-rFO">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="BLOGS" identifier="2" id="m8b-GU-d0s">
+                            <view key="view" id="Q8z-19-Cbe">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="DgC-PZ-wvC">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                            <nil key="identifier"/>
+                                        </webPreferences>
+                                    </webView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DgC-PZ-wvC" secondAttribute="trailing" id="JPl-Zk-fv1"/>
+                                    <constraint firstAttribute="bottom" secondItem="DgC-PZ-wvC" secondAttribute="bottom" id="bA7-68-vEB"/>
+                                    <constraint firstItem="DgC-PZ-wvC" firstAttribute="leading" secondItem="Q8z-19-Cbe" secondAttribute="leading" id="m1O-aJ-H8Q"/>
+                                    <constraint firstItem="DgC-PZ-wvC" firstAttribute="top" secondItem="Q8z-19-Cbe" secondAttribute="top" id="mx0-tm-JTu"/>
+                                </constraints>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="wm1-QX-Rcf" customClass="BlueBackgroundView">
+                    <rect key="frame" x="0.0" y="280" width="600" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="13N-tm-uc6"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
-                <constraint firstItem="wm1-QX-Rcf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="0xv-B5-0Eh"/>
-                <constraint firstItem="wm1-QX-Rcf" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="19" id="6Kz-Gp-564"/>
-                <constraint firstAttribute="trailing" secondItem="wm1-QX-Rcf" secondAttribute="trailing" id="8jG-H3-f6Q"/>
-                <constraint firstItem="DgC-PZ-wvC" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="Mgc-nv-Yi5"/>
-                <constraint firstAttribute="bottom" secondItem="DgC-PZ-wvC" secondAttribute="bottom" id="O67-GR-wQT"/>
-                <constraint firstItem="DgC-PZ-wvC" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="aco-J3-CeG"/>
-                <constraint firstAttribute="trailing" secondItem="DgC-PZ-wvC" secondAttribute="trailing" id="blF-FS-ifi"/>
-                <constraint firstItem="DgC-PZ-wvC" firstAttribute="top" secondItem="wm1-QX-Rcf" secondAttribute="bottom" id="zbc-ru-Bxo"/>
+                <constraint firstAttribute="trailing" secondItem="Teu-tF-YMH" secondAttribute="trailing" id="7A4-dQ-vcW"/>
+                <constraint firstAttribute="trailing" secondItem="58Q-Tv-Pho" secondAttribute="trailing" id="NY6-HQ-0bY"/>
+                <constraint firstItem="Teu-tF-YMH" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="Qc0-BH-Uw0"/>
+                <constraint firstItem="wm1-QX-Rcf" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="19" id="YvF-Fl-2FA"/>
+                <constraint firstAttribute="bottom" secondItem="Teu-tF-YMH" secondAttribute="bottom" id="dsB-iu-BHn"/>
+                <constraint firstAttribute="trailing" secondItem="wm1-QX-Rcf" secondAttribute="trailing" id="ecg-RP-0GX"/>
+                <constraint firstItem="58Q-Tv-Pho" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="ovu-G0-Zs5"/>
+                <constraint firstItem="wm1-QX-Rcf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="w6q-8s-5aG"/>
+                <constraint firstItem="Teu-tF-YMH" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="yNS-CS-cKL"/>
+                <constraint firstItem="58Q-Tv-Pho" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ymb-xU-Zfe"/>
             </constraints>
         </customView>
     </objects>

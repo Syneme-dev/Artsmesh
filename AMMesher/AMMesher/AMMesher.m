@@ -389,12 +389,14 @@
     
     NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
     [properties setObject: _privateIp forKey:@"privateIp"];
-    [properties setObject: _publicIp forKey:@"publicIp"];
+   // [properties setObject: _publicIp forKey:@"publicIp"];
     [properties setObject: _controlPort forKey:@"controlPort"];
     [properties setObject: _chatPort forKey:@"chatPort"];
     [properties setObject: _myStatus forKey:@"description"];
     [properties setObject: _location forKey:@"location"];
     [properties setObject: _domain forKey:@"domain"];
+    //[properties setObject: _chatPort forKey:@"chatPortMap"];//set the chatport to map port before mesh
+   
     
     AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
                                                  initWithParameter:_dataSource.ip
@@ -492,7 +494,7 @@
     {
         if([keyPath isEqualTo:@"myPublicIp"])
         {
-            _publicIp = [[change objectForKey:@"new"] stringValue];
+            _publicIp = [change objectForKey:@"new"];
             
             NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
                                       _nickName,
@@ -512,7 +514,7 @@
         }
         else if([keyPath isEqualToString:@"myChatPortMap"])
         {
-            _chatPortMap = [[change objectForKey:@"new"] stringValue];
+            _chatPortMap = [change objectForKey:@"new"];
             NSString* fullUserName = [NSString stringWithFormat:@"%@@%@.%@",
                                       _nickName,
                                       _domain,

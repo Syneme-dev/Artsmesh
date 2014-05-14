@@ -125,9 +125,10 @@
 withFilterContext:(id)filterContext
 {
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
-    if ([fromHost isEqualToString:_holePunchingServerIp])
+    if (![fromHost isEqualToString:_holePunchingServerIp])
     {
-        return;
+        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@ send message:%@", fromHost, msg);
     }
     
 	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -152,7 +153,7 @@ withFilterContext:(id)filterContext
         [self didChangeValueForKey:@"myPublicIp"];
     }
     
-    if ([self.myChatPortMap isNotEqualTo:myPubPort])
+    if (![self.myChatPortMap isEqualToString:myPubPort])
     {
         //save chatPortMap to etcd
         [self willChangeValueForKey:@"myChatPortMap"];

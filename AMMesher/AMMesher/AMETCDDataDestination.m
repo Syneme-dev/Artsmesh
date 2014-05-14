@@ -300,7 +300,7 @@
                     [userIntoGroup.children addObject:newUser];
     
                     AMMesher* mesher = [AMMesher sharedAMMesher];
-                    if ([userIntoGroup.uniqueName isEqualToString:mesher.myGroupName])
+                    if ([userIntoGroup.uniqueName isEqualToString:mesher.mySelf.groupName])
                     {
                         
                         NSDictionary *params = @{

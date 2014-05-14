@@ -9,23 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "AMETCDOperationDelegate.h"
 
-
-
 @protocol AMETCDOperationDelegate;
-@class AMETCDDataDestination;
-@class AMHolePunchingClient;
 
+@class AMUser;
+@class AMETCDDataDestination;
 @interface AMMesher : NSObject<AMETCDOperationDelegate>
 
-@property AMETCDDataDestination* usergroupDest;
-@property NSString* myGroupName;
-@property BOOL isLeader;
+@property AMUser* mySelf;
+@property NSString* leaderName;
 @property int etcdState;    //0 stop, 1 running, 2 error
-@property BOOL isOnline;
 
-@property (readonly) NSString* myUniqueName;
 @property (readonly) NSArray* myGroupUsers;
-@property (readonly) AMHolePunchingClient* holePunchingClient;
+@property (readonly) NSArray* allGroupUsers;
+@property BOOL isOnline;
+@property BOOL isLeader;
 
 +(id)sharedAMMesher;
 +(NSOperationQueue*)sharedEtcdOperQueue;
@@ -40,6 +37,8 @@
 -(void)everyoneGoOnline;
 -(void)goOnline;
 -(void)goOffline;
+
+-(void)updateMySelfProperties:(NSDictionary*) properties;
 
 @end    
 

@@ -41,7 +41,7 @@ static void *PingKVOContext;
 - (void)awakeFromNib
 {
     [_mesher addObserver:self
-              forKeyPath:@"usergroupDest.userGroups"
+              forKeyPath:@"myGroupUsers"
                  options:0
                  context:&PingKVOContext];
     
@@ -82,8 +82,9 @@ static void *PingKVOContext;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     AMUser* user = _myGroupUsers[self.userTable.selectedRow];
+    NSString* pingIp = (user.publicIp == nil) ? user.privateIp: user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
-                                user.publicIp];
+                                pingIp];
     [self runCommand:pingCommand];
 }
 

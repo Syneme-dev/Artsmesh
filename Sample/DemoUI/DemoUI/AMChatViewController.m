@@ -133,6 +133,7 @@
 -(void)stopHolePunching
 {
     [_holePunchingClient stopHolePunching];
+    [self startChatWithoutHolePunching];
 }
 
 -(void)NewUserJoined:(NSNotification*) notification

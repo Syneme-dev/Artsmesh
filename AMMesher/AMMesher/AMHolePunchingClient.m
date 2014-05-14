@@ -153,7 +153,7 @@ withFilterContext:(id)filterContext
         [self didChangeValueForKey:@"myPublicIp"];
     }
     
-    if ([self.myChatPortMap isNotEqualTo:myPubPort])
+    if (![self.myChatPortMap isEqualToString:myPubPort])
     {
         //save chatPortMap to etcd
         [self willChangeValueForKey:@"myChatPortMap"];

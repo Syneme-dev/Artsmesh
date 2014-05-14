@@ -12,6 +12,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNotificationManager/AMNotificationManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"
+#import "AMMesher/AMHolePunchingClient.h"
 
 
 @interface AMChatViewController ()
@@ -38,21 +39,21 @@
          */
         
         
-        _socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self
-                                                delegateQueue:dispatch_get_main_queue()];
-        
-        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        NSString* chatPort =[defaults stringForKey:Preference_Key_General_ChatPort];
-        int port = [chatPort intValue];
-        
-        NSError *error = nil;
-        if (![_socket bindToPort:port error:&error]) {
-            NSLog(@"Error binding: %@", error);
-        }
-        
-        if (![_socket beginReceiving:&error]) {
-            NSLog(@"Error receiving: %@", error);
-        }
+//        _socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self
+//                                                delegateQueue:dispatch_get_main_queue()];
+//        
+//        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//        NSString* chatPort =[defaults stringForKey:Preference_Key_General_ChatPort];
+//        int port = [chatPort intValue];
+//        
+//        NSError *error = nil;
+//        if (![_socket bindToPort:port error:&error]) {
+//            NSLog(@"Error binding: %@", error);
+//        }
+//        
+//        if (![_socket beginReceiving:&error]) {
+//            NSLog(@"Error receiving: %@", error);
+//        }
         
         [[AMNotificationManager defaultShared] listenMessageType:self withTypeName:AMN_NEW_USER_JOINED callback:@selector(NewUserJoined:)];
     }
@@ -86,8 +87,10 @@
                     @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
     
 //    NSData* msgData = [[NSString stringWithFormat:@"%@:%@", nickName, msg] dataUsingEncoding:NSUTF8StringEncoding];
+
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
+    AMHolePunchingClient* hpc = mesher.holePunchingClient;
     NSArray* users = mesher.myGroupUsers;
     if(users != nil)
     {
@@ -96,7 +99,9 @@
             NSString* ip = user.publicIp;
             int port = [user.chatPort intValue];
             
-            [_socket sendData:msgData toHost:ip port:port withTimeout:-1 tag:0];
+           // [_socket sendData:msgData toHost:ip port:port withTimeout:-1 tag:0];
+            
+            [hpc sendPacket:msgData toHost:user.publicIp toPort:user.chatPort];
         }
     }
     

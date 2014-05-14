@@ -23,6 +23,9 @@
       location = "container:"
       name = "Utilities">
       <FileRef
+         location = "group:AMUdpEchoServer/AMUdpEchoServer.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:UIFramewrok/UIFramework.xcodeproj">
       </FileRef>
       <FileRef

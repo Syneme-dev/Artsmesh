@@ -20,6 +20,7 @@
 @property NSString* privateIp;
 @property NSString* chatPort;
 @property NSString* controlPort;
+@property NSString* chatPortMap;
 
 -(id)init;
 

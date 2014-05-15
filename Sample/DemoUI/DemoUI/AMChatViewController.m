@@ -97,10 +97,12 @@
     if (isOnline == YES && isOnlineOld == NO)
     {
         //start hole punching
+        [self startHolePunching];
     }
     else if(isOnlineOld == YES && isOnline == NO)
     {
         //stop hole punching
+        [self startChatWithoutHolePunching];
     }
 }
 

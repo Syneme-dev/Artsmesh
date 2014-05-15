@@ -10,6 +10,7 @@
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMChatHolePunchingClient
 {
@@ -169,6 +170,8 @@ withFilterContext:(id)filterContext
         [mesher updateMySelfProperties:props];
         
         self.myPublicIp = myPubIp;
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:myPubIp forKey:Preference_Key_General_PublicIP];
     }
     
     if (![self.myChatPortMap isEqualToString:myPubPort])

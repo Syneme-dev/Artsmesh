@@ -110,7 +110,7 @@
     [self loadPingPanel];
     
     //Note:using the following code to render FOAF panel.
-  //  [self loadFOAFPanel];
+    [self loadFOAFPanel];
     
     
 }

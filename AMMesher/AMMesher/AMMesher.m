@@ -15,6 +15,7 @@
 #import "AMUser.h"
 #import "AMCommunicator.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 
 
 @implementation AMMesher
@@ -23,6 +24,7 @@
     AMETCDDataSource* _dataSource;
     AMCommunicator* _communicator;
     AMETCDDataDestination* _usergroupDest;
+    GCDAsyncUdpSocket* _publicIpEchoSocket;
     NSTimer* _userTTL;
     
     NSString* _etcdServerPort;
@@ -225,7 +227,76 @@
         self.isOnline = YES;
         [self didChangeValueForKey:@"isOnline"];
     }
+    
+    [self getPublicIp];
 }
+
+-(void)getPublicIp
+{
+    _publicIpEchoSocket = [[GCDAsyncUdpSocket alloc]
+                   initWithDelegate:self
+                   delegateQueue:dispatch_get_main_queue()];
+    
+    NSError *error = nil;
+    if (![_publicIpEchoSocket bindToPort:0 error:&error])
+    {
+        return;
+    }
+    if (![_publicIpEchoSocket beginReceiving:&error])
+    {
+        [_publicIpEchoSocket close];
+        return;
+    }
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
+    NSString* udpEchoServerPort = [defaults stringForKey:Preference_Key_General_ChatStunServerPort];
+    
+    NSData* data = [@"getip" dataUsingEncoding:NSUTF8StringEncoding];
+    [_publicIpEchoSocket sendData:data
+                           toHost:udpEchoServerIp
+                             port:[udpEchoServerPort intValue]
+                      withTimeout:-1
+                              tag:0];
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+   didReceiveData:(NSData *)data
+      fromAddress:(NSData *)address
+withFilterContext:(id)filterContext
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
+
+    NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
+    if (![fromHost isEqualToString:udpEchoServerIp])
+    {
+        return;
+    }
+    
+	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (msg == nil || [msg isEqualToString:@""])
+    {
+        return;
+    }
+    
+    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
+    if ([ipAndPort count] < 2)
+    {
+        return;
+    }
+    
+    NSString* myPubIp = [ipAndPort objectAtIndex:0];
+    if (self.mySelf.publicIp == nil || [self.mySelf.publicIp isEqualToString:@""])
+    {
+        NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:
+                                myPubIp, @"publicIp",
+                                nil];
+        [self updateMySelfProperties:props];
+    }
+}
+
 
 -(void)goOffline
 {

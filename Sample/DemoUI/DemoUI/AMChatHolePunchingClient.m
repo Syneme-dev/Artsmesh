@@ -159,22 +159,20 @@ withFilterContext:(id)filterContext
         return;
     }
     
+    AMMesher* mehser = [AMMesher sharedAMMesher];
+
     NSString* myPubIp = [ipAndPort objectAtIndex:0];
     NSString* myPubPort = [ipAndPort objectAtIndex:1];
-    if (![self.myPublicIp isEqualToString:myPubIp])
+    if (![mehser.mySelf.publicIp isEqualToString:myPubIp])
     {
         AMMesher* mesher = [AMMesher sharedAMMesher];
         NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:
                                  myPubIp, @"publicIp",
                                  nil];
         [mesher updateMySelfProperties:props];
-        
-        self.myPublicIp = myPubIp;
-        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:myPubIp forKey:Preference_Key_General_PublicIP];
     }
     
-    if (![self.myChatPortMap isEqualToString:myPubPort])
+    if (![mehser.mySelf.chatPortMap isEqualToString:myPubPort])
     {
         AMMesher* mesher = [AMMesher sharedAMMesher];
         NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:

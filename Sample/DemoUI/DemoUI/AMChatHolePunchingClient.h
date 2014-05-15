@@ -16,9 +16,6 @@
 
 @interface AMChatHolePunchingClient : NSObject
 
-@property NSString* myPublicIp;
-@property NSString* myChatPort;
-@property NSString* myChatPortMap;
 @property id msgDelegate;
 
 -(id)initWithPort:(NSString*)port server:(NSString*)ip serverPort:(NSString*)port;

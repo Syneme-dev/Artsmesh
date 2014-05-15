@@ -233,6 +233,11 @@
 
 -(void)getPublicIp
 {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
+    NSString* udpEchoServerPort = [defaults stringForKey:Preference_Key_General_ChatStunServerPort];
+    
     _publicIpEchoSocket = [[GCDAsyncUdpSocket alloc]
                    initWithDelegate:self
                    delegateQueue:dispatch_get_main_queue()];
@@ -247,11 +252,6 @@
         [_publicIpEchoSocket close];
         return;
     }
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
-    NSString* udpEchoServerPort = [defaults stringForKey:Preference_Key_General_ChatStunServerPort];
     
     NSData* data = [@"getip" dataUsingEncoding:NSUTF8StringEncoding];
     [_publicIpEchoSocket sendData:data

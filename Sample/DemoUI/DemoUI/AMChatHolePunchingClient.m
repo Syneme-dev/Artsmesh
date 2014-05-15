@@ -141,10 +141,8 @@ withFilterContext:(id)filterContext
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     if (![fromHost isEqualToString:_holePunchingServerIp])
     {
-        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@ send message:%@", fromHost, msg);
-        
         [self.msgDelegate handleIncomingData:data fromAddress:address];
+        return;
     }
     
 	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

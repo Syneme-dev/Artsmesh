@@ -31,8 +31,6 @@
 		26F2BF4218FCB5E900DD04A6 /* AMETCDUpdateUserOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF2E18FCB5E900DD04A6 /* AMETCDUpdateUserOperation.m */; };
 		26F2BF4318FCB5E900DD04A6 /* AMETCDUserTTLOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF2F18FCB5E900DD04A6 /* AMETCDUserTTLOperation.h */; };
 		26F2BF4418FCB5E900DD04A6 /* AMETCDUserTTLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF3018FCB5E900DD04A6 /* AMETCDUserTTLOperation.m */; };
-		26F2BF4518FCB5E900DD04A6 /* AMETCDWatchOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF3118FCB5E900DD04A6 /* AMETCDWatchOperation.h */; };
-		26F2BF4618FCB5E900DD04A6 /* AMETCDWatchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF3218FCB5E900DD04A6 /* AMETCDWatchOperation.m */; };
 		26F2BF4918FCB5F900DD04A6 /* AMKillETCDOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4718FCB5F900DD04A6 /* AMKillETCDOperation.h */; };
 		26F2BF4A18FCB5F900DD04A6 /* AMKillETCDOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4818FCB5F900DD04A6 /* AMKillETCDOperation.m */; };
 		26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */; };
@@ -89,8 +87,6 @@
 		26F2BF2E18FCB5E900DD04A6 /* AMETCDUpdateUserOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDUpdateUserOperation.m; sourceTree = "<group>"; };
 		26F2BF2F18FCB5E900DD04A6 /* AMETCDUserTTLOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDUserTTLOperation.h; sourceTree = "<group>"; };
 		26F2BF3018FCB5E900DD04A6 /* AMETCDUserTTLOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDUserTTLOperation.m; sourceTree = "<group>"; };
-		26F2BF3118FCB5E900DD04A6 /* AMETCDWatchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDWatchOperation.h; sourceTree = "<group>"; };
-		26F2BF3218FCB5E900DD04A6 /* AMETCDWatchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDWatchOperation.m; sourceTree = "<group>"; };
 		26F2BF4718FCB5F900DD04A6 /* AMKillETCDOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKillETCDOperation.h; sourceTree = "<group>"; };
 		26F2BF4818FCB5F900DD04A6 /* AMKillETCDOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKillETCDOperation.m; sourceTree = "<group>"; };
 		26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
@@ -220,8 +216,6 @@
 				26F2BF2E18FCB5E900DD04A6 /* AMETCDUpdateUserOperation.m */,
 				26F2BF2F18FCB5E900DD04A6 /* AMETCDUserTTLOperation.h */,
 				26F2BF3018FCB5E900DD04A6 /* AMETCDUserTTLOperation.m */,
-				26F2BF3118FCB5E900DD04A6 /* AMETCDWatchOperation.h */,
-				26F2BF3218FCB5E900DD04A6 /* AMETCDWatchOperation.m */,
 				AFAF2C97190604DC00131A7A /* AMETCDOperationDelegate.h */,
 			);
 			name = Operations;
@@ -264,7 +258,6 @@
 				26F2BF4118FCB5E900DD04A6 /* AMETCDUpdateUserOperation.h in Headers */,
 				26F2BF6818FCB65400DD04A6 /* AMETCDDataDestination.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
-				26F2BF4518FCB5E900DD04A6 /* AMETCDWatchOperation.h in Headers */,
 				26F2BF6D18FCB65400DD04A6 /* AMETCDDestination.h in Headers */,
 				26F2BF3F18FCB5E900DD04A6 /* AMETCDQueryOperation.h in Headers */,
 				26F2BF3518FCB5E900DD04A6 /* AMETCDDeleteUserOperation.h in Headers */,
@@ -347,7 +340,6 @@
 				26F2BF4418FCB5E900DD04A6 /* AMETCDUserTTLOperation.m in Sources */,
 				26F2BF3418FCB5E900DD04A6 /* AMETCDAddUserOperation.m in Sources */,
 				26F2BF3A18FCB5E900DD04A6 /* AMETCDLaunchOperation.m in Sources */,
-				26F2BF4618FCB5E900DD04A6 /* AMETCDWatchOperation.m in Sources */,
 				26F2BF3C18FCB5E900DD04A6 /* AMETCDOperation.m in Sources */,
 				26F2BF6E18FCB65400DD04A6 /* AMETCDDestination.m in Sources */,
 				26F2BF4A18FCB5F900DD04A6 /* AMKillETCDOperation.m in Sources */,

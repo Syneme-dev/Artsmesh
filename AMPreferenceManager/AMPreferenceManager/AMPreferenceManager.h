@@ -11,9 +11,12 @@
 #define Preference_Key_General_MachineName          @"Preference_Key_General_MachineName"
 #define Preference_Key_General_PrivateIP            @"Preference_Key_General_PrivateIP"
 #define Preference_Key_General_PublicIP             @"Preference_Key_General_PublicIP"
-#define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
 #define Preference_Key_General_ControlPort          @"Preference_Key_General_ControlPort"
 #define Preference_Key_General_UseIpv6              @"Preference_Key_General_UseIpv6"
+#define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
+#define Preference_Key_General_ChatStunServerIp     @"Preference_Key_General_ChatStunServerIp"
+#define Preference_Key_General_ChatStunServerPort   @"Preference_Key_General_ChatStunServerPort"
+
 
 
 //ETCD

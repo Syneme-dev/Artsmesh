@@ -1,17 +1,18 @@
 //
-//  AMHolePunchingClient.m
+//  AMChatHolePunchingClient.m
 //  AMMesher
 //
 //  Created by 王 为 on 5/14/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMHolePunchingClient.h"
+#import "AMChatHolePunchingClient.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
-#import "AMMesher.h"
-#import "AMUser.h"
+#import "AMMesher/AMMesher.h"
+#import "AMMesher/AMUser.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
-@implementation AMHolePunchingClient
+@implementation AMChatHolePunchingClient
 {
     GCDAsyncUdpSocket* _chatSocket;
     NSString* _holePunchingServerIp;
@@ -71,6 +72,13 @@
                                                  repeats:YES];
 }
 
+-(void)stopHolePunching
+{
+    [_toHolePunchingServerTTL invalidate];
+    [_toPeerTTL invalidate];
+    [_chatSocket close];
+}
+
 -(void)sendTTLToServer
 {
     NSString* msg = [NSString stringWithFormat:@"get public ip and port"];
@@ -84,7 +92,7 @@
 -(void)sendTTLToPeers
 {
     AMMesher* mesher = [AMMesher sharedAMMesher];
-    NSString* myName = mesher.myUniqueName;
+    NSString* myName = mesher.mySelf.uniqueName;
     
     for(AMUser* user in mesher.myGroupUsers)
     {
@@ -98,7 +106,13 @@
             continue;
         }
         
-        NSString* msg = [NSString stringWithFormat:@"get public ip and port"];
+        if ([user.location isEqualToString: mesher.mySelf.location]
+            && [user.domain isEqualToString:mesher.mySelf.domain])
+        {
+            continue;
+        }
+        
+        NSString* msg = [NSString stringWithFormat:@"HB"];
         NSData *data = [msg dataUsingEncoding:NSUTF8StringEncoding];
         
         [_chatSocket sendData:data toHost:user.publicIp
@@ -127,8 +141,8 @@ withFilterContext:(id)filterContext
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     if (![fromHost isEqualToString:_holePunchingServerIp])
     {
-        NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@ send message:%@", fromHost, msg);
+        [self.msgDelegate handleIncomingData:data fromAddress:address];
+        return;
     }
     
 	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -143,24 +157,27 @@ withFilterContext:(id)filterContext
         return;
     }
     
+    AMMesher* mehser = [AMMesher sharedAMMesher];
+
     NSString* myPubIp = [ipAndPort objectAtIndex:0];
     NSString* myPubPort = [ipAndPort objectAtIndex:1];
-    if (![self.myPublicIp isEqualToString:myPubIp])
+    if (![mehser.mySelf.publicIp isEqualToString:myPubIp])
     {
-        //savet my public ip to etcd
-        [self willChangeValueForKey:@"myPublicIp"];
-        self.myPublicIp = myPubIp;
-        [self didChangeValueForKey:@"myPublicIp"];
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:
+                                 myPubIp, @"publicIp",
+                                 nil];
+        [mesher updateMySelfProperties:props];
     }
     
-    if (![self.myChatPortMap isEqualToString:myPubPort])
+    if (![mehser.mySelf.chatPortMap isEqualToString:myPubPort])
     {
-        //save chatPortMap to etcd
-        [self willChangeValueForKey:@"myChatPortMap"];
-        self.myChatPortMap = myPubPort;
-        [self didChangeValueForKey:@"myChatPortMap"];
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:
+                                myPubPort, @"chatPortMap",
+                                nil];
+        [mesher updateMySelfProperties:props];
     }
 }
-
 
 @end

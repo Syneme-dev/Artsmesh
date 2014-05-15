@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMChatHolePunchingClient.h"
 
 @interface AMChatViewController : NSViewController
-    <GCDAsyncUdpSocketDelegate>
+    <GCDAsyncUdpSocketDelegate, AMChatHolePunchingClientDelegate>
 
 @property (nonatomic) NSMutableArray *chatRecords;
 @property (weak) IBOutlet NSTextField *chatMsgField;

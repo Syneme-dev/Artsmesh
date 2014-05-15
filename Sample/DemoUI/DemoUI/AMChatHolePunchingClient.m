@@ -112,7 +112,7 @@
             continue;
         }
         
-        NSString* msg = [NSString stringWithFormat:@"get public ip and port"];
+        NSString* msg = [NSString stringWithFormat:@"HB"];
         NSData *data = [msg dataUsingEncoding:NSUTF8StringEncoding];
         
         [_chatSocket sendData:data toHost:user.publicIp

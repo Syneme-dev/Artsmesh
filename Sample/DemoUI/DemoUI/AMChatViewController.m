@@ -25,6 +25,7 @@
     GCDAsyncUdpSocket *_socket;
     AMChatHolePunchingClient* _holePunchingClient;
     BOOL _isHolePunching;
+    NSData *_heartBeatData;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +35,7 @@
     {
         _chatRecords = [[NSMutableArray alloc] init];
         _isHolePunching = NO;
+        _heartBeatData = [@"HB" dataUsingEncoding:NSUTF8StringEncoding];
     }
     return self;
 }
@@ -208,13 +210,14 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [self showChatRecord:chatRecord];
+    [self handleIncomingData:data fromAddress:address];
 }
 
 
 -(void)handleIncomingData:(NSData*)data fromAddress:(NSData*)address
 {
+    if ([data isEqualToData:_heartBeatData])
+        return;
     NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [self showChatRecord:chatRecord];
 }

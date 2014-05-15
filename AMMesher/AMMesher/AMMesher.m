@@ -294,6 +294,7 @@ withFilterContext:(id)filterContext
                                 myPubIp, @"publicIp",
                                 nil];
         [self updateMySelfProperties:props];
+        [_publicIpEchoSocket close];
     }
 }
 

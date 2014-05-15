@@ -128,6 +128,20 @@
             newUser = [[AMUser alloc] init];
             newUser.uniqueName = uniqueUserName;
             [userIntoGroup.children addObject:newUser];
+            
+            AMMesher* mesher = [AMMesher sharedAMMesher];
+            if ([userIntoGroup.uniqueName isEqualToString:mesher.mySelf.groupName])
+            {
+                
+                NSDictionary *params = @{
+                                         @"time"      : [NSDate date],
+                                         @"username"  : newUser.nodeName,
+                                         };
+                
+                AMNotificationManager* notificationManager = [AMNotificationManager defaultShared];
+                [notificationManager postMessage:params withTypeName:AMN_NEW_USER_JOINED source:nil];
+            }
+            
         }
         
         for(NSString* key in otherProps)

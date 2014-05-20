@@ -41,7 +41,7 @@
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
-                                <action selector="onUpButtonClick:" target="-2" id="3AG-6l-MQY"/>
+                                <action selector="onAddFieldButtonClick:" target="-2" id="wq8-0q-zPx"/>
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vp-YEP" userLabel="foafTab">

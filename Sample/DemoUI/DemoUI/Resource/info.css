@@ -1,0 +1,25 @@
+
+#header{
+display:none;
+}
+#footer{
+display:none;
+}
+#content{
+display:none;
+width:560px !important;
+}
+
+#aside_primary{
+//display:none;
+}
+#site_nav_local_views{
+display:none;
+}
+#aside_primary_wrapper,#core,#wrap{
+width:600px !important;
+}
+
+#content h1{
+display:none;
+}

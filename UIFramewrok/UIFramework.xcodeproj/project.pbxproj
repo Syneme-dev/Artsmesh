@@ -33,8 +33,6 @@
 		CE883166192C44B900DA17CE /* AMBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883162192C44B800DA17CE /* AMBox.m */; };
 		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; };
 		CE88316A192C52EA00DA17CE /* AMPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883168192C52EA00DA17CE /* AMPanelView.m */; };
-		CE88316D192C6E7B00DA17CE /* AMPanelViewKnob.h in Headers */ = {isa = PBXBuildFile; fileRef = CE88316B192C6E7B00DA17CE /* AMPanelViewKnob.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE88316E192C6E7B00DA17CE /* AMPanelViewKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = CE88316C192C6E7B00DA17CE /* AMPanelViewKnob.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +79,6 @@
 		CE883162192C44B800DA17CE /* AMBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBox.m; sourceTree = "<group>"; };
 		CE883167192C52EA00DA17CE /* AMPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelView.h; sourceTree = "<group>"; };
 		CE883168192C52EA00DA17CE /* AMPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelView.m; sourceTree = "<group>"; };
-		CE88316B192C6E7B00DA17CE /* AMPanelViewKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewKnob.h; sourceTree = "<group>"; };
-		CE88316C192C6E7B00DA17CE /* AMPanelViewKnob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewKnob.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +106,6 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
-				CE88316B192C6E7B00DA17CE /* AMPanelViewKnob.h */,
-				CE88316C192C6E7B00DA17CE /* AMPanelViewKnob.m */,
 				CE883167192C52EA00DA17CE /* AMPanelView.h */,
 				CE883168192C52EA00DA17CE /* AMPanelView.m */,
 				CE88315F192C44B800DA17CE /* AMBoxItem.h */,
@@ -214,7 +208,6 @@
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
-				CE88316D192C6E7B00DA17CE /* AMPanelViewKnob.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
@@ -327,7 +320,6 @@
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,
 				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
-				CE88316E192C6E7B00DA17CE /* AMPanelViewKnob.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
 			);

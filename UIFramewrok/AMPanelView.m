@@ -73,6 +73,11 @@
     }
 }
 
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    _resizing = NO;
+}
+
 - (BOOL)isFlipped
 {
     return YES;

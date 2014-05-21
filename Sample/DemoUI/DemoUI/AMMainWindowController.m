@@ -95,7 +95,7 @@
     NSRect screenSize = [[NSScreen mainScreen] frame];
     //Note:code make the window max size.
     //[self.window setFrame:screenSize display:YES ];
-    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - UI_appleMenuBarHeight)];
+//    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - UI_appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
     _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-UI_topbarHeight)];
     [scrollView setDocumentView:_containerView];

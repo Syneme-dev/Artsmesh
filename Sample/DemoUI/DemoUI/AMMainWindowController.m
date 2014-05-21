@@ -208,10 +208,9 @@
    // panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
 //    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
-    _userGroupViewController.view.frame = NSMakeRect(0, 0, 300, 380);
+    _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
     [panelViewController.view addSubview:_userGroupViewController.view];
     [panelViewController setTitle:@"GROUPS"];
-//    [_containerView addSubview:panelViewController.view];
     [panelControllers setObject:panelViewController forKey:@"GROUPS"];
 }
 
@@ -219,18 +218,15 @@
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    NSSize panelSize = NSMakeSize(600.0f, 720.0f);
+    NSSize panelSize = NSMakeSize(600.0f, 400);
     [panelView setFrameSize:panelSize];
-    panelView.minSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
-    
-//    [_containerView addSubview:panelViewController.view];
     [panelViewController.titleView setStringValue:@"PREFERENCE"];
 //    panelViewController.view.frame = NSMakeRect(
 //                                                      UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing,
 //                                                     UI_panelPaddingBottom, 600.0f, 720.0f);
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    preferenceViewController.view.frame = NSMakeRect(0, 400, 600, 300);
+    preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 300);
     [panelViewController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
@@ -244,17 +240,17 @@
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, 720.0f);
     [panelView setFrameSize:panelSize];
-    panelView.minSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
     
-//    [_containerView addSubview:panelViewController.view];
     [panelViewController setTitle:@"CHAT"];
 //    panelViewController.view.frame = NSMakeRect(
 //                                                UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*2+UI_panelSpacing,
 //                                                UI_panelPaddingBottom, 600.0f, 720.0f);
     
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
-    chatViewController.view.frame = NSMakeRect(0, 100, 600, 600);
+    chatViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 650);
+    
+    //chatViewController.view addConstraint:<#(NSLayoutConstraint *)#>
     [panelViewController.view addSubview:chatViewController.view];
     
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
@@ -265,9 +261,8 @@
     AMPanelViewController *panelViewController  = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    NSSize panelSize = NSMakeSize(600.0f, 720.0f);
+    NSSize panelSize = NSMakeSize(600.0f, 400);
     [panelView setFrameSize:panelSize];
-    panelView.minSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
     
 //    [_containerView addSubview:panelViewController.view];
@@ -277,7 +272,7 @@
 //                                                UI_panelPaddingBottom, 600.0f, 720.0f);
     
     pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    pingViewController.view.frame = NSMakeRect(0, 100, 600, 600);
+    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight+5, 600, 380);
     [panelViewController.view addSubview:pingViewController.view];
     
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;

@@ -24,6 +24,7 @@
 {
     self = [super initWithFrame:frameRect];
     if (self) {
+        _maxSizeConstraint = NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX);
         _draggingSource = YES;
         [self registerForDraggedTypes: @[NSPasteboardTypeString]];
     }
@@ -57,6 +58,15 @@
     [self setFrameSize:frameSize];
 }
 
+- (void)setMaxSizeConstraint:(NSSize)maxSizeConstraint
+{
+    _maxSizeConstraint = maxSizeConstraint;
+    NSSize frameSize = self.frame.size;
+    frameSize = NSMakeSize(MIN(_maxSizeConstraint.width, frameSize.width),
+                           MIN(_maxSizeConstraint.height, frameSize.height));
+    [self setFrameSize:frameSize];
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 
@@ -64,7 +74,7 @@
 {
     NSView *superview = self.superview;
     [super removeFromSuperview];
-    self.minSizeConstraint = NSZeroSize;
+    //    self.minSizeConstraint = NSZeroSize;
     if ([superview respondsToSelector:@selector(didRemoveBoxItem:)])
         [superview performSelector:@selector(didRemoveBoxItem:) withObject:self];
 }
@@ -77,8 +87,12 @@
 - (void)setFrameSize:(NSSize)newSize
 {
     NSSize oldSize = self.frame.size;
-    newSize = NSMakeSize(MAX(_minSizeConstraint.width, newSize.width),
-                         MAX(_minSizeConstraint.height, newSize.height));
+    NSSize minSize = self.minSizeConstraint;
+    NSSize maxSize = self.maxSizeConstraint;
+    
+    newSize = NSMakeSize(
+                         MIN(MAX(minSize.width, newSize.width), maxSize.width),
+                         MIN(MAX(minSize.height, newSize.height), maxSize.height));
     if (!NSEqualSizes(oldSize, newSize)) {
         [super setFrameSize:newSize];
         if ([self.superview respondsToSelector:@selector(doBoxLayout)])
@@ -130,13 +144,13 @@
 }
 
 - (NSDragOperation)draggingSession:(NSDraggingSession *)session
-    sourceOperationMaskForDraggingContext:(NSDraggingContext)context
+sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
     switch (context) {
         case NSDraggingContextOutsideApplication:
             return NSDragOperationDelete;
-        // by using this fall through pattern, we will remain compatible
-        // if the contexts get more precise in the future.
+            // by using this fall through pattern, we will remain compatible
+            // if the contexts get more precise in the future.
         case NSDraggingContextWithinApplication:
         default:
             return NSDragOperationMove;
@@ -149,14 +163,14 @@
     [pasteboardItem setString:@"" forType:NSPasteboardTypeString];
     
     /*
-    NSRect draggingRect = NSZeroRect;
-    draggingRect.size = self.frame.size;
-    NSImage *draggingImage = [[NSImage alloc] initWithSize:draggingRect.size];
-    [draggingImage lockFocus];
-    [self drawRect:draggingRect];
-    [[NSColor colorWithWhite:1.0 alpha:0.5] set];
-    [NSBezierPath fillRect:draggingRect];
-    [draggingImage unlockFocus];
+     NSRect draggingRect = NSZeroRect;
+     draggingRect.size = self.frame.size;
+     NSImage *draggingImage = [[NSImage alloc] initWithSize:draggingRect.size];
+     [draggingImage lockFocus];
+     [self drawRect:draggingRect];
+     [[NSColor colorWithWhite:1.0 alpha:0.5] set];
+     [NSBezierPath fillRect:draggingRect];
+     [draggingImage unlockFocus];
      */
     
     NSBitmapImageRep *imageRep = [self bitmapImageRepForCachingDisplayInRect:self.bounds];

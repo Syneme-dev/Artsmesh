@@ -288,6 +288,7 @@
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
     [panelView setFrameSize:panelSize];
     panelView.minSizeConstraint = panelSize;
+    panelView.maxSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
 //    panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
 //                                                panelHeight+UI_pixelHeightAdjustment,  UI_defaultPanelWidth, panelHeight);

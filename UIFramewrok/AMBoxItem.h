@@ -15,6 +15,7 @@
 @property(nonatomic) CGFloat paddingTop;
 @property(nonatomic) CGFloat paddingBottom;
 @property(nonatomic) NSSize minSizeConstraint;
+@property(nonatomic) NSSize maxSizeConstraint;
 @property(nonatomic) BOOL draggingSource;
 @property(nonatomic, readonly) BOOL visiable;
 

@@ -199,9 +199,9 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor blueColor] set];
-    [NSBezierPath setDefaultLineWidth:2];
-    [NSBezierPath strokeRect:[self enclosingRectForSubItem:self.firstItem]];
+//    [[NSColor blueColor] set];
+//    [NSBezierPath setDefaultLineWidth:2];
+//    [NSBezierPath strokeRect:self.bounds];
 }
 
 #pragma mark - dragging destination implementation

@@ -12,7 +12,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNotificationManager/AMNotificationManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"
-#import "AMMesher/AMHolePunchingClient.h"
+//#import "AMMesher/AMHolePunchingClient.h"
 
 @interface AMChatViewController ()
 

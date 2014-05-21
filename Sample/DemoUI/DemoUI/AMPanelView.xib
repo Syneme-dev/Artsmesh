@@ -135,23 +135,21 @@
                         <constraint firstAttribute="height" constant="16" id="bjb-lc-6NG"/>
                     </constraints>
                 </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="xgw-dq-WnY" userLabel="RightBottom" customClass="AMPanelViewKnob">
-                    <rect key="frame" x="584" y="0.0" width="16" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="16" id="Uhb-y4-1PF"/>
-                        <constraint firstAttribute="height" constant="16" id="n0E-me-kJA"/>
-                    </constraints>
-                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fvD-YA-Ec9" secondAttribute="trailing" id="1kz-FY-IF3"/>
                 <constraint firstItem="vIZ-or-1gE" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="4ru-k1-tr0"/>
                 <constraint firstAttribute="bottom" secondItem="vIZ-or-1gE" secondAttribute="bottom" id="4uj-by-BmG"/>
-                <constraint firstAttribute="bottom" secondItem="xgw-dq-WnY" secondAttribute="bottom" id="FkK-bI-JS4"/>
-                <constraint firstAttribute="trailing" secondItem="xgw-dq-WnY" secondAttribute="trailing" id="nay-EI-WmR"/>
                 <constraint firstItem="fvD-YA-Ec9" firstAttribute="top" secondItem="1" secondAttribute="top" constant="2" id="tr9-6T-1QV"/>
                 <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yp8-BK-kH4"/>
+            </constraints>
+        </customView>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="xgw-dq-WnY" userLabel="RightBottom" customClass="AMPanelViewKnob">
+            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+            <constraints>
+                <constraint firstAttribute="width" constant="16" id="Uhb-y4-1PF"/>
+                <constraint firstAttribute="height" constant="16" id="n0E-me-kJA"/>
             </constraints>
         </customView>
     </objects>

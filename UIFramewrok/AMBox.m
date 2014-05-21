@@ -21,6 +21,7 @@
     if (self) {
         _style = style;
         self.draggingSource = NO;
+        [self registerForDraggedTypes: @[NSPasteboardTypeString]];
     }
     return self;
 }

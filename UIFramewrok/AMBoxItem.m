@@ -26,7 +26,6 @@
     if (self) {
         _maxSizeConstraint = NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX);
         _draggingSource = YES;
-        [self registerForDraggedTypes: @[NSPasteboardTypeString]];
     }
     return self;
 }

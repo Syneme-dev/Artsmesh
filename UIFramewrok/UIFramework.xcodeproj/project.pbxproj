@@ -31,7 +31,7 @@
 		CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883160192C44B800DA17CE /* AMBoxItem.m */; };
 		CE883165192C44B900DA17CE /* AMBox.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883161192C44B800DA17CE /* AMBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE883166192C44B900DA17CE /* AMBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883162192C44B800DA17CE /* AMBox.m */; };
-		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; };
+		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE88316A192C52EA00DA17CE /* AMPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883168192C52EA00DA17CE /* AMPanelView.m */; };
 /* End PBXBuildFile section */
 
@@ -208,9 +208,9 @@
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
+				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
-				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,

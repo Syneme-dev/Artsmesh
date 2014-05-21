@@ -35,9 +35,9 @@ static NSMutableDictionary *allPlugins = nil;
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
     }
-//    [self startMesher];
-//    [self connectMesher];
-//    [self writePluginDataToMesher];
+    [self startMesher];
+    [self connectMesher];
+    [self writePluginDataToMesher];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {

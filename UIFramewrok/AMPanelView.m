@@ -8,57 +8,66 @@
 
 #import "AMPanelView.h"
 
+@interface AMPanelView ()
+
+@property(nonatomic) NSRect knobRectLeft;
+@property(nonatomic) NSRect knobRectRight;
+
+@end
+
 @implementation AMPanelView
 {
-    NSRect _knobRect;
     NSColor *_knobColor;
-    NSPoint _mouseDownLocation;
+    BOOL _resizing;
 }
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-
+        
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
-//
-//    _knobColor = [NSColor colorWithCalibratedRed:(46)/255.0f
-//                                           green:(58)/255.0f
-//                                            blue:(75)/255.0f
-//                                           alpha:1.0f];
-    _knobColor = [NSColor redColor];
+
+    _knobColor = [NSColor colorWithCalibratedRed:(46)/255.0f
+                                           green:(58)/255.0f
+                                            blue:(75)/255.0f
+                                           alpha:1.0f];
+}
+
+- (NSRect)knobRectRight
+{
+    return NSMakeRect(self.bounds.size.width - 16,
+                      self.bounds.size.height - 16, 16, 16);
+}
+
+- (NSRect)knobRectLeft
+{
+    return NSMakeRect(0, self.bounds.size.height - 16, 16, 16);
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    [super mouseDown:theEvent];
-    _mouseDownLocation = [self convertPoint:[theEvent locationInWindow]
-                                   fromView:nil];
+    NSPoint mouseDownLocation = [self convertPoint:[theEvent locationInWindow]
+                                          fromView:nil];
+    if (NSPointInRect(mouseDownLocation, self.knobRectRight))
+        _resizing = YES;
+    else
+        [super mouseDown:theEvent];
 }
 
-- (NSRect)getKnobRect
-{
-    NSSize size = self.bounds.size;
-    return NSMakeRect(size.width - 16, size.height - 16, 16, 16);
-}
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    if (NSPointInRect(_mouseDownLocation, [self getKnobRect])) {
+    if (_resizing) {
         NSPoint mouseLocation = [self convertPoint:[theEvent locationInWindow]
                                           fromView:nil];
-        CGFloat deltaX = mouseLocation.x - _mouseDownLocation.x;
-        CGFloat deltaY = mouseLocation.y - _mouseDownLocation.y;
-//        _knobRect = NSOffsetRect(_knobRect, deltaX, deltaY);
-        NSSize frameSize = self.frame.size;
-        frameSize.width += deltaX;
-        frameSize.height += deltaY;
-        [self setFrameSize:frameSize];
+        [self setFrameSize:NSMakeSize(mouseLocation.x + 8,
+                                      mouseLocation.y + 8)];
     } else {
         [super mouseDragged:theEvent];
     }
@@ -71,11 +80,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-//    [[NSColor colorWithWhite:0.22 alpha:1.0] set];
-//    [NSBezierPath fillRect:self.bounds];
+    [[NSColor colorWithWhite:0.22 alpha:1.0] set];
+    [NSBezierPath fillRect:self.bounds];
     [_knobColor set];
-    NSRect rect = [self getKnobRect];
-    [NSBezierPath fillRect:rect];
+    [NSBezierPath fillRect:self.knobRectLeft];
+    [NSBezierPath fillRect:self.knobRectRight];
 }
 
 

@@ -26,6 +26,7 @@
 #import <UIFramework/BlueBackgroundView.h>
 #import "AMChatViewController.h"
 #import "AMPingViewController.h"
+#import "UIFramework/AMBox.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -48,7 +49,7 @@
 @implementation AMMainWindowController
 {
     AMUserGroupViewController *_userGroupViewController;
-    NSView *_containerView;
+    AMBox *_containerView;
     AMETCDPreferenceViewController *preferenceViewController;
     AMSocialViewController * socialViewController;
 //    AMPanelViewController *preferencePanelController;
@@ -92,11 +93,45 @@
 
 - (void)showDefaultWindow {
     
-    NSRect screenSize = [[NSScreen mainScreen] frame];
+    NSSize windowSize = [self.window.contentView frame].size;
     //Note:code make the window max size.
     //[self.window setFrame:screenSize display:YES ];
 //    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - UI_appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    scrollView.frame = NSMakeRect(UI_leftSidebarWidth,
+                                  0,
+                                  windowSize.width - UI_leftSidebarWidth,
+                                  windowSize.height - UI_topbarHeight);
+    
+    _containerView = [AMBox hbox];
+    _containerView.frame = scrollView.bounds;
+    _containerView.paddingLeft = 40;
+    _containerView.paddingRight = 20;
+    _containerView.minSizeConstraint = _containerView.frame.size;
+    _containerView.allowBecomeEmpty = YES;
+    _containerView.gapBetweenItems = 50;
+    CGFloat contentHeight = _containerView.frame.size.height;
+     _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
+         if ([boxItem isKindOfClass:[AMBox class]])
+             return (AMBox *)nil;
+         AMBox *newBox = [AMBox vbox];
+         newBox.minSizeConstraint = NSMakeSize(0, contentHeight);
+         newBox.paddingTop = 20;
+         newBox.paddingBottom = 20;
+         newBox.gapBetweenItems = 20;
+         [newBox addSubview:boxItem];
+         return newBox;
+     };
+    [scrollView setDocumentView:_containerView];
+    
+    [self loadVersion];
+    [self loadUserPanel];
+    [self loadGroupsPanel];
+    [self loadPreferencePanel];
+    [self loadChatPanel];
+    [self loadPingPanel];
+
+    /*
     _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-UI_topbarHeight)];
     [scrollView setDocumentView:_containerView];
     [self loadVersion];
@@ -111,7 +146,7 @@
     
     //Note:using the following code to render FOAF panel.
     [self loadFOAFPanel];
-    
+    */
     
 }
 

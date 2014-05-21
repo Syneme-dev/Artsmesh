@@ -202,6 +202,8 @@
 //    [[NSColor blueColor] set];
 //    [NSBezierPath setDefaultLineWidth:2];
 //    [NSBezierPath strokeRect:self.bounds];
+//    [[NSColor redColor] set];
+//    [NSBezierPath fillRect:self.bounds];
 }
 
 #pragma mark - dragging destination implementation

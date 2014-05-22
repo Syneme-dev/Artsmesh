@@ -15,6 +15,9 @@
 {
     Boolean isLogin;
     NSString* statusNetURL;
+    NSString* username;
+    NSString* infoUrl;
+    NSString* myBlogUrl;
 }
 
 
@@ -36,8 +39,13 @@
     isLogin=false;
      NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
      statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
+   username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
     NSURL *loginURL = [NSURL URLWithString:
                       [NSString stringWithFormat:@"%@/main/login?fromMac=true",statusNetURL ]];
+    
+    infoUrl=        [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,username ];
+    
+    myBlogUrl =[NSString stringWithFormat:@"%@/%@/all?fromMac=true",statusNetURL,username ];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:loginURL]];
 }
@@ -64,7 +72,8 @@
     NSString *url= sender.mainFrameURL;
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-    if([url isEqual:@"http://artsmesh.io/xujian?fromMac=true"])
+   
+    if([url isEqual:infoUrl])
     {
         path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
     }
@@ -79,7 +88,6 @@
 
 -(void)login:(WebFrame *)frame{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
     NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
     NSString *loginJs=[NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();",username,password ];
           [frame.webView stringByEvaluatingJavaScriptFromString:
@@ -89,11 +97,8 @@
 
 
 - (IBAction)onFOAFTabClick:(id)sender{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
     NSURL *baseURL =
-    [NSURL URLWithString:
-    [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,username ]];
+    [NSURL URLWithString:infoUrl];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:baseURL]];
 }
@@ -101,16 +106,24 @@
 
 
 - (IBAction)onBlogTabClick:(id)sender{
-    NSURL *baseURL =
-    [NSURL URLWithString:
-     [NSString stringWithFormat:@"%@?fromMac=true",statusNetURL ]];
+    NSURL *baseURL=[NSURL URLWithString:myBlogUrl];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:baseURL]];
 
 }
 
 - (IBAction)onUpButtonClick:(id)sender{
+     NSString *url= self.socialWebTab.mainFrameURL;
+    if([url isEqual:infoUrl])
+    {
      [self gotoUsersPage];
+    }
+    else if([url isEqual:myBlogUrl]){
+        NSURL *baseURL=[NSURL URLWithString:statusNetURL];
+        [self.socialWebTab.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:baseURL]];
+    
+    }
 }
 
 - (IBAction)onAddFieldButtonClick:(id)sender{

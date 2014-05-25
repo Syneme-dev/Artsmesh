@@ -15,8 +15,8 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 
 @interface AMBox : AMBoxItem<NSDraggingDestination>
 
-@property(nonatomic, readonly) AMBoxItem *firstItem;
-@property(nonatomic, readonly) AMBoxItem *lastItem;
+@property(nonatomic, readonly) AMBoxItem *firstVisibleItem;
+@property(nonatomic, readonly) AMBoxItem *lastVisibleItem;
 @property(nonatomic, readonly) AMBoxStyle style;
 @property(nonatomic) CGFloat paddingLeft;
 @property(nonatomic) CGFloat paddingRight;
@@ -35,5 +35,6 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 - (void)doBoxLayout;
 - (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point;
 - (void)didRemoveBoxItem:(AMBoxItem *)boxItem;
+- (AMBoxItem *)boxItemBelowPoint:(NSPoint)point;
 
 @end

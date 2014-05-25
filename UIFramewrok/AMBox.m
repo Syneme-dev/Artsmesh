@@ -8,6 +8,9 @@
 #import "AMBox.h"
 
 @implementation AMBox
+{
+    NSRect _rectForPromptLine;
+}
 
 - (instancetype)initWithFrame:(NSRect)frameRect
 {
@@ -83,11 +86,8 @@
     [self setFrameSize:boxSize];
 }
 
-- (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point
+- (AMBoxItem *)boxItemBelowPoint:(NSPoint)point
 {
-    if (NSPointInRect(point, [boxItem enclosingRect]))
-        return;
-    
     point = [self convertPoint:point fromView:nil];
     CGFloat offsetX = self.paddingLeft;
     CGFloat offsetY = self.paddingTop;
@@ -95,6 +95,8 @@
     AMBoxItem *belowItem = nil;
     
     for (AMBoxItem *item in self.subviews) {
+        if (!item.visiable)
+            continue;
         if (self.style == AMBoxVertical) {
             offsetY += gap;
             if (offsetY > point.y)
@@ -110,18 +112,16 @@
         if (gap == 0)
             gap = self.gapBetweenItems;
     }
-    
-    
-//    if ([boxItem isDescendantOf:self]) {
-//        BOOL saved = self.allowBecomeEmpty;
-//        self.allowBecomeEmpty = YES;
-//        [boxItem removeFromSuperview];
-//        self.allowBecomeEmpty = saved;
-//    } else {
-//        [boxItem removeFromSuperview];
-//    }
+    return belowItem;
+}
+
+- (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point
+{
+    if (NSPointInRect(point, [boxItem enclosingRect]))
+        return;
+
     [boxItem removeFromSuperview];
-    
+    AMBoxItem *belowItem = [self boxItemBelowPoint:point];
     if (belowItem)
         [self addSubview:boxItem positioned:NSWindowAbove relativeTo:belowItem];
     else
@@ -138,14 +138,22 @@
     [self doBoxLayout];
 }
 
-- (AMBoxItem *)firstItem
+- (AMBoxItem *)firstVisibleItem
 {
-    return [self.subviews firstObject];
+    for (AMBoxItem *item in self.subviews) {
+        if (item.visiable)
+            return item;
+    }
+    return nil;
 }
 
-- (AMBoxItem *)lastItem
+- (AMBoxItem *)lastVisibleItem
 {
-    return [self.subviews lastObject];
+    for (AMBoxItem *item in [self.subviews reverseObjectEnumerator]) {
+        if (item.visiable)
+            return item;
+    }
+    return nil;
 }
 
 #pragma mark - overridden methods
@@ -190,6 +198,25 @@
 //    [NSBezierPath strokeRect:self.bounds];
 //    [[NSColor redColor] set];
 //    [NSBezierPath fillRect:self.bounds];
+    if (!NSEqualRects(NSZeroRect, _rectForPromptLine)) {
+        NSBezierPath *path = [NSBezierPath bezierPath];
+        CGFloat x = _rectForPromptLine.origin.x;
+        CGFloat y = _rectForPromptLine.origin.y;
+        CGFloat w = _rectForPromptLine.size.width;
+        CGFloat h = _rectForPromptLine.size.height;
+        if (self.style == AMBoxVertical) {
+            [path appendBezierPathWithOvalInRect:NSMakeRect(x, y, h, h)];
+            [path moveToPoint:NSMakePoint(x + h, y + h / 2)];
+            [path lineToPoint:NSMakePoint(x + w, y + h / 2)];
+        } else {
+            [path appendBezierPathWithOvalInRect:NSMakeRect(x, y, w, w)];
+            [path moveToPoint:NSMakePoint(x + w / 2, y + w)];
+            [path lineToPoint:NSMakePoint(x + w / 2, y + h)];
+        }
+        [[NSColor colorWithRed:0.43 green:0.62 blue:0.93 alpha:1.0] set];
+        [NSBezierPath setDefaultLineWidth:1.0];
+        [path stroke];
+    }
 }
 
 #pragma mark - dragging destination implementation
@@ -208,8 +235,44 @@
     return NSDragOperationNone;
 }
 
+- (NSDragOperation)draggingUpdated:(id<NSDraggingInfo>)sender
+{
+    AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
+    NSPoint location = [sender draggingLocation];
+    NSRect rect = NSZeroRect;
+    AMBoxItem *belowItem = [self boxItemBelowPoint:location];
+    if (belowItem) {
+        NSPoint origin = belowItem.frame.origin;
+        NSSize size = belowItem.frame.size;
+        if (self.style == AMBoxVertical) {
+            rect = NSMakeRect(0, origin.y + size.height + self.gapBetweenItems / 2,
+                              self.frame.size.width, 6);
+        } else {
+            rect = NSMakeRect(origin.x + size.width + 10 + self.gapBetweenItems / 2, 0,
+                              6, self.frame.size.height);
+        }
+    } else {
+        if (self.style == AMBoxVertical) {
+            rect = NSMakeRect(0, self.paddingTop / 2,
+                              self.frame.size.width - 6, 6);
+        } else {
+            rect = NSMakeRect(self.paddingLeft / 2, 0,
+                              6, self.frame.size.height - 6);
+        }
+    }
+    if (!NSEqualRects(rect, _rectForPromptLine)) {
+        _rectForPromptLine = rect;
+        self.needsDisplay = YES;
+    }
+    return NSDragOperationMove;
+}
+
 - (void)draggingExited:(id<NSDraggingInfo>)sender
 {
+    if (!NSEqualRects(NSZeroRect, _rectForPromptLine)) {
+        _rectForPromptLine = NSZeroRect;
+        self.needsDisplay = YES;
+    }
 }
 
 - (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
@@ -222,6 +285,10 @@
     AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
     NSPoint location = [sender draggingLocation];
     [self dropBoxItem:item atLocation:location];
+    if (!NSEqualRects(NSZeroRect, _rectForPromptLine)) {
+        _rectForPromptLine = NSZeroRect;
+        self.needsDisplay = YES;
+    }
     return YES;
 }
 

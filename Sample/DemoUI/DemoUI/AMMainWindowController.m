@@ -102,7 +102,7 @@
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;
-    _containerView.paddingRight = 20;
+    _containerView.paddingRight = 50;
     _containerView.minSizeConstraint = _containerView.frame.size;
     _containerView.allowBecomeEmpty = YES;
     _containerView.gapBetweenItems = 50;
@@ -114,7 +114,9 @@
          newBox.minSizeConstraint = NSMakeSize(0, contentHeight);
          newBox.paddingTop = 20;
          newBox.paddingBottom = 20;
-         newBox.gapBetweenItems = 20;
+         newBox.paddingLeft = 6;
+         newBox.paddingRight = 0;
+         newBox.gapBetweenItems = 40;
          [newBox addSubview:boxItem];
          return newBox;
      };

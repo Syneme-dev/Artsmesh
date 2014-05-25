@@ -67,16 +67,16 @@
     CGFloat x2 = hostingBox.bounds.size.width;
     CGFloat y2 = hostingBox.bounds.size.height;
     if (hostingBox.style == AMBoxVertical) {
-        if (self != hostingBox.firstItem)
+        if (self != hostingBox.firstVisibleItem)
             y1 = origin.y - hostingBox.gapBetweenItems;
-        if (self != hostingBox.lastItem)
+        if (self != hostingBox.lastVisibleItem)
             y2 = origin.y + size.height + hostingBox.gapBetweenItems;
         NSRect rect = NSMakeRect(x1, y1, x2 - x1, y2 - y1);
         return [hostingBox convertRect:rect toView:nil];
     } else {
-        if (self != hostingBox.firstItem)
+        if (self != hostingBox.firstVisibleItem)
             x1 = origin.x - hostingBox.gapBetweenItems;
-        if (self != hostingBox.lastItem)
+        if (self != hostingBox.lastVisibleItem)
             x2 = origin.x + size.width + hostingBox.gapBetweenItems;
         NSRect rect = NSMakeRect(x1, y1, x2 - x1, y2 - y1);
         return [hostingBox convertRect:rect toView:nil];
@@ -208,7 +208,7 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     NSImage* draggingImage = [[NSImage alloc] initWithSize:imageRect.size];
     [draggingImage addRepresentation:imageRep];
     [draggingImage lockFocus];
-    [[NSColor colorWithWhite:1.0 alpha:0.5] set];
+    [[NSColor colorWithWhite:1.0 alpha:0.3] set];
     [NSBezierPath fillRect:imageRect];
     [draggingImage unlockFocus];
     

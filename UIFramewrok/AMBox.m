@@ -1,6 +1,5 @@
 //
 //  AMBox.m
-//  BoxLayout2
 //
 //  Created by lattesir on 5/20/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
@@ -20,7 +19,7 @@
     self = [super initWithFrame:NSZeroRect];
     if (self) {
         _style = style;
-        self.draggingSource = NO;
+        self.dragBehavior = AMDragForNone;
         [self registerForDraggedTypes: @[NSPasteboardTypeString]];
     }
     return self;
@@ -36,6 +35,14 @@
     return [[AMBox alloc] initWithFrame:NSZeroRect sytle:AMBoxVertical];
 }
 
+
+- (void)setPadding:(CGFloat)padding
+{
+    self.paddingLeft = padding;
+    self.paddingRight = padding;
+    self.paddingTop = padding;
+    self.paddingBottom = padding;
+}
 
 - (void)doBoxLayout
 {
@@ -78,6 +85,10 @@
 
 - (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point
 {
+    if (NSPointInRect(point, [boxItem enclosingRect]))
+        return;
+    
+    point = [self convertPoint:point fromView:nil];
     CGFloat offsetX = self.paddingLeft;
     CGFloat offsetY = self.paddingTop;
     CGFloat gap = 0;
@@ -100,14 +111,16 @@
             gap = self.gapBetweenItems;
     }
     
-    if ([boxItem isDescendantOf:self]) {
-        BOOL saved = self.allowBecomeEmpty;
-        self.allowBecomeEmpty = YES;
-        [boxItem removeFromSuperview];
-        self.allowBecomeEmpty = saved;
-    } else {
-        [boxItem removeFromSuperview];
-    }
+    
+//    if ([boxItem isDescendantOf:self]) {
+//        BOOL saved = self.allowBecomeEmpty;
+//        self.allowBecomeEmpty = YES;
+//        [boxItem removeFromSuperview];
+//        self.allowBecomeEmpty = saved;
+//    } else {
+//        [boxItem removeFromSuperview];
+//    }
+    [boxItem removeFromSuperview];
     
     if (belowItem)
         [self addSubview:boxItem positioned:NSWindowAbove relativeTo:belowItem];
@@ -134,34 +147,6 @@
 {
     return [self.subviews lastObject];
 }
-
-/*
-- (NSRect)enclosingRectForSubItem:(AMBoxItem *)item
-{
-    NSRect rect = NSZeroRect;
-    CGFloat dX, dY;
-    
-    if (item.superview == self) {
-        rect = item.frame;
-        if (self.style == AMBoxVertical) {
-            dX = -self.paddingLeft;
-            dY = (item == self.firstItem) ? -self.paddingTop : -self.gapBetweenItems;
-            rect = NSOffsetRect(rect, dX, dY);
-            dX = -dX + self.paddingRight;
-            dY = (item == self.lastItem) ? -dY + self.paddingBottom : -dY + self.gapBetweenItems;
-            rect = NSInsetRect(rect, dX, dY);
-        } else {
-            dX = (item == self.firstItem) ? -self.paddingLeft : -self.gapBetweenItems;
-            dY = -self.paddingTop;
-            rect = NSOffsetRect(rect, dX, dY);
-            dX = (item == self.lastItem) ? -dX + self.paddingRight : -dX + self.gapBetweenItems;
-            dY = -dY + self.paddingBottom;
-            rect = NSInsetRect(rect, dX, dY);
-        }
-    }
-    return rect;
-}
- */
 
 #pragma mark - overridden methods
 
@@ -235,7 +220,7 @@
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
 {
     AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
-    NSPoint location = [self convertPoint:[sender draggingLocation] fromView:nil];
+    NSPoint location = [sender draggingLocation];
     [self dropBoxItem:item atLocation:location];
     return YES;
 }

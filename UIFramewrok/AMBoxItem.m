@@ -1,20 +1,19 @@
 //
 //  AMBoxItem.m
-//  BoxLayout2
 //
 //  Created by lattesir on 5/20/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
 #import "AMBoxItem.h"
+#import "AMBox.h"
 
 @interface AMBoxItem ()
 {
     NSEvent *_mouseDownEvent;
-    BOOL _draggingSessionCreated;
 }
 
-- (NSDraggingItem *)createDraggingItem;
+- (NSArray *)createDraggingItems;
 
 @end
 
@@ -25,7 +24,7 @@
     self = [super initWithFrame:frameRect];
     if (self) {
         _maxSizeConstraint = NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX);
-        _draggingSource = YES;
+        _dragBehavior = AMDragForMoving;
     }
     return self;
 }
@@ -40,12 +39,48 @@
     return NO;
 }
 
-- (void)setPadding:(CGFloat)padding
+- (AMBox *)hostingBox
 {
-    self.paddingLeft = padding;
-    self.paddingRight = padding;
-    self.paddingTop = padding;
-    self.paddingBottom = padding;
+    if ([self.superview isKindOfClass:[AMBox class]])
+        return (AMBox *)self.superview;
+    else
+        return nil;
+}
+
+- (NSRect)enclosingRect
+{
+    AMBox *hostingBox = self.hostingBox;
+    if (!hostingBox || !self.visiable)
+        return NSZeroRect;
+    
+    int count = 0;
+    for (AMBoxItem *item in hostingBox.subviews) {
+        if (item.visiable)
+            count++;
+    }
+    if (count == 1)
+        return [hostingBox enclosingRect];
+    
+    NSPoint origin = self.frame.origin;
+    NSSize size = self.frame.size;
+    CGFloat x1 = 0, y1 = 0;
+    CGFloat x2 = hostingBox.bounds.size.width;
+    CGFloat y2 = hostingBox.bounds.size.height;
+    if (hostingBox.style == AMBoxVertical) {
+        if (self != hostingBox.firstItem)
+            y1 = origin.y - hostingBox.gapBetweenItems;
+        if (self != hostingBox.lastItem)
+            y2 = origin.y + size.height + hostingBox.gapBetweenItems;
+        NSRect rect = NSMakeRect(x1, y1, x2 - x1, y2 - y1);
+        return [hostingBox convertRect:rect toView:nil];
+    } else {
+        if (self != hostingBox.firstItem)
+            x1 = origin.x - hostingBox.gapBetweenItems;
+        if (self != hostingBox.lastItem)
+            x2 = origin.x + size.width + hostingBox.gapBetweenItems;
+        NSRect rect = NSMakeRect(x1, y1, x2 - x1, y2 - y1);
+        return [hostingBox convertRect:rect toView:nil];
+    }
 }
 
 - (void)setMinSizeConstraint:(NSSize)minSizeConstraint
@@ -71,11 +106,9 @@
 
 - (void)removeFromSuperview
 {
-    NSView *superview = self.superview;
+    AMBox *hostingBox = self.hostingBox;
     [super removeFromSuperview];
-    //    self.minSizeConstraint = NSZeroSize;
-    if ([superview respondsToSelector:@selector(didRemoveBoxItem:)])
-        [superview performSelector:@selector(didRemoveBoxItem:) withObject:self];
+    [hostingBox didRemoveBoxItem:self];
 }
 
 - (void)setFrame:(NSRect)frameRect
@@ -94,8 +127,7 @@
                          MIN(MAX(minSize.height, newSize.height), maxSize.height));
     if (!NSEqualSizes(oldSize, newSize)) {
         [super setFrameSize:newSize];
-        if ([self.superview respondsToSelector:@selector(doBoxLayout)])
-            [self.superview performSelector:@selector(doBoxLayout)];
+        [self.hostingBox doBoxLayout];
     }
 }
 
@@ -103,15 +135,19 @@
 {
     if (self.isHidden ^ flag) {
         [super setHidden:flag];
-        if ([self.superview respondsToSelector:@selector(doBoxLayout)])
-            [self.superview performSelector:@selector(doBoxLayout)];
+        [self.hostingBox doBoxLayout];
     }
+}
+
+- (void)resizeByDraggingLocation:(NSPoint)location
+{
+    return;
 }
 
 #pragma clang diagnostic pop
 
 
-#pragma mark - dragging source implementation
+#pragma mark - dragging and resizing implementation
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
@@ -120,22 +156,24 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    if (self.draggingSource && !_draggingSessionCreated) {
-        NSDraggingItem *draggingItem = [self createDraggingItem];
-        [self beginDraggingSessionWithItems:@[draggingItem]
-                                      event:_mouseDownEvent
-                                     source:self];
-        _draggingSessionCreated = YES;
+    switch (self.dragBehavior) {
+        case AMDragForMoving:
+            [self beginDraggingSessionWithItems:[self createDraggingItems]
+                                          event:_mouseDownEvent
+                                         source:self];
+            break;
+        case AMDragForResizing:
+            [self resizeByDraggingLocation:[theEvent locationInWindow]];
+            break;
+        default:
+            break;
     }
-    return;
 }
 
 - (void)draggingSession:(NSDraggingSession *)session
            endedAtPoint:(NSPoint)screenPoint
               operation:(NSDragOperation)operation
 {
-    _draggingSessionCreated = NO;
-    
     if (operation == NSDragOperationDelete) {
         [self removeFromSuperview];
         return;
@@ -156,22 +194,12 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     }
 }
 
-- (NSDraggingItem *)createDraggingItem
+- (NSArray *)createDraggingItems
 {
     NSPasteboardItem *pasteboardItem = [[NSPasteboardItem alloc] init];
     [pasteboardItem setString:@"" forType:NSPasteboardTypeString];
     
-    /*
-     NSRect draggingRect = NSZeroRect;
-     draggingRect.size = self.frame.size;
-     NSImage *draggingImage = [[NSImage alloc] initWithSize:draggingRect.size];
-     [draggingImage lockFocus];
-     [self drawRect:draggingRect];
-     [[NSColor colorWithWhite:1.0 alpha:0.5] set];
-     [NSBezierPath fillRect:draggingRect];
-     [draggingImage unlockFocus];
-     */
-    
+    // generate semi-transparent thumbnail
     NSBitmapImageRep *imageRep = [self bitmapImageRepForCachingDisplayInRect:self.bounds];
     imageRep.size = self.bounds.size;
     [self cacheDisplayInRect:self.bounds toBitmapImageRep:imageRep];
@@ -188,7 +216,7 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
                                     initWithPasteboardWriter:pasteboardItem];
     [draggingItem setDraggingFrame:imageRect contents:draggingImage];
     
-    return draggingItem;
+    return @[draggingItem];
 }
 
 @end

@@ -1,6 +1,5 @@
 //
 //  AMBox.h
-//  BoxLayout2
 //
 //  Created by lattesir on 5/20/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
@@ -16,9 +15,13 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 
 @interface AMBox : AMBoxItem<NSDraggingDestination>
 
-@property(nonatomic, readonly) AMBoxItem *firstItem;
-@property(nonatomic, readonly) AMBoxItem *lastItem;
+@property(nonatomic, readonly) AMBoxItem *firstVisibleItem;
+@property(nonatomic, readonly) AMBoxItem *lastVisibleItem;
 @property(nonatomic, readonly) AMBoxStyle style;
+@property(nonatomic) CGFloat paddingLeft;
+@property(nonatomic) CGFloat paddingRight;
+@property(nonatomic) CGFloat paddingTop;
+@property(nonatomic) CGFloat paddingBottom;
 @property(nonatomic) CGFloat gapBetweenItems;
 @property(nonatomic) BOOL allowBecomeEmpty;
 @property(nonatomic, copy) AMBoxItem *(^prepareForAdding)(AMBoxItem *);
@@ -28,9 +31,10 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 
 // designated initializer
 - (instancetype)initWithFrame:(NSRect)frameRect sytle:(AMBoxStyle)style;
+- (void)setPadding:(CGFloat)padding;
 - (void)doBoxLayout;
 - (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point;
 - (void)didRemoveBoxItem:(AMBoxItem *)boxItem;
-// - (NSRect)enclosingRectForSubItem:(AMBoxItem *)item;
+- (AMBoxItem *)boxItemBelowPoint:(NSPoint)point;
 
 @end

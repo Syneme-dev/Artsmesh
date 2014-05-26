@@ -188,6 +188,7 @@
     [panelViewController.view addSubview:socialViewController.view];
     [panelViewController setTitle:@"SOCIAL"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
+      [socialViewController.socialWebTab setPolicyDelegate:socialViewController];
     
     [socialViewController.socialWebTab setDrawsBackground:NO];
 //    [_containerView addSubview:panelViewController.view];

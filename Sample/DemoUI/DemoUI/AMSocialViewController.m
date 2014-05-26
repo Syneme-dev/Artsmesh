@@ -29,9 +29,27 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-                
+      
+        
             }
     return self;
+}
+
+- (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
+    if( [sender isEqual:self.socialWebTab] ) {
+        [listener use];
+    }
+    else {
+        [[NSWorkspace sharedWorkspace] openURL:[actionInformation objectForKey:WebActionOriginalURLKey]];
+        [listener ignore];
+
+    }
+}
+
+
+- (void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener {
+    [[NSWorkspace sharedWorkspace] openURL:[actionInformation objectForKey:WebActionOriginalURLKey]];
+    [listener ignore];
 }
 
 
@@ -77,9 +95,12 @@
     {
         path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
     }
-    else{
+    else if([url hasPrefix:statusNetURL]){
         path=[path stringByAppendingString:@"/Contents/Resources/web.css"];
     }
+             else{
+                 self.socialWebTab.preferences.userStyleSheetEnabled = NO;
+             }
     self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 
     if(!isLogin)

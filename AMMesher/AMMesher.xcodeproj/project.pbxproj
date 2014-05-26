@@ -22,12 +22,28 @@
 		26BC15C919321D280020AD2B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15C719321D280020AD2B /* MainMenu.xib */; };
 		26BC15CB19321D280020AD2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15CA19321D280020AD2B /* Images.xcassets */; };
 		26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5218D7C2A2006501C4 /* AMMesher.framework */; };
+		26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */; };
+		26BC15E71932E7F30020AD2B /* amserver in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15E61932E7F30020AD2B /* amserver */; };
+		26BC15E91932E8040020AD2B /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26BC15E61932E7F30020AD2B /* amserver */; };
 		26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */; };
 		26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */; };
 		26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4D18FCB61000DD04A6 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4E18FCB61000DD04A6 /* AMMesher.m */; };
 		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		26BC15E81932E7FE0020AD2B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				26BC15E91932E8040020AD2B /* amserver in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
@@ -55,6 +71,8 @@
 		26BC15C519321D280020AD2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		26BC15C819321D280020AD2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		26BC15CA19321D280020AD2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
+		26BC15E61932E7F30020AD2B /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26F2BF4D18FCB61000DD04A6 /* AMMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesher.h; sourceTree = "<group>"; };
@@ -67,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */,
 				2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */,
 				D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */,
 				2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */,
@@ -90,6 +109,7 @@
 		2692CD4818D7C2A2006501C4 = {
 			isa = PBXGroup;
 			children = (
+				26BC15E61932E7F30020AD2B /* amserver */,
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
 				26BC15B819321D280020AD2B /* AMMesherTest */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,
@@ -109,6 +129,7 @@
 		2692CD5418D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */,
 				2630E02519163B390071260C /* AMNotificationManager.framework */,
 				D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */,
 				2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */,
@@ -220,6 +241,7 @@
 				26BC15B219321D280020AD2B /* Sources */,
 				26BC15B319321D280020AD2B /* Frameworks */,
 				26BC15B419321D280020AD2B /* Resources */,
+				26BC15E81932E7FE0020AD2B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -264,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */,
+				26BC15E71932E7F30020AD2B /* amserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +527,7 @@
 				26BC15DF19321D280020AD2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

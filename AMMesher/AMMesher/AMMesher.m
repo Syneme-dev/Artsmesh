@@ -7,8 +7,15 @@
 //
 #import "AMMesher.h"
 #import "AMUser.h"
+#import "AMLeaderElecter.h"
+#import "AMTaskLauncher/AMShellTask.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMMesher
+{
+    AMLeaderElecter* _elector;
+    AMShellTask *_mesherServerTask;
+}
 
 +(id)sharedAMMesher{
     static AMMesher* sharedMesher = nil;
@@ -27,6 +34,106 @@
     
     return self;
 }
+
+-(void)loadPreference
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+
+//    _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
+//    _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
+//    _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
+//    _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
+//    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_UserTTLTimeout];
+//    _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
+//    _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
+//    _machineName = [defaults stringForKey:Preference_Key_General_MachineName];
+//
+//    self.mySelf.groupName = @"Artsmesh";
+//    self.mySelf.domain =[defaults stringForKey:Preference_Key_User_Domain];
+//    self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
+//    self.mySelf.uniqueName = [NSString stringWithFormat:@"%@@%@.%@",
+//                              [defaults stringForKey:Preference_Key_User_NickName],
+//                              self.mySelf.domain,
+//                              self.mySelf.location];
+//    self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
+//    self.mySelf.privateIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+//    self.mySelf.controlPort = [defaults stringForKey:Preference_Key_General_ControlPort];
+//    self.mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+
+}
+
+-(void)startLoalMesher{
+    [self loadPreference];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* mesherServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
+
+    _elector = [[AMLeaderElecter alloc] init];
+    _elector.mesherPort = [mesherServerPort intValue];
+
+    [_elector kickoffElectProcess];
+    [_elector addObserver:self forKeyPath:@"state"
+                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                  context:nil];
+}
+
+-(void)startMesherServer{
+    
+    if (_mesherServerTask){
+        [_mesherServerTask cancel];
+    }
+    
+    NSString *command = [NSString stringWithFormat:@"AMMesherServer -rest_port %@ -heartbeat_port %@ -user_timeout %@",
+                         @"8080", @"8082", @"30"];
+    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
+    [_mesherServerTask launch];
+}
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context{
+    
+    if ([object isEqualTo:_elector]){
+        if ([keyPath isEqualToString:@"state"]){
+            
+            int oldState = [[change objectForKey:@"old"] intValue];
+            int newState = [[change objectForKey:@"new"] intValue];
+            NSLog(@" old state is %d", oldState);
+            NSLog(@" new state is %d", newState);
+
+            if(newState == 2){
+                //I'm the leader
+                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                
+                [self willChangeValueForKey:@"isLeader"];
+                self.isLeader = YES;
+                [self didChangeValueForKey:@"isLeader"];
+                
+                [self willChangeValueForKey:@"localLeaderName"];
+                self.localLeaderName = _elector.mesherHost;
+                [self didChangeValueForKey:@"localLeaderName"];
+                
+            }else if(newState == 4){
+                //Joined
+                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                
+                [self willChangeValueForKey:@"isLeader"];
+                self.isLeader = NO;
+                [self didChangeValueForKey:@"isLeader"];
+                
+                [self willChangeValueForKey:@"localLeaderName"];
+                self.localLeaderName = _elector.mesherHost;
+                [self didChangeValueForKey:@"localLeaderName"];
+            }
+        }else{
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
+    }
+}
+
 
 
 //+(NSOperationQueue*)sharedEtcdOperQueue
@@ -49,32 +156,7 @@
 
 
 //
-//-(void)getUserDefaults
-//{
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    
-//    _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-//    _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
-//    _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
-//    _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
-//    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_UserTTLTimeout];
-//    _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
-//    _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
-//    _machineName = [defaults stringForKey:Preference_Key_General_MachineName];
-//    
-//    self.mySelf.groupName = @"Artsmesh";
-//    self.mySelf.domain =[defaults stringForKey:Preference_Key_User_Domain];
-//    self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
-//    self.mySelf.uniqueName = [NSString stringWithFormat:@"%@@%@.%@",
-//                              [defaults stringForKey:Preference_Key_User_NickName],
-//                              self.mySelf.domain,
-//                              self.mySelf.location];
-//    self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
-//    self.mySelf.privateIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
-//    self.mySelf.controlPort = [defaults stringForKey:Preference_Key_General_ControlPort];
-//    self.mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-//
-//}
+
 //
 //-(NSArray*) myGroupUsers
 //{
@@ -87,19 +169,7 @@
 //    return _usergroupDest.userGroups;
 //}
 //
-//-(void)startLoalMesher
-//{
-//    [self getUserDefaults];
-//    
-//    _elector = [[AMLeaderElecter alloc] init];
-//    _elector.mesherPort = [_etcdServerPort intValue];
-//    _communicator = [[AMCommunicator alloc] initWithPort:self.mySelf.controlPort];
-//    
-//    [_elector kickoffElectProcess];
-//    [_elector addObserver:self forKeyPath:@"state"
-//                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                  context:nil];
-//}
+
 //
 //-(void)stopLocalMesher
 //{
@@ -439,68 +509,6 @@
 //    }
 //}
 //
-//#pragma mark -
-//#pragma   mark KVO
-//- (void) observeValueForKeyPath:(NSString *)keyPath
-//                       ofObject:(id)object
-//                         change:(NSDictionary *)change
-//                        context:(void *)context
-//{
-//    if ([object isEqualTo:_elector])
-//    {
-//        if ([keyPath isEqualToString:@"state"])
-//        {
-//            int oldState = [[change objectForKey:@"old"] intValue];
-//            int newState = [[change objectForKey:@"new"] intValue];
-//            
-//            NSLog(@" old state is %d", oldState);
-//            NSLog(@" new state is %d", newState);
-//            
-//            if(newState == 2)//Published
-//            {
-//                [self willChangeValueForKey:@"isLeader"];
-//                self.isLeader = YES;
-//                [self didChangeValueForKey:@"isLeader"];
-//                
-//                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
-//                
-//                if (self.etcdState == 0)
-//                {
-//                    [self performSelectorOnMainThread:@selector(launchETCD)
-//                                           withObject:nil waitUntilDone:NO];
-//                }
-//            }
-//            else if(newState == 4)//Joined
-//            {
-//                self.isLeader = NO;
-//                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
-//                
-//                if(self.etcdState == 0)
-//                {
-//                    [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
-//                }
-//            }
-//        }
-//        else
-//        {
-//            [super observeValueForKeyPath:keyPath
-//                                 ofObject:object
-//                                   change:change
-//                                  context:context];
-//        }
-//    }
-//    else if([object isEqualTo: _usergroupDest])
-//    {
-//         if ([keyPath isEqualToString:@"userGroups"])
-//         {
-//             //forward the KVO message
-//             [self willChangeValueForKey:@"myGroupUsers"];
-//             [self didChangeValueForKey:@"myGroupUsers"];
-//             [self willChangeValueForKey:@"allGroupUsers"];
-//             [self didChangeValueForKey:@"allGroupUsers"];
-//         }
-//    }
-//}
 //
 //
 //#pragma mark -

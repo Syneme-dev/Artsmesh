@@ -11,6 +11,15 @@
 
 @implementation AMUserPortMap
 
+-(NSDictionary*)jsonDict{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:self.portName forKey:@"PortName"];
+    [dict setObject:self.internalPort forKey:@"InternalPort"];
+    [dict setObject:self.natMapPort forKey:@"NATMapPort"];
+    
+    return dict;
+}
+
 -(NSString*)jsonString{
     
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
@@ -66,12 +75,12 @@
     
     NSMutableArray* portMapsJsonStr = [[NSMutableArray alloc] init];
     for(AMUserPortMap* pm in self.portMaps) {
-        NSString* jStr = [pm jsonString];
-        [portMapsJsonStr addObject:jStr];
+        NSDictionary* dict = [pm jsonDict];
+        [portMapsJsonStr addObject:dict];
     }
     
     [dict setObject:portMapsJsonStr forKey:@"PortMaps"];
-    NSData* encodedData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    NSData* encodedData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     NSString* jsonString = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
     
     return jsonString;

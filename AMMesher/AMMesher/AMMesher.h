@@ -14,6 +14,9 @@
 @property AMUser* mySelf;
 @property NSMutableArray* allUsers;
 
+@property NSString* localLeaderName;
+@property BOOL isLeader;
+
 +(id)sharedAMMesher;
 -(void)startLoalMesher;
 

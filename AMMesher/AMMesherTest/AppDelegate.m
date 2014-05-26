@@ -8,12 +8,19 @@
 
 #import "AppDelegate.h"
 #import "AMUser.h"
+#import "AMMesher.h"
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    
+    [mesher startLoalMesher];
+}
+
+-(void)AMUsertest{
     AMUser* user = [[AMUser alloc] init];
     user.nickName = @"test";
     
@@ -24,7 +31,7 @@
     
     NSString* jsonStr1 = [pm1 jsonString];
     NSLog(jsonStr1);
-
+    
     AMUserPortMap* pm2 = [[AMUserPortMap alloc] init];
     pm2.portName = @"test2";
     pm2.internalPort = @"12345";

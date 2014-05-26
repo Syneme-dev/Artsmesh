@@ -23,6 +23,7 @@
     NSString* _amserverRestPort;
     NSString* _amserverUdpPort;
     NSString* _amserverURL;
+    NSString* _amuserTimeout;
     
     int uselistVsersion;
 }
@@ -61,7 +62,11 @@
 }
 
 -(void)loadPreference{
-    
+    //TODO:
+    _amserverIp = @"localhost";
+    _amserverRestPort = @"8080";
+    _amserverUdpPort = @"8082";
+    _amuserTimeout = @"30";
 }
 
 -(void)startLoalMesher{
@@ -100,9 +105,33 @@
         [_mesherServerTask cancel];
     }
     
-    NSString *command = [NSString stringWithFormat:@"AMMesherServer -rest_port %@ -heartbeat_port %@ -user_timeout %@", @"8080", @"8082", @"30"];
+    [self killAllAMServer];
+    
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"amserver"];
+    NSString *command = [NSString stringWithFormat:
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
+                         lanchPath, _amserverRestPort,
+                         _amserverUdpPort, _amuserTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     [_mesherServerTask launch];
+    
+    NSFileHandle *inputStream = [_mesherServerTask fileHandlerForReading];
+    NSMutableString *content = [[NSMutableString alloc] init];
+    
+    //Log Message, later will be remove or redirect to file
+    inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
+        NSData *data = [fh availableData];
+        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        NSLog(content);
+    };
+
+}
+
+-(void)killAllAMServer{
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"amserver", nil]];
+   // usleep(1000*500);
 }
 
 -(void)registerSelf{
@@ -235,7 +264,7 @@
         }else{
             //TODO: tell the user update self error
         }
-        
+    
     }
 }
 

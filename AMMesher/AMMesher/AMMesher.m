@@ -23,6 +23,8 @@
     NSString* _amserverRestPort;
     NSString* _amserverUdpPort;
     NSString* _amserverURL;
+    
+    int uselistVsersion;
 }
 
 +(id)sharedAMMesher{
@@ -39,6 +41,7 @@
     if (self = [super init]){
         self.mySelf = [[AMUser alloc] init];
         self.allUsers = [[NSMutableArray alloc] init];
+        uselistVsersion = 0;
     }
     
     return self;
@@ -58,29 +61,7 @@
 }
 
 -(void)loadPreference{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-
-//    _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-//    _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
-//    _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
-//    _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
-//    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_UserTTLTimeout];
-//    _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
-//    _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
-//    _machineName = [defaults stringForKey:Preference_Key_General_MachineName];
-//
-//    self.mySelf.groupName = @"Artsmesh";
-//    self.mySelf.domain =[defaults stringForKey:Preference_Key_User_Domain];
-//    self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
-//    self.mySelf.uniqueName = [NSString stringWithFormat:@"%@@%@.%@",
-//                              [defaults stringForKey:Preference_Key_User_NickName],
-//                              self.mySelf.domain,
-//                              self.mySelf.location];
-//    self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
-//    self.mySelf.privateIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
-//    self.mySelf.controlPort = [defaults stringForKey:Preference_Key_General_ControlPort];
-//    self.mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-
+    
 }
 
 -(void)startLoalMesher{
@@ -98,6 +79,21 @@
                   context:nil];
 }
 
+-(void)stopLocalMesher{
+    
+    if (self.isLeader == NO) {
+        AMUpdateUserOperation* deleteOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
+        deleteOper.action = @"delete";
+        [deleteOper start];
+    }
+    
+    [_elector stopElect];
+    
+    if (_mesherServerTask){
+        [_mesherServerTask cancel];
+    }
+}
+
 -(void)startMesherServer{
     
     if (_mesherServerTask){
@@ -110,12 +106,9 @@
 }
 
 -(void)registerSelf{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* mesherUpdPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-    NSString* mesherAddr = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
+    uselistVsersion = 0;
     
-    AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:mesherAddr withPort:mesherUpdPort];
-    
+    AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     updateOper.action = @"register";
     [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
 }
@@ -124,6 +117,45 @@
     AMUpdateUserOperation* heartbeatOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     heartbeatOper.action = @"heartbeat";
     [[AMMesher sharedEtcdOperQueue] addOperation:heartbeatOper];
+}
+
+-(void)joinGroup:(NSString*)groupName{
+    if ([self.mySelf.groupName isEqualToString:groupName]) {
+        return;
+    }
+    
+    @synchronized(self){
+        self.mySelf.groupName = groupName;
+    }
+    
+    AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
+    updateOper.action = @"update";
+    [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
+    
+}
+
+-(void)backToArtsmesh{
+    [self joinGroup:@"Artsmesh"];
+}
+
+-(void)goOnline{
+    if (self.isOnline) {
+        return;
+    }
+    
+    if (self.isLeader) {
+        //stop local server is i'm the local leader
+        if (_mesherServerTask){
+            [_mesherServerTask cancel];
+        }
+    }
+    
+    @synchronized(self){
+        self.isOnline = YES;
+        //TODO: change the amserver ip and port
+        [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
+        [self registerSelf];
+    }
 }
 
 #pragma mark -

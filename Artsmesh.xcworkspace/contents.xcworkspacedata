@@ -58,9 +58,6 @@
          <FileRef
             location = "group:AMMesher/AMMesher.xcodeproj">
          </FileRef>
-         <FileRef
-            location = "group:AMETCDApi/AMETCDApi.xcodeproj">
-         </FileRef>
       </Group>
    </Group>
    <Group

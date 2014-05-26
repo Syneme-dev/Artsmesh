@@ -2,31 +2,37 @@
 //  AMUser.h
 //  AMMesher
 //
-//  Created by 王 为 on 3/27/14.
+//  Created by Wei Wang on 5/25/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "AMUserGroupNode.h"
 
-@interface AMUser : AMUserGroupNode
+@interface AMUserPortMap : NSObject
+@property NSString* portName;
+@property NSString* internalPort;
+@property NSString* natMapPort;
 
-@property NSString* uniqueName;
+-(NSString*)jsonString;
+@end
+
+@interface AMUser : NSObject
+
+@property NSString* userid;
+@property NSString* nickName;
 @property NSString* domain;
 @property NSString* location;
 @property NSString* groupName;
 @property NSString* description;
 @property NSString* publicIp;
 @property NSString* privateIp;
-@property NSString* chatPort;
-@property NSString* controlPort;
-@property NSString* chatPortMap;
+@property NSString* localLeader;
+@property NSMutableArray* portMaps;
 
 -(id)init;
 
--(NSString*)nodeName;
-
-+(NSArray*)parseFullUserName:(NSString*)fullName;
-
+-(NSString*)jsonString;
+-(NSString*)md5String;
 
 @end
+

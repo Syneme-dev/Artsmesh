@@ -320,4 +320,21 @@
         [pannelViewController closePanel:nil];
     }
 }
+
+-(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status{
+    NSView *mainView= self.window.contentView;
+    for (NSView *subView in mainView.subviews) {
+        if([subView isKindOfClass:[BlueBackgroundView class]] )
+        {
+            NSButton *buttonView= subView.subviews[0];
+            if(buttonView !=nil&& [buttonView.identifier  isEqualTo:identifier])
+            {
+                [buttonView setState:status?NSOnState:NSOffState];
+                break;
+            }
+        }
+    }
+
+
+}
 @end

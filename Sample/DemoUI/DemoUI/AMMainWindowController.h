@@ -16,5 +16,7 @@
 @property (weak) IBOutlet NSTextField *versionLabel;
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
 
+-(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
+
 
 @end

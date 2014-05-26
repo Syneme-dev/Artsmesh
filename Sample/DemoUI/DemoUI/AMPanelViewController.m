@@ -7,7 +7,7 @@
 //
 
 #import "AMPanelViewController.h"
-
+#import "AMAppDelegate.h"
 @interface AMPanelViewController ()
 
 @end
@@ -38,9 +38,8 @@
 
 - (IBAction)closePanel:(id)sender {
     [self.view setHidden:YES];
-    //TODO:move right panel to left.
-//    NSPoint point=NSMakePoint(self.view.frame.origin.x+100.0, self.view.frame.origin.y);
-//    [self.view setFrameOrigin:point];
-    
+    AMAppDelegate *appDelegate=[NSApp delegate];
+    [appDelegate.mainWindowController setSideBarItemStatus:self.titleView.stringValue withStatus:NO ];
+    //Note:move right panel to left when close.
 }
 @end

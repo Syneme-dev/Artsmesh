@@ -5,51 +5,29 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-//#import "AMETCDOperationHeader.h"
-//#import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
-//#import "AMLeaderElecter.h"
-//#import "AMNetworkUtils/AMNetworkUtils.h"
-//#import "AMETCDApi/AMETCD.h"
-//#import "AMGroup.h"
 #import "AMUser.h"
 
-
-
 @implementation AMMesher
-//{
-//    AMLeaderElecter* _elector;
-//    AMETCDDataSource* _dataSource;
-//    AMCommunicator* _communicator;
-//    AMETCDDataDestination* _usergroupDest;
-//    GCDAsyncUdpSocket* _publicIpEchoSocket;
-//    NSTimer* _userTTL;
-//    
-//    NSString* _etcdServerPort;
-//    NSString* _etcdClientPort;
-//    NSString* _etcdHeartbeatTimeout;
-//    NSString* _etcdElectionTimeout;
-//    NSString* _etcdUserTTL;
-//    NSString* _artsmeshIOIp;
-//    NSString* _artsmeshIOPort;
-//    NSString* _machineName;
-//    NSString* _maxNode;
-//}
 
-//+(id)sharedAMMesher
-//{
-//    static AMMesher* sharedMesher = nil;
-//    
-//    @synchronized(self)
-//    {
-//        if (sharedMesher == nil)
-//        {
-//            sharedMesher = [[self alloc] init];
-//        }
-//    }
-//    
-//    return sharedMesher;
-//}
++(id)sharedAMMesher{
+    static AMMesher* sharedMesher = nil;
+    @synchronized(self){
+        if (sharedMesher == nil){
+            sharedMesher = [[self alloc] init];
+        }
+    }
+    return sharedMesher;
+}
+
+-(id)init{
+    if (self = [super init]){
+        self.mySelf = [[AMUser alloc] init];
+    }
+    
+    return self;
+}
+
 
 //+(NSOperationQueue*)sharedEtcdOperQueue
 //{
@@ -68,18 +46,7 @@
 //    return etcdOperQueue;
 //}
 
--(id)init
-{
-    if (self = [super init])
-    {
-//        self.isLeader = NO;
-//        self.isOnline = NO;
-//        self.etcdState = 0;
-//        self.mySelf = [[AMUser alloc] init];
-    }
-    
-    return self;
-}
+
 
 //
 //-(void)getUserDefaults

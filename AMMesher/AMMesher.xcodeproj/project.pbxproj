@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2620DD16193306780075A09F /* AMMesherOperationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2620DD15193306780075A09F /* AMMesherOperationDelegate.h */; };
+		2620DD19193306B00075A09F /* AMMesherOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2620DD17193306B00075A09F /* AMMesherOperation.h */; };
+		2620DD1A193306B00075A09F /* AMMesherOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2620DD18193306B00075A09F /* AMMesherOperation.m */; };
+		2620DD1D193308290075A09F /* AMRequestUserOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2620DD1B193308290075A09F /* AMRequestUserOperation.h */; };
+		2620DD1E193308290075A09F /* AMRequestUserOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2620DD1C193308290075A09F /* AMRequestUserOperation.m */; };
+		2620DD25193313FC0075A09F /* AMUpdateUserOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2620DD23193313FC0075A09F /* AMUpdateUserOperation.h */; };
+		2620DD26193313FC0075A09F /* AMUpdateUserOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2620DD24193313FC0075A09F /* AMUpdateUserOperation.m */; };
 		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
@@ -46,6 +53,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2620DD15193306780075A09F /* AMMesherOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherOperationDelegate.h; sourceTree = "<group>"; };
+		2620DD17193306B00075A09F /* AMMesherOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherOperation.h; sourceTree = "<group>"; };
+		2620DD18193306B00075A09F /* AMMesherOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMesherOperation.m; sourceTree = "<group>"; };
+		2620DD1B193308290075A09F /* AMRequestUserOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRequestUserOperation.h; sourceTree = "<group>"; };
+		2620DD1C193308290075A09F /* AMRequestUserOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRequestUserOperation.m; sourceTree = "<group>"; };
+		2620DD23193313FC0075A09F /* AMUpdateUserOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUpdateUserOperation.h; sourceTree = "<group>"; };
+		2620DD24193313FC0075A09F /* AMUpdateUserOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUpdateUserOperation.m; sourceTree = "<group>"; };
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +169,13 @@
 		2692CD5B18D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXGroup;
 			children = (
+				2620DD23193313FC0075A09F /* AMUpdateUserOperation.h */,
+				2620DD24193313FC0075A09F /* AMUpdateUserOperation.m */,
+				2620DD17193306B00075A09F /* AMMesherOperation.h */,
+				2620DD18193306B00075A09F /* AMMesherOperation.m */,
+				2620DD1B193308290075A09F /* AMRequestUserOperation.h */,
+				2620DD1C193308290075A09F /* AMRequestUserOperation.m */,
+				2620DD15193306780075A09F /* AMMesherOperationDelegate.h */,
 				26BC15AE193214BB0020AD2B /* AMUser.h */,
 				26BC15AF193214BB0020AD2B /* AMUser.m */,
 				26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */,
@@ -208,8 +229,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BC15B0193214BB0020AD2B /* AMUser.h in Headers */,
+				2620DD1D193308290075A09F /* AMRequestUserOperation.h in Headers */,
+				2620DD16193306780075A09F /* AMMesherOperationDelegate.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
+				2620DD25193313FC0075A09F /* AMUpdateUserOperation.h in Headers */,
+				2620DD19193306B00075A09F /* AMMesherOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,9 +333,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2620DD1E193308290075A09F /* AMRequestUserOperation.m in Sources */,
 				26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */,
 				26BC15B1193214BB0020AD2B /* AMUser.m in Sources */,
 				26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */,
+				2620DD26193313FC0075A09F /* AMUpdateUserOperation.m in Sources */,
+				2620DD1A193306B00075A09F /* AMMesherOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

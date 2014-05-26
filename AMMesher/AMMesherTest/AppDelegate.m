@@ -29,16 +29,12 @@
     pm1.internalPort = @"12345";
     pm1.natMapPort = @"45321";
     
-    NSString* jsonStr1 = [pm1 jsonString];
-    NSLog(jsonStr1);
     
     AMUserPortMap* pm2 = [[AMUserPortMap alloc] init];
     pm2.portName = @"test2";
     pm2.internalPort = @"12345";
     pm2.natMapPort = @"45321";
     
-    NSString* jsonStr2 = [pm2 jsonString];
-    NSLog(jsonStr2);
     
     [user.portMaps addObject:pm1];
     [user.portMaps addObject:pm2];

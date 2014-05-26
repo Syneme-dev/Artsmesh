@@ -9,6 +9,8 @@
 #import "AMUpdateUserOperation.h"
 #import "AMMesherOperationDelegate.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMMesher.h"
+#import "AMUser.h"
 
 @implementation AMUpdateUserOperation{
     GCDAsyncUdpSocket* _udpSocket;
@@ -53,7 +55,13 @@
         return;
     }
     
-    //send udp packets
+    if ([self.action isEqualToString:@"register"]) {
+        [self registerMyself];
+    }else if ([self.action isEqualToString:@"update"]){
+        [self updateMyself];
+    }else if ([self.action isEqualToString:@"heartbeat"]){
+        [self heartbeatMyself];
+    }
     
     do{
         _shouldRunLoopFinished = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
@@ -68,6 +76,28 @@
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(MesherOperDidFinished:)
                                                 withObject:self waitUntilDone:NO];
     return;
+}
+
+-(void)registerMyself{
+    
+    AMUser* user = nil;
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    @synchronized(self){
+        user = [mesher.mySelf copy];
+    }
+    
+    NSData* jsonData = [user jsonData];
+    [_udpSocket sendData:jsonData toHost:self.serverAddress
+                    port:[self.serverPort intValue] withTimeout:-1 tag:0];
+    
+}
+
+-(void)updateMyself{
+    
+}
+
+-(void)heartbeatMyself{
+    
 }
 
 #pragma mark -

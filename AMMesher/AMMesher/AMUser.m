@@ -20,25 +20,21 @@
     return dict;
 }
 
--(NSString*)jsonString{
-    
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:self.portName forKey:@"PortName"];
-    [dict setObject:self.internalPort forKey:@"InternalPort"];
-    [dict setObject:self.natMapPort forKey:@"NATMapPort"];
-    
-    NSData* encodedData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-    NSString* jsonString = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
-    
-    return jsonString;
-}
-
 -(NSString*)contentStr{
     NSString* contentStr = [NSString stringWithFormat:@"%@%@%@",
                             self.portName,
                             self.internalPort,
                             self.natMapPort];
     return contentStr;
+}
+
+-(AMUserPortMap*)copy{
+    AMUserPortMap* copyPortMap = [[AMUserPortMap alloc] init];
+    copyPortMap.portName = self.portName;
+    copyPortMap.internalPort = self.internalPort;
+    copyPortMap.natMapPort = self.natMapPort;
+    
+    return copyPortMap;
 }
 
 @end
@@ -63,6 +59,12 @@
 }
 
 -(NSString*)jsonString{
+   
+    NSData* encodedData = [self jsonData];
+    return [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+}
+
+-(NSData*)jsonData{
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:self.userid forKey:@"UserId"];
     [dict setObject:self.nickName forKey:@"NickName"];
@@ -80,10 +82,8 @@
     }
     
     [dict setObject:portMapsJsonStr forKey:@"PortMaps"];
-    NSData* encodedData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-    NSString* jsonString = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
-    
-    return jsonString;
+    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+
 }
 
 -(NSString*)md5String
@@ -138,6 +138,25 @@
     CFRelease(uuidObject);
     
     return uuidStr;
+}
+
+-(AMUser*)copy{
+
+    AMUser* copyUser = [[AMUser alloc ] init];
+    copyUser.userid = self.userid;
+    copyUser.nickName = self.nickName;
+    copyUser.domain = self.domain;
+    copyUser.location = self.location;
+    copyUser.groupName = self.groupName;
+    copyUser.publicIp = self.publicIp ;
+    copyUser.privateIp  = self.privateIp;
+    copyUser.localLeader = self.localLeader;
+    
+    for(AMUserPortMap* pm in self.portMaps){
+        [copyUser.portMaps addObject:[pm copy]];
+    }
+    
+    return copyUser;
 }
 
 @end

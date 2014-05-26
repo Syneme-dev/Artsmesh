@@ -215,6 +215,7 @@
                 [self didChangeValueForKey:@"localLeaderName"];
                 
                 [self startMesherServer];
+                [self registerSelf];
                 
             }else if(newState == 4){
                 //Joined
@@ -227,6 +228,8 @@
                 [self willChangeValueForKey:@"localLeaderName"];
                 self.localLeaderName = _elector.mesherHost;
                 [self didChangeValueForKey:@"localLeaderName"];
+                
+                [self registerSelf];
             }
         }else{
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

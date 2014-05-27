@@ -17,15 +17,22 @@
             <rect key="frame" x="0.0" y="0.0" width="574" height="696"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="tLa-0G-48B" customClass="BlueBackgroundView">
+                    <rect key="frame" x="0.0" y="675" width="574" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="GMd-J4-Zj6"/>
+                    </constraints>
+                </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="82" horizontalPageScroll="10" verticalLineScroll="82" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-8i-vKH">
-                    <rect key="frame" x="20" y="242" width="522" height="434"/>
+                    <rect key="frame" x="20" y="242" width="522" height="433"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hAT-cO-ZYc">
-                        <rect key="frame" x="0.0" y="0.0" width="522" height="434"/>
+                        <rect key="frame" x="0.0" y="0.0" width="522" height="433"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="80" rowSizeStyle="automatic" viewBased="YES" id="CaR-4q-Mcs">
-                                <rect key="frame" x="0.0" y="0.0" width="522" height="434"/>
+                                <rect key="frame" x="0.0" y="0.0" width="522" height="433"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -146,14 +153,17 @@
             </subviews>
             <constraints>
                 <constraint firstItem="bwT-52-Io9" firstAttribute="top" secondItem="YNy-8i-vKH" secondAttribute="bottom" constant="8" symbolic="YES" id="5mj-S8-G0W"/>
+                <constraint firstItem="tLa-0G-48B" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" id="7TJ-kV-HDj"/>
                 <constraint firstAttribute="bottom" secondItem="YNy-8i-vKH" secondAttribute="bottom" constant="242" id="9jM-ND-c1T"/>
                 <constraint firstAttribute="trailing" secondItem="YNy-8i-vKH" secondAttribute="trailing" constant="32" id="DbO-iE-zD4"/>
                 <constraint firstItem="QVG-6V-oqM" firstAttribute="top" secondItem="bwT-52-Io9" secondAttribute="bottom" constant="8" id="Dog-PL-IL2"/>
                 <constraint firstItem="HE2-lp-WMZ" firstAttribute="leading" secondItem="QVG-6V-oqM" secondAttribute="trailing" constant="8" id="Q0P-nd-Dic"/>
+                <constraint firstAttribute="trailing" secondItem="tLa-0G-48B" secondAttribute="trailing" id="RO8-5G-VXd"/>
                 <constraint firstItem="YNy-8i-vKH" firstAttribute="leading" secondItem="bwT-52-Io9" secondAttribute="leading" id="Uz6-JA-iI0"/>
                 <constraint firstItem="YNy-8i-vKH" firstAttribute="trailing" secondItem="bwT-52-Io9" secondAttribute="trailing" id="V9w-Re-oeZ"/>
-                <constraint firstItem="YNy-8i-vKH" firstAttribute="top" secondItem="QHJ-JV-rbK" secondAttribute="top" constant="20" id="iVu-VC-kUr"/>
+                <constraint firstItem="YNy-8i-vKH" firstAttribute="top" secondItem="QHJ-JV-rbK" secondAttribute="top" constant="21" id="iVu-VC-kUr"/>
                 <constraint firstItem="HE2-lp-WMZ" firstAttribute="top" secondItem="bwT-52-Io9" secondAttribute="bottom" constant="12" id="l19-Lo-rcg"/>
+                <constraint firstItem="tLa-0G-48B" firstAttribute="top" secondItem="QHJ-JV-rbK" secondAttribute="top" constant="20" id="rrx-W2-daY"/>
                 <constraint firstItem="YNy-8i-vKH" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" constant="20" id="xkJ-eR-Elu"/>
                 <constraint firstAttribute="trailing" secondItem="HE2-lp-WMZ" secondAttribute="trailing" constant="32" id="zz7-Gp-gEE"/>
             </constraints>

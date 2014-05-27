@@ -268,7 +268,7 @@
     [_containerView addSubview:panelView];
     [panelViewController setTitle:@"PING"];
     pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight+5, 600, 380);
+    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
     [panelViewController.view addSubview:pingViewController.view];
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [panelControllers setObject:panelViewController forKey:@"PING"];

@@ -35,7 +35,7 @@
     {
         if ([view isKindOfClass:[NSButton class]])
         {
-            NSButton* btn = view;
+            NSButton* btn = (NSButton*)view;
             if([btn.identifier isEqualTo:@"post"])
             {
                 [btn setTarget:self];

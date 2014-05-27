@@ -945,10 +945,10 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT">
-                        <rect key="frame" x="227" y="734" width="79" height="32"/>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
+                        <rect key="frame" x="240" y="735" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="meshButton" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -988,6 +988,15 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
+                        <rect key="frame" x="280" y="741" width="38" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mesh" id="YtJ-b7-urv">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
@@ -1044,8 +1053,9 @@
         <image name="SideBar_videoRoute" width="40" height="40"/>
         <image name="SideBar_videoRoute_h" width="40" height="40"/>
         <image name="SideBar_video_h" width="40" height="40"/>
-        <image name="meshButton" width="113" height="40"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
+        <image name="topbar_mesh" width="25" height="25"/>
+        <image name="topbar_mesh_offline" width="25" height="25"/>
     </resources>
 </document>

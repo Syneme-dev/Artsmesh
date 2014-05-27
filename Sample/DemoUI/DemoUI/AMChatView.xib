@@ -17,22 +17,22 @@
             <rect key="frame" x="0.0" y="0.0" width="574" height="696"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="107" horizontalPageScroll="10" verticalLineScroll="107" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-8i-vKH">
-                    <rect key="frame" x="20" y="242" width="534" height="434"/>
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="82" horizontalPageScroll="10" verticalLineScroll="82" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-8i-vKH">
+                    <rect key="frame" x="20" y="242" width="522" height="434"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="hAT-cO-ZYc">
-                        <rect key="frame" x="0.0" y="0.0" width="534" height="434"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hAT-cO-ZYc">
+                        <rect key="frame" x="0.0" y="0.0" width="522" height="434"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="105" rowSizeStyle="automatic" viewBased="YES" id="CaR-4q-Mcs">
-                                <rect key="frame" x="0.0" y="0.0" width="534" height="434"/>
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="80" rowSizeStyle="automatic" viewBased="YES" id="CaR-4q-Mcs">
+                                <rect key="frame" x="0.0" y="0.0" width="522" height="434"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                 <color key="gridColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="531" minWidth="40" maxWidth="1000" id="8v3-2I-2s4">
+                                    <tableColumn width="519" minWidth="40" maxWidth="1000" id="8v3-2I-2s4">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -46,11 +46,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="nkY-vF-pq6" customClass="AMChatTableCellView">
-                                                <rect key="frame" x="1" y="1" width="531" height="105"/>
+                                                <rect key="frame" x="1" y="1" width="519" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField identifier="sender" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-wF-DBE">
-                                                        <rect key="frame" x="1" y="62" width="379" height="31"/>
+                                                    <textField identifier="sender" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-wF-DBE" customClass="AMFoundryFontView">
+                                                        <rect key="frame" x="1" y="37" width="379" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sender" id="aMI-1R-Kas">
                                                             <font key="font" metaFont="system" size="18"/>
@@ -61,8 +61,8 @@
                                                             <binding destination="nkY-vF-pq6" name="value" keyPath="objectValue.sender" id="sXm-90-xS7"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField identifier="message" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-yM-cWZ">
-                                                        <rect key="frame" x="3" y="2" width="377" height="52"/>
+                                                    <textField identifier="message" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-yM-cWZ" customClass="AMFoundryFontView">
+                                                        <rect key="frame" x="3" y="-23" width="377" height="52"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="ync-DS-aRJ">
                                                             <font key="font" metaFont="system"/>
@@ -73,8 +73,8 @@
                                                             <binding destination="nkY-vF-pq6" name="value" keyPath="objectValue.message" id="CgN-ne-fE1"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField identifier="sendTime" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-q5-i1h">
-                                                        <rect key="frame" x="448" y="70" width="81" height="23"/>
+                                                    <textField identifier="sendTime" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-q5-i1h" customClass="AMFoundryFontView">
+                                                        <rect key="frame" x="448" y="45" width="81" height="23"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="10:38 AM" id="Zuj-c4-Alu">
                                                             <dateFormatter key="formatter" timeStyle="short" id="a4j-jA-rYi"/>
@@ -87,9 +87,9 @@
                                                         </connections>
                                                     </textField>
                                                     <button identifier="post" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-9z-gft">
-                                                        <rect key="frame" x="486" y="9" width="41" height="46"/>
+                                                        <rect key="frame" x="500" y="16" width="26" height="24"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" title="btn" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cgr-fC-3KC">
+                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="chat_post_h" imagePosition="overlaps" alignment="center" alternateImage="chat_post" state="on" imageScaling="proportionallyDown" inset="2" id="Cgr-fC-3KC">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -115,9 +115,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwT-52-Io9" customClass="AMTextFieldView">
-                    <rect key="frame" x="20" y="52" width="534" height="101"/>
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bwT-52-Io9" customClass="AMTextFieldView">
+                    <rect key="frame" x="20" y="133" width="522" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="101" id="d2S-sS-gcC"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="border" focusRingType="none" placeholderString="" id="cje-Cf-iTC">
                         <font key="font" metaFont="system"/>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -126,11 +129,33 @@
                         <action selector="sendMsg:" target="-2" id="cKS-q7-bKo"/>
                     </connections>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HE2-lp-WMZ" customClass="AMFoundryFontView">
+                    <rect key="frame" x="172" y="104" width="372" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="COMMAND+ENTER TO SEND CHAT &amp; STATUSNET MESSAGE" id="khc-eA-dwt">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QVG-6V-oqM">
+                    <rect key="frame" x="141" y="100" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="chat_command" id="gZ1-TK-APT"/>
+                </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="bwT-52-Io9" firstAttribute="top" secondItem="YNy-8i-vKH" secondAttribute="bottom" constant="8" symbolic="YES" id="5mj-S8-G0W"/>
+                <constraint firstAttribute="bottom" secondItem="YNy-8i-vKH" secondAttribute="bottom" constant="242" id="9jM-ND-c1T"/>
                 <constraint firstAttribute="trailing" secondItem="YNy-8i-vKH" secondAttribute="trailing" constant="32" id="DbO-iE-zD4"/>
+                <constraint firstItem="QVG-6V-oqM" firstAttribute="top" secondItem="bwT-52-Io9" secondAttribute="bottom" constant="8" id="Dog-PL-IL2"/>
+                <constraint firstItem="HE2-lp-WMZ" firstAttribute="leading" secondItem="QVG-6V-oqM" secondAttribute="trailing" constant="8" id="Q0P-nd-Dic"/>
+                <constraint firstItem="YNy-8i-vKH" firstAttribute="leading" secondItem="bwT-52-Io9" secondAttribute="leading" id="Uz6-JA-iI0"/>
+                <constraint firstItem="YNy-8i-vKH" firstAttribute="trailing" secondItem="bwT-52-Io9" secondAttribute="trailing" id="V9w-Re-oeZ"/>
                 <constraint firstItem="YNy-8i-vKH" firstAttribute="top" secondItem="QHJ-JV-rbK" secondAttribute="top" constant="20" id="iVu-VC-kUr"/>
+                <constraint firstItem="HE2-lp-WMZ" firstAttribute="top" secondItem="bwT-52-Io9" secondAttribute="bottom" constant="12" id="l19-Lo-rcg"/>
                 <constraint firstItem="YNy-8i-vKH" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" constant="20" id="xkJ-eR-Elu"/>
+                <constraint firstAttribute="trailing" secondItem="HE2-lp-WMZ" secondAttribute="trailing" constant="32" id="zz7-Gp-gEE"/>
             </constraints>
         </customView>
         <arrayController objectClassName="NSDictionary" editable="NO" id="bwB-Mm-xp2">
@@ -144,4 +169,9 @@
             </connections>
         </arrayController>
     </objects>
+    <resources>
+        <image name="chat_command" width="25" height="25"/>
+        <image name="chat_post" width="25" height="25"/>
+        <image name="chat_post_h" width="25" height="25"/>
+    </resources>
 </document>

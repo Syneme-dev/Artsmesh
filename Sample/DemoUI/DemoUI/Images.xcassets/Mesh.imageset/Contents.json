@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "user_Icon_FOAF.png"
+      "filename" : "Mesh.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "user_Icon-01.png"
+      "filename" : "Mesh@2x.png"
     }
   ],
   "info" : {

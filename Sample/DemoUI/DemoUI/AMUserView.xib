@@ -106,7 +106,19 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="MnP-fX-0Hh" customClass="BlueBackgroundView">
+                    <rect key="frame" x="0.0" y="279" width="300" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="4jZ-kC-NGv"/>
+                    </constraints>
+                </customView>
             </subviews>
+            <constraints>
+                <constraint firstItem="MnP-fX-0Hh" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" id="VE6-YX-Gyg"/>
+                <constraint firstItem="MnP-fX-0Hh" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="i8r-or-1vz"/>
+                <constraint firstAttribute="trailing" secondItem="MnP-fX-0Hh" secondAttribute="trailing" id="zVw-Wg-E8J"/>
+            </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
     </objects>

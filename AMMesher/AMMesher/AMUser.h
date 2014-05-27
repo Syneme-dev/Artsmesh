@@ -34,6 +34,8 @@
 -(NSString*)md5String;
 -(AMUser*)copy;
 
++(AMUser*)userFromJsonData:(NSData*) data;
+
 @end
 
 
@@ -66,6 +68,8 @@
 
 @property NSString* version;
 @property NSMutableArray* userlist;
+
++(AMUserRESTResponse*)responseFromJsonData:(NSData*) data;
 
 @end
 

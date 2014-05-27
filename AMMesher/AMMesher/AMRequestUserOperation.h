@@ -8,9 +8,11 @@
 
 #import "AMMesherOperation.h"
 
+@class AMUserRESTResponse;
 @interface AMRequestUserOperation : AMMesherOperation
 
 @property NSString* mesherSeverURL;
+@property AMUserRESTResponse* restResponse;
 
 -(id)initWithMesherServerUrl:(NSString*)mesherServerURL;
 

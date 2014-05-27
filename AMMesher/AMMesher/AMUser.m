@@ -58,13 +58,7 @@
     return self;
 }
 
--(NSString*)jsonString{
-   
-    NSData* encodedData = [self jsonData];
-    return [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
-}
-
--(NSData*)jsonData{
+-(NSDictionary*)jsonDict{
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:self.userid forKey:@"UserId"];
     [dict setObject:self.nickName forKey:@"NickName"];
@@ -82,9 +76,11 @@
     }
     
     [dict setObject:portMapsJsonStr forKey:@"PortMaps"];
-    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-
+    
+    return dict;
 }
+
+
 
 -(NSString*)md5String
 {
@@ -160,5 +156,58 @@
 }
 
 @end
+
+@implementation AMUserUDPRequest
+
+-(NSString*)jsonString{
+    
+    NSData* encodedData = [self jsonData];
+    return [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+}
+
+-(NSData*)jsonData{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:self.version forKey:@"Version"];
+    [dict setObject:self.action forKey:@"Action"];
+    
+    if (self.userContent != nil) {
+        [dict setObject:self.userContent forKey:@"UserContent"];
+        [dict setObject:self.contentMd5 forKey:@"ContenMd5"];
+    }
+   
+    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+}
+
+@end
+
+@implementation AMUserUDPResponse
+
++(AMUserUDPResponse*)responseFromJsonData:(NSData*) data{
+    NSError *jsonParsingError = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:data
+                                                 options:0
+                                                   error:&jsonParsingError];
+    if(jsonParsingError != nil){
+        return nil;
+    }
+    
+    if (![objects isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    
+    AMUserUDPResponse* response = [[AMUserUDPResponse alloc] init];
+    response.action = [objects valueForKey:@"Action"];
+    response.version = [objects  valueForKey:@"Version"];
+    response.contentMd5 = [objects valueForKey:@"ContentMd5"];
+    response.isSucceeded = [[objects valueForKey:@"IsSucceeded"] boolValue];
+    
+    return response;
+}
+
+@end
+
+
+
+
 
 

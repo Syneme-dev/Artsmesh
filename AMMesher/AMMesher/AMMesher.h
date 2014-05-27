@@ -11,13 +11,21 @@
 @protocol AMMesherOperationDelegate;
 @class AMUser;
 
+@protocol AMMesherDelegate <NSObject>
+
+-(void)onMesherError:(NSError*)err;
+
+@end
+
 @interface AMMesher: NSObject
 
 @property AMUser* mySelf;
 @property NSMutableArray* allUsers;
+@property NSString* uselistVersion;
 @property NSString* localLeaderName;
 @property BOOL isLeader;
 @property BOOL isOnline;
+@property id<AMMesherDelegate> delegate;
 
 +(id)sharedAMMesher;
 

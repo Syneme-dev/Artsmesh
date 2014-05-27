@@ -31,37 +31,42 @@
 @property NSMutableArray* portMaps;
 
 -(id)init;
--(NSData*)jsonData;
--(NSString*)jsonString;
 -(NSString*)md5String;
 -(AMUser*)copy;
 
 @end
 
 
-@interface AMUserRequest : NSObject
+@interface AMUserUDPRequest : NSObject
 
 @property NSString* action;
 @property NSString* version;
 @property AMUser* userContent;
 @property NSString* contentMd5;
 
+-(NSData*)jsonData;
+-(NSString*)jsonString;
+
 @end
 
 
-@interface AMUserResponse: NSObject
+@interface AMUserUDPResponse : NSObject
 
+@property NSString* action;
 @property NSString* version;
-@property AMUser* userContent;
 @property NSString* contentMd5;
+@property BOOL isSucceeded;
+
++(AMUserUDPResponse*)responseFromJsonData:(NSData*) data;
 
 @end
 
 
-@interface AMUserListResult : NSObject
+@interface AMUserRESTResponse: NSObject
 
 @property NSString* version;
 @property NSMutableArray* userlist;
 
 @end
+
 

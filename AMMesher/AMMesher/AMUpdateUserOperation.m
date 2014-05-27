@@ -13,9 +13,13 @@
 #import "AMUser.h"
 
 @implementation AMUpdateUserOperation{
+    
     GCDAsyncUdpSocket* _udpSocket;
     dispatch_queue_t _heartbeatQueue;
     BOOL _shouldRunLoopFinished;
+    NSTimer* _sendTimer;
+    int _sendPeroid;
+    int _retryTimes;
     
 }
 
@@ -24,6 +28,8 @@
         self.serverAddress = addr;
         self.serverPort = port;
         _shouldRunLoopFinished = NO;
+        _sendPeroid = 6;
+        _retryTimes = 5;
     }
     
     return self;
@@ -55,13 +61,7 @@
         return;
     }
     
-    if ([self.action isEqualToString:@"register"]) {
-        [self registerMyself];
-    }else if ([self.action isEqualToString:@"update"]){
-        [self updateMyself];
-    }else if ([self.action isEqualToString:@"heartbeat"]){
-        [self heartbeatMyself];
-    }
+    [self sendUdpPacket];
     
     do{
         _shouldRunLoopFinished = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
@@ -78,26 +78,23 @@
     return;
 }
 
--(void)registerMyself{
+-(void)sendUdpPacket{
     
-    AMUser* user = nil;
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    @synchronized(self){
-        user = [mesher.mySelf copy];
+    if (_retryTimes >= 5) {
+        _shouldRunLoopFinished  = YES;
+        self.isSucceeded = NO;
+        self.errorDescription = @"send udp packets to server failed after 5 times retry!";
+        return;
     }
     
-    NSData* jsonData = [user jsonData];
+    //make sure the action type is the same
+    self.udpRequest.action = self.action;
+    NSData* jsonData = [self.udpRequest jsonData];
     [_udpSocket sendData:jsonData toHost:self.serverAddress
                     port:[self.serverPort intValue] withTimeout:-1 tag:0];
+    _sendTimer = [NSTimer scheduledTimerWithTimeInterval:_sendPeroid target:self selector:@selector(sendUdpPacket) userInfo:nil repeats:NO];
     
-}
-
--(void)updateMyself{
-    
-}
-
--(void)heartbeatMyself{
-    
+    _retryTimes++;
 }
 
 #pragma mark -
@@ -118,11 +115,19 @@
    didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
-	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"received string:%@", msg);
     
-    _shouldRunLoopFinished = YES;
-    self.isSucceeded = YES;
+	NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"received json string:%@", jsonStr);
+
+    self.udpResponse = [AMUserUDPResponse responseFromJsonData:data];
+    if (self.udpResponse != nil &&
+        [self.udpResponse.action isEqualToString:self.udpRequest.action] &&
+        [self.udpResponse.contentMd5 isEqualToString:self.udpRequest.contentMd5] ) {
+        
+        [_sendTimer invalidate ];
+        self.isSucceeded = YES;
+        _shouldRunLoopFinished  = YES;
+    }
 }
 
 @end

@@ -15,8 +15,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
-    AMMesher* mesher = [AMMesher sharedAMMesher];
     
+    
+    
+    
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+
     [mesher startLoalMesher];
 }
 
@@ -39,9 +43,9 @@
     [user.portMaps addObject:pm1];
     [user.portMaps addObject:pm2];
     
-    NSString* jsonStr3 = [user jsonString];
-    NSLog(jsonStr3);
-    NSLog([user md5String]);
+//    NSString* jsonStr3 = [user jsonString];
+//    NSLog(jsonStr3);
+//    NSLog([user md5String]);
 }
 
 @end

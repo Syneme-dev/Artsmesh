@@ -8,10 +8,14 @@
 
 #import "AMMesherOperation.h"
 
+@class AMUserUDPResponse;
+@class AMUserUDPRequest;
 @interface AMUpdateUserOperation : AMMesherOperation
 
 @property NSString* serverPort;
 @property NSString* serverAddress;
+@property AMUserUDPRequest* udpRequest;
+@property AMUserUDPResponse* udpResponse;
 
 -(id)initWithServerAddr:(NSString*)addr withPort:(NSString*)port;
 

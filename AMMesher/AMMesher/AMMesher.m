@@ -18,14 +18,15 @@
 {
     AMLeaderElecter* _elector;
     AMShellTask *_mesherServerTask;
+    
+    AMRequestUserOperation* _requestUserListQueue; //the queue size is 1
+    
     NSTimer* _heartbeatTimer;
     NSString* _amserverIp;
     NSString* _amserverRestPort;
     NSString* _amserverUdpPort;
     NSString* _amserverURL;
     NSString* _amuserTimeout;
-    
-    int uselistVsersion;
 }
 
 +(id)sharedAMMesher{
@@ -42,7 +43,7 @@
     if (self = [super init]){
         self.mySelf = [[AMUser alloc] init];
         self.allUsers = [[NSMutableArray alloc] init];
-        uselistVsersion = 0;
+        self.uselistVersion = @"0";
     }
     
     return self;
@@ -135,16 +136,33 @@
 }
 
 -(void)registerSelf{
-    uselistVsersion = 0;
+    self.uselistVersion = 0;
+    
+    AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
+    @synchronized(self){
+        request.userContent = [self.mySelf copy];
+        request.version = self.uselistVersion;
+    }
+    request.contentMd5 = [request.userContent md5String];
     
     AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     updateOper.action = @"register";
+    updateOper.udpRequest = request;
+    
     [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
 }
 
 -(void)heartbeat{
+    
+    AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
+    @synchronized(self){
+        request.version = self.uselistVersion;
+    }
+    
     AMUpdateUserOperation* heartbeatOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     heartbeatOper.action = @"heartbeat";
+    heartbeatOper.udpRequest = request;
+    
     [[AMMesher sharedEtcdOperQueue] addOperation:heartbeatOper];
 }
 
@@ -153,12 +171,20 @@
         return;
     }
     
+    AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
+    
     @synchronized(self){
         self.mySelf.groupName = groupName;
+        request.userContent = [self.mySelf copy];
+        request.version = self.uselistVersion;
     }
+    
+    [_heartbeatTimer invalidate];
     
     AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     updateOper.action = @"update";
+    updateOper.udpRequest = request;
+    
     [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
     
 }
@@ -184,6 +210,26 @@
         //TODO: change the amserver ip and port
         [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
         [self registerSelf];
+    }
+}
+
+-(void)requestUserListInQueue{
+
+    @synchronized(_requestUserListQueue){
+        if (_requestUserListQueue == nil) {
+            _requestUserListQueue  = [[AMRequestUserOperation alloc] initWithMesherServerUrl:_amserverURL];
+            _requestUserListQueue.action = @"request";
+        }
+    }
+}
+
+-(void)requestUserListPop{
+    
+    @synchronized(_requestUserListQueue){
+        if (_requestUserListQueue != nil){
+            [[AMMesher sharedEtcdOperQueue] addOperation:_requestUserListQueue];
+            _requestUserListQueue = nil;
+        }
     }
 }
 
@@ -241,33 +287,44 @@
 #pragma mark AMMesherOperationDelegate
 -(void)MesherOperDidFinished:(AMMesherOperation*)oper{
     
-    if ([oper.action isEqualToString:@"register"]) {
-        if (oper.isSucceeded) {
-            _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
-            
-            AMRequestUserOperation* requestOper = [[AMRequestUserOperation alloc] initWithMesherServerUrl: _amserverURL];
-            requestOper.action = @"request";
-            [[AMMesher sharedEtcdOperQueue] addOperation:requestOper];
-            
-        }else{
-            //TODO: tell the user register self error
-        }
+    if (oper.isSucceeded == NO) {
+        NSString* errDomain = [NSString stringWithFormat:@"AMMesher-%@", oper.action];
+        NSDictionary* dict = @{@"erroInfo": oper.errorDescription};
+        NSError* err = [NSError errorWithDomain:errDomain code:-1 userInfo:dict];
+        [self.delegate onMesherError:err];
         
-    }else if([oper.action isEqualToString:@"heartbeat"]){
-        if (oper.isSucceeded) {
-            //TODO:compare the version if the version is out date, send a request oper
-            _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
-        }else{
-            //TODO: tell the user heartbeat self error
-        }
-        
-    }else if([oper.action isEqualToString:@"update"]){
-        if (oper.isSucceeded) {
-            //TODO:update the userlist version.
-        }else{
-            //TODO: tell the user update self error
-        }
+        return;
+    }
     
+    //succeeded!
+    if ([oper.action isEqualToString:@"register"]) {
+        
+        NSLog(@"regiser succeede, start heartbeat schedule and request userlist");
+        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
+        
+        [self requestUserListInQueue];
+        [self requestUserListPop];
+            
+    }else if([oper.action isEqualToString:@"heartbeat"]){
+        AMUpdateUserOperation* updateOper = (AMUpdateUserOperation* )oper;
+        
+        int curVer;
+        @synchronized(self){
+            curVer = [self.uselistVersion intValue];
+        }
+        
+        int resVer = [updateOper.udpResponse.version intValue];
+        if (resVer > curVer) {
+            [self requestUserListInQueue];
+            [self requestUserListPop];
+        }
+        
+        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
+            
+    }else if([oper.action isEqualToString:@"update"]){
+        
+        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
+            
     }
 }
 

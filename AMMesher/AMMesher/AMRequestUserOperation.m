@@ -41,7 +41,7 @@
         self.errorDescription = [NSString stringWithFormat:@"get userlist request failed! %@",
                                  resultLog];
         self.isSucceeded = NO;
-        
+
         [(NSObject *)self.delegate performSelectorOnMainThread:@selector(MesherOperDidFinished:) withObject:self waitUntilDone:NO];
         
         return;

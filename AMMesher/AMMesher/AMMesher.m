@@ -118,13 +118,12 @@
     [_mesherServerTask launch];
     
     NSFileHandle *inputStream = [_mesherServerTask fileHandlerForReading];
-    NSMutableString *content = [[NSMutableString alloc] init];
     
     //Log Message, later will be remove or redirect to file
     inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
         NSData *data = [fh availableData];
-        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-        NSLog(content);
+        NSString* logStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(logStr);
     };
 
 }
@@ -136,7 +135,7 @@
 }
 
 -(void)registerSelf{
-    self.uselistVersion = 0;
+    self.uselistVersion = @"0";
     
     AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
     @synchronized(self){

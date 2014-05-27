@@ -66,13 +66,15 @@
     
     if(self = [super init]){
         self.userid = [AMUser createUserId];
-        self.groupName = @"Artsmesh";
+        self.groupName = @"";
         self.domain = @"";
         self.location = @"";
         self.groupName = @"";
         self.publicIp = @"";
         self.privateIp = @"";
         self.localLeader = @"";
+        self.nickName = @"default";
+        self.description = @"default";
         self.portMaps = [[NSMutableArray alloc] init];
     }
     
@@ -228,7 +230,7 @@
     [dict setObject:self.action forKey:@"Action"];
     
     if (self.userContent != nil) {
-        [dict setObject:self.userContent forKey:@"UserContent"];
+        [dict setObject:[self.userContent jsonDict]  forKey:@"UserContent"];
         [dict setObject:self.contentMd5 forKey:@"ContenMd5"];
     }
    

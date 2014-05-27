@@ -20,6 +20,7 @@
     NSTimer* _sendTimer;
     int _sendPeroid;
     int _retryTimes;
+    int _maxRetryTimes;
     
 }
 
@@ -29,7 +30,8 @@
         self.serverPort = port;
         _shouldRunLoopFinished = NO;
         _sendPeroid = 6;
-        _retryTimes = 5;
+        _retryTimes = 0;
+        _maxRetryTimes = 5;
     }
     
     return self;
@@ -37,6 +39,13 @@
 
 -(void)main
 {
+    if (self.isCancelled) {
+        self.isSucceeded = YES;
+        self.errorDescription = @"task is canceled!";
+        [(NSObject *)self.delegate performSelectorOnMainThread:@selector(MesherOperDidFinished:)
+                                                    withObject:self waitUntilDone:NO];
+    }
+    
     _heartbeatQueue = dispatch_queue_create("user_heartbeat_thread_queue", DISPATCH_QUEUE_SERIAL);
     _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:_heartbeatQueue];
     
@@ -80,7 +89,7 @@
 
 -(void)sendUdpPacket{
     
-    if (_retryTimes >= 5) {
+    if (_retryTimes >= 5 || self.isCancelled) {
         _shouldRunLoopFinished  = YES;
         self.isSucceeded = NO;
         self.errorDescription = @"send udp packets to server failed after 5 times retry!";

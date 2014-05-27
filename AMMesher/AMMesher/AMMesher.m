@@ -146,6 +146,7 @@
     
     AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     updateOper.action = @"register";
+    updateOper.delegate = self;
     updateOper.udpRequest = request;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
@@ -161,6 +162,7 @@
     AMUpdateUserOperation* heartbeatOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     heartbeatOper.action = @"heartbeat";
     heartbeatOper.udpRequest = request;
+    heartbeatOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:heartbeatOper];
 }
@@ -183,6 +185,7 @@
     AMUpdateUserOperation* updateOper = [[AMUpdateUserOperation alloc] initWithServerAddr:_amserverIp withPort:_amserverUdpPort];
     updateOper.action = @"update";
     updateOper.udpRequest = request;
+    updateOper.delegate = self;
     
     [[AMMesher sharedEtcdOperQueue] addOperation:updateOper];
     
@@ -218,6 +221,7 @@
         if (_requestUserListQueue == nil) {
             _requestUserListQueue  = [[AMRequestUserOperation alloc] initWithMesherServerUrl:_amserverURL];
             _requestUserListQueue.action = @"request";
+            _requestUserListQueue.delegate = self;
         }
     }
 }
@@ -259,7 +263,7 @@
                 self.localLeaderName = _elector.mesherHost;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                [self startMesherServer];
+               // [self startMesherServer];
                 [self registerSelf];
                 
             }else if(newState == 4){
@@ -324,6 +328,10 @@
         
         _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
             
+    }else if([oper.action isEqualToString:@"request"]){
+        AMRequestUserOperation* requestOper = (AMRequestUserOperation* )oper;
+        
+       // requestOper.restResponse
     }
 }
 

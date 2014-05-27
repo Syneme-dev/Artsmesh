@@ -17,7 +17,7 @@
 
 @end
 
-@interface AMMesher: NSObject
+@interface AMMesher: NSObject<AMMesherOperationDelegate>
 
 @property AMUser* mySelf;
 @property NSMutableArray* allUsers;

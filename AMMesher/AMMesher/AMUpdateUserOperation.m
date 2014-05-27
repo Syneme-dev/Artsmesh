@@ -31,7 +31,7 @@
         _shouldRunLoopFinished = NO;
         _sendPeroid = 6;
         _retryTimes = 0;
-        _maxRetryTimes = 5;
+        _maxRetryTimes = 3;
     }
     
     return self;
@@ -44,13 +44,14 @@
         self.errorDescription = @"task is canceled!";
         [(NSObject *)self.delegate performSelectorOnMainThread:@selector(MesherOperDidFinished:)
                                                     withObject:self waitUntilDone:NO];
+        return;
     }
     
     _heartbeatQueue = dispatch_queue_create("user_heartbeat_thread_queue", DISPATCH_QUEUE_SERIAL);
     _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:_heartbeatQueue];
     
     NSError *error = nil;
-    if (![_udpSocket bindToPort:[self.serverPort intValue] error:&error]){
+    if (![_udpSocket bindToPort:0 error:&error]){
         
         self.isSucceeded = NO;
         self.errorDescription = [NSString stringWithFormat:@"init udp socket error: %@",
@@ -72,16 +73,13 @@
     
     [self sendUdpPacket];
     
+    //dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
     do{
-        _shouldRunLoopFinished = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                                          beforeDate:[NSDate distantFuture]];
-    }while (_shouldRunLoopFinished != YES);
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate distantFuture]];
+    }while (!_shouldRunLoopFinished);
     
     [_udpSocket close];
-    
-    //Important: If your app is built with a deployment target of OS X v10.8 and later or iOS v6.0 and later, dispatch queues are typically managed by ARC, so you do not need to retain or release the dispatch queues
-    //dispatch_release(_heartbeatQueue);
-    
     [(NSObject *)self.delegate performSelectorOnMainThread:@selector(MesherOperDidFinished:)
                                                 withObject:self waitUntilDone:NO];
     return;
@@ -89,7 +87,7 @@
 
 -(void)sendUdpPacket{
     
-    if (_retryTimes >= 5 || self.isCancelled) {
+    if (_retryTimes >= _maxRetryTimes || self.isCancelled) {
         _shouldRunLoopFinished  = YES;
         self.isSucceeded = NO;
         self.errorDescription = @"send udp packets to server failed after 5 times retry!";
@@ -118,6 +116,7 @@
     self.errorDescription = [NSString stringWithFormat:@"send heartbeat packets failed: %@",
                              error.description];
     _shouldRunLoopFinished = YES;
+   // dispatch_semaphore_signal(_semaphore);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -136,6 +135,8 @@ withFilterContext:(id)filterContext{
         [_sendTimer invalidate ];
         self.isSucceeded = YES;
         _shouldRunLoopFinished  = YES;
+       // dispatch_semaphore_signal(_semaphore);
+     
     }
 }
 

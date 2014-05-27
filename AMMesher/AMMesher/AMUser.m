@@ -103,8 +103,6 @@
     return dict;
 }
 
-
-
 -(NSString*)md5String
 {
     NSMutableString* portMapStr = [[NSMutableString alloc] init];
@@ -231,7 +229,7 @@
     
     if (self.userContent != nil) {
         [dict setObject:[self.userContent jsonDict]  forKey:@"UserContent"];
-        [dict setObject:self.contentMd5 forKey:@"ContenMd5"];
+        [dict setObject:self.contentMd5 forKey:@"UserContentMd5"];
     }
    
     return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
@@ -257,7 +255,7 @@
     AMUserUDPResponse* response = [[AMUserUDPResponse alloc] init];
     response.action = [objects valueForKey:@"Action"];
     response.version = [objects  valueForKey:@"Version"];
-    response.contentMd5 = [objects valueForKey:@"ContentMd5"];
+    response.contentMd5 = [objects valueForKey:@"UserContentMd5"];
     response.isSucceeded = [[objects valueForKey:@"IsSucceeded"] boolValue];
     
     return response;

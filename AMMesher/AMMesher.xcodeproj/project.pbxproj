@@ -36,6 +36,10 @@
 		26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */; };
 		26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4D18FCB61000DD04A6 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4E18FCB61000DD04A6 /* AMMesher.m */; };
+		CE318D961934BB43006D6EAA /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D921934BB43006D6EAA /* AMGroup.h */; };
+		CE318D971934BB43006D6EAA /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D931934BB43006D6EAA /* AMGroup.m */; };
+		CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D941934BB43006D6EAA /* AMGroupsBuilder.h */; };
+		CE318D991934BB43006D6EAA /* AMGroupsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D951934BB43006D6EAA /* AMGroupsBuilder.m */; };
 		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +95,10 @@
 		26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26F2BF4D18FCB61000DD04A6 /* AMMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesher.h; sourceTree = "<group>"; };
 		26F2BF4E18FCB61000DD04A6 /* AMMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMesher.m; sourceTree = "<group>"; };
+		CE318D921934BB43006D6EAA /* AMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroup.h; sourceTree = "<group>"; };
+		CE318D931934BB43006D6EAA /* AMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroup.m; sourceTree = "<group>"; };
+		CE318D941934BB43006D6EAA /* AMGroupsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupsBuilder.h; sourceTree = "<group>"; };
+		CE318D951934BB43006D6EAA /* AMGroupsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupsBuilder.m; sourceTree = "<group>"; };
 		D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +184,10 @@
 				2620DD1B193308290075A09F /* AMRequestUserOperation.h */,
 				2620DD1C193308290075A09F /* AMRequestUserOperation.m */,
 				2620DD15193306780075A09F /* AMMesherOperationDelegate.h */,
+				CE318D921934BB43006D6EAA /* AMGroup.h */,
+				CE318D931934BB43006D6EAA /* AMGroup.m */,
+				CE318D941934BB43006D6EAA /* AMGroupsBuilder.h */,
+				CE318D951934BB43006D6EAA /* AMGroupsBuilder.m */,
 				26BC15AE193214BB0020AD2B /* AMUser.h */,
 				26BC15AF193214BB0020AD2B /* AMUser.m */,
 				26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */,
@@ -230,9 +242,11 @@
 			files = (
 				26BC15B0193214BB0020AD2B /* AMUser.h in Headers */,
 				2620DD1D193308290075A09F /* AMRequestUserOperation.h in Headers */,
+				CE318D961934BB43006D6EAA /* AMGroup.h in Headers */,
 				2620DD16193306780075A09F /* AMMesherOperationDelegate.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
+				CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */,
 				2620DD25193313FC0075A09F /* AMUpdateUserOperation.h in Headers */,
 				2620DD19193306B00075A09F /* AMMesherOperation.h in Headers */,
 			);
@@ -334,10 +348,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2620DD1E193308290075A09F /* AMRequestUserOperation.m in Sources */,
+				CE318D991934BB43006D6EAA /* AMGroupsBuilder.m in Sources */,
 				26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */,
 				26BC15B1193214BB0020AD2B /* AMUser.m in Sources */,
 				26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */,
 				2620DD26193313FC0075A09F /* AMUpdateUserOperation.m in Sources */,
+				CE318D971934BB43006D6EAA /* AMGroup.m in Sources */,
 				2620DD1A193306B00075A09F /* AMMesherOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

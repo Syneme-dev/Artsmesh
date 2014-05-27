@@ -10,6 +10,8 @@
 
 @interface AMPanelViewController : NSViewController
 
+- (IBAction)onTearClick:(id)sender;
+
 @property (strong) IBOutlet NSView *toolBarView;
 
 @property (weak) IBOutlet NSTextField *titleView;

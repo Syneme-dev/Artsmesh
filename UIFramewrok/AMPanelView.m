@@ -24,6 +24,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         
     }
     return self;
@@ -76,11 +77,14 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor colorWithWhite:0.22 alpha:1.0] set];
+    [self.backgroundColor set];
     [NSBezierPath fillRect:self.bounds];
     [_knobColor set];
     [NSBezierPath fillRect:self.knobRectLeft];
     [NSBezierPath fillRect:self.knobRectRight];
+    
+  
+
 }
 
 

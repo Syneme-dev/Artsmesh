@@ -10,4 +10,7 @@
 
 @interface AMPanelView : AMBoxItem
 
+@property(nonatomic) NSColor* backgroundColor;
+
+
 @end

@@ -290,7 +290,6 @@
     userViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, UI_defaultPanelWidth, panelHeight-UI_panelTitlebarHeight);
     [panelViewController.view addSubview:userViewController.view];
      [panelControllers setObject:panelViewController forKey:@"USER"];
-    
 }
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender {

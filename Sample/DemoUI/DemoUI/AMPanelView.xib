@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -48,7 +48,7 @@
                                 <action selector="closePanel:" target="-2" id="910-zG-81m"/>
                             </connections>
                         </button>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diy-MI-ZVa" userLabel="close">
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diy-MI-ZVa" userLabel="extend">
                             <rect key="frame" x="555" y="3" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -60,7 +60,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="close">
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="fullscreen">
                             <rect key="frame" x="530" y="3" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -72,7 +72,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-Xz-G6O" userLabel="close">
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-Xz-G6O" userLabel="copy">
                             <rect key="frame" x="505" y="3" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -84,7 +84,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="close">
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="settings">
                             <rect key="frame" x="480" y="3" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -96,7 +96,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
-                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W15-SQ-vxR" userLabel="close">
+                        <button focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W15-SQ-vxR" userLabel="tear">
                             <rect key="frame" x="455" y="3" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
@@ -107,6 +107,9 @@
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="onTearClick:" target="-2" id="ATh-Sw-9b7"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>

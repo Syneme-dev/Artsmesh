@@ -21,7 +21,7 @@
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
 
-    [mesher startLoalMesher];
+    [mesher startElector];
 }
 
 -(void)AMUsertest{

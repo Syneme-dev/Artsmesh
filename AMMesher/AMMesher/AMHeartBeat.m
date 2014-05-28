@@ -34,8 +34,8 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
                                  userInfo:nil];
 }
 
-- (instancetype)initWithHost:(char *)host
-                        port:(char *)port
+- (instancetype)initWithHost:(NSString *)host
+                        port:(NSString *)port
                         ipv6:(BOOL)useIpv6
 {
     self = [super init];
@@ -47,7 +47,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
         hints.ai_family = _family;
         hints.ai_protocol = IPPROTO_UDP;
         hints.ai_socktype = SOCK_DGRAM;
-        if (getaddrinfo(host, port, &hints, &ai) < 0) {
+        if (getaddrinfo([host UTF8String], [port UTF8String], &hints, &ai) < 0) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException
                                            reason:@"getaddrinfo failed"
                                          userInfo:nil];

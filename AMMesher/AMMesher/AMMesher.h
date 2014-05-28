@@ -20,8 +20,6 @@
 @interface AMMesher: NSObject<AMMesherOperationDelegate>
 
 @property AMUser* mySelf;
-@property NSMutableArray* allUsers;
-@property NSString* uselistVersion;
 @property NSString* localLeaderName;
 @property BOOL isLeader;
 @property BOOL isOnline;
@@ -29,11 +27,14 @@
 
 +(id)sharedAMMesher;
 
--(void)startLoalMesher;
--(void)stopLocalMesher;
+-(void)startMesher;
+-(void)goOnline;
+-(void)goOffline;
+-(void)stopMesher;
+
 -(void)joinGroup:(NSString*)groupName;
 -(void)backToArtsmesh;
--(void)goOnline;
+
 
 @end    
 

@@ -52,7 +52,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-    [[AMMesher sharedAMMesher] startLoalMesher];
+    [[AMMesher sharedAMMesher] startElector];
 }
 
 - (void)showPreferencePanel {

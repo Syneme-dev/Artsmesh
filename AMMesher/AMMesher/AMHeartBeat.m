@@ -25,7 +25,6 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
 {
     int _family;
     NSData *_serverAddress;
-    NSDate *_fireDate;
 }
 
 - (instancetype)init
@@ -60,24 +59,10 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
     return self;
 }
 
-- (void)fireSinceDate:(NSDate *)date
-{
-    _fireDate = [date copy];
-    [self start];
-}
-
-- (void)fireNow
-{
-    [self fireSinceDate:[NSDate date]];
-}
-
-
 - (void)main
 {
-    [NSThread sleepUntilDate:_fireDate];
-    
     NSTimeInterval sleepTime = 0;
-    while (self.isCancelled) {
+    while (!self.isCancelled) {
         if (sleepTime > 0)
             [NSThread sleepForTimeInterval:sleepTime];
         

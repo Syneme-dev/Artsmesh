@@ -30,8 +30,6 @@ enum {
 - (instancetype)initWithHost:(char *)host
                         port:(char *)port
                         ipv6:(BOOL)useIpv6;
-- (void)fireSinceDate:(NSDate *)date;
-- (void)fireNow;
 
 @end
 

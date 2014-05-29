@@ -80,6 +80,12 @@
         self.mySelf.description = @"I love coffee";
         self.mySelf.privateIp = @"127.0.0.1";
         
+        AMUserPortMap* pm = [[AMUserPortMap alloc] init];
+        pm.portName = @"port1";
+        pm.internalPort = @"20005";
+        pm.natMapPort   = @"12345";
+        [self.mySelf.portMaps addObject:pm];
+        
         _isNeedUpdateInfo = YES;
     }
 }
@@ -401,7 +407,7 @@
                 self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                //[self startLocalServer];
+                [self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;

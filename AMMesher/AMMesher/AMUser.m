@@ -37,23 +37,16 @@
     return copyPortMap;
 }
 
-+(AMUserPortMap*)portMapFromJsonData:(NSData*) data{
-    NSError *jsonParsingError = nil;
-    id objects = [NSJSONSerialization JSONObjectWithData:data
-                                                 options:0
-                                                   error:&jsonParsingError];
-    if(jsonParsingError != nil){
-        return nil;
-    }
++(AMUserPortMap*)portMapFromJsonData:(id) object{
     
-    if (![objects isKindOfClass:[NSDictionary class]]) {
+    if (![object isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
     
     AMUserPortMap* portMap = [[AMUserPortMap alloc] init];
-    portMap.portName= [objects valueForKey:@"PortName"];
-    portMap.internalPort = [objects  valueForKey:@"InternalPort"];
-    portMap.natMapPort = [objects valueForKey:@"NATMapPort"];
+    portMap.portName= [object valueForKey:@"PortName"];
+    portMap.internalPort = [object  valueForKey:@"InternalPort"];
+    portMap.natMapPort = [object valueForKey:@"NATMapPort"];
 
     return portMap;
 }
@@ -135,30 +128,23 @@
             ];
 }
 
-+(AMUser*)userFromJsonData:(NSData*) data{
-    NSError *jsonParsingError = nil;
-    id objects = [NSJSONSerialization JSONObjectWithData:data
-                                                 options:0
-                                                   error:&jsonParsingError];
-    if(jsonParsingError != nil){
-        return nil;
-    }
++(AMUser*)userFromJsonData:(id) object{
     
-    if (![objects isKindOfClass:[NSDictionary class]]) {
+    if (![object isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
     
     AMUser* user = [[AMUser alloc] init];
-    user.userid = [objects valueForKey:@"UserId"];
-    user.nickName = [objects  valueForKey:@"NickName"];
-    user.domain = [objects valueForKey:@"Domain"];
-    user.location = [objects valueForKey:@"Location"];
-    user.groupName  = [objects valueForKey:@"GroupName"];
-    user.publicIp = [objects valueForKey:@"PublicIp"];
-    user.privateIp = [objects valueForKey:@"PrivateIp"];
-    user.localLeader =  [objects valueForKey:@"LocalLeader"];
+    user.userid = [object valueForKey:@"UserId"];
+    user.nickName = [object  valueForKey:@"NickName"];
+    user.domain = [object valueForKey:@"Domain"];
+    user.location = [object valueForKey:@"Location"];
+    user.groupName  = [object valueForKey:@"GroupName"];
+    user.publicIp = [object valueForKey:@"PublicIp"];
+    user.privateIp = [object valueForKey:@"PrivateIp"];
+    user.localLeader =  [object valueForKey:@"LocalLeader"];
     
-    id portMaps = [objects valueForKey:@"PortMaps"];
+    id portMaps = [object valueForKey:@"PortMaps"];
     if ([portMaps isKindOfClass:[NSArray class]]) {
         for(id portMapData in portMaps){
             AMUserPortMap* pm = [AMUserPortMap portMapFromJsonData:portMapData];
@@ -293,6 +279,7 @@
     id userlistArr = [objects valueForKey:@"UserListData"];
     if ([userlistArr isKindOfClass:[NSArray class]]) {
         for(id userData in userlistArr){
+            
             AMUser* user = [AMUser userFromJsonData:userData];
             if (user != nil) {
                 [response.userlist addObject:user];

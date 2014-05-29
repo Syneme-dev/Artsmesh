@@ -129,6 +129,8 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             sleepTime = self.timeInterval - (now - startTime);
         }
     }
+    if ([self.delegate respondsToSelector:@selector(heartBeatDidCancel)])
+        [self.delegate heartBeatDidCancel];
 }
 
 - (void)reportError:(int)errorCode

@@ -8,6 +8,8 @@
 
 #import "AMUserRequest.h"
 
+NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
+
 @implementation AMUserRequest
 
 -(void)main{
@@ -40,8 +42,8 @@
     if (returnData == nil) {
         if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
             
-            NSError *error = [NSError errorWithDomain:@""
-                                                 code:123
+            NSError *error = [NSError errorWithDomain:AMUserRequestDomain
+                                                 code:AMUserRequestFalied
                                              userInfo:nil];
             
             [self.delegate userrequest:self didFailWithError:error];

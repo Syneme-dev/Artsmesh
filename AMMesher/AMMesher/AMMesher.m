@@ -401,7 +401,7 @@
                 self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                [self startLocalServer];
+                //[self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;

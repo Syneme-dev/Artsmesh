@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @protocol AMUserRequestDelegate;
 
+extern NSString * const AMUserRequestDomain;
+#define AMUserRequestFalied -1
+
 @interface AMUserRequest : NSOperation
-
 @property(nonatomic, weak) id<AMUserRequestDelegate> delegate;
-
 @end
 
 @protocol AMUserRequestDelegate <NSObject>
-
 @optional
 
 - (NSString *)httpServerURL;

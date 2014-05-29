@@ -7,6 +7,7 @@
 //
 #import "AMMesher.h"
 #import "AMUser.h"
+#import "AMGroup.h"
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
@@ -14,20 +15,35 @@
 #import "AMRequestUserOperation.h"
 #import "AMUpdateUserOperation.h"
 #import "AMHeartBeat.h"
+#import "AMSystemConfig.h"
+
+@interface AMMesher()
+
+@property AMUser* mySelf;
+@property NSString* localLeaderName;
+@property BOOL isLocalLeader;
+@property BOOL isOnline;
+@property NSArray* userGroups;
+@property int userGroupsVersion;
+
+@end
 
 @implementation AMMesher
 {
-    //Mesher Server
     AMLeaderElecter* _elector;
     AMShellTask *_mesherServerTask;
-    
     AMHeartBeat* _heartbeatThread;
+    
     NSOperationQueue* _httpRequestQueue;
     
     AMSystemConfig* _systemConfig;
-
-    int _userlistVersion;
+    
     BOOL _isNeedUpdateInfo;
+    
+    int _heartbeatFailureCount;
+    
+    
+    
 }
 
 - (instancetype)init
@@ -51,16 +67,12 @@
 -(id)initMesher
 {
     if (self = [super init]){
-        _mySelf = [[AMUser alloc] init];
-        _userlistVersion = 0;
         
-        _httpRequestQueue = [[NSOperationQueue alloc] init];
-        _httpRequestQueue.name = @"Http Operation Queue";
-        _httpRequestQueue.maxConcurrentOperationCount = 1;
-
         [self loadUserProfile];
         [self loadSystemConfig];
-        
+        [self initUserGroups];
+        [self initHttpReuestQueue];
+        [self initMesherPublisher];
     }
     
     return self;
@@ -70,8 +82,10 @@
 {
     //TODO: load preference
     @synchronized(self){
+        self.mySelf = [[AMUser alloc] init];
         self.mySelf.nickName = @"myNickName";
         self.mySelf.description = @"I love coffee";
+        self.mySelf.privateIp = @"127.0.0.1";
         
         _isNeedUpdateInfo = YES;
     }
@@ -79,21 +93,39 @@
 
 -(void)loadSystemConfig
 {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _systemConfig = [[AMSystemConfig alloc] init];
     //TODO: load system config from Preference
+    
+    _systemConfig.myServerPort = @"8080";
+    _systemConfig.heartbeatInterval = @"2";
+    _systemConfig.myServerUserTimeout = @"30";
+    _systemConfig.maxHeartbeatFailure = @"5";
 }
+
+-(void)initUserGroups
+{
+    self.userGroups = [[NSMutableArray alloc] init];
+    self.userGroupsVersion = 0;
+}
+
+-(void)initHttpReuestQueue{
+    _httpRequestQueue = [[NSOperationQueue alloc] init];
+    _httpRequestQueue.name = @"Http Operation Queue";
+    _httpRequestQueue.maxConcurrentOperationCount = 1;
+}
+
+
+-(void)initMesherPublisher
+{
+    if (_systemConfig) {
+        _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
+    }
+}
+
 
 -(void)startMesher
 {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* mesherServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-    
-    //TODO:
-    if (_elector == nil){
-        _elector = [[AMLeaderElecter alloc] init];
-        _elector.mesherPort = [_systemConfig.localServerUdpPort intValue];
-    }
-  
     [_elector kickoffElectProcess];
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -105,17 +137,17 @@
     if (_heartbeatThread)
         [_heartbeatThread cancel];
     
-    if (_elector)
-        [_elector stopElect];
-
     if (_mesherServerTask)
         [_mesherServerTask cancel];
+    [self killAllAMServer];
+    
+    if (_elector)
+        [_elector stopElect];
     
     _heartbeatThread = nil;
     _elector = nil;
     _mesherServerTask = nil;
 }
-
 
 -(void)setMySelfPropties:(NSDictionary*)props
 {
@@ -142,27 +174,34 @@
     [self joinGroup:@""];
 }
 
+
 -(void)goOnline
 {
-    [self stopMesher];
-
-    const char* globalHost = [_systemConfig.globalServerAddr UTF8String];
-    const char* globalport = [_systemConfig.globalServerUdpPort UTF8String];
+    if (_isOnline) {
+        return;
+    }
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: globalHost port:globalport ipv6:_systemConfig.isIpv6];
-    _heartbeatThread.delegate = self;
-    [_heartbeatThread start];
+    [self stopMesher];
+    NSString* gServerAddr = _systemConfig.globalServerAddr;
+    NSString* gServerPort = _systemConfig.globalServerPort;
+    BOOL userIpv6 = _systemConfig.useIpv6;
     
     @synchronized(self){
         _isNeedUpdateInfo = YES;
     }
+
+     _isOnline = YES;
     
-    _isOnline = YES;
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: gServerAddr port: gServerPort ipv6:userIpv6];
+    _heartbeatThread.delegate = self;
+    [_heartbeatThread start];
+
 }
 
 -(void)goOffline
 {
     [self stopMesher];
+    _isOnline = NO;
     [self startMesher];
 }
 
@@ -180,9 +219,9 @@
     NSString *command = [NSString stringWithFormat:
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
                          lanchPath,
-                         _systemConfig.localServerHttpPort,
-                         _systemConfig.localServerUdpPort,
-                         _systemConfig.userTimeout];
+                         _systemConfig.myServerPort,
+                         _systemConfig.myServerPort,
+                         _systemConfig.myServerUserTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     [_mesherServerTask launch];
     
@@ -202,6 +241,26 @@
                              arguments:[NSArray arrayWithObjects:@"-c", @"amserver", nil]];
 }
 
+-(void)startHearBeat:(NSString*)addr serverPort:(NSString*)port
+{
+    if (_heartbeatThread) {
+        [_heartbeatThread cancel];
+    }
+    
+    _heartbeatFailureCount = 0;
+    BOOL useIpv6 = NO;
+    if (_systemConfig) {
+        useIpv6 = _systemConfig.useIpv6;
+    }
+
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: addr port:port ipv6:useIpv6];
+    _heartbeatThread.delegate = self;
+    _heartbeatThread.timeInterval = 2;
+    _heartbeatThread.receiveTimeout = 5;
+    [_heartbeatThread start];
+}
+
+
 
 #pragma mark-
 #pragma AMHeartBeatDelegate
@@ -212,7 +271,7 @@
     @synchronized(self){
         AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
         request.action = @"update";
-        request.version = [NSString stringWithFormat:@"%d", _userlistVersion];
+        request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
         
         if (_isNeedUpdateInfo) {
             request.contentMd5 = [self.mySelf md5String];
@@ -226,17 +285,38 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
+    _heartbeatFailureCount = 0;
     
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didReceiveData:%@", jsonStr);
+    
+    AMUserUDPResponse* response = [AMUserUDPResponse responseFromJsonData:data];
+    
+    @synchronized(self){
+        if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
+            _isNeedUpdateInfo = NO;
+        }
+        
+        if ([response.version intValue] >  self.userGroupsVersion) {
+            NSLog(@"need download userlist");
+        }
+    }
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-    
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didSendData:%@", jsonStr);
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
+    NSLog(@"didSendData:%@", error.description);
     
+    _heartbeatFailureCount ++;
+    if (_heartbeatFailureCount > [_systemConfig.maxHeartbeatFailure intValue]) {
+        [self.delegate onMesherError:error];
+    }
 }
 
 #pragma mark -
@@ -244,8 +324,8 @@
 - (void) observeValueForKeyPath:(NSString *)keyPath
                        ofObject:(id)object
                          change:(NSDictionary *)change
-                        context:(void *)context{
-    
+                        context:(void *)context
+{
     if ([object isEqualTo:_elector]){
         if ([keyPath isEqualToString:@"state"]){
             
@@ -256,34 +336,36 @@
 
             if(newState == 2){
                 //I'm the leader
-                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
                 
                 [self willChangeValueForKey:@"isLeader"];
-                _isLeader = YES;
+                self.isLocalLeader = YES;
                 [self didChangeValueForKey:@"isLeader"];
                 
                 [self willChangeValueForKey:@"localLeaderName"];
-                _localLeaderName = _elector.mesherHost;
+                self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                [self startLocalServer];
+                //[self startLocalServer];
+                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
-                //TODO:
+                self.isLocalLeader = YES;
                 
             }else if(newState == 4){
                 //Joined
-                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
                 
                 [self willChangeValueForKey:@"isLeader"];
-                _isLeader = NO;
+                self.isLocalLeader = NO;
                 [self didChangeValueForKey:@"isLeader"];
                 
                 [self willChangeValueForKey:@"localLeaderName"];
-                _localLeaderName = _elector.mesherHost;
+                self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                 //TODO:
+                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
+                self.isLocalLeader = NO;
             }
         }else{
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

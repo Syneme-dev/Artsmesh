@@ -18,8 +18,8 @@
     NSNetServiceBrowser*  _mesherServiceBrowser;
     NSNetService* _myMesherService;
     NSMutableArray* _allMesherServices;
-    NSString* _httpURL;
-    NSString* _udpPort;
+    
+    NSString* _myPort;
 }
 
 - (instancetype)init
@@ -30,14 +30,13 @@
 }
 
 
--(id)initWithURL:(NSString*)httpUrl udpPort:(NSString*)port
+-(id)initWithPort:(NSString*)port
 {
     if(self = [super init])
     {
         _allMesherServices = [[NSMutableArray alloc]init];
         self.state = MESHER_STATE_STOP;
-        _udpPort = port;
-        _httpURL = httpUrl;
+        _myPort = port;
         
         [self browseLocalMesher];
     }
@@ -54,7 +53,7 @@
     
     _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
     _mesherServiceBrowser.delegate = self;
-    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:_httpURL];
+    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
     
     return YES;
 }
@@ -82,10 +81,10 @@
 -(void)publishLocalMesher
 {
     // create new instance of netService
- 	_myMesherService = [[NSNetService alloc] initWithDomain:_httpURL
+ 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
-                                                       port:[_udpPort intValue]];
+                                                       port:[_myPort intValue]];
 	if (_myMesherService == nil)
     {
         [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
@@ -193,8 +192,7 @@
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
     _serverName = sender.hostName;
-    _serverUdpPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
-    _serverURL = sender.domain;
+    _serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
     self.state = MESHER_STATE_JOINED;
 }
@@ -217,8 +215,7 @@
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
     _serverName = sender.hostName;
-    _serverUdpPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
-    _serverURL = sender.domain;
+    _serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
     self.state = MESHER_STATE_PUBLISHED;
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);

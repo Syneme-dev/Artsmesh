@@ -16,12 +16,8 @@
 {
     // Insert code here to initialize your application
     
-    
-    
-    
     AMMesher* mesher = [AMMesher sharedAMMesher];
-
-    [mesher startElector];
+    [mesher startMesher];
 }
 
 -(void)AMUsertest{

@@ -9,24 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class AMUser;
+@class AMSystemConfig;
 @protocol AMHeartBeatDelegate;
-
-
-@interface AMSystemConfig : NSObject
-//Client
-@property NSString* globalServerAddr;
-@property NSString* globalServerUdpPort;
-@property NSString* globalServerHttpPort;
-@property NSString* heartbeatInterval;
-@property BOOL isIpv6;
-//Client And Server
-@property NSString* localServerAddr;
-@property NSString* localServerUdpPort;
-@property NSString* localServerHttpPort;
-//Server
-@property NSString* userTimeout;
-@end
-
 
 @protocol AMMesherDelegate <NSObject>
 -(void)onUserGroupsChange:(NSArray*)groups;
@@ -38,8 +22,9 @@
 
 @property (readonly) AMUser* mySelf;
 @property (readonly) NSString* localLeaderName;
-@property (readonly) BOOL isLeader;
+@property (readonly) BOOL isLocalLeader;
 @property (readonly) BOOL isOnline;
+@property (readonly) NSArray* userGroups;
 @property id<AMMesherDelegate> delegate;
 
 +(id)sharedAMMesher;

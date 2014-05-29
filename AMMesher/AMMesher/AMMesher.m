@@ -21,22 +21,13 @@
     AMLeaderElecter* _elector;
     AMShellTask *_mesherServerTask;
     
-    NSString* _mesherServerAddr;
-    NSString* _mesherServerUpdPort;
-    NSString* _mesherServerHttpPort;
-    NSString* _mesherUserTimeout;
-    NSString* _globalMesherAddr;
-    NSString* _globalMesherHttpPort;
-    NSString* _globalMesherUdpPort;
-  
-    //Heatbeat
     AMHeartBeat* _heartbeatThread;
-    
-    BOOL _isNeedUpdateInfo;
-    
-    //HttpRequest
     NSOperationQueue* _httpRequestQueue;
+    
+    AMSystemConfig* _systemConfig;
 
+    int _userlistVersion;
+    BOOL _isNeedUpdateInfo;
 }
 
 - (instancetype)init
@@ -60,28 +51,20 @@
 -(id)initMesher
 {
     if (self = [super init]){
+        _mySelf = [[AMUser alloc] init];
+        _userlistVersion = 0;
         
-        self.mySelf = [[AMUser alloc] init];
-        self.allUsers = [[NSMutableArray alloc] init];
-        self.uselistVersion = @"0";
+        _httpRequestQueue = [[NSOperationQueue alloc] init];
+        _httpRequestQueue.name = @"Http Operation Queue";
+        _httpRequestQueue.maxConcurrentOperationCount = 1;
 
         [self loadUserProfile];
         [self loadSystemConfig];
         
-        [self initializeMembers];
     }
     
     return self;
 }
-
--(void)initializeMembers
-{
-    
-    _httpRequestQueue = [[NSOperationQueue alloc] init];
-    _httpRequestQueue.name = @"Http Operation Queue";
-    _httpRequestQueue.maxConcurrentOperationCount = 1;
-}
-
 
 -(void)loadUserProfile
 {
@@ -96,31 +79,28 @@
 
 -(void)loadSystemConfig
 {
-    //TODO:
-    _mesherServerAddr = @"localhost";
-    _mesherServerUpdPort = @"8082";
-    _mesherServerHttpPort = @"8080";
-    _mesherUserTimeout = @"30";
-    
+    _systemConfig = [[AMSystemConfig alloc] init];
+    //TODO: load system config from Preference
 }
 
--(void)startElector
+-(void)startMesher
 {
-
-    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* mesherServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-
-    _elector = [[AMLeaderElecter alloc] init];
-    _elector.mesherPort = [mesherServerPort intValue];
-
+    
+    //TODO:
+    if (_elector == nil){
+        _elector = [[AMLeaderElecter alloc] init];
+        _elector.mesherPort = [_systemConfig.localServerUdpPort intValue];
+    }
+  
     [_elector kickoffElectProcess];
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context:nil];
 }
 
--(void)stopLocalMesher
+-(void)stopMesher
 {
     if (_heartbeatThread)
         [_heartbeatThread cancel];
@@ -130,9 +110,64 @@
 
     if (_mesherServerTask)
         [_mesherServerTask cancel];
+    
+    _heartbeatThread = nil;
+    _elector = nil;
+    _mesherServerTask = nil;
 }
 
--(void)startMesherServer
+
+-(void)setMySelfPropties:(NSDictionary*)props
+{
+    @synchronized(self){
+        for (NSString* key in props) {
+            id value = [props valueForKey:key];
+            [self.mySelf setValue:value forKey:key];
+        }
+        
+        _isNeedUpdateInfo = YES;
+    }
+}
+
+-(void)joinGroup:(NSString*)groupName
+{
+    @synchronized(self){
+        [self.mySelf setValue:groupName forKey:@"groupName"];
+        _isNeedUpdateInfo = YES;
+    }
+}
+
+-(void)backToArtsmesh
+{
+    [self joinGroup:@""];
+}
+
+-(void)goOnline
+{
+    [self stopMesher];
+
+    const char* globalHost = [_systemConfig.globalServerAddr UTF8String];
+    const char* globalport = [_systemConfig.globalServerUdpPort UTF8String];
+    
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: globalHost port:globalport ipv6:_systemConfig.isIpv6];
+    _heartbeatThread.delegate = self;
+    [_heartbeatThread start];
+    
+    @synchronized(self){
+        _isNeedUpdateInfo = YES;
+    }
+    
+    _isOnline = YES;
+}
+
+-(void)goOffline
+{
+    [self stopMesher];
+    [self startMesher];
+}
+
+
+-(void)startLocalServer
 {
     if (_mesherServerTask)
         [_mesherServerTask cancel];
@@ -145,9 +180,9 @@
     NSString *command = [NSString stringWithFormat:
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
                          lanchPath,
-                         _mesherServerHttpPort,
-                         _mesherServerUpdPort,
-                         _mesherUserTimeout];
+                         _systemConfig.localServerHttpPort,
+                         _systemConfig.localServerUdpPort,
+                         _systemConfig.userTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     [_mesherServerTask launch];
     
@@ -168,64 +203,40 @@
 }
 
 
--(void)joinGroup:(NSString*)groupName
+#pragma mark-
+#pragma AMHeartBeatDelegate
+
+- (NSData *)heartBeatData
 {
-    if ([self.mySelf.groupName isEqualToString:groupName]) {
-        return;
-    }
-    
-    self.mySelf.groupName = groupName;
+    NSData* data ;
     @synchronized(self){
-        _isNeedUpdateInfo = YES;
+        AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
+        request.action = @"update";
+        request.version = [NSString stringWithFormat:@"%d", _userlistVersion];
+        
+        if (_isNeedUpdateInfo) {
+            request.contentMd5 = [self.mySelf md5String];
+            request.userContent = self.mySelf;
+        }
+        data = [request jsonData];
     }
+    
+    return data;
 }
 
--(void)backToArtsmesh
+- (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
-    [self joinGroup:@"Artsmesh"];
+    
 }
 
--(void)goOnline
+- (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-    if (self.isOnline) {
-        return;
-    }
-    
-    if (self.isLeader) {
-        //stop local server if i'm the local leader
-        if (_mesherServerTask){
-            [_mesherServerTask cancel];
-        }
-    }
-    
-    [_heartbeatThread cancel];
-    
-    _heartbeatThread = [AMHeartBeat alloc] initWithHost: port:<#(char *)#> ipv6:<#(BOOL)#>
-    
-    
-    
     
 }
 
--(void)requestUserListInQueue{
-
-    @synchronized(_requestUserListQueue){
-        if (_requestUserListQueue == nil) {
-            _requestUserListQueue  = [[AMRequestUserOperation alloc] initWithMesherServerUrl:_amserverURL];
-            _requestUserListQueue.action = @"request";
-            _requestUserListQueue.delegate = self;
-        }
-    }
-}
-
--(void)requestUserListPop{
+- (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
+{
     
-    @synchronized(_requestUserListQueue){
-        if (_requestUserListQueue != nil){
-            [[AMMesher sharedEtcdOperQueue] addOperation:_requestUserListQueue];
-            _requestUserListQueue = nil;
-        }
-    }
 }
 
 #pragma mark -
@@ -248,83 +259,35 @@
                 NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
                 
                 [self willChangeValueForKey:@"isLeader"];
-                self.isLeader = YES;
+                _isLeader = YES;
                 [self didChangeValueForKey:@"isLeader"];
                 
                 [self willChangeValueForKey:@"localLeaderName"];
-                self.localLeaderName = _elector.mesherHost;
+                _localLeaderName = _elector.mesherHost;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-               // [self startMesherServer];
-                [self registerSelf];
+                [self startLocalServer];
+                
+                //TODO:
                 
             }else if(newState == 4){
                 //Joined
                 NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
                 
                 [self willChangeValueForKey:@"isLeader"];
-                self.isLeader = NO;
+                _isLeader = NO;
                 [self didChangeValueForKey:@"isLeader"];
                 
                 [self willChangeValueForKey:@"localLeaderName"];
-                self.localLeaderName = _elector.mesherHost;
+                _localLeaderName = _elector.mesherHost;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                [self registerSelf];
+                 //TODO:
+                
             }
         }else{
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
     }
 }
-
-#pragma mark -
-#pragma mark AMMesherOperationDelegate
--(void)MesherOperDidFinished:(AMMesherOperation*)oper{
-    
-    if (oper.isSucceeded == NO) {
-        NSString* errDomain = [NSString stringWithFormat:@"AMMesher-%@", oper.action];
-        NSDictionary* dict = @{@"erroInfo": oper.errorDescription};
-        NSError* err = [NSError errorWithDomain:errDomain code:-1 userInfo:dict];
-        [self.delegate onMesherError:err];
-        
-        return;
-    }
-    
-    //succeeded!
-    if ([oper.action isEqualToString:@"register"]) {
-        
-        NSLog(@"regiser succeede, start heartbeat schedule and request userlist");
-        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
-        
-        [self requestUserListInQueue];
-        [self requestUserListPop];
-            
-    }else if([oper.action isEqualToString:@"heartbeat"]){
-        AMUpdateUserOperation* updateOper = (AMUpdateUserOperation* )oper;
-        
-        int curVer;
-        @synchronized(self){
-            curVer = [self.uselistVersion intValue];
-        }
-        
-        int resVer = [updateOper.udpResponse.version intValue];
-        if (resVer > curVer) {
-            [self requestUserListInQueue];
-            [self requestUserListPop];
-        }
-        
-        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
-            
-    }else if([oper.action isEqualToString:@"update"]){
-        
-        _heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(heartbeat) userInfo:nil repeats:NO];
-            
-    }else if([oper.action isEqualToString:@"request"]){
-        AMRequestUserOperation* requestOper = (AMRequestUserOperation* )oper;
-        
-       // requestOper.restResponse
-    }
-}
-
 @end

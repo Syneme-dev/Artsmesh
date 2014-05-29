@@ -8,21 +8,38 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol AMMesherOperationDelegate;
 @class AMUser;
+@protocol AMHeartBeatDelegate;
 
-@protocol AMMesherDelegate <NSObject>
 
--(void)onMesherError:(NSError*)err;
-
+@interface AMSystemConfig : NSObject
+//Client
+@property NSString* globalServerAddr;
+@property NSString* globalServerUdpPort;
+@property NSString* globalServerHttpPort;
+@property NSString* heartbeatInterval;
+@property BOOL isIpv6;
+//Client And Server
+@property NSString* localServerAddr;
+@property NSString* localServerUdpPort;
+@property NSString* localServerHttpPort;
+//Server
+@property NSString* userTimeout;
 @end
 
-@interface AMMesher: NSObject<AMMesherOperationDelegate>
 
-@property AMUser* mySelf;
-@property NSString* localLeaderName;
-@property BOOL isLeader;
-@property BOOL isOnline;
+@protocol AMMesherDelegate <NSObject>
+-(void)onUserGroupsChange:(NSArray*)groups;
+-(void)onMesherError:(NSError*)err;
+@end
+
+
+@interface AMMesher: NSObject<AMHeartBeatDelegate>
+
+@property (readonly) AMUser* mySelf;
+@property (readonly) NSString* localLeaderName;
+@property (readonly) BOOL isLeader;
+@property (readonly) BOOL isOnline;
 @property id<AMMesherDelegate> delegate;
 
 +(id)sharedAMMesher;
@@ -35,7 +52,10 @@
 -(void)joinGroup:(NSString*)groupName;
 -(void)backToArtsmesh;
 
+-(void)setMySelfPropties:(NSDictionary*)props;
 
-@end    
+@end
+
+
 
 

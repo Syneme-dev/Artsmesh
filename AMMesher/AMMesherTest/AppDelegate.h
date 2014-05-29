@@ -11,5 +11,8 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+- (IBAction)online:(id)sender;
+- (IBAction)offline:(id)sender;
+- (IBAction)stop:(id)sender;
 
 @end

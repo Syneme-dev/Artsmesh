@@ -18,6 +18,8 @@
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
 		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
+		267FA5711936ECFC001FDA74 /* amserver in Resources */ = {isa = PBXBuildFile; fileRef = 267FA5701936ECFC001FDA74 /* amserver */; };
+		267FA5721936ED03001FDA74 /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 267FA5701936ECFC001FDA74 /* amserver */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
@@ -32,8 +34,6 @@
 		26BC15CB19321D280020AD2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15CA19321D280020AD2B /* Images.xcassets */; };
 		26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5218D7C2A2006501C4 /* AMMesher.framework */; };
 		26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */; };
-		26BC15E71932E7F30020AD2B /* amserver in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15E61932E7F30020AD2B /* amserver */; };
-		26BC15E91932E8040020AD2B /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26BC15E61932E7F30020AD2B /* amserver */; };
 		26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */; };
 		26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */; };
 		26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4D18FCB61000DD04A6 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,7 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				26BC15E91932E8040020AD2B /* amserver in CopyFiles */,
+				267FA5721936ED03001FDA74 /* amserver in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +72,7 @@
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
 		267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
+		267FA5701936ECFC001FDA74 /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,7 +97,6 @@
 		26BC15C819321D280020AD2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		26BC15CA19321D280020AD2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
-		26BC15E61932E7F30020AD2B /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
 		26F2BF4D18FCB61000DD04A6 /* AMMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesher.h; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		2692CD4818D7C2A2006501C4 = {
 			isa = PBXGroup;
 			children = (
-				26BC15E61932E7F30020AD2B /* amserver */,
+				267FA5701936ECFC001FDA74 /* amserver */,
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
 				26BC15B819321D280020AD2B /* AMMesherTest */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,
@@ -339,7 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */,
-				26BC15E71932E7F30020AD2B /* amserver in Resources */,
+				267FA5711936ECFC001FDA74 /* amserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

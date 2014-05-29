@@ -33,17 +33,12 @@
     AMLeaderElecter* _elector;
     AMShellTask *_mesherServerTask;
     AMHeartBeat* _heartbeatThread;
-    
     NSOperationQueue* _httpRequestQueue;
-    
     AMSystemConfig* _systemConfig;
-    
     BOOL _isNeedUpdateInfo;
-    
     int _heartbeatFailureCount;
-    
-    
-    
+    dispatch_semaphore_t _heartbeatCancelSem;
+
 }
 
 - (instancetype)init
@@ -72,7 +67,6 @@
         [self loadSystemConfig];
         [self initUserGroups];
         [self initHttpReuestQueue];
-        [self initMesherPublisher];
     }
     
     return self;
@@ -101,6 +95,8 @@
     _systemConfig.heartbeatInterval = @"2";
     _systemConfig.myServerUserTimeout = @"30";
     _systemConfig.maxHeartbeatFailure = @"5";
+    _systemConfig.globalServerPort = @"8080";
+    _systemConfig.globalServerAddr = @"localhost";
 }
 
 -(void)initUserGroups
@@ -116,16 +112,14 @@
 }
 
 
--(void)initMesherPublisher
-{
-    if (_systemConfig) {
-        _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
-    }
-}
-
-
 -(void)startMesher
 {
+    if(_elector == nil){
+        if (_systemConfig) {
+            _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
+        }
+    }
+    
     [_elector kickoffElectProcess];
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -135,14 +129,24 @@
 -(void)stopMesher
 {
     if (_heartbeatThread)
+    {
+        _heartbeatCancelSem = dispatch_semaphore_create(0);
         [_heartbeatThread cancel];
+        dispatch_semaphore_wait(_heartbeatCancelSem, DISPATCH_TIME_FOREVER);
+    }
+    
     
     if (_mesherServerTask)
+    {
         [_mesherServerTask cancel];
-    [self killAllAMServer];
+        [self killAllAMServer];
+    }
     
     if (_elector)
+    {
+        [_elector removeObserver:self forKeyPath:@"state"];
         [_elector stopElect];
+    }
     
     _heartbeatThread = nil;
     _elector = nil;
@@ -192,10 +196,7 @@
 
      _isOnline = YES;
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: gServerAddr port: gServerPort ipv6:userIpv6];
-    _heartbeatThread.delegate = self;
-    [_heartbeatThread start];
-
+    [self startHearBeat:gServerAddr serverPort:gServerPort];
 }
 
 -(void)goOffline
@@ -319,6 +320,12 @@
     }
 }
 
+- (void)heartBeatDidCancel
+{
+    NSLog(@"heartbeat heartbeat thread canceled!");
+    dispatch_semaphore_signal(_heartbeatCancelSem);
+}
+
 #pragma mark -
 #pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -346,7 +353,7 @@
                 self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
-                //[self startLocalServer];
+                [self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;

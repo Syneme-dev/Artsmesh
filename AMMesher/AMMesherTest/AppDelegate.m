@@ -11,6 +11,9 @@
 #import "AMMesher.h"
 
 @implementation AppDelegate
+{
+    
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -44,4 +47,18 @@
 //    NSLog([user md5String]);
 }
 
+- (IBAction)online:(id)sender {
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher goOnline];
+}
+
+- (IBAction)offline:(id)sender {
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher goOffline];
+}
+
+- (IBAction)stop:(id)sender {
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher stopMesher];
+}
 @end

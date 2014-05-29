@@ -334,7 +334,8 @@
 
 - (NSString *)httpServerURL
 {
-    return @"http://localhost/users";
+    //TODO
+    return @"http://localhost:8080/users";
 }
 
 - (void)userRequestDidCancel
@@ -343,6 +344,10 @@
 }
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
+    if (data == nil) {
+        return;
+    }
+    
     NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@", dataStr);
     

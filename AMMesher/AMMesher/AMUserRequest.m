@@ -37,7 +37,20 @@
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(userrequest:didReceiveData:)]) {
+    if (returnData == nil) {
+        if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
+            
+            NSError *error = [NSError errorWithDomain:@""
+                                                 code:123
+                                             userInfo:nil];
+            
+            [self.delegate userrequest:self didFailWithError:error];
+        }
+        
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
         [self.delegate userrequest:self didReceiveData:returnData];
     }
     

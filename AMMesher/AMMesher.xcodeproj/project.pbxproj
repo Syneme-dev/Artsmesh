@@ -11,10 +11,10 @@
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
 		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
-		267FA5711936ECFC001FDA74 /* amserver in Resources */ = {isa = PBXBuildFile; fileRef = 267FA5701936ECFC001FDA74 /* amserver */; };
-		267FA5721936ED03001FDA74 /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 267FA5701936ECFC001FDA74 /* amserver */; };
 		267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA5731936EF0D001FDA74 /* AMUserRequest.h */; };
 		267FA5761936EF0D001FDA74 /* AMUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA5741936EF0D001FDA74 /* AMUserRequest.m */; };
+		267FA57B1936F726001FDA74 /* amserver in Resources */ = {isa = PBXBuildFile; fileRef = 267FA57A1936F726001FDA74 /* amserver */; };
+		267FA57C1936F728001FDA74 /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 267FA57A1936F726001FDA74 /* amserver */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
@@ -49,7 +49,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				267FA5721936ED03001FDA74 /* amserver in CopyFiles */,
+				267FA57C1936F728001FDA74 /* amserver in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,9 +60,9 @@
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
 		267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
-		267FA5701936ECFC001FDA74 /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		267FA5731936EF0D001FDA74 /* AMUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserRequest.h; sourceTree = "<group>"; };
 		267FA5741936EF0D001FDA74 /* AMUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserRequest.m; sourceTree = "<group>"; };
+		267FA57A1936F726001FDA74 /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,7 +129,7 @@
 		2692CD4818D7C2A2006501C4 = {
 			isa = PBXGroup;
 			children = (
-				267FA5701936ECFC001FDA74 /* amserver */,
+				267FA57A1936F726001FDA74 /* amserver */,
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
 				26BC15B819321D280020AD2B /* AMMesherTest */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,
@@ -321,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */,
-				267FA5711936ECFC001FDA74 /* amserver in Resources */,
+				267FA57B1936F726001FDA74 /* amserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

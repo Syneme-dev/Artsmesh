@@ -13,6 +13,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMHeartBeat.h"
 #import "AMSystemConfig.h"
+#import "AMUserRequest.h"
 
 @interface AMMesher()
 
@@ -125,13 +126,16 @@
 
 -(void)stopMesher
 {
+    if (_httpRequestQueue) {
+        [_httpRequestQueue  cancelAllOperations];
+    }
+    
     if (_heartbeatThread)
     {
         _heartbeatCancelSem = dispatch_semaphore_create(0);
         [_heartbeatThread cancel];
         dispatch_semaphore_wait(_heartbeatCancelSem, DISPATCH_TIME_FOREVER);
     }
-    
     
     if (_mesherServerTask)
     {
@@ -294,6 +298,10 @@
         
         if ([response.version intValue] >  self.userGroupsVersion) {
             NSLog(@"need download userlist");
+            
+            AMUserRequest* req = [[AMUserRequest alloc] init];
+            req.delegate = self;
+            [_httpRequestQueue  addOperation:req];
         }
     }
 }
@@ -318,6 +326,29 @@
 {
     NSLog(@"heartbeat heartbeat thread canceled!");
     dispatch_semaphore_signal(_heartbeatCancelSem);
+}
+
+#pragma mark-
+#pragma AMUserRequestDelegate
+
+- (NSString *)httpServerURL
+{
+    return @"http://localhost/users";
+}
+
+- (void)userRequestDidCancel
+{
+    
+}
+- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
+{
+    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", dataStr);
+}
+
+- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
+{
+    
 }
 
 #pragma mark -

@@ -27,8 +27,8 @@ enum {
 @property(nonatomic, weak) id<AMHeartBeatDelegate> delegate;
 
 // designated initializer
-- (instancetype)initWithHost:(char *)host
-                        port:(char *)port
+- (instancetype)initWithHost:(NSString *)host
+                        port:(NSString *)port
                         ipv6:(BOOL)useIpv6;
 
 @end

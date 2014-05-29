@@ -11,9 +11,6 @@
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMMesherOperationDelegate.h"
-#import "AMRequestUserOperation.h"
-#import "AMUpdateUserOperation.h"
 #import "AMHeartBeat.h"
 #import "AMSystemConfig.h"
 
@@ -186,17 +183,14 @@
     }
     
     [self stopMesher];
-    NSString* gServerAddr = _systemConfig.globalServerAddr;
-    NSString* gServerPort = _systemConfig.globalServerPort;
-    BOOL userIpv6 = _systemConfig.useIpv6;
     
     @synchronized(self){
         _isNeedUpdateInfo = YES;
     }
-
+    
      _isOnline = YES;
     
-    [self startHearBeat:gServerAddr serverPort:gServerPort];
+    [self startHearBeat:_systemConfig.globalServerAddr serverPort:_systemConfig.globalServerPort];
 }
 
 -(void)goOffline

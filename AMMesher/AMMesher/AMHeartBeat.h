@@ -38,6 +38,7 @@ enum {
 @optional
 
 - (NSData *)heartBeatData;
+- (void)heartBeatDidCancel;
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data;
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data;
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error;

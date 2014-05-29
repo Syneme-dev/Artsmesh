@@ -14,6 +14,7 @@
 #import "AMHeartBeat.h"
 #import "AMSystemConfig.h"
 #import "AMUserRequest.h"
+#import "AMGroupsBuilder.h"
 
 @interface AMMesher()
 
@@ -344,6 +345,23 @@
 {
     NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@", dataStr);
+    
+    AMUserRESTResponse* response = [AMUserRESTResponse responseFromJsonData:data];
+    if (response == nil) {
+        return;
+    }
+    
+    @synchronized(self)
+    {
+        self.userGroupsVersion = [response.version intValue];
+        AMGroupsBuilder* builder = [[AMGroupsBuilder alloc] init];
+        
+        for (AMUser* user in response.userlist ) {
+            [builder addUser:user];
+        }
+        
+        self.userGroups = builder.groups;
+    }
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

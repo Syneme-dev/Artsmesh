@@ -121,6 +121,9 @@
 
 -(void)startMesher
 {
+    _heartbeatFailureCount = 0;
+    _isNeedUpdateInfo = YES;
+    
     if(_elector == nil){
         if (_systemConfig) {
             _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
@@ -137,6 +140,7 @@
 {
     if (_httpRequestQueue) {
         [_httpRequestQueue  cancelAllOperations];
+        [_httpRequestQueue waitUntilAllOperationsAreFinished];
     }
     
     if (_heartbeatThread)
@@ -144,6 +148,7 @@
         _heartbeatCancelSem = dispatch_semaphore_create(0);
         [_heartbeatThread cancel];
         dispatch_semaphore_wait(_heartbeatCancelSem, DISPATCH_TIME_FOREVER);
+        _heartbeatCancelSem = nil;
     }
     
     if (_mesherServerTask)
@@ -395,6 +400,7 @@
 {
     
 }
+
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
     if (data == nil) {

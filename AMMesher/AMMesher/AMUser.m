@@ -219,7 +219,7 @@
         [dict setObject:self.contentMd5 forKey:@"UserContentMd5"];
     }
    
-    return [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    return [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
 }
 
 @end

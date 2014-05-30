@@ -43,7 +43,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationWillTerminate:(NSNotification *)notification {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    [[AMMesher sharedAMMesher] stopLocalMesher];
+    [[AMMesher sharedAMMesher] stopMesher];
 }
 
 - (void)connectMesher {
@@ -52,7 +52,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-    [[AMMesher sharedAMMesher] startElector];
+    [[AMMesher sharedAMMesher] startMesher];
 }
 
 - (void)showPreferencePanel {

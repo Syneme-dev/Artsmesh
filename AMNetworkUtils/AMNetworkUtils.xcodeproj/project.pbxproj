@@ -16,6 +16,8 @@
 		2692CE1118D7CEC8006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */; };
 		2692CE1318D7CEC8006501C4 /* AMNetworkUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */; };
 		2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */; };
+		26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */; };
 		26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */; };
 		26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +52,8 @@
 		2692CE0E18D7CEC8006501C4 /* AMNetworkUtilsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMNetworkUtilsTests-Info.plist"; sourceTree = "<group>"; };
 		2692CE1018D7CEC8006501C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNetworkUtilsTests.m; sourceTree = "<group>"; };
+		26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHolePunchingSocket.h; sourceTree = "<group>"; };
+		26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHolePunchingSocket.m; sourceTree = "<group>"; };
 		26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 		2692CDF718D7CEC8006501C4 /* AMNetworkUtils */ = {
 			isa = PBXGroup;
 			children = (
+				26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */,
+				26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */,
 				26EE8BD118DC0AB3008262F8 /* JSONKit.h */,
 				26EE8BD218DC0AB3008262F8 /* JSONKit.m */,
 				26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */,
@@ -173,6 +179,7 @@
 				2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */,
 				26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */,
 				26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */,
+				26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */,
 				26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +282,7 @@
 				26EE8B8118DBB23E008262F8 /* GCDAsyncSocket.m in Sources */,
 				26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */,
 				26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */,
+				26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */,
 				2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

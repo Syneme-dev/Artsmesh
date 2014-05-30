@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class AMUser;
+@class AMGroup;
+@class AMUserPortMap;
 @class AMSystemConfig;
 @protocol AMHeartBeatDelegate;
 
@@ -38,6 +40,8 @@
 -(void)backToArtsmesh;
 
 -(void)setMySelfPropties:(NSDictionary*)props;
+-(void)setPortMaps:(AMUserPortMap*)portMap;
+-(AMUserPortMap*)portMapByName:(NSString*)portMapName;
 
 @end
 

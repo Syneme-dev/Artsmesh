@@ -15,6 +15,7 @@
 #import "AMSystemConfig.h"
 #import "AMUserRequest.h"
 #import "AMGroupsBuilder.h"
+#import "AMNotificationManager/AMNotificationManager.h"
 
 @interface AMMesher()
 
@@ -182,6 +183,22 @@
     }
 }
 
+-(AMGroup*)myGroup
+{
+    AMGroup* myGroup;
+    NSString* myGroupName = self.mySelf.groupName;
+    NSArray* groups = self.userGroups;
+
+    for(AMGroup* g in groups){
+        if ([g.groupName isEqualToString:myGroupName]) {
+            myGroup = g;
+            break;
+        }
+    }
+    
+    return myGroup;
+}
+
 -(void)backToArtsmesh
 {
     [self joinGroup:@""];
@@ -267,7 +284,36 @@
     [_heartbeatThread start];
 }
 
+-(void)setPortMaps:(AMUserPortMap*)portMap
+{
+    @synchronized(self){
+        BOOL bFind = NO;
+        for (AMUserPortMap* pm in self.mySelf.portMaps) {
+            if([pm.portName isEqualToString:portMap.portName]){
+                pm.internalPort = portMap.internalPort;
+                pm.natMapPort = portMap.natMapPort;
+                bFind = YES;
+                break;
+            }
+        }
+        if (!bFind) {
+            [self.mySelf.portMaps addObject:portMap];
+        }
+        
+        _isNeedUpdateInfo = YES;
+    }
+}
 
+-(AMUserPortMap*)portMapByName:(NSString*)portMapName{
+    @synchronized(self){
+        for (AMUserPortMap* pm in self.mySelf.portMaps) {
+            if([pm.portName isEqualToString:portMapName]){
+                return pm;
+            }
+        }
+        return nil;
+    }
+}
 
 #pragma mark-
 #pragma AMHeartBeatDelegate
@@ -372,7 +418,16 @@
             [builder addUser:user];
         }
         
+        [self willChangeValueForKey:@"userGroups"];
         self.userGroups = builder.groups;
+        [self didChangeValueForKey:@"userGroups"];
+        
+        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+        AMGroup* myGroup = [self myGroup];
+        [params setObject:myGroup forKey:@"myGroup"];
+        [params setObject:self.userGroups forKey:@"allGroups"];
+        
+        [[AMNotificationManager defaultShared] postMessage:params withTypeName:AM_USERGROUPS_CHANGED source:self];
     }
 }
 

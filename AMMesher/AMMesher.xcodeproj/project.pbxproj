@@ -18,7 +18,7 @@
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
-		26BC15B0193214BB0020AD2B /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BC15AE193214BB0020AD2B /* AMUser.h */; };
+		26BC15B0193214BB0020AD2B /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BC15AE193214BB0020AD2B /* AMUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26BC15B1193214BB0020AD2B /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15AF193214BB0020AD2B /* AMUser.m */; };
 		26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		26BC15BD19321D280020AD2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15BB19321D280020AD2B /* InfoPlist.strings */; };
@@ -29,13 +29,14 @@
 		26BC15CB19321D280020AD2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15CA19321D280020AD2B /* Images.xcassets */; };
 		26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5218D7C2A2006501C4 /* AMMesher.framework */; };
 		26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */; };
+		26CC6CD8193838980008E83E /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */; };
 		26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */; };
 		26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2BF4D18FCB61000DD04A6 /* AMMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4E18FCB61000DD04A6 /* AMMesher.m */; };
 		CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */ = {isa = PBXBuildFile; fileRef = CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */; };
 		CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */; };
-		CE318D961934BB43006D6EAA /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D921934BB43006D6EAA /* AMGroup.h */; };
+		CE318D961934BB43006D6EAA /* AMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D921934BB43006D6EAA /* AMGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE318D971934BB43006D6EAA /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D931934BB43006D6EAA /* AMGroup.m */; };
 		CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D941934BB43006D6EAA /* AMGroupsBuilder.h */; };
 		CE318D991934BB43006D6EAA /* AMGroupsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D951934BB43006D6EAA /* AMGroupsBuilder.m */; };
@@ -118,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26CC6CD8193838980008E83E /* AMNotificationManager.framework in Frameworks */,
 				26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */,
 				26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */,
 			);
@@ -514,6 +516,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesherTest/AMMesherTest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -531,6 +537,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesherTest/AMMesherTest-Prefix.pch";
 				INFOPLIST_FILE = "AMMesherTest/AMMesherTest-Info.plist";

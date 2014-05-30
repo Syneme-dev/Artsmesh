@@ -79,6 +79,7 @@
         self.mySelf.nickName = @"myNickName";
         self.mySelf.description = @"I love coffee";
         self.mySelf.privateIp = @"127.0.0.1";
+        self.mySelf.groupName = @"Artsmesh";
         
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
         pm.portName = @"port1";

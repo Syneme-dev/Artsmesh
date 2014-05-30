@@ -35,6 +35,9 @@
 - (void)addUser:(AMUser *)user
 {
     NSAssert([self.groupName isEqual:user.groupName], @"groupName mismatch");
+    if (_users == nil) {
+        _users = [[NSMutableArray alloc] init];
+    }
     [_users addObject:user];
 }
 

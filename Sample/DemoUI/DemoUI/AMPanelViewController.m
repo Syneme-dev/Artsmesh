@@ -7,7 +7,8 @@
 //
 
 #import "AMPanelViewController.h"
-
+#import "AMAppDelegate.h"
+#import "UIFramework/AMPanelView.h"
 @interface AMPanelViewController ()
 
 @end
@@ -38,9 +39,13 @@
 
 - (IBAction)closePanel:(id)sender {
     [self.view setHidden:YES];
-    //TODO:move right panel to left.
-//    NSPoint point=NSMakePoint(self.view.frame.origin.x+100.0, self.view.frame.origin.y);
-//    [self.view setFrameOrigin:point];
-    
+    AMAppDelegate *appDelegate=[NSApp delegate];
+    [appDelegate.mainWindowController setSideBarItemStatus:self.titleView.stringValue withStatus:NO ];
+    //Note:move right panel to left when close.
+}
+- (IBAction)onTearClick:(id)sender {
+    AMPanelView *panelView= (AMPanelView*) self.view;
+    panelView.backgroundColor = [NSColor colorWithCalibratedRed:(38)/255.0f green:(38)/255.0f blue:(38)/255.0f alpha:1.0f];
+    [panelView setNeedsDisplay:YES];
 }
 @end

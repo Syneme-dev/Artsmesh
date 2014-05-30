@@ -102,7 +102,7 @@
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;
-    _containerView.paddingRight = 20;
+    _containerView.paddingRight = 50;
     _containerView.minSizeConstraint = _containerView.frame.size;
     _containerView.allowBecomeEmpty = YES;
     _containerView.gapBetweenItems = 50;
@@ -114,7 +114,9 @@
          newBox.minSizeConstraint = NSMakeSize(0, contentHeight);
          newBox.paddingTop = 20;
          newBox.paddingBottom = 20;
-         newBox.gapBetweenItems = 20;
+         newBox.paddingLeft = 6;
+         newBox.paddingRight = 0;
+         newBox.gapBetweenItems = 40;
          [newBox addSubview:boxItem];
          return newBox;
      };
@@ -188,6 +190,7 @@
     [panelViewController.view addSubview:socialViewController.view];
     [panelViewController setTitle:@"SOCIAL"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
+      [socialViewController.socialWebTab setPolicyDelegate:socialViewController];
     
     [socialViewController.socialWebTab setDrawsBackground:NO];
 //    [_containerView addSubview:panelViewController.view];
@@ -259,22 +262,14 @@
 
 -(void)loadPingPanel{
     AMPanelViewController *panelViewController  = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
-    
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, 400);
     [panelView setFrameSize:panelSize];
     [_containerView addSubview:panelView];
-    
-//    [_containerView addSubview:panelViewController.view];
     [panelViewController setTitle:@"PING"];
-//    panelViewController.view.frame = NSMakeRect(
-//                                                UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*4+UI_panelSpacing*2,
-//                                                UI_panelPaddingBottom, 600.0f, 720.0f);
-    
     pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight+5, 600, 380);
+    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
     [panelViewController.view addSubview:pingViewController.view];
-    
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [panelControllers setObject:panelViewController forKey:@"PING"];
 }
@@ -290,20 +285,11 @@
     panelView.minSizeConstraint = panelSize;
     panelView.maxSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
-//    panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
-//                                                panelHeight+UI_pixelHeightAdjustment,  UI_defaultPanelWidth, panelHeight);
-    
-//  the following code for iMac
-//    panelViewController.view.frame = NSMakeRect(70.0f,self.window.frame.size.height-UI_topbarHeight-
-//                                                  panelHeight - UI_panelTitlebarHeight,  UI_defaultPanelWidth, panelHeight);
-//    [_containerView addSubview:panelViewController.view];
-
     [panelViewController setTitle:@"USER"];
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
-    userViewController.view.frame = NSMakeRect(0, 0, 300, 300);
+    userViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, UI_defaultPanelWidth, panelHeight-UI_panelTitlebarHeight);
     [panelViewController.view addSubview:userViewController.view];
      [panelControllers setObject:panelViewController forKey:@"USER"];
-    
 }
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
@@ -316,5 +302,22 @@
         AMPanelViewController* pannelViewController=panelControllers[sender.identifier];
         [pannelViewController closePanel:nil];
     }
+}
+
+-(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status{
+    NSView *mainView= self.window.contentView;
+    for (NSView *subView in mainView.subviews) {
+        if([subView isKindOfClass:[BlueBackgroundView class]] )
+        {
+            NSButton *buttonView= subView.subviews[0];
+            if(buttonView !=nil&& [buttonView.identifier  isEqualTo:identifier])
+            {
+                [buttonView setState:status?NSOnState:NSOffState];
+                break;
+            }
+        }
+    }
+
+
 }
 @end

@@ -18,13 +18,13 @@
 @implementation AMPanelView
 {
     NSColor *_knobColor;
-    BOOL _resizing;
 }
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         
     }
     return self;
@@ -55,27 +55,19 @@
     NSPoint mouseDownLocation = [self convertPoint:[theEvent locationInWindow]
                                           fromView:nil];
     if (NSPointInRect(mouseDownLocation, self.knobRectRight))
-        _resizing = YES;
-    else
-        [super mouseDown:theEvent];
+        self.dragBehavior = AMDragForResizing;
+    [super mouseDown:theEvent];
 }
 
-
-- (void)mouseDragged:(NSEvent *)theEvent
+- (void)resizeByDraggingLocation:(NSPoint)location
 {
-    if (_resizing) {
-        NSPoint mouseLocation = [self convertPoint:[theEvent locationInWindow]
-                                          fromView:nil];
-        [self setFrameSize:NSMakeSize(mouseLocation.x + 8,
-                                      mouseLocation.y + 8)];
-    } else {
-        [super mouseDragged:theEvent];
-    }
+    location = [self convertPoint:location fromView:nil];
+    [self setFrameSize:NSMakeSize(location.x + 8, location.y + 8)];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    _resizing = NO;
+    self.dragBehavior = AMDragForMoving;
 }
 
 - (BOOL)isFlipped
@@ -85,11 +77,14 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor colorWithWhite:0.22 alpha:1.0] set];
+    [self.backgroundColor set];
     [NSBezierPath fillRect:self.bounds];
     [_knobColor set];
     [NSBezierPath fillRect:self.knobRectLeft];
     [NSBezierPath fillRect:self.knobRectRight];
+    
+  
+
 }
 
 

@@ -121,7 +121,7 @@
     NSURL *baseURL =
     [NSURL URLWithString:infoUrl];
     [self.socialWebTab.mainFrame loadRequest:
-     [NSURLRequest requestWithURL:baseURL]];
+    [NSURLRequest requestWithURL:baseURL]];
 }
 
 

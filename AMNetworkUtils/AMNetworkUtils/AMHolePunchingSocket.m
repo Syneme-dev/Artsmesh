@@ -145,18 +145,10 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 withFilterContext:(id)filterContext
 {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (msg == nil || [msg isEqualToString:@""]){
-        //error
-        return;
-    }
-    
-    if ([msg isEqualToString:AMholePunchingPeerPacket]) {
-        //peer packet
-        return;
-    }
     
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     if ([fromHost isEqualToString:_serverIp]){
+        
         // server packet
         NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
         if ([ipAndPort count] < 2){
@@ -167,11 +159,20 @@ withFilterContext:(id)filterContext
         _mappedPort = [ipAndPort objectAtIndex:1];
         return;
     }
+
+    if ([msg isEqualToString:AMholePunchingPeerPacket]) {
+        //peer packet
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(socket:didReceiveData:)]) {
         [self.delegate socket:self didReceiveData:data];
     }
 }
 
+@end
+
+
+@implementation AMHolePunchingPeer
 
 @end

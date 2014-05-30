@@ -49,7 +49,9 @@
     
     
     //TODO: get preferenc
-    _socket = [[AMHolePunchingSocket alloc] initWithServer: @"127.0.0.1" serverPort:@"12345" clientPort:@"9930"];
+    _socket = [[AMHolePunchingSocket alloc] initWithServer: @"123.124.145.254" serverPort:@"22250" clientPort:@"12345"];
+    [_socket initSocket];
+    _socket.delegate = self;
 }
 
 -(void)onlineStatusChanged:(NSNotification*) notification
@@ -111,6 +113,7 @@
         [self performSelectorOnMainThread:@selector(showLeavedUsers:) withObject:leavedUsers waitUntilDone:NO];
     }
     
+    [self updatePortInfo];
 }
 
 -(void)showNewCommers:(id)newCommers
@@ -143,26 +146,32 @@
 
 -(void)updatePortInfo
 {
-    NSMutableArray* peerAddrs = [[NSMutableArray alloc]  init];
+    NSMutableArray* localPeers = [[NSMutableArray alloc]  init];
+    NSMutableArray* remotePeers = [[NSMutableArray alloc]  init];
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
     NSString* myLocalLeaderName = mesher.mySelf.localLeader;
     
     for (AMUser* user in _myGroup.users) {
+        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
         for (AMUserPortMap* pm in user.portMaps) {
-            //statements
+            if ([pm.portName isEqualToString:@"ChatPort"]) {
+                
+                if ([user.localLeader isEqualToString:myLocalLeaderName]){
+                    peerAddr.ip = user.privateIp;
+                    peerAddr.port = pm.internalPort;
+                    [localPeers addObject:peerAddr];
+                }else{
+                    peerAddr.ip = user.publicIp;
+                    peerAddr.port = pm.natMapPort;
+                    [remotePeers addObject:peerAddr];
+                }
+            }
         }
-        
-        
-//        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
-//        if ([user.localLeader isEqualToString:myLocalLeaderName]) {
-//            
-////            peerAddr.ip = user.privateIp;
-////            peerAddr.port =
-////            _socket.localPeers addObject:<#(id)#>
-//        }
-        
     }
+
+    _socket.localPeers = localPeers;
+    _socket.remotePeers = remotePeers;
 }
 
 - (IBAction)sendMsg:(id)sender
@@ -177,6 +186,8 @@
 
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
                     @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
+    
+    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
     if (_socket) {
         [_socket sendPacketToPeers:msgData];
     }
@@ -195,15 +206,18 @@
 
 
 -(void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error{
-    
+    NSLog(@"chat socket failed: %@", error.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
     
+    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [self showChatRecord:chatRecord];
+
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{
-    
+    NSLog(@"chat message did not send out: %@", err.description);
 }
 
 

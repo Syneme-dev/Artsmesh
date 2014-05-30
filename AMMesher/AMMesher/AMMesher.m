@@ -82,8 +82,8 @@
         self.mySelf.groupName = @"333";
         
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
-        pm.portName = @"port1";
-        pm.internalPort = @"20005";
+        pm.portName = @"ChatPort";
+        pm.internalPort = @"12345";
         pm.natMapPort   = @"12345";
         [self.mySelf.portMaps addObject:pm];
         

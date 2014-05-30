@@ -32,7 +32,7 @@ static void *PingKVOContext;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _mesher = [AMMesher sharedAMMesher];
-        _myGroupUsers = _mesher.myGroupUsers;
+        //_myGroupUsers = _mesher.myGroupUsers;
     }
     
     return self;
@@ -54,16 +54,16 @@ static void *PingKVOContext;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (context != &PingKVOContext) {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
-        return;
-    }
-    
-    _myGroupUsers = _mesher.myGroupUsers;
-    [self.userTable reloadData];
+//    if (context != &PingKVOContext) {
+//        [super observeValueForKeyPath:keyPath
+//                             ofObject:object
+//                               change:change
+//                              context:context];
+//        return;
+//    }
+//    
+//    _myGroupUsers = _mesher.myGroupUsers;
+//    [self.userTable reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -73,9 +73,9 @@ static void *PingKVOContext;
 - (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 
     NSTableCellView *result = [tableView makeViewWithIdentifier:[tableColumn identifier] owner:nil];
-    
-    AMUser* user = _myGroupUsers[row];
-    [result.textField setStringValue:user.nodeName];
+//    
+//    AMUser* user = _myGroupUsers[row];
+//    [result.textField setStringValue:user.nodeName];
     return result;
 }
 

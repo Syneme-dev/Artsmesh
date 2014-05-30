@@ -5,14 +5,14 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
+@protocol  AMHeartBeatDelegate;
 
 @class AMUser;
 @class AMGroup;
 @class AMUserPortMap;
 @class AMSystemConfig;
-@protocol AMHeartBeatDelegate;
+
 
 @protocol AMMesherDelegate <NSObject>
 -(void)onUserGroupsChange:(NSArray*)groups;
@@ -28,6 +28,8 @@
 @property (readonly) BOOL isOnline;
 @property (readonly) NSArray* userGroups;
 @property id<AMMesherDelegate> delegate;
+
+-(NSArray*)allGroupUsers;
 
 +(id)sharedAMMesher;
 

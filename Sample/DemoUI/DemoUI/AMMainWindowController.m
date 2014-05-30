@@ -18,7 +18,6 @@
 #import "HelloWorldConst.h"
 #import "AMPanelViewController.h"
 #import "UserGroupModuleConst.h"
-#import "AMMesher/AMMesher.h"
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
 #import "AMSocialViewController.h"
@@ -74,7 +73,7 @@
 }
 
 - (IBAction)mesh:(id)sender {
-    [[AMMesher sharedAMMesher] everyoneGoOnline];
+    [[AMMesher sharedAMMesher] goOnline];
 }
 
 -(void)loadVersion{

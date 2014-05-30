@@ -11,11 +11,11 @@
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMHeartBeat.h"
 #import "AMSystemConfig.h"
 #import "AMUserRequest.h"
 #import "AMGroupsBuilder.h"
 #import "AMNotificationManager/AMNotificationManager.h"
+#import "AMHeartBeat.h"
 
 @interface AMMesher()
 
@@ -37,7 +37,6 @@
     AMSystemConfig* _systemConfig;
     BOOL _isNeedUpdateInfo;
     int _heartbeatFailureCount;
-    dispatch_semaphore_t _heartbeatCancelSem;
 
 }
 
@@ -80,7 +79,7 @@
         self.mySelf.nickName = @"myNickName";
         self.mySelf.description = @"I love coffee";
         self.mySelf.privateIp = @"127.0.0.1";
-        self.mySelf.groupName = @"Artsmesh";
+        self.mySelf.groupName = @"333";
         
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
         pm.portName = @"port1";
@@ -145,10 +144,7 @@
     
     if (_heartbeatThread)
     {
-        _heartbeatCancelSem = dispatch_semaphore_create(0);
         [_heartbeatThread cancel];
-        dispatch_semaphore_wait(_heartbeatCancelSem, DISPATCH_TIME_FOREVER);
-        _heartbeatCancelSem = nil;
     }
     
     if (_mesherServerTask)
@@ -252,8 +248,9 @@
                          _systemConfig.myServerPort,
                          _systemConfig.myServerUserTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
+    NSLog(@"command is %@", command);
     [_mesherServerTask launch];
-    
+
     //Log Message, later will be remove or redirect to file
     NSFileHandle *inputStream = [_mesherServerTask fileHandlerForReading];
     inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
@@ -381,12 +378,6 @@
     }
 }
 
-- (void)heartBeatDidCancel
-{
-    NSLog(@"heartbeat heartbeat thread canceled!");
-    dispatch_semaphore_signal(_heartbeatCancelSem);
-}
-
 #pragma mark-
 #pragma AMUserRequestDelegate
 
@@ -428,12 +419,13 @@
         self.userGroups = builder.groups;
         [self didChangeValueForKey:@"userGroups"];
         
-        NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
         AMGroup* myGroup = [self myGroup];
-        [params setObject:myGroup forKey:@"myGroup"];
-        [params setObject:self.userGroups forKey:@"allGroups"];
-        
-        [[AMNotificationManager defaultShared] postMessage:params withTypeName:AM_USERGROUPS_CHANGED source:self];
+        if (myGroup != nil) {
+            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+            [params setObject:myGroup forKey:@"myGroup"];
+            [params setObject:self.userGroups forKey:@"allGroups"];
+            [[AMNotificationManager defaultShared] postMessage:params withTypeName:AM_USERGROUPS_CHANGED source:self];
+        }
     }
 }
 
@@ -495,4 +487,10 @@
         }
     }
 }
+
+-(NSArray*)allGroupUsers{
+    
+    return nil;
+}
+
 @end

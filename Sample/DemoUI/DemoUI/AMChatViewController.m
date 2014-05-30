@@ -13,6 +13,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNotificationManager/AMNotificationManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"
+#import "AMNetworkUtils/AMHolePunchingSocket.h"
 
 @interface AMChatViewController ()
 
@@ -149,17 +150,17 @@
     
     for (AMUser* user in _myGroup.users) {
         for (AMUserPortMap* pm in user.portMaps) {
-            statements
+            //statements
         }
         
         
-        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
-        if ([user.localLeader isEqualToString:myLocalLeaderName]) {
-            
-//            peerAddr.ip = user.privateIp;
-//            peerAddr.port =
-//            _socket.localPeers addObject:<#(id)#>
-        }
+//        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
+//        if ([user.localLeader isEqualToString:myLocalLeaderName]) {
+//            
+////            peerAddr.ip = user.privateIp;
+////            peerAddr.port =
+////            _socket.localPeers addObject:<#(id)#>
+//        }
         
     }
 }

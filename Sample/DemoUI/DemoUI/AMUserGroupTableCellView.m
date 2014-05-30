@@ -7,7 +7,7 @@
 //
 
 #import "AMUserGroupTableCellView.h"
-#import "AMMesher/AMUserGroupNode.h"
+//#import "AMMesher/AMUserGroupNode.h"
 
 @implementation AMUserGroupTableCellView
 
@@ -29,20 +29,20 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    for (NSView* view in self.subviews )
-    {
-        if ([view isKindOfClass:[NSButton class]])
-        {
-            if([self.objectValue isKindOfClass:[AMUserGroupNode class]])
-            {
-                AMUserGroupNode* node = self.objectValue;
-                if (node.isLeaf == NO)
-                {
-                     [view setHidden:NO];
-                }
-            }
-        }
-    }
+//    for (NSView* view in self.subviews )
+//    {
+//        if ([view isKindOfClass:[NSButton class]])
+//        {
+//            if([self.objectValue isKindOfClass:[AMUserGroupNode class]])
+//            {
+//                AMUserGroupNode* node = self.objectValue;
+//                if (node.isLeaf == NO)
+//                {
+//                     [view setHidden:NO];
+//                }
+//            }
+//        }
+//    }
     
      //NSLog(@"Mouse Entered!");
 }

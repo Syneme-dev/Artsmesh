@@ -186,9 +186,6 @@
             <declaredKeys>
                 <string>nodeName</string>
             </declaredKeys>
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.sharedMesher.allGroupUsers" id="A45-9X-dVM"/>
-            </connections>
         </treeController>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>
     </objects>

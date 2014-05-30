@@ -43,6 +43,7 @@
 
 @property NSString* action;
 @property NSString* version;
+@property NSString* userid;
 @property AMUser* userContent;
 @property NSString* contentMd5;
 

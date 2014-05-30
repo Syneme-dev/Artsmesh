@@ -265,6 +265,8 @@
 {
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"amserver", nil]];
+    
+    //sleep(1);
 }
 
 -(void)startHearBeat:(NSString*)addr serverPort:(NSString*)port
@@ -326,6 +328,7 @@
     @synchronized(self){
         AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
         request.action = @"update";
+        request.userid = self.mySelf.userid;
         request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
         
         if (_isNeedUpdateInfo) {
@@ -348,6 +351,10 @@
     AMUserUDPResponse* response = [AMUserUDPResponse responseFromJsonData:data];
     
     @synchronized(self){
+        if (response.isSucceeded == NO) {
+            _isNeedUpdateInfo = YES;
+        }
+        
         if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
             _isNeedUpdateInfo = NO;
         }

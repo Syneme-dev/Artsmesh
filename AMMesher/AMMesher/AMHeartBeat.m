@@ -25,6 +25,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
 {
     int _family;
     NSData *_serverAddress;
+    NSCondition *_condition;
 }
 
 - (instancetype)init
@@ -40,6 +41,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
 {
     self = [super init];
     if (self) {
+        _condition = [[NSCondition alloc] init];
         _family = useIpv6 ? PF_INET6 : PF_INET;
         struct addrinfo hints;
         struct addrinfo *ai;
@@ -57,6 +59,16 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
         freeaddrinfo(ai);
     }
     return self;
+}
+
+- (void)cancel
+{
+    [_condition lock];
+    if (!self.isCancelled) {
+        [super cancel];
+        [_condition wait];
+    }
+    [_condition unlock];
 }
 
 - (void)main
@@ -129,8 +141,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             sleepTime = self.timeInterval - (now - startTime);
         }
     }
-    if ([self.delegate respondsToSelector:@selector(heartBeatDidCancel)])
-        [self.delegate heartBeatDidCancel];
+    [_condition signal];
 }
 
 - (void)reportError:(int)errorCode

@@ -320,4 +320,7 @@
 
 
 }
+//TODO:using this method to set up a global textEditor for textField.
+//windowWillReturnFieldEditor:toObject:.
+
 @end

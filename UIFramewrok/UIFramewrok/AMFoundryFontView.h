@@ -10,4 +10,5 @@
 
 @interface AMFoundryFontView : NSTextField
 
+- (NSCursor *)creationCursor ;
 @end

@@ -20,13 +20,15 @@ enum {
 @interface AMHolePunchingSocket : NSObject
 
 @property NSTimeInterval timeInterval;
-@property NSMutableArray* peerList;
+@property NSMutableArray* localPeers;
+@property NSMutableArray* remotePeers;
 @property BOOL useIpv6;
 @property id<AMHolePunchingSocketDelegate> delegate;
 
 - (instancetype)initWithServer:(NSString*)serverIp
                     serverPort:(NSString*)serverPort
                     clientPort:(NSString*)clientPort;
+-(void)initSocket;
 -(void)startHolePunching;
 -(void)stopHolePunching;
 -(void)sendPacketToPeers:(NSData*)data;

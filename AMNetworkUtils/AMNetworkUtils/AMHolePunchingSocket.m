@@ -36,16 +36,18 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
         _serverPort = serverPort;
         _internalPort = clientPort;
         self.timeInterval = 5;
+        self.localPeers = [[NSMutableArray alloc] init];
+        self.remotePeers = [[NSMutableArray alloc] init];
     }
     
     return self;
 }
 
--(void)startHolePunching
+-(void)initSocket
 {
     _socket = [[GCDAsyncUdpSocket alloc]
-                   initWithDelegate:self
-                   delegateQueue:dispatch_get_main_queue()];
+               initWithDelegate:self
+               delegateQueue:dispatch_get_main_queue()];
     
     if (self.useIpv6) {
         [_socket setPreferIPv6];
@@ -53,7 +55,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
     
     NSError *error = nil;
     if (![_socket bindToPort:[_internalPort intValue] error:&error]){
-       
+        
         if ([self.delegate respondsToSelector:@selector(socket:didFailWithError:)]) {
             
             NSError* err = [NSError errorWithDomain:AMHolePunchingSocketErrorDomain
@@ -78,6 +80,11 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
         return;
     }
 
+}
+
+-(void)startHolePunching
+{
+   
     _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
 }
 
@@ -103,7 +110,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
     
     [_socket sendData:data toHost:_serverIp port: [_serverPort intValue] withTimeout:-1 tag:AMHolePunchingDataTag];
     
-    for (AMHolePunchingPeer* peer in _peerList) {
+    for (AMHolePunchingPeer* peer in self.remotePeers) {
         [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingDataTag];
     }
 }
@@ -111,7 +118,11 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 
 -(void)sendPacketToPeers:(NSData*)data
 {
-    for (AMHolePunchingPeer* peer in _peerList) {
+    for (AMHolePunchingPeer* peer in self.remotePeers) {
+        [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingHeartBeatTag];
+    }
+    
+    for (AMHolePunchingPeer* peer in self.localPeers) {
         [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingHeartBeatTag];
     }
 }

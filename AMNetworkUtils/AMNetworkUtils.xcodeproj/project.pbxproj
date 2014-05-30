@@ -16,7 +16,7 @@
 		2692CE1118D7CEC8006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */; };
 		2692CE1318D7CEC8006501C4 /* AMNetworkUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */; };
 		2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */; };
+		26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */; };
 		26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */; };

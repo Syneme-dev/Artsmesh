@@ -37,8 +37,9 @@
     AMHeartBeat* _heartbeatThread;
     NSOperationQueue* _httpRequestQueue;
     AMSystemConfig* _systemConfig;
-    BOOL _isNeedUpdateInfo;
     int _heartbeatFailureCount;
+    
+    NSString* _action;
 
 }
 
@@ -91,7 +92,7 @@
         pm.natMapPort   = pm.internalPort;
         [self.mySelf.portMaps addObject:pm];
         
-        _isNeedUpdateInfo = YES;
+        _action = @"new";
     }
 }
 
@@ -126,7 +127,7 @@
 -(void)startMesher
 {
     _heartbeatFailureCount = 0;
-    _isNeedUpdateInfo = YES;
+    _action = @"new";
     
     if(_elector == nil){
         if (_systemConfig) {
@@ -177,7 +178,7 @@
             [self.mySelf setValue:value forKey:key];
         }
         
-        _isNeedUpdateInfo = YES;
+        _action = @"update";
     }
 }
 
@@ -185,7 +186,7 @@
 {
     @synchronized(self){
         [self.mySelf setValue:groupName forKey:@"groupName"];
-        _isNeedUpdateInfo = YES;
+        _action = @"update";
     }
 }
 
@@ -220,18 +221,33 @@
     [self stopMesher];
     
     @synchronized(self){
-        _isNeedUpdateInfo = YES;
+        _action = @"new";
     }
     
      _isOnline = YES;
     
     [self startHearBeat:_systemConfig.globalServerAddr serverPort:_systemConfig.globalServerPort];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        
+        NSDictionary* params = @{@"IsOnline":@"YES"};
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE object:self userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
 }
 
 -(void)goOffline
 {
     [self stopMesher];
     _isOnline = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        
+        NSDictionary* params = @{@"IsOnline":@"NO"};
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE object:self userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
     [self startMesher];
 }
 
@@ -301,7 +317,7 @@
             [self.mySelf.portMaps addObject:portMap];
         }
         
-        _isNeedUpdateInfo = YES;
+        _action = @"update";
     }
 }
 
@@ -324,14 +340,15 @@
     NSData* data ;
     @synchronized(self){
         AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
-        request.action = @"update";
+        request.action = _action;
         request.userid = self.mySelf.userid;
         request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
         
-        if (_isNeedUpdateInfo) {
+        if ([_action isEqualToString:@"new"] || [_action isEqualToString:@"update"]) {
             request.contentMd5 = [self.mySelf md5String];
             request.userContent = self.mySelf;
         }
+        
         data = [request jsonData];
     }
     
@@ -349,11 +366,11 @@
     
     @synchronized(self){
         if (response.isSucceeded == NO) {
-            _isNeedUpdateInfo = YES;
+            _action = @"update";
         }
         
         if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
-            _isNeedUpdateInfo = NO;
+            _action = @"heartbeat";
         }
         
         if ([response.version intValue] >  self.userGroupsVersion) {
@@ -473,7 +490,7 @@
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
-                    _isNeedUpdateInfo = YES;
+                    _action = @"new";
                 }
                 
                 [self startLocalServer];
@@ -495,7 +512,7 @@
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
-                    _isNeedUpdateInfo = YES;
+                    _action = @"new";
                 }
                 
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];

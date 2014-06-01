@@ -63,7 +63,7 @@
 
 -(void)onlineStatusChanged:(NSNotification*) notification
 {
-    BOOL isOnline = [notification.userInfo[@"isOnline"] boolValue];
+    BOOL isOnline = [notification.userInfo[@"IsOnline"] boolValue];
     if (isOnline == YES) {
         [_socket startHolePunching];
     }else{
@@ -191,7 +191,7 @@
     NSLog(@"chat message did not send out: %@", err.description);
 }
 
--(void)socket:(AMHolePunchingSocket *)socket didNotSendDataFromServer:(NSData *)data{
+-(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     // server packet
     NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
@@ -202,7 +202,7 @@
     if(![_myPubIp isEqualToString:[ipAndPort objectAtIndex:0]]){
         _myPubIp = [ipAndPort objectAtIndex:0];
         
-        NSDictionary* dict = @{@"myPublicIp": _myPubIp};
+        NSDictionary* dict = @{@"publicIp": _myPubIp};
         AMMesher* mesher = [AMMesher sharedAMMesher];
         [mesher setMySelfPropties:dict];
     }

@@ -159,7 +159,6 @@
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
                     @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
     
-    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:msgData];
     if (_socket) {
         [_socket sendPacketToPeers:msgData];
     }

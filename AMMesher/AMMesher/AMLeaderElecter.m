@@ -200,7 +200,7 @@
     
     NSString* hostName = sender.hostName;
     if ([hostName hasSuffix:@"."]) {
-        hostName = [hostName substringToIndex:[hostName length] - 2];
+        hostName = [hostName substringToIndex:[hostName length] - 1];
         hostName = [hostName lowercaseString];
     }
     
@@ -229,7 +229,7 @@
 {
     NSString* hostName = [AMNetworkUtils getHostName];
     if ([hostName hasSuffix:@"."]) {
-        hostName = [hostName substringToIndex:[hostName length] - 2];
+        hostName = [hostName substringToIndex:[hostName length] - 1];
         hostName = [hostName lowercaseString];
     }
     

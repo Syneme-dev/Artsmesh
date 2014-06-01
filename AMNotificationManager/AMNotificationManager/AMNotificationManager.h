@@ -10,9 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "AMNotificationMessage.h"
 
-static NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
-static NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
-static NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
+
+extern NSString* const AMN_MESHER_STARTED;
+//static NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
+//static NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
 
 @interface AMNotificationManager : NSObject
 

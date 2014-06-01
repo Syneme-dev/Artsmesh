@@ -14,8 +14,10 @@
 #import "AMSystemConfig.h"
 #import "AMUserRequest.h"
 #import "AMGroupsBuilder.h"
-#import "AMNotificationManager/AMNotificationManager.h"
 #import "AMHeartBeat.h"
+
+ NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
+ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
 
 @interface AMMesher()
 
@@ -96,8 +98,9 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _systemConfig = [[AMSystemConfig alloc] init];
     //TODO: load system config from Preference
-    
-    _systemConfig.myServerPort = @"8080";
+ 
+   // defaults stringForKey:
+   // _systemConfig.myServerPort = @"8080";
     _systemConfig.heartbeatInterval = @"2";
     _systemConfig.myServerUserTimeout = @"30";
     _systemConfig.maxHeartbeatFailure = @"5";
@@ -426,9 +429,12 @@
         self.userGroups = builder.groups;
         [self didChangeValueForKey:@"userGroups"];
         
-        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // do work here
+            NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        });
+
 //        AMGroup* myGroup = [self myGroup];
 //        if (myGroup != nil) {
 //            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];

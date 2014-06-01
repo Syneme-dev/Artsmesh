@@ -11,7 +11,6 @@
 #import "AMMesher/AMUser.h"
 #import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMNotificationManager/AMNotificationManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
 
@@ -103,20 +102,6 @@
                                  @"sender"  : @"SYSTEM",
                                  @"message" : [NSString stringWithFormat:@"%@ JOINED THE CONVERSATION",
                                                newUser.nickName],
-                                 @"time"    : [NSDate date]
-                                 };
-        [self showChatRecord:record];
-    }
-}
-
-
--(void)showLeavedUsers:(id)leavedUsers
-{
-    for (AMUser* user in leavedUsers) {
-        NSDictionary *record = @{
-                                 @"sender"  : @"SYSTEM",
-                                 @"message" : [NSString stringWithFormat:@"%@ LEAVED THE CONVERSATION",
-                                               user.nickName],
                                  @"time"    : [NSDate date]
                                  };
         [self showChatRecord:record];

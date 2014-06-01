@@ -8,6 +8,7 @@
 
 //#import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMNotificationManager.h"
+NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
 
 static id sharedManager = nil;
 

@@ -88,7 +88,7 @@
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
         pm.portName = @"ChatPort";
         pm.internalPort = [defaults stringForKey:Preference_Key_General_ChatPort];;
-        pm.natMapPort   = Preference_Key_General_ChatPort;
+        pm.natMapPort   = pm.internalPort;
         [self.mySelf.portMaps addObject:pm];
         
         _isNeedUpdateInfo = YES;
@@ -387,7 +387,10 @@
 
 - (NSString *)httpServerURL
 {
-    //TODO
+    if (_elector) {
+        NSString* URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
+        return URLStr;
+    }
     return @"http://localhost:8080/users";
 }
 

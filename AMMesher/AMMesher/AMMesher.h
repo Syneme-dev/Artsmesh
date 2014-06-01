@@ -29,8 +29,6 @@
 @property (readonly) NSArray* userGroups;
 @property id<AMMesherDelegate> delegate;
 
--(NSArray*)allGroupUsers;
-
 +(id)sharedAMMesher;
 
 -(void)startMesher;

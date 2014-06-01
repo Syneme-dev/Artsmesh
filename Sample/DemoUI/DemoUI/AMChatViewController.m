@@ -40,18 +40,18 @@
 
 -(void)awakeFromNib
 {
-    [[AMNotificationManager defaultShared] listenMessageType:self
-                                                withTypeName:AM_USERGROUPS_CHANGED
-                                                    callback:@selector(userGroupsChanged:)];
-     [[AMNotificationManager defaultShared] listenMessageType:self
-                                                 withTypeName:AM_MESHER_ONLINE
-                                                     callback:@selector(onlineStatusChanged:)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name:AM_MESHER_ONLINE object:nil];
     
     //TODO: get preferenc
     _socket = [[AMHolePunchingSocket alloc] initWithServer: @"123.124.145.254" serverPort:@"22250" clientPort:@"12345"];
     [_socket initSocket];
     _socket.delegate = self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
 -(void)onlineStatusChanged:(NSNotification*) notification

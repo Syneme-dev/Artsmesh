@@ -426,13 +426,16 @@
         self.userGroups = builder.groups;
         [self didChangeValueForKey:@"userGroups"];
         
-        AMGroup* myGroup = [self myGroup];
-        if (myGroup != nil) {
-            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-            [params setObject:myGroup forKey:@"myGroup"];
-            [params setObject:self.userGroups forKey:@"allGroups"];
-            [[AMNotificationManager defaultShared] postMessage:params withTypeName:AM_USERGROUPS_CHANGED source:self];
-        }
+        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+//        AMGroup* myGroup = [self myGroup];
+//        if (myGroup != nil) {
+//            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+//            [params setObject:myGroup forKey:@"myGroup"];
+//            [params setObject:self.userGroups forKey:@"allGroups"];
+//            [[AMNotificationManager defaultShared] postMessage:nil withTypeName:AM_USERGROUPS_CHANGED source:self];
+//        }
     }
 }
 
@@ -493,11 +496,6 @@
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
     }
-}
-
--(NSArray*)allGroupUsers{
-    
-    return nil;
 }
 
 @end

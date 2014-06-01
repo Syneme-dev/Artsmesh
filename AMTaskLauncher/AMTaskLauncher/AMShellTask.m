@@ -34,6 +34,10 @@
         _pipe = [NSPipe pipe];
         _task.standardOutput = _pipe;
         _task.standardError = _pipe;
+        AMShellTask * __weak weakSelf = self;
+        _task.terminationHandler = ^(NSTask *unused) {
+            [weakSelf cancel];
+        };
     }
     
     return self;
@@ -53,7 +57,7 @@
 - (void)cancel
 {
     if (_task) {
-        _pipe.fileHandleForReading.readabilityHandler = nil;
+//        _pipe.fileHandleForReading.readabilityHandler = nil;
         [_task interrupt];
         _task = nil;
         _pipe = nil;

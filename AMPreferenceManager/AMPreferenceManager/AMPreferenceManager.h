@@ -31,24 +31,7 @@
 #define Preference_Key_StatusNet_UserName       @"Preference_Key_StatusNet_UserName"
 #define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
-//Default Value
-#define Preference_General_MachineName      @"MyComputer"
-#define Preference_General_PrivateIP        @"127.0.0.1"
-#define Preference_General_PublicIP         @"127.0.0.1"
-#define Preference_General_ChatPort         @"9033"
-#define Preference_General_ControlPort      @"9357"
-
-
-
-#define Preference_ETCD_ServerPort          @"17001"
-#define Preference_ETCD_ClientPort          @"14001"
-#define Preference_ETCD_HeartbeatTimeout    @"50"
-#define Preference_ETCD_ElectionTimeout     @"250"
-#define Preference_ETCD_UserTTLTimeout      @"30"
-#define Preference_ETCD_ArtsmeshIO_IP       @"123.124.145.254"
-#define Preference_ETCD_ArtsmeshIO_Port     @"14001"
-#define Preference_ETCD_MaxNode             @"9"
-
+//default
 #define Preference_User_Domain              @"CCOM"
 #define Preference_User_Description         @"This is my description."
 #define Preference_User_Status              @"Online"
@@ -56,6 +39,11 @@
 #define Preference_User_Location            @"BeiJing"
 #define Preference_User_NickName            @"NickName"
 #define Preference_User_FullName            @"Music Art"
+
+#define Preference_General_ChatPort         @"55523"
+#define Preference_User_PrivateIp           @""
+#define Preference_User_PublicIp            @""
+#define Preference_User_LocalLeader         @""
 
 #import <Foundation/Foundation.h>
 

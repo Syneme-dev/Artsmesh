@@ -13,6 +13,12 @@
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
 
+@interface AMLeaderElecter ()
+@property NSString* serverName;
+@property NSString* serverPort;
+@end
+
+
 @implementation AMLeaderElecter
 {
     NSNetServiceBrowser*  _mesherServiceBrowser;
@@ -191,8 +197,8 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    _serverName = sender.hostName;
-    _serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
+    self.serverName = sender.hostName;
+    self.serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
     self.state = MESHER_STATE_JOINED;
 }
@@ -214,8 +220,8 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    _serverName = sender.hostName;
-    _serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
+    self.serverName = [AMNetworkUtils getHostName];;
+    self.serverPort =  _myPort;
     
     self.state = MESHER_STATE_PUBLISHED;
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);

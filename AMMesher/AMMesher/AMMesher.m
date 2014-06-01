@@ -84,8 +84,6 @@
         self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
         self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
         self.mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
-        self.mySelf.localLeader = @"";
-        self.mySelf.groupName = @"";
         
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
         pm.portName = @"ChatPort";

@@ -197,7 +197,14 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    self.serverName = sender.hostName;
+    
+    NSString* hostName = sender.hostName;
+    if ([hostName hasSuffix:@"."]) {
+        hostName = [hostName substringToIndex:[hostName length] - 2];
+        hostName = [hostName lowercaseString];
+    }
+    
+    self.serverName = hostName;
     self.serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
     self.state = MESHER_STATE_JOINED;
@@ -220,7 +227,13 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    self.serverName = [AMNetworkUtils getHostName];;
+    NSString* hostName = [AMNetworkUtils getHostName];
+    if ([hostName hasSuffix:@"."]) {
+        hostName = [hostName substringToIndex:[hostName length] - 2];
+        hostName = [hostName lowercaseString];
+    }
+    
+    self.serverName = hostName;
     self.serverPort =  _myPort;
     
     self.state = MESHER_STATE_PUBLISHED;

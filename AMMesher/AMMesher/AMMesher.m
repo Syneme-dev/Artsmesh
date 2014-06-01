@@ -389,6 +389,7 @@
 {
     if (_elector) {
         NSString* URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
+        NSLog(@"%@", URLStr);
         return URLStr;
     }
     return @"http://localhost:8080/users";

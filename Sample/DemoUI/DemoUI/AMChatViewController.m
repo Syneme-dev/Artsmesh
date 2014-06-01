@@ -129,8 +129,7 @@
         AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
         for (AMUserPortMap* pm in user.portMaps) {
             if ([pm.portName isEqualToString:@"ChatPort"]) {
-                
-                if ([user.localLeader isEqualToString:myLocalLeaderName]){
+                if ([ user.localLeader isEqualToString:myLocalLeaderName]){
                     peerAddr.ip = user.privateIp;
                     peerAddr.port = pm.internalPort;
                     [localPeers addObject:peerAddr];

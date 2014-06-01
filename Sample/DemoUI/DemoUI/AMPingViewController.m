@@ -29,8 +29,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        _users = [[AMMesher sharedAMMesher] myGroup].users;
-        _users = @[[[AMMesher sharedAMMesher] mySelf]];
+        _users = [[AMMesher sharedAMMesher] myGroup].users;
     }
     
     return self;
@@ -78,10 +77,10 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     AMUser* user = _users[self.userTable.selectedRow];
-    NSString* pingIp = (user.publicIp == nil) ? user.privateIp: user.publicIp;
+    NSString* pingIp = ([user.publicIp isEqualToString: @""]) ? user.privateIp: user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];
-//    [self runCommand:pingCommand];
+    [self runCommand:pingCommand];
 }
 
 - (void)runCommand:(NSString *)command

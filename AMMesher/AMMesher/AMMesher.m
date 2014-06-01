@@ -247,7 +247,7 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"amserver"];
     NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >amserver.log 2>&1",
                          lanchPath,
                          _systemConfig.myServerPort,
                          _systemConfig.myServerPort,
@@ -255,14 +255,6 @@
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);
     [_mesherServerTask launch];
-
-    //Log Message, later will be remove or redirect to file
-    NSFileHandle *inputStream = [_mesherServerTask fileHandlerForReading];
-    inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
-        NSData *data = [fh availableData];
-        NSString* logStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", logStr);
-    };
 
 }
 
@@ -431,22 +423,14 @@
         [self willChangeValueForKey:@"userGroups"];
         self.userGroups = builder.groups;
         [self didChangeValueForKey:@"userGroups"];
-        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // do work here
-//            NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
-//        });
-        
-        
-//        AMGroup* myGroup = [self myGroup];
-//        if (myGroup != nil) {
-//            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-//            [params setObject:myGroup forKey:@"myGroup"];
-//            [params setObject:self.userGroups forKey:@"allGroups"];
-//            [[AMNotificationManager defaultShared] postMessage:nil withTypeName:AM_USERGROUPS_CHANGED source:self];
-//        }
+    
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
 
 
 }
@@ -488,8 +472,9 @@
                     _isNeedUpdateInfo = YES;
                 }
                 
-                [self startLocalServer];
+                //[self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
+               // [self startHearBeat:@"192.168.1.103" serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;
                 
@@ -511,7 +496,6 @@
                 }
                 
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-                
                 self.isLocalLeader = NO;
             }
         }else{

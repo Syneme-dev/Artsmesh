@@ -8,6 +8,8 @@
 
 #import "AMHolePunchingSocket.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMMesher/AMMesher.h"
+#import "AMMesher/AMUser.h"
 
 #define AMHolePunchingHeartBeatTag  0
 #define AMHolePunchingDataTag       1
@@ -149,14 +151,9 @@ withFilterContext:(id)filterContext
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     if ([fromHost isEqualToString:_serverIp]){
         
-        // server packet
-        NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
-        if ([ipAndPort count] < 2){
-            return;
+        if ([self.delegate respondsToSelector:@selector(socket:didReceiveDataFromServer:)]) {
+            [self.delegate socket:self didReceiveDataFromServer:data];
         }
-        
-        _mappedIp = [ipAndPort objectAtIndex:0];
-        _mappedPort = [ipAndPort objectAtIndex:1];
         return;
     }
 

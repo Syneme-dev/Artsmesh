@@ -77,16 +77,20 @@
 {
     //TODO: load preference
     @synchronized(self){
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
         self.mySelf = [[AMUser alloc] init];
-        self.mySelf.nickName = @"myNickName";
-        self.mySelf.description = @"I love coffee";
-        self.mySelf.privateIp = @"127.0.0.1";
-        self.mySelf.groupName = @"333";
+        self.mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
+        self.mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
+        self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
+        self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
+        self.mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
+        self.mySelf.localLeader = @"";
+        self.mySelf.groupName = @"";
         
         AMUserPortMap* pm = [[AMUserPortMap alloc] init];
         pm.portName = @"ChatPort";
-        pm.internalPort = @"12345";
-        pm.natMapPort   = @"12345";
+        pm.internalPort = [defaults stringForKey:Preference_Key_General_ChatPort];;
+        pm.natMapPort   = Preference_Key_General_ChatPort;
         [self.mySelf.portMaps addObject:pm];
         
         _isNeedUpdateInfo = YES;
@@ -97,15 +101,15 @@
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     _systemConfig = [[AMSystemConfig alloc] init];
-    //TODO: load system config from Preference
- 
-   // defaults stringForKey:
-   // _systemConfig.myServerPort = @"8080";
+    _systemConfig.myServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
     _systemConfig.heartbeatInterval = @"2";
     _systemConfig.myServerUserTimeout = @"30";
     _systemConfig.maxHeartbeatFailure = @"5";
-    _systemConfig.globalServerPort = @"8080";
-    _systemConfig.globalServerAddr = @"localhost";
+    _systemConfig.globalServerPort = [defaults stringForKey:Preference_Key_General_GlobalServerPort];
+    _systemConfig.globalServerAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
+    _systemConfig.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    _systemConfig.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
+    _systemConfig.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
 }
 
 -(void)initUserGroups
@@ -477,6 +481,11 @@
                 self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
                 
+                @synchronized(self){
+                    self.mySelf.localLeader = self.localLeaderName;
+                    _isNeedUpdateInfo = YES;
+                }
+                
                 [self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
@@ -493,6 +502,11 @@
                 [self willChangeValueForKey:@"localLeaderName"];
                 self.localLeaderName = _elector.serverName;
                 [self didChangeValueForKey:@"localLeaderName"];
+                
+                @synchronized(self){
+                    self.mySelf.localLeader = self.localLeaderName;
+                    _isNeedUpdateInfo = YES;
+                }
                 
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 

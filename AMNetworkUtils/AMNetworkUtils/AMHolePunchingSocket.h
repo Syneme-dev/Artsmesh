@@ -49,7 +49,7 @@ enum {
 
 @optional
 - (void)socket:(AMHolePunchingSocket*) socket didReceiveData:(NSData *)data;
+- (void)socket:(AMHolePunchingSocket*) socket didReceiveDataFromServer:(NSData *)data;
 - (void)socket:(AMHolePunchingSocket*) socket didNotSendData:(NSError*)err;
 - (void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error;
-
 @end

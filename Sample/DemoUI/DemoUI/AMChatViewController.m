@@ -24,7 +24,9 @@
 {
     AMHolePunchingSocket *_socket;
     AMGroup* _myGroup;
-    AMUserPortMap* _charPortMap;
+    NSString* _myPubIp;
+    NSString* _myInternalPort;
+    NSString* _myNATPort;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +35,9 @@
     if (self)
     {
         _chatRecords = [[NSMutableArray alloc] init];
+        _myPubIp = @"";
+        _myNATPort = @"";
+        _myInternalPort = @"";
     }
     return self;
 }
@@ -40,11 +45,14 @@
 -(void)awakeFromNib
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name:AM_MESHER_ONLINE object:nil];
     
-    //TODO: get preferenc
-    _socket = [[AMHolePunchingSocket alloc] initWithServer: @"123.124.145.254" serverPort:@"22250" clientPort:@"12345"];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
+    NSString* port = [defaults stringForKey:Preference_Key_General_StunServerPort];
+    _myInternalPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    
+    _socket = [[AMHolePunchingSocket alloc] initWithServer: addr serverPort:port clientPort: _myInternalPort];
     [_socket initSocket];
     _socket.delegate = self;
 }
@@ -183,6 +191,35 @@
 
 -(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{
     NSLog(@"chat message did not send out: %@", err.description);
+}
+
+-(void)socket:(AMHolePunchingSocket *)socket didNotSendDataFromServer:(NSData *)data{
+    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // server packet
+    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
+    if ([ipAndPort count] < 2){
+        return;
+    }
+    
+    if(![_myPubIp isEqualToString:[ipAndPort objectAtIndex:0]]){
+        _myPubIp = [ipAndPort objectAtIndex:0];
+        
+        NSDictionary* dict = @{@"myPublicIp": _myPubIp};
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        [mesher setMySelfPropties:dict];
+    }
+    
+    if(![_myNATPort isEqualToString:[ipAndPort objectAtIndex:1]]){
+        _myNATPort = [ipAndPort objectAtIndex:1];
+        
+        AMUserPortMap *portMap = [[AMUserPortMap alloc] init];
+        portMap.portName = @"ChatPort";
+        portMap.natMapPort =  _myNATPort;
+        portMap.internalPort = _myInternalPort;
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        [mesher setPortMaps:portMap];
+    }
+
 }
 
 

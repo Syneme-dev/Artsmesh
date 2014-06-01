@@ -8,27 +8,14 @@
 
 
 //General
-#define Preference_Key_General_MachineName          @"Preference_Key_General_MachineName"
-#define Preference_Key_General_PrivateIP            @"Preference_Key_General_PrivateIP"
-#define Preference_Key_General_PublicIP             @"Preference_Key_General_PublicIP"
-#define Preference_Key_General_ControlPort          @"Preference_Key_General_ControlPort"
 #define Preference_Key_General_UseIpv6              @"Preference_Key_General_UseIpv6"
+#define Preference_Key_General_MachineName          @"Preference_Key_General_MachineName"
+#define Preference_Key_General_LocalServerPort      @"Preference_Key_General_LocalServerPort"
+#define Preference_Key_General_GlobalServerAddr     @"Preference_Key_General_GlobalServerAddr"
+#define Preference_Key_General_GlobalServerPort     @"Preference_Key_General_GlobalServerPort"
 #define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
-#define Preference_Key_General_ChatStunServerIp     @"Preference_Key_General_ChatStunServerIp"
-#define Preference_Key_General_ChatStunServerPort   @"Preference_Key_General_ChatStunServerPort"
-
-
-
-//ETCD
-#define Preference_Key_ETCD_ServerPort              @"Preference_Key_ETCD_ServerPort"
-#define Preference_key_ETCD_ClientPort              @"Preference_key_ETCD_ClientPort"
-#define Preference_Key_ETCD_HeartbeatTimeout        @"Preference_Key_ETCD_HeartbeatTimeout"
-#define Preference_Key_ETCD_ElectionTimeout         @"Preference_Key_ETCD_ElectionTimeout"
-#define Preference_Key_ETCD_ArtsmeshIOIP            @"Preference_Key_ETCD_ArtsmeshIOIP"
-#define Preference_Key_ETCD_ArtsmeshIOPort          @"Preference_Key_ETCD_ArtsmeshIOPort"
-#define Preference_Key_ETCD_MaxNode                 @"Preference_Key_ETCD_MaxNode"
-#define Preference_Key_ETCD_UserTTLTimeout          @"Preference_Key_ETCD_UserTTLTimeout"
-
+#define Preference_Key_General_StunServerAddr       @"Preference_Key_General_StunServerAddr"
+#define Preference_Key_General_StunServerPort       @"Preference_Key_General_StunServerPort"
 
 //UserInfo
 #define Preference_Key_User_NickName            @"Preference_Key_User_NickName"
@@ -36,8 +23,8 @@
 #define Preference_Key_User_Location            @"Preference_Key_User_Location"
 #define Preference_Key_User_FullName            @"Preference_Key_User_FullName"
 #define Preference_Key_User_Description         @"Preference_Key_User_Description"
-#define Preference_Key_User_Status              @"Preference_Key_User_Status"
 #define Preference_Key_User_Project             @"Preference_Key_User_Project"
+#define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"

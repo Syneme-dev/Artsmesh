@@ -113,7 +113,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             ssize_t nbytes = -1;
             nbytes = sendto(sockfd, data.bytes, data.length, 0, _serverAddress.bytes,
                             (socklen_t)_serverAddress.length);
-            if (nbytes == -1) {
+            if (nbytes == -1 || nbytes == 0) {
                 [self reportError:AMHeartBeatErrorSendDataFailed];
                 goto cleanup;
             }

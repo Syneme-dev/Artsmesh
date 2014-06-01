@@ -384,7 +384,7 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
-    NSLog(@"didSendData:%@", error.description);
+    NSLog(@"hearBeat error:%@", error.description);
     
     _heartbeatFailureCount ++;
     if (_heartbeatFailureCount > [_systemConfig.maxHeartbeatFailure intValue]) {
@@ -405,6 +405,7 @@
 {
     
 }
+
 
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
@@ -433,12 +434,13 @@
         self.userGroups = builder.groups;
         [self didChangeValueForKey:@"userGroups"];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // do work here
-            NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
-        });
-
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // do work here
+//            NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+//            [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        });
+        
+        
 //        AMGroup* myGroup = [self myGroup];
 //        if (myGroup != nil) {
 //            NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -447,6 +449,8 @@
 //            [[AMNotificationManager defaultShared] postMessage:nil withTypeName:AM_USERGROUPS_CHANGED source:self];
 //        }
     }
+
+
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

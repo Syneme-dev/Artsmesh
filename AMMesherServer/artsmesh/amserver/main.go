@@ -37,8 +37,8 @@ func init(){
 func main() {
 	checkArgs() 
 
-	restport := fmt.Sprintf("localhost:%d", g_rest_port)
-	udpport := fmt.Sprintf("localhost:%d", g_heartbeat_port)
+	restport := fmt.Sprintf(":%d", g_rest_port)
+	udpport := fmt.Sprintf(":%d", g_heartbeat_port)
 	isIpv4 := !g_ipv6
 	usertimeout := g_user_timeout
 	

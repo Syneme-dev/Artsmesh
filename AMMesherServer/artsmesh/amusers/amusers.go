@@ -44,6 +44,7 @@ func(user *AMUser)Copy()(AMUser){
 type AMUserUDPRequest struct{
 	Action			string
 	Version 		string
+	UserId			string
 	UserContent		AMUser
 	UserContentMd5	string
 }

@@ -472,9 +472,8 @@
                     _isNeedUpdateInfo = YES;
                 }
                 
-                //[self startLocalServer];
+                [self startLocalServer];
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-               // [self startHearBeat:@"192.168.1.103" serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;
                 

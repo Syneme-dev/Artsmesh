@@ -66,7 +66,7 @@ func (server *AMUdpServer)StartUdpServer(){
 }
 
 func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
-	var buf [512]byte
+	var buf [1024]byte
 
 	n, addr, err := conn.ReadFromUDP(buf[0:])
 	if err != nil {
@@ -78,6 +78,7 @@ func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
 	fmt.Fprintf(os.Stdout, "%d bytes received from %s \n", n, addr.String())
 	
 	len := bytes.Index(buf[:], []byte{0})
+	fmt.Fprintf(os.Stdout, "received json len: %d \n", len)
 	jsonStream := string(buf[:len])
 	fmt.Fprintf(os.Stdout, "received json content: %s \n", jsonStream)
 
@@ -85,11 +86,12 @@ func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
 	if	req == nil {
 		return
 	}
-	
+
+	var updateIsDone bool = true
 	if req.Action == "delete"{	
-		server.HandleDeleteUser(req.UserContent.UserId)
+		server.HandleDeleteUser(req.UserId)
 	}else{
-		server.HandleUpdateUser(req)
+		updateIsDone = server.HandleUpdateUser(req)
 	}
 	
 	interval := time.Now().Sub(server.ChangeTime)
@@ -120,62 +122,85 @@ func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
 		server.ChangeTime = time.Now()
 	}
 	
-	var udpres amusers.AMUserUDPResponse
-	udpres.Action = req.Action
-	udpres.Version = server.RestServer.Response.Version
-	udpres.UserContentMd5 = req.UserContentMd5
-	udpres.IsSucceeded = "YES"
+	if req.Action == "delete"{
+		return
+	}else{
+		var udpres amusers.AMUserUDPResponse
+		udpres.Action = req.Action
+		udpres.Version = server.RestServer.Response.Version
+		if updateIsDone == true{
+			udpres.UserContentMd5 = req.UserContentMd5
+			udpres.IsSucceeded = "YES"
+		}else{
+			udpres.IsSucceeded = "NO"
+		}
 	
-	udpResStr, err := json.Marshal(udpres)
-	if err == nil{
-		//fmt.Fprintf(os.Stdout, "the udp response is: %s\n", udpResStr)	
+		udpResStr, err := json.Marshal(udpres)
+		if err == nil{
+			//fmt.Fprintf(os.Stdout, "the udp response is: %s\n", udpResStr)	
 	
-		udpResBytes := []byte(udpResStr)
-		_, err := conn.WriteToUDP(udpResBytes, addr)
-		if	err != nil{
-			fmt.Fprintf(os.Stdout, "Write to Udp failed!")
+			udpResBytes := []byte(udpResStr)
+			_, err := conn.WriteToUDP(udpResBytes, addr)
+			if	err != nil{
+				fmt.Fprintf(os.Stdout, "Write to Udp failed!")
+				return
+			}
+		}else{
+			fmt.Fprintf(os.Stdout, "error: %s", err.Error())	
 			return
 		}
-	}else{
-		fmt.Fprintf(os.Stdout, "error: %s", err.Error())	
-		return
 	}
 }
 
 
-func (server *AMUdpServer)HandleUpdateUser(req *amusers.AMUserUDPRequest){
+func (server *AMUdpServer)HandleUpdateUser(req *amusers.AMUserUDPRequest)bool{
 	bFind := false
 	
-	var pUser *amusers.AMUserStorage
-	for e := server.UserStoreList.Front(); e != nil; e = e.Next(){
+	e := server.UserStoreList.Front();
+	for e != nil {
 		userValue := e.Value.(amusers.AMUserStorage)
-		if	userValue.UserContent.UserId == req.UserContent.UserId{
+		if	userValue.UserContent.UserId == req.UserId{
 			bFind = true
 			
-			fmt.Fprintf(os.Stdout, "Find User\n")
 			if  req.UserContentMd5 != "" && userValue.UserContentMd5 != req.UserContentMd5{
+				fmt.Fprintf(os.Stdout, "Update request\n")
 				userValue.UserContent = req.UserContent
 				server.ChangeNumber++
 			}
 			
 			userValue.LastHeartbeat = time.Now()
-			pUser = &userValue
-			
-			server.UserStoreList.Remove(e)
+			server.UserStoreList.MoveToBack(e)
 			break;
+		}else{
+			dur := time.Now().Sub(userValue.LastHeartbeat) 
+			fmt.Fprintf(os.Stdout, "duration is %f\n", dur.Seconds())
+			if dur.Seconds() > server.UserTimeout{
+				fmt.Fprintf(os.Stdout, "will remove use")
+				server.UserStoreList.Remove(e)
+				e = server.UserStoreList.Front();
+				server.ChangeNumber++
+			}else{
+				e = e.Next()
+			}
 		}
 	}
 	
-	if bFind == true{
-		server.UserStoreList.PushBack(*pUser)
-	}else{
+	if bFind == false{
+		if req.UserContentMd5 != ""{
+		fmt.Fprintf(os.Stdout, "will add new user")
 		var userStoreNew amusers.AMUserStorage
 		userStoreNew.UserContent = req.UserContent
 		userStoreNew.UserContentMd5 = req.UserContentMd5
 		userStoreNew.LastHeartbeat = time.Now()
 		server.UserStoreList.PushBack(userStoreNew)
 		server.ChangeNumber++
-	}
+		return true
+		}else{
+			return false
+		}
+	}	
+		
+	return false
 }
 
 func (server *AMUdpServer)HandleDeleteUser(userId string){
@@ -184,7 +209,7 @@ func (server *AMUdpServer)HandleDeleteUser(userId string){
 		userValue := e.Value.(amusers.AMUserStorage)
 		if userValue.UserContent.UserId  == userId {
 			server.UserStoreList.Remove(e)
-			break;
+			break
 		}
 	}
 }

@@ -178,12 +178,8 @@
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, 740);
     [panelView setFrameSize:panelSize];
     panelView.minSizeConstraint = panelSize;
+    panelView.maxSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
-    
-//    float panelHeight=720.0f;
-//    panelViewController.view.frame = NSMakeRect(containerWidth,
-//                                                  self.window.frame.size.height-UI_topbarHeight-
-//                                                  panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth*2, panelHeight);
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [panelViewController.view addSubview:socialViewController.view];
@@ -255,8 +251,8 @@
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, 740.0f);
     [panelView setFrameSize:panelSize];
-//    panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
-//    panelView.maxSizeConstraint = panelSize;
+    panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
+    panelView.maxSizeConstraint = panelSize;
     [_containerView addSubview:panelView];
     [panelViewController setTitle:@"CHAT"];
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];

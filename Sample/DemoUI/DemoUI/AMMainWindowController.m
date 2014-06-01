@@ -224,15 +224,28 @@
     [panelView setFrameSize:panelSize];
     [_containerView addSubview:panelView];
     [panelViewController.titleView setStringValue:@"PREFERENCE"];
-//    panelViewController.view.frame = NSMakeRect(
-//                                                      UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing,
-//                                                     UI_panelPaddingBottom, 600.0f, 720.0f);
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 300);
+    NSView *preferenceView = preferenceViewController.view;
     [panelViewController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
     [panelControllers setObject:panelViewController forKey:@"PREFERENCE"];
+    
+    [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
+    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:views]];
+    
+    [panelView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[preferenceView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+
+    
 
 }
 
@@ -243,17 +256,24 @@
     NSSize panelSize = NSMakeSize(600.0f, 720.0f);
     [panelView setFrameSize:panelSize];
     [_containerView addSubview:panelView];
-    
     [panelViewController setTitle:@"CHAT"];
-//    panelViewController.view.frame = NSMakeRect(
-//                                                UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth+UI_panelSpacing+UI_defaultPanelWidth*2+UI_panelSpacing,
-//                                                UI_panelPaddingBottom, 600.0f, 720.0f);
-    
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     chatViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 650);
+    NSView *chatView = chatViewController.view;
+    [panelViewController.view addSubview:chatView];
     
-    //chatViewController.view addConstraint:<#(NSLayoutConstraint *)#>
-    [panelViewController.view addSubview:chatViewController.view];
+    [chatView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(chatView);
+    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[chatView]|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:views]];
+    
+    [panelView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[chatView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
     
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
      [panelControllers setObject:panelViewController forKey:@"CHAT"];

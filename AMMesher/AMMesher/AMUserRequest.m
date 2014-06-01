@@ -52,7 +52,7 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
+    if ([self.delegate respondsToSelector:@selector(userrequest:didReceiveData:)]) {
         [self.delegate userrequest:self didReceiveData:returnData];
     }
     

@@ -267,8 +267,23 @@
     [_containerView addSubview:panelView];
     [panelViewController setTitle:@"PING"];
     pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    pingViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
-    [panelViewController.view addSubview:pingViewController.view];
+    NSView *pingView = pingViewController.view;
+    pingView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
+    [panelView addSubview:pingView];
+    
+    [pingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(pingView);
+    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pingView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
+    [panelView addConstraints:
+        [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[pingView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [panelControllers setObject:panelViewController forKey:@"PING"];
 }

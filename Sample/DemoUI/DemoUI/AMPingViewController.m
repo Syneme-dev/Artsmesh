@@ -10,15 +10,13 @@
 #import "AMPingUserTableCellView.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
+#import "AMMesher/AMGroup.h"
 #import "AMTaskLauncher/AMShellTask.h"
-
-static void *PingKVOContext;
 
 @interface AMPingViewController ()
 {
     AMShellTask *_task;
-    AMMesher *_mesher;
-    NSArray *_myGroupUsers;
+    NSArray *_users;
 }
 
 - (void)runCommand:(NSString *)command;
@@ -31,8 +29,8 @@ static void *PingKVOContext;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _mesher = [AMMesher sharedAMMesher];
-        //_myGroupUsers = _mesher.myGroupUsers;
+//        _users = [[AMMesher sharedAMMesher] myGroup].users;
+        _users = @[[[AMMesher sharedAMMesher] mySelf]];
     }
     
     return self;
@@ -40,52 +38,50 @@ static void *PingKVOContext;
 
 - (void)awakeFromNib
 {
-    [_mesher addObserver:self
-              forKeyPath:@"myGroupUsers"
-                 options:0
-                 context:&PingKVOContext];
-    
-    NSColor *color = [NSColor whiteColor];
-    [self.outputTextView setTextColor:color];
+    self.outputTextView.textColor = [NSColor whiteColor];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+        selector:@selector(userGroupsChanged:)
+        name:AM_USERGROUPS_CHANGED
+        object:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
+-(void)userGroupsChanged:(NSNotification*)notification
 {
-//    if (context != &PingKVOContext) {
-//        [super observeValueForKeyPath:keyPath
-//                             ofObject:object
-//                               change:change
-//                              context:context];
-//        return;
-//    }
-//    
-//    _myGroupUsers = _mesher.myGroupUsers;
-//    [self.userTable reloadData];
+    _users = [[AMMesher sharedAMMesher] myGroup].users;
+    [self.userTable reloadData];
+}
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [_myGroupUsers count];
+    return [_users count];
 }
 
-- (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+- (id)tableView:(NSTableView *)tableView
+    viewForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row
+{
 
-    NSTableCellView *result = [tableView makeViewWithIdentifier:[tableColumn identifier] owner:nil];
-//    
-//    AMUser* user = _myGroupUsers[row];
-//    [result.textField setStringValue:user.nodeName];
+    NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier
+                                                          owner:nil];
+   
+    AMUser* user = _users[row];
+    [result.textField setStringValue:user.nickName];
     return result;
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    AMUser* user = _myGroupUsers[self.userTable.selectedRow];
+    AMUser* user = _users[self.userTable.selectedRow];
     NSString* pingIp = (user.publicIp == nil) ? user.privateIp: user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];
-    [self runCommand:pingCommand];
+//    [self runCommand:pingCommand];
 }
 
 - (void)runCommand:(NSString *)command

@@ -68,12 +68,10 @@
 -(void)userGroupsChanged:(NSNotification*) notification
 {
     NSMutableArray* joinedUsers = nil;
-    NSMutableArray* leavedUsers = nil;
-    
-    AMGroup* myNewGroup = notification.userInfo[@"myGroup"];
+    AMGroup* myNewGroup = [[AMMesher sharedAMMesher] myGroup];
+
     if (_myGroup != nil) {
         joinedUsers = [[NSMutableArray alloc] init];
-        leavedUsers = [[NSMutableArray alloc] init];
         for (AMUser* newUser in myNewGroup.users) {
             
             BOOL bFind = NO;
@@ -87,30 +85,12 @@
                 [joinedUsers addObject:newUser];
             }
         }
-        
-        for (AMUser* oldUser in _myGroup.users) {
-            
-            BOOL bFind = NO;
-            for(AMUser* newUser in myNewGroup.users){
-                if ([oldUser.userid isEqualToString:newUser.userid]) {
-                    bFind = YES;
-                    break;
-                }
-            }
-            if (bFind == NO) {
-                [leavedUsers addObject:oldUser];
-            }
-        }
     }
     
     _myGroup = myNewGroup;
     
     if (joinedUsers != nil ) {
         [self performSelectorOnMainThread:@selector(showNewCommers:) withObject:joinedUsers waitUntilDone:NO];
-    }
-    
-    if (leavedUsers != nil) {
-        [self performSelectorOnMainThread:@selector(showLeavedUsers:) withObject:leavedUsers waitUntilDone:NO];
     }
     
     [self updatePortInfo];

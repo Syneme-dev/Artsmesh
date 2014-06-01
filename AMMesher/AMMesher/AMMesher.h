@@ -35,6 +35,7 @@
 -(void)goOnline;
 -(void)goOffline;
 -(void)stopMesher;
+-(AMGroup*)myGroup;
 
 -(void)joinGroup:(NSString*)groupName;
 -(void)backToArtsmesh;

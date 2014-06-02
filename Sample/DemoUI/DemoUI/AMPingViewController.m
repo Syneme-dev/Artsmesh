@@ -91,13 +91,25 @@
     _task = [[AMShellTask alloc] initWithCommand:command];
     [_task launch];
     NSFileHandle *inputStream = [_task fileHandlerForReading];
-    NSMutableString *content = [[NSMutableString alloc] init];
-    AMPingViewController * __weak weakSelf = self;
+//    NSMutableString *content = [[NSMutableString alloc] init];
+//    AMPingViewController * __weak weakSelf = self;
+    NSTextView *output = self.outputTextView;
     inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
         NSData *data = [fh availableData];
-        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-        AMPingViewController *strongSelf = weakSelf;
-        strongSelf.outputTextView.string = content;
+        NSString *string = [[NSString alloc] initWithData:data
+                                                 encoding:NSUTF8StringEncoding];
+        NSDictionary *attr = @{
+            NSForegroundColorAttributeName : [NSColor whiteColor]
+        };
+        NSAttributedString *attrString =
+            [[NSAttributedString alloc] initWithString:string attributes:attr];
+        [output.textStorage appendAttributedString:attrString];
+        output.needsDisplay = YES;
+        
+//        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+//        AMPingViewController *strongSelf = weakSelf;
+//        strongSelf.outputTextView.string = content;
+        
     };
 }
 

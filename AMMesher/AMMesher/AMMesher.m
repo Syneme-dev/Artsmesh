@@ -488,6 +488,7 @@
                 }
                 
                 [self startLocalServer];
+                sleep(1);
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;

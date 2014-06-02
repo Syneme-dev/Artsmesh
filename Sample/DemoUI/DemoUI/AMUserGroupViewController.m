@@ -10,6 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
 #import "AMUserGroupTableCellView.h"
+#import "AMUserGroupNode.h"
 
 @interface AMUserGroupViewController ()
 
@@ -22,7 +23,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        self.sharedMesher  =  [AMMesher sharedAMMesher];
         
         NSTextField *textField = self.createGroupTextField;
         NSColor *insertionPointColor = [NSColor whiteColor];
@@ -36,23 +36,55 @@
     return self;
 }
 
+-(void)awakeFromNib{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
+}
+
+-(void)userGroupsChanged:(NSNotification*) notification
+{
+    AMMesher* mehser = [AMMesher sharedAMMesher];
+    NSArray* usergroups = mehser.userGroups;
+    
+    NSMutableArray* newUserGroupNodes = [[NSMutableArray alloc]  init];
+    for (AMGroup* group in usergroups) {
+        AMUserGroupNode* newGroupNode = [[AMUserGroupNode alloc] init];
+        newGroupNode.nodeName = [group.groupName isEqualToString:@""]?@"Artsmesh":group.groupName;
+        newGroupNode.isLeaf = NO;
+        newGroupNode.parent = nil;
+        newGroupNode.children = [[NSMutableArray alloc] init];
+        
+        for(AMUser* user in group.users){
+            AMUserGroupNode* newUserNode = [[AMUserGroupNode alloc] init];
+            newUserNode.nodeName = user.nickName;
+            newUserNode.isLeaf = YES;
+            newUserNode.parent = newGroupNode;
+            newUserNode.children = nil;
+            [newGroupNode addChildrenObject:newUserNode];
+        }
+        
+        [newUserGroupNodes addObject:newGroupNode];
+    }
+    
+    [self willChangeValueForKey:@"userGroupNodes"];
+    self.userGroupNodes = newUserGroupNodes;
+    [self didChangeValueForKey:@"userGroupNodes"];
+
+}
+
+
+
 - (IBAction)joinGroup:(id)sender
 {
-//    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
-//    {
-//        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
-//        
-//        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
-//        {
-//            AMUserGroupNode* node = cellView.objectValue;
-//            if ([node isKindOfClass:[AMGroup class]])
-//            {
-//                AMGroup* group = (AMGroup*)node;
-//                NSString* groupName = group.uniqueName;
-//                [[AMMesher sharedAMMesher] joinGroup:groupName];
-//            }
-//        }
-//    }
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
+    {
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
+        
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;;
+            [[AMMesher sharedAMMesher] joinGroup:node.nodeName];
+        }
+    }
 }
 
 - (IBAction)createGroup:(id)sender
@@ -66,28 +98,20 @@
 
 - (IBAction)quitGroup:(id)sender
 {
-//    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
-//    {
-//        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
-//        
-//        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
-//        {
-//            AMUserGroupNode* node = cellView.objectValue;
-//            if ([node isKindOfClass:[AMGroup class]])
-//            {
-//                AMGroup* group = (AMGroup*)node;
-//                NSString* groupName = group.uniqueName;
-//                if ([groupName isEqualToString:@"Artsmesh"])
-//                {
-//                    return;
-//                }
-//                
-//                [[AMMesher sharedAMMesher] backToArtsmesh];
-//            }
-//        }
-//    }
-
-    
+    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
+    {
+        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
+        
+        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
+        {
+            AMUserGroupNode* node = cellView.objectValue;
+            if ([node.nodeName isEqualToString:@"Artsmesh"])
+            {
+                    return;
+            }
+            [[AMMesher sharedAMMesher] backToArtsmesh];
+        }
+    }
 }
 
 - (IBAction)createGroupByEnter:(id)sender
@@ -99,25 +123,6 @@
     }
 }
 
-- (IBAction)mergeGroup:(id)sender
-{
-    
-//    if ([[sender superview] isKindOfClass:[AMUserGroupTableCellView class]])
-//    {
-//        AMUserGroupTableCellView* cellView = (AMUserGroupTableCellView*)[sender superview];
-//        
-//        if([cellView.objectValue isKindOfClass:[AMUserGroupNode class]])
-//        {
-//            AMUserGroupNode* node = cellView.objectValue;
-//            if ([node isKindOfClass:[AMGroup class]])
-//            {
-//                AMGroup* group = (AMGroup*)node;
-//                NSString* groupName = group.uniqueName;
-//                [[AMMesher sharedAMMesher] everyoneJoinGroup:groupName];
-//            }
-//        }
-//    }
-}
 
 
 @end

@@ -206,12 +206,29 @@
     NSSize panelSize = NSMakeSize(300.0f, 400.0f);
     [panelView setFrameSize:panelSize];
     panelView.minSizeConstraint = panelSize;
+    NSSize maxSize = NSMakeSize(600.0f, 740.0f);
+    panelView.maxSizeConstraint = maxSize;
     [_containerView addSubview:panelView];
-   // panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.origin.y+self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
-//    panelViewController.view.frame = NSMakeRect(70.0f, self.window.frame.size.height-40.0f-300.0f-10-400-20, 300.0f, 400.0f);
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
-    [panelViewController.view addSubview:_userGroupViewController.view];
+     NSView *groupView = _userGroupViewController.view;
+    [panelViewController.view addSubview:groupView];
+    
+    [groupView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(groupView);
+    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[groupView]|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:views]];
+    
+    [panelView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[groupView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
+    
+    
     [panelViewController setTitle:@"GROUPS"];
     [panelControllers setObject:panelViewController forKey:@"GROUPS"];
 }

@@ -288,7 +288,10 @@
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, 400);
     [panelView setFrameSize:panelSize];
-    panelView.minSizeConstraint = panelSize;
+    NSSize maxSize = NSMakeSize(600.0f, 740);
+    NSSize minSize = NSMakeSize(600.0f, 300);
+    panelView.maxSizeConstraint = maxSize;
+    panelView.minSizeConstraint = minSize;
     [_containerView addSubview:panelView];
     [panelViewController setTitle:@"PING"];
     pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];

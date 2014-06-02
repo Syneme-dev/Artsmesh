@@ -214,7 +214,7 @@
 
 -(void)goOnline
 {
-    if (_isOnline) {
+    if (self.isOnline == YES) {
         return;
     }
     
@@ -224,7 +224,7 @@
         _action = @"new";
     }
     
-     _isOnline = YES;
+     self.isOnline = YES;
     
     [self startHearBeat:_systemConfig.globalServerAddr serverPort:_systemConfig.globalServerPort];
     
@@ -240,7 +240,7 @@
 -(void)goOffline
 {
     [self stopMesher];
-    _isOnline = NO;
+    self.isOnline = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         // do work here
         
@@ -378,7 +378,11 @@
             
             AMUserRequest* req = [[AMUserRequest alloc] init];
             req.delegate = self;
-            [_httpRequestQueue  addOperation:req];
+            
+            if(_httpRequestQueue.operationCount < 2)
+            {
+                 [_httpRequestQueue  addOperation:req];
+            }
         }
     }
 }

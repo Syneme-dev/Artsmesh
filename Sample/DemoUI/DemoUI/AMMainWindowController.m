@@ -73,7 +73,13 @@
 }
 
 - (IBAction)mesh:(id)sender {
-    [[AMMesher sharedAMMesher] goOnline];
+    
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    if (mesher.isOnline == NO) {
+        [mesher goOnline ];
+    }else{
+        [mesher goOffline];
+    }
 }
 
 -(void)loadVersion{

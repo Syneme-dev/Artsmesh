@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+@class AMFoundryFontView;
 
 @interface AMMainWindowController : NSWindowController
+
 - (IBAction)mesh:(id)sender;
 - (void)showDefaultWindow ;
 @property (weak) IBOutlet NSTextField *versionLabel;

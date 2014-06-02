@@ -39,7 +39,7 @@
     AMSystemConfig* _systemConfig;
     int _heartbeatFailureCount;
     
-    NSString* _action;
+    NSString* _md5OnServer;
 
 }
 
@@ -91,8 +91,6 @@
         pm.internalPort = [defaults stringForKey:Preference_Key_General_ChatPort];;
         pm.natMapPort   = pm.internalPort;
         [self.mySelf.portMaps addObject:pm];
-        
-        _action = @"new";
     }
 }
 
@@ -127,7 +125,7 @@
 -(void)startMesher
 {
     _heartbeatFailureCount = 0;
-    _action = @"new";
+    _md5OnServer = @"";
     
     if(_elector == nil){
         if (_systemConfig) {
@@ -177,8 +175,6 @@
             id value = [props valueForKey:key];
             [self.mySelf setValue:value forKey:key];
         }
-        
-        _action = @"update";
     }
 }
 
@@ -186,7 +182,6 @@
 {
     @synchronized(self){
         [self.mySelf setValue:groupName forKey:@"groupName"];
-        _action = @"update";
     }
 }
 
@@ -221,7 +216,7 @@
     [self stopMesher];
     
     @synchronized(self){
-        _action = @"new";
+        _md5OnServer = @"";
     }
     
      self.isOnline = YES;
@@ -316,8 +311,6 @@
         if (!bFind) {
             [self.mySelf.portMaps addObject:portMap];
         }
-        
-        _action = @"update";
     }
 }
 
@@ -340,15 +333,15 @@
     NSData* data ;
     @synchronized(self){
         AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
-        request.action = _action;
+
         request.userid = self.mySelf.userid;
         request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
         
-        if ([_action isEqualToString:@"new"] || [_action isEqualToString:@"update"]) {
-            request.contentMd5 = [self.mySelf md5String];
+        NSString* localMd5 = [self.mySelf md5String];
+        if (![localMd5 isEqualToString:_md5OnServer]) {
             request.userContent = self.mySelf;
+            request.contentMd5 = localMd5;
         }
-        
         data = [request jsonData];
     }
     
@@ -365,15 +358,7 @@
     AMUserUDPResponse* response = [AMUserUDPResponse responseFromJsonData:data];
     
     @synchronized(self){
-        if (response.isSucceeded == NO) {
-            _action = @"new";
-        }else{
-            if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
-                _action = @"heartbeat";
-            }else{
-                _action = @"update";
-            }
-        }
+        _md5OnServer  = response.contentMd5;
         
         if ([response.version intValue] !=  self.userGroupsVersion) {
             NSLog(@"need download userlist");
@@ -410,12 +395,17 @@
 
 - (NSString *)httpServerURL
 {
-    if (_elector) {
-        NSString* URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
+    NSString* URLStr;
+    if (self.isOnline) {
+        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _systemConfig.globalServerAddr, _systemConfig.globalServerPort];
         NSLog(@"%@", URLStr);
-        return URLStr;
+        
+    }else{
+        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
+        NSLog(@"%@", URLStr);
     }
-    return @"http://localhost:8080/users";
+    
+    return URLStr;
 }
 
 - (void)userRequestDidCancel
@@ -494,7 +484,7 @@
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
-                    _action = @"new";
+                    _md5OnServer = @"";
                 }
                 
                 [self startLocalServer];
@@ -516,7 +506,7 @@
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
-                    _action = @"new";
+                    _md5OnServer = @"";
                 }
                 
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];

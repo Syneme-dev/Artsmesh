@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
-		264A68A51938B73C00E880D2 /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 264A68A01938B71200E880D2 /* amserver */; };
 		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
 		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
 		267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA5731936EF0D001FDA74 /* AMUserRequest.h */; };
@@ -49,7 +48,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				264A68A51938B73C00E880D2 /* amserver in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +56,6 @@
 /* Begin PBXFileReference section */
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
-		264A68A01938B71200E880D2 /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
 		267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
 		267FA5731936EF0D001FDA74 /* AMUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserRequest.h; sourceTree = "<group>"; };
@@ -130,7 +127,6 @@
 		2692CD4818D7C2A2006501C4 = {
 			isa = PBXGroup;
 			children = (
-				264A68A01938B71200E880D2 /* amserver */,
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
 				26BC15B819321D280020AD2B /* AMMesherTest */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,

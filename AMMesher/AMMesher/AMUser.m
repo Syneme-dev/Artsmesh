@@ -211,7 +211,6 @@
 -(NSData*)jsonData{
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:self.version forKey:@"Version"];
-    [dict setObject:self.action forKey:@"Action"];
     [dict setObject:self.userid forKey:@"UserId"];
     
     if (self.userContent != nil) {

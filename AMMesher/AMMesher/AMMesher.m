@@ -366,14 +366,16 @@
     
     @synchronized(self){
         if (response.isSucceeded == NO) {
-            _action = @"update";
+            _action = @"new";
+        }else{
+            if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
+                _action = @"heartbeat";
+            }else{
+                _action = @"update";
+            }
         }
         
-        if ([response.contentMd5 isEqualToString:[self.mySelf md5String]]) {
-            _action = @"heartbeat";
-        }
-        
-        if ([response.version intValue] >  self.userGroupsVersion) {
+        if ([response.version intValue] !=  self.userGroupsVersion) {
             NSLog(@"need download userlist");
             
             AMUserRequest* req = [[AMUserRequest alloc] init];
@@ -456,8 +458,6 @@
         NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     });
-
-
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

@@ -2,16 +2,27 @@ package restserver
 
 import (
 	"fmt"
-	"errors"
 	"os"
-    "github.com/ant0ine/go-json-rest/rest"
+    "log"
     "net/http"
 	"artsmesh/amusers"
+	"encoding/json"
 )
 
 type AMRestServer struct{
 	Response  *amusers.AMUserRESTResponse
 	RestPort string
+}
+
+func (server *AMRestServer) getUsers(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(os.Stdout, "GetAllUsers requst coming...")
+	usersObj := server.Response
+	
+	userlist, err := json.Marshal(usersObj)
+	if err == nil{
+		userlistStr := string(userlist[:])
+		fmt.Fprintf(w, userlistStr)
+	}
 }
 
 func (server *AMRestServer) StartRestServer(){
@@ -21,36 +32,13 @@ func (server *AMRestServer) StartRestServer(){
 	server.Response.Version = "1"
 	server.Response.UserListData = nil
 	
-	var err error
-	if server.RestPort == ""{
-		err = errors.New("didn't set rest server port")
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
-	}
 	
-	 handler := rest.ResourceHandler{
-        EnableRelaxedContentType: true,
-    }
-	
-    err = handler.SetRoutes(
-        rest.RouteObjectMethod("GET", "/users", server, "GetAllUsers"),
-    )
+	http.HandleFunc("/", server.getUsers)
+	err := http.ListenAndServe(server.RestPort, nil)
 	if	err != nil{
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
-	}
-	
-	err = http.ListenAndServe(server.RestPort, &handler)
-	if	err != nil{
-		fmt.Fprintln(os.Stderr, err.Error())
+		log.Fatal("listen and serve failed!")
 		os.Exit(1)
 	}
 }
 
-func (server *AMRestServer) GetAllUsers(w rest.ResponseWriter, r *rest.Request) {
-	fmt.Fprintln(os.Stdout, "GetAllUsers requst coming...")
-	usersObj := server.Response
-	if	usersObj != nil{
-		w.WriteJson(&usersObj)
-	}
-}
+

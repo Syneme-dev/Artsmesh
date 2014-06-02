@@ -47,6 +47,7 @@ func main() {
 	udpServer.RestServer = &restServer
 	
 	go udpServer.StartUdpServer()
+	
 	restServer.StartRestServer()
 }
 

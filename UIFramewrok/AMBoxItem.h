@@ -8,12 +8,13 @@
 #import <Foundation/Foundation.h>
 @class AMBox;
 
+extern NSString * const AMBoxItemType;
+
 typedef NS_ENUM(NSUInteger, AMDragBehavior) {
     AMDragForNone,
     AMDragForMoving,
     AMDragForResizing
 };
-
 
 @interface AMBoxItem : NSView<NSDraggingSource>
 

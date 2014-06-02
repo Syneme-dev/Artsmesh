@@ -23,7 +23,7 @@
     if (self) {
         _style = style;
         self.dragBehavior = AMDragForNone;
-        [self registerForDraggedTypes: @[NSPasteboardTypeString]];
+        [self registerForDraggedTypes: @[AMBoxItemType]];
     }
     return self;
 }

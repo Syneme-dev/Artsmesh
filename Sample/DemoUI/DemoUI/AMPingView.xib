@@ -21,22 +21,22 @@
                     <rect key="frame" x="0.0" y="379" width="600" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
-                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDA-bb-l5B">
-                    <rect key="frame" x="174" y="46" width="426" height="333"/>
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDA-bb-l5B">
+                    <rect key="frame" x="174" y="29" width="426" height="350"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <clipView key="contentView" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="JFT-Gt-d5u">
-                        <rect key="frame" x="0.0" y="0.0" width="426" height="333"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="JFT-Gt-d5u">
+                        <rect key="frame" x="0.0" y="0.0" width="426" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="dTf-KF-31B">
-                                <rect key="frame" x="0.0" y="0.0" width="426" height="333"/>
+                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" id="dTf-KF-31B">
+                                <rect key="frame" x="0.0" y="0.0" width="426" height="350"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" red="0.18823531269999999" green="0.18823531269999999" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
-                                <size key="minSize" width="426" height="333"/>
+                                <size key="minSize" width="426" height="350"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="426" height="333"/>
+                                <size key="minSize" width="426" height="350"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -51,15 +51,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cau-Ga-Qzk">
-                    <rect key="frame" x="0.0" y="46" width="178" height="333"/>
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cau-Ga-Qzk">
+                    <rect key="frame" x="0.0" y="29" width="178" height="350"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="gzk-oZ-chL">
-                        <rect key="frame" x="0.0" y="0.0" width="178" height="333"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gzk-oZ-chL">
+                        <rect key="frame" x="0.0" y="0.0" width="178" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="R3s-wf-lrE">
-                                <rect key="frame" x="0.0" y="0.0" width="178" height="333"/>
+                                <rect key="frame" x="0.0" y="0.0" width="178" height="350"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.18823531269999999" green="0.18823531269999999" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
@@ -89,7 +89,7 @@
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="OKf-js-bDt">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                 </subviews>
@@ -108,6 +108,9 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="178" id="GTt-GI-dix"/>
+                    </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="FT0-CF-VXR">
                         <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -118,6 +121,15 @@
                     </scroller>
                 </scrollView>
             </subviews>
+            <constraints>
+                <constraint firstItem="xDA-bb-l5B" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="174" id="Lp0-mt-S64"/>
+                <constraint firstAttribute="bottom" secondItem="cau-Ga-Qzk" secondAttribute="bottom" constant="29" id="Nss-5U-bN5"/>
+                <constraint firstAttribute="trailing" secondItem="xDA-bb-l5B" secondAttribute="trailing" id="SSX-zv-pIJ"/>
+                <constraint firstAttribute="bottom" secondItem="xDA-bb-l5B" secondAttribute="bottom" constant="29" id="VYW-n9-dul"/>
+                <constraint firstItem="xDA-bb-l5B" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="21" id="dPG-Nl-hc6"/>
+                <constraint firstItem="cau-Ga-Qzk" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="21" id="eL7-pM-fCb"/>
+                <constraint firstItem="cau-Ga-Qzk" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="iKU-uM-cn2"/>
+            </constraints>
         </customView>
     </objects>
 </document>

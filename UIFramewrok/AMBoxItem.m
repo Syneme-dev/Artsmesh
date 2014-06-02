@@ -8,6 +8,8 @@
 #import "AMBoxItem.h"
 #import "AMBox.h"
 
+NSString * const AMBoxItemType = @"com.artmesh.boxitem";
+
 @interface AMBoxItem ()
 {
     NSEvent *_mouseDownEvent;
@@ -197,7 +199,7 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 - (NSArray *)createDraggingItems
 {
     NSPasteboardItem *pasteboardItem = [[NSPasteboardItem alloc] init];
-    [pasteboardItem setString:@"" forType:NSPasteboardTypeString];
+    [pasteboardItem setString:@"" forType:AMBoxItemType];
     
     // generate semi-transparent thumbnail
     NSBitmapImageRep *imageRep = [self bitmapImageRepForCachingDisplayInRect:self.bounds];

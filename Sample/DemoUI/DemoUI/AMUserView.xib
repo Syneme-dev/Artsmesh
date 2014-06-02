@@ -57,7 +57,7 @@
                         <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Location" id="6HL-PH-Sfu"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6" customClass="AMFoundryFontView">
                     <rect key="frame" x="40" y="36" width="251" height="73"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="" drawsBackground="YES" id="msF-DJ-hzo">

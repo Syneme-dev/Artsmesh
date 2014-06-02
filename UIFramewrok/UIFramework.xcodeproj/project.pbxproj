@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; };
+		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontTextView.h; path = UIFramewrok/AMFoundryFontTextView.h; sourceTree = "<group>"; };
+		26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontTextView.m; path = UIFramewrok/AMFoundryFontTextView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AF00D43C18C9B5E6004DE9E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,6 +118,8 @@
 				CE883162192C44B800DA17CE /* AMBox.m */,
 				AF82E352190CA9680083487C /* AMFoundryFontView.h */,
 				AF82E353190CA9680083487C /* AMFoundryFontView.m */,
+				26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */,
+				26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */,
 				AFB34F6819065C1400092E33 /* AMButtonHandler.h */,
 				AFB34F6919065C1400092E33 /* AMButtonHandler.m */,
 				AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */,
@@ -208,6 +214,7 @@
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
+				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
@@ -313,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE883166192C44B900DA17CE /* AMBox.m in Sources */,
+				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				CE88316A192C52EA00DA17CE /* AMPanelView.m in Sources */,

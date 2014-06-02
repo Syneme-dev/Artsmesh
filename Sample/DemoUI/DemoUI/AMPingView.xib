@@ -24,14 +24,14 @@
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDA-bb-l5B">
                     <rect key="frame" x="174" y="29" width="426" height="350"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="JFT-Gt-d5u">
+                    <clipView key="contentView" copiesOnScroll="NO" id="JFT-Gt-d5u">
                         <rect key="frame" x="0.0" y="0.0" width="426" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" id="dTf-KF-31B" customClass="AMFoundryFontTextView">
+                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" id="dTf-KF-31B" customClass="AMFoundryFontTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="426" height="350"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" red="0.18823531269999999" green="0.18823531269999999" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="minSize" width="426" height="350"/>
                                 <size key="maxSize" width="463" height="10000000"/>

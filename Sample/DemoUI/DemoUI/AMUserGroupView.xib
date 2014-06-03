@@ -149,8 +149,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-Id-bKm">
-                    <rect key="frame" x="-1" y="1" width="26" height="26"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-Id-bKm">
+                    <rect key="frame" x="0.0" y="22" width="25" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="CreateGroup" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="O6z-l9-DxA">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -160,9 +160,12 @@
                         <action selector="createGroup:" target="-2" id="Bd2-xW-Qbu"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg">
-                    <rect key="frame" x="28" y="1" width="272" height="26"/>
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg">
+                    <rect key="frame" x="28" y="22" width="284" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="26" id="OW3-cF-5Wu"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" focusRingType="none" alignment="center" placeholderString="CREATE A NEW GROUP" drawsBackground="YES" id="vur-DY-jHT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -177,10 +180,13 @@
                 <constraint firstItem="UGc-Id-bKm" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="1df-J9-aQH"/>
                 <constraint firstAttribute="bottom" secondItem="eE2-gh-pZg" secondAttribute="bottom" constant="22" id="6Rg-ol-5nL"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Dd0-hw-6n4"/>
+                <constraint firstItem="eE2-gh-pZg" firstAttribute="top" secondItem="UGc-Id-bKm" secondAttribute="top" id="FnM-pi-PRb"/>
                 <constraint firstAttribute="trailing" secondItem="eE2-gh-pZg" secondAttribute="trailing" id="JzL-RK-OlO"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Kg0-Q4-Qyl"/>
+                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" constant="28" id="Nlz-wi-LxO"/>
                 <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" id="WSB-1T-40f"/>
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
+                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="UGc-Id-bKm" secondAttribute="trailing" constant="3" id="kAg-CK-dg8"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
                 <constraint firstAttribute="bottom" secondItem="UGc-Id-bKm" secondAttribute="bottom" constant="22" id="rHT-yj-H1N"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>

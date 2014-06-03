@@ -78,7 +78,7 @@ static NSMutableDictionary *allPlugins = nil;
     NSBundle *main = [NSBundle mainBundle];
     NSArray *allPlugins = [main pathsForResourcesOfType:@"bundle" inDirectory:@"../PlugIns"];
     NSMutableDictionary *availablePlugins = [NSMutableDictionary dictionaryWithCapacity:10];
-    id<AMPluginAppDelegate> plugin = nil;
+    id plugin = nil;
     NSString *pluginName = nil;
     NSBundle *pluginBundle = nil;
     for (NSString *path in allPlugins) {

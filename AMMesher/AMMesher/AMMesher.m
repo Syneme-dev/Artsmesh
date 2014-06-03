@@ -19,7 +19,8 @@
  NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
  NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
 
-@interface AMMesher()
+
+@interface AMMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
 
 @property AMUser* mySelf;
 @property NSString* localLeaderName;

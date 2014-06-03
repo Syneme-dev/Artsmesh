@@ -237,7 +237,7 @@
 
 - (NSDragOperation)draggingUpdated:(id<NSDraggingInfo>)sender
 {
-    AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
+    //AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
     NSPoint location = [sender draggingLocation];
     NSRect rect = NSZeroRect;
     AMBoxItem *belowItem = [self boxItemBelowPoint:location];

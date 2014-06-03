@@ -45,6 +45,12 @@
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
 
+#define Preference_General_StunServerAddr   @"123.124.145.254"
+#define Preference_General_StunServerPort   @"22250"
+#define Preference_General_GlobalServerAddr   @"123.124.145.254"
+#define Preference_General_GlobalServerPort   @"8080"
+#define Preference_General_LocalServerPort    @"8080"
+
 #import <Foundation/Foundation.h>
 
 @interface AMPreferenceManager : NSObject

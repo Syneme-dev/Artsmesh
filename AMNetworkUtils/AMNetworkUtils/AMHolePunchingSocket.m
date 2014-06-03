@@ -8,8 +8,6 @@
 
 #import "AMHolePunchingSocket.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
-#import "AMMesher/AMMesher.h"
-#import "AMMesher/AMUser.h"
 
 #define AMHolePunchingHeartBeatTag  0
 #define AMHolePunchingDataTag       1
@@ -86,6 +84,9 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 
 -(void)startHolePunching
 {
+    if (self.useIpv6) {
+        return;
+    }
    
     _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
 }

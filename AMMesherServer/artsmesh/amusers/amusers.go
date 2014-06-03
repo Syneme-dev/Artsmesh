@@ -50,10 +50,10 @@ type AMUserUDPRequest struct{
 }
 	
 type AMUserUDPResponse struct{
-	Action 			string
+	Action 			string //unused
 	Version			string
 	UserContentMd5		string
-	IsSucceeded		string
+	IsSucceeded		string//unused
 }
 
 type AMUserRESTResponse struct{

@@ -15,7 +15,7 @@ var g_ipv6 bool
 
 const(
 	default_rest_port = 8080
-	default_heartbeat_port = 8082
+	default_heartbeat_port = 8080
 	default_user_timeout = 30.0
 	default_ipv6 = false
 	usage = "-rest_port 8080 -heartbeat_port8082 -user_timeout 30 -ipv6"

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		2624CABD191A33FA007EED09 /* AMStatusNetModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */; };
-		2648BF54193C732800D56BB9 /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2648BF53193C732800D56BB9 /* amserver */; };
 		2683E6B8193C9E40002B1D34 /* AMUserGroupNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2683E6B7193C9E40002B1D34 /* AMUserGroupNode.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
@@ -26,6 +25,7 @@
 		26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
+		26E4172A193E10DD00D66FEB /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26E41729193E10DD00D66FEB /* amserver */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
@@ -103,7 +103,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				2648BF54193C732800D56BB9 /* amserver in CopyFiles */,
+				26E4172A193E10DD00D66FEB /* amserver in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +140,6 @@
 /* Begin PBXFileReference section */
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMStatusNetModule.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMStatusNetModule.framework; sourceTree = "<group>"; };
-		2648BF53193C732800D56BB9 /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		2683E6B6193C9E40002B1D34 /* AMUserGroupNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupNode.h; sourceTree = "<group>"; };
 		2683E6B7193C9E40002B1D34 /* AMUserGroupNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupNode.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
@@ -164,6 +163,7 @@
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
+		26E41729193E10DD00D66FEB /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				2648BF53193C732800D56BB9 /* amserver */,
+				26E41729193E10DD00D66FEB /* amserver */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,

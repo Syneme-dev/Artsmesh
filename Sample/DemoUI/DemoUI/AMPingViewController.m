@@ -107,7 +107,7 @@
         NSAttributedString *attrString =
             [[NSAttributedString alloc] initWithString:string attributes:attr];
         [output.textStorage appendAttributedString:attrString];
-       // output.needsDisplay = YES;
+        output.needsDisplay = YES;
         
 //        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
 //        AMPingViewController *strongSelf = weakSelf;

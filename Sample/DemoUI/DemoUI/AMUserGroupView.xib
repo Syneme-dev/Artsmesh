@@ -8,7 +8,9 @@
             <connections>
                 <outlet property="createGroupName" destination="eE2-gh-pZg" id="aUw-Ow-Svk"/>
                 <outlet property="createGroupTextField" destination="eE2-gh-pZg" id="cn9-nN-73N"/>
-                <outlet property="treeViewController" destination="u0D-Lj-5gf" id="15I-rZ-3ig"/>
+                <outlet property="groupCellView" destination="R8J-WH-Y9f" id="8bZ-yk-E3p"/>
+                <outlet property="groupCellViewJoinBtn" destination="heI-OY-PRa" id="adR-MG-5hY"/>
+                <outlet property="outlineView" destination="vcz-fd-kzK" id="TCQ-26-2Vz"/>
                 <outlet property="userGroupOutline" destination="vcz-fd-kzK" id="yRF-tB-qQW"/>
                 <outlet property="view" destination="5d4-5O-feO" id="qB8-O0-9Hr"/>
             </connections>
@@ -26,14 +28,14 @@
                         <constraint firstAttribute="height" constant="1" id="iqW-yh-bix"/>
                     </constraints>
                 </customView>
-                <scrollView focusRingType="none" borderType="none" horizontalLineScroll="32" horizontalPageScroll="10" verticalLineScroll="32" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
+                <scrollView focusRingType="none" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
                     <rect key="frame" x="0.0" y="25" width="312" height="312"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="Pea-9b-WbH">
                         <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="30" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK" customClass="AMUserGroupOutlineView">
+                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
                                 <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -53,87 +55,28 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView id="dPi-04-sQ9" customClass="AMUserGroupTableCellView">
-                                                <rect key="frame" x="1" y="1" width="309" height="30"/>
+                                            <tableCellView identifier="ugcell" id="zeI-8S-JLP">
+                                                <rect key="frame" x="1" y="1" width="309" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DEo-U9-i6M">
-                                                        <rect key="frame" x="1" y="1" width="132" height="25"/>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgT-O2-LB7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="309" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="THk-Ce-Rip">
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="UpR-Bh-B9u">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
-                                                        <connections>
-                                                            <binding destination="dPi-04-sQ9" name="value" keyPath="objectValue.nodeName" id="0yV-QH-J0l"/>
-                                                        </connections>
                                                     </textField>
-                                                    <button hidden="YES" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="ajr-1P-LrG">
-                                                        <rect key="frame" x="120" y="2" width="25" height="24"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="GroupMessage" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="nSz-kR-bpN">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                    </button>
-                                                    <button hidden="YES" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="B9I-fw-ldj">
-                                                        <rect key="frame" x="150" y="2" width="25" height="24"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="JoinGroup" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="K93-Qk-2dy">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="joinGroup:" target="-2" id="OlN-CP-XVB"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button hidden="YES" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="cFx-cv-so2">
-                                                        <rect key="frame" x="180" y="2" width="25" height="24"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" title="J" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Xor-GR-hJg">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="joinGroup:" target="-2" id="R3V-bd-pW4"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button hidden="YES" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="TRQ-ft-FD3">
-                                                        <rect key="frame" x="210" y="2" width="25" height="24"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" title="M" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="1hq-el-d4M">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="mergeGroup:" target="-2" id="RkD-lj-Hfj"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button hidden="YES" fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-91-lGf">
-                                                        <rect key="frame" x="240" y="2" width="25" height="24"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="QuitGroup" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="KxH-IA-xsd">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="quitGroup:" target="-2" id="cky-BN-pTS"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <connections>
-                                                    <outlet property="textField" destination="DEo-U9-i6M" id="5nr-vV-5j7"/>
+                                                    <outlet property="textField" destination="mgT-O2-LB7" id="hO8-8Z-1Xa"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
-                                        <connections>
-                                            <binding destination="u0D-Lj-5gf" name="value" keyPath="arrangedObjects" id="Th8-Eo-VSZ"/>
-                                        </connections>
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
-                                    <binding destination="u0D-Lj-5gf" name="content" keyPath="arrangedObjects" id="gXD-Ek-7Wl"/>
                                     <outlet property="delegate" destination="-2" id="Bfm-2v-1k3"/>
                                 </connections>
                             </outlineView>
@@ -193,20 +136,26 @@
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="zy8-zK-VLd"/>
             </constraints>
         </customView>
-        <treeController objectClassName="AMUserGroupNode" childrenKeyPath="children" leafKeyPath="isLeaf" id="u0D-Lj-5gf">
-            <declaredKeys>
-                <string>nodeName</string>
-            </declaredKeys>
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="self.userGroupNodes" id="ilJ-F1-5Wn"/>
-            </connections>
-        </treeController>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>
+        <customView id="R8J-WH-Y9f">
+            <rect key="frame" x="0.0" y="0.0" width="173" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heI-OY-PRa">
+                    <rect key="frame" x="116" y="4" width="52" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" title="Join" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4ly-Px-BXj">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="joinGroup:" target="-2" id="8QE-sn-JXL"/>
+                    </connections>
+                </button>
+            </subviews>
+        </customView>
     </objects>
     <resources>
         <image name="CreateGroup" width="30" height="30"/>
-        <image name="GroupMessage" width="30" height="30"/>
-        <image name="JoinGroup" width="29" height="29"/>
-        <image name="QuitGroup" width="29" height="29"/>
     </resources>
 </document>

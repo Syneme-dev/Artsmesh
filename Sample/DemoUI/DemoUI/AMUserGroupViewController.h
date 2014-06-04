@@ -9,16 +9,18 @@
 #import <Cocoa/Cocoa.h>
 @class AMUserGroupNode;
 
-@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate>
-@property NSArray* userGroupNodes;
-@property (weak) IBOutlet NSTextField *createGroupTextField;
-@property (weak) IBOutlet NSOutlineView *userGroupOutline;
-@property (strong) IBOutlet NSTreeController *treeViewController;
+@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource>
 
+@property (weak) IBOutlet NSTextField *createGroupTextField;
+@property (weak) IBOutlet NSOutlineView *outlineView;
+@property (weak) IBOutlet NSView *groupCellView;
+@property (weak) IBOutlet NSButton *groupCellViewJoinBtn;
+
+@property NSArray* userGroups;
 
 - (IBAction)joinGroup:(id)sender;
-- (IBAction)createGroup:(id)sender;
 - (IBAction)quitGroup:(id)sender;
+- (IBAction)createGroup:(id)sender;
 - (IBAction)createGroupByEnter:(id)sender;
 
 

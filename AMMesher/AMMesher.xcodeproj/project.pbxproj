@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */; };
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
 		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
@@ -105,7 +104,6 @@
 				26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */,
 				2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */,
 				D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */,
-				2623DDBF18DD0E7C00BF982F /* AMETCDApi.framework in Frameworks */,
 				2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */,
 				2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */,
 			);

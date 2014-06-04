@@ -158,6 +158,9 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
+    if (!_mouseDownEvent)
+        return;
+    
     switch (self.dragBehavior) {
         case AMDragForMoving:
             [self beginDraggingSessionWithItems:[self createDraggingItems]
@@ -170,6 +173,11 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
         default:
             break;
     }
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    _mouseDownEvent = nil;
 }
 
 - (void)draggingSession:(NSDraggingSession *)session

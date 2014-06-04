@@ -57,7 +57,7 @@
 - (void)cancel
 {
     if (_task) {
-//        _pipe.fileHandleForReading.readabilityHandler = nil;
+        _pipe.fileHandleForReading.readabilityHandler = nil;
         [_task interrupt];
         _task = nil;
         _pipe = nil;

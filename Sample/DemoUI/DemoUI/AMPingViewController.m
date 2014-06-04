@@ -90,13 +90,14 @@
 {
     if (_task)
         [_task cancel];
-    self.outputTextView.string = @"";
+    NSTextView *outputView = self.outputTextView;
+    outputView.string = @"";
     _task = [[AMShellTask alloc] initWithCommand:command];
     [_task launch];
     NSFileHandle *inputStream = [_task fileHandlerForReading];
 //    NSMutableString *content = [[NSMutableString alloc] init];
 //    AMPingViewController * __weak weakSelf = self;
-    NSTextView *output = self.outputTextView;
+    
     inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
         NSData *data = [fh availableData];
         NSString *string = [[NSString alloc] initWithData:data
@@ -106,8 +107,8 @@
         };
         NSAttributedString *attrString =
             [[NSAttributedString alloc] initWithString:string attributes:attr];
-        [output.textStorage appendAttributedString:attrString];
-        output.needsDisplay = YES;
+        [outputView.textStorage appendAttributedString:attrString];
+        outputView.needsDisplay = YES;
         
 //        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
 //        AMPingViewController *strongSelf = weakSelf;

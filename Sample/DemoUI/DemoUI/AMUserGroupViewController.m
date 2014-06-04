@@ -18,7 +18,7 @@
 
 @implementation AMUserGroupViewController
 {
-    NSString* _selectGroupName;
+    id _selectItem;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,7 +60,7 @@
 - (IBAction)joinGroup:(id)sender
 {
     if ([[sender title] isEqualToString:@"Join"]) {
-         [[AMMesher sharedAMMesher] joinGroup:_selectGroupName];
+         [[AMMesher sharedAMMesher] joinGroup:[_selectItem groupName]];
     }else{
         [[AMMesher sharedAMMesher] backToArtsmesh];
     }
@@ -137,17 +137,20 @@
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
+    
     NSTableCellView* cellView = [outlineView makeViewWithIdentifier: @"ugcell" owner:self];
-    
-    NSRect rect = [cellView bounds];
+    [cellView setObjectValue:item];
     NSDictionary* userInfo = @{@"sender": cellView};
-    NSTrackingArea* trackArea = [[NSTrackingArea alloc]
-                                 initWithRect:rect
-                                 options:(NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow )
-                                 owner:self
-                                 userInfo:userInfo];
     
-    [cellView addTrackingArea:trackArea];
+    if ([[cellView trackingAreas] count] == 0) {
+         NSRect rect = [cellView bounds];
+        NSTrackingArea* trackArea = [[NSTrackingArea alloc]
+                                     initWithRect:rect
+                                     options:(NSTrackingMouseEnteredAndExited  |NSTrackingActiveInKeyWindow )
+                                     owner:self
+                                     userInfo:userInfo];
+        [cellView addTrackingArea:trackArea];
+    }
     
     NSString* title;
     if ([item isKindOfClass:[AMGroup class]]) {
@@ -172,20 +175,22 @@
 {
     NSDictionary* userInfo = [theEvent userData];
     NSTableCellView* cellView = [userInfo objectForKey:@"sender"];
-    _selectGroupName = cellView.textField.stringValue;
-
-    if ([_selectGroupName isEqualToString:@"Artsmesh"]) {
-        _selectGroupName = @"";
-    }
+    _selectItem = cellView.objectValue;
     
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    if ([mesher.mySelf.groupName isEqualToString:_selectGroupName]) {
-        self.groupCellViewJoinBtn.title = @"Leave";
-    }else{
-        self.groupCellViewJoinBtn.title = @"Join";
+    if ([_selectItem isKindOfClass:[AMGroup class]]) {
+        if ([[_selectItem groupName ] isEqualToString:@"Artsmesh"]) {
+            _selectItem = @"";
+        }
+        
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        if ([mesher.mySelf.groupName isEqualToString:[_selectItem groupName]]) {
+            self.groupCellViewJoinBtn.title = @"Leave";
+        }else{
+            self.groupCellViewJoinBtn.title = @"Join";
+        }
+        
+        [cellView addSubview:self.groupCellView];
     }
-    
-    [cellView addSubview:self.groupCellView];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent

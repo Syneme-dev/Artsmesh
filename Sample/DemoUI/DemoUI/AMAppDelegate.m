@@ -25,6 +25,9 @@
 
 static NSMutableDictionary *allPlugins = nil;
 
+@interface AMAppDelegate() <AMPluginAppDelegate>
+@end
+
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {

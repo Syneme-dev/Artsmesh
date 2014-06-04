@@ -9,14 +9,10 @@
 extern NSString* const AM_USERGROUPS_CHANGED;
 extern NSString* const AM_MESHER_ONLINE;
 
-@protocol  AMHeartBeatDelegate;
-@protocol AMUserRequestDelegate;
-
 @class AMUser;
 @class AMGroup;
 @class AMUserPortMap;
 @class AMSystemConfig;
-
 
 @protocol AMMesherDelegate <NSObject>
 -(void)onUserGroupsChange:(NSArray*)groups;
@@ -24,7 +20,7 @@ extern NSString* const AM_MESHER_ONLINE;
 @end
 
 
-@interface AMMesher: NSObject<AMHeartBeatDelegate, AMUserRequestDelegate>
+@interface AMMesher: NSObject
 
 @property (readonly) AMUser* mySelf;
 @property (readonly) NSString* localLeaderName;

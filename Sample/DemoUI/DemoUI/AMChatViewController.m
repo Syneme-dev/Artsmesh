@@ -53,6 +53,8 @@
     _myInternalPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     
     _socket = [[AMHolePunchingSocket alloc] initWithServer: addr serverPort:port clientPort: _myInternalPort];
+    _socket.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
+    
     [_socket initSocket];
     _socket.delegate = self;
 }

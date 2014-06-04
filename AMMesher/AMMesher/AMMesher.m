@@ -19,7 +19,8 @@
  NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
  NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
 
-@interface AMMesher()
+
+@interface AMMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
 
 @property AMUser* mySelf;
 @property NSString* localLeaderName;
@@ -107,6 +108,7 @@
     _systemConfig.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     _systemConfig.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     _systemConfig.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
+    _systemConfig.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
 }
 
 -(void)initUserGroups
@@ -488,7 +490,6 @@
                 }
                 
                 [self startLocalServer];
-                sleep(1);
                 [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;

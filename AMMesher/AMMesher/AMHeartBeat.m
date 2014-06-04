@@ -26,6 +26,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
     int _family;
     NSData *_serverAddress;
     NSCondition *_condition;
+    NSData *_lastHeartBeatData;
 }
 
 - (instancetype)init
@@ -63,8 +64,14 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
 
 - (void)cancel
 {
+    [self cancelWithData:nil];
+}
+
+- (void)cancelWithData:(NSData *)data
+{
     [_condition lock];
     if (!self.isCancelled) {
+        _lastHeartBeatData = data;
         [super cancel];
         [_condition wait];
     }
@@ -73,7 +80,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
 
 - (void)main
 {
-    NSTimeInterval sleepTime = 0;
+    NSTimeInterval sleepTime = self.initialDelay;
     while (!self.isCancelled) {
         @autoreleasepool {
             if (sleepTime > 0)
@@ -141,6 +148,16 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             sleepTime = self.timeInterval - (now - startTime);
         }
     }
+    
+    if (_lastHeartBeatData) {
+        int sockfd = socket(_family, SOCK_DGRAM, IPPROTO_UDP);
+        if (sockfd != -1) {
+            sendto(sockfd, _lastHeartBeatData.bytes, _lastHeartBeatData.length,
+                   0, _serverAddress.bytes, (socklen_t)_serverAddress.length);
+            close(sockfd);
+        }
+    }
+    
     [_condition signal];
 }
 

@@ -22,6 +22,7 @@ enum {
 
 @interface AMHeartBeat : NSThread
 
+@property(nonatomic) NSTimeInterval initialDelay;
 @property(nonatomic) NSTimeInterval timeInterval;
 @property(nonatomic) NSTimeInterval receiveTimeout;
 @property(nonatomic, weak) id<AMHeartBeatDelegate> delegate;
@@ -30,6 +31,7 @@ enum {
 - (instancetype)initWithHost:(NSString *)host
                         port:(NSString *)port
                         ipv6:(BOOL)useIpv6;
+- (void)cancelWithData:(NSData *)data;
 
 @end
 

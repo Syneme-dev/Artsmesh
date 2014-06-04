@@ -13,6 +13,8 @@
 #import "AMMesher/AMGroup.h"
 #import "AMTaskLauncher/AMShellTask.h"
 
+#define UI_Color_b7b7b7  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]
+
 @interface AMPingViewController ()
 {
     AMShellTask *_task;
@@ -37,7 +39,6 @@
 
 - (void)awakeFromNib
 {
-    self.outputTextView.textColor = [NSColor whiteColor];
     [[NSNotificationCenter defaultCenter]
         addObserver:self
         selector:@selector(userGroupsChanged:)
@@ -76,6 +77,8 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
+    if (self.userTable.selectedRow == -1)
+        return;
     AMUser* user = _users[self.userTable.selectedRow];
     NSString* pingIp = ([user.publicIp isEqualToString: @""]) ? user.privateIp: user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
@@ -99,12 +102,12 @@
         NSString *string = [[NSString alloc] initWithData:data
                                                  encoding:NSUTF8StringEncoding];
         NSDictionary *attr = @{
-            NSForegroundColorAttributeName : [NSColor whiteColor]
+            NSForegroundColorAttributeName : UI_Color_b7b7b7
         };
         NSAttributedString *attrString =
             [[NSAttributedString alloc] initWithString:string attributes:attr];
         [output.textStorage appendAttributedString:attrString];
-        output.needsDisplay = YES;
+       // output.needsDisplay = YES;
         
 //        [content appendString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
 //        AMPingViewController *strongSelf = weakSelf;

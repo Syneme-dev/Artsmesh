@@ -19,10 +19,10 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void)awakeFromNib
 {
     [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
-    [super drawRect:dirtyRect];
 }
+
 
 @end

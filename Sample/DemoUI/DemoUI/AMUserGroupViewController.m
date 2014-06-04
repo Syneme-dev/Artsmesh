@@ -45,8 +45,11 @@
     
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
-    [self.outlineView setRowHeight:30.0];
+    [self.outlineView setRowHeight:22.0];
+    [self.outlineView setTarget:self];
+    [self.outlineView setDoubleAction:@selector(doubleClickOutlineView:)];
 }
+
 
 -(void)userGroupsChanged:(NSNotification*) notification
 {
@@ -57,13 +60,9 @@
 }
 
 
-- (IBAction)joinGroup:(id)sender
+- (IBAction)quitGroup:(id)sender
 {
-    if ([[sender title] isEqualToString:@"Join"]) {
-         [[AMMesher sharedAMMesher] joinGroup:[_selectItem groupName]];
-    }else{
         [[AMMesher sharedAMMesher] backToArtsmesh];
-    }
 }
 
 - (IBAction)createGroup:(id)sender
@@ -82,6 +81,19 @@
     if (createName != nil && ![createName isEqualToString:@""])
     {
         [[AMMesher sharedAMMesher] joinGroup:createName];
+    }
+}
+
+
+-(IBAction)doubleClickOutlineView:(id)sender{
+    if([sender isKindOfClass:[NSOutlineView class]]){
+        NSOutlineView* ov = (NSOutlineView*)sender;
+        NSInteger selected = [ov selectedRow];
+        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        id item = selectedCellView.objectValue;
+        if ([item isKindOfClass:[AMGroup class]]) {
+            [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
+        }
     }
 }
 
@@ -146,7 +158,7 @@
          NSRect rect = [cellView bounds];
         NSTrackingArea* trackArea = [[NSTrackingArea alloc]
                                      initWithRect:rect
-                                     options:(NSTrackingMouseEnteredAndExited  |NSTrackingActiveInKeyWindow )
+                                     options:(NSTrackingMouseEnteredAndExited  | NSTrackingMouseMoved|NSTrackingActiveInKeyWindow )
                                      owner:self
                                      userInfo:userInfo];
         [cellView addTrackingArea:trackArea];
@@ -169,6 +181,7 @@
     return cellView;
 }
 
+
 #pragma mark-
 #pragma TableViewCell Tracking Area
 - (void)mouseEntered:(NSEvent *)theEvent
@@ -178,26 +191,19 @@
     _selectItem = cellView.objectValue;
     
     if ([_selectItem isKindOfClass:[AMGroup class]]) {
-        if ([[_selectItem groupName ] isEqualToString:@"Artsmesh"]) {
-            _selectItem = @"";
-        }
-        
-        AMMesher* mesher = [AMMesher sharedAMMesher];
-        if ([mesher.mySelf.groupName isEqualToString:[_selectItem groupName]]) {
-            self.groupCellViewJoinBtn.title = @"Leave";
-        }else{
-            self.groupCellViewJoinBtn.title = @"Join";
-        }
-        
         [cellView addSubview:self.groupCellView];
+        NSRect superRect = [cellView bounds];
+        NSRect subRect = self.groupCellView.frame;
+        int origX = superRect.size.width - subRect.size.width;
+        subRect.origin = NSMakePoint(origX, 0);
+        
+        [self.groupCellView setFrame:subRect];
     }
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
     [self.groupCellView removeFromSuperview];
-    
-    //cellView.textField.stringValue = @"Mouse Exited!";
 }
 
 

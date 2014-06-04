@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
+                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
                                 <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -137,25 +137,53 @@
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>
-        <customView id="R8J-WH-Y9f">
-            <rect key="frame" x="0.0" y="0.0" width="173" height="30"/>
+        <customView identifier="leaveGroup" id="R8J-WH-Y9f">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="20"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heI-OY-PRa">
-                    <rect key="frame" x="116" y="4" width="52" height="23"/>
+                    <rect key="frame" x="125" y="0.0" width="25" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" title="Join" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4ly-Px-BXj">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_exit" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="4ly-Px-BXj">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="joinGroup:" target="-2" id="8QE-sn-JXL"/>
+                        <action selector="quitGroup:" target="-2" id="Tcs-76-z84"/>
                     </connections>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-vc-Sfv">
+                    <rect key="frame" x="100" y="0.0" width="25" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_broadcast" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="e2W-ct-DVr">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKd-a1-ri5">
+                    <rect key="frame" x="50" y="0.0" width="25" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_lock" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="8JZ-fW-Ayx">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klP-Ww-HJE">
+                    <rect key="frame" x="75" y="0.0" width="25" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_chat" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="mOK-HE-tui">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
                 </button>
             </subviews>
         </customView>
     </objects>
     <resources>
         <image name="CreateGroup" width="30" height="30"/>
+        <image name="group_broadcast" width="10" height="10"/>
+        <image name="group_chat" width="10" height="10"/>
+        <image name="group_exit" width="10" height="10"/>
+        <image name="group_lock" width="10" height="10"/>
     </resources>
 </document>

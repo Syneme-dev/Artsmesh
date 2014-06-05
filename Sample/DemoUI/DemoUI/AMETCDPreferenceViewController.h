@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+
 @interface AMETCDPreferenceViewController : NSViewController
 @property (retain) IBOutlet NSTabView *tabs;
+
+@property  IBOutlet NSView *progressView;
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;
 @property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;

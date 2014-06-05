@@ -29,6 +29,7 @@
 		AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAC30C819382E71000FFC5F /* AMTextView.m */; };
 		AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = AFB34F6819065C1400092E33 /* AMButtonHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB34F6919065C1400092E33 /* AMButtonHandler.m */; };
+		AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AFD344C6193EF82C0057F222 /* AMUIConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */ = {isa = PBXBuildFile; fileRef = CE88315F192C44B800DA17CE /* AMBoxItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883160192C44B800DA17CE /* AMBoxItem.m */; };
 		CE883165192C44B900DA17CE /* AMBox.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883161192C44B800DA17CE /* AMBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +78,7 @@
 		AFAC30C819382E71000FFC5F /* AMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextView.m; sourceTree = "<group>"; };
 		AFB34F6819065C1400092E33 /* AMButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMButtonHandler.h; sourceTree = "<group>"; };
 		AFB34F6919065C1400092E33 /* AMButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMButtonHandler.m; sourceTree = "<group>"; };
+		AFD344C6193EF82C0057F222 /* AMUIConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUIConst.h; sourceTree = "<group>"; };
 		CE88315F192C44B800DA17CE /* AMBoxItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBoxItem.h; sourceTree = "<group>"; };
 		CE883160192C44B800DA17CE /* AMBoxItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBoxItem.m; sourceTree = "<group>"; };
 		CE883161192C44B800DA17CE /* AMBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBox.h; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				AFD344C6193EF82C0057F222 /* AMUIConst.h */,
 				AFAC30C719382E71000FFC5F /* AMTextView.h */,
 				AFAC30C819382E71000FFC5F /* AMTextView.m */,
 				CE883167192C52EA00DA17CE /* AMPanelView.h */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
+				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,

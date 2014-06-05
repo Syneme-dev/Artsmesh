@@ -12,6 +12,11 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMStatusNetModule/AMStatusNetModule.h"
 
+
+#import "AMPopupMenuItem.h"
+
+
+
 @interface AMETCDPreferenceViewController ()
 
 @end
@@ -42,6 +47,11 @@
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_b7b7b7];
     
     [self resetPopupItems];
+    [self.myPrivateIpPopup setPullsDown:YES];
+    
+
+
+
 }
 
 
@@ -116,16 +126,27 @@
                                 [NSFont systemFontOfSize: [NSFont systemFontSize]],
                                 NSFontAttributeName, nil];
     
+     NSMenu *newMenu = [[NSMenu alloc] init];
+    
+    
     for (int i = 0; i < [itemArray count]; i++)
     {
         NSMenuItem *item = [itemArray objectAtIndex:i];
-        
         NSAttributedString *as = [[NSAttributedString alloc]
                                   initWithString:[item title]
                                   attributes:attributes];
-        
         [item setAttributedTitle:as];
+        
+        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title action:@selector(menuItem1Action:) keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
+        popMenuItem.popupButton=self.myPrivateIpPopup;
+        [popMenuItem setEnabled:YES];
+        [popMenuItem setTarget:self];
+        [newMenu addItem:popMenuItem];
+        
     }
+   
+    [self.myPrivateIpPopup setMenu:newMenu];
+    
 
 }
 

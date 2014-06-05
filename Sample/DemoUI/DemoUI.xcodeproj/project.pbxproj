@@ -43,6 +43,8 @@
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
 		AF01080B1929DA84001415CC /* info.css in Resources */ = {isa = PBXBuildFile; fileRef = AF01080A1929DA84001415CC /* info.css */; };
+		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
+		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
 		AF74054618F7D93200B3C1DF /* Attachement.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052018F7D93100B3C1DF /* Attachement.png */; };
 		AF74054718F7D93200B3C1DF /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052118F7D93100B3C1DF /* Edit.png */; };
 		AF74054818F7D93200B3C1DF /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052218F7D93100B3C1DF /* Favorite.png */; };
@@ -67,6 +69,8 @@
 		AF82E35C190CAB630083487C /* KievitSlabOT-Light.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E346190CA81A0083487C /* KievitSlabOT-Light.otf */; };
 		AF82E35D190CAB630083487C /* KievitSlabOT-Thin.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */; };
 		AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E348190CA81A0083487C /* KievitSlabOT.otf */; };
+		AF86600919401C83008DB7CA /* AMTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86600819401C83008DB7CA /* AMTestView.xib */; };
+		AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86600B19401F4D008DB7CA /* AMTestViewController.m */; };
 		AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */; };
 		AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B418F6848D003BB9D1 /* profile.png */; };
 		AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
@@ -190,6 +194,9 @@
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		AF01080A1929DA84001415CC /* info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = info.css; path = Resource/info.css; sourceTree = "<group>"; };
+		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
+		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
+		AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMouseOverButtonView.m; sourceTree = "<group>"; };
 		AF74052018F7D93100B3C1DF /* Attachement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Attachement.png; path = Resource/Attachement.png; sourceTree = "<group>"; };
 		AF74052118F7D93100B3C1DF /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Edit.png; path = Resource/Edit.png; sourceTree = "<group>"; };
 		AF74052218F7D93100B3C1DF /* Favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Favorite.png; path = Resource/Favorite.png; sourceTree = "<group>"; };
@@ -214,6 +221,9 @@
 		AF82E346190CA81A0083487C /* KievitSlabOT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KievitSlabOT-Light.otf"; sourceTree = "<group>"; };
 		AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KievitSlabOT-Thin.otf"; sourceTree = "<group>"; };
 		AF82E348190CA81A0083487C /* KievitSlabOT.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KievitSlabOT.otf; sourceTree = "<group>"; };
+		AF86600819401C83008DB7CA /* AMTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTestView.xib; sourceTree = "<group>"; };
+		AF86600A19401F4D008DB7CA /* AMTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTestViewController.h; sourceTree = "<group>"; };
+		AF86600B19401F4D008DB7CA /* AMTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTestViewController.m; sourceTree = "<group>"; };
 		AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OnlineDot.png; path = Resource/OnlineDot.png; sourceTree = "<group>"; };
 		AF8CE2B418F6848D003BB9D1 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = Resource/profile.png; sourceTree = "<group>"; };
 		AF9205411910B42D0051BE63 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
@@ -285,6 +295,8 @@
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
 				26E1E6A019023496000BF14C /* AMChatView.xib */,
 				D4ACE85D19175D09004A907D /* AMPingView.xib */,
+				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
+				AF86600819401C83008DB7CA /* AMTestView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -308,6 +320,8 @@
 				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
 				D4ACE85F19175DC8004A907D /* AMPingViewController.h */,
 				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
+				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
+				AF86600B19401F4D008DB7CA /* AMTestViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -336,6 +350,8 @@
 				26B4D071191A256200F55CD3 /* AMTextFieldView.m */,
 				269D3430191B1EC40010B540 /* AMChatTableCellView.h */,
 				269D3431191B1EC40010B540 /* AMChatTableCellView.m */,
+				AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */,
+				AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -591,8 +607,10 @@
 				AF74054818F7D93200B3C1DF /* Favorite.png in Resources */,
 				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
+				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
+				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AFC77F901900CBFB003543CF /* web.css in Resources */,
 				AF74056918F7D93200B3C1DF /* Trash.png in Resources */,
@@ -647,6 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
+				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
@@ -654,6 +673,7 @@
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D4ACE8641917627C004A907D /* AMPingUserTableCellView.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,

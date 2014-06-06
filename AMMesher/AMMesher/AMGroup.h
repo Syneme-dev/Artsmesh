@@ -1,23 +1,28 @@
 //
 //  AMGroup.h
-//  AMMesher
 //
-//  Created by 王 为 on 3/27/14.
-//  Copyright (c) 2014 AM. All rights reserved.
+//  Created by lattesir on 5/27/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "AMUserGroupNode.h"
+#import "AMUser.h"
 
-@class AMETCDResult;
-@interface AMGroup : AMUserGroupNode
+@interface AMGroup : NSObject
 
-@property NSString* uniqueName;
-@property NSString* description;
+@property(nonatomic, readonly) NSString *groupName;
+@property(nonatomic, readonly) NSArray *users;
 
--(id)init;
+// designated initializer
+- (instancetype)initWithGroupName:(NSString *)groupName;
+- (void)addUser:(AMUser *)user;
 
-+(NSArray*)parseFullGroupName:(NSString*)fullName;
 
+// collection accessor
+- (NSUInteger)countOfUsers;
+- (id)objectInUsersAtIndex:(NSUInteger)index;
+- (void)insertObject:(AMUser *)user inUsersAtIndex:(NSUInteger)index;
+- (void)removeObjectFromUsersAtIndex:(NSUInteger)index;
+- (void)replaceObjectInUsersAtIndex:(NSUInteger)index withObject:(id)user;
 
 @end

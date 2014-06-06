@@ -5,130 +5,135 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-#import "AMETCDOperationHeader.h"
-#import "AMETCDDataSourceHeader.h"
 #import "AMMesher.h"
-#import "AMLeaderElecter.h"
-#import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMETCDApi/AMETCD.h"
-#import "AMGroup.h"
 #import "AMUser.h"
-#import "AMCommunicator.h"
+#import "AMGroup.h"
+#import "AMLeaderElecter.h"
+#import "AMTaskLauncher/AMShellTask.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMSystemConfig.h"
+#import "AMUserRequest.h"
+#import "AMGroupsBuilder.h"
+#import "AMHeartBeat.h"
 
+ NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
+ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
+
+
+@interface AMMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
+
+@property AMUser* mySelf;
+@property NSString* localLeaderName;
+@property BOOL isLocalLeader;
+@property BOOL isOnline;
+@property NSArray* userGroups;
+@property int userGroupsVersion;
+
+@end
 
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
-    AMETCDDataSource* _dataSource;
-    AMCommunicator* _communicator;
-    AMETCDDataDestination* _usergroupDest;
-    GCDAsyncUdpSocket* _publicIpEchoSocket;
-    NSTimer* _userTTL;
+    AMShellTask *_mesherServerTask;
+    AMHeartBeat* _heartbeatThread;
+    NSOperationQueue* _httpRequestQueue;
+    AMSystemConfig* _systemConfig;
+    int _heartbeatFailureCount;
     
-    NSString* _etcdServerPort;
-    NSString* _etcdClientPort;
-    NSString* _etcdHeartbeatTimeout;
-    NSString* _etcdElectionTimeout;
-    NSString* _etcdUserTTL;
-    NSString* _artsmeshIOIp;
-    NSString* _artsmeshIOPort;
-    NSString* _machineName;
-    NSString* _maxNode;
+    NSString* _md5OnServer;
+
+}
+
+- (instancetype)init
+{
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:@"unsupported initializer"
+                                 userInfo:nil];
 }
 
 +(id)sharedAMMesher
 {
     static AMMesher* sharedMesher = nil;
-    
-    @synchronized(self)
-    {
-        if (sharedMesher == nil)
-        {
-            sharedMesher = [[self alloc] init];
+    @synchronized(self){
+        if (sharedMesher == nil){
+            sharedMesher = [[self alloc] initMesher];
         }
     }
-    
     return sharedMesher;
 }
 
-+(NSOperationQueue*)sharedEtcdOperQueue
+-(id)initMesher
 {
-    static NSOperationQueue* etcdOperQueue = nil;
-    
-    @synchronized(self)
-    {
-        if (!etcdOperQueue)
-        {
-            etcdOperQueue = [[NSOperationQueue alloc] init];
-            etcdOperQueue.name = @"ETCD Operation Queue";
-            //etcdOperQueue.maxConcurrentOperationCount = 1;
-        }
-    }
-    
-    return etcdOperQueue;
-}
-
--(id)init
-{
-    if (self = [super init])
-    {
-        self.isLeader = NO;
-        self.isOnline = NO;
-        self.etcdState = 0;
-        self.mySelf = [[AMUser alloc] init];
+    if (self = [super init]){
+        
+        [self loadUserProfile];
+        [self loadSystemConfig];
+        [self initUserGroups];
+        [self initHttpReuestQueue];
     }
     
     return self;
 }
 
+-(void)loadUserProfile
+{
+    //TODO: load preference
+    @synchronized(self){
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        self.mySelf = [[AMUser alloc] init];
+        self.mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
+        self.mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
+        self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
+        self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
+        self.mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
+        
+        AMUserPortMap* pm = [[AMUserPortMap alloc] init];
+        pm.portName = @"ChatPort";
+        pm.internalPort = [defaults stringForKey:Preference_Key_General_ChatPort];;
+        pm.natMapPort   = pm.internalPort;
+        [self.mySelf.portMaps addObject:pm];
+    }
+}
 
--(void)getUserDefaults
+-(void)loadSystemConfig
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    _etcdServerPort = [defaults stringForKey:Preference_Key_ETCD_ServerPort];
-    _etcdClientPort = [defaults stringForKey:Preference_key_ETCD_ClientPort];
-    _etcdHeartbeatTimeout = [defaults stringForKey:Preference_Key_ETCD_HeartbeatTimeout];
-    _etcdElectionTimeout = [defaults stringForKey:Preference_Key_ETCD_ElectionTimeout];
-    _etcdUserTTL = [defaults stringForKey:Preference_Key_ETCD_UserTTLTimeout];
-    _artsmeshIOIp = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOIP];
-    _artsmeshIOPort = [defaults stringForKey:Preference_Key_ETCD_ArtsmeshIOPort];
-    _machineName = [defaults stringForKey:Preference_Key_General_MachineName];
-    
-    self.mySelf.groupName = @"Artsmesh";
-    self.mySelf.domain =[defaults stringForKey:Preference_Key_User_Domain];
-    self.mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
-    self.mySelf.uniqueName = [NSString stringWithFormat:@"%@@%@.%@",
-                              [defaults stringForKey:Preference_Key_User_NickName],
-                              self.mySelf.domain,
-                              self.mySelf.location];
-    self.mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
-    self.mySelf.privateIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
-    self.mySelf.controlPort = [defaults stringForKey:Preference_Key_General_ControlPort];
-    self.mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-
+    _systemConfig = [[AMSystemConfig alloc] init];
+    _systemConfig.myServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
+    _systemConfig.heartbeatInterval = @"2";
+    _systemConfig.myServerUserTimeout = @"30";
+    _systemConfig.maxHeartbeatFailure = @"5";
+    _systemConfig.globalServerPort = [defaults stringForKey:Preference_Key_General_GlobalServerPort];
+    _systemConfig.globalServerAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
+    _systemConfig.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    _systemConfig.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
+    _systemConfig.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
+    _systemConfig.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
 }
 
--(NSArray*) myGroupUsers
+-(void)initUserGroups
 {
-    NSArray *users = [_usergroupDest getGroupUsers:self.mySelf.groupName];
-    return users ? users : @[];
+    self.userGroups = [[NSMutableArray alloc] init];
+    self.userGroupsVersion = 0;
 }
 
--(NSArray*)allGroupUsers
-{
-    return _usergroupDest.userGroups;
+-(void)initHttpReuestQueue{
+    _httpRequestQueue = [[NSOperationQueue alloc] init];
+    _httpRequestQueue.name = @"Http Operation Queue";
+    _httpRequestQueue.maxConcurrentOperationCount = 1;
 }
 
--(void)startLoalMesher
+
+-(void)startMesher
 {
-    [self getUserDefaults];
+    _heartbeatFailureCount = 0;
+    _md5OnServer = @"";
     
-    _elector = [[AMLeaderElecter alloc] init];
-    _elector.mesherPort = [_etcdServerPort intValue];
-    _communicator = [[AMCommunicator alloc] initWithPort:self.mySelf.controlPort];
+    if(_elector == nil){
+        if (_systemConfig) {
+            _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
+        }
+    }
     
     [_elector kickoffElectProcess];
     [_elector addObserver:self forKeyPath:@"state"
@@ -136,342 +141,320 @@
                   context:nil];
 }
 
--(void)stopLocalMesher
+-(void)stopMesher
 {
-    [[AMMesher sharedEtcdOperQueue] cancelAllOperations ];
-    
-    @synchronized(self)
-    {
-        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
-                                              initWithParameter:_dataSource.ip
-                                              port:_dataSource.port
-                                              fullUserName:self.mySelf.uniqueName];
-        
-        [delOper start];
-
-    }
-   
-    
-    AMKillETCDOperation* etcdKiller = [[AMKillETCDOperation alloc] init];
-    [etcdKiller start];
-    
-    self.etcdState = 0;
-    
-    [_elector stopElect];
-    [_elector removeObserver:self forKeyPath:@"state"];
-}
-
--(void)everyoneGoOnline
-{
-    @synchronized(_usergroupDest)
-    {
-        for (AMGroup* group in _usergroupDest.userGroups)
-        {
-            if ([group.uniqueName isEqualToString:self.mySelf.groupName])
-            {
-                for (AMUser* user in group.children)
-                {
-                    if (user.privateIp != nil && user.privateIp != nil)
-                    {
-                        [_communicator goOnlineCommand:user.privateIp port:user.controlPort];
-                    }
-                }
-            }
-        }
+    if (_httpRequestQueue) {
+        [_httpRequestQueue  cancelAllOperations];
+        [_httpRequestQueue waitUntilAllOperationsAreFinished];
     }
     
-    [self goOnline];
+    if (_heartbeatThread)
+    {
+        [_heartbeatThread cancel];
+    }
+    
+    if (_mesherServerTask)
+    {
+        [_mesherServerTask cancel];
+        [self killAllAMServer];
+    }
+    
+    if (_elector)
+    {
+        [_elector removeObserver:self forKeyPath:@"state"];
+        [_elector stopElect];
+    }
+    
+    _heartbeatThread = nil;
+    _elector = nil;
+    _mesherServerTask = nil;
 }
 
--(void)everyoneJoinGroup:(NSString *)groupName
+-(void)setMySelfPropties:(NSDictionary*)props
 {
-    @synchronized(_usergroupDest)
-    {
-        for (AMGroup* group in _usergroupDest.userGroups)
-        {
-            if ([group.uniqueName isEqualToString:self.mySelf.groupName])
-            {
-                for (AMUser* user in group.children)
-                {
-                    if (user.privateIp != nil && user.controlPort != nil)
-                    {
-                        [_communicator joinGroupCommand:groupName
-                                                     ip:user.privateIp
-                                                   port:user.controlPort];
-                    }
-                }
-            }
+    @synchronized(self){
+        for (NSString* key in props) {
+            id value = [props valueForKey:key];
+            [self.mySelf setValue:value forKey:key];
         }
     }
 }
-
--(void)goOnline
-{
-    if(self.etcdState != 1 || self.isOnline == YES)
-    {
-        return;
-    }
-
-    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
-    
-    @synchronized(self)
-    {
-        [_usergroupDest clearUserGroup];
-        
-        [_dataSource stopWatch];
-        _dataSource.ip   = _artsmeshIOIp;
-        _dataSource.port = _artsmeshIOPort;
-        [self addSelfToDataSource];
-        
-        [self willChangeValueForKey:@"isOnline"];
-        self.isOnline = YES;
-        [self didChangeValueForKey:@"isOnline"];
-    }
-    
-    [self getPublicIp];
-}
-
--(void)getPublicIp
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
-    NSString* udpEchoServerPort = [defaults stringForKey:Preference_Key_General_ChatStunServerPort];
-    
-    _publicIpEchoSocket = [[GCDAsyncUdpSocket alloc]
-                   initWithDelegate:self
-                   delegateQueue:dispatch_get_main_queue()];
-    
-    NSError *error = nil;
-    if (![_publicIpEchoSocket bindToPort:0 error:&error])
-    {
-        return;
-    }
-    if (![_publicIpEchoSocket beginReceiving:&error])
-    {
-        [_publicIpEchoSocket close];
-        return;
-    }
-    
-    NSData* data = [@"getip" dataUsingEncoding:NSUTF8StringEncoding];
-    [_publicIpEchoSocket sendData:data
-                           toHost:udpEchoServerIp
-                             port:[udpEchoServerPort intValue]
-                      withTimeout:-1
-                              tag:0];
-}
-
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock
-   didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address
-withFilterContext:(id)filterContext
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* udpEchoServerIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
-
-    NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
-    if (![fromHost isEqualToString:udpEchoServerIp])
-    {
-        return;
-    }
-    
-	NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (msg == nil || [msg isEqualToString:@""])
-    {
-        return;
-    }
-    
-    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
-    if ([ipAndPort count] < 2)
-    {
-        return;
-    }
-    
-    NSString* myPubIp = [ipAndPort objectAtIndex:0];
-    if (self.mySelf.publicIp == nil || [self.mySelf.publicIp isEqualToString:@""])
-    {
-        NSDictionary* props =  [NSDictionary dictionaryWithObjectsAndKeys:
-                                myPubIp, @"publicIp",
-                                nil];
-        [self updateMySelfProperties:props];
-        [_publicIpEchoSocket close];
-    }
-}
-
-
--(void)goOffline
-{
-    if(self.etcdState != 1 || self.isOnline == NO)
-    {
-        return;
-    }
-    
-    [[AMMesher sharedEtcdOperQueue] cancelAllOperations];
-    
-    @synchronized(self)
-    {
-        AMETCDDeleteUserOperation* delOper = [[AMETCDDeleteUserOperation alloc]
-                                              initWithParameter:_dataSource.ip
-                                              port:_dataSource.port
-                                              fullUserName:self.mySelf.uniqueName];
-        
-        [delOper start];
-
-        [_usergroupDest clearUserGroup];
-        
-        [_dataSource stopWatch];
-        _dataSource.ip   = self.mySelf.privateIp;
-        _dataSource.port = _etcdClientPort;
-        [self addSelfToDataSource];
-        
-        self.isOnline = NO;
-    }
-}
-
 
 -(void)joinGroup:(NSString*)groupName
 {
-    if([groupName isEqualToString:self.mySelf.groupName])
-    {
-        return;
+    @synchronized(self){
+        [self.mySelf setValue:groupName forKey:@"groupName"];
+    }
+}
+
+-(AMGroup*)myGroup
+{
+    AMGroup* myGroup;
+    NSString* myGroupName = self.mySelf.groupName;
+    NSArray* groups = self.userGroups;
+
+    for(AMGroup* g in groups){
+        if ([g.groupName isEqualToString:myGroupName]) {
+            myGroup = g;
+            break;
+        }
     }
     
-    NSString* groupNameKey = @"groupName";
-    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
-    [userPropties setObject:groupName forKey:groupNameKey];
-    
-    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
-                                                 initWithParameter:_dataSource.ip
-                                                 port:_dataSource.port
-                                                 fullUserName:self.mySelf.uniqueName
-                                                 userProperties:userPropties];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
-    self.mySelf.groupName = groupName;
+    return myGroup;
 }
 
 -(void)backToArtsmesh
 {
-    NSString* groupNameKey = @"groupName";
-    NSMutableDictionary* userPropties = [[NSMutableDictionary alloc] init];
-    [userPropties setObject:@"Artsmesh" forKey:groupNameKey];
-    
-    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
-                                                 initWithParameter:_dataSource.ip
-                                                 port: _dataSource.port
-                                                 fullUserName:self.mySelf.uniqueName
-                                                 userProperties:userPropties];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
-    self.mySelf.groupName= @"Artsmesh";
-
+    [self joinGroup:@""];
 }
 
--(void)updateMySelfProperties:(NSDictionary*) properties
+
+-(void)goOnline
 {
-    if (self.etcdState != 1)
-    {
+    if (self.isOnline == YES) {
         return;
     }
-
-    for(NSString* key in properties)
-    {
-        id value = [properties valueForKey:key];
-        [self.mySelf setValue:value forKey:key];
+    
+    [self stopMesher];
+    
+    @synchronized(self){
+        _md5OnServer = @"";
     }
     
-    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
-                                                 initWithParameter:_dataSource.ip
-                                                 port: _dataSource.port
-                                                 fullUserName:self.mySelf.uniqueName
-                                                 userProperties:properties];
+     self.isOnline = YES;
     
-     [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
+    [self startHearBeat:_systemConfig.globalServerAddr serverPort:_systemConfig.globalServerPort];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        
+        NSDictionary* params = @{@"IsOnline":@"YES"};
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE object:self userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
 }
 
--(void)launchETCD
+-(void)goOffline
 {
-    NSString* peers =nil;
-    if (!self.isLeader)
-    {
-        peers = [NSString stringWithFormat:@"%@:%d",  _elector.mesherIp, _elector.mesherPort];
+    [self stopMesher];
+    self.isOnline = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        
+        NSDictionary* params = @{@"IsOnline":@"NO"};
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE object:self userInfo:params];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
+    [self startMesher];
+}
+
+
+-(void)startLocalServer
+{
+    if (_mesherServerTask)
+        [_mesherServerTask cancel];
+    
+    [self killAllAMServer];
+    
+    
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"amserver"];
+    NSString *command = [NSString stringWithFormat:
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >amserver.log 2>&1",
+                         lanchPath,
+                         _systemConfig.myServerPort,
+                         _systemConfig.myServerPort,
+                         _systemConfig.myServerUserTimeout];
+    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
+    NSLog(@"command is %@", command);
+    [_mesherServerTask launch];
+
+}
+
+-(void)killAllAMServer
+{
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"amserver", nil]];
+    
+    //sleep(1);
+}
+
+-(void)startHearBeat:(NSString*)addr serverPort:(NSString*)port
+{
+    if (_heartbeatThread) {
+        [_heartbeatThread cancel];
+    }
+    
+    _heartbeatFailureCount = 0;
+    BOOL useIpv6 = NO;
+    if (_systemConfig) {
+        useIpv6 = _systemConfig.useIpv6;
     }
 
-    AMETCDLaunchOperation* launchOper = [[AMETCDLaunchOperation alloc]
-                                         initWithParameter:self.mySelf.privateIp
-                                         clientPort:_etcdClientPort
-                                         serverPort:_etcdServerPort
-                                         peers:peers
-                                         heartbeatInterval:_etcdHeartbeatTimeout
-                                         electionTimeout:_etcdElectionTimeout];
-    launchOper.delegate = self;
-    
-    AMETCDInitOperation* etcdInitOper = [[AMETCDInitOperation alloc]
-                                         initWithEtcdServer:self.mySelf.privateIp
-                                         port:_etcdClientPort];
-    etcdInitOper.delegate = self;
-    [etcdInitOper addDependency:launchOper];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:launchOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:etcdInitOper];
-
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: addr port:port ipv6:useIpv6];
+    _heartbeatThread.delegate = self;
+    _heartbeatThread.timeInterval = 2;
+    _heartbeatThread.receiveTimeout = 5;
+    [_heartbeatThread start];
 }
 
--(void)addSelfToDataSource
+-(void)setPortMaps:(AMUserPortMap*)portMap
 {
-    AMETCDAddUserOperation* addUserOper = [[AMETCDAddUserOperation alloc]
-                                           initWithParameter: _dataSource.ip
-                                           port:_dataSource.port
-                                           fullUserName:self.mySelf.uniqueName
-                                           fullGroupName:self.mySelf.groupName
-                                           ttl:[_etcdUserTTL intValue]];
-    
-    NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
-    [properties setObject: self.mySelf.privateIp forKey:@"privateIp"];
-    [properties setObject: self.mySelf.controlPort forKey:@"controlPort"];
-    [properties setObject: self.mySelf.chatPort forKey:@"chatPort"];
-    [properties setObject: self.mySelf.description forKey:@"description"];
-    [properties setObject: self.mySelf.location forKey:@"location"];
-    [properties setObject: self.mySelf.domain forKey:@"domain"];
-    
-    AMETCDUpdateUserOperation* updateUserOper = [[AMETCDUpdateUserOperation alloc]
-                                                 initWithParameter:_dataSource.ip
-                                                 port:_dataSource.port
-                                                 fullUserName:self.mySelf.uniqueName
-                                                 userProperties:properties];
-    
-    AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                           initWithParameter:self.mySelf.privateIp
-                                           port:_etcdClientPort
-                                           fullUserName:self.mySelf.uniqueName
-                                           ttl:[_etcdUserTTL intValue]];
-    
-    addUserOper.delegate = self;
-    updateUserOper.delegate = self;
-    userTTLOper.delegate = self;
-    
-    [updateUserOper addDependency:addUserOper];
-    [userTTLOper addDependency:updateUserOper];
-    
-    [[AMMesher sharedEtcdOperQueue] addOperation:addUserOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:updateUserOper];
-    [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+    @synchronized(self){
+        BOOL bFind = NO;
+        for (AMUserPortMap* pm in self.mySelf.portMaps) {
+            if([pm.portName isEqualToString:portMap.portName]){
+                pm.internalPort = portMap.internalPort;
+                pm.natMapPort = portMap.natMapPort;
+                bFind = YES;
+                break;
+            }
+        }
+        if (!bFind) {
+            [self.mySelf.portMaps addObject:portMap];
+        }
+    }
 }
 
--(void)refreshMyTTL
+-(AMUserPortMap*)portMapByName:(NSString*)portMapName{
+    @synchronized(self){
+        for (AMUserPortMap* pm in self.mySelf.portMaps) {
+            if([pm.portName isEqualToString:portMapName]){
+                return pm;
+            }
+        }
+        return nil;
+    }
+}
+
+#pragma mark-
+#pragma AMHeartBeatDelegate
+
+- (NSData *)heartBeatData
 {
+    NSData* data ;
+    @synchronized(self){
+        AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
+
+        request.userid = self.mySelf.userid;
+        request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
+        
+        NSString* localMd5 = [self.mySelf md5String];
+        if (![localMd5 isEqualToString:_md5OnServer]) {
+            request.userContent = self.mySelf;
+            request.contentMd5 = localMd5;
+        }
+        data = [request jsonData];
+    }
+    
+    return data;
+}
+
+- (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
+{
+    _heartbeatFailureCount = 0;
+    
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didReceiveData:%@", jsonStr);
+    
+    AMUserUDPResponse* response = [AMUserUDPResponse responseFromJsonData:data];
+    
+    @synchronized(self){
+        _md5OnServer  = response.contentMd5;
+        
+        if ([response.version intValue] !=  self.userGroupsVersion) {
+            NSLog(@"need download userlist");
+            
+            AMUserRequest* req = [[AMUserRequest alloc] init];
+            req.delegate = self;
+            
+            if(_httpRequestQueue.operationCount < 2)
+            {
+                 [_httpRequestQueue  addOperation:req];
+            }
+        }
+    }
+}
+
+- (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
+{
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didSendData:%@", jsonStr);
+}
+
+- (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
+{
+    NSLog(@"hearBeat error:%@", error.description);
+    
+    _heartbeatFailureCount ++;
+    if (_heartbeatFailureCount > [_systemConfig.maxHeartbeatFailure intValue]) {
+        [self.delegate onMesherError:error];
+    }
+}
+
+#pragma mark-
+#pragma AMUserRequestDelegate
+
+- (NSString *)httpServerURL
+{
+    NSString* URLStr;
+    if (self.isOnline) {
+        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _systemConfig.globalServerAddr, _systemConfig.globalServerPort];
+        NSLog(@"%@", URLStr);
+        
+    }else{
+        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
+        NSLog(@"%@", URLStr);
+    }
+    
+    return URLStr;
+}
+
+- (void)userRequestDidCancel
+{
+    
+}
+
+
+- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
+{
+    if (data == nil) {
+        return;
+    }
+    
+    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", dataStr);
+    
+    AMUserRESTResponse* response = [AMUserRESTResponse responseFromJsonData:data];
+    if (response == nil) {
+        return;
+    }
+    
     @synchronized(self)
     {
-        AMETCDUserTTLOperation* userTTLOper = [[AMETCDUserTTLOperation alloc]
-                                               initWithParameter:_dataSource.ip
-                                               port:_dataSource.port
-                                               fullUserName:self.mySelf.uniqueName
-                                               ttl:[_etcdUserTTL intValue]];
+        self.userGroupsVersion = [response.version intValue];
+        AMGroupsBuilder* builder = [[AMGroupsBuilder alloc] init];
         
-        userTTLOper.delegate = self;
+        for (AMUser* user in response.userlist ) {
+            [builder addUser:user];
+        }
         
-        [[AMMesher sharedEtcdOperQueue] addOperation:userTTLOper];
+        [self willChangeValueForKey:@"userGroups"];
+        self.userGroups = builder.groups;
+        [self didChangeValueForKey:@"userGroups"];
+    
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
+}
+
+- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
+{
+    
 }
 
 #pragma mark -
@@ -481,116 +464,59 @@ withFilterContext:(id)filterContext
                          change:(NSDictionary *)change
                         context:(void *)context
 {
-    if ([object isEqualTo:_elector])
-    {
-        if ([keyPath isEqualToString:@"state"])
-        {
+    if ([object isEqualTo:_elector]){
+        if ([keyPath isEqualToString:@"state"]){
+            
             int oldState = [[change objectForKey:@"old"] intValue];
             int newState = [[change objectForKey:@"new"] intValue];
-            
             NSLog(@" old state is %d", oldState);
             NSLog(@" new state is %d", newState);
-            
-            if(newState == 2)//Published
-            {
+
+            if(newState == 2){
+                //I'm the leader
+                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
+                
                 [self willChangeValueForKey:@"isLeader"];
-                self.isLeader = YES;
+                self.isLocalLeader = YES;
                 [self didChangeValueForKey:@"isLeader"];
                 
-                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
+                [self willChangeValueForKey:@"localLeaderName"];
+                self.localLeaderName = _elector.serverName;
+                [self didChangeValueForKey:@"localLeaderName"];
                 
-                if (self.etcdState == 0)
-                {
-                    [self performSelectorOnMainThread:@selector(launchETCD)
-                                           withObject:nil waitUntilDone:NO];
+                @synchronized(self){
+                    self.mySelf.localLeader = self.localLeaderName;
+                    _md5OnServer = @"";
                 }
-            }
-            else if(newState == 4)//Joined
-            {
-                self.isLeader = NO;
-                NSLog(@"Mesher is %@:%d", _elector.mesherHost, _elector.mesherPort);
                 
-                if(self.etcdState == 0)
-                {
-                    [self performSelectorOnMainThread:@selector(launchETCD) withObject:nil waitUntilDone:NO];
+                [self startLocalServer];
+                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
+                
+                self.isLocalLeader = YES;
+                
+            }else if(newState == 4){
+                //Joined
+                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
+                
+                [self willChangeValueForKey:@"isLeader"];
+                self.isLocalLeader = NO;
+                [self didChangeValueForKey:@"isLeader"];
+                
+                [self willChangeValueForKey:@"localLeaderName"];
+                self.localLeaderName = _elector.serverName;
+                [self didChangeValueForKey:@"localLeaderName"];
+                
+                @synchronized(self){
+                    self.mySelf.localLeader = self.localLeaderName;
+                    _md5OnServer = @"";
                 }
+                
+                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
+                self.isLocalLeader = NO;
             }
+        }else{
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
-        else
-        {
-            [super observeValueForKeyPath:keyPath
-                                 ofObject:object
-                                   change:change
-                                  context:context];
-        }
-    }
-    else if([object isEqualTo: _usergroupDest])
-    {
-         if ([keyPath isEqualToString:@"userGroups"])
-         {
-             //forward the KVO message
-             [self willChangeValueForKey:@"myGroupUsers"];
-             [self didChangeValueForKey:@"myGroupUsers"];
-             [self willChangeValueForKey:@"allGroupUsers"];
-             [self didChangeValueForKey:@"allGroupUsers"];
-         }
-    }
-}
-
-
-#pragma mark -
-#pragma mark AMETCDOperationDelegate
--(void)AMETCDOperationDidFinished:(AMETCDOperation *)oper
-{
-    if([oper isKindOfClass:[AMETCDInitOperation class]])
-    {
-        if (oper.isResultOK == NO)
-        {
-            [NSException raise:@"etcd start error" format:nil];
-            return;
-        }
-        
-        [self willChangeValueForKey:@"etcdState"];
-        self.etcdState = 1;
-        [self didChangeValueForKey:@"etcdState"];
-        
-        @synchronized(self)
-        {
-            _dataSource = [[AMETCDDataSource alloc]
-                           init:@"data source"
-                           ip:self.mySelf.privateIp
-                           port:_etcdClientPort];
-            
-            if (_usergroupDest != nil)
-            {
-                [_usergroupDest removeObserver:self forKeyPath:@"userGroups"];
-            }
-            
-            _usergroupDest = [[AMETCDDataDestination alloc] init];
-            [_usergroupDest addObserver:self
-                             forKeyPath:@"userGroups"
-                                options:NSKeyValueObservingOptionNew
-                                context:nil];
-            
-            [_dataSource addDestination:_usergroupDest];
-            [self addSelfToDataSource];
-        }
-    }
-    else if([oper isKindOfClass:[AMETCDUserTTLOperation class]])
-    {
-        _userTTL = [NSTimer scheduledTimerWithTimeInterval:([_etcdUserTTL intValue]/3)
-                                                    target:self
-                                                  selector:@selector(refreshMyTTL)
-                                                  userInfo:nil
-                                                   repeats:NO];
-    }
-    else if([oper isKindOfClass:[AMETCDAddUserOperation class]])
-    {
-       [_dataSource watch];
-    }
-    else if([oper isKindOfClass:[AMETCDUpdateUserOperation class]])
-    {
-        
     }
 }
 

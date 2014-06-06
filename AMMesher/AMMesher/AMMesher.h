@@ -5,41 +5,47 @@
 //  Created by Wei Wang on 3/18/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
-#import "AMETCDOperationDelegate.h"
-
-@protocol AMETCDOperationDelegate;
+extern NSString* const AM_USERGROUPS_CHANGED;
+extern NSString* const AM_MESHER_ONLINE;
 
 @class AMUser;
-@class AMETCDDataDestination;
-@interface AMMesher : NSObject<AMETCDOperationDelegate>
+@class AMGroup;
+@class AMUserPortMap;
+@class AMSystemConfig;
 
-@property AMUser* mySelf;
-@property NSString* leaderName;
-@property int etcdState;    //0 stop, 1 running, 2 error
+@protocol AMMesherDelegate <NSObject>
+-(void)onUserGroupsChange:(NSArray*)groups;
+-(void)onMesherError:(NSError*)err;
+@end
 
-@property (readonly) NSArray* myGroupUsers;
-@property (readonly) NSArray* allGroupUsers;
-@property BOOL isOnline;
-@property BOOL isLeader;
+
+@interface AMMesher: NSObject
+
+@property (readonly) AMUser* mySelf;
+@property (readonly) NSString* localLeaderName;
+@property (readonly) BOOL isLocalLeader;
+@property (readonly) BOOL isOnline;
+@property (readonly) NSArray* userGroups;
+@property id<AMMesherDelegate> delegate;
 
 +(id)sharedAMMesher;
-+(NSOperationQueue*)sharedEtcdOperQueue;
 
--(void)startLoalMesher;
--(void)stopLocalMesher;
-
--(void)joinGroup:(NSString*)groupName;
--(void)everyoneJoinGroup:(NSString*)groupName;
--(void)backToArtsmesh;
-
--(void)everyoneGoOnline;
+-(void)startMesher;
 -(void)goOnline;
 -(void)goOffline;
+-(void)stopMesher;
+-(AMGroup*)myGroup;
 
--(void)updateMySelfProperties:(NSDictionary*) properties;
+-(void)joinGroup:(NSString*)groupName;
+-(void)backToArtsmesh;
 
-@end    
+-(void)setMySelfPropties:(NSDictionary*)props;
+-(void)setPortMaps:(AMUserPortMap*)portMap;
+-(AMUserPortMap*)portMapByName:(NSString*)portMapName;
+
+@end
+
+
 
 

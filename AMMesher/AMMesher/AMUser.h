@@ -2,31 +2,76 @@
 //  AMUser.h
 //  AMMesher
 //
-//  Created by 王 为 on 3/27/14.
+//  Created by Wei Wang on 5/25/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "AMUserGroupNode.h"
 
-@interface AMUser : AMUserGroupNode
+@interface AMUserPortMap : NSObject
 
-@property NSString* uniqueName;
+@property NSString* portName;
+@property NSString* internalPort;
+@property NSString* natMapPort;
+
+@end
+
+
+@interface AMUser : NSObject
+
+@property NSString* userid;
+@property NSString* nickName;
 @property NSString* domain;
 @property NSString* location;
 @property NSString* groupName;
 @property NSString* description;
 @property NSString* publicIp;
 @property NSString* privateIp;
-@property NSString* chatPort;
-@property NSString* controlPort;
-@property NSString* chatPortMap;
+@property NSString* localLeader;
+@property NSMutableArray* portMaps;
 
 -(id)init;
+-(NSString*)md5String;
+-(AMUser*)copy;
 
--(NSString*)nodeName;
-
-+(NSArray*)parseFullUserName:(NSString*)fullName;
-
++(AMUser*)userFromJsonData:(NSData*) data;
 
 @end
+
+
+@interface AMUserUDPRequest : NSObject
+
+@property NSString* action;
+@property NSString* version;
+@property NSString* userid;
+@property AMUser* userContent;
+@property NSString* contentMd5;
+
+-(NSData*)jsonData;
+-(NSString*)jsonString;
+
+@end
+
+
+@interface AMUserUDPResponse : NSObject
+
+@property NSString* action;
+@property NSString* version;
+@property NSString* contentMd5;
+@property BOOL isSucceeded;
+
++(AMUserUDPResponse*)responseFromJsonData:(NSData*) data;
+
+@end
+
+
+@interface AMUserRESTResponse: NSObject
+
+@property NSString* version;
+@property NSMutableArray* userlist;
+
++(AMUserRESTResponse*)responseFromJsonData:(NSData*) data;
+
+@end
+
+

@@ -15,7 +15,7 @@ var g_ipv6 bool
 
 const(
 	default_rest_port = 8080
-	default_heartbeat_port = 8082
+	default_heartbeat_port = 8080
 	default_user_timeout = 30.0
 	default_ipv6 = false
 	usage = "-rest_port 8080 -heartbeat_port8082 -user_timeout 30 -ipv6"
@@ -35,18 +35,19 @@ func init(){
 }
 
 func main() {
-	checkArgs()
+	checkArgs() 
 
-	restport := fmt.Sprintf("localhost:%d", g_rest_port)
-	udpport := fmt.Sprintf("localhost:%d", g_heartbeat_port)
+	restport := fmt.Sprintf(":%d", g_rest_port)
+	udpport := fmt.Sprintf(":%d", g_heartbeat_port)
 	isIpv4 := !g_ipv6
 	usertimeout := g_user_timeout
 	
-	restServer := restserver.AMRestServer{Restport:restport}
+	restServer := restserver.AMRestServer{RestPort:restport}
 	udpServer := udpserver.AMUdpServer{UserTimeout : usertimeout, IsIpv4: isIpv4, UdpPort:udpport }
 	udpServer.RestServer = &restServer
 	
 	go udpServer.StartUdpServer()
+	
 	restServer.StartRestServer()
 }
 

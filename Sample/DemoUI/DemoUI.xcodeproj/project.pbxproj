@@ -9,15 +9,13 @@
 /* Begin PBXBuildFile section */
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		2624CABD191A33FA007EED09 /* AMStatusNetModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */; };
+		2683E6B8193C9E40002B1D34 /* AMUserGroupNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2683E6B7193C9E40002B1D34 /* AMUserGroupNode.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
-		2692DB8B18E91D7100553924 /* etcd in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
-		2692DB8C18E91D7A00553924 /* etcd in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2692DB8A18E91D7100553924 /* etcd */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
-		26B5D4371924125A008FF9AD /* AMChatHolePunchingClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B5D4361924125A008FF9AD /* AMChatHolePunchingClient.m */; };
 		26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBA1900D01A0083742E /* GroupMessage.png */; };
 		26D2FFBF1900D01A0083742E /* meshButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBB1900D01A0083742E /* meshButton.png */; };
 		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
@@ -27,6 +25,7 @@
 		26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
+		26E4172A193E10DD00D66FEB /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26E41729193E10DD00D66FEB /* amserver */; };
 		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
@@ -108,7 +107,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				2692DB8C18E91D7A00553924 /* etcd in CopyFiles */,
+				26E4172A193E10DD00D66FEB /* amserver in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,9 +144,10 @@
 /* Begin PBXFileReference section */
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		2624CABC191A33FA007EED09 /* AMStatusNetModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMStatusNetModule.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMStatusNetModule.framework; sourceTree = "<group>"; };
+		2683E6B6193C9E40002B1D34 /* AMUserGroupNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupNode.h; sourceTree = "<group>"; };
+		2683E6B7193C9E40002B1D34 /* AMUserGroupNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupNode.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
-		2692DB8A18E91D7100553924 /* etcd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = etcd; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
@@ -155,8 +155,6 @@
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		26B4D071191A256200F55CD3 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
-		26B5D4351924125A008FF9AD /* AMChatHolePunchingClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatHolePunchingClient.h; sourceTree = "<group>"; };
-		26B5D4361924125A008FF9AD /* AMChatHolePunchingClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatHolePunchingClient.m; sourceTree = "<group>"; };
 		26D2FFBA1900D01A0083742E /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GroupMessage.png; path = Resource/GroupMessage.png; sourceTree = "<group>"; };
 		26D2FFBB1900D01A0083742E /* meshButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meshButton.png; path = Resource/meshButton.png; sourceTree = "<group>"; };
 		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
@@ -169,6 +167,7 @@
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
+		26E41729193E10DD00D66FEB /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
@@ -326,13 +325,13 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		26B5D43419241241008FF9AD /* HelpClasses */ = {
+		2683E6B2193C9DCA002B1D34 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				26B5D4351924125A008FF9AD /* AMChatHolePunchingClient.h */,
-				26B5D4361924125A008FF9AD /* AMChatHolePunchingClient.m */,
+				2683E6B6193C9E40002B1D34 /* AMUserGroupNode.h */,
+				2683E6B7193C9E40002B1D34 /* AMUserGroupNode.m */,
 			);
-			name = HelpClasses;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
@@ -359,7 +358,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				2692DB8A18E91D7100553924 /* etcd */,
+				26E41729193E10DD00D66FEB /* amserver */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
@@ -411,7 +410,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
-				26B5D43419241241008FF9AD /* HelpClasses */,
+				2683E6B2193C9DCA002B1D34 /* Models */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
@@ -599,7 +598,6 @@
 				AF9DC78718E96AEB0029DB97 /* ken.png in Resources */,
 				AF74056318F7D93200B3C1DF /* Reply.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
-				2692DB8B18E91D7100553924 /* etcd in Resources */,
 				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
@@ -624,8 +622,8 @@
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 				26D2FFBF1900D01A0083742E /* meshButton.png in Resources */,
 				AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */,
-				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054918F7D93200B3C1DF /* Favorites.png in Resources */,
+				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
 				AF74054718F7D93200B3C1DF /* Edit.png in Resources */,
 				26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */,
@@ -675,10 +673,10 @@
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */,
+				2683E6B8193C9E40002B1D34 /* AMUserGroupNode.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
-				26B5D4371924125A008FF9AD /* AMChatHolePunchingClient.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,

@@ -13,6 +13,7 @@ import (
 	"artsmesh/amusers"
 	"encoding/json"
 	"container/list"
+	"strconv"
 )
 
 type AMUdpServer struct{
@@ -22,9 +23,7 @@ type AMUdpServer struct{
 	RestServer *restserver.AMRestServer
 	ChangeNumber int
 	ChangeTime time.Time
-	//UserHeadNode *amusers.AMUserStorage
-	UserIdList *list.List
-	UserData map[string] *amusers.AMUserStorage
+	UserStoreList *list.List
 }
 
 func (server *AMUdpServer)StartUdpServer(){
@@ -39,8 +38,7 @@ func (server *AMUdpServer)StartUdpServer(){
 		os.Exit(1)
 	}
 	
-	server.UserIdList = list.New()
-	server.UserData = map[string]*amusers.AMUserStorage{}
+	server.UserStoreList = list.New()
 	server.ChangeNumber = 0
 	server.ChangeTime = time.Now()
 
@@ -68,10 +66,11 @@ func (server *AMUdpServer)StartUdpServer(){
 }
 
 func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
-	var buf [512]byte
+	var buf [1024]byte
 
 	n, addr, err := conn.ReadFromUDP(buf[0:])
 	if err != nil {
+		fmt.Fprintf(os.Stdout, "ReadFromUDP failed")
 		return
 	}
 	
@@ -79,6 +78,7 @@ func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
 	fmt.Fprintf(os.Stdout, "%d bytes received from %s \n", n, addr.String())
 	
 	len := bytes.Index(buf[:], []byte{0})
+	fmt.Fprintf(os.Stdout, "received json len: %d \n", len)
 	jsonStream := string(buf[:len])
 	fmt.Fprintf(os.Stdout, "received json content: %s \n", jsonStream)
 
@@ -86,123 +86,160 @@ func (server *AMUdpServer) HandleClient(conn *net.UDPConn){
 	if	req == nil {
 		return
 	}
-	if	req.UserContent.Id == ""{
+	
+	updResponse := server.HandleUDPRequest(req)
+	if server.ChangeNumber > 0 {
+		server.UpdateRestServer()
+	}
+
+	if updResponse != nil{
+		curData := server.RestServer.GetResponseData()
+		updResponse.Version = curData.Version
+		
+		server.SendUDPResponse(addr, conn, updResponse)
+	}
+}
+
+func (server *AMUdpServer)SendUDPResponse(addr *net.UDPAddr, conn *net.UDPConn, resObj *amusers.AMUserUDPResponse){
+	udpResStr, err := json.Marshal(resObj)
+	if err != nil{
+		fmt.Fprintf(os.Stdout, "error: %s", err.Error())
 		return
 	}
 	
-	if req.Action == "delete"{	
-		server.HandleDeleteUser(req.UserContent.Id)
-	}else{
-		server.HandleUpdateUser(req)
-	}
-	
-	interval := time.Now().Sub(server.ChangeTime)
-	if server.ChangeNumber > 0 || interval.Seconds() > 5{
-		
-		fmt.Fprintf(os.Stdout, "change number: %d, time interval: %f", 
-					server.ChangeNumber, interval.Seconds())
-		
-		//update the rest server
-		userArrObj := new(amusers.AMUserResonse)
-		userArrObj.Data = make([]amusers.AMUser, server.UserIdList.Len())
-		i := 0
-		for _, userData := range server.UserData {
-			userArrObj.Data[i] = *userData.UserContent.Copy()	
-        	i++
-		}
-	
-		userArrObj.Version = server.RestServer.UserArrayObj.Version+1
-		server.RestServer.UserArrayObj = userArrObj
-		
-		server.ChangeNumber = 0 
-		server.ChangeTime = time.Now()
+	udpResBytes := []byte(udpResStr)
+	_, err = conn.WriteToUDP(udpResBytes, addr)
+	if	err != nil{
+		fmt.Fprintf(os.Stdout, "Write to Udp failed!")
 	}
 }
 
-func (server *AMUdpServer)FindUserId(id string)*list.Element{
+func (server *AMUdpServer)UpdateRestServer(){
+	fmt.Fprintf(os.Stdout, "There are %d user on server now!\n",  server.UserStoreList.Len())
+	server.ChangeNumber = 0 
 	
-	for e := server.UserIdList.Front(); e != nil; e = e.Next(){
-		if e.Value == id{
-			return e
+	var RESTResponse amusers.AMUserRESTResponse
+	for e := server.UserStoreList.Front(); e != nil; e = e.Next(){
+		userValue := e.Value.(*amusers.AMUserStorage)
+		RESTResponse.UserListData = append(RESTResponse.UserListData, userValue.UserContent.Copy())
+	}
+	
+	curData := server.RestServer.GetResponseData()
+	ver, err := strconv.Atoi(curData.Version)
+	if	err != nil {
+		fmt.Fprintf	(os.Stderr, "version is incorrect:%s", server.RestServer.Response.Version)
+		return;
+	}
+	
+	RESTResponse.Version = fmt.Sprintf("%d", ver + 1)
+	server.RestServer.SetResponseData(&RESTResponse)
+}
+
+
+//func (server *AMUdpServer)ValidateMd5(req *amusers.AMUserUDPRequest)bool{
+	
+//}
+
+func (server *AMUdpServer)HandleUDPRequest(req *amusers.AMUserUDPRequest)*amusers.AMUserUDPResponse{
+	var udpres amusers.AMUserUDPResponse
+	
+	//delete timeout user
+	for e := server.UserStoreList.Front(); e != nil; e = e.Next(){
+		
+		userValue := e.Value.(*amusers.AMUserStorage)
+		dur := time.Now().Sub(userValue.LastHeartbeat)
+		fmt.Fprintf(os.Stdout, "user time interval is:%f\n", dur.Seconds())
+		fmt.Fprint(os.Stdout, userValue.LastHeartbeat, time.Now())
+		
+		
+		if dur.Seconds() > server.UserTimeout{
+			fmt.Fprintf(os.Stdout, "will remove use")
+			server.UserStoreList.Remove(e)
+			server.ChangeNumber++
+		}else{
+			break	
 		}
 	}
 	
-	return nil
-}
-
-//{"Action":"new","UserContent": {"Id":"123", "Name":"wangwei","Public_ip":"192.168.1.1","Private_ip":"192.168.1.1","Local_leader":"test123","Groupname":"test123","Domain":"test123","Location":"test123","Description":"test123"},"UserContentMd5":"12345"}
-func (server *AMUdpServer)HandleUpdateUser(req *amusers.AMUserRequset){
+	//deal with delete user request
+	if req.UserContentMd5 == "-1"{
+		
+		for e := server.UserStoreList.Front(); e != nil; e = e.Next(){			
+			userValue := e.Value.(*amusers.AMUserStorage)
+			if	userValue.UserContent.UserId == req.UserId{
+				server.UserStoreList.Remove(e)
+				server.ChangeNumber++
+				break
+			}
+		}
+		
+		return nil
+	}
 	
-	id := req.UserContent.Id
-	userStorage := server.UserData[id]
-	if userStorage==nil {
-		fmt.Fprintf(os.Stdout, "Adding new user %s\n", id)
-		userStorage := new(amusers.AMUserStorage)
-		userStorage.UserContent = *req.UserContent.Copy()
-		userStorage.UserContentMd5 = req.UserContentMd5
-		userStorage.LastHeartbeat = time.Now()
-		server.UserData[id] = userStorage
-		server.UserIdList.PushBack(id)
+	//deal with heartbeat or update
+	for e := server.UserStoreList.Front(); e != nil; e = e.Next(){
+		userValue := e.Value.(*amusers.AMUserStorage)
+		if	userValue.UserContent.UserId == req.UserId{
+			
+			if  req.UserContentMd5 != "" && userValue.UserContentMd5 != req.UserContentMd5{
+				//fmt.Fprintf(os.Stdout, "req.UserContentMd5:\n", req.UserContentMd5)
+				//fmt.Fprintf(os.Stdout, "userValue.UserContentMd5:\n", req.UserContentMd5)
+				fmt.Fprintf(os.Stdout, "Update request\n")
+				userValue.UserContent = req.UserContent
+				userValue.UserContentMd5 = req.UserContentMd5
+				server.ChangeNumber++
+			}
+			udpres.UserContentMd5 = userValue.UserContentMd5
+			userValue.LastHeartbeat = time.Now()
+			fmt.Fprint(os.Stdout, "update heartbeat time!!!!!!!!!!!!!\n", userValue.LastHeartbeat)
+			server.UserStoreList.MoveToBack(e)
+			
+			return &udpres
+		}
+	}
+	
+	//didn't find user
+	if  req.UserContentMd5 != "" {
+		//new user
+		fmt.Fprintf(os.Stdout, "will add new user")
+		var userStoreNew amusers.AMUserStorage
+		userStoreNew.UserContent = req.UserContent
+		userStoreNew.UserContentMd5 = req.UserContentMd5
+		userStoreNew.LastHeartbeat = time.Now()
+		fmt.Fprint(os.Stdout, "update heartbeat time\n", userStoreNew.LastHeartbeat)
+		server.UserStoreList.PushBack(&userStoreNew)
 		server.ChangeNumber++
 		
-	}else if req.UserContentMd5 == ""{
-		fmt.Fprintf(os.Stdout, "update user %s\n", id)
-		userStorage.LastHeartbeat = time.Now()
-		
-		e:=server.FindUserId(id)
-		if e == nil{
-			fmt.Fprintf(os.Stderr, "Fatal Errror, map and list data conflict!")		
-		}
-		
-		server.UserIdList.MoveToBack(e)
+		udpres.UserContentMd5 = userStoreNew.UserContentMd5
+		return &udpres
 	}else{
-		if req.UserContentMd5 == userStorage.UserContentMd5{
-			fmt.Fprintf(os.Stdout, "received the resend update package, drop it")
-		}else{
-			fmt.Fprintf(os.Stdout, "received the update package")
-			userStorage.UserContent = *req.UserContent.Copy()
-			userStorage.LastHeartbeat = time.Now()
-			
-			e:=server.FindUserId(id)
-			if e == nil{
-				fmt.Fprintf(os.Stderr, "Fatal Errror, map and list data conflict!")		
-			}
-		
-			server.UserIdList.MoveToBack(e)
-			server.ChangeNumber++
-		}
-	}
+		udpres.UserContentMd5 = "0"//expired user 
+		return &udpres
+	}	
 }
 
-func (server *AMUdpServer)HandleDeleteUser(userId string){
-	
-	userStorage := server.UserData[userId]
-	fmt.Fprintf(os.Stdout, "Deleting user %s\n", userId)
+//func (server *AMUdpServer)HandleDeleteUser(userId string){
+//	fmt.Fprintf(os.Stdout, "Deleting user %s\n", userId)
+//	for e := server.UserStoreList.Front(); e != nil; e = e.Next(){
+//		userValue := e.Value.(amusers.AMUserStorage)
+//		if userValue.UserContent.UserId  == userId {
+//			server.UserStoreList.Remove(e)
+//			server.ChangeNumber++
+//			break
+//		}
+//	}
+//}
 
-	if (userStorage == nil){
-		fmt.Fprintf(os.Stdout, "don't have this user %s\n", userId)
-		return
-	}
-
-	e := server.FindUserId(userId)
-	if e == nil{
-		fmt.Fprintf(os.Stderr, "Fatal Errror, map and list data conflict!")		
-	}
-	
-	server.UserIdList.Remove(e)
-	delete(server.UserData, userId)
-}
-
-func (server *AMUdpServer) ParseJsonString(contentStr string) *amusers.AMUserRequset{
+func (server *AMUdpServer) ParseJsonString(contentStr string) *amusers.AMUserUDPRequest{
 	var err error
-	var req amusers.AMUserRequset
+	var req amusers.AMUserUDPRequest
 	dec := json.NewDecoder(strings.NewReader(contentStr))
 	for{
 		err = dec.Decode(&req); 
 		 if err == io.EOF {
 			//fmt.Fprintf(os.Stdout, "client request is: %s\n", req.Action)
-			if	req.UserContent.Id != ""{
-				fmt.Fprintf(os.Stdout, "userinfo is: %s\n", req.UserContent.Id)
+			if	req.UserContent.UserId != ""{
+				fmt.Fprintf(os.Stdout, "userinfo is: %s\n", req.UserContent.UserId)
 			}
 			break;
 		}else if err != nil{

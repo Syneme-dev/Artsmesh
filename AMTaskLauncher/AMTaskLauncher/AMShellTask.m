@@ -34,6 +34,10 @@
         _pipe = [NSPipe pipe];
         _task.standardOutput = _pipe;
         _task.standardError = _pipe;
+        AMShellTask * __weak weakSelf = self;
+        _task.terminationHandler = ^(NSTask *unused) {
+            [weakSelf cancel];
+        };
     }
     
     return self;

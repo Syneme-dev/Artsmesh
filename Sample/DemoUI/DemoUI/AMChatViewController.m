@@ -9,10 +9,10 @@
 #import "AMChatViewController.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMUser.h"
+#import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMNotificationManager/AMNotificationManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"
-//#import "AMMesher/AMHolePunchingClient.h"
+#import "AMNetworkUtils/AMHolePunchingSocket.h"
 
 @interface AMChatViewController ()
 
@@ -22,10 +22,11 @@
 
 @implementation AMChatViewController
 {
-    GCDAsyncUdpSocket *_socket;
-    AMChatHolePunchingClient* _holePunchingClient;
-    BOOL _isHolePunching;
-    NSData *_heartBeatData;
+    AMHolePunchingSocket *_socket;
+    AMGroup* _myGroup;
+    NSString* _myPubIp;
+    NSString* _myInternalPort;
+    NSString* _myNATPort;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,167 +35,137 @@
     if (self)
     {
         _chatRecords = [[NSMutableArray alloc] init];
-        _isHolePunching = NO;
-        _heartBeatData = [@"HB" dataUsingEncoding:NSUTF8StringEncoding];
+        _myPubIp = @"";
+        _myNATPort = @"";
+        _myInternalPort = @"";
     }
     return self;
 }
 
 -(void)awakeFromNib
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name:AM_MESHER_ONLINE object:nil];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
+    NSString* port = [defaults stringForKey:Preference_Key_General_StunServerPort];
+    _myInternalPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    
+    _socket = [[AMHolePunchingSocket alloc] initWithServer: addr serverPort:port clientPort: _myInternalPort];
+    _socket.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
+    
+    [_socket initSocket];
+    _socket.delegate = self;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]  removeObserver:self];
+}
+
+-(void)onlineStatusChanged:(NSNotification*) notification
+{
+    BOOL isOnline = [notification.userInfo[@"IsOnline"] boolValue];
+    if (isOnline == YES) {
+        [_socket startHolePunching];
+    }else{
+        [_socket stopHolePunching];
+    }
+}
+
+
+-(void)userGroupsChanged:(NSNotification*) notification
+{
+    NSMutableArray* joinedUsers = nil;
+    AMGroup* myNewGroup = [[AMMesher sharedAMMesher] myGroup];
+
+    if (_myGroup != nil) {
+        joinedUsers = [[NSMutableArray alloc] init];
+        for (AMUser* newUser in myNewGroup.users) {
+            
+            BOOL bFind = NO;
+            for(AMUser* oldUser in _myGroup.users){
+                if ([oldUser.userid isEqualToString:newUser.userid]) {
+                    bFind = YES;
+                    break;
+                }
+            }
+            if (bFind == NO) {
+                [joinedUsers addObject:newUser];
+            }
+        }
+    }
+    
+    _myGroup = myNewGroup;
+    
+    if (joinedUsers != nil ) {
+        [self performSelectorOnMainThread:@selector(showNewCommers:) withObject:joinedUsers waitUntilDone:NO];
+    }
+    
+    [self updatePortInfo];
+}
+
+-(void)showNewCommers:(id)newCommers
+{
+    for (AMUser* newUser in newCommers) {
+        NSDictionary *record = @{
+                                 @"sender"  : @"SYSTEM",
+                                 @"message" : [NSString stringWithFormat:@"%@ JOINED THE CONVERSATION",
+                                               newUser.nickName],
+                                 @"time"    : [NSDate date]
+                                 };
+        [self showChatRecord:record];
+    }
+}
+
+
+-(void)updatePortInfo
+{
+    NSMutableArray* localPeers = [[NSMutableArray alloc]  init];
+    NSMutableArray* remotePeers = [[NSMutableArray alloc]  init];
+    
     AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher addObserver:self
-             forKeyPath:@"isOnline"
-                options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                context:nil];
+    NSString* myLocalLeaderName = mesher.mySelf.localLeader;
     
-    [[AMNotificationManager defaultShared] listenMessageType:self withTypeName:AMN_NEW_USER_JOINED callback:@selector(NewUserJoined:)];
-    
-    if (mesher.isOnline == NO)
-    {
-        [self startChatWithoutHolePunching];
-    }
-    else
-    {
-        [self startHolePunching];
+    for (AMUser* user in _myGroup.users) {
+        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
+        for (AMUserPortMap* pm in user.portMaps) {
+            if ([pm.portName isEqualToString:@"ChatPort"]) {
+                if ([ user.localLeader isEqualToString:myLocalLeaderName]){
+                    peerAddr.ip = user.privateIp;
+                    peerAddr.port = pm.internalPort;
+                    [localPeers addObject:peerAddr];
+                }else{
+                    peerAddr.ip = user.publicIp;
+                    peerAddr.port = pm.natMapPort;
+                    [remotePeers addObject:peerAddr];
+                }
+            }
+        }
     }
 
-}
-
--(void)startChatWithoutHolePunching
-{
-    _socket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self
-                                            delegateQueue:dispatch_get_main_queue()];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* chatPort =[defaults stringForKey:Preference_Key_General_ChatPort];
-    int port = [chatPort intValue];
-    
-    NSError *error = nil;
-    if (![_socket bindToPort:port error:&error]) {
-        NSLog(@"Error binding: %@", error);
-    }
-    
-    if (![_socket beginReceiving:&error]) {
-        NSLog(@"Error receiving: %@", error);
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-    if (![keyPath isEqualToString:@"isOnline"])
-    {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
-        return;
-    }
-    
-    BOOL isOnlineOld = [[change objectForKey:@"old"] boolValue];
-    BOOL isOnline = [[change objectForKey:@"new"] boolValue];
-    if (isOnline == YES && isOnlineOld == NO)
-    {
-        //start hole punching
-        [self startHolePunching];
-    }
-    else if(isOnlineOld == YES && isOnline == NO)
-    {
-        //stop hole punching
-        [self startChatWithoutHolePunching];
-    }
-}
-
--(void)startHolePunching
-{
-    if (_isHolePunching == YES)
-    {
-        return;
-    }
-    
-    if (_socket)
-    {
-        [_socket close];
-        _socket = nil;
-    }
-    
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* hpsIp = [defaults stringForKey:Preference_Key_General_ChatStunServerIp];
-    NSString* hpsPort = [defaults stringForKey:Preference_Key_General_ChatStunServerPort];
-    NSString* chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-    
-    _holePunchingClient = [[AMChatHolePunchingClient alloc] initWithPort:chatPort server:hpsIp serverPort:hpsPort];
-    _holePunchingClient.msgDelegate = self;
-    [_holePunchingClient startHolePunching];
-    
-    _isHolePunching = YES;
-}
-
--(void)stopHolePunching
-{
-    [_holePunchingClient stopHolePunching];
-    [self startChatWithoutHolePunching];
-}
-
--(void)NewUserJoined:(NSNotification*) notification
-{
-    NSLog(@"new user joined");
-    NSDictionary *record = @{
-        @"sender"  : @"SYSTEM",
-        @"message" : [NSString stringWithFormat:@"%@ JOINED THE CONVERSATION",
-                      notification.userInfo[@"username"]],
-        @"time"    : notification.userInfo[@"time"]
-    };
-    [self showChatRecord:record];
+    _socket.localPeers = localPeers;
+    _socket.remotePeers = remotePeers;
 }
 
 - (IBAction)sendMsg:(id)sender
 {
     NSString* msg = [self.chatMsgField stringValue];
-    if(msg == nil || [msg isEqualToString:@""])
-    {
+    if(msg == nil || [msg isEqualToString:@""]){
         return;
     }
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* nickName =[defaults stringForKey:Preference_Key_User_NickName];
-    
+
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    NSString* nickName = mesher.mySelf.nickName;
+
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
                     @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
     
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    NSArray* users = mesher.myGroupUsers;
-    if(users != nil)
-    {
-        for (AMUser* user in users)
-        {
-            NSString* ip ;
-            if ([user.location isEqualToString:mesher.mySelf.location] &&
-                [user.domain isEqualToString:mesher.mySelf.domain])
-            {
-                ip = user.privateIp;
-            }
-            else
-            {
-                ip = user.publicIp;
-            }
-
-            if (_isHolePunching)
-            {
-                [_holePunchingClient sendPacket:msgData toHost:ip toPort:user.chatPortMap];
-            }
-            else
-            {
-                [_socket sendData:msgData toHost:ip port:[user.chatPort intValue] withTimeout:-1 tag:0];
-            }
-        }
+    if (_socket) {
+        [_socket sendPacketToPeers:msgData];
     }
     
-    self.chatMsgField.stringValue = @"";
+   self.chatMsgField.stringValue = @"";
 
 }
 
@@ -206,20 +177,50 @@
     [self.tableView scrollToEndOfDocument:self];
 }
 
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address
-withFilterContext:(id)filterContext
-{
-    [self handleIncomingData:data fromAddress:address];
+
+-(void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error{
+    NSLog(@"chat socket failed: %@", error.description);
 }
 
-
--(void)handleIncomingData:(NSData*)data fromAddress:(NSData*)address
-{
-    if ([data isEqualToData:_heartBeatData])
-        return;
+-(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
+    
     NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [self showChatRecord:chatRecord];
+
 }
+
+-(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{
+    NSLog(@"chat message did not send out: %@", err.description);
+}
+
+-(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{
+    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // server packet
+    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
+    if ([ipAndPort count] < 2){
+        return;
+    }
+    
+    if(![_myPubIp isEqualToString:[ipAndPort objectAtIndex:0]]){
+        _myPubIp = [ipAndPort objectAtIndex:0];
+        
+        NSDictionary* dict = @{@"publicIp": _myPubIp};
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        [mesher setMySelfPropties:dict];
+    }
+    
+    if(![_myNATPort isEqualToString:[ipAndPort objectAtIndex:1]]){
+        _myNATPort = [ipAndPort objectAtIndex:1];
+        
+        AMUserPortMap *portMap = [[AMUserPortMap alloc] init];
+        portMap.portName = @"ChatPort";
+        portMap.natMapPort =  _myNATPort;
+        portMap.internalPort = _myInternalPort;
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        [mesher setPortMaps:portMap];
+    }
+
+}
+
 
 @end

@@ -25,6 +25,9 @@
 
 static NSMutableDictionary *allPlugins = nil;
 
+@interface AMAppDelegate() <AMPluginAppDelegate>
+@end
+
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -43,7 +46,7 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationWillTerminate:(NSNotification *)notification {
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
-    [[AMMesher sharedAMMesher] stopLocalMesher];
+    [[AMMesher sharedAMMesher] stopMesher];
 }
 
 - (void)connectMesher {
@@ -52,7 +55,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)startMesher {
     //TODO:
-    [[AMMesher sharedAMMesher] startLoalMesher];
+    [[AMMesher sharedAMMesher] startMesher];
 }
 
 - (void)showPreferencePanel {

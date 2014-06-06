@@ -13,21 +13,36 @@
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
 
+@interface AMLeaderElecter ()
+@property NSString* serverName;
+@property NSString* serverPort;
+@end
+
+
 @implementation AMLeaderElecter
 {
     NSNetServiceBrowser*  _mesherServiceBrowser;
     NSNetService* _myMesherService;
     NSMutableArray* _allMesherServices;
+    
+    NSString* _myPort;
+}
+
+- (instancetype)init
+{
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:@"unsupported initializer"
+                                 userInfo:nil];
 }
 
 
--(id)init
+-(id)initWithPort:(NSString*)port
 {
     if(self = [super init])
     {
         _allMesherServices = [[NSMutableArray alloc]init];
         self.state = MESHER_STATE_STOP;
-        self.mesherPort = 0;
+        _myPort = port;
         
         [self browseLocalMesher];
     }
@@ -75,7 +90,7 @@
  	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
-                                                       port:(self.mesherPort==0)?7001:self.mesherPort];
+                                                       port:[_myPort intValue]];
 	if (_myMesherService == nil)
     {
         [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
@@ -110,7 +125,7 @@
     }
     else
     {
-        self.mesherHost = service.hostName;
+        _serverName = service.hostName;
         self.state = MESHER_STATE_JOINED;
     }
 }
@@ -120,7 +135,7 @@
 {
     [self stopBrowser];
     [self unpublishLocalMesher];
-    self.mesherHost = @"";
+    _serverName = @"";
     
     self.state = MESHER_STATE_STOP;
 }
@@ -182,21 +197,15 @@
 {
     NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
     
-    self.mesherHost = sender.hostName;
-    self.mesherPort = (int)sender.port;
     
-    for(NSData* addr in sender.addresses)
-    {
-        if([GCDAsyncUdpSocket isIPv4Address:addr])
-        {
-            NSString* mesherAddr = [GCDAsyncUdpSocket hostFromAddress:addr];
-            if(![mesherAddr hasPrefix:@"127"])
-            {
-                self.mesherIp = mesherAddr;
-                break;
-            }
-        }
+    NSString* hostName = sender.hostName;
+    if ([hostName hasSuffix:@"."]) {
+        hostName = [hostName substringToIndex:[hostName length] - 1];
+        hostName = [hostName lowercaseString];
     }
+    
+    self.serverName = hostName;
+    self.serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
     self.state = MESHER_STATE_JOINED;
 }
@@ -218,13 +227,16 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    self.mesherHost = [AMNetworkUtils getHostName];
-    self.mesherPort = (int)sender.port;
+    NSString* hostName = [AMNetworkUtils getHostName];
+    if ([hostName hasSuffix:@"."]) {
+        hostName = [hostName substringToIndex:[hostName length] - 1];
+        hostName = [hostName lowercaseString];
+    }
     
-    self.mesherIp = [AMNetworkUtils getHostIpv4Addr];
+    self.serverName = hostName;
+    self.serverPort =  _myPort;
     
     self.state = MESHER_STATE_PUBLISHED;
-    
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);
 }
 

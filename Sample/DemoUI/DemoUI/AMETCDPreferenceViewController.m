@@ -67,7 +67,7 @@
 - (IBAction)privateIpSelected:(id)sender{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
-    [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
 }
 
 - (IBAction)useIpv6Checked:(id)sender
@@ -153,7 +153,7 @@
 -(void)loadIpv4
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+    NSString* oldIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
     BOOL ipSelected = NO;
     int popupIndex = 0;
     
@@ -184,7 +184,7 @@
     {
         [self.myPrivateIpPopup selectItemAtIndex:0];
         NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
-        [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+        [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
     }
     
     [self resetPopupItems];
@@ -194,7 +194,7 @@
 -(void) loadIpv6
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* oldIp = [defaults stringForKey:Preference_Key_General_PrivateIP];
+    NSString* oldIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
     BOOL ipSelected = NO;
     int popupIndex = 0;
     
@@ -228,7 +228,7 @@
     {
         [self.myPrivateIpPopup selectItemAtIndex:0];
         NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
-        [defaults setObject:myPrivateIP forKey:Preference_Key_General_PrivateIP];
+        [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
     }
     
     [self resetPopupItems];

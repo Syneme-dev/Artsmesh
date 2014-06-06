@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Artsmesh. All rights reserved.
 //
 
-#import <AMPreferenceManager/AMPreferenceManager.h>
+//#import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMNotificationManager.h"
+NSString* const AMN_MESHER_STARTED = @"AMN_MESHER_STARTED";
 
 static id sharedManager = nil;
 

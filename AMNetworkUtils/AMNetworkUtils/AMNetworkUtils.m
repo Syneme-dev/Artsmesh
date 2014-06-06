@@ -71,9 +71,11 @@
 +(NSString*)getHostName
 {
     NSHost* host = [NSHost currentHost];
-    NSArray* hostName = [host.name componentsSeparatedByString:@"."];
+//    NSArray* hostName = [host.name componentsSeparatedByString:@"."];
+//    
+//    return hostName[0];
     
-    return hostName[0];
+    return host.name;
 }
 
 

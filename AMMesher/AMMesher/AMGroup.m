@@ -1,57 +1,71 @@
 //
 //  AMGroup.m
-//  AMMesher
 //
-//  Created by 王 为 on 3/27/14.
-//  Copyright (c) 2014 AM. All rights reserved.
+//  Created by lattesir on 5/27/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
 #import "AMGroup.h"
-#import "AMETCDApi/AMETCD.h"
-#import "AMUser.h"
 
 @implementation AMGroup
-
--(id)init
 {
-    if (self = [super init])
-    {
-        self.isLeaf = NO;
-        self.children = [[NSMutableArray alloc] init];
-        self.parent = nil;
+    NSString *_groupName;
+    NSMutableArray *_users;
+}
+
+- (id)init
+{
+    return [self initWithGroupName:@""];
+}
+
+- (instancetype)initWithGroupName:(NSString *)groupName;
+{
+    self = [super init];
+    if (self) {
+        _groupName = [groupName copy];
     }
-    
     return self;
 }
 
--(NSString*)nodeName
+- (NSArray *)users
 {
-    if (self.uniqueName == nil)
-    {
-        return @"default";
-    }
-    
-    return self.uniqueName;
+    return _users;
 }
 
-+(NSArray*)parseFullGroupName:(NSString*)fullName
+- (void)addUser:(AMUser *)user
 {
-    NSMutableArray* parts = [[NSMutableArray alloc] init];
-    NSArray* nameAndDomain = [fullName componentsSeparatedByString:@"@"];
-    [parts addObject:[nameAndDomain objectAtIndex:0]];
-    
-    if ([nameAndDomain count] > 1)
-    {
-        NSArray* domainAndLocation = [[nameAndDomain objectAtIndex:1] componentsSeparatedByString:@"."];
-        [parts addObject:[domainAndLocation objectAtIndex:0]];
-        
-        if ([domainAndLocation count] > 1)
-        {
-            [parts addObject:[domainAndLocation objectAtIndex:1]];
-        }
+    NSAssert([self.groupName isEqual:user.groupName], @"groupName mismatch");
+    if (_users == nil) {
+        _users = [[NSMutableArray alloc] init];
     }
-    
-    return parts;
+    [_users addObject:user];
+}
+
+- (NSUInteger)countOfUsers
+{
+    return [_users count];
+}
+
+- (id)objectInUsersAtIndex:(NSUInteger)index
+{
+    return [_users objectAtIndex:index];
+}
+
+- (void)insertObject:(AMUser *)user inUsersAtIndex:(NSUInteger)index
+{
+    NSAssert([self.groupName isEqual:user.groupName], @"groupName mismatch");
+    [_users insertObject:user atIndex:index];
+}
+
+- (void)removeObjectFromUsersAtIndex:(NSUInteger)index
+{
+    [_users removeObjectAtIndex:index];
+}
+
+- (void)replaceObjectInUsersAtIndex:(NSUInteger)index withObject:(id)user
+{
+    NSAssert([self.groupName isEqual:[user groupName]], @"groupName mismatch");
+    [_users replaceObjectAtIndex:index withObject:user];
 }
 
 @end

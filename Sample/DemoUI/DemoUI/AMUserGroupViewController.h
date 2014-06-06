@@ -7,20 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class AMUserGroupNode;
 
-@class AMMesher;
-
-@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate>
+@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource>
 
 @property (weak) IBOutlet NSTextField *createGroupTextField;
-@property (weak) IBOutlet NSOutlineView *userGroupOutline;
-@property (strong) IBOutlet NSTreeController *treeViewController;
-@property (weak) AMMesher* sharedMesher;
+@property (weak) IBOutlet NSOutlineView *outlineView;
+@property (weak) IBOutlet NSView *groupCellView;
+@property (weak) IBOutlet NSButton *groupCellViewJoinBtn;
 
-- (IBAction)joinGroup:(id)sender;
-- (IBAction)createGroup:(id)sender;
+@property NSArray* userGroups;
+
 - (IBAction)quitGroup:(id)sender;
+- (IBAction)createGroup:(id)sender;
 - (IBAction)createGroupByEnter:(id)sender;
-- (IBAction)mergeGroup:(id)sender;
+
 
 @end

@@ -28,6 +28,10 @@
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
 #import "AMTestViewController.h"
+#import "AMMixingViewController.h"
+#import "AMOSCRouteViewController.h"    
+#import "AMVisualViewController.h"
+#import "AMMapViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -56,6 +60,10 @@
     AMChatViewController *chatViewController;
     AMPingViewController *pingViewController;
     AMTestViewController *testViewController;
+     AMMapViewController *mapViewController;
+     AMMixingViewController *mixingViewController;
+
+    AMVisualViewController  *visualViewController;
     NSMutableDictionary *panelControllers;
     float containerWidth;
 }
@@ -95,17 +103,12 @@
 }
 
 - (void)showDefaultWindow {
-    
     NSSize windowSize = [self.window.contentView frame].size;
-    //Note:code make the window max size.
-    //[self.window setFrame:screenSize display:YES ];
-//    [self.window setFrameOrigin:NSMakePoint(0.0f, screenSize.size.height - UI_appleMenuBarHeight)];
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
     scrollView.frame = NSMakeRect(UI_leftSidebarWidth,
                                   0,
                                   windowSize.width - UI_leftSidebarWidth,
                                   windowSize.height - UI_topbarHeight);
-    
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;
@@ -128,7 +131,6 @@
          return newBox;
      };
     [scrollView setDocumentView:_containerView];
-    
     [self loadVersion];
     [self loadUserPanel];
     [self loadGroupsPanel];
@@ -137,16 +139,23 @@
     [self loadPingPanel];
     [self loadFOAFPanel];
     [self loadTestPanel];
-
+    [self loadMapPanel];
+    [self loadVisualPanel];
+    [self loadMixingPanel];
+}
+-(AMPanelViewController* )createOrShowPanel:(NSString*) identifier withTitle:(NSString*)title{
+    AMPanelViewController *viewController=
+    [self createOrShowPanel:identifier withTitle:title columnCount:1];
+    return viewController;
     
 }
 
--(AMPanelViewController* )createOrShowPanel:(NSString*) identifier withTitle:(NSString*)title{
+
+-(AMPanelViewController* )createOrShowPanel:(NSString*) identifier withTitle:(NSString*)title columnCount:(int)column{
     AMPanelViewController *panelViewController;
     if (panelControllers[identifier]!=nil) {
        panelViewController=panelControllers[identifier];
         [panelViewController.view setHidden:NO];
-
     }
     else
     {
@@ -155,7 +164,7 @@
         float panelHeight=720.0f;
         panelViewController.view.frame = NSMakeRect(containerWidth,
                                                     self.window.frame.size.height-UI_topbarHeight-
-                                                    panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth, panelHeight);
+                                                    panelHeight+UI_pixelHeightAdjustment, UI_defaultPanelWidth*(float)column, panelHeight);
         [panelViewController setTitle:title];
         [_containerView addSubview:panelViewController.view];
         containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
@@ -170,7 +179,7 @@
 
 -(void)fillPanel:(NSView*) panelView content:(NSView*)contentView{
     
-        NSSize panelSize = panelView.frame.size;
+    NSSize panelSize = panelView.frame.size;
         contentView.frame = NSMakeRect(0, UI_panelContentPaddingBottom, panelSize.width, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
         [panelView addSubview:contentView];
         [contentView setNeedsDisplay:YES];
@@ -182,6 +191,26 @@
         testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
         [self fillPanel:panelViewController.view content:testViewController.view];
     }
+
+-(void)loadMapPanel{
+    AMPanelViewController* panelViewController=  [self createOrShowPanel:@"Map" withTitle:@"Map" columnCount:4];
+    mapViewController = [[AMMapViewController alloc] initWithNibName:@"AMMapViewController" bundle:nil];
+    [self fillPanel:panelViewController.view content:mapViewController.view];
+}
+
+-(void)loadMixingPanel{
+    AMPanelViewController* panelViewController=  [self createOrShowPanel:@"Mixing" withTitle:@"Mixing" columnCount:4];
+    mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
+    [self fillPanel:panelViewController.view content:mixingViewController.view];
+}
+
+-(void)loadVisualPanel{
+    AMPanelViewController* panelViewController=  [self createOrShowPanel:@"Visual" withTitle:@"Visualization" columnCount:2];
+    visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
+    [self fillPanel:panelViewController.view content:visualViewController.view];
+}
+
+
 
 
 -(void)loadFOAFPanel{

@@ -44,6 +44,12 @@
 		AF01080B1929DA84001415CC /* info.css in Resources */ = {isa = PBXBuildFile; fileRef = AF01080A1929DA84001415CC /* info.css */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
+		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
+		AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF200642194585F6008630C8 /* AMMapViewController.xib */; };
+		AF20064819458604008630C8 /* AMVisualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF20064619458604008630C8 /* AMVisualViewController.m */; };
+		AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF20064719458604008630C8 /* AMVisualViewController.xib */; };
+		AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */; };
+		AF20064E1945861B008630C8 /* AMOSCRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */; };
 		AF74054618F7D93200B3C1DF /* Attachement.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052018F7D93100B3C1DF /* Attachement.png */; };
 		AF74054718F7D93200B3C1DF /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052118F7D93100B3C1DF /* Edit.png */; };
 		AF74054818F7D93200B3C1DF /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = AF74052218F7D93100B3C1DF /* Favorite.png */; };
@@ -80,6 +86,12 @@
 		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
 		AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC77F8D1900C91A003543CF /* AMSocialViewController.m */; };
 		AFC77F901900CBFB003543CF /* web.css in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8F1900CBFB003543CF /* web.css */; };
+		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
+		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
+		AFDA79AA1945869D0002873B /* mapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A81945869D0002873B /* mapShot.png */; };
+		AFDA79AB1945869D0002873B /* mixingShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A91945869D0002873B /* mixingShot.png */; };
+		AFDA79AE194586C50002873B /* oscShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79AC194586C50002873B /* oscShot.png */; };
+		AFDA79AF194586C50002873B /* visualShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79AD194586C50002873B /* visualShot.png */; };
 		CE153B05191E5CA200E53250 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE153B04191E5CA200E53250 /* AMTaskLauncher.framework */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
@@ -196,6 +208,15 @@
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
 		AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMouseOverButtonView.m; sourceTree = "<group>"; };
+		AF200640194585F6008630C8 /* AMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMapViewController.h; sourceTree = "<group>"; };
+		AF200641194585F6008630C8 /* AMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMapViewController.m; sourceTree = "<group>"; };
+		AF200642194585F6008630C8 /* AMMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMapViewController.xib; sourceTree = "<group>"; };
+		AF20064519458604008630C8 /* AMVisualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVisualViewController.h; sourceTree = "<group>"; };
+		AF20064619458604008630C8 /* AMVisualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVisualViewController.m; sourceTree = "<group>"; };
+		AF20064719458604008630C8 /* AMVisualViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVisualViewController.xib; sourceTree = "<group>"; };
+		AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCRouteViewController.h; sourceTree = "<group>"; };
+		AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCRouteViewController.m; sourceTree = "<group>"; };
+		AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCRouteViewController.xib; sourceTree = "<group>"; };
 		AF74052018F7D93100B3C1DF /* Attachement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Attachement.png; path = Resource/Attachement.png; sourceTree = "<group>"; };
 		AF74052118F7D93100B3C1DF /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Edit.png; path = Resource/Edit.png; sourceTree = "<group>"; };
 		AF74052218F7D93100B3C1DF /* Favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Favorite.png; path = Resource/Favorite.png; sourceTree = "<group>"; };
@@ -236,6 +257,13 @@
 		AFC77F8C1900C91A003543CF /* AMSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSocialViewController.h; sourceTree = "<group>"; };
 		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
 		AFC77F8F1900CBFB003543CF /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = web.css; path = Resource/web.css; sourceTree = "<group>"; };
+		AFDA79A21945864A0002873B /* AMMixingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixingViewController.h; sourceTree = "<group>"; };
+		AFDA79A31945864A0002873B /* AMMixingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixingViewController.m; sourceTree = "<group>"; };
+		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
+		AFDA79A81945869D0002873B /* mapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapShot.png; sourceTree = "<group>"; };
+		AFDA79A91945869D0002873B /* mixingShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mixingShot.png; sourceTree = "<group>"; };
+		AFDA79AC194586C50002873B /* oscShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oscShot.png; sourceTree = "<group>"; };
+		AFDA79AD194586C50002873B /* visualShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visualShot.png; sourceTree = "<group>"; };
 		CE153B04191E5CA200E53250 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../../AMTaskLauncher/build/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
@@ -321,6 +349,18 @@
 				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
 				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
 				AF86600B19401F4D008DB7CA /* AMTestViewController.m */,
+				AF200640194585F6008630C8 /* AMMapViewController.h */,
+				AF200641194585F6008630C8 /* AMMapViewController.m */,
+				AF200642194585F6008630C8 /* AMMapViewController.xib */,
+				AF20064519458604008630C8 /* AMVisualViewController.h */,
+				AF20064619458604008630C8 /* AMVisualViewController.m */,
+				AF20064719458604008630C8 /* AMVisualViewController.xib */,
+				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
+				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
+				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
+				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
+				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
+				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -476,6 +516,7 @@
 		AF8CE2B618F6870A003BB9D1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				AFDA79A7194586660002873B /* panelshot */,
 				AF9205401910B2F10051BE63 /* statusnetIcon */,
 				AF82E33F190CA7FC0083487C /* font */,
 				26D2FFC41900D6EF0083742E /* CreateGroup.png */,
@@ -508,6 +549,17 @@
 				AF8CE2B418F6848D003BB9D1 /* profile.png */,
 			);
 			name = statusnetIcon;
+			sourceTree = "<group>";
+		};
+		AFDA79A7194586660002873B /* panelshot */ = {
+			isa = PBXGroup;
+			children = (
+				AFDA79AC194586C50002873B /* oscShot.png */,
+				AFDA79AD194586C50002873B /* visualShot.png */,
+				AFDA79A81945869D0002873B /* mapShot.png */,
+				AFDA79A91945869D0002873B /* mixingShot.png */,
+			);
+			name = panelshot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,18 +645,23 @@
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
+				AFDA79AF194586C50002873B /* visualShot.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AF74056A18F7D93200B3C1DF /* Users.png in Resources */,
 				AF9DC78718E96AEB0029DB97 /* ken.png in Resources */,
+				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AF74056318F7D93200B3C1DF /* Reply.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
+				AFDA79AB1945869D0002873B /* mixingShot.png in Resources */,
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
 				AF01080B1929DA84001415CC /* info.css in Resources */,
 				AF74054818F7D93200B3C1DF /* Favorite.png in Resources */,
+				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
+				AFDA79AA1945869D0002873B /* mapShot.png in Resources */,
 				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
@@ -612,6 +669,7 @@
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AFC77F901900CBFB003543CF /* web.css in Resources */,
 				AF74056918F7D93200B3C1DF /* Trash.png in Resources */,
+				AFDA79AE194586C50002873B /* oscShot.png in Resources */,
 				AF74054B18F7D93200B3C1DF /* Home.png in Resources */,
 				26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */,
 				AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */,
@@ -619,12 +677,14 @@
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */,
 				26E1E6A119023496000BF14C /* AMChatView.xib in Resources */,
+				AF20064E1945861B008630C8 /* AMOSCRouteViewController.xib in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 				26D2FFBF1900D01A0083742E /* meshButton.png in Resources */,
 				AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */,
 				AF74054918F7D93200B3C1DF /* Favorites.png in Resources */,
 				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
+				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AF74054718F7D93200B3C1DF /* Edit.png in Resources */,
 				26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */,
 				26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */,
@@ -665,6 +725,7 @@
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
+				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26DA41BA1909E79200DC0DCC /* AMUserGroupOutlineView.m in Sources */,
@@ -677,10 +738,13 @@
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
+				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
+				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
 				26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */,
+				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

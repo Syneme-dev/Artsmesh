@@ -34,11 +34,10 @@
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
                             <view key="view" ambiguous="YES" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="570" height="270"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="0.0" y="-50" width="600" height="320"/>
+                                        <rect key="frame" x="0.0" y="-320" width="600" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
@@ -404,10 +403,6 @@
                             </connections>
                         </button>
                     </subviews>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qmJ-xR-Zkw" customClass="BlueBackgroundView">
-                    <rect key="frame" x="0.0" y="249" width="600" height="1"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
             </subviews>
         </customView>

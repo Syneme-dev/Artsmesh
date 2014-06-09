@@ -17,6 +17,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ksy-Yh-CFv" customClass="BlueBackgroundView">
+                    <rect key="frame" x="0.0" y="559" width="600" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="1N4-EQ-DLD"/>
+                    </constraints>
+                </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fvD-YA-Ec9" userLabel="Top" customClass="BlueBackgroundView">
                     <rect key="frame" x="0.0" y="580" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -133,6 +140,9 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fvD-YA-Ec9" secondAttribute="trailing" id="1kz-FY-IF3"/>
+                <constraint firstAttribute="trailing" secondItem="Ksy-Yh-CFv" secondAttribute="trailing" id="SIG-Nz-Pu0"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ZLC-p9-POz"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="bottom" constant="20" id="cI4-dK-hIY"/>
                 <constraint firstItem="fvD-YA-Ec9" firstAttribute="top" secondItem="1" secondAttribute="top" id="kov-vW-jW2"/>
                 <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yp8-BK-kH4"/>
             </constraints>

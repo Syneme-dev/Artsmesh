@@ -314,6 +314,10 @@
 		262021F418EAE56200811E4E /* Panels */ = {
 			isa = PBXGroup;
 			children = (
+				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
+				AF200642194585F6008630C8 /* AMMapViewController.xib */,
+				AF20064719458604008630C8 /* AMVisualViewController.xib */,
+				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */,
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
@@ -351,16 +355,12 @@
 				AF86600B19401F4D008DB7CA /* AMTestViewController.m */,
 				AF200640194585F6008630C8 /* AMMapViewController.h */,
 				AF200641194585F6008630C8 /* AMMapViewController.m */,
-				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064519458604008630C8 /* AMVisualViewController.h */,
 				AF20064619458604008630C8 /* AMVisualViewController.m */,
-				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
 				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
-				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
 				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
-				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

@@ -30,8 +30,7 @@
     [self.popUpButton removeAllItems];
     [self.popUpButton addItemsWithTitles:itemTitles];
     [self.popUpButton setPullsDown:YES];
-      NSMenu *newMenu = [[NSMenu alloc] init];
-    
+    NSMenu *newMenu = [[NSMenu alloc] init];
     NSArray *itemArray = [self.popUpButton itemArray];
 //    NSDictionary *attributes = [NSDictionary
 //                                dictionaryWithObjectsAndKeys:

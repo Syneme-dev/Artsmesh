@@ -27,6 +27,7 @@
 #import "AMPingViewController.h"
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
+#import "AMTestViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -54,6 +55,7 @@
     AMSocialViewController * socialViewController;
     AMChatViewController *chatViewController;
     AMPingViewController *pingViewController;
+    AMTestViewController *testViewController;
     NSMutableDictionary *panelControllers;
     float containerWidth;
 }
@@ -134,35 +136,21 @@
     [self loadChatPanel];
     [self loadPingPanel];
     [self loadFOAFPanel];
+    [self loadTestPanel];
 
-    /*
-    _containerView = [[NSView alloc] initWithFrame:NSMakeRect(0, self.window.frame.origin.y, 10000.0f, self.window.frame.size.height-UI_topbarHeight)];
-    [scrollView setDocumentView:_containerView];
-    [self loadVersion];
-    [self loadPreferencePanel];
-    [self loadGroupsPanel];
-    [self loadUserPanel];
-    containerWidth=
-    UI_leftSidebarWidth+UI_panelSpacing+UI_defaultPanelWidth
-    +UI_panelSpacing+2*UI_defaultPanelWidth+UI_panelSpacing ;
-    [self loadChatPanel];
-    [self loadPingPanel];
-    
-    //Note:using the following code to render FOAF panel.
-    [self loadFOAFPanel];
-    */
     
 }
 
--(void)createEmptyPanel:(NSString*) identifier withTitle:(NSString*)title{
+-(AMPanelViewController* )createOrShowPanel:(NSString*) identifier withTitle:(NSString*)title{
+    AMPanelViewController *panelViewController;
     if (panelControllers[identifier]!=nil) {
-        AMPanelViewController *panelViewController=panelControllers[identifier];
+       panelViewController=panelControllers[identifier];
         [panelViewController.view setHidden:NO];
 
     }
     else
     {
-        AMPanelViewController *panelViewController=
+        panelViewController=
         [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
         float panelHeight=720.0f;
         panelViewController.view.frame = NSMakeRect(containerWidth,
@@ -174,8 +162,27 @@
         [panelControllers setObject:panelViewController forKey:identifier];
     }
     
+    return panelViewController;
+    
 
 }
+
+
+-(void)fillPanel:(NSView*) panelView content:(NSView*)contentView{
+    
+        NSSize panelSize = panelView.frame.size;
+        contentView.frame = NSMakeRect(0, UI_panelContentPaddingBottom, panelSize.width, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
+        [panelView addSubview:contentView];
+        [contentView setNeedsDisplay:YES];
+    
+}
+
+-(void)loadTestPanel{
+      AMPanelViewController* panelViewController=  [self createOrShowPanel:@"test" withTitle:@"test"];
+        testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
+        [self fillPanel:panelViewController.view content:testViewController.view];
+    }
+
 
 -(void)loadFOAFPanel{
     AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
@@ -353,7 +360,7 @@
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     if(sender.state==NSOnState)
     {
-        [self createEmptyPanel:sender.identifier withTitle:sender.identifier];
+        [self createOrShowPanel:sender.identifier withTitle:sender.identifier];
     }
     else
     {

@@ -12,6 +12,7 @@
 
 - (IBAction)onTearClick:(id)sender;
 
+@property (nonatomic) NSString* panelId;
 @property (strong) IBOutlet NSView *toolBarView;
 
 @property (weak) IBOutlet NSTextField *titleView;

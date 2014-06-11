@@ -20,11 +20,22 @@
     NSColor *_knobColor;
 }
 
+-(void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    NSTrackingAreaOptions trackingOptions = NSTrackingEnabledDuringMouseDrag | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
+    NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:self.frame options:trackingOptions owner:self userInfo:nil];
+    [self addTrackingArea:trackingArea];
+    
+
+}
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
+//        [self setAcceptsTouchEvents:YES];
+         self.backgroundColor = [NSColor colorWithCalibratedRed:(38)/255.0f green:(38)/255.0f blue:(38)/255.0f alpha:1.0f];
+//        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         
     }
     return self;
@@ -86,6 +97,19 @@
   
 
 }
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    self.backgroundColor  = [ NSColor colorWithWhite:0.22 alpha:1.0];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    self.backgroundColor = [NSColor colorWithCalibratedRed:(38)/255.0f green:(38)/255.0f blue:(38)/255.0f alpha:1.0f];
+      [self setNeedsDisplay:YES];
+}
+
 
 
 @end

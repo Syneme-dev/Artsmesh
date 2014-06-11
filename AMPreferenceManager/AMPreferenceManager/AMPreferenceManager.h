@@ -51,11 +51,18 @@
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"8080"
 
+#define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
+
+
+
+
 #import <Foundation/Foundation.h>
 
 @interface AMPreferenceManager : NSObject
 
 +(AMPreferenceManager *)defaultShared;
+
++ (NSUserDefaults *)instance ;
 
 + (void)registerPreference;
 @end

@@ -21,10 +21,10 @@
     return [NSUserDefaults standardUserDefaults];
 }
 
-
-
-
 + (void)registerPreference {
+    NSMutableArray *openedPanel=[[NSMutableArray alloc] init];
+    [openedPanel addObject:@"User_Panel"];
+//    [openedPanel setArray:[NSArray arrayWithObjects:@"User_Panel",@"Group_Panel",nil]];
     NSDictionary *registrationDomainDefaultsValues =
             [NSDictionary dictionaryWithObjectsAndKeys:
              Preference_General_ChatPort,        Preference_Key_General_ChatPort,
@@ -40,6 +40,7 @@
              Preference_General_GlobalServerAddr,Preference_Key_General_GlobalServerAddr,
              Preference_General_GlobalServerPort,Preference_Key_General_GlobalServerPort,
              Preference_General_LocalServerPort, Preference_Key_General_LocalServerPort,
+             openedPanel,UserData_Key_OpenedPanel,
             nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

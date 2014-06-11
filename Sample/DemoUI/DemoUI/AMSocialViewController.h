@@ -11,14 +11,13 @@
 
 
 @interface AMSocialViewController : NSViewController
+
 @property (strong) IBOutlet WebView *socialWebTab;
-
--(void)loadPage;
-
 @property (retain) IBOutlet NSTabView *tabs;
 - (IBAction)onFOAFTabClick:(id)sender;
 - (IBAction)onBlogTabClick:(id)sender;
 - (IBAction)onUpButtonClick:(id)sender;
 - (IBAction)onAddFieldButtonClick:(id)sender;
+-(void)loadPage;
 
 @end

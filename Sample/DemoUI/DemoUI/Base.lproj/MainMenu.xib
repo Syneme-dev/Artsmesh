@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -749,7 +749,7 @@
                         <rect key="frame" x="0.0" y="524" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button identifier="OSCROUTER" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaV-lp-VWb" userLabel="OSC ROUTER">
+                            <button identifier="OSCMESSAGE" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaV-lp-VWb" userLabel="OSC ROUTER">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_osc" imagePosition="only" alignment="center" alternateImage="SideBar_osc_h" imageScaling="proportionallyDown" inset="2" id="sib-zI-nF3">
@@ -896,13 +896,16 @@
                         <rect key="frame" x="0.0" y="155" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button identifier="ASKKEN" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="askKen">
+                            <button identifier="TEAROFF" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="only" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="onSidebarItemClick:" target="B30-a9-ZW1" id="ZFn-gW-NEr"/>
+                                </connections>
                             </button>
                         </subviews>
                     </customView>

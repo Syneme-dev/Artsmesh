@@ -140,40 +140,46 @@
      };
     [scrollView setDocumentView:_containerView];
     [self loadVersion];
-//    [[AMPreferenceManager instance] setObject:[[NSMutableArray alloc]init] forKey:UserData_Key_OpenedPanel];
     NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
-   [self loadTestPanel];
+ 
     if ([openedPanels containsObject:UI_Panel_Key_User]) {
         [self loadUserPanel];
+    }
+    
+    [self loadTestPanel];
+
+    
+    if ([openedPanels containsObject:UI_Panel_Key_Map]) {
+        [self loadMapPanel];
+    }
+    if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
+        [self loadVisualPanel];
+    }
+    if ([openedPanels containsObject:UI_Panel_Key_Mixing]) {
+        [self loadMixingPanel];
+    }
+    
+    if ([openedPanels containsObject:UI_Panel_Key_NetworkTools]) {
+        
+        [self loadNetworkToolsPanel];
+    }
+    if ([openedPanels containsObject:UI_Panel_Key_Preference]) {
+        [self loadPreferencePanel];
+    }
+    [self loadFOAFPanel];
+    if ([openedPanels containsObject:UI_Panel_Key_Chat]) {
+        [self loadChatPanel];
     }
     
     if ([openedPanels containsObject:UI_Panel_Key_Groups]) {
         [self loadGroupsPanel];
     }
-    if ([openedPanels containsObject:UI_Panel_Key_Preference]) {
-        [self loadPreferencePanel];
-        }
-    if ([openedPanels containsObject:UI_Panel_Key_Chat]) {
-    [self loadChatPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_NetworkTools]) {
-
-    [self loadNetworkToolsPanel];
-    }
+   
 //    if ([openedPanels containsObject:UI_Panel_Key_F]) {
-
-    [self loadFOAFPanel];
+    
 //    }
     
-    if ([openedPanels containsObject:UI_Panel_Key_Map]) {
-    [self loadMapPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
-    [self loadVisualPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Mixing]) {
-    [self loadMixingPanel];
-    }
+    
     for (NSString* openedPanel in openedPanels) {
         NSString *sideItemId=[openedPanel stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
         [self setSideBarItemStatus:sideItemId withStatus:YES ];
@@ -199,11 +205,16 @@
         panelViewController=
         [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.panelId=identifier;
-        panelViewController.view.frame = NSMakeRect(0,
+        panelViewController.view.frame = NSMakeRect(160+UI_defaultPanelWidth,
                                                     self.window.frame.size.height-UI_topbarHeight-
                                                     height+UI_pixelHeightAdjustment, width, height);
         [panelViewController setTitle:title];
-        [_containerView addSubview:panelViewController.view  positioned:NSWindowBelow relativeTo:nil];
+    NSView *firstPanel=nil;
+    if(_containerView.subviews.count>0)
+    {
+        firstPanel=_containerView.subviews[0];
+    }
+        [_containerView addSubview:panelViewController.view  positioned:NSWindowAbove relativeTo:firstPanel];
         containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
         [self.panelControllers setObject:panelViewController forKey:identifier];
         
@@ -288,9 +299,25 @@
 - (void)loadGroupsPanel {
     float panelWidth=300.0f;
     float panelHeight=400.0f;
-    AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_Groups withTitle:@"GROUPS"
-                                                           width:panelWidth height:panelHeight];
+    AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_Groups
+                                                       withTitle:@"GROUPS"
+                                                           width:panelWidth
+                                                          height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
+    //TODO:create a group panel below the user panel by default.
+    //TODO:sample code like below.
+    
+//    NSMutableArray *openedPanels=[[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+//    if([openedPanels containsObject:UI_Panel_Key_User])
+//    {
+//        
+//        AMPanelViewController *userPanelViewController=self.panelControllers[UI_Panel_Key_User];
+//        NSRect userViewFrame=userPanelViewController.view.frame;
+//        [panelView setFrameOrigin:NSMakePoint(userViewFrame.origin.x, userViewFrame.origin.y+100.0+userViewFrame.size.height)];
+//        [panelView setNeedsDisplay:YES];
+//    }
+
+  
     NSSize panelSize = NSMakeSize(300.0f, 400.0f);
     panelView.minSizeConstraint = panelSize;
 //    NSSize maxSize = NSMakeSize(600.0f, 740.0f);

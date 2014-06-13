@@ -238,7 +238,7 @@
 
 }
 
--(void)hidePanel:(NSString *)panelName{
+-(void)removePanel:(NSString *)panelName{
     AMPanelViewController* pannelViewController=self.panelControllers[panelName];
     [pannelViewController closePanel:nil];
   
@@ -494,7 +494,7 @@
     }
     else
     {
-        [self hidePanel:panelId];
+        [self removePanel:panelId];
     }
 }
 

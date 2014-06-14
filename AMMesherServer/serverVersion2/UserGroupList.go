@@ -237,7 +237,7 @@ func RemoveTimeoutUser(){
 	for e := gl.timeSort.Front(); e != nil;{
 		user := e.Value.(UserNode)
 		dur := time.Now().Sub(user.timestamp)
-		if	dur < 30.0{
+		if	dur.Seconds() < g_user_timeout{
 			break
 		}
 		

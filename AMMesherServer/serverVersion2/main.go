@@ -44,7 +44,6 @@ type GroupUserCommand struct{
 	groupId			string
 	groupData		string
 	superGroup		string
-	mergeToGroup	string
 }
 
 const(
@@ -110,25 +109,25 @@ func executeCommand(){
 		switch command.action{
 		case user_new:
 			AddNewUser(command.userId, command.groupId, command.userData)
-			break
+			//go don't need break here
 		case group_new:
 			AddNewGroup(command.groupId, command.superGroup, command.groupData)
-			break
+
 		case group_update:
 			UpdataGroup(command.groupId, command.groupData)
-			break
+
 		case user_update:
 			UpdataUser(command.userId, command.groupId, command.userData)	
-			break
+
 		case group_delete:
 			DeleteGroup(command.groupId)
-			break
+
 		case user_delete:
 			DeleteUser(command.userId, command.groupId)
-			break
+
 		case group_move:
 			MoveGroup(command.groupId, command.superGroup)
-			break
+
 		case user_heartbeat:
 			UserHeartbeat(command.userId, command.groupId)
 		}

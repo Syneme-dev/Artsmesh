@@ -10,6 +10,7 @@ import(
 	"bytes"
 	"strings"
 	"encoding/json"
+	"io"
 )
 
 var g_rest_port int
@@ -128,15 +129,10 @@ func executeCommand(){
 		case group_move:
 			MoveGroup(command.groupId, command.superGroup)
 			break
+		case user_heartbeat:
+			UserHeartbeat(command.userId, command.groupId)
 		}
 	}
-}
-
-func userNewExecute(cmd *GroupUserCommand){
-	
-	
-	
-
 }
 
 
@@ -189,13 +185,35 @@ func handleClient(conn *net.UDPConn){
 	jsonStream := string(buf[:len])
 	fmt.Fprintf(os.Stdout, "received json content: %s \n", jsonStream)
 
-	//req := parseJsonString(jsonStream)
-	//if	req == nil {
-	//	return
-	//}
+	heartbeatInfo := parseJsonString(jsonStream)
+	if	heartbeatInfo == nil {
+		return
+	}
 	
-	//response := handleUDPRequest(req)
+	var command GroupUserCommand
+	command.action = user_heartbeat
+	command.userId = heartbeatInfo.userId
+	command.groupId = heartbeatInfo.groupId
 	
+	g_command_pipe<- command
+}
+
+func parseJsonString(contentStr string) *UserHeartbeatInfo{
+	var err error
+	var info UserHeartbeatInfo
+	dec := json.NewDecoder(strings.NewReader(contentStr))
+	for{
+		err = dec.Decode(&info); 
+		 if err == io.EOF {
+			break;
+		}else if err != nil{
+			fmt.Println("parse json string failed")
+			fmt.Println(os.Stderr, err.Error())
+			return nil;
+		}
+	}
+	
+	return &info
 }
 
 ///////////////////////Http GoRoutine///////////////////////

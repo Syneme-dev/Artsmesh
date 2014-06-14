@@ -174,7 +174,7 @@ func AddNewUser(userId string, groupId, userData string)(bool){
 	
 	addUserToGroup(newUser, group)
 	makeUserIndex(newUser)
-	UpdateUserTimestamp(newUser)
+	updateUserTimestamp(newUser)
 	makeSnapShot()
 	
 	return true
@@ -192,9 +192,22 @@ func UpdataUser(userId string, groupId, userData string)(bool){
 	}
 	
 	existUser.userData = userData
-	UpdateUserTimestamp(existUser)
+	updateUserTimestamp(existUser)
 	makeSnapShot()
 	
+	return true
+}
+
+func UserHeartbeat(userId string, groupId string)(bool){
+	
+	group := getGroupById(groupId)
+	user := getUserById(userId)
+	
+	if group ==nil || user == nil{
+		return false
+	}
+	
+	updateUserTimestamp(user)
 	return true
 }
 
@@ -235,7 +248,7 @@ func RemoveTimeoutUser(){
 	makeSnapShot()
 }
 
-func UpdateUserTimestamp(user *UserNode){
+func updateUserTimestamp(user *UserNode){
 	
 	user.timestamp = time.Now()
 	for e := gl.timeSort.Front();  e != nil; e = e.Next(){

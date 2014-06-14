@@ -1,6 +1,7 @@
 package main
 
 import(
+	"fmt"
 	"time"
 	"sync"
 	"container/list"
@@ -21,6 +22,18 @@ type GroupNode struct{
 	subgroups		map[string]*GroupNode	
 }
 
+type DTOUser struct{
+	UserId 		string
+	UserData 	string
+}
+
+type DTOGroup struct{
+	GroupId 	string
+	GroupData 	string
+	Users 		[]*DTOUser
+	SubGroups   []*DTOGroup
+}
+
 type GroupList struct{
 	global_version 	int
 	rootGroup 		*GroupNode
@@ -32,13 +45,13 @@ type GroupList struct{
 var gl GroupList
 
 var snapShotLock sync.RWMutex
-var snapShot *GroupNode
+var snapShot *DTOGroup
 
 func InitGroupList(){
 	var rootGroup = new(GroupNode)
 	rootGroup.groupId = ""
 	rootGroup.superGroupId = ""
-	rootGroup.groupData = ""
+	rootGroup.groupData = "RootGoup"
 	rootGroup.users = nil
 	rootGroup.subgroups = make(map[string]*GroupNode, 100)
 
@@ -55,20 +68,25 @@ func InitGroupList(){
 
 func AddNewGroup(groupId string, superGroupId string, groupData string)(bool){
 	
+	fmt.Println("AddNewGroup Method Called...")
+	
 	if groupId == superGroupId {
+		fmt.Println("groupId can not be equal to superGroupId")
 		return false
 	}
 	
 	existGroup := getGroupById(groupId)
 	if existGroup != nil{
-		//already exist
+		fmt.Println("group alread exist!")
 		return false 
 	}
 	
 	superGroup := getGroupById(superGroupId)
 	if	superGroup == nil{
-		//super group is not exist, add to the root group
+		fmt.Println("super group is not exist, add to the root group")
 		superGroup = gl.rootGroup
+	}else{
+		fmt.Println("super group is: ", superGroup.groupData)
 	}
 	
 	var newGroup  = new(GroupNode)
@@ -80,6 +98,8 @@ func AddNewGroup(groupId string, superGroupId string, groupData string)(bool){
 	addGroupToSuper(newGroup, superGroup)
 	makeGroupIndex(newGroup)
 	makeSnapShot()
+	
+	fmt.Println("AddNewGroup Method Finished!")
 
 	return true
 }
@@ -289,6 +309,10 @@ func removeFromGroupIndex(group *GroupNode){
 }
 
 func tryRemoveEmptyGroup(group *GroupNode){
+	if group.groupId == ""{
+		//root group
+		return
+	}
 	
 	if len(group.users) == 0 && len(group.subgroups) == 0{
 		superGroup := getGroupById(group.superGroupId)
@@ -300,11 +324,31 @@ func tryRemoveEmptyGroup(group *GroupNode){
 
 func makeSnapShot(){
 	snapShotLock.Lock()
-	snapShot = copyGroup(gl.rootGroup)
+	snapShot = copyGroupToDTO(gl.rootGroup)
 	snapShotLock.Unlock()
+	
+	fmt.Println("Printing snapshot:-------------------")
+	printDTOGroup(snapShot)
+	fmt.Println("End Printng--------------------------")
 }
 
-func RLockSnapShot()(*GroupNode){
+func printDTOGroup(dtg *DTOGroup){
+	fmt.Println("Group Id is:", dtg.GroupId)
+	fmt.Println("Group data is:", dtg.GroupData)
+	for _, v := range dtg.Users{
+		fmt.Println("printing users:")
+		fmt.Printf("userid=%s, userdata=%s\n", v.UserId, v.UserData)
+		fmt.Println("end printing users:")
+	}
+	
+	for _, v := range dtg.SubGroups{
+		fmt.Println("printing subgroups:")
+	 	printDTOGroup(v)
+		fmt.Println("end printing subgroups:")
+	}
+}
+
+func RLockSnapShot()(*DTOGroup){
 	snapShotLock.RLock()
 	return snapShot
 }
@@ -313,28 +357,25 @@ func RUnlockSnapShot(){
 	snapShotLock.RUnlock()
 }
 
-func copyGroup(group *GroupNode)(*GroupNode){
+func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	
-	var cg = new(GroupNode)
-	cg.groupId = group.groupId
-	cg.groupData = group.groupData
-	cg.superGroupId = group.superGroupId
-	cg.users = make(map[string]*UserNode, 100)
-	cg.subgroups = make(map[string]*GroupNode, 10)
+	var dtoGroup = new (DTOGroup)
+	dtoGroup.GroupId = group.groupId
+	dtoGroup.GroupData = group.groupData
+	//dtoGroup.Users = []*DTOUser
+	//dtoGroup.SubGroups = []*DTOGroup
 	
-	for k, v := range group.users{
-		u := new(UserNode)
-		u.userId = v.userId
-		u.groupId = v.groupId
-		u.userData = v.userData
-		u.timestamp = v.timestamp
-		cg.users[k] = u
+	for _, v := range group.users{
+		u := new(DTOUser)
+		u.UserId = v.userId
+		u.UserData = v.userData
+		dtoGroup.Users = append(dtoGroup.Users, u)
 	}
 
-	for k, v := range group.subgroups{
-		g := copyGroup(v)
-		cg.subgroups[k] = g
+	for _, v := range group.subgroups{
+		dtog := copyGroupToDTO(v)
+		dtoGroup.SubGroups = append(dtoGroup.SubGroups, dtog)
 	}
 
-	return cg
+	return dtoGroup
 }

@@ -9,7 +9,7 @@ import(
 	"flag"
 	"bytes"
 	"strings"
-	//"encoding/json"
+	"encoding/json"
 )
 
 var g_rest_port int
@@ -32,8 +32,8 @@ const(
 	user_heartbeat
 	group_new
 	group_update
-	group_merge
-	group_unmerge
+	group_delete
+	group_move
 )
 
 type GroupUserCommand struct{
@@ -110,14 +110,24 @@ func executeCommand(){
 		case user_new:
 			AddNewUser(command.userId, command.groupId, command.userData)
 			break
+		case group_new:
+			AddNewGroup(command.groupId, command.superGroup, command.groupData)
+			break
+		case group_update:
+			UpdataGroup(command.groupId, command.groupData)
+			break
 		case user_update:
-			UpdataUser(command.userId, command.groupId, command.userData)
+			UpdataUser(command.userId, command.groupId, command.userData)	
+			break
+		case group_delete:
+			DeleteGroup(command.groupId)
+			break
 		case user_delete:
 			DeleteUser(command.userId, command.groupId)
-		case user_heartbeat:
-			//UpdateUserTimestamp()
-		case group_merge:
-		case group_unmerge:
+			break
+		case group_move:
+			MoveGroup(command.groupId, command.superGroup)
+			break
 		}
 	}
 }
@@ -192,15 +202,18 @@ func handleClient(conn *net.UDPConn){
 
 func addUser(w http.ResponseWriter, r *http.Request){	
 	r.ParseForm()
-	fmt.Println(r.Form)
-	fmt.Println("path", r.URL.Path)	
-	
 	userId := strings.Join(r.Form["userId"], "") 
 	groupId := strings.Join(r.Form["groupId"], "")
 	userData := strings.Join(r.Form["userData"], "")
+	
+	fmt.Println("")
+	fmt.Println("user_add requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
 	fmt.Println("userId:", userId)
 	fmt.Println("groupId:", groupId)
 	fmt.Println("userData:", userData)
+	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
@@ -210,42 +223,203 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	command.groupId = groupId
 	command.userData = userData
 	
-	//g_command_pipe<- command
-	
-	
+	g_command_pipe<- command
+
 	fmt.Fprintf(w, "ok")
 }
 
 func getAllUsers(w http.ResponseWriter, r *http.Request){
+	snapShotLock.RLock()
+	userData, err := json.Marshal(snapShot)
+	if err != nil{
+		fmt.Fprintf(os.Stderr, "error: %s", err.Error())
+		return
+	}
+	snapShotLock.RUnlock()
 	
+	userDataStr := fmt.Sprintf("%s", userData)
+	fmt.Printf("\n%s\n", userDataStr)
+	fmt.Fprintf(w, userDataStr)
 }
 
 func updateUser(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	userId := strings.Join(r.Form["userId"], "") 
+	groupId := strings.Join(r.Form["groupId"], "")
+	userData := strings.Join(r.Form["userData"], "")
 	
+	fmt.Println("")
+	fmt.Println("user_update requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+	fmt.Println("userId:", userId)
+	fmt.Println("groupId:", groupId)
+	fmt.Println("userData:", userData)
+	fmt.Println("end http requst information ---------------------")
+	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = user_update
+	command.userId = userId
+	command.groupId = groupId
+	command.userData = userData
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func deleteUser(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	userId := strings.Join(r.Form["userId"], "") 
+	groupId := strings.Join(r.Form["groupId"], "")
 	
+	fmt.Println("")
+	fmt.Println("user_delete requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+	fmt.Println("userId:", userId)
+	fmt.Println("groupId:", groupId)
+	fmt.Println("end http requst information ---------------------")
+	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = user_delete
+	command.userId = userId
+	command.groupId = groupId
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func addGroup(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	groupId := strings.Join(r.Form["groupId"], "")
+	superGroupId := strings.Join(r.Form["superGroupId"], "")
+	groupData := strings.Join(r.Form["groupData"], "")
 	
+	fmt.Println("")
+	fmt.Println("group_add requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+
+	fmt.Println("groupId is:", groupId)
+	fmt.Println("groupData is:", groupData)
+	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("end http requst information ---------------------")
+	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = group_new
+	command.groupId = groupId
+	command.groupData = groupData
+	command.superGroup = superGroupId
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func updateGroup(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	groupId := strings.Join(r.Form["groupId"], "")
+	groupData := strings.Join(r.Form["groupData"], "")
 	
+	fmt.Println("")
+	fmt.Println("group_update requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+
+	fmt.Println("groupId is:", groupId)
+	fmt.Println("groupData is:", groupData)
+	fmt.Println("end http requst information ---------------------")
+	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = group_update
+	command.groupId = groupId
+	command.groupData = groupData
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func deleteGroup(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	groupId := strings.Join(r.Form["groupId"], "")
+
+	fmt.Println("")
+	fmt.Println("group_delete requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+	fmt.Println("groupId is:", groupId)
+	fmt.Println("end http requst information ---------------------")
 	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = group_delete
+	command.groupId = groupId
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func mergeGroup(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	groupId := strings.Join(r.Form["groupId"], "")
+	superGroupId := strings.Join(r.Form["superGroupId"], "")
+
+	fmt.Println("")
+	fmt.Println("group_move requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+	fmt.Println("groupId is:", groupId)
+	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("end http requst information ---------------------")
 	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = group_move
+	command.groupId = groupId
+	command.superGroup = superGroupId
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func unmergeGroup(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	groupId := strings.Join(r.Form["groupId"], "")
+	superGroupId := ""
+
+	fmt.Println("")
+	fmt.Println("group_move requst information ---------------------")
+	fmt.Println(r.Form)
+	fmt.Println("path", r.URL.Path)	
+	fmt.Println("groupId is:", groupId)
+	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("end http requst information ---------------------")
 	
+	//check value
+	
+	var command GroupUserCommand
+	command.action = group_move
+	command.groupId = groupId
+	command.superGroup = superGroupId
+	
+	g_command_pipe<- command
+
+	fmt.Fprintf(w, "ok")
 }
 
 func startRestServer(){

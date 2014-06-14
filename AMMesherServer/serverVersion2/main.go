@@ -5,7 +5,6 @@ import(
 	"net"
 	"net/http"
 	"os"
-	"time"
 	"flag"
 	"bytes"
 	"strings"
@@ -20,9 +19,8 @@ var g_ipv6 bool
 var g_command_pipe chan GroupUserCommand
 
 type UserHeartbeatInfo struct{
-	userId string
-	groupId string
-	lastHeartbeat time.Time
+	UserId 		string
+	GroupId 		string
 }
 
 type CommandAction int
@@ -108,16 +106,20 @@ func executeCommand(){
 		command := <-g_command_pipe
 		switch command.action{
 		case user_new:
-			AddNewUser(command.userId, command.groupId, command.userData)
+			res := AddNewUser(command.userId, command.groupId, command.userData)
+			fmt.Println("AddNewUser return value is", res)
 			//go don't need break here
 		case group_new:
-			AddNewGroup(command.groupId, command.superGroup, command.groupData)
+			res := AddNewGroup(command.groupId, command.superGroup, command.groupData)
+			fmt.Println("AddNewGroup return value is", res)
 
 		case group_update:
-			UpdataGroup(command.groupId, command.groupData)
+			res := UpdataGroup(command.groupId, command.groupData)
+			fmt.Println("UpdataGroup return value is", res)
 
 		case user_update:
-			UpdataUser(command.userId, command.groupId, command.userData)	
+			res := UpdataUser(command.userId, command.groupId, command.userData)	
+			fmt.Println("UpdataUser return value is", res)
 
 		case group_delete:
 			DeleteGroup(command.groupId)
@@ -126,10 +128,12 @@ func executeCommand(){
 			DeleteUser(command.userId, command.groupId)
 
 		case group_move:
-			MoveGroup(command.groupId, command.superGroup)
+			res := MoveGroup(command.groupId, command.superGroup)
+			fmt.Println("MoveGroup return value is", res)
 
 		case user_heartbeat:
-			UserHeartbeat(command.userId, command.groupId)
+			res := UserHeartbeat(command.userId, command.groupId)
+			fmt.Println("UserHeartbeat return value is", res)
 		}
 	}
 }
@@ -150,7 +154,7 @@ func startUdpServer(){
 	}
 	
 	if	err  != nil{
-		fmt.Fprintf(os.Stderr, "Fatal Error", err.Error())
+		fmt.Println("Fatal Error", err.Error())
 		os.Exit(1)
 	}
 	
@@ -158,7 +162,7 @@ func startUdpServer(){
 	
 	conn, err := net.ListenUDP("udp", udpAddr)
 	if	err  != nil{
-		fmt.Fprintf(os.Stderr, "Fatal Error", err.Error())
+		fmt.Println("Fatal Error", err.Error())
 		os.Exit(1)
 	}
 	
@@ -172,29 +176,45 @@ func handleClient(conn *net.UDPConn){
 	var buf [1024]byte
 	n, addr, err := conn.ReadFromUDP(buf[0:])
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "ReadFromUDP failed")
+		fmt.Println("ReadFromUDP failed")
 		return
 	}
 	
-	fmt.Fprintln(os.Stdout, "Handling Client ...")
-	fmt.Fprintf(os.Stdout, "%d bytes received from %s \n", n, addr.String())
+	fmt.Println("Handling Client ...")
+	fmt.Printf("%d bytes received from %s \n", n, addr.String())
 	
 	len := bytes.Index(buf[:], []byte{0})
-	fmt.Fprintf(os.Stdout, "received json len: %d \n", len)
+	fmt.Printf("received json len: %d \n", len)
 	jsonStream := string(buf[:len])
-	fmt.Fprintf(os.Stdout, "received json content: %s \n", jsonStream)
+	fmt.Printf("received json content: %s \n", jsonStream)
 
 	heartbeatInfo := parseJsonString(jsonStream)
 	if	heartbeatInfo == nil {
+		fmt.Printf("json format is not correct\n")
 		return
 	}
 	
+	fmt.Printf("heartbeat userid is %s\n", heartbeatInfo.UserId)
+	fmt.Printf("heartbeat groupid is %s\n", heartbeatInfo.GroupId)
+	
 	var command GroupUserCommand
 	command.action = user_heartbeat
-	command.userId = heartbeatInfo.userId
-	command.groupId = heartbeatInfo.groupId
+	command.userId = heartbeatInfo.UserId
+	command.groupId = heartbeatInfo.GroupId
 	
 	g_command_pipe<- command
+
+	ss := RLockSnapShot()
+	version := ss.Version
+	RUnlockSnapShot()
+	
+	versionStr := fmt.Sprintf("%d", version)
+	
+	bytes := []byte(versionStr)
+	_, err = conn.WriteToUDP(bytes, addr)
+	if	err != nil{
+		fmt.Fprintf(os.Stdout, "Write to Udp failed!")
+	}
 }
 
 func parseJsonString(contentStr string) *UserHeartbeatInfo{
@@ -246,13 +266,13 @@ func addUser(w http.ResponseWriter, r *http.Request){
 }
 
 func getAllUsers(w http.ResponseWriter, r *http.Request){
-	snapShotLock.RLock()
-	userData, err := json.Marshal(snapShot)
+	ss := RLockSnapShot()
+	userData, err := json.Marshal(ss)
 	if err != nil{
 		fmt.Fprintf(os.Stderr, "error: %s", err.Error())
 		return
 	}
-	snapShotLock.RUnlock()
+	RUnlockSnapShot()
 	
 	userDataStr := fmt.Sprintf("%s", userData)
 	fmt.Printf("\n%s\n", userDataStr)

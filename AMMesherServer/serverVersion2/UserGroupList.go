@@ -34,6 +34,11 @@ type DTOGroup struct{
 	SubGroups   []*DTOGroup
 }
 
+type DTOSnapShot struct{
+	Data		*DTOGroup
+	Version		int
+}
+
 type GroupList struct{
 	global_version 	int
 	rootGroup 		*GroupNode
@@ -45,7 +50,7 @@ type GroupList struct{
 var gl GroupList
 
 var snapShotLock sync.RWMutex
-var snapShot *DTOGroup
+var snapShot *DTOSnapShot
 
 func InitGroupList(){
 	var rootGroup = new(GroupNode)
@@ -63,6 +68,7 @@ func InitGroupList(){
 	
 	gl.groupIndex[""] = rootGroup
 	
+	snapShot = new(DTOSnapShot)
 	makeSnapShot()
 }
 
@@ -337,11 +343,13 @@ func tryRemoveEmptyGroup(group *GroupNode){
 
 func makeSnapShot(){
 	snapShotLock.Lock()
-	snapShot = copyGroupToDTO(gl.rootGroup)
+	snapShot.Data = copyGroupToDTO(gl.rootGroup)
+	snapShot.Version = gl.global_version
 	snapShotLock.Unlock()
 	
 	fmt.Println("Printing snapshot:-------------------")
-	printDTOGroup(snapShot)
+	fmt.Println("version is:", snapShot.Version)
+	printDTOGroup(snapShot.Data)
 	fmt.Println("End Printng--------------------------")
 }
 
@@ -361,7 +369,7 @@ func printDTOGroup(dtg *DTOGroup){
 	}
 }
 
-func RLockSnapShot()(*DTOGroup){
+func RLockSnapShot()(*DTOSnapShot){
 	snapShotLock.RLock()
 	return snapShot
 }
@@ -375,8 +383,6 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	var dtoGroup = new (DTOGroup)
 	dtoGroup.GroupId = group.groupId
 	dtoGroup.GroupData = group.groupData
-	//dtoGroup.Users = []*DTOUser
-	//dtoGroup.SubGroups = []*DTOGroup
 	
 	for _, v := range group.users{
 		u := new(DTOUser)

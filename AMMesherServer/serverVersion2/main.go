@@ -92,6 +92,7 @@ func checkArgs(){
 
 func main(){
 	
+	checkArgs()
 	g_command_pipe = make(chan GroupUserCommand, 10)
 	InitGroupList()
 	

@@ -42,7 +42,7 @@ type DTOSnapShot struct{
 type GroupList struct{
 	global_version 	int
 	rootGroup 		*GroupNode
-	timeSort		*list.List
+	timeSort			*list.List
 	groupIndex		map[string]*GroupNode
 	userIndex		map[string]*UserNode
 }
@@ -206,6 +206,8 @@ func UpdataUser(userId string, groupId, userData string)(bool){
 
 func UserHeartbeat(userId string, groupId string)(bool){
 	
+	tryRemoveTimeoutUser()
+	
 	group := getGroupById(groupId)
 	user := getUserById(userId)
 	
@@ -229,8 +231,8 @@ func DeleteUser(userId string, groupId string)(bool){
 		return false
 	}
 	
-	superGroup := removeUserFromGroup(existUser)
-	tryRemoveEmptyGroup(superGroup)
+	removeUserFromGroup(existUser)
+	tryRemoveEmptyGroup(group)
 	
 	removeUserFromIndex(existUser)
 	removeFromTimeSort(existUser)
@@ -239,19 +241,23 @@ func DeleteUser(userId string, groupId string)(bool){
 	return true
 }
 
-func RemoveTimeoutUser(){
+func tryRemoveTimeoutUser(){
+	var isUserDel bool
 	for e := gl.timeSort.Front(); e != nil;{
-		user := e.Value.(UserNode)
+		user := e.Value.(*UserNode)
 		dur := time.Now().Sub(user.timestamp)
 		if	dur.Seconds() < g_user_timeout{
 			break
 		}
 		
 		DeleteUser(user.userId, user.groupId)
+		isUserDel = true
 		e = gl.timeSort.Front()
 	}
 	
-	makeSnapShot()
+	if isUserDel{
+		makeSnapShot()
+	}
 }
 
 func updateUserTimestamp(user *UserNode){
@@ -342,6 +348,7 @@ func tryRemoveEmptyGroup(group *GroupNode){
 }
 
 func makeSnapShot(){
+	gl.global_version++
 	snapShotLock.Lock()
 	snapShot.Data = copyGroupToDTO(gl.rootGroup)
 	snapShot.Version = gl.global_version

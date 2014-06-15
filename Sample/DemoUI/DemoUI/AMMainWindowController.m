@@ -75,11 +75,11 @@
 - (IBAction)mesh:(id)sender {
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
-    if (mesher.isOnline == NO) {
-        [mesher goOnline ];
-    }else{
-        [mesher goOffline];
-    }
+//    if (mesher.isOnline == NO) {
+//        [mesher goOnline ];
+//    }else{
+//        [mesher goOffline];
+//    }
 }
 
 -(void)loadVersion{

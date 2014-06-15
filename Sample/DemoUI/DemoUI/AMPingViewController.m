@@ -31,7 +31,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _users = [[AMMesher sharedAMMesher] myGroup].users;
+       // _users = [[AMMesher sharedAMMesher] myGroup].users;
     }
     
     return self;
@@ -48,7 +48,7 @@
 
 -(void)userGroupsChanged:(NSNotification*)notification
 {
-    _users = [[AMMesher sharedAMMesher] myGroup].users;
+   // _users = [[AMMesher sharedAMMesher] myGroup].users;
     [self.userTable reloadData];
 }
 

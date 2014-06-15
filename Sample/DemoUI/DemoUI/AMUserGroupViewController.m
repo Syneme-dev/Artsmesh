@@ -54,7 +54,7 @@
 -(void)userGroupsChanged:(NSNotification*) notification
 {
     AMMesher* mehser = [AMMesher sharedAMMesher];
-    self.userGroups = mehser.userGroups;
+ //   self.userGroups = mehser.userGroups;
     
     [self.outlineView reloadData];
 }
@@ -62,39 +62,39 @@
 
 - (IBAction)quitGroup:(id)sender
 {
-        [[AMMesher sharedAMMesher] backToArtsmesh];
+     //   [[AMMesher sharedAMMesher] backToArtsmesh];
 }
 
-- (IBAction)createGroup:(id)sender
-{
-    NSString* createName = [self.createGroupTextField stringValue];
-    if (createName != nil && ![createName isEqualToString:@""])
-    {
-        [[AMMesher sharedAMMesher] joinGroup:createName];
-    }
-}
+//- (IBAction)createGroup:(id)sender
+//{
+//    NSString* createName = [self.createGroupTextField stringValue];
+//    if (createName != nil && ![createName isEqualToString:@""])
+//    {
+//        [[AMMesher sharedAMMesher] joinGroup:createName];
+//    }
+//}
 
 
-- (IBAction)createGroupByEnter:(id)sender
-{
-    NSString* createName = [self.createGroupTextField stringValue];
-    if (createName != nil && ![createName isEqualToString:@""])
-    {
-        [[AMMesher sharedAMMesher] joinGroup:createName];
-    }
-}
+//- (IBAction)createGroupByEnter:(id)sender
+//{
+//    NSString* createName = [self.createGroupTextField stringValue];
+//    if (createName != nil && ![createName isEqualToString:@""])
+//    {
+//        [[AMMesher sharedAMMesher] joinGroup:createName];
+//    }
+//}
 
 
 -(IBAction)doubleClickOutlineView:(id)sender{
-    if([sender isKindOfClass:[NSOutlineView class]]){
-        NSOutlineView* ov = (NSOutlineView*)sender;
-        NSInteger selected = [ov selectedRow];
-        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-        id item = selectedCellView.objectValue;
-        if ([item isKindOfClass:[AMGroup class]]) {
-            [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
-        }
-    }
+//    if([sender isKindOfClass:[NSOutlineView class]]){
+//        NSOutlineView* ov = (NSOutlineView*)sender;
+//        NSInteger selected = [ov selectedRow];
+//        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+//        id item = selectedCellView.objectValue;
+//        if ([item isKindOfClass:[AMGroup class]]) {
+//            [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
+//        }
+//    }
 }
 
 

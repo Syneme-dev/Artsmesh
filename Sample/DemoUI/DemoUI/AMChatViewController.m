@@ -42,6 +42,8 @@
     return self;
 }
 
+/*
+
 -(void)awakeFromNib
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
@@ -195,7 +197,6 @@
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    // server packet
     NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
     if ([ipAndPort count] < 2){
         return;
@@ -222,5 +223,5 @@
 
 }
 
-
+*/
 @end

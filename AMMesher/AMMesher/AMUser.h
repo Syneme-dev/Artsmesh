@@ -28,6 +28,8 @@
 @property NSString* publicIp;
 @property NSString* privateIp;
 @property NSString* localLeader;
+@property BOOL      isOnline;
+@property BOOL      isLocalLeader;
 @property NSMutableArray* portMaps;
 
 -(id)init;

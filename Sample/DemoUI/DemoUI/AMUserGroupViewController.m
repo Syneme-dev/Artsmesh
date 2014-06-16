@@ -83,7 +83,7 @@
 -(void)userGroupsChanged:(NSNotification*) notification
 {
     if ([notification.name isEqual:AM_LOCALUSERS_CHANGED]) {
-        _localUsers = [AMAppObjects appObjects][AMLocalUsersKey];
+        _localUsers = [[AMAppObjects appObjects][AMLocalUsersKey] allValues];
     }
     
     [self.outlineView reloadData];

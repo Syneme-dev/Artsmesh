@@ -278,6 +278,10 @@
             
             NSDictionary* userDataDict = (NSDictionary*)object;
             NSDictionary* oldUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
+            if (oldUsers == nil) {
+                oldUsers = [[NSMutableDictionary alloc] init];
+                [[AMAppObjects appObjects] setObject:oldUsers forKey:AMLocalUsersKey];
+            }
             
             AMUser* oldUser = [oldUsers objectForKey:userId];
             if(oldUser != nil){

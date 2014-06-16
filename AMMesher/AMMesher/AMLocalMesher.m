@@ -59,13 +59,13 @@
     
     [self stopLocalServer];
     
-    
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
+                         //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d",
                          lanchPath,
-                         _serverIp,
+                         _serverPort,
                          _serverPort,
                          _userTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
@@ -218,7 +218,7 @@
 {
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
-   // NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+    NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
 }
 
 
@@ -331,7 +331,7 @@
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
 {
-    NSAssert(NO, @"http request failed!");
+   // NSAssert(NO, @"http request failed!");
 }
 
 

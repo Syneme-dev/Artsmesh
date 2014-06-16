@@ -56,16 +56,24 @@ func UpdataGroup(groupName string)(bool){
 
 func AddNewUser(userId string, userData string, groupId string, groupName string)(bool){
 	
-	if ul.groupId == ""{
-		ul.groupId = groupId
+	if ul.groupName == ""{
+		fmt.Printf("!!!new group name:%s", ul.groupName);
 		ul.groupName = groupName
+	}
+	
+	if ul.groupId == ""{
+		fmt.Printf("!!!new group id %s:\n", ul.groupId);
+		ul.groupId = groupId
 	}
 	
 	existUser := ul.users[userId]
 	if existUser != nil{
+		fmt.Println("user already exist!");
 		return false
 	}
 	
+	fmt.Println("will add user to list:", userId);
+
 	newUser := new(UserNode)
 	newUser.userId = userId
 	newUser.userData = userData
@@ -103,14 +111,29 @@ func UserHeartbeat(userId string )(bool){
 }
 
 func CheckTimeout(){
+	
 	hasChanged := false
+	var deleteKeys []string
 	
 	for k, v := range ul.users{
 		dur := time.Now().Sub(v.timestamp)
 		if dur.Seconds() > g_user_timeout{
-			delete(ul.users, k)
+			fmt.Printf("user %s duration is %f seconds\n", v.userId, dur.Seconds())
+			fmt.Printf("user timeout is %f seconds, will delete!\n", g_user_timeout)	
+			deleteKeys = append(deleteKeys, k)
+			hasChanged = true
 		}
 	}
+	
+	fmt.Println("the user count is", len(ul.users))
+	fmt.Println("will delete count:", len(deleteKeys))
+
+	for _,k := range deleteKeys{
+		fmt.Printf("k is %s\n", k)
+		delete(ul.users, k)
+	}
+	
+	fmt.Println("after delete count is", len(ul.users))
 	
 	if hasChanged{
 		makeSnapShot()
@@ -132,25 +155,27 @@ func DeleteUser(userId string  )(bool){
 
 func makeSnapShot(){
 	ul.version++
+	newSnapShot := new(ULSnapshot)
+
+	newSnapShot.Version = ul.version
+	newSnapShot.GroupId = ul.groupId
+	newSnapShot.GroupName = ul.groupName
 	
-	snapShotLock.Lock()
-	
-	snapShot.Version = ul.version
-	snapShot.GroupId = ul.groupId
-	snapShot.GroupName = ul.groupName
-	
+	fmt.Println("-------------ul.user count is:", len(ul.users))
 	for _, v := range ul.users{
 		userDto := new(UserDTO)
 		userDto.UserId = v.userId
 		userDto.UserData = v.userData
+		newSnapShot.UserDTOs = append(newSnapShot.UserDTOs, userDto)
 	}
 	
-	snapShot.Version = ul.version
+	fmt.Println("-------------newSnapShot.UserDTOs count is:", len(newSnapShot.UserDTOs))
 	
+	snapShotLock.Lock()
+	snapShot = newSnapShot
 	snapShotLock.Unlock()
 	
 	fmt.Println("Printing snapshot:-------------------")
-	fmt.Println("version is:", snapShot.Version)
 	printSnapshot(snapShot)
 	fmt.Println("End Printng--------------------------")
 }

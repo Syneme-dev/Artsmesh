@@ -185,7 +185,8 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
                 //I'm the leader
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
                 
-               // [_localMesher startLocalServer];
+                [_localMesher startLocalServer];
+                    sleep(1);
                 [_localMesher startLocalClient];
                 
             }else if(newState == 4){

@@ -25,6 +25,10 @@ type UserHeartbeatInfo struct{
 	UserId 		string
 }
 
+type UserHeartbeatResposeDTO struct{
+	Version  	string
+}
+
 type CommandAction int
 const(
 	user_new	 CommandAction= iota
@@ -44,11 +48,11 @@ type GroupUserCommand struct{
 }
 
 const(
-	default_rest_port = 8080
-	default_heartbeat_port = 8080
+	default_rest_port = 9090
+	default_heartbeat_port = 9090
 	default_user_timeout = 30.0
 	default_ipv6 = false
-	usage = "-rest_port 8080 -heartbeat_port 8082 -user_timeout 30 -ipv6"
+	usage = "-rest_port 9090 -heartbeat_port 9090 -user_timeout 30 -ipv6"
 )
 
 var Usage = func() {
@@ -139,10 +143,14 @@ func executeCommand(){
 
 ////////////////////////check heartbeat goroutine//////////
 func userTimeout(){
-	var command GroupUserCommand
-	command.action = check_heartbeat
 	
-	g_command_pipe<- command
+	for t := range g_ticker.C {
+		fmt.Println("check timeour users", t)
+		var command GroupUserCommand
+		command.action = check_heartbeat
+
+		g_command_pipe<- command
+    }
 }
 
 ///////////////////////Udp GoRoutine///////////////////////
@@ -212,9 +220,17 @@ func handleClient(conn *net.UDPConn){
 	version := snapShot.Version
 	RUnlockSnapShot()
 	
-	versionStr := fmt.Sprintf("%d", version)
 	
-	bytes := []byte(versionStr)
+	udpResponse := new(UserHeartbeatResposeDTO)
+	udpResponse.Version = fmt.Sprintf("%d", version)
+	
+	udpResStr, err := json.Marshal(udpResponse)
+	if err != nil{
+		fmt.Fprintf(os.Stderr, "error: %s", err.Error())
+		return
+	}
+	
+	bytes := []byte(udpResStr)
 	_, err = conn.WriteToUDP(bytes, addr)
 	if	err != nil{
 		fmt.Fprintf(os.Stdout, "Write to Udp failed!")
@@ -265,6 +281,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	command.userId = userId
 	command.groupId = groupId
 	command.userData = userData
+	command.groupName = groupName
 	
 	g_command_pipe<- command
 
@@ -288,7 +305,6 @@ func getAllUsers(w http.ResponseWriter, r *http.Request){
 func updateUser(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
 	userId := strings.Join(r.Form["userId"], "") 
-	groupId := strings.Join(r.Form["groupId"], "")
 	userData := strings.Join(r.Form["userData"], "")
 	
 	fmt.Println("")
@@ -296,7 +312,6 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
 	fmt.Println("userId:", userId)
-	fmt.Println("groupId:", groupId)
 	fmt.Println("userData:", userData)
 	fmt.Println("end http requst information ---------------------")
 	
@@ -305,7 +320,6 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 	var command GroupUserCommand
 	command.action = user_update
 	command.userId = userId
-	command.groupId = groupId
 	command.userData = userData
 	
 	g_command_pipe<- command
@@ -316,14 +330,12 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 func deleteUser(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
 	userId := strings.Join(r.Form["userId"], "") 
-	groupId := strings.Join(r.Form["groupId"], "")
 	
 	fmt.Println("")
 	fmt.Println("user_delete requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
 	fmt.Println("userId:", userId)
-	fmt.Println("groupId:", groupId)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
@@ -331,7 +343,6 @@ func deleteUser(w http.ResponseWriter, r *http.Request){
 	var command GroupUserCommand
 	command.action = user_delete
 	command.userId = userId
-	command.groupId = groupId
 	
 	g_command_pipe<- command
 
@@ -340,7 +351,6 @@ func deleteUser(w http.ResponseWriter, r *http.Request){
 
 func updateGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
 	groupName := strings.Join(r.Form["groupName"], "")
 	
 	fmt.Println("")
@@ -348,15 +358,13 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
 
-	fmt.Println("groupId is:", groupId)
-	fmt.Println("groupData is:", groupName)
+	fmt.Println("groupName is:", groupName)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = group_update
-	command.groupId = groupId
 	command.groupName = groupName
 	
 	g_command_pipe<- command
@@ -377,6 +385,7 @@ func startRestServer(){
 	err := http.ListenAndServe(restport, nil)
 	if	err != nil{
 		fmt.Println("listen and serve failed!")
+		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 }

@@ -44,7 +44,12 @@
 }
 
 -(void)awakeFromNib{
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
+   [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(userGroupsChanged:)
+               name:AM_LOCALUSERS_CHANGED
+             object:nil];
+    
     AMUser *user1 = [[AMUser alloc] init];
     user1.nickName = @"user1";
     AMUser *user2 = [[AMUser alloc] init];
@@ -62,7 +67,7 @@
     group2.groupName = @"group2";
     group2.users = @[user4];
     
-    _localUsers = @[user1, user2];
+   // _localUsers = @[user1, user2];
     _remoteGroups = @{
         @"group1": group1,
         @"group2": group2
@@ -77,10 +82,11 @@
 
 -(void)userGroupsChanged:(NSNotification*) notification
 {
-//    AMMesher* mehser = [AMMesher sharedAMMesher];
-//    self.userGroups = mehser.userGroups;
-//    
-//    [self.outlineView reloadData];
+    if ([notification.name isEqual:AM_LOCALUSERS_CHANGED]) {
+        _localUsers = [AMAppObjects appObjects][AMLocalUsersKey];
+    }
+    
+    [self.outlineView reloadData];
 }
 
 

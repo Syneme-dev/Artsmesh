@@ -18,9 +18,5 @@
 
 @property NSArray* userGroups;
 
-- (IBAction)quitGroup:(id)sender;
-- (IBAction)createGroup:(id)sender;
-- (IBAction)createGroupByEnter:(id)sender;
-
 
 @end

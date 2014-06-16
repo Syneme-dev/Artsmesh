@@ -23,15 +23,16 @@
 
 - (void)addUser:(AMUser *)user
 {
-    NSString *groupName = user.groupName;
-    AMGroup *group = _groups[groupName];
-    if (!group) {
-        group = [[AMGroup alloc] initWithGroupName:groupName];
-        _groups[groupName] = group;
-    }
-    [group addUser:user];
+//    NSString *groupName = user.groupName;
+//    AMGroup *group = _groups[groupName];
+//    if (!group) {
+//        group = [[AMGroup alloc] initWithGroupName:groupName];
+//        _groups[groupName] = group;
+//    }
+//    [group addUser:user];
 }
 
+ 
 - (NSArray *)groups
 {
     NSArray *keys = [_groups.allKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];

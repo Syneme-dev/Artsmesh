@@ -39,11 +39,11 @@
 
 - (void)awakeFromNib
 {
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-        selector:@selector(userGroupsChanged:)
-        name:AM_USERGROUPS_CHANGED
-        object:nil];
+//    [[NSNotificationCenter defaultCenter]
+//        addObserver:self
+//        selector:@selector(userGroupsChanged:)
+//        name:AM_USERGROUPS_CHANGED
+//        object:nil];
 }
 
 -(void)userGroupsChanged:(NSNotification*)notification

@@ -16,7 +16,9 @@
 #import "AMGroupsBuilder.h"
 #import "AMHeartBeat.h"
 
- NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
+ //NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
+ NSString* const AM_LOCALUSERS_CHANGED = @"AM_LOCALUSERS_CHANGED";
+ NSString* const AM_REMOTEGROUPS_CHANGED = @"AM_REMOTEGROUPS_CHANGED";
  NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
 
 
@@ -445,11 +447,11 @@
     
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         // do work here
-        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-    });
+//        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//    });
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

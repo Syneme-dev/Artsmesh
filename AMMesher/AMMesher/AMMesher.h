@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-extern NSString* const AM_USERGROUPS_CHANGED;
+//extern NSString* const AM_USERGROUPS_CHANGED;
+extern NSString* const AM_LOCALUSERS_CHANGED;
+extern NSString* const AM_REMOTEGROUPS_CHANGED;
 extern NSString* const AM_MESHER_ONLINE;
 
 @class AMUser;

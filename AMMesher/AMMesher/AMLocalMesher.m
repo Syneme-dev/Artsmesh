@@ -11,6 +11,9 @@
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMUserRequest.h"
+#import "AMUser.h"
+#import "AMAppObjects.h"
+#import "AMMesher.h"
 
 
 @interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
@@ -29,7 +32,7 @@
     AMHeartBeat* _heartbeatThread;
     
     int _heartbeatFailureCount;
-    
+    int _serverUserlistVersion;
 }
 
 -(id)initWithServer:(NSString*)ip
@@ -43,6 +46,7 @@
         _useIpv6 = useIpv6;
         _userTimeout = seconds;
         _heartbeatFailureCount = 0;
+        _serverUserlistVersion = 0;
     }
     
     return self;
@@ -134,27 +138,27 @@
     
 }
 
+-(void)requestUserList
+{
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate  = self;
+    req.action = @"users-get";
+    
+    [_httpRequestQueue addOperation:req];
+}
+
 
 #pragma mark-
 #pragma AMHeartBeatDelegate
 
 - (NSData *)heartBeatData
 {
-    NSData* data ;
-//    @synchronized(self){
-//        AMUserUDPRequest* request = [[AMUserUDPRequest alloc] init];
-//        
-//        request.userid = self.mySelf.userid;
-//        request.version = [NSString stringWithFormat:@"%d", self.userGroupsVersion];
-//        
-//        NSString* localMd5 = [self.mySelf md5String];
-//        if (![localMd5 isEqualToString:_md5OnServer]) {
-//            request.userContent = self.mySelf;
-//            request.contentMd5 = localMd5;
-//        }
-//        data = [request jsonData];
-//    }
+    AMUser* mySelf = [[AMAppObjects  appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"Myself is nil");
     
+    NSMutableDictionary* localHeartbeatReq = [[NSMutableDictionary alloc] init];
+    [localHeartbeatReq setObject:mySelf.userid forKey:@"UserId"];
+    NSData* data = [NSJSONSerialization dataWithJSONObject:localHeartbeatReq options:0 error:nil];
     return data;
 }
 
@@ -162,26 +166,18 @@
 {
     _heartbeatFailureCount = 0;
     
-//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"didReceiveData:%@", jsonStr);
-//    
-//    AMUserUDPResponse* response = [AMUserUDPResponse responseFromJsonData:data];
-//    
-//    @synchronized(self){
-//        _md5OnServer  = response.contentMd5;
-//        
-//        if ([response.version intValue] !=  self.userGroupsVersion) {
-//            NSLog(@"need download userlist");
-//            
-//            AMUserRequest* req = [[AMUserRequest alloc] init];
-//            req.delegate = self;
-//            
-//            if(_httpRequestQueue.operationCount < 2)
-//            {
-//                [_httpRequestQueue  addOperation:req];
-//            }
-//        }
-//    }
+    NSError *error = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:data
+                                                 options:0
+                                                   error:&error];
+    NSAssert(error == nil, @"parse json data failed!");
+    
+    NSDictionary* result = (NSDictionary*)objects;
+    int version = [[result objectForKey:@"Version"] intValue];
+    
+    if (version != _serverUserlistVersion){
+        [self requestUserList];
+    }
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
@@ -193,47 +189,45 @@
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
     NSLog(@"hearBeat error:%@", error.description);
-//    
-//    _heartbeatFailureCount ++;
-//    if (_heartbeatFailureCount > [_systemConfig.maxHeartbeatFailure intValue]) {
-//        [self.delegate onMesherError:error];
-//    }
+    _heartbeatFailureCount ++;
+    NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
 }
 
 
 #pragma mark-
 #pragma AMUserRequestDelegate
 
-- (NSString *)httpServerURL
+- (NSString *)httpBaseURL
 {
-    NSString* URLStr;
-//    if (self.isOnline) {
-//        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _systemConfig.globalServerAddr, _systemConfig.globalServerPort];
-//        NSLog(@"%@", URLStr);
-//        
-//    }else{
-//        URLStr = [NSString stringWithFormat:@"http://%@:%@/users", _elector.serverName, _elector.serverPort];
-//        NSLog(@"%@", URLStr);
-//    }
-    
-    return URLStr;
+    return [NSString stringWithFormat:@"http://%@:%@", _serverIp, _serverPort];
 }
 
-- (void)userRequestDidCancel
+-(NSString*)httpMethod:(NSString *)action
 {
-    
+    if ([action isEqualToString:@"/users/getall"]){
+        return  @"GET";
+    }else{
+        return @"POST";
+    }
 }
 
+-(NSDictionary*)httpBody:(NSString *)action
+{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSDictionary* dict = [mySelf jsonDict];
+    
+    return dict;
+}
 
-//- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
-//{
-//    if (data == nil) {
-//        return;
-//    }
-//    
-//    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@", dataStr);
-//    
+- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
+{
+    if (data == nil) {
+        return;
+    }
+    
+    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", dataStr);
+    
 //    AMUserRESTResponse* response = [AMUserRESTResponse responseFromJsonData:data];
 //    if (response == nil) {
 //        return;
@@ -253,18 +247,18 @@
 //        [self didChangeValueForKey:@"userGroups"];
 //        
 //    }
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        // do work here
-//        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//    });
-//}
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // do work here
+        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    });
+}
 
-//- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
-//{
-//    
-//}
+- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
+{
+    NSAssert(NO, @"http request failed!");
+}
 
 
 @end

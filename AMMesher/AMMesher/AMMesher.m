@@ -134,7 +134,7 @@
 
 -(void)goOnline
 {
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMUser* mySelf = [[AMAppObjects appObjects] valueForKey:AMMyselfKey];
     NSAssert(mySelf, @"my self is nil");
     
     if(mySelf.isOnline){
@@ -146,7 +146,7 @@
 
 -(void)goOffline
 {
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMUser* mySelf = [[AMAppObjects appObjects] valueForKey:AMMyselfKey];
     NSAssert(mySelf, @"my self is nil");
     if(!mySelf.isOnline){
         return;

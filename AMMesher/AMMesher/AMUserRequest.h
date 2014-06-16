@@ -14,14 +14,17 @@ extern NSString * const AMUserRequestDomain;
 
 @interface AMUserRequest : NSOperation
 @property(nonatomic, weak) id<AMUserRequestDelegate> delegate;
+@property  NSString* action;
 @end
 
 @protocol AMUserRequestDelegate <NSObject>
 @optional
 
-- (NSString *)httpServerURL;
+- (NSString*)httpBaseURL;
+- (NSString*)httpMethod:(NSString*)action;
+- (NSDictionary*)httpBody:(NSString*)action;
 - (void)userRequestDidCancel;
-- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data;
-- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error;
+- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data action:(NSString*) action;
+- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error action:(NSString*) action;
 
 @end

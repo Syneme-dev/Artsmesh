@@ -182,6 +182,8 @@
 		2692CD5B18D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXGroup;
 			children = (
+				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
+				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
 				26AE4371194E89C500117629 /* AMLocalMesher.h */,
 				26AE4372194E89C500117629 /* AMLocalMesher.m */,
 				26AE4375194E9B3400117629 /* AMRemoteMesher.h */,
@@ -202,8 +204,6 @@
 				267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */,
 				26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */,
 				26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */,
-				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
-				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
 				2692CD5C18D7C2A2006501C4 /* Supporting Files */,
 			);
 			path = AMMesher;

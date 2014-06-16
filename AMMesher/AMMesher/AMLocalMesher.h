@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AMHeartBeatDelegate;
+
 @interface AMLocalMesher : NSObject
 
 -(id)initWithServer:(NSString*)ip
@@ -21,9 +23,7 @@
 -(void)startLocalClient;
 -(void)stopLocalClient;
 
--(BOOL)changeGroupName;
--(void)goOnline;
--(void)goOffline;
+-(void)changeGroupName;
 
 
 @end

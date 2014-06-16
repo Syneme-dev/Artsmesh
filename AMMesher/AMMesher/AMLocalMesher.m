@@ -10,6 +10,11 @@
 #import "AMHeartBeat.h"
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
+#import "AMUserRequest.h"
+
+
+@interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
+@end
 
 @implementation AMLocalMesher
 {
@@ -112,6 +117,21 @@
     }
     
     _heartbeatThread = nil;
+}
+
+-(void)changeGroupName
+{
+    
+}
+
+-(void)goOnline
+{
+    
+}
+
+-(void)goOffline
+{
+    
 }
 
 
@@ -246,41 +266,5 @@
 //    
 //}
 
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMLeaderElecter class]]){
-        
-        AMLeaderElecter* elector = (AMLeaderElecter*)object;
-        
-        if ([keyPath isEqualToString:@"state"]){
-            
-            int oldState = [[change objectForKey:@"old"] intValue];
-            int newState = [[change objectForKey:@"new"] intValue];
-            NSLog(@" old state is %d", oldState);
-            NSLog(@" new state is %d", newState);
-            
-            if(newState == 2){
-                //I'm the leader
-                NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
-                
-                [self startLocalServer];
-                //[self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-
-            }else if(newState == 4){
-                //Joined
-                NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
-
-                // [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-            }
-        }else{
-            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-        }
-    }
-}
 
 @end

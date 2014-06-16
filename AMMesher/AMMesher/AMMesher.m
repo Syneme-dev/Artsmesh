@@ -457,67 +457,6 @@
     
 }
 
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isEqualTo:_elector]){
-        if ([keyPath isEqualToString:@"state"]){
-            
-            int oldState = [[change objectForKey:@"old"] intValue];
-            int newState = [[change objectForKey:@"new"] intValue];
-            NSLog(@" old state is %d", oldState);
-            NSLog(@" new state is %d", newState);
 
-            if(newState == 2){
-                //I'm the leader
-                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
-                
-//                [self willChangeValueForKey:@"isLeader"];
-//                self.isLocalLeader = YES;
-//                [self didChangeValueForKey:@"isLeader"];
-//                
-//                [self willChangeValueForKey:@"localLeaderName"];
-//                self.localLeaderName = _elector.serverName;
-//                [self didChangeValueForKey:@"localLeaderName"];
-                
-                @synchronized(self){
-                    self.mySelf.localLeader = self.localLeaderName;
-                    _md5OnServer = @"";
-                }
-                
-                [self startLocalServer];
-                //[self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-                
-                self.isLocalLeader = YES;
-                
-            }else if(newState == 4){
-                //Joined
-                NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
-                
-//                [self willChangeValueForKey:@"isLeader"];
-//                self.isLocalLeader = NO;
-//                [self didChangeValueForKey:@"isLeader"];
-//                
-//                [self willChangeValueForKey:@"localLeaderName"];
-//                self.localLeaderName = _elector.serverName;
-//                [self didChangeValueForKey:@"localLeaderName"];
-                
-                @synchronized(self){
-                    self.mySelf.localLeader = self.localLeaderName;
-                    _md5OnServer = @"";
-                }
-                
-               // [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
-                self.isLocalLeader = NO;
-            }
-        }else{
-            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-        }
-    }
-}
 
 @end

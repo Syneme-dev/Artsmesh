@@ -17,7 +17,6 @@ extern NSString* const AM_MESHER_ONLINE;
 @class AMSystemConfig;
 
 @protocol AMMesherDelegate <NSObject>
--(void)onUserGroupsChange:(NSArray*)groups;
 -(void)onMesherError:(NSError*)err;
 @end
 

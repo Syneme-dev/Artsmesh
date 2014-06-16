@@ -33,6 +33,7 @@
 @property NSMutableArray* portMaps;
 
 -(id)init;
+-(NSDictionary*)jsonDict;
 -(NSString*)md5String;
 -(AMUser*)copy;
 

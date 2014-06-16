@@ -15,6 +15,10 @@
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
+		26AE4373194E89C500117629 /* AMLocalMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4371194E89C500117629 /* AMLocalMesher.h */; };
+		26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4372194E89C500117629 /* AMLocalMesher.m */; };
+		26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4375194E9B3400117629 /* AMRemoteMesher.h */; };
+		26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4376194E9B3400117629 /* AMRemoteMesher.m */; };
 		26BC15B0193214BB0020AD2B /* AMUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BC15AE193214BB0020AD2B /* AMUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26BC15B1193214BB0020AD2B /* AMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15AF193214BB0020AD2B /* AMUser.m */; };
 		26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
@@ -72,6 +76,10 @@
 		2692CD8D18D7C325006501C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2692CD9418D7C37A006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
+		26AE4371194E89C500117629 /* AMLocalMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalMesher.h; sourceTree = "<group>"; };
+		26AE4372194E89C500117629 /* AMLocalMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalMesher.m; sourceTree = "<group>"; };
+		26AE4375194E9B3400117629 /* AMRemoteMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRemoteMesher.h; sourceTree = "<group>"; };
+		26AE4376194E9B3400117629 /* AMRemoteMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRemoteMesher.m; sourceTree = "<group>"; };
 		26BC15AE193214BB0020AD2B /* AMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUser.h; sourceTree = "<group>"; };
 		26BC15AF193214BB0020AD2B /* AMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUser.m; sourceTree = "<group>"; };
 		26BC15B619321D280020AD2B /* AMMesherTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMMesherTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +182,12 @@
 		2692CD5B18D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXGroup;
 			children = (
+				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
+				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
+				26AE4371194E89C500117629 /* AMLocalMesher.h */,
+				26AE4372194E89C500117629 /* AMLocalMesher.m */,
+				26AE4375194E9B3400117629 /* AMRemoteMesher.h */,
+				26AE4376194E9B3400117629 /* AMRemoteMesher.m */,
 				CEF8D325194D5D2400159B71 /* AMAppObjects.h */,
 				CEF8D326194D5D2400159B71 /* AMAppObjects.m */,
 				CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */,
@@ -190,8 +204,6 @@
 				267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */,
 				26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */,
 				26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */,
-				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
-				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
 				2692CD5C18D7C2A2006501C4 /* Supporting Files */,
 			);
 			path = AMMesher;
@@ -239,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BC15B0193214BB0020AD2B /* AMUser.h in Headers */,
+				26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */,
 				CE318D961934BB43006D6EAA /* AMGroup.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */,
@@ -246,6 +259,7 @@
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
 				267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */,
 				CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */,
+				26AE4373194E89C500117629 /* AMLocalMesher.h in Headers */,
 				267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,9 +361,11 @@
 				CE318D991934BB43006D6EAA /* AMGroupsBuilder.m in Sources */,
 				267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */,
 				CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */,
+				26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */,
 				26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */,
 				26BC15B1193214BB0020AD2B /* AMUser.m in Sources */,
 				26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */,
+				26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */,
 				267FA5761936EF0D001FDA74 /* AMUserRequest.m in Sources */,
 				CE318D971934BB43006D6EAA /* AMGroup.m in Sources */,
 				CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */,

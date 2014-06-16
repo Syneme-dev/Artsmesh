@@ -14,7 +14,8 @@ extern NSString * const AMUserRequestDomain;
 
 @interface AMUserRequest : NSOperation
 @property(nonatomic, weak) id<AMUserRequestDelegate> delegate;
-@property  NSString* action;
+@property  NSString* requestPath;
+@property NSDictionary* formData;
 @end
 
 @protocol AMUserRequestDelegate <NSObject>

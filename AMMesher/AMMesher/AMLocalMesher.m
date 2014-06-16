@@ -11,10 +11,10 @@
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMUserRequest.h"
-#import "AMUser.h"
 #import "AMAppObjects.h"
 #import "AMMesher.h"
 #import "AMGroup.h"
+
 
 @interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
 @end
@@ -119,32 +119,59 @@
     
     if (_httpRequestQueue) {
         [_httpRequestQueue  cancelAllOperations];
-        [_httpRequestQueue waitUntilAllOperationsAreFinished];
+        [self unregisterSelf];
     }
     
+    _httpRequestQueue = nil;
     _heartbeatThread = nil;
 }
 
--(void)changeGroupName
+-(void)changeGroupName:(NSString* ) name
 {
-    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/groups/update";
+    req.formData = @{@"groupName": name };
+    [_httpRequestQueue addOperation:req];
 }
 
 -(void)registerSelf
 {
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
+    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
+    
+    
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate = self;
-    req.action = @"/users/add";
+    req.requestPath = @"/users/add";
+    
+    NSMutableDictionary* dict = [mySelf toLocalHttpBodyDict];
+    [dict setObject:clusterId forKey:@"groupId"];
+    [dict setObject:clusterName forKey:@"groupName"];
+    
+    req.formData = dict;
     
     [_httpRequestQueue addOperation:req];
+}
+
+-(void)unregisterSelf{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/delete";
+    req.formData = @{@"userId": mySelf.userid};
+    
+    [_httpRequestQueue addOperation:req];
+    [_httpRequestQueue waitUntilAllOperationsAreFinished];
 }
 
 -(void)requestUserList
 {
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate  = self;
-    req.action = @"/users/getall";
-    
+    req.requestPath = @"/users/getall";
+
     [_httpRequestQueue addOperation:req];
 }
 
@@ -212,13 +239,6 @@
     }
 }
 
--(NSDictionary*)httpBodyForm:(NSString *)action
-{
-    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSDictionary* dict = [mySelf toLocalHttpBodyDict];
-    return dict;
-}
-
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
     if (data == nil) {
@@ -228,12 +248,12 @@
     NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"received http response:%@\n", dataStr);
     
-    if([userrequest.action isEqualToString:@"/users/add"]){
+    if([userrequest.requestPath isEqualToString:@"/users/add"]){
         [self startHeartbeat];
         return;
     }
     
-    if ([userrequest.action isEqualToString:@"/users/getall"]) {
+    if ([userrequest.requestPath isEqualToString:@"/users/getall"]) {
         
         NSLog(@"getall users return........................");
         
@@ -260,6 +280,8 @@
         }
         
         NSArray* userArr = [result objectForKey:@"UserDTOs"];
+        NSMutableDictionary* newUsers = [[NSMutableDictionary alloc] init];
+        
         for (int i = 0; i < userArr.count; i++)
         {
             NSDictionary* userDTO = (NSDictionary*)userArr[i];
@@ -282,29 +304,20 @@
                 oldUsers = [[NSMutableDictionary alloc] init];
                 [[AMAppObjects appObjects] setObject:oldUsers forKey:AMLocalUsersKey];
             }
-            
-            AMUser* oldUser = [oldUsers objectForKey:userId];
-            if(oldUser != nil){
-                oldUser.nickName = [userDataDict objectForKey:@"nickName"];
-                oldUser.domain = [userDataDict objectForKey:@"domain"];
-                oldUser.location = [userDataDict objectForKey:@"location"];
-                oldUser.localLeader = [userDataDict objectForKey:@"localLeader"];
-                oldUser.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
-                oldUser.privateIp = [userDataDict objectForKey:@"privateIp"];
-                oldUser.chatPort = [userDataDict objectForKey:@"chatPort"];
-            }else{
-                AMUser* user = [[AMUser alloc] init];
-                user.userid = userId;
-                user.nickName = [userDataDict objectForKey:@"nickName"];
-                user.domain = [userDataDict objectForKey:@"domain"];
-                user.location = [userDataDict objectForKey:@"location"];
-                user.localLeader = [userDataDict objectForKey:@"localLeader"];
-                user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
-                user.privateIp = [userDataDict objectForKey:@"privateIp"];
-                user.chatPort = [userDataDict objectForKey:@"chatPort"];
-                [oldUsers setValue:user forKeyPath:userId];
-            }
+
+            AMUser* user = [[AMUser alloc] init];
+            user.userid = userId;
+            user.nickName = [userDataDict objectForKey:@"nickName"];
+            user.domain = [userDataDict objectForKey:@"domain"];
+            user.location = [userDataDict objectForKey:@"location"];
+            user.localLeader = [userDataDict objectForKey:@"localLeader"];
+            user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
+            user.ip = [userDataDict objectForKey:@"privateIp"];
+            user.chatPort = [userDataDict objectForKey:@"chatPort"];
+            [newUsers setValue:user forKeyPath:userId];
         }
+        
+        [[AMAppObjects appObjects] setObject:newUsers forKey:AMLocalUsersKey];
         
         _userlistVersion = [[result objectForKey:@"Version"] intValue];
         NSNotification* notification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];

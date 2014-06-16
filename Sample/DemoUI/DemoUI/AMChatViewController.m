@@ -8,7 +8,7 @@
 
 #import "AMChatViewController.h"
 #import "AMMesher/AMMesher.h"
-#import "AMMesher/AMUser.h"
+#import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNetModule/AMStatusNetModule.h"

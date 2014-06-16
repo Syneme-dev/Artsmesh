@@ -22,9 +22,9 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     NSString* strBaseURL = [self.delegate httpBaseURL];
-    NSString* strMethod = [self.delegate httpMethod:self.action];
+    NSString* strMethod = [self.delegate httpMethod:self.requestPath];
     
-    NSString* strURL= [[NSString alloc] initWithFormat:@"%@%@", strBaseURL, self.action];
+    NSString* strURL= [[NSString alloc] initWithFormat:@"%@%@", strBaseURL, self.requestPath];
     
     [request setURL:[NSURL URLWithString:strURL]];
     [request setHTTPMethod:strMethod];
@@ -36,8 +36,7 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
         [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
         [request setAllHTTPHeaderFields:headerDictionary];
         
-        NSDictionary* bodyDic = [self.delegate httpBodyForm:self.action];
-        NSMutableData* bodyData = [self createSetKeyHttpBody:bodyDic];
+        NSMutableData* bodyData = [self createSetKeyHttpBody:self.formData];
         [request setHTTPBody: bodyData];
     }
     

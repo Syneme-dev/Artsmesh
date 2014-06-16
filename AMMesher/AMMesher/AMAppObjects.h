@@ -18,6 +18,24 @@ extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
 @interface AMAppObjects : NSObject
 
 + (id)appObjects;
-
++ (NSString*) creatUUID;
 
 @end
+
+@interface AMUser : NSObject
+
+@property NSString* userid;
+@property NSString* nickName;
+@property NSString* domain;
+@property NSString* location;
+@property NSString* description;
+@property NSString* ip;
+@property NSString* localLeader;
+@property BOOL      isOnline;
+@property NSString* chatPort;
+
+-(NSMutableDictionary*)toLocalHttpBodyDict;
+
+@end
+
+

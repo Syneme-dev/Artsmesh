@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMUser.h"
 #import "AMGroup.h"
 
 @interface AMGroupsBuilder : NSObject

@@ -11,10 +11,11 @@ extern NSString* const AM_LOCALUSERS_CHANGED;
 extern NSString* const AM_REMOTEGROUPS_CHANGED;
 extern NSString* const AM_MESHER_ONLINE;
 
-@class AMUser;
+@class AMLocalUser;
 @class AMGroup;
 @class AMUserPortMap;
 @class AMSystemConfig;
+
 
 @protocol AMMesherDelegate <NSObject>
 -(void)onMesherError:(NSError*)err;

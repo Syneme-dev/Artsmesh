@@ -51,21 +51,23 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
     }
     
     if (returnData == nil) {
-        if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:action:)]) {
+        if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
             
             NSError *error = [NSError errorWithDomain:AMUserRequestDomain
                                                  code:AMUserRequestFalied
                                              userInfo:nil];
-            
-            [self.delegate userrequest:self didFailWithError:error action:self.action];
+        
+            [self.delegate userrequest:self didFailWithError:error];
         }
         
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(userrequest:didReceiveData:action:)]) {
-        [self.delegate userrequest:self didReceiveData:returnData action:self.action];
+    if ([self.delegate respondsToSelector:@selector(userrequest:didReceiveData:)]) {
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate userrequest:self didReceiveData:returnData];
+        });
     }
     
     return;

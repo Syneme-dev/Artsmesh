@@ -139,9 +139,9 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
                 goto cleanup;
             }
             if ([self.delegate respondsToSelector:@selector(heartBeat:didReceiveData:)])
-                [self.delegate heartBeat:self
-                          didReceiveData:[NSData dataWithBytes:rcvbuf length:nbytes]];
-            
+                
+            [self.delegate heartBeat:self
+                              didReceiveData:[NSData dataWithBytes:rcvbuf length:nbytes]];
         cleanup:
             close(sockfd);
             NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];

@@ -32,7 +32,7 @@
     AMHeartBeat* _heartbeatThread;
     
     int _heartbeatFailureCount;
-    int _serverUserlistVersion;
+    int _userlistVersion;
 }
 
 -(id)initWithServer:(NSString*)ip
@@ -46,7 +46,7 @@
         _useIpv6 = useIpv6;
         _userTimeout = seconds;
         _heartbeatFailureCount = 0;
-        _serverUserlistVersion = 0;
+        _userlistVersion = 0;
     }
     
     return self;
@@ -143,7 +143,7 @@
 {
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate  = self;
-    req.action = @"users-get";
+    req.action = @"/users/getall";
     
     [_httpRequestQueue addOperation:req];
 }
@@ -176,7 +176,7 @@
     NSDictionary* result = (NSDictionary*)objects;
     int version = [[result objectForKey:@"Version"] intValue];
     
-    if (version != _serverUserlistVersion){
+    if (version != _userlistVersion){
         [self requestUserList];
     }
 }
@@ -226,18 +226,90 @@
     }
     
     NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSAssert([dataStr isEqualToString:@"ok"], @"http request failed!");
+    NSLog(@"received http response:%@\n", dataStr);
     
     if([userrequest.action isEqualToString:@"/users/add"]){
         [self startHeartbeat];
         return;
     }
     
-    if ([userrequest.action isEqualToString:@"users/getall"]) {
-        //parse
+    if ([userrequest.action isEqualToString:@"/users/getall"]) {
         
+        NSLog(@"getall users return........................");
+        
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:data
+                                                     options:0
+                                                       error:&err];
+        if(err != nil){
+            NSLog(@"parse Json error:%@", err.description);
+            return;
+        }
+        
+        NSDictionary* result = (NSDictionary*)objects;
+        
+        NSString* clusterId = [result objectForKey:@"GroupId"];
+        NSString* clusterName = [result objectForKey:@"GroupName"];
+        
+        NSString* oldClusterId = [[AMAppObjects appObjects] objectForKey:AMClusterIdKey];
+        NSString* oldClusterName = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
+        
+        if (![oldClusterId isEqualToString:clusterId] || ![oldClusterName isEqualToString:clusterName]){
+            [[AMAppObjects appObjects] setObject:clusterId forKey:AMClusterIdKey];
+            [[AMAppObjects appObjects] setObject:AMClusterNameKey forKey:AMClusterNameKey];
+        }
+        
+        NSArray* userArr = [result objectForKey:@"UserDTOs"];
+        for (int i = 0; i < userArr.count; i++)
+        {
+            NSDictionary* userDTO = (NSDictionary*)userArr[i];
+            NSString* userId = [userDTO objectForKey:@"UserId"];
+            NSString* userDataStr = [userDTO objectForKey:@"UserData"];
+            NSData* userData = [userDataStr dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSError *err = nil;
+            id object = [NSJSONSerialization JSONObjectWithData:userData
+                                                         options:0
+                                                           error:&err];
+            if(err != nil){
+                NSLog(@"parse Json error:%@", err.description);
+                return;
+            }
+            
+            NSDictionary* userDataDict = (NSDictionary*)object;
+            NSDictionary* oldUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
+            
+            AMUser* oldUser = [oldUsers objectForKey:userId];
+            if(oldUser != nil){
+                oldUser.nickName = [userDataDict objectForKey:@"nickName"];
+                oldUser.domain = [userDataDict objectForKey:@"domain"];
+                oldUser.location = [userDataDict objectForKey:@"location"];
+                oldUser.localLeader = [userDataDict objectForKey:@"localLeader"];
+                oldUser.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
+                oldUser.privateIp = [userDataDict objectForKey:@"privateIp"];
+                oldUser.chatPort = [userDataDict objectForKey:@"chatPort"];
+            }else{
+                AMUser* user = [[AMUser alloc] init];
+                user.userid = userId;
+                user.nickName = [userDataDict objectForKey:@"nickName"];
+                user.domain = [userDataDict objectForKey:@"domain"];
+                user.location = [userDataDict objectForKey:@"location"];
+                user.localLeader = [userDataDict objectForKey:@"localLeader"];
+                user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
+                user.privateIp = [userDataDict objectForKey:@"privateIp"];
+                user.chatPort = [userDataDict objectForKey:@"chatPort"];
+                [oldUsers setValue:user forKeyPath:userId];
+            }
+        }
+        
+        _userlistVersion = [[result objectForKey:@"Version"] intValue];
+        NSNotification* notification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+    
         return;
     }
+
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

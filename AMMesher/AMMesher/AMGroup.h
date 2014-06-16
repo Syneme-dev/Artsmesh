@@ -13,4 +13,6 @@
 @property(nonatomic) NSString *groupName;
 @property(nonatomic) NSArray *users;
 
++ (NSString*) createGroupId;
+
 @end

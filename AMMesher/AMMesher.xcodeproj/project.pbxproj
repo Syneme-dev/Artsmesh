@@ -41,7 +41,7 @@
 		CE318D971934BB43006D6EAA /* AMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D931934BB43006D6EAA /* AMGroup.m */; };
 		CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = CE318D941934BB43006D6EAA /* AMGroupsBuilder.h */; };
 		CE318D991934BB43006D6EAA /* AMGroupsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE318D951934BB43006D6EAA /* AMGroupsBuilder.m */; };
-		CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF8D325194D5D2400159B71 /* AMAppObjects.h */; };
+		CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF8D325194D5D2400159B71 /* AMAppObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8D326194D5D2400159B71 /* AMAppObjects.m */; };
 		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
 /* End PBXBuildFile section */
@@ -253,9 +253,9 @@
 				26BC15B0193214BB0020AD2B /* AMUser.h in Headers */,
 				26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */,
 				CE318D961934BB43006D6EAA /* AMGroup.h in Headers */,
+				CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */,
-				CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
 				267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */,
 				CE318D981934BB43006D6EAA /* AMGroupsBuilder.h in Headers */,

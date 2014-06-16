@@ -68,12 +68,8 @@
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
     mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
-    
-    AMUserPortMap* pm = [[AMUserPortMap alloc] init];
-    pm.portName = @"ChatPort";
-    pm.internalPort = [defaults stringForKey:Preference_Key_General_ChatPort];;
-    pm.natMapPort   = pm.internalPort;
-    [mySelf.portMaps addObject:pm];
+    mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    mySelf.groupName = @"LocalGroup";
     
     [AMAppObjects appObjects][AMMyselfKey] = mySelf;
 }
@@ -97,6 +93,14 @@
 
 -(void)startMesher
 {
+    if(_localMesher == nil){
+        _localMesher = [[AMLocalMesher alloc] initWithServer:@"localhost" port:_systemConfig.myServerPort userTimeout:30 ipv6:_systemConfig.useIpv6];
+    }
+    
+    if (_remoteMesher == nil) {
+        //build remote mesher
+    }
+    
     if(_elector == nil){
         if (_systemConfig) {
             _elector = [[AMLeaderElecter alloc] initWithPort:_systemConfig.myServerPort];
@@ -107,15 +111,6 @@
     [_elector addObserver:self forKeyPath:@"state"
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context:nil];
-    
-    if(_localMesher != nil){
-        _localMesher = [[AMLocalMesher alloc] initWithServer:_systemConfig.myServerPort port:_systemConfig.myServerPort userTimeout:30 ipv6:_systemConfig.useIpv6];
-    }
-    
-    if (_remoteMesher != nil) {
-        //build remote mesher
-    }
-
 }
 
 -(void)stopMesher
@@ -189,7 +184,7 @@
                 //I'm the leader
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
                 
-                [_localMesher startLocalServer];
+               // [_localMesher startLocalServer];
                 [_localMesher startLocalClient];
                 
             }else if(newState == 4){

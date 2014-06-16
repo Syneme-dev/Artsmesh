@@ -36,9 +36,9 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
         [request addValue:headerfield forHTTPHeaderField:@"Content-Type"];
         [request setAllHTTPHeaderFields:headerDictionary];
         
-        NSDictionary* bodyDic = [self.delegate httpBody:self.action];
-        NSMutableData* httpBody = [self createSetKeyHttpBody:bodyDic];
-        [request setHTTPBody: httpBody];
+        NSDictionary* bodyDic = [self.delegate httpBodyForm:self.action];
+        NSMutableData* bodyData = [self createSetKeyHttpBody:bodyDic];
+        [request setHTTPBody: bodyData];
     }
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request

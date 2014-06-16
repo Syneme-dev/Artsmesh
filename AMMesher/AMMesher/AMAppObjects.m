@@ -15,18 +15,18 @@ NSString * const AMMyselfKey = @"AMMyselfKey";
 NSString * const AMMergedGroupNameKey = @"AMMergedGroupNameKey";
 NSString * const AMRemoteGroupsKey = @"AMRemoteGroupsKey";
 
-static AMAppObjects *instance = nil;
+static NSMutableDictionary *global_dict = nil;
 
 @implementation AMAppObjects
 
 + (void)initialize
 {
-    instance = [[AMAppObjects alloc] init];
+    global_dict = [[NSMutableDictionary alloc] init];
 }
 
-+ (id)appObjects
++ (NSMutableDictionary*)appObjects
 {
-    return instance;
+    return global_dict;
 }
 
 @end

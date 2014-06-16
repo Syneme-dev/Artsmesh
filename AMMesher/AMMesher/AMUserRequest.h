@@ -22,7 +22,7 @@ extern NSString * const AMUserRequestDomain;
 
 - (NSString*)httpBaseURL;
 - (NSString*)httpMethod:(NSString*)action;
-- (NSDictionary*)httpBody:(NSString*)action;
+- (NSDictionary*)httpBodyForm:(NSString*)action;
 - (void)userRequestDidCancel;
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data action:(NSString*) action;
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error action:(NSString*) action;

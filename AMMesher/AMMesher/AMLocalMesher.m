@@ -14,7 +14,7 @@
 #import "AMUser.h"
 #import "AMAppObjects.h"
 #import "AMMesher.h"
-
+#import "AMGroup.h"
 
 @interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
 @end
@@ -87,14 +87,15 @@
 
 -(void)startLocalClient
 {
-    if (_mesherServerTask) {
-        return;
-    }
-    
     _httpRequestQueue = [[NSOperationQueue alloc] init];
     _httpRequestQueue.name = @"LocalMesherQueue";
     _httpRequestQueue.maxConcurrentOperationCount = 1;
     
+    [self registerSelf];
+}
+
+-(void)startHeartbeat
+{
     if (_heartbeatThread) {
         [_heartbeatThread cancel];
     }
@@ -106,6 +107,7 @@
     _heartbeatThread.timeInterval = 2;
     _heartbeatThread.receiveTimeout = 5;
     [_heartbeatThread start];
+
 }
 
 -(void)stopLocalClient
@@ -128,14 +130,13 @@
     
 }
 
--(void)goOnline
+-(void)registerSelf
 {
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.action = @"/users/add";
     
-}
-
--(void)goOffline
-{
-    
+    [_httpRequestQueue addOperation:req];
 }
 
 -(void)requestUserList
@@ -190,7 +191,7 @@
 {
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
-    NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+   // NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
 }
 
 
@@ -211,11 +212,10 @@
     }
 }
 
--(NSDictionary*)httpBody:(NSString *)action
+-(NSDictionary*)httpBodyForm:(NSString *)action
 {
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSDictionary* dict = [mySelf jsonDict];
-    
+    NSDictionary* dict = [mySelf toLocalHttpBodyDict];
     return dict;
 }
 
@@ -226,33 +226,18 @@
     }
     
     NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", dataStr);
+    NSAssert([dataStr isEqualToString:@"ok"], @"http request failed!");
     
-//    AMUserRESTResponse* response = [AMUserRESTResponse responseFromJsonData:data];
-//    if (response == nil) {
-//        return;
-//    }
-//    
-//    @synchronized(self)
-//    {
-//        self.userGroupsVersion = [response.version intValue];
-//        AMGroupsBuilder* builder = [[AMGroupsBuilder alloc] init];
-//        
-//        for (AMUser* user in response.userlist ) {
-//            [builder addUser:user];
-//        }
-//        
-//        [self willChangeValueForKey:@"userGroups"];
-//        self.userGroups = builder.groups;
-//        [self didChangeValueForKey:@"userGroups"];
-//        
-//    }
+    if([userrequest.action isEqualToString:@"/users/add"]){
+        [self startHeartbeat];
+        return;
+    }
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        // do work here
-//        NSNotification* notification = [NSNotification notificationWithName:AM_USERGROUPS_CHANGED object:self userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//    });
+    if ([userrequest.action isEqualToString:@"users/getall"]) {
+        //parse
+        
+        return;
+    }
 }
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

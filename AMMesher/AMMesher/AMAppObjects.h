@@ -15,8 +15,9 @@ extern NSString * const AMMyselfKey;        // AMUser *
 extern NSString * const AMMergedGroupIdKey; // NSString *
 extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
 
-@interface AMAppObjects : NSMutableDictionary
+@interface AMAppObjects : NSObject
 
 + (id)appObjects;
+
 
 @end

@@ -258,7 +258,7 @@
     
     
     NSBundle* mainBundle = [NSBundle mainBundle];
-    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"amserver"];
+    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     NSString *command = [NSString stringWithFormat:
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >amserver.log 2>&1",
                          lanchPath,
@@ -274,7 +274,7 @@
 -(void)killAllAMServer
 {
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"amserver", nil]];
+                             arguments:[NSArray arrayWithObjects:@"-c", @"LocalServer", nil]];
     
     //sleep(1);
 }
@@ -476,13 +476,13 @@
                 //I'm the leader
                 NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
                 
-                [self willChangeValueForKey:@"isLeader"];
-                self.isLocalLeader = YES;
-                [self didChangeValueForKey:@"isLeader"];
-                
-                [self willChangeValueForKey:@"localLeaderName"];
-                self.localLeaderName = _elector.serverName;
-                [self didChangeValueForKey:@"localLeaderName"];
+//                [self willChangeValueForKey:@"isLeader"];
+//                self.isLocalLeader = YES;
+//                [self didChangeValueForKey:@"isLeader"];
+//                
+//                [self willChangeValueForKey:@"localLeaderName"];
+//                self.localLeaderName = _elector.serverName;
+//                [self didChangeValueForKey:@"localLeaderName"];
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
@@ -490,7 +490,7 @@
                 }
                 
                 [self startLocalServer];
-                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
+                //[self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 
                 self.isLocalLeader = YES;
                 
@@ -498,20 +498,20 @@
                 //Joined
                 NSLog(@"Mesher is %@:%@", _elector.serverName, _elector.serverPort);
                 
-                [self willChangeValueForKey:@"isLeader"];
-                self.isLocalLeader = NO;
-                [self didChangeValueForKey:@"isLeader"];
-                
-                [self willChangeValueForKey:@"localLeaderName"];
-                self.localLeaderName = _elector.serverName;
-                [self didChangeValueForKey:@"localLeaderName"];
+//                [self willChangeValueForKey:@"isLeader"];
+//                self.isLocalLeader = NO;
+//                [self didChangeValueForKey:@"isLeader"];
+//                
+//                [self willChangeValueForKey:@"localLeaderName"];
+//                self.localLeaderName = _elector.serverName;
+//                [self didChangeValueForKey:@"localLeaderName"];
                 
                 @synchronized(self){
                     self.mySelf.localLeader = self.localLeaderName;
                     _md5OnServer = @"";
                 }
                 
-                [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
+               // [self startHearBeat:_elector.serverName serverPort:_elector.serverPort];
                 self.isLocalLeader = NO;
             }
         }else{

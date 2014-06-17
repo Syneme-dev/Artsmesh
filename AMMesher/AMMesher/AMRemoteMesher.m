@@ -75,6 +75,8 @@
     _httpRequestQueue = nil;
     _heartbeatThread = nil;
     
+    [[AMAppObjects appObjects]removeObjectForKey:AMRemoteGroupsKey];
+    
     NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:userNotification];
 }
@@ -137,10 +139,11 @@
 
 -(void)unregisterSelf{
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSString* myGroupId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate = self;
     req.requestPath = @"/users/delete";
-    req.formData = @{@"userId": mySelf.userid};
+    req.formData = @{@"userId": mySelf.userid, @"groupId":myGroupId};
     
     [_httpRequestQueue addOperation:req];
     [_httpRequestQueue waitUntilAllOperationsAreFinished];

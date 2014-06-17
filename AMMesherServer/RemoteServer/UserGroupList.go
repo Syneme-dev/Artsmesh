@@ -339,6 +339,9 @@ func tryRemoveEmptyGroup(group *GroupNode){
 		return
 	}
 	
+	fmt.Println("group user len is:", len(group.users))
+	fmt.Println("group subgroup len is:", len(group.subgroups))
+	
 	if len(group.users) == 0 && len(group.subgroups) == 0{
 		superGroup := getGroupById(group.superGroupId)
 		delete(superGroup.subgroups, group.groupId)
@@ -349,9 +352,13 @@ func tryRemoveEmptyGroup(group *GroupNode){
 
 func makeSnapShot(){
 	gl.global_version++
+	
+	newSnapShot := new(DTOSnapShot)
+	newSnapShot.Data = copyGroupToDTO(gl.rootGroup)
+	newSnapShot.Version = gl.global_version
+	
 	snapShotLock.Lock()
-	snapShot.Data = copyGroupToDTO(gl.rootGroup)
-	snapShot.Version = gl.global_version
+	snapShot = newSnapShot
 	snapShotLock.Unlock()
 	
 	fmt.Println("Printing snapshot:-------------------")

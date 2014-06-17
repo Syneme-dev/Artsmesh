@@ -49,29 +49,34 @@
            selector:@selector(userGroupsChanged:)
                name:AM_LOCALUSERS_CHANGED
              object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+        selector:@selector(userGroupsChanged:)
+        name:AM_REMOTEGROUPS_CHANGED
+        object:nil];
     
-    AMUser *user1 = [[AMUser alloc] init];
-    user1.nickName = @"user1";
-    AMUser *user2 = [[AMUser alloc] init];
-    user2.nickName = @"user2";
-    
-    AMUser *user3 = [[AMUser alloc] init];
-    user3.nickName = @"user3";
-    AMGroup *group1 = [[AMGroup alloc] init];
-    group1.groupName = @"group1";
-    group1.users = @[user3];
-    
-    AMUser *user4 = [[AMUser alloc] init];
-    user4.nickName = @"user4";
-    AMGroup *group2 = [[AMGroup alloc] init];
-    group2.groupName = @"group2";
-    group2.users = @[user4];
+//    AMUser *user1 = [[AMUser alloc] init];
+//    user1.nickName = @"user1";
+//    AMUser *user2 = [[AMUser alloc] init];
+//    user2.nickName = @"user2";
+//    
+//    AMUser *user3 = [[AMUser alloc] init];
+//    user3.nickName = @"user3";
+//    AMGroup *group1 = [[AMGroup alloc] init];
+//    group1.groupName = @"group1";
+//    group1.users = @[user3];
+//    
+//    AMUser *user4 = [[AMUser alloc] init];
+//    user4.nickName = @"user4";
+//    AMGroup *group2 = [[AMGroup alloc] init];
+//    group2.groupName = @"group2";
+//    group2.users = @[user4];
     
    // _localUsers = @[user1, user2];
-    _remoteGroups = @{
-        @"group1": group1,
-        @"group2": group2
-        };
+//    _remoteGroups = @{
+//        @"group1": group1,
+//        @"group2": group2
+//        };
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
     [self.outlineView setRowHeight:22.0];
@@ -84,6 +89,8 @@
 {
     if ([notification.name isEqual:AM_LOCALUSERS_CHANGED]) {
         _localUsers = [[AMAppObjects appObjects][AMLocalUsersKey] allValues];
+    } else if ([notification.name isEqual:AM_REMOTEGROUPS_CHANGED]) {
+        _remoteGroups = [AMAppObjects appObjects][AMRemoteGroupsKey];
     }
     
     [self.outlineView reloadData];

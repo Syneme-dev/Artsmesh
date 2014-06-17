@@ -280,7 +280,7 @@
         NSArray* userArr = [result objectForKey:@"UserDTOs"];
         NSMutableDictionary* newUsers = [[NSMutableDictionary alloc] init];
         
-        for (int i = 0; i < userArr.count; i++)
+        for (int i = 0; i < [userArr count]; i++)
         {
             NSDictionary* userDTO = (NSDictionary*)userArr[i];
             NSString* userId = [userDTO objectForKey:@"UserId"];

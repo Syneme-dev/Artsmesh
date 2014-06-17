@@ -13,7 +13,6 @@ extern NSString* const AM_MESHER_ONLINE;
 
 @class AMLocalUser;
 @class AMGroup;
-@class AMUserPortMap;
 @class AMSystemConfig;
 
 

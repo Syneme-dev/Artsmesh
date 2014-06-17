@@ -129,7 +129,8 @@
         NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
         id item = selectedCellView.objectValue;
         if ([item isKindOfClass:[AMGroup class]]) {
-           // [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
+            NSString* superGroupId = [item groupId];
+            [[AMMesher sharedAMMesher] mergeGroup:superGroupId];
         }
     }
 }

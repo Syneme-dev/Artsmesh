@@ -258,6 +258,7 @@
         NSMutableDictionary* groupsDict = [[NSMutableDictionary alloc] init];
         for (int i =0; i < groups.count; i++){
             AMGroup* newGroup = [[AMGroup alloc] init];
+            newGroup.groupId = [groups[i] objectForKey:@"GroupId"];
             newGroup.groupName =  [groups[i] objectForKey:@"GroupData"];
             newGroup.users = [self getAllUserFromGroup:groups[i]];
             

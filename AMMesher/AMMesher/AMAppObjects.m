@@ -12,7 +12,7 @@ NSString * const AMClusterNameKey = @"AMClusterNameKey";
 NSString * const AMClusterIdKey = @"AMClusterIdKey";
 NSString * const AMLocalUsersKey = @"AMLocalUsersKey";
 NSString * const AMMyselfKey = @"AMMyselfKey";
-NSString * const AMMergedGroupNameKey = @"AMMergedGroupNameKey";
+NSString * const AMMergedGroupIdKey = @"AMMergedGroupIdKey";
 NSString * const AMRemoteGroupsKey = @"AMRemoteGroupsKey";
 
 static NSMutableDictionary *global_dict = nil;

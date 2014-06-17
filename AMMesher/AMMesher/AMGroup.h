@@ -10,6 +10,7 @@
 
 @interface AMGroup : NSObject
 
+@property(nonatomic) NSString *groupId;
 @property(nonatomic) NSString *groupName;
 @property(nonatomic) NSArray *users;
 

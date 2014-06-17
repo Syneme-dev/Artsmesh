@@ -74,6 +74,9 @@
     
     _httpRequestQueue = nil;
     _heartbeatThread = nil;
+    
+    NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:userNotification];
 }
 
 -(void)mergeGroup:(NSString*)toGroupId

@@ -158,15 +158,17 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     [_localMesher goOffline];
 }
 
--(void)mergeGroup:(NSString*)groupName
+-(void)mergeGroup:(NSString*)superGroupId
 {
     //call remote mesher merge group
+    [_remoteMesher mergeGroup:superGroupId];
 }
 
 
 -(void)unmergeGroup
 {
     //call remote mesher merge group
+    [_remoteMesher unmergeGroup];
 }
 
 #pragma mark -

@@ -18,7 +18,7 @@
 -(void)startRemoteClient;
 -(void)stopRemoteClient;
 
--(void)mergeGroup:(NSString*)groupName;
+-(void)mergeGroup:(NSString*)superGroupId;
 -(void)unmergeGroup;
 
 @end

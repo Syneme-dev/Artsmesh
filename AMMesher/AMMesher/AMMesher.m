@@ -97,7 +97,10 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     }
     
     if (_remoteMesher == nil) {
-        //build remote mesher
+        _remoteMesher = [[AMRemoteMesher alloc] initWithServer:_systemConfig.globalServerAddr
+                                                          port:_systemConfig.globalServerPort
+                                                   userTimeout:30
+                                                          ipv6:NO];
     }
     
     if(_elector == nil){
@@ -121,7 +124,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     }
     
     [_localMesher stopLocalClient];
-    //[_localMesher stopLocalServer];
+    [_localMesher stopLocalServer];
     
     //destroy remote mesher
     
@@ -138,7 +141,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
         return;
     }
     
-    //start remote mesher
+    
 }
 
 -(void)goOffline
@@ -184,14 +187,18 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
             if(newState == 2){
                 //I'm the leader
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
+                _localMesher.server = elector.serverName;
+                _localMesher.serverPort = elector.serverPort;
                 
                 [_localMesher startLocalServer];
-                    sleep(1);
+                sleep(1);
                 [_localMesher startLocalClient];
                 
             }else if(newState == 4){
                 //Joined
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
+                _localMesher.server = elector.serverName;
+                _localMesher.serverPort = elector.serverPort;
                 [_localMesher startLocalClient];
             }
         }else{

@@ -21,8 +21,6 @@
 
 @implementation AMLocalMesher
 {
-    NSString* _serverIp;
-    NSString* _serverPort;
     BOOL _useIpv6;
     int _userTimeout;
     
@@ -41,8 +39,8 @@
                ipv6:(BOOL)useIpv6
 {
     if (self = [super init]) {
-        _serverIp = ip;
-        _serverPort = port;
+        self.server = ip;
+        self.serverPort = port;
         _useIpv6 = useIpv6;
         _userTimeout = seconds;
         _heartbeatFailureCount = 0;
@@ -65,8 +63,8 @@
                          //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d",
                          lanchPath,
-                         _serverPort,
-                         _serverPort,
+                         self.serverPort,
+                         self.serverPort,
                          _userTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);
@@ -102,7 +100,7 @@
     
     _heartbeatFailureCount = 0;
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: _serverIp port:_serverPort ipv6:_useIpv6];
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: self.server port:self.serverPort ipv6:_useIpv6];
     _heartbeatThread.delegate = self;
     _heartbeatThread.timeInterval = 2;
     _heartbeatThread.receiveTimeout = 5;
@@ -227,7 +225,7 @@
 
 - (NSString *)httpBaseURL
 {
-    return [NSString stringWithFormat:@"http://%@:%@", _serverIp, _serverPort];
+    return [NSString stringWithFormat:@"http://%@:%@", self.server, self.serverPort];
 }
 
 -(NSString*)httpMethod:(NSString *)action

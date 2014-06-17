@@ -107,8 +107,11 @@ func executeCommand(){
 		command := <-g_command_pipe
 		switch command.action{
 		case user_new:
-			res := AddNewUser(command.userId, command.groupId, command.userData)
-			fmt.Println("AddNewUser return value is", res)
+			res := AddNewGroup(command.groupId, command.groupData)
+			if	res == true{
+				AddNewUser(command.userId, command.groupId, command.userData)
+			}
+
 			//go don't need break here
 		case group_new:
 			res := AddNewGroup(command.groupId, command.superGroup, command.groupData)
@@ -243,6 +246,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	userId := strings.Join(r.Form["userId"], "") 
 	groupId := strings.Join(r.Form["groupId"], "")
 	userData := strings.Join(r.Form["userData"], "")
+	groupData := strings.Join(r.Form["groupData"])
 	
 	fmt.Println("")
 	fmt.Println("user_add requst information ---------------------")
@@ -251,6 +255,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	fmt.Println("userId:", userId)
 	fmt.Println("groupId:", groupId)
 	fmt.Println("userData:", userData)
+	fmt.Println("groupData:", groupData)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
@@ -260,6 +265,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	command.userId = userId
 	command.groupId = groupId
 	command.userData = userData
+	command.groupData = groupData
 	
 	g_command_pipe<- command
 

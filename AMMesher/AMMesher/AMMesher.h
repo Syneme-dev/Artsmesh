@@ -34,6 +34,7 @@ extern NSString* const AM_MESHER_ONLINE;
 -(void)goOffline;
 -(void)mergeGroup:(NSString*)groupName;
 -(void)unmergeGroup;
+-(void)changeLocalGroupName:(NSString*)newGroupName;
 
 @end
 

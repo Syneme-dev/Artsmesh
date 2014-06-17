@@ -102,24 +102,34 @@
      [[AMMesher sharedAMMesher] unmergeGroup];
 }
 
-//- (IBAction)createGroup:(id)sender
-//{
-//    NSString* createName = [self.createGroupTextField stringValue];
-//    if (createName != nil && ![createName isEqualToString:@""])
-//    {
-//        [[AMMesher sharedAMMesher] joinGroup:createName];
-//    }
-//}
+- (IBAction)createGroup:(id)sender
+{
+    NSString* newGroupName = [self.createGroupTextField stringValue];
+    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
+    {
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        if (mySelf.isOnline) {
+            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
+        }else{
+            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+        }
+    }
+}
 
 
-//- (IBAction)createGroupByEnter:(id)sender
-//{
-//    NSString* createName = [self.createGroupTextField stringValue];
-//    if (createName != nil && ![createName isEqualToString:@""])
-//    {
-//        [[AMMesher sharedAMMesher] joinGroup:createName];
-//    }
-//}
+- (IBAction)createGroupByEnter:(id)sender
+{
+    NSString* newGroupName = [self.createGroupTextField stringValue];
+    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
+    {
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        if (mySelf.isOnline) {
+            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
+        }else{
+            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+        }
+    }
+}
 
 
 -(void)doubleClickOutlineView:(id)sender{
@@ -205,7 +215,8 @@
     
     NSString* title;
     if ([item isEqual:@"__localUsers"]) {
-        title = @"Local Users";
+        //title = @"Local Users";
+        title = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
     } else if ([item isEqual:@"__remoteGroups"]) {
         title = @"Public Groups";
     } else if ([item isKindOfClass:[AMGroup class]]) {

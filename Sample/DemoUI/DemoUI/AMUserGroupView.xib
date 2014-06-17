@@ -98,6 +98,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="createGroup:" target="-2" id="tzB-ff-02C"/>
+                    </connections>
                 </button>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
                     <rect key="frame" x="28" y="22" width="284" height="26"/>
@@ -110,6 +113,9 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="createGroupByEnter:" target="-2" id="nlG-2z-vqw"/>
+                    </connections>
                 </textField>
             </subviews>
             <constraints>

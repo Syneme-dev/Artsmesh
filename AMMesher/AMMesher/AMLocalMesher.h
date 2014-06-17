@@ -25,7 +25,7 @@
 -(void)startLocalClient;
 -(void)stopLocalClient;
 
--(void)changeGroupName;
+-(void)changeGroupName:(NSString*)newGroupName;
 -(void)goOnline;
 -(void)goOffline;
 

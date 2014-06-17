@@ -124,12 +124,12 @@
     _heartbeatThread = nil;
 }
 
--(void)changeGroupName:(NSString* ) name
+-(void)changeGroupName:(NSString* ) newGroupName
 {
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate = self;
     req.requestPath = @"/groups/update";
-    req.formData = @{@"groupName": name };
+    req.formData = @{@"groupName": newGroupName };
     [_httpRequestQueue addOperation:req];
 }
 
@@ -303,7 +303,7 @@
         
         if (![oldClusterId isEqualToString:clusterId] || ![oldClusterName isEqualToString:clusterName]){
             [[AMAppObjects appObjects] setObject:clusterId forKey:AMClusterIdKey];
-            [[AMAppObjects appObjects] setObject:AMClusterNameKey forKey:AMClusterNameKey];
+            [[AMAppObjects appObjects] setObject:clusterName forKey:AMClusterNameKey];
         }
         
         NSArray* userArr = [result objectForKey:@"UserDTOs"];

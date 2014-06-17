@@ -112,11 +112,9 @@ func executeCommand(){
 		command := <-g_command_pipe
 		switch command.action{
 		case user_new:
-			res := AddNewGroup(command.groupId, "", command.groupData)
-			if res == true{
-				AddNewUser(command.userId, command.groupId, command.userData)
-			}
-
+			AddNewGroup(command.groupId, "", command.groupData)
+			AddNewUser(command.userId, command.groupId, command.userData)
+			
 		case group_new:
 			res := AddNewGroup(command.groupId, command.superGroup, command.groupData)
 			fmt.Println("AddNewGroup return value is", res)

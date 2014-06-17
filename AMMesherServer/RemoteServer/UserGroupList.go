@@ -9,15 +9,15 @@ import(
 
 type UserNode struct{
 	userId 		string
-	groupId 	string
+	groupId 		string
 	userData 	string
 	timestamp   time.Time
 }
 
 type GroupNode struct{
-	groupId 		string
+	groupId 			string
 	superGroupId 	string
-	groupData   	string
+	groupData   		string
 	users    		map[string]*UserNode
 	subgroups		map[string]*GroupNode	
 }

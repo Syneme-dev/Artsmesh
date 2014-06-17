@@ -171,6 +171,11 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     [_remoteMesher unmergeGroup];
 }
 
+-(void)changeLocalGroupName:(NSString*)newGroupName
+{
+    [_localMesher changeGroupName:newGroupName];
+}
+
 #pragma mark -
 #pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath

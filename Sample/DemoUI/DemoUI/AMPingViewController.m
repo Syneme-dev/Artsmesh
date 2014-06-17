@@ -39,16 +39,18 @@
 
 - (void)awakeFromNib
 {
-//    [[NSNotificationCenter defaultCenter]
-//        addObserver:self
-//        selector:@selector(userGroupsChanged:)
-//        name:AM_USERGROUPS_CHANGED
-//        object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+        selector:@selector(userGroupsChanged:)
+        name:AM_REMOTEGROUPS_CHANGED
+        object:nil];
 }
 
 -(void)userGroupsChanged:(NSNotification*)notification
 {
-   // _users = [[AMMesher sharedAMMesher] myGroup].users;
+    NSString *mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+    NSDictionary *groups = [AMAppObjects appObjects][AMRemoteGroupsKey];
+    _users = [groups[mergedGroupId] users];
     [self.userTable reloadData];
 }
 

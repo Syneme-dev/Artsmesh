@@ -10,7 +10,7 @@
 
 extern NSString * const AMClusterNameKey;   // NSString *
 extern NSString * const AMClusterIdKey;     // NSString *
-extern NSString * const AMLocalUsersKey;    // NSArray *
+extern NSString * const AMLocalUsersKey;    // NSDictionary *
 extern NSString * const AMMyselfKey;        // AMUser *
 extern NSString * const AMMergedGroupIdKey; // NSString *
 extern NSString * const AMRemoteGroupsKey;  // NSDictionary *

@@ -76,7 +76,6 @@
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
-                                    <action selector="doubleClickOutlineView:" target="-2" id="NZD-p1-hKX"/>
                                     <outlet property="delegate" destination="-2" id="Bfm-2v-1k3"/>
                                 </connections>
                             </outlineView>
@@ -143,7 +142,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="quitGroup:" target="-2" id="Tcs-76-z84"/>
+                        <action selector="unmerge:" target="-2" id="huC-0b-i1Z"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-vc-Sfv">

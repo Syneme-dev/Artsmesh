@@ -97,9 +97,9 @@
 }
 
 
-- (IBAction)quitGroup:(id)sender
+- (IBAction)unmerge:(id)sender
 {
-     //   [[AMMesher sharedAMMesher] backToArtsmesh];
+     [[AMMesher sharedAMMesher] unmergeGroup];
 }
 
 //- (IBAction)createGroup:(id)sender
@@ -122,10 +122,15 @@
 //}
 
 
--(IBAction)doubleClickOutlineView:(id)sender{
+-(void)doubleClickOutlineView:(id)sender{
     if([sender isKindOfClass:[NSOutlineView class]]){
         NSOutlineView* ov = (NSOutlineView*)sender;
         NSInteger selected = [ov selectedRow];
+        
+        if (selected < 0){
+            return;
+        }
+
         NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
         id item = selectedCellView.objectValue;
         if ([item isKindOfClass:[AMGroup class]]) {

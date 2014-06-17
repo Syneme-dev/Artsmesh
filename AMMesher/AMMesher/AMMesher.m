@@ -126,7 +126,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     [_localMesher stopLocalClient];
     [_localMesher stopLocalServer];
     
-    //destroy remote mesher
+    [_remoteMesher stopRemoteClient];
     
     _elector = nil;
 }

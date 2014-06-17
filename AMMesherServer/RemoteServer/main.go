@@ -23,6 +23,11 @@ type UserHeartbeatInfo struct{
 	GroupId 		string
 }
 
+type UserHeartbeatResposeDTO struct{
+	Version  	string
+}
+
+
 type CommandAction int
 const(
 	user_new	 CommandAction= iota
@@ -107,12 +112,11 @@ func executeCommand(){
 		command := <-g_command_pipe
 		switch command.action{
 		case user_new:
-			res := AddNewGroup(command.groupId, command.groupData)
-			if	res == true{
+			res := AddNewGroup(command.groupId, "", command.groupData)
+			if res == true{
 				AddNewUser(command.userId, command.groupId, command.userData)
 			}
 
-			//go don't need break here
 		case group_new:
 			res := AddNewGroup(command.groupId, command.superGroup, command.groupData)
 			fmt.Println("AddNewGroup return value is", res)
@@ -212,9 +216,16 @@ func handleClient(conn *net.UDPConn){
 	version := ss.Version
 	RUnlockSnapShot()
 	
-	versionStr := fmt.Sprintf("%d", version)
+	udpResponse := new(UserHeartbeatResposeDTO)
+	udpResponse.Version = fmt.Sprintf("%d", version)
 	
-	bytes := []byte(versionStr)
+	udpResStr, err := json.Marshal(udpResponse)
+	if err != nil{
+		fmt.Fprintf(os.Stderr, "error: %s", err.Error())
+		return
+	}
+	
+	bytes := []byte(udpResStr)
 	_, err = conn.WriteToUDP(bytes, addr)
 	if	err != nil{
 		fmt.Fprintf(os.Stdout, "Write to Udp failed!")
@@ -246,7 +257,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	userId := strings.Join(r.Form["userId"], "") 
 	groupId := strings.Join(r.Form["groupId"], "")
 	userData := strings.Join(r.Form["userData"], "")
-	groupData := strings.Join(r.Form["groupData"])
+	groupData := strings.Join(r.Form["groupName"], "")
 	
 	fmt.Println("")
 	fmt.Println("user_add requst information ---------------------")

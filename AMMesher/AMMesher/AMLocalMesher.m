@@ -216,7 +216,7 @@
 {
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
-    NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+    //NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
 }
 
 

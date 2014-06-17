@@ -62,17 +62,38 @@
 
 -(void)stopRemoteClient
 {
+    if (_heartbeatThread)
+    {
+        [_heartbeatThread cancel];
+    }
     
+    if (_httpRequestQueue) {
+        [_httpRequestQueue  cancelAllOperations];
+        [self unregisterSelf];
+    }
+    
+    _httpRequestQueue = nil;
+    _heartbeatThread = nil;
 }
 
--(void)mergeGroup:(NSString*)groupName
+-(void)mergeGroup:(NSString*)toGroupId
 {
+    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/groups/merge";
     
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:clusterId forKey:@"groupId"];
+    [dict setObject:toGroupId forKey:@"superGroupId"];
+    
+    req.formData = dict;
+    [_httpRequestQueue addOperation:req];
 }
 
 -(void)unmergeGroup
 {
-    
+    [self mergeGroup:@""];
 }
 
 -(void)startHeartbeat

@@ -63,7 +63,7 @@
                          //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d",
                          lanchPath,
-                         self.server,
+                         self.serverPort,
                          self.serverPort,
                          _userTimeout];
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];

@@ -306,9 +306,11 @@
             [[AMAppObjects appObjects] setObject:clusterName forKey:AMClusterNameKey];
         }
         
-        NSArray* userArr = [result objectForKey:@"UserDTOs"];
+        id userArr = [result objectForKey:@"UserDTOs"];
         NSMutableDictionary* newUsers = [[NSMutableDictionary alloc] init];
-        
+        if (userArr == [NSNull null]) {
+            userArr = nil;
+        }
         for (int i = 0; i < [userArr count]; i++)
         {
             NSDictionary* userDTO = (NSDictionary*)userArr[i];

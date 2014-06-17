@@ -307,7 +307,7 @@
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
 {
-    NSAssert(NO, @"http request failed!");
+    //NSAssert(NO, @"http request failed!");
 }
 
 

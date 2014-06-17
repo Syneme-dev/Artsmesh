@@ -26,6 +26,8 @@
 -(void)stopLocalClient;
 
 -(void)changeGroupName;
+-(void)goOnline;
+-(void)goOffline;
 
 
 @end

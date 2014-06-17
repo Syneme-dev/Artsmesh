@@ -141,6 +141,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
         return;
     }
     
+    [_localMesher goOnline];
     [_remoteMesher startRemoteClient];
     
 }
@@ -153,7 +154,8 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
         return;
     }
     
-    //stop the remote mesher
+    [_remoteMesher stopRemoteClient];
+    [_localMesher goOffline];
 }
 
 -(void)mergeGroup:(NSString*)groupName

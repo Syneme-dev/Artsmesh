@@ -133,6 +133,35 @@
     [_httpRequestQueue addOperation:req];
 }
 
+-(void)goOnline
+{
+    NSDictionary* dict = @{@"isOnline": @YES};
+    [self changeMyselfInfo:dict];
+}
+
+-(void)goOffline{
+     NSDictionary* dict = @{@"isOnline": @NO};
+    [self changeMyselfInfo:dict];
+}
+
+-(void)changeMyselfInfo:(NSDictionary*)dict;
+{
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    
+    for(NSString* key in dict){
+        [mySelf setValue:dict[key] forKey:key];
+    }
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/update";
+    dict = [mySelf toDict];
+
+    req.formData = dict;
+    
+    [_httpRequestQueue addOperation:req];
+}
+
 -(void)registerSelf
 {
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];

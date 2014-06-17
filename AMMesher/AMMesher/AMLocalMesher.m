@@ -144,7 +144,7 @@
     req.delegate = self;
     req.requestPath = @"/users/add";
     
-    NSMutableDictionary* dict = [mySelf toLocalHttpBodyDict];
+    NSMutableDictionary* dict = [mySelf toDict];
     [dict setObject:clusterId forKey:@"groupId"];
     [dict setObject:clusterName forKey:@"groupName"];
     

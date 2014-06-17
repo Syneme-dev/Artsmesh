@@ -141,6 +141,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
         return;
     }
     
+    [_remoteMesher startRemoteClient];
     
 }
 

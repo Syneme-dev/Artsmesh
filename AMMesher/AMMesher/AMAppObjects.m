@@ -63,7 +63,7 @@ static NSMutableDictionary *global_dict = nil;
     return self;
 }
 
--(NSMutableDictionary*)toLocalHttpBodyDict
+-(NSMutableDictionary*)toDict
 {
     NSMutableDictionary* contentDict = [[NSMutableDictionary alloc] init];
     [contentDict setObject:self.nickName forKey:@"nickName"];
@@ -83,6 +83,34 @@ static NSMutableDictionary *global_dict = nil;
     
     return localHttpBody;
 }
+
++(id)AMUserFromDict:(NSDictionary*)dict
+{
+    AMUser* tempUser = [[AMUser alloc] init];
+    tempUser.userid =[dict objectForKey:@"UserId"];
+    NSString* userData = [dict objectForKey:@"UserData"];
+    NSData* data = [userData dataUsingEncoding:NSUTF8StringEncoding];
+    NSError* err = nil;
+    NSDictionary* userObj = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:0
+                                                      error:&err];
+    if (err != nil) {
+        NSLog(@"parse json in AMUserFromDict failed!");
+        return tempUser;
+    }
+    
+    tempUser.nickName =[userObj objectForKey:@"nickName"];
+    tempUser.domain =[userObj objectForKey:@"domain"];
+    tempUser.location =[userObj objectForKey:@"Location"];
+    tempUser.localLeader =[userObj objectForKey:@"localLeader"];
+    tempUser.ip =[userObj objectForKey:@"Ip"];
+    tempUser.chatPort =[userObj objectForKey:@"chatPort"];
+    tempUser.isOnline =[[userObj objectForKey:@"isOnline"] boolValue];
+    tempUser.description =[userObj objectForKey:@"description"];
+    
+    return tempUser;
+}
+
 
 
 

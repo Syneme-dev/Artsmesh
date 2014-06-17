@@ -34,7 +34,9 @@ extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
 @property BOOL      isOnline;
 @property NSString* chatPort;
 
--(NSMutableDictionary*)toLocalHttpBodyDict;
+-(NSMutableDictionary*)toDict;
+
++(id)AMUserFromDict:(NSDictionary*)dict;
 
 @end
 

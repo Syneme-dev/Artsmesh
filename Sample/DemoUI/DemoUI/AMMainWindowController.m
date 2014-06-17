@@ -27,6 +27,7 @@
 #import "AMPingViewController.h"
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
+#import "AMMesher/AMAppObjects.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -75,11 +76,13 @@
 - (IBAction)mesh:(id)sender {
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
-//    if (mesher.isOnline == NO) {
-//        [mesher goOnline ];
-//    }else{
-//        [mesher goOffline];
-//    }
+    AMUser* mySelf = [[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    if(!mySelf.isOnline){
+        [mesher goOnline];
+    }else{
+        [mesher goOffline];
+    }
+
 }
 
 -(void)loadVersion{

@@ -123,15 +123,15 @@
 
 
 -(IBAction)doubleClickOutlineView:(id)sender{
-//    if([sender isKindOfClass:[NSOutlineView class]]){
-//        NSOutlineView* ov = (NSOutlineView*)sender;
-//        NSInteger selected = [ov selectedRow];
-//        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-//        id item = selectedCellView.objectValue;
-//        if ([item isKindOfClass:[AMGroup class]]) {
-//            [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
-//        }
-//    }
+    if([sender isKindOfClass:[NSOutlineView class]]){
+        NSOutlineView* ov = (NSOutlineView*)sender;
+        NSInteger selected = [ov selectedRow];
+        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        id item = selectedCellView.objectValue;
+        if ([item isKindOfClass:[AMGroup class]]) {
+           // [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
+        }
+    }
 }
 
 

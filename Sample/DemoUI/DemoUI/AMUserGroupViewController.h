@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet NSView *groupCellView;
 @property (weak) IBOutlet NSButton *groupCellViewJoinBtn;
+-(IBAction)doubleClickOutlineView:(id)sender;
 
 @property NSArray* userGroups;
 

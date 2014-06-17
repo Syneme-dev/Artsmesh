@@ -236,12 +236,19 @@
             
             [groupsDict setObject:newGroup forKey:[groups[i] objectForKey:@"GroupId"]];
         }
+    
+        NSNotification* groupNotification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:groupNotification];
         
         [[AMAppObjects appObjects] setObject:groupsDict forKey:AMRemoteGroupsKey];
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
         
-       
-        NSNotification* notification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        if (mySelf.isOnline == NO){
+            mySelf.isOnline = YES;
+        }
+        
+        NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:userNotification];
 
         return;
     }

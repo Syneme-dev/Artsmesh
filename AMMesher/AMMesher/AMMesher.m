@@ -186,12 +186,14 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
                 
                 [_localMesher startLocalServer];
-                    sleep(1);
+                sleep(1);
                 [_localMesher startLocalClient];
                 
             }else if(newState == 4){
                 //Joined
                 NSLog(@"Mesher is %@:%@", elector.serverName, elector.serverPort);
+                _localMesher.server = elector.serverName;
+                _localMesher.serverPort = elector.serverPort;
                 [_localMesher startLocalClient];
             }
         }else{

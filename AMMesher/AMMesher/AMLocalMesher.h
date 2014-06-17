@@ -11,6 +11,8 @@
 @protocol AMHeartBeatDelegate;
 
 @interface AMLocalMesher : NSObject
+@property NSString* server;
+@property NSString* serverPort;
 
 -(id)initWithServer:(NSString*)ip
                port:(NSString*)port

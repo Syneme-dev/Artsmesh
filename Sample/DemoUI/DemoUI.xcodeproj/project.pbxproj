@@ -26,7 +26,6 @@
 		26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
-		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
@@ -266,7 +265,6 @@
 				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
 				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
 				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
-				26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

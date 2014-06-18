@@ -195,6 +195,10 @@
 
 -(void)requestUserList
 {
+    if ([_httpRequestQueue operationCount] > 2){
+        return;
+    }
+    
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate  = self;
     req.requestPath = @"/users/getall";

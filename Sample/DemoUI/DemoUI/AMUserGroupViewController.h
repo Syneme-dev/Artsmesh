@@ -15,10 +15,11 @@
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet NSView *groupCellView;
 @property (weak) IBOutlet NSButton *groupCellViewJoinBtn;
-
 @property NSArray* userGroups;
 
-- (IBAction)quitGroup:(id)sender;
+-(void)doubleClickOutlineView:(id)sender;
+- (IBAction)unmerge:(id)sender;
+
 - (IBAction)createGroup:(id)sender;
 - (IBAction)createGroupByEnter:(id)sender;
 

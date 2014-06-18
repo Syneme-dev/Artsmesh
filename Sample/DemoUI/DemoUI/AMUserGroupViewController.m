@@ -9,6 +9,7 @@
 #import "AMUserGroupViewController.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
+#import "AMMesher/AMAppObjects.h"
 #import "AMUserGroupTableCellView.h"
 #import "AMUserGroupNode.h"
 
@@ -19,6 +20,8 @@
 @implementation AMUserGroupViewController
 {
     id _selectItem;
+    NSArray *_localUsers;
+    NSDictionary *_remoteGroups;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,8 +44,39 @@
 }
 
 -(void)awakeFromNib{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
+   [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(userGroupsChanged:)
+               name:AM_LOCALUSERS_CHANGED
+             object:nil];
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+        selector:@selector(userGroupsChanged:)
+        name:AM_REMOTEGROUPS_CHANGED
+        object:nil];
     
+//    AMUser *user1 = [[AMUser alloc] init];
+//    user1.nickName = @"user1";
+//    AMUser *user2 = [[AMUser alloc] init];
+//    user2.nickName = @"user2";
+//    
+//    AMUser *user3 = [[AMUser alloc] init];
+//    user3.nickName = @"user3";
+//    AMGroup *group1 = [[AMGroup alloc] init];
+//    group1.groupName = @"group1";
+//    group1.users = @[user3];
+//    
+//    AMUser *user4 = [[AMUser alloc] init];
+//    user4.nickName = @"user4";
+//    AMGroup *group2 = [[AMGroup alloc] init];
+//    group2.groupName = @"group2";
+//    group2.users = @[user4];
+    
+   // _localUsers = @[user1, user2];
+//    _remoteGroups = @{
+//        @"group1": group1,
+//        @"group2": group2
+//        };
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
     [self.outlineView setRowHeight:22.0];
@@ -53,46 +87,65 @@
 
 -(void)userGroupsChanged:(NSNotification*) notification
 {
-    AMMesher* mehser = [AMMesher sharedAMMesher];
-    self.userGroups = mehser.userGroups;
+    if ([notification.name isEqual:AM_LOCALUSERS_CHANGED]) {
+        _localUsers = [[AMAppObjects appObjects][AMLocalUsersKey] allValues];
+    } else if ([notification.name isEqual:AM_REMOTEGROUPS_CHANGED]) {
+        _remoteGroups = [AMAppObjects appObjects][AMRemoteGroupsKey];
+    }
     
     [self.outlineView reloadData];
 }
 
 
-- (IBAction)quitGroup:(id)sender
+- (IBAction)unmerge:(id)sender
 {
-        [[AMMesher sharedAMMesher] backToArtsmesh];
+     [[AMMesher sharedAMMesher] unmergeGroup];
 }
 
 - (IBAction)createGroup:(id)sender
 {
-    NSString* createName = [self.createGroupTextField stringValue];
-    if (createName != nil && ![createName isEqualToString:@""])
+    NSString* newGroupName = [self.createGroupTextField stringValue];
+    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
     {
-        [[AMMesher sharedAMMesher] joinGroup:createName];
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        if (mySelf.isOnline) {
+            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
+        }else{
+            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+        }
     }
 }
 
 
 - (IBAction)createGroupByEnter:(id)sender
 {
-    NSString* createName = [self.createGroupTextField stringValue];
-    if (createName != nil && ![createName isEqualToString:@""])
+    NSString* newGroupName = [self.createGroupTextField stringValue];
+    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
     {
-        [[AMMesher sharedAMMesher] joinGroup:createName];
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        if (mySelf.isOnline) {
+            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
+        }else{
+            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+        }
     }
 }
 
 
--(IBAction)doubleClickOutlineView:(id)sender{
+-(void)doubleClickOutlineView:(id)sender{
     if([sender isKindOfClass:[NSOutlineView class]]){
         NSOutlineView* ov = (NSOutlineView*)sender;
         NSInteger selected = [ov selectedRow];
+        
+        if (selected < 0){
+            return;
+        }
+
         NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
         id item = selectedCellView.objectValue;
         if ([item isKindOfClass:[AMGroup class]]) {
-            [[AMMesher sharedAMMesher] joinGroup:[item groupName]];
+            NSString* superGroupId = [item groupId];
+            [[AMMesher sharedAMMesher] mergeGroup:superGroupId];
         }
     }
 }
@@ -103,48 +156,44 @@
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
-    if (item == nil) {
-        if (self.userGroups == nil){
+    if (!item) {
+        if (!_localUsers)
             return 0;
-        }else{
-            return [self.userGroups count];
-        }
+        else
+            return _remoteGroups ? 2 : 1;
+    } else if ([item isEqual:@"__localUsers"]) {
+        return [_localUsers count];
+    } else if ([item isEqual:@"__remoteGroups"]) {
+        return [_remoteGroups count];
+    } else if ([item isKindOfClass:[AMGroup class]]) {
+        return [[(AMGroup *)item users] count];
+    } else {
+        return 0;
     }
-    
-    if ([item isKindOfClass:[AMGroup class]]) {
-        AMGroup* group = (AMGroup*)item;
-        return [group.users count];
-    }
-
-    return 0;
 }
 
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    if (item == nil) {
-        return YES;
-    }else if([item isKindOfClass:[AMGroup class]]){
-        AMGroup* group = (AMGroup*)item;
-        return [group.users count] != 0;
-    }else{
-        return NO;
-    }
+    return [self outlineView:outlineView numberOfChildrenOfItem:item] > 0;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    if (item == nil) {
-        if (self.userGroups == nil) {
-            return nil;
-        }else{
-            return [self.userGroups objectAtIndex:0];
+    if (!item) {
+        if (index == 0) {
+            return @"__localUsers";
+        } else {
+            return @"__remoteGroups";
         }
-    }else{
-        if ([item isKindOfClass:[AMGroup class]]) {
-            AMGroup* group  = (AMGroup*)item;
-            return [group.users objectAtIndex:index];
-        }else{
-            return nil;
-        }
+    } else if ([item isEqual:@"__localUsers"]) {
+        return _localUsers[index];
+    } else if ([item isEqual:@"__remoteGroups"]) {
+        return [_remoteGroups allValues][index];
+    } else if ([item isKindOfClass:[AMGroup class]]) {
+        return [(AMGroup *)item users][index];
+    } else {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:nil
+                                     userInfo:nil];
     }
 }
 
@@ -165,15 +214,19 @@
     }
     
     NSString* title;
-    if ([item isKindOfClass:[AMGroup class]]) {
-        AMGroup* group = (AMGroup*)item;
-        title = group.groupName;
-        if ([title isEqualToString:@""]) {
-            title = @"Artsmesh";
-        }
-    }else{
-        AMUser* user = (AMUser*)item;
-        title = user.nickName;
+    if ([item isEqual:@"__localUsers"]) {
+        //title = @"Local Users";
+        title = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
+    } else if ([item isEqual:@"__remoteGroups"]) {
+        title = @"Public Groups";
+    } else if ([item isKindOfClass:[AMGroup class]]) {
+        title = [(AMGroup *)item groupName];
+    } else if ([item isKindOfClass:[AMUser class]]) {
+        title = [(AMUser *)item nickName];
+    } else {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:nil
+                                     userInfo:nil];
     }
     
     cellView.textField.stringValue = title;

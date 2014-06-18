@@ -14,12 +14,16 @@ extern NSString * const AMUserRequestDomain;
 
 @interface AMUserRequest : NSOperation
 @property(nonatomic, weak) id<AMUserRequestDelegate> delegate;
+@property  NSString* requestPath;
+@property NSDictionary* formData;
 @end
 
 @protocol AMUserRequestDelegate <NSObject>
 @optional
 
-- (NSString *)httpServerURL;
+- (NSString*)httpBaseURL;
+- (NSString*)httpMethod:(NSString*)action;
+- (NSDictionary*)httpBodyForm:(NSString*)action;
 - (void)userRequestDidCancel;
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data;
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error;

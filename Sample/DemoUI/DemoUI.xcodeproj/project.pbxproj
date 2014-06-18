@@ -25,8 +25,6 @@
 		26DA41BD1909E7A600DC0DCC /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DA41BC1909E7A600DC0DCC /* AMUserGroupTableCellView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
-		26E4172A193E10DD00D66FEB /* amserver in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26E41729193E10DD00D66FEB /* amserver */; };
-		26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
@@ -93,6 +91,7 @@
 		AFDA79AE194586C50002873B /* oscShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79AC194586C50002873B /* oscShot.png */; };
 		AFDA79AF194586C50002873B /* visualShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79AD194586C50002873B /* visualShot.png */; };
 		CE153B05191E5CA200E53250 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE153B04191E5CA200E53250 /* AMTaskLauncher.framework */; };
+		CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE7D80AE19502157001E6CF7 /* LocalServer */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
@@ -119,7 +118,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				26E4172A193E10DD00D66FEB /* amserver in CopyFiles */,
+				CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +178,6 @@
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
-		26E41729193E10DD00D66FEB /* amserver */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = amserver; sourceTree = "<group>"; };
 		26ED34C518CFDFAF00E1B791 /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
@@ -265,6 +263,7 @@
 		AFDA79AC194586C50002873B /* oscShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oscShot.png; sourceTree = "<group>"; };
 		AFDA79AD194586C50002873B /* visualShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visualShot.png; sourceTree = "<group>"; };
 		CE153B04191E5CA200E53250 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../../AMTaskLauncher/build/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
+		CE7D80AE19502157001E6CF7 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
@@ -294,7 +293,6 @@
 				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
 				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
 				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
-				26ED34C618CFDFAF00E1B791 /* AMETCDApi.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,7 +396,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				26E41729193E10DD00D66FEB /* amserver */,
+				CE7D80AE19502157001E6CF7 /* LocalServer */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,

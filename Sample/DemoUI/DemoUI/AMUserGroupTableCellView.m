@@ -8,6 +8,8 @@
 
 #import "AMUserGroupTableCellView.h"
 #import "AMUserGroupNode.h"
+#import "AMMesher/AMAppObjects.h"
+
 
 @implementation AMUserGroupTableCellView
 
@@ -24,54 +26,15 @@
 {
     [super drawRect:dirtyRect];
     
-    // Drawing code here.
-}
-
-- (void)mouseEntered:(NSEvent *)theEvent
-{
-    for (NSView* view in self.subviews )
-    {
-        if ([view isKindOfClass:[NSButton class]])
-        {
-            if([self.objectValue isKindOfClass:[AMUserGroupNode class]])
-            {
-                AMUserGroupNode* node = self.objectValue;
-                if (node.isLeaf == NO)
-                {
-                     [view setHidden:NO];
-                }
-            }
-        }
+    if ([self.objectValue isKindOfClass:[AMUser class]]) {
+        AMUser *user = (AMUser *)self.objectValue;
+        if (user.isOnline)
+            [[NSColor greenColor] set];
+        else
+            [[NSColor lightGrayColor] set];
+        NSRectFill(NSMakeRect(2, 5, 5, self.bounds.size.height - 8));
     }
-    
-     //NSLog(@"Mouse Entered!");
 }
 
-- (void)mouseExited:(NSEvent *)theEvent
-{
-    
-    for (NSView* view in self.subviews )
-    {
-        if ([view isKindOfClass:[NSButton class]])
-        {
-            [view setHidden:YES];
-        }
-    }
-    
-    //NSLog(@"Mouse Exited!");
-    
-}
-
--(void)viewDidMoveToSuperview
-{
-    NSRect rect = [self frame];
-    NSTrackingArea* trackArea = [[NSTrackingArea alloc]
-                                 initWithRect:rect
-                                 options:(NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved |NSTrackingActiveInKeyWindow )
-                                 owner:self
-                                 userInfo:nil];
-    
-    [self addTrackingArea:trackArea];
-}
 
 @end

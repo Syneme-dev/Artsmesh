@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserGroupViewController">
             <connections>
-                <outlet property="createGroupName" destination="eE2-gh-pZg" id="aUw-Ow-Svk"/>
-                <outlet property="createGroupTextField" destination="eE2-gh-pZg" id="cn9-nN-73N"/>
+                <outlet property="createGroupTextField" destination="eE2-gh-pZg" id="C5N-7P-0UI"/>
                 <outlet property="groupCellView" destination="R8J-WH-Y9f" id="8bZ-yk-E3p"/>
                 <outlet property="groupCellViewJoinBtn" destination="heI-OY-PRa" id="adR-MG-5hY"/>
                 <outlet property="outlineView" destination="vcz-fd-kzK" id="TCQ-26-2Vz"/>
@@ -35,7 +34,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" indentationMarkerFollowsCell="NO" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
+                            <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
                                 <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -55,12 +54,12 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="ugcell" id="zeI-8S-JLP">
+                                            <tableCellView identifier="ugcell" id="zeI-8S-JLP" customClass="AMUserGroupTableCellView">
                                                 <rect key="frame" x="1" y="1" width="309" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgT-O2-LB7" customClass="AMFoundryFontView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="309" height="17"/>
+                                                        <rect key="frame" x="14" y="0.0" width="295" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="UpR-Bh-B9u">
                                                             <font key="font" metaFont="system" size="14"/>
@@ -100,7 +99,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="createGroup:" target="-2" id="Bd2-xW-Qbu"/>
+                        <action selector="createGroup:" target="-2" id="tzB-ff-02C"/>
                     </connections>
                 </button>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
@@ -115,7 +114,7 @@
                         <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
                     <connections>
-                        <action selector="createGroupByEnter:" target="-2" id="jmy-Op-uBg"/>
+                        <action selector="createGroupByEnter:" target="-2" id="nlG-2z-vqw"/>
                     </connections>
                 </textField>
             </subviews>
@@ -149,7 +148,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="quitGroup:" target="-2" id="Tcs-76-z84"/>
+                        <action selector="unmerge:" target="-2" id="huC-0b-i1Z"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-vc-Sfv">

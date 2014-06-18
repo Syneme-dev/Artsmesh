@@ -9,7 +9,7 @@
 #import "AMPingViewController.h"
 #import "AMPingUserTableCellView.h"
 #import "AMMesher/AMMesher.h"
-#import "AMMesher/AMUser.h"
+#import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMGroup.h"
 #import "AMTaskLauncher/AMShellTask.h"
 
@@ -31,7 +31,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _users = [[AMMesher sharedAMMesher] myGroup].users;
+       // _users = [[AMMesher sharedAMMesher] myGroup].users;
     }
     
     return self;
@@ -42,13 +42,15 @@
     [[NSNotificationCenter defaultCenter]
         addObserver:self
         selector:@selector(userGroupsChanged:)
-        name:AM_USERGROUPS_CHANGED
+        name:AM_REMOTEGROUPS_CHANGED
         object:nil];
 }
 
 -(void)userGroupsChanged:(NSNotification*)notification
 {
-    _users = [[AMMesher sharedAMMesher] myGroup].users;
+    NSString *mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+    NSDictionary *groups = [AMAppObjects appObjects][AMRemoteGroupsKey];
+    _users = [groups[mergedGroupId] users];
     [self.userTable reloadData];
 }
 
@@ -80,7 +82,7 @@
     if (self.userTable.selectedRow == -1)
         return;
     AMUser* user = _users[self.userTable.selectedRow];
-    NSString* pingIp = ([user.publicIp isEqualToString: @""]) ? user.privateIp: user.publicIp;
+    NSString* pingIp = user.ip;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];
     [self runCommand:pingCommand];

@@ -8,64 +8,17 @@
 #import "AMGroup.h"
 
 @implementation AMGroup
-{
-    NSString *_groupName;
-    NSMutableArray *_users;
-}
 
-- (id)init
++ (NSString*) createGroupId
 {
-    return [self initWithGroupName:@""];
-}
-
-- (instancetype)initWithGroupName:(NSString *)groupName;
-{
-    self = [super init];
-    if (self) {
-        _groupName = [groupName copy];
-    }
-    return self;
-}
-
-- (NSArray *)users
-{
-    return _users;
-}
-
-- (void)addUser:(AMUser *)user
-{
-    NSAssert([self.groupName isEqual:user.groupName], @"groupName mismatch");
-    if (_users == nil) {
-        _users = [[NSMutableArray alloc] init];
-    }
-    [_users addObject:user];
-}
-
-- (NSUInteger)countOfUsers
-{
-    return [_users count];
-}
-
-- (id)objectInUsersAtIndex:(NSUInteger)index
-{
-    return [_users objectAtIndex:index];
-}
-
-- (void)insertObject:(AMUser *)user inUsersAtIndex:(NSUInteger)index
-{
-    NSAssert([self.groupName isEqual:user.groupName], @"groupName mismatch");
-    [_users insertObject:user atIndex:index];
-}
-
-- (void)removeObjectFromUsersAtIndex:(NSUInteger)index
-{
-    [_users removeObjectAtIndex:index];
-}
-
-- (void)replaceObjectInUsersAtIndex:(NSUInteger)index withObject:(id)user
-{
-    NSAssert([self.groupName isEqual:[user groupName]], @"groupName mismatch");
-    [_users replaceObjectAtIndex:index withObject:user];
+    // Create universally unique identifier (object)
+    CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
+    
+    // Get the string representation of CFUUID object.
+    NSString *uuidStr = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuidObject));
+    CFRelease(uuidObject);
+    
+    return uuidStr;
 }
 
 @end

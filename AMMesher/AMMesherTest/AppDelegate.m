@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "AMUser.h"
+#import "AMLocalUser.h"
 #import "AMMesher.h"
 
 @implementation AppDelegate
@@ -24,7 +24,7 @@
 }
 
 -(void)AMUsertest{
-    AMUser* user = [[AMUser alloc] init];
+    AMLocalUser* user = [[AMLocalUser alloc] init];
     user.nickName = @"test";
     
     AMUserPortMap* pm1 = [[AMUserPortMap alloc] init];

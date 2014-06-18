@@ -6,23 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMUser.h"
+#import "AMAppObjects.h"
 
 @interface AMGroup : NSObject
 
-@property(nonatomic, readonly) NSString *groupName;
-@property(nonatomic, readonly) NSArray *users;
+@property(nonatomic) NSString *groupId;
+@property(nonatomic) NSString *groupName;
+@property(nonatomic) NSArray *users;
 
-// designated initializer
-- (instancetype)initWithGroupName:(NSString *)groupName;
-- (void)addUser:(AMUser *)user;
-
-
-// collection accessor
-- (NSUInteger)countOfUsers;
-- (id)objectInUsersAtIndex:(NSUInteger)index;
-- (void)insertObject:(AMUser *)user inUsersAtIndex:(NSUInteger)index;
-- (void)removeObjectFromUsersAtIndex:(NSUInteger)index;
-- (void)replaceObjectInUsersAtIndex:(NSUInteger)index withObject:(id)user;
++ (NSString*) createGroupId;
 
 @end

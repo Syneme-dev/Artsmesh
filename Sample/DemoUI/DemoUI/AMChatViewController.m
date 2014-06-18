@@ -8,7 +8,7 @@
 
 #import "AMChatViewController.h"
 #import "AMMesher/AMMesher.h"
-#import "AMMesher/AMUser.h"
+#import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
@@ -40,6 +40,8 @@
     }
     return self;
 }
+
+/*
 
 -(void)awakeFromNib
 {
@@ -194,7 +196,6 @@
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    // server packet
     NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
     if ([ipAndPort count] < 2){
         return;
@@ -221,5 +222,5 @@
 
 }
 
-
+*/
 @end

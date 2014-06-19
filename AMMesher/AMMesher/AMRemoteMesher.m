@@ -145,12 +145,12 @@
 
 -(void)mergeGroup:(NSString*)toGroupId
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if([machine mesherState] != kMesherMeshed ){
-        return;
-    }
+//    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+//    NSAssert(machine, @"mesher state machine can not be nil!");
+//    
+//    if([machine mesherState] != kMesherMeshed ){
+//        return;
+//    }
     
     NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
     
@@ -162,6 +162,7 @@
     req.delegate = self;
     req.requestPath = @"/groups/merge";
     req.formData = dict;
+    req.httpMethod = @"POST";
     [_httpRequestQueue addOperation:req];
 }
 

@@ -31,10 +31,12 @@ extern NSString * const AMSystemConfigKey; //AMSystemConfig
 @property NSString* domain;
 @property NSString* location;
 @property NSString* description;
-@property NSString* ip;
+@property NSString* privateIp;
+@property NSString* publicIp;
 @property NSString* localLeader;
 @property BOOL      isOnline;
 @property NSString* chatPort;
+@property NSString* publicChatPort;
 
 -(NSMutableDictionary*)toDict;
 

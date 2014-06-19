@@ -9,7 +9,7 @@
 //extern NSString* const AM_USERGROUPS_CHANGED;
 extern NSString* const AM_LOCALUSERS_CHANGED;
 extern NSString* const AM_REMOTEGROUPS_CHANGED;
-extern NSString* const AM_MESHER_ONLINE;
+extern NSString* const AM_MESHER_ONLINE_CHANGED;
 
 @class AMLocalUser;
 @class AMGroup;
@@ -28,13 +28,13 @@ extern NSString* const AM_MESHER_ONLINE;
 
 -(void)startMesher;
 -(void)stopMesher;
--(void)renameCluster:(NSString *)newClusterName;
 
 -(void)goOnline;
 -(void)goOffline;
 -(void)mergeGroup:(NSString*)groupName;
 -(void)unmergeGroup;
 -(void)changeLocalGroupName:(NSString*)newGroupName;
+-(void)updateMySelf;
 
 @end
 

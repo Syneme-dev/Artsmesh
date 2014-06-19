@@ -13,5 +13,6 @@
 @interface AMLocalMesher : NSObject
 
 -(void)changeGroupName:(NSString*)newGroupName;
+-(void)updateMyselfInfo;
 
 @end

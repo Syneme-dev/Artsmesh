@@ -22,11 +22,6 @@
 
 @implementation AMRemoteMesher
 {
-    NSString* _serverIp;
-    NSString* _serverPort;
-    BOOL _useIpv6;
-    int _userTimeout;
-    
     NSOperationQueue* _httpRequestQueue;
     AMHeartBeat* _heartbeat;
     AMShellTask *_mesherServerTask;
@@ -89,6 +84,28 @@
 -(void)startRemoteClient
 {
     [self registerSelf];
+}
+
+-(void)updateMyselfInfo
+{
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    if([machine mesherState] != kMesherMeshed){
+        return;
+    }
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSDictionary* dict = [mySelf toDict];
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/update";
+    req.formData = dict;
+    req.httpMethod = @"POST";
+    
+    [_httpRequestQueue addOperation:req];
+    [_httpRequestQueue waitUntilAllOperationsAreFinished];
 }
 
 

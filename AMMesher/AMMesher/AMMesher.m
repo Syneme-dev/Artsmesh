@@ -18,7 +18,7 @@
 
 NSString* const AM_LOCALUSERS_CHANGED = @"AM_LOCALUSERS_CHANGED";
 NSString* const AM_REMOTEGROUPS_CHANGED = @"AM_REMOTEGROUPS_CHANGED";
-NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
+NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
 
 @implementation AMMesher
 {
@@ -67,7 +67,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
-    mySelf.ip = [defaults stringForKey:Preference_Key_User_PrivateIp];
+    mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
     mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     [AMAppObjects appObjects][AMMyselfKey] = mySelf;
     [AMAppObjects appObjects][AMClusterNameKey] = @"LocalGroup";
@@ -210,6 +210,23 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     }
     
     [_localMesher changeGroupName:newGroupName];
+}
+
+-(void)updateMySelf
+{
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    if ([machine mesherState] == kMesherStarted)
+    {
+        [_localMesher updateMyselfInfo];
+        
+    }else if([machine mesherState] == kMesherMeshed){
+        
+        [_localMesher updateMyselfInfo];
+        [_remoteMesher updateMyselfInfo];
+    }
+    
 }
 
 

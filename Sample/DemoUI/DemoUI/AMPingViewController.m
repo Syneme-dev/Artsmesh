@@ -81,7 +81,7 @@
     if (self.userTable.selectedRow == -1)
         return;
     AMUser* user = _users[self.userTable.selectedRow];
-    NSString* pingIp = user.ip;
+    NSString* pingIp = user.privateIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];
     [self runCommand:pingCommand];

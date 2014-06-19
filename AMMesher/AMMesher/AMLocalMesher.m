@@ -23,9 +23,6 @@
 
 @implementation AMLocalMesher
 {
-    BOOL _useIpv6;
-    int _userTimeout;
-    
     NSOperationQueue* _httpRequestQueue;
     AMHeartBeat* _heartbeat;
     AMShellTask *_mesherServerTask;
@@ -436,7 +433,7 @@
             user.location = [userDataDict objectForKey:@"location"];
             user.localLeader = [userDataDict objectForKey:@"localLeader"];
             user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
-            user.ip = [userDataDict objectForKey:@"privateIp"];
+            user.privateIp = [userDataDict objectForKey:@"privateIp"];
             user.chatPort = [userDataDict objectForKey:@"chatPort"];
             [newUsers setValue:user forKeyPath:userId];
         }

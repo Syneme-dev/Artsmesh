@@ -148,7 +148,7 @@
         AMUser* ru = [_remotePeerSet objectForKey:ruKey];
         AMHolePunchingPeer* rPeer = [[AMHolePunchingPeer alloc] init];
         rPeer.ip = ru.publicIp;
-        rPeer.port = ru.chatPort;
+        rPeer.port = ru.publicChatPort;
         [socketRemotePeers addObject:rPeer];
     }
     

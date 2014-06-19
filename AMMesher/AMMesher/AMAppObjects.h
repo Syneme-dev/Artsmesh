@@ -14,6 +14,8 @@ extern NSString * const AMLocalUsersKey;    // NSDictionary *
 extern NSString * const AMMyselfKey;        // AMUser *
 extern NSString * const AMMergedGroupIdKey; // NSString *
 extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
+extern NSString * const AMMesherStateMachineKey; //AMMesherStateMachine
+extern NSString * const AMSystemConfigKey; //AMSystemConfig
 
 @interface AMAppObjects : NSObject
 

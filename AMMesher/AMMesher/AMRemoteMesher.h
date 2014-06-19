@@ -10,11 +10,6 @@
 
 @interface AMRemoteMesher : NSObject
 
--(id)initWithServer:(NSString*)ip
-               port:(NSString*)port
-        userTimeout:(int)seconds
-               ipv6:(BOOL)useIpv6;
-
 -(void)startRemoteClient;
 -(void)stopRemoteClient;
 

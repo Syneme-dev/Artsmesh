@@ -12,6 +12,14 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
 
 @implementation AMUserRequest
 
+-(id)init{
+    if (self  = [super init]){
+        self.httpTimeout = 30;
+    }
+    
+    return self;
+}
+
 -(void)main{
     if (self.isCancelled) {
         if ([self.delegate respondsToSelector:@selector(userRequestDidCancel)])
@@ -22,14 +30,13 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     NSString* strBaseURL = [self.delegate httpBaseURL];
-    NSString* strMethod = [self.delegate httpMethod:self.requestPath];
-    
     NSString* strURL= [[NSString alloc] initWithFormat:@"%@%@", strBaseURL, self.requestPath];
     
     [request setURL:[NSURL URLWithString:strURL]];
-    [request setHTTPMethod:strMethod];
+    [request setHTTPMethod:self.httpMethod];
+    [request setTimeoutInterval:self.httpTimeout];
     
-    if ([strMethod isEqualToString:@"POST"]){
+    if ([self.httpMethod isEqualToString:@"POST"]){
         NSString* headerfield = @"application/x-www-form-urlencoded";
         NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
         

@@ -15,6 +15,7 @@
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
+		26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */; };
 		26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBA1900D01A0083742E /* GroupMessage.png */; };
 		26D2FFBF1900D01A0083742E /* meshButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBB1900D01A0083742E /* meshButton.png */; };
 		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
@@ -148,6 +149,8 @@
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		26B4D071191A256200F55CD3 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
+		26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableCellView.h; sourceTree = "<group>"; };
+		26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableCellView.m; sourceTree = "<group>"; };
 		26D2FFBA1900D01A0083742E /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GroupMessage.png; path = Resource/GroupMessage.png; sourceTree = "<group>"; };
 		26D2FFBB1900D01A0083742E /* meshButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meshButton.png; path = Resource/meshButton.png; sourceTree = "<group>"; };
 		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */,
+				26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */,
 				26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */,
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
@@ -634,6 +639,7 @@
 			files = (
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
+				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,

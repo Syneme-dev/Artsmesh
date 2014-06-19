@@ -72,6 +72,7 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     [AMAppObjects appObjects][AMMyselfKey] = mySelf;
     [AMAppObjects appObjects][AMClusterNameKey] = @"LocalGroup";
     [AMAppObjects appObjects][AMClusterIdKey] = [AMAppObjects creatUUID];
+    [AMAppObjects appObjects][AMMergedGroupIdKey] = [AMAppObjects appObjects][AMClusterIdKey];
 }
 
 -(void)loadSystemConfig

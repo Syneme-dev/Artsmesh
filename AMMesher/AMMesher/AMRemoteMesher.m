@@ -148,13 +148,6 @@
 
 -(void)mergeGroup:(NSString*)toGroupId
 {
-//    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-//    NSAssert(machine, @"mesher state machine can not be nil!");
-//    
-//    if([machine mesherState] != kMesherMeshed ){
-//        return;
-//    }
-    
     NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
     
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
@@ -322,8 +315,13 @@
             AMGroup* newGroup = [[AMGroup alloc] init];
             newGroup.groupId = [groups[i] objectForKey:@"GroupId"];
             newGroup.groupName =  [groups[i] objectForKey:@"GroupData"];
-            newGroup.users = [self getAllUserFromGroup:groups[i]];
             
+            BOOL isMySelfIn = NO;
+            newGroup.users = [self getAllUserFromGroup:groups[i] isMySelfIn:&isMySelfIn];
+            if (isMySelfIn == YES) {
+                [AMAppObjects appObjects][AMMergedGroupIdKey] = newGroup.groupId;
+            }
+        
             [groupsDict setObject:newGroup forKey:[groups[i] objectForKey:@"GroupId"]];
         }
     
@@ -350,7 +348,10 @@
 }
 
 
--(NSArray*)getAllUserFromGroup:(NSDictionary*)group{
+-(NSArray*)getAllUserFromGroup:(NSDictionary*)group isMySelfIn:(BOOL*)mySelfIn{
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"myself can not be nil");
     
     NSMutableArray* allusers = [[NSMutableArray alloc] init];
     
@@ -360,15 +361,18 @@
     if ([myUsers isKindOfClass:[NSArray class]]) {
         
         for (int i = 0; i < [myUsers count]; i++) {
-            
             AMUser* newUser = [AMUser AMUserFromDict:myUsers[i]];
+            if ([newUser.userid isEqualToString:mySelf.userid]) {
+                *mySelfIn = YES;
+            }
+            
             [allusers addObject:newUser];
         }
     }
     
     if ([mySubGroups isKindOfClass:[NSArray class]]) {
         for (int i = 0; i < [mySubGroups count]; i++) {
-            NSArray* subUsers = [self getAllUserFromGroup:mySubGroups[i]];
+            NSArray* subUsers = [self getAllUserFromGroup:mySubGroups[i] isMySelfIn:mySelfIn];
             for (int j = 0; j < [subUsers count]; j++) {
                 [allusers addObject:subUsers[j]];
             }
@@ -376,6 +380,7 @@
     }
     return allusers;
 }
+
 
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

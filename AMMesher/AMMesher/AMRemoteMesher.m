@@ -304,6 +304,10 @@
         }
 
         [machine setMesherState:kMesherMeshed];
+        
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
         [self startHeartbeat];
         
         return;

@@ -147,7 +147,7 @@
     for (NSString* ruKey in _remotePeerSet) {
         AMUser* ru = [_remotePeerSet objectForKey:ruKey];
         AMHolePunchingPeer* rPeer = [[AMHolePunchingPeer alloc] init];
-        rPeer.ip = ru.privateIp;
+        rPeer.ip = ru.publicIp;
         rPeer.port = ru.chatPort;
         [socketRemotePeers addObject:rPeer];
     }

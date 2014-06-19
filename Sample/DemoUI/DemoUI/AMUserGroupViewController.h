@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class AMUserGroupNode;
 
 @interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource>
 

@@ -7,7 +7,6 @@
 //
 
 #import "AMPingViewController.h"
-#import "AMPingUserTableCellView.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMGroup.h"

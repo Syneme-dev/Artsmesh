@@ -224,8 +224,8 @@ NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";
     
         if ([keyPath isEqualToString:@"mesherState"]){
         
-            AMMesherState oldState = [[change objectForKey:@"old"] intValue];
-            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+//            AMMesherState oldState = [[change objectForKey:@"old"] intValue];
+//            AMMesherState newState = [[change objectForKey:@"new"] intValue];
             
         }
     }

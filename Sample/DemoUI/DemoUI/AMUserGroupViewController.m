@@ -10,8 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMUserGroupTableCellView.h"
-#import "AMUserGroupNode.h"
+
 
 @interface AMUserGroupViewController ()
 

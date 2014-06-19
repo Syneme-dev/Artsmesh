@@ -75,6 +75,9 @@
                 case kMesherUnmeshing:
                     [self stopRemoteClient];
                     break;
+                case kMesherStopping:
+                    [self stopRemoteClient];
+                    break;
                 default:
                     break;
             }

@@ -87,6 +87,10 @@
                     [self updateMyselfInfo];
                     [machine setMesherState:kMesherStarted];
                     break;
+                case kMesherStopping:
+                    [self stopLocalServer];
+                    [self stopLocalClient];
+                    break;
                 default:
                     break;
             }

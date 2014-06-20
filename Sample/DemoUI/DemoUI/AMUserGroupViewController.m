@@ -101,21 +101,6 @@
      [[AMMesher sharedAMMesher] unmergeGroup];
 }
 
-- (IBAction)createGroup:(id)sender
-{
-    NSString* newGroupName = [self.createGroupTextField stringValue];
-    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
-    {
-        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-        if (mySelf.isOnline) {
-            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
-        }else{
-            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
-        }
-    }
-}
-
-
 - (IBAction)createGroupByEnter:(id)sender
 {
     NSString* newGroupName = [self.createGroupTextField stringValue];
@@ -126,6 +111,7 @@
             self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
         }else{
             [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+            self.createGroupTextField.stringValue = @"";
         }
     }
 }

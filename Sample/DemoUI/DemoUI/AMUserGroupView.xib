@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -91,24 +91,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-Id-bKm">
-                    <rect key="frame" x="0.0" y="22" width="25" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="CreateGroup" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="O6z-l9-DxA">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="createGroup:" target="-2" id="tzB-ff-02C"/>
-                    </connections>
-                </button>
-                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
-                    <rect key="frame" x="28" y="22" width="284" height="26"/>
+                <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
+                    <rect key="frame" x="0.0" y="22" width="312" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="26" id="OW3-cF-5Wu"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" focusRingType="none" alignment="center" placeholderString="CREATE A NEW GROUP" drawsBackground="YES" id="vur-DY-jHT">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" focusRingType="none" alignment="center" placeholderString="CHANGE CLUSTER NAME BY ENTER" drawsBackground="YES" id="vur-DY-jHT">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
@@ -119,18 +108,13 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="UGc-Id-bKm" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="1df-J9-aQH"/>
                 <constraint firstAttribute="bottom" secondItem="eE2-gh-pZg" secondAttribute="bottom" constant="22" id="6Rg-ol-5nL"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Dd0-hw-6n4"/>
-                <constraint firstItem="eE2-gh-pZg" firstAttribute="top" secondItem="UGc-Id-bKm" secondAttribute="top" id="FnM-pi-PRb"/>
                 <constraint firstAttribute="trailing" secondItem="eE2-gh-pZg" secondAttribute="trailing" id="JzL-RK-OlO"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Kg0-Q4-Qyl"/>
-                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" constant="28" id="Nlz-wi-LxO"/>
                 <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" id="WSB-1T-40f"/>
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
-                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="UGc-Id-bKm" secondAttribute="trailing" constant="3" id="kAg-CK-dg8"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
-                <constraint firstAttribute="bottom" secondItem="UGc-Id-bKm" secondAttribute="bottom" constant="22" id="rHT-yj-H1N"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="zy8-zK-VLd"/>
             </constraints>
@@ -179,7 +163,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="CreateGroup" width="30" height="30"/>
         <image name="group_broadcast" width="10" height="10"/>
         <image name="group_chat" width="10" height="10"/>
         <image name="group_exit" width="10" height="10"/>

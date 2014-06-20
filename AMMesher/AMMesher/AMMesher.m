@@ -51,6 +51,7 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     if (self = [super init]){
         [self loadUserProfile];
         [self loadSystemConfig];
+        [self initCluster];
         [self initMesherStateMachine];
         [self initComponents];
     }
@@ -70,9 +71,6 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
     mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     [AMAppObjects appObjects][AMMyselfKey] = mySelf;
-    [AMAppObjects appObjects][AMClusterNameKey] = @"LocalGroup";
-    [AMAppObjects appObjects][AMClusterIdKey] = [AMAppObjects creatUUID];
-    [AMAppObjects appObjects][AMMergedGroupIdKey] = [AMAppObjects appObjects][AMClusterIdKey];
 }
 
 -(void)loadSystemConfig
@@ -90,8 +88,14 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     config.myServerUserTimeout = @"30";
     config.maxHeartbeatFailure = @"5";
     config.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
-    
     [[AMAppObjects appObjects] setObject:config forKey:AMSystemConfigKey];
+}
+
+-(void)initCluster{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [AMAppObjects appObjects][AMClusterNameKey] = [defaults stringForKey:Preference_Key_Cluster_Name];
+    [AMAppObjects appObjects][AMClusterIdKey] = [AMAppObjects creatUUID];
+    [AMAppObjects appObjects][AMMergedGroupIdKey] = [AMAppObjects appObjects][AMClusterIdKey];
 }
 
 -(void)initMesherStateMachine
@@ -210,6 +214,9 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     }
     
     [_localMesher changeGroupName:newGroupName];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:newGroupName forKey:Preference_Key_Cluster_Name];
+    [[AMAppObjects appObjects] setObject:newGroupName forKey:AMClusterNameKey ];
 }
 
 -(void)updateMySelf

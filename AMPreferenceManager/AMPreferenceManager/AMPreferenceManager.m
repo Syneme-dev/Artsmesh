@@ -40,6 +40,7 @@
              Preference_General_GlobalServerAddr,Preference_Key_General_GlobalServerAddr,
              Preference_General_GlobalServerPort,Preference_Key_General_GlobalServerPort,
              Preference_General_LocalServerPort, Preference_Key_General_LocalServerPort,
+             Preference_Cluster_Name,            Preference_Key_Cluster_Name,
             nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

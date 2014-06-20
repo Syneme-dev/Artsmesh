@@ -25,6 +25,7 @@
 #define Preference_Key_User_Description         @"Preference_Key_User_Description"
 #define Preference_Key_User_Project             @"Preference_Key_User_Project"
 #define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
+#define Preference_Key_Cluster_Name             @"Preference_Key_Cluster_Name"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
@@ -44,12 +45,13 @@
 #define Preference_User_PrivateIp           @""
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
+#define Preference_Cluster_Name             @"LocalGroup"
 
 #define Preference_General_StunServerAddr   @"123.124.145.254"
 #define Preference_General_StunServerPort   @"22250"
 #define Preference_General_GlobalServerAddr   @"123.124.145.254"
 #define Preference_General_GlobalServerPort   @"8080"
-#define Preference_General_LocalServerPort    @"8080"
+#define Preference_General_LocalServerPort    @"9090"
 
 #import <Foundation/Foundation.h>
 

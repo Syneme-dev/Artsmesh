@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
                     <rect key="frame" x="0.0" y="22" width="312" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
@@ -116,6 +116,7 @@
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>
+                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="u7F-SX-Pyg"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="zy8-zK-VLd"/>
             </constraints>
         </customView>

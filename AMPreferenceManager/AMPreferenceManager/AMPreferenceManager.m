@@ -40,11 +40,8 @@
              Preference_General_GlobalServerAddr,Preference_Key_General_GlobalServerAddr,
              Preference_General_GlobalServerPort,Preference_Key_General_GlobalServerPort,
              Preference_General_LocalServerPort, Preference_Key_General_LocalServerPort,
-<<<<<<< HEAD
              openedPanel,UserData_Key_OpenedPanel,
-=======
              Preference_Cluster_Name,            Preference_Key_Cluster_Name,
->>>>>>> origin/groups
             nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

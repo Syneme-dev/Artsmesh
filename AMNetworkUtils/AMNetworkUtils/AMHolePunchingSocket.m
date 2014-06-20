@@ -160,6 +160,7 @@ withFilterContext:(id)filterContext
 
     if ([msg isEqualToString:AMholePunchingPeerPacket]) {
         //peer packet
+        NSLog(@"heartbeat from %@", fromHost);
         return;
     }
     

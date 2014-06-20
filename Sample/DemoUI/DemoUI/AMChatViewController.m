@@ -121,14 +121,18 @@
             
             if (nil == [_localPeerSet objectForKey:newUser.userid] &&
                 nil == [_remotePeerSet objectForKey:newUser.userid]) {
-                
                 [joinedUsers addObject:newUser];
-                
-                if(nil == [myLocalUsers objectForKey:newUser.userid]) {
-                    [_remotePeerSet setObject:newUser forKey:newUser.userid];
-                }else{
-                    [_localPeerSet setObject:newUser forKey:newUser.userid];
-                }
+            }
+        }
+        
+        [_localPeerSet removeAllObjects];
+        [_remotePeerSet removeAllObjects];
+        
+        for (AMUser* newUser in newUserlist) {
+            if(nil == [myLocalUsers objectForKey:newUser.userid]) {
+                [_remotePeerSet setObject:newUser forKey:newUser.userid];
+            }else{
+                [_localPeerSet setObject:newUser forKey:newUser.userid];
             }
         }
     }
@@ -235,11 +239,14 @@
     }
     
     if(![_myNATPort isEqualToString:[ipAndPort objectAtIndex:1]]){
-        _myNATPort = [ipAndPort objectAtIndex:1];
         
+        _myNATPort = [ipAndPort objectAtIndex:1];
         AMUser* meSelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
         meSelf.publicChatPort = _myNATPort;
+        
         [[AMMesher sharedAMMesher] updateMySelf];
+        
+        NSLog(@"go here!");
     }
 
 }

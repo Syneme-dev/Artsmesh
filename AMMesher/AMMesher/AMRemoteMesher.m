@@ -14,17 +14,14 @@
 #import "AMAppObjects.h"
 #import "AMMesher.h"
 #import "AMGroup.h"
+#import "AMMesherStateMachine.h"
+#import "AMSystemConfig.h"
 
 @interface AMRemoteMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
 @end
 
 @implementation AMRemoteMesher
 {
-    NSString* _serverIp;
-    NSString* _serverPort;
-    BOOL _useIpv6;
-    int _userTimeout;
-    
     NSOperationQueue* _httpRequestQueue;
     AMHeartBeat* _heartbeat;
     AMShellTask *_mesherServerTask;
@@ -34,37 +31,110 @@
     int _userlistVersion;
 }
 
--(id)initWithServer:(NSString*)ip
-               port:(NSString*)port
-        userTimeout:(int)seconds
-               ipv6:(BOOL)useIpv6
+-(id)init
 {
     if (self = [super init]) {
-        _serverIp = ip;
-        _serverPort = port;
-        _useIpv6 = useIpv6;
-        _userTimeout = seconds;
-        _heartbeatFailureCount = 0;
-        _userlistVersion = 0;
+        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+        NSAssert(machine, @"mesher state machine should not be nil!");
+        
+        [machine addObserver:self forKeyPath:@"mesherState"
+                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                     context:nil];
+        
+        _httpRequestQueue = [[NSOperationQueue alloc] init];
+        _httpRequestQueue.name = @"RemoteMesherQueue";
+        _httpRequestQueue.maxConcurrentOperationCount = 1;
     }
     
     return self;
 }
 
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([object isKindOfClass:[AMMesherStateMachine class]]){
+        
+        if ([keyPath isEqualToString:@"mesherState"]){
+            
+            //AMMesherState oldState = [[change objectForKey:@"old"] intValue];
+            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch (newState) {
+                case kMesherMeshing:
+                    [self startRemoteClient];
+                    break;
+                case kMesherUnmeshing:
+                    [self stopRemoteClient];
+                    break;
+                case kMesherStopping:
+                    [self stopRemoteClient];
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+
 -(void)startRemoteClient
 {
-    _httpRequestQueue = [[NSOperationQueue alloc] init];
-    _httpRequestQueue.name = @"RemoteMesherQueue";
-    _httpRequestQueue.maxConcurrentOperationCount = 1;
-    
     [self registerSelf];
 }
+
+-(void)updateMyselfInfo
+{
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    if([machine mesherState] != kMesherMeshed){
+        return;
+    }
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSDictionary* dict = [mySelf toDict];
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/update";
+    req.formData = dict;
+    req.httpMethod = @"POST";
+    
+    [_httpRequestQueue addOperation:req];
+    [_httpRequestQueue waitUntilAllOperationsAreFinished];
+}
+
+
+-(void)registerSelf
+{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
+    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
+    
+    NSMutableDictionary* dict = [mySelf toDict];
+    [dict setObject:clusterId forKey:@"groupId"];
+    [dict setObject:clusterName forKey:@"groupName"];
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/add";
+    req.httpMethod = @"POST";
+    req.formData = dict;
+    
+    [_httpRequestQueue addOperation:req];
+}
+
 
 -(void)stopRemoteClient
 {
     if (_heartbeatThread)
     {
         [_heartbeatThread cancel];
+         _heartbeatThread = nil;
     }
     
     if (_httpRequestQueue) {
@@ -72,27 +142,40 @@
         [self unregisterSelf];
     }
     
-    _httpRequestQueue = nil;
-    _heartbeatThread = nil;
-    
     [[AMAppObjects appObjects]removeObjectForKey:AMRemoteGroupsKey];
     
     NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:userNotification];
 }
 
+-(void)unregisterSelf{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSString* myGroupId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/delete";
+    req.formData = @{@"userId": mySelf.userid, @"groupId":myGroupId};
+    req.httpTimeout = 10;
+    req.httpMethod = @"POST";
+    
+    [_httpRequestQueue addOperation:req];
+}
+
+
 -(void)mergeGroup:(NSString*)toGroupId
 {
     NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/groups/merge";
     
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:clusterId forKey:@"groupId"];
     [dict setObject:toGroupId forKey:@"superGroupId"];
     
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/groups/merge";
     req.formData = dict;
+    req.httpMethod = @"POST";
     [_httpRequestQueue addOperation:req];
 }
 
@@ -107,46 +190,23 @@
         [_heartbeatThread cancel];
     }
     
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey ];
+    NSAssert(config, @"system config can not be nil!");
+    
+    NSString* remoteServerAddr = config.globalServerAddr;
+    NSString* remoteServerPort = config.globalServerPort;
+    BOOL useIpv6 = config.useIpv6;
+    int HBTimeInterval = [config.heartbeatInterval intValue];
+    int HBReceiveTimeout = [config.heartbeatRecvTimeout intValue];
+    
     _heartbeatFailureCount = 0;
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: _serverIp port:_serverPort ipv6:_useIpv6];
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: remoteServerAddr port:remoteServerPort ipv6:useIpv6];
     _heartbeatThread.delegate = self;
-    _heartbeatThread.timeInterval = 2;
-    _heartbeatThread.receiveTimeout = 5;
+    _heartbeatThread.timeInterval = HBTimeInterval;
+    _heartbeatThread.receiveTimeout = HBReceiveTimeout;
     [_heartbeatThread start];
     
-}
-
--(void)registerSelf
-{
-    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
-    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
-    
-    
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/users/add";
-    
-    NSMutableDictionary* dict = [mySelf toDict];
-    [dict setObject:clusterId forKey:@"groupId"];
-    [dict setObject:clusterName forKey:@"groupName"];
-    
-    req.formData = dict;
-    
-    [_httpRequestQueue addOperation:req];
-}
-
--(void)unregisterSelf{
-    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSString* myGroupId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/users/delete";
-    req.formData = @{@"userId": mySelf.userid, @"groupId":myGroupId};
-    
-    [_httpRequestQueue addOperation:req];
-    [_httpRequestQueue waitUntilAllOperationsAreFinished];
 }
 
 -(void)requestUserList
@@ -158,6 +218,7 @@
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate  = self;
     req.requestPath = @"/users/getall";
+    req.httpMethod = @"POST";
     
     [_httpRequestQueue addOperation:req];
 }
@@ -180,14 +241,14 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+
     _heartbeatFailureCount = 0;
-    
     NSError *error = nil;
     id objects = [NSJSONSerialization JSONObjectWithData:data
                                                  options:0
                                                    error:&error];
-    //NSAssert(error == nil, @"parse json data failed!");
-    
     NSDictionary* result = (NSDictionary*)objects;
     int version = [[result objectForKey:@"Version"] intValue];
     
@@ -215,17 +276,14 @@
 
 - (NSString *)httpBaseURL
 {
-    return [NSString stringWithFormat:@"http://%@:%@", _serverIp, _serverPort];
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    NSAssert(config, @"system config can not be nil!");
+    NSString* localServerAddr = config.globalServerAddr;
+    NSString* localServerPort = config.globalServerPort;
+    
+    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
 }
 
--(NSString*)httpMethod:(NSString *)action
-{
-    if ([action isEqualToString:@"/users/getall"]){
-        return  @"GET";
-    }else{
-        return @"POST";
-    }
-}
 
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
@@ -237,7 +295,21 @@
     NSLog(@"received http response:%@\n", dataStr);
     
     if([userrequest.requestPath isEqualToString:@"/users/add"]){
+        
+        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+        NSAssert(machine, @"mesher state machine can not be nil!");
+        
+        if ([machine mesherState] != kMesherMeshing){
+            return;
+        }
+
+        [machine setMesherState:kMesherMeshed];
+        
+        NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
         [self startHeartbeat];
+        
         return;
     }
     
@@ -264,8 +336,13 @@
             AMGroup* newGroup = [[AMGroup alloc] init];
             newGroup.groupId = [groups[i] objectForKey:@"GroupId"];
             newGroup.groupName =  [groups[i] objectForKey:@"GroupData"];
-            newGroup.users = [self getAllUserFromGroup:groups[i]];
             
+            BOOL isMySelfIn = NO;
+            newGroup.users = [self getAllUserFromGroup:groups[i] isMySelfIn:&isMySelfIn];
+            if (isMySelfIn == YES) {
+                [AMAppObjects appObjects][AMMergedGroupIdKey] = newGroup.groupId;
+            }
+        
             [groupsDict setObject:newGroup forKey:[groups[i] objectForKey:@"GroupId"]];
         }
     
@@ -285,10 +362,17 @@
         return;
     }
     
+    if([userrequest.requestPath isEqualToString:@"/users/delete"]){
+        
+        [_httpRequestQueue  cancelAllOperations];
+    }
 }
 
 
--(NSArray*)getAllUserFromGroup:(NSDictionary*)group{
+-(NSArray*)getAllUserFromGroup:(NSDictionary*)group isMySelfIn:(BOOL*)mySelfIn{
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"myself can not be nil");
     
     NSMutableArray* allusers = [[NSMutableArray alloc] init];
     
@@ -298,15 +382,18 @@
     if ([myUsers isKindOfClass:[NSArray class]]) {
         
         for (int i = 0; i < [myUsers count]; i++) {
-            
             AMUser* newUser = [AMUser AMUserFromDict:myUsers[i]];
+            if ([newUser.userid isEqualToString:mySelf.userid]) {
+                *mySelfIn = YES;
+            }
+            
             [allusers addObject:newUser];
         }
     }
     
     if ([mySubGroups isKindOfClass:[NSArray class]]) {
         for (int i = 0; i < [mySubGroups count]; i++) {
-            NSArray* subUsers = [self getAllUserFromGroup:mySubGroups[i]];
+            NSArray* subUsers = [self getAllUserFromGroup:mySubGroups[i] isMySelfIn:mySelfIn];
             for (int j = 0; j < [subUsers count]; j++) {
                 [allusers addObject:subUsers[j]];
             }
@@ -314,6 +401,7 @@
     }
     return allusers;
 }
+
 
 
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error

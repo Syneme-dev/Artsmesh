@@ -14,6 +14,8 @@
 #import "AMAppObjects.h"
 #import "AMMesher.h"
 #import "AMGroup.h"
+#import "AMMesherStateMachine.h"
+#import "AMSystemConfig.h"
 
 
 @interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
@@ -21,9 +23,6 @@
 
 @implementation AMLocalMesher
 {
-    BOOL _useIpv6;
-    int _userTimeout;
-    
     NSOperationQueue* _httpRequestQueue;
     AMHeartBeat* _heartbeat;
     AMShellTask *_mesherServerTask;
@@ -33,64 +32,155 @@
     int _userlistVersion;
 }
 
--(id)initWithServer:(NSString*)ip
-               port:(NSString*)port
-        userTimeout:(int)seconds
-               ipv6:(BOOL)useIpv6
+-(id)init
 {
     if (self = [super init]) {
-        self.server = ip;
-        self.serverPort = port;
-        _useIpv6 = useIpv6;
-        _userTimeout = seconds;
-        _heartbeatFailureCount = 0;
-        _userlistVersion = 0;
+
+        //add observer to mesher state machine
+        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+        NSAssert(machine, @"mesher state machine should not be nil!");
+        
+        [machine addObserver:self forKeyPath:@"mesherState"
+                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                     context:nil];
+        
+        //init NSOperationQueue
+        _httpRequestQueue = [[NSOperationQueue alloc] init];
+        _httpRequestQueue.name = @"LocalMesherQueue";
+        _httpRequestQueue.maxConcurrentOperationCount = 1;
     }
     
     return self;
 }
 
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([object isKindOfClass:[AMMesherStateMachine class]]){
+        
+        if ([keyPath isEqualToString:@"mesherState"]){
+            
+            AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+            
+            //AMMesherState oldState = [[change objectForKey:@"old"] intValue];
+            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch (newState) {
+                case kMesherLocalServerStarting:
+                    [self startLocalServer];
+                    break;
+                case kMesherLocalClientStarting:
+                    [self startLocalClient];
+                    break;
+                case kMesherMeshed:
+                    [self updateMyselfInfo];
+                    break;
+                case kMesherUnmeshing:
+                    [self updateMyselfInfo];
+                    [machine setMesherState:kMesherStarted];
+                    break;
+                case kMesherStopping:
+                    [self stopLocalServer];
+                    [self stopLocalClient];
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma   mark Functions
+
 -(void)startLocalServer
 {
-    if (_mesherServerTask)
-        [_mesherServerTask cancel];
-    
     [self stopLocalServer];
     
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey ];
+    NSAssert(config, @"system config can not be nil!");
+    NSString* port = config.localServertPort;
+    NSString* userTimeout = config.myServerUserTimeout;
+
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     NSString *command = [NSString stringWithFormat:
                          //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
                          lanchPath,
-                         self.serverPort,
-                         self.serverPort,
-                         _userTimeout];
+                         port,
+                         port,
+                         userTimeout];
+    
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);
     [_mesherServerTask launch];
+    
+    sleep(2);
+    
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine should not be nil!");
+    
+    [machine setMesherState:kMesherLocalClientStarting];
 }
 
 
 -(void)stopLocalServer
 {
-    if (_mesherServerTask != nil)
-    {
+    if (_mesherServerTask != nil){
         [_mesherServerTask cancel];
+        _mesherServerTask = nil;
     }
     
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"LocalServer", nil]];
 }
 
+
 -(void)startLocalClient
 {
-    _httpRequestQueue = [[NSOperationQueue alloc] init];
-    _httpRequestQueue.name = @"LocalMesherQueue";
-    _httpRequestQueue.maxConcurrentOperationCount = 1;
-    
     [self registerSelf];
 }
+
+
+-(void)registerSelf
+{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
+    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
+    
+    NSMutableDictionary* dict = [mySelf toDict];
+    [dict setObject:clusterId forKey:@"groupId"];
+    [dict setObject:clusterName forKey:@"groupName"];
+    
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    req.delegate = self;
+    req.requestPath = @"/users/add";
+    req.httpMethod = @"POST";
+    req.formData = dict;
+    
+    [_httpRequestQueue addOperation:req];
+}
+
+
+-(void)unregisterSelf{
+    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
+    AMUserRequest* req = [[AMUserRequest alloc] init];
+    
+    req.delegate = self;
+    req.requestPath = @"/users/delete";
+    req.formData = @{@"userId": mySelf.userid};
+    req.httpMethod = @"POST";
+    
+    [_httpRequestQueue addOperation:req];
+    [_httpRequestQueue waitUntilAllOperationsAreFinished];
+}
+
 
 -(void)startHeartbeat
 {
@@ -98,20 +188,27 @@
         [_heartbeatThread cancel];
     }
     
-    _heartbeatFailureCount = 0;
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey ];
+    NSAssert(config, @"system config can not be nil!");
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: self.server port:self.serverPort ipv6:_useIpv6];
+    NSString* localServerAddr = config.localServerAddr;
+    NSString* localServerPort = config.localServertPort;
+    BOOL useIpv6 = config.useIpv6;
+    int HBTimeInterval = [config.heartbeatInterval intValue];
+    int HBReceiveTimeout = [config.heartbeatRecvTimeout intValue];
+    
+    _heartbeatFailureCount = 0;
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: localServerAddr port:localServerPort ipv6:useIpv6];
     _heartbeatThread.delegate = self;
-    _heartbeatThread.timeInterval = 2;
-    _heartbeatThread.receiveTimeout = 5;
+    _heartbeatThread.timeInterval = HBTimeInterval;
+    _heartbeatThread.receiveTimeout = HBReceiveTimeout;
     [_heartbeatThread start];
-
 }
+
 
 -(void)stopLocalClient
 {
-    if (_heartbeatThread)
-    {
+    if (_heartbeatThread){
         [_heartbeatThread cancel];
     }
     
@@ -122,76 +219,55 @@
     
     _httpRequestQueue = nil;
     _heartbeatThread = nil;
+    
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    [machine setMesherState:kMesherStopped];
 }
+
 
 -(void)changeGroupName:(NSString* ) newGroupName
 {
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/groups/update";
-    req.formData = @{@"groupName": newGroupName };
-    [_httpRequestQueue addOperation:req];
-}
-
--(void)goOnline
-{
-    NSDictionary* dict = @{@"isOnline": @YES};
-    [self changeMyselfInfo:dict];
-}
-
--(void)goOffline{
-     NSDictionary* dict = @{@"isOnline": @NO};
-    [self changeMyselfInfo:dict];
-}
-
--(void)changeMyselfInfo:(NSDictionary*)dict;
-{
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
     
-    for(NSString* key in dict){
-        [mySelf setValue:dict[key] forKey:key];
+    AMMesherState mState = [machine mesherState];
+    if (mState != kMesherStarted ){
+        return;
     }
     
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate = self;
-    req.requestPath = @"/users/update";
-    dict = [mySelf toDict];
-
-    req.formData = dict;
+    req.requestPath = @"/groups/update";
+    req.formData = @{@"groupName": newGroupName };
+    req.httpMethod = @"POST";
     
     [_httpRequestQueue addOperation:req];
 }
 
--(void)registerSelf
+-(void)updateMyselfInfo
 {
-    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
-    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
     
+    if([machine mesherState] < kMesherStarted  || [machine mesherState] >= kMesherStopping){
+        return;
+    }
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSDictionary* dict = [mySelf toDict];
     
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate = self;
-    req.requestPath = @"/users/add";
-    
-    NSMutableDictionary* dict = [mySelf toDict];
-    [dict setObject:clusterId forKey:@"groupId"];
-    [dict setObject:clusterName forKey:@"groupName"];
-    
+    req.requestPath = @"/users/update";
     req.formData = dict;
-    
-    [_httpRequestQueue addOperation:req];
-}
-
--(void)unregisterSelf{
-    AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/users/delete";
-    req.formData = @{@"userId": mySelf.userid};
+    req.httpMethod = @"POST";
     
     [_httpRequestQueue addOperation:req];
     [_httpRequestQueue waitUntilAllOperationsAreFinished];
 }
+
 
 -(void)requestUserList
 {
@@ -202,6 +278,7 @@
     AMUserRequest* req = [[AMUserRequest alloc] init];
     req.delegate  = self;
     req.requestPath = @"/users/getall";
+    req.httpMethod = @"GET";
 
     [_httpRequestQueue addOperation:req];
 }
@@ -221,10 +298,13 @@
     return data;
 }
 
+
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
-    _heartbeatFailureCount = 0;
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
     
+    _heartbeatFailureCount = 0;
     NSError *error = nil;
     id objects = [NSJSONSerialization JSONObjectWithData:data
                                                  options:0
@@ -238,6 +318,7 @@
         [self requestUserList];
     }
 }
+
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
@@ -258,17 +339,14 @@
 
 - (NSString *)httpBaseURL
 {
-    return [NSString stringWithFormat:@"http://%@:%@", self.server, self.serverPort];
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    NSAssert(config, @"system config can not be nil!");
+    NSString* localServerAddr = config.localServerAddr;
+    NSString* localServerPort = config.localServertPort;
+    
+    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
 }
 
--(NSString*)httpMethod:(NSString *)action
-{
-    if ([action isEqualToString:@"/users/getall"]){
-        return  @"GET";
-    }else{
-        return @"POST";
-    }
-}
 
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
 {
@@ -280,6 +358,16 @@
     NSLog(@"received http response:%@\n", dataStr);
     
     if([userrequest.requestPath isEqualToString:@"/users/add"]){
+        
+        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+        NSAssert(machine, @"mesher state machine can not be nil!");
+        
+        if ([machine mesherState] != kMesherLocalClientStarting){
+            return;
+        }
+        
+        [machine setMesherState:kMesherStarted];
+        
         [self startHeartbeat];
         return;
     }
@@ -345,7 +433,7 @@
             user.location = [userDataDict objectForKey:@"location"];
             user.localLeader = [userDataDict objectForKey:@"localLeader"];
             user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
-            user.ip = [userDataDict objectForKey:@"privateIp"];
+            user.privateIp = [userDataDict objectForKey:@"privateIp"];
             user.chatPort = [userDataDict objectForKey:@"chatPort"];
             [newUsers setValue:user forKeyPath:userId];
         }

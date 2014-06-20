@@ -12,6 +12,7 @@
 #import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
+#import "AMMesher/AMMesherStateMachine.h"
 
 @interface AMChatViewController ()
 
@@ -23,6 +24,10 @@
 {
     AMHolePunchingSocket *_socket;
     AMGroup* _myGroup;
+    
+    NSMutableDictionary* _localPeerSet;
+    NSMutableDictionary* _remotePeerSet;
+    
     NSString* _myPubIp;
     NSString* _myInternalPort;
     NSString* _myNATPort;
@@ -34,6 +39,8 @@
     if (self)
     {
         _chatRecords = [[NSMutableArray alloc] init];
+        _localPeerSet = [[NSMutableDictionary alloc]init];
+        _remotePeerSet = [[NSMutableDictionary alloc] init];
         _myPubIp = @"";
         _myNATPort = @"";
         _myInternalPort = @"";
@@ -41,13 +48,13 @@
     return self;
 }
 
-/*
 
 -(void)awakeFromNib
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name:AM_USERGROUPS_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name:AM_MESHER_ONLINE object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LOCALUSERS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_REMOTEGROUPS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MESHER_ONLINE_CHANGED object:nil];
+
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     NSString* port = [defaults stringForKey:Preference_Key_General_StunServerPort];
@@ -64,10 +71,12 @@
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
+
 -(void)onlineStatusChanged:(NSNotification*) notification
 {
-    BOOL isOnline = [notification.userInfo[@"IsOnline"] boolValue];
-    if (isOnline == YES) {
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"myself can not be nil");
+    if (mySelf.isOnline == YES) {
         [_socket startHolePunching];
     }else{
         [_socket stopHolePunching];
@@ -77,34 +86,78 @@
 
 -(void)userGroupsChanged:(NSNotification*) notification
 {
-    NSMutableArray* joinedUsers = nil;
-    AMGroup* myNewGroup = [[AMMesher sharedAMMesher] myGroup];
-
-    if (_myGroup != nil) {
-        joinedUsers = [[NSMutableArray alloc] init];
-        for (AMUser* newUser in myNewGroup.users) {
-            
-            BOOL bFind = NO;
-            for(AMUser* oldUser in _myGroup.users){
-                if ([oldUser.userid isEqualToString:newUser.userid]) {
-                    bFind = YES;
-                    break;
-                }
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+   if (machine.mesherState != kMesherMeshed &&
+       machine.mesherState != kMesherStarted &&
+       machine.mesherState != kMesherUnmeshing){
+       return;
+   }
+    
+    
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"myself can not be nil");
+    
+    NSDictionary* myLocalUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
+    NSMutableArray* joinedUsers = [[NSMutableArray alloc] init];
+    
+    if (mySelf.isOnline == NO) {
+        [_remotePeerSet removeAllObjects];
+        
+        for (NSString* userKey in myLocalUsers) {
+            AMUser* user = [myLocalUsers objectForKey:userKey];
+            if (nil == [_localPeerSet objectForKey:user.userid]) {
+                [joinedUsers addObject:user];
+                [_localPeerSet setObject:user forKey:user.userid];
             }
-            if (bFind == NO) {
+        }
+
+    }else{
+    
+        NSString *mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+        NSDictionary *groups = [AMAppObjects appObjects][AMRemoteGroupsKey];
+        NSArray* newUserlist = [groups[mergedGroupId] users];
+        
+        for (AMUser* newUser in newUserlist) {
+            
+            if (nil == [_localPeerSet objectForKey:newUser.userid] &&
+                nil == [_remotePeerSet objectForKey:newUser.userid]) {
+                
                 [joinedUsers addObject:newUser];
+                
+                if(nil == [myLocalUsers objectForKey:newUser.userid]) {
+                    [_remotePeerSet setObject:newUser forKey:newUser.userid];
+                }else{
+                    [_localPeerSet setObject:newUser forKey:newUser.userid];
+                }
             }
         }
     }
     
-    _myGroup = myNewGroup;
-    
-    if (joinedUsers != nil ) {
-        [self performSelectorOnMainThread:@selector(showNewCommers:) withObject:joinedUsers waitUntilDone:NO];
+    NSMutableArray* socketLocalPeers = [[NSMutableArray alloc] init];
+    for (NSString* luKey in _localPeerSet) {
+        AMUser* lu = [_localPeerSet objectForKey:luKey];
+        AMHolePunchingPeer* lPeer = [[AMHolePunchingPeer alloc] init];
+        lPeer.ip = lu.privateIp;
+        lPeer.port = lu.chatPort;
+        [socketLocalPeers addObject:lPeer];
     }
     
-    [self updatePortInfo];
+    NSMutableArray* socketRemotePeers = [[NSMutableArray alloc] init];
+    for (NSString* ruKey in _remotePeerSet) {
+        AMUser* ru = [_remotePeerSet objectForKey:ruKey];
+        AMHolePunchingPeer* rPeer = [[AMHolePunchingPeer alloc] init];
+        rPeer.ip = ru.publicIp;
+        rPeer.port = ru.publicChatPort;
+        [socketRemotePeers addObject:rPeer];
+    }
+    
+    _socket.localPeers = socketLocalPeers;
+    _socket.remotePeers = socketRemotePeers;
+    
+    [self performSelectorOnMainThread:@selector(showNewCommers:) withObject:joinedUsers waitUntilDone:NO];
+    return;
 }
+
 
 -(void)showNewCommers:(id)newCommers
 {
@@ -120,35 +173,6 @@
 }
 
 
--(void)updatePortInfo
-{
-    NSMutableArray* localPeers = [[NSMutableArray alloc]  init];
-    NSMutableArray* remotePeers = [[NSMutableArray alloc]  init];
-    
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    NSString* myLocalLeaderName = mesher.mySelf.localLeader;
-    
-    for (AMUser* user in _myGroup.users) {
-        AMHolePunchingPeer* peerAddr = [[AMHolePunchingPeer alloc] init];
-        for (AMUserPortMap* pm in user.portMaps) {
-            if ([pm.portName isEqualToString:@"ChatPort"]) {
-                if ([ user.localLeader isEqualToString:myLocalLeaderName]){
-                    peerAddr.ip = user.privateIp;
-                    peerAddr.port = pm.internalPort;
-                    [localPeers addObject:peerAddr];
-                }else{
-                    peerAddr.ip = user.publicIp;
-                    peerAddr.port = pm.natMapPort;
-                    [remotePeers addObject:peerAddr];
-                }
-            }
-        }
-    }
-
-    _socket.localPeers = localPeers;
-    _socket.remotePeers = remotePeers;
-}
-
 - (IBAction)sendMsg:(id)sender
 {
     NSString* msg = [self.chatMsgField stringValue];
@@ -156,8 +180,9 @@
         return;
     }
 
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    NSString* nickName = mesher.mySelf.nickName;
+    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    NSAssert(mySelf, @"myself can not be nil");
+    NSString* nickName = mySelf.nickName;
 
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
                     @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
@@ -203,24 +228,20 @@
     
     if(![_myPubIp isEqualToString:[ipAndPort objectAtIndex:0]]){
         _myPubIp = [ipAndPort objectAtIndex:0];
-        
-        NSDictionary* dict = @{@"publicIp": _myPubIp};
-        AMMesher* mesher = [AMMesher sharedAMMesher];
-        [mesher setMySelfPropties:dict];
+    
+        AMUser* meSelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        meSelf.publicIp = _myPubIp;
+        [[AMMesher sharedAMMesher] updateMySelf];
     }
     
     if(![_myNATPort isEqualToString:[ipAndPort objectAtIndex:1]]){
         _myNATPort = [ipAndPort objectAtIndex:1];
         
-        AMUserPortMap *portMap = [[AMUserPortMap alloc] init];
-        portMap.portName = @"ChatPort";
-        portMap.natMapPort =  _myNATPort;
-        portMap.internalPort = _myInternalPort;
-        AMMesher* mesher = [AMMesher sharedAMMesher];
-        [mesher setPortMaps:portMap];
+        AMUser* meSelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        meSelf.publicChatPort = _myNATPort;
+        [[AMMesher sharedAMMesher] updateMySelf];
     }
 
 }
 
-*/
 @end

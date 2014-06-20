@@ -1028,12 +1028,12 @@
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
                 <outlet property="mainWindowController" destination="B30-a9-ZW1" id="n9f-pi-bPS"/>
-                <outlet property="mesherButton" destination="kwj-11-GIT" id="Twn-wM-8Zp"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
             <connections>
+                <outlet property="meshBtn" destination="kwj-11-GIT" id="XSi-kI-oZ0"/>
                 <outlet property="meshLabel" destination="6Bw-Cb-ntc" id="e08-HX-aeY"/>
                 <outlet property="meshLeabel" destination="6Bw-Cb-ntc" id="cDs-Dx-ic2"/>
                 <outlet property="versionLabel" destination="2bQ-eS-vUf" id="46h-jo-WII"/>

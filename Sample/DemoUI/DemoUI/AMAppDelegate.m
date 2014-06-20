@@ -33,13 +33,15 @@ static NSMutableDictionary *allPlugins = nil;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
     [AMPreferenceManager registerPreference];
+    
+    [self startMesher];
     [self.mainWindowController showDefaultWindow];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
     }
-    [self startMesher];
-    [self connectMesher];
+    //[self startMesher];
+    //[self connectMesher];
     [self writePluginDataToMesher];
 }
 

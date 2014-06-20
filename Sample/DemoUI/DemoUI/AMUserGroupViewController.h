@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class AMUserGroupNode;
 
 @interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource>
 
@@ -19,8 +18,6 @@
 
 -(void)doubleClickOutlineView:(id)sender;
 - (IBAction)unmerge:(id)sender;
-
-- (IBAction)createGroup:(id)sender;
 - (IBAction)createGroupByEnter:(id)sender;
 
 

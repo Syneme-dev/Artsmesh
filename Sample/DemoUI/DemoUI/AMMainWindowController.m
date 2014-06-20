@@ -28,6 +28,7 @@
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
 #import "AMMesher/AMAppObjects.h"
+#import "AMMesher/AMMesherStateMachine.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -74,15 +75,28 @@
 }
 
 - (IBAction)mesh:(id)sender {
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    if (machine == nil) {
+        return;
+    }
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
-    AMUser* mySelf = [[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    if(!mySelf.isOnline){
+    
+    if (machine.mesherState == kMesherStarted) {
         [mesher goOnline];
-    }else{
+        self.meshBtn.state = 0;
+    }else if(machine.mesherState == kMesherMeshed){
         [mesher goOffline];
+        self.meshBtn.state = 2;
+    }else{
+        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        if (mySelf.isOnline == YES) {
+            self.meshBtn.state = 0;
+        }else{
+            self.meshBtn.state = 2;
+        }
+        return;
     }
-
 }
 
 -(void)loadVersion{

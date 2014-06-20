@@ -10,8 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMUserGroupTableCellView.h"
-#import "AMUserGroupNode.h"
+
 
 @interface AMUserGroupViewController ()
 
@@ -94,6 +93,7 @@
     }
     
     [self.outlineView reloadData];
+    [self.outlineView expandItem:nil expandChildren:YES];
 }
 
 
@@ -101,21 +101,6 @@
 {
      [[AMMesher sharedAMMesher] unmergeGroup];
 }
-
-- (IBAction)createGroup:(id)sender
-{
-    NSString* newGroupName = [self.createGroupTextField stringValue];
-    if (newGroupName != nil && ![newGroupName isEqualToString:@""])
-    {
-        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-        if (mySelf.isOnline) {
-            self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
-        }else{
-            [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
-        }
-    }
-}
-
 
 - (IBAction)createGroupByEnter:(id)sender
 {
@@ -127,6 +112,7 @@
             self.createGroupTextField.stringValue = @"You can't rename group after mesh!";
         }else{
             [[AMMesher sharedAMMesher] changeLocalGroupName:newGroupName];
+            self.createGroupTextField.stringValue = @"";
         }
     }
 }

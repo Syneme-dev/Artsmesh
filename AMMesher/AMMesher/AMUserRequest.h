@@ -13,17 +13,19 @@ extern NSString * const AMUserRequestDomain;
 #define AMUserRequestFalied -1
 
 @interface AMUserRequest : NSOperation
+
 @property(nonatomic, weak) id<AMUserRequestDelegate> delegate;
-@property  NSString* requestPath;
+@property NSString* requestPath;
 @property NSDictionary* formData;
+@property NSString* httpMethod;
+@property int httpTimeout;
+
 @end
 
 @protocol AMUserRequestDelegate <NSObject>
 @optional
 
 - (NSString*)httpBaseURL;
-- (NSString*)httpMethod:(NSString*)action;
-- (NSDictionary*)httpBodyForm:(NSString*)action;
 - (void)userRequestDidCancel;
 - (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data;
 - (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error;

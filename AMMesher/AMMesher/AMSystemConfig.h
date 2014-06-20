@@ -13,11 +13,15 @@
 //Client
 @property NSString* globalServerAddr;
 @property NSString* globalServerPort;
+@property NSString* localServerAddr;
+@property NSString* localServertPort;
 @property NSString* heartbeatInterval;
+@property NSString* heartbeatRecvTimeout;
 @property NSString* maxHeartbeatFailure;
 @property NSString* chatPort;
 @property NSString* stunServerAddr;
 @property NSString* stunServerPort;
+
 
 //Server
 @property NSString* myServerUserTimeout;

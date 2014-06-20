@@ -7,67 +7,93 @@
 //
 
 #import "AMLeaderElecter.h"
-#import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#import "AMMesherStateMachine.h"
+#import "AMAppObjects.h"
+#import "AMSystemConfig.h"
 
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
-
-@interface AMLeaderElecter ()
-@property NSString* serverName;
-@property NSString* serverPort;
-@end
-
 
 @implementation AMLeaderElecter
 {
     NSNetServiceBrowser*  _mesherServiceBrowser;
     NSNetService* _myMesherService;
     NSMutableArray* _allMesherServices;
-    
-    NSString* _myPort;
 }
 
-- (instancetype)init
+- (id)init
 {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"unsupported initializer"
-                                 userInfo:nil];
-}
-
-
--(id)initWithPort:(NSString*)port
-{
-    if(self = [super init])
-    {
-        _allMesherServices = [[NSMutableArray alloc]init];
-        self.state = MESHER_STATE_STOP;
-        _myPort = port;
-        
-        [self browseLocalMesher];
+    if (self = [super init]) {
+        AMMesherStateMachine* machine =[[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+        NSAssert(machine, @"mesher state machine can not be nil!");
+        [machine addObserver:self forKeyPath:@"mesherState"
+                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                     context:nil];
     }
     
     return self;
 }
 
--(BOOL)browseLocalMesher
+
+-(void)kickoffElectProcess
 {
-    if(_mesherServiceBrowser != nil)
-    {
-        [self stopBrowser];
+    [self publishLocalMesher];
+}
+
+
+-(void)publishLocalMesher
+{
+    AMSystemConfig* config = [[AMAppObjects appObjects ] valueForKey:AMSystemConfigKey];
+    NSAssert(config, @"system config should not be nil");
+    
+    int port = [config.myServerPort intValue];
+ 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
+                                                       type:MESHER_SERVICE_TYPE
+                                                       name:MESHER_SERVICE_NAME
+                                                       port:port];
+    NSAssert(_myMesherService, @"alloc Mesher Failed!");
+	[_myMesherService scheduleInRunLoop:[NSRunLoop currentRunLoop]
+                                forMode:NSRunLoopCommonModes];
+	[_myMesherService setDelegate:self];
+	[_myMesherService publish];
+}
+
+
+-(void)browseLocalMesher
+{
+    if (_mesherServiceBrowser == nil) {
+         _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
+         _mesherServiceBrowser.delegate = self;
+    }
+
+    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
+}
+
+
+-(void)resolveLocalMesher{
+    
+    if ([_allMesherServices count] == 0){
+        return;
     }
     
-    _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
-    _mesherServiceBrowser.delegate = self;
-    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
-    
-    return YES;
+    NSNetService* service = [_allMesherServices objectAtIndex:0];
+    if(service.hostName == nil){
+        service.delegate  = self;
+        [service resolveWithTimeout:5.0];
+    }
 }
+
+
+-(void)stopElector
+{
+    [self stopBrowser];
+    [self unpublishLocalMesher];
+}
+
 
 - (void) stopBrowser
 {
-    if (_mesherServiceBrowser == nil )
-    {
+    if (_mesherServiceBrowser == nil ){
         return;
     }
     
@@ -78,73 +104,9 @@
 }
 
 
--(void)kickoffElectProcess
-{
-    self.state = MESHER_STATE_PUBLISHING;
-    [self publishLocalMesher];
-}
-
--(void)publishLocalMesher
-{
-    // create new instance of netService
- 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
-                                                       type:MESHER_SERVICE_TYPE
-                                                       name:MESHER_SERVICE_NAME
-                                                       port:[_myPort intValue]];
-	if (_myMesherService == nil)
-    {
-        [NSException raise:@"alloc Mesher Failed!" format:@"there is an exception raise in func publishLocalMesher"];
-    }
-    
-    // Add service to current run loop
-	[_myMesherService scheduleInRunLoop:[NSRunLoop currentRunLoop]
-                                forMode:NSRunLoopCommonModes];
-    
-    // NetService will let us know about what's happening via delegate methods
-	[_myMesherService setDelegate:self];
-    
-    // Publish the service
-	[_myMesherService publish];
-}
-
-
--(void)joinLocalMesher:(int) index
-{
-    if(index >= [_allMesherServices count])
-    {
-        self.state = MESHER_STATE_ERROR;
-        return;
-    }
-    
-    NSNetService* service = [_allMesherServices objectAtIndex:index];
-    if(service.hostName == nil)
-    {
-        service.delegate  = self;
-        [service resolveWithTimeout:5.0];
-        self.state = MESHER_STATE_JOINING;
-    }
-    else
-    {
-        _serverName = service.hostName;
-        self.state = MESHER_STATE_JOINED;
-    }
-}
-
-
--(void)stopElect
-{
-    [self stopBrowser];
-    [self unpublishLocalMesher];
-    _serverName = @"";
-    
-    self.state = MESHER_STATE_STOP;
-}
-
-
 - (void) unpublishLocalMesher
 {
-    if (_myMesherService)
-    {
+    if (_myMesherService){
 		[_myMesherService stop];
 		[_myMesherService removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 		_myMesherService = nil;
@@ -160,36 +122,29 @@
             didFindService:(NSNetService *)netService
                 moreComing:(BOOL)moreServicesComing
 {
-    // Make sure that we don't have such service already (why would this happen? not sure)
-    if ( ![_allMesherServices containsObject:netService] )
-    {
-        // Add it to our list
+    if ( ![_allMesherServices containsObject:netService] ){
         [_allMesherServices addObject:netService];
     }
     
-    // If more entries are coming, no need to update UI just yet
-    if ( moreServicesComing )
-    {
+    if ( moreServicesComing ){
         return;
     }
+    
+    [self resolveLocalMesher];
 }
 
 
-// Service was removed
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser
          didRemoveService:(NSNetService *)netService
                moreComing:(BOOL)moreServicesComing
 {
-    // Remove from list
     [_allMesherServices removeObject:netService];
     
-    // If more entries are coming, no need to update UI just yet
-    if ( moreServicesComing )
-    {
+    if ( moreServicesComing ){
         return;
     }
     
-    [self kickoffElectProcess];
+    [self publishLocalMesher];
 }
 
 // Called when net service has been successfully resolved
@@ -204,52 +159,89 @@
         hostName = [hostName lowercaseString];
     }
     
-    self.serverName = hostName;
-    self.serverPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    NSAssert(config, @"system config can not be nil");
     
-    self.state = MESHER_STATE_JOINED;
+    config.localServerAddr = hostName;
+    config.localServertPort = [NSString stringWithFormat:@"%ld", sender.port];
+    
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine should not be nil");
+    [machine setMesherState:kMesherLocalClientStarting];
 }
+
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
+{
+    NSLog(@"service:%@ can not be resloved!\n", sender.name);
+    [self publishLocalMesher];
+}
+
 
 #pragma mark -
 #pragma mark NSNetService Delegate Method Implementations
-
-// Delegate method, called by NSNetService in case service publishing fails for whatever reason
 - (void) netService:(NSNetService*)sender didNotPublish:(NSDictionary*)errorDict
 {
-    if ( sender != _myMesherService )
-    {
+    if ( sender != _myMesherService ){
         return;
     }
-    
-    //goto JoinMesher State
-    [self joinLocalMesher:0];
+
+    [self browseLocalMesher];
 }
+
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    NSString* hostName = [AMNetworkUtils getHostName];
-    if ([hostName hasSuffix:@"."]) {
-        hostName = [hostName substringToIndex:[hostName length] - 1];
-        hostName = [hostName lowercaseString];
-    }
-    
-    self.serverName = hostName;
-    self.serverPort =  _myPort;
-    
-    self.state = MESHER_STATE_PUBLISHED;
     NSLog(@" >> netServiceDidPublish: %@", [sender name]);
+    
+    NSString* hostName = [[NSHost currentHost] name];
+    
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    NSAssert(config, @"system config can not be nil");
+    
+    config.localServerAddr = hostName;
+    config.localServertPort = [NSString stringWithFormat:@"%ld", sender.port];
+
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine should not be nil");
+    [machine setMesherState:kMesherLocalServerStarting];
 }
+
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
     NSLog(@" >> netServiceDidStop: %@", [sender name]);
 }
 
-// Called if we weren't able to resolve net service
-- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
 {
-    NSLog(@"service:%@ can not be resloved!\n", sender.name);
-    self.state = MESHER_STATE_ERROR;
+    if ([object isKindOfClass:[AMMesherStateMachine class]]){
+        
+        if ([keyPath isEqualToString:@"mesherState"]){
+            
+            //AMMesherState oldState = [[change objectForKey:@"old"] intValue];
+            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch(newState){
+                case kMesherStarting:
+                    [self kickoffElectProcess];
+                    break;
+                    
+                case kMesherStopping:
+                    [self stopElector];
+                    break;
+            
+                default:
+                    break;
+                    //[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+            }
+        }
+    }
 }
 
 

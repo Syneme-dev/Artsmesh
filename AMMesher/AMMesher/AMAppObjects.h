@@ -14,6 +14,8 @@ extern NSString * const AMLocalUsersKey;    // NSDictionary *
 extern NSString * const AMMyselfKey;        // AMUser *
 extern NSString * const AMMergedGroupIdKey; // NSString *
 extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
+extern NSString * const AMMesherStateMachineKey; //AMMesherStateMachine
+extern NSString * const AMSystemConfigKey; //AMSystemConfig
 
 @interface AMAppObjects : NSObject
 
@@ -29,10 +31,12 @@ extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
 @property NSString* domain;
 @property NSString* location;
 @property NSString* description;
-@property NSString* ip;
+@property NSString* privateIp;
+@property NSString* publicIp;
 @property NSString* localLeader;
 @property BOOL      isOnline;
 @property NSString* chatPort;
+@property NSString* publicChatPort;
 
 -(NSMutableDictionary*)toDict;
 

@@ -7,7 +7,6 @@
 //
 
 #import "AMUserGroupTableCellView.h"
-#import "AMUserGroupNode.h"
 #import "AMMesher/AMAppObjects.h"
 
 

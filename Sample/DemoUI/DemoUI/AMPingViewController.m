@@ -7,7 +7,6 @@
 //
 
 #import "AMPingViewController.h"
-#import "AMPingUserTableCellView.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMGroup.h"
@@ -82,7 +81,7 @@
     if (self.userTable.selectedRow == -1)
         return;
     AMUser* user = _users[self.userTable.selectedRow];
-    NSString* pingIp = user.ip;
+    NSString* pingIp = user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];
     [self runCommand:pingCommand];

@@ -93,6 +93,7 @@
     }
     
     [self.outlineView reloadData];
+    [self.outlineView collapseItem:nil collapseChildren:YES];
 }
 
 

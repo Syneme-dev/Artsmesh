@@ -51,7 +51,10 @@
     [openedPanels  removeObject:self.panelId];
     [[AMPreferenceManager instance] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     
-    [appDelegate.mainWindowController.panelControllers removeObjectForKey:self.panelId ];
+    if([appDelegate.mainWindowController.panelControllers.allKeys containsObject:self.panelId])
+    {
+        [appDelegate.mainWindowController.panelControllers removeObjectForKey:self.panelId ];
+    }
     //Note:move right panel to left when close.
 }
 - (IBAction)onTearClick:(id)sender {

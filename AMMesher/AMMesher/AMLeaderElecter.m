@@ -1,4 +1,4 @@
-//
+ //
 //  AMLeaderElecter.m
 //  AMMesher
 //
@@ -29,6 +29,8 @@
         [machine addObserver:self forKeyPath:@"mesherState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
+        
+        _allMesherServices = [[NSMutableArray alloc] init];
     }
     
     return self;

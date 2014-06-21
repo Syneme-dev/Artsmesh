@@ -214,9 +214,16 @@
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
     
-    NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [self showChatRecord:chatRecord];
-
+    @try {
+        NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+         [self showChatRecord:chatRecord];
+    }
+    @catch ( NSException *exception) {
+        NSLog(@"An Error packets is send to Chat module: %@", exception.description);
+    }
+    @finally {
+        //do nothing;
+    }
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{

@@ -461,6 +461,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";
 				INFOPLIST_FILE = "UIFramewrok/UIFramework-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = UIFramework;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -476,6 +477,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";
 				INFOPLIST_FILE = "UIFramewrok/UIFramework-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = UIFramework;
 				WRAPPER_EXTENSION = framework;
 			};

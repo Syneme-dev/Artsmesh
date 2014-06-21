@@ -56,6 +56,9 @@
          location = "container:"
          name = "Module">
          <FileRef
+            location = "group:AMStatusNet/AMStatusNet.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:AMMesher/AMMesher.xcodeproj">
          </FileRef>
       </Group>

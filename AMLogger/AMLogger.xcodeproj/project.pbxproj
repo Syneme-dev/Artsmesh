@@ -369,6 +369,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMLogger/AMLogger-Prefix.pch";
 				INFOPLIST_FILE = "AMLogger/AMLogger-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -384,6 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMLogger/AMLogger-Prefix.pch";
 				INFOPLIST_FILE = "AMLogger/AMLogger-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -448,6 +450,7 @@
 				37FCBA0818710F6300C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		37FCBA0918710F6300C1FD1B /* Build configuration list for PBXNativeTarget "AMLoggerTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +459,7 @@
 				37FCBA0B18710F6300C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

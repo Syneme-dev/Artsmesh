@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF8D7F7C1951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
+		AF8D7F861951654800437F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7F841951654800437F6F /* InfoPlist.strings */; };
+		AF8D7F911951654800437F6F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F901951654800437F6F /* XCTest.framework */; };
+		AF8D7F921951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
+		AF8D7F951951654800437F6F /* AMStatusNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F781951654800437F6F /* AMStatusNet.framework */; };
+		AF8D7F9B1951654800437F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7F991951654800437F6F /* InfoPlist.strings */; };
+		AF8D7F9D1951654800437F6F /* AMStatusNetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D7F9C1951654800437F6F /* AMStatusNetTests.m */; };
+		AF8D7FAD1951657C00437F6F /* AMStatusNet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */; };
+		AF8D7FAE1951657C00437F6F /* AMStatusNet-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */; };
+		AF8D7FAF1951657C00437F6F /* AMStatusNetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = AF8D7FA91951657C00437F6F /* AMStatusNetModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AF8D7FB01951657C00437F6F /* AMStatusNetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D7FAA1951657C00437F6F /* AMStatusNetModule.m */; };
+		AF8D7FB11951657C00437F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7FAB1951657C00437F6F /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF8D7F931951654800437F6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF8D7F6F1951654800437F6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF8D7F771951654800437F6F;
+			remoteInfo = AMStatusNet;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AF8D7F781951654800437F6F /* AMStatusNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMStatusNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8D7F7B1951654800437F6F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AF8D7F7E1951654800437F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AF8D7F7F1951654800437F6F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AF8D7F801951654800437F6F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AF8D7F831951654800437F6F /* AMStatusNet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMStatusNet-Info.plist"; sourceTree = "<group>"; };
+		AF8D7F851951654800437F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AF8D7F871951654800437F6F /* AMStatusNet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMStatusNet-Prefix.pch"; sourceTree = "<group>"; };
+		AF8D7F8F1951654800437F6F /* AMStatusNetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMStatusNetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8D7F901951654800437F6F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AF8D7F981951654800437F6F /* AMStatusNetTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMStatusNetTests-Info.plist"; sourceTree = "<group>"; };
+		AF8D7F9A1951654800437F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AF8D7F9C1951654800437F6F /* AMStatusNetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetTests.m; sourceTree = "<group>"; };
+		AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AMStatusNet-Info.plist"; sourceTree = "<group>"; };
+		AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AMStatusNet-Prefix.pch"; sourceTree = "<group>"; };
+		AF8D7FA91951657C00437F6F /* AMStatusNetModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatusNetModule.h; sourceTree = "<group>"; };
+		AF8D7FAA1951657C00437F6F /* AMStatusNetModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetModule.m; sourceTree = "<group>"; };
+		AF8D7FAC1951657C00437F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF8D7F741951654800437F6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7F7C1951654800437F6F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF8D7F8C1951654800437F6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7F921951654800437F6F /* Cocoa.framework in Frameworks */,
+				AF8D7F951951654800437F6F /* AMStatusNet.framework in Frameworks */,
+				AF8D7F911951654800437F6F /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF8D7F6E1951654800437F6F = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F811951654800437F6F /* AMStatusNet */,
+				AF8D7F961951654800437F6F /* AMStatusNetTests */,
+				AF8D7F7A1951654800437F6F /* Frameworks */,
+				AF8D7F791951654800437F6F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF8D7F791951654800437F6F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F781951654800437F6F /* AMStatusNet.framework */,
+				AF8D7F8F1951654800437F6F /* AMStatusNetTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF8D7F7A1951654800437F6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F7B1951654800437F6F /* Cocoa.framework */,
+				AF8D7F901951654800437F6F /* XCTest.framework */,
+				AF8D7F7D1951654800437F6F /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF8D7F7D1951654800437F6F /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F7E1951654800437F6F /* Foundation.framework */,
+				AF8D7F7F1951654800437F6F /* CoreData.framework */,
+				AF8D7F801951654800437F6F /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AF8D7F811951654800437F6F /* AMStatusNet */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7FA61951657C00437F6F /* AMStatusNet */,
+				AF8D7F821951654800437F6F /* Supporting Files */,
+			);
+			path = AMStatusNet;
+			sourceTree = "<group>";
+		};
+		AF8D7F821951654800437F6F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F831951654800437F6F /* AMStatusNet-Info.plist */,
+				AF8D7F841951654800437F6F /* InfoPlist.strings */,
+				AF8D7F871951654800437F6F /* AMStatusNet-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF8D7F961951654800437F6F /* AMStatusNetTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F9C1951654800437F6F /* AMStatusNetTests.m */,
+				AF8D7F971951654800437F6F /* Supporting Files */,
+			);
+			path = AMStatusNetTests;
+			sourceTree = "<group>";
+		};
+		AF8D7F971951654800437F6F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7F981951654800437F6F /* AMStatusNetTests-Info.plist */,
+				AF8D7F991951654800437F6F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF8D7FA61951657C00437F6F /* AMStatusNet */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */,
+				AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */,
+				AF8D7FA91951657C00437F6F /* AMStatusNetModule.h */,
+				AF8D7FAA1951657C00437F6F /* AMStatusNetModule.m */,
+				AF8D7FAB1951657C00437F6F /* InfoPlist.strings */,
+			);
+			name = AMStatusNet;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AF8D7F751951654800437F6F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7FAF1951657C00437F6F /* AMStatusNetModule.h in Headers */,
+				AF8D7FAE1951657C00437F6F /* AMStatusNet-Prefix.pch in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		AF8D7F771951654800437F6F /* AMStatusNet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF8D7FA01951654800437F6F /* Build configuration list for PBXNativeTarget "AMStatusNet" */;
+			buildPhases = (
+				AF8D7F731951654800437F6F /* Sources */,
+				AF8D7F741951654800437F6F /* Frameworks */,
+				AF8D7F751951654800437F6F /* Headers */,
+				AF8D7F761951654800437F6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMStatusNet;
+			productName = AMStatusNet;
+			productReference = AF8D7F781951654800437F6F /* AMStatusNet.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AF8D7F8E1951654800437F6F /* AMStatusNetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF8D7FA31951654800437F6F /* Build configuration list for PBXNativeTarget "AMStatusNetTests" */;
+			buildPhases = (
+				AF8D7F8B1951654800437F6F /* Sources */,
+				AF8D7F8C1951654800437F6F /* Frameworks */,
+				AF8D7F8D1951654800437F6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF8D7F941951654800437F6F /* PBXTargetDependency */,
+			);
+			name = AMStatusNetTests;
+			productName = AMStatusNetTests;
+			productReference = AF8D7F8F1951654800437F6F /* AMStatusNetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF8D7F6F1951654800437F6F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Artsmesh;
+				TargetAttributes = {
+					AF8D7F8E1951654800437F6F = {
+						TestTargetID = AF8D7F771951654800437F6F;
+					};
+				};
+			};
+			buildConfigurationList = AF8D7F721951654800437F6F /* Build configuration list for PBXProject "AMStatusNet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AF8D7F6E1951654800437F6F;
+			productRefGroup = AF8D7F791951654800437F6F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF8D7F771951654800437F6F /* AMStatusNet */,
+				AF8D7F8E1951654800437F6F /* AMStatusNetTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF8D7F761951654800437F6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7FAD1951657C00437F6F /* AMStatusNet-Info.plist in Resources */,
+				AF8D7FB11951657C00437F6F /* InfoPlist.strings in Resources */,
+				AF8D7F861951654800437F6F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF8D7F8D1951654800437F6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7F9B1951654800437F6F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF8D7F731951654800437F6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7FB01951657C00437F6F /* AMStatusNetModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF8D7F8B1951654800437F6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF8D7F9D1951654800437F6F /* AMStatusNetTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF8D7F941951654800437F6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF8D7F771951654800437F6F /* AMStatusNet */;
+			targetProxy = AF8D7F931951654800437F6F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AF8D7F841951654800437F6F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF8D7F851951654800437F6F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AF8D7F991951654800437F6F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF8D7F9A1951654800437F6F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AF8D7FAB1951657C00437F6F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF8D7FAC1951657C00437F6F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AF8D7F9E1951654800437F6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AF8D7F9F1951654800437F6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AF8D7FA11951654800437F6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNet/AMStatusNet-Prefix.pch";
+				INFOPLIST_FILE = "AMStatusNet/AMStatusNet-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		AF8D7FA21951654800437F6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNet/AMStatusNet-Prefix.pch";
+				INFOPLIST_FILE = "AMStatusNet/AMStatusNet-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		AF8D7FA41951654800437F6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMStatusNet.framework/Versions/A/AMStatusNet";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNet/AMStatusNet-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AMStatusNetTests/AMStatusNetTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AF8D7FA51951654800437F6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMStatusNet.framework/Versions/A/AMStatusNet";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMStatusNet/AMStatusNet-Prefix.pch";
+				INFOPLIST_FILE = "AMStatusNetTests/AMStatusNetTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF8D7F721951654800437F6F /* Build configuration list for PBXProject "AMStatusNet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF8D7F9E1951654800437F6F /* Debug */,
+				AF8D7F9F1951654800437F6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF8D7FA01951654800437F6F /* Build configuration list for PBXNativeTarget "AMStatusNet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF8D7FA11951654800437F6F /* Debug */,
+				AF8D7FA21951654800437F6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AF8D7FA31951654800437F6F /* Build configuration list for PBXNativeTarget "AMStatusNetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF8D7FA41951654800437F6F /* Debug */,
+				AF8D7FA51951654800437F6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF8D7F6F1951654800437F6F /* Project object */;
+}

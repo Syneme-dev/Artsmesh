@@ -259,8 +259,8 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"didSendData:%@", jsonStr);
+//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSLog(@"didSendData:%@", jsonStr);
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error

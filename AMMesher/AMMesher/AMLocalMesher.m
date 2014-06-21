@@ -73,6 +73,7 @@
             switch (newState) {
                 case kMesherLocalServerStarting:
                     [self startLocalServer];
+                    //[self startLocalClient];
                     break;
                 case kMesherLocalClientStarting:
                     [self startLocalClient];
@@ -362,9 +363,9 @@
         AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
         NSAssert(machine, @"mesher state machine can not be nil!");
         
-        if ([machine mesherState] != kMesherLocalClientStarting){
-            return;
-        }
+//        if ([machine mesherState] != kMesherLocalClientStarting){
+//            return;
+//        }
         
         [machine setMesherState:kMesherStarted];
         

@@ -106,6 +106,10 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context:nil];
     
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(computerWillSleep:) name:NSWorkspaceWillSleepNotification object:nil];
+    
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(computerDidWakeup:) name:NSWorkspaceDidWakeNotification object:nil];
+    
     [[AMAppObjects appObjects] setObject:machine forKey:AMMesherStateMachineKey];
 
 }
@@ -123,6 +127,16 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     if(_elector == nil){
         _elector = [[AMLeaderElecter alloc] init];
     }
+}
+
+-(void)computerWillSleep:(NSNotification*)notification
+{
+    [self stopMesher];
+}
+
+-(void)computerDidWakeup:(NSNotification*)notification
+{
+    [self startMesher];
 }
 
 

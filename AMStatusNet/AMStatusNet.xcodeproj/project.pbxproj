@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AF8D7F7C1951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
-		AF8D7F861951654800437F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7F841951654800437F6F /* InfoPlist.strings */; };
 		AF8D7F911951654800437F6F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F901951654800437F6F /* XCTest.framework */; };
 		AF8D7F921951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
 		AF8D7F951951654800437F6F /* AMStatusNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F781951654800437F6F /* AMStatusNet.framework */; };
 		AF8D7F9B1951654800437F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7F991951654800437F6F /* InfoPlist.strings */; };
 		AF8D7F9D1951654800437F6F /* AMStatusNetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D7F9C1951654800437F6F /* AMStatusNetTests.m */; };
-		AF8D7FAD1951657C00437F6F /* AMStatusNet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */; };
 		AF8D7FAE1951657C00437F6F /* AMStatusNet-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */; };
 		AF8D7FAF1951657C00437F6F /* AMStatusNetModule.h in Headers */ = {isa = PBXBuildFile; fileRef = AF8D7FA91951657C00437F6F /* AMStatusNetModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF8D7FB01951657C00437F6F /* AMStatusNetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D7FAA1951657C00437F6F /* AMStatusNetModule.m */; };
@@ -250,9 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8D7FAD1951657C00437F6F /* AMStatusNet-Info.plist in Resources */,
 				AF8D7FB11951657C00437F6F /* InfoPlist.strings in Resources */,
-				AF8D7F861951654800437F6F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +478,7 @@
 				AF8D7FA21951654800437F6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF8D7FA31951654800437F6F /* Build configuration list for PBXNativeTarget "AMStatusNetTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +487,7 @@
 				AF8D7FA51951654800437F6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

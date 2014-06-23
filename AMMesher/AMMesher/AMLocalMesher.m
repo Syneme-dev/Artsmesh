@@ -117,8 +117,7 @@
                          port,
                          port,
                          userTimeout];
-    for (int i = 0; i < 10; i++)
-        NSBeep();
+    system("say \"Now I'm the leader and my host name is `hostname`\"");
     
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);

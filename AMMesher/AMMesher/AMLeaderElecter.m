@@ -63,10 +63,10 @@
 
 -(void)browseLocalMesher
 {
-    if (_mesherServiceBrowser == nil) {
+    //if (_mesherServiceBrowser == nil) {
          _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
          _mesherServiceBrowser.delegate = self;
-    }
+    //}
 
     [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@"local."];
 }

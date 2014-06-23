@@ -79,10 +79,8 @@
     }
     
     NSNetService* service = [_allMesherServices objectAtIndex:0];
-    if(service.hostName == nil){
-        service.delegate  = self;
-        [service resolveWithTimeout:5.0];
-    }
+    service.delegate  = self;
+    [service resolveWithTimeout:5.0];
 }
 
 

@@ -49,7 +49,7 @@
     NSAssert(config, @"system config should not be nil");
     
     int port = [config.myServerPort intValue];
- 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
+ 	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
                                                        port:port];
@@ -68,7 +68,7 @@
          _mesherServiceBrowser.delegate = self;
     }
 
-    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
+    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@"local."];
 }
 
 

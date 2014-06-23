@@ -111,12 +111,14 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     NSString *command = [NSString stringWithFormat:
-                         //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %d >LocalServer.log 2>&1",
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >LocalServer.log 2>&1",
+                         //@"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
                          lanchPath,
                          port,
                          port,
                          userTimeout];
+    for (int i = 0; i < 10; i++)
+        NSBeep();
     
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);

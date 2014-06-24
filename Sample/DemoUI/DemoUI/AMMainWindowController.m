@@ -165,7 +165,7 @@
     scrollView.frame = NSMakeRect(UI_leftSidebarWidth+10,
                                   0,
                                   windowSize.width - UI_leftSidebarWidth,
-                                  windowSize.height - UI_topbarHeight);
+                                  windowSize.height - UI_topbarHeight-20);
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;

@@ -649,27 +649,27 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-xu-vmU">
-                        <rect key="frame" x="41" y="0.0" width="1159" height="728"/>
+                        <rect key="frame" x="41" y="0.0" width="1159" height="708"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="odj-kE-TsY">
-                            <rect key="frame" x="0.0" y="0.0" width="1159" height="728"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1159" height="708"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7i-di-ip4">
-                                    <rect key="frame" x="0.0" y="0.0" width="1576" height="728"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1576" height="708"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                         </clipView>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="V3V-By-qRD">
-                            <rect key="frame" x="0.0" y="712" width="1159" height="16"/>
+                            <rect key="frame" x="0.0" y="692" width="1159" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="d2O-Bj-e1n">
@@ -678,7 +678,7 @@
                         </scroller>
                     </scrollView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32k-JN-wvV" userLabel="user" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="688" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="648" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="USER" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XvE-b0-PoG" userLabel="USER">
@@ -695,7 +695,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUd-73-Mf2" userLabel="group" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="647" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="607" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="GROUPS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0X-Sn-eMy" userLabel="GROUPS">
@@ -712,7 +712,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buw-IA-tqi" userLabel="setting" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="606" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="566" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="PREFERENCE" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9v-QB-zVc" userLabel="PREFERENCE">
@@ -729,7 +729,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-oY-8if" userLabel="terminal" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="565" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="525" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="NETWORKTOOLS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJG-Ub-l3r" userLabel="NETWORK TOOLS">
@@ -746,7 +746,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K11-xs-VTh" userLabel="osc" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="524" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="484" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="OSCMESSAGE" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaV-lp-VWb" userLabel="OSC ROUTER">
@@ -763,7 +763,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fbs-7f-cN8" userLabel="chat" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="483" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="443" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="CHAT" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVF-Uh-cQ1" userLabel="chat">
@@ -780,7 +780,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6xs-yK-Ik5" userLabel="mapview" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="442" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="402" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="MAP" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93e-xc-2Iy" userLabel="map">
@@ -797,7 +797,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Va6-5H-cZI" userLabel="oscrouter" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="401" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="361" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="VISUAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABf-qQ-aMa" userLabel="visual">
@@ -813,36 +813,25 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WuP-WD-9Zs" userLabel="audiorouter" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="360" width="40" height="40"/>
+                    <customView identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-cP-0rI" userLabel="social" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="320" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4U-Ja-JOj">
+                            <button identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yne-yQ-23D" userLabel="social">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_audioRoute" imagePosition="only" alignment="center" alternateImage="SideBar_audioRoute_h" imageScaling="proportionallyDown" inset="2" id="vw5-lg-jkq">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_setting" imagePosition="only" alignment="center" alternateImage="panel_setting_h" imageScaling="proportionallyDown" inset="2" id="pAk-5j-0xC">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                            </button>
-                        </subviews>
-                    </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iFN-52-DX6" userLabel="videoRouter" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="319" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THJ-uh-qtg">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_videoRoute" imagePosition="only" alignment="center" alternateImage="SideBar_videoRoute_h" imageScaling="proportionallyDown" inset="2" id="ubV-u4-L8T">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
+                                <connections>
+                                    <action selector="onSidebarItemClick:" target="B30-a9-ZW1" id="aWO-TB-NtG"/>
+                                </connections>
                             </button>
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-60-PDr" userLabel="clock" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="278" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="279" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="TIMER" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-hS-yGJ" userLabel="timer">
@@ -859,7 +848,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rP7-nO-BJv" userLabel="movie" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="237" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="238" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="MIXING" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0lw-BH-CMw" userLabel="mixing">
@@ -876,7 +865,7 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-rY-rAF" userLabel="musicScore" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="196" width="40" height="40"/>
+                        <rect key="frame" x="0.0" y="197" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="MUSICSCORE" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7E-ga-fmY" userLabel="musicScore">
@@ -892,14 +881,14 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XK4-TL-O3D" userLabel="askKen" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="155" width="40" height="40"/>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XK4-TL-O3D" userLabel="tearOffWindow" customClass="BlueBackgroundView">
+                        <rect key="frame" x="0.0" y="156" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button identifier="TEAROFF" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
+                            <button identifier="TEAROFF" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="only" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="overlaps" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -910,7 +899,7 @@
                         </subviews>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTH-N1-xDZ" customClass="AMFoundryFontView">
-                        <rect key="frame" x="430" y="742" width="160" height="17"/>
+                        <rect key="frame" x="446" y="732" width="160" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00  :  00  :  00  SEC" id="hA5-yY-yxD">
                             <font key="font" metaFont="system"/>
@@ -919,7 +908,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
-                        <rect key="frame" x="70" y="742" width="80" height="17"/>
+                        <rect key="frame" x="96" y="732" width="80" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH" id="eNi-as-Uyj">
                             <font key="font" metaFont="system"/>
@@ -928,7 +917,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf" customClass="AMFoundryFontView">
-                        <rect key="frame" x="147" y="742" width="120" height="17"/>
+                        <rect key="frame" x="173" y="732" width="120" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.0.0" id="DZC-sX-GBB">
                             <font key="font" metaFont="system"/>
@@ -937,7 +926,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
-                        <rect key="frame" x="848" y="742" width="60" height="17"/>
+                        <rect key="frame" x="848" y="732" width="60" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SYPHON" id="j3Z-Wm-3C7">
                             <font key="font" metaFont="system"/>
@@ -946,7 +935,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-q8-NcC" customClass="AMFoundryFontView">
-                        <rect key="frame" x="967" y="742" width="60" height="17"/>
+                        <rect key="frame" x="967" y="732" width="60" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACK" id="oUL-Za-3RH">
                             <font key="font" metaFont="system"/>
@@ -955,7 +944,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0y6-Or-7Ha" customClass="AMFoundryFontView">
-                        <rect key="frame" x="1066" y="742" width="60" height="17"/>
+                        <rect key="frame" x="1066" y="732" width="60" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OSC" id="mb4-bR-hfc">
                             <font key="font" metaFont="system"/>
@@ -964,7 +953,7 @@
                         </textFieldCell>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
-                        <rect key="frame" x="240" y="735" width="30" height="30"/>
+                        <rect key="frame" x="266" y="725" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -975,7 +964,7 @@
                         </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KD8-g0-Ew6">
-                        <rect key="frame" x="818" y="742" width="16" height="16"/>
+                        <rect key="frame" x="818" y="732" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="e63-MZ-myK">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -983,7 +972,7 @@
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qme-pL-mB7">
-                        <rect key="frame" x="937" y="742" width="16" height="16"/>
+                        <rect key="frame" x="937" y="732" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="pz7-Yu-088">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -991,7 +980,7 @@
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-Xf-hwP">
-                        <rect key="frame" x="403" y="742" width="16" height="16"/>
+                        <rect key="frame" x="419" y="732" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_off" imagePosition="only" alignment="center" alternateImage="play_on" imageScaling="proportionallyDown" inset="2" id="mbk-Xg-bLU">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -999,7 +988,7 @@
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQH-zt-t50">
-                        <rect key="frame" x="1033" y="742" width="16" height="16"/>
+                        <rect key="frame" x="1033" y="732" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="BjC-Au-PYB">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -1007,7 +996,7 @@
                         </buttonCell>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
-                        <rect key="frame" x="280" y="741" width="38" height="17"/>
+                        <rect key="frame" x="306" y="731" width="38" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mesh" id="YtJ-b7-urv">
                             <font key="font" metaFont="system"/>
@@ -1019,7 +1008,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="41" id="Ugv-En-9Uv"/>
-                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="372" secondAttribute="top" constant="40" id="fdf-eJ-kAU"/>
+                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="372" secondAttribute="top" constant="60" id="fdf-eJ-kAU"/>
                     <constraint firstAttribute="trailing" secondItem="zEs-xu-vmU" secondAttribute="trailing" id="pKE-za-V8h"/>
                 </constraints>
             </view>
@@ -1047,8 +1036,6 @@
         <image name="Server_on" width="15" height="15"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
-        <image name="SideBar_audioRoute" width="40" height="40"/>
-        <image name="SideBar_audioRoute_h" width="40" height="40"/>
         <image name="SideBar_chat" width="40" height="40"/>
         <image name="SideBar_chat_h" width="40" height="40"/>
         <image name="SideBar_clock" width="40" height="40"/>
@@ -1070,9 +1057,9 @@
         <image name="SideBar_user" width="40" height="40"/>
         <image name="SideBar_user_h" width="40" height="40"/>
         <image name="SideBar_video" width="40" height="40"/>
-        <image name="SideBar_videoRoute" width="40" height="40"/>
-        <image name="SideBar_videoRoute_h" width="40" height="40"/>
         <image name="SideBar_video_h" width="40" height="40"/>
+        <image name="panel_setting" width="15" height="15"/>
+        <image name="panel_setting_h" width="15" height="15"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>

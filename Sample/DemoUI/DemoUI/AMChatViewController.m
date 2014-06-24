@@ -168,7 +168,7 @@
     for (AMUser* newUser in newCommers) {
         NSDictionary *record = @{
                                  @"sender"  : @"SYSTEM",
-                                 @"message" : [NSString stringWithFormat:@"%@ JOINED THE CONVERSATION",
+                                 @"message" : [NSString stringWithFormat:@"%@ JOINED THE GROUP",
                                                newUser.nickName],
                                  @"time"    : [NSDate date]
                                  };

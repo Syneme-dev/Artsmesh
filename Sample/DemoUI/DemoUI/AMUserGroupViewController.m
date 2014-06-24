@@ -10,6 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
+#import "AMUserGroupTableRowView.h"
 
 
 @interface AMUserGroupViewController ()
@@ -204,7 +205,7 @@
         //title = @"Local Users";
         title = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
     } else if ([item isEqual:@"__remoteGroups"]) {
-        title = @"Public Groups";
+        title = @"Artsmesh";
     } else if ([item isKindOfClass:[AMGroup class]]) {
         title = [(AMGroup *)item groupName];
     } else if ([item isKindOfClass:[AMUser class]]) {
@@ -220,6 +221,11 @@
     return cellView;
 }
 
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    AMUserGroupTableRowView* rowView = [[AMUserGroupTableRowView alloc] init];
+    return rowView;
+}
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

@@ -58,6 +58,8 @@
 #define UI_Panel_Key_Map @"MAP_PANEL"
 #define UI_Panel_Key_Visual @"VISUAL_PANEL"
 
+#define UI_Panel_Key_Social @"SOCIAL_PANEL"
+
 
 
 
@@ -215,7 +217,7 @@
     if ([openedPanels containsObject:UI_Panel_Key_Preference]) {
         [self loadPreferencePanel];
     }
-    [self loadFOAFPanel];
+    
     if ([openedPanels containsObject:UI_Panel_Key_Chat]) {
         [self loadChatPanel];
     }
@@ -223,7 +225,9 @@
     if ([openedPanels containsObject:UI_Panel_Key_Groups]) {
         [self loadGroupsPanel];
     }
-   //TODO:check to load foaf.
+    if ([openedPanels containsObject:UI_Panel_Key_Social]) {
+        [self loadFOAFPanel];
+    }
     
     for (NSString* openedPanel in openedPanels) {
         NSString *sideItemId=[openedPanel stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
@@ -321,23 +325,23 @@
 }
 
 -(void)loadFOAFPanel{
-    AMPanelViewController *panelViewController = [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    
+     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Social withTitle:@"Social" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
+
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, UI_defaultPanelHeight);
-    [panelView setFrameSize:panelSize];
     panelView.minSizeConstraint = panelSize;
     panelView.maxSizeConstraint = panelSize;
-    [_containerView addSubview:panelView];
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [panelViewController.view addSubview:socialViewController.view];
-    [panelViewController setTitle:@"SOCIAL"];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
     [socialViewController.socialWebTab setPolicyDelegate:socialViewController];
+    [socialViewController.socialWebTab setUIDelegate:socialViewController];
+
     [socialViewController.socialWebTab setDrawsBackground:NO];
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
-    [self.panelControllers setObject:panelViewController forKey:@"SOCIAL"];
 }
 
 - (void)loadGroupsPanel {
@@ -364,9 +368,6 @@
   
     NSSize panelSize = NSMakeSize(300.0f, 340.0f);
     panelView.minSizeConstraint = panelSize;
-//    NSSize maxSize = NSMakeSize(600.0f, 740.0f);
-//    panelView.maxSizeConstraint = maxSize;
-
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
      NSView *groupView = _userGroupViewController.view;
@@ -529,6 +530,10 @@
         else if ([panelId isEqualToString:UI_Panel_Key_Visual]) {
             [self loadVisualPanel];
         }
+        else if ([panelId isEqualToString:UI_Panel_Key_Social]) {
+            [self loadFOAFPanel];
+        }
+
 
         else
         {

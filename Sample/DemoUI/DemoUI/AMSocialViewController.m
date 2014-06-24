@@ -30,7 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
       
-        
+       
             }
     return self;
 }
@@ -45,6 +45,27 @@
 
     }
 }
+-(void)dealloc{
+    //To avoid a error when closing 
+    [self.socialWebTab.mainFrame stopLoading];
+}
+
+- (void)webView:(WebView *)sender willCloseFrame:(WebFrame *)frame
+{
+
+//    [super webview:sender willCloseFrame:frame];
+//    [self.socialWebTab.mainFrame stopLoading];
+
+    
+}
+
+-(void)webViewClose:(WebView *)sender
+{
+    [self.socialWebTab.mainFrame stopLoading];
+    [self.socialWebTab cancelOperation:nil];
+
+    [super webViewClose:sender];
+    }
 
 
 - (void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener {
@@ -88,6 +109,7 @@
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
     NSString *url= sender.mainFrameURL;
+    
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
    

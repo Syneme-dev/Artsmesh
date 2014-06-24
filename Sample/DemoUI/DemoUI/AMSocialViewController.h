@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-
+#import <WebKit/WebFrameLoadDelegate.h>
 
 @interface AMSocialViewController : NSViewController
 

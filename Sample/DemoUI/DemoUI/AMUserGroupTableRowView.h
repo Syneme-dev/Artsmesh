@@ -7,7 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@protocol AMUserGroupTableRowViewDelegate;
 
 @interface AMUserGroupTableRowView : NSTableRowView
+
+@property (weak)id<AMUserGroupTableRowViewDelegate> delegate;
+
+@end
+
+@protocol AMUserGroupTableRowViewDelegate <NSObject>
+
+-(void)userGroupTableRowView:(AMUserGroupTableRowView*)rowView
+                 headerImage:(NSImage**)image
+              alternateImage:(NSImage**)alterImage;
 
 @end

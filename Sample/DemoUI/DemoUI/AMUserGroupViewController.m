@@ -224,7 +224,56 @@
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
     AMUserGroupTableRowView* rowView = [[AMUserGroupTableRowView alloc] init];
+    
+    if ([item isEqual:@"__localUsers"]) {
+        rowView.identifier = @"__localUsers";
+        
+    }else if( [item  isEqual:@"__remoteGroups"]){
+        rowView.identifier = @"__localUsers";
+        
+    }else if( [item isKindOfClass:[AMGroup class]]){
+        rowView.identifier = [(AMGroup*)item groupId];
+        
+    }else{
+        rowView.identifier = @"user";
+    }
+
+    rowView.delegate = self;
     return rowView;
+}
+
+
+-(void)userGroupTableRowView:(AMUserGroupTableRowView*)rowView
+                 headerImage:(NSImage**)image
+              alternateImage:(NSImage**)alterImage
+{
+    NSString* identifier = rowView.identifier;
+    if ([identifier isEqualToString:@"__localUsers"]) {
+        
+        for(AMUser* user in _localUsers){
+            if (user.isOnline == YES) {
+                *image = [NSImage imageNamed:@"group_online"];
+                *alterImage = [NSImage imageNamed:@"group_online_expanded"];
+                return;
+            }
+        }
+        
+        *image = [NSImage imageNamed:@"group_offline"];
+        *alterImage = [NSImage imageNamed:@"group4"];
+        return;
+        
+    }else if([identifier isEqualToString:@"__remoteGroups"] ){
+        
+        *image = [NSImage imageNamed:@"group1"];
+        *alterImage = [NSImage imageNamed:@"group2"];
+        return;
+        
+    }else if([identifier isEqualToString:@"user"]){
+        return;
+        
+    }else{
+        return;
+    }
 }
 
 #pragma mark-

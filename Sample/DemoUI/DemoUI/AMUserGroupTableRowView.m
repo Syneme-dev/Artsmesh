@@ -35,8 +35,13 @@
         // This is (presumably) the button holding the
         // outline triangle button.
         // We set our own images here.
-        [(NSButton *)subview setImage:[NSImage imageNamed:@"chat_command"]];
-        [(NSButton *)subview setAlternateImage:[NSImage imageNamed:@"chat_command"]];
+        NSImage* image = nil;
+        NSImage* alterImage = nil;
+        [self.delegate userGroupTableRowView:self headerImage:&image alternateImage:&alterImage];
+        if (image != nil && alterImage != nil) {
+            [(NSButton *)subview setImage:image];
+            [(NSButton *)subview setAlternateImage:alterImage];
+        }
     }
 }
 

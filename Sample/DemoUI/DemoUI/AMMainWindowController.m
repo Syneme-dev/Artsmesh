@@ -35,6 +35,7 @@
 #import "AMAppDelegate.h"
 #import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMMesherStateMachine.h"
+#import "MZTimerLabel.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -79,6 +80,7 @@
     AMMapViewController *mapViewController;
     AMMixingViewController *mixingViewController;
     AMVisualViewController  *visualViewController;
+    MZTimerLabel *amTimerControl;
     
     float containerWidth;
 }
@@ -145,6 +147,7 @@
 
 -(void)showDefaultWindow
 {
+    [self initTimer];
 //    [self.window setReleasedWhenClosed:NO];
 
 //    if (![[NSFileManager defaultManager] fileExistsAtPath:@"x5"]) {
@@ -343,6 +346,11 @@
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
 }
+-(void)initTimer{
+    amTimerControl = [[MZTimerLabel alloc] initWithLabel:(NSTextField*)self.amTimer andTimerType:MZTimerLabelTypeStopWatch];
+    [amTimerControl setStopWatchTime:0];
+    amTimerControl.timeFormat=@"HH:mm:ss";
+}
 
 - (void)loadGroupsPanel {
     float panelWidth=UI_defaultPanelWidth;
@@ -500,16 +508,15 @@
     [self fillPanel:panelViewController.view content:userViewController.view];
 }
 
-
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId=
     [[NSString stringWithFormat:@"%@_PANEL",sender.identifier ] uppercaseString];
-
+    
     if(sender.state==NSOnState)
     {
         if ([panelId isEqualToString:UI_Panel_Key_User]) {
             [self loadUserPanel];
-            }
+        }
         else if ([panelId isEqualToString:UI_Panel_Key_Groups]) {
             [self loadGroupsPanel];
         }
@@ -533,8 +540,8 @@
         else if ([panelId isEqualToString:UI_Panel_Key_Social]) {
             [self loadFOAFPanel];
         }
-
-
+        
+        
         else
         {
             [self createPanel:panelId withTitle:sender.identifier];
@@ -543,6 +550,21 @@
     else
     {
         [self removePanel:panelId];
+    }
+}
+
+
+
+- (IBAction)onTimerControlItemClick:(NSButton *)sender {
+
+    if(sender.state==NSOnState)
+    {
+        [amTimerControl start];
+    }
+    else
+    {
+        [amTimerControl pause];
+        [amTimerControl reset];
     }
 }
 

@@ -18,8 +18,10 @@
 @property NSMutableDictionary *panelControllers;
 @property (weak) IBOutlet NSTextField *versionLabel;
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
+@property (weak) IBOutlet AMFoundryFontView *amTimer;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 
+- (IBAction)onTimerControlItemClick:(NSButton *)sender;
 
 @end

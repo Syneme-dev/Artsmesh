@@ -232,7 +232,7 @@
         rowView.identifier = @"__localUsers";
         
     }else if( [item isKindOfClass:[AMGroup class]]){
-        rowView.identifier = [(AMGroup*)item groupId];
+        rowView.identifier = @"group";
         
     }else{
         rowView.identifier = @"user";
@@ -259,19 +259,23 @@
         }
         
         *image = [NSImage imageNamed:@"group_offline"];
-        *alterImage = [NSImage imageNamed:@"group4"];
+        *alterImage = [NSImage imageNamed:@"group_offline_expanded"];
         return;
         
     }else if([identifier isEqualToString:@"__remoteGroups"] ){
         
-        *image = [NSImage imageNamed:@"group1"];
-        *alterImage = [NSImage imageNamed:@"group2"];
+        *image = [NSImage imageNamed:@"group_online"];
+        *alterImage = [NSImage imageNamed:@"group_online_expanded"];
         return;
         
     }else if([identifier isEqualToString:@"user"]){
         return;
         
     }else{
+        *image = [NSImage imageNamed:@"group_online"];
+        *alterImage = [NSImage imageNamed:@"group_online_expanded"];
+        return;
+
         return;
     }
 }

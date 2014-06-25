@@ -10,7 +10,7 @@
 
 @class AMFoundryFontView;
 
-@interface AMMainWindowController : NSWindowController
+@interface AMMainWindowController : NSWindowController<NSWindowDelegate>
 @property (weak) IBOutlet NSButton *meshBtn;
 
 - (IBAction)mesh:(id)sender;

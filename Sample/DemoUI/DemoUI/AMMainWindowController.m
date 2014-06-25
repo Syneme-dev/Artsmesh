@@ -157,7 +157,6 @@
     
 }
 
-
 - (void)createDefaultWindow {
      NSScreen *mainScreen = [NSScreen mainScreen];
     [self.window setFrame:NSMakeRect(10, 40 , mainScreen.frame.size.width-80,mainScreen.frame.size.height-80) display:YES];
@@ -302,9 +301,21 @@
 
 -(void)fillPanel:(NSView*) panelView content:(NSView*)contentView{
     NSSize panelSize = panelView.frame.size;
-        contentView.frame = NSMakeRect(0, UI_panelContentPaddingBottom, panelSize.width, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
-        [panelView addSubview:contentView];
-        [contentView setNeedsDisplay:YES];
+    contentView.frame = NSMakeRect(0, UI_panelContentPaddingBottom, panelSize.width, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
+    [panelView addSubview:contentView];
+   // [contentView setNeedsDisplay:YES];
+    [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [panelView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [panelView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
 }
 
 -(void)loadTestPanel{
@@ -373,9 +384,8 @@
 //    }
 
   
-    NSSize panelSize = NSMakeSize(300.0f, 340.0f);
-   // panelView.minSizeConstraint = panelSize;
-    panelView.minSizeConstraint = NSMakeSize(300.0f, 200.0f);
+    NSSize panelSize = NSMakeSize(300.0f, 220.0f);
+    panelView.minSizeConstraint = panelSize;
     _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
      NSView *groupView = _userGroupViewController.view;
@@ -450,8 +460,10 @@
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     NSView *chatView = chatViewController.view;
     
+    
     [self fillPanel:panelViewController.view content:chatViewController.view];
     
+    /*
     [chatView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(chatView);
     [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[chatView]|"
@@ -463,6 +475,7 @@
                                              options:0
                                              metrics:nil
                                                views:views]];
+     */
 }
 
 -(void)loadNetworkToolsPanel{
@@ -498,13 +511,11 @@
 }
 
 - (void)loadUserPanel {
-    float panelHeight=340.0f;
+    float panelHeight=300.0f;
     AMPanelViewController *panelViewController=[self createPanel:@"USER_PANEL" withTitle:@"USER" width:UI_defaultPanelWidth height:panelHeight];
         AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
-    //panelView.minSizeConstraint = panelSize;
-    panelView.minSizeConstraint = NSMakeSize(UI_defaultPanelWidth, 200);
-   // panelView.maxSizeConstraint = panelSize;
+    panelView.minSizeConstraint = panelSize;
     AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     [self fillPanel:panelViewController.view content:userViewController.view];
 }

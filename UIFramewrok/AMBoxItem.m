@@ -85,23 +85,17 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
     }
 }
 
-- (void)setMinSizeConstraint:(NSSize)minSizeConstraint
+- (void)setPreferredSize:(NSSize)preferredSize
 {
-    _minSizeConstraint = minSizeConstraint;
-    NSSize frameSize = self.frame.size;
-    frameSize = NSMakeSize(MAX(_minSizeConstraint.width, frameSize.width),
-                           MAX(_minSizeConstraint.height, frameSize.height));
-    [self setFrameSize:frameSize];
+    CGFloat w = preferredSize.width;
+    CGFloat h = preferredSize.height;
+    
+    w = MIN(MAX(w, self.minSizeConstraint.width), self.maxSizeConstraint.width);
+    h = MIN(MAX(h, self.minSizeConstraint.height), self.maxSizeConstraint.height);
+    _preferredSize.width = w;
+    _preferredSize.height = h;
 }
 
-- (void)setMaxSizeConstraint:(NSSize)maxSizeConstraint
-{
-    _maxSizeConstraint = maxSizeConstraint;
-    NSSize frameSize = self.frame.size;
-    frameSize = NSMakeSize(MIN(_maxSizeConstraint.width, frameSize.width),
-                           MIN(_maxSizeConstraint.height, frameSize.height));
-    [self setFrameSize:frameSize];
-}
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
@@ -111,26 +105,6 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
     AMBox *hostingBox = self.hostingBox;
     [super removeFromSuperview];
     [hostingBox didRemoveBoxItem:self];
-}
-
-- (void)setFrame:(NSRect)frameRect
-{
-    return [self setFrameSize:frameRect.size];
-}
-
-- (void)setFrameSize:(NSSize)newSize
-{
-    NSSize oldSize = self.frame.size;
-    NSSize minSize = self.minSizeConstraint;
-    NSSize maxSize = self.maxSizeConstraint;
-    
-    newSize = NSMakeSize(
-                         MIN(MAX(minSize.width, newSize.width), maxSize.width),
-                         MIN(MAX(minSize.height, newSize.height), maxSize.height));
-    if (!NSEqualSizes(oldSize, newSize)) {
-        [super setFrameSize:newSize];
-        [self.hostingBox doBoxLayout];
-    }
 }
 
 - (void)setHidden:(BOOL)flag

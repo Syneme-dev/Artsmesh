@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, AMDragBehavior) {
 
 @property(nonatomic) NSSize minSizeConstraint;
 @property(nonatomic) NSSize maxSizeConstraint;
+@property(nonatomic) NSSize preferredSize;
 @property(nonatomic) AMDragBehavior dragBehavior;
 @property(nonatomic, readonly) BOOL visiable;
 @property(nonatomic, readonly) AMBox *hostingBox;

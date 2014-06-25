@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 - (instancetype)initWithFrame:(NSRect)frameRect sytle:(AMBoxStyle)style;
 - (void)setPadding:(CGFloat)padding;
 - (void)doBoxLayout;
-- (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point;
+- (BOOL)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point;
 - (void)didRemoveBoxItem:(AMBoxItem *)boxItem;
 - (AMBoxItem *)boxItemBelowPoint:(NSPoint)point;
 

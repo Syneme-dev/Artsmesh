@@ -47,16 +47,6 @@
     self.paddingBottom = padding;
 }
 
-- (void)setMinSizeConstraint:(NSSize)minSizeConstraint
-{
-    CGFloat minContentHeight = [self minContentHeight];
-    if (minSizeConstraint.height >= minContentHeight) {
-        [self setMinSizeConstraint:minSizeConstraint];
-        [self setFrameSize:minSizeConstraint];
-        [self doBoxLayout];
-    }
-}
-
 - (CGFloat)minContentHeight
 {
     CGFloat offsetY = 0;
@@ -67,7 +57,7 @@
             continue;
         CGFloat itemMinHeight = 0;
         if ([item isKindOfClass:[AMBox class]])
-            itemMinHeight = [(AMBox *)item minContentHeight];
+            itemMinHeight = item.frame.size.height;
         else
             itemMinHeight = item.minSizeConstraint.height;
         if (self.style == AMBoxVertical) {
@@ -88,9 +78,10 @@
     CGFloat offsetY = self.paddingTop;
     CGFloat gap = 0;
     CGFloat boxWidth = 0;
-    CGFloat boxHeight = self.minSizeConstraint.height;
+    CGFloat boxHeight = self.frame.size.height;
     CGFloat freeSpace = boxHeight - [self minContentHeight] -
                             self.paddingTop - self.paddingBottom;
+    NSAssert(freeSpace >= 0, @"freeSpace must be greater than zero");
     AMBoxItem *lastItem = self.lastVisibleItem;
     
     for (AMBoxItem *item in self.subviews) {
@@ -102,15 +93,14 @@
             [item setFrameOrigin:NSMakePoint(offsetX, offsetY)];
             NSSize itemSize = NSZeroSize;
             if ([item isKindOfClass:[AMBox class]]) {
-                itemSize = item.minSizeConstraint;
-                [(AMBox *)item doBoxLayout];
+                itemSize = item.frame.size;
             } else {
                 itemSize = NSMakeSize(item.preferredSize.width,
                                       item.minSizeConstraint.height);
                 CGFloat additionalSpace = freeSpace;
                 if (item != lastItem)
                     additionalSpace = MIN(additionalSpace,
-                        self.preferredSize.height - self.minSizeConstraint.height);
+                        item.preferredSize.height - item.minSizeConstraint.height);
                 if (additionalSpace > 0) {
                     freeSpace -= additionalSpace;
                     itemSize.height += additionalSpace;
@@ -124,23 +114,24 @@
             [item setFrameOrigin:NSMakePoint(offsetX, offsetY)];
             NSSize itemSize = NSZeroSize;
             if ([item isKindOfClass:[AMBox class]]) {
-                itemSize = item.minSizeConstraint;
-                [(AMBox *)item doBoxLayout];
+                itemSize = item.frame.size;
             } else {
                 itemSize = NSMakeSize(item.preferredSize.width,
                             boxHeight - self.paddingTop - self.paddingBottom);
+                [item setFrameSize:itemSize];
             }
-            [item setFrameSize:itemSize];
             offsetX += itemSize.width;
-            boxWidth += itemSize.width;
+            boxWidth = offsetX - self.paddingLeft;
         }
         if (gap == 0)
             gap = self.gapBetweenItems;
     }
 
-    
-    [self setFrameSize:NSMakeSize(boxWidth + self.paddingLeft + self.paddingRight,
-                                  boxHeight)];
+    NSSize newBoxSize = NSMakeSize(boxWidth + self.paddingLeft + self.paddingRight, boxHeight);
+    if (!NSEqualSizes(self.frame.size, newBoxSize)) {
+        [self setFrameSize:newBoxSize];
+        [self.hostingBox doBoxLayout];
+    }
 }
 
 - (AMBoxItem *)boxItemBelowPoint:(NSPoint)point
@@ -172,17 +163,25 @@
     return belowItem;
 }
 
-- (void)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point
+- (BOOL)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point
 {
     if (NSPointInRect(point, [boxItem enclosingRect]))
-        return;
-
+        return YES;
+    
     [boxItem removeFromSuperview];
+    if (self.style == AMBoxVertical) {
+        CGFloat freeSpace = self.frame.size.height - self.paddingBottom -
+            self.paddingTop - self.gapBetweenItems - [self minContentHeight];
+        if (freeSpace < boxItem.minSizeConstraint.height)
+            return NO;
+    }
+    
     AMBoxItem *belowItem = [self boxItemBelowPoint:point];
     if (belowItem)
         [self addSubview:boxItem positioned:NSWindowAbove relativeTo:belowItem];
     else
         [self addSubview:boxItem positioned:NSWindowBelow relativeTo:nil];
+    return YES;
 }
 
 - (void)didRemoveBoxItem:(AMBoxItem *)boxItem
@@ -280,6 +279,7 @@
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
 {
+    /*
     id source = [sender draggingSource];
     
     if ([source isKindOfClass:[AMBoxItem class]]) {
@@ -290,6 +290,8 @@
     }
     
     return NSDragOperationNone;
+     */
+    return NSDragOperationMove;
 }
 
 - (NSDragOperation)draggingUpdated:(id<NSDraggingInfo>)sender
@@ -341,12 +343,12 @@
 {
     AMBoxItem *item = (AMBoxItem *)[sender draggingSource];
     NSPoint location = [sender draggingLocation];
-    [self dropBoxItem:item atLocation:location];
+    BOOL canDrop = [self dropBoxItem:item atLocation:location];
     if (!NSEqualRects(NSZeroRect, _rectForPromptLine)) {
         _rectForPromptLine = NSZeroRect;
         self.needsDisplay = YES;
     }
-    return YES;
+    return canDrop;
 }
 
 @end

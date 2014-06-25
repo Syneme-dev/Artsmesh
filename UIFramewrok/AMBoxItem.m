@@ -92,13 +92,14 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
     
     w = MIN(MAX(w, self.minSizeConstraint.width), self.maxSizeConstraint.width);
     h = MIN(MAX(h, self.minSizeConstraint.height), self.maxSizeConstraint.height);
-    _preferredSize.width = w;
-    _preferredSize.height = h;
+    _preferredSize = NSMakeSize(w, h);
+    [self.hostingBox doBoxLayout];
 }
 
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
+
 
 - (void)removeFromSuperview
 {

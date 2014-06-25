@@ -34,17 +34,16 @@
 }
 
 -(void)awakeFromNib{
-    [AMButtonHandler changeTabTextColor:self.etcdTabButton toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.etcdTabButton toColor:UI_Color_blue];
     
-    [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_b7b7b7];
-    
-    [AMButtonHandler changeTabTextColor:self.useIpv6Button toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.useIpv6Button toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
     
     [self resetPopupItems];
     [self.myPrivateIpPopup setPullsDown:YES];

@@ -58,6 +58,7 @@
 #define UI_Panel_Key_Mixing @"MIXING_PANEL"
 #define UI_Panel_Key_Map @"MAP_PANEL"
 #define UI_Panel_Key_Visual @"VISUAL_PANEL"
+#define UI_Panel_Key_OSCMessage @"OSCMESSAGE_PANEL"
 
 #define UI_Panel_Key_Social @"SOCIAL_PANEL"
 
@@ -231,6 +232,7 @@
     if ([openedPanels containsObject:UI_Panel_Key_Social]) {
         [self loadFOAFPanel];
     }
+    [self loadOSCMessagePanel];
     
     for (NSString* openedPanel in openedPanels) {
         NSString *sideItemId=[openedPanel stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
@@ -322,9 +324,17 @@
 }
 
 -(void)loadVisualPanel{
-    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Visual withTitle:@"Visualization" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Visual withTitle:@"Visualization" width:UI_defaultPanelWidth*3.0 height:UI_defaultPanelHeight ];
     visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
+    [visualViewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController.view content:visualViewController.view];
+}
+
+-(void)loadOSCMessagePanel{
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_OSCMessage withTitle:@"OSC Message" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
+    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
+    [viewController.view setAutoresizesSubviews:YES];
+    [self fillPanel:panelViewController.view content:viewController.view];
 }
 
 -(void)loadFOAFPanel{
@@ -540,6 +550,10 @@
         else if ([panelId isEqualToString:UI_Panel_Key_Social]) {
             [self loadFOAFPanel];
         }
+        else if ([panelId isEqualToString:UI_Panel_Key_OSCMessage]) {
+            [self loadOSCMessagePanel];
+        }
+        
         
         
         else

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -12,24 +12,24 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="665" height="601"/>
+            <rect key="frame" x="0.0" y="0.0" width="1273" height="1163"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yeN-ys-0tm">
-                    <rect key="frame" x="0.0" y="0.0" width="665" height="601"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="visualShot" id="yNJ-bA-CcP"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="shot_audio" id="yNJ-bA-CcP"/>
                 </imageView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="yeN-ys-0tm" secondAttribute="trailing" id="6vY-uB-rn2"/>
-                <constraint firstItem="yeN-ys-0tm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="8tA-RH-6Ud"/>
+                <constraint firstItem="yeN-ys-0tm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="92q-cO-3p2"/>
                 <constraint firstItem="yeN-ys-0tm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="f8P-9W-nJw"/>
                 <constraint firstAttribute="bottom" secondItem="yeN-ys-0tm" secondAttribute="bottom" id="vfL-Z8-Mka"/>
             </constraints>
         </customView>
     </objects>
     <resources>
-        <image name="visualShot" width="665" height="601"/>
+        <image name="shot_audio" width="1273" height="1142"/>
     </resources>
 </document>

@@ -11,6 +11,7 @@
 
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <WebKit/WebKit.h>
+#import <UIFramework/AMButtonHandler.h>
 @interface AMSocialViewController ()
 {
     Boolean isLogin;
@@ -33,6 +34,14 @@
        
             }
     return self;
+}
+
+-(void)awakeFromNib{
+    [AMButtonHandler changeTabTextColor:self.upTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.infoTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.blogTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.searchTabButton toColor:UI_Color_blue];
+
 }
 
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {

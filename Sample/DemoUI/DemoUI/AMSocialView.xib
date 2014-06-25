@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="5056"/>
@@ -7,8 +7,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMSocialViewController">
             <connections>
+                <outlet property="blogTabButton" destination="3Ol-Ok-SRS" id="B2I-4m-EgO"/>
+                <outlet property="infoTabButton" destination="vc1-vp-YEP" id="dcX-53-bFG"/>
+                <outlet property="searchTabButton" destination="aqN-KA-g0x" id="xmK-KK-Hbs"/>
                 <outlet property="socialWebTab" destination="DgC-PZ-wvC" id="tls-wJ-YT6"/>
                 <outlet property="tabs" destination="Teu-tF-YMH" id="Ew1-Rz-ODl"/>
+                <outlet property="upTabButton" destination="Sly-pa-QQv" id="GIw-YF-MdQ"/>
                 <outlet property="view" destination="c22-O7-iKe" id="mNj-Bf-7dn"/>
             </connections>
         </customObject>
@@ -22,10 +26,22 @@
                     <rect key="frame" x="0.0" y="280" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="upTab">
-                            <rect key="frame" x="420" y="3" width="40" height="13"/>
+                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9r-uj-gVs" customClass="BlueBackgroundView">
+                            <rect key="frame" x="539" y="5" width="1" height="10"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="UP  |  " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
+                        </customView>
+                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjZ-94-DDK" customClass="BlueBackgroundView">
+                            <rect key="frame" x="499" y="5" width="1" height="10"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        </customView>
+                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay8-XS-nLs" customClass="BlueBackgroundView">
+                            <rect key="frame" x="459" y="5" width="1" height="10"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        </customView>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="upTab">
+                            <rect key="frame" x="431" y="3" width="20" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="inline" title="UP" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
@@ -34,9 +50,9 @@
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-KA-g0x" userLabel="addFieldTab">
-                            <rect key="frame" x="536" y="3" width="60" height="13"/>
+                            <rect key="frame" x="540" y="3" width="50" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="ADD FIELD" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
+                            <buttonCell key="cell" type="inline" title="SEARCH" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
@@ -45,9 +61,9 @@
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vp-YEP" userLabel="foafTab">
-                            <rect key="frame" x="460" y="3" width="40" height="13"/>
+                            <rect key="frame" x="465" y="3" width="30" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="INFO  |   " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
+                            <buttonCell key="cell" type="inline" title="INFO" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
@@ -56,9 +72,9 @@
                             </connections>
                         </button>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-Ok-SRS" userLabel="blogTab">
-                            <rect key="frame" x="500" y="3" width="40" height="13"/>
+                            <rect key="frame" x="503" y="3" width="30" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="BLOG  |  " bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="nWI-6M-Rzz">
+                            <buttonCell key="cell" type="inline" title="BLOG" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="nWI-6M-Rzz">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>

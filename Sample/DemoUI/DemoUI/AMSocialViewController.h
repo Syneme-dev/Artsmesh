@@ -19,5 +19,9 @@
 - (IBAction)onUpButtonClick:(id)sender;
 - (IBAction)onAddFieldButtonClick:(id)sender;
 -(void)loadPage;
+@property (strong) IBOutlet NSButton *upTabButton;
+@property (strong) IBOutlet NSButton *infoTabButton;
+@property (strong) IBOutlet NSButton *blogTabButton;
+@property (strong) IBOutlet NSButton *searchTabButton;
 
 @end

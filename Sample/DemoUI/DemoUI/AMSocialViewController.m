@@ -19,6 +19,7 @@
     NSString* username;
     NSString* infoUrl;
     NSString* myBlogUrl;
+    NSString* publicBlogUrl;
 }
 
 
@@ -76,7 +77,7 @@
     [super webViewClose:sender];
     }
 
-
+//Note:working for enable to open external link with new web browser.
 - (void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener {
     [[NSWorkspace sharedWorkspace] openURL:[actionInformation objectForKey:WebActionOriginalURLKey]];
     [listener ignore];
@@ -87,6 +88,8 @@
     isLogin=false;
      NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
      statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
+    
+    
    username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
     NSURL *loginURL = [NSURL URLWithString:
                       [NSString stringWithFormat:@"%@/main/login?fromMac=true",statusNetURL ]];
@@ -94,6 +97,7 @@
     infoUrl=        [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,username ];
     
     myBlogUrl =[NSString stringWithFormat:@"%@/%@/all?fromMac=true",statusNetURL,username ];
+    publicBlogUrl=[NSString stringWithFormat:@"%@/blogs?fromMac=true",statusNetURL ];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:loginURL]];
 }
@@ -171,7 +175,7 @@
      [self gotoUsersPage];
     }
     else if([url isEqual:myBlogUrl]){
-        NSURL *baseURL=[NSURL URLWithString:statusNetURL];
+        NSURL *baseURL=[NSURL URLWithString:publicBlogUrl];
         [self.socialWebTab.mainFrame loadRequest:
          [NSURLRequest requestWithURL:baseURL]];
     

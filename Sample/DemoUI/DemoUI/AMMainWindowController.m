@@ -201,9 +201,6 @@
         [self loadUserPanel];
     }
     
-    [self loadTestPanel];
-
-    
     if ([openedPanels containsObject:UI_Panel_Key_Map]) {
         [self loadMapPanel];
     }

@@ -10,6 +10,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
+#import "AMUserGroupTableRowView.h"
 
 
 @interface AMUserGroupViewController ()
@@ -204,7 +205,7 @@
         //title = @"Local Users";
         title = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
     } else if ([item isEqual:@"__remoteGroups"]) {
-        title = @"Public Groups";
+        title = @"Artsmesh";
     } else if ([item isKindOfClass:[AMGroup class]]) {
         title = [(AMGroup *)item groupName];
     } else if ([item isKindOfClass:[AMUser class]]) {
@@ -220,6 +221,64 @@
     return cellView;
 }
 
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    AMUserGroupTableRowView* rowView = [[AMUserGroupTableRowView alloc] init];
+    
+    if ([item isEqual:@"__localUsers"]) {
+        rowView.identifier = @"__localUsers";
+        
+    }else if( [item  isEqual:@"__remoteGroups"]){
+        rowView.identifier = @"__localUsers";
+        
+    }else if( [item isKindOfClass:[AMGroup class]]){
+        rowView.identifier = @"group";
+        
+    }else{
+        rowView.identifier = @"user";
+    }
+
+    rowView.delegate = self;
+    return rowView;
+}
+
+
+-(void)userGroupTableRowView:(AMUserGroupTableRowView*)rowView
+                 headerImage:(NSImage**)image
+              alternateImage:(NSImage**)alterImage
+{
+    NSString* identifier = rowView.identifier;
+    if ([identifier isEqualToString:@"__localUsers"]) {
+        
+        for(AMUser* user in _localUsers){
+            if (user.isOnline == YES) {
+                *image = [NSImage imageNamed:@"group_online"];
+                *alterImage = [NSImage imageNamed:@"group_online_expanded"];
+                return;
+            }
+        }
+        
+        *image = [NSImage imageNamed:@"group_offline"];
+        *alterImage = [NSImage imageNamed:@"group_offline_expanded"];
+        return;
+        
+    }else if([identifier isEqualToString:@"__remoteGroups"] ){
+        
+        *image = [NSImage imageNamed:@"group_online"];
+        *alterImage = [NSImage imageNamed:@"group_online_expanded"];
+        return;
+        
+    }else if([identifier isEqualToString:@"user"]){
+        return;
+        
+    }else{
+        *image = [NSImage imageNamed:@"group_online"];
+        *alterImage = [NSImage imageNamed:@"group_online_expanded"];
+        return;
+
+        return;
+    }
+}
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

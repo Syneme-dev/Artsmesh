@@ -20,6 +20,7 @@
 		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
 		26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC21900D44D0083742E /* JoinGroup.png */; };
 		26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC41900D6EF0083742E /* CreateGroup.png */; };
+		26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
@@ -190,6 +191,8 @@
 		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
 		26D2FFC21900D44D0083742E /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JoinGroup.png; path = Resource/JoinGroup.png; sourceTree = "<group>"; };
 		26D2FFC41900D6EF0083742E /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CreateGroup.png; path = Resource/CreateGroup.png; sourceTree = "<group>"; };
+		26D6580E19594D0200CD3C22 /* AMUserGroupTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableRowView.h; sourceTree = "<group>"; };
+		26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableRowView.m; sourceTree = "<group>"; };
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 				AFBDCCA6195AB8F400653C18 /* MZTimerLabel.m */,
 				26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */,
 				26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */,
+				26D6580E19594D0200CD3C22 /* AMUserGroupTableRowView.h */,
+				26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */,
 				26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */,
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
@@ -755,6 +760,7 @@
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
+				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,

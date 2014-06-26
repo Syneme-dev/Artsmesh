@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMUserGroupTableRowView.h"
 
-@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource>
+@interface AMUserGroupViewController : NSViewController<NSOutlineViewDelegate, NSOutlineViewDataSource, AMUserGroupTableRowViewDelegate>
 
 @property (weak) IBOutlet NSTextField *createGroupTextField;
 @property (weak) IBOutlet NSOutlineView *outlineView;

@@ -338,7 +338,7 @@
 }
 
 -(void)loadMixingPanel{
-    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Mixing withTitle:@"Mixing" width:UI_defaultPanelWidth*4.0 height:UI_defaultPanelHeight ];
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Mixing withTitle:@"Mixing" width:UI_defaultPanelWidth*3.0 height:UI_defaultPanelHeight ];
     mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:mixingViewController.view];
 }

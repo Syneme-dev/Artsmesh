@@ -90,13 +90,6 @@
 		AF9DC78718E96AEB0029DB97 /* ken.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78618E96AEB0029DB97 /* ken.png */; };
 		AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB95D4718FFB61E00853263 /* AMMainWindowController.m */; };
 		AFBDCCA7195AB8F400653C18 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBDCCA6195AB8F400653C18 /* MZTimerLabel.m */; };
-		AFBDCCAF195AD0E300653C18 /* shot_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCA8195AD0E300653C18 /* shot_audio.png */; };
-		AFBDCCB0195AD0E300653C18 /* shot_mainOutput.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCA9195AD0E300653C18 /* shot_mainOutput.png */; };
-		AFBDCCB1195AD0E300653C18 /* shot_mixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCAA195AD0E300653C18 /* shot_mixing.png */; };
-		AFBDCCB2195AD0E300653C18 /* shot_musicScore.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCAB195AD0E300653C18 /* shot_musicScore.png */; };
-		AFBDCCB3195AD0E300653C18 /* shot_oscMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCAC195AD0E300653C18 /* shot_oscMessage.png */; };
-		AFBDCCB4195AD0E300653C18 /* shot_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCAD195AD0E300653C18 /* shot_timer.png */; };
-		AFBDCCB5195AD0E300653C18 /* shot_video.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCAE195AD0E300653C18 /* shot_video.png */; };
 		AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */; };
 		AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */; };
 		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
@@ -108,9 +101,15 @@
 		AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34797195BEF620055043E /* AMTimerViewController.xib */; };
 		AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3479B195BEF720055043E /* AMMainOutputViewController.m */; };
 		AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */; };
+		AFD75759195D048E0057976D /* shot_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75752195D048E0057976D /* shot_audio.png */; };
+		AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75753195D048E0057976D /* shot_mainOutput.png */; };
+		AFD7575B195D048E0057976D /* shot_mixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75754195D048E0057976D /* shot_mixing.png */; };
+		AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75755195D048E0057976D /* shot_musicScore.png */; };
+		AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75756195D048E0057976D /* shot_oscMessage.png */; };
+		AFD7575E195D048E0057976D /* shot_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75757195D048E0057976D /* shot_timer.png */; };
+		AFD7575F195D048E0057976D /* shot_video.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD75758195D048E0057976D /* shot_video.png */; };
 		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
 		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
-		AFDA79AA1945869D0002873B /* mapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A81945869D0002873B /* mapShot.png */; };
 		CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE7D80AE19502157001E6CF7 /* LocalServer */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
@@ -278,13 +277,6 @@
 		AFB95D4718FFB61E00853263 /* AMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainWindowController.m; sourceTree = "<group>"; };
 		AFBDCCA5195AB8F400653C18 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZTimerLabel.h; path = MZTimerLabel/MZTimerLabel.h; sourceTree = "<group>"; };
 		AFBDCCA6195AB8F400653C18 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZTimerLabel.m; path = MZTimerLabel/MZTimerLabel.m; sourceTree = "<group>"; };
-		AFBDCCA8195AD0E300653C18 /* shot_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_audio.png; path = Resource/panelshot/shot_audio.png; sourceTree = "<group>"; };
-		AFBDCCA9195AD0E300653C18 /* shot_mainOutput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_mainOutput.png; path = Resource/panelshot/shot_mainOutput.png; sourceTree = "<group>"; };
-		AFBDCCAA195AD0E300653C18 /* shot_mixing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_mixing.png; path = Resource/panelshot/shot_mixing.png; sourceTree = "<group>"; };
-		AFBDCCAB195AD0E300653C18 /* shot_musicScore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_musicScore.png; path = Resource/panelshot/shot_musicScore.png; sourceTree = "<group>"; };
-		AFBDCCAC195AD0E300653C18 /* shot_oscMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_oscMessage.png; path = Resource/panelshot/shot_oscMessage.png; sourceTree = "<group>"; };
-		AFBDCCAD195AD0E300653C18 /* shot_timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_timer.png; path = Resource/panelshot/shot_timer.png; sourceTree = "<group>"; };
-		AFBDCCAE195AD0E300653C18 /* shot_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shot_video.png; path = Resource/panelshot/shot_video.png; sourceTree = "<group>"; };
 		AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCMessageViewController.h; sourceTree = "<group>"; };
 		AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCMessageViewController.m; sourceTree = "<group>"; };
 		AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCMessageViewController.xib; sourceTree = "<group>"; };
@@ -301,10 +293,16 @@
 		AFD3479A195BEF720055043E /* AMMainOutputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMainOutputViewController.h; sourceTree = "<group>"; };
 		AFD3479B195BEF720055043E /* AMMainOutputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainOutputViewController.m; sourceTree = "<group>"; };
 		AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMainOutputViewController.xib; sourceTree = "<group>"; };
+		AFD75752195D048E0057976D /* shot_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_audio.png; sourceTree = "<group>"; };
+		AFD75753195D048E0057976D /* shot_mainOutput.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_mainOutput.png; sourceTree = "<group>"; };
+		AFD75754195D048E0057976D /* shot_mixing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_mixing.png; sourceTree = "<group>"; };
+		AFD75755195D048E0057976D /* shot_musicScore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_musicScore.png; sourceTree = "<group>"; };
+		AFD75756195D048E0057976D /* shot_oscMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_oscMessage.png; sourceTree = "<group>"; };
+		AFD75757195D048E0057976D /* shot_timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_timer.png; sourceTree = "<group>"; };
+		AFD75758195D048E0057976D /* shot_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_video.png; sourceTree = "<group>"; };
 		AFDA79A21945864A0002873B /* AMMixingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixingViewController.h; sourceTree = "<group>"; };
 		AFDA79A31945864A0002873B /* AMMixingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixingViewController.m; sourceTree = "<group>"; };
 		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
-		AFDA79A81945869D0002873B /* mapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapShot.png; sourceTree = "<group>"; };
 		CE7D80AE19502157001E6CF7 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
@@ -593,16 +591,16 @@
 		AFDA79A7194586660002873B /* panelshot */ = {
 			isa = PBXGroup;
 			children = (
-				AFBDCCA8195AD0E300653C18 /* shot_audio.png */,
-				AFBDCCA9195AD0E300653C18 /* shot_mainOutput.png */,
-				AFBDCCAA195AD0E300653C18 /* shot_mixing.png */,
-				AFBDCCAB195AD0E300653C18 /* shot_musicScore.png */,
-				AFBDCCAC195AD0E300653C18 /* shot_oscMessage.png */,
-				AFBDCCAD195AD0E300653C18 /* shot_timer.png */,
-				AFBDCCAE195AD0E300653C18 /* shot_video.png */,
-				AFDA79A81945869D0002873B /* mapShot.png */,
+				AFD75752195D048E0057976D /* shot_audio.png */,
+				AFD75753195D048E0057976D /* shot_mainOutput.png */,
+				AFD75754195D048E0057976D /* shot_mixing.png */,
+				AFD75755195D048E0057976D /* shot_musicScore.png */,
+				AFD75756195D048E0057976D /* shot_oscMessage.png */,
+				AFD75757195D048E0057976D /* shot_timer.png */,
+				AFD75758195D048E0057976D /* shot_video.png */,
 			);
 			name = panelshot;
+			path = Resource/panelshot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,26 +686,26 @@
 			files = (
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
-				AFBDCCB2195AD0E300653C18 /* shot_musicScore.png in Resources */,
+				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AF74056A18F7D93200B3C1DF /* Users.png in Resources */,
 				AF9DC78718E96AEB0029DB97 /* ken.png in Resources */,
+				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AF74056318F7D93200B3C1DF /* Reply.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
+				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
+				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AF01080B1929DA84001415CC /* info.css in Resources */,
-				AFBDCCB1195AD0E300653C18 /* shot_mixing.png in Resources */,
-				AFBDCCAF195AD0E300653C18 /* shot_audio.png in Resources */,
-				AFBDCCB4195AD0E300653C18 /* shot_timer.png in Resources */,
 				AF74054818F7D93200B3C1DF /* Favorite.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
+				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,
 				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
-				AFDA79AA1945869D0002873B /* mapShot.png in Resources */,
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
@@ -716,11 +714,11 @@
 				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AFC77F901900CBFB003543CF /* web.css in Resources */,
+				AFD7575B195D048E0057976D /* shot_mixing.png in Resources */,
 				AF74056918F7D93200B3C1DF /* Trash.png in Resources */,
-				AFBDCCB0195AD0E300653C18 /* shot_mainOutput.png in Resources */,
 				AF74054B18F7D93200B3C1DF /* Home.png in Resources */,
 				26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */,
-				AFBDCCB3195AD0E300653C18 /* shot_oscMessage.png in Resources */,
+				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */,
 				AF74056118F7D93200B3C1DF /* RecentTags.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
@@ -733,7 +731,6 @@
 				AF74054918F7D93200B3C1DF /* Favorites.png in Resources */,
 				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
-				AFBDCCB5195AD0E300653C18 /* shot_video.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
 				AF74054718F7D93200B3C1DF /* Edit.png in Resources */,

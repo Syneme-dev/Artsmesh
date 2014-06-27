@@ -75,7 +75,8 @@
 - (void)resizeByDraggingLocation:(NSPoint)location
 {
     location = [self convertPoint:location fromView:nil];
-    [self setFrameSize:NSMakeSize(location.x + 8, location.y + 8)];
+   // [self setFrameSize:NSMakeSize(location.x + 8, location.y + 8)];
+    self.preferredSize = NSMakeSize(location.x + 8, location.y + 8);
 }
 
 - (void)mouseUp:(NSEvent *)theEvent

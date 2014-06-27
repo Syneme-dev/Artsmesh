@@ -46,7 +46,7 @@
 //                                  initWithString:[item title]
 //                                  attributes:attributes];
 //        [item setAttributedTitle:as];
-        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title action:@selector(menuItem1Action:) keyEquivalent:@"" width:self.popUpButton.frame.size.width];
+        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title  keyEquivalent:@"" width:self.popUpButton.frame.size.width];
         popMenuItem.popupButton=self.popUpButton;
         [popMenuItem setEnabled:YES];
         [popMenuItem setTarget:self];

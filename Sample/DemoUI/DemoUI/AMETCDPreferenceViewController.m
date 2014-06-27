@@ -136,7 +136,7 @@
                                   attributes:attributes];
         [item setAttributedTitle:as];
         
-        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title action:@selector(menuItem1Action:) keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
+        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title  keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
         popMenuItem.popupButton=self.myPrivateIpPopup;
         [popMenuItem setEnabled:YES];
         [popMenuItem setTarget:self];

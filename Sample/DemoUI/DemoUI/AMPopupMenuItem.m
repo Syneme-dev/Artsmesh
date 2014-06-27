@@ -13,7 +13,7 @@
 
 @implementation AMPopupMenuItem
 
--(id)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode
+-(id)initWithTitle:(NSString *)aString  keyEquivalent:(NSString *)charCode
              width:(CGFloat)width
 {
 //    NSDictionary *attributes = [NSDictionary

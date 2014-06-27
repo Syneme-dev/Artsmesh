@@ -236,7 +236,7 @@
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
                             <view key="view" id="343-FY-LyZ">
-                                <rect key="frame" x="0.0" y="0.0" width="570" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rND-dd-2Kz">

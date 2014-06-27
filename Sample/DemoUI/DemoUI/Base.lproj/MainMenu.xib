@@ -885,7 +885,7 @@
                         <rect key="frame" x="0.0" y="156" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button identifier="TEAROFF" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
+                            <button identifier="MAINOUTPUT" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="overlaps" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">

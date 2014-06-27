@@ -63,6 +63,13 @@
 #define UI_Panel_Key_Social @"SOCIAL_PANEL"
 
 
+#define UI_Panel_Key_Timer @"TIMER_PANEL"
+
+#define UI_Panel_Key_MusicScore @"MUSICSCORE_PANEL"
+
+#define UI_Panel_Key_MainOutput @"MAINOUTPUT_PANEL"
+
+
 
 
 @interface AMMainWindowController ()
@@ -229,6 +236,18 @@
     if ([openedPanels containsObject:UI_Panel_Key_Social]) {
         [self loadFOAFPanel];
     }
+    
+    if ([openedPanels containsObject:UI_Panel_Key_MusicScore]) {
+        [self loadMusicScorePanel];
+    }
+    
+    if ([openedPanels containsObject:UI_Panel_Key_MainOutput]) {
+        [self loadMainOutputPanel];
+    }
+    if ([openedPanels containsObject:UI_Panel_Key_Timer]) {
+        [self loadTimerPanel];
+    }
+    
     [self loadOSCMessagePanel];
     
     for (NSString* openedPanel in openedPanels) {
@@ -331,6 +350,24 @@
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_OSCMessage withTitle:@"OSC Message" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
     [viewController.view setAutoresizesSubviews:YES];
+    [self fillPanel:panelViewController.view content:viewController.view];
+}
+
+-(void)loadMainOutputPanel{
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_MainOutput withTitle:@"Main Output" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight ];
+    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMainOutputViewController" bundle:nil];
+    [self fillPanel:panelViewController.view content:viewController.view];
+}
+
+-(void)loadTimerPanel{
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Timer withTitle:@"Clock" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
+    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
+    [self fillPanel:panelViewController.view content:viewController.view];
+}
+
+-(void)loadMusicScorePanel{
+    AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_MusicScore withTitle:@"Music Score" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
+    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:viewController.view];
 }
 
@@ -550,9 +587,16 @@
         else if ([panelId isEqualToString:UI_Panel_Key_OSCMessage]) {
             [self loadOSCMessagePanel];
         }
+        else if ([panelId isEqualToString:UI_Panel_Key_MusicScore]) {
+            [self loadMusicScorePanel];
+        }
         
-        
-        
+       else if ([panelId isEqualToString:UI_Panel_Key_MainOutput]) {
+            [self loadMainOutputPanel];
+        }
+        else if ([panelId isEqualToString:UI_Panel_Key_Timer]) {
+            [self loadTimerPanel];
+        }
         else
         {
             [self createPanel:panelId withTitle:sender.identifier];

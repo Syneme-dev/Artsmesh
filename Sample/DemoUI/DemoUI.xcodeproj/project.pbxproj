@@ -102,6 +102,12 @@
 		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
 		AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC77F8D1900C91A003543CF /* AMSocialViewController.m */; };
 		AFC77F901900CBFB003543CF /* web.css in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8F1900CBFB003543CF /* web.css */; };
+		AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */; };
+		AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */; };
+		AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34796195BEF620055043E /* AMTimerViewController.m */; };
+		AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34797195BEF620055043E /* AMTimerViewController.xib */; };
+		AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3479B195BEF720055043E /* AMMainOutputViewController.m */; };
+		AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */; };
 		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
 		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
 		AFDA79AA1945869D0002873B /* mapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A81945869D0002873B /* mapShot.png */; };
@@ -286,6 +292,15 @@
 		AFC77F8C1900C91A003543CF /* AMSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSocialViewController.h; sourceTree = "<group>"; };
 		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
 		AFC77F8F1900CBFB003543CF /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = web.css; path = Resource/web.css; sourceTree = "<group>"; };
+		AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicScoreViewController.h; sourceTree = "<group>"; };
+		AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicScoreViewController.m; sourceTree = "<group>"; };
+		AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMusicScoreViewController.xib; sourceTree = "<group>"; };
+		AFD34795195BEF620055043E /* AMTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerViewController.h; sourceTree = "<group>"; };
+		AFD34796195BEF620055043E /* AMTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerViewController.m; sourceTree = "<group>"; };
+		AFD34797195BEF620055043E /* AMTimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerViewController.xib; sourceTree = "<group>"; };
+		AFD3479A195BEF720055043E /* AMMainOutputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMainOutputViewController.h; sourceTree = "<group>"; };
+		AFD3479B195BEF720055043E /* AMMainOutputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainOutputViewController.m; sourceTree = "<group>"; };
+		AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMainOutputViewController.xib; sourceTree = "<group>"; };
 		AFDA79A21945864A0002873B /* AMMixingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixingViewController.h; sourceTree = "<group>"; };
 		AFDA79A31945864A0002873B /* AMMixingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixingViewController.m; sourceTree = "<group>"; };
 		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
@@ -387,6 +402,15 @@
 				AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */,
 				AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */,
 				AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */,
+				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
+				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
+				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
+				AFD34795195BEF620055043E /* AMTimerViewController.h */,
+				AFD34796195BEF620055043E /* AMTimerViewController.m */,
+				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
+				AFD3479A195BEF720055043E /* AMMainOutputViewController.h */,
+				AFD3479B195BEF720055043E /* AMMainOutputViewController.m */,
+				AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -684,8 +708,10 @@
 				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AF74054618F7D93200B3C1DF /* Attachement.png in Resources */,
 				AFDA79AA1945869D0002873B /* mapShot.png in Resources */,
+				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
+				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
 				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
@@ -709,6 +735,7 @@
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
 				AFBDCCB5195AD0E300653C18 /* shot_video.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
+				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
 				AF74054718F7D93200B3C1DF /* Edit.png in Resources */,
 				26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */,
 				26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */,
@@ -747,10 +774,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
+				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
+				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
@@ -758,6 +787,7 @@
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
+				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,

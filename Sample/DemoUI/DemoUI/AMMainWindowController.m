@@ -247,8 +247,12 @@
     if ([openedPanels containsObject:UI_Panel_Key_Timer]) {
         [self loadTimerPanel];
     }
+    if ([openedPanels containsObject:UI_Panel_Key_OSCMessage]) {
+        [self loadOSCMessagePanel];
+
+    }
     
-    [self loadOSCMessagePanel];
+    
     
     for (NSString* openedPanel in openedPanels) {
         NSString *sideItemId=[openedPanel stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];

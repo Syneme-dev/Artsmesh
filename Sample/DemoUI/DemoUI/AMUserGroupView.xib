@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMUserGroupViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelViewController">
             <connections>
-                <outlet property="createGroupTextField" destination="eE2-gh-pZg" id="C5N-7P-0UI"/>
-                <outlet property="groupCellView" destination="R8J-WH-Y9f" id="8bZ-yk-E3p"/>
-                <outlet property="groupCellViewJoinBtn" destination="heI-OY-PRa" id="adR-MG-5hY"/>
-                <outlet property="outlineView" destination="vcz-fd-kzK" id="TCQ-26-2Vz"/>
-                <outlet property="userGroupOutline" destination="vcz-fd-kzK" id="yRF-tB-qQW"/>
+                <outlet property="outlineView" destination="vcz-fd-kzK" id="ukK-qa-dSJ"/>
                 <outlet property="view" destination="5d4-5O-feO" id="qB8-O0-9Hr"/>
             </connections>
         </customObject>
@@ -102,9 +98,6 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
-                    <connections>
-                        <action selector="createGroupByEnter:" target="-2" id="nlG-2z-vqw"/>
-                    </connections>
                 </textField>
             </subviews>
             <constraints>
@@ -121,52 +114,5 @@
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>
-        <customView identifier="leaveGroup" id="R8J-WH-Y9f">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="20"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heI-OY-PRa">
-                    <rect key="frame" x="125" y="0.0" width="25" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_exit" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="4ly-Px-BXj">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="unmerge:" target="-2" id="huC-0b-i1Z"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkV-vc-Sfv">
-                    <rect key="frame" x="100" y="0.0" width="25" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_broadcast" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="e2W-ct-DVr">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKd-a1-ri5">
-                    <rect key="frame" x="50" y="0.0" width="25" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_lock" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="8JZ-fW-Ayx">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klP-Ww-HJE">
-                    <rect key="frame" x="75" y="0.0" width="25" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_chat" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="mOK-HE-tui">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-            </subviews>
-        </customView>
     </objects>
-    <resources>
-        <image name="group_broadcast" width="10" height="10"/>
-        <image name="group_chat" width="10" height="10"/>
-        <image name="group_exit" width="10" height="10"/>
-        <image name="group_lock" width="10" height="10"/>
-    </resources>
 </document>

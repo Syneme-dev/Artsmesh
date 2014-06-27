@@ -13,6 +13,11 @@
 @property(nonatomic) NSString *groupId;
 @property(nonatomic) NSString *groupName;
 @property(nonatomic) NSArray *users;
+@property NSString* password;
+@property NSString* description;
+@property NSString* leaderId;
+@property NSString* leaderName;
+
 
 + (NSString*) createGroupId;
 

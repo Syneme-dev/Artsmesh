@@ -20,7 +20,6 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
 #import "AMSocialViewController.h"
-#import "AMUserGroupViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
 #import "AMChatViewController.h"
 #import "AMPingViewController.h"
@@ -35,6 +34,7 @@
 #import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMMesherStateMachine.h"
 #import "MZTimerLabel.h"
+#import "AMGroupPanelViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -77,7 +77,7 @@
 
 @implementation AMMainWindowController
 {
-    AMUserGroupViewController *_userGroupViewController;
+    AMGroupPanelViewController *_userGroupViewController;
     AMBox *_containerView;
     AMETCDPreferenceViewController *preferenceViewController;
     AMSocialViewController * socialViewController;
@@ -441,7 +441,7 @@
   
     NSSize panelSize = NSMakeSize(300.0f, 220.0f);
     panelView.minSizeConstraint = panelSize;
-    _userGroupViewController = [[AMUserGroupViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
+    _userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
      NSView *groupView = _userGroupViewController.view;
     [panelViewController.view addSubview:groupView];

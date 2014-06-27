@@ -16,6 +16,9 @@ extern NSString * const AMMergedGroupIdKey; // NSString *
 extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
 extern NSString * const AMMesherStateMachineKey; //AMMesherStateMachine
 extern NSString * const AMSystemConfigKey; //AMSystemConfig
+extern NSString * const AMGroupMessageKey;
+extern NSString * const AMMeshedGroupsKey;
+extern NSString * const AMLocaGroupKey;
 
 @interface AMAppObjects : NSObject
 

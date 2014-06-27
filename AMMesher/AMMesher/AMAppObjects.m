@@ -16,6 +16,9 @@ NSString * const AMMergedGroupIdKey = @"AMMergedGroupIdKey";
 NSString * const AMRemoteGroupsKey = @"AMRemoteGroupsKey";
 NSString * const AMMesherStateMachineKey = @"AMMesherStateMachineKey";
 NSString * const AMSystemConfigKey = @"AMSystemConfigKey";
+NSString * const AMGroupMessageKey = @"AMGroupMessageKey";
+NSString * const AMMeshedGroupsKey = @"AMMeshedGroupsKey";
+NSString * const AMLocaGroupKey = @"AMLocaGroupKey";
 
 static NSMutableDictionary *global_dict = nil;
 

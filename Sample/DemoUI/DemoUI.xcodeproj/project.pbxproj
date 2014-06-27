@@ -23,6 +23,14 @@
 		26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
+		26E89C8F195D6CD100F602A2 /* AMGroupOutlineGroupCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C84195D6CD100F602A2 /* AMGroupOutlineGroupCellView.m */; };
+		26E89C90195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C86195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m */; };
+		26E89C91195D6CD100F602A2 /* AMGroupOutlineGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E89C87195D6CD100F602A2 /* AMGroupOutlineGroupCellController.xib */; };
+		26E89C92195D6CD100F602A2 /* AMGroupOutlineUserCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C89195D6CD100F602A2 /* AMGroupOutlineUserCellView.m */; };
+		26E89C93195D6CD100F602A2 /* AMGroupOutlineUserCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C8B195D6CD100F602A2 /* AMGroupOutlineUserCellController.m */; };
+		26E89C94195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E89C8C195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib */; };
+		26E89C95195D6CD100F602A2 /* AMGroupOutlineRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */; };
+		26E89C98195D6D0100F602A2 /* AMGroupPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */; };
 		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
@@ -202,6 +210,20 @@
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
+		26E89C83195D6CD100F602A2 /* AMGroupOutlineGroupCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineGroupCellView.h; sourceTree = "<group>"; };
+		26E89C84195D6CD100F602A2 /* AMGroupOutlineGroupCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineGroupCellView.m; sourceTree = "<group>"; };
+		26E89C85195D6CD100F602A2 /* AMGroupOutlineGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineGroupCellController.h; sourceTree = "<group>"; };
+		26E89C86195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineGroupCellController.m; sourceTree = "<group>"; };
+		26E89C87195D6CD100F602A2 /* AMGroupOutlineGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineGroupCellController.xib; sourceTree = "<group>"; };
+		26E89C88195D6CD100F602A2 /* AMGroupOutlineUserCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineUserCellView.h; sourceTree = "<group>"; };
+		26E89C89195D6CD100F602A2 /* AMGroupOutlineUserCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineUserCellView.m; sourceTree = "<group>"; };
+		26E89C8A195D6CD100F602A2 /* AMGroupOutlineUserCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineUserCellController.h; sourceTree = "<group>"; };
+		26E89C8B195D6CD100F602A2 /* AMGroupOutlineUserCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineUserCellController.m; sourceTree = "<group>"; };
+		26E89C8C195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineUserCellController.xib; sourceTree = "<group>"; };
+		26E89C8D195D6CD100F602A2 /* AMGroupOutlineRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineRowView.h; sourceTree = "<group>"; };
+		26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineRowView.m; sourceTree = "<group>"; };
+		26E89C96195D6D0100F602A2 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
+		26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
 		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
 		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
 		26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
@@ -356,7 +378,6 @@
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
-				26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */,
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
@@ -436,6 +457,28 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		26E89C82195D6C8300F602A2 /* GroupPanel */ = {
+			isa = PBXGroup;
+			children = (
+				26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */,
+				26E89C83195D6CD100F602A2 /* AMGroupOutlineGroupCellView.h */,
+				26E89C84195D6CD100F602A2 /* AMGroupOutlineGroupCellView.m */,
+				26E89C85195D6CD100F602A2 /* AMGroupOutlineGroupCellController.h */,
+				26E89C86195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m */,
+				26E89C87195D6CD100F602A2 /* AMGroupOutlineGroupCellController.xib */,
+				26E89C88195D6CD100F602A2 /* AMGroupOutlineUserCellView.h */,
+				26E89C89195D6CD100F602A2 /* AMGroupOutlineUserCellView.m */,
+				26E89C8A195D6CD100F602A2 /* AMGroupOutlineUserCellController.h */,
+				26E89C8B195D6CD100F602A2 /* AMGroupOutlineUserCellController.m */,
+				26E89C8C195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib */,
+				26E89C8D195D6CD100F602A2 /* AMGroupOutlineRowView.h */,
+				26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */,
+				26E89C96195D6D0100F602A2 /* AMGroupPanelViewController.h */,
+				26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */,
+			);
+			name = GroupPanel;
+			sourceTree = "<group>";
+		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +533,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				26E89C82195D6C8300F602A2 /* GroupPanel */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
@@ -689,6 +733,7 @@
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				AFBDCCB2195AD0E300653C18 /* shot_musicScore.png in Resources */,
+				26E89C94195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AF74056A18F7D93200B3C1DF /* Users.png in Resources */,
 				AF9DC78718E96AEB0029DB97 /* ken.png in Resources */,
@@ -700,6 +745,7 @@
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
 				AF01080B1929DA84001415CC /* info.css in Resources */,
+				26E89C91195D6CD100F602A2 /* AMGroupOutlineGroupCellController.xib in Resources */,
 				AFBDCCB1195AD0E300653C18 /* shot_mixing.png in Resources */,
 				AFBDCCAF195AD0E300653C18 /* shot_audio.png in Resources */,
 				AFBDCCB4195AD0E300653C18 /* shot_timer.png in Resources */,
@@ -774,26 +820,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
+				26E89C98195D6D0100F602A2 /* AMGroupPanelViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
+				26E89C93195D6CD100F602A2 /* AMGroupOutlineUserCellController.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				26E89C8F195D6CD100F602A2 /* AMGroupOutlineGroupCellView.m in Sources */,
+				26E89C92195D6CD100F602A2 /* AMGroupOutlineUserCellView.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
+				26E89C90195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
+				26E89C95195D6CD100F602A2 /* AMGroupOutlineRowView.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
 				26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */,
 				AFBDCCA7195AB8F400653C18 /* MZTimerLabel.m in Sources */,

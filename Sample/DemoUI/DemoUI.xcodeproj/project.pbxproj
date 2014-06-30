@@ -31,7 +31,6 @@
 		26E89C94195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E89C8C195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib */; };
 		26E89C95195D6CD100F602A2 /* AMGroupOutlineRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */; };
 		26E89C98195D6D0100F602A2 /* AMGroupPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */; };
-		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
 		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
@@ -226,8 +225,6 @@
 		26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineRowView.m; sourceTree = "<group>"; };
 		26E89C96195D6D0100F602A2 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
 		26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
-		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
-		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
 		26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
 		26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,8 +396,6 @@
 		262021F518EAE58400811E4E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */,
-				26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */,
 				D41155E718E9539B00C84092 /* AMUserViewController.h */,
 				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
@@ -857,7 +852,6 @@
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				26E89C95195D6CD100F602A2 /* AMGroupOutlineRowView.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
-				26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */,
 				AFBDCCA7195AB8F400653C18 /* MZTimerLabel.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,

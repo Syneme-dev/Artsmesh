@@ -35,11 +35,9 @@
         // This is (presumably) the button holding the
         // outline triangle button.
         // We set our own images here.
-        NSImage* image =  [self.delegate headImageForRowView:self];
-        NSImage* alterImage = [self.delegate alterHeadImageForRowView:self];
-        if (image != nil && alterImage != nil) {
-            [(NSButton *)subview setImage:image];
-            [(NSButton *)subview setAlternateImage:alterImage];
+        if (self.headImage != nil && self.alterHeadImage != nil) {
+            [(NSButton *)subview setImage:self.headImage];
+            [(NSButton *)subview setAlternateImage:self.alterHeadImage];
         }
     }
 }

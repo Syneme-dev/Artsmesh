@@ -21,7 +21,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="eU6-sL-lmf"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAu-5t-46Y" customClass="AMFoundryFontView">
-                    <rect key="frame" x="1" y="21" width="105" height="17"/>
+                    <rect key="frame" x="1" y="11" width="105" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ely-DX-B2h">
                         <font key="font" metaFont="system" size="15"/>

@@ -7,17 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@protocol AMGroupOutlineRowViewDelegate;
 
 @interface AMGroupOutlineRowView : NSTableRowView
 
-@property id<AMGroupOutlineRowViewDelegate> delegate;
-
-@end
-
-@protocol AMGroupOutlineRowViewDelegate <NSObject>
-
--(NSImage*)headImageForRowView:(AMGroupOutlineRowView*)rowView;
--(NSImage*)alterHeadImageForRowView:(AMGroupOutlineRowView*)rowView;
+@property NSImage* headImage;
+@property NSImage* alterHeadImage;
 
 @end

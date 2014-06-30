@@ -14,7 +14,7 @@
 #import "AMGroupOutlineRowView.h"
 #import "AMGroupOutlineLabelCellController.h"
 
-@interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource, AMGroupOutlineRowViewDelegate>
+@interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @end
 
@@ -142,7 +142,6 @@
 }
 
 
-
 #pragma mark-
 #pragma outlineView DataSource
 
@@ -224,20 +223,26 @@
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
-    rowView.delegate = self;
+    
+    if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
+        
+        rowView.headImage = [NSImage imageNamed:@"group_online"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        
+    }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
+        
+        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
+        NSString* groupId  = groupController.group.groupId;
+        NSDictionary* meshedGroupDict = [AMAppObjects appObjects][AMMeshedGroupsKey];
+        if (meshedGroupDict[groupId] != nil) {
+            rowView.headImage = [NSImage imageNamed:@"group_online"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        }else{
+            rowView.headImage = [NSImage imageNamed:@"group_offline"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+        }
+    }
     
     return rowView;
 }
-
--(NSImage*)headImageForRowView:(AMGroupOutlineRowView *)rowView
-{
-    return [NSImage imageNamed:@"group_online"];
-}
-
--(NSImage*)alterHeadImageForRowView:(AMGroupOutlineRowView *)rowView
-{
-    return [NSImage imageNamed:@"group_online_expanded"];
-}
-
-
 @end

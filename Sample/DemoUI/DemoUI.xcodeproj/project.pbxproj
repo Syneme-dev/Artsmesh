@@ -126,6 +126,8 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
+		D4B6B8621960FE3100A613A5 /* AMGroupOutlineLabelCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B6B8601960FE3100A613A5 /* AMGroupOutlineLabelCellController.m */; };
+		D4B6B8631960FE3100A613A5 /* AMGroupOutlineLabelCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B6B8611960FE3100A613A5 /* AMGroupOutlineLabelCellController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +341,9 @@
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
+		D4B6B85F1960FE3100A613A5 /* AMGroupOutlineLabelCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineLabelCellController.h; sourceTree = "<group>"; };
+		D4B6B8601960FE3100A613A5 /* AMGroupOutlineLabelCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineLabelCellController.m; sourceTree = "<group>"; };
+		D4B6B8611960FE3100A613A5 /* AMGroupOutlineLabelCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineLabelCellController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +476,9 @@
 				26E89C8A195D6CD100F602A2 /* AMGroupOutlineUserCellController.h */,
 				26E89C8B195D6CD100F602A2 /* AMGroupOutlineUserCellController.m */,
 				26E89C8C195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib */,
+				D4B6B85F1960FE3100A613A5 /* AMGroupOutlineLabelCellController.h */,
+				D4B6B8601960FE3100A613A5 /* AMGroupOutlineLabelCellController.m */,
+				D4B6B8611960FE3100A613A5 /* AMGroupOutlineLabelCellController.xib */,
 				26E89C8D195D6CD100F602A2 /* AMGroupOutlineRowView.h */,
 				26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */,
 				26E89C96195D6D0100F602A2 /* AMGroupPanelViewController.h */,
@@ -759,6 +767,7 @@
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
 				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
+				D4B6B8631960FE3100A613A5 /* AMGroupOutlineLabelCellController.xib in Resources */,
 				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AFC77F901900CBFB003543CF /* web.css in Resources */,
@@ -837,6 +846,7 @@
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
+				D4B6B8621960FE3100A613A5 /* AMGroupOutlineLabelCellController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,

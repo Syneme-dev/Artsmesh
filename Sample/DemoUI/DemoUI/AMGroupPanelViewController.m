@@ -12,6 +12,7 @@
 #import "AMGroupOutlineGroupCellController.h"
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineRowView.h"
+#import "AMGroupOutlineLabelCellController.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource, AMGroupOutlineRowViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -51,6 +52,9 @@
     
     [_userGroups addObject:localGroupController];
     
+    AMGroupOutlineLabelCellController* labelController = [[AMGroupOutlineLabelCellController alloc] initWithNibName:@"AMGroupOutlineLabelCellController" bundle:nil];
+    labelController.groupControllers = [[NSMutableArray alloc] init];
+    
     NSDictionary* remoteGroupDict = [AMAppObjects appObjects][AMRemoteGroupsKey];
     
     for (NSString* groupId in remoteGroupDict) {
@@ -68,8 +72,9 @@
             [remoteGroupController.userControllers addObject:localUserController];
         }
         
-        [_userGroups addObject:remoteGroupController];
+        [labelController.groupControllers addObject:remoteGroupController];
     }
+    [_userGroups addObject:labelController];
 }
 
 -(void)awakeFromNib
@@ -148,6 +153,9 @@
     }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
         AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
         return [groupController.userControllers count];
+    }else if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
+        AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
+        return [labelController.groupControllers count];
     }else{
         return 0;
     }
@@ -164,6 +172,9 @@
         if ([item isKindOfClass:[AMGroupOutlineGroupCellController class]]) {
             AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
             return [groupController.userControllers objectAtIndex:index];
+        }else if([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
+            AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
+            return [labelController.groupControllers objectAtIndex:index];
         }
     }else if ([_userGroups count] != 0){
         return _userGroups[index];
@@ -187,6 +198,12 @@
         [userController setTrackArea];
         
         return userController.view;
+        
+    }else if([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
+        AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
+        [labelController updateUI];
+        
+        return labelController.view;
     }
     
     return nil;

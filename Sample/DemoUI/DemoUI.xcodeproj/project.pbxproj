@@ -312,8 +312,8 @@
 		D41155E718E9539B00C84092 /* AMUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserViewController.h; sourceTree = "<group>"; };
 		D41155E818E9539B00C84092 /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserViewController.m; sourceTree = "<group>"; };
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
-		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
-		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
+		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldConst.h; path = ../HelloWorldConst.h; sourceTree = "<group>"; };
+		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserGroupModuleConst.h; path = ../UserGroupModuleConst.h; sourceTree = "<group>"; };
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
@@ -438,8 +438,6 @@
 			isa = PBXGroup;
 			children = (
 				CE7D80AE19502157001E6CF7 /* LocalServer */,
-				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
-				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -488,12 +486,14 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
+				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
+				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
+				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				AFAEBD811961060200B7FB51 /* ViewsExtend */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
-				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
-				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				37C23187187A8FFD00554AFD /* Images.xcassets */,
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 			);

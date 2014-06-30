@@ -11,7 +11,6 @@
 #import "AMRemoteMesher.h"
 #import "AMLocalMesher.h"
 #import "AMAppObjects.h"
-#import "AMGroup.h"
 #import "AMLeaderElecter.h"
 #import "AMMesherStateMachine.h"
 

@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
 
 @interface AMGroupOutlineUserCellController : NSViewController

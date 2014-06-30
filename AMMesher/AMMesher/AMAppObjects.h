@@ -47,4 +47,16 @@ extern NSString * const AMLocaGroupKey;
 
 @end
 
+@interface AMGroup : NSObject
+
+@property (nonatomic) NSString *groupId;
+@property (nonatomic) NSString *groupName;
+@property (nonatomic) NSString* password;
+@property (nonatomic) NSString* description;
+@property (nonatomic) NSString* leaderId;
+@property (nonatomic) NSString* leaderName;
+@property (nonatomic) NSArray *users;
+
+@end
+
 

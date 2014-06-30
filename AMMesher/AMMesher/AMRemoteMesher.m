@@ -13,7 +13,6 @@
 #import "AMUserRequest.h"
 #import "AMAppObjects.h"
 #import "AMMesher.h"
-#import "AMGroup.h"
 #import "AMMesherStateMachine.h"
 #import "AMSystemConfig.h"
 

@@ -123,7 +123,9 @@ static NSMutableDictionary *global_dict = nil;
     return tempUser;
 }
 
+@end
 
+@implementation AMGroup
 
 
 @end

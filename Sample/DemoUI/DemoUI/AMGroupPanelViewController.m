@@ -8,7 +8,6 @@
 
 #import "AMGroupPanelViewController.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMGroup.h"
 #import "AMGroupOutlineGroupCellController.h"
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineRowView.h"

@@ -7,7 +7,6 @@
 //
 
 #import "AMGroupOutlineGroupCellController.h"
-#import "AMMesher/AMGroup.h"
 #import "AMMesher/AMAppObjects.h"
 #import "AMGroupOutlineGroupCellView.h"
 #import "UIFramework/AMFoundryFontView.h"

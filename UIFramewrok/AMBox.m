@@ -168,14 +168,16 @@
     if (NSPointInRect(point, [boxItem enclosingRect]))
         return YES;
     
-    [boxItem removeFromSuperview];
-    if (self.style == AMBoxVertical) {
+   
+    if (![boxItem isDescendantOf:self] && self.style == AMBoxVertical) {
         CGFloat freeSpace = self.frame.size.height - self.paddingBottom -
             self.paddingTop - self.gapBetweenItems - [self minContentHeight];
         if (freeSpace < boxItem.minSizeConstraint.height)
             return NO;
     }
     
+    
+    [boxItem removeFromSuperview];
     AMBoxItem *belowItem = [self boxItemBelowPoint:point];
     if (belowItem)
         [self addSubview:boxItem positioned:NSWindowAbove relativeTo:belowItem];

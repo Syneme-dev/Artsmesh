@@ -226,10 +226,7 @@
         [self loadUserPanel];
     }
     
-    if ([openedPanels containsObject:UI_Panel_Key_Map]) {
-        [self loadMapPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
+       if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
         [self loadVisualPanel];
     }
     if ([openedPanels containsObject:UI_Panel_Key_Mixing]) {
@@ -269,6 +266,10 @@
         [self loadOSCMessagePanel];
 
     }
+    if ([openedPanels containsObject:UI_Panel_Key_Map]) {
+        [self loadMapPanel];
+    }
+
     
     
     

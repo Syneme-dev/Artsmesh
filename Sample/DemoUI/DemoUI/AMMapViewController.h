@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import <WebKit/WebKit.h>
+#import <WebKit/WebFrameLoadDelegate.h>
+
 @interface AMMapViewController : NSViewController
+@property (strong) IBOutlet WebView *webView;
 
 @end

@@ -10,8 +10,6 @@
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
 		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
 		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
-		267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA5731936EF0D001FDA74 /* AMUserRequest.h */; };
-		267FA5761936EF0D001FDA74 /* AMUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA5741936EF0D001FDA74 /* AMUserRequest.m */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
@@ -39,6 +37,10 @@
 		CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */; };
 		CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF8D325194D5D2400159B71 /* AMAppObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8D326194D5D2400159B71 /* AMAppObjects.m */; };
+		D41D9778196148ED007CAD46 /* AMHttpSyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D41D9776196148ED007CAD46 /* AMHttpSyncRequest.h */; };
+		D41D9779196148ED007CAD46 /* AMHttpSyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */; };
+		D41D977C1961490D007CAD46 /* AMHttpAsyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */; };
+		D41D977D1961490D007CAD46 /* AMHttpAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D977B1961490D007CAD46 /* AMHttpAsyncRequest.m */; };
 		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,8 +61,6 @@
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
 		267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
-		267FA5731936EF0D001FDA74 /* AMUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserRequest.h; sourceTree = "<group>"; };
-		267FA5741936EF0D001FDA74 /* AMUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserRequest.m; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +97,10 @@
 		CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHeartBeat.m; sourceTree = "<group>"; };
 		CEF8D325194D5D2400159B71 /* AMAppObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAppObjects.h; sourceTree = "<group>"; };
 		CEF8D326194D5D2400159B71 /* AMAppObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAppObjects.m; sourceTree = "<group>"; };
+		D41D9776196148ED007CAD46 /* AMHttpSyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpSyncRequest.h; sourceTree = "<group>"; };
+		D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpSyncRequest.m; sourceTree = "<group>"; };
+		D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpAsyncRequest.h; sourceTree = "<group>"; };
+		D41D977B1961490D007CAD46 /* AMHttpAsyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpAsyncRequest.m; sourceTree = "<group>"; };
 		D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,8 +192,10 @@
 				26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */,
 				CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */,
 				CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */,
-				267FA5731936EF0D001FDA74 /* AMUserRequest.h */,
-				267FA5741936EF0D001FDA74 /* AMUserRequest.m */,
+				D41D9776196148ED007CAD46 /* AMHttpSyncRequest.h */,
+				D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */,
+				D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */,
+				D41D977B1961490D007CAD46 /* AMHttpAsyncRequest.m */,
 				267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */,
 				267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */,
 				2692CD5C18D7C2A2006501C4 /* Supporting Files */,
@@ -241,10 +247,11 @@
 				26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */,
 				CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */,
 				26B93CBA1951686E0012F1FA /* AMMesherStateMachine.h in Headers */,
+				D41D977C1961490D007CAD46 /* AMHttpAsyncRequest.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */,
+				D41D9778196148ED007CAD46 /* AMHttpSyncRequest.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
-				267FA5751936EF0D001FDA74 /* AMUserRequest.h in Headers */,
 				26AE4373194E89C500117629 /* AMLocalMesher.h in Headers */,
 				267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */,
 			);
@@ -344,14 +351,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41D9779196148ED007CAD46 /* AMHttpSyncRequest.m in Sources */,
 				267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */,
+				D41D977D1961490D007CAD46 /* AMHttpAsyncRequest.m in Sources */,
 				26B93CBB1951686E0012F1FA /* AMMesherStateMachine.m in Sources */,
 				CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */,
 				26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */,
 				26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */,
 				26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */,
 				26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */,
-				267FA5761936EF0D001FDA74 /* AMUserRequest.m in Sources */,
 				CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

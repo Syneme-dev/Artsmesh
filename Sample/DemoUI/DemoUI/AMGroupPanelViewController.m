@@ -34,7 +34,7 @@
 -(void)createControllerFromData
 {
     _userGroups = [[NSMutableArray alloc] init];
-    AMGroup* localGroup = [AMAppObjects appObjects][AMLocaGroupKey];
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     
     AMGroupOutlineGroupCellController* localGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
     localGroupController.group = localGroup;
@@ -100,9 +100,8 @@
     
     localGroup.users = users;
     localGroup.leaderId = user1.userid;
-    localGroup.leaderName = user1.nickName;
     
-    [AMAppObjects appObjects][AMLocaGroupKey] = localGroup;
+    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
     
     
     AMGroup* remoteGroup1 = [[AMGroup alloc] init];
@@ -127,7 +126,6 @@
     
     remoteGroup1.users = remoteUsers1;
     remoteGroup1.leaderId = user4.userid;
-    remoteGroup1.leaderName = user4.nickName;
     
     NSMutableDictionary* remoteGroups = [[NSMutableDictionary alloc] init];
     [remoteGroups setObject:remoteGroup1 forKey:remoteGroup1.groupId];
@@ -231,9 +229,7 @@
     }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
         
         AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-        NSString* groupId  = groupController.group.groupId;
-        NSDictionary* meshedGroupDict = [AMAppObjects appObjects][AMMeshedGroupsKey];
-        if (meshedGroupDict[groupId] != nil) {
+        if ([groupController.group isMeshed]) {
             rowView.headImage = [NSImage imageNamed:@"group_online"];
             rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
         }else{

@@ -16,6 +16,6 @@
 -(void)mergeGroup:(NSString*)superGroupId;
 -(void)unmergeGroup;
 
--(void)updateMyselfInfo;
+-(void)updateMyself;
 
 @end

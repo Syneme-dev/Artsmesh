@@ -38,8 +38,7 @@
         [cellView.lockBtn setHidden:NO];
     }
     
-    NSDictionary* groupMsgDict = [AMAppObjects appObjects][AMGroupMessageKey];
-    if ([groupMsgDict[self.group.groupId] count] == 0) {
+    if ([[self.group messages] count] == 0) {
         [cellView.messageBtn setHidden:YES];
     }else{
         [cellView.messageBtn setHidden:NO];
@@ -87,7 +86,7 @@
     
     NSString* mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
     
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocaGroupKey];
+    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     if ([myGroup.groupId isEqualToString:self.group.groupId ]){
         [cellView.mergeBtn setHidden:YES];
         [cellView.leaveBtn setHidden:YES];

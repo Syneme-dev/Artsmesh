@@ -12,7 +12,7 @@
 
 @interface AMLocalMesher : NSObject
 
--(void)changeGroupName:(NSString*)newGroupName;
--(void)updateMyselfInfo;
+-(void)updateMyself;
+-(void)changeGroupPassword:(NSString*)newPassword password:(NSString*)oldPassword;
 
 @end

@@ -93,17 +93,15 @@
    }
     
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-    NSAssert(mySelf, @"myself can not be nil");
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     
-    NSDictionary* myLocalUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
     NSMutableArray* joinedUsers = [[NSMutableArray alloc] init];
     
     if (mySelf.isOnline == NO) {
         [_remotePeerSet removeAllObjects];
         
-        for (NSString* userKey in myLocalUsers) {
-            AMUser* user = [myLocalUsers objectForKey:userKey];
+        for (AMUser* user in myGroup.users) {
             if (nil == [_localPeerSet objectForKey:user.userid]) {
                 [joinedUsers addObject:user];
                 [_localPeerSet setObject:user forKey:user.userid];
@@ -128,8 +126,15 @@
         [_remotePeerSet removeAllObjects];
         
         for (AMUser* newUser in newUserlist) {
-            if(nil == [myLocalUsers objectForKey:newUser.userid]) {
-                [_remotePeerSet setObject:newUser forKey:newUser.userid];
+            BOOL bFind = NO;
+            for (AMUser* user in myGroup.users) {
+                if ([user.userid isEqualToString:newUser.userid]) {
+                    bFind = YES;
+                }
+            }
+        
+            if (!bFind) {
+                 [_remotePeerSet setObject:newUser forKey:newUser.userid];
             }else{
                 [_localPeerSet setObject:newUser forKey:newUser.userid];
             }

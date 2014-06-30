@@ -1,16 +1,16 @@
 //
-//  AMUserRequest.m
+//  AMHttpAsyncRequest.m
 //  AMMesher
 //
-//  Created by Wei Wang on 5/29/14.
+//  Created by 王 为 on 6/30/14.
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMUserRequest.h"
+#import "AMHttpAsyncRequest.h"
 
-NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
+NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
 
-@implementation AMUserRequest
+@implementation AMHttpAsyncRequest
 
 -(id)init{
     if (self  = [super init]){
@@ -22,15 +22,14 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
 
 -(void)main{
     if (self.isCancelled) {
-        if ([self.delegate respondsToSelector:@selector(userRequestDidCancel)])
-            [self.delegate userRequestDidCancel];
+        if (self.requestCallback) {
+            self.requestCallback(nil, nil, YES);
+        }
         return;
     }
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
-    NSString* strBaseURL = [self.delegate httpBaseURL];
-    NSString* strURL= [[NSString alloc] initWithFormat:@"%@%@", strBaseURL, self.requestPath];
+    NSString* strURL= [[NSString alloc] initWithFormat:@"%@%@", self.baseURL, self.requestPath];
     
     [request setURL:[NSURL URLWithString:strURL]];
     [request setHTTPMethod:self.httpMethod];
@@ -47,33 +46,17 @@ NSString * const AMUserRequestDomain = @"AMUserRequestDomain";
         [request setHTTPBody: bodyData];
     }
     
+    NSError* error = nil;
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request
-                                               returningResponse:nil error:nil];
-
+                                               returningResponse:nil
+                                                           error:&error];
+    
     if (self.isCancelled) {
-        if ([self.delegate respondsToSelector:@selector(userRequestDidCancel)])
-            [self.delegate userRequestDidCancel];
-        return;
-    }
-    
-    if (returnData == nil) {
-        if ([self.delegate respondsToSelector:@selector(userrequest:didFailWithError:)]) {
-            
-            NSError *error = [NSError errorWithDomain:AMUserRequestDomain
-                                                 code:AMUserRequestFalied
-                                             userInfo:nil];
-        
-            [self.delegate userrequest:self didFailWithError:error];
+        if (self.requestCallback) {
+            self.requestCallback(returnData, error, YES);
         }
-        
-        return;
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(userrequest:didReceiveData:)]) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate userrequest:self didReceiveData:returnData];
-        });
+    }else{
+        self.requestCallback(returnData, error, NO);
     }
     
     return;

@@ -7,18 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+extern NSString * const AMLocalGroupKey; //My local group, AMGroup*
+extern NSString * const AMMyselfKey;//Myself, AMUser*
+extern NSString * const AMMergedGroupIdKey;//My merged group id, NSString
+extern NSString * const AMRemoteGroupsKey;//All groups on AM, NSDictionary
 
-extern NSString * const AMClusterNameKey;   // NSString *
-extern NSString * const AMClusterIdKey;     // NSString *
-extern NSString * const AMLocalUsersKey;    // NSDictionary *
-extern NSString * const AMMyselfKey;        // AMUser *
-extern NSString * const AMMergedGroupIdKey; // NSString *
-extern NSString * const AMRemoteGroupsKey;  // NSDictionary *
-extern NSString * const AMMesherStateMachineKey; //AMMesherStateMachine
-extern NSString * const AMSystemConfigKey; //AMSystemConfig
-extern NSString * const AMGroupMessageKey;
-extern NSString * const AMMeshedGroupsKey;
-extern NSString * const AMLocaGroupKey;
+extern NSString * const AMMesherStateMachineKey;//mesher state, internal use, AMMesherStateMachine*
+extern NSString * const AMSystemConfigKey;//AMSytemConfig*
 
 @interface AMAppObjects : NSObject
 
@@ -29,34 +24,55 @@ extern NSString * const AMLocaGroupKey;
 
 @interface AMUser : NSObject
 
-@property NSString* userid;
-@property NSString* nickName;
-@property NSString* domain;
-@property NSString* location;
-@property NSString* description;
-@property NSString* privateIp;
-@property NSString* publicIp;
-@property NSString* localLeader;
-@property BOOL      isOnline;
-@property NSString* chatPort;
-@property NSString* publicChatPort;
+//serialize properties
+@property (nonatomic) NSString* userid;
+@property (nonatomic) NSString* nickName;
+@property (nonatomic) NSString* domain;
+@property (nonatomic) NSString* location;
+@property (nonatomic) NSString* description;
+@property (nonatomic) NSString* privateIp;
+@property (nonatomic) NSString* publicIp;
+@property (nonatomic) BOOL      isLeader;
+@property (nonatomic) BOOL      isOnline;
+@property (nonatomic) NSString* chatPort;
+@property (nonatomic) NSString* publicChatPort;
 
 -(NSMutableDictionary*)toDict;
-
 +(id)AMUserFromDict:(NSDictionary*)dict;
 
 @end
 
 @interface AMGroup : NSObject
 
-@property (nonatomic) NSString *groupId;
-@property (nonatomic) NSString *groupName;
-@property (nonatomic) NSString* password;
+//serialize properties
+@property (nonatomic) NSString* groupId;
+@property (nonatomic) NSString* groupName;
 @property (nonatomic) NSString* description;
 @property (nonatomic) NSString* leaderId;
-@property (nonatomic) NSString* leaderName;
-@property (nonatomic) NSArray *users;
+
+-(NSMutableDictionary*)dictWithoutUsers;
++(id)AMGroupFromDict:(NSDictionary*)dict;
+
+//non serialize properties
+@property (nonatomic) NSString* password;
+@property (nonatomic) NSArray* users;
+@property (nonatomic) NSArray* messages;
+
+-(BOOL)isMeshed;
+-(AMUser*)leader;
 
 @end
+
+@interface AMGroupMessage : NSObject
+
+@property NSString* fromUserId;
+@property NSString* fromGroupId;
+@property NSString* fromGroupName;
+@property NSString* fromUserNickName;
+@property NSString* messages;
+@property NSString* time;
+
+@end
+
 
 

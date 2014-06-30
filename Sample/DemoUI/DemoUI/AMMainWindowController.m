@@ -105,6 +105,22 @@
     return self;
 }
 
+- (void)windowDidResize:(NSNotification *)notification
+{
+    CGFloat height = 0;
+    for (AMBox *box in _containerView.subviews) {
+        height = MAX(height, [box minContentHeight] + box.paddingTop + box.paddingBottom);
+    }
+    height += _containerView.paddingTop + _containerView.paddingBottom;
+    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    height = MAX(height, scrollView.frame.size.height);
+    _containerView.frame = NSMakeRect(0, 0, 0, height);
+    for (AMBox *box in _containerView.subviews) {
+        [box setFrameSize:NSMakeSize(box.frame.size.width, height)];
+        [box doBoxLayout];
+    }
+    [_containerView doBoxLayout];
+}
 
 - (void)windowDidLoad
 {
@@ -202,6 +218,7 @@
          return newBox;
      };
     [scrollView setDocumentView:_containerView];
+    
     [self loadVersion];
     NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
    

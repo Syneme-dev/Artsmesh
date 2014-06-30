@@ -36,5 +36,6 @@ typedef NS_ENUM(NSUInteger, AMBoxStyle) {
 - (BOOL)dropBoxItem:(AMBoxItem *)boxItem atLocation:(NSPoint)point;
 - (void)didRemoveBoxItem:(AMBoxItem *)boxItem;
 - (AMBoxItem *)boxItemBelowPoint:(NSPoint)point;
+- (CGFloat)minContentHeight;
 
 @end

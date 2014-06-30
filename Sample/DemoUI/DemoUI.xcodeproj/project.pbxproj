@@ -15,11 +15,6 @@
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
 		26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */; };
-		26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBA1900D01A0083742E /* GroupMessage.png */; };
-		26D2FFBF1900D01A0083742E /* meshButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBB1900D01A0083742E /* meshButton.png */; };
-		26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFBC1900D01A0083742E /* QuitGroup.png */; };
-		26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC21900D44D0083742E /* JoinGroup.png */; };
-		26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D2FFC41900D6EF0083742E /* CreateGroup.png */; };
 		26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
@@ -82,12 +77,16 @@
 		AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E348190CA81A0083487C /* KievitSlabOT.otf */; };
 		AF86600919401C83008DB7CA /* AMTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86600819401C83008DB7CA /* AMTestView.xib */; };
 		AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86600B19401F4D008DB7CA /* AMTestViewController.m */; };
-		AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */; };
 		AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8CE2B418F6848D003BB9D1 /* profile.png */; };
 		AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
 		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
 		AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78018E963B40029DB97 /* AMPanelView.xib */; };
-		AF9DC78718E96AEB0029DB97 /* ken.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78618E96AEB0029DB97 /* ken.png */; };
+		AFAEBD741961025400B7FB51 /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD731961025400B7FB51 /* CreateGroup.png */; };
+		AFAEBD761961026C00B7FB51 /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD751961026C00B7FB51 /* JoinGroup.png */; };
+		AFAEBD781961028E00B7FB51 /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD771961028E00B7FB51 /* GroupMessage.png */; };
+		AFAEBD7A1961029A00B7FB51 /* OnlineDot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD791961029A00B7FB51 /* OnlineDot.png */; };
+		AFAEBD7C196102A700B7FB51 /* QuitGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD7B196102A700B7FB51 /* QuitGroup.png */; };
+		AFAEBD7E196102CF00B7FB51 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD7D196102CF00B7FB51 /* logo.png */; };
 		AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB95D4718FFB61E00853263 /* AMMainWindowController.m */; };
 		AFBDCCA7195AB8F400653C18 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBDCCA6195AB8F400653C18 /* MZTimerLabel.m */; };
 		AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */; };
@@ -191,11 +190,6 @@
 		26B4D071191A256200F55CD3 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableCellView.h; sourceTree = "<group>"; };
 		26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableCellView.m; sourceTree = "<group>"; };
-		26D2FFBA1900D01A0083742E /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GroupMessage.png; path = Resource/GroupMessage.png; sourceTree = "<group>"; };
-		26D2FFBB1900D01A0083742E /* meshButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meshButton.png; path = Resource/meshButton.png; sourceTree = "<group>"; };
-		26D2FFBC1900D01A0083742E /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QuitGroup.png; path = Resource/QuitGroup.png; sourceTree = "<group>"; };
-		26D2FFC21900D44D0083742E /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JoinGroup.png; path = Resource/JoinGroup.png; sourceTree = "<group>"; };
-		26D2FFC41900D6EF0083742E /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CreateGroup.png; path = Resource/CreateGroup.png; sourceTree = "<group>"; };
 		26D6580E19594D0200CD3C22 /* AMUserGroupTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableRowView.h; sourceTree = "<group>"; };
 		26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableRowView.m; sourceTree = "<group>"; };
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
@@ -224,7 +218,7 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
-		AF01080A1929DA84001415CC /* info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = info.css; path = Resource/info.css; sourceTree = "<group>"; };
+		AF01080A1929DA84001415CC /* info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = info.css; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
 		AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMouseOverButtonView.m; sourceTree = "<group>"; };
@@ -253,7 +247,7 @@
 		AF74054418F7D93200B3C1DF /* Trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Trash.png; path = Resource/Trash.png; sourceTree = "<group>"; };
 		AF74054518F7D93200B3C1DF /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Users.png; path = Resource/Users.png; sourceTree = "<group>"; };
 		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Artsmesh2Logo.icns; path = Resource/Artsmesh2Logo.icns; sourceTree = "<group>"; };
+		AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Artsmesh2Logo.icns; sourceTree = "<group>"; };
 		AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Bold.otf"; sourceTree = "<group>"; };
 		AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Light.otf"; sourceTree = "<group>"; };
 		AF82E342190CA81A0083487C /* FoundryMonoline-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Medium.otf"; sourceTree = "<group>"; };
@@ -266,13 +260,17 @@
 		AF86600819401C83008DB7CA /* AMTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTestView.xib; sourceTree = "<group>"; };
 		AF86600A19401F4D008DB7CA /* AMTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTestViewController.h; sourceTree = "<group>"; };
 		AF86600B19401F4D008DB7CA /* AMTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTestViewController.m; sourceTree = "<group>"; };
-		AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OnlineDot.png; path = Resource/OnlineDot.png; sourceTree = "<group>"; };
 		AF8CE2B418F6848D003BB9D1 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = Resource/profile.png; sourceTree = "<group>"; };
 		AF9205411910B42D0051BE63 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserView.xib; sourceTree = "<group>"; };
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
 		AF9DC78018E963B40029DB97 /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
-		AF9DC78618E96AEB0029DB97 /* ken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ken.png; sourceTree = "<group>"; };
+		AFAEBD731961025400B7FB51 /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CreateGroup.png; sourceTree = "<group>"; };
+		AFAEBD751961026C00B7FB51 /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JoinGroup.png; sourceTree = "<group>"; };
+		AFAEBD771961028E00B7FB51 /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroupMessage.png; sourceTree = "<group>"; };
+		AFAEBD791961029A00B7FB51 /* OnlineDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OnlineDot.png; sourceTree = "<group>"; };
+		AFAEBD7B196102A700B7FB51 /* QuitGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QuitGroup.png; sourceTree = "<group>"; };
+		AFAEBD7D196102CF00B7FB51 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		AFB95D4618FFB61E00853263 /* AMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMainWindowController.h; sourceTree = "<group>"; };
 		AFB95D4718FFB61E00853263 /* AMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainWindowController.m; sourceTree = "<group>"; };
 		AFBDCCA5195AB8F400653C18 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZTimerLabel.h; path = MZTimerLabel/MZTimerLabel.h; sourceTree = "<group>"; };
@@ -283,7 +281,7 @@
 		AFC77F8A1900C80A003543CF /* AMSocialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSocialView.xib; sourceTree = "<group>"; };
 		AFC77F8C1900C91A003543CF /* AMSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSocialViewController.h; sourceTree = "<group>"; };
 		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
-		AFC77F8F1900CBFB003543CF /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = web.css; path = Resource/web.css; sourceTree = "<group>"; };
+		AFC77F8F1900CBFB003543CF /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = web.css; sourceTree = "<group>"; };
 		AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicScoreViewController.h; sourceTree = "<group>"; };
 		AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicScoreViewController.m; sourceTree = "<group>"; };
 		AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMusicScoreViewController.xib; sourceTree = "<group>"; };
@@ -502,10 +500,8 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AF01080A1929DA84001415CC /* info.css */,
-				AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */,
-				AFC77F8F1900CBFB003543CF /* web.css */,
-				AF8CE2B618F6870A003BB9D1 /* Resource */,
+				AFAEBD801961038F00B7FB51 /* Resource */,
+				AF8CE2B618F6870A003BB9D1 /* Resource2 */,
 				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
 				37C2317B187A8FFD00554AFD /* main.m */,
@@ -546,25 +542,14 @@
 				AF82E347190CA81A0083487C /* KievitSlabOT-Thin.otf */,
 				AF82E348190CA81A0083487C /* KievitSlabOT.otf */,
 			);
-			name = font;
-			path = Resource/font;
+			path = font;
 			sourceTree = "<group>";
 		};
-		AF8CE2B618F6870A003BB9D1 /* Resource */ = {
+		AF8CE2B618F6870A003BB9D1 /* Resource2 */ = {
 			isa = PBXGroup;
 			children = (
-				AFDA79A7194586660002873B /* panelshot */,
-				AF9205401910B2F10051BE63 /* statusnetIcon */,
-				AF82E33F190CA7FC0083487C /* font */,
-				26D2FFC41900D6EF0083742E /* CreateGroup.png */,
-				26D2FFC21900D44D0083742E /* JoinGroup.png */,
-				26D2FFBA1900D01A0083742E /* GroupMessage.png */,
-				26D2FFBB1900D01A0083742E /* meshButton.png */,
-				26D2FFBC1900D01A0083742E /* QuitGroup.png */,
-				AF9DC78618E96AEB0029DB97 /* ken.png */,
-				AF8CE2B218F6838F003BB9D1 /* OnlineDot.png */,
 			);
-			name = Resource;
+			name = Resource2;
 			sourceTree = "<group>";
 		};
 		AF9205401910B2F10051BE63 /* statusnetIcon */ = {
@@ -586,6 +571,26 @@
 				AF8CE2B418F6848D003BB9D1 /* profile.png */,
 			);
 			name = statusnetIcon;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AFAEBD801961038F00B7FB51 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				AF9205401910B2F10051BE63 /* statusnetIcon */,
+				AF82E33F190CA7FC0083487C /* font */,
+				AFDA79A7194586660002873B /* panelshot */,
+				AFAEBD7D196102CF00B7FB51 /* logo.png */,
+				AFAEBD7B196102A700B7FB51 /* QuitGroup.png */,
+				AFAEBD791961029A00B7FB51 /* OnlineDot.png */,
+				AFAEBD771961028E00B7FB51 /* GroupMessage.png */,
+				AFAEBD751961026C00B7FB51 /* JoinGroup.png */,
+				AFAEBD731961025400B7FB51 /* CreateGroup.png */,
+				AF01080A1929DA84001415CC /* info.css */,
+				AF7DF6E11904C0F600554E6F /* Artsmesh2Logo.icns */,
+				AFC77F8F1900CBFB003543CF /* web.css */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		AFDA79A7194586660002873B /* panelshot */ = {
@@ -599,8 +604,7 @@
 				AFD75757195D048E0057976D /* shot_timer.png */,
 				AFD75758195D048E0057976D /* shot_video.png */,
 			);
-			name = panelshot;
-			path = Resource/panelshot;
+			path = panelshot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -689,18 +693,21 @@
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AF74056A18F7D93200B3C1DF /* Users.png in Resources */,
-				AF9DC78718E96AEB0029DB97 /* ken.png in Resources */,
+				AFAEBD7E196102CF00B7FB51 /* logo.png in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AF74056318F7D93200B3C1DF /* Reply.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
+				AFAEBD781961028E00B7FB51 /* GroupMessage.png in Resources */,
 				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
+				AFAEBD741961025400B7FB51 /* CreateGroup.png in Resources */,
 				AF74056218F7D93200B3C1DF /* RepliesPost.png in Resources */,
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AF01080B1929DA84001415CC /* info.css in Resources */,
+				AFAEBD7C196102A700B7FB51 /* QuitGroup.png in Resources */,
 				AF74054818F7D93200B3C1DF /* Favorite.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,
@@ -709,7 +716,9 @@
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AF7DF6E21904C0F600554E6F /* Artsmesh2Logo.icns in Resources */,
+				AFAEBD761961026C00B7FB51 /* JoinGroup.png in Resources */,
 				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
+				AFAEBD7A1961029A00B7FB51 /* OnlineDot.png in Resources */,
 				AF74056018F7D93200B3C1DF /* PublicTimeline.png in Resources */,
 				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
@@ -717,25 +726,19 @@
 				AFD7575B195D048E0057976D /* shot_mixing.png in Resources */,
 				AF74056918F7D93200B3C1DF /* Trash.png in Resources */,
 				AF74054B18F7D93200B3C1DF /* Home.png in Resources */,
-				26D2FFBE1900D01A0083742E /* GroupMessage.png in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AF8CE2B518F6848D003BB9D1 /* profile.png in Resources */,
 				AF74056118F7D93200B3C1DF /* RecentTags.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
-				26D2FFC51900D6EF0083742E /* CreateGroup.png in Resources */,
 				26E1E6A119023496000BF14C /* AMChatView.xib in Resources */,
 				AF20064E1945861B008630C8 /* AMOSCRouteViewController.xib in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
-				26D2FFBF1900D01A0083742E /* meshButton.png in Resources */,
-				AF8CE2B318F6838F003BB9D1 /* OnlineDot.png in Resources */,
 				AF74054918F7D93200B3C1DF /* Favorites.png in Resources */,
 				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
 				AF74054718F7D93200B3C1DF /* Edit.png in Resources */,
-				26D2FFC01900D01A0083742E /* QuitGroup.png in Resources */,
-				26D2FFC31900D44D0083742E /* JoinGroup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

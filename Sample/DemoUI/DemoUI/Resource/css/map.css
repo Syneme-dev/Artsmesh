@@ -1,28 +1,22 @@
 
 #header{
-display:none;
+    display:none;
 }
 #footer{
-display:none;
-}
-
-#wrap,#core{
-width:100% !important;
+    display:none;
 }
 #content{
-//width:560px !important;
-}
 
+}
 #aside_primary{
-display:none;
+    display:none;
 }
 #site_nav_local_views{
-display:none;
+    display:none;
 }
 #aside_primary_wrapper,#core,#wrap{
-//width:600px !important;
+    width:100% !important;
 }
-
 #content h1{
-display:none;
+    display:none;
 }

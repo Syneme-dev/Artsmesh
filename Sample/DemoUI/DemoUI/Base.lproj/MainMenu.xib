@@ -649,7 +649,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -695,11 +695,29 @@
                         </subviews>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="JHd-2A-fFw" userLabel="logo" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="718" width="80" height="40"/>
+                        <rect key="frame" x="0.0" y="718" width="200" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
+                                <rect key="frame" x="10" y="12" width="80" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH" id="eNi-as-Uyj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf" customClass="AMFoundryFontView">
+                                <rect key="frame" x="94" y="12" width="120" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.0.0" id="DZC-sX-GBB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="as9-CM-p7p">
-                                <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="160" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="9bM-Lh-3Lo"/>
@@ -710,8 +728,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="as9-CM-p7p" secondAttribute="bottom" id="QaO-YV-fVV"/>
+                            <constraint firstAttribute="width" constant="200" id="aqD-LN-vUi"/>
                             <constraint firstAttribute="trailing" secondItem="as9-CM-p7p" secondAttribute="trailing" id="puZ-29-HGK"/>
-                            <constraint firstItem="as9-CM-p7p" firstAttribute="leading" secondItem="JHd-2A-fFw" secondAttribute="leading" constant="40" id="ws4-yy-aUj"/>
                             <constraint firstItem="as9-CM-p7p" firstAttribute="top" secondItem="JHd-2A-fFw" secondAttribute="top" id="zbS-O7-dAF"/>
                         </constraints>
                     </customView>
@@ -923,24 +941,6 @@
                         <rect key="frame" x="446" y="732" width="160" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00  :  00  :  00  SEC" id="hA5-yY-yxD">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
-                        <rect key="frame" x="96" y="732" width="80" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH" id="eNi-as-Uyj">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf" customClass="AMFoundryFontView">
-                        <rect key="frame" x="173" y="732" width="120" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0.0.0" id="DZC-sX-GBB">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

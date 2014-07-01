@@ -18,16 +18,18 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <webView translatesAutoresizingMaskIntoConstraints="NO" id="Guc-Yk-vYr">
-                    <rect key="frame" x="0.0" y="0.0" width="1101" height="573"/>
+                    <rect key="frame" x="0.0" y="40" width="1101" height="533"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                        <nil key="identifier"/>
+                    </webPreferences>
                 </webView>
             </subviews>
             <constraints>
                 <constraint firstItem="Guc-Yk-vYr" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="2Sv-4J-yOg"/>
                 <constraint firstItem="Guc-Yk-vYr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="9I4-TP-VG9"/>
                 <constraint firstAttribute="trailing" secondItem="Guc-Yk-vYr" secondAttribute="trailing" id="XFi-Ea-55h"/>
-                <constraint firstAttribute="bottom" secondItem="Guc-Yk-vYr" secondAttribute="bottom" id="clk-4u-Qa3"/>
+                <constraint firstAttribute="bottom" secondItem="Guc-Yk-vYr" secondAttribute="bottom" constant="40" id="clk-4u-Qa3"/>
             </constraints>
         </customView>
     </objects>

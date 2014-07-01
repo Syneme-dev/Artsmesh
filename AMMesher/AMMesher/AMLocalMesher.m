@@ -262,7 +262,10 @@
             });
             
         }else{
-            NSAssert(NO, @"register self on local server response wrong!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"register self failed, retry");
+                [self registerSelf];
+            });
         }
     };
     

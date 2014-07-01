@@ -9,6 +9,7 @@
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineUserCellView.h"
 #import "AMMesher/AMAppObjects.h"
+#import "AMGroupPanelModel.h"
 
 
 @interface AMGroupOutlineUserCellController ()
@@ -68,6 +69,14 @@
 -(void)dealloc
 {
     [self removeTrackAres];
+}
+
+
+- (IBAction)infoBtnClick:(id)sender
+{
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    model.selectedUser = self.user;
+    model.detailPanelState = DetailPanelUser;
 }
 
 #pragma mark-

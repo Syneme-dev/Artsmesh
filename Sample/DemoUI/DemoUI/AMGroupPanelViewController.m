@@ -16,6 +16,7 @@
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/BlueBackgroundView.h"
+#import "AMUserDetailsViewController.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -173,6 +174,11 @@
 
 -(void)hideDetailView
 {
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
+    
     NSRect rect = self.detailView.frame;
     NSRect scrollViewRect = self.outlineScrollView.frame;
     scrollViewRect.size.height += rect.size.height;
@@ -184,11 +190,9 @@
 
 -(void)showGroupDetails
 {
+    [self hideDetailView];
+    
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    if (_detailViewController) {
-        [_detailViewController.view removeFromSuperview];
-        _detailViewController = nil;
-    }
     
     _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
     [self.detailView addSubview:_detailViewController.view];
@@ -199,8 +203,9 @@
     
     NSRect rect = gdc.view.frame;
     NSRect scrollViewRect = self.outlineScrollView.frame;
+    
     rect.size.width = scrollViewRect.size.width;
-    scrollViewRect.size.height -= rect.size.height;
+    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
     rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
     
     [self.outlineScrollView setFrame:scrollViewRect];
@@ -211,7 +216,27 @@
 
 -(void)showUserDetails
 {
+    [self hideDetailView];
     
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    _detailViewController = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
+    [self.detailView addSubview:_detailViewController.view];
+    
+    AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;
+    udc.user = model.selectedUser;
+    [udc updateUI];
+    
+    NSRect rect = udc.view.frame;
+    NSRect scrollViewRect = self.outlineScrollView.frame;
+
+    rect.size.width = scrollViewRect.size.width;
+    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
+    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
+    
+    [self.outlineScrollView setFrame:scrollViewRect];
+    [self.detailView setFrame:rect];
+    
+    [self.view display];
 }
 
 
@@ -229,12 +254,16 @@
             DetailPanelState newState = [[change objectForKey:@"new"] intValue];
             DetailPanelState oldState = [[change objectForKey:@"old"] intValue];
             
-            if (oldState == DetailPanelHide && newState == DetailPanelGroup) {
+            if (newState == oldState) {
+                return;
+            }
+            
+            if (newState == DetailPanelGroup) {
                 [self showGroupDetails];
                 return;
             }
             
-            if (oldState == DetailPanelUser && newState == DetailPanelGroup) {
+            if (newState == DetailPanelUser) {
                 [self showUserDetails];
                 return;
             }

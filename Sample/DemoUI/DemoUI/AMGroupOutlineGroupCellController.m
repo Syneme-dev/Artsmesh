@@ -76,7 +76,8 @@
     [self removeTrackAres];
 }
 
-- (IBAction)infoBtnClick:(id)sender{
+- (IBAction)infoBtnClick:(id)sender
+{
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     model.selectedGroup = self.group;
     model.detailPanelState = DetailPanelGroup;

@@ -13,14 +13,20 @@
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineRowView.h"
 #import "AMGroupOutlineLabelCellController.h"
+#import "AMGroupPanelModel.h"
+#import "AMGroupDetailsViewController.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
+@property (weak) IBOutlet NSView *detailView;
+@property (weak) IBOutlet NSScrollView *outlineScrollView;
+
 @end
 
 @implementation AMGroupPanelViewController
 {
     NSMutableArray* _userGroups;
+    NSViewController* _detailViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -149,9 +155,86 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew context:nil];
+    
     [self reloadGroups];
     self.outlineView.delegate = self;
     self.outlineView.dataSource  = self;
+}
+
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[AMGroupPanelModel sharedGroupModel] removeObserver:self];
+}
+
+-(void)hideDetailView
+{
+    NSRect rect = self.detailView.frame;
+    rect.size.height = 0;
+    
+    [self.detailView setFrame:rect];
+}
+
+-(void)showGroupDetails
+{
+//    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+//    self.detailView. = model.selectedGroup
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
+    
+//    _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
+   
+    NSRect scrollViewRect = self.outlineScrollView.frame;
+    scrollViewRect.size.height -= 400;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.outlineScrollView setFrame:scrollViewRect];
+    });
+    
+    
+//    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
+//    rect.size.height = 400;
+    
+    
+    //[self.view addSubview:_detailViewController.view];
+    //[_detailViewController.view setFrame:rect];
+    
+    [self.view setNeedsDisplay:YES];
+}
+
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([object isKindOfClass:[AMGroupPanelModel class]]){
+        
+        if ([keyPath isEqualToString:@"detailPanelState"]){
+            
+            DetailPanelState state =  [[change objectForKey:@"new"] intValue];
+            switch (state) {
+                case DetailPanelHide:
+                    ;
+                    break;
+                case DetailPanelUser:
+                    ;
+                    break;
+                case DetailPanelGroup:
+                    [self showGroupDetails];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		260C809219628E0000D64E9D /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 260C809119628E0000D64E9D /* LocalServer */; };
+		260C80961962975400D64E9D /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C80941962975400D64E9D /* AMGroupDetailsViewController.m */; };
+		260C80971962975400D64E9D /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 260C80951962975400D64E9D /* AMGroupDetailsViewController.xib */; };
+		260C809A1962A54A00D64E9D /* AMGroupPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C80991962A54A00D64E9D /* AMGroupPanelModel.m */; };
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
@@ -190,6 +193,11 @@
 
 /* Begin PBXFileReference section */
 		260C809119628E0000D64E9D /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
+		260C80931962975400D64E9D /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
+		260C80941962975400D64E9D /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
+		260C80951962975400D64E9D /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
+		260C80981962A54A00D64E9D /* AMGroupPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelModel.h; sourceTree = "<group>"; };
+		260C80991962A54A00D64E9D /* AMGroupPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelModel.m; sourceTree = "<group>"; };
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
@@ -478,6 +486,11 @@
 				26E89C8E195D6CD100F602A2 /* AMGroupOutlineRowView.m */,
 				26E89C96195D6D0100F602A2 /* AMGroupPanelViewController.h */,
 				26E89C97195D6D0100F602A2 /* AMGroupPanelViewController.m */,
+				260C80931962975400D64E9D /* AMGroupDetailsViewController.h */,
+				260C80941962975400D64E9D /* AMGroupDetailsViewController.m */,
+				260C80951962975400D64E9D /* AMGroupDetailsViewController.xib */,
+				260C80981962A54A00D64E9D /* AMGroupPanelModel.h */,
+				260C80991962A54A00D64E9D /* AMGroupPanelModel.m */,
 			);
 			name = GroupPanel;
 			sourceTree = "<group>";
@@ -783,6 +796,7 @@
 				AF74054918F7D93200B3C1DF /* Favorites.png in Resources */,
 				AF74056418F7D93200B3C1DF /* ShareLocation.png in Resources */,
 				AF74054C18F7D93200B3C1DF /* IncomingTopic.png in Resources */,
+				260C80971962975400D64E9D /* AMGroupDetailsViewController.xib in Resources */,
 				AFBDCCB5195AD0E300653C18 /* shot_video.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
@@ -841,6 +855,7 @@
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
+				260C809A1962A54A00D64E9D /* AMGroupPanelModel.m in Sources */,
 				D4B6B8621960FE3100A613A5 /* AMGroupOutlineLabelCellController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
@@ -848,6 +863,7 @@
 				26E89C90195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
+				260C80961962975400D64E9D /* AMGroupDetailsViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				26E89C95195D6CD100F602A2 /* AMGroupOutlineRowView.m in Sources */,

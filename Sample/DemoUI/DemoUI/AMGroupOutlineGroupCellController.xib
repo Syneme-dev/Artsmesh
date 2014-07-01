@@ -49,6 +49,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="infoBtnClick:" target="-2" id="Qhn-xO-LKW"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M05-DM-bnQ">
                             <rect key="frame" x="60" y="1" width="20" height="20"/>

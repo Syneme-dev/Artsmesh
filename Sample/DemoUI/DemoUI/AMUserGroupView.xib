@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelViewController">
             <connections>
+                <outlet property="detailView" destination="tNQ-iM-Ykd" id="SuH-WM-heA"/>
+                <outlet property="outlineScrollView" destination="8EI-Ko-tQv" id="KIG-RU-jab"/>
                 <outlet property="outlineView" destination="vcz-fd-kzK" id="ukK-qa-dSJ"/>
                 <outlet property="view" destination="5d4-5O-feO" id="qB8-O0-9Hr"/>
             </connections>
@@ -23,15 +25,15 @@
                         <constraint firstAttribute="height" constant="1" id="iqW-yh-bix"/>
                     </constraints>
                 </customView>
-                <scrollView focusRingType="none" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
-                    <rect key="frame" x="0.0" y="25" width="312" height="312"/>
+                <scrollView focusRingType="none" ambiguous="YES" misplaced="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
+                    <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
-                        <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
+                    <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
+                        <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
-                                <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
+                                <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.21960785984992981" green="0.21960785984992981" blue="0.21960785984992981" alpha="1" colorSpace="deviceRGB"/>
@@ -87,30 +89,18 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-gh-pZg" customClass="AMFoundryFontView">
-                    <rect key="frame" x="0.0" y="22" width="312" height="26"/>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNQ-iM-Ykd">
+                    <rect key="frame" x="0.0" y="337" width="312" height="0.0"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="26" id="OW3-cF-5Wu"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" focusRingType="none" alignment="center" placeholderString="CHANGE CLUSTER NAME BY ENTER" drawsBackground="YES" id="vur-DY-jHT">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
-                </textField>
+                </customView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="eE2-gh-pZg" secondAttribute="bottom" constant="22" id="6Rg-ol-5nL"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Dd0-hw-6n4"/>
-                <constraint firstAttribute="trailing" secondItem="eE2-gh-pZg" secondAttribute="trailing" id="JzL-RK-OlO"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Kg0-Q4-Qyl"/>
                 <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" id="WSB-1T-40f"/>
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>
-                <constraint firstItem="eE2-gh-pZg" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="u7F-SX-Pyg"/>
-                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="zy8-zK-VLd"/>
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

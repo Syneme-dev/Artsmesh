@@ -10,9 +10,9 @@
 #import "AMMesher/AMAppObjects.h"
 #import "AMGroupOutlineGroupCellView.h"
 #import "UIFramework/AMFoundryFontView.h"
+#import "AMGroupPanelModel.h"
 
 @interface AMGroupOutlineGroupCellController ()
-
 @end
 
 @implementation AMGroupOutlineGroupCellController
@@ -76,6 +76,11 @@
     [self removeTrackAres];
 }
 
+- (IBAction)infoBtnClick:(id)sender{
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    model.selectedGroup = self.group;
+    model.detailPanelState = DetailPanelGroup;
+}
 
 #pragma mark-
 #pragma TableViewCell Tracking Area
@@ -106,6 +111,5 @@
     [cellView.leaveBtn setHidden:YES];
     [cellView.mergeBtn setHidden:YES];
 }
-
 
 @end

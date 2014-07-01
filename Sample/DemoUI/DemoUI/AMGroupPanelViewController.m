@@ -158,7 +158,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew context:nil];
+    [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:nil];
     
     [self reloadGroups];
     self.outlineView.delegate = self;
@@ -174,15 +174,17 @@
 -(void)hideDetailView
 {
     NSRect rect = self.detailView.frame;
+    NSRect scrollViewRect = self.outlineScrollView.frame;
+    scrollViewRect.size.height += rect.size.height;
     rect.size.height = 0;
-    
     [self.detailView setFrame:rect];
+    [self.outlineScrollView setFrame:scrollViewRect];
+    [self.view display];
 }
 
 -(void)showGroupDetails
 {
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-//    self.detailView. = model.selectedGroup
     if (_detailViewController) {
         [_detailViewController.view removeFromSuperview];
         _detailViewController = nil;
@@ -190,21 +192,26 @@
     
     _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
     [self.detailView addSubview:_detailViewController.view];
+    
     AMGroupDetailsViewController* gdc = (AMGroupDetailsViewController*)_detailViewController;
     gdc.group = model.selectedGroup;
+    [gdc updateUI];
     
+    NSRect rect = gdc.view.frame;
     NSRect scrollViewRect = self.outlineScrollView.frame;
-    NSRect rect = scrollViewRect;
-    scrollViewRect.size.height -= 300;
-    [self.outlineScrollView setFrame:scrollViewRect];
-    
+    rect.size.width = scrollViewRect.size.width;
+    scrollViewRect.size.height -= rect.size.height;
     rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
-    rect.size.height = 300;
     
-    
+    [self.outlineScrollView setFrame:scrollViewRect];
     [self.detailView setFrame:rect];
     
     [self.view display];
+}
+
+-(void)showUserDetails
+{
+    
 }
 
 
@@ -219,20 +226,21 @@
         
         if ([keyPath isEqualToString:@"detailPanelState"]){
             
-            DetailPanelState state =  [[change objectForKey:@"new"] intValue];
-            switch (state) {
-                case DetailPanelHide:
-                    ;
-                    break;
-                case DetailPanelUser:
-                    ;
-                    break;
-                case DetailPanelGroup:
-                    [self showGroupDetails];
-                    break;
-                    
-                default:
-                    break;
+            DetailPanelState newState = [[change objectForKey:@"new"] intValue];
+            DetailPanelState oldState = [[change objectForKey:@"old"] intValue];
+            
+            if (oldState == DetailPanelHide && newState == DetailPanelGroup) {
+                [self showGroupDetails];
+                return;
+            }
+            
+            if (oldState == DetailPanelUser && newState == DetailPanelGroup) {
+                [self showUserDetails];
+                return;
+            }
+            
+            if (newState == DetailPanelHide) {
+                [self hideDetailView];
             }
         }
     }

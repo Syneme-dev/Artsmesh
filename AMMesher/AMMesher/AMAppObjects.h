@@ -60,6 +60,8 @@ extern NSString * const AMSystemConfigKey;//AMSytemConfig*
 
 -(BOOL)isMeshed;
 -(AMUser*)leader;
+-(BOOL)isMyMergedGroup;
+-(BOOL)isMyGroup;
 
 @end
 

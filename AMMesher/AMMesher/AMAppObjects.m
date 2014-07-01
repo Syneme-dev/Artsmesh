@@ -99,7 +99,7 @@ static NSMutableDictionary *global_dict = nil;
 +(id)AMUserFromDict:(NSDictionary*)dict
 {
     AMUser* user = [[AMUser alloc] init];
-    user.userid = dict[@"Userid"];
+    user.userid = dict[@"UserId"];
     user.nickName = dict[@"NickName"];
     user.domain = dict[@"Domain"];
     user.location = dict[@"Location"];
@@ -158,6 +158,25 @@ static NSMutableDictionary *global_dict = nil;
     }
 
     return nil;
+}
+
+
+-(BOOL)isMyGroup
+{
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    if (localGroup == nil) {
+        return NO;
+    }
+    return [self.groupId isEqualToString:localGroup.groupId];
+}
+
+
+-(BOOL)isMyMergedGroup
+{
+    NSString* mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+    if(mergedGroupId == nil)
+        return NO;
+    return [mergedGroupId isEqualToString:self.groupId];
 }
 
 

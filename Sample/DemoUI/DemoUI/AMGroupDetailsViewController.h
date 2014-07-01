@@ -13,4 +13,6 @@
 
 @property AMGroup* group;
 
+-(void)updateUI;
+
 @end

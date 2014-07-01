@@ -72,8 +72,8 @@
             
             switch (newState) {
                 case kMesherLocalServerStarting:
-                    [self startLocalServer];
-                    //[self startLocalClient];
+                    //[self startLocalServer];
+                    [self startLocalClient];
                     break;
                 case kMesherLocalClientStarting:
                     [self startLocalClient];
@@ -178,10 +178,10 @@
                 [self registerSelf];
             });
             
-        }else if([responseStr isEqualToString:@"group aleady register"]){
+        }else if([responseStr isEqualToString:@"group already exist"]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 mySelf.isLeader = NO;
-                [self getLocalGroupInfo];
+                 [self registerSelf];
             });
             
         }else{
@@ -240,7 +240,7 @@
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/user/register";
+    req.requestPath = @"/users/register";
     req.httpMethod = @"POST";
     req.formData = dict;
     req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
@@ -474,9 +474,11 @@
         }
         
         NSDictionary* result = (NSDictionary*)objects;
-        AMGroup* group = [AMGroup AMGroupFromDict:result];
+
+        NSDictionary* groupData = (NSDictionary*)result[@"GroupData"];
+        AMGroup* group = [AMGroup AMGroupFromDict:groupData];
         
-        id userArr = [result objectForKey:@"UserDTOs"];
+        id userArr = [result objectForKey:@"UsersData"];
         if (userArr == [NSNull null]) {
             userArr = nil;
         }
@@ -492,10 +494,7 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-            if (![group.groupId isEqualToString:localGroup.groupId]) {
-                NSAssert(NO, @"local group id is not the same");
-            }
-            
+            localGroup.groupId = group.groupId;
             localGroup.groupName = group.groupName;
             localGroup.description = group.description;
             localGroup.leaderId = group.leaderId;

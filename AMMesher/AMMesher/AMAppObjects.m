@@ -76,10 +76,22 @@ static NSMutableDictionary *global_dict = nil;
     [dict setObject:self.location forKey:@"location"];
     [dict setObject:self.privateIp forKey:@"privateIp"];
     [dict setObject:self.publicIp forKey:@"publicIp"];
-    [dict setObject:@(self.isLeader) forKey:@"isLeader"];
+    
+    if (self.isLeader) {
+         [dict setObject:@"YES" forKey:@"isLeader"];
+    }else{
+        [dict setObject:@"NO" forKey:@"isLeader"];
+    }
+   
     [dict setObject:self.chatPort forKey:@"chatPort"];
     [dict setObject:self.publicChatPort forKey:@"publicChatPort"];
-    [dict setObject:@(self.isOnline) forKey:@"isOnline"];
+    
+    if (self.isOnline) {
+        [dict setObject:@"YES" forKey:@"isOnline"];
+    }else{
+        [dict setObject:@"NO" forKey:@"isOnline"];
+    }
+    
     
     return dict;
 }
@@ -87,17 +99,17 @@ static NSMutableDictionary *global_dict = nil;
 +(id)AMUserFromDict:(NSDictionary*)dict
 {
     AMUser* user = [[AMUser alloc] init];
-    user.userid = dict[@"userid"];
-    user.nickName = dict[@"nickName"];
-    user.domain = dict[@"domain"];
+    user.userid = dict[@"Userid"];
+    user.nickName = dict[@"NickName"];
+    user.domain = dict[@"Domain"];
     user.location = dict[@"Location"];
-    user.isLeader = [dict[@"localLeader"] boolValue];
-    user.privateIp = dict[@"privateIp"];
-    user.publicIp = dict[@"publicIp"];
-    user.chatPort = dict[@"chatPort"];
-    user.publicChatPort = dict[@"publicChatPort"];
-    user.isOnline = [dict[@"isOnline"] boolValue];
-    user.description = dict[@"description"];
+    user.isLeader = [dict[@"LocalLeader"] boolValue];
+    user.privateIp = dict[@"PrivateIp"];
+    user.publicIp = dict[@"PublicIp"];
+    user.chatPort = dict[@"ChatPort"];
+    user.publicChatPort = dict[@"PublicChatPort"];
+    user.isOnline = [dict[@"IsOnline"] boolValue];
+    user.description = dict[@"Description"];
     return user;
 }
 
@@ -118,10 +130,10 @@ static NSMutableDictionary *global_dict = nil;
 +(id)AMGroupFromDict:(NSDictionary*)dict
 {
     AMGroup* group = [[AMGroup alloc] init];
-    group.groupId = dict[@"groupId"];
-    group.groupName = dict[@"groupName"];
-    group.description = dict[@"description"];
-    group.leaderId = dict[@"leaderId"];
+    group.groupId = dict[@"GroupId"];
+    group.groupName = dict[@"GroupName"];
+    group.description = dict[@"Description"];
+    group.leaderId = dict[@"LeaderId"];
     return group;
 }
 

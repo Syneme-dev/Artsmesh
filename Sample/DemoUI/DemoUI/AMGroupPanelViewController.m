@@ -15,11 +15,13 @@
 #import "AMGroupOutlineLabelCellController.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsViewController.h"
+#import "UIFramework/BlueBackgroundView.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet NSView *detailView;
 @property (weak) IBOutlet NSScrollView *outlineScrollView;
+@property (weak) IBOutlet BlueBackgroundView *topboundView;
 
 @end
 
@@ -186,24 +188,21 @@
         _detailViewController = nil;
     }
     
-//    _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
-   
+    _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
+    [self.detailView addSubview:_detailViewController.view];
+    
     NSRect scrollViewRect = self.outlineScrollView.frame;
-    scrollViewRect.size.height -= 400;
+    NSRect rect = scrollViewRect;
+    scrollViewRect.size.height -= 300;
+    [self.outlineScrollView setFrame:scrollViewRect];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.outlineScrollView setFrame:scrollViewRect];
-    });
-    
-    
-//    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
-//    rect.size.height = 400;
+    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
+    rect.size.height = 300;
     
     
-    //[self.view addSubview:_detailViewController.view];
-    //[_detailViewController.view setFrame:rect];
+    [self.detailView setFrame:rect];
     
-    [self.view setNeedsDisplay:YES];
+    [self.view display];
 }
 
 

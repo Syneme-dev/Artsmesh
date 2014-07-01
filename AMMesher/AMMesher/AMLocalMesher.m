@@ -72,8 +72,8 @@
             
             switch (newState) {
                 case kMesherLocalServerStarting:
-                    //[self startLocalServer];
-                    [self startLocalClient];
+                    [self startLocalServer];
+                    //[self startLocalClient];
                     break;
                 case kMesherLocalClientStarting:
                     [self startLocalClient];
@@ -233,10 +233,8 @@
 -(void)registerSelf
 {
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     
     NSMutableDictionary* dict = [mySelf toDict];
-    [dict setObject:myGroup.groupId forKey:@"groupId"];
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];

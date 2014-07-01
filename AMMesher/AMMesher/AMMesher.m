@@ -102,6 +102,7 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     localGroup.messages = [[NSMutableArray alloc] init];
     localGroup.users = [[NSMutableArray alloc] init];
     
+    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
     [AMAppObjects appObjects][AMMergedGroupIdKey] = localGroup.groupId;
 }
 

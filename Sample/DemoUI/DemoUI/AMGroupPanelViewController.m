@@ -8,6 +8,7 @@
 
 #import "AMGroupPanelViewController.h"
 #import "AMMesher/AMAppObjects.h"
+#import "AMMesher/AMMesher.h"
 #import "AMGroupOutlineGroupCellController.h"
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineRowView.h"
@@ -31,10 +32,13 @@
     return self;
 }
 
--(void)createControllerFromData
+-(void)reloadGroups
 {
     _userGroups = [[NSMutableArray alloc] init];
     AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    if (localGroup == nil) {
+        return;
+    }
     
     AMGroupOutlineGroupCellController* localGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
     localGroupController.group = localGroup;
@@ -50,6 +54,13 @@
     }
     
     [_userGroups addObject:localGroupController];
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    if (mySelf.isOnline == NO) {
+        
+        [self.outlineView reloadData];
+        return;
+    }
     
     AMGroupOutlineLabelCellController* labelController = [[AMGroupOutlineLabelCellController alloc] initWithNibName:@"AMGroupOutlineLabelCellController" bundle:nil];
     labelController.groupControllers = [[NSMutableArray alloc] init];
@@ -74,66 +85,71 @@
         [labelController.groupControllers addObject:remoteGroupController];
     }
     [_userGroups addObject:labelController];
+    
+    [self.outlineView reloadData];
 }
 
 -(void)awakeFromNib
 {
-    AMGroup* localGroup = [[AMGroup alloc] init];
-    localGroup.groupId = [AMAppObjects creatUUID];
-    localGroup.groupName = @"local group";
-    localGroup.description = @"This is local group!";
-    localGroup.password = @"";
+//    AMGroup* localGroup = [[AMGroup alloc] init];
+//    localGroup.groupId = [AMAppObjects creatUUID];
+//    localGroup.groupName = @"local group";
+//    localGroup.description = @"This is local group!";
+//    localGroup.password = @"";
+//    
+//    NSMutableArray* users = [[NSMutableArray alloc] init];
+//    
+//    AMUser* user1 = [[AMUser alloc] init];
+//    user1.userid = [AMAppObjects creatUUID];
+//    user1.nickName = @"www";
+//    user1.isOnline = NO;
+//    [users addObject:user1];
+//    
+//    AMUser* user2 = [[AMUser alloc] init];
+//    user2.userid = [AMAppObjects creatUUID];
+//    user2.nickName = @"www2";
+//    user2.isOnline = YES;
+//    [users addObject:user2];
+//    
+//    localGroup.users = users;
+//    localGroup.leaderId = user1.userid;
+//    
+//    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
+//    
+//    
+//    AMGroup* remoteGroup1 = [[AMGroup alloc] init];
+//    remoteGroup1.groupId = [AMAppObjects creatUUID];
+//    remoteGroup1.groupName = @"RemoteGroup";
+//    remoteGroup1.description = @"This is remote group1!";
+//    remoteGroup1.password = @"123456";
+//    
+//    NSMutableArray* remoteUsers1 = [[NSMutableArray alloc] init];
+//    
+//    AMUser* user3 = [[AMUser alloc] init];
+//    user3.userid = [AMAppObjects creatUUID];
+//    user3.nickName = @"KKK";
+//    user3.isOnline = YES;
+//    [remoteUsers1 addObject:user3];
+//    
+//    AMUser* user4 = [[AMUser alloc] init];
+//    user4.userid = [AMAppObjects creatUUID];
+//    user4.nickName = @"KKK2s";
+//    user4.isOnline = YES;
+//    [remoteUsers1 addObject:user4];
+//    
+//    remoteGroup1.users = remoteUsers1;
+//    remoteGroup1.leaderId = user4.userid;
+//    
+//    NSMutableDictionary* remoteGroups = [[NSMutableDictionary alloc] init];
+//    [remoteGroups setObject:remoteGroup1 forKey:remoteGroup1.groupId];
+//    
+//    [AMAppObjects appObjects][AMRemoteGroupsKey] = remoteGroups;
     
-    NSMutableArray* users = [[NSMutableArray alloc] init];
     
-    AMUser* user1 = [[AMUser alloc] init];
-    user1.userid = [AMAppObjects creatUUID];
-    user1.nickName = @"www";
-    user1.isOnline = NO;
-    [users addObject:user1];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_LOCALUSERS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
-    AMUser* user2 = [[AMUser alloc] init];
-    user2.userid = [AMAppObjects creatUUID];
-    user2.nickName = @"www2";
-    user2.isOnline = YES;
-    [users addObject:user2];
-    
-    localGroup.users = users;
-    localGroup.leaderId = user1.userid;
-    
-    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
-    
-    
-    AMGroup* remoteGroup1 = [[AMGroup alloc] init];
-    remoteGroup1.groupId = [AMAppObjects creatUUID];
-    remoteGroup1.groupName = @"RemoteGroup";
-    remoteGroup1.description = @"This is remote group1!";
-    remoteGroup1.password = @"123456";
-    
-    NSMutableArray* remoteUsers1 = [[NSMutableArray alloc] init];
-    
-    AMUser* user3 = [[AMUser alloc] init];
-    user3.userid = [AMAppObjects creatUUID];
-    user3.nickName = @"KKK";
-    user3.isOnline = YES;
-    [remoteUsers1 addObject:user3];
-    
-    AMUser* user4 = [[AMUser alloc] init];
-    user4.userid = [AMAppObjects creatUUID];
-    user4.nickName = @"KKK2s";
-    user4.isOnline = YES;
-    [remoteUsers1 addObject:user4];
-    
-    remoteGroup1.users = remoteUsers1;
-    remoteGroup1.leaderId = user4.userid;
-    
-    NSMutableDictionary* remoteGroups = [[NSMutableDictionary alloc] init];
-    [remoteGroups setObject:remoteGroup1 forKey:remoteGroup1.groupId];
-    
-    [AMAppObjects appObjects][AMRemoteGroupsKey] = remoteGroups;
-    
-    
-    [self createControllerFromData];
+    [self reloadGroups];
     self.outlineView.delegate = self;
     self.outlineView.dataSource  = self;
 }

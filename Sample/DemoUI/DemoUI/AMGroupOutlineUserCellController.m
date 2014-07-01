@@ -24,9 +24,9 @@
     
     cellView.textField.stringValue = self.user.nickName;
     if (self.user.isOnline) {
-        [cellView.imageView setImage:[NSImage imageNamed:@"user_offline"]];
-    }else{
         [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
+    }else{
+        [cellView.imageView setImage:[NSImage imageNamed:@"user_offline"]];
     }
     
     if ([self.group.leaderId isEqualToString:self.user.userid]) {
@@ -36,9 +36,9 @@
     }
     
     if (self.user.isOnline) {
-        [cellView.zombieBtn setHidden:YES];
-    }else{
         [cellView.zombieBtn setHidden:NO];
+    }else{
+        [cellView.zombieBtn setHidden:YES];
     }
     
     [cellView.infoBtn setHidden:YES];

@@ -523,7 +523,7 @@ func startRestServer(){
 	http.HandleFunc("/groups/change_password",  change_group_password)
 	http.HandleFunc("/users/register", register_user)
 	http.HandleFunc("/users/update",  update_user)
-	http.HandleFunc("/users/delete",  update_user)
+	http.HandleFunc("/users/unregister",  delete_user)
 	http.HandleFunc("/users/getall",  getAllUsers)
 	
 	err := http.ListenAndServe(restport, nil)

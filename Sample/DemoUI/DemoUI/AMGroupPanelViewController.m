@@ -181,7 +181,7 @@
 
 -(void)showGroupDetails
 {
-//    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
 //    self.detailView. = model.selectedGroup
     if (_detailViewController) {
         [_detailViewController.view removeFromSuperview];
@@ -190,6 +190,8 @@
     
     _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
     [self.detailView addSubview:_detailViewController.view];
+    AMGroupDetailsViewController* gdc = (AMGroupDetailsViewController*)_detailViewController;
+    gdc.group = model.selectedGroup;
     
     NSRect scrollViewRect = self.outlineScrollView.frame;
     NSRect rect = scrollViewRect;

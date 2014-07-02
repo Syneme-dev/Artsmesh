@@ -92,7 +92,7 @@
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/groups/register";
+    req.requestPath = @"/groups/add";
     req.httpMethod = @"POST";
     req.formData = [myGroup dictWithoutUsers];
     req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
@@ -109,13 +109,15 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"] ||
-            [responseStr isEqualToString:@"group aleady register"]) {
+            [responseStr isEqualToString:@"group aleady exist"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self registerSelf];
             });
             
         }else{
-            NSAssert(NO, @"remote register group response wrong!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self registerGroup];
+            });
         }
     };
     
@@ -132,7 +134,7 @@
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL ];
-    req.requestPath = @"/users/register";
+    req.requestPath = @"/users/add";
     req.httpMethod = @"POST";
     req.formData = dict;
     
@@ -159,9 +161,13 @@
             });
             
         }else{
-            NSAssert(NO, @"remote register self response wrong!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mySelf.isOnline = NO;
+            });
         }
     };
+    
+    [_httpRequestQueue addOperation:req];
 }
 
 -(void)updateMyself
@@ -335,7 +341,9 @@
         
         NSMutableDictionary* groupsDict = [[NSMutableDictionary alloc] init];
         for (int i =0; i < groups.count; i++){
-            AMGroup* newGroup = [AMGroup AMGroupFromDict:(NSDictionary *)groups[i]];
+            NSDictionary* dtoGroup = (NSDictionary*)groups[i];
+            NSDictionary* groupData = dtoGroup[@"GroupData"];
+            AMGroup* newGroup = [AMGroup AMGroupFromDict:groupData];
             
             BOOL isMySelfIn = NO;
             newGroup.users = [self getAllUserFromGroup:groups[i] isMySelfIn:&isMySelfIn];
@@ -343,7 +351,7 @@
                 [AMAppObjects appObjects][AMMergedGroupIdKey] = newGroup.groupId;
             }
             
-            [groupsDict setObject:newGroup forKey:[groups[i] objectForKey:@"GroupId"]];
+            [groupsDict setObject:newGroup forKey:newGroup.groupId];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{

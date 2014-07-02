@@ -134,6 +134,7 @@ static NSMutableDictionary *global_dict = nil;
     group.groupName = dict[@"GroupName"];
     group.description = dict[@"Description"];
     group.leaderId = dict[@"LeaderId"];
+    group.password = @"";
     return group;
 }
 

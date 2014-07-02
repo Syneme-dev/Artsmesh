@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260C809219628E0000D64E9D /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 260C809119628E0000D64E9D /* LocalServer */; };
 		260C80961962975400D64E9D /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C80941962975400D64E9D /* AMGroupDetailsViewController.m */; };
 		260C80971962975400D64E9D /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 260C80951962975400D64E9D /* AMGroupDetailsViewController.xib */; };
 		260C809A1962A54A00D64E9D /* AMGroupPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C80991962A54A00D64E9D /* AMGroupPanelModel.m */; };
@@ -127,6 +126,7 @@
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
+		D418DBCD1964331300FC3413 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = D418DBCC1964331300FC3413 /* LocalServer */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
@@ -151,7 +151,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				260C809219628E0000D64E9D /* LocalServer in CopyFiles */,
+				D418DBCD1964331300FC3413 /* LocalServer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +194,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		260C809119628E0000D64E9D /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		260C80931962975400D64E9D /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
 		260C80941962975400D64E9D /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
 		260C80951962975400D64E9D /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -345,6 +344,7 @@
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
 		D41155E718E9539B00C84092 /* AMUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserViewController.h; sourceTree = "<group>"; };
 		D41155E818E9539B00C84092 /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserViewController.m; sourceTree = "<group>"; };
+		D418DBCC1964331300FC3413 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserGroupModuleConst.h; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				260C809119628E0000D64E9D /* LocalServer */,
+				D418DBCC1964331300FC3413 /* LocalServer */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23175187A8FFD00554AFD /* DemoUI */,

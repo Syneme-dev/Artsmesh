@@ -448,6 +448,8 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	var command GroupUserCommand
 	command.action = group_new
 	command.group = reqGroup
+	command.superGroup = new(AMRequestGroup)
+	command.superGroup.GroupId = ""
 	command.response = make(chan string)
 	
 	g_command_pipe<- command

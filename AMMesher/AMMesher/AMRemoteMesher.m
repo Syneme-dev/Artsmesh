@@ -341,8 +341,16 @@
         
         NSMutableDictionary* groupsDict = [[NSMutableDictionary alloc] init];
         for (int i =0; i < groups.count; i++){
+            if (![groups[i]isKindOfClass:[NSDictionary class]]) {
+                continue;
+            }
+            
             NSDictionary* dtoGroup = (NSDictionary*)groups[i];
             NSDictionary* groupData = dtoGroup[@"GroupData"];
+            if (![groupData isKindOfClass:[NSDictionary class]]) {
+                continue;
+            }
+            
             AMGroup* newGroup = [AMGroup AMGroupFromDict:groupData];
             
             BOOL isMySelfIn = NO;

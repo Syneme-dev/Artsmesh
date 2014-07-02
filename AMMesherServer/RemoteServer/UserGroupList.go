@@ -80,7 +80,7 @@ func AddNewGroup(group *AMRequestGroup, superGroupId string)(string){
 	
 	existGroup := getGroupById(group.GroupId)
 	if existGroup != nil{
-		return "group alread exist!"
+		return "group alread exist"
 	}
 	
 	superGroup := getGroupById(superGroupId)

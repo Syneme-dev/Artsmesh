@@ -407,7 +407,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	//check value
 	
 	var command GroupUserCommand
-	command.action = user_register
+	command.action = user_update
 	command.user = reqUser
 	command.response = make(chan string)
 	

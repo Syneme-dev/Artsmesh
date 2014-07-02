@@ -156,11 +156,13 @@ func executeCommand(){
 			command.response<- response
 
 		case group_delete:
-			DeleteGroup(command.group.GroupId)
+			response := DeleteGroup(command.group.GroupId)
+			command.response<- response
 
 		case user_delete:
-			DeleteUser(command.user.UserId, command.group.GroupId)
-
+			response := DeleteUser(command.user.UserId, command.group.GroupId)
+			command.response<- response
+			
 		case group_move:
 			response := MoveGroup(command.group.GroupId, command.superGroup.GroupId)
 			command.response<- response
@@ -419,6 +421,7 @@ func deleteUser(w http.ResponseWriter, r *http.Request){
 	command.action = user_delete
 	command.user = reqUser
 	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
 	

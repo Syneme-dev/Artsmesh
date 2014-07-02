@@ -43,19 +43,21 @@ func InitUserList(){
 
 func RegisterGroup(group *AMRequestGroup)(string){
 	fmt.Println("RegisterGroup------------BEGIN");
+	defer fmt.Println("RegisterGroup------------END");
 	
 	if g_store.groupData == nil{
 		g_store.groupData = group
 		makeSnapShot()
 		return "ok"
 	}
-	fmt.Println("RegisterGroup------------END");
+	
 	return "group already exist"
 }
 
 func UpdataGroup(group *AMRequestGroup)(string){
 	
 	fmt.Println("UpdataGroup------------BEGIN");
+	defer fmt.Println("UpdataGroup------------END");
 	
 	if g_store.groupData.GroupId == group.GroupId{
 		g_store.groupData.GroupName = group.GroupName
@@ -64,11 +66,15 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		makeSnapShot()
 		return "ok"
 	}
-	fmt.Println("UpdataGroup------------END");
+	
 	return "group not found"
 }
 
 func ChangeGroupPassword(passwordOper *AMRequestChangePassword)(string){
+	
+	fmt.Println("ChangeGroupPassword------------BEGIN");
+	defer fmt.Println("ChangeGroupPassword------------END");
+	
 	if g_store.groupData.GroupId == passwordOper.groupId{
 		if g_store.password == passwordOper.oldPassword{
 			g_store.password = passwordOper.newPassword
@@ -83,6 +89,7 @@ func ChangeGroupPassword(passwordOper *AMRequestChangePassword)(string){
 func RegisterUser(user *AMRequestUser)(string){
 	
 	fmt.Println("RegisterUser------------BEGIN");
+	defer fmt.Println("RegisterUser------------END");
 	
 	if g_store.groupData == nil {
 		return "group not found"
@@ -99,13 +106,13 @@ func RegisterUser(user *AMRequestUser)(string){
 	g_store.userStores[user.UserId] = uStore
 	makeSnapShot()
 	
-	fmt.Println("RegisterUser------------END");
 	return "ok"
 }
 
 func UpdataUser(user *AMRequestUser)(string){
 	
 	fmt.Println("UpdataUser------------BEGIN");
+	defer fmt.Println("UpdataUser------------END");
 	
 	existUser := g_store.userStores[user.UserId]
 	if existUser == nil{
@@ -117,13 +124,13 @@ func UpdataUser(user *AMRequestUser)(string){
 
 	makeSnapShot()
 	
-	fmt.Println("UpdataUser------------END");
 	return "ok"
 }
 
 func UserHeartbeat(userId string) {
 	
 	fmt.Println("UserHeartbeat------------BEGIN");
+	defer fmt.Println("UserHeartbeat------------END");
 	
 	existUser := g_store.userStores[userId]
 	if existUser == nil{
@@ -132,11 +139,11 @@ func UserHeartbeat(userId string) {
 	}
 	
 	existUser.timestamp = time.Now()
-	fmt.Println("UserHeartbeat------------END");
 }
 
 func CheckTimeout(){
 	fmt.Println("CheckTimeout------------BEGIN");
+	defer fmt.Println("CheckTimeout------------END");
 	
 	hasChanged := false
 	var deleteKeys []string
@@ -158,12 +165,11 @@ func CheckTimeout(){
 	if hasChanged{
 		makeSnapShot()
 	}
-	
-	fmt.Println("CheckTimeout------------END");
 }
 
 func DeleteUser(userId string){
 	fmt.Println("DeleteUser------------BEGIN");
+	defer fmt.Println("DeleteUser------------END");
 	
 	existUser := g_store.userStores[userId]
 	if existUser == nil{
@@ -173,8 +179,6 @@ func DeleteUser(userId string){
 	
 	delete(g_store.userStores, userId)
 	makeSnapShot()
-	
-	fmt.Println("DeleteUser------------END");
 }
 
 func makeSnapShot(){

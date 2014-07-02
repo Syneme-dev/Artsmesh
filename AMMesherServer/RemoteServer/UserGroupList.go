@@ -8,34 +8,29 @@ import(
 )
 
 type UserNode struct{
-	userId 		string
-	groupId 		string
-	userData 	string
+	userData 	*AMRequestUser
+	groupId		string
 	timestamp   time.Time
 }
 
 type GroupNode struct{
-	groupId 			string
-	superGroupId 	string
-	groupData   		string
-	users    		map[string]*UserNode
-	subgroups		map[string]*GroupNode	
+	version		int
+	groupData   	*AMRequestGroup
+	password	 	string
+	superGroupId string 
+	userData 	map[string]*UserNode	
+	subGroups	map[string]*GroupNode
 }
 
-type DTOUser struct{
-	UserId 		string
-	UserData 	string
-}
 
 type DTOGroup struct{
-	GroupId 	string
-	GroupData 	string
-	Users 		[]*DTOUser
-	SubGroups   []*DTOGroup
+	GroupData 	*AMRequestGroup
+	Users 		[]*AMRequestUser
+	SubGroups    []*DTOGroup
 }
 
 type DTOSnapShot struct{
-	Data		*DTOGroup
+	Data			*DTOGroup
 	Version		int
 }
 
@@ -54,11 +49,13 @@ var snapShot *DTOSnapShot
 
 func InitGroupList(){
 	var rootGroup = new(GroupNode)
-	rootGroup.groupId = ""
-	rootGroup.superGroupId = ""
-	rootGroup.groupData = "RootGoup"
-	rootGroup.users = nil
-	rootGroup.subgroups = make(map[string]*GroupNode, 100)
+	rootGroup.groupData = new(AMRequestGroup)
+	rootGroup.groupData.GroupId = ""
+	rootGroup.groupData.GroupName = "RootGroup"
+	rootGroup.groupData.Description = "RootGroup";
+	rootGroup.groupData.LeaderId = "";
+	rootGroup.userData = nil;
+	rootGroup.subGroups = make(map[string]*GroupNode, 100)
 
 	gl.global_version = 0
 	gl.rootGroup = rootGroup
@@ -72,19 +69,18 @@ func InitGroupList(){
 	makeSnapShot()
 }
 
-func AddNewGroup(groupId string, superGroupId string, groupData string)(bool){
+func AddNewGroup(group *AMRequestGroup, superGroupId string)(string){
 	
-	fmt.Println("AddNewGroup Method Called...")
+	fmt.Println("AddNewGroup------------BEGIN");
+	defer fmt.Println("AddNewGroup------------END");
 	
-	if groupId == superGroupId {
-		fmt.Println("groupId can not be equal to superGroupId")
-		return false
+	if group.GroupId == superGroupId {
+		return "can not add group to self"
 	}
 	
-	existGroup := getGroupById(groupId)
+	existGroup := getGroupById(group.GroupId)
 	if existGroup != nil{
-		fmt.Println("group alread exist!")
-		return false 
+		return "group alread exist!"
 	}
 	
 	superGroup := getGroupById(superGroupId)
@@ -92,41 +88,45 @@ func AddNewGroup(groupId string, superGroupId string, groupData string)(bool){
 		fmt.Println("super group is not exist, add to the root group")
 		superGroup = gl.rootGroup
 	}else{
-		fmt.Println("super group is: ", superGroup.groupData)
+		fmt.Println("super group is: ", superGroup.groupData.GroupName)
 	}
 	
 	var newGroup  = new(GroupNode)
-	newGroup.groupId = groupId
-	newGroup.groupData = groupData
-	newGroup.users = make(map[string]*UserNode, 100)
-	newGroup.subgroups = make(map[string]*GroupNode, 10)
+	newGroup.groupData = new(AMRequestGroup)
+	newGroup.groupData.GroupId = group.GroupId
+	newGroup.groupData.GroupName = group.GroupName
+	newGroup.groupData.Description = group.Description
+	newGroup.groupData.LeaderId = group.LeaderId
+	newGroup.userData = make(map[string]*UserNode, 100)
+	newGroup.subGroups = make(map[string]*GroupNode, 10)
 	
 	addGroupToSuper(newGroup, superGroup)
 	makeGroupIndex(newGroup)
 	makeSnapShot()
 	
-	fmt.Println("AddNewGroup Method Finished!")
-
-	return true
+	return "ok"
 }
 
-func MoveGroup(groupId string, toGroupId string)(bool){
+func MoveGroup(groupId string, toGroupId string)(string){
+	
+	fmt.Println("MoveGroup------------BEGIN");
+	defer fmt.Println("MoveGroup------------END");
 	
 	if groupId == toGroupId{
-		return false
+		return "can not move to self"
 	}
 	
 	group := getGroupById(groupId)
 	toGroup := getGroupById(toGroupId)
 	
 	if group == nil || toGroup == nil{
-		return false
+		return "group not found"
 	}
 	
-	oldSuperGroupId := group.superGroupId
+	oldSuperGroupId := group.groupData.GroupId
 	if oldSuperGroupId == toGroupId{
 		//alread in
-		return false
+		return "ok"
 	}
 	
 	oldSuper := removeFromSuperGroup(group)
@@ -135,76 +135,117 @@ func MoveGroup(groupId string, toGroupId string)(bool){
 	
 	makeSnapShot()
 	
-	return true
+	return "ok"
 }
 
-func DeleteGroup(groupId string){
+func DeleteGroup(groupId string)(string){
+	
+	fmt.Println("DeleteGroup------------BEGIN");
+	defer fmt.Println("DeleteGroup------------END");
+	
 	group := getGroupById(groupId)
 	if group == nil{
-		return
+		return "group not found"
 	}
 	
 	oldSuper := removeFromSuperGroup(group)
 	tryRemoveEmptyGroup(oldSuper)	
 	removeFromGroupIndex(group)
 	makeSnapShot()
+	
+	return "ok"
 }
 
-func UpdataGroup(groupId string, groupData string)(bool){
+func UpdataGroup(ug *AMRequestGroup)(string){
+	
+	fmt.Println("DeleteGroup------------BEGIN");
+	defer fmt.Println("DeleteGroup------------END");
 
-	group := getGroupById(groupId)
+	group := getGroupById(ug.GroupId)
 	if group == nil{
-		return false
+		return "group not found"
 	}
 	
-	group.groupData = groupData
+	group.groupData.GroupName = ug.GroupName;
+	group.groupData.Description = ug.Description;
+	group.groupData.LeaderId = ug.LeaderId;
+	
 	makeSnapShot()
-	return true
+	return "ok"
 }
 
-func AddNewUser(userId string, groupId, userData string)(bool){
+func AddNewUser(user *AMRequestUser, groupId string)(string){
+	fmt.Println("AddNewUser------------BEGIN");
+	defer fmt.Println("AddNewUser------------END");
 	
-	existUser := getUserById(userId)
+	existUser := getUserById(user.UserId)
 	if existUser != nil{
-		return false
+		return "user already exist"
 	}
 	
 	group := getGroupById(groupId)
 	if group == nil{
-		return false	
+		return "group not found"	
 	}
 	
 	newUser := new(UserNode)
-	newUser.userId = userId
-	newUser.userData = userData
+	newUser.userData = new(AMRequestUser)
+	newUser.userData.UserId = user.UserId
+	newUser.userData.NickName = user.NickName
+	newUser.userData.Domain = user.Domain
+	newUser.userData.Location = user.Location
+	newUser.userData.Description = user.Description
+	newUser.userData.PublicIp = user.PublicIp
+	newUser.userData.PrivateIp = user.PrivateIp
+	newUser.userData.ChatPort = user.ChatPort
+	newUser.userData.PublicChatPort = user.PublicChatPort
+	newUser.userData.IsLeader = user.IsLeader
+	newUser.userData.IsOnline = user.IsOnline
 	
 	addUserToGroup(newUser, group)
 	makeUserIndex(newUser)
 	updateUserTimestamp(newUser)
 	makeSnapShot()
 	
-	return true
+	return "ok"
 }
 
-func UpdataUser(userId string, groupId, userData string)(bool){
-	existUser := getUserById(userId)
+func UpdataUser(user *AMRequestUser, groupId string)(string){
+	
+	fmt.Println("UpdataUser------------BEGIN");
+	defer fmt.Println("UpdataUser------------END");
+	
+	existUser := getUserById(user.UserId)
 	if existUser == nil{
-		return false
+		return "user not found"
 	}
 	
 	group := getGroupById(groupId)
 	if group == nil{
-		return false
+		return "group not found"
 	}
 	
-	existUser.userData = userData
+	existUser.userData.NickName = user.NickName
+	existUser.userData.Location = user.Location
+	existUser.userData.Domain = user.Domain
+	existUser.userData.Description = user.Description
+	existUser.userData.PublicChatPort = user.PublicChatPort
+	existUser.userData.PublicIp = user.PublicIp
+	existUser.userData.PrivateIp = user.PrivateIp
+	existUser.userData.ChatPort = user.ChatPort
+	existUser.userData.IsLeader = user.IsLeader
+	existUser.userData.IsOnline = user.IsOnline
+	
 	updateUserTimestamp(existUser)
 	makeSnapShot()
 	
-	return true
+	return "ok"
 }
 
-func UserHeartbeat(userId string, groupId string)(bool){
+func UserHeartbeat(userId string, groupId string)(string){
+	
+	fmt.Println("UserHeartbeat------------BEGIN");
+	defer fmt.Println("UserHeartbeat------------END");
 	
 	tryRemoveTimeoutUser()
 	
@@ -212,23 +253,26 @@ func UserHeartbeat(userId string, groupId string)(bool){
 	user := getUserById(userId)
 	
 	if group ==nil || user == nil{
-		return false
+		return "user not found"
 	}
 	
 	updateUserTimestamp(user)
-	return true
+	return "ok"
 }
 
-func DeleteUser(userId string, groupId string)(bool){
+func DeleteUser(userId string, groupId string)(string){
+	
+	fmt.Println("UserHeartbeat------------BEGIN");
+	defer fmt.Println("UserHeartbeat------------END");
 	
 	existUser := getUserById(userId)
 	if existUser == nil{
-		return false
+		return "user not found"
 	}
 	
 	group := getGroupById(groupId)
 	if group == nil {
-		return false
+		return "group not found"
 	}
 	
 	removeUserFromGroup(existUser)
@@ -238,7 +282,7 @@ func DeleteUser(userId string, groupId string)(bool){
 	removeFromTimeSort(existUser)
 	makeSnapShot()
 	
-	return true
+	return "ok"
 }
 
 func tryRemoveTimeoutUser(){
@@ -250,7 +294,7 @@ func tryRemoveTimeoutUser(){
 			break
 		}
 		
-		DeleteUser(user.userId, user.groupId)
+		DeleteUser(user.userData.UserId, user.groupId)
 		isUserDel = true
 		e = gl.timeSort.Front()
 	}
@@ -266,7 +310,7 @@ func updateUserTimestamp(user *UserNode){
 	for e := gl.timeSort.Front();  e != nil; e = e.Next(){
 		u := e.Value.(*UserNode)
 		
-		if u.userId == user.userId{
+		if u.userData.UserId == user.userData.UserId{
 			gl.timeSort.Remove(e)
 			break
 		}
@@ -280,19 +324,19 @@ func getUserById(userId string)(*UserNode){
 }
 
 func addUserToGroup(user *UserNode, group *GroupNode){
-	group.users[user.userId] = user
-	user.groupId = group.groupId
+	group.userData[user.userData.UserId] = user
+	user.groupId = group.groupData.GroupId
 }
 
 func makeUserIndex(user *UserNode){
-	gl.userIndex[user.userId] = user
+	gl.userIndex[user.userData.UserId] = user
 }
 
 func removeFromTimeSort(user *UserNode){
 	
 	for e := gl.timeSort.Front(); e != nil; e = e.Next(){
 		u := e.Value.(*UserNode)
-		if u.userId == user.userId{
+		if u.userData.UserId == user.userData.UserId{
 			gl.timeSort.Remove(e)
 			break
 		}
@@ -301,13 +345,13 @@ func removeFromTimeSort(user *UserNode){
 
 func removeUserFromGroup(user *UserNode)(*GroupNode){
 	group := getGroupById(user.groupId)
-	delete(group.users, user.userId)
+	delete(group.userData, user.userData.UserId)
 	return group
 }
 
 func removeUserFromIndex(user *UserNode){
 
-	delete (gl.userIndex, user.userId)
+	delete (gl.userIndex, user.userData.UserId)
 }
 
 func getGroupById(groupId string)*GroupNode{
@@ -315,37 +359,37 @@ func getGroupById(groupId string)*GroupNode{
 }
 
 func addGroupToSuper(group *GroupNode, super *GroupNode){	
-	super.subgroups[group.groupId] = group
-	group.superGroupId = super.groupId
+	super.subGroups[group.groupData.GroupId] = group
+	group.superGroupId = super.groupData.GroupId
 }
 
 func removeFromSuperGroup(group *GroupNode)(*GroupNode){
 	super := getGroupById(group.superGroupId)
-	delete(super.subgroups, group.groupId)
+	delete(super.subGroups, group.groupData.GroupId)
 	return super
 }
 
 func makeGroupIndex(group *GroupNode){
-	gl.groupIndex[group.groupId] = group
+	gl.groupIndex[group.groupData.GroupId] = group
 }
 
 func removeFromGroupIndex(group *GroupNode){
-	delete(gl.groupIndex, group.groupId)
+	delete(gl.groupIndex, group.groupData.GroupId)
 }
 
 func tryRemoveEmptyGroup(group *GroupNode){
-	if group.groupId == ""{
+	if group.groupData.GroupId == ""{
 		//root group
 		return
 	}
 	
-	fmt.Println("group user len is:", len(group.users))
-	fmt.Println("group subgroup len is:", len(group.subgroups))
+	fmt.Println("group user len is:", len(group.userData))
+	fmt.Println("group subgroup len is:", len(group.subGroups))
 	
-	if len(group.users) == 0 && len(group.subgroups) == 0{
+	if len(group.userData) == 0 && len(group.subGroups) == 0{
 		superGroup := getGroupById(group.superGroupId)
-		delete(superGroup.subgroups, group.groupId)
-		delete(gl.groupIndex, group.groupId)
+		delete(superGroup.subGroups, group.groupData.GroupId)
+		delete(gl.groupIndex, group.groupData.GroupId)
 		tryRemoveEmptyGroup(superGroup)
 	}
 }
@@ -368,11 +412,11 @@ func makeSnapShot(){
 }
 
 func printDTOGroup(dtg *DTOGroup){
-	fmt.Println("Group Id is:", dtg.GroupId)
-	fmt.Println("Group data is:", dtg.GroupData)
+	fmt.Println("Group Id is:", dtg.GroupData.GroupId)
+	fmt.Println("Group naem is:", dtg.GroupData.GroupName)
 	for _, v := range dtg.Users{
 		fmt.Println("printing users:")
-		fmt.Printf("userid=%s, userdata=%s\n", v.UserId, v.UserData)
+		fmt.Printf("userid=%s, nickName=%s\n", v.UserId, v.NickName)
 		fmt.Println("end printing users:")
 	}
 	
@@ -394,18 +438,31 @@ func RUnlockSnapShot(){
 
 func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	
-	var dtoGroup = new (DTOGroup)
-	dtoGroup.GroupId = group.groupId
-	dtoGroup.GroupData = group.groupData
+	dtoGroup := new(DTOGroup)
+	dtoGroup.GroupData = new(AMRequestGroup)
+	dtoGroup.GroupData.GroupId = group.groupData.GroupId
+	dtoGroup.GroupData.GroupName = group.groupData.GroupName
+	dtoGroup.GroupData.Description = group.groupData.Description
+	dtoGroup.GroupData.LeaderId = group.groupData.LeaderId
 	
-	for _, v := range group.users{
-		u := new(DTOUser)
-		u.UserId = v.userId
-		u.UserData = v.userData
+	for _, v := range group.userData{
+		u := new(AMRequestUser)
+		u.UserId = v.userData.UserId
+		u.NickName = v.userData.NickName
+		u.Location = v.userData.Location
+		u.Description = v.userData.Description
+		u.Domain = v.userData.Domain
+		u.PublicIp = v.userData.PublicIp
+		u.PrivateIp = v.userData.PrivateIp
+		u.PublicChatPort = v.userData.PublicChatPort
+		u.ChatPort = v.userData.ChatPort
+		u.IsLeader = v.userData.IsLeader
+		u.IsOnline = v.userData.IsOnline
+
 		dtoGroup.Users = append(dtoGroup.Users, u)
 	}
 
-	for _, v := range group.subgroups{
+	for _, v := range group.subGroups{
 		dtog := copyGroupToDTO(v)
 		dtoGroup.SubGroups = append(dtoGroup.SubGroups, dtog)
 	}

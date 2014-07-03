@@ -88,23 +88,23 @@
                     </constraints>
                 </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="m8b-GU-d0s" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-tF-YMH">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                    <rect key="frame" x="0.0" y="20" width="600" height="260"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="FOAF" identifier="1" id="cpT-dg-QgQ">
                             <view key="view" id="faL-kg-rFO">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="BLOGS" identifier="2" id="m8b-GU-d0s">
                             <view key="view" id="Q8z-19-Cbe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="DgC-PZ-wvC">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                             <nil key="identifier"/>
@@ -134,7 +134,7 @@
                 <constraint firstAttribute="trailing" secondItem="58Q-Tv-Pho" secondAttribute="trailing" id="NY6-HQ-0bY"/>
                 <constraint firstItem="Teu-tF-YMH" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="Qc0-BH-Uw0"/>
                 <constraint firstItem="wm1-QX-Rcf" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="19" id="YvF-Fl-2FA"/>
-                <constraint firstAttribute="bottom" secondItem="Teu-tF-YMH" secondAttribute="bottom" id="dsB-iu-BHn"/>
+                <constraint firstAttribute="bottom" secondItem="Teu-tF-YMH" secondAttribute="bottom" constant="20" id="dsB-iu-BHn"/>
                 <constraint firstAttribute="trailing" secondItem="wm1-QX-Rcf" secondAttribute="trailing" id="ecg-RP-0GX"/>
                 <constraint firstItem="58Q-Tv-Pho" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="ovu-G0-Zs5"/>
                 <constraint firstItem="wm1-QX-Rcf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="w6q-8s-5aG"/>

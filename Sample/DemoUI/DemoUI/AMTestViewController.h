@@ -10,5 +10,8 @@
 
 @interface AMTestViewController : NSViewController
 @property (strong) IBOutlet NSPopUpButton *popUpButton;
+- (IBAction)ShowUserButtonClick:(id)sender;
+@property (strong) IBOutlet NSTextField *groupNameText;
+- (IBAction)ShowGroupButtonClick:(id)sender;
 
 @end

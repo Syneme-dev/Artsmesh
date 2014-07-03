@@ -159,28 +159,13 @@
     [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@.%@",shortVersion,buildVersion]];
 }
 
--(void)awakeFromNib{
 
-}
-
--(void)loadArchivedWindow:(NSView*)scrollView{
-   
-    [NSKeyedArchiver archiveRootObject:scrollView toFile:@"x5"];
-}
 
 -(void)showDefaultWindow
 {
     [self initTimer];
-//    [self.window setReleasedWhenClosed:NO];
-
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:@"x5"]) {
-        [self createDefaultWindow];
-//    }
-//    else{
-//        NSScrollView *scrollView=[NSKeyedUnarchiver unarchiveObjectWithFile:@"xujiantemp3"];
-//        
-//        [self.window setContentView:scrollView];
-//    }
+    [self createDefaultWindow];
+    [self loadTestPanel];
     
 }
 
@@ -531,7 +516,7 @@
 //    panelView.maxSizeConstraint = maxPanelSize;
     [panelViewController setTitle:@"CHAT"];
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
-    NSView *chatView = chatViewController.view;
+
     
     
     [self fillPanel:panelViewController.view content:chatViewController.view];

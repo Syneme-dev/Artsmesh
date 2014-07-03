@@ -11,6 +11,10 @@
 #import "AMNotificationMessage.h"
 
 
+#define AMN_SHOWUSERINFO @"AMN_SHOWUSERINFO"
+
+#define AMN_SHOWGROUPINFO @"AMN_SHOWGROUPINFO"
+
 extern NSString* const AMN_MESHER_STARTED;
 //static NSString* const AM_USERGROUPS_CHANGED = @"AM_USERGROUPS_CHANGED";
 //static NSString* const AM_MESHER_ONLINE= @"AM_MESHER_ONLINE";

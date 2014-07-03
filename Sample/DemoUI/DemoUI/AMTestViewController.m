@@ -9,6 +9,8 @@
 #import "AMTestViewController.h"
 #import "AMPopupMenuItem.h"
 
+#import <AMNotificationManager/AMNotificationManager.h>
+
 @interface AMTestViewController ()
 
 @end
@@ -57,4 +59,19 @@
 
 }
 
+-(void) postNotificationShowUser
+{
+    NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                                 @"wangwei", @"UserName", nil];
+    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+}
+
+- (IBAction)ShowUserButtonClick:(id)sender {
+    [self postNotificationShowUser];
+}
+- (IBAction)ShowGroupButtonClick:(id)sender {
+    NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                            self.groupNameText.stringValue , @"GroupName", nil];
+    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+}
 @end

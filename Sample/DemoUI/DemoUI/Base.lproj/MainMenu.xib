@@ -649,7 +649,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -859,7 +859,7 @@
                             <button identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yne-yQ-23D" userLabel="social">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_setting" imagePosition="only" alignment="center" alternateImage="panel_setting_h" imageScaling="proportionallyDown" inset="2" id="pAk-5j-0xC">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_social" imagePosition="only" alignment="center" alternateImage="SideBar_social_h" imageScaling="proportionallyDown" inset="2" id="pAk-5j-0xC">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1110,6 +1110,8 @@
         <image name="SideBar_route_h" width="40" height="40"/>
         <image name="SideBar_setting" width="40" height="40"/>
         <image name="SideBar_setting_h" width="40" height="40"/>
+        <image name="SideBar_social" width="40" height="40"/>
+        <image name="SideBar_social_h" width="40" height="40"/>
         <image name="SideBar_terminal" width="40" height="40"/>
         <image name="SideBar_terminal_h" width="40" height="40"/>
         <image name="SideBar_user" width="40" height="40"/>
@@ -1117,8 +1119,6 @@
         <image name="SideBar_video" width="40" height="40"/>
         <image name="SideBar_video_h" width="40" height="40"/>
         <image name="logo" width="59" height="60"/>
-        <image name="panel_setting" width="15" height="15"/>
-        <image name="panel_setting_h" width="15" height="15"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>

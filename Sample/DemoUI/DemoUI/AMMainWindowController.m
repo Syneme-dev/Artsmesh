@@ -581,8 +581,8 @@
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId=
     [[NSString stringWithFormat:@"%@_PANEL",sender.identifier ] uppercaseString];
-    NSString *command = [NSString stringWithFormat:@"say \"this is %@\"", panelId];
-    system([command UTF8String]);
+//    NSString *command = [NSString stringWithFormat:@"say \"this is %@\"", panelId];
+//    system([command UTF8String]);
 
     if(sender.state==NSOnState)
     {

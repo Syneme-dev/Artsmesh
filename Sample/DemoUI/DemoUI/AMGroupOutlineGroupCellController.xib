@@ -60,6 +60,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="leaveBtnClick:" target="-2" id="vwj-b7-p0b"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apw-1e-TPG">
                             <rect key="frame" x="40" y="1" width="20" height="20"/>
@@ -68,6 +71,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="mergeBtnClick:" target="-2" id="scb-af-G2Z"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYQ-u4-bMc">
                             <rect key="frame" x="20" y="1" width="20" height="20"/>

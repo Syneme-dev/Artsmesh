@@ -166,7 +166,6 @@
     self.outlineView.dataSource  = self;
 }
 
-
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[AMGroupPanelModel sharedGroupModel] removeObserver:self];

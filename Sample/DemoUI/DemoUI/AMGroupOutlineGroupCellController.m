@@ -11,6 +11,7 @@
 #import "AMGroupOutlineGroupCellView.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMGroupOutlineGroupCellController ()
 @end
@@ -82,6 +83,19 @@
     model.selectedGroup = self.group;
     model.detailPanelState = DetailPanelGroup;
 }
+
+- (IBAction)mergeBtnClick:(id)sender
+{
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher mergeGroup:self.group.groupId];
+}
+
+- (IBAction)leaveBtnClick:(id)sender
+{
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher unmergeGroup];
+}
+
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

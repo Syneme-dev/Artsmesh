@@ -23,6 +23,9 @@
       location = "container:"
       name = "Utilities">
       <FileRef
+         location = "group:Pods/Pods.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:AMUdpEchoServer/AMUdpEchoServer.xcodeproj">
       </FileRef>
       <FileRef

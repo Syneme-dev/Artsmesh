@@ -33,18 +33,22 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="groupNameEdited:" target="-2" id="mc0-ca-LAb"/>
                         <outlet property="delegate" destination="-2" id="JMI-9V-WxA"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNc-kH-RRD" customClass="AMFoundryFontView">
                     <rect key="frame" x="21" y="3" width="229" height="15"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="5md-ZT-Dvi">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="5md-ZT-Dvi">
                         <customFormatter key="formatter" id="c2z-52-4vc" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="groupDescriptionEdited:" target="-2" id="dT8-Dz-gN0"/>
+                    </connections>
                 </textField>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="w6k-bZ-PuW">
                     <rect key="frame" x="154" y="16" width="131" height="21"/>

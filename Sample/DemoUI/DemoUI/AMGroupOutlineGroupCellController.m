@@ -114,6 +114,35 @@
     [mesher unmergeGroup];
 }
 
+- (IBAction)groupNameEdited:(NSTextField *)sender
+{
+    AMGroup* myLocalGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    
+    NSString* newGroupName = sender.stringValue;
+    if ([newGroupName isEqualToString:myLocalGroup.groupName] ) {
+        return;
+    }
+    
+    myLocalGroup.groupName = newGroupName;
+    
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher updateGroup];
+}
+
+- (IBAction)groupDescriptionEdited:(NSTextField *)sender
+{
+    AMGroup* myLocalGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    
+    NSString* newDescripton = sender.stringValue;
+    if ([newDescripton isEqualToString:myLocalGroup.description] ) {
+        return;
+    }
+    
+    myLocalGroup.description = newDescripton;
+    
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher updateGroup];
+}
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

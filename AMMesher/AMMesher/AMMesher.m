@@ -19,6 +19,9 @@ NSString* const AM_LOCALUSERS_CHANGED = @"AM_LOCALUSERS_CHANGED";
 NSString* const AM_REMOTEGROUPS_CHANGED = @"AM_REMOTEGROUPS_CHANGED";
 NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
 
+NSString* const AM_MESHER_UPDATE_GROUP_FAILED = @"AM_MESHER_UPDATE_GROUP_FAILED";
+NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
+
 @implementation AMMesher
 {
     AMLeaderElecter* _elector;
@@ -226,9 +229,18 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     [_remoteMesher unmergeGroup];
 }
 
--(void)changeLocalGroupName:(NSString*)newGroupName
+-(void)updateGroup
 {
-
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    if ([machine mesherState] == kMesherStarted){
+        [_localMesher updateGroupInfo];
+        
+    }else if([machine mesherState] == kMesherMeshed ){
+        [_localMesher updateGroupInfo];
+        [_remoteMesher updateGroupInfo];
+    }
 }
 
 -(void)updateMySelf

@@ -17,5 +17,6 @@
 -(void)unmergeGroup;
 
 -(void)updateMyself;
+-(void)updateGroupInfo;
 
 @end

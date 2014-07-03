@@ -15,4 +15,6 @@
 -(void)updateMyself;
 -(void)changeGroupPassword:(NSString*)newPassword password:(NSString*)oldPassword;
 
+-(void)updateGroupInfo;
+
 @end

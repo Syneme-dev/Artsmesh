@@ -447,6 +447,40 @@
     
 }
 
+-(void)updateGroupInfo
+{
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/update";
+    req.formData = [localGroup dictWithoutUsers];
+    req.httpMethod = @"POST";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_UPDATE_GROUP_FAILED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_UPDATE_GROUP_FAILED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+}
+
 
 -(void)requestUserList
 {

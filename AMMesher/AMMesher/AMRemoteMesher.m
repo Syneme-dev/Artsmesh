@@ -208,6 +208,44 @@
     [_httpRequestQueue addOperation:req];
 }
 
+-(void)updateGroupInfo
+{
+    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+    NSAssert(machine, @"mesher state machine can not be nil!");
+    
+    if([machine mesherState] != kMesherMeshed){
+        return;
+    }
+    
+    AMGroup* myGroup = [[AMAppObjects appObjects] objectForKey:AMLocalGroupKey];
+    NSDictionary* dict = [myGroup dictWithoutUsers];
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/update";
+    req.formData = dict;
+    req.httpMethod = @"POST";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when update group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSAssert(NO, @"update user info on remote response wrong!");
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+}
+
 
 -(void)stopRemoteClient
 {

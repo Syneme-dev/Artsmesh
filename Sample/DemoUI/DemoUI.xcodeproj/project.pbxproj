@@ -19,8 +19,6 @@
 		26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
-		26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */; };
-		26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
@@ -114,6 +112,23 @@
 		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
 		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
 		CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE7D80AE19502157001E6CF7 /* LocalServer */; };
+		CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */; };
+		CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */; };
+		CEC2FC56196588FD00AFD309 /* AMGroupOutlineGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */; };
+		CEC2FC57196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3D196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib */; };
+		CEC2FC58196588FD00AFD309 /* AMGroupOutlineGroupCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3F196588FD00AFD309 /* AMGroupOutlineGroupCellView.m */; };
+		CEC2FC59196588FD00AFD309 /* AMGroupOutlineLabelCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */; };
+		CEC2FC5A196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */; };
+		CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */; };
+		CEC2FC5C196588FD00AFD309 /* AMGroupOutlineUserCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */; };
+		CEC2FC5D196588FD00AFD309 /* AMGroupOutlineUserCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC47196588FD00AFD309 /* AMGroupOutlineUserCellController.xib */; };
+		CEC2FC5E196588FD00AFD309 /* AMGroupOutlineUserCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC49196588FD00AFD309 /* AMGroupOutlineUserCellView.m */; };
+		CEC2FC5F196588FD00AFD309 /* AMGroupPanelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */; };
+		CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */; };
+		CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */; };
+		CEC2FC62196588FD00AFD309 /* AMUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */; };
+		CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */; };
+		CEC2FC64196588FD00AFD309 /* AMUserGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
@@ -199,9 +214,6 @@
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
-		26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupViewController.h; sourceTree = "<group>"; };
-		26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupViewController.m; sourceTree = "<group>"; };
-		26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
 		26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -309,6 +321,34 @@
 		AFDA79A31945864A0002873B /* AMMixingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixingViewController.m; sourceTree = "<group>"; };
 		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
 		CE7D80AE19502157001E6CF7 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
+		CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
+		CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
+		CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
+		CEC2FC3B196588FD00AFD309 /* AMGroupOutlineGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineGroupCellController.h; sourceTree = "<group>"; };
+		CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineGroupCellController.m; sourceTree = "<group>"; };
+		CEC2FC3D196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineGroupCellController.xib; sourceTree = "<group>"; };
+		CEC2FC3E196588FD00AFD309 /* AMGroupOutlineGroupCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineGroupCellView.h; sourceTree = "<group>"; };
+		CEC2FC3F196588FD00AFD309 /* AMGroupOutlineGroupCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineGroupCellView.m; sourceTree = "<group>"; };
+		CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineLabelCellController.h; sourceTree = "<group>"; };
+		CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineLabelCellController.m; sourceTree = "<group>"; };
+		CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineLabelCellController.xib; sourceTree = "<group>"; };
+		CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineRowView.h; sourceTree = "<group>"; };
+		CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineRowView.m; sourceTree = "<group>"; };
+		CEC2FC45196588FD00AFD309 /* AMGroupOutlineUserCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineUserCellController.h; sourceTree = "<group>"; };
+		CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineUserCellController.m; sourceTree = "<group>"; };
+		CEC2FC47196588FD00AFD309 /* AMGroupOutlineUserCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupOutlineUserCellController.xib; sourceTree = "<group>"; };
+		CEC2FC48196588FD00AFD309 /* AMGroupOutlineUserCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineUserCellView.h; sourceTree = "<group>"; };
+		CEC2FC49196588FD00AFD309 /* AMGroupOutlineUserCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineUserCellView.m; sourceTree = "<group>"; };
+		CEC2FC4A196588FD00AFD309 /* AMGroupPanelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelModel.h; sourceTree = "<group>"; };
+		CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelModel.m; sourceTree = "<group>"; };
+		CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
+		CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
+		CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
+		CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
+		CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailsViewController.h; sourceTree = "<group>"; };
+		CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsViewController.m; sourceTree = "<group>"; };
+		CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserDetailsViewController.xib; sourceTree = "<group>"; };
+		CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserGroupView.xib; sourceTree = "<group>"; };
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
@@ -362,7 +402,6 @@
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
-				26F2BF7218FCB6C800DD04A6 /* AMUserGroupView.xib */,
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
@@ -379,8 +418,6 @@
 		262021F518EAE58400811E4E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				26F2BF6F18FCB6BC00DD04A6 /* AMUserGroupViewController.h */,
-				26F2BF7018FCB6BC00DD04A6 /* AMUserGroupViewController.m */,
 				D41155E718E9539B00C84092 /* AMUserViewController.h */,
 				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
@@ -498,6 +535,7 @@
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
+				CEC2FC37196588FD00AFD309 /* GroupPanel */,
 				AFAEBD811961060200B7FB51 /* ViewsExtend */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
@@ -638,6 +676,41 @@
 			path = panelshot;
 			sourceTree = "<group>";
 		};
+		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
+				CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */,
+				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
+				CEC2FC3B196588FD00AFD309 /* AMGroupOutlineGroupCellController.h */,
+				CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */,
+				CEC2FC3D196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib */,
+				CEC2FC3E196588FD00AFD309 /* AMGroupOutlineGroupCellView.h */,
+				CEC2FC3F196588FD00AFD309 /* AMGroupOutlineGroupCellView.m */,
+				CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */,
+				CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */,
+				CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */,
+				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
+				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
+				CEC2FC45196588FD00AFD309 /* AMGroupOutlineUserCellController.h */,
+				CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */,
+				CEC2FC47196588FD00AFD309 /* AMGroupOutlineUserCellController.xib */,
+				CEC2FC48196588FD00AFD309 /* AMGroupOutlineUserCellView.h */,
+				CEC2FC49196588FD00AFD309 /* AMGroupOutlineUserCellView.m */,
+				CEC2FC4A196588FD00AFD309 /* AMGroupPanelModel.h */,
+				CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */,
+				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
+				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
+				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
+				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
+				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
+				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
+				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
+				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
+			);
+			path = GroupPanel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -730,6 +803,7 @@
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
+				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
@@ -745,8 +819,9 @@
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
-				26F2BF7318FCB6C800DD04A6 /* AMUserGroupView.xib in Resources */,
+				CEC2FC5A196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
+				CEC2FC57196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
@@ -767,12 +842,15 @@
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
+				CEC2FC64196588FD00AFD309 /* AMUserGroupView.xib in Resources */,
+				CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */,
 				26E1E6A119023496000BF14C /* AMChatView.xib in Resources */,
 				AF20064E1945861B008630C8 /* AMOSCRouteViewController.xib in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 				AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
+				CEC2FC5D196588FD00AFD309 /* AMGroupOutlineUserCellController.xib in Resources */,
 				AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */,
 				AFAEBDB619610BEA00B7FB51 /* ShareLocation.png in Resources */,
 			);
@@ -842,28 +920,38 @@
 				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
+				CEC2FC59196588FD00AFD309 /* AMGroupOutlineLabelCellController.m in Sources */,
 				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
+				CEC2FC5C196588FD00AFD309 /* AMGroupOutlineUserCellController.m in Sources */,
+				CEC2FC5E196588FD00AFD309 /* AMGroupOutlineUserCellView.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
+				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
+				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
+				CEC2FC58196588FD00AFD309 /* AMGroupOutlineGroupCellView.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
+				CEC2FC5F196588FD00AFD309 /* AMGroupPanelModel.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
+				CEC2FC62196588FD00AFD309 /* AMUserDetailsViewController.m in Sources */,
+				CEC2FC56196588FD00AFD309 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
+				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
-				26F2BF7118FCB6BC00DD04A6 /* AMUserGroupViewController.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
+				CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

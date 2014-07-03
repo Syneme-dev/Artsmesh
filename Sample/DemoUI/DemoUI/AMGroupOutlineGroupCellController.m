@@ -12,11 +12,29 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
 #import "AMMesher/AMMesher.h"
+#import "AMErrPopoverViewController.h"
+#import "AMGroupTextFieldFormatter.h"
 
-@interface AMGroupOutlineGroupCellController ()
+#define MAX_GROUP_NAME_LENGTH 16
+#define MAX_GROUP_DESCRIPTION 64
+
+@interface AMGroupOutlineGroupCellController ()<NSTextFieldDelegate>
+
+@property NSPopover* myPopOver;
 @end
 
 @implementation AMGroupOutlineGroupCellController
+
+-(void)awakeFromNib
+{
+    AMGroupOutlineGroupCellView* cellView = (AMGroupOutlineGroupCellView*)self.view;
+    AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
+    [formatter setMaximumLength:MAX_GROUP_NAME_LENGTH];
+    
+    AMGroupTextFieldFormatter* desFormatter = cellView.descriptionField.formatter;
+    [desFormatter setMaximumLength:MAX_GROUP_DESCRIPTION];
+}
+
 
 -(void)updateUI
 {
@@ -126,5 +144,32 @@
     [cellView.leaveBtn setHidden:YES];
     [cellView.mergeBtn setHidden:YES];
 }
+
+#pragma mark-
+#pragma NSTextField Delegate
+
+-(BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//            self.myPopOver = [[NSPopover alloc] init];
+//            self.myPopOver.animates = YES;
+//            self.myPopOver.contentViewController = [[AMErrPopoverViewController alloc] initWithNibName:@"AMErrPopoverViewController" bundle:nil];
+//        
+//            [self.myPopOver showRelativeToRect:[control bounds] ofView:control preferredEdge:NSMaxXEdge];
+//    });
+    
+    if ([control.identifier isEqualToString:@"group_name_field"]) {
+        NSTextField* groupNameField = (NSTextField*)control;
+        
+        NSString* groupName = groupNameField.stringValue;
+        if (groupName.length > 16) {
+            
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 
 @end

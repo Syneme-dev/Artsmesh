@@ -16,6 +16,9 @@
 		268F7F3919635CFE008D5055 /* AMUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268F7F3719635CFE008D5055 /* AMUserDetailsViewController.m */; };
 		268F7F3A19635CFE008D5055 /* AMUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268F7F3819635CFE008D5055 /* AMUserDetailsViewController.xib */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
+		2696130F19652499004FF130 /* AMErrPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2696130D19652499004FF130 /* AMErrPopoverViewController.m */; };
+		2696131019652499004FF130 /* AMErrPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2696130E19652499004FF130 /* AMErrPopoverViewController.xib */; };
+		2696131319652DDE004FF130 /* AMGroupTextFieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2696131219652DDE004FF130 /* AMGroupTextFieldFormatter.m */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
@@ -206,6 +209,11 @@
 		268F7F3719635CFE008D5055 /* AMUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsViewController.m; sourceTree = "<group>"; };
 		268F7F3819635CFE008D5055 /* AMUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserDetailsViewController.xib; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
+		2696130C19652499004FF130 /* AMErrPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMErrPopoverViewController.h; sourceTree = "<group>"; };
+		2696130D19652499004FF130 /* AMErrPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMErrPopoverViewController.m; sourceTree = "<group>"; };
+		2696130E19652499004FF130 /* AMErrPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMErrPopoverViewController.xib; sourceTree = "<group>"; };
+		2696131119652DDE004FF130 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
+		2696131219652DDE004FF130 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
@@ -499,6 +507,11 @@
 				268F7F3819635CFE008D5055 /* AMUserDetailsViewController.xib */,
 				260C80981962A54A00D64E9D /* AMGroupPanelModel.h */,
 				260C80991962A54A00D64E9D /* AMGroupPanelModel.m */,
+				2696130C19652499004FF130 /* AMErrPopoverViewController.h */,
+				2696130D19652499004FF130 /* AMErrPopoverViewController.m */,
+				2696130E19652499004FF130 /* AMErrPopoverViewController.xib */,
+				2696131119652DDE004FF130 /* AMGroupTextFieldFormatter.h */,
+				2696131219652DDE004FF130 /* AMGroupTextFieldFormatter.m */,
 			);
 			name = GroupPanel;
 			sourceTree = "<group>";
@@ -757,6 +770,7 @@
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				AFBDCCB2195AD0E300653C18 /* shot_musicScore.png in Resources */,
+				2696131019652499004FF130 /* AMErrPopoverViewController.xib in Resources */,
 				26E89C94195D6CD100F602A2 /* AMGroupOutlineUserCellController.xib in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				AF74056A18F7D93200B3C1DF /* Users.png in Resources */,
@@ -866,10 +880,12 @@
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				260C809A1962A54A00D64E9D /* AMGroupPanelModel.m in Sources */,
+				2696130F19652499004FF130 /* AMErrPopoverViewController.m in Sources */,
 				D4B6B8621960FE3100A613A5 /* AMGroupOutlineLabelCellController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
+				2696131319652DDE004FF130 /* AMGroupTextFieldFormatter.m in Sources */,
 				26E89C90195D6CD100F602A2 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

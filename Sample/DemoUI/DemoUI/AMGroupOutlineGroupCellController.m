@@ -67,6 +67,15 @@
     [cellView.infoBtn setHidden:YES];
     [cellView.leaveBtn setHidden:YES];
     [cellView.mergeBtn setHidden:YES];
+    
+    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    if ([myGroup.groupId isEqualToString:self.group.groupId ]){
+        [cellView.textField setEditable:YES];
+        [cellView.descriptionField setEditable:YES];
+    }else{
+        [cellView.textField setEditable:NO];
+        [cellView.descriptionField setEditable:NO];
+    }
 }
 
 -(void)setTrackArea

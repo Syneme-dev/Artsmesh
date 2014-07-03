@@ -11,6 +11,8 @@
 @interface AMPanelView : AMBoxItem
 
 @property(nonatomic) NSColor* backgroundColor;
+@property(nonatomic, weak) NSViewController *panelViewController;
 
+- (IBAction)testClick:(id)sender;
 
 @end

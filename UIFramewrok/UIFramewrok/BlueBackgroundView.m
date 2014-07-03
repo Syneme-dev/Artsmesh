@@ -19,6 +19,7 @@
     return self;
 }
 
+/*
 - (void)mouseDown:(NSEvent *)theEvent
 {
     [self.superview mouseDown:theEvent];
@@ -28,6 +29,7 @@
 {
     [self.superview mouseDragged:theEvent];
 }
+ */
 
 - (void)drawRect:(NSRect)dirtyRect
 {

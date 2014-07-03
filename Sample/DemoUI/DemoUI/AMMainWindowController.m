@@ -82,7 +82,6 @@
     AMETCDPreferenceViewController *preferenceViewController;
     AMSocialViewController * socialViewController;
     AMChatViewController *chatViewController;
-    AMPingViewController *pingViewController;
     AMTestViewController *testViewController;
     AMMapViewController *mapViewController;
     AMMixingViewController *mixingViewController;
@@ -167,6 +166,26 @@
     [self createDefaultWindow];
     [self loadTestPanel];
     
+}
+
+- (void)copyPanel:(NSButton *)sender
+{
+    static int numberOfNetworkToolsPanel = 0;
+    
+    AMPanelView *panelView = (AMPanelView *)sender.superview.superview;
+    AMPanelViewController *controller = (AMPanelViewController *)panelView.panelViewController;
+    
+    if (controller.panelType == AMNetworkToolsPanelType) {
+        NSString *newId = [NSString stringWithFormat:@"%@_%d", controller.panelId,
+                       ++numberOfNetworkToolsPanel];
+        NSString *newTitle = [NSString stringWithFormat:@"NETWORK TOOLS - %d", numberOfNetworkToolsPanel];
+        AMPanelViewController *newController =
+            [self createNetworkToolsPanelController:newId withTitle:newTitle];
+        AMPanelView *newPanel = (AMPanelView *)newController.view;
+        [newController.view removeFromSuperview];
+        [_containerView addSubview:newPanel positioned:NSWindowAbove relativeTo:panelView.hostingBox];
+        [newPanel scrollRectToVisible:newPanel.frame];
+    }
 }
 
 - (void)createDefaultWindow {
@@ -264,6 +283,7 @@
     }
     
 }
+
 -(AMPanelViewController* )createPanel:(NSString*) identifier withTitle:(NSString*)title{
     AMPanelViewController *viewController=
     [self createPanel:identifier withTitle:title  width:UI_defaultPanelWidth height:UI_defaultPanelHeight];
@@ -287,6 +307,7 @@
 //                                                    self.window.frame.size.height-UI_topbarHeight-
 //                                                    height+UI_pixelHeightAdjustment, width, height);
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
+    panelView.panelViewController = panelViewController;
     panelView.preferredSize = NSMakeSize(width, height);
         [panelViewController setTitle:title];
     
@@ -537,36 +558,31 @@
      */
 }
 
--(void)loadNetworkToolsPanel{
+- (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
+                                                   withTitle:(NSString *)title
+{
     float panelWidth=600.0f;
     float panelHeight=720.0f;
-    AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_NetworkTools withTitle:@"NETWORK TOOLS" width:panelWidth height:panelHeight];
+    AMPanelViewController *panelViewController=[self createPanel:ident withTitle:title width:panelWidth height:panelHeight];
+    panelViewController.panelType = AMNetworkToolsPanelType;
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-//    NSSize maxSize = NSMakeSize(600.0f, 720);
+    //    NSSize maxSize = NSMakeSize(600.0f, 720);
     NSSize minSize = NSMakeSize(600.0f, 300);
-//    panelView.maxSizeConstraint = maxSize;
+    //    panelView.maxSizeConstraint = maxSize;
     panelView.minSizeConstraint = minSize;
     
-    pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    NSView *pingView = pingViewController.view;
+    AMPingViewController *pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
+    panelViewController.subViewController = pingViewController;
+    NSView *pingView = pingViewController.view;    
     pingView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
     [panelView addSubview:pingView];
-    [pingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *views = NSDictionaryOfVariableBindings(pingView);
-    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pingView]|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-    
-    [panelView addConstraints:
-        [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[pingView]|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-    
     
     [self fillPanel:panelViewController.view content:pingViewController.view];
-    
+    return panelViewController;
+}
+
+-(void)loadNetworkToolsPanel{
+    [self createNetworkToolsPanelController:UI_Panel_Key_NetworkTools withTitle:@"NETWORK TOOLS"];
 }
 
 - (void)loadUserPanel {

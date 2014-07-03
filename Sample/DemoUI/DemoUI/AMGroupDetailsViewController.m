@@ -11,6 +11,7 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMMesher/AMMesher.h"
 
 
 @interface AMGroupDetailsViewController ()
@@ -48,6 +49,12 @@
     }
     
     [self.groupDescField setStringValue:self.group.description];
+}
+
+- (IBAction)joinGroup:(NSButton *)sender
+{
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    [mesher mergeGroup:self.group.groupId];
 }
 
 - (IBAction)cancelClick:(id)sender

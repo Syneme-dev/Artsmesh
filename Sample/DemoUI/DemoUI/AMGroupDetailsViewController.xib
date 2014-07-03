@@ -67,6 +67,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="joinGroup:" target="-2" id="dmP-L1-hPl"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-E3-LdX">
                     <rect key="frame" x="150" y="0.0" width="150" height="35"/>

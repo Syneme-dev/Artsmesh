@@ -10,15 +10,14 @@
 #import "AMMesher/AMAppObjects.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
+#import <UIFramework/AMButtonHandler.h>
+
 
 @interface AMGroupDetailsViewController ()
 
 @property (weak) IBOutlet NSButton *joinBtn;
-@property (weak) IBOutlet NSButton *leaderBtn;
-@property (weak) IBOutlet NSButton *commitBtn;
 @property (weak) IBOutlet NSButton *cancelBtn;
-@property (weak) IBOutlet NSButton *changePasswordBtn;
-@property (weak) IBOutlet AMFoundryFontView *leaderField;
+@property (weak) IBOutlet AMFoundryFontView *groupDescField;
 
 @end
 
@@ -36,12 +35,11 @@
 
 -(void)updateUI
 {
-    AMUser* leader = [self.group leader];
-    self.leaderField.stringValue = leader.nickName;
+    [AMButtonHandler changeTabTextColor:self.joinBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
     
     BOOL isMyGroup = [self.group isMyGroup];
     BOOL isMyMergedGroup = [self.group isMyMergedGroup];
-    
     
     if ( isMyGroup || isMyMergedGroup) {
         [self.joinBtn setEnabled:NO];
@@ -49,12 +47,7 @@
         [self.joinBtn setEnabled:YES];
     }
     
-    AMUser* mySelf =[AMAppObjects appObjects][AMMyselfKey];
-    if (isMyGroup || mySelf.isLeader) {
-        [self.leaderBtn setEnabled:NO];
-    }else{
-        [self.leaderBtn setEnabled:NO];
-    }
+    [self.groupDescField setStringValue:self.group.description];
 }
 
 - (IBAction)cancelClick:(id)sender

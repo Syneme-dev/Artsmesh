@@ -50,6 +50,8 @@
 
 -(void)awakeFromNib
 {
+    [self userGroupsChanged:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_REMOTEGROUPS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MESHER_ONLINE_CHANGED object:nil];

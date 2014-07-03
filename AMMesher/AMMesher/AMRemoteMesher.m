@@ -158,11 +158,16 @@
                 AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
                 [machine setMesherState:kMesherMeshed];
                 
+                NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
             });
             
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 mySelf.isOnline = NO;
+                NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
             });
         }
     };
@@ -276,6 +281,9 @@
     req.httpTimeout = 10;
     req.httpMethod = @"POST";
     [req sendRequest];
+    
+    NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 

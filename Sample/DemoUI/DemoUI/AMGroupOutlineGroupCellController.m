@@ -12,7 +12,6 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
 #import "AMMesher/AMMesher.h"
-#import "AMErrPopoverViewController.h"
 #import "AMGroupTextFieldFormatter.h"
 
 #define MAX_GROUP_NAME_LENGTH 16
@@ -20,7 +19,6 @@
 
 @interface AMGroupOutlineGroupCellController ()<NSTextFieldDelegate>
 
-@property NSPopover* myPopOver;
 @end
 
 @implementation AMGroupOutlineGroupCellController

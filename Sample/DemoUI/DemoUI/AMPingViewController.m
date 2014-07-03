@@ -45,6 +45,7 @@
         object:nil];
 }
 
+
 -(void)userGroupsChanged:(NSNotification*)notification
 {
     NSString *mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];

@@ -404,7 +404,8 @@
     panelView.minSizeConstraint = panelSize;
 //    panelView.maxSizeConstraint = panelSize;
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
-    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
+//    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
+    [self fillPanel:panelViewController.view content:socialViewController.view];
     [panelViewController.view addSubview:socialViewController.view];
     [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
     [socialViewController.socialWebTab setPolicyDelegate:socialViewController];

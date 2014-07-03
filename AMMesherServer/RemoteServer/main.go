@@ -27,6 +27,27 @@ type UserHeartbeatResposeDTO struct{
 	Version  	string
 }
 
+type AMRequestGroup struct{
+	GroupId 		string
+	GroupName 	string
+	Description 	string
+	LeaderId 	string
+}
+
+type AMRequestUser struct{
+	UserId 		string
+	NickName 	string
+	Domain		string
+	Location  	string
+	Description 	string
+	PrivateIp 	string
+	PublicIp		string
+	IsLeader		string
+	IsOnline		string
+	ChatPort		string
+	PublicChatPort string
+}
+
 
 type CommandAction int
 const(
@@ -42,11 +63,17 @@ const(
 
 type GroupUserCommand struct{
 	action  	CommandAction
-	userId 			string 
-	userData 		string
-	groupId			string
-	groupData		string
-	superGroup		string
+	group 			*AMRequestGroup
+	superGroup 		*AMRequestGroup
+	user 			*AMRequestUser
+	passworOper 		*AMRequestChangePassword
+	response  		chan string
+}
+
+type AMRequestChangePassword struct{
+	groupId 			string
+	oldPassword  	string
+	newPassword 		string
 }
 
 const(
@@ -111,35 +138,38 @@ func executeCommand(){
 	for{
 		command := <-g_command_pipe
 		switch command.action{
-		case user_new:
-			AddNewGroup(command.groupId, "", command.groupData)
-			AddNewUser(command.userId, command.groupId, command.userData)
 			
 		case group_new:
-			res := AddNewGroup(command.groupId, command.superGroup, command.groupData)
-			fmt.Println("AddNewGroup return value is", res)
-
+			response := AddNewGroup(command.group, command.superGroup.GroupId)
+			command.response<- response
+			
+		case user_new:
+			response := AddNewUser(command.user, command.group.GroupId)
+			command.response<- response
+		
 		case group_update:
-			res := UpdataGroup(command.groupId, command.groupData)
-			fmt.Println("UpdataGroup return value is", res)
+			response := UpdataGroup(command.group)
+			command.response<- response
 
 		case user_update:
-			res := UpdataUser(command.userId, command.groupId, command.userData)	
-			fmt.Println("UpdataUser return value is", res)
+			response := UpdataUser(command.user, command.group.GroupId)	
+			command.response<- response
 
 		case group_delete:
-			DeleteGroup(command.groupId)
+			response := DeleteGroup(command.group.GroupId)
+			command.response<- response
 
 		case user_delete:
-			DeleteUser(command.userId, command.groupId)
-
+			response := DeleteUser(command.user.UserId, command.group.GroupId)
+			command.response<- response
+			
 		case group_move:
-			res := MoveGroup(command.groupId, command.superGroup)
-			fmt.Println("MoveGroup return value is", res)
+			response := MoveGroup(command.group.GroupId, command.superGroup.GroupId)
+			command.response<- response
 
 		case user_heartbeat:
-			res := UserHeartbeat(command.userId, command.groupId)
-			fmt.Println("UserHeartbeat return value is", res)
+			response := UserHeartbeat(command.user.UserId, command.group.GroupId)
+			command.response<- response
 		}
 	}
 }
@@ -205,10 +235,15 @@ func handleClient(conn *net.UDPConn){
 	
 	var command GroupUserCommand
 	command.action = user_heartbeat
-	command.userId = heartbeatInfo.UserId
-	command.groupId = heartbeatInfo.GroupId
-	
+	command.user = new(AMRequestUser)
+	command.user.UserId = heartbeatInfo.UserId
+	command.group = new(AMRequestGroup)
+	command.group.GroupId = heartbeatInfo.GroupId
+	command.response = make(chan string)
+
 	g_command_pipe<- command
+	response := <-command.response
+	fmt.Println(response)
 
 	ss := RLockSnapShot()
 	version := ss.Version
@@ -252,33 +287,51 @@ func parseJsonString(contentStr string) *UserHeartbeatInfo{
 
 func addUser(w http.ResponseWriter, r *http.Request){	
 	r.ParseForm()
-	userId := strings.Join(r.Form["userId"], "") 
-	groupId := strings.Join(r.Form["groupId"], "")
-	userData := strings.Join(r.Form["userData"], "")
-	groupData := strings.Join(r.Form["groupName"], "")
+	
+	reqUser := new(AMRequestUser)
+	reqUser.UserId = strings.Join(r.Form["userId"], "") 
+	reqUser.NickName = strings.Join(r.Form["nickName"], "") 
+	reqUser.Domain = strings.Join(r.Form["domain"], "") 
+	reqUser.Location = strings.Join(r.Form["location"], "") 
+	reqUser.Description = strings.Join(r.Form["description"], "") 
+	reqUser.PrivateIp = strings.Join(r.Form["privateIp"], "") 
+	reqUser.PublicIp = strings.Join(r.Form["publicIp"], "") 
+	reqUser.IsLeader = strings.Join(r.Form["isLeader"], "") 
+	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
+	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
+	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
+	
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 
 	
 	fmt.Println("")
 	fmt.Println("user_add requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("userId:", userId)
-	fmt.Println("groupId:", groupId)
-	fmt.Println("userData:", userData)
-	fmt.Println("groupData:", groupData)
+	fmt.Println("userId:", reqUser.UserId)
+	fmt.Println("nickName:", reqUser.NickName)
+	fmt.Println("domain:", reqUser.Domain)
+	fmt.Println("location:", reqUser.Location)
+	fmt.Println("description:", reqUser.Description)
+	fmt.Println("privateIp:", reqUser.PrivateIp)
+	fmt.Println("publicIp:", reqUser.PublicIp)
+	fmt.Println("isLeader:", reqUser.IsLeader)
+	fmt.Println("isOnline:", reqUser.IsOnline)
+	fmt.Println("chatPort:", reqUser.ChatPort)
+	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
+	fmt.Println("groupId:", reqGroup.GroupId)
+
 	fmt.Println("end http requst information ---------------------")
-	
-	//check value
 	
 	var command GroupUserCommand
 	command.action = user_new
-	command.userId = userId
-	command.groupId = groupId
-	command.userData = userData
-	command.groupData = groupData
+	command.user = reqUser
+	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
-
-	fmt.Fprintf(w, "ok")
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func getAllUsers(w http.ResponseWriter, r *http.Request){
@@ -297,182 +350,230 @@ func getAllUsers(w http.ResponseWriter, r *http.Request){
 
 func updateUser(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	userId := strings.Join(r.Form["userId"], "") 
-	groupId := strings.Join(r.Form["groupId"], "")
-	userData := strings.Join(r.Form["userData"], "")
 	
+	reqUser := new(AMRequestUser)
+	reqUser.UserId = strings.Join(r.Form["userId"], "") 
+	reqUser.NickName = strings.Join(r.Form["nickName"], "") 
+	reqUser.Domain = strings.Join(r.Form["domain"], "") 
+	reqUser.Location = strings.Join(r.Form["location"], "") 
+	reqUser.Description = strings.Join(r.Form["description"], "") 
+	reqUser.PrivateIp = strings.Join(r.Form["privateIp"], "") 
+	reqUser.PublicIp = strings.Join(r.Form["publicIp"], "") 
+	reqUser.IsLeader = strings.Join(r.Form["isLeader"], "") 
+	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
+	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
+	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
+	
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 
+		
 	fmt.Println("")
 	fmt.Println("user_update requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("userId:", userId)
-	fmt.Println("groupId:", groupId)
-	fmt.Println("userData:", userData)
+	fmt.Println("userId:", reqUser.UserId)
+	fmt.Println("nickName:", reqUser.NickName)
+	fmt.Println("domain:", reqUser.Domain)
+	fmt.Println("location:", reqUser.Location)
+	fmt.Println("description:", reqUser.Description)
+	fmt.Println("privateIp:", reqUser.PrivateIp)
+	fmt.Println("publicIp:", reqUser.PublicIp)
+	fmt.Println("isLeader:", reqUser.IsLeader)
+	fmt.Println("isOnline:", reqUser.IsOnline)
+	fmt.Println("chatPort:", reqUser.ChatPort)
+	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = user_update
-	command.userId = userId
-	command.groupId = groupId
-	command.userData = userData
+	command.user = reqUser
+	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
-
-	fmt.Fprintf(w, "ok")
+	
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func deleteUser(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	userId := strings.Join(r.Form["userId"], "") 
-	groupId := strings.Join(r.Form["groupId"], "")
+	
+	reqUser := new(AMRequestUser)
+	reqUser.UserId = strings.Join(r.Form["userId"], "") 
+	
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 
 	
 	fmt.Println("")
 	fmt.Println("user_delete requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("userId:", userId)
-	fmt.Println("groupId:", groupId)
+	fmt.Println("userId:", reqUser.UserId)
+	fmt.Println("groupId:", reqGroup.GroupId)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = user_delete
-	command.userId = userId
-	command.groupId = groupId
+	command.user = reqUser
+	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
-
-	fmt.Fprintf(w, "ok")
+	
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func addGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
-	superGroupId := strings.Join(r.Form["superGroupId"], "")
-	groupData := strings.Join(r.Form["groupData"], "")
+		
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "")
+	reqGroup.GroupName = strings.Join(r.Form["groupName"], "")
+	reqGroup.Description = strings.Join(r.Form["description"], "")
+	reqGroup.LeaderId = strings.Join(r.Form["leaderId"], "")
 	
 	fmt.Println("")
-	fmt.Println("group_add requst information ---------------------")
+	fmt.Println("register_group requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-
-	fmt.Println("groupId is:", groupId)
-	fmt.Println("groupData is:", groupData)
-	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("groupId:", reqGroup.GroupId)
+	fmt.Println("groupName:", reqGroup.GroupName)
+	fmt.Println("description:", reqGroup.Description)
+	fmt.Println("leaderId:", reqGroup.LeaderId)
 	fmt.Println("end http requst information ---------------------")
-	
-	//check value
 	
 	var command GroupUserCommand
 	command.action = group_new
-	command.groupId = groupId
-	command.groupData = groupData
-	command.superGroup = superGroupId
+	command.group = reqGroup
+	command.superGroup = new(AMRequestGroup)
+	command.superGroup.GroupId = ""
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
-
-	fmt.Fprintf(w, "ok")
+	
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func updateGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
-	groupData := strings.Join(r.Form["groupData"], "")
+	
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "")
+	reqGroup.GroupName = strings.Join(r.Form["groupName"], "")
+	reqGroup.Description = strings.Join(r.Form["description"], "")
+	reqGroup.LeaderId = strings.Join(r.Form["leaderId"], "")
 	
 	fmt.Println("")
 	fmt.Println("group_update requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-
-	fmt.Println("groupId is:", groupId)
-	fmt.Println("groupData is:", groupData)
+	fmt.Println("groupId:", reqGroup.GroupId)
+	fmt.Println("groupName:", reqGroup.GroupName)
+	fmt.Println("description:", reqGroup.Description)
+	fmt.Println("leaderId:", reqGroup.LeaderId)
 	fmt.Println("end http requst information ---------------------")
-	
-	//check value
 	
 	var command GroupUserCommand
 	command.action = group_update
-	command.groupId = groupId
-	command.groupData = groupData
+	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
-
-	fmt.Fprintf(w, "ok")
+	
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func deleteGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
+	
+	reqGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "")
 
 	fmt.Println("")
 	fmt.Println("group_delete requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("groupId is:", groupId)
+	fmt.Println("groupId is:", reqGroup.GroupId)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = group_delete
-	command.groupId = groupId
+	command.group = reqGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
 
-	fmt.Fprintf(w, "ok")
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func mergeGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
-	superGroupId := strings.Join(r.Form["superGroupId"], "")
+	
+	reqGroup := new(AMRequestGroup)
+	reqSuperGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "")
+	reqSuperGroup.GroupId =  strings.Join(r.Form["superGroupId"], "")
 
 	fmt.Println("")
 	fmt.Println("group_move requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("groupId is:", groupId)
-	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("groupId is:", reqGroup.GroupId)
+	fmt.Println("superGroupId is:", reqSuperGroup.GroupId)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = group_move
-	command.groupId = groupId
-	command.superGroup = superGroupId
+	command.group = reqGroup
+	command.superGroup = reqSuperGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
 
-	fmt.Fprintf(w, "ok")
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func unmergeGroup(w http.ResponseWriter, r *http.Request){
 	r.ParseForm()
-	groupId := strings.Join(r.Form["groupId"], "")
-	superGroupId := ""
+	
+	reqGroup := new(AMRequestGroup)
+	reqSuperGroup := new(AMRequestGroup)
+	reqGroup.GroupId = strings.Join(r.Form["groupId"], "")
+	reqSuperGroup.GroupId =  ""
 
 	fmt.Println("")
 	fmt.Println("group_move requst information ---------------------")
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)	
-	fmt.Println("groupId is:", groupId)
-	fmt.Println("superGroupId is:", superGroupId)
+	fmt.Println("group is:", reqGroup.GroupName)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
 	
 	var command GroupUserCommand
 	command.action = group_move
-	command.groupId = groupId
-	command.superGroup = superGroupId
+	command.group = reqGroup
+	command.superGroup = reqSuperGroup
+	command.response = make(chan string)
 	
 	g_command_pipe<- command
 
-	fmt.Fprintf(w, "ok")
+	response := <-command.response
+	fmt.Fprintf(w, response)
 }
 
 func startRestServer(){

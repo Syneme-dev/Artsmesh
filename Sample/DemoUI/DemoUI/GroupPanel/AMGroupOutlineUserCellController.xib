@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMGroupOutlineUserCellController">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <customView id="Hz6-mo-xeY" customClass="AMGroupOutlineUserCellView">
+            <rect key="frame" x="0.0" y="0.0" width="252" height="23"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gt4-i8-mdR">
+                    <rect key="frame" x="2" y="2" width="17" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="gh2-fK-RXl"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ks3-XZ-0wB" customClass="AMFoundryFontView">
+                    <rect key="frame" x="18" y="4" width="119" height="17"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="ab4-QM-G0o">
+                        <customFormatter key="formatter" id="QDj-l3-sQe" customClass="AMGroupTextFieldFormatter"/>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="userNameEdited:" target="-2" id="NDK-eD-xM8"/>
+                    </connections>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qC5-Ey-8E8">
+                    <rect key="frame" x="152" y="1" width="100" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Grq-7N-rIk">
+                            <rect key="frame" x="0.0" y="2" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="SideBar_user_h" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="5Rq-yX-s6c">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="awN-46-d2C">
+                            <rect key="frame" x="40" y="1" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="user_zombie" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvC-ZJ-I1T">
+                            <rect key="frame" x="80" y="2" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_info" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="infoBtnClick:" target="-2" id="YT3-G8-FJk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
+            </subviews>
+            <connections>
+                <outlet property="imageView" destination="gt4-i8-mdR" id="rvw-Bs-Sud"/>
+                <outlet property="infoBtn" destination="OvC-ZJ-I1T" id="stQ-RP-X7K"/>
+                <outlet property="leaderBtn" destination="Grq-7N-rIk" id="3DS-Q9-3tb"/>
+                <outlet property="textField" destination="ks3-XZ-0wB" id="jEl-vY-CGG"/>
+                <outlet property="zombieBtn" destination="awN-46-d2C" id="ry8-2V-sq1"/>
+            </connections>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="SideBar_user_h" width="40" height="40"/>
+        <image name="group_info" width="25" height="25"/>
+        <image name="user_zombie" width="25" height="25"/>
+    </resources>
+</document>

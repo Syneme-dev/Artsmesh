@@ -9,7 +9,6 @@
 #import "AMPingViewController.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMGroup.h"
 #import "AMTaskLauncher/AMShellTask.h"
 
 #define UI_Color_b7b7b7  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]

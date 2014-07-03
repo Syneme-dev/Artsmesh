@@ -10,15 +10,15 @@
 #import "AMHeartBeat.h"
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
-#import "AMUserRequest.h"
 #import "AMAppObjects.h"
 #import "AMMesher.h"
-#import "AMGroup.h"
 #import "AMMesherStateMachine.h"
 #import "AMSystemConfig.h"
+#import "AMHttpAsyncRequest.h"
+#import "AMHttpSyncRequest.h"
 
 
-@interface AMLocalMesher()<AMHeartBeatDelegate, AMUserRequestDelegate>
+@interface AMLocalMesher()<AMHeartBeatDelegate>
 @end
 
 @implementation AMLocalMesher
@@ -79,10 +79,10 @@
                     [self startLocalClient];
                     break;
                 case kMesherMeshed:
-                    [self updateMyselfInfo];
+                    [self updateMyself];
                     break;
                 case kMesherUnmeshing:
-                    [self updateMyselfInfo];
+                    [self updateMyself];
                     [machine setMesherState:kMesherStarted];
                     break;
                 case kMesherStopping:
@@ -145,41 +145,145 @@
 
 -(void)startLocalClient
 {
-    [self registerSelf];
+    [self registerLocalGroup];
+}
+
+-(void)registerLocalGroup
+{
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    myGroup.leaderId = mySelf.userid;
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/register";
+    req.httpMethod = @"POST";
+    req.formData = [myGroup dictWithoutUsers];
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL cancel){
+        if (cancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if ([responseStr isEqualToString:@"ok"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mySelf.isLeader = YES;
+                [self registerSelf];
+            });
+            
+        }else if([responseStr isEqualToString:@"group already exist"]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mySelf.isLeader = NO;
+                 [self registerSelf];
+            });
+            
+        }else{
+            NSAssert(NO, @"local http request wrong!");
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+}
+
+
+-(void)getLocalGroupInfo
+{
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/getall";
+    req.httpMethod = @"GET";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when get group info:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            AMGroup* group = [AMGroup AMGroupFromDict:(NSDictionary*)response];
+            AMGroup* localGroup =[AMAppObjects appObjects][AMLocalGroupKey];
+            
+            //should no need synchronized, because in main loop
+            // @synchronized(localGroup){
+            localGroup.groupName = group.groupName;
+            localGroup.description = group.description;
+            localGroup.leaderId = group.leaderId;
+            //}
+            
+            [self registerSelf];
+        });
+    };
+    
+    [_httpRequestQueue addOperation:req];
 }
 
 
 -(void)registerSelf
 {
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    NSString* clusterId = [[AMAppObjects appObjects] valueForKey:AMClusterIdKey];
-    NSString* clusterName = [[AMAppObjects appObjects] valueForKey:AMClusterNameKey];
     
     NSMutableDictionary* dict = [mySelf toDict];
-    [dict setObject:clusterId forKey:@"groupId"];
-    [dict setObject:clusterName forKey:@"groupName"];
     
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/users/add";
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/users/register";
     req.httpMethod = @"POST";
     req.formData = dict;
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if ([responseStr isEqualToString:@"ok"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
+                [machine setMesherState:kMesherStarted];
+                [self startHeartbeat];
+            });
+            
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"register self failed, retry");
+                [self registerSelf];
+            });
+        }
+    };
     
     [_httpRequestQueue addOperation:req];
 }
 
 
 -(void)unregisterSelf{
+    
     AMUser* mySelf =[[AMAppObjects appObjects] valueForKey:AMMyselfKey];
-    AMUserRequest* req = [[AMUserRequest alloc] init];
     
-    req.delegate = self;
-    req.requestPath = @"/users/delete";
-    req.formData = @{@"userId": mySelf.userid};
-    req.httpMethod = @"POST";
-    
-    [_httpRequestQueue addOperation:req];
-    [_httpRequestQueue waitUntilAllOperationsAreFinished];
+    AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];
+    unregReq.baseURL = [self httpBaseURL];
+    unregReq.requestPath = @"/users/unregister";
+    unregReq.httpMethod = @"POST";
+    unregReq.formData = @{@"userId": mySelf.userid};
+
+    [unregReq sendRequest];
 }
 
 
@@ -228,26 +332,84 @@
 }
 
 
--(void)changeGroupName:(NSString* ) newGroupName
+-(void)updateLocalGroup
+{
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    NSAssert(localGroup, @"local group should not be nil");
+    
+    NSMutableDictionary* dict = [localGroup dictWithoutUsers];
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/update";
+    req.httpMethod = @"POST";
+    req.formData = dict;
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSAssert(NO, @"update group info response wrong!");
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+}
+
+-(void)changeGroupPassword:(NSString*)newPassword password:(NSString*)oldPassword
 {
     AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
     NSAssert(machine, @"mesher state machine can not be nil!");
     
     AMMesherState mState = [machine mesherState];
-    if (mState != kMesherStarted ){
+    if (mState < kMesherStarted ){
         return;
     }
     
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
-    req.requestPath = @"/groups/update";
-    req.formData = @{@"groupName": newGroupName };
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    dict[@"password"] = oldPassword;
+    dict[@"newPasswrod"] = newPassword;
+    dict[@"groupId"] = localGroup.groupId;
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/change_password";
+    req.formData = dict;
     req.httpMethod = @"POST";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSAssert(NO, @"update group password response wrong!");
+        }
+    };
     
     [_httpRequestQueue addOperation:req];
 }
 
--(void)updateMyselfInfo
+
+-(void)updateMyself
 {
     AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
     NSAssert(machine, @"mesher state machine can not be nil!");
@@ -256,32 +418,142 @@
         return;
     }
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-    NSDictionary* dict = [mySelf toDict];
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
     
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate = self;
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/update";
-    req.formData = dict;
+    req.formData = [mySelf toDict];
     req.httpMethod = @"POST";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSAssert(NO, @"update user info response wrong!");
+        }
+    };
     
     [_httpRequestQueue addOperation:req];
-    [_httpRequestQueue waitUntilAllOperationsAreFinished];
+    
+}
+
+-(void)updateGroupInfo
+{
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
+    req.requestPath = @"/groups/update";
+    req.formData = [localGroup dictWithoutUsers];
+    req.httpMethod = @"POST";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_UPDATE_GROUP_FAILED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        
+        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+        if (![responseStr isEqualToString:@"ok"]) {
+            NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_UPDATE_GROUP_FAILED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
 }
 
 
 -(void)requestUserList
 {
-    if ([_httpRequestQueue operationCount] > 2){
-        return;
-    }
-    
-    AMUserRequest* req = [[AMUserRequest alloc] init];
-    req.delegate  = self;
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/getall";
     req.httpMethod = @"GET";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        NSLog(@"getall users return........................");
+        
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+        if(err != nil){
+            NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+            NSAssert(NO, errInfo);
+        }
+        
+        NSDictionary* result = (NSDictionary*)objects;
+
+        NSDictionary* groupData = (NSDictionary*)result[@"GroupData"];
+        AMGroup* group = [AMGroup AMGroupFromDict:groupData];
+        
+        id userArr = [result objectForKey:@"UsersData"];
+        if (userArr == [NSNull null]) {
+            userArr = nil;
+        }
+        
+        NSMutableArray* users = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < [userArr count]; i++)
+        {
+            NSDictionary* userDict = (NSDictionary*)userArr[i];
+            AMUser* user = [AMUser AMUserFromDict:userDict];
+            [users addObject:user];
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+            localGroup.groupId = group.groupId;
+            localGroup.groupName = group.groupName;
+            localGroup.description = group.description;
+            localGroup.leaderId = group.leaderId;
+            localGroup.users = users;
+            
+            _userlistVersion = [[result objectForKey:@"Version"] intValue];
+            
+            NSNotification* notification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+        });
+    };
 
     [_httpRequestQueue addOperation:req];
+}
+
+- (NSString *)httpBaseURL
+{
+    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    NSAssert(config, @"system config can not be nil!");
+    NSString* localServerAddr = config.localServerAddr;
+    NSString* localServerPort = config.localServertPort;
+    
+    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
 }
 
 
@@ -298,7 +570,6 @@
     NSData* data = [NSJSONSerialization dataWithJSONObject:localHeartbeatReq options:0 error:nil];
     return data;
 }
-
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
@@ -320,7 +591,6 @@
     }
 }
 
-
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
 //    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -332,128 +602,6 @@
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
     //NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
-}
-
-
-#pragma mark-
-#pragma AMUserRequestDelegate
-
-- (NSString *)httpBaseURL
-{
-    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
-    NSAssert(config, @"system config can not be nil!");
-    NSString* localServerAddr = config.localServerAddr;
-    NSString* localServerPort = config.localServertPort;
-    
-    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
-}
-
-
-- (void)userrequest:(AMUserRequest *)userrequest didReceiveData:(NSData *)data
-{
-    if (data == nil) {
-        return;
-    }
-    
-    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"received http response:%@\n", dataStr);
-    
-    if([userrequest.requestPath isEqualToString:@"/users/add"]){
-        
-        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-        NSAssert(machine, @"mesher state machine can not be nil!");
-        
-//        if ([machine mesherState] != kMesherLocalClientStarting){
-//            return;
-//        }
-        
-        [machine setMesherState:kMesherStarted];
-        
-        [self startHeartbeat];
-        return;
-    }
-    
-    if ([userrequest.requestPath isEqualToString:@"/users/getall"]) {
-        
-        NSLog(@"getall users return........................");
-        
-        NSError *err = nil;
-        id objects = [NSJSONSerialization JSONObjectWithData:data
-                                                     options:0
-                                                       error:&err];
-        if(err != nil){
-            NSLog(@"parse Json error:%@", err.description);
-            return;
-        }
-        
-        NSDictionary* result = (NSDictionary*)objects;
-        
-        NSString* clusterId = [result objectForKey:@"GroupId"];
-        NSString* clusterName = [result objectForKey:@"GroupName"];
-        
-        NSString* oldClusterId = [[AMAppObjects appObjects] objectForKey:AMClusterIdKey];
-        NSString* oldClusterName = [[AMAppObjects appObjects] objectForKey:AMClusterNameKey];
-        
-        if (![oldClusterId isEqualToString:clusterId] || ![oldClusterName isEqualToString:clusterName]){
-            [[AMAppObjects appObjects] setObject:clusterId forKey:AMClusterIdKey];
-            [[AMAppObjects appObjects] setObject:clusterName forKey:AMClusterNameKey];
-        }
-        
-        id userArr = [result objectForKey:@"UserDTOs"];
-        NSMutableDictionary* newUsers = [[NSMutableDictionary alloc] init];
-        if (userArr == [NSNull null]) {
-            userArr = nil;
-        }
-        for (int i = 0; i < [userArr count]; i++)
-        {
-            NSDictionary* userDTO = (NSDictionary*)userArr[i];
-            NSString* userId = [userDTO objectForKey:@"UserId"];
-            NSString* userDataStr = [userDTO objectForKey:@"UserData"];
-            NSData* userData = [userDataStr dataUsingEncoding:NSUTF8StringEncoding];
-            
-            NSError *err = nil;
-            id object = [NSJSONSerialization JSONObjectWithData:userData
-                                                         options:0
-                                                           error:&err];
-            if(err != nil){
-                NSLog(@"parse Json error:%@", err.description);
-                return;
-            }
-            
-            NSDictionary* userDataDict = (NSDictionary*)object;
-            NSDictionary* oldUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
-            if (oldUsers == nil) {
-                oldUsers = [[NSMutableDictionary alloc] init];
-                [[AMAppObjects appObjects] setObject:oldUsers forKey:AMLocalUsersKey];
-            }
-
-            AMUser* user = [[AMUser alloc] init];
-            user.userid = userId;
-            user.nickName = [userDataDict objectForKey:@"nickName"];
-            user.domain = [userDataDict objectForKey:@"domain"];
-            user.location = [userDataDict objectForKey:@"location"];
-            user.localLeader = [userDataDict objectForKey:@"localLeader"];
-            user.isOnline = [[userDataDict objectForKey:@"isOnline"] boolValue];
-            user.privateIp = [userDataDict objectForKey:@"privateIp"];
-            user.chatPort = [userDataDict objectForKey:@"chatPort"];
-            [newUsers setValue:user forKeyPath:userId];
-        }
-        
-        [[AMAppObjects appObjects] setObject:newUsers forKey:AMLocalUsersKey];
-        
-        _userlistVersion = [[result objectForKey:@"Version"] intValue];
-        NSNotification* notification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-    
-        return;
-    }
-
-}
-
-- (void)userrequest:(AMUserRequest *)userrequest didFailWithError:(NSError *)error
-{
-   // NSAssert(NO, @"http request failed!");
 }
 
 

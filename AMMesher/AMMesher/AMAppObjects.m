@@ -7,15 +7,15 @@
 //
 
 #import "AMAppObjects.h"
-
-NSString * const AMClusterNameKey = @"AMClusterNameKey";
-NSString * const AMClusterIdKey = @"AMClusterIdKey";
-NSString * const AMLocalUsersKey = @"AMLocalUsersKey";
+NSString * const AMMeshedGroupKey = @"AMMeshedGroupKey";
+NSString * const AMGroupMessageKey = @"AMGroupMessageKey";
+NSString * const AMLocalGroupKey = @"AMLocalGroupKey";
 NSString * const AMMyselfKey = @"AMMyselfKey";
 NSString * const AMMergedGroupIdKey = @"AMMergedGroupIdKey";
 NSString * const AMRemoteGroupsKey = @"AMRemoteGroupsKey";
 NSString * const AMMesherStateMachineKey = @"AMMesherStateMachineKey";
 NSString * const AMSystemConfigKey = @"AMSystemConfigKey";
+
 
 static NSMutableDictionary *global_dict = nil;
 
@@ -56,7 +56,7 @@ static NSMutableDictionary *global_dict = nil;
         self.location = @"Local";
         self.privateIp = @"127.0.0.1";
         self.publicIp = @"127.0.0.1";
-        self.localLeader = @"default";
+        self.isLeader = NO;
         self.nickName = @"default";
         self.description = @"default";
         self.chatPort = @"9033";
@@ -69,57 +69,116 @@ static NSMutableDictionary *global_dict = nil;
 
 -(NSMutableDictionary*)toDict
 {
-    NSMutableDictionary* contentDict = [[NSMutableDictionary alloc] init];
-    [contentDict setObject:self.nickName forKey:@"nickName"];
-    [contentDict setObject:self.domain forKey:@"domain"];
-    [contentDict setObject:self.location forKey:@"location"];
-    [contentDict setObject:self.privateIp forKey:@"privateIp"];
-    [contentDict setObject:self.publicIp forKey:@"publicIp"];
-    [contentDict setObject:self.localLeader forKey:@"localLeader"];
-    [contentDict setObject:self.chatPort forKey:@"chatPort"];
-    [contentDict setObject:self.publicChatPort forKey:@"publicChatPort"];
-    [contentDict setObject:@(self.isOnline) forKey:@"isOnline"];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:self.userid forKey:@"userId"];
+    [dict setObject:self.nickName forKey:@"nickName"];
+    [dict setObject:self.domain forKey:@"domain"];
+    [dict setObject:self.location forKey:@"location"];
+    [dict setObject:self.privateIp forKey:@"privateIp"];
+    [dict setObject:self.publicIp forKey:@"publicIp"];
     
-    NSData* userData = [NSJSONSerialization dataWithJSONObject:contentDict options:0 error:nil];
-    NSString* userDataStr = [[NSString alloc] initWithData:userData encoding:NSUTF8StringEncoding];
+    if (self.isLeader) {
+         [dict setObject:@"YES" forKey:@"isLeader"];
+    }else{
+        [dict setObject:@"NO" forKey:@"isLeader"];
+    }
+   
+    [dict setObject:self.chatPort forKey:@"chatPort"];
+    [dict setObject:self.publicChatPort forKey:@"publicChatPort"];
     
-    NSMutableDictionary* localHttpBody = [[NSMutableDictionary alloc] init];
-    [localHttpBody setObject:userDataStr forKey:@"userData"];
-    [localHttpBody setObject:self.userid forKey:@"userId"];
+    if (self.isOnline) {
+        [dict setObject:@"YES" forKey:@"isOnline"];
+    }else{
+        [dict setObject:@"NO" forKey:@"isOnline"];
+    }
     
-    return localHttpBody;
+    
+    return dict;
 }
 
 +(id)AMUserFromDict:(NSDictionary*)dict
 {
-    AMUser* tempUser = [[AMUser alloc] init];
-    tempUser.userid =[dict objectForKey:@"UserId"];
-    NSString* userData = [dict objectForKey:@"UserData"];
-    NSData* data = [userData dataUsingEncoding:NSUTF8StringEncoding];
-    NSError* err = nil;
-    NSDictionary* userObj = [NSJSONSerialization JSONObjectWithData:data
-                                                    options:0
-                                                      error:&err];
-    if (err != nil) {
-        NSLog(@"parse json in AMUserFromDict failed!");
-        return tempUser;
-    }
-    
-    tempUser.nickName =[userObj objectForKey:@"nickName"];
-    tempUser.domain =[userObj objectForKey:@"domain"];
-    tempUser.location =[userObj objectForKey:@"Location"];
-    tempUser.localLeader =[userObj objectForKey:@"localLeader"];
-    tempUser.privateIp =[userObj objectForKey:@"privateIp"];
-    tempUser.publicIp =[userObj objectForKey:@"publicIp"];
-    tempUser.chatPort =[userObj objectForKey:@"chatPort"];
-    tempUser.publicChatPort =[userObj objectForKey:@"publicChatPort"];
-    tempUser.isOnline =[[userObj objectForKey:@"isOnline"] boolValue];
-    tempUser.description =[userObj objectForKey:@"description"];
-    
-    return tempUser;
+    AMUser* user = [[AMUser alloc] init];
+    user.userid = dict[@"UserId"];
+    user.nickName = dict[@"NickName"];
+    user.domain = dict[@"Domain"];
+    user.location = dict[@"Location"];
+    user.isLeader = [dict[@"IsLeader"] boolValue];
+    user.privateIp = dict[@"PrivateIp"];
+    user.publicIp = dict[@"PublicIp"];
+    user.chatPort = dict[@"ChatPort"];
+    user.publicChatPort = dict[@"PublicChatPort"];
+    user.isOnline = [dict[@"IsOnline"] boolValue];
+    user.description = dict[@"Description"];
+    return user;
+}
+
+@end
+
+@implementation AMGroup
+
+-(NSMutableDictionary*)dictWithoutUsers
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    dict[@"groupId"] = self.groupId;
+    dict[@"groupName"] = self.groupName;
+    dict[@"description"] = self.description;
+    dict[@"leaderId"] = self.leaderId;
+    return dict;
+}
+
++(id)AMGroupFromDict:(NSDictionary*)dict
+{
+    AMGroup* group = [[AMGroup alloc] init];
+    group.groupId = dict[@"GroupId"];
+    group.groupName = dict[@"GroupName"];
+    group.description = dict[@"Description"];
+    group.leaderId = dict[@"LeaderId"];
+    group.password = @"";
+    return group;
 }
 
 
+-(BOOL)isMeshed
+{
+    for (AMUser* user in self.users) {
+        if (user.isOnline == YES) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(AMUser*)leader
+{
+    for (AMUser* user in self.users) {
+        if ([user.userid isEqualToString:self.leaderId]) {
+            return user;
+        }
+    }
+
+    return nil;
+}
+
+
+-(BOOL)isMyGroup
+{
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    if (localGroup == nil) {
+        return NO;
+    }
+    return [self.groupId isEqualToString:localGroup.groupId];
+}
+
+
+-(BOOL)isMyMergedGroup
+{
+    NSString* mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+    if(mergedGroupId == nil)
+        return NO;
+    return [mergedGroupId isEqualToString:self.groupId];
+}
 
 
 @end

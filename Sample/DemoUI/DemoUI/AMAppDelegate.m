@@ -18,7 +18,6 @@
 #import "AMMesher/AMMesher.h"
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
-#import "AMUserGroupViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
 
 

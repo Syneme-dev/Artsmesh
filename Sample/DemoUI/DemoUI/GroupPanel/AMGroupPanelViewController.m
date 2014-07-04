@@ -77,6 +77,7 @@
     if (mySelf.isOnline == NO) {
         
         [self.outlineView reloadData];
+         [self.outlineView expandItem:nil expandChildren:YES];
         return;
     }
     
@@ -108,6 +109,7 @@
     [_userGroups addObject:labelController];
     
     [self.outlineView reloadData];
+    [self.outlineView expandItem:nil expandChildren:YES];
 }
 
 -(void)awakeFromNib
@@ -300,7 +302,8 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    return [self outlineView:outlineView numberOfChildrenOfItem:item] > 0;
+    long i =  [self outlineView:outlineView numberOfChildrenOfItem:item];
+    return i > 0;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item

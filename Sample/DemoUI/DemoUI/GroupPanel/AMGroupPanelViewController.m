@@ -179,11 +179,8 @@
     }
     
     NSRect rect = self.detailView.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
-    scrollViewRect.size.height += rect.size.height;
     rect.size.height = 0;
-    [self.detailView setFrame:rect];
-    [self.outlineScrollView setFrame:scrollViewRect];
+    [self.detailView.animator setFrame:rect];
     [self.view display];
 }
 
@@ -204,12 +201,9 @@
     NSRect scrollViewRect = self.outlineScrollView.frame;
     
     rect.size.width = scrollViewRect.size.width;
-    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
-    
-    [self.outlineScrollView setFrame:scrollViewRect];
-    [self.detailView setFrame:rect];
-    
+    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height - rect.size.height;
+
+    [self.detailView.animator setFrame:rect];
     [self.view display];
 }
 
@@ -229,11 +223,9 @@
     NSRect scrollViewRect = self.outlineScrollView.frame;
 
     rect.size.width = scrollViewRect.size.width;
-    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
+    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height - rect.size.height;
     
-    [self.outlineScrollView setFrame:scrollViewRect];
-    [self.detailView setFrame:rect];
+    [self.detailView.animator setFrame:rect];
     
     [self.view display];
 }

@@ -135,6 +135,7 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
+		D4DB6CB0196682B300AA5B05 /* AMUserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +361,8 @@
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
+		D4DB6CAE196682B300AA5B05 /* AMUserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailView.h; sourceTree = "<group>"; };
+		D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F353201534CF41128CA1E7AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -707,6 +710,8 @@
 				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
 				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
 				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
+				D4DB6CAE196682B300AA5B05 /* AMUserDetailView.h */,
+				D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */,
 			);
 			path = GroupPanel;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
+				D4DB6CB0196682B300AA5B05 /* AMUserDetailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

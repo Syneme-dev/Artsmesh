@@ -51,20 +51,27 @@
     
     AMGroupOutlineGroupCellController* localGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
     localGroupController.group = localGroup;
+    localGroupController.editable = YES;
     localGroupController.userControllers = [[NSMutableArray alloc] init];
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
     
     for (AMUser* user in localGroup.users){
         AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
         
         localUserController.group = localGroup;
         localUserController.user = user;
+        if ([user.userid isEqualToString: mySelf.userid]) {
+            localUserController.editable = YES;
+        }else{
+            localUserController.editable = NO;
+        }
         
         [localGroupController.userControllers addObject:localUserController];
     }
     
     [_userGroups addObject:localGroupController];
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
     if (mySelf.isOnline == NO) {
         
         [self.outlineView reloadData];

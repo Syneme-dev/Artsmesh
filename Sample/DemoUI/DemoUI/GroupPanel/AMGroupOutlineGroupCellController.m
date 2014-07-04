@@ -66,8 +66,7 @@
     [cellView.leaveBtn setHidden:YES];
     [cellView.mergeBtn setHidden:YES];
     
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-    if ([myGroup.groupId isEqualToString:self.group.groupId ]){
+    if (self.editable){
         [cellView.textField setEditable:YES];
         [cellView.descriptionField setEditable:YES];
     }else{

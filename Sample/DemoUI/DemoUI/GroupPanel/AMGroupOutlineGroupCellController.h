@@ -13,6 +13,7 @@
 
 @property AMGroup* group;
 @property NSMutableArray* userControllers;
+@property BOOL editable;
 
 -(void)setTrackArea;
 -(void)removeTrackAres;

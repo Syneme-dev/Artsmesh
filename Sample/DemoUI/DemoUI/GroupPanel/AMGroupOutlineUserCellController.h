@@ -13,6 +13,8 @@
 
 @property AMGroup* group;
 @property AMUser* user;
+@property BOOL editable;
+
 
 -(void)updateUI;
 -(void)setTrackArea;

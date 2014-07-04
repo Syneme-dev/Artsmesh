@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -26,15 +26,15 @@
                         <constraint firstAttribute="height" constant="1" id="iqW-yh-bix"/>
                     </constraints>
                 </customView>
-                <scrollView focusRingType="none" ambiguous="YES" misplaced="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
-                    <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
+                <scrollView focusRingType="none" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
+                    <rect key="frame" x="0.0" y="25" width="312" height="312"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
-                        <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
+                    <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
+                        <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Heo-zb-RZP" id="vcz-fd-kzK">
-                                <rect key="frame" x="0.0" y="0.0" width="312" height="337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="312" height="312"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.21960785984992981" green="0.21960785984992981" blue="0.21960785984992981" alpha="1" colorSpace="deviceRGB"/>
@@ -90,18 +90,23 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNQ-iM-Ykd">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="tNQ-iM-Ykd">
                     <rect key="frame" x="0.0" y="337" width="312" height="0.0"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
             </subviews>
             <constraints>
+                <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="tNQ-iM-Ykd" secondAttribute="leading" id="DcE-5s-azk"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Dd0-hw-6n4"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Kg0-Q4-Qyl"/>
+                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="tNQ-iM-Ykd" secondAttribute="top" id="Sai-vn-cqZ"/>
+                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="FUd-oe-GjI" secondAttribute="top" id="Ts2-na-SIJ"/>
                 <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" id="WSB-1T-40f"/>
+                <constraint firstItem="8EI-Ko-tQv" firstAttribute="trailing" secondItem="tNQ-iM-Ykd" secondAttribute="trailing" id="XT1-yh-xtI"/>
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>
+                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="tNQ-iM-Ykd" secondAttribute="bottom" id="uEf-rV-78R"/>
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

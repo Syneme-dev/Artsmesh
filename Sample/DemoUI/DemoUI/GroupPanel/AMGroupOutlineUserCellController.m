@@ -33,9 +33,7 @@
 {
     NSAssert([self.view isKindOfClass:[AMGroupOutlineUserCellView class]], @"internal error: the view is not AMGroupOutlineUserCellView");
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
-    if ([self.user.userid isEqualToString:mySelf.userid]) {
+    if (self.editable) {
         [cellView.textField setEditable:YES];
     }else{
         [cellView.textField setEditable:NO];

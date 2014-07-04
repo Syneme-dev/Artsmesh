@@ -179,6 +179,7 @@
     }
     
     NSRect rect = self.detailView.frame;
+    rect.origin.y += rect.size.height;
     rect.size.height = 0;
     [self.detailView.animator setFrame:rect];
     [self.view display];
@@ -217,17 +218,17 @@
     
     AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;
     udc.user = model.selectedUser;
-    [udc updateUI];
-    
+
     NSRect rect = udc.view.frame;
     NSRect scrollViewRect = self.outlineScrollView.frame;
-
+    rect.origin.x = scrollViewRect.origin.x;
+    rect.origin.y = self.topboundView.frame.origin.y - rect.size.height;
     rect.size.width = scrollViewRect.size.width;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height - rect.size.height;
     
     [self.detailView.animator setFrame:rect];
+    [udc updateUI];
     
-    [self.view display];
+   [self.view display];
 }
 
 

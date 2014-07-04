@@ -83,6 +83,7 @@
     
     AMGroupOutlineLabelCellController* labelController = [[AMGroupOutlineLabelCellController alloc] initWithNibName:@"AMGroupOutlineLabelCellController" bundle:nil];
     labelController.groupControllers = [[NSMutableArray alloc] init];
+    [_userGroups addObject:labelController];
     
     NSDictionary* remoteGroupDict = [AMAppObjects appObjects][AMRemoteGroupsKey];
     
@@ -104,9 +105,9 @@
             [remoteGroupController.userControllers addObject:remoteUserController];
         }
         
-        [labelController.groupControllers addObject:remoteGroupController];
+        [_userGroups addObject:remoteGroupController];
     }
-    [_userGroups addObject:labelController];
+   
     
     [self.outlineView reloadData];
     [self.outlineView expandItem:nil expandChildren:YES];
@@ -366,9 +367,9 @@
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
     if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
-        
-        rowView.headImage = [NSImage imageNamed:@"group_online"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+
+//        rowView.headImage = [NSImage imageNamed:@"group_online"];
+//        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
         
     }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
         

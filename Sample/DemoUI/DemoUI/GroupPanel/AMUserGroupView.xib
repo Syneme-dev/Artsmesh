@@ -79,7 +79,7 @@
                                 </connections>
                             </outlineView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.19607844948768616" green="0.19607844948768616" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="GMs-u4-bGj">
                         <rect key="frame" x="-100" y="-100" width="0.0" height="16"/>

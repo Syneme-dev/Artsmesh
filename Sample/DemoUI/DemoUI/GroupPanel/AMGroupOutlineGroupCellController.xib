@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -24,7 +24,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="Qcs-De-ZRc"/>
                 </imageView>
                 <textField identifier="group_name_field" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="48h-mX-dSF" customClass="AMFoundryFontView">
-                    <rect key="frame" x="1" y="18" width="147" height="19"/>
+                    <rect key="frame" x="10" y="18" width="138" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="BTS-Fu-aUF">
                         <customFormatter key="formatter" id="H18-xs-3to" customClass="AMGroupTextFieldFormatter"/>
@@ -37,9 +37,12 @@
                         <outlet property="delegate" destination="-2" id="JMI-9V-WxA"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNc-kH-RRD" customClass="AMFoundryFontView">
-                    <rect key="frame" x="21" y="3" width="229" height="15"/>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mNc-kH-RRD" customClass="AMFoundryFontView">
+                    <rect key="frame" x="33" y="3" width="229" height="15"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="j6y-WF-QXc"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="5md-ZT-Dvi">
                         <customFormatter key="formatter" id="c2z-52-4vc" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -107,17 +110,20 @@
                 </customView>
             </subviews>
             <constraints>
+                <constraint firstItem="mNc-kH-RRD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="1ka-EC-UWh"/>
                 <constraint firstAttribute="bottom" secondItem="zfJ-7F-1F1" secondAttribute="bottom" constant="20" symbolic="YES" id="26S-ZG-sec"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="3A7-rg-KHq"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="leading" secondItem="48h-mX-dSF" secondAttribute="trailing" constant="8" id="6UN-WQ-oRM"/>
                 <constraint firstAttribute="trailing" secondItem="w6k-bZ-PuW" secondAttribute="trailing" id="Lqi-I4-06s"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="top" secondItem="zfJ-7F-1F1" secondAttribute="top" id="MAw-qb-HcC"/>
+                <constraint firstItem="48h-mX-dSF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="NUk-V1-ODS"/>
                 <constraint firstAttribute="bottom" secondItem="w6k-bZ-PuW" secondAttribute="bottom" constant="16" id="SYb-GI-yCb"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="leading" secondItem="48h-mX-dSF" secondAttribute="trailing" constant="8" symbolic="YES" id="edJ-Ov-dNG"/>
-                <constraint firstItem="zfJ-7F-1F1" firstAttribute="leading" secondItem="48h-mX-dSF" secondAttribute="leading" id="mhN-9t-56H"/>
+                <constraint firstItem="mNc-kH-RRD" firstAttribute="top" secondItem="48h-mX-dSF" secondAttribute="bottom" id="lyU-cr-H8Q"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="top" secondItem="48h-mX-dSF" secondAttribute="top" id="qn1-9b-0zJ"/>
                 <constraint firstItem="zfJ-7F-1F1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="3" id="r8U-Ol-o22"/>
                 <constraint firstItem="w6k-bZ-PuW" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="154" id="w7t-H4-iPl"/>
+                <constraint firstAttribute="trailing" secondItem="mNc-kH-RRD" secondAttribute="trailing" constant="25" id="zNX-dp-yTT"/>
             </constraints>
             <connections>
                 <outlet property="descriptionField" destination="mNc-kH-RRD" id="sUl-gA-hxJ"/>

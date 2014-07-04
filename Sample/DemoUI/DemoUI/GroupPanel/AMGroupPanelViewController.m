@@ -67,6 +67,8 @@
             localUserController.editable = NO;
         }
         
+        localUserController.localUser = YES;
+    
         [localGroupController.userControllers addObject:localUserController];
     }
     
@@ -88,14 +90,17 @@
         AMGroupOutlineGroupCellController* remoteGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
         remoteGroupController.group = remoteGroup;
         remoteGroupController.userControllers = [[NSMutableArray alloc] init];
+        remoteGroupController.editable = NO;
         
         for (AMUser* user in remoteGroup.users){
-            AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
+            AMGroupOutlineUserCellController* remoteUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
             
-            localUserController.group = remoteGroup;
-            localUserController.user = user;
+            remoteUserController.group = remoteGroup;
+            remoteUserController.user = user;
+            remoteUserController.editable = NO;
+            remoteUserController.localUser = NO;
             
-            [remoteGroupController.userControllers addObject:localUserController];
+            [remoteGroupController.userControllers addObject:remoteUserController];
         }
         
         [labelController.groupControllers addObject:remoteGroupController];

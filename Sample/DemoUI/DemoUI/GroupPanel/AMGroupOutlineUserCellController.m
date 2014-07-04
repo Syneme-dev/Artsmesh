@@ -52,7 +52,7 @@
         [cellView.leaderBtn setHidden:YES];
     }
     
-    if (self.user.isOnline) {
+    if (self.user.isOnline && self.localUser) {
         [cellView.zombieBtn setHidden:NO];
     }else{
         [cellView.zombieBtn setHidden:YES];

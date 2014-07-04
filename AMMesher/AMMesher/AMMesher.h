@@ -10,6 +10,8 @@
 extern NSString* const AM_LOCALUSERS_CHANGED;
 extern NSString* const AM_REMOTEGROUPS_CHANGED;
 extern NSString* const AM_MESHER_ONLINE_CHANGED;
+extern NSString* const AM_MESHER_UPDATE_GROUP_FAILED;
+extern NSString* const AM_MESHER_UPDATE_USER_FAILED;
 
 @class AMLocalUser;
 @class AMGroup;
@@ -33,7 +35,7 @@ extern NSString* const AM_MESHER_ONLINE_CHANGED;
 -(void)goOffline;
 -(void)mergeGroup:(NSString*)groupName;
 -(void)unmergeGroup;
--(void)changeLocalGroupName:(NSString*)newGroupName;
+-(void)updateGroup;
 -(void)updateMySelf;
 
 @end

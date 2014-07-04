@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; };
+		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
@@ -17,17 +17,17 @@
 		AF00D45318C9B5E6004DE9E6 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */; };
 		AF00D45918C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */; };
-		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; };
+		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */; };
-		AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */; };
+		AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7DF6E61904C26E00554E6F /* AMMaxSizeView.m */; };
-		AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF82E352190CA9680083487C /* AMFoundryFontView.h */; };
+		AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF82E352190CA9680083487C /* AMFoundryFontView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF82E353190CA9680083487C /* AMFoundryFontView.m */; };
 		AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9DC78318E9643E0029DB97 /* BlueBackgroundView.m */; };
-		AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAA502218EC1375009286F4 /* AMMovableWindow.h */; };
+		AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAA502218EC1375009286F4 /* AMMovableWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAA502318EC1375009286F4 /* AMMovableWindow.m */; };
-		AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAC30C719382E71000FFC5F /* AMTextView.h */; };
+		AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = AFAC30C719382E71000FFC5F /* AMTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAC30C819382E71000FFC5F /* AMTextView.m */; };
 		AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = AFB34F6819065C1400092E33 /* AMButtonHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB34F6919065C1400092E33 /* AMButtonHandler.m */; };
@@ -224,14 +224,14 @@
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
-				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
-				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
+				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
+				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

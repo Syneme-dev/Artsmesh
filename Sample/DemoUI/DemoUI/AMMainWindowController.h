@@ -23,5 +23,6 @@
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
+- (IBAction)copyPanel:(id)sender;
 
 @end

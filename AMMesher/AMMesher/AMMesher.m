@@ -11,7 +11,6 @@
 #import "AMRemoteMesher.h"
 #import "AMLocalMesher.h"
 #import "AMAppObjects.h"
-#import "AMGroup.h"
 #import "AMLeaderElecter.h"
 #import "AMMesherStateMachine.h"
 
@@ -19,6 +18,9 @@
 NSString* const AM_LOCALUSERS_CHANGED = @"AM_LOCALUSERS_CHANGED";
 NSString* const AM_REMOTEGROUPS_CHANGED = @"AM_REMOTEGROUPS_CHANGED";
 NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
+
+NSString* const AM_MESHER_UPDATE_GROUP_FAILED = @"AM_MESHER_UPDATE_GROUP_FAILED";
+NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
 
 @implementation AMMesher
 {
@@ -51,7 +53,7 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     if (self = [super init]){
         [self loadUserProfile];
         [self loadSystemConfig];
-        [self initCluster];
+        [self initLocalGroup];
         [self initMesherStateMachine];
         [self initComponents];
     }
@@ -64,6 +66,7 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     AMUser* mySelf = [[AMUser alloc] init];
+    mySelf.userid = [AMAppObjects creatUUID];
     mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
     mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
@@ -91,11 +94,19 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     [[AMAppObjects appObjects] setObject:config forKey:AMSystemConfigKey];
 }
 
--(void)initCluster{
+-(void)initLocalGroup{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [AMAppObjects appObjects][AMClusterNameKey] = [defaults stringForKey:Preference_Key_Cluster_Name];
-    [AMAppObjects appObjects][AMClusterIdKey] = [AMAppObjects creatUUID];
-    [AMAppObjects appObjects][AMMergedGroupIdKey] = [AMAppObjects appObjects][AMClusterIdKey];
+    AMGroup* localGroup = [[AMGroup alloc]init];
+    localGroup.groupId = [AMAppObjects creatUUID];
+    localGroup.groupName = [defaults stringForKey:Preference_Key_Cluster_Name];
+    localGroup.description = @"no description";
+    localGroup.password = @"";
+    localGroup.leaderId = @"";
+    localGroup.messages = [[NSMutableArray alloc] init];
+    localGroup.users = [[NSMutableArray alloc] init];
+    
+    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
+    [AMAppObjects appObjects][AMMergedGroupIdKey] = localGroup.groupId;
 }
 
 -(void)initMesherStateMachine
@@ -218,19 +229,18 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     [_remoteMesher unmergeGroup];
 }
 
--(void)changeLocalGroupName:(NSString*)newGroupName
+-(void)updateGroup
 {
     AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
     NSAssert(machine, @"mesher state machine can not be nil!");
     
-    if ([machine mesherState] != kMesherStarted){
-        return;
+    if ([machine mesherState] == kMesherStarted){
+        [_localMesher updateGroupInfo];
+        
+    }else if([machine mesherState] == kMesherMeshed ){
+        [_localMesher updateGroupInfo];
+        [_remoteMesher updateGroupInfo];
     }
-    
-    [_localMesher changeGroupName:newGroupName];
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:newGroupName forKey:Preference_Key_Cluster_Name];
-    [[AMAppObjects appObjects] setObject:newGroupName forKey:AMClusterNameKey ];
 }
 
 -(void)updateMySelf
@@ -240,12 +250,12 @@ NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
     
     if ([machine mesherState] == kMesherStarted)
     {
-        [_localMesher updateMyselfInfo];
+        [_localMesher updateMyself];
         
     }else if([machine mesherState] == kMesherMeshed){
         
-        [_localMesher updateMyselfInfo];
-        [_remoteMesher updateMyselfInfo];
+        [_localMesher updateMyself];
+        [_remoteMesher updateMyself];
     }
     
 }

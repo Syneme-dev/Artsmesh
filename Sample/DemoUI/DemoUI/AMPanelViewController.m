@@ -12,6 +12,7 @@
 #import <AMPreferenceManager/AMPreferenceManager.h>
 
 
+
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 @interface AMPanelViewController ()
 
@@ -40,6 +41,11 @@
 
 -(void)setTitle:(NSString *)title{
     [self.titleView setStringValue:title];
+}
+
+- (NSString *)title
+{
+    return self.titleView.stringValue;
 }
 //-()
 

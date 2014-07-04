@@ -6,170 +6,212 @@ import(
 	"sync"
 )
 
-type UserList struct{
-	version	 	int
-	groupId 		string
-	groupName 	string
-	users		map[string]*UserNode
-}
-
-type UserNode struct{
-	userId 		string
-	userData 	string
+type UserStore struct{
+	userData 	*AMRequestUser
 	timestamp   time.Time
 }
 
-type ULSnapshot struct{
-	Version		int
-	GroupId		string
-	GroupName	string
-	UserDTOs		[]*UserDTO
+type GroupStore struct{
+	version		int
+	groupData   	*AMRequestGroup
+	password	 	string
+	userStores 	map[string]*UserStore	
 }
 
-type UserDTO struct{
-	UserId 		string
-	UserData 	string
+type Snapshot struct{
+	Version int
+	GroupData   	*AMRequestGroup
+	UsersData 	[]*AMRequestUser
 }
 
-
-var ul *UserList
+var g_store *GroupStore
 var snapShotLock sync.RWMutex
-var snapShot *ULSnapshot
+var snapShot *Snapshot
 
 func InitUserList(){
-	ul = new(UserList)
-	ul.version = 0
-	ul.groupId = ""
-	ul.groupName = ""
-	ul.users = make(map[string]*UserNode, 100)
+	g_store = new(GroupStore)
+	g_store.version = 0
+	g_store.password = ""
+	g_store.groupData = nil
+	g_store.userStores = make(map[string]*UserStore, 100)
 
-	snapShot = new(ULSnapshot)
-	makeSnapShot()
+	snapShot = new(Snapshot)
+	snapShot.Version = g_store.version;
+	//makeSnapShot()
 }
 
-func UpdataGroup(groupName string)(bool){
+
+func RegisterGroup(group *AMRequestGroup)(string){
+	fmt.Println("RegisterGroup------------BEGIN");
+	defer fmt.Println("RegisterGroup------------END");
 	
-	ul.groupName = groupName
-	makeSnapShot()
-	return true
+	if g_store.groupData == nil{
+		g_store.groupData = group
+		makeSnapShot()
+		return "ok"
+	}
+	
+	return "group already exist"
 }
 
-func AddNewUser(userId string, userData string, groupId string, groupName string)(bool){
+func UpdataGroup(group *AMRequestGroup)(string){
 	
-	if ul.groupName == ""{
-		fmt.Printf("!!!new group name:%s", ul.groupName);
-		ul.groupName = groupName
+	fmt.Println("UpdataGroup------------BEGIN");
+	defer fmt.Println("UpdataGroup------------END");
+	
+	if g_store.groupData.GroupId == group.GroupId{
+		g_store.groupData.GroupName = group.GroupName
+		g_store.groupData.Description = group.Description
+		g_store.groupData.LeaderId = group.LeaderId
+		makeSnapShot()
+		return "ok"
 	}
 	
-	if ul.groupId == ""{
-		fmt.Printf("!!!new group id %s:\n", ul.groupId);
-		ul.groupId = groupId
-	}
-	
-	existUser := ul.users[userId]
-	if existUser != nil{
-		fmt.Println("user already exist!");
-		return false
-	}
-	
-	fmt.Println("will add user to list:", userId);
-
-	newUser := new(UserNode)
-	newUser.userId = userId
-	newUser.userData = userData
-	newUser.timestamp = time.Now()
-	ul.users[newUser.userId] = newUser
-
-	makeSnapShot()
-	
-	return true
+	return "group not found"
 }
 
-func UpdataUser(userId string, userData string)(bool){
+func ChangeGroupPassword(passwordOper *AMRequestChangePassword)(string){
 	
-	existUser := ul.users[userId]
+	fmt.Println("ChangeGroupPassword------------BEGIN");
+	defer fmt.Println("ChangeGroupPassword------------END");
+	
+	if g_store.groupData.GroupId == passwordOper.groupId{
+		if g_store.password == passwordOper.oldPassword{
+			g_store.password = passwordOper.newPassword
+			return "ok"
+		}else{
+			return "password is wrong"
+		}			
+	}
+	return "group not found"
+}
+
+func RegisterUser(user *AMRequestUser)(string){
+	
+	fmt.Println("RegisterUser------------BEGIN");
+	defer fmt.Println("RegisterUser------------END");
+	
+	if g_store.groupData == nil {
+		return "group not found"
+	}
+	
+	exsitUser := g_store.userStores[user.UserId]
+	if	exsitUser != nil {
+		return "user already exist!"
+	}
+	
+	uStore := new(UserStore)
+	uStore.timestamp = time.Now()
+	uStore.userData = user
+	g_store.userStores[user.UserId] = uStore
+	makeSnapShot()
+	
+	return "ok"
+}
+
+func UpdataUser(user *AMRequestUser)(string){
+	
+	fmt.Println("UpdataUser------------BEGIN");
+	defer fmt.Println("UpdataUser------------END");
+	
+	existUser := g_store.userStores[user.UserId]
 	if existUser == nil{
-		return false
+		return "user not found"
 	}
 	
-	existUser.userData = userData
 	existUser.timestamp = time.Now()
+	existUser.userData = user
 
 	makeSnapShot()
-	return true
+	
+	return "ok"
 }
 
-func UserHeartbeat(userId string )(bool){
+func UserHeartbeat(userId string) {
 	
-	existUser := ul.users[userId]
+	fmt.Println("UserHeartbeat------------BEGIN");
+	defer fmt.Println("UserHeartbeat------------END");
+	
+	existUser := g_store.userStores[userId]
 	if existUser == nil{
-		return false
+		fmt.Println("user not exist!");
+		return
 	}
 	
 	existUser.timestamp = time.Now()
-	return true
 }
 
 func CheckTimeout(){
+	fmt.Println("CheckTimeout------------BEGIN");
+	defer fmt.Println("CheckTimeout------------END");
 	
 	hasChanged := false
 	var deleteKeys []string
 	
-	for k, v := range ul.users{
+	for k, v := range g_store.userStores{
 		dur := time.Now().Sub(v.timestamp)
 		if dur.Seconds() > g_user_timeout{
-			fmt.Printf("user %s duration is %f seconds\n", v.userId, dur.Seconds())
+			fmt.Printf("user %s duration is %f seconds\n", v.userData.NickName, dur.Seconds())
 			fmt.Printf("user timeout is %f seconds, will delete!\n", g_user_timeout)	
 			deleteKeys = append(deleteKeys, k)
 			hasChanged = true
 		}
 	}
 	
-	fmt.Println("the user count is", len(ul.users))
-	fmt.Println("will delete count:", len(deleteKeys))
-
 	for _,k := range deleteKeys{
-		fmt.Printf("k is %s\n", k)
-		delete(ul.users, k)
+		delete(g_store.userStores, k)
 	}
-	
-	fmt.Println("after delete count is", len(ul.users))
 	
 	if hasChanged{
 		makeSnapShot()
 	}
 }
 
-func DeleteUser(userId string  )(bool){
+func DeleteUser(userId string){
+	fmt.Println("DeleteUser------------BEGIN");
+	defer fmt.Println("DeleteUser------------END");
 	
-	existUser := ul.users[userId]
+	existUser := g_store.userStores[userId]
 	if existUser == nil{
-		return false
+		fmt.Println("user not exist!");
+		return
 	}
 	
-	delete(ul.users, userId)
+	delete(g_store.userStores, userId)
 	makeSnapShot()
-	
-	return true
 }
 
 func makeSnapShot(){
-	ul.version++
-	newSnapShot := new(ULSnapshot)
+	g_store.version++
+	newSnapShot := new(Snapshot)
 
-	newSnapShot.Version = ul.version
-	newSnapShot.GroupId = ul.groupId
-	newSnapShot.GroupName = ul.groupName
-	
-	fmt.Println("-------------ul.user count is:", len(ul.users))
-	for _, v := range ul.users{
-		userDto := new(UserDTO)
-		userDto.UserId = v.userId
-		userDto.UserData = v.userData
-		newSnapShot.UserDTOs = append(newSnapShot.UserDTOs, userDto)
+	newSnapShot.Version = g_store.version
+	newSnapShot.GroupData = new(AMRequestGroup)
+	newSnapShot.GroupData.GroupId = g_store.groupData.GroupId
+	newSnapShot.GroupData.GroupName = g_store.groupData.GroupName
+	newSnapShot.GroupData.Description = g_store.groupData.Description
+	newSnapShot.GroupData.LeaderId = g_store.groupData.LeaderId
+		
+	fmt.Println("-------------g_store.userStores count is:", len(g_store.userStores))
+	for _, v := range g_store.userStores{
+		
+		userData := new(AMRequestUser)
+		userData.UserId = v.userData.UserId
+		userData.NickName = v.userData.NickName
+		userData.Domain = v.userData.Domain
+		userData.Location = v.userData.Location
+		userData.Description = v.userData.Description
+		userData.IsOnline = v.userData.IsOnline
+		userData.IsLeader = v.userData.IsLeader
+		userData.PrivateIp = v.userData.PrivateIp
+		userData.PublicIp = v.userData.PublicIp
+		userData.ChatPort = v.userData.ChatPort
+		userData.PublicChatPort = v.userData.PublicChatPort
+		
+		newSnapShot.UsersData = append(newSnapShot.UsersData , userData)
 	}
 	
-	fmt.Println("-------------newSnapShot.UserDTOs count is:", len(newSnapShot.UserDTOs))
+	fmt.Println("-------------newSnapShot.usersData count is:", len(newSnapShot.UsersData))
 	
 	snapShotLock.Lock()
 	snapShot = newSnapShot
@@ -180,16 +222,12 @@ func makeSnapShot(){
 	fmt.Println("End Printng--------------------------")
 }
 
-func printSnapshot(snap *ULSnapshot){
+func printSnapshot(snap *Snapshot){
 	fmt.Println("Version is:", snap.Version)
-	fmt.Println("Group Id is:", snap.GroupId)
-	fmt.Println("Group name is:", snap.GroupName)
-
-	fmt.Println("printing users:")
-	for _, v := range snap.UserDTOs{
-		fmt.Printf("userid=%s, userdata=%s\n", v.UserId, v.UserData)
+	fmt.Println("Group Name is:", snap.GroupData.GroupName)
+	for _, v := range snap.UsersData{
+		fmt.Printf("nickname=%s", v.NickName)
 	}
-	fmt.Println("end printing users:")
 }
 
 func RLockSnapShot(){

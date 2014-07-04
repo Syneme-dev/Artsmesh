@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -87,9 +87,12 @@
                                 <constraint firstAttribute="width" constant="16" id="hmN-Qg-gAa"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_copy" imagePosition="only" alignment="center" alternateImage="panel_copy_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ETH-2v-v8R">
-                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="copyPanel:" target="-1" id="oqa-wE-Apn"/>
+                            </connections>
                         </button>
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="settings">
                             <rect key="frame" x="480" y="2" width="16" height="16"/>

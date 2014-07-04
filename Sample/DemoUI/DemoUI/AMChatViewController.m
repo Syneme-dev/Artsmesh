@@ -9,7 +9,6 @@
 #import "AMChatViewController.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMGroup.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
 #import "AMMesher/AMMesherStateMachine.h"
@@ -51,6 +50,8 @@
 
 -(void)awakeFromNib
 {
+    [self userGroupsChanged:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_REMOTEGROUPS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MESHER_ONLINE_CHANGED object:nil];
@@ -94,17 +95,15 @@
    }
     
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-    NSAssert(mySelf, @"myself can not be nil");
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     
-    NSDictionary* myLocalUsers = [[AMAppObjects appObjects] objectForKey:AMLocalUsersKey];
     NSMutableArray* joinedUsers = [[NSMutableArray alloc] init];
     
     if (mySelf.isOnline == NO) {
         [_remotePeerSet removeAllObjects];
         
-        for (NSString* userKey in myLocalUsers) {
-            AMUser* user = [myLocalUsers objectForKey:userKey];
+        for (AMUser* user in myGroup.users) {
             if (nil == [_localPeerSet objectForKey:user.userid]) {
                 [joinedUsers addObject:user];
                 [_localPeerSet setObject:user forKey:user.userid];
@@ -129,8 +128,15 @@
         [_remotePeerSet removeAllObjects];
         
         for (AMUser* newUser in newUserlist) {
-            if(nil == [myLocalUsers objectForKey:newUser.userid]) {
-                [_remotePeerSet setObject:newUser forKey:newUser.userid];
+            BOOL bFind = NO;
+            for (AMUser* user in myGroup.users) {
+                if ([user.userid isEqualToString:newUser.userid]) {
+                    bFind = YES;
+                }
+            }
+        
+            if (!bFind) {
+                 [_remotePeerSet setObject:newUser forKey:newUser.userid];
             }else{
                 [_localPeerSet setObject:newUser forKey:newUser.userid];
             }

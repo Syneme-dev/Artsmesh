@@ -229,6 +229,7 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     _detailViewController = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
+    
     [self.detailView addSubview:_detailViewController.view];
     
     AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;

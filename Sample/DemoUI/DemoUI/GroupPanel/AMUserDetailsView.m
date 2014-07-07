@@ -1,15 +1,15 @@
 //
-//  AMGroupDetailsView.m
+//  AMUserDetailsView.m
 //  DemoUI
 //
 //  Created by 王 为 on 7/7/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupDetailsView.h"
+#import "AMUserDetailsView.h"
 #import <UIFramework/AMButtonHandler.h>
 
-@implementation AMGroupDetailsView
+@implementation AMUserDetailsView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -25,8 +25,8 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    [AMButtonHandler changeTabTextColor:self.joinGroupBtn toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.emptyBtn toColor:UI_Color_b7b7b7];
     [self.layer setBackgroundColor:[[NSColor colorWithCalibratedRed:0.14
                                                               green:0.14
                                                                blue:0.14
@@ -55,8 +55,9 @@
                                     contentR.size.width / 2 - 1,
                                     35);
     
-    [self.joinGroupBtn setFrame:firstBtnRect];
-    [self.cancelBtn setFrame:lastBtnRect];
+    [self.emptyBtn setFrame:firstBtnRect];
+    [self.closeBtn setFrame:lastBtnRect];
+
 }
 
 @end

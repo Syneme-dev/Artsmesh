@@ -133,6 +133,7 @@
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
+		D456008F196A72E600023B68 /* AMGroupDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D456008E196A72E600023B68 /* AMGroupDetailsView.m */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
 		D4DB6CB0196682B300AA5B05 /* AMUserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */; };
@@ -359,6 +360,8 @@
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldConst.h; path = ../HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserGroupModuleConst.h; path = ../UserGroupModuleConst.h; sourceTree = "<group>"; };
+		D456008D196A72E600023B68 /* AMGroupDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsView.h; sourceTree = "<group>"; };
+		D456008E196A72E600023B68 /* AMGroupDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsView.m; sourceTree = "<group>"; };
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
@@ -704,6 +707,8 @@
 				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
 				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
 				CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */,
+				D456008D196A72E600023B68 /* AMGroupDetailsView.h */,
+				D456008E196A72E600023B68 /* AMGroupDetailsView.m */,
 				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
 				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
 				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
@@ -954,6 +959,7 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				CEC2FC62196588FD00AFD309 /* AMUserDetailsViewController.m in Sources */,
+				D456008F196A72E600023B68 /* AMGroupDetailsView.m in Sources */,
 				CEC2FC56196588FD00AFD309 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

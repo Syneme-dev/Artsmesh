@@ -12,25 +12,22 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <tableCellView id="d99-fj-tXF">
-            <rect key="frame" x="0.0" y="0.0" width="271" height="27"/>
+            <rect key="frame" x="0.0" y="0.0" width="271" height="38"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TrM-ze-jbJ">
-                    <rect key="frame" x="3" y="8" width="17" height="16"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TrM-ze-jbJ">
+                    <rect key="frame" x="3" y="18" width="17" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="17" id="de1-nu-QFi"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="eU6-sL-lmf"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cAu-5t-46Y" customClass="AMFoundryFontView">
-                    <rect key="frame" x="1" y="4" width="269" height="17"/>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAu-5t-46Y" customClass="AMFoundryFontView">
+                    <rect key="frame" x="20" y="18" width="269" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="17" id="82o-ry-LbY"/>
-                    </constraints>
                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="ely-DX-B2h">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
@@ -38,12 +35,11 @@
             </subviews>
             <constraints>
                 <constraint firstItem="TrM-ze-jbJ" firstAttribute="top" secondItem="d99-fj-tXF" secondAttribute="top" constant="3" id="29u-k4-ekv"/>
-                <constraint firstItem="cAu-5t-46Y" firstAttribute="leading" secondItem="TrM-ze-jbJ" secondAttribute="leading" id="BpS-t6-Wuv"/>
-                <constraint firstItem="cAu-5t-46Y" firstAttribute="top" secondItem="d99-fj-tXF" secondAttribute="top" constant="6" id="IPx-dm-Eja"/>
-                <constraint firstAttribute="bottom" secondItem="cAu-5t-46Y" secondAttribute="bottom" constant="4" id="cGi-oX-41k"/>
-                <constraint firstAttribute="trailing" secondItem="cAu-5t-46Y" secondAttribute="trailing" constant="3" id="dXo-b0-LFG"/>
+                <constraint firstAttribute="trailing" secondItem="cAu-5t-46Y" secondAttribute="trailing" constant="-6" id="Vv2-7Z-ny8"/>
+                <constraint firstItem="cAu-5t-46Y" firstAttribute="top" secondItem="d99-fj-tXF" secondAttribute="top" constant="6" id="iod-Hg-POr"/>
+                <constraint firstItem="cAu-5t-46Y" firstAttribute="leading" secondItem="d99-fj-tXF" secondAttribute="leading" constant="12" id="kLR-FK-gT9"/>
                 <constraint firstAttribute="bottom" secondItem="TrM-ze-jbJ" secondAttribute="bottom" constant="8" id="lvE-fS-rgN"/>
-                <constraint firstItem="cAu-5t-46Y" firstAttribute="leading" secondItem="d99-fj-tXF" secondAttribute="leading" constant="3" id="wVM-4y-aBg"/>
+                <constraint firstItem="TrM-ze-jbJ" firstAttribute="leading" secondItem="d99-fj-tXF" secondAttribute="leading" constant="3" id="uhd-SZ-hdf"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="TrM-ze-jbJ" id="cKE-HY-cvu"/>

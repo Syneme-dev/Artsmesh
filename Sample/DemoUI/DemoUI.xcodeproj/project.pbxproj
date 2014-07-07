@@ -138,7 +138,6 @@
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
 		D4DB6CB0196682B300AA5B05 /* AMUserDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */; };
-		D4F20DA31966CD4600FB359D /* AMGroupOutlineLabelCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F20DA21966CD4600FB359D /* AMGroupOutlineLabelCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,8 +369,6 @@
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
 		D4DB6CAE196682B300AA5B05 /* AMUserDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailView.h; sourceTree = "<group>"; };
 		D4DB6CAF196682B300AA5B05 /* AMUserDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailView.m; sourceTree = "<group>"; };
-		D4F20DA11966CD4600FB359D /* AMGroupOutlineLabelCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineLabelCellView.h; sourceTree = "<group>"; };
-		D4F20DA21966CD4600FB359D /* AMGroupOutlineLabelCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineLabelCellView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F353201534CF41128CA1E7AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -704,8 +701,6 @@
 				CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */,
 				CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */,
 				CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */,
-				D4F20DA11966CD4600FB359D /* AMGroupOutlineLabelCellView.h */,
-				D4F20DA21966CD4600FB359D /* AMGroupOutlineLabelCellView.m */,
 				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
 				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
 				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
@@ -943,7 +938,6 @@
 				CEC2FC59196588FD00AFD309 /* AMGroupOutlineLabelCellController.m in Sources */,
 				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
-				D4F20DA31966CD4600FB359D /* AMGroupOutlineLabelCellView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				CEC2FC5C196588FD00AFD309 /* AMGroupOutlineUserCellController.m in Sources */,
 				CEC2FC5E196588FD00AFD309 /* AMGroupOutlineUserCellView.m in Sources */,

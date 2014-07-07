@@ -100,7 +100,7 @@
     if (mySelf.isOnline == NO) {
         
         [self.outlineView reloadData];
-         [self.outlineView expandItem:nil expandChildren:YES];
+        [self.outlineView expandItem:nil expandChildren:YES];
         return;
     }
     
@@ -128,7 +128,7 @@
             [remoteGroupController.userControllers addObject:remoteUserController];
         }
         
-        [_userGroups addObject:remoteGroupController];
+        [labelController.groupControllers addObject:remoteGroupController];
     }
    
     
@@ -395,8 +395,8 @@
     
     if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
 
-//        rowView.headImage = [NSImage imageNamed:@"group_online"];
-//        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
         
     }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
         

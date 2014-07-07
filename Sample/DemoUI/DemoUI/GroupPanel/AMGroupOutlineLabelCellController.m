@@ -21,7 +21,7 @@
     if(self.labelText != nil){
         cellView.textField.stringValue = self.labelText;
     }else{
-        cellView.textField.stringValue = @"GROUPS ON ARTSMESH";
+        cellView.textField.stringValue = @"ARTSMESH";
     }
     
     [cellView.imageView setHidden:YES];

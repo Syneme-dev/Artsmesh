@@ -18,5 +18,6 @@
 -(void)setTrackArea;
 -(void)removeTrackAres;
 -(void)updateUI;
+-(void)doubleClicked:(id)sender;
 
 @end

@@ -110,6 +110,11 @@
     [mesher updateMySelf];
 }
 
+-(void)doubleClicked:(id)sender
+{
+    
+}
+
 #pragma mark-
 #pragma TableViewCell Tracking Area
 - (void)mouseEntered:(NSEvent *)theEvent

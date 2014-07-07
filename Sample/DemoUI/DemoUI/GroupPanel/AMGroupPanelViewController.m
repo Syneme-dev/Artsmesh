@@ -17,6 +17,8 @@
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/BlueBackgroundView.h"
 #import "AMUserDetailsViewController.h"
+#import "AMGroupOutlineGroupCellView.h"
+#import "AMGroupOutlineUserCellView.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -39,6 +41,27 @@
         // Initialization code here.
     }
     return self;
+}
+
+-(void)doubleClickOutlineView:(id)sender
+{
+    if([sender isKindOfClass:[NSOutlineView class]]){
+        NSOutlineView* ov = (NSOutlineView*)sender;
+        NSInteger selected = [ov selectedRow];
+        
+        if (selected < 0){
+            return;
+        }
+        
+        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        if ([selectedCellView isKindOfClass:[AMGroupOutlineGroupCellView class]]) {
+            AMGroupOutlineGroupCellView* gCell = (AMGroupOutlineGroupCellView*)selectedCellView;
+            [gCell.infoBtn performClick:gCell.infoBtn];
+        }else if([selectedCellView isKindOfClass:[AMGroupOutlineUserCellView class]]){
+            AMGroupOutlineUserCellView* uCell = (AMGroupOutlineUserCellView*)selectedCellView;
+            [uCell.infoBtn performClick:uCell.infoBtn];
+        }
+    }
 }
 
 -(void)reloadGroups
@@ -113,7 +136,7 @@
     [self.outlineView expandItem:nil expandChildren:YES];
 }
 
--(void)awakeFromNib
+-(void) awakeFromNib
 {
 //    AMGroup* localGroup = [[AMGroup alloc] init];
 //    localGroup.groupId = [AMAppObjects creatUUID];
@@ -179,6 +202,9 @@
     [self reloadGroups];
     self.outlineView.delegate = self;
     self.outlineView.dataSource  = self;
+    
+    [self.outlineView setTarget:self];
+    [self.outlineView setDoubleAction:@selector(doubleClickOutlineView:)];
 }
 
 -(void)dealloc{

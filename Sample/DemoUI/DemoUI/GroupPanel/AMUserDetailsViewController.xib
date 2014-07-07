@@ -120,10 +120,10 @@
                         <binding destination="-2" name="value" keyPath="self.user.publicIp" id="5rV-7W-fpP"/>
                     </connections>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjF-oM-mAj">
-                    <rect key="frame" x="203" y="245" width="76" height="18"/>
+                <button focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjF-oM-mAj">
+                    <rect key="frame" x="197" y="245" width="89" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="IS LEADER" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PM5-Qn-AH6">
+                    <buttonCell key="cell" type="check" title="IS LEADER" bezelStyle="regularSquare" imagePosition="left" state="on" focusRingType="none" inset="2" id="PM5-Qn-AH6">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -131,10 +131,10 @@
                         <binding destination="-2" name="value" keyPath="self.user.isLeader" id="lVK-iq-TIk"/>
                     </connections>
                 </button>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvj-O0-U5G">
-                    <rect key="frame" x="203" y="299" width="79" height="18"/>
+                <button focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvj-O0-U5G">
+                    <rect key="frame" x="197" y="299" width="89" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="IS MESHED" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zSv-9g-Pau">
+                    <buttonCell key="cell" type="check" title="IS MESHED" bezelStyle="regularSquare" imagePosition="left" state="on" focusRingType="none" inset="2" id="zSv-9g-Pau">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

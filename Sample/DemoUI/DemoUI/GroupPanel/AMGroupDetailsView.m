@@ -25,12 +25,25 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    [AMButtonHandler changeTabTextColor:self.joinGroupBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.joinGroupBtn toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_b7b7b7];
     [self.layer setBackgroundColor:[[NSColor colorWithCalibratedRed:0.14
                                                               green:0.14
                                                                blue:0.14
                                                               alpha:0.95] CGColor]];
+    
+    NSRect contentR = self.bounds;
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    [[NSColor grayColor] set];
+    NSBezierPath *btnLine = [NSBezierPath bezierPath];
+    [btnLine moveToPoint:NSMakePoint(contentR.origin.x, contentR.origin.y + 36)];
+    [btnLine lineToPoint:NSMakePoint(contentR.origin.x + contentR.size.width, contentR.origin.y + 36)];
+    [btnLine moveToPoint:NSMakePoint(contentR.origin.x + contentR.size.width / 2, contentR.origin.y + 36)];
+    [btnLine lineToPoint:NSMakePoint(contentR.origin.x + contentR.size.width / 2, contentR.origin.y)];
+    [btnLine stroke];
+    [NSGraphicsContext restoreGraphicsState];
     
 }
 

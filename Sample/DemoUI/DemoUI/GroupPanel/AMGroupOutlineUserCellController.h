@@ -20,6 +20,5 @@
 -(void)updateUI;
 -(void)setTrackArea;
 -(void)removeTrackAres;
--(void)doubleClicked:(id)sender;
 
 @end

@@ -66,7 +66,7 @@
 {
 
     AMNotificationMessage *message=[AMN_NOTIFICATION_MANAGER createMessageWithHeader:nil withBody:nil];
-    [AMN_NOTIFICATION_MANAGER postMessage:message withTypeName:AMN_MESHER_STARTED sender:self];
+//    [AMN_NOTIFICATION_MANAGER postMessage:message withTypeName:AMN_MESHER_STARTED sender:self];
 }
 
 -(void) onFunctionOneInvoked{

@@ -76,6 +76,7 @@ static NSMutableDictionary *global_dict = nil;
     [dict setObject:self.location forKey:@"location"];
     [dict setObject:self.privateIp forKey:@"privateIp"];
     [dict setObject:self.publicIp forKey:@"publicIp"];
+    [dict setObject:self.description forKey:@"description"];
     
     if (self.isLeader) {
          [dict setObject:@"YES" forKey:@"isLeader"];

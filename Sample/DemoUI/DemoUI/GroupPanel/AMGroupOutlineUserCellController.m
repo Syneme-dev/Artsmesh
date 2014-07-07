@@ -40,6 +40,7 @@
     }
     
     cellView.textField.stringValue = self.user.nickName;
+    cellView.descriptionField.stringValue = self.user.description;
     if (self.user.isOnline) {
         [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
     }else{

@@ -7,6 +7,7 @@
 //
 
 #import "AMTestViewController.h"
+#import "AMRestHelper.h"
 #import "AMPopupMenuItem.h"
 
 #import <AMNotificationManager/AMNotificationManager.h>

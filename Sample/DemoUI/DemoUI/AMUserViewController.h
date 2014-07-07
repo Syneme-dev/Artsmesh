@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMUserViewController : NSViewController
+@property (strong) IBOutlet NSImageView *avatarView;
 @property (strong) IBOutlet NSTextField *statusMessageLabel;
 
 @end

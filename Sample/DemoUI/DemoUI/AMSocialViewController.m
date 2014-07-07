@@ -8,11 +8,9 @@
 
 #import "AMSocialViewController.h"
 #import <Cocoa/Cocoa.h>
-
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <WebKit/WebKit.h>
 #import <UIFramework/AMButtonHandler.h>
-
 #import <AMNotificationManager/AMNotificationManager.h>
 
 

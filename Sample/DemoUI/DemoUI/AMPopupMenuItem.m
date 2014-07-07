@@ -26,9 +26,10 @@
 //                                     initWithString:aString                                     attributes:attributes];
 //
 //    [self setAttributedTitle:attrTitle];
-    [self setTitle:aString];
+   
 //    self =[ super initWithTitle:aString action:aSelector keyEquivalent:charCode];
     if (self){
+         [self setTitle:aString];
         self.theLabel = [[AMMouseOverButtonView alloc] initWithFrame:NSMakeRect(10, 8, width, 20)];
         [self.theLabel setBordered:NO];
         [[self.theLabel cell] setBackgroundColor:UI_Color_b7b7b7];

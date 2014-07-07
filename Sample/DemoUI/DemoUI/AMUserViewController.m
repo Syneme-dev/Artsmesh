@@ -8,6 +8,10 @@
 
 #import "AMUserViewController.h"
 
+#import <AMNotificationManager/AMNotificationManager.h>
+#import "AMRestHelper.h"
+#import "AFHTTPRequestOperationManager.h"
+
 @interface AMUserViewController ()
 
 @end
@@ -18,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+//        [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_UPDATEUSERAVATOR callback:@selector(onUpdateUserAVator:)];
     }
     return self;
 }
@@ -27,6 +31,38 @@
 -(void)awakeFromNib
 {
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
+    [self loadAvatarImage];
+}
+
+//-(void)onUpdateUserAVator:(NSNotification*)notification{
+//    
+//
+//    NSDictionary* user=notification.userInfo;
+//    NSString *imageUrlString=[user valueForKey:@"profile_image_url"];
+//    NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+//    NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
+//    [self.avatarView  setImage:imageFromBundle];
+//    
+////http://artsmesh.io//theme/dark/default-avatar-profile.png
+//}
+
+-(void)loadAvatarImage{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *myAccountUrl=[AMRestHelper getMyAccountInfoUrl];
+    [manager GET:myAccountUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
+        [self loadAvatarFromUrl:imageUrlString];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+-(void)loadAvatarFromUrl:(NSString*)imageUrlString{
+    NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+    NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
+    [self.avatarView  setImage:imageFromBundle];
 }
 
 @end

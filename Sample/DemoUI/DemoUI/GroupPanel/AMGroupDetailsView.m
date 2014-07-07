@@ -20,6 +20,11 @@
     return self;
 }
 
+-(void)dealloc
+{
+    NSLog(@"dealloc called!");
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
@@ -58,5 +63,16 @@
     [self.joinGroupBtn setFrame:firstBtnRect];
     [self.cancelBtn setFrame:lastBtnRect];
 }
+
+-(BOOL)acceptsFirstResponder
+{
+    return  YES;
+}
+
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    return;
+}
+
 
 @end

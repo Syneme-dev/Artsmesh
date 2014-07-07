@@ -27,4 +27,9 @@
     // Drawing code here.
 }
 
+-(void)viewDidEndLiveResize
+{
+    [super viewDidEndLiveResize];
+}
+
 @end

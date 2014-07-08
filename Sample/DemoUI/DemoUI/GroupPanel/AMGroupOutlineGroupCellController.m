@@ -28,9 +28,6 @@
     AMGroupOutlineGroupCellView* cellView = (AMGroupOutlineGroupCellView*)self.view;
     AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
     [formatter setMaximumLength:MAX_GROUP_NAME_LENGTH];
-    
-    AMGroupTextFieldFormatter* desFormatter = cellView.descriptionField.formatter;
-    [desFormatter setMaximumLength:MAX_GROUP_DESCRIPTION];
 }
 
 
@@ -40,7 +37,6 @@
     AMGroupOutlineGroupCellView* cellView = (AMGroupOutlineGroupCellView*)self.view;
     
     cellView.textField.stringValue = self.group.groupName;
-    cellView.descriptionField.stringValue = self.group.description;
     
 //    NSDictionary* meshedGroup = [AMAppObjects appObjects][AMMeshedGroupsKey];
 //    if (meshedGroup[self.group.groupId] == nil ) {
@@ -68,10 +64,8 @@
     
     if (self.editable){
         [cellView.textField setEditable:YES];
-        [cellView.descriptionField setEditable:YES];
     }else{
         [cellView.textField setEditable:NO];
-        [cellView.descriptionField setEditable:NO];
     }
 }
 

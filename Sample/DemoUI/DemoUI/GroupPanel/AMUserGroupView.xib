@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelViewController">
             <connections>
-                <outlet property="detailView" destination="tNQ-iM-Ykd" id="SuH-WM-heA"/>
                 <outlet property="outlineScrollView" destination="8EI-Ko-tQv" id="KIG-RU-jab"/>
                 <outlet property="outlineView" destination="vcz-fd-kzK" id="ukK-qa-dSJ"/>
                 <outlet property="topboundView" destination="FUd-oe-GjI" id="EJB-3u-yt2"/>
@@ -90,23 +89,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="tNQ-iM-Ykd">
-                    <rect key="frame" x="0.0" y="337" width="312" height="0.0"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </customView>
             </subviews>
             <constraints>
-                <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="tNQ-iM-Ykd" secondAttribute="leading" id="DcE-5s-azk"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Dd0-hw-6n4"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="Kg0-Q4-Qyl"/>
-                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="tNQ-iM-Ykd" secondAttribute="top" id="Sai-vn-cqZ"/>
                 <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="FUd-oe-GjI" secondAttribute="top" id="Ts2-na-SIJ"/>
                 <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" id="WSB-1T-40f"/>
-                <constraint firstItem="8EI-Ko-tQv" firstAttribute="trailing" secondItem="tNQ-iM-Ykd" secondAttribute="trailing" id="XT1-yh-xtI"/>
                 <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="25" id="faj-Ro-v1f"/>
                 <constraint firstAttribute="trailing" secondItem="FUd-oe-GjI" secondAttribute="trailing" id="lPN-ra-hPi"/>
                 <constraint firstItem="FUd-oe-GjI" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" id="tru-S1-P88"/>
-                <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="tNQ-iM-Ykd" secondAttribute="bottom" id="uEf-rV-78R"/>
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

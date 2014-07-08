@@ -16,6 +16,5 @@
 @property (weak) IBOutlet NSButton *mergeBtn;
 @property (weak) IBOutlet NSButton *leaveBtn;
 @property (weak) IBOutlet NSButton *infoBtn;
-@property (weak) IBOutlet AMFoundryFontView *descriptionField;
 
 @end

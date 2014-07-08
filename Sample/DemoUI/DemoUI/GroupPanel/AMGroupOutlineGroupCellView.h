@@ -17,4 +17,6 @@
 @property (weak) IBOutlet NSButton *leaveBtn;
 @property (weak) IBOutlet NSButton *infoBtn;
 
+@property (weak) id delegate;
+
 @end

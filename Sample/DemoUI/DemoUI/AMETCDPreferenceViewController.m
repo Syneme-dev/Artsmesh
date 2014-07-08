@@ -10,7 +10,7 @@
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
-#import "AMStatusNetModule/AMStatusNetModule.h"
+#import "AMStatusNet/AMStatusNetModule.h"
 
 
 #import "AMPopupMenuItem.h"

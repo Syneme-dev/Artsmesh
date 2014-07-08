@@ -18,7 +18,7 @@
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Grq-7N-rIk">
                     <rect key="frame" x="171" y="18" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="SideBar_user_h" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="5Rq-yX-s6c">
+                    <buttonCell key="cell" type="smallSquare" title="L" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="5Rq-yX-s6c">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -26,7 +26,7 @@
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="awN-46-d2C">
                     <rect key="frame" x="199" y="18" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="user_zombie" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
+                    <buttonCell key="cell" type="smallSquare" title="Z" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -34,7 +34,7 @@
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OvC-ZJ-I1T">
                     <rect key="frame" x="227" y="18" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_info" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
+                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -83,8 +83,5 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="SideBar_user_h" width="40" height="40"/>
-        <image name="group_info" width="25" height="25"/>
-        <image name="user_zombie" width="25" height="25"/>
     </resources>
 </document>

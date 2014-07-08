@@ -8,7 +8,7 @@
 
 #import "AMChatTableCellView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMStatusNetModule/AMStatusNetModule.h"
+#import "AMStatusNet/AMStatusNetModule.h"
 
 @implementation AMChatTableCellView
 

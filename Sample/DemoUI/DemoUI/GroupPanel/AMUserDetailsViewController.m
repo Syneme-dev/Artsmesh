@@ -28,6 +28,7 @@
 {
     
 }
+
 - (IBAction)closeClick:(id)sender
 {
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];

@@ -10,16 +10,11 @@
 #import "AMMesher/AMAppObjects.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
-#import <UIFramework/AMButtonHandler.h>
 #import "AMMesher/AMMesher.h"
+#import "AMGroupDetailsView.h"
 
 
 @interface AMGroupDetailsViewController ()
-
-@property (weak) IBOutlet NSButton *joinBtn;
-@property (weak) IBOutlet NSButton *cancelBtn;
-@property (weak) IBOutlet AMFoundryFontView *groupDescField;
-
 @end
 
 
@@ -36,19 +31,16 @@
 
 -(void)updateUI
 {
-    [AMButtonHandler changeTabTextColor:self.joinBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    
     BOOL isMyGroup = [self.group isMyGroup];
     BOOL isMyMergedGroup = [self.group isMyMergedGroup];
     
-    if ( isMyGroup || isMyMergedGroup) {
-        [self.joinBtn setEnabled:NO];
-    }else{
-        [self.joinBtn setEnabled:YES];
-    }
+    AMGroupDetailsView* detailView = (AMGroupDetailsView*)self.view;
     
-    [self.groupDescField setStringValue:self.group.description];
+    if ( isMyGroup || isMyMergedGroup) {
+        [detailView.joinGroupBtn  setEnabled:NO];
+    }else{
+        [detailView.joinGroupBtn setEnabled:YES];
+    }
 }
 
 - (IBAction)joinGroup:(NSButton *)sender

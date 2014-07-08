@@ -33,15 +33,14 @@
 {
     NSAssert([self.view isKindOfClass:[AMGroupOutlineUserCellView class]], @"internal error: the view is not AMGroupOutlineUserCellView");
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
-    if ([self.user.userid isEqualToString:mySelf.userid]) {
+    if (self.editable) {
         [cellView.textField setEditable:YES];
     }else{
         [cellView.textField setEditable:NO];
     }
     
     cellView.textField.stringValue = self.user.nickName;
+    cellView.descriptionField.stringValue = self.user.description;
     if (self.user.isOnline) {
         [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
     }else{
@@ -54,7 +53,7 @@
         [cellView.leaderBtn setHidden:YES];
     }
     
-    if (self.user.isOnline) {
+    if (self.user.isOnline && self.localUser) {
         [cellView.zombieBtn setHidden:NO];
     }else{
         [cellView.zombieBtn setHidden:YES];

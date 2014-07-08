@@ -439,7 +439,7 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update user info response wrong!");
+            NSAssert(NO, @"update user info response wrong! %@", responseStr);
         }
     };
     

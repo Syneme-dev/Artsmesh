@@ -259,7 +259,6 @@
         
         [[AMMesher sharedAMMesher] updateMySelf];
         
-        NSLog(@"go here!");
     }
 
 }

@@ -1,14 +1,14 @@
 //
-//  AMGroupOutlineUserCellView.m
-//  AMGroupOutlineTest
+//  AMGroupPanelView.m
+//  DemoUI
 //
-//  Created by 王 为 on 6/27/14.
-//  Copyright (c) 2014 王 为. All rights reserved.
+//  Created by 王 为 on 7/8/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupOutlineUserCellView.h"
+#import "AMGroupPanelView.h"
 
-@implementation AMGroupOutlineUserCellView
+@implementation AMGroupPanelView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -22,10 +22,13 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
-
     
     // Drawing code here.
 }
 
+-(void)viewWillStartLiveResize
+{
+    
+}
 
 @end

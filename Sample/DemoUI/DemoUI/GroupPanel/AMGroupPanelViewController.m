@@ -22,7 +22,6 @@
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
-@property (weak) IBOutlet NSView *detailView;
 @property (weak) IBOutlet NSScrollView *outlineScrollView;
 @property (weak) IBOutlet BlueBackgroundView *topboundView;
 
@@ -138,61 +137,6 @@
 
 -(void) awakeFromNib
 {
-//    AMGroup* localGroup = [[AMGroup alloc] init];
-//    localGroup.groupId = [AMAppObjects creatUUID];
-//    localGroup.groupName = @"local group";
-//    localGroup.description = @"This is local group!";
-//    localGroup.password = @"";
-//    
-//    NSMutableArray* users = [[NSMutableArray alloc] init];
-//    
-//    AMUser* user1 = [[AMUser alloc] init];
-//    user1.userid = [AMAppObjects creatUUID];
-//    user1.nickName = @"www";
-//    user1.isOnline = NO;
-//    [users addObject:user1];
-//    
-//    AMUser* user2 = [[AMUser alloc] init];
-//    user2.userid = [AMAppObjects creatUUID];
-//    user2.nickName = @"www2";
-//    user2.isOnline = YES;
-//    [users addObject:user2];
-//    
-//    localGroup.users = users;
-//    localGroup.leaderId = user1.userid;
-//    
-//    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
-//    
-//    
-//    AMGroup* remoteGroup1 = [[AMGroup alloc] init];
-//    remoteGroup1.groupId = [AMAppObjects creatUUID];
-//    remoteGroup1.groupName = @"RemoteGroup";
-//    remoteGroup1.description = @"This is remote group1!";
-//    remoteGroup1.password = @"123456";
-//    
-//    NSMutableArray* remoteUsers1 = [[NSMutableArray alloc] init];
-//    
-//    AMUser* user3 = [[AMUser alloc] init];
-//    user3.userid = [AMAppObjects creatUUID];
-//    user3.nickName = @"KKK";
-//    user3.isOnline = YES;
-//    [remoteUsers1 addObject:user3];
-//    
-//    AMUser* user4 = [[AMUser alloc] init];
-//    user4.userid = [AMAppObjects creatUUID];
-//    user4.nickName = @"KKK2s";
-//    user4.isOnline = YES;
-//    [remoteUsers1 addObject:user4];
-//    
-//    remoteGroup1.users = remoteUsers1;
-//    remoteGroup1.leaderId = user4.userid;
-//    
-//    NSMutableDictionary* remoteGroups = [[NSMutableDictionary alloc] init];
-//    [remoteGroups setObject:remoteGroup1 forKey:remoteGroup1.groupId];
-//    
-//    [AMAppObjects appObjects][AMRemoteGroupsKey] = remoteGroups;
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
@@ -219,10 +163,12 @@
         _detailViewController = nil;
     }
     
-    NSRect rect = self.detailView.frame;
-    rect.origin.y += rect.size.height;
+    NSRect rect = _detailViewController.view.frame;
+    rect.origin.y -= rect.size.height;
     rect.size.height = 0;
-    [self.detailView.animator setFrame:rect];
+    
+    [_detailViewController.view.animator setFrame:rect];
+
     [self.view display];
 }
 
@@ -233,19 +179,19 @@
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     
     _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
-    [self.detailView addSubview:_detailViewController.view];
-    
     AMGroupDetailsViewController* gdc = (AMGroupDetailsViewController*)_detailViewController;
     gdc.group = model.selectedGroup;
     [gdc updateUI];
     
-    NSRect rect = gdc.view.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
+    [self.view addSubview:_detailViewController.view];
     
-    rect.size.width = scrollViewRect.size.width;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height - rect.size.height;
-
-    [self.detailView.animator setFrame:rect];
+    NSRect rect = gdc.view.frame;
+    NSRect topRect = self.topboundView.frame;
+    rect.origin = topRect.origin;
+    [_detailViewController.view setFrame:rect];
+    
+    rect.origin.y -= rect.size.height;
+    [_detailViewController.view.animator setFrame:rect];
     [self.view display];
 }
 
@@ -255,19 +201,18 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     _detailViewController = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
-    
-    [self.detailView addSubview:_detailViewController.view];
-    
     AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;
     udc.user = model.selectedUser;
-
-    NSRect rect = udc.view.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
-    rect.origin.x = scrollViewRect.origin.x;
-    rect.origin.y = self.topboundView.frame.origin.y - rect.size.height;
-    rect.size.width = scrollViewRect.size.width;
     
-    [self.detailView.animator setFrame:rect];
+    [self.view addSubview:_detailViewController.view];
+    
+    NSRect rect = udc.view.frame;
+    NSRect topRect = self.topboundView.frame;
+    rect.origin = topRect.origin;
+    [_detailViewController.view setFrame:rect];
+    
+    rect.origin.y -= rect.size.height;
+    [_detailViewController.view.animator setFrame:rect];
     [udc updateUI];
     
    [self.view display];

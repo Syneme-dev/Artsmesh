@@ -25,12 +25,12 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="eU6-sL-lmf"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cAu-5t-46Y" customClass="AMFoundryFontView">
-                    <rect key="frame" x="28" y="5" width="200" height="20"/>
+                    <rect key="frame" x="26" y="5" width="204" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="0If-To-YRo"/>
                     </constraints>
-                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" borderStyle="border" alignment="left" title="Table View Cell" id="ely-DX-B2h">
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="ely-DX-B2h">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

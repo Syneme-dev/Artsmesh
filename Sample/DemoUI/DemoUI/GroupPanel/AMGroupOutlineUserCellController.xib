@@ -16,37 +16,37 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Grq-7N-rIk">
-                    <rect key="frame" x="225" y="4" width="20" height="22"/>
+                    <rect key="frame" x="225" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="WIE-cw-C82"/>
                         <constraint firstAttribute="height" constant="20" id="xjf-Cv-dEC"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="L" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Rq-yX-s6c">
+                    <buttonCell key="cell" type="smallSquare" title="L" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="5Rq-yX-s6c">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="awN-46-d2C">
-                    <rect key="frame" x="250" y="4" width="20" height="22"/>
+                    <rect key="frame" x="250" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="Xfc-QO-hW3"/>
                         <constraint firstAttribute="height" constant="20" id="gaz-5T-stK"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="Z" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
+                    <buttonCell key="cell" type="smallSquare" title="Z" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OvC-ZJ-I1T">
-                    <rect key="frame" x="275" y="4" width="20" height="22"/>
+                    <rect key="frame" x="275" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="0Df-Lg-gOt"/>
                         <constraint firstAttribute="width" constant="20" id="UJy-ka-ocY"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
+                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -64,12 +64,12 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="gh2-fK-RXl"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ks3-XZ-0wB" customClass="AMFoundryFontView">
-                    <rect key="frame" x="32" y="5" width="185" height="20"/>
+                    <rect key="frame" x="30" y="5" width="189" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="UDH-li-L99"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="border" id="ab4-QM-G0o">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="ab4-QM-G0o">
                         <customFormatter key="formatter" id="QDj-l3-sQe" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>

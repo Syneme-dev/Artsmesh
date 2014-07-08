@@ -21,12 +21,12 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="Qcs-De-ZRc"/>
                 </imageView>
                 <textField identifier="group_name_field" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="48h-mX-dSF" customClass="AMFoundryFontView">
-                    <rect key="frame" x="20" y="5" width="162" height="20"/>
+                    <rect key="frame" x="18" y="5" width="166" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="35f-iS-TAO"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="border" id="BTS-Fu-aUF">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="BTS-Fu-aUF">
                         <customFormatter key="formatter" id="H18-xs-3to" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" size="15" name="LucidaGrande"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -38,13 +38,13 @@
                     </connections>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1jr-fh-Ix4">
-                    <rect key="frame" x="278" y="4" width="20" height="22"/>
+                    <rect key="frame" x="278" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Im4-zt-YSp"/>
                         <constraint firstAttribute="width" constant="20" id="rpk-8k-Nuz"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q7G-ph-CD7">
+                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Q7G-ph-CD7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -53,13 +53,13 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M05-DM-bnQ">
-                    <rect key="frame" x="256" y="4" width="20" height="22"/>
+                    <rect key="frame" x="256" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="6q6-uE-QSn"/>
                         <constraint firstAttribute="height" constant="20" id="Uye-c6-QJ9"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_exit" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJW-zE-Uxa">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_exit" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="XJW-zE-Uxa">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -68,13 +68,13 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="apw-1e-TPG">
-                    <rect key="frame" x="234" y="4" width="20" height="22"/>
+                    <rect key="frame" x="234" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="MeP-H8-QZ0"/>
                         <constraint firstAttribute="width" constant="20" id="iFJ-8X-AQs"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="SideBar_group_h" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TTg-aG-A1J">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="SideBar_group_h" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="TTg-aG-A1J">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -83,25 +83,25 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zYQ-u4-bMc">
-                    <rect key="frame" x="212" y="4" width="20" height="22"/>
+                    <rect key="frame" x="212" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="L0D-mB-wMl"/>
                         <constraint firstAttribute="width" constant="20" id="pzt-7B-sqB"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_chat" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eWy-Hw-MX2">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_chat" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="eWy-Hw-MX2">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wdi-mF-1NZ">
-                    <rect key="frame" x="190" y="4" width="20" height="22"/>
+                    <rect key="frame" x="190" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="8pD-gU-Llc"/>
                         <constraint firstAttribute="height" constant="20" id="lz3-8T-iPf"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_lock" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y5X-Aw-HvV">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_lock" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="y5X-Aw-HvV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

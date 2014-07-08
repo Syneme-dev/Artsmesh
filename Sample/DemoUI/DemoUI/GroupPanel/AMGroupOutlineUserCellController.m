@@ -26,7 +26,8 @@
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
     AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
     [formatter setMaximumLength:MAX_USER_NAME_LENGTH];
-
+    
+    cellView.delegate = self;
 }
 
 -(void)updateUI
@@ -109,6 +110,13 @@
     AMMesher* mesher = [AMMesher sharedAMMesher];
     [mesher updateMySelf];
 }
+
+-(void)viewFrameChanged:(NSView*)view
+{
+    [self removeTrackAres];
+    [self setTrackArea];
+}
+
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

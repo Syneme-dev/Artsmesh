@@ -11,6 +11,7 @@
 #import <AMNotificationManager/AMNotificationManager.h>
 #import "AMRestHelper.h"
 #import "AFHTTPRequestOperationManager.h"
+#import <UIFramework/AMButtonHandler.h>
 
 @interface AMUserViewController ()
 
@@ -30,8 +31,10 @@
 
 -(void)awakeFromNib
 {
-    [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
-    [self loadAvatarImage];
+//    [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
+//     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
+//    [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
+//    [self loadAvatarImage];
 }
 
 //-(void)onUpdateUserAVator:(NSNotification*)notification{
@@ -65,4 +68,12 @@
     [self.avatarView  setImage:imageFromBundle];
 }
 
+- (IBAction)onUserTabClick:(id)sender {
+    [self.tabs selectTabViewItemAtIndex:0];
+}
+
+- (IBAction)onGroupTabClick:(id)sender {
+    
+    [self.tabs selectTabViewItemAtIndex:1];
+}
 @end

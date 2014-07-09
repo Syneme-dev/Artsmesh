@@ -11,5 +11,10 @@
 @interface AMUserViewController : NSViewController
 @property (strong) IBOutlet NSImageView *avatarView;
 @property (strong) IBOutlet NSTextField *statusMessageLabel;
+@property (strong) IBOutlet NSButton *userTabButton;
+@property (strong) IBOutlet NSButton *groupTabButton;
+@property (strong) IBOutlet NSTabView *tabs;
+- (IBAction)onUserTabClick:(id)sender;
+- (IBAction)onGroupTabClick:(id)sender;
 
 @end

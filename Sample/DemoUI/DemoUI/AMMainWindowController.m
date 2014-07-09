@@ -85,6 +85,7 @@
     AMTestViewController *testViewController;
     AMMapViewController *mapViewController;
     AMMixingViewController *mixingViewController;
+    AMUserViewController *userViewController;
     AMVisualViewController  *visualViewController;
     MZTimerLabel *amTimerControl;
     
@@ -591,7 +592,7 @@
         AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
     panelView.minSizeConstraint = panelSize;
-    AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
+    userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     [self fillPanel:panelViewController.view content:userViewController.view];
 }
 

@@ -22,7 +22,6 @@
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
-@property (weak) IBOutlet NSScrollView *outlineScrollView;
 @property (weak) IBOutlet BlueBackgroundView *topboundView;
 
 @end
@@ -158,64 +157,72 @@
 
 -(void)hideDetailView
 {
-    if (_detailViewController) {
-        [_detailViewController.view removeFromSuperview];
-        _detailViewController = nil;
-    }
-    
     NSRect rect = _detailViewController.view.frame;
     rect.origin.y -= rect.size.height;
     rect.size.height = 0;
     
     [_detailViewController.view.animator setFrame:rect];
-
     [self.view display];
+    
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
 }
 
 -(void)showGroupDetails
 {
-    [self hideDetailView];
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
+    
+    AMGroupDetailsViewController* gdc = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    
-    _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
-    AMGroupDetailsViewController* gdc = (AMGroupDetailsViewController*)_detailViewController;
     gdc.group = model.selectedGroup;
-    [gdc updateUI];
-    
-    [self.view addSubview:_detailViewController.view];
-    
+    [self.view addSubview:gdc.view];
+
     NSRect rect = gdc.view.frame;
     NSRect topRect = self.topboundView.frame;
     rect.origin = topRect.origin;
-    [_detailViewController.view setFrame:rect];
+    [gdc.view setFrame:rect];
     
     rect.origin.y -= rect.size.height;
-    [_detailViewController.view.animator setFrame:rect];
+    [gdc.view.animator setFrame:rect];
+    
+    [gdc updateUI];
     [self.view display];
+    
+    _detailViewController = gdc;
 }
 
 -(void)showUserDetails
 {
-    [self hideDetailView];
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
+    
+    AMUserDetailsViewController* udc = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    _detailViewController = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
-    AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;
     udc.user = model.selectedUser;
     
-    [self.view addSubview:_detailViewController.view];
+    [self.view addSubview:udc.view];
     
     NSRect rect = udc.view.frame;
     NSRect topRect = self.topboundView.frame;
     rect.origin = topRect.origin;
-    [_detailViewController.view setFrame:rect];
+    [udc.view setFrame:rect];
     
     rect.origin.y -= rect.size.height;
-    [_detailViewController.view.animator setFrame:rect];
-    [udc updateUI];
+    [udc.view.animator setFrame:rect];
     
-   [self.view display];
+    [udc updateUI];
+    [self.view display];
+    
+    _detailViewController = udc;
 }
 
 

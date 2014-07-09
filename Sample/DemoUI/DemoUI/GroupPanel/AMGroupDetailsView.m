@@ -20,11 +20,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    NSLog(@"dealloc called!");
-}
-
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];

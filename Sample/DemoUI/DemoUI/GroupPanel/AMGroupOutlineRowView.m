@@ -42,4 +42,15 @@
     }
 }
 
+- (void)drawSelectionInRect:(NSRect)dirtyRect {
+    if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
+        NSRect selectionRect = NSInsetRect(self.bounds, 1, 1);
+        [[NSColor colorWithCalibratedRed:0.2 green:0.2 blue:0.2 alpha:1] setStroke];
+        [[NSColor colorWithCalibratedRed:0.2 green:0.2 blue:0.2 alpha:1] setFill];
+        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRect:selectionRect];
+        [selectionPath fill];
+        [selectionPath stroke];
+    }
+}
+
 @end

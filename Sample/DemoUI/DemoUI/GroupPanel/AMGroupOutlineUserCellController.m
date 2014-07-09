@@ -26,16 +26,15 @@
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
     AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
     [formatter setMaximumLength:MAX_USER_NAME_LENGTH];
-
+    
+    cellView.delegate = self;
 }
 
 -(void)updateUI
 {
     NSAssert([self.view isKindOfClass:[AMGroupOutlineUserCellView class]], @"internal error: the view is not AMGroupOutlineUserCellView");
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
-    if ([self.user.userid isEqualToString:mySelf.userid]) {
+    if (self.editable) {
         [cellView.textField setEditable:YES];
     }else{
         [cellView.textField setEditable:NO];
@@ -54,7 +53,7 @@
         [cellView.leaderBtn setHidden:YES];
     }
     
-    if (self.user.isOnline) {
+    if (self.user.isOnline && self.localUser) {
         [cellView.zombieBtn setHidden:NO];
     }else{
         [cellView.zombieBtn setHidden:YES];
@@ -111,6 +110,13 @@
     AMMesher* mesher = [AMMesher sharedAMMesher];
     [mesher updateMySelf];
 }
+
+-(void)viewFrameChanged:(NSView*)view
+{
+    [self removeTrackAres];
+    [self setTrackArea];
+}
+
 
 #pragma mark-
 #pragma TableViewCell Tracking Area

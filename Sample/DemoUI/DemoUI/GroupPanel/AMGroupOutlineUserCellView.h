@@ -12,5 +12,6 @@
 @property (weak) IBOutlet NSButton *leaderBtn;
 @property (weak) IBOutlet NSButton *zombieBtn;
 @property (weak) IBOutlet NSButton *infoBtn;
+@property (weak) id delegate;
 
 @end

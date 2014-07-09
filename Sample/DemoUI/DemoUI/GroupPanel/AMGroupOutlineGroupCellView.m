@@ -27,4 +27,15 @@
     // Drawing code here.
 }
 
+-(void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    
+    if([self.delegate respondsToSelector:@selector(viewFrameChanged:)])
+    {
+        [self.delegate viewFrameChanged:nil];
+    }
+}
+
+
 @end

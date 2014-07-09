@@ -17,10 +17,11 @@
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/BlueBackgroundView.h"
 #import "AMUserDetailsViewController.h"
+#import "AMGroupOutlineGroupCellView.h"
+#import "AMGroupOutlineUserCellView.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
-@property (weak) IBOutlet NSView *detailView;
 @property (weak) IBOutlet NSScrollView *outlineScrollView;
 @property (weak) IBOutlet BlueBackgroundView *topboundView;
 
@@ -41,6 +42,27 @@
     return self;
 }
 
+-(void)doubleClickOutlineView:(id)sender
+{
+    if([sender isKindOfClass:[NSOutlineView class]]){
+        NSOutlineView* ov = (NSOutlineView*)sender;
+        NSInteger selected = [ov selectedRow];
+        
+        if (selected < 0){
+            return;
+        }
+        
+        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        if ([selectedCellView isKindOfClass:[AMGroupOutlineGroupCellView class]]) {
+            AMGroupOutlineGroupCellView* gCell = (AMGroupOutlineGroupCellView*)selectedCellView;
+            [gCell.infoBtn performClick:gCell.infoBtn];
+        }else if([selectedCellView isKindOfClass:[AMGroupOutlineUserCellView class]]){
+            AMGroupOutlineUserCellView* uCell = (AMGroupOutlineUserCellView*)selectedCellView;
+            [uCell.infoBtn performClick:uCell.infoBtn];
+        }
+    }
+}
+
 -(void)reloadGroups
 {
     _userGroups = [[NSMutableArray alloc] init];
@@ -51,28 +73,39 @@
     
     AMGroupOutlineGroupCellController* localGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
     localGroupController.group = localGroup;
+    localGroupController.editable = YES;
     localGroupController.userControllers = [[NSMutableArray alloc] init];
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
     
     for (AMUser* user in localGroup.users){
         AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
         
         localUserController.group = localGroup;
         localUserController.user = user;
+        if ([user.userid isEqualToString: mySelf.userid]) {
+            localUserController.editable = YES;
+        }else{
+            localUserController.editable = NO;
+        }
         
+        localUserController.localUser = YES;
+    
         [localGroupController.userControllers addObject:localUserController];
     }
     
     [_userGroups addObject:localGroupController];
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
     if (mySelf.isOnline == NO) {
         
         [self.outlineView reloadData];
+        [self.outlineView expandItem:nil expandChildren:YES];
         return;
     }
     
     AMGroupOutlineLabelCellController* labelController = [[AMGroupOutlineLabelCellController alloc] initWithNibName:@"AMGroupOutlineLabelCellController" bundle:nil];
     labelController.groupControllers = [[NSMutableArray alloc] init];
+    [_userGroups addObject:labelController];
     
     NSDictionary* remoteGroupDict = [AMAppObjects appObjects][AMRemoteGroupsKey];
     
@@ -81,80 +114,29 @@
         AMGroupOutlineGroupCellController* remoteGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
         remoteGroupController.group = remoteGroup;
         remoteGroupController.userControllers = [[NSMutableArray alloc] init];
+        remoteGroupController.editable = NO;
         
         for (AMUser* user in remoteGroup.users){
-            AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
+            AMGroupOutlineUserCellController* remoteUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
             
-            localUserController.group = remoteGroup;
-            localUserController.user = user;
+            remoteUserController.group = remoteGroup;
+            remoteUserController.user = user;
+            remoteUserController.editable = NO;
+            remoteUserController.localUser = NO;
             
-            [remoteGroupController.userControllers addObject:localUserController];
+            [remoteGroupController.userControllers addObject:remoteUserController];
         }
         
         [labelController.groupControllers addObject:remoteGroupController];
     }
-    [_userGroups addObject:labelController];
+   
     
     [self.outlineView reloadData];
+    [self.outlineView expandItem:nil expandChildren:YES];
 }
 
--(void)awakeFromNib
+-(void) awakeFromNib
 {
-//    AMGroup* localGroup = [[AMGroup alloc] init];
-//    localGroup.groupId = [AMAppObjects creatUUID];
-//    localGroup.groupName = @"local group";
-//    localGroup.description = @"This is local group!";
-//    localGroup.password = @"";
-//    
-//    NSMutableArray* users = [[NSMutableArray alloc] init];
-//    
-//    AMUser* user1 = [[AMUser alloc] init];
-//    user1.userid = [AMAppObjects creatUUID];
-//    user1.nickName = @"www";
-//    user1.isOnline = NO;
-//    [users addObject:user1];
-//    
-//    AMUser* user2 = [[AMUser alloc] init];
-//    user2.userid = [AMAppObjects creatUUID];
-//    user2.nickName = @"www2";
-//    user2.isOnline = YES;
-//    [users addObject:user2];
-//    
-//    localGroup.users = users;
-//    localGroup.leaderId = user1.userid;
-//    
-//    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
-//    
-//    
-//    AMGroup* remoteGroup1 = [[AMGroup alloc] init];
-//    remoteGroup1.groupId = [AMAppObjects creatUUID];
-//    remoteGroup1.groupName = @"RemoteGroup";
-//    remoteGroup1.description = @"This is remote group1!";
-//    remoteGroup1.password = @"123456";
-//    
-//    NSMutableArray* remoteUsers1 = [[NSMutableArray alloc] init];
-//    
-//    AMUser* user3 = [[AMUser alloc] init];
-//    user3.userid = [AMAppObjects creatUUID];
-//    user3.nickName = @"KKK";
-//    user3.isOnline = YES;
-//    [remoteUsers1 addObject:user3];
-//    
-//    AMUser* user4 = [[AMUser alloc] init];
-//    user4.userid = [AMAppObjects creatUUID];
-//    user4.nickName = @"KKK2s";
-//    user4.isOnline = YES;
-//    [remoteUsers1 addObject:user4];
-//    
-//    remoteGroup1.users = remoteUsers1;
-//    remoteGroup1.leaderId = user4.userid;
-//    
-//    NSMutableDictionary* remoteGroups = [[NSMutableDictionary alloc] init];
-//    [remoteGroups setObject:remoteGroup1 forKey:remoteGroup1.groupId];
-//    
-//    [AMAppObjects appObjects][AMRemoteGroupsKey] = remoteGroups;
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
@@ -164,6 +146,9 @@
     [self reloadGroups];
     self.outlineView.delegate = self;
     self.outlineView.dataSource  = self;
+    
+    [self.outlineView setTarget:self];
+    [self.outlineView setDoubleAction:@selector(doubleClickOutlineView:)];
 }
 
 -(void)dealloc{
@@ -178,12 +163,12 @@
         _detailViewController = nil;
     }
     
-    NSRect rect = self.detailView.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
-    scrollViewRect.size.height += rect.size.height;
+    NSRect rect = _detailViewController.view.frame;
+    rect.origin.y -= rect.size.height;
     rect.size.height = 0;
-    [self.detailView setFrame:rect];
-    [self.outlineScrollView setFrame:scrollViewRect];
+    
+    [_detailViewController.view.animator setFrame:rect];
+
     [self.view display];
 }
 
@@ -194,22 +179,19 @@
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     
     _detailViewController = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
-    [self.detailView addSubview:_detailViewController.view];
-    
     AMGroupDetailsViewController* gdc = (AMGroupDetailsViewController*)_detailViewController;
     gdc.group = model.selectedGroup;
     [gdc updateUI];
     
+    [self.view addSubview:_detailViewController.view];
+    
     NSRect rect = gdc.view.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
+    NSRect topRect = self.topboundView.frame;
+    rect.origin = topRect.origin;
+    [_detailViewController.view setFrame:rect];
     
-    rect.size.width = scrollViewRect.size.width;
-    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
-    
-    [self.outlineScrollView setFrame:scrollViewRect];
-    [self.detailView setFrame:rect];
-    
+    rect.origin.y -= rect.size.height;
+    [_detailViewController.view.animator setFrame:rect];
     [self.view display];
 }
 
@@ -219,23 +201,21 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     _detailViewController = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
-    [self.detailView addSubview:_detailViewController.view];
-    
     AMUserDetailsViewController* udc = (AMUserDetailsViewController*)_detailViewController;
     udc.user = model.selectedUser;
-    [udc updateUI];
+    
+    [self.view addSubview:_detailViewController.view];
     
     NSRect rect = udc.view.frame;
-    NSRect scrollViewRect = self.outlineScrollView.frame;
-
-    rect.size.width = scrollViewRect.size.width;
-    scrollViewRect.size.height = self.topboundView.frame.origin.y - scrollViewRect.origin.y - rect.size.height ;
-    rect.origin.y = scrollViewRect.origin.y + scrollViewRect.size.height;
+    NSRect topRect = self.topboundView.frame;
+    rect.origin = topRect.origin;
+    [_detailViewController.view setFrame:rect];
     
-    [self.outlineScrollView setFrame:scrollViewRect];
-    [self.detailView setFrame:rect];
+    rect.origin.y -= rect.size.height;
+    [_detailViewController.view.animator setFrame:rect];
+    [udc updateUI];
     
-    [self.view display];
+   [self.view display];
 }
 
 
@@ -295,7 +275,8 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    return [self outlineView:outlineView numberOfChildrenOfItem:item] > 0;
+    long i =  [self outlineView:outlineView numberOfChildrenOfItem:item];
+    return i > 0;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
@@ -358,9 +339,9 @@
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
     if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
-        
-        rowView.headImage = [NSImage imageNamed:@"group_online"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+
+        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
         
     }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
         

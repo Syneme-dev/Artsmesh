@@ -22,9 +22,15 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
-
-    
     // Drawing code here.
+}
+
+-(void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    if ([self.delegate respondsToSelector:@selector(viewFrameChanged:)]) {
+        [self.delegate viewFrameChanged:nil];
+    }
 }
 
 

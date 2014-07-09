@@ -29,8 +29,7 @@
     AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
     [formatter setMaximumLength:MAX_GROUP_NAME_LENGTH];
     
-    AMGroupTextFieldFormatter* desFormatter = cellView.descriptionField.formatter;
-    [desFormatter setMaximumLength:MAX_GROUP_DESCRIPTION];
+    cellView.delegate = self;
 }
 
 
@@ -40,14 +39,6 @@
     AMGroupOutlineGroupCellView* cellView = (AMGroupOutlineGroupCellView*)self.view;
     
     cellView.textField.stringValue = self.group.groupName;
-    cellView.descriptionField.stringValue = self.group.description;
-    
-//    NSDictionary* meshedGroup = [AMAppObjects appObjects][AMMeshedGroupsKey];
-//    if (meshedGroup[self.group.groupId] == nil ) {
-//        [cellView.imageView setImage:[NSImage imageNamed:@"user_offline"]];
-//    }else{
-//        [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
-//    }
     
     if ([self.group.password isEqualToString:@""]) {
         [cellView.lockBtn setHidden:YES];
@@ -68,10 +59,8 @@
     
     if (self.editable){
         [cellView.textField setEditable:YES];
-        [cellView.descriptionField setEditable:YES];
     }else{
         [cellView.textField setEditable:NO];
-        [cellView.descriptionField setEditable:NO];
     }
 }
 
@@ -87,7 +76,6 @@
         [self.view addTrackingArea:trackArea];
     }
 }
-
 
 -(void)removeTrackAres
 {
@@ -135,20 +123,15 @@
     [mesher updateGroup];
 }
 
-- (IBAction)groupDescriptionEdited:(NSTextField *)sender
+#pragma mark-
+#pragma TableViewCell FrameChanged
+
+-(void)viewFrameChanged:(NSView*)view
 {
-    AMGroup* myLocalGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-    
-    NSString* newDescripton = sender.stringValue;
-    if ([newDescripton isEqualToString:myLocalGroup.description] ) {
-        return;
-    }
-    
-    myLocalGroup.description = newDescripton;
-    
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher updateGroup];
+    [self removeTrackAres];
+    [self setTrackArea];
 }
+
 
 #pragma mark-
 #pragma TableViewCell Tracking Area
@@ -185,14 +168,6 @@
 
 -(BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//            self.myPopOver = [[NSPopover alloc] init];
-//            self.myPopOver.animates = YES;
-//            self.myPopOver.contentViewController = [[AMErrPopoverViewController alloc] initWithNibName:@"AMErrPopoverViewController" bundle:nil];
-//        
-//            [self.myPopOver showRelativeToRect:[control bounds] ofView:control preferredEdge:NSMaxXEdge];
-//    });
-    
     if ([control.identifier isEqualToString:@"group_name_field"]) {
         NSTextField* groupNameField = (NSTextField*)control;
         

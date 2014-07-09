@@ -649,7 +649,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -852,7 +852,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-cP-0rI" userLabel="social" customClass="BlueBackgroundView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-cP-0rI" userLabel="social" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="320" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>

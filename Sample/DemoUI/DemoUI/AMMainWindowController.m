@@ -228,7 +228,7 @@
     NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
    
     if ([openedPanels containsObject:UI_Panel_Key_User]) {
-        [self loadUserPanel];
+        [self loadProfilePanel];
     }
     
        if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
@@ -586,9 +586,9 @@
     [self createNetworkToolsPanelController:UI_Panel_Key_NetworkTools withTitle:@"NETWORK TOOLS"];
 }
 
-- (void)loadUserPanel {
+- (void)loadProfilePanel {
     float panelHeight=300.0f;
-    AMPanelViewController *panelViewController=[self createPanel:@"USER_PANEL" withTitle:@"USER" width:UI_defaultPanelWidth height:panelHeight];
+    AMPanelViewController *panelViewController=[self createPanel:@"USER_PANEL" withTitle:@"PROFILE" width:UI_defaultPanelWidth height:panelHeight];
         AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
     panelView.minSizeConstraint = panelSize;
@@ -605,7 +605,7 @@
     if(sender.state==NSOnState)
     {
         if ([panelId isEqualToString:UI_Panel_Key_User]) {
-            [self loadUserPanel];
+            [self loadProfilePanel];
         }
         else if ([panelId isEqualToString:UI_Panel_Key_Groups]) {
             [self loadGroupsPanel];

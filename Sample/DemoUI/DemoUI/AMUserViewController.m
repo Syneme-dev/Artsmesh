@@ -23,7 +23,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        [AMN_NOTIFICATION_MANAGER listenMessageType:self withTypeName:AMN_UPDATEUSERAVATOR callback:@selector(onUpdateUserAVator:)];
     }
     return self;
 }
@@ -31,12 +30,12 @@
 
 -(void)awakeFromNib
 {
-//    [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
-//     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
-//    [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
-//    [self loadAvatarImage];
+    [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
+     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
+    [self loadAvatarImage];
 }
-
+//Note:sample code if using this as notification.
 //-(void)onUpdateUserAVator:(NSNotification*)notification{
 //    
 //

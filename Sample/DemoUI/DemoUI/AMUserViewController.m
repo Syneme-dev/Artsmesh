@@ -12,6 +12,8 @@
 #import "AMRestHelper.h"
 #import "AFHTTPRequestOperationManager.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMMesher/AMAppObjects.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMUserViewController ()
 
@@ -74,5 +76,77 @@
 - (IBAction)onGroupTabClick:(id)sender {
     
     [self.tabs selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)groupNameEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    localGroup.groupName = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (IBAction)groupDescriptionEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    localGroup.description = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (IBAction)nicknameEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.nickName = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+- (IBAction)locationEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.location = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+- (IBAction)statusMessageEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.description = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+- (IBAction)domainEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.domain = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 @end

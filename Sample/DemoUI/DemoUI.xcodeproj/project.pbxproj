@@ -412,10 +412,9 @@
 			children = (
 				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
-				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
+				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
-				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
@@ -430,8 +429,6 @@
 		262021F518EAE58400811E4E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D41155E718E9539B00C84092 /* AMUserViewController.h */,
-				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
 				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
@@ -543,12 +540,13 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2FC37196588FD00AFD309 /* GroupPanel */,
+				D499651B196D1A2C00033761 /* ProfilePanel */,
 				AFE5FC5C196A40E00079B434 /* Classes */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
-				CEC2FC37196588FD00AFD309 /* GroupPanel */,
 				AFAEBD811961060200B7FB51 /* ViewsExtend */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
@@ -737,6 +735,16 @@
 				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 			);
 			path = GroupPanel;
+			sourceTree = "<group>";
+		};
+		D499651B196D1A2C00033761 /* ProfilePanel */ = {
+			isa = PBXGroup;
+			children = (
+				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
+				D41155E718E9539B00C84092 /* AMUserViewController.h */,
+				D41155E818E9539B00C84092 /* AMUserViewController.m */,
+			);
+			name = ProfilePanel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

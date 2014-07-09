@@ -25,7 +25,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akq-NV-Uo8" customClass="AMFoundryFontView">
-                    <rect key="frame" x="12" y="129" width="93" height="17"/>
+                    <rect key="frame" x="12" y="129" width="260" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUP NAME:" id="ap2-3o-PFU">
                         <font key="font" metaFont="system"/>
@@ -46,7 +46,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUX-fy-9mx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="13" y="67" width="92" height="17"/>
+                    <rect key="frame" x="13" y="67" width="259" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DESCRIPTION:" id="VdI-vj-MdV">
                         <font key="font" metaFont="system"/>

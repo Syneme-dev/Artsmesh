@@ -15,14 +15,16 @@
 #import "AMGroupOutlineLabelCellController.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsViewController.h"
-#import "UIFramework/BlueBackgroundView.h"
 #import "AMUserDetailsViewController.h"
 #import "AMGroupOutlineGroupCellView.h"
 #import "AMGroupOutlineUserCellView.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
-@property (weak) IBOutlet BlueBackgroundView *topboundView;
+@property (weak) IBOutlet NSButton *staticGroupTab;
+@property (weak) IBOutlet NSButton *liveGroupTab;
+@property (weak) IBOutlet NSTabView *groupTabView;
 
 @end
 
@@ -136,6 +138,9 @@
 
 -(void) awakeFromNib
 {
+    [AMButtonHandler changeTabTextColor:self.staticGroupTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.liveGroupTab toColor:UI_Color_blue];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
     
@@ -157,13 +162,6 @@
 
 -(void)hideDetailView
 {
-    NSRect rect = _detailViewController.view.frame;
-    rect.origin.y -= rect.size.height;
-    rect.size.height = 0;
-    
-    [_detailViewController.view.animator setFrame:rect];
-    [self.view display];
-    
     if (_detailViewController) {
         [_detailViewController.view removeFromSuperview];
         _detailViewController = nil;
@@ -172,10 +170,7 @@
 
 -(void)showGroupDetails
 {
-    if (_detailViewController) {
-        [_detailViewController.view removeFromSuperview];
-        _detailViewController = nil;
-    }
+    [self hideDetailView];
     
     AMGroupDetailsViewController* gdc = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
     
@@ -184,8 +179,10 @@
     [self.view addSubview:gdc.view];
 
     NSRect rect = gdc.view.frame;
-    NSRect topRect = self.topboundView.frame;
-    rect.origin = topRect.origin;
+    NSRect tabFrame = self.groupTabView.frame;
+    rect.origin.x = tabFrame.origin.x;
+    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+    rect.size.width = tabFrame.size.width;
     [gdc.view setFrame:rect];
     
     rect.origin.y -= rect.size.height;
@@ -199,21 +196,19 @@
 
 -(void)showUserDetails
 {
-    if (_detailViewController) {
-        [_detailViewController.view removeFromSuperview];
-        _detailViewController = nil;
-    }
+     [self hideDetailView];
     
     AMUserDetailsViewController* udc = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     udc.user = model.selectedUser;
-    
     [self.view addSubview:udc.view];
     
     NSRect rect = udc.view.frame;
-    NSRect topRect = self.topboundView.frame;
-    rect.origin = topRect.origin;
+    NSRect tabFrame = self.groupTabView.frame;
+    rect.origin.x = tabFrame.origin.x;
+    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+    rect.size.width = tabFrame.size.width;
     [udc.view setFrame:rect];
     
     rect.origin.y -= rect.size.height;
@@ -224,7 +219,6 @@
     
     _detailViewController = udc;
 }
-
 
 #pragma mark -
 #pragma   mark KVO
@@ -238,11 +232,11 @@
         if ([keyPath isEqualToString:@"detailPanelState"]){
             
             DetailPanelState newState = [[change objectForKey:@"new"] intValue];
-            DetailPanelState oldState = [[change objectForKey:@"old"] intValue];
+            //DetailPanelState oldState = [[change objectForKey:@"old"] intValue];
             
-            if (newState == oldState) {
-                return;
-            }
+           // if (newState == oldState) {
+            //    return;
+           // }
             
             if (newState == DetailPanelGroup) {
                 [self showGroupDetails];
@@ -364,4 +358,20 @@
     
     return rowView;
 }
+
+#pragma mark-
+#pragma StaticGroups
+
+- (IBAction)staticGroupTabClick:(NSButton *)sender
+{
+    [self hideDetailView];
+    [self.groupTabView selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)liveGroupTabClick:(NSButton *)sender
+{
+    [self hideDetailView];
+    [self.groupTabView selectTabViewItemAtIndex:0];
+}
+
 @end

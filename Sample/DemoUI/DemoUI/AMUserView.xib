@@ -147,7 +147,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUj-IO-sS7" userLabel="gotoSocial">
-                                        <rect key="frame" x="102" y="158" width="26" height="26"/>
+                                        <rect key="frame" x="136" y="120" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="cq8-qB-Jw4">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -155,7 +155,7 @@
                                         </buttonCell>
                                     </button>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjb-6x-FtH" userLabel="project" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="100" y="201" width="154" height="22"/>
+                                        <rect key="frame" x="128" y="203" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Group Location" id="JvJ-BG-XBp">
                                             <font key="font" metaFont="system"/>
@@ -163,8 +163,8 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqr-cF-59g" userLabel="location" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="100" y="255" width="154" height="22"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqr-cF-59g" userLabel="groupName" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="128" y="233" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Group Name" id="SIV-Tt-uLh">
                                             <font key="font" metaFont="system"/>
@@ -173,6 +173,7 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="groupNameEdited:" target="-2" id="dq9-6k-ekw"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Name" id="PKd-dE-Nd4"/>
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pG9-Ph-oy5" userLabel="statusMessage" customClass="AMFoundryFontView">
@@ -185,16 +186,8 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="groupDescriptionEdited:" target="-2" id="6GZ-Ix-VhQ"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Description" id="kQf-Xl-EsU"/>
                                         </connections>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7B-DR-szH">
-                                        <rect key="frame" x="7" y="258" width="82" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Group Info" id="70O-Kz-oeg">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
                                     </textField>
                                 </subviews>
                             </view>

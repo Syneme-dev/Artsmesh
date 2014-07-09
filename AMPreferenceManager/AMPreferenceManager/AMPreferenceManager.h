@@ -26,6 +26,7 @@
 #define Preference_Key_User_Project             @"Preference_Key_User_Project"
 #define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
 #define Preference_Key_Cluster_Name             @"Preference_Key_Cluster_Name"
+#define Preference_Key_Cluster_Description      @"Preference_Key_Cluster_Description"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
@@ -46,6 +47,7 @@
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
 #define Preference_Cluster_Name             @"LocalGroup"
+#define Preference_Cluster_Description      @"There is no description of the group"
 
 #define Preference_General_StunServerAddr   @"123.124.145.254"
 #define Preference_General_StunServerPort   @"22250"

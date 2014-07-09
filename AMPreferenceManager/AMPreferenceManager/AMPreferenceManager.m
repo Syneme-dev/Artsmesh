@@ -42,6 +42,7 @@
              Preference_General_LocalServerPort, Preference_Key_General_LocalServerPort,
              openedPanel,UserData_Key_OpenedPanel,
              Preference_Cluster_Name,            Preference_Key_Cluster_Name,
+             Preference_Cluster_Description,     Preference_Key_Cluster_Description,
             nil];
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

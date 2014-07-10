@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
+		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
@@ -200,6 +201,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
+		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
@@ -723,11 +726,13 @@
 				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
 				CEC2FC4A196588FD00AFD309 /* AMGroupPanelModel.h */,
 				CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */,
+				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
 				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
 				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
-				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
 				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
 				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
+				26015405196E340500045A55 /* AMLiveGroupDataSource.h */,
+				26015406196E340500045A55 /* AMLiveGroupDataSource.m */,
 			);
 			path = GroupPanel;
 			sourceTree = "<group>";
@@ -980,6 +985,7 @@
 				CEC2FC56196588FD00AFD309 /* AMGroupOutlineGroupCellController.m in Sources */,
 				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
+				26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,

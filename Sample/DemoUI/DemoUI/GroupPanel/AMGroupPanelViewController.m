@@ -14,14 +14,17 @@
 #import "AMUserDetailsViewController.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMLiveGroupDataSource.h"
+#import "AMStaticGroupDataSource.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @property (weak) IBOutlet NSButton *staticGroupTab;
 @property (weak) IBOutlet NSButton *liveGroupTab;
 @property (weak) IBOutlet NSTabView *groupTabView;
+@property (weak) IBOutlet NSOutlineView *staticGroupOutlineView;
 
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
+@property (strong)AMStaticGroupDataSource* staticGroupDataSource;
 
 @end
 
@@ -46,11 +49,19 @@
     
     self.liveGroupDataSource = [[AMLiveGroupDataSource alloc] init];
     [self.liveGroupDataSource reloadGroups];
+    [self.outlineView reloadData];
     self.outlineView.delegate = self.liveGroupDataSource;
     self.outlineView.dataSource  = self.liveGroupDataSource;
-
     [self.outlineView setTarget:self.liveGroupDataSource];
     [self.outlineView setDoubleAction:@selector(doubleClickOutlineView:)];
+    
+    self.staticGroupDataSource = [[AMStaticGroupDataSource alloc] init];
+    [self.staticGroupDataSource reloadGroups];
+    [self.staticGroupOutlineView reloadData];
+    self.staticGroupOutlineView.delegate = self.staticGroupDataSource;
+    self.staticGroupOutlineView.dataSource = self.staticGroupDataSource;
+    [self.staticGroupOutlineView setTarget:self.staticGroupDataSource];
+    [self.staticGroupOutlineView setDoubleAction:@selector(doubleClickOutlineView:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LOCALUSERS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
@@ -161,7 +172,6 @@
     }
 }
 
-
 #pragma mark-
 #pragma StaticGroups
 
@@ -175,6 +185,11 @@
 {
     [self hideDetailView];
     [self.groupTabView selectTabViewItemAtIndex:0];
+}
+- (IBAction)reloadStaticGroups:(NSButton *)sender
+{
+    [self.staticGroupDataSource reloadGroups];
+    [self.staticGroupOutlineView reloadData];
 }
 
 @end

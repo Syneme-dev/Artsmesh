@@ -136,6 +136,9 @@
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4560092196A7BF900023B68 /* AMUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4560091196A7BF900023B68 /* AMUserDetailsView.m */; };
+		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
+		D46F5286196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */; };
+		D46F5287196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */; };
 		D499651A196D16FB00033761 /* AMGroupDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D456008E196A72E600023B68 /* AMGroupDetailsView.m */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
 		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
@@ -369,6 +372,11 @@
 		D456008E196A72E600023B68 /* AMGroupDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsView.m; sourceTree = "<group>"; };
 		D4560090196A7BF900023B68 /* AMUserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailsView.h; sourceTree = "<group>"; };
 		D4560091196A7BF900023B68 /* AMUserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsView.m; sourceTree = "<group>"; };
+		D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDataSource.h; sourceTree = "<group>"; };
+		D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDataSource.m; sourceTree = "<group>"; };
+		D46F5283196E815400C48E5B /* AMStaticGroupOutlineCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupOutlineCellViewController.h; sourceTree = "<group>"; };
+		D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupOutlineCellViewController.m; sourceTree = "<group>"; };
+		D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticGroupOutlineCellViewController.xib; sourceTree = "<group>"; };
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
 		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
@@ -733,6 +741,11 @@
 				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 				26015405196E340500045A55 /* AMLiveGroupDataSource.h */,
 				26015406196E340500045A55 /* AMLiveGroupDataSource.m */,
+				D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */,
+				D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */,
+				D46F5283196E815400C48E5B /* AMStaticGroupOutlineCellViewController.h */,
+				D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */,
+				D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */,
 			);
 			path = GroupPanel;
 			sourceTree = "<group>";
@@ -843,6 +856,7 @@
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
+				D46F5287196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
@@ -964,11 +978,13 @@
 				CEC2FC5C196588FD00AFD309 /* AMGroupOutlineUserCellController.m in Sources */,
 				CEC2FC5E196588FD00AFD309 /* AMGroupOutlineUserCellView.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
+				D46F5286196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				D4560092196A7BF900023B68 /* AMUserDetailsView.m in Sources */,
 				AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
+				D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */,
 				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
 				CEC2FC58196588FD00AFD309 /* AMGroupOutlineGroupCellView.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,

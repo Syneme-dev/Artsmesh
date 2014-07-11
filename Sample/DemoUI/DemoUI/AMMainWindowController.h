@@ -25,4 +25,6 @@
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
 - (IBAction)copyPanel:(id)sender;
 
+-(void)createPanelWithType:(NSString*)panelType withTitle:(NSString*)title isTab:(BOOL)isTab withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex;
+
 @end

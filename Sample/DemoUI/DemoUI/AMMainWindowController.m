@@ -228,7 +228,7 @@
     NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
    
     if ([openedPanels containsObject:UI_Panel_Key_User]) {
-        [self loadProfilePanel];
+        [self loadProfilePanel:UI_Panel_Key_User];
     }
     
        if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
@@ -367,75 +367,79 @@
                                                views:views]];
 }
 
--(void)loadTestPanel{
+-(AMPanelViewController*) loadTestPanel{
     AMPanelViewController* panelViewController=  [self createPanel:@"TEST_PANEL" withTitle:@"test"];
         testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
         [self fillPanel:panelViewController.view content:testViewController.view];
+    return panelViewController;
     }
 
--(void)loadMapPanel{
+-(AMPanelViewController*) loadMapPanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Map withTitle:@"Map" width:UI_defaultPanelWidth*4.0 height:UI_defaultPanelHeight ];
     mapViewController = [[AMMapViewController alloc] initWithNibName:@"AMMapViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:mapViewController.view];
+    return panelViewController;
 }
 
--(void)loadMixingPanel{
+-(AMPanelViewController*) loadMixingPanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Mixing withTitle:@"Mixing" width:UI_defaultPanelWidth*3.0 height:UI_defaultPanelHeight ];
     mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:mixingViewController.view];
+    return panelViewController;
 }
 
--(void)loadVisualPanel{
+-(AMPanelViewController*) loadVisualPanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Visual withTitle:@"Visualization" width:UI_defaultPanelWidth*3.0 height:UI_defaultPanelHeight ];
     visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [visualViewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController.view content:visualViewController.view];
+    return panelViewController;
 }
 
--(void)loadOSCMessagePanel{
+-(AMPanelViewController*)loadOSCMessagePanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_OSCMessage withTitle:@"OSC Message" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
     [viewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController.view content:viewController.view];
+    return panelViewController;
 }
 
--(void)loadMainOutputPanel{
+-(AMPanelViewController*)loadMainOutputPanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_MainOutput withTitle:@"Main Output" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight ];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMainOutputViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:viewController.view];
+    return panelViewController;
 }
 
--(void)loadTimerPanel{
+-(AMPanelViewController*)loadTimerPanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Timer withTitle:@"Clock" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:viewController.view];
+    return panelViewController;
 }
 
--(void)loadMusicScorePanel{
+-(AMPanelViewController*)loadMusicScorePanel{
     AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_MusicScore withTitle:@"Music Score" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
     [self fillPanel:panelViewController.view content:viewController.view];
+    return panelViewController;
 }
 
--(void)loadFOAFPanel{
+-(AMPanelViewController*)loadFOAFPanel{
     
      AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Social withTitle:@"Social" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
 
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
-//    panelView.maxSizeConstraint = panelSize;
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
-//    socialViewController.view.frame = NSMakeRect(0, UI_panelContentPaddingBottom, UI_defaultPanelWidth*2, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [self fillPanel:panelViewController.view content:socialViewController.view];
     [panelViewController.view addSubview:socialViewController.view];
-    [socialViewController.socialWebTab setFrameLoadDelegate:socialViewController];
-    [socialViewController.socialWebTab setPolicyDelegate:socialViewController];
-    [socialViewController.socialWebTab setUIDelegate:socialViewController];
 
     [socialViewController.socialWebTab setDrawsBackground:NO];
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
+    return panelViewController;
 }
 -(void)initTimer{
     amTimerControl = [[MZTimerLabel alloc] initWithLabel:(NSTextField*)self.amTimer andTimerType:MZTimerLabelTypeStopWatch];
@@ -443,7 +447,7 @@
     amTimerControl.timeFormat=@"HH:mm:ss";
 }
 
-- (void)loadGroupsPanel {
+- (AMPanelViewController*)loadGroupsPanel {
     float panelWidth=UI_defaultPanelWidth;
     float panelHeight=340.0f;
     AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_Groups
@@ -451,6 +455,7 @@
                                                            width:panelWidth
                                                           height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
+    return panelViewController;
     //TODO:create a group panel below the user panel by default.
     //TODO:sample code like below.
     
@@ -486,12 +491,12 @@
                                                views:views]];
     
     
-    
+    return panelViewController;
 
 
 }
 
-- (void)loadPreferencePanel {
+- (AMPanelViewController*)loadPreferencePanel {
     float panelWidth=UI_defaultPanelWidth*2;
     float panelHeight=UI_defaultPanelHeight;
     AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_Preference withTitle:@"PREFERENCE"
@@ -499,9 +504,6 @@
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
-//    panelView.maxSizeConstraint = panelSize;
-
-
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 270);
     NSView *preferenceView = preferenceViewController.view;
@@ -522,27 +524,23 @@
                                              options:0
                                              metrics:nil
                                                views:views]];
-
+return panelViewController;
     
 
 }
 
-- (void)loadChatPanel {
+- (AMPanelViewController*)loadChatPanel {
     float panelWidth=600.0f;
     float panelHeight=720.0f;
 
     AMPanelViewController *panelViewController=[self createPanel:UI_Panel_Key_Chat withTitle:@"CHAT"
                                                            width:panelWidth height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    //NSSize maxPanelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
-//    panelView.maxSizeConstraint = maxPanelSize;
     [panelViewController setTitle:@"CHAT"];
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
-
-    
-    
     [self fillPanel:panelViewController.view content:chatViewController.view];
+    return panelViewController;
     
     /*
     [chatView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -567,33 +565,31 @@
     AMPanelViewController *panelViewController=[self createPanel:ident withTitle:title width:panelWidth height:panelHeight];
     panelViewController.panelType = AMNetworkToolsPanelType;
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    //    NSSize maxSize = NSMakeSize(600.0f, 720);
     NSSize minSize = NSMakeSize(600.0f, 300);
-    //    panelView.maxSizeConstraint = maxSize;
     panelView.minSizeConstraint = minSize;
-    
     AMPingViewController *pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
     panelViewController.subViewController = pingViewController;
     NSView *pingView = pingViewController.view;    
     pingView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
     [panelView addSubview:pingView];
-    
     [self fillPanel:panelViewController.view content:pingViewController.view];
     return panelViewController;
 }
 
--(void)loadNetworkToolsPanel{
-    [self createNetworkToolsPanelController:UI_Panel_Key_NetworkTools withTitle:@"NETWORK TOOLS"];
+-(AMPanelViewController*)loadNetworkToolsPanel{
+    return [self createNetworkToolsPanelController:UI_Panel_Key_NetworkTools withTitle:@"NETWORK TOOLS"];
 }
 
-- (void)loadProfilePanel {
+- (AMPanelViewController*) loadProfilePanel:(NSString*)panelId {
     float panelHeight=300.0f;
-    AMPanelViewController *panelViewController=[self createPanel:@"USER_PANEL" withTitle:@"PROFILE" width:UI_defaultPanelWidth height:panelHeight];
+    AMPanelViewController *panelViewController=[self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth height:panelHeight];
         AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
     panelView.minSizeConstraint = panelSize;
     userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     [self fillPanel:panelViewController.view content:userViewController.view];
+    panelViewController.tabPanelViewController=userViewController;
+    return panelViewController;
 }
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
@@ -605,7 +601,7 @@
     if(sender.state==NSOnState)
     {
         if ([panelId isEqualToString:UI_Panel_Key_User]) {
-            [self loadProfilePanel];
+            [self loadProfilePanel:UI_Panel_Key_User];
         }
         else if ([panelId isEqualToString:UI_Panel_Key_Groups]) {
             [self loadGroupsPanel];
@@ -652,6 +648,65 @@
     {
         [self removePanel:panelId];
     }
+}
+
+-(void)createPanelWithType:(NSString*)panelType withTitle:(NSString*)title isTab:(BOOL)isTab withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex{
+    AMPanelViewController *panelViewController;
+    NSString *panelId=panelType;
+    if(isTab)
+    {
+        panelId=[NSString stringWithFormat:@"%@_%@",panelType,tabId];
+    }
+    
+    if ([panelType isEqualToString:UI_Panel_Key_User]) {
+        panelViewController=[self loadProfilePanel:panelId];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Groups]) {
+       panelViewController= [self loadGroupsPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Preference]) {
+       panelViewController= [self loadPreferencePanel];
+    }else if ([panelType isEqualToString:UI_Panel_Key_Chat]) {
+      panelViewController=  [self loadChatPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_NetworkTools]) {
+      panelViewController=  [self loadNetworkToolsPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Map]) {
+      panelViewController=  [self loadMapPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Mixing]) {
+      panelViewController=  [self loadMixingPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Visual]) {
+     panelViewController=   [self loadVisualPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Social]) {
+      panelViewController=  [self loadFOAFPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_OSCMessage]) {
+      panelViewController=  [self loadOSCMessagePanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_MusicScore]) {
+       panelViewController= [self loadMusicScorePanel];
+    }
+    
+    else if ([panelType isEqualToString:UI_Panel_Key_MainOutput]) {
+      panelViewController=  [self loadMainOutputPanel];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Timer]) {
+      panelViewController=  [self loadTimerPanel];
+    }
+    else
+    {
+     panelViewController=   [self createPanel:panelType withTitle:title];
+    }
+    
+    if(isTab&& panelViewController.tabPanelViewController!=nil)
+    {
+        [panelViewController showAsTabPanel:title withTabIndex:tabIndex];
+    }
+
 }
 
 

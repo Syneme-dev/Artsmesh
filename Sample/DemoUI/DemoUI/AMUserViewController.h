@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTabPanelViewController.h"
 
-@interface AMUserViewController : NSViewController
+@interface AMUserViewController : AMTabPanelViewController
 @property (strong) IBOutlet NSImageView *avatarView;
 @property (strong) IBOutlet NSTextField *statusMessageLabel;
 @property (strong) IBOutlet NSButton *userTabButton;

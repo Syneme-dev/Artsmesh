@@ -71,4 +71,45 @@
     panelView.backgroundColor = UI_Color_gray;
     [panelView setNeedsDisplay:YES];
 }
+
+- (IBAction)onCopyTabButtonClick:(id)sender {
+    //TOOD:Create a new panel
+     NSInteger index=[self.tabPanelViewController.tabs indexOfTabViewItem:self.tabPanelViewController.tabs.selectedTabViewItem];
+    if(self.tabPanelViewController.showingTabsCount==1)
+    {
+        return;//Note: do not copy any more.
+    }
+     NSButton *button= self.tabPanelViewController.tabButtons[index];
+//
+    
+    
+    //TODO:handle when there is no tab left.
+    
+    [button setHidden:YES];
+    for (int i=0; i<self.tabPanelViewController.tabButtons.count; i++) {
+        NSButton *buttonItem =self.tabPanelViewController.tabButtons[i];
+        if (buttonItem.isHidden==FALSE) {
+            [self.tabPanelViewController.tabs selectTabViewItemAtIndex:i];
+        }
+    }
+
+    [self.tabPanelViewController.view  setNeedsDisplay:YES];
+    NSString *tabPanelTitle=[NSString stringWithFormat:@"%@ - %@",self.title,button.title ];
+     [[AM_APPDELEGATE mainWindowController] createPanelWithType:self.panelId withTitle:tabPanelTitle isTab:YES withTabId:button.title withTabIndex:index ];
+    self.tabPanelViewController.showingTabsCount--;
+}
+
+-(void)showAsTabPanel:(NSString*)tabTitle withTabIndex:(NSInteger)tabIndex  {
+    [self.tearOffButton setHidden:YES];
+    [self.settingButton setHidden:YES];
+    [self.tabPanelButton setHidden:YES];
+    [self.maxSizeButton setHidden:YES];
+    [self.fullScreenButton setHidden:YES];
+    [self setTitle:tabTitle];
+    for (int i=0; i<[self.tabPanelViewController.tabButtons count]; i++) {
+        [self.tabPanelViewController.tabButtons[i] setHidden:YES];
+    }
+     [self.view setNeedsDisplay:YES];
+    [self.tabPanelViewController selectTabIndex:tabIndex];
+}
 @end

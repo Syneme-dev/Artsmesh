@@ -10,4 +10,7 @@
 
 @interface AMGroupPanelDetailView : NSView
 
+@property NSString* leftBtnTitle;
+@property NSString* rightBtnTitle;
+
 @end

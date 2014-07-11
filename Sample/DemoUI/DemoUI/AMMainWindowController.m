@@ -455,7 +455,6 @@
                                                            width:panelWidth
                                                           height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    return panelViewController;
     //TODO:create a group panel below the user panel by default.
     //TODO:sample code like below.
     

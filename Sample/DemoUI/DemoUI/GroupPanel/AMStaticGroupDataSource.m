@@ -39,7 +39,17 @@
     
     [module getGroupsOnStatusNet:@"http://artsmesh.io/api/statusnet/groups/list_all.json" completionBlock:^(NSData* response, NSError* error){
         if (error ==nil && response != nil) {
-            self.staticGroups = [AMStatusNetGroupParser parseStatusNetGroups:response];
+            NSArray* staticGroups  = [AMStatusNetGroupParser parseStatusNetGroups:response];
+            NSMutableArray* staticGroupControllers = [[NSMutableArray alloc] init];
+            
+            for (AMStatusNetGroup* group in staticGroups) {
+                AMStaticGroupOutlineCellViewController* staticGroupController = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+                staticGroupController.staticGroup = group;
+                
+                [staticGroupControllers addObject:staticGroupController];
+            }
+            
+            self.staticGroups = staticGroupControllers;
         }
     }];
 }
@@ -74,30 +84,28 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMStatusNetGroup class]]) {
-        AMStatusNetGroup* group =(AMStatusNetGroup*)item;
+    if ([item isKindOfClass:[AMStaticGroupOutlineCellViewController class]]) {
+        AMStaticGroupOutlineCellViewController* groupController = (AMStaticGroupOutlineCellViewController*)item;
+        [groupController updateUI];
+        [groupController setTrackArea];
         
-        AMStaticGroupOutlineCellViewController* controller = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
-        controller.staticGroup = group;
-        [controller updateUI];
-        
-        return controller.view;
+        return groupController.view;
     }
 
     return nil;
 }
 
-//- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
-//{
-//    if ([item isKindOfClass:[NSViewController class]]) {
-//        NSViewController* controller = (NSViewController*) item;
-//        NSView* cellView = controller.view;
-//        
-//        return cellView.frame.size.height;
-//    }
-//    
-//    return 0.0;
-//}
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    if ([item isKindOfClass:[NSViewController class]]) {
+        NSViewController* controller = (NSViewController*) item;
+        NSView* cellView = controller.view;
+        
+        return cellView.frame.size.height;
+    }
+    
+    return 0.0;
+}
 
 //- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 //{

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -116,14 +116,14 @@
                                         <rect key="frame" x="0.0" y="27" width="300" height="310"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="tXR-Xl-CIo">
-                                            <rect key="frame" x="1" y="17" width="298" height="292"/>
+                                            <rect key="frame" x="1" y="1" width="298" height="308"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="VMZ-oa-FHG" viewBased="YES" indentationPerLevel="16" outlineTableColumn="KAD-7F-lgN" id="uV3-9c-qTo">
-                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="292"/>
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="KAD-7F-lgN" id="uV3-9c-qTo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="308"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.19607844948768616" green="0.19607844948768616" blue="0.19607844948768616" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn width="295" minWidth="16" maxWidth="1000" id="KAD-7F-lgN">
@@ -165,17 +165,13 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="O7S-8v-alG">
-                                            <rect key="frame" x="1" y="1" width="0.0" height="16"/>
+                                            <rect key="frame" x="-7" y="2" width="0.0" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="K7F-Rr-GIu">
-                                            <rect key="frame" x="-15" y="17" width="16" height="0.0"/>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="K7F-Rr-GIu">
+                                            <rect key="frame" x="-14" y="9" width="15" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <tableHeaderView key="headerView" id="VMZ-oa-FHG">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="17"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableHeaderView>
                                     </scrollView>
                                 </subviews>
                             </view>

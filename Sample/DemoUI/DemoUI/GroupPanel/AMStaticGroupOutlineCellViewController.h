@@ -11,8 +11,10 @@
 
 @interface AMStaticGroupOutlineCellViewController : NSViewController
 
-@property (weak) AMStatusNetGroup* staticGroup;
+@property AMStatusNetGroup* staticGroup;
 
 -(void)updateUI;
+-(void)setTrackArea;
+-(void)removeTrackAres;
 
 @end

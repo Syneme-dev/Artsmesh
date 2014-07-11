@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "AMMesher/AMAppObjects.h"
+#import "AMStatusNet/AMStatusNetGroupParser.h"
 
 typedef enum {
     DetailPanelHide,
     DetailPanelUser,
-    DetailPanelGroup
+    DetailPanelGroup,
+    DetailPanelStaticGroup,
 }DetailPanelState;
 
 @interface AMGroupPanelModel : NSObject
@@ -20,6 +22,7 @@ typedef enum {
 @property AMGroup* selectedGroup;
 @property AMUser* selectedUser;
 @property DetailPanelState detailPanelState;
+@property AMStatusNetGroup* selectedStaticGroup;
 
 +(id)sharedGroupModel;
 

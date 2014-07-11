@@ -24,8 +24,8 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="rCm-uE-fil"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
-                    <rect key="frame" x="34" y="5" width="232" height="20"/>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
+                    <rect key="frame" x="34" y="5" width="214" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="yqj-qt-61M"/>
@@ -37,7 +37,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="xb8-GE-aqU">
-                    <rect key="frame" x="277" y="5" width="20" height="20"/>
+                    <rect key="frame" x="254" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="3HA-Uz-xFj"/>
@@ -51,18 +51,35 @@
                         <action selector="socialBtnClicked:" target="-2" id="Poo-9S-7kB"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="WMq-Cl-l5K">
+                    <rect key="frame" x="277" y="5" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="CAq-6e-RPA"/>
+                        <constraint firstAttribute="width" constant="20" id="MpY-Vx-vkw"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" title="I" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="caj-Xp-QJ2">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="infoBtnClicked:" target="-2" id="S96-Fw-WwM"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xb8-GE-aqU" secondAttribute="bottom" constant="5" id="0M2-hM-HCJ"/>
+                <constraint firstAttribute="trailing" secondItem="WMq-Cl-l5K" secondAttribute="trailing" constant="3" id="2Im-mK-DIJ"/>
                 <constraint firstItem="h1i-Kc-GOv" firstAttribute="leading" secondItem="w62-8T-FVQ" secondAttribute="trailing" constant="17" id="9GZ-vS-jSt"/>
-                <constraint firstAttribute="trailing" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="Eh2-HH-nne"/>
-                <constraint firstItem="xb8-GE-aqU" firstAttribute="leading" secondItem="h1i-Kc-GOv" secondAttribute="trailing" constant="13" id="XH4-WS-jfs"/>
+                <constraint firstAttribute="bottom" secondItem="WMq-Cl-l5K" secondAttribute="bottom" constant="5" id="fIp-Xf-rnJ"/>
+                <constraint firstItem="WMq-Cl-l5K" firstAttribute="leading" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="gLg-BR-OfW"/>
                 <constraint firstAttribute="bottom" secondItem="h1i-Kc-GOv" secondAttribute="bottom" constant="5" id="lbW-gg-dEj"/>
                 <constraint firstItem="w62-8T-FVQ" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="5" id="oks-dF-FS3"/>
                 <constraint firstAttribute="bottom" secondItem="w62-8T-FVQ" secondAttribute="bottom" constant="8" id="wCs-QF-EzQ"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="w62-8T-FVQ" id="AE4-zu-Nz2"/>
+                <outlet property="infoBtn" destination="WMq-Cl-l5K" id="PVh-ZT-X51"/>
                 <outlet property="socialBtn" destination="xb8-GE-aqU" id="ic0-Ph-nNg"/>
                 <outlet property="textField" destination="h1i-Kc-GOv" id="ccG-q7-JYe"/>
             </connections>

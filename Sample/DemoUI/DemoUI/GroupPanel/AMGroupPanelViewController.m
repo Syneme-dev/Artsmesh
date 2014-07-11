@@ -12,6 +12,7 @@
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsViewController.h"
 #import "AMUserDetailsViewController.h"
+#import "AMStaticGroupDetailsViewController.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
@@ -142,6 +143,31 @@
     _detailViewController = udc;
 }
 
+-(void)showStaticGroupDetailView
+{
+    [self hideDetailView];
+    
+    AMStaticGroupDetailsViewController* staticGroupDetailController = [[AMStaticGroupDetailsViewController alloc] initWithNibName:@"AMStaticGroupDetailsViewController" bundle:nil];
+    
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    staticGroupDetailController.staticGroup = model.selectedStaticGroup;
+    [self.view addSubview:staticGroupDetailController.view];
+    
+    NSRect rect = staticGroupDetailController.view.frame;
+    NSRect tabFrame = self.groupTabView.frame;
+    rect.origin.x = tabFrame.origin.x;
+    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+    rect.size.width = tabFrame.size.width;
+    [staticGroupDetailController.view setFrame:rect];
+    
+    rect.origin.y -= rect.size.height;
+    [staticGroupDetailController.view.animator setFrame:rect];
+    
+    [self.view display];
+    
+    _detailViewController = staticGroupDetailController;
+}
+
 #pragma mark -
 #pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -162,6 +188,11 @@
             
             if (newState == DetailPanelUser) {
                 [self showUserDetails];
+                return;
+            }
+            
+            if (newState == DetailPanelStaticGroup) {
+                [self showStaticGroupDetailView];
                 return;
             }
             

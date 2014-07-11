@@ -12,5 +12,6 @@
 
 @property (weak) IBOutlet NSButton *socialBtn;
 @property (weak) id delegate;
+@property (weak) IBOutlet NSButton *infoBtn;
 
 @end

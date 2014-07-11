@@ -10,7 +10,7 @@
 #import "AMStatusNet/AMStatusNetModule.h"
 #import "AMStatusNet/AMStatusNetGroupParser.h"
 #import "AMStaticGroupOutlineCellViewController.h"
-#import <AMNotificationManager/AMNotificationManager.h>
+#import "AMStaticGroupOutlineCellView.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -24,12 +24,8 @@
             return;
         }
         
-        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-        NSString* groupName = selectedCellView.textField.stringValue;
-        
-        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 groupName , @"GroupName", nil];
-        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+        AMStaticGroupOutlineCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        [selectedCellView.infoBtn performClick:selectedCellView.infoBtn];
     }
 }
 

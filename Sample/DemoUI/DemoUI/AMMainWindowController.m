@@ -512,7 +512,6 @@
     NSSize panelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 270);
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController.view content:preferenceViewController.view];
 //    [panelViewController.view addSubview:preferenceViewController.view];

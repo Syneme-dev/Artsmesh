@@ -10,6 +10,7 @@
 #import "AMAppDelegate.h"
 #import "UIFramework/AMPanelView.h"
 #import <AMPreferenceManager/AMPreferenceManager.h>
+#import "AMTabPanelViewController.h"
 
 
 
@@ -114,6 +115,11 @@
 
 - (IBAction)onCopyTabButtonClick:(id)sender {
     //TOOD:Create a new panel
+    if(self.tabPanelViewController ==nil)
+    {
+        return;
+    }
+    
      NSInteger index=[self.tabPanelViewController.tabs indexOfTabViewItem:self.tabPanelViewController.tabs.selectedTabViewItem];
     if(self.tabPanelViewController.showingTabsCount==1)
     {

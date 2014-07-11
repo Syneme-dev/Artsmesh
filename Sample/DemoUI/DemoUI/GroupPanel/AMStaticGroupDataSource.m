@@ -10,7 +10,8 @@
 #import "AMStatusNet/AMStatusNetModule.h"
 #import "AMStatusNet/AMStatusNetGroupParser.h"
 #import "AMStaticGroupOutlineCellViewController.h"
-#import <AMNotificationManager/AMNotificationManager.h>
+#import "AMStaticGroupOutlineCellView.h"
+#import "AMGroupOutlineRowView.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -24,12 +25,8 @@
             return;
         }
         
-        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-        NSString* groupName = selectedCellView.textField.stringValue;
-        
-        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 groupName , @"GroupName", nil];
-        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+        AMStaticGroupOutlineCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        [selectedCellView.infoBtn performClick:selectedCellView.infoBtn];
     }
 }
 
@@ -39,7 +36,17 @@
     
     [module getGroupsOnStatusNet:@"http://artsmesh.io/api/statusnet/groups/list_all.json" completionBlock:^(NSData* response, NSError* error){
         if (error ==nil && response != nil) {
-            self.staticGroups = [AMStatusNetGroupParser parseStatusNetGroups:response];
+            NSArray* staticGroups  = [AMStatusNetGroupParser parseStatusNetGroups:response];
+            NSMutableArray* staticGroupControllers = [[NSMutableArray alloc] init];
+            
+            for (AMStatusNetGroup* group in staticGroups) {
+                AMStaticGroupOutlineCellViewController* staticGroupController = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+                staticGroupController.staticGroup = group;
+                
+                [staticGroupControllers addObject:staticGroupController];
+            }
+            
+            self.staticGroups = staticGroupControllers;
         }
     }];
 }
@@ -74,53 +81,33 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMStatusNetGroup class]]) {
-        AMStatusNetGroup* group =(AMStatusNetGroup*)item;
+    if ([item isKindOfClass:[AMStaticGroupOutlineCellViewController class]]) {
+        AMStaticGroupOutlineCellViewController* groupController = (AMStaticGroupOutlineCellViewController*)item;
+        [groupController updateUI];
+        [groupController setTrackArea];
         
-        AMStaticGroupOutlineCellViewController* controller = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
-        controller.staticGroup = group;
-        [controller updateUI];
-        
-        return controller.view;
+        return groupController.view;
     }
 
     return nil;
 }
 
-//- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
-//{
-//    if ([item isKindOfClass:[NSViewController class]]) {
-//        NSViewController* controller = (NSViewController*) item;
-//        NSView* cellView = controller.view;
-//        
-//        return cellView.frame.size.height;
-//    }
-//    
-//    return 0.0;
-//}
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    if ([item isKindOfClass:[NSViewController class]]) {
+        NSViewController* controller = (NSViewController*) item;
+        NSView* cellView = controller.view;
+        
+        return cellView.frame.size.height;
+    }
+    
+    return 0.0;
+}
 
-//- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
-//{
-//    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
-//    
-//    if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
-//        
-//        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
-//        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
-//        
-//    }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
-//        
-//        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-//        if ([groupController.group isMeshed]) {
-//            rowView.headImage = [NSImage imageNamed:@"group_online"];
-//            rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-//        }else{
-//            rowView.headImage = [NSImage imageNamed:@"group_offline"];
-//            rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
-//        }
-//    }
-//    
-//    return rowView;
-//}
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
+    return rowView;
+}
 
 @end

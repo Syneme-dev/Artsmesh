@@ -19,6 +19,7 @@
 @property (weak) IBOutlet NSTextField *versionLabel;
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
 @property (weak) IBOutlet AMFoundryFontView *amTimer;
+@property(nonatomic, readonly) NSView *containerView;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

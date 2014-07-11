@@ -10,9 +10,9 @@
 
 @interface AMPanelView : AMBoxItem
 
+@property(nonatomic) NSSize initialSize;
+@property(nonatomic) BOOL tearedOff;
 @property(nonatomic) NSColor* backgroundColor;
 @property(nonatomic, weak) NSViewController *panelViewController;
-
-- (IBAction)testClick:(id)sender;
 
 @end

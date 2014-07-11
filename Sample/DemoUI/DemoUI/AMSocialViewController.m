@@ -46,6 +46,10 @@
     [AMButtonHandler changeTabTextColor:self.infoTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.blogTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.searchTabButton toColor:UI_Color_blue];
+    
+    [self.socialWebTab setFrameLoadDelegate:self];
+    [self.socialWebTab setPolicyDelegate:self];
+    [self.socialWebTab setUIDelegate:self];
 
 }
 

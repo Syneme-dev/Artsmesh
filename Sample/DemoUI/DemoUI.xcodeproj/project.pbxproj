@@ -97,6 +97,7 @@
 		AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */; };
 		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
 		AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC77F8D1900C91A003543CF /* AMSocialViewController.m */; };
+		AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */; };
 		AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */; };
 		AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */; };
 		AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34796195BEF620055043E /* AMTimerViewController.m */; };
@@ -135,6 +136,7 @@
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
+		D435BCCC196BB8CB00D9F835 /* AMGroupPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = D435BCCB196BB8CB00D9F835 /* AMGroupPanelView.m */; };
 		D4560092196A7BF900023B68 /* AMUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4560091196A7BF900023B68 /* AMUserDetailsView.m */; };
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
 		D46F5286196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */; };
@@ -311,6 +313,8 @@
 		AFC77F8A1900C80A003543CF /* AMSocialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSocialView.xib; sourceTree = "<group>"; };
 		AFC77F8C1900C91A003543CF /* AMSocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSocialViewController.h; sourceTree = "<group>"; };
 		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
+		AFCC3C1A196D098C00518552 /* AMTabPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabPanelViewController.h; sourceTree = "<group>"; };
+		AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabPanelViewController.m; sourceTree = "<group>"; };
 		AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicScoreViewController.h; sourceTree = "<group>"; };
 		AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicScoreViewController.m; sourceTree = "<group>"; };
 		AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMusicScoreViewController.xib; sourceTree = "<group>"; };
@@ -474,6 +478,8 @@
 				AFD3479A195BEF720055043E /* AMMainOutputViewController.h */,
 				AFD3479B195BEF720055043E /* AMMainOutputViewController.m */,
 				AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */,
+				AFCC3C1A196D098C00518552 /* AMTabPanelViewController.h */,
+				AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1009,6 +1015,7 @@
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
+				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,

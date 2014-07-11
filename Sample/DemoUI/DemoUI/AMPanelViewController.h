@@ -7,16 +7,25 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTabPanelViewController.h"
 
 typedef NS_ENUM(NSUInteger, AMPanelViewType) {
     AMNetworkToolsPanelType = 1
 };
 
 @interface AMPanelViewController : NSViewController
+@property (strong) IBOutlet NSButton *tearOffButton;
+@property (strong) IBOutlet NSButton *settingButton;
+@property (strong) IBOutlet NSButton *tabPanelButton;
+@property (strong) IBOutlet NSButton *maxSizeButton;
+@property (strong) IBOutlet NSButton *fullScreenButton;
 
 - (IBAction)onTearClick:(id)sender;
+- (IBAction)onCopyTabButtonClick:(id)sender;
 
 @property(nonatomic) AMPanelViewType panelType;
+
+@property(nonatomic) AMTabPanelViewController *tabPanelViewController;
 @property (nonatomic) NSString* panelId;
 @property (strong) IBOutlet NSView *toolBarView;
 @property(nonatomic) NSString *title;
@@ -24,5 +33,7 @@ typedef NS_ENUM(NSUInteger, AMPanelViewType) {
 
 @property (weak) IBOutlet NSTextField *titleView;
 - (IBAction)closePanel:(id)sender;
+
+-(void)showAsTabPanel:(NSString*)tabTitle withTabIndex:(NSInteger)tabIndex;
 
 @end

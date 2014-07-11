@@ -31,8 +31,13 @@ typedef NS_ENUM(NSUInteger, AMPanelViewType) {
 @property(nonatomic) NSString *title;
 @property(nonatomic) NSViewController *subViewController;
 
+@property(strong)  AMPanelViewController *movedFromController;
+
 @property (weak) IBOutlet NSTextField *titleView;
 - (IBAction)closePanel:(id)sender;
+
+
+-(void)reAttachTab:(NSInteger)tabIntex;
 
 -(void)showAsTabPanel:(NSString*)tabTitle withTabIndex:(NSInteger)tabIndex;
 

@@ -29,7 +29,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+
         // Initialization code here.
     }
    
@@ -41,6 +41,7 @@
 -(void)awakeFromNib
 {
         [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
+
 }
 
 -(void)setTitle:(NSString *)title{
@@ -54,6 +55,12 @@
 //-()
 
 - (IBAction)closePanel:(id)sender {
+    if(self.movedFromController!=nil)
+    {
+        NSInteger tabIndex=[self.tabPanelViewController.tabs indexOfTabViewItem:self.tabPanelViewController.tabs.selectedTabViewItem];
+        [self.movedFromController reAttachTab:tabIndex];
+        
+    }
     [self.view removeFromSuperview];
 //    [self.view setHidden:YES];
     AMAppDelegate *appDelegate=[NSApp delegate];
@@ -68,6 +75,7 @@
     {
         [appDelegate.mainWindowController.panelControllers removeObjectForKey:self.panelId ];
     }
+    
     //Note:move right panel to left when close.
 }
 
@@ -114,23 +122,17 @@
 }
 
 - (IBAction)onCopyTabButtonClick:(id)sender {
-    //TOOD:Create a new panel
     if(self.tabPanelViewController ==nil)
     {
         return;
     }
-    
      NSInteger index=[self.tabPanelViewController.tabs indexOfTabViewItem:self.tabPanelViewController.tabs.selectedTabViewItem];
+    //Note:handle when there is no tab left.
     if(self.tabPanelViewController.showingTabsCount==1)
     {
         return;//Note: do not copy any more.
     }
-     NSButton *button= self.tabPanelViewController.tabButtons[index];
-//
-    
-    
-    //TODO:handle when there is no tab left.
-    
+    NSButton *button= self.tabPanelViewController.tabButtons[index];
     [button setHidden:YES];
     for (int i=0; i<self.tabPanelViewController.tabButtons.count; i++) {
         NSButton *buttonItem =self.tabPanelViewController.tabButtons[i];
@@ -141,8 +143,16 @@
 
     [self.tabPanelViewController.view  setNeedsDisplay:YES];
     NSString *tabPanelTitle=[NSString stringWithFormat:@"%@ - %@",self.title,button.title ];
-     [[AM_APPDELEGATE mainWindowController] createPanelWithType:self.panelId withTitle:tabPanelTitle isTab:YES withTabId:button.title withTabIndex:index ];
+    [[AM_APPDELEGATE mainWindowController] createTabPanelWithType:self.panelId withTitle:tabPanelTitle withTabId:button.title withTabIndex:index from:self];
     self.tabPanelViewController.showingTabsCount--;
+}
+
+-(void)reAttachTab:(NSInteger)tabIntex{
+    NSButton *button= self.tabPanelViewController.tabButtons[tabIntex];
+    [button setHidden:NO];
+     self.tabPanelViewController.showingTabsCount++;
+    [self.tabPanelViewController.tabs selectTabViewItemAtIndex:tabIntex];
+
 }
 
 -(void)showAsTabPanel:(NSString*)tabTitle withTabIndex:(NSInteger)tabIndex  {

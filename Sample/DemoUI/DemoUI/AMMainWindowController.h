@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMPanelViewController.h"
 
 @class AMFoundryFontView;
 
@@ -26,6 +27,6 @@
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
 - (IBAction)copyPanel:(id)sender;
 
--(void)createPanelWithType:(NSString*)panelType withTitle:(NSString*)title isTab:(BOOL)isTab withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex;
+-(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController;
 
 @end

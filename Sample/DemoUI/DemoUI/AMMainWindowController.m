@@ -435,14 +435,11 @@
 -(AMPanelViewController*)loadFOAFPanel{
     
      AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Social withTitle:@"Social" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
-
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     [self fillPanel:panelViewController.view content:socialViewController.view];
-    [panelViewController.view addSubview:socialViewController.view];
-
     [socialViewController.socialWebTab setDrawsBackground:NO];
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
@@ -462,7 +459,6 @@
                                                            width:panelWidth
                                                           height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    return panelViewController;
     //TODO:create a group panel below the user panel by default.
     //TODO:sample code like below.
     
@@ -514,11 +510,8 @@
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController.view content:preferenceViewController.view];
-//    [panelViewController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
-
-    
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
     [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
@@ -657,13 +650,12 @@ return panelViewController;
     }
 }
 
--(void)createPanelWithType:(NSString*)panelType withTitle:(NSString*)title isTab:(BOOL)isTab withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex{
+-(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title  withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController{
     AMPanelViewController *panelViewController;
     NSString *panelId=panelType;
-    if(isTab)
-    {
+   
         panelId=[NSString stringWithFormat:@"%@_%@",panelType,tabId];
-    }
+    
     
     if ([panelType isEqualToString:UI_Panel_Key_User]) {
         panelViewController=[self loadProfilePanel:panelId];
@@ -709,10 +701,11 @@ return panelViewController;
      panelViewController=   [self createPanel:panelType withTitle:title];
     }
     
-    if(isTab&& panelViewController.tabPanelViewController!=nil)
+    if(panelViewController.tabPanelViewController!=nil)
     {
         [panelViewController showAsTabPanel:title withTabIndex:tabIndex];
     }
+    panelViewController.movedFromController=fromController;
 
 }
 

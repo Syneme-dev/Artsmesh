@@ -11,6 +11,7 @@
 #import "AMStatusNet/AMStatusNetGroupParser.h"
 #import "AMStaticGroupOutlineCellViewController.h"
 #import "AMStaticGroupOutlineCellView.h"
+#import "AMGroupOutlineRowView.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -103,28 +104,10 @@
     return 0.0;
 }
 
-//- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
-//{
-//    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
-//    
-//    if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
-//        
-//        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
-//        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
-//        
-//    }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
-//        
-//        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-//        if ([groupController.group isMeshed]) {
-//            rowView.headImage = [NSImage imageNamed:@"group_online"];
-//            rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-//        }else{
-//            rowView.headImage = [NSImage imageNamed:@"group_offline"];
-//            rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
-//        }
-//    }
-//    
-//    return rowView;
-//}
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
+    return rowView;
+}
 
 @end

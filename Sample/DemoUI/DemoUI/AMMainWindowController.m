@@ -507,7 +507,8 @@
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 270);
     NSView *preferenceView = preferenceViewController.view;
-    [panelViewController.view addSubview:preferenceViewController.view];
+    [self fillPanel:panelViewController.view content:preferenceViewController.view];
+//    [panelViewController.view addSubview:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
 

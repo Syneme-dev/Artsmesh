@@ -12,6 +12,9 @@
 #import "AMRestHelper.h"
 #import "AFHTTPRequestOperationManager.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMMesher/AMAppObjects.h"
+#import "AMMesher/AMMesher.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMUserViewController ()
 
@@ -85,5 +88,95 @@
     
 //    [self.tabs selectNextTabViewItem:nil];
     [self.tabs selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)groupNameEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    localGroup.groupName = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateGroup];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Name];
+}
+
+- (IBAction)groupDescriptionEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    localGroup.description = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateGroup];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Description];
+}
+
+- (IBAction)nicknameEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.nickName = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_NickName];
+}
+
+- (IBAction)locationEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.location = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Location];
+}
+
+- (IBAction)statusMessageEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.description = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Description];
+}
+
+- (IBAction)domainEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    mySelf.domain = sender.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Domain];
 }
 @end

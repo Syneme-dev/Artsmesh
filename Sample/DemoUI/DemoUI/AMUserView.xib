@@ -43,6 +43,7 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="nicknameEdited:" target="-2" id="cZh-hp-ySv"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_NickName" id="qEh-q1-3Lq"/>
                                         </connections>
                                     </textField>
@@ -76,6 +77,7 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="locationEdited:" target="-2" id="gtP-1H-Q4B"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Location" id="6HL-PH-Sfu"/>
                                         </connections>
                                     </textField>
@@ -88,6 +90,7 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="statusMessageEdited:" target="-2" id="UJB-sP-bFd"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Description" id="e5N-DL-VAv"/>
                                         </connections>
                                     </textField>
@@ -100,6 +103,7 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="domainEdited:" target="-2" id="mPK-zM-E1R"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Domain" id="zb5-Mh-p8q"/>
                                         </connections>
                                     </textField>
@@ -167,6 +171,10 @@
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="groupNameEdited:" target="-2" id="dq9-6k-ekw"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Name" id="PKd-dE-Nd4"/>
+                                        </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pG9-Ph-oy5" userLabel="statusMessage" customClass="AMFoundryFontView">
                                         <rect key="frame" x="17" y="-2" width="265" height="73"/>

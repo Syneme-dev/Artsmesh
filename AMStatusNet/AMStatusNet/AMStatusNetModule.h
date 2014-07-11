@@ -15,4 +15,8 @@
                  withUserName:(NSString*)username
                  withPassword:(NSString*)password;
 
+-(void)getGroupsOnStatusNet:(NSString*)url
+            completionBlock:(void(^)(NSData*, NSError*))completionBlock;
+
+
 @end

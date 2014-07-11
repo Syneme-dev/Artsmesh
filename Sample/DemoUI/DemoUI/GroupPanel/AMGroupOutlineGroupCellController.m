@@ -13,6 +13,7 @@
 #import "AMGroupPanelModel.h"
 #import "AMMesher/AMMesher.h"
 #import "AMGroupTextFieldFormatter.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 #define MAX_GROUP_NAME_LENGTH 16
 #define MAX_GROUP_DESCRIPTION 64
@@ -121,6 +122,9 @@
     
     AMMesher* mesher = [AMMesher sharedAMMesher];
     [mesher updateGroup];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Name];
 }
 
 #pragma mark-

@@ -13,6 +13,7 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
 @interface AMBoxItem ()
 {
     NSEvent *_mouseDownEvent;
+    NSPoint _offset;
 }
 
 - (NSArray *)createDraggingItems;
@@ -26,7 +27,7 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
     self = [super initWithFrame:frameRect];
     if (self) {
         _maxSizeConstraint = NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX);
-        _dragBehavior = AMDragForMoving;
+        _dragBehavior = AMDragForDropping;
     }
     return self;
 }
@@ -128,22 +129,39 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    _mouseDownEvent = theEvent;
+    NSPoint p1, p2;
+    
+    switch (self.dragBehavior) {
+        case AMDragForDropping:
+            _mouseDownEvent = theEvent;
+            break;
+        case AMDragForMoving:
+            p1 = self.frame.origin;
+            p2 = [self.superview convertPoint:[theEvent locationInWindow]
+                                             fromView:nil];
+            _offset = NSMakePoint(p1.x - p2.x, p1.y - p2.y);
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    if (!_mouseDownEvent)
-        return;
+    NSPoint p, newOrigin;
     
     switch (self.dragBehavior) {
-        case AMDragForMoving:
+        case AMDragForDropping:
             [self beginDraggingSessionWithItems:[self createDraggingItems]
                                           event:_mouseDownEvent
                                          source:self];
             break;
-        case AMDragForResizing:
-            [self resizeByDraggingLocation:[theEvent locationInWindow]];
+        case AMDragForMoving:
+            p = [self.superview convertPoint:[theEvent locationInWindow]
+                                    fromView:nil];
+            newOrigin.x = p.x + _offset.x;
+            newOrigin.y = p.y + _offset.y;
+            [self setFrameOrigin:newOrigin];
             break;
         default:
             break;
@@ -152,7 +170,8 @@ NSString * const AMBoxItemType = @"com.artmesh.boxitem";
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    _mouseDownEvent = nil;
+    if (_mouseDownEvent)
+        _mouseDownEvent = nil;
 }
 
 - (void)draggingSession:(NSDraggingSession *)session

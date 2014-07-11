@@ -91,6 +91,12 @@
     
     float containerWidth;
 }
+
+- (NSView *)containerView
+{
+    return _containerView;
+}
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -310,6 +316,7 @@
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     panelView.panelViewController = panelViewController;
     panelView.preferredSize = NSMakeSize(width, height);
+    panelView.initialSize = panelView.preferredSize;
         [panelViewController setTitle:title];
     
     NSView *firstPanel=nil;

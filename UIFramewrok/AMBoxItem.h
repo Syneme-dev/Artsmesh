@@ -12,8 +12,8 @@ extern NSString * const AMBoxItemType;
 
 typedef NS_ENUM(NSUInteger, AMDragBehavior) {
     AMDragForNone,
+    AMDragForDropping,
     AMDragForMoving,
-    AMDragForResizing
 };
 
 @interface AMBoxItem : NSView<NSDraggingSource>

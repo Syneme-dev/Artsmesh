@@ -15,6 +15,9 @@
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 @interface AMPanelViewController ()
+{
+    NSWindow *_floatingWindow;
+}
 
 @end
 
@@ -66,9 +69,46 @@
     }
     //Note:move right panel to left when close.
 }
+
 - (IBAction)onTearClick:(id)sender {
     AMPanelView *panelView= (AMPanelView*) self.view;
-    panelView.backgroundColor = UI_Color_gray;
-    [panelView setNeedsDisplay:YES];
+    if (!panelView.tearedOff) {
+        NSPoint p = [panelView convertPoint:NSMakePoint(0, panelView.bounds.size.height)
+                                     toView:nil];
+        NSRect rect = NSMakeRect(p.x, p.y, 0, 0);
+        rect = [panelView.window convertRectToScreen:rect];
+        NSPoint windowOrigin = rect.origin;
+        
+        [panelView removeFromSuperview];
+        panelView.tearedOff = YES;
+        panelView.frame = NSMakeRect(0, 0, panelView.initialSize.width,
+                                     panelView.initialSize.height);
+        
+        _floatingWindow = [[NSWindow alloc] initWithContentRect:panelView.frame
+                                                     styleMask:NSBorderlessWindowMask
+                                                       backing:NSBackingStoreBuffered
+                                                         defer:NO];
+        _floatingWindow.contentView = panelView;
+        _floatingWindow.level = NSFloatingWindowLevel;
+        [_floatingWindow setFrameOrigin:windowOrigin];
+        
+        NSSize screenSize = panelView.window.screen.visibleFrame.size;
+//        NSPoint windowOrigin;
+//        windowOrigin.x = screenSize.width - panelView.frame.size.width;
+//        windowOrigin.y = screenSize.height - panelView.frame.size.height;
+//        [_floatingWindow.animator setFrameOrigin:windowOrigin];
+        NSRect windowFrame = panelView.frame;
+        windowFrame.origin.x = screenSize.width - panelView.frame.size.width;
+        windowFrame.origin.y = screenSize.height - panelView.frame.size.height;
+        [_floatingWindow.animator setFrame:windowFrame display:NO];
+        
+        [_floatingWindow makeKeyAndOrderFront:self];
+    } else {
+        _floatingWindow = nil;
+        AMMainWindowController *mainWindowController = [[NSApp delegate] mainWindowController];
+        panelView.tearedOff = NO;
+        [mainWindowController.containerView addSubview:panelView];
+        [panelView scrollRectToVisible:panelView.bounds];
+    }
 }
 @end

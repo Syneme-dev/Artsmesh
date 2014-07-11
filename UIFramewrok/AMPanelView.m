@@ -12,6 +12,7 @@
 
 @interface AMPanelView ()
 
+@property(nonatomic) BOOL resizing;
 @property(nonatomic) NSRect knobRectLeft;
 @property(nonatomic) NSRect knobRectRight;
 
@@ -20,6 +21,7 @@
 @implementation AMPanelView
 {
     NSColor *_knobColor;
+    NSPoint _offset;
 }
 
 -(void)setFrame:(NSRect)frameRect
@@ -65,23 +67,57 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSPoint mouseDownLocation = [self convertPoint:[theEvent locationInWindow]
-                                          fromView:nil];
-    if (NSPointInRect(mouseDownLocation, self.knobRectRight))
-        self.dragBehavior = AMDragForResizing;
-    [super mouseDown:theEvent];
+    NSPoint p = [theEvent locationInWindow];
+    
+    if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
+        self.resizing = YES;
+    } else if (self.tearedOff) {
+        _offset.x = -p.x;
+        _offset.y = -p.y;
+    } else {
+        [super mouseDown:theEvent];
+    }
 }
 
-- (void)resizeByDraggingLocation:(NSPoint)location
+- (void)mouseDragged:(NSEvent *)theEvent
 {
-    location = [self convertPoint:location fromView:nil];
-   // [self setFrameSize:NSMakeSize(location.x + 8, location.y + 8)];
-    self.preferredSize = NSMakeSize(location.x + 8, location.y + 8);
+    NSPoint p = [theEvent locationInWindow];
+
+    if (self.resizing) {
+        p.x += 8;
+        p.y -= 8;
+        if (!self.tearedOff) {
+            p = [self convertPoint:p fromView:nil];
+            self.preferredSize = NSMakeSize(p.x, p.y);
+        } else {
+            NSRect windowFrame = NSZeroRect;
+            windowFrame.origin.y = p.y;
+            windowFrame.size.width = p.x;
+            windowFrame.size.height = (self.window.frame.size.height - p.y);
+            windowFrame = [self.window convertRectToScreen:windowFrame];
+            [self setFrameSize:windowFrame.size];
+            [self.window setFrame:windowFrame display:YES];
+        }
+    } else if (self.tearedOff) {
+        NSRect rect = NSMakeRect(p.x, p.y, 0, 0);
+        rect = [self.window convertRectToScreen:rect];
+        p = rect.origin;
+        NSPoint newOrigin = NSMakePoint(_offset.x + p.x, _offset.y + p.y);
+        [self.window setFrameOrigin:newOrigin];
+    } else {
+        [super mouseDragged:theEvent];
+    }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    self.dragBehavior = AMDragForMoving;
+    if (self.resizing) {
+        self.resizing = NO;
+    } else if (self.tearedOff) {
+        // do nothing
+    } else {
+        [super mouseUp:theEvent];
+    }
 }
 
 - (BOOL)isFlipped
@@ -96,9 +132,6 @@
     [_knobColor set];
     [NSBezierPath fillRect:self.knobRectLeft];
     [NSBezierPath fillRect:self.knobRectRight];
-    
-  
-
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent

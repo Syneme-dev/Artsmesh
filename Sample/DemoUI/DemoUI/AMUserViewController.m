@@ -33,10 +33,20 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
      [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
     [self loadAvatarImage];
+}
+
+-(void)registerTabButtons{
+    super.tabs=self.tabs;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.userTabButton];
+    [self.tabButtons addObject:self.groupTabButton];
+    self.showingTabsCount=2;
+    
 }
 //Note:sample code if using this as notification.
 //-(void)onUpdateUserAVator:(NSNotification*)notification{
@@ -76,6 +86,7 @@
 
 - (IBAction)onGroupTabClick:(id)sender {
     
+//    [self.tabs selectNextTabViewItem:nil];
     [self.tabs selectTabViewItemAtIndex:1];
 }
 

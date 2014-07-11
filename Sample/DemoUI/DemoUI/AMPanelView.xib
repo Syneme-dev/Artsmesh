@@ -6,6 +6,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
             <connections>
+                <outlet property="copyTabButton" destination="OB6-Xz-G6O" id="CE9-F3-nDs"/>
+                <outlet property="fullScreenButton" destination="diy-MI-ZVa" id="tvb-QH-1Ow"/>
+                <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
+                <outlet property="settingButton" destination="42T-8I-slY" id="4Sk-iJ-M2Z"/>
+                <outlet property="tabPanelButton" destination="OB6-Xz-G6O" id="wqh-bV-f9u"/>
+                <outlet property="tearOffButton" destination="W15-SQ-vxR" id="bXM-0x-G0W"/>
                 <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
                 <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
@@ -91,7 +97,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="copyPanel:" target="-1" id="oqa-wE-Apn"/>
+                                <action selector="onCopyTabButtonClick:" target="-2" id="r9S-ZW-6xX"/>
                             </connections>
                         </button>
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="settings">

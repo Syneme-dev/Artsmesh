@@ -265,6 +265,9 @@
 
 -(void)onChecked:(AMCheckBoxView *)sender
 {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
+    
     if(sender.checked){
           [self loadIpv6];
     }else{

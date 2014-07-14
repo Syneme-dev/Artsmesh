@@ -435,14 +435,11 @@
 -(AMPanelViewController*)loadFOAFPanel{
     
      AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Social withTitle:@"Social" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
-
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     [self fillPanel:panelViewController.view content:socialViewController.view];
-    [panelViewController.view addSubview:socialViewController.view];
-
     [socialViewController.socialWebTab setDrawsBackground:NO];
     containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
     [socialViewController loadPage];
@@ -511,13 +508,10 @@
     NSSize panelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
-    preferenceViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 270);
     NSView *preferenceView = preferenceViewController.view;
-    [panelViewController.view addSubview:preferenceViewController.view];
+    [self fillPanel:panelViewController.view content:preferenceViewController.view];
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
-
-    
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
     [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
@@ -656,13 +650,12 @@ return panelViewController;
     }
 }
 
--(void)createPanelWithType:(NSString*)panelType withTitle:(NSString*)title isTab:(BOOL)isTab withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex{
+-(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title  withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController{
     AMPanelViewController *panelViewController;
     NSString *panelId=panelType;
-    if(isTab)
-    {
+   
         panelId=[NSString stringWithFormat:@"%@_%@",panelType,tabId];
-    }
+    
     
     if ([panelType isEqualToString:UI_Panel_Key_User]) {
         panelViewController=[self loadProfilePanel:panelId];
@@ -708,10 +701,11 @@ return panelViewController;
      panelViewController=   [self createPanel:panelType withTitle:title];
     }
     
-    if(isTab&& panelViewController.tabPanelViewController!=nil)
+    if(panelViewController.tabPanelViewController!=nil)
     {
         [panelViewController showAsTabPanel:title withTabIndex:tabIndex];
     }
+    panelViewController.movedFromController=fromController;
 
 }
 

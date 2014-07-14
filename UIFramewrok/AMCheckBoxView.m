@@ -19,12 +19,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        self.backgroupColor = [NSColor colorWithCalibratedRed:0.14 green:0.14 blue:0.14 alpha:1];
+        self.backgroupColor = [NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1];
         self.btnBackGroundColor = [NSColor colorWithCalibratedRed:0.10 green:0.10  blue:0.10  alpha:1];
         self.btnColor = [NSColor colorWithCalibratedRed:(60.0/255.0) green:(75.0/255.0) blue:(94.0/255.0) alpha:1];
         self.title = @"AMCHECKBOX";
         self.textColor = [NSColor grayColor];
         self.readOnly = NO;
+        self.drawBackground = NO;
         self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize];
     }
     
@@ -40,9 +41,11 @@
     [NSGraphicsContext saveGraphicsState];
     
     //Drawing background
-    NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
-    [self.backgroupColor set];
-    [border fill];
+    if (self.drawBackground) {
+        NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
+        [self.backgroupColor set];
+        [border fill];
+    }
     
     // Drawing title
     NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] init];
@@ -89,6 +92,10 @@
     }
     self.checked = !self.checked;
     [self setNeedsDisplay];
+    
+    if (self.delegate) {
+        [self.delegate onChecked:self];
+    }
 }
 
 @end

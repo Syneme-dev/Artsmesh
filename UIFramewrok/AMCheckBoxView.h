@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol AMCheckBoxDelegeate;
+
 @interface AMCheckBoxView : NSControl
 
 @property NSString* title;
@@ -18,5 +20,15 @@
 @property NSColor* btnBackGroundColor;
 @property NSColor* btnColor;
 @property BOOL readOnly;
+@property BOOL drawBackground;
+
+@property id<AMCheckBoxDelegeate>delegate;
+
+@end
+
+
+@protocol AMCheckBoxDelegeate <NSObject>
+
+-(void)onChecked:(AMCheckBoxView*)sender;
 
 @end

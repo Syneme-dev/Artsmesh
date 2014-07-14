@@ -36,7 +36,6 @@
 }
 
 -(void)awakeFromNib{
-    [AMButtonHandler changeTabTextColor:self.etcdTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];

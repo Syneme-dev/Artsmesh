@@ -16,11 +16,9 @@
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;
 @property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
-@property (weak) IBOutlet NSButton *useIpv6Button;
 @property (weak) IBOutlet NSTextField *statusNetPostTestResult;
 @property (weak) IBOutlet NSButton *testStatusNetPost;
 
-@property (strong) IBOutlet NSButton *etcdTabButton;
 @property (strong) IBOutlet NSButton *generalTabButton;
 @property (strong) IBOutlet NSButton *jackServerTabButton;
 
@@ -29,13 +27,11 @@
 @property (strong) IBOutlet NSButton *audioTabButton;
 @property (strong) IBOutlet NSButton *statusnetTabButton;
 
-- (IBAction)onETCDTabClick:(id)sender;
 - (IBAction)onJackServerTabClick:(id)sender;
 - (IBAction)onGeneralClick:(id)sender;
 - (IBAction)onStatusNetClick:(id)sender;
 
 - (IBAction)privateIpSelected:(id)sender;
-- (IBAction)useIpv6Checked:(id)sender;
 - (IBAction)statusNetTest:(id)sender;
 
 -(void)loadSystemInfo;

@@ -208,7 +208,6 @@
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;
     _containerView.paddingRight = 50;
-  //  _containerView.minSizeConstraint = _containerView.frame.size;
     _containerView.allowBecomeEmpty = YES;
     _containerView.gapBetweenItems = 50;
     CGFloat contentHeight = _containerView.frame.size.height;
@@ -216,7 +215,6 @@
          if ([boxItem isKindOfClass:[AMBox class]])
              return (AMBox *)nil;
          AMBox *newBox = [AMBox vbox];
-         //newBox.minSizeConstraint = NSMakeSize(0, contentHeight);
          newBox.paddingTop = 20;
          newBox.paddingBottom = 40;
          newBox.paddingLeft = 6;
@@ -229,66 +227,16 @@
          return newBox;
      };
     [scrollView setDocumentView:_containerView];
-    
     [self loadVersion];
     NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
-   
-    if ([openedPanels containsObject:UI_Panel_Key_User]) {
-        [self loadProfilePanel:UI_Panel_Key_User];
+    for (NSString* openedPanelId in openedPanels) {
+        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
+        {
+            [self createPanelWithType:openedPanelId withId:openedPanelId];
+            NSString *sideItemId=[openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+        }
     }
-    
-       if ([openedPanels containsObject:UI_Panel_Key_Visual]) {
-        [self loadVisualPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Mixing]) {
-        [self loadMixingPanel];
-    }
-    
-    if ([openedPanels containsObject:UI_Panel_Key_NetworkTools]) {
-        
-        [self loadNetworkToolsPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Preference]) {
-        [self loadPreferencePanel];
-    }
-    
-    if ([openedPanels containsObject:UI_Panel_Key_Chat]) {
-        [self loadChatPanel];
-    }
-    
-    if ([openedPanels containsObject:UI_Panel_Key_Groups]) {
-        [self loadGroupsPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Social]) {
-        [self loadFOAFPanel];
-    }
-    
-    if ([openedPanels containsObject:UI_Panel_Key_MusicScore]) {
-        [self loadMusicScorePanel];
-    }
-    
-    if ([openedPanels containsObject:UI_Panel_Key_MainOutput]) {
-        [self loadMainOutputPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Timer]) {
-        [self loadTimerPanel];
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_OSCMessage]) {
-        [self loadOSCMessagePanel];
-
-    }
-    if ([openedPanels containsObject:UI_Panel_Key_Map]) {
-        [self loadMapPanel];
-    }
-
-    
-    
-    
-    for (NSString* openedPanel in openedPanels) {
-        NSString *sideItemId=[openedPanel stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-        [self setSideBarItemStatus:sideItemId withStatus:YES ];
-    }
-    
 }
 
 -(AMPanelViewController* )createPanel:(NSString*) identifier withTitle:(NSString*)title{
@@ -310,9 +258,6 @@
         panelViewController=
         [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.panelId=identifier;
-//        panelViewController.view.frame = NSMakeRect(160+UI_defaultPanelWidth,
-//                                                    self.window.frame.size.height-UI_topbarHeight-
-//                                                    height+UI_pixelHeightAdjustment, width, height);
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     panelView.panelViewController = panelViewController;
     panelView.preferredSize = NSMakeSize(width, height);
@@ -513,17 +458,18 @@
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
-    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:views]];
-    
-    [panelView addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[preferenceView]|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
+//    NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
+    //TODO:useless code ,please help check and remove it.
+//    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
+//                                                                              options:0
+//                                                                              metrics:nil
+//                                                                                views:views]];
+//    
+//    [panelView addConstraints:
+//     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[preferenceView]|"
+//                                             options:0
+//                                             metrics:nil
+//                                               views:views]];
 return panelViewController;
     
 
@@ -537,7 +483,6 @@ return panelViewController;
                                                            width:panelWidth height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
-    [panelViewController setTitle:@"CHAT"];
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     [self fillPanel:panelViewController.view content:chatViewController.view];
     return panelViewController;
@@ -595,54 +540,9 @@ return panelViewController;
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId=
     [[NSString stringWithFormat:@"%@_PANEL",sender.identifier ] uppercaseString];
-//    NSString *command = [NSString stringWithFormat:@"say \"this is %@\"", panelId];
-//    system([command UTF8String]);
-
     if(sender.state==NSOnState)
     {
-        if ([panelId isEqualToString:UI_Panel_Key_User]) {
-            [self loadProfilePanel:UI_Panel_Key_User];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Groups]) {
-            [self loadGroupsPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Preference]) {
-            [self loadPreferencePanel];
-        }else if ([panelId isEqualToString:UI_Panel_Key_Chat]) {
-            [self loadChatPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_NetworkTools]) {
-            [self loadNetworkToolsPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Map]) {
-            [self loadMapPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Mixing]) {
-            [self loadMixingPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Visual]) {
-            [self loadVisualPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Social]) {
-            [self loadFOAFPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_OSCMessage]) {
-            [self loadOSCMessagePanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_MusicScore]) {
-            [self loadMusicScorePanel];
-        }
-        
-       else if ([panelId isEqualToString:UI_Panel_Key_MainOutput]) {
-            [self loadMainOutputPanel];
-        }
-        else if ([panelId isEqualToString:UI_Panel_Key_Timer]) {
-            [self loadTimerPanel];
-        }
-        else
-        {
-            [self createPanel:panelId withTitle:sender.identifier];
-        }
+        [self createPanelWithType:panelId withId:panelId];
     }
     else
     {
@@ -650,56 +550,59 @@ return panelViewController;
     }
 }
 
--(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title  withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController{
+-(AMPanelViewController *)createPanelWithType:(NSString*)panelType withId:(NSString*)panelId{
     AMPanelViewController *panelViewController;
-    NSString *panelId=panelType;
-   
-        panelId=[NSString stringWithFormat:@"%@_%@",panelType,tabId];
-    
-    
     if ([panelType isEqualToString:UI_Panel_Key_User]) {
         panelViewController=[self loadProfilePanel:panelId];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Groups]) {
-       panelViewController= [self loadGroupsPanel];
+        panelViewController= [self loadGroupsPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Preference]) {
-       panelViewController= [self loadPreferencePanel];
+        panelViewController= [self loadPreferencePanel];
     }else if ([panelType isEqualToString:UI_Panel_Key_Chat]) {
-      panelViewController=  [self loadChatPanel];
+        panelViewController=  [self loadChatPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_NetworkTools]) {
-      panelViewController=  [self loadNetworkToolsPanel];
+        panelViewController=  [self loadNetworkToolsPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Map]) {
-      panelViewController=  [self loadMapPanel];
+        panelViewController=  [self loadMapPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Mixing]) {
-      panelViewController=  [self loadMixingPanel];
+        panelViewController=  [self loadMixingPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Visual]) {
-     panelViewController=   [self loadVisualPanel];
+        panelViewController=   [self loadVisualPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Social]) {
-      panelViewController=  [self loadFOAFPanel];
+        panelViewController=  [self loadFOAFPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_OSCMessage]) {
-      panelViewController=  [self loadOSCMessagePanel];
+        panelViewController=  [self loadOSCMessagePanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_MusicScore]) {
-       panelViewController= [self loadMusicScorePanel];
+        panelViewController= [self loadMusicScorePanel];
     }
-    
     else if ([panelType isEqualToString:UI_Panel_Key_MainOutput]) {
-      panelViewController=  [self loadMainOutputPanel];
+        panelViewController=  [self loadMainOutputPanel];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Timer]) {
-      panelViewController=  [self loadTimerPanel];
+        panelViewController=  [self loadTimerPanel];
     }
     else
     {
-     panelViewController=   [self createPanel:panelType withTitle:title];
+        //TODO:check whether need to load the panel having different panelType.
+       // panelViewController=   [self createPanel:panelType withTitle:panelId];
     }
+    return panelViewController;
+
+}
+
+-(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title  withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController{
+    
+    NSString *panelId=[NSString stringWithFormat:@"%@_%@",panelType,tabId];
+    AMPanelViewController *panelViewController=[self createPanelWithType:panelType withId:panelId];
     
     if(panelViewController.tabPanelViewController!=nil)
     {

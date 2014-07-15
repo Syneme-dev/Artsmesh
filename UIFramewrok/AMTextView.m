@@ -25,11 +25,11 @@
     
     // Drawing code here.
 }
-- (void)drawInsertionPointInRect:(NSRect)aRect color:(NSColor *)aColor turnedOn:(BOOL)flag
-{
-    
-}
- 
 
+- (void)awakeFromNib
+{
+    [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
+    [self setFocusRingType:NSFocusRingTypeNone];
+}
 
 @end

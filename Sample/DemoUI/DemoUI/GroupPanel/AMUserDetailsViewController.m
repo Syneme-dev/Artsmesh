@@ -8,8 +8,11 @@
 
 #import "AMUserDetailsViewController.h"
 #import "AMGroupPanelModel.h"
+#import "UIFramework/AMCheckBoxView.h"
 
 @interface AMUserDetailsViewController ()
+@property (weak) IBOutlet AMCheckBoxView *isLeader;
+@property (weak) IBOutlet AMCheckBoxView *isMeshed;
 
 @end
 
@@ -24,9 +27,18 @@
     return self;
 }
 
+-(void)awakeFromNib
+{
+    self.isLeader.title = @"LEADER";
+    self.isMeshed.title = @"MESHED";
+    self.isLeader.readOnly = YES;
+    self.isMeshed.readOnly = YES;
+}
+
 -(void)updateUI
 {
-    
+    self.isLeader.checked = self.user.isLeader;
+    self.isMeshed.checked = self.user.isOnline;
 }
 
 - (IBAction)closeClick:(id)sender

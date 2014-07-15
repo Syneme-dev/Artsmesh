@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
+		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */; };
@@ -53,6 +55,8 @@
 /* Begin PBXFileReference section */
 		26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontTextView.h; path = UIFramewrok/AMFoundryFontTextView.h; sourceTree = "<group>"; };
 		26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontTextView.m; path = UIFramewrok/AMFoundryFontTextView.m; sourceTree = "<group>"; };
+		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
+		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AF00D43C18C9B5E6004DE9E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -116,9 +120,11 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
-				AFD344C6193EF82C0057F222 /* AMUIConst.h */,
+				26CEAE8B197380F600DF285F /* AMCheckBoxView.h */,
+				26CEAE8C197380F600DF285F /* AMCheckBoxView.m */,
 				AFAC30C719382E71000FFC5F /* AMTextView.h */,
 				AFAC30C819382E71000FFC5F /* AMTextView.m */,
+				AFD344C6193EF82C0057F222 /* AMUIConst.h */,
 				CE883167192C52EA00DA17CE /* AMPanelView.h */,
 				CE883168192C52EA00DA17CE /* AMPanelView.m */,
 				CE88315F192C44B800DA17CE /* AMBoxItem.h */,
@@ -220,6 +226,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
@@ -333,6 +340,7 @@
 				CE883166192C44B900DA17CE /* AMBox.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
+				26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */,
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				CE88316A192C52EA00DA17CE /* AMPanelView.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,

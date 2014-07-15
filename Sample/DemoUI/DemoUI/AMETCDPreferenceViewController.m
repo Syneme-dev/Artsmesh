@@ -11,13 +11,15 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMStatusNet/AMStatusNetModule.h"
+#import <UIFramework/AMCheckBoxView.h>
 
 
 #import "AMPopupMenuItem.h"
 
 
 
-@interface AMETCDPreferenceViewController ()
+@interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate>
+@property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
 
 @end
 
@@ -34,22 +36,20 @@
 }
 
 -(void)awakeFromNib{
-    [AMButtonHandler changeTabTextColor:self.etcdTabButton toColor:UI_Color_blue];
-    
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.useIpv6Button toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
     
     [self resetPopupItems];
     [self.myPrivateIpPopup setPullsDown:YES];
     
-
-
+    self.Ipv6checkBox.readOnly= NO;
+    self.Ipv6checkBox.title = @"USE IPV6";
+    self.Ipv6checkBox.delegate = self;
 
 }
 
@@ -67,21 +67,6 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
     [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
-}
-
-- (IBAction)useIpv6Checked:(id)sender
-{
-    NSButton* checkbtn = sender;
-    switch (checkbtn.state)
-    {
-        case 0:
-            [self loadIpv4];
-            break;
-            
-        default:
-            [self loadIpv6];
-            break;
-    }
 }
 
 - (IBAction)statusNetTest:(id)sender {
@@ -267,10 +252,24 @@
     
     if (useIpv6)
     {
+        self.Ipv6checkBox.checked = YES;
         [self loadIpv6];
     }
     else
     {
+        self.Ipv6checkBox.checked = NO;
+        [self loadIpv4];
+    }
+}
+
+-(void)onChecked:(AMCheckBoxView *)sender
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
+    
+    if(sender.checked){
+          [self loadIpv6];
+    }else{
         [self loadIpv4];
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
             <connections>
+                <outlet property="Ipv6checkBox" destination="6Tp-lO-ZpI" id="XfT-aw-tjN"/>
                 <outlet property="audioTabButton" destination="niJ-06-bEy" id="4SE-HW-0Kd"/>
                 <outlet property="generalTabButton" destination="mvk-HX-fYa" id="1cE-ZS-hnU"/>
                 <outlet property="jackRouterTabButton" destination="vtg-zK-Gic" id="Mcj-vm-QCm"/>
@@ -16,7 +17,6 @@
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
                 <outlet property="testStatusNetPost" destination="FE0-1F-GTL" id="F0y-vz-Hq1"/>
-                <outlet property="useIpv6Button" destination="azm-bA-5Wc" id="eoO-Um-nLy"/>
                 <outlet property="videoTabButton" destination="fqL-QQ-Ulv" id="USk-ju-JX0"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
@@ -215,20 +215,10 @@
                                                     <action selector="privateIpSelected:" target="-2" id="ZeV-2d-M67"/>
                                                 </connections>
                                             </popUpButton>
-                                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="azm-bA-5Wc">
-                                                <rect key="frame" x="441" y="281" width="94" height="18"/>
+                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
+                                                <rect key="frame" x="417" y="277" width="163" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="check" title="USE IPV6" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ycS-in-eTa">
-                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                    <connections>
-                                                        <action selector="useIpv6Checked:" target="-2" id="7nX-mO-z2g"/>
-                                                    </connections>
-                                                </buttonCell>
-                                                <connections>
-                                                    <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_UseIpv6" id="bAN-ep-y8F"/>
-                                                </connections>
-                                            </button>
+                                            </customView>
                                         </subviews>
                                     </customView>
                                 </subviews>

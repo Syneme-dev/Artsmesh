@@ -313,7 +313,7 @@
                                              metrics:nil
                                                views:views]];
     [panelView addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]-21-|"
                                              options:0
                                              metrics:nil
                                                views:views]];

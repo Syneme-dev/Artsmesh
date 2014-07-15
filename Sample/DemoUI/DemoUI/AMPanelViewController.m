@@ -41,6 +41,8 @@
 -(void)awakeFromNib
 {
         [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
+    [self.fullScreenButton setHidden:YES];
+    [self.maxSizeButton setHidden:YES];
 
 }
 

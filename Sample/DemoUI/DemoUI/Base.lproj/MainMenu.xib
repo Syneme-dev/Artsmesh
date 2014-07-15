@@ -695,7 +695,7 @@
                         </subviews>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="JHd-2A-fFw" userLabel="logo" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="718" width="200" height="40"/>
+                        <rect key="frame" x="0.0" y="718" width="160" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
@@ -716,21 +716,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="as9-CM-p7p">
-                                <rect key="frame" x="160" y="0.0" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="9bM-Lh-3Lo"/>
-                                    <constraint firstAttribute="width" constant="40" id="NQx-o7-N6w"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo" id="VeN-ow-NW3"/>
-                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="as9-CM-p7p" secondAttribute="bottom" id="QaO-YV-fVV"/>
-                            <constraint firstAttribute="width" constant="200" id="aqD-LN-vUi"/>
-                            <constraint firstAttribute="trailing" secondItem="as9-CM-p7p" secondAttribute="trailing" id="puZ-29-HGK"/>
-                            <constraint firstItem="as9-CM-p7p" firstAttribute="top" secondItem="JHd-2A-fFw" secondAttribute="top" id="zbS-O7-dAF"/>
+                            <constraint firstAttribute="width" constant="160" id="aqD-LN-vUi"/>
+                            <constraint firstAttribute="height" constant="40" id="zDA-gD-Aih"/>
                         </constraints>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUd-73-Mf2" userLabel="group" customClass="BlueBackgroundView">
@@ -1048,6 +1037,7 @@
                 <constraints>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="2Iq-Md-vEu"/>
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
+                    <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
@@ -1063,7 +1053,6 @@
                     <constraint firstAttribute="trailing" secondItem="zEs-xu-vmU" secondAttribute="trailing" id="pKE-za-V8h"/>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="leading" secondItem="PQH-zt-t50" secondAttribute="trailing" constant="19" id="rL3-YX-u6Q"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="leading" secondItem="qme-pL-mB7" secondAttribute="trailing" constant="16" id="zCo-Jl-82V"/>
-                    <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="zzP-ay-b18"/>
                 </constraints>
             </view>
             <contentBorderThickness minY="0.0"/>
@@ -1118,7 +1107,6 @@
         <image name="SideBar_user_h" width="40" height="40"/>
         <image name="SideBar_video" width="40" height="40"/>
         <image name="SideBar_video_h" width="40" height="40"/>
-        <image name="logo" width="59" height="60"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>

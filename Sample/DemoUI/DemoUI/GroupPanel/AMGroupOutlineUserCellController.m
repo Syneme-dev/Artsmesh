@@ -37,12 +37,9 @@
 {
     NSAssert([self.view isKindOfClass:[AMGroupOutlineUserCellView class]], @"internal error: the view is not AMGroupOutlineUserCellView");
     AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    if (self.editable) {
-        [cellView.textField setEditable:YES];
-    }else{
-        [cellView.textField setEditable:NO];
-    }
-    
+  
+    [cellView.textField setEditable:NO];
+
     cellView.textField.stringValue = self.user.nickName;
     if (self.user.isOnline) {
         [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
@@ -97,24 +94,6 @@
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     model.selectedUser = self.user;
     model.detailPanelState = DetailPanelUser;
-}
-
-- (IBAction)userNameEdited:(NSTextField *)sender
-{
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
-    
-    NSString* newName = sender.stringValue;
-    if ([newName isEqualToString:mySelf.nickName] ) {
-        return;
-    }
-    
-    mySelf.nickName = newName;
-    
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher updateMySelf];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_NickName];
 }
 
 -(void)viewFrameChanged:(NSView*)view

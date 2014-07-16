@@ -185,6 +185,7 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="groupDescriptionEdited:" target="-2" id="Pg6-Yz-YEg"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Description" id="GXv-VU-UGB"/>
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7B-DR-szH">

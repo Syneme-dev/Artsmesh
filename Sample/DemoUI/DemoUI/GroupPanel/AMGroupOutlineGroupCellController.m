@@ -57,12 +57,7 @@
     [cellView.infoBtn setHidden:YES];
     [cellView.leaveBtn setHidden:YES];
     [cellView.mergeBtn setHidden:YES];
-    
-    if (self.editable){
-        [cellView.textField setEditable:YES];
-    }else{
-        [cellView.textField setEditable:NO];
-    }
+    [cellView.textField setEditable:NO];
 }
 
 -(void)setTrackArea
@@ -107,24 +102,6 @@
 {
     AMMesher* mesher = [AMMesher sharedAMMesher];
     [mesher unmergeGroup];
-}
-
-- (IBAction)groupNameEdited:(NSTextField *)sender
-{
-    AMGroup* myLocalGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-    
-    NSString* newGroupName = sender.stringValue;
-    if ([newGroupName isEqualToString:myLocalGroup.groupName] ) {
-        return;
-    }
-    
-    myLocalGroup.groupName = newGroupName;
-    
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher updateGroup];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Name];
 }
 
 #pragma mark-

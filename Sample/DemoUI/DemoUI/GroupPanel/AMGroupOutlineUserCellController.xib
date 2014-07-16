@@ -69,15 +69,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="UDH-li-L99"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="ab4-QM-G0o">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" id="ab4-QM-G0o">
                         <customFormatter key="formatter" id="QDj-l3-sQe" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                    <connections>
-                        <action selector="userNameEdited:" target="-2" id="NDK-eD-xM8"/>
-                    </connections>
                 </textField>
             </subviews>
             <constraints>

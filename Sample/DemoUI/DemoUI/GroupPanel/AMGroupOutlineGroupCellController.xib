@@ -26,14 +26,13 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="35f-iS-TAO"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" id="BTS-Fu-aUF">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" id="BTS-Fu-aUF">
                         <customFormatter key="formatter" id="H18-xs-3to" customClass="AMGroupTextFieldFormatter"/>
                         <font key="font" size="15" name="LucidaGrande"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <action selector="groupNameEdited:" target="-2" id="mc0-ca-LAb"/>
                         <outlet property="delegate" destination="-2" id="JMI-9V-WxA"/>
                     </connections>
                 </textField>

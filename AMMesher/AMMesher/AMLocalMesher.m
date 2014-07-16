@@ -166,6 +166,10 @@
         
         if (error != nil) {
             NSLog(@"error happened when register group:%@", error.description);
+            NSLog(@"will try again!");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self registerLocalGroup];
+            });
             return;
         }
         

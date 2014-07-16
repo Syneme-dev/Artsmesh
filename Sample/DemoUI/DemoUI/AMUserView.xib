@@ -177,13 +177,16 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pG9-Ph-oy5" userLabel="statusMessage" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="17" y="-2" width="265" height="73"/>
+                                        <rect key="frame" x="17" y="0.0" width="265" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Description" id="F5q-NW-7Y9">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="groupDescriptionEdited:" target="-2" id="Pg6-Yz-YEg"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7B-DR-szH">
                                         <rect key="frame" x="7" y="238" width="82" height="17"/>

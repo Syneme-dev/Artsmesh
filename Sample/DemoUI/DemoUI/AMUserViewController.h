@@ -17,5 +17,6 @@
 @property (strong) IBOutlet NSTabView *tabs;
 - (IBAction)onUserTabClick:(id)sender;
 - (IBAction)onGroupTabClick:(id)sender;
+- (IBAction)onGotoUserInfoClick:(id)sender;
 
 @end

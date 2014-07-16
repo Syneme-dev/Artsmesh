@@ -12,8 +12,12 @@
 #import <WebKit/WebKit.h>
 #import <UIFramework/AMButtonHandler.h>
 #import <AMNotificationManager/AMNotificationManager.h>
-
-
+    
+    typedef enum {
+        INFO_USER,
+        INFO_GROUP,
+        INFO_BLOG
+    }SocialPanelState_Enum;//枚举名称
 
 @interface AMSocialViewController ()
 {
@@ -23,6 +27,8 @@
     NSString* infoUrl;
     NSString* myBlogUrl;
     NSString* publicBlogUrl;
+    SocialPanelState_Enum infoStatus;
+    Boolean isInfoPage;
 }
 
 
@@ -58,6 +64,8 @@
     NSString *userName =[[notification userInfo] objectForKey:@"UserName"];
     infoUrl= [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,userName ];
     NSURL *userInfoURL=  [NSURL URLWithString:infoUrl];
+    infoStatus=INFO_USER;
+    isInfoPage=true;
     [self.socialWebTab.mainFrame loadRequest:
     [NSURLRequest requestWithURL:userInfoURL]];
 
@@ -68,6 +76,8 @@
 {
     NSString *groupName =[[notification userInfo] objectForKey:@"GroupName"];
     infoUrl= [NSString stringWithFormat:@"%@/group/%@?fromMac=true",statusNetURL,groupName];
+    infoStatus=INFO_GROUP;
+    isInfoPage=true;
     NSURL *groupInfoURL=  [NSURL URLWithString:infoUrl];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:groupInfoURL]];
@@ -146,8 +156,8 @@
     
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-   
-    if([url isEqual:infoUrl])
+   if(isInfoPage)
+//    if([url isEqual:infoUrl])
     {
         path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
     }
@@ -176,35 +186,68 @@
 - (IBAction)onFOAFTabClick:(id)sender{
     NSURL *baseURL =
     [NSURL URLWithString:infoUrl];
+    isInfoPage=true;
     [self.socialWebTab.mainFrame loadRequest:
     [NSURLRequest requestWithURL:baseURL]];
+    NSRange range= [infoUrl rangeOfString:@"group"];
+    if(range.length==0)
+    {
+        infoStatus=INFO_USER;
+    }
+    else
+    {
+        infoStatus=INFO_GROUP;
+    }
 }
 
 
 
 - (IBAction)onBlogTabClick:(id)sender{
-    NSURL *baseURL=[NSURL URLWithString:myBlogUrl];
+    isInfoPage=false;
+    
+    NSString *urlString=myBlogUrl;
+    if(infoStatus==INFO_USER||infoStatus==INFO_GROUP)
+    {
+        urlString=infoUrl;
+    }
+    infoStatus=INFO_BLOG;
+    NSURL *baseURL=[NSURL URLWithString:urlString];
+  
+        
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:baseURL]];
 
 }
 
 - (IBAction)onUpButtonClick:(id)sender{
-     NSString *url= self.socialWebTab.mainFrameURL;
-    if([url isEqual:infoUrl])
+    isInfoPage=false;
+//    NSString *url= self.socialWebTab.mainFrameURL;
+    
+//    if([url isEqual:infoUrl])
+//    {
+//     [self gotoUsersPage];
+//    }
+//    else if([url isEqual:myBlogUrl]){
+    if(infoStatus==INFO_USER)
     {
-     [self gotoUsersPage];
+    [self gotoUsersPage];
     }
-    else if([url isEqual:myBlogUrl]){
+    else if(infoStatus==INFO_GROUP){
+        [self   gotoGroupsPage];
+    }
+    else if (infoStatus==INFO_BLOG)
+    {
         NSURL *baseURL=[NSURL URLWithString:publicBlogUrl];
         [self.socialWebTab.mainFrame loadRequest:
          [NSURLRequest requestWithURL:baseURL]];
-    
+
     }
+    
+    
 }
 
 - (IBAction)onAddFieldButtonClick:(id)sender{
-     [self gotoGroupsPage];
+   //  [self gotoGroupsPage];
 
 }
 

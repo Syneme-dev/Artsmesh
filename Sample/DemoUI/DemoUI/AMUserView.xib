@@ -131,6 +131,9 @@
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="onGotoUserInfoClick:" target="-2" id="pg5-R6-wdw"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

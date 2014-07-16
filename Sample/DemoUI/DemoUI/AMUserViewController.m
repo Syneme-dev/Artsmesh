@@ -90,6 +90,16 @@
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
+- (IBAction)onGotoUserInfoClick:(id)sender {
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                             myUserName, @"UserName", nil];
+    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+
+}
+
 - (IBAction)groupNameEdited:(NSTextField *)sender
 {
     if ([sender.stringValue isEqualTo:@""]) {

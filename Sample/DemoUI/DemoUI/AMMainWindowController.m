@@ -526,14 +526,19 @@ return panelViewController;
 }
 
 - (AMPanelViewController*) loadProfilePanel:(NSString*)panelId {
-    float panelHeight=300.0f;
+    float panelHeight = 300.0f;
     AMPanelViewController *panelViewController=[self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth height:panelHeight];
-        AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, panelHeight);
-    panelView.minSizeConstraint = panelSize;
+    AMPanelView *panelView = (AMPanelView *)panelViewController.view;
+    NSSize minSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelWidth);
+    panelView.minSizeConstraint = minSize;
+    
     userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
+    NSView* profileView = userViewController.view;
+    [panelView addSubview:profileView];
+    
     [self fillPanel:panelViewController.view content:userViewController.view];
     panelViewController.tabPanelViewController=userViewController;
+
     return panelViewController;
 }
 

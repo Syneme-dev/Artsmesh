@@ -24,18 +24,6 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akq-NV-Uo8" customClass="AMFoundryFontView">
-                    <rect key="frame" x="12" y="129" width="260" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUP NAME:" id="ap2-3o-PFU">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="self.group.groupName" id="r0u-r5-bY2"/>
-                    </connections>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmy-Bl-QYv" customClass="AMFoundryFontView">
                     <rect key="frame" x="13" y="99" width="92" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -44,18 +32,6 @@
                         <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUX-fy-9mx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="13" y="67" width="259" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DESCRIPTION:" id="VdI-vj-MdV">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="self.group.description" id="ZtD-4D-hsJ"/>
-                    </connections>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-CK-gOS">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
@@ -82,6 +58,30 @@ Gw
                         <action selector="cancelClick:" target="-2" id="kIX-V7-My4"/>
                     </connections>
                 </button>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DWC-gP-Xhw" customClass="AMFoundryFontView">
+                    <rect key="frame" x="13" y="124" width="259" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="oif-Xw-RFl">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.groupName" id="2rN-9W-Dne"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKs-uc-xjD" customClass="AMFoundryFontView">
+                    <rect key="frame" x="13" y="64" width="259" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="XsP-dA-0gD">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.description" id="ocb-YT-dzp"/>
+                    </connections>
+                </textField>
             </subviews>
             <connections>
                 <outlet property="cancelBtn" destination="Ohb-E3-LdX" id="3Gi-ZY-lAc"/>

@@ -29,6 +29,8 @@
     [formatter setMaximumLength:MAX_USER_NAME_LENGTH];
     
     cellView.delegate = self;
+    [cellView.textField setEditable:NO];
+    [cellView.textField setSelectable:NO];
 }
 
 -(void)updateUI

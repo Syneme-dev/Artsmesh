@@ -30,10 +30,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="312" height="358"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView focusRingType="none" ambiguous="YES" misplaced="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
+                                    <scrollView focusRingType="none" misplaced="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
                                         <rect key="frame" x="0.0" y="-7" width="305" height="353"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
+                                        <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="353"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -97,6 +97,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8EI-Ko-tQv" firstAttribute="leading" secondItem="hng-nT-hrv" secondAttribute="leading" id="8nk-5k-oUn"/>
+                                    <constraint firstAttribute="bottom" secondItem="8EI-Ko-tQv" secondAttribute="bottom" constant="-7" id="YTj-Uv-Pe6"/>
                                     <constraint firstAttribute="trailing" secondItem="8EI-Ko-tQv" secondAttribute="trailing" constant="7" id="bOp-Um-u2r"/>
                                     <constraint firstItem="8EI-Ko-tQv" firstAttribute="top" secondItem="hng-nT-hrv" secondAttribute="top" constant="4" id="eLB-Hw-TU0"/>
                                 </constraints>

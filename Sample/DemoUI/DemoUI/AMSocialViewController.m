@@ -129,6 +129,8 @@
     
     myBlogUrl =[NSString stringWithFormat:@"%@/%@/all?fromMac=true",statusNetURL,myUserName ];
     publicBlogUrl=[NSString stringWithFormat:@"%@/blogs?fromMac=true",statusNetURL ];
+    infoStatus=INFO_USER;
+    isInfoPage=true;
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:loginURL]];
 }

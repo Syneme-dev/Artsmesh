@@ -11,6 +11,7 @@
 #import "UIFramework/AMPanelView.h"
 #import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMTabPanelViewController.h"
+#import "UIFramework/AMBorderView.h"
 
 
 
@@ -92,15 +93,15 @@
         
         [panelView removeFromSuperview];
         panelView.tearedOff = YES;
-        panelView.frame = NSMakeRect(0, 0, panelView.initialSize.width,
-                                     panelView.initialSize.height);
+        AMBorderView *contentView = [[AMBorderView alloc] initWithView:panelView];
         
-        _floatingWindow = [[NSWindow alloc] initWithContentRect:panelView.frame
+        _floatingWindow = [[NSWindow alloc] initWithContentRect:contentView.frame
                                                      styleMask:NSBorderlessWindowMask
                                                        backing:NSBackingStoreBuffered
                                                          defer:NO];
-        _floatingWindow.contentView = panelView;
+        _floatingWindow.contentView = contentView;
         _floatingWindow.level = NSFloatingWindowLevel;
+
         [_floatingWindow setFrameOrigin:windowOrigin];
         
         NSSize screenSize = panelView.window.screen.visibleFrame.size;
@@ -108,9 +109,9 @@
 //        windowOrigin.x = screenSize.width - panelView.frame.size.width;
 //        windowOrigin.y = screenSize.height - panelView.frame.size.height;
 //        [_floatingWindow.animator setFrameOrigin:windowOrigin];
-        NSRect windowFrame = panelView.frame;
-        windowFrame.origin.x = screenSize.width - panelView.frame.size.width;
-        windowFrame.origin.y = screenSize.height - panelView.frame.size.height;
+        NSRect windowFrame = contentView.frame;
+        windowFrame.origin.x = screenSize.width - contentView.frame.size.width;
+        windowFrame.origin.y = screenSize.height - contentView.frame.size.height;
         [_floatingWindow.animator setFrame:windowFrame display:NO];
         
         [_floatingWindow makeKeyAndOrderFront:self];

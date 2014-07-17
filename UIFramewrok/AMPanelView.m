@@ -7,6 +7,8 @@
 //
 
 #import "AMPanelView.h"
+#import "AMBox.h"
+#import "AMBorderView.h"
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 
@@ -21,7 +23,7 @@
 @implementation AMPanelView
 {
     NSColor *_knobColor;
-    NSPoint _offset;
+    NSPoint _constantVector;
 }
 
 -(void)setFrame:(NSRect)frameRect
@@ -71,9 +73,17 @@
     
     if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
         self.resizing = YES;
+        p = [self convertPoint:p fromView:nil];
+        _constantVector = NSMakePoint(self.bounds.size.width - p.x,
+                                      self.bounds.size.height - p.y);
+        if (self.tearedOff) {
+            _constantVector.x += BORDER_THICKNESS;
+            _constantVector.y *= -1.0;
+            _constantVector.y -= BORDER_THICKNESS;
+        }
     } else if (self.tearedOff) {
-        _offset.x = -p.x;
-        _offset.y = -p.y;
+        _constantVector.x = -p.x;
+        _constantVector.y = -p.y;
     } else {
         [super mouseDown:theEvent];
     }
@@ -84,25 +94,56 @@
     NSPoint p = [theEvent locationInWindow];
 
     if (self.resizing) {
-        p.x += 8;
-        p.y -= 8;
         if (!self.tearedOff) {
             p = [self convertPoint:p fromView:nil];
+            p.x += _constantVector.x;
+            p.y += _constantVector.y;
             self.preferredSize = NSMakeSize(p.x, p.y);
         } else {
+            NSRect rect = NSMakeRect(p.x, p.y, 0, 0);
+            rect = [self.window convertRectToScreen:rect];
+            p = rect.origin;
+            p.x += _constantVector.x;
+            p.y += _constantVector.y;
+            
+            /*
             NSRect windowFrame = NSZeroRect;
             windowFrame.origin.y = p.y;
-            windowFrame.size.width = p.x;
+            windowFrame.size.width = p.x
             windowFrame.size.height = (self.window.frame.size.height - p.y);
-            windowFrame = [self.window convertRectToScreen:windowFrame];
-            [self setFrameSize:windowFrame.size];
+             */
+            
+            /*
+            NSRect windowFrame = self.window.frame;
+            windowFrame.size.width = (p.x - windowFrame.origin.x);
+            windowFrame.size.height += (windowFrame.origin.y - p.y);
+            windowFrame.origin.y = p.y;
+             */
+            
+            NSPoint topLeft = NSMakePoint(self.window.frame.origin.x,
+                    self.window.frame.origin.y + self.window.frame.size.height);
+            CGFloat newWidth = MAX(self.minSizeConstraint.width, p.x - self.window.frame.origin.x);
+            CGFloat newHeight = MAX(self.minSizeConstraint.height, topLeft.y - p.y);
+            NSRect windowFrame = NSMakeRect(topLeft.x, topLeft.y - newHeight,
+                                            newWidth, newHeight);
+            
+//            [self.superview setFrame:NSMakeRect(0, 0, windowFrame.size.width,
+//                                                windowFrame.size.height)];
+//            windowFrame = [self.window convertRectToScreen:windowFrame];
+            
+            [self.window.contentView setFrame:NSMakeRect(0, 0, windowFrame.size.width,
+                                                         windowFrame.size.height)];
+            [self setFrame:NSMakeRect(BORDER_THICKNESS, BORDER_THICKNESS,
+                                      windowFrame.size.width - 2 * BORDER_THICKNESS,
+                                      windowFrame.size.height - 2 * BORDER_THICKNESS)];
+            [self setNeedsDisplay:YES];
             [self.window setFrame:windowFrame display:YES];
         }
     } else if (self.tearedOff) {
         NSRect rect = NSMakeRect(p.x, p.y, 0, 0);
         rect = [self.window convertRectToScreen:rect];
         p = rect.origin;
-        NSPoint newOrigin = NSMakePoint(_offset.x + p.x, _offset.y + p.y);
+        NSPoint newOrigin = NSMakePoint(p.x + _constantVector.x, p.y + _constantVector.y);
         [self.window setFrameOrigin:newOrigin];
     } else {
         [super mouseDragged:theEvent];

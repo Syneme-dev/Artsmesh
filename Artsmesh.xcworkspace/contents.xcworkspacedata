@@ -23,6 +23,9 @@
       location = "container:"
       name = "Utilities">
       <FileRef
+         location = "group:AMCommonTools/AMCommonTools.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Pods/Pods.xcodeproj">
       </FileRef>
       <FileRef
@@ -82,5 +85,8 @@
    <Group
       location = "container:"
       name = "Database">
+      <FileRef
+         location = "group:AMCoreData/AMCoreData.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>

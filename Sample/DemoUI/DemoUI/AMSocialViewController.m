@@ -29,6 +29,7 @@
     NSString* publicBlogUrl;
     SocialPanelState_Enum infoStatus;
     Boolean isInfoPage;
+    NSString* loginURL;
 }
 
 
@@ -65,7 +66,7 @@
     infoUrl= [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,userName ];
     NSURL *userInfoURL=  [NSURL URLWithString:infoUrl];
     infoStatus=INFO_USER;
-    isInfoPage=true;
+    isInfoPage=YES;
     [self.socialWebTab.mainFrame loadRequest:
     [NSURLRequest requestWithURL:userInfoURL]];
 
@@ -77,7 +78,7 @@
     NSString *groupName =[[notification userInfo] objectForKey:@"GroupName"];
     infoUrl= [NSString stringWithFormat:@"%@/group/%@?fromMac=true",statusNetURL,groupName];
     infoStatus=INFO_GROUP;
-    isInfoPage=true;
+    isInfoPage=YES;
     NSURL *groupInfoURL=  [NSURL URLWithString:infoUrl];
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:groupInfoURL]];
@@ -116,13 +117,13 @@
 
 
 -(void)loadPage{
-    isLogin=false;
+    isLogin=NO;
      NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
      statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
     
     
    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    NSURL *loginURL = [NSURL URLWithString:
+    loginURL = [NSURL URLWithString:
                       [NSString stringWithFormat:@"%@/main/login?fromMac=true",statusNetURL ]];
     
     infoUrl=        [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,myUserName ];
@@ -130,7 +131,7 @@
     myBlogUrl =[NSString stringWithFormat:@"%@/%@/all?fromMac=true",statusNetURL,myUserName ];
     publicBlogUrl=[NSString stringWithFormat:@"%@/blogs?fromMac=true",statusNetURL ];
     infoStatus=INFO_USER;
-    isInfoPage=true;
+    isInfoPage=YES;
     [self.socialWebTab.mainFrame loadRequest:
      [NSURLRequest requestWithURL:loginURL]];
 }
@@ -158,7 +159,8 @@
     
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-   if(isInfoPage)
+
+   if(isInfoPage&&([url isEqual: loginURL]||[url isEqual: infoUrl]))
 //    if([url isEqual:infoUrl])
     {
         path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
@@ -181,14 +183,14 @@
     NSString *loginJs=[NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();",myUserName,password ];
           [frame.webView stringByEvaluatingJavaScriptFromString:
            loginJs];
-    isLogin=TRUE;
+    isLogin=YES;
 }
 
 
 - (IBAction)onFOAFTabClick:(id)sender{
     NSURL *baseURL =
     [NSURL URLWithString:infoUrl];
-    isInfoPage=true;
+    isInfoPage=YES;
     [self.socialWebTab.mainFrame loadRequest:
     [NSURLRequest requestWithURL:baseURL]];
     NSRange range= [infoUrl rangeOfString:@"group"];
@@ -222,7 +224,7 @@
 }
 
 - (IBAction)onUpButtonClick:(id)sender{
-    isInfoPage=false;
+    isInfoPage=NO;
 //    NSString *url= self.socialWebTab.mainFrameURL;
     
 //    if([url isEqual:infoUrl])

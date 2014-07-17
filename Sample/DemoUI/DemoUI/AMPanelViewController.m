@@ -82,6 +82,11 @@
     //Note:move right panel to left when close.
 }
 
+- (IBAction)toggleFullScreen:(id)sender
+{
+    
+}
+
 - (IBAction)onTearClick:(id)sender {
     AMPanelView *panelView= (AMPanelView*) self.view;
     if (!panelView.tearedOff) {
@@ -93,6 +98,7 @@
         
         [panelView removeFromSuperview];
         panelView.tearedOff = YES;
+        [self.fullScreenButton setHidden:NO];
         AMBorderView *contentView = [[AMBorderView alloc] initWithView:panelView];
         
         _floatingWindow = [[NSWindow alloc] initWithContentRect:contentView.frame
@@ -119,6 +125,7 @@
         _floatingWindow = nil;
         AMMainWindowController *mainWindowController = [[NSApp delegate] mainWindowController];
         panelView.tearedOff = NO;
+        [self.fullScreenButton setHidden:YES];
         [mainWindowController.containerView addSubview:panelView];
         [panelView scrollRectToVisible:panelView.bounds];
     }

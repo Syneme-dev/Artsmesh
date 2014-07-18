@@ -11,7 +11,6 @@
 #import "AMMesher/AMAppObjects.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
-#import "AMMesher/AMMesherStateMachine.h"
 
 @interface AMChatViewController ()
 

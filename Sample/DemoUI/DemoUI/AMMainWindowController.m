@@ -32,7 +32,6 @@
 #import "AMMapViewController.h"
 #import "AMAppDelegate.h"
 #import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMMesherStateMachine.h"
 #import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
 
@@ -134,21 +133,16 @@
 }
 
 - (IBAction)mesh:(id)sender {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    if (machine == nil) {
-        return;
-    }
-    
+
     AMMesher* mesher = [AMMesher sharedAMMesher];
-    
-    if (machine.mesherState == kMesherStarted) {
+    if (mesher.mesherState == kMesherStarted) {
         [mesher goOnline];
         self.meshBtn.state = 0;
-    }else if(machine.mesherState == kMesherMeshed){
+    }else if(mesher.mesherState == kMesherMeshed){
         [mesher goOffline];
         self.meshBtn.state = 2;
     }else{
-        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+        AMLiveUser* mySelf = [AMCoreData appObjects] objectForKey:AMMyselfKey];
         if (mySelf.isOnline == YES) {
             self.meshBtn.state = 0;
         }else{

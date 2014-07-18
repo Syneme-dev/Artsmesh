@@ -7,9 +7,8 @@
 //
 
 #import "AMLeaderElecter.h"
-#import "AMMesherStateMachine.h"
-#import "AMAppObjects.h"
-#import "AMSystemConfig.h"
+#import "AMMesher.h"
+#import "AMCoreData/AMCoreData.h"
 
 #define MESHER_SERVICE_TYPE @"_ammesher._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
@@ -24,9 +23,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        AMMesherStateMachine* machine =[[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-        NSAssert(machine, @"mesher state machine can not be nil!");
-        [machine addObserver:self forKeyPath:@"mesherState"
+        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
         
@@ -45,10 +42,10 @@
 
 -(void)publishLocalMesher
 {
-    AMSystemConfig* config = [[AMAppObjects appObjects ] valueForKey:AMSystemConfigKey];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config should not be nil");
     
-    int port = [config.myServerPort intValue];
+    int port = [config.localServerPort intValue];
  	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
@@ -159,15 +156,13 @@
         hostName = [hostName lowercaseString];
     }
     
-    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil");
     
-    config.localServerAddr = hostName;
-    config.localServertPort = [NSString stringWithFormat:@"%ld", sender.port];
+    config.localServerIp = hostName;
+    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
     
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine should not be nil");
-    [machine setMesherState:kMesherLocalClientStarting];
+    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
@@ -195,15 +190,13 @@
     
     NSString* hostName = [[NSHost currentHost] name];
     
-    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;;
     NSAssert(config, @"system config can not be nil");
     
-    config.localServerAddr = hostName;
-    config.localServertPort = [NSString stringWithFormat:@"%ld", sender.port];
+    config.localServerIp = hostName;
+    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
 
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine should not be nil");
-    [machine setMesherState:kMesherLocalServerStarting];
+    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalServerStarting];
 }
 
 
@@ -220,7 +213,7 @@
                          change:(NSDictionary *)change
                         context:(void *)context
 {
-    if ([object isKindOfClass:[AMMesherStateMachine class]]){
+    if ([object isKindOfClass:[AMMesher class]]){
         
         if ([keyPath isEqualToString:@"mesherState"]){
             

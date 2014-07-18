@@ -7,6 +7,7 @@
 //
 
 #import "AMLiveGroup.h"
+#import "AMLiveUser.h"
 
 @implementation AMLiveGroup
 
@@ -30,5 +31,29 @@
     group.password = @"";
     return group;
 }
+
+
+-(BOOL)isMeshed
+{
+    for (AMLiveUser* user in self.users) {
+        if (user.isOnline == YES) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(AMLiveUser*)leader
+{
+    for (AMLiveUser* user in self.users) {
+        if ([user.userid isEqualToString:self.leaderId]) {
+            return user;
+        }
+    }
+    
+    return nil;
+}
+
 
 @end

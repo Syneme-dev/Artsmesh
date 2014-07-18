@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMStatusNet/AMStatusNetGroupParser.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMStaticGroupOutlineCellViewController : NSViewController
 
-@property AMStatusNetGroup* staticGroup;
+@property AMStaticGroup* staticGroup;
 
 -(void)updateUI;
 -(void)setTrackArea;

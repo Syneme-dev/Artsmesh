@@ -6,21 +6,10 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 #import "AMMesher.h"
-#import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMSystemConfig.h"
 #import "AMRemoteMesher.h"
 #import "AMLocalMesher.h"
-#import "AMAppObjects.h"
 #import "AMLeaderElecter.h"
-#import "AMMesherStateMachine.h"
-
-
-NSString* const AM_LOCALUSERS_CHANGED = @"AM_LOCALUSERS_CHANGED";
-NSString* const AM_REMOTEGROUPS_CHANGED = @"AM_REMOTEGROUPS_CHANGED";
-NSString* const AM_MESHER_ONLINE_CHANGED= @"AM_MESHER_ONLINE_CHANGED";
-
-NSString* const AM_MESHER_UPDATE_GROUP_FAILED = @"AM_MESHER_UPDATE_GROUP_FAILED";
-NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
+#import "AMCoreData/AMCoreData.h"
 
 @implementation AMMesher
 {
@@ -51,78 +40,11 @@ NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
 -(id)initMesher
 {
     if (self = [super init]){
-        [self loadUserProfile];
-        [self loadSystemConfig];
-        [self initLocalGroup];
-        [self initMesherStateMachine];
+        self.mesherState = kMesherInitialized;
         [self initComponents];
     }
     
     return self;
-}
-
--(void)loadUserProfile
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    AMUser* mySelf = [[AMUser alloc] init];
-    mySelf.userid = [AMAppObjects creatUUID];
-    mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
-    mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
-    mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
-    mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
-    mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
-    mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-    [AMAppObjects appObjects][AMMyselfKey] = mySelf;
-}
-
--(void)loadSystemConfig
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    AMSystemConfig* config = [[AMSystemConfig alloc] init];
-    config.globalServerPort = [defaults stringForKey:Preference_Key_General_GlobalServerPort];
-    config.globalServerAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
-    config.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
-    config.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
-    config.myServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
-    config.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-    config.heartbeatInterval = @"2";
-    config.heartbeatRecvTimeout = @"5";
-    config.myServerUserTimeout = @"30";
-    config.maxHeartbeatFailure = @"5";
-    config.useIpv6 = [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
-    [[AMAppObjects appObjects] setObject:config forKey:AMSystemConfigKey];
-}
-
--(void)initLocalGroup{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    AMGroup* localGroup = [[AMGroup alloc]init];
-    localGroup.groupId = [AMAppObjects creatUUID];
-    localGroup.groupName = [defaults stringForKey:Preference_Key_Cluster_Name];
-    localGroup.description = @"no description";
-    localGroup.password = @"";
-    localGroup.leaderId = @"";
-    localGroup.messages = [[NSMutableArray alloc] init];
-    localGroup.users = [[NSMutableArray alloc] init];
-    
-    [AMAppObjects appObjects][AMLocalGroupKey] = localGroup;
-    [AMAppObjects appObjects][AMMergedGroupIdKey] = localGroup.groupId;
-}
-
--(void)initMesherStateMachine
-{
-    AMMesherStateMachine* machine = [[AMMesherStateMachine alloc] init];
-    machine.mesherState = kMesherInitialized;
-    [machine addObserver:self forKeyPath:@"mesherState"
-                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                  context:nil];
-    
-    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(computerWillSleep:) name:NSWorkspaceWillSleepNotification object:nil];
-    
-    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(computerDidWakeup:) name:NSWorkspaceDidWakeNotification object:nil];
-    
-    [[AMAppObjects appObjects] setObject:machine forKey:AMMesherStateMachineKey];
-
 }
 
 -(void) initComponents{
@@ -140,76 +62,49 @@ NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
     }
 }
 
--(void)computerWillSleep:(NSNotification*)notification
-{
-    [self stopMesher];
-}
-
--(void)computerDidWakeup:(NSNotification*)notification
-{
-    [self startMesher];
-}
-
-
 -(void)startMesher
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] != kMesherInitialized) {
+    if(self.mesherState != kMesherInitialized){
         return;
     }
     
-    AMMesherStateMachine* stateMachine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    [stateMachine setMesherState:kMesherStarting];
+    self.mesherState = kMesherStarting;
 }
 
 -(void)stopMesher
 {
-    AMMesherStateMachine* stateMachine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    [stateMachine setMesherState:kMesherStopping];
-    
-    [stateMachine removeObserver:self forKeyPath:@"mesherState"];
+    self.mesherState = kMesherStopping;
 }
 
 
 -(void)goOnline
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] != kMesherStarted) {
+    if (self.mesherState != kMesherStarted) {
         return;
     }
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-    mySelf.isOnline = YES;
+    [AMCoreData shareInstance].mySelf.isOnline = YES;
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
     
-    [machine setMesherState:kMesherMeshing];
+    self.mesherState = kMesherMeshing;
 }
 
 -(void)goOffline
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] < kMesherMeshed || [machine mesherState] >= kMesherStopping){
+    if (self.mesherState < kMesherMeshed || self.mesherState >= kMesherStopping) {
         return;
     }
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-    mySelf.isOnline = NO;
+    [AMCoreData shareInstance].mySelf.isOnline = NO;
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
     
-    [machine setMesherState:kMesherUnmeshing];
+    self.mesherState = kMesherUnmeshing;
 }
 
 
 -(void)mergeGroup:(NSString*)superGroupId
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] != kMesherMeshed){
+    if (self.mesherState != kMesherMeshed) {
         return;
     }
     
@@ -219,10 +114,7 @@ NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
 
 -(void)unmergeGroup
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] != kMesherMeshed){
+    if (self.mesherState != kMesherMeshed){
         return;
     }
     
@@ -231,13 +123,10 @@ NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
 
 -(void)updateGroup
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] == kMesherStarted){
+    if (self.mesherState == kMesherStarted){
         [_localMesher updateGroupInfo];
         
-    }else if([machine mesherState] == kMesherMeshed ){
+    }else if(self.mesherState == kMesherMeshed ){
         [_localMesher updateGroupInfo];
         [_remoteMesher updateGroupInfo];
     }
@@ -245,42 +134,16 @@ NSString* const AM_MESHER_UPDATE_USER_FAILED = @"AM_MESHER_UPDATE_USER_FAILED";
 
 -(void)updateMySelf
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if ([machine mesherState] == kMesherStarted)
+    if (self.mesherState == kMesherStarted)
     {
         [_localMesher updateMyself];
         
-    }else if([machine mesherState] == kMesherMeshed){
+    }else if(self.mesherState == kMesherMeshed){
         
         [_localMesher updateMyself];
         [_remoteMesher updateMyself];
     }
     
 }
-
-
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMMesherStateMachine class]]){
-    
-        if ([keyPath isEqualToString:@"mesherState"]){
-        
-//            AMMesherState oldState = [[change objectForKey:@"old"] intValue];
-//            AMMesherState newState = [[change objectForKey:@"new"] intValue];
-            
-        }
-    }
-}
-
-
-
-
 
 @end

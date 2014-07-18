@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMStatusNet/AMStatusNetGroupParser.h"
+#import "AMCoreData/AMCoreData.h"
 
 
 @interface AMStaticGroupDetailsViewController : NSViewController
 
-@property AMStatusNetGroup* staticGroup;
+@property AMStaticGroup* staticGroup;
 
 @end

@@ -7,10 +7,8 @@
 //
 
 #import "AMGroupDetailsViewController.h"
-#import "AMMesher/AMAppObjects.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
-#import "AMMesher/AMMesher.h"
 #import "AMGroupDetailsView.h"
 
 
@@ -31,8 +29,11 @@
 
 -(void)updateUI
 {
-    BOOL isMyGroup = [self.group isMyGroup];
-    BOOL isMyMergedGroup = [self.group isMyMergedGroup];
+    NSString* myGroupId = [AMCoreData shareInstance].myLocalLiveGroup.groupId;
+    BOOL isMyGroup = [myGroupId isEqualToString:self.group.groupId];
+    
+    NSString* myMergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+    BOOL isMyMergedGroup = [myMergedGroupId isEqualToString:self.group.groupId];
     
     AMGroupDetailsView* detailView = (AMGroupDetailsView*)self.view;
     
@@ -45,8 +46,8 @@
 
 - (IBAction)joinGroup:(NSButton *)sender
 {
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher mergeGroup:self.group.groupId];
+    [AMCoreData shareInstance].mergedGroupId = self.group.groupId;
+    [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
 }
 
 - (IBAction)cancelClick:(id)sender

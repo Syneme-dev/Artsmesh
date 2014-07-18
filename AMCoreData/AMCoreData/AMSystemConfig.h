@@ -16,6 +16,8 @@
 @property NSString* localServerPort;
 @property NSString* remoteHeartbeatInterval;
 @property NSString* localHeartbeatInterval;
+@property NSString* remoteHeartbeatRecvTimeout;
+@property NSString* localHeartbeatRecvTimeout;
 @property NSString* serverHeartbeatTimeout;
 @property NSString* maxHeartbeatFailureCount;
 @property NSString* stunServerAddr;

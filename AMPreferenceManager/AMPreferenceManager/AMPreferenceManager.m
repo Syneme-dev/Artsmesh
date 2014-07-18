@@ -104,6 +104,8 @@
     config.localServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
     config.remoteHeartbeatInterval = @"2";
     config.localHeartbeatInterval = @"2";
+    config.remoteHeartbeatRecvTimeout = @"5";
+    config.localHeartbeatRecvTimeout = @"2";
     config.serverHeartbeatTimeout = @"30";
     config.maxHeartbeatFailureCount = @"5";
     config.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];

@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMMesher/AMAppObjects.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMGroupOutlineUserCellController : NSViewController
 
-@property AMGroup* group;
-@property AMUser* user;
+@property AMLiveGroup* group;
+@property AMLiveUser* user;
 @property BOOL editable;
 @property BOOL localUser;
 

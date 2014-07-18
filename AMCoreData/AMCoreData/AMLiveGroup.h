@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class AMLiveUser;
 
 @interface AMLiveGroup : NSObject
 
@@ -23,5 +24,8 @@
 @property (nonatomic) NSString* password;
 @property (nonatomic) NSArray* users;
 @property (nonatomic) NSArray* messages;
+
+-(BOOL)isMeshed;
+-(AMLiveUser*)leader;
 
 @end

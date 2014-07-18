@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2615E9691978AA0300A7CBF0 /* AMCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDF8D1977F60A00B0035D /* AMCoreData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDF811977F60A00B0035D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF801977F60A00B0035D /* Cocoa.framework */; };
 		268BDF8B1977F60A00B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BDF891977F60A00B0035D /* InfoPlist.strings */; };
 		268BDF8F1977F60A00B0035D /* AMCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDF8E1977F60A00B0035D /* AMCoreData.m */; };
@@ -15,15 +16,15 @@
 		268BDF9A1977F60A00B0035D /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF7D1977F60A00B0035D /* AMCoreData.framework */; };
 		268BDFA01977F60A00B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BDF9E1977F60A00B0035D /* InfoPlist.strings */; };
 		268BDFA21977F60A00B0035D /* AMCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFA11977F60A00B0035D /* AMCoreDataTests.m */; };
-		268BDFAD1977F63B00B0035D /* AMLiveGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAB1977F63B00B0035D /* AMLiveGroup.h */; };
+		268BDFAD1977F63B00B0035D /* AMLiveGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAB1977F63B00B0035D /* AMLiveGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFAE1977F63B00B0035D /* AMLiveGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFAC1977F63B00B0035D /* AMLiveGroup.m */; };
-		268BDFB11977F64600B0035D /* AMLiveUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAF1977F64600B0035D /* AMLiveUser.h */; };
+		268BDFB11977F64600B0035D /* AMLiveUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAF1977F64600B0035D /* AMLiveUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFB21977F64600B0035D /* AMLiveUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFB01977F64600B0035D /* AMLiveUser.m */; };
-		268BDFB51977F65400B0035D /* AMStaticGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFB31977F65400B0035D /* AMStaticGroup.h */; };
+		268BDFB51977F65400B0035D /* AMStaticGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFB31977F65400B0035D /* AMStaticGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFB61977F65400B0035D /* AMStaticGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFB41977F65400B0035D /* AMStaticGroup.m */; };
-		268BDFB91977F66700B0035D /* AMStaticUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFB71977F66700B0035D /* AMStaticUser.h */; };
+		268BDFB91977F66700B0035D /* AMStaticUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFB71977F66700B0035D /* AMStaticUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFBA1977F66700B0035D /* AMStaticUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFB81977F66700B0035D /* AMStaticUser.m */; };
-		268BDFC5197808C800B0035D /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFC3197808C800B0035D /* AMSystemConfig.h */; };
+		268BDFC5197808C800B0035D /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFC3197808C800B0035D /* AMSystemConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFC6197808C800B0035D /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFC4197808C800B0035D /* AMSystemConfig.m */; };
 		268BE03B19780D6B00B0035D /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE03A19780D6B00B0035D /* AMCommonTools.framework */; };
 /* End PBXBuildFile section */
@@ -187,10 +188,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2615E9691978AA0300A7CBF0 /* AMCoreData.h in Headers */,
 				268BDFB51977F65400B0035D /* AMStaticGroup.h in Headers */,
 				268BDFB91977F66700B0035D /* AMStaticUser.h in Headers */,
-				268BDFC5197808C800B0035D /* AMSystemConfig.h in Headers */,
 				268BDFAD1977F63B00B0035D /* AMLiveGroup.h in Headers */,
+				268BDFC5197808C800B0035D /* AMSystemConfig.h in Headers */,
 				268BDFB11977F64600B0035D /* AMLiveUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +508,7 @@
 				268BDFA71977F60A00B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		268BDFA81977F60A00B0035D /* Build configuration list for PBXNativeTarget "AMCoreDataTests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +517,7 @@
 				268BDFAA1977F60A00B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

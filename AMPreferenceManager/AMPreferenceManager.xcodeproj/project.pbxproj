@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2615E96B1978AA3400A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96A1978AA3400A7CBF0 /* AMCoreData.framework */; };
+		2615E96D1978AB1E00A7CBF0 /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96C1978AB1E00A7CBF0 /* AMCommonTools.framework */; };
 		37EF81881880CE4900FE7944 /* AMPreferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB90618710D3100C1FD1B /* AMPreferenceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37FCB8FA18710D3100C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB8F918710D3100C1FD1B /* Cocoa.framework */; };
 		37FCB90418710D3100C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB90218710D3100C1FD1B /* InfoPlist.strings */; };
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2615E96A1978AA3400A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
+		2615E96C1978AB1E00A7CBF0 /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		37FCB8F618710D3100C1FD1B /* AMPreferenceManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMPreferenceManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB8F918710D3100C1FD1B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37FCB8FC18710D3100C1FD1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2615E96D1978AB1E00A7CBF0 /* AMCommonTools.framework in Frameworks */,
+				2615E96B1978AA3400A7CBF0 /* AMCoreData.framework in Frameworks */,
 				37FCB8FA18710D3100C1FD1B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +96,8 @@
 		37FCB8F818710D3100C1FD1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2615E96C1978AB1E00A7CBF0 /* AMCommonTools.framework */,
+				2615E96A1978AA3400A7CBF0 /* AMCoreData.framework */,
 				37FCB8F918710D3100C1FD1B /* Cocoa.framework */,
 				37FCB90E18710D3100C1FD1B /* XCTest.framework */,
 				37FCB8FB18710D3100C1FD1B /* Other Frameworks */,
@@ -367,6 +375,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMPreferenceManager/AMPreferenceManager-Prefix.pch";
@@ -383,6 +395,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMPreferenceManager/AMPreferenceManager-Prefix.pch";

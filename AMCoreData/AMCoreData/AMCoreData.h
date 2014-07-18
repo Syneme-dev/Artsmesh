@@ -27,14 +27,10 @@
 @property AMSystemConfig* systemConfig;
 
 +(AMCoreData*)shareInstance;
-
--(void)updateMyself;
--(void)updateMLiveGroup;
--(void)updateRemoteLiveGroups;
--(void)updateStaticGroups;
--(void)updateSystemConfig;
+-(void)broadcastChanges:(NSString*)notificationName;
 
 @end
+
 
 
 

@@ -228,7 +228,7 @@
      };
     [scrollView setDocumentView:_containerView];
     [self loadVersion];
-    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
+    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
     for (NSString* openedPanelId in openedPanels) {
         if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
         {
@@ -274,7 +274,7 @@
         [self.panelControllers setObject:panelViewController forKey:identifier];
         
     
-    NSMutableArray *openedPanels=[[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+    NSMutableArray *openedPanels=[[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
     if(![openedPanels containsObject:identifier])
     {
         [openedPanels addObject:identifier];
@@ -286,7 +286,7 @@
         }
     }
 
-    [[AMPreferenceManager instance] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
+    [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     
     return panelViewController;
     

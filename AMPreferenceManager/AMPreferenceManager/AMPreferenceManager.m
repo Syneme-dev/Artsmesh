@@ -89,8 +89,6 @@
     mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     
     [AMCoreData shareInstance].mySelf = mySelf;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
-    
 }
 
 -(void)writeSystemConfig
@@ -114,7 +112,6 @@
     config.useIpv6 =  [defaults stringForKey:Preference_Key_General_UseIpv6];
 
     [AMCoreData shareInstance].systemConfig = config;
-    [[AMCoreData shareInstance] broadcastChanges:AM_SYSTEM_CONFIG_CHANGED];
 }
 
 -(void)writeGroupProfile
@@ -127,7 +124,6 @@
     localGroup.password = @"";
 
     [AMCoreData shareInstance].myLocalLiveGroup= localGroup;
-    [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
 }
 
 

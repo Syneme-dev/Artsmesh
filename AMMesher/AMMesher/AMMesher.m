@@ -41,7 +41,6 @@
 {
     if (self = [super init]){
         self.mesherState = kMesherInitialized;
-        [self initComponents];
     }
     
     return self;
@@ -68,6 +67,7 @@
         return;
     }
     
+    [self initComponents];
     self.mesherState = kMesherStarting;
 }
 
@@ -83,9 +83,6 @@
         return;
     }
     
-    [AMCoreData shareInstance].mySelf.isOnline = YES;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
-    
     self.mesherState = kMesherMeshing;
 }
 
@@ -94,9 +91,6 @@
     if (self.mesherState < kMesherMeshed || self.mesherState >= kMesherStopping) {
         return;
     }
-    
-    [AMCoreData shareInstance].mySelf.isOnline = NO;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
     
     self.mesherState = kMesherUnmeshing;
 }

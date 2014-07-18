@@ -15,6 +15,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMUserViewController ()
 
@@ -108,7 +109,7 @@
     
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.groupName = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+    [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)groupDescriptionEdited:(NSTextField *)sender
@@ -119,7 +120,7 @@
     
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.description = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+    [[AMMesher sharedAMMesher] updateGroup];;
 }
 
 - (IBAction)nicknameEdited:(NSTextField *)sender
@@ -130,7 +131,7 @@
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.nickName = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 
 - (IBAction)locationEdited:(NSTextField *)sender
@@ -141,8 +142,7 @@
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.location = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
-
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 
 - (IBAction)statusMessageEdited:(NSTextField *)sender
@@ -153,7 +153,7 @@
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.description = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 
 - (IBAction)domainEdited:(NSTextField *)sender
@@ -164,6 +164,6 @@
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.domain = sender.stringValue;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 @end

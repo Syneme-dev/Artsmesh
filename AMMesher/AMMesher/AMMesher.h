@@ -29,6 +29,13 @@ typedef enum{
 -(void)stopMesher;
 
 @property AMMesherState mesherState;
+-(void)goOnline;
+-(void)goOffline;
+-(void)mergeGroup:(NSString*)superGroupId;
+-(void)unmergeGroup;
+-(void)updateGroup;
+-(void)updateMySelf;
+
 
 @end
 

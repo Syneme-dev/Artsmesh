@@ -10,6 +10,7 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsView.h"
+#import "AMMesher/AMMesher.h"
 
 
 @interface AMGroupDetailsViewController ()
@@ -46,8 +47,7 @@
 
 - (IBAction)joinGroup:(NSButton *)sender
 {
-    [AMCoreData shareInstance].mergedGroupId = self.group.groupId;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+    [[AMMesher sharedAMMesher] mergeGroup:self.group.groupId];
 }
 
 - (IBAction)cancelClick:(id)sender

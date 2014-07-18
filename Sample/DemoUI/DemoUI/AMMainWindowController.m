@@ -33,6 +33,7 @@
 #import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMMesher/AMMesher.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -58,16 +59,9 @@
 #define UI_Panel_Key_OSCMessage @"OSCMESSAGE_PANEL"
 
 #define UI_Panel_Key_Social @"SOCIAL_PANEL"
-
-
 #define UI_Panel_Key_Timer @"TIMER_PANEL"
-
 #define UI_Panel_Key_MusicScore @"MUSICSCORE_PANEL"
-
 #define UI_Panel_Key_MainOutput @"MAINOUTPUT_PANEL"
-
-
-
 
 @interface AMMainWindowController ()
 
@@ -135,13 +129,12 @@
     
     BOOL isOnline = [AMCoreData shareInstance].mySelf.isOnline;
     if (isOnline) {
+        [[AMMesher sharedAMMesher] goOffline];
         self.meshBtn.state = 0;
     }else{
+        [[AMMesher sharedAMMesher] goOnline];
         self.meshBtn.state = 2;
     }
-    
-    [AMCoreData shareInstance].mySelf.isOnline = !isOnline;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
 }
 
 -(void)loadVersion{

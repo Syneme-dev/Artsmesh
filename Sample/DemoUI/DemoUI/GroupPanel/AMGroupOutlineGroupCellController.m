@@ -11,6 +11,7 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupTextFieldFormatter.h"
+#import "AMMesher/AMMesher.h"
 
 #define MAX_GROUP_NAME_LENGTH 16
 #define MAX_GROUP_DESCRIPTION 64
@@ -91,14 +92,12 @@
 
 - (IBAction)mergeBtnClick:(id)sender
 {
-    [AMCoreData shareInstance].mergedGroupId = self.group.groupId;
-    [[AMCoreData shareInstance]broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+    [[AMMesher sharedAMMesher] mergeGroup:self.group.groupId];
 }
 
 - (IBAction)leaveBtnClick:(id)sender
 {
-    [AMCoreData shareInstance].mergedGroupId = @"";
-    [[AMCoreData shareInstance]broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+    [[AMMesher sharedAMMesher] mergeGroup:@""];
 }
 
 #pragma mark-

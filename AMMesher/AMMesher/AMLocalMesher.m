@@ -34,7 +34,6 @@
 {
     if (self = [super init]) {
 
-        //add observer to mesher state machine
         [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
@@ -185,41 +184,41 @@
 }
 
 
--(void)getLocalGroupInfo
-{
-    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/groups/getall";
-    req.httpMethod = @"GET";
-    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-        if (isCancel == YES) {
-            return;
-        }
-        
-        if (error != nil) {
-            NSLog(@"error happened when get group info:%@", error.description);
-            return;
-        }
-        
-        NSAssert(response, @"response should not be nil without error");
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            AMLiveGroup* group = [AMLiveGroup AMGroupFromDict:(NSDictionary*)response];
-            AMLiveGroup* localGroup =[AMCoreData shareInstance].myLocalLiveGroup;
-            
-            //should no need synchronized, because in main loop
-            // @synchronized(localGroup){
-            localGroup.groupName = group.groupName;
-            localGroup.description = group.description;
-            localGroup.leaderId = group.leaderId;
-            //}
-            
-            [self registerSelf];
-        });
-    };
-    
-    [_httpRequestQueue addOperation:req];
-}
+//-(void)getLocalGroupInfo
+//{
+//    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+//    req.baseURL = [self httpBaseURL];
+//    req.requestPath = @"/groups/getall";
+//    req.httpMethod = @"GET";
+//    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+//        if (isCancel == YES) {
+//            return;
+//        }
+//        
+//        if (error != nil) {
+//            NSLog(@"error happened when get group info:%@", error.description);
+//            return;
+//        }
+//        
+//        NSAssert(response, @"response should not be nil without error");
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            AMLiveGroup* group = [AMLiveGroup AMGroupFromDict:(NSDictionary*)response];
+//            AMLiveGroup* localGroup =[AMCoreData shareInstance].myLocalLiveGroup;
+//            
+//            //should no need synchronized, because in main loop
+//            // @synchronized(localGroup){
+//            localGroup.groupName = group.groupName;
+//            localGroup.description = group.description;
+//            localGroup.leaderId = group.leaderId;
+//            //}
+//            
+//            [self registerSelf];
+//        });
+//    };
+//    
+//    [_httpRequestQueue addOperation:req];
+//}
 
 
 -(void)registerSelf
@@ -414,6 +413,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info response wrong! %@", responseStr);
+            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
         }
     };
     
@@ -447,6 +447,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSLog(@"updateGroupInfo succeeded!");
+            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         }
     };
     

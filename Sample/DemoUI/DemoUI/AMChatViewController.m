@@ -8,6 +8,7 @@
 
 #import "AMChatViewController.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
 
@@ -241,7 +242,8 @@
     
         AMLiveUser* meSelf = [AMCoreData shareInstance].mySelf;
         meSelf.publicIp = _myPubIp;
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
+
+        [[AMMesher sharedAMMesher] updateMySelf];
     }
     
     if(![_myNATPort isEqualToString:[ipAndPort objectAtIndex:1]]){
@@ -250,8 +252,7 @@
         AMLiveUser* meSelf = [AMCoreData shareInstance].mySelf;
         meSelf.publicChatPort = _myNATPort;
         
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
-        
+        [[AMMesher sharedAMMesher] updateMySelf];
     }
 
 }

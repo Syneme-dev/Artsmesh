@@ -150,7 +150,6 @@
                 mySelf.isOnline = YES;
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
-                
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
             });
             
@@ -194,6 +193,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info on remote response wrong!");
+            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
         }
     };
 
@@ -229,6 +229,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info on remote response wrong!%@", responseStr);
+            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         }
     };
     
@@ -296,6 +297,9 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
+            [AMCoreData shareInstance].mergedGroupId = toGroupId;
+            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+            
             NSAssert(NO, @"merge group info on remote response wrong!");
         }
     };

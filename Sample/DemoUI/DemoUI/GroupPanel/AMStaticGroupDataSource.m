@@ -7,8 +7,6 @@
 //
 
 #import "AMStaticGroupDataSource.h"
-#import "AMStatusNet/AMStatusNetModule.h"
-#import "AMStatusNet/AMStatusNetGroupParser.h"
 #import "AMStaticGroupOutlineCellViewController.h"
 #import "AMStaticGroupOutlineCellView.h"
 #import "AMGroupOutlineRowView.h"
@@ -32,23 +30,23 @@
 
 -(void)reloadGroups
 {
-    AMStatusNetModule* module = [[AMStatusNetModule alloc] init];
-    
-    [module getGroupsOnStatusNet:@"http://artsmesh.io/api/statusnet/groups/list_all.json" completionBlock:^(NSData* response, NSError* error){
-        if (error ==nil && response != nil) {
-            NSArray* staticGroups  = [AMStatusNetGroupParser parseStatusNetGroups:response];
-            NSMutableArray* staticGroupControllers = [[NSMutableArray alloc] init];
-            
-            for (AMStatusNetGroup* group in staticGroups) {
-                AMStaticGroupOutlineCellViewController* staticGroupController = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
-                staticGroupController.staticGroup = group;
-                
-                [staticGroupControllers addObject:staticGroupController];
-            }
-            
-            self.staticGroups = staticGroupControllers;
-        }
-    }];
+//    AMStatusNetModule* module = [[AMStatusNetModule alloc] init];
+//    
+//    [module getGroupsOnStatusNet:@"http://artsmesh.io/api/statusnet/groups/list_all.json" completionBlock:^(NSData* response, NSError* error){
+//        if (error ==nil && response != nil) {
+//            NSArray* staticGroups  = [AMStatusNetGroupParser parseStatusNetGroups:response];
+//            NSMutableArray* staticGroupControllers = [[NSMutableArray alloc] init];
+//            
+//            for (AMStatusNetGroup* group in staticGroups) {
+//                AMStaticGroupOutlineCellViewController* staticGroupController = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+//                staticGroupController.staticGroup = group;
+//                
+//                [staticGroupControllers addObject:staticGroupController];
+//            }
+//            
+//            self.staticGroups = staticGroupControllers;
+//        }
+//    }];
 }
 
 

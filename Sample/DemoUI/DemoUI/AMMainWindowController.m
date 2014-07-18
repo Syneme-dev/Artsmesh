@@ -30,7 +30,6 @@
 #import "AMVisualViewController.h"
 #import "AMMapViewController.h"
 #import "AMAppDelegate.h"
-#import "AMMesher/AMAppObjects.h"
 #import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"

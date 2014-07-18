@@ -69,6 +69,9 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     NSPoint p = [theEvent locationInWindow];
     
     if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
@@ -91,6 +94,9 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     NSPoint p = [theEvent locationInWindow];
 
     if (self.resizing) {
@@ -128,6 +134,9 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     if (self.resizing) {
         self.resizing = NO;
     } else if (self.tearedOff) {

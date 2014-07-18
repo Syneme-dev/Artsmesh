@@ -84,8 +84,29 @@
 
 - (IBAction)toggleFullScreen:(id)sender
 {
-    
+    [_floatingWindow toggleFullScreen:self];
 }
+
+- (NSSize)window:(NSWindow *)window willUseFullScreenContentSize:(NSSize)proposedSize
+{
+    return proposedSize;
+}
+
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+    [self.tearOffButton setHidden:YES];
+    AMPanelView *panelView = (AMPanelView *)self.view;
+    panelView.inFullScreenMode = YES;
+}
+
+- (void)windowWillExitFullScreen:(NSNotification *)notification
+{
+    [self.tearOffButton setHidden:NO];
+    AMPanelView *panelView = (AMPanelView *)self.view;
+    panelView.inFullScreenMode = NO;
+    [_floatingWindow orderFront:self];
+}
+
 
 - (IBAction)onTearClick:(id)sender {
     AMPanelView *panelView= (AMPanelView*) self.view;
@@ -112,27 +133,45 @@
                                                                saturation:0.15
                                                                brightness:0.15
                                                                     alpha:1.0];
+        _floatingWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
+        _floatingWindow.delegate = self;
         [_floatingWindow setFrameOrigin:windowOrigin];
         
-        NSSize screenSize = panelView.window.screen.visibleFrame.size;
+        NSSize screenSize = panelView.window.screen.frame.size;
 //        NSPoint windowOrigin;
 //        windowOrigin.x = screenSize.width - panelView.frame.size.width;
 //        windowOrigin.y = screenSize.height - panelView.frame.size.height;
 //        [_floatingWindow.animator setFrameOrigin:windowOrigin];
         NSRect windowFrame = contentView.frame;
-        windowFrame.origin.x = screenSize.width - contentView.frame.size.width;
-        windowFrame.origin.y = screenSize.height - contentView.frame.size.height;
+        windowFrame.origin.x = (screenSize.width - windowFrame.size.width) / 2;
+        windowFrame.origin.y = screenSize.height - windowFrame.size.height - 80;
         [_floatingWindow.animator setFrame:windowFrame display:NO];
         
         [_floatingWindow makeKeyAndOrderFront:self];
     } else {
+//        [panelView removeFromSuperview];
+//        [panelView setTranslatesAutoresizingMaskIntoConstraints:YES];
+//        _floatingWindow = nil;
+//        panelView.tearedOff = NO;
+//        [self.fullScreenButton setHidden:YES];
+//        [[[NSApp delegate] mainWindowController].containerView addSubview:panelView];
+//        [panelView scrollRectToVisible:panelView.bounds];
+        
+        AMBoxItem *dummy = [[AMBoxItem alloc] initWithFrame:panelView.frame];
+        [[[NSApp delegate] mainWindowController].containerView addSubview:dummy];
+//        [dummy scrollRectToVisible:dummy.bounds];
+        NSRect rectInScreen = [dummy convertRect:dummy.bounds toView:nil];
+        rectInScreen = [dummy.window convertRectToScreen:rectInScreen];
+        
+        [_floatingWindow.animator setFrame:rectInScreen display:NO animate:YES];
+        [dummy removeFromSuperview];
         [panelView removeFromSuperview];
         [panelView setTranslatesAutoresizingMaskIntoConstraints:YES];
         _floatingWindow = nil;
         panelView.tearedOff = NO;
         [self.fullScreenButton setHidden:YES];
         [[[NSApp delegate] mainWindowController].containerView addSubview:panelView];
-        [panelView scrollRectToVisible:panelView.bounds];
+        [panelView scrollRectToVisible:panelView.enclosingRect];
     }
 }
 

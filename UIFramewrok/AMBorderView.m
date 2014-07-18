@@ -30,12 +30,12 @@
         [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = NSDictionaryOfVariableBindings(aView);
         [self addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[aView]-10-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[aView]-20-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];
         [self addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[aView]-10-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[aView]-20-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];
@@ -50,8 +50,15 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1.0] set];
+  //  [[NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1.0] set];
+  //  NSRectFill(self.bounds);
+    [[NSColor clearColor] set];
     NSRectFill(self.bounds);
+    [[NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1.0] set];
+    NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRoundedRect:self.bounds
+                                                                xRadius:10
+                                                                yRadius:10];
+    [roundedRect fill];
 }
 
 @end

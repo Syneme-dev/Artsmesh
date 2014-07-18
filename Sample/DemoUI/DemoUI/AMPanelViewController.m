@@ -129,10 +129,12 @@
         _floatingWindow.contentView = contentView;
         _floatingWindow.level = NSFloatingWindowLevel;
         _floatingWindow.hasShadow = YES;
-        _floatingWindow.backgroundColor = [NSColor colorWithCalibratedHue:0.15
-                                                               saturation:0.15
-                                                               brightness:0.15
-                                                                    alpha:1.0];
+//        _floatingWindow.backgroundColor = [NSColor colorWithCalibratedHue:0.15
+//                                                               saturation:0.15
+//                                                               brightness:0.15
+//                                                                    alpha:1.0];
+        [_floatingWindow setOpaque:NO];
+        _floatingWindow.backgroundColor = [NSColor clearColor];
         _floatingWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
         _floatingWindow.delegate = self;
         [_floatingWindow setFrameOrigin:windowOrigin];
@@ -159,7 +161,7 @@
         
         AMBoxItem *dummy = [[AMBoxItem alloc] initWithFrame:panelView.frame];
         [[[NSApp delegate] mainWindowController].containerView addSubview:dummy];
-//        [dummy scrollRectToVisible:dummy.bounds];
+        [dummy scrollRectToVisible:dummy.bounds];
         NSRect rectInScreen = [dummy convertRect:dummy.bounds toView:nil];
         rectInScreen = [dummy.window convertRectToScreen:rectInScreen];
         

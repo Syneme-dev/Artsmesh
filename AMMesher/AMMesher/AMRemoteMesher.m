@@ -121,6 +121,7 @@
 -(void)registerSelf
 {
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.isOnline = YES;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     NSMutableDictionary* dict = [mySelf toDict];
@@ -147,7 +148,6 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                mySelf.isOnline = YES;
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];

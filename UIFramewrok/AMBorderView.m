@@ -12,20 +12,33 @@
 
 @implementation AMBorderView
 
-- (id)initWithView:(NSView *)view
+- (id)initWithView:(NSView *)aView
 {
-    if (!view)
+    if (!aView)
         return nil;
     
     self = [super init];
     if (self) {
         NSRect rect = NSZeroRect;
-        rect.size = view.frame.size;
+        rect.size = aView.frame.size;
         rect.size.width += BORDER_THICKNESS * 2;
         rect.size.height += BORDER_THICKNESS * 2;
         [self setFrame:rect];
-        [view setFrameOrigin:NSMakePoint(BORDER_THICKNESS, BORDER_THICKNESS)];
-        [self addSubview:view];
+        [aView setFrameOrigin:NSMakePoint(BORDER_THICKNESS, BORDER_THICKNESS)];
+        [self addSubview:aView];
+        
+        [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(aView);
+        [self addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[aView]-10-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [self addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[aView]-10-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
     }
     return self;
 }

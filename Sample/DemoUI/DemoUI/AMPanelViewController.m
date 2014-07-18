@@ -107,7 +107,11 @@
                                                          defer:NO];
         _floatingWindow.contentView = contentView;
         _floatingWindow.level = NSFloatingWindowLevel;
-
+        _floatingWindow.hasShadow = YES;
+        _floatingWindow.backgroundColor = [NSColor colorWithCalibratedHue:0.15
+                                                               saturation:0.15
+                                                               brightness:0.15
+                                                                    alpha:1.0];
         [_floatingWindow setFrameOrigin:windowOrigin];
         
         NSSize screenSize = panelView.window.screen.visibleFrame.size;
@@ -122,11 +126,12 @@
         
         [_floatingWindow makeKeyAndOrderFront:self];
     } else {
+        [panelView removeFromSuperview];
+        [panelView setTranslatesAutoresizingMaskIntoConstraints:YES];
         _floatingWindow = nil;
-        AMMainWindowController *mainWindowController = [[NSApp delegate] mainWindowController];
         panelView.tearedOff = NO;
         [self.fullScreenButton setHidden:YES];
-        [mainWindowController.containerView addSubview:panelView];
+        [[[NSApp delegate] mainWindowController].containerView addSubview:panelView];
         [panelView scrollRectToVisible:panelView.bounds];
     }
 }

@@ -40,7 +40,7 @@
 -(void)reloadGroups
 {
     NSMutableArray* userGroups = [[NSMutableArray alloc] init];
-    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     if (localGroup == nil) {
         return;
     }
@@ -50,9 +50,9 @@
     localGroupController.editable = YES;
     localGroupController.userControllers = [[NSMutableArray alloc] init];
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
-    for (AMUser* user in localGroup.users){
+    for (AMLiveUser* user in localGroup.users){
         AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
         
         localUserController.group = localGroup;
@@ -79,16 +79,13 @@
     labelController.groupControllers = [[NSMutableArray alloc] init];
     [userGroups addObject:labelController];
     
-    NSDictionary* remoteGroupDict = [AMAppObjects appObjects][AMRemoteGroupsKey];
-    
-    for (NSString* groupId in remoteGroupDict) {
-        AMGroup* remoteGroup = remoteGroupDict[groupId];
+    for (AMLiveGroup* remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         AMGroupOutlineGroupCellController* remoteGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
         remoteGroupController.group = remoteGroup;
         remoteGroupController.userControllers = [[NSMutableArray alloc] init];
         remoteGroupController.editable = NO;
         
-        for (AMUser* user in remoteGroup.users){
+        for (AMLiveUser* user in remoteGroup.users){
             AMGroupOutlineUserCellController* remoteUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
             
             remoteUserController.group = remoteGroup;

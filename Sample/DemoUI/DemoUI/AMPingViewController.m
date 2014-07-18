@@ -7,8 +7,7 @@
 //
 
 #import "AMPingViewController.h"
-#import "AMMesher/AMMesher.h"
-#import "AMMesher/AMAppObjects.h"
+#import "AMCoreData/AMCoreData.h"
 #import "AMTaskLauncher/AMShellTask.h"
 
 #define UI_Color_b7b7b7  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]
@@ -40,16 +39,20 @@
     [[NSNotificationCenter defaultCenter]
         addObserver:self
         selector:@selector(userGroupsChanged:)
-        name:AM_REMOTEGROUPS_CHANGED
+        name: AM_LIVE_GROUP_CHANDED
         object:nil];
 }
 
 
 -(void)userGroupsChanged:(NSNotification*)notification
 {
-    NSString *mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
-    NSDictionary *groups = [AMAppObjects appObjects][AMRemoteGroupsKey];
-    _users = [groups[mergedGroupId] users];
+    NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+    for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
+        if ([g.groupId isEqualToString:mergedGroupId]) {
+            _users = g.users;
+        }
+    }
+    
     [self.userTable reloadData];
 }
 
@@ -71,7 +74,7 @@
     NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier
                                                           owner:nil];
    
-    AMUser* user = _users[row];
+    AMLiveUser* user = _users[row];
     [result.textField setStringValue:user.nickName];
     return result;
 }
@@ -80,7 +83,7 @@
 {
     if (self.userTable.selectedRow == -1)
         return;
-    AMUser* user = _users[self.userTable.selectedRow];
+    AMLiveUser* user = _users[self.userTable.selectedRow];
     NSString* pingIp = user.publicIp;
     NSString *pingCommand = [NSString stringWithFormat:@"ping -c 5 %@",
                                 pingIp];

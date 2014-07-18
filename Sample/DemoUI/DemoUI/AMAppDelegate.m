@@ -31,16 +31,15 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
-    [AMPreferenceManager registerPreference];
+    [[AMPreferenceManager shareInstance] initPreference];
     
-    [self startMesher];
     [self.mainWindowController showDefaultWindow];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
     }
-    //[self startMesher];
-    //[self connectMesher];
+    
+    [self startMesher];
     [self writePluginDataToMesher];
 }
 
@@ -101,7 +100,7 @@ static NSMutableDictionary *allPlugins = nil;
 }
 
 - (AMPreferenceManager *)sharedPreferenceManger {
-    return [AMPreferenceManager defaultShared];
+    return [AMPreferenceManager shareInstance];
 }
 
 

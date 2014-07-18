@@ -8,7 +8,6 @@
 
 
 #import "AMMainWindowController.h"
-#import "AMMesher/AMMesher.h"
 #import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPluginLoader/AMPluginProtocol.h>
@@ -31,10 +30,10 @@
 #import "AMVisualViewController.h"
 #import "AMMapViewController.h"
 #import "AMAppDelegate.h"
-#import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMMesherStateMachine.h"
 #import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
+#import "AMCoreData/AMCoreData.h"
+#import "AMMesher/AMMesher.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -60,16 +59,9 @@
 #define UI_Panel_Key_OSCMessage @"OSCMESSAGE_PANEL"
 
 #define UI_Panel_Key_Social @"SOCIAL_PANEL"
-
-
 #define UI_Panel_Key_Timer @"TIMER_PANEL"
-
 #define UI_Panel_Key_MusicScore @"MUSICSCORE_PANEL"
-
 #define UI_Panel_Key_MainOutput @"MAINOUTPUT_PANEL"
-
-
-
 
 @interface AMMainWindowController ()
 
@@ -134,29 +126,15 @@
 }
 
 - (IBAction)mesh:(id)sender {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    if (machine == nil) {
-        return;
-    }
     
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    
-    if (machine.mesherState == kMesherStarted) {
-        [mesher goOnline];
+    BOOL isOnline = [AMCoreData shareInstance].mySelf.isOnline;
+    if (isOnline) {
+        [[AMMesher sharedAMMesher] goOffline];
         self.meshBtn.state = 0;
-    }else if(machine.mesherState == kMesherMeshed){
-        [mesher goOffline];
-        self.meshBtn.state = 2;
     }else{
-        AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
-        if (mySelf.isOnline == YES) {
-            self.meshBtn.state = 0;
-        }else{
-            self.meshBtn.state = 2;
-        }
-        return;
+        [[AMMesher sharedAMMesher] goOnline];
+        self.meshBtn.state = 2;
     }
-
 }
 
 -(void)loadVersion{
@@ -228,7 +206,7 @@
      };
     [scrollView setDocumentView:_containerView];
     [self loadVersion];
-    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel];
+    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
     for (NSString* openedPanelId in openedPanels) {
         if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
         {
@@ -274,7 +252,7 @@
         [self.panelControllers setObject:panelViewController forKey:identifier];
         
     
-    NSMutableArray *openedPanels=[[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+    NSMutableArray *openedPanels=[[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
     if(![openedPanels containsObject:identifier])
     {
         [openedPanels addObject:identifier];
@@ -286,7 +264,7 @@
         }
     }
 
-    [[AMPreferenceManager instance] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
+    [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     
     return panelViewController;
     

@@ -12,9 +12,10 @@
 #import "AMRestHelper.h"
 #import "AFHTTPRequestOperationManager.h"
 #import <UIFramework/AMButtonHandler.h>
-#import "AMMesher/AMAppObjects.h"
 #import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMCoreData/AMCoreData.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMUserViewController ()
 
@@ -35,7 +36,7 @@
 {
     [super awakeFromNib];
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
-     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
     [self loadAvatarImage];
 }
@@ -80,13 +81,13 @@
     [self.avatarView  setImage:imageFromBundle];
 }
 
-- (IBAction)onUserTabClick:(id)sender {
+- (IBAction)onUserTabClick:(id)sender
+{
     [self.tabs selectTabViewItemAtIndex:0];
 }
 
-- (IBAction)onGroupTabClick:(id)sender {
-    
-//    [self.tabs selectNextTabViewItem:nil];
+- (IBAction)onGroupTabClick:(id)sender
+{
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
@@ -106,13 +107,9 @@
         return;
     }
     
-    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-    localGroup.groupName = sender.stringValue;
-    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.groupName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Name];
 }
 
 - (IBAction)groupDescriptionEdited:(NSTextField *)sender
@@ -121,13 +118,9 @@
         return;
     }
     
-    AMGroup* localGroup = [AMAppObjects appObjects][AMLocalGroupKey];
-    localGroup.description = sender.stringValue;
-    
-    [[AMMesher sharedAMMesher] updateGroup];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_Cluster_Description];
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.description = sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];;
 }
 
 - (IBAction)nicknameEdited:(NSTextField *)sender
@@ -136,13 +129,9 @@
         return;
     }
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.nickName = sender.stringValue;
-    
     [[AMMesher sharedAMMesher] updateMySelf];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_NickName];
 }
 
 - (IBAction)locationEdited:(NSTextField *)sender
@@ -151,13 +140,9 @@
         return;
     }
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.location = sender.stringValue;
-    
     [[AMMesher sharedAMMesher] updateMySelf];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Location];
 }
 
 - (IBAction)statusMessageEdited:(NSTextField *)sender
@@ -166,13 +151,9 @@
         return;
     }
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.description = sender.stringValue;
-    
     [[AMMesher sharedAMMesher] updateMySelf];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Description];
 }
 
 - (IBAction)domainEdited:(NSTextField *)sender
@@ -181,12 +162,8 @@
         return;
     }
     
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.domain = sender.stringValue;
-    
     [[AMMesher sharedAMMesher] updateMySelf];
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:sender.stringValue forKeyPath:Preference_Key_User_Domain];
 }
 @end

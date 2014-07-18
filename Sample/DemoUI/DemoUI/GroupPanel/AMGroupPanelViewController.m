@@ -7,8 +7,7 @@
 //
 
 #import "AMGroupPanelViewController.h"
-#import "AMMesher/AMAppObjects.h"
-#import "AMMesher/AMMesher.h"
+#import "AMCoreData/AMCoreData.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupDetailsViewController.h"
 #import "AMUserDetailsViewController.h"
@@ -64,15 +63,14 @@
     [self.staticGroupOutlineView setTarget:self.staticGroupDataSource];
     [self.staticGroupOutlineView setDoubleAction:@selector(doubleClickOutlineView:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LOCALUSERS_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_REMOTEGROUPS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self.liveGroupDataSource];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[AMGroupPanelModel sharedGroupModel] removeObserver:self];
 }
 

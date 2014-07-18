@@ -69,10 +69,10 @@
     AMAppDelegate *appDelegate=[NSApp delegate];
     NSString *sideItemId=[[self.panelId mutableCopy]stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
     [appDelegate.mainWindowController setSideBarItemStatus:sideItemId withStatus:NO ];
-    NSMutableArray *openedPanels=[(NSMutableArray*)[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+    NSMutableArray *openedPanels=[(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
 
     [openedPanels  removeObject:self.panelId];
-    [[AMPreferenceManager instance] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
+    [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     
     if([appDelegate.mainWindowController.panelControllers.allKeys containsObject:self.panelId])
     {

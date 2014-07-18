@@ -58,15 +58,13 @@
 #define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
 
 
-
-
 #import <Foundation/Foundation.h>
 
 @interface AMPreferenceManager : NSObject
 
-+(AMPreferenceManager *)defaultShared;
++(AMPreferenceManager*)shareInstance;
++(NSUserDefaults *)standardUserDefaults;
 
-+ (NSUserDefaults *)instance ;
+-(void)initPreference;
 
-+ (void)registerPreference;
 @end

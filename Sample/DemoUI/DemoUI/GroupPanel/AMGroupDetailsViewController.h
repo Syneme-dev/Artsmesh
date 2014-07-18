@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMMesher/AMAppObjects.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMGroupDetailsViewController : NSViewController
 
-@property AMGroup* group;
+@property AMLiveGroup* group;
 
 -(void)updateUI;
 

@@ -8,7 +8,6 @@
 
 
 #import "AMMainWindowController.h"
-#import "AMMesher/AMMesher.h"
 #import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPluginLoader/AMPluginProtocol.h>
@@ -34,6 +33,7 @@
 #import "AMMesher/AMAppObjects.h"
 #import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
+#import "AMCoreData/AMCoreData.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -133,24 +133,16 @@
 }
 
 - (IBAction)mesh:(id)sender {
-
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    if (mesher.mesherState == kMesherStarted) {
-        [mesher goOnline];
+    
+    BOOL isOnline = [AMCoreData shareInstance].mySelf.isOnline;
+    if (isOnline) {
         self.meshBtn.state = 0;
-    }else if(mesher.mesherState == kMesherMeshed){
-        [mesher goOffline];
-        self.meshBtn.state = 2;
     }else{
-        AMLiveUser* mySelf = [AMCoreData appObjects] objectForKey:AMMyselfKey];
-        if (mySelf.isOnline == YES) {
-            self.meshBtn.state = 0;
-        }else{
-            self.meshBtn.state = 2;
-        }
-        return;
+        self.meshBtn.state = 2;
     }
-
+    
+    [AMCoreData shareInstance].mySelf.isOnline = !isOnline;
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
 }
 
 -(void)loadVersion{

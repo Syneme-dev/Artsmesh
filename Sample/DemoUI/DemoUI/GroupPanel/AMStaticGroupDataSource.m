@@ -119,6 +119,14 @@
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
+    
+    if ([item isKindOfClass:[AMGroupOutlineStaticCellViewController class]]) {
+        
+        rowView.headImage = [NSImage imageNamed:@"group_online"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        
+    }
+    
     return rowView;
 }
 

@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "group_info.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "user_leader.png"
+      "filename" : "group_info@2X-09.png"
     }
   ],
   "info" : {

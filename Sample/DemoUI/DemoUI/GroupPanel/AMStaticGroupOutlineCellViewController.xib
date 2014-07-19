@@ -58,7 +58,7 @@
                         <constraint firstAttribute="height" constant="20" id="CAq-6e-RPA"/>
                         <constraint firstAttribute="width" constant="20" id="MpY-Vx-vkw"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="I" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="caj-Xp-QJ2">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="usergroup_info" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="caj-Xp-QJ2">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -87,5 +87,6 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="usergroup_info" width="10" height="10"/>
     </resources>
 </document>

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMStaticGroupOutlineCellViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMGroupOutlineStaticCellViewController">
             <connections>
                 <outlet property="view" destination="T0M-5b-ahP" id="Vly-Yl-703"/>
             </connections>

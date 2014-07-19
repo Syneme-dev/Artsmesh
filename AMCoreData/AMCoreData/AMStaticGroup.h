@@ -26,4 +26,8 @@
 @property (nonatomic, strong) NSString* created;
 @property (nonatomic, strong) NSString* modified;
 
+@property (nonatomic, strong) NSArray* users;
+
++(AMStaticGroup*)staticGroupFromDict:(NSDictionary*)dict;
+
 @end

@@ -36,7 +36,7 @@
 
 -(void)awakeFromNib
 {
-    if (self.homepageView) {
+    if (self.homepageView && self.staticGroup.homepage) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepageView.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor grayColor],
                                NSFontAttributeName:textViewFont};
@@ -45,7 +45,7 @@
         [self.homepageView setNeedsDisplay:YES];
     }
     
-    if (self.descriptionView) {
+    if (self.descriptionView && self.staticGroup.description) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.descriptionView.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor grayColor],
                                NSFontAttributeName:textViewFont};

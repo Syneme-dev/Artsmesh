@@ -7,9 +7,10 @@
 //
 
 #import "AMStaticGroupDataSource.h"
-#import "AMStaticGroupOutlineCellViewController.h"
 #import "AMStaticGroupOutlineCellView.h"
 #import "AMGroupOutlineRowView.h"
+#import "AMCoreData/AMCoreData.h"
+#import "AMGroupOutlineStaticCellViewController.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -30,34 +31,46 @@
 
 -(void)reloadGroups
 {
-//    AMStatusNetModule* module = [[AMStatusNetModule alloc] init];
-//    
-//    [module getGroupsOnStatusNet:@"http://artsmesh.io/api/statusnet/groups/list_all.json" completionBlock:^(NSData* response, NSError* error){
-//        if (error ==nil && response != nil) {
-//            NSArray* staticGroups  = [AMStatusNetGroupParser parseStatusNetGroups:response];
-//            NSMutableArray* staticGroupControllers = [[NSMutableArray alloc] init];
-//            
-//            for (AMStatusNetGroup* group in staticGroups) {
-//                AMStaticGroupOutlineCellViewController* staticGroupController = [[AMStaticGroupOutlineCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
-//                staticGroupController.staticGroup = group;
-//                
-//                [staticGroupControllers addObject:staticGroupController];
-//            }
-//            
-//            self.staticGroups = staticGroupControllers;
-//        }
-//    }];
+    NSArray* staticGroups =  [AMCoreData shareInstance].staticGroups;
+    if (staticGroups == nil) {
+        return;
+    }
+    
+    NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
+    
+    for(AMStaticGroup* sg in staticGroups){
+        AMGroupOutlineStaticCellViewController* groupController =
+        [[AMGroupOutlineStaticCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+        
+        groupController.staticGroup = sg;
+        groupController.staticUser = nil;
+        
+        if([sg users] != nil){
+            groupController.userControllers = [[NSMutableArray alloc] init];
+            for (AMStaticUser* su in [sg users]) {
+                AMGroupOutlineStaticCellViewController* userController =
+                [[AMGroupOutlineStaticCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+                
+                userController.staticGroup = sg;
+                userController.staticUser = su;
+                [groupController.userControllers addObject:userController];
+            }
+        }
+        
+        [groupControllers addObject:groupController];
+    }
+    
+    self.staticGroupControllers = groupControllers;
 }
 
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
     if (item == nil) {
-        return  [self.staticGroups count];
+        return  [self.staticGroupControllers count];
     }else{
-        return  0;
+        return [[item userControllers] count];
     }
-    
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
@@ -68,23 +81,24 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    if(index < [self.staticGroups count])
-    {
-        return self.staticGroups[index];
+    if (item == nil) {
+        return self.staticGroupControllers[index];
+    }else{
+        return [item userControllers][index];
     }
-    
+        
     return nil;
 }
 
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMStaticGroupOutlineCellViewController class]]) {
-        AMStaticGroupOutlineCellViewController* groupController = (AMStaticGroupOutlineCellViewController*)item;
-        [groupController updateUI];
-        [groupController setTrackArea];
+    if ([item isKindOfClass:[AMGroupOutlineStaticCellViewController class]]) {
+        AMGroupOutlineStaticCellViewController* staticController = (AMGroupOutlineStaticCellViewController*)item;
+        [staticController updateUI];
+        [staticController setTrackArea];
         
-        return groupController.view;
+        return staticController.view;
     }
 
     return nil;

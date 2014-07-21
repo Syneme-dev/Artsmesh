@@ -11,8 +11,7 @@
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
 #import "AMMesher.h"
-#import "AMHttpAsyncRequest.h"
-#import "AMHttpSyncRequest.h"
+#import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMCoreData/AMCoreData.h"
 
 

@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView ambiguous="YES" misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
+                <tabView ambiguous="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
                     <rect key="frame" x="0.0" y="20" width="300" height="256"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
                                         <rect key="frame" x="88" y="224" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
@@ -97,7 +97,7 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Domain" id="zb5-Mh-p8q"/>
                                         </connections>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
                                         <rect key="frame" x="0.0" y="166" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
@@ -114,7 +114,7 @@
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
                                         <rect key="frame" x="90" y="104" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kul-MC-1jE">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="Kul-MC-1jE">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -197,7 +197,7 @@
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUj-IO-sS7" userLabel="gotoSocial">
                                         <rect key="frame" x="90" y="104" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cq8-qB-Jw4">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="cq8-qB-Jw4">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

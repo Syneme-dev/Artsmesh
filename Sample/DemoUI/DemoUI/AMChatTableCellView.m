@@ -8,7 +8,7 @@
 
 #import "AMChatTableCellView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMStatusNet/AMStatusNetModule.h"
+#import "AMStatusNet/AMStatusNet.h"
 
 @implementation AMChatTableCellView
 
@@ -75,24 +75,15 @@
                     sendTime = tf.stringValue;
                 }
             }
-            NSString* status = [NSString stringWithFormat:@"%@ said: %@ at %@ in group", senderName, message, sendTime];
-            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-            NSString* statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
-            NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-            NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
             
-            AMStatusNetModule* statusNetMod = [[AMStatusNetModule alloc] init];
-            BOOL res = [statusNetMod postMessageToStatusNet:status
-                                                 urlAddress:statusNetURL
-                                               withUserName:username
-                                               withPassword:password];
+            NSString* status = [NSString stringWithFormat:@"%@ said: %@ at %@ in group", senderName, message, sendTime];
+            BOOL res = [[AMStatusNet shareInstance] postMessageToStatusNet:status];
             if (res)
             {
                 [clickBtn setEnabled:NO];;
             }
         }
     }
-
 }
 
 @end

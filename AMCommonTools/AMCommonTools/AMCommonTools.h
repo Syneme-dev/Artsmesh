@@ -12,4 +12,10 @@
 
 + (NSString*) creatUUID;
 
++ (BOOL)isValidIpv4:(NSString *)ip;
+
++ (BOOL)isValidIpv6:(NSString *)ip;
+
++(NSString*)getCurrentTimeString;
+
 @end

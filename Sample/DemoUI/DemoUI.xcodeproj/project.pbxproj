@@ -19,6 +19,7 @@
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
+		269C3349197D063000AF86AA /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269C3348197D063000AF86AA /* AMCommonTools.framework */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
@@ -225,6 +226,7 @@
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
+		269C3348197D063000AF86AA /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269C3349197D063000AF86AA /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */,
 				AF45429F19553C2200CCD862 /* AMTaskLauncher.framework in Frameworks */,
@@ -436,11 +439,9 @@
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
-				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
-				26E1E6A019023496000BF14C /* AMChatView.xib */,
 				D4ACE85D19175D09004A907D /* AMPingView.xib */,
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
@@ -451,16 +452,12 @@
 		262021F518EAE58400811E4E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
-				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
-				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
-				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
 				D4ACE85F19175DC8004A907D /* AMPingViewController.h */,
 				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
 				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
@@ -494,14 +491,14 @@
 		26716C22197A106800D69F0C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
+				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
 				CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */,
 				CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */,
 				CEC2FC3B196588FD00AFD309 /* AMGroupOutlineGroupCellController.h */,
 				CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */,
 				CEC2FC45196588FD00AFD309 /* AMGroupOutlineUserCellController.h */,
 				CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */,
-				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
-				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
 				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
 				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
 				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
@@ -563,6 +560,28 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		269C3340197CF49400AF86AA /* ChatPanel */ = {
+			isa = PBXGroup;
+			children = (
+				26E1E6A019023496000BF14C /* AMChatView.xib */,
+				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
+				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
+				269D3430191B1EC40010B540 /* AMChatTableCellView.h */,
+				269D3431191B1EC40010B540 /* AMChatTableCellView.m */,
+			);
+			name = ChatPanel;
+			sourceTree = "<group>";
+		};
+		269C3347197D00F000AF86AA /* PreferencePanel */ = {
+			isa = PBXGroup;
+			children = (
+				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
+				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
+				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
+			);
+			name = PreferencePanel;
+			sourceTree = "<group>";
+		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,8 +589,6 @@
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
 				26B4D071191A256200F55CD3 /* AMTextFieldView.m */,
-				269D3430191B1EC40010B540 /* AMChatTableCellView.h */,
-				269D3431191B1EC40010B540 /* AMChatTableCellView.m */,
 				AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */,
 				AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */,
 			);
@@ -602,6 +619,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				269C3348197D063000AF86AA /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
 				AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */,
@@ -633,11 +651,11 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				269C3347197D00F000AF86AA /* PreferencePanel */,
+				269C3340197CF49400AF86AA /* ChatPanel */,
 				CEC2FC37196588FD00AFD309 /* GroupPanel */,
 				D499651B196D1A2C00033761 /* ProfilePanel */,
 				AFE5FC5C196A40E00079B434 /* Classes */,
-				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
-				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				AFAEBD811961060200B7FB51 /* ViewsExtend */,
@@ -653,6 +671,8 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
+				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				AFAEBD801961038F00B7FB51 /* Resource */,
 				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
@@ -1197,7 +1217,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
@@ -1212,7 +1235,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;

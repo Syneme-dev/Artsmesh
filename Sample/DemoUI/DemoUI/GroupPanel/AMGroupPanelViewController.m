@@ -15,6 +15,7 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
+#import "AMStatusNet/AMStatusNet.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -64,6 +65,7 @@
     [self.staticGroupOutlineView setDoubleAction:@selector(doubleClickOutlineView:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshStaticGroups) name:AM_STATIC_GROUP_CHANGED object:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
@@ -215,10 +217,18 @@
     [self hideDetailView];
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
+
 - (IBAction)reloadStaticGroups:(NSButton *)sender
+{
+    [[AMStatusNet shareInstance] loadGroups];
+}
+
+-(void)refreshStaticGroups
 {
     [self.staticGroupDataSource reloadGroups];
     [self.staticGroupOutlineView reloadData];
+    [self.staticGroupOutlineView expandItem:nil expandChildren:YES];
 }
+
 
 @end

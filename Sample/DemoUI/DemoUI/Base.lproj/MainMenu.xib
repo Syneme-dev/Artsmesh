@@ -655,21 +655,21 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-xu-vmU">
-                        <rect key="frame" x="41" y="0.0" width="1159" height="708"/>
+                        <rect key="frame" x="50" y="0.0" width="1150" height="708"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="odj-kE-TsY">
-                            <rect key="frame" x="0.0" y="0.0" width="1159" height="708"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1150" height="708"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7i-di-ip4">
-                                    <rect key="frame" x="0.0" y="0.0" width="1576" height="708"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1567" height="708"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                         </clipView>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="V3V-By-qRD">
-                            <rect key="frame" x="0.0" y="692" width="1159" height="16"/>
+                            <rect key="frame" x="0.0" y="692" width="1150" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="d2O-Bj-e1n">
@@ -910,11 +910,11 @@
                         </subviews>
                     </customView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XK4-TL-O3D" userLabel="tearOffWindow" customClass="BlueBackgroundView">
-                        <rect key="frame" x="0.0" y="156" width="40" height="40"/>
+                        <rect key="frame" x="31" y="0.0" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <button identifier="MAINOUTPUT" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNK-vB-bPT" userLabel="tearoff">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="-40" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_askKen" imagePosition="overlaps" alignment="center" alternateImage="SideBar_askKen_h" imageScaling="proportionallyDown" inset="2" id="jbk-Ic-OQn">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -1042,7 +1042,7 @@
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
                     <constraint firstItem="KD8-g0-Ew6" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="UV4-FM-aGm"/>
-                    <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="41" id="Ugv-En-9Uv"/>
+                    <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="50" id="Ugv-En-9Uv"/>
                     <constraint firstItem="PQH-zt-t50" firstAttribute="leading" secondItem="m4w-q8-NcC" secondAttribute="trailing" constant="8" id="VXo-FK-AAy"/>
                     <constraint firstItem="iv2-ru-op1" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="WmQ-0Q-tGp"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="XKt-Z9-ayg"/>

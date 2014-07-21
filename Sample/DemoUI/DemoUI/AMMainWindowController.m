@@ -239,6 +239,8 @@
             [self setSideBarItemStatus:sideItemId withStatus:YES ];
         }
     }
+    
+    [self windowDidResize:nil];  // temporary resolution
 }
 
 

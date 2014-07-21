@@ -10,7 +10,6 @@
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
-#import "AMStatusNet/AMStatusNetModule.h"
 #import <UIFramework/AMCheckBoxView.h>
 
 
@@ -70,25 +69,25 @@
 }
 
 - (IBAction)statusNetTest:(id)sender {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
-    NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
-    
-    AMStatusNetModule* statusNetMod = [[AMStatusNetModule alloc] init];
-    BOOL res = [statusNetMod postMessageToStatusNet:@"This is a test message send from Artsmesh through API"
-                                   urlAddress:statusNetURL
-                                 withUserName:username
-                                 withPassword:password];
-    
-    if (res)
-    {
-        self.statusNetPostTestResult.stringValue = @"Post Succeeded!";
-    }
-    else
-    {
-        self.statusNetPostTestResult.stringValue = @"Post Failed!";
-    }
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString* statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
+//    NSString* username = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+//    NSString* password = [defaults stringForKey:Preference_Key_StatusNet_Password];
+//    
+//    AMStatusNetModule* statusNetMod = [[AMStatusNetModule alloc] init];
+//    BOOL res = [statusNetMod postMessageToStatusNet:@"This is a test message send from Artsmesh through API"
+//                                   urlAddress:statusNetURL
+//                                 withUserName:username
+//                                 withPassword:password];
+//    
+//    if (res)
+//    {
+//        self.statusNetPostTestResult.stringValue = @"Post Succeeded!";
+//    }
+//    else
+//    {
+//        self.statusNetPostTestResult.stringValue = @"Post Failed!";
+ //   }
     
 }
 
@@ -143,26 +142,26 @@
     
     [self.myPrivateIpPopup removeAllItems];
     NSArray* addresses = [NSHost currentHost].addresses;
-    for (int i = 0; i < [addresses count]; i++)
-    {
-        NSString* ipStr = [addresses objectAtIndex:i];
-        if ([AMNetworkUtils isValidIpv4:ipStr])
-        {
-            if ([ipStr hasPrefix:@"127"])
-            {
-                continue;
-            }
-            
-            [self.myPrivateIpPopup addItemWithTitle:ipStr];
-            if ([ipStr isEqualToString:oldIp])
-            {
-                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
-                ipSelected = YES;
-            }
-            
-            popupIndex++;
-        }
-    }
+//    for (int i = 0; i < [addresses count]; i++)
+//    {
+//        NSString* ipStr = [addresses objectAtIndex:i];
+//        if ([AMNetworkUtils isValidIpv4:ipStr])
+//        {
+//            if ([ipStr hasPrefix:@"127"])
+//            {
+//                continue;
+//            }
+//            
+//            [self.myPrivateIpPopup addItemWithTitle:ipStr];
+//            if ([ipStr isEqualToString:oldIp])
+//            {
+//                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
+//                ipSelected = YES;
+//            }
+//            
+//            popupIndex++;
+//        }
+//    }
     
     if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
     {
@@ -177,45 +176,45 @@
 
 -(void) loadIpv6
 {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* oldIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
-    BOOL ipSelected = NO;
-    int popupIndex = 0;
-    
-    [self.myPrivateIpPopup removeAllItems];
-    NSArray* addresses = [NSHost currentHost].addresses;
-    for (int i = 0; i < [addresses count]; i++)
-    {
-        NSString* ipStr = [addresses objectAtIndex:i];
-        if([AMNetworkUtils isValidIpv6:ipStr])
-        {
-            if ([ipStr hasPrefix:@"::"])
-            {
-                continue;
-            }
-            
-            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
-            ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
-            
-            [self.myPrivateIpPopup addItemWithTitle:ipStr];
-            
-            if ([ipStr isEqualToString:oldIp])
-            {
-                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
-                ipSelected = YES;
-            }
-            popupIndex ++;
-        }
-    }
-    
-    if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
-    {
-        [self.myPrivateIpPopup selectItemAtIndex:0];
-        NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
-        [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
-    }
-    
-    [self resetPopupItems];
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString* oldIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
+//    BOOL ipSelected = NO;
+//    int popupIndex = 0;
+//    
+//    [self.myPrivateIpPopup removeAllItems];
+//    NSArray* addresses = [NSHost currentHost].addresses;
+//    for (int i = 0; i < [addresses count]; i++)
+//    {
+//        NSString* ipStr = [addresses objectAtIndex:i];
+//        if([AMNetworkUtils isValidIpv6:ipStr])
+//        {
+//            if ([ipStr hasPrefix:@"::"])
+//            {
+//                continue;
+//            }
+//            
+//            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+//            ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
+//            
+//            [self.myPrivateIpPopup addItemWithTitle:ipStr];
+//            
+//            if ([ipStr isEqualToString:oldIp])
+//            {
+//                [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
+//                ipSelected = YES;
+//            }
+//            popupIndex ++;
+//        }
+//    }
+//    
+//    if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
+//    {
+//        [self.myPrivateIpPopup selectItemAtIndex:0];
+//        NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
+//        [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
+//    }
+//    
+//    [self resetPopupItems];
 }
 
 -(void)resetPopupItems
@@ -246,20 +245,20 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     BOOL useIpv6 = [defaults boolForKey:Preference_Key_General_UseIpv6];
     
-    NSString* machineName = [AMNetworkUtils getHostName];
-    self.myMachineNameField.stringValue = machineName;
-    [defaults setObject:machineName forKey:Preference_Key_General_MachineName];
-    
-    if (useIpv6)
-    {
-        self.Ipv6checkBox.checked = YES;
-        [self loadIpv6];
-    }
-    else
-    {
-        self.Ipv6checkBox.checked = NO;
-        [self loadIpv4];
-    }
+//    NSString* machineName = [AMNetworkUtils getHostName];
+//    self.myMachineNameField.stringValue = machineName;
+//    [defaults setObject:machineName forKey:Preference_Key_General_MachineName];
+//    
+//    if (useIpv6)
+//    {
+//        self.Ipv6checkBox.checked = YES;
+//        [self loadIpv6];
+//    }
+//    else
+//    {
+//        self.Ipv6checkBox.checked = NO;
+//        [self loadIpv4];
+//    }
 }
 
 -(void)onChecked:(AMCheckBoxView *)sender

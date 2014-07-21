@@ -15,6 +15,7 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
+#import "AMStatusNet/AMStatusNet.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -217,8 +218,7 @@
 }
 - (IBAction)reloadStaticGroups:(NSButton *)sender
 {
-    [self.staticGroupDataSource reloadGroups];
-    [self.staticGroupOutlineView reloadData];
+    [[AMStatusNet shareInstance] loadGroups];
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AMCoreData/AMCoreData.h"
-#import "AMStatusNet/AMStatusNetGroupParser.h"
 
 typedef enum {
     DetailPanelHide,

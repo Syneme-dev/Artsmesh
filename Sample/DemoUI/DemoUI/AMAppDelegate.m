@@ -19,6 +19,7 @@
 #import "AMETCDPreferenceViewController.h"
 #import "AMUserViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
+#import "AMStatusNet/AMStatusNet.h"
 
 
 
@@ -31,7 +32,9 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
+    
     [[AMPreferenceManager shareInstance] initPreference];
+    [[AMStatusNet shareInstance] loadGroups];
     
     [self.mainWindowController showDefaultWindow];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];

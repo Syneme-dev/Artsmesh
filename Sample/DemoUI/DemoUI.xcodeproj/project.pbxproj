@@ -19,6 +19,7 @@
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
+		269C3349197D063000AF86AA /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269C3348197D063000AF86AA /* AMCommonTools.framework */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
@@ -225,6 +226,7 @@
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
+		269C3348197D063000AF86AA /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269C3349197D063000AF86AA /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */,
 				AF45429F19553C2200CCD862 /* AMTaskLauncher.framework in Frameworks */,
@@ -616,6 +619,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				269C3348197D063000AF86AA /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
 				AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */,
@@ -1213,7 +1217,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
@@ -1228,7 +1235,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;

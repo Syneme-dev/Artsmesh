@@ -8,11 +8,8 @@
 
 #import "AMGroupOutlineUserCellController.h"
 #import "AMGroupOutlineUserCellView.h"
-#import "AMMesher/AMAppObjects.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupTextFieldFormatter.h"
-#import "AMMesher/AMMesher.h"
-#import "AMPreferenceManager/AMPreferenceManager.h"
 
 #define MAX_USER_NAME_LENGTH 16
 

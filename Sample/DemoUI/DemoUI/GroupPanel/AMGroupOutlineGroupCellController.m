@@ -7,13 +7,11 @@
 //
 
 #import "AMGroupOutlineGroupCellController.h"
-#import "AMMesher/AMAppObjects.h"
 #import "AMGroupOutlineGroupCellView.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
-#import "AMMesher/AMMesher.h"
 #import "AMGroupTextFieldFormatter.h"
-#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMMesher/AMMesher.h"
 
 #define MAX_GROUP_NAME_LENGTH 16
 #define MAX_GROUP_DESCRIPTION 64
@@ -94,14 +92,12 @@
 
 - (IBAction)mergeBtnClick:(id)sender
 {
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher mergeGroup:self.group.groupId];
+    [[AMMesher sharedAMMesher] mergeGroup:self.group.groupId];
 }
 
 - (IBAction)leaveBtnClick:(id)sender
 {
-    AMMesher* mesher = [AMMesher sharedAMMesher];
-    [mesher unmergeGroup];
+    [[AMMesher sharedAMMesher] mergeGroup:@""];
 }
 
 #pragma mark-
@@ -121,9 +117,9 @@
     AMGroupOutlineGroupCellView* cellView = (AMGroupOutlineGroupCellView*)self.view;
     [cellView.infoBtn setHidden:NO];
     
-    NSString* mergedGroupId = [AMAppObjects appObjects][AMMergedGroupIdKey];
+    NSString* mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
     if ([myGroup.groupId isEqualToString:self.group.groupId ]){
         [cellView.mergeBtn setHidden:YES];
         [cellView.leaveBtn setHidden:YES];

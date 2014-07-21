@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -34,7 +34,7 @@
                         <constraint firstAttribute="width" constant="20" id="Xfc-QO-hW3"/>
                         <constraint firstAttribute="height" constant="20" id="gaz-5T-stK"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="Z" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="user_zombie" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="8sX-3y-ias">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -46,7 +46,7 @@
                         <constraint firstAttribute="height" constant="20" id="0Df-Lg-gOt"/>
                         <constraint firstAttribute="width" constant="20" id="UJy-ka-ocY"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="usergroup_info" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="MMc-cX-JGV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -101,5 +101,7 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="user_zombie" width="10" height="10"/>
+        <image name="usergroup_info" width="10" height="10"/>
     </resources>
 </document>

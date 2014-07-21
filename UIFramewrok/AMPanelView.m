@@ -69,6 +69,9 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     NSPoint p = [theEvent locationInWindow];
     
     if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
@@ -91,6 +94,9 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     NSPoint p = [theEvent locationInWindow];
 
     if (self.resizing) {
@@ -105,21 +111,7 @@
             p = rect.origin;
             p.x += _constantVector.x;
             p.y += _constantVector.y;
-            
-            /*
-            NSRect windowFrame = NSZeroRect;
-            windowFrame.origin.y = p.y;
-            windowFrame.size.width = p.x
-            windowFrame.size.height = (self.window.frame.size.height - p.y);
-             */
-            
-            /*
-            NSRect windowFrame = self.window.frame;
-            windowFrame.size.width = (p.x - windowFrame.origin.x);
-            windowFrame.size.height += (windowFrame.origin.y - p.y);
-            windowFrame.origin.y = p.y;
-             */
-            
+
             NSPoint topLeft = NSMakePoint(self.window.frame.origin.x,
                     self.window.frame.origin.y + self.window.frame.size.height);
             CGFloat newWidth = MAX(self.minSizeConstraint.width, p.x - self.window.frame.origin.x);
@@ -127,16 +119,6 @@
             NSRect windowFrame = NSMakeRect(topLeft.x, topLeft.y - newHeight,
                                             newWidth, newHeight);
             
-//            [self.superview setFrame:NSMakeRect(0, 0, windowFrame.size.width,
-//                                                windowFrame.size.height)];
-//            windowFrame = [self.window convertRectToScreen:windowFrame];
-            
-            [self.window.contentView setFrame:NSMakeRect(0, 0, windowFrame.size.width,
-                                                         windowFrame.size.height)];
-            [self setFrame:NSMakeRect(BORDER_THICKNESS, BORDER_THICKNESS,
-                                      windowFrame.size.width - 2 * BORDER_THICKNESS,
-                                      windowFrame.size.height - 2 * BORDER_THICKNESS)];
-            [self setNeedsDisplay:YES];
             [self.window setFrame:windowFrame display:YES];
         }
     } else if (self.tearedOff) {
@@ -152,6 +134,9 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    if (self.inFullScreenMode)
+        return;
+    
     if (self.resizing) {
         self.resizing = NO;
     } else if (self.tearedOff) {

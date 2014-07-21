@@ -1,26 +1,29 @@
 //
-//  AMStaticGroupOutlineCellViewController.m
+//  AMGroupOutlineStaticCellViewController.m
 //  DemoUI
 //
-//  Created by 王 为 on 7/10/14.
+//  Created by Wei Wang on 7/19/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMStaticGroupOutlineCellViewController.h"
-#import "AMGroupPanelModel.h"
+#import "AMGroupOutlineStaticCellViewController.h"
 #import "AMStaticGroupOutlineCellView.h"
+#import "AMGroupPanelModel.h"
 #import <AMNotificationManager/AMNotificationManager.h>
 
-@interface AMStaticGroupOutlineCellViewController ()
+@interface AMGroupOutlineStaticCellViewController ()
 
 @end
 
-@implementation AMStaticGroupOutlineCellViewController
+@implementation AMGroupOutlineStaticCellViewController
 
--(void)awakeFromNib
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    AMStaticGroupOutlineCellView* cellView = (AMStaticGroupOutlineCellView*)self.view;
-    cellView.delegate = self;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
 }
 
 -(void)setTrackArea
@@ -40,7 +43,13 @@
 {
     AMStaticGroupOutlineCellView* cellView = (AMStaticGroupOutlineCellView*)self.view;
     [cellView.imageView setHidden:YES];
-    cellView.textField.stringValue = [self.staticGroup nickname];
+    
+    if (self.staticUser != nil) {
+        cellView.textField.stringValue = [self.staticUser name];
+    }else if(self.staticGroup != nil){
+        cellView.textField.stringValue = [self.staticGroup nickname];
+    }
+
     [cellView.socialBtn setHidden:YES];
     [cellView.infoBtn setHidden:YES];
     
@@ -95,8 +104,6 @@
     [cellView.socialBtn setHidden:YES];
     [cellView.infoBtn setHidden:YES];
 }
-
-
 
 
 @end

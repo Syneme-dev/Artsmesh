@@ -14,14 +14,14 @@
 		26136C57196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */; };
 		26136C5A196FB78D00D033BF /* AMStaticGroupDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26136C59196FB78D00D033BF /* AMStaticGroupDetailsView.m */; };
 		26136C5D196FBAD300D033BF /* AMStaticGroupOutlineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26136C5C196FBAD300D033BF /* AMStaticGroupOutlineCellView.m */; };
+		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
+		26716C31197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
-		26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */; };
-		26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
@@ -142,7 +142,6 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D4560092196A7BF900023B68 /* AMUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4560091196A7BF900023B68 /* AMUserDetailsView.m */; };
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
-		D46F5286196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */; };
 		D46F5287196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */; };
 		D499651A196D16FB00033761 /* AMGroupDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D456008E196A72E600023B68 /* AMGroupDetailsView.m */; };
 		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
@@ -220,6 +219,9 @@
 		26136C59196FB78D00D033BF /* AMStaticGroupDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDetailsView.m; sourceTree = "<group>"; };
 		26136C5B196FBAD300D033BF /* AMStaticGroupOutlineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupOutlineCellView.h; sourceTree = "<group>"; };
 		26136C5C196FBAD300D033BF /* AMStaticGroupOutlineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupOutlineCellView.m; sourceTree = "<group>"; };
+		2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
+		26716C2F197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineStaticCellViewController.h; sourceTree = "<group>"; };
+		26716C30197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineStaticCellViewController.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
@@ -229,10 +231,6 @@
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		26B4D071191A256200F55CD3 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
-		26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableCellView.h; sourceTree = "<group>"; };
-		26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableCellView.m; sourceTree = "<group>"; };
-		26D6580E19594D0200CD3C22 /* AMUserGroupTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserGroupTableRowView.h; sourceTree = "<group>"; };
-		26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserGroupTableRowView.m; sourceTree = "<group>"; };
 		26E1E6A019023496000BF14C /* AMChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMChatView.xib; sourceTree = "<group>"; };
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
@@ -389,8 +387,6 @@
 		D4560091196A7BF900023B68 /* AMUserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsView.m; sourceTree = "<group>"; };
 		D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDataSource.h; sourceTree = "<group>"; };
 		D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDataSource.m; sourceTree = "<group>"; };
-		D46F5283196E815400C48E5B /* AMStaticGroupOutlineCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupOutlineCellViewController.h; sourceTree = "<group>"; };
-		D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupOutlineCellViewController.m; sourceTree = "<group>"; };
 		D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticGroupOutlineCellViewController.xib; sourceTree = "<group>"; };
 		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
 		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
@@ -406,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */,
 				AF45429F19553C2200CCD862 /* AMTaskLauncher.framework in Frameworks */,
 				AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */,
@@ -494,13 +491,81 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		26716C22197A106800D69F0C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */,
+				CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */,
+				CEC2FC3B196588FD00AFD309 /* AMGroupOutlineGroupCellController.h */,
+				CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */,
+				CEC2FC45196588FD00AFD309 /* AMGroupOutlineUserCellController.h */,
+				CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */,
+				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
+				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
+				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
+				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
+				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
+				CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */,
+				26136C53196FB5B300D033BF /* AMStaticGroupDetailsViewController.h */,
+				26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */,
+				26716C2F197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.h */,
+				26716C30197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		26716C23197A107100D69F0C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26015405196E340500045A55 /* AMLiveGroupDataSource.h */,
+				26015406196E340500045A55 /* AMLiveGroupDataSource.m */,
+				D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */,
+				D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */,
+				CEC2FC4A196588FD00AFD309 /* AMGroupPanelModel.h */,
+				CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		26716C24197A107700D69F0C /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FC3D196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib */,
+				CEC2FC47196588FD00AFD309 /* AMGroupOutlineUserCellController.xib */,
+				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
+				CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */,
+				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
+				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
+				D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */,
+				26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
+		26716C25197A10B900D69F0C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FC3E196588FD00AFD309 /* AMGroupOutlineGroupCellView.h */,
+				CEC2FC3F196588FD00AFD309 /* AMGroupOutlineGroupCellView.m */,
+				CEC2FC48196588FD00AFD309 /* AMGroupOutlineUserCellView.h */,
+				CEC2FC49196588FD00AFD309 /* AMGroupOutlineUserCellView.m */,
+				26136C5B196FBAD300D033BF /* AMStaticGroupOutlineCellView.h */,
+				26136C5C196FBAD300D033BF /* AMStaticGroupOutlineCellView.m */,
+				26136C58196FB78D00D033BF /* AMStaticGroupDetailsView.h */,
+				26136C59196FB78D00D033BF /* AMStaticGroupDetailsView.m */,
+				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
+				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
+				D4560090196A7BF900023B68 /* AMUserDetailsView.h */,
+				D4560091196A7BF900023B68 /* AMUserDetailsView.m */,
+				D456008D196A72E600023B68 /* AMGroupDetailsView.h */,
+				D456008E196A72E600023B68 /* AMGroupDetailsView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				26B93CBC1952B4510012F1FA /* AMUserGroupTableCellView.h */,
-				26B93CBD1952B4510012F1FA /* AMUserGroupTableCellView.m */,
-				26D6580E19594D0200CD3C22 /* AMUserGroupTableRowView.h */,
-				26D6580F19594D0200CD3C22 /* AMUserGroupTableRowView.m */,
 				26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */,
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
@@ -537,6 +602,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
 				AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */,
 				AF9205411910B42D0051BE63 /* UIFramework.framework */,
@@ -726,52 +792,12 @@
 		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
 			isa = PBXGroup;
 			children = (
-				CEC2FC3E196588FD00AFD309 /* AMGroupOutlineGroupCellView.h */,
-				CEC2FC3F196588FD00AFD309 /* AMGroupOutlineGroupCellView.m */,
-				CEC2FC3B196588FD00AFD309 /* AMGroupOutlineGroupCellController.h */,
-				CEC2FC3C196588FD00AFD309 /* AMGroupOutlineGroupCellController.m */,
-				CEC2FC3D196588FD00AFD309 /* AMGroupOutlineGroupCellController.xib */,
-				CEC2FC48196588FD00AFD309 /* AMGroupOutlineUserCellView.h */,
-				CEC2FC49196588FD00AFD309 /* AMGroupOutlineUserCellView.m */,
-				CEC2FC45196588FD00AFD309 /* AMGroupOutlineUserCellController.h */,
-				CEC2FC46196588FD00AFD309 /* AMGroupOutlineUserCellController.m */,
-				CEC2FC47196588FD00AFD309 /* AMGroupOutlineUserCellController.xib */,
-				26136C5B196FBAD300D033BF /* AMStaticGroupOutlineCellView.h */,
-				26136C5C196FBAD300D033BF /* AMStaticGroupOutlineCellView.m */,
-				D46F5283196E815400C48E5B /* AMStaticGroupOutlineCellViewController.h */,
-				D46F5284196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m */,
-				D46F5285196E815400C48E5B /* AMStaticGroupOutlineCellViewController.xib */,
-				CEC2FC40196588FD00AFD309 /* AMGroupOutlineLabelCellController.h */,
-				CEC2FC41196588FD00AFD309 /* AMGroupOutlineLabelCellController.m */,
-				CEC2FC42196588FD00AFD309 /* AMGroupOutlineLabelCellController.xib */,
-				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
-				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
-				D456008D196A72E600023B68 /* AMGroupDetailsView.h */,
-				D456008E196A72E600023B68 /* AMGroupDetailsView.m */,
-				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
-				CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */,
-				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
-				D4560090196A7BF900023B68 /* AMUserDetailsView.h */,
-				D4560091196A7BF900023B68 /* AMUserDetailsView.m */,
-				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
-				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
-				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
-				26136C58196FB78D00D033BF /* AMStaticGroupDetailsView.h */,
-				26136C59196FB78D00D033BF /* AMStaticGroupDetailsView.m */,
-				26136C53196FB5B300D033BF /* AMStaticGroupDetailsViewController.h */,
-				26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */,
-				26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */,
-				CEC2FC4A196588FD00AFD309 /* AMGroupPanelModel.h */,
-				CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */,
-				CEC2FC53196588FD00AFD309 /* AMUserGroupView.xib */,
-				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
-				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
 				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
 				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
-				26015405196E340500045A55 /* AMLiveGroupDataSource.h */,
-				26015406196E340500045A55 /* AMLiveGroupDataSource.m */,
-				D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */,
-				D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */,
+				26716C25197A10B900D69F0C /* Views */,
+				26716C24197A107700D69F0C /* Nibs */,
+				26716C23197A107100D69F0C /* Models */,
+				26716C22197A106800D69F0C /* Controllers */,
 			);
 			path = GroupPanel;
 			sourceTree = "<group>";
@@ -1001,14 +1027,12 @@
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				CEC2FC59196588FD00AFD309 /* AMGroupOutlineLabelCellController.m in Sources */,
-				26B93CBE1952B4510012F1FA /* AMUserGroupTableCellView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				CEC2FC5C196588FD00AFD309 /* AMGroupOutlineUserCellController.m in Sources */,
 				CEC2FC5E196588FD00AFD309 /* AMGroupOutlineUserCellView.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
-				D46F5286196E815400C48E5B /* AMStaticGroupOutlineCellViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				D4560092196A7BF900023B68 /* AMUserDetailsView.m in Sources */,
 				AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */,
@@ -1025,13 +1049,13 @@
 				CEC2FC5F196588FD00AFD309 /* AMGroupPanelModel.m in Sources */,
 				26136C5D196FBAD300D033BF /* AMStaticGroupOutlineCellView.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
+				26716C31197A21DB00D69F0C /* AMGroupOutlineStaticCellViewController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				CEC2FC62196588FD00AFD309 /* AMUserDetailsViewController.m in Sources */,
 				AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */,
 				CEC2FC56196588FD00AFD309 /* AMGroupOutlineGroupCellController.m in Sources */,
-				26D6581019594D0200CD3C22 /* AMUserGroupTableRowView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
 				D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */,
 				26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */,
@@ -1173,12 +1197,7 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/robbin/Developer/Artsmesh/AMTaskLauncher/build/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
@@ -1193,12 +1212,7 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/robbin/Developer/Artsmesh/AMTaskLauncher/build/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;

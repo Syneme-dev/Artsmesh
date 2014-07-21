@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMMesher/AMAppObjects.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMUserDetailsViewController : NSViewController
 
-@property AMUser* user;
+@property AMLiveUser* user;
 
 -(void)updateUI;
 

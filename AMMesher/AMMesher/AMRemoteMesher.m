@@ -10,12 +10,10 @@
 #import "AMHeartBeat.h"
 #import "AMLeaderElecter.h"
 #import "AMTaskLauncher/AMShellTask.h"
-#import "AMAppObjects.h"
 #import "AMMesher.h"
-#import "AMMesherStateMachine.h"
-#import "AMSystemConfig.h"
 #import "AMHttpAsyncRequest.h"
 #import "AMHttpSyncRequest.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
 @end
@@ -34,10 +32,8 @@
 -(id)init
 {
     if (self = [super init]) {
-        AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-        NSAssert(machine, @"mesher state machine should not be nil!");
         
-        [machine addObserver:self forKeyPath:@"mesherState"
+        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
         
@@ -56,11 +52,9 @@
                          change:(NSDictionary *)change
                         context:(void *)context
 {
-    if ([object isKindOfClass:[AMMesherStateMachine class]]){
+    if ([object isKindOfClass:[AMMesher class]]){
         
         if ([keyPath isEqualToString:@"mesherState"]){
-            
-            //AMMesherState oldState = [[change objectForKey:@"old"] intValue];
             AMMesherState newState = [[change objectForKey:@"new"] intValue];
             
             switch (newState) {
@@ -88,7 +82,7 @@
 
 -(void)registerGroup
 {
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
@@ -126,8 +120,9 @@
 
 -(void)registerSelf
 {
-    AMUser* mySelf = [AMAppObjects appObjects][AMMyselfKey];
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.isOnline = YES;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     NSMutableDictionary* dict = [mySelf toDict];
     dict[@"groupId"] = myGroup.groupId;
@@ -153,21 +148,15 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                mySelf.isOnline = YES;
                 [self startHeartbeat];
-                AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-                [machine setMesherState:kMesherMeshed];
-                
-                NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
-                
+                [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
+                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
             });
             
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 mySelf.isOnline = NO;
-                NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
             });
         }
     };
@@ -177,14 +166,11 @@
 
 -(void)updateMyself
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if([machine mesherState] != kMesherMeshed){
+    if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSDictionary* dict = [mySelf toDict];
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -207,6 +193,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info on remote response wrong!");
+            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
         }
     };
 
@@ -215,14 +202,11 @@
 
 -(void)updateGroupInfo
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-    
-    if([machine mesherState] != kMesherMeshed){
+    if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
     
-    AMGroup* myGroup = [[AMAppObjects appObjects] objectForKey:AMLocalGroupKey];
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -245,6 +229,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info on remote response wrong!%@", responseStr);
+            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         }
     };
     
@@ -264,15 +249,13 @@
         [self unregisterSelf];
     }
     
-    [[AMAppObjects appObjects]removeObjectForKey:AMRemoteGroupsKey];
-    
-    NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:userNotification];
+    [AMCoreData shareInstance].remoteLiveGroups = nil;
+    [[AMCoreData shareInstance]broadcastChanges: AM_LIVE_GROUP_CHANDED];
 }
 
 -(void)unregisterSelf{
-    AMUser* mySelf =[AMAppObjects appObjects][AMMyselfKey];
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     AMHttpSyncRequest* req = [[AMHttpSyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
@@ -282,14 +265,14 @@
     req.httpMethod = @"POST";
     [req sendRequest];
     
-    NSNotification* notification = [NSNotification notificationWithName:AM_MESHER_ONLINE_CHANGED object:self userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    mySelf.isOnline = NO;
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
 }
 
 
 -(void)mergeGroup:(NSString*)toGroupId
 {
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:myGroup.groupId forKey:@"groupId"];
@@ -314,6 +297,9 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
+            [AMCoreData shareInstance].mergedGroupId = toGroupId;
+            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+            
             NSAssert(NO, @"merge group info on remote response wrong!");
         }
     };
@@ -332,14 +318,14 @@
         [_heartbeatThread cancel];
     }
     
-    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey ];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
     
-    NSString* remoteServerAddr = config.globalServerAddr;
-    NSString* remoteServerPort = config.globalServerPort;
-    BOOL useIpv6 = config.useIpv6;
-    int HBTimeInterval = [config.heartbeatInterval intValue];
-    int HBReceiveTimeout = [config.heartbeatRecvTimeout intValue];
+    NSString* remoteServerAddr = config.artsmeshAddr;
+    NSString* remoteServerPort = config.artsmeshPort;
+    BOOL useIpv6 = [config.useIpv6 boolValue];
+    int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
+    int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
     _heartbeatFailureCount = 0;
     
@@ -385,7 +371,7 @@
         NSDictionary* data = [result valueForKey:@"Data"];
         NSArray* groups = [data valueForKey:@"SubGroups"];
         
-        NSMutableDictionary* groupsDict = [[NSMutableDictionary alloc] init];
+        NSMutableArray* groupArray = [[NSMutableArray alloc] init];
         for (int i =0; i < groups.count; i++){
             if (![groups[i]isKindOfClass:[NSDictionary class]]) {
                 continue;
@@ -397,25 +383,20 @@
                 continue;
             }
             
-            AMGroup* newGroup = [AMGroup AMGroupFromDict:groupData];
+            AMLiveGroup* newGroup = [AMLiveGroup AMGroupFromDict:groupData];
             
             BOOL isMySelfIn = NO;
             newGroup.users = [self getAllUserFromGroup:groups[i] isMySelfIn:&isMySelfIn];
             if (isMySelfIn == YES) {
-                [AMAppObjects appObjects][AMMergedGroupIdKey] = newGroup.groupId;
+                [AMCoreData shareInstance].mergedGroupId = newGroup.groupId;
             }
             
-            [groupsDict setObject:newGroup forKey:newGroup.groupId];
+            [groupArray addObject: newGroup];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[AMAppObjects appObjects] setObject:groupsDict forKey:AMRemoteGroupsKey];
-            
-            NSNotification* groupNotification = [NSNotification notificationWithName:AM_LOCALUSERS_CHANGED object:self userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:groupNotification];
-            
-            NSNotification* userNotification = [NSNotification notificationWithName:AM_REMOTEGROUPS_CHANGED object:self userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:userNotification];
+            [AMCoreData shareInstance].remoteLiveGroups = groupArray;
+            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         });
     };
     
@@ -424,7 +405,7 @@
 
 -(NSArray*)getAllUserFromGroup:(NSDictionary*)group isMySelfIn:(BOOL*)mySelfIn{
     
-    AMUser* mySelf = [[AMAppObjects appObjects] objectForKey:AMMyselfKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSAssert(mySelf, @"myself can not be nil");
     
     NSMutableArray* allusers = [[NSMutableArray alloc] init];
@@ -435,7 +416,7 @@
     if ([myUsers isKindOfClass:[NSArray class]]) {
         
         for (int i = 0; i < [myUsers count]; i++) {
-            AMUser* newUser = [AMUser AMUserFromDict:myUsers[i]];
+            AMLiveUser* newUser = [AMLiveUser AMUserFromDict:myUsers[i]];
             if ([newUser.userid isEqualToString:mySelf.userid]) {
                 *mySelfIn = YES;
             }
@@ -457,10 +438,10 @@
 
 - (NSString *)httpBaseURL
 {
-    AMSystemConfig* config = [[AMAppObjects appObjects] objectForKey:AMSystemConfigKey  ];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
-    NSString* localServerAddr = config.globalServerAddr;
-    NSString* localServerPort = config.globalServerPort;
+    NSString* localServerAddr = config.artsmeshAddr;
+    NSString* localServerPort = config.artsmeshPort;
     
     return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
 }
@@ -471,8 +452,8 @@
 
 - (NSData *)heartBeatData
 {
-    AMUser* mySelf = [AMAppObjects  appObjects][AMMyselfKey];
-    AMGroup* myGroup = [AMAppObjects appObjects][AMLocalGroupKey];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     NSMutableDictionary* remoteHBReq = [[NSMutableDictionary alloc] init];
     [remoteHBReq setObject:mySelf.userid forKey:@"UserId"];
@@ -483,9 +464,6 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didReceiveData:(NSData *)data
 {
-    AMMesherStateMachine* machine = [[AMAppObjects appObjects] objectForKey:AMMesherStateMachineKey];
-    NSAssert(machine, @"mesher state machine can not be nil!");
-
     _heartbeatFailureCount = 0;
     NSError *error = nil;
     id objects = [NSJSONSerialization JSONObjectWithData:data

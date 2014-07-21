@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2615E9711978C15600A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E9701978C15600A7CBF0 /* AMCoreData.framework */; };
 		2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
-		267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */; };
-		267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */; };
 		2692CD5618D7C2A2006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		2692CDDF18D7CB88006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CD8C18D7C325006501C4 /* InfoPlist.strings */; };
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
@@ -17,8 +16,6 @@
 		26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4372194E89C500117629 /* AMLocalMesher.m */; };
 		26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4375194E9B3400117629 /* AMRemoteMesher.h */; };
 		26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4376194E9B3400117629 /* AMRemoteMesher.m */; };
-		26B93CBA1951686E0012F1FA /* AMMesherStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 26B93CB81951686E0012F1FA /* AMMesherStateMachine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26B93CBB1951686E0012F1FA /* AMMesherStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B93CB91951686E0012F1FA /* AMMesherStateMachine.m */; };
 		26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		26BC15BD19321D280020AD2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15BB19321D280020AD2B /* InfoPlist.strings */; };
 		26BC15BF19321D280020AD2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15BE19321D280020AD2B /* main.m */; };
@@ -35,8 +32,6 @@
 		26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2BF4E18FCB61000DD04A6 /* AMMesher.m */; };
 		CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */ = {isa = PBXBuildFile; fileRef = CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */; };
 		CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */; };
-		CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF8D325194D5D2400159B71 /* AMAppObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF8D326194D5D2400159B71 /* AMAppObjects.m */; };
 		D41D9778196148ED007CAD46 /* AMHttpSyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D41D9776196148ED007CAD46 /* AMHttpSyncRequest.h */; };
 		D41D9779196148ED007CAD46 /* AMHttpSyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */; };
 		D41D977C1961490D007CAD46 /* AMHttpAsyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */; };
@@ -57,10 +52,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2615E9701978C15600A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
 		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
-		267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
-		267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2692CD5818D7C2A2006501C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -76,8 +70,6 @@
 		26AE4372194E89C500117629 /* AMLocalMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalMesher.m; sourceTree = "<group>"; };
 		26AE4375194E9B3400117629 /* AMRemoteMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRemoteMesher.h; sourceTree = "<group>"; };
 		26AE4376194E9B3400117629 /* AMRemoteMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRemoteMesher.m; sourceTree = "<group>"; };
-		26B93CB81951686E0012F1FA /* AMMesherStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMesherStateMachine.h; sourceTree = "<group>"; };
-		26B93CB91951686E0012F1FA /* AMMesherStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMesherStateMachine.m; sourceTree = "<group>"; };
 		26BC15B619321D280020AD2B /* AMMesherTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMMesherTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26BC15BA19321D280020AD2B /* AMMesherTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMMesherTest-Info.plist"; sourceTree = "<group>"; };
 		26BC15BC19321D280020AD2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -95,8 +87,6 @@
 		26F2BF4E18FCB61000DD04A6 /* AMMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMesher.m; sourceTree = "<group>"; };
 		CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHeartBeat.h; sourceTree = "<group>"; };
 		CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHeartBeat.m; sourceTree = "<group>"; };
-		CEF8D325194D5D2400159B71 /* AMAppObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAppObjects.h; sourceTree = "<group>"; };
-		CEF8D326194D5D2400159B71 /* AMAppObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAppObjects.m; sourceTree = "<group>"; };
 		D41D9776196148ED007CAD46 /* AMHttpSyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpSyncRequest.h; sourceTree = "<group>"; };
 		D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpSyncRequest.m; sourceTree = "<group>"; };
 		D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpAsyncRequest.h; sourceTree = "<group>"; };
@@ -109,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2615E9711978C15600A7CBF0 /* AMCoreData.framework in Frameworks */,
 				26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */,
 				2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */,
 				D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */,
@@ -152,6 +143,7 @@
 		2692CD5418D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2615E9701978C15600A7CBF0 /* AMCoreData.framework */,
 				26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */,
 				2630E02519163B390071260C /* AMNotificationManager.framework */,
 				D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */,
@@ -178,10 +170,6 @@
 		2692CD5B18D7C2A2006501C4 /* AMMesher */ = {
 			isa = PBXGroup;
 			children = (
-				26B93CB81951686E0012F1FA /* AMMesherStateMachine.h */,
-				26B93CB91951686E0012F1FA /* AMMesherStateMachine.m */,
-				CEF8D325194D5D2400159B71 /* AMAppObjects.h */,
-				CEF8D326194D5D2400159B71 /* AMAppObjects.m */,
 				26F2BF4D18FCB61000DD04A6 /* AMMesher.h */,
 				26F2BF4E18FCB61000DD04A6 /* AMMesher.m */,
 				26AE4371194E89C500117629 /* AMLocalMesher.h */,
@@ -196,8 +184,6 @@
 				D41D9777196148ED007CAD46 /* AMHttpSyncRequest.m */,
 				D41D977A1961490D007CAD46 /* AMHttpAsyncRequest.h */,
 				D41D977B1961490D007CAD46 /* AMHttpAsyncRequest.m */,
-				267FA56C1936CF4D001FDA74 /* AMSystemConfig.h */,
-				267FA56D1936CF4D001FDA74 /* AMSystemConfig.m */,
 				2692CD5C18D7C2A2006501C4 /* Supporting Files */,
 			);
 			path = AMMesher;
@@ -245,15 +231,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */,
-				CEF8D327194D5D2400159B71 /* AMAppObjects.h in Headers */,
-				26B93CBA1951686E0012F1FA /* AMMesherStateMachine.h in Headers */,
 				D41D977C1961490D007CAD46 /* AMHttpAsyncRequest.h in Headers */,
 				26F2BF5218FCB61000DD04A6 /* AMMesher.h in Headers */,
 				CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */,
 				D41D9778196148ED007CAD46 /* AMHttpSyncRequest.h in Headers */,
 				26F2BF5018FCB61000DD04A6 /* AMLeaderElecter.h in Headers */,
 				26AE4373194E89C500117629 /* AMLocalMesher.h in Headers */,
-				267FA56E1936CF4D001FDA74 /* AMSystemConfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,10 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41D9779196148ED007CAD46 /* AMHttpSyncRequest.m in Sources */,
-				267FA56F1936CF4D001FDA74 /* AMSystemConfig.m in Sources */,
 				D41D977D1961490D007CAD46 /* AMHttpAsyncRequest.m in Sources */,
-				26B93CBB1951686E0012F1FA /* AMMesherStateMachine.m in Sources */,
-				CEF8D328194D5D2400159B71 /* AMAppObjects.m in Sources */,
 				26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */,
 				26F2BF5118FCB61000DD04A6 /* AMLeaderElecter.m in Sources */,
 				26F2BF5318FCB61000DD04A6 /* AMMesher.m in Sources */,
@@ -487,10 +467,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesher/AMMesher-Prefix.pch";
@@ -507,10 +484,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMMesher/AMMesher-Prefix.pch";

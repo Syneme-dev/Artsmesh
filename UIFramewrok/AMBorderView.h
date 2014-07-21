@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define BORDER_THICKNESS    10
+#define BORDER_THICKNESS    20
 
 @interface AMBorderView : NSView
 

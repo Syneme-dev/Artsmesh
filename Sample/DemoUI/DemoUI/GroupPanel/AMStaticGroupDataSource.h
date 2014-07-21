@@ -10,7 +10,7 @@
 
 @interface AMStaticGroupDataSource : NSObject<NSOutlineViewDelegate, NSOutlineViewDataSource>
 
-@property NSArray* staticGroups;
+@property NSArray* staticGroupControllers;
 
 -(void)reloadGroups;
 -(void)doubleClickOutlineView:(id)sender;

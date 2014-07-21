@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, AMPanelViewType) {
     AMNetworkToolsPanelType = 1
 };
 
-@interface AMPanelViewController : NSViewController
+@interface AMPanelViewController : NSViewController <NSWindowDelegate>
 @property (strong) IBOutlet NSButton *tearOffButton;
 @property (strong) IBOutlet NSButton *settingButton;
 @property (strong) IBOutlet NSButton *tabPanelButton;

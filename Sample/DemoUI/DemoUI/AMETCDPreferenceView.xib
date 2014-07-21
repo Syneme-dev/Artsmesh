@@ -51,11 +51,11 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="513" width="480" height="22"/>
+                                                <rect key="frame" x="340" y="568" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="mdO-6K-TJ9">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="mdO-6K-TJ9">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -63,11 +63,11 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="277" width="480" height="22"/>
+                                                <rect key="frame" x="30" y="388" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="QNm-sK-8WN">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="QNm-sK-8WN">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -75,11 +75,11 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="425" width="480" height="22"/>
+                                                <rect key="frame" x="30" y="479" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="FpE-Om-O0Y">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="FpE-Om-O0Y">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -87,11 +87,11 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="568" width="480" height="22"/>
+                                                <rect key="frame" x="30" y="568" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="07h-x9-f8t">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="07h-x9-f8t">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -99,11 +99,11 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="198" width="480" height="22"/>
+                                                <rect key="frame" x="340" y="388" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="sNo-mW-eIN">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="sNo-mW-eIN">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -111,11 +111,11 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="370" width="480" height="22"/>
+                                                <rect key="frame" x="340" y="479" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="8L7-ye-LWe">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="8L7-ye-LWe">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -123,7 +123,7 @@
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="228" width="107" height="17"/>
+                                                <rect key="frame" x="328" y="416" width="107" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CHAT PORT" placeholderString="" id="RDf-HN-MbI">
                                                     <font key="font" metaFont="system"/>
@@ -132,7 +132,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="455" width="101" height="17"/>
+                                                <rect key="frame" x="18" y="509" width="101" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="STUN SERVER" placeholderString="" id="WD6-YD-NgB">
                                                     <font key="font" metaFont="system"/>
@@ -150,7 +150,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="307" width="158" height="17"/>
+                                                <rect key="frame" x="18" y="416" width="158" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LOCAL SERVER PORT" placeholderString="" id="nmO-zR-RIE">
                                                     <font key="font" metaFont="system"/>
@@ -159,7 +159,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="543" width="142" height="17"/>
+                                                <rect key="frame" x="328" y="598" width="142" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MESHER SERVER PORT" placeholderString="" id="h25-NV-GqN">
                                                     <font key="font" metaFont="system"/>
@@ -168,7 +168,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="400" width="125" height="17"/>
+                                                <rect key="frame" x="328" y="509" width="125" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="STUN SERVER PORT" placeholderString="" id="hmo-Ve-y1x">
                                                     <font key="font" metaFont="system"/>
@@ -177,11 +177,11 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgK-Gw-A8W" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="70" y="732" width="480" height="22"/>
+                                                <rect key="frame" x="30" y="732" width="484" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="bmH-5w-mGc">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="bmH-5w-mGc">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -198,7 +198,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
-                                                <rect key="frame" x="60" y="656" width="295" height="21"/>
+                                                <rect key="frame" x="32" y="656" width="257" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <popUpButtonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="kXj-kD-xSH">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -216,7 +216,7 @@
                                                 </connections>
                                             </popUpButton>
                                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
-                                                <rect key="frame" x="387" y="661" width="163" height="24"/>
+                                                <rect key="frame" x="330" y="663" width="220" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </subviews>
@@ -226,7 +226,7 @@
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
                             <view key="view" id="343-FY-LyZ">
-                                <rect key="frame" x="0.0" y="0.0" width="599" height="799"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rND-dd-2Kz">
@@ -243,9 +243,9 @@
                                                 </textFieldCell>
                                             </textField>
                                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-TQ-We4">
-                                                <rect key="frame" x="74" y="582" width="349" height="22"/>
+                                                <rect key="frame" x="72" y="582" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="border" usesSingleLineMode="YES" id="S01-da-Af0">
+                                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" usesSingleLineMode="YES" id="S01-da-Af0">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -287,18 +287,18 @@
                                                 </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-IG-Qwh">
-                                                <rect key="frame" x="74" y="467" width="349" height="17"/>
+                                                <rect key="frame" x="72" y="467" width="353" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" id="P7k-zP-lZz">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="P7k-zP-lZz">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-9S-Qxd">
-                                                <rect key="frame" x="74" y="666" width="349" height="22"/>
+                                                <rect key="frame" x="72" y="666" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="13u-HY-EKP">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="13u-HY-EKP">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -308,9 +308,9 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-lY-JpS">
-                                                <rect key="frame" x="74" y="732" width="349" height="22"/>
+                                                <rect key="frame" x="72" y="732" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" id="N1r-JL-1Hz">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="N1r-JL-1Hz">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -326,7 +326,7 @@
                         </tabViewItem>
                         <tabViewItem label="View" identifier="3" id="Uhs-af-iDr">
                             <view key="view" id="Dwd-l8-aCe">
-                                <rect key="frame" x="0.0" y="0.0" width="599" height="799"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>

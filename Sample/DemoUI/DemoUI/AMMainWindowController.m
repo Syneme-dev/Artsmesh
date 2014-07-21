@@ -80,6 +80,7 @@
     AMUserViewController *userViewController;
     AMVisualViewController  *visualViewController;
     MZTimerLabel *amTimerControl;
+    Boolean isWindowLoading;
     
     float containerWidth;
 }
@@ -157,11 +158,16 @@
 
 -(void)showDefaultWindow
 {
+    isWindowLoading=YES;
     [self initTimer];
     [self createDefaultWindow];
     [self loadTestPanel];
+    isWindowLoading=NO;
+   
+
     
 }
+
 
 - (void)copyPanel:(NSButton *)sender
 {
@@ -235,6 +241,8 @@
     }
 }
 
+
+
 -(AMPanelViewController* )createPanel:(NSString*) identifier withTitle:(NSString*)title{
     AMPanelViewController *viewController=
     [self createPanel:identifier withTitle:title  width:UI_defaultPanelWidth height:UI_defaultPanelHeight];
@@ -248,45 +256,75 @@
     [panelViewController.view setHidden:NO];
 }
 
--(AMPanelViewController* )createPanel:(NSString*) identifier withTitle:(NSString*)title  width:(float)width height:(float)height{
-    AMPanelViewController *panelViewController;
-    
-        panelViewController=
+-(AMPanelViewController* )createPanelFromSideBar:(NSString*) identifier withTitle:(NSString*)title  width:(float)width height:(float)height{
+    AMPanelViewController *panelViewController=
         [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.panelId=identifier;
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     panelView.panelViewController = panelViewController;
     panelView.preferredSize = NSMakeSize(width, height);
     panelView.initialSize = panelView.preferredSize;
-        [panelViewController setTitle:title];
-    
-    NSView *firstPanel=nil;
-    if(_containerView.subviews.count>0)
-    {
-        firstPanel=_containerView.subviews[0];
-    }
-        [_containerView addSubview:panelViewController.view  positioned:NSWindowAbove relativeTo:firstPanel];
-        containerWidth+=panelViewController.view.frame.size.width+UI_panelSpacing;
-        [self.panelControllers setObject:panelViewController forKey:identifier];
-        
-    
+    [panelViewController setTitle:title];
+    [self.panelControllers setObject:panelViewController forKey:identifier];
     NSMutableArray *openedPanels=[[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
     if(![openedPanels containsObject:identifier])
     {
         [openedPanels addObject:identifier];
     }
-    for (NSView *subView in _containerView.subviews) {
-        if([subView isKindOfClass:[AMPanelView class]] )
-        {
-            [subView setFrameOrigin:NSMakePoint(subView.frame.origin.x+40.0+width, subView.frame.origin.y)];
+//    for (NSView *subView in _containerView.subviews) {
+//        if([subView isKindOfClass:[AMPanelView class]] )
+//        {
+//            [subView setFrameOrigin:NSMakePoint(subView.frame.origin.x+40.0+width, subView.frame.origin.y)];
+//        }
+//    }
+     [_containerView addSubview:panelViewController.view];
+    [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
+    return panelViewController;
+
+}
+
+-(AMPanelViewController* )createPanel:(NSString*) identifier withTitle:(NSString*)title  width:(float)width height:(float)height{
+    AMPanelViewController *panelViewController=
+    [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    panelViewController.panelId=identifier;
+    AMPanelView *panelView = (AMPanelView *)panelViewController.view;
+    panelView.panelViewController = panelViewController;
+    panelView.preferredSize = NSMakeSize(width, height);
+    panelView.initialSize = panelView.preferredSize;
+    [panelViewController setTitle:title];
+    
+    NSView *firstPanel=nil;
+    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    CGFloat x=  [[scrollView contentView] documentVisibleRect].origin.x;
+    NSClipView *documentView=scrollView.contentView.documentView;
+    CGFloat diffX=documentView.frame.size.width;
+    if(_containerView.subviews.count>0&&isWindowLoading==NO)
+    {
+        for (NSString* openedPanelId in self.panelControllers.allKeys) {
+            AMAppDelegate *appDelegate=[NSApp delegate];
+            AMPanelViewController* firstPanelViewController=appDelegate.mainWindowController.panelControllers[openedPanelId];
+            AMBoxItem *boxItem =(AMBoxItem*)firstPanelViewController.view;
+            AMBox *box=[boxItem hostingBox];
+            if(box.frame.origin.x>x&&box.frame.origin.x-x-diffX<0)
+            {
+                diffX=box.frame.origin.x-x;
+                firstPanel=firstPanelViewController.view.superview;
+            }
         }
+         [_containerView addSubview:panelViewController.view  positioned:NSWindowBelow relativeTo:firstPanel];
+    }
+    else{
+            [_containerView addSubview:panelViewController.view];
+    }
+    [self.panelControllers setObject:panelViewController forKey:identifier];
+    NSMutableArray *openedPanels=[[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+    if(![openedPanels containsObject:identifier])
+    {
+        [openedPanels addObject:identifier];
     }
 
     [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
-    
     return panelViewController;
-    
-
 }
 
 -(void)removePanel:(NSString *)panelName{

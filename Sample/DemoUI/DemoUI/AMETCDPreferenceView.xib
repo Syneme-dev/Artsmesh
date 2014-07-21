@@ -13,6 +13,7 @@
                 <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
                 <outlet property="myPrivateIpPopup" destination="6jJ-Sr-xt6" id="Baf-8c-k7w"/>
+                <outlet property="postStatusMessageButton" destination="FE0-1F-GTL" id="K5O-x4-sSX"/>
                 <outlet property="statusNetPostTestResult" destination="dlL-IG-Qwh" id="CEA-pF-YkR"/>
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
@@ -34,11 +35,11 @@
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
                             <view key="view" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="-1" y="-19" width="600" height="799"/>
+                                        <rect key="frame" x="-1" y="0.0" width="600" height="799"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
@@ -226,24 +227,24 @@
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
                             <view key="view" id="343-FY-LyZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rND-dd-2Kz">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                                        <rect key="frame" x="0.0" y="-19" width="600" height="799"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70f-5O-vHn">
-                                                <rect key="frame" x="18" y="762" width="132" height="17"/>
+                                                <rect key="frame" x="18" y="762" width="143" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Web service address" id="yNN-sD-npH">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="StatusNet Home Page:" id="yNN-sD-npH">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-TQ-We4">
-                                                <rect key="frame" x="72" y="582" width="353" height="22"/>
+                                                <rect key="frame" x="30" y="611" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" usesSingleLineMode="YES" id="S01-da-Af0">
                                                     <font key="font" metaFont="system"/>
@@ -267,7 +268,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGB-ud-1WS">
-                                                <rect key="frame" x="18" y="612" width="64" height="17"/>
+                                                <rect key="frame" x="18" y="641" width="64" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="z6r-82-ewW">
                                                     <font key="font" metaFont="system"/>
@@ -276,9 +277,9 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FE0-1F-GTL">
-                                                <rect key="frame" x="169" y="485" width="158" height="32"/>
+                                                <rect key="frame" x="111" y="569" width="190" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="push" title="Post a test message" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7kf-tJ-Xei">
+                                                <buttonCell key="cell" type="square" title="Post a test message" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="7kf-tJ-Xei">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -287,7 +288,7 @@
                                                 </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-IG-Qwh">
-                                                <rect key="frame" x="72" y="467" width="353" height="17"/>
+                                                <rect key="frame" x="30" y="539" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="P7k-zP-lZz">
                                                     <font key="font" metaFont="system"/>
@@ -296,7 +297,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-9S-Qxd">
-                                                <rect key="frame" x="72" y="666" width="353" height="22"/>
+                                                <rect key="frame" x="30" y="666" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="13u-HY-EKP">
                                                     <font key="font" metaFont="system"/>
@@ -308,7 +309,7 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-lY-JpS">
-                                                <rect key="frame" x="72" y="732" width="353" height="22"/>
+                                                <rect key="frame" x="30" y="732" width="353" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="N1r-JL-1Hz">
                                                     <font key="font" metaFont="system"/>

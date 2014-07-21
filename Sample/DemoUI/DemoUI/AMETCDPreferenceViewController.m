@@ -47,6 +47,7 @@
     [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.postStatusMessageButton toColor:UI_Color_blue];
     
     _preference_queue = dispatch_queue_create("preference_queue", DISPATCH_QUEUE_SERIAL);
     

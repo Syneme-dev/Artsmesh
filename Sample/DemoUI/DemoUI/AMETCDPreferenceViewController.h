@@ -26,6 +26,7 @@
 @property (strong) IBOutlet NSButton *videoTabButton;
 @property (strong) IBOutlet NSButton *audioTabButton;
 @property (strong) IBOutlet NSButton *statusnetTabButton;
+@property (weak) IBOutlet NSButton *postStatusMessageButton;
 
 - (IBAction)onJackServerTabClick:(id)sender;
 - (IBAction)onGeneralClick:(id)sender;

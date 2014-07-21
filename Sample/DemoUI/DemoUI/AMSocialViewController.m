@@ -123,8 +123,7 @@
     
     
    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    loginURL = [NSURL URLWithString:
-                      [NSString stringWithFormat:@"%@/main/login?fromMac=true",statusNetURL ]];
+    loginURL = [NSString stringWithFormat:@"%@/main/login?fromMac=true",statusNetURL ];
     
     infoUrl=        [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURL,myUserName ];
     
@@ -133,7 +132,8 @@
     infoStatus=INFO_USER;
     isInfoPage=YES;
     [self.socialWebTab.mainFrame loadRequest:
-     [NSURLRequest requestWithURL:loginURL]];
+     [NSURLRequest requestWithURL:[NSURL URLWithString:
+loginURL]]];
 }
 
 -(void)gotoUsersPage{

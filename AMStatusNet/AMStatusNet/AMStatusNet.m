@@ -8,6 +8,7 @@
 
 #import "AMStatusNet.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMNetworkUtils/AMNetworkUtils.h"
 
 @interface AMStatusNet()
 
@@ -17,6 +18,9 @@
 @end
 
 @implementation AMStatusNet
+{
+    NSOperationQueue* _httpRequestQueue;
+}
 
 +(AMStatusNet*)shareInstance
 {
@@ -43,7 +47,12 @@
     self.userName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
     self.password = [defaults stringForKey:Preference_Key_StatusNet_Password];
     
-    return nil;
+    //init NSOperationQueue
+    _httpRequestQueue = [[NSOperationQueue alloc] init];
+    _httpRequestQueue.name = @"StatusNetRequstQueue";
+    _httpRequestQueue.maxConcurrentOperationCount = 1;
+    
+    return self;
 }
 
 -(void)loadGroups
@@ -65,9 +74,82 @@
         return;
     }
     
-    return;
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = @"/api/statusnet/groups/list_all.json";
+    req.httpMethod = @"GET";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when register group:%@", error.description);
+            return;
+        }
+        
+        NSAssert(response, @"response should not be nil without error");
+        NSLog(@"get statusnet user goups return........................");
+        
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+        if(err != nil){
+            NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+            NSAssert(NO, errInfo);
+        }
+        
+        NSArray* result = (NSArray*)objects;
+        NSMutableArray* staticGroups = [[NSMutableArray alloc] init];
+        for(id object in result){
+            if ([object isKindOfClass:[NSDictionary class]]) {
+                AMStaticGroup* group = [AMStaticGroup staticGroupFromDict:object];
+                [self getStaticUserByGroup:group];
+                [staticGroups addObject:group];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [AMCoreData shareInstance].staticGroups = staticGroups;
+            [[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
+        });
+    };
     
+    [_httpRequestQueue addOperation:req];
+    return;
 }
+
+
+-(void)getStaticUserByGroup:(AMStaticGroup*)group
+{
+
+    AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];
+    unregReq.baseURL = self.homePage;
+    unregReq.requestPath = [NSString stringWithFormat:@"/api/statusnet/groups/membership/%@.json", group.nickname];
+    unregReq.httpMethod = @"GET";
+    NSData* response = [unregReq sendRequest];
+    if (response != nil) {
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+        if(err != nil){
+            NSLog(@"parse Json error:%@", err.description);
+            return;
+        }
+        
+        if ([objects isKindOfClass:[NSArray class]]) {
+            NSArray* result = (NSArray*)objects;
+            NSMutableArray* users = [[NSMutableArray alloc] init];
+            for (id userobj in result) {
+                if ([userobj isKindOfClass:[NSDictionary class]]) {
+                    AMStaticUser* newUser = [AMStaticUser staticUserFromDict:userobj];
+                    [users addObject:newUser];
+                }
+            }
+            
+            group.users = users;
+        }
+    }
+}
+
 
 
 -(BOOL)quickRegisterAccount:(NSString*)account password:(NSString*)password

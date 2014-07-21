@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260153FD196E2B8100045A55 /* AMStatusNetGroupParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 260153FB196E2B8100045A55 /* AMStatusNetGroupParser.h */; };
-		260153FE196E2B8100045A55 /* AMStatusNetGroupParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 260153FC196E2B8100045A55 /* AMStatusNetGroupParser.m */; };
 		269C3330197CB96000AF86AA /* AMStatusNet.h in Headers */ = {isa = PBXBuildFile; fileRef = 269C332E197CB96000AF86AA /* AMStatusNet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		269C3331197CB96000AF86AA /* AMStatusNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C332F197CB96000AF86AA /* AMStatusNet.m */; };
 		269C3333197CDDFC00AF86AA /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269C3332197CDDFC00AF86AA /* AMPreferenceManager.framework */; };
+		269C333D197CE50400AF86AA /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269C333C197CE50400AF86AA /* AMNetworkUtils.framework */; };
+		269C333F197CEDEA00AF86AA /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 269C333E197CEDEA00AF86AA /* AMCoreData.framework */; };
 		AF8D7F7C1951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
 		AF8D7F911951654800437F6F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F901951654800437F6F /* XCTest.framework */; };
 		AF8D7F921951654800437F6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8D7F7B1951654800437F6F /* Cocoa.framework */; };
@@ -35,11 +35,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		260153FB196E2B8100045A55 /* AMStatusNetGroupParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatusNetGroupParser.h; sourceTree = "<group>"; };
-		260153FC196E2B8100045A55 /* AMStatusNetGroupParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetGroupParser.m; sourceTree = "<group>"; };
 		269C332E197CB96000AF86AA /* AMStatusNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatusNet.h; sourceTree = "<group>"; };
 		269C332F197CB96000AF86AA /* AMStatusNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatusNet.m; sourceTree = "<group>"; };
 		269C3332197CDDFC00AF86AA /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
+		269C333C197CE50400AF86AA /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
+		269C333E197CEDEA00AF86AA /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
 		AF8D7F781951654800437F6F /* AMStatusNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMStatusNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8D7F7B1951654800437F6F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AF8D7F7E1951654800437F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269C333F197CEDEA00AF86AA /* AMCoreData.framework in Frameworks */,
+				269C333D197CE50400AF86AA /* AMNetworkUtils.framework in Frameworks */,
 				269C3333197CDDFC00AF86AA /* AMPreferenceManager.framework in Frameworks */,
 				AF8D7F7C1951654800437F6F /* Cocoa.framework in Frameworks */,
 			);
@@ -105,6 +107,8 @@
 		AF8D7F7A1951654800437F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				269C333E197CEDEA00AF86AA /* AMCoreData.framework */,
+				269C333C197CE50400AF86AA /* AMNetworkUtils.framework */,
 				269C3332197CDDFC00AF86AA /* AMPreferenceManager.framework */,
 				AF8D7F7B1951654800437F6F /* Cocoa.framework */,
 				AF8D7F901951654800437F6F /* XCTest.framework */,
@@ -135,6 +139,9 @@
 		AF8D7F821951654800437F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */,
+				AF8D7FAB1951657C00437F6F /* InfoPlist.strings */,
+				AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */,
 				AF8D7F831951654800437F6F /* AMStatusNet-Info.plist */,
 				AF8D7F841951654800437F6F /* InfoPlist.strings */,
 				AF8D7F871951654800437F6F /* AMStatusNet-Prefix.pch */,
@@ -165,13 +172,8 @@
 			children = (
 				269C332E197CB96000AF86AA /* AMStatusNet.h */,
 				269C332F197CB96000AF86AA /* AMStatusNet.m */,
-				AF8D7FA71951657C00437F6F /* AMStatusNet-Info.plist */,
-				AF8D7FA81951657C00437F6F /* AMStatusNet-Prefix.pch */,
 				AF8D7FA91951657C00437F6F /* AMStatusNetModule.h */,
 				AF8D7FAA1951657C00437F6F /* AMStatusNetModule.m */,
-				AF8D7FAB1951657C00437F6F /* InfoPlist.strings */,
-				260153FB196E2B8100045A55 /* AMStatusNetGroupParser.h */,
-				260153FC196E2B8100045A55 /* AMStatusNetGroupParser.m */,
 			);
 			name = AMStatusNet;
 			sourceTree = "<group>";
@@ -184,7 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				269C3330197CB96000AF86AA /* AMStatusNet.h in Headers */,
-				260153FD196E2B8100045A55 /* AMStatusNetGroupParser.h in Headers */,
 				AF8D7FAF1951657C00437F6F /* AMStatusNetModule.h in Headers */,
 				AF8D7FAE1951657C00437F6F /* AMStatusNet-Prefix.pch in Headers */,
 			);
@@ -286,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				269C3331197CB96000AF86AA /* AMStatusNet.m in Sources */,
-				260153FE196E2B8100045A55 /* AMStatusNetGroupParser.m in Sources */,
 				AF8D7FB01951657C00437F6F /* AMStatusNetModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

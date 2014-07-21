@@ -35,11 +35,11 @@
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
                             <view key="view" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="-1" y="0.0" width="600" height="799"/>
+                                        <rect key="frame" x="-1" y="-19" width="600" height="799"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
@@ -199,14 +199,14 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
-                                                <rect key="frame" x="32" y="656" width="257" height="21"/>
+                                                <rect key="frame" x="20" y="656" width="257" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <popUpButtonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="kXj-kD-xSH">
-                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="kXj-kD-xSH">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" title="OtherViews" id="NuT-og-gxa">
                                                         <items>
-                                                            <menuItem title="Item 1" id="oJk-sL-JYx"/>
+                                                            <menuItem title="Item 1" hidden="YES" id="oJk-sL-JYx"/>
                                                             <menuItem title="Item 2" id="DaG-8A-meK"/>
                                                             <menuItem title="Item 3" id="GBT-Jz-5DZ"/>
                                                         </items>

@@ -367,8 +367,8 @@
 		CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelModel.m; sourceTree = "<group>"; };
 		CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
 		CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
-		CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMGroupTextFieldFormatter.h; path = GroupPanel/AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
-		CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMGroupTextFieldFormatter.m; path = GroupPanel/AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
+		CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
+		CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
 		CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserDetailsViewController.xib; sourceTree = "<group>"; };
@@ -436,7 +436,6 @@
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
-				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
@@ -450,8 +449,6 @@
 		262021F518EAE58400811E4E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
-				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
 				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
@@ -572,6 +569,16 @@
 			name = ChatPanel;
 			sourceTree = "<group>";
 		};
+		269C3347197D00F000AF86AA /* PreferencePanel */ = {
+			isa = PBXGroup;
+			children = (
+				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
+				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
+				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
+			);
+			name = PreferencePanel;
+			sourceTree = "<group>";
+		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,14 +647,11 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				269C3347197D00F000AF86AA /* PreferencePanel */,
 				269C3340197CF49400AF86AA /* ChatPanel */,
 				CEC2FC37196588FD00AFD309 /* GroupPanel */,
-				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
-				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 				D499651B196D1A2C00033761 /* ProfilePanel */,
 				AFE5FC5C196A40E00079B434 /* Classes */,
-				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
-				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				AFAEBD811961060200B7FB51 /* ViewsExtend */,
@@ -663,6 +667,8 @@
 		37C23176187A8FFD00554AFD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
+				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				AFAEBD801961038F00B7FB51 /* Resource */,
 				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
@@ -802,6 +808,8 @@
 		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
+				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 				26716C25197A10B900D69F0C /* Views */,
 				26716C24197A107700D69F0C /* Nibs */,
 				26716C23197A107100D69F0C /* Models */,

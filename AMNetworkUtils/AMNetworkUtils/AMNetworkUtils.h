@@ -15,21 +15,4 @@
 
 @interface AMNetworkUtils : NSObject
 
-//+ (BOOL)isValidIpv4:(NSString *)ip;
-//
-//+ (BOOL)isValidIpv6:(NSString *)ip;
-//
-////return the first ipv4 address
-//+(NSString*)getHostIpv4Addr;
-//
-////return the first ipv6 address
-//+(NSString*)getHostIpv6Addr;
-//
-//+(NSString*)getHostName;
-//
-//+(NSString*)getCurrentTimeString;
-//
-//+(NSData*)addressFromIpAndPort:(NSString*)ipStr
-//                          port:(int)p;
-
 @end

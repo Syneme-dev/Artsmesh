@@ -52,7 +52,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="340" y="568" width="212" height="22"/>
+                                                <rect key="frame" x="340" y="476" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="mdO-6K-TJ9">
                                                     <font key="font" metaFont="system"/>
@@ -112,7 +112,7 @@
                                                 </connections>
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="340" y="479" width="212" height="22"/>
+                                                <rect key="frame" x="340" y="568" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="8L7-ye-LWe">
                                                     <font key="font" metaFont="system"/>
@@ -199,7 +199,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
-                                                <rect key="frame" x="20" y="656" width="257" height="21"/>
+                                                <rect key="frame" x="20" y="656" width="237" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="kXj-kD-xSH">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -217,7 +217,7 @@
                                                 </connections>
                                             </popUpButton>
                                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
-                                                <rect key="frame" x="330" y="663" width="220" height="24"/>
+                                                <rect key="frame" x="330" y="678" width="220" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </subviews>

@@ -105,6 +105,12 @@
 
 - (void)windowDidResize:(NSNotification *)notification
 {
+    CGFloat height = [self calculateContainerHeight];
+    [self resizeContainerHeightTo:height];
+}
+
+- (CGFloat)calculateContainerHeight
+{
     CGFloat height = 0;
     for (AMBox *box in _containerView.subviews) {
         height = MAX(height, [box minContentHeight] + box.paddingTop + box.paddingBottom);
@@ -112,12 +118,16 @@
     height += _containerView.paddingTop + _containerView.paddingBottom;
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
     height = MAX(height, scrollView.frame.size.height);
-    _containerView.frame = NSMakeRect(0, 0, 0, height);
+    return height;
+}
+
+- (void)resizeContainerHeightTo:(CGFloat)height
+{
     for (AMBox *box in _containerView.subviews) {
         [box setFrameSize:NSMakeSize(box.frame.size.width, height)];
         [box doBoxLayout];
     }
-    [_containerView doBoxLayout];
+    [_containerView setFrameSize:NSMakeSize(_containerView.frame.size.width, height)];
 }
 
 - (void)windowDidLoad
@@ -188,7 +198,8 @@
     _containerView.paddingRight = 50;
     _containerView.allowBecomeEmpty = YES;
     _containerView.gapBetweenItems = 50;
-    CGFloat contentHeight = _containerView.frame.size.height;
+//    CGFloat contentHeight = _containerView.frame.size.height;
+    id __weak weakSelf = self;
      _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
          if ([boxItem isKindOfClass:[AMBox class]])
              return (AMBox *)nil;
@@ -200,7 +211,14 @@
          newBox.gapBetweenItems = 40;
          CGFloat width = boxItem.preferredSize.width + newBox.paddingLeft +
                             newBox.paddingRight;
-         [newBox setFrameSize:NSMakeSize(width, contentHeight)];
+         CGFloat height = boxItem.minSizeConstraint.height + newBox.paddingTop +  newBox.paddingBottom;
+         id strongSelf = weakSelf;
+         CGFloat containerHeight = [strongSelf calculateContainerHeight];
+         if (containerHeight < height)
+             [strongSelf resizeContainerHeightTo:height];
+         else
+             height = containerHeight;
+         [newBox setFrameSize:NSMakeSize(width, height)];
          [newBox addSubview:boxItem];
          return newBox;
      };

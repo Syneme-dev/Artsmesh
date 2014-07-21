@@ -367,8 +367,8 @@
 		CEC2FC4B196588FD00AFD309 /* AMGroupPanelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelModel.m; sourceTree = "<group>"; };
 		CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
 		CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
-		CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
-		CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
+		CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMGroupTextFieldFormatter.h; path = GroupPanel/AMGroupTextFieldFormatter.h; sourceTree = "<group>"; };
+		CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMGroupTextFieldFormatter.m; path = GroupPanel/AMGroupTextFieldFormatter.m; sourceTree = "<group>"; };
 		CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserDetailsViewController.xib; sourceTree = "<group>"; };
@@ -440,7 +440,6 @@
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
-				26E1E6A019023496000BF14C /* AMChatView.xib */,
 				D4ACE85D19175D09004A907D /* AMPingView.xib */,
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
@@ -459,8 +458,6 @@
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
-				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
-				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
 				D4ACE85F19175DC8004A907D /* AMPingViewController.h */,
 				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
 				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
@@ -563,6 +560,18 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		269C3340197CF49400AF86AA /* ChatPanel */ = {
+			isa = PBXGroup;
+			children = (
+				26E1E6A019023496000BF14C /* AMChatView.xib */,
+				26E1E6A2190234EB000BF14C /* AMChatViewController.h */,
+				26E1E6A3190234EB000BF14C /* AMChatViewController.m */,
+				269D3430191B1EC40010B540 /* AMChatTableCellView.h */,
+				269D3431191B1EC40010B540 /* AMChatTableCellView.m */,
+			);
+			name = ChatPanel;
+			sourceTree = "<group>";
+		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,8 +579,6 @@
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
 				26B4D071191A256200F55CD3 /* AMTextFieldView.m */,
-				269D3430191B1EC40010B540 /* AMChatTableCellView.h */,
-				269D3431191B1EC40010B540 /* AMChatTableCellView.m */,
 				AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */,
 				AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */,
 			);
@@ -633,7 +640,10 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				269C3340197CF49400AF86AA /* ChatPanel */,
 				CEC2FC37196588FD00AFD309 /* GroupPanel */,
+				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
+				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 				D499651B196D1A2C00033761 /* ProfilePanel */,
 				AFE5FC5C196A40E00079B434 /* Classes */,
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
@@ -792,8 +802,6 @@
 		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
 			isa = PBXGroup;
 			children = (
-				CEC2FC4E196588FD00AFD309 /* AMGroupTextFieldFormatter.h */,
-				CEC2FC4F196588FD00AFD309 /* AMGroupTextFieldFormatter.m */,
 				26716C25197A10B900D69F0C /* Views */,
 				26716C24197A107700D69F0C /* Nibs */,
 				26716C23197A107100D69F0C /* Models */,

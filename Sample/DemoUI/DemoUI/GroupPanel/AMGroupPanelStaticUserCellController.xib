@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelStaticUserCellController">
+            <connections>
+                <outlet property="infoBtn" destination="RVB-8o-0Dg" id="87g-kr-Jdq"/>
+                <outlet property="socialBtn" destination="iYe-MO-zO1" id="erU-4a-L3J"/>
+                <outlet property="view" destination="eR7-uP-duv" id="VY0-cS-OQ4"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <tableCellView id="eR7-uP-duv" customClass="AMGroupPanelTableCellView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="28"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
+                    <rect key="frame" x="3" y="6" width="17" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="DC2-yl-Ptz"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
+                    <rect key="frame" x="26" y="6" width="158" height="17"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="2i6-qR-Bgj">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="iYe-MO-zO1">
+                    <rect key="frame" x="249" y="4" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="mDf-HA-9g8"/>
+                        <constraint firstAttribute="width" constant="20" id="oEk-vl-1pL"/>
+                    </constraints>
+                    <buttonCell key="cell" type="smallSquare" title="S" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ebF-Y6-TqS">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="socialBtnClicked:" target="-2" id="l7y-CI-ZO6"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="RVB-8o-0Dg">
+                    <rect key="frame" x="277" y="4" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="HNO-ic-tlM"/>
+                        <constraint firstAttribute="height" constant="20" id="Rwy-fr-giy"/>
+                    </constraints>
+                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="6Ip-MW-RHe">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="infoBtnClicked:" target="-2" id="RF1-fh-HpQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RVB-8o-0Dg" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="GyJ-lg-3JR"/>
+                <constraint firstItem="RVB-8o-0Dg" firstAttribute="leading" secondItem="iYe-MO-zO1" secondAttribute="trailing" constant="8" id="MKA-kk-TJ6"/>
+                <constraint firstItem="iYe-MO-zO1" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="cMU-g5-bQU"/>
+                <constraint firstAttribute="trailing" secondItem="RVB-8o-0Dg" secondAttribute="trailing" constant="3" id="fnh-8b-Pq3"/>
+            </constraints>
+            <connections>
+                <outlet property="imageView" destination="v5r-nE-53N" id="VIx-9w-eM5"/>
+                <outlet property="textField" destination="5SE-6n-cRH" id="dfN-XD-Gaf"/>
+            </connections>
+        </tableCellView>
+    </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+    </resources>
+</document>

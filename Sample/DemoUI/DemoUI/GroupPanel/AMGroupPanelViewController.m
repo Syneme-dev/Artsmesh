@@ -16,6 +16,7 @@
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
 #import "AMStatusNet/AMStatusNet.h"
+#import "AMStaticUserDetailsViewController.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -147,25 +148,50 @@
 {
     [self hideDetailView];
     
-    AMStaticGroupDetailsViewController* staticGroupDetailController = [[AMStaticGroupDetailsViewController alloc] initWithNibName:@"AMStaticGroupDetailsViewController" bundle:nil];
+    AMStaticGroupDetailsViewController* sdc = [[AMStaticGroupDetailsViewController alloc] initWithNibName:@"AMStaticGroupDetailsViewController" bundle:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    staticGroupDetailController.staticGroup = model.selectedStaticGroup;
-    [self.view addSubview:staticGroupDetailController.view];
+    sdc.staticGroup = model.selectedStaticGroup;
+    [self.view addSubview:sdc.view];
     
-    NSRect rect = staticGroupDetailController.view.frame;
+    NSRect rect = sdc.view.frame;
     NSRect tabFrame = self.groupTabView.frame;
     rect.origin.x = tabFrame.origin.x;
     rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
     rect.size.width = tabFrame.size.width;
-    [staticGroupDetailController.view setFrame:rect];
+    [sdc.view setFrame:rect];
     
     rect.origin.y -= rect.size.height;
-    [staticGroupDetailController.view.animator setFrame:rect];
+    [sdc.view.animator setFrame:rect];
     
     [self.view display];
     
-    _detailViewController = staticGroupDetailController;
+    _detailViewController = sdc;
+}
+
+-(void)showStaticUserDetailView
+{
+    [self hideDetailView];
+    
+    AMStaticUserDetailsViewController* sudc = [[AMStaticUserDetailsViewController alloc] initWithNibName:@"AMStaticUserDetailsViewController" bundle:nil];
+    
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    sudc.staticUser = model.selectedStaticUser;
+    [self.view addSubview:sudc.view];
+    
+    NSRect rect = sudc.view.frame;
+    NSRect tabFrame = self.groupTabView.frame;
+    rect.origin.x = tabFrame.origin.x;
+    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+    rect.size.width = tabFrame.size.width;
+    [sudc.view setFrame:rect];
+    
+    rect.origin.y -= rect.size.height;
+    [sudc.view.animator setFrame:rect];
+    
+    [self.view display];
+    
+    _detailViewController = sudc;
 }
 
 #pragma mark -
@@ -193,6 +219,11 @@
             
             if (newState == DetailPanelStaticGroup) {
                 [self showStaticGroupDetailView];
+                return;
+            }
+            
+            if (newState == DetailPanelStaticUser) {
+                [self showStaticUserDetailView];
                 return;
             }
             

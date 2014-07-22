@@ -1,5 +1,5 @@
 //
-//  AMGroupOutlineUserCellController.h
+//  AMGroupPanelUserCellController.h
 //  AMGroupOutlineTest
 //
 //  Created by 王 为 on 6/27/14.
@@ -8,17 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "AMGroupPanelTableCellController.h"
 
-@interface AMGroupOutlineUserCellController : NSViewController
+@interface AMGroupPanelUserCellController : AMGroupPanelTableCellController
 
 @property AMLiveGroup* group;
 @property AMLiveUser* user;
-@property BOOL editable;
 @property BOOL localUser;
-
-
--(void)updateUI;
--(void)setTrackArea;
--(void)removeTrackAres;
 
 @end

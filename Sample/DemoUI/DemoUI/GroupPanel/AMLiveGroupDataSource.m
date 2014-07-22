@@ -7,12 +7,12 @@
 //
 
 #import "AMLiveGroupDataSource.h"
-#import "AMGroupOutlineGroupCellController.h"
-#import "AMGroupOutlineUserCellController.h"
-#import "AMGroupOutlineLabelCellController.h"
+#import "AMGroupPanelTableCellController.h"
+#import "AMGroupPanelGroupCellController.h"
+#import "AMGroupPanelUserCellController.h"
+#import "AMGroupPanelLabelCellController.h"
 #import "AMGroupOutlineRowView.h"
-#import "AMGroupOutlineGroupCellView.h"
-#import "AMGroupOutlineUserCellView.h"
+#import "AMGroupPanelTableCellView.h"
 
 @implementation AMLiveGroupDataSource
 
@@ -26,14 +26,8 @@
             return;
         }
         
-        NSTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-        if ([selectedCellView isKindOfClass:[AMGroupOutlineGroupCellView class]]) {
-            AMGroupOutlineGroupCellView* gCell = (AMGroupOutlineGroupCellView*)selectedCellView;
-            [gCell.infoBtn performClick:gCell.infoBtn];
-        }else if([selectedCellView isKindOfClass:[AMGroupOutlineUserCellView class]]){
-            AMGroupOutlineUserCellView* uCell = (AMGroupOutlineUserCellView*)selectedCellView;
-            [uCell.infoBtn performClick:uCell.infoBtn];
-        }
+        AMGroupPanelTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        [selectedCellView doubleClicked:self];
     }
 }
 
@@ -45,27 +39,20 @@
         return;
     }
     
-    AMGroupOutlineGroupCellController* localGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
+    AMGroupPanelGroupCellController* localGroupController = [[AMGroupPanelGroupCellController alloc] initWithNibName:@"AMGroupPanelGroupCellController" bundle:nil];
+    
     localGroupController.group = localGroup;
-    localGroupController.editable = YES;
-    localGroupController.userControllers = [[NSMutableArray alloc] init];
+    localGroupController.childrenController = [[NSMutableArray alloc] init];
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
     for (AMLiveUser* user in localGroup.users){
-        AMGroupOutlineUserCellController* localUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
+        AMGroupPanelUserCellController* localUserController = [[AMGroupPanelUserCellController alloc] initWithNibName:@"AMGroupPanelUserCellController" bundle:nil];
         
         localUserController.group = localGroup;
         localUserController.user = user;
-        if ([user.userid isEqualToString: mySelf.userid]) {
-            localUserController.editable = YES;
-        }else{
-            localUserController.editable = NO;
-        }
-        
         localUserController.localUser = YES;
-        
-        [localGroupController.userControllers addObject:localUserController];
+        [localGroupController.childrenController addObject:localUserController];
     }
     
     [userGroups addObject:localGroupController];
@@ -75,28 +62,26 @@
         return;
     }
     
-    AMGroupOutlineLabelCellController* labelController = [[AMGroupOutlineLabelCellController alloc] initWithNibName:@"AMGroupOutlineLabelCellController" bundle:nil];
-    labelController.groupControllers = [[NSMutableArray alloc] init];
+    AMGroupPanelLabelCellController* labelController = [[AMGroupPanelLabelCellController alloc] initWithNibName:@"AMGroupPanelLabelCellController" bundle:nil];
+    labelController.childrenController = [[NSMutableArray alloc] init];
     [userGroups addObject:labelController];
     
     for (AMLiveGroup* remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
-        AMGroupOutlineGroupCellController* remoteGroupController = [[AMGroupOutlineGroupCellController alloc] initWithNibName:@"AMGroupOutlineGroupCellController" bundle:nil];
+        AMGroupPanelGroupCellController* remoteGroupController = [[AMGroupPanelGroupCellController alloc] initWithNibName:@"AMGroupPanelGroupCellController" bundle:nil];
         remoteGroupController.group = remoteGroup;
-        remoteGroupController.userControllers = [[NSMutableArray alloc] init];
-        remoteGroupController.editable = NO;
+        remoteGroupController.childrenController = [[NSMutableArray alloc] init];
         
         for (AMLiveUser* user in remoteGroup.users){
-            AMGroupOutlineUserCellController* remoteUserController = [[AMGroupOutlineUserCellController alloc] initWithNibName:@"AMGroupOutlineUserCellController" bundle:nil];
+            AMGroupPanelUserCellController* remoteUserController = [[AMGroupPanelUserCellController alloc] initWithNibName:@"AMGroupPanelUserCellController" bundle:nil];
             
             remoteUserController.group = remoteGroup;
             remoteUserController.user = user;
-            remoteUserController.editable = NO;
             remoteUserController.localUser = NO;
             
-            [remoteGroupController.userControllers addObject:remoteUserController];
+            [remoteGroupController.childrenController addObject:remoteUserController];
         }
         
-        [labelController.groupControllers addObject:remoteGroupController];
+        [labelController.childrenController addObject:remoteGroupController];
     }
     
     self.liveGroups = userGroups;
@@ -106,12 +91,9 @@
 {
     if (item == nil) {
         return [self.liveGroups count];
-    }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
-        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-        return [groupController.userControllers count];
-    }else if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
-        AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
-        return [labelController.groupControllers count];
+    }else if([item isKindOfClass:[AMGroupPanelTableCellController class]]){
+        AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
+        return [tableCellController.childrenController count];
     }else{
         return 0;
     }
@@ -126,12 +108,9 @@
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
     if (item != nil) {
-        if ([item isKindOfClass:[AMGroupOutlineGroupCellController class]]) {
-            AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-            return [groupController.userControllers objectAtIndex:index];
-        }else if([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
-            AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
-            return [labelController.groupControllers objectAtIndex:index];
+        if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+            AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
+            return [tableCellController.childrenController objectAtIndex:index];
         }
     }else if ([self.liveGroups count] != 0){
         return self.liveGroups[index];
@@ -142,27 +121,14 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMGroupOutlineGroupCellController class]]) {
-        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
-        [groupController updateUI];
-        [groupController setTrackArea];
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+        AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
+        [tableCellController updateUI];
+        [tableCellController setTrackArea];
         
-        return groupController.view;
+        return tableCellController.view;
         
-    }else if([item isKindOfClass:[AMGroupOutlineUserCellController class]]){
-        AMGroupOutlineUserCellController* userController = (AMGroupOutlineUserCellController*)item;
-        [userController updateUI];
-        [userController setTrackArea];
-        
-        return userController.view;
-        
-    }else if([item isKindOfClass:[AMGroupOutlineLabelCellController class]]){
-        AMGroupOutlineLabelCellController* labelController = (AMGroupOutlineLabelCellController*)item;
-        [labelController updateUI];
-        
-        return labelController.view;
     }
-    
     return nil;
 }
 
@@ -182,14 +148,14 @@
 {
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
-    if ([item isKindOfClass:[AMGroupOutlineLabelCellController class]]) {
+    if ([item isKindOfClass:[AMGroupPanelLabelCellController class]]) {
         
         rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
         rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
         
-    }else if([item isKindOfClass:[AMGroupOutlineGroupCellController class]]){
+    }else if([item isKindOfClass:[AMGroupPanelGroupCellController class]]){
         
-        AMGroupOutlineGroupCellController* groupController = (AMGroupOutlineGroupCellController*)item;
+        AMGroupPanelGroupCellController* groupController = (AMGroupPanelGroupCellController*)item;
         if ([groupController.group isMeshed]) {
             rowView.headImage = [NSImage imageNamed:@"group_online"];
             rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];

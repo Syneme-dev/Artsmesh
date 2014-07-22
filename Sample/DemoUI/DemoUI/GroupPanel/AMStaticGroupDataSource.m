@@ -7,10 +7,12 @@
 //
 
 #import "AMStaticGroupDataSource.h"
-#import "AMStaticGroupOutlineCellView.h"
+#import "AMGroupPanelTableCellView.h"
 #import "AMGroupOutlineRowView.h"
 #import "AMCoreData/AMCoreData.h"
-#import "AMGroupOutlineStaticCellViewController.h"
+#import "AMGroupPanelTableCellController.h"
+#import "AMGroupPanelStaticGroupCellController.h"
+#import "AMGroupPanelStaticUserCellController.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -24,8 +26,8 @@
             return;
         }
         
-        AMStaticGroupOutlineCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
-        [selectedCellView.infoBtn performClick:selectedCellView.infoBtn];
+        AMGroupPanelTableCellView *selectedCellView = [ov viewAtColumn:0 row:selected makeIfNecessary:YES];
+        [selectedCellView doubleClicked:self];
     }
 }
 
@@ -39,21 +41,19 @@
     NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
     
     for(AMStaticGroup* sg in staticGroups){
-        AMGroupOutlineStaticCellViewController* groupController =
-        [[AMGroupOutlineStaticCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+        AMGroupPanelStaticGroupCellController* groupController =
+        [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellController" bundle:nil];
         
         groupController.staticGroup = sg;
-        groupController.staticUser = nil;
         
         if([sg users] != nil){
-            groupController.userControllers = [[NSMutableArray alloc] init];
+            groupController.childrenController = [[NSMutableArray alloc] init];
             for (AMStaticUser* su in [sg users]) {
-                AMGroupOutlineStaticCellViewController* userController =
-                [[AMGroupOutlineStaticCellViewController alloc] initWithNibName:@"AMStaticGroupOutlineCellViewController" bundle:nil];
+                AMGroupPanelStaticUserCellController* userController =
+                [[AMGroupPanelStaticUserCellController alloc] initWithNibName:@"AMGroupPanelStaticUserCellController" bundle:nil];
                 
-                userController.staticGroup = sg;
                 userController.staticUser = su;
-                [groupController.userControllers addObject:userController];
+                [groupController.childrenController addObject:userController];
             }
         }
         
@@ -69,7 +69,7 @@
     if (item == nil) {
         return  [self.staticGroupControllers count];
     }else{
-        return [[item userControllers] count];
+        return [[item childrenController] count];
     }
 }
 
@@ -84,7 +84,7 @@
     if (item == nil) {
         return self.staticGroupControllers[index];
     }else{
-        return [item userControllers][index];
+        return [item childrenController][index];
     }
         
     return nil;
@@ -93,8 +93,8 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMGroupOutlineStaticCellViewController class]]) {
-        AMGroupOutlineStaticCellViewController* staticController = (AMGroupOutlineStaticCellViewController*)item;
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+        AMGroupPanelTableCellController* staticController = (AMGroupPanelTableCellController*)item;
         [staticController updateUI];
         [staticController setTrackArea];
         
@@ -106,8 +106,8 @@
 
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
-    if ([item isKindOfClass:[NSViewController class]]) {
-        NSViewController* controller = (NSViewController*) item;
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+        AMGroupPanelTableCellController* controller = (AMGroupPanelTableCellController*) item;
         NSView* cellView = controller.view;
         
         return cellView.frame.size.height;
@@ -120,11 +120,10 @@
 {
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
-    if ([item isKindOfClass:[AMGroupOutlineStaticCellViewController class]]) {
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
         
         rowView.headImage = [NSImage imageNamed:@"group_online"];
         rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-        
     }
     
     return rowView;

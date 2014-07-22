@@ -26,10 +26,10 @@
 
 -(void)updateUI
 {
-//    AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
-//    [cellView.imageView setHidden:YES];
-//    cellView.textField.stringValue = [self.staticGroup nickname];
-//    
+    AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
+    [cellView.imageView setHidden:YES];
+    cellView.textField.stringValue = [self.staticUser name];
+    
 //    [self.socialBtn setHidden:YES];
 //    [self.infoBtn setHidden:YES];
 }
@@ -48,6 +48,11 @@
 //    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
 //    model.selectedStaticGroup = self.staticGroup;
 //    model.detailPanelState = DetailPanelStaticGroup;
+}
+
+-(void)cellViewDoubleClicked:(id)sender
+{
+    //[self.infoBtn performClick:sender];
 }
 
 #pragma mark-

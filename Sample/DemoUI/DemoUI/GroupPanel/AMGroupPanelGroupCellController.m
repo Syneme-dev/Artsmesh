@@ -73,6 +73,11 @@
     [[AMMesher sharedAMMesher] mergeGroup:@""];
 }
 
+-(void)cellViewDoubleClicked:(id)sender
+{
+    [self.infoBtn performClick:sender];
+}
+
 #pragma mark-
 #pragma TableViewCell FrameChanged
 

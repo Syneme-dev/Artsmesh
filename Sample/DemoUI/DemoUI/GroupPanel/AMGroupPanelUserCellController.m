@@ -53,32 +53,6 @@
     [self.infoBtn setHidden:YES];
 }
 
--(void)setTrackArea
-{
-    if ([[self.view trackingAreas] count] == 0) {
-        NSRect rect = [self.view bounds];
-        NSTrackingArea* trackArea = [[NSTrackingArea alloc]
-                                     initWithRect:rect
-                                     options:(NSTrackingMouseEnteredAndExited  | NSTrackingMouseMoved|NSTrackingActiveInKeyWindow )
-                                     owner:self
-                                     userInfo:nil];
-        [self.view addTrackingArea:trackArea];
-    }
-}
-
-
--(void)removeTrackAres
-{
-    for ( NSTrackingArea* ta in [self.view trackingAreas]){
-        [self.view removeTrackingArea:ta];
-    }
-}
-
--(void)dealloc
-{
-    [self removeTrackAres];
-}
-
 
 - (IBAction)infoBtnClick:(id)sender
 {
@@ -87,10 +61,9 @@
     model.detailPanelState = DetailPanelUser;
 }
 
--(void)viewFrameChanged:(NSView*)view
+-(void)cellViewDoubleClicked:(id)sender
 {
-    [self removeTrackAres];
-    [self setTrackArea];
+    [self.infoBtn performClick:sender];
 }
 
 

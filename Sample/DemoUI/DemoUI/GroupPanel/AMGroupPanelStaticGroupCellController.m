@@ -54,6 +54,11 @@
     model.detailPanelState = DetailPanelStaticGroup;
 }
 
+-(void)cellViewDoubleClicked:(id)sender
+{
+    [self.infoBtn performClick:sender];
+}
+
 #pragma mark-
 #pragma TableViewCell Tracking Area
 - (void)mouseEntered:(NSEvent *)theEvent

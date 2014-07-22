@@ -59,6 +59,12 @@
     
 }
 
+-(void)dealloc
+{
+    [self removeTrackAres];
+}
+
+
 -(void)cellViewDoubleClicked:(id)sender
 {
     return;

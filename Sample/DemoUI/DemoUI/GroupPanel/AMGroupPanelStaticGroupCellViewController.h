@@ -1,5 +1,5 @@
 //
-//  AMGroupOutlineStaticCellViewController.h
+//  AMGroupPanelStaticGroupCellViewController.h
 //  DemoUI
 //
 //  Created by Wei Wang on 7/19/14.
@@ -8,15 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "AMGroupPanelTableCellViewController.h"
 
-@interface AMGroupOutlineStaticCellViewController : NSViewController
+@interface AMGroupPanelStaticGroupCellViewController : AMGroupPanelTableCellViewController
 
 @property AMStaticGroup* staticGroup;
 @property AMStaticUser* staticUser;
-@property NSMutableArray* userControllers;
-
--(void)setTrackArea;
--(void)removeTrackAres;
--(void)updateUI;
 
 @end

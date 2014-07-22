@@ -1,14 +1,15 @@
 //
-//  AMGroupOutlineUserCellView.m
-//  AMGroupOutlineTest
+//  AMGroupPanelTableCellView.m
+//  DemoUI
 //
-//  Created by 王 为 on 6/27/14.
-//  Copyright (c) 2014 王 为. All rights reserved.
+//  Created by Wei Wang on 7/22/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupOutlineUserCellView.h"
+#import "AMGroupPanelTableCellView.h"
+#import "AMGroupPanelTableCellViewController.h"
 
-@implementation AMGroupOutlineUserCellView
+@implementation AMGroupPanelTableCellView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -22,6 +23,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
+    
     // Drawing code here.
 }
 
@@ -33,5 +35,11 @@
     }
 }
 
+-(void)doubleClicked:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(cellViewDoubleClicked:)]) {
+        [self.delegate cellViewDoubleClicked:sender];
+    }
+}
 
 @end

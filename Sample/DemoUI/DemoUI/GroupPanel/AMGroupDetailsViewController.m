@@ -9,9 +9,8 @@
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
-#import "AMGroupDetailsView.h"
+#import "AMGroupPanelDetailView.h"
 #import "AMMesher/AMMesher.h"
-
 
 @interface AMGroupDetailsViewController ()
 @end
@@ -36,13 +35,13 @@
     NSString* myMergedGroupId = [AMCoreData shareInstance].mergedGroupId;
     BOOL isMyMergedGroup = [myMergedGroupId isEqualToString:self.group.groupId];
     
-    AMGroupDetailsView* detailView = (AMGroupDetailsView*)self.view;
+    AMGroupPanelDetailView* detailView = (AMGroupPanelDetailView*)self.view;
     
-    if ( isMyGroup || isMyMergedGroup) {
-        [detailView.joinGroupBtn  setEnabled:NO];
-    }else{
-        [detailView.joinGroupBtn setEnabled:YES];
-    }
+//    if ( isMyGroup || isMyMergedGroup) {
+//        [detailView.joinGroupBtn  setEnabled:NO];
+//    }else{
+//        [detailView.joinGroupBtn setEnabled:YES];
+//    }
 }
 
 - (IBAction)joinGroup:(NSButton *)sender

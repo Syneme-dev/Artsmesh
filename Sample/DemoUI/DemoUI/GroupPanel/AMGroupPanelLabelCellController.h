@@ -1,5 +1,5 @@
 //
-//  AMGroupOutlineLabelCellController.h
+//  AMGroupPanelLabelCellController.h
 //  DemoUI
 //
 //  Created by 王 为 on 6/30/14.
@@ -7,12 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMGroupPanelTableCellViewController.h"
 
-@interface AMGroupOutlineLabelCellController : NSViewController
-
+@interface AMGroupPanelLabelCellController : AMGroupPanelTableCellViewController
 @property NSString* labelText;
-@property NSMutableArray* groupControllers;
-
--(void)updateUI;
 
 @end

@@ -1,42 +1,36 @@
 //
-//  AMGroupOutlineUserCellController.m
+//  AMGroupPanelUserCellController.m
 //  AMGroupOutlineTest
 //
 //  Created by 王 为 on 6/27/14.
 //  Copyright (c) 2014 王 为. All rights reserved.
 //
 
-#import "AMGroupOutlineUserCellController.h"
-#import "AMGroupOutlineUserCellView.h"
+#import "AMGroupPanelUserCellController.h"
 #import "AMGroupPanelModel.h"
 #import "AMGroupTextFieldFormatter.h"
+#import "AMGroupPanelTableCellView.h"
 
 #define MAX_USER_NAME_LENGTH 16
 
-@interface AMGroupOutlineUserCellController ()
+@interface AMGroupPanelUserCellController ()
+@property (weak) IBOutlet NSButton *leaderBtn;
+@property (weak) IBOutlet NSButton *zombieBtn;
+@property (weak) IBOutlet NSButton *infoBtn;
 
 @end
 
-@implementation AMGroupOutlineUserCellController
+@implementation AMGroupPanelUserCellController
 
 -(void)awakeFromNib
 {
-    AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    AMGroupTextFieldFormatter* formatter = cellView.textField.formatter;
-    [formatter setMaximumLength:MAX_USER_NAME_LENGTH];
-    
-    cellView.delegate = self;
-    [cellView.textField setEditable:NO];
-    [cellView.textField setSelectable:NO];
+    [super awakeFromNib];
 }
 
 -(void)updateUI
 {
-    NSAssert([self.view isKindOfClass:[AMGroupOutlineUserCellView class]], @"internal error: the view is not AMGroupOutlineUserCellView");
-    AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-  
+    AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
     [cellView.textField setEditable:NO];
-
     cellView.textField.stringValue = self.user.nickName;
     if (self.user.isOnline) {
         [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
@@ -45,18 +39,18 @@
     }
     
     if ([self.group.leaderId isEqualToString:self.user.userid]) {
-        [cellView.leaderBtn setHidden:NO];
+        [self.leaderBtn setHidden:NO];
     }else{
-        [cellView.leaderBtn setHidden:YES];
+        [self.leaderBtn setHidden:YES];
     }
     
     if (self.user.isOnline && self.localUser) {
-        [cellView.zombieBtn setHidden:NO];
+        [self.zombieBtn setHidden:NO];
     }else{
-        [cellView.zombieBtn setHidden:YES];
+        [self.zombieBtn setHidden:YES];
     }
     
-    [cellView.infoBtn setHidden:YES];
+    [self.infoBtn setHidden:YES];
 }
 
 -(void)setTrackArea
@@ -104,14 +98,12 @@
 #pragma TableViewCell Tracking Area
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    [cellView.infoBtn setHidden:NO];
+    [self.infoBtn setHidden:NO];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    AMGroupOutlineUserCellView* cellView = (AMGroupOutlineUserCellView*)self.view;
-    [cellView.infoBtn setHidden:YES];
+    [self.infoBtn setHidden:YES];
 }
 
 

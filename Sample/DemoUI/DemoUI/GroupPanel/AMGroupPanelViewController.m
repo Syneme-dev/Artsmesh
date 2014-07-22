@@ -16,6 +16,7 @@
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
 #import "AMStatusNet/AMStatusNet.h"
+#import "AMStaticUserDetailsViewController.h"
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -168,6 +169,31 @@
     _detailViewController = sdc;
 }
 
+-(void)showStaticUserDetailView
+{
+    [self hideDetailView];
+    
+    AMStaticUserDetailsViewController* sudc = [[AMStaticUserDetailsViewController alloc] initWithNibName:@"AMStaticUserDetailsViewController" bundle:nil];
+    
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    sudc.staticUser = model.selectedStaticUser;
+    [self.view addSubview:sudc.view];
+    
+    NSRect rect = sudc.view.frame;
+    NSRect tabFrame = self.groupTabView.frame;
+    rect.origin.x = tabFrame.origin.x;
+    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+    rect.size.width = tabFrame.size.width;
+    [sudc.view setFrame:rect];
+    
+    rect.origin.y -= rect.size.height;
+    [sudc.view.animator setFrame:rect];
+    
+    [self.view display];
+    
+    _detailViewController = sudc;
+}
+
 #pragma mark -
 #pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -193,6 +219,11 @@
             
             if (newState == DetailPanelStaticGroup) {
                 [self showStaticGroupDetailView];
+                return;
+            }
+            
+            if (newState == DetailPanelStaticUser) {
+                [self showStaticUserDetailView];
                 return;
             }
             

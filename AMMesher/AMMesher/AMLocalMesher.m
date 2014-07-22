@@ -154,6 +154,7 @@
             NSLog(@"error happened when register group:%@", error.description);
             NSLog(@"will try again!");
             dispatch_async(dispatch_get_main_queue(), ^{
+                sleep(2);
                 [self registerLocalGroup];
             });
             return;

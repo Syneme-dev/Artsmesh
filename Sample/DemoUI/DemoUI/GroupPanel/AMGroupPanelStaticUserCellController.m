@@ -44,7 +44,7 @@
     NSString* name = self.staticUser.name;
     NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
                              name , @"UserName", nil];
-    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
 }
 
 - (IBAction)infoBtnClicked:(NSButton *)sender

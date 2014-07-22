@@ -65,7 +65,6 @@
 		268BDFB81977F66700B0035D /* AMStaticUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticUser.m; sourceTree = "<group>"; };
 		268BDFC3197808C800B0035D /* AMSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSystemConfig.h; sourceTree = "<group>"; };
 		268BDFC4197808C800B0035D /* AMSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSystemConfig.m; sourceTree = "<group>"; };
-		268BE03719780CC000B0035D /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../AMCommonTools/build/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		268BE03A19780D6B00B0035D /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				268BE03A19780D6B00B0035D /* AMCommonTools.framework */,
-				268BE03719780CC000B0035D /* AMCommonTools.framework */,
 				268BDF801977F60A00B0035D /* Cocoa.framework */,
 				268BDF951977F60A00B0035D /* XCTest.framework */,
 				268BDF821977F60A00B0035D /* Other Frameworks */,
@@ -420,6 +418,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMCoreData/AMCoreData-Prefix.pch";
 				INFOPLIST_FILE = "AMCoreData/AMCoreData-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -436,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMCoreData/AMCoreData-Prefix.pch";
 				INFOPLIST_FILE = "AMCoreData/AMCoreData-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

@@ -373,6 +373,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMCommonTools/AMCommonTools-Prefix.pch";
 				INFOPLIST_FILE = "AMCommonTools/AMCommonTools-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -388,6 +389,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMCommonTools/AMCommonTools-Prefix.pch";
 				INFOPLIST_FILE = "AMCommonTools/AMCommonTools-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -452,6 +454,7 @@
 				268BE03319780C4700B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		268BE03419780C4700B0035D /* Build configuration list for PBXNativeTarget "AMCommonToolsTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +463,7 @@
 				268BE03619780C4700B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

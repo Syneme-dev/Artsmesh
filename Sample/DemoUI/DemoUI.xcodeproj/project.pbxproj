@@ -54,6 +54,9 @@
 		AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
+		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
+		AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
+		AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
 		AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF796F5B1900EE7D00C48C00 /* WebKit.framework */; };
 		AF82E356190CAB630083487C /* FoundryMonoline-Bold.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */; };
 		AF82E357190CAB630083487C /* FoundryMonoline-Light.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */; };
@@ -176,6 +179,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */,
+				AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */,
 				AF4542A019553C6C00CCD862 /* AMStatusNet.framework in CopyFiles */,
 				AF4542A119553C6C00CCD862 /* AMTaskLauncher.framework in CopyFiles */,
 				AF4542A319553C6C00CCD862 /* UIFramework.framework in CopyFiles */,
@@ -268,6 +273,7 @@
 		AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCRouteViewController.xib; sourceTree = "<group>"; };
 		AF45429C19553C2200CCD862 /* AMStatusNet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMStatusNet.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMStatusNet.framework; sourceTree = "<group>"; };
 		AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
+		AF7242B2197E19CA0008799B /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Bold.otf"; sourceTree = "<group>"; };
 		AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Light.otf"; sourceTree = "<group>"; };
@@ -402,6 +408,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */,
 				AF45429F19553C2200CCD862 /* AMTaskLauncher.framework in Frameworks */,
@@ -602,6 +609,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF7242B2197E19CA0008799B /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
 				AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */,
@@ -1197,7 +1205,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
@@ -1212,7 +1223,10 @@
 			baseConfigurationReference = F353201534CF41128CA1E7AA /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;

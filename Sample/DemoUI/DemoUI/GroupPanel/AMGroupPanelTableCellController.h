@@ -1,5 +1,5 @@
 //
-//  AMGroupPanelTableCellViewController.h
+//  AMGroupPanelTableCellController.h
 //  DemoUI
 //
 //  Created by Wei Wang on 7/22/14.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <AMCoreData/AMCoreData.h>
 
-@interface AMGroupPanelTableCellViewController : NSViewController
+@interface AMGroupPanelTableCellController : NSViewController
 
 @property NSMutableArray* childrenController;
 

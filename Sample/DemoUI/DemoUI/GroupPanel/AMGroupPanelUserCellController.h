@@ -8,9 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "AMGroupPanelTableCellController.h"
 
-
-@interface AMGroupPanelUserCellController : NSViewController
+@interface AMGroupPanelUserCellController : AMGroupPanelTableCellController
 
 @property AMLiveGroup* group;
 @property AMLiveUser* user;

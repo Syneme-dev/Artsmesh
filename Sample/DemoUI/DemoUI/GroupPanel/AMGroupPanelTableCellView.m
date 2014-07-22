@@ -7,7 +7,7 @@
 //
 
 #import "AMGroupPanelTableCellView.h"
-#import "AMGroupPanelTableCellViewController.h"
+#import "AMGroupPanelTableCellController.h"
 
 @implementation AMGroupPanelTableCellView
 

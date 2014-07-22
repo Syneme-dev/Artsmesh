@@ -15,8 +15,10 @@
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
 		266CE253197E406500D8145B /* AMGroupPanelDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE252197E406500D8145B /* AMGroupPanelDetailView.m */; };
 		266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE255197E41F700D8145B /* AMGroupPanelTableCellView.m */; };
-		266CE259197E428D00D8145B /* AMGroupPanelTableCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE258197E428D00D8145B /* AMGroupPanelTableCellViewController.m */; };
-		26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.m */; };
+		266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE258197E428D00D8145B /* AMGroupPanelTableCellController.m */; };
+		266CE25D197E550400D8145B /* AMGroupPanelStaticUserCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE25B197E550400D8145B /* AMGroupPanelStaticUserCellController.m */; };
+		266CE25E197E550400D8145B /* AMGroupPanelStaticUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */; };
+		26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
@@ -218,10 +220,13 @@
 		266CE252197E406500D8145B /* AMGroupPanelDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelDetailView.m; sourceTree = "<group>"; };
 		266CE254197E41F700D8145B /* AMGroupPanelTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelTableCellView.h; sourceTree = "<group>"; };
 		266CE255197E41F700D8145B /* AMGroupPanelTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelTableCellView.m; sourceTree = "<group>"; };
-		266CE257197E428D00D8145B /* AMGroupPanelTableCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelTableCellViewController.h; sourceTree = "<group>"; };
-		266CE258197E428D00D8145B /* AMGroupPanelTableCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelTableCellViewController.m; sourceTree = "<group>"; };
-		26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticGroupCellViewController.h; sourceTree = "<group>"; };
-		26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticGroupCellViewController.m; sourceTree = "<group>"; };
+		266CE257197E428D00D8145B /* AMGroupPanelTableCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelTableCellController.h; sourceTree = "<group>"; };
+		266CE258197E428D00D8145B /* AMGroupPanelTableCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelTableCellController.m; sourceTree = "<group>"; };
+		266CE25A197E550400D8145B /* AMGroupPanelStaticUserCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticUserCellController.h; sourceTree = "<group>"; };
+		266CE25B197E550400D8145B /* AMGroupPanelStaticUserCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticUserCellController.m; sourceTree = "<group>"; };
+		266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticUserViewController.xib; sourceTree = "<group>"; };
+		26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticGroupCellController.h; sourceTree = "<group>"; };
+		26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticGroupCellController.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
@@ -484,16 +489,18 @@
 			children = (
 				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
 				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
-				266CE257197E428D00D8145B /* AMGroupPanelTableCellViewController.h */,
-				266CE258197E428D00D8145B /* AMGroupPanelTableCellViewController.m */,
+				266CE257197E428D00D8145B /* AMGroupPanelTableCellController.h */,
+				266CE258197E428D00D8145B /* AMGroupPanelTableCellController.m */,
 				CEC2FC40196588FD00AFD309 /* AMGroupPanelLabelCellController.h */,
 				CEC2FC41196588FD00AFD309 /* AMGroupPanelLabelCellController.m */,
 				CEC2FC3B196588FD00AFD309 /* AMGroupPanelGroupCellController.h */,
 				CEC2FC3C196588FD00AFD309 /* AMGroupPanelGroupCellController.m */,
 				CEC2FC45196588FD00AFD309 /* AMGroupPanelUserCellController.h */,
 				CEC2FC46196588FD00AFD309 /* AMGroupPanelUserCellController.m */,
-				26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.h */,
-				26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.m */,
+				26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.h */,
+				26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */,
+				266CE25A197E550400D8145B /* AMGroupPanelStaticUserCellController.h */,
+				266CE25B197E550400D8145B /* AMGroupPanelStaticUserCellController.m */,
 				CEC2FC50196588FD00AFD309 /* AMUserDetailsViewController.h */,
 				CEC2FC51196588FD00AFD309 /* AMUserDetailsViewController.m */,
 				CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */,
@@ -524,6 +531,7 @@
 				CEC2FC47196588FD00AFD309 /* AMGroupPanelUserCellController.xib */,
 				CEC2FC42196588FD00AFD309 /* AMGroupPanelLabelCellController.xib */,
 				D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */,
+				266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */,
 				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
 				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
 				26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */,
@@ -910,6 +918,7 @@
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
+				266CE25E197E550400D8145B /* AMGroupPanelStaticUserViewController.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
@@ -1035,7 +1044,7 @@
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				CEC2FC5C196588FD00AFD309 /* AMGroupPanelUserCellController.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
-				266CE259197E428D00D8145B /* AMGroupPanelTableCellViewController.m in Sources */,
+				266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */,
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */,
@@ -1049,7 +1058,8 @@
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				CEC2FC5F196588FD00AFD309 /* AMGroupPanelModel.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
-				26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellViewController.m in Sources */,
+				266CE25D197E550400D8145B /* AMGroupPanelStaticUserCellController.m in Sources */,
+				26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,

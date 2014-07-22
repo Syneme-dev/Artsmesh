@@ -7,7 +7,7 @@
 //
 
 #import "AMLiveGroupDataSource.h"
-#import "AMGroupPanelTableCellViewController.h"
+#import "AMGroupPanelTableCellController.h"
 #import "AMGroupPanelGroupCellController.h"
 #import "AMGroupPanelUserCellController.h"
 #import "AMGroupPanelLabelCellController.h"
@@ -91,8 +91,8 @@
 {
     if (item == nil) {
         return [self.liveGroups count];
-    }else if([item isKindOfClass:[AMGroupPanelTableCellViewController class]]){
-        AMGroupPanelTableCellViewController* tableCellController = (AMGroupPanelTableCellViewController*)item;
+    }else if([item isKindOfClass:[AMGroupPanelTableCellController class]]){
+        AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
         return [tableCellController.childrenController count];
     }else{
         return 0;
@@ -108,8 +108,8 @@
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
     if (item != nil) {
-        if ([item isKindOfClass:[AMGroupPanelTableCellViewController class]]) {
-            AMGroupPanelTableCellViewController* tableCellController = (AMGroupPanelTableCellViewController*)item;
+        if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+            AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
             return [tableCellController.childrenController objectAtIndex:index];
         }
     }else if ([self.liveGroups count] != 0){
@@ -121,8 +121,8 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     
-    if ([item isKindOfClass:[AMGroupPanelTableCellViewController class]]) {
-        AMGroupPanelTableCellViewController* tableCellController = (AMGroupPanelTableCellViewController*)item;
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
+        AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
         [tableCellController updateUI];
         [tableCellController setTrackArea];
         

@@ -1,23 +1,23 @@
 //
-//  AMGroupPanelTableCellViewController.m
+//  AMGroupPanelTableCellController.m
 //  DemoUI
 //
 //  Created by Wei Wang on 7/22/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupPanelTableCellViewController.h"
+#import "AMGroupPanelTableCellController.h"
 #import "AMGroupTextFieldFormatter.h"
 #import "AMGroupPanelTableCellView.h"
 
 #define MAX_GROUP_NAME_LENGTH 16
 #define MAX_GROUP_DESCRIPTION 64
 
-@interface AMGroupPanelTableCellViewController ()
+@interface AMGroupPanelTableCellController ()
 
 @end
 
-@implementation AMGroupPanelTableCellViewController
+@implementation AMGroupPanelTableCellController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMGroupPanelTableCellViewController.h"
+#import "AMGroupPanelTableCellController.h"
 
-@interface AMGroupPanelLabelCellController : AMGroupPanelTableCellViewController
+@interface AMGroupPanelLabelCellController : AMGroupPanelTableCellController
 @property NSString* labelText;
 
 @end

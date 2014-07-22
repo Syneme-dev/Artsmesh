@@ -1,23 +1,23 @@
 //
-//  AMGroupPanelStaticGroupCellViewController.m
+//  AMGroupPanelStaticGroupCellController.m
 //  DemoUI
 //
 //  Created by Wei Wang on 7/19/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupPanelStaticGroupCellViewController.h"
+#import "AMGroupPanelStaticGroupCellController.h"
 #import "AMGroupPanelModel.h"
 #import <AMNotificationManager/AMNotificationManager.h>
 #import "AMGroupPanelTableCellView.h"
 
-@interface AMGroupPanelStaticGroupCellViewController ()
+@interface AMGroupPanelStaticGroupCellController ()
 @property (weak) IBOutlet NSButton *socialBtn;
 @property (weak) IBOutlet NSButton *infoBtn;
 
 @end
 
-@implementation AMGroupPanelStaticGroupCellViewController
+@implementation AMGroupPanelStaticGroupCellController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,16 +32,10 @@
 {
     AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
     [cellView.imageView setHidden:YES];
+    cellView.textField.stringValue = [self.staticGroup nickname];
     
-    if (self.staticUser != nil) {
-        cellView.textField.stringValue = [self.staticUser name];
-    }else if(self.staticGroup != nil){
-        cellView.textField.stringValue = [self.staticGroup nickname];
-    }
-
     [self.socialBtn setHidden:YES];
     [self.infoBtn setHidden:YES];
-    
 }
 
 

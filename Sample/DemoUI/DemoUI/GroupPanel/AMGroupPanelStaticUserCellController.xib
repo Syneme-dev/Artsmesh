@@ -23,7 +23,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="DC2-yl-Ptz"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
-                    <rect key="frame" x="26" y="6" width="158" height="17"/>
+                    <rect key="frame" x="17" y="7" width="158" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="2i6-qR-Bgj">
                         <font key="font" metaFont="system"/>

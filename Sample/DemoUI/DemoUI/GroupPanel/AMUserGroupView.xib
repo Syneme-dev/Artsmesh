@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -198,13 +198,13 @@
                     </tabViewItems>
                 </tabView>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="JhF-3o-4wl">
-                    <rect key="frame" x="230" y="387" width="80" height="13"/>
+                    <rect key="frame" x="260" y="387" width="50" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="80" id="cMF-fc-SlJ"/>
-                        <constraint firstAttribute="height" constant="13" id="tcJ-fD-Oql"/>
+                        <constraint firstAttribute="height" constant="13" id="DvK-lO-vMf"/>
+                        <constraint firstAttribute="width" constant="50" id="cSi-Ys-qLA"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="STATIC GROUP" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="dtE-9E-eHj">
+                    <buttonCell key="cell" type="inline" title="STATIC" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="dtE-9E-eHj">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
@@ -212,12 +212,12 @@
                         <action selector="staticGroupTabClick:" target="-2" id="9bS-Zl-fl5"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7H-IX-HAC">
-                    <rect key="frame" x="216" y="385" width="18" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c7H-IX-HAC">
+                    <rect key="frame" x="244" y="385" width="18" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="17" id="dTP-Rb-OpQ"/>
-                        <constraint firstAttribute="width" constant="8" id="dvR-vW-bwo"/>
+                        <constraint firstAttribute="width" constant="14" id="Lzv-0y-eR7"/>
+                        <constraint firstAttribute="height" constant="17" id="cG7-X5-HC2"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" | " id="VCA-Nj-ye5">
                         <font key="font" metaFont="system"/>
@@ -226,13 +226,13 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Ak0-w3-tjY">
-                    <rect key="frame" x="142" y="387" width="80" height="13"/>
+                    <rect key="frame" x="206" y="387" width="41" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="13" id="8ag-QG-Zsy"/>
-                        <constraint firstAttribute="width" constant="80" id="XiU-qS-hm5"/>
+                        <constraint firstAttribute="height" constant="13" id="7we-L2-lFd"/>
+                        <constraint firstAttribute="width" constant="41" id="S1y-6G-cgb"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="LIVE GROUP" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Hn8-IA-OZu">
+                    <buttonCell key="cell" type="inline" title="LIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Hn8-IA-OZu">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
@@ -242,16 +242,16 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="JhF-3o-4wl" firstAttribute="leading" secondItem="c7H-IX-HAC" secondAttribute="trailing" constant="2" id="15i-2G-HY2"/>
                 <constraint firstItem="iFe-Pp-Jnt" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="20" symbolic="YES" id="1IE-Un-pzP"/>
+                <constraint firstAttribute="trailing" secondItem="JhF-3o-4wl" secondAttribute="trailing" constant="2" id="8kg-XW-zBG"/>
+                <constraint firstItem="JhF-3o-4wl" firstAttribute="leading" secondItem="Ak0-w3-tjY" secondAttribute="trailing" constant="13" id="FMB-2v-ckK"/>
                 <constraint firstAttribute="trailing" secondItem="iFe-Pp-Jnt" secondAttribute="trailing" id="Qnp-kx-pnM"/>
-                <constraint firstItem="JhF-3o-4wl" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="3" id="SjW-v5-bBF"/>
-                <constraint firstItem="Ak0-w3-tjY" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="3" id="Uly-co-WFo"/>
-                <constraint firstItem="c7H-IX-HAC" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="1" id="aib-WI-XoE"/>
-                <constraint firstAttribute="trailing" secondItem="JhF-3o-4wl" secondAttribute="trailing" constant="2" id="aoB-89-Jz0"/>
-                <constraint firstItem="JhF-3o-4wl" firstAttribute="leading" secondItem="Ak0-w3-tjY" secondAttribute="trailing" constant="8" id="iFO-D1-VB7"/>
+                <constraint firstItem="Ak0-w3-tjY" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="3" id="TiA-4d-xLd"/>
+                <constraint firstItem="JhF-3o-4wl" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="3" id="j8q-Ow-U6z"/>
+                <constraint firstItem="c7H-IX-HAC" firstAttribute="top" secondItem="5d4-5O-feO" secondAttribute="top" constant="1" id="oVB-ss-KBT"/>
                 <constraint firstAttribute="bottom" secondItem="iFe-Pp-Jnt" secondAttribute="bottom" constant="25" id="ptQ-Dw-B1D"/>
                 <constraint firstItem="iFe-Pp-Jnt" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="ySx-Mi-ZT2"/>
+                <constraint firstItem="JhF-3o-4wl" firstAttribute="leading" secondItem="c7H-IX-HAC" secondAttribute="trailing" id="yUg-HJ-lRF"/>
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

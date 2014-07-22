@@ -45,18 +45,18 @@
     [btnLine stroke];
     [NSGraphicsContext restoreGraphicsState];
     
-    NSRect firstBtnRect = NSMakeRect(contentR.origin.x,
-                                     contentR.origin.y,
-                                     contentR.size.width / 2 -1,
-                                     35);
-    
-    NSRect lastBtnRect = NSMakeRect(contentR.origin.x + contentR.size.width / 2 + 1,
-                                    contentR.origin.y,
-                                    contentR.size.width / 2 - 1,
-                                    35);
-    
-    [self.joinGroupBtn setFrame:firstBtnRect];
-    [self.cancelBtn setFrame:lastBtnRect];
+//    NSRect firstBtnRect = NSMakeRect(contentR.origin.x,
+//                                     contentR.origin.y,
+//                                     contentR.size.width / 2 -1,
+//                                     35);
+//    
+//    NSRect lastBtnRect = NSMakeRect(contentR.origin.x + contentR.size.width / 2 + 1,
+//                                    contentR.origin.y,
+//                                    contentR.size.width / 2 - 1,
+//                                    35);
+//    
+//    [self.joinGroupBtn setFrame:firstBtnRect];
+//    [self.cancelBtn setFrame:lastBtnRect];
 }
 
 -(BOOL)acceptsFirstResponder

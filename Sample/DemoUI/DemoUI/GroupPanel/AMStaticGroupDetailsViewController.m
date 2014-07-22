@@ -38,7 +38,7 @@
 {
     if (self.homepageView && self.staticGroup.homepage) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepageView.font.pointSize];
-        NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor grayColor],
+        NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticGroup.homepage attributes:attr];
         [self.homepageView.textStorage appendAttributedString:attrStr];
@@ -47,7 +47,7 @@
     
     if (self.descriptionView && self.staticGroup.description) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.descriptionView.font.pointSize];
-        NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor grayColor],
+        NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticGroup.description attributes:attr];
         [self.descriptionView.textStorage appendAttributedString:attrStr];

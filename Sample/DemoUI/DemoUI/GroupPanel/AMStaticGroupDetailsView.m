@@ -45,19 +45,6 @@
     [btnLine lineToPoint:NSMakePoint(contentR.origin.x + contentR.size.width / 2, contentR.origin.y)];
     [btnLine stroke];
     [NSGraphicsContext restoreGraphicsState];
-    
-    NSRect firstBtnRect = NSMakeRect(contentR.origin.x,
-                                     contentR.origin.y,
-                                     contentR.size.width / 2 -1,
-                                     35);
-    
-    NSRect lastBtnRect = NSMakeRect(contentR.origin.x + contentR.size.width / 2 + 1,
-                                    contentR.origin.y,
-                                    contentR.size.width / 2 - 1,
-                                    35);
-    
-    [self.emptyBtn setFrame:firstBtnRect];
-    [self.closeBtn setFrame:lastBtnRect];
 
 }
 
@@ -71,5 +58,6 @@
 {
     return;
 }
+
 
 @end

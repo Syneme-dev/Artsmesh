@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserDetailsViewController">
             <connections>
+                <outlet property="closeBtn" destination="hJQ-v6-N1M" id="U55-2j-I1i"/>
                 <outlet property="isLeader" destination="NMP-Qd-fsO" id="tZe-6C-06t"/>
                 <outlet property="isMeshed" destination="Jhr-b7-aYH" id="OJm-pi-lXV"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticUserDetailsViewController">
             <connections>
+                <outlet property="clostBtn" destination="gBV-X7-L5C" id="lR9-uh-bLK"/>
                 <outlet property="description" destination="XrH-cW-JJF" id="rSv-zQ-z45"/>
                 <outlet property="homepage" destination="V0E-1h-i8U" id="2Th-Px-Wvw"/>
                 <outlet property="location" destination="pvA-8i-8Jp" id="9Li-Aa-3JP"/>
@@ -177,6 +178,9 @@
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="closeBtnClicked:" target="-2" id="hw3-Km-CKC"/>
+                    </connections>
                 </button>
             </subviews>
         </customView>

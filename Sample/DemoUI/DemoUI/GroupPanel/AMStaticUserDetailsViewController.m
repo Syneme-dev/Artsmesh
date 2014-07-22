@@ -8,6 +8,8 @@
 
 #import "AMStaticUserDetailsViewController.h"
 #import <UIFramework/AMFoundryFontView.h>
+#import "AMGroupPanelModel.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMStaticUserDetailsViewController ()
 @property (weak) IBOutlet AMFoundryFontView *userName;
@@ -15,6 +17,7 @@
 @property (weak) IBOutlet AMFoundryFontView *timeZone;
 @property (unsafe_unretained) IBOutlet NSTextView *homepage;
 @property (unsafe_unretained) IBOutlet NSTextView *description;
+@property (weak) IBOutlet NSButton *clostBtn;
 
 @end
 
@@ -31,6 +34,8 @@
 
 -(void)awakeFromNib
 {
+    [AMButtonHandler changeTabTextColor:self.clostBtn toColor:UI_Color_blue];
+    
     if (self.homepage && self.staticUser.url) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepage.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
@@ -48,6 +53,12 @@
         [self.description.textStorage appendAttributedString:attrStr];
         [self.description setNeedsDisplay:YES];
     }
+}
+
+- (IBAction)closeBtnClicked:(NSButton *)sender
+{
+    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
+    model.detailPanelState = DetailPanelHide;
 }
 
 @end

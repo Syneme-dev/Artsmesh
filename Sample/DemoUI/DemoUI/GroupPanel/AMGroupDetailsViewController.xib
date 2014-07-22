@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupDetailsViewController">
             <connections>
+                <outlet property="closeBtn" destination="Ohb-E3-LdX" id="xcv-ra-yyf"/>
+                <outlet property="joinBtn" destination="Yyg-CK-gOS" id="38d-Sf-xAM"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -40,6 +42,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="joinGroup:" target="-2" id="Xut-P3-ToJ"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-E3-LdX">
                     <rect key="frame" x="149" y="0.0" width="150" height="35"/>
@@ -51,6 +56,9 @@
 Gw
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="cancelClick:" target="-2" id="EGN-kz-0KC"/>
+                    </connections>
                 </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DWC-gP-Xhw" customClass="AMFoundryFontView">
                     <rect key="frame" x="13" y="124" width="259" height="22"/>

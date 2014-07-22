@@ -9,10 +9,12 @@
 #import "AMUserDetailsViewController.h"
 #import "AMGroupPanelModel.h"
 #import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMUserDetailsViewController ()
 @property (weak) IBOutlet AMCheckBoxView *isLeader;
 @property (weak) IBOutlet AMCheckBoxView *isMeshed;
+@property (weak) IBOutlet NSButton *closeBtn;
 
 @end
 
@@ -33,6 +35,8 @@
     self.isMeshed.title = @"MESHED";
     self.isLeader.readOnly = YES;
     self.isMeshed.readOnly = YES;
+    
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
 }
 
 -(void)updateUI

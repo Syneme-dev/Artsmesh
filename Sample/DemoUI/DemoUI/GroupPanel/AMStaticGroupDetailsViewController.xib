@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticGroupDetailsViewController">
             <connections>
+                <outlet property="closeBtn" destination="2Xr-aO-LvL" id="Jht-zC-ZqW"/>
                 <outlet property="descriptionView" destination="L2H-zT-dxJ" id="94Q-cu-jPc"/>
                 <outlet property="homepageView" destination="Jfy-4y-lnk" id="sqe-s8-8bV"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

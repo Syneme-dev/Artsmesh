@@ -17,14 +17,17 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="28"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
                     <rect key="frame" x="3" y="6" width="17" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="DC2-yl-Ptz"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
-                    <rect key="frame" x="17" y="7" width="158" height="17"/>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
+                    <rect key="frame" x="20" y="6" width="193" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="2H3-4b-0gC"/>
+                    </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="2i6-qR-Bgj">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -65,7 +68,10 @@
             <constraints>
                 <constraint firstItem="RVB-8o-0Dg" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="GyJ-lg-3JR"/>
                 <constraint firstItem="RVB-8o-0Dg" firstAttribute="leading" secondItem="iYe-MO-zO1" secondAttribute="trailing" constant="8" id="MKA-kk-TJ6"/>
+                <constraint firstItem="5SE-6n-cRH" firstAttribute="leading" secondItem="v5r-nE-53N" secondAttribute="trailing" constant="2" id="bnJ-cy-jb9"/>
                 <constraint firstItem="iYe-MO-zO1" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="cMU-g5-bQU"/>
+                <constraint firstItem="5SE-6n-cRH" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="5" id="dNA-LO-131"/>
+                <constraint firstItem="iYe-MO-zO1" firstAttribute="leading" secondItem="5SE-6n-cRH" secondAttribute="trailing" constant="38" id="doU-gk-pQX"/>
                 <constraint firstAttribute="trailing" secondItem="RVB-8o-0Dg" secondAttribute="trailing" constant="3" id="fnh-8b-Pq3"/>
             </constraints>
             <connections>

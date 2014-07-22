@@ -130,8 +130,8 @@
     
     if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
         
-        rowView.headImage = [NSImage imageNamed:@"group_online"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        rowView.headImage = [NSImage imageNamed:@"group_offline"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
     }
     
     return rowView;

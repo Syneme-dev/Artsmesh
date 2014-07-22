@@ -81,7 +81,7 @@
     CGFloat boxHeight = self.frame.size.height;
     CGFloat freeSpace = boxHeight - [self minContentHeight] -
                             self.paddingTop - self.paddingBottom;
-    NSAssert(freeSpace >= 0, @"freeSpace must be greater than zero");
+//    NSAssert(freeSpace >= 0, @"freeSpace must be greater than zero");
     AMBoxItem *lastItem = self.lastVisibleItem;
     
     for (AMBoxItem *item in self.subviews) {

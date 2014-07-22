@@ -13,12 +13,24 @@
 #import "AMTabPanelViewController.h"
 #import "UIFramework/AMBorderView.h"
 
+@interface AMFloatingWindow : NSWindow
+
+@end
+
+@implementation AMFloatingWindow
+
+- (BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
+
+@end
 
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 @interface AMPanelViewController ()
 {
-    NSWindow *_floatingWindow;
+    AMFloatingWindow *_floatingWindow;
 }
 
 @end
@@ -122,7 +134,7 @@
         [self.fullScreenButton setHidden:NO];
         AMBorderView *contentView = [[AMBorderView alloc] initWithView:panelView];
         
-        _floatingWindow = [[NSWindow alloc] initWithContentRect:contentView.frame
+        _floatingWindow = [[AMFloatingWindow alloc] initWithContentRect:contentView.frame
                                                      styleMask:NSBorderlessWindowMask
                                                        backing:NSBackingStoreBuffered
                                                          defer:NO];

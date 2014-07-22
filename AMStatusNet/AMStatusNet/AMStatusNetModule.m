@@ -71,20 +71,6 @@
 }
 
 
--(void)getGroupsOnStatusNet:(NSString*)url
-            completionBlock:(void(^)(NSData*, NSError*))completionBlock
-{
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-   
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    
-    NSError* error = nil;
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
-                                               returningResponse:nil
-                                                           error:&error];
-    completionBlock(returnData, error);
-}
 
 
 @end

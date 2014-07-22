@@ -249,11 +249,6 @@
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
 
-- (IBAction)reloadStaticGroups:(NSButton *)sender
-{
-    [[AMStatusNet shareInstance] loadGroups];
-}
-
 -(void)refreshStaticGroups
 {
     [self.staticGroupDataSource reloadGroups];

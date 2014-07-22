@@ -13,6 +13,7 @@
 #import "AMGroupPanelTableCellController.h"
 #import "AMGroupPanelStaticGroupCellController.h"
 #import "AMGroupPanelStaticUserCellController.h"
+#import "AMGroupPanelStaticLabelController.h"
 
 @implementation AMStaticGroupDataSource
 
@@ -38,6 +39,8 @@
         return;
     }
     
+    AMGroupPanelStaticLabelController* labelController = [[AMGroupPanelStaticLabelController alloc] initWithNibName:@"AMGroupPanelStaticLabelController" bundle:nil];
+    
     NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
     
     for(AMStaticGroup* sg in staticGroups){
@@ -60,7 +63,12 @@
         [groupControllers addObject:groupController];
     }
     
-    self.staticGroupControllers = groupControllers;
+    labelController.childrenController = groupControllers;
+    
+    NSMutableArray* statusNetControllers = [[NSMutableArray alloc] init];
+    [statusNetControllers addObject:labelController ];
+    
+    self.staticGroupControllers = statusNetControllers;
 }
 
 

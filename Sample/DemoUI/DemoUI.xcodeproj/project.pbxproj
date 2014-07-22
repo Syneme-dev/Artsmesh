@@ -17,7 +17,7 @@
 		266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE255197E41F700D8145B /* AMGroupPanelTableCellView.m */; };
 		266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE258197E428D00D8145B /* AMGroupPanelTableCellController.m */; };
 		266CE25D197E550400D8145B /* AMGroupPanelStaticUserCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE25B197E550400D8145B /* AMGroupPanelStaticUserCellController.m */; };
-		266CE25E197E550400D8145B /* AMGroupPanelStaticUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */; };
+		266CE25E197E550400D8145B /* AMGroupPanelStaticUserCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE25C197E550400D8145B /* AMGroupPanelStaticUserCellController.xib */; };
 		26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
@@ -224,7 +224,7 @@
 		266CE258197E428D00D8145B /* AMGroupPanelTableCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelTableCellController.m; sourceTree = "<group>"; };
 		266CE25A197E550400D8145B /* AMGroupPanelStaticUserCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticUserCellController.h; sourceTree = "<group>"; };
 		266CE25B197E550400D8145B /* AMGroupPanelStaticUserCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticUserCellController.m; sourceTree = "<group>"; };
-		266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticUserViewController.xib; sourceTree = "<group>"; };
+		266CE25C197E550400D8145B /* AMGroupPanelStaticUserCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticUserCellController.xib; sourceTree = "<group>"; };
 		26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticGroupCellController.h; sourceTree = "<group>"; };
 		26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticGroupCellController.m; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 				CEC2FC47196588FD00AFD309 /* AMGroupPanelUserCellController.xib */,
 				CEC2FC42196588FD00AFD309 /* AMGroupPanelLabelCellController.xib */,
 				D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */,
-				266CE25C197E550400D8145B /* AMGroupPanelStaticUserViewController.xib */,
+				266CE25C197E550400D8145B /* AMGroupPanelStaticUserCellController.xib */,
 				CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */,
 				CEC2FC52196588FD00AFD309 /* AMUserDetailsViewController.xib */,
 				26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */,
@@ -918,7 +918,7 @@
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
-				266CE25E197E550400D8145B /* AMGroupPanelStaticUserViewController.xib in Resources */,
+				266CE25E197E550400D8145B /* AMGroupPanelStaticUserCellController.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,

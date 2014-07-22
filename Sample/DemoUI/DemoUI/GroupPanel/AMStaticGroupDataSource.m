@@ -42,7 +42,7 @@
     
     for(AMStaticGroup* sg in staticGroups){
         AMGroupPanelStaticGroupCellController* groupController =
-        [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellontroller" bundle:nil];
+        [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellController" bundle:nil];
         
         groupController.staticGroup = sg;
         
@@ -106,7 +106,7 @@
 
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
-    if ([item isKindOfClass:[NSViewController class]]) {
+    if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
         AMGroupPanelTableCellController* controller = (AMGroupPanelTableCellController*) item;
         NSView* cellView = controller.view;
         
@@ -124,7 +124,6 @@
         
         rowView.headImage = [NSImage imageNamed:@"group_online"];
         rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-        
     }
     
     return rowView;

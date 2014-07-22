@@ -59,6 +59,11 @@
     
 }
 
+-(void)cellViewDoubleClicked:(id)sender
+{
+    return;
+}
+
 #pragma mark-
 #pragma TableViewCell FrameChanged
 

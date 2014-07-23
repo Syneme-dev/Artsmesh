@@ -71,6 +71,7 @@
         [self loadAvatarFromUrl:imageUrlString];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        [self loadAvatarFromUrl:@"http://artsmesh.io//theme/dark/default-avatar-profile.png"];
     }];
 }
 

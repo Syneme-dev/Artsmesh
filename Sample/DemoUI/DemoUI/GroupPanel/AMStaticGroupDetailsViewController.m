@@ -10,6 +10,8 @@
 #import "AMGroupPanelModel.h"
 #import "UIFramework/AMFoundryFontTextView.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "UIFramework/AMFoundryFontView.h"
+#import "AMMesher/AMMesher.h"
 
 #define UI_Color_b7b7b7  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]
 @interface AMStaticGroupDetailsViewController ()
@@ -17,6 +19,9 @@
 @property (unsafe_unretained) IBOutlet NSTextView *homepageView;
 @property (unsafe_unretained) IBOutlet AMFoundryFontTextView *descriptionView;
 @property (weak) IBOutlet NSButton *closeBtn;
+@property (weak) IBOutlet NSButton *applyBtn;
+@property (weak) IBOutlet AMFoundryFontView *groupNameField;
+
 
 @end
 
@@ -39,6 +44,7 @@
 -(void)awakeFromNib
 {
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.applyBtn toColor:UI_Color_blue];
     
     if (self.homepageView && self.staticGroup.homepage) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepageView.font.pointSize];
@@ -57,6 +63,13 @@
         [self.descriptionView.textStorage appendAttributedString:attrStr];
         [self.descriptionView setNeedsDisplay:YES];
     }
+}
+
+- (IBAction)applyBtnClicked:(NSButton *)sender
+{
+    [AMCoreData shareInstance].myLocalLiveGroup.groupName = self.groupNameField.stringValue;
+    [AMCoreData shareInstance].myLocalLiveGroup.description = self.descriptionView.textStorage.string;
+    [[AMMesher sharedAMMesher] updateGroup];
 }
 
 

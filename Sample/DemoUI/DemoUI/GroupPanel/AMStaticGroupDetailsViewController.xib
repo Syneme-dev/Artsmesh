@@ -6,8 +6,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticGroupDetailsViewController">
             <connections>
+                <outlet property="applyBtn" destination="Lji-lN-j3v" id="8xQ-hZ-Td2"/>
                 <outlet property="closeBtn" destination="2Xr-aO-LvL" id="Jht-zC-ZqW"/>
                 <outlet property="descriptionView" destination="L2H-zT-dxJ" id="94Q-cu-jPc"/>
+                <outlet property="groupNameField" destination="Fws-m1-Ab1" id="Jdi-GF-sfU"/>
                 <outlet property="homepageView" destination="Jfy-4y-lnk" id="sqe-s8-8bV"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -113,10 +115,13 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v">
                     <rect key="frame" x="0.0" y="1" width="149" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
+                    <buttonCell key="cell" type="square" title="APPLE TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="applyBtnClicked:" target="-2" id="lQY-LO-CB4"/>
+                    </connections>
                 </button>
                 <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F61-wU-GGJ">
                     <rect key="frame" x="32" y="232" width="223" height="28"/>

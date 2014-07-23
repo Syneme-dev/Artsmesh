@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticUserDetailsViewController">
             <connections>
+                <outlet property="applyBtn" destination="FY4-sE-1Hv" id="V37-2D-wLe"/>
                 <outlet property="clostBtn" destination="gBV-X7-L5C" id="lR9-uh-bLK"/>
                 <outlet property="description" destination="XrH-cW-JJF" id="rSv-zQ-z45"/>
                 <outlet property="homepage" destination="V0E-1h-i8U" id="2Th-Px-Wvw"/>
@@ -166,10 +167,13 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FY4-sE-1Hv">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="b0i-Zc-3jL">
+                    <buttonCell key="cell" type="square" title="APPLY TO LIVEUSER" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="b0i-Zc-3jL">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="applyBtnClicked:" target="-2" id="ena-mO-n6i"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gBV-X7-L5C">
                     <rect key="frame" x="149" y="0.0" width="150" height="35"/>

@@ -10,6 +10,7 @@
 #import <UIFramework/AMFoundryFontView.h>
 #import "AMGroupPanelModel.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMStaticUserDetailsViewController ()
 @property (weak) IBOutlet AMFoundryFontView *userName;
@@ -18,6 +19,7 @@
 @property (unsafe_unretained) IBOutlet NSTextView *homepage;
 @property (unsafe_unretained) IBOutlet NSTextView *description;
 @property (weak) IBOutlet NSButton *clostBtn;
+@property (weak) IBOutlet NSButton *applyBtn;
 
 @end
 
@@ -35,6 +37,7 @@
 -(void)awakeFromNib
 {
     [AMButtonHandler changeTabTextColor:self.clostBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.applyBtn toColor:UI_Color_blue];
     
     if (self.homepage && self.staticUser.url) {
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepage.font.pointSize];
@@ -59,6 +62,15 @@
 {
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     model.detailPanelState = DetailPanelHide;
+}
+
+- (IBAction)applyBtnClicked:(NSButton *)sender
+{
+    [AMCoreData shareInstance].mySelf.nickName = self.userName.stringValue;
+    [AMCoreData shareInstance].mySelf.description = self.description.textStorage.string;
+    [AMCoreData shareInstance].mySelf.location = self.location.stringValue;
+    
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 
 @end

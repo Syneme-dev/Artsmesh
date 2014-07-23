@@ -68,10 +68,15 @@
 
 - (IBAction)applyBtnClicked:(NSButton *)sender
 {
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    
     [AMCoreData shareInstance].myLocalLiveGroup.groupName = self.groupNameField.stringValue;
     [AMCoreData shareInstance].myLocalLiveGroup.description = self.descriptionView.textStorage.string;
-    [[AMMesher sharedAMMesher] updateGroup];
     
+    [defaults setObject:self.groupNameField.stringValue forKey:Preference_Key_Cluster_Name];
+    [defaults setObject:self.self.descriptionView.textStorage.string forKey:Preference_Key_Cluster_Description];
+    
+    [[AMMesher sharedAMMesher] updateGroup];
     [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];
 }
 

@@ -71,6 +71,7 @@
     [AMCoreData shareInstance].mySelf.location = self.location.stringValue;
     
     [[AMMesher sharedAMMesher] updateMySelf];
+    [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];
 }
 
 @end

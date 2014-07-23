@@ -14,6 +14,7 @@ typedef enum {
     DetailPanelUser,
     DetailPanelGroup,
     DetailPanelStaticGroup,
+    DetailPanelStaticUser,
 }DetailPanelState;
 
 @interface AMGroupPanelModel : NSObject
@@ -22,6 +23,7 @@ typedef enum {
 @property AMLiveUser* selectedUser;
 @property DetailPanelState detailPanelState;
 @property AMStaticGroup* selectedStaticGroup;
+@property AMStaticUser* selectedStaticUser;
 
 +(id)sharedGroupModel;
 

@@ -35,9 +35,18 @@
         // This is (presumably) the button holding the
         // outline triangle button.
         // We set our own images here.
+        NSButton* triangleBtn = (NSButton *)subview;
+        
         if (self.headImage != nil && self.alterHeadImage != nil) {
-            [(NSButton *)subview setImage:self.headImage];
-            [(NSButton *)subview setAlternateImage:self.alterHeadImage];
+            [triangleBtn setImage:self.headImage];
+            [triangleBtn setAlternateImage:self.alterHeadImage];
+            
+            NSRect rect = NSMakeRect(triangleBtn.frame.origin.x,
+                                     triangleBtn.frame.origin.y+5,
+                                     15,
+                                     15);
+
+            [triangleBtn setFrame:rect];
         }
     }
 }

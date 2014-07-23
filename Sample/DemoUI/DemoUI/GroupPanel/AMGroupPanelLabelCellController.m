@@ -1,18 +1,18 @@
 //
-//  AMGroupOutlineLabelCellController.m
+//  AMGroupPanelLabelCellController.m
 //  DemoUI
 //
 //  Created by 王 为 on 6/30/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGroupOutlineLabelCellController.h"
+#import "AMGroupPanelLabelCellController.h"
 
-@interface AMGroupOutlineLabelCellController ()
+@interface AMGroupPanelLabelCellController ()
 
 @end
 
-@implementation AMGroupOutlineLabelCellController
+@implementation AMGroupPanelLabelCellController
 
 -(void)updateUI
 {

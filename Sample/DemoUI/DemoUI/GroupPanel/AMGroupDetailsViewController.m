@@ -9,11 +9,14 @@
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMGroupPanelModel.h"
-#import "AMGroupDetailsView.h"
+#import "AMGroupPanelDetailView.h"
 #import "AMMesher/AMMesher.h"
-
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMGroupDetailsViewController ()
+@property (weak) IBOutlet NSButton *joinBtn;
+@property (weak) IBOutlet NSButton *closeBtn;
+
 @end
 
 
@@ -28,6 +31,13 @@
     return self;
 }
 
+
+-(void)awakeFromNib
+{
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.joinBtn toColor:UI_Color_blue];
+}
+
 -(void)updateUI
 {
     NSString* myGroupId = [AMCoreData shareInstance].myLocalLiveGroup.groupId;
@@ -36,12 +46,10 @@
     NSString* myMergedGroupId = [AMCoreData shareInstance].mergedGroupId;
     BOOL isMyMergedGroup = [myMergedGroupId isEqualToString:self.group.groupId];
     
-    AMGroupDetailsView* detailView = (AMGroupDetailsView*)self.view;
-    
     if ( isMyGroup || isMyMergedGroup) {
-        [detailView.joinGroupBtn  setEnabled:NO];
+        [self.joinBtn  setEnabled:NO];
     }else{
-        [detailView.joinGroupBtn setEnabled:YES];
+        [self.joinBtn setEnabled:YES];
     }
 }
 

@@ -28,22 +28,22 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">
-                    <rect key="frame" x="0.0" y="-19" width="600" height="799"/>
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
                             <view key="view" id="Mp1-oa-ElH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-xL-9s4">
-                                        <rect key="frame" x="-1" y="0.0" width="600" height="799"/>
+                                        <rect key="frame" x="-1" y="0.0" width="600" height="780"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="685" width="93" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="18" y="671" width="93" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="5Tz-Hg-3ES"/>
@@ -55,8 +55,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="340" y="479" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="340" y="465" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="208" id="4gp-ql-qy0"/>
@@ -71,8 +71,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_ChatPort" id="eWt-D6-xXb"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="30" y="388" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="30" y="374" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="208" id="hxv-r7-bTG"/>
@@ -87,8 +87,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_LocalServerPort" id="XZs-2r-Vmq"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="30" y="479" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="30" y="465" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="UBY-xt-UvY"/>
@@ -103,8 +103,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerAddr" id="NjG-vl-Ywi"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="30" y="568" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="30" y="554" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="208" id="QU9-Rc-McQ"/>
@@ -119,8 +119,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_GlobalServerAddr" id="Urz-cG-4ZF"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="340" y="388" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="340" y="374" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="208" id="IrV-zw-Ehs"/>
@@ -135,8 +135,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerPort" id="BDO-sM-tgo"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="340" y="568" width="212" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="340" y="554" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="3iH-rz-5hc"/>
@@ -151,8 +151,8 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_GlobalServerPort" id="94X-Dp-ZuD"/>
                                                 </connections>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="328" y="416" width="107" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="328" y="402" width="107" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="103" id="ALY-AS-ZFv"/>
@@ -164,8 +164,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="509" width="101" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="18" y="495" width="101" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="97" id="1MP-il-H3j"/>
@@ -177,8 +177,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-AN-6QR" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="598" width="105" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-AN-6QR" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="18" y="584" width="105" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="101" id="PtD-ob-DvZ"/>
@@ -190,8 +190,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="416" width="158" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="18" y="402" width="158" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="154" id="Rdf-a6-o7E"/>
@@ -203,8 +203,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="328" y="598" width="142" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="328" y="584" width="142" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="138" id="1Ff-T4-gd4"/>
@@ -216,8 +216,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="328" y="509" width="125" height="17"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="328" y="495" width="125" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="121" id="GSl-5J-z6K"/>
@@ -229,8 +229,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgK-Gw-A8W" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="30" y="732" width="484" height="22"/>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgK-Gw-A8W" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="30" y="718" width="484" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="bmH-5w-mGc">
                                                     <font key="font" metaFont="system"/>
@@ -242,7 +242,7 @@
                                                 </connections>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LcN-Mm-SCa" customClass="AMFoundryFontView">
-                                                <rect key="frame" x="18" y="762" width="104" height="17"/>
+                                                <rect key="frame" x="18" y="743" width="104" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="OJU-Sv-NVs"/>
@@ -254,8 +254,8 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <popUpButton focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
-                                                <rect key="frame" x="20" y="656" width="237" height="21"/>
+                                            <popUpButton focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
+                                                <rect key="frame" x="20" y="642" width="237" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="237" id="gWC-aS-asQ"/>
@@ -275,8 +275,8 @@
                                                     <action selector="privateIpSelected:" target="-2" id="ZeV-2d-M67"/>
                                                 </connections>
                                             </popUpButton>
-                                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
-                                                <rect key="frame" x="330" y="678" width="220" height="24"/>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
+                                                <rect key="frame" x="330" y="664" width="220" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="KMg-B5-qRS"/>
@@ -443,8 +443,8 @@
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="297" y="2" width="72" height="13"/>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
+                            <rect key="frame" x="288" y="2" width="81" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
                                 <behavior key="behavior" lightByContents="YES"/>
@@ -454,8 +454,8 @@
                                 <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
                             </connections>
                         </button>
-                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="jackRouterTab">
-                            <rect key="frame" x="328" y="2" width="120" height="13"/>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="jackRouterTab">
+                            <rect key="frame" x="363" y="2" width="85" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="inline" title="JACK ROUTER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
                                 <behavior key="behavior" lightByContents="YES"/>
@@ -501,8 +501,8 @@
                                 <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
                             </connections>
                         </button>
-                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
-                            <rect key="frame" x="207" y="2" width="86" height="13"/>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
+                            <rect key="frame" x="198" y="2" width="86" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="86" id="OzK-wI-J0Y"/>

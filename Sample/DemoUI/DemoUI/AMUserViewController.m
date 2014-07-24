@@ -16,8 +16,11 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
+#import "AMUserLogonViewController.h"
 
 @interface AMUserViewController ()
+
+@property NSPopover *myPopover;
 
 @end
 
@@ -96,10 +99,31 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                             myUserName, @"UserName", nil];
-    [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+    if (myUserName != nil && ![myUserName isEqualToString:@""]) {
+        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 myUserName, @"UserName", nil];
+        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+    }else{
+        [self PopoverUserLogonView:sender];
+    }
+}
 
+-(void)PopoverUserLogonView:(id)sender
+{
+    if (self.myPopover == nil) {
+        self.myPopover = [[NSPopover alloc] init];
+        
+        self.myPopover.animates = YES;
+        self.myPopover.behavior = NSPopoverBehaviorTransient;
+        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        self.myPopover.delegate = self;
+    }
+    
+    self.myPopover.contentViewController = [[AMUserLogonViewController alloc] initWithNibName:@"AMUserLogonViewController" bundle:nil];
+    
+    NSButton *targetButton = (NSButton*)sender;
+    NSRectEdge prefEdge = NSMaxXEdge;
+    [self.myPopover showRelativeToRect:[targetButton bounds] ofView:sender preferredEdge:prefEdge];
 }
 
 - (IBAction)groupNameEdited:(NSTextField *)sender

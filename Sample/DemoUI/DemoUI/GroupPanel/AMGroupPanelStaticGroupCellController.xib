@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -26,7 +26,7 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="rCm-uE-fil"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
                     <rect key="frame" x="12" y="4" width="214" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
@@ -39,7 +39,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="xb8-GE-aqU">
-                    <rect key="frame" x="254" y="5" width="20" height="20"/>
+                    <rect key="frame" x="250" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="3HA-Uz-xFj"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="WMq-Cl-l5K">
-                    <rect key="frame" x="277" y="5" width="20" height="20"/>
+                    <rect key="frame" x="273" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="CAq-6e-RPA"/>
@@ -71,11 +71,11 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xb8-GE-aqU" secondAttribute="bottom" constant="5" id="0M2-hM-HCJ"/>
-                <constraint firstAttribute="trailing" secondItem="WMq-Cl-l5K" secondAttribute="trailing" constant="3" id="2Im-mK-DIJ"/>
                 <constraint firstItem="h1i-Kc-GOv" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="4" id="4SA-2c-F3X"/>
+                <constraint firstAttribute="trailing" secondItem="WMq-Cl-l5K" secondAttribute="trailing" constant="7" id="6Hy-eZ-O3H"/>
                 <constraint firstItem="h1i-Kc-GOv" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="14" id="Gjx-Ae-UTO"/>
+                <constraint firstItem="WMq-Cl-l5K" firstAttribute="leading" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="JdV-5t-Dgx"/>
                 <constraint firstAttribute="bottom" secondItem="WMq-Cl-l5K" secondAttribute="bottom" constant="5" id="fIp-Xf-rnJ"/>
-                <constraint firstItem="WMq-Cl-l5K" firstAttribute="leading" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="gLg-BR-OfW"/>
                 <constraint firstItem="xb8-GE-aqU" firstAttribute="leading" secondItem="h1i-Kc-GOv" secondAttribute="trailing" constant="30" id="lAz-M7-bmN"/>
                 <constraint firstItem="w62-8T-FVQ" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="5" id="oks-dF-FS3"/>
                 <constraint firstAttribute="bottom" secondItem="w62-8T-FVQ" secondAttribute="bottom" constant="8" id="wCs-QF-EzQ"/>
@@ -90,6 +90,6 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="usergroup_info" width="10" height="10"/>
+        <image name="usergroup_info" width="7" height="7"/>
     </resources>
 </document>

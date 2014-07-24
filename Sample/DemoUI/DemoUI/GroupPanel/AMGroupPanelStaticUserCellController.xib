@@ -56,7 +56,7 @@
                         <constraint firstAttribute="width" constant="20" id="HNO-ic-tlM"/>
                         <constraint firstAttribute="height" constant="20" id="Rwy-fr-giy"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="6Ip-MW-RHe">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="usergroup_info" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="6Ip-MW-RHe">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -82,5 +82,6 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="usergroup_info" width="7" height="7"/>
     </resources>
 </document>

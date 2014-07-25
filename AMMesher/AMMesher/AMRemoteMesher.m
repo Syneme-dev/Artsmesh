@@ -474,6 +474,12 @@
     if (version != _userlistVersion){
         [self requestUserList];
     }
+    
+    BOOL hasMessage = [[result objectForKey:@"HasMessage"] boolValue];
+    if (hasMessage) {
+        //Send quest message request
+    }
+
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data

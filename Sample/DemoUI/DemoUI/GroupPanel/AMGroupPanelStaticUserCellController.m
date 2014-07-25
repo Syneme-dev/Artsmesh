@@ -31,8 +31,9 @@
 -(void)updateUI
 {
     AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
-    [cellView.imageView setHidden:YES];
     cellView.textField.stringValue = [self.staticUser name];
+    [cellView.textField setEditable:NO];
+    [cellView.imageView setImage:[NSImage imageNamed:@"user_offline"]];
     
     [self.socialBtn setHidden:YES];
     [self.infoBtn setHidden:YES];

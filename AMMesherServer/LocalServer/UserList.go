@@ -63,6 +63,11 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		g_store.groupData.GroupName = group.GroupName
 		g_store.groupData.Description = group.Description
 		g_store.groupData.LeaderId = group.LeaderId
+		g_store.groupData.FullName = group.FullName
+		g_store.groupData.Location = group.Location
+		g_store.groupData.Project = group.Project
+		g_store.groupData.Busy = group.Busy
+		
 		makeSnapShot()
 		return "ok"
 	}
@@ -191,6 +196,11 @@ func makeSnapShot(){
 	newSnapShot.GroupData.GroupName = g_store.groupData.GroupName
 	newSnapShot.GroupData.Description = g_store.groupData.Description
 	newSnapShot.GroupData.LeaderId = g_store.groupData.LeaderId
+	newSnapShot.GroupData.FullName = g_store.groupData.FullName
+	newSnapShot.GroupData.Project = g_store.groupData.Project
+	newSnapShot.GroupData.Location = g_store.groupData.Location
+	newSnapShot.GroupData.Busy = g_store.groupData.Busy
+	
 		
 	fmt.Println("-------------g_store.userStores count is:", len(g_store.userStores))
 	for _, v := range g_store.userStores{
@@ -207,6 +217,7 @@ func makeSnapShot(){
 		userData.PublicIp = v.userData.PublicIp
 		userData.ChatPort = v.userData.ChatPort
 		userData.PublicChatPort = v.userData.PublicChatPort
+		userData.Busy = v.userData.Busy
 		
 		newSnapShot.UsersData = append(newSnapShot.UsersData , userData)
 	}

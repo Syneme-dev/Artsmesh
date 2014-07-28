@@ -17,8 +17,11 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMUserLogonViewController.h"
+#import "UIFrameWork/AMCheckBoxView.h"
 
 @interface AMUserViewController ()
+@property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
+@property (weak) IBOutlet AMCheckBoxView *userBusyCheckBox;
 
 @property NSPopover *myPopover;
 
@@ -41,6 +44,8 @@
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
+    self.groupBusyCheckbox.title = @"BUSY";
+    self.userBusyCheckBox.title = @"BUSY";
     [self loadAvatarImage];
 }
 

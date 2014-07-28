@@ -677,7 +677,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32k-JN-wvV" userLabel="user" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32k-JN-wvV" userLabel="user" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="648" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -722,7 +722,7 @@
                             <constraint firstAttribute="height" constant="40" id="zDA-gD-Aih"/>
                         </constraints>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUd-73-Mf2" userLabel="group" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUd-73-Mf2" userLabel="group" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="607" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -739,7 +739,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buw-IA-tqi" userLabel="setting" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buw-IA-tqi" userLabel="setting" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="566" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -756,7 +756,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-oY-8if" userLabel="terminal" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-oY-8if" userLabel="terminal" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="525" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -773,7 +773,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K11-xs-VTh" userLabel="osc" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K11-xs-VTh" userLabel="osc" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="484" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -790,7 +790,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fbs-7f-cN8" userLabel="chat" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fbs-7f-cN8" userLabel="chat" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="443" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -807,7 +807,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6xs-yK-Ik5" userLabel="mapview" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6xs-yK-Ik5" userLabel="mapview" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="402" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -824,7 +824,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Va6-5H-cZI" userLabel="oscrouter" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Va6-5H-cZI" userLabel="oscrouter" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="361" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -841,7 +841,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-cP-0rI" userLabel="social" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-cP-0rI" userLabel="social" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="320" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -858,7 +858,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-60-PDr" userLabel="clock" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-60-PDr" userLabel="clock" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="279" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -875,7 +875,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rP7-nO-BJv" userLabel="movie" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rP7-nO-BJv" userLabel="movie" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="238" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -892,7 +892,7 @@
                             </button>
                         </subviews>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-rY-rAF" userLabel="musicScore" customClass="BlueBackgroundView">
+                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-rY-rAF" userLabel="musicScore" customClass="BlueBackgroundView">
                         <rect key="frame" x="0.0" y="197" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -927,7 +927,7 @@
                         </subviews>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTH-N1-xDZ" customClass="AMFoundryFontView">
-                        <rect key="frame" x="446" y="732" width="160" height="17"/>
+                        <rect key="frame" x="301" y="732" width="160" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00  :  00  :  00  SEC" id="hA5-yY-yxD">
                             <font key="font" metaFont="system"/>
@@ -971,7 +971,7 @@
                         </textFieldCell>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
-                        <rect key="frame" x="266" y="725" width="30" height="30"/>
+                        <rect key="frame" x="181" y="725" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1002,7 +1002,7 @@
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-Xf-hwP">
-                        <rect key="frame" x="419" y="732" width="16" height="16"/>
+                        <rect key="frame" x="274" y="732" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_off" imagePosition="only" alignment="center" alternateImage="play_on" imageScaling="proportionallyDown" inset="2" id="mbk-Xg-bLU">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -1025,7 +1025,7 @@
                         </buttonCell>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
-                        <rect key="frame" x="306" y="731" width="38" height="17"/>
+                        <rect key="frame" x="221" y="731" width="38" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mesh" id="YtJ-b7-urv">
                             <font key="font" metaFont="system"/>

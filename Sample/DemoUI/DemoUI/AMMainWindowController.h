@@ -27,6 +27,10 @@
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
 - (IBAction)copyPanel:(id)sender;
 
+
+-(void)removePanel:(NSString *)panelName;
+-(AMPanelViewController *)createPanelWithType:(NSString*)panelType withId:(NSString*)panelId;
+
 -(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title withTabId:(NSString*)tabId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController;
 
 @end

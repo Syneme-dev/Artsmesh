@@ -176,18 +176,34 @@
     isWindowLoading=YES;
     [self initTimer];
     [self createDefaultWindow];
-//    [self loadTestPanel];
-    [self initControlBar];
+//    [self loadTestPanel]; //Note:uncomment this code to show test panel.
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
+
+    [self initControlBar:isTopBar];
     [self createDefaultPanelAndloadControlBarItemStatus];
     isWindowLoading=NO;
 }
 
--(void)initControlBar{
- NSSize windowSize = [self.window.contentView frame].size;
- NSPoint point=   NSMakePoint(400, windowSize.height-60);
-    controlBarController=[[AMPanelControlBarViewController alloc]initWithNibName:@"PanelControlBarView" bundle:nil];
+-(void)initControlBar:(BOOL)isTop{
+    if (controlBarController) {
+        [controlBarController.view removeFromSuperview];
+    }
+    NSSize windowSize = [self.window.contentView frame].size;
+    if(isTop){
+                NSPoint point=   NSMakePoint(400, windowSize.height-60);
+        controlBarController=[[AMPanelControlBarViewController alloc]initWithNibName:@"PanelControlBarView" bundle:nil];
     [controlBarController.view setFrameOrigin:point];
     [self.window.contentView addSubview:controlBarController.view];
+    }
+    else{
+        
+        controlBarController=[[AMPanelControlBarViewController alloc]initWithNibName:@"VerticalControlBarView" bundle:nil];
+        NSPoint point=   NSMakePoint(0, windowSize.height-60-20-controlBarController.view.frame.size.height);
+        [controlBarController.view setFrameOrigin:point];
+        [self.window.contentView addSubview:controlBarController.view];
+    
+    }
     
 }
 
@@ -201,7 +217,17 @@
             [self setSideBarItemStatus:sideItemId withStatus:YES ];
         }
     }
+}
 
+-(void)loadControlBarItemStatus{
+    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
+    for (NSString* openedPanelId in openedPanels) {
+        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
+        {
+            NSString *sideItemId=[openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+        }
+    }
 }
 
 - (void)copyPanel:(NSButton *)sender
@@ -299,12 +325,6 @@
     {
         [openedPanels addObject:identifier];
     }
-//    for (NSView *subView in _containerView.subviews) {
-//        if([subView isKindOfClass:[AMPanelView class]] )
-//        {
-//            [subView setFrameOrigin:NSMakePoint(subView.frame.origin.x+40.0+width, subView.frame.origin.y)];
-//        }
-//    }
      [_containerView addSubview:panelViewController.view];
     [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;

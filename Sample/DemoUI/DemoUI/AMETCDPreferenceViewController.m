@@ -13,11 +13,8 @@
 #import <UIFramework/AMCheckBoxView.h>
 #import <AMCommonTools/AMCommonTools.h>
 #import <AMStatusNet/AMStatusNet.h>
-
-
+#import "AMAppDelegate.h"
 #import "AMPopupMenuItem.h"
-
-
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
@@ -48,16 +45,18 @@
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.postStatusMessageButton toColor:UI_Color_blue];
-    
     _preference_queue = dispatch_queue_create("preference_queue", DISPATCH_QUEUE_SERIAL);
-    
     [self resetPopupItems];
     [self.myPrivateIpPopup setPullsDown:YES];
-    
     self.Ipv6checkBox.readOnly= NO;
     self.Ipv6checkBox.title = @"USE IPV6";
     self.Ipv6checkBox.delegate = self;
+    self.isTopControlBarCheckBox.delegate=self;
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
+    self.isTopControlBarCheckBox.checked=isTopBar;
+    
 }
 
 - (IBAction)onJackServerTabClick:(id)sender {
@@ -287,15 +286,25 @@
     }
 }
 
+
+
 -(void)onChecked:(AMCheckBoxView *)sender
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if([sender.identifier isEqualToString:@"isTopControlBar"]){
+        AMAppDelegate *appDelegate=AM_APPDELEGATE;
+        [appDelegate.mainWindowController initControlBar:sender.checked];
+        [defaults setBool:sender.checked forKey:Preference_Key_General_TopControlBar];
+        [appDelegate.mainWindowController loadControlBarItemStatus];
+    }
+    else{
     [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
     
     if(sender.checked){
           [self loadIpv6];
     }else{
         [self loadIpv4];
+    }
     }
 }
 

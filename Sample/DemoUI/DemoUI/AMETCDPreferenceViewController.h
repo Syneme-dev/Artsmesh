@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <UIFramework/AMCheckBoxView.h>
 
 
 @interface AMETCDPreferenceViewController : NSViewController
@@ -35,6 +36,7 @@
 - (IBAction)privateIpSelected:(id)sender;
 - (IBAction)statusNetTest:(id)sender;
 
+@property (strong) IBOutlet AMCheckBoxView *isTopControlBarCheckBox;
 -(void)loadSystemInfo;
 -(void)customPrefrence;
 

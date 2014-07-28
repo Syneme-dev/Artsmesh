@@ -82,7 +82,6 @@
 		AF82E35E190CAB630083487C /* KievitSlabOT.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E348190CA81A0083487C /* KievitSlabOT.otf */; };
 		AF86600919401C83008DB7CA /* AMTestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86600819401C83008DB7CA /* AMTestView.xib */; };
 		AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86600B19401F4D008DB7CA /* AMTestViewController.m */; };
-		AF8EC7BF1985F80C0019D650 /* PanelControlVerticalBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8EC7BE1985F80C0019D650 /* PanelControlVerticalBarView.xib */; };
 		AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */; };
 		AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
 		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
@@ -315,7 +314,6 @@
 		AF86600819401C83008DB7CA /* AMTestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTestView.xib; sourceTree = "<group>"; };
 		AF86600A19401F4D008DB7CA /* AMTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTestViewController.h; sourceTree = "<group>"; };
 		AF86600B19401F4D008DB7CA /* AMTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTestViewController.m; sourceTree = "<group>"; };
-		AF8EC7BE1985F80C0019D650 /* PanelControlVerticalBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelControlVerticalBarView.xib; sourceTree = "<group>"; };
 		AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerticalControlBarView.xib; sourceTree = "<group>"; };
 		AF9205411910B42D0051BE63 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserView.xib; sourceTree = "<group>"; };
@@ -471,7 +469,6 @@
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
 				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
-				AF8EC7BE1985F80C0019D650 /* PanelControlVerticalBarView.xib */,
 				AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */,
 			);
 			name = Panels;
@@ -958,7 +955,6 @@
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
 				AFAEBDB319610BEA00B7FB51 /* RecentTags.png in Resources */,
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
-				AF8EC7BF1985F80C0019D650 /* PanelControlVerticalBarView.xib in Resources */,
 				AFAEBDB019610BEA00B7FB51 /* IncomingTopic.png in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
@@ -989,6 +985,7 @@
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,
+				260646661985EC3B003FCD21 /* LocalServer in Resources */,
 				AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,

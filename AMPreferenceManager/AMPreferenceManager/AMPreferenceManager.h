@@ -16,6 +16,7 @@
 #define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
 #define Preference_Key_General_StunServerAddr       @"Preference_Key_General_StunServerAddr"
 #define Preference_Key_General_StunServerPort       @"Preference_Key_General_StunServerPort"
+#define Preference_Key_General_TopControlBar @"Preference_Key_General_TopControlBar"
 
 //UserInfo
 #define Preference_Key_User_NickName            @"Preference_Key_User_NickName"
@@ -57,6 +58,7 @@
 #define Preference_General_GlobalServerAddr   @"123.124.145.254"
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"9090"
+#define Preference_General_TopControlBar   @"YES"
 
 #define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
 

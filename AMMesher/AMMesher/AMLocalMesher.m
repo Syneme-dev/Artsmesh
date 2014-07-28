@@ -416,7 +416,7 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info response wrong! %@", responseStr);
-            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED];
+            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_LOCAL];
         }
     };
     

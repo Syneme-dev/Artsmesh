@@ -100,7 +100,7 @@
         self.window.restorable = YES;
         self.window.restorationClass = [appDelegate class];
         self.window.identifier = @"mainWindow";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANDED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANDED_REMOTE object:nil];
     }
     return self;
 }

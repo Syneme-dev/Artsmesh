@@ -8,10 +8,12 @@
             <connections>
                 <outlet property="avatarView" destination="X62-yl-u4b" id="Cly-Ba-cyK"/>
                 <outlet property="groupBusyCheckbox" destination="SNl-7e-QuP" id="e0f-bN-mun"/>
+                <outlet property="groupStatusIcon" destination="Li6-Sz-exa" id="57N-Ig-y0Z"/>
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>
                 <outlet property="userBusyCheckBox" destination="LIb-SJ-ZZa" id="ch2-KB-gRr"/>
+                <outlet property="userStatusIcon" destination="xaj-44-mtN" id="Xs5-xT-xCX"/>
                 <outlet property="userTabButton" destination="CTb-fs-kgV" id="oEi-dy-f2a"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
             </connections>
@@ -111,7 +113,7 @@
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-44-mtN" userLabel="statusIcon">
                                         <rect key="frame" x="10" y="70" width="10" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="OnlineDot" id="JHP-5W-JGn"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="user_unmeshed_icon" id="JHP-5W-JGn"/>
                                     </imageView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
                                         <rect key="frame" x="100" y="104" width="26" height="26"/>
@@ -247,7 +249,7 @@
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li6-Sz-exa" userLabel="statusIcon">
                                         <rect key="frame" x="8" y="70" width="10" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="OnlineDot" id="XWE-gE-N7z"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="XWE-gE-N7z"/>
                                     </imageView>
                                 </subviews>
                             </view>
@@ -310,8 +312,9 @@
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
     </objects>
     <resources>
-        <image name="OnlineDot" width="9" height="10"/>
         <image name="SideBar_user_h" width="40" height="40"/>
+        <image name="group_unmeshed_icon" width="45" height="45"/>
         <image name="user_Icon_FOAF" width="25" height="25"/>
+        <image name="user_unmeshed_icon" width="44" height="44"/>
     </resources>
 </document>

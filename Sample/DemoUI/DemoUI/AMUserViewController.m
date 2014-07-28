@@ -22,6 +22,8 @@
 @interface AMUserViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheckBox;
+@property (weak) IBOutlet NSImageView *userStatusIcon;
+@property (weak) IBOutlet NSImageView *groupStatusIcon;
 
 @property NSPopover *myPopover;
 
@@ -48,8 +50,38 @@
     self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
     self.userBusyCheckBox.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfSynced) name:AM_MYSELF_CHANDED_REMOTE object:nil];
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfSynced) name:AM_MYSELF_CHANDED_LOCAL object:nil];
     [self loadAvatarImage];
 }
+
+-(void)mySelfSynced
+{
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    
+    if (mySelf.isOnline) {
+        if (mySelf.busy) {
+            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy_icon"]];
+        }else{
+            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
+        }
+    }else{
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    }
+    
+    if ([myGroup isMeshed]) {
+        if (mySelf.busy) {
+            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy_icon"]];
+        }else{
+            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
+        }
+    }else{
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+    }
+}
+
 
 -(void)registerTabButtons{
     super.tabs=self.tabs;

@@ -145,7 +145,40 @@
     
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.description = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateGroup];;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (IBAction)groupFullNameEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.fullName = sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (IBAction)groupProjetctEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.project= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (IBAction)groupLocationEdited:(NSTextField *)sender
+{
+    if ([sender.stringValue isEqualTo:@""]) {
+        return;
+    }
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.location= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)nicknameEdited:(NSTextField *)sender

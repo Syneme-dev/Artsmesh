@@ -91,14 +91,15 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         NSLog(@"get statusnet user goups return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
         if(err != nil){
             NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
-            NSAssert(NO, errInfo);
+            NSLog(@"%@", errInfo);
+            //NSAssert(NO, errInfo);
         }
         
         NSArray* result = (NSArray*)objects;

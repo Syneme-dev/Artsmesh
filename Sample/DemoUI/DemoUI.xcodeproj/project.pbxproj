@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
+		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
+		2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2602038419809E2C0013687A /* AMUserLogonViewController.xib */; };
+		260646661985EC3B003FCD21 /* LocalServer in Resources */ = {isa = PBXBuildFile; fileRef = 260646651985EC3B003FCD21 /* LocalServer */; };
+		260646671985EC4A003FCD21 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 260646651985EC3B003FCD21 /* LocalServer */; };
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */; };
 		26136C57196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */; };
@@ -132,7 +136,6 @@
 		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
 		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
 		AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE5FC5E196A41270079B434 /* AMRestHelper.m */; };
-		CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE7D80AE19502157001E6CF7 /* LocalServer */; };
 		CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */; };
 		CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */; };
 		CEC2FC56196588FD00AFD309 /* AMGroupPanelGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3C196588FD00AFD309 /* AMGroupPanelGroupCellController.m */; };
@@ -176,7 +179,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				CE7D80AF19502157001E6CF7 /* LocalServer in CopyFiles */,
+				260646671985EC4A003FCD21 /* LocalServer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +226,10 @@
 /* Begin PBXFileReference section */
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
 		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
+		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
+		2602038319809E2C0013687A /* AMUserLogonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserLogonViewController.m; sourceTree = "<group>"; };
+		2602038419809E2C0013687A /* AMUserLogonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserLogonViewController.xib; sourceTree = "<group>"; };
+		260646651985EC3B003FCD21 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		26136C53196FB5B300D033BF /* AMStaticGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDetailsViewController.h; sourceTree = "<group>"; };
 		26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDetailsViewController.m; sourceTree = "<group>"; };
@@ -373,7 +380,6 @@
 		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
 		AFE5FC5D196A41270079B434 /* AMRestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMRestHelper.h; path = Classes/AMRestHelper.h; sourceTree = "<group>"; };
 		AFE5FC5E196A41270079B434 /* AMRestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMRestHelper.m; path = Classes/AMRestHelper.m; sourceTree = "<group>"; };
-		CE7D80AE19502157001E6CF7 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -625,7 +631,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				CE7D80AE19502157001E6CF7 /* LocalServer */,
+				260646651985EC3B003FCD21 /* LocalServer */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -857,6 +863,9 @@
 				D41155E818E9539B00C84092 /* AMUserViewController.m */,
 				D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */,
 				D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */,
+				2602038219809E2C0013687A /* AMUserLogonViewController.h */,
+				2602038319809E2C0013687A /* AMUserLogonViewController.m */,
+				2602038419809E2C0013687A /* AMUserLogonViewController.xib */,
 			);
 			name = ProfilePanel;
 			sourceTree = "<group>";
@@ -975,6 +984,7 @@
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
 				CEC2FC5A196588FD00AFD309 /* AMGroupPanelLabelCellController.xib in Resources */,
+				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
@@ -1113,6 +1123,7 @@
 				26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
+				2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				266CE253197E406500D8145B /* AMGroupPanelDetailView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,

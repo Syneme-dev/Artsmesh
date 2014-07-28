@@ -18,6 +18,9 @@
     dict[@"groupName"] = self.groupName;
     dict[@"description"] = self.description;
     dict[@"leaderId"] = self.leaderId;
+    dict[@"fullName"] = self.fullName;
+    dict[@"project"] = self.project;
+    dict[@"location"] = self.location;
     return dict;
 }
 
@@ -28,6 +31,9 @@
     group.groupName = dict[@"GroupName"];
     group.description = dict[@"Description"];
     group.leaderId = dict[@"LeaderId"];
+    group.fullName = dict[@"fullName"];
+    group.project = dict[@"project"];
+    group.location = dict[@"location"];
     group.password = @"";
     return group;
 }

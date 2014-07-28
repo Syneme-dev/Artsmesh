@@ -12,6 +12,7 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMMesher/AMMesher.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 #define UI_Color_b7b7b7  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]
 @interface AMStaticGroupDetailsViewController ()
@@ -67,9 +68,16 @@
 
 - (IBAction)applyBtnClicked:(NSButton *)sender
 {
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    
     [AMCoreData shareInstance].myLocalLiveGroup.groupName = self.groupNameField.stringValue;
     [AMCoreData shareInstance].myLocalLiveGroup.description = self.descriptionView.textStorage.string;
+    
+    [defaults setObject:self.groupNameField.stringValue forKey:Preference_Key_Cluster_Name];
+    [defaults setObject:self.self.descriptionView.textStorage.string forKey:Preference_Key_Cluster_Description];
+    
     [[AMMesher sharedAMMesher] updateGroup];
+    [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];
 }
 
 

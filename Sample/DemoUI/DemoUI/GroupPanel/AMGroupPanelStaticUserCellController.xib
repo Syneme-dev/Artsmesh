@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -17,16 +17,20 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="28"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
-                    <rect key="frame" x="3" y="6" width="17" height="17"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
+                    <rect key="frame" x="4" y="7" width="14" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="942-SY-pjz"/>
+                        <constraint firstAttribute="width" constant="14" id="Oxx-Of-98I"/>
+                    </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="DC2-yl-Ptz"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
-                    <rect key="frame" x="20" y="6" width="193" height="17"/>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
+                    <rect key="frame" x="24" y="6" width="193" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="17" id="2H3-4b-0gC"/>
+                        <constraint firstAttribute="height" constant="17" id="2v7-9j-lm3"/>
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="2i6-qR-Bgj">
                         <font key="font" metaFont="system"/>
@@ -41,7 +45,7 @@
                         <constraint firstAttribute="height" constant="20" id="mDf-HA-9g8"/>
                         <constraint firstAttribute="width" constant="20" id="oEk-vl-1pL"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="S" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ebF-Y6-TqS">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="user_Icon_FOAF" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ebF-Y6-TqS">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -56,7 +60,7 @@
                         <constraint firstAttribute="width" constant="20" id="HNO-ic-tlM"/>
                         <constraint firstAttribute="height" constant="20" id="Rwy-fr-giy"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="I" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="6Ip-MW-RHe">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="usergroup_info" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="6Ip-MW-RHe">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -66,13 +70,15 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="5SE-6n-cRH" firstAttribute="leading" secondItem="v5r-nE-53N" secondAttribute="trailing" constant="8" id="3Jl-pp-OiC"/>
+                <constraint firstItem="v5r-nE-53N" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="7" id="4Tu-hk-ozW"/>
                 <constraint firstItem="RVB-8o-0Dg" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="GyJ-lg-3JR"/>
+                <constraint firstItem="v5r-nE-53N" firstAttribute="leading" secondItem="eR7-uP-duv" secondAttribute="leading" constant="4" id="JXA-cZ-O9B"/>
                 <constraint firstItem="RVB-8o-0Dg" firstAttribute="leading" secondItem="iYe-MO-zO1" secondAttribute="trailing" constant="8" id="MKA-kk-TJ6"/>
-                <constraint firstItem="5SE-6n-cRH" firstAttribute="leading" secondItem="v5r-nE-53N" secondAttribute="trailing" constant="2" id="bnJ-cy-jb9"/>
                 <constraint firstItem="iYe-MO-zO1" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="4" id="cMU-g5-bQU"/>
-                <constraint firstItem="5SE-6n-cRH" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="5" id="dNA-LO-131"/>
-                <constraint firstItem="iYe-MO-zO1" firstAttribute="leading" secondItem="5SE-6n-cRH" secondAttribute="trailing" constant="38" id="doU-gk-pQX"/>
                 <constraint firstAttribute="trailing" secondItem="RVB-8o-0Dg" secondAttribute="trailing" constant="3" id="fnh-8b-Pq3"/>
+                <constraint firstItem="5SE-6n-cRH" firstAttribute="top" secondItem="eR7-uP-duv" secondAttribute="top" constant="5" id="foY-2z-qSC"/>
+                <constraint firstItem="iYe-MO-zO1" firstAttribute="leading" secondItem="5SE-6n-cRH" secondAttribute="trailing" constant="34" id="oTk-7W-AVJ"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="v5r-nE-53N" id="VIx-9w-eM5"/>
@@ -82,5 +88,7 @@
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="user_Icon_FOAF" width="25" height="25"/>
+        <image name="usergroup_info" width="7" height="7"/>
     </resources>
 </document>

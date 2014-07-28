@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "group_offline_expanded.png"
+      "filename" : "live_group_offline_expanded.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "live_group_offline_expanded@2x.png"
     }
   ],
   "info" : {

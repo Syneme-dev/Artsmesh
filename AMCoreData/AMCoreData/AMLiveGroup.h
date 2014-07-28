@@ -17,6 +17,10 @@
 @property (nonatomic) NSString* description;
 @property (nonatomic) NSString* leaderId;
 
+@property (nonatomic) NSString* fullName;
+@property (nonatomic) NSString* project;
+@property (nonatomic) NSString* location;
+
 -(NSMutableDictionary*)dictWithoutUsers;
 +(id)AMGroupFromDict:(NSDictionary*)dict;
 

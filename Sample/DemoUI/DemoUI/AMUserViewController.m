@@ -19,7 +19,7 @@
 #import "AMUserLogonViewController.h"
 #import "UIFrameWork/AMCheckBoxView.h"
 
-@interface AMUserViewController ()
+@interface AMUserViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheckBox;
 
@@ -45,7 +45,9 @@
     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
     self.groupBusyCheckbox.title = @"BUSY";
+    self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
+    self.userBusyCheckBox.delegate = self;
     [self loadAvatarImage];
 }
 
@@ -229,4 +231,23 @@
     mySelf.domain = sender.stringValue;
     [[AMMesher sharedAMMesher] updateMySelf];
 }
+
+-(void)onChecked:(AMCheckBoxView*)sender
+{
+    if(sender.checked){
+        if(sender == self.groupBusyCheckbox){
+            NSLog(@"group busy checkbox checked");
+        }else if(sender == self.userBusyCheckBox){
+            NSLog(@"user busy checkbox checked");
+        }
+    }else{
+        if(sender == self.groupBusyCheckbox){
+            NSLog(@"group busy checkbox unchecked");
+        }else if(sender == self.userBusyCheckBox){
+            NSLog(@"user busy checkbox unchecked");
+        }
+    }
+}
+
+
 @end

@@ -249,10 +249,13 @@
                 [[AMMesher sharedAMMesher] setMesherState:kMesherStarted];
                 [self startHeartbeat];
             });
-            
+
+        }else if([responseStr isEqualToString:@"user already exist!"]){
+            NSLog(@"%@", responseStr);
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"register self failed, retry");
+                sleep(2);
                 [self registerSelf];
             });
         }

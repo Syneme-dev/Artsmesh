@@ -22,6 +22,7 @@
 @property (nonatomic) BOOL      isOnline;
 @property (nonatomic) NSString* chatPort;
 @property (nonatomic) NSString* publicChatPort;
+@property (nonatomic) BOOL      busy;
 
 -(NSMutableDictionary*)toDict;
 +(id)AMUserFromDict:(NSDictionary*)dict;

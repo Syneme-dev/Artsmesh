@@ -236,18 +236,36 @@
 {
     if(sender.checked){
         if(sender == self.groupBusyCheckbox){
-            NSLog(@"group busy checkbox checked");
+            //NSLog(@"group busy checkbox checked");
+            [self setUserBusy:YES];
         }else if(sender == self.userBusyCheckBox){
-            NSLog(@"user busy checkbox checked");
+            //NSLog(@"user busy checkbox checked");
+            [self setGroupBusy:YES];
         }
     }else{
         if(sender == self.groupBusyCheckbox){
-            NSLog(@"group busy checkbox unchecked");
+            //NSLog(@"group busy checkbox unchecked");
+            [self setUserBusy:NO];
         }else if(sender == self.userBusyCheckBox){
-            NSLog(@"user busy checkbox unchecked");
+            //NSLog(@"user busy checkbox unchecked");
+            [self setGroupBusy:NO];
         }
     }
 }
 
+-(void)setUserBusy:(BOOL)busy
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.busy = busy;
+    [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+
+-(void)setGroupBusy:(BOOL)busy
+{
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    group.busy = busy;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
 
 @end

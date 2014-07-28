@@ -21,6 +21,13 @@
     dict[@"fullName"] = self.fullName;
     dict[@"project"] = self.project;
     dict[@"location"] = self.location;
+    
+    if (self.busy) {
+        [dict setObject:@"YES" forKey:@"busy"];
+    }else{
+        [dict setObject:@"NO" forKey:@"busy"];
+    }
+    
     return dict;
 }
 
@@ -31,9 +38,10 @@
     group.groupName = dict[@"GroupName"];
     group.description = dict[@"Description"];
     group.leaderId = dict[@"LeaderId"];
-    group.fullName = dict[@"fullName"];
-    group.project = dict[@"project"];
-    group.location = dict[@"location"];
+    group.fullName = dict[@"FullName"];
+    group.project = dict[@"Project"];
+    group.location = dict[@"Location"];
+    group.busy = [dict[@"Busy"] boolValue];
     group.password = @"";
     return group;
 }

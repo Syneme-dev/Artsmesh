@@ -537,6 +537,8 @@ return panelViewController;
                                                            width:panelWidth height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
+    
+    chatViewController = nil;
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     [self fillPanel:panelViewController.view content:chatViewController.view];
     return panelViewController;

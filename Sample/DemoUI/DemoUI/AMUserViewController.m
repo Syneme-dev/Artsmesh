@@ -155,7 +155,7 @@
         self.myPopover.animates = YES;
         self.myPopover.behavior = NSPopoverBehaviorTransient;
         self.myPopover.appearance = NSPopoverAppearanceHUD;
-        self.myPopover.delegate = self;
+        //self.myPopover.delegate = self;
     }
     
     self.myPopover.contentViewController = [[AMUserLogonViewController alloc] initWithNibName:@"AMUserLogonViewController" bundle:nil];
@@ -268,19 +268,15 @@
 {
     if(sender.checked){
         if(sender == self.groupBusyCheckbox){
-            //NSLog(@"group busy checkbox checked");
-            [self setUserBusy:YES];
-        }else if(sender == self.userBusyCheckBox){
-            //NSLog(@"user busy checkbox checked");
             [self setGroupBusy:YES];
+        }else if(sender == self.userBusyCheckBox){
+            [self setUserBusy:YES];
         }
     }else{
         if(sender == self.groupBusyCheckbox){
-            //NSLog(@"group busy checkbox unchecked");
-            [self setUserBusy:NO];
-        }else if(sender == self.userBusyCheckBox){
-            //NSLog(@"user busy checkbox unchecked");
             [self setGroupBusy:NO];
+        }else if(sender == self.userBusyCheckBox){
+            [self setUserBusy:NO];
         }
     }
 }

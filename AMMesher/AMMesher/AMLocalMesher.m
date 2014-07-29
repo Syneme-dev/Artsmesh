@@ -389,6 +389,8 @@
 
 -(void)updateMyself
 {
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
+    
     if([[AMMesher sharedAMMesher] mesherState] < kMesherStarted  ||
        [[AMMesher sharedAMMesher] mesherState] >= kMesherStopping){
         return;
@@ -411,21 +413,21 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
-        
+        //NSAssert(response, @"response should not be nil without error");
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update user info response wrong! %@", responseStr);
-            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_LOCAL];
+           NSLog(@"update user info response wrong! %@", responseStr);
         }
+        
+        //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_LOCAL];
     };
     
     [_httpRequestQueue addOperation:req];
-    
 }
 
 -(void)updateGroupInfo
 {
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_LOCAL];
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -449,9 +451,10 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSLog(@"updateGroupInfo succeeded!");
-            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            NSLog(@"updateGroupInfo failed!");
         }
+        
+       // [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_LOCAL];
     };
     
     [_httpRequestQueue addOperation:req];

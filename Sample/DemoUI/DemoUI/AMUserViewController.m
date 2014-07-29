@@ -51,37 +51,123 @@
     self.userBusyCheckBox.title = @"BUSY";
     self.userBusyCheckBox.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfSynced) name:AM_MYSELF_CHANDED_REMOTE object:nil];
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfSynced) name:AM_MYSELF_CHANDED_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanging) name:AM_MYGROUP_CHANGING_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanged) name:AM_MYGROUP_CHANGED_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfChanging) name:AM_MYSELF_CHANGING_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myselfChanged) name:AM_MYSELF_CHANGED_LOCAL object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanging) name:AM_MYGROUP_CHANGING_REMOTE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanged) name:AM_MYGROUP_CHANGED_REMOTE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanging) name:AM_MYSELF_CHANGING_REMOTE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userListChenged) name:AM_LIVE_GROUP_CHANDED object:nil];
+
     [self loadAvatarImage];
 }
 
--(void)mySelfSynced
+-(void)dealloc
 {
-    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)userListChenged
+{
+    [self localGroupChanged];
+    [self myselfChanged];
+    [self remoteGroupChanged];
+    [self remoteMyselfChanged];
+}
+
+-(void)remoteGroupChanging
+{
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    
-    if (mySelf.isOnline) {
-        if (mySelf.busy) {
-            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy_icon"]];
-        }else{
-            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
-        }
-    }else{
-        [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    if(mySelf.isOnline == NO) {
+        return;
+    }
+
+    [self.groupStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+}
+
+-(void)remoteGroupChanged
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == NO) {
+        return;
     }
     
-    if ([myGroup isMeshed]) {
-        if (mySelf.busy) {
-            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy_icon"]];
-        }else{
-            [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
-        }
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if (myGroup.busy) {
+        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
     }else{
-        [self.userStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }
+
+}
+
+-(void)remoteMyselfChanging
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == NO) {
+        return;
+    }
+    
+    [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+}
+
+-(void)remoteMyselfChanged
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == NO) {
+        return;
+    }
+    
+    if (mySelf.busy) {
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
+    }else{
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
     }
 }
 
+-(void)localGroupChanging
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == YES) {
+        return;
+    }
+    
+    [self.groupStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+}
+
+-(void)localGroupChanged
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == YES) {
+        return;
+    }
+    
+    [self.groupStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+}
+
+-(void)mySelfChanging
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == YES) {
+        return;
+    }
+    
+    [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+}
+
+-(void)myselfChanged
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(mySelf.isOnline == YES) {
+        return;
+    }
+    
+    [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+}
 
 -(void)registerTabButtons{
     super.tabs=self.tabs;

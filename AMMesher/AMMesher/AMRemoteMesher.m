@@ -81,6 +81,7 @@
 
 -(void)registerGroup
 {
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -106,9 +107,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self registerSelf];
             });
-            
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
+                sleep(2);
                 [self registerGroup];
             });
         }
@@ -119,6 +120,8 @@
 
 -(void)registerSelf
 {
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.isOnline = YES;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -149,13 +152,13 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
-                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_REMOTE];
+                //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
+                //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
             });
             
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 mySelf.isOnline = NO;
-                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_REMOTE];
             });
         }
     };
@@ -168,6 +171,8 @@
     if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
+    
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSDictionary* dict = [mySelf toDict];
@@ -192,8 +197,9 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSAssert(NO, @"update user info on remote response wrong!");
-            [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_REMOTE];
         }
+        
+         //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
     };
 
     [_httpRequestQueue addOperation:req];
@@ -204,6 +210,8 @@
     if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
+    
+    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
     
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
@@ -227,9 +235,10 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update user info on remote response wrong!%@", responseStr);
-            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            NSLog(@"update user info on remote response wrong!%@", responseStr);
         }
+        
+        //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
     };
     
     [_httpRequestQueue addOperation:req];
@@ -265,7 +274,6 @@
     [req sendRequest];
     
     mySelf.isOnline = NO;
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANDED_REMOTE];
 }
 
 
@@ -296,11 +304,12 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
+            NSLog(@"update user info on remote response wrong!%@", responseStr);
+        }else{
             [AMCoreData shareInstance].mergedGroupId = toGroupId;
-            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
-            
-            NSAssert(NO, @"merge group info on remote response wrong!");
         }
+        
+        [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
     };
     
     [_httpRequestQueue addOperation:req];

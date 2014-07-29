@@ -52,7 +52,7 @@
     [self userGroupsChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANDED_REMOTE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANGED_REMOTE object:nil];
 
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];

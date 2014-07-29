@@ -34,6 +34,7 @@
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
+#import "AMPanelControlBarViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -80,6 +81,7 @@
     AMUserViewController *userViewController;
     AMVisualViewController  *visualViewController;
     MZTimerLabel *amTimerControl;
+    AMPanelControlBarViewController *controlBarController;
     Boolean isWindowLoading;
     
     float containerWidth;
@@ -174,10 +176,59 @@
     isWindowLoading=YES;
     [self initTimer];
     [self createDefaultWindow];
-    [self loadTestPanel];
+//    [self loadTestPanel]; //Note:uncomment this code to show test panel.
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
+
+    [self initControlBar:isTopBar];
+    [self createDefaultPanelAndloadControlBarItemStatus];
     isWindowLoading=NO;
 }
 
+-(void)initControlBar:(BOOL)isTop{
+    if (controlBarController) {
+        [controlBarController.view removeFromSuperview];
+    }
+    NSSize windowSize = [self.window.contentView frame].size;
+    if(isTop){
+                NSPoint point=   NSMakePoint(400, windowSize.height-60);
+        controlBarController=[[AMPanelControlBarViewController alloc]initWithNibName:@"PanelControlBarView" bundle:nil];
+    [controlBarController.view setFrameOrigin:point];
+    [self.window.contentView addSubview:controlBarController.view];
+    }
+    else{
+        
+        controlBarController=[[AMPanelControlBarViewController alloc]initWithNibName:@"VerticalControlBarView" bundle:nil];
+        NSPoint point=   NSMakePoint(0, windowSize.height-60-20-controlBarController.view.frame.size.height);
+        [controlBarController.view setFrameOrigin:point];
+        [self.window.contentView addSubview:controlBarController.view];
+    
+    }
+    
+}
+
+-(void)createDefaultPanelAndloadControlBarItemStatus{
+    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
+    for (NSString* openedPanelId in openedPanels) {
+        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
+        {
+            [self createPanelWithType:openedPanelId withId:openedPanelId];
+            NSString *sideItemId=[openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+        }
+    }
+}
+
+-(void)loadControlBarItemStatus{
+    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
+    for (NSString* openedPanelId in openedPanels) {
+        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
+        {
+            NSString *sideItemId=[openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+        }
+    }
+}
 
 - (void)copyPanel:(NSButton *)sender
 {
@@ -240,15 +291,6 @@
      };
     [scrollView setDocumentView:_containerView];
     [self loadVersion];
-    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    for (NSString* openedPanelId in openedPanels) {
-        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
-        {
-            [self createPanelWithType:openedPanelId withId:openedPanelId];
-            NSString *sideItemId=[openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-            [self setSideBarItemStatus:sideItemId withStatus:YES ];
-        }
-    }
     
     [self windowDidResize:nil];  // temporary resolution
 }
@@ -283,12 +325,6 @@
     {
         [openedPanels addObject:identifier];
     }
-//    for (NSView *subView in _containerView.subviews) {
-//        if([subView isKindOfClass:[AMPanelView class]] )
-//        {
-//            [subView setFrameOrigin:NSMakePoint(subView.frame.origin.x+40.0+width, subView.frame.origin.y)];
-//        }
-//    }
      [_containerView addSubview:panelViewController.view];
     [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;
@@ -350,7 +386,6 @@
     NSSize panelSize = panelView.frame.size;
     contentView.frame = NSMakeRect(0, UI_panelContentPaddingBottom, panelSize.width, panelSize.height-UI_panelTitlebarHeight-UI_panelContentPaddingBottom);
     [panelView addSubview:contentView];
-   // [contentView setNeedsDisplay:YES];
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
     [panelView addConstraints:
@@ -424,7 +459,6 @@
 }
 
 -(AMPanelViewController*)loadFOAFPanel{
-    
      AMPanelViewController* panelViewController=  [self createPanel:UI_Panel_Key_Social withTitle:@"Social" width:UI_defaultPanelWidth*2.0 height:UI_defaultPanelHeight ];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth*2, UI_defaultPanelHeight);
@@ -450,20 +484,6 @@
                                                            width:panelWidth
                                                           height:panelHeight];
     AMPanelView *panelView = (AMPanelView *)panelViewController.view;
-    //TODO:create a group panel below the user panel by default.
-    //TODO:sample code like below.
-    
-//    NSMutableArray *openedPanels=[[[AMPreferenceManager instance] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
-//    if([openedPanels containsObject:UI_Panel_Key_User])
-//    {
-//        
-//        AMPanelViewController *userPanelViewController=self.panelControllers[UI_Panel_Key_User];
-//        NSRect userViewFrame=userPanelViewController.view.frame;
-//        [panelView setFrameOrigin:NSMakePoint(userViewFrame.origin.x, userViewFrame.origin.y+100.0+userViewFrame.size.height)];
-//        [panelView setNeedsDisplay:YES];
-//    }
-
-  
     NSSize panelSize = NSMakeSize(300.0f, 220.0f);
     panelView.minSizeConstraint = panelSize;
     _userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
@@ -504,18 +524,6 @@
     [preferenceViewController loadSystemInfo];
     [preferenceViewController customPrefrence];
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    NSDictionary *views = NSDictionaryOfVariableBindings(preferenceView);
-    //TODO:useless code ,please help check and remove it.
-//    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[preferenceView]|"
-//                                                                              options:0
-//                                                                              metrics:nil
-//                                                                                views:views]];
-//    
-//    [panelView addConstraints:
-//     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[preferenceView]|"
-//                                             options:0
-//                                             metrics:nil
-//                                               views:views]];
 return panelViewController;
     
 
@@ -532,20 +540,6 @@ return panelViewController;
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     [self fillPanel:panelViewController.view content:chatViewController.view];
     return panelViewController;
-    
-    /*
-    [chatView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *views = NSDictionaryOfVariableBindings(chatView);
-    [panelView addConstraints:        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[chatView]|"
-                                                                              options:0
-                                                                              metrics:nil
-                                                                                views:views]];
-    [panelView addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[chatView]|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-     */
 }
 
 - (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
@@ -681,6 +675,19 @@ return panelViewController;
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status{
     NSView *mainView= self.window.contentView;
     for (NSView *subView in mainView.subviews) {
+        if ([subView.identifier isEqualToString:@"controlBarContainer"]) {
+             for (NSView *subItemView in subView.subviews) {
+                 NSButton *buttonView= subItemView.subviews[0];
+                 if(buttonView !=nil&& [buttonView.identifier  isEqualTo:identifier])
+                 {
+                     [buttonView setState:status?NSOnState:NSOffState];
+                     break;
+                 }
+             }
+                 
+        }
+    }
+     for (NSView *subView in mainView.subviews) {
         if([subView isKindOfClass:[BlueBackgroundView class]] )
         {
             NSButton *buttonView= subView.subviews[0];

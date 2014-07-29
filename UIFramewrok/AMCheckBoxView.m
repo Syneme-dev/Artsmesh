@@ -22,7 +22,7 @@
         self.backgroupColor = [NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1];
         self.btnBackGroundColor = [NSColor colorWithCalibratedRed:0.10 green:0.10  blue:0.10  alpha:1];
         self.btnColor = [NSColor colorWithCalibratedRed:(60.0/255.0) green:(75.0/255.0) blue:(94.0/255.0) alpha:1];
-        self.title = @"AMCHECKBOX";
+        self.title = @"";
         self.textColor = [NSColor grayColor];
         self.readOnly = NO;
         self.drawBackground = NO;

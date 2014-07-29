@@ -72,20 +72,7 @@
 }
 
 - (IBAction)ShowUserButtonClick:(id)sender {
-    NSMutableArray *openedPanels=(NSMutableArray*)[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    for (NSString* openedPanelId in openedPanels) {
-        if([openedPanelId rangeOfString:@"_PANEL"].location!=NSNotFound)
-        {
-            NSLog(openedPanelId);
-              AMAppDelegate *appDelegate=[NSApp delegate];
-             AMPanelViewController* panelViewController=appDelegate.mainWindowController.panelControllers[openedPanelId];
-            AMBoxItem *boxItem =(AMBoxItem*)panelViewController.view;
-            AMBox *box=[boxItem hostingBox];
-            NSString *message= [NSString stringWithFormat:@"%@:%f",openedPanelId, box.frame.origin.x];
-            NSLog(message);
-        }
-    }
-
+   
     
 //    [self postNotificationShowUser];
 }

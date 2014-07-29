@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -9,6 +9,7 @@
                 <outlet property="Ipv6checkBox" destination="6Tp-lO-ZpI" id="XfT-aw-tjN"/>
                 <outlet property="audioTabButton" destination="niJ-06-bEy" id="4SE-HW-0Kd"/>
                 <outlet property="generalTabButton" destination="mvk-HX-fYa" id="1cE-ZS-hnU"/>
+                <outlet property="isTopControlBarCheckBox" destination="fdL-A4-ABv" id="pDf-wo-wfW"/>
                 <outlet property="jackRouterTabButton" destination="vtg-zK-Gic" id="Mcj-vm-QCm"/>
                 <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
@@ -50,6 +51,15 @@
                                                     <constraint firstAttribute="width" constant="89" id="RkP-UY-gGS"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PRIVATE IP" id="54X-Dj-zZf">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahF-a9-fYt" customClass="AMFoundryFontView">
+                                                <rect key="frame" x="18" y="338" width="120" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Top Control Bar " id="FPH-Fi-snn">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -282,6 +292,13 @@
                                                     <constraint firstAttribute="height" constant="24" id="KMg-B5-qRS"/>
                                                     <constraint firstAttribute="width" constant="220" id="z8E-N2-9jE"/>
                                                 </constraints>
+                                            </customView>
+                                            <customView identifier="isTopControlBar" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-A4-ABv" customClass="AMCheckBoxView">
+                                                <rect key="frame" x="183" y="334" width="30" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <connections>
+                                                    <binding destination="pGe-YA-GCX" name="toolTip" keyPath="values.Preference_Key_General_TopControlBar" id="JDV-Ha-BHa"/>
+                                                </connections>
                                             </customView>
                                         </subviews>
                                         <constraints>

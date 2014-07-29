@@ -74,7 +74,7 @@
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[AMGroupPanelModel sharedGroupModel] removeObserver:self];
+    //[[AMGroupPanelModel sharedGroupModel] removeObserver:self];
 }
 
 -(void)reloadLiveGroups

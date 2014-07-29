@@ -12,36 +12,27 @@
 #import <AMPluginLoader/AMPluginProtocol.h>
 #import <AMNotificationManager/AMNotificationManager.h>
 #import <AMPreferenceManager/AMPreferenceManager.h>
-#import "HelloWorldConst.h"
-#import "AMPanelViewController.h"
 #import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
-#import "AMETCDPreferenceViewController.h"
-#import "AMUserViewController.h"
-#import <UIFramework/BlueBackgroundView.h>
 #import "AMStatusNet/AMStatusNet.h"
-
 
 
 static NSMutableDictionary *allPlugins = nil;
 
-@interface AMAppDelegate() <AMPluginAppDelegate>
+@interface AMAppDelegate () <AMPluginAppDelegate>
 @end
 
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
-    
     [[AMPreferenceManager shareInstance] initPreference];
     [[AMStatusNet shareInstance] loadGroups];
-    
     [self.mainWindowController showDefaultWindow];
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
     }
-    
     [self startMesher];
     [self writePluginDataToMesher];
 }
@@ -72,9 +63,8 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)writePluginDataToMesher {
     //TODO:
-    
-}
 
+}
 
 
 - (NSMutableDictionary *)loadPlugins {

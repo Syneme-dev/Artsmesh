@@ -91,7 +91,7 @@
         self.window.restorable = YES;
         self.window.restorationClass = [appDelegate class];
         self.window.identifier = @"mainWindow";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANDED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
     }
     return self;
 }
@@ -501,6 +501,8 @@
                                                              width:panelWidth height:panelHeight];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
+    
+    chatViewController = nil;
     chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     [self fillPanel:panelViewController.view content:chatViewController.view];
     return panelViewController;

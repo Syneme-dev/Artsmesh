@@ -33,7 +33,11 @@
     [cellView.textField setEditable:NO];
     cellView.textField.stringValue = self.user.nickName;
     if (self.user.isOnline) {
-        [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
+        if (self.user.busy) {
+            [cellView.imageView setImage:[NSImage imageNamed:@"live_user_busy"]];
+        }else{
+            [cellView.imageView setImage:[NSImage imageNamed:@"user_online"]];
+        }
     }else{
         [cellView.imageView setImage:[NSImage imageNamed:@"user_offline"]];
     }

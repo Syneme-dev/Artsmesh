@@ -34,6 +34,10 @@ type AMRequestGroup struct{
 	GroupName 	string
 	Description 	string
 	LeaderId 	string
+	FullName 	string
+	Project		string
+	Location		string
+	Busy			string
 }
 
 type AMRequestUser struct{
@@ -48,6 +52,7 @@ type AMRequestUser struct{
 	IsOnline		string
 	ChatPort		string
 	PublicChatPort string
+	Busy			string
 }
 
 type AMRequestChangePassword struct{
@@ -300,6 +305,10 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.GroupName = strings.Join(r.Form["groupName"], "")
 	reqGroup.Description = strings.Join(r.Form["description"], "")
 	reqGroup.LeaderId = strings.Join(r.Form["leaderId"], "")
+	reqGroup.FullName = strings.Join(r.Form["fullName"], "")
+	reqGroup.Project = strings.Join(r.Form["project"], "")
+	reqGroup.Location = strings.Join(r.Form["location"], "")
+	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
 	fmt.Println("")
 	fmt.Println("register_group requst information ---------------------")
@@ -309,6 +318,10 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("groupName:", reqGroup.GroupName)
 	fmt.Println("description:", reqGroup.Description)
 	fmt.Println("leaderId:", reqGroup.LeaderId)
+	fmt.Println("fullName:", reqGroup.FullName)
+	fmt.Println("project:", reqGroup.Project)
+	fmt.Println("location:", reqGroup.Location)
+	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand
@@ -337,6 +350,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
 	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
+	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 	
 	reqGroup := new(AMRequestGroup)
 	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 
@@ -357,6 +371,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("chatPort:", reqUser.ChatPort)
 	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
 	fmt.Println("groupId:", reqGroup.GroupId)
+	fmt.Println("busy:", reqUser.Busy)
 
 	fmt.Println("end http requst information ---------------------")
 	
@@ -386,6 +401,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
 	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
+	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 		
 	fmt.Println("")
 	fmt.Println("user_update requst information ---------------------")
@@ -402,6 +418,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("isOnline:", reqUser.IsOnline)
 	fmt.Println("chatPort:", reqUser.ChatPort)
 	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
+	fmt.Println("busy:", reqUser.Busy)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
@@ -425,6 +442,10 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.GroupName = strings.Join(r.Form["groupName"], "")
 	reqGroup.Description = strings.Join(r.Form["description"], "")
 	reqGroup.LeaderId = strings.Join(r.Form["leaderId"], "")
+	reqGroup.FullName = strings.Join(r.Form["fullName"], "")
+	reqGroup.Project = strings.Join(r.Form["project"], "")
+	reqGroup.Location = strings.Join(r.Form["location"], "")
+	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
 	fmt.Println("")
 	fmt.Println("group_update requst information ---------------------")
@@ -434,6 +455,10 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("groupName:", reqGroup.GroupName)
 	fmt.Println("description:", reqGroup.Description)
 	fmt.Println("leaderId:", reqGroup.LeaderId)
+	fmt.Println("fullName:", reqGroup.FullName)
+	fmt.Println("project:", reqGroup.Project)
+	fmt.Println("location:", reqGroup.Location)
+	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand
@@ -468,8 +493,8 @@ func delete_user(w http.ResponseWriter, r *http.Request){
 	
 	g_command_pipe<- command
 	
-	response := <-command.response
-	fmt.Fprintf(w, response)
+	//response := <-command.response
+	//fmt.Fprintf(w, response)
 }
 
 func change_group_password(w http.ResponseWriter, r *http.Request){

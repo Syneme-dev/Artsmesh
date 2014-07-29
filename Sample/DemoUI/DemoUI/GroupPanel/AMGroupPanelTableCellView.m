@@ -30,15 +30,19 @@
 -(void)setFrame:(NSRect)frameRect
 {
     [super setFrame:frameRect];
-    if ([self.delegate respondsToSelector:@selector(viewFrameChanged:)]) {
-        [self.delegate viewFrameChanged:nil];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(viewFrameChanged:)]) {
+            [self.delegate viewFrameChanged:nil];
+        }
     }
 }
 
 -(void)doubleClicked:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(cellViewDoubleClicked:)]) {
-        [self.delegate cellViewDoubleClicked:sender];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(cellViewDoubleClicked:)]) {
+            [self.delegate cellViewDoubleClicked:sender];
+        }
     }
 }
 

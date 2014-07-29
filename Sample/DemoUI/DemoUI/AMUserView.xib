@@ -7,9 +7,13 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserViewController">
             <connections>
                 <outlet property="avatarView" destination="X62-yl-u4b" id="Cly-Ba-cyK"/>
+                <outlet property="groupBusyCheckbox" destination="SNl-7e-QuP" id="e0f-bN-mun"/>
+                <outlet property="groupStatusIcon" destination="Li6-Sz-exa" id="57N-Ig-y0Z"/>
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>
+                <outlet property="userBusyCheckBox" destination="LIb-SJ-ZZa" id="ch2-KB-gRr"/>
+                <outlet property="userStatusIcon" destination="xaj-44-mtN" id="Xs5-xT-xCX"/>
                 <outlet property="userTabButton" destination="CTb-fs-kgV" id="oEi-dy-f2a"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
             </connections>
@@ -20,18 +24,18 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView ambiguous="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
+                <tabView ambiguous="YES" misplaced="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
                     <rect key="frame" x="0.0" y="20" width="300" height="256"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Tab" identifier="1" id="qZ2-YF-N8B">
-                            <view key="view" ambiguous="YES" id="09e-65-pFX" customClass="AMTabItemView">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                            <view key="view" id="09e-65-pFX" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="-32" width="154" height="22"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="98" y="224" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Pk6-Yh-nnY"/>
@@ -48,7 +52,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xza-bX-mVV" userLabel="fullname" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="-53" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="203" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="FullName" id="13X-0n-HwG">
                                             <font key="font" metaFont="system"/>
@@ -60,7 +64,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eam-gX-142" userLabel="project" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="-78" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="178" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project" id="XxX-5Y-d7s">
                                             <font key="font" metaFont="system"/>
@@ -72,7 +76,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2g-yj-0FH" userLabel="location" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="-98" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="158" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="fGa-3A-VhF">
                                             <font key="font" metaFont="system"/>
@@ -85,7 +89,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0SY-2D-fk2" userLabel="domain" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="-118" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="138" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Domain" id="rar-Fd-kzJ">
                                             <font key="font" metaFont="system"/>
@@ -97,8 +101,8 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Domain" id="zb5-Mh-p8q"/>
                                         </connections>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
-                                        <rect key="frame" x="0.0" y="-90" width="80" height="80"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
+                                        <rect key="frame" x="0.0" y="166" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="Czn-gZ-wlh"/>
@@ -107,12 +111,12 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_user_h" id="sc6-if-94S"/>
                                     </imageView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-44-mtN" userLabel="statusIcon">
-                                        <rect key="frame" x="8" y="-187" width="10" height="10"/>
+                                        <rect key="frame" x="10" y="70" width="10" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="OnlineDot" id="JHP-5W-JGn"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="user_unmeshed_icon" id="JHP-5W-JGn"/>
                                     </imageView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
-                                        <rect key="frame" x="90" y="-152" width="26" height="26"/>
+                                        <rect key="frame" x="100" y="104" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="Kul-MC-1jE">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -123,7 +127,7 @@
                                         </connections>
                                     </button>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6" userLabel="description" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="28" y="-251" width="264" height="75"/>
+                                        <rect key="frame" x="28" y="5" width="264" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="" id="msF-DJ-hzo">
                                             <font key="font" metaFont="system"/>
@@ -135,9 +139,12 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Description" id="e5N-DL-VAv"/>
                                         </connections>
                                     </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIb-SJ-ZZa" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="15" y="140" width="62" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="jsc-N7-VSE" firstAttribute="leading" secondItem="X62-yl-u4b" secondAttribute="trailing" constant="10" id="5uX-xB-fyO"/>
                                     <constraint firstItem="X62-yl-u4b" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" id="Ggs-wT-cBU"/>
                                     <constraint firstItem="X62-yl-u4b" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="lkc-OV-2tZ"/>
                                     <constraint firstItem="jsc-N7-VSE" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="zRO-d1-5ir"/>
@@ -145,12 +152,16 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="qVc-j3-ELj">
-                            <view key="view" id="UVa-w4-awA" customClass="AMTabItemView">
+                            <view key="view" ambiguous="YES" id="UVa-w4-awA" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-7e-QuP" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="15" y="140" width="62" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqr-cF-59g" userLabel="groupName" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="224" width="154" height="22"/>
+                                        <rect key="frame" x="99" y="224" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Group Name" id="SIV-Tt-uLh">
                                             <font key="font" metaFont="system"/>
@@ -163,7 +174,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjb-6x-FtH" userLabel="fullName" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="203" width="154" height="22"/>
+                                        <rect key="frame" x="99" y="203" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="FullName" id="JvJ-BG-XBp">
                                             <font key="font" metaFont="system"/>
@@ -176,7 +187,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Z6-me-VkK" userLabel="project" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="178" width="154" height="22"/>
+                                        <rect key="frame" x="99" y="178" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project" id="BBD-ED-NXn">
                                             <font key="font" metaFont="system"/>
@@ -189,7 +200,7 @@
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-Eg-5uZ" userLabel="location" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="88" y="158" width="154" height="22"/>
+                                        <rect key="frame" x="99" y="158" width="154" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="dEy-Ha-9zK">
                                             <font key="font" metaFont="system"/>
@@ -207,7 +218,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_user_h" id="IdX-Zl-s4x"/>
                                     </imageView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUj-IO-sS7" userLabel="gotoSocial">
-                                        <rect key="frame" x="90" y="104" width="26" height="26"/>
+                                        <rect key="frame" x="101" y="104" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="cq8-qB-Jw4">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -228,13 +239,18 @@
                                         </connections>
                                     </textField>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euY-qG-z2R">
-                                        <rect key="frame" x="120" y="133" width="120" height="22"/>
+                                        <rect key="frame" x="101" y="139" width="120" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="square" title="Create Password" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="z2x-Gq-lWG">
+                                        <buttonCell key="cell" type="square" title="Create Password" bezelStyle="shadowlessSquare" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="z2x-Gq-lWG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li6-Sz-exa" userLabel="statusIcon">
+                                        <rect key="frame" x="8" y="70" width="10" height="10"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="XWE-gE-N7z"/>
+                                    </imageView>
                                 </subviews>
                             </view>
                         </tabViewItem>
@@ -296,8 +312,9 @@
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
     </objects>
     <resources>
-        <image name="OnlineDot" width="9" height="10"/>
         <image name="SideBar_user_h" width="40" height="40"/>
+        <image name="group_unmeshed_icon" width="45" height="45"/>
         <image name="user_Icon_FOAF" width="25" height="25"/>
+        <image name="user_unmeshed_icon" width="44" height="44"/>
     </resources>
 </document>

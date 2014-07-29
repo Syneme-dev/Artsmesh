@@ -21,6 +21,8 @@
 @property (nonatomic) NSString* project;
 @property (nonatomic) NSString* location;
 
+@property (nonatomic) BOOL busy;
+
 -(NSMutableDictionary*)dictWithoutUsers;
 +(id)AMGroupFromDict:(NSDictionary*)dict;
 

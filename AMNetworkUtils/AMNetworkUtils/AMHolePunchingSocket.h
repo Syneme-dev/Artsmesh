@@ -23,7 +23,7 @@ enum {
 @property NSMutableArray* localPeers;
 @property NSMutableArray* remotePeers;
 @property BOOL useIpv6;
-@property id<AMHolePunchingSocketDelegate> delegate;
+@property (weak) id<AMHolePunchingSocketDelegate> delegate;
 
 - (instancetype)initWithServer:(NSString*)serverIp
                     serverPort:(NSString*)serverPort
@@ -34,6 +34,8 @@ enum {
 -(void)sendPacketToPeers:(NSData*)data;
 -(NSString*)NATMappedPort;
 -(NSString*)NATMappedIp;
+
+-(void)closeSocket;
 
 @end
 

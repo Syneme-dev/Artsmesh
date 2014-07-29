@@ -10,7 +10,7 @@
 
 @interface AMGroupPanelTableCellView : NSTableCellView
 
-@property (weak) id delegate;
+@property (strong) id delegate;
 
 -(void)doubleClicked:(id)sender;
 

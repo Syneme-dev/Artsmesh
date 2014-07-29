@@ -56,6 +56,12 @@
         [dict setObject:@"NO" forKey:@"isOnline"];
     }
     
+    if (self.busy) {
+        [dict setObject:@"YES" forKey:@"busy"];
+    }else{
+        [dict setObject:@"NO" forKey:@"busy"];
+    }
+    
     
     return dict;
 }
@@ -74,6 +80,7 @@
     user.publicChatPort = dict[@"PublicChatPort"];
     user.isOnline = [dict[@"IsOnline"] boolValue];
     user.description = dict[@"Description"];
+    user.busy = [dict[@"Busy"] boolValue];
     return user;
 }
 

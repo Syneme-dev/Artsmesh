@@ -49,11 +49,6 @@
 
 -(void)awakeFromNib
 {
-    [self userGroupsChanged:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANDED object:nil];
-
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     NSString* port = [defaults stringForKey:Preference_Key_General_StunServerPort];
@@ -64,9 +59,16 @@
     
     [_socket initSocket];
     _socket.delegate = self;
+    
+    [self userGroupsChanged:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANGED_REMOTE object:nil];
 }
 
 -(void)dealloc{
+    
+    [_socket closeSocket];
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
@@ -175,7 +177,6 @@
         [self showChatRecord:record];
     }
 }
-
 
 - (IBAction)sendMsg:(id)sender
 {

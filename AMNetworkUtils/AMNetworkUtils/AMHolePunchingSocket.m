@@ -91,6 +91,17 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
     _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
 }
 
+-(void)dealloc
+{
+    [self closeSocket];
+}
+
+-(void)closeSocket
+{
+    [_socket close];
+    _socket = nil;
+}
+
 
 -(void)stopHolePunching{
     [_punchingTimer invalidate];

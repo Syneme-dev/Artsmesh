@@ -70,6 +70,7 @@
 //-()
 
 - (IBAction)closePanel:(id)sender {
+    self.contentPanelViewController=nil;
     if(self.movedFromController!=nil)
     {
         NSInteger tabIndex=[self.tabPanelViewController.tabs indexOfTabViewItem:self.tabPanelViewController.tabs.selectedTabViewItem];

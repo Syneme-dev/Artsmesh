@@ -113,11 +113,13 @@
 }
 
 - (void)resizeContainerHeightTo:(CGFloat)height {
+    [_containerView setFrameSize:NSMakeSize(_containerView.frame.size.width, height)];
     for (AMBox *box in _containerView.subviews) {
         [box setFrameSize:NSMakeSize(box.frame.size.width, height)];
+    }
+    for (AMBox *box in _containerView.subviews) {
         [box doBoxLayout];
     }
-    [_containerView setFrameSize:NSMakeSize(_containerView.frame.size.width, height)];
 }
 
 - (void)myStatucChanged {

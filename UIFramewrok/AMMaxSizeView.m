@@ -57,4 +57,16 @@
 	[super drawRect:dirtyRect];
 }
 
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    if ([theEvent clickCount] == 2) {
+        NSPoint location = [theEvent locationInWindow];
+        location = [self convertPoint:location fromView:nil];
+        CGFloat height = self.bounds.size.height;
+        if (location.y > height - 60) {
+            [self.window miniaturize:self];
+        }
+    }
+}
+
 @end

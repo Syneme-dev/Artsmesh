@@ -455,8 +455,10 @@
     panelView.minSizeConstraint = panelSize;
     AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
+    
+    [self fillPanel:panelViewController content:userGroupViewController];
     NSView *groupView = userGroupViewController.view;
-    [panelViewController.view addSubview:groupView];
+//    [panelViewController.view addSubview:groupView];
 
     [groupView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(groupView);

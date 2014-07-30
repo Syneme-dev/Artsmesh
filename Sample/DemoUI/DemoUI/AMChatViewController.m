@@ -61,6 +61,7 @@
     _socket.delegate = self;
     
     [self userGroupsChanged:nil];
+    [self onlineStatusChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANGED_REMOTE object:nil];

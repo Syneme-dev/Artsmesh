@@ -370,16 +370,23 @@
 -(void)setUserBusy:(BOOL)busy
 {
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.busy = busy;
-    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    if (mySelf.isOnline) {
+        mySelf.busy = busy;
+        [[AMMesher sharedAMMesher] updateMySelf];
+    }
+
 }
 
 
 -(void)setGroupBusy:(BOOL)busy
 {
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    group.busy = busy;
-    [[AMMesher sharedAMMesher] updateGroup];
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if (mySelf.isOnline) {
+        group.busy = busy;
+        [[AMMesher sharedAMMesher] updateGroup];
+    }
 }
 
 @end

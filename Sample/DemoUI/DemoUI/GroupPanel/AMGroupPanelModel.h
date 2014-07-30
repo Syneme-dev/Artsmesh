@@ -25,6 +25,6 @@ typedef enum {
 @property AMStaticGroup* selectedStaticGroup;
 @property AMStaticUser* selectedStaticUser;
 
-+(id)sharedGroupModel;
++(AMGroupPanelModel*)sharedGroupModel;
 
 @end

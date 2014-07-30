@@ -1,14 +1,17 @@
 //
-//  AMPopUpMenuItemView.m
-//  UIFramework
+//  AMPopUpMenuItem.m
+//  MyPopUpTest
 //
-//  Created by Wei Wang on 7/30/14.
-//  Copyright (c) 2014 Artsmesh. All rights reserved.
+//  Created by 王 为 on 7/31/14.
+//  Copyright (c) 2014 王 为. All rights reserved.
 //
 
-#import "AMPopUpMenuItemView.h"
+#import "AMPopUpMenuItem.h"
 
-@implementation AMPopUpMenuItemView
+@implementation AMPopUpMenuItem
+{
+    BOOL _mouseOver;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -16,10 +19,11 @@
     if (self) {
         // Initialization code here.
         self.backgroupColor = [NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1];
+        self.mouseOverColor = [NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1];
         self.title = @"";
-        self.textColor = [NSColor grayColor];
-        self.drawBackground = NO;
+        self.textColor = [NSColor whiteColor];
         self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize];
+        [self addTrackingRect:self.bounds owner:self userData:nil assumeInside:NO];
     }
     return self;
 }
@@ -32,11 +36,15 @@
     [NSGraphicsContext saveGraphicsState];
     
     //Drawing background
-    if (self.drawBackground) {
-        NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
+    
+    NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
+    if (_mouseOver) {
+        [self.mouseOverColor set];
+    }else{
         [self.backgroupColor set];
-        [border fill];
     }
+    
+    [border fill];
     
     // Drawing title
     NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] init];
@@ -50,10 +58,28 @@
     }
     
     NSSize fontSize = [self.title sizeWithAttributes:textAttributes];
-    NSPoint titleLocation = NSMakePoint(0, (self.bounds.size.height - fontSize.height) /2);
+    NSPoint titleLocation = NSMakePoint(10, (self.bounds.size.height - fontSize.height) /2);
     [self.title drawAtPoint:titleLocation withAttributes:textAttributes];
     
     [NSGraphicsContext restoreGraphicsState];
 }
+
+-(void)mouseEntered:(NSEvent *)theEvent
+{
+    _mouseOver = YES;
+    [self setNeedsDisplay:YES];
+}
+
+-(void)mouseExited:(NSEvent *)theEvent
+{
+    _mouseOver = NO;
+    [self setNeedsDisplay:YES];
+}
+
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    [self.delegate itemSelected:self];
+}
+
 
 @end

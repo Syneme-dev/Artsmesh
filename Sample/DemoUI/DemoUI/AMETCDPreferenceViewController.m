@@ -15,7 +15,7 @@
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
 #import "AMPopupMenuItem.h"
-#import "UIFramework/AMpopUpMenuItemView.h"
+
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
@@ -47,10 +47,6 @@
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.postStatusMessageButton toColor:UI_Color_blue];
     _preference_queue = dispatch_queue_create("preference_queue", DISPATCH_QUEUE_SERIAL);
-    //[self resetPopupItems];
-    [self.myPrivateIpPopup setPullsDown:YES];
-    //[self.myPrivateIpPopup.cell menu]
-    
     
     self.Ipv6checkBox.readOnly= NO;
     self.Ipv6checkBox.title = @"USE IPV6";
@@ -68,11 +64,11 @@
 }
 
 - (IBAction)privateIpSelected:(id)sender{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
-    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
-    
-    [self.myPrivateIpPopup selectItem:self.myPrivateIpPopup.selectedItem];
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
+//    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
+//    
+//    [self.myPrivateIpPopup selectItem:self.myPrivateIpPopup.selectedItem];
 }
 
 - (IBAction)statusNetTest:(id)sender {
@@ -147,37 +143,26 @@
             BOOL ipSelected = NO;
             int popupIndex = 0;
             
-            [self.myPrivateIpPopup removeAllItems];
-            NSMenu* menu = self.myPrivateIpPopup.menu;
+            [self.ipPopUpView removeAllItems];
             
             for (NSString* ipStr in ipv4s) {
-                NSMenuItem* newItem  = [[NSMenuItem alloc] initWithTitle:ipStr action:@selector(privateIpSelected:) keyEquivalent:@""];
-              
-                AMPopUpMenuItemView* newItemView = [[AMPopUpMenuItemView alloc] initWithFrame:self.myPrivateIpPopup.bounds];
-                newItemView.title = ipStr;
-                newItemView.drawBackground = YES;
-                
-                [newItem setView:newItemView];
-                [newItem setEnabled:YES];
-                [menu addItem:newItem];
+                [self.ipPopUpView addItemWithTitle:ipStr];
                 
                 if ([ipStr isEqualToString:oldIp])
                 {
-                    [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
+                    [self.ipPopUpView selectItemAtIndex:popupIndex];
                     ipSelected = YES;
                 }
                 
                  popupIndex++;
             }
             
-            if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
+            if (!ipSelected && [self.ipPopUpView itemCount] > 0)
             {
-                [self.myPrivateIpPopup selectItemAtIndex:0];
-                NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
+                [self.ipPopUpView selectItemAtIndex:0];
+                NSString* myPrivateIP = [self.ipPopUpView stringValue];
                 [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
             }
-            
-            //[self resetPopupItems];
         });
     
     });
@@ -206,38 +191,26 @@
             BOOL ipSelected = NO;
             int popupIndex = 0;
             
-            [self.myPrivateIpPopup removeAllItems];
-            NSMenu* menu = self.myPrivateIpPopup.menu;
+            [self.ipPopUpView removeAllItems];
             
             for (NSString* ipStr in ipv6s) {
-                
-                NSMenuItem* newItem  = [[NSMenuItem alloc] initWithTitle:ipStr action:@selector(privateIpSelected:) keyEquivalent:@""];
-                
-                AMPopUpMenuItemView* newItemView = [[AMPopUpMenuItemView alloc] initWithFrame:self.myPrivateIpPopup.bounds];
-                newItemView.title = ipStr;
-                newItemView.drawBackground = YES;
-                
-                [newItem setView:newItemView];
-                [newItem setEnabled:YES];
-                [menu addItem:newItem];
+                [self.ipPopUpView addItemWithTitle:ipStr];
 
                 if ([ipStr isEqualToString:oldIp])
                 {
-                    [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
+                    [self.ipPopUpView selectItemAtIndex:popupIndex];
                     ipSelected = YES;
                 }
                 
                 popupIndex++;
             }
             
-            if (!ipSelected && [[self.myPrivateIpPopup itemTitles] count] > 0)
+            if (!ipSelected && [self.ipPopUpView itemCount] > 0)
             {
-                [self.myPrivateIpPopup selectItemAtIndex:0];
-                NSString* myPrivateIP = [[self.myPrivateIpPopup itemTitles] objectAtIndex:0];
+                [self.ipPopUpView selectItemAtIndex:0];
+                NSString* myPrivateIP = [self.ipPopUpView stringValue ];
                 [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
             }
-            
-            //[self resetPopupItems];
         });
         
     });

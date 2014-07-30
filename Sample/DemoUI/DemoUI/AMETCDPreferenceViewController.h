@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <UIFramework/AMCheckBoxView.h>
+#import "UIFramework/AMPopUpView.h"
 
 
 @interface AMETCDPreferenceViewController : NSViewController
@@ -16,9 +17,9 @@
 @property  IBOutlet NSView *progressView;
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;
-@property (weak) IBOutlet NSPopUpButton *myPrivateIpPopup;
 @property (weak) IBOutlet NSTextField *statusNetPostTestResult;
 @property (weak) IBOutlet NSButton *testStatusNetPost;
+@property (weak) IBOutlet AMPopUpView *ipPopUpView;
 
 @property (strong) IBOutlet NSButton *generalTabButton;
 @property (strong) IBOutlet NSButton *jackServerTabButton;

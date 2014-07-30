@@ -61,7 +61,7 @@
 @end
 
 @implementation AMMainWindowController {
-    AMGroupPanelViewController *_userGroupViewController;
+//    AMGroupPanelViewController *_userGroupViewController;
     AMBox *_containerView;
 //    AMETCDPreferenceViewController *preferenceViewController;
 //    AMSocialViewController *socialViewController;
@@ -453,9 +453,9 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(300.0f, 220.0f);
     panelView.minSizeConstraint = panelSize;
-    _userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
-    _userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
-    NSView *groupView = _userGroupViewController.view;
+    AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
+    userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
+    NSView *groupView = userGroupViewController.view;
     [panelViewController.view addSubview:groupView];
 
     [groupView setTranslatesAutoresizingMaskIntoConstraints:NO];

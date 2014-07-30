@@ -63,14 +63,14 @@
 @implementation AMMainWindowController {
     AMGroupPanelViewController *_userGroupViewController;
     AMBox *_containerView;
-    AMETCDPreferenceViewController *preferenceViewController;
-    AMSocialViewController *socialViewController;
-    AMChatViewController *chatViewController;
-    AMTestViewController *testViewController;
+//    AMETCDPreferenceViewController *preferenceViewController;
+//    AMSocialViewController *socialViewController;
+//    AMChatViewController *chatViewController;
+//    AMTestViewController *testViewController;
 //    AMMapViewController *mapViewController;
-    AMMixingViewController *mixingViewController;
-    AMUserViewController *userViewController;
-    AMVisualViewController *visualViewController;
+//    AMMixingViewController *mixingViewController;
+//    AMUserViewController *userViewController;
+//    AMVisualViewController *visualViewController;
     MZTimerLabel *amTimerControl;
     AMPanelControlBarViewController *controlBarController;
     Boolean isWindowLoading;
@@ -368,7 +368,7 @@
 
 - (AMPanelViewController *)loadTestPanel {
     AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
-    testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
+    AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
     [self fillPanel:panelViewController content:testViewController];
     return panelViewController;
 }
@@ -382,14 +382,14 @@
 
 - (AMPanelViewController *)loadMixingPanel {
     AMPanelViewController *panelViewController = [self createPanel:UI_Panel_Key_Mixing withTitle:@"Mixing" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight ];
-    mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
+    AMMixingViewController *mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
     [self fillPanel:panelViewController content:mixingViewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadVisualPanel {
     AMPanelViewController *panelViewController = [self createPanel:UI_Panel_Key_Visual withTitle:@"Visualization" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight ];
-    visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
+    AMVisualViewController *visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [visualViewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController content:visualViewController];
     return panelViewController;
@@ -429,7 +429,7 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth* 2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
-    socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
+    AMSocialViewController *socialViewController = [[AMSocialViewController alloc] initWithNibName:@"AMSocialView" bundle:nil];
     [self fillPanel:panelViewController content:socialViewController];
     [socialViewController.socialWebTab setDrawsBackground:NO];
     containerWidth += panelViewController.view.frame.size.width + UI_panelSpacing;
@@ -485,7 +485,7 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
-    preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    AMETCDPreferenceViewController *preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController content:preferenceViewController];
     [preferenceViewController loadSystemInfo];
@@ -505,8 +505,8 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);
     
-    chatViewController = nil;
-    chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
+//    chatViewController = nil;
+    AMChatViewController *chatViewController = [[AMChatViewController alloc] initWithNibName:@"AMChatView" bundle:nil];
     [self fillPanel:panelViewController content:chatViewController];
     return panelViewController;
 }
@@ -525,7 +525,7 @@
     NSView *pingView = pingViewController.view;
     pingView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
     [panelView addSubview:pingView];
-    [self fillPanel:panelViewController.view content:pingViewController.view];
+    [self fillPanel:panelViewController content:pingViewController];
     return panelViewController;
 }
 
@@ -540,7 +540,7 @@
     NSSize minSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelWidth);
     panelView.minSizeConstraint = minSize;
 
-    userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
+    AMUserViewController *userViewController = [[AMUserViewController alloc] initWithNibName:@"AMUserView" bundle:nil];
     NSView *profileView = userViewController.view;
     [panelView addSubview:profileView];
 

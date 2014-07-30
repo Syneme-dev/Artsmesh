@@ -68,9 +68,9 @@
 - (IBAction)applyBtnClicked:(NSButton *)sender
 {
      NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
-    [AMCoreData shareInstance].mySelf.nickName = self.userName.stringValue;
-    [AMCoreData shareInstance].mySelf.description = self.description.textStorage.string;
-    [AMCoreData shareInstance].mySelf.location = self.location.stringValue;
+    [AMCoreData shareInstance].mySelf.nickName = self.staticUser.name;
+    [AMCoreData shareInstance].mySelf.description = self.staticUser.description;
+    [AMCoreData shareInstance].mySelf.location = self.staticUser.location;
     
     [defaults setObject:self.userName.stringValue forKey:Preference_Key_User_NickName];
     [defaults setObject:self.description.textStorage.string forKey:Preference_Key_User_Description];

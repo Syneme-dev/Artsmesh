@@ -17,7 +17,7 @@
                                  userInfo:nil];
 }
 
-+(id)sharedGroupModel
++(AMGroupPanelModel*)sharedGroupModel
 {
     static AMGroupPanelModel* model = nil;
     @synchronized(self){

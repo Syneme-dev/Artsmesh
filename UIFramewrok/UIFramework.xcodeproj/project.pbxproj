@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
+		2677D11C1989161F00C2D9A7 /* AMPopUpMenuItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2677D11A1989161F00C2D9A7 /* AMPopUpMenuItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2677D11D1989161F00C2D9A7 /* AMPopUpMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677D11B1989161F00C2D9A7 /* AMPopUpMenuItemView.m */; };
+		2677D1241989318C00C2D9A7 /* AMPopUpButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 2677D1221989318C00C2D9A7 /* AMPopUpButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2677D1251989318C00C2D9A7 /* AMPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677D1231989318C00C2D9A7 /* AMPopUpButton.m */; };
+		2677D12819893E9100C2D9A7 /* AMDarkMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 2677D12619893E9100C2D9A7 /* AMDarkMenu.h */; };
+		2677D12919893E9100C2D9A7 /* AMDarkMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677D12719893E9100C2D9A7 /* AMDarkMenu.m */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
@@ -57,6 +63,12 @@
 /* Begin PBXFileReference section */
 		26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontTextView.h; path = UIFramewrok/AMFoundryFontTextView.h; sourceTree = "<group>"; };
 		26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontTextView.m; path = UIFramewrok/AMFoundryFontTextView.m; sourceTree = "<group>"; };
+		2677D11A1989161F00C2D9A7 /* AMPopUpMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopUpMenuItemView.h; sourceTree = "<group>"; };
+		2677D11B1989161F00C2D9A7 /* AMPopUpMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopUpMenuItemView.m; sourceTree = "<group>"; };
+		2677D1221989318C00C2D9A7 /* AMPopUpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopUpButton.h; sourceTree = "<group>"; };
+		2677D1231989318C00C2D9A7 /* AMPopUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopUpButton.m; sourceTree = "<group>"; };
+		2677D12619893E9100C2D9A7 /* AMDarkMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMDarkMenu.h; sourceTree = "<group>"; };
+		2677D12719893E9100C2D9A7 /* AMDarkMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMDarkMenu.m; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +136,12 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				2677D12619893E9100C2D9A7 /* AMDarkMenu.h */,
+				2677D12719893E9100C2D9A7 /* AMDarkMenu.m */,
+				2677D1221989318C00C2D9A7 /* AMPopUpButton.h */,
+				2677D1231989318C00C2D9A7 /* AMPopUpButton.m */,
+				2677D11A1989161F00C2D9A7 /* AMPopUpMenuItemView.h */,
+				2677D11B1989161F00C2D9A7 /* AMPopUpMenuItemView.m */,
 				26CEAE8B197380F600DF285F /* AMCheckBoxView.h */,
 				26CEAE8C197380F600DF285F /* AMCheckBoxView.m */,
 				AFAC30C719382E71000FFC5F /* AMTextView.h */,
@@ -233,6 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
+				2677D1241989318C00C2D9A7 /* AMPopUpButton.h in Headers */,
+				2677D11C1989161F00C2D9A7 /* AMPopUpMenuItemView.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
@@ -244,6 +264,7 @@
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
+				2677D12819893E9100C2D9A7 /* AMDarkMenu.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);
@@ -344,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2677D1251989318C00C2D9A7 /* AMPopUpButton.m in Sources */,
 				CE883166192C44B900DA17CE /* AMBox.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
@@ -356,6 +378,8 @@
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,
 				AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */,
 				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
+				2677D11D1989161F00C2D9A7 /* AMPopUpMenuItemView.m in Sources */,
+				2677D12919893E9100C2D9A7 /* AMDarkMenu.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
 			);

@@ -15,6 +15,7 @@
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
 #import "AMPopupMenuItem.h"
+#import "UIFramework/AMpopUpMenuItemView.h"
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
@@ -46,8 +47,11 @@
     [AMButtonHandler changeTabTextColor:self.testStatusNetPost toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.postStatusMessageButton toColor:UI_Color_blue];
     _preference_queue = dispatch_queue_create("preference_queue", DISPATCH_QUEUE_SERIAL);
-    [self resetPopupItems];
+    //[self resetPopupItems];
     [self.myPrivateIpPopup setPullsDown:YES];
+    //[self.myPrivateIpPopup.cell menu]
+    
+    
     self.Ipv6checkBox.readOnly= NO;
     self.Ipv6checkBox.title = @"USE IPV6";
     self.Ipv6checkBox.delegate = self;
@@ -94,33 +98,33 @@
 
 -(void)customPrefrence
 {
-    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
-    NSDictionary *attributes = [NSDictionary
-                                dictionaryWithObjectsAndKeys:
-                                [NSColor whiteColor], NSForegroundColorAttributeName,
-                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
-                                NSFontAttributeName, nil];
-    
-     NSMenu *newMenu = [[NSMenu alloc] init];
-    
-    
-    for (int i = 0; i < [itemArray count]; i++)
-    {
-        NSMenuItem *item = [itemArray objectAtIndex:i];
-        NSAttributedString *as = [[NSAttributedString alloc]
-                                  initWithString:[item title]
-                                  attributes:attributes];
-        [item setAttributedTitle:as];
-        
-        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title  keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
-        popMenuItem.popupButton=self.myPrivateIpPopup;
-        [popMenuItem setEnabled:YES];
-        [popMenuItem setTarget:self];
-        [newMenu addItem:popMenuItem];
-        
-    }
-   
-    [self.myPrivateIpPopup setMenu:newMenu];
+//    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
+//    NSDictionary *attributes = [NSDictionary
+//                                dictionaryWithObjectsAndKeys:
+//                                [NSColor whiteColor], NSForegroundColorAttributeName,
+//                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
+//                                NSFontAttributeName, nil];
+//    
+//     NSMenu *newMenu = [[NSMenu alloc] init];
+//    
+//    
+//    for (int i = 0; i < [itemArray count]; i++)
+//    {
+//        NSMenuItem *item = [itemArray objectAtIndex:i];
+//        NSAttributedString *as = [[NSAttributedString alloc]
+//                                  initWithString:[item title]
+//                                  attributes:attributes];
+//        [item setAttributedTitle:as];
+//        
+//        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title  keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
+//        popMenuItem.popupButton=self.myPrivateIpPopup;
+//        [popMenuItem setEnabled:YES];
+//        [popMenuItem setTarget:self];
+//        [newMenu addItem:popMenuItem];
+//        
+//    }
+//   
+//    [self.myPrivateIpPopup setMenu:newMenu];
 }
 
 -(void)loadIpv4
@@ -133,11 +137,6 @@
             NSString* ipStr = [addresses objectAtIndex:i];
             if ([AMCommonTools isValidIpv4:ipStr])
             {
-//                if ([ipStr hasPrefix:@"127"])
-//                {
-//                    continue;
-//                }
-                
                 [ipv4s addObject:ipStr];
             }
         }
@@ -149,9 +148,19 @@
             int popupIndex = 0;
             
             [self.myPrivateIpPopup removeAllItems];
+            NSMenu* menu = self.myPrivateIpPopup.menu;
             
             for (NSString* ipStr in ipv4s) {
-                [self.myPrivateIpPopup addItemWithTitle:ipStr];
+                NSMenuItem* newItem  = [[NSMenuItem alloc] initWithTitle:ipStr action:@selector(privateIpSelected:) keyEquivalent:@""];
+              
+                AMPopUpMenuItemView* newItemView = [[AMPopUpMenuItemView alloc] initWithFrame:self.myPrivateIpPopup.bounds];
+                newItemView.title = ipStr;
+                newItemView.drawBackground = YES;
+                
+                [newItem setView:newItemView];
+                [newItem setEnabled:YES];
+                [menu addItem:newItem];
+                
                 if ([ipStr isEqualToString:oldIp])
                 {
                     [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
@@ -168,7 +177,7 @@
                 [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
             }
             
-            [self resetPopupItems];
+            //[self resetPopupItems];
         });
     
     });
@@ -184,11 +193,6 @@
             NSString* ipStr = [addresses objectAtIndex:i];
             if ([AMCommonTools isValidIpv6:ipStr])
             {
-//                if ([ipStr hasPrefix:@"::"])
-//                {
-//                    continue;
-//                }
-                
                 NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
                 ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
                 
@@ -203,9 +207,20 @@
             int popupIndex = 0;
             
             [self.myPrivateIpPopup removeAllItems];
+            NSMenu* menu = self.myPrivateIpPopup.menu;
             
             for (NSString* ipStr in ipv6s) {
-                [self.myPrivateIpPopup addItemWithTitle:ipStr];
+                
+                NSMenuItem* newItem  = [[NSMenuItem alloc] initWithTitle:ipStr action:@selector(privateIpSelected:) keyEquivalent:@""];
+                
+                AMPopUpMenuItemView* newItemView = [[AMPopUpMenuItemView alloc] initWithFrame:self.myPrivateIpPopup.bounds];
+                newItemView.title = ipStr;
+                newItemView.drawBackground = YES;
+                
+                [newItem setView:newItemView];
+                [newItem setEnabled:YES];
+                [menu addItem:newItem];
+
                 if ([ipStr isEqualToString:oldIp])
                 {
                     [self.myPrivateIpPopup selectItemAtIndex:popupIndex];
@@ -222,7 +237,7 @@
                 [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
             }
             
-            [self resetPopupItems];
+            //[self resetPopupItems];
         });
         
     });
@@ -244,28 +259,28 @@
     });
 }
 
--(void)resetPopupItems
-{
-    //self.myPrivateIpPopup
-    
-    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
-    int i;
-    NSDictionary *attributes = [NSDictionary
-                                dictionaryWithObjectsAndKeys:
-                                [NSColor whiteColor], NSForegroundColorAttributeName,
-                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
-                                NSFontAttributeName, nil];
-    
-    for (i = 0; i < [itemArray count]; i++) {
-        NSMenuItem *item = [itemArray objectAtIndex:i];
-        
-        NSAttributedString *as = [[NSAttributedString alloc]
-                                  initWithString:[item title]
-                                  attributes:attributes];
-        
-        [item setAttributedTitle:as];
-    }
-}
+//-(void)resetPopupItems
+//{
+//    //self.myPrivateIpPopup
+//    
+//    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
+//    int i;
+//    NSDictionary *attributes = [NSDictionary
+//                                dictionaryWithObjectsAndKeys:
+//                                [NSColor whiteColor], NSForegroundColorAttributeName,
+//                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
+//                                NSFontAttributeName, nil];
+//    
+//    for (i = 0; i < [itemArray count]; i++) {
+//        NSMenuItem *item = [itemArray objectAtIndex:i];
+//        
+//        NSAttributedString *as = [[NSAttributedString alloc]
+//                                  initWithString:[item title]
+//                                  attributes:attributes];
+//        
+//        [item setAttributedTitle:as];
+//    }
+//}
 
 -(void)loadSystemInfo
 {

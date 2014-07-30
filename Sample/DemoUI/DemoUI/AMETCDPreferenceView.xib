@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -264,19 +264,19 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <popUpButton focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
+                                            <popUpButton focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6" customClass="AMPopUpButton">
                                                 <rect key="frame" x="20" y="642" width="237" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="237" id="gWC-aS-asQ"/>
                                                 </constraints>
-                                                <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="kXj-kD-xSH">
+                                                <popUpButtonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="kXj-kD-xSH">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
                                                     <menu key="menu" title="OtherViews" id="NuT-og-gxa">
                                                         <items>
-                                                            <menuItem title="Item 1" hidden="YES" id="oJk-sL-JYx"/>
-                                                            <menuItem title="Item 2" id="DaG-8A-meK"/>
+                                                            <menuItem title="Item 1" id="oJk-sL-JYx"/>
+                                                            <menuItem title="Item 2" state="on" id="DaG-8A-meK"/>
                                                             <menuItem title="Item 3" id="GBT-Jz-5DZ"/>
                                                         </items>
                                                     </menu>

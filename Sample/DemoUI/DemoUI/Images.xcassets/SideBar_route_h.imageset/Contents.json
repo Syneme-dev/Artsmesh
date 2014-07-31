@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "SideBar_route.png"
+      "filename" : "SideBar_Icon-18.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "SideBar_Icon-08.png"
+      "filename" : "SideBar_Icon@2x-18.png"
     }
   ],
   "info" : {

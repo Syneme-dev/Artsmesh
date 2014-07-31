@@ -19,6 +19,8 @@
 		AF00D45318C9B5E6004DE9E6 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */; };
 		AF00D45918C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */; };
+		AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AF2890DE198A398A00D05174 /* AMBlueButton.h */; };
+		AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2890DF198A398A00D05174 /* AMBlueButton.m */; };
 		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */; };
 		AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,6 +76,8 @@
 		AF00D45618C9B5E6004DE9E6 /* UIFrameworkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIFrameworkTests-Info.plist"; sourceTree = "<group>"; };
 		AF00D45818C9B5E6004DE9E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIFramewrokTests.m; sourceTree = "<group>"; };
+		AF2890DE198A398A00D05174 /* AMBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlueButton.h; sourceTree = "<group>"; };
+		AF2890DF198A398A00D05174 /* AMBlueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlueButton.m; sourceTree = "<group>"; };
 		AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMDragDropView.h; path = UIFramewrok/AMDragDropView.h; sourceTree = "<group>"; };
 		AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMDragDropView.m; path = UIFramewrok/AMDragDropView.m; sourceTree = "<group>"; };
 		AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMaxSizeView.h; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				AF2890DE198A398A00D05174 /* AMBlueButton.h */,
+				AF2890DF198A398A00D05174 /* AMBlueButton.m */,
 				26CEAE8B197380F600DF285F /* AMCheckBoxView.h */,
 				26CEAE8C197380F600DF285F /* AMCheckBoxView.m */,
 				AFAC30C719382E71000FFC5F /* AMTextView.h */,
@@ -233,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
+				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
@@ -355,6 +362,7 @@
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,
 				AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */,
+				AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */,
 				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,

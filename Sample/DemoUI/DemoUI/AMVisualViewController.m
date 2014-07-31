@@ -23,4 +23,19 @@
     return self;
 }
 
+- (IBAction)onVisualTabClick:(NSButton *)sender {
+    [self.tabView selectTabViewItemAtIndex:0];
+}
+
+- (IBAction)onOSCTabClick:(id)sender {
+    [self.tabView selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)onAudioTabClick:(id)sender {
+    [self.tabView selectTabViewItemAtIndex:2];
+}
+
+- (IBAction)onVideoTabClick:(id)sender {
+    [self.tabView selectTabViewItemAtIndex:3];
+}
 @end

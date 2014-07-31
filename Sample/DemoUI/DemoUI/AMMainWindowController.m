@@ -61,16 +61,7 @@
 @end
 
 @implementation AMMainWindowController {
-//    AMGroupPanelViewController *_userGroupViewController;
     AMBox *_containerView;
-//    AMETCDPreferenceViewController *preferenceViewController;
-//    AMSocialViewController *socialViewController;
-//    AMChatViewController *chatViewController;
-//    AMTestViewController *testViewController;
-//    AMMapViewController *mapViewController;
-//    AMMixingViewController *mixingViewController;
-//    AMUserViewController *userViewController;
-//    AMVisualViewController *visualViewController;
     MZTimerLabel *amTimerControl;
     AMPanelControlBarViewController *controlBarController;
     Boolean isWindowLoading;
@@ -152,7 +143,7 @@
     isWindowLoading = YES;
     [self initTimer];
     [self createDefaultWindow];
-//    [self loadTestPanel]; //Note:uncomment this code to show test panel.
+    [self loadTestPanel]; //Note:uncomment this code to show test panel.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
@@ -238,7 +229,6 @@
     _containerView.paddingRight = 50;
     _containerView.allowBecomeEmpty = YES;
     _containerView.gapBetweenItems = 50;
-//    CGFloat contentHeight = _containerView.frame.size.height;
     id __weak weakSelf = self;
     _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
         if ([boxItem isKindOfClass:[AMBox class]])

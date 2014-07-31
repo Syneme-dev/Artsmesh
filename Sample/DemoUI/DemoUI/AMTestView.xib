@@ -43,7 +43,7 @@
                         <action selector="ShowUserButtonClick:" target="-2" id="byG-U5-L60"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvU-SG-mDQ">
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvU-SG-mDQ" customClass="AMBlueButton">
                     <rect key="frame" x="154" y="119" width="119" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Show Group" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gaz-9Q-VWb">

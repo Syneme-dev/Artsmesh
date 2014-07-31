@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -9,11 +9,11 @@
                 <outlet property="Ipv6checkBox" destination="6Tp-lO-ZpI" id="XfT-aw-tjN"/>
                 <outlet property="audioTabButton" destination="niJ-06-bEy" id="4SE-HW-0Kd"/>
                 <outlet property="generalTabButton" destination="mvk-HX-fYa" id="1cE-ZS-hnU"/>
+                <outlet property="ipPopUpView" destination="tQ3-7Y-Wal" id="JCW-FA-Icu"/>
                 <outlet property="isTopControlBarCheckBox" destination="fdL-A4-ABv" id="pDf-wo-wfW"/>
                 <outlet property="jackRouterTabButton" destination="vtg-zK-Gic" id="Mcj-vm-QCm"/>
                 <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
-                <outlet property="myPrivateIpPopup" destination="6jJ-Sr-xt6" id="Baf-8c-k7w"/>
                 <outlet property="postStatusMessageButton" destination="FE0-1F-GTL" id="K5O-x4-sSX"/>
                 <outlet property="statusNetPostTestResult" destination="dlL-IG-Qwh" id="CEA-pF-YkR"/>
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
@@ -35,7 +35,7 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
-                            <view key="view" id="Mp1-oa-ElH">
+                            <view key="view" id="Mp1-oa-ElH" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -81,7 +81,7 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_ChatPort" id="eWt-D6-xXb"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" customClass="AMFoundryFontView">
+                                            <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="30" y="374" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -97,7 +97,7 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_LocalServerPort" id="XZs-2r-Vmq"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" customClass="AMFoundryFontView">
+                                            <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="30" y="465" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -113,7 +113,7 @@
                                                     <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerAddr" id="NjG-vl-Ywi"/>
                                                 </connections>
                                             </textField>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" customClass="AMFoundryFontView">
+                                            <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="30" y="554" width="212" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -174,7 +174,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="18" y="495" width="101" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -187,7 +187,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-AN-6QR" customClass="AMFoundryFontView">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-AN-6QR" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="18" y="584" width="105" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -200,7 +200,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="18" y="402" width="158" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <constraints>
@@ -264,27 +264,6 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <popUpButton focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Sr-xt6">
-                                                <rect key="frame" x="20" y="642" width="237" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="237" id="gWC-aS-asQ"/>
-                                                </constraints>
-                                                <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" focusRingType="none" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="kXj-kD-xSH">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="menu"/>
-                                                    <menu key="menu" title="OtherViews" id="NuT-og-gxa">
-                                                        <items>
-                                                            <menuItem title="Item 1" hidden="YES" id="oJk-sL-JYx"/>
-                                                            <menuItem title="Item 2" id="DaG-8A-meK"/>
-                                                            <menuItem title="Item 3" id="GBT-Jz-5DZ"/>
-                                                        </items>
-                                                    </menu>
-                                                </popUpButtonCell>
-                                                <connections>
-                                                    <action selector="privateIpSelected:" target="-2" id="ZeV-2d-M67"/>
-                                                </connections>
-                                            </popUpButton>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" customClass="AMCheckBoxView">
                                                 <rect key="frame" x="330" y="664" width="220" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -300,6 +279,10 @@
                                                     <binding destination="pGe-YA-GCX" name="toolTip" keyPath="values.Preference_Key_General_TopControlBar" id="JDV-Ha-BHa"/>
                                                 </connections>
                                             </customView>
+                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-7Y-Wal" customClass="AMPopUpView">
+                                                <rect key="frame" x="32" y="638" width="208" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            </customView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="32K-V3-qm6" firstAttribute="top" secondItem="yiF-oi-4hZ" secondAttribute="bottom" constant="8" id="1FF-ul-Syc"/>
@@ -308,7 +291,6 @@
                                             <constraint firstItem="dkv-aO-371" firstAttribute="top" secondItem="Muo-V0-R66" secondAttribute="bottom" constant="46" id="9Dw-1D-oKv"/>
                                             <constraint firstItem="Zsp-bb-wBq" firstAttribute="top" secondItem="OgK-Gw-A8W" secondAttribute="bottom" constant="30" id="9et-Zf-vG7"/>
                                             <constraint firstItem="LcN-Mm-SCa" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="20" id="ARG-X5-6uU"/>
-                                            <constraint firstItem="6jJ-Sr-xt6" firstAttribute="top" secondItem="Zsp-bb-wBq" secondAttribute="bottom" constant="8" id="Frw-SJ-D7H"/>
                                             <constraint firstAttribute="trailing" secondItem="2aw-tB-Mm1" secondAttribute="trailing" constant="50" id="LO3-ZD-WfC"/>
                                             <constraint firstItem="Muo-V0-R66" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="32" id="MgE-dD-Jpu"/>
                                             <constraint firstAttribute="trailing" secondItem="yiF-oi-4hZ" secondAttribute="trailing" constant="149" id="O86-4Z-C6z"/>
@@ -324,7 +306,6 @@
                                             <constraint firstItem="BTG-Vy-bTy" firstAttribute="top" secondItem="dkv-aO-371" secondAttribute="bottom" constant="6" id="fYl-sn-eqW"/>
                                             <constraint firstItem="6Tp-lO-ZpI" firstAttribute="top" secondItem="OgK-Gw-A8W" secondAttribute="bottom" constant="30" id="goT-oL-yQW"/>
                                             <constraint firstItem="aGA-7j-dZK" firstAttribute="top" secondItem="wTE-sc-8gr" secondAttribute="bottom" constant="6" id="hG7-BH-8jF"/>
-                                            <constraint firstItem="bgf-AN-6QR" firstAttribute="top" secondItem="6jJ-Sr-xt6" secondAttribute="bottom" constant="41" id="ibp-lZ-xny"/>
                                             <constraint firstItem="wTE-sc-8gr" firstAttribute="top" secondItem="32K-V3-qm6" secondAttribute="bottom" constant="46" id="jx4-LN-OHE"/>
                                             <constraint firstItem="dkv-aO-371" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="20" id="kMV-64-lpB"/>
                                             <constraint firstAttribute="trailing" secondItem="aGA-7j-dZK" secondAttribute="trailing" constant="50" id="lRN-5l-KIO"/>
@@ -335,7 +316,6 @@
                                             <constraint firstItem="BTG-Vy-bTy" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="32" id="v7U-ps-gMQ"/>
                                             <constraint firstItem="Zsp-bb-wBq" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="20" id="wBR-Y1-1Fn"/>
                                             <constraint firstItem="Muo-V0-R66" firstAttribute="top" secondItem="6hU-q8-TbQ" secondAttribute="bottom" constant="8" id="xaA-pn-C15"/>
-                                            <constraint firstItem="6jJ-Sr-xt6" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="20" id="zMz-S0-LcQ"/>
                                             <constraint firstItem="OgK-Gw-A8W" firstAttribute="leading" secondItem="Cb0-xL-9s4" secondAttribute="leading" constant="32" id="zgC-Ie-sMJ"/>
                                         </constraints>
                                     </customView>
@@ -349,12 +329,12 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
-                            <view key="view" id="343-FY-LyZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                            <view key="view" id="343-FY-LyZ" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rND-dd-2Kz">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                                        <rect key="frame" x="0.0" y="-19" width="600" height="799"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70f-5O-vHn">
@@ -449,8 +429,8 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="3" id="Uhs-af-iDr">
-                            <view key="view" id="Dwd-l8-aCe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="799"/>
+                            <view key="view" id="Dwd-l8-aCe" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>

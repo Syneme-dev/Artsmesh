@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
+		2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877019899ABA001DA266 /* AMPopUpView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877119899ABA001DA266 /* AMPopUpView.m */; };
+		2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877219899ABA001DA266 /* AMPopUpMenuItem.h */; };
+		2658877D19899ABA001DA266 /* AMPopUpMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877319899ABA001DA266 /* AMPopUpMenuItem.m */; };
+		2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877419899ABA001DA266 /* AMPopUpMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877519899ABA001DA266 /* AMPopUpMenuController.m */; };
+		2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2658877619899ABA001DA266 /* AMPopUpMenuController.xib */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
@@ -59,6 +66,13 @@
 /* Begin PBXFileReference section */
 		26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontTextView.h; path = UIFramewrok/AMFoundryFontTextView.h; sourceTree = "<group>"; };
 		26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontTextView.m; path = UIFramewrok/AMFoundryFontTextView.m; sourceTree = "<group>"; };
+		2658877019899ABA001DA266 /* AMPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopUpView.h; sourceTree = "<group>"; };
+		2658877119899ABA001DA266 /* AMPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopUpView.m; sourceTree = "<group>"; };
+		2658877219899ABA001DA266 /* AMPopUpMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopUpMenuItem.h; sourceTree = "<group>"; };
+		2658877319899ABA001DA266 /* AMPopUpMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopUpMenuItem.m; sourceTree = "<group>"; };
+		2658877419899ABA001DA266 /* AMPopUpMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopUpMenuController.h; sourceTree = "<group>"; };
+		2658877519899ABA001DA266 /* AMPopUpMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopUpMenuController.m; sourceTree = "<group>"; };
+		2658877619899ABA001DA266 /* AMPopUpMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPopUpMenuController.xib; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +139,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2658876C19899A97001DA266 /* AMPopupMenuButton */ = {
+			isa = PBXGroup;
+			children = (
+				2658877019899ABA001DA266 /* AMPopUpView.h */,
+				2658877119899ABA001DA266 /* AMPopUpView.m */,
+				2658877219899ABA001DA266 /* AMPopUpMenuItem.h */,
+				2658877319899ABA001DA266 /* AMPopUpMenuItem.m */,
+				2658877419899ABA001DA266 /* AMPopUpMenuController.h */,
+				2658877519899ABA001DA266 /* AMPopUpMenuController.m */,
+				2658877619899ABA001DA266 /* AMPopUpMenuController.xib */,
+			);
+			name = AMPopupMenuButton;
+			sourceTree = "<group>";
+		};
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +278,9 @@
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
+				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
+				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);
@@ -332,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */,
 				AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +383,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE883166192C44B900DA17CE /* AMBox.m in Sources */,
+				2658877D19899ABA001DA266 /* AMPopUpMenuItem.m in Sources */,
+				2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
+				2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
 				CE25C51219775A08003A8B39 /* AMPanelView.m in Sources */,
 				CE25C51019775960003A8B39 /* AMBorderView.m in Sources */,

@@ -12,8 +12,9 @@
 
 
 @implementation AMMaxSizeView
-
-
+{
+    NSRect _oldWindowFrame;
+}
 
 
 - (NSColor *) colorFromHexRGB:(NSString *) inColorString
@@ -42,7 +43,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+        _oldWindowFrame = NSZeroRect;
     }
     return self;
 }
@@ -55,6 +56,29 @@
     [UI_Color_gray set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    if ([theEvent clickCount] == 2) {
+        NSPoint location = [theEvent locationInWindow];
+        location = [self convertPoint:location fromView:nil];
+        CGFloat height = self.bounds.size.height;
+        if (location.y > height - 60) {
+            NSWindow *window = self.window;
+            if (NSEqualRects(_oldWindowFrame, NSZeroRect)) {
+                _oldWindowFrame = window.frame;
+                NSRect miniFrame = NSMakeRect(_oldWindowFrame.origin.x,
+                                              window.screen.visibleFrame.origin.y,
+                                              _oldWindowFrame.size.width,
+                                              60);
+                [window.animator setFrame:miniFrame display:NO];
+            } else {
+                [window.animator setFrame:_oldWindowFrame display:YES];
+                _oldWindowFrame = NSZeroRect;
+            }
+        }
+    }
 }
 
 @end

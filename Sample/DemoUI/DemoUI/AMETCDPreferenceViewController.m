@@ -14,10 +14,9 @@
 #import <AMCommonTools/AMCommonTools.h>
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
-#import "AMPopupMenuItem.h"
 
 
-@interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate>
+@interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
 @property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
 
 @end
@@ -37,6 +36,7 @@
     return self;
 }
 
+
 -(void)awakeFromNib{
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
@@ -52,27 +52,29 @@
     self.Ipv6checkBox.title = @"USE IPV6";
     self.Ipv6checkBox.delegate = self;
     self.isTopControlBarCheckBox.delegate=self;
+    
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
     self.isTopControlBarCheckBox.checked=isTopBar;
     self.isTopControlBarCheckBox.title = @"CONTROL BAR TOP";
     self.isTopControlBarCheckBox.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: 13];
-
     
+    self.ipPopUpView.delegate = self;
 }
+
 
 - (IBAction)onJackServerTabClick:(id)sender {
     [self.tabs selectTabViewItemWithIdentifier:@"2"];
 }
 
-- (IBAction)privateIpSelected:(id)sender{
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    NSString* myPrivateIP = [self.myPrivateIpPopup titleOfSelectedItem];
-//    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
-//    
-//    [self.myPrivateIpPopup selectItem:self.myPrivateIpPopup.selectedItem];
+
+-(void)itemSelected:(AMPopUpView*)sender{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* myPrivateIP = [self.ipPopUpView stringValue];
+    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
 }
+
 
 - (IBAction)statusNetTest:(id)sender {
     BOOL res = [[AMStatusNet shareInstance] postMessageToStatusNet:@"This is a test message send from Artsmesh through API"];
@@ -83,17 +85,19 @@
     else
     {
         self.statusNetPostTestResult.stringValue = @"Post Failed!";
-   }
-    
+    }
 }
+
 
 - (IBAction)onGeneralClick:(id)sender {
       [self.tabs selectTabViewItemWithIdentifier:@"0"];
 }
 
+
 - (IBAction)onStatusNetClick:(id)sender {
      [self.tabs selectTabViewItemWithIdentifier:@"6"];
 }
+
 
 -(void)loadIpv4
 {
@@ -139,6 +143,7 @@
     
     });
 }
+
 
 -(void) loadIpv6
 {
@@ -204,6 +209,7 @@
     });
 }
 
+
 -(void)loadSystemInfo
 {
     [self loadMachineName];
@@ -222,7 +228,6 @@
         [self loadIpv4];
     }
 }
-
 
 
 -(void)onChecked:(AMCheckBoxView *)sender

@@ -109,7 +109,7 @@
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
-                sleep(2);
+                //sleep(2);
                 [self registerGroup];
             });
         }

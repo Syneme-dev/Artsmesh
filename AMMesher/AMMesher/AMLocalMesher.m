@@ -100,13 +100,14 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >LocalServer.log 2>&1",
+                        // @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >LocalServer.log 2>&1 &",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
                          lanchPath,
                          port,
                          port,
                          userTimeout];
     //system("say \"Now I'm the leader and my host name is `hostname`\"");
-    
+    NSLog(@"command is %@", command);
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
     NSLog(@"command is %@", command);
     [_mesherServerTask launch];
@@ -154,7 +155,7 @@
             NSLog(@"error happened when register group:%@", error.description);
             NSLog(@"will try again!");
             dispatch_async(dispatch_get_main_queue(), ^{
-                sleep(2);
+                //sleep(2);
                 [self registerLocalGroup];
             });
             return;
@@ -255,7 +256,7 @@
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"register self failed, retry");
-                sleep(2);
+                //sleep(2);
                 [self registerSelf];
             });
         }

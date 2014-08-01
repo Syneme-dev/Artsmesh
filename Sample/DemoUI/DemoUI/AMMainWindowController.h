@@ -21,6 +21,7 @@
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
 @property (weak) IBOutlet AMFoundryFontView *amTimer;
 @property(nonatomic, readonly) NSView *containerView;
+@property (weak) IBOutlet NSButton *amTimerBtn;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

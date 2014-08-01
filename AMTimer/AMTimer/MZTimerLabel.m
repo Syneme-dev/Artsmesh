@@ -57,6 +57,9 @@
 #pragma mark - Initialize method
 
 @implementation MZTimerLabel
+{
+    NSMutableArray* _timerScreens;
+}
 
 @synthesize timeFormat = _timeFormat;
 
@@ -321,8 +324,39 @@
     }
     
     NSString *strDate = [self.dateFormatter stringFromDate:timeToShow];
-    [self.timeLabel setStringValue: strDate];
+    NSArray* timeParts =  [strDate componentsSeparatedByString:@":"];
     
+    if ([timeParts count] == 3) {
+        strDate = [NSString stringWithFormat:@"%@  :  %@  :  %@  SEC",
+                         [timeParts objectAtIndex:0],
+                         [timeParts objectAtIndex:1],
+                         [timeParts objectAtIndex:2]];
+    }
+    
+    for (NSTextField* tf in _timerScreens ) {
+        [tf setStringValue: strDate];
+    }
+    
+    [self.timeLabel setStringValue: strDate];
+}
+
+-(void)addTimerScreen:(NSTextField*)timeLabel
+{
+    if (_timerScreens == nil){
+        _timerScreens = [[NSMutableArray alloc] init];
+    }
+    
+    [_timerScreens addObject:timeLabel];
+}
+
+-(void)removeTimerScreen:(NSTextField*)timerLabel
+{
+    [_timerScreens removeObject:timerLabel];
+}
+
+-(void)removeAllScreen
+{
+    [_timerScreens removeAllObjects];
 }
 
 @end

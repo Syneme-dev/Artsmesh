@@ -483,7 +483,6 @@
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController content:preferenceViewController];
     [preferenceViewController loadSystemInfo];
-    [preferenceViewController customPrefrence];
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
     return panelViewController;
 

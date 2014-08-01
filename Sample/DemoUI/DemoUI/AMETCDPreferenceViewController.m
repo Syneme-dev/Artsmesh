@@ -56,6 +56,9 @@
     BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
     self.isTopControlBarCheckBox.checked=isTopBar;
+    self.isTopControlBarCheckBox.title = @"CONTROL BAR TOP";
+    self.isTopControlBarCheckBox.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: 13];
+
     
 }
 
@@ -90,37 +93,6 @@
 
 - (IBAction)onStatusNetClick:(id)sender {
      [self.tabs selectTabViewItemWithIdentifier:@"6"];
-}
-
--(void)customPrefrence
-{
-//    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
-//    NSDictionary *attributes = [NSDictionary
-//                                dictionaryWithObjectsAndKeys:
-//                                [NSColor whiteColor], NSForegroundColorAttributeName,
-//                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
-//                                NSFontAttributeName, nil];
-//    
-//     NSMenu *newMenu = [[NSMenu alloc] init];
-//    
-//    
-//    for (int i = 0; i < [itemArray count]; i++)
-//    {
-//        NSMenuItem *item = [itemArray objectAtIndex:i];
-//        NSAttributedString *as = [[NSAttributedString alloc]
-//                                  initWithString:[item title]
-//                                  attributes:attributes];
-//        [item setAttributedTitle:as];
-//        
-//        AMPopupMenuItem *popMenuItem=[[AMPopupMenuItem alloc]initWithTitle:item.title  keyEquivalent:@"" width:self.myPrivateIpPopup.frame.size.width];
-//        popMenuItem.popupButton=self.myPrivateIpPopup;
-//        [popMenuItem setEnabled:YES];
-//        [popMenuItem setTarget:self];
-//        [newMenu addItem:popMenuItem];
-//        
-//    }
-//   
-//    [self.myPrivateIpPopup setMenu:newMenu];
 }
 
 -(void)loadIpv4
@@ -232,29 +204,6 @@
     });
 }
 
-//-(void)resetPopupItems
-//{
-//    //self.myPrivateIpPopup
-//    
-//    NSArray *itemArray = [self.myPrivateIpPopup itemArray];
-//    int i;
-//    NSDictionary *attributes = [NSDictionary
-//                                dictionaryWithObjectsAndKeys:
-//                                [NSColor whiteColor], NSForegroundColorAttributeName,
-//                                [NSFont systemFontOfSize: [NSFont systemFontSize]],
-//                                NSFontAttributeName, nil];
-//    
-//    for (i = 0; i < [itemArray count]; i++) {
-//        NSMenuItem *item = [itemArray objectAtIndex:i];
-//        
-//        NSAttributedString *as = [[NSAttributedString alloc]
-//                                  initWithString:[item title]
-//                                  attributes:attributes];
-//        
-//        [item setAttributedTitle:as];
-//    }
-//}
-
 -(void)loadSystemInfo
 {
     [self loadMachineName];
@@ -286,13 +235,13 @@
         [appDelegate.mainWindowController loadControlBarItemStatus];
     }
     else{
-    [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
-    
-    if(sender.checked){
-          [self loadIpv6];
-    }else{
-        [self loadIpv4];
-    }
+        [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
+        
+        if(sender.checked){
+            [self loadIpv6];
+        }else{
+            [self loadIpv4];
+        }
     }
 }
 

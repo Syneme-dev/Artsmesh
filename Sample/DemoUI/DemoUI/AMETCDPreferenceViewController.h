@@ -39,7 +39,6 @@
 
 @property (strong) IBOutlet AMCheckBoxView *isTopControlBarCheckBox;
 -(void)loadSystemInfo;
--(void)customPrefrence;
 
 
 @end

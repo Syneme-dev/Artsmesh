@@ -68,17 +68,21 @@
             NSWindow *window = self.window;
             if (NSEqualRects(_oldWindowFrame, NSZeroRect)) {
                 _oldWindowFrame = window.frame;
-                NSRect miniFrame = NSMakeRect(_oldWindowFrame.origin.x,
-                                              window.screen.visibleFrame.origin.y,
-                                              _oldWindowFrame.size.width,
-                                              60);
+                NSRect miniFrame = NSMakeRect(
+                        (window.screen.visibleFrame.size.width - 1200) / 2,
+                        window.screen.visibleFrame.size.height - 60,
+                        1200, 60);
                 [window.animator setFrame:miniFrame display:NO];
+                [window setMovable:NO];
             } else {
+                [window setMovable:YES];
                 [window.animator setFrame:_oldWindowFrame display:YES];
                 _oldWindowFrame = NSZeroRect;
             }
         }
     }
 }
+
+
 
 @end

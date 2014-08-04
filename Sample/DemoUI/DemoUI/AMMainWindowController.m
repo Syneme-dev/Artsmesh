@@ -172,7 +172,7 @@
     }
     NSSize windowSize = [self.window.contentView frame].size;
     if (isTop) {
-        NSPoint point = NSMakePoint(400, windowSize.height - 60);
+        NSPoint point = NSMakePoint(450, windowSize.height - 60);
         controlBarController = [[AMPanelControlBarViewController alloc] initWithNibName:@"PanelControlBarView" bundle:nil];
         [controlBarController.view setFrameOrigin:point];
         [self.window.contentView addSubview:controlBarController.view];

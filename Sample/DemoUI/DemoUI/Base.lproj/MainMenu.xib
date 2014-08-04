@@ -657,8 +657,8 @@
                     <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-xu-vmU">
                         <rect key="frame" x="50" y="0.0" width="1140" height="708"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <clipView key="contentView" ambiguous="YES" misplaced="YES" copiesOnScroll="NO" id="odj-kE-TsY">
-                            <rect key="frame" x="0.0" y="0.0" width="1140" height="708"/>
+                        <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="odj-kE-TsY">
+                            <rect key="frame" x="0.0" y="0.0" width="1140" height="693"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7i-di-ip4">

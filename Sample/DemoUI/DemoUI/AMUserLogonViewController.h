@@ -10,4 +10,6 @@
 
 @interface AMUserLogonViewController : NSViewController
 
+@property NSString* nickName;
+
 @end

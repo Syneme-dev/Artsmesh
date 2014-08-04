@@ -160,14 +160,78 @@
     return YES;
 }
 
--(BOOL)registerAccount:(AMStaticUser*)user password:(NSString*)password
+-(BOOL)registerAccount:(NSString*)user password:(NSString*)password
 {
+    if (self.homePage == nil || [self.homePage isEqualToString:@""])
+    {
+        return NO;
+    }
+
+    AMHttpSyncRequest* req = [[AMHttpSyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = @"/api/account/register.json";
+    req.httpMethod = @"POST";
+    req.formData = @{@"nickname": user, @"password" : password, @"confirm":password };
+    
+    NSData* response = [req sendRequest];
+    if (response == nil) {
+        return NO;
+    }
+    
+    NSError *err = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+    
+    if ([objects isKindOfClass:[NSDictionary class]]) {
+        NSDictionary* responseDict = (NSDictionary*)objects;
+        if ([responseDict objectForKey:@"error"]) {
+            return NO;
+        }
+    }
+    
     return YES;
+
 }
 
 -(BOOL)loginAccount:(NSString*)account password:(NSString*)password
 {
-    return YES;
+    if (self.homePage == nil || [self.homePage isEqualToString:@""])
+    {
+        return NO;
+    }
+    
+    NSString* statusStr = [NSString stringWithFormat:@"%@ login from Artsmesh App", account];
+    
+    AMHttpSyncRequest* req = [[AMHttpSyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = @"/api/statuses/update.json";
+    req.httpMethod = @"POST";
+    req.username = account;
+    req.password = password;
+    req.formData = @{@"status": statusStr};
+    
+    NSData* response = [req sendRequest];
+    if (response == nil) {
+        return NO;
+    }
+    
+    NSError *err = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+    if(err != nil){
+        NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+        NSLog(@"%@", errInfo);
+        return NO;
+    }
+    
+    if (![objects isKindOfClass:[NSDictionary class]]) {
+        return NO;
+    }
+    
+    NSDictionary* responseDict = (NSDictionary*)objects;
+    if ([[responseDict objectForKey:@"text"] isEqualToString:statusStr]) {
+        return YES;
+    }
+
+    return NO;
 }
 
 -(BOOL)followGroup:(NSString*)groupName

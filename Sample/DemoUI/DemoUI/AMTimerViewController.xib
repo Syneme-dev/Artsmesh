@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
             <connections>
+                <outlet property="timerBtn" destination="8n2-ni-U11" id="CcC-EZ-lMe"/>
+                <outlet property="timerScreen" destination="Olv-Cc-6Sm" id="ITn-jQ-Wi0"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -15,23 +17,40 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="100" verticalHuggingPriority="251" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="ORC-Ic-Yu0">
-                    <rect key="frame" x="0.0" y="196" width="300" height="36"/>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8n2-ni-U11">
+                    <rect key="frame" x="0.0" y="206" width="35" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="36" id="bJq-a6-dvk"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_timer" id="8U0-PT-2Tu"/>
-                </imageView>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_off" imagePosition="overlaps" alignment="center" alternateImage="play_on" imageScaling="proportionallyDown" inset="2" id="LXI-B5-6mk">
+                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="timerBtnClicked:" target="-2" id="jcX-1g-hBb"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Olv-Cc-6Sm" customClass="AMFoundryFontView">
+                    <rect key="frame" x="41" y="211" width="205" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" title="00  :  00  :  00  SEC" id="VxS-7H-w96">
+                        <font key="font" metaFont="system" size="20"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upC-nT-h05" customClass="AMFoundryFontView">
+                    <rect key="frame" x="250" y="214" width="51" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="senconds" id="Uj7-hE-6aT">
+                        <font key="font" metaFont="miniSystem"/>
+                        <color key="textColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <constraints>
-                <constraint firstItem="ORC-Ic-Yu0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="0Fv-vO-zZT"/>
-                <constraint firstAttribute="trailing" secondItem="ORC-Ic-Yu0" secondAttribute="trailing" id="3ki-Wh-bYZ"/>
-                <constraint firstItem="ORC-Ic-Yu0" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="40" id="cvu-nr-4HB"/>
-            </constraints>
         </customView>
     </objects>
     <resources>
-        <image name="shot_timer" width="831" height="96"/>
+        <image name="play_off" width="15" height="15"/>
+        <image name="play_on" width="15" height="15"/>
     </resources>
 </document>

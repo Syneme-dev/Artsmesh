@@ -34,7 +34,6 @@
 - (IBAction)onGeneralClick:(id)sender;
 - (IBAction)onStatusNetClick:(id)sender;
 
-- (IBAction)privateIpSelected:(id)sender;
 - (IBAction)statusNetTest:(id)sender;
 
 @property (strong) IBOutlet AMCheckBoxView *isTopControlBarCheckBox;

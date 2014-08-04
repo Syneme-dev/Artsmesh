@@ -27,6 +27,7 @@
 		266CE262197E5F3A00D8145B /* AMStaticUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE260197E5F3A00D8145B /* AMStaticUserDetailsViewController.m */; };
 		266CE263197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE261197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib */; };
 		26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */; };
+		268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
@@ -92,7 +93,6 @@
 		AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD841961075F00B7FB51 /* visualShot.png */; };
 		AFAEBD8A196107BE00B7FB51 /* info.css in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD88196107BE00B7FB51 /* info.css */; };
 		AFAEBD8B196107BE00B7FB51 /* web.css in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD89196107BE00B7FB51 /* web.css */; };
-		AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAEBD8D1961098B00B7FB51 /* MZTimerLabel.m */; };
 		AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD8F19610B8700B7FB51 /* Artsmesh2Logo.icns */; };
 		AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD9019610B8700B7FB51 /* CreateGroup.png */; };
 		AFAEBD9819610B8700B7FB51 /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD9119610B8700B7FB51 /* GroupMessage.png */; };
@@ -253,6 +253,8 @@
 		266CE261197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticUserDetailsViewController.xib; sourceTree = "<group>"; };
 		26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticGroupCellController.h; sourceTree = "<group>"; };
 		26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticGroupCellController.m; sourceTree = "<group>"; };
+		268DA7C1198B998900F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../AMTimer/build/Debug/AMTimer.framework; sourceTree = "<group>"; };
+		268DA7C3198B99A100F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTimer.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
@@ -327,8 +329,6 @@
 		AFAEBD841961075F00B7FB51 /* visualShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visualShot.png; sourceTree = "<group>"; };
 		AFAEBD88196107BE00B7FB51 /* info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = info.css; sourceTree = "<group>"; };
 		AFAEBD89196107BE00B7FB51 /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = web.css; sourceTree = "<group>"; };
-		AFAEBD8C1961098B00B7FB51 /* MZTimerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
-		AFAEBD8D1961098B00B7FB51 /* MZTimerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
 		AFAEBD8F19610B8700B7FB51 /* Artsmesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Artsmesh2Logo.icns; sourceTree = "<group>"; };
 		AFAEBD9019610B8700B7FB51 /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CreateGroup.png; sourceTree = "<group>"; };
 		AFAEBD9119610B8700B7FB51 /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroupMessage.png; sourceTree = "<group>"; };
@@ -431,6 +431,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */,
@@ -505,9 +506,6 @@
 				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
 				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
 				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
-				AFD34795195BEF620055043E /* AMTimerViewController.h */,
-				AFD34796195BEF620055043E /* AMTimerViewController.m */,
-				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
 				AFD3479A195BEF720055043E /* AMMainOutputViewController.h */,
 				AFD3479B195BEF720055043E /* AMMainOutputViewController.m */,
 				AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */,
@@ -594,6 +592,16 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		268DA743198B87A200F86EBB /* TimerPanel */ = {
+			isa = PBXGroup;
+			children = (
+				AFD34795195BEF620055043E /* AMTimerViewController.h */,
+				AFD34796195BEF620055043E /* AMTimerViewController.m */,
+				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
+			);
+			name = TimerPanel;
+			sourceTree = "<group>";
+		};
 		269C3340197CF49400AF86AA /* ChatPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +661,8 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				268DA7C3198B99A100F86EBB /* AMTimer.framework */,
+				268DA7C1198B998900F86EBB /* AMTimer.framework */,
 				AF7242B2197E19CA0008799B /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
@@ -685,6 +695,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				268DA743198B87A200F86EBB /* TimerPanel */,
 				269C3347197D00F000AF86AA /* PreferencePanel */,
 				269C3340197CF49400AF86AA /* ChatPanel */,
 				CEC2FC37196588FD00AFD309 /* GroupPanel */,
@@ -692,7 +703,6 @@
 				AFE5FC5C196A40E00079B434 /* Classes */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
-				AFAEBD811961060200B7FB51 /* ViewsExtend */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
@@ -782,16 +792,6 @@
 				AFDA79A7194586660002873B /* panelshot */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		AFAEBD811961060200B7FB51 /* ViewsExtend */ = {
-			isa = PBXGroup;
-			children = (
-				AFAEBD8C1961098B00B7FB51 /* MZTimerLabel.h */,
-				AFAEBD8D1961098B00B7FB51 /* MZTimerLabel.m */,
-			);
-			name = ViewsExtend;
-			path = Views;
 			sourceTree = "<group>";
 		};
 		AFAEBD821961074800B7FB51 /* image */ = {
@@ -1102,7 +1102,6 @@
 				266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */,
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
-				AFAEBD8E1961098B00B7FB51 /* MZTimerLabel.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26579B7F197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m in Sources */,
@@ -1270,6 +1269,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1288,6 +1289,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

@@ -23,11 +23,12 @@
 #import "AMMixingViewController.h"
 #import "AMVisualViewController.h"
 #import "AMMapViewController.h"
-#import "MZTimerLabel.h"
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMPanelControlBarViewController.h"
+#import "AMTimer/AMTimer.h"
+#import "AMTimerViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -62,7 +63,7 @@
 
 @implementation AMMainWindowController {
     AMBox *_containerView;
-    MZTimerLabel *amTimerControl;
+    //MZTimerLabel *amTimerControl;
     AMPanelControlBarViewController *controlBarController;
     Boolean isWindowLoading;
 
@@ -83,9 +84,20 @@
         self.window.restorationClass = [appDelegate class];
         self.window.identifier = @"mainWindow";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
+        
+        [[AMTimer shareInstance] addObserver:self
+                                  forKeyPath:@"state"
+                                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                     context:nil];
     }
     return self;
 }
+
+-(void)windowWillClose:(NSNotification *)notification
+{
+    [[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
+}
+
 
 - (void)windowDidResize:(NSNotification *)notification {
     CGFloat height = [self calculateContainerHeight];
@@ -443,7 +455,7 @@
 
 - (AMPanelViewController *)loadTimerPanel {
     AMPanelViewController *panelViewController = [self createPanel:UI_Panel_Key_Timer withTitle:@"Clock" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
-    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
+    NSViewController *viewController = [[AMTimerViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
@@ -469,9 +481,8 @@
 }
 
 - (void)initTimer {
-    amTimerControl = [[MZTimerLabel alloc] initWithLabel:(NSTextField *) self.amTimer andTimerType:MZTimerLabelTypeStopWatch];
-    [amTimerControl setStopWatchTime:0];
-    amTimerControl.timeFormat = @"HH:mm:ss";
+
+    [[AMTimer shareInstance] addTimerScreen:self.amTimer];
 }
 
 - (AMPanelViewController *)loadGroupsPanel {
@@ -640,11 +651,12 @@
 - (IBAction)onTimerControlItemClick:(NSButton *)sender {
 
     if (sender.state == NSOnState) {
-        [amTimerControl start];
+        [[AMTimer shareInstance] start];
     }
     else {
-        [amTimerControl pause];
-        [amTimerControl reset];
+        
+        [[AMTimer shareInstance] pause];
+        [[AMTimer shareInstance] reset];
     }
 }
 
@@ -668,6 +680,30 @@
             if (buttonView != nil&& [buttonView.identifier isEqualTo:identifier]) {
                 [buttonView setState:status ? NSOnState : NSOffState];
                 break;
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([object isKindOfClass:[AMTimer class]]){
+        
+        if ([keyPath isEqualToString:@"state"]){
+            AMTimerState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch (newState) {
+                case kAMTimerStart:
+                    [self.amTimerBtn setState:1];
+                    break;
+                default:
+                    [self.amTimerBtn setState:0];
+                    break;
             }
         }
     }

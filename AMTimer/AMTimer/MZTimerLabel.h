@@ -109,8 +109,9 @@ typedef enum{
 - (NSTimeInterval)getTimeCounted;
 
 
-
-
+-(void)addTimerScreen:(NSTextField*)timeLabel;
+-(void)removeTimerScreen:(NSTextField*)timeLabel;
+-(void)removeAllScreen;
 
 
 @end

@@ -134,6 +134,10 @@
     _title = itemTitle;
     [self removePopUpMenu];
     [self setNeedsDisplay:YES];
+    
+    if (self.delegate) {
+        [self.delegate itemSelected:self];
+    }
 }
 
 -(CGFloat)popupItemHeight

@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@protocol AMPopUpViewDelegeate;
 
-@interface AMPopUpView : NSView
+@interface AMPopUpView : NSControl
 
 @property NSFont* font;
 @property NSColor* textColor;
@@ -16,6 +17,8 @@
 @property NSColor* mouseOverColor;
 @property CGFloat itemHeight;
 @property CGFloat itemWidth;
+
+@property id<AMPopUpViewDelegeate> delegate;
 
 -(NSString*)stringValue;
 
@@ -26,5 +29,11 @@
 
 -(void)selectItemAtIndex:(NSUInteger)index;
 -(NSUInteger)itemCount;
+
+@end
+
+@protocol AMPopUpViewDelegeate <NSObject>
+
+-(void)itemSelected:(AMPopUpView*)sender;
 
 @end

@@ -654,10 +654,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-xu-vmU">
+                    <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEs-xu-vmU">
                         <rect key="frame" x="50" y="0.0" width="1140" height="708"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <clipView key="contentView" copiesOnScroll="NO" id="odj-kE-TsY">
+                        <clipView key="contentView" ambiguous="YES" misplaced="YES" copiesOnScroll="NO" id="odj-kE-TsY">
                             <rect key="frame" x="0.0" y="0.0" width="1140" height="708"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -838,7 +838,6 @@
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
                     <constraint firstItem="KD8-g0-Ew6" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="UV4-FM-aGm"/>
-                    <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="50" id="Ugv-En-9Uv"/>
                     <constraint firstItem="PQH-zt-t50" firstAttribute="leading" secondItem="m4w-q8-NcC" secondAttribute="trailing" constant="8" id="VXo-FK-AAy"/>
                     <constraint firstItem="iv2-ru-op1" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="WmQ-0Q-tGp"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="XKt-Z9-ayg"/>
@@ -846,7 +845,6 @@
                     <constraint firstItem="qme-pL-mB7" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="du2-EA-BKm"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="372" secondAttribute="top" constant="60" id="fdf-eJ-kAU"/>
                     <constraint firstItem="PQH-zt-t50" firstAttribute="top" secondItem="372" secondAttribute="top" constant="21" id="n1q-6l-Kee"/>
-                    <constraint firstAttribute="trailing" secondItem="zEs-xu-vmU" secondAttribute="trailing" constant="10" id="pKE-za-V8h"/>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="leading" secondItem="PQH-zt-t50" secondAttribute="trailing" constant="19" id="rL3-YX-u6Q"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="leading" secondItem="qme-pL-mB7" secondAttribute="trailing" constant="16" id="zCo-Jl-82V"/>
                 </constraints>

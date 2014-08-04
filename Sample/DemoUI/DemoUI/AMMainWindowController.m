@@ -145,7 +145,7 @@
     isWindowLoading = YES;
     [self initTimer];
     [self createDefaultWindow];
-    [self loadTestPanel]; //Note:uncomment this code to show test panel.
+//    [self loadTestPanel]; //Note:uncomment this code to show test panel.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
@@ -173,7 +173,42 @@
         [self.window.contentView addSubview:controlBarController.view];
 
     }
+    NSView *contentView = [self.window contentView];
+    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSView *customView = scrollView;
+    [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    //    [contentView addSubview:customView];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(customView);
+    NSArray *constraints50=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[customView]-10-|"  options:0
+                                                                   metrics:nil
+                                                                     views:views];
+    NSArray *constraints10=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[customView]-10-|"  options:0
+                                                                   metrics:nil
+                                                                     views:views];
+    NSLayoutConstraint *itemFor10=constraints10[0];
+    [itemFor10 setIdentifier:@"leftSideBarConstrainsId10"];
+    NSLayoutConstraint *itemFor50=constraints50[0];
+    [itemFor50 setIdentifier:@"leftSideBarConstrainsId50"];
 
+    
+    NSArray *constrains=[contentView constraints];
+    for (NSLayoutConstraint *item in constrains) {
+        if([item.identifier isEqualToString:@"leftSideBarConstrainsId10"]
+           ||[item.identifier isEqualToString:@"leftSideBarConstrainsId50"])
+        {
+            [contentView removeConstraint:item];
+        }
+    }
+    [scrollView removeConstraints: scrollView.constraints];
+    if(!isTop){
+        [contentView addConstraints:constraints50];
+    }
+    else{
+        [contentView addConstraints:constraints10];
+
+    }
 }
 
 - (void)createDefaultPanelAndloadControlBarItemStatus {
@@ -225,6 +260,10 @@
             0,
             windowSize.width - UI_leftSidebarWidth,
             windowSize.height - UI_topbarHeight- 20);
+    
+    
+   
+
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
     _containerView.paddingLeft = 40;
@@ -450,25 +489,8 @@
     
     [self fillPanel:panelViewController content:userGroupViewController];
     NSView *groupView = userGroupViewController.view;
-//    [panelViewController.view addSubview:groupView];
-
     [groupView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *views = NSDictionaryOfVariableBindings(groupView);
-    [panelView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[groupView]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
-
-    [panelView addConstraints:
-            [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[groupView]|"
-                                                    options:0
-                                                    metrics:nil
-                                                      views:views]];
-
-
     return panelViewController;
-
-
 }
 
 - (AMPanelViewController *)loadPreferencePanel {

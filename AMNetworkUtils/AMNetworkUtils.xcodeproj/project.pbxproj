@@ -28,6 +28,8 @@
 		26EE8B8118DBB23E008262F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B7F18DBB23E008262F8 /* GCDAsyncSocket.m */; };
 		26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8BD118DC0AB3008262F8 /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BD218DC0AB3008262F8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		26F07AC8198F85ED009C72D6 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F07AC6198F85ED009C72D6 /* NSData+Base64.h */; };
+		26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F07AC7198F85ED009C72D6 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		26EE8B7F18DBB23E008262F8 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		26EE8BD118DC0AB3008262F8 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		26EE8BD218DC0AB3008262F8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		26F07AC6198F85ED009C72D6 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		26F07AC7198F85ED009C72D6 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,8 @@
 		2692CDF718D7CEC8006501C4 /* AMNetworkUtils */ = {
 			isa = PBXGroup;
 			children = (
+				26F07AC6198F85ED009C72D6 /* NSData+Base64.h */,
+				26F07AC7198F85ED009C72D6 /* NSData+Base64.m */,
 				2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */,
 				2692CDFF18D7CEC8006501C4 /* AMNetworkUtils.m */,
 				26EE8BD118DC0AB3008262F8 /* JSONKit.h */,
@@ -188,6 +194,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F07AC8198F85ED009C72D6 /* NSData+Base64.h in Headers */,
 				2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */,
 				269C3338197CE28900AF86AA /* AMHttpSyncRequest.h in Headers */,
 				269C333A197CE28900AF86AA /* AMHttpAsyncRequest.h in Headers */,
@@ -298,6 +305,7 @@
 				26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */,
 				26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */,
 				26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */,
+				26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */,
 				269C3339197CE28900AF86AA /* AMHttpSyncRequest.m in Sources */,
 				2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */,
 			);

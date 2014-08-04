@@ -7,6 +7,7 @@
 //
 
 #import "AMHttpSyncRequest.h"
+#import "NSData+Base64.h"
 
 @implementation AMHttpSyncRequest
 
@@ -36,6 +37,13 @@
         
         NSMutableData* bodyData = [self createSetKeyHttpBody:self.formData];
         [request setHTTPBody: bodyData];
+    }
+    
+    if(self.username != nil && self.password != nil){
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.username, self.password];
+        NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedString]];
+        [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     }
     
     return [NSURLConnection sendSynchronousRequest:request

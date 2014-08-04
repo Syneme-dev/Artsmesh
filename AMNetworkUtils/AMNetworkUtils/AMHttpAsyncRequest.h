@@ -18,6 +18,8 @@ extern NSString * const AMHttpAsyncRequestDomain;
 @property (nonatomic) NSDictionary* formData;
 @property (nonatomic) NSString* httpMethod;
 @property (nonatomic) int httpTimeout;
+@property (nonatomic) NSString* username;
+@property (nonatomic) NSString* password;
 
 @property (nonatomic, strong) void(^requestCallback)(NSData* response, NSError* error, BOOL isCancel);
 

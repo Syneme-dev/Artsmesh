@@ -19,7 +19,7 @@
 #import "AMUserLogonViewController.h"
 #import "UIFrameWork/AMCheckBoxView.h"
 
-@interface AMUserViewController ()<AMCheckBoxDelegeate>
+@interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheckBox;
 @property (weak) IBOutlet NSImageView *userStatusIcon;
@@ -242,7 +242,7 @@
         self.myPopover.animates = YES;
         self.myPopover.behavior = NSPopoverBehaviorTransient;
         self.myPopover.appearance = NSPopoverAppearanceHUD;
-        //self.myPopover.delegate = self;
+        self.myPopover.delegate = self;
     }
     
     self.myPopover.contentViewController = [[AMUserLogonViewController alloc] initWithNibName:@"AMUserLogonViewController" bundle:nil];
@@ -387,6 +387,16 @@
     if (mySelf.isOnline) {
         group.busy = busy;
         [[AMMesher sharedAMMesher] updateGroup];
+    }
+}
+
+- (void)popoverWillShow:(NSNotification *)notification
+{
+    AMUserLogonViewController* popController = (AMUserLogonViewController*)self.myPopover.contentViewController;
+    if (popController != nil) {
+        
+        AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+        popController.nickName = mySelf.nickName;
     }
 }
 

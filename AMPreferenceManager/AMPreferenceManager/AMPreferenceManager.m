@@ -120,10 +120,10 @@
     AMLiveGroup* localGroup = [[AMLiveGroup alloc] init];
     localGroup.groupId = [AMCommonTools creatUUID];
     localGroup.groupName = [defaults stringForKey:Preference_Key_Cluster_Name];
-    localGroup.description = @"no description";
-    localGroup.fullName = @"";
-    localGroup.location = @"";
-    localGroup.project = @"";
+    localGroup.description = [defaults stringForKey:Preference_Key_Cluster_Description];;
+    localGroup.fullName = [defaults stringForKey:Preference_Key_Cluster_FullName];
+    localGroup.location = [defaults stringForKey:Preference_Key_Cluster_Location];
+    localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
     localGroup.password = @"";
 
     [AMCoreData shareInstance].myLocalLiveGroup= localGroup;

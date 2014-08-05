@@ -65,7 +65,7 @@
     
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
-    [self loadAvatarImage];
+    [self loadUserAvatar];
 }
 
 -(void)dealloc
@@ -192,24 +192,52 @@
 ////http://artsmesh.io//theme/dark/default-avatar-profile.png
 //}
 
--(void)loadAvatarImage{
+-(void)loadUserAvatar
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString *statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSString * myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSString *myAccountUrl=[NSString stringWithFormat:@"%@/api/users/show/%@.json",statusNetURL,myUserName];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *myAccountUrl=[AMRestHelper getMyAccountInfoUrl];
     [manager GET:myAccountUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
-        [self loadAvatarFromUrl:imageUrlString];
+        
+        NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
+        
+        NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+        NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
+        [self.userAvatarView  setImage:imageFromBundle];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
         NSLog(@"Error: %@", error);
-        [self loadAvatarFromUrl:@"http://artsmesh.io//theme/dark/default-avatar-profile.png"];
     }];
 }
 
--(void)loadAvatarFromUrl:(NSString*)imageUrlString{
-    NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-    NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
-    [self.avatarView  setImage:imageFromBundle];
+-(void)loadGroupAvatar
+{
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
+//    NSString * myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+//    NSString *myAccountUrl=[NSString stringWithFormat:@"%@/api/users/show/%@.json",statusNetURL,myUserName];
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:myAccountUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
+//        
+//        NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+//        NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
+//        [self.userAvatarView  setImage:imageFromBundle];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//        NSLog(@"Error: %@", error);
+//    }];
 }
+
 
 - (IBAction)onUserTabClick:(id)sender
 {
@@ -250,6 +278,19 @@
     NSButton *targetButton = (NSButton*)sender;
     NSRectEdge prefEdge = NSMaxXEdge;
     [self.myPopover showRelativeToRect:[targetButton bounds] ofView:sender preferredEdge:prefEdge];
+}
+
+- (IBAction)groupSocialBtnClicked:(NSButton *)sender
+{
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+//    if (myUserName != nil && ![myUserName isEqualToString:@""]) {
+//        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                 myUserName, @"UserName", nil];
+//        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+//    }else{
+//        [self PopoverUserLogonView:sender];
+//    }
 }
 
 - (IBAction)groupNameEdited:(NSTextField *)sender

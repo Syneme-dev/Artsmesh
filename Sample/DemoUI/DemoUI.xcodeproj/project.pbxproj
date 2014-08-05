@@ -17,6 +17,8 @@
 		26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */; };
 		26136C57196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */; };
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
+		262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */; };
+		262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */; };
 		26579B7F197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26579B7D197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m */; };
 		26579B80197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26579B7E197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.xib */; };
 		266CE253197E406500D8145B /* AMGroupPanelDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE252197E406500D8145B /* AMGroupPanelDetailView.m */; };
@@ -236,6 +238,9 @@
 		26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDetailsViewController.m; sourceTree = "<group>"; };
 		26136C55196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticGroupDetailsViewController.xib; sourceTree = "<group>"; };
 		2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
+		262ABCA91990A4590098E232 /* AMGroupCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupCreateViewController.h; sourceTree = "<group>"; };
+		262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupCreateViewController.m; sourceTree = "<group>"; };
+		262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupCreateViewController.xib; sourceTree = "<group>"; };
 		26579B7C197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticLabelController.h; sourceTree = "<group>"; };
 		26579B7D197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticLabelController.m; sourceTree = "<group>"; };
 		26579B7E197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticLabelController.xib; sourceTree = "<group>"; };
@@ -869,6 +874,9 @@
 				2602038219809E2C0013687A /* AMUserLogonViewController.h */,
 				2602038319809E2C0013687A /* AMUserLogonViewController.m */,
 				2602038419809E2C0013687A /* AMUserLogonViewController.xib */,
+				262ABCA91990A4590098E232 /* AMGroupCreateViewController.h */,
+				262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */,
+				262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */,
 			);
 			name = ProfilePanel;
 			sourceTree = "<group>";
@@ -1014,6 +1022,7 @@
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
+				262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				CEC2FC64196588FD00AFD309 /* AMUserGroupView.xib in Resources */,
 				CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */,
@@ -1128,6 +1137,7 @@
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
 				2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */,
+				262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				266CE253197E406500D8145B /* AMGroupPanelDetailView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,

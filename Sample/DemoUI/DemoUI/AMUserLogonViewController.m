@@ -18,7 +18,6 @@
 @property (weak) IBOutlet NSSecureTextField *passwordField;
 @property (weak) IBOutlet NSSecureTextField *passwordConfirmField;
 
-@property (weak) IBOutlet NSTextField *artmeshURLErr;
 @property (weak) IBOutlet NSTextField *nickNameErr;
 @property (weak) IBOutlet NSTextField *passwordErr;
 @property (weak) IBOutlet NSTextField *passwordConfirmErr;
@@ -44,7 +43,6 @@
 
 - (IBAction)registerStatusNet:(NSButton *)sender
 {
-    self.artmeshURLErr.stringValue = @"";
     self.nickNameErr.stringValue = @"";
     self.passwordErr.stringValue = @"";
     self.passwordConfirmErr.stringValue = @"";
@@ -52,7 +50,6 @@
     NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
     NSString* url = [defaults stringForKey:Preference_Key_StatusNet_URL];
     if(url == nil || [url isEqualToString:@""]){
-        self.artmeshURLErr.stringValue = @"!";
         return;
     }
     
@@ -82,7 +79,6 @@
 
 - (IBAction)loginStatusNet:(NSButton *)sender
 {
-    self.artmeshURLErr.stringValue = @"";
     self.nickNameErr.stringValue = @"";
     self.passwordErr.stringValue = @"";
     self.passwordConfirmErr.stringValue = @"";
@@ -90,7 +86,6 @@
     NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
     NSString* url = [defaults stringForKey:Preference_Key_StatusNet_URL];
     if(url == nil || [url isEqualToString:@""]){
-        self.artmeshURLErr.stringValue = @"!";
         return;
     }
     

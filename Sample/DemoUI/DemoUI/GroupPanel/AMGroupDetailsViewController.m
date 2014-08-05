@@ -16,6 +16,7 @@
 @interface AMGroupDetailsViewController ()
 @property (weak) IBOutlet NSButton *joinBtn;
 @property (weak) IBOutlet NSButton *closeBtn;
+@property (unsafe_unretained) IBOutlet NSTextView *groupDetailView;
 
 @end
 
@@ -50,6 +51,15 @@
         [self.joinBtn  setEnabled:NO];
     }else{
         [self.joinBtn setEnabled:YES];
+    }
+    
+    if (![self.group.description isEqualToString:@""]) {
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: 13];
+        NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
+                               NSFontAttributeName:textViewFont};
+        NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.group.description attributes:attr];
+        [self.groupDetailView.textStorage appendAttributedString:attrStr];
+        [self.groupDetailView setNeedsDisplay:YES];
     }
 }
 

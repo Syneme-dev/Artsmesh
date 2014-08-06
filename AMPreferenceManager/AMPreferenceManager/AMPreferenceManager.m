@@ -62,6 +62,9 @@
              openedPanel,UserData_Key_OpenedPanel,
              Preference_Cluster_Name,            Preference_Key_Cluster_Name,
              Preference_Cluster_Description,     Preference_Key_Cluster_Description,
+             Preference_Cluster_FullName,        Preference_Key_Cluster_FullName,
+             Preference_Cluster_Location,        Preference_Key_Cluster_Location,
+             Preference_Cluster_Project,         Preference_Key_Cluster_Project,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

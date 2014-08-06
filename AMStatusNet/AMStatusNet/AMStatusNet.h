@@ -13,12 +13,17 @@
 
 @property NSString* homePage;
 
--(BOOL)quickRegisterAccount:(NSString*)account password:(NSString*)password;
--(BOOL)registerAccount:(NSString*)user password:(NSString*)password;
+-(BOOL)registerAccount:(NSString*)account password:(NSString*)password;
 -(BOOL)loginAccount:(NSString*)account password:(NSString*)password;
 -(BOOL)followGroup:(NSString*)groupName;
 -(BOOL)createGroup:(NSString*)groupName;
 -(BOOL)postMessageToStatusNet:(NSString*)status;
+
+-(void)loadUserAvatar:(NSString*)userName
+      requestCallback:(void (^)(NSImage* image, NSError* error))requestCallback;
+
+-(void)loadGroupAvatar:(NSString*)groupName
+       requestCallback:(void (^)(NSImage* image, NSError* error))requestCallback;
 
 -(void)loadGroups;
 

@@ -154,13 +154,7 @@
     }
 }
 
-
--(BOOL)quickRegisterAccount:(NSString*)account password:(NSString*)password
-{
-    return YES;
-}
-
--(BOOL)registerAccount:(NSString*)user password:(NSString*)password
+-(BOOL)registerAccount:(NSString*)account password:(NSString*)password
 {
     if (self.homePage == nil || [self.homePage isEqualToString:@""])
     {
@@ -171,7 +165,7 @@
     req.baseURL = self.homePage;
     req.requestPath = @"/api/account/register.json";
     req.httpMethod = @"POST";
-    req.formData = @{@"nickname": user, @"password" : password, @"confirm":password };
+    req.formData = @{@"nickname": account, @"password" : password, @"confirm":password };
     
     NSData* response = [req sendRequest];
     if (response == nil) {
@@ -243,6 +237,116 @@
 {
     return YES;
 }
+
+
+-(void)loadUserAvatar:(NSString*)userName
+      requestCallback:(void (^)(NSImage* image, NSError* error))requestCallback
+{
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = [NSString stringWithFormat:@"/api/users/show/%@.json", userName];
+    req.httpMethod = @"GET";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when loadUserAvatar:%@", error.description);
+            
+            if (requestCallback) {
+                requestCallback(nil, error);
+            }
+            return;
+        }
+        
+        //NSAssert(response, @"response should not be nil without error");
+        NSLog(@"get statusnet user goups return........................");
+        
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+        if(err != nil){
+            NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+            NSLog(@"%@", errInfo);
+            
+            if (requestCallback) {
+                requestCallback(nil, err);
+            }
+            
+            return;
+        }
+        
+        if ([objects isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* dict = (NSDictionary*)objects;
+            NSString *imageUrlString = [dict valueForKey:@"profile_image_url"];
+            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+           // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+            if (requestCallback) {
+                requestCallback(avatarImage, nil);
+            }
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+}
+
+-(void)loadGroupAvatar:(NSString*)groupName
+       requestCallback:(void (^)(NSImage* image, NSError* error))requestCallback
+{
+    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = [NSString stringWithFormat:@"/api/statusnet/groups/show/%@.json", groupName];
+    req.httpMethod = @"GET";
+    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
+        if (isCancel == YES) {
+            return;
+        }
+        
+        if (error != nil) {
+            NSLog(@"error happened when loadGroupAvatar:%@", error.description);
+            
+            if (requestCallback) {
+                requestCallback(nil, error);
+            }
+            return;
+        }
+        
+        //NSAssert(response, @"response should not be nil without error");
+        NSLog(@"get statusnet user goups return........................");
+        
+        NSError *err = nil;
+        id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+        if(err != nil){
+            NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+            NSLog(@"%@", errInfo);
+            
+            if (requestCallback) {
+                requestCallback(nil, err);
+            }
+            
+            return;
+        }
+        
+        if ([objects isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* dict = (NSDictionary*)objects;
+            NSString *imageUrlString = [dict valueForKey:@"original_logo"];
+            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
+            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+            if (requestCallback) {
+                requestCallback(avatarImage, nil);
+            }
+        }
+    };
+    
+    [_httpRequestQueue addOperation:req];
+
+}
+
 
 -(BOOL)postMessageToStatusNet:(NSString*)status
 {

@@ -18,6 +18,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMUserLogonViewController.h"
 #import "UIFrameWork/AMCheckBoxView.h"
+#import "AMStatusNet/AMStatusNet.h"
 
 @interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
@@ -66,6 +67,7 @@
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
     [self loadUserAvatar];
+    [self loadGroupAvatar];
 }
 
 -(void)dealloc
@@ -195,47 +197,34 @@
 -(void)loadUserAvatar
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString *statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSString * myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    NSString *myAccountUrl=[NSString stringWithFormat:@"%@/api/users/show/%@.json",statusNetURL,myUserName];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:myAccountUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
-        
-        NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-        NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
-        [self.userAvatarView  setImage:imageFromBundle];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"Error: %@", error);
+    [[AMStatusNet shareInstance] loadUserAvatar:myUserName requestCallback:^(NSImage* image, NSError* err){
+        if (err != nil) {
+            return;
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.userAvatarView setImage:image];
+            });
+        }
     }];
 }
 
 -(void)loadGroupAvatar
 {
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *statusNetURL= [defaults stringForKey:Preference_Key_StatusNet_URL];
-//    NSString * myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-//    NSString *myAccountUrl=[NSString stringWithFormat:@"%@/api/users/show/%@.json",statusNetURL,myUserName];
-//    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager GET:myAccountUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSString *imageUrlString=[responseObject valueForKey:@"profile_image_url"];
-//        
-//        NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//        NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-//        NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
-//        [self.userAvatarView  setImage:imageFromBundle];
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        
-//        NSLog(@"Error: %@", error);
-//    }];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString * myGroupName = [defaults stringForKey:Preference_Key_Cluster_Name];
+    
+    [[AMStatusNet shareInstance] loadGroupAvatar:myGroupName requestCallback:^(NSImage* image, NSError* err){
+        if (err != nil) {
+            return;
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.groupAvatarView setImage:image];
+            });
+        }
+    }];
+
 }
 
 

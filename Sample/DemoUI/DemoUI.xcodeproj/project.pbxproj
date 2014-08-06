@@ -139,6 +139,9 @@
 		AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDA79A31945864A0002873B /* AMMixingViewController.m */; };
 		AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDA79A41945864A0002873B /* AMMixingViewController.xib */; };
 		AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE5FC5E196A41270079B434 /* AMRestHelper.m */; };
+		CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6007781990615C00EF9220 /* AMNetworkToolsViewController.m */; };
+		CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */; };
+		CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */; };
 		CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */; };
 		CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */; };
 		CEC2FC56196588FD00AFD309 /* AMGroupPanelGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3C196588FD00AFD309 /* AMGroupPanelGroupCellController.m */; };
@@ -160,8 +163,6 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
 		D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */; };
-		D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ACE85D19175D09004A907D /* AMPingView.xib */; };
-		D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE86019175DC8004A907D /* AMPingViewController.m */; };
 		D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -387,6 +388,11 @@
 		AFDA79A41945864A0002873B /* AMMixingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixingViewController.xib; sourceTree = "<group>"; };
 		AFE5FC5D196A41270079B434 /* AMRestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMRestHelper.h; path = Classes/AMRestHelper.h; sourceTree = "<group>"; };
 		AFE5FC5E196A41270079B434 /* AMRestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMRestHelper.m; path = Classes/AMRestHelper.m; sourceTree = "<group>"; };
+		CE6007771990615C00EF9220 /* AMNetworkToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkToolsViewController.h; sourceTree = "<group>"; };
+		CE6007781990615C00EF9220 /* AMNetworkToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkToolsViewController.m; sourceTree = "<group>"; };
+		CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMNetworkToolsViewController.xib; sourceTree = "<group>"; };
+		CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkToolsCommand.h; sourceTree = "<group>"; };
+		CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkToolsCommand.m; sourceTree = "<group>"; };
 		CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -422,9 +428,6 @@
 		D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDataSource.h; sourceTree = "<group>"; };
 		D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDataSource.m; sourceTree = "<group>"; };
 		D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticGroupCellController.xib; sourceTree = "<group>"; };
-		D4ACE85D19175D09004A907D /* AMPingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingView.xib; sourceTree = "<group>"; };
-		D4ACE85F19175DC8004A907D /* AMPingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingViewController.h; sourceTree = "<group>"; };
-		D4ACE86019175DC8004A907D /* AMPingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingViewController.m; sourceTree = "<group>"; };
 		D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabItemView.h; sourceTree = "<group>"; };
 		D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabItemView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,7 +478,6 @@
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
-				D4ACE85D19175D09004A907D /* AMPingView.xib */,
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
 				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
@@ -493,8 +495,6 @@
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
-				D4ACE85F19175DC8004A907D /* AMPingViewController.h */,
-				D4ACE86019175DC8004A907D /* AMPingViewController.m */,
 				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
 				AF86600B19401F4D008DB7CA /* AMTestViewController.m */,
 				AF200640194585F6008630C8 /* AMMapViewController.h */,
@@ -700,6 +700,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
 				268DA743198B87A200F86EBB /* TimerPanel */,
 				269C3347197D00F000AF86AA /* PreferencePanel */,
 				269C3340197CF49400AF86AA /* ChatPanel */,
@@ -850,6 +851,18 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		CE60077C1990696700EF9220 /* NetworkToolsPanel */ = {
+			isa = PBXGroup;
+			children = (
+				CE6007771990615C00EF9220 /* AMNetworkToolsViewController.h */,
+				CE6007781990615C00EF9220 /* AMNetworkToolsViewController.m */,
+				CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */,
+				CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */,
+				CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */,
+			);
+			name = NetworkToolsPanel;
+			sourceTree = "<group>";
+		};
 		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,6 +984,7 @@
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AFAEBDB019610BEA00B7FB51 /* IncomingTopic.png in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
+				CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */,
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
@@ -1006,7 +1020,6 @@
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,
 				266CE263197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib in Resources */,
-				D4ACE85E19175D09004A907D /* AMPingView.xib in Resources */,
 				AFAEBDB819610BEA00B7FB51 /* Users.png in Resources */,
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AFAEBD9B19610B8700B7FB51 /* OnlineDot.png in Resources */,
@@ -1099,7 +1112,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4ACE86119175DC8004A907D /* AMPingViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
@@ -1109,6 +1121,7 @@
 				CEC2FC5C196588FD00AFD309 /* AMGroupPanelUserCellController.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */,
+				CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */,
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
@@ -1141,6 +1154,7 @@
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				266CE253197E406500D8145B /* AMGroupPanelDetailView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
+				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
 				266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,

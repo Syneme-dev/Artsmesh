@@ -16,7 +16,7 @@
 #import "AMSocialViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
 #import "AMChatViewController.h"
-#import "AMPingViewController.h"
+#import "AMNetworkToolsViewController.h"
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
 #import "AMTestViewController.h"
@@ -546,12 +546,13 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize minSize = NSMakeSize(600.0f, 300);
     panelView.minSizeConstraint = minSize;
-    AMPingViewController *pingViewController = [[AMPingViewController alloc] initWithNibName:@"AMPingView" bundle:nil];
-    panelViewController.subViewController = pingViewController;
-    NSView *pingView = pingViewController.view;
-    pingView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
-    [panelView addSubview:pingView];
-    [self fillPanel:panelViewController content:pingViewController];
+    AMNetworkToolsViewController *networkToolsViewController =
+        [[AMNetworkToolsViewController alloc] initWithNibName:@"AMNetworkToolsViewController" bundle:nil];
+    panelViewController.subViewController = networkToolsViewController;
+    NSView *networkToolsView = networkToolsViewController.view;
+    networkToolsView.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
+    [panelView addSubview:networkToolsView];
+    [self fillPanel:panelViewController content:networkToolsViewController];
     return panelViewController;
 }
 

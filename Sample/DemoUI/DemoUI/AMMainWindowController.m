@@ -30,6 +30,8 @@
 #import "AMPanelControlBarViewController.h"
 #import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
+#import "AMMusicScoreViewController.h"
+#import "AMOSCMessageViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -422,7 +424,7 @@
 
 - (AMPanelViewController *)loadOSCMessagePanel:(NSString *)panelId {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC Message" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
-    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
+    NSViewController *viewController = [[AMOSCMessageViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
     [viewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
@@ -444,7 +446,7 @@
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Music Score" width:UI_defaultPanelWidth height:UI_defaultPanelHeight ];
-    NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
+    NSViewController *viewController = [[AMMusicScoreViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }

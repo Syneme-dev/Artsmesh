@@ -26,6 +26,7 @@
        requestCallback:(void (^)(NSImage* image, NSError* error))requestCallback;
 
 -(void)loadGroups;
+-(void)loadMyGroups:(NSString*)userName;
 
 +(AMStatusNet*)shareInstance;
 

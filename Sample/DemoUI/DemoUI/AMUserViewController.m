@@ -19,12 +19,14 @@
 #import "AMUserLogonViewController.h"
 #import "UIFrameWork/AMCheckBoxView.h"
 #import "AMStatusNet/AMStatusNet.h"
+#import "UIFrameWork/AMFoundryFontView.h"
 
 @interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheckBox;
 @property (weak) IBOutlet NSImageView *userStatusIcon;
 @property (weak) IBOutlet NSImageView *groupStatusIcon;
+@property (weak) IBOutlet AMFoundryFontView *groupNameField;
 
 @property NSPopover *myPopover;
 
@@ -114,7 +116,7 @@
     if(mySelf.isOnline == NO) {
         return;
     }
-    
+
     [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
 }
 
@@ -149,6 +151,7 @@
         return;
     }
     
+    [self loadGroupAvatar];
     [self.groupStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
 }
 
@@ -169,6 +172,7 @@
         return;
     }
     
+    [self loadUserAvatar];
     [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
 }
 
@@ -180,19 +184,6 @@
     self.showingTabsCount=2;
     
 }
-//Note:sample code if using this as notification.
-//-(void)onUpdateUserAVator:(NSNotification*)notification{
-//    
-//
-//    NSDictionary* user=notification.userInfo;
-//    NSString *imageUrlString=[user valueForKey:@"profile_image_url"];
-//    NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-//    NSImage *imageFromBundle = [[NSImage alloc] initWithData:imageData];
-//    [self.avatarView  setImage:imageFromBundle];
-//    
-////http://artsmesh.io//theme/dark/default-avatar-profile.png
-//}
 
 -(void)loadUserAvatar
 {
@@ -271,15 +262,19 @@
 
 - (IBAction)groupSocialBtnClicked:(NSButton *)sender
 {
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-//    if (myUserName != nil && ![myUserName isEqualToString:@""]) {
-//        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                 myUserName, @"UserName", nil];
-//        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
-//    }else{
-//        [self PopoverUserLogonView:sender];
-//    }
+    NSString* groupName = self.groupNameField.stringValue;
+    
+    for (AMStaticGroup* sg in [AMCoreData shareInstance].staticGroups) {
+        if ([sg.nickname isEqualToString:groupName]) {
+            NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     groupName, @"GroupName", nil];
+            [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+            return;
+        }
+    }
+    
+    [self PopoverUserLogonView:sender];
+
 }
 
 - (IBAction)groupNameEdited:(NSTextField *)sender
@@ -428,6 +423,11 @@
         AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
         popController.nickName = mySelf.nickName;
     }
+}
+
+-(void)popoverDidClose:(NSNotification *)notification
+{
+    [self loadUserAvatar];
 }
 
 @end

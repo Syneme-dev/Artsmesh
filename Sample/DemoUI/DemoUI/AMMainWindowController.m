@@ -481,8 +481,8 @@
 }
 
 - (void)initTimer {
-
-    [[AMTimer shareInstance] addTimerScreen:self.amTimer];
+    NSTextField *timerField=(NSTextField*)self.amTimer;
+    [[AMTimer shareInstance] addTimerScreen:timerField];
 }
 
 - (AMPanelViewController *)loadGroupsPanel {

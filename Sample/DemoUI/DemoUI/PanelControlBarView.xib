@@ -126,7 +126,7 @@
                     <rect key="frame" x="205" y="10" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button identifier="VISUAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVk-24-SVN" userLabel="visual">
+                        <button identifier="ROUTING" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVk-24-SVN" userLabel="visual">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_route" imagePosition="only" alignment="center" alternateImage="SideBar_route_h" imageScaling="proportionallyDown" inset="2" id="MIy-6N-p2J">

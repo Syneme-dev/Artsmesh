@@ -22,6 +22,16 @@
     }
     return self;
 }
+-(void)registerTabButtons{
+    super.tabs=self.tabView;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.visualTab];
+    [self.tabButtons addObject:self.oscTab];
+    [self.tabButtons addObject:self.audioTab];
+    [self.tabButtons addObject:self.videoTab];
+    self.showingTabsCount=4;
+    
+}
 
 - (IBAction)onVisualTabClick:(NSButton *)sender {
     [self.tabView selectTabViewItemAtIndex:0];

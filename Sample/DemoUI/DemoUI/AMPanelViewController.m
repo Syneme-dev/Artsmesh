@@ -205,14 +205,16 @@
     [button setHidden:YES];
     for (int i=0; i<self.tabPanelViewController.tabButtons.count; i++) {
         NSButton *buttonItem =self.tabPanelViewController.tabButtons[i];
-        if (buttonItem.isHidden==FALSE) {
+        if (buttonItem.isHidden==NO) {
             [self.tabPanelViewController.tabs selectTabViewItemAtIndex:i];
         }
     }
 
     [self.tabPanelViewController.view  setNeedsDisplay:YES];
     NSString *tabPanelTitle=[NSString stringWithFormat:@"%@ - %@",self.title,button.title ];
-    [[AM_APPDELEGATE mainWindowController] createTabPanelWithType:self.panelId withTitle:tabPanelTitle withTabId:button.title withTabIndex:index from:self];
+    
+    NSString *tabPanelID=[NSString stringWithFormat:@"%@_%@_TABPANEL",self.panelId,button.title ];
+    [[AM_APPDELEGATE mainWindowController] createTabPanelWithType:self.panelId withTitle:tabPanelTitle withPanelId:tabPanelID withTabIndex:index from:self];
     self.tabPanelViewController.showingTabsCount--;
 }
 

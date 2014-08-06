@@ -7,6 +7,7 @@
 //
 
 #import "AMHttpAsyncRequest.h"
+#import "NSData+Base64.h"
 
 NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
 
@@ -44,6 +45,13 @@ NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
         
         NSMutableData* bodyData = [self createSetKeyHttpBody:self.formData];
         [request setHTTPBody: bodyData];
+    }
+    
+    if(self.username != nil && self.password != nil){
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.username, self.password];
+        NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedString]];
+        [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     }
     
     NSError* error = nil;

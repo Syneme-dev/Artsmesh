@@ -10,7 +10,6 @@
 #import "AMTabPanelViewController.h"
 
 @interface AMUserViewController : AMTabPanelViewController
-@property (strong) IBOutlet NSImageView *avatarView;
 @property (strong) IBOutlet NSTextField *statusMessageLabel;
 @property (strong) IBOutlet NSButton *userTabButton;
 @property (strong) IBOutlet NSButton *groupTabButton;
@@ -18,5 +17,7 @@
 - (IBAction)onUserTabClick:(id)sender;
 - (IBAction)onGroupTabClick:(id)sender;
 - (IBAction)onGotoUserInfoClick:(id)sender;
+@property (weak) IBOutlet NSImageView *userAvatarView;
+@property (weak) IBOutlet NSImageView *groupAvatarView;
 
 @end

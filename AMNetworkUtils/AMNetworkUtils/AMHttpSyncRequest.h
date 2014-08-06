@@ -15,6 +15,8 @@
 @property NSString* httpMethod;
 @property NSDictionary* formData;
 @property int httpTimeout;
+@property NSString* username;
+@property NSString* password;
 
 -(NSData*)sendRequest;
 

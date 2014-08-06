@@ -14,7 +14,7 @@
 @property NSString* homePage;
 
 -(BOOL)quickRegisterAccount:(NSString*)account password:(NSString*)password;
--(BOOL)registerAccount:(AMStaticUser*)user password:(NSString*)password;
+-(BOOL)registerAccount:(NSString*)user password:(NSString*)password;
 -(BOOL)loginAccount:(NSString*)account password:(NSString*)password;
 -(BOOL)followGroup:(NSString*)groupName;
 -(BOOL)createGroup:(NSString*)groupName;

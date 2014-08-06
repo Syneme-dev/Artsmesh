@@ -435,8 +435,8 @@
     return panelViewController;
 }
 
-- (AMPanelViewController *)loadVisualPanel:(NSString*)panelId {
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Visualization" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight ];
+- (AMPanelViewController *)loadRoutingPanel:(NSString*)panelId {
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Routing" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight ];
     AMVisualViewController *visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [visualViewController.view setAutoresizesSubviews:YES];
     [self fillPanel:panelViewController content:visualViewController];
@@ -615,7 +615,7 @@
         panelViewController = [self loadMixingPanel:panelId];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Visual]) {
-        panelViewController = [self loadVisualPanel:panelId];
+        panelViewController = [self loadRoutingPanel:panelId];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Social]) {
         panelViewController = [self loadFOAFPanel:panelId];

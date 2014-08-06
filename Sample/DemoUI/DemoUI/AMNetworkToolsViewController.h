@@ -1,0 +1,28 @@
+//
+//  AMNetworkToolsViewController.h
+//  DemoUI
+//
+//  Created by lattesir on 8/5/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+@interface AMNetworkToolsViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+
+@property (weak) IBOutlet NSButton *pingButton;
+@property (weak) IBOutlet NSButton *tracerouteButton;
+@property (weak) IBOutlet NSButton *iperfButton;
+@property (weak) IBOutlet NSTabView *tabView;
+
+@property (weak) IBOutlet NSTableView *pingTableView;
+@property (unsafe_unretained) IBOutlet NSTextView *pingContentView;
+
+@property (weak) IBOutlet NSTableView *tracerouteTableView;
+@property (unsafe_unretained) IBOutlet NSTextView *tracerouteContentView;
+
+- (IBAction)ping:(id)sender;
+- (IBAction)traceroute:(id)sender;
+- (IBAction)iperf:(id)sender;
+
+@end

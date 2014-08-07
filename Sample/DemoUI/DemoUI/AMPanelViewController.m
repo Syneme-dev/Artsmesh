@@ -227,7 +227,7 @@
 }
 
 -(void)showAsTabPanel:(NSString*)tabTitle withTabIndex:(NSInteger)tabIndex  {
-    [self.tearOffButton setHidden:YES];
+    [self.tearOffButton setHidden:NO];
     [self.settingButton setHidden:YES];
     [self.tabPanelButton setHidden:YES];
     [self.maxSizeButton setHidden:YES];

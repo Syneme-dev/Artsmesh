@@ -115,7 +115,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v">
                     <rect key="frame" x="0.0" y="1" width="149" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" title="APPLE TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
+                    <buttonCell key="cell" type="square" title="APPLY TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

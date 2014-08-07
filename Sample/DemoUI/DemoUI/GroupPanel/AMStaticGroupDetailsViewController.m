@@ -47,17 +47,21 @@
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.applyBtn toColor:UI_Color_blue];
     
-    if (self.homepageView && self.staticGroup.homepage) {
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepageView.font.pointSize];
+    if (self.staticGroup.nickname != nil) {
+        
+    }
+    
+    if (![self.staticGroup.homepage isEqualTo:[NSNull null]]) {
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.homepageView.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticGroup.homepage attributes:attr];
         [self.homepageView.textStorage appendAttributedString:attrStr];
         [self.homepageView setNeedsDisplay:YES];
     }
-    
-    if (self.descriptionView && self.staticGroup.description) {
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.descriptionView.font.pointSize];
+
+    if (![self.staticGroup.description isEqualTo:[NSNull null]]) {
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.descriptionView.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticGroup.description attributes:attr];

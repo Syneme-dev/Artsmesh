@@ -68,6 +68,15 @@
         [self.descriptionView.textStorage appendAttributedString:attrStr];
         [self.descriptionView setNeedsDisplay:YES];
     }
+    
+
+    [self.applyBtn setEnabled:NO];
+    NSArray* myGroups = [AMCoreData shareInstance].myStaticGroups;
+    for (AMStaticGroup* sg in myGroups) {
+        if ([sg.g_id intValue] == [self.staticGroup.g_id intValue]) {
+            [self.applyBtn setEnabled:YES];
+        }
+    }
 }
 
 - (IBAction)applyBtnClicked:(NSButton *)sender
@@ -79,10 +88,21 @@
     [AMCoreData shareInstance].myLocalLiveGroup.location = self.staticGroup.location;
     [AMCoreData shareInstance].myLocalLiveGroup.fullName = self.staticGroup.fullname;
     
-    [defaults setObject:self.staticGroup.nickname forKey:Preference_Key_Cluster_Name];
-    [defaults setObject:self.staticGroup.description forKey:Preference_Key_Cluster_Description];
-    [defaults setObject:self.staticGroup.location forKey:Preference_Key_Cluster_Location];
-    [defaults setObject:self.staticGroup.fullname forKey:Preference_Key_Cluster_FullName];
+    if (self.staticGroup.nickname) {
+         [defaults setObject:self.staticGroup.nickname forKey:Preference_Key_Cluster_Name];
+    }
+    
+    if (self.staticGroup.description) {
+        [defaults setObject:self.staticGroup.description forKey:Preference_Key_Cluster_Description];
+    }
+    
+    if (self.staticGroup.location) {
+        [defaults setObject:self.staticGroup.location forKey:Preference_Key_Cluster_Location];
+    }
+    
+    if (self.staticGroup.fullname) {
+        [defaults setObject:self.staticGroup.fullname forKey:Preference_Key_Cluster_FullName];
+    }
     
     [[AMMesher sharedAMMesher] updateGroup];
     [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];

@@ -7,8 +7,10 @@
 //
 
 #import "AMGroupCreateViewController.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMGroupCreateViewController ()
+@property (weak) IBOutlet NSButton *createBtn;
 
 @end
 
@@ -21,6 +23,11 @@
         // Initialization code here.
     }
     return self;
+}
+
+-(void)awakeFromNib
+{
+    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
 }
 
 @end

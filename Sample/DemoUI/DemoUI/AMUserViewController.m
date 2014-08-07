@@ -20,6 +20,7 @@
 #import "UIFrameWork/AMCheckBoxView.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "UIFrameWork/AMFoundryFontView.h"
+#import "AMGroupCreateViewController.h"
 
 @interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
@@ -273,8 +274,26 @@
         }
     }
     
-    [self PopoverUserLogonView:sender];
+    [self popoverGroupRegisterView:sender];
 
+}
+
+-(void)popoverGroupRegisterView:(id)sender
+{
+    if (self.myPopover == nil) {
+        self.myPopover = [[NSPopover alloc] init];
+        
+        self.myPopover.animates = YES;
+        self.myPopover.behavior = NSPopoverBehaviorTransient;
+        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        self.myPopover.delegate = self;
+    }
+    
+    self.myPopover.contentViewController = [[AMGroupCreateViewController alloc] initWithNibName:@"AMGroupCreateViewController" bundle:nil];
+    
+    NSButton *targetButton = (NSButton*)sender;
+    NSRectEdge prefEdge = NSMaxXEdge;
+    [self.myPopover showRelativeToRect:[targetButton bounds] ofView:sender preferredEdge:prefEdge];
 }
 
 - (IBAction)groupNameEdited:(NSTextField *)sender

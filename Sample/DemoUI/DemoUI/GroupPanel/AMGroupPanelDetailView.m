@@ -44,4 +44,14 @@
 
 }
 
+-(BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    return;
+}
+
 @end

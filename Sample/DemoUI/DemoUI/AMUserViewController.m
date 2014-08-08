@@ -436,12 +436,24 @@
 
 - (void)popoverWillShow:(NSNotification *)notification
 {
-    AMUserLogonViewController* popController = (AMUserLogonViewController*)self.myPopover.contentViewController;
-    if (popController != nil) {
-        
-        AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-        popController.nickName = mySelf.nickName;
+    if ([self.myPopover.contentViewController isKindOfClass:[AMUserLogonViewController class]]) {
+        AMUserLogonViewController* popController = (AMUserLogonViewController*)self.myPopover.contentViewController;
+        if (popController != nil) {
+            
+            AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+            popController.nickName = mySelf.nickName;
+        }
+    }else if([self.myPopover.contentViewController isKindOfClass:[AMGroupCreateViewController class]]){
+        AMGroupCreateViewController* popController = (AMGroupCreateViewController*)self.myPopover.contentViewController;
+        if (popController != nil) {
+            
+            NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+            NSString* groupname = [defaults stringForKey:Preference_Key_Cluster_Name];
+            popController.nickName = groupname;
+        }
     }
+    
+   
 }
 
 -(void)popoverDidClose:(NSNotification *)notification

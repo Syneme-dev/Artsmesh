@@ -48,12 +48,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3V-rE-tIo">
-                                        <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="S3V-rE-tIo">
+                                        <rect key="frame" x="10" y="10" width="1087" height="895"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_audioMixing" id="tbd-nE-DML"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_audioMixing2" id="tbd-nE-DML"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="S3V-rE-tIo" firstAttribute="leading" secondItem="0NF-gq-SD2" secondAttribute="leading" constant="10" id="0vc-bV-UKA"/>
+                                    <constraint firstAttribute="trailing" secondItem="S3V-rE-tIo" secondAttribute="trailing" constant="10" id="4mB-8K-j5k"/>
+                                    <constraint firstAttribute="bottom" secondItem="S3V-rE-tIo" secondAttribute="bottom" constant="10" id="Rkr-hA-jj2"/>
+                                    <constraint firstItem="S3V-rE-tIo" firstAttribute="top" secondItem="0NF-gq-SD2" secondAttribute="top" constant="10" id="Tc2-ne-6U2"/>
+                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="OUTPUT" identifier="" id="2k8-Yt-b7W">
@@ -132,7 +138,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="shot_audioMixing" width="290" height="394"/>
+        <image name="shot_audioMixing2" width="940" height="534"/>
         <image name="shot_mainOutput" width="1583" height="888"/>
         <image name="shot_mixing" width="1107" height="915"/>
     </resources>

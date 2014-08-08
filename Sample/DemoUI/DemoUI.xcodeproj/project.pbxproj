@@ -11,7 +11,6 @@
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
 		2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2602038419809E2C0013687A /* AMUserLogonViewController.xib */; };
-		260646661985EC3B003FCD21 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2606466A19861C2E003FCD21 /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2606466819861C23003FCD21 /* LocalServer */; };
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */; };
@@ -70,6 +69,7 @@
 		AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
+		AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AF53F606199320BA0003DDC4 /* shot_audioMixing.png */; };
 		AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */; };
 		AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */; };
 		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
@@ -309,6 +309,7 @@
 		AF2890DB198A36BC00D05174 /* shot_visual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_visual.png; sourceTree = "<group>"; };
 		AF45429C19553C2200CCD862 /* AMStatusNet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMStatusNet.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMStatusNet.framework; sourceTree = "<group>"; };
 		AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
+		AF53F606199320BA0003DDC4 /* shot_audioMixing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_audioMixing.png; sourceTree = "<group>"; };
 		AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelControlBarView.xib; sourceTree = "<group>"; };
 		AF621F1C197F59C8005F4F97 /* AMPanelControlBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMPanelControlBarViewController.h; path = Controllers/AMPanelControlBarViewController.h; sourceTree = "<group>"; };
 		AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMPanelControlBarViewController.m; path = Controllers/AMPanelControlBarViewController.m; sourceTree = "<group>"; };
@@ -829,6 +830,7 @@
 		AFDA79A7194586660002873B /* panelshot */ = {
 			isa = PBXGroup;
 			children = (
+				AF53F606199320BA0003DDC4 /* shot_audioMixing.png */,
 				AF2890DA198A36BC00D05174 /* shot_osc.png */,
 				AF2890DB198A36BC00D05174 /* shot_visual.png */,
 				AFD75752195D048E0057976D /* shot_audio.png */,
@@ -1015,7 +1017,6 @@
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,
-				260646661985EC3B003FCD21 /* (null) in Resources */,
 				AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,
@@ -1036,6 +1037,7 @@
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
 				262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */,
+				AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
 				CEC2FC64196588FD00AFD309 /* AMUserGroupView.xib in Resources */,
 				CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */,

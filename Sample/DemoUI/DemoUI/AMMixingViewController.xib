@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMixingViewController">
             <connections>
+                <outlet property="audioTab" destination="H6j-RL-8NU" id="bYW-Bu-cgA"/>
+                <outlet property="outputTab" destination="c7R-W9-hgh" id="3SC-xF-qCL"/>
+                <outlet property="tabs" destination="IvW-AE-wDy" id="sec-IO-GmO"/>
+                <outlet property="videoTab" destination="4O6-Ou-FXf" id="Tgx-mA-NUa"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -15,21 +19,121 @@
             <rect key="frame" x="0.0" y="0.0" width="1107" height="936"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="qfK-mw-y2u">
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="IvW-AE-wDy">
                     <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_mixing" id="FI8-Nc-Sdn"/>
-                </imageView>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="VIDEO" identifier="1" id="NF0-OA-Rwq">
+                            <view key="view" id="FvG-wM-AMY">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="qfK-mw-y2u">
+                                        <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_mixing" id="FI8-Nc-Sdn"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qfK-mw-y2u" secondAttribute="bottom" id="6w5-hZ-RFu"/>
+                                    <constraint firstAttribute="trailing" secondItem="qfK-mw-y2u" secondAttribute="trailing" id="CTa-p1-SqE"/>
+                                    <constraint firstItem="qfK-mw-y2u" firstAttribute="leading" secondItem="FvG-wM-AMY" secondAttribute="leading" id="Y5K-Bo-FZv"/>
+                                    <constraint firstItem="qfK-mw-y2u" firstAttribute="top" secondItem="FvG-wM-AMY" secondAttribute="top" id="d4j-CK-OBo"/>
+                                </constraints>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="AUDIO" identifier="2" id="bzf-ck-IUs">
+                            <view key="view" id="0NF-gq-SD2">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3V-rE-tIo">
+                                        <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_audioMixing" id="tbd-nE-DML"/>
+                                    </imageView>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="OUTPUT" identifier="" id="2k8-Yt-b7W">
+                            <view key="view" id="5bz-YN-iex">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrH-QL-xhi">
+                                        <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_mainOutput" id="rgf-wz-8O1"/>
+                                    </imageView>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="H6j-RL-8NU" userLabel="audioTabButton" customClass="AMBlueButton">
+                    <rect key="frame" x="973" y="919" width="40" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="7ro-Jq-Xc9"/>
+                        <constraint firstAttribute="height" constant="13" id="RF6-bs-km7"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="QLQ-Cg-T9P">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onAudioTabClick:" target="-2" id="caD-wV-P90"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="4O6-Ou-FXf" userLabel="videoTabButton" customClass="AMBlueButton">
+                    <rect key="frame" x="925" y="919" width="40" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="3of-2K-djm"/>
+                        <constraint firstAttribute="width" constant="40" id="PgW-0c-wfW"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="9zL-e0-h1e">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onVideoTabClick:" target="-2" id="Z90-bb-uEQ"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="c7R-W9-hgh" userLabel="outputTabButton" customClass="AMBlueButton">
+                    <rect key="frame" x="1016" y="919" width="80" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="2Zd-9z-iJA"/>
+                        <constraint firstAttribute="width" constant="80" id="pTF-3P-sGh"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="MAIN OUTPUT" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="yqu-4u-9u2">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onOutputTabClick:" target="-2" id="hHx-5l-QQ5"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="qfK-mw-y2u" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="PIa-cE-Vax"/>
-                <constraint firstItem="qfK-mw-y2u" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="Tmn-8l-DyH"/>
-                <constraint firstAttribute="trailing" secondItem="qfK-mw-y2u" secondAttribute="trailing" id="eBH-qU-EY3"/>
-                <constraint firstAttribute="bottom" secondItem="qfK-mw-y2u" secondAttribute="bottom" id="yw6-WK-T1j"/>
+                <constraint firstItem="c7R-W9-hgh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="0bb-dQ-j1T"/>
+                <constraint firstItem="H6j-RL-8NU" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="58z-6S-cLU"/>
+                <constraint firstAttribute="trailing" secondItem="c7R-W9-hgh" secondAttribute="trailing" constant="11" id="8da-db-fb7"/>
+                <constraint firstAttribute="trailing" secondItem="IvW-AE-wDy" secondAttribute="trailing" id="9FZ-qL-ILT"/>
+                <constraint firstAttribute="bottom" secondItem="IvW-AE-wDy" secondAttribute="bottom" id="Abw-1f-OPI"/>
+                <constraint firstItem="IvW-AE-wDy" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="CcH-fV-l9T"/>
+                <constraint firstItem="IvW-AE-wDy" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="POV-5F-gnr"/>
+                <constraint firstItem="c7R-W9-hgh" firstAttribute="leading" secondItem="H6j-RL-8NU" secondAttribute="trailing" constant="3" id="dU2-7E-D9E"/>
+                <constraint firstItem="4O6-Ou-FXf" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="oLl-gW-MZK"/>
+                <constraint firstItem="H6j-RL-8NU" firstAttribute="leading" secondItem="4O6-Ou-FXf" secondAttribute="trailing" constant="8" id="yVM-Jq-yZy"/>
             </constraints>
         </customView>
     </objects>
     <resources>
+        <image name="shot_audioMixing" width="290" height="394"/>
+        <image name="shot_mainOutput" width="1583" height="888"/>
         <image name="shot_mixing" width="1107" height="915"/>
     </resources>
 </document>

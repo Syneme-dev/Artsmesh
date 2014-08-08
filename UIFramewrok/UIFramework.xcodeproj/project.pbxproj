@@ -26,7 +26,7 @@
 		AF00D45318C9B5E6004DE9E6 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */; };
 		AF00D45918C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */; };
-		AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AF2890DE198A398A00D05174 /* AMBlueButton.h */; };
+		AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AF2890DE198A398A00D05174 /* AMBlueButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2890DF198A398A00D05174 /* AMBlueButton.m */; };
 		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */; };
@@ -274,7 +274,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
-				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
 				2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
@@ -286,6 +285,7 @@
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
+				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
 				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
 				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,

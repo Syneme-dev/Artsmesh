@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView focusRingType="none" ambiguous="YES" misplaced="YES" borderType="none" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="8EI-Ko-tQv">
-                                        <rect key="frame" x="0.0" y="-3" width="305" height="361"/>
+                                        <rect key="frame" x="0.0" y="-1" width="305" height="361"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pea-9b-WbH">
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="361"/>
@@ -184,7 +184,7 @@
                         <constraint firstAttribute="height" constant="13" id="DvK-lO-vMf"/>
                         <constraint firstAttribute="width" constant="50" id="cSi-Ys-qLA"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="STATIC" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="dtE-9E-eHj">
+                    <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="dtE-9E-eHj">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>

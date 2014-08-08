@@ -40,8 +40,8 @@
     [AMButtonHandler changeTabTextColor:self.clostBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.applyBtn toColor:UI_Color_blue];
     
-    if (self.homepage && self.staticUser.url) {
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.homepage.font.pointSize];
+    if (![self.staticUser.url isEqualTo:[NSNull null]]) {
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.homepage.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticUser.url attributes:attr];
@@ -49,8 +49,8 @@
         [self.homepage setNeedsDisplay:YES];
     }
     
-    if (self.description && self.staticUser.description) {
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.description.font.pointSize];
+    if (![self.staticUser.description isEqualTo:[NSNull null]]) {
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.description.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticUser.description attributes:attr];

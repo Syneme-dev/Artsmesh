@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -86,7 +86,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.staticGroup.created" id="ApC-hz-ziN"/>
+                        <binding destination="-2" name="value" keyPath="self.staticGroup.created" id="BHt-pI-XAY"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9x-nh-a1O" customClass="AMFoundryFontView">
@@ -98,7 +98,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.staticGroup.modified" id="0fs-SZ-1si"/>
+                        <binding destination="-2" name="value" keyPath="self.staticGroup.modified" id="wGs-JR-bmr"/>
                     </connections>
                 </textField>
                 <button wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xr-aO-LvL">
@@ -115,7 +115,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v">
                     <rect key="frame" x="0.0" y="1" width="149" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" title="APPLE TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
+                    <buttonCell key="cell" type="square" title="APPLY TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -182,9 +182,6 @@
                         <rect key="frame" x="-100" y="-100" width="15" height="45"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <connections>
-                        <binding destination="-2" name="hidden" keyPath="self.staticGroup.description" id="82q-g2-jLJ"/>
-                    </connections>
                 </scrollView>
             </subviews>
             <connections>

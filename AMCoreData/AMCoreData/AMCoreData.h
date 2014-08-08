@@ -27,6 +27,7 @@
 #define AM_STATIC_GROUP_CHANGED         @"AM_STATIC_GROUP_CHANGED"
 #define AM_SYSTEM_CONFIG_CHANGED        @"AM_SYSTEM_CONFIG_CHANGED"
 #define AM_MERGED_GROUPID_CHANGED       @"AM_MERGED_GROUPID_CHANGED"
+#define AM_MYSTATIC_GROUPS_CHANGED      @"AM_MYSTATIC_GROUPS_CHANGED"
 
 @interface AMCoreData : NSObject
 
@@ -36,6 +37,7 @@
 @property NSArray* remoteLiveGroups;
 @property NSArray* staticGroups;
 @property AMSystemConfig* systemConfig;
+@property NSArray* myStaticGroups;
 
 
 +(AMCoreData*)shareInstance;

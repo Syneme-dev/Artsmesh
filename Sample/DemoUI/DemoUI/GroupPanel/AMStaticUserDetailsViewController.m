@@ -57,6 +57,15 @@
         [self.description.textStorage appendAttributedString:attrStr];
         [self.description setNeedsDisplay:YES];
     }
+    
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    NSString* myNickName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    if ([self.staticUser.name isEqualToString:myNickName]) {
+        [self.applyBtn setEnabled:YES];
+    }else{
+        [self.applyBtn setEnabled:NO];
+    }
+    
 }
 
 - (IBAction)closeBtnClicked:(NSButton *)sender

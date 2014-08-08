@@ -22,10 +22,9 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
-//    
 //    [[NSColor redColor] set];
 //    [NSBezierPath fillRect:self.bounds];
-    // Drawing code here.
+
 }
 
 -(BOOL)acceptsFirstResponder

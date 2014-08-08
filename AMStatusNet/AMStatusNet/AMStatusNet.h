@@ -15,8 +15,7 @@
 
 -(BOOL)registerAccount:(NSString*)account password:(NSString*)password;
 -(BOOL)loginAccount:(NSString*)account password:(NSString*)password;
--(BOOL)followGroup:(NSString*)groupName;
--(BOOL)createGroup:(NSString*)groupName;
+-(BOOL)createGroup:(NSString*)groupName account:(NSString*)account password:(NSString*)password;
 -(BOOL)postMessageToStatusNet:(NSString*)status;
 
 -(void)loadUserAvatar:(NSString*)userName

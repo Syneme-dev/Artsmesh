@@ -88,19 +88,19 @@
     [AMCoreData shareInstance].myLocalLiveGroup.location = self.staticGroup.location;
     [AMCoreData shareInstance].myLocalLiveGroup.fullName = self.staticGroup.fullname;
     
-    if (self.staticGroup.nickname) {
+    if ([self.staticGroup.nickname isNotEqualTo:[NSNull null]]) {
          [defaults setObject:self.staticGroup.nickname forKey:Preference_Key_Cluster_Name];
     }
     
-    if (self.staticGroup.description) {
+    if ([self.staticGroup.description isNotEqualTo:[NSNull null]]) {
         [defaults setObject:self.staticGroup.description forKey:Preference_Key_Cluster_Description];
     }
     
-    if (self.staticGroup.location) {
+    if ([self.staticGroup.location isNotEqualTo:[NSNull null]]) {
         [defaults setObject:self.staticGroup.location forKey:Preference_Key_Cluster_Location];
     }
     
-    if (self.staticGroup.fullname) {
+    if ([self.staticGroup.fullname isNotEqualTo:[NSNull null]]) {
         [defaults setObject:self.staticGroup.fullname forKey:Preference_Key_Cluster_FullName];
     }
     

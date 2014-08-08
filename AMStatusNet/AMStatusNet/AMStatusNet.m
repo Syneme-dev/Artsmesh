@@ -339,12 +339,13 @@
         if ([objects isKindOfClass:[NSDictionary class]]) {
             NSDictionary* dict = (NSDictionary*)objects;
             NSString *imageUrlString = [dict valueForKey:@"profile_image_url"];
-            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-           // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
-            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
-            if (requestCallback) {
-                requestCallback(avatarImage, nil);
+            if ([imageUrlString isNotEqualTo:[NSNull null]]) {
+                NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+                NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+                if (requestCallback) {
+                    requestCallback(avatarImage, nil);
+                }
             }
         }
     };
@@ -392,12 +393,14 @@
         if ([objects isKindOfClass:[NSDictionary class]]) {
             NSDictionary* dict = (NSDictionary*)objects;
             NSString *imageUrlString = [dict valueForKey:@"original_logo"];
-            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
-            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
-            if (requestCallback) {
-                requestCallback(avatarImage, nil);
+            
+            if ([imageUrlString isNotEqualTo:[NSNull null]]) {
+                NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+                NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+                if (requestCallback) {
+                    requestCallback(avatarImage, nil);
+                }
             }
         }
     };

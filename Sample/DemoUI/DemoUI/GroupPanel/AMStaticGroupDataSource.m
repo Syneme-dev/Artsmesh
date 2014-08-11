@@ -38,60 +38,60 @@
     
     NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
     
-//    NSArray* staticGroups =  [AMCoreData shareInstance].staticGroups;
-//    NSArray* myStaticGroups = [AMCoreData shareInstance].myStaticGroups;
- 
-//    if (staticGroups != nil) {
-//        if (myStaticGroups != nil) {
-//            for(AMStaticGroup* msg in myStaticGroups){
-//                AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:msg];
-//                gc.isMyGroup = YES;
-//                
-//                BOOL inserted = NO;
-//                for (int i = 0; i < [groupControllers count]; i++) {
-//                    AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
-//                    if (gc.groupUserCount > tempg. groupUserCount) {
-//                        [groupControllers insertObject:gc atIndex:i];
-//                        inserted = YES;
-//                        break;
-//                    }
-//                }
-//                
-//                if (inserted == NO) {
-//                    [groupControllers addObject:gc];
-//                }
-//            }
-//
-//        }
-//        
-//        for(AMStaticGroup* sg in staticGroups){
-//            
-//            if ([self isMyGroup:sg]) {
-//                continue;
-//            }
-//            
-//            AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:sg];
-//            gc.isMyGroup = NO;
-//            
-//            BOOL inserted = NO;
-//            for (int i = 0 ; i < [groupControllers count]; i++) {
-//                AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
-//                if (tempg.isMyGroup) {
-//                    continue;
-//                }
-//                
-//                if (gc.groupUserCount > tempg. groupUserCount) {
-//                    [groupControllers insertObject:gc atIndex:i];
-//                    inserted = YES;
-//                    break;
-//                }
-//            }
-//            
-//            if (inserted == NO) {
-//                [groupControllers addObject:gc];
-//            }
-//        }
-//    }
+   NSArray* staticGroups =  [AMCoreData shareInstance].staticGroups;
+   NSArray* myStaticGroups = [AMCoreData shareInstance].myStaticGroups;
+
+   if (staticGroups != nil) {
+       if (myStaticGroups != nil) {
+           for(AMStaticGroup* msg in myStaticGroups){
+               AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:msg];
+               gc.isMyGroup = YES;
+               
+               BOOL inserted = NO;
+               for (int i = 0; i < [groupControllers count]; i++) {
+                   AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
+                   if (gc.groupUserCount > tempg. groupUserCount) {
+                       [groupControllers insertObject:gc atIndex:i];
+                       inserted = YES;
+                       break;
+                   }
+               }
+               
+               if (inserted == NO) {
+                   [groupControllers addObject:gc];
+               }
+           }
+
+       }
+       
+       for(AMStaticGroup* sg in staticGroups){
+           
+           if ([self isMyGroup:sg]) {
+               continue;
+           }
+           
+           AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:sg];
+           gc.isMyGroup = NO;
+           
+           BOOL inserted = NO;
+           for (int i = 0 ; i < [groupControllers count]; i++) {
+               AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
+               if (tempg.isMyGroup) {
+                   continue;
+               }
+               
+               if (gc.groupUserCount > tempg. groupUserCount) {
+                   [groupControllers insertObject:gc atIndex:i];
+                   inserted = YES;
+                   break;
+               }
+           }
+           
+           if (inserted == NO) {
+               [groupControllers addObject:gc];
+           }
+       }
+   }
     
     labelController.childrenController = groupControllers;
     

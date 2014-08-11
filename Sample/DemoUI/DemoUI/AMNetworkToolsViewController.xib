@@ -263,6 +263,43 @@
                             <view key="view" id="gha-BE-fvw">
                                 <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o94-5B-aLv">
+                                        <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <clipView key="contentView" id="wgl-K9-QiN">
+                                            <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView editable="NO" selectable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nd1-0G-VZC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="0.21960785984992981" green="0.21960785984992981" blue="0.21960785984992981" alpha="1" colorSpace="deviceRGB"/>
+                                                    <size key="minSize" width="593" height="298"/>
+                                                    <size key="maxSize" width="634" height="10000000"/>
+                                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="minSize" width="593" height="298"/>
+                                                    <size key="maxSize" width="634" height="10000000"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ANt-sT-g5u">
+                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="SVT-TO-vWn">
+                                            <rect key="frame" x="-100" y="-100" width="15" height="298"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="o94-5B-aLv" firstAttribute="top" secondItem="gha-BE-fvw" secondAttribute="top" id="0uk-Qg-8xA"/>
+                                    <constraint firstAttribute="bottom" secondItem="o94-5B-aLv" secondAttribute="bottom" id="1cd-nI-a26"/>
+                                    <constraint firstAttribute="trailing" secondItem="o94-5B-aLv" secondAttribute="trailing" id="ip8-le-CPP"/>
+                                    <constraint firstItem="o94-5B-aLv" firstAttribute="leading" secondItem="gha-BE-fvw" secondAttribute="leading" id="qPg-mg-Ghl"/>
+                                </constraints>
                             </view>
                         </tabViewItem>
                     </tabViewItems>

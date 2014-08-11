@@ -110,7 +110,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [AMCoreData shareInstance].staticGroups = staticGroups;
-            [[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
+            //[[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
         });
     };
     

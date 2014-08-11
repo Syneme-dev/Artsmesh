@@ -587,14 +587,15 @@
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Preference]) {
         panelViewController = [self loadPreferencePanel:panelId relatedView:relatedView];
-    } else if ([panelType isEqualToString:UI_Panel_Key_Chat]) {
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Chat]) {
         panelViewController = [self loadChatPanel:panelId relatedView:relatedView];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_NetworkTools]) {
         panelViewController = [self loadNetworkToolsPanel:panelId relatedView:relatedView];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Map]) {
-        panelViewController = [self loadMapPanel:panelId relatedView:relatedView];
+        //panelViewController = [self loadMapPanel:panelId relatedView:relatedView];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Mixing]) {
         panelViewController = [self loadMixingPanel:panelId relatedView:relatedView];

@@ -35,7 +35,7 @@
 {
     AMGroupPanelTableCellView* cellView = (AMGroupPanelTableCellView*)self.view;
     [cellView.imageView setHidden:YES];
-    cellView.textField.stringValue = @"STATUSNET_GROUPS";
+    cellView.textField.stringValue = @"Archive Groups";
 }
 
 @end

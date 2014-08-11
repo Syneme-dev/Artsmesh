@@ -91,7 +91,7 @@
 {
     [self.liveGroupDataSource reloadGroups];
     [self.outlineView reloadData];
-    //[self.outlineView expandItem:nil expandChildren:YES];
+    [self.outlineView expandItem:[self.outlineView itemAtRow:0] expandChildren:NO];
 }
 
 -(void)hideDetailView
@@ -263,7 +263,7 @@
 {
     [self.staticGroupDataSource reloadGroups];
     [self.staticGroupOutlineView reloadData];
-    //[self.staticGroupOutlineView expandItem:nil expandChildren:YES];
+    [self.staticGroupOutlineView expandItem:[self.staticGroupOutlineView itemAtRow:0] expandChildren:NO];
 }
 
 

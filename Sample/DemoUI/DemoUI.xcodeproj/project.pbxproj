@@ -33,6 +33,8 @@
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
+		269FB84D1998816E00355312 /* AMViewStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMViewStreamingViewController.m */; };
+		269FB84E1998816E00355312 /* AMViewStreamingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
@@ -268,6 +270,9 @@
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
+		269FB84A1998816E00355312 /* AMViewStreamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewStreamingViewController.h; sourceTree = "<group>"; };
+		269FB84B1998816E00355312 /* AMViewStreamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMViewStreamingViewController.m; sourceTree = "<group>"; };
+		269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMViewStreamingViewController.xib; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
@@ -634,6 +639,16 @@
 			name = PreferencePanel;
 			sourceTree = "<group>";
 		};
+		269FB8491998814600355312 /* G+Panel */ = {
+			isa = PBXGroup;
+			children = (
+				269FB84A1998816E00355312 /* AMViewStreamingViewController.h */,
+				269FB84B1998816E00355312 /* AMViewStreamingViewController.m */,
+				269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */,
+			);
+			name = "G+Panel";
+			sourceTree = "<group>";
+		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,6 +720,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				269FB8491998814600355312 /* G+Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
 				268DA743198B87A200F86EBB /* TimerPanel */,
 				269C3347197D00F000AF86AA /* PreferencePanel */,
@@ -1001,6 +1017,7 @@
 				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
+				269FB84E1998816E00355312 /* AMViewStreamingViewController.xib in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				26136C57196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib in Resources */,
 				D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */,
@@ -1122,6 +1139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269FB84D1998816E00355312 /* AMViewStreamingViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,

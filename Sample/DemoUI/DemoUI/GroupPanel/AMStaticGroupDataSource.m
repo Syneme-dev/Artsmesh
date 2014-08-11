@@ -34,33 +34,58 @@
 
 -(void)reloadGroups
 {
-    NSArray* staticGroups =  [AMCoreData shareInstance].staticGroups;
-    if (staticGroups == nil) {
-        return;
-    }
-    
     AMGroupPanelStaticLabelController* labelController = [[AMGroupPanelStaticLabelController alloc] initWithNibName:@"AMGroupPanelStaticLabelController" bundle:nil];
     
     NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
     
-    for(AMStaticGroup* sg in staticGroups){
-        AMGroupPanelStaticGroupCellController* groupController =
-        [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellController" bundle:nil];
-        
-        groupController.staticGroup = sg;
-        
-        if([sg users] != nil){
-            groupController.childrenController = [[NSMutableArray alloc] init];
-            for (AMStaticUser* su in [sg users]) {
-                AMGroupPanelStaticUserCellController* userController =
-                [[AMGroupPanelStaticUserCellController alloc] initWithNibName:@"AMGroupPanelStaticUserCellController" bundle:nil];
+    NSArray* staticGroups =  [AMCoreData shareInstance].staticGroups;
+    NSArray* myStaticGroups = [AMCoreData shareInstance].myStaticGroups;
+ 
+    if (staticGroups != nil) {
+        if (myStaticGroups != nil) {
+            for(AMStaticGroup* msg in myStaticGroups){
+                AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:msg];
+                gc.isMyGroup = YES;
                 
-                userController.staticUser = su;
-                [groupController.childrenController addObject:userController];
+                BOOL inserted = NO;
+                for (int i = 0; i < [groupControllers count]; i++) {
+                    AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
+                    if (gc.groupUserCount > tempg. groupUserCount) {
+                        [groupControllers insertObject:gc atIndex:i];
+                        inserted = YES;
+                        break;
+                    }
+                }
+                
+                if (inserted == NO) {
+                    [groupControllers addObject:gc];
+                }
             }
+
         }
         
-        [groupControllers addObject:groupController];
+        for(AMStaticGroup* sg in staticGroups){
+            AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:sg];
+            gc.isMyGroup = NO;
+            
+            BOOL inserted = NO;
+            for (int i = 0 ; i < [groupControllers count]; i++) {
+                AMGroupPanelStaticGroupCellController* tempg = groupControllers[i];
+                if (tempg.isMyGroup) {
+                    continue;
+                }
+                
+                if (gc.groupUserCount > tempg. groupUserCount) {
+                    [groupControllers insertObject:gc atIndex:i];
+                    inserted = YES;
+                    break;
+                }
+            }
+            
+            if (inserted == NO) {
+                [groupControllers addObject:gc];
+            }
+        }
     }
     
     labelController.childrenController = groupControllers;
@@ -69,6 +94,28 @@
     [statusNetControllers addObject:labelController ];
     
     self.staticGroupControllers = statusNetControllers;
+}
+
+-(AMGroupPanelStaticGroupCellController*)createGroupControllerWithGroup:(AMStaticGroup*)staticGroup
+{
+    AMGroupPanelStaticGroupCellController* groupController =
+    [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellController" bundle:nil];
+    
+    groupController.staticGroup = staticGroup;
+    groupController.groupUserCount = [staticGroup.users count];
+    
+    if([staticGroup users] != nil){
+        groupController.childrenController = [[NSMutableArray alloc] init];
+        for (AMStaticUser* su in [staticGroup users]) {
+            AMGroupPanelStaticUserCellController* userController =
+            [[AMGroupPanelStaticUserCellController alloc] initWithNibName:@"AMGroupPanelStaticUserCellController" bundle:nil];
+            
+            userController.staticUser = su;
+            [groupController.childrenController addObject:userController];
+        }
+    }
+
+    return groupController;
 }
 
 

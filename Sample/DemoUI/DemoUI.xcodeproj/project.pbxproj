@@ -170,7 +170,6 @@
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
 		D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */; };
 		D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */; };
-		D4EB71471998E45400E39811 /* logo-02.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EB71461998E45400E39811 /* logo-02.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -444,7 +443,6 @@
 		D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticGroupCellController.xib; sourceTree = "<group>"; };
 		D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabItemView.h; sourceTree = "<group>"; };
 		D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabItemView.m; sourceTree = "<group>"; };
-		D4EB71461998E45400E39811 /* logo-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-02.png"; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F353201534CF41128CA1E7AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -670,7 +668,6 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				D4EB71461998E45400E39811 /* logo-02.png */,
 				2606466819861C23003FCD21 /* LocalServer */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
@@ -1045,7 +1042,6 @@
 				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
-				D4EB71471998E45400E39811 /* logo-02.png in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,

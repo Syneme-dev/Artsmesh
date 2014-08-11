@@ -13,5 +13,7 @@
 @interface AMGroupPanelStaticGroupCellController : AMGroupPanelTableCellController
 
 @property AMStaticGroup* staticGroup;
+@property long groupUserCount;
+@property BOOL isMyGroup;
 
 @end

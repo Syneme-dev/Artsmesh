@@ -21,13 +21,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Mye-Nu-lsW" userLabel="staticTabButton" customClass="AMBlueButton">
-                    <rect key="frame" x="1051" y="577" width="40" height="13"/>
+                    <rect key="frame" x="1031" y="577" width="60" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="IOS-bT-2LI"/>
-                        <constraint firstAttribute="width" constant="40" id="lB5-uy-QRf"/>
+                        <constraint firstAttribute="width" constant="60" id="lB5-uy-QRf"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="STATIC" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
+                    <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
@@ -36,7 +36,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="jAs-Rs-5oa" userLabel="liveTabButton" customClass="AMBlueButton">
-                    <rect key="frame" x="996" y="577" width="40" height="13"/>
+                    <rect key="frame" x="976" y="577" width="40" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="jiV-f1-Gmm"/>
@@ -84,7 +84,7 @@
                                     <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fcn-UN-fD2">
                                         <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_staticGroup" id="s48-fK-PzX"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_archiveWithMap" id="s48-fK-PzX"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -111,6 +111,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="shot_staticGroup" width="942" height="835"/>
+        <image name="shot_archiveWithMap" width="1346" height="874"/>
     </resources>
 </document>

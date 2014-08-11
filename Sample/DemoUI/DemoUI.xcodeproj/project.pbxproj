@@ -118,6 +118,7 @@
 		AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBDA919610BEA00B7FB51 /* Trash.png */; };
 		AFAEBDB819610BEA00B7FB51 /* Users.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBDAA19610BEA00B7FB51 /* Users.png */; };
 		AFAEBDBA19611AD900B7FB51 /* map.css in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBDB919611AD900B7FB51 /* map.css */; };
+		AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB5C6EA19988CA6005D3727 /* shot_archiveWithMap.png */; };
 		AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB95D4718FFB61E00853263 /* AMMainWindowController.m */; };
 		AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */; };
 		AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */; };
@@ -361,6 +362,7 @@
 		AFAEBDA919610BEA00B7FB51 /* Trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trash.png; sourceTree = "<group>"; };
 		AFAEBDAA19610BEA00B7FB51 /* Users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Users.png; sourceTree = "<group>"; };
 		AFAEBDB919611AD900B7FB51 /* map.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = map.css; sourceTree = "<group>"; };
+		AFB5C6EA19988CA6005D3727 /* shot_archiveWithMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_archiveWithMap.png; sourceTree = "<group>"; };
 		AFB95D4618FFB61E00853263 /* AMMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMainWindowController.h; sourceTree = "<group>"; };
 		AFB95D4718FFB61E00853263 /* AMMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMainWindowController.m; sourceTree = "<group>"; };
 		AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCMessageViewController.h; sourceTree = "<group>"; };
@@ -834,6 +836,7 @@
 		AFDA79A7194586660002873B /* panelshot */ = {
 			isa = PBXGroup;
 			children = (
+				AFB5C6EA19988CA6005D3727 /* shot_archiveWithMap.png */,
 				AF1D228019985ED600CB6665 /* shot_staticGroup.png */,
 				AFF9BE7B19945A5F00B137BC /* shot_audioMixing2.png */,
 				AF53F606199320BA0003DDC4 /* shot_audioMixing.png */,
@@ -1022,6 +1025,7 @@
 				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
+				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,

@@ -269,11 +269,15 @@
     [self.window setFrame:NSMakeRect(10, 40, mainScreen.frame.size.width - 80, mainScreen.frame.size.height - 80) display:YES];
     NSSize windowSize = [self.window.contentView frame].size;
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+
     scrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
             0,
             windowSize.width - UI_leftSidebarWidth,
             windowSize.height - UI_topbarHeight- 20);
 
+    [scrollView setHorizontalLineScroll:100];
+    [scrollView  setNeedsDisplay:YES];
+   
 
     _containerView = [AMBox hbox];
     _containerView.frame = scrollView.bounds;
@@ -595,7 +599,7 @@
         panelViewController = [self loadNetworkToolsPanel:panelId relatedView:relatedView];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Map]) {
-        //panelViewController = [self loadMapPanel:panelId relatedView:relatedView];
+        panelViewController = [self loadMapPanel:panelId relatedView:relatedView];
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Mixing]) {
         panelViewController = [self loadMixingPanel:panelId relatedView:relatedView];

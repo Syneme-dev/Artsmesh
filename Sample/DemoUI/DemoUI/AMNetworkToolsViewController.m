@@ -33,6 +33,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.pingButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.tracerouteButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton toColor:UI_Color_blue];
@@ -48,6 +49,16 @@
         selector:@selector(userGroupsChanged:)
         name: AM_LIVE_GROUP_CHANDED
         object:nil];
+}
+
+-(void)registerTabButtons
+{
+    super.tabs=self.tabs;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.pingButton];
+    [self.tabButtons addObject:self.tracerouteButton];
+    [self.tabButtons addObject:self.iperfButton];
+    self.showingTabsCount=3;
 }
 
 - (void)dealloc

@@ -21,16 +21,16 @@
                     <rect key="frame" x="5" y="8" width="14" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="14" id="PcG-cn-1nK"/>
-                        <constraint firstAttribute="width" constant="14" id="oQ0-By-Wmr"/>
+                        <constraint firstAttribute="height" constant="14" id="UKv-G2-xbi"/>
+                        <constraint firstAttribute="width" constant="14" id="ttX-IX-KbN"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="rCm-uE-fil"/>
                 </imageView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="h1i-Kc-GOv" customClass="AMFoundryFontView">
                     <rect key="frame" x="12" y="4" width="214" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="C3e-Bz-RAA"/>
+                        <constraint firstAttribute="height" constant="20" id="XLa-gQ-aG5"/>
                     </constraints>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="yhe-VV-cab">
                         <font key="font" metaFont="system"/>
@@ -42,8 +42,8 @@
                     <rect key="frame" x="250" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="3HA-Uz-xFj"/>
-                        <constraint firstAttribute="height" constant="20" id="GhZ-4v-vGn"/>
+                        <constraint firstAttribute="height" constant="20" id="2bD-CR-znY"/>
+                        <constraint firstAttribute="width" constant="20" id="MgM-5u-C99"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="VHp-Dh-JJ8">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -57,8 +57,8 @@
                     <rect key="frame" x="273" y="5" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="CAq-6e-RPA"/>
-                        <constraint firstAttribute="width" constant="20" id="MpY-Vx-vkw"/>
+                        <constraint firstAttribute="height" constant="20" id="IPI-eK-Xcp"/>
+                        <constraint firstAttribute="width" constant="20" id="LCC-ua-xWm"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="usergroup_info" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="caj-Xp-QJ2">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -70,15 +70,19 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="xb8-GE-aqU" secondAttribute="bottom" constant="5" id="0M2-hM-HCJ"/>
-                <constraint firstItem="h1i-Kc-GOv" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="4" id="4SA-2c-F3X"/>
-                <constraint firstAttribute="trailing" secondItem="WMq-Cl-l5K" secondAttribute="trailing" constant="7" id="6Hy-eZ-O3H"/>
-                <constraint firstItem="h1i-Kc-GOv" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="14" id="Gjx-Ae-UTO"/>
-                <constraint firstItem="WMq-Cl-l5K" firstAttribute="leading" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="JdV-5t-Dgx"/>
-                <constraint firstAttribute="bottom" secondItem="WMq-Cl-l5K" secondAttribute="bottom" constant="5" id="fIp-Xf-rnJ"/>
-                <constraint firstItem="xb8-GE-aqU" firstAttribute="leading" secondItem="h1i-Kc-GOv" secondAttribute="trailing" constant="30" id="lAz-M7-bmN"/>
-                <constraint firstItem="w62-8T-FVQ" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="5" id="oks-dF-FS3"/>
-                <constraint firstAttribute="bottom" secondItem="w62-8T-FVQ" secondAttribute="bottom" constant="8" id="wCs-QF-EzQ"/>
+                <constraint firstAttribute="bottom" secondItem="xb8-GE-aqU" secondAttribute="bottom" constant="5" id="Cbb-uM-fyX"/>
+                <constraint firstItem="w62-8T-FVQ" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="6" id="GwH-rC-K4B"/>
+                <constraint firstAttribute="trailing" secondItem="h1i-Kc-GOv" secondAttribute="trailing" constant="76" id="QAp-Rp-dhm"/>
+                <constraint firstAttribute="trailing" secondItem="WMq-Cl-l5K" secondAttribute="trailing" constant="7" id="Sio-1y-CiL"/>
+                <constraint firstItem="xb8-GE-aqU" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="3" id="U6v-X9-yIk"/>
+                <constraint firstItem="WMq-Cl-l5K" firstAttribute="leading" secondItem="xb8-GE-aqU" secondAttribute="trailing" constant="3" id="X6f-oW-7T7"/>
+                <constraint firstItem="h1i-Kc-GOv" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="14" id="fZA-no-ZO2"/>
+                <constraint firstAttribute="bottom" secondItem="WMq-Cl-l5K" secondAttribute="bottom" constant="5" id="iZz-t1-9mb"/>
+                <constraint firstItem="h1i-Kc-GOv" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="4" id="iqI-CV-8Cn"/>
+                <constraint firstAttribute="bottom" secondItem="h1i-Kc-GOv" secondAttribute="bottom" constant="4" id="oBl-Ec-Tcu"/>
+                <constraint firstItem="WMq-Cl-l5K" firstAttribute="top" secondItem="T0M-5b-ahP" secondAttribute="top" constant="3" id="pyd-aU-IkS"/>
+                <constraint firstAttribute="bottom" secondItem="w62-8T-FVQ" secondAttribute="bottom" constant="8" id="r38-Ja-y2O"/>
+                <constraint firstItem="w62-8T-FVQ" firstAttribute="leading" secondItem="T0M-5b-ahP" secondAttribute="leading" constant="5" id="x3z-Px-T3N"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="w62-8T-FVQ" id="AE4-zu-Nz2"/>

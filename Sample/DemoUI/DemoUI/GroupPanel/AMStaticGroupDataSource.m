@@ -65,6 +65,11 @@
         }
         
         for(AMStaticGroup* sg in staticGroups){
+            
+            if ([self isMyGroup:sg]) {
+                continue;
+            }
+            
             AMGroupPanelStaticGroupCellController* gc = [self createGroupControllerWithGroup:sg];
             gc.isMyGroup = NO;
             
@@ -94,6 +99,20 @@
     [statusNetControllers addObject:labelController ];
     
     self.staticGroupControllers = statusNetControllers;
+}
+
+-(BOOL)isMyGroup:(AMStaticGroup*)group
+{
+    
+    NSArray* myGroups = [AMCoreData shareInstance].myStaticGroups;
+    for (AMStaticGroup* g in myGroups)
+    {
+        if ([g.g_id integerValue] == [group.g_id integerValue]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 -(AMGroupPanelStaticGroupCellController*)createGroupControllerWithGroup:(AMStaticGroup*)staticGroup

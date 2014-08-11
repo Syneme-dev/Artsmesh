@@ -34,8 +34,10 @@
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
-		269FB84D1998816E00355312 /* AMViewStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMViewStreamingViewController.m */; };
-		269FB84E1998816E00355312 /* AMViewStreamingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */; };
+		269F93671998F024006E19DD /* AMManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F93651998F024006E19DD /* AMManualViewController.m */; };
+		269F93681998F024006E19DD /* AMManualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269F93661998F024006E19DD /* AMManualViewController.xib */; };
+		269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMGPlusViewController.m */; };
+		269FB84E1998816E00355312 /* AMGPlusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269FB84C1998816E00355312 /* AMGPlusViewController.xib */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
@@ -272,9 +274,12 @@
 		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
-		269FB84A1998816E00355312 /* AMViewStreamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewStreamingViewController.h; sourceTree = "<group>"; };
-		269FB84B1998816E00355312 /* AMViewStreamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMViewStreamingViewController.m; sourceTree = "<group>"; };
-		269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMViewStreamingViewController.xib; sourceTree = "<group>"; };
+		269F93641998F024006E19DD /* AMManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMManualViewController.h; sourceTree = "<group>"; };
+		269F93651998F024006E19DD /* AMManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMManualViewController.m; sourceTree = "<group>"; };
+		269F93661998F024006E19DD /* AMManualViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMManualViewController.xib; sourceTree = "<group>"; };
+		269FB84A1998816E00355312 /* AMGPlusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGPlusViewController.h; sourceTree = "<group>"; };
+		269FB84B1998816E00355312 /* AMGPlusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGPlusViewController.m; sourceTree = "<group>"; };
+		269FB84C1998816E00355312 /* AMGPlusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGPlusViewController.xib; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
@@ -642,12 +647,22 @@
 			name = PreferencePanel;
 			sourceTree = "<group>";
 		};
+		269F93631998EFF8006E19DD /* Manual Panel */ = {
+			isa = PBXGroup;
+			children = (
+				269F93641998F024006E19DD /* AMManualViewController.h */,
+				269F93651998F024006E19DD /* AMManualViewController.m */,
+				269F93661998F024006E19DD /* AMManualViewController.xib */,
+			);
+			name = "Manual Panel";
+			sourceTree = "<group>";
+		};
 		269FB8491998814600355312 /* G+Panel */ = {
 			isa = PBXGroup;
 			children = (
-				269FB84A1998816E00355312 /* AMViewStreamingViewController.h */,
-				269FB84B1998816E00355312 /* AMViewStreamingViewController.m */,
-				269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */,
+				269FB84A1998816E00355312 /* AMGPlusViewController.h */,
+				269FB84B1998816E00355312 /* AMGPlusViewController.m */,
+				269FB84C1998816E00355312 /* AMGPlusViewController.xib */,
 			);
 			name = "G+Panel";
 			sourceTree = "<group>";
@@ -722,6 +737,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* G+Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
 				268DA743198B87A200F86EBB /* TimerPanel */,
@@ -1020,7 +1036,7 @@
 				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
-				269FB84E1998816E00355312 /* AMViewStreamingViewController.xib in Resources */,
+				269FB84E1998816E00355312 /* AMGPlusViewController.xib in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				26136C57196FB5B300D033BF /* AMStaticGroupDetailsViewController.xib in Resources */,
 				D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */,
@@ -1062,6 +1078,7 @@
 				AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */,
 				AFAEBDB419610BEA00B7FB51 /* RepliesPost.png in Resources */,
 				AFD7575B195D048E0057976D /* shot_mixing.png in Resources */,
+				269F93681998F024006E19DD /* AMManualViewController.xib in Resources */,
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
@@ -1143,7 +1160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				269FB84D1998816E00355312 /* AMViewStreamingViewController.m in Sources */,
+				269F93671998F024006E19DD /* AMManualViewController.m in Sources */,
+				269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,

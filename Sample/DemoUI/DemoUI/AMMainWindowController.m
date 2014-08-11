@@ -32,6 +32,8 @@
 #import "AMTimerViewController.h"
 #import "AMMusicScoreViewController.h"
 #import "AMOSCMessageViewController.h"
+#import "AMGPlusViewController.h"
+#import "AMManualViewController.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -59,6 +61,9 @@
 #define UI_Panel_Key_Timer @"TIMER_PANEL"
 #define UI_Panel_Key_MusicScore @"MUSICSCORE_PANEL"
 #define UI_Panel_Key_MainOutput @"MAINOUTPUT_PANEL"
+
+#define UI_Panel_Key_GPlus @"GPLUS_PANEL"
+#define UI_Panel_Key_Manual @"MANUAL_PANEL"
 
 @interface AMMainWindowController ()
 
@@ -530,6 +535,33 @@
     [self fillPanel:panelViewController content:chatViewController];
     return panelViewController;
 }
+
+- (AMPanelViewController *)loadGPlusPanel:(NSString *)panelId relatedView:(NSView*)view {
+    float panelWidth = UI_defaultPanelWidth;
+    float panelHeight = 340.0f;
+    
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"G+"
+                                                             width:panelWidth height:panelHeight relatedView:view];
+    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
+    panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);
+    AMGPlusViewController *gPlusViewController = [[AMGPlusViewController alloc] initWithNibName:@"AMGPlusViewController" bundle:nil];
+    [self fillPanel:panelViewController content:gPlusViewController];
+    return panelViewController;
+}
+
+- (AMPanelViewController *)loadManualPanel:(NSString *)panelId relatedView:(NSView*)view {
+    float panelWidth = UI_defaultPanelWidth*2;
+    float panelHeight = UI_defaultPanelHeight;
+    
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MANAUAL"
+                                                             width:panelWidth height:panelHeight relatedView:view];
+    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
+    panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);
+    AMManualViewController *manualViewController = [[AMManualViewController alloc] initWithNibName:@"AMManualViewController" bundle:nil];
+    [self fillPanel:panelViewController content:manualViewController];
+    return panelViewController;
+}
+
 - (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
                                                    withTitle:(NSString *)title
                                                 relatedView:(NSView*)view{
@@ -618,6 +650,14 @@
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Timer]) {
         panelViewController = [self loadTimerPanel:panelId relatedView:relatedView];
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_GPlus]) {
+        panelViewController = [self loadGPlusPanel:panelId relatedView:relatedView];
+        NSLog(@"UI_Panel_Key_GPlus");
+    }
+    else if ([panelType isEqualToString:UI_Panel_Key_Manual]) {
+        panelViewController = [self loadManualPanel:panelId relatedView:relatedView];
+        NSLog(@"UI_Panel_Key_Manual");
     }
     else {
         //TODO:check whether need to load the panel having different panelType.

@@ -1,5 +1,5 @@
 //
-//  AMViewStreamingViewController.h
+//  AMGPlusViewController.h
 //  DemoUI
 //
 //  Created by Wei Wang on 8/11/14.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMViewStreamingViewController : NSViewController
+@interface AMGPlusViewController : NSViewController
 
 @end

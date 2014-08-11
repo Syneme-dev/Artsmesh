@@ -390,7 +390,10 @@
 
 -(void)updateMyself
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
     [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
+    });
+    
     
     if([[AMMesher sharedAMMesher] mesherState] < kMesherStarted  ||
        [[AMMesher sharedAMMesher] mesherState] >= kMesherStopping){

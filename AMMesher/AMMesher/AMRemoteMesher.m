@@ -81,7 +81,10 @@
 
 -(void)registerGroup
 {
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
+    });
+    
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -120,7 +123,9 @@
 
 -(void)registerSelf
 {
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
+    });
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.isOnline = YES;
@@ -152,7 +157,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
-                //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
+                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
                 //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
             });
             
@@ -172,7 +177,9 @@
         return;
     }
     
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
+    });
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSDictionary* dict = [mySelf toDict];
@@ -211,8 +218,10 @@
         return;
     }
     
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
+    });
+
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
     
@@ -258,7 +267,9 @@
     }
     
     [AMCoreData shareInstance].remoteLiveGroups = nil;
-    [[AMCoreData shareInstance]broadcastChanges: AM_LIVE_GROUP_CHANDED];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[AMCoreData shareInstance]broadcastChanges: AM_LIVE_GROUP_CHANDED];
+    });
 }
 
 -(void)unregisterSelf{
@@ -309,7 +320,9 @@
             [AMCoreData shareInstance].mergedGroupId = toGroupId;
         }
         
-        [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+        });
     };
     
     [_httpRequestQueue addOperation:req];

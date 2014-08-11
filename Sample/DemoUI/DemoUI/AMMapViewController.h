@@ -7,11 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "AMTabPanelViewController.h"
 #import <WebKit/WebKit.h>
+
+#import <UIFramework/AMBlueButton.h>
 #import <WebKit/WebFrameLoadDelegate.h>
 
-@interface AMMapViewController : NSViewController
+@interface AMMapViewController : AMTabPanelViewController
 @property (strong) IBOutlet WebView *webView;
+@property (strong) IBOutlet NSTabView *tabs;
+@property (strong) IBOutlet AMBlueButton *staticTab;
+- (IBAction)onStaticTabClick:(id)sender;
+@property (strong) IBOutlet AMBlueButton *liveTab;
+- (IBAction)liveTabClick:(id)sender;
 
 @end

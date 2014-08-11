@@ -32,12 +32,22 @@
     return self;
 }
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self.webView setFrameLoadDelegate:self];
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];
     [self.webView setDrawsBackground:NO];
     [self loadPage];
 
+}
+
+-(void)registerTabButtons{
+    super.tabs=self.tabs;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.liveTab];
+    [self.tabButtons addObject:self.staticTab];
+    self.showingTabsCount=2;
+    
 }
 
 
@@ -113,4 +123,11 @@
 
 
 
+- (IBAction)onStaticTabClick:(id)sender {
+    [self.tabs selectTabViewItemAtIndex:1];
+
+}
+- (IBAction)liveTabClick:(id)sender {
+    [self.tabs selectTabViewItemAtIndex:0];
+}
 @end

@@ -7,6 +7,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMapViewController">
             <connections>
+                <outlet property="liveTab" destination="jAs-Rs-5oa" id="pJm-Yf-nnb"/>
+                <outlet property="staticTab" destination="Mye-Nu-lsW" id="WHL-bG-9hU"/>
+                <outlet property="tabs" destination="nKY-XV-9cq" id="7As-kA-IVC"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="webView" destination="Guc-Yk-vYr" id="oSy-Of-xeC"/>
             </connections>
@@ -17,20 +20,97 @@
             <rect key="frame" x="0.0" y="0.0" width="1101" height="594"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <webView translatesAutoresizingMaskIntoConstraints="NO" id="Guc-Yk-vYr">
-                    <rect key="frame" x="0.0" y="40" width="1101" height="533"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
-                        <nil key="identifier"/>
-                    </webPreferences>
-                </webView>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Mye-Nu-lsW" userLabel="staticTabButton" customClass="AMBlueButton">
+                    <rect key="frame" x="1051" y="577" width="40" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="IOS-bT-2LI"/>
+                        <constraint firstAttribute="width" constant="40" id="lB5-uy-QRf"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="STATIC" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onStaticTabClick:" target="-2" id="GU9-iG-B0N"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="jAs-Rs-5oa" userLabel="liveTabButton" customClass="AMBlueButton">
+                    <rect key="frame" x="996" y="577" width="40" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="jiV-f1-Gmm"/>
+                        <constraint firstAttribute="height" constant="13" id="p6j-U6-u3F"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="LIVE" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="oIu-wk-qIa">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="liveTabClick:" target="-2" id="NhP-r3-Pcz"/>
+                    </connections>
+                </button>
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="nKY-XV-9cq">
+                    <rect key="frame" x="0.0" y="21" width="1101" height="552"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="Tab" identifier="1" id="Wva-Sa-TJf">
+                            <view key="view" id="UVM-E0-eXY">
+                                <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="Guc-Yk-vYr">
+                                        <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                            <nil key="identifier"/>
+                                        </webPreferences>
+                                    </webView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Guc-Yk-vYr" secondAttribute="trailing" id="0Bz-Ok-O4c"/>
+                                    <constraint firstItem="Guc-Yk-vYr" firstAttribute="leading" secondItem="UVM-E0-eXY" secondAttribute="leading" id="Viy-d1-8VD"/>
+                                    <constraint firstAttribute="bottom" secondItem="Guc-Yk-vYr" secondAttribute="bottom" id="gB2-Ty-JoL"/>
+                                    <constraint firstItem="Guc-Yk-vYr" firstAttribute="top" secondItem="UVM-E0-eXY" secondAttribute="top" id="jjt-hH-wqd"/>
+                                </constraints>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="View" identifier="2" id="IVm-qE-lNG">
+                            <view key="view" id="uUj-3Q-IYJ">
+                                <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fcn-UN-fD2">
+                                        <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_staticGroup" id="s48-fK-PzX"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Fcn-UN-fD2" secondAttribute="bottom" id="02T-K3-gBy"/>
+                                    <constraint firstItem="Fcn-UN-fD2" firstAttribute="top" secondItem="uUj-3Q-IYJ" secondAttribute="top" id="0sD-WL-VOA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fcn-UN-fD2" secondAttribute="trailing" id="MNe-2K-0RI"/>
+                                    <constraint firstItem="Fcn-UN-fD2" firstAttribute="leading" secondItem="uUj-3Q-IYJ" secondAttribute="leading" id="ZkU-RU-8ov"/>
+                                </constraints>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
             </subviews>
             <constraints>
-                <constraint firstItem="Guc-Yk-vYr" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="2Sv-4J-yOg"/>
-                <constraint firstItem="Guc-Yk-vYr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="9I4-TP-VG9"/>
-                <constraint firstAttribute="trailing" secondItem="Guc-Yk-vYr" secondAttribute="trailing" id="XFi-Ea-55h"/>
-                <constraint firstAttribute="bottom" secondItem="Guc-Yk-vYr" secondAttribute="bottom" constant="40" id="clk-4u-Qa3"/>
+                <constraint firstItem="Mye-Nu-lsW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="Lr8-xY-0Ls"/>
+                <constraint firstItem="Mye-Nu-lsW" firstAttribute="leading" secondItem="jAs-Rs-5oa" secondAttribute="trailing" constant="15" id="Mma-kl-OeH"/>
+                <constraint firstAttribute="bottom" secondItem="nKY-XV-9cq" secondAttribute="bottom" constant="21" id="N4m-Aw-iQd"/>
+                <constraint firstAttribute="trailing" secondItem="Mye-Nu-lsW" secondAttribute="trailing" constant="10" id="Na7-wY-eXl"/>
+                <constraint firstItem="jAs-Rs-5oa" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="R5Y-73-L1P"/>
+                <constraint firstAttribute="trailing" secondItem="nKY-XV-9cq" secondAttribute="trailing" id="bxU-I6-XCG"/>
+                <constraint firstItem="nKY-XV-9cq" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="fao-SX-gbC"/>
+                <constraint firstItem="nKY-XV-9cq" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="u6l-Au-xR0"/>
             </constraints>
         </customView>
     </objects>
+    <resources>
+        <image name="shot_staticGroup" width="942" height="835"/>
+    </resources>
 </document>

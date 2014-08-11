@@ -46,6 +46,7 @@
 
 -(void) awakeFromNib
 {
+    [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.staticGroupTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.liveGroupTab toColor:UI_Color_blue];
     
@@ -70,6 +71,15 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+}
+
+-(void)registerTabButtons{
+    super.tabs=self.tabs;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.liveGroupTab];
+    [self.tabButtons addObject:self.staticGroupTab];
+    self.showingTabsCount=2;
+    
 }
 
 -(void)dealloc{

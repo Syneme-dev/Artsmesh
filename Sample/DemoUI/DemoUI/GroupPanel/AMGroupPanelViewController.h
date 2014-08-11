@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTabPanelViewController.h"
 
-@interface AMGroupPanelViewController : NSViewController
+@interface AMGroupPanelViewController : AMTabPanelViewController
 
 @end

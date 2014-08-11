@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTabPanelViewController.h"
 
-@interface AMNetworkToolsViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@interface AMNetworkToolsViewController : AMTabPanelViewController<NSTableViewDelegate, NSTableViewDataSource>
 
 @property (weak) IBOutlet NSButton *pingButton;
 @property (weak) IBOutlet NSButton *tracerouteButton;

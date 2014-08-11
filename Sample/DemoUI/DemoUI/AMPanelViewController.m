@@ -78,6 +78,8 @@
         
     }
     [self.view removeFromSuperview];
+    if (_floatingWindow)
+        _floatingWindow = nil;
 //    [self.view setHidden:YES];
     AMAppDelegate *appDelegate=[NSApp delegate];
     NSString *sideItemId=[[self.panelId mutableCopy]stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];

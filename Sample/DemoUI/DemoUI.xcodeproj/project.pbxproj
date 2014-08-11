@@ -33,6 +33,7 @@
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
+		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		269FB84D1998816E00355312 /* AMViewStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMViewStreamingViewController.m */; };
 		269FB84E1998816E00355312 /* AMViewStreamingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269FB84C1998816E00355312 /* AMViewStreamingViewController.xib */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
@@ -198,6 +199,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */,
 				AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */,
 				AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */,
 				AF4542A019553C6C00CCD862 /* AMStatusNet.framework in CopyFiles */,

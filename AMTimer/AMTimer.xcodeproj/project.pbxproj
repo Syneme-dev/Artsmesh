@@ -381,6 +381,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMTimer/AMTimer-Prefix.pch";
 				INFOPLIST_FILE = "AMTimer/AMTimer-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -396,6 +397,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMTimer/AMTimer-Prefix.pch";
 				INFOPLIST_FILE = "AMTimer/AMTimer-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -460,6 +462,7 @@
 				268DA7B8198B918A00F86EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		268DA7B9198B918A00F86EBB /* Build configuration list for PBXNativeTarget "AMTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +471,7 @@
 				268DA7BB198B918A00F86EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

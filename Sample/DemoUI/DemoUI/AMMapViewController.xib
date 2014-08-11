@@ -84,7 +84,7 @@
                                     <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fcn-UN-fD2">
                                         <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_visual" id="s48-fK-PzX"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_staticGroup" id="s48-fK-PzX"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -111,6 +111,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="shot_visual" width="996" height="885"/>
+        <image name="shot_staticGroup" width="942" height="835"/>
     </resources>
 </document>

@@ -49,6 +49,7 @@
 		37C23190187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C23198187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23196187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2319A187A8FFD00554AFD /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23199187A8FFD00554AFD /* DemoUITests.m */; };
+		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
@@ -294,6 +295,7 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
 		AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMouseOverButtonView.m; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 		AFDA79A7194586660002873B /* panelshot */ = {
 			isa = PBXGroup;
 			children = (
+				AF1D228019985ED600CB6665 /* shot_staticGroup.png */,
 				AFF9BE7B19945A5F00B137BC /* shot_audioMixing2.png */,
 				AF53F606199320BA0003DDC4 /* shot_audioMixing.png */,
 				AF2890DA198A36BC00D05174 /* shot_osc.png */,
@@ -1014,6 +1017,7 @@
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
+				AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */,
 				CEC2FC5A196588FD00AFD309 /* AMGroupPanelLabelCellController.xib in Resources */,
 				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,

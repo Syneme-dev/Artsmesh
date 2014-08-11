@@ -38,6 +38,7 @@
 
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];
@@ -66,6 +67,15 @@
 
 - (IBAction)onJackServerTabClick:(id)sender {
     [self.tabs selectTabViewItemWithIdentifier:@"2"];
+}
+
+-(void)registerTabButtons
+{
+    super.tabs=self.tabs;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.generalTabButton];
+    [self.tabButtons addObject:self.postStatusMessageButton];
+    self.showingTabsCount=2;
 }
 
 

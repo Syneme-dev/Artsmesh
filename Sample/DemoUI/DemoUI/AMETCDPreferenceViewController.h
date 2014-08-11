@@ -9,9 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <UIFramework/AMCheckBoxView.h>
 #import "UIFramework/AMPopUpView.h"
+#import "AMTabPanelViewController.h"
 
 
-@interface AMETCDPreferenceViewController : NSViewController
+@interface AMETCDPreferenceViewController : AMTabPanelViewController
 @property (retain) IBOutlet NSTabView *tabs;
 
 @property  IBOutlet NSView *progressView;

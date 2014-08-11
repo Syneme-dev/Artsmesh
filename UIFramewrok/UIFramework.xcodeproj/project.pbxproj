@@ -51,6 +51,8 @@
 		CE883165192C44B900DA17CE /* AMBox.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883161192C44B800DA17CE /* AMBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE883166192C44B900DA17CE /* AMBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883162192C44B800DA17CE /* AMBox.m */; };
 		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC27F091993877E0023163F /* AMTextFieldCell.h */; };
+		CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC27F0A1993877E0023163F /* AMTextFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		CE883161192C44B800DA17CE /* AMBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBox.h; sourceTree = "<group>"; };
 		CE883162192C44B800DA17CE /* AMBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBox.m; sourceTree = "<group>"; };
 		CE883167192C52EA00DA17CE /* AMPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelView.h; sourceTree = "<group>"; };
+		CEC27F091993877E0023163F /* AMTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldCell.h; sourceTree = "<group>"; };
+		CEC27F0A1993877E0023163F /* AMTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 				CE883162192C44B800DA17CE /* AMBox.m */,
 				CE25C50D19775960003A8B39 /* AMBorderView.h */,
 				CE25C50E19775960003A8B39 /* AMBorderView.m */,
+				CEC27F091993877E0023163F /* AMTextFieldCell.h */,
+				CEC27F0A1993877E0023163F /* AMTextFieldCell.m */,
 				AF82E352190CA9680083487C /* AMFoundryFontView.h */,
 				AF82E353190CA9680083487C /* AMFoundryFontView.m */,
 				26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */,
@@ -281,6 +287,7 @@
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
 				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
+				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
@@ -396,6 +403,7 @@
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
+				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,
 				AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */,
 				AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */,

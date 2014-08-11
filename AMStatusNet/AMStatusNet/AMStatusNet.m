@@ -287,14 +287,50 @@
     return NO;
 }
 
--(BOOL)followGroup:(NSString*)groupName
+-(BOOL)createGroup:(NSString*)groupName account:(NSString*)account password:(NSString*)password
 {
-    return YES;
-}
+    if (self.homePage == nil || [self.homePage isEqualToString:@""]){
+        
+        NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+        self.homePage = [defaults stringForKey:Preference_Key_StatusNet_URL];
+        
+        if (self.homePage == nil || [self.homePage isEqualToString:@""]){
+            return NO;
+        }
+    }
+    
+    AMHttpSyncRequest* req = [[AMHttpSyncRequest alloc] init];
+    req.baseURL = self.homePage;
+    req.requestPath = @"/api/statusnet/groups/create.json";
+    req.httpMethod = @"POST";
+    req.username = account;
+    req.password = password;
+    req.formData = @{@"nickname": groupName};
+    
+    NSData* response = [req sendRequest];
+    if (response == nil) {
+        return NO;
+    }
+    
+    NSError *err = nil;
+    id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
+    if(err != nil){
+        NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
+        NSLog(@"%@", errInfo);
+        return NO;
+    }
+    
+    if (![objects isKindOfClass:[NSDictionary class]]) {
+        return NO;
+    }
+    
+    NSDictionary* myGroup = (NSDictionary* )objects;
+    if([[myGroup objectForKey:@"nickname"] isEqualToString:groupName])
+    {
+        return YES;
+    }
 
--(BOOL)createGroup:(NSString*)groupName
-{
-    return YES;
+    return NO;
 }
 
 
@@ -339,12 +375,13 @@
         if ([objects isKindOfClass:[NSDictionary class]]) {
             NSDictionary* dict = (NSDictionary*)objects;
             NSString *imageUrlString = [dict valueForKey:@"profile_image_url"];
-            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-           // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
-            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
-            if (requestCallback) {
-                requestCallback(avatarImage, nil);
+            if ([imageUrlString isNotEqualTo:[NSNull null]]) {
+                NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+                NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+                if (requestCallback) {
+                    requestCallback(avatarImage, nil);
+                }
             }
         }
     };
@@ -392,12 +429,14 @@
         if ([objects isKindOfClass:[NSDictionary class]]) {
             NSDictionary* dict = (NSDictionary*)objects;
             NSString *imageUrlString = [dict valueForKey:@"original_logo"];
-            NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            // NSData *imageData = [imageUrl resourceDataUsingCache:NO];
-            NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
-            NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
-            if (requestCallback) {
-                requestCallback(avatarImage, nil);
+            
+            if ([imageUrlString isNotEqualTo:[NSNull null]]) {
+                NSURL* imageUrl=[NSURL URLWithString:[imageUrlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+                NSImage *avatarImage = [[NSImage alloc] initWithData:imageData];
+                if (requestCallback) {
+                    requestCallback(avatarImage, nil);
+                }
             }
         }
     };

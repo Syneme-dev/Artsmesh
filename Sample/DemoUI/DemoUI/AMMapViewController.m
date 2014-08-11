@@ -32,6 +32,7 @@
     return self;
 }
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self.webView setFrameLoadDelegate:self];
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];

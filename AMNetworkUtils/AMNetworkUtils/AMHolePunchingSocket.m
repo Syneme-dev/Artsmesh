@@ -25,6 +25,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
     
     NSTimer*  _punchingTimer;
     GCDAsyncUdpSocket* _socket;
+    NSArray* _hostIps;
 }
 
 - (instancetype)initWithServer:(NSString*)serverIp
@@ -38,6 +39,9 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
         self.timeInterval = 5;
         self.localPeers = [[NSMutableArray alloc] init];
         self.remotePeers = [[NSMutableArray alloc] init];
+        
+        NSHost* serverHost = [NSHost hostWithName:serverIp];
+        _hostIps = [serverHost addresses];
     }
     
     return self;
@@ -161,8 +165,8 @@ withFilterContext:(id)filterContext
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
-    if ([fromHost isEqualToString:_serverIp]){
-        
+    
+    if([_hostIps containsObject:fromHost]){
         if ([self.delegate respondsToSelector:@selector(socket:didReceiveDataFromServer:)]) {
             [self.delegate socket:self didReceiveDataFromServer:data];
         }

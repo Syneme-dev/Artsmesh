@@ -172,11 +172,11 @@
             }
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
             [AMCoreData shareInstance].myStaticGroups = myStaticGroups;
             [[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
             [[AMCoreData shareInstance] broadcastChanges:AM_MYSTATIC_GROUPS_CHANGED];
-        });
+       // });
     };
     
     [_httpRequestQueue addOperation:req];

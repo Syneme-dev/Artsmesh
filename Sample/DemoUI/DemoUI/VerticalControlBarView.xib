@@ -240,7 +240,7 @@
                         <button identifier="GPLUS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LKX-kJ-TAm" userLabel="G+">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="square" title="G+" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="3qe-6s-Vmx">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_GPlus" imagePosition="only" alignment="center" alternateImage="SideBar_GPlus_h" imageScaling="proportionallyDown" inset="2" id="3qe-6s-Vmx">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -257,7 +257,7 @@
                         <button identifier="MANUAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-nX-q2e" userLabel="?">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="square" title="?" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="Il6-9d-ClP">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_Manual" imagePosition="only" alignment="center" alternateImage="SideBar_Manual_h" imageScaling="proportionallyDown" inset="2" id="Il6-9d-ClP">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -271,6 +271,10 @@
         </customView>
     </objects>
     <resources>
+        <image name="SideBar_GPlus" width="40" height="40"/>
+        <image name="SideBar_GPlus_h" width="40" height="40"/>
+        <image name="SideBar_Manual" width="40" height="40"/>
+        <image name="SideBar_Manual_h" width="40" height="40"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
         <image name="SideBar_chat" width="40" height="40"/>

@@ -106,7 +106,7 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"] ||
-            [responseStr isEqualToString:@"group aleady exist"]) {
+            [responseStr isEqualToString:@"group alread exist"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self registerSelf];
             });

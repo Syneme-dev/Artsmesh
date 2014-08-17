@@ -15,6 +15,9 @@
 #import "AMGroupPanelTableCellView.h"
 
 @implementation AMLiveGroupDataSource
+{
+     NSMutableArray* _expanededNodes;
+}
 
 -(void)doubleClickOutlineView:(id)sender
 {
@@ -42,7 +45,9 @@
     AMGroupPanelGroupCellController* localGroupController = [[AMGroupPanelGroupCellController alloc] initWithNibName:@"AMGroupPanelGroupCellController" bundle:nil];
     
     localGroupController.group = localGroup;
-    localGroupController.childrenController = [[NSMutableArray alloc] init];
+    localGroupController.nodeItemIdentifier = @"localGroupController";
+    localGroupController.isExpanded = YES;
+    localGroupController.childrenNodeItem = [[NSMutableArray alloc] init];
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
@@ -52,7 +57,10 @@
         localUserController.group = localGroup;
         localUserController.user = user;
         localUserController.localUser = YES;
-        [localGroupController.childrenController addObject:localUserController];
+        localUserController.nodeItemIdentifier = user.userid;
+        localUserController.isExpanded = NO;
+        
+        [localGroupController.childrenNodeItem addObject:localUserController];
     }
     
     [userGroups addObject:localGroupController];
@@ -63,13 +71,18 @@
     }
     
     AMGroupPanelLabelCellController* labelController = [[AMGroupPanelLabelCellController alloc] initWithNibName:@"AMGroupPanelLabelCellController" bundle:nil];
-    labelController.childrenController = [[NSMutableArray alloc] init];
+    labelController.childrenNodeItem = [[NSMutableArray alloc] init];
+    labelController.nodeItemIdentifier = @"AMLabelController";
+    labelController.isExpanded = YES;
+    
     [userGroups addObject:labelController];
     
     for (AMLiveGroup* remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         AMGroupPanelGroupCellController* remoteGroupController = [[AMGroupPanelGroupCellController alloc] initWithNibName:@"AMGroupPanelGroupCellController" bundle:nil];
         remoteGroupController.group = remoteGroup;
-        remoteGroupController.childrenController = [[NSMutableArray alloc] init];
+        remoteGroupController.nodeItemIdentifier = remoteGroup.groupId;
+        remoteGroupController.isExpanded = [self isControllerExpanded:remoteGroup.groupId];
+        remoteGroupController.childrenNodeItem = [[NSMutableArray alloc] init];
         
         for (AMLiveUser* user in remoteGroup.users){
             AMGroupPanelUserCellController* remoteUserController = [[AMGroupPanelUserCellController alloc] initWithNibName:@"AMGroupPanelUserCellController" bundle:nil];
@@ -77,14 +90,36 @@
             remoteUserController.group = remoteGroup;
             remoteUserController.user = user;
             remoteUserController.localUser = NO;
+            remoteUserController.nodeItemIdentifier = user.userid;
+            remoteUserController.isExpanded = NO;
             
-            [remoteGroupController.childrenController addObject:remoteUserController];
+            [remoteGroupController.childrenNodeItem addObject:remoteUserController];
         }
         
-        [labelController.childrenController addObject:remoteGroupController];
+        [labelController.childrenNodeItem addObject:remoteGroupController];
     }
     
     self.liveGroups = userGroups;
+}
+
+-(NSMutableArray*)expandedNodes
+{
+    if (_expanededNodes == nil) {
+        _expanededNodes = [[NSMutableArray alloc] init];
+    }
+    
+    return _expanededNodes;
+}
+
+-(BOOL)isControllerExpanded:(NSString*)gId
+{
+    for (NSString* expanedId in _expanededNodes) {
+        if ([expanedId isEqualTo:gId]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
@@ -93,7 +128,7 @@
         return [self.liveGroups count];
     }else if([item isKindOfClass:[AMGroupPanelTableCellController class]]){
         AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
-        return [tableCellController.childrenController count];
+        return [tableCellController.childrenNodeItem count];
     }else{
         return 0;
     }
@@ -110,13 +145,31 @@
     if (item != nil) {
         if ([item isKindOfClass:[AMGroupPanelTableCellController class]]) {
             AMGroupPanelTableCellController* tableCellController = (AMGroupPanelTableCellController*)item;
-            return [tableCellController.childrenController objectAtIndex:index];
+            return [tableCellController.childrenNodeItem objectAtIndex:index];
         }
     }else if ([self.liveGroups count] != 0){
         return self.liveGroups[index];
     }
     
     return nil;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+     AMGroupPanelTableCellController* controller = [[notification userInfo]valueForKey:@"NSObject"];
+    if (controller != nil){
+        controller.isExpanded = YES;
+        [[self expandedNodes] addObject:controller.nodeItemIdentifier];
+    }
+}
+
+-(void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+     AMGroupPanelTableCellController* controller = [[notification userInfo]valueForKey:@"NSObject"];
+    if (controller != nil){
+        controller.isExpanded = NO;
+        [[self expandedNodes] removeObject:controller.nodeItemIdentifier];
+    }
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{

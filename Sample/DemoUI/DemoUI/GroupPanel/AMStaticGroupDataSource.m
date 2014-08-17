@@ -16,6 +16,9 @@
 #import "AMGroupPanelStaticLabelController.h"
 
 @implementation AMStaticGroupDataSource
+{
+    NSMutableArray* _expanededNodes;
+}
 
 -(void)doubleClickOutlineView:(id)sender
 {
@@ -35,6 +38,9 @@
 -(void)reloadGroups
 {
     AMGroupPanelStaticLabelController* labelController = [[AMGroupPanelStaticLabelController alloc] initWithNibName:@"AMGroupPanelStaticLabelController" bundle:nil];
+    
+    labelController.nodeItemIdentifier = @"staticLabelController";
+    labelController.isExpanded = YES;
     
     NSMutableArray* groupControllers = [[NSMutableArray alloc] init];
     
@@ -93,12 +99,21 @@
        }
    }
     
-    labelController.childrenController = groupControllers;
+    labelController.childrenNodeItem = groupControllers;
     
     NSMutableArray* statusNetControllers = [[NSMutableArray alloc] init];
     [statusNetControllers addObject:labelController ];
     
     self.staticGroupControllers = statusNetControllers;
+}
+
+-(NSMutableArray*)expandedNodes
+{
+    if (_expanededNodes == nil) {
+        _expanededNodes = [[NSMutableArray alloc] init];
+    }
+    
+    return _expanededNodes;
 }
 
 -(BOOL)isMyGroup:(AMStaticGroup*)group
@@ -121,20 +136,35 @@
     [[AMGroupPanelStaticGroupCellController alloc] initWithNibName:@"AMGroupPanelStaticGroupCellController" bundle:nil];
     
     groupController.staticGroup = staticGroup;
+    groupController.nodeItemIdentifier = staticGroup.g_id;
     groupController.groupUserCount = [staticGroup.users count];
+    groupController.isExpanded = [self isControllerExpanded:staticGroup.g_id];
     
     if([staticGroup users] != nil){
-        groupController.childrenController = [[NSMutableArray alloc] init];
+        groupController.childrenNodeItem = [[NSMutableArray alloc] init];
         for (AMStaticUser* su in [staticGroup users]) {
             AMGroupPanelStaticUserCellController* userController =
             [[AMGroupPanelStaticUserCellController alloc] initWithNibName:@"AMGroupPanelStaticUserCellController" bundle:nil];
             
             userController.staticUser = su;
-            [groupController.childrenController addObject:userController];
+            userController.nodeItemIdentifier = su.u_id;
+            userController.isExpanded = NO;
+            [groupController.childrenNodeItem addObject:userController];
         }
     }
 
     return groupController;
+}
+
+-(BOOL)isControllerExpanded:(NSString*)gId
+{
+    for (NSString* expanedId in _expanededNodes) {
+        if ([expanedId isEqualTo:gId]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 
@@ -143,7 +173,7 @@
     if (item == nil) {
         return  [self.staticGroupControllers count];
     }else{
-        return [[item childrenController] count];
+        return [[item childrenNodeItem] count];
     }
 }
 
@@ -158,10 +188,28 @@
     if (item == nil) {
         return self.staticGroupControllers[index];
     }else{
-        return [item childrenController][index];
+        return [item childrenNodeItem][index];
     }
         
     return nil;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    AMGroupPanelTableCellController* controller = [[notification userInfo]valueForKey:@"NSObject"];
+    if (controller != nil){
+        controller.isExpanded = YES;
+        [[self expandedNodes] addObject:controller.nodeItemIdentifier];
+    }
+}
+
+-(void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+     AMGroupPanelTableCellController* controller = [[notification userInfo]valueForKey:@"NSObject"];
+    if (controller != nil){
+        controller.isExpanded = NO;
+        [[self expandedNodes] removeObject:controller.nodeItemIdentifier];
+    }
 }
 
 

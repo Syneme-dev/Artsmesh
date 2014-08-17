@@ -11,7 +11,9 @@
 
 @interface AMGroupPanelTableCellController : NSViewController
 
-@property NSMutableArray* childrenController;
+@property NSString* nodeItemIdentifier;;
+@property NSMutableArray* childrenNodeItem;
+@property BOOL isExpanded;
 
 -(void)updateUI;
 -(void)setTrackArea;

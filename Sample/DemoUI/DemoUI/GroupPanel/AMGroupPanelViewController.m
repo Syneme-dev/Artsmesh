@@ -263,7 +263,7 @@
 {
     [self.staticGroupDataSource reloadGroups];
     [self.staticGroupOutlineView reloadData];
-    [self.staticGroupOutlineView expandItem:[self.staticGroupOutlineView itemAtRow:0] expandChildren:NO];
+    //[self.staticGroupOutlineView expandItem:[self.staticGroupOutlineView itemAtRow:0] expandChildren:NO];
 }
 
 

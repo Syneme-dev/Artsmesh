@@ -38,6 +38,7 @@
 		269F93681998F024006E19DD /* AMManualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269F93661998F024006E19DD /* AMManualViewController.xib */; };
 		269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMGPlusViewController.m */; };
 		269FB84E1998816E00355312 /* AMGPlusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269FB84C1998816E00355312 /* AMGPlusViewController.xib */; };
+		26AE28CC199DDADC00686E66 /* AMGroupOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE28CB199DDADC00686E66 /* AMGroupOutlineView.m */; };
 		26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */; };
 		26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B4D071191A256200F55CD3 /* AMTextFieldView.m */; };
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
@@ -280,6 +281,8 @@
 		269FB84A1998816E00355312 /* AMGPlusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGPlusViewController.h; sourceTree = "<group>"; };
 		269FB84B1998816E00355312 /* AMGPlusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGPlusViewController.m; sourceTree = "<group>"; };
 		269FB84C1998816E00355312 /* AMGPlusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGPlusViewController.xib; sourceTree = "<group>"; };
+		26AE28CA199DDADC00686E66 /* AMGroupOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupOutlineView.h; sourceTree = "<group>"; };
+		26AE28CB199DDADC00686E66 /* AMGroupOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupOutlineView.m; sourceTree = "<group>"; };
 		26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPopupMenuItem.h; sourceTree = "<group>"; };
 		26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPopupMenuItem.m; sourceTree = "<group>"; };
 		26B4D070191A256200F55CD3 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
@@ -611,6 +614,8 @@
 				266CE252197E406500D8145B /* AMGroupPanelDetailView.m */,
 				266CE254197E41F700D8145B /* AMGroupPanelTableCellView.h */,
 				266CE255197E41F700D8145B /* AMGroupPanelTableCellView.m */,
+				26AE28CA199DDADC00686E66 /* AMGroupOutlineView.h */,
+				26AE28CB199DDADC00686E66 /* AMGroupOutlineView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1181,6 +1186,7 @@
 				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
+				26AE28CC199DDADC00686E66 /* AMGroupOutlineView.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
 				CEC2FC5F196588FD00AFD309 /* AMGroupPanelModel.m in Sources */,

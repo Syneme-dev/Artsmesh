@@ -155,8 +155,8 @@
 
 - (void)loadVersion {
     NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-    [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@.%@", shortVersion, buildVersion]];
+//    NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+    [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@", shortVersion]];
 }
 
 

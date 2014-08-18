@@ -677,7 +677,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="JHd-2A-fFw" userLabel="logo" customClass="BlueBackgroundView">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="JHd-2A-fFw" userLabel="logo">
                         <rect key="frame" x="0.0" y="718" width="160" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -691,7 +691,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf" customClass="AMFoundryFontView">
-                                <rect key="frame" x="125" y="12" width="25" height="17"/>
+                                <rect key="frame" x="117" y="12" width="25" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2.1" id="DZC-sX-GBB">
                                     <font key="font" metaFont="system"/>

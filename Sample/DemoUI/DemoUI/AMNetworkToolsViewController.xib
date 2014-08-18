@@ -160,7 +160,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="298"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" red="0.2196078598" green="0.2196078598" blue="0.2196078598" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <tableViewGridLines key="gridStyleMask" vertical="YES"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
@@ -236,7 +236,7 @@
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                 </textView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.2196078598" green="0.2196078598" blue="0.2196078598" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Ve7-xW-NdK">
                                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
@@ -274,7 +274,7 @@
                                                 <textView editable="NO" selectable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nd1-0G-VZC">
                                                     <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" red="0.21960785984992981" green="0.21960785984992981" blue="0.21960785984992981" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="593" height="298"/>
                                                     <size key="maxSize" width="634" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

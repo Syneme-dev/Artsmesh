@@ -66,7 +66,7 @@
 
 
 - (IBAction)onJackServerTabClick:(id)sender {
-    [self.tabs selectTabViewItemWithIdentifier:@"2"];
+    [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
 
 -(void)registerTabButtons

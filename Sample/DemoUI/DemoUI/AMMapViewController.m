@@ -38,7 +38,7 @@
     [self.webView setUIDelegate:self];
     [self.webView setDrawsBackground:NO];
     [self loadPage];
-
+    [self loadArchivePage];
 }
 
 -(void)registerTabButtons{
@@ -96,6 +96,13 @@
     [NSURLRequest requestWithURL:mapURL]];
 }
 
+- (void)loadArchivePage
+{
+    NSURL *url = [NSURL URLWithString:@"http://artsmesh.io/circle/circle.html"];
+    [self.archiveWebView.mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
+    [self.archiveWebView.mainFrame.frameView.documentView scaleUnitSquareToSize:NSMakeSize(0.8, 0.8)];
+}
+
 -(void)gotoUsersPage{
 //    NSURL *baseURL =
 //    [NSURL URLWithString:
@@ -120,8 +127,6 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
-
-
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

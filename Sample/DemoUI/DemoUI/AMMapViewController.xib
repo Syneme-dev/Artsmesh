@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="5056"/>
@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMapViewController">
             <connections>
+                <outlet property="archiveWebView" destination="aII-go-2Np" id="bSR-pY-OLC"/>
                 <outlet property="liveTab" destination="jAs-Rs-5oa" id="pJm-Yf-nnb"/>
                 <outlet property="staticTab" destination="Mye-Nu-lsW" id="WHL-bG-9hU"/>
                 <outlet property="tabs" destination="nKY-XV-9cq" id="7As-kA-IVC"/>
@@ -81,17 +82,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fcn-UN-fD2">
+                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="aII-go-2Np">
                                         <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_archiveWithMap" id="s48-fK-PzX"/>
-                                    </imageView>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                                    </webView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Fcn-UN-fD2" secondAttribute="bottom" id="02T-K3-gBy"/>
-                                    <constraint firstItem="Fcn-UN-fD2" firstAttribute="top" secondItem="uUj-3Q-IYJ" secondAttribute="top" id="0sD-WL-VOA"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fcn-UN-fD2" secondAttribute="trailing" id="MNe-2K-0RI"/>
-                                    <constraint firstItem="Fcn-UN-fD2" firstAttribute="leading" secondItem="uUj-3Q-IYJ" secondAttribute="leading" id="ZkU-RU-8ov"/>
+                                    <constraint firstItem="aII-go-2Np" firstAttribute="leading" secondItem="uUj-3Q-IYJ" secondAttribute="leading" id="KWR-qr-ARv"/>
+                                    <constraint firstItem="aII-go-2Np" firstAttribute="top" secondItem="uUj-3Q-IYJ" secondAttribute="top" id="Xxf-rp-tHC"/>
+                                    <constraint firstAttribute="bottom" secondItem="aII-go-2Np" secondAttribute="bottom" id="cjA-Yb-Ibt"/>
+                                    <constraint firstAttribute="trailing" secondItem="aII-go-2Np" secondAttribute="trailing" id="dLZ-Tm-ZaP"/>
                                 </constraints>
                             </view>
                         </tabViewItem>
@@ -110,7 +111,4 @@
             </constraints>
         </customView>
     </objects>
-    <resources>
-        <image name="shot_archiveWithMap" width="1346" height="874"/>
-    </resources>
 </document>

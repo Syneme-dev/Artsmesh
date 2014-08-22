@@ -66,6 +66,19 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
     return outputDevices;
 }
 
+
+-(AMAudioDevice*)findDevByName:(NSString*)devName
+{
+    for (AMAudioDevice* dev in _audioDevices) {
+        if ([dev.devName isEqualToString:devName]) {
+            return dev;
+        }
+    }
+    
+    return nil;
+}
+
+
 -(AMAudioDevice*)defaultInputDevice
 {
     AudioDeviceID defaultInputDevId = -1;
@@ -247,7 +260,6 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
     
     return;
 }
-
 
 #pragma mark-
 #pragma private functions

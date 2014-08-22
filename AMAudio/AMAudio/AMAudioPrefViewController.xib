@@ -161,6 +161,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="inputDevChanged:" target="-2" id="GWI-PG-N7h"/>
+                    </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EYn-D6-CDL" userLabel="Output Devices">
                     <rect key="frame" x="162" y="441" width="312" height="26"/>
@@ -176,6 +179,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="outputDevChanged:" target="-2" id="DZ1-cc-MSO"/>
+                    </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-LV-he9">
                     <rect key="frame" x="307" y="410" width="167" height="26"/>

@@ -19,4 +19,6 @@
 
 -(void)loadDevices;
 
+-(AMAudioDevice*)findDevByName:(NSString*)devName;
+
 @end

@@ -14,6 +14,7 @@
 #import <AMCommonTools/AMCommonTools.h>
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
+#import "AMAudio/AMAudio.h"
 
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>

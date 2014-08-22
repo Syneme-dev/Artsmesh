@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMAudioDevice.h"
+#import "AMAudioDeviceManager.h"
 
 @interface AMAudio : NSObject
 

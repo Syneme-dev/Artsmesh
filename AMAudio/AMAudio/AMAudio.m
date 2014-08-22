@@ -14,10 +14,11 @@
     AMAudioPrefViewController* _prefController;
 }
 
--(NSViewController*)getPreferenceUI
+-(NSViewController*)getJackPrefUI
 {
     if (_prefController == nil) {
-        _prefController = [[AMAudioPrefViewController alloc] initWithNibName:@"AMAudioPrefViewController" bundle:nil];
+       NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+        _prefController = [[AMAudioPrefViewController alloc] initWithNibName:@"AMAudioPrefViewController" bundle:myBundle];
     }
     
     return _prefController;

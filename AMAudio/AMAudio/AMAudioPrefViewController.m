@@ -35,12 +35,15 @@
     if (self) {
         // Initialization code here.
         _devManager = [[AMAudioDeviceManager alloc] init];
+        
+        [self fillDriverBox];
     }
     return self;
 }
 
 -(void)fillDriverBox
 {
+    [self.driverBox removeAllItems];
     [self.driverBox addItemsWithTitles:@[@"coreaudio"]];
 }
 

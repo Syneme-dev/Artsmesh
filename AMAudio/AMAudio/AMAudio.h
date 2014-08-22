@@ -12,6 +12,6 @@
 
 @interface AMAudio : NSObject
 
--(NSViewController*)getPreferenceUI;
+-(NSViewController*)getJackPrefUI;
 
 @end

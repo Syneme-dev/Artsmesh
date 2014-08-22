@@ -182,14 +182,12 @@
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sI8-zE-VJW">
                     <rect key="frame" x="162" y="703" width="312" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MAC-eS-S3l" id="wzq-hq-yAO">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="wzq-hq-yAO">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="tYg-1K-ROv">
                             <items>
-                                <menuItem title="Item 1" state="on" id="MAC-eS-S3l"/>
-                                <menuItem title="Item 2" id="nyP-HE-iIN"/>
-                                <menuItem title="Item 3" id="HA0-gq-KFj"/>
+                                <menuItem title="coreaudio" id="MAC-eS-S3l"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

@@ -89,11 +89,45 @@
 
 - (IBAction)inputDevChanged:(NSPopUpButton *)sender
 {
+    NSString* inputDevName = [self.inputDevBox.selectedItem title];
+    AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
+    
+    NSString* outputDevName = [self.outputDevBox.selectedItem title];
+    AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
+    
+    if ([inputDev isAggregateDevice]) {
+        [self.outputDevBox selectItemWithTitle:inputDevName];
+    }else if([outputDev isAggregateDevice]){
+        NSArray* outDevs = [_devManager outputDevices];
+        for (AMAudioDevice* dev in outDevs) {
+            if(![dev isAggregateDevice]){
+                [self.outputDevBox selectItemWithTitle:dev.devName];
+            }
+        }
+    }
+    
     [self deviceSelectionChanged];
 }
 
 - (IBAction)outputDevChanged:(NSPopUpButton *)sender
 {
+    NSString* inputDevName = [self.inputDevBox.selectedItem title];
+    AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
+    
+    NSString* outputDevName = [self.outputDevBox.selectedItem title];
+    AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
+    
+    if ([outputDev isAggregateDevice]) {
+        [self.inputDevBox selectItemWithTitle:outputDevName];
+    }else if([inputDev isAggregateDevice]){
+        NSArray* inDevs = [_devManager inputDevices];
+        for (AMAudioDevice* dev in inDevs) {
+            if(![dev isAggregateDevice]){
+                [self.inputDevBox selectItemWithTitle:dev.devName];
+            }
+        }
+    }
+    
     [self deviceSelectionChanged];
 }
 

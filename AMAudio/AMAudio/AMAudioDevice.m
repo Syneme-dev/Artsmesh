@@ -10,4 +10,13 @@
 
 @implementation AMAudioDevice
 
+-(BOOL)isAggregateDevice
+{
+    if(self.inChannels >0 && self.outChanels > 0){
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end

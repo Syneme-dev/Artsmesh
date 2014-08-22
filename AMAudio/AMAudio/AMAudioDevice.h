@@ -19,4 +19,6 @@
 @property NSMutableArray* sampleRates;
 @property NSMutableArray* bufferSizes;
 
+-(BOOL)isAggregateDevice;
+
 @end

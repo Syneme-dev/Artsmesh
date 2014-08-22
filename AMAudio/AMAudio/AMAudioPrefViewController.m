@@ -36,15 +36,45 @@
         // Initialization code here.
         _devManager = [[AMAudioDeviceManager alloc] init];
         
-        [self fillDriverBox];
     }
+    
     return self;
+}
+
+-(void)awakeFromNib
+{
+     [self loadPrefs];
+}
+
+-(void)loadPrefs
+{
+    [self fillDriverBox];
+    [self fillInputAndOutputDevice];
 }
 
 -(void)fillDriverBox
 {
     [self.driverBox removeAllItems];
-    [self.driverBox addItemsWithTitles:@[@"coreaudio"]];
+    [self.driverBox addItemWithTitle:@"coreaudio"];
 }
+
+-(void)fillInputAndOutputDevice
+{
+    [self.inputDevBox removeAllItems];
+    [self.outputDevBox removeAllItems];
+    
+    NSArray* inputDevices = [_devManager inputDevices];
+    NSArray* outputDevices = [_devManager outputDevices];
+    
+    for(AMAudioDevice* dev in inputDevices){
+        [self.inputDevBox addItemWithTitle:dev.devName];
+    }
+    
+    for (AMAudioDevice* dev in outputDevices) {
+        [self.outputDevBox addItemWithTitle:dev.devName];
+    }
+}
+
+
 
 @end

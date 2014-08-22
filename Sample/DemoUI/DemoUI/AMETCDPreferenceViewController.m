@@ -95,6 +95,8 @@
     _audioViewController = [_audioModule getJackPrefUI];
     if (_audioViewController) {
         [tabView addSubview:_audioViewController.view];
+        NSRect rect = tabView.bounds;
+        [_audioViewController.view setFrame:rect];
     }
 }
 

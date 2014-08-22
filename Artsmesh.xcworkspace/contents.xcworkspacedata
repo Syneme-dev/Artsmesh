@@ -62,6 +62,9 @@
          location = "container:"
          name = "Module">
          <FileRef
+            location = "group:AMAudio/AMAudio.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:AMTimer/AMTimer.xcodeproj">
          </FileRef>
          <FileRef

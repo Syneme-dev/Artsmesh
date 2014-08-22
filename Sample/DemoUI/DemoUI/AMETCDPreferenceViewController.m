@@ -14,6 +14,7 @@
 #import <AMCommonTools/AMCommonTools.h>
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
+#import "AMAudio/AMAudio.h"
 
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
@@ -24,6 +25,8 @@
 @implementation AMETCDPreferenceViewController
 {
     dispatch_queue_t _preference_queue;
+    NSViewController* _audioViewController;
+    AMAudio* _audioModule;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,6 +35,7 @@
     if (self) {
         
         // Initialization code here.
+        _audioModule = [[AMAudio alloc] init];
     }
     return self;
 }
@@ -62,11 +66,43 @@
     self.isTopControlBarCheckBox.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: 13];
     
     self.ipPopUpView.delegate = self;
+    
+    [self loadPrefViews];
+    
+}
+
+
+-(void)loadPrefViews
+{
+    NSArray* tabItems = [self.tabs tabViewItems];
+    
+    for (NSTabViewItem* item in tabItems) {
+        NSView* view = item.view;
+        
+        if ([view.identifier isEqualTo:@"generalTab"]) {
+            ;
+        }else if([view.identifier isEqualTo:@"jackServerTab"]){
+            [self loadJackPref:view];
+        }else if([view.identifier isEqualTo:@"statusNetTab"]){
+            ;
+        }
+    }
+}
+
+
+-(void)loadJackPref:(NSView*)tabView
+{
+    _audioViewController = [_audioModule getJackPrefUI];
+    if (_audioViewController) {
+        [tabView addSubview:_audioViewController.view];
+        NSRect rect = tabView.bounds;
+        [_audioViewController.view setFrame:rect];
+    }
 }
 
 
 - (IBAction)onJackServerTabClick:(id)sender {
-    [self.tabs selectTabViewItemWithIdentifier:@"2"];
+    [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
 
 -(void)registerTabButtons

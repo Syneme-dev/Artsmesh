@@ -173,6 +173,8 @@
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
 		D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */; };
+		D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
+		D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
 		D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +215,7 @@
 				AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */,
 				AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */,
 				AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */,
+				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +454,7 @@
 		D46F5280196E77F500C48E5B /* AMStaticGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDataSource.h; sourceTree = "<group>"; };
 		D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDataSource.m; sourceTree = "<group>"; };
 		D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticGroupCellController.xib; sourceTree = "<group>"; };
+		D472934519A6E8F30034CC34 /* AMAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMAudio.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMAudio.framework; sourceTree = "<group>"; };
 		D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabItemView.h; sourceTree = "<group>"; };
 		D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabItemView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -462,6 +466,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
 				268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
@@ -711,6 +716,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D472934519A6E8F30034CC34 /* AMAudio.framework */,
 				268DA7C3198B99A100F86EBB /* AMTimer.framework */,
 				AF7242B2197E19CA0008799B /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
@@ -1356,6 +1362,7 @@
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1377,6 +1384,7 @@
 					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
@@ -35,7 +35,7 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
-                            <view key="view" id="Mp1-oa-ElH" customClass="AMTabItemView">
+                            <view key="view" identifier="generalTabView" id="Mp1-oa-ElH" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -245,8 +245,8 @@
                                             <constraint firstAttribute="height" constant="24" id="AQN-AB-orn"/>
                                         </constraints>
                                     </customView>
-                                    <customView identifier="isTopControlBar" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-A4-ABv" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="20" y="353" width="275" height="24"/>
+                                    <customView identifier="isTopControlBar" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-A4-ABv" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="20" y="354" width="275" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Qxp-Ex-2qK"/>
@@ -322,8 +322,14 @@
                                 </constraints>
                             </view>
                         </tabViewItem>
+                        <tabViewItem label="JackServer" identifier="1" id="Uhs-af-iDr">
+                            <view key="view" identifier="jackServerTab" id="Dwd-l8-aCe" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
-                            <view key="view" id="343-FY-LyZ" customClass="AMTabItemView">
+                            <view key="view" identifier="statusNetTabView" id="343-FY-LyZ" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -422,23 +428,17 @@
                                 </subviews>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="View" identifier="3" id="Uhs-af-iDr">
-                            <view key="view" id="Dwd-l8-aCe" customClass="AMTabItemView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                        </tabViewItem>
                     </tabViewItems>
                 </tabView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="284" y="2" width="81" height="13"/>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
+                            <rect key="frame" x="288" y="2" width="81" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
-                                <behavior key="behavior" lightByContents="YES"/>
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>

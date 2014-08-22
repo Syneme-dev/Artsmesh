@@ -12,4 +12,6 @@
 
 @interface AMAudio : NSObject
 
+-(NSViewController*)getPreferenceUI;
+
 @end

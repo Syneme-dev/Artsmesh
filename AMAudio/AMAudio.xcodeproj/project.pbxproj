@@ -20,6 +20,9 @@
 		D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */; };
 		D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = D472931E19A6E5030034CC34 /* AMAudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934819A70D390034CC34 /* AMAudioPrefViewController.h */; };
+		D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934919A70D390034CC34 /* AMAudioPrefViewController.m */; };
+		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		D472933D19A6E5460034CC34 /* AMAudioDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioDevice.m; sourceTree = "<group>"; };
 		D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioDeviceManager.h; sourceTree = "<group>"; };
 		D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioDeviceManager.m; sourceTree = "<group>"; };
+		D472934819A70D390034CC34 /* AMAudioPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioPrefViewController.h; sourceTree = "<group>"; };
+		D472934919A70D390034CC34 /* AMAudioPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioPrefViewController.m; sourceTree = "<group>"; };
+		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAudioPrefViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,9 @@
 				D472933D19A6E5460034CC34 /* AMAudioDevice.m */,
 				D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */,
 				D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */,
+				D472934819A70D390034CC34 /* AMAudioPrefViewController.h */,
+				D472934919A70D390034CC34 /* AMAudioPrefViewController.m */,
+				D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */,
 			);
 			path = AMAudio;
 			sourceTree = "<group>";
@@ -165,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
+				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
 			);
@@ -246,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */,
 				D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +278,7 @@
 			files = (
 				D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */,
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
+				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

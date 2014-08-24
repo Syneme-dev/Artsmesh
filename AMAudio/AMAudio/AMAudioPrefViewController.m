@@ -167,8 +167,10 @@
         
         for (NSNumber* bIn in bufSizeSupportIn) {
             for (NSNumber* bOut in bufSizeSupportOut) {
-                NSString* bufSizeStr = [NSString stringWithFormat:@"%d", [bIn intValue ]];
-                [commonBufSize addObject:bufSizeStr];
+                if ([bIn isEqual:bOut]){
+                    NSString* bufSizeStr = [NSString stringWithFormat:@"%d", [bIn intValue ]];
+                    [commonBufSize addObject:bufSizeStr];
+                }
             }
         }
         
@@ -199,6 +201,66 @@
     }
 }
 
+- (IBAction)saveConfig:(NSButton *)sender
+{
+    if (self.jackConfig) {
+        self.jackConfig.driver = self.driverBox.stringValue;
+        
+        NSString* inputDevName = self.inputDevBox.stringValue;
+        AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
+        if(inputDev){
+            self.jackConfig.inputDevUID = inputDev.devUID;
+        }
+        
+        NSString* outputDevName = self.outputDevBox.stringValue;
+        AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
+        if (outputDev) {
+            self.jackConfig.outputDevUID = outputDev.devUID;
+        }
+        
+        self.jackConfig.sampleRate = [self.sampleRateBox.stringValue intValue];
+        self.jackConfig.bufferSize = [self.bufferSizeBox.stringValue intValue];
+        
+        self.jackConfig.inChansCount = [self.interfaceInChansBox.stringValue intValue];
+        self.jackConfig.outChansCount = [self.interfaceOutChansBox.stringValue intValue];
+        
+        self.jackConfig.hogMode = [self.hogModeCheck state] == 1;
+        self.jackConfig.clockDriftCompensation = [self.compensationCheck state] == 1;
+        self.jackConfig.systemPortMonitoring = [self.portMornitingCheck state] == 1;
+        self.jackConfig.activeMIDI = [self.midiCheck state] == 1;
+        
+        [self.jackConfig archiveConfigs];
+    }
+}
+
+
+- (IBAction)restoreConfig:(NSButton *)sender
+{
+    [self.driverBox selectItemAtIndex:0];
+    
+    AMAudioDevice* inputDev = [_devManager findDevByUID:self.jackConfig.inputDevUID];
+    [self.inputDevBox selectItemWithTitle:inputDev.devName];
+    
+    AMAudioDevice* outputDev = [_devManager findDevByUID:self.jackConfig.outputDevUID];
+    [self.outputDevBox selectItemWithTitle:outputDev.devName];
+    
+    NSString* sampleRateStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.sampleRate];
+    [self.sampleRateBox selectItemWithTitle:sampleRateStr];
+    
+    NSString* bufferSizeStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.bufferSize];
+    [self.bufferSizeBox selectItemWithTitle:bufferSizeStr];
+    
+    NSString* inChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.interfaceInputChannel];
+    [self.interfaceInChansBox selectItemWithTitle:inChansStr];
+    
+    NSString* outChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.interfaceOutputChannel];
+    [self.interfaceOutChansBox selectItemWithTitle:outChansStr];
+    
+    [self.hogModeCheck setState:(self.jackConfig.hogMode)?1:0];
+    [self.compensationCheck setState:(self.jackConfig.clockDriftCompensation)?1:0];
+    [self.portMornitingCheck setState:(self.jackConfig.systemPortMonitoring)?1:0];
+    [self.midiCheck setState:(self.jackConfig.activeMIDI)?1:0];
+}
 
 
 @end

@@ -12,8 +12,9 @@
 
 @interface AMAudio : NSObject
 
--(NSViewController*)getJackPrefUI;
++(id)sharedInstance;
 
+-(NSViewController*)getJackPrefUI;
 -(BOOL)startJack;
 
 @end

@@ -8,10 +8,34 @@
 
 #import "AMAudio.h"
 #import "AMAudioPrefViewController.h"
+#import "AMJackConfigs.h"
 
 @implementation AMAudio
 {
     AMAudioPrefViewController* _prefController;
+    AMJackConfigs* _configs;
+}
+
++(id)sharedInstance
+{
+    static AMAudio* sharedInstance = nil;
+    @synchronized(self){
+        if (sharedInstance == nil){
+            sharedInstance = [[self alloc] privateInit];
+        }
+    }
+    return sharedInstance;
+}
+
+-(id)init
+{
+    return nil;
+}
+
+-(id)privateInit
+{
+    _configs = [AMJackConfigs initWithArchiveConfig];
+    return self;
 }
 
 -(NSViewController*)getJackPrefUI
@@ -31,7 +55,10 @@
         return YES;
     }
     
+    NSString* command =  [_configs formatCommandLine];
+    
     return YES;
 }
+
 
 @end

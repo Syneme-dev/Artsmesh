@@ -296,6 +296,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="saveConfig:" target="-2" id="8jK-jz-7Bg"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4D-5o-561">
                     <rect key="frame" x="303" y="61" width="82" height="32"/>
@@ -307,6 +310,9 @@
 Gw
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="restoreConfig:" target="-2" id="eMA-oM-D14"/>
+                    </connections>
                 </button>
             </subviews>
         </view>

@@ -29,7 +29,7 @@
 
 -(id)init
 {
-    return nil;
+    return [AMAudio sharedInstance];
 }
 
 -(id)privateInit
@@ -43,6 +43,7 @@
     if (_prefController == nil) {
        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
         _prefController = [[AMAudioPrefViewController alloc] initWithNibName:@"AMAudioPrefViewController" bundle:myBundle];
+        _prefController.jackConfig = _configs;
     }
     
     return _prefController;

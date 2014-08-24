@@ -94,4 +94,15 @@
     return commandLine;
 }
 
+-(void)archiveConfigs
+{
+    
+}
+
++(id)initWithArchiveConfig
+{
+    AMJackConfigs* config = [[AMJackConfigs alloc] init];
+    return config;
+}
+
 @end

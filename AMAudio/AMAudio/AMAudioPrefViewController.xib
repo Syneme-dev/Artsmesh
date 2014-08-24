@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMAudioPrefViewController">
             <connections>
                 <outlet property="bufferSizeBox" destination="HBo-3E-7aF" id="lAN-1e-OBr"/>
+                <outlet property="cancelBtn" destination="w4D-5o-561" id="7aE-XF-Kq5"/>
                 <outlet property="compensationCheck" destination="9vH-aW-MIv" id="0f5-X4-gf7"/>
                 <outlet property="driverBox" destination="sI8-zE-VJW" id="hMm-8f-orn"/>
                 <outlet property="hogModeCheck" destination="bFA-aI-xaL" id="iek-up-etV"/>
@@ -17,6 +18,7 @@
                 <outlet property="outputDevBox" destination="EYn-D6-CDL" id="UgX-17-K8G"/>
                 <outlet property="portMornitingCheck" destination="lnw-7J-tet" id="jOP-KN-Kgp"/>
                 <outlet property="sampleRateBox" destination="F7s-LV-he9" id="QbU-J9-frD"/>
+                <outlet property="saveBtn" destination="8OZ-in-zO5" id="TJP-rR-Ech"/>
                 <outlet property="view" destination="2x1-ne-wYU" id="QWO-Qa-hJc"/>
             </connections>
         </customObject>
@@ -197,6 +199,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="comboChanged:" target="-2" id="vTN-0N-zIh"/>
+                    </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBo-3E-7aF">
                     <rect key="frame" x="307" y="379" width="167" height="26"/>
@@ -212,6 +217,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="comboChanged:" target="-2" id="7ao-QW-I1X"/>
+                    </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AnV-KK-F30">
                     <rect key="frame" x="307" y="177" width="167" height="26"/>
@@ -227,6 +235,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="comboChanged:" target="-2" id="HJR-ln-2kD"/>
+                    </connections>
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B8S-uE-nZm">
                     <rect key="frame" x="307" y="141" width="167" height="26"/>
@@ -242,6 +253,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="comboChanged:" target="-2" id="WIL-hK-KPt"/>
+                    </connections>
                 </popUpButton>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFA-aI-xaL">
                     <rect key="frame" x="424" y="352" width="49" height="18"/>
@@ -250,6 +264,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="checkboxChanged:" target="-2" id="D3R-Ai-mwb"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9vH-aW-MIv">
                     <rect key="frame" x="424" y="318" width="49" height="18"/>
@@ -258,6 +275,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="checkboxChanged:" target="-2" id="GBK-Dk-f8V"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnw-7J-tet">
                     <rect key="frame" x="424" y="288" width="49" height="18"/>
@@ -266,6 +286,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="checkboxChanged:" target="-2" id="Jes-tq-2nD"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBB-ia-izL">
                     <rect key="frame" x="424" y="255" width="49" height="18"/>
@@ -274,6 +297,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="checkboxChanged:" target="-2" id="36z-e4-q81"/>
+                    </connections>
                 </button>
                 <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Kl0-vV-oY8">
                     <rect key="frame" x="20" y="220" width="546" height="5"/>

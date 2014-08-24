@@ -23,12 +23,16 @@
 @property (weak) IBOutlet NSButton *midiCheck;
 @property (weak) IBOutlet NSPopUpButton *interfaceInChansBox;
 @property (weak) IBOutlet NSPopUpButton *interfaceOutChansBox;
+@property (weak) IBOutlet NSButton *saveBtn;
+@property (weak) IBOutlet NSButton *cancelBtn;
+
 
 @end
 
 @implementation AMAudioPrefViewController
 {
     AMAudioDeviceManager* _devManager;
+    BOOL _isEdited;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,7 +49,10 @@
 
 -(void)awakeFromNib
 {
-     [self loadPrefs];
+    [self loadPrefs];
+    [self.saveBtn setEnabled:NO];
+    [self.cancelBtn setEnabled:NO];
+    
 }
 
 -(void)loadPrefs
@@ -53,6 +60,7 @@
     [self fillDriverBox];
     [self fillInputAndOutputDevice];
     [self setCheckBoxes];
+    [self saveConfig:nil];
 }
 
 -(void)fillDriverBox
@@ -77,8 +85,8 @@
         [self.outputDevBox addItemWithTitle:dev.devName];
     }
     
-    [self inputDevChanged:self.inputDevBox];
-    [self outputDevChanged:self.outputDevBox];
+    [self inputDevChanged:nil];
+    [self outputDevChanged:nil];
 }
 
 -(void)setCheckBoxes
@@ -109,6 +117,11 @@
     }
     
     [self deviceSelectionChanged];
+    
+    if (sender != nil){
+        [self.saveBtn setEnabled:YES];
+        [self.cancelBtn setEnabled:YES];
+    }
 }
 
 - (IBAction)outputDevChanged:(NSPopUpButton *)sender
@@ -131,6 +144,11 @@
     }
     
     [self deviceSelectionChanged];
+    
+    if (sender != nil){
+        [self.saveBtn setEnabled:YES];
+        [self.cancelBtn setEnabled:YES];
+    }
 }
 
 -(void)deviceSelectionChanged
@@ -206,23 +224,23 @@
     if (self.jackConfig) {
         self.jackConfig.driver = self.driverBox.stringValue;
         
-        NSString* inputDevName = self.inputDevBox.stringValue;
+        NSString* inputDevName = self.inputDevBox.title;
         AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
         if(inputDev){
             self.jackConfig.inputDevUID = inputDev.devUID;
         }
         
-        NSString* outputDevName = self.outputDevBox.stringValue;
+        NSString* outputDevName = self.outputDevBox.title;
         AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
         if (outputDev) {
             self.jackConfig.outputDevUID = outputDev.devUID;
         }
         
-        self.jackConfig.sampleRate = [self.sampleRateBox.stringValue intValue];
-        self.jackConfig.bufferSize = [self.bufferSizeBox.stringValue intValue];
+        self.jackConfig.sampleRate = [self.sampleRateBox.title intValue];
+        self.jackConfig.bufferSize = [self.bufferSizeBox.title intValue];
         
-        self.jackConfig.inChansCount = [self.interfaceInChansBox.stringValue intValue];
-        self.jackConfig.outChansCount = [self.interfaceOutChansBox.stringValue intValue];
+        self.jackConfig.inChansCount = [self.interfaceInChansBox.title intValue];
+        self.jackConfig.outChansCount = [self.interfaceOutChansBox.title intValue];
         
         self.jackConfig.hogMode = [self.hogModeCheck state] == 1;
         self.jackConfig.clockDriftCompensation = [self.compensationCheck state] == 1;
@@ -231,6 +249,10 @@
         
         [self.jackConfig archiveConfigs];
     }
+    
+    [self.saveBtn setEnabled:NO];
+    [self.cancelBtn setEnabled:NO];
+
 }
 
 
@@ -260,7 +282,21 @@
     [self.compensationCheck setState:(self.jackConfig.clockDriftCompensation)?1:0];
     [self.portMornitingCheck setState:(self.jackConfig.systemPortMonitoring)?1:0];
     [self.midiCheck setState:(self.jackConfig.activeMIDI)?1:0];
+    
+    [self.saveBtn setEnabled:NO];
+    [self.cancelBtn setEnabled:NO];
 }
 
+- (IBAction)comboChanged:(NSPopUpButton *)sender
+{
+    [self.saveBtn setEnabled:YES];
+    [self.cancelBtn setEnabled:YES];
+}
+
+- (IBAction)checkboxChanged:(NSButton *)sender
+{
+    [self.saveBtn setEnabled:YES];
+    [self.cancelBtn setEnabled:YES];
+}
 
 @end

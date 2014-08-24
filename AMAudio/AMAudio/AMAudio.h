@@ -14,4 +14,6 @@
 
 -(NSViewController*)getJackPrefUI;
 
+-(BOOL)startJack;
+
 @end

@@ -24,4 +24,14 @@
     return _prefController;
 }
 
+-(BOOL)startJack
+{
+    int n = system("killall -0 jackdmp >/dev/null");
+    if (n == 0) {
+        return YES;
+    }
+    
+    return YES;
+}
+
 @end

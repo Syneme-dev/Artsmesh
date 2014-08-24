@@ -23,6 +23,8 @@
 		D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934819A70D390034CC34 /* AMAudioPrefViewController.h */; };
 		D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934919A70D390034CC34 /* AMAudioPrefViewController.m */; };
 		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
+		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
+		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		D472934819A70D390034CC34 /* AMAudioPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioPrefViewController.h; sourceTree = "<group>"; };
 		D472934919A70D390034CC34 /* AMAudioPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioPrefViewController.m; sourceTree = "<group>"; };
 		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAudioPrefViewController.xib; sourceTree = "<group>"; };
+		D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackConfigs.h; sourceTree = "<group>"; };
+		D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackConfigs.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 				D472931819A6E5030034CC34 /* Supporting Files */,
 				D472933C19A6E5460034CC34 /* AMAudioDevice.h */,
 				D472933D19A6E5460034CC34 /* AMAudioDevice.m */,
+				D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */,
+				D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */,
 				D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */,
 				D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */,
 				D472934819A70D390034CC34 /* AMAudioPrefViewController.h */,
@@ -177,6 +183,7 @@
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
+				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +287,7 @@
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
+				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +490,7 @@
 				D472933819A6E5030034CC34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D472933919A6E5030034CC34 /* Build configuration list for PBXNativeTarget "AMAudioTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +499,7 @@
 				D472933B19A6E5030034CC34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

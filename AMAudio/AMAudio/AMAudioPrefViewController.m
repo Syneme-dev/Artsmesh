@@ -8,8 +8,10 @@
 
 #import "AMAudioPrefViewController.h"
 #import "AMAudioDeviceManager.h"
+#import "AMJackConfigs.h"
 
 @interface AMAudioPrefViewController ()
+
 @property (weak) IBOutlet NSPopUpButton *driverBox;
 @property (weak) IBOutlet NSPopUpButton *inputDevBox;
 @property (weak) IBOutlet NSPopUpButton *outputDevBox;

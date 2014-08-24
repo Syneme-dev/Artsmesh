@@ -9,11 +9,13 @@
 #import "AMAudio.h"
 #import "AMAudioPrefViewController.h"
 #import "AMJackConfigs.h"
+#import "AMTaskLauncher/AMShellTask.h"
 
 @implementation AMAudio
 {
     AMAudioPrefViewController* _prefController;
     AMJackConfigs* _configs;
+    AMShellTask* _jackTask;
 }
 
 +(id)sharedInstance
@@ -57,6 +59,9 @@
     }
     
     NSString* command =  [_configs formatCommandLine];
+    NSLog(@"command is %@", command);
+    _jackTask = [[AMShellTask alloc] initWithCommand:command];
+    [_jackTask launch];
     
     return YES;
 }

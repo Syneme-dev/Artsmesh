@@ -50,6 +50,8 @@
 
 -(void)dealloc
 {
+    
+    //Are there any memory leaks?
     StopNotification();
 }
 

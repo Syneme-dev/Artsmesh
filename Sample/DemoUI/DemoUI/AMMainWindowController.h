@@ -22,6 +22,7 @@
 @property (weak) IBOutlet AMFoundryFontView *amTimer;
 @property(nonatomic, readonly) NSView *containerView;
 @property (weak) IBOutlet NSButton *amTimerBtn;
+@property (weak) IBOutlet NSButton *jackServerBtn;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

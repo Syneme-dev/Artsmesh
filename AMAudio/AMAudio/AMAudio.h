@@ -10,11 +10,19 @@
 #import "AMAudioDevice.h"
 #import "AMAudioDeviceManager.h"
 
+typedef enum {
+    JackState_Stopped = 0,
+    JackState_Started,
+}JackState;
+
 @interface AMAudio : NSObject
+
+@property (readonly) JackState jackState;
 
 +(id)sharedInstance;
 
 -(NSViewController*)getJackPrefUI;
 -(BOOL)startJack;
+-(void)stopJack;
 
 @end

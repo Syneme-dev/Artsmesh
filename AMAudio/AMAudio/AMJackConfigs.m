@@ -22,16 +22,16 @@
     
     if (major == 10 && minor >= 5) {
 #if defined(__i386__)
-        strcpy(stringa,"/usr/local/bin/./jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackdmp -R");
 #elif defined(__x86_64__)
-        strcpy(stringa,"/usr/local/bin/./jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackdmp -R");
 #elif defined(__ppc__)
-        strcpy(stringa, "arch -ppc /usr/local/bin/./jackdmp -R");
+        strcpy(stringa, "arch -ppc /usr/local/bin/jackdmp -R");
 #elif defined(__ppc64__)
-        strcpy(stringa,"/usr/local/bin/./jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackdmp -R");
 #endif
     }else{
-        strcpy(stringa,"/usr/local/bin/./jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackdmp -R");
     }
     
     if (self.verboseLoggingForDebugPurpose) {
@@ -89,6 +89,8 @@
     if (self.systemPortMonitoring) {
         strcat(stringa, " -m ");
     }
+    
+    strcat(stringa, " >/dev/null 2>&1");
     
     NSString* commandLine = [NSString stringWithFormat:@"%s", stringa];
     return commandLine;

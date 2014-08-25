@@ -109,6 +109,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
     return nil;
 }
 
+
 -(AMAudioDevice*)defaultOutputDevice
 {
     AudioDeviceID defaultOutputDevId = -1;

@@ -109,7 +109,6 @@
     //system("say \"Now I'm the leader and my host name is `hostname`\"");
     NSLog(@"command is %@", command);
     _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
-    NSLog(@"command is %@", command);
     [_mesherServerTask launch];
     
     sleep(2);

@@ -222,7 +222,7 @@
 - (IBAction)saveConfig:(NSButton *)sender
 {
     if (self.jackConfig) {
-        self.jackConfig.driver = self.driverBox.stringValue;
+        self.jackConfig.driver = self.driverBox.title;
         
         NSString* inputDevName = self.inputDevBox.title;
         AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];

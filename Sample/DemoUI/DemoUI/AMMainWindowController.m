@@ -34,6 +34,7 @@
 #import "AMOSCMessageViewController.h"
 #import "AMGPlusViewController.h"
 #import "AMManualViewController.h"
+#import  "AMAudio/AMAudio.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -97,12 +98,18 @@
                                   forKeyPath:@"state"
                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                                      context:nil];
+        
+        [[AMAudio sharedInstance] addObserver:self
+                                  forKeyPath:@"jackState"
+                                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                     context:nil];
     }
     return self;
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
     [[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
+    [[AMAudio sharedInstance] removeObserver:self forKeyPath:@"jackState"];
 }
 
 
@@ -710,6 +717,18 @@
     }
 }
 
+- (IBAction)jackServerToggled:(NSButton *)sender
+{
+    AMAudio* audioModule = [AMAudio sharedInstance];
+    if(audioModule.jackState == JackState_Stopped){
+        [self.jackServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
+        [audioModule startJack];
+    }else{
+        [audioModule stopJack];
+    }
+}
+
+
 #pragma mark -
 #pragma   mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -730,6 +749,23 @@
                     break;
             }
         }
+    }
+    
+    if  ([object isKindOfClass:[AMAudio class]]){
+        
+        if ([keyPath isEqualToString:@"jackState"]) {
+            JackState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch (newState) {
+                case JackState_Started:
+                    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+                    break;
+                default:
+                    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+                    break;
+            }
+        }
+
     }
 }
 

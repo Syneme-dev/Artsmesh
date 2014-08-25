@@ -26,7 +26,6 @@
 {
     dispatch_queue_t _preference_queue;
     NSViewController* _audioViewController;
-    AMAudio* _audioModule;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,8 +33,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        // Initialization code here.
-        _audioModule = [[AMAudio alloc] init];
     }
     return self;
 }
@@ -92,7 +89,7 @@
 
 -(void)loadJackPref:(NSView*)tabView
 {
-    _audioViewController = [_audioModule getJackPrefUI];
+    _audioViewController = [[AMAudio sharedInstance] getJackPrefUI];
     if (_audioViewController) {
         [tabView addSubview:_audioViewController.view];
         NSRect rect = tabView.bounds;

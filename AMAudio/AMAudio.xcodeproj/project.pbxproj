@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D443717819AACED700F49705 /* AMJackClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D443717619AACED700F49705 /* AMJackClient.h */; };
+		D443717919AACED700F49705 /* AMJackClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D443717719AACED700F49705 /* AMJackClient.m */; };
+		D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D443717A19AACF6300F49705 /* AudioToolbox.framework */; };
+		D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D443717C19AACF7A00F49705 /* CoreAudio.framework */; };
 		D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472931119A6E5030034CC34 /* Cocoa.framework */; };
 		D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D472931A19A6E5030034CC34 /* InfoPlist.strings */; };
 		D472932019A6E5030034CC34 /* AMAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = D472931F19A6E5030034CC34 /* AMAudio.m */; };
@@ -39,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D443717619AACED700F49705 /* AMJackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackClient.h; sourceTree = "<group>"; };
+		D443717719AACED700F49705 /* AMJackClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackClient.m; sourceTree = "<group>"; };
+		D443717A19AACF6300F49705 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D443717C19AACF7A00F49705 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		D472930E19A6E5030034CC34 /* AMAudio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMAudio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D472931119A6E5030034CC34 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D472931419A6E5030034CC34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
+				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
 				D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */,
 			);
@@ -111,6 +121,8 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D443717C19AACF7A00F49705 /* CoreAudio.framework */,
+				D443717A19AACF6300F49705 /* AudioToolbox.framework */,
 				D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */,
 				D472931119A6E5030034CC34 /* Cocoa.framework */,
 				D472932619A6E5030034CC34 /* XCTest.framework */,
@@ -137,6 +149,8 @@
 				D472931819A6E5030034CC34 /* Supporting Files */,
 				D472933C19A6E5460034CC34 /* AMAudioDevice.h */,
 				D472933D19A6E5460034CC34 /* AMAudioDevice.m */,
+				D443717619AACED700F49705 /* AMJackClient.h */,
+				D443717719AACED700F49705 /* AMJackClient.m */,
 				D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */,
 				D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */,
 				D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */,
@@ -185,6 +199,7 @@
 			files = (
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
+				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
@@ -290,6 +305,7 @@
 				D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */,
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
+				D443717919AACED700F49705 /* AMJackClient.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 			);
@@ -406,6 +422,7 @@
 		D472933719A6E5030034CC34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -416,8 +433,14 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMAudio/AMAudio-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -426,6 +449,7 @@
 		D472933819A6E5030034CC34 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -436,8 +460,14 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMAudio/AMAudio-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

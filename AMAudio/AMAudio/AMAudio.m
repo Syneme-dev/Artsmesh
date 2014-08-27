@@ -77,7 +77,7 @@
     }else{
         self.jackState = JackState_Started;
     }
-    
+
     return YES;
 }
 

@@ -7,12 +7,16 @@
 //
 
 #import "AMVisualViewController.h"
+#import "AMAudio/AMAudio.h"
 
 @interface AMVisualViewController ()
 
 @end
 
 @implementation AMVisualViewController
+{
+    NSViewController* _audioRouterViewController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,4 +52,47 @@
 - (IBAction)onVideoTabClick:(id)sender {
     [self.tabView selectTabViewItemAtIndex:3];
 }
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self loadTabViews];
+}
+
+-(void)loadTabViews
+{
+    NSArray* tabItems = [self.tabs tabViewItems];
+    
+    for (NSTabViewItem* item in tabItems) {
+        NSView* view = item.view;
+        if ([view.identifier isEqualTo:@"Audio Router"]) {
+            [self loadAudioRouterView: view];
+        }
+    }
+}
+
+
+-(void)loadAudioRouterView:(NSView*)tabView
+{
+    _audioRouterViewController = [[AMAudio sharedInstance] getJackRouterUI];
+    if (_audioRouterViewController) {
+        NSView* contentView = _audioRouterViewController.view;
+        [tabView addSubview:contentView];
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+
+    }
+}
+
 @end

@@ -64,22 +64,9 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="AUDIO" identifier="" id="mGf-md-fIs">
-                            <view key="view" id="Rm2-Lg-bfO">
+                            <view key="view" identifier="Audio Router" id="Rm2-Lg-bfO">
                                 <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="s7w-8L-eLo">
-                                        <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="shot_audio" id="9rJ-36-tv6"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="s7w-8L-eLo" secondAttribute="trailing" id="4vh-w5-bSl"/>
-                                    <constraint firstAttribute="bottom" secondItem="s7w-8L-eLo" secondAttribute="bottom" id="6rx-ED-wxQ"/>
-                                    <constraint firstItem="s7w-8L-eLo" firstAttribute="leading" secondItem="Rm2-Lg-bfO" secondAttribute="leading" id="KwO-Mc-IEN"/>
-                                    <constraint firstItem="s7w-8L-eLo" firstAttribute="top" secondItem="Rm2-Lg-bfO" secondAttribute="top" id="TrT-TR-TS4"/>
-                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="VIDEO" identifier="" id="4wb-Ka-rhz">
@@ -181,7 +168,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="shot_audio" width="1273" height="1142"/>
         <image name="shot_osc" width="996" height="892"/>
         <image name="shot_video" width="1291" height="1169"/>
         <image name="shot_visual" width="996" height="885"/>

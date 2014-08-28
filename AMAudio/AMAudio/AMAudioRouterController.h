@@ -10,8 +10,5 @@
 
 @interface AMAudioRouterController : NSViewController
 
-- (void) createViews;
-- (void) setInitialVars;
-- (void) layoutIOButtons;
 
 @end

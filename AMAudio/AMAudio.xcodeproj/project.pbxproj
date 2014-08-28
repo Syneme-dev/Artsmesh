@@ -444,7 +444,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
@@ -472,7 +471,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;

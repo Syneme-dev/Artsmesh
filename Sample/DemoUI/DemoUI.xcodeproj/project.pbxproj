@@ -1357,13 +1357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
@@ -1379,13 +1373,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/xujian/Workspace/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/weiwang/src/Artsmesh/AMTimer/build/Debug,
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;

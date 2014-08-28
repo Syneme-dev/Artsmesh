@@ -502,7 +502,6 @@
 				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
-				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
@@ -527,8 +526,6 @@
 				AF86600B19401F4D008DB7CA /* AMTestViewController.m */,
 				AF200640194585F6008630C8 /* AMMapViewController.h */,
 				AF200641194585F6008630C8 /* AMMapViewController.m */,
-				AF20064519458604008630C8 /* AMVisualViewController.h */,
-				AF20064619458604008630C8 /* AMVisualViewController.m */,
 				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
 				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
 				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
@@ -750,6 +747,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* G+Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
@@ -949,6 +947,16 @@
 				262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */,
 			);
 			name = ProfilePanel;
+			sourceTree = "<group>";
+		};
+		D4BBBD6219AF256B006BEE40 /* Visualization Panel */ = {
+			isa = PBXGroup;
+			children = (
+				AF20064519458604008630C8 /* AMVisualViewController.h */,
+				AF20064619458604008630C8 /* AMVisualViewController.m */,
+				AF20064719458604008630C8 /* AMVisualViewController.xib */,
+			);
+			name = "Visualization Panel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

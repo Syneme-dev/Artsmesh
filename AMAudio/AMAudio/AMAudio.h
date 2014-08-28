@@ -22,6 +22,7 @@ typedef enum {
 +(id)sharedInstance;
 
 -(NSViewController*)getJackPrefUI;
+-(NSViewController*)getJackRouterUI;
 -(BOOL)startJack;
 -(void)stopJack;
 

@@ -7,7 +7,8 @@
 //
 
 #import "AMJackClient.h"
-#include <jack/jack.h>
+#include "jack.h"
+#include "types.h"
 
 #define JACK_MAX_PORTS  2048
 

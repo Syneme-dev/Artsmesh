@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		262DE06219AF82F1003EA53E /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262DE06119AF82F1003EA53E /* Jackmp.framework */; };
-		262DE07319AF839E003EA53E /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06419AF839E003EA53E /* control.h */; };
-		262DE07419AF839E003EA53E /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06519AF839E003EA53E /* intclient.h */; };
-		262DE07519AF839E003EA53E /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06619AF839E003EA53E /* jack.h */; };
-		262DE07619AF839E003EA53E /* jslist.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06719AF839E003EA53E /* jslist.h */; };
-		262DE07719AF839E003EA53E /* midiport.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06819AF839E003EA53E /* midiport.h */; };
-		262DE07819AF839E003EA53E /* net.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06919AF839E003EA53E /* net.h */; };
-		262DE07919AF839E003EA53E /* ringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06A19AF839E003EA53E /* ringbuffer.h */; };
-		262DE07A19AF839E003EA53E /* session.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06B19AF839E003EA53E /* session.h */; };
-		262DE07B19AF839E003EA53E /* statistics.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06C19AF839E003EA53E /* statistics.h */; };
-		262DE07C19AF839E003EA53E /* systemdeps.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06D19AF839E003EA53E /* systemdeps.h */; };
-		262DE07D19AF839E003EA53E /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06E19AF839E003EA53E /* thread.h */; };
-		262DE07E19AF839E003EA53E /* transport.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE06F19AF839E003EA53E /* transport.h */; };
-		262DE07F19AF839E003EA53E /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE07019AF839E003EA53E /* types.h */; };
-		262DE08019AF839E003EA53E /* weakjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE07119AF839E003EA53E /* weakjack.h */; };
-		262DE08119AF839E003EA53E /* weakmacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 262DE07219AF839E003EA53E /* weakmacros.h */; };
+		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
+		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
+		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
+		CE151F2B19B01372002D2AD4 /* jslist.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1C19B01372002D2AD4 /* jslist.h */; };
+		CE151F2C19B01372002D2AD4 /* midiport.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1D19B01372002D2AD4 /* midiport.h */; };
+		CE151F2D19B01372002D2AD4 /* net.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1E19B01372002D2AD4 /* net.h */; };
+		CE151F2E19B01372002D2AD4 /* ringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1F19B01372002D2AD4 /* ringbuffer.h */; };
+		CE151F2F19B01372002D2AD4 /* session.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2019B01372002D2AD4 /* session.h */; };
+		CE151F3019B01372002D2AD4 /* statistics.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2119B01372002D2AD4 /* statistics.h */; };
+		CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2219B01372002D2AD4 /* systemdeps.h */; };
+		CE151F3219B01372002D2AD4 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2319B01372002D2AD4 /* thread.h */; };
+		CE151F3319B01372002D2AD4 /* transport.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2419B01372002D2AD4 /* transport.h */; };
+		CE151F3419B01372002D2AD4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2519B01372002D2AD4 /* types.h */; };
+		CE151F3519B01372002D2AD4 /* weakjack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2619B01372002D2AD4 /* weakjack.h */; };
+		CE151F3619B01372002D2AD4 /* weakmacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2719B01372002D2AD4 /* weakmacros.h */; };
 		D442425619AF0C75003F8B2E /* AMAudioRouterController.h in Headers */ = {isa = PBXBuildFile; fileRef = D442425319AF0C75003F8B2E /* AMAudioRouterController.h */; };
 		D442425719AF0C75003F8B2E /* AMAudioRouterController.m in Sources */ = {isa = PBXBuildFile; fileRef = D442425419AF0C75003F8B2E /* AMAudioRouterController.m */; };
 		D443717819AACED700F49705 /* AMJackClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D443717619AACED700F49705 /* AMJackClient.h */; };
@@ -67,21 +67,21 @@
 
 /* Begin PBXFileReference section */
 		262DE06119AF82F1003EA53E /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
-		262DE06419AF839E003EA53E /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
-		262DE06519AF839E003EA53E /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
-		262DE06619AF839E003EA53E /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
-		262DE06719AF839E003EA53E /* jslist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jslist.h; sourceTree = "<group>"; };
-		262DE06819AF839E003EA53E /* midiport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midiport.h; sourceTree = "<group>"; };
-		262DE06919AF839E003EA53E /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
-		262DE06A19AF839E003EA53E /* ringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ringbuffer.h; sourceTree = "<group>"; };
-		262DE06B19AF839E003EA53E /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
-		262DE06C19AF839E003EA53E /* statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statistics.h; sourceTree = "<group>"; };
-		262DE06D19AF839E003EA53E /* systemdeps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemdeps.h; sourceTree = "<group>"; };
-		262DE06E19AF839E003EA53E /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
-		262DE06F19AF839E003EA53E /* transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transport.h; sourceTree = "<group>"; };
-		262DE07019AF839E003EA53E /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		262DE07119AF839E003EA53E /* weakjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakjack.h; sourceTree = "<group>"; };
-		262DE07219AF839E003EA53E /* weakmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakmacros.h; sourceTree = "<group>"; };
+		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
+		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
+		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
+		CE151F1C19B01372002D2AD4 /* jslist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jslist.h; sourceTree = "<group>"; };
+		CE151F1D19B01372002D2AD4 /* midiport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midiport.h; sourceTree = "<group>"; };
+		CE151F1E19B01372002D2AD4 /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
+		CE151F1F19B01372002D2AD4 /* ringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ringbuffer.h; sourceTree = "<group>"; };
+		CE151F2019B01372002D2AD4 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
+		CE151F2119B01372002D2AD4 /* statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statistics.h; sourceTree = "<group>"; };
+		CE151F2219B01372002D2AD4 /* systemdeps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemdeps.h; sourceTree = "<group>"; };
+		CE151F2319B01372002D2AD4 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
+		CE151F2419B01372002D2AD4 /* transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transport.h; sourceTree = "<group>"; };
+		CE151F2519B01372002D2AD4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		CE151F2619B01372002D2AD4 /* weakjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakjack.h; sourceTree = "<group>"; };
+		CE151F2719B01372002D2AD4 /* weakmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakmacros.h; sourceTree = "<group>"; };
 		D442425319AF0C75003F8B2E /* AMAudioRouterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioRouterController.h; sourceTree = "<group>"; };
 		D442425419AF0C75003F8B2E /* AMAudioRouterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioRouterController.m; sourceTree = "<group>"; };
 		D443717619AACED700F49705 /* AMJackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackClient.h; sourceTree = "<group>"; };
@@ -146,42 +146,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		262DE06319AF833B003EA53E /* Jack */ = {
+		CE151F1819B01372002D2AD4 /* jack */ = {
 			isa = PBXGroup;
 			children = (
-				262DE08319AF83C9003EA53E /* Libs */,
-				262DE08219AF83BC003EA53E /* include */,
+				CE151F1919B01372002D2AD4 /* control.h */,
+				CE151F1A19B01372002D2AD4 /* intclient.h */,
+				CE151F1B19B01372002D2AD4 /* jack.h */,
+				CE151F1C19B01372002D2AD4 /* jslist.h */,
+				CE151F1D19B01372002D2AD4 /* midiport.h */,
+				CE151F1E19B01372002D2AD4 /* net.h */,
+				CE151F1F19B01372002D2AD4 /* ringbuffer.h */,
+				CE151F2019B01372002D2AD4 /* session.h */,
+				CE151F2119B01372002D2AD4 /* statistics.h */,
+				CE151F2219B01372002D2AD4 /* systemdeps.h */,
+				CE151F2319B01372002D2AD4 /* thread.h */,
+				CE151F2419B01372002D2AD4 /* transport.h */,
+				CE151F2519B01372002D2AD4 /* types.h */,
+				CE151F2619B01372002D2AD4 /* weakjack.h */,
+				CE151F2719B01372002D2AD4 /* weakmacros.h */,
 			);
-			name = Jack;
-			sourceTree = "<group>";
-		};
-		262DE08219AF83BC003EA53E /* include */ = {
-			isa = PBXGroup;
-			children = (
-				262DE06419AF839E003EA53E /* control.h */,
-				262DE06519AF839E003EA53E /* intclient.h */,
-				262DE06619AF839E003EA53E /* jack.h */,
-				262DE06719AF839E003EA53E /* jslist.h */,
-				262DE06819AF839E003EA53E /* midiport.h */,
-				262DE06919AF839E003EA53E /* net.h */,
-				262DE06A19AF839E003EA53E /* ringbuffer.h */,
-				262DE06B19AF839E003EA53E /* session.h */,
-				262DE06C19AF839E003EA53E /* statistics.h */,
-				262DE06D19AF839E003EA53E /* systemdeps.h */,
-				262DE06E19AF839E003EA53E /* thread.h */,
-				262DE06F19AF839E003EA53E /* transport.h */,
-				262DE07019AF839E003EA53E /* types.h */,
-				262DE07119AF839E003EA53E /* weakjack.h */,
-				262DE07219AF839E003EA53E /* weakmacros.h */,
-			);
-			name = include;
-			sourceTree = "<group>";
-		};
-		262DE08319AF83C9003EA53E /* Libs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libs;
+			path = jack;
 			sourceTree = "<group>";
 		};
 		D472930419A6E5030034CC34 = {
@@ -230,7 +214,7 @@
 		D472931719A6E5030034CC34 /* AMAudio */ = {
 			isa = PBXGroup;
 			children = (
-				262DE06319AF833B003EA53E /* Jack */,
+				CE151F1819B01372002D2AD4 /* jack */,
 				D4BBBD7619AF7352006BEE40 /* AMRouterView.h */,
 				D4BBBD7719AF7352006BEE40 /* AMRouterView.m */,
 				D4BBBD7819AF7352006BEE40 /* AMPort.h */,
@@ -293,27 +277,27 @@
 			files = (
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
-				262DE07D19AF839E003EA53E /* thread.h in Headers */,
+				CE151F3219B01372002D2AD4 /* thread.h in Headers */,
 				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
-				262DE07E19AF839E003EA53E /* transport.h in Headers */,
-				262DE07A19AF839E003EA53E /* session.h in Headers */,
+				CE151F3319B01372002D2AD4 /* transport.h in Headers */,
+				CE151F2F19B01372002D2AD4 /* session.h in Headers */,
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
-				262DE07F19AF839E003EA53E /* types.h in Headers */,
-				262DE07C19AF839E003EA53E /* systemdeps.h in Headers */,
-				262DE07419AF839E003EA53E /* intclient.h in Headers */,
+				CE151F3419B01372002D2AD4 /* types.h in Headers */,
+				CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */,
+				CE151F2919B01372002D2AD4 /* intclient.h in Headers */,
 				D4BBBD7C19AF7352006BEE40 /* AMPort.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
-				262DE07619AF839E003EA53E /* jslist.h in Headers */,
-				262DE07819AF839E003EA53E /* net.h in Headers */,
-				262DE08119AF839E003EA53E /* weakmacros.h in Headers */,
+				CE151F2B19B01372002D2AD4 /* jslist.h in Headers */,
+				CE151F2D19B01372002D2AD4 /* net.h in Headers */,
+				CE151F3619B01372002D2AD4 /* weakmacros.h in Headers */,
 				D4BBBD7A19AF7352006BEE40 /* AMRouterView.h in Headers */,
-				262DE07719AF839E003EA53E /* midiport.h in Headers */,
-				262DE07919AF839E003EA53E /* ringbuffer.h in Headers */,
-				262DE07519AF839E003EA53E /* jack.h in Headers */,
-				262DE07B19AF839E003EA53E /* statistics.h in Headers */,
-				262DE07319AF839E003EA53E /* control.h in Headers */,
-				262DE08019AF839E003EA53E /* weakjack.h in Headers */,
+				CE151F2C19B01372002D2AD4 /* midiport.h in Headers */,
+				CE151F2E19B01372002D2AD4 /* ringbuffer.h in Headers */,
+				CE151F2A19B01372002D2AD4 /* jack.h in Headers */,
+				CE151F3019B01372002D2AD4 /* statistics.h in Headers */,
+				CE151F2819B01372002D2AD4 /* control.h in Headers */,
+				CE151F3519B01372002D2AD4 /* weakjack.h in Headers */,
 				D442425619AF0C75003F8B2E /* AMAudioRouterController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,9 +484,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include/,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -539,9 +522,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include/,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 			};
@@ -565,6 +547,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/AMAudio",
 				);
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -592,6 +575,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/AMAudio",
 				);
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";

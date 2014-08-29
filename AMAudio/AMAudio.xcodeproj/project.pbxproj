@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		262DE06219AF82F1003EA53E /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262DE06119AF82F1003EA53E /* Jackmp.framework */; };
 		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
 		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
 		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
@@ -66,7 +65,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		262DE06119AF82F1003EA53E /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			files = (
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
 				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
-				262DE06219AF82F1003EA53E /* Jackmp.framework in Frameworks */,
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
 				D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */,
 			);
@@ -190,7 +187,6 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				262DE06119AF82F1003EA53E /* Jackmp.framework */,
 				D443717C19AACF7A00F49705 /* CoreAudio.framework */,
 				D443717A19AACF6300F49705 /* AudioToolbox.framework */,
 				D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */,
@@ -538,8 +534,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AMAudio/jack",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -566,8 +563,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AMAudio/jack",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

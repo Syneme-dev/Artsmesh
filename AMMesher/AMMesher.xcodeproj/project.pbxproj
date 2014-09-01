@@ -49,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		2615E9701978C15600A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
-		2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMETCDApi.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMETCDApi.framework; sourceTree = "<group>"; };
 		2630E02519163B390071260C /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		2692CD5218D7C2A2006501C4 /* AMMesher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMMesher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CD5518D7C2A2006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -139,7 +138,6 @@
 				26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */,
 				2630E02519163B390071260C /* AMNotificationManager.framework */,
 				D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */,
-				2623DDBE18DD0E7C00BF982F /* AMETCDApi.framework */,
 				2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */,
 				2692CD5518D7C2A2006501C4 /* Cocoa.framework */,
 				2692CD6A18D7C2A2006501C4 /* XCTest.framework */,

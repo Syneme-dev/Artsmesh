@@ -52,6 +52,8 @@
 		D4BBBD7D19AF7352006BEE40 /* AMPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BBBD7919AF7352006BEE40 /* AMPort.m */; };
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
+		D4FA2C0B19B4BD1900B245BB /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */; };
+		D4FA2C0C19B4BD3100B245BB /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,19 @@
 			remoteInfo = AMAudio;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D4FA2C0919B4BD0000B245BB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4FA2C0B19B4BD1900B245BB /* Jackmp.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
@@ -116,6 +131,7 @@
 		D4BBBD7919AF7352006BEE40 /* AMPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPort.m; sourceTree = "<group>"; };
 		D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackConfigs.h; sourceTree = "<group>"; };
 		D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackConfigs.m; sourceTree = "<group>"; };
+		D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jackmp.framework; path = AMAudio/jack/Jackmp.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4FA2C0C19B4BD3100B245BB /* Jackmp.framework in Frameworks */,
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
 				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
@@ -168,6 +185,7 @@
 		D472930419A6E5030034CC34 = {
 			isa = PBXGroup;
 			children = (
+				D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */,
 				D472931719A6E5030034CC34 /* AMAudio */,
 				D472932C19A6E5030034CC34 /* AMAudioTests */,
 				D472931019A6E5030034CC34 /* Frameworks */,
@@ -309,6 +327,7 @@
 				D472930A19A6E5030034CC34 /* Frameworks */,
 				D472930B19A6E5030034CC34 /* Headers */,
 				D472930C19A6E5030034CC34 /* Resources */,
+				D4FA2C0919B4BD0000B245BB /* CopyFiles */,
 			);
 			buildRules = (
 			);

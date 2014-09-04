@@ -18,6 +18,7 @@
 @property (strong) IBOutlet NSTabView *tabs;
 @property (strong) IBOutlet AMBlueButton *staticTab;
 @property (weak) IBOutlet WebView *archiveWebView;
+@property (strong) IBOutlet NSImageView *liveMapView;
 - (IBAction)onStaticTabClick:(id)sender;
 @property (strong) IBOutlet AMBlueButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;

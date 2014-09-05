@@ -77,6 +77,7 @@
     _audioRouterViewController = [[AMAudio sharedInstance] getJackRouterUI];
     if (_audioRouterViewController) {
         NSView* contentView = _audioRouterViewController.view;
+        contentView.frame = NSMakeRect(0, 0, 800, 600);
         [tabView addSubview:contentView];
         
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];

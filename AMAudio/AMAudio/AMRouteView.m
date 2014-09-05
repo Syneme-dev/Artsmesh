@@ -21,9 +21,8 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+    [NSColor whiteColor];
+    NSRectFill(self.bounds);
 }
 
 @end

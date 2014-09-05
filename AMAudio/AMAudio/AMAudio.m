@@ -21,7 +21,7 @@
 @implementation AMAudio
 {
     AMAudioPrefViewController* _prefController;
-   // AMAudioRouterController*   _audioController;
+    AMRouteViewController*   _audioController;
     
     AMJackConfigs* _configs;
     AMShellTask* _jackTask;
@@ -71,15 +71,13 @@
 
 -(NSViewController*)getJackRouterUI
 {
-    /*
+    
     if (_audioController == nil) {
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-        _audioController = [[AMAudioRouterController alloc] initWithNibName:@"AMAudioRouterController" bundle:myBundle];
+        _audioController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
     }
     
     return _audioController;
-     */
-    return [[AMRouteViewController alloc] init];
 }
 
 -(BOOL)startJack

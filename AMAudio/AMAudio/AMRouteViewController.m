@@ -14,11 +14,5 @@
 
 @implementation AMRouteViewController
 
-- (void)loadView
-{
-    AMRouteView *routeView = [[AMRouteView alloc] init];
-    self.view = routeView;
-    routeView.delegate = self;
-}
 
 @end

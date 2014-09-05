@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */; };
 		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
 		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
 		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
@@ -79,6 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				CE68805019B94EF20062211C /* AMChannel.m */,
 				CE68805119B94EF20062211C /* AMRouteView.h */,
 				CE68805219B94EF20062211C /* AMRouteView.m */,
+				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
 				CE68805719B94F2A0062211C /* AMRouteViewController.h */,
 				CE68805819B94F2A0062211C /* AMRouteViewController.m */,
 				D472931E19A6E5030034CC34 /* AMAudio.h */,
@@ -391,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */,
+				26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */,
 				D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

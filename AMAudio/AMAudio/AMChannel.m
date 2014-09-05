@@ -10,4 +10,22 @@
 
 @implementation AMChannel
 
+- (instancetype)initWithIndex:(NSUInteger)index;
+{
+    self = [super init];
+    if (self) {
+        _index = index;
+        [self reset];
+    }
+    return self;
+}
+
+- (void)reset
+{
+    _type = AMPlaceholderChannel;
+    _deviceID = nil;
+    _channelName = nil;
+    _peerIndexes = [[NSMutableIndexSet alloc] init];
+}
+
 @end

@@ -11,23 +11,23 @@
 @class AMRouteView;
 
 @protocol AMRouterViewDelegate
-@optional
-- (BOOL)routeView:(AMRouteView *)routeView
-    shouldConnectChannel:(AMChannel *)channel1
-               toChannel:(AMChannel *)channel2;
-- (BOOL)routeView:(AMRouteView *)routeView
-    connectChannel:(AMChannel *)channel1
-         toChannel:(AMChannel *)channel2;
 
 - (BOOL)routeView:(AMRouteView *)routeView
-    shouldDisonnectChannel:(AMChannel *)channel1
-               fromChannel:(AMChannel *)channel2;
+shouldConnectChannel:(AMChannel *)channel1
+        toChannel:(AMChannel *)channel2;
 - (BOOL)routeView:(AMRouteView *)routeView
-    disonnectChannel:(AMChannel *)channel1
-         fromChannel:(AMChannel *)channel2;
+   connectChannel:(AMChannel *)channel1
+        toChannel:(AMChannel *)channel2;
 
 - (BOOL)routeView:(AMRouteView *)routeView
-    shouldRemoveDevice:(NSString *)deviceID;
+shouldDisonnectChannel:(AMChannel *)channel1
+      fromChannel:(AMChannel *)channel2;
+- (BOOL)routeView:(AMRouteView *)routeView
+disconnectChannel:(AMChannel *)channel1
+      fromChannel:(AMChannel *)channel2;
+
+- (BOOL)routeView:(AMRouteView *)routeView
+shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMRouteView *)routeView
      removeDevice:(NSString *)deviceID;
 
@@ -36,7 +36,7 @@
 
 @interface AMRouteView : NSView
 
-@property(nonatomic, weak) id<AMRouterViewDelegate> delegate;
+@property(nonatomic) id<AMRouterViewDelegate> delegate;
 @property(nonatomic, readonly) NSArray *allChannels;
 
 - (void)associateSourceChannels:(NSIndexSet *)sourceChannelIndexes

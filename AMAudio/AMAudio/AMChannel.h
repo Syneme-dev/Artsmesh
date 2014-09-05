@@ -17,10 +17,14 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 
 @interface AMChannel : NSObject
 
-@property(nonatomic, readonly) AMChannelType type;
+@property(nonatomic) AMChannelType type;
 @property(nonatomic) NSString *deviceID;
 @property(nonatomic) NSString *channelName;
-@property(nonatomic) NSInteger index;
+@property(nonatomic) NSUInteger index;
 @property(nonatomic) NSMutableIndexSet *peerIndexes;
+
+// designated initializer
+- (instancetype)initWithIndex:(NSUInteger)index;
+- (void)reset;
 
 @end

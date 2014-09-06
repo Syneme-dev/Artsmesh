@@ -91,15 +91,17 @@
     //imageView is your outlet
     [_liveMapView setImage: mapImage];
     [mapTab.view addSubview: _liveMapView];
+    
+    //Center the view within parent view
+    [_liveMapView setFrameOrigin:NSMakePoint(
+        (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
+        (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
+    )];
+    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
 }
 
 - (void)loadArchivePage
 {
-    /**
-    NSURL *url = [NSURL URLWithString:@"http://artsmesh.io/circle/circle.html"];
-    [self.archiveWebView.mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
-    [self.archiveWebView.mainFrame.frameView.documentView scaleUnitSquareToSize:NSMakeSize(0.8, 0.8)];
-     **/
     
     //TODO:there is an errror when load social and map at the same time.
     //Error:There was a problem with your session token.
@@ -138,6 +140,7 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
+
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

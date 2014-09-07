@@ -188,6 +188,9 @@
 Gw
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="cancelOper:" target="-2" id="lRS-1d-I2i"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wZM-is-OrT">
                     <rect key="frame" x="205" y="13" width="140" height="32"/>
@@ -196,13 +199,16 @@ Gw
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="startJacktrip:" target="-2" id="mQ7-18-VOS"/>
+                    </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eW0-pn-Doq">
                     <rect key="frame" x="51" y="528" width="164" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="54I-N6-KxB" id="5r9-Qo-Qg9">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="o5h-yd-BjC">
                             <items>
                                 <menuItem title="Item 1" state="on" id="54I-N6-KxB"/>
@@ -220,7 +226,7 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="vfz-Qf-5A2" id="ziD-iX-aa4">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="jF5-cR-jRK">
                             <items>
                                 <menuItem title="Item 1" state="on" id="vfz-Qf-5A2"/>
@@ -238,7 +244,7 @@ Gw
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JQM-Q7-fvh" id="wlY-cz-EWU">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="jgl-1i-yEf">
                             <items>
                                 <menuItem title="Item 1" state="on" id="JQM-Q7-fvh"/>

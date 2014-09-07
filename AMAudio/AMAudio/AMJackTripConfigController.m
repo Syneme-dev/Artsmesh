@@ -63,7 +63,6 @@
     
     //init channel count
     [self.channelCountSelecter removeAllItems];
-    
     for (int i = 2; i <= 16; i *= 2) {
         NSString* numStr = [NSString stringWithFormat:@"%d", i];
         [self.channelCountSelecter addItemWithTitle:numStr];
@@ -110,6 +109,16 @@
     }else{
         [self.peerSelfDefine setEnabled:NO];
     }
+}
+
+- (IBAction)startJacktrip:(NSButton *)sender
+{
+    
+}
+
+- (IBAction)cancelOper:(NSButton *)sender
+{
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265A405619BD65C8003D27E5 /* AMCoreData.framework */; };
 		26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */; };
 		26F2C30E19B9FD61001261F0 /* AMJackTripConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */; };
 		26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */; };
@@ -83,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		265A405619BD65C8003D27E5 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
 		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
 		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripConfigController.h; sourceTree = "<group>"; };
 		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfigController.m; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
 				D4FA2C0C19B4BD3100B245BB /* Jackmp.framework in Frameworks */,
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
 				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
@@ -211,6 +214,7 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				265A405619BD65C8003D27E5 /* AMCoreData.framework */,
 				D443717C19AACF7A00F49705 /* CoreAudio.framework */,
 				D443717A19AACF6300F49705 /* AudioToolbox.framework */,
 				D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */,
@@ -568,6 +572,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -598,6 +603,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -7,6 +7,7 @@
 //
 
 #import "AMJackTripConfigController.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMJackTripConfigController ()
 @property (weak) IBOutlet NSPopUpButton *roleSelecter;
@@ -21,7 +22,6 @@
 @property (weak) IBOutlet NSButton *loopbackCheck;
 @property (weak) IBOutlet NSButton *jamlinkCheck;
 @property (weak) IBOutlet NSButton *createBtn;
-@property (weak) IBOutlet NSButton *cancelBtn;
 
 @end
 
@@ -57,8 +57,17 @@
     
     //init peers
     [self.peerSelecter removeAllItems];
-    [self.peerSelecter addItemWithTitle:@"wangwei"];
-    [self.peerSelecter addItemWithTitle:@"robbin"];
+    NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    for (AMLiveUser* user in myGroupMem) {
+        if([user.userid isNotEqualTo:mySelf.userid]){
+            [self.peerSelecter addItemWithTitle:user.nickName];
+            if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
+                self.peerSelfDefine.stringValue = user.publicIp;
+            }
+        }
+    }
+    
     [self.peerSelecter addItemWithTitle:@"ip address"];
     
     //init channel count
@@ -108,15 +117,17 @@
         [self.peerSelfDefine setEnabled:YES];
     }else{
         [self.peerSelfDefine setEnabled:NO];
+    
+        NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
+        for (AMLiveUser* user in myGroupMem) {
+            if([user.nickName isEqualToString:sender.selectedItem.title]){
+                self.peerSelfDefine.stringValue = user.publicIp;
+            }
+        }
     }
 }
 
 - (IBAction)startJacktrip:(NSButton *)sender
-{
-    
-}
-
-- (IBAction)cancelOper:(NSButton *)sender
 {
     
 }

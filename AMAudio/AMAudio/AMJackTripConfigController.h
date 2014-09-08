@@ -10,6 +10,5 @@
 
 @interface AMJackTripConfigController : NSViewController
 
-@property NSString* role;
 
 @end

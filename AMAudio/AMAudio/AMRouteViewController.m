@@ -8,16 +8,18 @@
 
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
+#import "AMJackClient.h"
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
 @property NSPopover *myPopover;
 
-
-
 @end
 
 @implementation AMRouteViewController
+{
+    AMJackClient* _jackClient;
+}
 
 - (BOOL)routeView:(AMRouteView *)routeView
 shouldConnectChannel:(AMChannel *)channel1
@@ -57,6 +59,40 @@ shouldRemoveDevice:(NSString *)deviceID;
      removeDevice:(NSString *)deviceID
 {
     return YES;
+}
+
+-(void)awakeFromNib
+{
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(reloadAudioChannel:)
+     name:JACKTRIP_CHANGED_NOTIFICATION
+     object:nil];
+    
+    _jackClient = [[AMJackClient alloc] init];
+}
+
+-(void)dealloc
+{
+    if (_jackClient) {
+        [_jackClient closeJackClient];
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self];
+}
+
+-(void)reloadAudioChannel:(NSNotification*)notify
+{
+    if(_jackClient.isOpen == NO){
+        if (![_jackClient openJackClient]) {
+            NSException* exp = [[NSException alloc] initWithName:@"OpenJackClientFailed!" reason:@"" userInfo:nil];
+            [exp raise];
+        }
+    }
+    
+    NSArray* srcPorts = [_jackClient sourcePorts];
+    NSArray* desPorts = [_jackClient destinationPorts];
+    
 }
 
 - (IBAction)startJackTrip:(NSButton *)sender

@@ -8,6 +8,8 @@
 
 #import "AMJackTripConfigController.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMTaskLauncher/AMShellTask.h"
+#import "AMRouteViewController.h"
 
 @interface AMJackTripConfigController ()
 @property (weak) IBOutlet NSPopUpButton *roleSelecter;
@@ -26,6 +28,9 @@
 @end
 
 @implementation AMJackTripConfigController
+{
+    NSMutableArray* _jacktripTasks;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,7 +83,12 @@
     }
     
     //init port
-    self.portOffset.stringValue = [NSString stringWithFormat:@"%d", 0];
+    if (_jacktripTasks == nil) {
+        self.portOffset.stringValue = [NSString stringWithFormat:@"%d", 0];
+    }else{
+        self.portOffset.stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)[_jacktripTasks count]];
+    }
+    
     
     //init -q
     self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
@@ -102,10 +112,8 @@
 - (IBAction)roleSelectedChanged:(NSPopUpButton *)sender
 {
     if ([sender.selectedItem.title isEqualToString:@"Client"]){
-        self.role = @"-c";
         [self.peerSelecter setEnabled:YES];
     }else{
-        self.role = @"-s";
         [self.peerSelecter setEnabled:NO];
         [self.peerSelfDefine setEnabled:NO];
     }
@@ -130,7 +138,62 @@
 
 - (IBAction)startJacktrip:(NSButton *)sender
 {
+    NSMutableString* commandline = [NSMutableString stringWithFormat:@"jacktrip"];
+    
+    //-s or -c
+    if([self.roleSelecter.selectedItem.title isEqualToString:@"Server"]){
+        [commandline appendFormat:@" -s"];
+    }else{
+        [commandline appendFormat:@" -c %@", self.peerSelfDefine.stringValue];
+    }
+    
+    //port offset
+    [commandline appendFormat:@" -o %@", self.portOffset.stringValue];
+    
+    //channel numbers
+    [commandline appendFormat:@" -n %@", self.channelCountSelecter.selectedItem.title];
+    
+    //-q
+    [commandline appendFormat:@" -q %@", self.qCount.stringValue];
+    
+    //-r
+    [commandline appendFormat:@" -r %@", self.rCount.stringValue];
+    
+    //-b
+    [commandline appendFormat:@" -b %@", self.bitRateRes.stringValue];
+    
+    //-z
+    if (self.zerounderrunCheck.state == NSOnState ) {
+        [commandline appendFormat:@" -z"];
+    }
+    
+    //-l
+    if (self.loopbackCheck.state == NSOnState) {
+        [commandline appendFormat:@" -l"];
+    }
+    
+    //-j
+    if (self.jamlinkCheck.state == NSOnState) {
+        [commandline appendFormat:@" -j"];
+    }
+    
+    NSLog(@"jack trip command line is: %@", commandline);
+    
+    if (_jacktripTasks == nil) {
+        _jacktripTasks = [[NSMutableArray alloc] init];
+    }
+    
+    AMShellTask* task = [[AMShellTask alloc] initWithCommand:commandline];
+    [task launch];
+    [_jacktripTasks addObject:task];
+    
+    
+    NSNotification* notification = [NSNotification notificationWithName:JACKTRIP_CHANGED_NOTIFICATION
+                                                                 object:self
+                                                               userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
     
 }
+
 
 @end

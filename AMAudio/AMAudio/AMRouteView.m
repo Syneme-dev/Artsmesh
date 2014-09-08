@@ -67,23 +67,23 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     [self doInit];
     
     self.delegate = [[AMRouteViewController alloc] init];
-    NSMutableIndexSet *srcChannel = [[NSMutableIndexSet alloc] init];
-    NSMutableIndexSet *destChannel = [[NSMutableIndexSet alloc] init];
-    [srcChannel addIndex:0];
-    [srcChannel addIndex:1];
-    [destChannel addIndex:2];
-    
-    [destChannel addIndex:3];
-    [self associateSourceChannels:srcChannel
-              destinationChannels:destChannel
-                       withDevice:@"Device1"
-                             name:@"Device 1"];
-    _selectedChannel = [self channelAtIndex:2];
-    NSArray *channels = [self channelsAssociatedWithDevice:@"Device1"];
-    [[channels[0] peerIndexes] addIndex:2];
-    [[channels[1] peerIndexes] addIndex:3];
-    _selectedConnection[0] = 0;
-    _selectedConnection[1] = 2;
+//    NSMutableIndexSet *srcChannel = [[NSMutableIndexSet alloc] init];
+//    NSMutableIndexSet *destChannel = [[NSMutableIndexSet alloc] init];
+//    [srcChannel addIndex:0];
+//    [srcChannel addIndex:1];
+//    [destChannel addIndex:2];
+//    
+//    [destChannel addIndex:3];
+//    [self associateSourceChannels:srcChannel
+//              destinationChannels:destChannel
+//                       withDevice:@"Device1"
+//                             name:@"Device 1"];
+//    _selectedChannel = [self channelAtIndex:2];
+//    NSArray *channels = [self channelsAssociatedWithDevice:@"Device1"];
+//    [[channels[0] peerIndexes] addIndex:2];
+//    [[channels[1] peerIndexes] addIndex:3];
+//    _selectedConnection[0] = 0;
+//    _selectedConnection[1] = 2;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -403,6 +403,11 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     }
     
     return NO;
+}
+
++(NSUInteger)maxChannels
+{
+    return kNumberOfChannels;
 }
 
 @end

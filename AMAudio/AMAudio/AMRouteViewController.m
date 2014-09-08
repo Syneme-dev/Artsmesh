@@ -9,6 +9,8 @@
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
 #import "AMJackClient.h"
+#import "AMChannel.h"
+#import "AMJackDevice.h"
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
@@ -93,6 +95,65 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSArray* srcPorts = [_jackClient sourcePorts];
     NSArray* desPorts = [_jackClient destinationPorts];
     
+    NSMutableDictionary* jackDevices = [[NSMutableDictionary alloc] init];
+    for (NSString* channelName in srcPorts) {
+        NSArray* channelNameParts = [channelName componentsSeparatedByString:@":"];
+        if ([channelNameParts count] != 2) {
+            continue;
+        }
+        
+        NSString* jackDevName = channelNameParts [0];
+        AMJackDevice* jackDevice;
+        jackDevice = [jackDevices objectForKey:jackDevName];
+        if (jackDevice == nil) {
+            jackDevice = [[AMJackDevice alloc] init];
+            jackDevice.srcChans = [[NSMutableArray alloc] init];
+            jackDevice.desChans = [[NSMutableArray alloc] init];
+            jackDevice.deviceID = jackDevName;
+            jackDevice.deviceName = jackDevName;
+        }
+        
+        AMChannel* chann = [[AMChannel alloc] init];
+        chann.type = AMSourceChannel;
+        chann.channelName = channelNameParts[1];
+        chann.deviceID = channelNameParts [0];
+        [jackDevice.srcChans addObject:chann];
+        
+        jackDevices[jackDevName] = jackDevice;
+    }
+    
+    for (NSString* channelName in desPorts) {
+        NSArray* channelNameParts = [channelName componentsSeparatedByString:@":"];
+        if ([channelNameParts count] != 2) {
+            continue;
+        }
+        
+        NSString* jackDevName = channelNameParts [0];
+        AMJackDevice* jackDevice;
+        jackDevice = [jackDevices objectForKey:jackDevName];
+        if (jackDevice == nil) {
+            jackDevice = [[AMJackDevice alloc] init];
+            jackDevice.srcChans = [[NSMutableArray alloc] init];
+            jackDevice.desChans = [[NSMutableArray alloc] init];
+            jackDevice.deviceID = jackDevName;
+            jackDevice.deviceName = jackDevName;
+        }
+        
+        AMChannel* chann = [[AMChannel alloc] init];
+        chann.type = AMDestinationChannel;
+        chann.channelName = channelNameParts[1];
+        chann.deviceID = channelNameParts [0];
+        [jackDevice.desChans addObject:chann];
+        
+        jackDevices[jackDevName] = jackDevice;
+    }
+    
+    for (NSString* name in jackDevices) {
+        AMJackDevice* device = jackDevices[name];
+        [device addDeviceToRouteView:(AMRouteView*)self.view];
+    }
+    
+    [self.view setNeedsDisplay:YES];
 }
 
 - (IBAction)startJackTrip:(NSButton *)sender

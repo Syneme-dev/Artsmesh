@@ -46,4 +46,6 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (AMChannel *)channelAtIndex:(NSUInteger)index;
 - (NSArray *)channelsAssociatedWithDevice:(NSString *)deviceID;
 
++(NSUInteger)maxChannels;
+
 @end

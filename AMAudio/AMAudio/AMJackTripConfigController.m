@@ -63,7 +63,7 @@
         if([user.userid isNotEqualTo:mySelf.userid]){
             [self.peerSelecter addItemWithTitle:user.nickName];
             if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
-                self.peerSelfDefine.stringValue = user.publicIp;
+                self.peerSelfDefine.stringValue = user.privateIp;
             }
         }
     }
@@ -115,13 +115,14 @@
 {
     if ([sender.selectedItem.title isEqualToString:@"ip address"]) {
         [self.peerSelfDefine setEnabled:YES];
+        self.peerSelfDefine.stringValue = @"";
     }else{
         [self.peerSelfDefine setEnabled:NO];
     
         NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
         for (AMLiveUser* user in myGroupMem) {
             if([user.nickName isEqualToString:sender.selectedItem.title]){
-                self.peerSelfDefine.stringValue = user.publicIp;
+                self.peerSelfDefine.stringValue = user.privateIp;
             }
         }
     }

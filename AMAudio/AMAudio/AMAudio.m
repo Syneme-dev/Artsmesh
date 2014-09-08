@@ -10,7 +10,7 @@
 #import "AMAudioPrefViewController.h"
 #import "AMJackConfigs.h"
 #import "AMTaskLauncher/AMShellTask.h"
-#import "AMAudioRouterController.h"
+#import "AMRouteViewController.h"
 
 @interface AMAudio()
 
@@ -21,7 +21,7 @@
 @implementation AMAudio
 {
     AMAudioPrefViewController* _prefController;
-    AMAudioRouterController*   _audioController;
+    AMRouteViewController*   _audioController;
     
     AMJackConfigs* _configs;
     AMShellTask* _jackTask;
@@ -71,9 +71,10 @@
 
 -(NSViewController*)getJackRouterUI
 {
+    
     if (_audioController == nil) {
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-        _audioController = [[AMAudioRouterController alloc] initWithNibName:@"AMAudioRouterController" bundle:myBundle];
+        _audioController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
     }
     
     return _audioController;

@@ -7,8 +7,13 @@
 //
 
 #import "AMRouteViewController.h"
+#import "AMJackTripConfigController.h"
 
-@interface AMRouteViewController ()
+@interface AMRouteViewController ()  <NSPopoverDelegate>
+
+@property NSPopover *myPopover;
+
+
 
 @end
 
@@ -52,6 +57,33 @@ shouldRemoveDevice:(NSString *)deviceID;
      removeDevice:(NSString *)deviceID
 {
     return YES;
+}
+
+- (IBAction)startJackTrip:(NSButton *)sender
+{
+    if (self.myPopover == nil) {
+        self.myPopover = [[NSPopover alloc] init];
+        
+        self.myPopover.animates = YES;
+        self.myPopover.behavior = NSPopoverBehaviorTransient;
+        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        self.myPopover.delegate = self;
+    }
+    
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+    self.myPopover.contentViewController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+    [self.myPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+}
+
+
+- (void)popoverWillShow:(NSNotification *)notification
+{
+    
+}
+
+-(void)popoverDidClose:(NSNotification *)notification
+{
+
 }
 
 @end

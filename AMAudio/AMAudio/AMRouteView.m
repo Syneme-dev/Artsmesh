@@ -67,17 +67,16 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 {
     [self doInit];
     
-//<<<<<<< HEAD
-    self.delegate = [[AMRouteViewController alloc] init];
-    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-    for (int i = 0; i < 4; i++) {
-        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-        channels[i] = channel;
-    }
-    [self associateChannels:channels
-                 withDevice:@"Device1"
-                       name:@"Device 1"];
+//    self.delegate = [[AMRouteViewController alloc] init];
+//    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//    for (int i = 0; i < 4; i++) {
+//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//        channels[i] = channel;
+//    }
+//    [self associateChannels:channels
+//                 withDevice:@"Device1"
+//                       name:@"Device 1"];
 }
 
 - (void)drawRect:(NSRect)dirtyRect

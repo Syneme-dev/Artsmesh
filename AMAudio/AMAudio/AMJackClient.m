@@ -9,6 +9,7 @@
 #import "AMJackClient.h"
 #include "jack.h"
 #include "types.h"
+#import "AMChannel.h"
 
 #define JACK_MAX_PORTS  2048
 
@@ -34,16 +35,16 @@
     return YES;
 }
 
--(NSArray*)sourcePorts
+-(NSArray*)allChannels
 {
-    NSMutableArray* inputPorts = [[NSMutableArray alloc] init];
+    NSMutableArray* allChannels = [[NSMutableArray alloc] init];
     if (_client == NULL) {
-        return inputPorts;
+        return allChannels;
     }
     
     const char** ports =  jack_get_ports(_client, NULL, NULL, 0);
     if (!ports){
-        return inputPorts;
+        return allChannels;
     }
     
     for (int i = 0; i < JACK_MAX_PORTS; i++) {
@@ -54,50 +55,39 @@
         jack_port_t* jackport = jack_port_by_name(_client, ports[i]);
         if (jackport != NULL) {
             int flag = jack_port_flags(jackport);
+            
+            NSString* fullChannName = [NSString stringWithFormat:@"%s", ports[i]];
+            NSArray* channNamePath = [fullChannName componentsSeparatedByString:@":"];
+            NSString* channName;
+            NSString* deviceName;
+            
+            if ([channNamePath count] == 2 ) {
+                deviceName = channNamePath[0];
+                channName = channNamePath[1];
+            }else if( [channNamePath count] == 1){
+                deviceName = channNamePath[0];
+                channName = channNamePath[0];
+            }else{
+                continue;
+            }
+            
+            AMChannel* newChann = [[AMChannel alloc] init];
+            newChann.channelName = channName;
+            newChann.deviceID = deviceName;
+            
             if (flag & JackPortIsInput) {
-        
-                NSString* portname = [NSString stringWithFormat:@"%s", ports[i]];
-                [inputPorts addObject:portname];
+                newChann.type = AMSourceChannel;
+            }else{
+                newChann.type = AMDestinationChannel;
             }
+            
+            [allChannels addObject:newChann];
         }
     }
-    
-    jack_free(ports);
-    return inputPorts;
-}
 
--(NSArray*)destinationPorts
-{
-    NSMutableArray* outputPorts = [[NSMutableArray alloc] init];
-    if (_client == NULL) {
-        return outputPorts;
-    }
-    
-    const char** ports =  jack_get_ports(_client, NULL, NULL, 0);
-    if (!ports){
-        return outputPorts;
-    }
-    
-    for (int i = 0; i < JACK_MAX_PORTS; i++) {
-        if (ports[i] == NULL) {
-            break;
-        }
-        
-        jack_port_t* jackport = jack_port_by_name(_client, ports[i]);
-        if (jackport != NULL) {
-            int flag = jack_port_flags(jackport);
-            if (flag & JackPortIsOutput) {
-                
-                NSString* portname = [NSString stringWithFormat:@"%s", ports[i]];
-                [outputPorts addObject:portname];
-            }
-        }
-    }
-    
     jack_free(ports);
-    return outputPorts;
+    return allChannels;
 }
-
 
 -(NSArray*)connectionForPort:(NSString*)portName
 {

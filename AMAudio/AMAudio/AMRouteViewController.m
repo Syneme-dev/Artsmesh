@@ -11,6 +11,7 @@
 #import "AMJackClient.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"
+#import "AMRouteView.h"
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
@@ -90,70 +91,47 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     if(_jackClient.isOpen == NO){
         if (![_jackClient openJackClient]) {
-            NSException* exp = [[NSException alloc] initWithName:@"OpenJackClientFailed!" reason:@"" userInfo:nil];
+            NSException* exp = [[NSException alloc]
+                                initWithName:@"OpenJackClientFailed!"
+                                reason:@""
+                                userInfo:nil];
             [exp raise];
         }
     }
     
-    NSArray* srcPorts = [_jackClient sourcePorts];
-    NSArray* desPorts = [_jackClient destinationPorts];
-    
-    NSMutableDictionary* jackDevices = [[NSMutableDictionary alloc] init];
-    for (NSString* channelName in srcPorts) {
-        NSArray* channelNameParts = [channelName componentsSeparatedByString:@":"];
-        if ([channelNameParts count] != 2) {
-            continue;
-        }
-        
-        NSString* jackDevName = channelNameParts [0];
-        AMJackDevice* jackDevice;
-        jackDevice = [jackDevices objectForKey:jackDevName];
-        if (jackDevice == nil) {
-            jackDevice = [[AMJackDevice alloc] init];
-            jackDevice.srcChans = [[NSMutableArray alloc] init];
-            jackDevice.desChans = [[NSMutableArray alloc] init];
-            jackDevice.deviceID = jackDevName;
-            jackDevice.deviceName = jackDevName;
-        }
-        
-        AMChannel* chann = [[AMChannel alloc] init];
-        chann.type = AMSourceChannel;
-        chann.channelName = channelNameParts[1];
-        chann.deviceID = channelNameParts [0];
-        [jackDevice.srcChans addObject:chann];
-        
-        jackDevices[jackDevName] = jackDevice;
+    NSArray* allChann = [_jackClient allChannels];
+    if ([allChann count] > [AMRouteView maxChannels]) {
+        NSException* exp = [[NSException alloc]
+                            initWithName:@"TooManyChannels"
+                            reason:@""
+                            userInfo:nil];
+        [exp raise];
     }
     
-    for (NSString* channelName in desPorts) {
-        NSArray* channelNameParts = [channelName componentsSeparatedByString:@":"];
-        if ([channelNameParts count] != 2) {
-            continue;
+    NSMutableDictionary* devices = [[NSMutableDictionary alloc] init];
+    for (NSUInteger i = 0; i < [allChann count]; i++) {
+        AMChannel* chann = allChann[i];
+        chann.index = i;
+
+        AMJackDevice* device = devices[chann.deviceID];
+        if(device == nil){
+            device = [[AMJackDevice alloc] init];
+            device.deviceID = chann.deviceID;
+            device.deviceName = chann.deviceID;
+            device.channels = [[NSMutableArray alloc] init];
+            
+            devices[chann.deviceID] = device;
         }
         
-        NSString* jackDevName = channelNameParts [0];
-        AMJackDevice* jackDevice;
-        jackDevice = [jackDevices objectForKey:jackDevName];
-        if (jackDevice == nil) {
-            jackDevice = [[AMJackDevice alloc] init];
-            jackDevice.srcChans = [[NSMutableArray alloc] init];
-            jackDevice.desChans = [[NSMutableArray alloc] init];
-            jackDevice.deviceID = jackDevName;
-            jackDevice.deviceName = jackDevName;
-        }
-        
-        AMChannel* chann = [[AMChannel alloc] init];
-        chann.type = AMDestinationChannel;
-        chann.channelName = channelNameParts[1];
-        chann.deviceID = channelNameParts [0];
-        [jackDevice.desChans addObject:chann];
-        
-        jackDevices[jackDevName] = jackDevice;
+        [device.channels addObject:chann];
     }
     
-    for (NSString* name in jackDevices) {
-        AMJackDevice* device = jackDevices[name];
-        [device addDeviceToRouteView:(AMRouteView*)self.view];
+    for(NSString* deviceID in devices){
+        AMJackDevice* device = devices[deviceID];
+        AMRouteView* routeView = (AMRouteView*)self.view;
+        [routeView associateChannels:device.channels
+                          withDevice:device.deviceID
+                                name:device.deviceName];
     }
     
     [self.view setNeedsDisplay:YES];

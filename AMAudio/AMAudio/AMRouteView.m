@@ -19,7 +19,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 
 @property(nonatomic) NSString *deviceID;
 @property(nonatomic) NSString *deviceName;
-@property(nonatomic) NSIndexSet *channelIndexes;
+@property(nonatomic) NSRange channelIndexRange;
 
 @end
 
@@ -39,6 +39,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     NSColor *_selectedConnectionColor;
     NSPoint _center;
     CGFloat _radius;
+    NSMutableArray *_allChannels;
     AMChannel *_selectedChannel;
     AMChannel *_targetChannel;
     NSInteger _selectedConnection[2];
@@ -67,23 +68,16 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     [self doInit];
     
     self.delegate = [[AMRouteViewController alloc] init];
-    NSMutableIndexSet *srcChannel = [[NSMutableIndexSet alloc] init];
-    NSMutableIndexSet *destChannel = [[NSMutableIndexSet alloc] init];
-    [srcChannel addIndex:0];
-    [srcChannel addIndex:1];
-    [destChannel addIndex:2];
-    
-    [destChannel addIndex:3];
-    [self associateSourceChannels:srcChannel
-              destinationChannels:destChannel
-                       withDevice:@"Device1"
-                             name:@"Device 1"];
-    _selectedChannel = [self channelAtIndex:2];
-    NSArray *channels = [self channelsAssociatedWithDevice:@"Device1"];
-    [[channels[0] peerIndexes] addIndex:2];
-    [[channels[1] peerIndexes] addIndex:3];
-    _selectedConnection[0] = 0;
-    _selectedConnection[1] = 2;
+    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+    for (int i = 0; i < 4; i++) {
+        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+        channels[i] = channel;
+    }
+    [self associateChannels:channels
+                 withDevice:@"Device1"
+                       name:@"Device 1"];
+
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -144,7 +138,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
     AMChannel *channel = [self testClickOccuredOnChannel:theEvent];
-    if (channel) {
+    if (channel && channel.type != AMPlaceholderChannel) {
         if (_selectedChannel && _selectedChannel.type != channel.type &&
             ![_selectedChannel.peerIndexes containsIndex:channel.index]) {
             _targetChannel = channel;
@@ -169,26 +163,20 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 
 #pragma mark - Public Methods
 
-- (void)associateSourceChannels:(NSIndexSet *)sourceChannelIndexes
-            destinationChannels:(NSIndexSet *)destinationChannelIndexes
-                     withDevice:(NSString *)deviceID
-                           name:(NSString *)deviceName
+- (void)associateChannels:(NSArray *)channels
+               withDevice:(NSString *)deviceID
+                     name:(NSString *)deviceName
 {
-    [sourceChannelIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [self channelAtIndex:idx].type = AMSourceChannel;
-    }];
-    [destinationChannelIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [self channelAtIndex:idx].type = AMDestinationChannel;
-    }];
     AMDevice *device = [[AMDevice alloc] init];
     device.deviceID = deviceID;
     device.deviceName = deviceName;
-    NSUInteger firstIndex = MIN(sourceChannelIndexes.firstIndex,
-                                destinationChannelIndexes.firstIndex);
-    NSUInteger lastIndex = MAX(sourceChannelIndexes.lastIndex,
-                               destinationChannelIndexes.lastIndex);
-    NSRange range = NSMakeRange(firstIndex, lastIndex);
-    device.channelIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSUInteger minIndex = 0;
+    for (AMChannel *channel in channels) {
+        NSAssert(channel.index < kNumberOfChannels, @"channel index out of bound");
+        minIndex = MIN(minIndex, channel.index);
+        _allChannels[channel.index] = channel;
+    }
+    device.channelIndexRange = NSMakeRange(minIndex, channels.count);
     self.devices[deviceID] = device;
 }
 
@@ -199,12 +187,10 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 
 - (NSArray *)channelsAssociatedWithDevice:(NSString *)deviceID
 {
-    NSIndexSet *indexes = [self.devices[deviceID] channelIndexes];
-    NSUInteger count = indexes.lastIndex - indexes.firstIndex + 1;
-    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:count];
-    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [channels addObject:[self channelAtIndex:idx]];
-    }];
+    NSRange range = [self.devices[deviceID] channelIndexRange];
+    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:range.length];
+    for (NSUInteger i = range.location; i < range.location + range.length; i++)
+        [channels addObject:[self channelAtIndex:i]];
     return channels;
 }
 
@@ -212,12 +198,10 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 
 - (void)doInit
 {
-    NSMutableArray *allChannels = [NSMutableArray arrayWithCapacity:kNumberOfChannels];
-    for (int i = 0; i < kNumberOfChannels; i++) {
-        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-        [allChannels addObject:channel];
-    }
-    _allChannels = [allChannels copy];
+    _allChannels = [NSMutableArray arrayWithCapacity:kNumberOfChannels];
+    for (int i = 0; i < kNumberOfChannels; i++)
+        _allChannels[i] = [[AMChannel alloc] initWithIndex:i];
+    
     _devices = [NSMutableDictionary dictionary];
     
     _selectedConnection[0] = NSNotFound;

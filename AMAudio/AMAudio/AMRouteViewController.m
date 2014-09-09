@@ -70,6 +70,9 @@ shouldRemoveDevice:(NSString *)deviceID;
      name:JACKTRIP_CHANGED_NOTIFICATION
      object:nil];
     
+    AMRouteView* view = (AMRouteView*)self.view;
+    view.delegate = self;
+
     _jackClient = [[AMJackClient alloc] init];
 }
 

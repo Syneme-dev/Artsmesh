@@ -66,7 +66,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 {
     [self doInit];
     
-    self.delegate = [[AMRouteViewController alloc] init];
+//    self.delegate = [[AMRouteViewController alloc] init];
 //    NSMutableIndexSet *srcChannel = [[NSMutableIndexSet alloc] init];
 //    NSMutableIndexSet *destChannel = [[NSMutableIndexSet alloc] init];
 //    [srcChannel addIndex:0];
@@ -83,7 +83,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 //    [[channels[0] peerIndexes] addIndex:2];
 //    [[channels[1] peerIndexes] addIndex:3];
 //    _selectedConnection[0] = 0;
-//    _selectedConnection[1] = 2;
+//    _selectedConnection[1] = 2;chrom
 }
 
 - (void)drawRect:(NSRect)dirtyRect

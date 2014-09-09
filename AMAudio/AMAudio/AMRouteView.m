@@ -67,6 +67,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 {
     [self doInit];
     
+//<<<<<<< HEAD
     self.delegate = [[AMRouteViewController alloc] init];
     NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
     for (int i = 0; i < 4; i++) {
@@ -77,7 +78,6 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     [self associateChannels:channels
                  withDevice:@"Device1"
                        name:@"Device 1"];
-
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -387,6 +387,11 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     }
     
     return NO;
+}
+
++(NSUInteger)maxChannels
+{
+    return kNumberOfChannels;
 }
 
 @end

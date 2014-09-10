@@ -89,7 +89,6 @@
         self.portOffset.stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)[_jacktripTasks count]];
     }
     
-    
     //init -q
     self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
    
@@ -187,6 +186,7 @@
     [task launch];
     [_jacktripTasks addObject:task];
     
+    sleep(1);
     
     NSNotification* notification = [NSNotification notificationWithName:JACKTRIP_CHANGED_NOTIFICATION
                                                                  object:self

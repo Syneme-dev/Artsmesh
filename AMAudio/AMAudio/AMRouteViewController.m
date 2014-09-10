@@ -75,6 +75,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     view.delegate = self;
 
     _jackClient = [[AMJackClient alloc] init];
+    
+    [self reloadAudioChannel:nil];
 }
 
 -(void)dealloc

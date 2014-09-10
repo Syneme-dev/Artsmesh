@@ -26,6 +26,8 @@
 		CE151F3419B01372002D2AD4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2519B01372002D2AD4 /* types.h */; };
 		CE151F3519B01372002D2AD4 /* weakjack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2619B01372002D2AD4 /* weakjack.h */; };
 		CE151F3619B01372002D2AD4 /* weakmacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F2719B01372002D2AD4 /* weakmacros.h */; };
+		CE29B4E319BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */; };
+		CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */; };
 		CE68805319B94EF20062211C /* AMChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = CE68804F19B94EF20062211C /* AMChannel.h */; };
 		CE68805419B94EF20062211C /* AMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68805019B94EF20062211C /* AMChannel.m */; };
 		CE68805519B94EF20062211C /* AMRouteView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE68805119B94EF20062211C /* AMRouteView.h */; };
@@ -102,6 +104,8 @@
 		CE151F2519B01372002D2AD4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		CE151F2619B01372002D2AD4 /* weakjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakjack.h; sourceTree = "<group>"; };
 		CE151F2719B01372002D2AD4 /* weakmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakmacros.h; sourceTree = "<group>"; };
+		CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+QuartzUtilities.h"; sourceTree = "<group>"; };
+		CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+QuartzUtilities.m"; sourceTree = "<group>"; };
 		CE68804F19B94EF20062211C /* AMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChannel.h; sourceTree = "<group>"; };
 		CE68805019B94EF20062211C /* AMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChannel.m; sourceTree = "<group>"; };
 		CE68805119B94EF20062211C /* AMRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouteView.h; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 				CE68805019B94EF20062211C /* AMChannel.m */,
 				CE68805119B94EF20062211C /* AMRouteView.h */,
 				CE68805219B94EF20062211C /* AMRouteView.m */,
+				CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */,
+				CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */,
 				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
 				CE68805719B94F2A0062211C /* AMRouteViewController.h */,
 				CE68805819B94F2A0062211C /* AMRouteViewController.m */,
@@ -315,6 +321,7 @@
 				CE151F2D19B01372002D2AD4 /* net.h in Headers */,
 				CE151F3619B01372002D2AD4 /* weakmacros.h in Headers */,
 				CE151F2C19B01372002D2AD4 /* midiport.h in Headers */,
+				CE29B4E319BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h in Headers */,
 				CE151F2E19B01372002D2AD4 /* ringbuffer.h in Headers */,
 				CE151F2A19B01372002D2AD4 /* jack.h in Headers */,
 				CE151F3019B01372002D2AD4 /* statistics.h in Headers */,
@@ -433,6 +440,7 @@
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,
 				CE68805419B94EF20062211C /* AMChannel.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
+				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
 				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 				CE68805619B94EF20062211C /* AMRouteView.m in Sources */,
 			);

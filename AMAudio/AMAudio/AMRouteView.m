@@ -10,10 +10,54 @@
 #import "AMRouteView.h"
 #import "AMChannel.h"
 #import "AMRouteViewController.h"
+#import "NSBezierPath+QuartzUtilities.h"
 
-static NSUInteger kNumberOfChannels = 54;
+typedef struct GlyphArcInfo {
+	CGFloat	width;
+	CGFloat	angle;	// in radians
+} GlyphArcInfo;
+
+static GlyphArcInfo *
+CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
+{
+    CFIndex glyphCount = CTLineGetGlyphCount(line);
+    GlyphArcInfo *glyphArcInfo = (GlyphArcInfo *)calloc(glyphCount, sizeof(GlyphArcInfo));
+    
+	NSArray *runArray = (__bridge NSArray *)CTLineGetGlyphRuns(line);
+	CFIndex glyphOffset = 0;
+	for (id run in runArray) {
+		CFIndex runGlyphCount = CTRunGetGlyphCount((__bridge CTRunRef)run);
+        CGGlyph glyphs[runGlyphCount];
+        CTRunGetGlyphs((__bridge CTRunRef)run, CFRangeMake(0, 0), glyphs);
+		for (CFIndex runGlyphIndex = 0; runGlyphIndex < runGlyphCount; runGlyphIndex++) {
+            CFIndex index = glyphOffset + runGlyphIndex;
+			glyphArcInfo[index].width = CTRunGetTypographicBounds((__bridge CTRunRef)run,
+                                            CFRangeMake(runGlyphIndex, 1), NULL, NULL, NULL);
+		}
+        
+		glyphOffset += runGlyphCount;
+	}
+    
+	//double lineLength = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+	CGFloat prevHalfWidth = glyphArcInfo[0].width / 2.0;
+	glyphArcInfo[0].angle = prevHalfWidth / radius;
+	for (CFIndex lineGlyphIndex = 1; lineGlyphIndex < glyphCount; lineGlyphIndex++) {
+		CGFloat halfWidth = glyphArcInfo[lineGlyphIndex].width / 2.0;
+		CGFloat prevCenterToCenter = prevHalfWidth + halfWidth;
+		glyphArcInfo[lineGlyphIndex].angle = prevCenterToCenter / radius;
+		prevHalfWidth = halfWidth;
+	}
+    
+    return glyphArcInfo;
+}
+
+
+#define todegree(radius)  ((radius) * 360.0 / (2.0 * M_PI))
+
+static NSUInteger kNumberOfChannels = 72;
 static CGFloat kChannelRadius = 10.0;
 static CGFloat kPlaceholderChannelRadius = 5.0;
+static CGFloat kCloseButtonRadius = 0.0;
 
 @interface AMDevice : NSObject
 
@@ -32,6 +76,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 {
     NSColor *_backgroundColor;
     NSColor *_placeholderChannelColor;
+    NSColor *_deviceLableColor;
     NSColor *_sourceChannelColor;
     NSColor *_destinationChannelColor;
     NSColor *_selectedChannelFillColor;
@@ -49,6 +94,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
 @property(nonatomic) NSMutableDictionary *devices;
 
 @end
+
 
 @implementation AMRouteView
 
@@ -76,7 +122,7 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     }
     [self associateChannels:channels
                  withDevice:@"Device1"
-                       name:@"Device 1"];
+                       name:@"GarageBand"];
 
 }
 
@@ -85,15 +131,14 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     [_backgroundColor set];
     NSRectFill(self.bounds);
     
+    [self drawDeviceLabel];
+    
     for (AMChannel *channel in self.allChannels) {
         if (channel.type == AMSourceChannel) {
             [channel.peerIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
                 AMChannel *peerChannle = [self channelAtIndex:idx];
-                NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-                [bezierPath moveToPoint:[self centerOfChannel:channel]];
-                [bezierPath curveToPoint:[self centerOfChannel:peerChannle]
-                           controlPoint1:_center
-                           controlPoint2:_center];
+                NSBezierPath *bezierPath = [self bezierPathFromChannel:channel
+                                                             toChannel:peerChannle];
                 bezierPath.lineWidth = 2.0;
                 [_connectionColor setStroke];
                 [bezierPath stroke];
@@ -234,6 +279,10 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
                                                          green:0.3686
                                                           blue:0.494
                                                          alpha:1.0];
+    _deviceLableColor = [NSColor colorWithCalibratedRed:0.27
+                                                  green:0.3686
+                                                   blue:0.494
+                                                  alpha:1.0];
     _selectedChannelFillColor = [NSColor lightGrayColor];
     _connectionColor = [NSColor greenColor];
     _selectedConnectionColor = [NSColor colorWithCalibratedRed:1.0
@@ -290,6 +339,138 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
     CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfChannels;
     return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
+}
+
+- (NSBezierPath *)bezierPathFromChannel:(AMChannel *)channel1
+                              toChannel:(AMChannel *)channel2
+{
+    NSBezierPath *bezierPath = [NSBezierPath bezierPath];
+    [bezierPath moveToPoint:[self centerOfChannel:channel1]];
+    [bezierPath curveToPoint:[self centerOfChannel:channel2]
+               controlPoint1:_center
+               controlPoint2:_center];
+    return bezierPath;
+}
+
+- (void)drawDeviceLabel
+{
+    // draw device circle
+    CGFloat radius = _radius + 25.0;
+    NSBezierPath *circle = [NSBezierPath bezierPath];
+    [circle appendBezierPathWithArcWithCenter:_center
+                                       radius:radius
+                                   startAngle:3.75
+                                     endAngle:363.75];
+    CGFloat lineDash[2];
+    lineDash[0] = 0.8 * kChannelRadius;
+    lineDash[1] = radius * 2.0 * M_PI / kNumberOfChannels - lineDash[0];
+    [circle setLineDash:lineDash
+                  count:sizeof(lineDash) / sizeof(lineDash[0])
+                  phase:0.0];
+    circle.lineWidth = 2.0;
+    [_deviceLableColor set];
+    [circle stroke];
+    
+    // draw device lables
+    for (NSString *deviceID in self.devices) {
+        AMDevice *device = self.devices[deviceID];
+        NSRange indexRange = device.channelIndexRange;
+        NSInteger startIndex = indexRange.location;
+        NSInteger endIndex = startIndex + indexRange.length;
+        CGFloat startAngle = (startIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
+        CGFloat endAngle = (endIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
+        
+        // draw cd line
+        NSBezierPath *cdLine = [NSBezierPath bezierPath];
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(startAngle) + _center.x,
+                                        (radius - 8.0) * sin(startAngle) + _center.y)];
+        [cdLine lineToPoint:NSMakePoint((radius + 8.0) * cos(startAngle) + _center.x,
+                                        (radius + 8.0) * sin(startAngle) + _center.y)];
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(endAngle) + _center.x,
+                                        (radius - 8.0) * sin(endAngle) + _center.y)];
+        [cdLine lineToPoint:NSMakePoint((radius + 8.0) * cos(endAngle) + _center.x,
+                                        (radius + 8.0) * sin(endAngle) + _center.y)];
+        cdLine.lineWidth = 1.0;
+        [cdLine stroke];
+        
+        // draw lable
+        CGFloat arcLength = radius * (endAngle - startAngle);
+        CGFloat maxTextWidth = arcLength - 30.0 - kCloseButtonRadius;
+        if (maxTextWidth <= 20)
+            continue;
+        
+        NSDictionary *attributes = @{
+            NSForegroundColorAttributeName : _deviceLableColor,
+            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:11.0]
+        };
+        NSAttributedString *label =
+            [[NSAttributedString alloc] initWithString:device.deviceName
+                                            attributes:attributes];
+        CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)label);
+        CGFloat textWidth = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+        if (textWidth > maxTextWidth) {
+            NSAttributedString *truncationTokenString =
+                [[NSAttributedString alloc] initWithString:@"…"
+                                            attributes:attributes];
+            CTLineRef truncationToken = CTLineCreateWithAttributedString(
+                            (__bridge CFAttributedStringRef)truncationTokenString);
+            CTLineRef truncatedLine = CTLineCreateTruncatedLine(line, maxTextWidth,
+                                            kCTLineTruncationEnd, truncationToken);
+            CFRelease(line);
+            line = truncatedLine;
+            CFRelease(truncationToken);
+            textWidth = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+        }
+        
+        // align text to arc center
+        CGFloat angleAdjust = ((arcLength - kCloseButtonRadius - textWidth) / 2.0) / radius;
+        endAngle -= angleAdjust;
+        startAngle += angleAdjust + kCloseButtonRadius / radius;
+        
+        NSBezierPath *textPath = [NSBezierPath bezierPath];
+        [textPath appendBezierPathWithArcWithCenter:_center
+                                             radius:radius
+                                         startAngle:todegree(startAngle) - 1.0
+                                           endAngle:todegree(endAngle) + 1.0];
+        textPath.lineWidth = 20.0;
+        [_backgroundColor set];
+        [textPath stroke];
+
+        CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
+        CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, _center.x, _center.y);
+        CGContextRotateCTM(context, endAngle - M_PI_2);
+        
+        CGPoint textPosition = CGPointMake(0.0, radius);
+        CGContextSetTextPosition(context, textPosition.x, textPosition.y);
+        
+        GlyphArcInfo *glyphArcInfo = CreateGlyphArcInfo(line, radius);
+        NSArray *runArray = (__bridge NSArray *)CTLineGetGlyphRuns(line);
+        CFIndex glyphOffset = 0;
+        for (id run in runArray) {
+            CFIndex runGlyphCount = CTRunGetGlyphCount((__bridge CTRunRef)run);
+            for (CFIndex runGlyphIndex = 0; runGlyphIndex < runGlyphCount; runGlyphIndex++) {
+                CFRange glyphRange = CFRangeMake(runGlyphIndex, 1);
+                CFIndex index = runGlyphIndex + glyphOffset;
+                CGContextRotateCTM(context, -(glyphArcInfo[index].angle));
+                CGFloat glyphWidth = glyphArcInfo[index].width;
+                CGFloat halfGlyphWidth = glyphWidth / 2.0;
+                CGPoint positionForThisGlyph = CGPointMake(textPosition.x - halfGlyphWidth,
+                                                           textPosition.y);
+                textPosition.x -= glyphWidth;
+                CGAffineTransform textMatrix = CTRunGetTextMatrix((__bridge CTRunRef)run);
+                textMatrix.tx = positionForThisGlyph.x;
+                textMatrix.ty = positionForThisGlyph.y;
+                CGContextSetTextMatrix(context, textMatrix);
+                CTRunDraw((__bridge CTRunRef)run, context, glyphRange);
+            }
+        }
+ 
+        CFRelease(line);
+        free(glyphArcInfo);
+        CGContextRestoreGState(context);
+    }
 }
 
 - (void)drawChannel:(AMChannel *)channel WithCenterAt:(NSPoint)p
@@ -364,16 +545,12 @@ static CGFloat kPlaceholderChannelRadius = 5.0;
         if (channel.type == AMSourceChannel) {
             [channel.peerIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
                 AMChannel *peerChannle = [self channelAtIndex:idx];
-                CGPoint channelCenter = NSPointToCGPoint([self centerOfChannel:channel]);
-                CGPoint peerChannleCenter = NSPointToCGPoint([self centerOfChannel:peerChannle]);
-                
-                CGMutablePathRef bezierPath = CGPathCreateMutable();
-                CGPathMoveToPoint(bezierPath, NULL, channelCenter.x, channelCenter.y);
-                CGPathAddCurveToPoint(bezierPath, NULL, _center.x, _center.y, _center.x,
-                                      _center.y, peerChannleCenter.x, peerChannleCenter.y);
-                CGPathRef hitTestArea = CGPathCreateCopyByStrokingPath(bezierPath, NULL,
-                                                                       20.0, NSButtLineCapStyle, NSRoundLineJoinStyle, 10.0);
-                CGPathRelease(bezierPath);
+                NSBezierPath *bezierPath = [self bezierPathFromChannel:channel
+                                                             toChannel:peerChannle];
+                CGPathRef quartzBezierPath = [bezierPath quartzPath:NO];
+                CGPathRef hitTestArea = CGPathCreateCopyByStrokingPath(quartzBezierPath,
+                                NULL, 20.0, NSButtLineCapStyle, NSRoundLineJoinStyle, 10.0);
+                CGPathRelease(quartzBezierPath);
                 if (CGPathContainsPoint(hitTestArea, NULL, p, false)) {
                     _selectedConnection[0] = channel.index;
                     _selectedConnection[1] = peerChannle.index;

@@ -26,9 +26,11 @@
     
     _client = jack_client_open("JackArtsmesh", JackNullOption, NULL);
     if (_client == NULL) {
+        self.isOpen = NO;
         return NO;
     }
     
+    self.isOpen = YES;
     return YES;
 }
 
@@ -125,6 +127,7 @@
 -(void)closeJackClient
 {
     jack_client_close(_client);
+    self.isOpen = NO;
 }
 
 

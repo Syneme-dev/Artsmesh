@@ -75,6 +75,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     view.delegate = self;
 
     _jackClient = [[AMJackClient alloc] init];
+   
     
     [self reloadAudioChannel:nil];
 }
@@ -84,7 +85,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     if (_jackClient) {
         [_jackClient closeJackClient];
     }
-    
+
     [[NSNotificationCenter defaultCenter]
      removeObserver:self];
 }

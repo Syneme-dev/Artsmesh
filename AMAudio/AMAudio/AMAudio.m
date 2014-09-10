@@ -7,24 +7,22 @@
 //
 
 #import "AMAudio.h"
+#import "AMJackManager.h"
+#import "AMJackTripManager.h"
 #import "AMAudioPrefViewController.h"
-#import "AMJackConfigs.h"
-#import "AMTaskLauncher/AMShellTask.h"
 #import "AMRouteViewController.h"
+#import "AMJackTripConfigController.h"
 
 @interface AMAudio()
-
-@property JackState jackState;
-
 @end
 
 @implementation AMAudio
 {
+    AMJackManager* _jackManager;
+    AMJackTripManager* _jacktripManager;
     AMAudioPrefViewController* _prefController;
-    AMRouteViewController*   _audioController;
-    
-    AMJackConfigs* _configs;
-    AMShellTask* _jackTask;
+    AMRouteViewController* _routerController;
+    AMJackTripConfigController* _jackTripController;
 }
 
 +(id)sharedInstance
@@ -45,17 +43,24 @@
 
 -(id)privateInit
 {
-    _configs = [AMJackConfigs initWithArchiveConfig];
+    _jackManager = [[AMJackManager alloc] init];
+    _jacktripManager = [[AMJackTripManager alloc] init];
     
-    StartNotification();
     return self;
+}
+
+-(void)releaseResources
+{
+    [_jacktripManager stopAllJacktrips];
+    [_jackManager stopJack];
+    
+    _jackManager = nil;
+    _jacktripManager = nil;
 }
 
 -(void)dealloc
 {
-    
-    //Are there any memory leaks?
-    StopNotification();
+    [self releaseResources];
 }
 
 -(NSViewController*)getJackPrefUI
@@ -63,7 +68,7 @@
     if (_prefController == nil) {
        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
         _prefController = [[AMAudioPrefViewController alloc] initWithNibName:@"AMAudioPrefViewController" bundle:myBundle];
-        _prefController.jackConfig = _configs;
+        _prefController.jackManager = _jackManager;
     }
     
     return _prefController;
@@ -71,104 +76,32 @@
 
 -(NSViewController*)getJackRouterUI
 {
-    
-    if (_audioController == nil) {
+    if (_routerController == nil) {
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-        _audioController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
+        _routerController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
     }
     
-    return _audioController;
+    return _routerController;
+}
+
+-(NSViewController*)getJacktripPrefUI
+{
+    if (_jackTripController == nil) {
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+        _jackTripController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+    }
+    
+    return _jackTripController;
 }
 
 -(BOOL)startJack
 {
-    int n = system("killall -0 jackdmp >/dev/null");
-    if (n != 0) {
-        NSString* command =  [_configs formatCommandLine];
-        NSLog(@"command is %@", command);
-        _jackTask = [[AMShellTask alloc] initWithCommand:command];
-        [_jackTask launch];
-    }else{
-        self.jackState = JackState_Started;
-    }
-
-    return YES;
+    return [_jackManager startJack];
 }
 
 -(void)stopJack
 {
-    system("killall jackdmp >/dev/null");
+    return [_jackManager stopJack];
 }
-
-static void StartNotification()
-{
-	CFStringRef ref = CFStringCreateWithCString(NULL, DefaultServerName(), kCFStringEncodingMacRoman);
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDistributedCenter(),
-									NULL, startCallback, CFSTR("com.grame.jackserver.start"),
-									ref, CFNotificationSuspensionBehaviorDeliverImmediately);
-    
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDistributedCenter(),
-									NULL, stopCallback, CFSTR("com.grame.jackserver.stop"),
-									ref, CFNotificationSuspensionBehaviorDeliverImmediately);
-	CFRelease(ref);
-}
-
-
-static void StopNotification()
-{
-	CFStringRef ref = CFStringCreateWithCString(NULL, DefaultServerName(), kCFStringEncodingMacRoman);
-	CFNotificationCenterRemoveObserver(CFNotificationCenterGetDistributedCenter(), NULL,
-                                       CFSTR("com.grame.jackserver.start"), ref);
-    
-	CFNotificationCenterRemoveObserver(CFNotificationCenterGetDistributedCenter(), NULL,
-                                       CFSTR("com.grame.jackserver.stop"), ref);
-	CFRelease(ref);
-}
-
-
-static char* DefaultServerName()
-{
-    char* server_name;
-    if ((server_name = getenv("JACK_DEFAULT_SERVER")) == NULL)
-        server_name = "default";
-    return server_name;
-}
-
-static void startCallback(CFNotificationCenterRef center,
-                          void*	observer,
-                          CFStringRef name,
-                          const void* object,
-                          CFDictionaryRef userInfo)
-{
-    AMAudio* module = [AMAudio sharedInstance];
-    module.jackState = JackState_Started;
-}
-
-static void stopCallback(CFNotificationCenterRef center,
-                         void*	observer,
-                         CFStringRef name,
-                         const void* object,
-                         CFDictionaryRef userInfo)
-{
-    
-    AMAudio* module = [AMAudio sharedInstance];
-    module.jackState = JackState_Stopped;
-    
-// 	if (gJackRunning) {
-//        id POOL = [[NSAutoreleasePool alloc] init];
-//		gJackRunning = false;
-//        
-//		NSString *mess1 = NSLocalizedString(@"Fatal error:", nil);
-//		NSString *mess2 = NSLocalizedString(@"Jack server has been stopped, JackPilot will quit.", nil);
-//		NSString *mess3 = NSLocalizedString(@"Ok", nil);
-//        
-//		NSRunCriticalAlertPanel(mess1, mess2, mess3, nil, nil);
-//		closeJack();
-//        [POOL release];
-//		exit(1);
-//	}
-}
-
-
 
 @end

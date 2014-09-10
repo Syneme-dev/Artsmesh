@@ -16,7 +16,7 @@ typedef enum {
 #define AM_JACK_STARTED_NOTIFICATION @"Jack started notification"
 #define AM_JACK_STOPPED_NOTIFICATION @"Jack stopped notification"
 
-#define AM_JACKTRIP_CHANGED_NOTIFICATION   @"JackTrip Changed"
+#define AM_RELOAD_JACK_CHANNEL_NOTIFICATION   @"JackTrip Changed"
 
 @interface AMAudio : NSObject
 
@@ -27,6 +27,8 @@ typedef enum {
 -(NSViewController*)getJacktripPrefUI;
 -(BOOL)startJack;
 -(void)stopJack;
+
+-(BOOL)isJackStarted;
 
 -(void)releaseResources;
 

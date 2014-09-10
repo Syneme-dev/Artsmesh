@@ -16,6 +16,25 @@
 
 @implementation AMJackTripManager
 
+-(id)init
+{
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(onJackStopped:)
+         name:AM_JACK_STOPPED_NOTIFICATION
+         object:nil];
+    }
+    
+    return self;
+}
+
+-(void)onJackStopped:(NSNotification*)notification
+{
+    [self stopAllJacktrips];
+}
+
+
 -(BOOL)startJacktrip:(AMJacktripConfigs *)cfgs
 {
     NSMutableString* commandline = [NSMutableString stringWithFormat:@"jacktrip"];
@@ -74,13 +93,14 @@
     
     [self.jackTripInstances addObject:newInstance];
     
-    NSNotification* notification = [NSNotification notificationWithName:AM_JACKTRIP_CHANGED_NOTIFICATION
+    NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
                                                                  object:self
                                                                userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
     return YES;
 }
+
 
 -(void)stopAllJacktrips
 {
@@ -90,7 +110,13 @@
     }
     
     system("killall jacktrip >/dev/null");
+    
+    NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+                                                                 object:self
+                                                               userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
+
 
 -(void)stopJacktripByName:(NSString*)instanceName
 {
@@ -105,6 +131,11 @@
             break;
         }
     }
+    
+    NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+                                                                 object:self
+                                                               userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 @end

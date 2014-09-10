@@ -118,6 +118,7 @@
 {
     jack_client_close(_client);
     self.isOpen = NO;
+    _client = NULL;
 }
 
 

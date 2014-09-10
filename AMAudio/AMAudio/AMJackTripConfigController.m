@@ -16,7 +16,7 @@
 @property (weak) IBOutlet NSPopUpButton *peerSelecter;
 @property (weak) IBOutlet NSPopUpButton *channelCountSelecter;
 @property (weak) IBOutlet NSTextField *peerSelfDefine;
-@property (weak) IBOutlet NSTextField *portOffset;
+@property (weak) IBOutlet NSPopUpButton *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *qCount;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
@@ -42,12 +42,40 @@
 {
     [self initControlStates];
     [self initParameters];
+    [self initPortOffset];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(jacktripChanged:)
+     name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+     object:nil];
 }
 
 -(void)initControlStates
 {
     [self.peerSelecter setEnabled:NO];
     [self.peerSelfDefine setEnabled:NO];
+}
+
+-(void)initPortOffset
+{
+    [self.portOffsetSelector removeAllItems];
+    
+    NSUInteger maxChannCount = [AMRouteView maxChannels];
+    for (NSUInteger i = 0; i <maxChannCount; i++) {
+        
+        BOOL inUse = NO;
+        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
+            if(jacktrip.portOffset == i){
+                inUse = YES;
+                break;
+            }
+        }
+        
+        if(!inUse){
+            NSString* str = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+            [self.portOffsetSelector addItemWithTitle:str];
+        }
+    }
 }
 
 -(void)initParameters
@@ -80,7 +108,7 @@
     }
     
     //init port
-    self.portOffset.stringValue = [NSString stringWithFormat:@"%d", 0];
+    [self.portOffsetSelector selectItemAtIndex:0];
     
     //init -q
     self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
@@ -134,7 +162,7 @@
     
     cfgs.role = self.roleSelecter.selectedItem.title;
     cfgs.serverAddr = self.peerSelfDefine.stringValue;
-    cfgs.portOffset = self.portOffset.stringValue;
+    cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
     cfgs.channelCount = self.channelCountSelecter.selectedItem.title;
     cfgs.qCount = self.qCount.stringValue;
     cfgs.rCount = self.rCount.stringValue;
@@ -157,6 +185,13 @@
                             userInfo:nil];
         [exp raise];
     }
+}
+
+-(void)jacktripChanged:(NSNotification*)notification
+{
+    [self initControlStates];
+    [self initParameters];
+    [self initPortOffset];
 }
 
 

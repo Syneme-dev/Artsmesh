@@ -12,6 +12,7 @@
 #import "AMChannel.h"
 #import "AMJackDevice.h"
 #import "AMRouteView.h"
+#import "AMAudio.h"
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
@@ -68,7 +69,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(reloadAudioChannel:)
-     name:JACKTRIP_CHANGED_NOTIFICATION
+     name:AM_JACKTRIP_CHANGED_NOTIFICATION
      object:nil];
     
     AMRouteView* view = (AMRouteView*)self.view;

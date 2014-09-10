@@ -89,6 +89,7 @@
     if (_jackTripController == nil) {
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
         _jackTripController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+        _jackTripController.jacktripManager = _jacktripManager;
     }
     
     return _jackTripController;

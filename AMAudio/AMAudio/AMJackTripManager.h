@@ -7,11 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMTaskLauncher/AMShellTask.h"
+#import "AMJacktripConfigs.h"
+
+@interface AMJacktripInstance : NSObject
+
+@property NSString* instanceName;
+@property AMShellTask* jacktripTask;
+@property int portOffset;
+
+@end
 
 @interface AMJackTripManager : NSObject
 
 @property NSMutableArray* jackTripInstances;
 
+-(BOOL)startJacktrip:(AMJacktripConfigs*)cfgs;
 -(void)stopAllJacktrips;
+-(void)stopJacktripByName:(NSString*)instanceName;
 
 @end

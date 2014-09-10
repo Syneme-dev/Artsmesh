@@ -16,6 +16,8 @@ typedef enum {
 #define AM_JACK_STARTED_NOTIFICATION @"Jack started notification"
 #define AM_JACK_STOPPED_NOTIFICATION @"Jack stopped notification"
 
+#define AM_JACKTRIP_CHANGED_NOTIFICATION   @"JackTrip Changed"
+
 @interface AMAudio : NSObject
 
 +(id)sharedInstance;

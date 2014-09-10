@@ -105,4 +105,9 @@
     return [_jackManager stopJack];
 }
 
+-(void)stopJacktrips
+{
+    [_jacktripManager stopAllJacktrips];
+}
+
 @end

@@ -221,34 +221,40 @@
 
 - (IBAction)saveConfig:(NSButton *)sender
 {
-    if (self.jackConfig) {
-        self.jackConfig.driver = self.driverBox.title;
-        
-        NSString* inputDevName = self.inputDevBox.title;
-        AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
-        if(inputDev){
-            self.jackConfig.inputDevUID = inputDev.devUID;
-        }
-        
-        NSString* outputDevName = self.outputDevBox.title;
-        AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
-        if (outputDev) {
-            self.jackConfig.outputDevUID = outputDev.devUID;
-        }
-        
-        self.jackConfig.sampleRate = [self.sampleRateBox.title intValue];
-        self.jackConfig.bufferSize = [self.bufferSizeBox.title intValue];
-        
-        self.jackConfig.inChansCount = [self.interfaceInChansBox.title intValue];
-        self.jackConfig.outChansCount = [self.interfaceOutChansBox.title intValue];
-        
-        self.jackConfig.hogMode = [self.hogModeCheck state] == 1;
-        self.jackConfig.clockDriftCompensation = [self.compensationCheck state] == 1;
-        self.jackConfig.systemPortMonitoring = [self.portMornitingCheck state] == 1;
-        self.jackConfig.activeMIDI = [self.midiCheck state] == 1;
-        
-        [self.jackConfig archiveConfigs];
+    if (self.jackManager == nil) {
+        NSException* exp = [[NSException alloc]
+                            initWithName:@"Code Bug!"
+                            reason:@"to save config, must set manager first"
+                            userInfo:nil];
+        [exp raise];
     }
+    
+    self.jackManager.jackCfg.driver = self.driverBox.title;
+    
+    NSString* inputDevName = self.inputDevBox.title;
+    AMAudioDevice* inputDev = [_devManager findDevByName:inputDevName];
+    if(inputDev){
+        self.jackManager.jackCfg.inputDevUID = inputDev.devUID;
+    }
+    
+    NSString* outputDevName = self.outputDevBox.title;
+    AMAudioDevice* outputDev = [_devManager findDevByName:outputDevName];
+    if (outputDev) {
+        self.jackManager.jackCfg.outputDevUID = outputDev.devUID;
+    }
+    
+    self.jackManager.jackCfg.sampleRate = [self.sampleRateBox.title intValue];
+    self.jackManager.jackCfg.bufferSize = [self.bufferSizeBox.title intValue];
+    
+    self.jackManager.jackCfg.inChansCount = [self.interfaceInChansBox.title intValue];
+    self.jackManager.jackCfg.outChansCount = [self.interfaceOutChansBox.title intValue];
+    
+    self.jackManager.jackCfg.hogMode = [self.hogModeCheck state] == 1;
+    self.jackManager.jackCfg.clockDriftCompensation = [self.compensationCheck state] == 1;
+    self.jackManager.jackCfg.systemPortMonitoring = [self.portMornitingCheck state] == 1;
+    self.jackManager.jackCfg.activeMIDI = [self.midiCheck state] == 1;
+    
+    [self.jackManager.jackCfg archiveConfigs];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
@@ -260,28 +266,28 @@
 {
     [self.driverBox selectItemAtIndex:0];
     
-    AMAudioDevice* inputDev = [_devManager findDevByUID:self.jackConfig.inputDevUID];
+    AMAudioDevice* inputDev = [_devManager findDevByUID:self.jackManager.jackCfg.inputDevUID];
     [self.inputDevBox selectItemWithTitle:inputDev.devName];
     
-    AMAudioDevice* outputDev = [_devManager findDevByUID:self.jackConfig.outputDevUID];
+    AMAudioDevice* outputDev = [_devManager findDevByUID:self.jackManager.jackCfg.outputDevUID];
     [self.outputDevBox selectItemWithTitle:outputDev.devName];
     
-    NSString* sampleRateStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.sampleRate];
+    NSString* sampleRateStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.sampleRate];
     [self.sampleRateBox selectItemWithTitle:sampleRateStr];
     
-    NSString* bufferSizeStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.bufferSize];
+    NSString* bufferSizeStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.bufferSize];
     [self.bufferSizeBox selectItemWithTitle:bufferSizeStr];
     
-    NSString* inChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.interfaceInputChannel];
+    NSString* inChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.interfaceInputChannel];
     [self.interfaceInChansBox selectItemWithTitle:inChansStr];
     
-    NSString* outChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackConfig.interfaceOutputChannel];
+    NSString* outChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.interfaceOutputChannel];
     [self.interfaceOutChansBox selectItemWithTitle:outChansStr];
     
-    [self.hogModeCheck setState:(self.jackConfig.hogMode)?1:0];
-    [self.compensationCheck setState:(self.jackConfig.clockDriftCompensation)?1:0];
-    [self.portMornitingCheck setState:(self.jackConfig.systemPortMonitoring)?1:0];
-    [self.midiCheck setState:(self.jackConfig.activeMIDI)?1:0];
+    [self.hogModeCheck setState:(self.jackManager.jackCfg.hogMode)?1:0];
+    [self.compensationCheck setState:(self.jackManager.jackCfg.clockDriftCompensation)?1:0];
+    [self.portMornitingCheck setState:(self.jackManager.jackCfg.systemPortMonitoring)?1:0];
+    [self.midiCheck setState:(self.jackManager.jackCfg.activeMIDI)?1:0];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

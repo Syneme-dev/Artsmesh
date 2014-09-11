@@ -34,7 +34,7 @@
 
 -(NSString*)formatCommandLine;
 
-+(id)initWithArchiveConfig;
++(id)archivedJackConfig;
 -(void)archiveConfigs;
 
 

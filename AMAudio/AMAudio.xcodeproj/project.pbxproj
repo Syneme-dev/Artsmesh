@@ -57,6 +57,12 @@
 		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
+		D4ACB38A19C00E4D00C9E7C5 /* AMJackManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ACB38819C00E4D00C9E7C5 /* AMJackManager.h */; };
+		D4ACB38B19C00E4D00C9E7C5 /* AMJackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACB38919C00E4D00C9E7C5 /* AMJackManager.m */; };
+		D4ACB38E19C00F6800C9E7C5 /* AMJackTripManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ACB38C19C00F6800C9E7C5 /* AMJackTripManager.h */; };
+		D4ACB38F19C00F6800C9E7C5 /* AMJackTripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACB38D19C00F6800C9E7C5 /* AMJackTripManager.m */; };
+		D4ACB39219C01F8C00C9E7C5 /* AMJacktripConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ACB39019C01F8C00C9E7C5 /* AMJacktripConfigs.h */; };
+		D4ACB39319C01F8C00C9E7C5 /* AMJacktripConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ACB39119C01F8C00C9E7C5 /* AMJacktripConfigs.m */; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
@@ -144,6 +150,12 @@
 		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAudioPrefViewController.xib; sourceTree = "<group>"; };
 		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackDevice.h; sourceTree = "<group>"; };
 		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackDevice.m; sourceTree = "<group>"; };
+		D4ACB38819C00E4D00C9E7C5 /* AMJackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackManager.h; sourceTree = "<group>"; };
+		D4ACB38919C00E4D00C9E7C5 /* AMJackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackManager.m; sourceTree = "<group>"; };
+		D4ACB38C19C00F6800C9E7C5 /* AMJackTripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripManager.h; sourceTree = "<group>"; };
+		D4ACB38D19C00F6800C9E7C5 /* AMJackTripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripManager.m; sourceTree = "<group>"; };
+		D4ACB39019C01F8C00C9E7C5 /* AMJacktripConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripConfigs.h; sourceTree = "<group>"; };
+		D4ACB39119C01F8C00C9E7C5 /* AMJacktripConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJacktripConfigs.m; sourceTree = "<group>"; };
 		D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
 		D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackConfigs.h; sourceTree = "<group>"; };
 		D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackConfigs.m; sourceTree = "<group>"; };
@@ -248,6 +260,25 @@
 			children = (
 				D472931E19A6E5030034CC34 /* AMAudio.h */,
 				D472931F19A6E5030034CC34 /* AMAudio.m */,
+				D4ACB38819C00E4D00C9E7C5 /* AMJackManager.h */,
+				D4ACB38919C00E4D00C9E7C5 /* AMJackManager.m */,
+				D4ACB38C19C00F6800C9E7C5 /* AMJackTripManager.h */,
+				D4ACB38D19C00F6800C9E7C5 /* AMJackTripManager.m */,
+				D472934819A70D390034CC34 /* AMAudioPrefViewController.h */,
+				D472934919A70D390034CC34 /* AMAudioPrefViewController.m */,
+				D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */,
+				26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */,
+				26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */,
+				26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */,
+				D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */,
+				D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */,
+				D4ACB39019C01F8C00C9E7C5 /* AMJacktripConfigs.h */,
+				D4ACB39119C01F8C00C9E7C5 /* AMJacktripConfigs.m */,
+				D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */,
+				D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */,
+				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
+				CE68805719B94F2A0062211C /* AMRouteViewController.h */,
+				CE68805819B94F2A0062211C /* AMRouteViewController.m */,
 				CE68804F19B94EF20062211C /* AMChannel.h */,
 				CE68805019B94EF20062211C /* AMChannel.m */,
 				D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */,
@@ -266,13 +297,6 @@
 				D472933D19A6E5460034CC34 /* AMAudioDevice.m */,
 				D443717619AACED700F49705 /* AMJackClient.h */,
 				D443717719AACED700F49705 /* AMJackClient.m */,
-				D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */,
-				D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */,
-				D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */,
-				D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */,
-				D472934819A70D390034CC34 /* AMAudioPrefViewController.h */,
-				D472934919A70D390034CC34 /* AMAudioPrefViewController.m */,
-				D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */,
 				CE151F1819B01372002D2AD4 /* jack */,
 				D472931819A6E5030034CC34 /* Supporting Files */,
 			);
@@ -316,6 +340,7 @@
 			files = (
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
+				D4ACB38E19C00F6800C9E7C5 /* AMJackTripManager.h in Headers */,
 				CE151F3219B01372002D2AD4 /* thread.h in Headers */,
 				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
 				CE151F3319B01372002D2AD4 /* transport.h in Headers */,
@@ -323,10 +348,12 @@
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
 				CE151F3419B01372002D2AD4 /* types.h in Headers */,
+				D4ACB39219C01F8C00C9E7C5 /* AMJacktripConfigs.h in Headers */,
 				CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */,
 				CE151F2919B01372002D2AD4 /* intclient.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
+				D4ACB38A19C00E4D00C9E7C5 /* AMJackManager.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
 				CE151F2B19B01372002D2AD4 /* jslist.h in Headers */,
 				CE151F2D19B01372002D2AD4 /* net.h in Headers */,
@@ -446,7 +473,10 @@
 				D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */,
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
+				D4ACB38F19C00F6800C9E7C5 /* AMJackTripManager.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
+				D4ACB39319C01F8C00C9E7C5 /* AMJacktripConfigs.m in Sources */,
+				D4ACB38B19C00E4D00C9E7C5 /* AMJackManager.m in Sources */,
 				CE68805A19B94F2A0062211C /* AMRouteViewController.m in Sources */,
 				D443717919AACED700F49705 /* AMJackClient.m in Sources */,
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,

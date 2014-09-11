@@ -13,7 +13,7 @@
                 <outlet property="loopbackCheck" destination="nvu-wb-Vzs" id="GgI-Ks-Kzo"/>
                 <outlet property="peerSelecter" destination="rCt-V7-nmw" id="YsC-oG-fH3"/>
                 <outlet property="peerSelfDefine" destination="C9y-dw-Mxb" id="V0T-WJ-idM"/>
-                <outlet property="portOffset" destination="OqI-lC-LaZ" id="yf2-KB-3qD"/>
+                <outlet property="portOffsetSelector" destination="SSP-ON-uNu" id="17a-ZU-Tuj"/>
                 <outlet property="qCount" destination="hag-TD-6wS" id="d5g-UQ-LVo"/>
                 <outlet property="rCount" destination="L5s-Id-jS9" id="VjE-Ip-4VO"/>
                 <outlet property="roleSelecter" destination="eW0-pn-Doq" id="Bsb-v8-kuO"/>
@@ -112,15 +112,6 @@
                     <rect key="frame" x="241" y="451" width="128" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="JFU-v1-fQm">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqI-lC-LaZ">
-                    <rect key="frame" x="116" y="345" width="59" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="uNP-y0-a1C">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -235,6 +226,21 @@
                                 <menuItem title="Item 1" state="on" id="JQM-Q7-fvh"/>
                                 <menuItem title="Item 2" id="6Bu-PT-f7L"/>
                                 <menuItem title="Item 3" id="7rq-NR-1Ii"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSP-ON-uNu">
+                    <rect key="frame" x="122" y="343" width="93" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="d6G-ta-l7C" id="9Qq-Gx-7yO">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="8Nf-ol-Gqz">
+                            <items>
+                                <menuItem title="Item 1" state="on" id="d6G-ta-l7C"/>
+                                <menuItem title="Item 2" id="vOf-Oi-6Fb"/>
+                                <menuItem title="Item 3" id="Idb-fO-0BS"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

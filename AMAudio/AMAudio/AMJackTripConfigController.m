@@ -8,15 +8,15 @@
 
 #import "AMJackTripConfigController.h"
 #import "AMCoreData/AMCoreData.h"
-#import "AMTaskLauncher/AMShellTask.h"
 #import "AMRouteViewController.h"
+#import "AMJacktripConfigs.h"
 
 @interface AMJackTripConfigController ()
 @property (weak) IBOutlet NSPopUpButton *roleSelecter;
 @property (weak) IBOutlet NSPopUpButton *peerSelecter;
 @property (weak) IBOutlet NSPopUpButton *channelCountSelecter;
 @property (weak) IBOutlet NSTextField *peerSelfDefine;
-@property (weak) IBOutlet NSTextField *portOffset;
+@property (weak) IBOutlet NSPopUpButton *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *qCount;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
@@ -28,9 +28,6 @@
 @end
 
 @implementation AMJackTripConfigController
-{
-    NSMutableArray* _jacktripTasks;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,12 +42,40 @@
 {
     [self initControlStates];
     [self initParameters];
+    [self initPortOffset];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(jacktripChanged:)
+     name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+     object:nil];
 }
 
 -(void)initControlStates
 {
     [self.peerSelecter setEnabled:NO];
     [self.peerSelfDefine setEnabled:NO];
+}
+
+-(void)initPortOffset
+{
+    [self.portOffsetSelector removeAllItems];
+    
+    NSUInteger maxChannCount = [AMRouteView maxChannels];
+    for (NSUInteger i = 0; i <maxChannCount; i++) {
+        
+        BOOL inUse = NO;
+        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
+            if(jacktrip.portOffset == i){
+                inUse = YES;
+                break;
+            }
+        }
+        
+        if(!inUse){
+            NSString* str = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+            [self.portOffsetSelector addItemWithTitle:str];
+        }
+    }
 }
 
 -(void)initParameters
@@ -83,12 +108,7 @@
     }
     
     //init port
-    if (_jacktripTasks == nil) {
-        self.portOffset.stringValue = [NSString stringWithFormat:@"%d", 0];
-    }else{
-        self.portOffset.stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)[_jacktripTasks count]];
-    }
-    
+    [self.portOffsetSelector selectItemAtIndex:0];
     
     //init -q
     self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
@@ -138,61 +158,40 @@
 
 - (IBAction)startJacktrip:(NSButton *)sender
 {
-    NSMutableString* commandline = [NSMutableString stringWithFormat:@"jacktrip"];
+    AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
     
-    //-s or -c
-    if([self.roleSelecter.selectedItem.title isEqualToString:@"Server"]){
-        [commandline appendFormat:@" -s"];
+    cfgs.role = self.roleSelecter.selectedItem.title;
+    cfgs.serverAddr = self.peerSelfDefine.stringValue;
+    cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
+    cfgs.channelCount = self.channelCountSelecter.selectedItem.title;
+    cfgs.qCount = self.qCount.stringValue;
+    cfgs.rCount = self.rCount.stringValue;
+    cfgs.bitrateRes = self.bitRateRes.stringValue;
+    cfgs.zerounderrun = self.zerounderrunCheck.state == NSOnState;
+    cfgs.loopback = self.loopbackCheck.state == NSOnState;
+    cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
+    
+    if (![self.peerSelecter.title isEqualToString:@""]) {
+        cfgs.clientName = self.peerSelecter.title;
     }else{
-        [commandline appendFormat:@" -c %@", self.peerSelfDefine.stringValue];
+        cfgs.clientName = self.peerSelfDefine.stringValue;
     }
     
-    //port offset
-    [commandline appendFormat:@" -o %@", self.portOffset.stringValue];
-    
-    //channel numbers
-    [commandline appendFormat:@" -n %@", self.channelCountSelecter.selectedItem.title];
-    
-    //-q
-    [commandline appendFormat:@" -q %@", self.qCount.stringValue];
-    
-    //-r
-    [commandline appendFormat:@" -r %@", self.rCount.stringValue];
-    
-    //-b
-    [commandline appendFormat:@" -b %@", self.bitRateRes.stringValue];
-    
-    //-z
-    if (self.zerounderrunCheck.state == NSOnState ) {
-        [commandline appendFormat:@" -z"];
+    if(![self.jacktripManager startJacktrip:cfgs]){
+        //should tell user the error, will remove the exception later
+        NSException* exp = [[NSException alloc]
+                            initWithName:@"start jacktrip failed!"
+                            reason:@"maybe port conflict"
+                            userInfo:nil];
+        [exp raise];
     }
-    
-    //-l
-    if (self.loopbackCheck.state == NSOnState) {
-        [commandline appendFormat:@" -l"];
-    }
-    
-    //-j
-    if (self.jamlinkCheck.state == NSOnState) {
-        [commandline appendFormat:@" -j"];
-    }
-    
-    NSLog(@"jack trip command line is: %@", commandline);
-    
-    if (_jacktripTasks == nil) {
-        _jacktripTasks = [[NSMutableArray alloc] init];
-    }
-    
-    AMShellTask* task = [[AMShellTask alloc] initWithCommand:commandline];
-    [task launch];
-    [_jacktripTasks addObject:task];
-    
-    
-    NSNotification* notification = [NSNotification notificationWithName:JACKTRIP_CHANGED_NOTIFICATION
-                                                                 object:self
-                                                               userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
+}
+
+-(void)jacktripChanged:(NSNotification*)notification
+{
+    [self initControlStates];
+    [self initParameters];
+    [self initPortOffset];
 }
 
 

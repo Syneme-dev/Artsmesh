@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
+#import "AMLiveMapView.h"
 #import <WebKit/WebKit.h>
 
 #import <UIFramework/AMBlueButton.h>
@@ -18,7 +19,7 @@
 @property (strong) IBOutlet NSTabView *tabs;
 @property (strong) IBOutlet AMBlueButton *staticTab;
 @property (weak) IBOutlet WebView *archiveWebView;
-@property (strong) IBOutlet NSImageView *liveMapView;
+@property (strong) IBOutlet AMLiveMapView *liveMapView;
 - (IBAction)onStaticTabClick:(id)sender;
 @property (strong) IBOutlet AMBlueButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;

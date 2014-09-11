@@ -44,6 +44,9 @@
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
+		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
+		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
+		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2317C187A8FFD00554AFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2317B187A8FFD00554AFD /* main.m */; };
@@ -295,6 +298,12 @@
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
 		26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
+		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
+		2D6D76F019C16B4400201106 /* AMWorldMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWorldMap.m; sourceTree = "<group>"; };
+		2D6D76F219C16C5100201106 /* AMLiveMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapView.h; sourceTree = "<group>"; };
+		2D6D76F319C16C5100201106 /* AMLiveMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapView.m; sourceTree = "<group>"; };
+		2D6D76F519C16E3300201106 /* AMPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPixel.h; sourceTree = "<group>"; };
+		2D6D76F619C16E3300201106 /* AMPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPixel.m; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -679,6 +688,8 @@
 		26DA41B71909E77500DC0DCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D6D76F219C16C5100201106 /* AMLiveMapView.h */,
+				2D6D76F319C16C5100201106 /* AMLiveMapView.m */,
 				26B4D06D191A233200F55CD3 /* AMPopupMenuItem.h */,
 				26B4D06E191A233200F55CD3 /* AMPopupMenuItem.m */,
 				26B4D070191A256200F55CD3 /* AMTextFieldView.h */,
@@ -902,6 +913,10 @@
 			children = (
 				AFE5FC5D196A41270079B434 /* AMRestHelper.h */,
 				AFE5FC5E196A41270079B434 /* AMRestHelper.m */,
+				2D6D76EF19C16B4400201106 /* AMWorldMap.h */,
+				2D6D76F019C16B4400201106 /* AMWorldMap.m */,
+				2D6D76F519C16E3300201106 /* AMPixel.h */,
+				2D6D76F619C16E3300201106 /* AMPixel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1198,10 +1213,12 @@
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
+				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				26579B7F197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m in Sources */,
 				D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */,
 				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
+				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				26AE28CC199DDADC00686E66 /* AMGroupOutlineView.m in Sources */,
@@ -1215,6 +1232,7 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				CEC2FC62196588FD00AFD309 /* AMUserDetailsViewController.m in Sources */,
+				2D6D76F719C16E3300201106 /* AMPixel.m in Sources */,
 				266CE262197E5F3A00D8145B /* AMStaticUserDetailsViewController.m in Sources */,
 				AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */,
 				CEC2FC56196588FD00AFD309 /* AMGroupPanelGroupCellController.m in Sources */,

@@ -85,7 +85,7 @@
 
 -(void)loadLivePage {
     NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
-    
+    /**
     NSImage *mapImage = [NSImage imageNamed:@"mapShot.png"];
     _liveMapView = [[NSImageView alloc] initWithFrame:self.view.bounds];
     //imageView is your outlet
@@ -98,6 +98,21 @@
         (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
     )];
     [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+     **/
+    
+    AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
+    _liveMapView = mapView;
+    [mapTab.view addSubview: _liveMapView];
+    
+    //Center the view within parent view
+    
+    [_liveMapView setFrameOrigin:NSMakePoint(
+                                             (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
+                                             (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
+                                             )];
+    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+     
+    
 }
 
 - (void)loadArchivePage

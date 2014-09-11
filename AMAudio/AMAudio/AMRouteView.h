@@ -39,11 +39,12 @@ shouldRemoveDevice:(NSString *)deviceID;
 @property(nonatomic) id<AMRouterViewDelegate> delegate;
 @property(nonatomic, readonly) NSArray *allChannels;
 
-- (void)associateSourceChannels:(NSIndexSet *)sourceChannelIndexes
-            destinationChannels:(NSIndexSet *)destinationChannelIndexes
-                     withDevice:(NSString *)deviceID
-                           name:(NSString *)deviceName;
+- (void)associateChannels:(NSArray *)channels
+               withDevice:(NSString *)deviceID
+                     name:(NSString *)deviceName;
 - (AMChannel *)channelAtIndex:(NSUInteger)index;
 - (NSArray *)channelsAssociatedWithDevice:(NSString *)deviceID;
+
++(NSUInteger)maxChannels;
 
 @end

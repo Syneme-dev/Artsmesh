@@ -7,13 +7,16 @@
 //
 
 #import "AMJackTripConfigController.h"
+#import "AMCoreData/AMCoreData.h"
+#import "AMRouteViewController.h"
+#import "AMJacktripConfigs.h"
 
 @interface AMJackTripConfigController ()
 @property (weak) IBOutlet NSPopUpButton *roleSelecter;
 @property (weak) IBOutlet NSPopUpButton *peerSelecter;
 @property (weak) IBOutlet NSPopUpButton *channelCountSelecter;
 @property (weak) IBOutlet NSTextField *peerSelfDefine;
-@property (weak) IBOutlet NSTextField *portOffset;
+@property (weak) IBOutlet NSPopUpButton *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *qCount;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
@@ -21,7 +24,6 @@
 @property (weak) IBOutlet NSButton *loopbackCheck;
 @property (weak) IBOutlet NSButton *jamlinkCheck;
 @property (weak) IBOutlet NSButton *createBtn;
-@property (weak) IBOutlet NSButton *cancelBtn;
 
 @end
 
@@ -40,12 +42,40 @@
 {
     [self initControlStates];
     [self initParameters];
+    [self initPortOffset];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(jacktripChanged:)
+     name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+     object:nil];
 }
 
 -(void)initControlStates
 {
     [self.peerSelecter setEnabled:NO];
     [self.peerSelfDefine setEnabled:NO];
+}
+
+-(void)initPortOffset
+{
+    [self.portOffsetSelector removeAllItems];
+    
+    NSUInteger maxChannCount = [AMRouteView maxChannels];
+    for (NSUInteger i = 0; i <maxChannCount; i++) {
+        
+        BOOL inUse = NO;
+        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
+            if(jacktrip.portOffset == i){
+                inUse = YES;
+                break;
+            }
+        }
+        
+        if(!inUse){
+            NSString* str = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+            [self.portOffsetSelector addItemWithTitle:str];
+        }
+    }
 }
 
 -(void)initParameters
@@ -57,20 +87,28 @@
     
     //init peers
     [self.peerSelecter removeAllItems];
-    [self.peerSelecter addItemWithTitle:@"wangwei"];
-    [self.peerSelecter addItemWithTitle:@"robbin"];
+    NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    for (AMLiveUser* user in myGroupMem) {
+        if([user.userid isNotEqualTo:mySelf.userid]){
+            [self.peerSelecter addItemWithTitle:user.nickName];
+            if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
+                self.peerSelfDefine.stringValue = user.privateIp;
+            }
+        }
+    }
+    
     [self.peerSelecter addItemWithTitle:@"ip address"];
     
     //init channel count
     [self.channelCountSelecter removeAllItems];
-    
     for (int i = 2; i <= 16; i *= 2) {
         NSString* numStr = [NSString stringWithFormat:@"%d", i];
         [self.channelCountSelecter addItemWithTitle:numStr];
     }
     
     //init port
-    self.portOffset.stringValue = [NSString stringWithFormat:@"%d", 0];
+    [self.portOffsetSelector selectItemAtIndex:0];
     
     //init -q
     self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
@@ -94,10 +132,8 @@
 - (IBAction)roleSelectedChanged:(NSPopUpButton *)sender
 {
     if ([sender.selectedItem.title isEqualToString:@"Client"]){
-        self.role = @"-c";
         [self.peerSelecter setEnabled:YES];
     }else{
-        self.role = @"-s";
         [self.peerSelecter setEnabled:NO];
         [self.peerSelfDefine setEnabled:NO];
     }
@@ -107,9 +143,56 @@
 {
     if ([sender.selectedItem.title isEqualToString:@"ip address"]) {
         [self.peerSelfDefine setEnabled:YES];
+        self.peerSelfDefine.stringValue = @"";
     }else{
         [self.peerSelfDefine setEnabled:NO];
+    
+        NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
+        for (AMLiveUser* user in myGroupMem) {
+            if([user.nickName isEqualToString:sender.selectedItem.title]){
+                self.peerSelfDefine.stringValue = user.privateIp;
+            }
+        }
     }
 }
+
+- (IBAction)startJacktrip:(NSButton *)sender
+{
+    AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
+    
+    cfgs.role = self.roleSelecter.selectedItem.title;
+    cfgs.serverAddr = self.peerSelfDefine.stringValue;
+    cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
+    cfgs.channelCount = self.channelCountSelecter.selectedItem.title;
+    cfgs.qCount = self.qCount.stringValue;
+    cfgs.rCount = self.rCount.stringValue;
+    cfgs.bitrateRes = self.bitRateRes.stringValue;
+    cfgs.zerounderrun = self.zerounderrunCheck.state == NSOnState;
+    cfgs.loopback = self.loopbackCheck.state == NSOnState;
+    cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
+    
+    if (![self.peerSelecter.title isEqualToString:@""]) {
+        cfgs.clientName = self.peerSelecter.title;
+    }else{
+        cfgs.clientName = self.peerSelfDefine.stringValue;
+    }
+    
+    if(![self.jacktripManager startJacktrip:cfgs]){
+        //should tell user the error, will remove the exception later
+        NSException* exp = [[NSException alloc]
+                            initWithName:@"start jacktrip failed!"
+                            reason:@"maybe port conflict"
+                            userInfo:nil];
+        [exp raise];
+    }
+}
+
+-(void)jacktripChanged:(NSNotification*)notification
+{
+    [self initControlStates];
+    [self initParameters];
+    [self initPortOffset];
+}
+
 
 @end

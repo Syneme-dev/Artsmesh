@@ -7,9 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMJackTripManager.h"
+#import "AMJackManager.h"
 
 @interface AMJackTripConfigController : NSViewController
 
-@property NSString* role;
+@property (weak)AMJackTripManager* jacktripManager;
+@property (weak)AMJackManager* jackManager;
 
 @end

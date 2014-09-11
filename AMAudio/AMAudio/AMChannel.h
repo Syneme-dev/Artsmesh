@@ -25,6 +25,5 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 
 // designated initializer
 - (instancetype)initWithIndex:(NSUInteger)index;
-- (void)reset;
 
 @end

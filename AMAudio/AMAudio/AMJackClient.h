@@ -10,11 +10,13 @@
 
 @interface AMJackClient : NSObject
 
+@property BOOL isOpen;
+
 -(BOOL) openJackClient;
 -(void) closeJackClient;
 
--(NSArray*)sourcePorts;
--(NSArray*)destinationPorts;
+-(NSArray*)allChannels;
+
 -(NSArray*)connectionForPort:(NSString*)portName;
 
 -(BOOL)connectOutput:(NSString*)output toInput:(NSString*)input;

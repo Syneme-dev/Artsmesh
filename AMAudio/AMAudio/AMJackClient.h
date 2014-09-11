@@ -15,8 +15,8 @@
 -(BOOL) openJackClient;
 -(void) closeJackClient;
 
--(NSArray*)allChannels;
-
+-(NSArray*)sourcePorts;
+-(NSArray*)destinationPorts;
 -(NSArray*)connectionForPort:(NSString*)portName;
 
 -(BOOL)connectOutput:(NSString*)output toInput:(NSString*)input;

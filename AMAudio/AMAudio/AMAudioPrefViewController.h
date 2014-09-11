@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMJackManager.h"
+#import "AMJackConfigs.h"
 
 @interface AMAudioPrefViewController : NSViewController
 
-@property AMJackManager* jackManager;
-
+@property AMJackConfigs* jackConfig;
 
 @end

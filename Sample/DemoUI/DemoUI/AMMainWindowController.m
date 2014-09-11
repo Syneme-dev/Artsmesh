@@ -93,15 +93,16 @@
         self.window.restorationClass = [appDelegate class];
         self.window.identifier = @"mainWindow";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStarted:) name:AM_JACK_STARTED_NOTIFICATION object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStopped:) name:AM_JACK_STOPPED_NOTIFICATION object:nil];
 
         [[AMTimer shareInstance] addObserver:self
                                   forKeyPath:@"state"
                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                                      context:nil];
         
+        [[AMAudio sharedInstance] addObserver:self
+                                  forKeyPath:@"jackState"
+                                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                     context:nil];
     }
     return self;
 }
@@ -719,22 +720,12 @@
 - (IBAction)jackServerToggled:(NSButton *)sender
 {
     AMAudio* audioModule = [AMAudio sharedInstance];
-    if(![audioModule isJackStarted]){
+    if(audioModule.jackState == JackState_Stopped){
         [self.jackServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
         [audioModule startJack];
     }else{
         [audioModule stopJack];
     }
-}
-
--(void)jackStarted:(NSNotification*)notification
-{
-    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
-}
-
--(void)jackStopped:(NSNotification*)notification
-{
-    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
 }
 
 
@@ -758,6 +749,23 @@
                     break;
             }
         }
+    }
+    
+    if  ([object isKindOfClass:[AMAudio class]]){
+        
+        if ([keyPath isEqualToString:@"jackState"]) {
+            JackState newState = [[change objectForKey:@"new"] intValue];
+            
+            switch (newState) {
+                case JackState_Started:
+                    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+                    break;
+                default:
+                    [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+                    break;
+            }
+        }
+
     }
 }
 

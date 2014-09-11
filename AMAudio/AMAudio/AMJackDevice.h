@@ -13,6 +13,9 @@
 
 @property NSString* deviceID;
 @property NSString* deviceName;
-@property NSMutableArray* channels;
+@property NSMutableArray* srcChans;
+@property NSMutableArray* desChans;
+
+-(BOOL)addDeviceToRouteView :(AMRouteView*)routeView;
 
 @end

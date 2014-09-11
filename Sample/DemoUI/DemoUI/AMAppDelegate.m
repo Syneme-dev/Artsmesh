@@ -15,7 +15,6 @@
 #import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
 #import "AMStatusNet/AMStatusNet.h"
-#import "AMAudio/AMAudio.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -42,8 +41,6 @@ static NSMutableDictionary *allPlugins = nil;
     id userPluginClass = allPlugins[UserGroupPluginName];
     [userPluginClass canQuit];
     [[AMMesher sharedAMMesher] stopMesher];
-    
-    [[AMAudio sharedInstance] releaseResources];
 }
 
 - (void)connectMesher {
@@ -98,7 +95,6 @@ static NSMutableDictionary *allPlugins = nil;
 - (AMPreferenceManager *)sharedPreferenceManger {
     return [AMPreferenceManager shareInstance];
 }
-
 
 
 @end

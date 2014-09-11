@@ -9,8 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "AMRouteView.h"
 
-#define JACKTRIP_CHANGED_NOTIFICATION   @"JackTrip Changed"
-
 @interface AMRouteViewController : NSViewController<AMRouterViewDelegate>
 
 @end

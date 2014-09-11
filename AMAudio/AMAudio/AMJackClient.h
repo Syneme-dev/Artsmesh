@@ -10,8 +10,6 @@
 
 @interface AMJackClient : NSObject
 
-@property BOOL isOpen;
-
 -(BOOL) openJackClient;
 -(void) closeJackClient;
 

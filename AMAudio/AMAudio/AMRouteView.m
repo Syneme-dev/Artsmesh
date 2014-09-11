@@ -566,9 +566,4 @@ static CGFloat kCloseButtonRadius = 0.0;
     return NO;
 }
 
-+(NSUInteger)maxChannels
-{
-    return kNumberOfChannels;
-}
-
 @end

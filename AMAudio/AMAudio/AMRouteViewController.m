@@ -132,7 +132,6 @@ shouldRemoveDevice:(NSString *)deviceID;
 //        }
 //        
 //        [self.view setNeedsDisplay:YES];
-        
         return;
     }
     
@@ -181,6 +180,9 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
     
     if (self.jackManager.jackState == JackState_Stopped) {
+        
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Jack is not running" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"To start jacktrip you must start JACK first!"];
+        [alert runModal];
         return;
     }
     

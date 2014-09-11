@@ -23,6 +23,8 @@
 
 @implementation AMMapViewController
 
+@synthesize liveMapView = _liveMapView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,7 +39,7 @@
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];
     [self.webView setDrawsBackground:NO];
-    [self loadPage];
+    [self loadLivePage];
     [self loadArchivePage];
 }
 
@@ -46,7 +48,7 @@
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.liveTab];
     [self.tabButtons addObject:self.staticTab];
-    self.showingTabsCount=2;
+    self.showingTabsCount=3;
     
 }
 
@@ -81,26 +83,52 @@
     [listener ignore];
 }
 
-
--(void)loadPage{
-    //TODO:there is an errror when load social and map at the same time.
-    //Error:There was a problem with your session token.
-    //TODO:the social panel may change the map panel css style .
+-(void)loadLivePage {
+    NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
+    /**
+    NSImage *mapImage = [NSImage imageNamed:@"mapShot.png"];
+    _liveMapView = [[NSImageView alloc] initWithFrame:self.view.bounds];
+    //imageView is your outlet
+    [_liveMapView setImage: mapImage];
+    [mapTab.view addSubview: _liveMapView];
     
-//    isLogin=false;
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
-    NSURL *mapURL = [NSURL URLWithString:
-                       [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
-    [self.webView.mainFrame loadRequest:
-    [NSURLRequest requestWithURL:mapURL]];
+    //Center the view within parent view
+    [_liveMapView setFrameOrigin:NSMakePoint(
+        (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
+        (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
+    )];
+    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+     **/
+    
+    AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
+    _liveMapView = mapView;
+    [mapTab.view addSubview: _liveMapView];
+    
+    //Center the view within parent view
+    
+    [_liveMapView setFrameOrigin:NSMakePoint(
+                                             (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
+                                             (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
+                                             )];
+    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+     
+    
 }
 
 - (void)loadArchivePage
 {
-    NSURL *url = [NSURL URLWithString:@"http://artsmesh.io/circle/circle.html"];
-    [self.archiveWebView.mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
-    [self.archiveWebView.mainFrame.frameView.documentView scaleUnitSquareToSize:NSMakeSize(0.8, 0.8)];
+    
+    //TODO:there is an errror when load social and map at the same time.
+    //Error:There was a problem with your session token.
+    //TODO:the social panel may change the map panel css style .
+    
+    //    isLogin=false;
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSURL *mapURL = [NSURL URLWithString:
+                     [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
+    [self.archiveWebView.mainFrame loadRequest:
+    [NSURLRequest requestWithURL:mapURL]];
 }
 
 -(void)gotoUsersPage{
@@ -127,6 +155,7 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
+
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

@@ -148,7 +148,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     for (NSUInteger i = 0; i < [allChann count]; i++) {
         AMChannel* chann = allChann[i];
         chann.index = i;
-
+        
         AMJackDevice* device = devices[chann.deviceID];
         if(device == nil){
             device = [[AMJackDevice alloc] init];

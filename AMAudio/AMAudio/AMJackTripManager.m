@@ -93,6 +93,8 @@
     
     [self.jackTripInstances addObject:newInstance];
     
+    sleep(2);
+    
     NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
                                                                  object:self
                                                                userInfo:nil];

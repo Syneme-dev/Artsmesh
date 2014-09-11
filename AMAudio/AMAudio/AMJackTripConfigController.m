@@ -24,6 +24,7 @@
 @property (weak) IBOutlet NSButton *loopbackCheck;
 @property (weak) IBOutlet NSButton *jamlinkCheck;
 @property (weak) IBOutlet NSButton *createBtn;
+@property (weak) IBOutlet NSTextField *showName;
 
 @end
 
@@ -84,6 +85,9 @@
     [self.roleSelecter removeAllItems];
     [self.roleSelecter addItemWithTitle:@"Server"];
     [self.roleSelecter addItemWithTitle:@"Client"];
+    
+    //init show name
+    self.showName.stringValue = [NSString stringWithFormat:@"Jacktrip_%lu", (unsigned long)[self.jacktripManager.jackTripInstances count]];
     
     //init peers
     [self.peerSelecter removeAllItems];
@@ -170,12 +174,7 @@
     cfgs.zerounderrun = self.zerounderrunCheck.state == NSOnState;
     cfgs.loopback = self.loopbackCheck.state == NSOnState;
     cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
-    
-    if (![self.peerSelecter.title isEqualToString:@""]) {
-        cfgs.clientName = self.peerSelecter.title;
-    }else{
-        cfgs.clientName = self.peerSelfDefine.stringValue;
-    }
+    cfgs.clientName = self.showName.stringValue;
     
     if(![self.jacktripManager startJacktrip:cfgs]){
         //should tell user the error, will remove the exception later

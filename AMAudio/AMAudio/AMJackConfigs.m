@@ -101,7 +101,7 @@
     
 }
 
-+(id)initWithArchiveConfig
++(id)archivedJackConfig;
 {
     AMJackConfigs* config = [[AMJackConfigs alloc] init];
     return config;

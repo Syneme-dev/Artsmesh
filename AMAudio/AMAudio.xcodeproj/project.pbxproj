@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265A405619BD65C8003D27E5 /* AMCoreData.framework */; };
+		26A11B2319C143A300796327 /* AMJackManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B1D19C143A300796327 /* AMJackManager.h */; };
+		26A11B2419C143A300796327 /* AMJackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B1E19C143A300796327 /* AMJackManager.m */; };
+		26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B1F19C143A300796327 /* AMJacktripConfigs.h */; };
+		26A11B2619C143A300796327 /* AMJacktripConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B2019C143A300796327 /* AMJacktripConfigs.m */; };
+		26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B2119C143A300796327 /* AMJackTripManager.h */; };
+		26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B2219C143A300796327 /* AMJackTripManager.m */; };
 		26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */; };
 		26F2C30E19B9FD61001261F0 /* AMJackTripConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */; };
 		26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */; };
@@ -89,6 +95,12 @@
 
 /* Begin PBXFileReference section */
 		265A405619BD65C8003D27E5 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
+		26A11B1D19C143A300796327 /* AMJackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackManager.h; sourceTree = "<group>"; };
+		26A11B1E19C143A300796327 /* AMJackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackManager.m; sourceTree = "<group>"; };
+		26A11B1F19C143A300796327 /* AMJacktripConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripConfigs.h; sourceTree = "<group>"; };
+		26A11B2019C143A300796327 /* AMJacktripConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJacktripConfigs.m; sourceTree = "<group>"; };
+		26A11B2119C143A300796327 /* AMJackTripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripManager.h; sourceTree = "<group>"; };
+		26A11B2219C143A300796327 /* AMJackTripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripManager.m; sourceTree = "<group>"; };
 		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
 		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripConfigController.h; sourceTree = "<group>"; };
 		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfigController.m; sourceTree = "<group>"; };
@@ -246,6 +258,12 @@
 		D472931719A6E5030034CC34 /* AMAudio */ = {
 			isa = PBXGroup;
 			children = (
+				26A11B1D19C143A300796327 /* AMJackManager.h */,
+				26A11B1E19C143A300796327 /* AMJackManager.m */,
+				26A11B1F19C143A300796327 /* AMJacktripConfigs.h */,
+				26A11B2019C143A300796327 /* AMJacktripConfigs.m */,
+				26A11B2119C143A300796327 /* AMJackTripManager.h */,
+				26A11B2219C143A300796327 /* AMJackTripManager.m */,
 				D472931E19A6E5030034CC34 /* AMAudio.h */,
 				D472931F19A6E5030034CC34 /* AMAudio.m */,
 				CE68804F19B94EF20062211C /* AMChannel.h */,
@@ -324,7 +342,9 @@
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
 				CE151F3419B01372002D2AD4 /* types.h in Headers */,
 				CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */,
+				26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */,
 				CE151F2919B01372002D2AD4 /* intclient.h in Headers */,
+				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
@@ -341,6 +361,7 @@
 				CE151F2819B01372002D2AD4 /* control.h in Headers */,
 				CE151F3519B01372002D2AD4 /* weakjack.h in Headers */,
 				CE68805919B94F2A0062211C /* AMRouteViewController.h in Headers */,
+				26A11B2319C143A300796327 /* AMJackManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,12 +468,15 @@
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
+				26A11B2419C143A300796327 /* AMJackManager.m in Sources */,
+				26A11B2619C143A300796327 /* AMJacktripConfigs.m in Sources */,
 				CE68805A19B94F2A0062211C /* AMRouteViewController.m in Sources */,
 				D443717919AACED700F49705 /* AMJackClient.m in Sources */,
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,
 				CE68805419B94EF20062211C /* AMChannel.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
+				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 				CE68805619B94EF20062211C /* AMRouteView.m in Sources */,
 			);

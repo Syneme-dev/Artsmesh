@@ -733,7 +733,7 @@
 }
 
 -(void)jackStopped:(NSNotification*)notification
-{
+{    
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
 }
 

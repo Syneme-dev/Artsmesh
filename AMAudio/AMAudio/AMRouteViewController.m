@@ -97,6 +97,17 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void)jackStopped:(NSNotification*)notification
 {
     //[self.jackClient closeJackClient];
+    
+    AMRouteView* routerView = (AMRouteView*)self.view;
+    for(AMChannel* chann in routerView.allChannels){
+        chann.deviceID = @"";
+        chann.channelName = @"";
+        chann.peerIndexes = nil;
+        chann.type = AMPlaceholderChannel;
+    }
+    
+    [self.view setNeedsDisplay:YES];
+    
     [self.jacktripManager stopAllJacktrips];
     
 }
@@ -111,16 +122,16 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void)reloadAudioChannel:(NSNotification*)notify
 {
     if (![self.jackClient isOpen]) {
-        
-        AMRouteView* routerView = (AMRouteView*)self.view;
-        for(AMChannel* chann in routerView.allChannels){
-            chann.deviceID = @"";
-            chann.channelName = @"";
-            chann.peerIndexes = nil;
-            chann.type = AMPlaceholderChannel;
-        }
-        
-        [self.view setNeedsDisplay:YES];
+//        
+//        AMRouteView* routerView = (AMRouteView*)self.view;
+//        for(AMChannel* chann in routerView.allChannels){
+//            chann.deviceID = @"";
+//            chann.channelName = @"";
+//            chann.peerIndexes = nil;
+//            chann.type = AMPlaceholderChannel;
+//        }
+//        
+//        [self.view setNeedsDisplay:YES];
         
         return;
     }

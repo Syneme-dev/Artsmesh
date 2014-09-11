@@ -113,7 +113,7 @@ static CGFloat kCloseButtonRadius = 0.0;
 {
     [self doInit];
     
-    self.delegate = [[AMRouteViewController alloc] init];
+    //self.delegate = [[AMRouteViewController alloc] init];
     NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
     NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
     for (int i = 0; i < 4; i++) {
@@ -122,17 +122,17 @@ static CGFloat kCloseButtonRadius = 0.0;
         channels[i] = channel;
     }
     
-    for (int i = 8; i < 12; i++) {
-        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-        channels2[i-8] = channel;
-    }
+//    for (int i = 8; i < 12; i++) {
+//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//        channels2[i-8] = channel;
+//    }
     [self associateChannels:channels
                  withDevice:@"Device1"
                        name:@"GarageBand"];
-    [self associateChannels:channels2
-                 withDevice:@"Device2"
-                       name:@"Device2"];
+//    [self associateChannels:channels2
+//                 withDevice:@"Device2"
+//                       name:@"Device2"];
 
 }
 

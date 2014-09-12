@@ -35,6 +35,7 @@
 }
 -(void)awakeFromNib{
     [super awakeFromNib];
+    [self.tabs setAutoresizesSubviews:YES];
     [self.webView setFrameLoadDelegate:self];
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];
@@ -48,7 +49,7 @@
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.liveTab];
     [self.tabButtons addObject:self.staticTab];
-    self.showingTabsCount=3;
+    self.showingTabsCount=2;
     
 }
 
@@ -84,34 +85,42 @@
 }
 
 -(void)loadLivePage {
+
     NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
-    /**
-    NSImage *mapImage = [NSImage imageNamed:@"mapShot.png"];
-    _liveMapView = [[NSImageView alloc] initWithFrame:self.view.bounds];
-    //imageView is your outlet
-    [_liveMapView setImage: mapImage];
-    [mapTab.view addSubview: _liveMapView];
+    NSView *contentView = mapTab.view;
     
-    //Center the view within parent view
-    [_liveMapView setFrameOrigin:NSMakePoint(
-        (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
-        (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
-    )];
-    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-     **/
+    
+    NSLog(@"%f", self.tabs.bounds.size.width);
     
     AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
     _liveMapView = mapView;
-    [mapTab.view addSubview: _liveMapView];
+    [_liveMapView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    [contentView addSubview: _liveMapView];
+    
+    _liveMapView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : _liveMapView}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : _liveMapView}];
+    
+    [contentView addConstraints:verticalConstraints];
+    [contentView addConstraints:horizontalConstraints];
     
     //Center the view within parent view
     
+    /**
     [_liveMapView setFrameOrigin:NSMakePoint(
                                              (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
                                              (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
                                              )];
     [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-     
+     **/
     
 }
 
@@ -155,6 +164,13 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
+
+/**
+- (void)drawRect:(NSRect)dirtyRect {
+    
+
+}
+**/
 
 
 - (IBAction)onStaticTabClick:(id)sender {

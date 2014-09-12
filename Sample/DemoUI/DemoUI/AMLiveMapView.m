@@ -127,7 +127,9 @@ AMWorldMap *worldMap;
         
         //[port drawWithCenterAt:[self centerOfPort:i]];
         [port drawWithCenterAt:portCenter];
+        
     }
+    
 }
 
 - (NSPoint)centerOfPort:(NSInteger)portIndex

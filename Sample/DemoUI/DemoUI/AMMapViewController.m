@@ -35,6 +35,7 @@
 }
 -(void)awakeFromNib{
     [super awakeFromNib];
+    [self.tabs setAutoresizesSubviews:YES];
     [self.webView setFrameLoadDelegate:self];
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];
@@ -48,7 +49,7 @@
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.liveTab];
     [self.tabButtons addObject:self.staticTab];
-    self.showingTabsCount=3;
+    self.showingTabsCount=2;
     
 }
 
@@ -84,25 +85,19 @@
 }
 
 -(void)loadLivePage {
-    NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
     /**
-    NSImage *mapImage = [NSImage imageNamed:@"mapShot.png"];
-    _liveMapView = [[NSImageView alloc] initWithFrame:self.view.bounds];
-    //imageView is your outlet
-    [_liveMapView setImage: mapImage];
-    [mapTab.view addSubview: _liveMapView];
+    NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
+    NSView *liveTabView = mapTab.view;
     
-    //Center the view within parent view
-    [_liveMapView setFrameOrigin:NSMakePoint(
-        (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
-        (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
-    )];
-    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-     **/
+    [liveTabView setAutoresizesSubviews:YES];
+    
+    NSLog(@"%f", self.tabs.bounds.size.width);
     
     AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
     _liveMapView = mapView;
-    [mapTab.view addSubview: _liveMapView];
+    [_liveMapView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    [liveTabView addSubview: _liveMapView];
     
     //Center the view within parent view
     
@@ -111,7 +106,7 @@
                                              (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
                                              )];
     [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-     
+    **/
     
 }
 
@@ -155,6 +150,13 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
+
+/**
+- (void)drawRect:(NSRect)dirtyRect {
+    
+
+}
+**/
 
 
 - (IBAction)onStaticTabClick:(id)sender {

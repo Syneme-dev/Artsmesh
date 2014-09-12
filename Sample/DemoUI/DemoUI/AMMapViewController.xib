@@ -56,7 +56,7 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Tab" identifier="1" id="Wva-Sa-TJf">
-                            <view key="view" id="UVM-E0-eXY">
+                            <view key="view" id="UVM-E0-eXY" customClass="AMLiveMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

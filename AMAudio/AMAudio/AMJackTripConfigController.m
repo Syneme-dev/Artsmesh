@@ -176,6 +176,17 @@
     cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
     cfgs.clientName = self.showName.stringValue;
     
+    int totalChannels = 0;
+    for (AMJacktripInstance* instance in self.jacktripManager.jackTripInstances){
+        totalChannels += instance.channelCount;
+    }
+    
+    if (self.maxChannels < totalChannels + [cfgs.channelCount intValue]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Too many channels" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There are already too many channels, you must close some deviecs!"];
+        [alert runModal];
+        return;
+    }
+    
     if(![self.jacktripManager startJacktrip:cfgs]){
         //should tell user the error, will remove the exception later
         NSException* exp = [[NSException alloc]

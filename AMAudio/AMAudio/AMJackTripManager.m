@@ -86,6 +86,7 @@
     newInstance.jacktripTask = task;
     newInstance.portOffset = [cfgs.portOffset intValue];
     newInstance.instanceName = cfgs.clientName;
+    newInstance.channelCount = [cfgs.channelCount intValue];
     
     if (self.jackTripInstances == nil){
         self.jackTripInstances = [[NSMutableArray alloc] init];

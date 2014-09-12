@@ -15,6 +15,7 @@
 @property NSString* instanceName;
 @property AMShellTask* jacktripTask;
 @property int portOffset;
+@property int channelCount;
 
 @end
 

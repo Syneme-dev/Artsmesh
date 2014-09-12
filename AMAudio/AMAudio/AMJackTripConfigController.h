@@ -14,5 +14,6 @@
 
 @property (weak)AMJackTripManager* jacktripManager;
 @property (weak)AMJackManager* jackManager;
+@property int maxChannels;
 
 @end

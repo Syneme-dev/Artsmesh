@@ -21,6 +21,9 @@
 @end
 
 @implementation AMRouteViewController
+{
+    NSTimer* _deviceTimer;
+}
 
 
 - (BOOL)routeView:(AMRouteView *)routeView
@@ -113,6 +116,15 @@ shouldRemoveDevice:(NSString *)deviceID;
     view.delegate = self;
     
     [self reloadAudioChannel:nil];
+    
+    _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
+}
+
+-(void)refreshDevices
+{
+    //if([self.jacktripManager.jackTripInstances count] != 0){
+        [self reloadAudioChannel:nil];
+    //}
 }
 
 -(void)jackStarted:(NSNotification*)notification
@@ -142,15 +154,9 @@ shouldRemoveDevice:(NSString *)deviceID;
         return;
     }
     
-    NSArray* allChann = [self.jackClient allChannels];
-    if ([allChann count] > [AMRouteView maxChannels]) {
-        NSException* exp = [[NSException alloc]
-                            initWithName:@"TooManyChannels"
-                            reason:@""
-                            userInfo:nil];
-        [exp raise];
-    }
+    AMRouteView* routeView = (AMRouteView*)self.view;
     
+    NSArray* allChann = [self.jackClient allChannels];
     NSMutableDictionary* devices = [[NSMutableDictionary alloc] init];
     for (NSUInteger i = 0; i < [allChann count]; i++) {
         AMChannel* chann = allChann[i];
@@ -171,13 +177,24 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     for(NSString* deviceID in devices){
         AMJackDevice* device = devices[deviceID];
-        AMRouteView* routeView = (AMRouteView*)self.view;
         [routeView associateChannels:device.channels
                           withDevice:device.deviceID
                                 name:device.deviceName];
     }
     
-   // [self.view setNeedsDisplay:YES];
+    NSArray* channelsOnView = [routeView allChannels];
+    for (AMChannel* chann in channelsOnView) {
+        NSString* fullName = [chann channelFullName];
+        NSArray* conns = [self.jackClient connectionForPort:fullName];
+        for (NSString* conn in conns ) {
+            for (AMChannel* peerChann in channelsOnView) {
+                NSString* peerFullName = [peerChann channelFullName];
+                if ([conn isEqualTo:peerFullName]) {
+                    [routeView connectChannel:chann toChannel:peerChann];
+                }
+            }
+        }
+    }
 }
 
 - (IBAction)startJackTrip:(NSButton *)sender
@@ -202,7 +219,11 @@ shouldRemoveDevice:(NSString *)deviceID;
         self.myPopover.delegate = self;
     }
     
-    self.myPopover.contentViewController =  [[AMAudio sharedInstance] getJacktripPrefUI];
+    AMJackTripConfigController* controller = (AMJackTripConfigController*)[[AMAudio sharedInstance] getJacktripPrefUI];
+    AMRouteView* routerView = (AMRouteView*)self.view;
+    controller.maxChannels = (int)[[routerView allChannels] count];
+    self.myPopover.contentViewController = controller;
+    
     [self.myPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
 }
 

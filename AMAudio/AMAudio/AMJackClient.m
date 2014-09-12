@@ -76,9 +76,9 @@
             newChann.deviceID = deviceName;
             
             if (flag & JackPortIsInput) {
-                newChann.type = AMSourceChannel;
-            }else{
                 newChann.type = AMDestinationChannel;
+            }else{
+                newChann.type = AMSourceChannel;
             }
             
             [allChannels addObject:newChann];
@@ -113,7 +113,6 @@
     return connectNames;
 }
 
-
 -(void)closeJackClient
 {
     jack_client_close(_client);
@@ -121,20 +120,18 @@
     _client = NULL;
 }
 
-
--(BOOL)connectOutput:(NSString *)output toInput:(NSString *)input
+-(BOOL)connectSrc:(NSString*)src toDest:(NSString*)dest
 {
-    const char* sourcePort = [output cStringUsingEncoding:NSUTF8StringEncoding];
-    const char* desPort = [input cStringUsingEncoding:NSUTF8StringEncoding];
+    const char* srcPort = [src cStringUsingEncoding:NSUTF8StringEncoding];
+    const char* desPort = [dest cStringUsingEncoding:NSUTF8StringEncoding];
     
-    return 0 == jack_connect(_client, sourcePort, desPort);
+    return 0 == jack_connect(_client, srcPort, desPort);
 }
 
--(BOOL)disconnectOutput:(NSString *)output fromInput:(NSString *)input
+-(BOOL)disconnectChannel:(NSString*)src fromDest:(NSString*) dest
 {
-    const char* sourcePort = [output cStringUsingEncoding:NSUTF8StringEncoding];
-    const char* desPort = [input cStringUsingEncoding:NSUTF8StringEncoding];
-    
+    const char* sourcePort = [src cStringUsingEncoding:NSUTF8StringEncoding];
+    const char* desPort = [dest cStringUsingEncoding:NSUTF8StringEncoding];
     return 0 == jack_disconnect(_client, sourcePort, desPort);
 }
 

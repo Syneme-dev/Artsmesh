@@ -108,7 +108,6 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
     [[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
-    [[AMAudio sharedInstance] removeObserver:self forKeyPath:@"jackState"];
 }
 
 

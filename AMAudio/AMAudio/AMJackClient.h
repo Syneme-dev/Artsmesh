@@ -19,8 +19,8 @@
 
 -(NSArray*)connectionForPort:(NSString*)portName;
 
--(BOOL)connectOutput:(NSString*)output toInput:(NSString*)input;
--(BOOL)disconnectOutput:(NSString*)output fromInput:(NSString*) input;
+-(BOOL)connectSrc:(NSString*)src toDest:(NSString*)dest;
+-(BOOL)disconnectChannel:(NSString*)src fromDest:(NSString*) dest;
 
 
 @end

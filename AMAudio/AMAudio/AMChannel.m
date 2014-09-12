@@ -28,4 +28,9 @@
     return self;
 }
 
+-(NSString*)channelFullName
+{
+    return [NSString stringWithFormat:@"%@:%@", self.deviceID, self.channelName];
+}
+
 @end

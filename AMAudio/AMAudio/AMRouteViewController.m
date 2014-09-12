@@ -34,6 +34,18 @@ shouldConnectChannel:(AMChannel *)channel1
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    NSString* srcChannName;
+    NSString* destChannName;
+    
+    if (channel1.type == AMSourceChannel) {
+        srcChannName = [NSString stringWithFormat:@"%@:%@", channel1.deviceID, channel1.channelName];
+        destChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
+    }else{
+        destChannName = [NSString stringWithFormat:@"%@:%@", channel1.deviceID, channel1.channelName];
+        srcChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
+    }
+    
+    [self.jackClient connectSrc:srcChannName toDest:destChannName];
     return YES;
 }
 
@@ -48,7 +60,18 @@ shouldDisonnectChannel:(AMChannel *)channel1
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
-    return YES;
+    NSString* srcChannName;
+    NSString* destChannName;
+    
+    if (channel1.type == AMSourceChannel) {
+        srcChannName = [NSString stringWithFormat:@"%@:%@", channel1.deviceID, channel1.channelName];
+        destChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
+    }else{
+        destChannName = [NSString stringWithFormat:@"%@:%@", channel1.deviceID, channel1.channelName];
+        srcChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
+    }
+    
+    return [self.jackClient disconnectChannel:srcChannName fromDest:destChannName];
 }
 
 - (BOOL)routeView:(AMRouteView *)routeView
@@ -122,16 +145,6 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void)reloadAudioChannel:(NSNotification*)notify
 {
     if (![self.jackClient isOpen]) {
-//        
-//        AMRouteView* routerView = (AMRouteView*)self.view;
-//        for(AMChannel* chann in routerView.allChannels){
-//            chann.deviceID = @"";
-//            chann.channelName = @"";
-//            chann.peerIndexes = nil;
-//            chann.type = AMPlaceholderChannel;
-//        }
-//        
-//        [self.view setNeedsDisplay:YES];
         return;
     }
     

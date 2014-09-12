@@ -26,4 +26,6 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 // designated initializer
 - (instancetype)initWithIndex:(NSUInteger)index;
 
+-(NSString*)channelFullName;
+
 @end

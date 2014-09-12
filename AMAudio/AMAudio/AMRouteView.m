@@ -57,13 +57,14 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 static NSUInteger kNumberOfChannels = 72;
 static CGFloat kChannelRadius = 10.0;
 static CGFloat kPlaceholderChannelRadius = 5.0;
-static CGFloat kCloseButtonRadius = 0.0;
+static CGFloat kCloseButtonRadius = 6.0;
 
 @interface AMDevice : NSObject
 
 @property(nonatomic) NSString *deviceID;
 @property(nonatomic) NSString *deviceName;
 @property(nonatomic) NSRange channelIndexRange;
+@property(nonatomic) NSPoint closeButtonCenter;
 
 @end
 
@@ -114,25 +115,25 @@ static CGFloat kCloseButtonRadius = 0.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-//    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 0; i < 4; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//        channels[i] = channel;
-//    }
-//    [self associateChannels:channels
-//                 withDevice:@"Device1"
-//                       name:@"Device 1"];
-//    
-//    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 8; i < 12; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//        channels2[i - 8] = channel;
-//    }
-//    [self associateChannels:channels2
-//                 withDevice:@"Device2"
-//                       name:@"Device 2"];
+//   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 0; i < 4; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//       channels[i] = channel;
+//   }
+//   [self associateChannels:channels
+//                withDevice:@"Device1"
+//                      name:@"Device 1"];
+//   
+//   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 8; i < 12; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//       channels2[i - 8] = channel;
+//   }
+//   [self associateChannels:channels2
+//                withDevice:@"Device2"
+//                      name:@"GarageBand"];
 
 }
 
@@ -186,8 +187,15 @@ static CGFloat kCloseButtonRadius = 0.0;
         return;
     }
     
-    if ([self testClickOccuredOnConnection:theEvent])
+    if ([self testClickOccuredOnConnection:theEvent]) {
         self.needsDisplay = YES;
+        return;
+    }
+    
+    NSString *deviceID = [self testClickOccuredOnCloseDeviceButton:theEvent];
+    if (deviceID) {
+        [self tryToCloseDevice:deviceID];
+    }
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
@@ -233,6 +241,7 @@ static CGFloat kCloseButtonRadius = 0.0;
     }
     device.channelIndexRange = NSMakeRange(minIndex, channels.count);
     self.devices[deviceID] = device;
+    self.needsDisplay = YES;
 }
 
 - (AMChannel *)channelAtIndex:(NSUInteger)index
@@ -247,6 +256,44 @@ static CGFloat kCloseButtonRadius = 0.0;
     for (NSUInteger i = range.location; i < range.location + range.length; i++)
         [channels addObject:[self channelAtIndex:i]];
     return channels;
+}
+
+- (void)connectChannel:(AMChannel *)channel1 toChannel:(AMChannel *)channel2
+{
+    [channel1.peerIndexes addIndex:channel2.index];
+    [channel2.peerIndexes addIndex:channel1.index];
+    self.needsDisplay = YES;
+}
+
+- (void)disconnectChannel:(AMChannel *)channel1 fromChannel:(AMChannel *)channel2
+{
+    [channel1.peerIndexes removeIndex:channel2.index];
+    [channel2.peerIndexes removeIndex:channel1.index];
+    self.needsDisplay = YES;
+}
+
+- (void)removeDevice:(NSString *)deviceID
+{
+    NSRange channelIndexes = [self.devices[deviceID] channelIndexRange];
+    NSUInteger start = channelIndexes.location;
+    NSUInteger end = channelIndexes.location + channelIndexes.length;
+    for (; start < end; start++) {
+        AMChannel *channel = [self channelAtIndex:start];
+        [channel.peerIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            [[self channelAtIndex:idx].peerIndexes removeIndex:start];
+        }];
+        _allChannels[start] = [[AMChannel alloc] initWithIndex:start];
+    }
+    [self.devices removeObjectForKey:deviceID];
+    self.needsDisplay = YES;
+}
+
+- (void)removeALLDevice
+{
+    for (NSString *deviceID in self.devices.allKeys) {
+        [self removeDevice:deviceID];
+    }
+    self.needsDisplay = YES;
 }
 
 #pragma mark - Private Methods
@@ -317,10 +364,8 @@ static CGFloat kCloseButtonRadius = 0.0;
         if ([self.delegate routeView:self
                       connectChannel:_selectedChannel
                            toChannel:_targetChannel]) {
-            [_selectedChannel.peerIndexes addIndex:_targetChannel.index];
-            [_targetChannel.peerIndexes addIndex:_selectedChannel.index];
+            [self connectChannel:_selectedChannel toChannel:_targetChannel];
             _targetChannel = nil;
-            self.needsDisplay = YES;
         }
     }
 }
@@ -335,14 +380,22 @@ static CGFloat kCloseButtonRadius = 0.0;
         if ([self.delegate routeView:self
                    disconnectChannel:channel1
                          fromChannel:channel2]) {
-            [channel1.peerIndexes removeIndex:channel2.index];
-            [channel2.peerIndexes removeIndex:channel1.index];
+            [self disconnectChannel:channel1 fromChannel:channel2];
             _selectedConnection[0] = NSNotFound;
             _selectedConnection[1] = NSNotFound;
-            self.needsDisplay = YES;
         }
     }
 }
+
+- (void)tryToCloseDevice:(NSString *)deviceID
+{
+    if ([self.delegate routeView:self shouldRemoveDevice:deviceID]) {
+        if ([self.delegate routeView:self removeDevice:deviceID]) {
+            [self removeDevice:deviceID];
+        }
+    }
+}
+
 
 - (NSPoint)centerOfChannel:(AMChannel *)channel
 {
@@ -365,7 +418,7 @@ static CGFloat kCloseButtonRadius = 0.0;
 - (void)drawDeviceLabel
 {
     // draw device circle
-    CGFloat radius = _radius + 25.0;
+    CGFloat radius = _radius + 22.0;
     NSBezierPath *circle = [NSBezierPath bezierPath];
     [circle appendBezierPathWithArcWithCenter:_center
                                        radius:radius
@@ -406,9 +459,12 @@ static CGFloat kCloseButtonRadius = 0.0;
         
         // draw lable
         CGFloat arcLength = radius * (endAngle - startAngle);
-        CGFloat maxTextWidth = arcLength - 30.0 - kCloseButtonRadius;
-        if (maxTextWidth <= 20)
+        // 28: |- 10 - devcie lable - 8 - close button - 10 - |
+        CGFloat maxTextWidth = arcLength - 28.0 - kCloseButtonRadius * 2.0;
+        if (maxTextWidth <= 20) {
+            device.closeButtonCenter = NSZeroPoint;
             continue;
+        }
         
         NSDictionary *attributes = @{
             NSForegroundColorAttributeName : _deviceLableColor,
@@ -434,19 +490,42 @@ static CGFloat kCloseButtonRadius = 0.0;
         }
         
         // align text to arc center
-        CGFloat angleAdjust = ((arcLength - kCloseButtonRadius - textWidth) / 2.0) / radius;
+        CGFloat angleAdjust = ((arcLength - textWidth - 2.0 * kCloseButtonRadius - 8.0) / 2.0) / radius;
         endAngle -= angleAdjust;
-        startAngle += angleAdjust + kCloseButtonRadius / radius;
-        
+        startAngle += angleAdjust + (2.0 * kCloseButtonRadius + 8.0) / radius;
+        // erase dash line
         NSBezierPath *textPath = [NSBezierPath bezierPath];
         [textPath appendBezierPathWithArcWithCenter:_center
-                                             radius:radius
-                                         startAngle:todegree(startAngle) - 1.0
-                                           endAngle:todegree(endAngle) + 1.0];
-        textPath.lineWidth = 20.0;
+                    radius:radius
+                startAngle:todegree(startAngle - (2.0 * kCloseButtonRadius + 14.0) / radius)
+                  endAngle:todegree(endAngle + 4.0 / radius)];
+        textPath.lineWidth = 10.0;
         [_backgroundColor set];
         [textPath stroke];
-
+        // draw close button
+        CGFloat closeButtonCenterAngle = startAngle - (8.0 + kCloseButtonRadius) / radius;
+        NSPoint closeButtonCenterPosition = NSMakePoint(
+                (radius + 4.0) * cos(closeButtonCenterAngle) + _center.x,
+                (radius + 4.0) * sin(closeButtonCenterAngle) + _center.y);
+        device.closeButtonCenter = closeButtonCenterPosition;
+        NSBezierPath *closeButtonCircle = [NSBezierPath bezierPath];
+        [closeButtonCircle appendBezierPathWithArcWithCenter:closeButtonCenterPosition
+                                                      radius:kCloseButtonRadius
+                                                  startAngle:0
+                                                    endAngle:360];
+        [_deviceLableColor setStroke];
+        [closeButtonCircle stroke];
+        NSBezierPath *closeButtonLine = [NSBezierPath bezierPath];
+        CGFloat r = hypot(_center.x - closeButtonCenterPosition.x,
+                          _center.y - closeButtonCenterPosition.y);
+        CGFloat angle1 = todegree(closeButtonCenterAngle - 0.5 * kCloseButtonRadius / radius);
+        CGFloat angle2 = todegree(closeButtonCenterAngle + 0.5 * kCloseButtonRadius / radius);
+        [closeButtonLine appendBezierPathWithArcWithCenter:_center
+                                                    radius:r
+                                                startAngle:angle1
+                                                  endAngle:angle2];
+        [closeButtonLine stroke];
+        
         CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
         CGContextSetTextMatrix(context, CGAffineTransformIdentity);
         CGContextSaveGState(context);
@@ -575,6 +654,23 @@ static CGFloat kCloseButtonRadius = 0.0;
     }
     
     return NO;
+}
+
+- (NSString *)testClickOccuredOnCloseDeviceButton:(NSEvent *)mouseUpEvent
+{
+    NSPoint p1 = [self convertPoint:[mouseUpEvent locationInWindow]
+                          fromView:nil];
+    
+    for (NSString *deviceID in self.devices) {
+        NSPoint p2 = [self.devices[deviceID] closeButtonCenter];
+        if (!NSEqualPoints(p2, NSZeroPoint)) {
+            CGFloat distance = hypot(p1.x - p2.x, p1.y - p2.y);
+            if (distance < kCloseButtonRadius)
+                return deviceID;
+        }
+    }
+    
+    return nil;
 }
 
 +(NSUInteger)maxChannels

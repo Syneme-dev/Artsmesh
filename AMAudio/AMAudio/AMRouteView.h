@@ -45,6 +45,11 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (AMChannel *)channelAtIndex:(NSUInteger)index;
 - (NSArray *)channelsAssociatedWithDevice:(NSString *)deviceID;
 
+- (void)connectChannel:(AMChannel *)channel1 toChannel:(AMChannel *)channel2;
+- (void)disconnectChannel:(AMChannel *)channel1 fromChannel:(AMChannel *)channel2;
+- (void)removeDevice:(NSString *)deviceID;
+- (void)removeALLDevice;
+
 +(NSUInteger)maxChannels;
 
 @end

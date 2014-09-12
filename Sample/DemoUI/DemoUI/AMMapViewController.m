@@ -85,11 +85,10 @@
 }
 
 -(void)loadLivePage {
-    /**
+
     NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
-    NSView *liveTabView = mapTab.view;
+    NSView *contentView = mapTab.view;
     
-    [liveTabView setAutoresizesSubviews:YES];
     
     NSLog(@"%f", self.tabs.bounds.size.width);
     
@@ -97,16 +96,31 @@
     _liveMapView = mapView;
     [_liveMapView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     
-    [liveTabView addSubview: _liveMapView];
+    [contentView addSubview: _liveMapView];
+    
+    _liveMapView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : _liveMapView}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : _liveMapView}];
+    
+    [contentView addConstraints:verticalConstraints];
+    [contentView addConstraints:horizontalConstraints];
     
     //Center the view within parent view
     
+    /**
     [_liveMapView setFrameOrigin:NSMakePoint(
                                              (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
                                              (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
                                              )];
     [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-    **/
+     **/
     
 }
 

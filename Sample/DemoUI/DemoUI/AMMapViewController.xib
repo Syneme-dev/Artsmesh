@@ -12,7 +12,6 @@
                 <outlet property="staticTab" destination="Mye-Nu-lsW" id="WHL-bG-9hU"/>
                 <outlet property="tabs" destination="nKY-XV-9cq" id="7As-kA-IVC"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
-                <outlet property="webView" destination="Guc-Yk-vYr" id="oSy-Of-xeC"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -60,21 +59,6 @@
                             <view key="view" id="UVM-E0-eXY">
                                 <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <webView translatesAutoresizingMaskIntoConstraints="NO" id="Guc-Yk-vYr">
-                                        <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
-                                            <nil key="identifier"/>
-                                        </webPreferences>
-                                    </webView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Guc-Yk-vYr" secondAttribute="trailing" id="0Bz-Ok-O4c"/>
-                                    <constraint firstItem="Guc-Yk-vYr" firstAttribute="leading" secondItem="UVM-E0-eXY" secondAttribute="leading" id="Viy-d1-8VD"/>
-                                    <constraint firstAttribute="bottom" secondItem="Guc-Yk-vYr" secondAttribute="bottom" id="gB2-Ty-JoL"/>
-                                    <constraint firstItem="Guc-Yk-vYr" firstAttribute="top" secondItem="UVM-E0-eXY" secondAttribute="top" id="jjt-hH-wqd"/>
-                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="IVm-qE-lNG">
@@ -85,7 +69,9 @@
                                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="aII-go-2Np">
                                         <rect key="frame" x="0.0" y="0.0" width="1101" height="552"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
+                                            <nil key="identifier"/>
+                                        </webPreferences>
                                     </webView>
                                 </subviews>
                                 <constraints>

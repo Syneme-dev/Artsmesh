@@ -132,7 +132,6 @@ shouldRemoveDevice:(NSString *)deviceID;
 //        }
 //        
 //        [self.view setNeedsDisplay:YES];
-        
         return;
     }
     
@@ -149,7 +148,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     for (NSUInteger i = 0; i < [allChann count]; i++) {
         AMChannel* chann = allChann[i];
         chann.index = i;
-
+        
         AMJackDevice* device = devices[chann.deviceID];
         if(device == nil){
             device = [[AMJackDevice alloc] init];
@@ -181,6 +180,9 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
     
     if (self.jackManager.jackState == JackState_Stopped) {
+        
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Jack is not running" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"To start jacktrip you must start JACK first!"];
+        [alert runModal];
         return;
     }
     

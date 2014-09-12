@@ -23,6 +23,8 @@
 
 @implementation AMMapViewController
 
+@synthesize liveMapView = _liveMapView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,11 +35,12 @@
 }
 -(void)awakeFromNib{
     [super awakeFromNib];
+    [self.tabs setAutoresizesSubviews:YES];
     [self.webView setFrameLoadDelegate:self];
     [self.webView setPolicyDelegate:self];
     [self.webView setUIDelegate:self];
     [self.webView setDrawsBackground:NO];
-    [self loadPage];
+    [self loadLivePage];
     [self loadArchivePage];
 }
 
@@ -81,26 +84,60 @@
     [listener ignore];
 }
 
+-(void)loadLivePage {
 
--(void)loadPage{
-    //TODO:there is an errror when load social and map at the same time.
-    //Error:There was a problem with your session token.
-    //TODO:the social panel may change the map panel css style .
+    NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
+    NSView *contentView = mapTab.view;
     
-//    isLogin=false;
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
-    NSURL *mapURL = [NSURL URLWithString:
-                       [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
-    [self.webView.mainFrame loadRequest:
-    [NSURLRequest requestWithURL:mapURL]];
+    
+    NSLog(@"%f", self.tabs.bounds.size.width);
+    
+    AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
+    _liveMapView = mapView;
+    [_liveMapView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    [contentView addSubview: _liveMapView];
+    
+    _liveMapView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : _liveMapView}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : _liveMapView}];
+    
+    [contentView addConstraints:verticalConstraints];
+    [contentView addConstraints:horizontalConstraints];
+    
+    //Center the view within parent view
+    
+    /**
+    [_liveMapView setFrameOrigin:NSMakePoint(
+                                             (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
+                                             (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
+                                             )];
+    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+     **/
+    
 }
 
 - (void)loadArchivePage
 {
-    NSURL *url = [NSURL URLWithString:@"http://artsmesh.io/circle/circle.html"];
-    [self.archiveWebView.mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
-    [self.archiveWebView.mainFrame.frameView.documentView scaleUnitSquareToSize:NSMakeSize(0.8, 0.8)];
+    
+    //TODO:there is an errror when load social and map at the same time.
+    //Error:There was a problem with your session token.
+    //TODO:the social panel may change the map panel css style .
+    
+    //    isLogin=false;
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSURL *mapURL = [NSURL URLWithString:
+                     [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
+    [self.archiveWebView.mainFrame loadRequest:
+    [NSURLRequest requestWithURL:mapURL]];
 }
 
 -(void)gotoUsersPage{
@@ -127,6 +164,14 @@
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
+
+/**
+- (void)drawRect:(NSRect)dirtyRect {
+    
+
+}
+**/
+
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

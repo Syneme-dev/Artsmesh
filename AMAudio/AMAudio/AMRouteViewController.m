@@ -45,8 +45,7 @@ shouldConnectChannel:(AMChannel *)channel1
         srcChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
     }
     
-    [self.jackClient connectSrc:srcChannName toDest:destChannName];
-    return YES;
+    return [self.jackClient connectSrc:srcChannName toDest:destChannName];
 }
 
 - (BOOL)routeView:(AMRouteView *)routeView
@@ -77,12 +76,17 @@ disconnectChannel:(AMChannel *)channel1
 - (BOOL)routeView:(AMRouteView *)routeView
 shouldRemoveDevice:(NSString *)deviceID;
 {
+    if ([deviceID isEqualToString:@"system"]) {
+        return NO;
+    }
+    
     return YES;
 }
 
 - (BOOL)routeView:(AMRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
+    [self.jacktripManager stopJacktripByName:deviceID];
     return YES;
 }
 
@@ -119,20 +123,10 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)jackStopped:(NSNotification*)notification
 {
-    //[self.jackClient closeJackClient];
-    
     AMRouteView* routerView = (AMRouteView*)self.view;
-    for(AMChannel* chann in routerView.allChannels){
-        chann.deviceID = @"";
-        chann.channelName = @"";
-        chann.peerIndexes = nil;
-        chann.type = AMPlaceholderChannel;
-    }
-    
-    [self.view setNeedsDisplay:YES];
+    [routerView removeALLDevice];
     
     [self.jacktripManager stopAllJacktrips];
-    
 }
 
 -(void)dealloc
@@ -183,7 +177,7 @@ shouldRemoveDevice:(NSString *)deviceID;
                                 name:device.deviceName];
     }
     
-    [self.view setNeedsDisplay:YES];
+   // [self.view setNeedsDisplay:YES];
 }
 
 - (IBAction)startJackTrip:(NSButton *)sender

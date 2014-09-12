@@ -89,6 +89,7 @@
         _routerController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
         _routerController.jackClient = _jackClient;
         _routerController.jackManager = _jackManager;
+        _routerController.jacktripManager = _jacktripManager;
     }
     
     return _routerController;

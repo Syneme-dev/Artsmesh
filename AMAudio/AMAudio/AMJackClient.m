@@ -25,7 +25,7 @@
         jack_client_close(_client);
     }
     
-    _client = jack_client_open("JackArtsmesh", JackNullOption, NULL);
+    _client = jack_client_open("JackArtsmesh", 0, 0);
     if (_client == NULL) {
         self.isOpen = NO;
         return NO;

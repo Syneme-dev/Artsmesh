@@ -269,6 +269,11 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     [channel1.peerIndexes removeIndex:channel2.index];
     [channel2.peerIndexes removeIndex:channel1.index];
+    if (channel1.index == _selectedConnection[0] ||
+        channel1.index == _selectedConnection[1]) {
+        _selectedConnection[0] = NSNotFound;
+        _selectedConnection[1] = NSNotFound;
+    }
     self.needsDisplay = YES;
 }
 
@@ -277,13 +282,30 @@ static CGFloat kCloseButtonRadius = 6.0;
     NSRange channelIndexes = [self.devices[deviceID] channelIndexRange];
     NSUInteger start = channelIndexes.location;
     NSUInteger end = channelIndexes.location + channelIndexes.length;
+    BOOL disableMenuItem = NO;
     for (; start < end; start++) {
+        if (start == _selectedConnection[0] || start == _selectedConnection[1]) {
+            _selectedConnection[0] = NSNotFound;
+            _selectedConnection[1] = NSNotFound;
+            disableMenuItem = YES;
+        }
         AMChannel *channel = [self channelAtIndex:start];
+        if (channel == _selectedChannel) {
+            _selectedChannel = nil;
+            _targetChannel = nil;
+            disableMenuItem = YES;
+        }
         [channel.peerIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
             [[self channelAtIndex:idx].peerIndexes removeIndex:start];
         }];
         _allChannels[start] = [[AMChannel alloc] initWithIndex:start];
     }
+    if (disableMenuItem) {
+        for (NSMenuItem *menuItem in _contextMenu.itemArray) {
+            [menuItem setEnabled:NO];
+        }
+    }
+    
     [self.devices removeObjectForKey:deviceID];
     self.needsDisplay = YES;
 }
@@ -336,9 +358,9 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                          green:0.3686
                                                           blue:0.494
                                                          alpha:1.0];
-    _deviceLableColor = [NSColor colorWithCalibratedRed:0.27
-                                                  green:0.3686
-                                                   blue:0.494
+    _deviceLableColor = [NSColor colorWithCalibratedRed:0.18
+                                                  green:0.227
+                                                   blue:0.298
                                                   alpha:1.0];
     _selectedChannelFillColor = [NSColor lightGrayColor];
     _connectionColor = [NSColor greenColor];
@@ -418,7 +440,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (void)drawDeviceLabel
 {
     // draw device circle
-    CGFloat radius = _radius + 22.0;
+    CGFloat radius = _radius + 30.0;
     NSBezierPath *circle = [NSBezierPath bezierPath];
     [circle appendBezierPathWithArcWithCenter:_center
                                        radius:radius

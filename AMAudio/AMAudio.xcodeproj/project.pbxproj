@@ -63,11 +63,11 @@
 		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
+		D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
+		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
-		D4FA2C0B19B4BD1900B245BB /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */; };
-		D4FA2C0C19B4BD3100B245BB /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D4FA2C0B19B4BD1900B245BB /* Jackmp.framework in CopyFiles */,
+				D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,10 +156,10 @@
 		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAudioPrefViewController.xib; sourceTree = "<group>"; };
 		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackDevice.h; sourceTree = "<group>"; };
 		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackDevice.m; sourceTree = "<group>"; };
+		D4B57E4D19C69003009F7701 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
 		D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
 		D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackConfigs.h; sourceTree = "<group>"; };
 		D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackConfigs.m; sourceTree = "<group>"; };
-		D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jackmp.framework; path = AMAudio/jack/Jackmp.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,10 +168,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
-				D4FA2C0C19B4BD3100B245BB /* Jackmp.framework in Frameworks */,
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
 				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
+				D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */,
 				D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +192,7 @@
 		CE151F1819B01372002D2AD4 /* jack */ = {
 			isa = PBXGroup;
 			children = (
+				D4B57E4D19C69003009F7701 /* Jackmp.framework */,
 				CE151F1919B01372002D2AD4 /* control.h */,
 				CE151F1A19B01372002D2AD4 /* intclient.h */,
 				CE151F1B19B01372002D2AD4 /* jack.h */,
@@ -214,7 +215,6 @@
 		D472930419A6E5030034CC34 = {
 			isa = PBXGroup;
 			children = (
-				D4FA2C0A19B4BD1900B245BB /* Jackmp.framework */,
 				D472931719A6E5030034CC34 /* AMAudio */,
 				D472932C19A6E5030034CC34 /* AMAudioTests */,
 				D472931019A6E5030034CC34 /* Frameworks */,

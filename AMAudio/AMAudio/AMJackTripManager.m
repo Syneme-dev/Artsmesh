@@ -76,6 +76,11 @@
         [commandline appendFormat:@" -j"];
     }
     
+    //-V
+    if (cfgs.useIpv6) {
+        [commandline appendFormat:@" -V"];
+    }
+    
     [commandline appendFormat:@" --clientname %@", cfgs.clientName];
     NSLog(@"jack trip command line is: %@", commandline);
 

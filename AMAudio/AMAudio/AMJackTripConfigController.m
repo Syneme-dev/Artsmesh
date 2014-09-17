@@ -10,11 +10,11 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMRouteViewController.h"
 #import "AMJacktripConfigs.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMJackTripConfigController ()
 @property (weak) IBOutlet NSPopUpButton *roleSelecter;
 @property (weak) IBOutlet NSPopUpButton *peerSelecter;
-@property (weak) IBOutlet NSPopUpButton *channelCountSelecter;
 @property (weak) IBOutlet NSTextField *peerSelfDefine;
 @property (weak) IBOutlet NSPopUpButton *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *qCount;
@@ -24,7 +24,8 @@
 @property (weak) IBOutlet NSButton *loopbackCheck;
 @property (weak) IBOutlet NSButton *jamlinkCheck;
 @property (weak) IBOutlet NSButton *createBtn;
-@property (weak) IBOutlet NSTextField *showName;
+@property (weak) IBOutlet NSTextField *channeCount;
+@property (weak) IBOutlet NSButton *userIpv6;
 
 @end
 
@@ -53,16 +54,13 @@
 
 -(void)initControlStates
 {
-    [self.peerSelecter setEnabled:NO];
-    [self.peerSelfDefine setEnabled:NO];
 }
 
 -(void)initPortOffset
 {
     [self.portOffsetSelector removeAllItems];
     
-    NSUInteger maxChannCount = [AMRouteView maxChannels];
-    for (NSUInteger i = 0; i <maxChannCount; i++) {
+    for (NSUInteger i = 0; i <20; i++) {
         
         BOOL inUse = NO;
         for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
@@ -86,14 +84,26 @@
     [self.roleSelecter addItemWithTitle:@"Server"];
     [self.roleSelecter addItemWithTitle:@"Client"];
     
-    //init show name
-    self.showName.stringValue = [NSString stringWithFormat:@"Jacktrip_%lu", (unsigned long)[self.jacktripManager.jackTripInstances count]];
-    
     //init peers
     [self.peerSelecter removeAllItems];
     NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     for (AMLiveUser* user in myGroupMem) {
+        
+        //Two User at most have one connection
+        BOOL alreadyConnect = NO;
+        for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
+            if ([user.nickName isEqualToString:jacktrip.instanceName]){
+                alreadyConnect = YES;
+                break;
+            }
+        }
+        
+        if (alreadyConnect) {
+            continue;
+        }
+        
+        //Add no connection peers
         if([user.userid isNotEqualTo:mySelf.userid]){
             [self.peerSelecter addItemWithTitle:user.nickName];
             if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
@@ -104,12 +114,6 @@
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
     
-    //init channel count
-    [self.channelCountSelecter removeAllItems];
-    for (int i = 2; i <= 16; i *= 2) {
-        NSString* numStr = [NSString stringWithFormat:@"%d", i];
-        [self.channelCountSelecter addItemWithTitle:numStr];
-    }
     
     //init port
     [self.portOffsetSelector selectItemAtIndex:0];
@@ -131,16 +135,17 @@
     
     //init -j
     [self.jamlinkCheck setState:NSOffState];
+    
+    //int -V
+    BOOL useIpv6 = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Key_General_UseIpv6] boolValue];
+    
+    if (useIpv6) {
+        [self.userIpv6 setState:NSOnState];
+    }
 }
 
 - (IBAction)roleSelectedChanged:(NSPopUpButton *)sender
 {
-    if ([sender.selectedItem.title isEqualToString:@"Client"]){
-        [self.peerSelecter setEnabled:YES];
-    }else{
-        [self.peerSelecter setEnabled:NO];
-        [self.peerSelfDefine setEnabled:NO];
-    }
 }
 
 - (IBAction)peerSelectedChanged:(NSPopUpButton *)sender
@@ -167,14 +172,32 @@
     cfgs.role = self.roleSelecter.selectedItem.title;
     cfgs.serverAddr = self.peerSelfDefine.stringValue;
     cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
-    cfgs.channelCount = self.channelCountSelecter.selectedItem.title;
+    cfgs.channelCount = self.channeCount.stringValue;
     cfgs.qCount = self.qCount.stringValue;
     cfgs.rCount = self.rCount.stringValue;
     cfgs.bitrateRes = self.bitRateRes.stringValue;
     cfgs.zerounderrun = self.zerounderrunCheck.state == NSOnState;
     cfgs.loopback = self.loopbackCheck.state == NSOnState;
     cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
-    cfgs.clientName = self.showName.stringValue;
+    
+    NSString* showName;
+    if (![self.peerSelecter.selectedItem.title isEqualToString:@"ip address"]){
+        showName = self.peerSelecter.selectedItem.title;
+    }else{
+        //Two User at most have one connection
+        for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
+            if ([self.peerSelfDefine.stringValue isEqualToString:jacktrip.instanceName]){
+                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Connection!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You've already start a jacktrip for that ip!"];
+                [alert runModal];
+                return;
+            }
+        }
+        
+        showName = self.peerSelfDefine.stringValue;
+    }
+    
+    cfgs.clientName = showName;
+    cfgs.useIpv6 = self.userIpv6.state == NSOnState;
     
     int totalChannels = 0;
     for (AMJacktripInstance* instance in self.jacktripManager.jackTripInstances){

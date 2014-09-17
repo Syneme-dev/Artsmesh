@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265A405619BD65C8003D27E5 /* AMCoreData.framework */; };
+		26624DC119C912BF008F3D6D /* JackTripBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 26624DC019C912BF008F3D6D /* JackTripBtn.png */; };
 		26A11B2319C143A300796327 /* AMJackManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B1D19C143A300796327 /* AMJackManager.h */; };
 		26A11B2419C143A300796327 /* AMJackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B1E19C143A300796327 /* AMJackManager.m */; };
 		26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B1F19C143A300796327 /* AMJacktripConfigs.h */; };
@@ -95,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		265A405619BD65C8003D27E5 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
+		26624DC019C912BF008F3D6D /* JackTripBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JackTripBtn.png; sourceTree = "<group>"; };
 		26A11B1D19C143A300796327 /* AMJackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackManager.h; sourceTree = "<group>"; };
 		26A11B1E19C143A300796327 /* AMJackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackManager.m; sourceTree = "<group>"; };
 		26A11B1F19C143A300796327 /* AMJacktripConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripConfigs.h; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 		D472931819A6E5030034CC34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				26624DC019C912BF008F3D6D /* JackTripBtn.png */,
 				D472931919A6E5030034CC34 /* AMAudio-Info.plist */,
 				D472931A19A6E5030034CC34 /* InfoPlist.strings */,
 				D472931D19A6E5030034CC34 /* AMAudio-Prefix.pch */,
@@ -445,6 +448,7 @@
 				D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */,
 				26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */,
 				D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */,
+				26624DC119C912BF008F3D6D /* JackTripBtn.png in Resources */,
 				26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

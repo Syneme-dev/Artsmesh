@@ -16,9 +16,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-36-tM4">
-                    <rect key="frame" x="20" y="482" width="60" height="62"/>
+                    <rect key="frame" x="20" y="483" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="smallSquare" title="+" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ob1-Mf-6Yv">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="JackTripBtn" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Ob1-Mf-6Yv">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -29,4 +29,7 @@
             </subviews>
         </customView>
     </objects>
+    <resources>
+        <image name="JackTripBtn" width="52" height="52"/>
+    </resources>
 </document>

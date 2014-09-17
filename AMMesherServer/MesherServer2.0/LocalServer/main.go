@@ -37,6 +37,8 @@ type AMRequestGroup struct{
 	FullName 	string
 	Project		string
 	Location		string
+	Longitude	string
+	Latitude		string
 	Busy			string
 }
 
@@ -308,6 +310,9 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.FullName = strings.Join(r.Form["fullName"], "")
 	reqGroup.Project = strings.Join(r.Form["project"], "")
 	reqGroup.Location = strings.Join(r.Form["location"], "")
+	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
+	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
+	
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
 	fmt.Println("")
@@ -321,6 +326,8 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("fullName:", reqGroup.FullName)
 	fmt.Println("project:", reqGroup.Project)
 	fmt.Println("location:", reqGroup.Location)
+	fmt.Println("longitude:", reqGroup.Longitude)
+	fmt.Println("latitude:", reqGroup.Latitude)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	
@@ -445,6 +452,8 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.FullName = strings.Join(r.Form["fullName"], "")
 	reqGroup.Project = strings.Join(r.Form["project"], "")
 	reqGroup.Location = strings.Join(r.Form["location"], "")
+	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
+	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
 	fmt.Println("")
@@ -458,6 +467,8 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("fullName:", reqGroup.FullName)
 	fmt.Println("project:", reqGroup.Project)
 	fmt.Println("location:", reqGroup.Location)
+	fmt.Println("longitude:", reqGroup.Longitude)
+	fmt.Println("latitude:", reqGroup.Latitude)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	

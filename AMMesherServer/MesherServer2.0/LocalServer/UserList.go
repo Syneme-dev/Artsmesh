@@ -65,6 +65,8 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		g_store.groupData.LeaderId = group.LeaderId
 		g_store.groupData.FullName = group.FullName
 		g_store.groupData.Location = group.Location
+		g_store.groupData.Longitude = group.Longitude
+		g_store.groupData.Latitude = group.Latitude
 		g_store.groupData.Project = group.Project
 		g_store.groupData.Busy = group.Busy
 		
@@ -199,6 +201,8 @@ func makeSnapShot(){
 	newSnapShot.GroupData.FullName = g_store.groupData.FullName
 	newSnapShot.GroupData.Project = g_store.groupData.Project
 	newSnapShot.GroupData.Location = g_store.groupData.Location
+	newSnapShot.GroupData.Longitude = g_store.groupData.Longitude
+	newSnapShot.GroupData.Latitude = g_store.groupData.Latitude
 	newSnapShot.GroupData.Busy = g_store.groupData.Busy
 	
 		

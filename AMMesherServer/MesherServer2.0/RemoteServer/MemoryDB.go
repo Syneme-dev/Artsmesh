@@ -54,8 +54,14 @@ func InitGroupList(){
 	rootGroup.groupData = new(AMRequestGroup)
 	rootGroup.groupData.GroupId = ""
 	rootGroup.groupData.GroupName = "RootGroup"
-	rootGroup.groupData.Description = "RootGroup";
-	rootGroup.groupData.LeaderId = "";
+	rootGroup.groupData.Description = "RootGroup"
+	rootGroup.groupData.LeaderId = ""
+	rootGroup.groupData.FullName = ""
+	rootGroup.groupData.Project = ""
+	rootGroup.groupData.Location = ""
+	rootGroup.groupData.Longitude = ""
+	rootGroup.groupData.Latitude = ""
+	rootGroup.groupData.Busy = "NO"
 	rootGroup.userData = nil;
 	rootGroup.subGroups = make(map[string]*GroupNode, 100)
 
@@ -99,6 +105,12 @@ func AddNewGroup(group *AMRequestGroup, superGroupId string)(string){
 	newGroup.groupData.GroupName = group.GroupName
 	newGroup.groupData.Description = group.Description
 	newGroup.groupData.LeaderId = group.LeaderId
+	newGroup.groupData.FullName = group.FullName
+	newGroup.groupData.Project = group.Project
+	newGroup.groupData.Location = group.Location
+	newGroup.groupData.Longitude = group.Longitude;
+	newGroup.groupData.Latitude = group.Latitude;
+	newGroup.groupData.Busy = group.Busy
 	newGroup.userData = make(map[string]*UserNode, 100)
 	newGroup.subGroups = make(map[string]*GroupNode, 10)
 	
@@ -171,6 +183,12 @@ func UpdataGroup(ug *AMRequestGroup)(string){
 	group.groupData.GroupName = ug.GroupName;
 	group.groupData.Description = ug.Description;
 	group.groupData.LeaderId = ug.LeaderId;
+	group.groupData.FullName = ug.FullName;
+	group.groupData.Project = ug.Project;
+	group.groupData.Location = ug.Location;
+	group.groupData.Longitude = ug.Longitude;
+	group.groupData.Latitude = ug.Latitude;
+	group.groupData.Busy = ug.Busy;
 	
 	makeSnapShot()
 	return "ok"
@@ -203,6 +221,7 @@ func AddNewUser(user *AMRequestUser, groupId string)(string){
 	newUser.userData.PublicChatPort = user.PublicChatPort
 	newUser.userData.IsLeader = user.IsLeader
 	newUser.userData.IsOnline = user.IsOnline
+	newUser.userData.Busy = user.Busy
 	
 	addUserToGroup(newUser, group)
 	makeUserIndex(newUser)
@@ -237,6 +256,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	existUser.userData.ChatPort = user.ChatPort
 	existUser.userData.IsLeader = user.IsLeader
 	existUser.userData.IsOnline = user.IsOnline
+	existUser.userData.Busy = user.Busy
 	
 	updateUserTimestamp(existUser)
 	makeSnapShot()
@@ -504,6 +524,12 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	dtoGroup.GroupData.GroupName = group.groupData.GroupName
 	dtoGroup.GroupData.Description = group.groupData.Description
 	dtoGroup.GroupData.LeaderId = group.groupData.LeaderId
+	dtoGroup.GroupData.FullName = group.groupData.FullName
+	dtoGroup.GroupData.Project = group.groupData.Project
+	dtoGroup.GroupData.Location = group.groupData.Location
+	dtoGroup.GroupData.Longitude = group.groupData.Longitude
+	dtoGroup.GroupData.Latitude = group.groupData.Latitude
+	dtoGroup.GroupData.Busy = group.groupData.Busy
 	
 	for _, v := range group.userData{
 		u := new(AMRequestUser)
@@ -518,6 +544,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 		u.ChatPort = v.userData.ChatPort
 		u.IsLeader = v.userData.IsLeader
 		u.IsOnline = v.userData.IsOnline
+		u.Busy = v.userData.Busy
 
 		dtoGroup.Users = append(dtoGroup.Users, u)
 	}

@@ -9,6 +9,7 @@
 #import "AMAudioPrefViewController.h"
 #import "AMAudioDeviceManager.h"
 #import "AMJackConfigs.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMAudioPrefViewController ()
 
@@ -85,6 +86,24 @@
         [self.outputDevBox addItemWithTitle:dev.devName];
     }
     
+    NSString* prefInDevName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InputDevice];
+    NSString* prefOutDevName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_OutputDevice];
+    
+    for (NSString* deviceName in self.inputDevBox.itemTitles) {
+        if ([deviceName isEqualToString:prefInDevName]) {
+            [self.inputDevBox selectItemWithTitle:deviceName];
+            break;
+        }
+    }
+    
+    for (NSString* deviceName in self.outputDevBox.itemTitles) {
+        if ([deviceName isEqualToString:prefOutDevName]) {
+            [self.outputDevBox selectItemWithTitle:deviceName];
+            break;
+        }
+    }
+    
+
     [self inputDevChanged:nil];
     [self outputDevChanged:nil];
 }
@@ -178,6 +197,14 @@
         [self.sampleRateBox removeAllItems];
         [self.sampleRateBox addItemsWithTitles:commonSampleRate];
         
+        NSString* prefSampleRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_SampleRate];
+        for (NSString* strRate in self.sampleRateBox.itemTitles ) {
+            if ([strRate isEqualToString:prefSampleRate]) {
+                [self.sampleRateBox selectItemWithTitle:strRate];
+                break;
+            }
+        }
+        
         //Buffer Size
         NSArray* bufSizeSupportIn = [inputDev bufferSizes];
         NSArray* bufSizeSupportOut = [outputDev bufferSizes];
@@ -195,6 +222,14 @@
         [self.bufferSizeBox removeAllItems];
         [self.bufferSizeBox addItemsWithTitles:commonBufSize];
         
+        NSString* prefBufSize = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_BufferSize];
+        for (NSString* strBufSize in self.bufferSizeBox.itemTitles ) {
+            if ([strBufSize isEqualToString:prefBufSize]) {
+                [self.bufferSizeBox selectItemWithTitle:strBufSize];
+                break;
+            }
+        }
+        
         //Interface input channel
         [self.interfaceInChansBox removeAllItems];
         
@@ -204,7 +239,19 @@
             [self.interfaceInChansBox addItemWithTitle:chanStr];
         }
         
-        [self.interfaceInChansBox selectItemAtIndex:inputChansCount];
+        NSString* prefInput = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InterfaceInChans];
+        BOOL hasPref = NO;
+        for(NSString* inCountStr in self.interfaceInChansBox.itemTitles){
+            if ([inCountStr isEqualToString:prefInput]) {
+                [self.interfaceInChansBox selectItemWithTitle:inCountStr];
+                hasPref = YES;
+                break;
+            }
+        }
+        
+        if(!hasPref){
+            [self.interfaceInChansBox selectItemAtIndex:inputChansCount];
+        }
         
         //Interface output channel
         [self.interfaceOutChansBox removeAllItems];
@@ -215,7 +262,19 @@
             [self.interfaceOutChansBox addItemWithTitle:chanStr];
         }
         
-        [self.interfaceOutChansBox selectItemAtIndex:outputChansCount];
+        NSString* prefOutput = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InterfaceOutChanns];
+        hasPref = NO;
+        for(NSString* outCountStr in self.interfaceOutChansBox.itemTitles){
+            if ([outCountStr isEqualToString:prefOutput]) {
+                [self.interfaceOutChansBox selectItemWithTitle:outCountStr];
+                hasPref = YES;
+                break;
+            }
+        }
+        
+        if(!hasPref){
+            [self.interfaceInChansBox selectItemAtIndex:outputChansCount];
+        }
     }
 }
 
@@ -245,19 +304,48 @@
     
     self.jackManager.jackCfg.sampleRate = [self.sampleRateBox.title intValue];
     self.jackManager.jackCfg.bufferSize = [self.bufferSizeBox.title intValue];
-    
     self.jackManager.jackCfg.inChansCount = [self.interfaceInChansBox.title intValue];
     self.jackManager.jackCfg.outChansCount = [self.interfaceOutChansBox.title intValue];
-    
-    self.jackManager.jackCfg.hogMode = [self.hogModeCheck state] == 1;
-    self.jackManager.jackCfg.clockDriftCompensation = [self.compensationCheck state] == 1;
-    self.jackManager.jackCfg.systemPortMonitoring = [self.portMornitingCheck state] == 1;
-    self.jackManager.jackCfg.activeMIDI = [self.midiCheck state] == 1;
-    
+    self.jackManager.jackCfg.hogMode = [self.hogModeCheck state] == NSOnState;
+    self.jackManager.jackCfg.clockDriftCompensation = [self.compensationCheck state] == NSOnState;
+    self.jackManager.jackCfg.systemPortMonitoring = [self.portMornitingCheck state] == NSOnState;
+    self.jackManager.jackCfg.activeMIDI = [self.midiCheck state] == NSOnState;
     [self.jackManager.jackCfg archiveConfigs];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
+    
+    //save preferecces
+    [[AMPreferenceManager standardUserDefaults] setObject:inputDevName forKey:Preference_Jack_InputDevice];
+    [[AMPreferenceManager standardUserDefaults] setObject:outputDevName forKey:Preference_Jack_OutputDevice];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.sampleRateBox.title forKey:Preference_Jack_SampleRate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.bufferSizeBox.title forKey:Preference_Jack_BufferSize];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceInChansBox.title forKey:Preference_Jack_InterfaceInChans];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceOutChansBox.title forKey:Preference_Jack_InterfaceOutChanns];
+    
+    if (self.jackManager.jackCfg.hogMode) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_HogMode];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jack_HogMode];
+    }
+    
+    if (self.jackManager.jackCfg.clockDriftCompensation) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_ClockDriftComp];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jack_ClockDriftComp];
+    }
+    
+    if (self.jackManager.jackCfg.systemPortMonitoring) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_PortMoniting];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jack_PortMoniting];
+    }
+    
+    if (self.jackManager.jackCfg.activeMIDI) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_ActiveMIDI];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jack_ActiveMIDI];
+    }
 
 }
 

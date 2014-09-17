@@ -66,6 +66,21 @@
 #define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
 
 
+
+/////////////////////////Audio Preference///////////////////////////////////////
+#define Preference_Jack_Driver          @"Preference_Jack_Driver"
+#define Preference_Jack_InputDevice     @"Preference_Jack_InputDevice"
+#define Preference_Jack_OutputDevice    @"Preference_Jack_OutputDevice"
+#define Preference_Jack_SampleRate      @"Preference_Jack_SampleRate"
+#define Preference_Jack_BufferSize      @"Preference_Jack_BufferSize"
+#define Preference_Jack_HogMode         @"Preference_Jack_HogMode"
+#define Preference_Jack_ClockDriftComp  @"Preference_Jack_ClockDriftComp"
+#define Preference_Jack_PortMoniting    @"Preference_Jack_PortMoniting"
+#define Preference_Jack_ActiveMIDI      @"Preference_Jack_ActiveMIDI"
+#define Preference_Jack_InterfaceInChans  @"Preference_Jack_InterfaceChans"
+#define Preference_Jack_InterfaceOutChanns @"Preference_Jack_InterfaceOutChanns"
+
+
 #import <Foundation/Foundation.h>
 
 @interface AMPreferenceManager : NSObject

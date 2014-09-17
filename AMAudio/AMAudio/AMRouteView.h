@@ -41,7 +41,8 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 - (void)associateChannels:(NSArray *)channels
                withDevice:(NSString *)deviceID
-                     name:(NSString *)deviceName;
+                     name:(NSString *)deviceName
+                removable:(BOOL)removable;
 - (AMChannel *)channelAtIndex:(NSUInteger)index;
 - (NSArray *)channelsAssociatedWithDevice:(NSString *)deviceID;
 

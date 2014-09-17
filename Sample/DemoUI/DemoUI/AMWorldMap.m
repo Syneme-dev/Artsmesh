@@ -28,10 +28,10 @@ NSString *mapLine8 =  @"..XXX......XXXXX.XXXX..XXXXXX.....XX.XXXXXXXXXXXXXXXXXXX
 NSString *mapLine9 =  @".XXXXXXXXXXXXXXXXX.XXX.XXXX.XX...XX..XXXXXXXXXXXXXXXXXXXXXXXXXX....XX......";
 NSString *mapLine10 = @"XXXXXXXXXXXXXXXXX..XXX..XX...XX...XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..XX.......";
 NSString *mapLine11 = @".XXXXXXXXXXXXXXX..XXXX...X........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...........";
-NSString *mapLine12 = @"XXXXXXXXXXXXXXXX..XXXX..........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX............";
-NSString *mapLine13 = @".XX....XXXXXXXXXXXXXXXX........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.............";
-NSString *mapLine14 = @"........XXXXXXXXXXXXXXXX........XX...XXXXXXXXXXXXXXXXXXXXXXXX..............";
-NSString *mapLine15 = @".........XXXXXXXXXXXX..............XX....XXXXXXXXXXXXXXXXXX.X..............";
+NSString *mapLine12 = @"XXXXXXXXXXXXXXXX..XXXX..........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..X.........";
+NSString *mapLine13 = @".XX....XXXXXXXXXXXXXXXX........XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...X.........";
+NSString *mapLine14 = @"........XXXXXXXXXXXXXXXX........XX...XXXXXXXXXXXXXXXXXXXXXXXX...XX.........";
+NSString *mapLine15 = @".........XXXXXXXXXXXX..............XX....XXXXXXXXXXXXXXXXXX.X..XX..........";
 NSString *mapLine16 = @".........XXXXXXXXXXXX...........XXXXXX.X.XXXXXXXXXXXXXXXXXXX...............";
 NSString *mapLine17 = @".........XXXXXXXXXXX............XXXXXXXXXXXXXXXXXXXXXXXXXXXX...............";
 NSString *mapLine18 = @".........XXXXXXXXXX............XXXXXXXXXX.XXXX..XXXXXXXXXXX................";
@@ -47,9 +47,9 @@ NSString *mapLine27 = @"..................XXXXXXXXX...........XXXXX.XX..........
 NSString *mapLine28 = @"..................XXXXXXXXX...........XXXX..X............XXXXXXXXX.........";
 NSString *mapLine29 = @"..................XXXXXXXXX...........XXXX................XXXXXXXX.........";
 NSString *mapLine30 = @"....................XXXXXX.............XX.................XXXXXXXX.........";
-NSString *mapLine31 = @"....................XXXXX......................................XX......X...";
-NSString *mapLine32 = @"....................XXXX..............................................XX...";
-NSString *mapLine33 = @"...................XXXXX.............................................XX....";
+NSString *mapLine31 = @"....................XXXXX......................................XX.....X....";
+NSString *mapLine32 = @"....................XXXX.............................................XX....";
+NSString *mapLine33 = @"...................XXXXX............................................XX.....";
 NSString *mapLine34 = @"...................XXXX....................................................";
 NSString *mapLine35 = @"...................XXX.....................................................";
 NSString *mapLine36 = @"...................XX......................................................";
@@ -128,7 +128,7 @@ NSString *mapLine40 = @"........................................................
         
         // Set number of map tiles to place
         int numTiles = 0;
-        int curTile = 0;
+        int curTile = 1;
         for (int i = 0; i < self.allMapPixels.count; i++) {
             
             NSString *curString = [self.allMapPixels objectAtIndex:i];

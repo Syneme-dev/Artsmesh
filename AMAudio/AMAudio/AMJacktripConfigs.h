@@ -44,4 +44,7 @@
 //--clientname                             Change default client name (default is JackTrip)
 @property NSString* clientName;
 
+//--ipv6                                   User Ipv6 Protocol
+@property BOOL useIpv6;
+
 @end

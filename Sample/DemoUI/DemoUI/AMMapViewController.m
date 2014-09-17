@@ -7,6 +7,7 @@
 //
 
 #import "AMMapViewController.h"
+#import "AMCoreData/AMCoreData.h"
 
 #import <Cocoa/Cocoa.h>
 
@@ -111,6 +112,7 @@
     
     [contentView addConstraints:verticalConstraints];
     [contentView addConstraints:horizontalConstraints];
+    
     
     //Center the view within parent view
     

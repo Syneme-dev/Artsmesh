@@ -9,6 +9,7 @@
 #import "AMLiveMapView.h"
 #import "AMWorldMap.h"
 #import "AMPixel.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMLiveMapView ()
 {
@@ -38,7 +39,7 @@ AMWorldMap *worldMap;
 
 - (void)awakeFromNib
 {
-    [self setup];
+    //[self setup];
 }
 
 - (void)setup
@@ -59,7 +60,80 @@ AMWorldMap *worldMap;
     }
     _ports = [allPorts copy];
     _portIndex = -1;
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    
+    //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
+    float lat = 39.9075;
+    float lon = 116.39723;
+    double mapLat0 = worldMap.mapHeight/2;
+    double mapLon0 = worldMap.mapWidth/2;
+    
+    //NSLog(@"my name is %@ and my local live group is %@", mySelf.nickName, myGroup.groupName);
+    
+    //If lat & lon exist, find their equivelent on current live map
+    //need an if statement here checking for amlivegroup data, when it's ready
+    double liveGroupLat = (lat * mapLat0)/90;
+    double liveGroupLon = (lon * mapLon0)/180;
+    double liveGroupPosY = liveGroupLat;
+    double liveGroupPosX = liveGroupLon;
+    
+    if (liveGroupPosY > 0 ) {
+        liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
+    } else {
+        liveGroupPosY += mapLat0;
+    }
+    if ( liveGroupPosX < 0 ) {
+        liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
+    } else {
+        liveGroupPosX += mapLon0;
+    }
+    
+    //Find closest pixel to current live group location
+    
+    AMPixel *liveGroupPixel;
+    double closestDistToLiveGroup = -1;
+    NSPoint portCenter;
+    float portX = 0;
+    float portY = 0;
+    float portRow = 0;
+    int portCol = 0;
+    //double portW = self.bounds.size.width / (long)worldMap.mapWidth;
+    //double portH = self.bounds.size.height / (long)worldMap.mapHeight;
+    double portW = 1;
+    double portH = worldMap.mapHeight / worldMap.mapWidth;
+    
+    portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
+    
+    for (int i = 0; i < self.ports.count; i++) {
+        AMPixel *port = self.ports[i];
         
+        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
+        
+        portRow = portPixelPos/worldMap.mapWidth;
+        if ( portRow != (int)portRow ) {
+            portRow += (int)portRow + 1;
+        }
+        portCol = portPixelPos % worldMap.mapWidth;
+        if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
+        
+        portX = (portCol * portW) - (portW/2);
+        portY = (portRow * portH) - (portH/2);
+        
+        //Calculate distance between portCenter and liveGroup lat/lon
+        double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
+        
+        if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
+            //NSLog(@"Pixel %i with x/y: (%d, %d) compared to livegroup x/y of: (%f,%f)", i, portX, portY, liveGroupPosX, liveGroupPosY);
+            //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
+            closestDistToLiveGroup = distToLiveGroup;
+            liveGroupPixel = port;
+        }
+        
+        
+    }
+    liveGroupPixel.state = AMPixelStateConnected;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -91,7 +165,7 @@ AMWorldMap *worldMap;
     
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        int portPixelPos = [[worldMap.markedPixels objectAtIndex:i] integerValue];
+        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
         
         if (port.state == AMPixelStateConnected && port.index < port.peerIndex) {
             NSBezierPath *bezierPath = [NSBezierPath bezierPath];

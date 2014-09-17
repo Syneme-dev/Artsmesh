@@ -179,7 +179,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         AMJackDevice* device = devices[deviceID];
         [routeView associateChannels:device.channels
                           withDevice:device.deviceID
-                                name:device.deviceName];
+                                name:device.deviceName
+                           removable:YES];
     }
     
     NSArray* channelsOnView = [routeView allChannels];

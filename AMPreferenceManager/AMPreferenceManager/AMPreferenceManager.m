@@ -89,6 +89,7 @@
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
     mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
+    mySelf.publicIp = mySelf.privateIp;
     mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     
     [AMCoreData shareInstance].mySelf = mySelf;

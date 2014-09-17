@@ -21,6 +21,9 @@
 @property (nonatomic) NSString* project;
 @property (nonatomic) NSString* location;
 
+@property (nonatomic) NSString* longitude;
+@property (nonatomic) NSString* latitude;
+
 @property (nonatomic) BOOL busy;
 
 -(NSMutableDictionary*)dictWithoutUsers;

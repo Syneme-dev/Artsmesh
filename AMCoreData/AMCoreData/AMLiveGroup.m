@@ -21,6 +21,8 @@
     dict[@"fullName"] = self.fullName;
     dict[@"project"] = self.project;
     dict[@"location"] = self.location;
+    dict[@"longitude"] = self.longitude;
+    dict[@"latitude"] = self.latitude;
     
     if (self.busy) {
         [dict setObject:@"YES" forKey:@"busy"];
@@ -41,6 +43,8 @@
     group.fullName = dict[@"FullName"];
     group.project = dict[@"Project"];
     group.location = dict[@"Location"];
+    group.longitude = dict[@"longitude"];
+    group.latitude = dict[@"latitude"];
     group.busy = [dict[@"Busy"] boolValue];
     group.password = @"";
     return group;

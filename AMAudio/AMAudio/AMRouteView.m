@@ -63,10 +63,12 @@ static CGFloat kCloseButtonRadius = 6.0;
 
 @property(nonatomic) NSString *deviceID;
 @property(nonatomic) NSString *deviceName;
+@property(nonatomic) BOOL removable;
 @property(nonatomic) NSRange channelIndexRange;
 @property(nonatomic) NSPoint closeButtonCenter;
 
 @end
+
 
 @implementation AMDevice
 
@@ -115,25 +117,27 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-//   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//   for (int i = 0; i < 4; i++) {
-//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//       channels[i] = channel;
-//   }
-//   [self associateChannels:channels
-//                withDevice:@"Device1"
-//                      name:@"Device 1"];
-//   
-//   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//   for (int i = 8; i < 12; i++) {
-//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//       channels2[i - 8] = channel;
-//   }
-//   [self associateChannels:channels2
-//                withDevice:@"Device2"
-//                      name:@"GarageBand"];
+//    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//    for (int i = 0; i < 4; i++) {
+//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//        channels[i] = channel;
+//    }
+//    [self associateChannels:channels
+//                 withDevice:@"Device1"
+//                       name:@"Device 1"
+//                  removable:NO];
+//    
+//    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+//    for (int i = 8; i < 12; i++) {
+//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//        channels2[i - 8] = channel;
+//    }
+//    [self associateChannels:channels2
+//                 withDevice:@"Device2"
+//                       name:@"GarageBand"
+//                  removable:YES];
 
 }
 
@@ -229,10 +233,12 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (void)associateChannels:(NSArray *)channels
                withDevice:(NSString *)deviceID
                      name:(NSString *)deviceName
+                removable:(BOOL)removable
 {
     AMDevice *device = [[AMDevice alloc] init];
     device.deviceID = deviceID;
     device.deviceName = deviceName;
+    device.removable = removable;
     NSUInteger minIndex = NSUIntegerMax;
     for (AMChannel *channel in channels) {
         NSAssert(channel.index < kNumberOfChannels, @"channel index out of bound");
@@ -440,7 +446,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (void)drawDeviceLabel
 {
     // draw device circle
-    CGFloat radius = _radius + 30.0;
+    CGFloat radius = _radius + 32.0;
     NSBezierPath *circle = [NSBezierPath bezierPath];
     [circle appendBezierPathWithArcWithCenter:_center
                                        radius:radius
@@ -481,16 +487,17 @@ static CGFloat kCloseButtonRadius = 6.0;
         
         // draw lable
         CGFloat arcLength = radius * (endAngle - startAngle);
-        // 28: |- 10 - devcie lable - 8 - close button - 10 - |
-        CGFloat maxTextWidth = arcLength - 28.0 - kCloseButtonRadius * 2.0;
-        if (maxTextWidth <= 20) {
+        // 18: |- 6 - devcie lable - 6 - close button - 6 - |
+        CGFloat closeButtonRadius = (device.removable) ? kCloseButtonRadius : 0.0;
+        CGFloat maxTextWidth = arcLength - 18.0 - closeButtonRadius * 2.0;
+        if (maxTextWidth <= 16) {
             device.closeButtonCenter = NSZeroPoint;
             continue;
         }
         
         NSDictionary *attributes = @{
             NSForegroundColorAttributeName : _deviceLableColor,
-            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:11.0]
+            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:12.0]
         };
         NSAttributedString *label =
             [[NSAttributedString alloc] initWithString:device.deviceName
@@ -512,41 +519,44 @@ static CGFloat kCloseButtonRadius = 6.0;
         }
         
         // align text to arc center
-        CGFloat angleAdjust = ((arcLength - textWidth - 2.0 * kCloseButtonRadius - 8.0) / 2.0) / radius;
+        CGFloat angleAdjust = ((arcLength - textWidth - 2.0 * closeButtonRadius - 6.0) / 2.0) / radius;
         endAngle -= angleAdjust;
-        startAngle += angleAdjust + (2.0 * kCloseButtonRadius + 8.0) / radius;
+        startAngle += angleAdjust + (2.0 * closeButtonRadius + 6.0) / radius;
         // erase dash line
         NSBezierPath *textPath = [NSBezierPath bezierPath];
         [textPath appendBezierPathWithArcWithCenter:_center
                     radius:radius
-                startAngle:todegree(startAngle - (2.0 * kCloseButtonRadius + 14.0) / radius)
+                startAngle:todegree(startAngle - (2.0 * closeButtonRadius + 12.0) / radius)
                   endAngle:todegree(endAngle + 4.0 / radius)];
         textPath.lineWidth = 10.0;
         [_backgroundColor set];
         [textPath stroke];
-        // draw close button
-        CGFloat closeButtonCenterAngle = startAngle - (8.0 + kCloseButtonRadius) / radius;
-        NSPoint closeButtonCenterPosition = NSMakePoint(
-                (radius + 4.0) * cos(closeButtonCenterAngle) + _center.x,
-                (radius + 4.0) * sin(closeButtonCenterAngle) + _center.y);
-        device.closeButtonCenter = closeButtonCenterPosition;
-        NSBezierPath *closeButtonCircle = [NSBezierPath bezierPath];
-        [closeButtonCircle appendBezierPathWithArcWithCenter:closeButtonCenterPosition
-                                                      radius:kCloseButtonRadius
-                                                  startAngle:0
-                                                    endAngle:360];
-        [_deviceLableColor setStroke];
-        [closeButtonCircle stroke];
-        NSBezierPath *closeButtonLine = [NSBezierPath bezierPath];
-        CGFloat r = hypot(_center.x - closeButtonCenterPosition.x,
-                          _center.y - closeButtonCenterPosition.y);
-        CGFloat angle1 = todegree(closeButtonCenterAngle - 0.5 * kCloseButtonRadius / radius);
-        CGFloat angle2 = todegree(closeButtonCenterAngle + 0.5 * kCloseButtonRadius / radius);
-        [closeButtonLine appendBezierPathWithArcWithCenter:_center
-                                                    radius:r
-                                                startAngle:angle1
-                                                  endAngle:angle2];
-        [closeButtonLine stroke];
+        
+        if (closeButtonRadius > 0.0) {
+            // draw close button
+            CGFloat closeButtonCenterAngle = startAngle - (8.0 + closeButtonRadius) / radius;
+            NSPoint closeButtonCenterPosition = NSMakePoint(
+                    (radius + 4.0) * cos(closeButtonCenterAngle) + _center.x,
+                    (radius + 4.0) * sin(closeButtonCenterAngle) + _center.y);
+            device.closeButtonCenter = closeButtonCenterPosition;
+            NSBezierPath *closeButtonCircle = [NSBezierPath bezierPath];
+            [closeButtonCircle appendBezierPathWithArcWithCenter:closeButtonCenterPosition
+                                                          radius:closeButtonRadius
+                                                      startAngle:0
+                                                        endAngle:360];
+            [_deviceLableColor setStroke];
+            [closeButtonCircle stroke];
+            NSBezierPath *closeButtonLine = [NSBezierPath bezierPath];
+            CGFloat r = hypot(_center.x - closeButtonCenterPosition.x,
+                              _center.y - closeButtonCenterPosition.y);
+            CGFloat angle1 = todegree(closeButtonCenterAngle - 0.5 * closeButtonRadius / radius);
+            CGFloat angle2 = todegree(closeButtonCenterAngle + 0.5 * closeButtonRadius / radius);
+            [closeButtonLine appendBezierPathWithArcWithCenter:_center
+                                                        radius:r
+                                                    startAngle:angle1
+                                                      endAngle:angle2];
+            [closeButtonLine stroke];
+        }
         
         CGContextRef context = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
         CGContextSetTextMatrix(context, CGAffineTransformIdentity);

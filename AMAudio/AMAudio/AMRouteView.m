@@ -125,7 +125,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 //    }
 //    [self associateChannels:channels
 //                 withDevice:@"Device1"
-//                       name:@"Device 1"
+//                       name:@"abcdefghijklmnopqrstuvwxyz"
 //                  removable:NO];
 //    
 //    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
@@ -524,9 +524,10 @@ static CGFloat kCloseButtonRadius = 6.0;
         startAngle += angleAdjust + (2.0 * closeButtonRadius + 6.0) / radius;
         // erase dash line
         NSBezierPath *textPath = [NSBezierPath bezierPath];
+        CGFloat startAngleOffset = 2.0 * closeButtonRadius + 4.0 + ((device.removable) ? 6.0 : 0.0);
         [textPath appendBezierPathWithArcWithCenter:_center
                     radius:radius
-                startAngle:todegree(startAngle - (2.0 * closeButtonRadius + 12.0) / radius)
+                startAngle:todegree(startAngle - startAngleOffset / radius)
                   endAngle:todegree(endAngle + 4.0 / radius)];
         textPath.lineWidth = 10.0;
         [_backgroundColor set];
@@ -694,7 +695,10 @@ static CGFloat kCloseButtonRadius = 6.0;
                           fromView:nil];
     
     for (NSString *deviceID in self.devices) {
-        NSPoint p2 = [self.devices[deviceID] closeButtonCenter];
+        AMDevice *device = self.devices[deviceID];
+        if (!device.removable)
+            continue;
+        NSPoint p2 = [device closeButtonCenter];
         if (!NSEqualPoints(p2, NSZeroPoint)) {
             CGFloat distance = hypot(p1.x - p2.x, p1.y - p2.y);
             if (distance < kCloseButtonRadius)

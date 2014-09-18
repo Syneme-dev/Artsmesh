@@ -117,27 +117,27 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-//    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 0; i < 4; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//        channels[i] = channel;
-//    }
-//    [self associateChannels:channels
-//                 withDevice:@"Device1"
-//                       name:@"abcdefghijklmnopqrstuvwxyz"
-//                  removable:NO];
-//    
-//    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 8; i < 12; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//        channels2[i - 8] = channel;
-//    }
-//    [self associateChannels:channels2
-//                 withDevice:@"Device2"
-//                       name:@"GarageBand"
-//                  removable:YES];
+    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+    for (int i = 0; i < 4; i++) {
+        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+        channels[i] = channel;
+    }
+    [self associateChannels:channels
+                 withDevice:@"Device1"
+                       name:@"abcdefghijklmnopqrstuvwxyz"
+                  removable:NO];
+    
+    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+    for (int i = 8; i < 12; i++) {
+        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+        channels2[i - 8] = channel;
+    }
+    [self associateChannels:channels2
+                 withDevice:@"Device2"
+                       name:@"GarageBand"
+                  removable:YES];
 
 }
 
@@ -209,10 +209,9 @@ static CGFloat kCloseButtonRadius = 6.0;
         if (_selectedChannel && _selectedChannel.type != channel.type &&
             ![_selectedChannel.peerIndexes containsIndex:channel.index]) {
             _targetChannel = channel;
-            NSMenuItem *connectMenuItem = [_contextMenu itemAtIndex:0];
-            [connectMenuItem setEnabled:YES];
-            NSMenuItem *disconnectMenuItem = [_contextMenu itemAtIndex:1];
-            [disconnectMenuItem setEnabled:NO];
+            [[_contextMenu itemAtIndex:0] setEnabled:YES];
+            [[_contextMenu itemAtIndex:1] setEnabled:NO];
+            [[_contextMenu itemAtIndex:2] setEnabled:NO];
             [NSMenu popUpContextMenu:_contextMenu withEvent:theEvent forView:self];
             self.needsDisplay = YES;
         }
@@ -220,10 +219,9 @@ static CGFloat kCloseButtonRadius = 6.0;
     }
     
     if ([self testClickOccuredOnConnection:theEvent]) {
-        NSMenuItem *connectMenuItem = [_contextMenu itemAtIndex:0];
-        [connectMenuItem setEnabled:NO];
-        NSMenuItem *disconnectMenuItem = [_contextMenu itemAtIndex:1];
-        [disconnectMenuItem setEnabled:YES];
+        [[_contextMenu itemAtIndex:0] setEnabled:NO];
+        [[_contextMenu itemAtIndex:1] setEnabled:YES];
+        [[_contextMenu itemAtIndex:2] setEnabled:YES];
         [NSMenu popUpContextMenu:_contextMenu withEvent:theEvent forView:self];
     }
 }
@@ -347,6 +345,10 @@ static CGFloat kCloseButtonRadius = 6.0;
                                action:@selector(tryToDisconnect:)
                         keyEquivalent:@""
                               atIndex:1];
+    [_contextMenu insertItemWithTitle:@"Disconnect All"
+                               action:@selector(tryToDisconnectAll)
+                        keyEquivalent:@""
+                              atIndex:2];
     
     self.postsFrameChangedNotifications = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -409,8 +411,26 @@ static CGFloat kCloseButtonRadius = 6.0;
                    disconnectChannel:channel1
                          fromChannel:channel2]) {
             [self disconnectChannel:channel1 fromChannel:channel2];
-            _selectedConnection[0] = NSNotFound;
-            _selectedConnection[1] = NSNotFound;
+        }
+    }
+}
+
+- (void)tryToDisconnectAll
+{
+    for (AMChannel *channel in self.allChannels) {
+        if (channel.type == AMSourceChannel) {
+            [channel.peerIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                AMChannel *destinationChannel = [self channelAtIndex:idx];
+                if ([self.delegate routeView:self
+                      shouldDisonnectChannel:channel
+                                 fromChannel:destinationChannel]) {
+                    if ([self.delegate routeView:self
+                               disconnectChannel:channel
+                                     fromChannel:destinationChannel]) {
+                        [self disconnectChannel:channel fromChannel:destinationChannel];
+                    }
+                }
+            }];
         }
     }
 }

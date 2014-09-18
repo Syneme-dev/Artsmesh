@@ -231,7 +231,11 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 - (void)popoverWillShow:(NSNotification *)notification
 {
-    
+    AMJackTripConfigController* controller = (AMJackTripConfigController*)self.myPopover.contentViewController;
+    if (controller) {
+        [controller initPortOffset];
+        [controller initParameters];
+    }
 }
 
 -(void)popoverDidClose:(NSNotification *)notification

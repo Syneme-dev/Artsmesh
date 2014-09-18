@@ -16,4 +16,8 @@
 @property (weak)AMJackManager* jackManager;
 @property int maxChannels;
 
+-(void)initParameters;
+-(void)initPortOffset;
+
+
 @end

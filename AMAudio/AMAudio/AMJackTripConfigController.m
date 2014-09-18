@@ -42,18 +42,13 @@
 
 -(void)awakeFromNib
 {
-    [self initControlStates];
-    [self initParameters];
-    [self initPortOffset];
+//    [self initParameters];
+//    [self initPortOffset];
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(jacktripChanged:)
      name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
      object:nil];
-}
-
--(void)initControlStates
-{
 }
 
 -(void)initPortOffset
@@ -114,6 +109,8 @@
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
     
+    //init channel count
+    self.channeCount.stringValue = @"2";
     
     //init port
     [self.portOffsetSelector selectItemAtIndex:0];
@@ -222,7 +219,6 @@
 
 -(void)jacktripChanged:(NSNotification*)notification
 {
-    [self initControlStates];
     [self initParameters];
     [self initPortOffset];
 }

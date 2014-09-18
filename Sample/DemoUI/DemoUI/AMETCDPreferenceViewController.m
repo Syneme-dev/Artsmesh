@@ -199,7 +199,8 @@
             if ([AMCommonTools isValidIpv6:ipStr])
             {
                 NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
-                ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
+                //ipStr = [NSString stringWithFormat:@"[%@]", [ipStrComponents objectAtIndex:0]];
+                ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
                 
                 [ipv6s addObject:ipStr];
             }

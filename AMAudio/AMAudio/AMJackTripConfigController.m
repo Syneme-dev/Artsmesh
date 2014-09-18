@@ -168,6 +168,13 @@
     
     cfgs.role = self.roleSelecter.selectedItem.title;
     cfgs.serverAddr = self.peerSelfDefine.stringValue;
+    if([cfgs.serverAddr hasPrefix:@"["]){
+        cfgs.serverAddr = [cfgs.serverAddr substringFromIndex:1];
+    }
+    if ([cfgs.serverAddr hasSuffix:@"]"]) {
+        cfgs.serverAddr = [cfgs.serverAddr substringToIndex:cfgs.serverAddr.length - 1];
+    }
+    
     cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
     cfgs.channelCount = self.channeCount.stringValue;
     cfgs.qCount = self.qCount.stringValue;

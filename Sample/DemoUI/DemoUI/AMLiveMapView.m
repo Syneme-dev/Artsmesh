@@ -10,6 +10,7 @@
 #import "AMWorldMap.h"
 #import "AMPixel.h"
 #import "AMCoreData/AMCoreData.h"
+#import "CoreLocation/CoreLocation.h"
 
 @interface AMLiveMapView ()
 {
@@ -20,6 +21,7 @@
 
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
+@property (nonatomic) NSMutableDictionary * localGroupLoc;
 
 @end
 
@@ -39,7 +41,7 @@ AMWorldMap *worldMap;
 
 - (void)awakeFromNib
 {
-    //[self setup];
+    [self setup];
 }
 
 - (void)setup
@@ -47,6 +49,7 @@ AMWorldMap *worldMap;
     
     //Construct WorldMap and pixel arrays for assigning buttons to view
     worldMap = [[AMWorldMap alloc] init];
+    _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
     
     _backgroundColor = [NSColor colorWithCalibratedRed:0.15
                                                  green:0.15
@@ -61,83 +64,24 @@ AMWorldMap *worldMap;
     _ports = [allPorts copy];
     _portIndex = -1;
     
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+
+    // Get/Set location data
     
-    //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
-    float lat = 39.9075;
-    float lon = 116.39723;
-    double mapLat0 = worldMap.mapHeight/2;
-    double mapLon0 = worldMap.mapWidth/2;
-    
-    //NSLog(@"my name is %@ and my local live group is %@", mySelf.nickName, myGroup.groupName);
-    
-    //If lat & lon exist, find their equivelent on current live map
-    //need an if statement here checking for amlivegroup data, when it's ready
-    double liveGroupLat = (lat * mapLat0)/90;
-    double liveGroupLon = (lon * mapLon0)/180;
-    double liveGroupPosY = liveGroupLat;
-    double liveGroupPosX = liveGroupLon;
-    
-    if (liveGroupPosY > 0 ) {
-        liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
-    } else {
-        liveGroupPosY += mapLat0;
+    NSString *location = @"beijing";
+    if (myGroup.location) {
+        location = myGroup.location;
     }
-    if ( liveGroupPosX < 0 ) {
-        liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
-    } else {
-        liveGroupPosX += mapLon0;
-    }
+    [self getCoordinates:location];
     
-    //Find closest pixel to current live group location
-    
-    AMPixel *liveGroupPixel;
-    double closestDistToLiveGroup = -1;
-    NSPoint portCenter;
-    float portX = 0;
-    float portY = 0;
-    float portRow = 0;
-    int portCol = 0;
-    //double portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    //double portH = self.bounds.size.height / (long)worldMap.mapHeight;
-    double portW = 1;
-    double portH = worldMap.mapHeight / worldMap.mapWidth;
-    
-    portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
-    
-    for (int i = 0; i < self.ports.count; i++) {
-        AMPixel *port = self.ports[i];
-        
-        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
-        
-        portRow = portPixelPos/worldMap.mapWidth;
-        if ( portRow != (int)portRow ) {
-            portRow += (int)portRow + 1;
-        }
-        portCol = portPixelPos % worldMap.mapWidth;
-        if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
-        
-        portX = (portCol * portW) - (portW/2);
-        portY = (portRow * portH) - (portH/2);
-        
-        //Calculate distance between portCenter and liveGroup lat/lon
-        double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
-        
-        if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-            //NSLog(@"Pixel %i with x/y: (%d, %d) compared to livegroup x/y of: (%f,%f)", i, portX, portY, liveGroupPosX, liveGroupPosY);
-            //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
-            closestDistToLiveGroup = distToLiveGroup;
-            liveGroupPixel = port;
-        }
-        
-        
-    }
-    liveGroupPixel.state = AMPixelStateConnected;
+    [self markLiveGroupLocation];
+
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    NSLog(@"draw rect called..");
+    
     [self.backgroundColor set];
     NSRectFill(self.bounds);
     
@@ -222,5 +166,110 @@ AMWorldMap *worldMap;
     return YES;
 }
 
+- (void)markLiveGroupLocation {
+
+    if ( [_localGroupLoc count] > 0 ) {
+    //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
+    float lat;
+    float lon;
+    // Use this when data available in AMCoreData if ( myGroup.latitude && myGroup.longitude ) {
+    
+        //lat = [myGroup.latitude floatValue];lon = [myGroup.longitude floatValue];
+        NSLog(@"found latitude was %f", [[_localGroupLoc objectForKey:@"latitude"] floatValue]);
+        lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
+        lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
+        //NSLog(@"lat/lon = %f/%f", lat, lon);
+
+    double mapLat0 = worldMap.mapHeight/2;
+    double mapLon0 = worldMap.mapWidth/2;
+    
+    //If lat & lon exist, find their equivelent on current live map
+    //need an if statement here checking for amlivegroup data, when it's ready
+    double liveGroupLat = (lat * mapLat0)/90;
+    double liveGroupLon = (lon * mapLon0)/180;
+    double liveGroupPosY = liveGroupLat;
+    double liveGroupPosX = liveGroupLon;
+    
+    if (liveGroupPosY > 0 ) {
+        liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
+    } else {
+        liveGroupPosY += mapLat0;
+    }
+    if ( liveGroupPosX < 0 ) {
+        liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
+    } else {
+        liveGroupPosX += mapLon0;
+    }
+    
+    //Find closest pixel to current live group location
+    
+    AMPixel *liveGroupPixel;
+    double closestDistToLiveGroup = -1;
+    float portX = 0;
+    float portY = 0;
+    float portRow = 0;
+    int portCol = 0;
+    //double portW = self.bounds.size.width / (long)worldMap.mapWidth;
+    //double portH = self.bounds.size.height / (long)worldMap.mapHeight;
+    double portW = 1;
+    double portH = worldMap.mapHeight / worldMap.mapWidth;
+    
+    portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
+    
+    for (int i = 0; i < self.ports.count; i++) {
+        AMPixel *port = self.ports[i];
+        port.state = AMPixelStateNormal;
+        
+        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
+        
+        portRow = portPixelPos/worldMap.mapWidth;
+        if ( portRow != (int)portRow ) {
+            portRow += (int)portRow + 1;
+        }
+        portCol = portPixelPos % worldMap.mapWidth;
+        if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
+        
+        portX = (portCol * portW) - (portW/2);
+        portY = (portRow * portH) - (portH/2);
+        
+        //Calculate distance between portCenter and liveGroup lat/lon
+        double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
+        
+        if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
+            //NSLog(@"Pixel %i with x/y: (%d, %d) compared to livegroup x/y of: (%f,%f)", i, portX, portY, liveGroupPosX, liveGroupPosY);
+            //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
+            closestDistToLiveGroup = distToLiveGroup;
+            liveGroupPixel = port;
+        }
+        
+        
+    }
+    liveGroupPixel.state = AMPixelStateConnected;
+    }
+}
+
+- (void)getCoordinates:(NSString *)searchTerm{
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder geocodeAddressString:searchTerm
+                 completionHandler:^(NSArray* placemarks, NSError* error){
+                     if (error) {
+                         NSLog(@"%@", error);
+                         
+                     } else if (placemarks && placemarks.count > 0) {
+                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                         
+                         NSLog(@"top search result is %f, %f",topResult.location.coordinate.latitude, topResult.location.coordinate.longitude);
+                         
+                         [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.latitude] forKey:@"latitude"];
+                         [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.longitude] forKey:@"longitude"];
+                         
+                         [self markLiveGroupLocation];
+                         
+                         [self setNeedsDisplay:YES];
+                     }
+                 }
+     ];
+
+}
 
 @end

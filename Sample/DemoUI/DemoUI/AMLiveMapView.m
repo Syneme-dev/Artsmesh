@@ -272,4 +272,8 @@ AMWorldMap *worldMap;
 
 }
 
+- (void)reloadMapView {
+    [self setup];
+}
+
 @end

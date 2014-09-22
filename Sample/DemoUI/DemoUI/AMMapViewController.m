@@ -15,6 +15,20 @@
 #import <WebKit/WebKit.h>
 #import <UIFramework/AMButtonHandler.h>
 
+
+#import <AMNotificationManager/AMNotificationManager.h>
+#import "AMRestHelper.h"
+#import "AFHTTPRequestOperationManager.h"
+#import <UIFramework/AMButtonHandler.h>
+#import "AMMesher/AMMesher.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMMesher/AMMesher.h"
+#import "AMUserLogonViewController.h"
+#import "UIFrameWork/AMCheckBoxView.h"
+#import "AMStatusNet/AMStatusNet.h"
+#import "UIFrameWork/AMFoundryFontView.h"
+#import "AMGroupCreateViewController.h"
+
 @interface AMMapViewController ()
 {
     NSString* statusNetURLString;
@@ -31,6 +45,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
                 // Initialization code here.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged) name:AM_LIVE_GROUP_CHANDED object:nil];
     }
     return self;
 }
@@ -69,6 +84,8 @@
 -(void)dealloc{
     //To avoid a error when closing
     [self.webView.mainFrame stopLoading];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -167,13 +184,9 @@
     
 }
 
-/**
-- (void)drawRect:(NSRect)dirtyRect {
-    
-
+- (void)liveGroupChanged {
+    [self loadLivePage];
 }
-**/
-
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self.tabs selectTabViewItemAtIndex:1];

@@ -981,9 +981,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		37C2316B187A8FFD00554AFD /* DemoUI */ = {
+		37C2316B187A8FFD00554AFD /* Artsmesh */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "DemoUI" */;
+			buildConfigurationList = 37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Artsmesh" */;
 			buildPhases = (
 				09714A52F7964CC4AFC5CC4D /* Check Pods Manifest.lock */,
 				37C23168187A8FFD00554AFD /* Sources */,
@@ -999,7 +999,7 @@
 			);
 			dependencies = (
 			);
-			name = DemoUI;
+			name = Artsmesh;
 			productName = DemoUI;
 			productReference = 37C2316C187A8FFD00554AFD /* DemoUI.app */;
 			productType = "com.apple.product-type.application";
@@ -1050,7 +1050,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				37C2316B187A8FFD00554AFD /* DemoUI */,
+				37C2316B187A8FFD00554AFD /* Artsmesh */,
 				37C2318C187A8FFD00554AFD /* DemoUITests */,
 			);
 		};
@@ -1272,7 +1272,7 @@
 /* Begin PBXTargetDependency section */
 		37C23192187A8FFD00554AFD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37C2316B187A8FFD00554AFD /* DemoUI */;
+			target = 37C2316B187A8FFD00554AFD /* Artsmesh */;
 			targetProxy = 37C23191187A8FFD00554AFD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1471,7 +1471,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "DemoUI" */ = {
+		37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Artsmesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37C2319E187A8FFD00554AFD /* Debug */,

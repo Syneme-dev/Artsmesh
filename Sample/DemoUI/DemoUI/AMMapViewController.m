@@ -45,7 +45,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
                 // Initialization code here.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged) name:AM_LIVE_GROUP_CHANDED object:nil];
     }
     return self;
 }
@@ -84,8 +83,6 @@
 -(void)dealloc{
     //To avoid a error when closing
     [self.webView.mainFrame stopLoading];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -182,10 +179,6 @@
     }
     self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
-}
-
-- (void)liveGroupChanged {
-    [self loadLivePage];
 }
 
 - (IBAction)onStaticTabClick:(id)sender {

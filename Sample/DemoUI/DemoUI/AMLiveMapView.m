@@ -68,13 +68,11 @@ AMWorldMap *worldMap;
 
     // Get/Set location data
     
-    NSString *location = @"beijing";
-    if (myGroup.location) {
-        location = myGroup.location;
-    }
-    [self getCoordinates:location];
+    [self findLiveGroupLocation:myGroup];
     
     [self markLiveGroupLocation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
 
 }
 
@@ -164,6 +162,15 @@ AMWorldMap *worldMap;
 
 - (BOOL)isFlipped{
     return YES;
+}
+
+- (void)findLiveGroupLocation:(AMLiveGroup *)theGroup {
+    AMLiveGroup *myGroup = theGroup;
+    NSString *location = @"beijing";
+    if (myGroup.location) {
+        location = myGroup.location;
+    }
+    [self getCoordinates:location];
 }
 
 - (void)markLiveGroupLocation {
@@ -272,8 +279,21 @@ AMWorldMap *worldMap;
 
 }
 
-- (void)reloadMapView {
-    [self setup];
+- (void)liveGroupChanged:(NSNotification *)note {
+    NSLog(@"THFJSDKFJSLDFJ:SDLKFJ:SDLKJF:SDLKFJS:DLKFJ:SDLKFJ:SDLKFJ");
+    
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSString *location = @"beijing";
+    if (myGroup.location) {
+        location = myGroup.location;
+    }
+    [self getCoordinates:location];
+    
+    [self markLiveGroupLocation];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

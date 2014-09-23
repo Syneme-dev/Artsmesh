@@ -11,6 +11,5 @@
 @interface AMLiveMapView : NSView
 
 - (BOOL)isFlipped;
-- (void)reloadMapView;
 
 @end

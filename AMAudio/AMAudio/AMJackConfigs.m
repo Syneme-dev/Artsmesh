@@ -106,7 +106,7 @@
 {
     AMJackConfigs* config = [[AMJackConfigs alloc] init];
     NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
-    config.driver = @"coreaudio";
+    config.driver = [defaults stringForKey:Preference_Jack_Driver];;
     config.inputDevUID = [defaults stringForKey:Preference_Jack_InputDevice];
     config.outputDevUID = [defaults stringForKey:Preference_Jack_OutputDevice];
     config.sampleRate  = [[defaults stringForKey:Preference_Jack_SampleRate] intValue];

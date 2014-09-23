@@ -7,6 +7,7 @@
 //
 
 #import "AMJackConfigs.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMJackConfigs
 
@@ -104,6 +105,19 @@
 +(id)archivedJackConfig;
 {
     AMJackConfigs* config = [[AMJackConfigs alloc] init];
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    config.driver = @"coreaudio";
+    config.inputDevUID = [defaults stringForKey:Preference_Jack_InputDevice];
+    config.outputDevUID = [defaults stringForKey:Preference_Jack_OutputDevice];
+    config.sampleRate  = [[defaults stringForKey:Preference_Jack_SampleRate] intValue];
+    config.bufferSize = [[defaults stringForKey:Preference_Jack_BufferSize] intValue];
+    config.inChansCount = [[defaults stringForKey:Preference_Jack_InterfaceInChans] intValue];
+    config.outChansCount = [[defaults stringForKey:Preference_Jack_InterfaceOutChanns] intValue];
+    config.hogMode = [[defaults stringForKey:Preference_Jack_HogMode] boolValue];
+    config.clockDriftCompensation = [[defaults stringForKey:Preference_Jack_ClockDriftComp] boolValue];
+    config.systemPortMonitoring= [[defaults stringForKey:Preference_Jack_PortMoniting] boolValue];
+    config.activeMIDI = [[defaults stringForKey:Preference_Jack_ActiveMIDI] boolValue];
+
     return config;
 }
 

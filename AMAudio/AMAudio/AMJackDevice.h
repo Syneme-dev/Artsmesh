@@ -15,4 +15,6 @@
 @property NSString* deviceName;
 @property NSMutableArray* channels;
 
+-(void)sortChannels;
+
 @end

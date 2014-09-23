@@ -160,7 +160,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSMutableDictionary* devices = [[NSMutableDictionary alloc] init];
     for (NSUInteger i = 0; i < [allChann count]; i++) {
         AMChannel* chann = allChann[i];
-        chann.index = i;
+        //chann.index = i;
         
         AMJackDevice* device = devices[chann.deviceID];
         if(device == nil){
@@ -175,8 +175,16 @@ shouldRemoveDevice:(NSString *)deviceID;
         [device.channels addObject:chann];
     }
     
+    
+    int j = 0;
     for(NSString* deviceID in devices){
         AMJackDevice* device = devices[deviceID];
+        [device sortChannels];
+        
+        for (AMChannel* chann  in device.channels) {
+            chann.index = j++;
+        }
+        
         [routeView associateChannels:device.channels
                           withDevice:device.deviceID
                                 name:device.deviceName

@@ -316,6 +316,7 @@
     [self.cancelBtn setEnabled:NO];
     
     //save preferecces
+    [[AMPreferenceManager standardUserDefaults] setObject:self.jackManager.jackCfg.driver forKey:Preference_Jack_Driver];
     [[AMPreferenceManager standardUserDefaults] setObject:inputDevName forKey:Preference_Jack_InputDevice];
     [[AMPreferenceManager standardUserDefaults] setObject:outputDevName forKey:Preference_Jack_OutputDevice];
     [[AMPreferenceManager standardUserDefaults] setObject:self.sampleRateBox.title forKey:Preference_Jack_SampleRate];

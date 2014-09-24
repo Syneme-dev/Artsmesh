@@ -720,7 +720,11 @@
     AMAudio* audioModule = [AMAudio sharedInstance];
     if(![audioModule isJackStarted]){
         [self.jackServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
-        [audioModule startJack];
+        if (![audioModule startJack])
+        {
+            [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+        }
+        
     }else{
         [audioModule stopJack];
     }

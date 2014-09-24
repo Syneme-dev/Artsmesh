@@ -42,9 +42,6 @@
 
 -(void)awakeFromNib
 {
-//    [self initParameters];
-//    [self initPortOffset];
-    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(jacktripChanged:)
      name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
@@ -81,9 +78,25 @@
     
     //init peers
     [self.peerSelecter removeAllItems];
-    NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    for (AMLiveUser* user in myGroupMem) {
+    
+    
+    NSMutableArray* allUserList =[[NSMutableArray alloc] init];
+    
+    AMCoreData* dataStore = [AMCoreData shareInstance];
+    NSArray* myLocalGroupMem = dataStore.myLocalLiveGroup.users;
+    [allUserList addObjectsFromArray:myLocalGroupMem];
+    
+    AMLiveUser* mySelf = dataStore.mySelf;
+    if (mySelf.isOnline){
+        for (AMLiveGroup* remoteGroup in dataStore.remoteLiveGroups) {
+            NSString* mergedGroupId = dataStore.mergedGroupId;
+            if ([remoteGroup.groupId isEqualToString:mergedGroupId]){
+                [allUserList addObjectsFromArray:remoteGroup.users];
+            }
+        }
+    }
+    
+    for (AMLiveUser* user in allUserList) {
         
         //Two User at most have one connection
         BOOL alreadyConnect = NO;
@@ -102,7 +115,11 @@
         if([user.userid isNotEqualTo:mySelf.userid]){
             [self.peerSelecter addItemWithTitle:user.nickName];
             if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
-                self.peerSelfDefine.stringValue = user.privateIp;
+                if (mySelf.isOnline) {
+                    self.peerSelfDefine.stringValue = user.publicIp;
+                }else{
+                    self.peerSelfDefine.stringValue = user.privateIp;
+                }
             }
         }
     }

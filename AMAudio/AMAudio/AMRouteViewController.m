@@ -217,7 +217,7 @@ shouldRemoveDevice:(NSString *)deviceID;
         
         maxIndex = (maxIndex > channShow.index) ? maxIndex : channShow.index;
     }
-    
+
     int j = maxIndex + 1;
     for(NSString* deviceID in devicesToAdd){
         AMJackDevice* device = devicesToAdd[deviceID];
@@ -227,6 +227,7 @@ shouldRemoveDevice:(NSString *)deviceID;
             chann.index = j++;
         }
         
+        //add new device to router view
         BOOL removable = NO;
         for (int i = 0; i < [self.jacktripManager.jackTripInstances count]; i++) {
             AMJacktripInstance* jacktrip = self.jacktripManager.jackTripInstances[i];

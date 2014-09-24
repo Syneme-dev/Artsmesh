@@ -23,16 +23,16 @@
     
     if (major == 10 && minor >= 5) {
 #if defined(__i386__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #elif defined(__x86_64__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #elif defined(__ppc__)
         strcpy(stringa, "arch -ppc /usr/local/bin/jackdmp -R");
 #elif defined(__ppc64__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #endif
     }else{
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
     }
     
     if (self.verboseLoggingForDebugPurpose) {

@@ -109,9 +109,7 @@
 
 -(BOOL)startJack
 {
-    [_jackManager startJack];
-    
-    return YES;
+    return [_jackManager startJack];
 }
 
 -(void)stopJack

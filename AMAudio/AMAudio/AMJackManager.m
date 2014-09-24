@@ -39,17 +39,22 @@
 
 -(BOOL)startJack
 {
-     int n = system("killall -0 jackdmp >/dev/null");
-     if (n != 0) {
-         NSString* command =  [self.jackCfg formatCommandLine];
-         NSLog(@"command is %@", command);
-         _jackTask = [[AMShellTask alloc] initWithCommand:command];
+    int n = system("killall -0 jackd >/dev/null");
+    int m = system("killall -0 jackdmp >/dev/null");
+    if (n != 0 && m != 0) {
+        NSString* command =  [self.jackCfg formatCommandLine];
+        NSLog(@"command is %@", command);
+        _jackTask = [[AMShellTask alloc] initWithCommand:command];
          [_jackTask launch];
+         return YES;
      }else{
-         self.jackState = JackState_Started;
+         NSNotification* notification = [[NSNotification alloc]
+                                         initWithName: AM_JACK_STARTED_NOTIFICATION
+                                         object:nil
+                                         userInfo:nil];
+         [[NSNotificationCenter defaultCenter] postNotification:notification];
+         return NO;
      }
-    
-    return YES;
 }
 
 -(void)stopJack
@@ -57,7 +62,14 @@
     [_jackTask cancel];
     _jackTask = nil;
     
+    system("killall jackd >/dev/null");
     system("killall jackdmp >/dev/null");
+    
+    NSNotification* notification = [[NSNotification alloc]
+                                    initWithName: AM_JACK_STOPPED_NOTIFICATION
+                                    object:nil
+                                    userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 -(void)jackStarted:(NSNotification*)notification

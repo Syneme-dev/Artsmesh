@@ -12,6 +12,10 @@
 #import "AMCoreData/AMCoreData.h"
 #import "CoreLocation/CoreLocation.h"
 
+#import "AMLiveGroupDataSource.h"
+#import "AMStaticGroupDataSource.h"
+#import "AMStatusNet/AMStatusNet.h"
+
 @interface AMLiveMapView ()
 {
     NSPoint _center;
@@ -22,6 +26,8 @@
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
+@property (nonatomic) BOOL isCheckingLocation;
+@property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
 @end
 
@@ -68,12 +74,26 @@ AMWorldMap *worldMap;
 
     // Get/Set location data
     
-    [self findLiveGroupLocation:myGroup];
+    self.isCheckingLocation = YES;
     
-    [self markLiveGroupLocation];
+    if ( [myGroup isMeshed] ) {
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+            NSLog(@"This group is .. %@ from %@ with id of %@", remoteGroup.groupName, remoteGroup.location, remoteGroup.groupId);
+            
+            [self findLiveGroupLocation:remoteGroup];
+            
+            [self markLiveGroupLocation];
+        }
+    } else {
+    
+        [self findLiveGroupLocation:myGroup];
+    
+        [self markLiveGroupLocation];
+    }
+    
+    self.isCheckingLocation = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
-
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -225,7 +245,7 @@ AMWorldMap *worldMap;
     
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        port.state = AMPixelStateNormal;
+        if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
         
         int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
         
@@ -280,16 +300,7 @@ AMWorldMap *worldMap;
 }
 
 - (void)liveGroupChanged:(NSNotification *)note {
-    NSLog(@"THFJSDKFJSLDFJ:SDLKFJ:SDLKJF:SDLKFJS:DLKFJ:SDLKFJ:SDLKFJ");
-    
-    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    NSString *location = @"beijing";
-    if (myGroup.location) {
-        location = myGroup.location;
-    }
-    [self getCoordinates:location];
-    
-    [self markLiveGroupLocation];
+    [self setup];
 }
 
 - (void)dealloc {

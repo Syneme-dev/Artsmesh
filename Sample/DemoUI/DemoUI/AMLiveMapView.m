@@ -81,14 +81,12 @@ AMWorldMap *worldMap;
             NSLog(@"This group is .. %@ from %@ with id of %@", remoteGroup.groupName, remoteGroup.location, remoteGroup.groupId);
             
             [self findLiveGroupLocation:remoteGroup];
-            
-            [self markLiveGroupLocation];
+    
         }
     } else {
     
         [self findLiveGroupLocation:myGroup];
     
-        [self markLiveGroupLocation];
     }
     
     self.isCheckingLocation = NO;
@@ -191,6 +189,7 @@ AMWorldMap *worldMap;
         location = myGroup.location;
     }
     [self getCoordinates:location];
+
 }
 
 - (void)markLiveGroupLocation {
@@ -280,7 +279,7 @@ AMWorldMap *worldMap;
     [geoCoder geocodeAddressString:searchTerm
                  completionHandler:^(NSArray* placemarks, NSError* error){
                      if (error) {
-                         NSLog(@"%@", error);
+                         NSLog(@"error--%@",[error localizedDescription]);
                          
                      } else if (placemarks && placemarks.count > 0) {
                          CLPlacemark *topResult = [placemarks objectAtIndex:0];
@@ -296,6 +295,7 @@ AMWorldMap *worldMap;
                      }
                  }
      ];
+    
 
 }
 

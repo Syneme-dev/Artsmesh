@@ -306,7 +306,7 @@
 		2D6D76F519C16E3300201106 /* AMPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPixel.h; sourceTree = "<group>"; };
 		2D6D76F619C16E3300201106 /* AMPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPixel.m; sourceTree = "<group>"; };
 		2DED40CC19CBED2D006F12FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
-		37C2316C187A8FFD00554AFD /* DemoUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37C2316C187A8FFD00554AFD /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		37C23173187A8FFD00554AFD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -718,7 +718,7 @@
 		37C2316D187A8FFD00554AFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				37C2316C187A8FFD00554AFD /* DemoUI.app */,
+				37C2316C187A8FFD00554AFD /* Artsmesh.app */,
 				37C2318D187A8FFD00554AFD /* DemoUITests.xctest */,
 			);
 			name = Products;
@@ -1001,7 +1001,7 @@
 			);
 			name = Artsmesh;
 			productName = DemoUI;
-			productReference = 37C2316C187A8FFD00554AFD /* DemoUI.app */;
+			productReference = 37C2316C187A8FFD00554AFD /* Artsmesh.app */;
 			productType = "com.apple.product-type.application";
 		};
 		37C2318C187A8FFD00554AFD /* DemoUITests */ = {

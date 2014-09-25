@@ -7,6 +7,7 @@
 //
 
 #import "AMJackConfigs.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMJackConfigs
 
@@ -22,16 +23,16 @@
     
     if (major == 10 && minor >= 5) {
 #if defined(__i386__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #elif defined(__x86_64__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #elif defined(__ppc__)
         strcpy(stringa, "arch -ppc /usr/local/bin/jackdmp -R");
 #elif defined(__ppc64__)
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
 #endif
     }else{
-        strcpy(stringa,"/usr/local/bin/jackdmp -R");
+        strcpy(stringa,"/usr/local/bin/jackd -R");
     }
     
     if (self.verboseLoggingForDebugPurpose) {
@@ -104,6 +105,19 @@
 +(id)archivedJackConfig;
 {
     AMJackConfigs* config = [[AMJackConfigs alloc] init];
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    config.driver = [defaults stringForKey:Preference_Jack_Driver];;
+    config.inputDevUID = [defaults stringForKey:Preference_Jack_InputDevice];
+    config.outputDevUID = [defaults stringForKey:Preference_Jack_OutputDevice];
+    config.sampleRate  = [[defaults stringForKey:Preference_Jack_SampleRate] intValue];
+    config.bufferSize = [[defaults stringForKey:Preference_Jack_BufferSize] intValue];
+    config.inChansCount = [[defaults stringForKey:Preference_Jack_InterfaceInChans] intValue];
+    config.outChansCount = [[defaults stringForKey:Preference_Jack_InterfaceOutChanns] intValue];
+    config.hogMode = [[defaults stringForKey:Preference_Jack_HogMode] boolValue];
+    config.clockDriftCompensation = [[defaults stringForKey:Preference_Jack_ClockDriftComp] boolValue];
+    config.systemPortMonitoring= [[defaults stringForKey:Preference_Jack_PortMoniting] boolValue];
+    config.activeMIDI = [[defaults stringForKey:Preference_Jack_ActiveMIDI] boolValue];
+
     return config;
 }
 

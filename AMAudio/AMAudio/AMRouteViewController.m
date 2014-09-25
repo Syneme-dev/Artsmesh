@@ -156,33 +156,94 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMRouteView* routeView = (AMRouteView*)self.view;
     
+    //Read all channels from system
     NSArray* allChann = [self.jackClient allChannels];
-    NSMutableDictionary* devices = [[NSMutableDictionary alloc] init];
-    for (NSUInteger i = 0; i < [allChann count]; i++) {
-        AMChannel* chann = allChann[i];
-        chann.index = i;
-        
-        AMJackDevice* device = devices[chann.deviceID];
-        if(device == nil){
-            device = [[AMJackDevice alloc] init];
-            device.deviceID = chann.deviceID;
-            device.deviceName = chann.deviceID;
-            device.channels = [[NSMutableArray alloc] init];
-            
-            devices[chann.deviceID] = device;
+    
+    //Remove device not exist any more
+    for (AMChannel* channShow in [routeView allChannels])
+    {
+        if (channShow.type == AMPlaceholderChannel) {
+            continue;
         }
         
-        [device.channels addObject:chann];
+        BOOL bFind = NO;
+        for (AMChannel* channAct in allChann) {
+            if ([channShow.deviceID isEqualToString:channAct.deviceID]) {
+                bFind = YES;
+            }
+        }
+        if (!bFind) {
+            [routeView removeDevice:channShow.deviceID];
+        }
     }
     
-    for(NSString* deviceID in devices){
-        AMJackDevice* device = devices[deviceID];
+    //Calculate new device to add
+    NSMutableDictionary* devicesToAdd = [[NSMutableDictionary alloc] init];
+    for( AMChannel *channAct in allChann){
+        BOOL bFind = NO;
+        for (AMChannel* channShow in [routeView allChannels]){
+            if (channShow.type == AMPlaceholderChannel) {
+                continue;
+            }
+            
+            if ([channAct.deviceID isEqualToString:channShow.deviceID]) {
+                bFind = YES;
+                break;
+            }
+        }
+        
+        if (!bFind){
+            AMJackDevice* device = devicesToAdd[channAct.deviceID];
+            if(device == nil){
+                //if device not exsit, create one
+                device = [[AMJackDevice alloc] init];
+                device.deviceID = channAct.deviceID;
+                device.deviceName = channAct.deviceID;
+                device.channels = [[NSMutableArray alloc] init];
+                
+                devicesToAdd[channAct.deviceID] = device;
+            }
+            
+            [device.channels addObject:channAct];
+        }
+    }
+    
+    //Index new device channel
+    int maxIndex = 0;
+    for(AMChannel* channShow in [routeView allChannels]){
+        if (channShow.type == AMPlaceholderChannel) {
+            continue;
+        }
+        
+        maxIndex = (maxIndex > channShow.index) ? maxIndex : channShow.index;
+    }
+
+    int j = maxIndex + 1;
+    for(NSString* deviceID in devicesToAdd){
+        AMJackDevice* device = devicesToAdd[deviceID];
+        [device sortChannels];
+        
+        for (AMChannel* chann  in device.channels) {
+            chann.index = j++;
+        }
+        
+        //add new device to router view
+        BOOL removable = NO;
+        for (int i = 0; i < [self.jacktripManager.jackTripInstances count]; i++) {
+            AMJacktripInstance* jacktrip = self.jacktripManager.jackTripInstances[i];
+            if ([jacktrip.instanceName isEqualToString:deviceID]) {
+                removable = YES;
+                break;
+            }
+        }
+        
         [routeView associateChannels:device.channels
                           withDevice:device.deviceID
                                 name:device.deviceName
-                           removable:YES];
+                           removable:removable];
     }
     
+    //set connections
     NSArray* channelsOnView = [routeView allChannels];
     for (AMChannel* chann in channelsOnView) {
         NSString* fullName = [chann channelFullName];

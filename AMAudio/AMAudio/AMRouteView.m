@@ -1,3 +1,4 @@
+
 //
 //  AMRouteView.m
 //  RoutePanel
@@ -80,6 +81,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     NSColor *_backgroundColor;
     NSColor *_placeholderChannelColor;
     NSColor *_deviceLableColor;
+    NSColor *_deviceCircleColor;
     NSColor *_sourceChannelColor;
     NSColor *_destinationChannelColor;
     NSColor *_selectedChannelFillColor;
@@ -117,27 +119,27 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-//    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 0; i < 4; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//        channels[i] = channel;
-//    }
-//    [self associateChannels:channels
-//                 withDevice:@"Device1"
-//                       name:@"abcdefghijklmnopqrstuvwxyz"
-//                  removable:NO];
-//    
-//    NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//    for (int i = 8; i < 12; i++) {
-//        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//        channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//        channels2[i - 8] = channel;
-//    }
-//    [self associateChannels:channels2
-//                 withDevice:@"Device2"
-//                       name:@"GarageBand"
-//                  removable:YES];
+//   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 0; i < 4; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//       channels[i] = channel;
+//   }
+//   [self associateChannels:channels
+//                withDevice:@"Device1"
+//                      name:@"abcdefghijklmnopqrstuvwxyz"
+//                 removable:NO];
+//   
+//   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 8; i < 12; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//       channels2[i - 8] = channel;
+//   }
+//   [self associateChannels:channels2
+//                withDevice:@"Device2"
+//                      name:@"GarageBand"
+//                 removable:YES];
 
 }
 
@@ -366,10 +368,11 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                          green:0.3686
                                                           blue:0.494
                                                          alpha:1.0];
-    _deviceLableColor = [NSColor colorWithCalibratedRed:0.18
-                                                  green:0.227
-                                                   blue:0.298
-                                                  alpha:1.0];
+    _deviceCircleColor = [NSColor colorWithCalibratedRed:0.18
+                                                   green:0.227
+                                                    blue:0.298
+                                                   alpha:1.0];
+    _deviceLableColor = [NSColor grayColor];
     _selectedChannelFillColor = [NSColor lightGrayColor];
     _connectionColor = [NSColor greenColor];
     _selectedConnectionColor = [NSColor colorWithCalibratedRed:1.0
@@ -479,7 +482,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                   count:sizeof(lineDash) / sizeof(lineDash[0])
                   phase:0.0];
     circle.lineWidth = 2.0;
-    [_deviceLableColor set];
+    [_deviceCircleColor set];
     [circle stroke];
     
     // draw device lables
@@ -502,7 +505,7 @@ static CGFloat kCloseButtonRadius = 6.0;
         [cdLine lineToPoint:NSMakePoint((radius + 8.0) * cos(endAngle) + _center.x,
                                         (radius + 8.0) * sin(endAngle) + _center.y)];
         cdLine.lineWidth = 1.0;
-        [_deviceLableColor set];
+        [_deviceCircleColor set];
         [cdLine stroke];
         
         // draw lable
@@ -517,7 +520,7 @@ static CGFloat kCloseButtonRadius = 6.0;
         
         NSDictionary *attributes = @{
             NSForegroundColorAttributeName : _deviceLableColor,
-            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:12.0]
+            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:13.0]
         };
         NSAttributedString *label =
             [[NSAttributedString alloc] initWithString:device.deviceName
@@ -565,7 +568,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                           radius:closeButtonRadius
                                                       startAngle:0
                                                         endAngle:360];
-            [_deviceLableColor setStroke];
+            [_deviceCircleColor setStroke];
             [closeButtonCircle stroke];
             NSBezierPath *closeButtonLine = [NSBezierPath bezierPath];
             CGFloat r = hypot(_center.x - closeButtonCenterPosition.x,

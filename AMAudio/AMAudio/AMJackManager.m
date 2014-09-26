@@ -145,7 +145,8 @@ static void stopCallback(CFNotificationCenterRef center,
 {
     
     NSNotification* notification = [[NSNotification alloc]
-                                    initWithName: AM_JACK_STOPPED_NOTIFICATION                                    object:nil
+                                    initWithName: AM_JACK_STOPPED_NOTIFICATION
+                                    object:nil
                                     userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }

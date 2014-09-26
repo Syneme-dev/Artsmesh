@@ -53,19 +53,12 @@
 {
     [super drawRect:dirtyRect];
     
-    // Drawing code here.
-    [NSGraphicsContext saveGraphicsState];
+    //Drawing border and background
+    NSBezierPath *border = [NSBezierPath bezierPathWithRoundedRect:self.bounds
+                                                           xRadius:5 yRadius:5];
+    [[NSColor colorWithRed:69/255.0 green:69/255.0 blue:74/255.0 alpha:1.0] set];
+    [border stroke];
     
-    //Drawing background
-    
-    NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
-    if (self.mouseEntered) {
-        [self.mouseOverColor set];
-    }else{
-        [self.backgroupColor set];
-    }
-    
-    [border fill];
     
     // Drawing title
     NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] init];
@@ -86,17 +79,22 @@
     NSRect contentRect = self.bounds;
     CGFloat imageSize = (contentRect.size.height - 5)/2;
     
-    NSRect rect = NSMakeRect(contentRect.origin.x + contentRect.size.width - 10 - imageSize, contentRect.origin.y + 5, imageSize, imageSize);
+    NSRect rect = NSMakeRect(contentRect.origin.x + contentRect.size.width - 20 - imageSize, contentRect.origin.y + 5, imageSize, imageSize);
     
     NSImage* triangle = [NSImage imageNamed:@"popUpTriangle"];
     [triangle drawAtPoint:rect.origin fromRect:NSZeroRect operation:NSCompositeHighlight fraction:1.0];
     
-    [NSGraphicsContext restoreGraphicsState];
 }
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
     if (self.popUpMenuController == nil) {
+        return;
+    }
+    
+    if (self.popup) {
+        [self.popup removeFromSuperview];
+        self.popup = nil;
         return;
     }
     
@@ -108,6 +106,7 @@
     rect.size.height = menuHeight;
 
     [self.superview addSubview:[self popUpMenuController].view];
+    self.popup = [self popUpMenuController].view;
     [self.popUpMenuController.view setFrame:rect];
     [self.superview setNeedsDisplay:YES];
 }

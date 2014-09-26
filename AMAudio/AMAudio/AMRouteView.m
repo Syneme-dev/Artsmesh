@@ -157,11 +157,12 @@ static CGFloat kCloseButtonRadius = 6.0;
                 AMChannel *peerChannle = [self channelAtIndex:idx];
                 NSBezierPath *bezierPath = [self bezierPathFromChannel:channel
                                                              toChannel:peerChannle];
+                bezierPath.lineWidth = 1.5;
                 [_connectionColor setStroke];
                 [bezierPath stroke];
                 if (channel.index == _selectedConnection[0] &&
                     peerChannle.index == _selectedConnection[1]) {
-                    bezierPath.lineWidth = 8.0;
+                    bezierPath.lineWidth = 6.0;
                     [_connectionColor setStroke];
                     [bezierPath stroke];
                 }

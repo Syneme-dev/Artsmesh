@@ -119,29 +119,29 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-   for (int i = 0; i < 4; i++) {
-       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-       channels[i] = channel;
-   }
-   [self associateChannels:channels
-                withDevice:@"Device1"
-                      name:@"abcdefghijklmnopqrstuvwxyz"
-                 removable:NO];
-   
-   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-   for (int i = 8; i < 12; i++) {
-       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-       channels2[i - 8] = channel;
-   }
-   [self associateChannels:channels2
-                withDevice:@"Device2"
-                      name:@"GarageBand"
-                 removable:YES];
-    
-    [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
+//   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 0; i < 4; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//       channels[i] = channel;
+//   }
+//   [self associateChannels:channels
+//                withDevice:@"Device1"
+//                      name:@"abcdefghijklmnopqrstuvwxyz"
+//                 removable:NO];
+//   
+//   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+//   for (int i = 8; i < 12; i++) {
+//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//       channels2[i - 8] = channel;
+//   }
+//   [self associateChannels:channels2
+//                withDevice:@"Device2"
+//                      name:@"GarageBand"
+//                 removable:YES];
+//    
+//    [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
 }
 
 - (void)drawRect:(NSRect)dirtyRect

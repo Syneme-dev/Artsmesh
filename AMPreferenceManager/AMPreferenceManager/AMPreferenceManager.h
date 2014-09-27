@@ -44,7 +44,7 @@
 #define Preference_User_Project             @"Synema.Asia"
 #define Preference_User_Location            @"BeiJing"
 #define Preference_User_NickName            @"NickName"
-#define Preference_User_FullName            @"Music Art"
+#define Preference_User_FullName            @"YourFullName"
 
 #define Preference_General_ChatPort         @"55523"
 #define Preference_User_PrivateIp           @""

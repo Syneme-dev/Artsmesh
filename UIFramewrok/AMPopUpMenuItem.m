@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        self.backgroupColor = [NSColor colorWithCalibratedRed:0.15 green:0.15 blue:0.15 alpha:1];
+        self.backgroupColor = [NSColor colorWithCalibratedRed:47/255.0 green:47/255.0 blue:55/255.0 alpha:1];
         self.mouseOverColor = [NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1];
         self.title = @"";
         self.textColor = [NSColor whiteColor];
@@ -36,7 +36,6 @@
     [NSGraphicsContext saveGraphicsState];
     
     //Drawing background
-    
     NSBezierPath* border = [NSBezierPath bezierPathWithRect:self.bounds];
     if (_mouseOver) {
         [self.mouseOverColor set];

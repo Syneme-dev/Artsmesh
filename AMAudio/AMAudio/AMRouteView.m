@@ -140,7 +140,8 @@ static CGFloat kCloseButtonRadius = 6.0;
 //                withDevice:@"Device2"
 //                      name:@"GarageBand"
 //                 removable:YES];
-
+//    
+//    [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -156,13 +157,13 @@ static CGFloat kCloseButtonRadius = 6.0;
                 AMChannel *peerChannle = [self channelAtIndex:idx];
                 NSBezierPath *bezierPath = [self bezierPathFromChannel:channel
                                                              toChannel:peerChannle];
-                bezierPath.lineWidth = 2.0;
+                bezierPath.lineWidth = 1.5;
                 [_connectionColor setStroke];
                 [bezierPath stroke];
                 if (channel.index == _selectedConnection[0] &&
                     peerChannle.index == _selectedConnection[1]) {
-                    bezierPath.lineWidth = 12.0;
-                    [_selectedConnectionColor setStroke];
+                    bezierPath.lineWidth = 6.0;
+                    [_connectionColor setStroke];
                     [bezierPath stroke];
                 }
             }];
@@ -374,7 +375,10 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                    alpha:1.0];
     _deviceLableColor = [NSColor grayColor];
     _selectedChannelFillColor = [NSColor lightGrayColor];
-    _connectionColor = [NSColor greenColor];
+    _connectionColor = [NSColor colorWithCalibratedRed:0.133
+                                                 green:0.34
+                                                  blue:0.137
+                                                 alpha:1.0];
     _selectedConnectionColor = [NSColor colorWithCalibratedRed:1.0
                                                          green:1.0
                                                           blue:1.0

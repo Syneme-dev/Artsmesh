@@ -219,6 +219,7 @@ AMWorldMap *worldMap;
     if (liveGroupPosY > 0 ) {
         liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
     } else {
+        liveGroupPosY = fabs(liveGroupPosY);
         liveGroupPosY += mapLat0;
     }
     if ( liveGroupPosX < 0 ) {
@@ -226,6 +227,7 @@ AMWorldMap *worldMap;
     } else {
         liveGroupPosX += mapLon0;
     }
+    NSLog(@"Relative position of liveGroup on 75/40 map is: %f, %f", liveGroupPosX, liveGroupPosY);
     
     //Find closest pixel to current live group location
     
@@ -262,7 +264,7 @@ AMWorldMap *worldMap;
         double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
         
         if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-            //NSLog(@"Pixel %i with x/y: (%d, %d) compared to livegroup x/y of: (%f,%f)", i, portX, portY, liveGroupPosX, liveGroupPosY);
+            NSLog(@"Pixel %i with x/y: (%f, %f) compared to livegroup x/y of: (%f,%f) now has shortest distance of %f", i, portX, portY, liveGroupPosX, liveGroupPosY, distToLiveGroup);
             //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
             closestDistToLiveGroup = distToLiveGroup;
             liveGroupPixel = port;

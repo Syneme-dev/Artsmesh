@@ -26,7 +26,10 @@
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
-@property (nonatomic) NSMutableArray * mergedLocations;
+@property (nonatomic) NSMutableDictionary * mergedLocations;
+@property (nonatomic) double mapXPush;
+@property (nonatomic) double portW;
+@property (nonatomic) double portH;
 @property (nonatomic) BOOL isCheckingLocation;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
@@ -55,13 +58,21 @@ AMWorldMap *worldMap;
 {
     
     //Construct WorldMap and pixel arrays for assigning buttons to view
+    
+    //Set initial variables
     worldMap = [[AMWorldMap alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
+    _mergedLocations = [[NSMutableDictionary alloc] init];
     
     _backgroundColor = [NSColor colorWithCalibratedRed:0.15
                                                  green:0.15
                                                   blue:0.15
                                                  alpha:1.0];
+    
+    _portW = self.bounds.size.width / (long)worldMap.mapWidth;
+    _portH = self.bounds.size.height / (long)worldMap.mapHeight;
+    _mapXPush = (self.bounds.size.width - (_portW * worldMap.mapWidth))/2;
+    
     int numberOfPorts = (int)worldMap.numMapTiles;
     NSMutableArray *allPorts = [NSMutableArray arrayWithCapacity:numberOfPorts];
     
@@ -83,13 +94,15 @@ AMWorldMap *worldMap;
             
             [self findLiveGroupLocation:remoteGroup];
     
+            // Note groups that are merged
             if (remoteGroup.subGroups != nil) {
                 for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
                     [self findLiveGroupLocation:remoteSubGroup];
 
-                    // At this point, note the 2 groups in some way so you can
-                    // Draw a line connecting this remoteSubGroup and the parent remoteGroup
-                    // When the buttons are being identified and marked
+                    NSDictionary *groups;
+                    [groups setValue:remoteGroup forKey:@"group"];
+                    [groups setValue:remoteSubGroup forKey:@"subGroup"];
+                    [_mergedLocations setValue:groups forKey:@"groups"];
                     
                 }
             }
@@ -107,7 +120,7 @@ AMWorldMap *worldMap;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSLog(@"draw rect called..");
+    //NSLog(@"draw rect called..");
     
     [self.backgroundColor set];
     NSRectFill(self.bounds);
@@ -121,23 +134,14 @@ AMWorldMap *worldMap;
     //Draw each port onto the canvas
     
     NSPoint portCenter;
-    int portX = 0;
-    int portY = 0;
-    float portRow = 0;
-    int portCol = 0;
-    float portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    float portH = self.bounds.size.height / (long)worldMap.mapHeight;
     
-    portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
-    
-    float xPush = (self.bounds.size.width - (portW * worldMap.mapWidth))/2;
-    //float xPush = 0.0;
+    //_portW = self.bounds.size.width / (long)worldMap.mapWidth;
     
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
         
+        // Old code to connect 2 ports with line
+        /**
         if (port.state == AMPixelStateConnected && port.index < port.peerIndex) {
             NSBezierPath *bezierPath = [NSBezierPath bezierPath];
             [bezierPath moveToPoint:[self centerOfPort:port.index]];
@@ -157,21 +161,13 @@ AMWorldMap *worldMap;
                 [bezierPath stroke];
             }
         }
+        **/
         
-        // Find position of current Tile on the LiveMapView
-        
-        portRow = (portPixelPos / (float)worldMap.mapWidth);
-        if (portRow != (int)portRow) {
-            portRow = (int)portRow + 1;
-        }
-        portCol = portPixelPos % worldMap.mapWidth;
-        if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
-        portX = ((portW * portCol) - (portW/2)) + xPush;
-        portY = (portH * portRow) - (portH/2);
-        portCenter = NSMakePoint(portX, portY);
-        
+        portCenter = [self getPortCenter:port];
         //[port drawWithCenterAt:[self centerOfPort:i]];
+        
         [port drawWithCenterAt:portCenter];
+        
         
     }
     
@@ -183,12 +179,21 @@ AMWorldMap *worldMap;
         AMPixel *point1;
         AMPixel *point2;
         
+        AMLiveGroup *group = [groups valueForKey:@"group"];
+        AMLiveGroup *remoteGroup = [groups valueForKey:@"remoteGroup"];
+        
         // Find port associated with each group
         for (int i = 0; i < self.ports.count; i++) {
             AMPixel *port = self.ports[i];
             if ( port.location != nil ) {
                 // port location = group 1 location, set point1 = to port
                 // else if location = group 2 location, set point 2 = to port
+                if (port.location == group.location) {
+                    point1 = port;
+                }
+                else if (port.location == remoteGroup.location) {
+                    point2 = port;
+                }
             }
         }
         
@@ -196,17 +201,49 @@ AMWorldMap *worldMap;
         
         
         NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-        /**
-        [bezierPath moveToPoint:[self centerOfPort:peer]];
-        [bezierPath curveToPoint:[self centerOfPort:port.peerIndex]
-                   controlPoint1:_center
-                   controlPoint2:_center];
-         **/
+    
+        [bezierPath moveToPoint:[self getPortCenter:point1]];
+        [bezierPath curveToPoint:[self getPortCenter:point2]
+                   controlPoint1:center
+                   controlPoint2:center];
+        bezierPath.lineWidth = 2.0;
+        [[NSColor grayColor] setStroke];
+        [bezierPath stroke];
+        
     }
     
 }
 
+- (NSPoint)getPortCenter:(AMPixel *)port {
+    
+    //NSUInteger portPixelPos = [self.ports indexOfObjectIdenticalTo:port];
+    NSUInteger portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:port.index] integerValue];
+    
+    NSPoint portCenter;
+    int portX = 0;
+    int portY = 0;
+    float portRow = 0;
+    NSUInteger portCol = 0;
+    
+    _portW = self.bounds.size.width / (long)worldMap.mapWidth;
+    float portH = (((long)worldMap.mapHeight * _portW )/(long)worldMap.mapWidth) *1.75;
+    
+    // Find position of current Pixel on the LiveMapView
+    
+    portRow = (portPixelPos / (float)worldMap.mapWidth);
+    if (portRow != (int)portRow) {
+        portRow = (int)portRow + 1;
+    }
+    portCol = portPixelPos % worldMap.mapWidth;
+    if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
+    portX = ((_portW * portCol) - (_portW/2)) + _mapXPush;
+    portY = (portH * portRow) - (portH/2);
+    portCenter = NSMakePoint(portX, portY);
+    
+    return portCenter;
+}
 
+/**
 - (NSPoint)centerOfPort:(NSInteger)portIndex
 {
     NSAssert(portIndex >= 0 && portIndex < self.ports.count, @"invalid argument");
@@ -217,7 +254,7 @@ AMWorldMap *worldMap;
                        _radius * sin(radian) + _center.y);
     
 }
-
+**/
 
 
 - (BOOL)isFlipped{
@@ -279,8 +316,6 @@ AMWorldMap *worldMap;
     float portY = 0;
     float portRow = 0;
     int portCol = 0;
-    //double portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    //double portH = self.bounds.size.height / (long)worldMap.mapHeight;
     double portW = 1;
     double portH = worldMap.mapHeight / worldMap.mapWidth;
     

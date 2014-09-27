@@ -83,15 +83,15 @@
     NSMutableArray* allUserList =[[NSMutableArray alloc] init];
     
     AMCoreData* dataStore = [AMCoreData shareInstance];
-    NSArray* myLocalGroupMem = dataStore.myLocalLiveGroup.users;
-    [allUserList addObjectsFromArray:myLocalGroupMem];
+    //NSArray* myLocalGroupMem = dataStore.myLocalLiveGroup.users;
+    //[allUserList addObjectsFromArray:myLocalGroupMem];
     
     AMLiveUser* mySelf = dataStore.mySelf;
     if (mySelf.isOnline){
         for (AMLiveGroup* remoteGroup in dataStore.remoteLiveGroups) {
             NSString* mergedGroupId = dataStore.mergedGroupId;
             if ([remoteGroup.groupId isEqualToString:mergedGroupId]){
-                [allUserList addObjectsFromArray:remoteGroup.users];
+                [allUserList addObjectsFromArray:[remoteGroup usersIncludeSubGroup]];
             }
         }
     }
@@ -169,11 +169,28 @@
         self.peerSelfDefine.stringValue = @"";
     }else{
         [self.peerSelfDefine setEnabled:NO];
+        
+        AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+        NSMutableArray* allusers = [[NSMutableArray alloc] init];
+        
+        if (!mySelf.isOnline) {
+            [allusers addObjectsFromArray: [AMCoreData shareInstance].myLocalLiveGroup.users];
+        }else{
+            NSString* mergeGroupId = [AMCoreData shareInstance].mergedGroupId;
+            for (AMLiveGroup* remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+                if([remoteGroup.groupId isEqualToString:mergeGroupId]){
+                    [allusers addObjectsFromArray: [remoteGroup usersIncludeSubGroup]];
+                }
+            }
+        }
     
-        NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
-        for (AMLiveUser* user in myGroupMem) {
+        for (AMLiveUser* user in allusers) {
             if([user.nickName isEqualToString:sender.selectedItem.title]){
-                self.peerSelfDefine.stringValue = user.privateIp;
+                if(!mySelf.isOnline){
+                    self.peerSelfDefine.stringValue = user.privateIp;
+                }else{
+                    self.peerSelfDefine.stringValue = user.publicIp;
+                }
             }
         }
     }

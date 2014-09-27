@@ -71,7 +71,7 @@
     NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
     for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
         if ([g.groupId isEqualToString:mergedGroupId]) {
-            _users = g.users;
+            _users = [g usersIncludeSubGroup];
         }
     }
     

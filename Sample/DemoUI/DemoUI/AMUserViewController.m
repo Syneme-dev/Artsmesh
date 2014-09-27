@@ -540,7 +540,7 @@
     //TODO:
     
     [[AMPreferenceManager standardUserDefaults]
-     setObject:self.nickNameField.stringValue forKey:Preference_User_FullName];
+     setObject:self.fullNameField.stringValue forKey:Preference_User_FullName];
 }
 
 - (IBAction)projectChanged:(id)sender

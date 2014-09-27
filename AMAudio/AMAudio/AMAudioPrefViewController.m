@@ -63,6 +63,9 @@
     self.sampleRateBox.delegate = self;
     self.bufferSizeBox.delegate = self;
     self.hogModeCheck.delegate = self;
+    self.compensationCheck.delegate = self;
+    self.midiCheck.delegate = self;
+    self.portMornitingCheck.delegate = self;
     
     [self loadPrefs];
     [self.saveBtn setEnabled:NO];
@@ -356,28 +359,45 @@
 {
     [self.driverBox selectItemAtIndex:0];
     
-    AMAudioDevice* inputDev = [_devManager findDevByUID:self.jackManager.jackCfg.inputDevUID];
-    [self.inputDevBox selectItemWithTitle:inputDev.devName];
+    NSString* inputDev = [[AMPreferenceManager standardUserDefaults]
+                          stringForKey:Preference_Jack_InputDevice];
+    [self.inputDevBox selectItemWithTitle:inputDev];
     
-    AMAudioDevice* outputDev = [_devManager findDevByUID:self.jackManager.jackCfg.outputDevUID];
-    [self.outputDevBox selectItemWithTitle:outputDev.devName];
+    NSString* outputDev = [[AMPreferenceManager standardUserDefaults]
+                           stringForKey:Preference_Jack_OutputDevice];
+    [self.outputDevBox selectItemWithTitle:outputDev];
     
-    NSString* sampleRateStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.sampleRate];
-    [self.sampleRateBox selectItemWithTitle:sampleRateStr];
+    NSString* sampleRate = [[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Jack_SampleRate];
+    [self.sampleRateBox selectItemWithTitle:sampleRate];
     
-    NSString* bufferSizeStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.bufferSize];
-    [self.bufferSizeBox selectItemWithTitle:bufferSizeStr];
+    NSString* bufferSize = [[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Jack_BufferSize];
+    [self.bufferSizeBox selectItemWithTitle:bufferSize];
     
-    NSString* inChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.interfaceInputChannel];
-    [self.interfaceInChansBox selectItemWithTitle:inChansStr];
+    NSString* inChanns = [[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Jack_InterfaceInChans];
+    [self.interfaceInChansBox selectItemWithTitle:inChanns];
     
-    NSString* outChansStr = [[NSString alloc ] initWithFormat:@"%d", self.jackManager.jackCfg.interfaceOutputChannel];
-    [self.interfaceOutChansBox selectItemWithTitle:outChansStr];
+    NSString* outChanns = [[AMPreferenceManager standardUserDefaults]
+                          stringForKey:Preference_Jack_InterfaceOutChanns];
+    [self.interfaceOutChansBox selectItemWithTitle:outChanns];
     
-    [self.hogModeCheck setChecked:self.jackManager.jackCfg.hogMode];
-    [self.compensationCheck setChecked:self.jackManager.jackCfg.clockDriftCompensation];
-    [self.portMornitingCheck setChecked:self.jackManager.jackCfg.systemPortMonitoring];
-    [self.midiCheck setChecked:self.jackManager.jackCfg.activeMIDI];
+    BOOL hogMode = [[AMPreferenceManager standardUserDefaults]
+                           boolForKey:Preference_Jack_HogMode];
+    [self.hogModeCheck setChecked:hogMode];
+    
+    BOOL compensation = [[AMPreferenceManager standardUserDefaults]
+                    boolForKey:Preference_Jack_ClockDriftComp];
+    [self.compensationCheck setChecked:compensation];
+    
+    BOOL portMorniting = [[AMPreferenceManager standardUserDefaults]
+                         boolForKey:Preference_Jack_PortMoniting];
+    [self.portMornitingCheck setChecked:portMorniting];
+    
+    BOOL midi = [[AMPreferenceManager standardUserDefaults]
+                          boolForKey:Preference_Jack_ActiveMIDI];
+    [self.midiCheck setChecked:midi];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

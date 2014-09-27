@@ -28,6 +28,12 @@
 @property (weak) IBOutlet NSImageView *userStatusIcon;
 @property (weak) IBOutlet NSImageView *groupStatusIcon;
 @property (weak) IBOutlet AMFoundryFontView *groupNameField;
+@property (weak) IBOutlet AMFoundryFontView *nickNameField;
+@property (weak) IBOutlet AMFoundryFontView *fullNameField;
+@property (weak) IBOutlet AMFoundryFontView *projectField;
+@property (weak) IBOutlet AMFoundryFontView *locationField;
+@property (weak) IBOutlet AMFoundryFontView *affiliationField;
+@property (weak) IBOutlet AMFoundryFontView *biographyField;
 
 @property NSPopover *myPopover;
 
@@ -69,6 +75,7 @@
     
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
+    [self loadPreference];
     [self loadUserAvatar];
     [self loadGroupAvatar];
 }
@@ -351,50 +358,6 @@
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
-- (IBAction)nicknameEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.nickName = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)locationEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.location = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)statusMessageEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.description = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)domainEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.domain = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
 -(void)onChecked:(AMCheckBoxView*)sender
 {
     if(sender.checked){
@@ -459,6 +422,190 @@
 -(void)popoverDidClose:(NSNotification *)notification
 {
     [self loadUserAvatar];
+}
+
+-(void)loadPreference
+{
+    [self loadNickName];
+    [self loadFullName];
+    [self loadProject];
+    [self loadLocation];
+    [self loadAffiliation];
+    [self loadBiography];
+}
+
+-(void)loadNickName
+{
+    NSString* defaultNickName = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_User_NickName];
+    if (defaultNickName == nil) {
+        self.nickNameField.stringValue = [NSHost currentHost].name;
+    }else if ([defaultNickName isEqualToString:@""]) {
+        self.nickNameField.stringValue = [NSHost currentHost].name;
+    }else{
+        self.nickNameField.stringValue = defaultNickName;
+    }
+}
+
+-(void)loadFullName
+{
+    NSString* defaultFullName = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_User_FullName];
+    if (defaultFullName == nil) {
+        self.fullNameField.stringValue = @"YourFullName";
+    }else if ([defaultFullName isEqualToString:@""]) {
+        self.fullNameField.stringValue = @"YourFullName";
+    }else{
+        self.fullNameField.stringValue = defaultFullName;
+    }
+}
+
+-(void)loadProject
+{
+    NSString* defaultProject = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_User_Project];
+    if (defaultProject == nil) {
+        self.projectField.stringValue = @"YourProject";
+    }else if ([defaultProject isEqualToString:@""]) {
+        self.projectField.stringValue = @"YourProject";
+    }else{
+        self.projectField.stringValue = defaultProject;
+    }
+}
+
+-(void)loadLocation
+{
+    NSString* defaultLocation = [[AMPreferenceManager standardUserDefaults]
+                                stringForKey:Preference_User_Location];
+    if (defaultLocation == nil) {
+        self.locationField.stringValue = @"YourLocation";
+    }else if ([defaultLocation isEqualToString:@""]) {
+        self.locationField.stringValue = @"YourLocation";
+    }else{
+        self.locationField.stringValue = defaultLocation;
+    }
+}
+
+-(void)loadAffiliation
+{
+    NSString* defaultAffiliation = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_User_Domain];
+    if (defaultAffiliation == nil) {
+        self.affiliationField.stringValue = @"YourAffiliation";
+    }else if ([defaultAffiliation isEqualToString:@""]) {
+        self.affiliationField.stringValue = @"YourAffiliation";
+    }else{
+        self.affiliationField.stringValue = defaultAffiliation;
+    }
+}
+
+-(void)loadBiography
+{
+    NSString* defaultBio = [[AMPreferenceManager standardUserDefaults]
+                                    stringForKey:Preference_User_Description];
+    if (defaultBio == nil) {
+        self.biographyField.stringValue = @"YourBiography";
+    }else if ([defaultBio isEqualToString:@""]) {
+        self.biographyField.stringValue = @"YourBiography";
+    }else{
+        self.biographyField.stringValue = defaultBio;
+    }
+}
+
+- (IBAction)nickNameChanged:(id)sender
+{
+    NSString* nickName = self.nickNameField.stringValue;
+    if ([nickName isEqualToString:@""]) {
+        self.nickNameField.stringValue = [NSHost currentHost].name;
+    }
+    
+    //update AMCoreData
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.nickName = nickName;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    //update Preference
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.nickNameField.stringValue forKey:Preference_User_NickName];
+}
+
+- (IBAction)fullNameChanged:(id)sender
+{
+    NSString* fullName = self.fullNameField.stringValue;
+    if ([fullName isEqualToString:@""]) {
+        self.fullNameField.stringValue = @"YourFullName";
+    }
+    
+    //update AMCoreData
+    //TODO:
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.nickNameField.stringValue forKey:Preference_User_FullName];
+}
+
+- (IBAction)projectChanged:(id)sender
+{
+    NSString* project = self.projectField.stringValue;
+    if ([project isEqualToString:@""]) {
+        self.projectField.stringValue = @"YourProject";
+    }
+    
+    //update AMCoreData
+    //TODO:
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.projectField.stringValue forKey:Preference_User_Project];
+}
+
+- (IBAction)locationChanged:(id)sender
+{
+    NSString* location = self.locationField.stringValue;
+    if ([location isEqualToString:@""]) {
+        self.locationField.stringValue = @"YourLocation";
+    }
+    
+    //update AMCoreData
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.location = location;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    //update Preference
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.locationField.stringValue forKey:Preference_User_Location];
+}
+
+- (IBAction)affiliationChanged:(id)sender
+{
+    NSString* affilication = self.affiliationField.stringValue;
+    if ([affilication isEqualToString:@""]) {
+        self.affiliationField.stringValue = @"YourAffiliation";
+    }
+    
+    //update AMCoreData
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.domain = affilication;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+    //update Preference
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.affiliationField.stringValue forKey:Preference_User_Domain];
+}
+
+- (IBAction)biographyChanged:(id)sender
+{
+    NSString* biography = self.biographyField.stringValue;
+    if ([biography isEqualToString:@""]) {
+        self.biographyField.stringValue = @"YourBiography";
+    }
+    
+    //update AMCoreData
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    mySelf.description = biography;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+     //update Preference
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.biographyField.stringValue forKey:Preference_User_Description];
 }
 
 @end

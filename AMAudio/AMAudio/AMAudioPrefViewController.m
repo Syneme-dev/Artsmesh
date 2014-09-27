@@ -23,12 +23,6 @@
 @property (weak) IBOutlet AMCheckBoxView *compensationCheck;
 @property (weak) IBOutlet AMCheckBoxView *portMornitingCheck;
 @property (weak) IBOutlet AMCheckBoxView *midiCheck;
-
-
-//@property (weak) IBOutlet NSButton *hogModeCheck;
-//@property (weak) IBOutlet NSButton *compensationCheck;
-//@property (weak) IBOutlet NSButton *portMornitingCheck;
-//@property (weak) IBOutlet NSButton *midiCheck;
 @property (weak) IBOutlet AMPopUpView *interfaceInChansBox;
 @property (weak) IBOutlet AMPopUpView *interfaceOutChansBox;
 @property (weak) IBOutlet NSButton *saveBtn;
@@ -62,6 +56,8 @@
     self.driverBox.delegate = self;
     self.sampleRateBox.delegate = self;
     self.bufferSizeBox.delegate = self;
+    self.interfaceInChansBox.delegate = self;
+    self.interfaceOutChansBox.delegate = self;
     self.hogModeCheck.delegate = self;
     self.compensationCheck.delegate = self;
     self.midiCheck.delegate = self;
@@ -142,6 +138,8 @@
     }else if([sender isEqual:self.sampleRateBox]){
         [self comboChanged:sender];
     }else if([sender isEqual:self.bufferSizeBox]){
+        [self comboChanged:sender];
+    }else{
         [self comboChanged:sender];
     }
 }

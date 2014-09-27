@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, AMPixelState) {
 @property(nonatomic) NSColor *dotColor;
 @property(nonatomic) NSColor *outerCircleColor;
 @property(nonatomic) NSColor *innerCircleColor;
+@property(nonatomic) NSString *location;
 
 // designated initializer
 - (instancetype)initWithIndex:(NSInteger)index;

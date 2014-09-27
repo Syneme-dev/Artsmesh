@@ -26,6 +26,7 @@
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
+@property (nonatomic) NSMutableArray * mergedLocations;
 @property (nonatomic) BOOL isCheckingLocation;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
@@ -82,6 +83,16 @@ AMWorldMap *worldMap;
             
             [self findLiveGroupLocation:remoteGroup];
     
+            if (remoteGroup.subGroups != nil) {
+                for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+                    [self findLiveGroupLocation:remoteSubGroup];
+
+                    // At this point, note the 2 groups in some way so you can
+                    // Draw a line connecting this remoteSubGroup and the parent remoteGroup
+                    // When the buttons are being identified and marked
+                    
+                }
+            }
         }
     } else {
     
@@ -164,7 +175,37 @@ AMWorldMap *worldMap;
         
     }
     
+    // Draw each line connecting ports
+    for ( NSArray *groups in self.mergedLocations) {
+        NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
+                                  NSHeight(self.bounds) / 16.0);
+        NSPoint center = NSMakePoint(NSMidX(rect), NSMidY(rect));
+        AMPixel *point1;
+        AMPixel *point2;
+        
+        // Find port associated with each group
+        for (int i = 0; i < self.ports.count; i++) {
+            AMPixel *port = self.ports[i];
+            if ( port.location != nil ) {
+                // port location = group 1 location, set point1 = to port
+                // else if location = group 2 location, set point 2 = to port
+            }
+        }
+        
+        //calculate center point of current port on live map (maybe move this to function)
+        
+        
+        NSBezierPath *bezierPath = [NSBezierPath bezierPath];
+        /**
+        [bezierPath moveToPoint:[self centerOfPort:peer]];
+        [bezierPath curveToPoint:[self centerOfPort:port.peerIndex]
+                   controlPoint1:_center
+                   controlPoint2:_center];
+         **/
+    }
+    
 }
+
 
 - (NSPoint)centerOfPort:(NSInteger)portIndex
 {
@@ -178,6 +219,7 @@ AMWorldMap *worldMap;
 }
 
 
+
 - (BOOL)isFlipped{
     return YES;
 }
@@ -188,11 +230,11 @@ AMWorldMap *worldMap;
     if (myGroup.location) {
         location = myGroup.location;
     }
-    [self getCoordinates:location];
+    [self getCoordinates:myGroup];
 
 }
 
-- (void)markLiveGroupLocation {
+- (void)markLiveGroupLocation:(AMLiveGroup *)theGroup {
 
     if ( [_localGroupLoc count] > 0 ) {
     //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
@@ -201,7 +243,7 @@ AMWorldMap *worldMap;
     // Use this when data available in AMCoreData if ( myGroup.latitude && myGroup.longitude ) {
     
         //lat = [myGroup.latitude floatValue];lon = [myGroup.longitude floatValue];
-        NSLog(@"found latitude was %f", [[_localGroupLoc objectForKey:@"latitude"] floatValue]);
+        //NSLog(@"found latitude was %f", [[_localGroupLoc objectForKey:@"latitude"] floatValue]);
         lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
         lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         //NSLog(@"lat/lon = %f/%f", lat, lon);
@@ -227,7 +269,7 @@ AMWorldMap *worldMap;
     } else {
         liveGroupPosX += mapLon0;
     }
-    NSLog(@"Relative position of liveGroup on 75/40 map is: %f, %f", liveGroupPosX, liveGroupPosY);
+    //NSLog(@"Relative position of liveGroup on 75/40 map is: %f, %f", liveGroupPosX, liveGroupPosY);
     
     //Find closest pixel to current live group location
     
@@ -264,7 +306,7 @@ AMWorldMap *worldMap;
         double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
         
         if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-            NSLog(@"Pixel %i with x/y: (%f, %f) compared to livegroup x/y of: (%f,%f) now has shortest distance of %f", i, portX, portY, liveGroupPosX, liveGroupPosY, distToLiveGroup);
+            //NSLog(@"Pixel %i with x/y: (%f, %f) compared to livegroup x/y of: (%f,%f) now has shortest distance of %f", i, portX, portY, liveGroupPosX, liveGroupPosY, distToLiveGroup);
             //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
             closestDistToLiveGroup = distToLiveGroup;
             liveGroupPixel = port;
@@ -272,11 +314,14 @@ AMWorldMap *worldMap;
         
         
     }
+    liveGroupPixel.location = theGroup.location;
     liveGroupPixel.state = AMPixelStateConnected;
     }
 }
 
-- (void)getCoordinates:(NSString *)searchTerm{
+- (void)getCoordinates:(AMLiveGroup *)currentGroup{
+    NSString *searchTerm = currentGroup.location;
+    
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     [geoCoder geocodeAddressString:searchTerm
                  completionHandler:^(NSArray* placemarks, NSError* error){
@@ -291,7 +336,7 @@ AMWorldMap *worldMap;
                          [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.latitude] forKey:@"latitude"];
                          [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.longitude] forKey:@"longitude"];
                          
-                         [self markLiveGroupLocation];
+                         [self markLiveGroupLocation:currentGroup];
                          
                          [self setNeedsDisplay:YES];
                      }

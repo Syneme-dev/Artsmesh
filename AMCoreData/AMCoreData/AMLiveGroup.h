@@ -33,8 +33,10 @@
 @property (nonatomic) NSString* password;
 @property (nonatomic) NSArray* users;
 @property (nonatomic) NSArray* messages;
+@property (nonatomic) NSArray* subGroups;
 
 -(BOOL)isMeshed;
 -(AMLiveUser*)leader;
+-(NSArray*)usersIncludeSubGroup;
 
 @end

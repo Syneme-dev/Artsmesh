@@ -86,6 +86,7 @@
     });
     
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    [AMCoreData shareInstance].mergedGroupId = myGroup.groupId;
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];

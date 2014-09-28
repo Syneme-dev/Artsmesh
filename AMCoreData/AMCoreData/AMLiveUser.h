@@ -12,6 +12,7 @@
 
 //serialize properties
 @property (nonatomic) NSString* userid;
+@property (nonatomic) NSString* fullName;
 @property (nonatomic) NSString* nickName;
 @property (nonatomic) NSString* domain;
 @property (nonatomic) NSString* location;

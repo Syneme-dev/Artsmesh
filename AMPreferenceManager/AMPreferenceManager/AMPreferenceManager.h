@@ -20,12 +20,12 @@
 
 //UserInfo
 #define Preference_Key_User_NickName            @"Preference_Key_User_NickName"
-#define Preference_Key_User_Domain              @"Preference_Key_User_Domain"
+#define Preference_Key_User_Affiliation         @"Preference_Key_User_Affiliation"
 #define Preference_Key_User_Location            @"Preference_Key_User_Location"
 #define Preference_Key_User_FullName            @"Preference_Key_User_FullName"
 #define Preference_Key_User_Description         @"Preference_Key_User_Description"
-#define Preference_Key_User_Project             @"Preference_Key_User_Project"
 #define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
+
 #define Preference_Key_Cluster_Name             @"Preference_Key_Cluster_Name"
 #define Preference_Key_Cluster_Description      @"Preference_Key_Cluster_Description"
 #define Preference_Key_Cluster_FullName         @"Preference_Key_Cluster_FullName"
@@ -38,10 +38,9 @@
 #define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
 //default
-#define Preference_User_Domain              @"CCOM"
+#define Preference_User_Affiliation         @"CCOM"
 #define Preference_User_Description         @"This is my description."
 #define Preference_User_Status              @"Online"
-#define Preference_User_Project             @"Synema.Asia"
 #define Preference_User_Location            @"BeiJing"
 #define Preference_User_NickName            @"NickName"
 #define Preference_User_FullName            @"YourFullName"

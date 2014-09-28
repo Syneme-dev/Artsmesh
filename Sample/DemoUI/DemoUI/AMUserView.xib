@@ -37,10 +37,11 @@
                     <tabViewItems>
                         <tabViewItem label="Tab" identifier="1" id="qZ2-YF-N8B">
                             <view key="view" ambiguous="YES" id="09e-65-pFX" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="98" y="-32" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="224" width="154" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Pk6-Yh-nnY"/>
                                             <constraint firstAttribute="width" constant="150" id="rJv-Dm-uTH"/>
@@ -52,10 +53,11 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="nickNameChanged:" target="-2" id="0Y4-xU-BSq"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_NickName" id="OcR-xw-1JL"/>
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xza-bX-mVV" userLabel="fullname" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="98" y="-53" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="203" width="154" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="FullName" id="13X-0n-HwG" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -63,10 +65,11 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="fullNameChanged:" target="-2" id="0vV-t3-Jel"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_FullName" id="1le-nP-Dtl"/>
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0SY-2D-fk2" userLabel="domain" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="-78" width="154" height="22"/>
+                                        <rect key="frame" x="99" y="178" width="154" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Affiliation" id="rar-Fd-kzJ" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -74,10 +77,11 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="affiliationChanged:" target="-2" id="BxY-ef-0Wo"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Affiliation" id="8Qc-WX-j6Q"/>
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2g-yj-0FH" userLabel="location" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="98" y="-98" width="154" height="22"/>
+                                        <rect key="frame" x="98" y="158" width="154" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="fGa-3A-VhF" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -85,10 +89,11 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="locationChanged:" target="-2" id="ufy-QR-ErS"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Location" id="EUu-4f-Zoq"/>
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
-                                        <rect key="frame" x="0.0" y="-90" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="166" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="Czn-gZ-wlh"/>
                                             <constraint firstAttribute="height" constant="80" id="evf-LT-KGg"/>
@@ -96,11 +101,11 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_user_h" id="sc6-if-94S"/>
                                     </imageView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-44-mtN" userLabel="statusIcon">
-                                        <rect key="frame" x="10" y="-186" width="10" height="10"/>
+                                        <rect key="frame" x="10" y="70" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="user_unmeshed_icon" id="JHP-5W-JGn"/>
                                     </imageView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
-                                        <rect key="frame" x="100" y="-152" width="26" height="26"/>
+                                        <rect key="frame" x="100" y="104" width="26" height="26"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="Kul-MC-1jE">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -110,7 +115,7 @@
                                         </connections>
                                     </button>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6" userLabel="description" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="28" y="-251" width="264" height="75"/>
+                                        <rect key="frame" x="28" y="5" width="264" height="75"/>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="" id="msF-DJ-hzo" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -118,10 +123,11 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="biographyChanged:" target="-2" id="s6P-ML-o3v"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Description" id="wLc-ha-G6R"/>
                                         </connections>
                                     </textField>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIb-SJ-ZZa" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="15" y="-116" width="62" height="22"/>
+                                        <rect key="frame" x="15" y="140" width="62" height="22"/>
                                     </customView>
                                 </subviews>
                                 <constraints>
@@ -271,9 +277,19 @@
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="leading" secondItem="WOP-gG-W83" secondAttribute="trailing" constant="6" id="fax-El-rZ7"/>
                 <constraint firstItem="CTb-fs-kgV" firstAttribute="top" secondItem="1" secondAttribute="top" constant="4" id="qK2-ls-i6e"/>
             </constraints>
-            <point key="canvasLocation" x="-506" y="53"/>
+            <point key="canvasLocation" x="-855" y="68"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
+        <textField verticalHuggingPriority="750" id="bzc-zf-E2u">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4z0-j4-zcQ">
+                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="fLD-rc-vke"/>
+                <font key="font" metaFont="system"/>
+                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+            </textFieldCell>
+        </textField>
     </objects>
     <resources>
         <image name="SideBar_user_h" width="40" height="40"/>

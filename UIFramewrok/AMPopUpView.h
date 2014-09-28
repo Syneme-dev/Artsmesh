@@ -11,7 +11,6 @@
 
 @interface AMPopUpView : NSControl
 
-@property(nonatomic) NSView *popup;
 @property NSFont* font;
 @property NSColor* textColor;
 @property NSColor* backgroupColor;

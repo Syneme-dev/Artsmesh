@@ -125,11 +125,12 @@
 
 -(void)itemSelected:(NSString *)itemTitle
 {
+    NSString* oldTitle = _title;
     _title = itemTitle;
     [self removePopUpMenu];
     [self setNeedsDisplay:YES];
     
-    if (self.delegate) {
+    if (self.delegate && [oldTitle isNotEqualTo:_title]) {
         [self.delegate itemSelected:self];
     }
 }
@@ -202,6 +203,12 @@
 {
     [[self popUpMenuController] selectItemAtInedex:index];
 }
+
+-(void)selectItemWithTitle:(NSString*)title
+{
+    [[self popUpMenuController] selectItemWithTitle:title];
+}
+
 
 -(NSUInteger)itemCount
 {

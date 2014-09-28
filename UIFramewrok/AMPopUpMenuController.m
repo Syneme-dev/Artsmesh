@@ -106,6 +106,15 @@
     }
 }
 
+-(void)selectItemWithTitle:(NSString*)title
+{
+    for(AMPopUpMenuItem* item in [self menuItems]){
+        if ([item.title isEqualToString:title]) {
+            [item performSelector:@selector(mouseDown:) withObject:nil];
+        }
+    }
+}
+
 -(NSUInteger)itemCount
 {
     return [[self menuItems] count];

@@ -84,7 +84,9 @@
         remoteGroupController.isExpanded = [self isControllerExpanded:remoteGroup.groupId];
         remoteGroupController.childrenNodeItem = [[NSMutableArray alloc] init];
         
-        for (AMLiveUser* user in remoteGroup.users){
+        
+        NSArray* allUsers = [remoteGroup usersIncludeSubGroup];
+        for (AMLiveUser* user in allUsers){
             AMGroupPanelUserCellController* remoteUserController = [[AMGroupPanelUserCellController alloc] initWithNibName:@"AMGroupPanelUserCellController" bundle:nil];
             
             remoteUserController.group = remoteGroup;

@@ -112,7 +112,7 @@
         
         for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
             if ([g.groupId isEqualToString:mergedGroupId]) {
-                newUserlist = g.users;
+                newUserlist = [g usersIncludeSubGroup];
             }
         }
    

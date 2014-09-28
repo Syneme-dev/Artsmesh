@@ -28,6 +28,7 @@
 -(void)addItemsWithTitles:(NSArray*)titles;
 
 -(void)selectItemAtIndex:(NSUInteger)index;
+-(void)selectItemWithTitle:(NSString*)title;
 -(NSUInteger)itemCount;
 
 @end

@@ -389,40 +389,61 @@
         
         NSDictionary* result = (NSDictionary*)objects;
         _userlistVersion = [[result objectForKey:@"Version"] intValue];
-        NSDictionary* data = [result valueForKey:@"Data"];
-        NSArray* groups = [data valueForKey:@"SubGroups"];
+        NSDictionary* rootGroup = [result valueForKey:@"Data"];
         
-        NSMutableArray* groupArray = [[NSMutableArray alloc] init];
+        NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
+        NSMutableArray* groupList = [[NSMutableArray alloc] init];
         for (int i =0; i < groups.count; i++){
             if (![groups[i]isKindOfClass:[NSDictionary class]]) {
                 continue;
             }
             
-            NSDictionary* dtoGroup = (NSDictionary*)groups[i];
-            NSDictionary* groupData = dtoGroup[@"GroupData"];
-            if (![groupData isKindOfClass:[NSDictionary class]]) {
-                continue;
-            }
-            
-            AMLiveGroup* newGroup = [AMLiveGroup AMGroupFromDict:groupData];
-            
-            BOOL isMySelfIn = NO;
-            newGroup.users = [self getAllUserFromGroup:groups[i] isMySelfIn:&isMySelfIn];
-            if (isMySelfIn == YES) {
-                [AMCoreData shareInstance].mergedGroupId = newGroup.groupId;
-            }
-            
-            [groupArray addObject: newGroup];
+            NSDictionary* groupData = (NSDictionary*)groups[i];
+            AMLiveGroup* newGroup = [self parseGroup:groupData];
+            [groupList addObject:newGroup];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [AMCoreData shareInstance].remoteLiveGroups = groupArray;
+            [AMCoreData shareInstance].remoteLiveGroups = groupList;
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         });
     };
     
     [_httpRequestQueue addOperation:req];
 }
+
+-(AMLiveGroup*)parseGroup:(NSDictionary*)groupData
+{
+    //part group meta
+    NSDictionary* groupDict = groupData[@"GroupData"];
+    AMLiveGroup* newGroup = [AMLiveGroup AMGroupFromDict:groupDict];
+    
+    //parse native users
+    NSMutableArray* users = [[NSMutableArray alloc] init];
+    NSArray* userDicts = groupData[@"Users"];
+    if ([userDicts isKindOfClass:[NSArray class]]) {
+        for(NSDictionary* userDict in userDicts){
+            AMLiveUser* newUser = [AMLiveUser AMUserFromDict:userDict];
+            [users addObject:newUser];
+        }
+    }
+    newGroup.users = users;
+
+    //parse subgroups
+    NSMutableArray* subgroups = [[NSMutableArray alloc] init];
+    NSArray* subGroupsData = groupData[@"SubGroups"];
+    if ([subGroupsData isKindOfClass:[NSArray class]]) {
+        for(NSDictionary* subGroupData in subGroupsData){
+            AMLiveGroup* sub = [self parseGroup:subGroupData];
+            [subgroups addObject:sub];
+        }
+    }
+    
+    newGroup.subGroups = subgroups;
+    
+    return newGroup;
+}
+
 
 -(NSArray*)getAllUserFromGroup:(NSDictionary*)group isMySelfIn:(BOOL*)mySelfIn{
     

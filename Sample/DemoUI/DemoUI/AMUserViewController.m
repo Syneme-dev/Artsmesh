@@ -180,21 +180,11 @@
 
 -(void)mySelfChanging
 {
-//    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-//    if(mySelf.isOnline == YES) {
-//        return;
-//    }
-    
     [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
 }
 
 -(void)myselfChanged
 {
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == YES) {
-        return;
-    }
-    
     [self loadUserAvatar];
     [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
 }

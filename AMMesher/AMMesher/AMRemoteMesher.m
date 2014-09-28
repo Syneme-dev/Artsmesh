@@ -401,6 +401,7 @@
             
             NSDictionary* groupData = (NSDictionary*)groups[i];
             AMLiveGroup* newGroup = [self parseGroup:groupData];
+            newGroup.superGroup = nil;
             [groupList addObject:newGroup];
         }
         
@@ -436,6 +437,7 @@
     if ([subGroupsData isKindOfClass:[NSArray class]]) {
         for(NSDictionary* subGroupData in subGroupsData){
             AMLiveGroup* sub = [self parseGroup:subGroupData];
+            sub.superGroup = newGroup;
             [subgroups addObject:sub];
         }
     }

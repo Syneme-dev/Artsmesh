@@ -109,17 +109,16 @@
     }else{
         NSArray* newUserlist = nil;
         
-        NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
-        if (mergedGroupId != nil && ![mergedGroupId isEqualToString:@""]) {
-            
-            for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
-                if ([g.groupId isEqualToString:mergedGroupId]) {
-                    newUserlist = [g usersIncludeSubGroup];
-                    break;
-                }
-            }
+        if(myGroup.superGroup == nil){
+            newUserlist = [myGroup usersIncludeSubGroup];
         }else{
-            newUserlist = [[AMCoreData shareInstance].myLocalLiveGroup usersIncludeSubGroup];
+            
+            AMLiveGroup* root = myGroup;
+            while (root.superGroup != nil) {
+                root = root.superGroup;
+            }
+            
+            newUserlist = [root usersIncludeSubGroup];
         }
         
         for (AMLiveUser* newUser in newUserlist) {

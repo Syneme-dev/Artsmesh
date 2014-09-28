@@ -43,6 +43,8 @@
 +(AMCoreData*)shareInstance;
 -(void)broadcastChanges:(NSString*)notificationName;
 
+-(AMLiveGroup*)mergedGroup;
+
 @end
 
 

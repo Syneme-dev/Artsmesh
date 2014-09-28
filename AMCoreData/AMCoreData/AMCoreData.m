@@ -88,4 +88,38 @@
   //  });
 }
 
+-(AMLiveGroup*)mergedGroup
+{
+    for (AMLiveGroup* group in self.remoteLiveGroups) {
+        if ([self isMySelfIn:group]) {
+            
+            if ([self.myLocalLiveGroup.groupId isEqualToString:group.groupId]) {
+                return nil;
+            }else{
+                return group;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+-(BOOL)isMySelfIn:(AMLiveGroup*)group
+{
+    for (AMLiveUser* user in group.users) {
+        
+        if ([user.userid isEqualToString:self.mySelf.userid]) {
+            return YES;
+        }
+    }
+    
+    for (AMLiveGroup* subgroup in group.subGroups) {
+        if ([self isMySelfIn:subgroup]) {
+            return  YES;
+        }
+    }
+    
+    return NO;
+}
+
 @end

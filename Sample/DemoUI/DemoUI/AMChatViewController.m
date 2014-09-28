@@ -109,16 +109,11 @@
     }else{
         NSArray* newUserlist = nil;
         
-        if(myGroup.superGroup == nil){
+        AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
+        if (mergedGroup == nil) {
             newUserlist = [myGroup usersIncludeSubGroup];
         }else{
-            
-            AMLiveGroup* root = myGroup;
-            while (root.superGroup != nil) {
-                root = root.superGroup;
-            }
-            
-            newUserlist = [root usersIncludeSubGroup];
+            newUserlist = [mergedGroup usersIncludeSubGroup];
         }
         
         for (AMLiveUser* newUser in newUserlist) {

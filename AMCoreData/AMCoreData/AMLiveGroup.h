@@ -34,7 +34,6 @@
 @property (nonatomic) NSArray* users;
 @property (nonatomic) NSArray* messages;
 @property (nonatomic) NSArray* subGroups;
-@property (nonatomic) AMLiveGroup* superGroup;
 
 -(BOOL)isMeshed;
 -(AMLiveUser*)leader;

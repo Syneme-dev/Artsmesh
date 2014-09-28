@@ -108,14 +108,20 @@
 
     }else{
         NSArray* newUserlist = nil;
-        NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
         
-        for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
-            if ([g.groupId isEqualToString:mergedGroupId]) {
-                newUserlist = [g usersIncludeSubGroup];
+        NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+        if (mergedGroupId != nil && ![mergedGroupId isEqualToString:@""]) {
+            
+            for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
+                if ([g.groupId isEqualToString:mergedGroupId]) {
+                    newUserlist = [g usersIncludeSubGroup];
+                    break;
+                }
             }
+        }else{
+            newUserlist = [[AMCoreData shareInstance].myLocalLiveGroup usersIncludeSubGroup];
         }
-   
+        
         for (AMLiveUser* newUser in newUserlist) {
             
             if (nil == [_localPeerSet objectForKey:newUser.userid] &&

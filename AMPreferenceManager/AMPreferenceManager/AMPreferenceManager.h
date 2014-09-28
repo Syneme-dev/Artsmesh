@@ -38,11 +38,11 @@
 #define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
 //default
-#define Preference_User_Affiliation         @"CCOM"
-#define Preference_User_Description         @"This is my description."
+#define Preference_User_Affiliation         @"YourAffiliation"
+#define Preference_User_Description         @"This is my biography."
 #define Preference_User_Status              @"Online"
-#define Preference_User_Location            @"BeiJing"
-#define Preference_User_NickName            @"NickName"
+#define Preference_User_Location            @"YourLocation"
+#define Preference_User_NickName            @"YourNickName"
 #define Preference_User_FullName            @"YourFullName"
 
 #define Preference_General_ChatPort         @"55523"

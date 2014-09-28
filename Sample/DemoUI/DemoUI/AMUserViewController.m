@@ -152,11 +152,27 @@
 
 -(void)localGroupChanged
 {
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.groupName forKey:Preference_Key_Cluster_Name];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.fullName forKey:Preference_Key_Cluster_FullName];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.project forKey:Preference_Key_Cluster_Project];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.location forKey:Preference_Key_Cluster_Location];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(mySelf.isOnline == YES) {
         return;
     }
-    
+
     [self loadGroupAvatar];
     [self.groupStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
 }
@@ -426,10 +442,10 @@
 {
     NSString* nickName = self.nickNameField.stringValue;
     if ([nickName isEqualToString:@""]) {
-        NSString* defaultName = [[AMPreferenceManager standardUserDefaults]
+        nickName = [[AMPreferenceManager standardUserDefaults]
                                  stringForKey:Preference_Key_User_NickName];
         
-        self.nickNameField.stringValue = defaultName;
+        self.nickNameField.stringValue = nickName;
     }
     
     //update AMCoreData
@@ -443,10 +459,10 @@
 {
     NSString* fullName = self.fullNameField.stringValue;
     if ([fullName isEqualToString:@""]) {
-        NSString* defaultFullName = [[AMPreferenceManager standardUserDefaults]
+        fullName = [[AMPreferenceManager standardUserDefaults]
                                  stringForKey:Preference_Key_User_FullName];
         
-        self.fullNameField.stringValue = defaultFullName;
+        self.fullNameField.stringValue = fullName;
     }
     
     //update AMCoreData
@@ -460,10 +476,10 @@
     NSString* location = self.locationField.stringValue;
     if ([location isEqualToString:@""]) {
         
-        NSString* defaultLocation = [[AMPreferenceManager standardUserDefaults]
+        location = [[AMPreferenceManager standardUserDefaults]
                                      stringForKey:Preference_Key_User_Location];
     
-        self.locationField.stringValue = defaultLocation;
+        self.locationField.stringValue = location;
     }
     
     //update AMCoreData
@@ -478,10 +494,10 @@
     NSString* affilication = self.affiliationField.stringValue;
     if ([affilication isEqualToString:@""]) {
         
-        NSString* defaultAff = [[AMPreferenceManager standardUserDefaults]
+        affilication = [[AMPreferenceManager standardUserDefaults]
                                      stringForKey:Preference_Key_User_Affiliation];
         
-        self.affiliationField.stringValue = defaultAff;
+        self.affiliationField.stringValue = affilication;
     }
     
     //update AMCoreData
@@ -496,10 +512,10 @@
     NSString* biography = self.biographyField.stringValue;
     if ([biography isEqualToString:@""]) {
         
-        NSString* defaultBio = [[AMPreferenceManager standardUserDefaults]
+        biography = [[AMPreferenceManager standardUserDefaults]
                                 stringForKey:Preference_Key_User_Description];
         
-        self.biographyField.stringValue = defaultBio;
+        self.biographyField.stringValue = biography;
     }
     
     //update AMCoreData

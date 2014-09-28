@@ -33,7 +33,7 @@
 
 @property AMLiveUser* mySelf;
 @property AMLiveGroup* myLocalLiveGroup;
-@property NSString* mergedGroupId;
+//@property NSString* mergedGroupId;
 @property NSArray* remoteLiveGroups;
 @property NSArray* staticGroups;
 @property AMSystemConfig* systemConfig;

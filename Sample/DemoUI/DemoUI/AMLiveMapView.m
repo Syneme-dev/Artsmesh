@@ -26,7 +26,7 @@
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
-@property (nonatomic) NSMutableDictionary * mergedLocations;
+@property (nonatomic) NSMutableArray * mergedLocations;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
@@ -62,7 +62,7 @@ AMWorldMap *worldMap;
     //Set initial variables
     worldMap = [[AMWorldMap alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
-    _mergedLocations = [[NSMutableDictionary alloc] init];
+    _mergedLocations = [[NSMutableArray alloc] init];
     
     _backgroundColor = [NSColor colorWithCalibratedRed:0.15
                                                  green:0.15
@@ -90,11 +90,27 @@ AMWorldMap *worldMap;
     
     if ( [myGroup isMeshed] ) {
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
-            NSLog(@"This group is .. %@ from %@ with id of %@", remoteGroup.groupName, remoteGroup.location, remoteGroup.groupId);
+            //NSLog(@"This group is .. %@ from %@ with id of %@ and has subgroups: %@", remoteGroup.groupName, remoteGroup.location, remoteGroup.groupId, remoteGroup.subGroups);
             
             [self findLiveGroupLocation:remoteGroup];
+            
+            for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+                NSLog(@"Here's a subgroup called %@", remoteSubGroup.groupName);
+                
+                [self findLiveGroupLocation:remoteSubGroup];
+                
+                NSMutableDictionary *groups = [[NSMutableDictionary alloc] init];
+                [groups setObject:remoteGroup forKey:@"group"];
+                [groups setObject:remoteSubGroup forKey:@"subGroup"];
+                [_mergedLocations addObject:groups];
+                
+                //NSLog(@"groups array looks like %@", groups);
+                //NSLog(@"merged locations array looks like %@", _mergedLocations);
+            }
+            
     
             // Note groups that are merged
+            /**
             if (remoteGroup.subGroups != nil) {
                 for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
                     [self findLiveGroupLocation:remoteSubGroup];
@@ -106,6 +122,7 @@ AMWorldMap *worldMap;
                     
                 }
             }
+            **/
         }
     } else {
     
@@ -171,8 +188,11 @@ AMWorldMap *worldMap;
         
     }
     
+    NSLog(@"mergedLocations looks like %@", self.mergedLocations);
+    
     // Draw each line connecting ports
-    for ( NSArray *groups in self.mergedLocations) {
+    for ( NSMutableDictionary *groups in self.mergedLocations) {
+        
         NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                                   NSHeight(self.bounds) / 16.0);
         NSPoint center = NSMakePoint(NSMidX(rect), NSMidY(rect));
@@ -180,7 +200,9 @@ AMWorldMap *worldMap;
         AMPixel *point2;
         
         AMLiveGroup *group = [groups valueForKey:@"group"];
-        AMLiveGroup *remoteGroup = [groups valueForKey:@"remoteGroup"];
+        AMLiveGroup *remoteGroup = [groups valueForKey:@"subGroup"];
+        
+        NSLog(@"A line needs to be drawn between %@ and %@", group.groupName, remoteGroup.groupName);
         
         // Find port associated with each group
         for (int i = 0; i < self.ports.count; i++) {

@@ -92,12 +92,7 @@
 {
     for (AMLiveGroup* group in self.remoteLiveGroups) {
         if ([self isMySelfIn:group]) {
-            
-            if ([self.myLocalLiveGroup.groupId isEqualToString:group.groupId]) {
-                return nil;
-            }else{
-                return group;
-            }
+            return group;
         }
     }
     

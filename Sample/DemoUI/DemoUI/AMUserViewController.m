@@ -30,7 +30,6 @@
 @property (weak) IBOutlet AMFoundryFontView *groupNameField;
 @property (weak) IBOutlet AMFoundryFontView *nickNameField;
 @property (weak) IBOutlet AMFoundryFontView *fullNameField;
-@property (weak) IBOutlet AMFoundryFontView *projectField;
 @property (weak) IBOutlet AMFoundryFontView *locationField;
 @property (weak) IBOutlet AMFoundryFontView *affiliationField;
 @property (weak) IBOutlet AMFoundryFontView *biographyField;
@@ -428,7 +427,6 @@
 {
     [self loadNickName];
     [self loadFullName];
-    [self loadProject];
     [self loadLocation];
     [self loadAffiliation];
     [self loadBiography];
@@ -460,18 +458,6 @@
     }
 }
 
--(void)loadProject
-{
-    NSString* defaultProject = [[AMPreferenceManager standardUserDefaults]
-                                 stringForKey:Preference_User_Project];
-    if (defaultProject == nil) {
-        self.projectField.stringValue = @"YourProject";
-    }else if ([defaultProject isEqualToString:@""]) {
-        self.projectField.stringValue = @"YourProject";
-    }else{
-        self.projectField.stringValue = defaultProject;
-    }
-}
 
 -(void)loadLocation
 {
@@ -541,20 +527,6 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.fullNameField.stringValue forKey:Preference_User_FullName];
-}
-
-- (IBAction)projectChanged:(id)sender
-{
-    NSString* project = self.projectField.stringValue;
-    if ([project isEqualToString:@""]) {
-        self.projectField.stringValue = @"YourProject";
-    }
-    
-    //update AMCoreData
-    //TODO:
-    
-    [[AMPreferenceManager standardUserDefaults]
-     setObject:self.projectField.stringValue forKey:Preference_User_Project];
 }
 
 - (IBAction)locationChanged:(id)sender

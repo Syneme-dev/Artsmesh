@@ -161,6 +161,7 @@ Gw
                     <rect key="frame" x="57" y="247" width="415" height="31"/>
                 </customView>
             </subviews>
+            <point key="canvasLocation" x="-78" y="-56"/>
         </view>
     </objects>
 </document>

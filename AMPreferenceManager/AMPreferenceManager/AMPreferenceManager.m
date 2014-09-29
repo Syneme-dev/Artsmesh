@@ -47,9 +47,8 @@
     NSDictionary *registrationDomainDefaultsValues =
             [NSDictionary dictionaryWithObjectsAndKeys:
              Preference_General_ChatPort,        Preference_Key_General_ChatPort,
-             Preference_User_Domain,             Preference_Key_User_Domain,
+             Preference_User_Affiliation,        Preference_Key_User_Affiliation,
              Preference_User_Description,        Preference_Key_User_Description,
-             Preference_User_Project,            Preference_Key_User_Project,
              Preference_User_Location,           Preference_Key_User_Location,
              Preference_User_NickName,           Preference_Key_User_NickName,
              Preference_User_FullName,           Preference_Key_User_FullName,
@@ -85,7 +84,7 @@
     AMLiveUser* mySelf = [[AMLiveUser alloc] init];
     mySelf.userid = [AMCommonTools creatUUID];
     mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
-    mySelf.domain = [defaults stringForKey:Preference_Key_User_Domain];
+    mySelf.domain= [defaults stringForKey:Preference_Key_User_Affiliation];
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
     mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];

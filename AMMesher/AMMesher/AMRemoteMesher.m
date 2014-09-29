@@ -316,8 +316,6 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSLog(@"update user info on remote response wrong!%@", responseStr);
-        }else{
-            [AMCoreData shareInstance].mergedGroupId = toGroupId;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -440,7 +438,6 @@
     }
     
     newGroup.subGroups = subgroups;
-    
     return newGroup;
 }
 

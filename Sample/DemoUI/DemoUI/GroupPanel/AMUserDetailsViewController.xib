@@ -127,7 +127,7 @@
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.user.domain" id="9XN-hV-RNt"/>
+                        <binding destination="-2" name="value" keyPath="self.user.fullName" id="HvY-os-3E2"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dbP-wD-OCe" customClass="AMFoundryFontView">

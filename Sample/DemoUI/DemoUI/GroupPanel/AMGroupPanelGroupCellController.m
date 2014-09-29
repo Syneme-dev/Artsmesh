@@ -94,13 +94,13 @@
 {
     [self.infoBtn setHidden:NO];
     
-    NSString* mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+    AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     if ([myGroup.groupId isEqualToString:self.group.groupId ]){
         [self.mergeBtn setHidden:YES];
         [self.leaveBtn setHidden:YES];
-    }else if([self.group.groupId isEqualToString:mergedGroupId]){
+    }else if([self.group.groupId isEqualToString:mergedGroup.groupId]){
         [self.mergeBtn setHidden:YES];
         [self.leaveBtn setHidden:NO];
     }else{

@@ -68,12 +68,8 @@
 
 -(void)userGroupsChanged:(NSNotification*)notification
 {
-    NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
-    for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
-        if ([g.groupId isEqualToString:mergedGroupId]) {
-            _users = [g usersIncludeSubGroup];
-        }
-    }
+    AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
+    _users = [mergedGroup usersIncludeSubGroup];
     
     [self.pingTableView reloadData];
     [self.tracerouteTableView reloadData];

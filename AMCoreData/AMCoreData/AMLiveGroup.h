@@ -29,7 +29,7 @@
 -(NSMutableDictionary*)dictWithoutUsers;
 +(id)AMGroupFromDict:(NSDictionary*)dict;
 
-//non serialize properties
+//non serialize properties, and should no be change outside AMMesher
 @property (nonatomic) NSString* password;
 @property (nonatomic) NSArray* users;
 @property (nonatomic) NSArray* messages;

@@ -74,7 +74,7 @@
     self.portOffsetSelector.delegate = self;
     [self.portOffsetSelector removeAllItems];
     
-    for (NSUInteger i = 0; i <20; i++) {
+    for (NSUInteger i = 0; i <10; i++) {
         
         BOOL inUse = NO;
         for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
@@ -114,13 +114,8 @@
     {
         self.allUsers = dataStore.myLocalLiveGroup.users;
     }else{
-        
-        NSString* mergedGroupId = dataStore.mergedGroupId;
-        for (AMLiveGroup* remoteGroup in dataStore.remoteLiveGroups) {
-            if ([remoteGroup.groupId isEqualToString:mergedGroupId]){
-                self.allUsers = [remoteGroup usersIncludeSubGroup];
-            }
-        }
+        AMLiveGroup* mergedGroup = [dataStore mergedGroup];
+        self.allUsers = [mergedGroup usersIncludeSubGroup];
     }
     
     int firstIndexInUserlist = -1;

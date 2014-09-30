@@ -31,6 +31,8 @@
 #define Preference_Key_Cluster_FullName         @"Preference_Key_Cluster_FullName"
 #define Preference_Key_Cluster_Project          @"Preference_Key_Cluster_Project"
 #define Preference_Key_Cluster_Location         @"Preference_Key_Cluster_Location"
+#define Preference_Key_Cluster_Longitude        @"Preference_Key_Cluster_Longitude"
+#define Preference_Key_Cluster_Latitude         @"Preference_Key_Cluster_Latitude"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
@@ -52,7 +54,9 @@
 #define Preference_Cluster_Name             @"LocalGroup"
 #define Preference_Cluster_Description      @"There is no description of the group"
 #define Preference_Cluster_FullName         @"Full Name"
-#define Preference_Cluster_Location         @"Location"
+#define Preference_Cluster_Location         @"Beijing"
+#define Preference_Cluster_Longitude        @"116"
+#define Preference_Cluster_Latitude         @"39"
 #define Preference_Cluster_Project          @"Project"
 
 #define Preference_General_StunServerAddr   @"Artsmesh.io"

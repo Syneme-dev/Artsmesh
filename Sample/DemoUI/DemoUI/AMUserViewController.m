@@ -389,6 +389,9 @@
                          myGroup.latitude =  [NSString stringWithFormat:@"%f", topResult.location.coordinate.latitude];
                          
                          [[AMMesher sharedAMMesher] updateGroup];
+                         
+                         [[AMPreferenceManager standardUserDefaults] setObject:Preference_Key_Cluster_Longitude forKey:myGroup.longitude];
+                         [[AMPreferenceManager standardUserDefaults] setObject:Preference_Key_Cluster_Latitude forKey:myGroup.latitude];
                      }
                  }
      ];

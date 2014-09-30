@@ -115,8 +115,8 @@
     
     [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
     
-    [AMCoreData shareInstance].myLocalLiveGroup.longitude = @"116";
-    [AMCoreData shareInstance].myLocalLiveGroup.latitude = @"39";
+//    [AMCoreData shareInstance].myLocalLiveGroup.longitude = @"116";
+//    [AMCoreData shareInstance].myLocalLiveGroup.latitude = @"39";
 }
 
 

@@ -130,7 +130,7 @@
     localGroup.fullName = [defaults stringForKey:Preference_Key_Cluster_FullName];
     localGroup.location = [defaults stringForKey:Preference_Key_Cluster_Location];
     localGroup.longitude = [defaults stringForKey:Preference_Key_Cluster_Longitude];
-    localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];;
+    localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];
     localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
     localGroup.password = @"";
 

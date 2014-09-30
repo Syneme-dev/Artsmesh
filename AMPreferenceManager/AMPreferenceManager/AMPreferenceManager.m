@@ -64,6 +64,9 @@
              Preference_Cluster_FullName,        Preference_Key_Cluster_FullName,
              Preference_Cluster_Location,        Preference_Key_Cluster_Location,
              Preference_Cluster_Project,         Preference_Key_Cluster_Project,
+             Preference_StatusNet_URL,           Preference_Key_StatusNet_URL,
+             Preference_Cluster_Latitude,        Preference_Key_Cluster_Latitude,
+             Preference_Cluster_Longitude,       Preference_Key_Cluster_Longitude,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
@@ -126,8 +129,8 @@
     localGroup.description = [defaults stringForKey:Preference_Key_Cluster_Description];;
     localGroup.fullName = [defaults stringForKey:Preference_Key_Cluster_FullName];
     localGroup.location = [defaults stringForKey:Preference_Key_Cluster_Location];
-    localGroup.longitude = @"";
-    localGroup.latitude = @"";
+    localGroup.longitude = [defaults stringForKey:Preference_Key_Cluster_Longitude];
+    localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];
     localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
     localGroup.password = @"";
 

@@ -21,6 +21,7 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "UIFrameWork/AMFoundryFontView.h"
 #import "AMGroupCreateViewController.h"
+#import "CoreLocation/CoreLocation.h"
 
 @interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
@@ -358,9 +359,44 @@
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    group.location= sender.stringValue;
-    [[AMMesher sharedAMMesher] updateGroup];
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([myGroup.location isEqualToString:sender.stringValue]) {
+        return;
+    }
+    
+    [self getCoordinates: sender.stringValue];
+    
+    //[[AMMesher sharedAMMesher] updateGroup];
+}
+
+- (void)getCoordinates:(NSString *)searchTerm
+{
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder geocodeAddressString:searchTerm
+                 completionHandler:^(NSArray* placemarks, NSError* error){
+                     if (error) {
+                         NSLog(@"%@", error);
+                         
+                     } else if (placemarks && placemarks.count > 0) {
+                         
+                         AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                         
+                         NSLog(@"top search result is %f, %f",topResult.location.coordinate.latitude, topResult.location.coordinate.longitude);
+                         
+                         myGroup.location = searchTerm;
+                         myGroup.longitude = [NSString stringWithFormat:@"%f", topResult.location.coordinate.longitude];
+                         myGroup.latitude =  [NSString stringWithFormat:@"%f", topResult.location.coordinate.latitude];
+                         
+                         [[AMMesher sharedAMMesher] updateGroup];
+                         
+                         [[AMPreferenceManager standardUserDefaults]
+                          setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
+                         [[AMPreferenceManager standardUserDefaults]
+                          setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
+                     }
+                 }
+     ];
 }
 
 -(void)onChecked:(AMCheckBoxView*)sender

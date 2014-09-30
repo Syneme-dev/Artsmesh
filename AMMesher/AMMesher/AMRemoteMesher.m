@@ -55,6 +55,7 @@
         
         if ([keyPath isEqualToString:@"mesherState"]){
             AMMesherState newState = [[change objectForKey:@"new"] intValue];
+            AMMesherState oldState = [[change objectForKey:@"old"] intValue];
             
             switch (newState) {
                 case kMesherMeshing:
@@ -64,7 +65,9 @@
                     [self stopRemoteClient];
                     break;
                 case kMesherStopping:
-                    [self stopRemoteClient];
+                    if (oldState == kMesherMeshed){
+                        [self stopRemoteClient];
+                    }
                     break;
                 default:
                     break;

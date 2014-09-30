@@ -46,8 +46,8 @@
     group.fullName = dict[@"FullName"];
     group.project = dict[@"Project"];
     group.location = dict[@"Location"];
-    group.longitude = dict[@"longitude"];
-    group.latitude = dict[@"latitude"];
+    group.longitude = dict[@"Longitude"];
+    group.latitude = dict[@"Latitude"];
     group.busy = [dict[@"Busy"] boolValue];
     group.password = @"";
     return group;

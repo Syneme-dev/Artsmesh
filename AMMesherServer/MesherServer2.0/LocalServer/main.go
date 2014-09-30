@@ -32,19 +32,20 @@ type UserHeartbeatResposeDTO struct{
 type AMRequestGroup struct{
 	GroupId 		string
 	GroupName 	string
-	Description 	string
-	LeaderId 	string
 	FullName 	string
 	Project		string
 	Location		string
 	Longitude	string
 	Latitude		string
+	Description 	string
+	LeaderId 	string
 	Busy			string
 }
 
 type AMRequestUser struct{
 	UserId 		string
 	NickName 	string
+	FullName		string
 	Domain		string
 	Location  	string
 	Description 	string
@@ -348,6 +349,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	reqUser := new(AMRequestUser)
 	reqUser.UserId = strings.Join(r.Form["userId"], "") 
 	reqUser.NickName = strings.Join(r.Form["nickName"], "") 
+	reqUser.FullName = strings.Join(r.Form["fullName"], "")
 	reqUser.Domain = strings.Join(r.Form["domain"], "") 
 	reqUser.Location = strings.Join(r.Form["location"], "") 
 	reqUser.Description = strings.Join(r.Form["description"], "") 
@@ -368,6 +370,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("path", r.URL.Path)	
 	fmt.Println("userId:", reqUser.UserId)
 	fmt.Println("nickName:", reqUser.NickName)
+	fmt.Println("fullName:", reqUser.FullName)
 	fmt.Println("domain:", reqUser.Domain)
 	fmt.Println("location:", reqUser.Location)
 	fmt.Println("description:", reqUser.Description)
@@ -399,6 +402,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	reqUser := new(AMRequestUser)
 	reqUser.UserId = strings.Join(r.Form["userId"], "") 
 	reqUser.NickName = strings.Join(r.Form["nickName"], "") 
+	reqUser.FullName = strings.Join(r.Form["fullName"], "")
 	reqUser.Domain = strings.Join(r.Form["domain"], "") 
 	reqUser.Location = strings.Join(r.Form["location"], "") 
 	reqUser.Description = strings.Join(r.Form["description"], "") 
@@ -416,6 +420,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("path", r.URL.Path)	
 	fmt.Println("userId:", reqUser.UserId)
 	fmt.Println("nickName:", reqUser.NickName)
+	fmt.Println("fullName:", reqUser.FullName)
 	fmt.Println("domain:", reqUser.Domain)
 	fmt.Println("location:", reqUser.Location)
 	fmt.Println("description:", reqUser.Description)

@@ -518,6 +518,8 @@
             localGroup.groupName = group.groupName;
             localGroup.description = group.description;
             localGroup.location = group.location;
+            localGroup.longitude = group.longitude;
+            localGroup.latitude = group.latitude;
             localGroup.fullName = group.fullName;
             localGroup.project = group.project;
             localGroup.leaderId = group.leaderId;

@@ -64,6 +64,7 @@
              Preference_Cluster_FullName,        Preference_Key_Cluster_FullName,
              Preference_Cluster_Location,        Preference_Key_Cluster_Location,
              Preference_Cluster_Project,         Preference_Key_Cluster_Project,
+             Preference_StatusNet_URL,           Preference_Key_StatusNet_URL,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

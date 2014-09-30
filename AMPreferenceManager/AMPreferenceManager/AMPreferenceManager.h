@@ -45,7 +45,7 @@
 #define Preference_User_NickName            @"YourNickName"
 #define Preference_User_FullName            @"YourFullName"
 
-#define Preference_General_ChatPort         @"55523"
+#define Preference_General_ChatPort         @"22260"
 #define Preference_User_PrivateIp           @""
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
@@ -55,12 +55,14 @@
 #define Preference_Cluster_Location         @"Location"
 #define Preference_Cluster_Project          @"Project"
 
-#define Preference_General_StunServerAddr   @"123.124.145.254"
+#define Preference_General_StunServerAddr   @"Artsmesh.io"
 #define Preference_General_StunServerPort   @"22250"
-#define Preference_General_GlobalServerAddr   @"123.124.145.254"
+#define Preference_General_GlobalServerAddr   @"Artsmesh.io"
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"9090"
 #define Preference_General_TopControlBar   @"YES"
+
+#define Preference_StatusNet_URL            @"http://artsmesh.io"
 
 #define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
 

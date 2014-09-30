@@ -212,6 +212,7 @@ func makeSnapShot(){
 		userData := new(AMRequestUser)
 		userData.UserId = v.userData.UserId
 		userData.NickName = v.userData.NickName
+		userData.FullName = v.userData.FullName
 		userData.Domain = v.userData.Domain
 		userData.Location = v.userData.Location
 		userData.Description = v.userData.Description

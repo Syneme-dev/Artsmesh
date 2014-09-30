@@ -26,8 +26,8 @@
 		266CE25E197E550400D8145B /* AMGroupPanelStaticUserCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE25C197E550400D8145B /* AMGroupPanelStaticUserCellController.xib */; };
 		266CE262197E5F3A00D8145B /* AMStaticUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266CE260197E5F3A00D8145B /* AMStaticUserDetailsViewController.m */; };
 		266CE263197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266CE261197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib */; };
-		2670F67E19C9CC4F00CE0F7E /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2670F67D19C9CC4F00CE0F7E /* LocalServer */; };
 		26716C31197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */; };
+		2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
@@ -200,7 +200,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				2670F67E19C9CC4F00CE0F7E /* LocalServer in CopyFiles */,
+				2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,9 +275,9 @@
 		266CE25F197E5F3A00D8145B /* AMStaticUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticUserDetailsViewController.h; sourceTree = "<group>"; };
 		266CE260197E5F3A00D8145B /* AMStaticUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticUserDetailsViewController.m; sourceTree = "<group>"; };
 		266CE261197E5F3A00D8145B /* AMStaticUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticUserDetailsViewController.xib; sourceTree = "<group>"; };
-		2670F67D19C9CC4F00CE0F7E /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		26716C2F197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelStaticGroupCellController.h; sourceTree = "<group>"; };
 		26716C30197A21DB00D69F0C /* AMGroupPanelStaticGroupCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelStaticGroupCellController.m; sourceTree = "<group>"; };
+		2686C35C19DA4E9200352DFF /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		268DA7C3198B99A100F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTimer.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
@@ -709,7 +709,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				2670F67D19C9CC4F00CE0F7E /* LocalServer */,
+				2686C35C19DA4E9200352DFF /* LocalServer */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,

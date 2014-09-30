@@ -212,6 +212,7 @@ func AddNewUser(user *AMRequestUser, groupId string)(string){
 	newUser.userData = new(AMRequestUser)
 	newUser.userData.UserId = user.UserId
 	newUser.userData.NickName = user.NickName
+	newUser.userData.FullName = user.FullName
 	newUser.userData.Domain = user.Domain
 	newUser.userData.Location = user.Location
 	newUser.userData.Description = user.Description
@@ -247,6 +248,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	}
 	
 	existUser.userData.NickName = user.NickName
+	existUser.userData.FullName = user.FullName
 	existUser.userData.Location = user.Location
 	existUser.userData.Domain = user.Domain
 	existUser.userData.Description = user.Description
@@ -535,6 +537,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 		u := new(AMRequestUser)
 		u.UserId = v.userData.UserId
 		u.NickName = v.userData.NickName
+		u.FullName = v.userData.FullName
 		u.Location = v.userData.Location
 		u.Description = v.userData.Description
 		u.Domain = v.userData.Domain

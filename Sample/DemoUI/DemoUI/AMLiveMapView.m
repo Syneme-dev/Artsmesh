@@ -188,10 +188,9 @@ AMWorldMap *worldMap;
         
     }
     
-    NSLog(@"mergedLocations looks like %@", self.mergedLocations);
-    
     // Draw each line connecting ports
     for ( NSMutableDictionary *groups in self.mergedLocations) {
+        NSLog(@"mergedLocations looks like %@", self.mergedLocations);
         
         NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                                   NSHeight(self.bounds) / 16.0);
@@ -289,11 +288,24 @@ AMWorldMap *worldMap;
     if (myGroup.location) {
         location = myGroup.location;
     }
-    [self getCoordinates:myGroup];
+    
+    NSLog(@"current group is %@ with latitude and longitude: %@, %@", theGroup.groupName, theGroup.latitude, theGroup.longitude);
+    
+    [self markLiveGroupLocation:theGroup];
+    
+    [self setNeedsDisplay:YES];
+    
+    //[self getCoordinates:myGroup];
 
 }
 
 - (void)markLiveGroupLocation:(AMLiveGroup *)theGroup {
+    
+    float curLat = [theGroup.latitude floatValue];
+    float curLon = [theGroup.longitude floatValue];
+    
+    [_localGroupLoc setObject:[NSNumber numberWithFloat: curLat] forKey:@"latitude"];
+    [_localGroupLoc setObject:[NSNumber numberWithFloat: curLon] forKey:@"longitude"];
 
     if ( [_localGroupLoc count] > 0 ) {
     //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
@@ -306,6 +318,7 @@ AMWorldMap *worldMap;
         lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
         lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         //NSLog(@"lat/lon = %f/%f", lat, lon);
+        
 
     double mapLat0 = worldMap.mapHeight/2;
     double mapLon0 = worldMap.mapWidth/2;
@@ -345,7 +358,7 @@ AMWorldMap *worldMap;
     
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
+        //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
         
         int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
         

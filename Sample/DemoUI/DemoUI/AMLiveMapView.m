@@ -112,14 +112,10 @@ AMWorldMap *worldMap;
                         AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
                         AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
                         
-                        NSLog(@"merged location contains: %@, %@", storedGroup.groupName, storedSubGroup.groupName);
-                        NSLog(@"checking against these groups: %@, %@", remoteGroup.groupName, remoteSubGroup.groupName);
-                        
                         if ( [remoteGroup.groupId isEqualToString:storedGroup.groupId] ||
                              [remoteGroup.groupId isEqualToString:storedSubGroup.groupId] ||
                              [remoteSubGroup.groupId isEqualToString:storedGroup.groupId] ||
                              [remoteSubGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
-                            NSLog(@"Need to remove old merged location...");
                             
                             [self.mergedLocations removeObject:groups];
                         }
@@ -132,10 +128,7 @@ AMWorldMap *worldMap;
         }
     } else {
         
-        NSLog( @"stored mygroup location: %@, current myGroup location: %@", storedMyGroupLoc, myGroup.location );
-        
         if ( storedMyGroupLoc != myGroup.location ) {
-            NSLog(@"local location doesn't match stored location.");
             [_allGroupsLoc removeAllObjects];
             [self clearMap];
         
@@ -153,7 +146,6 @@ AMWorldMap *worldMap;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    //NSLog(@"draw rect called..");
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     [self.backgroundColor set];
@@ -208,7 +200,6 @@ AMWorldMap *worldMap;
     // Draw each line connecting ports
     if ( [myGroup isMeshed] ) {
         for ( NSMutableDictionary *groups in self.mergedLocations) {
-            NSLog(@"mergedLocations looks like %@", self.mergedLocations);
         
             NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                                   NSHeight(self.bounds) / 16.0);
@@ -218,9 +209,8 @@ AMWorldMap *worldMap;
         
             AMLiveGroup *group = [groups valueForKey:@"group"];
             AMLiveGroup *remoteGroup = [groups valueForKey:@"subGroup"];
-        
-            NSLog(@"A line needs to be drawn between %@ and %@", group.groupName, remoteGroup.groupName);
-        
+            
+            // TODO: this can probably be more efficient
             // Find port associated with each group
             for (int i = 0; i < self.ports.count; i++) {
                 AMPixel *port = self.ports[i];
@@ -312,8 +302,6 @@ AMWorldMap *worldMap;
         location = myGroup.location;
     }
     
-    NSLog(@"finding live group location..");
-    //NSLog(@"current group is %@ with latitude and longitude: %@, %@", theGroup.groupName, theGroup.latitude, theGroup.longitude);
     
     [self markLiveGroupLocation:theGroup];
     
@@ -321,8 +309,6 @@ AMWorldMap *worldMap;
     
     _refreshNeeded = YES;
     
-    //[self getCoordinates:myGroup];
-
 }
 
 - (void)markLiveGroupLocation:(AMLiveGroup *)theGroup {
@@ -334,16 +320,9 @@ AMWorldMap *worldMap;
     [_localGroupLoc setObject:[NSNumber numberWithFloat: curLon] forKey:@"longitude"];
 
     if ( [_localGroupLoc count] > 0 ) {
-    //This variable is fake data, replace when actual lat/lon fields availbale in AMCoreData LiveGroup section
-    float lat;
-    float lon;
-    // Use this when data available in AMCoreData if ( myGroup.latitude && myGroup.longitude ) {
     
-        //lat = [myGroup.latitude floatValue];lon = [myGroup.longitude floatValue];
-        //NSLog(@"found latitude was %f", [[_localGroupLoc objectForKey:@"latitude"] floatValue]);
-        lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
-        lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
-        //NSLog(@"lat/lon = %f/%f", lat, lon);
+    float lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
+    float lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         
 
     double mapLat0 = worldMap.mapHeight/2;
@@ -367,7 +346,6 @@ AMWorldMap *worldMap;
     } else {
         liveGroupPosX += mapLon0;
     }
-    //NSLog(@"Relative position of liveGroup on 75/40 map is: %f, %f", liveGroupPosX, liveGroupPosY);
     
     //Find closest pixel to current live group location
     
@@ -402,8 +380,7 @@ AMWorldMap *worldMap;
         double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
         
         if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-            //NSLog(@"Pixel %i with x/y: (%f, %f) compared to livegroup x/y of: (%f,%f) now has shortest distance of %f", i, portX, portY, liveGroupPosX, liveGroupPosY, distToLiveGroup);
-            //NSLog(@"new closest Port has distance from livegroup of %f",distToLiveGroup);
+            // New shortest distance found, note it
             closestDistToLiveGroup = distToLiveGroup;
             liveGroupPixel = port;
         }
@@ -417,33 +394,6 @@ AMWorldMap *worldMap;
     [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
     
     }
-}
-
-- (void)getCoordinates:(AMLiveGroup *)currentGroup{
-    NSString *searchTerm = currentGroup.location;
-    
-    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
-    [geoCoder geocodeAddressString:searchTerm
-                 completionHandler:^(NSArray* placemarks, NSError* error){
-                     if (error) {
-                         NSLog(@"error--%@",[error localizedDescription]);
-                         
-                     } else if (placemarks && placemarks.count > 0) {
-                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                         
-                         NSLog(@"top search result is %f, %f",topResult.location.coordinate.latitude, topResult.location.coordinate.longitude);
-                         
-                         [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.latitude] forKey:@"latitude"];
-                         [_localGroupLoc setObject:[NSNumber numberWithFloat:topResult.location.coordinate.longitude] forKey:@"longitude"];
-                         
-                         [self markLiveGroupLocation:currentGroup];
-                         
-                         [self setNeedsDisplay:YES];
-                     }
-                 }
-     ];
-    
-
 }
 
 - (void)checkPixel:(AMLiveGroup *)theGroup {
@@ -467,7 +417,6 @@ AMWorldMap *worldMap;
     }
     
     if (normalize) {
-        NSLog(@"Normalizing a pixel..");
         pixelToCheck.state = AMPixelStateNormal;
     }
     

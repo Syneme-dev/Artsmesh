@@ -467,24 +467,33 @@ AMWorldMap *worldMap;
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
     //NSPoint cursorPoint = [ thisEvent locationInWindow ];
+    //_portW = self.bounds.size.width / (long)worldMap.mapWidth;
+    //_portH = self.bounds.size.height / (long)worldMap.mapHeight;
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     //NSLog(@"X coordinate is %f and Y coordinate is %f",cursorPoint.x,cursorPoint.y);
     
     for ( AMPixel *port in _allLiveGroupPixels ) {
         
-        /**
-        NSRect portBounds = NSMakeRect((port.center.x - (_portW/2), (port.center.y - (_portH/2))), port.center.y, _portW, _portH);
+        AMPixel *curPort = [_allLiveGroupPixels objectForKey:port];
+        
+        NSPoint portCenter = [self getPortCenter:curPort];
+        
+        //NSRect portBounds = NSMakeRect((portCenter.x - (_portW/2), ( - (_portH/2))), portCenter.y, _portW, _portH);
+        NSRect portBounds = NSMakeRect((portCenter.x - (_portW/2)), (portCenter.y - (_portW/2)), _portW, _portH);
+        
+        //NSLog(@"group with has bounds of %@", NSStringFromPoint(portBounds.origin));
         if ( NSPointInRect(cursorPoint, portBounds) ) {
-            NSString *portLoc = port.location;
+            NSString *portLoc = curPort.location;
             for ( NSDictionary *group in _allGroupsLoc ) {
                 
                 NSString *groupLoc = [_allGroupsLoc objectForKey:group];
                 if (groupLoc == portLoc) {
-                    NSLog(@"group is being hovered on!");
+                    
+                        NSLog(@"group is being hovered on! %@", group);
+                    
                 }
             }
         }
-         **/
         
     }
 }

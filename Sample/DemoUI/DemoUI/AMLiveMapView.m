@@ -28,6 +28,7 @@
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
 @property (nonatomic) NSMutableDictionary * allLiveGroupPixels;
 @property (nonatomic) NSMutableArray * mergedLocations;
+@property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary * allGroupsLoc;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
@@ -305,6 +306,8 @@ AMWorldMap *worldMap;
     
     [self markLiveGroupLocation:theGroup];
     
+    [_allGroups removeObjectForKey:groupID];
+    [_allGroups setObject:myGroup forKey:groupID];
     [_allGroupsLoc setObject:myGroup.location forKey:groupID];
     
     _refreshNeeded = YES;
@@ -436,6 +439,7 @@ AMWorldMap *worldMap;
 
 - (void)initVars {
     worldMap = [[AMWorldMap alloc] init];
+    _allGroups = [[NSMutableDictionary alloc] init];
     _allGroupsLoc = [[NSMutableDictionary alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
     _mergedLocations = [[NSMutableArray alloc] init];
@@ -466,30 +470,31 @@ AMWorldMap *worldMap;
 
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
-    //NSPoint cursorPoint = [ thisEvent locationInWindow ];
-    //_portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    //_portH = self.bounds.size.height / (long)worldMap.mapHeight;
+    // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
-    //NSLog(@"X coordinate is %f and Y coordinate is %f",cursorPoint.x,cursorPoint.y);
     
     for ( AMPixel *port in _allLiveGroupPixels ) {
         
-        AMPixel *curPort = [_allLiveGroupPixels objectForKey:port];
+        // Look through every pixel that is set to connected/active state
         
+        AMPixel *curPort = [_allLiveGroupPixels objectForKey:port];
         NSPoint portCenter = [self getPortCenter:curPort];
         
-        //NSRect portBounds = NSMakeRect((portCenter.x - (_portW/2), ( - (_portH/2))), portCenter.y, _portW, _portH);
+        // Make an imaginary rectangle around each active pixel
         NSRect portBounds = NSMakeRect((portCenter.x - (_portW/2)), (portCenter.y - (_portW/2)), _portW, _portH);
         
-        //NSLog(@"group with has bounds of %@", NSStringFromPoint(portBounds.origin));
         if ( NSPointInRect(cursorPoint, portBounds) ) {
             NSString *portLoc = curPort.location;
+            
             for ( NSDictionary *group in _allGroupsLoc ) {
                 
+                // Look through all groups and compare locations to current port
                 NSString *groupLoc = [_allGroupsLoc objectForKey:group];
                 if (groupLoc == portLoc) {
                     
-                        NSLog(@"group is being hovered on! %@", group);
+                    // Group found, do something with it's information
+                    AMLiveGroup *hovGroup = [_allGroups objectForKey:group];
+                    NSLog(@"group is being hovered on! %@", hovGroup.groupName);
                     
                 }
             }

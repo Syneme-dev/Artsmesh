@@ -28,7 +28,7 @@
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
 @property (nonatomic) NSMutableDictionary * allLiveGroupPixels;
 @property (nonatomic) NSMutableArray * mergedLocations;
-@property (nonatomic) NSCache * allGroupsLoc;
+@property (nonatomic) NSMutableDictionary * allGroupsLoc;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
@@ -436,7 +436,7 @@ AMWorldMap *worldMap;
 
 - (void)initVars {
     worldMap = [[AMWorldMap alloc] init];
-    _allGroupsLoc = [[NSCache alloc] init];
+    _allGroupsLoc = [[NSMutableDictionary alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
     _mergedLocations = [[NSMutableArray alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
@@ -459,6 +459,34 @@ AMWorldMap *worldMap;
     
     _ports = [allPorts copy];
     _portIndex = -1;
+    
+    NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
+    [self addTrackingArea:trackingArea];
+}
+
+-(void) mouseMoved: (NSEvent *) thisEvent
+{
+    //NSPoint cursorPoint = [ thisEvent locationInWindow ];
+    NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
+    //NSLog(@"X coordinate is %f and Y coordinate is %f",cursorPoint.x,cursorPoint.y);
+    
+    for ( AMPixel *port in _allLiveGroupPixels ) {
+        
+        /**
+        NSRect portBounds = NSMakeRect((port.center.x - (_portW/2), (port.center.y - (_portH/2))), port.center.y, _portW, _portH);
+        if ( NSPointInRect(cursorPoint, portBounds) ) {
+            NSString *portLoc = port.location;
+            for ( NSDictionary *group in _allGroupsLoc ) {
+                
+                NSString *groupLoc = [_allGroupsLoc objectForKey:group];
+                if (groupLoc == portLoc) {
+                    NSLog(@"group is being hovered on!");
+                }
+            }
+        }
+         **/
+        
+    }
 }
 
 - (void)dealloc {

@@ -30,6 +30,7 @@
 @property (nonatomic) NSMutableArray * mergedLocations;
 @property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary * allGroupsLoc;
+@property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
@@ -64,7 +65,6 @@ AMWorldMap *worldMap;
 {
     
     //Construct WorldMap and pixel arrays for assigning buttons to view
-    
     
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:myGroup.groupId];
@@ -143,6 +143,7 @@ AMWorldMap *worldMap;
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -466,12 +467,17 @@ AMWorldMap *worldMap;
     
     NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
     [self addTrackingArea:trackingArea];
+
+    //Apply the information overlay to the map
+    [self addOverlay:self];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
+
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
+    BOOL isHovering = NO;
     
     for ( AMPixel *port in _allLiveGroupPixels ) {
         
@@ -496,11 +502,55 @@ AMWorldMap *worldMap;
                     AMLiveGroup *hovGroup = [_allGroups objectForKey:group];
                     NSLog(@"group is being hovered on! %@", hovGroup.groupName);
                     
+                    [_infoPanel setString:hovGroup.groupName];
+                    isHovering = YES;
                 }
             }
         }
         
     }
+    switch (isHovering) {
+        case YES:
+            if (_infoPanel.isHidden) { [self showView:_infoPanel]; }
+            break;
+        default:
+            if (!_infoPanel.isHidden) { [self hideView:_infoPanel]; }
+    }
+}
+
+- (void)addOverlay:(NSView *)parentView {
+    // Add the info panel to the map (used for displaying text on map)
+    NSRect textFrame = [self bounds];
+    NSLog(@"text frame width is %f", textFrame.size.width);
+    NSLog(@"text frame height is %f", textFrame.size.height);
+    textFrame.size.width = textFrame.size.width/2;
+    textFrame.size.height = textFrame.size.height/5;
+    
+    _infoPanel = [[NSTextView alloc] initWithFrame:textFrame];
+    _infoPanel.backgroundColor = [NSColor colorWithCalibratedRed:0.227f
+                                                          green:0.251f
+                                                           blue:0.337
+                                                          alpha:0.8];
+    [_infoPanel setEditable:NO];
+    [_infoPanel setSelectable:NO];
+    
+    [_infoPanel setString:@"test"];
+    
+    [parentView addSubview:_infoPanel positioned:NSWindowAbove relativeTo:nil];
+
+    [_infoPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (_infoPanel.frame.size.height) )];
+    
+    [_infoPanel setAutoresizingMask:NSViewWidthSizable | NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+    
+    [self hideView:_infoPanel];
+}
+
+- (void)hideView:(NSView *)theView {
+    [theView setHidden:TRUE];
+}
+- (void)showView:(NSView *)theView {
+    [theView setHidden:FALSE];
+    [theView setNeedsDisplay:YES];
 }
 
 - (void)dealloc {

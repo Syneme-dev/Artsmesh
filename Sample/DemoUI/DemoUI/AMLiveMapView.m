@@ -526,18 +526,26 @@ AMWorldMap *worldMap;
     textFrame.size.width = textFrame.size.width/2;
     textFrame.size.height = textFrame.size.height/5;
     
+    // Set TextView Properties
     _infoPanel = [[NSTextView alloc] initWithFrame:textFrame];
-    _infoPanel.backgroundColor = [NSColor colorWithCalibratedRed:0.227f
-                                                          green:0.251f
-                                                           blue:0.337
-                                                          alpha:0.8];
-    [_infoPanel setEditable:NO];
-    [_infoPanel setSelectable:NO];
+    [_infoPanel setTextColor:[NSColor whiteColor]];
+    
+    _infoPanel.backgroundColor = _backgroundColor;
+    
+    NSShadow *dropShadow = [[NSShadow alloc] init];
+    [dropShadow setShadowColor:[NSColor blackColor]];
+    [dropShadow setShadowOffset:NSMakeSize(0, 4.0)];
+    [dropShadow setShadowBlurRadius:4.0];
+    
+    [self setWantsLayer: YES];
+    [_infoPanel setShadow: dropShadow];
     
     [_infoPanel setString:@"test"];
     
+    
+    // Add TextView to Live Map, as a subview overlay
     [parentView addSubview:_infoPanel positioned:NSWindowAbove relativeTo:nil];
-
+    
     [_infoPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (_infoPanel.frame.size.height) )];
     
     [_infoPanel setAutoresizingMask:NSViewWidthSizable | NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];

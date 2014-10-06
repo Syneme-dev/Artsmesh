@@ -511,7 +511,14 @@ AMWorldMap *worldMap;
     }
     switch (isHovering) {
         case YES:
-            if (_infoPanel.isHidden) { [self showView:_infoPanel]; }
+            if (_infoPanel.isHidden) {
+                if ( cursorPoint.x > self.frame.size.width/2 ) {
+                    [_infoPanel setFrameOrigin:NSMakePoint(cursorPoint.x - (_infoPanel.frame.size.width + 20), cursorPoint.y + 20)];
+                } else {
+                    [_infoPanel setFrameOrigin: NSMakePoint(cursorPoint.x + 20,cursorPoint.y + 20)];
+                }
+                [self showView:_infoPanel];
+            }
             break;
         default:
             if (!_infoPanel.isHidden) { [self hideView:_infoPanel]; }
@@ -523,24 +530,28 @@ AMWorldMap *worldMap;
     NSRect textFrame = [self bounds];
     NSLog(@"text frame width is %f", textFrame.size.width);
     NSLog(@"text frame height is %f", textFrame.size.height);
-    textFrame.size.width = textFrame.size.width/2;
-    textFrame.size.height = textFrame.size.height/5;
+    textFrame.size.width = 200; //textFrame.size.width/2;
+    textFrame.size.height = 35; //textFrame.size.height/5;
+    NSFont *font = [NSFont userFontOfSize:16.0];
     
     // Set TextView Properties
     _infoPanel = [[NSTextView alloc] initWithFrame:textFrame];
     [_infoPanel setTextColor:[NSColor whiteColor]];
+    [_infoPanel setFont:font];
+    [_infoPanel setAlignment: NSCenterTextAlignment];
     
     _infoPanel.backgroundColor = _backgroundColor;
     
     NSShadow *dropShadow = [[NSShadow alloc] init];
-    [dropShadow setShadowColor:[NSColor blackColor]];
+    [dropShadow setShadowColor:[NSColor colorWithCalibratedRed:0.0
+                                                         green:0.0
+                                                          blue:0.0
+                                                         alpha:0.8]];
     [dropShadow setShadowOffset:NSMakeSize(0, 4.0)];
     [dropShadow setShadowBlurRadius:4.0];
     
     [self setWantsLayer: YES];
     [_infoPanel setShadow: dropShadow];
-    
-    [_infoPanel setString:@"test"];
     
     
     // Add TextView to Live Map, as a subview overlay
@@ -548,7 +559,7 @@ AMWorldMap *worldMap;
     
     [_infoPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (_infoPanel.frame.size.height) )];
     
-    [_infoPanel setAutoresizingMask:NSViewWidthSizable | NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+    [_infoPanel setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin]; //NSViewWidthSizable
     
     [self hideView:_infoPanel];
 }

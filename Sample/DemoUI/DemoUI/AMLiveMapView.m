@@ -31,6 +31,7 @@
 @property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary * allGroupsLoc;
 @property (nonatomic) NSTextView *infoPanel;
+@property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
@@ -470,6 +471,7 @@ AMWorldMap *worldMap;
     worldMap = [[AMWorldMap alloc] init];
     _allGroups = [[NSMutableDictionary alloc] init];
     _allGroupsLoc = [[NSMutableDictionary alloc] init];
+    _infoPanels = [[NSMutableDictionary alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
     _mergedLocations = [[NSMutableArray alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
@@ -497,7 +499,7 @@ AMWorldMap *worldMap;
     [self addTrackingArea:trackingArea];
 
     //Apply the information overlay to the map
-    [self addOverlay:self];
+    //[self addOverlay:self];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -509,17 +511,17 @@ AMWorldMap *worldMap;
     // Group found, do something with it's information
     AMLiveGroup *hovGroup;
     
-    for ( AMPixel *port in _allLiveGroupPixels ) {
+    for ( AMPixel *pixel in _allLiveGroupPixels ) {
         
         // Look through every pixel that is set to connected/active state
         
-        AMPixel *curPort = [_allLiveGroupPixels objectForKey:port];
-        NSPoint portCenter = [self getPortCenter:curPort];
+        AMPixel *curPort = [_allLiveGroupPixels objectForKey:pixel];
+        NSPoint pixelCenter = [self getPortCenter:curPort];
         
         // Make an imaginary rectangle around each active pixel
-        NSRect portBounds = NSMakeRect((portCenter.x - (_portW/2)), (portCenter.y - (_portW/2)), _portW, _portH);
+        NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
         
-        if ( NSPointInRect(cursorPoint, portBounds) ) {
+        if ( NSPointInRect(cursorPoint, pixelBounds) ) {
             NSString *portLoc = curPort.location;
             
             for ( NSDictionary *group in _allGroupsLoc ) {
@@ -528,42 +530,58 @@ AMWorldMap *worldMap;
                 NSString *groupLoc = [_allGroupsLoc objectForKey:group];
                 if (groupLoc == portLoc) {
                     
+                    hovGroup = [_allGroups objectForKey:group];
                     //NSLog(@"group is being hovered on! %@", hovGroup.groupName);
                     
-                    hovGroup = [_allGroups objectForKey:group];
+                    switch (isHovering) {
+                        case NO:
+                            if ( ![_infoPanels objectForKey:pixel] ) {
+                                NSLog(@"Add overlay for %@", hovGroup.groupName);
+                                [self addOverlay:pixel];
+                            }
                     
-                    [_infoPanel setString:hovGroup.groupName];
+                            NSTextView *thePanel = [_infoPanels objectForKey:pixel];
+                            [thePanel setString:hovGroup.groupName];
+                            if ( thePanel.isHidden ) {
+                                
+                                AMPixel *curPixel = [_allLiveGroupPixels objectForKey:pixel];
+                                NSPoint hovPoint = [self getPortCenter:curPixel];
+                                
+                                
+                                if ( hovPoint.x > self.frame.size.width/2 ) {
+                                    
+                                    [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
+                                } else {
+                                    [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
+                                }
+                                [self showView:thePanel];
+                            }
+                    }
+                    
                     isHovering = YES;
+                    
                 }
             }
         }
         
     }
     switch (isHovering) {
-        case YES:
-            if (_infoPanel.isHidden) {
-                AMPixel *hovPixel = [_allLiveGroupPixels objectForKey:hovGroup.groupId];
-                NSPoint hovPoint = [self getPortCenter:hovPixel];
-                
-                if ( cursorPoint.x > self.frame.size.width/2 ) {
-                    
-                    [_infoPanel setFrameOrigin:NSMakePoint(hovPoint.x - (_infoPanel.frame.size.width + 20), hovPoint.y + 20)];
-                } else {
-                    [_infoPanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
+        case NO:
+            for ( id thePanel in _infoPanels ) {
+                NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
+                if (!curPanel.isHidden) {
+                    [self hideView:curPanel];
                 }
-                [self showView:_infoPanel];
-                
-                //
-
             }
             break;
-        default:
-            if (!_infoPanel.isHidden) { [self hideView:_infoPanel]; }
     }
 }
 
-- (void)addOverlay:(NSView *)parentView {
+- (void)addOverlay:(AMPixel *) thePixel {
     // Add the info panel to the map (used for displaying text on map)
+    id pixelId = thePixel;
+    NSTextView *newPanel;
+    
     NSRect textFrame = [self bounds];
     NSLog(@"text frame width is %f", textFrame.size.width);
     NSLog(@"text frame height is %f", textFrame.size.height);
@@ -572,12 +590,12 @@ AMWorldMap *worldMap;
     NSFont *font = [NSFont userFontOfSize:16.0];
     
     // Set TextView Properties
-    _infoPanel = [[NSTextView alloc] initWithFrame:textFrame];
-    [_infoPanel setTextColor:[NSColor whiteColor]];
-    [_infoPanel setFont:font];
-    [_infoPanel setAlignment: NSCenterTextAlignment];
+    newPanel = [[NSTextView alloc] initWithFrame:textFrame];
+    [newPanel setTextColor:[NSColor whiteColor]];
+    [newPanel setFont:font];
+    [newPanel setAlignment: NSCenterTextAlignment];
     
-    _infoPanel.backgroundColor = _backgroundColor;
+    newPanel.backgroundColor = _backgroundColor;
     
     NSShadow *dropShadow = [[NSShadow alloc] init];
     [dropShadow setShadowColor:[NSColor colorWithCalibratedRed:0.0
@@ -588,17 +606,21 @@ AMWorldMap *worldMap;
     [dropShadow setShadowBlurRadius:4.0];
     
     [self setWantsLayer: YES];
-    [_infoPanel setShadow: dropShadow];
+    [newPanel setShadow: dropShadow];
     
     
     // Add TextView to Live Map, as a subview overlay
-    [parentView addSubview:_infoPanel positioned:NSWindowAbove relativeTo:nil];
+    [self addSubview:newPanel positioned:NSWindowAbove relativeTo:nil];
     
-    [_infoPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (_infoPanel.frame.size.height) )];
+    [newPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (newPanel.frame.size.height) )];
     
-    [_infoPanel setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin]; //NSViewWidthSizable
+    [newPanel setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin]; //NSViewWidthSizable
     
-    [self hideView:_infoPanel];
+    [self hideView:newPanel];
+    
+    NSLog(@"New view created and added, with visibility of %hhd", newPanel.isHidden);
+    
+    [_infoPanels setObject:newPanel forKey:pixelId];
 }
 
 - (void)hideView:(NSView *)theView {

@@ -79,9 +79,6 @@
       location = "container:"
       name = "Core Service">
       <FileRef
-         location = "group:AMNetworkService/AMNetworkService.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">
       </FileRef>
       <FileRef

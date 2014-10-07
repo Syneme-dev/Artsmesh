@@ -106,9 +106,10 @@ AMWorldMap *worldMap;
                     [connectedGroups setObject:remoteGroup forKey:@"group"];
                     [connectedGroups setObject:remoteSubGroup forKey:@"subGroup"];
                     
-                    //TODO: Need to be sure either group isn't stored in the mergedLocations array as
-                    //part of an old merged connection
+                    //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
                     
+                    /** this has been moved to a function, 
+                        make sure still works when meshed then delete this
                     for ( NSMutableDictionary *groups in self.mergedLocations) {
                         AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
                         AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
@@ -121,6 +122,12 @@ AMWorldMap *worldMap;
                             [self.mergedLocations removeObject:groups];
                         }
                     }
+                    **/
+                    
+                    
+                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
+                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
+                    
                     
                     [_mergedLocations addObject:connectedGroups];
                 
@@ -282,8 +289,8 @@ AMWorldMap *worldMap;
 - (NSPoint)centerOfPort:(NSInteger)portIndex
 {
     NSAssert(portIndex >= 0 && portIndex < self.ports.count, @"invalid argument");
-    
-    
+ 
+ 
     CGFloat radian = portIndex * 2 * M_PI / self.ports.count;
     return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
@@ -398,6 +405,27 @@ AMWorldMap *worldMap;
     [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
     
     }
+}
+
+- (id) checkGroupIsMerged:(AMLiveGroup *)theGroup {
+    id mergedId = nil;
+    
+    for ( NSMutableDictionary *groups in self.mergedLocations) {
+        AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
+        AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
+        
+        if ( [theGroup.groupId isEqualToString:storedGroup.groupId] ||
+            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ||
+            [theGroup.groupId isEqualToString:storedGroup.groupId] ||
+            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
+            
+            mergedId = groups;
+        } else {
+            mergedId = nil;
+        }
+    }
+    
+    return mergedId;
 }
 
 - (void)checkPixel:(AMLiveGroup *)theGroup {
@@ -524,6 +552,9 @@ AMWorldMap *worldMap;
                     [_infoPanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
                 }
                 [self showView:_infoPanel];
+                
+                //
+
             }
             break;
         default:

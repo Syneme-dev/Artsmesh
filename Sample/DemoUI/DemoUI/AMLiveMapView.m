@@ -478,6 +478,8 @@ AMWorldMap *worldMap;
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     BOOL isHovering = NO;
+    // Group found, do something with it's information
+    AMLiveGroup *hovGroup;
     
     for ( AMPixel *port in _allLiveGroupPixels ) {
         
@@ -498,9 +500,9 @@ AMWorldMap *worldMap;
                 NSString *groupLoc = [_allGroupsLoc objectForKey:group];
                 if (groupLoc == portLoc) {
                     
-                    // Group found, do something with it's information
-                    AMLiveGroup *hovGroup = [_allGroups objectForKey:group];
-                    NSLog(@"group is being hovered on! %@", hovGroup.groupName);
+                    //NSLog(@"group is being hovered on! %@", hovGroup.groupName);
+                    
+                    hovGroup = [_allGroups objectForKey:group];
                     
                     [_infoPanel setString:hovGroup.groupName];
                     isHovering = YES;
@@ -512,10 +514,14 @@ AMWorldMap *worldMap;
     switch (isHovering) {
         case YES:
             if (_infoPanel.isHidden) {
+                AMPixel *hovPixel = [_allLiveGroupPixels objectForKey:hovGroup.groupId];
+                NSPoint hovPoint = [self getPortCenter:hovPixel];
+                
                 if ( cursorPoint.x > self.frame.size.width/2 ) {
-                    [_infoPanel setFrameOrigin:NSMakePoint(cursorPoint.x - (_infoPanel.frame.size.width + 20), cursorPoint.y + 20)];
+                    
+                    [_infoPanel setFrameOrigin:NSMakePoint(hovPoint.x - (_infoPanel.frame.size.width + 20), hovPoint.y + 20)];
                 } else {
-                    [_infoPanel setFrameOrigin: NSMakePoint(cursorPoint.x + 20,cursorPoint.y + 20)];
+                    [_infoPanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
                 }
                 [self showView:_infoPanel];
             }

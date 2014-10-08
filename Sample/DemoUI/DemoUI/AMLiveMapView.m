@@ -359,7 +359,7 @@ AMWorldMap *worldMap;
         liveGroupPosX += mapLon0;
     }
     
-    //Find closest pixel to current live group location
+    //Find closest open pixel to current live group location
     
     AMPixel *liveGroupPixel;
     double closestDistToLiveGroup = -1;
@@ -376,25 +376,29 @@ AMWorldMap *worldMap;
         AMPixel *port = self.ports[i];
         //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
         
-        int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
+        if ( port.state == AMPixelStateNormal ) {
+            
+            int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
         
-        portRow = portPixelPos/worldMap.mapWidth;
-        if ( portRow != (int)portRow ) {
-            portRow += (int)portRow + 1;
-        }
-        portCol = portPixelPos % worldMap.mapWidth;
-        if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
+            portRow = portPixelPos/worldMap.mapWidth;
+            if ( portRow != (int)portRow ) {
+                portRow += (int)portRow + 1;
+            }
+            portCol = portPixelPos % worldMap.mapWidth;
+            if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
         
-        portX = (portCol * portW) - (portW/2);
-        portY = (portRow * portH) - (portH/2);
+            portX = (portCol * portW) - (portW/2);
+            portY = (portRow * portH) - (portH/2);
         
-        //Calculate distance between portCenter and liveGroup lat/lon
-        double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
+            //Calculate distance between portCenter and liveGroup lat/lon
+            double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
         
-        if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-            // New shortest distance found, note it
-            closestDistToLiveGroup = distToLiveGroup;
-            liveGroupPixel = port;
+            if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
+                // New shortest distance found, note it
+                closestDistToLiveGroup = distToLiveGroup;
+                liveGroupPixel = port;
+            }
+        
         }
         
         

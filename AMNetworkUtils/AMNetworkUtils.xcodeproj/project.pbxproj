@@ -28,7 +28,7 @@
 		26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BD218DC0AB3008262F8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26F07AC8198F85ED009C72D6 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F07AC6198F85ED009C72D6 /* NSData+Base64.h */; };
 		26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F07AC7198F85ED009C72D6 /* NSData+Base64.m */; };
-		D4E6203E19E3E18E006C0F8A /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E6203C19E3E18E006C0F8A /* AMHolePunchingSocket.h */; };
+		D4E6203E19E3E18E006C0F8A /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E6203C19E3E18E006C0F8A /* AMHolePunchingSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4E6203F19E3E18E006C0F8A /* AMHolePunchingSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E6203D19E3E18E006C0F8A /* AMHolePunchingSocket.m */; };
 /* End PBXBuildFile section */
 
@@ -200,8 +200,8 @@
 				269C333A197CE28900AF86AA /* AMHttpAsyncRequest.h in Headers */,
 				26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */,
 				26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */,
-				26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */,
 				D4E6203E19E3E18E006C0F8A /* AMHolePunchingSocket.h in Headers */,
+				26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

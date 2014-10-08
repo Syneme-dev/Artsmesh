@@ -535,12 +535,12 @@ AMWorldMap *worldMap;
                     
                     switch (isHovering) {
                         case NO:
-                            if ( ![_infoPanels objectForKey:pixel] ) {
+                            if ( ![_infoPanels objectForKey:hovGroup.groupId] ) {
                                 NSLog(@"Add overlay for %@", hovGroup.groupName);
-                                [self addOverlay:pixel];
+                                [self addOverlay:hovGroup];
                             }
                     
-                            NSTextView *thePanel = [_infoPanels objectForKey:pixel];
+                            NSTextView *thePanel = [_infoPanels objectForKey:hovGroup.groupId];
                             [thePanel setString:hovGroup.groupName];
                             if ( thePanel.isHidden ) {
                                 
@@ -555,6 +555,51 @@ AMWorldMap *worldMap;
                                     [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
                                 }
                                 [self showView:thePanel];
+                                
+                                // If the current group is a part of a merged group, show a panel for the other group also
+                                
+                                id mergedGroups = [self checkGroupIsMerged:hovGroup ];
+                                if ( mergedGroups ) {
+                                    // This group is merged
+                                    
+                                    AMLiveGroup *mergedGroup;
+                                    if ( [mergedGroups valueForKey:@"subGroup"] == hovGroup ) {
+                                        mergedGroup = [mergedGroups valueForKey:@"group"];
+                                    } else if ( [mergedGroups valueForKey:@"group"] == hovGroup ) {
+                                        mergedGroup = [mergedGroups valueForKey:@"subGroup"];
+                                    }
+                                    
+                                    
+                                    // find pixel for mergedGroup
+                                    AMPixel *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
+                                    
+                                    // if pixel doesn't have a panel, add one
+                                    if ( ![_infoPanels objectForKey:mergedGroup.groupId] ) {
+                                        [self addOverlay:mergedGroup];
+                                    }
+                                    // grab the newly created info panel and manipulate it, if not done already
+                                    thePanel = [_infoPanels objectForKey:mergedGroup.groupId];
+                                    [thePanel setString:mergedGroup.groupName];
+                                    if ( thePanel.isHidden ) {
+                                        NSPoint hovPoint = [self getPortCenter:mergedPixel];
+                                        
+                                        
+                                        if ( hovPoint.x > self.frame.size.width/2 ) {
+                                            
+                                            [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
+                                        } else {
+                                            [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
+                                        }
+                                        [self showView:thePanel];
+                                    
+                                    }
+                                    
+                                    
+                                } else {
+                                    //This group isn't merged..
+                                }
+                                
+                                
                             }
                     }
                     
@@ -577,14 +622,14 @@ AMWorldMap *worldMap;
     }
 }
 
-- (void)addOverlay:(AMPixel *) thePixel {
+- (void)addOverlay:(AMLiveGroup *) theGroup {
     // Add the info panel to the map (used for displaying text on map)
-    id pixelId = thePixel;
+    //id pixelId = thePixel;
+    NSString *groupId = theGroup.groupId;
+    
     NSTextView *newPanel;
     
     NSRect textFrame = [self bounds];
-    NSLog(@"text frame width is %f", textFrame.size.width);
-    NSLog(@"text frame height is %f", textFrame.size.height);
     textFrame.size.width = 200; //textFrame.size.width/2;
     textFrame.size.height = 35; //textFrame.size.height/5;
     NSFont *font = [NSFont userFontOfSize:16.0];
@@ -618,9 +663,9 @@ AMWorldMap *worldMap;
     
     [self hideView:newPanel];
     
-    NSLog(@"New view created and added, with visibility of %hhd", newPanel.isHidden);
+    //NSLog(@"New view created and added, with visibility of %hhd", newPanel.isHidden);
     
-    [_infoPanels setObject:newPanel forKey:pixelId];
+    [_infoPanels setObject:newPanel forKey:groupId];
 }
 
 - (void)hideView:(NSView *)theView {

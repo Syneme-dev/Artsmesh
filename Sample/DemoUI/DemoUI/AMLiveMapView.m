@@ -109,23 +109,6 @@ AMWorldMap *worldMap;
                     
                     //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
                     
-                    /** this has been moved to a function, 
-                        make sure still works when meshed then delete this
-                    for ( NSMutableDictionary *groups in self.mergedLocations) {
-                        AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
-                        AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
-                        
-                        if ( [remoteGroup.groupId isEqualToString:storedGroup.groupId] ||
-                             [remoteGroup.groupId isEqualToString:storedSubGroup.groupId] ||
-                             [remoteSubGroup.groupId isEqualToString:storedGroup.groupId] ||
-                             [remoteSubGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
-                            
-                            [self.mergedLocations removeObject:groups];
-                        }
-                    }
-                    **/
-                    
-                    
                     [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
                     [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
                     
@@ -171,33 +154,8 @@ AMWorldMap *worldMap;
     
     NSPoint portCenter;
     
-    //_portW = self.bounds.size.width / (long)worldMap.mapWidth;
-    
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        
-        // Old code to connect 2 ports with line
-        /**
-        if (port.state == AMPixelStateConnected && port.index < port.peerIndex) {
-            NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-            [bezierPath moveToPoint:[self centerOfPort:port.index]];
-            [bezierPath curveToPoint:[self centerOfPort:port.peerIndex]
-                       controlPoint1:_center
-                       controlPoint2:_center];
-            if (port.index == _portIndex) {
-                bezierPath.lineWidth = 12.0;
-                [[NSColor colorWithRed:0.6 green:1.0 blue:1.0 alpha:0.2] setStroke];
-                [bezierPath stroke];
-                bezierPath.lineWidth = 2.0;
-                [[NSColor lightGrayColor] setStroke];
-                [bezierPath stroke];
-            } else {
-                bezierPath.lineWidth = 2.0;
-                [[NSColor grayColor] setStroke];
-                [bezierPath stroke];
-            }
-        }
-        **/
         
         portCenter = [self getPortCenter:port];
         //[port drawWithCenterAt:[self centerOfPort:i]];
@@ -235,8 +193,6 @@ AMWorldMap *worldMap;
                     }
                 }
             }
-        
-            //calculate center point of current port on live map (maybe move this to function)
         
         
             NSBezierPath *bezierPath = [NSBezierPath bezierPath];
@@ -284,24 +240,6 @@ AMWorldMap *worldMap;
     portCenter = NSMakePoint(portX, portY);
     
     return portCenter;
-}
-
-/**
-- (NSPoint)centerOfPort:(NSInteger)portIndex
-{
-    NSAssert(portIndex >= 0 && portIndex < self.ports.count, @"invalid argument");
- 
- 
-    CGFloat radian = portIndex * 2 * M_PI / self.ports.count;
-    return NSMakePoint(_radius * cos(radian) + _center.x,
-                       _radius * sin(radian) + _center.y);
-    
-}
-**/
-
-
-- (BOOL)isFlipped{
-    return YES;
 }
 
 - (void)findLiveGroupLocation:(AMLiveGroup *)theGroup {
@@ -508,11 +446,10 @@ AMWorldMap *worldMap;
 
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
-
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     BOOL isHovering = NO;
-    // Group found, do something with it's information
+
     AMLiveGroup *hovGroup;
     
     for ( AMPixel *pixel in _allLiveGroupPixels ) {
@@ -539,6 +476,8 @@ AMWorldMap *worldMap;
                     
                     switch (isHovering) {
                         case NO:
+                            
+                            // Display info panel
                             if ( ![_infoPanels objectForKey:hovGroup.groupId] ) {
                                 NSLog(@"Add overlay for %@", hovGroup.groupName);
                                 [self addOverlay:hovGroup];
@@ -548,17 +487,8 @@ AMWorldMap *worldMap;
                             [thePanel setString:hovGroup.groupName];
                             if ( thePanel.isHidden ) {
                                 
-                                AMPixel *curPixel = [_allLiveGroupPixels objectForKey:pixel];
-                                NSPoint hovPoint = [self getPortCenter:curPixel];
-                                
-                                
-                                if ( hovPoint.x > self.frame.size.width/2 ) {
-                                    
-                                    [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
-                                } else {
-                                    [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
-                                }
-                                [self showView:thePanel];
+                                // Display the main group panel
+                                [self displayInfoPanel:thePanel forGroup:hovGroup onPixel:pixel];
                                 
                                 // If the current group is a part of a merged group, show a panel for the other group also
                                 
@@ -581,21 +511,12 @@ AMWorldMap *worldMap;
                                     if ( ![_infoPanels objectForKey:mergedGroup.groupId] ) {
                                         [self addOverlay:mergedGroup];
                                     }
+                                    
                                     // grab the newly created info panel and manipulate it, if not done already
                                     thePanel = [_infoPanels objectForKey:mergedGroup.groupId];
                                     [thePanel setString:mergedGroup.groupName];
                                     if ( thePanel.isHidden ) {
-                                        NSPoint hovPoint = [self getPortCenter:mergedPixel];
-                                        
-                                        
-                                        if ( hovPoint.x > self.frame.size.width/2 ) {
-                                            
-                                            [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
-                                        } else {
-                                            [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
-                                        }
-                                        [self showView:thePanel];
-                                    
+                                        [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
                                     }
                                     
                                     
@@ -624,6 +545,20 @@ AMWorldMap *worldMap;
             }
             break;
     }
+}
+
+- (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
+        
+    AMPixel *curPixel = [_allLiveGroupPixels objectForKey:thePixel];
+    NSPoint hovPoint = [self getPortCenter:curPixel];
+        
+    if ( hovPoint.x > self.frame.size.width/2 ) {
+            
+        [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
+    } else {
+        [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
+    }
+    [self showView:thePanel];
 }
 
 - (void)addOverlay:(AMLiveGroup *) theGroup {
@@ -667,8 +602,6 @@ AMWorldMap *worldMap;
     
     [self hideView:newPanel];
     
-    //NSLog(@"New view created and added, with visibility of %hhd", newPanel.isHidden);
-    
     [_infoPanels setObject:newPanel forKey:groupId];
 }
 
@@ -678,6 +611,10 @@ AMWorldMap *worldMap;
 - (void)showView:(NSView *)theView {
     [theView setHidden:FALSE];
     [theView setNeedsDisplay:YES];
+}
+
+- (BOOL)isFlipped{
+    return YES;
 }
 
 - (void)dealloc {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMChatViewController">
@@ -12,20 +12,18 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="QHJ-JV-rbK">
             <rect key="frame" x="0.0" y="0.0" width="574" height="631"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="82" horizontalPageScroll="10" verticalLineScroll="82" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-8i-vKH">
                     <rect key="frame" x="10" y="112" width="554" height="499"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hAT-cO-ZYc">
                         <rect key="frame" x="0.0" y="0.0" width="554" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="80" rowSizeStyle="automatic" viewBased="YES" id="CaR-4q-Mcs">
-                                <rect key="frame" x="0.0" y="0.0" width="554" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -51,7 +49,6 @@
                                                 <subviews>
                                                     <textField identifier="sender" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-wF-DBE" customClass="AMFoundryFontView">
                                                         <rect key="frame" x="8" y="40" width="379" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Btd-xV-cRk"/>
                                                             <constraint firstAttribute="width" constant="375" id="os2-JC-mHJ"/>
@@ -67,7 +64,6 @@
                                                     </textField>
                                                     <textField identifier="message" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-yM-cWZ" customClass="AMFoundryFontView">
                                                         <rect key="frame" x="8" y="-20" width="449" height="52"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="52" id="Ugn-GK-xXN"/>
                                                         </constraints>
@@ -82,7 +78,6 @@
                                                     </textField>
                                                     <textField identifier="sendTime" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ACW-q5-i1h" customClass="AMFoundryFontView">
                                                         <rect key="frame" x="429" y="47" width="104" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="Y04-rP-Dyt"/>
                                                             <constraint firstAttribute="height" constant="23" id="vq8-lw-Ys5"/>
@@ -99,7 +94,6 @@
                                                     </textField>
                                                     <button identifier="post" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-9z-gft">
                                                         <rect key="frame" x="506" y="25" width="25" height="25"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="6L7-8j-3Zp"/>
                                                             <constraint firstAttribute="width" constant="25" id="7lf-UZ-hke"/>
@@ -134,17 +128,14 @@
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Z9e-Ot-5Vg">
-                        <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Tjw-Rc-EiZ">
-                        <rect key="frame" x="558" y="0.0" width="16" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bwT-52-Io9" customClass="AMTextFieldView">
                     <rect key="frame" x="10" y="20" width="554" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="V7o-of-PlD"/>
                     </constraints>

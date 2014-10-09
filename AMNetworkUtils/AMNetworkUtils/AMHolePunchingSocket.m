@@ -9,107 +9,96 @@
 #import "AMHolePunchingSocket.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 
+#define AMHolePunchingHeartBeatTag  0
+#define AMHolePunchingDataTag       1
 #define AMholePunchingPeerPacket    @"HB"
-#define AMHeartbeatPacketTag        0
-#define AMBroadcastPacketTag        1
-#define AMPacketTagStartIndex       2
 
 NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDomain";
 
 @implementation AMHolePunchingSocket
 {
-    GCDAsyncUdpSocket* _socket;
-    NSTimer*  _punchingTimer;
-    NSTimer*  _checkingTimer;
+    NSString* _serverIp;
+    NSString* _serverPort;
+    NSString* _internalPort;
     NSString* _mappedPort;
     NSString* _mappedIp;
-    long _tag;
+    
+    NSTimer*  _punchingTimer;
+    GCDAsyncUdpSocket* _socket;
+    NSArray* _hostIps;
 }
 
--(id)initWithServer:(NSString*)serverIp
-         serverPort:(NSString*)serverPort
-         clientPort:(NSString*)clientPort
-       timeInterval:(NSTimeInterval)heartbeatInterval
-           moduleId:(NSString*)moduleId
+- (instancetype)initWithServer:(NSString*)serverIp
+                    serverPort:(NSString*)serverPort
+                    clientPort:(NSString*)clientPort
 {
     if (self = [super init]) {
-        self.stunServer = [[AMHolePunchingServer alloc] initWithIp:serverIp port:serverPort];
-        self.clientPort = clientPort;
-        self.heartbeatInterval = heartbeatInterval;
-        self.moduleId = moduleId;
-        self.peers = [[NSMutableArray alloc] init];
-        _tag = AMPacketTagStartIndex;
+        _serverIp = serverIp;
+        _serverPort = serverPort;
+        _internalPort = clientPort;
+        self.timeInterval = 5;
+        self.localPeers = [[NSMutableArray alloc] init];
+        self.remotePeers = [[NSMutableArray alloc] init];
+        
+        NSHost* serverHost = [NSHost hostWithName:serverIp];
+        _hostIps = [serverHost addresses];
     }
     
     return self;
 }
 
-
--(void)startHolePunching
-{
-    BOOL ret = [self initSocket];
-    if (!ret) {
-        return;
-    }
-    
-    _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.heartbeatInterval
-                                                      target:self
-                                                    selector:@selector(sendHeartbeat)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    
-    _checkingTimer = [NSTimer scheduledTimerWithTimeInterval:self.heartbeatInterval * 3
-                                                      target:self
-                                                    selector:@selector(checkTimeout)
-                                                    userInfo:nil
-                                                     repeats:YES];
-}
-
-
--(void)stopHolePunching{
-    [self closeSocket];
-    [_punchingTimer invalidate];
-    _punchingTimer = nil;
-}
-
-
--(BOOL)initSocket
+-(void)initSocket
 {
     _socket = [[GCDAsyncUdpSocket alloc]
                initWithDelegate:self
                delegateQueue:dispatch_get_main_queue()];
     
+    if (self.useIpv6) {
+        [_socket setPreferIPv6];
+    }
+    
     NSError *error = nil;
-    if (![_socket bindToPort:[self.clientPort intValue] error:&error]){
+    if (![_socket bindToPort:[_internalPort intValue] error:&error]){
         
-        if ([self.delegate respondsToSelector:@selector(socket:failedWithError:)]) {
+        if ([self.delegate respondsToSelector:@selector(socket:didFailWithError:)]) {
             
             NSError* err = [NSError errorWithDomain:AMHolePunchingSocketErrorDomain
                                                code:AMHolePunchingSocketErrorSocketFailed
                                            userInfo:nil];
-            [self.delegate socket:self failedWithError:err];
+            [self.delegate socket:self didFailWithError:err];
         }
         
-        return NO ;
+        return ;
     }
-    
     if (![_socket beginReceiving:&error]){
         [_socket close];
         
-        if ([self.delegate respondsToSelector:@selector(socket:failedWithError:)]) {
+        if ([self.delegate respondsToSelector:@selector(socket:didFailWithError:)]) {
             
             NSError* err = [NSError errorWithDomain:AMHolePunchingSocketErrorDomain
                                                code:AMHolePunchingSocketErrorSocketFailed
                                            userInfo:nil];
-            [self.delegate socket:self failedWithError:err];
+            [self.delegate socket:self didFailWithError:err];
         }
         
-        return NO;
+        return;
     }
     
-    return YES;
 }
 
+-(void)startHolePunching
+{
+    if (self.useIpv6) {
+        return;
+    }
+    
+    _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
+}
+
+-(void)dealloc
+{
+    [self closeSocket];
+}
 
 -(void)closeSocket
 {
@@ -118,11 +107,15 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 }
 
 
+-(void)stopHolePunching{
+    [_punchingTimer invalidate];
+    _punchingTimer = nil;
+}
+
 -(NSString*)NATMappedPort
 {
     return _mappedPort;
 }
-
 
 -(NSString*)NATMappedIp
 {
@@ -133,151 +126,61 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 -(void)sendHeartbeat{
     NSData *data = [AMholePunchingPeerPacket dataUsingEncoding:NSUTF8StringEncoding];
     
-    [_socket sendData:data
-               toHost:self.stunServer.serverIp
-                 port: [self.stunServer.serverPort intValue]
-          withTimeout:-1
-                  tag:AMHeartbeatPacketTag];
+    [_socket sendData:data toHost:_serverIp port: [_serverPort intValue] withTimeout:-1 tag:AMHolePunchingDataTag];
     
-    for (AMHolePunchingPeer* peer in self.peers) {
-        [_socket sendData:data
-                   toHost:peer.ip
-                     port: [peer.port intValue]
-              withTimeout:-1
-                      tag:AMHeartbeatPacketTag];
+    for (AMHolePunchingPeer* peer in self.remotePeers) {
+        [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingDataTag];
     }
 }
 
 
--(void)checkTimeout
+-(void)sendPacketToPeers:(NSData*)data
 {
-    //Check peers
-    for (AMHolePunchingPeer* peer in self.peers) {
-        
-        if (peer.lastHearbeat == nil) {
-            continue;
-        }
-        
-        NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate] - [peer.lastHearbeat timeIntervalSinceReferenceDate];
-        if (interval > self.heartbeatInterval*3) {
-            peer.recvTimeout = YES;
-        }else{
-            peer.recvTimeout = NO;
-        }
+    for (AMHolePunchingPeer* peer in self.remotePeers) {
+        [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingHeartBeatTag];
     }
     
-    //Check Server
-    if (self.stunServer.lastHeartbeat != nil) {
-        NSTimeInterval interval = [NSDate timeIntervalSinceReferenceDate] - [self.stunServer.lastHeartbeat timeIntervalSinceReferenceDate];
-        if (interval > self.heartbeatInterval*3) {
-            self.stunServer.recvTimeout = YES;
-        }else{
-            self.stunServer.recvTimeout = NO;
-        }
+    for (AMHolePunchingPeer* peer in self.localPeers) {
+        [_socket sendData:data toHost:peer.ip  port: [peer.port intValue] withTimeout:-1 tag:AMHolePunchingHeartBeatTag];
     }
-}
-
-
--(void)broadcastData:(NSData*)data
-{
-    for (AMHolePunchingPeer* peer in self.peers) {
-        [_socket sendData:data
-                   toHost:peer.ip
-                     port: [peer.port intValue]
-              withTimeout:-1
-                      tag:AMBroadcastPacketTag];
-    }
-}
-
-
--(long)sendDataToPeer:(NSString*) peerId data:(NSData*)data
-{
-    for (AMHolePunchingPeer* peer in self.peers) {
-        
-        if ([peer.peerId isEqualToString: peerId]) {
-            [_socket sendData:data
-                       toHost:peer.ip
-                         port: [peer.port intValue]
-                  withTimeout:-1
-                          tag:_tag++];
-            return _tag;
-        }
-    }
-    
-    return -1;
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag
 {
-    if([self.delegate respondsToSelector:@selector(holePunchingSocket:didSendDataWithTag:)]){
-        [self.delegate holePunchingSocket:self didSendDataWithTag:tag];
-    }
+    // You could add checks here
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
 {
-    if ([self.delegate respondsToSelector:@selector(holePunchingSocket:didNotSendDataWithTag:dueToError:)]) {
-        [self.delegate holePunchingSocket:self didNotSendDataWithTag:tag dueToError:error];
+    if ([self.delegate respondsToSelector:@selector(socket:didNotSendData:)]) {
+        [self.delegate socket:self didNotSendData:error];
     }
 }
 
-
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+   didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    //NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     
-    if ([fromHost isEqualToString:self.stunServer.serverIp]) {
-        self.stunServer.lastHeartbeat = [NSDate date];
-        [self parsePublicAddr:data];
-        
-        return;
-    }
-    
-    for (AMHolePunchingPeer* peer in self.peers) {
-        if ([peer.ip isEqualToString:fromHost]) {
-             NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if ([msg isEqualToString:AMholePunchingPeerPacket]) {
-                peer.lastHearbeat = [NSDate date];
-                
-                return;
-            }else if([self.delegate respondsToSelector:@selector(holePunchingSocket:didReceiveData:fromPeer:withFilterContext:)]){
-                //forward data to delegate
-                [self.delegate holePunchingSocket:self didReceiveData:data fromPeer:peer withFilterContext:nil];
-                
-                return;
-            }
+    if([_hostIps containsObject:fromHost]){
+        if ([self.delegate respondsToSelector:@selector(socket:didReceiveDataFromServer:)]) {
+            [self.delegate socket:self didReceiveDataFromServer:data];
         }
-    }
-}
-
--(void)parsePublicAddr:(NSData*)data
-{
-    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
-    if ([ipAndPort count] < 2){
         return;
     }
     
-    BOOL natAddrChanged = NO;
-    if(![_mappedIp isEqualToString:[ipAndPort objectAtIndex:0]]){
-        _mappedIp = [ipAndPort objectAtIndex:0];
-        natAddrChanged = YES;
+    if ([msg isEqualToString:AMholePunchingPeerPacket]) {
+        //peer packet
+        NSLog(@"heartbeat from %@", fromHost);
+        return;
     }
     
-    if(![_mappedPort isEqualToString:[ipAndPort objectAtIndex:1]]){
-        _mappedPort = [ipAndPort objectAtIndex:1];
-        natAddrChanged = YES;
-    }
-    
-    if (natAddrChanged) {
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:AM_NAT_ADDR_CHANGED
-         object:self
-         userInfo:@{@"natip" : _mappedIp,
-                    @"natport":_mappedPort}];
+    if ([self.delegate respondsToSelector:@selector(socket:didReceiveData:)]) {
+        [self.delegate socket:self didReceiveData:data];
     }
 }
 
@@ -285,34 +188,5 @@ withFilterContext:(id)filterContext
 
 
 @implementation AMHolePunchingPeer
-
--(id)initWithIp:(NSString*)ip port:(NSString*)port peerId:(NSString*)peerId
-{
-    if (self = [super init]) {
-        self.ip = ip;
-        self.port = port;
-        self.peerId = peerId;
-        self.lastHearbeat = nil;
-        self.recvTimeout = NO;
-    }
-    
-    return self;
-}
-
-@end
-
-@implementation AMHolePunchingServer
-
--(id)initWithIp:(NSString*)ip port:(NSString*)port
-{
-    if (self = [super init]) {
-        self.serverIp = ip;
-        self.serverPort = port;
-        self.lastHeartbeat = nil;
-        self.recvTimeout = NO;
-    }
-    
-    return self;
-}
 
 @end

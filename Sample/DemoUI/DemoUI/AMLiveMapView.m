@@ -440,8 +440,6 @@ AMWorldMap *worldMap;
     NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
     [self addTrackingArea:trackingArea];
 
-    //Apply the information overlay to the map
-    //[self addOverlay:self];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -479,7 +477,6 @@ AMWorldMap *worldMap;
                             
                             // Display info panel
                             if ( ![_infoPanels objectForKey:hovGroup.groupId] ) {
-                                NSLog(@"Add overlay for %@", hovGroup.groupName);
                                 [self addOverlay:hovGroup];
                             }
                     
@@ -505,7 +502,8 @@ AMWorldMap *worldMap;
                                     
                                     
                                     // find pixel for mergedGroup
-                                    AMPixel *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
+                                    //AMLiveGroup *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
+                                    id mergedPixel = mergedGroup.groupId;
                                     
                                     // if pixel doesn't have a panel, add one
                                     if ( ![_infoPanels objectForKey:mergedGroup.groupId] ) {
@@ -548,9 +546,24 @@ AMWorldMap *worldMap;
 }
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
-        
+    NSSize panelPadding = { 10, 5 };
+    
+    
+    NSLayoutManager *panelLayout = thePanel.layoutManager;
+    NSTextContainer *panelText = thePanel.textContainer;
+    
+    [panelLayout glyphRangeForTextContainer:panelText] ;
+    NSSize panelSize = [panelLayout usedRectForTextContainer:panelText].size;
+    
+    
+    NSRect newPanelSize = NSMakeRect(0, 0, panelSize.width + (panelPadding.width *2), panelSize.height+panelPadding.height + (panelPadding.height * 2));
+    [thePanel setTextContainerInset:panelPadding];
+    [thePanel setFrame:newPanelSize];
+
+    //id pixelId = (id)thePixel;
     AMPixel *curPixel = [_allLiveGroupPixels objectForKey:thePixel];
     NSPoint hovPoint = [self getPortCenter:curPixel];
+
         
     if ( hovPoint.x > self.frame.size.width/2 ) {
             
@@ -558,6 +571,7 @@ AMWorldMap *worldMap;
     } else {
         [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
     }
+    
     [self showView:thePanel];
 }
 

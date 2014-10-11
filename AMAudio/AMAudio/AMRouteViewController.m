@@ -160,6 +160,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSArray* allChann = [self.jackClient allChannels];
     
     //Remove device not exist any more
+    NSMutableArray* removedDevices = [[NSMutableArray alloc] init];
     for (AMChannel* channShow in [routeView allChannels])
     {
         if (channShow.type == AMPlaceholderChannel) {
@@ -172,9 +173,16 @@ shouldRemoveDevice:(NSString *)deviceID;
                 bFind = YES;
             }
         }
+        
         if (!bFind) {
-            [routeView removeDevice:channShow.deviceID];
+            if (![removedDevices containsObject:channShow.deviceID]) {
+                [removedDevices addObject:channShow.deviceID];
+            }
         }
+    }
+    
+    for (NSString* devId in removedDevices ) {
+        [routeView removeDevice:devId];
     }
     
     //Calculate new device to add

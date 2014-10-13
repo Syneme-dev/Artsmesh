@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
@@ -24,14 +24,13 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
@@ -41,7 +40,6 @@
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zsp-bb-wBq" customClass="AMFoundryFontView">
                                         <rect key="frame" x="18" y="689" width="93" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="c6x-Je-b4j"/>
                                             <constraint firstAttribute="width" constant="89" id="fBn-Nh-ot1"/>
@@ -54,7 +52,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
                                         <rect key="frame" x="358" y="599" width="224" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="TXG-jf-fuj"/>
                                             <constraint firstAttribute="height" constant="22" id="o9D-VW-L4n"/>
@@ -70,7 +67,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" userLabel="LocalServerPort" customClass="AMFoundryFontView">
                                         <rect key="frame" x="46" y="599" width="251" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="4Nf-kM-OLL"/>
                                         </constraints>
@@ -85,7 +81,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" userLabel="StunServerAddr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="53" y="417" width="244" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="oJz-07-oXo"/>
                                         </constraints>
@@ -100,7 +95,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" userLabel="GlobalServerAddr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="46" y="511" width="251" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="IaF-Pd-Xeu"/>
                                         </constraints>
@@ -115,7 +109,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" userLabel="StunServerPort" customClass="AMFoundryFontView">
                                         <rect key="frame" x="358" y="417" width="224" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="cCS-QG-Taq"/>
                                             <constraint firstAttribute="height" constant="22" id="oZw-ZH-CI4"/>
@@ -131,7 +124,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" userLabel="GlobalServerPort" customClass="AMFoundryFontView">
                                         <rect key="frame" x="358" y="511" width="224" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="GVn-2a-yJf"/>
                                             <constraint firstAttribute="height" constant="22" id="TOf-7G-djj"/>
@@ -147,7 +139,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="343" y="631" width="107" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="103" id="ALY-AS-ZFv"/>
                                             <constraint firstAttribute="height" constant="17" id="uMb-yO-9AE"/>
@@ -160,7 +151,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6hU-q8-TbQ" customClass="AMFoundryFontView">
                                         <rect key="frame" x="18" y="449" width="101" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="1yM-5B-0Kx"/>
                                             <constraint firstAttribute="height" constant="17" id="RjD-cw-nrh"/>
@@ -173,7 +163,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bgf-AN-6QR" customClass="AMFoundryFontView">
                                         <rect key="frame" x="18" y="543" width="105" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="101" id="amd-Vi-jV9"/>
                                             <constraint firstAttribute="height" constant="17" id="qQ2-ft-cN8"/>
@@ -186,7 +175,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dkv-aO-371" customClass="AMFoundryFontView">
                                         <rect key="frame" x="18" y="631" width="158" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="154" id="WQC-JN-ezO"/>
                                             <constraint firstAttribute="height" constant="17" id="neb-e4-PCU"/>
@@ -199,7 +187,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
                                         <rect key="frame" x="343" y="543" width="142" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="Vq5-E1-JfS"/>
                                         </constraints>
@@ -211,7 +198,6 @@
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
                                         <rect key="frame" x="343" y="449" width="125" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="pGn-1m-CTt"/>
                                             <constraint firstAttribute="width" constant="121" id="zEC-an-grC"/>
@@ -224,7 +210,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgK-Gw-A8W" userLabel="MachineName" customClass="AMFoundryFontView">
                                         <rect key="frame" x="46" y="716" width="536" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="6A3-dT-Vny"/>
                                         </constraints>
@@ -239,7 +224,6 @@
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" userLabel="UseIPv6" customClass="AMCheckBoxView">
                                         <rect key="frame" x="345" y="657" width="235" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="235" id="9vw-da-29z"/>
                                             <constraint firstAttribute="height" constant="24" id="AQN-AB-orn"/>
@@ -247,7 +231,6 @@
                                     </customView>
                                     <customView identifier="isTopControlBar" translatesAutoresizingMaskIntoConstraints="NO" id="fdL-A4-ABv" customClass="AMCheckBoxView">
                                         <rect key="frame" x="20" y="354" width="275" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Qxp-Ex-2qK"/>
                                         </constraints>
@@ -257,14 +240,12 @@
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-7Y-Wal" userLabel="PrivateIP" customClass="AMPopUpView">
                                         <rect key="frame" x="48" y="656" width="247" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Ikk-0U-f2J"/>
                                         </constraints>
                                     </customView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LcN-Mm-SCa" customClass="AMFoundryFontView">
                                         <rect key="frame" x="18" y="743" width="104" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="cqd-jB-DkZ"/>
                                             <constraint firstAttribute="height" constant="17" id="vbY-uR-xmg"/>
@@ -335,11 +316,9 @@
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rND-dd-2Kz">
                                         <rect key="frame" x="0.0" y="-19" width="600" height="799"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70f-5O-vHn">
                                                 <rect key="frame" x="18" y="762" width="143" height="17"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="StatusNet Home Page:" id="yNN-sD-npH">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -348,7 +327,6 @@
                                             </textField>
                                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gm7-TQ-We4">
                                                 <rect key="frame" x="30" y="611" width="353" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" usesSingleLineMode="YES" id="S01-da-Af0">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -363,7 +341,6 @@
                                             </secureTextField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeO-DS-oBV">
                                                 <rect key="frame" x="18" y="693" width="56" height="17"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Account" id="9TP-Sq-xOM">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -372,7 +349,6 @@
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGB-ud-1WS">
                                                 <rect key="frame" x="18" y="641" width="64" height="17"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="z6r-82-ewW">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -381,7 +357,6 @@
                                             </textField>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FE0-1F-GTL">
                                                 <rect key="frame" x="111" y="569" width="190" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="square" title="Post a test message" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="7kf-tJ-Xei">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -392,7 +367,6 @@
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-IG-Qwh">
                                                 <rect key="frame" x="30" y="539" width="353" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="P7k-zP-lZz">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -401,7 +375,6 @@
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-9S-Qxd" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="30" y="666" width="353" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="13u-HY-EKP" customClass="AMTextFieldCell">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,7 +386,6 @@
                                             </textField>
                                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-lY-JpS" customClass="AMFoundryFontView">
                                                 <rect key="frame" x="30" y="732" width="353" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="N1r-JL-1Hz" customClass="AMTextFieldCell">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -432,22 +404,9 @@
                 </tabView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="288" y="2" width="81" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
-                            </connections>
-                        </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="jackRouterTab">
                             <rect key="frame" x="363" y="2" width="85" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="inline" title="JACK ROUTER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
@@ -455,7 +414,6 @@
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv" userLabel="videoTab">
                             <rect key="frame" x="440" y="2" width="50" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="CeQ-Af-eRd"/>
                                 <constraint firstAttribute="width" constant="50" id="PCL-PS-eoX"/>
@@ -467,7 +425,6 @@
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="audioTab">
                             <rect key="frame" x="490" y="2" width="50" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="fwL-eo-nKT"/>
                                 <constraint firstAttribute="height" constant="13" id="syG-EU-2WB"/>
@@ -479,7 +436,6 @@
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
                             <rect key="frame" x="540" y="2" width="60" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="hoA-fF-buB"/>
                                 <constraint firstAttribute="width" constant="60" id="xRv-us-iFr"/>
@@ -493,17 +449,23 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
-                            <rect key="frame" x="198" y="2" width="86" height="13"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="86" id="OzK-wI-J0Y"/>
-                            </constraints>
+                            <rect key="frame" x="217" y="2" width="71" height="13"/>
                             <buttonCell key="cell" type="inline" title="GENGERAL |" bezelStyle="inline" alignment="right" inset="2" id="dbP-tn-JPE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
+                            <rect key="frame" x="288" y="2" width="81" height="13"/>
+                            <buttonCell key="cell" type="inline" title="JACK SERVER |" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
                             </connections>
                         </button>
                     </subviews>
@@ -520,7 +482,7 @@
                         <constraint firstItem="mvk-HX-fYa" firstAttribute="baseline" secondItem="vtg-zK-Gic" secondAttribute="baseline" id="p99-ai-s7b"/>
                         <constraint firstItem="mvk-HX-fYa" firstAttribute="baseline" secondItem="YZd-cX-Ly4" secondAttribute="baseline" id="qFO-z2-WKW"/>
                         <constraint firstItem="fqL-QQ-Ulv" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="rsj-78-j2o"/>
-                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="leading" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="4" id="sNJ-45-bv0"/>
+                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="leading" secondItem="mvk-HX-fYa" secondAttribute="trailing" id="sNJ-45-bv0"/>
                     </constraints>
                 </customView>
             </subviews>

@@ -113,16 +113,19 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 - (IBAction)ping:(id)sender
 {
+    [self pushDownButton:self.pingButton];
     [self.tabView selectTabViewItemWithIdentifier:@"pingTab"];
 }
 
 - (IBAction)traceroute:(id)sender
 {
+    [self pushDownButton:self.tracerouteButton];
     [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
 }
 
 - (IBAction)iperf:(id)sender
 {
+    [self pushDownButton:self.iperfButton];
     [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
 }
 

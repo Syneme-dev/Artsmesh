@@ -250,12 +250,14 @@
 - (IBAction)staticGroupTabClick:(NSButton *)sender
 {
     [self hideDetailView];
+    [self pushDownButton:self.staticGroupTab];
     [self.groupTabView selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)liveGroupTabClick:(NSButton *)sender
 {
     [self hideDetailView];
+    [self pushDownButton:self.liveGroupTab];
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
 

@@ -235,11 +235,13 @@
 
 - (IBAction)onUserTabClick:(id)sender
 {
+    [self pushDownButton:self.userTabButton];
     [self.tabs selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)onGroupTabClick:(id)sender
 {
+    [self pushDownButton:self.groupTabButton];
     [self.tabs selectTabViewItemAtIndex:1];
 }
 

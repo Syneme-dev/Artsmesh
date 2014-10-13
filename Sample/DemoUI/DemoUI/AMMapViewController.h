@@ -17,11 +17,11 @@
 @interface AMMapViewController : AMTabPanelViewController
 @property (strong) IBOutlet WebView *webView;
 @property (strong) IBOutlet NSTabView *tabs;
-@property (strong) IBOutlet AMBlueButton *staticTab;
+@property (strong) IBOutlet NSButton *staticTab;
 @property (weak) IBOutlet WebView *archiveWebView;
 @property (strong) IBOutlet AMLiveMapView *liveMapView;
 - (IBAction)onStaticTabClick:(id)sender;
-@property (strong) IBOutlet AMBlueButton *liveTab;
+@property (strong) IBOutlet NSButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;
 
 @end

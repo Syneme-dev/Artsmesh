@@ -57,6 +57,9 @@
     [self.webView setDrawsBackground:NO];
     [self loadLivePage];
     [self loadArchivePage];
+    [AMButtonHandler changeTabTextColor:self.staticTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.liveTab toColor:UI_Color_blue];
+
 }
 
 -(void)registerTabButtons{
@@ -182,10 +185,11 @@
 }
 
 - (IBAction)onStaticTabClick:(id)sender {
+    [self pushDownButton:self.staticTab];
     [self.tabs selectTabViewItemAtIndex:1];
-
 }
 - (IBAction)liveTabClick:(id)sender {
+    [self pushDownButton:self.liveTab];
     [self.tabs selectTabViewItemAtIndex:0];
 }
 @end

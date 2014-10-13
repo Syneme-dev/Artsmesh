@@ -99,6 +99,7 @@
 
 
 - (IBAction)onJackServerTabClick:(id)sender {
+    [self pushDownButton:self.jackServerTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
 
@@ -133,12 +134,14 @@
 
 
 - (IBAction)onGeneralClick:(id)sender {
-      [self.tabs selectTabViewItemWithIdentifier:@"0"];
+    [self pushDownButton:self.generalTabButton];
+    [self.tabs selectTabViewItemWithIdentifier:@"0"];
 }
 
 
 - (IBAction)onStatusNetClick:(id)sender {
-     [self.tabs selectTabViewItemWithIdentifier:@"6"];
+    [self pushDownButton:self.statusnetTabButton];
+    [self.tabs selectTabViewItemWithIdentifier:@"6"];
 }
 
 

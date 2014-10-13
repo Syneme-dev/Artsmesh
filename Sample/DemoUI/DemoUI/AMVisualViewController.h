@@ -16,12 +16,12 @@
 - (IBAction)onAudioTabClick:(id)sender;
 - (IBAction)onVideoTabClick:(id)sender;
 @property (strong) IBOutlet NSTabView *tabView;
-@property (strong) IBOutlet AMBlueButton *oscTab;
-@property (strong) IBOutlet AMBlueButton *visualTab;
+@property (strong) IBOutlet NSButton *oscTab;
+@property (strong) IBOutlet NSButton *visualTab;
 
-@property (strong) IBOutlet AMBlueButton *videoTab;
+@property (strong) IBOutlet NSButton *videoTab;
 
-@property (strong) IBOutlet AMBlueButton *audioTab;
+@property (strong) IBOutlet NSButton *audioTab;
 
 
 @end

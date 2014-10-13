@@ -14,6 +14,7 @@
 
 @property (weak)AMJackTripManager* jacktripManager;
 @property (weak)AMJackManager* jackManager;
+@property (weak)NSPopover* owner;
 @property int maxChannels;
 
 -(void)initParameters;

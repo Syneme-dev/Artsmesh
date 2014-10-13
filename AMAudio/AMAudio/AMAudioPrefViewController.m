@@ -11,6 +11,7 @@
 #import "AMJackConfigs.h"
 #import "UIFrameWork/AMPopUpView.h"
 #import "UIFrameWork/AMCheckBoxView.h"
+#import "UIFramework/AMButtonHandler.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMAudioPrefViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
@@ -66,6 +67,9 @@
     [self loadPrefs];
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
+    
+    [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
     
 }
 

@@ -104,19 +104,9 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-in-zO5">
-                    <rect key="frame" x="392" y="61" width="85" height="32"/>
-                    <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H16-1T-mTk">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="saveConfig:" target="-2" id="8jK-jz-7Bg"/>
-                    </connections>
-                </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4D-5o-561">
-                    <rect key="frame" x="303" y="61" width="82" height="32"/>
-                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WKv-o1-hfI">
+                    <rect key="frame" x="302" y="64" width="79" height="25"/>
+                    <buttonCell key="cell" type="square" title="Cancel" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="WKv-o1-hfI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
@@ -160,6 +150,16 @@ Gw
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-50-p0m" customClass="AMCheckBoxView">
                     <rect key="frame" x="57" y="247" width="415" height="31"/>
                 </customView>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-in-zO5">
+                    <rect key="frame" x="391" y="64" width="80" height="25"/>
+                    <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="H16-1T-mTk">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="saveConfig:" target="-2" id="8jK-jz-7Bg"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="-78" y="-56"/>
         </view>

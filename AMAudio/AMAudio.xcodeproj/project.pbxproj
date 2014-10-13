@@ -20,6 +20,7 @@
 		26F2C30E19B9FD61001261F0 /* AMJackTripConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */; };
 		26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */; };
 		26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */; };
+		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
 		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
 		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
 		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
@@ -109,6 +110,7 @@
 		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripConfigController.h; sourceTree = "<group>"; };
 		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfigController.m; sourceTree = "<group>"; };
 		26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackTripConfigController.xib; sourceTree = "<group>"; };
+		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */,
 				26624DC319C9261C008F3D6D /* AMPreferenceManager.framework in Frameworks */,
 				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
@@ -239,6 +242,7 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A58332319EBB14E00BFB468 /* UIFramework.framework */,
 				26624DC219C9261C008F3D6D /* AMPreferenceManager.framework */,
 				265A405619BD65C8003D27E5 /* AMCoreData.framework */,
 				D443717C19AACF7A00F49705 /* CoreAudio.framework */,
@@ -621,6 +625,7 @@
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -652,6 +657,7 @@
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

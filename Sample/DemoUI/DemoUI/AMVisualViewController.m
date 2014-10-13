@@ -8,6 +8,8 @@
 
 #import "AMVisualViewController.h"
 #import "AMAudio/AMAudio.h"
+#import <UIFramework/AMButtonHandler.h>
+
 
 @interface AMVisualViewController ()
 
@@ -34,22 +36,30 @@
     [self.tabButtons addObject:self.audioTab];
     [self.tabButtons addObject:self.videoTab];
     self.showingTabsCount=4;
-    
+    [AMButtonHandler changeTabTextColor:self.visualTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.oscTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
+
 }
 
 - (IBAction)onVisualTabClick:(NSButton *)sender {
+    [self pushDownButton:self.visualTab];
     [self.tabView selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)onOSCTabClick:(id)sender {
+    [self pushDownButton:self.oscTab];
     [self.tabView selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)onAudioTabClick:(id)sender {
+    [self pushDownButton:self.audioTab];
     [self.tabView selectTabViewItemAtIndex:2];
 }
 
 - (IBAction)onVideoTabClick:(id)sender {
+    [self pushDownButton:self.videoTab];
     [self.tabView selectTabViewItemAtIndex:3];
 }
 

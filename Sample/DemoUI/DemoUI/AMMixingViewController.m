@@ -7,6 +7,8 @@
 //
 
 #import "AMMixingViewController.h"
+#import <UIFramework/AMButtonHandler.h>
+
 
 @interface AMMixingViewController ()
 
@@ -29,18 +31,24 @@
     [self.tabButtons addObject:self.audioTab];
     [self.tabButtons addObject:self.outputTab];
     self.showingTabsCount=3;
-    
+    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.outputTab toColor:UI_Color_blue];
+
 }
 
 - (IBAction)onAudioTabClick:(id)sender {
+    [self pushDownButton:self.audioTab];
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)onVideoTabClick:(id)sender {
+    [self pushDownButton:self.videoTab];
     [self.tabs selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)onOutputTabClick:(id)sender {
+    [self pushDownButton:self.outputTab];
     [self.tabs selectTabViewItemAtIndex:2];
 }
 @end

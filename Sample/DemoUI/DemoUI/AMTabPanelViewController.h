@@ -15,5 +15,8 @@
 -(void)registerTabButtons;
 @property (strong) IBOutlet NSTabView *tabs;
 -(void)selectTabIndex:(NSInteger)index;
+@property(nonatomic) NSButton *currentPushedDownButton;
+
+- (void)pushDownButton:(NSButton *)button;
 
 @end

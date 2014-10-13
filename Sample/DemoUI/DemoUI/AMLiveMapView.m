@@ -106,10 +106,9 @@ AMWorldMap *worldMap;
                     [connectedGroups setObject:remoteGroup forKey:@"group"];
                     [connectedGroups setObject:remoteSubGroup forKey:@"subGroup"];
                     
-                    //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
+                    //TODO: Need to be sure either group isn't stored in the mergedLocations array as
+                    //part of an old merged connection
                     
-                    /** this has been moved to a function, 
-                        make sure still works when meshed then delete this
                     for ( NSMutableDictionary *groups in self.mergedLocations) {
                         AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
                         AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
@@ -122,12 +121,6 @@ AMWorldMap *worldMap;
                             [self.mergedLocations removeObject:groups];
                         }
                     }
-                    **/
-                    
-                    
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
-                    
                     
                     [_mergedLocations addObject:connectedGroups];
                 
@@ -289,8 +282,8 @@ AMWorldMap *worldMap;
 - (NSPoint)centerOfPort:(NSInteger)portIndex
 {
     NSAssert(portIndex >= 0 && portIndex < self.ports.count, @"invalid argument");
- 
- 
+    
+    
     CGFloat radian = portIndex * 2 * M_PI / self.ports.count;
     return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
@@ -407,27 +400,6 @@ AMWorldMap *worldMap;
     }
 }
 
-- (id) checkGroupIsMerged:(AMLiveGroup *)theGroup {
-    id mergedId = nil;
-    
-    for ( NSMutableDictionary *groups in self.mergedLocations) {
-        AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
-        AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
-        
-        if ( [theGroup.groupId isEqualToString:storedGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
-            
-            mergedId = groups;
-        } else {
-            mergedId = nil;
-        }
-    }
-    
-    return mergedId;
-}
-
 - (void)checkPixel:(AMLiveGroup *)theGroup {
     // This function checks a given group's previous location (following a change)
     // against all currently active locations on the map
@@ -506,8 +478,6 @@ AMWorldMap *worldMap;
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     BOOL isHovering = NO;
-    // Group found, do something with it's information
-    AMLiveGroup *hovGroup;
     
     for ( AMPixel *port in _allLiveGroupPixels ) {
         
@@ -528,9 +498,9 @@ AMWorldMap *worldMap;
                 NSString *groupLoc = [_allGroupsLoc objectForKey:group];
                 if (groupLoc == portLoc) {
                     
-                    //NSLog(@"group is being hovered on! %@", hovGroup.groupName);
-                    
-                    hovGroup = [_allGroups objectForKey:group];
+                    // Group found, do something with it's information
+                    AMLiveGroup *hovGroup = [_allGroups objectForKey:group];
+                    NSLog(@"group is being hovered on! %@", hovGroup.groupName);
                     
                     [_infoPanel setString:hovGroup.groupName];
                     isHovering = YES;
@@ -542,19 +512,12 @@ AMWorldMap *worldMap;
     switch (isHovering) {
         case YES:
             if (_infoPanel.isHidden) {
-                AMPixel *hovPixel = [_allLiveGroupPixels objectForKey:hovGroup.groupId];
-                NSPoint hovPoint = [self getPortCenter:hovPixel];
-                
                 if ( cursorPoint.x > self.frame.size.width/2 ) {
-                    
-                    [_infoPanel setFrameOrigin:NSMakePoint(hovPoint.x - (_infoPanel.frame.size.width + 20), hovPoint.y + 20)];
+                    [_infoPanel setFrameOrigin:NSMakePoint(cursorPoint.x - (_infoPanel.frame.size.width + 20), cursorPoint.y + 20)];
                 } else {
-                    [_infoPanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
+                    [_infoPanel setFrameOrigin: NSMakePoint(cursorPoint.x + 20,cursorPoint.y + 20)];
                 }
                 [self showView:_infoPanel];
-                
-                //
-
             }
             break;
         default:

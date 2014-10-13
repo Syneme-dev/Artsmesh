@@ -20,6 +20,8 @@
 		269C3339197CE28900AF86AA /* AMHttpSyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C3335197CE28900AF86AA /* AMHttpSyncRequest.m */; };
 		269C333A197CE28900AF86AA /* AMHttpAsyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 269C3336197CE28900AF86AA /* AMHttpAsyncRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		269C333B197CE28900AF86AA /* AMHttpAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C3337197CE28900AF86AA /* AMHttpAsyncRequest.m */; };
+		26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */; };
 		26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */; };
 		26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,8 +30,6 @@
 		26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EE8BD218DC0AB3008262F8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26F07AC8198F85ED009C72D6 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F07AC6198F85ED009C72D6 /* NSData+Base64.h */; };
 		26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F07AC7198F85ED009C72D6 /* NSData+Base64.m */; };
-		D4E6203E19E3E18E006C0F8A /* AMHolePunchingSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E6203C19E3E18E006C0F8A /* AMHolePunchingSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D4E6203F19E3E18E006C0F8A /* AMHolePunchingSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E6203D19E3E18E006C0F8A /* AMHolePunchingSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +62,8 @@
 		269C3335197CE28900AF86AA /* AMHttpSyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpSyncRequest.m; sourceTree = "<group>"; };
 		269C3336197CE28900AF86AA /* AMHttpAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpAsyncRequest.h; sourceTree = "<group>"; };
 		269C3337197CE28900AF86AA /* AMHttpAsyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpAsyncRequest.m; sourceTree = "<group>"; };
+		26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHolePunchingSocket.h; sourceTree = "<group>"; };
+		26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHolePunchingSocket.m; sourceTree = "<group>"; };
 		26EE8B6818DBA4E6008262F8 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		26EE8B6918DBA4E6008262F8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		26EE8B7E18DBB23E008262F8 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -70,8 +72,6 @@
 		26EE8BD218DC0AB3008262F8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		26F07AC6198F85ED009C72D6 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		26F07AC7198F85ED009C72D6 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		D4E6203C19E3E18E006C0F8A /* AMHolePunchingSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHolePunchingSocket.h; sourceTree = "<group>"; };
-		D4E6203D19E3E18E006C0F8A /* AMHolePunchingSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHolePunchingSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 				269C3335197CE28900AF86AA /* AMHttpSyncRequest.m */,
 				269C3336197CE28900AF86AA /* AMHttpAsyncRequest.h */,
 				269C3337197CE28900AF86AA /* AMHttpAsyncRequest.m */,
-				D4E6203C19E3E18E006C0F8A /* AMHolePunchingSocket.h */,
-				D4E6203D19E3E18E006C0F8A /* AMHolePunchingSocket.m */,
+				26CC6CE1193857B60008E83E /* AMHolePunchingSocket.h */,
+				26CC6CE2193857B60008E83E /* AMHolePunchingSocket.m */,
 				2692CDF818D7CEC8006501C4 /* Supporting Files */,
 			);
 			path = AMNetworkUtils;
@@ -200,7 +200,7 @@
 				269C333A197CE28900AF86AA /* AMHttpAsyncRequest.h in Headers */,
 				26EE8B6A18DBA4E6008262F8 /* GCDAsyncUdpSocket.h in Headers */,
 				26EE8BD318DC0AB3008262F8 /* JSONKit.h in Headers */,
-				D4E6203E19E3E18E006C0F8A /* AMHolePunchingSocket.h in Headers */,
+				26CC6CE3193857B60008E83E /* AMHolePunchingSocket.h in Headers */,
 				26EE8B8018DBB23E008262F8 /* GCDAsyncSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +304,7 @@
 				269C333B197CE28900AF86AA /* AMHttpAsyncRequest.m in Sources */,
 				26EE8B6B18DBA4E6008262F8 /* GCDAsyncUdpSocket.m in Sources */,
 				26EE8BD418DC0AB3008262F8 /* JSONKit.m in Sources */,
-				D4E6203F19E3E18E006C0F8A /* AMHolePunchingSocket.m in Sources */,
+				26CC6CE4193857B60008E83E /* AMHolePunchingSocket.m in Sources */,
 				26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */,
 				269C3339197CE28900AF86AA /* AMHttpSyncRequest.m in Sources */,
 				2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */,

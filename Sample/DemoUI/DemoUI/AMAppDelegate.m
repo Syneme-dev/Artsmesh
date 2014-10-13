@@ -26,9 +26,6 @@ static NSMutableDictionary *allPlugins = nil;
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
-    
-    
     allPlugins = [self loadPlugins];
     [[AMPreferenceManager shareInstance] initPreference];
     [[AMStatusNet shareInstance] loadGroups];

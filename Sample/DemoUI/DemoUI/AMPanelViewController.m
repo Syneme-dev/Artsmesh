@@ -148,6 +148,8 @@
 //                                                               saturation:0.15
 //                                                               brightness:0.15
 //                                                                    alpha:1.0];
+        [_floatingWindow setOpaque:NO];
+        _floatingWindow.backgroundColor = [NSColor clearColor];
         _floatingWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
         _floatingWindow.delegate = self;
         [_floatingWindow setFrameOrigin:windowOrigin];

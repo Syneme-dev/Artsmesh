@@ -13,7 +13,7 @@
 @interface AMJacktripInstance : NSObject
 
 @property NSString* instanceName;
-@property NSTask* jacktripTask;
+@property AMShellTask* jacktripTask;
 @property int portOffset;
 @property int channelCount;
 

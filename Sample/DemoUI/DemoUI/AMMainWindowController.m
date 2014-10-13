@@ -92,8 +92,7 @@
         self.window.restorable = YES;
         self.window.restorationClass = [appDelegate class];
         self.window.identifier = @"mainWindow";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AMNotification_Meshed object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AMNotification_Demeshed object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myStatucChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStarted:) name:AM_JACK_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStopped:) name:AM_JACK_STOPPED_NOTIFICATION object:nil];

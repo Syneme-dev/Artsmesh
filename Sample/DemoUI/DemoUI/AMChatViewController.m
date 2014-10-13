@@ -65,11 +65,8 @@
     
     [_socket startHolePunching];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AMNotification_MyClusterChanged object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AMNotification_MyLiveGroupChanged object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AMNotification_Meshed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AMNotification_Demeshed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANGED_REMOTE object:nil];
 }
 
 -(void)dealloc{
@@ -82,13 +79,13 @@
 
 -(void)onlineStatusChanged:(NSNotification*) notification
 {
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    //NSAssert(mySelf, @"myself can not be nil");
-    if (mySelf.isOnline == YES) {
-        [_socket startHolePunching];
-    }else{
-        [_socket stopHolePunching];
-    }
+//    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+//    NSAssert(mySelf, @"myself can not be nil");
+//    if (mySelf.isOnline == YES) {
+//        [_socket startHolePunching];
+//    }else{
+//        [_socket stopHolePunching];
+//    }
 }
 
 

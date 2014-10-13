@@ -66,11 +66,8 @@
     [self.staticGroupOutlineView setTarget:self.staticGroupDataSource];
     [self.staticGroupOutlineView setDoubleAction:@selector(doubleClickOutlineView:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AMNotification_MyClusterChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AMNotification_LiveGroupListChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AMNotification_MySelfChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AMNotification_MyLiveGroupChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshStaticGroups) name:AMNotification_ArchievedGroupListChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshStaticGroups) name:AM_STATIC_GROUP_CHANGED object:nil];
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];

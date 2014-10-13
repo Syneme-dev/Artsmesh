@@ -83,7 +83,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
         
         return;
     }
-    
+
 }
 
 -(void)startHolePunching
@@ -91,7 +91,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
     if (self.useIpv6) {
         return;
     }
-    
+   
     _punchingTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
 }
 
@@ -147,7 +147,7 @@ NSString * const AMHolePunchingSocketErrorDomain = @"AMHolePunchingSocketErrorDo
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag
 {
-    // You could add checks here
+	// You could add checks here
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
@@ -172,7 +172,7 @@ withFilterContext:(id)filterContext
         }
         return;
     }
-    
+
     if ([msg isEqualToString:AMholePunchingPeerPacket]) {
         //peer packet
         NSLog(@"heartbeat from %@", fromHost);

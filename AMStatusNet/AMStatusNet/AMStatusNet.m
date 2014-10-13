@@ -110,6 +110,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [AMCoreData shareInstance].staticGroups = staticGroups;
+            //[[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
         });
     };
     
@@ -171,9 +172,10 @@
             }
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{            
-            NSNotification* notification = [NSNotification notificationWithName: AMNotification_ArchievedGroupListChanged object:self userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [AMCoreData shareInstance].myStaticGroups = myStaticGroups;
+            [[AMCoreData shareInstance] broadcastChanges:AM_STATIC_GROUP_CHANGED];
+            [[AMCoreData shareInstance] broadcastChanges:AM_MYSTATIC_GROUPS_CHANGED];
         });
     };
     

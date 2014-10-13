@@ -61,14 +61,17 @@
     self.userBusyCheckBox.title = @"BUSY";
     self.userBusyCheckBox.delegate = self;
     
-  
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanged) name:AM_MYGROUP_CHANGED_LOCAL object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myselfChanged) name:AM_MYSELF_CHANGED_LOCAL object:nil];
-//    
-//
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userListChenged) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanging) name:AM_MYGROUP_CHANGING_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanged) name:AM_MYGROUP_CHANGED_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfChanging) name:AM_MYSELF_CHANGING_LOCAL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myselfChanged) name:AM_MYSELF_CHANGED_LOCAL object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanging) name:AM_MYGROUP_CHANGING_REMOTE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanged) name:AM_MYGROUP_CHANGED_REMOTE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanging) name:AM_MYSELF_CHANGING_REMOTE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userListChenged) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;

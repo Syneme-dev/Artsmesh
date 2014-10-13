@@ -17,22 +17,11 @@ PODS:
   - AFNetworking/Reachability (2.3.1)
   - AFNetworking/Security (2.3.1)
   - AFNetworking/Serialization (2.3.1)
-  - CocoaLumberjack (2.0.0-beta2):
-    - CocoaLumberjack/CLI
-    - CocoaLumberjack/Core
-    - CocoaLumberjack/Extensions
-  - CocoaLumberjack/CLI (2.0.0-beta2):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Core (2.0.0-beta2)
-  - CocoaLumberjack/Extensions (2.0.0-beta2):
-    - CocoaLumberjack/Core
 
 DEPENDENCIES:
   - AFNetworking
-  - CocoaLumberjack
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  CocoaLumberjack: 956d3fb98fed498a13d56499f262c975ef431c98
 
 COCOAPODS: 0.32.1

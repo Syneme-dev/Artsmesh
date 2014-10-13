@@ -47,7 +47,7 @@
     [[NSNotificationCenter defaultCenter]
         addObserver:self
         selector:@selector(userGroupsChanged:)
-        name: AMNotification_MyLiveGroupChanged
+        name: AM_LIVE_GROUP_CHANDED
         object:nil];
 }
 

@@ -114,9 +114,6 @@
     sleep(2);
     
     [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
-    
-//    [AMCoreData shareInstance].myLocalLiveGroup.longitude = @"116";
-//    [AMCoreData shareInstance].myLocalLiveGroup.latitude = @"39";
 }
 
 
@@ -163,7 +160,7 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+       // NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
@@ -186,44 +183,6 @@
     [_httpRequestQueue addOperation:req];
 }
 
-
-//-(void)getLocalGroupInfo
-//{
-//    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-//    req.baseURL = [self httpBaseURL];
-//    req.requestPath = @"/groups/getall";
-//    req.httpMethod = @"GET";
-//    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-//        if (isCancel == YES) {
-//            return;
-//        }
-//        
-//        if (error != nil) {
-//            NSLog(@"error happened when get group info:%@", error.description);
-//            return;
-//        }
-//        
-//        NSAssert(response, @"response should not be nil without error");
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            AMLiveGroup* group = [AMLiveGroup AMGroupFromDict:(NSDictionary*)response];
-//            AMLiveGroup* localGroup =[AMCoreData shareInstance].myLocalLiveGroup;
-//            
-//            //should no need synchronized, because in main loop
-//            // @synchronized(localGroup){
-//            localGroup.groupName = group.groupName;
-//            localGroup.description = group.description;
-//            localGroup.leaderId = group.leaderId;
-//            //}
-//            
-//            [self registerSelf];
-//        });
-//    };
-//    
-//    [_httpRequestQueue addOperation:req];
-//}
-
-
 -(void)registerSelf
 {
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
@@ -244,7 +203,7 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
@@ -343,46 +302,16 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update group info response wrong!");
-        }
-    };
-    
-    [_httpRequestQueue addOperation:req];
-}
-
--(void)changeGroupPassword:(NSString*)newPassword password:(NSString*)oldPassword
-{
-    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    dict[@"password"] = oldPassword;
-    dict[@"newPasswrod"] = newPassword;
-    dict[@"groupId"] = localGroup.groupId;
-    
-    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/groups/change_password";
-    req.formData = dict;
-    req.httpMethod = @"POST";
-    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-        if (isCancel == YES) {
-            return;
-        }
-        
-        if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
-            return;
-        }
-        
-        NSAssert(response, @"response should not be nil without error");
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update group password response wrong!");
+            NSLog(@"update group info response wrong!");
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MyClusterChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            });
         }
     };
     
@@ -392,11 +321,6 @@
 
 -(void)updateMyself
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
-    });
-    
-    
     if([[AMMesher sharedAMMesher] mesherState] < kMesherStarted  ||
        [[AMMesher sharedAMMesher] mesherState] >= kMesherStopping){
         return;
@@ -423,9 +347,12 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
            NSLog(@"update user info response wrong! %@", responseStr);
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MySelfChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            });
         }
-        
-        //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_LOCAL];
     };
     
     [_httpRequestQueue addOperation:req];
@@ -433,7 +360,6 @@
 
 -(void)updateGroupInfo
 {
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_LOCAL];
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -453,14 +379,17 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSLog(@"updateGroupInfo failed!");
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MyClusterChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            });
         }
-        
-       // [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_LOCAL];
     };
     
     [_httpRequestQueue addOperation:req];
@@ -483,14 +412,15 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         NSLog(@"getall users return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
         if(err != nil){
             NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
-            NSAssert(NO, errInfo);
+            NSLog(@"%@", errInfo);
+            return;
         }
         
         NSDictionary* result = (NSDictionary*)objects;
@@ -527,7 +457,8 @@
             
             _userlistVersion = [[result objectForKey:@"Version"] intValue];
             
-            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            NSNotification* notification = [NSNotification notificationWithName: AMNotification_MyClusterChanged object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         });
     };
 
@@ -578,15 +509,14 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"didSendData:%@", jsonStr);
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didSendData:%@", jsonStr);
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
-    //NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
 }
 
 

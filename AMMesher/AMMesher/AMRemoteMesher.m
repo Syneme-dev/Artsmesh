@@ -120,10 +120,6 @@
 
 -(void)registerGroup
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
-    });
-    
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
 
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -141,7 +137,7 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"] ||
@@ -162,10 +158,6 @@
 
 -(void)registerSelf
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
-    });
-    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.isOnline = YES;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -189,15 +181,20 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+       // NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
-                [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
-                //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
+                
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MySelfChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
+                notification = [NSNotification notificationWithName: AMNotification_Meshed object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                
             });
             
         }else{
@@ -215,10 +212,6 @@
     if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
-    });
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSDictionary* dict = [mySelf toDict];
@@ -238,14 +231,17 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update user info on remote response wrong!");
+            NSLog(@"update user info on remote response wrong!");
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MySelfChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            });
         }
-        
-         //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
     };
 
     [_httpRequestQueue addOperation:req];
@@ -257,10 +253,6 @@
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
-    });
-
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
     
@@ -279,14 +271,17 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
             NSLog(@"update user info on remote response wrong!%@", responseStr);
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNotification* notification = [NSNotification notificationWithName: AMNotification_MyLiveGroupChanged object:self userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+            });
         }
-        
-        //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
     };
     
     [_httpRequestQueue addOperation:req];
@@ -313,7 +308,9 @@
     
     [AMCoreData shareInstance].remoteLiveGroups = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance]broadcastChanges: AM_LIVE_GROUP_CHANDED];
+        
+        NSNotification* notification = [NSNotification notificationWithName: AMNotification_Demeshed object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
     });
 }
 
@@ -364,7 +361,8 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
+            NSNotification* notification = [NSNotification notificationWithName: AMNotification_LiveGroupListChanged object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         });
     };
     
@@ -417,7 +415,7 @@
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        //NSAssert(response, @"response should not be nil without error");
         
         NSLog(@"getall users return........................");
         
@@ -448,7 +446,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [AMCoreData shareInstance].remoteLiveGroups = groupList;
-            [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            
+            NSNotification* notification = [NSNotification notificationWithName: AMNotification_LiveGroupListChanged object:self userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         });
     };
     
@@ -569,8 +569,8 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"didSendData:%@", jsonStr);
+    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"didSendData:%@", jsonStr);
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error

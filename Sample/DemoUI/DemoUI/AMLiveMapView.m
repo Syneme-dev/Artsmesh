@@ -133,7 +133,8 @@ AMWorldMap *worldMap;
         [self setNeedsDisplay:YES];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AMNotification_MyLiveGroupChanged object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AMNotification_MyClusterChanged  object:nil];
     
 }
 

@@ -80,14 +80,6 @@
 }
 
 
--(void)broadcastChanges:(NSString*)notificationName
-{
-   // dispatch_async(dispatch_get_main_queue(), ^{
-        NSNotification* notification = [NSNotification notificationWithName:notificationName object:self userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-  //  });
-}
-
 -(AMLiveGroup*)mergedGroup
 {
     for (AMLiveGroup* group in self.remoteLiveGroups) {

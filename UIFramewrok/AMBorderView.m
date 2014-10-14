@@ -30,12 +30,12 @@
         [aView setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = NSDictionaryOfVariableBindings(aView);
         [self addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[aView]-20-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[aView]-0-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];
         [self addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[aView]-20-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[aView]-0-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];

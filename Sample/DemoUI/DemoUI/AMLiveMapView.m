@@ -69,9 +69,6 @@ AMWorldMap *worldMap;
     
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:myGroup.groupId];
-    
-    NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] init];
-
      
     // Get/Set location data
     
@@ -79,43 +76,10 @@ AMWorldMap *worldMap;
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
             
-            NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
-
-            if ( storedGroupLoc != remoteGroup.location ) {
-                // Current group has either just been created or has had a location change
-                
-                if ( storedGroupLoc != nil ) { [self checkPixel:remoteGroup]; };
-                
-                [_allGroupsLoc removeObjectForKey:remoteGroup.groupId];
-                
-                [self findLiveGroupLocation:remoteGroup];
-                
-            }
+            [self updateGroups:[NSArray arrayWithObject:remoteGroup]];
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
-                NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
-                
-                if ( storedSubGroupLoc != remoteSubGroup.location ) {
-                    
-                    if ( storedSubGroupLoc != nil ) { [self checkPixel:remoteSubGroup]; };
-                    
-                    [_allGroupsLoc removeObjectForKey:remoteSubGroup.groupId];
-                    
-                    [self findLiveGroupLocation:remoteSubGroup];
-                
-                    [connectedGroups removeAllObjects];
-                    [connectedGroups setObject:remoteGroup forKey:@"group"];
-                    [connectedGroups setObject:remoteSubGroup forKey:@"subGroup"];
-                    
-                    //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
-                    
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
-                    
-                    
-                    [_mergedLocations addObject:connectedGroups];
-                
-                }
+                [self updateGroups:[NSArray arrayWithObjects:remoteGroup, remoteSubGroup, nil]];
             }
         }
     } else {
@@ -403,6 +367,42 @@ AMWorldMap *worldMap;
         AMPixel *port = self.ports[i];
         port.state = AMPixelStateNormal;
     }
+}
+
+- (void)updateGroups:(NSArray *)theGroups {
+
+    AMLiveGroup *theGroup = [theGroups objectAtIndex:0];
+    
+    NSString * storedGroupLoc = [_allGroupsLoc objectForKey:theGroup.groupId];
+    
+    if ( storedGroupLoc != theGroup.location ) {
+        // Current group has either just been created or has had a location change
+        
+        if ( storedGroupLoc != nil ) { [self checkPixel:theGroup]; };
+        
+        [_allGroupsLoc removeObjectForKey:theGroup.groupId];
+        
+        [self findLiveGroupLocation:theGroup];
+        
+        if ( [theGroups count] >= 2 ) {
+            AMLiveGroup *parentGroup = [theGroups objectAtIndex:1];
+            
+            NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] init];
+            
+            [connectedGroups setObject:parentGroup forKey:@"group"];
+            [connectedGroups setObject:theGroup forKey:@"subGroup"];
+            
+            //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
+            
+            [self.mergedLocations removeObject:[self checkGroupIsMerged:parentGroup]];
+            [self.mergedLocations removeObject:[self checkGroupIsMerged:theGroup]];
+            
+            
+            [_mergedLocations addObject:connectedGroups];
+        }
+        
+    }
+    
 }
 
 - (void)liveGroupChanged:(NSNotification *)note {

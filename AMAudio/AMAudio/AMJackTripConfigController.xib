@@ -8,7 +8,8 @@
             <connections>
                 <outlet property="bitRateRes" destination="uH7-XW-2mz" id="ncV-uc-V87"/>
                 <outlet property="channeCount" destination="zc0-y7-gih" id="vWK-a5-3Ka"/>
-                <outlet property="createBtn" destination="wZM-is-OrT" id="xY1-Qk-yja"/>
+                <outlet property="closeBtn" destination="wZM-is-OrT" id="p4p-2E-f2Z"/>
+                <outlet property="createBtn" destination="YSS-gi-ODN" id="2vb-yi-IcR"/>
                 <outlet property="ipv6Check" destination="d8c-cq-8jP" id="INT-us-TbJ"/>
                 <outlet property="jamlinkCheck" destination="Xdg-ZU-rAy" id="gbu-FU-R4p"/>
                 <outlet property="loopbackCheck" destination="aYT-b3-uN6" id="lbi-RJ-wSC"/>
@@ -103,13 +104,13 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wZM-is-OrT">
-                    <rect key="frame" x="218" y="1" width="165" height="32"/>
-                    <buttonCell key="cell" type="square" title="Create" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="UME-P8-nEt">
+                    <rect key="frame" x="283" y="0.0" width="100" height="30"/>
+                    <buttonCell key="cell" type="square" title="Close" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="UME-P8-nEt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="startJacktrip:" target="-2" id="mQ7-18-VOS"/>
+                        <action selector="closeClicked:" target="-2" id="tap-JC-FMT"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zc0-y7-gih" customClass="AMFoundryFontView">
@@ -183,8 +184,18 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-gi-ODN">
+                    <rect key="frame" x="184" y="0.0" width="100" height="30"/>
+                    <buttonCell key="cell" type="square" title="Run" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="VJk-QO-VMs">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="startJacktrip:" target="-2" id="C5D-uB-Oip"/>
+                    </connections>
+                </button>
             </subviews>
-            <point key="canvasLocation" x="259" y="-69"/>
+            <point key="canvasLocation" x="536" y="-71"/>
         </customView>
     </objects>
 </document>

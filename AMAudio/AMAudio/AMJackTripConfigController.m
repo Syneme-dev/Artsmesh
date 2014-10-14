@@ -14,6 +14,7 @@
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMJackTripConfigController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
@@ -30,6 +31,7 @@
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
+@property (weak) IBOutlet NSButton *closeBtn;
 
 @property NSArray* allUsers;
 
@@ -49,6 +51,9 @@
 
 -(void)awakeFromNib
 {
+    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(jacktripChanged:)
      name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
@@ -325,6 +330,8 @@
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
         [alert runModal];
     }
+    
+    [self.owner performClose:nil];
 }
 
 -(void)jacktripChanged:(NSNotification*)notification
@@ -333,5 +340,9 @@
     [self initPortOffset];
 }
 
+- (IBAction)closeClicked:(NSButton *)sender
+{
+    [self.owner performClose:nil];
+}
 
 @end

@@ -67,7 +67,7 @@
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
 		D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
-		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
+		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
@@ -422,7 +422,7 @@
 		D472930519A6E5030034CC34 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = AM;
 				TargetAttributes = {
 					D472932419A6E5030034CC34 = {

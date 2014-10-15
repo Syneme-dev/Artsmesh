@@ -25,18 +25,17 @@
 
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
-@property (nonatomic) NSMutableDictionary * localGroupLoc;
-@property (nonatomic) NSMutableDictionary * allLiveGroupPixels;
-@property (nonatomic) NSMutableArray * mergedLocations;
+@property (nonatomic) NSMutableDictionary *localGroupLoc;
+@property (nonatomic) NSMutableDictionary *allLiveGroupPixels;
+@property (nonatomic) NSMutableArray *mergedLocations;
 @property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary * allGroupsLoc;
-@property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
-@property (nonatomic) BOOL isCheckingLocation;
 @property (nonatomic) BOOL refreshNeeded;
+@property (nonatomic) AMLiveGroup *curHovGroup;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
 @end
@@ -276,7 +275,6 @@ AMWorldMap *worldMap;
     
     for (int i = 0; i < self.ports.count; i++) {
         AMPixel *port = self.ports[i];
-        //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
         
         if ( port.state == AMPixelStateNormal ) {
             
@@ -417,6 +415,7 @@ AMWorldMap *worldMap;
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
     _mergedLocations = [[NSMutableArray alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
+    _curHovGroup = [[AMLiveGroup alloc] init];
     
     _backgroundColor = [NSColor colorWithCalibratedRed:0.15
                                                  green:0.15
@@ -445,6 +444,8 @@ AMWorldMap *worldMap;
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
     // This event fires when you're in the live map view and the mouse is moving
+    if ( worldMap.state == overView ) {
+        
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     BOOL isHovering = NO;
 
@@ -474,6 +475,9 @@ AMWorldMap *worldMap;
                     
                     switch (isHovering) {
                         case NO:
+                            [[NSCursor pointingHandCursor] set];
+                            
+                            _curHovGroup = hovGroup;
                             
                             // Display info panel
                             if ( ![_infoPanels objectForKey:hovGroup.groupId] ) {
@@ -535,14 +539,38 @@ AMWorldMap *worldMap;
     }
     switch (isHovering) {
         case NO:
-            for ( id thePanel in _infoPanels ) {
-                NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
-                if (!curPanel.isHidden) {
-                    [self hideView:curPanel];
-                }
-            }
+            [[NSCursor arrowCursor] set];
+            [self hideAllPanels];
             break;
     }
+        
+    } else if ( worldMap.state == programView ) {
+        [[NSCursor arrowCursor] set];
+    }  //close if worldMap state == overView
+}
+
+-(void) mouseDown: (NSEvent *) thisEvent {
+    
+    NSCursor *cursor = [NSCursor currentCursor];
+    
+    if ( [cursor isEqual:[NSCursor pointingHandCursor]] ) {
+        // Cursor is hovering over group and has been clicked
+        
+        if (_curHovGroup) {
+            worldMap.state = programView;
+            
+            NSLog(@"%@ was clicked on!", _curHovGroup.groupName);
+            // Check if group is parent or subgroup of a merge
+        
+        }
+        
+        
+    } else {
+        // General map area has been clicked, reset map state
+        worldMap.state = overView;
+        [self hideAllPanels];
+    }
+    
 }
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
@@ -573,6 +601,15 @@ AMWorldMap *worldMap;
     }
     
     [self showView:thePanel];
+}
+
+- (void)hideAllPanels {
+    for ( id thePanel in _infoPanels ) {
+        NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
+        if (!curPanel.isHidden) {
+            [self hideView:curPanel];
+        }
+    }
 }
 
 - (void)addOverlay:(AMLiveGroup *) theGroup {

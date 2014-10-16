@@ -434,6 +434,10 @@
         NSDictionary* rootGroup = [result valueForKey:@"Data"];
         
         NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
+        if ([groups isEqual:[NSNull null]]) {
+            return;
+        }
+        
         NSMutableArray* groupList = [[NSMutableArray alloc] init];
         for (int i =0; i < groups.count; i++){
             if (![groups[i]isKindOfClass:[NSDictionary class]]) {

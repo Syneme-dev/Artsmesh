@@ -27,7 +27,7 @@
 @property (nonatomic) NSArray *ports;
 @property (nonatomic) NSMutableDictionary * localGroupLoc;
 @property (nonatomic) NSMutableDictionary * allLiveGroupPixels;
-@property (nonatomic) NSMutableArray * mergedLocations;
+@property (nonatomic) NSMutableDictionary * mergedLocations;
 @property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary * allGroupsLoc;
 @property (nonatomic) NSTextView *infoPanel;
@@ -52,6 +52,7 @@ AMWorldMap *worldMap;
     if (self) {
         [self initVars];
         [self setup];
+        [self getFakeData];
     }
     return self;
 }
@@ -76,6 +77,7 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [myGroup isMeshed] ) {
+        //AMCoreData *remoteGroups = [AMCoreData shareInstance].remoteLiveGroups;
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
             
@@ -84,7 +86,10 @@ AMWorldMap *worldMap;
             if ( storedGroupLoc != remoteGroup.location ) {
                 // Current group has either just been created or has had a location change
                 
-                if ( storedGroupLoc != nil ) { [self checkPixel:remoteGroup]; };
+                if ( storedGroupLoc != nil ) {
+                    //[self checkPixel:remoteGroup];
+                    [self clearPixel:remoteGroup];
+                };
                 
                 [_allGroupsLoc removeObjectForKey:remoteGroup.groupId];
                 
@@ -94,10 +99,16 @@ AMWorldMap *worldMap;
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
+                NSLog(@"group %@ has a subgroup called %@",remoteGroup.groupName, remoteSubGroup.groupName );
                 
                 if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                    //subgroup either just created or location changed
+                    NSLog(@"Subgroup %@ needs to be added/updated", remoteSubGroup.groupName);
                     
-                    if ( storedSubGroupLoc != nil ) { [self checkPixel:remoteSubGroup]; };
+                    if ( storedSubGroupLoc != nil ) {
+                        //[self checkPixel:remoteSubGroup];
+                        [self clearPixel:remoteSubGroup];
+                    };
                     
                     [_allGroupsLoc removeObjectForKey:remoteSubGroup.groupId];
                     
@@ -109,11 +120,15 @@ AMWorldMap *worldMap;
                     
                     //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
                     
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
-                    [self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
+                    //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
+                    //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
                     
+                        
+                    NSLog(@"add connected groups %@ and %@ to mergedConnections array", [connectedGroups objectForKey:@"group"], [connectedGroups objectForKey:@"subGroup"]);
+                    NSString *mergeId = [NSString stringWithFormat:@"%@%@", remoteGroup.groupId, remoteSubGroup.groupId];
+                    NSLog(@"the merge id is %@", mergeId);
                     
-                    [_mergedLocations addObject:connectedGroups];
+                    [_mergedLocations setObject:connectedGroups forKey:mergeId];
                 
                 }
             }
@@ -167,44 +182,38 @@ AMWorldMap *worldMap;
     
     // Draw each line connecting ports
     if ( [myGroup isMeshed] ) {
-        for ( NSMutableDictionary *groups in self.mergedLocations) {
+        for ( NSMutableDictionary *groups in self.mergedLocations ) {
         
-            NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
-                                  NSHeight(self.bounds) / 16.0);
-            NSPoint center = NSMakePoint(NSMidX(rect), NSMidY(rect));
+            NSLog(@"Merged locations are.. %@", self.mergedLocations);
+            NSLog(@"this merged location is.. %@", groups);
+            
+            NSMutableDictionary *theGroups = [self.mergedLocations objectForKey:groups];
+            
             AMPixel *point1;
             AMPixel *point2;
         
-            AMLiveGroup *group = [groups valueForKey:@"group"];
-            AMLiveGroup *remoteGroup = [groups valueForKey:@"subGroup"];
+            AMLiveGroup *group = [theGroups valueForKey:@"group"];
+            AMLiveGroup *subGroup = [theGroups valueForKey:@"subGroup"];
             
-            // TODO: this can probably be more efficient
-            // Find port associated with each group
-            for (int i = 0; i < self.ports.count; i++) {
-                AMPixel *port = self.ports[i];
-                if ( port.location != nil ) {
-                    // port location = group 1 location, set point1 = to port
-                    // else if location = group 2 location, set point 2 = to port
-                    if (port.location == group.location) {
-                        point1 = port;
-                    }
-                    else if (port.location == remoteGroup.location) {
-                        point2 = port;
-                    }
-                }
-            }
         
-        
-            NSBezierPath *bezierPath = [NSBezierPath bezierPath];
+            point1 = [_allLiveGroupPixels objectForKey:group.groupId];
+            point2 = [_allLiveGroupPixels objectForKey:subGroup.groupId];
+            
+            if ( point1 && point2 ) {
+                
+                NSLog(@"Drawing line from group %@ with id %@ at point %f, %f to group %@ with id %@ at point %f, %f", group.groupName, group.groupId, [self getPortCenter:point1].x, [self getPortCenter:point1].y, subGroup.groupName, subGroup.groupId, [self getPortCenter:point2].x, [self getPortCenter:point2].y);
+                
+                NSBezierPath *bezierPath = [NSBezierPath bezierPath];
     
-            [bezierPath moveToPoint:[self getPortCenter:point1]];
-            [bezierPath curveToPoint:[self getPortCenter:point2]
-                   controlPoint1:center
-                   controlPoint2:center];
-            bezierPath.lineWidth = 2.0;
-            [[NSColor grayColor] setStroke];
-            [bezierPath stroke];
-        
+                [bezierPath moveToPoint:[self getPortCenter:point1]];
+                [bezierPath lineToPoint:[self getPortCenter:point2]];
+                //[bezierPath curveToPoint:[self getPortCenter:point2]
+                   //controlPoint1:center
+                   //controlPoint2:center];
+                bezierPath.lineWidth = 2.0;
+                [[NSColor grayColor] setStroke];
+                [bezierPath stroke];
+            }
         }
         
     } else {
@@ -243,6 +252,8 @@ AMWorldMap *worldMap;
 }
 
 - (void)findLiveGroupLocation:(AMLiveGroup *)theGroup {
+    NSLog(@"find live group location for %@ with group id of %@", theGroup.groupName, theGroup.groupId);
+    
     AMLiveGroup *myGroup = theGroup;
     NSString *groupID = myGroup.groupId;
     NSString *location = @"beijing";
@@ -297,8 +308,11 @@ AMWorldMap *worldMap;
         liveGroupPosX += mapLon0;
     }
     
-    //Find closest open pixel to current live group location
-    
+    // Clear any old pixel associated with this group
+    [self clearPixel:theGroup];
+        
+    // Find closest open pixel to current live group location
+        
     AMPixel *liveGroupPixel;
     double closestDistToLiveGroup = -1;
     float portX = 0;
@@ -342,11 +356,14 @@ AMWorldMap *worldMap;
         
     }
     
-    liveGroupPixel.location = theGroup.location;
-    liveGroupPixel.state = AMPixelStateConnected;
+    if ( liveGroupPixel.state == AMPixelStateNormal ) {
+        liveGroupPixel.location = theGroup.location;
+        liveGroupPixel.liveGroupId = theGroup.groupId;
+        liveGroupPixel.state = AMPixelStateConnected;
         
-    [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
+        [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
     
+        }
     }
 }
 
@@ -395,8 +412,14 @@ AMWorldMap *worldMap;
         pixelToCheck.state = AMPixelStateNormal;
     }
     
-    
 }
+
+- (void)clearPixel:(AMLiveGroup *)theGroup {
+    AMPixel *pixelToClear = [_allLiveGroupPixels objectForKey:theGroup.groupId];
+    
+    pixelToClear.state = AMPixelStateNormal;
+}
+
 
 - (void)clearMap {
     for (int i = 0; i < self.ports.count; i++) {
@@ -415,7 +438,8 @@ AMWorldMap *worldMap;
     _allGroupsLoc = [[NSMutableDictionary alloc] init];
     _infoPanels = [[NSMutableDictionary alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
-    _mergedLocations = [[NSMutableArray alloc] init];
+    //_mergedLocations = [[NSMutableArray alloc] init];
+    _mergedLocations = [[NSMutableDictionary alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
     
     _backgroundColor = [NSColor colorWithCalibratedRed:0.15
@@ -444,6 +468,7 @@ AMWorldMap *worldMap;
 
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
+    /**
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     BOOL isHovering = NO;
@@ -543,6 +568,7 @@ AMWorldMap *worldMap;
             }
             break;
     }
+    **/
 }
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
@@ -633,6 +659,44 @@ AMWorldMap *worldMap;
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+
+- (NSDictionary *)getFakeData {
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/artsmesh-test-data.json"]];
+    NSData *response = [NSURLConnection sendSynchronousRequest:request
+returningResponse:nil error:nil];
+    NSError *jsonParsingError = nil;
+    NSArray *fakeLiveData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    
+    if(jsonParsingError != nil){
+        NSLog(@"fake data parse Json error:%@", jsonParsingError.description);
+    }
+    
+    NSDictionary *liveGroups;
+    
+    
+    NSDictionary* results = (NSDictionary*)fakeLiveData;
+    NSDictionary* rootGroup = [results valueForKey:@"Data"];
+    
+    NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
+
+    NSMutableArray* groupList = [[NSMutableArray alloc] init];
+    for (int i =0; i < groups.count; i++){
+        if (![groups[i]isKindOfClass:[NSDictionary class]]) {
+            continue;
+        }
+        
+        NSDictionary* groupData = (NSDictionary*)groups[i];
+    }
+    
+    for (AMLiveGroup *remoteGroup in groups) {
+        NSLog(@"here is a group %@", remoteGroup );
+    }
+    
+    return results;
 }
 
 @end

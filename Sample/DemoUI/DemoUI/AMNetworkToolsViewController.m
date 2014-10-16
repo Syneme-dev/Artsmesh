@@ -49,6 +49,11 @@
         selector:@selector(userGroupsChanged:)
         name: AM_LIVE_GROUP_CHANDED
         object:nil];
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if (mySelf.isOnline) {
+        [self userGroupsChanged:nil];
+    }
 }
 
 -(void)registerTabButtons

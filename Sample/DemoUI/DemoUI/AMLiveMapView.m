@@ -52,7 +52,6 @@ AMWorldMap *worldMap;
     if (self) {
         [self initVars];
         [self setup];
-        [self getFakeData];
     }
     return self;
 }
@@ -78,8 +77,9 @@ AMWorldMap *worldMap;
     
     if ( [myGroup isMeshed] ) {
         //AMCoreData *remoteGroups = [AMCoreData shareInstance].remoteLiveGroups;
-        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
+        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
 
@@ -663,9 +663,9 @@ AMWorldMap *worldMap;
 
 
 
-- (NSDictionary *)getFakeData {
+- (NSMutableArray *)getFakeData {
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/artsmesh-test-data.json"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/artsmesh-test-data.json"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request
 returningResponse:nil error:nil];
     NSError *jsonParsingError = nil;
@@ -675,28 +675,68 @@ returningResponse:nil error:nil];
         NSLog(@"fake data parse Json error:%@", jsonParsingError.description);
     }
     
-    NSDictionary *liveGroups;
-    
-    
     NSDictionary* results = (NSDictionary*)fakeLiveData;
     NSDictionary* rootGroup = [results valueForKey:@"Data"];
     
     NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
-
-    NSMutableArray* groupList = [[NSMutableArray alloc] init];
-    for (int i =0; i < groups.count; i++){
-        if (![groups[i]isKindOfClass:[NSDictionary class]]) {
-            continue;
-        }
+    
+    
+    NSMutableArray *formattedResults = [[NSMutableArray alloc] init];
+    for (NSDictionary *remoteGroup in groups) {
+        //Create group and any subgroups from data
+        //AMLiveGroup *theGroup = [self createFakeGroup:[remoteGroup valueForKey:@"GroupData"]];
+        AMLiveGroup *theGroup = [self createFakeGroup:remoteGroup];
         
-        NSDictionary* groupData = (NSDictionary*)groups[i];
+        //NSLog(@"here is a group %@", theGroup.groupName);
+        [formattedResults addObject:theGroup];
     }
     
-    for (AMLiveGroup *remoteGroup in groups) {
-        NSLog(@"here is a group %@", remoteGroup );
+    NSLog(@"formatted groups are : %@", formattedResults);
+    
+    return formattedResults;
+}
+
+- (AMLiveGroup *)createFakeGroup:(NSDictionary *)remoteGroup {
+    NSDictionary *rawGroupData = [remoteGroup objectForKey:@"GroupData"];
+    NSArray *rawSubGroupData = [remoteGroup valueForKey:@"SubGroups"];
+    
+    AMLiveGroup *theGroup = [[AMLiveGroup alloc] init];
+    theGroup.groupId = [rawGroupData valueForKey:@"GroupId"];
+    theGroup.groupName = [rawGroupData valueForKey:@"GroupName"];
+    theGroup.description = [rawGroupData valueForKey:@"Description"];
+    theGroup.leaderId = [rawGroupData valueForKey:@"LeaderId"];
+    theGroup.fullName = [rawGroupData valueForKey:@"FullName"];
+    theGroup.project = [rawGroupData valueForKey:@"Project"];
+    theGroup.location = [rawGroupData valueForKey:@"Location"];
+    theGroup.longitude = [rawGroupData valueForKey:@"Longitude"];
+    theGroup.latitude = [rawGroupData valueForKey:@"Latitude"];
+    theGroup.busy = (BOOL)[rawGroupData valueForKey:@"Busy"];
+    
+    if ( ![rawSubGroupData isEqual:[NSNull null]] ) {NSLog(@"no subgroups");
+        theGroup.subGroups = [self findFakeSubGroups:rawSubGroupData];
     }
     
-    return results;
+    return theGroup;
+}
+
+- (NSMutableArray *)findFakeSubGroups:(NSArray *)rawSubGroupData {
+    
+    NSMutableArray *subGroups = [[NSMutableArray alloc] init];
+    
+    
+    
+    //NSLog(@"subgroup data looks like %@", rawSubGroupData);
+    
+    for (NSDictionary *remoteSubGroup in rawSubGroupData) {
+        AMLiveGroup *theGroup = [self createFakeGroup:remoteSubGroup];
+        [subGroups addObject:theGroup];
+    }
+    
+    NSLog(@"subgroups look like %@", subGroups);
+    
+    
+    return subGroups;
+    
 }
 
 @end

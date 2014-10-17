@@ -75,9 +75,13 @@ AMWorldMap *worldMap;
     
     if ( [myGroup isMeshed] ) {
         //AMCoreData *remoteGroups = [AMCoreData shareInstance].remoteLiveGroups;
-        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        
+        [self clearGroup:myGroup.groupId];
+        
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
-        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+            NSLog(@"here is a live group %@ with id %@", remoteGroup.groupName, remoteGroup.groupId);
             
             NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
 
@@ -137,6 +141,9 @@ AMWorldMap *worldMap;
                 _refreshNeeded = YES;
             }
         }
+        
+        NSLog(@"my local live group is : %@", myGroup.groupId);
+        NSLog(@"All live groups are : %@", _allGroups);
     
     
     } else {
@@ -418,6 +425,12 @@ AMWorldMap *worldMap;
         pixelToCheck.state = AMPixelStateNormal;
     }
     
+}
+
+- (void)clearGroup:(id)theGroup {
+    [self clearPixel:theGroup];
+    [_allGroups removeObjectForKey:theGroup];
+    [_allGroupsLoc removeObjectForKey:theGroup];
 }
 
 - (void)clearPixel:(id)theGroup {

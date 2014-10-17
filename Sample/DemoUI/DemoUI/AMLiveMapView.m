@@ -25,11 +25,11 @@
 
 @property (nonatomic) NSColor *backgroundColor;
 @property (nonatomic) NSArray *ports;
-@property (nonatomic) NSMutableDictionary * localGroupLoc;
-@property (nonatomic) NSMutableDictionary * allLiveGroupPixels;
-@property (nonatomic) NSMutableDictionary * mergedLocations;
+@property (nonatomic) NSMutableDictionary *localGroupLoc;
+@property (nonatomic) NSMutableDictionary *allLiveGroupPixels;
+@property (nonatomic) NSMutableDictionary *mergedLocations;
 @property (nonatomic) NSMutableDictionary *allGroups;
-@property (nonatomic) NSMutableDictionary * allGroupsLoc;
+@property (nonatomic) NSMutableDictionary *allGroupsLoc;
 @property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) double mapXPush;
@@ -84,11 +84,6 @@ AMWorldMap *worldMap;
             if ( storedGroupLoc != remoteGroup.location ) {
                 // Current group has either just been created or has had a location change
                 
-                if ( storedGroupLoc != nil ) {
-                    //[self checkPixel:remoteGroup];
-                    [self clearPixel:remoteGroup];
-                };
-                
                 [_allGroupsLoc removeObjectForKey:remoteGroup.groupId];
                 
                 [self findLiveGroupLocation:remoteGroup];
@@ -104,7 +99,7 @@ AMWorldMap *worldMap;
                     
                     if ( storedSubGroupLoc != nil ) {
                         //[self checkPixel:remoteSubGroup];
-                        [self clearPixel:remoteSubGroup];
+                        [self clearPixel:remoteSubGroup.groupId];
                     };
                     
                     [_allGroupsLoc removeObjectForKey:remoteSubGroup.groupId];
@@ -134,6 +129,16 @@ AMWorldMap *worldMap;
                 }
             }
         }
+        
+        // Check for de-meshed users
+        for (AMPixel *curPixel in _allLiveGroupPixels) {
+            if ( ![_allGroups objectForKey:curPixel] ) {
+                // This group no longer exists (de-meshed)
+                _refreshNeeded = YES;
+            }
+        }
+    
+    
     } else {
         
         if ( storedMyGroupLoc != myGroup.location ) {
@@ -310,7 +315,7 @@ AMWorldMap *worldMap;
     }
     
     // Clear any old pixel associated with this group
-    [self clearPixel:theGroup];
+    [self clearPixel:theGroup.groupId];
         
     // Find closest open pixel to current live group location
         
@@ -415,8 +420,8 @@ AMWorldMap *worldMap;
     
 }
 
-- (void)clearPixel:(AMLiveGroup *)theGroup {
-    AMPixel *pixelToClear = [_allLiveGroupPixels objectForKey:theGroup.groupId];
+- (void)clearPixel:(id)theGroup {
+    AMPixel *pixelToClear = [_allLiveGroupPixels objectForKey:theGroup];
     
     pixelToClear.state = AMPixelStateNormal;
 }

@@ -205,9 +205,10 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSString *profileUrl = [NSString stringWithFormat:@"/%@", myUserName];
     if (myUserName != nil && ![myUserName isEqualToString:@""]) {
         NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 myUserName, @"UserName", nil];
+                                 profileUrl, @"ProfileUrl", nil];
         [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
     }else{
         [self PopoverUserLogonView:sender];

@@ -57,8 +57,8 @@ typedef enum {
 }
 
 - (void)onShowUserInfo:(NSNotification *)notification {
-    NSString *userName = [[notification userInfo] objectForKey:@"UserName"];
-    infoUrl = [NSString stringWithFormat:@"%@/%@?fromMac=true", statusNetURL, userName];
+    NSString* profileUrl = [[notification userInfo] objectForKey:@"ProfileUrl"];
+    infoUrl = [NSString stringWithFormat:@"%@%@?fromMac=true", statusNetURL, profileUrl];
     NSURL *userInfoURL = [NSURL URLWithString:infoUrl];
     infoStatus = INFO_USER;
     isInfoPage = YES;

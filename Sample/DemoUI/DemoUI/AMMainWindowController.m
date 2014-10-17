@@ -138,9 +138,9 @@
 }
 
 - (void)myStatucChanged {
-    if ([AMCoreData shareInstance].mySelf.isOnline == YES) {
+    if ([[AMMesher sharedAMMesher] mesherState] == kMesherMeshed){
         self.meshBtn.state = 0;
-    } else {
+    }else{
         self.meshBtn.state = 2;
     }
 }
@@ -148,13 +148,15 @@
 
 - (IBAction)mesh:(id)sender {
 
-    BOOL isOnline = [AMCoreData shareInstance].mySelf.isOnline;
-    if (isOnline) {
-        [[AMMesher sharedAMMesher] goOffline];
-        //self.meshBtn.state = 2;
-    } else {
+    if ([[AMMesher sharedAMMesher] mesherState] == kMesherMeshed ||
+        [[AMMesher sharedAMMesher] mesherState] == kMesherMeshing) {
+        
+         [[AMMesher sharedAMMesher] goOffline];
+    }else if([[AMMesher sharedAMMesher] mesherState] == kMesherStarted ){
+        
         [[AMMesher sharedAMMesher] goOnline];
-        //self.meshBtn.state = 0;
+    }else{
+        self.meshBtn.state = 2;
     }
 }
 

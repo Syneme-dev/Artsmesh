@@ -26,6 +26,10 @@
     
     int _heartbeatFailureCount;
     int _userlistVersion;
+    
+    GCDAsyncUdpSocket* _udpSocket;
+    NSTimer* _publicIpReqTimer;
+    NSArray* _stunServerAddrs;
 }
 
 -(id)init
@@ -79,8 +83,39 @@
 
 -(void)startRemoteClient
 {
+    [self requestPublicIp];
     [self registerGroup];
 }
+
+-(void)requestPublicIp
+{
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    NSHost* serverHost = [NSHost hostWithName:config.stunServerAddr];
+    _stunServerAddrs = [serverHost addresses];
+    
+    _udpSocket = [[GCDAsyncUdpSocket alloc]
+                  initWithDelegate:self
+                  delegateQueue:dispatch_get_main_queue()];
+    NSError *error = nil;
+    if (![_udpSocket bindToPort:0 error:&error])
+    {
+        NSLog(@"requestPublicIp failed: Error binding: %@", error);
+        return;
+    }
+    if (![_udpSocket beginReceiving:&error])
+    {
+        NSLog(@"requestPublicIp failed:: Error receiving: %@", error);
+        return;
+    }
+    
+    _publicIpReqTimer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                         target:self
+                                                       selector:@selector(sendHeartbeat)
+                                                       userInfo:nil
+                                                        repeats:YES];
+    return ;
+}
+
 
 -(void)registerGroup
 {
@@ -259,6 +294,12 @@
 
 -(void)stopRemoteClient
 {
+    [_publicIpReqTimer invalidate];
+    _publicIpReqTimer = nil;
+    
+    [_udpSocket close];
+    _udpSocket = nil;
+    
     if (_heartbeatThread){
         [_heartbeatThread cancel];
          _heartbeatThread = nil;
@@ -393,6 +434,10 @@
         NSDictionary* rootGroup = [result valueForKey:@"Data"];
         
         NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
+        if ([groups isEqual:[NSNull null]]) {
+            return;
+        }
+        
         NSMutableArray* groupList = [[NSMutableArray alloc] init];
         for (int i =0; i < groups.count; i++){
             if (![groups[i]isKindOfClass:[NSDictionary class]]) {
@@ -536,6 +581,70 @@
     NSLog(@"hearBeat error:%@", error.description);
     _heartbeatFailureCount ++;
     // NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+}
+
+
+
+#pragma mark-
+#pragma RequestPublicIP
+
+-(void)sendHeartbeat{
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    
+    NSData *data = [@"HB" dataUsingEncoding:NSUTF8StringEncoding];
+    [_udpSocket sendData:data
+                  toHost:config.stunServerAddr
+                    port: [config.stunServerPort intValue]
+             withTimeout:-1
+                     tag:0];
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag
+{
+    ;
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
+{
+    ;
+}
+
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
+      fromAddress:(NSData *)address
+withFilterContext:(id)filterContext
+{
+    //NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
+    
+    if ([_stunServerAddrs containsObject:fromHost]) {
+        [self parsePublicAddr:data];
+        
+        [_publicIpReqTimer invalidate];
+        _publicIpReqTimer = nil;
+        
+        return;
+    }
+}
+
+-(void)parsePublicAddr:(NSData*)data
+{
+    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSArray* ipAndPort = [msg componentsSeparatedByString:@":"];
+    if ([ipAndPort count] < 2){
+        return;
+    }
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if(![mySelf.publicIp isEqualToString:[ipAndPort objectAtIndex:0]]){
+        mySelf.publicIp = [ipAndPort objectAtIndex:0];
+        
+        [_publicIpReqTimer invalidate];
+        _publicIpReqTimer = nil;
+        
+        AMMesher* mesher = [AMMesher sharedAMMesher];
+        [mesher updateMySelf];
+    }
 }
 
 @end

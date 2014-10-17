@@ -84,8 +84,15 @@
     [commandline appendFormat:@" --clientname %@", cfgs.clientName];
     NSLog(@"jack trip command line is: %@", commandline);
 
-    AMShellTask* task = [[AMShellTask alloc] initWithCommand:commandline];
+    NSTask* task = [[NSTask alloc] init];
+    task.launchPath = @"/bin/bash";
+    task.arguments = @[@"-c", [commandline copy]];
+    task.terminationHandler = ^(NSTask* t){
+        [self.jackTripInstances removeObject:t];
+    };
+    
     [task launch];
+
     
     AMJacktripInstance* newInstance = [[AMJacktripInstance alloc] init];
     newInstance.jacktripTask = task;
@@ -97,14 +104,20 @@
         self.jackTripInstances = [[NSMutableArray alloc] init];
     }
     
-    [self.jackTripInstances addObject:newInstance];
-    
     sleep(2);
     
-    NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
-                                                                 object:self
-                                                               userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    if(task.isRunning){
+        [self.jackTripInstances addObject:newInstance];
+        
+        NSNotification* notification =
+        [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
+                                      object:self
+                                    userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }else
+    {
+        NSLog(@"start jacktrip failed!");
+    }
     
     return YES;
 }
@@ -113,11 +126,16 @@
 -(void)stopAllJacktrips
 {
     for (AMJacktripInstance* jacktrip in self.jackTripInstances) {
-        [jacktrip.jacktripTask cancel];
+        
+        pid_t pid = jacktrip.jacktripTask.processIdentifier;
+        NSString* command = [NSString stringWithFormat:@"killall %d >/dev/null",
+                             pid];
+        
+        system([command cStringUsingEncoding:NSUTF8StringEncoding]);
         jacktrip.jacktripTask = nil;
     }
     
-    system("killall jacktrip >/dev/null");
+    [self.jackTripInstances removeAllObjects];
     
     NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
                                                                  object:self
@@ -126,19 +144,26 @@
 }
 
 
+
 -(void)stopJacktripByName:(NSString*)instanceName
 {
+    AMJacktripInstance* jacktrip = nil;
     for (int i = 0; i < [self.jackTripInstances count]; i++) {
-        AMJacktripInstance* jacktrip = self.jackTripInstances[i];
+        jacktrip = self.jackTripInstances[i];
         
         if ([jacktrip.instanceName isEqualToString:instanceName]) {
-            [jacktrip.jacktripTask cancel];
-            jacktrip.jacktripTask = nil;
-            
-            [self.jackTripInstances removeObject:jacktrip];
             break;
         }
     }
+    
+    if (jacktrip != nil) {
+        [jacktrip.jacktripTask terminate];
+        [jacktrip.jacktripTask waitUntilExit];
+        jacktrip.jacktripTask = nil;
+        
+        [self.jackTripInstances removeObject:jacktrip];
+    }
+
     
     NSNotification* notification = [NSNotification notificationWithName:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
                                                                  object:self

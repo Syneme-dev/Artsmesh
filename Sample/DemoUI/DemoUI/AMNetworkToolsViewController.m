@@ -118,7 +118,15 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         _pingCommand.command = command;
         [_pingCommand run];
     } else if (tableView == self.tracerouteTableView) {
-        NSString *command = [NSString stringWithFormat:@"/usr/sbin/traceroute %@", ip];
+        
+        NSString *command;
+        
+        if ([AMCommonTools isValidIpv4:ip]){
+            command = [NSString stringWithFormat:@"/usr/sbin/traceroute %@", ip];
+        }else{
+            command = [NSString stringWithFormat:@"/usr/sbin/traceroute6 %@", ip];
+        }
+
         [_tracerouteCommand stop];
         _tracerouteCommand.command = command;
         [_tracerouteCommand run];

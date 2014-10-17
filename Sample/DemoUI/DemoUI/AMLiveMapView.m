@@ -69,8 +69,6 @@ AMWorldMap *worldMap;
     
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:myGroup.groupId];
-    
-    NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] init];
 
      
     // Get/Set location data
@@ -99,7 +97,6 @@ AMWorldMap *worldMap;
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
-                NSLog(@"group %@ has a subgroup called %@",remoteGroup.groupName, remoteSubGroup.groupName );
                 
                 if ( storedSubGroupLoc != remoteSubGroup.location ) {
                     //subgroup either just created or location changed
@@ -113,23 +110,27 @@ AMWorldMap *worldMap;
                     [_allGroupsLoc removeObjectForKey:remoteSubGroup.groupId];
                     
                     [self findLiveGroupLocation:remoteSubGroup];
-                
-                    [connectedGroups removeAllObjects];
-                    [connectedGroups setObject:remoteGroup forKey:@"group"];
-                    [connectedGroups setObject:remoteSubGroup forKey:@"subGroup"];
                     
                     //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
                     
                     //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
                     //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
                     
-                        
-                    NSLog(@"add connected groups %@ and %@ to mergedConnections array", [connectedGroups objectForKey:@"group"], [connectedGroups objectForKey:@"subGroup"]);
-                    NSString *mergeId = [NSString stringWithFormat:@"%@%@", remoteGroup.groupId, remoteSubGroup.groupId];
-                    NSLog(@"the merge id is %@", mergeId);
                     
-                    [_mergedLocations setObject:connectedGroups forKey:mergeId];
-                
+                    NSString *mergeId = [NSString stringWithFormat:@"%@%@", remoteGroup.groupId, remoteSubGroup.groupId];
+                    
+                    if ( ![_mergedLocations objectForKey:mergeId] ) {
+                        NSLog(@"this connection doesn't yet exist, so add it!");
+                        NSLog(@"the new merge id is %@", mergeId);
+                    
+                        NSLog(@"merged locations before merge are : %@", _mergedLocations);
+                        
+                        NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] initWithObjectsAndKeys:remoteGroup, @"group", remoteSubGroup, @"subGroup", nil];
+                        
+                        [_mergedLocations setObject:connectedGroups forKey:mergeId];
+                        NSLog(@"merged locations are : %@", _mergedLocations);
+                    }
+                        
                 }
             }
         }
@@ -182,12 +183,12 @@ AMWorldMap *worldMap;
     
     // Draw each line connecting ports
     if ( [myGroup isMeshed] ) {
-        for ( NSMutableDictionary *groups in self.mergedLocations ) {
+        for ( NSMutableDictionary *groups in _mergedLocations ) {
         
-            NSLog(@"Merged locations are.. %@", self.mergedLocations);
+            NSLog(@"Merged locations are.. %@", _mergedLocations);
             NSLog(@"this merged location is.. %@", groups);
             
-            NSMutableDictionary *theGroups = [self.mergedLocations objectForKey:groups];
+            NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
             
             AMPixel *point1;
             AMPixel *point2;
@@ -217,7 +218,7 @@ AMWorldMap *worldMap;
         }
         
     } else {
-        [self.mergedLocations removeAllObjects];
+        [_mergedLocations removeAllObjects];
     }
     
 }
@@ -370,7 +371,7 @@ AMWorldMap *worldMap;
 - (id) checkGroupIsMerged:(AMLiveGroup *)theGroup {
     id mergedId = nil;
     
-    for ( NSMutableDictionary *groups in self.mergedLocations) {
+    for ( NSMutableDictionary *groups in _mergedLocations) {
         AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
         AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
         
@@ -691,7 +692,7 @@ returningResponse:nil error:nil];
         [formattedResults addObject:theGroup];
     }
     
-    NSLog(@"formatted groups are : %@", formattedResults);
+    //NSLog(@"formatted groups are : %@", formattedResults);
     
     return formattedResults;
 }
@@ -732,7 +733,7 @@ returningResponse:nil error:nil];
         [subGroups addObject:theGroup];
     }
     
-    NSLog(@"subgroups look like %@", subGroups);
+    //NSLog(@"subgroups look like %@", subGroups);
     
     
     return subGroups;

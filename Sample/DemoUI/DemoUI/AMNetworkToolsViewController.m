@@ -104,7 +104,14 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     AMLiveUser* user = _users[tableView.selectedRow];
     NSString* ip = user.publicIp;
     if (tableView == self.pingTableView) {
-        NSString *command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+        NSString *command;
+        AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+        if (config.useIpv6) {
+            command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+        }else{
+            command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+        }
+        
         [_pingCommand stop];
         _pingCommand.command = command;
         [_pingCommand run];

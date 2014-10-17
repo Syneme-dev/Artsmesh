@@ -71,7 +71,7 @@
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
     [self loadUserAvatar];
     [self loadGroupAvatar];
-    
+    [self onUserTabClick:self.userTabButton];
 }
 
 -(void)dealloc

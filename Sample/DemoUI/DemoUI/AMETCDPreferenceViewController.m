@@ -65,7 +65,7 @@
     self.ipPopUpView.delegate = self;
     
     [self loadPrefViews];
-    
+    [self onGeneralClick:self.generalTabButton];
 }
 
 

@@ -59,7 +59,7 @@
     [self loadArchivePage];
     [AMButtonHandler changeTabTextColor:self.staticTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.liveTab toColor:UI_Color_blue];
-
+    [self liveTabClick:self.liveTab];
 }
 
 -(void)registerTabButtons{

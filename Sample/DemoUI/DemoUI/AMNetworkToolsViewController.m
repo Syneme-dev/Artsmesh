@@ -49,6 +49,8 @@
         selector:@selector(userGroupsChanged:)
         name: AM_LIVE_GROUP_CHANDED
         object:nil];
+    
+    [self ping:self.pingButton];
 }
 
 -(void)registerTabButtons

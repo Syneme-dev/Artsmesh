@@ -71,6 +71,8 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
+    [self liveGroupTabClick:self.liveGroupTab];
 }
 
 -(void)registerTabButtons{

@@ -21,31 +21,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Mye-Nu-lsW" userLabel="staticTabButton">
-                    <rect key="frame" x="1031" y="577" width="60" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="IOS-bT-2LI"/>
-                        <constraint firstAttribute="width" constant="60" id="lB5-uy-QRf"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
+                    <rect key="frame" x="1031" y="577" width="55" height="13"/>
+                    <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
                     <connections>
                         <action selector="onStaticTabClick:" target="-2" id="GU9-iG-B0N"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="jAs-Rs-5oa" userLabel="liveTabButton">
-                    <rect key="frame" x="976" y="577" width="40" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="jiV-f1-Gmm"/>
-                        <constraint firstAttribute="height" constant="13" id="p6j-U6-u3F"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="LIVE" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="oIu-wk-qIa">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="liveTabClick:" target="-2" id="NhP-r3-Pcz"/>
                     </connections>
                 </button>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="nKY-XV-9cq">
@@ -80,15 +62,32 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="jAs-Rs-5oa" userLabel="liveTabButton">
+                    <rect key="frame" x="983" y="577" width="40" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="YV1-Vz-H0f"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="LIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="oIu-wk-qIa">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="liveTabClick:" target="-2" id="NhP-r3-Pcz"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="Mye-Nu-lsW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="Lr8-xY-0Ls"/>
-                <constraint firstItem="Mye-Nu-lsW" firstAttribute="leading" secondItem="jAs-Rs-5oa" secondAttribute="trailing" constant="15" id="Mma-kl-OeH"/>
+                <constraint firstItem="Mye-Nu-lsW" firstAttribute="leading" secondItem="jAs-Rs-5oa" secondAttribute="trailing" constant="8" id="3hX-E9-IjS"/>
+                <constraint firstItem="jAs-Rs-5oa" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="9Of-hc-KQF"/>
+                <constraint firstItem="nKY-XV-9cq" firstAttribute="top" secondItem="Mye-Nu-lsW" secondAttribute="bottom" constant="4" id="I7g-6e-Dhm"/>
+                <constraint firstItem="Mye-Nu-lsW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="Iag-9V-ucX"/>
                 <constraint firstAttribute="bottom" secondItem="nKY-XV-9cq" secondAttribute="bottom" constant="21" id="N4m-Aw-iQd"/>
-                <constraint firstAttribute="trailing" secondItem="Mye-Nu-lsW" secondAttribute="trailing" constant="10" id="Na7-wY-eXl"/>
-                <constraint firstItem="jAs-Rs-5oa" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="R5Y-73-L1P"/>
+                <constraint firstAttribute="trailing" secondItem="jAs-Rs-5oa" secondAttribute="trailing" constant="78" id="Teb-Ca-Ohr"/>
+                <constraint firstItem="Mye-Nu-lsW" firstAttribute="leading" secondItem="jAs-Rs-5oa" secondAttribute="trailing" constant="8" id="UEY-Of-pEQ"/>
                 <constraint firstAttribute="trailing" secondItem="nKY-XV-9cq" secondAttribute="trailing" id="bxU-I6-XCG"/>
+                <constraint firstItem="jAs-Rs-5oa" firstAttribute="centerY" secondItem="Mye-Nu-lsW" secondAttribute="centerY" id="cTY-Gk-bgw"/>
                 <constraint firstItem="nKY-XV-9cq" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="fao-SX-gbC"/>
+                <constraint firstItem="nKY-XV-9cq" firstAttribute="top" secondItem="jAs-Rs-5oa" secondAttribute="bottom" constant="4" id="mb2-On-CEt"/>
                 <constraint firstItem="nKY-XV-9cq" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="u6l-Au-xR0"/>
             </constraints>
         </customView>

@@ -10,6 +10,7 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMCoreData/AMCoreData.h"
 #import "AMNetworkToolsCommand.h"
+#import "AMCommonTools/AMCommonTools.h"
 
 @interface AMNetworkToolsViewController ()
 {
@@ -54,6 +55,7 @@
     if (mySelf.isOnline) {
         [self userGroupsChanged:nil];
     }
+    [self ping:self.pingButton];
 }
 
 -(void)registerTabButtons
@@ -104,12 +106,27 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     AMLiveUser* user = _users[tableView.selectedRow];
     NSString* ip = user.publicIp;
     if (tableView == self.pingTableView) {
-        NSString *command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+        NSString *command;
+        
+        if ([AMCommonTools isValidIpv4:ip]){
+            command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+        }else{
+            command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+        }
+        
         [_pingCommand stop];
         _pingCommand.command = command;
         [_pingCommand run];
     } else if (tableView == self.tracerouteTableView) {
-        NSString *command = [NSString stringWithFormat:@"/usr/sbin/traceroute %@", ip];
+        
+        NSString *command;
+        
+        if ([AMCommonTools isValidIpv4:ip]){
+            command = [NSString stringWithFormat:@"/usr/sbin/traceroute %@", ip];
+        }else{
+            command = [NSString stringWithFormat:@"/usr/sbin/traceroute6 %@", ip];
+        }
+
         [_tracerouteCommand stop];
         _tracerouteCommand.command = command;
         [_tracerouteCommand run];

@@ -42,9 +42,9 @@
 
 - (IBAction)socialBtnClicked:(NSButton *)sender
 {
-    NSString* name = self.staticUser.name;
+    NSString* url = self.staticUser.statusnet_profile_url;
     NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                             name , @"UserName", nil];
+                             url , @"ProfileUrl", nil];
     [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
 }
 

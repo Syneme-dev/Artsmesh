@@ -486,8 +486,6 @@ AMWorldMap *worldMap;
 {
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
-
-    NSLog(@"hovGroup is %@", _hovGroup);
     
     if (!_hovGroup) {
         // Hasn't been hoving over group, check to make sure still not hovering
@@ -548,7 +546,7 @@ AMWorldMap *worldMap;
                                             
                                         // if pixel doesn't have a panel, add one
                                         if ( ![_infoPanels objectForKey:theMergedGroup.groupId] ) {
-                                            [self addOverlay:mergedGroup];
+                                            [self addOverlay:theMergedGroup];
                                         }
                                             
                                         // grab the newly created info panel and manipulate it, if not done already
@@ -567,6 +565,7 @@ AMWorldMap *worldMap;
                                     
                                     
                             }
+                            [[NSCursor pointingHandCursor] set];
                             _isHovering = YES;
                             break;
                         
@@ -579,6 +578,7 @@ AMWorldMap *worldMap;
             
         } //close live pixel for loop
     } else {
+        [[NSCursor pointingHandCursor] set];
         // Group currently hovered on, make sure still hovering on
         NSLog(@"Is group still hovering?..");
         id hovGroupId = _hovGroup.groupId;
@@ -597,6 +597,7 @@ AMWorldMap *worldMap;
     }// close if _hovGroup
     switch (_isHovering) {
         case NO:
+            [[NSCursor arrowCursor] set];
             _hovGroup = nil;
             for ( id thePanel in _infoPanels ) {
                 NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
@@ -653,6 +654,7 @@ AMWorldMap *worldMap;
     // Set TextView Properties
     newPanel = [[NSTextView alloc] initWithFrame:textFrame];
     [newPanel setTextColor:[NSColor whiteColor]];
+    [newPanel setEditable:NO];
     [newPanel setFont:font];
     [newPanel setAlignment: NSCenterTextAlignment];
     

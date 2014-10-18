@@ -91,7 +91,8 @@ typedef enum {
 }
 
 - (void)dealloc {
-    //To avoid a error when closing 
+    //To avoid a error when closing
+    [AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     [self.socialWebTab.mainFrame stopLoading];
 }
 

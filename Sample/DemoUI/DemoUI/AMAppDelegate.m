@@ -24,11 +24,20 @@ static NSMutableDictionary *allPlugins = nil;
 @interface AMAppDelegate () <AMPluginAppDelegate>
 @end
 
+
+// global uncaught exception handler
+void uncaughtExceptionHandler(NSException *exception) {
+    AMLog(AMLog_Error, @"Uncaught Exception", @"an uncaught exception happened: %@",exception.description);
+}
+
 @implementation AMAppDelegate
 
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    allPlugins = [self loadPlugins];
+
     [AMLogger AMLoggerInit];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    allPlugins = [self loadPlugins];
     [[AMPreferenceManager shareInstance] initPreference];
     [[AMStatusNet shareInstance] loadGroups];
     [self.mainWindowController showDefaultWindow];

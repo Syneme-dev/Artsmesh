@@ -187,9 +187,6 @@ AMWorldMap *worldMap;
     // Draw each line connecting ports
     if ( [myGroup isMeshed] ) {
         for ( NSMutableDictionary *groups in _mergedLocations ) {
-        
-            NSLog(@"Merged locations are.. %@", _mergedLocations);
-            NSLog(@"this merged location is.. %@", groups);
             
             NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
             
@@ -204,8 +201,6 @@ AMWorldMap *worldMap;
             point2 = [_allLiveGroupPixels objectForKey:subGroup.groupId];
             
             if ( point1 && point2 ) {
-                
-                NSLog(@"Drawing line from group %@ with id %@ at point %f, %f to group %@ with id %@ at point %f, %f", group.groupName, group.groupId, [self getPortCenter:point1].x, [self getPortCenter:point1].y, subGroup.groupName, subGroup.groupId, [self getPortCenter:point2].x, [self getPortCenter:point2].y);
                 
                 NSBezierPath *bezierPath = [NSBezierPath bezierPath];
     
@@ -256,7 +251,6 @@ AMWorldMap *worldMap;
 }
 
 - (void)findLiveGroupLocation:(AMLiveGroup *)theGroup {
-    NSLog(@"find live group location for %@ with group id of %@", theGroup.groupName, theGroup.groupId);
     
     AMLiveGroup *myGroup = theGroup;
     NSString *groupID = myGroup.groupId;
@@ -395,6 +389,7 @@ AMWorldMap *worldMap;
     id mergedGroups = [self checkGroupIsMerged:theGroup ];
     if ( [mergedGroups count] > 0 ) {
         // This group has some merged connections
+        
         for ( id mergedGroup in mergedGroups) {
             // Here is a connection, make sure the subGroup is still a subgroup and hasn't de-merged
             AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
@@ -409,7 +404,9 @@ AMWorldMap *worldMap;
                 {
                     // Subgroup no longer exists. Remove this stored connection
                     NSString *mergeId = [NSString stringWithFormat:@"%@%@", theGroup.groupId, theMergedGroup.groupId];
+                    NSString *mergeSubId = [NSString stringWithFormat:@"%@%@", theMergedGroup.groupId, theGroup.groupId];
                     [_mergedLocations removeObjectForKey:mergeId];
+                    [_mergedLocations removeObjectForKey:mergeSubId];
                     break;
                 }
                     
@@ -525,7 +522,6 @@ AMWorldMap *worldMap;
             if ( NSPointInRect(cursorPoint, pixelBounds) ) {
 
                 AMLiveGroup *group = [_allGroups objectForKey:pixel];
-                //NSLog(@"group is being hovered on! %@", group);
                 if ( group ) {
                     // Group is being hovered on
                     

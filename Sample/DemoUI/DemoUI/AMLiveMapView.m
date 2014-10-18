@@ -110,12 +110,6 @@ AMWorldMap *worldMap;
                     
                     [self findLiveGroupLocation:remoteSubGroup];
                     
-                    //Make sure either group isn't stored in the mergedLocations array as part of an old merged connection
-                    
-                    //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteGroup]];
-                    //[self.mergedLocations removeObject:[self checkGroupIsMerged:remoteSubGroup]];
-                    
-                    
                     NSString *mergeId = [NSString stringWithFormat:@"%@%@", remoteGroup.groupId, remoteSubGroup.groupId];
                     
                     if ( ![_mergedLocations objectForKey:mergeId] ) {
@@ -128,6 +122,10 @@ AMWorldMap *worldMap;
                         
                 }
             }
+            
+            //Make sure group isn't stored in the mergedLocations array as part of an old merged connection
+            [self removeOldMerges:remoteGroup];
+            
         }
         
         // Check for de-meshed users
@@ -381,22 +379,45 @@ AMWorldMap *worldMap;
         
         AMLiveGroup *storedGroup = [theGroups valueForKey:@"group"];
         AMLiveGroup *storedSubGroup = [theGroups valueForKey:@"subGroup"];
-        NSLog(@"control group id: %@", theGroup.groupId);
-        NSLog(@"Merged group id: %@", storedGroup.groupId);
-        NSLog(@"Merged subGroup id: %@", storedSubGroup.groupId);
         
         if ( [theGroup.groupId isEqualToString:storedGroup.groupId] ) {
-            NSLog(@"Merge found!");
+            // merge found
             [mergedIds setObject:storedSubGroup forKey:storedSubGroup.groupId];
         } else if ( [theGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
-            NSLog(@"Merge found!");
+            // merge found
             [mergedIds setObject:storedGroup forKey:storedGroup.groupId];
         }
     }
-    
-    NSLog(@"found merges are with groups %@", mergedIds);
-    
     return mergedIds;
+}
+
+- (void)removeOldMerges:(AMLiveGroup *)theGroup {
+    id mergedGroups = [self checkGroupIsMerged:theGroup ];
+    if ( [mergedGroups count] > 0 ) {
+        // This group has some merged connections
+        for ( id mergedGroup in mergedGroups) {
+            // Here is a connection, make sure the subGroup is still a subgroup and hasn't de-merged
+            AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
+            BOOL groupExists = NO;
+            for (AMLiveGroup *remoteSubGroup in theGroup.subGroups) {
+                if ( theMergedGroup.groupId == remoteSubGroup.groupId ) {
+                    groupExists = YES;
+                }
+            }
+            switch (groupExists) {
+                case NO:
+                {
+                    // Subgroup no longer exists. Remove this stored connection
+                    NSString *mergeId = [NSString stringWithFormat:@"%@%@", theGroup.groupId, theMergedGroup.groupId];
+                    [_mergedLocations removeObjectForKey:mergeId];
+                    break;
+                }
+                    
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 - (void)checkPixel:(AMLiveGroup *)theGroup {
@@ -507,14 +528,12 @@ AMWorldMap *worldMap;
                 //NSLog(@"group is being hovered on! %@", group);
                 if ( group ) {
                     // Group is being hovered on
-                        
+                    
                     _hovGroup = group;
                     groupFound = YES;
                         
                     switch (_isHovering) {
                         case NO:
-                            NSLog(@"group is being hovered on! %@", _hovGroup.groupName);
-                                
                             // Display info panel
                             if ( ![_infoPanels objectForKey:_hovGroup.groupId] ) {
                                 [self addOverlay:_hovGroup];
@@ -532,16 +551,11 @@ AMWorldMap *worldMap;
                                 id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
                                 if ( [mergedGroups count] > 0 ) {
                                     // This group is merged
-                                    NSLog(@"This group is merged: %@", mergedGroups);
                                     for ( id mergedGroup in mergedGroups) {
                                     
                                         AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
                                             
-                                        NSLog(@"Here is a merged group : %@", theMergedGroup.groupName);
-                                        
-                                            
                                         // find pixel for mergedGroup
-                                        //AMLiveGroup *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
                                         id mergedPixel = theMergedGroup.groupId;
                                             
                                         // if pixel doesn't have a panel, add one
@@ -557,8 +571,6 @@ AMWorldMap *worldMap;
                                         }
                                 }
                                         
-                                        
-                                        
                                 } else {
                                         //This group isn't merged..
                                 }
@@ -569,8 +581,7 @@ AMWorldMap *worldMap;
                             _isHovering = YES;
                             break;
                         
-                        } // close switch case
-                        
+                    } // close switch case
                 }
             }
         
@@ -580,11 +591,8 @@ AMWorldMap *worldMap;
     } else {
         [[NSCursor pointingHandCursor] set];
         // Group currently hovered on, make sure still hovering on
-        NSLog(@"Is group still hovering?..");
         id hovGroupId = _hovGroup.groupId;
-        NSLog(@"hovGroup is %@", _hovGroup.groupId);
         AMPixel *curPort = [_allLiveGroupPixels objectForKey:hovGroupId];
-        NSLog(@"current pixel being hovered on is %@", curPort);
         NSPoint pixelCenter = [self getPortCenter:curPort];
         
         // Make an imaginary rectangle around this active pixel
@@ -595,6 +603,7 @@ AMWorldMap *worldMap;
             _isHovering = NO;
         }
     }// close if _hovGroup
+    
     switch (_isHovering) {
         case NO:
             [[NSCursor arrowCursor] set];

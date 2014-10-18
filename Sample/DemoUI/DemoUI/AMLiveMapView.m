@@ -611,13 +611,13 @@ AMWorldMap *worldMap;
                 }
             }
             if ( worldMap.state == overView && self.wantsLayer == YES) {
-                NSLog(@"wants layer no");
+                // Turn this off when not needed to avoid graphic clipping
                 [self setWantsLayer: NO];
             }
             break;
         case YES:
             if ( worldMap.state == overView && self.wantsLayer == NO ) {
-                NSLog(@"wants layer yes");
+                // Displaying shadows atop live map, so need this property
                 [self setWantsLayer: YES];
             }
             break;

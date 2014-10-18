@@ -36,7 +36,8 @@ static AMLogger* _sharedInstance = nil;
 {
     if (_logFileHandle == nil) {
         NSFileManager *fm = [NSFileManager defaultManager];
-        _logFilePath = [NSString stringWithFormat:@"%@/../../../AMLog.log", [NSBundle mainBundle].resourcePath];
+        NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+        _logFilePath = [NSString stringWithFormat:@"%@/../AMLog.log", bundlePath];
         
         
         

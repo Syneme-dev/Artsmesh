@@ -82,7 +82,7 @@
         [commandline appendFormat:@" -V"];
     }
 
-    NSString* jackdmpLogPath = [NSString stringWithFormat:@" > %@/../jacktrip_%@.log", [NSBundle mainBundle].bundlePath, cfgs.clientName];
+    NSString* jackdmpLogPath = [NSString stringWithFormat:@" > \"%@/../jacktrip_%@.log\"", [NSBundle mainBundle].bundlePath, cfgs.clientName];
     [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jackdmpLogPath];
     AMLog(AMLog_Debug, @"AMAudio", @"jack trip command line is %@", commandline);
     

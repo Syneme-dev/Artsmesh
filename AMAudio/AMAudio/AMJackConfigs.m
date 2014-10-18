@@ -93,7 +93,7 @@
     
     //strcat(stringa, " >/dev/null 2>&1");
     
-    NSString* jackdmpLogPath = [NSString stringWithFormat:@" > %@/../../../jackdmp.log", [NSBundle mainBundle].resourcePath];
+    NSString* jackdmpLogPath = [NSString stringWithFormat:@" > \"%@/../../../jackdmp.log\"", [NSBundle mainBundle].resourcePath];
     const char* szJackdmpLogPath = [jackdmpLogPath cStringUsingEncoding:NSUTF8StringEncoding];
     strcat(stringa, szJackdmpLogPath);
     

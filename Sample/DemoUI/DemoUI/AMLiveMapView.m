@@ -36,6 +36,8 @@
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
 @property (nonatomic) BOOL isCheckingLocation;
+@property (nonatomic) BOOL isHovering;
+@property (nonatomic) AMLiveGroup *hovGroup;
 @property (nonatomic) BOOL refreshNeeded;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
@@ -81,7 +83,6 @@ AMWorldMap *worldMap;
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
         //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
-            NSLog(@"here is a live group %@ with id %@", remoteGroup.groupName, remoteGroup.groupId);
             
             NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
 
@@ -99,7 +100,6 @@ AMWorldMap *worldMap;
                 
                 if ( storedSubGroupLoc != remoteSubGroup.location ) {
                     //subgroup either just created or location changed
-                    NSLog(@"Subgroup %@ needs to be added/updated", remoteSubGroup.groupName);
                     
                     if ( storedSubGroupLoc != nil ) {
                         //[self checkPixel:remoteSubGroup];
@@ -119,15 +119,11 @@ AMWorldMap *worldMap;
                     NSString *mergeId = [NSString stringWithFormat:@"%@%@", remoteGroup.groupId, remoteSubGroup.groupId];
                     
                     if ( ![_mergedLocations objectForKey:mergeId] ) {
-                        NSLog(@"this connection doesn't yet exist, so add it!");
-                        NSLog(@"the new merge id is %@", mergeId);
-                    
-                        NSLog(@"merged locations before merge are : %@", _mergedLocations);
+                        // Connection doesn't exist yet
                         
                         NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] initWithObjectsAndKeys:remoteGroup, @"group", remoteSubGroup, @"subGroup", nil];
                         
                         [_mergedLocations setObject:connectedGroups forKey:mergeId];
-                        NSLog(@"merged locations are : %@", _mergedLocations);
                     }
                         
                 }
@@ -141,9 +137,6 @@ AMWorldMap *worldMap;
                 _refreshNeeded = YES;
             }
         }
-        
-        NSLog(@"my local live group is : %@", myGroup.groupId);
-        NSLog(@"All live groups are : %@", _allGroups);
     
     
     } else {
@@ -380,25 +373,30 @@ AMWorldMap *worldMap;
     }
 }
 
-- (id) checkGroupIsMerged:(AMLiveGroup *)theGroup {
-    id mergedId = nil;
+- (NSMutableDictionary *) checkGroupIsMerged:(AMLiveGroup *)theGroup {
+    NSMutableDictionary *mergedIds = [[NSMutableDictionary alloc] init];
     
-    for ( NSMutableDictionary *groups in _mergedLocations) {
-        AMLiveGroup *storedGroup = [groups valueForKey:@"group"];
-        AMLiveGroup *storedSubGroup = [groups valueForKey:@"subGroup"];
+    for ( NSDictionary *groups in _mergedLocations) {
+        NSDictionary *theGroups = [_mergedLocations objectForKey:groups];
         
-        if ( [theGroup.groupId isEqualToString:storedGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedGroup.groupId] ||
-            [theGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
-            
-            mergedId = groups;
-        } else {
-            mergedId = nil;
+        AMLiveGroup *storedGroup = [theGroups valueForKey:@"group"];
+        AMLiveGroup *storedSubGroup = [theGroups valueForKey:@"subGroup"];
+        NSLog(@"control group id: %@", theGroup.groupId);
+        NSLog(@"Merged group id: %@", storedGroup.groupId);
+        NSLog(@"Merged subGroup id: %@", storedSubGroup.groupId);
+        
+        if ( [theGroup.groupId isEqualToString:storedGroup.groupId] ) {
+            NSLog(@"Merge found!");
+            [mergedIds setObject:storedSubGroup forKey:storedSubGroup.groupId];
+        } else if ( [theGroup.groupId isEqualToString:storedSubGroup.groupId] ) {
+            NSLog(@"Merge found!");
+            [mergedIds setObject:storedGroup forKey:storedGroup.groupId];
         }
     }
     
-    return mergedId;
+    NSLog(@"found merges are with groups %@", mergedIds);
+    
+    return mergedIds;
 }
 
 - (void)checkPixel:(AMLiveGroup *)theGroup {
@@ -457,7 +455,6 @@ AMWorldMap *worldMap;
     _allGroupsLoc = [[NSMutableDictionary alloc] init];
     _infoPanels = [[NSMutableDictionary alloc] init];
     _localGroupLoc = [[NSMutableDictionary alloc] initWithCapacity:2];
-    //_mergedLocations = [[NSMutableArray alloc] init];
     _mergedLocations = [[NSMutableDictionary alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
     
@@ -487,98 +484,120 @@ AMWorldMap *worldMap;
 
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
-    /**
     // This event fires when you're in the live map view and the mouse is moving
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
-    BOOL isHovering = NO;
 
-    AMLiveGroup *hovGroup;
+    NSLog(@"hovGroup is %@", _hovGroup);
     
-    for ( AMPixel *pixel in _allLiveGroupPixels ) {
+    if (!_hovGroup) {
+        // Hasn't been hoving over group, check to make sure still not hovering
         
-        // Look through every pixel that is set to connected/active state
-        
-        AMPixel *curPort = [_allLiveGroupPixels objectForKey:pixel];
-        NSPoint pixelCenter = [self getPortCenter:curPort];
-        
-        // Make an imaginary rectangle around each active pixel
-        NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
-        
-        if ( NSPointInRect(cursorPoint, pixelBounds) ) {
-            NSString *portLoc = curPort.location;
+        BOOL groupFound = NO;
+        for ( AMPixel *pixel in _allLiveGroupPixels ) {
             
-            for ( NSDictionary *group in _allGroupsLoc ) {
-                
-                // Look through all groups and compare locations to current port
-                NSString *groupLoc = [_allGroupsLoc objectForKey:group];
-                if (groupLoc == portLoc) {
-                    
-                    hovGroup = [_allGroups objectForKey:group];
-                    //NSLog(@"group is being hovered on! %@", hovGroup.groupName);
-                    
-                    switch (isHovering) {
+            // Look through every pixel that is set to connected/active state
+            
+            AMPixel *curPort = [_allLiveGroupPixels objectForKey:pixel];
+            NSPoint pixelCenter = [self getPortCenter:curPort];
+            
+            // Make an imaginary rectangle around this active pixel
+            NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
+            
+            if ( NSPointInRect(cursorPoint, pixelBounds) ) {
+
+                AMLiveGroup *group = [_allGroups objectForKey:pixel];
+                //NSLog(@"group is being hovered on! %@", group);
+                if ( group ) {
+                    // Group is being hovered on
+                        
+                    _hovGroup = group;
+                    groupFound = YES;
+                        
+                    switch (_isHovering) {
                         case NO:
-                            
+                            NSLog(@"group is being hovered on! %@", _hovGroup.groupName);
+                                
                             // Display info panel
-                            if ( ![_infoPanels objectForKey:hovGroup.groupId] ) {
-                                [self addOverlay:hovGroup];
+                            if ( ![_infoPanels objectForKey:_hovGroup.groupId] ) {
+                                [self addOverlay:_hovGroup];
                             }
-                    
-                            NSTextView *thePanel = [_infoPanels objectForKey:hovGroup.groupId];
-                            [thePanel setString:hovGroup.groupName];
+                        
+                            NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
+                            [thePanel setString:_hovGroup.groupName];
                             if ( thePanel.isHidden ) {
-                                
+                                    
                                 // Display the main group panel
-                                [self displayInfoPanel:thePanel forGroup:hovGroup onPixel:pixel];
-                                
+                                [self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
+                                    
                                 // If the current group is a part of a merged group, show a panel for the other group also
-                                
-                                id mergedGroups = [self checkGroupIsMerged:hovGroup ];
-                                if ( mergedGroups ) {
+                                    
+                                id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
+                                if ( [mergedGroups count] > 0 ) {
                                     // This group is merged
+                                    NSLog(@"This group is merged: %@", mergedGroups);
+                                    for ( id mergedGroup in mergedGroups) {
                                     
-                                    AMLiveGroup *mergedGroup;
-                                    if ( [mergedGroups valueForKey:@"subGroup"] == hovGroup ) {
-                                        mergedGroup = [mergedGroups valueForKey:@"group"];
-                                    } else if ( [mergedGroups valueForKey:@"group"] == hovGroup ) {
-                                        mergedGroup = [mergedGroups valueForKey:@"subGroup"];
-                                    }
-                                    
-                                    
-                                    // find pixel for mergedGroup
-                                    //AMLiveGroup *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
-                                    id mergedPixel = mergedGroup.groupId;
-                                    
-                                    // if pixel doesn't have a panel, add one
-                                    if ( ![_infoPanels objectForKey:mergedGroup.groupId] ) {
-                                        [self addOverlay:mergedGroup];
-                                    }
-                                    
-                                    // grab the newly created info panel and manipulate it, if not done already
-                                    thePanel = [_infoPanels objectForKey:mergedGroup.groupId];
-                                    [thePanel setString:mergedGroup.groupName];
-                                    if ( thePanel.isHidden ) {
-                                        [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
-                                    }
-                                    
-                                    
-                                } else {
-                                    //This group isn't merged..
+                                        AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
+                                            
+                                        NSLog(@"Here is a merged group : %@", theMergedGroup.groupName);
+                                        
+                                            
+                                        // find pixel for mergedGroup
+                                        //AMLiveGroup *mergedPixel = [_allLiveGroupPixels objectForKey:mergedGroup.groupId];
+                                        id mergedPixel = theMergedGroup.groupId;
+                                            
+                                        // if pixel doesn't have a panel, add one
+                                        if ( ![_infoPanels objectForKey:theMergedGroup.groupId] ) {
+                                            [self addOverlay:mergedGroup];
+                                        }
+                                            
+                                        // grab the newly created info panel and manipulate it, if not done already
+                                        thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
+                                        [thePanel setString:theMergedGroup.groupName];
+                                        if ( thePanel.isHidden ) {
+                                            [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                        }
                                 }
-                                
-                                
+                                        
+                                        
+                                        
+                                } else {
+                                        //This group isn't merged..
+                                }
+                                    
+                                    
                             }
-                    }
-                    
-                    isHovering = YES;
-                    
+                            _isHovering = YES;
+                            break;
+                        
+                        } // close switch case
+                        
                 }
             }
-        }
         
-    }
-    switch (isHovering) {
+            if (groupFound) { break;}
+            
+        } //close live pixel for loop
+    } else {
+        // Group currently hovered on, make sure still hovering on
+        NSLog(@"Is group still hovering?..");
+        id hovGroupId = _hovGroup.groupId;
+        NSLog(@"hovGroup is %@", _hovGroup.groupId);
+        AMPixel *curPort = [_allLiveGroupPixels objectForKey:hovGroupId];
+        NSLog(@"current pixel being hovered on is %@", curPort);
+        NSPoint pixelCenter = [self getPortCenter:curPort];
+        
+        // Make an imaginary rectangle around this active pixel
+        NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
+        
+        if ( !NSPointInRect(cursorPoint, pixelBounds) ) {
+            //Cursor no longer hovering over a group
+            _isHovering = NO;
+        }
+    }// close if _hovGroup
+    switch (_isHovering) {
         case NO:
+            _hovGroup = nil;
             for ( id thePanel in _infoPanels ) {
                 NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
                 if (!curPanel.isHidden) {
@@ -587,7 +606,6 @@ AMWorldMap *worldMap;
             }
             break;
     }
-    **/
 }
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {

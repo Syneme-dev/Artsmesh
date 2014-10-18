@@ -43,10 +43,10 @@ static id sharedManager = nil;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         // do work here
-//        NSNotification* notification = [NSNotification notificationWithName:typeName object:sender userInfo:parameters];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        NSNotification* notification = [NSNotification notificationWithName:typeName object:sender userInfo:parameters];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:typeName object:nil];
+       // [[NSNotificationCenter defaultCenter] postNotificationName:typeName object:nil];
     });
 }
 

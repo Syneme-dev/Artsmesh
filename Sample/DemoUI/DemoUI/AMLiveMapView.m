@@ -610,6 +610,16 @@ AMWorldMap *worldMap;
                     [self hideView:curPanel];
                 }
             }
+            if ( worldMap.state == overView && self.wantsLayer == YES) {
+                NSLog(@"wants layer no");
+                [self setWantsLayer: NO];
+            }
+            break;
+        case YES:
+            if ( worldMap.state == overView && self.wantsLayer == NO ) {
+                NSLog(@"wants layer yes");
+                [self setWantsLayer: YES];
+            }
             break;
     }
 }
@@ -673,7 +683,7 @@ AMWorldMap *worldMap;
     [dropShadow setShadowOffset:NSMakeSize(0, 4.0)];
     [dropShadow setShadowBlurRadius:4.0];
     
-    [self setWantsLayer: YES];
+    //[self setWantsLayer: YES];
     [newPanel setShadow: dropShadow];
     
     

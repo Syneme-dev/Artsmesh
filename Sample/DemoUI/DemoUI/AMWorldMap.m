@@ -144,6 +144,8 @@ NSString *mapLine40 = @"........................................................
         }
         self.numMapTiles = numTiles;
     }
+    
+    _state = overView;
 }
 
 

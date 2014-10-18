@@ -16,6 +16,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMAudio/AMAudio.h"
+#import "AMLogger/AMLogger.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -27,6 +28,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     allPlugins = [self loadPlugins];
+    [AMLogger AMLoggerInit];
     [[AMPreferenceManager shareInstance] initPreference];
     [[AMStatusNet shareInstance] loadGroups];
     [self.mainWindowController showDefaultWindow];
@@ -44,6 +46,8 @@ static NSMutableDictionary *allPlugins = nil;
     [[AMMesher sharedAMMesher] stopMesher];
     
     [[AMAudio sharedInstance] releaseResources];
+    
+    [AMLogger AMLoggerRelease];
 }
 
 - (void)connectMesher {

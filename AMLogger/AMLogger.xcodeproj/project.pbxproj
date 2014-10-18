@@ -15,6 +15,7 @@
 		37FCB9FB18710F6300C1FD1B /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9DE18710F6300C1FD1B /* AMLogger.framework */; };
 		37FCBA0118710F6300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9FF18710F6300C1FD1B /* InfoPlist.strings */; };
 		37FCBA0318710F6300C1FD1B /* AMLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */; };
+		D47A184C19F21242000A8CCB /* AMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB9EE18710F6300C1FD1B /* AMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47A184C19F21242000A8CCB /* AMLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

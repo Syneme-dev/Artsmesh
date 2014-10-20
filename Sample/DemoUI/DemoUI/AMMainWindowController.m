@@ -148,15 +148,11 @@
 
 - (IBAction)mesh:(id)sender {
 
-    if ([[AMMesher sharedAMMesher] mesherState] == kMesherMeshed ||
-        [[AMMesher sharedAMMesher] mesherState] == kMesherMeshing) {
-        
-         [[AMMesher sharedAMMesher] goOffline];
-    }else if([[AMMesher sharedAMMesher] mesherState] == kMesherStarted ){
-        
-        [[AMMesher sharedAMMesher] goOnline];
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    if ([mesher mesherState] == kMesherUnmeshed){
+        [mesher goOnline];
     }else{
-        self.meshBtn.state = 2;
+        [mesher goOffline];
     }
 }
 

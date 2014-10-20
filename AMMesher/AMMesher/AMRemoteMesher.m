@@ -59,7 +59,6 @@
         
         if ([keyPath isEqualToString:@"mesherState"]){
             AMMesherState newState = [[change objectForKey:@"new"] intValue];
-            AMMesherState oldState = [[change objectForKey:@"old"] intValue];
             
             switch (newState) {
                 case kMesherMeshing:
@@ -67,11 +66,6 @@
                     break;
                 case kMesherUnmeshing:
                     [self stopRemoteClient];
-                    break;
-                case kMesherStopping:
-                    if (oldState == kMesherMeshed){
-                        [self stopRemoteClient];
-                    }
                     break;
                 default:
                     break;
@@ -195,8 +189,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
+                [[AMMesher sharedAMMesher] updateMySelf];
+                
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
-                //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
             });
             
         }else{
@@ -309,6 +304,9 @@
         [_httpRequestQueue  cancelAllOperations];
         [self unregisterSelf];
     }
+    
+    [[AMMesher sharedAMMesher] setMesherState:kMesherUnmeshed];
+    [[AMMesher sharedAMMesher] updateMySelf];
     
     [AMCoreData shareInstance].remoteLiveGroups = nil;
     dispatch_async(dispatch_get_main_queue(), ^{

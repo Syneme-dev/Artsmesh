@@ -33,7 +33,7 @@
 {
     if (self = [super init]) {
 
-        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
+        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
         
@@ -56,25 +56,17 @@
 {
     if ([object isKindOfClass:[AMMesher class]]){
         
-        if ([keyPath isEqualToString:@"mesherState"]){
-            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+        if ([keyPath isEqualToString:@"clusterState"]){
+            AMClusterState newState = [[change objectForKey:@"new"] intValue];
             
             switch (newState) {
-                case kMesherLocalServerStarting:
+                case kClusterServerStarting:
                     [self startLocalServer];
-                    //[self startLocalClient];
                     break;
-                case kMesherLocalClientStarting:
+                case kClusterClientRegisting:
                     [self startLocalClient];
                     break;
-                case kMesherMeshed:
-                    [self updateMyself];
-                    break;
-                case kMesherUnmeshing:
-                    [self updateMyself];
-                    [[AMMesher sharedAMMesher] setMesherState:kMesherStarted];
-                    break;
-                case kMesherStopping:
+                case kClusterStopping:
                     [self stopLocalServer];
                     [self stopLocalClient];
                     break;
@@ -114,10 +106,7 @@
     
     sleep(2);
     
-    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
-    
-//    [AMCoreData shareInstance].myLocalLiveGroup.longitude = @"116";
-//    [AMCoreData shareInstance].myLocalLiveGroup.latitude = @"39";
+    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
 
@@ -250,12 +239,16 @@
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AMMesher sharedAMMesher] setMesherState:kMesherStarted];
+                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
                 [self startHeartbeat];
             });
-
+            
         }else if([responseStr isEqualToString:@"user already exist!"]){
             NSLog(@"%@", responseStr);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
+                [self startHeartbeat];
+            });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"register self failed, retry");
@@ -320,7 +313,7 @@
     _httpRequestQueue = nil;
     _heartbeatThread = nil;
     
-    [[AMMesher sharedAMMesher] setMesherState:kMesherStopped];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterStopped];
 }
 
 
@@ -394,12 +387,10 @@
 -(void)updateMyself
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
     });
     
-    
-    if([[AMMesher sharedAMMesher] mesherState] < kMesherStarted  ||
-       [[AMMesher sharedAMMesher] mesherState] >= kMesherStopping){
+    if([[AMMesher sharedAMMesher] clusterState] != kClusterStarted){
         return;
     }
     

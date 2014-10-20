@@ -7,30 +7,37 @@
 //
 #import <Foundation/Foundation.h>
 
-typedef enum{
+typedef enum {
+    kClusterError = -1,
+    kClusterStopped = 0,
+    kClusterAutoDiscovering,
+    kClusterServerStarting,
+    kClusterClientRegisting,
+    kClusterStarted,
+    kClusterStopping,
+}AMClusterState;
+
+
+typedef enum {
     kMesherError = -1,
-    kMesherInitialized = 0,
-    kMesherStarting,
-    kMesherLocalServerStarting,
-    kMesherLocalClientStarting,
-    kMesherStarted,
+    kMesherUnmeshed = 0,
     kMesherMeshing,
     kMesherMeshed,
     kMesherUnmeshing,
-    kMesherStopping,
-    kMesherStopped,
 }AMMesherState;
 
 
 @interface AMMesher: NSObject
 
 +(id)sharedAMMesher;
+@property AMMesherState mesherState;
+@property AMClusterState clusterState;
+
 -(void)startMesher;
 -(void)stopMesher;
-
-@property AMMesherState mesherState;
 -(void)goOnline;
 -(void)goOffline;
+
 -(void)mergeGroup:(NSString*)superGroupId;
 -(void)unmergeGroup;
 -(void)updateGroup;

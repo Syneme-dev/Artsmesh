@@ -71,18 +71,20 @@ AMWorldMap *worldMap;
     
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:myGroup.groupId];
-
      
     // Get/Set location data
     
     if ( [myGroup isMeshed] ) {
-        //AMCoreData *remoteGroups = [AMCoreData shareInstance].remoteLiveGroups;
+        NSLog(@"Meshed setup..");
+        NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
         [self clearGroup:myGroup.groupId];
         
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
         //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+            
+            [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
             NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
 
@@ -96,6 +98,9 @@ AMWorldMap *worldMap;
             }
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+                
+                [curGroups setObject:remoteSubGroup.groupName forKey:remoteSubGroup.groupId];
+                
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
                 
                 if ( storedSubGroupLoc != remoteSubGroup.location ) {
@@ -129,13 +134,15 @@ AMWorldMap *worldMap;
         }
         
         // Check for de-meshed users
-        for (AMPixel *curPixel in _allLiveGroupPixels) {
-            if ( ![_allGroups objectForKey:curPixel] ) {
+        
+        NSMutableDictionary *allGroupsCopy = [_allGroups copy];
+        for ( AMLiveGroup *group in allGroupsCopy ) {
+            if (![curGroups objectForKey:group]) {
                 // This group no longer exists (de-meshed)
+                [self clearGroup:group];
                 _refreshNeeded = YES;
             }
         }
-    
     
     } else {
         
@@ -497,7 +504,16 @@ AMWorldMap *worldMap;
     
     NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
     [self addTrackingArea:trackingArea];
+    
+    
+    // For local testing purposes only
+    /**
+    [NSTimer scheduledTimerWithTimeInterval: 30.0
+                                                  target: self
+                                                selector:@selector(onTick:)
+                                                userInfo: nil repeats:YES];
 
+    **/
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -716,6 +732,14 @@ AMWorldMap *worldMap;
 }
 
 
+// Below: Local testing code (not used in production)
+
+
+-(void)onTick:(NSTimer *)timer {
+    //do something
+    //NSLog(@"test ping..");
+    [self setup];
+}
 
 - (NSMutableArray *)getFakeData {
 
@@ -766,7 +790,8 @@ returningResponse:nil error:nil];
     theGroup.latitude = [rawGroupData valueForKey:@"Latitude"];
     theGroup.busy = (BOOL)[rawGroupData valueForKey:@"Busy"];
     
-    if ( ![rawSubGroupData isEqual:[NSNull null]] ) {NSLog(@"no subgroups");
+    if ( ![rawSubGroupData isEqual:[NSNull null]] ) {
+        //NSLog(@"no subgroups");
         theGroup.subGroups = [self findFakeSubGroups:rawSubGroupData];
     }
     

@@ -15,6 +15,8 @@
 		37FCB9FB18710F6300C1FD1B /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9DE18710F6300C1FD1B /* AMLogger.framework */; };
 		37FCBA0118710F6300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9FF18710F6300C1FD1B /* InfoPlist.strings */; };
 		37FCBA0318710F6300C1FD1B /* AMLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */; };
+		4A9A79A619F9146700AF49EC /* AMLogFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A79A419F9146700AF49EC /* AMLogFilter.h */; };
+		4A9A79A719F9146700AF49EC /* AMLogFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A79A519F9146700AF49EC /* AMLogFilter.m */; };
 		D47A184C19F21242000A8CCB /* AMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB9EE18710F6300C1FD1B /* AMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		37FCB9FE18710F6300C1FD1B /* AMLoggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMLoggerTests-Info.plist"; sourceTree = "<group>"; };
 		37FCBA0018710F6300C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMLoggerTests.m; sourceTree = "<group>"; };
+		4A9A79A419F9146700AF49EC /* AMLogFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLogFilter.h; sourceTree = "<group>"; };
+		4A9A79A519F9146700AF49EC /* AMLogFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLogFilter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 			children = (
 				37FCB9EE18710F6300C1FD1B /* AMLogger.h */,
 				37FCB9EF18710F6300C1FD1B /* AMLogger.m */,
+				4A9A79A419F9146700AF49EC /* AMLogFilter.h */,
+				4A9A79A519F9146700AF49EC /* AMLogFilter.m */,
 				37FCB9E818710F6300C1FD1B /* Supporting Files */,
 			);
 			path = AMLogger;
@@ -153,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47A184C19F21242000A8CCB /* AMLogger.h in Headers */,
+				4A9A79A619F9146700AF49EC /* AMLogFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB9F018710F6300C1FD1B /* AMLogger.m in Sources */,
+				4A9A79A719F9146700AF49EC /* AMLogFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

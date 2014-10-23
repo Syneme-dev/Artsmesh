@@ -38,6 +38,7 @@
     [AMButtonHandler changeTabTextColor:self.pingButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.tracerouteButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.logButton toColor:UI_Color_blue];
     
     _pingCommand = [[AMNetworkToolsCommand alloc] init];
     _pingCommand.contentView = self.pingContentView;
@@ -65,7 +66,8 @@
     [self.tabButtons addObject:self.pingButton];
     [self.tabButtons addObject:self.tracerouteButton];
     [self.tabButtons addObject:self.iperfButton];
-    self.showingTabsCount=3;
+    [self.tabButtons addObject:self.logButton];
+    self.showingTabsCount=4;
 }
 
 - (void)dealloc
@@ -149,6 +151,11 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 {
     [self pushDownButton:self.iperfButton];
     [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
+}
+
+- (IBAction)log:(id)sender {
+    [self pushDownButton:self.logButton];
+    [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
 @end

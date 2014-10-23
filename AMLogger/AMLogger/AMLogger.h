@@ -12,7 +12,8 @@
 typedef enum {
     AMLog_Error,
     AMLog_Warning,
-    AMLog_Debug
+    AMLog_Debug,
+    AMLog_System,
     
 }AMLogCategory;
 
@@ -34,6 +35,10 @@ void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...);
 
 +(void)AMLoggerInit;
 +(void)AMLoggerRelease;
+
+//.Artsmesh.app/../Log/xxx.log
++(NSString*)AMLogPath:(NSString*)processName;
+
 
 -(void)registerViewer:(id<AMLoggerViewer>)viewer forCategory:(AMLogCategory)cat;
 -(void)unregisterViewer:(id<AMLoggerViewer>)viewer;

@@ -8,6 +8,7 @@
 
 #import "AMLogger.h"
 static AMLogger* _sharedInstance = nil;
+const NSString* _logRelativeFolderName = @"/Log";
 
 @implementation AMLogger
 {

@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSButton *tracerouteButton;
 @property (weak) IBOutlet NSButton *iperfButton;
 @property (weak) IBOutlet NSTabView *tabView;
+@property (weak) IBOutlet NSButton *logButton;
 
 @property (weak) IBOutlet NSTableView *pingTableView;
 @property (unsafe_unretained) IBOutlet NSTextView *pingContentView;
@@ -25,5 +26,6 @@
 - (IBAction)ping:(id)sender;
 - (IBAction)traceroute:(id)sender;
 - (IBAction)iperf:(id)sender;
+- (IBAction)log:(id)sender;
 
 @end

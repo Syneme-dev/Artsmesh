@@ -175,7 +175,7 @@
 //        [panelView scrollRectToVisible:panelView.bounds];
         
         AMBoxItem *dummy = [[AMBoxItem alloc] initWithFrame:panelView.frame];
-        [[[NSApp delegate] mainWindowController].containerView addSubview:dummy];
+        [[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView addSubview:dummy];
         [dummy scrollRectToVisible:dummy.bounds];
         NSRect rectInScreen = [dummy convertRect:dummy.bounds toView:nil];
         rectInScreen = [dummy.window convertRectToScreen:rectInScreen];
@@ -187,7 +187,7 @@
         _floatingWindow = nil;
         panelView.tearedOff = NO;
         [self.fullScreenButton setHidden:YES];
-        [[[NSApp delegate] mainWindowController].containerView addSubview:panelView];
+        [[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView addSubview:panelView];
         [panelView scrollRectToVisible:panelView.enclosingRect];
     }
 }

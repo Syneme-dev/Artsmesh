@@ -30,15 +30,18 @@
 @property (nonatomic) NSMutableDictionary *mergedLocations;
 @property (nonatomic) NSMutableDictionary *allGroups;
 @property (nonatomic) NSMutableDictionary *allGroupsLoc;
-@property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) NSMutableDictionary *infoPanels;
+@property (nonatomic) NSMutableDictionary *fonts;
+@property (nonatomic) NSView *programView;
+@property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
 @property (nonatomic) double portH;
 @property (nonatomic) BOOL isCheckingLocation;
 @property (nonatomic) BOOL isHovering;
-@property (nonatomic) AMLiveGroup *hovGroup;
 @property (nonatomic) BOOL refreshNeeded;
+@property (nonatomic) AMLiveGroup *myGroup;
+@property (nonatomic) AMLiveGroup *hovGroup;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
 @end
@@ -69,16 +72,16 @@ AMWorldMap *worldMap;
     
     //Construct WorldMap and pixel arrays for assigning buttons to view
     
-    AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:myGroup.groupId];
+    //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:_myGroup.groupId];
      
     // Get/Set location data
     
-    if ( [myGroup isMeshed] ) {
+    if ( [_myGroup isMeshed] ) {
 
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
-        [self clearGroup:myGroup.groupId];
+        [self clearGroup:_myGroup.groupId];
         
         for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
 
@@ -146,11 +149,11 @@ AMWorldMap *worldMap;
     
     } else {
         
-        if ( storedMyGroupLoc != myGroup.location ) {
+        if ( storedMyGroupLoc != _myGroup.location ) {
             [_allGroupsLoc removeAllObjects];
             [self clearMap];
         
-            [self findLiveGroupLocation:myGroup];
+            [self findLiveGroupLocation:_myGroup];
         }
     }
     
@@ -165,7 +168,7 @@ AMWorldMap *worldMap;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     [self.backgroundColor set];
     NSRectFill(self.bounds);
@@ -192,7 +195,7 @@ AMWorldMap *worldMap;
     }
     
     // Draw each line connecting ports
-    if ( [myGroup isMeshed] ) {
+    if ( [_myGroup isMeshed] ) {
         for ( NSMutableDictionary *groups in _mergedLocations ) {
             
             NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
@@ -476,6 +479,7 @@ AMWorldMap *worldMap;
 
 - (void)initVars {
     worldMap = [[AMWorldMap alloc] init];
+    _myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     _allGroups = [[NSMutableDictionary alloc] init];
     _allGroupsLoc = [[NSMutableDictionary alloc] init];
     _infoPanels = [[NSMutableDictionary alloc] init];
@@ -491,6 +495,18 @@ AMWorldMap *worldMap;
     _portW = self.bounds.size.width / (long)worldMap.mapWidth;
     _portH = self.bounds.size.height / (long)worldMap.mapHeight;
     _mapXPush = (self.bounds.size.width - (_portW * worldMap.mapWidth))/2;
+    
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:16.0], @"header",
+              [NSFont fontWithName: @"FoundryMonoline" size:14.0], @"body",
+              [NSFont fontWithName: @"FoundryMonoline" size:12.0], @"small",
+              nil];
+    
+    _programView = [[NSView alloc] initWithFrame:[self bounds]];
+    
+    [self addSubview:_programView];
+    [self hideView:_programView];
     
     int numberOfPorts = (int)worldMap.numMapTiles;
     NSMutableArray *allPorts = [NSMutableArray arrayWithCapacity:numberOfPorts];
@@ -519,6 +535,8 @@ AMWorldMap *worldMap;
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
     // This event fires when you're in the live map view and the mouse is moving
+if ( worldMap.state == overView ) {
+    
     NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
     
     if (!_hovGroup) {
@@ -543,7 +561,7 @@ AMWorldMap *worldMap;
                     
                     _hovGroup = group;
                     groupFound = YES;
-                        
+                    
                     switch (_isHovering) {
                         case NO:
                             // Display info panel
@@ -620,12 +638,8 @@ AMWorldMap *worldMap;
         case NO:
             [[NSCursor arrowCursor] set];
             _hovGroup = nil;
-            for ( id thePanel in _infoPanels ) {
-                NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
-                if (!curPanel.isHidden) {
-                    [self hideView:curPanel];
-                }
-            }
+            [self hideAllPanels];
+
             if ( worldMap.state == overView && self.wantsLayer == YES) {
                 // Turn this off when not needed to avoid graphic clipping
                 [self setWantsLayer: NO];
@@ -638,7 +652,68 @@ AMWorldMap *worldMap;
             }
             break;
     }
+} else if ( worldMap.state == programView ) {
+    [[NSCursor arrowCursor] set];
+    _hovGroup = nil;
 }
+    
+}
+
+
+-(void) mouseDown: (NSEvent *) thisEvent {
+    
+    NSCursor *cursor = [NSCursor currentCursor];
+    
+    if ( [cursor isEqual:[NSCursor pointingHandCursor]] ) {
+        // Cursor is hovering over group and has been clicked
+        
+        if (_hovGroup) {
+            worldMap.state = programView;
+            
+            NSLog(@"%@ was clicked on!", _hovGroup.groupName);
+            if ( [_myGroup isMeshed] ) {
+                // Check if group is parent or subgroup of a merge
+                
+            } else {
+                // only worry about myGroup
+                
+                NSSize programSize = {100, 200};
+                [_programView setFrameSize:programSize];
+                [_programView setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
+                
+                /**
+                NSTextView *groupDetailsView = [[NSTextView alloc] initWithFrame:[_programView bounds]];
+                [groupDetailsView insertText:_myGroup.groupName];
+                [self formatTextView:groupDetailsView withFont:[_fonts objectForKey:@"body"]];
+                [groupDetailsView insertNewline:groupDetailsView];
+                [groupDetailsView insertText:groupDesc];
+                 
+                 
+                [_programView setSubviews:[NSArray arrayWithObjects:groupDetailsView, nil]];
+                **/
+                
+                NSTextField *groupTitleField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, _programView.frame.size.height, _programView.frame.size.width, 40) ];
+                [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
+                
+                [_programView addSubview:groupTitleField];
+                
+                [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
+                [self showView:_programView];
+            }
+            
+        }
+        
+        
+    } else {
+        // General map area has been clicked, reset map state
+        _isHovering = NO;
+        worldMap.state = overView;
+        [self hideView:_programView];
+        [self hideAllPanels];
+    }
+    
+}
+
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
     NSSize panelPadding = { 10, 5 };
@@ -670,6 +745,15 @@ AMWorldMap *worldMap;
     [self showView:thePanel];
 }
 
+- (void)hideAllPanels {
+    for ( id thePanel in _infoPanels ) {
+        NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
+        if (!curPanel.isHidden) {
+            [self hideView:curPanel];
+        }
+    }
+}
+
 - (void)addOverlay:(AMLiveGroup *) theGroup {
     // Add the info panel to the map (used for displaying text on map)
     //id pixelId = thePixel;
@@ -680,13 +764,13 @@ AMWorldMap *worldMap;
     NSRect textFrame = [self bounds];
     textFrame.size.width = 200; //textFrame.size.width/2;
     textFrame.size.height = 35; //textFrame.size.height/5;
-    NSFont *font = [NSFont userFontOfSize:16.0];
+    //NSFont *font = [NSFont fontWithName: @"FoundryMonoline" size: 16.0];
     
     // Set TextView Properties
     newPanel = [[NSTextView alloc] initWithFrame:textFrame];
     [newPanel setTextColor:[NSColor whiteColor]];
     [newPanel setEditable:NO];
-    [newPanel setFont:font];
+    [newPanel setFont:[_fonts objectForKey:@"header"]];
     [newPanel setAlignment: NSCenterTextAlignment];
     
     newPanel.backgroundColor = _backgroundColor;
@@ -702,7 +786,6 @@ AMWorldMap *worldMap;
     //[self setWantsLayer: YES];
     [newPanel setShadow: dropShadow];
     
-    
     // Add TextView to Live Map, as a subview overlay
     [self addSubview:newPanel positioned:NSWindowAbove relativeTo:nil];
     
@@ -713,6 +796,46 @@ AMWorldMap *worldMap;
     [self hideView:newPanel];
     
     [_infoPanels setObject:newPanel forKey:groupId];
+}
+
+- (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {
+    
+    [theTextView setTextColor:[NSColor whiteColor]];
+    [theTextView setFont:theFont];
+    [theTextView setAlignment: NSCenterTextAlignment];
+    
+    theTextView.backgroundColor = _backgroundColor;
+    
+    NSFontManager *fontmanager = [NSFontManager sharedFontManager];
+    NSLog(@"Font weight is %li", (long)[fontmanager weightOfFont:theFont] );
+}
+
+- (void)formatTextField:(NSTextField *)theField withFont:(NSFont *)theFont {
+    
+    [theField setBackgroundColor:_backgroundColor];
+    [theField setBordered:NO];
+    [theField setStringValue:_myGroup.groupName];
+    
+    //theFont = [[NSFontManager sharedFontManager] convertFont:theFont toHaveTrait:NSFontBoldTrait];
+    
+    [theField setFont: theFont];
+    
+    NSFontManager *fontmanager = [NSFontManager sharedFontManager];
+    NSLog(@"Font weight is %li", (long)[fontmanager weightOfFont:theFont] );
+    
+}
+
+- (void)addShadow:(NSView *)theView withOffset:(NSSize)theOffset {
+    
+    NSShadow *dropShadow = [[NSShadow alloc] init];
+    [dropShadow setShadowColor:[NSColor colorWithCalibratedRed:0.0
+                                                         green:0.0
+                                                          blue:0.0
+                                                         alpha:0.8]];
+    [dropShadow setShadowOffset:theOffset];
+    [dropShadow setShadowBlurRadius:4.0];
+    
+    [theView setShadow: dropShadow];
 }
 
 - (void)hideView:(NSView *)theView {

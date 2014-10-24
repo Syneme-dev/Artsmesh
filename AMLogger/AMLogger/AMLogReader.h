@@ -11,10 +11,10 @@
 @interface AMLogReader : NSObject
 
 @property int logCountFromTail;
--(BOOL)         openLogFromTail;
--(BOOL)         openLogAll;
--(NSArray*)     logArray;
--(NSString*)    nextLogItem;
+
+-(NSArray*)lastLogItmes;
+-(NSString*)nextLogItem;
+
 @end
 
 @interface AMErrorLogReader : AMLogReader

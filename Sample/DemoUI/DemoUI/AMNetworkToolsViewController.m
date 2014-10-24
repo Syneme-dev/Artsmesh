@@ -160,8 +160,8 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
-- (IBAction)showErrorLog:(id)sender {
-    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+-(void) showLogFromTail:(AMLogReader*) reader
+{
     if([reader openLogFromTail] == YES)
     {
         NSArray*  logArray = [reader logArray];
@@ -169,10 +169,23 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         NSString* logItem = [logArray objectAtIndex:count++];
         while (logItem) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
-            NSString* logItem = [logArray objectAtIndex:count++];
+            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            
+            logItem = [logArray objectAtIndex:count++];
         }
     }
 
+}
+
+-(void) showEntireLog( )
+{
+    
+}
+
+- (IBAction)showErrorLog:(id)sender {
+    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+    
+    [self showLogFromTail];
 }
 
 - (IBAction)showWarningLog:(id)sender {

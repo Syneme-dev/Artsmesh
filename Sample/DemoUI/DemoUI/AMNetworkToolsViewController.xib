@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
             <connections>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
+                <outlet property="logTextView" destination="l4w-D1-cZA" id="Fp8-OV-aJv"/>
                 <outlet property="pingButton" destination="P0v-P2-klr" id="lui-OM-kGD"/>
                 <outlet property="pingContentView" destination="WsA-3d-Df9" id="EBf-50-FW5"/>
                 <outlet property="pingTableView" destination="OFT-1T-5V9" id="rgu-bj-mPv"/>
@@ -34,9 +34,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smr-Z1-0Tm">
+                                    <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smr-Z1-0Tm">
                                         <rect key="frame" x="0.0" y="-26" width="178" height="324"/>
-                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="jrR-UO-o4M">
+                                        <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="jrR-UO-o4M">
                                             <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -99,9 +99,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ez-MD-AkL">
+                                    <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ez-MD-AkL">
                                         <rect key="frame" x="178" y="0.0" width="415" height="298"/>
-                                        <clipView key="contentView" copiesOnScroll="NO" id="g4x-M9-b9K">
+                                        <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="g4x-M9-b9K">
                                             <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -301,6 +301,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showErrorLog:" target="-2" id="kbW-hf-wc5"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
                                         <rect key="frame" x="20" y="368" width="106" height="52"/>
@@ -308,6 +311,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showWarningLog:" target="-2" id="rU0-Rq-3mI"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-mb-beO">
                                         <rect key="frame" x="20" y="298" width="106" height="52"/>
@@ -315,6 +321,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showInfoLog:" target="-2" id="dJn-Vv-bTi"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-xl-1sj">
                                         <rect key="frame" x="20" y="222" width="106" height="52"/>
@@ -322,6 +331,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showSysLog:" target="-2" id="GJz-tZ-I2l"/>
+                                        </connections>
                                     </button>
                                     <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-65-mVZ">
                                         <rect key="frame" x="162" y="20" width="479" height="468"/>
@@ -330,14 +342,14 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="l4w-D1-cZA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="223" height="466"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="462" height="466"/>
-                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <size key="minSize" width="477" height="466"/>
+                                                    <size key="maxSize" width="479" height="10000000"/>
                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="462" height="466"/>
-                                                    <size key="maxSize" width="463" height="10000000"/>
+                                                    <size key="minSize" width="477" height="466"/>
+                                                    <size key="maxSize" width="479" height="10000000"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

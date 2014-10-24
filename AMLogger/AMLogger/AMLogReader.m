@@ -21,7 +21,7 @@
     return nil;
 }
 
--(BOOL) openLastSomeLogs
+-(BOOL) openLogFromTail
 {
     if(logFullPath)
     {
@@ -33,7 +33,7 @@
         return NO;
 }
 
--(NSMutableArray*) logArray
+-(NSArray*) logArray
 {
     return logArray;
 }

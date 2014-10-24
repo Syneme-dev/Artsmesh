@@ -17,7 +17,7 @@
 		37FCBA0318710F6300C1FD1B /* AMLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */; };
 		4A9A79A619F9146700AF49EC /* AMLogFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A79A419F9146700AF49EC /* AMLogFilter.h */; };
 		4A9A79A719F9146700AF49EC /* AMLogFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9A79A519F9146700AF49EC /* AMLogFilter.m */; };
-		4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */; };
+		4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FD5A6C519FA1EEC00BDD634 /* AMLogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A6C319FA1EEC00BDD634 /* AMLogReader.m */; };
 		D47A184C19F21242000A8CCB /* AMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB9EE18710F6300C1FD1B /* AMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -165,8 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47A184C19F21242000A8CCB /* AMLogger.h in Headers */,
-				4A9A79A619F9146700AF49EC /* AMLogFilter.h in Headers */,
 				4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */,
+				4A9A79A619F9146700AF49EC /* AMLogFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

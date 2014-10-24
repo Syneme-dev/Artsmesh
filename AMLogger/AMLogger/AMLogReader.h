@@ -12,8 +12,11 @@
 
 -(id) initLogReader:(NSString*)proceesName;
 @property int logCountFromTail;
--(NSString*) nextLogItem;
--(void) resetReader;
+
+-(BOOL)         openLogFromTail;
+-(NSArray*)     logArray;
+-(NSString*)    nextLogItem;
+-(void)         resetReader;
 @end
 
 

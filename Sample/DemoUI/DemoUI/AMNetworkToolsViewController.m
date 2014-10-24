@@ -11,6 +11,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMNetworkToolsCommand.h"
 #import "AMCommonTools/AMCommonTools.h"
+#import "AMLogger/AMLogReader.h"
 
 @interface AMNetworkToolsViewController ()
 {
@@ -18,6 +19,7 @@
     AMNetworkToolsCommand *_pingCommand;
     AMNetworkToolsCommand *_tracerouteCommand;
 }
+@property (unsafe_unretained) IBOutlet NSTextView *logTextView;
 
 @end
 
@@ -158,4 +160,21 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
+- (IBAction)showErrorLog:(id)sender {
+    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+    if([reader openLogFromTail] == YES)
+    {
+        NSArray* logArray = [reader logArray];
+    }
+
+}
+
+- (IBAction)showWarningLog:(id)sender {
+}
+
+- (IBAction)showInfoLog:(id)sender {
+}
+
+- (IBAction)showSysLog:(id)sender {
+}
 @end

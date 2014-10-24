@@ -10,22 +10,26 @@
 
 
 @interface AMLogReader : NSObject
+
 @property int logCountFromTail;
 
--(id)           initWithLogFullPath:(NSString*)logFile;
 -(BOOL)         openLogFromTail;
 -(NSArray*)     logArray;
 -(NSString*)    nextLogItem;
 
 @end
 
-
-
 @interface AMErrorLogReader : AMLogReader
--(id) initErrorLogReader;
 @end
 
+@interface AMWarningLogReader : AMLogReader
+@end
+
+@interface AMInfoLogReader : AMLogReader
+@end
 
 @interface  AMSystemLogReader : AMLogReader
+
+-(id)initWithFileName:(NSString*)logFilePath;
 
 @end

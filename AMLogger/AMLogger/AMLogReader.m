@@ -49,9 +49,10 @@
 
 @synthesize logCountFromTail;
 
--(id) initLogReader:(NSString*) newLogFullPath{
+
+-(id)initWithFileName:(NSString*)logFilePath{
     if (self = [super init]) {
-        logFullPath = newLogFullPath;
+        logFullPath = logFilePath;
     }
 
     return self;
@@ -77,12 +78,11 @@
 
 @implementation AMErrorLogReader
 
--(id) initErrorLogReader{
-    
+-(id) init{
     NSString* logName = [AMLogger AMLoggerName];
     NSString* logPath = [AMLogger AMLogPath];
     NSString* logDir = [NSString stringWithFormat:@"%@/%@", logPath, logName];
-    self = [super initLogReader:logDir];
+    self = [super initWithFileName:logDir];
     return self;
 }
 
@@ -93,12 +93,45 @@
 
 @end
 
+@implementation AMWarningLogReader
+-(id) init{
+    NSString* logName = [AMLogger AMLoggerName];
+    NSString* logPath = [AMLogger AMLogPath];
+    NSString* logDir = [NSString stringWithFormat:@"%@/%@", logPath, logName];
+    self = [super initWithFileName:logDir];
+    return self;
+}
+
+-(NSArray *)logArray{
+    NSArray* logArray = @[@"Warning log1", @"Warning log2", @"Warning log3"];
+    return logArray;
+}
+
+@end
+
+@implementation AMInfoLogReader
+
+-(id) init{
+    NSString* logName = [AMLogger AMLoggerName];
+    NSString* logPath = [AMLogger AMLogPath];
+    NSString* logDir = [NSString stringWithFormat:@"%@/%@", logPath, logName];
+    self = [super initWithFileName:logDir];
+    return self;
+}
+
+-(NSArray *)logArray{
+    NSArray* logArray = @[@"Info log1", @"Info log2", @"Info log3"];
+    return logArray;
+}
+
+@end
 
 
 @implementation AMSystemLogReader
--(id) initSystemLogReader:(NSString*)fullPath
-{
-    return [super initLogReader:fullPath];
+
+-(id)initWithFileName:(NSString*)logFilePath{
+    self = [super initWithFileName:logFilePath];
+    return self;
 }
 
 @end

@@ -58,7 +58,8 @@ const NSString* _logName = @"AMLog.log";
         NSFileManager *fm = [NSFileManager defaultManager];
         
         NSString* bundlePath = [AMLogger AMLogPath];
-        _logFilePath = [NSString stringWithFormat:@"%@/AMLog.log", bundlePath];
+        NSString* logName = [AMLogger AMLoggerName];
+        _logFilePath = [NSString stringWithFormat:@"%@/%@", bundlePath, logName];
         if (trunc) {
             NSError* err;
             [fm removeItemAtPath:_logFilePath error:&err];

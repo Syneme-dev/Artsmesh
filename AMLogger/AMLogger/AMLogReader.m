@@ -41,37 +41,54 @@
  }
  */
 
+@interface AMLogReader()
+
+@property NSFileHandle* logFileHandle;
+
+@end
+
+
 @implementation AMLogReader
 {
-    NSString*           logFullPath;
-    NSMutableArray*     logArray;
+    NSString*    _logFullPath;
+    NSArray*     _logArray;
 }
 
 @synthesize logCountFromTail;
 
-
 -(id)initWithFileName:(NSString*)logFilePath{
     if (self = [super init]) {
-        logFullPath = logFilePath;
+        _logFullPath = logFilePath;
     }
 
     return self;
 }
 
--(BOOL) openLogFromTail
-{
-    return YES;
-}
-
--(NSArray*)logArray{
-    return nil;
-}
-
-
--(NSString*) nextLogItem
-{
-    return @"do not call base class method!";
-}
+//-(NSArray*)logArray
+//{
+//    return _logArray;
+//}
+//
+//-(void)setLogArray:(NSArray*)array
+//{
+//    _logArray = array;
+//}
+//
+//-(NSString*) nextLogItem
+//{
+//    return @"do not call base class method!";
+//}
+//
+//-(BOOL)openLogFromTail
+//{
+//    NSFileManager* fm = [NSFileManager defaultManager];
+//    if (NO == [fm fileExistsAtPath:_logFullPath isDirectory:NO]) {
+//        return NO;
+//    }
+//    
+//    self.logFileHandle = [NSFileHandle fileHandleForReadingAtPath:_logFullPath];
+//    return self.logFileHandle != NULL;
+//}
 
 @end
 
@@ -106,6 +123,7 @@
     NSArray* logArray = @[@"Warning log1", @"Warning log2", @"Warning log3"];
     return logArray;
 }
+
 
 @end
 

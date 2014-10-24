@@ -8,6 +8,38 @@
 
 #import "AMLogReader.h"
 #import "AMLogger.h"
+/*
+ //Error按钮实现代码
+ 
+ AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+ if([reader openLastSomeLogs] == YES)
+ {
+ NSMutableArray* logArray = [reader logArray];
+ }
+ */
+
+/*
+ //System按钮实现代码
+ //利用coco框架，打开文件对话框，获取文件路径
+ NSString* fullPath = [...]
+ AMSystemLogReader* reader
+ AMSystemLogReader* reader = [[AMSystemLogReader alloc] initSystemLogReader];
+ if([reader openLastSomeLogs] == YES)
+ {
+ NSMutableArray* logArray = [reader logArray];
+ }
+ */
+
+/*
+ //打开文件全部内容
+ AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+ NSString* logItem = [reader nextLogItem];
+ 
+ while(logItem)
+ {
+ [view appendString:logItem];
+ }
+ */
 
 @implementation AMLogReader
 {
@@ -18,68 +50,40 @@
 @synthesize logCountFromTail;
 
 -(id) initLogReader:(NSString*) newLogFullPath{
-    //Open File
-    logFullPath = newLogFullPath;
-    return nil;
+    if (self = [super init]) {
+        logFullPath = newLogFullPath;
+    }
+
+    return self;
 }
 
 -(BOOL) openLogFromTail
 {
-    if(logFullPath)
-    {
-        //Open a log file
-        //Save to logArray instance varible.
-        return YES;
-    }
-    else
-        return NO;
+    return YES;
 }
 
--(NSArray*) logArray
-{
+-(NSArray*)logArray{
     return nil;
 }
 
-/*
-    //Error按钮实现代码
- 
-    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
-    if([reader openLastSomeLogs] == YES)
-    {
-        NSMutableArray* logArray = [reader logArray];
-    }
- */
 
-/*
-        //System按钮实现代码
-    //利用coco框架，打开文件对话框，获取文件路径
-    NSString* fullPath = [...]
-    AMSystemLogReader* reader
-    AMSystemLogReader* reader = [[AMSystemLogReader alloc] initSystemLogReader];
-    if([reader openLastSomeLogs] == YES)
-    {
-        NSMutableArray* logArray = [reader logArray];
-    }
- */
+-(NSString*) nextLogItem
+{
+    return @"do not call base class method!";
+}
 
-    /*
-    //打开文件全部内容
-    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
-    NSString* logItem = [reader nextLogItem];
-
-    while(logItem)
-    {
-        [view appendString:logItem];
-    }
-    */
 @end
 
 
 @implementation AMErrorLogReader
 
 -(id) initErrorLogReader{
-    NSString* logDir = [NSString stringWithFormat:@"%@/%@", [AMLogger AMLogPath], @"AMLog.log"];
-    return [super initLogReader:logDir];
+    
+    NSString* logName = [AMLogger AMLoggerName];
+    NSString* logPath = [AMLogger AMLogPath];
+    NSString* logDir = [NSString stringWithFormat:@"%@/%@", logPath, logName];
+    self = [super initLogReader:logDir];
+    return self;
 }
 
 -(NSArray *)logArray{

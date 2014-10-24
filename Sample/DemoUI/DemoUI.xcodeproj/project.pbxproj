@@ -310,7 +310,6 @@
 		37C23182187A8FFD00554AFD /* AMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAppDelegate.m; sourceTree = "<group>"; };
 		37C23185187A8FFD00554AFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		37C23187187A8FFD00554AFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		37C2318E187A8FFD00554AFD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
@@ -725,7 +724,6 @@
 				268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */,
 				268E7DD818D1861000B0F710 /* AMNotificationManager.framework */,
 				37C2316F187A8FFD00554AFD /* Cocoa.framework */,
-				37C2318E187A8FFD00554AFD /* XCTest.framework */,
 				37C23171187A8FFD00554AFD /* Other Frameworks */,
 				DFB17E0F797C4935AFFC1CF2 /* libPods.a */,
 			);

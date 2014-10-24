@@ -10,14 +10,12 @@
 
 
 @interface AMLogReader : NSObject
-
--(id) initLogReader:(NSString*)proceesName;
 @property int logCountFromTail;
 
+-(id)           initWithLogFullPath:(NSString*)logFile;
 -(BOOL)         openLogFromTail;
 -(NSArray*)     logArray;
 -(NSString*)    nextLogItem;
--(void)         resetReader;
 
 @end
 
@@ -25,8 +23,6 @@
 
 @interface AMErrorLogReader : AMLogReader
 -(id) initErrorLogReader;
--(NSString*) nextLogItem;
--(void) resetReader;
 @end
 
 

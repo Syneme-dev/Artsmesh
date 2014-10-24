@@ -498,9 +498,9 @@ AMWorldMap *worldMap;
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:16.0], @"header",
-              [NSFont fontWithName: @"FoundryMonoline" size:14.0], @"body",
-              [NSFont fontWithName: @"FoundryMonoline" size:12.0], @"small",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:16.0], @"header",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
               nil];
     
     _programView = [[NSView alloc] initWithFrame:[self bounds]];
@@ -677,7 +677,7 @@ if ( worldMap.state == overView ) {
             } else {
                 // only worry about myGroup
                 
-                NSSize programSize = {100, 200};
+                NSSize programSize = {250, 200};
                 [_programView setFrameSize:programSize];
                 [_programView setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
                 
@@ -814,7 +814,7 @@ if ( worldMap.state == overView ) {
     
     [theField setBackgroundColor:_backgroundColor];
     [theField setBordered:NO];
-    [theField setStringValue:_myGroup.groupName];
+    [theField setStringValue:@"Additional Info"];
     
     //theFont = [[NSFontManager sharedFontManager] convertFont:theFont toHaveTrait:NSFontBoldTrait];
     

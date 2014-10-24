@@ -23,7 +23,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
+        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
         
@@ -162,7 +162,7 @@
     config.localServerIp = hostName;
     config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
     
-    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
@@ -196,7 +196,7 @@
     config.localServerIp = hostName;
     config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
 
-    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalServerStarting];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterServerStarting];
 }
 
 
@@ -215,23 +215,21 @@
 {
     if ([object isKindOfClass:[AMMesher class]]){
         
-        if ([keyPath isEqualToString:@"mesherState"]){
+        if ([keyPath isEqualToString:@"clusterState"]){
             
-            //AMMesherState oldState = [[change objectForKey:@"old"] intValue];
-            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+            AMClusterState newState = [[change objectForKey:@"new"] intValue];
             
             switch(newState){
-                case kMesherStarting:
+                case kClusterAutoDiscovering:
                     [self kickoffElectProcess];
                     break;
                     
-                case kMesherStopping:
+                case kClusterStopping:
                     [self stopElector];
                     break;
             
                 default:
                     break;
-                    //[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
             }
         }
     }

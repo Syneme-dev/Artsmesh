@@ -138,9 +138,9 @@
 }
 
 - (void)myStatucChanged {
-    if ([AMCoreData shareInstance].mySelf.isOnline == YES) {
+    if ([[AMMesher sharedAMMesher] mesherState] == kMesherMeshed){
         self.meshBtn.state = 0;
-    } else {
+    }else{
         self.meshBtn.state = 2;
     }
 }
@@ -148,13 +148,11 @@
 
 - (IBAction)mesh:(id)sender {
 
-    BOOL isOnline = [AMCoreData shareInstance].mySelf.isOnline;
-    if (isOnline) {
-        [[AMMesher sharedAMMesher] goOffline];
-        //self.meshBtn.state = 2;
-    } else {
-        [[AMMesher sharedAMMesher] goOnline];
-        //self.meshBtn.state = 0;
+    AMMesher* mesher = [AMMesher sharedAMMesher];
+    if ([mesher mesherState] == kMesherUnmeshed){
+        [mesher goOnline];
+    }else{
+        [mesher goOffline];
     }
 }
 
@@ -425,28 +423,28 @@
 }
 
 - (AMPanelViewController *)loadMapPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Map" width:UI_defaultPanelWidth* 4.0 height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MAP" width:UI_defaultPanelWidth* 4.0 height:UI_defaultPanelHeight relatedView:view];
     AMMapViewController *mapViewController = [[AMMapViewController alloc] initWithNibName:@"AMMapViewController" bundle:nil];
     [self fillPanel:panelViewController content:mapViewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadMixingPanel:(NSString *)panelId  relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Mixing" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MIXING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMMixingViewController *mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
     [self fillPanel:panelViewController content:mixingViewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadRoutingPanel:(NSString *)panelId relatedView:(NSView*)view {
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Routing" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"ROUTING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMVisualViewController *visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [self fillPanel:panelViewController content:visualViewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadOSCMessagePanel:(NSString *)panelId relatedView:(NSView*)view {
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC Message" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC MESSAGE" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
     NSViewController *viewController = [[AMOSCMessageViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
@@ -460,21 +458,21 @@
 }
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Clock" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
     NSViewController *viewController = [[AMTimerViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Music Score" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
     NSViewController *viewController = [[AMMusicScoreViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
 
 - (AMPanelViewController *)loadFOAFPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Social" width:UI_defaultPanelWidth* 2.0 height:UI_defaultPanelHeight  relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SOCIAL" width:UI_defaultPanelWidth* 2.0 height:UI_defaultPanelHeight  relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth* 2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;

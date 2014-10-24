@@ -256,27 +256,46 @@
         return NO;
     }
     
-    if ([self.peerAddress isEqualTo:@""] ||
-        [self.peerName isEqualTo:@""]) {
-        return NO;
+    if ([self.roleSelecter.stringValue isEqualTo:@"Server"]){
+        if ([self.peerName.stringValue isEqualTo:@""]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
+            [alert runModal];
+            return NO;
+        }
+        
+    }else if([self.roleSelecter.stringValue isEqualTo:@"Client"]||
+             [self.peerAddress.stringValue isEqualTo:@""]){
+        if([self.peerName.stringValue isEqualTo:@""]){
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];
+            [alert runModal];
+            return NO;
+        }
     }
-   
+
     //check illegal ip address
     //TODO:
     
     if ([self.channeCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"channel count parameter can not be less than zero"];
+        [alert runModal];
         return NO;
     }
     
     if([self.qCount.stringValue intValue] <= 0){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"qcount parameter can not be less than zero"];
+        [alert runModal];
         return NO;
     }
     
     if ([self.rCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
+        [alert runModal];
         return NO;
     }
     
     if ([self.bitRateRes.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"bitRateRes parameter can not be less than zero"];
+        [alert runModal];
         return NO;
     }
     

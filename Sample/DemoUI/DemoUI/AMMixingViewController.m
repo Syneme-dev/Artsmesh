@@ -34,7 +34,7 @@
     [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.outputTab toColor:UI_Color_blue];
-
+    [self onVideoTabClick:self.videoTab];
 }
 
 - (IBAction)onAudioTabClick:(id)sender {

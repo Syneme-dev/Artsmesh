@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -649,7 +650,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -725,7 +726,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
                         <rect key="frame" x="906" y="731" width="56" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SYPHON" id="j3Z-Wm-3C7">
                             <font key="font" metaFont="system"/>
@@ -767,7 +768,7 @@
                             <action selector="mesh:" target="B30-a9-ZW1" id="nU0-Er-fia"/>
                         </connections>
                     </button>
-                    <button translatesAutoresizingMaskIntoConstraints="NO" id="KD8-g0-Ew6">
+                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KD8-g0-Ew6">
                         <rect key="frame" x="876" y="733" width="15" height="15"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="e63-MZ-myK">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -845,7 +846,6 @@
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
                 <outlet property="mainWindowController" destination="B30-a9-ZW1" id="n9f-pi-bPS"/>
-                <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
@@ -854,8 +854,6 @@
                 <outlet property="amTimerBtn" destination="F1S-Xf-hwP" id="RHz-Ul-Ctr"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>
                 <outlet property="meshBtn" destination="kwj-11-GIT" id="XSi-kI-oZ0"/>
-                <outlet property="meshLabel" destination="6Bw-Cb-ntc" id="e08-HX-aeY"/>
-                <outlet property="meshLeabel" destination="6Bw-Cb-ntc" id="cDs-Dx-ic2"/>
                 <outlet property="versionLabel" destination="2bQ-eS-vUf" id="46h-jo-WII"/>
                 <outlet property="window" destination="371" id="BOz-Gb-G7x"/>
             </connections>

@@ -148,8 +148,8 @@
 //                                                               saturation:0.15
 //                                                               brightness:0.15
 //                                                                    alpha:1.0];
-        [_floatingWindow setOpaque:NO];
-        _floatingWindow.backgroundColor = [NSColor clearColor];
+//        [_floatingWindow setOpaque:NO];
+//        _floatingWindow.backgroundColor = [NSColor clearColor];
         _floatingWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
         _floatingWindow.delegate = self;
         [_floatingWindow setFrameOrigin:windowOrigin];
@@ -175,7 +175,7 @@
 //        [panelView scrollRectToVisible:panelView.bounds];
         
         AMBoxItem *dummy = [[AMBoxItem alloc] initWithFrame:panelView.frame];
-        [[[NSApp delegate] mainWindowController].containerView addSubview:dummy];
+        [[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView addSubview:dummy];
         [dummy scrollRectToVisible:dummy.bounds];
         NSRect rectInScreen = [dummy convertRect:dummy.bounds toView:nil];
         rectInScreen = [dummy.window convertRectToScreen:rectInScreen];
@@ -187,7 +187,7 @@
         _floatingWindow = nil;
         panelView.tearedOff = NO;
         [self.fullScreenButton setHidden:YES];
-        [[[NSApp delegate] mainWindowController].containerView addSubview:panelView];
+        [[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView addSubview:panelView];
         [panelView scrollRectToVisible:panelView.enclosingRect];
     }
 }

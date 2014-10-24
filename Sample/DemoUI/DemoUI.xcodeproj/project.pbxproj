@@ -33,7 +33,7 @@
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
-		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
+		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		269F93671998F024006E19DD /* AMManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F93651998F024006E19DD /* AMManualViewController.m */; };
 		269F93681998F024006E19DD /* AMManualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269F93661998F024006E19DD /* AMManualViewController.xib */; };
 		269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMGPlusViewController.m */; };
@@ -68,20 +68,20 @@
 		AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */ = {isa = PBXBuildFile; fileRef = AF2890DB198A36BC00D05174 /* shot_visual.png */; };
 		AF45429E19553C2200CCD862 /* AMStatusNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF45429C19553C2200CCD862 /* AMStatusNet.framework */; };
 		AF45429F19553C2200CCD862 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */; };
-		AF4542A019553C6C00CCD862 /* AMStatusNet.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF45429C19553C2200CCD862 /* AMStatusNet.framework */; };
-		AF4542A119553C6C00CCD862 /* AMTaskLauncher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */; };
-		AF4542A319553C6C00CCD862 /* UIFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
-		AF4542A419553C6C00CCD862 /* AMNetworkUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
-		AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
-		AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
-		AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
-		AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
+		AF4542A019553C6C00CCD862 /* AMStatusNet.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF45429C19553C2200CCD862 /* AMStatusNet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A119553C6C00CCD862 /* AMTaskLauncher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF45429D19553C2200CCD862 /* AMTaskLauncher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A319553C6C00CCD862 /* UIFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A419553C6C00CCD862 /* AMNetworkUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AF53F606199320BA0003DDC4 /* shot_audioMixing.png */; };
 		AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */; };
 		AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */; };
-		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
+		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
-		AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
+		AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF796F5B1900EE7D00C48C00 /* WebKit.framework */; };
 		AF82E356190CAB630083487C /* FoundryMonoline-Bold.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */; };
 		AF82E357190CAB630083487C /* FoundryMonoline-Light.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = AF82E341190CA81A0083487C /* FoundryMonoline-Light.otf */; };
@@ -175,7 +175,9 @@
 		D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */; };
 		D46F5287196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */; };
 		D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
-		D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
+		D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A184D19F21296000A8CCB /* AMLogger.framework */; };
+		D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D47A184D19F21296000A8CCB /* AMLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -196,6 +198,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */,
 				269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */,
 				AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */,
 				AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */,
@@ -454,6 +457,7 @@
 		D46F5281196E77F500C48E5B /* AMStaticGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDataSource.m; sourceTree = "<group>"; };
 		D46F5285196E815400C48E5B /* AMGroupPanelStaticGroupCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelStaticGroupCellController.xib; sourceTree = "<group>"; };
 		D472934519A6E8F30034CC34 /* AMAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMAudio.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMAudio.framework; sourceTree = "<group>"; };
+		D47A184D19F21296000A8CCB /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabItemView.h; sourceTree = "<group>"; };
 		D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabItemView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -465,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
 				268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
@@ -705,6 +710,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D47A184D19F21296000A8CCB /* AMLogger.framework */,
 				2DED40CC19CBED2D006F12FD /* CoreLocation.framework */,
 				D472934519A6E8F30034CC34 /* AMAudio.framework */,
 				268DA7C3198B99A100F86EBB /* AMTimer.framework */,
@@ -991,7 +997,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = AM;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Artsmesh;
 			};
 			buildConfigurationList = 37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "DemoUI" */;
@@ -1323,6 +1329,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1342,6 +1349,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

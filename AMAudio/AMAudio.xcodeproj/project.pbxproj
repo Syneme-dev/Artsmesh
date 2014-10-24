@@ -64,10 +64,11 @@
 		D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934819A70D390034CC34 /* AMAudioPrefViewController.h */; };
 		D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934919A70D390034CC34 /* AMAudioPrefViewController.m */; };
 		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
+		D47A184A19F21110000A8CCB /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A184919F21110000A8CCB /* AMLogger.framework */; };
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
 		D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
-		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
+		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
@@ -160,6 +161,7 @@
 		D472934819A70D390034CC34 /* AMAudioPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioPrefViewController.h; sourceTree = "<group>"; };
 		D472934919A70D390034CC34 /* AMAudioPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioPrefViewController.m; sourceTree = "<group>"; };
 		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAudioPrefViewController.xib; sourceTree = "<group>"; };
+		D47A184919F21110000A8CCB /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackDevice.h; sourceTree = "<group>"; };
 		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackDevice.m; sourceTree = "<group>"; };
 		D4B57E4D19C69003009F7701 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47A184A19F21110000A8CCB /* AMLogger.framework in Frameworks */,
 				4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */,
 				26624DC319C9261C008F3D6D /* AMPreferenceManager.framework in Frameworks */,
 				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
@@ -242,6 +245,7 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D47A184919F21110000A8CCB /* AMLogger.framework */,
 				4A58332319EBB14E00BFB468 /* UIFramework.framework */,
 				26624DC219C9261C008F3D6D /* AMPreferenceManager.framework */,
 				265A405619BD65C8003D27E5 /* AMCoreData.framework */,
@@ -422,7 +426,7 @@
 		D472930519A6E5030034CC34 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = AM;
 				TargetAttributes = {
 					D472932419A6E5030034CC34 = {
@@ -626,6 +630,7 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -658,6 +663,7 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

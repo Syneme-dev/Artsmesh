@@ -49,7 +49,7 @@
                                                 green:(58)/255.0f
                                                  blue:(75)/255.0f
                                                 alpha:1.0f];
-        pushedDownButtonColor = [NSColor whiteColor];
+        pushedDownButtonColor = [NSColor lightGrayColor];
     }
     
     if (self.currentPushedDownButton == button)

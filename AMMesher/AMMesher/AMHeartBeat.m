@@ -7,9 +7,11 @@
 //
 
 #import "AMHeartBeat.h"
+#import "AMLogger/AMLogger.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+
 
 const NSUInteger AMHeartBeatMaxPackageSize = 512;
 NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
@@ -55,8 +57,13 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
                                            reason:@"getaddrinfo failed"
                                          userInfo:nil];
         }
-        _serverAddress = [NSData dataWithBytes:ai->ai_addr
-                                        length:ai->ai_addrlen];
+        if(ai != NULL){
+            _serverAddress = [NSData dataWithBytes:ai->ai_addr
+                                            length:ai->ai_addrlen];
+        }else{
+            AMLog(AMLog_Error, @"AMMesher", @"error in heartbeat, check if you are use a conflict ipv4 and ipv6 network.");
+        }
+
         freeaddrinfo(ai);
     }
     return self;

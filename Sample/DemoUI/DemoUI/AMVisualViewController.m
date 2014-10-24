@@ -67,6 +67,7 @@
 {
     [super awakeFromNib];
     [self loadTabViews];
+    [self onVisualTabClick:self.visualTab];
 }
 
 -(void)loadTabViews

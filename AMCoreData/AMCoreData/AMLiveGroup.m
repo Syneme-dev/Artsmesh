@@ -13,6 +13,7 @@
 @end
 
 @implementation AMLiveGroup
+@synthesize description;
 
 -(NSMutableDictionary*)dictWithoutUsers
 {

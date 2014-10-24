@@ -11,6 +11,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMChatViewController ()
 
@@ -214,7 +215,7 @@
 
 
 -(void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error{
-    NSLog(@"chat socket failed: %@", error.description);
+    AMLog(AMLog_Error, @"AMChat", @"chat socket failed: %@", error.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
@@ -224,7 +225,7 @@
          [self showChatRecord:chatRecord];
     }
     @catch ( NSException *exception) {
-        NSLog(@"An Error packets is send to Chat module: %@", exception.description);
+        AMLog(AMLog_Error, @"AMChat",@"An Error packets is send to Chat module: %@", exception.description);
     }
     @finally {
         //do nothing;
@@ -232,7 +233,7 @@
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{
-    NSLog(@"chat message did not send out: %@", err.description);
+    AMLog(AMLog_Error, @"AMChat",@"chat message did not send out: %@", err.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{

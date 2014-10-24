@@ -16,6 +16,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMAudio/AMAudio.h"
+#import "AMLogger/AMLogger.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -23,9 +24,19 @@ static NSMutableDictionary *allPlugins = nil;
 @interface AMAppDelegate () <AMPluginAppDelegate>
 @end
 
+
+// global uncaught exception handler
+void uncaughtExceptionHandler(NSException *exception) {
+    AMLog(AMLog_Error, @"Uncaught Exception", @"an uncaught exception happened: %@",exception.description);
+}
+
 @implementation AMAppDelegate
 
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
+    [AMLogger AMLoggerInit];
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     allPlugins = [self loadPlugins];
     [[AMPreferenceManager shareInstance] initPreference];
     [[AMStatusNet shareInstance] loadGroups];
@@ -44,6 +55,8 @@ static NSMutableDictionary *allPlugins = nil;
     [[AMMesher sharedAMMesher] stopMesher];
     
     [[AMAudio sharedInstance] releaseResources];
+    
+    [AMLogger AMLoggerRelease];
 }
 
 - (void)connectMesher {

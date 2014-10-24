@@ -164,7 +164,13 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
     if([reader openLogFromTail] == YES)
     {
-        NSArray* logArray = [reader logArray];
+        NSArray*  logArray = [reader logArray];
+        int count = 0;
+        NSString* logItem = [logArray objectAtIndex:count++];
+        while (logItem) {
+            [[[self.logTextView textStorage] mutableString] appendString: logItem];
+            NSString* logItem = [logArray objectAtIndex:count++];
+        }
     }
 
 }

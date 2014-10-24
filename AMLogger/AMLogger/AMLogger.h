@@ -36,7 +36,7 @@ void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...);
 +(void)AMLoggerInit;
 +(void)AMLoggerRelease;
 
-//.Artsmesh.app/../Log/
++(NSString*)AMLoggerName;
 +(NSString*)AMLogPath;
 
 @end

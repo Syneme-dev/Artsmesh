@@ -11,6 +11,7 @@
 
 static AMLogger* _sharedInstance = nil;
 const NSString* _logRelativeFolderName = @"/Log";
+const NSString* _logName = @"AMLog.log";
 
 @implementation AMLogger
 {
@@ -42,6 +43,12 @@ const NSString* _logRelativeFolderName = @"/Log";
     }
     
     return bundlePath;
+}
+
++(NSString*)AMLoggerName
+{
+    NSString* logName = [NSString stringWithFormat:@"%@", _logName];
+    return logName;
 }
 
 

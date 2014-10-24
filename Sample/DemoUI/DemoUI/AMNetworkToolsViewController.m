@@ -162,6 +162,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void) showLogFromTail:(AMLogReader*) reader
 {
+    [self.logTextView setString:@""];
     if([reader openLogFromTail] == YES)
     {
         NSArray*  logArray = [reader logArray];
@@ -177,23 +178,24 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 }
 
--(void) showEntireLog( )
-{
-    
-}
 
 - (IBAction)showErrorLog:(id)sender {
-    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
-    
-    [self showLogFromTail];
+    AMLogReader* reader = [[AMErrorLogReader alloc] init];
+    [self showLogFromTail:reader];
 }
 
 - (IBAction)showWarningLog:(id)sender {
+    AMLogReader* reader = [[AMWarningLogReader alloc] init];
+    [self showLogFromTail:reader];
 }
 
 - (IBAction)showInfoLog:(id)sender {
+    AMLogReader* reader = [[AMInfoLogReader alloc] init];
+    [self showLogFromTail:reader];
 }
 
 - (IBAction)showSysLog:(id)sender {
+    AMLogReader* reader = [[AMSystemLogReader alloc] init];
+    [self showLogFromTail:reader];
 }
 @end

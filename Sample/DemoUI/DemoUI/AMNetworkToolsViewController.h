@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
 
+@class AMLogReader;
+
 @interface AMNetworkToolsViewController : AMTabPanelViewController<NSTableViewDelegate, NSTableViewDataSource>
 - (IBAction)showErrorLog:(id)sender;
 - (IBAction)showWarningLog:(id)sender;
@@ -32,5 +34,8 @@
 - (IBAction)traceroute:(id)sender;
 - (IBAction)iperf:(id)sender;
 - (IBAction)log:(id)sender;
+
+
+-(void) showLogFromTail:(AMLogReader*) reader;
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import "AMLogReader.h"
+#import "AMLogger.h"
 
 @implementation AMLogReader
 {
     NSString*           logFullPath;
     NSMutableArray*     logArray;
 }
+
 @synthesize logCountFromTail;
 
 -(id) initLogReader:(NSString*) newLogFullPath{
@@ -35,7 +37,7 @@
 
 -(NSArray*) logArray
 {
-    return logArray;
+    return nil;
 }
 
 /*
@@ -74,9 +76,15 @@
 
 
 @implementation AMErrorLogReader
+
 -(id) initErrorLogReader{
     NSString* logDir = [NSString stringWithFormat:@"%@/%@", [AMLogger AMLogPath], @"AMLog.log"];
     return [super initLogReader:logDir];
+}
+
+-(NSArray *)logArray{
+    NSArray* logArray = @[@"error log1", @"error log2", @"error log3"];
+    return logArray;
 }
 
 @end

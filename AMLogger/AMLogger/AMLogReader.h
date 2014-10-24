@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMLogger.h"
+
+
 @interface AMLogReader : NSObject
 
 -(id) initLogReader:(NSString*)proceesName;
@@ -17,6 +18,7 @@
 -(NSArray*)     logArray;
 -(NSString*)    nextLogItem;
 -(void)         resetReader;
+
 @end
 
 

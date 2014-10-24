@@ -7,6 +7,8 @@
 //
 
 #import "AMLogger.h"
+#import <Foundation/NSPathUtilities.h>
+
 static AMLogger* _sharedInstance = nil;
 const NSString* _logRelativeFolderName = @"/Log";
 
@@ -32,16 +34,24 @@ const NSString* _logRelativeFolderName = @"/Log";
     [_sharedInstance closeLogger];
 }
 
++(NSString*)AMLogPath
+{
+    NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
+    if ([bundlePath hasSuffix:@".app"]) {
+        [bundlePath stringByDeletingLastPathComponent];
+    }
+    
+    return bundlePath;
+}
+
 
 -(void)openLogger:(BOOL)trunc
 {
     if (_logFileHandle == nil) {
         NSFileManager *fm = [NSFileManager defaultManager];
-        NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
-        _logFilePath = [NSString stringWithFormat:@"%@/../AMLog.log", bundlePath];
         
-        
-        
+        NSString* bundlePath = [AMLogger AMLogPath];
+        _logFilePath = [NSString stringWithFormat:@"%@/AMLog.log", bundlePath];
         if (trunc) {
             NSError* err;
             [fm removeItemAtPath:_logFilePath error:&err];
@@ -79,26 +89,6 @@ const NSString* _logRelativeFolderName = @"/Log";
         NSLog(@"%@", logItem);
         [_logFileHandle writeData: [logItem dataUsingEncoding:NSUTF8StringEncoding]];
     }
-}
-
--(void)registerViewer:(id<AMLoggerViewer>)viewer forCategory:(AMLogCategory)cat
-{
-    
-}
-
-
--(void)unregisterViewer:(id<AMLoggerViewer>)viewer
-{
-    
-}
-
-
-//backFromIndex: retrieve log from the latest. the latest log item is index 0;
-//count: how many items of log you want to get, max 5000
-//if there are not so much logs, will return the actual count
--(NSArray*)readLogCategory:(AMLogCategory)cat backFromIndex:(long)index count:(long)count
-{
-    return nil;
 }
 
 

@@ -10,6 +10,7 @@
 #import "AMCommonTools/AMCommonTools.h"
 
 @implementation AMLiveUser
+@synthesize description;
 
 -(id)init{
     
@@ -30,6 +31,7 @@
     
     return self;
 }
+
 
 -(NSMutableDictionary*)toDict
 {

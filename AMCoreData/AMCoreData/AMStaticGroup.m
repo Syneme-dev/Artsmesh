@@ -9,6 +9,7 @@
 #import "AMStaticGroup.h"
 
 @implementation AMStaticGroup
+@synthesize description;
 
 +(AMStaticGroup*)staticGroupFromDict:(NSDictionary*)dict
 {

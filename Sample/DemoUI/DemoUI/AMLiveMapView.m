@@ -75,7 +75,7 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [myGroup isMeshed] ) {
-        NSLog(@"Meshed setup..");
+
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
         [self clearGroup:myGroup.groupId];

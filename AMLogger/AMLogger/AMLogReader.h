@@ -8,15 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface AMLogReader : NSObject
 
 @property int logCountFromTail;
-
 -(BOOL)         openLogFromTail;
+-(BOOL)         openLogAll;
 -(NSArray*)     logArray;
 -(NSString*)    nextLogItem;
-
 @end
 
 @interface AMErrorLogReader : AMLogReader
@@ -29,7 +27,5 @@
 @end
 
 @interface  AMSystemLogReader : AMLogReader
-
 -(id)initWithFileName:(NSString*)logFilePath;
-
 @end

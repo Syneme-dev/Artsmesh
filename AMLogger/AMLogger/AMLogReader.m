@@ -9,6 +9,12 @@
 #import "AMLogReader.h"
 
 @implementation AMLogReader
+{
+    NSString*           logFullPath;
+    NSMutableArray*     logArray;
+}
+@synthesize logCountFromTail;
+
 -(id) initLogReader:(NSString*) newLogFullPath{
     //Open File
     logFullPath = newLogFullPath;
@@ -33,46 +39,37 @@
 }
 
 /*
- //Error按钮实现代码
+    //Error按钮实现代码
  
- AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
- if([reader openLastSomeLogs] == YES)
- {
- NSMutableArray* logArray = [reader logArray];
- }
+    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+    if([reader openLastSomeLogs] == YES)
+    {
+        NSMutableArray* logArray = [reader logArray];
+    }
  */
 
 /*
- //System按钮实现代码
- //利用coco框架，打开文件对话框，获取文件路径
- NSString* fullPath = [...]
- AMSystemLogReader* reader
- AMSystemLogReader* reader = [[AMSystemLogReader alloc] initSystemLogReader];
- if([reader openLastSomeLogs] == YES)
- {
- NSMutableArray* logArray = [reader logArray];
- }
- 
- AMLogReader* reader = [[AMErrorLogReader alloc] init];
- NSString* logItem = [reader nextLogItem];
- while(logItem)
- {
- [view appendString:logItem];
- }
- 
- 
- while(1)
- {
- NSString* logItem = reader nextLogItem;
- while(logItem)
- {
- [view appendString:logItem];
- }
- sleep(1);
- }
-
- 
+        //System按钮实现代码
+    //利用coco框架，打开文件对话框，获取文件路径
+    NSString* fullPath = [...]
+    AMSystemLogReader* reader
+    AMSystemLogReader* reader = [[AMSystemLogReader alloc] initSystemLogReader];
+    if([reader openLastSomeLogs] == YES)
+    {
+        NSMutableArray* logArray = [reader logArray];
+    }
  */
+
+    /*
+    //打开文件全部内容
+    AMLogReader* reader = [[AMErrorLogReader alloc] initErrorLogReader];
+    NSString* logItem = [reader nextLogItem];
+
+    while(logItem)
+    {
+        [view appendString:logItem];
+    }
+    */
 @end
 
 

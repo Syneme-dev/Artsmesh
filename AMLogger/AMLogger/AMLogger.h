@@ -36,8 +36,8 @@ void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...);
 +(void)AMLoggerInit;
 +(void)AMLoggerRelease;
 
-//.Artsmesh.app/../Log/xxx.log
-+(NSString*)AMLogPath:(NSString*)processName;
+//.Artsmesh.app/../Log/
++(NSString*)AMLogPath;
 
 
 -(void)registerViewer:(id<AMLoggerViewer>)viewer forCategory:(AMLogCategory)cat;

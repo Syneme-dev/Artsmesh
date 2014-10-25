@@ -19,9 +19,9 @@
     AMNetworkToolsCommand *_pingCommand;
     AMNetworkToolsCommand *_tracerouteCommand;
     
-    AMLogReader* _logReader;
+    AMLogReader*            _logReader;
+    NSTimer*                _readTimer;
 }
-@property (unsafe_unretained) IBOutlet NSTextView *logTextView;
 
 @end
 
@@ -162,10 +162,19 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
--(void) showLogFromTail:(AMLogReader*) reader
+-(void) handleNextLogTimer:(NSTimer*) timer
+{
+    NSString* logItem = nil;
+    while( (logItem = [_logReader nextLogItem]) != nil) {
+        [[[self.logTextView textStorage] mutableString] appendString: logItem];
+        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+    }
+}
+
+-(void) showLogFromTail
 {
     [self.logTextView setString:@""];
-    NSArray*  logArray = [reader lastLogItmes];
+    NSArray*  logArray = [_logReader lastLogItmes];
     if(logArray)
     {
         int count = 0;
@@ -176,28 +185,56 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             
             logItem = [logArray objectAtIndex:count++];
         }
+        _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
+                                                     target:self
+                                                   selector:@selector(handleNextLogTimer)
+                                                   userInfo:nil
+                                                    repeats:YES];
     }
 
+}
+
+-(void) showFullLog
+{
+    [self.logTextView setString:@""];
+    NSString* logItem = nil;
+    while((logItem = [_logReader nextLogItem]) != nil){
+        [[[self.logTextView textStorage] mutableString] appendString: logItem];
+        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+    }
+        
+}
+
+-(void) showLog
+{
+    [_readTimer invalidate];
+    
+    if(_fullLog.state == NSOnState){
+        [self showFullLog];
+    }
+    else{
+        [self showLogFromTail];
+    }
 }
 
 
 - (IBAction)showErrorLog:(id)sender {
     _logReader = [[AMErrorLogReader alloc] init];
-    [self showLogFromTail:_logReader];
+    [self showLog];
 }
 
 - (IBAction)showWarningLog:(id)sender {
     _logReader = [[AMWarningLogReader alloc] init];
-    [self showLogFromTail:_logReader];
+    [self showLog];
 }
 
 - (IBAction)showInfoLog:(id)sender {
     _logReader = [[AMInfoLogReader alloc] init];
-    [self showLogFromTail:_logReader];
+    [self showLog];
 }
 
 - (IBAction)showSysLog:(id)sender {
     _logReader = [[AMSystemLogReader alloc] init];
-    [self showLogFromTail:_logReader];
+    [self showLog];
 }
 @end

@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
             <connections>
+                <outlet property="fullLog" destination="mJs-5G-H3P" id="7Sx-sC-v4t"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
                 <outlet property="logTextView" destination="l4w-D1-cZA" id="Fp8-OV-aJv"/>

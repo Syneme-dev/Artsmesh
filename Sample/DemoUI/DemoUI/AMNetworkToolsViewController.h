@@ -35,7 +35,11 @@
 - (IBAction)iperf:(id)sender;
 - (IBAction)log:(id)sender;
 
+@property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
+@property (weak)                IBOutlet NSButton*      fullLog;
 
--(void) showLogFromTail:(AMLogReader*) reader;
-
+-(void) showLog;
+-(void) showLogFromTail;
+-(void) showFullLog;
+-(void) handleNextLogTimer:(NSTimer*) timer;
 @end

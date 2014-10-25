@@ -18,6 +18,8 @@
     NSArray *_users;
     AMNetworkToolsCommand *_pingCommand;
     AMNetworkToolsCommand *_tracerouteCommand;
+    
+    AMLogReader* _logReader;
 }
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;
 
@@ -163,9 +165,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 -(void) showLogFromTail:(AMLogReader*) reader
 {
     [self.logTextView setString:@""];
-    if([reader openLogFromTail] == YES)
+    NSArray*  logArray = [reader lastLogItmes];
+    if(logArray)
     {
-        NSArray*  logArray = [reader logArray];
         int count = 0;
         NSString* logItem = [logArray objectAtIndex:count++];
         while (logItem) {
@@ -180,22 +182,22 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 
 - (IBAction)showErrorLog:(id)sender {
-    AMLogReader* reader = [[AMErrorLogReader alloc] init];
-    [self showLogFromTail:reader];
+    _logReader = [[AMErrorLogReader alloc] init];
+    [self showLogFromTail:_logReader];
 }
 
 - (IBAction)showWarningLog:(id)sender {
-    AMLogReader* reader = [[AMWarningLogReader alloc] init];
-    [self showLogFromTail:reader];
+    _logReader = [[AMWarningLogReader alloc] init];
+    [self showLogFromTail:_logReader];
 }
 
 - (IBAction)showInfoLog:(id)sender {
-    AMLogReader* reader = [[AMInfoLogReader alloc] init];
-    [self showLogFromTail:reader];
+    _logReader = [[AMInfoLogReader alloc] init];
+    [self showLogFromTail:_logReader];
 }
 
 - (IBAction)showSysLog:(id)sender {
-    AMLogReader* reader = [[AMSystemLogReader alloc] init];
-    [self showLogFromTail:reader];
+    _logReader = [[AMSystemLogReader alloc] init];
+    [self showLogFromTail:_logReader];
 }
 @end

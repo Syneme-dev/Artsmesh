@@ -38,6 +38,7 @@ void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...);
 
 +(NSString*)AMLoggerName;
 +(NSString*)AMLogPath;
++(NSArray*)allLogNames;
 
 @end
 

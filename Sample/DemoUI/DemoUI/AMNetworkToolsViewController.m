@@ -63,6 +63,9 @@
         [self userGroupsChanged:nil];
     }
     [self ping:self.pingButton];
+    
+    NSArray* logs = [AMLogger allLogNames];
+    [self.chooseLogCombo addItemsWithObjectValues:logs];
 }
 
 -(void)registerTabButtons

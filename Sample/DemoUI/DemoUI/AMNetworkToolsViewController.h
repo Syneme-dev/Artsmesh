@@ -17,12 +17,16 @@
 - (IBAction)showInfoLog:(id)sender;
 - (IBAction)showSysLog:(id)sender;
 
-
 @property (weak) IBOutlet NSButton *pingButton;
 @property (weak) IBOutlet NSButton *tracerouteButton;
 @property (weak) IBOutlet NSButton *iperfButton;
 @property (weak) IBOutlet NSTabView *tabView;
 @property (weak) IBOutlet NSButton *logButton;
+
+
+@property (weak) IBOutlet NSComboBox *chooseLogCombo;
+@property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
+@property (weak)                IBOutlet NSButton*      fullLog;
 
 @property (weak) IBOutlet NSTableView *pingTableView;
 @property (unsafe_unretained) IBOutlet NSTextView *pingContentView;
@@ -35,8 +39,7 @@
 - (IBAction)iperf:(id)sender;
 - (IBAction)log:(id)sender;
 
-@property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
-@property (weak)                IBOutlet NSButton*      fullLog;
+
 
 -(void) showLog;
 -(void) showLogFromTail;

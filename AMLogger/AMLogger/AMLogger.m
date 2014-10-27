@@ -51,6 +51,22 @@ const NSString* _logName = @"AMLog.log";
     return logName;
 }
 
++(NSArray*)allLogNames
+{
+    NSFileManager *fm =[NSFileManager defaultManager];
+    NSArray* files = [fm contentsOfDirectoryAtPath:[AMLogger AMLogPath] error:nil];
+    NSMutableArray* logFiles = [[NSMutableArray alloc] init];
+    
+    for (NSString* fileName in files) {
+        if ([fileName hasSuffix:@".log"]) {
+            NSString* fileNameWithoutExt = [fileName stringByDeletingPathExtension];
+            
+            [logFiles addObject:fileNameWithoutExt];
+        }
+    }
+    return logFiles;
+}
+
 
 -(void)openLogger:(BOOL)trunc
 {

@@ -171,7 +171,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         if(logArray){
             for (NSString* logItem in logArray) {
                 [[[self.logTextView textStorage] mutableString] appendString: logItem];
-                [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
             }
         }
         _appendStringCount = 0;
@@ -179,7 +178,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
             _appendStringCount++;
     }
 }
@@ -193,7 +191,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
       //  NSString* logItem = [logArray objectAtIndex:count++];
         for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
         }
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
@@ -225,6 +222,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     else{
         [self showLogFromTail];
     }
+    [self.logTextView scrollToEndOfDocument:self];
 }
 
 

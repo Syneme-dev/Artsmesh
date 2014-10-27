@@ -166,26 +166,36 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void) handleNextLogTimer:(NSTimer*) timer
 {
-    NSString* logItem = nil;
+    NSString*   logItem = nil;
+    int         _appendStringCount = 0;
+    if(_appendStringCount > 10000 && [[self.logTextView textStorage] length] > 1024*1024*5){//when textView larger than 5MB
+        NSArray*  logArray = [_logReader lastLogItmes];
+        if(logArray){
+            for (NSString* logItem in logArray) {
+                [[[self.logTextView textStorage] mutableString] appendString: logItem];
+                [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            }
+        }
+        _appendStringCount = 0;
+    }
+        
     while( (logItem = [_logReader nextLogItem]) != nil) {
-        [[[self.logTextView textStorage] mutableString] appendString: logItem];
-        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            [[[self.logTextView textStorage] mutableString] appendString: logItem];
+            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            _appendStringCount++;
     }
 }
 
 -(void) showLogFromTail
 {
-    [self.logTextView setString:@""];
     NSArray*  logArray = [_logReader lastLogItmes];
     if([logArray count] > 0)
     {
-        int count = 0;
-        NSString* logItem = [logArray objectAtIndex:count++];
-        while (logItem) {
+//        int count = 0;
+      //  NSString* logItem = [logArray objectAtIndex:count++];
+        for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
             [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
-            
-            logItem = [logArray objectAtIndex:count++];
         }
         
         

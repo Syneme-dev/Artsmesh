@@ -40,6 +40,7 @@
 @property (nonatomic) BOOL isCheckingLocation;
 @property (nonatomic) BOOL isHovering;
 @property (nonatomic) BOOL refreshNeeded;
+@property (nonatomic) BOOL isMeshed;
 @property (nonatomic) AMLiveGroup *myGroup;
 @property (nonatomic) AMLiveGroup *hovGroup;
 @property (strong)AMLiveGroupDataSource* liveGroupDataSource;
@@ -108,6 +109,7 @@ AMWorldMap *worldMap;
                 
                 if ( storedSubGroupLoc != remoteSubGroup.location ) {
                     //subgroup either just created or location changed
+                    //NSLog(@"subgroup either just created or location changed.. %@", remoteSubGroup.groupName);
                     
                     if ( storedSubGroupLoc != nil ) {
                         //[self checkPixel:remoteSubGroup];
@@ -162,7 +164,6 @@ AMWorldMap *worldMap;
         [self setNeedsDisplay:YES];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
 }
 
@@ -193,6 +194,8 @@ AMWorldMap *worldMap;
         
         
     }
+    
+    //NSLog(@"all merged connections are %@", _mergedLocations);
     
     // Draw each line connecting ports
     if ( [_myGroup isMeshed] ) {
@@ -492,6 +495,7 @@ AMWorldMap *worldMap;
                                                   blue:0.15
                                                  alpha:1.0];
     
+    _isMeshed = NO;
     _portW = self.bounds.size.width / (long)worldMap.mapWidth;
     _portH = self.bounds.size.height / (long)worldMap.mapHeight;
     _mapXPush = (self.bounds.size.width - (_portW * worldMap.mapWidth))/2;
@@ -530,6 +534,8 @@ AMWorldMap *worldMap;
                                                 userInfo: nil repeats:YES];
 
     **/
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -698,7 +704,7 @@ if ( worldMap.state == overView ) {
                 [_programView addSubview:groupTitleField];
                 
                 [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
-                [self showView:_programView];
+                //[self showView:_programView];
             }
             
         }

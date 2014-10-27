@@ -8,6 +8,7 @@
 
 #import "AMLogReader.h"
 #import "AMLogger.h"
+#import "NSFileHandle+readLine.h"
 /*
  //Error按钮实现代码
  
@@ -52,6 +53,9 @@
 {
     NSString*    _logFullPath;
     NSArray*     _logArray;
+    
+    NSFileHandle* _fileHandle;
+    
 }
 
 @synthesize logCountFromTail;
@@ -59,36 +63,78 @@
 -(id)initWithFileName:(NSString*)logFilePath{
     if (self = [super init]) {
         _logFullPath = logFilePath;
+        
+        NSFileManager* fm = [NSFileManager defaultManager];
+        if (![fm fileExistsAtPath:logFilePath]) {
+            [fm createFileAtPath:logFilePath contents:nil attributes:nil];
+        }
+        
+        _fileHandle = [NSFileHandle fileHandleForReadingAtPath:logFilePath];
+        if (_fileHandle == nil){
+            return nil;
+        }
     }
 
     return self;
 }
 
-//-(NSArray*)logArray
-//{
-//    return _logArray;
-//}
-//
-//-(void)setLogArray:(NSArray*)array
-//{
-//    _logArray = array;
-//}
-//
-//-(NSString*) nextLogItem
-//{
-//    return @"do not call base class method!";
-//}
-//
-//-(BOOL)openLogFromTail
-//{
-//    NSFileManager* fm = [NSFileManager defaultManager];
-//    if (NO == [fm fileExistsAtPath:_logFullPath isDirectory:NO]) {
-//        return NO;
-//    }
-//    
-//    self.logFileHandle = [NSFileHandle fileHandleForReadingAtPath:_logFullPath];
-//    return self.logFileHandle != NULL;
-//}
+-(NSString* )filterLog:(NSData*)logData
+{
+     return [[NSString alloc] initWithData:logData encoding:NSUTF8StringEncoding];
+}
+
+-(NSArray*)lastLogItmes
+{
+    NSMutableArray* logs = [[NSMutableArray alloc] init];
+    
+    if(_fileHandle){
+        unsigned long long fileSize = [self logSize];
+        unsigned long long bufferSize = 1024*1024;
+        
+        if (bufferSize > fileSize) {
+            [_fileHandle seekToFileOffset:0];
+        }else{
+            [_fileHandle seekToFileOffset:fileSize - bufferSize];
+        }
+        
+        
+        NSData* logData = [_fileHandle readLineWithDelimiter:@"\n"];
+        while (logData != nil) {
+            NSString* logStr = [self filterLog:logData];
+            [logs addObject:logStr];
+        }
+    }
+    
+    return logs;
+}
+
+-(NSString*)nextLogItem
+{
+    NSData* logData = [_fileHandle readLineWithDelimiter:@"\n"];
+    while (logData != nil) {
+        NSString* logStr = [self filterLog:logData];
+        if (logStr == nil) {
+            continue;
+        }else{
+            return logStr;
+        }
+    }
+    
+    return nil;
+}
+
+
+-(unsigned long long)logSize
+{
+    unsigned long long fileSize = -1;
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSDictionary* fileAttr = [fm attributesOfItemAtPath:_logFullPath error:nil];
+    if(fileAttr!=nil){
+        fileSize = [[fileAttr objectForKey:NSFileSize] unsignedLongLongValue];
+    }
+    
+    return fileSize;
+}
 
 @end
 

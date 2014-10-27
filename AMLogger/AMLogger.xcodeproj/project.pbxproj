@@ -18,6 +18,8 @@
 		4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FD5A6C519FA1EEC00BDD634 /* AMLogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A6C319FA1EEC00BDD634 /* AMLogReader.m */; };
 		D47A184C19F21242000A8CCB /* AMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB9EE18710F6300C1FD1B /* AMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4E7982119FDECC400512089 /* NSFileHandle+readLine.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E7981F19FDECC400512089 /* NSFileHandle+readLine.h */; };
+		D4E7982219FDECC400512089 /* NSFileHandle+readLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E7982019FDECC400512089 /* NSFileHandle+readLine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMLoggerTests.m; sourceTree = "<group>"; };
 		4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLogReader.h; sourceTree = "<group>"; };
 		4FD5A6C319FA1EEC00BDD634 /* AMLogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLogReader.m; sourceTree = "<group>"; };
+		D4E7981F19FDECC400512089 /* NSFileHandle+readLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+readLine.h"; sourceTree = "<group>"; };
+		D4E7982019FDECC400512089 /* NSFileHandle+readLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+readLine.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 		37FCB9E718710F6300C1FD1B /* AMLogger */ = {
 			isa = PBXGroup;
 			children = (
+				D4E7981F19FDECC400512089 /* NSFileHandle+readLine.h */,
+				D4E7982019FDECC400512089 /* NSFileHandle+readLine.m */,
 				37FCB9EE18710F6300C1FD1B /* AMLogger.h */,
 				37FCB9EF18710F6300C1FD1B /* AMLogger.m */,
 				4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */,
@@ -159,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47A184C19F21242000A8CCB /* AMLogger.h in Headers */,
+				D4E7982119FDECC400512089 /* NSFileHandle+readLine.h in Headers */,
 				4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB9F018710F6300C1FD1B /* AMLogger.m in Sources */,
+				D4E7982219FDECC400512089 /* NSFileHandle+readLine.m in Sources */,
 				4FD5A6C519FA1EEC00BDD634 /* AMLogReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

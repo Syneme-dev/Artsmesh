@@ -187,7 +187,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         }
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
-                                                   selector:@selector(handleNextLogTimer)
+                                                   selector:@selector(handleNextLogTimer:)
                                                    userInfo:nil
                                                     repeats:YES];
     }

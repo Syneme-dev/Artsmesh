@@ -102,6 +102,8 @@
         while (logData != nil) {
             NSString* logStr = [self filterLog:logData];
             [logs addObject:logStr];
+            
+            logData =  [_fileHandle readLineWithDelimiter:@"\n"];
         }
     }
     

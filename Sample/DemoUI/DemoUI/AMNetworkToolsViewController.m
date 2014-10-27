@@ -12,6 +12,7 @@
 #import "AMNetworkToolsCommand.h"
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMLogger/AMLogReader.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMNetworkToolsViewController ()
 {
@@ -21,6 +22,7 @@
     
     AMLogReader*            _logReader;
     NSTimer*                _readTimer;
+    NSTimer*                _testTimer;
 }
 
 @end
@@ -185,13 +187,15 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 -(void) showLogFromTail
 {
     NSArray*  logArray = [_logReader lastLogItmes];
-    if(logArray)
+    if([logArray count] > 0)
     {
 //        int count = 0;
       //  NSString* logItem = [logArray objectAtIndex:count++];
         for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
         }
+        
+        
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
                                                    selector:@selector(handleNextLogTimer:)
@@ -243,6 +247,16 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 - (IBAction)showSysLog:(id)sender {
     _logReader = [[AMSystemLogReader alloc] init];
     [self showLog];
+}
+
+- (IBAction)startTest:(id)sender
+{
+    _testTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(testLog) userInfo:nil repeats:YES];
+}
+
+-(void)testLog
+{
+    AMLog(AMLog_Debug, @"test", @"%@\n", [NSDate date]);
 }
 
 @end

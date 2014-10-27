@@ -164,16 +164,32 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void) handleNextLogTimer:(NSTimer*) timer
 {
-    NSString* logItem = nil;
+    NSString*   logItem = nil;
+    int         _appendStringCount = 0;
+    if(_appendStringCount > 10000 && [[self.logTextView textStorage] length] > 1024*1024*5){//when textView larger than 5MB
+        NSArray*  logArray = [_logReader lastLogItmes];
+        if(logArray){
+            int count = 0;
+            logItem = [logArray objectAtIndex:count++];
+            while (logItem) {
+                [[[self.logTextView textStorage] mutableString] appendString: logItem];
+                [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+                
+                logItem = [logArray objectAtIndex:count++];
+            }
+        }
+        _appendStringCount = 0;
+    }
+        
     while( (logItem = [_logReader nextLogItem]) != nil) {
-        [[[self.logTextView textStorage] mutableString] appendString: logItem];
-        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            [[[self.logTextView textStorage] mutableString] appendString: logItem];
+            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
+            _appendStringCount++;
     }
 }
 
 -(void) showLogFromTail
 {
-    [self.logTextView setString:@""];
     NSArray*  logArray = [_logReader lastLogItmes];
     if(logArray)
     {

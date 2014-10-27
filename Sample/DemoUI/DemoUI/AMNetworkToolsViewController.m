@@ -207,7 +207,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSString* logItem = nil;
     while((logItem = [_logReader nextLogItem]) != nil){
         [[[self.logTextView textStorage] mutableString] appendString: logItem];
-        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
     }
         
 }

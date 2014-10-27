@@ -169,13 +169,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     if(_appendStringCount > 10000 && [[self.logTextView textStorage] length] > 1024*1024*5){//when textView larger than 5MB
         NSArray*  logArray = [_logReader lastLogItmes];
         if(logArray){
-            int count = 0;
-            logItem = [logArray objectAtIndex:count++];
-            while (logItem) {
+            for (NSString* logItem in logArray) {
                 [[[self.logTextView textStorage] mutableString] appendString: logItem];
                 [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
-                
-                logItem = [logArray objectAtIndex:count++];
             }
         }
         _appendStringCount = 0;
@@ -193,13 +189,11 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSArray*  logArray = [_logReader lastLogItmes];
     if(logArray)
     {
-        int count = 0;
-        NSString* logItem = [logArray objectAtIndex:count++];
-        while (logItem) {
+//        int count = 0;
+      //  NSString* logItem = [logArray objectAtIndex:count++];
+        for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
             [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
-            
-            logItem = [logArray objectAtIndex:count++];
         }
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
@@ -253,4 +247,5 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     _logReader = [[AMSystemLogReader alloc] init];
     [self showLog];
 }
+
 @end

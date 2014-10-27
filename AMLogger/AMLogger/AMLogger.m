@@ -39,7 +39,7 @@ const NSString* _logName = @"AMLog.log";
 {
     NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
     if ([bundlePath hasSuffix:@".app"]) {
-        [bundlePath stringByDeletingLastPathComponent];
+        bundlePath = [bundlePath stringByDeletingLastPathComponent];
     }
     
     return bundlePath;

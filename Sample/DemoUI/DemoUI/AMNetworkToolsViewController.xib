@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
@@ -371,6 +372,16 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8L-RN-eeX">
+                                        <rect key="frame" x="29" y="80" width="88" height="25"/>
+                                        <buttonCell key="cell" type="square" title="startTest" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rfF-5l-NWQ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="startTest:" target="-2" id="BSa-bc-WUQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                         </tabViewItem>
@@ -402,7 +413,7 @@
                         <action selector="iperf:" target="-2" id="8JS-zM-SPH"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
                     <rect key="frame" x="479" y="529" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Ull-8C-5iV">
                         <font key="font" metaFont="system"/>
@@ -410,7 +421,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
                     <rect key="frame" x="558" y="529" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Q1F-Tr-5Dd">
                         <font key="font" metaFont="system"/>
@@ -418,7 +429,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
                     <rect key="frame" x="611" y="528" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
@@ -426,7 +437,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
                     <rect key="frame" x="443" y="530" width="30" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="0VL-UO-Rft"/>

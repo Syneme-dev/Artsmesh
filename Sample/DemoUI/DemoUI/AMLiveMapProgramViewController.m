@@ -7,6 +7,9 @@
 //
 
 #import "AMLiveMapProgramViewController.h"
+#import "AMMesher/AMMesher.h"
+#import "AMLiveMapProgramView.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMLiveMapProgramViewController ()
 
@@ -14,9 +17,19 @@
 
 @implementation AMLiveMapProgramViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
 }
+
+-(void)awakeFromNib
+{
+}
+
+
 
 @end

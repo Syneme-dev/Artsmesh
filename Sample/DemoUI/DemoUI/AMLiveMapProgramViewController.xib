@@ -18,28 +18,89 @@
             <subviews>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="np2-yo-GYM" customClass="AMFoundryFontView">
                     <rect key="frame" x="13" y="412" width="103" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="NICK NAME:" id="dtI-Mo-2Uz">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="NICK NAME:" id="dtI-Mo-2Uz">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.36862745098039218" green="0.47058823529411764" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mrM-Ms-gtJ">
-                    <rect key="frame" x="149" y="0.0" width="150" height="39"/>
-                    <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JDs-Kw-hCb">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KTF-yH-Gig" customClass="AMFoundryFontView">
+                    <rect key="frame" x="23" y="387" width="263" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="qi7-gy-0ca">
                         <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KTF-yH-Gig">
-                    <rect key="frame" x="25" y="387" width="259" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="qi7-gy-0ca">
+                        <color key="textColor" red="1" green="0.99642875363037098" blue="0.98571501452148391" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.groupName" id="kd3-l5-Wl7">
+                            <dictionary key="options">
+                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                <string key="NSNoSelectionPlaceholder">None</string>
+                                <string key="NSNotApplicablePlaceholder">None</string>
+                                <string key="NSNullPlaceholder">None</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="092-n5-8Kn" customClass="AMFoundryFontView">
+                    <rect key="frame" x="13" y="362" width="100" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="FULL NAME:" id="J38-Mt-dy4">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.47058823529999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJu-jk-Jug" customClass="AMFoundryFontView">
+                    <rect key="frame" x="13" y="312" width="100" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="PROJECT:" id="S8j-Jc-oUh">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.47058823529999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3jj-l6-Zle" customClass="AMFoundryFontView">
+                    <rect key="frame" x="25" y="332" width="263" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="lgx-Ak-rmA">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.fullName" id="4A5-MJ-lCx"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21F-Ax-VhK" customClass="AMFoundryFontView">
+                    <rect key="frame" x="25" y="282" width="263" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="9lN-vn-53f">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.project" id="48h-zv-ifu"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9N-1w-4QO" customClass="AMFoundryFontView">
+                    <rect key="frame" x="13" y="257" width="100" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="LOCATION:" id="SOr-4D-Ws2">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.47058823529999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="thq-Pb-q9Q" customClass="AMFoundryFontView">
+                    <rect key="frame" x="25" y="227" width="263" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="grx-SQ-288">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.location" id="OCc-Qe-Vc4"/>
+                    </connections>
+                </textField>
             </subviews>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="ouD-c2-QVY"/>
     </objects>
 </document>

@@ -689,9 +689,11 @@ AMWorldMap *worldMap;
                 [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
                 
                 AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
+                pvc.group = _hovGroup;
                 
                 [self addSubview:pvc.view];
                 _programView = pvc.view;
+                [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
                 [self showView:_programView];
             }
             

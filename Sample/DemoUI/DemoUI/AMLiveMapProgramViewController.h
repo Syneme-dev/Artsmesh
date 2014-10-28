@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMLiveMapProgramViewController : NSViewController
+
+@property AMLiveGroup *group;
 
 @end

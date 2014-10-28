@@ -28,7 +28,7 @@
                                                               green:0.14
                                                                blue:0.14
                                                               alpha:0.95] CGColor]];
-    
+    /**
     NSRect contentR = self.bounds;
     
     [NSGraphicsContext saveGraphicsState];
@@ -40,8 +40,9 @@
     [btnLine moveToPoint:NSMakePoint(contentR.origin.x + contentR.size.width / 2, contentR.origin.y + 36)];
     [btnLine lineToPoint:NSMakePoint(contentR.origin.x + contentR.size.width / 2, contentR.origin.y)];
     [btnLine stroke];
+     
     [NSGraphicsContext restoreGraphicsState];
-    
+    **/
 }
 
 -(BOOL)acceptsFirstResponder

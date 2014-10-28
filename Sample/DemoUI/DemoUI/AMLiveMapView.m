@@ -11,6 +11,8 @@
 #import "AMPixel.h"
 #import "AMCoreData/AMCoreData.h"
 #import "CoreLocation/CoreLocation.h"
+#import "AMLiveMapProgramView.h"
+#import "AMLiveMapProgramViewController.h"
 
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
@@ -75,23 +77,23 @@ AMWorldMap *worldMap;
     
     //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSString *storedMyGroupLoc = [_allGroupsLoc objectForKey:_myGroup.groupId];
-     
+    
     // Get/Set location data
     
     if ( [_myGroup isMeshed] ) {
-
+        
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
         [self clearGroup:_myGroup.groupId];
         
-        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
-
-        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        
+        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
             NSString * storedGroupLoc = [_allGroupsLoc objectForKey:remoteGroup.groupId];
-
+            
             if ( storedGroupLoc != remoteGroup.location ) {
                 // Current group has either just been created or has had a location change
                 
@@ -129,7 +131,7 @@ AMWorldMap *worldMap;
                         
                         [_mergedLocations setObject:connectedGroups forKey:mergeId];
                     }
-                        
+                    
                 }
             }
             
@@ -148,13 +150,13 @@ AMWorldMap *worldMap;
                 _refreshNeeded = YES;
             }
         }
-    
+        
     } else {
         
         if ( storedMyGroupLoc != _myGroup.location ) {
             [_allGroupsLoc removeAllObjects];
             [self clearMap];
-        
+            
             [self findLiveGroupLocation:_myGroup];
         }
     }
@@ -205,23 +207,23 @@ AMWorldMap *worldMap;
             
             AMPixel *point1;
             AMPixel *point2;
-        
+            
             AMLiveGroup *group = [theGroups valueForKey:@"group"];
             AMLiveGroup *subGroup = [theGroups valueForKey:@"subGroup"];
             
-        
+            
             point1 = [_allLiveGroupPixels objectForKey:group.groupId];
             point2 = [_allLiveGroupPixels objectForKey:subGroup.groupId];
             
             if ( point1 && point2 ) {
                 
                 NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-    
+                
                 [bezierPath moveToPoint:[self getPortCenter:point1]];
                 [bezierPath lineToPoint:[self getPortCenter:point2]];
                 //[bezierPath curveToPoint:[self getPortCenter:point2]
-                   //controlPoint1:center
-                   //controlPoint2:center];
+                //controlPoint1:center
+                //controlPoint2:center];
                 bezierPath.lineWidth = 2.0;
                 [[NSColor grayColor] setStroke];
                 [bezierPath stroke];
@@ -290,90 +292,90 @@ AMWorldMap *worldMap;
     
     [_localGroupLoc setObject:[NSNumber numberWithFloat: curLat] forKey:@"latitude"];
     [_localGroupLoc setObject:[NSNumber numberWithFloat: curLon] forKey:@"longitude"];
-
+    
     if ( [_localGroupLoc count] > 0 ) {
-    
-    float lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
-    float lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         
-
-    double mapLat0 = worldMap.mapHeight/2;
-    double mapLon0 = worldMap.mapWidth/2;
-    
-    //If lat & lon exist, find their equivelent on current live map
-    //need an if statement here checking for amlivegroup data, when it's ready
-    double liveGroupLat = (lat * mapLat0)/90;
-    double liveGroupLon = (lon * mapLon0)/180;
-    double liveGroupPosY = liveGroupLat;
-    double liveGroupPosX = liveGroupLon;
-    
-    if (liveGroupPosY > 0 ) {
-        liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
-    } else {
-        liveGroupPosY = fabs(liveGroupPosY);
-        liveGroupPosY += mapLat0;
-    }
-    if ( liveGroupPosX < 0 ) {
-        liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
-    } else {
-        liveGroupPosX += mapLon0;
-    }
-    
-    // Clear any old pixel associated with this group
-    [self clearPixel:theGroup.groupId];
+        float lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
+        float lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         
-    // Find closest open pixel to current live group location
         
-    AMPixel *liveGroupPixel;
-    double closestDistToLiveGroup = -1;
-    float portX = 0;
-    float portY = 0;
-    float portRow = 0;
-    int portCol = 0;
-    double portW = 1;
-    double portH = worldMap.mapHeight / worldMap.mapWidth;
-    
-    portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
-    
-    for (int i = 0; i < self.ports.count; i++) {
-        AMPixel *port = self.ports[i];
-        //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
+        double mapLat0 = worldMap.mapHeight/2;
+        double mapLon0 = worldMap.mapWidth/2;
         
-        if ( port.state == AMPixelStateNormal ) {
-            
-            int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
+        //If lat & lon exist, find their equivelent on current live map
+        //need an if statement here checking for amlivegroup data, when it's ready
+        double liveGroupLat = (lat * mapLat0)/90;
+        double liveGroupLon = (lon * mapLon0)/180;
+        double liveGroupPosY = liveGroupLat;
+        double liveGroupPosX = liveGroupLon;
         
-            portRow = portPixelPos/worldMap.mapWidth;
-            if ( portRow != (int)portRow ) {
-                portRow += (int)portRow + 1;
-            }
-            portCol = portPixelPos % worldMap.mapWidth;
-            if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
-        
-            portX = (portCol * portW) - (portW/2);
-            portY = (portRow * portH) - (portH/2);
-        
-            //Calculate distance between portCenter and liveGroup lat/lon
-            double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
-        
-            if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
-                // New shortest distance found, note it
-                closestDistToLiveGroup = distToLiveGroup;
-                liveGroupPixel = port;
-            }
-        
+        if (liveGroupPosY > 0 ) {
+            liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
+        } else {
+            liveGroupPosY = fabs(liveGroupPosY);
+            liveGroupPosY += mapLat0;
+        }
+        if ( liveGroupPosX < 0 ) {
+            liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
+        } else {
+            liveGroupPosX += mapLon0;
         }
         
+        // Clear any old pixel associated with this group
+        [self clearPixel:theGroup.groupId];
         
-    }
-    
-    if ( liveGroupPixel.state == AMPixelStateNormal ) {
-        liveGroupPixel.location = theGroup.location;
-        liveGroupPixel.liveGroupId = theGroup.groupId;
-        liveGroupPixel.state = AMPixelStateConnected;
+        // Find closest open pixel to current live group location
         
-        [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
-    
+        AMPixel *liveGroupPixel;
+        double closestDistToLiveGroup = -1;
+        float portX = 0;
+        float portY = 0;
+        float portRow = 0;
+        int portCol = 0;
+        double portW = 1;
+        double portH = worldMap.mapHeight / worldMap.mapWidth;
+        
+        portH = (((long)worldMap.mapHeight * portW )/(long)worldMap.mapWidth) *1.75;
+        
+        for (int i = 0; i < self.ports.count; i++) {
+            AMPixel *port = self.ports[i];
+            //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
+            
+            if ( port.state == AMPixelStateNormal ) {
+                
+                int portPixelPos = (int)[[worldMap.markedPixels objectAtIndex:i] integerValue];
+                
+                portRow = portPixelPos/worldMap.mapWidth;
+                if ( portRow != (int)portRow ) {
+                    portRow += (int)portRow + 1;
+                }
+                portCol = portPixelPos % worldMap.mapWidth;
+                if (portCol == 0) { portCol = (int)worldMap.mapWidth; }
+                
+                portX = (portCol * portW) - (portW/2);
+                portY = (portRow * portH) - (portH/2);
+                
+                //Calculate distance between portCenter and liveGroup lat/lon
+                double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
+                
+                if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
+                    // New shortest distance found, note it
+                    closestDistToLiveGroup = distToLiveGroup;
+                    liveGroupPixel = port;
+                }
+                
+            }
+            
+            
+        }
+        
+        if ( liveGroupPixel.state == AMPixelStateNormal ) {
+            liveGroupPixel.location = theGroup.location;
+            liveGroupPixel.liveGroupId = theGroup.groupId;
+            liveGroupPixel.state = AMPixelStateConnected;
+            
+            [_allLiveGroupPixels setObject:liveGroupPixel forKey:theGroup.groupId];
+            
         }
     }
 }
@@ -507,7 +509,7 @@ AMWorldMap *worldMap;
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
               nil];
     
-    _programView = [[NSView alloc] initWithFrame:[self bounds]];
+    _programView = [[AMLiveMapProgramView alloc] init];
     
     [self addSubview:_programView];
     [self hideView:_programView];
@@ -528,12 +530,12 @@ AMWorldMap *worldMap;
     
     // For local testing purposes only
     /**
-    [NSTimer scheduledTimerWithTimeInterval: 30.0
-                                                  target: self
-                                                selector:@selector(onTick:)
-                                                userInfo: nil repeats:YES];
-
-    **/
+     [NSTimer scheduledTimerWithTimeInterval: 30.0
+     target: self
+     selector:@selector(onTick:)
+     userInfo: nil repeats:YES];
+     
+     **/
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
 }
@@ -541,127 +543,127 @@ AMWorldMap *worldMap;
 -(void) mouseMoved: (NSEvent *) thisEvent
 {
     // This event fires when you're in the live map view and the mouse is moving
-if ( worldMap.state == overView ) {
-    
-    NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
-    
-    if (!_hovGroup) {
-        // Hasn't been hoving over group, check to make sure still not hovering
+    if ( worldMap.state == overView ) {
         
-        BOOL groupFound = NO;
-        for ( AMPixel *pixel in _allLiveGroupPixels ) {
+        NSPoint cursorPoint = [self convertPoint: [thisEvent locationInWindow] fromView: nil];
+        
+        if (!_hovGroup) {
+            // Hasn't been hoving over group, check to make sure still not hovering
             
-            // Look through every pixel that is set to connected/active state
-            
-            AMPixel *curPort = [_allLiveGroupPixels objectForKey:pixel];
+            BOOL groupFound = NO;
+            for ( AMPixel *pixel in _allLiveGroupPixels ) {
+                
+                // Look through every pixel that is set to connected/active state
+                
+                AMPixel *curPort = [_allLiveGroupPixels objectForKey:pixel];
+                NSPoint pixelCenter = [self getPortCenter:curPort];
+                
+                // Make an imaginary rectangle around this active pixel
+                NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
+                
+                if ( NSPointInRect(cursorPoint, pixelBounds) ) {
+                    
+                    AMLiveGroup *group = [_allGroups objectForKey:pixel];
+                    if ( group ) {
+                        // Group is being hovered on
+                        
+                        _hovGroup = group;
+                        groupFound = YES;
+                        
+                        switch (_isHovering) {
+                            case NO:
+                                // Display info panel
+                                if ( ![_infoPanels objectForKey:_hovGroup.groupId] ) {
+                                    [self addOverlay:_hovGroup];
+                                }
+                                
+                                NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
+                                [thePanel setString:_hovGroup.groupName];
+                                if ( thePanel.isHidden ) {
+                                    
+                                    // Display the main group panel
+                                    [self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
+                                    
+                                    // If the current group is a part of a merged group, show a panel for the other group also
+                                    
+                                    id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
+                                    if ( [mergedGroups count] > 0 ) {
+                                        // This group is merged
+                                        for ( id mergedGroup in mergedGroups) {
+                                            
+                                            AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
+                                            
+                                            // find pixel for mergedGroup
+                                            id mergedPixel = theMergedGroup.groupId;
+                                            
+                                            // if pixel doesn't have a panel, add one
+                                            if ( ![_infoPanels objectForKey:theMergedGroup.groupId] ) {
+                                                [self addOverlay:theMergedGroup];
+                                            }
+                                            
+                                            // grab the newly created info panel and manipulate it, if not done already
+                                            thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
+                                            [thePanel setString:theMergedGroup.groupName];
+                                            if ( thePanel.isHidden ) {
+                                                [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                            }
+                                        }
+                                        
+                                    } else {
+                                        //This group isn't merged..
+                                    }
+                                    
+                                    
+                                }
+                                [[NSCursor pointingHandCursor] set];
+                                _isHovering = YES;
+                                break;
+                                
+                        } // close switch case
+                    }
+                }
+                
+                if (groupFound) { break;}
+                
+            } //close live pixel for loop
+        } else {
+            [[NSCursor pointingHandCursor] set];
+            // Group currently hovered on, make sure still hovering on
+            id hovGroupId = _hovGroup.groupId;
+            AMPixel *curPort = [_allLiveGroupPixels objectForKey:hovGroupId];
             NSPoint pixelCenter = [self getPortCenter:curPort];
             
             // Make an imaginary rectangle around this active pixel
             NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
             
-            if ( NSPointInRect(cursorPoint, pixelBounds) ) {
-
-                AMLiveGroup *group = [_allGroups objectForKey:pixel];
-                if ( group ) {
-                    // Group is being hovered on
-                    
-                    _hovGroup = group;
-                    groupFound = YES;
-                    
-                    switch (_isHovering) {
-                        case NO:
-                            // Display info panel
-                            if ( ![_infoPanels objectForKey:_hovGroup.groupId] ) {
-                                [self addOverlay:_hovGroup];
-                            }
-                        
-                            NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
-                            [thePanel setString:_hovGroup.groupName];
-                            if ( thePanel.isHidden ) {
-                                    
-                                // Display the main group panel
-                                [self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
-                                    
-                                // If the current group is a part of a merged group, show a panel for the other group also
-                                    
-                                id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
-                                if ( [mergedGroups count] > 0 ) {
-                                    // This group is merged
-                                    for ( id mergedGroup in mergedGroups) {
-                                    
-                                        AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
-                                            
-                                        // find pixel for mergedGroup
-                                        id mergedPixel = theMergedGroup.groupId;
-                                            
-                                        // if pixel doesn't have a panel, add one
-                                        if ( ![_infoPanels objectForKey:theMergedGroup.groupId] ) {
-                                            [self addOverlay:theMergedGroup];
-                                        }
-                                            
-                                        // grab the newly created info panel and manipulate it, if not done already
-                                        thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
-                                        [thePanel setString:theMergedGroup.groupName];
-                                        if ( thePanel.isHidden ) {
-                                            [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
-                                        }
-                                }
-                                        
-                                } else {
-                                        //This group isn't merged..
-                                }
-                                    
-                                    
-                            }
-                            [[NSCursor pointingHandCursor] set];
-                            _isHovering = YES;
-                            break;
-                        
-                    } // close switch case
+            if ( !NSPointInRect(cursorPoint, pixelBounds) ) {
+                //Cursor no longer hovering over a group
+                _isHovering = NO;
+            }
+        }// close if _hovGroup
+        
+        switch (_isHovering) {
+            case NO:
+                [[NSCursor arrowCursor] set];
+                _hovGroup = nil;
+                [self hideAllPanels];
+                
+                if ( worldMap.state == overView && self.wantsLayer == YES) {
+                    // Turn this off when not needed to avoid graphic clipping
+                    [self setWantsLayer: NO];
                 }
-            }
-        
-            if (groupFound) { break;}
-            
-        } //close live pixel for loop
-    } else {
-        [[NSCursor pointingHandCursor] set];
-        // Group currently hovered on, make sure still hovering on
-        id hovGroupId = _hovGroup.groupId;
-        AMPixel *curPort = [_allLiveGroupPixels objectForKey:hovGroupId];
-        NSPoint pixelCenter = [self getPortCenter:curPort];
-        
-        // Make an imaginary rectangle around this active pixel
-        NSRect pixelBounds = NSMakeRect((pixelCenter.x - (_portW/2)), (pixelCenter.y - (_portW/2)), _portW, _portH);
-        
-        if ( !NSPointInRect(cursorPoint, pixelBounds) ) {
-            //Cursor no longer hovering over a group
-            _isHovering = NO;
+                break;
+            case YES:
+                if ( worldMap.state == overView && self.wantsLayer == NO ) {
+                    // Displaying shadows atop live map, so need this property
+                    [self setWantsLayer: YES];
+                }
+                break;
         }
-    }// close if _hovGroup
-    
-    switch (_isHovering) {
-        case NO:
-            [[NSCursor arrowCursor] set];
-            _hovGroup = nil;
-            [self hideAllPanels];
-
-            if ( worldMap.state == overView && self.wantsLayer == YES) {
-                // Turn this off when not needed to avoid graphic clipping
-                [self setWantsLayer: NO];
-            }
-            break;
-        case YES:
-            if ( worldMap.state == overView && self.wantsLayer == NO ) {
-                // Displaying shadows atop live map, so need this property
-                [self setWantsLayer: YES];
-            }
-            break;
+    } else if ( worldMap.state == programView ) {
+        [[NSCursor arrowCursor] set];
+        _hovGroup = nil;
     }
-} else if ( worldMap.state == programView ) {
-    [[NSCursor arrowCursor] set];
-    _hovGroup = nil;
-}
     
 }
 
@@ -683,28 +685,14 @@ if ( worldMap.state == overView ) {
             } else {
                 // only worry about myGroup
                 
-                NSSize programSize = {250, 200};
-                [_programView setFrameSize:programSize];
-                [_programView setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
-                
-                /**
-                NSTextView *groupDetailsView = [[NSTextView alloc] initWithFrame:[_programView bounds]];
-                [groupDetailsView insertText:_myGroup.groupName];
-                [self formatTextView:groupDetailsView withFont:[_fonts objectForKey:@"body"]];
-                [groupDetailsView insertNewline:groupDetailsView];
-                [groupDetailsView insertText:groupDesc];
-                 
-                 
-                [_programView setSubviews:[NSArray arrayWithObjects:groupDetailsView, nil]];
-                **/
-                
                 NSTextField *groupTitleField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, _programView.frame.size.height, _programView.frame.size.width, 40) ];
                 [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
                 
-                [_programView addSubview:groupTitleField];
+                AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
                 
-                [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
-                //[self showView:_programView];
+                [self addSubview:pvc.view];
+                _programView = pvc.view;
+                [self showView:_programView];
             }
             
         }
@@ -735,14 +723,14 @@ if ( worldMap.state == overView ) {
     NSRect newPanelSize = NSMakeRect(0, 0, panelSize.width + (panelPadding.width *2), panelSize.height+panelPadding.height + (panelPadding.height * 2));
     [thePanel setTextContainerInset:panelPadding];
     [thePanel setFrame:newPanelSize];
-
+    
     //id pixelId = (id)thePixel;
     AMPixel *curPixel = [_allLiveGroupPixels objectForKey:thePixel];
     NSPoint hovPoint = [self getPortCenter:curPixel];
-
-        
+    
+    
     if ( hovPoint.x > self.frame.size.width/2 ) {
-            
+        
         [thePanel setFrameOrigin:NSMakePoint(hovPoint.x - (thePanel.frame.size.width + 20), hovPoint.y + 20)];
     } else {
         [thePanel setFrameOrigin: NSMakePoint(hovPoint.x + 20,hovPoint.y + 20)];
@@ -871,10 +859,10 @@ if ( worldMap.state == overView ) {
 }
 
 - (NSMutableArray *)getFakeData {
-
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/artsmesh-test-data.json"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request
-returningResponse:nil error:nil];
+                                             returningResponse:nil error:nil];
     NSError *jsonParsingError = nil;
     NSArray *fakeLiveData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
     

@@ -162,7 +162,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                 [bezierPath stroke];
                 if (channel.index == _selectedConnection[0] &&
                     peerChannle.index == _selectedConnection[1]) {
-                    bezierPath.lineWidth = 6.0;
+                    bezierPath.lineWidth = 4.0;
                     [_connectionColor setStroke];
                     [bezierPath stroke];
                 }
@@ -462,11 +462,27 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSBezierPath *)bezierPathFromChannel:(AMChannel *)channel1
                               toChannel:(AMChannel *)channel2
 {
+    NSPoint p1 = [self centerOfChannel:channel1];
+    NSPoint p2 = [self centerOfChannel:channel2];
+    NSPoint vector1 = NSMakePoint(p1.x - _center.x, p1.y - _center.y);
+    NSPoint vector2 = NSMakePoint(p2.x - _center.x, p2.y - _center.y);
+    NSPoint midVector = NSMakePoint((vector1.x + vector2.x) / 2.0,
+                                    (vector1.y + vector2.y) / 2.0);
+    CGFloat length = hypot(midVector.x, midVector.y);
+    CGFloat scaleFactor = 1.0;
+    if (length > 0.7 * _radius)
+        scaleFactor = 0.6 * _radius / length;
+    midVector.x *= scaleFactor;
+    midVector.y *= scaleFactor;
+    CGPoint cp = NSMakePoint(p1.x / 2.0 + p2.x / 2.0 - midVector.x,
+                             p1.y / 2.0 + p2.y / 2.0 - midVector.y);
+    
+    
     NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-    [bezierPath moveToPoint:[self centerOfChannel:channel1]];
-    [bezierPath curveToPoint:[self centerOfChannel:channel2]
-               controlPoint1:_center
-               controlPoint2:_center];
+    [bezierPath moveToPoint:p1];
+    [bezierPath curveToPoint:p2
+               controlPoint1:cp
+               controlPoint2:cp];
     return bezierPath;
 }
 
@@ -699,7 +715,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                              toChannel:peerChannle];
                 CGPathRef quartzBezierPath = [bezierPath quartzPath:NO];
                 CGPathRef hitTestArea = CGPathCreateCopyByStrokingPath(quartzBezierPath,
-                                NULL, 20.0, NSButtLineCapStyle, NSRoundLineJoinStyle, 10.0);
+                                NULL, 6.0, kCGLineCapRound, kCGLineJoinRound, 10.0);
                 CGPathRelease(quartzBezierPath);
                 if (CGPathContainsPoint(hitTestArea, NULL, p, false)) {
                     _selectedConnection[0] = channel.index;

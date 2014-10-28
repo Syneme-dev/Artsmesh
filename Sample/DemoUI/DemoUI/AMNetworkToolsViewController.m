@@ -65,7 +65,8 @@
     [self ping:self.pingButton];
     
     NSArray* logs = [AMLogger allLogNames];
-    [self.chooseLogCombo addItemsWithObjectValues:logs];
+    [self.logFileCombo addItemsWithObjectValues:logs];
+    self.logFileCombo.delegate = self;
 }
 
 -(void)registerTabButtons
@@ -192,12 +193,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSArray*  logArray = [_logReader lastLogItmes];
     if([logArray count] > 0)
     {
-//        int count = 0;
-      //  NSString* logItem = [logArray objectAtIndex:count++];
         for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
         }
-        
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
@@ -231,7 +229,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.logTextView scrollToEndOfDocument:self];
 }
 
-
 - (IBAction)showErrorLog:(id)sender {
     _logReader = [[AMErrorLogReader alloc] init];
     [self showLog];
@@ -247,8 +244,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self showLog];
 }
 
-- (IBAction)showSysLog:(id)sender {
-    _logReader = [[AMSystemLogReader alloc] init];
+- (IBAction)logFileComboChanged:(id)sender {
+    NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
+    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];
 }
 
@@ -259,7 +257,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)testLog
 {
-    AMLog(AMLog_Debug, @"test", @"%@\n", [NSDate date]);
+    AMLog(AMLog_Debug, @"test", @"%@", [NSDate date]);
 }
 
 @end

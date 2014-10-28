@@ -24,7 +24,7 @@
 @property (weak) IBOutlet NSButton *logButton;
 
 
-@property (weak) IBOutlet NSComboBox *chooseLogCombo;
+@property (weak) IBOutlet NSComboBox *logFileCombo;
 @property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
 @property (weak)                IBOutlet NSButton*      fullLog;
 

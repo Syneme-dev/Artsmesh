@@ -24,7 +24,7 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
 
 + (instancetype)logReaderByType:(NSString *)type
 {
-    AMLogReader *logReader = [[self alloc] initWithFileName:@"artsmesh.log"];
+    AMLogReader *logReader = [[self alloc] initWithFileName:kAMDefaultLogFile];
     logReader.filter = ^(NSString *line) {
         return [line hasPrefix:type];
     };

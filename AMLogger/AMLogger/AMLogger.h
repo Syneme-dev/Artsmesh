@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kAMDefaultLogFile;
+
 extern NSString * const kAMErrorLog;
 extern NSString * const kAMWarningLog;
 extern NSString * const kAMInfoLog;

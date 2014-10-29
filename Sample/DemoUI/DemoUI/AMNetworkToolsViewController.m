@@ -64,7 +64,8 @@
     }
     [self ping:self.pingButton];
     
-    NSArray *logs = [[NSFileManager defaultManager] subpathsAtPath:AMLogDirectory()];
+    NSArray *logs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:AMLogDirectory()
+                                                                        error:nil];
     logs = [logs pathsMatchingExtensions:@[ @"log" ]];
     [self.logFileCombo addItemsWithObjectValues:logs];
     self.logFileCombo.delegate = self;

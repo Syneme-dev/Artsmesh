@@ -8,6 +8,8 @@
 
 #import "AMLogger.h"
 
+NSString * const kAMDefaultLogFile = @"artsmesh.log";
+
 NSString * const kAMErrorLog = @"ERROR";
 NSString * const kAMWarningLog = @"WARN";
 NSString * const kAMInfoLog = @"INFO";
@@ -40,7 +42,7 @@ AMLogInitialize(void)
     
     if (isDirectory) {
         NSString *logDirectory = AMLogDirectory();
-        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:@"artsmesh.log"];
+        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:kAMDefaultLogFile];
         NSString *previousLogFilePath = [logFilePath stringByAppendingString:@"~previous"];
         if ([fileManager fileExistsAtPath:logFilePath]) {
             [fileManager moveItemAtPath:logFilePath

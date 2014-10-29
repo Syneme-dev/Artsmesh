@@ -196,7 +196,8 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     if([logArray count] > 0)
     {
         for (NSString* logItem in logArray) {
-            [[[self.logTextView textStorage] mutableString] appendString: logItem];
+            NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
+            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
         }
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
@@ -221,6 +222,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 -(void) showLog
 {
     [_readTimer invalidate];
+    [self.logTextView setString:@""];
     
     if(_fullLog.state == NSOnState){
         [self showFullLog];

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelGroupCellController">
@@ -123,11 +124,6 @@
             </constraints>
             <connections>
                 <outlet property="imageView" destination="zfJ-7F-1F1" id="guX-d0-CNr"/>
-                <outlet property="infoBtn" destination="1jr-fh-Ix4" id="zZl-sa-718"/>
-                <outlet property="leaveBtn" destination="M05-DM-bnQ" id="kfY-o7-Hjs"/>
-                <outlet property="lockBtn" destination="Wdi-mF-1NZ" id="ASO-Iv-BGZ"/>
-                <outlet property="mergeBtn" destination="apw-1e-TPG" id="job-aY-Xmo"/>
-                <outlet property="messageBtn" destination="zYQ-u4-bMc" id="oL6-nH-cVi"/>
                 <outlet property="textField" destination="48h-mX-dSF" id="BIS-yg-abZ"/>
             </connections>
         </customView>

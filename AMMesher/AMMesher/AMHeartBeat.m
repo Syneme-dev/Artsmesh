@@ -61,7 +61,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             _serverAddress = [NSData dataWithBytes:ai->ai_addr
                                             length:ai->ai_addrlen];
         }else{
-            AMLog(AMLog_Error, @"AMMesher", @"error in heartbeat, check if you are use a conflict ipv4 and ipv6 network.");
+            AMLog(kAMErrorLog, @"AMMesher", @"error in heartbeat, check if you are use a conflict ipv4 and ipv6 network.");
         }
 
         freeaddrinfo(ai);

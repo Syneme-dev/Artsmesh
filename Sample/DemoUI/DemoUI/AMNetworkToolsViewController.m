@@ -230,17 +230,17 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 }
 
 - (IBAction)showErrorLog:(id)sender {
-    _logReader = [[AMErrorLogReader alloc] init];
+    _logReader = [AMLogReader errorLogReader];
     [self showLog];
 }
 
 - (IBAction)showWarningLog:(id)sender {
-    _logReader = [[AMWarningLogReader alloc] init];
+    _logReader = [AMLogReader warningLogReader];
     [self showLog];
 }
 
 - (IBAction)showInfoLog:(id)sender {
-    _logReader = [[AMInfoLogReader alloc] init];
+    _logReader = [AMLogReader infoLogReader];
     [self showLog];
 }
 
@@ -257,7 +257,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)testLog
 {
-    AMLog(AMLog_Debug, @"test", @"%@", [NSDate date]);
+    AMLog(kAMInfoLog, @"test", @"%@", [NSDate date]);
 }
 
 @end

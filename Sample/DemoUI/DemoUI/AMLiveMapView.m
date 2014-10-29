@@ -86,9 +86,9 @@ AMWorldMap *worldMap;
         
         [self clearGroup:_myGroup.groupId];
         
-        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         
-        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
@@ -678,23 +678,29 @@ AMWorldMap *worldMap;
         if (_hovGroup) {
             worldMap.state = programView;
             
-            NSLog(@"%@ was clicked on!", _hovGroup.groupName);
             if ( [_myGroup isMeshed] ) {
                 // Check if group is parent or subgroup of a merge
+                BOOL isMerged = NO;
+                for ( NSMutableDictionary *groups in _mergedLocations ) {
+                    
+                    NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
+                    
+                    AMLiveGroup *group = [theGroups valueForKey:@"group"];
+                    AMLiveGroup *subGroup = [theGroups valueForKey:@"subGroup"];
+                    if ( group == _hovGroup || subGroup == _hovGroup ) {
+                        [self displayProgram:group];
+                        isMerged = YES;
+                        break;
+                    }
+                }
+                if (!isMerged) {
+                    [self displayProgram:_hovGroup];
+                }
                 
             } else {
                 // only worry about myGroup
                 
-                NSTextField *groupTitleField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, _programView.frame.size.height, _programView.frame.size.width, 40) ];
-                [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
-                
-                AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
-                pvc.group = _hovGroup;
-                
-                [self addSubview:pvc.view];
-                _programView = pvc.view;
-                [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
-                [self showView:_programView];
+                [self displayProgram:_hovGroup];
             }
             
         }
@@ -708,6 +714,20 @@ AMWorldMap *worldMap;
         [self hideAllPanels];
     }
     
+}
+
+- (void)displayProgram:(AMLiveGroup *)theGroup {
+    if (!_programView) {
+        NSTextField *groupTitleField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, _programView.frame.size.height, _programView.frame.size.width, 40) ];
+        [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
+    }
+    AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
+    pvc.group = theGroup;
+    
+    [self addSubview:pvc.view];
+    _programView = pvc.view;
+    [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
+    [self showView:_programView];
 }
 
 

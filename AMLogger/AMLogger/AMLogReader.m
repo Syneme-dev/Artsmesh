@@ -24,7 +24,7 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
 
 + (instancetype)logReaderByType:(NSString *)type
 {
-    AMLogReader *logReader = [[self alloc] initWithFileName:AMLogFilePath()];
+    AMLogReader *logReader = [[self alloc] initWithFileName:@"artsmesh.log"];
     logReader.filter = ^(NSString *line) {
         return [line hasPrefix:type];
     };
@@ -51,10 +51,12 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
     return [self logReaderByType:kAMDebugLog];
 }
 
-- (instancetype)initWithFileName:(NSString *)logFilePath
+- (instancetype)initWithFileName:(NSString *)logFileName
 {
     self = [super init];
     if (self) {
+        NSString *logDirectory = AMLogDirectory();
+        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:logFileName];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if (![fileManager fileExistsAtPath:logFilePath])
             return nil;

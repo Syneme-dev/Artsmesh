@@ -18,7 +18,7 @@
 @property(nonatomic, copy) BOOL (^filter)(NSString *line);
 
 // designated initializer
-- (instancetype)initWithFileName:(NSString *)logFilePath;
+- (instancetype)initWithFileName:(NSString *)logFileName;
 - (NSArray *)lastLogItmes;
 - (NSString *)nextLogItem;
 

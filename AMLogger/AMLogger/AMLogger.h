@@ -16,4 +16,4 @@ extern NSString * const kAMDebugLog;
 BOOL AMLogInitialize(void);
 void AMLog(NSString *level, NSString *module, NSString *format, ...);
 void AMLogClose(void);
-NSString *AMLogFilePath(void);
+NSString *AMLogDirectory(void);

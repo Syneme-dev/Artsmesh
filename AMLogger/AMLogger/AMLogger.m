@@ -15,20 +15,13 @@ NSString * const kAMDebugLog = @"DEBUG";
 
 static FILE *logFile;
 
-static NSString *
+NSString *
 AMLogDirectory(void)
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     assert(paths.count == 1);
     NSString *logsDirecotry = [paths[0] stringByAppendingPathComponent:@"Logs"];
     return [logsDirecotry stringByAppendingPathComponent:@"Artsmesh"];
-}
-
-NSString *
-AMLogFilePath(void)
-{
-    NSString *directory = AMLogDirectory();
-    return [directory stringByAppendingPathComponent:@"artsmesh.log"];
 }
 
 BOOL
@@ -46,7 +39,8 @@ AMLogInitialize(void)
     }
     
     if (isDirectory) {
-        NSString *logFilePath = AMLogFilePath();
+        NSString *logDirectory = AMLogDirectory();
+        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:@"artsmesh.log"];
         NSString *previousLogFilePath = [logFilePath stringByAppendingString:@"~previous"];
         if ([fileManager fileExistsAtPath:logFilePath]) {
             [fileManager moveItemAtPath:logFilePath
@@ -55,6 +49,7 @@ AMLogInitialize(void)
         }
         if ([fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
             logFile = fopen([logFilePath cStringUsingEncoding:NSUTF8StringEncoding], "a");
+            setvbuf(logFile, NULL, _IOLBF, 0);
             return logFile != NULL;
         }
     }

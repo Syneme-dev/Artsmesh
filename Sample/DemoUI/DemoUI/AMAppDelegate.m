@@ -27,7 +27,7 @@ static NSMutableDictionary *allPlugins = nil;
 
 // global uncaught exception handler
 void uncaughtExceptionHandler(NSException *exception) {
-    AMLog(AMLog_Error, @"Uncaught Exception", @"an uncaught exception happened: %@",exception.description);
+    AMLog(kAMErrorLog, @"Uncaught Exception", @"an uncaught exception happened: %@",exception.description);
 }
 
 @implementation AMAppDelegate
@@ -35,7 +35,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
-    [AMLogger AMLoggerInit];
+    AMLogInitialize();
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     allPlugins = [self loadPlugins];
     [[AMPreferenceManager shareInstance] initPreference];
@@ -56,7 +56,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [[AMAudio sharedInstance] releaseResources];
     
-    [AMLogger AMLoggerRelease];
+    AMLogClose();
 }
 
 - (void)connectMesher {

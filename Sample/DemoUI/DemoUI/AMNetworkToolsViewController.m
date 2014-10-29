@@ -65,7 +65,8 @@
     [self ping:self.pingButton];
     
     NSArray* logs = [AMLogger allLogNames];
-    [self.chooseLogCombo addItemsWithObjectValues:logs];
+    [self.logFileCombo addItemsWithObjectValues:logs];
+    self.logFileCombo.delegate = self;
 }
 
 -(void)registerTabButtons
@@ -176,7 +177,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         if(logArray){
             for (NSString* logItem in logArray) {
                 [[[self.logTextView textStorage] mutableString] appendString: logItem];
-                [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
             }
         }
         _appendStringCount = 0;
@@ -184,7 +184,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
             _appendStringCount++;
     }
 }
@@ -194,13 +193,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSArray*  logArray = [_logReader lastLogItmes];
     if([logArray count] > 0)
     {
-//        int count = 0;
-      //  NSString* logItem = [logArray objectAtIndex:count++];
         for (NSString* logItem in logArray) {
             [[[self.logTextView textStorage] mutableString] appendString: logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
         }
-        
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
                                                      target:self
@@ -217,7 +212,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSString* logItem = nil;
     while((logItem = [_logReader nextLogItem]) != nil){
         [[[self.logTextView textStorage] mutableString] appendString: logItem];
-        [[[self.logTextView textStorage] mutableString] appendString: @"\n"];
     }
         
 }
@@ -232,8 +226,8 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     else{
         [self showLogFromTail];
     }
+    [self.logTextView scrollToEndOfDocument:self];
 }
-
 
 - (IBAction)showErrorLog:(id)sender {
     _logReader = [[AMErrorLogReader alloc] init];
@@ -250,8 +244,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self showLog];
 }
 
-- (IBAction)showSysLog:(id)sender {
-    _logReader = [[AMSystemLogReader alloc] init];
+- (IBAction)logFileComboChanged:(id)sender {
+    NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
+    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];
 }
 
@@ -262,7 +257,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)testLog
 {
-    AMLog(AMLog_Debug, @"test", @"%@\n", [NSDate date]);
+    AMLog(AMLog_Debug, @"test", @"%@", [NSDate date]);
 }
 
 @end

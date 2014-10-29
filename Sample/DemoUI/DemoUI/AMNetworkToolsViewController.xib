@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
             <connections>
-                <outlet property="chooseLogCombo" destination="FI2-Ew-d7P" id="ag9-vI-oaW"/>
                 <outlet property="fullLog" destination="mJs-5G-H3P" id="7Sx-sC-v4t"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
+                <outlet property="logFileCombo" destination="FI2-Ew-d7P" id="s6F-uF-Q6t"/>
                 <outlet property="logTextView" destination="l4w-D1-cZA" id="Fp8-OV-aJv"/>
                 <outlet property="pingButton" destination="P0v-P2-klr" id="lui-OM-kGD"/>
                 <outlet property="pingContentView" destination="WsA-3d-Df9" id="EBf-50-FW5"/>
@@ -309,7 +308,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
-                                        <rect key="frame" x="20" y="341" width="106" height="52"/>
+                                        <rect key="frame" x="20" y="318" width="106" height="52"/>
                                         <buttonCell key="cell" type="smallSquare" title="WarningLog" bezelStyle="smallSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l3u-e6-g84">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -319,7 +318,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-mb-beO">
-                                        <rect key="frame" x="20" y="271" width="106" height="52"/>
+                                        <rect key="frame" x="20" y="222" width="106" height="52"/>
                                         <buttonCell key="cell" type="smallSquare" title="InfoLog" bezelStyle="smallSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="E3d-pl-Xb2">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -328,18 +327,8 @@
                                             <action selector="showInfoLog:" target="-2" id="dJn-Vv-bTi"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-xl-1sj">
-                                        <rect key="frame" x="20" y="195" width="106" height="52"/>
-                                        <buttonCell key="cell" type="smallSquare" title="SysLog" bezelStyle="smallSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="52O-MC-AiK">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showSysLog:" target="-2" id="GJz-tZ-I2l"/>
-                                        </connections>
-                                    </button>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJs-5G-H3P">
-                                        <rect key="frame" x="18" y="119" width="110" height="30"/>
+                                        <rect key="frame" x="18" y="101" width="110" height="30"/>
                                         <buttonCell key="cell" type="check" title="fulllog" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1XL-m5-Zhi">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -355,13 +344,16 @@
                                             <action selector="startTest:" target="-2" id="BSa-bc-WUQ"/>
                                         </connections>
                                     </button>
-                                    <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-Ew-d7P" userLabel="LogFile">
-                                        <rect key="frame" x="19" y="161" width="110" height="26"/>
+                                    <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-Ew-d7P" userLabel="logFileCombo">
+                                        <rect key="frame" x="19" y="157" width="110" height="26"/>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="iTV-kb-nIC">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </comboBoxCell>
+                                        <connections>
+                                            <action selector="logFileComboChanged:" target="-2" id="mG6-Cl-pU5"/>
+                                        </connections>
                                     </comboBox>
                                     <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-65-mVZ">
                                         <rect key="frame" x="162" y="-7" width="479" height="468"/>
@@ -422,7 +414,7 @@
                         <action selector="iperf:" target="-2" id="8JS-zM-SPH"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
                     <rect key="frame" x="479" y="502" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Ull-8C-5iV">
                         <font key="font" metaFont="system"/>
@@ -430,7 +422,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
                     <rect key="frame" x="558" y="502" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Q1F-Tr-5Dd">
                         <font key="font" metaFont="system"/>
@@ -438,7 +430,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
                     <rect key="frame" x="611" y="501" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
@@ -446,7 +438,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
                     <rect key="frame" x="443" y="503" width="30" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="0VL-UO-Rft"/>

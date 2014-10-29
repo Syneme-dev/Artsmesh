@@ -7,44 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol AMLoggerViewer;
 
-typedef enum {
-    AMLog_Error,
-    AMLog_Warning,
-    AMLog_Debug,
-    AMLog_System,
-    
-}AMLogCategory;
+extern NSString * const kAMErrorLog;
+extern NSString * const kAMWarningLog;
+extern NSString * const kAMInfoLog;
+extern NSString * const kAMDebugLog;
 
-
-@interface AMLoggerStruct : NSObject
-
-@property NSString* happenModuleName;
-@property AMLogCategory* category;
-@property NSString* content;
-@property NSDate* timestamp;
-
-@end
-
-
-void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...);
-
-
-@interface AMLogger : NSObject
-
-+(void)AMLoggerInit;
-+(void)AMLoggerRelease;
-
-+(NSString*)AMLoggerName;
-+(NSString*)AMLogPath;
-+(NSArray*)allLogNames;
-
-@end
-
-
-@protocol AMLoggerViewer <NSObject>
-
--(void)addLog:(AMLoggerStruct*)logData;
-
-@end
+BOOL AMLogInitialize(void);
+void AMLog(NSString *level, NSString *module, NSString *format, ...);
+void AMLogClose(void);
+NSString *AMLogFilePath(void);

@@ -10,22 +10,20 @@
 
 @interface AMLogReader : NSObject
 
-@property int logCountFromTail;
++ (instancetype)errorLogReader;
++ (instancetype)warningLogReader;
++ (instancetype)infoLogReader;
++ (instancetype)debugLogReader;
 
--(NSArray*)lastLogItmes;
--(NSString*)nextLogItem;
+@property(nonatomic, copy) BOOL (^filter)(NSString *line);
+
+// designated initializer
+- (instancetype)initWithFileName:(NSString *)logFilePath;
+- (NSArray *)lastLogItmes;
+- (NSString *)nextLogItem;
 
 @end
 
-@interface AMErrorLogReader : AMLogReader
-@end
-
-@interface AMWarningLogReader : AMLogReader
-@end
-
-@interface AMInfoLogReader : AMLogReader
-@end
 
 @interface  AMSystemLogReader : AMLogReader
--(id)initWithFileName:(NSString*)logFilePath;
 @end

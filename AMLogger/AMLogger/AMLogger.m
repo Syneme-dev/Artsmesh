@@ -7,146 +7,87 @@
 //
 
 #import "AMLogger.h"
-#import <Foundation/NSPathUtilities.h>
 
-static AMLogger* _sharedInstance = nil;
-const NSString* _logRelativeFolderName = @"/Log";
-const NSString* _logName = @"AMLog.log";
+NSString * const kAMErrorLog = @"ERROR";
+NSString * const kAMWarningLog = @"WARN";
+NSString * const kAMInfoLog = @"INFO";
+NSString * const kAMDebugLog = @"DEBUG";
 
-@implementation AMLogger
+static FILE *logFile;
+
+static NSString *
+AMLogDirectory(void)
 {
-    NSString* _logFilePath;
-    NSFileHandle* _logFileHandle;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    assert(paths.count == 1);
+    NSString *logsDirecotry = [paths[0] stringByAppendingPathComponent:@"Logs"];
+    return [logsDirecotry stringByAppendingPathComponent:@"Artsmesh"];
 }
 
-+(void)AMLoggerInit
+NSString *
+AMLogFilePath(void)
 {
-    @synchronized(_sharedInstance){
-        if (_sharedInstance == nil) {
-            _sharedInstance = [[AMLogger alloc] init];
-        }
-        [_sharedInstance openLogger:YES];
-    }
+    NSString *directory = AMLogDirectory();
+    return [directory stringByAppendingPathComponent:@"artsmesh.log"];
 }
 
-
-+(void)AMLoggerRelease
+BOOL
+AMLogInitialize(void)
 {
-    [_sharedInstance closeLogger];
-}
-
-+(NSString*)AMLogPath
-{
-    NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
-    if ([bundlePath hasSuffix:@".app"]) {
-        bundlePath = [bundlePath stringByDeletingLastPathComponent];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *logDirectory = AMLogDirectory();
+    BOOL isDirectory;
+    
+    if (![fileManager fileExistsAtPath:logDirectory isDirectory:&isDirectory]) {
+        isDirectory = [fileManager createDirectoryAtPath:logDirectory
+                             withIntermediateDirectories:NO
+                                              attributes:nil
+                                                   error:nil];
     }
     
-    return bundlePath;
-}
-
-+(NSString*)AMLoggerName
-{
-    NSString* logName = [NSString stringWithFormat:@"%@", _logName];
-    return logName;
-}
-
-+(NSArray*)allLogNames
-{
-    NSFileManager *fm =[NSFileManager defaultManager];
-    NSArray* files = [fm contentsOfDirectoryAtPath:[AMLogger AMLogPath] error:nil];
-    NSMutableArray* logFiles = [[NSMutableArray alloc] init];
+    if (isDirectory) {
+        NSString *logFilePath = AMLogFilePath();
+        NSString *previousLogFilePath = [logFilePath stringByAppendingString:@"~previous"];
+        if ([fileManager fileExistsAtPath:logFilePath]) {
+            [fileManager moveItemAtPath:logFilePath
+                                 toPath:previousLogFilePath
+                                  error:nil];
+        }
+        if ([fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
+            logFile = fopen([logFilePath cStringUsingEncoding:NSUTF8StringEncoding], "a");
+            return logFile != NULL;
+        }
+    }
     
-    for (NSString* fileName in files) {
-        if ([fileName hasSuffix:@".log"]) {
-            NSString* fileNameWithoutExt = [fileName stringByDeletingPathExtension];
-            
-            [logFiles addObject:fileNameWithoutExt];
-        }
-    }
-    return logFiles;
+    return NO;
 }
 
 
--(void)openLogger:(BOOL)trunc
+void
+AMLogClose(void)
 {
-    if (_logFileHandle == nil) {
-        NSFileManager *fm = [NSFileManager defaultManager];
-        
-        NSString* bundlePath = [AMLogger AMLogPath];
-        NSString* logName = [AMLogger AMLoggerName];
-        _logFilePath = [NSString stringWithFormat:@"%@/%@", bundlePath, logName];
-        if (trunc) {
-            NSError* err;
-            [fm removeItemAtPath:_logFilePath error:&err];
-        }
-        
-        BOOL logFileExist = [fm createFileAtPath:_logFilePath contents:nil attributes:nil];
-        
-        if (logFileExist) {
-            _logFileHandle  = [NSFileHandle fileHandleForWritingAtPath:_logFilePath];
-        }
-        
-        NSLog(@"log file is located: %@", _logFilePath);
+    if (logFile) {
+        fclose(logFile);
+        logFile = NULL;
     }
 }
 
-
--(void)closeLogger
+void
+AMLog(NSString *level, NSString *module, NSString *format, ...)
 {
-    if(_logFileHandle){
-        [_logFileHandle closeFile];
-        _logFileHandle = nil;
-    }
-}
-
-
--(void)writeLogCategory:(AMLogCategory) cat module:(NSString*) module content:(NSString*)content;
-{
-    if(_logFileHandle){
-        NSString* logItem = [NSString stringWithFormat:@"%@:[%@]:[%@]:%@\n",
-                             [AMLogger AMLogCategoryToString:cat],
-                             [NSDate date],
-                             module,
-                             content
-                             ];
-        NSLog(@"%@", logItem);
-        [_logFileHandle writeData: [logItem dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-}
-
-
-+ (NSString*)AMLogCategoryToString:(AMLogCategory)cat{
-    NSString *result = nil;
-    switch(cat) {
-        case AMLog_Error:
-            result = @"ERROR:";
-            break;
-        case AMLog_Warning:
-            result = @"WARNING:";
-            break;
-        case AMLog_Debug:
-            result = @"DEBUG:";
-            break;
-        default:
-            result = @"Unkown";
-    }
-    return result;
-}
-
-@end
-
-
-void AMLog(AMLogCategory cat, NSString* module, NSString* format, ...)
-{
-    va_list list;
-    va_start(list, format);
-    NSString *logStr = [[NSString alloc] initWithFormat:format arguments:list];
-    va_end(list);
+    assert(logFile);
     
-    if (_sharedInstance) {
-        [_sharedInstance writeLogCategory:cat module:module content:logStr];
+    va_list ap;
+    NSString *message = @"";
+    
+    if (format) {
+        va_start(ap, format);
+        message = [[NSString alloc] initWithFormat:format arguments:ap];
+        va_end(ap);
     }
+    
+    NSString *logRecord = [NSString stringWithFormat:@"%@:[%@]:[%@]:%@",
+                                level, [NSDate date], module, message];
+    fprintf(logFile, "%s\n", [logRecord cStringUsingEncoding:NSUTF8StringEncoding]);
 }
-
 

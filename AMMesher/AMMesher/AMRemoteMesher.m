@@ -13,6 +13,7 @@
 #import "AMMesher.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
 @end
@@ -77,12 +78,17 @@
 
 -(void)startRemoteClient
 {
-    [self requestPublicIp];
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    if (!config.useIpv6) {
+        [self requestPublicIp];
+    }
+    
     [self registerGroup];
 }
 
 -(void)requestPublicIp
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"start querying public ip...");
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSHost* serverHost = [NSHost hostWithName:config.stunServerAddr];
     _stunServerAddrs = [serverHost addresses];
@@ -93,12 +99,14 @@
     NSError *error = nil;
     if (![_udpSocket bindToPort:0 error:&error])
     {
-        NSLog(@"requestPublicIp failed: Error binding: %@", error);
+        AMLog(kAMErrorLog, @"AMMesher", @"create udp socket failed in remote mesher when request public ip. Error:%@",
+                 error);
         return;
     }
+    
     if (![_udpSocket beginReceiving:&error])
     {
-        NSLog(@"requestPublicIp failed:: Error receiving: %@", error);
+        AMLog(kAMErrorLog, @"AMMesher", @"listening socket port failed in remote mesher when request public ip. Error:%@", error);
         return;
     }
     
@@ -113,6 +121,7 @@
 
 -(void)registerGroup
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"will register group to global server");
     dispatch_async(dispatch_get_main_queue(), ^{
         [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
     });
@@ -130,21 +139,28 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"register group to global server failed! %@", error);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if(response == nil){
+            AMLog(kAMErrorLog, @"AMMesher", @"register group to global server return nil");
+            return;
+        }
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"] ||
             [responseStr isEqualToString:@"group alread exist"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                AMLog(kAMInfoLog, @"AMMesher", @"register group to global server finished will register self");
                 [self registerSelf];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
-                //sleep(2);
+                
+                AMLog(kAMErrorLog, @"AMMesher", @"register group to global server failed will retry");
+                sleep(1);
                 [self registerGroup];
             });
         }
@@ -155,6 +171,7 @@
 
 -(void)registerSelf
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"start register self to global server");
     dispatch_async(dispatch_get_main_queue(), ^{
         [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
     });
@@ -178,15 +195,20 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"register self to global server failed.%@", error);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if(response == nil){
+            AMLog(kAMErrorLog, @"AMMesher", @"register self to global server return nil");
+            return;
+        }
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                AMLog(kAMInfoLog, @"AMMesher", @"register self to global server finished. will start heartbeat");
                 [self startHeartbeat];
                 [[AMMesher sharedAMMesher] setMesherState:kMesherMeshed];
                 [[AMMesher sharedAMMesher] updateMySelf];
@@ -196,7 +218,9 @@
             
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
+                AMLog(kAMErrorLog, @"AMMesher", @"register self to global server failed. Can not mesh");
                 mySelf.isOnline = NO;
+                [[AMMesher sharedAMMesher] updateMySelf];
             });
         }
     };
@@ -209,6 +233,8 @@
     if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"Will update my self to global server");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
@@ -228,18 +254,21 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"update myself to global server failed. %@", error);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if(response == nil){
+            AMLog(kAMErrorLog, @"AMMesher", @"update myself to global server return failed");
+        }
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update user info on remote response wrong!");
+            AMLog(kAMErrorLog, @"AMMesher", @"update myself to global server failed");
+            return;
         }
         
-         //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
+        AMLog(kAMInfoLog, @"AMMesher", @"update myself to global server finished");
     };
 
     [_httpRequestQueue addOperation:req];
@@ -250,6 +279,8 @@
     if([[AMMesher sharedAMMesher] mesherState] != kMesherMeshed){
         return;
     }
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"Will update group info to global server");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
@@ -268,19 +299,18 @@
             return;
         }
         
-        if (error != nil) {
-            NSLog(@"error happened when update group:%@", error.description);
+        if (error != nil || response == nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"update group to global server failed.%@",error);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
-        
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSLog(@"update user info on remote response wrong!%@", responseStr);
+            AMLog(kAMErrorLog, @"AMMesher", @"update group to global server failed.%@",responseStr);
+            return;
         }
         
-        //[[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_REMOTE];
+        AMLog(kAMInfoLog, @"AMMesher", @"update group to global server finished");
     };
     
     [_httpRequestQueue addOperation:req];
@@ -289,6 +319,7 @@
 
 -(void)stopRemoteClient
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"will stop remote mesher...");
     [_publicIpReqTimer invalidate];
     _publicIpReqTimer = nil;
     
@@ -348,17 +379,17 @@
             return;
         }
         
-        if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+        if (error != nil || response ==nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"merge group failed. %@", error);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
-        
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSLog(@"update user info on remote response wrong!%@", responseStr);
+            AMLog(kAMErrorLog, @"AMMesher", @"merge group failed. %@", responseStr);
+            return;
         }
+        AMLog(kAMInfoLog, @"AMMesher", @"merge group finished");
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
@@ -380,8 +411,7 @@
     }
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config can not be nil!");
-    
+
     NSString* remoteServerAddr = config.artsmeshAddr;
     NSString* remoteServerPort = config.artsmeshPort;
     BOOL useIpv6 = [config.useIpv6 boolValue];
@@ -400,6 +430,7 @@
 
 -(void)requestUserList
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"will request userlist from global server");
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/getall";
@@ -409,21 +440,17 @@
             return;
         }
         
-        if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+        if (error != nil || response == nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"query userlist from global server failed.%@", error);
             return;
         }
-        
-        NSAssert(response, @"response should not be nil without error");
-        
-        NSLog(@"getall users return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response
                                                      options:0
                                                        error:&err];
         if(err != nil){
-            NSLog(@"parse Json error:%@", err.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"query userlist JSON error %@", error);
             return;
         }
         
@@ -433,6 +460,7 @@
         
         NSArray* groups = [rootGroup valueForKey:@"SubGroups"];
         if ([groups isEqual:[NSNull null]]) {
+            AMLog(kAMErrorLog, @"AMMesher", @"group returned from global server is null");
             return;
         }
         
@@ -448,6 +476,7 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            AMLog(kAMInfoLog, @"AMMesher", @"query userlist from global server finished");
             [AMCoreData shareInstance].remoteLiveGroups = groupList;
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         });
@@ -570,15 +599,16 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"didSendData:%@", jsonStr);
+    _heartbeatFailureCount = 0;
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
-    NSLog(@"hearBeat error:%@", error.description);
+    AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to global server failed. %@", error);
     _heartbeatFailureCount ++;
-    // NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+    if (_heartbeatFailureCount > 5) {
+        AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
+    }
 }
 
 
@@ -604,7 +634,7 @@
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
 {
-    ;
+    AMLog(kAMWarningLog, @"AMMesher", @"request public ip udp send failed will retry");
 }
 
 
@@ -612,15 +642,10 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    //NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSString* fromHost = [GCDAsyncUdpSocket hostFromAddress:address];
     
     if ([_stunServerAddrs containsObject:fromHost]) {
         [self parsePublicAddr:data];
-        
-        [_publicIpReqTimer invalidate];
-        _publicIpReqTimer = nil;
-        
         return;
     }
 }
@@ -636,6 +661,8 @@ withFilterContext:(id)filterContext
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(![mySelf.publicIp isEqualToString:[ipAndPort objectAtIndex:0]]){
         mySelf.publicIp = [ipAndPort objectAtIndex:0];
+        
+        AMLog(kAMInfoLog, @"AMMesher", @"my public ip is%@. will stop querying", mySelf.publicIp);
         
         [_publicIpReqTimer invalidate];
         _publicIpReqTimer = nil;

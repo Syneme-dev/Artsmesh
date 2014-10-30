@@ -154,34 +154,21 @@
 // Called when net service has been successfully resolved
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 {
-    AMLog(kAMInfoLog, @"AMMesher", @"local service resolved, hostname:%@, port:%d", sender.hostName, sender.port);
-    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
     NSHost *host = [NSHost hostWithName:sender.hostName];
-    config.localServerName = host.name;
+    config.localServerHost = host;
+    config.localServerPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
-//    if (config.useIpv6) {
-//        
-//        for(NSString *addr in host.addresses){
-//            if ([AMCommonTools isValidIpv6:addr]) {
-//                <#statements#>
-//            }
-//        }
-//    }
-    
-    
-//    NSAssert(config, @"system config can not be nil");
-//    
-//    config.localServerIp = hostName;
-//    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
+    AMLog(kAMInfoLog, @"AMMesher", @"local service resolved, hostname:%@, port:%d",
+          sender.hostName, sender.port);
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
-    NSLog(@"service:%@ can not be resloved!\n", sender.name);
+    AMLog(kAMWarningLog, @"AMMesher", @"local service didn't be resolved, try to publish one");
     [self publishLocalMesher];
 }
 
@@ -203,14 +190,12 @@
 {
 
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    config.localServerIp = mySelf.privateIp;
-    config.localServerName = [NSHost currentHost].name;
+    config.localServerHost = [NSHost currentHost];
     config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
     
-    AMLog(kAMInfoLog, @"AMMesher", @"local server published, service name: %@, hostip:%@, port:%@",
+    AMLog(kAMInfoLog, @"AMMesher", @"local server published, service name: %@, host name:%@, port:%@",
           [sender name],
-          config.localServerIp,
+          config.localServerHost.name,
           config.localServerPort);
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterServerStarting];
@@ -219,7 +204,8 @@
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
-    NSLog(@" >> netServiceDidStop: %@", [sender name]);
+    AMLog(kAMInfoLog, @"AMMesher", @"local server service stop publishing.");
+
 }
 
 

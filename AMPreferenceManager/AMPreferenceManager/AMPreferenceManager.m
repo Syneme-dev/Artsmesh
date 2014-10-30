@@ -104,7 +104,7 @@
     
     config.artsmeshAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
     config.artsmeshPort =  [defaults stringForKey:Preference_Key_General_GlobalServerPort];
-    config.localServerIp = @"";
+    config.localServerHost = nil;
     config.localServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
     config.remoteHeartbeatInterval = @"2";
     config.localHeartbeatInterval = @"2";

@@ -182,7 +182,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         NSArray*  logArray = [_logReader lastLogItmes];
         if(logArray){
             for (NSString* logItem in logArray) {
-                 NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
+                 NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
                 [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
                 self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
             }
@@ -191,7 +191,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     }
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
-            NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
+            NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
             [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
             self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
             _appendStringCount++;

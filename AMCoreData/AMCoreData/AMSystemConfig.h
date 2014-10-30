@@ -12,9 +12,10 @@
 
 @property NSString* artsmeshAddr;
 @property NSString* artsmeshPort;
-@property NSString* localServerName;
-@property NSString* localServerIp;
+
+@property NSHost*   localServerHost;
 @property NSString* localServerPort;
+
 @property NSString* remoteHeartbeatInterval;
 @property NSString* localHeartbeatInterval;
 @property NSString* remoteHeartbeatRecvTimeout;

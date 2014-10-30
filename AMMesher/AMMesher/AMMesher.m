@@ -10,6 +10,7 @@
 #import "AMLocalMesher.h"
 #import "AMLeaderElecter.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMLogger/AMLogger.h"
 
 @implementation AMMesher
 {
@@ -54,6 +55,8 @@
     
     [self initComponents];
     self.clusterState = kClusterAutoDiscovering;
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"Starting local server auto-recovery");
 }
 
 -(void)stopMesher

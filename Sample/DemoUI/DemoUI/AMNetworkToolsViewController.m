@@ -12,7 +12,7 @@
 #import "AMLogger/AMLogReader.h"
 #import "AMLogger/AMLogger.h"
 
-@interface AMNetworkToolsViewController ()
+@interface AMNetworkToolsViewController ()<NSComboBoxDelegate>
 {
     NSArray *_users;
     AMNetworkToolsCommand *_pingCommand;

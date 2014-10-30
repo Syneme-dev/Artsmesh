@@ -15,7 +15,6 @@
 - (IBAction)showErrorLog:(id)sender;
 - (IBAction)showWarningLog:(id)sender;
 - (IBAction)showInfoLog:(id)sender;
-- (IBAction)showSysLog:(id)sender;
 
 @property (weak) IBOutlet NSButton *pingButton;
 @property (weak) IBOutlet NSButton *tracerouteButton;

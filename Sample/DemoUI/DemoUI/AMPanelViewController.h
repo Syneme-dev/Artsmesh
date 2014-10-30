@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, AMPanelViewType) {
 @property(nonatomic) NSViewController *contentPanelViewController;
 @property (nonatomic) NSString* panelId;
 @property (strong) IBOutlet NSView *toolBarView;
-@property(nonatomic) NSString *title;
+@property  NSString *title;
 @property(nonatomic) NSViewController *subViewController;
 
 @property(strong)  AMPanelViewController *movedFromController;

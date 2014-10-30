@@ -178,7 +178,6 @@
             </subviews>
             <connections>
                 <outlet property="closeBtn" destination="hJQ-v6-N1M" id="6AH-Dv-c85"/>
-                <outlet property="emptyBtn" destination="lYL-at-Ltp" id="fgH-Tl-SfI"/>
             </connections>
             <point key="canvasLocation" x="217.5" y="186"/>
         </customView>

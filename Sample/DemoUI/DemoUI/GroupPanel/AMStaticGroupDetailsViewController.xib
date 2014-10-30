@@ -173,12 +173,6 @@
                     </scroller>
                 </scrollView>
             </subviews>
-            <connections>
-                <outlet property="closeBtn" destination="Lji-lN-j3v" id="0WD-D7-Gm3"/>
-                <outlet property="createTiemField" destination="j2S-5g-cEP" id="JU2-Rs-GzS"/>
-                <outlet property="emptyBtn" destination="2Xr-aO-LvL" id="PPy-Cb-rX6"/>
-                <outlet property="modifiedTimeField" destination="f9x-nh-a1O" id="zB3-BM-BiZ"/>
-            </connections>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="l2q-aa-bZt"/>
     </objects>

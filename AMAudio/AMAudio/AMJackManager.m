@@ -42,7 +42,7 @@
     int m = system("killall -0 jackdmp >/dev/null");
     if (n != 0 && m != 0) {
         NSString* command =  [self.jackCfg formatCommandLine];
-        AMLog(kAMDebugLog, @"AMAudio", @"start jack commmand is: %@", command);
+        AMLog(kAMInfoLog, @"AMAudio", @"start jack commmand is: %@", command);
     
         _jackTask = [[NSTask alloc] init];
         _jackTask.launchPath = @"/bin/bash";
@@ -87,7 +87,7 @@
 
 -(void)jackStopped:(NSNotification*)notification
 {
-    AMLog(kAMDebugLog, @"AMAudio", @"Jack Server is stopped!");
+    AMLog(kAMInfoLog, @"AMAudio", @"Jack Server is stopped!");
     self.jackState = JackState_Stopped;
 }
 

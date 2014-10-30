@@ -13,7 +13,7 @@ NSString * const kAMDefaultLogFile = @"artsmesh.log";
 NSString * const kAMErrorLog = @"ERROR";
 NSString * const kAMWarningLog = @"WARN";
 NSString * const kAMInfoLog = @"INFO";
-NSString * const kAMDebugLog = @"DEBUG";
+//NSString * const kAMDebugLog = @"DEBUG";
 
 static FILE *logFile;
 

@@ -84,7 +84,7 @@
 
     NSString* jackdmpLogPath = [NSString stringWithFormat:@" > \"%@/../jacktrip_%@.log\"", [NSBundle mainBundle].bundlePath, cfgs.clientName];
     [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jackdmpLogPath];
-    AMLog(kAMDebugLog, @"AMAudio", @"jack trip command line is %@", commandline);
+    AMLog(kAMInfoLog, @"AMAudio", @"jack trip command line is %@", commandline);
     
     NSTask* task = [[NSTask alloc] init];
     task.launchPath = @"/bin/bash";

@@ -13,7 +13,7 @@ extern NSString * const kAMDefaultLogFile;
 extern NSString * const kAMErrorLog;
 extern NSString * const kAMWarningLog;
 extern NSString * const kAMInfoLog;
-extern NSString * const kAMDebugLog;
+//extern NSString * const kAMDebugLog;
 
 BOOL AMLogInitialize(void);
 void AMLog(NSString *level, NSString *module, NSString *format, ...);

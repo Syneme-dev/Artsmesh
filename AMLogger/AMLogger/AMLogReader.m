@@ -50,10 +50,10 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
     return [self logReaderByType:kAMInfoLog];
 }
 
-+ (instancetype)debugLogReader
-{
-    return [self logReaderByType:kAMDebugLog];
-}
+//+ (instancetype)debugLogReader
+//{
+//    return [self logReaderByType:kAMDebugLog];
+//}
 
 - (instancetype)initWithFileName:(NSString *)logFileName
 {

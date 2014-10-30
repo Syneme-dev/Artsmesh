@@ -26,6 +26,10 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
 {
     AMLogReader *logReader = [[self alloc] initWithFileName:kAMDefaultLogFile];
     logReader.filter = ^(NSString *line) {
+        if (type == kAMInfoLog) {
+            return YES;
+        }
+        
         return [line hasPrefix:type];
     };
     return logReader;

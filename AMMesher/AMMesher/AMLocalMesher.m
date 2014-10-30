@@ -129,8 +129,6 @@
 
 -(void)registerLocalGroup
 {
-    AMLog(kAMInfoLog, @"AMMesher", @"registing group");
-    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     myGroup.leaderId = mySelf.userid;
@@ -182,6 +180,7 @@
         }
     };
     
+    AMLog(kAMInfoLog, @"AMMesher", @"registing group url is:%@",req.baseURL);
     [_httpRequestQueue addOperation:req];
 }
 
@@ -204,7 +203,7 @@
         }
         
         if (error != nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@",
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@",
                   error.description);
             return;
         }
@@ -215,7 +214,7 @@
         }
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"]) {
+        if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
@@ -223,12 +222,6 @@
                 [self startHeartbeat];
             });
             
-        }else if([responseStr isEqualToString:@"user already exist!"]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                 AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! Info:%@", responseStr);
-                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
-                [self startHeartbeat];
-            });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
@@ -267,7 +260,7 @@
 
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* localServerAddr = config.localServerHost.address;
+    NSString* localServerAddr = config.localServerHost.name;
     NSString* localServerPort = config.localServerPort;
     BOOL useIpv6 = [config.useIpv6 boolValue];
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
@@ -464,7 +457,7 @@
 - (NSString *)httpBaseURL
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSString* localServerAddr = config.localServerHost.address;
+    NSString* localServerAddr = config.localServerHost.name;
     NSString* localServerPort = config.localServerPort;
     
     return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];

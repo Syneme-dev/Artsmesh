@@ -81,6 +81,7 @@
 
 -(void)jackStarted:(NSNotification*)notification
 {
+    AMLog(kAMInfoLog, @"AMAudio", @"Jack Server is started!");
     self.jackState = JackState_Started;
 }
 

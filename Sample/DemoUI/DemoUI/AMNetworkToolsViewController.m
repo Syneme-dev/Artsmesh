@@ -73,6 +73,9 @@
     logs = [logs pathsMatchingExtensions:@[ @"log" ]];
     [self.logFileCombo addItemsWithObjectValues:logs];
     self.logFileCombo.delegate = self;
+    
+    [self.logButton performClick:self];
+    [self.infoLogButton performClick:self];
 }
 
 -(void)registerTabButtons

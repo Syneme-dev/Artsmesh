@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="661" height="519"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Iy7-e0-VXr">
+                <tabView type="noTabsNoBorder" initialItem="jfh-Uf-Sck" translatesAutoresizingMaskIntoConstraints="NO" id="Iy7-e0-VXr">
                     <rect key="frame" x="0.0" y="29" width="661" height="469"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
@@ -40,7 +40,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smr-Z1-0Tm">
+                                    <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smr-Z1-0Tm">
                                         <rect key="frame" x="0.0" y="-26" width="178" height="495"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="jrR-UO-o4M">
                                             <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
@@ -105,14 +105,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ez-MD-AkL">
+                                    <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ez-MD-AkL">
                                         <rect key="frame" x="178" y="0.0" width="483" height="469"/>
                                         <clipView key="contentView" copiesOnScroll="NO" id="g4x-M9-b9K">
                                             <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" spellingCorrection="YES" id="WsA-3d-Df9" customClass="AMFoundryFontTextView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="469"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="backgroundColor" red="0.17647059261798859" green="0.17647059261798859" blue="0.17647059261798859" alpha="1" colorSpace="deviceRGB"/>
@@ -222,7 +222,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" spellingCorrection="YES" id="sbY-RD-sTE" customClass="AMFoundryFontTextView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="469"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.18823531269999999" green="0.18823531269999999" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="483" height="469"/>
@@ -266,7 +266,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textView editable="NO" selectable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nd1-0G-VZC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="593" height="469"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="661" height="469"/>
@@ -301,7 +301,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-fG-5hX">
+                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-fG-5hX">
                                         <rect key="frame" x="-1" y="418" width="123" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="F8d-FZ-zQl"/>
@@ -315,7 +315,7 @@
                                             <action selector="showErrorLog:" target="-2" id="kbW-hf-wc5"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
+                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
                                         <rect key="frame" x="-1" y="368" width="123" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="8SE-qb-nAR"/>

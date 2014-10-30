@@ -18,7 +18,7 @@
 @property (weak) IBOutlet AMFoundryFontView *location;
 @property (weak) IBOutlet AMFoundryFontView *timeZone;
 @property (unsafe_unretained) IBOutlet NSTextView *homepage;
-@property (unsafe_unretained) IBOutlet NSTextView *description;
+@property (unsafe_unretained) IBOutlet NSTextView *descriptionView;
 @property (weak) IBOutlet NSButton *clostBtn;
 @property (weak) IBOutlet NSButton *applyBtn;
 
@@ -50,12 +50,12 @@
     }
     
     if (![self.staticUser.description isEqualTo:[NSNull null]]) {
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.description.font.pointSize];
+        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: self.descriptionView.font.pointSize];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.staticUser.description attributes:attr];
-        [self.description.textStorage appendAttributedString:attrStr];
-        [self.description setNeedsDisplay:YES];
+        [self.descriptionView.textStorage appendAttributedString:attrStr];
+        [self.descriptionView setNeedsDisplay:YES];
     }
     
     NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
@@ -82,7 +82,7 @@
     [AMCoreData shareInstance].mySelf.location = self.staticUser.location;
     
     [defaults setObject:self.userName.stringValue forKey:Preference_Key_User_NickName];
-    [defaults setObject:self.description.textStorage.string forKey:Preference_Key_User_Description];
+    [defaults setObject:self.descriptionView.textStorage.string forKey:Preference_Key_User_Description];
     [defaults setObject:self.location.stringValue forKey:Preference_Key_User_Location];
     
     [[AMMesher sharedAMMesher] updateMySelf];

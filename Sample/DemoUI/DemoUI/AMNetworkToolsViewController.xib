@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
             <connections>
+                <outlet property="errorLogButton" destination="Ao1-fG-5hX" id="KWL-z3-n47"/>
                 <outlet property="fullLog" destination="mJs-5G-H3P" id="7Sx-sC-v4t"/>
+                <outlet property="infoLogButton" destination="k2z-mb-beO" id="8aH-OB-Oco"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
                 <outlet property="logFileCombo" destination="FI2-Ew-d7P" id="s6F-uF-Q6t"/>
@@ -20,6 +21,7 @@
                 <outlet property="tracerouteContentView" destination="sbY-RD-sTE" id="vJA-2Z-1tA"/>
                 <outlet property="tracerouteTableView" destination="0yF-M2-mqS" id="I7w-UM-ySP"/>
                 <outlet property="view" destination="AXe-bk-9Ll" id="R57-qd-tKJ"/>
+                <outlet property="warningLogButton" destination="S1F-tM-lae" id="wL8-6y-Obg"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -335,16 +337,6 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8L-RN-eeX">
-                                        <rect key="frame" x="29" y="53" width="88" height="25"/>
-                                        <buttonCell key="cell" type="square" title="startTest" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rfF-5l-NWQ">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="startTest:" target="-2" id="BSa-bc-WUQ"/>
-                                        </connections>
-                                    </button>
                                     <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-Ew-d7P" userLabel="logFileCombo">
                                         <rect key="frame" x="19" y="157" width="110" height="26"/>
                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="iTV-kb-nIC">
@@ -362,11 +354,11 @@
                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView focusRingType="none" ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="l4w-D1-cZA" customClass="AMFoundryFontTextView">
+                                                <textView focusRingType="none" ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="l4w-D1-cZA" customClass="AMFoundryFontTextView">
                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="468"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="backgroundColor" red="0.1764705926" green="0.1764705926" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="479" height="468"/>
                                                     <size key="maxSize" width="479" height="10000000"/>
                                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -416,7 +408,7 @@
                         <action selector="iperf:" target="-2" id="8JS-zM-SPH"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
                     <rect key="frame" x="479" y="502" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Ull-8C-5iV">
                         <font key="font" metaFont="system"/>
@@ -424,7 +416,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
                     <rect key="frame" x="558" y="502" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="Q1F-Tr-5Dd">
                         <font key="font" metaFont="system"/>
@@ -432,7 +424,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
                     <rect key="frame" x="611" y="501" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
@@ -440,7 +432,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
                     <rect key="frame" x="443" y="503" width="30" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="0VL-UO-Rft"/>

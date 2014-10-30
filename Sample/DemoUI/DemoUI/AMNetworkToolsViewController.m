@@ -1,7 +1,5 @@
-//
 //  AMNetworkToolsViewController.m
 //  DemoUI
-//
 //  Created by lattesir on 8/5/14.
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
@@ -24,6 +22,9 @@
     NSTimer*                _readTimer;
     NSTimer*                _testTimer;
 }
+@property (weak) IBOutlet NSButton *errorLogButton;
+@property (weak) IBOutlet NSButton *warningLogButton;
+@property (weak) IBOutlet NSButton *infoLogButton;
 
 @end
 
@@ -45,6 +46,9 @@
     [AMButtonHandler changeTabTextColor:self.tracerouteButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.logButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.errorLogButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.warningLogButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.infoLogButton toColor:UI_Color_blue];
     
     _pingCommand = [[AMNetworkToolsCommand alloc] init];
     _pingCommand.contentView = self.pingContentView;
@@ -178,14 +182,18 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         NSArray*  logArray = [_logReader lastLogItmes];
         if(logArray){
             for (NSString* logItem in logArray) {
-                [[[self.logTextView textStorage] mutableString] appendString: logItem];
+                 NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
+                [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+                self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
             }
         }
         _appendStringCount = 0;
     }
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
-            [[[self.logTextView textStorage] mutableString] appendString: logItem];
+            NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
+            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
             _appendStringCount++;
     }
 }
@@ -198,6 +206,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         for (NSString* logItem in logArray) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
             [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
         }
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
@@ -214,7 +223,8 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.logTextView setString:@""];
     NSString* logItem = nil;
     while((logItem = [_logReader nextLogItem]) != nil){
-        [[[self.logTextView textStorage] mutableString] appendString: logItem];
+        NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
+        [[[self.logTextView textStorage] mutableString] appendString:logItemEnter];
         self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
     }
     
@@ -253,16 +263,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
     _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];
-}
-
-- (IBAction)startTest:(id)sender
-{
-    _testTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(testLog) userInfo:nil repeats:YES];
-}
-
--(void)testLog
-{
-    AMLog(kAMInfoLog, @"test", @"%@", [NSDate date]);
 }
 
 @end

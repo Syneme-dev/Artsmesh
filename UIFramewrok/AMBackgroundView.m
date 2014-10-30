@@ -11,10 +11,11 @@
 @implementation AMBackgroundView
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSColor *backgroundColor = [NSColor colorWithCalibratedRed:0.149
-                                                         green:0.149
-                                                          blue:0.149
+   NSColor *backgroundColor = [NSColor colorWithCalibratedRed:0.15
+                                                         green:0.15
+                                                          blue:0.15
                                                          alpha:1.0];
+    //NSColor* backgroundColor = [NSColor whiteColor];
     [backgroundColor set];
     NSRectFill(self.bounds);
 }

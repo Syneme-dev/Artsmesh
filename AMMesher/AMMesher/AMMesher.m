@@ -56,7 +56,7 @@
     [self initComponents];
     self.clusterState = kClusterAutoDiscovering;
     
-    AMLog(kAMInfoLog, @"AMMesher", @"Starting local server auto-recovery");
+    AMLog(kAMInfoLog, @"AMMesher", @"Starting local server auto-discovery");
 }
 
 -(void)stopMesher

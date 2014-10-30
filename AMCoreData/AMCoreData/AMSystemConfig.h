@@ -25,6 +25,6 @@
 @property NSString* stunServerAddr;
 @property NSString* stunServerPort;
 @property NSString* internalChatPort;
-@property NSString* useIpv6;
+@property BOOL useIpv6;
 
 @end

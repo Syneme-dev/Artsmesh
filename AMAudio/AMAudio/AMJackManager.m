@@ -48,7 +48,7 @@
         _jackTask.launchPath = @"/bin/bash";
         _jackTask.arguments = @[@"-c", [command copy]];
         _jackTask.terminationHandler = ^(NSTask* t){
-            AMLog(kAMDebugLog, @"AMAudio", @"Jack service is stopped!");
+            
         };
         
         [_jackTask launch];
@@ -87,6 +87,7 @@
 
 -(void)jackStopped:(NSNotification*)notification
 {
+    AMLog(kAMDebugLog, @"AMAudio", @"Jack Server is stopped!");
     self.jackState = JackState_Stopped;
 }
 

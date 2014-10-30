@@ -262,7 +262,7 @@
     
     NSString* localServerAddr = config.localServerHost.name;
     NSString* localServerPort = config.localServerPort;
-    BOOL useIpv6 = [config.useIpv6 boolValue];
+    BOOL useIpv6 = config.useIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;

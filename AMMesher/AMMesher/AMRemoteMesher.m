@@ -414,7 +414,7 @@
 
     NSString* remoteServerAddr = config.artsmeshAddr;
     NSString* remoteServerPort = config.artsmeshPort;
-    BOOL useIpv6 = [config.useIpv6 boolValue];
+    BOOL useIpv6 = config.useIpv6;
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     

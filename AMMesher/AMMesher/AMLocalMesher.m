@@ -85,38 +85,33 @@
 
 -(void)startLocalServer
 {
-    [self stopLocalServer];
-    
-    AMLog(kAMInfoLog, @"AMMesher", @"starting local mesher server...");
-    
-    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSString* port = config.localServerPort;
-    NSString* userTimeout = config.serverHeartbeatTimeout;
-
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
-    lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
-    NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
-                         lanchPath,
-                         port,
-                         port,
-                         userTimeout];
-    AMLog(kAMInfoLog, @"AMMesher", @"local server command is:%@", command);
-    
-    _lsTask = [[NSTask alloc] init];
-    _lsTask.launchPath = @"/bin/bash";
-    _lsTask.arguments = @[@"-c", [command copy]];
-    _lsTask.terminationHandler = ^(NSTask* t){
+    int m = system("killall -0 LocalServer >/dev/null");
+    if (m != 0) {
+        AMLog(kAMInfoLog, @"AMMesher", @"starting local mesher server...");
         
-    };
-    
-    [_lsTask launch];
-    
-//    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
-//    [_mesherServerTask launch];
-    
-    sleep(2);
+        AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+        NSString* port = config.localServerPort;
+        NSString* userTimeout = config.serverHeartbeatTimeout;
+        
+        NSBundle* mainBundle = [NSBundle mainBundle];
+        NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
+        lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
+        NSString *command = [NSString stringWithFormat:
+                             @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
+                             lanchPath,
+                             port,
+                             port,
+                             userTimeout];
+        
+        AMLog(kAMInfoLog, @"AMMesher", @"local server command is:%@", command);
+        _lsTask = [[NSTask alloc] init];
+        _lsTask.launchPath = @"/bin/bash";
+        _lsTask.arguments = @[@"-c", [command copy]];
+        _lsTask.terminationHandler = ^(NSTask* t){
+        };
+        
+        [_lsTask launch];
+    }
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }

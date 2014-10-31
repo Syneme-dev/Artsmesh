@@ -26,6 +26,8 @@
     AMShellTask *_mesherServerTask;
     AMHeartBeat* _heartbeatThread;
     
+    NSTask *_lsTask;
+    
     int _heartbeatFailureCount;
     int _userlistVersion;
 }
@@ -101,8 +103,18 @@
                          port,
                          userTimeout];
     AMLog(kAMInfoLog, @"AMMesher", @"local server command is:%@", command);
-    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
-    [_mesherServerTask launch];
+    
+    _lsTask = [[NSTask alloc] init];
+    _lsTask.launchPath = @"/bin/bash";
+    _lsTask.arguments = @[@"-c", [command copy]];
+    _lsTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    
+    [_lsTask launch];
+    
+//    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
+//    [_mesherServerTask launch];
     
     sleep(2);
     
@@ -112,9 +124,14 @@
 
 -(void)stopLocalServer
 {
-    if (_mesherServerTask != nil){
-        [_mesherServerTask cancel];
-        _mesherServerTask = nil;
+//    if (_mesherServerTask != nil){
+//        [_mesherServerTask cancel];
+//        _mesherServerTask = nil;
+//    }
+    
+    if (_lsTask) {
+        [_lsTask terminate];
+        _lsTask = nil;
     }
     
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"

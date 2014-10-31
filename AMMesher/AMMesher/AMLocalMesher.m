@@ -95,7 +95,7 @@
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
     NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
+                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@",
                          lanchPath,
                          port,
                          port,

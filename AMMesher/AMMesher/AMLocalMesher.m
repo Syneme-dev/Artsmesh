@@ -111,13 +111,13 @@
         
     };
     
+    sleep(2);
+    
     [_lsTask launch];
     
 //    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
 //    [_mesherServerTask launch];
-    
-    sleep(2);
-    
+
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 

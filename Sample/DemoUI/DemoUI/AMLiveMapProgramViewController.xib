@@ -109,7 +109,7 @@
                             <textView ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" id="wHw-kn-vCg" customClass="AMFoundryFontTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="textColor" red="1" green="0.28676808533302034" blue="0.33273333827756102" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.95854610782278538" green="1" blue="0.9609701662517609" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="261" height="105"/>
                                 <size key="maxSize" width="463" height="10000000"/>
@@ -117,7 +117,7 @@
                                 <size key="minSize" width="261" height="105"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <connections>
-                                    <binding destination="-2" name="attributedString" keyPath="self.group.location" id="0r6-N9-ywp">
+                                    <binding destination="-2" name="attributedString" keyPath="self.group.description" id="txu-PY-pWV">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>

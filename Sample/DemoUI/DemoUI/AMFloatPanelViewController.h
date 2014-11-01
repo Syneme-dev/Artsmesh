@@ -7,7 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMLiveMapView.h"
 
 @interface AMFloatPanelViewController : NSViewController
+
+@property AMLiveMapView *liveMap;
+@property BOOL isClosed;
+
+- (IBAction)closePanel:(id)sender;
+
+#define floatPanelNotification @"floatPanelClosed"
+
 
 @end

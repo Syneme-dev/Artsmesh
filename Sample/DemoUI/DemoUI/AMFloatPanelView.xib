@@ -5,8 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMFloatPanelViewController">
             <connections>
+                <outlet property="closePanel" destination="PFq-T7-YMG" id="MCS-9R-YsY"/>
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
                 <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
                 <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>

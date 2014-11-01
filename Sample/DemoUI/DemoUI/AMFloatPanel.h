@@ -10,4 +10,9 @@
 
 @interface AMFloatPanel : NSView
 
+@property(nonatomic) NSSize initialSize;
+@property(nonatomic) BOOL inFullScreenMode;
+@property(nonatomic) NSColor* backgroundColor;
+@property(nonatomic, weak) NSViewController *floatPanelViewController;
+
 @end

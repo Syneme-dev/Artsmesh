@@ -13,6 +13,11 @@
 #import "CoreLocation/CoreLocation.h"
 #import "AMLiveMapProgramView.h"
 #import "AMLiveMapProgramViewController.h"
+#import "AMFloatPanelViewController.h"
+#import "AMFloatPanel.h"
+#import "AMPanelViewController.h"
+#import "UIFramework/AMBorderView.h"
+
 
 #import "AMLiveGroupDataSource.h"
 #import "AMStaticGroupDataSource.h"
@@ -35,6 +40,8 @@
 @property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) NSMutableDictionary *fonts;
 @property (nonatomic) NSView *programView;
+@property (nonatomic) AMFloatPanelViewController *floatPanelViewController;
+@property (nonatomic) NSWindow *programWindow;
 @property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) double mapXPush;
 @property (nonatomic) double portW;
@@ -160,12 +167,12 @@ AMWorldMap *worldMap;
             [self findLiveGroupLocation:_myGroup];
         }
     }
+
     
     if ( _refreshNeeded ) {
         _refreshNeeded = NO;
         [self setNeedsDisplay:YES];
     }
-    
     
 }
 
@@ -482,6 +489,12 @@ AMWorldMap *worldMap;
     [self setup];
 }
 
+- (void)floatPanelClosed:(NSNotification*)notification {
+    if (_programWindow) {
+        _programWindow.isVisible = NO;
+    }
+}
+
 - (void)initVars {
     worldMap = [[AMWorldMap alloc] init];
     _myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -538,6 +551,52 @@ AMWorldMap *worldMap;
      **/
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    //#define floatPanelNotification @"floatPanelClosed"
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(floatPanelClosed:)
+                                                 name:floatPanelNotification
+                                               object:nil];
+
+    
+    
+    
+    //Display test float panel frame
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    _floatPanelViewController = fpc;
+    AMFloatPanel *testFloatPanel = (AMFloatPanel *) fpc.view;
+    testFloatPanel.floatPanelViewController = fpc;
+    NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
+    
+    _programWindow  = [[NSWindow alloc] initWithContentRect:frame
+                                                     styleMask:NSBorderlessWindowMask
+                                                       backing:NSBackingStoreBuffered
+                                                         defer:NO];
+    //fpc.containerWindow = _programWindow;
+    fpc.liveMap = self;
+    [_programWindow setBackgroundColor:[NSColor blueColor]];
+    _programWindow.hasShadow = YES;
+    
+    [_programWindow setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
+
+    
+    [_programWindow.contentView addSubview:fpc.view];
+    
+    fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : fpc.view}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : fpc.view}];
+    [_programWindow.contentView addConstraints:verticalConstraints];
+    [_programWindow.contentView addConstraints:horizontalConstraints];
+    
+    [_programWindow.contentView setAutoresizesSubviews:YES];
+    [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    [_programWindow makeKeyAndOrderFront:self];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent

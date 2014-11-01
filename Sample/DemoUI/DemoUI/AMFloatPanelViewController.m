@@ -17,6 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    self.isClosed = NO;
+    
+}
+
+- (IBAction)closePanel:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:floatPanelNotification
+                                                        object:self
+                                                      userInfo:nil];
+
 }
 
 @end

@@ -51,6 +51,8 @@
 		CE883165192C44B900DA17CE /* AMBox.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883161192C44B800DA17CE /* AMBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE883166192C44B900DA17CE /* AMBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CE883162192C44B800DA17CE /* AMBox.m */; };
 		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC231731A00D5B300AC7B7F /* AMBackgroundView.h */; };
+		CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC231741A00D5B300AC7B7F /* AMBackgroundView.m */; };
 		CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC27F091993877E0023163F /* AMTextFieldCell.h */; };
 		CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC27F0A1993877E0023163F /* AMTextFieldCell.m */; };
 /* End PBXBuildFile section */
@@ -117,6 +119,8 @@
 		CE883161192C44B800DA17CE /* AMBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBox.h; sourceTree = "<group>"; };
 		CE883162192C44B800DA17CE /* AMBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBox.m; sourceTree = "<group>"; };
 		CE883167192C52EA00DA17CE /* AMPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelView.h; sourceTree = "<group>"; };
+		CEC231731A00D5B300AC7B7F /* AMBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBackgroundView.h; sourceTree = "<group>"; };
+		CEC231741A00D5B300AC7B7F /* AMBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBackgroundView.m; sourceTree = "<group>"; };
 		CEC27F091993877E0023163F /* AMTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldCell.h; sourceTree = "<group>"; };
 		CEC27F0A1993877E0023163F /* AMTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +192,8 @@
 				AF7DF6E61904C26E00554E6F /* AMMaxSizeView.m */,
 				AFAA502218EC1375009286F4 /* AMMovableWindow.h */,
 				AFAA502318EC1375009286F4 /* AMMovableWindow.m */,
+				CEC231731A00D5B300AC7B7F /* AMBackgroundView.h */,
+				CEC231741A00D5B300AC7B7F /* AMBackgroundView.m */,
 				AF9DC78218E9643E0029DB97 /* BlueBackgroundView.h */,
 				AF9DC78318E9643E0029DB97 /* BlueBackgroundView.m */,
 				AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */,
@@ -278,6 +284,7 @@
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
 				AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */,
+				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
@@ -401,6 +408,7 @@
 				CE25C51019775960003A8B39 /* AMBorderView.m in Sources */,
 				26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */,
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
+				CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,

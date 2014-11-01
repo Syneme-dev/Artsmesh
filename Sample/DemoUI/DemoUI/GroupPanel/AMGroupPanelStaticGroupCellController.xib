@@ -83,8 +83,6 @@
             </constraints>
             <connections>
                 <outlet property="imageView" destination="w62-8T-FVQ" id="AE4-zu-Nz2"/>
-                <outlet property="infoBtn" destination="WMq-Cl-l5K" id="PVh-ZT-X51"/>
-                <outlet property="socialBtn" destination="xb8-GE-aqU" id="ic0-Ph-nNg"/>
                 <outlet property="textField" destination="h1i-Kc-GOv" id="ccG-q7-JYe"/>
             </connections>
         </tableCellView>

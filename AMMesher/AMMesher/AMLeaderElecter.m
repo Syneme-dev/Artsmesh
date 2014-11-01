@@ -9,8 +9,10 @@
 #import "AMLeaderElecter.h"
 #import "AMMesher.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMLogger/AMLogger.h"
+#import "AMCommonTools/AMCommonTools.h"
 
-#define MESHER_SERVICE_TYPE @"_ammesher._tcp."
+#define MESHER_SERVICE_TYPE @"_http._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
 
 @implementation AMLeaderElecter
@@ -36,6 +38,7 @@
 
 -(void)kickoffElectProcess
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"kickoff local server elector process!");
     [self publishLocalMesher];
 }
 
@@ -43,14 +46,18 @@
 -(void)publishLocalMesher
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config should not be nil");
     
     int port = [config.localServerPort intValue];
- 	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
+ 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
                                                        port:port];
-    NSAssert(_myMesherService, @"alloc Mesher Failed!");
+    if (_myMesherService == nil) {
+        AMLog(kAMErrorLog, @"AMMesher", @"create bonjour service failed");
+        return;
+    }
+    
+    
 	[_myMesherService scheduleInRunLoop:[NSRunLoop currentRunLoop]
                                 forMode:NSRunLoopCommonModes];
 	[_myMesherService setDelegate:self];
@@ -60,12 +67,10 @@
 
 -(void)browseLocalMesher
 {
-    //if (_mesherServiceBrowser == nil) {
-         _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
-         _mesherServiceBrowser.delegate = self;
-    //}
-
-    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@"local."];
+    _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
+    _mesherServiceBrowser.delegate = self;
+   
+    [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
 }
 
 
@@ -127,6 +132,8 @@
         return;
     }
     
+    AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
+    
     [self resolveLocalMesher];
 }
 
@@ -147,27 +154,21 @@
 // Called when net service has been successfully resolved
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 {
-    NSLog(@"service:%@ can be resloved, hostname:%@, port:%ld\n", sender.name, sender.hostName, (long)sender.port);
-    
-    
-    NSString* hostName = sender.hostName;
-    if ([hostName hasSuffix:@"."]) {
-        hostName = [hostName substringToIndex:[hostName length] - 1];
-        hostName = [hostName lowercaseString];
-    }
-    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config can not be nil");
     
-    config.localServerIp = hostName;
-    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
+    NSHost *host = [NSHost hostWithName:sender.hostName];
+    config.localServerHost = host;
+    config.localServerPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"local service resolved, hostname:%@, port:%d",
+          sender.hostName, sender.port);
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
-    NSLog(@"service:%@ can not be resloved!\n", sender.name);
+    AMLog(kAMWarningLog, @"AMMesher", @"local service didn't be resolved, try to publish one");
     [self publishLocalMesher];
 }
 
@@ -179,30 +180,32 @@
     if ( sender != _myMesherService ){
         return;
     }
-
+    
+    AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, maybe already exist, will try to find one");
     [self browseLocalMesher];
 }
 
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-    NSLog(@" >> netServiceDidPublish: %@", [sender name]);
-    
-    NSString* hostName = [[NSHost currentHost] name];
-    
-    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;;
-    NSAssert(config, @"system config can not be nil");
-    
-    config.localServerIp = hostName;
-    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
 
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    config.localServerHost = [NSHost currentHost];
+    config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"local server published, service name: %@, host name:%@, port:%@",
+          [sender name],
+          config.localServerHost.name,
+          config.localServerPort);
+    
     [[AMMesher sharedAMMesher] setClusterState:kClusterServerStarting];
 }
 
 
 - (void) netServiceDidStop:(NSNetService *)sender
 {
-    NSLog(@" >> netServiceDidStop: %@", [sender name]);
+    AMLog(kAMInfoLog, @"AMMesher", @"local server service stop publishing.");
+
 }
 
 

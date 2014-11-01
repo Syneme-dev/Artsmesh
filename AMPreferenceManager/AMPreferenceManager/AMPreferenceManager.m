@@ -104,7 +104,7 @@
     
     config.artsmeshAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
     config.artsmeshPort =  [defaults stringForKey:Preference_Key_General_GlobalServerPort];
-    config.localServerIp = @"";
+    config.localServerHost = nil;
     config.localServerPort = [defaults stringForKey:Preference_Key_General_LocalServerPort];
     config.remoteHeartbeatInterval = @"2";
     config.localHeartbeatInterval = @"2";
@@ -115,7 +115,7 @@
     config.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     config.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
     config.internalChatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-    config.useIpv6 =  [defaults stringForKey:Preference_Key_General_UseIpv6];
+    config.useIpv6 =  [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
 
     [AMCoreData shareInstance].systemConfig = config;
 }

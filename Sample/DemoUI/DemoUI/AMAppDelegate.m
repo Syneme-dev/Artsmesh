@@ -25,28 +25,37 @@ static NSMutableDictionary *allPlugins = nil;
 @end
 
 
-// global uncaught exception handler
-void uncaughtExceptionHandler(NSException *exception) {
-    AMLog(AMLog_Error, @"Uncaught Exception", @"an uncaught exception happened: %@",exception.description);
-}
-
 @implementation AMAppDelegate
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
-    [AMLogger AMLoggerInit];
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    BOOL bRet = AMLogInitialize();
+    if (!bRet) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Init Log Module Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Can not open log file!"];
+        [alert runModal];
+        
+        return;
+    }
+    
+    AMLog(kAMInfoLog, @"Main", @"Artsmesh is Starting...");
     allPlugins = [self loadPlugins];
+    
     [[AMPreferenceManager shareInstance] initPreference];
+    AMLog(kAMInfoLog, @"Main", @"Preference is initialized.");
+    
     [[AMStatusNet shareInstance] loadGroups];
     [self.mainWindowController showDefaultWindow];
+    AMLog(kAMInfoLog, @"Main", @"Default Panels are initialized.");
+    
     BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
     if (!isPreferenceCompleted) {
         [self showPreferencePanel];
     }
+    
     [self startMesher];
     [self writePluginDataToMesher];
+    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
@@ -56,7 +65,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [[AMAudio sharedInstance] releaseResources];
     
-    [AMLogger AMLoggerRelease];
+    AMLogClose();
 }
 
 - (void)connectMesher {

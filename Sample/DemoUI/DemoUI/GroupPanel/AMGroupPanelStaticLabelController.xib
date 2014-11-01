@@ -66,6 +66,7 @@
                 <outlet property="imageView" destination="9r8-ia-hK4" id="jHv-u3-NVQ"/>
                 <outlet property="textField" destination="wFt-Vf-Phg" id="hC7-n4-w80"/>
             </connections>
+            <point key="canvasLocation" x="50" y="202"/>
         </tableCellView>
     </objects>
     <resources>

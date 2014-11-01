@@ -628,9 +628,6 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -661,9 +658,6 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AMAudio/jack",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					/Users/weiwang/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/ww/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

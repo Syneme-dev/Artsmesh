@@ -489,11 +489,6 @@ AMWorldMap *worldMap;
     [self setup];
 }
 
-- (void)floatPanelClosed:(NSNotification*)notification {
-    if (_programWindow) {
-        _programWindow.isVisible = NO;
-    }
-}
 
 - (void)initVars {
     worldMap = [[AMWorldMap alloc] init];
@@ -551,11 +546,6 @@ AMWorldMap *worldMap;
      **/
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
-    //#define floatPanelNotification @"floatPanelClosed"
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(floatPanelClosed:)
-                                                 name:floatPanelNotification
-                                               object:nil];
 
     
     
@@ -571,8 +561,7 @@ AMWorldMap *worldMap;
                                                      styleMask:NSBorderlessWindowMask
                                                        backing:NSBackingStoreBuffered
                                                          defer:NO];
-    //fpc.containerWindow = _programWindow;
-    fpc.liveMap = self;
+    fpc.containerWindow = _programWindow;
     [_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
     

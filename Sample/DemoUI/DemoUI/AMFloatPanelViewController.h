@@ -11,12 +11,10 @@
 
 @interface AMFloatPanelViewController : NSViewController
 
-@property AMLiveMapView *liveMap;
+@property NSWindow *containerWindow;
 @property BOOL isClosed;
 
 - (IBAction)closePanel:(id)sender;
-
-#define floatPanelNotification @"floatPanelClosed"
 
 
 @end

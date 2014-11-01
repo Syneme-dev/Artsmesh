@@ -22,9 +22,10 @@
 }
 
 - (IBAction)closePanel:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:floatPanelNotification
-                                                        object:self
-                                                      userInfo:nil];
+    if (!self.isClosed) {
+        self.isClosed = YES;
+        self.containerWindow.isVisible = NO;
+    }
 
 }
 

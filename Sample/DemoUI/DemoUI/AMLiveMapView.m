@@ -41,6 +41,7 @@
 @property (nonatomic) NSMutableDictionary *fonts;
 @property (nonatomic) NSView *programView;
 @property (nonatomic) AMFloatPanelViewController *floatPanelViewController;
+@property (nonatomic) AMLiveMapProgramViewController *programViewController;
 @property (nonatomic) NSWindow *programWindow;
 @property (nonatomic) NSTextView *infoPanel;
 @property (nonatomic) double mapXPush;
@@ -536,6 +537,9 @@ AMWorldMap *worldMap;
     [self addTrackingArea:trackingArea];
     
     
+    [self createProgram];
+    
+    
     // For local testing purposes only
     /**
      [NSTimer scheduledTimerWithTimeInterval: 30.0
@@ -546,46 +550,7 @@ AMWorldMap *worldMap;
      **/
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
-
     
-    
-    
-    //Display test float panel frame
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
-    _floatPanelViewController = fpc;
-    AMFloatPanel *testFloatPanel = (AMFloatPanel *) fpc.view;
-    testFloatPanel.floatPanelViewController = fpc;
-    NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
-    
-    _programWindow  = [[NSWindow alloc] initWithContentRect:frame
-                                                     styleMask:NSBorderlessWindowMask
-                                                       backing:NSBackingStoreBuffered
-                                                         defer:NO];
-    fpc.containerWindow = _programWindow;
-    [_programWindow setBackgroundColor:[NSColor blueColor]];
-    _programWindow.hasShadow = YES;
-    
-    [_programWindow setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
-
-    
-    [_programWindow.contentView addSubview:fpc.view];
-    
-    fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:@{@"subView" : fpc.view}];
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : fpc.view}];
-    [_programWindow.contentView addConstraints:verticalConstraints];
-    [_programWindow.contentView addConstraints:horizontalConstraints];
-    
-    [_programWindow.contentView setAutoresizesSubviews:YES];
-    [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    [_programWindow makeKeyAndOrderFront:self];
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -764,18 +729,64 @@ AMWorldMap *worldMap;
     
 }
 
-- (void)displayProgram:(AMLiveGroup *)theGroup {
-    if (!_programView) {
-        NSTextField *groupTitleField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, _programView.frame.size.height, _programView.frame.size.width, 40) ];
-        [self formatTextField:groupTitleField withFont:[_fonts objectForKey:@"header"]];
-    }
+
+- (void)createProgram {
+
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
-    pvc.group = theGroup;
+    _programViewController = pvc;
     
-    [self addSubview:pvc.view];
-    _programView = pvc.view;
-    [self addShadow:_programView withOffset:NSMakeSize(0, -4.0)];
-    [self showView:_programView];
+    double programW = pvc.view.frame.size.width;
+    double programH = pvc.view.frame.size.height;
+    
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    _floatPanelViewController = fpc;
+    _floatPanelViewController.panelTitle = @"someGroup";
+    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
+    AMFloatPanel *floatPanel = (AMFloatPanel *) fpc.view;
+    floatPanel.floatPanelViewController = fpc;
+    //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
+    NSRect frame = NSMakeRect(0, 0, programW, programH+41);
+    
+    _programWindow  = [[NSWindow alloc] initWithContentRect:frame
+                                                  styleMask:NSBorderlessWindowMask
+                                                    backing:NSBackingStoreBuffered
+                                                      defer:NO];
+    fpc.containerWindow = _programWindow;
+
+    [fpc.view addSubview:pvc.view];
+    
+    
+    //[_programWindow setBackgroundColor:[NSColor blueColor]];
+    _programWindow.hasShadow = YES;
+    
+    [_programWindow setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
+    
+    
+    [_programWindow.contentView addSubview:floatPanel];
+    
+    fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : fpc.view}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : fpc.view}];
+    [_programWindow.contentView addConstraints:verticalConstraints];
+    [_programWindow.contentView addConstraints:horizontalConstraints];
+    
+    [_programWindow.contentView setAutoresizesSubviews:YES];
+    [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    //[_programWindow makeKeyAndOrderFront:self];
+    
+}
+
+- (void)displayProgram:(AMLiveGroup *)theGroup {
+    _programViewController.group = theGroup;
+    _floatPanelViewController.panelTitle = theGroup.groupName;
+    [_programWindow makeKeyAndOrderFront:self];
 }
 
 

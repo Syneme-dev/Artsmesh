@@ -17,16 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    self.isClosed = NO;
-    
 }
 
 - (IBAction)closePanel:(id)sender {
-    if (!self.isClosed) {
-        self.isClosed = YES;
-        self.containerWindow.isVisible = NO;
-    }
-
+    self.containerWindow.isVisible = NO;
+    [self.closeBtn setState:0];
 }
 
 @end

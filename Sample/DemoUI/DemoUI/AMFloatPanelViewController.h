@@ -11,8 +11,11 @@
 
 @interface AMFloatPanelViewController : NSViewController
 
+@property (strong) IBOutlet NSButton *closeBtn;
+
+@property NSString *panelTitle;
 @property NSWindow *containerWindow;
-@property BOOL isClosed;
+//@property BOOL isClosed;
 
 - (IBAction)closePanel:(id)sender;
 

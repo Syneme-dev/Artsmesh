@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMFloatPanelViewController">
             <connections>
+                <outlet property="closeBtn" destination="PFq-T7-YMG" id="H6V-od-c08"/>
                 <outlet property="closePanel" destination="PFq-T7-YMG" id="MCS-9R-YsY"/>
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
                 <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
@@ -39,8 +40,11 @@
                                 <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="self.panelTitle" id="Ibg-f6-yQc"/>
+                            </connections>
                         </textField>
-                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
+                        <button identifier="closeBtn" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
                             <rect key="frame" x="580" y="2" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="16" id="mbC-zq-fMQ"/>
@@ -86,6 +90,7 @@
                 <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yp8-BK-kH4"/>
             </constraints>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="X2E-dC-fbD"/>
     </objects>
     <resources>
         <image name="panel_close" width="15" height="15"/>

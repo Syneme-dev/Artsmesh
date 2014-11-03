@@ -80,7 +80,7 @@ AMWorldMap *worldMap;
 
 - (void)setup
 {
-    
+ 
     //Construct WorldMap and pixel arrays for assigning buttons to view
     
     //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -94,9 +94,9 @@ AMWorldMap *worldMap;
         
         [self clearGroup:_myGroup.groupId];
         
-        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         
-        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
@@ -209,6 +209,7 @@ AMWorldMap *worldMap;
     
     // Draw each line connecting ports
     if ( [_myGroup isMeshed] ) {
+        
         for ( NSMutableDictionary *groups in _mergedLocations ) {
             
             NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
@@ -409,16 +410,21 @@ AMWorldMap *worldMap;
 }
 
 - (void)removeOldMerges:(AMLiveGroup *)theGroup {
-    id mergedGroups = [self checkGroupIsMerged:theGroup ];
+    NSMutableDictionary *mergedGroups = [[NSMutableDictionary alloc] init];
+    
+    mergedGroups = [self checkGroupIsMerged:theGroup];
+    
     if ( [mergedGroups count] > 0 ) {
         // This group has some merged connections
         
         for ( id mergedGroup in mergedGroups) {
-            // Here is a connection, make sure the subGroup is still a subgroup and hasn't de-merged
+            // Here is a connection
+            //make sure the subGroup is still a subgroup and hasn't de-merged
             AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
+            
             BOOL groupExists = NO;
             for (AMLiveGroup *remoteSubGroup in theGroup.subGroups) {
-                if ( theMergedGroup.groupId == remoteSubGroup.groupId ) {
+                if ( [theMergedGroup.groupId isEqualToString:remoteSubGroup.groupId] ) {
                     groupExists = YES;
                 }
             }
@@ -539,17 +545,16 @@ AMWorldMap *worldMap;
     
     [self createProgram];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
+    
     
     // For local testing purposes only
-    /**
+    
      [NSTimer scheduledTimerWithTimeInterval: 30.0
      target: self
      selector:@selector(onTick:)
      userInfo: nil repeats:YES];
-     
-     **/
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(liveGroupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
 }
 

@@ -92,11 +92,9 @@ AMWorldMap *worldMap;
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
-        [self clearGroup:_myGroup.groupId];
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         
-        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
-        
-        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
@@ -122,7 +120,6 @@ AMWorldMap *worldMap;
                     //NSLog(@"subgroup either just created or location changed.. %@", remoteSubGroup.groupName);
                     
                     if ( storedSubGroupLoc != nil ) {
-                        //[self checkPixel:remoteSubGroup];
                         [self clearPixel:remoteSubGroup.groupId];
                     };
                     
@@ -348,7 +345,6 @@ AMWorldMap *worldMap;
         
         for (int i = 0; i < self.ports.count; i++) {
             AMPixel *port = self.ports[i];
-            //if (self.isCheckingLocation) { port.state = AMPixelStateNormal; }
             
             if ( port.state == AMPixelStateNormal ) {
                 
@@ -410,6 +406,7 @@ AMWorldMap *worldMap;
 }
 
 - (void)removeOldMerges:(AMLiveGroup *)theGroup {
+    
     NSMutableDictionary *mergedGroups = [[NSMutableDictionary alloc] init];
     
     mergedGroups = [self checkGroupIsMerged:theGroup];
@@ -444,31 +441,6 @@ AMWorldMap *worldMap;
             }
         }
     }
-}
-
-- (void)checkPixel:(AMLiveGroup *)theGroup {
-    // This function checks a given group's previous location (following a change)
-    // against all currently active locations on the map
-    // If no other group is currently occupying that portion, turn the pixel from active to normal/off
-    
-    AMPixel *pixelToCheck = [_allLiveGroupPixels objectForKey:theGroup.groupId];
-    
-    [_allLiveGroupPixels removeObjectForKey:theGroup.groupId];
-    
-    BOOL normalize = YES;
-    
-    
-    for (NSString *pixelID in _allLiveGroupPixels) {
-        AMPixel *liveGroupPixel = [_allLiveGroupPixels objectForKey:pixelID];
-        if ( liveGroupPixel.location == pixelToCheck.location ) {
-            normalize = NO;
-            break;
-        }
-    }
-    
-    if (normalize) {
-        pixelToCheck.state = AMPixelStateNormal;
-    }
     
 }
 
@@ -476,6 +448,7 @@ AMWorldMap *worldMap;
     [self clearPixel:theGroup];
     [_allGroups removeObjectForKey:theGroup];
     [_allGroupsLoc removeObjectForKey:theGroup];
+
 }
 
 - (void)clearPixel:(id)theGroup {
@@ -551,11 +524,12 @@ AMWorldMap *worldMap;
     
     // For local testing purposes only
     
+    /**
      [NSTimer scheduledTimerWithTimeInterval: 30.0
      target: self
      selector:@selector(onTick:)
      userInfo: nil repeats:YES];
-    
+    **/
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent

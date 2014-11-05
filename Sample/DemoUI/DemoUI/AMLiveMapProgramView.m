@@ -8,6 +8,8 @@
 
 #import "AMLiveMapProgramView.h"
 
+#define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
+
 @implementation AMLiveMapProgramView
 
 - (id)initWithFrame:(NSRect)frame
@@ -24,10 +26,8 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    [self.layer setBackgroundColor:[[NSColor colorWithCalibratedRed:0.14
-                                                              green:0.14
-                                                               blue:0.14
-                                                              alpha:0.95] CGColor]];
+    
+    [self.layer setBackgroundColor:(__bridge CGColorRef)(UI_Color_gray)];
     /**
     NSRect contentR = self.bounds;
     

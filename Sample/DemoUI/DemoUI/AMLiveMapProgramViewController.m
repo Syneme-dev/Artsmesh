@@ -11,6 +11,8 @@
 #import "AMLiveMapProgramView.h"
 #import "UIFramework/AMButtonHandler.h"
 
+#define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
+
 @interface AMLiveMapProgramViewController ()
 
 @end
@@ -22,12 +24,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        
+        
     }
     return self;
 }
 
 -(void)awakeFromNib
 {
+    
 }
 
 

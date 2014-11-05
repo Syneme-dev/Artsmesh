@@ -8,9 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "UIFramework/AMFoundryFontTextView.h"
 
 @interface AMLiveMapProgramViewController : NSViewController
 
+@property (strong) IBOutlet NSScrollView *descScrollView;
+
+@property (strong) IBOutlet AMFoundryFontTextView *scrollTextView;
+
 @property AMLiveGroup *group;
+@property NSMutableAttributedString *desc;
 
 @end

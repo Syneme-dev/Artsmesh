@@ -100,44 +100,17 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZJ-eA-hcB">
-                    <rect key="frame" x="25" y="20" width="261" height="105"/>
-                    <clipView key="contentView" ambiguous="YES" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="qPO-do-PfJ">
-                        <rect key="frame" x="1" y="1" width="238" height="133"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView ambiguous="YES" editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" id="wHw-kn-vCg" customClass="AMFoundryFontTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="textColor" red="0.95854610782278538" green="1" blue="0.9609701662517609" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="261" height="105"/>
-                                <size key="maxSize" width="463" height="10000000"/>
-                                <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="minSize" width="261" height="105"/>
-                                <size key="maxSize" width="463" height="10000000"/>
-                                <connections>
-                                    <binding destination="-2" name="attributedString" keyPath="self.group.description" id="txu-PY-pWV">
-                                        <dictionary key="options">
-                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <string key="NSNullPlaceholder">Test</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
-                    </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="gri-RK-5wh">
-                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Mso-IH-E34">
-                        <rect key="frame" x="223" y="1" width="16" height="133"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HbN-jI-UbV" customClass="AMFoundryFontView">
+                    <rect key="frame" x="25" y="12" width="250" height="113"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" state="on" placeholderString="" id="hhw-9i-rJk">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.description" id="NvD-MO-mjc"/>
+                    </connections>
+                </textField>
             </subviews>
             <point key="canvasLocation" x="234" y="205.5"/>
         </customView>

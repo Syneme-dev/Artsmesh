@@ -765,6 +765,9 @@ AMWorldMap *worldMap;
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
     _floatPanelViewController.panelTitle = theGroup.groupName;
+    
+    NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
+    _programViewController.desc = groupDesc;
     [_programWindow makeKeyAndOrderFront:self];
 }
 

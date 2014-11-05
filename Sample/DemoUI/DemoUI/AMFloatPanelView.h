@@ -10,7 +10,7 @@
 #import "AMFloatPanelViewController.h"
 
 
-@interface AMFloatPanel : NSView
+@interface AMFloatPanelView : NSView
 
 @property(nonatomic) NSSize initialSize;
 @property(nonatomic) BOOL tearedOff;

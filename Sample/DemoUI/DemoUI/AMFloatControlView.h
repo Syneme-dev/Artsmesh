@@ -7,10 +7,10 @@
 //
 
 #import "UIFramework/BlueBackgroundView.h"
-#import "AMFloatPanel.h"
+#import "AMFloatPanelView.h"
 
 @interface AMFloatControlView : BlueBackgroundView
 
-@property (nonatomic) AMFloatPanel *thePanel;
+@property (nonatomic) AMFloatPanelView *thePanel;
 
 @end

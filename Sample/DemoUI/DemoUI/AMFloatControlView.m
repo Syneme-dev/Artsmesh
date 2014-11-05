@@ -17,13 +17,13 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    AMFloatPanel *floatPanel = (AMFloatPanel *)self.superview;
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;
     self.thePanel = floatPanel;
 }
 
 
 - (void)mouseDown:(NSEvent *)theEvent {
-    AMFloatPanel *floatPanel = (AMFloatPanel *)self.superview;
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;
     floatPanel.isDragging = YES;
 
 
@@ -42,7 +42,7 @@
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-    AMFloatPanel *floatPanel = (AMFloatPanel *)self.superview;
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;
     floatPanel.isDragging = YES;
     
     if (self.inFullScreenMode)
@@ -62,7 +62,7 @@
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-    AMFloatPanel *floatPanel = (AMFloatPanel *)self.superview;
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;
     floatPanel.isDragging = NO;
 }
 

@@ -14,7 +14,7 @@
 #import "AMLiveMapProgramView.h"
 #import "AMLiveMapProgramViewController.h"
 #import "AMFloatPanelViewController.h"
-#import "AMFloatPanel.h"
+#import "AMFloatPanelView.h"
 #import "AMPanelViewController.h"
 #import "UIFramework/AMBorderView.h"
 
@@ -721,7 +721,7 @@ AMWorldMap *worldMap;
     _floatPanelViewController = fpc;
     _floatPanelViewController.panelTitle = @"someGroup";
     [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
-    AMFloatPanel *floatPanel = (AMFloatPanel *) fpc.view;
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
     floatPanel.floatPanelViewController = fpc;
     //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
     NSRect frame = NSMakeRect(0, 0, programW, programH+41);

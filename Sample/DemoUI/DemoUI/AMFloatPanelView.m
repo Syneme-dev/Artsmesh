@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMFloatPanel.h"
+#import "AMFloatPanelView.h"
 #import "UIFramework/AMBorderView.h"
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 
-@interface AMFloatPanel ()
+@interface AMFloatPanelView ()
 
 @property(nonatomic) BOOL resizing;
 @property(nonatomic) NSRect knobRectLeft;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation AMFloatPanel
+@implementation AMFloatPanelView
 {
     NSColor *_knobColor;
     NSPoint _constantVector;

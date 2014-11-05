@@ -776,6 +776,7 @@ AMWorldMap *worldMap;
     
     
     _programViewController.desc = attrStr;
+    _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
 }
 

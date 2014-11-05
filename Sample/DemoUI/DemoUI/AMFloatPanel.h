@@ -7,12 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMFloatPanelViewController.h"
+
 
 @interface AMFloatPanel : NSView
 
 @property(nonatomic) NSSize initialSize;
+@property(nonatomic) BOOL tearedOff;
 @property(nonatomic) BOOL inFullScreenMode;
+@property(nonatomic) BOOL isDragging;
 @property(nonatomic) NSColor* backgroundColor;
-@property(nonatomic, weak) NSViewController *floatPanelViewController;
+@property(nonatomic, weak) AMFloatPanelViewController *floatPanelViewController;
 
 @end

@@ -43,6 +43,9 @@
         //        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         
     }
+    self.isDragging = NO;
+    self.inFullScreenMode = NO;
+    self.tearedOff = YES;
     return self;
 }
 
@@ -53,6 +56,7 @@
                                            green:(58)/255.0f
                                             blue:(75)/255.0f
                                            alpha:1.0f];
+
 }
 
 - (NSRect)knobRectRight
@@ -66,56 +70,10 @@
     return NSMakeRect(0, self.bounds.size.height - 16, 16, 16);
 }
 
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    if (self.inFullScreenMode)
-        return;
-    
-    NSPoint p = [theEvent locationInWindow];
-    
-    if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
-        self.resizing = YES;
-        p = [self convertPoint:p fromView:nil];
-        _constantVector = NSMakePoint(self.bounds.size.width - p.x,
-                                      self.bounds.size.height - p.y);
-
-    } else {
-        [super mouseDown:theEvent];
-    }
-}
-
-- (void)mouseDragged:(NSEvent *)theEvent
-{
-    if (self.inFullScreenMode)
-        return;
-    
-    //NSPoint p = [theEvent locationInWindow];
-    /**
-    if (self.resizing) {
-        
-            NSRect rect = NSMakeRect(p.x, p.y, 0, 0);
-            rect = [self.window convertRectToScreen:rect];
-            p = rect.origin;
-            p.x += _constantVector.x;
-            p.y += _constantVector.y;
-            
-            NSPoint topLeft = NSMakePoint(self.window.frame.origin.x,
-                                          self.window.frame.origin.y + self.window.frame.size.height);
-            CGFloat newWidth = MAX(self.minSizeConstraint.width, p.x - self.window.frame.origin.x);
-            CGFloat newHeight = MAX(self.minSizeConstraint.height, topLeft.y - p.y);
-            NSRect windowFrame = NSMakeRect(topLeft.x, topLeft.y - newHeight,
-                                            newWidth, newHeight);
-            
-            [self.window setFrame:windowFrame display:YES];
-     
-    } else {
-        [super mouseDragged:theEvent];
-    }
-     **/
-}
-
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    self.isDragging = NO;
+    
     if (self.inFullScreenMode)
         return;
     

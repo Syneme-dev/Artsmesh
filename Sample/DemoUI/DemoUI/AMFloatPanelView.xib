@@ -10,6 +10,7 @@
                 <outlet property="closeBtn" destination="PFq-T7-YMG" id="H6V-od-c08"/>
                 <outlet property="closePanel" destination="PFq-T7-YMG" id="MCS-9R-YsY"/>
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
+                <outlet property="panelTop" destination="fvD-YA-Ec9" id="TUg-ie-6hF"/>
                 <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
                 <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
@@ -27,7 +28,7 @@
                         <constraint firstAttribute="height" constant="1" id="1N4-EQ-DLD"/>
                     </constraints>
                 </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="fvD-YA-Ec9" userLabel="Top" customClass="BlueBackgroundView">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="fvD-YA-Ec9" userLabel="Top" customClass="AMFloatControlView">
                     <rect key="frame" x="0.0" y="580" width="600" height="20"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">

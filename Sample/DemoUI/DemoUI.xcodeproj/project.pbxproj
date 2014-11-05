@@ -44,6 +44,7 @@
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
+		2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0289BB1A0984BC0020968E /* AMFloatControlView.m */; };
 		2D18D8C01A04A456005BC1A7 /* AMFloatPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8BF1A04A456005BC1A7 /* AMFloatPanel.m */; };
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
@@ -295,6 +296,8 @@
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
 		26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
+		2D0289BA1A0984BC0020968E /* AMFloatControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatControlView.h; sourceTree = "<group>"; };
+		2D0289BB1A0984BC0020968E /* AMFloatControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatControlView.m; sourceTree = "<group>"; };
 		2D18D8BE1A04A456005BC1A7 /* AMFloatPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanel.h; sourceTree = "<group>"; };
 		2D18D8BF1A04A456005BC1A7 /* AMFloatPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanel.m; sourceTree = "<group>"; };
 		2D18D8C41A04AC5B005BC1A7 /* AMFloatPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelViewController.h; sourceTree = "<group>"; };
@@ -740,6 +743,8 @@
 				2D6D76F319C16C5100201106 /* AMLiveMapView.m */,
 				2D7BCE0419FF6FDC0000F18A /* AMLiveMapProgramView.h */,
 				2D7BCE0519FF6FDC0000F18A /* AMLiveMapProgramView.m */,
+				2D0289BA1A0984BC0020968E /* AMFloatControlView.h */,
+				2D0289BB1A0984BC0020968E /* AMFloatControlView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1237,6 +1242,7 @@
 				CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */,
 				26136C56196FB5B300D033BF /* AMStaticGroupDetailsViewController.m in Sources */,
 				CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */,
+				2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,

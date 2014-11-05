@@ -8,8 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMLiveMapView.h"
+#import "UIFramework/BlueBackgroundView.h"
+
 
 @interface AMFloatPanelViewController : NSViewController
+
+@property (strong) IBOutlet BlueBackgroundView *panelTop;
 
 @property (strong) IBOutlet NSButton *closeBtn;
 

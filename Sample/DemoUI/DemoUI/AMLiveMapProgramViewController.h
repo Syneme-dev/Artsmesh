@@ -17,6 +17,6 @@
 @property (strong) IBOutlet AMFoundryFontTextView *scrollTextView;
 
 @property AMLiveGroup *group;
-@property NSMutableAttributedString *desc;
+@property NSAttributedString *desc;
 
 @end

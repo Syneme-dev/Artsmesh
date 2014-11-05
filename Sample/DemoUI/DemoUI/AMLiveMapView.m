@@ -494,6 +494,7 @@ AMWorldMap *worldMap;
     _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:16.0], @"header",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:13.0], @"13",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
               nil];
     
@@ -766,8 +767,15 @@ AMWorldMap *worldMap;
     _programViewController.group = theGroup;
     _floatPanelViewController.panelTitle = theGroup.groupName;
     
-    NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
-    _programViewController.desc = groupDesc;
+    //NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
+    
+    NSFont* textViewFont =  [_fonts objectForKey:@"13"];
+    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textViewFont};
+    NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:theGroup.description attributes:attr];
+
+    
+    
+    _programViewController.desc = attrStr;
     [_programWindow makeKeyAndOrderFront:self];
 }
 

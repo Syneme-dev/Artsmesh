@@ -720,7 +720,7 @@ AMWorldMap *worldMap;
     
     AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
     _floatPanelViewController = fpc;
-    _floatPanelViewController.panelTitle = @"someGroup";
+    _floatPanelViewController.panelTitle = @"LIVE";
     [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
     floatPanel.floatPanelViewController = fpc;
@@ -765,7 +765,7 @@ AMWorldMap *worldMap;
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
-    _floatPanelViewController.panelTitle = theGroup.groupName;
+    //_floatPanelViewController.panelTitle = theGroup.groupName;
     
     //NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
     

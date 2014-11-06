@@ -38,7 +38,7 @@
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="title" id="cD7-bR-cVw">
                                 <font key="font" metaFont="system"/>
-                                <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" red="0.88235294117647056" green="0.15294117647058825" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>

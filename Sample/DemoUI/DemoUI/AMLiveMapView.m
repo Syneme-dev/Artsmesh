@@ -739,7 +739,7 @@ AMWorldMap *worldMap;
     //[_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
     
-    [_programWindow setFrameOrigin:NSMakePoint(self.frame.size.width/2, self.frame.size.height/2)];
+    [_programWindow setFrameOrigin:NSMakePoint((self.frame.size.width/2), self.frame.size.height)];
     
     
     [_programWindow.contentView addSubview:floatPanel];
@@ -772,7 +772,6 @@ AMWorldMap *worldMap;
     NSFont* textViewFont =  [_fonts objectForKey:@"13"];
     NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textViewFont};
     NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:theGroup.description attributes:attr];
-
     
     
     _programViewController.desc = attrStr;

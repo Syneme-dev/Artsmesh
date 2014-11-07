@@ -13,5 +13,6 @@
 
 @property(nonatomic) NSColor* backgroundColor;
 @property(nonatomic, weak) AMGroupPreviewPanelController *groupPreviewPanelController;
+@property AMLiveGroup *group;
 
 @end

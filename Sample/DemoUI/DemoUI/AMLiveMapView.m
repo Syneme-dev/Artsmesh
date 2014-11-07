@@ -16,6 +16,8 @@
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 #import "AMPanelViewController.h"
+#import "AMGroupPreviewPanelController.h"
+#import "AMGroupPreviewPanelView.h"
 #import "UIFramework/AMBorderView.h"
 
 
@@ -570,13 +572,15 @@ AMWorldMap *worldMap;
                                     [self addOverlay:_hovGroup];
                                 }
                                 
-                                NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
-                                [thePanel setString:_hovGroup.groupName];
-                                if ( thePanel.isHidden ) {
+                                //NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
+                                //[thePanel setString:_hovGroup.groupName];
+                                NSWindow *theOverlay = [_infoPanels objectForKey:_hovGroup.groupId];
+                                
+                                if ( ![theOverlay isVisible] ) {
                                     
                                     // Display the main group panel
-                                    [self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
-                                    
+                                    //[self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
+                                    [self displayGroupPreviewOverlay:_hovGroup onPixel:pixel];
                                     // If the current group is a part of a merged group, show a panel for the other group also
                                     
                                     id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
@@ -595,10 +599,12 @@ AMWorldMap *worldMap;
                                             }
                                             
                                             // grab the newly created info panel and manipulate it, if not done already
-                                            thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
-                                            [thePanel setString:theMergedGroup.groupName];
-                                            if ( thePanel.isHidden ) {
-                                                [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                            //thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
+                                            theOverlay = [_infoPanels objectForKey:theMergedGroup.groupId];
+                                            //[thePanel setString:theMergedGroup.groupName];
+                                            if ( ![theOverlay isVisible] ) {
+                                                //[self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                                [self displayGroupPreviewOverlay:mergedGroup onPixel:mergedPixel];
                                             }
                                         }
                                         
@@ -779,6 +785,42 @@ AMWorldMap *worldMap;
     [_programWindow makeKeyAndOrderFront:self];
 }
 
+- (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup onPixel:(AMPixel *) thePixel {
+    AMPixel *curPixel = [_allLiveGroupPixels objectForKey:thePixel];
+    
+    //NSPoint windowLocation = [self convertPoint:hovPoint fromView:nil];
+    NSPoint windowLocation = NSMakePoint(100, 100);
+    [self convertPoint:windowLocation fromView:self];
+    
+    
+    NSWindow *overlayWindow = [_infoPanels objectForKey:theGroup.groupId];
+    
+    
+    // Convert the hover coordinates to screen coordinates
+    AMLiveMapView *liveMapView = self;
+    NSPoint hovPoint = [self getPortCenter:curPixel];
+    NSPoint pointInWindow = [liveMapView convertPoint:hovPoint toView:nil];
+    NSRect rect = NSMakeRect(pointInWindow.x, pointInWindow.y, 0, 0);
+    rect = [[liveMapView window] convertRectToScreen:rect];
+    NSPoint pointOnScreen = NSMakePoint(rect.origin.x, rect.origin.y);
+    
+    
+    // Display group preview child window
+    
+    if ( hovPoint.x > self.frame.size.width/2 ) {
+        [overlayWindow setFrameOrigin:NSMakePoint((pointOnScreen.x - overlayWindow.frame.size.width) -20, (pointOnScreen.y - overlayWindow.frame.size.height) -20)];
+    } else {
+        [overlayWindow setFrameOrigin:NSMakePoint(pointOnScreen.x +20, (pointOnScreen.y - overlayWindow.frame.size.height) -20)];
+        
+    }
+    
+    NSArray *windowChildren = self.window.childWindows;
+    if ( ![windowChildren containsObject:overlayWindow] ) {
+        [self.window addChildWindow:overlayWindow ordered:NSWindowAbove];
+    } else {
+        [overlayWindow orderFront:self];
+    }
+}
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
     NSSize panelPadding = { 10, 5 };
@@ -811,56 +853,40 @@ AMWorldMap *worldMap;
 }
 
 - (void)hideAllPanels {
+    NSLog(@"hover exited, hide all panels now.");
     for ( id thePanel in _infoPanels ) {
+        /**
         NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
         if (!curPanel.isHidden) {
             [self hideView:curPanel];
+        }
+        **/
+        NSWindow *curWindow = [_infoPanels objectForKey:thePanel];
+        if ([curWindow isVisible]) {
+            [curWindow orderOut:self];
         }
     }
 }
 
 - (void)addOverlay:(AMLiveGroup *) theGroup {
+    //NSLog(@"Add overlay called.");
     // Add the info panel to the map (used for displaying text on map)
     //id pixelId = thePixel;
+    
     NSString *groupId = theGroup.groupId;
+    AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
+    gpc.group = theGroup;
     
-    NSTextView *newPanel;
+    double overlayW = gpc.view.frame.size.width;
+    double overlayH = gpc.view.frame.size.height;
     
-    NSRect textFrame = [self bounds];
-    textFrame.size.width = 200; //textFrame.size.width/2;
-    textFrame.size.height = 35; //textFrame.size.height/5;
-    //NSFont *font = [NSFont fontWithName: @"FoundryMonoline" size: 16.0];
+    NSRect frame = NSMakeRect(0, 0, overlayW, overlayH);
     
-    // Set TextView Properties
-    newPanel = [[NSTextView alloc] initWithFrame:textFrame];
-    [newPanel setTextColor:[NSColor whiteColor]];
-    [newPanel setEditable:NO];
-    [newPanel setFont:[_fonts objectForKey:@"header"]];
-    [newPanel setAlignment: NSCenterTextAlignment];
+    NSWindow *overlayWindow = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+    overlayWindow.hasShadow = YES;
+    [overlayWindow.contentView addSubview:gpc.view];
     
-    newPanel.backgroundColor = _backgroundColor;
-    
-    NSShadow *dropShadow = [[NSShadow alloc] init];
-    [dropShadow setShadowColor:[NSColor colorWithCalibratedRed:0.0
-                                                         green:0.0
-                                                          blue:0.0
-                                                         alpha:0.8]];
-    [dropShadow setShadowOffset:NSMakeSize(0, 4.0)];
-    [dropShadow setShadowBlurRadius:4.0];
-    
-    //[self setWantsLayer: YES];
-    [newPanel setShadow: dropShadow];
-    
-    // Add TextView to Live Map, as a subview overlay
-    [self addSubview:newPanel positioned:NSWindowAbove relativeTo:nil];
-    
-    [newPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (newPanel.frame.size.height) )];
-    
-    [newPanel setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin]; //NSViewWidthSizable
-    
-    [self hideView:newPanel];
-    
-    [_infoPanels setObject:newPanel forKey:groupId];
+    [_infoPanels setObject:overlayWindow forKey:groupId];
 }
 
 - (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {

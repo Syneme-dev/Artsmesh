@@ -107,9 +107,6 @@
     NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
     NSView *contentView = mapTab.view;
     
-    
-    NSLog(@"%f", self.tabs.bounds.size.width);
-    
     AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
     _liveMapView = mapView;
     [_liveMapView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];

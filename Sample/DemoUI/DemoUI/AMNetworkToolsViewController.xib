@@ -424,7 +424,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="EhF-kD-T50"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="traceroute" bezelStyle="inline" alignment="center" inset="2" id="E2B-TS-gCt">
+                    <buttonCell key="cell" type="inline" title="TRACEROUTE" bezelStyle="inline" alignment="center" inset="2" id="E2B-TS-gCt">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
@@ -437,7 +437,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="33" id="Tuz-J8-hJD"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="iperf" bezelStyle="inline" alignment="center" inset="2" id="jS4-uB-U96">
+                    <buttonCell key="cell" type="inline" title="IPERF" bezelStyle="inline" alignment="center" inset="2" id="jS4-uB-U96">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
@@ -474,7 +474,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="0VL-UO-Rft"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="ping" bezelStyle="inline" alignment="center" inset="2" id="nC0-vp-2hI">
+                    <buttonCell key="cell" type="inline" title="PING" bezelStyle="inline" alignment="center" inset="2" id="nC0-vp-2hI">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
@@ -487,7 +487,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="33" id="neM-z1-fAe"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="log" bezelStyle="inline" alignment="center" inset="2" id="Z1N-LI-INV">
+                    <buttonCell key="cell" type="inline" title="LOG" bezelStyle="inline" alignment="center" inset="2" id="Z1N-LI-INV">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>

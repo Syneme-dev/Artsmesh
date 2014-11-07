@@ -572,14 +572,11 @@ AMWorldMap *worldMap;
                                     [self addOverlay:_hovGroup];
                                 }
                                 
-                                //NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
-                                //[thePanel setString:_hovGroup.groupName];
-                                NSWindow *theOverlay = [_infoPanels objectForKey:_hovGroup.groupId];
+                                AMGroupPreviewPanelView *theOverlay = [_infoPanels objectForKey:_hovGroup.groupId];
                                 
-                                if ( ![theOverlay isVisible] ) {
+                                if ( [theOverlay isHidden] ) {
                                     
                                     // Display the main group panel
-                                    //[self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
                                     [self displayGroupPreviewOverlay:_hovGroup onPixel:pixel];
                                     // If the current group is a part of a merged group, show a panel for the other group also
                                     
@@ -599,11 +596,10 @@ AMWorldMap *worldMap;
                                             }
                                             
                                             // grab the newly created info panel and manipulate it, if not done already
-                                            //thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
                                             theOverlay = [_infoPanels objectForKey:theMergedGroup.groupId];
-                                            //[thePanel setString:theMergedGroup.groupName];
-                                            if ( ![theOverlay isVisible] ) {
-                                                //[self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                            
+                                            if ( [theOverlay isHidden] ) {
+
                                                 [self displayGroupPreviewOverlay:mergedGroup onPixel:mergedPixel];
                                             }
                                         }
@@ -787,16 +783,26 @@ AMWorldMap *worldMap;
 
 - (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup onPixel:(AMPixel *) thePixel {
     AMPixel *curPixel = [_allLiveGroupPixels objectForKey:thePixel];
+    NSPoint hovPoint = [self getPortCenter:curPixel];
     
     //NSPoint windowLocation = [self convertPoint:hovPoint fromView:nil];
     NSPoint windowLocation = NSMakePoint(100, 100);
     [self convertPoint:windowLocation fromView:self];
     
+    AMGroupPreviewPanelView *previewPanelView = [_infoPanels objectForKey:theGroup.groupId];
+
+    if ( hovPoint.x > self.frame.size.width/2 ) {
+        [previewPanelView setFrameOrigin:NSMakePoint((hovPoint.x - previewPanelView.frame.size.width) - 20, hovPoint.y +20)];
+    } else {
+        [previewPanelView setFrameOrigin:NSMakePoint(hovPoint.x + 20, hovPoint.y +20)];
+    }
+    [previewPanelView setHidden:NO];
     
-    NSWindow *overlayWindow = [_infoPanels objectForKey:theGroup.groupId];
+    //NSWindow *overlayWindow = [_infoPanels objectForKey:theGroup.groupId];
     
     
     // Convert the hover coordinates to screen coordinates
+    /**
     AMLiveMapView *liveMapView = self;
     NSPoint hovPoint = [self getPortCenter:curPixel];
     NSPoint pointInWindow = [liveMapView convertPoint:hovPoint toView:nil];
@@ -820,6 +826,7 @@ AMWorldMap *worldMap;
     } else {
         [overlayWindow orderFront:self];
     }
+    **/
 }
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
@@ -853,40 +860,28 @@ AMWorldMap *worldMap;
 }
 
 - (void)hideAllPanels {
-    NSLog(@"hover exited, hide all panels now.");
     for ( id thePanel in _infoPanels ) {
-        /**
-        NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
-        if (!curPanel.isHidden) {
-            [self hideView:curPanel];
+        AMGroupPreviewPanelView *curPreviewPanel = [_infoPanels objectForKey:thePanel];
+        if ( ![curPreviewPanel isHidden] ) {
+            [curPreviewPanel setHidden:YES];
         }
-        **/
-        NSWindow *curWindow = [_infoPanels objectForKey:thePanel];
-        if ([curWindow isVisible]) {
-            [curWindow orderOut:self];
-        }
+
     }
 }
 
 - (void)addOverlay:(AMLiveGroup *) theGroup {
-    //NSLog(@"Add overlay called.");
     // Add the info panel to the map (used for displaying text on map)
-    //id pixelId = thePixel;
     
     NSString *groupId = theGroup.groupId;
     AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
     gpc.group = theGroup;
+    AMGroupPreviewPanelView *previewPanelView = (AMGroupPreviewPanelView *)gpc.view;
+    previewPanelView.groupPreviewPanelController = gpc;
     
-    double overlayW = gpc.view.frame.size.width;
-    double overlayH = gpc.view.frame.size.height;
+    [previewPanelView setHidden:YES];
+    [self addSubview:previewPanelView];
     
-    NSRect frame = NSMakeRect(0, 0, overlayW, overlayH);
-    
-    NSWindow *overlayWindow = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-    overlayWindow.hasShadow = YES;
-    [overlayWindow.contentView addSubview:gpc.view];
-    
-    [_infoPanels setObject:overlayWindow forKey:groupId];
+    [_infoPanels setObject:previewPanelView forKey:groupId];
 }
 
 - (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {

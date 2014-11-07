@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMGroupPreviewPanelController.h"
 
 @interface AMGroupPreviewPanelView : NSView
 
 @property(nonatomic) NSColor* backgroundColor;
+@property(nonatomic, weak) AMGroupPreviewPanelController *groupPreviewPanelController;
 
 @end

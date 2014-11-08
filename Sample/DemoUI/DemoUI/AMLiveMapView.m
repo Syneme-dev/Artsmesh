@@ -42,6 +42,7 @@
 @property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) NSMutableDictionary *fonts;
 @property (nonatomic) NSView *programView;
+@property (nonatomic) NSTrackingArea *mapTrackingArea;
 @property (nonatomic) AMFloatPanelViewController *floatPanelViewController;
 @property (nonatomic) AMLiveMapProgramViewController *programViewController;
 @property (nonatomic) NSWindow *programWindow;
@@ -82,7 +83,7 @@ AMWorldMap *worldMap;
 
 - (void)setup
 {
- 
+
     //Construct WorldMap and pixel arrays for assigning buttons to view
     
     //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -521,6 +522,7 @@ AMWorldMap *worldMap;
     
     NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
     [self addTrackingArea:trackingArea];
+    _mapTrackingArea = trackingArea;
     
     
     [self createProgram];
@@ -537,6 +539,16 @@ AMWorldMap *worldMap;
      selector:@selector(onTick:)
      userInfo: nil repeats:YES];
     **/
+}
+
+- (void)updateTrackingAreas {
+    [super updateTrackingAreas];
+    if (_mapTrackingArea) {
+        [self removeTrackingArea:_mapTrackingArea];
+        NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
+        _mapTrackingArea = trackingArea;
+        [self addTrackingArea:_mapTrackingArea];
+    }
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent

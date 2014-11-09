@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMAudioMixerView : NSViewController
+@interface AMAudioMixerViewController : NSViewController
 
 @end

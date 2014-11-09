@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMAudioMixerView.h"
+#import "AMAudioMixerViewController.h"
 
-@interface AMAudioMixerView ()
+@interface AMAudioMixerViewController ()
 
 @end
 
-@implementation AMAudioMixerView
+@implementation AMAudioMixerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -25,6 +25,9 @@ typedef enum {
 -(NSViewController*)getJackPrefUI;
 -(NSViewController*)getJackRouterUI;
 -(NSViewController*)getJacktripPrefUI;
+-(NSViewController*)getMixerUI;
+
+
 -(BOOL)startJack;
 -(void)stopJack;
 

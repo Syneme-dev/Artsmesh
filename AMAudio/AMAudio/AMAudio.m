@@ -13,6 +13,7 @@
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
 #import "AMJackClient.h"
+#import "AMAudioMixerViewController.h"
 
 @interface AMAudio()
 @end
@@ -25,6 +26,7 @@
     AMAudioPrefViewController* _prefController;
     AMRouteViewController* _routerController;
     AMJackTripConfigController* _jackTripController;
+    AMAudioMixerViewController* _mixerViewController;
 }
 
 +(id)sharedInstance
@@ -105,6 +107,16 @@
     }
     
     return _jackTripController;
+}
+
+-(NSViewController*)getMixerUI
+{
+    if (_mixerViewController == nil) {
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+        _mixerViewController = [[AMAudioMixerViewController alloc] initWithNibName:@"AMAudioMixerViewController" bundle:myBundle];
+    }
+    
+    return _mixerViewController;
 }
 
 -(BOOL)startJack

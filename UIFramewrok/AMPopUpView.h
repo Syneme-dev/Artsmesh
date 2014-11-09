@@ -11,7 +11,6 @@
 
 @interface AMPopUpView : NSControl
 
-@property(nonatomic) NSView *popup;
 @property NSFont* font;
 @property NSColor* textColor;
 @property NSColor* backgroupColor;
@@ -29,6 +28,7 @@
 -(void)addItemsWithTitles:(NSArray*)titles;
 
 -(void)selectItemAtIndex:(NSUInteger)index;
+-(void)selectItemWithTitle:(NSString*)title;
 -(NSUInteger)itemCount;
 
 @end

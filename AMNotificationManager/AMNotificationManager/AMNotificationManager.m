@@ -45,6 +45,8 @@ static id sharedManager = nil;
         // do work here
         NSNotification* notification = [NSNotification notificationWithName:typeName object:sender userInfo:parameters];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+       // [[NSNotificationCenter defaultCenter] postNotificationName:typeName object:nil];
     });
 }
 

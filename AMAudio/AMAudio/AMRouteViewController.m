@@ -160,6 +160,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSArray* allChann = [self.jackClient allChannels];
     
     //Remove device not exist any more
+    NSMutableArray* removedDevices = [[NSMutableArray alloc] init];
     for (AMChannel* channShow in [routeView allChannels])
     {
         if (channShow.type == AMPlaceholderChannel) {
@@ -173,8 +174,15 @@ shouldRemoveDevice:(NSString *)deviceID;
             }
         }
         if (!bFind) {
-            [routeView removeDevice:channShow.deviceID];
+            
+            if (![removedDevices containsObject:channShow.deviceID]) {
+                [removedDevices addObject:channShow.deviceID];
+            }
         }
+    }
+    
+    for (NSString* devId in removedDevices ) {
+        [routeView removeDevice:devId];
     }
     
     //Calculate new device to add
@@ -285,7 +293,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
     self.myPopover.contentViewController = controller;
-    
+    controller.owner = self.myPopover;
+
     [self.myPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
 }
 
@@ -303,5 +312,8 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
 
 }
+
+
+
 
 @end

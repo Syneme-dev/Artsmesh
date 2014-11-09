@@ -13,6 +13,7 @@
 #import "AMMesher.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMLogger/AMLogger.h"
 
 
 @interface AMLocalMesher()<AMHeartBeatDelegate>
@@ -25,6 +26,8 @@
     AMShellTask *_mesherServerTask;
     AMHeartBeat* _heartbeatThread;
     
+    NSTask *_lsTask;
+    
     int _heartbeatFailureCount;
     int _userlistVersion;
 }
@@ -33,7 +36,7 @@
 {
     if (self = [super init]) {
 
-        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
+        [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
         
@@ -56,25 +59,17 @@
 {
     if ([object isKindOfClass:[AMMesher class]]){
         
-        if ([keyPath isEqualToString:@"mesherState"]){
-            AMMesherState newState = [[change objectForKey:@"new"] intValue];
+        if ([keyPath isEqualToString:@"clusterState"]){
+            AMClusterState newState = [[change objectForKey:@"new"] intValue];
             
             switch (newState) {
-                case kMesherLocalServerStarting:
+                case kClusterServerStarting:
                     [self startLocalServer];
-                    //[self startLocalClient];
                     break;
-                case kMesherLocalClientStarting:
+                case kClusterClientRegisting:
                     [self startLocalClient];
                     break;
-                case kMesherMeshed:
-                    [self updateMyself];
-                    break;
-                case kMesherUnmeshing:
-                    [self updateMyself];
-                    [[AMMesher sharedAMMesher] setMesherState:kMesherStarted];
-                    break;
-                case kMesherStopping:
+                case kClusterStopping:
                     [self stopLocalServer];
                     [self stopLocalClient];
                     break;
@@ -92,39 +87,51 @@
 {
     [self stopLocalServer];
     
+    AMLog(kAMInfoLog, @"AMMesher", @"starting local mesher server...");
+    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config can not be nil!");
     NSString* port = config.localServerPort;
     NSString* userTimeout = config.serverHeartbeatTimeout;
 
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
+    lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
     NSString *command = [NSString stringWithFormat:
-                        // @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >LocalServer.log 2>&1 &",
                          @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
                          lanchPath,
                          port,
                          port,
                          userTimeout];
-    //system("say \"Now I'm the leader and my host name is `hostname`\"");
-    NSLog(@"command is %@", command);
-    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
-    [_mesherServerTask launch];
+    AMLog(kAMInfoLog, @"AMMesher", @"local server command is:%@", command);
+    
+    _lsTask = [[NSTask alloc] init];
+    _lsTask.launchPath = @"/bin/bash";
+    _lsTask.arguments = @[@"-c", [command copy]];
+    _lsTask.terminationHandler = ^(NSTask* t){
+        
+    };
     
     sleep(2);
     
-    [[AMMesher sharedAMMesher] setMesherState:kMesherLocalClientStarting];
+    [_lsTask launch];
     
-    [AMCoreData shareInstance].myLocalLiveGroup.longitude = @"116";
-    [AMCoreData shareInstance].myLocalLiveGroup.latitude = @"39";
+//    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
+//    [_mesherServerTask launch];
+
+    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
 
 -(void)stopLocalServer
 {
-    if (_mesherServerTask != nil){
-        [_mesherServerTask cancel];
-        _mesherServerTask = nil;
+//    if (_mesherServerTask != nil){
+//        [_mesherServerTask cancel];
+//        _mesherServerTask = nil;
+//    }
+    
+    if (_lsTask) {
+        [_lsTask terminate];
+        _lsTask = nil;
     }
     
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
@@ -154,78 +161,51 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
-            NSLog(@"will try again!");
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",
+                  error.description);
             dispatch_async(dispatch_get_main_queue(), ^{
-                //sleep(2);
+                sleep(1);
                 [self registerLocalGroup];
             });
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if (response == nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"Fatal error, register group return value is nil");
+            return;
+        }
+        
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if ([responseStr isEqualToString:@"ok"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                AMLog(kAMInfoLog, @"AMMesher", @"register group succeeded. I'm leader now!");
                 mySelf.isLeader = YES;
                 [self registerSelf];
             });
             
         }else if([responseStr isEqualToString:@"group already exist"]){
             dispatch_async(dispatch_get_main_queue(), ^{
+                AMLog(kAMInfoLog, @"AMMesher", @"group already exist, will join.");
                 mySelf.isLeader = NO;
-                 [self registerSelf];
+                [self registerSelf];
             });
             
         }else{
-            NSAssert(NO, @"local http request wrong!");
+            AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
         }
     };
     
+    AMLog(kAMInfoLog, @"AMMesher", @"registing group url is:%@",req.baseURL);
     [_httpRequestQueue addOperation:req];
 }
 
 
-//-(void)getLocalGroupInfo
-//{
-//    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-//    req.baseURL = [self httpBaseURL];
-//    req.requestPath = @"/groups/getall";
-//    req.httpMethod = @"GET";
-//    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-//        if (isCancel == YES) {
-//            return;
-//        }
-//        
-//        if (error != nil) {
-//            NSLog(@"error happened when get group info:%@", error.description);
-//            return;
-//        }
-//        
-//        NSAssert(response, @"response should not be nil without error");
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            AMLiveGroup* group = [AMLiveGroup AMGroupFromDict:(NSDictionary*)response];
-//            AMLiveGroup* localGroup =[AMCoreData shareInstance].myLocalLiveGroup;
-//            
-//            //should no need synchronized, because in main loop
-//            // @synchronized(localGroup){
-//            localGroup.groupName = group.groupName;
-//            localGroup.description = group.description;
-//            localGroup.leaderId = group.leaderId;
-//            //}
-//            
-//            [self registerSelf];
-//        });
-//    };
-//    
-//    [_httpRequestQueue addOperation:req];
-//}
-
-
 -(void)registerSelf
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"registing self to local group");
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSMutableDictionary* dict = [mySelf toDict];
     
@@ -240,25 +220,29 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@",
+                  error.description);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if(response == nil){
+            AMLog(kAMErrorLog, @"AMMesher", @"response should not be nil without error");
+            return;
+        }
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"]) {
+        if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[AMMesher sharedAMMesher] setMesherState:kMesherStarted];
+                
+                AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
+                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
                 [self startHeartbeat];
             });
-
-        }else if([responseStr isEqualToString:@"user already exist!"]){
-            NSLog(@"%@", responseStr);
+            
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"register self failed, retry");
-                //sleep(2);
+                AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
+                sleep(1);
                 [self registerSelf];
             });
         }
@@ -270,6 +254,7 @@
 
 -(void)unregisterSelf{
     
+    AMLog(kAMInfoLog, @"AMMesher", @"unregisting self from local server");
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
     AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];
@@ -288,12 +273,13 @@
         [_heartbeatThread cancel];
     }
     
+    AMLog(kAMInfoLog, @"AMMesher", @"starting send heartbeat");
+
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config can not be nil!");
     
-    NSString* localServerAddr = config.localServerIp;
+    NSString* localServerAddr = config.localServerHost.name;
     NSString* localServerPort = config.localServerPort;
-    BOOL useIpv6 = [config.useIpv6 boolValue];
+    BOOL useIpv6 = config.useIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;
@@ -307,6 +293,8 @@
 
 -(void)stopLocalClient
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"will stop local server");
+    
     if (_heartbeatThread){
         [_heartbeatThread cancel];
     }
@@ -319,86 +307,19 @@
     _httpRequestQueue = nil;
     _heartbeatThread = nil;
     
-    [[AMMesher sharedAMMesher] setMesherState:kMesherStopped];
-}
-
-
--(void)updateLocalGroup
-{
-    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    NSMutableDictionary* dict = [localGroup dictWithoutUsers];
-    
-    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/groups/update";
-    req.httpMethod = @"POST";
-    req.formData = dict;
-    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-        if (isCancel == YES) {
-            return;
-        }
-        
-        if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
-            return;
-        }
-        
-        NSAssert(response, @"response should not be nil without error");
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update group info response wrong!");
-        }
-    };
-    
-    [_httpRequestQueue addOperation:req];
-}
-
--(void)changeGroupPassword:(NSString*)newPassword password:(NSString*)oldPassword
-{
-    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    dict[@"password"] = oldPassword;
-    dict[@"newPasswrod"] = newPassword;
-    dict[@"groupId"] = localGroup.groupId;
-    
-    AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [self httpBaseURL];
-    req.requestPath = @"/groups/change_password";
-    req.formData = dict;
-    req.httpMethod = @"POST";
-    req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
-        if (isCancel == YES) {
-            return;
-        }
-        
-        if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
-            return;
-        }
-        
-        NSAssert(response, @"response should not be nil without error");
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if (![responseStr isEqualToString:@"ok"]) {
-            NSAssert(NO, @"update group password response wrong!");
-        }
-    };
-    
-    [_httpRequestQueue addOperation:req];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterStopped];
 }
 
 
 -(void)updateMyself
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server");
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
+        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
     });
     
-    
-    if([[AMMesher sharedAMMesher] mesherState] < kMesherStarted  ||
-       [[AMMesher sharedAMMesher] mesherState] >= kMesherStopping){
+    if([[AMMesher sharedAMMesher] clusterState] != kClusterStarted){
         return;
     }
     
@@ -415,17 +336,18 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when update self:%@", error.description);
             return;
         }
         
-        //NSAssert(response, @"response should not be nil without error");
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-           NSLog(@"update user info response wrong! %@", responseStr);
+            
+            AMLog(kAMErrorLog, @"AMMesher", @"update self failed: %@", responseStr);
+            return;
         }
         
-        //[[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_LOCAL];
+        AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server finished");
     };
     
     [_httpRequestQueue addOperation:req];
@@ -433,6 +355,8 @@
 
 -(void)updateGroupInfo
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"updating group infomation in local server");
+    
     [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_LOCAL];
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
@@ -448,19 +372,25 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
-            NSAssert(NO, error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when update group:%@", error.description);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
+        if (response == nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"update group return nil");
+            return;
+        }
+
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            NSLog(@"updateGroupInfo failed!");
+            
+            AMLog(kAMErrorLog, @"AMMesher", @"update group failed: %@", responseStr);
+            return;
         }
         
-       // [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGED_LOCAL];
+        AMLog(kAMInfoLog, @"AMMesher", @"updating group infomation in local server finished");
+
     };
     
     [_httpRequestQueue addOperation:req];
@@ -479,23 +409,30 @@
         }
         
         if (error != nil) {
-            NSLog(@"error happened when register group:%@", error.description);
+            AMLog(kAMErrorLog, @"AMMesher", @"error happened when request userlist:%@", error.description);
             return;
         }
         
-        NSAssert(response, @"response should not be nil without error");
-        NSLog(@"getall users return........................");
+        if (response == nil) {
+            AMLog(kAMErrorLog, @"AMMesher", @"request userlist from local server return nil");
+            return;
+        }
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
         if(err != nil){
-            NSString* errInfo = [NSString stringWithFormat:@"parse Json error:%@", err.description];
-            NSAssert(NO, errInfo);
+            AMLog(kAMErrorLog, @"AMMesher", @"userlist from local server Json error:%@", err.description);
+            return;
         }
         
         NSDictionary* result = (NSDictionary*)objects;
 
         NSDictionary* groupData = (NSDictionary*)result[@"GroupData"];
+        if([groupData isEqual:[NSNull null]]){
+            AMLog(kAMErrorLog, @"AMMesher", @"group returned from local server is null");
+            return;
+        }
+        
         AMLiveGroup* group = [AMLiveGroup AMGroupFromDict:groupData];
         
         id userArr = [result objectForKey:@"UsersData"];
@@ -517,6 +454,11 @@
             localGroup.groupId = group.groupId;
             localGroup.groupName = group.groupName;
             localGroup.description = group.description;
+            localGroup.location = group.location;
+            localGroup.longitude = group.longitude;
+            localGroup.latitude = group.latitude;
+            localGroup.fullName = group.fullName;
+            localGroup.project = group.project;
             localGroup.leaderId = group.leaderId;
             localGroup.users = users;
             
@@ -532,8 +474,7 @@
 - (NSString *)httpBaseURL
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSAssert(config, @"system config can not be nil!");
-    NSString* localServerAddr = config.localServerIp;
+    NSString* localServerAddr = config.localServerHost.name;
     NSString* localServerPort = config.localServerPort;
     
     return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
@@ -546,7 +487,6 @@
 - (NSData *)heartBeatData
 {
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    NSAssert(mySelf, @"Myself is nil");
     
     NSMutableDictionary* localHeartbeatReq = [[NSMutableDictionary alloc] init];
     [localHeartbeatReq setObject:mySelf.userid forKey:@"UserId"];
@@ -561,27 +501,33 @@
     id objects = [NSJSONSerialization JSONObjectWithData:data
                                                  options:0
                                                    error:&error];
-    NSAssert(error == nil, @"parse json data failed!");
+    if (error != nil) {
+        AMLog(kAMErrorLog, @"AMMesher", @"heartbeat from local server JSON error %@", error.description);
+        return;
+    }
     
     NSDictionary* result = (NSDictionary*)objects;
     int version = [[result objectForKey:@"Version"] intValue];
     
     if (version != _userlistVersion){
+        AMLog(kAMInfoLog, @"AMMesher", @"userlist version is old, will get a new version");
         [self requestUserList];
     }
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-//    NSString* jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"didSendData:%@", jsonStr);
+    _heartbeatFailureCount = 0;
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
-    NSLog(@"hearBeat error:%@", error.description);
+    AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to local server failed! %@", error.description);
     _heartbeatFailureCount ++;
-    //NSAssert(_heartbeatFailureCount > 5, @"heartbeat failure count is bigger than max failure count!");
+    
+    if (_heartbeatFailureCount > 5) {
+        AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server continue fail more than 5 times");
+    }
 }
 
 

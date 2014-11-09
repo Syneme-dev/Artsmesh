@@ -119,29 +119,29 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self doInit];
     
     //self.delegate = [[AMRouteViewController alloc] init];
-//   NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//   for (int i = 0; i < 4; i++) {
-//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//       channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//       channels[i] = channel;
-//   }
-//   [self associateChannels:channels
-//                withDevice:@"Device1"
-//                      name:@"abcdefghijklmnopqrstuvwxyz"
-//                 removable:NO];
+//  NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+//  for (int i = 0; i < 4; i++) {
+//      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//      channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+//      channels[i] = channel;
+//  }
+//  [self associateChannels:channels
+//               withDevice:@"Device1"
+//                     name:@"abcdefghijklmnopqrstuvwxyz"
+//                removable:NO];
+//  
+//  NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+//  for (int i = 8; i < 12; i++) {
+//      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+//      channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+//      channels2[i - 8] = channel;
+//  }
+//  [self associateChannels:channels2
+//               withDevice:@"Device2"
+//                     name:@"GarageBand"
+//                removable:YES];
 //   
-//   NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//   for (int i = 8; i < 12; i++) {
-//       AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//       channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//       channels2[i - 8] = channel;
-//   }
-//   [self associateChannels:channels2
-//                withDevice:@"Device2"
-//                      name:@"GarageBand"
-//                 removable:YES];
-//    
-//    [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
+//   [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -162,7 +162,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                 [bezierPath stroke];
                 if (channel.index == _selectedConnection[0] &&
                     peerChannle.index == _selectedConnection[1]) {
-                    bezierPath.lineWidth = 6.0;
+                    bezierPath.lineWidth = 4.0;
                     [_connectionColor setStroke];
                     [bezierPath stroke];
                 }
@@ -462,11 +462,27 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSBezierPath *)bezierPathFromChannel:(AMChannel *)channel1
                               toChannel:(AMChannel *)channel2
 {
+    NSPoint p1 = [self centerOfChannel:channel1];
+    NSPoint p2 = [self centerOfChannel:channel2];
+    NSPoint vector1 = NSMakePoint(p1.x - _center.x, p1.y - _center.y);
+    NSPoint vector2 = NSMakePoint(p2.x - _center.x, p2.y - _center.y);
+    NSPoint midVector = NSMakePoint((vector1.x + vector2.x) / 2.0,
+                                    (vector1.y + vector2.y) / 2.0);
+    CGFloat length = hypot(midVector.x, midVector.y);
+    CGFloat scaleFactor = 1.0;
+    if (length > 0.7 * _radius)
+        scaleFactor = 0.6 * _radius / length;
+    midVector.x *= scaleFactor;
+    midVector.y *= scaleFactor;
+    CGPoint cp = NSMakePoint(p1.x / 2.0 + p2.x / 2.0 - midVector.x,
+                             p1.y / 2.0 + p2.y / 2.0 - midVector.y);
+    
+    
     NSBezierPath *bezierPath = [NSBezierPath bezierPath];
-    [bezierPath moveToPoint:[self centerOfChannel:channel1]];
-    [bezierPath curveToPoint:[self centerOfChannel:channel2]
-               controlPoint1:_center
-               controlPoint2:_center];
+    [bezierPath moveToPoint:p1];
+    [bezierPath curveToPoint:p2
+               controlPoint1:cp
+               controlPoint2:cp];
     return bezierPath;
 }
 
@@ -502,12 +518,12 @@ static CGFloat kCloseButtonRadius = 6.0;
         NSBezierPath *cdLine = [NSBezierPath bezierPath];
         [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(startAngle) + _center.x,
                                         (radius - 8.0) * sin(startAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 8.0) * cos(startAngle) + _center.x,
-                                        (radius + 8.0) * sin(startAngle) + _center.y)];
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(startAngle) + _center.x,
+                                        (radius + 16.0) * sin(startAngle) + _center.y)];
         [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(endAngle) + _center.x,
                                         (radius - 8.0) * sin(endAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 8.0) * cos(endAngle) + _center.x,
-                                        (radius + 8.0) * sin(endAngle) + _center.y)];
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(endAngle) + _center.x,
+                                        (radius + 16.0) * sin(endAngle) + _center.y)];
         cdLine.lineWidth = 1.0;
         [_deviceCircleColor set];
         [cdLine stroke];
@@ -699,7 +715,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                              toChannel:peerChannle];
                 CGPathRef quartzBezierPath = [bezierPath quartzPath:NO];
                 CGPathRef hitTestArea = CGPathCreateCopyByStrokingPath(quartzBezierPath,
-                                NULL, 20.0, NSButtLineCapStyle, NSRoundLineJoinStyle, 10.0);
+                                NULL, 6.0, kCGLineCapRound, kCGLineJoinRound, 10.0);
                 CGPathRelease(quartzBezierPath);
                 if (CGPathContainsPoint(hitTestArea, NULL, p, false)) {
                     _selectedConnection[0] = channel.index;

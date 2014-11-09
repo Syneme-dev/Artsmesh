@@ -21,6 +21,7 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "UIFrameWork/AMFoundryFontView.h"
 #import "AMGroupCreateViewController.h"
+#import "CoreLocation/CoreLocation.h"
 
 @interface AMUserViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet AMCheckBoxView *groupBusyCheckbox;
@@ -28,6 +29,11 @@
 @property (weak) IBOutlet NSImageView *userStatusIcon;
 @property (weak) IBOutlet NSImageView *groupStatusIcon;
 @property (weak) IBOutlet AMFoundryFontView *groupNameField;
+@property (weak) IBOutlet AMFoundryFontView *nickNameField;
+@property (weak) IBOutlet AMFoundryFontView *fullNameField;
+@property (weak) IBOutlet AMFoundryFontView *locationField;
+@property (weak) IBOutlet AMFoundryFontView *affiliationField;
+@property (weak) IBOutlet AMFoundryFontView *biographyField;
 
 @property NSPopover *myPopover;
 
@@ -59,18 +65,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanged) name:AM_MYGROUP_CHANGED_LOCAL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mySelfChanging) name:AM_MYSELF_CHANGING_LOCAL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myselfChanged) name:AM_MYSELF_CHANGED_LOCAL object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanging) name:AM_MYGROUP_CHANGING_REMOTE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteGroupChanged) name:AM_MYGROUP_CHANGED_REMOTE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanging) name:AM_MYSELF_CHANGING_REMOTE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteMyselfChanged) name:AM_MYSELF_CHANGED_REMOTE object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userListChenged) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
     [self loadUserAvatar];
     [self loadGroupAvatar];
+    [self onUserTabClick:self.userTabButton];
 }
 
 -(void)dealloc
@@ -82,99 +83,67 @@
 {
     [self localGroupChanged];
     [self myselfChanged];
-    [self remoteGroupChanged];
-    [self remoteMyselfChanged];
-}
-
--(void)remoteGroupChanging
-{
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == NO) {
-        return;
-    }
-
-    [self.groupStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
-}
-
--(void)remoteGroupChanged
-{
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == NO) {
-        return;
-    }
-    
-    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    if (myGroup.busy) {
-        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
-    }else{
-        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
-    }
-}
-
--(void)remoteMyselfChanging
-{
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == NO) {
-        return;
-    }
-
-    [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
-}
-
--(void)remoteMyselfChanged
-{
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == NO) {
-        return;
-    }
-    
-    if (mySelf.busy) {
-        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
-    }else{
-        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
-    }
 }
 
 -(void)localGroupChanging
 {
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == YES) {
-        return;
-    }
-    
     [self.groupStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
 }
 
 -(void)localGroupChanged
 {
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.groupName forKey:Preference_Key_Cluster_Name];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.fullName forKey:Preference_Key_Cluster_FullName];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.project forKey:Preference_Key_Cluster_Project];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.location forKey:Preference_Key_Cluster_Location];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(mySelf.isOnline == YES) {
         return;
     }
-    
+
     [self loadGroupAvatar];
-    [self.groupStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+    
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if (myGroup.busy) {
+        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
+    }else if([myGroup isMeshed]){
+        [self.groupStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }else{
+        [self.groupStatusIcon setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+    }
 }
 
 -(void)mySelfChanging
 {
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == YES) {
-        return;
-    }
-    
     [self.userStatusIcon setImage:[NSImage imageNamed:@"synchronizing_icon"]];
 }
 
 -(void)myselfChanged
 {
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if(mySelf.isOnline == YES) {
-        return;
-    }
-    
     [self loadUserAvatar];
-    [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    
+    if (mySelf.busy) {
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_busy"]];
+    }else if(mySelf.isOnline){
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }else{
+        
+        [self.userStatusIcon setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    }
 }
 
 -(void)registerTabButtons{
@@ -222,11 +191,13 @@
 
 - (IBAction)onUserTabClick:(id)sender
 {
+    [self pushDownButton:self.userTabButton];
     [self.tabs selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)onGroupTabClick:(id)sender
 {
+    [self pushDownButton:self.groupTabButton];
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
@@ -234,9 +205,10 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSString *profileUrl = [NSString stringWithFormat:@"/%@", myUserName];
     if (myUserName != nil && ![myUserName isEqualToString:@""]) {
         NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 myUserName, @"UserName", nil];
+                                 profileUrl, @"ProfileUrl", nil];
         [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
     }else{
         [self PopoverUserLogonView:sender];
@@ -298,101 +270,86 @@
 
 - (IBAction)groupNameEdited:(NSTextField *)sender
 {
-    if ([sender.stringValue isEqualTo:@""]) {
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:myGroup.groupName]) {
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    group.groupName = sender.stringValue;
+    myGroup.groupName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)groupDescriptionEdited:(NSTextField *)sender
 {
-    if ([sender.stringValue isEqualTo:@""]) {
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.description]) {
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.description = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)groupFullNameEdited:(NSTextField *)sender
 {
-    if ([sender.stringValue isEqualTo:@""]) {
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.fullName]) {
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.fullName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)groupProjetctEdited:(NSTextField *)sender
 {
-    if ([sender.stringValue isEqualTo:@""]) {
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.project]) {
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     group.project= sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
 - (IBAction)groupLocationEdited:(NSTextField *)sender
 {
-    if ([sender.stringValue isEqualTo:@""]) {
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""]|| [sender.stringValue isEqualTo:myGroup.location]) {
         return;
     }
     
-    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    group.location= sender.stringValue;
-    [[AMMesher sharedAMMesher] updateGroup];
+    [self getCoordinates: sender.stringValue];
 }
 
-- (IBAction)nicknameEdited:(NSTextField *)sender
+- (void)getCoordinates:(NSString *)searchTerm
 {
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.nickName = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)locationEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.location = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)statusMessageEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.description = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
-}
-
-- (IBAction)domainEdited:(NSTextField *)sender
-{
-    if ([sender.stringValue isEqualTo:@""]) {
-        return;
-    }
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    mySelf.domain = sender.stringValue;
-    [[AMMesher sharedAMMesher] updateMySelf];
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder geocodeAddressString:searchTerm
+                 completionHandler:^(NSArray* placemarks, NSError* error){
+                     if (error) {
+                         NSLog(@"%@", error);
+                         
+                     } else if (placemarks && placemarks.count > 0) {
+                         
+                         AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                         
+                         NSLog(@"top search result is %f, %f",topResult.location.coordinate.latitude, topResult.location.coordinate.longitude);
+                         
+                         myGroup.location = searchTerm;
+                         myGroup.longitude = [NSString stringWithFormat:@"%f", topResult.location.coordinate.longitude];
+                         myGroup.latitude =  [NSString stringWithFormat:@"%f", topResult.location.coordinate.latitude];
+                         
+                         [[AMMesher sharedAMMesher] updateGroup];
+                         
+                         [[AMPreferenceManager standardUserDefaults]
+                          setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
+                         [[AMPreferenceManager standardUserDefaults]
+                          setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
+                     }
+                 }
+     ];
 }
 
 -(void)onChecked:(AMCheckBoxView*)sender
@@ -459,6 +416,122 @@
 -(void)popoverDidClose:(NSNotification *)notification
 {
     [self loadUserAvatar];
+}
+
+- (IBAction)nickNameChanged:(id)sender
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSString* nickName = self.nickNameField.stringValue;
+    
+    if([mySelf.nickName isEqualTo:nickName]){
+        return;
+    }
+    
+    if ([nickName isEqualToString:@""]) {
+        nickName = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_Key_User_NickName];
+        
+        self.nickNameField.stringValue = nickName;
+    }
+    
+    //update AMCoreData
+   
+    mySelf.nickName = nickName;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+}
+
+- (IBAction)fullNameChanged:(id)sender
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSString* fullName = self.fullNameField.stringValue;
+    
+    if ([mySelf.fullName isEqualTo:fullName]) {
+        return;
+    }
+    
+    if ([fullName isEqualToString:@""]) {
+        fullName = [[AMPreferenceManager standardUserDefaults]
+                                 stringForKey:Preference_Key_User_FullName];
+        
+        self.fullNameField.stringValue = fullName;
+    }
+    
+    //update AMCoreData
+   
+    mySelf.fullName = fullName;
+    [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+- (IBAction)locationChanged:(id)sender
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSString* location = self.locationField.stringValue;
+    
+    if ([mySelf.location isEqualTo:location]) {
+        return;
+    }
+    
+    if ([location isEqualToString:@""]) {
+        
+        location = [[AMPreferenceManager standardUserDefaults]
+                                     stringForKey:Preference_Key_User_Location];
+    
+        self.locationField.stringValue = location;
+    }
+    
+    //update AMCoreData
+
+    mySelf.location = location;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+}
+
+- (IBAction)affiliationChanged:(id)sender
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSString* affilication = self.affiliationField.stringValue;
+    
+    if ([mySelf.domain isEqualTo:affilication]) {
+        return;
+    }
+    
+    if ([affilication isEqualToString:@""]) {
+        
+        affilication = [[AMPreferenceManager standardUserDefaults]
+                                     stringForKey:Preference_Key_User_Affiliation];
+        
+        self.affiliationField.stringValue = affilication;
+    }
+    
+    //update AMCoreData
+    mySelf.domain = affilication;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
+}
+
+- (IBAction)biographyChanged:(id)sender
+{
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSString* biography = self.biographyField.stringValue;
+    
+    if ([mySelf.description isEqualTo:biography]) {
+        return;
+    }
+    
+    if ([biography isEqualToString:@""]) {
+        
+        biography = [[AMPreferenceManager standardUserDefaults]
+                                stringForKey:Preference_Key_User_Description];
+        
+        self.biographyField.stringValue = biography;
+    }
+    
+    //update AMCoreData
+    
+    mySelf.description = biography;
+    [[AMMesher sharedAMMesher] updateMySelf];
+    
 }
 
 @end

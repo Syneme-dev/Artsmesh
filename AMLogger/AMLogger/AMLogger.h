@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMLogger : NSObject
+extern NSString * const kAMDefaultLogFile;
 
-@end
+extern NSString * const kAMErrorLog;
+extern NSString * const kAMWarningLog;
+extern NSString * const kAMInfoLog;
+//extern NSString * const kAMDebugLog;
+
+BOOL AMLogInitialize(void);
+void AMLog(NSString *level, NSString *module, NSString *format, ...);
+void AMLogClose(void);
+NSString *AMLogDirectory(void);

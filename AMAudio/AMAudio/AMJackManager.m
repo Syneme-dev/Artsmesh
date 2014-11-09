@@ -7,12 +7,11 @@
 //
 
 #import "AMJackManager.h"
-#import "AMTaskLauncher/AMShellTask.h"
-
+#import "AMLogger/AMLogger.h"
 
 @implementation AMJackManager
 {
-    AMShellTask* _jackTask;
+    NSTask* _jackTask;
 }
 
 -(id)init
@@ -43,9 +42,17 @@
     int m = system("killall -0 jackdmp >/dev/null");
     if (n != 0 && m != 0) {
         NSString* command =  [self.jackCfg formatCommandLine];
-        NSLog(@"command is %@", command);
-        _jackTask = [[AMShellTask alloc] initWithCommand:command];
-         [_jackTask launch];
+        AMLog(kAMInfoLog, @"AMAudio", @"start jack commmand is: %@", command);
+    
+        _jackTask = [[NSTask alloc] init];
+        _jackTask.launchPath = @"/bin/bash";
+        _jackTask.arguments = @[@"-c", [command copy]];
+        _jackTask.terminationHandler = ^(NSTask* t){
+            
+        };
+        
+        [_jackTask launch];
+
          return YES;
      }else{
          NSNotification* notification = [[NSNotification alloc]
@@ -59,7 +66,7 @@
 
 -(void)stopJack
 {
-    [_jackTask cancel];
+    [_jackTask terminate];
     _jackTask = nil;
     
     system("killall jackd >/dev/null");
@@ -74,11 +81,13 @@
 
 -(void)jackStarted:(NSNotification*)notification
 {
+    AMLog(kAMInfoLog, @"AMAudio", @"Jack Server is started!");
     self.jackState = JackState_Started;
 }
 
 -(void)jackStopped:(NSNotification*)notification
 {
+    AMLog(kAMInfoLog, @"AMAudio", @"Jack Server is stopped!");
     self.jackState = JackState_Stopped;
 }
 

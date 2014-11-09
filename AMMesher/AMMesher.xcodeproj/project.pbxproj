@@ -33,6 +33,7 @@
 		CE0EEACF1935D63D0063EBA7 /* AMHeartBeat.h in Headers */ = {isa = PBXBuildFile; fileRef = CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */; };
 		CE0EEAD01935D63D0063EBA7 /* AMHeartBeat.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */; };
 		D4945B3E190128FE00D1233D /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */; };
+		D4B24AC019F2593800790E10 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B24ABF19F2593800790E10 /* AMLogger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +84,7 @@
 		CE0EEACD1935D63D0063EBA7 /* AMHeartBeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHeartBeat.h; sourceTree = "<group>"; };
 		CE0EEACE1935D63D0063EBA7 /* AMHeartBeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHeartBeat.m; sourceTree = "<group>"; };
 		D4945B3D190128FE00D1233D /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
+		D4B24ABF19F2593800790E10 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B24AC019F2593800790E10 /* AMLogger.framework in Frameworks */,
 				2615E9711978C15600A7CBF0 /* AMCoreData.framework in Frameworks */,
 				26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */,
 				2630E02619163B390071260C /* AMNotificationManager.framework in Frameworks */,
@@ -134,6 +137,7 @@
 		2692CD5418D7C2A2006501C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4B24ABF19F2593800790E10 /* AMLogger.framework */,
 				2615E9701978C15600A7CBF0 /* AMCoreData.framework */,
 				26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */,
 				2630E02519163B390071260C /* AMNotificationManager.framework */,

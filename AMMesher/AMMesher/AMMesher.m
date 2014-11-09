@@ -10,6 +10,7 @@
 #import "AMLocalMesher.h"
 #import "AMLeaderElecter.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMLogger/AMLogger.h"
 
 @implementation AMMesher
 {
@@ -18,32 +19,17 @@
     AMRemoteMesher* _remoteMesher;
 }
 
-- (instancetype)init
-{
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:@"unsupported initializer"
-                                 userInfo:nil];
-}
-
 +(id)sharedAMMesher
 {
     static AMMesher* sharedMesher = nil;
     @synchronized(self){
         if (sharedMesher == nil){
-            sharedMesher = [[self alloc] initMesher];
+            sharedMesher = [[self alloc] init];
+            sharedMesher.mesherState = kMesherUnmeshed;
+            sharedMesher.clusterState = kClusterStopped;
         }
     }
     return sharedMesher;
-}
-
-
--(id)initMesher
-{
-    if (self = [super init]){
-        self.mesherState = kMesherInitialized;
-    }
-    
-    return self;
 }
 
 -(void) initComponents{
@@ -63,23 +49,26 @@
 
 -(void)startMesher
 {
-    if(self.mesherState != kMesherInitialized){
+    if(self.clusterState != kClusterStopped){
         return;
     }
     
     [self initComponents];
-    self.mesherState = kMesherStarting;
+    self.clusterState = kClusterAutoDiscovering;
+    
+    AMLog(kAMInfoLog, @"AMMesher", @"Starting local server auto-discovery");
 }
 
 -(void)stopMesher
 {
-    self.mesherState = kMesherStopping;
+    self.clusterState = kClusterStopping;
+    self.mesherState = kMesherUnmeshing;
 }
 
 
 -(void)goOnline
 {
-    if (self.mesherState != kMesherStarted) {
+    if (self.clusterState != kClusterStarted) {
         return;
     }
     
@@ -88,7 +77,11 @@
 
 -(void)goOffline
 {
-    if (self.mesherState < kMesherMeshed || self.mesherState >= kMesherStopping) {
+    if (self.clusterState != kClusterStarted) {
+        return;
+    }
+    
+    if (self.mesherState != kMesherMeshed) {
         return;
     }
     
@@ -117,27 +110,24 @@
 
 -(void)updateGroup
 {
-    if (self.mesherState == kMesherStarted){
+    if(self.clusterState == kClusterStarted){
         [_localMesher updateGroupInfo];
-        
-    }else if(self.mesherState == kMesherMeshed ){
-        [_localMesher updateGroupInfo];
+    }
+    
+    if (self.mesherState == kMesherMeshed) {
         [_remoteMesher updateGroupInfo];
     }
 }
 
 -(void)updateMySelf
 {
-    if (self.mesherState == kMesherStarted)
-    {
+    if(self.clusterState == kClusterStarted){
         [_localMesher updateMyself];
-        
-    }else if(self.mesherState == kMesherMeshed){
-        
-        [_localMesher updateMyself];
-        [_remoteMesher updateMyself];
     }
     
+    if (self.mesherState == kMesherMeshed) {
+        [_remoteMesher updateMyself];
+    }
 }
 
 @end

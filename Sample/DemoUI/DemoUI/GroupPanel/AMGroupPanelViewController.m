@@ -71,6 +71,8 @@
     
     AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
     [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
+    [self liveGroupTabClick:self.liveGroupTab];
 }
 
 -(void)registerTabButtons{
@@ -250,12 +252,14 @@
 - (IBAction)staticGroupTabClick:(NSButton *)sender
 {
     [self hideDetailView];
+    [self pushDownButton:self.staticGroupTab];
     [self.groupTabView selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)liveGroupTabClick:(NSButton *)sender
 {
     [self hideDetailView];
+    [self pushDownButton:self.liveGroupTab];
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
 

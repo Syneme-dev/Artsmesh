@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelStaticUserCellController">
@@ -12,14 +13,13 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <tableCellView id="eR7-uP-duv" customClass="AMGroupPanelTableCellView">
             <rect key="frame" x="0.0" y="0.0" width="300" height="28"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-nE-53N">
                     <rect key="frame" x="4" y="7" width="14" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="14" id="3bP-Wh-P80"/>
                         <constraint firstAttribute="height" constant="14" id="raQ-K5-4Kr"/>
@@ -28,7 +28,6 @@
                 </imageView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5SE-6n-cRH" customClass="AMFoundryFontView">
                     <rect key="frame" x="24" y="6" width="193" height="17"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="N1K-P5-fha"/>
                     </constraints>
@@ -40,7 +39,6 @@
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="iYe-MO-zO1">
                     <rect key="frame" x="249" y="4" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="7Sq-cu-Yhe"/>
                         <constraint firstAttribute="height" constant="20" id="Bgd-jz-pJB"/>
@@ -55,7 +53,6 @@
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="RVB-8o-0Dg">
                     <rect key="frame" x="277" y="4" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="KgY-sa-Ylv"/>
                         <constraint firstAttribute="height" constant="20" id="Qy5-qY-vWr"/>

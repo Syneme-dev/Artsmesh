@@ -13,7 +13,7 @@
 @interface AMCheckBoxView : NSControl
 
 @property NSString* title;
-@property BOOL  checked;
+//@property BOOL  checked;
 @property NSFont* font;
 @property NSColor* textColor;
 @property NSColor* backgroupColor;
@@ -23,6 +23,9 @@
 @property BOOL drawBackground;
 
 @property id<AMCheckBoxDelegeate>delegate;
+
+-(void)setChecked:(BOOL)checked;
+-(BOOL)checked;
 
 @end
 

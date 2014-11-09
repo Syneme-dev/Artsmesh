@@ -10,12 +10,14 @@
 #import "AMCommonTools/AMCommonTools.h"
 
 @implementation AMLiveUser
+@synthesize description;
 
 -(id)init{
     
     if(self = [super init]){
         self.userid = [AMCommonTools creatUUID];
         self.domain = @"Local";
+        self.fullName = @"FullName";
         self.location = @"Local";
         self.privateIp = @"127.0.0.1";
         self.publicIp = @"127.0.0.1";
@@ -30,10 +32,12 @@
     return self;
 }
 
+
 -(NSMutableDictionary*)toDict
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     [dict setObject:self.userid forKey:@"userId"];
+    [dict setObject:self.fullName forKey:@"fullName"];
     [dict setObject:self.nickName forKey:@"nickName"];
     [dict setObject:self.domain forKey:@"domain"];
     [dict setObject:self.location forKey:@"location"];
@@ -71,6 +75,7 @@
     AMLiveUser* user = [[AMLiveUser alloc] init];
     user.userid = dict[@"UserId"];
     user.nickName = dict[@"NickName"];
+    user.fullName = dict[@"FullName"];
     user.domain = dict[@"Domain"];
     user.location = dict[@"Location"];
     user.isLeader = [dict[@"IsLeader"] boolValue];

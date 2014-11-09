@@ -11,6 +11,7 @@
 #import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMChatViewController ()
 
@@ -108,14 +109,14 @@
 
     }else{
         NSArray* newUserlist = nil;
-        NSString *mergedGroupId = [AMCoreData shareInstance].mergedGroupId;
         
-        for (AMLiveGroup* g in [AMCoreData shareInstance].remoteLiveGroups) {
-            if ([g.groupId isEqualToString:mergedGroupId]) {
-                newUserlist = g.users;
-            }
+        AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
+        if (mergedGroup == nil) {
+            newUserlist = [myGroup usersIncludeSubGroup];
+        }else{
+            newUserlist = [mergedGroup usersIncludeSubGroup];
         }
-   
+        
         for (AMLiveUser* newUser in newUserlist) {
             
             if (nil == [_localPeerSet objectForKey:newUser.userid] &&
@@ -214,7 +215,7 @@
 
 
 -(void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error{
-    NSLog(@"chat socket failed: %@", error.description);
+    AMLog(kAMErrorLog, @"AMChat", @"chat socket failed: %@", error.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
@@ -224,7 +225,7 @@
          [self showChatRecord:chatRecord];
     }
     @catch ( NSException *exception) {
-        NSLog(@"An Error packets is send to Chat module: %@", exception.description);
+        AMLog(kAMErrorLog, @"AMChat",@"An Error packets is send to Chat module: %@", exception.description);
     }
     @finally {
         //do nothing;
@@ -232,7 +233,7 @@
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didNotSendData:(NSError *)err{
-    NSLog(@"chat message did not send out: %@", err.description);
+    AMLog(kAMErrorLog, @"AMChat",@"chat message did not send out: %@", err.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveDataFromServer:(NSData *)data{

@@ -11,21 +11,29 @@
 #import "AMRouteViewController.h"
 #import "AMJacktripConfigs.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMPopUpView.h"
+#import "UIFramework/AMFoundryFontView.h"
+#import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMButtonHandler.h"
 
-@interface AMJackTripConfigController ()
-@property (weak) IBOutlet NSPopUpButton *roleSelecter;
-@property (weak) IBOutlet NSPopUpButton *peerSelecter;
-@property (weak) IBOutlet NSTextField *peerSelfDefine;
-@property (weak) IBOutlet NSPopUpButton *portOffsetSelector;
+@interface AMJackTripConfigController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
+@property (weak) IBOutlet AMPopUpView *roleSelecter;
+@property (weak) IBOutlet AMPopUpView *peerSelecter;
+@property (weak) IBOutlet AMFoundryFontView *peerAddress;
+@property (weak) IBOutlet AMFoundryFontView *peerName;
+@property (weak) IBOutlet AMPopUpView *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *qCount;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
-@property (weak) IBOutlet NSButton *zerounderrunCheck;
-@property (weak) IBOutlet NSButton *loopbackCheck;
-@property (weak) IBOutlet NSButton *jamlinkCheck;
+@property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
+@property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
+@property (weak) IBOutlet AMCheckBoxView *jamlinkCheck;
+@property (weak) IBOutlet AMCheckBoxView *ipv6Check;
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
-@property (weak) IBOutlet NSButton *userIpv6;
+@property (weak) IBOutlet NSButton *closeBtn;
+
+@property NSArray* allUsers;
 
 @end
 
@@ -40,19 +48,38 @@
     return self;
 }
 
+
 -(void)awakeFromNib
 {
+    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(jacktripChanged:)
      name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
      object:nil];
 }
 
+
+-(void)itemSelected:(AMPopUpView*)sender
+{
+    if ([sender isEqual:self.peerSelecter]) {
+        [self peerSelectedChanged:sender];
+    }
+}
+
+-(void)onChecked:(AMCheckBoxView*)sender
+{
+    
+}
+
+
 -(void)initPortOffset
 {
+    self.portOffsetSelector.delegate = self;
     [self.portOffsetSelector removeAllItems];
     
-    for (NSUInteger i = 0; i <20; i++) {
+    for (NSUInteger i = 0; i <10; i++) {
         
         BOOL inUse = NO;
         for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
@@ -67,36 +94,39 @@
             [self.portOffsetSelector addItemWithTitle:str];
         }
     }
+    
+    [self.portOffsetSelector selectItemAtIndex:0];
 }
+
 
 -(void)initParameters
 {
     //init Jacktrip role
+    self.roleSelecter.delegate = self;
     [self.roleSelecter removeAllItems];
     [self.roleSelecter addItemWithTitle:@"Server"];
     [self.roleSelecter addItemWithTitle:@"Client"];
+    [self.roleSelecter selectItemAtIndex:0];
     
     //init peers
+    self.peerSelecter.delegate = self;
     [self.peerSelecter removeAllItems];
     
-    
-    NSMutableArray* allUserList =[[NSMutableArray alloc] init];
-    
     AMCoreData* dataStore = [AMCoreData shareInstance];
-    NSArray* myLocalGroupMem = dataStore.myLocalLiveGroup.users;
-    [allUserList addObjectsFromArray:myLocalGroupMem];
-    
     AMLiveUser* mySelf = dataStore.mySelf;
-    if (mySelf.isOnline){
-        for (AMLiveGroup* remoteGroup in dataStore.remoteLiveGroups) {
-            NSString* mergedGroupId = dataStore.mergedGroupId;
-            if ([remoteGroup.groupId isEqualToString:mergedGroupId]){
-                [allUserList addObjectsFromArray:remoteGroup.users];
-            }
-        }
+    
+    if (!mySelf.isOnline)
+    {
+        self.allUsers = dataStore.myLocalLiveGroup.users;
+    }else{
+        AMLiveGroup* mergedGroup = [dataStore mergedGroup];
+        self.allUsers = [mergedGroup usersIncludeSubGroup];
     }
     
-    for (AMLiveUser* user in allUserList) {
+    int firstIndexInUserlist = -1;
+    for (int i = 0; i < [self.allUsers count]; i++) {
+        
+        AMLiveUser* user = self.allUsers[i];
         
         //Two User at most have one connection
         BOOL alreadyConnect = NO;
@@ -111,20 +141,38 @@
             continue;
         }
         
-        //Add no connection peers
         if([user.userid isNotEqualTo:mySelf.userid]){
             [self.peerSelecter addItemWithTitle:user.nickName];
-            if ([self.peerSelfDefine.stringValue isEqualToString:@""]) {
-                if (mySelf.isOnline) {
-                    self.peerSelfDefine.stringValue = user.publicIp;
-                }else{
-                    self.peerSelfDefine.stringValue = user.privateIp;
-                }
-            }
+            firstIndexInUserlist = (firstIndexInUserlist == -1)?i:firstIndexInUserlist;
         }
     }
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
+    [self.peerSelecter selectItemAtIndex:0];
+    
+    if (firstIndexInUserlist == -1) {
+        //no one add to list except ip address
+        [self.peerAddress setEnabled:YES];
+        self.peerAddress.stringValue = @"";
+        
+        [self.peerName setEnabled:YES];
+        self.peerName.stringValue = @"";
+        
+    }else{
+        //auto select a user
+        if (!mySelf.isOnline) {
+            self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
+                                            privateIp];
+        }else{
+            self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
+                                            publicIp];
+        }
+        
+        self.peerName.stringValue = [self.allUsers [firstIndexInUserlist]
+                                     nickName];
+        [self.peerAddress setEnabled:NO];
+        [self.peerName setEnabled:NO];
+    }
     
     //init channel count
     self.channeCount.stringValue = @"2";
@@ -142,103 +190,167 @@
     self.bitRateRes.stringValue = [NSString stringWithFormat:@"%d", 16];
     
     //init -z
-    [self.zerounderrunCheck setState:NSOffState];
+    self.zerounderrunCheck.delegate = self;
+    self.zerounderrunCheck.title = @"Zerounderrun (-z)";
+    [self.zerounderrunCheck setChecked:NO];
     
     //init -I
-    [self.loopbackCheck setState:NSOffState];
+    self.loopbackCheck.delegate = self;
+    self.loopbackCheck.title = @"Loopback (-l)";
+    [self.loopbackCheck setChecked:NO];
     
     //init -j
-    [self.jamlinkCheck setState:NSOffState];
+    self.jamlinkCheck.delegate = self;
+    self.jamlinkCheck.title = @"jamlink (-j)";
+    [self.jamlinkCheck setChecked:NO];
     
     //int -V
     BOOL useIpv6 = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Key_General_UseIpv6] boolValue];
     
-    if (useIpv6) {
-        [self.userIpv6 setState:NSOnState];
-    }
+    self.ipv6Check.delegate = self;
+    self.ipv6Check.title = @"use Ipv6 (-V)";
+    [self.ipv6Check setChecked:useIpv6];
+
 }
 
-- (IBAction)roleSelectedChanged:(NSPopUpButton *)sender
-{
-}
 
-- (IBAction)peerSelectedChanged:(NSPopUpButton *)sender
+- (void)peerSelectedChanged:(AMPopUpView *)sender
 {
-    if ([sender.selectedItem.title isEqualToString:@"ip address"]) {
-        [self.peerSelfDefine setEnabled:YES];
-        self.peerSelfDefine.stringValue = @"";
+    if ([self.peerSelecter.stringValue isEqualToString:@"ip address"]) {
+        
+        [self.peerAddress setEnabled:YES];
+        [self.peerName setEnabled:YES];
+        
+        self.peerAddress.stringValue = @"";
+        self.peerName.stringValue = @"";
+        
     }else{
-        [self.peerSelfDefine setEnabled:NO];
-    
-        NSArray* myGroupMem = [AMCoreData shareInstance].myLocalLiveGroup.users;
-        for (AMLiveUser* user in myGroupMem) {
-            if([user.nickName isEqualToString:sender.selectedItem.title]){
-                self.peerSelfDefine.stringValue = user.privateIp;
-            }
-        }
-    }
-}
-
-- (IBAction)startJacktrip:(NSButton *)sender
-{
-    AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
-    
-    cfgs.role = self.roleSelecter.selectedItem.title;
-    cfgs.serverAddr = self.peerSelfDefine.stringValue;
-    if([cfgs.serverAddr hasPrefix:@"["]){
-        cfgs.serverAddr = [cfgs.serverAddr substringFromIndex:1];
-    }
-    if ([cfgs.serverAddr hasSuffix:@"]"]) {
-        cfgs.serverAddr = [cfgs.serverAddr substringToIndex:cfgs.serverAddr.length - 1];
-    }
-    
-    cfgs.portOffset = self.portOffsetSelector.selectedItem.title;
-    cfgs.channelCount = self.channeCount.stringValue;
-    cfgs.qCount = self.qCount.stringValue;
-    cfgs.rCount = self.rCount.stringValue;
-    cfgs.bitrateRes = self.bitRateRes.stringValue;
-    cfgs.zerounderrun = self.zerounderrunCheck.state == NSOnState;
-    cfgs.loopback = self.loopbackCheck.state == NSOnState;
-    cfgs.jamlink = self.jamlinkCheck.state == NSOnState;
-    
-    NSString* showName;
-    if (![self.peerSelecter.selectedItem.title isEqualToString:@"ip address"]){
-        showName = self.peerSelecter.selectedItem.title;
-    }else{
-        //Two User at most have one connection
-        for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
-            if ([self.peerSelfDefine.stringValue isEqualToString:jacktrip.instanceName]){
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Duplicate Connection!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You've already start a jacktrip for that ip!"];
-                [alert runModal];
-                return;
+        [self.peerAddress setEnabled:NO];
+        [self.peerName setEnabled:NO];
+        
+        AMCoreData* sharedStore = [AMCoreData shareInstance];
+        AMLiveUser* mySelf = sharedStore.mySelf;
+        
+        for (AMLiveUser* user in self.allUsers) {
+            
+            if([user.nickName isEqualToString:self.peerSelecter.stringValue]){
+                
+                if(!mySelf.isOnline){
+                    self.peerAddress.stringValue = user.privateIp;
+                }else{
+                    self.peerAddress.stringValue = user.publicIp;
+                }
+                
+                break;
             }
         }
         
-        showName = self.peerSelfDefine.stringValue;
+        self.peerName.stringValue = self.peerSelecter.stringValue;
+    }
+}
+
+-(BOOL)checkouJacktripParams
+{
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"Server"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"Client"]) {
+        return NO;
     }
     
-    cfgs.clientName = showName;
-    cfgs.useIpv6 = self.userIpv6.state == NSOnState;
+    if ([self.roleSelecter.stringValue isEqualTo:@"Server"]){
+        if ([self.peerName.stringValue isEqualTo:@""]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
+            [alert runModal];
+            return NO;
+        }
+        
+    }else if([self.roleSelecter.stringValue isEqualTo:@"Client"]||
+             [self.peerAddress.stringValue isEqualTo:@""]){
+        if([self.peerName.stringValue isEqualTo:@""]){
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];
+            [alert runModal];
+            return NO;
+        }
+    }
+
+    //check illegal ip address
+    //TODO:
     
+    if ([self.channeCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"channel count parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
+    if([self.qCount.stringValue intValue] <= 0){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"qcount parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
+    if ([self.rCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
+    if ([self.bitRateRes.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"bitRateRes parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
+    for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
+        if([jacktrip.instanceName isEqualToString:self.peerName.stringValue]){
+            
+            NSAlert *alert = [NSAlert alertWithMessageText:@"duplicate user!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Already have one jacktrip connection with that user."];
+            [alert runModal];
+            return NO;
+        }
+    }
+    
+    //check channel count;
     int totalChannels = 0;
     for (AMJacktripInstance* instance in self.jacktripManager.jackTripInstances){
         totalChannels += instance.channelCount;
     }
     
-    if (self.maxChannels < totalChannels + [cfgs.channelCount intValue]) {
+    if (self.maxChannels < totalChannels + [self.channeCount.stringValue intValue]) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Too many channels" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There are already too many channels, you must close some deviecs!"];
         [alert runModal];
+        return NO;
+    }
+
+    return YES;
+}
+
+- (IBAction)startJacktrip:(NSButton *)sender
+{
+    if (![self checkouJacktripParams]) {
         return;
     }
     
+    AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
+    
+    cfgs.role = self.roleSelecter.stringValue;
+    cfgs.serverAddr = self.peerAddress.stringValue;
+    cfgs.portOffset = self.portOffsetSelector.stringValue;
+    cfgs.channelCount = self.channeCount.stringValue;
+    cfgs.qCount = self.qCount.stringValue;
+    cfgs.rCount = self.rCount.stringValue;
+    cfgs.bitrateRes = self.bitRateRes.stringValue;
+    cfgs.zerounderrun = self.zerounderrunCheck.checked;
+    cfgs.loopback = self.loopbackCheck.checked;
+    cfgs.jamlink = self.jamlinkCheck.checked;
+    cfgs.clientName = self.peerName.stringValue;
+    cfgs.useIpv6 = self.ipv6Check.checked;
+    
     if(![self.jacktripManager startJacktrip:cfgs]){
-        //should tell user the error, will remove the exception later
-        NSException* exp = [[NSException alloc]
-                            initWithName:@"start jacktrip failed!"
-                            reason:@"maybe port conflict"
-                            userInfo:nil];
-        [exp raise];
+       
+        NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
+        [alert runModal];
     }
+    
+    [self.owner performClose:nil];
 }
 
 -(void)jacktripChanged:(NSNotification*)notification
@@ -247,5 +359,9 @@
     [self initPortOffset];
 }
 
+- (IBAction)closeClicked:(NSButton *)sender
+{
+    [self.owner performClose:nil];
+}
 
 @end

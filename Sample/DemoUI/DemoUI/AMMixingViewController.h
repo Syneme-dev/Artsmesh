@@ -11,9 +11,9 @@
 #import <UIFramework/AMBlueButton.h>
 
 @interface AMMixingViewController : AMTabPanelViewController
-@property (strong) IBOutlet AMBlueButton *audioTab;
-@property (strong) IBOutlet AMBlueButton *videoTab;
-@property (strong) IBOutlet AMBlueButton *outputTab;
+@property (strong) IBOutlet NSButton *audioTab;
+@property (strong) IBOutlet NSButton *videoTab;
+@property (strong) IBOutlet NSButton *outputTab;
 - (IBAction)onAudioTabClick:(id)sender;
 - (IBAction)onVideoTabClick:(id)sender;
 - (IBAction)onOutputTabClick:(id)sender;

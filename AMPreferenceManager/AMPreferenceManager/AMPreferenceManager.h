@@ -20,17 +20,19 @@
 
 //UserInfo
 #define Preference_Key_User_NickName            @"Preference_Key_User_NickName"
-#define Preference_Key_User_Domain              @"Preference_Key_User_Domain"
+#define Preference_Key_User_Affiliation         @"Preference_Key_User_Affiliation"
 #define Preference_Key_User_Location            @"Preference_Key_User_Location"
 #define Preference_Key_User_FullName            @"Preference_Key_User_FullName"
 #define Preference_Key_User_Description         @"Preference_Key_User_Description"
-#define Preference_Key_User_Project             @"Preference_Key_User_Project"
 #define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
+
 #define Preference_Key_Cluster_Name             @"Preference_Key_Cluster_Name"
 #define Preference_Key_Cluster_Description      @"Preference_Key_Cluster_Description"
 #define Preference_Key_Cluster_FullName         @"Preference_Key_Cluster_FullName"
 #define Preference_Key_Cluster_Project          @"Preference_Key_Cluster_Project"
 #define Preference_Key_Cluster_Location         @"Preference_Key_Cluster_Location"
+#define Preference_Key_Cluster_Longitude        @"Preference_Key_Cluster_Longitude"
+#define Preference_Key_Cluster_Latitude         @"Preference_Key_Cluster_Latitude"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
@@ -38,30 +40,33 @@
 #define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
 //default
-#define Preference_User_Domain              @"CCOM"
-#define Preference_User_Description         @"This is my description."
+#define Preference_User_Affiliation         @"YourAffiliation"
+#define Preference_User_Description         @"This is my biography."
 #define Preference_User_Status              @"Online"
-#define Preference_User_Project             @"Synema.Asia"
-#define Preference_User_Location            @"BeiJing"
-#define Preference_User_NickName            @"NickName"
-#define Preference_User_FullName            @"Music Art"
+#define Preference_User_Location            @"YourLocation"
+#define Preference_User_NickName            @"YourNickName"
+#define Preference_User_FullName            @"YourFullName"
 
-#define Preference_General_ChatPort         @"55523"
+#define Preference_General_ChatPort         @"22260"
 #define Preference_User_PrivateIp           @""
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
 #define Preference_Cluster_Name             @"LocalGroup"
 #define Preference_Cluster_Description      @"There is no description of the group"
 #define Preference_Cluster_FullName         @"Full Name"
-#define Preference_Cluster_Location         @"Location"
+#define Preference_Cluster_Location         @"Beijing"
+#define Preference_Cluster_Longitude        @"116"
+#define Preference_Cluster_Latitude         @"39"
 #define Preference_Cluster_Project          @"Project"
 
-#define Preference_General_StunServerAddr   @"123.124.145.254"
+#define Preference_General_StunServerAddr   @"Artsmesh.io"
 #define Preference_General_StunServerPort   @"22250"
-#define Preference_General_GlobalServerAddr   @"123.124.145.254"
+#define Preference_General_GlobalServerAddr   @"Artsmesh.io"
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"9090"
 #define Preference_General_TopControlBar   @"YES"
+
+#define Preference_StatusNet_URL            @"http://artsmesh.io"
 
 #define UserData_Key_OpenedPanel    @"UserData_Key_OpenedPanel"
 

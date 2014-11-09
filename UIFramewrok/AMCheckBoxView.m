@@ -13,6 +13,9 @@
 @end
 
 @implementation AMCheckBoxView
+{
+    BOOL _checked;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -96,6 +99,18 @@
     if (self.delegate) {
         [self.delegate onChecked:self];
     }
+}
+
+
+-(void)setChecked:(BOOL)checked
+{
+    _checked = checked;
+    [self setNeedsDisplay];
+}
+
+-(BOOL)checked
+{
+    return _checked;
 }
 
 @end

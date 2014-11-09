@@ -88,26 +88,21 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
-    if (self.popUpMenuController == nil) {
-        return;
-    }
-    
-    if (self.popup) {
-        [self.popup removeFromSuperview];
-        self.popup = nil;
+    NSView *popUpView = [self popUpMenuController].view;
+    if (popUpView.superview) {
+        [popUpView removeFromSuperview];
         return;
     }
     
     //CGFloat menuHeight = [self.popUpMenuController menuHeight];
-    CGFloat menuHeight = [self popUpMenuController].view.frame.size.height;
+    CGFloat menuHeight = popUpView.frame.size.height;
     
     NSRect rect = self.frame;
     rect.origin.y = rect.origin.y - menuHeight;
     rect.size.height = menuHeight;
 
-    [self.superview addSubview:[self popUpMenuController].view];
-    self.popup = [self popUpMenuController].view;
-    [self.popUpMenuController.view setFrame:rect];
+    [self.superview addSubview:popUpView];
+    [popUpView setFrame:rect];
     [self.superview setNeedsDisplay:YES];
 }
 
@@ -130,11 +125,12 @@
 
 -(void)itemSelected:(NSString *)itemTitle
 {
+    NSString* oldTitle = _title;
     _title = itemTitle;
     [self removePopUpMenu];
     [self setNeedsDisplay:YES];
     
-    if (self.delegate) {
+    if (self.delegate && [oldTitle isNotEqualTo:_title]) {
         [self.delegate itemSelected:self];
     }
 }
@@ -182,10 +178,6 @@
 
 -(void)removePopUpMenu
 {
-    if (self.popUpMenuController == nil) {
-        return;
-    }
-    
     [self.popUpMenuController.view removeFromSuperview];
 }
 
@@ -211,6 +203,12 @@
 {
     [[self popUpMenuController] selectItemAtInedex:index];
 }
+
+-(void)selectItemWithTitle:(NSString*)title
+{
+    [[self popUpMenuController] selectItemWithTitle:title];
+}
+
 
 -(NSUInteger)itemCount
 {

@@ -9,7 +9,11 @@
 #import "AMLiveGroup.h"
 #import "AMLiveUser.h"
 
+@interface AMLiveGroup()
+@end
+
 @implementation AMLiveGroup
+@synthesize description;
 
 -(NSMutableDictionary*)dictWithoutUsers
 {
@@ -43,8 +47,8 @@
     group.fullName = dict[@"FullName"];
     group.project = dict[@"Project"];
     group.location = dict[@"Location"];
-    group.longitude = dict[@"longitude"];
-    group.latitude = dict[@"latitude"];
+    group.longitude = dict[@"Longitude"];
+    group.latitude = dict[@"Latitude"];
     group.busy = [dict[@"Busy"] boolValue];
     group.password = @"";
     return group;
@@ -71,6 +75,28 @@
     }
     
     return nil;
+}
+
+-(NSArray*)usersIncludeSubGroup;
+{
+    return [self getAllUserFromGroup:self];
+}
+
+
+-(NSArray*)getAllUserFromGroup:(AMLiveGroup*)group
+{
+    NSMutableArray* allUsers = [[NSMutableArray alloc] init];
+    [allUsers addObjectsFromArray:group.users];
+    
+    if (group.subGroups == nil) {
+        return allUsers;
+    }
+    
+    for (AMLiveGroup* subg in group.subGroups) {
+        [allUsers addObjectsFromArray:[self getAllUserFromGroup:subg]];
+    }
+    
+    return allUsers;
 }
 
 

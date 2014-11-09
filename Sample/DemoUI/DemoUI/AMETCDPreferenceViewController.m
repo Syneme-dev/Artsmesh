@@ -65,7 +65,7 @@
     self.ipPopUpView.delegate = self;
     
     [self loadPrefViews];
-    
+    [self onGeneralClick:self.generalTabButton];
 }
 
 
@@ -99,6 +99,7 @@
 
 
 - (IBAction)onJackServerTabClick:(id)sender {
+    [self pushDownButton:self.jackServerTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
 
@@ -133,12 +134,14 @@
 
 
 - (IBAction)onGeneralClick:(id)sender {
-      [self.tabs selectTabViewItemWithIdentifier:@"0"];
+    [self pushDownButton:self.generalTabButton];
+    [self.tabs selectTabViewItemWithIdentifier:@"0"];
 }
 
 
 - (IBAction)onStatusNetClick:(id)sender {
-     [self.tabs selectTabViewItemWithIdentifier:@"6"];
+    [self pushDownButton:self.statusnetTabButton];
+    [self.tabs selectTabViewItemWithIdentifier:@"6"];
 }
 
 
@@ -274,6 +277,23 @@
 }
 
 
+-(void)changeMesherServerToIpv6:(BOOL)isIpv6{
+    NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+    NSString* gAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
+    if(![AMCommonTools isValidIpv4:gAddr] && ![AMCommonTools isValidIpv6:gAddr]){
+        if (isIpv6) {
+            gAddr = [NSString stringWithFormat:@"ipv6.%@", gAddr];
+        }else{
+            if ([gAddr hasPrefix:@"ipv6"]) {
+                gAddr = [gAddr substringFromIndex:5];
+            }
+        }
+        
+        [defaults setObject:gAddr forKey:Preference_Key_General_GlobalServerAddr];
+    }
+}
+
+
 -(void)onChecked:(AMCheckBoxView *)sender
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -288,8 +308,10 @@
         
         if(sender.checked){
             [self loadIpv6];
+            [self changeMesherServerToIpv6:YES];
         }else{
             [self loadIpv4];
+            [self changeMesherServerToIpv6:NO];
         }
     }
 }

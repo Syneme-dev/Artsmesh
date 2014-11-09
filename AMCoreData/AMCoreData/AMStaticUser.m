@@ -9,6 +9,7 @@
 #import "AMStaticUser.h"
 
 @implementation AMStaticUser
+@synthesize description;
 
 +(AMStaticUser*)staticUserFromDict:(NSDictionary*)dict
 {

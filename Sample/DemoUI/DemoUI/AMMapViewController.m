@@ -57,6 +57,9 @@
     [self.webView setDrawsBackground:NO];
     [self loadLivePage];
     [self loadArchivePage];
+    [AMButtonHandler changeTabTextColor:self.staticTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.liveTab toColor:UI_Color_blue];
+    [self liveTabClick:self.liveTab];
 }
 
 -(void)registerTabButtons{
@@ -103,9 +106,6 @@
 
     NSTabViewItem *mapTab = [self.tabs tabViewItemAtIndex:0];
     NSView *contentView = mapTab.view;
-    
-    
-    NSLog(@"%f", self.tabs.bounds.size.width);
     
     AMLiveMapView *mapView = [[AMLiveMapView alloc] initWithFrame:self.view.bounds];
     _liveMapView = mapView;
@@ -182,10 +182,11 @@
 }
 
 - (IBAction)onStaticTabClick:(id)sender {
+    [self pushDownButton:self.staticTab];
     [self.tabs selectTabViewItemAtIndex:1];
-
 }
 - (IBAction)liveTabClick:(id)sender {
+    [self pushDownButton:self.liveTab];
     [self.tabs selectTabViewItemAtIndex:0];
 }
 @end

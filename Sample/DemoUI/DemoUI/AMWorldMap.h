@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, mapState) {
+    overView,
+    programView,
+    videoView
+};
+
 @interface AMWorldMap : NSObject
 
 @property (nonatomic) NSInteger current_resolution;
@@ -23,6 +29,8 @@
 @property (nonatomic, assign) NSInteger tileHeight;
 
 @property (nonatomic, assign) NSInteger numGroups;
+
+@property (nonatomic) mapState state;
 
 - (id)init;
 

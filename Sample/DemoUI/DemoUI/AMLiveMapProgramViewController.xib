@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMLiveMapProgramViewController">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY" userLabel="Live Map Program View" customClass="AMLiveMapProgramView">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="92"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3jj-l6-Zle" userLabel="Group Full Name" customClass="AMFoundryFontView">
+                    <rect key="frame" x="20" y="20" width="360" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="lgx-Ak-rmA">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.fullName" id="4A5-MJ-lCx"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="21F-Ax-VhK" userLabel="Project Title" customClass="AMFoundryFontView">
+                    <rect key="frame" x="20" y="50" width="360" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="pQa-ox-zTm"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="9lN-vn-53f">
+                        <font key="font" metaFont="system" size="18"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.group.project" id="48h-zv-ifu"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="21F-Ax-VhK" firstAttribute="top" secondItem="3jj-l6-Zle" secondAttribute="bottom" constant="-52" id="0Bt-CJ-RMc"/>
+                <constraint firstItem="3jj-l6-Zle" firstAttribute="leading" secondItem="21F-Ax-VhK" secondAttribute="leading" id="CqX-dZ-g5h"/>
+                <constraint firstAttribute="trailing" secondItem="3jj-l6-Zle" secondAttribute="trailing" constant="22" id="MNk-5P-Bb1"/>
+                <constraint firstItem="3jj-l6-Zle" firstAttribute="trailing" secondItem="21F-Ax-VhK" secondAttribute="trailing" id="TeA-Ui-Eai"/>
+                <constraint firstItem="21F-Ax-VhK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="ZJM-Bo-YVk"/>
+                <constraint firstItem="3jj-l6-Zle" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="22" id="uBg-yw-qMV"/>
+            </constraints>
+            <point key="canvasLocation" x="234" y="65"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="ouD-c2-QVY"/>
+    </objects>
+</document>

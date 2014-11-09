@@ -44,7 +44,7 @@
     NSString* myGroupId = [AMCoreData shareInstance].myLocalLiveGroup.groupId;
     BOOL isMyGroup = [myGroupId isEqualToString:self.group.groupId];
     
-    NSString* myMergedGroupId = [AMCoreData shareInstance].mergedGroupId;
+    NSString* myMergedGroupId = [[AMCoreData shareInstance] mergedGroup].groupId;
     BOOL isMyMergedGroup = [myMergedGroupId isEqualToString:self.group.groupId];
     
     if ( isMyGroup || isMyMergedGroup) {

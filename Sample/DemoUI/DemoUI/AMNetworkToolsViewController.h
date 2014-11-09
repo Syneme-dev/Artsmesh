@@ -9,12 +9,23 @@
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
 
+@class AMLogReader;
+
 @interface AMNetworkToolsViewController : AMTabPanelViewController<NSTableViewDelegate, NSTableViewDataSource>
+- (IBAction)showErrorLog:(id)sender;
+- (IBAction)showWarningLog:(id)sender;
+- (IBAction)showInfoLog:(id)sender;
 
 @property (weak) IBOutlet NSButton *pingButton;
 @property (weak) IBOutlet NSButton *tracerouteButton;
 @property (weak) IBOutlet NSButton *iperfButton;
 @property (weak) IBOutlet NSTabView *tabView;
+@property (weak) IBOutlet NSButton *logButton;
+
+
+@property (weak) IBOutlet NSComboBox *logFileCombo;
+@property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
+@property (weak)                IBOutlet NSButton*      fullLog;
 
 @property (weak) IBOutlet NSTableView *pingTableView;
 @property (unsafe_unretained) IBOutlet NSTextView *pingContentView;
@@ -25,5 +36,12 @@
 - (IBAction)ping:(id)sender;
 - (IBAction)traceroute:(id)sender;
 - (IBAction)iperf:(id)sender;
+- (IBAction)log:(id)sender;
 
+
+
+-(void) showLog;
+-(void) showLogFromTail;
+-(void) showFullLog;
+-(void) handleNextLogTimer:(NSTimer*) timer;
 @end

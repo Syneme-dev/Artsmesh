@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMFloatPanelViewController">
+            <connections>
+                <outlet property="closeBtn" destination="PFq-T7-YMG" id="H6V-od-c08"/>
+                <outlet property="closePanel" destination="PFq-T7-YMG" id="MCS-9R-YsY"/>
+                <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
+                <outlet property="panelTop" destination="fvD-YA-Ec9" id="TUg-ie-6hF"/>
+                <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
+                <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
+                <outlet property="view" destination="1" id="WXf-WG-A9M"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="1" customClass="AMFloatPanelView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ksy-Yh-CFv" customClass="BlueBackgroundView">
+                    <rect key="frame" x="0.0" y="559" width="600" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="1N4-EQ-DLD"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="fvD-YA-Ec9" userLabel="Top" customClass="AMFloatControlView">
+                    <rect key="frame" x="0.0" y="580" width="600" height="20"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">
+                            <rect key="frame" x="10" y="2" width="180" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="176" id="wyr-qz-tC2"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="title" id="cD7-bR-cVw">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" red="0.88235294117647056" green="0.15294117647058825" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="self.panelTitle" id="Ibg-f6-yQc"/>
+                            </connections>
+                        </textField>
+                        <button identifier="closeBtn" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
+                            <rect key="frame" x="580" y="2" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="mbC-zq-fMQ"/>
+                                <constraint firstAttribute="height" constant="16" id="mfq-Uw-HWT"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_close" imagePosition="only" alignment="center" alternateImage="panel_close_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="closePanel:" target="-2" id="910-zG-81m"/>
+                            </connections>
+                        </button>
+                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="fullscreen">
+                            <rect key="frame" x="554" y="2" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="TSQ-hv-P39"/>
+                                <constraint firstAttribute="width" constant="16" id="VBF-i6-gvG"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_fullScreen" imagePosition="only" alignment="center" alternateImage="panel_fullScreen_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Drv-GT-vZ1"/>
+                        <constraint firstItem="XMe-0f-woX" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="ERd-65-SXe"/>
+                        <constraint firstItem="PFq-T7-YMG" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cBq-Mq-Dzy"/>
+                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="XMe-0f-woX" secondAttribute="trailing" constant="10" symbolic="YES" id="cuB-Iy-kpr"/>
+                        <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="4" id="fUz-xV-zi7"/>
+                        <constraint firstItem="dZ9-KQ-hje" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="1" id="nJS-za-g3e"/>
+                        <constraint firstItem="dZ9-KQ-hje" firstAttribute="leading" secondItem="fvD-YA-Ec9" secondAttribute="leading" constant="12" id="sO1-G2-RMk"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fvD-YA-Ec9" secondAttribute="trailing" id="1kz-FY-IF3"/>
+                <constraint firstAttribute="trailing" secondItem="Ksy-Yh-CFv" secondAttribute="trailing" id="SIG-Nz-Pu0"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ZLC-p9-POz"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="bottom" constant="20" id="cI4-dK-hIY"/>
+                <constraint firstItem="fvD-YA-Ec9" firstAttribute="top" secondItem="1" secondAttribute="top" id="kov-vW-jW2"/>
+                <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yp8-BK-kH4"/>
+            </constraints>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="X2E-dC-fbD"/>
+    </objects>
+    <resources>
+        <image name="panel_close" width="15" height="15"/>
+        <image name="panel_close_h" width="15" height="15"/>
+        <image name="panel_fullScreen" width="15" height="15"/>
+        <image name="panel_fullScreen_h" width="15" height="15"/>
+    </resources>
+</document>

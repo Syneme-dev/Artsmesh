@@ -20,12 +20,12 @@
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ocR-jC-4Aa" customClass="AMFoundryFontView">
                     <rect key="frame" x="10" y="11" width="130" height="12"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" state="on" id="1Ub-EE-Wkr">
-                        <font key="font" size="12" name="FoundryMonoline-RegItalic"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.group.description" id="Qbo-zN-O5b"/>
+                        <binding destination="-2" name="value" keyPath="self.groupDesc" id="Dgw-7Y-8ls"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxI-3R-7wX" customClass="AMFoundryFontView">

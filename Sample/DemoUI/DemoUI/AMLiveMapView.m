@@ -503,6 +503,7 @@ AMWorldMap *worldMap;
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:13.0], @"13",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0], @"small-italic",
               nil];
     
     _programView = [[AMLiveMapProgramView alloc] init];
@@ -870,6 +871,13 @@ AMWorldMap *worldMap;
     NSString *groupId = theGroup.groupId;
     AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
     gpc.group = theGroup;
+    
+    NSFont* textFieldFont =  [_fonts objectForKey:@"small-italic"];
+    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
+    NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    gpc.groupDesc = groupDesc;
+
+    
     AMGroupPreviewPanelView *previewPanelView = (AMGroupPreviewPanelView *)gpc.view;
     previewPanelView.groupPreviewPanelController = gpc;
     previewPanelView.group = theGroup;

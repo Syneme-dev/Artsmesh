@@ -24,6 +24,16 @@
 		26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */; };
 		26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */; };
 		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
+		4AC8A2491A1046BE006E534A /* AMVolumeBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2471A1046BE006E534A /* AMVolumeBar.h */; };
+		4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2481A1046BE006E534A /* AMVolumeBar.m */; };
+		4AC8A24D1A104E01006E534A /* AMVolumeCtlView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */; };
+		4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */; };
+		4AC8A2511A1059AE006E534A /* AMArtsmeshClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A24F1A1059AE006E534A /* AMArtsmeshClient.h */; };
+		4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2501A1059AE006E534A /* AMArtsmeshClient.m */; };
+		4AC8A2551A105AB1006E534A /* AMJackPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2531A105AB1006E534A /* AMJackPort.h */; };
+		4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2541A105AB1006E534A /* AMJackPort.m */; };
+		4AC8A2591A105AF3006E534A /* AMJackHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2571A105AF3006E534A /* AMJackHelper.h */; };
+		4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2581A105AF3006E534A /* AMJackHelper.m */; };
 		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
 		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
 		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
@@ -118,6 +128,16 @@
 		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackTripConfigController.m; path = AMAudio/AMJackTripConfigController.m; sourceTree = "<group>"; };
 		26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMJackTripConfigController.xib; path = AMAudio/AMJackTripConfigController.xib; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
+		4AC8A2471A1046BE006E534A /* AMVolumeBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVolumeBar.h; sourceTree = "<group>"; };
+		4AC8A2481A1046BE006E534A /* AMVolumeBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVolumeBar.m; sourceTree = "<group>"; };
+		4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVolumeCtlView.h; sourceTree = "<group>"; };
+		4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVolumeCtlView.m; sourceTree = "<group>"; };
+		4AC8A24F1A1059AE006E534A /* AMArtsmeshClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArtsmeshClient.h; sourceTree = "<group>"; };
+		4AC8A2501A1059AE006E534A /* AMArtsmeshClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArtsmeshClient.m; sourceTree = "<group>"; };
+		4AC8A2531A105AB1006E534A /* AMJackPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackPort.h; sourceTree = "<group>"; };
+		4AC8A2541A105AB1006E534A /* AMJackPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackPort.m; sourceTree = "<group>"; };
+		4AC8A2571A105AF3006E534A /* AMJackHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackHelper.h; sourceTree = "<group>"; };
+		4AC8A2581A105AF3006E534A /* AMJackHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackHelper.m; sourceTree = "<group>"; };
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -251,6 +271,16 @@
 				0198A7971A0F2264009A36CA /* AMAudioMixerViewController.h */,
 				0198A7981A0F2264009A36CA /* AMAudioMixerViewController.m */,
 				0198A7991A0F2264009A36CA /* AMAudioMixerViewController.xib */,
+				4AC8A2471A1046BE006E534A /* AMVolumeBar.h */,
+				4AC8A2481A1046BE006E534A /* AMVolumeBar.m */,
+				4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */,
+				4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */,
+				4AC8A24F1A1059AE006E534A /* AMArtsmeshClient.h */,
+				4AC8A2501A1059AE006E534A /* AMArtsmeshClient.m */,
+				4AC8A2531A105AB1006E534A /* AMJackPort.h */,
+				4AC8A2541A105AB1006E534A /* AMJackPort.m */,
+				4AC8A2571A105AF3006E534A /* AMJackHelper.h */,
+				4AC8A2581A105AF3006E534A /* AMJackHelper.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -373,6 +403,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC8A2511A1059AE006E534A /* AMArtsmeshClient.h in Headers */,
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
 				CE151F3219B01372002D2AD4 /* thread.h in Headers */,
@@ -385,6 +416,7 @@
 				CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */,
 				26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */,
 				CE151F2919B01372002D2AD4 /* intclient.h in Headers */,
+				4AC8A2551A105AB1006E534A /* AMJackPort.h in Headers */,
 				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
@@ -395,14 +427,17 @@
 				CE151F2C19B01372002D2AD4 /* midiport.h in Headers */,
 				CE29B4E319BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h in Headers */,
 				CE151F2E19B01372002D2AD4 /* ringbuffer.h in Headers */,
+				4AC8A24D1A104E01006E534A /* AMVolumeCtlView.h in Headers */,
 				CE151F2A19B01372002D2AD4 /* jack.h in Headers */,
 				CE151F3019B01372002D2AD4 /* statistics.h in Headers */,
+				4AC8A2591A105AF3006E534A /* AMJackHelper.h in Headers */,
 				0198A79A1A0F2264009A36CA /* AMAudioMixerViewController.h in Headers */,
 				26F2C30E19B9FD61001261F0 /* AMJackTripConfigController.h in Headers */,
 				CE68805319B94EF20062211C /* AMChannel.h in Headers */,
 				CE151F2819B01372002D2AD4 /* control.h in Headers */,
 				CE151F3519B01372002D2AD4 /* weakjack.h in Headers */,
 				CE68805919B94F2A0062211C /* AMRouteViewController.h in Headers */,
+				4AC8A2491A1046BE006E534A /* AMVolumeBar.h in Headers */,
 				26A11B2319C143A300796327 /* AMJackManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +546,7 @@
 				D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */,
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
+				4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
 				26A11B2419C143A300796327 /* AMJackManager.m in Sources */,
 				26A11B2619C143A300796327 /* AMJacktripConfigs.m in Sources */,
@@ -518,11 +554,15 @@
 				D443717919AACED700F49705 /* AMJackClient.m in Sources */,
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,
 				CE68805419B94EF20062211C /* AMChannel.m in Sources */,
+				4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
 				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				0198A79B1A0F2264009A36CA /* AMAudioMixerViewController.m in Sources */,
+				4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */,
 				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
+				4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */,
+				4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */,
 				CE68805619B94EF20062211C /* AMRouteView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

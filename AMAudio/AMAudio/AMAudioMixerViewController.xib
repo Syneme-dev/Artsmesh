@@ -5,8 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="`">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMAudioMixerViewController">
             <connections>
+                <outlet property="channelPairCount" destination="ayW-r7-C7l" id="Rak-lW-Dj2"/>
+                <outlet property="controlView" destination="jeJ-z3-Db6" id="jGq-Bo-ofJ"/>
                 <outlet property="startMixerBtn" destination="Nu2-93-j1L" id="a2P-aT-n4x"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -125,23 +127,26 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="1" verticalPageScroll="1" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQF-g0-AuM">
-                    <rect key="frame" x="0.0" y="0.0" width="616" height="291"/>
-                    <clipView key="contentView" id="pHd-8f-44V">
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="1" verticalPageScroll="1" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQF-g0-AuM">
+                    <rect key="frame" x="0.0" y="0.0" width="616" height="320"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="pHd-8f-44V">
                         <rect key="frame" x="1" y="1" width="248" height="158"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView id="jeJ-z3-Db6">
+                            <collectionView maxNumberOfRows="1" id="jeJ-z3-Db6">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="primaryBackgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="itemPrototype" destination="Qfs-HL-dd7" id="GIp-i9-jFe"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="lwO-sr-uhD">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="320" id="4JS-ul-OzL"/>
+                    </constraints>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="lwO-sr-uhD">
                         <rect key="frame" x="1" y="144" width="233" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -152,7 +157,6 @@
                 </scrollView>
             </subviews>
             <constraints>
-                <constraint firstItem="eQF-g0-AuM" firstAttribute="top" secondItem="6Vj-IW-2IJ" secondAttribute="bottom" constant="17" id="0Ip-4N-a7W"/>
                 <constraint firstAttribute="trailing" secondItem="5wi-Ql-pGT" secondAttribute="trailing" constant="20" id="0cl-G5-0aZ"/>
                 <constraint firstItem="IPB-Ge-IRm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="46" id="2Ne-SS-eJD"/>
                 <constraint firstItem="Hj6-PV-jvX" firstAttribute="top" secondItem="V3x-6c-hqx" secondAttribute="bottom" constant="15" id="43w-op-Pef"/>
@@ -183,9 +187,48 @@
                 <outlet property="view" destination="anj-Fq-GbD" id="ZjL-KI-nf6"/>
             </connections>
         </collectionViewItem>
-        <view id="anj-Fq-GbD">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+        <view id="anj-Fq-GbD" customClass="AMVolumeCtlView">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eFa-8r-h3B">
+                    <rect key="frame" x="8" y="6" width="61" height="18"/>
+                    <buttonCell key="cell" type="check" title="mute" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FlM-sZ-qOA">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.isMute" id="pOY-Ed-DDp"/>
+                    </connections>
+                </button>
+                <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQO-vR-r8C">
+                    <rect key="frame" x="18" y="27" width="21" height="235"/>
+                    <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="right" sliderType="linear" id="kJa-uS-Bzl"/>
+                    <connections>
+                        <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.meter" id="e9R-vO-SXI"/>
+                    </connections>
+                </slider>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxU-jD-vl8">
+                    <rect key="frame" x="19" y="273" width="38" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="QcW-92-1Vj">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.name" id="M9F-Sz-FIM"/>
+                    </connections>
+                </textField>
+                <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-4R-fJD">
+                    <rect key="frame" x="36" y="27" width="21" height="235"/>
+                    <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="right" sliderType="linear" id="BBl-Cz-NP7"/>
+                    <connections>
+                        <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.volume" id="8BL-2G-9Bo"/>
+                    </connections>
+                </slider>
+            </subviews>
+            <point key="canvasLocation" x="315" y="717"/>
         </view>
+        <userDefaultsController representsSharedInstance="YES" id="JWa-jk-KSo"/>
     </objects>
 </document>

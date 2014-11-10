@@ -198,7 +198,6 @@
                     <rect key="frame" x="36" y="27" width="21" height="235"/>
                     <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="right" sliderType="linear" id="BBl-Cz-NP7"/>
                     <connections>
-                        <action selector="volumeChanged:" target="anj-Fq-GbD" id="1aL-mu-soc"/>
                         <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.volume" id="8BL-2G-9Bo"/>
                     </connections>
                 </slider>
@@ -209,7 +208,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="muteChanged:" target="anj-Fq-GbD" id="fgJ-zg-hCj"/>
                         <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.isMute" id="pOY-Ed-DDp"/>
                     </connections>
                 </button>
@@ -232,12 +230,6 @@
                     </connections>
                 </textField>
             </subviews>
-            <connections>
-                <outlet property="meterSlider" destination="nQO-vR-r8C" id="Al9-aF-R4t"/>
-                <outlet property="muteCheck" destination="eFa-8r-h3B" id="iKw-I3-re3"/>
-                <outlet property="nameField" destination="fxU-jD-vl8" id="PA8-fe-0ty"/>
-                <outlet property="volumeSlider" destination="aKu-4R-fJD" id="xsb-j6-Egd"/>
-            </connections>
             <point key="canvasLocation" x="343" y="639"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="JWa-jk-KSo"/>

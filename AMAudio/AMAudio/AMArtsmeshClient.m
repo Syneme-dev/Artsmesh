@@ -97,18 +97,18 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
     if (cl != nil) {
         for (PortPair *pp in cl.portPairs) {
             
-            if (pp.inputPort.isMute) {
-                continue;
-            }
-            
+            float peak = 0.0;
+            float vol = 0.0;
             jack_default_audio_sample_t *inbuf = jack_port_get_buffer (pp.inputPort.port_handle, nframes);
             jack_default_audio_sample_t *outbuf = jack_port_get_buffer (pp.outputPort.port_handle, nframes);
             
-            float peak = 0.0;
-            
+            if (!pp.inputPort.isMute) {
+                vol = pp.inputPort.volume;
+            }
+
             //meter * volume
             for (int i = 0; i < nframes; i++) {
-                outbuf[i] = inbuf[i] * pp.inputPort.volume;
+                outbuf[i] = inbuf[i] * vol;
                 peak = peak > outbuf[i] ? peak: outbuf[i];
             }
         }
@@ -168,7 +168,7 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
         return NO;
     }
     
-    jack_on_shutdown(_jackcl, JackShutDownCallBack, (__bridge void*)self);
+    jack_on_shutdown(_jackcl, JackShutDownCallBack, (__bridge_retained void*)self);
     
     int nRet = jack_set_client_registration_callback(_jackcl, Client_RegistrationCallBack, (__bridge void*)self);
     if (nRet != 0) {

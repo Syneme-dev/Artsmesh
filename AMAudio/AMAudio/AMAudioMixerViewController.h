@@ -10,6 +10,4 @@
 
 @interface AMAudioMixerViewController : NSViewController
 
-@property NSArray* volumebars;
-
 @end

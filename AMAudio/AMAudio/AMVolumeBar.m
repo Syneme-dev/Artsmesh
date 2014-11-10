@@ -10,4 +10,43 @@
 
 @implementation AMVolumeBar
 
+@synthesize volume;
+@synthesize isMute;
+
+-(float)volume{
+    return volume;
+}
+
+-(void)setVolume:(float)vol{
+    
+    [self willChangeValueForKey:@"volume"];
+    volume = vol;
+
+    if ([self.delegate respondsToSelector:@selector(volumeBarChanged:)]) {
+        [self.delegate volumeBarChanged:self];
+    }
+    
+    [self didChangeValueForKey:@"volume"];
+}
+
+
+-(BOOL)isMute
+{
+    return isMute;
+}
+
+-(void)setIsMute:(BOOL)mute
+{
+    [self willChangeValueForKey:@"isMute"];
+    isMute = mute;
+    
+    if ([self.delegate respondsToSelector:@selector(volumeBarChanged:)]) {
+        [self.delegate volumeBarChanged:self];
+    }
+
+    [self didChangeValueForKey:@"isMute"];
+
+}
+
+
 @end

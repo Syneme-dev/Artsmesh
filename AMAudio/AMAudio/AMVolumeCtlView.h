@@ -10,4 +10,6 @@
 
 @interface AMVolumeCtlView : NSView
 
+@property (weak) IBOutlet NSTextField *nameField;
+
 @end

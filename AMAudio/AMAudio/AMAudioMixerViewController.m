@@ -10,8 +10,9 @@
 #import "AMVolumeBar.h"
 #import "AMArtsmeshClient.h"
 #import "AMAudio.h"
+#import "AMVolumeCtlView.h"
 
-@interface AMAudioMixerViewController ()<NSCollectionViewDelegate>
+@interface AMAudioMixerViewController ()<AMVolumeBarDelegate>
 
 @property (weak) IBOutlet NSButton *startMixerBtn;
 @property (weak) IBOutlet NSTextField *channelPairCount;
@@ -26,7 +27,6 @@
 {
     BOOL _mixerStarted;
     AMArtsmeshClient* _client;
-    __weak NSArray* _ports;
     
     NSTimer* _jackInfoTimer;
 }
@@ -36,21 +36,25 @@
     // Do view setup here
 }
 
+-(void)dealloc
+{
+    [self stopClient];
+}
+
 
 - (IBAction)startMixer:(NSButton *)sender
 {
     if (_mixerStarted){
         [self stopClient];
         self.startMixerBtn.title = @"Start Mixer" ;
-        _mixerStarted = YES;
+        _mixerStarted = NO;
     }else{
         if ([self startClient]){
             self.startMixerBtn.title = @"Stop Mixer" ;
-            _mixerStarted = NO;
+            _mixerStarted = YES;
         }
     }
 }
-
 
 -(BOOL)startClient
 {
@@ -73,37 +77,43 @@
         return NO;
     };
     
-    _ports = [_client allPorts];
-    
+    NSArray* ports = [_client allPorts];
     
     NSMutableArray* barCollection =[[NSMutableArray alloc] init];
-    for (AMJackPort* p in _ports) {
+    for (AMJackPort* p in ports) {
        
         if (p.portType == AMJackPort_Source) {
             AMVolumeBar *bar = [[AMVolumeBar alloc] init];
-            bar.volume = 0.0;
-            bar.meter = 0.0;
+            bar.volume = 0.5;
+            bar.meter = 0.5;
             bar.isMute = NO;
             bar.name = p.name;
+            bar.delegate = self;
             [barCollection addObject:bar];
+            
+            p.volume = bar.volume;
         }
     }
     
-    for (AMJackPort* p in _ports) {
+    for (AMJackPort* p in ports) {
         
         if (p.portType == AMJackPort_Destination) {
             AMVolumeBar *bar = [[AMVolumeBar alloc] init];
-            bar.volume = 0.0;
-            bar.meter = 0.0;
+            bar.volume = 0.4;
+            bar.meter = 0.4;
             bar.isMute = NO;
             bar.name = p.name;
+            bar.delegate = self;
             [barCollection addObject:bar];
         }
     }
     
     [self.controlView setContent:barCollection];
     
-    _jackInfoTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateJackInfo) userInfo:nil repeats:YES];
+    _jackInfoTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(updateJackInfo)
+                                                    userInfo:nil repeats:YES];
     
     return YES;
     
@@ -115,6 +125,7 @@
     _jackInfoTimer = nil;
     
     [_client unregisterClient];
+    
     [self.controlView setContent:[[NSMutableArray alloc] init]];
 }
 
@@ -130,8 +141,19 @@
 }
 
 
-
-
+-(void)volumeBarChanged:(AMVolumeBar *)bar
+{
+    NSString* portName = bar.name;
+    
+    NSArray* ports = [_client allPorts];
+    for (AMJackPort* p in ports) {
+        if ([p.name isEqualToString:portName]) {
+            
+            p.isMute = bar.isMute;
+            p.volume = bar.volume;
+        }
+    }
+}
 
 
 @end

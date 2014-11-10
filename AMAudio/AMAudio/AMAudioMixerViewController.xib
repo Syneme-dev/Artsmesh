@@ -124,7 +124,7 @@
                         <rect key="frame" x="1" y="1" width="248" height="158"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView maxNumberOfRows="1" id="jeJ-z3-Db6">
+                            <collectionView focusRingType="none" selectable="YES" maxNumberOfRows="1" id="jeJ-z3-Db6">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="primaryBackgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -198,6 +198,7 @@
                     <rect key="frame" x="36" y="27" width="21" height="235"/>
                     <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="right" sliderType="linear" id="BBl-Cz-NP7"/>
                     <connections>
+                        <action selector="volumeChanged:" target="anj-Fq-GbD" id="1aL-mu-soc"/>
                         <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.volume" id="8BL-2G-9Bo"/>
                     </connections>
                 </slider>
@@ -208,12 +209,13 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <action selector="muteChanged:" target="anj-Fq-GbD" id="fgJ-zg-hCj"/>
                         <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.isMute" id="pOY-Ed-DDp"/>
                     </connections>
                 </button>
-                <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQO-vR-r8C">
+                <slider focusRingType="none" horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQO-vR-r8C">
                     <rect key="frame" x="18" y="27" width="21" height="235"/>
-                    <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="right" sliderType="linear" id="kJa-uS-Bzl"/>
+                    <sliderCell key="cell" enabled="NO" focusRingType="none" alignment="left" maxValue="1" tickMarkPosition="right" sliderType="linear" id="kJa-uS-Bzl"/>
                     <connections>
                         <binding destination="Qfs-HL-dd7" name="value" keyPath="representedObject.meter" id="e9R-vO-SXI"/>
                     </connections>
@@ -230,7 +232,13 @@
                     </connections>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="315" y="717"/>
+            <connections>
+                <outlet property="meterSlider" destination="nQO-vR-r8C" id="Al9-aF-R4t"/>
+                <outlet property="muteCheck" destination="eFa-8r-h3B" id="iKw-I3-re3"/>
+                <outlet property="nameField" destination="fxU-jD-vl8" id="PA8-fe-0ty"/>
+                <outlet property="volumeSlider" destination="aKu-4R-fJD" id="xsb-j6-Egd"/>
+            </connections>
+            <point key="canvasLocation" x="343" y="639"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="JWa-jk-KSo"/>
     </objects>

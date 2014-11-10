@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol AMVolumeBarDelegate;
 
 @interface AMVolumeBar : NSObject
 
@@ -14,5 +15,14 @@
 @property float volume;
 @property float meter;
 @property BOOL isMute;
+
+@property (weak) id<AMVolumeBarDelegate> delegate;
+
+@end
+
+
+@protocol AMVolumeBarDelegate <NSObject>
+
+-(void)volumeBarChanged:(AMVolumeBar*)bar;
 
 @end

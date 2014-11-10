@@ -38,6 +38,8 @@
 -(void)portRegistered:(unsigned int)portId;
 -(void)portUnregistered:(unsigned int)portId;
 
+-(void)port:(AMJackPort*)port currentPeak:(float)peak;
+
 @end
 
 

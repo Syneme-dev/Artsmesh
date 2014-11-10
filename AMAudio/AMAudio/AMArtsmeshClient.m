@@ -109,7 +109,11 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
             //meter * volume
             for (int i = 0; i < nframes; i++) {
                 outbuf[i] = inbuf[i] * vol;
-                peak = peak > outbuf[i] ? peak: outbuf[i];
+                peak = peak > inbuf[i] ? peak: inbuf[i];
+            }
+            
+            if ([cl.delegate respondsToSelector:@selector(port:currentPeak:)]) {
+                [cl.delegate port:pp.inputPort currentPeak:peak];
             }
         }
     }

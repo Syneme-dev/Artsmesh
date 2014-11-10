@@ -12,7 +12,7 @@
 #import "AMAudio.h"
 #import "AMVolumeCtlView.h"
 
-@interface AMAudioMixerViewController ()<AMVolumeBarDelegate>
+@interface AMAudioMixerViewController ()<AMVolumeBarDelegate, AMJackClientDelegate>
 
 @property (weak) IBOutlet NSButton *startMixerBtn;
 @property (weak) IBOutlet NSTextField *channelPairCount;
@@ -115,6 +115,8 @@
                                                     selector:@selector(updateJackInfo)
                                                     userInfo:nil repeats:YES];
     
+    _client.delegate = self;
+    
     return YES;
     
 }
@@ -151,6 +153,16 @@
             
             p.isMute = bar.isMute;
             p.volume = bar.volume;
+        }
+    }
+}
+
+-(void)port:(AMJackPort *)port currentPeak:(float)peak
+{
+    for (AMVolumeBar* bar in self.controlView.content) {
+        if([port.name isEqualToString:bar.name]){
+            //NSLog(@"peak is %f", peak);
+            bar.meter = peak;
         }
     }
 }

@@ -518,10 +518,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0198A79D1A0F24B6009A36CA /* Mixer Panel */ = {
+			isa = PBXGroup;
+			children = (
+				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
+				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
+				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
+			);
+			name = "Mixer Panel";
+			sourceTree = "<group>";
+		};
 		262021F418EAE56200811E4E /* Panels */ = {
 			isa = PBXGroup;
 			children = (
-				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
@@ -550,8 +559,6 @@
 				AF200641194585F6008630C8 /* AMMapViewController.m */,
 				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
 				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
-				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
-				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
 				AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */,
 				AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */,
 				AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */,
@@ -831,6 +838,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
 				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* G+Panel */,

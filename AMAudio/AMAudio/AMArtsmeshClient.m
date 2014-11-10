@@ -247,5 +247,34 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
     return channs;
 }
 
+-(float)cpuLoad
+{
+    if (_jackcl) {
+        return jack_cpu_load(_jackcl);
+    }
+    
+    return 0.0f;
+}
+
+
+-(int)bufferSize
+{
+    if (_jackcl) {
+        return jack_get_buffer_size(_jackcl);
+    }
+    
+    return 0;
+}
+
+
+-(int)sampleRate
+{
+    if (_jackcl) {
+        return jack_get_sample_rate(_jackcl);
+    }
+    
+    return 0;
+}
+
 
 @end

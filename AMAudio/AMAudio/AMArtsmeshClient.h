@@ -20,6 +20,11 @@
 -(void)unregisterClient;
 -(NSArray*)allPorts;
 
+
+-(float)cpuLoad;
+-(int)bufferSize;
+-(int)sampleRate;
+
 @end
 
 

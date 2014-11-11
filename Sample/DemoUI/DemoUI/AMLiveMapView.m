@@ -13,9 +13,13 @@
 #import "CoreLocation/CoreLocation.h"
 #import "AMLiveMapProgramView.h"
 #import "AMLiveMapProgramViewController.h"
+#import "AMLiveMapProgramContentView.h"
+#import "AMLiveMapProgramPanelTextView.h"
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 #import "AMPanelViewController.h"
+#import "AMGroupPreviewPanelController.h"
+#import "AMGroupPreviewPanelView.h"
 #import "UIFramework/AMBorderView.h"
 
 
@@ -40,6 +44,7 @@
 @property (nonatomic) NSMutableDictionary *infoPanels;
 @property (nonatomic) NSMutableDictionary *fonts;
 @property (nonatomic) NSView *programView;
+@property (nonatomic) NSTrackingArea *mapTrackingArea;
 @property (nonatomic) AMFloatPanelViewController *floatPanelViewController;
 @property (nonatomic) AMLiveMapProgramViewController *programViewController;
 @property (nonatomic) NSWindow *programWindow;
@@ -80,7 +85,7 @@ AMWorldMap *worldMap;
 
 - (void)setup
 {
- 
+
     //Construct WorldMap and pixel arrays for assigning buttons to view
     
     //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -238,6 +243,10 @@ AMWorldMap *worldMap;
         
     } else {
         [_mergedLocations removeAllObjects];
+    }
+    
+    if ( !worldMap.state == overView ) {
+        [self updateGroupPreviewOverlays];
     }
     
 }
@@ -493,9 +502,10 @@ AMWorldMap *worldMap;
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:16.0], @"header",
-              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:14.0], @"body",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:13.0], @"13",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0], @"small-italic",
               nil];
     
     _programView = [[AMLiveMapProgramView alloc] init];
@@ -515,6 +525,7 @@ AMWorldMap *worldMap;
     
     NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
     [self addTrackingArea:trackingArea];
+    _mapTrackingArea = trackingArea;
     
     
     [self createProgram];
@@ -531,6 +542,16 @@ AMWorldMap *worldMap;
      selector:@selector(onTick:)
      userInfo: nil repeats:YES];
     **/
+}
+
+- (void)updateTrackingAreas {
+    [super updateTrackingAreas];
+    if (_mapTrackingArea) {
+        [self removeTrackingArea:_mapTrackingArea];
+        NSTrackingArea* trackingArea = [ [ NSTrackingArea alloc] initWithRect:[self bounds]       options:(NSTrackingMouseMoved | NSTrackingActiveAlways ) owner:self userInfo:nil];
+        _mapTrackingArea = trackingArea;
+        [self addTrackingArea:_mapTrackingArea];
+    }
 }
 
 -(void) mouseMoved: (NSEvent *) thisEvent
@@ -570,13 +591,12 @@ AMWorldMap *worldMap;
                                     [self addOverlay:_hovGroup];
                                 }
                                 
-                                NSTextView *thePanel = [_infoPanels objectForKey:_hovGroup.groupId];
-                                [thePanel setString:_hovGroup.groupName];
-                                if ( thePanel.isHidden ) {
+                                AMGroupPreviewPanelView *theOverlay = [_infoPanels objectForKey:_hovGroup.groupId];
+                                
+                                if ( [theOverlay isHidden] ) {
                                     
                                     // Display the main group panel
-                                    [self displayInfoPanel:thePanel forGroup:_hovGroup onPixel:pixel];
-                                    
+                                    [self displayGroupPreviewOverlay:_hovGroup];
                                     // If the current group is a part of a merged group, show a panel for the other group also
                                     
                                     id mergedGroups = [self checkGroupIsMerged:_hovGroup ];
@@ -586,19 +606,17 @@ AMWorldMap *worldMap;
                                             
                                             AMLiveGroup *theMergedGroup = [_allGroups objectForKey:mergedGroup];
                                             
-                                            // find pixel for mergedGroup
-                                            id mergedPixel = theMergedGroup.groupId;
-                                            
                                             // if pixel doesn't have a panel, add one
                                             if ( ![_infoPanels objectForKey:theMergedGroup.groupId] ) {
                                                 [self addOverlay:theMergedGroup];
                                             }
                                             
                                             // grab the newly created info panel and manipulate it, if not done already
-                                            thePanel = [_infoPanels objectForKey:theMergedGroup.groupId];
-                                            [thePanel setString:theMergedGroup.groupName];
-                                            if ( thePanel.isHidden ) {
-                                                [self displayInfoPanel:thePanel forGroup:mergedGroup onPixel:mergedPixel];
+                                            theOverlay = [_infoPanels objectForKey:theMergedGroup.groupId];
+                                            
+                                            if ( [theOverlay isHidden] ) {
+
+                                                [self displayGroupPreviewOverlay:mergedGroup];
                                             }
                                         }
                                         
@@ -714,6 +732,7 @@ AMWorldMap *worldMap;
 
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
     _programViewController = pvc;
+    pvc.scrollView.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
@@ -758,27 +777,66 @@ AMWorldMap *worldMap;
     
     [_programWindow.contentView setAutoresizesSubviews:YES];
     [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    //[_programWindow makeKeyAndOrderFront:self];
-    
+        
 }
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
-    //_floatPanelViewController.panelTitle = theGroup.groupName;
     
-    //NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
+    // Remove old content from scroll view
+    /**
+    for(NSView *subview in [_programViewController.scrollView subviews]) {
+        if([subview isKindOfClass:[AMLiveMapProgramPanelTextView class]]) {
+            [subview removeFromSuperview];
+        }
+    }
+     **/
     
-    NSFont* textViewFont =  [_fonts objectForKey:@"13"];
-    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textViewFont};
-    NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    // Configure & display the group/user fields
+    
+    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 100)];
+    
+    _programViewController.scrollView.documentView = programContentContainer;
+    
+    [programContentContainer fillContent:theGroup inScrollView:_programViewController.scrollView];
     
     
-    _programViewController.desc = attrStr;
+    // Display the program
     _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
 }
 
+- (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup {
+    
+    AMPixel *curPixel = [_allLiveGroupPixels objectForKey:theGroup.groupId];
+    NSPoint hovPoint = [self getPortCenter:curPixel];
+    
+    AMGroupPreviewPanelView *previewPanelView = [_infoPanels objectForKey:theGroup.groupId];
+
+    if ( hovPoint.x > self.frame.size.width/2 ) {
+        [previewPanelView setFrameOrigin:NSMakePoint((hovPoint.x - previewPanelView.frame.size.width) - 20, hovPoint.y +20)];
+    } else {
+        [previewPanelView setFrameOrigin:NSMakePoint(hovPoint.x + 20, hovPoint.y +20)];
+    }
+     
+    [previewPanelView setHidden:NO];
+    
+}
+
+- (void) updateGroupPreviewOverlays {
+    for ( id thePanel in _infoPanels ) {
+        
+        AMGroupPreviewPanelView *curPreviewPanelView = [_infoPanels objectForKey:thePanel];
+        
+        if (![curPreviewPanelView isHidden]) {
+            
+            [self displayGroupPreviewOverlay:curPreviewPanelView.group];
+            
+        }
+        
+    }
+
+}
 
 - (void)displayInfoPanel:(NSTextView *) thePanel forGroup:(AMLiveGroup *) theGroup onPixel:(AMPixel *) thePixel {
     NSSize panelPadding = { 10, 5 };
@@ -812,55 +870,36 @@ AMWorldMap *worldMap;
 
 - (void)hideAllPanels {
     for ( id thePanel in _infoPanels ) {
-        NSTextView *curPanel = [_infoPanels objectForKey:thePanel];
-        if (!curPanel.isHidden) {
-            [self hideView:curPanel];
+        AMGroupPreviewPanelView *curPreviewPanel = [_infoPanels objectForKey:thePanel];
+        if ( ![curPreviewPanel isHidden] ) {
+            [curPreviewPanel setHidden:YES];
         }
+
     }
 }
 
 - (void)addOverlay:(AMLiveGroup *) theGroup {
     // Add the info panel to the map (used for displaying text on map)
-    //id pixelId = thePixel;
+    
     NSString *groupId = theGroup.groupId;
+    AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
+    gpc.group = theGroup;
     
-    NSTextView *newPanel;
+    NSFont* textFieldFont =  [_fonts objectForKey:@"small-italic"];
+    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
+    NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    gpc.groupDesc = groupDesc;
+
     
-    NSRect textFrame = [self bounds];
-    textFrame.size.width = 200; //textFrame.size.width/2;
-    textFrame.size.height = 35; //textFrame.size.height/5;
-    //NSFont *font = [NSFont fontWithName: @"FoundryMonoline" size: 16.0];
+    AMGroupPreviewPanelView *previewPanelView = (AMGroupPreviewPanelView *)gpc.view;
+    previewPanelView.groupPreviewPanelController = gpc;
+    previewPanelView.group = theGroup;
     
-    // Set TextView Properties
-    newPanel = [[NSTextView alloc] initWithFrame:textFrame];
-    [newPanel setTextColor:[NSColor whiteColor]];
-    [newPanel setEditable:NO];
-    [newPanel setFont:[_fonts objectForKey:@"header"]];
-    [newPanel setAlignment: NSCenterTextAlignment];
+    [previewPanelView setHidden:YES];
+    [self addSubview:previewPanelView];
     
-    newPanel.backgroundColor = _backgroundColor;
+    [_infoPanels setObject:previewPanelView forKey:groupId];
     
-    NSShadow *dropShadow = [[NSShadow alloc] init];
-    [dropShadow setShadowColor:[NSColor colorWithCalibratedRed:0.0
-                                                         green:0.0
-                                                          blue:0.0
-                                                         alpha:0.8]];
-    [dropShadow setShadowOffset:NSMakeSize(0, 4.0)];
-    [dropShadow setShadowBlurRadius:4.0];
-    
-    //[self setWantsLayer: YES];
-    [newPanel setShadow: dropShadow];
-    
-    // Add TextView to Live Map, as a subview overlay
-    [self addSubview:newPanel positioned:NSWindowAbove relativeTo:nil];
-    
-    [newPanel setFrameOrigin:NSMakePoint( (self.frame.size.width/2), self.frame.size.height - (newPanel.frame.size.height) )];
-    
-    [newPanel setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin]; //NSViewWidthSizable
-    
-    [self hideView:newPanel];
-    
-    [_infoPanels setObject:newPanel forKey:groupId];
 }
 
 - (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {
@@ -870,9 +909,6 @@ AMWorldMap *worldMap;
     [theTextView setAlignment: NSCenterTextAlignment];
     
     theTextView.backgroundColor = _backgroundColor;
-    
-    NSFontManager *fontmanager = [NSFontManager sharedFontManager];
-    NSLog(@"Font weight is %li", (long)[fontmanager weightOfFont:theFont] );
 }
 
 - (void)formatTextField:(NSTextField *)theField withFont:(NSFont *)theFont {
@@ -884,10 +920,6 @@ AMWorldMap *worldMap;
     //theFont = [[NSFontManager sharedFontManager] convertFont:theFont toHaveTrait:NSFontBoldTrait];
     
     [theField setFont: theFont];
-    
-    NSFontManager *fontmanager = [NSFontManager sharedFontManager];
-    NSLog(@"Font weight is %li", (long)[fontmanager weightOfFont:theFont] );
-    
 }
 
 - (void)addShadow:(NSView *)theView withOffset:(NSSize)theOffset {

@@ -41,7 +41,7 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
@@ -81,6 +81,8 @@
         }else if([view.identifier isEqualTo:@"jackServerTab"]){
             [self loadJackPref:view];
         }else if([view.identifier isEqualTo:@"statusNetTab"]){
+            ;
+        }else if([view.identifier isEqualTo:@"OSCGroups"]){
             ;
         }
     }
@@ -144,6 +146,10 @@
     [self.tabs selectTabViewItemWithIdentifier:@"6"];
 }
 
+- (IBAction)onOSCGroupClick:(id)sender {
+    [self pushDownButton:self.oscGroupTabBtn];
+    [self.tabs selectTabViewItemWithIdentifier:@"2"];
+}
 
 -(void)loadIpv4
 {

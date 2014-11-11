@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
@@ -11,9 +12,9 @@
                 <outlet property="generalTabButton" destination="mvk-HX-fYa" id="1cE-ZS-hnU"/>
                 <outlet property="ipPopUpView" destination="tQ3-7Y-Wal" id="JCW-FA-Icu"/>
                 <outlet property="isTopControlBarCheckBox" destination="fdL-A4-ABv" id="pDf-wo-wfW"/>
-                <outlet property="jackRouterTabButton" destination="vtg-zK-Gic" id="Mcj-vm-QCm"/>
                 <outlet property="jackServerTabButton" destination="YZd-cX-Ly4" id="kTH-ui-AEF"/>
                 <outlet property="myMachineNameField" destination="OgK-Gw-A8W" id="grb-hW-hhK"/>
+                <outlet property="oscGroupTabBtn" destination="vtg-zK-Gic" id="PMt-YG-MFZ"/>
                 <outlet property="postStatusMessageButton" destination="FE0-1F-GTL" id="K5O-x4-sSX"/>
                 <outlet property="statusNetPostTestResult" destination="dlL-IG-Qwh" id="CEA-pF-YkR"/>
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
@@ -32,15 +33,18 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
                     <subviews>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="jackRouterTab">
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
                             <rect key="frame" x="351" y="2" width="81" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="81" id="8Gq-E1-bgK"/>
                             </constraints>
-                            <buttonCell key="cell" type="inline" title="JACK ROUTER  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
+                            <buttonCell key="cell" type="inline" title="OSC GROUP  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
+                            </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv" userLabel="videoTab">
                             <rect key="frame" x="435" y="2" width="47" height="13"/>
@@ -274,7 +278,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
                                         <rect key="frame" x="343" y="543" width="142" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="Vq5-E1-JfS"/>
@@ -396,6 +400,21 @@
                             <view key="view" identifier="jackServerTab" id="Dwd-l8-aCe" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="OSCGroups" identifier="2" id="ZCR-Ci-8sZ">
+                            <view key="view" id="XnP-jZ-xQz" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3q-8T-uzl">
+                                        <rect key="frame" x="250" y="477" width="82" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S51-tA-09J">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">

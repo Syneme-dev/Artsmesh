@@ -40,20 +40,30 @@
 
 - (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView {
     self.totalH = 0;
+    self.theScrollView = scrollView;
 
-    [self addTextView:theGroup.groupName toScrollView:scrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+    [self fillLiveGroup:theGroup];
     
-    [self addTextView:theGroup.description toScrollView:scrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
-    
-    for ( AMLiveUser *theUser in theGroup.users) {
-        NSLog(@"here's a user %@", theUser.nickName);
-        if ([theUser.fullName length] > 0){
-            [self addTextView:theUser.fullName toScrollView:scrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
-        } else {
-            [self addTextView:theUser.nickName toScrollView:scrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
-        }
-        if ( [theUser.description length] > 0 ) {
-            [self addTextView:theUser.description toScrollView:scrollView withMargin:(self.indentMargin * 2) andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+    for ( AMLiveGroup *subGroup in theGroup.subGroups) {
+        [self fillLiveGroup:subGroup];
+    }
+}
+
+- (void)fillLiveGroup:(AMLiveGroup *)theGroup {
+    if (self.theScrollView) {
+        [self addTextView:theGroup.groupName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+        
+        [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        
+        for ( AMLiveUser *theUser in theGroup.users) {
+            if ([theUser.fullName length] > 0){
+                [self addTextView:theUser.fullName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+            } else {
+                [self addTextView:theUser.nickName toScrollView:self.theScrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+            }
+            if ( [theUser.description length] > 0 ) {
+                [self addTextView:theUser.description toScrollView:self.theScrollView withMargin:(self.indentMargin * 2) andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+            }
         }
     }
 }
@@ -62,9 +72,7 @@
     NSDictionary* bodyFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:theFont};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:bodyFontAttr];
-    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(scrollView.bounds.size.width, 0) options:NSStringDrawingUsesFontLeading].size.height;
-
-    NSLog(@"The string height is: %f", theStringH);
+    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(scrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
     AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theMargin, self.totalH, scrollView.bounds.size.width - theMargin, theStringH)];
     [[theTextView textStorage] setAttributedString:theAttrString];

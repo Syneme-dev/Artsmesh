@@ -12,6 +12,7 @@
 @interface AMLiveMapProgramContentView : NSView
 
 @property AMLiveGroup *group;
+@property NSScrollView *theScrollView;
 @property NSMutableDictionary *fonts;
 @property double totalH;
 @property double bottomMargin;

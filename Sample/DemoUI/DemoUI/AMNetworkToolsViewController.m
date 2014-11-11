@@ -242,7 +242,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [AMButtonHandler changeTabTextColor:self.errorLogButton   toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.warningLogButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.infoLogButton    toColor:UI_Color_blue];
-   }
+}
 
 -(void) showLog
 {
@@ -263,7 +263,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     _logReader = [AMLogReader errorLogReader];
     [self showLog];
     [self clearAllButtonColor];
-    [AMButtonHandler changeTabTextColor:self.errorLogButton   toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.errorLogButton     toColor:UI_Color_b7b7b7];
 }
 
 - (IBAction)showWarningLog:(id)sender {
@@ -271,18 +271,18 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self showLog];
     [self clearAllButtonColor];
     [AMButtonHandler changeTabTextColor:self.warningLogButton   toColor:UI_Color_b7b7b7];
-
 }
 
-- (IBAction)showInfoLog:(id)sender {
+- (IBAction)showInfoLog:(id)sender
+{
     _logReader = [AMLogReader infoLogReader];
     [self showLog];
     [self clearAllButtonColor];
-    [AMButtonHandler changeTabTextColor:self.infoLogButton   toColor:UI_Color_b7b7b7];
-
+    [AMButtonHandler changeTabTextColor:self.infoLogButton      toColor:UI_Color_b7b7b7];
 }
 
-- (IBAction)logFileComboChanged:(id)sender {
+- (IBAction)logFileComboChanged:(id)sender
+{
     NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
     _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];

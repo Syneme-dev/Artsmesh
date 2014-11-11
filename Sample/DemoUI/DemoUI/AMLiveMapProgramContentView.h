@@ -13,6 +13,9 @@
 
 @property AMLiveGroup *group;
 @property NSMutableDictionary *fonts;
+@property double totalH;
+@property double bottomMargin;
+@property double indentMargin;
 
 - (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView;
 

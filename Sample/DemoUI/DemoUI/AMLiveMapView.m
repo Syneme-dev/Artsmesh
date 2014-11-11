@@ -794,7 +794,7 @@ AMWorldMap *worldMap;
     
     // Configure & display the group/user fields
     
-    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 100)];
+    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 0)];
     
     _programViewController.scrollView.documentView = programContentContainer;
     

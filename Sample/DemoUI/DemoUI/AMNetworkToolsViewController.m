@@ -11,6 +11,7 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMLogger/AMLogReader.h"
 #import "AMLogger/AMLogger.h"
+#import "UIFramework/AMCheckBoxView.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate>
 {
@@ -25,6 +26,7 @@
 @property (weak) IBOutlet NSButton *errorLogButton;
 @property (weak) IBOutlet NSButton *warningLogButton;
 @property (weak) IBOutlet NSButton *infoLogButton;
+@property (weak) IBOutlet AMCheckBoxView *fullLogCheck;
 
 @end
 
@@ -76,6 +78,8 @@
     
     [self.logButton performClick:self];
     [self.infoLogButton performClick:self];
+    
+    self.fullLogCheck.title = @"FULL LOG";
 }
 
 -(void)registerTabButtons
@@ -233,12 +237,19 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     
 }
 
+-(void) clearAllButtonColor
+{
+    [AMButtonHandler changeTabTextColor:self.errorLogButton   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.warningLogButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.infoLogButton    toColor:UI_Color_blue];
+   }
+
 -(void) showLog
 {
     [_readTimer invalidate];
     [self.logTextView setString:@""];
     
-    if(_fullLog.state == NSOnState){
+    if([self.fullLogCheck checked]){
         [self showFullLog];
     }
     else{
@@ -247,19 +258,28 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.logTextView scrollToEndOfDocument:self];
 }
 
-- (IBAction)showErrorLog:(id)sender {
+- (IBAction)showErrorLog:(id)sender
+{
     _logReader = [AMLogReader errorLogReader];
     [self showLog];
+    [self clearAllButtonColor];
+    [AMButtonHandler changeTabTextColor:self.errorLogButton   toColor:UI_Color_b7b7b7];
 }
 
 - (IBAction)showWarningLog:(id)sender {
     _logReader = [AMLogReader warningLogReader];
     [self showLog];
+    [self clearAllButtonColor];
+    [AMButtonHandler changeTabTextColor:self.warningLogButton   toColor:UI_Color_b7b7b7];
+
 }
 
 - (IBAction)showInfoLog:(id)sender {
     _logReader = [AMLogReader infoLogReader];
     [self showLog];
+    [self clearAllButtonColor];
+    [AMButtonHandler changeTabTextColor:self.infoLogButton   toColor:UI_Color_b7b7b7];
+
 }
 
 - (IBAction)logFileComboChanged:(id)sender {

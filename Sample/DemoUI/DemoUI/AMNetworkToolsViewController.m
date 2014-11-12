@@ -13,7 +13,8 @@
 #import "AMLogger/AMLogger.h"
 #import "UIFramework/AMCheckBoxView.h"
 
-@interface AMNetworkToolsViewController ()<NSComboBoxDelegate>
+
+@interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate>
 {
     NSArray *_users;
     AMNetworkToolsCommand *_pingCommand;
@@ -76,10 +77,15 @@
     [self.logFileCombo addItemsWithObjectValues:logs];
     self.logFileCombo.delegate = self;
     
+    [self.logFilePopUp addItemsWithTitles:logs];
+    
+    
     [self.logButton performClick:self];
     [self.infoLogButton performClick:self];
     
     self.fullLogCheck.title = @"FULL LOG";
+    
+    self.logFilePopUp.delegate  = self;
 }
 
 -(void)registerTabButtons
@@ -287,5 +293,22 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];
 }
+
+
+
+-(void) itemSelected:(AMPopUpView*)sender{
+//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+//    NSString* myPrivateIP = [self.ipPopUpView stringValue];
+//    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
+    
+    NSString* fileName = [self.logFilePopUp stringValue];
+    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
+    [self showLog];
+    
+//    NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
+//    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
+//    [self showLog];
+}
+
 
 @end

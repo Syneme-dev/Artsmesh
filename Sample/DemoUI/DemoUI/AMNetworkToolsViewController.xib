@@ -12,7 +12,7 @@
                 <outlet property="infoLogButton" destination="k2z-mb-beO" id="8aH-OB-Oco"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
-                <outlet property="logFileCombo" destination="FI2-Ew-d7P" id="s6F-uF-Q6t"/>
+                <outlet property="logFilePopUp" destination="h9L-Ma-tsd" id="eYK-3L-DK3"/>
                 <outlet property="logTextView" destination="l4w-D1-cZA" id="Fp8-OV-aJv"/>
                 <outlet property="pingButton" destination="P0v-P2-klr" id="lui-OM-kGD"/>
                 <outlet property="pingContentView" destination="WsA-3d-Df9" id="EBf-50-FW5"/>
@@ -378,12 +378,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-fG-5hX">
-                                        <rect key="frame" x="18" y="421" width="82" height="28"/>
+                                        <rect key="frame" x="18" y="421" width="112" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="82" id="3kr-3a-i2h"/>
+                                            <constraint firstAttribute="width" constant="112" id="3kr-3a-i2h"/>
                                             <constraint firstAttribute="height" constant="28" id="o8G-sM-tSq"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" title="ErrorLog" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="RTP-HR-rog">
+                                        <buttonCell key="cell" type="square" title="ERROR LOG" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="RTP-HR-rog">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -392,12 +392,12 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
-                                        <rect key="frame" x="18" y="383" width="82" height="28"/>
+                                        <rect key="frame" x="18" y="383" width="112" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="g8w-UG-JLT"/>
-                                            <constraint firstAttribute="width" constant="82" id="ncX-eQ-XiB"/>
+                                            <constraint firstAttribute="width" constant="112" id="ncX-eQ-XiB"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" title="WarningLog" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="l3u-e6-g84">
+                                        <buttonCell key="cell" type="square" title="WARNING LOG" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="l3u-e6-g84">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -406,12 +406,12 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-mb-beO">
-                                        <rect key="frame" x="18" y="339" width="82" height="28"/>
+                                        <rect key="frame" x="18" y="339" width="112" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="h2w-iI-8Ox"/>
-                                            <constraint firstAttribute="width" constant="82" id="kfb-UO-u1p"/>
+                                            <constraint firstAttribute="width" constant="112" id="kfb-UO-u1p"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" title="InfoLog" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="E3d-pl-Xb2">
+                                        <buttonCell key="cell" type="square" title="INFO LOG" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="E3d-pl-Xb2">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -419,21 +419,6 @@
                                             <action selector="showInfoLog:" target="-2" id="dJn-Vv-bTi"/>
                                         </connections>
                                     </button>
-                                    <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FI2-Ew-d7P" userLabel="logFileCombo">
-                                        <rect key="frame" x="18" y="237" width="85" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="82" id="BK8-Jk-Efc"/>
-                                            <constraint firstAttribute="height" constant="20" id="Yp5-jq-dp6"/>
-                                        </constraints>
-                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="iTV-kb-nIC">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </comboBoxCell>
-                                        <connections>
-                                            <action selector="logFileComboChanged:" target="-2" id="mG6-Cl-pU5"/>
-                                        </connections>
-                                    </comboBox>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
                                         <rect key="frame" x="18" y="281" width="82" height="28"/>
                                         <constraints>
@@ -442,7 +427,7 @@
                                         </constraints>
                                     </customView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-65-mVZ">
-                                        <rect key="frame" x="120" y="20" width="541" height="449"/>
+                                        <rect key="frame" x="178" y="20" width="483" height="449"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6AD-Ox-imv">
                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -452,10 +437,10 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
-                                                    <size key="minSize" width="541" height="449"/>
+                                                    <size key="minSize" width="483" height="449"/>
                                                     <size key="maxSize" width="542" height="10000000"/>
                                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <size key="minSize" width="541" height="449"/>
+                                                    <size key="minSize" width="483" height="449"/>
                                                     <size key="maxSize" width="542" height="10000000"/>
                                                 </textView>
                                             </subviews>
@@ -470,22 +455,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
+                                        <rect key="frame" x="20" y="229" width="148" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="148" id="Itu-hi-KCY"/>
+                                            <constraint firstAttribute="height" constant="36" id="jvr-vo-vMT"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="7js-65-mVZ" secondAttribute="bottom" constant="20" id="6yR-5G-w9C"/>
-                                    <constraint firstItem="7js-65-mVZ" firstAttribute="leading" secondItem="vAt-up-KKp" secondAttribute="trailing" constant="20" id="HRw-yf-99J"/>
+                                    <constraint firstItem="7js-65-mVZ" firstAttribute="leading" secondItem="h9L-Ma-tsd" secondAttribute="trailing" constant="10" id="KJf-1P-3oJ"/>
                                     <constraint firstItem="Ao1-fG-5hX" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="M2x-6H-x6D"/>
                                     <constraint firstItem="S1F-tM-lae" firstAttribute="top" secondItem="Ao1-fG-5hX" secondAttribute="bottom" constant="10" id="M30-W3-gjG"/>
+                                    <constraint firstItem="h9L-Ma-tsd" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="20" id="MDl-8M-DoR"/>
                                     <constraint firstItem="k2z-mb-beO" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="OR9-Ug-ZAY"/>
                                     <constraint firstItem="k2z-mb-beO" firstAttribute="top" secondItem="S1F-tM-lae" secondAttribute="bottom" constant="16" id="VY5-CY-E6S"/>
                                     <constraint firstItem="Ao1-fG-5hX" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" constant="20" id="aE8-LE-qvO"/>
-                                    <constraint firstItem="7js-65-mVZ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" id="cW3-hA-3Yc"/>
-                                    <constraint firstItem="FI2-Ew-d7P" firstAttribute="top" secondItem="vAt-up-KKp" secondAttribute="bottom" constant="20" id="dV5-Cb-z3C"/>
-                                    <constraint firstItem="FI2-Ew-d7P" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="lm5-Tx-iwS"/>
+                                    <constraint firstItem="7js-65-mVZ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" id="cie-Gd-kEe"/>
+                                    <constraint firstAttribute="trailing" secondItem="7js-65-mVZ" secondAttribute="trailing" id="dyW-hZ-cTB"/>
+                                    <constraint firstItem="h9L-Ma-tsd" firstAttribute="top" secondItem="vAt-up-KKp" secondAttribute="bottom" constant="16" id="ixb-U2-Ly5"/>
+                                    <constraint firstAttribute="bottom" secondItem="7js-65-mVZ" secondAttribute="bottom" constant="20" id="mk9-Gb-xZi"/>
                                     <constraint firstItem="vAt-up-KKp" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="onI-NR-7Ee"/>
                                     <constraint firstItem="S1F-tM-lae" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="uFW-8g-OwE"/>
                                     <constraint firstItem="vAt-up-KKp" firstAttribute="top" secondItem="k2z-mb-beO" secondAttribute="bottom" constant="30" id="vQF-fR-ap9"/>
-                                    <constraint firstAttribute="trailing" secondItem="7js-65-mVZ" secondAttribute="trailing" id="xzs-ga-PGd"/>
                                 </constraints>
                             </view>
                         </tabViewItem>

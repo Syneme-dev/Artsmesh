@@ -38,7 +38,8 @@
 
 -(BOOL)startJacktrip:(AMJacktripConfigs *)cfgs
 {
-    NSMutableString* commandline = [NSMutableString stringWithFormat:@"jacktrip"];
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
     
     //-s or -c
     if([cfgs.role isEqualToString:@"Server"]){

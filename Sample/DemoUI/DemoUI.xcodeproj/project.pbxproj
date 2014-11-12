@@ -65,6 +65,7 @@
 		37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23182187A8FFD00554AFD /* AMAppDelegate.m */; };
 		37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C23184187A8FFD00554AFD /* MainMenu.xib */; };
 		37C23188187A8FFD00554AFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C23187187A8FFD00554AFD /* Images.xcassets */; };
+		4A5701551A11BAEA00BF801E /* OscGroupServer in Resources */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
@@ -340,6 +341,7 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
@@ -1117,6 +1120,7 @@
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
 				AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */,
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
+				4A5701551A11BAEA00BF801E /* OscGroupServer in Resources */,
 				AFAEBDB319610BEA00B7FB51 /* RecentTags.png in Resources */,
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				AFAEBDB019610BEA00B7FB51 /* IncomingTopic.png in Resources */,

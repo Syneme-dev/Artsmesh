@@ -7,28 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A57013E1A11B7AC00BF801E /* AMOSCGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A57013D1A11B7AC00BF801E /* AMOSCGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A5701441A11B7AC00BF801E /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */; };
-		4A57014B1A11B7AC00BF801E /* AMOSCGroupsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57014A1A11B7AC00BF801E /* AMOSCGroupsTests.m */; };
+		4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */; };
+		4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */; };
+		4A6D4B851A130DB400B5D26B /* AMOSCPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */; };
+		4A6D4B881A130F3000B5D26B /* AMOSCGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A6D4B891A130F3000B5D26B /* AMOSCGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */; };
+		4A6D4B901A1319D700B5D26B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */; };
+		4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84111A135C20004CE862 /* AMPreferenceManager.framework */; };
+		4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84131A1369CD004CE862 /* AMLogger.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4A5701451A11B7AC00BF801E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4A57012F1A11B7AC00BF801E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A5701371A11B7AC00BF801E;
-			remoteInfo = AMOSCGroups;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMOSCGroups.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A57013C1A11B7AC00BF801E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A57013D1A11B7AC00BF801E /* AMOSCGroups.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMOSCGroups.h; sourceTree = "<group>"; };
-		4A5701431A11B7AC00BF801E /* AMOSCGroupsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMOSCGroupsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A5701491A11B7AC00BF801E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A57014A1A11B7AC00BF801E /* AMOSCGroupsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupsTests.m; sourceTree = "<group>"; };
+		4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCPrefViewController.h; sourceTree = "<group>"; };
+		4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCPrefViewController.m; sourceTree = "<group>"; };
+		4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCPrefViewController.xib; sourceTree = "<group>"; };
+		4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroups.h; sourceTree = "<group>"; };
+		4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroups.m; sourceTree = "<group>"; };
+		4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4AED84111A135C20004CE862 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
+		4AED84131A1369CD004CE862 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,14 +35,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4A5701401A11B7AC00BF801E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4A5701441A11B7AC00BF801E /* AMOSCGroups.framework in Frameworks */,
+				4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */,
+				4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */,
+				4A6D4B901A1319D700B5D26B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,8 +47,8 @@
 		4A57012E1A11B7AC00BF801E = {
 			isa = PBXGroup;
 			children = (
+				4AED84101A134007004CE862 /* Frameworks */,
 				4A57013A1A11B7AC00BF801E /* AMOSCGroups */,
-				4A5701471A11B7AC00BF801E /* AMOSCGroupsTests */,
 				4A5701391A11B7AC00BF801E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */,
-				4A5701431A11B7AC00BF801E /* AMOSCGroupsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,7 +64,11 @@
 		4A57013A1A11B7AC00BF801E /* AMOSCGroups */ = {
 			isa = PBXGroup;
 			children = (
-				4A57013D1A11B7AC00BF801E /* AMOSCGroups.h */,
+				4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */,
+				4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */,
+				4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */,
+				4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */,
+				4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */,
 				4A57013B1A11B7AC00BF801E /* Supporting Files */,
 			);
 			path = AMOSCGroups;
@@ -85,21 +82,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4A5701471A11B7AC00BF801E /* AMOSCGroupsTests */ = {
+		4AED84101A134007004CE862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A57014A1A11B7AC00BF801E /* AMOSCGroupsTests.m */,
-				4A5701481A11B7AC00BF801E /* Supporting Files */,
+				4AED84131A1369CD004CE862 /* AMLogger.framework */,
+				4AED84111A135C20004CE862 /* AMPreferenceManager.framework */,
+				4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */,
 			);
-			path = AMOSCGroupsTests;
-			sourceTree = "<group>";
-		};
-		4A5701481A11B7AC00BF801E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4A5701491A11B7AC00BF801E /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,7 +99,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A57013E1A11B7AC00BF801E /* AMOSCGroups.h in Headers */,
+				4A6D4B881A130F3000B5D26B /* AMOSCGroups.h in Headers */,
+				4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,24 +125,6 @@
 			productReference = 4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4A5701421A11B7AC00BF801E /* AMOSCGroupsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4A5701511A11B7AC00BF801E /* Build configuration list for PBXNativeTarget "AMOSCGroupsTests" */;
-			buildPhases = (
-				4A57013F1A11B7AC00BF801E /* Sources */,
-				4A5701401A11B7AC00BF801E /* Frameworks */,
-				4A5701411A11B7AC00BF801E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4A5701461A11B7AC00BF801E /* PBXTargetDependency */,
-			);
-			name = AMOSCGroupsTests;
-			productName = AMOSCGroupsTests;
-			productReference = 4A5701431A11B7AC00BF801E /* AMOSCGroupsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -162,9 +135,6 @@
 				ORGANIZATIONNAME = "王为";
 				TargetAttributes = {
 					4A5701371A11B7AC00BF801E = {
-						CreatedOnToolsVersion = 6.1;
-					};
-					4A5701421A11B7AC00BF801E = {
 						CreatedOnToolsVersion = 6.1;
 					};
 				};
@@ -182,7 +152,6 @@
 			projectRoot = "";
 			targets = (
 				4A5701371A11B7AC00BF801E /* AMOSCGroups */,
-				4A5701421A11B7AC00BF801E /* AMOSCGroupsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -192,13 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4A5701411A11B7AC00BF801E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				4A6D4B851A130DB400B5D26B /* AMOSCPrefViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,26 +172,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4A57013F1A11B7AC00BF801E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4A57014B1A11B7AC00BF801E /* AMOSCGroupsTests.m in Sources */,
+				4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */,
+				4A6D4B891A130F3000B5D26B /* AMOSCGroups.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4A5701461A11B7AC00BF801E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4A5701371A11B7AC00BF801E /* AMOSCGroups */;
-			targetProxy = 4A5701451A11B7AC00BF801E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4A57014C1A11B7AC00BF801E /* Debug */ = {
@@ -319,10 +268,15 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -336,44 +290,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		4A5701521A11B7AC00BF801E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AMOSCGroupsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		4A5701531A11B7AC00BF801E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AMOSCGroupsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -396,14 +323,7 @@
 				4A5701501A11B7AC00BF801E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		4A5701511A11B7AC00BF801E /* Build configuration list for PBXNativeTarget "AMOSCGroupsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4A5701521A11B7AC00BF801E /* Debug */,
-				4A5701531A11B7AC00BF801E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

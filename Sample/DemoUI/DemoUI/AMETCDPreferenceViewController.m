@@ -15,6 +15,8 @@
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
 #import "AMAudio/AMAudio.h"
+#import "AMOSCGroups/AMOSCGroups.h"
+
 
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
@@ -26,6 +28,7 @@
 {
     dispatch_queue_t _preference_queue;
     NSViewController* _audioViewController;
+    NSViewController* _oscGroupViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,8 +85,8 @@
             [self loadJackPref:view];
         }else if([view.identifier isEqualTo:@"statusNetTab"]){
             ;
-        }else if([view.identifier isEqualTo:@"OSCGroups"]){
-            ;
+        }else if([view.identifier isEqualTo:@"oscGroupTab"]){
+            [self loadOSCGroupPrefView:view ];
         }
     }
 }
@@ -99,6 +102,16 @@
     }
 }
 
+
+-(void)loadOSCGroupPrefView:(NSView*)tabView
+{
+    _oscGroupViewController = [[AMOSCGroups sharedInstance] getOSCPrefUI];
+    if(_oscGroupViewController){
+        [tabView addSubview:_oscGroupViewController.view];
+        NSRect rect = tabView.bounds;
+        [_oscGroupViewController.view setFrame:rect];
+    }
+}
 
 - (IBAction)onJackServerTabClick:(id)sender {
     [self pushDownButton:self.jackServerTabButton];

@@ -94,6 +94,7 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [_myGroup isMeshed] ) {
+        NSLog(@"iterate through groups in setup again.");
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
@@ -115,12 +116,15 @@ AMWorldMap *worldMap;
             }
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+        
+                AMLiveGroup *storedRemoteGroup = [_allGroups objectForKey:remoteGroup];
                 
                 [curGroups setObject:remoteSubGroup.groupName forKey:remoteSubGroup.groupId];
                 
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
                 
-                if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                //if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                if ( ![storedRemoteGroup.subGroups isEqualToArray:remoteGroup.subGroups] ) {
                     //subgroup either just created or location changed
                     //NSLog(@"subgroup either just created or location changed.. %@", remoteSubGroup.groupName);
                     
@@ -140,6 +144,8 @@ AMWorldMap *worldMap;
                         NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] initWithObjectsAndKeys:remoteGroup, @"group", remoteSubGroup, @"subGroup", nil];
                         
                         [_mergedLocations setObject:connectedGroups forKey:mergeId];
+                        
+                        _refreshNeeded = YES;
                     }
                     
                 }

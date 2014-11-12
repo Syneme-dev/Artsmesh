@@ -56,7 +56,7 @@
         [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
         
         for ( AMLiveUser *theUser in theGroup.users) {
-            if ([theUser.fullName length] > 0){
+            if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
                 [self addTextView:theUser.fullName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             } else {
                 [self addTextView:theUser.nickName toScrollView:self.theScrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];

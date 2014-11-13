@@ -98,9 +98,9 @@ AMWorldMap *worldMap;
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
-        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         
-        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             

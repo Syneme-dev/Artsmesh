@@ -29,10 +29,7 @@ void RunOscGroupClientUntilSigInt(
 		const char *userName, const char *userPassword, 
 		const char *groupName, const char *groupPassword );
 
+int oscgroupclient_main( int argc, char* argv[] );
 
-int RunOSCClient(const char* serverAddr, int serverPort,
-                 int remotePort, int rxPort, int txPort,
-                 const char* username, const char* userpwd,
-                 const char* groupname, const char* grouppwd);
 
 #endif /* INCLUDED_OSCGROUPCLIENT_H */

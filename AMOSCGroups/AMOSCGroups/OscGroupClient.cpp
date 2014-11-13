@@ -890,42 +890,50 @@ void RunOscGroupClientUntilSigInt(
 }
 
 
-int RunOSCClient(const char* serverAddr, int serverPort,
-                   int remotePort, int rxPort, int txPort,
-                   const char* username, const char* userpwd,
-                   const char* groupname, const char* grouppwd)
+int oscgroupclient_main(int argc, char* argv[])
 {
-     SanityCheckMd5();
+    SanityCheckMd5();
     
     try{
-        
-        IpEndpointName serverRemoteEndpoint( serverAddr, serverPort);
-        int localToRemotePort = remotePort;
-        int localTxPort = txPort;
-        int localRxPort = rxPort;
-        const char *userName = username;
-        const char *userPassword = userpwd;
-        const char *groupName = groupname;
-        const char *groupPassword = grouppwd;
-        
-        char serverAddressString[ IpEndpointName::ADDRESS_AND_PORT_STRING_LENGTH ];
-        serverRemoteEndpoint.AddressAndPortAsString( serverAddressString );
-        
+        if( argc != 10 ){
+            std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword\n";
+            std::cout << "users should send data to localhost:localtxport and listen on localhost:localrxport\n";
+            return 0;
+        }
+
+		IpEndpointName serverRemoteEndpoint( argv[1], atoi( argv[2] ) );
+        int localToRemotePort = std::atoi( argv[3] );
+        int localTxPort = std::atoi( argv[4] );
+        int localRxPort = std::atoi( argv[5] );
+        const char *userName = argv[6];
+        const char *userPassword = argv[7];
+        const char *groupName = argv[8];
+        const char *groupPassword = argv[9];
+
+		char serverAddressString[ IpEndpointName::ADDRESS_AND_PORT_STRING_LENGTH ];
+		serverRemoteEndpoint.AddressAndPortAsString( serverAddressString );
+
         std::cout << "oscgroupclient\n";
         std::cout << "connecting to group '" << groupName << "' as user '" << userName << "'.\n";
         std::cout << "using server at " << serverAddressString
-        << " with external traffic on local port " << localToRemotePort << "\n";
+                        << " with external traffic on local port " << localToRemotePort << "\n";
         std::cout << "--> send outbound traffic to localhost port " << localTxPort << "\n";
         std::cout << "<-- listen for inbound traffic on localhost port " << localRxPort << "\n";
-        
+
         RunOscGroupClientUntilSigInt( serverRemoteEndpoint, localToRemotePort,
-                                     localTxPort, localRxPort, userName, userPassword, groupName, groupPassword );
-        
+                localTxPort, localRxPort, userName, userPassword, groupName, groupPassword );
+
     }catch( std::exception& e ){
         std::cout << e.what() << std::endl;
     }
     
     return 0;
+}
+
+
+int main(int argc, char* argv[])
+{
+    return oscgroupclient_main( argc, argv );
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0136BDD91A14BE2D0009638F /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0136BDD71A14BE190009638F /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
@@ -202,6 +203,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				0136BDD91A14BE2D0009638F /* OSCGroupClient in CopyFiles */,
 				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */,
 				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */,
 				2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */,
@@ -253,6 +255,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0136BDD71A14BE190009638F /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = OSCGroupClient; path = ../../DerivedData/Artsmesh/Build/Products/Debug/OSCGroupClient; sourceTree = "<group>"; };
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
 		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
 		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
@@ -797,6 +800,7 @@
 				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
 				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
+				0136BDD71A14BE190009638F /* OSCGroupClient */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,

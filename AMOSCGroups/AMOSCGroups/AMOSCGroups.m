@@ -44,7 +44,7 @@
 
 -(id)privateInit
 {
-    
+    system("killall OscGroupClient >/dev/null");
     return self;
 }
 

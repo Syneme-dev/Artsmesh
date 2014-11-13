@@ -23,6 +23,7 @@
         self.fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:16.0], @"header",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:14.0], @"body",
+                  [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:14.0], @"body-italic",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:13.0], @"13",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:12.0], @"small",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0], @"small-italic",
@@ -53,7 +54,7 @@
     if (self.theScrollView) {
         [self addTextView:theGroup.groupName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
         
-        [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
         
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
@@ -62,9 +63,12 @@
                 [self addTextView:theUser.nickName toScrollView:self.theScrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             if ( [theUser.description length] > 0 ) {
-                [self addTextView:theUser.description toScrollView:self.theScrollView withMargin:(self.indentMargin * 2) andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.description toScrollView:self.theScrollView withMargin:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
             }
+            
         }
+        
+        self.totalH += self.bottomMargin;
     }
 }
 

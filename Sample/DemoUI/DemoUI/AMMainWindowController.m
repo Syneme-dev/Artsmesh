@@ -34,7 +34,8 @@
 #import "AMOSCMessageViewController.h"
 #import "AMGPlusViewController.h"
 #import "AMManualViewController.h"
-#import  "AMAudio/AMAudio.h"
+#import "AMAudio/AMAudio.h"
+#import "AMOSCGroups/AMOSCGroups.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -96,6 +97,9 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStarted:) name:AM_JACK_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackStopped:) name:AM_JACK_STOPPED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
 
         [[AMTimer shareInstance] addObserver:self
                                   forKeyPath:@"state"
@@ -728,6 +732,21 @@
     }
 }
 
+- (IBAction)oscServerToggled:(id)sender
+{
+    AMOSCGroups* oscGroups = [AMOSCGroups sharedInstance];
+    if(![oscGroups isOSCGroupServerStarted]){
+        [self.oscServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
+        if (![oscGroups startOSCGroupServer])
+        {
+            [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+        }
+        
+    }else{
+        [oscGroups stopOSCGroupServer];
+    }
+}
+
 -(void)jackStarted:(NSNotification*)notification
 {
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
@@ -736,6 +755,16 @@
 -(void)jackStopped:(NSNotification*)notification
 {    
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+}
+
+-(void)oscStarted:(NSNotification*)notification
+{
+    [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+}
+
+-(void)oscStopped:(NSNotification*)notification
+{
+    [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
 }
 
 

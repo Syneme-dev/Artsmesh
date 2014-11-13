@@ -650,7 +650,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -809,6 +809,9 @@
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="oscServerToggled:" target="B30-a9-ZW1" id="IvS-f0-Z8o"/>
+                        </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
                         <rect key="frame" x="221" y="731" width="38" height="17"/>
@@ -854,6 +857,7 @@
                 <outlet property="amTimerBtn" destination="F1S-Xf-hwP" id="RHz-Ul-Ctr"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>
                 <outlet property="meshBtn" destination="kwj-11-GIT" id="XSi-kI-oZ0"/>
+                <outlet property="oscServerBtn" destination="PQH-zt-t50" id="2Y7-b8-stK"/>
                 <outlet property="versionLabel" destination="2bQ-eS-vUf" id="46h-jo-WII"/>
                 <outlet property="window" destination="371" id="BOz-Gb-G7x"/>
             </connections>

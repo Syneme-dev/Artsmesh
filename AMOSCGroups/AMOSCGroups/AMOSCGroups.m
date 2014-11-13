@@ -85,6 +85,7 @@
                                         object:nil
                                         userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
+         _isOSCServerStarted = YES;
         return NO;
     }
 }
@@ -92,6 +93,7 @@
 
 -(void)stopOSCGroupServer
 {
+     _isOSCServerStarted = NO;
     [_serverTask terminate];
     _serverTask = nil;
     
@@ -112,7 +114,7 @@
 }
 
 -(BOOL)isOSCGroupServerStarted{
-    return NO;
+    return _isOSCServerStarted;
 }
 
 -(BOOL)isOSCGroupClientStarted{

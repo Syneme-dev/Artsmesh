@@ -94,7 +94,6 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [_myGroup isMeshed] ) {
-        NSLog(@"iterate through groups in setup again.");
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
@@ -746,11 +745,11 @@ AMWorldMap *worldMap;
     AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
     _floatPanelViewController = fpc;
     _floatPanelViewController.panelTitle = @"LIVE";
-    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
+    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH+floatPanel.borderThickness)];
     floatPanel.floatPanelViewController = fpc;
     //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
-    NSRect frame = NSMakeRect(0, 0, programW, programH+41);
+    NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
     
     _programWindow  = [[NSWindow alloc] initWithContentRect:frame
                                                   styleMask:NSBorderlessWindowMask
@@ -969,7 +968,7 @@ AMWorldMap *worldMap;
 
 - (NSMutableArray *)getFakeData {
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/artsmesh-test-data.json"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/artsmesh-test-data.json"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request
                                              returningResponse:nil error:nil];
     NSError *jsonParsingError = nil;
@@ -1041,8 +1040,6 @@ AMWorldMap *worldMap;
     } else { fakeUser.fullName = @""; }
     fakeUser.nickName = fakeNickName;
     fakeUser.description = fakeDescription;
-    
-    NSLog(@"the created user is %@", fakeUser);
 
     return fakeUser;
 }

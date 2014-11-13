@@ -7,18 +7,39 @@
 //
 
 #import "AMOSCGroupClientViewController.h"
+#import "AMOSCClient.h"
 
 @interface AMOSCGroupClientViewController ()
 
 @end
 
 @implementation AMOSCGroupClientViewController
+{
+    AMOSCClient* _oscClient;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    _oscClient = [[AMOSCClient alloc] init];
+    
+    _oscClient.serverAddr = @"localhost";
+    _oscClient.serverPort = @"22242";
+    _oscClient.remotePort = @"22243";
+    _oscClient.txPort = @"22244";
+    _oscClient.rxPort = @"22245";
+    _oscClient.userName = @"www";
+    _oscClient.userPwd = @"www";
+    _oscClient.groupName = @"fff";
+    _oscClient.groupPwd = @"dd";
+
 }
+
+
 - (IBAction)starttest:(id)sender {
+    
+    [_oscClient startOscClient];
 }
 
 @end

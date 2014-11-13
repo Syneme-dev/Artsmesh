@@ -18,6 +18,7 @@
 +(id)sharedInstance;
 
 -(NSViewController*)getOSCPrefUI;
+-(NSViewController*)getOSCClientUI;
 
 -(BOOL)startOSCGroupServer;
 -(void)stopOSCGroupServer;

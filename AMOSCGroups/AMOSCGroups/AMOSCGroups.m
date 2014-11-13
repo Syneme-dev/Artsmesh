@@ -11,10 +11,12 @@
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMOSCClient.h"
+#import "AMOSCGroupClientViewController.h"
 
 @implementation AMOSCGroups
 {
     AMOSCPrefViewController* _oscPrefController;
+    AMOSCGroupClientViewController* _oscClientController;
     AMOSCClient* _oscClient;
     
     BOOL _isOSCServerStarted;
@@ -54,6 +56,18 @@
     }
     
     return _oscPrefController;
+}
+
+-(NSViewController*)getOSCClientUI
+{
+    if (_oscClientController == nil) {
+        
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.OSCGroupFramework"];
+        _oscClientController = [[AMOSCGroupClientViewController alloc] initWithNibName:@"AMOSCGroupClientViewController" bundle:myBundle];
+        
+    }
+    
+    return _oscClientController;
 }
 
 -(BOOL)startOSCGroupServer;

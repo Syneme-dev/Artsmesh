@@ -44,21 +44,9 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="OSC" identifier="2" id="gf9-No-EmH">
-                            <view key="view" id="Mub-jV-tON">
+                            <view key="view" identifier="OSC Router" id="Mub-jV-tON">
                                 <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="s4W-4a-n0e">
-                                        <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_osc" id="1v3-vK-FTA"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="s4W-4a-n0e" secondAttribute="trailing" id="ECe-0O-obc"/>
-                                    <constraint firstItem="s4W-4a-n0e" firstAttribute="leading" secondItem="Mub-jV-tON" secondAttribute="leading" id="K0d-zY-vRX"/>
-                                    <constraint firstItem="s4W-4a-n0e" firstAttribute="top" secondItem="Mub-jV-tON" secondAttribute="top" id="Qud-Pn-4lu"/>
-                                    <constraint firstAttribute="bottom" secondItem="s4W-4a-n0e" secondAttribute="bottom" id="qgv-y4-vnn"/>
-                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="AUDIO" identifier="" id="mGf-md-fIs">
@@ -161,7 +149,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="shot_osc" width="996" height="892"/>
         <image name="shot_video" width="1291" height="1169"/>
         <image name="shot_visual" width="996" height="885"/>
     </resources>

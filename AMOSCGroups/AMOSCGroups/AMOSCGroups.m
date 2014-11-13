@@ -103,6 +103,7 @@
                                     object:nil
                                     userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    AMLog(kAMInfoLog, @"AMOSCGroup", @"OSCGroupServer is stopped!");
 }
 
 -(BOOL)startOSCGroupClient{

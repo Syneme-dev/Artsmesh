@@ -24,7 +24,7 @@
     
     _oscClient = [[AMOSCClient alloc] init];
     
-    _oscClient.serverAddr = @"localhost";
+    _oscClient.serverAddr = @"192.168.1.102";
     _oscClient.serverPort = @"22242";
     _oscClient.remotePort = @"22243";
     _oscClient.txPort = @"22244";

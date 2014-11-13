@@ -208,6 +208,7 @@ class ExternalCommunicationsSender : public TimerListener {
     UdpSocket& externalSocket_;
     IpEndpointName remoteServerEndpoint_;
     IpEndpointName localToServerEndpoint_;
+    IpEndpointName forwardMessageEndPoint_;
 
     std::string userName_;
     std::string userPassword_;
@@ -412,12 +413,14 @@ class ExternalCommunicationsSender : public TimerListener {
 public:
     ExternalCommunicationsSender( UdpSocket& externalSocket,
 			IpEndpointName remoteServerEndpoint,
+            IpEndpointName forwardMessageEndpoint,
 			int localToRemotePort,
             const char *userName, const char *userPassword,
             const char *groupName, const char *groupPassword )
         : lastAliveSentTime_( 0 )
         , externalSocket_( externalSocket )
 		, remoteServerEndpoint_( remoteServerEndpoint )
+        , forwardMessageEndPoint_(forwardMessageEndpoint)
 		, localToServerEndpoint_( 
 				externalSocket.LocalEndpointFor( remoteServerEndpoint ).address, 
 				localToRemotePort )
@@ -450,7 +453,9 @@ public:
                 ++peerEndpointToUse->forwardedPacketsCount;
                 peerEndpointToUse->lastPacketForwardTime = currentTime;
             }
-        }       
+        }
+        
+        externalSocket_.SendTo(forwardMessageEndPoint_, data, size);
     }
 
     
@@ -848,9 +853,10 @@ void SanityCheckMd5()
 
 void RunOscGroupClientUntilSigInt( 
 		const IpEndpointName& serverRemoteEndpoint, 
-		int localToRemotePort, int localTxPort, int localRxPort, 
+		int localToRemotePort, int localTxPort, int localRxPort,
 		const char *userName, const char *userPassword, 
-		const char *groupName, const char *groupPassword )
+		const char *groupName, const char *groupPassword,
+                                  int forwardPort)
 {
     // used hashed passwords instead of the user supplied ones
     
@@ -865,9 +871,17 @@ void RunOscGroupClientUntilSigInt(
 
 	UdpReceiveSocket localTxSocket( localTxPort );
 
-    ExternalCommunicationsSender externalCommunicationsSender( externalSocket, 
-			serverRemoteEndpoint, localToRemotePort, 
-			userName, userPasswordHash, groupName, groupPasswordHash );
+    ;
+    
+    ExternalCommunicationsSender externalCommunicationsSender(
+                                                              externalSocket,
+                                                              serverRemoteEndpoint,
+                                                              IpEndpointName("127.0.0.1",forwardPort),
+                                                              localToRemotePort,
+                                                              userName,
+                                                              userPasswordHash,
+                                                              groupName,
+                                                              groupPasswordHash );
 
     ExternalSocketListener externalSocketListener( 
 			serverRemoteEndpoint, localRxPort,
@@ -895,8 +909,8 @@ int oscgroupclient_main(int argc, char* argv[])
     SanityCheckMd5();
     
     try{
-        if( argc != 10 ){
-            std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword\n";
+        if( argc != 11 ){
+            std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword forwardPort\n";
             std::cout << "users should send data to localhost:localtxport and listen on localhost:localrxport\n";
             return 0;
         }
@@ -909,6 +923,7 @@ int oscgroupclient_main(int argc, char* argv[])
         const char *userPassword = argv[7];
         const char *groupName = argv[8];
         const char *groupPassword = argv[9];
+        int forwardPort = std::atoi(argv[10]);
 
 		char serverAddressString[ IpEndpointName::ADDRESS_AND_PORT_STRING_LENGTH ];
 		serverRemoteEndpoint.AddressAndPortAsString( serverAddressString );
@@ -921,7 +936,7 @@ int oscgroupclient_main(int argc, char* argv[])
         std::cout << "<-- listen for inbound traffic on localhost port " << localRxPort << "\n";
 
         RunOscGroupClientUntilSigInt( serverRemoteEndpoint, localToRemotePort,
-                localTxPort, localRxPort, userName, userPassword, groupName, groupPassword );
+                localTxPort, localRxPort, userName, userPassword, groupName, groupPassword, forwardPort);
 
     }catch( std::exception& e ){
         std::cout << e.what() << std::endl;

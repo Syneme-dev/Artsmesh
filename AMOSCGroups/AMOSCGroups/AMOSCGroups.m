@@ -10,10 +10,12 @@
 #import "AMOSCPrefViewController.h"
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMOSCClient.h"
 
 @implementation AMOSCGroups
 {
     AMOSCPrefViewController* _oscPrefController;
+    AMOSCClient* _oscClient;
     
     BOOL _isOSCServerStarted;
     BOOL _isOSCClientStarted;
@@ -107,6 +109,21 @@
 }
 
 -(BOOL)startOSCGroupClient{
+    
+    _oscClient = [[AMOSCClient alloc] init];
+    
+    _oscClient.serverAddr = @"localhost";
+    _oscClient.serverPort = @"22242";
+    _oscClient.remotePort = @"22243";
+    _oscClient.txPort = @"22244";
+    _oscClient.rxPort = @"22245";
+    _oscClient.userName = @"www";
+    _oscClient.userPwd = @"wwwp";
+    _oscClient.groupName = @"ggg";
+    _oscClient.groupPwd = @"gggp";
+    [_oscClient startOscClient];
+    
+
     return NO;
 }
 

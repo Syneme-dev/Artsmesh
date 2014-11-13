@@ -64,11 +64,6 @@
 		D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472931119A6E5030034CC34 /* Cocoa.framework */; };
 		D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D472931A19A6E5030034CC34 /* InfoPlist.strings */; };
 		D472932019A6E5030034CC34 /* AMAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = D472931F19A6E5030034CC34 /* AMAudio.m */; };
-		D472932719A6E5030034CC34 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472932619A6E5030034CC34 /* XCTest.framework */; };
-		D472932819A6E5030034CC34 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472931119A6E5030034CC34 /* Cocoa.framework */; };
-		D472932B19A6E5030034CC34 /* AMAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472930E19A6E5030034CC34 /* AMAudio.framework */; };
-		D472933119A6E5030034CC34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D472932F19A6E5030034CC34 /* InfoPlist.strings */; };
-		D472933319A6E5030034CC34 /* AMAudioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D472933219A6E5030034CC34 /* AMAudioTests.m */; };
 		D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D472933C19A6E5460034CC34 /* AMAudioDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D472933D19A6E5460034CC34 /* AMAudioDevice.m */; };
 		D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,16 +81,6 @@
 		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
 		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D472932919A6E5030034CC34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D472930519A6E5030034CC34 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D472930D19A6E5030034CC34;
-			remoteInfo = AMAudio;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D4FA2C0919B4BD0000B245BB /* CopyFiles */ = {
@@ -175,11 +160,7 @@
 		D472931D19A6E5030034CC34 /* AMAudio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMAudio-Prefix.pch"; sourceTree = "<group>"; };
 		D472931E19A6E5030034CC34 /* AMAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAudio.h; sourceTree = "<group>"; };
 		D472931F19A6E5030034CC34 /* AMAudio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAudio.m; sourceTree = "<group>"; };
-		D472932519A6E5030034CC34 /* AMAudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMAudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D472932619A6E5030034CC34 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		D472932E19A6E5030034CC34 /* AMAudioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMAudioTests-Info.plist"; sourceTree = "<group>"; };
-		D472933019A6E5030034CC34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D472933219A6E5030034CC34 /* AMAudioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAudioTests.m; sourceTree = "<group>"; };
 		D472933C19A6E5460034CC34 /* AMAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioDevice.h; path = AMAudio/AMAudioDevice.h; sourceTree = "<group>"; };
 		D472933D19A6E5460034CC34 /* AMAudioDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAudioDevice.m; path = AMAudio/AMAudioDevice.m; sourceTree = "<group>"; };
 		D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioDeviceManager.h; path = AMAudio/AMAudioDeviceManager.h; sourceTree = "<group>"; };
@@ -210,16 +191,6 @@
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
 				D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */,
 				D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D472932219A6E5030034CC34 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D472932B19A6E5030034CC34 /* AMAudio.framework in Frameworks */,
-				D472932819A6E5030034CC34 /* Cocoa.framework in Frameworks */,
-				D472932719A6E5030034CC34 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				D472931719A6E5030034CC34 /* AMAudio */,
-				D472932C19A6E5030034CC34 /* AMAudioTests */,
 				D472931019A6E5030034CC34 /* Frameworks */,
 				D472930F19A6E5030034CC34 /* Products */,
 			);
@@ -322,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				D472930E19A6E5030034CC34 /* AMAudio.framework */,
-				D472932519A6E5030034CC34 /* AMAudioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,24 +343,6 @@
 				D472931919A6E5030034CC34 /* AMAudio-Info.plist */,
 				D472931A19A6E5030034CC34 /* InfoPlist.strings */,
 				D472931D19A6E5030034CC34 /* AMAudio-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D472932C19A6E5030034CC34 /* AMAudioTests */ = {
-			isa = PBXGroup;
-			children = (
-				D472933219A6E5030034CC34 /* AMAudioTests.m */,
-				D472932D19A6E5030034CC34 /* Supporting Files */,
-			);
-			path = AMAudioTests;
-			sourceTree = "<group>";
-		};
-		D472932D19A6E5030034CC34 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D472932E19A6E5030034CC34 /* AMAudioTests-Info.plist */,
-				D472932F19A6E5030034CC34 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -464,24 +415,6 @@
 			productReference = D472930E19A6E5030034CC34 /* AMAudio.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D472932419A6E5030034CC34 /* AMAudioTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D472933919A6E5030034CC34 /* Build configuration list for PBXNativeTarget "AMAudioTests" */;
-			buildPhases = (
-				D472932119A6E5030034CC34 /* Sources */,
-				D472932219A6E5030034CC34 /* Frameworks */,
-				D472932319A6E5030034CC34 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D472932A19A6E5030034CC34 /* PBXTargetDependency */,
-			);
-			name = AMAudioTests;
-			productName = AMAudioTests;
-			productReference = D472932519A6E5030034CC34 /* AMAudioTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -490,11 +423,6 @@
 			attributes = {
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = AM;
-				TargetAttributes = {
-					D472932419A6E5030034CC34 = {
-						TestTargetID = D472930D19A6E5030034CC34;
-					};
-				};
 			};
 			buildConfigurationList = D472930819A6E5030034CC34 /* Build configuration list for PBXProject "AMAudio" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -509,7 +437,6 @@
 			projectRoot = "";
 			targets = (
 				D472930D19A6E5030034CC34 /* AMAudio */,
-				D472932419A6E5030034CC34 /* AMAudioTests */,
 			);
 		};
 /* End PBXProject section */
@@ -525,14 +452,6 @@
 				0198A79C1A0F2264009A36CA /* AMAudioMixerViewController.xib in Resources */,
 				26624DC119C912BF008F3D6D /* JackTripBtn.png in Resources */,
 				26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D472932319A6E5030034CC34 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D472933119A6E5030034CC34 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,37 +486,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D472932119A6E5030034CC34 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D472933319A6E5030034CC34 /* AMAudioTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D472932A19A6E5030034CC34 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D472930D19A6E5030034CC34 /* AMAudio */;
-			targetProxy = D472932919A6E5030034CC34 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D472931A19A6E5030034CC34 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D472931B19A6E5030034CC34 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D472932F19A6E5030034CC34 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D472933019A6E5030034CC34 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -745,46 +640,6 @@
 			};
 			name = Release;
 		};
-		D472933A19A6E5030034CC34 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMAudio.framework/Versions/A/AMAudio";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMAudio/AMAudio-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMAudioTests/AMAudioTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		D472933B19A6E5030034CC34 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMAudio.framework/Versions/A/AMAudio";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMAudio/AMAudio-Prefix.pch";
-				INFOPLIST_FILE = "AMAudioTests/AMAudioTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -802,15 +657,6 @@
 			buildConfigurations = (
 				D472933719A6E5030034CC34 /* Debug */,
 				D472933819A6E5030034CC34 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D472933919A6E5030034CC34 /* Build configuration list for PBXNativeTarget "AMAudioTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D472933A19A6E5030034CC34 /* Debug */,
-				D472933B19A6E5030034CC34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

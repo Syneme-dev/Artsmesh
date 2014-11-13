@@ -94,6 +94,7 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [_myGroup isMeshed] ) {
+        NSLog(@"iterate through groups in setup again.");
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
@@ -115,12 +116,15 @@ AMWorldMap *worldMap;
             }
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+        
+                AMLiveGroup *storedRemoteGroup = [_allGroups objectForKey:remoteGroup];
                 
                 [curGroups setObject:remoteSubGroup.groupName forKey:remoteSubGroup.groupId];
                 
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
                 
-                if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                //if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                if ( ![storedRemoteGroup.subGroups isEqualToArray:remoteGroup.subGroups] ) {
                     //subgroup either just created or location changed
                     //NSLog(@"subgroup either just created or location changed.. %@", remoteSubGroup.groupName);
                     
@@ -140,6 +144,8 @@ AMWorldMap *worldMap;
                         NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] initWithObjectsAndKeys:remoteGroup, @"group", remoteSubGroup, @"subGroup", nil];
                         
                         [_mergedLocations setObject:connectedGroups forKey:mergeId];
+                        
+                        _refreshNeeded = YES;
                     }
                     
                 }
@@ -616,7 +622,7 @@ AMWorldMap *worldMap;
                                             
                                             if ( [theOverlay isHidden] ) {
 
-                                                [self displayGroupPreviewOverlay:mergedGroup];
+                                                [self displayGroupPreviewOverlay:theMergedGroup];
                                             }
                                         }
                                         
@@ -794,7 +800,7 @@ AMWorldMap *worldMap;
     
     // Configure & display the group/user fields
     
-    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 100)];
+    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 0)];
     
     _programViewController.scrollView.documentView = programContentContainer;
     
@@ -996,6 +1002,7 @@ AMWorldMap *worldMap;
 
 - (AMLiveGroup *)createFakeGroup:(NSDictionary *)remoteGroup {
     NSDictionary *rawGroupData = [remoteGroup objectForKey:@"GroupData"];
+    NSArray *rawUserData = [remoteGroup objectForKey:@"Users"];
     NSArray *rawSubGroupData = [remoteGroup valueForKey:@"SubGroups"];
     
     AMLiveGroup *theGroup = [[AMLiveGroup alloc] init];
@@ -1009,6 +1016,10 @@ AMWorldMap *worldMap;
     theGroup.longitude = [rawGroupData valueForKey:@"Longitude"];
     theGroup.latitude = [rawGroupData valueForKey:@"Latitude"];
     theGroup.busy = (BOOL)[rawGroupData valueForKey:@"Busy"];
+
+    if ( ![rawUserData isEqual:[NSNull null]] ) {
+        theGroup.users = [self findFakeUsers:rawUserData];
+    }
     
     if ( ![rawSubGroupData isEqual:[NSNull null]] ) {
         //NSLog(@"no subgroups");
@@ -1016,6 +1027,36 @@ AMWorldMap *worldMap;
     }
     
     return theGroup;
+}
+
+- (AMLiveUser *)createFakeUser:(NSDictionary *)theUser {
+    AMLiveUser *fakeUser = [[AMLiveUser alloc] init];
+    
+    NSString *fakeFullName = [theUser objectForKey:@"FullName"];
+    NSString *fakeNickName = [theUser objectForKey:@"NickName"];
+    NSString *fakeDescription = [theUser objectForKey:@"Description"];
+    
+    if (![fakeFullName isEqualToString:@"FullName"]) {
+        fakeUser.fullName = fakeFullName;
+    } else { fakeUser.fullName = @""; }
+    fakeUser.nickName = fakeNickName;
+    fakeUser.description = fakeDescription;
+    
+    NSLog(@"the created user is %@", fakeUser);
+
+    return fakeUser;
+}
+
+- (NSMutableArray *)findFakeUsers:(NSArray *)rawUserData {
+    
+    NSMutableArray *users = [[NSMutableArray alloc] init];
+
+    for (NSDictionary *user in rawUserData) {
+        AMLiveUser *theUser = [self createFakeUser:user];
+        [users addObject:theUser];
+    }
+    
+    return users;
 }
 
 - (NSMutableArray *)findFakeSubGroups:(NSArray *)rawSubGroupData {

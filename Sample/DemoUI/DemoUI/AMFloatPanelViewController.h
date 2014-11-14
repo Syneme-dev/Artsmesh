@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMLiveMapView.h"
+#import "AMFlippedView.h"
 #import "UIFramework/BlueBackgroundView.h"
 
 
@@ -16,6 +17,8 @@
 @property (strong) IBOutlet BlueBackgroundView *panelTop;
 
 @property (strong) IBOutlet NSButton *closeBtn;
+
+@property (strong) IBOutlet AMFlippedView *panelContent;
 
 @property NSString *panelTitle;
 @property NSWindow *containerWindow;

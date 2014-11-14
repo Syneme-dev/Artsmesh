@@ -43,7 +43,7 @@
         self.backgroundColor = UI_Color_gray;
         //        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         self.borderThickness = 16;
-    }
+            }
     self.isDragging = NO;
     self.inFullScreenMode = NO;
     self.tearedOff = YES;
@@ -82,7 +82,7 @@
     NSPoint convertedPoint = [self convertPoint:p fromView:nil];
         
     if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
-        NSLog(@"clicked on right knob!");
+        //NSLog(@"clicked on right knob!");
         self.resizing = YES;
         p = [self convertPoint:p fromView:nil];
         _constantVector = NSMakePoint(self.bounds.size.width - p.x,

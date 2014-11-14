@@ -97,9 +97,9 @@ AMWorldMap *worldMap;
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
-        //for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        for (AMLiveGroup *remoteGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         
-        for (AMLiveGroup *remoteGroup in [self getFakeData]) {
+        //for (AMLiveGroup *remoteGroup in [self getFakeData]) {
             
             [curGroups setObject:remoteGroup.groupName forKey:remoteGroup.groupId];
             
@@ -737,6 +737,7 @@ AMWorldMap *worldMap;
 
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
     _programViewController = pvc;
+    pvc.view.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     pvc.scrollView.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     
     double programW = pvc.view.frame.size.width;
@@ -757,8 +758,8 @@ AMWorldMap *worldMap;
                                                       defer:NO];
     fpc.containerWindow = _programWindow;
 
-    [fpc.view addSubview:pvc.view];
-    
+    [fpc.panelContent addSubview:pvc.view];
+
     
     //[_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
@@ -767,6 +768,23 @@ AMWorldMap *worldMap;
     
     
     [_programWindow.contentView addSubview:floatPanel];
+    
+    
+    pvc.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : pvc.view}];
+    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : pvc.view}];
+    [_programWindow.contentView addConstraints:verticalConstraints1];
+    [_programWindow.contentView addConstraints:horizontalConstraints1];
+    
+    [_programWindow.contentView setAutoresizesSubviews:YES];
+    [pvc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
     
     fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"

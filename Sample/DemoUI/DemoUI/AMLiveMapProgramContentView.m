@@ -40,6 +40,54 @@
 }
 
 - (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView {
+    
+    //NSMutableArray *views = [[NSArray alloc] init];
+    
+    
+    self.theScrollView = scrollView;
+    
+    NSString *theString = theGroup.groupName;
+    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
+    
+    NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
+    
+    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] init];
+    
+    [[theTextView textStorage] setAttributedString:theAttrString];
+    
+    NSSize textViewRect = [theTextView intrinsicContentSize];
+    
+    NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
+    
+    [theTextView setFrameSize:textViewRect];
+    
+    [self addSubview:theTextView];
+    
+    
+    
+    
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : theTextView}];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : theTextView}];
+    [self.superview addConstraints:horizontalConstraints];
+    [self.superview addConstraints:verticalConstraints];
+    
+    [self.superview setAutoresizesSubviews:YES];
+    
+    //[self setFrameSize:NSMakeSize(self.bounds.size.width, textViewRect.height)];
+    //NSLog(@"content view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
+    
+    //NSSize contentSize = [theTextView intrinsicContentSize];
+    //NSLog(@"used rectangle for group name text view is: %f, %f", contentSize.width, contentSize.height);
+    
+    
+    /**
     self.totalH = 0;
     self.theScrollView = scrollView;
 
@@ -48,6 +96,8 @@
     for ( AMLiveGroup *subGroup in theGroup.subGroups) {
         [self fillLiveGroup:subGroup];
     }
+    **/
+    
 }
 
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {

@@ -17,6 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+        self.backgroundColor = [NSColor redColor];
     }
     return self;
 }
@@ -26,8 +27,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    
-    [self.layer setBackgroundColor:(__bridge CGColorRef)(UI_Color_gray)];
+
     /**
     NSRect contentR = self.bounds;
     
@@ -43,6 +43,11 @@
      
     [NSGraphicsContext restoreGraphicsState];
     **/
+    
+    [self.layer setBackgroundColor:(__bridge CGColorRef)(UI_Color_gray)];
+    
+    //[self.backgroundColor set];
+    //[NSBezierPath fillRect:self.bounds];
 }
 
 -(BOOL)acceptsFirstResponder

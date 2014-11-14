@@ -94,7 +94,6 @@ AMWorldMap *worldMap;
     // Get/Set location data
     
     if ( [_myGroup isMeshed] ) {
-        NSLog(@"iterate through groups in setup again.");
         
         NSMutableDictionary *curGroups = [[NSMutableDictionary alloc] init];
         
@@ -738,6 +737,7 @@ AMWorldMap *worldMap;
 
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
     _programViewController = pvc;
+    pvc.view.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     pvc.scrollView.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     
     double programW = pvc.view.frame.size.width;
@@ -746,11 +746,11 @@ AMWorldMap *worldMap;
     AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
     _floatPanelViewController = fpc;
     _floatPanelViewController.panelTitle = @"LIVE";
-    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
+    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH+floatPanel.borderThickness)];
     floatPanel.floatPanelViewController = fpc;
     //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
-    NSRect frame = NSMakeRect(0, 0, programW, programH+41);
+    NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
     
     _programWindow  = [[NSWindow alloc] initWithContentRect:frame
                                                   styleMask:NSBorderlessWindowMask
@@ -758,8 +758,8 @@ AMWorldMap *worldMap;
                                                       defer:NO];
     fpc.containerWindow = _programWindow;
 
-    [fpc.view addSubview:pvc.view];
-    
+    [fpc.panelContent addSubview:pvc.view];
+
     
     //[_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
@@ -768,6 +768,23 @@ AMWorldMap *worldMap;
     
     
     [_programWindow.contentView addSubview:floatPanel];
+    
+    
+    pvc.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : pvc.view}];
+    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : pvc.view}];
+    [_programWindow.contentView addConstraints:verticalConstraints1];
+    [_programWindow.contentView addConstraints:horizontalConstraints1];
+    
+    [_programWindow.contentView setAutoresizesSubviews:YES];
+    [pvc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
     
     fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
@@ -969,7 +986,7 @@ AMWorldMap *worldMap;
 
 - (NSMutableArray *)getFakeData {
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/artsmesh-test-data.json"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/artsmesh-test-data.json"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request
                                              returningResponse:nil error:nil];
     NSError *jsonParsingError = nil;
@@ -1041,8 +1058,6 @@ AMWorldMap *worldMap;
     } else { fakeUser.fullName = @""; }
     fakeUser.nickName = fakeNickName;
     fakeUser.description = fakeDescription;
-    
-    NSLog(@"the created user is %@", fakeUser);
 
     return fakeUser;
 }

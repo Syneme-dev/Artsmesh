@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMBoxItem.h"
 #import "AMFloatPanelViewController.h"
 
 
-@interface AMFloatPanelView : NSView
+@interface AMFloatPanelView : AMBoxItem
 
 @property(nonatomic) NSSize initialSize;
+@property(nonatomic) int borderThickness;
 @property(nonatomic) BOOL tearedOff;
 @property(nonatomic) BOOL inFullScreenMode;
 @property(nonatomic) BOOL isDragging;

@@ -41,6 +41,7 @@
     
 }
 
+
 - (void)mouseDragged:(NSEvent *)theEvent {
     AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;
     floatPanel.isDragging = YES;
@@ -60,6 +61,7 @@
         [super mouseDragged:theEvent];
     }
 }
+
 
 - (void)mouseUp:(NSEvent *)theEvent {
     AMFloatPanelView *floatPanel = (AMFloatPanelView *)self.superview;

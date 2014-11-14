@@ -37,6 +37,7 @@
 		0136BDDF1A14C1AF0009638F /* AMOSCGroupClientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0136BDDC1A14C1AF0009638F /* AMOSCGroupClientViewController.xib */; };
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
+		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
 		4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */; };
 		4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */; };
 		4A6D4B851A130DB400B5D26B /* AMOSCPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */; };
@@ -91,6 +92,7 @@
 		0136BDDC1A14C1AF0009638F /* AMOSCGroupClientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCGroupClientViewController.xib; sourceTree = "<group>"; };
 		4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCClient.h; sourceTree = "<group>"; };
 		4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCClient.m; sourceTree = "<group>"; };
+		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMOSCGroups.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A57013C1A11B7AC00BF801E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCPrefViewController.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */,
 				4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */,
 				4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */,
 				4A6D4B901A1319D700B5D26B /* Cocoa.framework in Frameworks */,
@@ -237,6 +240,7 @@
 		4AED84101A134007004CE862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */,
 				4AED84131A1369CD004CE862 /* AMLogger.framework */,
 				4AED84111A135C20004CE862 /* AMPreferenceManager.framework */,
 				4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */,

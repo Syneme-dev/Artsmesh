@@ -27,7 +27,7 @@ void RunOscGroupClientUntilSigInt(
 		const IpEndpointName& serverRemoteEndpoint, 
 		int localToRemotePort, int localTxPort, int localRxPort, 
 		const char *userName, const char *userPassword, 
-		const char *groupName, const char *groupPassword,int forwardPort );
+		const char *groupName, const char *groupPassword, const char* monitorAddr, int monitorPort );
 
 int oscgroupclient_main( int argc, char* argv[] );
 

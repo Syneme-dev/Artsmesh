@@ -135,6 +135,8 @@
     _oscClient.userPwd = @"wwwp";
     _oscClient.groupName = @"ggg";
     _oscClient.groupPwd = @"gggp";
+    _oscClient.monitorAddr = @"localhost";
+    _oscClient.monitorPort = @"22230";
     [_oscClient startOscClient];
     
 

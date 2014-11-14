@@ -856,7 +856,7 @@ void RunOscGroupClientUntilSigInt(
 		int localToRemotePort, int localTxPort, int localRxPort,
 		const char *userName, const char *userPassword, 
 		const char *groupName, const char *groupPassword,
-                                  int forwardPort)
+        const char* monitorAddr, int monitorPort)
 {
     // used hashed passwords instead of the user supplied ones
     
@@ -876,7 +876,7 @@ void RunOscGroupClientUntilSigInt(
     ExternalCommunicationsSender externalCommunicationsSender(
                                                               externalSocket,
                                                               serverRemoteEndpoint,
-                                                              IpEndpointName("127.0.0.1",forwardPort),
+                                                              IpEndpointName(monitorAddr,monitorPort),
                                                               localToRemotePort,
                                                               userName,
                                                               userPasswordHash,
@@ -909,8 +909,8 @@ int oscgroupclient_main(int argc, char* argv[])
     SanityCheckMd5();
     
     try{
-        if( argc != 11 ){
-            std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword forwardPort\n";
+        if( argc != 12 ){
+            std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword monitorAddr monitorPort\n";
             std::cout << "users should send data to localhost:localtxport and listen on localhost:localrxport\n";
             return 0;
         }
@@ -923,7 +923,8 @@ int oscgroupclient_main(int argc, char* argv[])
         const char *userPassword = argv[7];
         const char *groupName = argv[8];
         const char *groupPassword = argv[9];
-        int forwardPort = std::atoi(argv[10]);
+        const char *monitorAddr = argv[10];
+        int monitorPort = std::atoi(argv[11]);
 
 		char serverAddressString[ IpEndpointName::ADDRESS_AND_PORT_STRING_LENGTH ];
 		serverRemoteEndpoint.AddressAndPortAsString( serverAddressString );
@@ -936,7 +937,7 @@ int oscgroupclient_main(int argc, char* argv[])
         std::cout << "<-- listen for inbound traffic on localhost port " << localRxPort << "\n";
 
         RunOscGroupClientUntilSigInt( serverRemoteEndpoint, localToRemotePort,
-                localTxPort, localRxPort, userName, userPassword, groupName, groupPassword, forwardPort);
+                localTxPort, localRxPort, userName, userPassword, groupName, groupPassword, monitorAddr, monitorPort);
 
     }catch( std::exception& e ){
         std::cout << e.what() << std::endl;

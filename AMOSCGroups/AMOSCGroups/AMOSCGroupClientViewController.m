@@ -33,7 +33,9 @@
     _oscClient.userPwd = @"www";
     _oscClient.groupName = @"fff";
     _oscClient.groupPwd = @"dd";
-
+    _oscClient.monitorAddr = @"localhost";
+    _oscClient.monitorPort = @"22230";
+    
 }
 
 

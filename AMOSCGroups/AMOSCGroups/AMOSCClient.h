@@ -19,6 +19,8 @@
 @property NSString* userPwd;
 @property NSString* groupName;
 @property NSString* groupPwd;
+@property NSString* monitorAddr;
+@property NSString* monitorPort;
 
 -(BOOL)startOscClient;
 -(void)stopOscClient;

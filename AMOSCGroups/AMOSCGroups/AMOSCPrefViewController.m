@@ -97,11 +97,11 @@
      forKey:Preference_OSC_Client_GroupPwd];
     
     [[AMPreferenceManager standardUserDefaults]
-     setObject:self.oscClientMonitorAddr
+     setObject:self.oscClientMonitorAddr.stringValue
      forKey:Preference_OSC_Client_MonitorAddr];
     
     [[AMPreferenceManager standardUserDefaults]
-     setObject:self.oscClientMonitorPort
+     setObject:self.oscClientMonitorPort.stringValue
      forKey:Preference_OSC_Client_MonitorPort];
     
 }

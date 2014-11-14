@@ -13,6 +13,8 @@
 #import "CoreLocation/CoreLocation.h"
 #import "AMLiveMapProgramView.h"
 #import "AMLiveMapProgramViewController.h"
+#import "AMLiveMapProgramContentView.h"
+#import "AMLiveMapProgramPanelTextView.h"
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 #import "AMPanelViewController.h"
@@ -500,7 +502,7 @@ AMWorldMap *worldMap;
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:16.0], @"header",
-              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:14.0], @"body",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:13.0], @"13",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0], @"small-italic",
@@ -730,6 +732,7 @@ AMWorldMap *worldMap;
 
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
     _programViewController = pvc;
+    pvc.scrollView.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
@@ -779,16 +782,26 @@ AMWorldMap *worldMap;
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
-    //_floatPanelViewController.panelTitle = theGroup.groupName;
     
-    //NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
+    // Remove old content from scroll view
+    /**
+    for(NSView *subview in [_programViewController.scrollView subviews]) {
+        if([subview isKindOfClass:[AMLiveMapProgramPanelTextView class]]) {
+            [subview removeFromSuperview];
+        }
+    }
+     **/
     
-    NSFont* textViewFont =  [_fonts objectForKey:@"13"];
-    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textViewFont};
-    NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    // Configure & display the group/user fields
+    
+    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 100)];
+    
+    _programViewController.scrollView.documentView = programContentContainer;
+    
+    [programContentContainer fillContent:theGroup inScrollView:_programViewController.scrollView];
     
     
-    _programViewController.desc = attrStr;
+    // Display the program
     _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
 }

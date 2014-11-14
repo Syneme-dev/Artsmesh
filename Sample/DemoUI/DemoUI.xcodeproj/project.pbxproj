@@ -49,8 +49,10 @@
 		2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D016D5A1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib */; };
 		2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */; };
 		2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0289BB1A0984BC0020968E /* AMFloatControlView.m */; };
+		2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */; };
 		2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */; };
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
+		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -316,10 +318,14 @@
 		2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPreviewPanelView.m; sourceTree = "<group>"; };
 		2D0289BA1A0984BC0020968E /* AMFloatControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatControlView.h; sourceTree = "<group>"; };
 		2D0289BB1A0984BC0020968E /* AMFloatControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatControlView.m; sourceTree = "<group>"; };
+		2D0A7B8E1A11678B00202C3E /* AMLiveMapProgramContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramContentView.h; sourceTree = "<group>"; };
+		2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramContentView.m; sourceTree = "<group>"; };
 		2D18D8BE1A04A456005BC1A7 /* AMFloatPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelView.h; sourceTree = "<group>"; };
 		2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelView.m; sourceTree = "<group>"; };
 		2D18D8C41A04AC5B005BC1A7 /* AMFloatPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelViewController.h; sourceTree = "<group>"; };
 		2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelViewController.m; sourceTree = "<group>"; };
+		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
+		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
 		2D6D76F019C16B4400201106 /* AMWorldMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWorldMap.m; sourceTree = "<group>"; };
 		2D6D76F219C16C5100201106 /* AMLiveMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapView.h; sourceTree = "<group>"; };
@@ -779,6 +785,10 @@
 				2D0289BB1A0984BC0020968E /* AMFloatControlView.m */,
 				2D016D5D1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.h */,
 				2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */,
+				2D0A7B8E1A11678B00202C3E /* AMLiveMapProgramContentView.h */,
+				2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */,
+				2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */,
+				2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1268,6 +1278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				269F93671998F024006E19DD /* AMManualViewController.m in Sources */,
+				2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */,
 				269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
@@ -1328,6 +1339,7 @@
 				266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */,
+				2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,9 +14,8 @@
 
 @property (strong) IBOutlet NSScrollView *descScrollView;
 
-@property (strong) IBOutlet AMFoundryFontTextView *scrollTextView;
+@property (strong) IBOutlet NSScrollView *scrollView;
 
 @property AMLiveGroup *group;
-@property NSAttributedString *desc;
 
 @end

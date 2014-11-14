@@ -43,7 +43,11 @@
                                 <size key="minSize" width="130" height="28"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <connections>
-                                    <binding destination="-2" name="attributedString" keyPath="self.groupDesc" id="A5M-qx-XaJ"/>
+                                    <binding destination="-2" name="attributedString" keyPath="self.groupDesc" id="DRy-LR-aE6">
+                                        <dictionary key="options">
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textView>
                         </subviews>

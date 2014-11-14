@@ -80,6 +80,8 @@
              @"default", Preference_OSC_Client_UserPwd,
              @"default", Preference_OSC_Client_GroupName,
              @"default", Preference_OSC_Client_GroupPwd,
+             @"localhost", Preference_OSC_Client_MonitorAddr,
+             @"22230", Preference_OSC_Client_MonitorPort,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

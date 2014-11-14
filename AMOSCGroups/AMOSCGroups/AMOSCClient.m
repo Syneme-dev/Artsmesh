@@ -9,6 +9,7 @@
 #import "AMOSCClient.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 #import "AMLogger/AMLogger.h"
+#import "OSCPacket.h"
 
 @interface AMOSCClient()<GCDAsyncUdpSocketDelegate>
 @end
@@ -54,15 +55,15 @@
          self.groupPwd, self.monitorAddr,
          self.monitorPort];
         
-//        [_task terminate];
-//        _task = [[NSTask alloc] init];
-//        _task.launchPath = @"/bin/bash";
-//        _task.arguments = @[@"-c", [commandline copy]];
+        [_task terminate];
+        _task = [[NSTask alloc] init];
+        _task.launchPath = @"/bin/bash";
+        _task.arguments = @[@"-c", [commandline copy]];
         
         //AMLog(kAMInfoLog, @"AMOscGroups", commandline);
         NSLog(@"start osc client command is : %@", commandline);
         
-//        [_task launch];
+        [_task launch];
         
         return YES;
     }else{
@@ -87,10 +88,23 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSString* oscMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"receive osc message : %@", oscMessage);
-    //AMLog(kAMInfoLog, @"AMOSCGroups", oscMessage);
+    //NSString* host = [GCDAsyncUdpSocket hostFromAddress:address];
+    int port = [GCDAsyncUdpSocket portFromAddress:address];
     
+    OSCMutableMessage* packet = [[OSCMutableMessage alloc] initWithData:data];
+    NSLog(@"osc message:%@", packet.description);
+    
+    if (port == [self.remotePort intValue]) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate oscMessageSent:packet.description];
+        });
+        
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate oscMessageRecieved:packet.description];
+        });
+    }
 }
 
 

@@ -24,6 +24,8 @@
 @property (weak) IBOutlet NSTextField *oscClientUserPwd;
 @property (weak) IBOutlet NSTextField *oscClientGroupName;
 @property (weak) IBOutlet NSTextField *oscClientGroupPwd;
+@property (weak) IBOutlet NSTextField *oscClientMonitorAddr;
+@property (weak) IBOutlet NSTextField *oscClientMonitorPort;
 
 @end
 
@@ -94,6 +96,14 @@
      setObject:self.oscClientGroupPwd.stringValue
      forKey:Preference_OSC_Client_GroupPwd];
     
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.oscClientMonitorAddr
+     forKey:Preference_OSC_Client_MonitorAddr];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.oscClientMonitorPort
+     forKey:Preference_OSC_Client_MonitorPort];
+    
 }
 
 - (IBAction)restoreConfig:(id)sender
@@ -150,6 +160,14 @@
     NSString* grouppwd = [[AMPreferenceManager standardUserDefaults]
                            stringForKey:Preference_OSC_Client_GroupPwd];
     self.oscClientGroupPwd.stringValue = grouppwd;
+    
+    NSString* monitorAddr = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_OSC_Client_MonitorAddr];
+    self.oscClientMonitorAddr.stringValue = monitorAddr;
+    
+    NSString* monitorPort = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_OSC_Client_MonitorPort];
+    self.oscClientMonitorPort.stringValue = monitorPort;
 }
 
 
@@ -239,6 +257,17 @@
     
     NSString* grouppwd = self.oscClientGroupPwd.stringValue;
     if ([grouppwd isEqualToString:@""]) {
+        
+        return NO;
+    }
+    
+    NSString* monitorAddr = self.oscClientMonitorAddr.stringValue;
+    if ([monitorAddr isEqualToString:@""]){
+        return NO;
+    }
+    
+    int monitorPort = [self.oscClientMonitorPort intValue];
+    if (monitorPort < 1025 || monitorPort > 65535) {
         
         return NO;
     }

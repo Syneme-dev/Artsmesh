@@ -740,6 +740,7 @@ protected:
     const char *groupPassword_;
 
     UdpTransmitSocket localRxSocket_;
+    UdpTransmitSocket monitorSocket_;
 
     ExternalCommunicationsSender& externalCommunicationsSender_;
 
@@ -751,7 +752,8 @@ public:
     ExternalSocketListener( const IpEndpointName& remoteServerEndpoint, 
 			int localRxPort, const char *userName, const char *userPassword,
             const char *groupName, const char *groupPassword,
-            ExternalCommunicationsSender& externalCommunicationsSender )
+            ExternalCommunicationsSender& externalCommunicationsSender ,
+                           IpEndpointName monitorEndPoint)
         : remoteServerEndpoint_( remoteServerEndpoint )
         , userName_( userName )
         , userPassword_( userPassword )
@@ -759,6 +761,7 @@ public:
         , groupPassword_( groupPassword )
         , localRxSocket_( IpEndpointName( "localhost", localRxPort ) )
         , externalCommunicationsSender_( externalCommunicationsSender )
+        , monitorSocket_(monitorEndPoint)
     {
     }
 
@@ -783,6 +786,8 @@ public:
             // forward packet to local receive socket
 
             localRxSocket_.Send( data, size );
+            monitorSocket_.Send(data, size);
+            
         }
     }
 };
@@ -886,7 +891,7 @@ void RunOscGroupClientUntilSigInt(
     ExternalSocketListener externalSocketListener( 
 			serverRemoteEndpoint, localRxPort,
             userName, userPasswordHash, groupName, groupPasswordHash,
-            externalCommunicationsSender );
+            externalCommunicationsSender, IpEndpointName(monitorAddr,monitorPort));
 
     LocalTxSocketListener localTxSocketListener( externalCommunicationsSender );
 

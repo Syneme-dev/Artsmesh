@@ -101,6 +101,8 @@
 #define Preference_OSC_Client_UserPwd      @"Preference_OSC_Client_UserPwd"
 #define Preference_OSC_Client_GroupName    @"Preference_OSC_Client_GroupName"
 #define Preference_OSC_Client_GroupPwd     @"Preference_OSC_Client_GroupPwd"
+#define Preference_OSC_Client_MonitorAddr  @"Preference_OSC_Client_MonitorAddr"
+#define Preference_OSC_Client_MonitorPort  @"Preference_OSC_Client_MonitorPort"
 
 
 #import <Foundation/Foundation.h>

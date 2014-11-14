@@ -38,6 +38,10 @@
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
 		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
+		4A5954E31A15ED060058F0A5 /* OSCPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5954E11A15ED060058F0A5 /* OSCPacket.h */; };
+		4A5954E41A15ED060058F0A5 /* OSCPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5954E21A15ED060058F0A5 /* OSCPacket.m */; };
+		4A5954E71A15ED770058F0A5 /* NS+OSCAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5954E51A15ED770058F0A5 /* NS+OSCAdditions.h */; };
+		4A5954E81A15ED770058F0A5 /* NS+OSCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5954E61A15ED770058F0A5 /* NS+OSCAdditions.m */; };
 		4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */; };
 		4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */; };
 		4A6D4B851A130DB400B5D26B /* AMOSCPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */; };
@@ -95,6 +99,10 @@
 		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		4A5701381A11B7AC00BF801E /* AMOSCGroups.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMOSCGroups.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A57013C1A11B7AC00BF801E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A5954E11A15ED060058F0A5 /* OSCPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSCPacket.h; sourceTree = "<group>"; };
+		4A5954E21A15ED060058F0A5 /* OSCPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSCPacket.m; sourceTree = "<group>"; };
+		4A5954E51A15ED770058F0A5 /* NS+OSCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NS+OSCAdditions.h"; sourceTree = "<group>"; };
+		4A5954E61A15ED770058F0A5 /* NS+OSCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS+OSCAdditions.m"; sourceTree = "<group>"; };
 		4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCPrefViewController.h; sourceTree = "<group>"; };
 		4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCPrefViewController.m; sourceTree = "<group>"; };
 		4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCPrefViewController.xib; sourceTree = "<group>"; };
@@ -218,6 +226,10 @@
 				4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */,
 				4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */,
 				4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */,
+				4A5954E51A15ED770058F0A5 /* NS+OSCAdditions.h */,
+				4A5954E61A15ED770058F0A5 /* NS+OSCAdditions.m */,
+				4A5954E11A15ED060058F0A5 /* OSCPacket.h */,
+				4A5954E21A15ED060058F0A5 /* OSCPacket.m */,
 				4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */,
 				4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */,
 				4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */,
@@ -262,6 +274,7 @@
 				013442EC1A14DD0700ADD521 /* UdpSocket.h in Headers */,
 				013441751A14D71500ADD521 /* md5.h in Headers */,
 				013441771A14D71500ADD521 /* OscGroupClient.h in Headers */,
+				4A5954E71A15ED770058F0A5 /* NS+OSCAdditions.h in Headers */,
 				013442E81A14DD0700ADD521 /* PacketListener.h in Headers */,
 				013442EE1A14DD0700ADD521 /* MessageMappingOscPacketListener.h in Headers */,
 				4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */,
@@ -273,6 +286,7 @@
 				0136BDDD1A14C1AF0009638F /* AMOSCGroupClientViewController.h in Headers */,
 				013442E61A14DD0700ADD521 /* IpEndpointName.h in Headers */,
 				013442F91A14DD0700ADD521 /* OscTypes.h in Headers */,
+				4A5954E31A15ED060058F0A5 /* OSCPacket.h in Headers */,
 				4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +401,8 @@
 				4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */,
 				4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */,
 				0136BDDE1A14C1AF0009638F /* AMOSCGroupClientViewController.m in Sources */,
+				4A5954E41A15ED060058F0A5 /* OSCPacket.m in Sources */,
+				4A5954E81A15ED770058F0A5 /* NS+OSCAdditions.m in Sources */,
 				4A6D4B891A130F3000B5D26B /* AMOSCGroups.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

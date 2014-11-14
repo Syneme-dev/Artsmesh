@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol AMOSCClientDelegate;
 
 @interface AMOSCClient : NSObject
 
@@ -22,7 +23,16 @@
 @property NSString* monitorAddr;
 @property NSString* monitorPort;
 
+@property id<AMOSCClientDelegate> delegate;
+
 -(BOOL)startOscClient;
 -(void)stopOscClient;
+
+@end
+
+@protocol AMOSCClientDelegate <NSObject>
+
+-(void)oscMessageRecieved:(NSString*)content;
+-(void)oscMessageSent:(NSString*)content;
 
 @end

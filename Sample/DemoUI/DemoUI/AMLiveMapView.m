@@ -13,6 +13,8 @@
 #import "CoreLocation/CoreLocation.h"
 #import "AMLiveMapProgramView.h"
 #import "AMLiveMapProgramViewController.h"
+#import "AMLiveMapProgramContentView.h"
+#import "AMLiveMapProgramPanelTextView.h"
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 #import "AMPanelViewController.h"
@@ -113,12 +115,15 @@ AMWorldMap *worldMap;
             }
             
             for (AMLiveGroup *remoteSubGroup in remoteGroup.subGroups) {
+        
+                AMLiveGroup *storedRemoteGroup = [_allGroups objectForKey:remoteGroup];
                 
                 [curGroups setObject:remoteSubGroup.groupName forKey:remoteSubGroup.groupId];
                 
                 NSString * storedSubGroupLoc = [_allGroupsLoc objectForKey:remoteSubGroup.groupId];
                 
-                if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                //if ( storedSubGroupLoc != remoteSubGroup.location ) {
+                if ( ![storedRemoteGroup.subGroups isEqualToArray:remoteGroup.subGroups] ) {
                     //subgroup either just created or location changed
                     //NSLog(@"subgroup either just created or location changed.. %@", remoteSubGroup.groupName);
                     
@@ -138,6 +143,8 @@ AMWorldMap *worldMap;
                         NSMutableDictionary *connectedGroups = [[NSMutableDictionary alloc] initWithObjectsAndKeys:remoteGroup, @"group", remoteSubGroup, @"subGroup", nil];
                         
                         [_mergedLocations setObject:connectedGroups forKey:mergeId];
+                        
+                        _refreshNeeded = YES;
                     }
                     
                 }
@@ -500,9 +507,10 @@ AMWorldMap *worldMap;
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     _fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:16.0], @"header",
-              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:14.0], @"body",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:14.0], @"body",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:10 size:13.0], @"13",
               [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0], @"small",
+              [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0], @"small-italic",
               nil];
     
     _programView = [[AMLiveMapProgramView alloc] init];
@@ -613,7 +621,7 @@ AMWorldMap *worldMap;
                                             
                                             if ( [theOverlay isHidden] ) {
 
-                                                [self displayGroupPreviewOverlay:mergedGroup];
+                                                [self displayGroupPreviewOverlay:theMergedGroup];
                                             }
                                         }
                                         
@@ -729,6 +737,8 @@ AMWorldMap *worldMap;
 
     AMLiveMapProgramViewController *pvc = [[AMLiveMapProgramViewController alloc] initWithNibName:@"AMLiveMapProgramViewController" bundle:nil];
     _programViewController = pvc;
+    pvc.view.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
+    pvc.scrollView.autoresizingMask = NSViewHeightSizable | NSViewWidthSizable;
     
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
@@ -736,11 +746,11 @@ AMWorldMap *worldMap;
     AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
     _floatPanelViewController = fpc;
     _floatPanelViewController.panelTitle = @"LIVE";
-    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH)];
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
+    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH+floatPanel.borderThickness)];
     floatPanel.floatPanelViewController = fpc;
     //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
-    NSRect frame = NSMakeRect(0, 0, programW, programH+41);
+    NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
     
     _programWindow  = [[NSWindow alloc] initWithContentRect:frame
                                                   styleMask:NSBorderlessWindowMask
@@ -748,8 +758,8 @@ AMWorldMap *worldMap;
                                                       defer:NO];
     fpc.containerWindow = _programWindow;
 
-    [fpc.view addSubview:pvc.view];
-    
+    [fpc.panelContent addSubview:pvc.view];
+
     
     //[_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
@@ -758,6 +768,23 @@ AMWorldMap *worldMap;
     
     
     [_programWindow.contentView addSubview:floatPanel];
+    
+    
+    pvc.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : pvc.view}];
+    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : pvc.view}];
+    [_programWindow.contentView addConstraints:verticalConstraints1];
+    [_programWindow.contentView addConstraints:horizontalConstraints1];
+    
+    [_programWindow.contentView setAutoresizesSubviews:YES];
+    [pvc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
     
     fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
@@ -778,16 +805,26 @@ AMWorldMap *worldMap;
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
-    //_floatPanelViewController.panelTitle = theGroup.groupName;
     
-    //NSMutableAttributedString *groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description];
+    // Remove old content from scroll view
+    /**
+    for(NSView *subview in [_programViewController.scrollView subviews]) {
+        if([subview isKindOfClass:[AMLiveMapProgramPanelTextView class]]) {
+            [subview removeFromSuperview];
+        }
+    }
+     **/
     
-    NSFont* textViewFont =  [_fonts objectForKey:@"13"];
-    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textViewFont};
-    NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    // Configure & display the group/user fields
+    
+    AMLiveMapProgramContentView *programContentContainer = [[AMLiveMapProgramContentView alloc] initWithFrame:NSMakeRect(0, 0, _programViewController.scrollView.bounds.size.width, 0)];
+    
+    _programViewController.scrollView.documentView = programContentContainer;
+    
+    [programContentContainer fillContent:theGroup inScrollView:_programViewController.scrollView];
     
     
-    _programViewController.desc = attrStr;
+    // Display the program
     _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
 }
@@ -870,6 +907,13 @@ AMWorldMap *worldMap;
     NSString *groupId = theGroup.groupId;
     AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
     gpc.group = theGroup;
+    
+    NSFont* textFieldFont =  [_fonts objectForKey:@"small-italic"];
+    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
+    NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    gpc.groupDesc = groupDesc;
+
+    
     AMGroupPreviewPanelView *previewPanelView = (AMGroupPreviewPanelView *)gpc.view;
     previewPanelView.groupPreviewPanelController = gpc;
     previewPanelView.group = theGroup;
@@ -942,7 +986,7 @@ AMWorldMap *worldMap;
 
 - (NSMutableArray *)getFakeData {
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/artsmesh-test-data.json"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost/artsmesh-test-data.json"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request
                                              returningResponse:nil error:nil];
     NSError *jsonParsingError = nil;
@@ -975,6 +1019,7 @@ AMWorldMap *worldMap;
 
 - (AMLiveGroup *)createFakeGroup:(NSDictionary *)remoteGroup {
     NSDictionary *rawGroupData = [remoteGroup objectForKey:@"GroupData"];
+    NSArray *rawUserData = [remoteGroup objectForKey:@"Users"];
     NSArray *rawSubGroupData = [remoteGroup valueForKey:@"SubGroups"];
     
     AMLiveGroup *theGroup = [[AMLiveGroup alloc] init];
@@ -988,6 +1033,10 @@ AMWorldMap *worldMap;
     theGroup.longitude = [rawGroupData valueForKey:@"Longitude"];
     theGroup.latitude = [rawGroupData valueForKey:@"Latitude"];
     theGroup.busy = (BOOL)[rawGroupData valueForKey:@"Busy"];
+
+    if ( ![rawUserData isEqual:[NSNull null]] ) {
+        theGroup.users = [self findFakeUsers:rawUserData];
+    }
     
     if ( ![rawSubGroupData isEqual:[NSNull null]] ) {
         //NSLog(@"no subgroups");
@@ -995,6 +1044,34 @@ AMWorldMap *worldMap;
     }
     
     return theGroup;
+}
+
+- (AMLiveUser *)createFakeUser:(NSDictionary *)theUser {
+    AMLiveUser *fakeUser = [[AMLiveUser alloc] init];
+    
+    NSString *fakeFullName = [theUser objectForKey:@"FullName"];
+    NSString *fakeNickName = [theUser objectForKey:@"NickName"];
+    NSString *fakeDescription = [theUser objectForKey:@"Description"];
+    
+    if (![fakeFullName isEqualToString:@"FullName"]) {
+        fakeUser.fullName = fakeFullName;
+    } else { fakeUser.fullName = @""; }
+    fakeUser.nickName = fakeNickName;
+    fakeUser.description = fakeDescription;
+
+    return fakeUser;
+}
+
+- (NSMutableArray *)findFakeUsers:(NSArray *)rawUserData {
+    
+    NSMutableArray *users = [[NSMutableArray alloc] init];
+
+    for (NSDictionary *user in rawUserData) {
+        AMLiveUser *theUser = [self createFakeUser:user];
+        [users addObject:theUser];
+    }
+    
+    return users;
 }
 
 - (NSMutableArray *)findFakeSubGroups:(NSArray *)rawSubGroupData {

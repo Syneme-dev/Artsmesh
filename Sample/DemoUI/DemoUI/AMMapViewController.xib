@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1101" height="594"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Mye-Nu-lsW" userLabel="staticTabButton">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mye-Nu-lsW" userLabel="staticTabButton">
                     <rect key="frame" x="1031" y="577" width="55" height="13"/>
                     <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="qJi-B0-FbF">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>

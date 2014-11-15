@@ -9,6 +9,7 @@
 #import "AMVisualViewController.h"
 #import "AMAudio/AMAudio.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMOSCGroups/AMOSCGroups.h"
 
 
 @interface AMVisualViewController ()
@@ -18,6 +19,7 @@
 @implementation AMVisualViewController
 {
     NSViewController* _audioRouterViewController;
+    NSViewController* _oscRouterViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -78,7 +80,33 @@
         NSView* view = item.view;
         if ([view.identifier isEqualTo:@"Audio Router"]) {
             [self loadAudioRouterView: view];
+        }else if([view.identifier isEqualTo:@"OSC Router"]){
+            [self loadOSCRouterView:view];
         }
+    }
+}
+
+-(void)loadOSCRouterView:(NSView*)tabView
+{
+    _oscRouterViewController = [[AMOSCGroups sharedInstance] getOSCClientUI];
+    if (_oscRouterViewController) {
+        NSView* contentView = _oscRouterViewController.view;
+        contentView.frame = NSMakeRect(0, 0, 800, 600);
+        [tabView addSubview:contentView];
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
     }
 }
 

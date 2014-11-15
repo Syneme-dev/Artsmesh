@@ -86,6 +86,25 @@
 #define Preference_Jack_InterfaceOutChanns @"Preference_Jack_InterfaceOutChanns"
 
 
+
+/////////////////////////////OSC Groups////////////////////////////////////////
+#define Preference_OSC_Server_Port         @"Preference_OSC_Server_Port"
+#define Preference_OSC_Server_MaxUsers     @"Preference_OSC_Server_MaxUsers"
+#define Preference_OSC_Server_Timeout      @"Preference_OSC_Server_Timeout"
+#define Preference_OSC_Server_MaxGroups    @"Preference_OSC_Server_MaxGroups"
+#define Preference_OSC_Client_ServerAddr   @"Preference_OSC_Client_ServerAddr"
+#define Preference_OSC_Client_ServerPort   @"Preference_OSC_Client_ServerPort"
+#define Preference_OSC_Client_RemotePort   @"Preference_OSC_Client_RemotePort"
+#define Preference_OSC_Client_TxPort       @"Preference_OSC_Client_TxPort"
+#define Preference_OSC_Client_RxPort       @"Preference_OSC_Client_RxPort"
+#define Preference_OSC_Client_UserName     @"Preference_OSC_Client_UserName"
+#define Preference_OSC_Client_UserPwd      @"Preference_OSC_Client_UserPwd"
+#define Preference_OSC_Client_GroupName    @"Preference_OSC_Client_GroupName"
+#define Preference_OSC_Client_GroupPwd     @"Preference_OSC_Client_GroupPwd"
+#define Preference_OSC_Client_MonitorAddr  @"Preference_OSC_Client_MonitorAddr"
+#define Preference_OSC_Client_MonitorPort  @"Preference_OSC_Client_MonitorPort"
+
+
 #import <Foundation/Foundation.h>
 
 @interface AMPreferenceManager : NSObject

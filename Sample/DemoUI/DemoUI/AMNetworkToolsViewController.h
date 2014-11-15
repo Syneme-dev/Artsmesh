@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
+#import "UIFramework/AMPopUpView.h"
+
 
 @class AMLogReader;
 
@@ -16,22 +18,19 @@
 - (IBAction)showWarningLog:(id)sender;
 - (IBAction)showInfoLog:(id)sender;
 
-@property (weak) IBOutlet NSButton *pingButton;
-@property (weak) IBOutlet NSButton *tracerouteButton;
-@property (weak) IBOutlet NSButton *iperfButton;
-@property (weak) IBOutlet NSTabView *tabView;
-@property (weak) IBOutlet NSButton *logButton;
-
-
-@property (weak) IBOutlet NSComboBox *logFileCombo;
+@property (weak)                IBOutlet AMPopUpView*   logFilePopUp;
+@property (weak)                IBOutlet NSButton*      pingButton;
+@property (weak)                IBOutlet NSButton*      tracerouteButton;
+@property (weak)                IBOutlet NSButton*      iperfButton;
+@property (weak)                IBOutlet NSTabView*     tabView;
+@property (weak)                IBOutlet NSButton*      logButton;
+@property (weak)                IBOutlet NSComboBox*    logFileCombo;
 @property (unsafe_unretained)   IBOutlet NSTextView*    logTextView;
 @property (weak)                IBOutlet NSButton*      fullLog;
-
-@property (weak) IBOutlet NSTableView *pingTableView;
-@property (unsafe_unretained) IBOutlet NSTextView *pingContentView;
-
-@property (weak) IBOutlet NSTableView *tracerouteTableView;
-@property (unsafe_unretained) IBOutlet NSTextView *tracerouteContentView;
+@property (weak)                IBOutlet NSTableView*   pingTableView;
+@property (unsafe_unretained)   IBOutlet NSTextView *   pingContentView;
+@property (weak)                IBOutlet NSTableView*   tracerouteTableView;
+@property (unsafe_unretained)   IBOutlet NSTextView*    tracerouteContentView;
 
 - (IBAction)ping:(id)sender;
 - (IBAction)traceroute:(id)sender;

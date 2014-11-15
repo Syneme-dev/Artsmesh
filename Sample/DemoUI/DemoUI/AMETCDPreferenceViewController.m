@@ -15,6 +15,8 @@
 #import <AMStatusNet/AMStatusNet.h>
 #import "AMAppDelegate.h"
 #import "AMAudio/AMAudio.h"
+#import "AMOSCGroups/AMOSCGroups.h"
+
 
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
@@ -26,6 +28,7 @@
 {
     dispatch_queue_t _preference_queue;
     NSViewController* _audioViewController;
+    NSViewController* _oscGroupViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,7 +44,7 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.generalTabButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.jackRouterTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackServerTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.audioTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
@@ -82,6 +85,8 @@
             [self loadJackPref:view];
         }else if([view.identifier isEqualTo:@"statusNetTab"]){
             ;
+        }else if([view.identifier isEqualTo:@"oscGroupTab"]){
+            [self loadOSCGroupPrefView:view ];
         }
     }
 }
@@ -97,6 +102,16 @@
     }
 }
 
+
+-(void)loadOSCGroupPrefView:(NSView*)tabView
+{
+    _oscGroupViewController = [[AMOSCGroups sharedInstance] getOSCPrefUI];
+    if(_oscGroupViewController){
+        [tabView addSubview:_oscGroupViewController.view];
+        NSRect rect = tabView.bounds;
+        [_oscGroupViewController.view setFrame:rect];
+    }
+}
 
 - (IBAction)onJackServerTabClick:(id)sender {
     [self pushDownButton:self.jackServerTabButton];
@@ -144,6 +159,10 @@
     [self.tabs selectTabViewItemWithIdentifier:@"6"];
 }
 
+- (IBAction)onOSCGroupClick:(id)sender {
+    [self pushDownButton:self.oscGroupTabBtn];
+    [self.tabs selectTabViewItemWithIdentifier:@"2"];
+}
 
 -(void)loadIpv4
 {

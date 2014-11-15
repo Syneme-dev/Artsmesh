@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0136BDD91A14BE2D0009638F /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0136BDD71A14BE190009638F /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
@@ -48,8 +49,10 @@
 		2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D016D5A1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib */; };
 		2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */; };
 		2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0289BB1A0984BC0020968E /* AMFloatControlView.m */; };
+		2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */; };
 		2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */; };
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
+		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -57,6 +60,7 @@
 		2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0519FF6FDC0000F18A /* AMLiveMapProgramView.m */; };
 		2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */; };
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
+		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DED40CD19CBED2D006F12FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DED40CC19CBED2D006F12FD /* CoreLocation.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
@@ -65,6 +69,10 @@
 		37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23182187A8FFD00554AFD /* AMAppDelegate.m */; };
 		37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C23184187A8FFD00554AFD /* MainMenu.xib */; };
 		37C23188187A8FFD00554AFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C23187187A8FFD00554AFD /* Images.xcassets */; };
+		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
+		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
@@ -198,6 +206,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				0136BDD91A14BE2D0009638F /* OSCGroupClient in CopyFiles */,
+				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */,
+				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */,
 				2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +219,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */,
 				D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */,
 				269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */,
 				AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */,
@@ -246,6 +258,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0136BDD71A14BE190009638F /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = OSCGroupClient; path = ../../DerivedData/Artsmesh/Build/Products/Debug/OSCGroupClient; sourceTree = "<group>"; };
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
 		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
 		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
@@ -306,10 +319,14 @@
 		2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPreviewPanelView.m; sourceTree = "<group>"; };
 		2D0289BA1A0984BC0020968E /* AMFloatControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatControlView.h; sourceTree = "<group>"; };
 		2D0289BB1A0984BC0020968E /* AMFloatControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatControlView.m; sourceTree = "<group>"; };
+		2D0A7B8E1A11678B00202C3E /* AMLiveMapProgramContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramContentView.h; sourceTree = "<group>"; };
+		2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramContentView.m; sourceTree = "<group>"; };
 		2D18D8BE1A04A456005BC1A7 /* AMFloatPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelView.h; sourceTree = "<group>"; };
 		2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelView.m; sourceTree = "<group>"; };
 		2D18D8C41A04AC5B005BC1A7 /* AMFloatPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelViewController.h; sourceTree = "<group>"; };
 		2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelViewController.m; sourceTree = "<group>"; };
+		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
+		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
 		2D6D76F019C16B4400201106 /* AMWorldMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWorldMap.m; sourceTree = "<group>"; };
 		2D6D76F219C16C5100201106 /* AMLiveMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapView.h; sourceTree = "<group>"; };
@@ -322,6 +339,8 @@
 		2D7BCE0719FF70470000F18A /* AMLiveMapProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramViewController.h; sourceTree = "<group>"; };
 		2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramViewController.m; sourceTree = "<group>"; };
 		2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveMapProgramViewController.xib; sourceTree = "<group>"; };
+		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
+		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DED40CC19CBED2D006F12FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -340,6 +359,9 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
+		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
+		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
@@ -495,6 +517,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
 				268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */,
@@ -518,10 +541,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0198A79D1A0F24B6009A36CA /* Mixer Panel */ = {
+			isa = PBXGroup;
+			children = (
+				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
+				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
+				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
+			);
+			name = "Mixer Panel";
+			sourceTree = "<group>";
+		};
 		262021F418EAE56200811E4E /* Panels */ = {
 			isa = PBXGroup;
 			children = (
-				AFDA79A41945864A0002873B /* AMMixingViewController.xib */,
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
@@ -550,8 +582,6 @@
 				AF200641194585F6008630C8 /* AMMapViewController.m */,
 				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
 				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
-				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
-				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
 				AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */,
 				AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */,
 				AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */,
@@ -758,6 +788,10 @@
 				2D0289BB1A0984BC0020968E /* AMFloatControlView.m */,
 				2D016D5D1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.h */,
 				2D016D5E1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m */,
+				2D0A7B8E1A11678B00202C3E /* AMLiveMapProgramContentView.h */,
+				2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */,
+				2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */,
+				2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -769,6 +803,8 @@
 				2D6D76F019C16B4400201106 /* AMWorldMap.m */,
 				2D6D76F519C16E3300201106 /* AMPixel.h */,
 				2D6D76F619C16E3300201106 /* AMPixel.m */,
+				2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */,
+				2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -776,7 +812,10 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
+				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
+				0136BDD71A14BE190009638F /* OSCGroupClient */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -796,6 +835,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */,
 				D47A184D19F21296000A8CCB /* AMLogger.framework */,
 				2DED40CC19CBED2D006F12FD /* CoreLocation.framework */,
 				D472934519A6E8F30034CC34 /* AMAudio.framework */,
@@ -831,6 +871,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
 				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* G+Panel */,
@@ -1242,6 +1283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				269F93671998F024006E19DD /* AMManualViewController.m in Sources */,
+				2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */,
 				269FB84D1998816E00355312 /* AMGPlusViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
@@ -1261,6 +1303,7 @@
 				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
+				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				26579B7F197E6B2F00FC8D16 /* AMGroupPanelStaticLabelController.m in Sources */,
 				D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */,
 				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
@@ -1302,6 +1345,7 @@
 				266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */,
+				2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1421,6 +1465,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1440,6 +1485,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

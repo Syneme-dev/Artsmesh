@@ -10,4 +10,6 @@
 
 @interface AMLiveMapProgramView : NSView
 
+@property (nonatomic) NSColor *backgroundColor;
+
 @end

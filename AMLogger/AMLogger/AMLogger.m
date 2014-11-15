@@ -42,8 +42,9 @@ AMLogInitialize(void)
     
     if (isDirectory) {
         NSString *logDirectory = AMLogDirectory();
-        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:kAMDefaultLogFile];
-        NSString *previousLogFilePath = [logFilePath stringByAppendingString:@"~previous"];
+        NSString *prevLogFile = [NSString stringWithFormat:@"prev_%@", kAMDefaultLogFile];
+        NSString *logFilePath = [logDirectory stringByAppendingPathComponent:prevLogFile];
+        NSString *previousLogFilePath = logFilePath;//[logFilePath stringByAppendingString:@"~previous"];
         if ([fileManager fileExistsAtPath:logFilePath]) {
             [fileManager moveItemAtPath:logFilePath
                                  toPath:previousLogFilePath

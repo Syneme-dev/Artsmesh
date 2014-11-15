@@ -15,5 +15,6 @@
 @property (strong) IBOutlet AMFoundryFontView *descriptionTextField;
 
 @property AMLiveGroup *group;
+@property NSMutableAttributedString *groupDesc;
 
 @end

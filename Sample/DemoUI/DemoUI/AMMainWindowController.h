@@ -23,6 +23,7 @@
 @property(nonatomic, readonly) NSView *containerView;
 @property (weak) IBOutlet NSButton *amTimerBtn;
 @property (weak) IBOutlet NSButton *jackServerBtn;
+@property (weak) IBOutlet NSButton *oscServerBtn;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

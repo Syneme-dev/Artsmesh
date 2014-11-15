@@ -15,7 +15,7 @@
 #import <WebKit/WebFrameLoadDelegate.h>
 
 @interface AMMapViewController : AMTabPanelViewController
-@property (strong) IBOutlet WebView *webView;
+
 @property (strong) IBOutlet NSTabView *tabs;
 @property (strong) IBOutlet NSButton *staticTab;
 @property (weak) IBOutlet WebView *archiveWebView;
@@ -23,5 +23,6 @@
 - (IBAction)onStaticTabClick:(id)sender;
 @property (strong) IBOutlet NSButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;
+@property  float archiveScale;
 
 @end

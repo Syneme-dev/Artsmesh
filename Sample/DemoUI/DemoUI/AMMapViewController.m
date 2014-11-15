@@ -50,16 +50,31 @@
 }
 -(void)awakeFromNib{
     [super awakeFromNib];
+    self.archiveScale=1;
     [self.tabs setAutoresizesSubviews:YES];
-    [self.webView setFrameLoadDelegate:self];
-    [self.webView setPolicyDelegate:self];
-    [self.webView setUIDelegate:self];
-    [self.webView setDrawsBackground:NO];
+    [self.archiveWebView setFrameLoadDelegate:self];
+    [self.archiveWebView setPolicyDelegate:self];
+    [self.archiveWebView setUIDelegate:self];
+    [self.archiveWebView setDrawsBackground:NO];
     [self loadLivePage];
     [self loadArchivePage];
     [AMButtonHandler changeTabTextColor:self.staticTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.liveTab toColor:UI_Color_blue];
     [self liveTabClick:self.liveTab];
+}
+- (IBAction)smallerButtonClick:(id)sender {
+    if(self.archiveScale<0.5f){
+        return;
+    }
+    self.archiveScale-=0.1f;
+    NSString *scriptString=[NSString stringWithFormat:@"$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";document.documentElement.style.zoom = \"%f\"",self.archiveScale,self.archiveScale ];
+     [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
+}
+- (IBAction)largerButtonClick:(id)sender {
+    
+    self.archiveScale+=0.1f;
+    NSString *scriptString=[NSString stringWithFormat:@"$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";document.documentElement.style.zoom = \"%f\"",self.archiveScale,self.archiveScale ];
+    [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
 }
 
 -(void)registerTabButtons{
@@ -74,7 +89,7 @@
 
 
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
-    if( [sender isEqual:self.webView] ) {
+    if( [sender isEqual:self.archiveWebView] ) {
         [listener use];
     }
     else {
@@ -85,14 +100,14 @@
 }
 -(void)dealloc{
     //To avoid a error when closing
-    [self.webView.mainFrame stopLoading];
+    [self.archiveWebView.mainFrame stopLoading];
 }
 
 
 -(void)webViewClose:(WebView *)sender
 {
-    [self.webView.mainFrame stopLoading];
-    [self.webView cancelOperation:nil];
+    [self.archiveWebView.mainFrame stopLoading];
+    [self.archiveWebView cancelOperation:nil];
     [super webViewClose:sender];
 }
 
@@ -169,15 +184,15 @@
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
     NSString *url= sender.mainFrameURL;
-    self.webView.preferences.userStyleSheetEnabled = YES;
+    self.archiveWebView.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
    if([url hasPrefix:statusNetURLString]){
         path=[path stringByAppendingString:@"/Contents/Resources/map.css"];
     }
     else{
-        self.webView.preferences.userStyleSheetEnabled = NO;
+        self.archiveWebView.preferences.userStyleSheetEnabled = NO;
     }
-    self.webView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+    self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
 

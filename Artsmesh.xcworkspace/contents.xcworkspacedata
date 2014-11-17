@@ -62,6 +62,9 @@
          location = "container:"
          name = "Module">
          <FileRef
+            location = "group:AMVideo/AMVideo.xcodeproj">
+         </FileRef>
+         <FileRef
             location = "group:AMOSCGroups/AMOSCGroups.xcodeproj">
          </FileRef>
          <FileRef

@@ -170,6 +170,7 @@
 		CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */; };
 		CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7216CC19A19C9F00504E28 /* logo-02.png */; };
 		CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */; };
+		CEAE38E11A1A18E10079C2CB /* AMVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAE38E01A1A18E10079C2CB /* AMVideo.framework */; };
 		CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */; };
 		CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */; };
 		CEC2FC56196588FD00AFD309 /* AMGroupPanelGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3C196588FD00AFD309 /* AMGroupPanelGroupCellController.m */; };
@@ -467,6 +468,7 @@
 		CE7216CC19A19C9F00504E28 /* logo-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-02.png"; sourceTree = "<group>"; };
 		CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkToolsCommand.h; sourceTree = "<group>"; };
 		CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkToolsCommand.m; sourceTree = "<group>"; };
+		CEAE38E01A1A18E10079C2CB /* AMVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMVideo.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMVideo.framework; sourceTree = "<group>"; };
 		CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAE38E11A1A18E10079C2CB /* AMVideo.framework in Frameworks */,
 				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
@@ -835,6 +838,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEAE38E01A1A18E10079C2CB /* AMVideo.framework */,
 				4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */,
 				D47A184D19F21296000A8CCB /* AMLogger.framework */,
 				2DED40CC19CBED2D006F12FD /* CoreLocation.framework */,
@@ -1466,6 +1470,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/robbin/Developer/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1486,6 +1491,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					/Users/robbin/Developer/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

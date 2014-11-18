@@ -2,18 +2,19 @@
 //  AMVideo.h
 //  AMVideo
 //
-//  Created by 王为 on 17/11/14.
+//  Created by robbin on 11/17/14.
 //  Copyright (c) 2014 王为. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 
-//! Project version number for AMVideo.
-FOUNDATION_EXPORT double AMVideoVersionNumber;
+@interface AMVideo : NSObject
 
-//! Project version string for AMVideo.
-FOUNDATION_EXPORT const unsigned char AMVideoVersionString[];
++ (instancetype)sharedInstance;
 
-// In this header, you should import all the public headers of your framework using statements like #import <AMVideo/PublicHeader.h>
+- (NSViewController *)getMixerUI;
 
+- (void)startSyphon;
+- (void)stopSyphon;
 
+@end

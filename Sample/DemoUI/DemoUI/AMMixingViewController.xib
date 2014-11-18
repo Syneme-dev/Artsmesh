@@ -25,21 +25,9 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="VIDEO" identifier="1" id="NF0-OA-Rwq">
-                            <view key="view" id="FvG-wM-AMY">
+                            <view key="view" identifier="Video Mixer" id="FvG-wM-AMY">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="qfK-mw-y2u">
-                                        <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_mixing" id="FI8-Nc-Sdn"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="qfK-mw-y2u" secondAttribute="bottom" id="6w5-hZ-RFu"/>
-                                    <constraint firstAttribute="trailing" secondItem="qfK-mw-y2u" secondAttribute="trailing" id="CTa-p1-SqE"/>
-                                    <constraint firstItem="qfK-mw-y2u" firstAttribute="leading" secondItem="FvG-wM-AMY" secondAttribute="leading" id="Y5K-Bo-FZv"/>
-                                    <constraint firstItem="qfK-mw-y2u" firstAttribute="top" secondItem="FvG-wM-AMY" secondAttribute="top" id="d4j-CK-OBo"/>
-                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="AUDIO" identifier="2" id="bzf-ck-IUs">
@@ -121,6 +109,5 @@
     </objects>
     <resources>
         <image name="shot_mainOutput" width="1583" height="888"/>
-        <image name="shot_mixing" width="1107" height="915"/>
     </resources>
 </document>

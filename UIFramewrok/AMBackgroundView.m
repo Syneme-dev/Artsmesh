@@ -9,15 +9,28 @@
 #import "AMBackgroundView.h"
 
 @implementation AMBackgroundView
+@synthesize backgroundColor = _backgroundColor;
 
 - (void)drawRect:(NSRect)dirtyRect {
-   NSColor *backgroundColor = [NSColor colorWithCalibratedRed:0.15
-                                                         green:0.15
-                                                          blue:0.15
-                                                         alpha:1.0];
-    //NSColor* backgroundColor = [NSColor whiteColor];
-    [backgroundColor set];
+    [self.backgroundColor setFill];
     NSRectFill(self.bounds);
+}
+
+- (NSColor *)backgroundColor
+{
+    if (!_backgroundColor) {
+        _backgroundColor = [NSColor colorWithCalibratedRed:0.15
+                                                     green:0.15
+                                                      blue:0.15
+                                                     alpha:1.0];
+    }
+    return _backgroundColor;
+}
+
+- (void)setBackgroundColor:(NSColor *)backgroundColor
+{
+    _backgroundColor = backgroundColor;
+    [self setNeedsDisplay:YES];
 }
 
 @end

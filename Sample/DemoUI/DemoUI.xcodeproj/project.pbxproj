@@ -73,6 +73,7 @@
 		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A80C11C1A1B2A6C00130857 /* AMVideo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEAE38E01A1A18E10079C2CB /* AMVideo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
@@ -220,6 +221,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4A80C11C1A1B2A6C00130857 /* AMVideo.framework in CopyFiles */,
 				4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */,
 				D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */,
 				269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */,

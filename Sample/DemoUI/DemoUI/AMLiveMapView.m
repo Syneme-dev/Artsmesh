@@ -821,7 +821,7 @@ AMWorldMap *worldMap;
     
     _programViewController.scrollView.documentView = programContentContainer;
     
-    [programContentContainer fillContent:theGroup inScrollView:_programViewController.scrollView];
+    [programContentContainer fillContent:theGroup];
     
     
     // Display the program

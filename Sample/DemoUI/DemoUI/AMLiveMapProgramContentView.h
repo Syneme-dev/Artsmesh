@@ -12,12 +12,13 @@
 @interface AMLiveMapProgramContentView : NSView
 
 @property AMLiveGroup *group;
-@property NSScrollView *theScrollView;
 @property NSMutableDictionary *fonts;
 @property double totalH;
 @property double bottomMargin;
 @property double indentMargin;
 
-- (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView;
+@property NSMutableArray *allFields;
+
+- (void)fillContent:(AMLiveGroup *)theGroup;
 
 @end

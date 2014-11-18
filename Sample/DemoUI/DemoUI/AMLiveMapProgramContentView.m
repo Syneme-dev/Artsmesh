@@ -28,6 +28,7 @@
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:12.0], @"small",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0], @"small-italic",
                   nil];
+        
     }
     return self;
 }
@@ -39,12 +40,10 @@
     
 }
 
-- (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView {
+- (void)fillContent:(AMLiveGroup *)theGroup {
     
     //NSMutableArray *views = [[NSArray alloc] init];
     
-    
-    self.theScrollView = scrollView;
     
     NSString *theString = theGroup.groupName;
     NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
@@ -64,22 +63,6 @@
     [self addSubview:theTextView];
     
     
-    
-    
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : theTextView}];
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : theTextView}];
-    [self.superview addConstraints:horizontalConstraints];
-    [self.superview addConstraints:verticalConstraints];
-    
-    [self.superview setAutoresizesSubviews:YES];
-    
     //[self setFrameSize:NSMakeSize(self.bounds.size.width, textViewRect.height)];
     //NSLog(@"content view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
     
@@ -87,33 +70,32 @@
     //NSLog(@"used rectangle for group name text view is: %f, %f", contentSize.width, contentSize.height);
     
     
-    /**
+    
     self.totalH = 0;
-    self.theScrollView = scrollView;
 
     [self fillLiveGroup:theGroup];
     
     for ( AMLiveGroup *subGroup in theGroup.subGroups) {
         [self fillLiveGroup:subGroup];
     }
-    **/
+    
     
 }
 
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {
-    if (self.theScrollView) {
-        [self addTextView:theGroup.groupName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+    if (self.enclosingScrollView) {
+        [self addTextView:theGroup.groupName withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
         
-        [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+        [self addTextView:theGroup.description withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
         
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
-                [self addTextView:theUser.fullName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.fullName withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             } else {
-                [self addTextView:theUser.nickName toScrollView:self.theScrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.nickName withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             if ( [theUser.description length] > 0 ) {
-                [self addTextView:theUser.description toScrollView:self.theScrollView withMargin:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+                [self addTextView:theUser.description withMargin:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
             }
             
         }
@@ -122,13 +104,13 @@
     }
 }
 
-- (void)addTextView:(NSString *)theString toScrollView:(NSScrollView *)scrollView withMargin:(double) theMargin andFont:(NSFont *)theFont {
+- (void)addTextView:(NSString *)theString withMargin:(double) theMargin andFont:(NSFont *)theFont {
     NSDictionary* bodyFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:theFont};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:bodyFontAttr];
-    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(scrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
-    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theMargin, self.totalH, scrollView.bounds.size.width - theMargin, theStringH)];
+    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theMargin, self.totalH, self.enclosingScrollView.bounds.size.width - theMargin, theStringH)];
     [[theTextView textStorage] setAttributedString:theAttrString];
     
     self.totalH += theStringH;
@@ -136,7 +118,7 @@
 
     [self addSubview:theTextView];
     
-    [self setFrameSize:NSMakeSize(scrollView.bounds.size.width, self.totalH)];
+    [self setFrameSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, self.totalH)];
 }
 
 - (BOOL)isFlipped{

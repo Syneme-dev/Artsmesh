@@ -782,6 +782,7 @@ AMWorldMap *worldMap;
     [_programWindow.contentView addConstraints:verticalConstraints1];
     [_programWindow.contentView addConstraints:horizontalConstraints1];
     
+    
     [_programWindow.contentView setAutoresizesSubviews:YES];
     [pvc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     
@@ -800,7 +801,7 @@ AMWorldMap *worldMap;
     
     [_programWindow.contentView setAutoresizesSubviews:YES];
     [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-        
+    
 }
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
@@ -821,7 +822,7 @@ AMWorldMap *worldMap;
     
     _programViewController.scrollView.documentView = programContentContainer;
     
-    [programContentContainer fillContent:theGroup inScrollView:_programViewController.scrollView];
+    [programContentContainer fillContent:theGroup];
     
     
     // Display the program

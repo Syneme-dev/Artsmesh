@@ -85,7 +85,7 @@
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
                 [self addTextView:theUser.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             } else {
-                [self addTextView:theUser.nickName withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             if ( [theUser.description length] > 0 ) {
                 [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];

@@ -17,6 +17,8 @@
 @property double bottomMargin;
 @property double indentMargin;
 
+@property NSRect curSize;
+
 @property NSMutableArray *allFields;
 
 - (void)fillContent:(AMLiveGroup *)theGroup;

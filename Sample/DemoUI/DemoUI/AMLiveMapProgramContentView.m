@@ -18,6 +18,7 @@
     if (self) {
         self.bottomMargin = 10;
         self.indentMargin = 15;
+        self.allFields = [[NSMutableArray alloc] init];
         
         NSFontManager *fontManager = [NSFontManager sharedFontManager];
         self.fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -28,6 +29,8 @@
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:12.0], @"small",
                   [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0], @"small-italic",
                   nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:NSWindowDidResizeNotification object:self.window];
     }
     return self;
 }
@@ -36,34 +39,56 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    
 }
 
-- (void)fillContent:(AMLiveGroup *)theGroup inScrollView:(NSScrollView *)scrollView {
+- (void)fillContent:(AMLiveGroup *)theGroup {
+    
+    //NSMutableArray *views = [[NSArray alloc] init];
+    [self.allFields removeAllObjects];
+    
+    NSString *theString = theGroup.groupName;
+    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
+    
+    NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
+    
+    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] init];
+    
+    [[theTextView textStorage] setAttributedString:theAttrString];
+    
+    NSSize textViewRect = [theTextView intrinsicContentSize];
+    
+    NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
+    
+    [theTextView setFrameSize:textViewRect];
+    
+    [self addSubview:theTextView];
+    
+    
     self.totalH = 0;
-    self.theScrollView = scrollView;
 
     [self fillLiveGroup:theGroup];
     
     for ( AMLiveGroup *subGroup in theGroup.subGroups) {
         [self fillLiveGroup:subGroup];
     }
+    
+    
 }
 
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {
-    if (self.theScrollView) {
-        [self addTextView:theGroup.groupName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+    if (self.enclosingScrollView) {
+        [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
         
-        [self addTextView:theGroup.description toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+        [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
         
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
-                [self addTextView:theUser.fullName toScrollView:self.theScrollView withMargin:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             } else {
-                [self addTextView:theUser.nickName toScrollView:self.theScrollView withMargin:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             if ( [theUser.description length] > 0 ) {
-                [self addTextView:theUser.description toScrollView:self.theScrollView withMargin:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+                [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
             }
             
         }
@@ -72,13 +97,13 @@
     }
 }
 
-- (void)addTextView:(NSString *)theString toScrollView:(NSScrollView *)scrollView withMargin:(double) theMargin andFont:(NSFont *)theFont {
-    NSDictionary* bodyFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:theFont};
+- (void)addTextView:(NSString *)theString withIndent:(double) theIndent andFont:(NSFont *)theFont {
+    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:theFont};
     
-    NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:bodyFontAttr];
-    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(scrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
+    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
-    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theMargin, self.totalH, scrollView.bounds.size.width - theMargin, theStringH)];
+    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theIndent, self.totalH, self.enclosingScrollView.bounds.size.width - theIndent, theStringH)];
     [[theTextView textStorage] setAttributedString:theAttrString];
     
     self.totalH += theStringH;
@@ -86,11 +111,88 @@
 
     [self addSubview:theTextView];
     
-    [self setFrameSize:NSMakeSize(scrollView.bounds.size.width, self.totalH)];
+    [self setFrameSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, self.totalH)];
+    
+    
+    // Record the field for later user
+    
+    NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
+    
+    [theField setObject:theTextView forKey:@"object"];
+    [theField setObject:theFontAttr forKey:@"theFontAttr"];
+    [theField setObject:[NSNumber numberWithDouble:theIndent] forKey:@"indent"];
+    
+    
+    [self.allFields addObject:theField];
+}
+
+- (void)windowResized: (NSNotification *)notification {
+    
+    [self updateDocumentView];
+}
+
+- (void) updateDocumentView {
+    
+    if ( !NSEqualRects(self.enclosingScrollView.bounds, self.curSize) ) {
+        // Size has changed, update document view..
+        self.totalH = 0;
+        
+        [self resetDocumentSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0)];
+        
+        for (NSMutableDictionary *curObject in self.allFields) {
+            
+            NSObject *theObject = [curObject objectForKey:@"object"];
+            
+            if ( [theObject isKindOfClass:[AMLiveMapProgramPanelTextView class]] ) {
+                // current object is a flex text view, resize accordingly
+    
+                AMLiveMapProgramPanelTextView *theTextView = (AMLiveMapProgramPanelTextView *) theObject;
+                NSDictionary *theFontAttr = [curObject objectForKey:@"theFontAttr"];
+                double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
+                
+                [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent];
+            }
+            
+        }
+        
+        [self resetDocumentSize:NSMakeSize(self.bounds.size.width, self.totalH)];
+        
+        
+    }
+}
+
+- (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent {
+    
+    //Get the string from the textview
+    NSString *curString = [[theTextView textStorage] string];
+    
+    NSAttributedString *theAttrString = [[NSAttributedString alloc] initWithString:curString attributes:theFontAttr];
+    
+    double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    
+    NSSize newTextViewSize = NSMakeSize(self.bounds.size.width, newStringH);
+    NSPoint newTextViewOrigin = NSMakePoint(0 + theIndent, self.totalH);
+    
+    [theTextView setFrameSize:newTextViewSize];
+    [theTextView setFrameOrigin:newTextViewOrigin];
+    
+    self.totalH += (newStringH + self.bottomMargin);
+    
+}
+
+- (void)resetDocumentSize:(NSSize)theSize {
+    [self setFrameSize:theSize];
+    [self setBoundsSize:theSize];
+    
+    self.curSize = self.bounds;
 }
 
 - (BOOL)isFlipped{
     return YES;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidResizeNotification object:nil];
 }
 
 @end

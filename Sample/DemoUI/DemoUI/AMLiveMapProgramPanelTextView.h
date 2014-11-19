@@ -10,4 +10,6 @@
 
 @interface AMLiveMapProgramPanelTextView : NSTextView
 
+- (NSSize) intrinsicContentSize;
+
 @end

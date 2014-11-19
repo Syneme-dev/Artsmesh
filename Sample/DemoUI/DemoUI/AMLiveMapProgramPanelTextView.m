@@ -25,4 +25,16 @@
     // Drawing code here.
 }
 
+- (NSSize) intrinsicContentSize {
+    NSTextContainer* textContainer = [self textContainer];
+    NSLayoutManager* layoutManager = [self layoutManager];
+    [layoutManager ensureLayoutForTextContainer: textContainer];
+    return [layoutManager usedRectForTextContainer: textContainer].size;
+}
+
+- (void) didChangeText {
+    [super didChangeText];
+    [self invalidateIntrinsicContentSize];
+}
+
 @end

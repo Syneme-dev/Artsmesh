@@ -12,12 +12,15 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMOSCClient.h"
 #import "AMOSCGroupClientViewController.h"
+#import "AMOSCGroupMessageMonitorController.h"
 
 @implementation AMOSCGroups
 {
+    AMOSCClient* _oscClient;
+    
     AMOSCPrefViewController* _oscPrefController;
     AMOSCGroupClientViewController* _oscClientController;
-    AMOSCClient* _oscClient;
+    AMOSCGroupMessageMonitorController* _oscMonitorController;
     
     BOOL _isOSCServerStarted;
     BOOL _isOSCClientStarted;
@@ -68,6 +71,18 @@
     }
     
     return _oscClientController;
+}
+
+-(NSViewController*)getOSCMonitorUI
+{
+    if (_oscMonitorController == nil) {
+        
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.OSCGroupFramework"];
+        _oscMonitorController = [[AMOSCGroupMessageMonitorController alloc] initWithNibName:@"AMOSCGroupMessageMonitorController" bundle:myBundle];
+        
+    }
+    
+    return _oscMonitorController;
 }
 
 -(BOOL)startOSCGroupServer;
@@ -126,25 +141,41 @@
     
     _oscClient = [[AMOSCClient alloc] init];
     
-    _oscClient.serverAddr = @"localhost";
-    _oscClient.serverPort = @"22242";
-    _oscClient.remotePort = @"22243";
-    _oscClient.txPort = @"22244";
-    _oscClient.rxPort = @"22245";
-    _oscClient.userName = @"www";
-    _oscClient.userPwd = @"wwwp";
-    _oscClient.groupName = @"ggg";
-    _oscClient.groupPwd = @"gggp";
-    _oscClient.monitorAddr = @"localhost";
-    _oscClient.monitorPort = @"22230";
-    [_oscClient startOscClient];
+    NSString* oscServerAddr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_ServerAddr];
+    NSString* oscServerPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_ServerPort];
+    NSString* oscRemotePort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_RemotePort];
+    NSString* oscTxPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_TxPort];
+    NSString* oscRxPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_RxPort];
+    NSString* oscUserName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_UserName];
+    NSString* oscUserPwd = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_UserPwd];
+    NSString* oscGroupName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_GroupName];
+    NSString* oscGroupPwd = [[AMPreferenceManager standardUserDefaults ] stringForKey:Preference_OSC_Client_GroupPwd];
+    NSString* oscMonitorAddr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_MonitorAddr];
+    NSString* oscMonitorPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_MonitorPort];
     
+    _oscClient.serverAddr = oscServerAddr;
+    _oscClient.serverPort = oscServerPort;
+    _oscClient.remotePort = oscRemotePort;
+    _oscClient.txPort = oscTxPort;
+    _oscClient.rxPort = oscRxPort;
+    _oscClient.userName = oscUserName;
+    _oscClient.userPwd = oscUserPwd;
+    _oscClient.groupName = oscGroupName;
+    _oscClient.groupPwd = oscGroupPwd;
+    _oscClient.monitorAddr = oscMonitorAddr;
+    _oscClient.monitorPort = oscMonitorPort;
+    _oscClient.delegate = _oscMonitorController;
 
-    return NO;
+    if ([_oscClient startOscClient]){
+        _isOSCClientStarted = YES;
+    }
+    
+    return _isOSCClientStarted;
 }
 
 -(void)stopOSCGroupClient{
-    
+    [_oscClient stopOscClient];
+    _isOSCClientStarted = NO;
 }
 
 -(BOOL)isOSCGroupServerStarted{
@@ -152,7 +183,7 @@
 }
 
 -(BOOL)isOSCGroupClientStarted{
-    return NO;
+    return _isOSCClientStarted;
 }
 
 

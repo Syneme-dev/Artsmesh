@@ -7,12 +7,16 @@
 //
 
 #import "AMOSCMessageViewController.h"
+#import "AMOSCGroups/AMOSCGroups.h"
 
 @interface AMOSCMessageViewController ()
 
 @end
 
 @implementation AMOSCMessageViewController
+{
+    NSViewController* _controller;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,6 +25,19 @@
         // Initialization code here.
     }
     return self;
+}
+
+-(void)awakeFromNib
+{
+    _controller = [[AMOSCGroups sharedInstance] getOSCMonitorUI];
+    if (_controller != nil) {
+        
+        [self.view addSubview:_controller.view];
+        NSRect rect = self.view.bounds;
+        
+        rect.size.height -= 21;
+        _controller.view.frame = rect;
+    }
 }
 
 @end

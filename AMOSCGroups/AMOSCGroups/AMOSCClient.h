@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMOSCGroupMessageMonitorController.h"
 @protocol AMOSCClientDelegate;
 
 @interface AMOSCClient : NSObject
@@ -24,6 +25,7 @@
 @property NSString* monitorPort;
 
 @property id<AMOSCClientDelegate> delegate;
+@property (weak) AMOSCGroupMessageMonitorController* monitorController;
 
 -(BOOL)startOscClient;
 -(void)stopOscClient;
@@ -32,7 +34,7 @@
 
 @protocol AMOSCClientDelegate <NSObject>
 
--(void)oscMessageRecieved:(NSString*)content;
--(void)oscMessageSent:(NSString*)content;
+-(void)oscMessageRecieved:(id)oscPacket;
+-(void)oscMessageSent:(id)oscPacket;
 
 @end

@@ -587,9 +587,6 @@
 				AF200641194585F6008630C8 /* AMMapViewController.m */,
 				AF20064A1945861B008630C8 /* AMOSCRouteViewController.h */,
 				AF20064B1945861B008630C8 /* AMOSCRouteViewController.m */,
-				AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */,
-				AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */,
-				AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */,
 				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
 				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
 				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
@@ -877,6 +874,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				4A8E05831A1C754400645840 /* OSCMonitor */,
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
 				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
@@ -931,6 +929,16 @@
 				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A8E05831A1C754400645840 /* OSCMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				AFBDCCB6195AD41400653C18 /* AMOSCMessageViewController.h */,
+				AFBDCCB7195AD41400653C18 /* AMOSCMessageViewController.m */,
+				AFBDCCB8195AD41400653C18 /* AMOSCMessageViewController.xib */,
+			);
+			name = OSCMonitor;
 			sourceTree = "<group>";
 		};
 		AF82E33F190CA7FC0083487C /* font */ = {

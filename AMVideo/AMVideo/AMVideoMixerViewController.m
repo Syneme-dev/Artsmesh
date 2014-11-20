@@ -8,9 +8,11 @@
 
 #import "AMVideoMixerViewController.h"
 #import "AMVideoMixerBackgroundView.h"
+#import "AMSyphonManager.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
+@property (weak) IBOutlet AMVideoMixerBackgroundView *smallView0;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView1;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView2;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView3;
@@ -20,28 +22,54 @@
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView7;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView8;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView9;
-@property (weak) IBOutlet AMVideoMixerBackgroundView *smallView10;
-@property (strong, nonatomic) NSArray *smallViews;
+@property (strong, nonatomic, readonly) NSArray *smallViews;
+@property (strong, nonatomic) AMSyphonManager *syphonManager;
 @end
 
 @implementation AMVideoMixerViewController
+@synthesize smallViews = _smallViews;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.smallViews = @[
-        self.smallView1,
-        self.smallView2,
-        self.smallView3,
-        self.smallView4,
-        self.smallView5,
-        self.smallView6,
-        self.smallView7,
-        self.smallView8,
-        self.smallView9,
-        self.smallView10
-    ];
+    [self setup];
+}
+
+- (void)setup
+{
     self.bigView.hasBorder = YES;
+    self.bigView.contentView = [self.syphonManager getRouterView];
+    for (int i = 0; i < self.smallViews.count; i++) {
+        AMVideoMixerBackgroundView *view = self.smallViews[i];
+        view.contentView = [self.syphonManager getViewByIndex:i];
+    }
+}
+
+- (AMSyphonManager *)syphonManager
+{
+    if (!_syphonManager) {
+        _syphonManager = [[AMSyphonManager alloc] initWithClientCount:(int)self.smallViews.count];
+    }
+    return _syphonManager;
+}
+
+- (NSArray *)smallViews
+{
+    if (!_smallViews) {
+        _smallViews = @[
+            self.smallView0,
+            self.smallView1,
+            self.smallView2,
+            self.smallView3,
+            self.smallView4,
+            self.smallView5,
+            self.smallView6,
+            self.smallView7,
+            self.smallView8,
+            self.smallView9
+        ];
+    }
+    return _smallViews;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent

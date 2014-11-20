@@ -10,4 +10,5 @@
 
 @interface AMVideoMixerBackgroundView : NSView
 @property (nonatomic) BOOL hasBorder;
+@property (nonatomic) NSView *contentView;
 @end

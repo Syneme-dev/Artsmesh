@@ -17,6 +17,11 @@
     [[self openGLContext] setValues:&on forParameter:NSOpenGLCPSwapInterval];
 }
 
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     

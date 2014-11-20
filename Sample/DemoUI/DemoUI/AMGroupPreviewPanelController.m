@@ -26,11 +26,6 @@
 
 -(void)awakeFromNib
 {
-    NSFontManager *fontManager = [NSFontManager sharedFontManager];
-    
-    NSFont *italic = [fontManager fontWithFamily:@"FoundryMonoline-RegItalic" traits:NSUnitalicFontMask weight:5 size:20.0];
-    
-    [self.descriptionTextField setFont:italic];
 }
 
 @end

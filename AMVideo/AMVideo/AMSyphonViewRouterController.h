@@ -11,9 +11,11 @@
 
 @interface AMSyphonViewRouterController : NSViewController
 {
+    BOOL            routering;
+    
     NSArray*        servers;
     SyphonClient*   syClient;
-    SyphonServer*   syServer;
+    SyphonServer*   syRouter;
 
     NSTimeInterval fpsStart;
     NSUInteger fpsCount;
@@ -22,6 +24,7 @@
     NSUInteger frameHeight;
     
 }
-
+- (BOOL) startRouter:(NSString *)err;
+- (BOOL) stopRouter:(NSString *)err;
 
 @end

@@ -21,7 +21,15 @@
         }
     }
     
+    amSyphonRouter = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:nil];
+
+    
     return self;
+}
+
+- (AMSyphonView*) getRouterView
+{
+    return amSyphonRouter.view;
 }
 
 - (AMSyphonView*) getViewByIndex : (int) index
@@ -31,6 +39,19 @@
     }
     AMSyphonViewController* amSyphonCtrl = [amSyphonClients objectAtIndex:index];
     return amSyphonCtrl.view;
+}
+
+- (BOOL) startRouter:(NSString *)err
+{
+    [amSyphonRouter startRouter:err];
+    return YES;
+}
+
+- (BOOL) stopRouter:(NSString *)err
+{
+    [amSyphonRouter stopRouter:err];
+    
+    return YES;
 }
 
 @end

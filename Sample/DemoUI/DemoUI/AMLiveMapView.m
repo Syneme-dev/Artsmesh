@@ -748,8 +748,11 @@ AMWorldMap *worldMap;
     _floatPanelViewController.panelTitle = @"LIVE";
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
     [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH+floatPanel.borderThickness)];
+    floatPanel.initialSize = NSMakeSize(programW, programH+floatPanel.borderThickness);
     floatPanel.floatPanelViewController = fpc;
-    //NSRect frame = NSMakeRect(0, 0, fpc.view.frame.size.width-100, fpc.view.frame.size.height);
+
+    floatPanel.minSizeConstraint = NSMakeSize(programW, programH);
+    
     NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
     
     _programWindow  = [[NSWindow alloc] initWithContentRect:frame

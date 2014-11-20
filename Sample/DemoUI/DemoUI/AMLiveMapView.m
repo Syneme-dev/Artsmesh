@@ -761,11 +761,10 @@ AMWorldMap *worldMap;
     [fpc.panelContent addSubview:pvc.view];
 
     
-    //[_programWindow setBackgroundColor:[NSColor blueColor]];
     _programWindow.hasShadow = YES;
     
-    [_programWindow setFrameOrigin:NSMakePoint((self.frame.size.width/2), self.frame.size.height)];
-    
+    [_programWindow setFrameOrigin:NSMakePoint((self.frame.size.width/2), (self.frame.size.height - (_programWindow.frame.size.height/2)) )];
+    //[_programWindow setFrameOrigin:programOriginInWindow];
     
     [_programWindow.contentView addSubview:floatPanel];
     
@@ -806,15 +805,6 @@ AMWorldMap *worldMap;
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
-    
-    // Remove old content from scroll view
-    /**
-    for(NSView *subview in [_programViewController.scrollView subviews]) {
-        if([subview isKindOfClass:[AMLiveMapProgramPanelTextView class]]) {
-            [subview removeFromSuperview];
-        }
-    }
-     **/
     
     // Configure & display the group/user fields
     

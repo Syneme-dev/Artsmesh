@@ -20,6 +20,7 @@
 		4FFD1E3D1A1D87DE00F798E0 /* AMSyphonManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFD1E331A1D87DE00F798E0 /* AMSyphonManager.h */; };
 		4FFD1E3E1A1D87DE00F798E0 /* AMSyphonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD1E341A1D87DE00F798E0 /* AMSyphonManager.m */; };
 		4FFD1E411A1D881D00F798E0 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFD1E401A1D881D00F798E0 /* Syphon.framework */; };
+		4FFD1E471A1D8C4300F798E0 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E401A1D881D00F798E0 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEAE38D71A1A11BA0079C2CB /* AMVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAE38D51A1A11BA0079C2CB /* AMVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEAE38D81A1A11BA0079C2CB /* AMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE38D61A1A11BA0079C2CB /* AMVideo.m */; };
 		CEAE38DC1A1A17770079C2CB /* AMVideoMixerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAE38D91A1A17770079C2CB /* AMVideoMixerViewController.h */; };
@@ -39,6 +40,19 @@
 			remoteInfo = AMVideo;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4FFD1E461A1D8C3200F798E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4FFD1E471A1D8C4300F798E0 /* Syphon.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4A03FF451A199AE700227BD7 /* AMVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +224,7 @@
 				4A03FF411A199AE700227BD7 /* Frameworks */,
 				4A03FF421A199AE700227BD7 /* Headers */,
 				4A03FF431A199AE700227BD7 /* Resources */,
+				4FFD1E461A1D8C3200F798E0 /* CopyFiles */,
 			);
 			buildRules = (
 			);

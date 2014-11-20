@@ -36,6 +36,7 @@
 #import "AMManualViewController.h"
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
+#import "AMVideo/AMVideo.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -744,6 +745,20 @@
         
     }else{
         [oscGroups stopOSCGroupServer];
+    }
+}
+
+- (IBAction)syphonServerToggled:(id)sender
+{
+    AMVideo* videoMod= [AMVideo sharedInstance];
+    if (![videoMod isSyphonServerStarted]) {
+        
+        [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+        [videoMod startSyphon];
+        
+    }else{
+        [videoMod stopSyphon];
+        [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     }
 }
 

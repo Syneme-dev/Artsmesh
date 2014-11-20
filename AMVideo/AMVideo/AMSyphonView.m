@@ -24,8 +24,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    
-    
     [[self openGLContext] makeCurrentContext];
     
     CGLContextObj cgl_ctx = [[self openGLContext] CGLContextObj];

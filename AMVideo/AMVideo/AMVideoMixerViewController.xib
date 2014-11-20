@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
@@ -28,40 +28,40 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="vXC-Cw-609" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="20" y="237" width="692" height="343"/>
+                    <rect key="frame" x="20" y="325" width="692" height="255"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="MzZ-EV-3w6" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="20" y="124" width="132" height="96"/>
+                    <rect key="frame" x="20" y="168" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="AFJ-Aj-ue1" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="160" y="124" width="132" height="96"/>
+                    <rect key="frame" x="160" y="168" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="G5H-37-hKK" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="440" y="124" width="132" height="96"/>
+                    <rect key="frame" x="440" y="168" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="afc-Kx-ZLr" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="20" y="20" width="132" height="96"/>
+                    <rect key="frame" x="20" y="20" width="132" height="140"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="96" id="65q-1G-GdC"/>
+                        <constraint firstAttribute="height" constant="140" id="65q-1G-GdC"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="kQ4-xi-1cD" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="160" y="20" width="132" height="96"/>
+                    <rect key="frame" x="160" y="20" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="G8O-X7-PfG" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="300" y="20" width="132" height="96"/>
+                    <rect key="frame" x="300" y="20" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Kdn-tg-d4R" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="440" y="20" width="132" height="96"/>
+                    <rect key="frame" x="440" y="20" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LcQ-uL-zL8" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="580" y="124" width="132" height="96"/>
+                    <rect key="frame" x="580" y="168" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="z8o-oR-SXc" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="580" y="20" width="132" height="96"/>
+                    <rect key="frame" x="580" y="20" width="132" height="140"/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="VO4-rN-6Qu" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="300" y="124" width="132" height="96"/>
+                    <rect key="frame" x="300" y="168" width="132" height="140"/>
                 </customView>
             </subviews>
             <constraints>

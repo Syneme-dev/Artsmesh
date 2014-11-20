@@ -12,15 +12,15 @@
 #import "AMSyphonView.h"
 
 @interface AMSyphonManager : NSObject
-{
-    int                             amClientCnt;
-    NSMutableArray*                 amSyphonClients;
-    AMSyphonViewRouterController*   amSyphonRouter;
-}
-- (id) initWithClientCount : (int) cnt;
-- (AMSyphonView*)   getViewByIndex : (int) index;
-- (AMSyphonView*)   getRouterView;
-- (BOOL)            selectClientToRouter: (int)  index;
-- (BOOL)            startRouter:(NSString*) err;
-- (BOOL)            stopRouter:(NSString*) err;
+
+-(id)initWithClientCount:(int) cnt;
+
+-(NSView*)clientViewByIndex:(int)index;
+-(NSView*)outputView;
+-(void)selectClient:(int)index;
+-(BOOL)startRouter;
+-(void)stopRouter;
+
+-(BOOL)isSyphonServerStarted;
+
 @end

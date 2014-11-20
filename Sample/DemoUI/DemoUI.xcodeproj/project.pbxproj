@@ -74,7 +74,6 @@
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A80C11C1A1B2A6C00130857 /* AMVideo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEAE38E01A1A18E10079C2CB /* AMVideo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4FFD1E451A1D8B7000F798E0 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E441A1D8B7000F798E0 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
 		AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1D4D46193F2CAE00C3B435 /* AMMouseOverButtonView.m */; };
@@ -237,7 +236,6 @@
 				AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */,
 				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
-				4FFD1E451A1D8B7000F798E0 /* Syphon.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +365,6 @@
 		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
-		4FFD1E441A1D8B7000F798E0 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
 		AF1D4D45193F2CAE00C3B435 /* AMMouseOverButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMouseOverButtonView.h; sourceTree = "<group>"; };
@@ -817,7 +814,6 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				4FFD1E441A1D8B7000F798E0 /* Syphon.framework */,
 				4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */,
 				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
@@ -1483,8 +1479,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/robbin/Developer/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
@@ -1504,8 +1498,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
-					/Users/robbin/Developer/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";

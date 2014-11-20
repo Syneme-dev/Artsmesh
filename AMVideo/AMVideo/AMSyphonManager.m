@@ -15,10 +15,8 @@
     if(self = [super init]){
         amSyphonClients = [[NSMutableArray alloc] initWithCapacity:cnt];
         for(int i = 0; i < cnt; i++){
-            
-             NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
             AMSyphonViewController* amSyphonCtrl =  [[AMSyphonViewController alloc]
-                                                     initWithNibName:@"AMSyphonViewController" bundle:myBundle];
+                                                     initWithNibName:@"AMSyphonViewController" bundle:nil];
             [amSyphonClients addObject:amSyphonCtrl];
         }
     }

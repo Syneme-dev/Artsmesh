@@ -43,6 +43,8 @@
         AMVideoMixerBackgroundView *view = self.smallViews[i];
         view.contentView = [self.syphonManager getViewByIndex:i];
     }
+    
+    [self.syphonManager startRouter:nil];
 }
 
 - (AMSyphonManager *)syphonManager

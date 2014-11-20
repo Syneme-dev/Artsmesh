@@ -835,9 +835,11 @@ AMWorldMap *worldMap;
     } else {
         [previewPanelView setFrameOrigin:NSMakePoint(hovPoint.x + 20, hovPoint.y +20)];
     }
-     
-    [previewPanelView setHidden:NO];
     
+    [previewPanelView setDescription:theGroup];
+    
+    [previewPanelView setHidden:NO];
+
 }
 
 - (void) updateGroupPreviewOverlays {
@@ -902,11 +904,12 @@ AMWorldMap *worldMap;
     AMGroupPreviewPanelController *gpc = [[AMGroupPreviewPanelController alloc] initWithNibName:@"AMGroupPreviewPanelController" bundle:nil];
     gpc.group = theGroup;
     
+    /**
     NSFont* textFieldFont =  [_fonts objectForKey:@"small-italic"];
     NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
     NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
     gpc.groupDesc = groupDesc;
-
+    **/
     
     AMGroupPreviewPanelView *previewPanelView = (AMGroupPreviewPanelView *)gpc.view;
     previewPanelView.groupPreviewPanelController = gpc;

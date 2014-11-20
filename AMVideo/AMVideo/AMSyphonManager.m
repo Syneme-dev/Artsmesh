@@ -12,16 +12,18 @@
 @implementation AMSyphonManager
 - (id) initWithClientCount : (int) cnt
 {
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
+    
     if(self = [super init]){
         amSyphonClients = [[NSMutableArray alloc] initWithCapacity:cnt];
         for(int i = 0; i < cnt; i++){
             AMSyphonViewController* amSyphonCtrl =  [[AMSyphonViewController alloc]
-                                                     initWithNibName:@"AMSyphonViewController" bundle:nil];
+                                                     initWithNibName:@"AMSyphonViewController" bundle:myBundle];
             [amSyphonClients addObject:amSyphonCtrl];
         }
     }
     
-    amSyphonRouter = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:nil];
+    amSyphonRouter = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
 
     
     return self;

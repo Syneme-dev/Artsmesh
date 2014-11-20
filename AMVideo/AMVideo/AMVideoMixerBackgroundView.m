@@ -27,6 +27,27 @@
     }
 }
 
+- (void)setContentView:(NSView *)view
+{
+    if (_contentView)
+        [_contentView removeFromSuperview];
+    _contentView = view;
+    [self addSubview:_contentView];
+    [_contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSView *content = _contentView;
+    NSDictionary *views = NSDictionaryOfVariableBindings(content);
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+}
+
 - (BOOL)acceptsFirstResponder
 {
     return YES;

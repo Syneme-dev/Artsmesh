@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
@@ -8,16 +8,16 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMVideoMixerViewController">
             <connections>
                 <outlet property="bigView" destination="vXC-Cw-609" id="aAk-Ra-nOJ"/>
-                <outlet property="smallView1" destination="MzZ-EV-3w6" id="hNd-cZ-poZ"/>
-                <outlet property="smallView10" destination="z8o-oR-SXc" id="aRh-Ul-WZV"/>
-                <outlet property="smallView2" destination="AFJ-Aj-ue1" id="UhV-lN-viJ"/>
-                <outlet property="smallView3" destination="VO4-rN-6Qu" id="Pe3-i7-Dsg"/>
-                <outlet property="smallView4" destination="G5H-37-hKK" id="QDu-Qo-TRG"/>
-                <outlet property="smallView5" destination="LcQ-uL-zL8" id="xEh-7q-G7q"/>
-                <outlet property="smallView6" destination="afc-Kx-ZLr" id="is5-L1-Wfd"/>
-                <outlet property="smallView7" destination="kQ4-xi-1cD" id="Tfx-kh-q1a"/>
-                <outlet property="smallView8" destination="G8O-X7-PfG" id="lzT-dl-KLQ"/>
-                <outlet property="smallView9" destination="Kdn-tg-d4R" id="ljk-or-TWL"/>
+                <outlet property="smallView0" destination="MzZ-EV-3w6" id="mlf-9s-vno"/>
+                <outlet property="smallView1" destination="AFJ-Aj-ue1" id="SGL-Cl-dOF"/>
+                <outlet property="smallView2" destination="VO4-rN-6Qu" id="8F7-yn-5Ub"/>
+                <outlet property="smallView3" destination="G5H-37-hKK" id="j6V-VH-in7"/>
+                <outlet property="smallView4" destination="LcQ-uL-zL8" id="RQW-Z9-SkG"/>
+                <outlet property="smallView5" destination="afc-Kx-ZLr" id="T7Y-Uv-VF5"/>
+                <outlet property="smallView6" destination="kQ4-xi-1cD" id="9as-lZ-IW3"/>
+                <outlet property="smallView7" destination="G8O-X7-PfG" id="Yrb-jW-ijg"/>
+                <outlet property="smallView8" destination="Kdn-tg-d4R" id="uJZ-gC-fQ4"/>
+                <outlet property="smallView9" destination="z8o-oR-SXc" id="F5w-EK-8zg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

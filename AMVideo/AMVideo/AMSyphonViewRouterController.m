@@ -24,6 +24,13 @@
 }
 
 
+- (void) awakeFromNib
+{
+    CGLContextObj context = [[self.glView openGLContext] CGLContextObj];
+    syRouter = [[SyphonServer alloc] initWithName:@"AMSyphonRouter" context:context options:nil];
+    
+}
+
 - (void)startVideo{
     [syClient stop];
     
@@ -49,8 +56,15 @@
             }
             // ...then we check to see if our dimensions display or window shape needs to be updated
             SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
-            if(syServer){
-                
+            
+            //routering
+            if(routering){
+                [syRouter publishFrameTexture:frame.textureName
+                                textureTarget:GL_TEXTURE_RECTANGLE_EXT
+                                  imageRegion:NSMakeRect(0, 0, frame.textureSize.width, frame.textureSize.height)
+                            textureDimensions:frame.textureSize
+                                      flipped:NO];
+
             }
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             [self.glView setNeedsDisplay:YES];
@@ -71,4 +85,24 @@
     }
 }
 
+-(void) UpdateServerInfo
+{
+    servers = [[SyphonServerDirectory sharedDirectory] servers];
+}
+
+- (BOOL) startRouter:(NSString *)err
+{
+    routering   = YES;
+    [self UpdateServerInfo];
+    [self startVideo];
+ //   [syServer startRouter];
+    return YES;
+}
+- (BOOL) stopRouter:(NSString *)err
+{
+    routering  = NO;
+    [syRouter stop];
+    
+    return YES;
+}
 @end

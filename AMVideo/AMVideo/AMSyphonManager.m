@@ -7,53 +7,100 @@
 //
 
 #import "AMSyphonManager.h"
-
-
 @implementation AMSyphonManager
+{
+    NSMutableArray* _syClients;
+    AMSyphonViewRouterController* _syServer;
+}
+
 - (id) initWithClientCount : (int) cnt
 {
-    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
-    
     if(self = [super init]){
-        amSyphonClients = [[NSMutableArray alloc] initWithCapacity:cnt];
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
+        
+        _syClients = [[NSMutableArray alloc] init];
         for(int i = 0; i < cnt; i++){
             AMSyphonViewController* amSyphonCtrl =  [[AMSyphonViewController alloc]
                                                      initWithNibName:@"AMSyphonViewController" bundle:myBundle];
-            [amSyphonClients addObject:amSyphonCtrl];
+            [_syClients addObject:amSyphonCtrl];
         }
+        
+        _syServer = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
+        
+        [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers" options:NSKeyValueObservingOptionNew context:nil];
     }
-    
-    amSyphonRouter = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
 
-    
     return self;
 }
 
-- (AMSyphonView*) getRouterView
+-(void)dealloc
 {
-    return amSyphonRouter.view;
+    [[SyphonServerDirectory sharedDirectory] removeObserver:self forKeyPath:@"servers"];
 }
 
-- (AMSyphonView*) getViewByIndex : (int) index
+
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
 {
-    if(index >= [amSyphonClients count]){
+    
+    if ([keyPath isEqualToString:@"servers"]){
+        for (AMSyphonViewController* client in _syClients) {
+            [client updateServerList];
+        }
+    }
+}
+
+-(NSView*)clientViewByIndex:(int)index
+{
+    if(index >= [_syClients count]){
         return nil;
     }
-    AMSyphonViewController* amSyphonCtrl = [amSyphonClients objectAtIndex:index];
+    AMSyphonViewController* amSyphonCtrl = [_syClients objectAtIndex:index];
     return amSyphonCtrl.view;
 }
 
-- (BOOL) startRouter:(NSString *)err
+
+-(NSView*)outputView
 {
-    [amSyphonRouter startRouter:err];
-    return YES;
+    return _syServer.view;
 }
 
-- (BOOL) stopRouter:(NSString *)err
+
+- (BOOL) startRouter
 {
-    [amSyphonRouter stopRouter:err];
+    return [_syServer startRouter];
+}
+
+- (void) stopRouter
+{
+    [_syServer stopRouter];
+}
+
+-(void)selectClient:(int)index
+{
+    if(index >= [_syClients count]){
+        return;
+    }
     
-    return YES;
+    AMSyphonViewController* amSyphonCtrl = [_syClients objectAtIndex:index];
+    NSString* serverName = [amSyphonCtrl currentServerName];
+    [_syServer stop];
+    
+    if(serverName != nil){
+        _syServer.currentServerName = serverName;
+        [_syServer start];
+    }
+}
+
+
+-(BOOL)isSyphonServerStarted;
+{
+    return [_syServer routing];
 }
 
 @end

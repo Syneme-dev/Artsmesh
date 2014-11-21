@@ -14,6 +14,7 @@
 {
     SyphonClient* syClient;
 }
+
 @property (readwrite, retain) SyphonClient* syClient;
 
 @end

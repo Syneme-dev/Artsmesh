@@ -8,6 +8,9 @@
 
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
+
+NSString* kNonServer = @"    --    ";
+
 @interface AMSyphonViewController ()
 @property (weak) IBOutlet AMSyphonView *glView;
 @property (weak) IBOutlet NSPopUpButton *serverNamePopUpButton;
@@ -15,44 +18,86 @@
 @end
 
 @implementation AMSyphonViewController
+{
+    NSArray*        servers;
+    SyphonClient*   _syClient;
+    
+    NSTimeInterval fpsStart;
+    NSUInteger fpsCount;
+    NSUInteger FPS;
+    NSUInteger frameWidth;
+    NSUInteger frameHeight;
+}
 
 - (void)viewDidLoad {
-//    [super viewDidLoad];
-    // Do view setup here.
+    // [super viewDidLoad];
+    // Do view setup here
+    
+    [self updateServerList];
 }
 
-#pragma     mark -
-#pragma     mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
+-(void)updateServerList
 {
-    if ([object isKindOfClass:[SyphonServerDirectory class]]){
-        
-        if ([keyPath isEqualToString:@"servers"]){
-            [self UpdateServerInfo];
+    [self.serverNamePopUpButton removeAllItems];
+    [self.serverNamePopUpButton addItemWithTitle:kNonServer];
+    [self.serverNamePopUpButton addItemsWithTitles:[self syphonServerNames]];
+}
+
+-(NSArray*)syphonServerNames
+{
+    NSMutableArray* serverNames = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
+        NSString* name = [dict objectForKey:SyphonServerDescriptionAppNameKey];
+        if (name) {
+            [serverNames addObject:name];
         }
     }
-}
-
-- (void) awakeFromNib
-{
-    [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers"
-                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                                   context:nil];
     
-    [self UpdateServerInfo];
+    return serverNames;
 }
 
-- (IBAction)startVideo:(id)sender {
-    [syClient stop];
+
+-(NSDictionary*)syphonServerDisctriptByName:(NSString*)name
+{
+    NSDictionary* serverDescript = nil;
+    for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
+        NSString* str = [dict objectForKey:SyphonServerDescriptionAppNameKey];
+        
+        if ([str isEqualToString:name]) {
+            serverDescript = dict;
+        }
+    }
+    
+    return serverDescript;
+}
+
+
+-(void)stop
+{
+    self.currentServerName = kNonServer;
+    [_syClient stop];
+    _syClient = nil;
+}
+
+- (IBAction)serverSelected:(NSPopUpButton *)sender
+{
+    [self stop ];
+    if ([sender.selectedItem.title isEqualToString:kNonServer]) {
+        return;
+    }
+    
+    NSDictionary* serverDesctipt = [self syphonServerDisctriptByName:sender.selectedItem.title];
+    if (!serverDesctipt) {
+        return;
+    }
     
     // Reset our terrible FPS display
     fpsStart = [NSDate timeIntervalSinceReferenceDate];
     fpsCount = 0;
     FPS = 0;
-    syClient = [[SyphonClient alloc] initWithServerDescription:[servers lastObject] options:nil newFrameHandler:^(SyphonClient *client) {
+    
+    _syClient = [[SyphonClient alloc] initWithServerDescription:serverDesctipt options:nil newFrameHandler:^(SyphonClient *client) {
         // This gets called whenever the client receives a new frame.
         
         // The new-frame handler could be called from any thread, but because we update our UI we have
@@ -69,37 +114,23 @@
                 fpsCount = 0;
             }
             // ...then we check to see if our dimensions display or window shape needs to be updated
-            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
+//            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
             
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             [self.glView setNeedsDisplay:YES];
         }];
     }];
     
-    // Our view uses the client to draw, so keep it up to date
-    [self.glView setSyClient:syClient];
-    
-    // If we have a client we do nothing - wait until it outputs a frame
-    
-    // Otherwise clear the view
-    if (syClient == nil)
+    if (_syClient == nil)
     {
         frameWidth = 0;
         frameHeight = 0;
         [self.glView setNeedsDisplay:YES];
+        return;
     }
-}
-
--(void) UpdateServerInfo
-{
-    [self.serverNamePopUpButton removeAllItems];
-    NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
-    if( ![servers isEqualToArray:serversNow]){
-        servers = serversNow;
-        for (NSDictionary* serverInfo in servers) {
-            [self.serverNamePopUpButton addItemWithTitle:[serverInfo valueForKey:@"SyphonServerDescriptionAppNameKey"]];
-        }
-    }
+    
+    [self.glView setSyClient:_syClient];
+    self.currentServerName = sender.selectedItem.title;
 }
 
 

@@ -24,6 +24,7 @@
 @property (weak) IBOutlet NSButton *amTimerBtn;
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
+@property (weak) IBOutlet NSButton *syphonServerBtn;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

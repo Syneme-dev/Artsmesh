@@ -10,15 +10,9 @@
 #import <Syphon/Syphon.h>
 
 @interface AMSyphonViewController : NSViewController
-{
-    NSArray*        servers;
-    SyphonClient*   syClient;
-    
-    NSTimeInterval fpsStart;
-    NSUInteger fpsCount;
-    NSUInteger FPS;
-    NSUInteger frameWidth;
-    NSUInteger frameHeight;
 
-}
+@property NSString* currentServerName;
+
+-(void)updateServerList;
+
 @end

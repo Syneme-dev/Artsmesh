@@ -37,12 +37,12 @@
     NSView *content = _contentView;
     NSDictionary *views = NSDictionaryOfVariableBindings(content);
     [self addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[content]-0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[content]-3-|"
                                              options:0
                                              metrics:nil
                                                views:views]];
     [self addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[content]-0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-3-[content]-3-|"
                                              options:0
                                              metrics:nil
                                                views:views]];

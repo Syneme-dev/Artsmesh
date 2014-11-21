@@ -17,4 +17,6 @@
 - (void)startSyphon;
 - (void)stopSyphon;
 
+-(BOOL)isSyphonServerStarted;
+
 @end

@@ -12,7 +12,9 @@
 
 @interface AMGroupPreviewPanelController : NSViewController
 
-@property (strong) IBOutlet AMFoundryFontView *descriptionTextField;
+@property (strong) IBOutlet NSClipView *descScrollView;
+@property (strong) IBOutlet NSClipView *descClipView;
+@property (strong) IBOutlet NSTextView *descTextView;
 
 @property AMLiveGroup *group;
 @property NSMutableAttributedString *groupDesc;

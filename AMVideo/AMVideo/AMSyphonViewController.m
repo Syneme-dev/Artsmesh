@@ -38,9 +38,9 @@
 
 - (void) awakeFromNib
 {
-//    [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers"
-//                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                                   context:nil];
+    [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers"
+                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                   context:nil];
     
     [self UpdateServerInfo];
 }

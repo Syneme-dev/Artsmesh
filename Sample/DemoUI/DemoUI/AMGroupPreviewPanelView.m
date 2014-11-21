@@ -39,4 +39,18 @@ static NSColor *colorFromRGB(unsigned char r, unsigned char g, unsigned char b, 
     return [NSColor colorWithCalibratedRed:(r/255.0f) green:(g/255.0f) blue:(b/255.0f) alpha:a];
 }
 
+-(void)setDescription:(AMLiveGroup *)theGroup {
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    
+    NSFont* textFieldFont =  [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0];
+    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
+    NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
+    
+    NSTextView *newTextView = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, self.groupPreviewPanelController.descScrollView.bounds.size.width, 1000)];
+    
+    [[newTextView textStorage] setAttributedString:groupDesc];
+    newTextView.drawsBackground = NO;
+    [self.groupPreviewPanelController.descScrollView setDocumentView:newTextView];
+}
+
 @end

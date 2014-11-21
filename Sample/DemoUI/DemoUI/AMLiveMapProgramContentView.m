@@ -57,7 +57,7 @@
     
     NSSize textViewRect = [theTextView intrinsicContentSize];
     
-    NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
+    //NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
     
     [theTextView setFrameSize:textViewRect];
     

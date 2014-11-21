@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AMProfileTextFieldFormatter : NSFormatter {
-    int maxLength;
+@interface AMProfileTextFieldFormatter : NSFormatter
+{
+    NSInteger _maxLength;
 }
-- (void)setMaximumLength:(int)len;
-- (int)maximumLength;
+
+@property NSInteger maxLength;
 
 @end

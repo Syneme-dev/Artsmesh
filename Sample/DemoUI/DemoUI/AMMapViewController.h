@@ -15,6 +15,7 @@
 #import <WebKit/WebFrameLoadDelegate.h>
 
 @interface AMMapViewController : AMTabPanelViewController
+@property (weak) IBOutlet NSScrollView *testView;
 
 @property (strong) IBOutlet NSTabView *tabs;
 @property (strong) IBOutlet NSButton *staticTab;

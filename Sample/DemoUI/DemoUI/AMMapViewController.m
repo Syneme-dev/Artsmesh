@@ -192,8 +192,30 @@
     else{
         self.archiveWebView.preferences.userStyleSheetEnabled = NO;
     }
+    
+    [[self.archiveWebView windowScriptObject] setValue:self forKey:@"objcConnector"];
     self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
+}
+
+
+- (void)windowDidLoad{
+
+}
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector{
+    if (aSelector == @selector(elementClicked:)) return NO;
+    return YES;
+}
++ (BOOL)isKeyExcludedFromWebScript:(const char *)name{
+
+        return NO;
+
+
+}
+
+-(void)elementClicked:(NSArray *)eleId{
+    [self.testView setHidden:!self.testView.hidden];
+    NSLog(@"invoke from web click");
 }
 
 - (IBAction)onStaticTabClick:(id)sender {

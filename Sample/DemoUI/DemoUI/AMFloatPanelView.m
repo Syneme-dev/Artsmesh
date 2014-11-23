@@ -79,7 +79,7 @@
     
     NSPoint p = [theEvent locationInWindow];
     
-    NSPoint convertedPoint = [self convertPoint:p fromView:nil];
+   [self convertPoint:p fromView:nil];
         
     if (NSPointInRect([self convertPoint:p fromView:nil], self.knobRectRight)) {
         //NSLog(@"clicked on right knob!");

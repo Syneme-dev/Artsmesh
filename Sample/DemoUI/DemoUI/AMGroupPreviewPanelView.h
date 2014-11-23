@@ -8,11 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMGroupPreviewPanelController.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMGroupPreviewPanelView : NSView
 
 @property(nonatomic) NSColor* backgroundColor;
 @property(nonatomic, weak) AMGroupPreviewPanelController *groupPreviewPanelController;
 @property AMLiveGroup *group;
+
+-(void)setDescription:(AMLiveGroup *)theGroup;
 
 @end

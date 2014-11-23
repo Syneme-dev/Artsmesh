@@ -48,6 +48,11 @@
 		4A6D4B881A130F3000B5D26B /* AMOSCGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A6D4B891A130F3000B5D26B /* AMOSCGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */; };
 		4A6D4B901A1319D700B5D26B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */; };
+		4A8E05801A1C618700645840 /* AMOSCGroupMessageMonitorController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */; };
+		4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */; };
+		4A8E05821A1C618700645840 /* AMOSCGroupMessageMonitorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */; };
+		4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */; };
+		4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */; };
 		4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84111A135C20004CE862 /* AMPreferenceManager.framework */; };
 		4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84131A1369CD004CE862 /* AMLogger.framework */; };
 /* End PBXBuildFile section */
@@ -109,6 +114,11 @@
 		4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroups.h; sourceTree = "<group>"; };
 		4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroups.m; sourceTree = "<group>"; };
 		4A6D4B8F1A1319D700B5D26B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupMessageMonitorController.h; sourceTree = "<group>"; };
+		4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupMessageMonitorController.m; sourceTree = "<group>"; };
+		4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCGroupMessageMonitorController.xib; sourceTree = "<group>"; };
+		4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupClientConfig.h; sourceTree = "<group>"; };
+		4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupClientConfig.m; sourceTree = "<group>"; };
 		4AED84111A135C20004CE862 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		4AED84131A1369CD004CE862 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,9 +243,14 @@
 				4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */,
 				4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */,
 				4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */,
+				4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */,
+				4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */,
 				0136BDDA1A14C1AF0009638F /* AMOSCGroupClientViewController.h */,
 				0136BDDB1A14C1AF0009638F /* AMOSCGroupClientViewController.m */,
 				0136BDDC1A14C1AF0009638F /* AMOSCGroupClientViewController.xib */,
+				4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */,
+				4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */,
+				4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */,
 				4A57013B1A11B7AC00BF801E /* Supporting Files */,
 			);
 			path = AMOSCGroups;
@@ -280,7 +295,9 @@
 				4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */,
 				4A6D4B881A130F3000B5D26B /* AMOSCGroups.h in Headers */,
 				013442EB1A14DD0700ADD521 /* TimerListener.h in Headers */,
+				4A8E05801A1C618700645840 /* AMOSCGroupMessageMonitorController.h in Headers */,
 				013442EF1A14DD0700ADD521 /* OscException.h in Headers */,
+				4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */,
 				013442F01A14DD0700ADD521 /* OscHostEndianness.h in Headers */,
 				013442F31A14DD0700ADD521 /* OscPacketListener.h in Headers */,
 				0136BDDD1A14C1AF0009638F /* AMOSCGroupClientViewController.h in Headers */,
@@ -369,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A8E05821A1C618700645840 /* AMOSCGroupMessageMonitorController.xib in Resources */,
 				013442ED1A14DD0700ADD521 /* LICENSE in Resources */,
 				4A6D4B851A130DB400B5D26B /* AMOSCPrefViewController.xib in Resources */,
 				0136BDDF1A14C1AF0009638F /* AMOSCGroupClientViewController.xib in Resources */,
@@ -398,6 +416,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */,
+				4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */,
 				4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */,
 				4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */,
 				0136BDDE1A14C1AF0009638F /* AMOSCGroupClientViewController.m in Sources */,
@@ -515,7 +535,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
@@ -523,7 +543,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -537,7 +557,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/wangwei/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
@@ -545,7 +565,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

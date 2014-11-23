@@ -47,6 +47,7 @@
     self.isDragging = NO;
     self.inFullScreenMode = NO;
     self.tearedOff = YES;
+    
     return self;
 }
 
@@ -102,6 +103,7 @@
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
+    
     if (self.inFullScreenMode)
         return;
     
@@ -122,7 +124,9 @@
             
             NSPoint topLeft = NSMakePoint(self.window.frame.origin.x,
                                           self.window.frame.origin.y + self.window.frame.size.height);
+
             CGFloat newWidth = MAX(self.minSizeConstraint.width, p.x - self.window.frame.origin.x);
+
             CGFloat newHeight = MAX(self.minSizeConstraint.height, topLeft.y - p.y);
             NSRect windowFrame = NSMakeRect(topLeft.x, topLeft.y - newHeight,
                                             newWidth, newHeight);

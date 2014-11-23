@@ -91,19 +91,30 @@ withFilterContext:(id)filterContext
     //NSString* host = [GCDAsyncUdpSocket hostFromAddress:address];
     int port = [GCDAsyncUdpSocket portFromAddress:address];
     
-    OSCMutableMessage* packet = [[OSCMutableMessage alloc] initWithData:data];
-    NSLog(@"osc message:%@", packet.description);
+    id packet = [[OSCPacket alloc] initWithData:data];
+    [self printOSCPacket:packet];
     
     if (port == [self.remotePort intValue]) {
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate oscMessageSent:packet.description];
+            [self.delegate oscMessageSent:packet];
         });
         
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate oscMessageRecieved:packet.description];
+            [self.delegate oscMessageRecieved:packet];
         });
+    }
+}
+
+-(void)printOSCPacket:(OSCPacket*) packet
+{
+    if(![packet isBundle]){
+        OSCMutableMessage* message = (OSCMutableMessage*)packet;
+        NSLog(@"osc message:%@", [message description]);
+    }else{
+        for (OSCPacket* pk in [packet childPackets]) {
+            [self printOSCPacket:pk];
+        }
     }
 }
 

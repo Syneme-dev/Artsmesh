@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMBackgroundView : NSView
-
+@property (strong, nonatomic) NSColor *backgroundColor;
 @end

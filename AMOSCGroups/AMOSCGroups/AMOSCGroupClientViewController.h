@@ -10,4 +10,16 @@
 
 @interface AMOSCGroupClientViewController : NSViewController
 
+@property NSString* serverAddr;
+@property NSString* serverPort;
+@property NSString* remotePort;
+@property NSString* txPort;
+@property NSString* rxPort;
+@property NSString* userName;
+@property NSString* userPwd;
+@property NSString* groupName;
+@property NSString* groupPwd;
+@property NSString* monitorAddr;
+@property NSString* monitorPort;
+
 @end

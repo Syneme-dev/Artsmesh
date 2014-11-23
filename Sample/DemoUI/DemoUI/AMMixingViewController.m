@@ -9,7 +9,7 @@
 #import "AMMixingViewController.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMAudio/AMAudio.h"
-
+#import "AMVideo/AMVideo.h"
 
 @interface AMMixingViewController ()
 
@@ -18,6 +18,7 @@
 @implementation AMMixingViewController
 {
      NSViewController* _audioMixerViewController;
+     NSViewController* _videoMixerViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,6 +71,8 @@
         NSView* view = item.view;
         if ([view.identifier isEqualTo:@"Audio Mixer"]) {
             [self loadAudioMixerView: view];
+        } else if ([view.identifier isEqualTo:@"Video Mixer"]) {
+            [self loadVideoMixerView:view];
         }
     }
 }
@@ -97,4 +100,29 @@
         
     }
 }
+
+-(void)loadVideoMixerView:(NSView*)tabView
+{
+    _videoMixerViewController = [[AMVideo sharedInstance] getMixerUI];
+    if (_videoMixerViewController) {
+        NSView* contentView = _videoMixerViewController.view;
+        contentView.frame = NSMakeRect(0, 0, 800, 600);
+        [tabView addSubview:contentView];
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
+    }
+}
+
 @end

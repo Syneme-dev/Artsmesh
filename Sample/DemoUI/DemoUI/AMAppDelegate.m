@@ -17,6 +17,7 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMAudio/AMAudio.h"
 #import "AMLogger/AMLogger.h"
+#import "AMOscGroups/AMOSCGroups.h"
 
 
 static NSMutableDictionary *allPlugins = nil;
@@ -64,6 +65,9 @@ static NSMutableDictionary *allPlugins = nil;
     [[AMMesher sharedAMMesher] stopMesher];
     
     [[AMAudio sharedInstance] releaseResources];
+    [[AMOSCGroups sharedInstance] stopOSCGroupClient];
+    [[AMOSCGroups sharedInstance] stopOSCGroupServer];
+    
     
     AMLogClose();
 }

@@ -86,8 +86,6 @@
     
 }
 
-
-
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     if( [sender isEqual:self.archiveWebView] ) {
         [listener use];
@@ -98,11 +96,11 @@
         
     }
 }
+
 -(void)dealloc{
     //To avoid a error when closing
     [self.archiveWebView.mainFrame stopLoading];
 }
-
 
 -(void)webViewClose:(WebView *)sender
 {
@@ -141,17 +139,6 @@
     
     [contentView addConstraints:verticalConstraints];
     [contentView addConstraints:horizontalConstraints];
-    
-    
-    //Center the view within parent view
-    
-    /**
-    [_liveMapView setFrameOrigin:NSMakePoint(
-                                             (NSWidth([_liveMapView.superview bounds]) - NSWidth([_liveMapView frame])) / 2,
-                                             (NSHeight([_liveMapView.superview bounds]) - NSHeight([_liveMapView frame])) / 2
-                                             )];
-    [_liveMapView setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
-     **/
     
 }
 

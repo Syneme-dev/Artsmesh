@@ -19,7 +19,7 @@
 
 -(NSViewController*)getOSCPrefUI;
 -(NSViewController*)getOSCClientUI;
-
+-(NSViewController*)getOSCMonitorUI;
 -(BOOL)startOSCGroupServer;
 -(void)stopOSCGroupServer;
 

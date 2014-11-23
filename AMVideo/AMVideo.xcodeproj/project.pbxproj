@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A03FF511A199AE700227BD7 /* AMVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A03FF451A199AE700227BD7 /* AMVideo.framework */; };
+		4A03FF581A199AE700227BD7 /* AMVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A03FF571A199AE700227BD7 /* AMVideoTests.m */; };
+		4FFD1E351A1D87DE00F798E0 /* AMSyphonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFD1E2B1A1D87DE00F798E0 /* AMSyphonView.h */; };
+		4FFD1E361A1D87DE00F798E0 /* AMSyphonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD1E2C1A1D87DE00F798E0 /* AMSyphonView.m */; };
+		4FFD1E371A1D87DE00F798E0 /* AMSyphonViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFD1E2D1A1D87DE00F798E0 /* AMSyphonViewController.h */; };
+		4FFD1E381A1D87DE00F798E0 /* AMSyphonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD1E2E1A1D87DE00F798E0 /* AMSyphonViewController.m */; };
+		4FFD1E391A1D87DE00F798E0 /* AMSyphonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFD1E2F1A1D87DE00F798E0 /* AMSyphonViewController.xib */; };
+		4FFD1E3A1A1D87DE00F798E0 /* AMSyphonViewRouterController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFD1E301A1D87DE00F798E0 /* AMSyphonViewRouterController.h */; };
+		4FFD1E3B1A1D87DE00F798E0 /* AMSyphonViewRouterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD1E311A1D87DE00F798E0 /* AMSyphonViewRouterController.m */; };
+		4FFD1E3C1A1D87DE00F798E0 /* AMSyphonViewRouterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFD1E321A1D87DE00F798E0 /* AMSyphonViewRouterController.xib */; };
+		4FFD1E3D1A1D87DE00F798E0 /* AMSyphonManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFD1E331A1D87DE00F798E0 /* AMSyphonManager.h */; };
+		4FFD1E3E1A1D87DE00F798E0 /* AMSyphonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD1E341A1D87DE00F798E0 /* AMSyphonManager.m */; };
+		4FFD1E411A1D881D00F798E0 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FFD1E401A1D881D00F798E0 /* Syphon.framework */; };
+		4FFD1E471A1D8C4300F798E0 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E401A1D881D00F798E0 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEAE38D71A1A11BA0079C2CB /* AMVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAE38D51A1A11BA0079C2CB /* AMVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEAE38D81A1A11BA0079C2CB /* AMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE38D61A1A11BA0079C2CB /* AMVideo.m */; };
+		CEAE38DC1A1A17770079C2CB /* AMVideoMixerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAE38D91A1A17770079C2CB /* AMVideoMixerViewController.h */; };
+		CEAE38DD1A1A17770079C2CB /* AMVideoMixerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE38DA1A1A17770079C2CB /* AMVideoMixerViewController.m */; };
+		CEAE38DE1A1A17770079C2CB /* AMVideoMixerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE38DB1A1A17770079C2CB /* AMVideoMixerViewController.xib */; };
+		CEAE38E31A1A25A60079C2CB /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAE38E21A1A25A60079C2CB /* UIFramework.framework */; };
+		CEAE38E71A1A30C70079C2CB /* AMVideoMixerBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = CEAE38E51A1A30C70079C2CB /* AMVideoMixerBackgroundView.h */; };
+		CEAE38E81A1A30C70079C2CB /* AMVideoMixerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE38E61A1A30C70079C2CB /* AMVideoMixerBackgroundView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A03FF521A199AE700227BD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A03FF3C1A199AE700227BD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A03FF441A199AE700227BD7;
+			remoteInfo = AMVideo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4FFD1E461A1D8C3200F798E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4FFD1E471A1D8C4300F798E0 /* Syphon.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4A03FF451A199AE700227BD7 /* AMVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A03FF491A199AE700227BD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A03FF501A199AE700227BD7 /* AMVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A03FF561A199AE700227BD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A03FF571A199AE700227BD7 /* AMVideoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMVideoTests.m; sourceTree = "<group>"; };
+		4FFD1E2B1A1D87DE00F798E0 /* AMSyphonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonView.h; sourceTree = "<group>"; };
+		4FFD1E2C1A1D87DE00F798E0 /* AMSyphonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonView.m; sourceTree = "<group>"; };
+		4FFD1E2D1A1D87DE00F798E0 /* AMSyphonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewController.h; sourceTree = "<group>"; };
+		4FFD1E2E1A1D87DE00F798E0 /* AMSyphonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewController.m; sourceTree = "<group>"; };
+		4FFD1E2F1A1D87DE00F798E0 /* AMSyphonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonViewController.xib; sourceTree = "<group>"; };
+		4FFD1E301A1D87DE00F798E0 /* AMSyphonViewRouterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewRouterController.h; sourceTree = "<group>"; };
+		4FFD1E311A1D87DE00F798E0 /* AMSyphonViewRouterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewRouterController.m; sourceTree = "<group>"; };
+		4FFD1E321A1D87DE00F798E0 /* AMSyphonViewRouterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonViewRouterController.xib; sourceTree = "<group>"; };
+		4FFD1E331A1D87DE00F798E0 /* AMSyphonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonManager.h; sourceTree = "<group>"; };
+		4FFD1E341A1D87DE00F798E0 /* AMSyphonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonManager.m; sourceTree = "<group>"; };
+		4FFD1E401A1D881D00F798E0 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
+		CEAE38D51A1A11BA0079C2CB /* AMVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideo.h; sourceTree = "<group>"; };
+		CEAE38D61A1A11BA0079C2CB /* AMVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideo.m; sourceTree = "<group>"; };
+		CEAE38D91A1A17770079C2CB /* AMVideoMixerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoMixerViewController.h; sourceTree = "<group>"; };
+		CEAE38DA1A1A17770079C2CB /* AMVideoMixerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoMixerViewController.m; sourceTree = "<group>"; };
+		CEAE38DB1A1A17770079C2CB /* AMVideoMixerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoMixerViewController.xib; sourceTree = "<group>"; };
+		CEAE38E21A1A25A60079C2CB /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
+		CEAE38E51A1A30C70079C2CB /* AMVideoMixerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoMixerBackgroundView.h; sourceTree = "<group>"; };
+		CEAE38E61A1A30C70079C2CB /* AMVideoMixerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoMixerBackgroundView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4A03FF411A199AE700227BD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAE38E31A1A25A60079C2CB /* UIFramework.framework in Frameworks */,
+				4FFD1E411A1D881D00F798E0 /* Syphon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A03FF4D1A199AE700227BD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A03FF511A199AE700227BD7 /* AMVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A03FF3B1A199AE700227BD7 = {
+			isa = PBXGroup;
+			children = (
+				4A03FF471A199AE700227BD7 /* AMVideo */,
+				CEAE38E41A1A25B80079C2CB /* Frameworks */,
+				4A03FF541A199AE700227BD7 /* AMVideoTests */,
+				4A03FF461A199AE700227BD7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4A03FF461A199AE700227BD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A03FF451A199AE700227BD7 /* AMVideo.framework */,
+				4A03FF501A199AE700227BD7 /* AMVideoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A03FF471A199AE700227BD7 /* AMVideo */ = {
+			isa = PBXGroup;
+			children = (
+				4FFD1E3F1A1D87F300F798E0 /* AMSyphonManager */,
+				4A03FF481A199AE700227BD7 /* Supporting Files */,
+				CEAE38D51A1A11BA0079C2CB /* AMVideo.h */,
+				CEAE38D61A1A11BA0079C2CB /* AMVideo.m */,
+				CEAE38DF1A1A177E0079C2CB /* Mixer */,
+			);
+			path = AMVideo;
+			sourceTree = "<group>";
+		};
+		4A03FF481A199AE700227BD7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A03FF491A199AE700227BD7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A03FF541A199AE700227BD7 /* AMVideoTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A03FF571A199AE700227BD7 /* AMVideoTests.m */,
+				4A03FF551A199AE700227BD7 /* Supporting Files */,
+			);
+			path = AMVideoTests;
+			sourceTree = "<group>";
+		};
+		4A03FF551A199AE700227BD7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4A03FF561A199AE700227BD7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4FFD1E3F1A1D87F300F798E0 /* AMSyphonManager */ = {
+			isa = PBXGroup;
+			children = (
+				4FFD1E2B1A1D87DE00F798E0 /* AMSyphonView.h */,
+				4FFD1E2C1A1D87DE00F798E0 /* AMSyphonView.m */,
+				4FFD1E2D1A1D87DE00F798E0 /* AMSyphonViewController.h */,
+				4FFD1E2E1A1D87DE00F798E0 /* AMSyphonViewController.m */,
+				4FFD1E2F1A1D87DE00F798E0 /* AMSyphonViewController.xib */,
+				4FFD1E301A1D87DE00F798E0 /* AMSyphonViewRouterController.h */,
+				4FFD1E311A1D87DE00F798E0 /* AMSyphonViewRouterController.m */,
+				4FFD1E321A1D87DE00F798E0 /* AMSyphonViewRouterController.xib */,
+				4FFD1E331A1D87DE00F798E0 /* AMSyphonManager.h */,
+				4FFD1E341A1D87DE00F798E0 /* AMSyphonManager.m */,
+			);
+			name = AMSyphonManager;
+			sourceTree = "<group>";
+		};
+		CEAE38DF1A1A177E0079C2CB /* Mixer */ = {
+			isa = PBXGroup;
+			children = (
+				CEAE38E51A1A30C70079C2CB /* AMVideoMixerBackgroundView.h */,
+				CEAE38E61A1A30C70079C2CB /* AMVideoMixerBackgroundView.m */,
+				CEAE38D91A1A17770079C2CB /* AMVideoMixerViewController.h */,
+				CEAE38DA1A1A17770079C2CB /* AMVideoMixerViewController.m */,
+				CEAE38DB1A1A17770079C2CB /* AMVideoMixerViewController.xib */,
+			);
+			name = Mixer;
+			sourceTree = "<group>";
+		};
+		CEAE38E41A1A25B80079C2CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4FFD1E401A1D881D00F798E0 /* Syphon.framework */,
+				CEAE38E21A1A25A60079C2CB /* UIFramework.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4A03FF421A199AE700227BD7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAE38E71A1A30C70079C2CB /* AMVideoMixerBackgroundView.h in Headers */,
+				CEAE38D71A1A11BA0079C2CB /* AMVideo.h in Headers */,
+				4FFD1E371A1D87DE00F798E0 /* AMSyphonViewController.h in Headers */,
+				4FFD1E351A1D87DE00F798E0 /* AMSyphonView.h in Headers */,
+				CEAE38DC1A1A17770079C2CB /* AMVideoMixerViewController.h in Headers */,
+				4FFD1E3D1A1D87DE00F798E0 /* AMSyphonManager.h in Headers */,
+				4FFD1E3A1A1D87DE00F798E0 /* AMSyphonViewRouterController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4A03FF441A199AE700227BD7 /* AMVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A03FF5B1A199AE700227BD7 /* Build configuration list for PBXNativeTarget "AMVideo" */;
+			buildPhases = (
+				4A03FF401A199AE700227BD7 /* Sources */,
+				4A03FF411A199AE700227BD7 /* Frameworks */,
+				4A03FF421A199AE700227BD7 /* Headers */,
+				4A03FF431A199AE700227BD7 /* Resources */,
+				4FFD1E461A1D8C3200F798E0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMVideo;
+			productName = AMVideo;
+			productReference = 4A03FF451A199AE700227BD7 /* AMVideo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4A03FF4F1A199AE700227BD7 /* AMVideoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A03FF5E1A199AE700227BD7 /* Build configuration list for PBXNativeTarget "AMVideoTests" */;
+			buildPhases = (
+				4A03FF4C1A199AE700227BD7 /* Sources */,
+				4A03FF4D1A199AE700227BD7 /* Frameworks */,
+				4A03FF4E1A199AE700227BD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A03FF531A199AE700227BD7 /* PBXTargetDependency */,
+			);
+			name = AMVideoTests;
+			productName = AMVideoTests;
+			productReference = 4A03FF501A199AE700227BD7 /* AMVideoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4A03FF3C1A199AE700227BD7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "王为";
+				TargetAttributes = {
+					4A03FF441A199AE700227BD7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					4A03FF4F1A199AE700227BD7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = 4A03FF3F1A199AE700227BD7 /* Build configuration list for PBXProject "AMVideo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4A03FF3B1A199AE700227BD7;
+			productRefGroup = 4A03FF461A199AE700227BD7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4A03FF441A199AE700227BD7 /* AMVideo */,
+				4A03FF4F1A199AE700227BD7 /* AMVideoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4A03FF431A199AE700227BD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAE38DE1A1A17770079C2CB /* AMVideoMixerViewController.xib in Resources */,
+				4FFD1E391A1D87DE00F798E0 /* AMSyphonViewController.xib in Resources */,
+				4FFD1E3C1A1D87DE00F798E0 /* AMSyphonViewRouterController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A03FF4E1A199AE700227BD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4A03FF401A199AE700227BD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FFD1E3B1A1D87DE00F798E0 /* AMSyphonViewRouterController.m in Sources */,
+				CEAE38DD1A1A17770079C2CB /* AMVideoMixerViewController.m in Sources */,
+				4FFD1E3E1A1D87DE00F798E0 /* AMSyphonManager.m in Sources */,
+				CEAE38E81A1A30C70079C2CB /* AMVideoMixerBackgroundView.m in Sources */,
+				4FFD1E381A1D87DE00F798E0 /* AMSyphonViewController.m in Sources */,
+				CEAE38D81A1A11BA0079C2CB /* AMVideo.m in Sources */,
+				4FFD1E361A1D87DE00F798E0 /* AMSyphonView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A03FF4C1A199AE700227BD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A03FF581A199AE700227BD7 /* AMVideoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A03FF531A199AE700227BD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A03FF441A199AE700227BD7 /* AMVideo */;
+			targetProxy = 4A03FF521A199AE700227BD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4A03FF591A199AE700227BD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4A03FF5A1A199AE700227BD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4A03FF5C1A199AE700227BD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = AMVideo/Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4A03FF5D1A199AE700227BD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = AMVideo/Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4A03FF5F1A199AE700227BD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AMVideoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4A03FF601A199AE700227BD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AMVideoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A03FF3F1A199AE700227BD7 /* Build configuration list for PBXProject "AMVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A03FF591A199AE700227BD7 /* Debug */,
+				4A03FF5A1A199AE700227BD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A03FF5B1A199AE700227BD7 /* Build configuration list for PBXNativeTarget "AMVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A03FF5C1A199AE700227BD7 /* Debug */,
+				4A03FF5D1A199AE700227BD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A03FF5E1A199AE700227BD7 /* Build configuration list for PBXNativeTarget "AMVideoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A03FF5F1A199AE700227BD7 /* Debug */,
+				4A03FF601A199AE700227BD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4A03FF3C1A199AE700227BD7 /* Project object */;
+}

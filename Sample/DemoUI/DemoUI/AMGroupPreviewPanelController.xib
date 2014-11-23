@@ -7,6 +7,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPreviewPanelController">
             <connections>
+                <outlet property="descClipView" destination="jYF-u7-ka6" id="psx-EJ-lcZ"/>
+                <outlet property="descScrollView" destination="jYF-u7-ka6" id="1Qh-bl-bMG"/>
+                <outlet property="descTextView" destination="dfs-iV-rgB" id="GTG-Xs-jXv"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -53,13 +56,6 @@
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="130" height="28"/>
                                 <size key="maxSize" width="463" height="10000000"/>
-                                <connections>
-                                    <binding destination="-2" name="attributedString" keyPath="self.groupDesc" id="DRy-LR-aE6">
-                                        <dictionary key="options">
-                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

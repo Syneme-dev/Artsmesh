@@ -324,6 +324,49 @@
 
 - (void)getCoordinates:(NSString *)searchTerm
 {
+    NSString *username = @"artsmesh";
+    
+    NSString *searchURL = [NSString stringWithFormat:@"%@%@%@%@",
+        @"http://api.geonames.org/searchJSON?name=",
+        searchTerm,
+        @"&maxRows=1&username=",
+        username];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request
+                                             returningResponse:nil error:nil];
+    
+    NSError *jsonParsingError = nil;
+    NSArray *geoData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    
+    if(jsonParsingError != nil){
+        NSLog(@"Geo data parse JSON error:%@", jsonParsingError.description);
+    }
+    NSDictionary *results = (NSDictionary*)geoData;
+    NSDictionary *topResult = [[results valueForKey:@"geonames"] objectAtIndex:0];
+    
+    if ( [topResult count] >= 1 ) {
+        AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+        
+        double lat = [[topResult valueForKey:@"lat"] doubleValue];
+        double lon = [[topResult valueForKey:@"lng"] doubleValue];
+        
+        myGroup.location = searchTerm;
+        myGroup.longitude = [NSString stringWithFormat:@"%f", lon];
+        myGroup.latitude =  [NSString stringWithFormat:@"%f", lat];
+        
+        [[AMMesher sharedAMMesher] updateGroup];
+        
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
+    } else {
+        //No result found
+    }
+    
+    /**
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     [geoCoder geocodeAddressString:searchTerm
                  completionHandler:^(NSArray* placemarks, NSError* error){
@@ -350,6 +393,7 @@
                      }
                  }
      ];
+     **/
 }
 
 -(void)onChecked:(AMCheckBoxView*)sender

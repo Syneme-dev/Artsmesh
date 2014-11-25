@@ -8,7 +8,6 @@
 
 #import "AMVideoMixerViewController.h"
 #import "AMVideoMixerBackgroundView.h"
-#import "AMSyphonManager.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -23,7 +22,7 @@
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView8;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView9;
 @property (strong, nonatomic, readonly) NSArray *smallViews;
-@property (strong, nonatomic) AMSyphonManager *syphonManager;
+
 @end
 
 @implementation AMVideoMixerViewController
@@ -38,13 +37,12 @@
 - (void)setup
 {
     self.bigView.hasBorder = YES;
-    self.bigView.contentView = [self.syphonManager getRouterView];
+    self.bigView.contentView = [self.syphonManager outputView];
+    
     for (int i = 0; i < self.smallViews.count; i++) {
         AMVideoMixerBackgroundView *view = self.smallViews[i];
-        view.contentView = [self.syphonManager getViewByIndex:i];
+        view.contentView = [self.syphonManager clientViewByIndex:i];
     }
-    
-    [self.syphonManager startRouter:nil];
 }
 
 - (AMSyphonManager *)syphonManager
@@ -79,15 +77,21 @@
     NSPoint point = [self.view convertPoint:theEvent.locationInWindow
                                    fromView:nil];
     NSView *hitView = [self.view hitTest:point];
-    if ([self.smallViews indexOfObjectIdenticalTo:hitView] != NSNotFound) {
-        AMVideoMixerBackgroundView *theView = (AMVideoMixerBackgroundView *)hitView;
+    NSView *smallView = hitView.superview.superview;
+
+    if ([self.smallViews indexOfObjectIdenticalTo:smallView] != NSNotFound) {
+        AMVideoMixerBackgroundView *theView = (AMVideoMixerBackgroundView *)smallView;
         if (!theView.hasBorder) {
             for (AMVideoMixerBackgroundView *view in self.smallViews) {
                 if (view.hasBorder)
                     view.hasBorder = NO;
             }
+            
             theView.hasBorder = YES;
         }
+        
+        NSUInteger index = [self.smallViews indexOfObjectIdenticalTo:smallView];
+        [self.syphonManager selectClient:index];
     }
 }
 

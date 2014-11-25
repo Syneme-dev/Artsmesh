@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMSyphonManager.h"
 
 @interface AMVideoMixerViewController : NSViewController
+
+@property (strong, nonatomic) AMSyphonManager *syphonManager;
 
 @end

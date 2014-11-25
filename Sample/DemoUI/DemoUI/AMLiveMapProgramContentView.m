@@ -83,7 +83,7 @@
         
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
-                [self addTextView:theUser.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.fullName withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             } else {
                 [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }

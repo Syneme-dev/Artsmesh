@@ -11,6 +11,7 @@
 {
     NSMutableArray* _syClients;
     AMSyphonViewRouterController* _syServer;
+    AMSyphonViewRouterController* _syTearOff;
 }
 
 - (id) initWithClientCount : (int) cnt
@@ -26,6 +27,9 @@
         }
         
         _syServer = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
+        
+        _syTearOff = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
+        [_syTearOff stopRouter];
         
         [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers" options:NSKeyValueObservingOptionNew context:nil];
     }
@@ -70,6 +74,11 @@
     return _syServer.view;
 }
 
+- (NSView*) tearOffView
+{
+    
+    return _syTearOff.view;
+}
 
 - (BOOL) startRouter
 {

@@ -17,6 +17,7 @@
 
 -(NSView*)clientViewByIndex:(int)index;
 -(NSView*)outputView;
+-(NSView*)tearOffView;
 -(void)selectClient:(int)index;
 -(BOOL)startRouter;
 -(void)stopRouter;

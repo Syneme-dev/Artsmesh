@@ -48,9 +48,19 @@ NSString* kNonServer = @"    --    ";
     NSMutableArray* serverNames = [[NSMutableArray alloc] init];
     
     for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
-        NSString* name = [dict objectForKey:SyphonServerDescriptionAppNameKey];
-        if (name) {
-            [serverNames addObject:name];
+        NSString* appName   = [dict objectForKey:SyphonServerDescriptionAppNameKey];
+        NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
+        NSString* title     = [NSString stringWithString:appName];
+        
+        if([appName isEqualToString:@"Artsmesh"])
+        {
+            continue;
+        }
+        
+        // A server may not have a name (usually if it is the only server in an application)
+        if([name length] > 0) {
+            title = [name stringByAppendingFormat:@"-%@", title, nil];
+            [serverNames addObject:title];
         }
     }
     
@@ -58,13 +68,81 @@ NSString* kNonServer = @"    --    ";
 }
 
 
--(NSDictionary*)syphonServerDisctriptByName:(NSString*)name
+
+
+
+
+
+
+
+
+/*
+NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
+
+if( ![servers isEqualToArray:serversNow]){
+    
+    servers = serversNow;
+    
+    NSString* name      = nil;
+    
+    NSString* appName   = nil;
+    
+    NSString* title     = nil;
+    
+    
+    
+    [self.serverNamePopUpButton removeAllItems];
+    
+    [serversByTitle removeAllObjects];
+    
+    
+    
+    for (NSDictionary* serverInfo in servers) {
+        
+        name    = [serverInfo objectForKey:SyphonServerDescriptionNameKey];
+        
+        appName = [serverInfo objectForKey:SyphonServerDescriptionAppNameKey];
+        
+        title   = [NSString stringWithString:appName];
+        
+        
+        
+        // A server may not have a name (usually if it is the only server in an application)
+        
+        if([name length] > 0) {
+            
+            title = [name stringByAppendingFormat:@" - %@", title, nil];
+            
+        }
+        
+        
+        
+        [self.serverNamePopUpButton addItemWithTitle:title];
+        
+        [serversByTitle setObject:serverInfo forKey:title];
+        
+    }
+    
+}
+*/
+
+
+
+
+-(NSDictionary*)syphonServerDisctriptByName:(NSString*) selectedName
 {
     NSDictionary* serverDescript = nil;
     for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
-        NSString* str = [dict objectForKey:SyphonServerDescriptionAppNameKey];
+        NSString* appName   = [dict objectForKey:SyphonServerDescriptionAppNameKey];
+        NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
+        NSString* title     = [NSString stringWithString:appName];
         
-        if ([str isEqualToString:name]) {
+        // A server may not have a name (usually if it is the only server in an application)
+        if([name length] > 0) {
+            title = [name stringByAppendingFormat:@"-%@", title, nil];
+        }
+
+        if ([title isEqualToString:title]) {
             serverDescript = dict;
         }
     }

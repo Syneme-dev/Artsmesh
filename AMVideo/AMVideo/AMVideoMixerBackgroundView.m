@@ -48,9 +48,10 @@
                                                views:views]];
 }
 
-- (BOOL)acceptsFirstResponder
+- (void)mouseUp:(NSEvent *)theEvent
 {
-    return YES;
+    self.clickCount = theEvent.clickCount;
+    [self sendAction:self.action to:self.target];
 }
 
 - (NSColor *)backgroundColor

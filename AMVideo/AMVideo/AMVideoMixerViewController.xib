@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
@@ -23,45 +23,78 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="732" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="vXC-Cw-609" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="20" y="325" width="692" height="255"/>
-                </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="MzZ-EV-3w6" customClass="AMVideoMixerBackgroundView">
-                    <rect key="frame" x="20" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="ddO-MU-nVl"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="AFJ-Aj-ue1" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="160" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="NPZ-SU-57V"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="G5H-37-hKK" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="440" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="aWh-hb-Jrx"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="afc-Kx-ZLr" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="20" y="20" width="132" height="140"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="140" id="65q-1G-GdC"/>
                     </constraints>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="B15-wB-X5B"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="kQ4-xi-1cD" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="160" y="20" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="RbH-Lj-MmQ"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="G8O-X7-PfG" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="300" y="20" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="N1Z-Nb-vqV"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Kdn-tg-d4R" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="440" y="20" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="cnU-o4-aCm"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="LcQ-uL-zL8" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="580" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="nlt-3E-Hto"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="z8o-oR-SXc" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="580" y="20" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="qKa-jH-1ES"/>
+                    </connections>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="VO4-rN-6Qu" customClass="AMVideoMixerBackgroundView">
                     <rect key="frame" x="300" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="KEF-2W-Xly"/>
+                    </connections>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="MzZ-EV-3w6" customClass="AMVideoMixerBackgroundView">
+                    <rect key="frame" x="20" y="168" width="132" height="140"/>
+                    <connections>
+                        <action selector="handleSelectEvent:" target="-2" id="uJp-Qq-3Pp"/>
+                    </connections>
                 </customView>
             </subviews>
             <constraints>

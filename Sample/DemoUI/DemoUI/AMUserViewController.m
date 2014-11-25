@@ -332,7 +332,9 @@
         @"&maxRows=1&username=",
         username];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+    NSString *searchUTF8 = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchUTF8]];
     
     NSData *response = [NSURLConnection sendSynchronousRequest:request
                                              returningResponse:nil error:nil];
@@ -355,6 +357,9 @@
         myGroup.location = searchTerm;
         myGroup.longitude = [NSString stringWithFormat:@"%f", lon];
         myGroup.latitude =  [NSString stringWithFormat:@"%f", lat];
+        
+        //NSLog(@"location data is: %@", topResult);
+        //NSLog(@"saved lat/lon is: %f, %f", lat, lon);
         
         [[AMMesher sharedAMMesher] updateGroup];
         

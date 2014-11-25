@@ -318,28 +318,15 @@ AMWorldMap *worldMap;
         float lat = [[_localGroupLoc objectForKey:@"latitude"] floatValue];
         float lon = [[_localGroupLoc objectForKey:@"longitude"] floatValue];
         
-        
-        double mapLat0 = worldMap.mapHeight/2;
-        double mapLon0 = worldMap.mapWidth/2;
+        //NSLog(@"cur lat/lon for group to mark is: %f, %f", lat, lon);
         
         //If lat & lon exist, find their equivelent on current live map
         //need an if statement here checking for amlivegroup data, when it's ready
-        double liveGroupLat = (lat * mapLat0)/90;
-        double liveGroupLon = (lon * mapLon0)/180;
-        double liveGroupPosY = liveGroupLat;
-        double liveGroupPosX = liveGroupLon;
         
-        if (liveGroupPosY > 0 ) {
-            liveGroupPosY = mapLat0 - fabs(liveGroupPosY);
-        } else {
-            liveGroupPosY = fabs(liveGroupPosY);
-            liveGroupPosY += mapLat0;
-        }
-        if ( liveGroupPosX < 0 ) {
-            liveGroupPosX = mapLon0 - fabs(liveGroupPosX);
-        } else {
-            liveGroupPosX += mapLon0;
-        }
+        //Normally would be 90/180/360 etc but values have been trimmed
+        //to accomodate for unused map space
+        double liveGroupPosY = ((90-lat) * worldMap.mapHeight)/160;
+        double liveGroupPosX = (170 + lon) * worldMap.mapWidth/360;
         
         // Clear any old pixel associated with this group
         [self clearPixel:theGroup.groupId];
@@ -375,7 +362,8 @@ AMWorldMap *worldMap;
                 portY = (portRow * portH) - (portH/2);
                 
                 //Calculate distance between portCenter and liveGroup lat/lon
-                double distToLiveGroup = fabs(sqrt(pow((portX - liveGroupPosX),2) - (pow((portY - liveGroupPosY),2))));
+                
+                double distToLiveGroup = [self getDistanceBetweenPoint:NSMakePoint(portX, portY) AndPoint:NSMakePoint(liveGroupPosX, liveGroupPosY)];
                 
                 if (!isnan(distToLiveGroup) && (closestDistToLiveGroup == -1 || closestDistToLiveGroup > distToLiveGroup)) {
                     // New shortest distance found, note it
@@ -397,6 +385,14 @@ AMWorldMap *worldMap;
             
         }
     }
+}
+
+- (double) getDistanceBetweenPoint:(NSPoint) a AndPoint:(NSPoint) b {
+    double
+    dX = a.x - b.x,
+    dY = a.y - b.y;
+    
+    return sqrt(dX*dX + dY*dY);
 }
 
 - (NSMutableDictionary *) checkGroupIsMerged:(AMLiveGroup *)theGroup {

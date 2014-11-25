@@ -8,7 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMVideoMixerBackgroundView : NSView
+@interface AMVideoMixerBackgroundView : NSControl
 @property (nonatomic) BOOL hasBorder;
 @property (nonatomic) NSView *contentView;
+@property (nonatomic) NSInteger clickCount;
 @end

@@ -22,7 +22,7 @@
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView8;
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView9;
 @property (strong, nonatomic, readonly) NSArray *smallViews;
-
+@property (weak, nonatomic) AMVideoMixerBackgroundView *selected;
 @end
 
 @implementation AMVideoMixerViewController
@@ -72,6 +72,24 @@
     return _smallViews;
 }
 
+- (IBAction)handleSelectEvent:(AMVideoMixerBackgroundView *)sender
+{
+    if (sender == self.bigView) {
+        if (sender.clickCount == 2) {
+            
+        }
+    } else {
+        if (sender.clickCount == 1 && sender != self.selected) {
+            self.selected.hasBorder = NO;
+            self.selected = sender;
+            self.selected.hasBorder = YES;
+            int index = (int)[self.smallViews indexOfObjectIdenticalTo:self.selected];
+            [self.syphonManager selectClient:index];
+        }
+    }
+}
+
+/*
 - (void)mouseDown:(NSEvent *)theEvent
 {
     NSPoint point = [self.view convertPoint:theEvent.locationInWindow
@@ -94,5 +112,6 @@
         [self.syphonManager selectClient:index];
     }
 }
+ */
 
 @end

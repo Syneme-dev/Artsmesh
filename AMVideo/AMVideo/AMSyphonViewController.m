@@ -23,6 +23,8 @@ NSString* kNonServer = @"    --    ";
     SyphonClient*  _syClient;
     NSMutableDictionary* _processCounter;
     
+    NSString *_currSelection;
+    
     NSTimeInterval fpsStart;
     NSUInteger fpsCount;
     NSUInteger FPS;
@@ -41,7 +43,9 @@ NSString* kNonServer = @"    --    ";
 {
     [self.serverNamePopUpButton removeAllItems];
     [self.serverNamePopUpButton addItemWithTitle:kNonServer];
+    
     [self.serverNamePopUpButton addItemsWithTitles:[self syphonServerNames]];
+    [self.serverNamePopUpButton selectItemWithTitle: _currentServerName];
 }
 
 -(NSArray*)syphonServerNames
@@ -169,6 +173,8 @@ if( ![servers isEqualToArray:serversNow]){
 - (IBAction)serverSelected:(NSPopUpButton *)sender
 {
     [self stop ];
+    _currSelection = sender.selectedItem.title;
+                      
     if ([sender.selectedItem.title isEqualToString:kNonServer]) {
         return;
     }

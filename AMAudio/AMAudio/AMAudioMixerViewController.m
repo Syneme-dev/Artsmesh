@@ -7,19 +7,21 @@
 //
 
 #import "AMAudioMixerViewController.h"
-#import "AMVolumeBar.h"
 #import "AMArtsmeshClient.h"
 #import "AMAudio.h"
 #import "AMVolumeCtlView.h"
+#import "AMCollectionView.h"
+#import "AMMixerViewController.h"
+#import "AMMixerView.h"
 
-@interface AMAudioMixerViewController ()<AMVolumeBarDelegate, AMJackClientDelegate>
+@interface AMAudioMixerViewController ()<AMJackClientDelegate>
 
 @property (weak) IBOutlet NSButton *startMixerBtn;
 @property (weak) IBOutlet NSTextField *channelPairCount;
-@property (weak) IBOutlet NSCollectionView *controlView;
 @property (weak) IBOutlet NSTextField *cpuUsage;
 @property (weak) IBOutlet NSTextField *bufferSize;
 @property (weak) IBOutlet NSTextField *sampleRate;
+@property (weak) IBOutlet AMCollectionView *mixerCollectionView;
 
 @end
 
@@ -29,11 +31,14 @@
     AMArtsmeshClient* _client;
     
     NSTimer* _jackInfoTimer;
+    NSMutableArray *_mixerControllers;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here
+    [self.mixerCollectionView setBackgroudColor:[NSColor blackColor]];
+    self.mixerCollectionView.itemGap = 1;
 }
 
 -(void)dealloc
@@ -77,38 +82,32 @@
         return NO;
     };
     
+    _mixerControllers = [[NSMutableArray alloc] init];
     NSArray* ports = [_client allPorts];
     
-    NSMutableArray* barCollection =[[NSMutableArray alloc] init];
     for (AMJackPort* p in ports) {
        
         if (p.portType == AMJackPort_Source) {
-            AMVolumeBar *bar = [[AMVolumeBar alloc] init];
-            bar.volume = 0.5;
-            bar.meter = 0.5;
-            bar.isMute = NO;
-            bar.name = p.name;
-            bar.delegate = self;
-            [barCollection addObject:bar];
             
-            p.volume = bar.volume;
+            AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
+            p.volume = mixerCtrl.volume;
+            
+            [self.mixerCollectionView addViewItem:mixerCtrl.view];
+            [_mixerControllers addObject:mixerCtrl];
         }
     }
     
     for (AMJackPort* p in ports) {
         
         if (p.portType == AMJackPort_Destination) {
-            AMVolumeBar *bar = [[AMVolumeBar alloc] init];
-            bar.volume = 0.4;
-            bar.meter = 0.4;
-            bar.isMute = NO;
-            bar.name = p.name;
-            bar.delegate = self;
-            [barCollection addObject:bar];
+            
+            AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
+            p.volume = mixerCtrl.volume;
+            
+            [self.mixerCollectionView addViewItem:mixerCtrl.view];
+            [_mixerControllers addObject:mixerCtrl];
         }
     }
-    
-    [self.controlView setContent:barCollection];
     
     _jackInfoTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
@@ -121,6 +120,50 @@
     
 }
 
+-(AMMixerViewController *)createMixerByPort:(AMJackPort *)p
+{
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+    AMMixerViewController* mixerCtrl = [[AMMixerViewController alloc] initWithNibName:@"AMMixerViewController" bundle:myBundle];
+    [mixerCtrl setMeterRange:NSMakeRange(0, 1)];
+    mixerCtrl.meter = 0.0;
+    
+    [mixerCtrl setVolumeRange:NSMakeRange(0, 1)];
+    mixerCtrl.volume = 0.0;
+    
+    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:46.0/255 green:58.0/255 blue:75.0/255 alpha:1]];
+    //[(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor lightGrayColor]];
+    
+    mixerCtrl.channName = p.name;
+    [mixerCtrl addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew context:nil];
+    
+    return mixerCtrl;
+}
+
+
+#pragma mark -
+#pragma   mark KVO
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    if ([object isKindOfClass:[AMMixerViewController class]]){
+        
+        AMMixerViewController* mixerCtrl = (AMMixerViewController*)object;
+        
+        if ([keyPath isEqualToString:@"volume"]){
+            NSArray* ports = [_client allPorts];
+            for (AMJackPort* p in ports) {
+                if ([p.name isEqualToString:mixerCtrl.channName]) {
+                
+                    p.volume = mixerCtrl.volume;
+                }
+            }
+        }
+    }
+}
+
+
 -(void)stopClient
 {
     [_jackInfoTimer invalidate];
@@ -128,7 +171,8 @@
     
     [_client unregisterClient];
     
-    [self.controlView setContent:[[NSMutableArray alloc] init]];
+    [self.mixerCollectionView removeAllItems];
+    [_mixerControllers removeAllObjects];
 }
 
 -(void)updateJackInfo
@@ -143,26 +187,26 @@
 }
 
 
--(void)volumeBarChanged:(AMVolumeBar *)bar
-{
-    NSString* portName = bar.name;
-    
-    NSArray* ports = [_client allPorts];
-    for (AMJackPort* p in ports) {
-        if ([p.name isEqualToString:portName]) {
-            
-            p.isMute = bar.isMute;
-            p.volume = bar.volume;
-        }
-    }
-}
+//-(void)volumeBarChanged:(AMVolumeBar *)bar
+//{
+//    NSString* portName = bar.name;
+//    
+//    NSArray* ports = [_client allPorts];
+//    for (AMJackPort* p in ports) {
+//        if ([p.name isEqualToString:portName]) {
+//            
+//            p.isMute = bar.isMute;
+//            p.volume = bar.volume;
+//        }
+//    }
+//}
 
 -(void)port:(AMJackPort *)port currentPeak:(float)peak
 {
-    for (AMVolumeBar* bar in self.controlView.content) {
-        if([port.name isEqualToString:bar.name]){
-            //NSLog(@"peak is %f", peak);
-            bar.meter = peak;
+    for (AMMixerViewController* mc in _mixerControllers) {
+        if ([mc.channName isEqualToString:port.name]){
+            mc.meter = peak;
+            break;
         }
     }
 }

@@ -29,6 +29,7 @@
 #import "UIFrameWork/AMFoundryFontView.h"
 #import "AMGroupCreateViewController.h"
 
+
 @interface AMMapViewController ()
 {
     NSString* statusNetURLString;
@@ -156,6 +157,66 @@
                      [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
+    
+    [self createArchiveFloatWindow];
+}
+
+-(void)createArchiveFloatWindow {
+    //display test float panel
+    
+    //Create float panel controller + view
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    _floatPanelViewController = fpc;
+    _floatPanelViewController.panelTitle = @"ARCHIVE";
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
+    
+    //Create window to hold everything
+    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, 400, (300 + 41) + floatPanel.borderThickness);
+    _archiveFloatWindow  = [[NSWindow alloc] initWithContentRect:frame
+                                                       styleMask:NSBorderlessWindowMask
+                                                         backing:NSBackingStoreBuffered
+                                                           defer:NO];
+    fpc.containerWindow = _archiveFloatWindow;
+    _archiveFloatWindow.hasShadow = YES;
+    [_archiveFloatWindow.contentView addSubview:floatPanel];
+    
+    [_archiveFloatWindow.contentView setAutoresizesSubviews:YES];
+    
+    //NSLog(@"window frame is: %f, %f - frame origin: %f, %f - %@", _archiveFloatWindow.frame.size.width, _archiveFloatWindow.frame.size.height, _archiveFloatWindow.frame.origin.x, _archiveFloatWindow.frame.origin.y, _archiveFloatWindow);
+    
+    // Add sizing constraints to window
+    _floatPanelViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : _floatPanelViewController.view}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : _floatPanelViewController.view}];
+    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
+    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+    
+    [_archiveFloatWindow.contentView setAutoresizesSubviews:YES];
+    [_floatPanelViewController.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+}
+
+- (WebView *)embedYouTube:(NSString *)urlString frame:(NSRect)frame {
+    
+    self.youTubeVideo = [[WebView alloc] initWithFrame:frame];
+    [[self.youTubeVideo mainFrame] loadRequest:[NSURLRequest requestWithURL: [NSURL URLWithString:urlString]]];
+    [self.youTubeVideo setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    return self.youTubeVideo;
+}
+
+-(void)displayArchiveProgram {
+    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+    
+    [_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/cyMNXjgI2n0" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
+    
+    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
 }
 
 -(void)gotoUsersPage{
@@ -201,7 +262,9 @@
 }
 
 -(void)elementClicked:(NSArray *)eleId{
-    [self.testView setHidden:!self.testView.hidden];
+    //[self.testView setHidden:!self.testView.hidden];
+    [self displayArchiveProgram];
+    
     NSLog(@"invoke from web click");
 }
 

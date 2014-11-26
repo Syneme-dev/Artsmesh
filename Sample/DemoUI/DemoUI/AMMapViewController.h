@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
+#import "AMFloatPanelView.h"
+#import "AMFloatPanelViewController.h"
 #import "AMLiveMapView.h"
 #import <WebKit/WebKit.h>
 
@@ -25,5 +27,9 @@
 @property (strong) IBOutlet NSButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;
 @property  float archiveScale;
+
+@property AMFloatPanelViewController *floatPanelViewController;
+@property NSWindow *archiveFloatWindow;
+@property WebView *youTubeVideo;
 
 @end

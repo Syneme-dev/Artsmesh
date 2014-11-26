@@ -11,10 +11,7 @@
 #import <Syphon/Syphon.h>
 
 @interface AMSyphonView : NSOpenGLView
-{
-    SyphonClient* syClient;
-}
 
-@property (readwrite, retain) SyphonClient* syClient;
+@property SyphonImage *image;
 
 @end

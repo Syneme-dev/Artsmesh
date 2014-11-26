@@ -9,7 +9,6 @@
 #import "AMSyphonView.h"
 
 @implementation AMSyphonView
-@synthesize syClient;
 
 -(void) awakeFromNib
 {
@@ -44,7 +43,7 @@
     glLoadIdentity();
     
     // Get a new frame from the client
-    SyphonImage *image = [syClient newFrameImageForContext:cgl_ctx];
+    SyphonImage *image = self.image;
     if(image)
     {
         glEnable(GL_TEXTURE_RECTANGLE_ARB);

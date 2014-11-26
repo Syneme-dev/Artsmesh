@@ -19,8 +19,9 @@ NSString* kNonServer = @"    --    ";
 
 @implementation AMSyphonViewController
 {
-    NSArray*        servers;
-    SyphonClient*   _syClient;
+    NSMutableDictionary*  _syServers;
+    SyphonClient*  _syClient;
+    NSMutableDictionary* _processCounter;
     
     NSTimeInterval fpsStart;
     NSUInteger fpsCount;
@@ -46,6 +47,8 @@ NSString* kNonServer = @"    --    ";
 -(NSArray*)syphonServerNames
 {
     NSMutableArray* serverNames = [[NSMutableArray alloc] init];
+    _syServers = [[NSMutableDictionary alloc] init];
+    _processCounter = [[NSMutableDictionary alloc] init];
     
     for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
         NSString* appName   = [dict objectForKey:SyphonServerDescriptionAppNameKey];
@@ -54,27 +57,50 @@ NSString* kNonServer = @"    --    ";
         
         if([appName isEqualToString:@"Artsmesh"])
         {
+            //filter self server
             continue;
         }
+        
+        //Add appName to a dict for ref count
+        NSNumber* newNumber;
+        NSNumber* number = [_processCounter objectForKey:appName];
+        if (number != nil) {
+            newNumber = [NSNumber numberWithInt: [number intValue] + 1];
+        }else{
+            newNumber = [NSNumber numberWithInt:1];
+        }
+        
+        [_processCounter setObject:newNumber forKey:appName];
         
         // A server may not have a name (usually if it is the only server in an application)
         if([name length] > 0) {
             title = [name stringByAppendingFormat:@"-%@", title, nil];
-            [serverNames addObject:title];
         }
+    
+        if ([_syServers objectForKey:title] != nil) {
+            
+            NSArray* paths = [title componentsSeparatedByString:@"-"];
+            NSString* lastPath = [paths lastObject];
+            
+            NSScanner* scan = [NSScanner scannerWithString:lastPath];
+            int val;
+            BOOL isInt = [scan scanInt:&val] && [scan isAtEnd];
+            
+            if (isInt) {
+                NSString* titleBody = [title substringToIndex:title.length - lastPath.length - 1];
+                title = [NSString stringWithFormat:@"%@%@", titleBody, newNumber];
+                
+            }else{
+                title = [NSString stringWithFormat:@"%@-%@", title, newNumber];
+            }
+        }
+        
+        [_syServers setObject:dict forKey:title];
+        [serverNames addObject:title];
     }
     
     return serverNames;
 }
-
-
-
-
-
-
-
-
-
 
 /*
 NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
@@ -127,27 +153,9 @@ if( ![servers isEqualToArray:serversNow]){
 */
 
 
-
-
 -(NSDictionary*)syphonServerDisctriptByName:(NSString*) selectedName
 {
-    NSDictionary* serverDescript = nil;
-    for (NSDictionary* dict in [SyphonServerDirectory sharedDirectory].servers) {
-        NSString* appName   = [dict objectForKey:SyphonServerDescriptionAppNameKey];
-        NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
-        NSString* title     = [NSString stringWithString:appName];
-        
-        // A server may not have a name (usually if it is the only server in an application)
-        if([name length] > 0) {
-            title = [name stringByAppendingFormat:@"-%@", title, nil];
-        }
-
-        if ([title isEqualToString:title]) {
-            serverDescript = dict;
-        }
-    }
-    
-    return serverDescript;
+    return [_syServers objectForKey:selectedName];
 }
 
 
@@ -192,9 +200,12 @@ if( ![servers isEqualToArray:serversNow]){
                 fpsCount = 0;
             }
             // ...then we check to see if our dimensions display or window shape needs to be updated
-//            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
+            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
             
+             self.glView.image = frame;
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
+            
+            
             [self.glView setNeedsDisplay:YES];
         }];
     }];
@@ -207,7 +218,6 @@ if( ![servers isEqualToArray:serversNow]){
         return;
     }
     
-    [self.glView setSyClient:_syClient];
     self.currentServerName = sender.selectedItem.title;
 }
 

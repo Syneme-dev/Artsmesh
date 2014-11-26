@@ -56,6 +56,8 @@
         for (AMSyphonViewController* client in _syClients) {
             [client updateServerList];
         }
+        
+        [_syServer updateServerList];
     }
 }
 

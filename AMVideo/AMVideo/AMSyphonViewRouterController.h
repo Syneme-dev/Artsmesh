@@ -14,6 +14,8 @@
 @property BOOL routing;
 @property NSString* currentServerName;
 
+-(void)updateServerList;
+
 -(BOOL)start;
 -(void)stop;
 

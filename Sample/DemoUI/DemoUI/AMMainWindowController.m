@@ -36,7 +36,7 @@
 #import "AMManualViewController.h"
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
-#import "AMVideo/AMVideo.h"
+#import "AMVideo.h"
 
 
 #define UI_leftSidebarWidth 40.0f

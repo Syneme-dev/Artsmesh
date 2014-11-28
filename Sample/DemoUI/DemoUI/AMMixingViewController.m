@@ -9,7 +9,7 @@
 #import "AMMixingViewController.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMAudio/AMAudio.h"
-#import "AMVideo/AMVideo.h"
+#import "AMVideo.h"
 
 @interface AMMixingViewController ()
 
@@ -121,7 +121,7 @@
                                                  options:0
                                                  metrics:nil
                                                    views:views]];
-        
+     
     }
 }
 

@@ -241,7 +241,12 @@ AMWorldMap *worldMap;
                 //controlPoint1:center
                 //controlPoint2:center];
                 bezierPath.lineWidth = 2.0;
-                [[NSColor grayColor] setStroke];
+                NSColor *curLineColor = [NSColor grayColor];
+                if ( [_hovGroup.groupId isEqualToString:group.groupId] || [_hovGroup.groupId isEqualToString:subGroup.groupId] ) {
+                    curLineColor = [NSColor redColor];
+                }
+            
+                [curLineColor setStroke];
                 [bezierPath stroke];
             }
         }

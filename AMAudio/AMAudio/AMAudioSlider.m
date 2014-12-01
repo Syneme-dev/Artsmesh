@@ -83,8 +83,10 @@
     NSPoint pt = theEvent.locationInWindow;
     pt = [self convertPoint:pt fromView: nil];
 
-    if (pt.y >= self.bounds.size.height || pt.y < 0) {
-            //limite the mousr move range
+    if (pt.y >= self.bounds.size.height){
+        pt.y = self.bounds.size.height;
+    }else if( pt.y < 0) {
+        pt.y = 0;
     }
     
     self.value = pt.y * self.valueRange.length / self.bounds.size.height;

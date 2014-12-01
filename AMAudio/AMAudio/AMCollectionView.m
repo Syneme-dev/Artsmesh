@@ -34,6 +34,9 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
+    
+//    [[NSColor blueColor] set];
+//    [[NSBezierPath bezierPathWithRect:self.bounds] fill];
 }
 
 -(void) doInit
@@ -44,12 +47,34 @@
     scrollView.drawsBackground = NO;
     [self addSubview:scrollView];
     
+    [scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(scrollView);
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[scrollView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[scrollView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
     _scrollView = scrollView;
     _docView = [[NSView alloc] initWithFrame:scrollView.contentView.bounds];
     
     scrollView.documentView = _docView;
     
     _viewItems = [[NSMutableArray alloc] init];
+}
+
+-(void)setFrame:(NSRect)frame{
+    [super setFrame:frame];
+    
+    NSRect rect = _docView.frame;
+    rect.size.height = self.bounds.size.height;
+    _docView.frame = rect;
 }
 
 -(void)addViewItem:(NSView *)view

@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here
-    [self.mixerCollectionView setBackgroudColor:[NSColor blackColor]];
+   // [self.mixerCollectionView setBackgroudColor:[NSColor clearColor]];
     self.mixerCollectionView.itemGap = 1;
 }
 
@@ -173,6 +173,7 @@
     [self.mixerCollectionView removeAllItems];
     [_mixerControllers removeAllObjects];
 }
+
 
 -(void)updateJackInfo
 {

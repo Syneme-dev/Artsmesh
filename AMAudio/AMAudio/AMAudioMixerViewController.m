@@ -13,12 +13,11 @@
 #import "AMCollectionView.h"
 #import "AMMixerViewController.h"
 #import "AMMixerView.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @interface AMAudioMixerViewController ()<AMJackClientDelegate>
 
 @property (weak) IBOutlet NSButton *startMixerBtn;
-@property (weak) IBOutlet NSTextField *channelPairCount;
-@property (weak) IBOutlet NSTextField *cpuUsage;
 @property (weak) IBOutlet NSTextField *bufferSize;
 @property (weak) IBOutlet NSTextField *sampleRate;
 @property (weak) IBOutlet AMCollectionView *mixerCollectionView;
@@ -68,15 +67,15 @@
         [alert runModal];
         return NO;
     }
-    
-    int count = [self.channelPairCount.stringValue intValue];
-    if(count < 1 || count > 8){
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Channel count should be between 1 and 8"];
-        [alert runModal];
-        return NO;
-    }
 
-    _client = [[AMArtsmeshClient alloc] initWithChannelCounts:count];
+    int virtualChanns = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Jack_RouterVirtualChanns] intValue];
+    
+    if(virtualChanns < 0 || virtualChanns > 8){
+        NSLog(@"virtual channels is not in range, set to 2, current value:%d", virtualChanns);
+        virtualChanns = 2;
+    }
+    
+    _client = [[AMArtsmeshClient alloc] initWithChannelCounts:virtualChanns];
     if (![_client registerClient])
     {
         return NO;
@@ -177,11 +176,8 @@
 
 -(void)updateJackInfo
 {
-    NSString* strCPULoad = [NSString stringWithFormat:@"%.2f", [_client cpuLoad]];
     NSString* strBufSize = [NSString stringWithFormat:@"%d", [_client bufferSize]];
     NSString* strSampleRate = [NSString stringWithFormat:@"%d", [_client sampleRate]];
-    
-    self.cpuUsage.stringValue = strCPULoad;
     self.bufferSize.stringValue = strBufSize;
     self.sampleRate.stringValue = strSampleRate;
 }
@@ -209,6 +205,10 @@
             break;
         }
     }
+}
+
+-(void)jackShutDownClient:(AMArtsmeshClient *)client{
+
 }
 
 

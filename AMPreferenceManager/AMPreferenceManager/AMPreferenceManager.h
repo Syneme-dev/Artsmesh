@@ -84,6 +84,7 @@
 #define Preference_Jack_ActiveMIDI      @"Preference_Jack_ActiveMIDI"
 #define Preference_Jack_InterfaceInChans  @"Preference_Jack_InterfaceChans"
 #define Preference_Jack_InterfaceOutChanns @"Preference_Jack_InterfaceOutChanns"
+#define Preference_Jack_RouterVirtualChanns @"Preference_Jack_RouterVirtualChanns"
 
 
 

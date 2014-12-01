@@ -88,12 +88,12 @@
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
         [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];
         [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
                                                  options:0
                                                  metrics:nil
                                                    views:views]];

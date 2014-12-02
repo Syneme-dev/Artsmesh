@@ -37,6 +37,7 @@
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMVideo.h"
+#import "UIFramework/AMFoundryFontView.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -101,6 +102,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackCPUUsageChanged:) name:AM_JACK_CPU_USAGE_NOTIFICATION object:nil];
 
         [[AMTimer shareInstance] addObserver:self
                                   forKeyPath:@"state"
@@ -770,6 +773,8 @@
 -(void)jackStopped:(NSNotification*)notification
 {    
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.jackCPUUsageBar setCpuUsage:0.0];
+    self.jackCpuUageNum.stringValue = @"";
 }
 
 -(void)oscStarted:(NSNotification*)notification
@@ -780,6 +785,13 @@
 -(void)oscStopped:(NSNotification*)notification
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+}
+
+-(void)jackCPUUsageChanged:(NSNotification*)notification
+{
+    float usage = [notification.object floatValue];
+    [self.jackCPUUsageBar setCpuUsage:usage];
+    self.jackCpuUageNum.stringValue = [NSString stringWithFormat:@"%.2f", usage];
 }
 
 

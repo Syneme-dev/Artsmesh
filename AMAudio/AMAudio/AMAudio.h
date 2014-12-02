@@ -17,6 +17,7 @@ typedef enum {
 #define AM_JACK_STOPPED_NOTIFICATION @"Jack stopped notification"
 
 #define AM_RELOAD_JACK_CHANNEL_NOTIFICATION   @"JackTrip Changed"
+#define AM_JACK_CPU_USAGE_NOTIFICATION @"Jack CPU Usage Notification"
 
 @interface AMAudio : NSObject
 

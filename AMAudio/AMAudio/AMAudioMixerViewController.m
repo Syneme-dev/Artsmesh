@@ -184,6 +184,11 @@
     NSString* strSampleRate = [NSString stringWithFormat:@"%d", [_client sampleRate]];
     self.bufferSize.stringValue = strBufSize;
     self.sampleRate.stringValue = strSampleRate;
+    
+    float cpuUsage = [_client cpuLoad];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AM_JACK_CPU_USAGE_NOTIFICATION
+     object:[NSNumber numberWithFloat:cpuUsage]];
 }
 
 

@@ -822,6 +822,10 @@ AMWorldMap *worldMap;
     // Display the program
     _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
+    
+    _programWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
+    _programWindow.delegate = _floatPanelViewController;
+    
 }
 
 - (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup {

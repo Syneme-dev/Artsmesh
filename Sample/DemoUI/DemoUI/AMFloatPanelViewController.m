@@ -7,16 +7,7 @@
 //
 
 #import "AMFloatPanelViewController.h"
-
-@interface AMFloatingWindow : NSWindow
-
-@end
-
-@interface AMFloatPanelViewController () {
-    AMFloatingWindow *_floatingWindow;
-}
-
-@end
+#import "AMFloatPanelView.h"
 
 @implementation AMFloatPanelViewController
 
@@ -26,21 +17,38 @@
 }
 
 - (IBAction)closePanel:(id)sender {
-    if (_floatingWindow) {
-        _floatingWindow = nil;
-    }
     self.containerWindow.isVisible = NO;
     [self.closeBtn setState:0];
 }
 
+
 - (IBAction)toggleFullScreen:(id)sender
 {
-    [_floatingWindow toggleFullScreen:self];
+    if (self.containerWindow) {
+        [ [self.view window] toggleFullScreen:self];
+    }
 }
 
+- (NSSize)window:(NSWindow *)window willUseFullScreenContentSize:(NSSize)proposedSize
+{
+    return proposedSize;
+}
+
+- (void)windowWillEnterFullScreen:(NSNotification *)notification
+{
+    if (self.containerWindow) {
+        AMFloatPanelView *panelView = (AMFloatPanelView *)self.view;
+        panelView.inFullScreenMode = YES;
+    }
+}
+    
 - (void)windowWillExitFullScreen:(NSNotification *)notification
 {
-    [_floatingWindow orderFront:self];
+    if (self.containerWindow) {
+        AMFloatPanelView *panelView = (AMFloatPanelView *)self.view;
+        panelView.inFullScreenMode = NO;
+        [self.containerWindow orderFront:self];
+    }
 }
 
 @end

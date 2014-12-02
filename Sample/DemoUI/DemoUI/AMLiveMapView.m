@@ -754,7 +754,7 @@ AMWorldMap *worldMap;
 
     floatPanel.minSizeConstraint = NSMakeSize(programW, programH);
     
-    NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
+    NSRect frame = NSMakeRect(0, 0, programW, programH + 21 + floatPanel.borderThickness);
     
     _programWindow  = [[NSWindow alloc] initWithContentRect:frame
                                                   styleMask:NSBorderlessWindowMask

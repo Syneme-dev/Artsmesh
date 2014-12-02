@@ -50,7 +50,7 @@
     int height = self.bounds.size.height;
     NSRect poleRect = NSMakeRect(xPos, yPos, width, height);
     
-    [[NSColor darkGrayColor] set];
+    [[NSColor colorWithCalibratedRed:46.0/255 green:58.0/255 blue:75.0/255 alpha:1] set];
     [[NSBezierPath bezierPathWithRect:poleRect] fill];
 
     //draw holer

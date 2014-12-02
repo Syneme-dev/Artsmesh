@@ -50,11 +50,11 @@
 {
     if (_mixerStarted){
         [self stopClient];
-        self.startMixerBtn.title = @"Start Mixer" ;
+        self.startMixerBtn.title = @"Start" ;
         _mixerStarted = NO;
     }else{
         if ([self startClient]){
-            self.startMixerBtn.title = @"Stop Mixer" ;
+            self.startMixerBtn.title = @"Stop" ;
             _mixerStarted = YES;
         }
     }
@@ -129,8 +129,8 @@
     [mixerCtrl setVolumeRange:NSMakeRange(0, 1)];
     mixerCtrl.volume = 0.0;
     
-    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:46.0/255 green:58.0/255 blue:75.0/255 alpha:1]];
-    //[(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor lightGrayColor]];
+//    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:46.0/255 green:58.0/255 blue:75.0/255 alpha:1]];
+    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
     
     mixerCtrl.channName = p.name;
     [mixerCtrl addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew context:nil];

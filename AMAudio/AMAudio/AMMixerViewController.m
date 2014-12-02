@@ -36,6 +36,7 @@
 
 -(void)setChannName:(NSString *)channName
 {
+    channName = [channName uppercaseStringWithLocale:[NSLocale currentLocale]];
     self.channNameField.stringValue = channName;
 }
 

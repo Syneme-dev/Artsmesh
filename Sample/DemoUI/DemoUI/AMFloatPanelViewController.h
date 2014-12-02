@@ -17,6 +17,7 @@
 @property (strong) IBOutlet BlueBackgroundView *panelTop;
 
 @property (strong) IBOutlet NSButton *closeBtn;
+@property (strong) IBOutlet NSButton *fullScreenBtn;
 
 @property (strong) IBOutlet AMFlippedView *panelContent;
 
@@ -25,6 +26,7 @@
 //@property BOOL isClosed;
 
 - (IBAction)closePanel:(id)sender;
+- (IBAction)toggleFullScreen:(id)sender;
 
 
 @end

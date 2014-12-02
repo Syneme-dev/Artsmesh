@@ -8,7 +8,13 @@
 
 #import "AMFloatPanelViewController.h"
 
-@interface AMFloatPanelViewController ()
+@interface AMFloatingWindow : NSWindow
+
+@end
+
+@interface AMFloatPanelViewController () {
+    AMFloatingWindow *_floatingWindow;
+}
 
 @end
 
@@ -20,8 +26,21 @@
 }
 
 - (IBAction)closePanel:(id)sender {
+    if (_floatingWindow) {
+        _floatingWindow = nil;
+    }
     self.containerWindow.isVisible = NO;
     [self.closeBtn setState:0];
+}
+
+- (IBAction)toggleFullScreen:(id)sender
+{
+    [_floatingWindow toggleFullScreen:self];
+}
+
+- (void)windowWillExitFullScreen:(NSNotification *)notification
+{
+    [_floatingWindow orderFront:self];
 }
 
 @end

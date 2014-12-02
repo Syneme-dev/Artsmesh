@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="bufferSize" destination="5wi-Ql-pGT" id="V7U-XT-j3o"/>
                 <outlet property="mixerCollectionView" destination="yxY-iE-9qG" id="o1g-Sh-KKE"/>
+                <outlet property="outputMixerCollectionView" destination="KyU-DR-gcP" id="UXM-iI-PAz"/>
                 <outlet property="sampleRate" destination="6Vj-IW-2IJ" id="EME-du-0iE"/>
                 <outlet property="startMixerBtn" destination="Nu2-93-j1L" id="a2P-aT-n4x"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -17,11 +18,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="755" height="469"/>
+            <rect key="frame" x="0.0" y="0.0" width="755" height="526"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hj6-PV-jvX" customClass="AMFoundryFontView">
-                    <rect key="frame" x="225" y="406" width="87" height="17"/>
+                    <rect key="frame" x="225" y="463" width="87" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="aQG-Kj-Gpy"/>
                         <constraint firstAttribute="width" constant="83" id="fs0-WF-znG"/>
@@ -33,7 +34,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5wi-Ql-pGT" customClass="AMFoundryFontView">
-                    <rect key="frame" x="617" y="403" width="120" height="22"/>
+                    <rect key="frame" x="617" y="460" width="120" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="116" id="4mj-nk-xhh"/>
                         <constraint firstAttribute="height" constant="22" id="y0s-vp-yft"/>
@@ -45,7 +46,7 @@
                     </textFieldCell>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Vj-IW-2IJ" customClass="AMFoundryFontView">
-                    <rect key="frame" x="338" y="403" width="120" height="22"/>
+                    <rect key="frame" x="338" y="460" width="120" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="116" id="40c-z6-NdC"/>
                         <constraint firstAttribute="height" constant="22" id="lzg-jW-1k6"/>
@@ -57,7 +58,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nu2-93-j1L" customClass="AMBigBlueButton">
-                    <rect key="frame" x="20" y="384" width="60" height="60"/>
+                    <rect key="frame" x="20" y="441" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="3h9-K9-G6l"/>
                         <constraint firstAttribute="width" constant="60" id="4tU-Y7-4Gy"/>
@@ -71,10 +72,19 @@
                     </connections>
                 </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yxY-iE-9qG" customClass="AMCollectionView">
-                    <rect key="frame" x="20" y="0.0" width="715" height="344"/>
+                    <rect key="frame" x="20" y="17" width="355" height="400"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="9aT-Ng-3nc"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="KyU-DR-gcP" customClass="AMCollectionView">
+                    <rect key="frame" x="380" y="17" width="355" height="400"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="ESE-Qz-Sxe"/>
+                    </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V3x-6c-hqx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="501" y="406" width="75" height="17"/>
+                    <rect key="frame" x="501" y="463" width="75" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="B2E-TA-lYf"/>
                         <constraint firstAttribute="width" constant="71" id="PMi-qM-8mB"/>
@@ -88,21 +98,23 @@
             </subviews>
             <constraints>
                 <constraint firstItem="6Vj-IW-2IJ" firstAttribute="leading" secondItem="Hj6-PV-jvX" secondAttribute="trailing" constant="30" id="8D7-IH-Fs5"/>
-                <constraint firstAttribute="bottom" secondItem="yxY-iE-9qG" secondAttribute="bottom" id="HwU-sv-86k"/>
+                <constraint firstItem="KyU-DR-gcP" firstAttribute="top" secondItem="6Vj-IW-2IJ" secondAttribute="bottom" constant="43" id="Dan-2D-hGV"/>
                 <constraint firstItem="V3x-6c-hqx" firstAttribute="leading" secondItem="6Vj-IW-2IJ" secondAttribute="trailing" constant="47" id="Jtl-x9-PMq"/>
                 <constraint firstItem="Nu2-93-j1L" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="KP0-25-k8o"/>
-                <constraint firstAttribute="trailing" secondItem="yxY-iE-9qG" secondAttribute="trailing" constant="20" id="NM4-aE-fRj"/>
                 <constraint firstItem="5wi-Ql-pGT" firstAttribute="leading" secondItem="V3x-6c-hqx" secondAttribute="trailing" constant="45" id="O5U-CD-wy6"/>
                 <constraint firstItem="Hj6-PV-jvX" firstAttribute="leading" secondItem="Nu2-93-j1L" secondAttribute="trailing" constant="147" id="SjA-bk-6Ab"/>
-                <constraint firstItem="yxY-iE-9qG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="WeC-Ok-juC"/>
-                <constraint firstItem="yxY-iE-9qG" firstAttribute="top" secondItem="Nu2-93-j1L" secondAttribute="bottom" constant="40" id="dp2-jG-OGF"/>
+                <constraint firstItem="yxY-iE-9qG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="TQV-wk-ofK"/>
+                <constraint firstAttribute="trailing" secondItem="KyU-DR-gcP" secondAttribute="trailing" constant="20" id="Zbl-Sl-GDt"/>
                 <constraint firstItem="5wi-Ql-pGT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="fnF-zc-9da"/>
+                <constraint firstItem="KyU-DR-gcP" firstAttribute="leading" secondItem="yxY-iE-9qG" secondAttribute="trailing" constant="5" id="hCi-wR-cR1"/>
+                <constraint firstItem="yxY-iE-9qG" firstAttribute="top" secondItem="Nu2-93-j1L" secondAttribute="bottom" constant="24" id="hxR-ij-f5P"/>
                 <constraint firstItem="6Vj-IW-2IJ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="k52-w1-uEY"/>
                 <constraint firstItem="Hj6-PV-jvX" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="46" id="kpo-3M-XCs"/>
                 <constraint firstItem="V3x-6c-hqx" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="46" id="lSc-KP-mad"/>
+                <constraint firstItem="KyU-DR-gcP" firstAttribute="width" secondItem="yxY-iE-9qG" secondAttribute="width" id="pRu-9r-v3A"/>
                 <constraint firstItem="Nu2-93-j1L" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="25" id="t57-yX-iQv"/>
             </constraints>
-            <point key="canvasLocation" x="62.5" y="276.5"/>
+            <point key="canvasLocation" x="62.5" y="305"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="JWa-jk-KSo"/>
     </objects>

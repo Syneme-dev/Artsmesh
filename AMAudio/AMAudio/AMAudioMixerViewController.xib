@@ -71,7 +71,7 @@
                     </connections>
                 </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yxY-iE-9qG" customClass="AMCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="755" height="344"/>
+                    <rect key="frame" x="20" y="0.0" width="715" height="344"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V3x-6c-hqx" customClass="AMFoundryFontView">
                     <rect key="frame" x="501" y="406" width="75" height="17"/>
@@ -91,10 +91,10 @@
                 <constraint firstAttribute="bottom" secondItem="yxY-iE-9qG" secondAttribute="bottom" id="HwU-sv-86k"/>
                 <constraint firstItem="V3x-6c-hqx" firstAttribute="leading" secondItem="6Vj-IW-2IJ" secondAttribute="trailing" constant="47" id="Jtl-x9-PMq"/>
                 <constraint firstItem="Nu2-93-j1L" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="KP0-25-k8o"/>
-                <constraint firstAttribute="trailing" secondItem="yxY-iE-9qG" secondAttribute="trailing" id="NM4-aE-fRj"/>
+                <constraint firstAttribute="trailing" secondItem="yxY-iE-9qG" secondAttribute="trailing" constant="20" id="NM4-aE-fRj"/>
                 <constraint firstItem="5wi-Ql-pGT" firstAttribute="leading" secondItem="V3x-6c-hqx" secondAttribute="trailing" constant="45" id="O5U-CD-wy6"/>
                 <constraint firstItem="Hj6-PV-jvX" firstAttribute="leading" secondItem="Nu2-93-j1L" secondAttribute="trailing" constant="147" id="SjA-bk-6Ab"/>
-                <constraint firstItem="yxY-iE-9qG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="WeC-Ok-juC"/>
+                <constraint firstItem="yxY-iE-9qG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="WeC-Ok-juC"/>
                 <constraint firstItem="yxY-iE-9qG" firstAttribute="top" secondItem="Nu2-93-j1L" secondAttribute="bottom" constant="40" id="dp2-jG-OGF"/>
                 <constraint firstItem="5wi-Ql-pGT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="fnF-zc-9da"/>
                 <constraint firstItem="6Vj-IW-2IJ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="k52-w1-uEY"/>

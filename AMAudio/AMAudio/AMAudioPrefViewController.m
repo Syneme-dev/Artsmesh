@@ -13,6 +13,9 @@
 #import "UIFrameWork/AMCheckBoxView.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMFoundryFontView.h"
+
+#define kNumbers     @"123456789"
 
 @interface AMAudioPrefViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *driverBox;
@@ -28,7 +31,7 @@
 @property (weak) IBOutlet AMPopUpView *interfaceOutChansBox;
 @property (weak) IBOutlet NSButton *saveBtn;
 @property (weak) IBOutlet NSButton *cancelBtn;
-@property (weak) IBOutlet AMPopUpView *amVirtualChannsBox;
+@property (weak) IBOutlet AMFoundryFontView *amVirtualChannsField;
 
 
 @end
@@ -64,15 +67,20 @@
     self.compensationCheck.delegate = self;
     self.midiCheck.delegate = self;
     self.portMornitingCheck.delegate = self;
-    self.amVirtualChannsBox.delegate = self;
-    
+
     [self loadPrefs];
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:)  name:NSControlTextDidChangeNotification object:nil];
     
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)loadPrefs
@@ -86,12 +94,8 @@
 
 -(void)fillVirtualChannels
 {
-    for(int i = 0; i <= 10; i++){
-        [self.amVirtualChannsBox addItemWithTitle:[NSString stringWithFormat:@"%d", i]];
-    }
-    
     NSString *virtualChanns = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_RouterVirtualChanns];
-    [self.amVirtualChannsBox selectItemWithTitle:virtualChanns];
+    self.amVirtualChannsField.stringValue = virtualChanns;
 }
 
 -(void)fillDriverBox
@@ -308,6 +312,12 @@
         [exp raise];
     }
     
+    int virtualNum = [self.amVirtualChannsField.stringValue intValue];
+    if(virtualNum <= 0 || virtualNum >8){
+        self.amVirtualChannsField.stringValue = @"2";
+        return;
+    }
+    
     self.jackManager.jackCfg.driver = self.driverBox.stringValue;
     
     NSString* inputDevName = self.inputDevBox.stringValue;
@@ -343,7 +353,7 @@
     [[AMPreferenceManager standardUserDefaults] setObject:self.bufferSizeBox.stringValue forKey:Preference_Jack_BufferSize];
     [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceInChansBox.stringValue forKey:Preference_Jack_InterfaceInChans];
     [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceOutChansBox.stringValue forKey:Preference_Jack_InterfaceOutChanns];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.amVirtualChannsBox.stringValue forKey:Preference_Jack_RouterVirtualChanns];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.amVirtualChannsField.stringValue forKey:Preference_Jack_RouterVirtualChanns];
     
     if (self.jackManager.jackCfg.hogMode) {
         [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_HogMode];
@@ -401,7 +411,7 @@
     
     NSString *amVirtualChanns = [[AMPreferenceManager standardUserDefaults]
                                    stringForKey:Preference_Jack_RouterVirtualChanns];
-    [self.amVirtualChannsBox selectItemWithTitle:amVirtualChanns];
+    self.amVirtualChannsField.stringValue = amVirtualChanns;
     
     BOOL hogMode = [[AMPreferenceManager standardUserDefaults]
                            boolForKey:Preference_Jack_HogMode];
@@ -427,6 +437,15 @@
 {
     [self.saveBtn setEnabled:YES];
     [self.cancelBtn setEnabled:YES];
+}
+
+- (void)textDidChange:(NSNotification *)aNotification
+{
+    NSTextField *sender=[aNotification object];
+    if ([sender isEqualTo:self.amVirtualChannsField]) {
+        [self.saveBtn setEnabled:YES];
+        [self.cancelBtn setEnabled:YES];
+    }
 }
 
 @end

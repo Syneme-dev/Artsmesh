@@ -128,8 +128,6 @@
     
     [mixerCtrl setVolumeRange:NSMakeRange(0, 1)];
     mixerCtrl.volume = 0.0;
-    
-//    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:46.0/255 green:58.0/255 blue:75.0/255 alpha:1]];
     [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
     
     mixerCtrl.channName = p.name;
@@ -171,6 +169,11 @@
     [_client unregisterClient];
     
     [self.mixerCollectionView removeAllItems];
+    
+    for (AMMixerViewController* mixerCtrl in _mixerControllers) {
+        [mixerCtrl removeObserver:self forKeyPath:@"volume"];
+    }
+    
     [_mixerControllers removeAllObjects];
 }
 

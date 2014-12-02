@@ -8,6 +8,9 @@
 
 #import "AMVideoMixerViewController.h"
 #import "AMVideoMixerBackgroundView.h"
+#import "AMPanelViewController.h"
+#import "UIFrameWork/AMPanelView.h"
+#import "AMAppDelegate.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -76,7 +79,7 @@
 {
     if (sender == self.bigView) {
         if (sender.clickCount == 2) {
-            
+            [self popupVideoMixingWindow];
         }
     } else {
         if (sender.clickCount == 1 && sender != self.selected) {
@@ -88,6 +91,33 @@
         }
     }
 }
+
+
+- (void)popupVideoMixingWindow
+{
+    static NSString *panelId = @"AMVideoMixingPopupPanel";
+    
+    AMAppDelegate *appDelegate = (AMAppDelegate *)[NSApp delegate];
+    NSMutableDictionary *panelControllers = appDelegate.mainWindowController.panelControllers;
+    
+    if (!panelControllers[panelId]) {
+        AMPanelViewController *popupController =
+            [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+        popupController.panelId = panelId;
+        panelControllers[panelId] = popupController;
+        [popupController setTitle:@"MIXING"];
+        AMPanelView *panelView = (AMPanelView *)popupController.view;
+        panelView.panelViewController = popupController;
+        panelView.preferredSize = NSMakeSize(800, 600);
+        panelView.initialSize = panelView.preferredSize;
+        [popupController onTearClick:self];
+        popupController.settingButton.hidden = YES;
+        popupController.tearOffButton.hidden = YES;
+        popupController.tabPanelButton.hidden = YES;
+        popupController.maxSizeButton.hidden = YES;
+    }
+}
+
 
 /*
 - (void)mouseDown:(NSEvent *)theEvent

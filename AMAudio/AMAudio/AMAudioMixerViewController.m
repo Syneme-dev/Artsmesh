@@ -204,7 +204,9 @@
 -(void)port:(AMJackPort *)port currentPeak:(float)peak
 {
     for (AMMixerViewController* mc in _mixerControllers) {
-        if ([mc.channName isEqualToString:port.name]){
+        
+        NSString *portName = [port.name uppercaseStringWithLocale:[NSLocale  currentLocale]];
+        if ([mc.channName isEqualToString:portName]){
             mc.meter = peak;
             break;
         }

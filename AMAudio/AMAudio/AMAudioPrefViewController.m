@@ -28,6 +28,7 @@
 @property (weak) IBOutlet AMPopUpView *interfaceOutChansBox;
 @property (weak) IBOutlet NSButton *saveBtn;
 @property (weak) IBOutlet NSButton *cancelBtn;
+@property (weak) IBOutlet AMPopUpView *amVirtualChannsBox;
 
 
 @end
@@ -63,6 +64,7 @@
     self.compensationCheck.delegate = self;
     self.midiCheck.delegate = self;
     self.portMornitingCheck.delegate = self;
+    self.amVirtualChannsBox.delegate = self;
     
     [self loadPrefs];
     [self.saveBtn setEnabled:NO];
@@ -78,7 +80,18 @@
     [self fillDriverBox];
     [self fillInputAndOutputDevice];
     [self setCheckBoxes];
+    [self fillVirtualChannels];
     [self saveConfig:nil];
+}
+
+-(void)fillVirtualChannels
+{
+    for(int i = 0; i <= 10; i++){
+        [self.amVirtualChannsBox addItemWithTitle:[NSString stringWithFormat:@"%d", i]];
+    }
+    
+    NSString *virtualChanns = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_RouterVirtualChanns];
+    [self.amVirtualChannsBox selectItemWithTitle:virtualChanns];
 }
 
 -(void)fillDriverBox
@@ -330,6 +343,7 @@
     [[AMPreferenceManager standardUserDefaults] setObject:self.bufferSizeBox.stringValue forKey:Preference_Jack_BufferSize];
     [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceInChansBox.stringValue forKey:Preference_Jack_InterfaceInChans];
     [[AMPreferenceManager standardUserDefaults] setObject:self.interfaceOutChansBox.stringValue forKey:Preference_Jack_InterfaceOutChanns];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.amVirtualChannsBox.stringValue forKey:Preference_Jack_RouterVirtualChanns];
     
     if (self.jackManager.jackCfg.hogMode) {
         [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jack_HogMode];
@@ -384,6 +398,10 @@
     NSString* outChanns = [[AMPreferenceManager standardUserDefaults]
                           stringForKey:Preference_Jack_InterfaceOutChanns];
     [self.interfaceOutChansBox selectItemWithTitle:outChanns];
+    
+    NSString *amVirtualChanns = [[AMPreferenceManager standardUserDefaults]
+                                   stringForKey:Preference_Jack_RouterVirtualChanns];
+    [self.amVirtualChannsBox selectItemWithTitle:amVirtualChanns];
     
     BOOL hogMode = [[AMPreferenceManager standardUserDefaults]
                            boolForKey:Preference_Jack_HogMode];

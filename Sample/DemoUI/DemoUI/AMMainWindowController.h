@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMPanelViewController.h"
+#import "AMJackCPULoderView.h"
 
 @class AMFoundryFontView;
 
@@ -25,6 +26,8 @@
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
 @property (weak) IBOutlet NSButton *syphonServerBtn;
+@property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
+@property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

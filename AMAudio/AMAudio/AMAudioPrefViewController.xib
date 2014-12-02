@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMAudioPrefViewController">
             <connections>
+                <outlet property="amVirtualChannsBox" destination="fXA-MP-X5X" id="1Q2-7v-jag"/>
                 <outlet property="bufferSizeBox" destination="ADt-u4-1Xr" id="t85-rb-SZA"/>
                 <outlet property="cancelBtn" destination="w4D-5o-561" id="7aE-XF-Kq5"/>
                 <outlet property="compensationCheck" destination="T9P-xw-Lqq" id="otn-XM-7Ss"/>
@@ -26,19 +27,27 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <view id="2x1-ne-wYU">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="599"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7da-3z-mfH">
-                    <rect key="frame" x="18" y="543" width="93" height="17"/>
+                    <rect key="frame" x="18" y="562" width="93" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACK Server: " id="bXR-BN-XIz">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDC-cr-DWf">
+                    <rect key="frame" x="18" y="108" width="115" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artsmesh Router" id="I4b-pp-yea">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3W-Af-Ge7">
-                    <rect key="frame" x="54" y="508" width="47" height="17"/>
+                    <rect key="frame" x="54" y="527" width="47" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Driver:" id="YLm-0v-trM">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -46,7 +55,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lzu-Pk-Nay">
-                    <rect key="frame" x="54" y="477" width="87" height="17"/>
+                    <rect key="frame" x="54" y="496" width="87" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Input Device:" id="to9-yp-nvP">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -54,7 +63,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TM-bL-UiK">
-                    <rect key="frame" x="54" y="446" width="98" height="17"/>
+                    <rect key="frame" x="54" y="465" width="98" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output Device:" id="Tii-6o-d69">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -62,7 +71,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YbX-Tm-Dhm">
-                    <rect key="frame" x="54" y="415" width="86" height="17"/>
+                    <rect key="frame" x="54" y="434" width="86" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sample Rate:" id="xQn-gd-wC1">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -70,7 +79,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w3Z-il-Qrw">
-                    <rect key="frame" x="55" y="384" width="75" height="17"/>
+                    <rect key="frame" x="55" y="403" width="75" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Buffer Size:" id="iAg-fv-cZf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -78,15 +87,23 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3s-xK-ddq">
-                    <rect key="frame" x="55" y="182" width="162" height="17"/>
+                    <rect key="frame" x="55" y="201" width="162" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Interface Input Channels:" id="Xzy-v0-CAS">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4W-qt-2GL">
+                    <rect key="frame" x="54" y="75" width="170" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Artsmesh Virtual Channels:" id="GcV-q1-n7N">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSB-QL-EmK">
-                    <rect key="frame" x="54" y="146" width="173" height="17"/>
+                    <rect key="frame" x="54" y="165" width="173" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Interface Output Channels:" id="LZR-V3-wW8">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -94,19 +111,65 @@
                     </textFieldCell>
                 </textField>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Kl0-vV-oY8">
-                    <rect key="frame" x="20" y="220" width="546" height="5"/>
+                    <rect key="frame" x="20" y="239" width="546" height="5"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="wtO-t2-hmk">
-                    <rect key="frame" x="20" y="112" width="546" height="5"/>
+                    <rect key="frame" x="20" y="131" width="546" height="5"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQc-Bv-sXM" customClass="AMPopUpView">
+                    <rect key="frame" x="164" y="527" width="307" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZY-iz-qot" customClass="AMPopUpView">
+                    <rect key="frame" x="164" y="496" width="307" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cM6-du-VTs" customClass="AMPopUpView">
+                    <rect key="frame" x="164" y="465" width="307" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dx3-Hn-qD5" customClass="AMPopUpView">
+                    <rect key="frame" x="309" y="430" width="162" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ADt-u4-1Xr" customClass="AMPopUpView">
+                    <rect key="frame" x="309" y="403" width="162" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="028-uT-sQs" customClass="AMPopUpView">
+                    <rect key="frame" x="309" y="197" width="162" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXA-MP-X5X" customClass="AMPopUpView">
+                    <rect key="frame" x="309" y="75" width="162" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baa-HN-mys" customClass="AMPopUpView">
+                    <rect key="frame" x="309" y="165" width="162" height="21"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A22-LT-JlH" customClass="AMCheckBoxView">
+                    <rect key="frame" x="56" y="363" width="415" height="31"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9P-xw-Lqq" customClass="AMCheckBoxView">
+                    <rect key="frame" x="56" y="331" width="415" height="31"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aM4-Qo-rFX" customClass="AMCheckBoxView">
+                    <rect key="frame" x="56" y="299" width="415" height="31"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-50-p0m" customClass="AMCheckBoxView">
+                    <rect key="frame" x="57" y="266" width="415" height="31"/>
+                </customView>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-in-zO5">
+                    <rect key="frame" x="391" y="26" width="80" height="25"/>
+                    <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="H16-1T-mTk">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="saveConfig:" target="-2" id="8jK-jz-7Bg"/>
+                    </connections>
+                </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4D-5o-561">
-                    <rect key="frame" x="302" y="64" width="79" height="25"/>
+                    <rect key="frame" x="302" y="26" width="79" height="25"/>
                     <buttonCell key="cell" type="square" title="Cancel" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="WKv-o1-hfI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -118,51 +181,8 @@ Gw
                         <action selector="restoreConfig:" target="-2" id="eMA-oM-D14"/>
                     </connections>
                 </button>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LQc-Bv-sXM" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="508" width="307" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZY-iz-qot" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="477" width="307" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cM6-du-VTs" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="446" width="307" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dx3-Hn-qD5" customClass="AMPopUpView">
-                    <rect key="frame" x="309" y="411" width="162" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ADt-u4-1Xr" customClass="AMPopUpView">
-                    <rect key="frame" x="309" y="384" width="162" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="028-uT-sQs" customClass="AMPopUpView">
-                    <rect key="frame" x="309" y="178" width="162" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="baa-HN-mys" customClass="AMPopUpView">
-                    <rect key="frame" x="309" y="146" width="162" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A22-LT-JlH" customClass="AMCheckBoxView">
-                    <rect key="frame" x="56" y="344" width="415" height="31"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9P-xw-Lqq" customClass="AMCheckBoxView">
-                    <rect key="frame" x="56" y="312" width="415" height="31"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aM4-Qo-rFX" customClass="AMCheckBoxView">
-                    <rect key="frame" x="56" y="280" width="415" height="31"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-50-p0m" customClass="AMCheckBoxView">
-                    <rect key="frame" x="57" y="247" width="415" height="31"/>
-                </customView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OZ-in-zO5">
-                    <rect key="frame" x="391" y="64" width="80" height="25"/>
-                    <buttonCell key="cell" type="square" title="Save" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="H16-1T-mTk">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="saveConfig:" target="-2" id="8jK-jz-7Bg"/>
-                    </connections>
-                </button>
             </subviews>
-            <point key="canvasLocation" x="-78" y="-56"/>
+            <point key="canvasLocation" x="-78" y="-46.5"/>
         </view>
     </objects>
 </document>

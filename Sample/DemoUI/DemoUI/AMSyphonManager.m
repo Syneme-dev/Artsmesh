@@ -106,7 +106,7 @@
         _syServer.currentServerName = serverName;
         [_syServer start];
         
-        //tearOff
+        //tearOff 
         _syTearOff.currentServerName = serverName;
         [_syTearOff start];
     }

@@ -105,12 +105,29 @@
             [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
         popupController.panelId = panelId;
         panelControllers[panelId] = popupController;
-        [popupController setTitle:@"MIXING"];
         AMPanelView *panelView = (AMPanelView *)popupController.view;
         panelView.panelViewController = popupController;
         panelView.preferredSize = NSMakeSize(800, 600);
         panelView.initialSize = panelView.preferredSize;
+        
+        NSView *subview = [self.syphonManager tearOffView];
+        subview.frame = NSMakeRect(0, 20, panelView.bounds.size.width, panelView.bounds.size.height - 16);
+        [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [panelView addSubview:subview];
+        NSDictionary *views = @{ @"subview" : subview };
+        [panelView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subview]|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [panelView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[subview]-16-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
         [popupController onTearClick:self];
+        popupController.title = @"MIXING";
         popupController.settingButton.hidden = YES;
         popupController.tearOffButton.hidden = YES;
         popupController.tabPanelButton.hidden = YES;

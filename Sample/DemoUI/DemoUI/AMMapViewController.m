@@ -171,7 +171,7 @@
     AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
     
     //Create window to hold everything
-    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, 400, (300 + 41) + floatPanel.borderThickness);
+    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, 400, (300 + 21) + floatPanel.borderThickness);
     _archiveFloatWindow  = [[NSWindow alloc] initWithContentRect:frame
                                                        styleMask:NSBorderlessWindowMask
                                                          backing:NSBackingStoreBuffered
@@ -213,7 +213,7 @@
 -(void)displayArchiveProgram {
     [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
     
-    [_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/cyMNXjgI2n0" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
+    [_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/gm9a28J67E4" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
     
     [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
     [_archiveFloatWindow makeKeyAndOrderFront:NSApp];

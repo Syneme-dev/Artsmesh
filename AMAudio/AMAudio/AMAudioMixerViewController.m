@@ -21,6 +21,7 @@
 @property (weak) IBOutlet NSTextField *bufferSize;
 @property (weak) IBOutlet NSTextField *sampleRate;
 @property (weak) IBOutlet AMCollectionView *mixerCollectionView;
+@property (weak) IBOutlet AMCollectionView *outputMixerCollectionView;
 
 @end
 
@@ -36,7 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here
-   // [self.mixerCollectionView setBackgroudColor:[NSColor clearColor]];
+//    [self.mixerCollectionView setBackgroudColor:[NSColor redColor]];
+//    [self.outputMixerCollectionView setBackgroudColor:[NSColor blueColor]];
     self.mixerCollectionView.itemGap = 1;
 }
 
@@ -63,7 +65,10 @@
 -(BOOL)startClient
 {
     if(![[AMAudio sharedInstance] isJackStarted]){
-        NSAlert *alert = [NSAlert alertWithMessageText:@"State Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Should Start Jack Server first!"];
+        NSAlert *alert = [NSAlert alertWithMessageText:@"State Error"
+                                         defaultButton:@"Ok" alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Should Start Jack Server first!"];
         [alert runModal];
         return NO;
     }
@@ -103,7 +108,7 @@
             AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
             p.volume = mixerCtrl.volume;
             
-            [self.mixerCollectionView addViewItem:mixerCtrl.view];
+            [self.outputMixerCollectionView addViewItem:mixerCtrl.view];
             [_mixerControllers addObject:mixerCtrl];
         }
     }

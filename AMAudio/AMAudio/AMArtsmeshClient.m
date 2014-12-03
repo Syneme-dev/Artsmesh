@@ -146,11 +146,11 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
             PortPair* portPair = [[PortPair alloc] init];
             
             portPair.inputPort = [[AMJackPort alloc] init];
-            portPair.inputPort.name = [NSString stringWithFormat:@"input_%d", i+1];
+            portPair.inputPort.name = [NSString stringWithFormat:@"input%d", i+1];
             portPair.inputPort.portType = AMJackPort_Source;
             
             portPair.outputPort = [[AMJackPort alloc] init];
-            portPair.outputPort.name = [NSString stringWithFormat:@"output_%d", i+1];
+            portPair.outputPort.name = [NSString stringWithFormat:@"output%d", i+1];
             portPair.outputPort.portType = AMJackPort_Destination;
             
             [self.portPairs addObject:portPair];

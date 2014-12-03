@@ -9,7 +9,7 @@
 #import "AMAudioSlider.h"
 
 #define POLE_WIDTH      5
-#define HOLDER_WIDTH    15
+#define HOLDER_WIDTH    24
 
 @implementation AMAudioSlider
 

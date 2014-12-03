@@ -165,40 +165,10 @@
     //display test float panel
     
     //Create float panel controller + view
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(400, 300) andTitle:@"ARCHIVE"];
     _floatPanelViewController = fpc;
-    _floatPanelViewController.panelTitle = @"ARCHIVE";
-    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
     
-    //Create window to hold everything
-    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, 400, (300 + 21) + floatPanel.borderThickness);
-    _archiveFloatWindow  = [[NSWindow alloc] initWithContentRect:frame
-                                                       styleMask:NSBorderlessWindowMask
-                                                         backing:NSBackingStoreBuffered
-                                                           defer:NO];
-    fpc.containerWindow = _archiveFloatWindow;
-    _archiveFloatWindow.hasShadow = YES;
-    [_archiveFloatWindow.contentView addSubview:floatPanel];
-    
-    [_archiveFloatWindow.contentView setAutoresizesSubviews:YES];
-    
-    //NSLog(@"window frame is: %f, %f - frame origin: %f, %f - %@", _archiveFloatWindow.frame.size.width, _archiveFloatWindow.frame.size.height, _archiveFloatWindow.frame.origin.x, _archiveFloatWindow.frame.origin.y, _archiveFloatWindow);
-    
-    // Add sizing constraints to window
-    _floatPanelViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:@{@"subView" : _floatPanelViewController.view}];
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : _floatPanelViewController.view}];
-    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
-    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
-    
-    [_archiveFloatWindow.contentView setAutoresizesSubviews:YES];
-    [_floatPanelViewController.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    _archiveFloatWindow = fpc.containerWindow;
 }
 
 - (WebView *)embedYouTube:(NSString *)urlString frame:(NSRect)frame {

@@ -25,6 +25,8 @@
 @property NSWindow *containerWindow;
 //@property BOOL isClosed;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSize:(NSSize)theSize andTitle:(NSString *)theTitle;
+
 - (IBAction)closePanel:(id)sender;
 - (IBAction)toggleFullScreen:(id)sender;
 

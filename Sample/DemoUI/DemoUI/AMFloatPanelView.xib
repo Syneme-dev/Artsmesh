@@ -60,10 +60,13 @@
                                 <constraint firstAttribute="height" constant="16" id="TSQ-hv-P39"/>
                                 <constraint firstAttribute="width" constant="16" id="VBF-i6-gvG"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_fullScreen" imagePosition="only" alignment="center" alternateImage="panel_fullScreen_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_extend" imagePosition="only" alignment="center" alternateImage="panel_extend_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="toggleFullScreen:" target="-2" id="D90-7f-0X3"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -96,7 +99,7 @@
     <resources>
         <image name="panel_close" width="15" height="15"/>
         <image name="panel_close_h" width="15" height="15"/>
-        <image name="panel_fullScreen" width="15" height="15"/>
-        <image name="panel_fullScreen_h" width="15" height="15"/>
+        <image name="panel_extend" width="15" height="15"/>
+        <image name="panel_extend_h" width="15" height="15"/>
     </resources>
 </document>

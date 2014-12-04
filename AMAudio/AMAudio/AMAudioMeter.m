@@ -12,6 +12,7 @@
 {
     float _value;
     NSRange _valueRange;
+    NSTimer *_timer;
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect
@@ -33,9 +34,24 @@
 -(void)doInit
 {
     self.valueRange = NSMakeRange(0.0f, 1.0f);
-    self.value = 0.5;
+    self.value = 0.0;
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                              target:self
+                                            selector:@selector(updateUI)
+                                            userInfo:nil repeats:YES];
 }
 
+-(void)dealloc
+{
+    [_timer invalidate];
+    _timer = nil;
+}
+
+-(void)updateUI
+{
+    [self setNeedsDisplay:YES];
+}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
@@ -58,8 +74,6 @@
     [self willChangeValueForKey:@"value"];
     _value = value;
     [self didChangeValueForKey:@"value"];
-    
-    [self setNeedsDisplay:YES];
 }
 
 -(float)value{

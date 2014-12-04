@@ -174,6 +174,7 @@
     [_client unregisterClient];
     
     [self.mixerCollectionView removeAllItems];
+    [self.outputMixerCollectionView removeAllItems];
     
     for (AMMixerViewController* mixerCtrl in _mixerControllers) {
         [mixerCtrl removeObserver:self forKeyPath:@"volume"];
@@ -196,20 +197,6 @@
      object:[NSNumber numberWithFloat:cpuUsage]];
 }
 
-
-//-(void)volumeBarChanged:(AMVolumeBar *)bar
-//{
-//    NSString* portName = bar.name;
-//    
-//    NSArray* ports = [_client allPorts];
-//    for (AMJackPort* p in ports) {
-//        if ([p.name isEqualToString:portName]) {
-//            
-//            p.isMute = bar.isMute;
-//            p.volume = bar.volume;
-//        }
-//    }
-//}
 
 -(void)port:(AMJackPort *)port currentPeak:(float)peak
 {

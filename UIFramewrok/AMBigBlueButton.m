@@ -15,7 +15,12 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    [UI_Color_blue set];
+    if (self.state) {
+        [UI_Color_blue set];
+    }else{
+        [[NSColor redColor] set];
+    }
+    
     NSRect rect = self.bounds;
     rect = NSInsetRect(rect, 3.0, 3.0);
     
@@ -28,6 +33,7 @@
 {
     [AMButtonHandler changeTabTextColor:self toColor:UI_Color_blue];
 }
+
 
 
 @end

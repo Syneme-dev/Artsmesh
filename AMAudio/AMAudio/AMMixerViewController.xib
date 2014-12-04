@@ -49,7 +49,7 @@
                         <constraint firstAttribute="width" constant="36" id="sdd-P1-LLY"/>
                     </constraints>
                     <buttonCell key="cell" type="smallSquare" title="Mute" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="fsu-G2-j6L">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                 </button>

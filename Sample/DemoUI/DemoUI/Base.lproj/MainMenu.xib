@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
@@ -650,7 +650,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -824,11 +824,19 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIW-oc-qXb" customClass="AMJackCPULoderView">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="eIW-oc-qXb" customClass="AMJackCPULoderView">
                         <rect key="frame" x="1008" y="722" width="45" height="3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="Dfy-un-VqV"/>
+                            <constraint firstAttribute="height" constant="3" id="uHB-0e-hcb"/>
+                        </constraints>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZl-dT-72j" customClass="AMFoundryFontView">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DZl-dT-72j" customClass="AMFoundryFontView">
                         <rect key="frame" x="981" y="718" width="26" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="geE-cZ-cfk"/>
+                            <constraint firstAttribute="width" constant="22" id="kWg-5k-yNr"/>
+                        </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="03z-GT-QHt">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -841,6 +849,7 @@
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
+                    <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
                     <constraint firstItem="KD8-g0-Ew6" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="UV4-FM-aGm"/>
@@ -848,8 +857,11 @@
                     <constraint firstItem="iv2-ru-op1" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="WmQ-0Q-tGp"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="XKt-Z9-ayg"/>
                     <constraint firstItem="iv2-ru-op1" firstAttribute="leading" secondItem="KD8-g0-Ew6" secondAttribute="trailing" constant="17" id="Xj2-jA-NYZ"/>
+                    <constraint firstAttribute="trailing" secondItem="eIW-oc-qXb" secondAttribute="trailing" constant="147" id="dGF-95-RXd"/>
                     <constraint firstItem="qme-pL-mB7" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="du2-EA-BKm"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="372" secondAttribute="top" constant="60" id="fdf-eJ-kAU"/>
+                    <constraint firstItem="DZl-dT-72j" firstAttribute="top" secondItem="qme-pL-mB7" secondAttribute="bottom" constant="2" id="fq0-U2-OVd"/>
+                    <constraint firstItem="eIW-oc-qXb" firstAttribute="top" secondItem="m4w-q8-NcC" secondAttribute="bottom" constant="6" id="mJ6-KE-Qdw"/>
                     <constraint firstItem="PQH-zt-t50" firstAttribute="top" secondItem="372" secondAttribute="top" constant="21" id="n1q-6l-Kee"/>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="leading" secondItem="PQH-zt-t50" secondAttribute="trailing" constant="19" id="rL3-YX-u6Q"/>
                     <constraint firstItem="m4w-q8-NcC" firstAttribute="leading" secondItem="qme-pL-mB7" secondAttribute="trailing" constant="16" id="zCo-Jl-82V"/>

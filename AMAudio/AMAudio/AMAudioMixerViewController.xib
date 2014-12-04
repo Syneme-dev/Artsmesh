@@ -64,7 +64,7 @@
                         <constraint firstAttribute="width" constant="60" id="4tU-Y7-4Gy"/>
                     </constraints>
                     <buttonCell key="cell" type="smallSquare" title="START" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="iv3-wt-J8h">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>

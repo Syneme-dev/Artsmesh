@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
             <connections>
+                <outlet property="closeButton" destination="PFq-T7-YMG" id="Kfj-1e-0aK"/>
                 <outlet property="fullScreenButton" destination="diy-MI-ZVa" id="tvb-QH-1Ow"/>
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
                 <outlet property="settingButton" destination="42T-8I-slY" id="4Sk-iJ-M2Z"/>

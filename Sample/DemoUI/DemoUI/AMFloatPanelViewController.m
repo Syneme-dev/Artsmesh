@@ -39,9 +39,9 @@
                                                                defer:NO];
         self.containerWindow.hasShadow = YES;
         
-        [self.containerWindow setFrameOrigin:NSMakePoint(([(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.width/2 - (self.containerWindow.frame.size.width/1.25)), ([(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.height/2) )];
+        [self.containerWindow setFrameOrigin:NSMakePoint((([[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView window].frame.size.width/2) - (self.containerWindow.frame.size.width/2) ), ([(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.height/2) )];
         
-        NSLog(@"Application window dimensions: %f, %f", [(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.width, [(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.height);
+        NSLog(@"Application window dimensions: %f, %f", [[(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView window].frame.size.width, [(AMAppDelegate *)[NSApp delegate] mainWindowController].containerView.frame.size.height);
         
         [self.containerWindow.contentView addSubview:floatPanel];
     

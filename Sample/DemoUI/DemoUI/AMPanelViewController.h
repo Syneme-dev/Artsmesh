@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, AMPanelViewType) {
 @property (strong) IBOutlet NSButton *tabPanelButton;
 @property (strong) IBOutlet NSButton *maxSizeButton;
 @property (strong) IBOutlet NSButton *fullScreenButton;
+@property (weak) IBOutlet NSButton *closeButton;
 
 - (IBAction)onTearClick:(id)sender;
 - (IBAction)onCopyTabButtonClick:(id)sender;

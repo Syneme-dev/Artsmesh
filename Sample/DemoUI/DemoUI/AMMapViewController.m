@@ -31,9 +31,11 @@
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 
+
 @interface AMMapViewController ()
 {
     NSString* statusNetURLString;
+    NSString* statusNetProfileURLString;
 }
 
 @end
@@ -158,7 +160,71 @@
                      [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
+    
+    [self createArchiveFloatWindow];
 }
+
+-(void)createArchiveFloatWindow {
+    //display test float panel
+    
+    //Create float panel controller + view
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(600, 300) andTitle:@"ARCHIVE"];
+    _floatPanelViewController = fpc;
+    
+    _archiveFloatWindow = fpc.containerWindow;
+}
+
+- (WebView *)embedYouTube:(NSString *)urlString frame:(NSRect)frame {
+    
+    self.youTubeVideo = [[WebView alloc] initWithFrame:frame];
+    [[self.youTubeVideo mainFrame] loadRequest:[NSURLRequest requestWithURL: [NSURL URLWithString:urlString]]];
+    [self.youTubeVideo setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    return self.youTubeVideo;
+}
+
+-(void)displayArchiveProgram {
+    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+    
+    //[_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/gm9a28J67E4" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
+    
+    [self loadProfileWebView];
+    
+    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
+}
+
+-(void) loadProfileWebView {
+    WebView *profile_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    
+    [profile_webview setDrawsBackground:NO];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSURL *profile_url = [NSURL URLWithString:
+                          [NSString stringWithFormat:@"%@/ken?fromMac=true",statusNetURLString ]];
+    [profile_webview.mainFrame loadRequest:
+     [NSURLRequest requestWithURL:profile_url]];
+    
+    [_floatPanelViewController.panelContent addSubview:profile_webview];
+
+    //set up constraints
+    
+    profile_webview.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : profile_webview}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : profile_webview}];
+    
+    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
+    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+}
+
 
 -(void)gotoUsersPage{
 //    NSURL *baseURL =
@@ -168,16 +234,18 @@
 //     [NSURLRequest requestWithURL:baseURL]];
 }
 
-
-
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
+    NSLog(@"webview finished loading frame");
     NSString *url= sender.mainFrameURL;
     self.archiveWebView.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
    if([url hasPrefix:statusNetURLString]){
         path=[path stringByAppendingString:@"/Contents/Resources/map.css"];
     }
+   else if([url hasPrefix:statusNetProfileURLString]) {
+        path=[path stringByAppendingString:@"/Contents/Resources/web.css"];
+   }
     else{
         self.archiveWebView.preferences.userStyleSheetEnabled = NO;
     }

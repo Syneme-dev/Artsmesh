@@ -89,7 +89,7 @@
 
 - (void) stopRouter
 {
-    [_syServer stopRouter];
+    [_syServer  stopRouter];
 }
 
 -(void)selectClient:(int)index
@@ -105,6 +105,10 @@
     if(serverName != nil){
         _syServer.currentServerName = serverName;
         [_syServer start];
+        
+        //tearOff 
+        _syTearOff.currentServerName = serverName;
+        [_syTearOff start];
     }
 }
 

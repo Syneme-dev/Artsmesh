@@ -241,7 +241,12 @@ AMWorldMap *worldMap;
                 //controlPoint1:center
                 //controlPoint2:center];
                 bezierPath.lineWidth = 2.0;
-                [[NSColor grayColor] setStroke];
+                NSColor *curLineColor = [NSColor grayColor];
+                if ( [_hovGroup.groupId isEqualToString:group.groupId] || [_hovGroup.groupId isEqualToString:subGroup.groupId] ) {
+                    curLineColor = [NSColor redColor];
+                }
+            
+                [curLineColor setStroke];
                 [bezierPath stroke];
             }
         }
@@ -739,34 +744,11 @@ AMWorldMap *worldMap;
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
     
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(programW, programH) andTitle:@"LIVE"];
     _floatPanelViewController = fpc;
-    _floatPanelViewController.panelTitle = @"LIVE";
-    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
-    [_floatPanelViewController.view setFrameSize:NSMakeSize(programW, programH+floatPanel.borderThickness)];
-    floatPanel.initialSize = NSMakeSize(programW, programH+floatPanel.borderThickness);
-    floatPanel.floatPanelViewController = fpc;
-
-    floatPanel.minSizeConstraint = NSMakeSize(programW, programH);
-    
-    NSRect frame = NSMakeRect(0, 0, programW, programH + 41 + floatPanel.borderThickness);
-    
-    _programWindow  = [[NSWindow alloc] initWithContentRect:frame
-                                                  styleMask:NSBorderlessWindowMask
-                                                    backing:NSBackingStoreBuffered
-                                                      defer:NO];
-    fpc.containerWindow = _programWindow;
+    _programWindow = fpc.containerWindow;
 
     [fpc.panelContent addSubview:pvc.view];
-
-    
-    _programWindow.hasShadow = YES;
-    
-    [_programWindow setFrameOrigin:NSMakePoint((self.frame.size.width/2), (self.frame.size.height - (_programWindow.frame.size.height/2)) )];
-    //[_programWindow setFrameOrigin:programOriginInWindow];
-    
-    [_programWindow.contentView addSubview:floatPanel];
-    
     
     pvc.view.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
@@ -783,22 +765,6 @@ AMWorldMap *worldMap;
     
     [_programWindow.contentView setAutoresizesSubviews:YES];
     [pvc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    
-    fpc.view.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:@{@"subView" : fpc.view}];
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : fpc.view}];
-    [_programWindow.contentView addConstraints:verticalConstraints];
-    [_programWindow.contentView addConstraints:horizontalConstraints];
-    
-    [_programWindow.contentView setAutoresizesSubviews:YES];
-    [fpc.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     
 }
 
@@ -817,6 +783,8 @@ AMWorldMap *worldMap;
     // Display the program
     _programWindow.level = NSFloatingWindowLevel;
     [_programWindow makeKeyAndOrderFront:self];
+    
+    
 }
 
 - (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup {

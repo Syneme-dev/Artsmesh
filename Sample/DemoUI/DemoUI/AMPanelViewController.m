@@ -110,13 +110,15 @@
 - (void)windowWillEnterFullScreen:(NSNotification *)notification
 {
     [self.tearOffButton setHidden:YES];
+    self.closeButton.hidden = YES;
     AMPanelView *panelView = (AMPanelView *)self.view;
     panelView.inFullScreenMode = YES;
 }
 
-- (void)windowWillExitFullScreen:(NSNotification *)notification
+- (void)windowDidExitFullScreen:(NSNotification *)notification
 {
     [self.tearOffButton setHidden:NO];
+    self.closeButton.hidden = NO;
     AMPanelView *panelView = (AMPanelView *)self.view;
     panelView.inFullScreenMode = NO;
     [_floatingWindow orderFront:self];

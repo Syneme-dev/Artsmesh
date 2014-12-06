@@ -34,6 +34,17 @@
 		4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2541A105AB1006E534A /* AMJackPort.m */; };
 		4AC8A2591A105AF3006E534A /* AMJackHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2571A105AF3006E534A /* AMJackHelper.h */; };
 		4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2581A105AF3006E534A /* AMJackHelper.m */; };
+		4AF38F771A2631A1008FD2A3 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */; };
+		4AF38F781A2631A1008FD2A3 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */; };
+		4AF38F791A2631A1008FD2A3 /* AMMixerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */; };
+		4AF38F7A1A2631A1008FD2A3 /* AMMixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */; };
+		4AF38F7B1A2631A1008FD2A3 /* AMMixerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */; };
+		4AF38F7C1A2631A1008FD2A3 /* AMMixerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F711A2631A1008FD2A3 /* AMMixerViewController.m */; };
+		4AF38F7D1A2631A1008FD2A3 /* AMMixerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF38F721A2631A1008FD2A3 /* AMMixerViewController.xib */; };
+		4AF38F7E1A2631A1008FD2A3 /* AMAudioSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F731A2631A1008FD2A3 /* AMAudioSlider.h */; };
+		4AF38F7F1A2631A1008FD2A3 /* AMAudioSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F741A2631A1008FD2A3 /* AMAudioSlider.m */; };
+		4AF38F801A2631A1008FD2A3 /* AMAudioMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F751A2631A1008FD2A3 /* AMAudioMeter.h */; };
+		4AF38F811A2631A1008FD2A3 /* AMAudioMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F761A2631A1008FD2A3 /* AMAudioMeter.m */; };
 		CE151F2819B01372002D2AD4 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1919B01372002D2AD4 /* control.h */; };
 		CE151F2919B01372002D2AD4 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1A19B01372002D2AD4 /* intclient.h */; };
 		CE151F2A19B01372002D2AD4 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = CE151F1B19B01372002D2AD4 /* jack.h */; };
@@ -123,6 +134,17 @@
 		4AC8A2541A105AB1006E534A /* AMJackPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackPort.m; sourceTree = "<group>"; };
 		4AC8A2571A105AF3006E534A /* AMJackHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackHelper.h; sourceTree = "<group>"; };
 		4AC8A2581A105AF3006E534A /* AMJackHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackHelper.m; sourceTree = "<group>"; };
+		4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
+		4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionView.m; sourceTree = "<group>"; };
+		4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixerView.h; sourceTree = "<group>"; };
+		4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixerView.m; sourceTree = "<group>"; };
+		4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixerViewController.h; sourceTree = "<group>"; };
+		4AF38F711A2631A1008FD2A3 /* AMMixerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixerViewController.m; sourceTree = "<group>"; };
+		4AF38F721A2631A1008FD2A3 /* AMMixerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMixerViewController.xib; sourceTree = "<group>"; };
+		4AF38F731A2631A1008FD2A3 /* AMAudioSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioSlider.h; sourceTree = "<group>"; };
+		4AF38F741A2631A1008FD2A3 /* AMAudioSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioSlider.m; sourceTree = "<group>"; };
+		4AF38F751A2631A1008FD2A3 /* AMAudioMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMeter.h; sourceTree = "<group>"; };
+		4AF38F761A2631A1008FD2A3 /* AMAudioMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMeter.m; sourceTree = "<group>"; };
 		CE151F1919B01372002D2AD4 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		CE151F1A19B01372002D2AD4 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		CE151F1B19B01372002D2AD4 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -252,6 +274,17 @@
 				4AC8A2541A105AB1006E534A /* AMJackPort.m */,
 				4AC8A2571A105AF3006E534A /* AMJackHelper.h */,
 				4AC8A2581A105AF3006E534A /* AMJackHelper.m */,
+				4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */,
+				4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */,
+				4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */,
+				4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */,
+				4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */,
+				4AF38F711A2631A1008FD2A3 /* AMMixerViewController.m */,
+				4AF38F721A2631A1008FD2A3 /* AMMixerViewController.xib */,
+				4AF38F731A2631A1008FD2A3 /* AMAudioSlider.h */,
+				4AF38F741A2631A1008FD2A3 /* AMAudioSlider.m */,
+				4AF38F751A2631A1008FD2A3 /* AMAudioMeter.h */,
+				4AF38F761A2631A1008FD2A3 /* AMAudioMeter.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -354,6 +387,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF38F7E1A2631A1008FD2A3 /* AMAudioSlider.h in Headers */,
 				4AC8A2511A1059AE006E534A /* AMArtsmeshClient.h in Headers */,
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
@@ -364,12 +398,15 @@
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
 				D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */,
 				CE151F3419B01372002D2AD4 /* types.h in Headers */,
+				4AF38F801A2631A1008FD2A3 /* AMAudioMeter.h in Headers */,
 				CE151F3119B01372002D2AD4 /* systemdeps.h in Headers */,
 				26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */,
 				CE151F2919B01372002D2AD4 /* intclient.h in Headers */,
+				4AF38F791A2631A1008FD2A3 /* AMMixerView.h in Headers */,
 				4AC8A2551A105AB1006E534A /* AMJackPort.h in Headers */,
 				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
+				4AF38F771A2631A1008FD2A3 /* AMCollectionView.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
 				CE151F2B19B01372002D2AD4 /* jslist.h in Headers */,
@@ -379,6 +416,7 @@
 				CE29B4E319BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h in Headers */,
 				CE151F2E19B01372002D2AD4 /* ringbuffer.h in Headers */,
 				4AC8A24D1A104E01006E534A /* AMVolumeCtlView.h in Headers */,
+				4AF38F7B1A2631A1008FD2A3 /* AMMixerViewController.h in Headers */,
 				CE151F2A19B01372002D2AD4 /* jack.h in Headers */,
 				CE151F3019B01372002D2AD4 /* statistics.h in Headers */,
 				4AC8A2591A105AF3006E534A /* AMJackHelper.h in Headers */,
@@ -449,6 +487,7 @@
 				D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */,
 				26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */,
 				D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */,
+				4AF38F7D1A2631A1008FD2A3 /* AMMixerViewController.xib in Resources */,
 				0198A79C1A0F2264009A36CA /* AMAudioMixerViewController.xib in Resources */,
 				26624DC119C912BF008F3D6D /* JackTripBtn.png in Resources */,
 				26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */,
@@ -467,6 +506,7 @@
 				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
 				4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
+				4AF38F7F1A2631A1008FD2A3 /* AMAudioSlider.m in Sources */,
 				26A11B2419C143A300796327 /* AMJackManager.m in Sources */,
 				26A11B2619C143A300796327 /* AMJacktripConfigs.m in Sources */,
 				CE68805A19B94F2A0062211C /* AMRouteViewController.m in Sources */,
@@ -474,15 +514,19 @@
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,
 				CE68805419B94EF20062211C /* AMChannel.m in Sources */,
 				4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */,
+				4AF38F7C1A2631A1008FD2A3 /* AMMixerViewController.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
+				4AF38F781A2631A1008FD2A3 /* AMCollectionView.m in Sources */,
 				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				0198A79B1A0F2264009A36CA /* AMAudioMixerViewController.m in Sources */,
 				4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */,
 				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 				4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */,
+				4AF38F811A2631A1008FD2A3 /* AMAudioMeter.m in Sources */,
 				4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */,
 				CE68805619B94EF20062211C /* AMRouteView.m in Sources */,
+				4AF38F7A1A2631A1008FD2A3 /* AMMixerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,9 @@
 
 #import "AMVideoMixerViewController.h"
 #import "AMVideoMixerBackgroundView.h"
+#import "AMPanelViewController.h"
+#import "UIFrameWork/AMPanelView.h"
+#import "AMAppDelegate.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -76,7 +79,7 @@
 {
     if (sender == self.bigView) {
         if (sender.clickCount == 2) {
-            
+            [self popupVideoMixingWindow];
         }
     } else {
         if (sender.clickCount == 1 && sender != self.selected) {
@@ -88,6 +91,50 @@
         }
     }
 }
+
+
+- (void)popupVideoMixingWindow
+{
+    static NSString *panelId = @"AMVideoMixingPopupPanel";
+    
+    AMAppDelegate *appDelegate = (AMAppDelegate *)[NSApp delegate];
+    NSMutableDictionary *panelControllers = appDelegate.mainWindowController.panelControllers;
+    
+    if (!panelControllers[panelId]) {
+        AMPanelViewController *popupController =
+            [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+        popupController.panelId = panelId;
+        panelControllers[panelId] = popupController;
+        AMPanelView *panelView = (AMPanelView *)popupController.view;
+        panelView.panelViewController = popupController;
+        panelView.preferredSize = NSMakeSize(800, 600);
+        panelView.initialSize = panelView.preferredSize;
+        
+        NSView *subview = [self.syphonManager tearOffView];
+        subview.frame = NSMakeRect(0, 20, panelView.bounds.size.width, panelView.bounds.size.height - 16);
+        [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [panelView addSubview:subview];
+        NSDictionary *views = @{ @"subview" : subview };
+        [panelView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subview]|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [panelView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[subview]-16-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
+        [popupController onTearClick:self];
+        popupController.title = @"MIXING";
+        popupController.settingButton.hidden = YES;
+        popupController.tearOffButton.hidden = YES;
+        popupController.tabPanelButton.hidden = YES;
+        popupController.maxSizeButton.hidden = YES;
+    }
+}
+
 
 /*
 - (void)mouseDown:(NSEvent *)theEvent

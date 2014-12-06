@@ -19,11 +19,12 @@ NSString* kNonServer = @"    --    ";
 
 @implementation AMSyphonViewController
 {
-    NSMutableDictionary*  _syServers;
-    SyphonClient*  _syClient;
-    NSMutableDictionary* _processCounter;
+    NSDictionary*           _curServer;
+    NSMutableDictionary*    _syServers;
+    SyphonClient*           _syClient;
+    NSMutableDictionary*    _processCounter;
     
-    NSString *_currSelection;
+    NSString *              _currSelection;
     
     NSTimeInterval fpsStart;
     NSUInteger fpsCount;

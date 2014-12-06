@@ -272,9 +272,9 @@
 
 }
 
-
-
-- (void)createProgram {
+-(void)elementClicked:(NSArray *)eleId{
+    //[self.testView setHidden:!self.testView.hidden];
+    [self displayArchiveProgram];
     
     
     //display test float panel
@@ -327,13 +327,8 @@
     
 }
 
--(void)elementClicked:(NSNumber*)abc{
 
 
-    NSLog(@"invoke from web click");
-    [self createProgram];
-
-}
 
 - (IBAction)onStaticTabClick:(id)sender {
     [self pushDownButton:self.staticTab];

@@ -48,7 +48,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-                // Initialization code here.
     }
     return self;
 }
@@ -75,7 +74,6 @@
      [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
 }
 - (IBAction)largerButtonClick:(id)sender {
-    
     self.archiveScale+=0.1f;
     NSString *scriptString=[NSString stringWithFormat:@"$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";document.documentElement.style.zoom = \"%f\"",self.archiveScale,self.archiveScale ];
     [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
@@ -89,9 +87,6 @@
     self.showingTabsCount=2;
     
 }
-
-
-
 
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     if( [sender isEqual:self.archiveWebView] ) {
@@ -258,38 +253,9 @@
     else{
         self.archiveWebView.preferences.userStyleSheetEnabled = NO;
     }
-    
     [[self.archiveWebView windowScriptObject] setValue:self forKey:@"objcConnector"];
-//    [[self.archiveWebView windowScriptObject] setValue:[NSWebScriptBridge getWebScriptBridge] forKey:@"yourBridge"];
-    
     self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-    
 }
-
-
-
-//- (BOOL)webView:(UIWebView *)webView2
-//shouldStartLoadWithRequest:(NSURLRequest *)request
-// navigationType:(UIWebViewNavigationType)navigationType {
-//    
-//    NSString *requestString = [[request URL] absoluteString];
-//    NSArray *components = [requestString componentsSeparatedByString:@":"];
-//    
-//    if ([components count] > 1 &&
-//        [(NSString *)[components objectAtIndex:0] isEqualToString:@"myapp"]) {
-//        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"myfunction"])
-//        {
-//            
-//            NSLog([components objectAtIndex:2]); [[Airship shared] displayStoreFront]; //<- This is the code to open the Store
-//            NSLog([components objectAtIndex:3]); // param2
-//            // Call your method in Objective-C method using the above...
-//        }
-//        return NO;
-//    }
-//    
-//    return YES; // Return YES to make sure regular navigation works as expected.
-//}
-
 
 - (void)windowDidLoad{
 

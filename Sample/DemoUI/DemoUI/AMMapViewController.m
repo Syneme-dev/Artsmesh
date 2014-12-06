@@ -206,18 +206,9 @@
     return self.youTubeVideo;
 }
 
--(void)displayArchiveProgram {
-    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
-    
-    //[_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/gm9a28J67E4" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
-    
-    [self loadProfileWebView];
-    
-    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
-    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
-}
 
--(void) loadProfileWebView {
+
+-(void) loadProfileWebView:(NSString*)userName {
     WebView *profile_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
     
     [profile_webview setDrawsBackground:NO];
@@ -225,7 +216,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *profile_url = [NSURL URLWithString:
-                          [NSString stringWithFormat:@"%@/ken?fromMac=true",statusNetURLString ]];
+                          [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURLString ,userName]];
     [profile_webview.mainFrame loadRequest:
      [NSURLRequest requestWithURL:profile_url]];
     
@@ -250,11 +241,6 @@
 
 
 -(void)gotoUsersPage{
-//    NSURL *baseURL =
-//    [NSURL URLWithString:
-//     [NSString stringWithFormat:@"%@/directory/users?fromMac=true",statusNetURL ]];
-//    [self.socialWebTab.mainFrame loadRequest:
-//     [NSURLRequest requestWithURL:baseURL]];
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
@@ -324,7 +310,14 @@
 }
 
 -(void)elementClicked:(NSString *)userName{
-    [self displayArchiveProgram];
+    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+    
+    //[_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/gm9a28J67E4" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
+    
+    [self loadProfileWebView:userName];
+    
+    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
     
     //Create content view that will appear inside window
     NSTextView *testContent = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 400, 300)];

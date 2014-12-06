@@ -90,9 +90,32 @@
     
 }
 
+
+
+
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     if( [sender isEqual:self.archiveWebView] ) {
         [listener use];
+        NSString *requestString = [[request URL] absoluteString];
+        NSArray *components = [requestString componentsSeparatedByString:@":"];
+        
+        if ([components count] > 1 &&
+            [(NSString *)[components objectAtIndex:0] isEqualToString:@"app"]) {
+            
+            if([(NSString *)[components objectAtIndex:1] isEqualToString:@"nodeClick"])
+            {
+                if ([components count]==4&&[[components objectAtIndex:2] isEqualToString:@"group"]) {
+                    NSString *groupName=[components objectAtIndex:3];
+                    [self groupClicked:groupName];
+                }
+                else{
+                NSString *nodeName=[components objectAtIndex:2];
+                [self elementClicked:nodeName];
+                }
+            }
+
+        }
+        
     }
     else {
         [[NSWorkspace sharedWorkspace] openURL:[actionInformation objectForKey:WebActionOriginalURLKey]];
@@ -258,6 +281,30 @@
 }
 
 
+
+//- (BOOL)webView:(UIWebView *)webView2
+//shouldStartLoadWithRequest:(NSURLRequest *)request
+// navigationType:(UIWebViewNavigationType)navigationType {
+//    
+//    NSString *requestString = [[request URL] absoluteString];
+//    NSArray *components = [requestString componentsSeparatedByString:@":"];
+//    
+//    if ([components count] > 1 &&
+//        [(NSString *)[components objectAtIndex:0] isEqualToString:@"myapp"]) {
+//        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"myfunction"])
+//        {
+//            
+//            NSLog([components objectAtIndex:2]); [[Airship shared] displayStoreFront]; //<- This is the code to open the Store
+//            NSLog([components objectAtIndex:3]); // param2
+//            // Call your method in Objective-C method using the above...
+//        }
+//        return NO;
+//    }
+//    
+//    return YES; // Return YES to make sure regular navigation works as expected.
+//}
+
+
 - (void)windowDidLoad{
 
 }
@@ -272,12 +319,12 @@
 
 }
 
--(void)elementClicked:(NSArray *)eleId{
-    //[self.testView setHidden:!self.testView.hidden];
+-(void)groupClicked:(NSString *)groupName{
+    NSLog (groupName);
+}
+
+-(void)elementClicked:(NSString *)userName{
     [self displayArchiveProgram];
-    
-    
-    //display test float panel
     
     //Create content view that will appear inside window
     NSTextView *testContent = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 400, 300)];

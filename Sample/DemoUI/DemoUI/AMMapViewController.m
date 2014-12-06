@@ -28,6 +28,8 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "UIFrameWork/AMFoundryFontView.h"
 #import "AMGroupCreateViewController.h"
+#import "AMFloatPanelViewController.h"
+#import "AMFloatPanelView.h"
 
 @interface AMMapViewController ()
 {
@@ -181,6 +183,8 @@
     }
     
     [[self.archiveWebView windowScriptObject] setValue:self forKey:@"objcConnector"];
+//    [[self.archiveWebView windowScriptObject] setValue:[NSWebScriptBridge getWebScriptBridge] forKey:@"yourBridge"];
+    
     self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     
 }
@@ -200,9 +204,67 @@
 
 }
 
--(void)elementClicked:(NSArray *)eleId{
-    [self.testView setHidden:!self.testView.hidden];
+
+
+- (void)createProgram {
+    
+    
+    //display test float panel
+    
+    //Create content view that will appear inside window
+    NSTextView *testContent = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 400, 300)];
+    
+    [testContent setString:@"Here's some content"];
+    
+    //Create float panel controller + view
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
+    AMFloatPanelViewController *_floatPanelViewController = fpc;
+    _floatPanelViewController.panelTitle = @"Test Window";
+    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
+    
+    [fpc.panelContent addSubview:testContent];
+    
+    //Create window to hold everything
+    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, testContent.frame.size.width, (testContent.frame.size.height + 41) + floatPanel.borderThickness);
+    NSWindow *_testWindow  = [[NSWindow alloc] initWithContentRect:frame
+                                               styleMask:NSBorderlessWindowMask
+                                                 backing:NSBackingStoreBuffered
+                                                   defer:NO];
+    fpc.containerWindow = _testWindow;
+    _testWindow.hasShadow = YES;
+    [_testWindow.contentView addSubview:floatPanel];
+    
+    [_testWindow.contentView setAutoresizesSubviews:YES];
+    [testContent setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    // Add sizing constraints to window
+    _floatPanelViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : _floatPanelViewController.view}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : _floatPanelViewController.view}];
+    [_testWindow.contentView addConstraints:verticalConstraints];
+    [_testWindow.contentView addConstraints:horizontalConstraints];
+    
+    [_testWindow.contentView setAutoresizesSubviews:YES];
+    [_floatPanelViewController.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    // Display test Window
+    [_testWindow setBackgroundColor:[NSColor blueColor]];
+    [_testWindow makeKeyAndOrderFront:self];
+    
+}
+
+-(void)elementClicked:(NSNumber*)abc{
+
+
     NSLog(@"invoke from web click");
+    [self createProgram];
+
 }
 
 - (IBAction)onStaticTabClick:(id)sender {

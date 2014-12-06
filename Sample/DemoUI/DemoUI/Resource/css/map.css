@@ -15,7 +15,12 @@
     display:none;
 }
 #aside_primary_wrapper,#core,#wrap{
-    width:100% !important;
+/*    width:100% !important;*/
+}
+
+#circle {
+    top:200px;
+/*    left:30%;*/
 }
 #content h1{
     display:none;

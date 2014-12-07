@@ -74,6 +74,8 @@
 		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
+		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
@@ -380,6 +382,9 @@
 		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
+		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
+		4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonTearOffController.m; sourceTree = "<group>"; };
+		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
@@ -1087,6 +1092,9 @@
 			children = (
 				CE486A951A280CB900D35B82 /* AMSyphonManager.h */,
 				CE486A961A280CB900D35B82 /* AMSyphonManager.m */,
+				4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */,
+				4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */,
+				4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */,
 				CE486A971A280CB900D35B82 /* AMSyphonView.h */,
 				CE486A981A280CB900D35B82 /* AMSyphonView.m */,
 				CE486A991A280CB900D35B82 /* AMSyphonViewController.h */,
@@ -1262,6 +1270,7 @@
 				CEC2FC5A196588FD00AFD309 /* AMGroupPanelLabelCellController.xib in Resources */,
 				2D77D2CE1A04A24800C30F13 /* AMFloatPanelView.xib in Resources */,
 				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
+				4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
@@ -1430,6 +1439,7 @@
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
+				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				266CE256197E41F700D8145B /* AMGroupPanelTableCellView.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */,

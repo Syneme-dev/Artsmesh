@@ -35,6 +35,7 @@
 @interface AMMapViewController ()
 {
     NSString* statusNetURLString;
+    NSString* statusNetGroupURLString;
     NSString* statusNetProfileURLString;
 }
 
@@ -204,8 +205,10 @@
 
 -(void) loadGroupWebView:(NSString *)groupName {
     WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [group_webview setFrameLoadDelegate:self];
     
     [group_webview setDrawsBackground:NO];
+    _floatWindowWebView = group_webview;
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
@@ -235,13 +238,16 @@
 
 -(void) loadProfileWebView:(NSString*)userName {
     WebView *profile_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [profile_webview setFrameLoadDelegate:self];
     
     [profile_webview setDrawsBackground:NO];
+    _floatWindowWebView = profile_webview;
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *profile_url = [NSURL URLWithString:
                           [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURLString ,userName]];
+    statusNetProfileURLString = [profile_url absoluteString];
     [profile_webview.mainFrame loadRequest:
      [NSURLRequest requestWithURL:profile_url]];
     
@@ -270,21 +276,31 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    NSLog(@"webview finished loading frame");
+    
     NSString *url= sender.mainFrameURL;
-    self.archiveWebView.preferences.userStyleSheetEnabled = YES;
+    sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-   if([url hasPrefix:statusNetURLString]){
+    
+    
+    if ( statusNetProfileURLString && [url hasPrefix:statusNetProfileURLString]) {
+        [sender setPreferencesIdentifier:@"floatWindowPrefs"];
+        path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+        
+    }
+    else if ( statusNetGroupURLString && [url hasPrefix:statusNetGroupURLString]) {
+        [sender setPreferencesIdentifier:@"floatWindowPrefs"];
+        path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+        
+    }
+    else if([url hasPrefix:statusNetURLString]){
         path=[path stringByAppendingString:@"/Contents/Resources/map.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     }
-   else if([url hasPrefix:statusNetProfileURLString]) {
-        path=[path stringByAppendingString:@"/Contents/Resources/web.css"];
-   }
-    else{
-        self.archiveWebView.preferences.userStyleSheetEnabled = NO;
+    else {
+        sender.preferences.userStyleSheetEnabled = NO;
     }
-    [[self.archiveWebView windowScriptObject] setValue:self forKey:@"objcConnector"];
-    self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 }
 
 - (void)windowDidLoad{

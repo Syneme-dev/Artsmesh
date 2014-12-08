@@ -9,6 +9,7 @@
 #import "AMGroupPreviewPanelView.h"
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
 
 @implementation AMGroupPreviewPanelView
 
@@ -42,8 +43,8 @@ static NSColor *colorFromRGB(unsigned char r, unsigned char g, unsigned char b, 
 -(void)setDescription:(AMLiveGroup *)theGroup {
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     
-    NSFont* textFieldFont =  [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:5 size:12.0];
-    NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:textFieldFont};
+    NSFont* textFieldFont =  [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:5 size:12.0];
+    NSDictionary* attr = @{NSForegroundColorAttributeName:UI_Text_Color_Gray, NSFontAttributeName:textFieldFont};
     NSMutableAttributedString* groupDesc = [[NSMutableAttributedString alloc] initWithString:theGroup.description attributes:attr];
     
     NSTextView *newTextView = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, self.groupPreviewPanelController.descScrollView.bounds.size.width, 1000)];

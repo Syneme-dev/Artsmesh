@@ -10,6 +10,8 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLiveMapProgramPanelTextView.h"
 
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
+
 @implementation AMLiveMapProgramContentView
 
 - (id)initWithFrame:(NSRect)frame
@@ -47,7 +49,7 @@
     [self.allFields removeAllObjects];
     
     NSString *theString = theGroup.groupName;
-    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
+    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
     
@@ -79,7 +81,7 @@
     if (self.enclosingScrollView) {
         [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
         
-        [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+        [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
         
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
@@ -88,7 +90,7 @@
                 [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             if ( [theUser.description length] > 0 ) {
-                [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body-italic"]];
+                [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body"]];
             }
             
         }
@@ -98,7 +100,7 @@
 }
 
 - (void)addTextView:(NSString *)theString withIndent:(double) theIndent andFont:(NSFont *)theFont {
-    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName:theFont};
+    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:theFont};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
     double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;

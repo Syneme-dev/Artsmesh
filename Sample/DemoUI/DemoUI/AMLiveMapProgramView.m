@@ -17,7 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        self.backgroundColor = [NSColor redColor];
+        self.backgroundColor = UI_Color_gray;
     }
     return self;
 }

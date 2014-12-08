@@ -27,6 +27,8 @@
 #import "AMStaticGroupDataSource.h"
 #import "AMStatusNet/AMStatusNet.h"
 
+#define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
+
 @interface AMLiveMapView ()
 {
     NSPoint _center;
@@ -888,7 +890,7 @@ AMWorldMap *worldMap;
 
 - (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {
     
-    [theTextView setTextColor:[NSColor whiteColor]];
+    [theTextView setTextColor:UI_Color_gray];
     [theTextView setFont:theFont];
     [theTextView setAlignment: NSCenterTextAlignment];
     

@@ -120,6 +120,15 @@
     _client = NULL;
 }
 
+-(float)cpuUsage
+{
+    if(self.isOpen){
+        return jack_cpu_load(_client);
+    }
+    
+    return 0.0;
+}
+
 -(BOOL)connectSrc:(NSString*)src toDest:(NSString*)dest
 {
     const char* srcPort = [src cStringUsingEncoding:NSUTF8StringEncoding];

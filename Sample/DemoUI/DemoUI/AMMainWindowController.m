@@ -80,6 +80,8 @@
     Boolean isWindowLoading;
 
     float containerWidth;
+    
+    NSTimer *_jackCpuTimer;
 }
 
 - (NSView *)containerView {
@@ -102,9 +104,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jackCPUUsageChanged:) name:AM_JACK_CPU_USAGE_NOTIFICATION object:nil];
-
+    
         [[AMTimer shareInstance] addObserver:self
                                   forKeyPath:@"state"
                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -768,13 +768,27 @@
 -(void)jackStarted:(NSNotification*)notification
 {
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+    self.jackCPUUsageBar.hidden = NO;
+    self.jackCpuUageNum.hidden = NO;
+    
+    _jackCpuTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(queryJackCpu) userInfo:nil repeats:YES];
 }
 
 -(void)jackStopped:(NSNotification*)notification
 {    
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
-    [self.jackCPUUsageBar setCpuUsage:0.0];
-    self.jackCpuUageNum.stringValue = @"";
+    self.jackCPUUsageBar.hidden = YES;
+    self.jackCpuUageNum.hidden = YES;
+    
+    [_jackCpuTimer invalidate];
+    _jackCpuTimer = nil;
+}
+
+-(void)queryJackCpu
+{
+    float cpuUsage = [[AMAudio sharedInstance ] jackCpuUsage];
+    [self.jackCPUUsageBar setCpuUsage:cpuUsage];
+    self.jackCpuUageNum.stringValue = [NSString stringWithFormat:@"%.2f", cpuUsage];
 }
 
 -(void)oscStarted:(NSNotification*)notification
@@ -786,14 +800,6 @@
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
 }
-
--(void)jackCPUUsageChanged:(NSNotification*)notification
-{
-    float usage = [notification.object floatValue];
-    [self.jackCPUUsageBar setCpuUsage:usage];
-    self.jackCpuUageNum.stringValue = [NSString stringWithFormat:@"%.2f", usage];
-}
-
 
 #pragma mark -
 #pragma   mark KVO

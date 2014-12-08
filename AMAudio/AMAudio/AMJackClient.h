@@ -22,5 +22,7 @@
 -(BOOL)connectSrc:(NSString*)src toDest:(NSString*)dest;
 -(BOOL)disconnectChannel:(NSString*)src fromDest:(NSString*) dest;
 
+-(float)cpuUsage;
+
 
 @end

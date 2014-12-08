@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMSyphonTearOffController : NSViewController
-
+- (void)selectNewServer:(NSDictionary *) aServer;
 @end

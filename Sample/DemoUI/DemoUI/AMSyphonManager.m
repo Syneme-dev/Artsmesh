@@ -10,8 +10,8 @@
 @implementation AMSyphonManager
 {
     NSMutableArray* _syClients;
-    AMSyphonViewRouterController* _syServer;
-    AMSyphonViewRouterController* _syTearOff;
+    AMSyphonViewRouterController*   _syServer;
+    AMSyphonTearOffController*      _syTearOff;
 }
 
 - (id) initWithClientCount : (int) cnt
@@ -28,8 +28,8 @@
         
         _syServer = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
         
-        _syTearOff = [[AMSyphonViewRouterController alloc] initWithNibName:@"AMSyphonViewRouterController" bundle:myBundle];
-        [_syTearOff stopRouter];
+        _syTearOff = [[AMSyphonTearOffController alloc] initWithNibName:@"AMSyphonTearOffController" bundle:myBundle];
+    
         
         [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers" options:NSKeyValueObservingOptionNew context:nil];
     }
@@ -106,9 +106,10 @@
         _syServer.currentServerName = serverName;
         [_syServer start];
         
-        //tearOff 
-        _syTearOff.currentServerName = serverName;
-        [_syTearOff start];
+        //tearOff
+        [_syTearOff selectNewServer:[_syServer currentServer]];
+  //      _syTearOff.currentServerName = serverName;
+  //      [_syTearOff start];
     }
 }
 

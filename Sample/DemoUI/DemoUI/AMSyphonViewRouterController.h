@@ -13,6 +13,7 @@
 
 @property BOOL routing;
 @property NSString* currentServerName;
+-(NSDictionary*) currentServer;
 
 -(void)updateServerList;
 

@@ -32,7 +32,8 @@
     AMArtsmeshClient* _client;
     
     NSTimer* _jackInfoTimer;
-    NSMutableArray *_mixerControllers;
+    NSTimer *_meterTimer;
+    NSMutableDictionary *_mixerCtrls;
 }
 
 - (void)viewDidLoad {
@@ -103,7 +104,7 @@
         return NO;
     };
     
-    _mixerControllers = [[NSMutableArray alloc] init];
+    _mixerCtrls = [[NSMutableDictionary alloc] init];
     NSArray* ports = [_client allPorts];
     
     for (AMJackPort* p in ports) {
@@ -114,7 +115,7 @@
             p.volume = mixerCtrl.volume;
             
             [self.mixerCollectionView addViewItem:mixerCtrl.view];
-            [_mixerControllers addObject:mixerCtrl];
+            [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
     }
     
@@ -126,7 +127,7 @@
             p.volume = mixerCtrl.volume;
             
             [self.outputMixerCollectionView addViewItem:mixerCtrl.view];
-            [_mixerControllers addObject:mixerCtrl];
+            [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
     }
     
@@ -134,11 +135,26 @@
                                                       target:self
                                                     selector:@selector(updateJackInfo)
                                                     userInfo:nil repeats:YES];
+    _meterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                   target:self
+                                                 selector:@selector(updateChannelPeak)
+                                                 userInfo:nil
+                                                  repeats:YES];
     
     _client.delegate = self;
     
     return YES;
     
+}
+
+-(void)updateChannelPeak
+{
+    
+    NSArray* ports = [_client allPorts];
+    for (AMJackPort* p in ports) {
+        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:p.name];
+        ctrl.meter = p.tempPeak;
+    }
 }
 
 -(AMMixerViewController *)createMixerByPort:(AMJackPort *)p
@@ -185,6 +201,9 @@
 
 -(void)stopClient
 {
+    [_meterTimer invalidate];
+    _meterTimer = nil;
+    
     [_jackInfoTimer invalidate];
     _jackInfoTimer = nil;
     
@@ -193,11 +212,12 @@
     [self.mixerCollectionView removeAllItems];
     [self.outputMixerCollectionView removeAllItems];
     
-    for (AMMixerViewController* mixerCtrl in _mixerControllers) {
-        [mixerCtrl removeObserver:self forKeyPath:@"volume"];
+    for (NSString *channName in _mixerCtrls) {
+        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:channName];
+        [ctrl removeObserver:self forKeyPath:@"volume"];
     }
     
-    [_mixerControllers removeAllObjects];
+    [_mixerCtrls removeAllObjects];
 }
 
 
@@ -207,29 +227,8 @@
     NSString* strSampleRate = [NSString stringWithFormat:@"%d", [_client sampleRate]];
     self.bufferSize.stringValue = strBufSize;
     self.sampleRate.stringValue = strSampleRate;
-    
-    float cpuUsage = [_client cpuLoad];
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:AM_JACK_CPU_USAGE_NOTIFICATION
-     object:[NSNumber numberWithFloat:cpuUsage]];
 }
 
-
--(void)port:(AMJackPort *)port currentPeak:(float)peak
-{
-    for (AMMixerViewController* mc in _mixerControllers) {
-        
-        NSString *portName = [port.name uppercaseStringWithLocale:[NSLocale  currentLocale]];
-        if ([mc.channName isEqualToString:portName]){
-            mc.meter = peak;
-            break;
-        }
-    }
-}
-
--(void)jackShutDownClient:(AMArtsmeshClient *)client{
-
-}
 
 
 @end

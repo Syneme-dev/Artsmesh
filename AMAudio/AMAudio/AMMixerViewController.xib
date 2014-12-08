@@ -42,7 +42,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="t43-v9-7S5" customClass="AMBigBlueButton">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="t43-v9-7S5" customClass="AMAudioMuteButton">
                     <rect key="frame" x="25" y="7" width="36" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="Xkj-pi-BEC"/>
@@ -52,6 +52,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="mute:" target="-2" id="sYx-ew-YLu"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

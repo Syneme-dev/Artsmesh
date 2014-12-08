@@ -9,6 +9,7 @@
 #import "AMMixerViewController.h"
 #import "AMAudioMeter.h"
 #import "AMAudioSlider.h"
+#import "AMAudioMuteButton.h"
 
 @interface AMMixerViewController ()<AMAudioSliderDelegate>
 @property (weak) IBOutlet AMAudioSlider *volSlider;
@@ -76,6 +77,18 @@
     self.volSlider.valueRange = range;
 }
 
+- (IBAction)mute:(id)sender
+{
+//    AMAudioMuteButton *btn = (AMAudioMuteButton *)sender;
+//    if (btn.title isEqualToString:@"mute") {
+//        self.volSlider.val
+//    }
+//    
+//    
+//    self.volume = 0.0;
+//    
+//    [(AMAudioMuteButton *)sender setButtonOnState:YES];
+}
 
 
 @end

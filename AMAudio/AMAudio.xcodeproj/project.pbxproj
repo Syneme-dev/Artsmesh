@@ -23,6 +23,8 @@
 		26F2C30E19B9FD61001261F0 /* AMJackTripConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */; };
 		26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */; };
 		26F2C31019B9FD61001261F0 /* AMJackTripConfigController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */; };
+		4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A3D17431A36138600D19720 /* AMAudioMuteButton.h */; };
+		4A3D17461A36138600D19720 /* AMAudioMuteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D17441A36138600D19720 /* AMAudioMuteButton.m */; };
 		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
 		4AC8A2491A1046BE006E534A /* AMVolumeBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2471A1046BE006E534A /* AMVolumeBar.h */; };
 		4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2481A1046BE006E534A /* AMVolumeBar.m */; };
@@ -123,6 +125,8 @@
 		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackTripConfigController.h; path = AMAudio/AMJackTripConfigController.h; sourceTree = "<group>"; };
 		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackTripConfigController.m; path = AMAudio/AMJackTripConfigController.m; sourceTree = "<group>"; };
 		26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMJackTripConfigController.xib; path = AMAudio/AMJackTripConfigController.xib; sourceTree = "<group>"; };
+		4A3D17431A36138600D19720 /* AMAudioMuteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMuteButton.h; sourceTree = "<group>"; };
+		4A3D17441A36138600D19720 /* AMAudioMuteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMuteButton.m; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		4AC8A2471A1046BE006E534A /* AMVolumeBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVolumeBar.h; sourceTree = "<group>"; };
 		4AC8A2481A1046BE006E534A /* AMVolumeBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVolumeBar.m; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 				4AF38F741A2631A1008FD2A3 /* AMAudioSlider.m */,
 				4AF38F751A2631A1008FD2A3 /* AMAudioMeter.h */,
 				4AF38F761A2631A1008FD2A3 /* AMAudioMeter.m */,
+				4A3D17431A36138600D19720 /* AMAudioMuteButton.h */,
+				4A3D17441A36138600D19720 /* AMAudioMuteButton.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
 				CE151F3219B01372002D2AD4 /* thread.h in Headers */,
 				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
+				4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */,
 				CE151F3319B01372002D2AD4 /* transport.h in Headers */,
 				CE151F2F19B01372002D2AD4 /* session.h in Headers */,
 				D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */,
@@ -507,6 +514,7 @@
 				4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
 				4AF38F7F1A2631A1008FD2A3 /* AMAudioSlider.m in Sources */,
+				4A3D17461A36138600D19720 /* AMAudioMuteButton.m in Sources */,
 				26A11B2419C143A300796327 /* AMJackManager.m in Sources */,
 				26A11B2619C143A300796327 /* AMJacktripConfigs.m in Sources */,
 				CE68805A19B94F2A0062211C /* AMRouteViewController.m in Sources */,

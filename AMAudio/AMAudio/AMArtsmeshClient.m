@@ -97,24 +97,17 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
     if (cl != nil) {
         for (PortPair *pp in cl.portPairs) {
             
-            float peak = 0.0;
-            float vol = 0.0;
             jack_default_audio_sample_t *inbuf = jack_port_get_buffer (pp.inputPort.port_handle, nframes);
             jack_default_audio_sample_t *outbuf = jack_port_get_buffer (pp.outputPort.port_handle, nframes);
             
-            if (!pp.inputPort.isMute) {
-                vol = pp.inputPort.volume;
-            }
-
-            //meter * volume
-            for (int i = 0; i < nframes; i++) {
-                outbuf[i] = inbuf[i] * vol;
-                peak = peak > inbuf[i] ? peak: inbuf[i];
-            }
+            pp.inputPort.tempPeak = inbuf[0] * pp.inputPort.volume;
+            pp.outputPort.tempPeak = outbuf[0] * pp.outputPort.volume;
             
-            if ([cl.delegate respondsToSelector:@selector(port:currentPeak:)]) {
-                [cl.delegate port:pp.inputPort currentPeak:peak];
+            for (int i = 0; i < nframes; i++) {
+                outbuf[i] = inbuf[i] * pp.inputPort.volume * outbuf[0] * pp.outputPort.volume;
             }
+        
+            //memcpy(outbuf, inbuf, nframes * sizeof(jack_default_audio_sample_t));
         }
     }
     

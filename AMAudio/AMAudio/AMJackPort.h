@@ -19,8 +19,8 @@ typedef enum _AMJackPortType{
 @property NSString* name;
 @property AMJackPortType portType;
 
-@property BOOL isMute;
 @property float volume;
+@property float tempPeak;
 
 @property jack_port_t *port_handle;
 

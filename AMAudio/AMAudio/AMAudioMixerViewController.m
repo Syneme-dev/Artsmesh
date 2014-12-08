@@ -14,10 +14,11 @@
 #import "AMMixerViewController.h"
 #import "AMMixerView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMBigBlueButton.h"
 
 @interface AMAudioMixerViewController ()<AMJackClientDelegate>
 
-@property (weak) IBOutlet NSButton *startMixerBtn;
+@property (weak) IBOutlet AMBigBlueButton *startMixerBtn;
 @property (weak) IBOutlet NSTextField *bufferSize;
 @property (weak) IBOutlet NSTextField *sampleRate;
 @property (weak) IBOutlet AMCollectionView *mixerCollectionView;
@@ -40,6 +41,20 @@
 //    [self.mixerCollectionView setBackgroudColor:[NSColor redColor]];
 //    [self.outputMixerCollectionView setBackgroudColor:[NSColor blueColor]];
     self.mixerCollectionView.itemGap = 1;
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(jackStopped:)
+     name:AM_JACK_STOPPED_NOTIFICATION
+     object:nil];
+}
+
+-(void)jackStopped:(NSNotification*)notification
+{
+    if(_mixerStarted)
+    {
+        [self.startMixerBtn performClick:nil];
+    }
 }
 
 -(void)dealloc
@@ -53,10 +68,12 @@
     if (_mixerStarted){
         [self stopClient];
         self.startMixerBtn.title = @"Start" ;
+         [self.startMixerBtn setButtonOnState:NO];
         _mixerStarted = NO;
     }else{
         if ([self startClient]){
             self.startMixerBtn.title = @"Stop" ;
+            [self.startMixerBtn setButtonOnState:YES];
             _mixerStarted = YES;
         }
     }

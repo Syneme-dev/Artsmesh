@@ -10,4 +10,6 @@
 
 @interface AMBigBlueButton : NSButton
 
+-(void)setButtonOnState:(BOOL)onState;
+
 @end

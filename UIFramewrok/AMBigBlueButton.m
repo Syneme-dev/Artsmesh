@@ -10,15 +10,18 @@
 #import "AMButtonHandler.h"
 
 @implementation AMBigBlueButton
+{
+    BOOL _onState;
+}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    if (self.state) {
+    if (!_onState) {
         [UI_Color_blue set];
     }else{
-        [[NSColor redColor] set];
+        [[NSColor colorWithCalibratedRed:20.0/255.0 green:150.0/255.0 blue:63.0/255.0 alpha:1] set];
     }
     
     NSRect rect = self.bounds;
@@ -32,6 +35,12 @@
 -(void)viewWillDraw
 {
     [AMButtonHandler changeTabTextColor:self toColor:UI_Color_blue];
+}
+
+-(void)setButtonOnState:(BOOL)onState
+{
+    _onState = onState;
+    [self setNeedsDisplay];
 }
 
 

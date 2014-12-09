@@ -23,7 +23,7 @@
                         <constraint firstAttribute="height" constant="22" id="pQa-ox-zTm"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" id="9lN-vn-53f">
-                        <font key="font" metaFont="system" size="18"/>
+                        <font key="font" metaFont="system" size="16"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

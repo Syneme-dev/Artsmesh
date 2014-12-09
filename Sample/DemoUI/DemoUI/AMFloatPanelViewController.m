@@ -16,13 +16,14 @@
 
 @implementation AMFloatPanelViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSize:(NSSize)theSize andTitle:(NSString *)theTitle
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSize:(NSSize)theSize andTitle:(NSString *)theTitle andTitleColor:(NSColor *) theTitleColor
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.        
         self.panelTitle = theTitle;
-        
+        self.panelTitleColor = theTitleColor;
+                
         // Set up the float panel view and window that will hold it
         AMFloatPanelView *floatPanel = (AMFloatPanelView *) self.view;
         [self.view setFrameSize:NSMakeSize(theSize.width, theSize.height+floatPanel.borderThickness)];

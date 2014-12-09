@@ -21,11 +21,14 @@
 
 @property (strong) IBOutlet AMFlippedView *panelContent;
 
+@property (strong) IBOutlet NSTextField *titleTextField;
+
 @property NSString *panelTitle;
+@property NSColor *panelTitleColor;
 @property NSWindow *containerWindow;
 //@property BOOL isClosed;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSize:(NSSize)theSize andTitle:(NSString *)theTitle;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSize:(NSSize)theSize andTitle:(NSString *)theTitle andTitleColor:(NSColor *)theTitleColor;
 
 - (IBAction)closePanel:(id)sender;
 - (IBAction)toggleFullScreen:(id)sender;

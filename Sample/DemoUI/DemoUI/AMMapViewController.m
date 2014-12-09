@@ -31,6 +31,7 @@
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
 
 @interface AMMapViewController ()
 {
@@ -187,7 +188,7 @@
     //display test float panel
     
     //Create float panel controller + view
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(600, 300) andTitle:@"ARCHIVE"];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(600, 300) andTitle:@"ARCHIVE" andTitleColor:UI_Text_Color_Gray];
     _floatPanelViewController = fpc;
     
     _archiveFloatWindow = fpc.containerWindow;

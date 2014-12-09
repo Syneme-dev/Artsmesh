@@ -112,8 +112,6 @@
         if (p.portType == AMJackPort_Source) {
             
             AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
-            p.volume = mixerCtrl.volume;
-            
             [self.mixerCollectionView addViewItem:mixerCtrl.view];
             [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
@@ -124,8 +122,6 @@
         if (p.portType == AMJackPort_Destination) {
             
             AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
-            p.volume = mixerCtrl.volume;
-            
             [self.outputMixerCollectionView addViewItem:mixerCtrl.view];
             [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
@@ -152,8 +148,9 @@
     
     NSArray* ports = [_client allPorts];
     for (AMJackPort* p in ports) {
-        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:p.name];
-        ctrl.meter = p.tempPeak;
+        NSString *portName = [p.name uppercaseString];
+        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:portName];
+        ctrl.meter = p.tempPeak * 100;
     }
 }
 
@@ -165,37 +162,14 @@
     mixerCtrl.meter = 0.0;
     
     [mixerCtrl setVolumeRange:NSMakeRange(0, 1)];
-    mixerCtrl.volume = 0.0;
-    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
-    
+    mixerCtrl.volume = 0.5;
+    [(AMMixerView*)mixerCtrl.view
+     setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
+    mixerCtrl.jackport = p;
     mixerCtrl.channName = p.name;
-    [mixerCtrl addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew context:nil];
+    p.volume = mixerCtrl.volume;
     
     return mixerCtrl;
-}
-
-
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMMixerViewController class]]){
-        
-        AMMixerViewController* mixerCtrl = (AMMixerViewController*)object;
-        
-        if ([keyPath isEqualToString:@"volume"]){
-            NSArray* ports = [_client allPorts];
-            for (AMJackPort* p in ports) {
-                if ([p.name isEqualToString:mixerCtrl.channName]) {
-                
-                    p.volume = mixerCtrl.volume;
-                }
-            }
-        }
-    }
 }
 
 

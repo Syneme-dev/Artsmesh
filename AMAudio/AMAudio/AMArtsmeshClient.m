@@ -100,12 +100,14 @@ int Data_ProcessCallback (jack_nframes_t nframes, void *arg)
             jack_default_audio_sample_t *inbuf = jack_port_get_buffer (pp.inputPort.port_handle, nframes);
             jack_default_audio_sample_t *outbuf = jack_port_get_buffer (pp.outputPort.port_handle, nframes);
             
-            pp.inputPort.tempPeak = inbuf[0] * pp.inputPort.volume;
-            pp.outputPort.tempPeak = outbuf[0] * pp.outputPort.volume;
+            
             
             for (int i = 0; i < nframes; i++) {
-                outbuf[i] = inbuf[i] * pp.inputPort.volume * outbuf[0] * pp.outputPort.volume;
+                outbuf[i] = inbuf[i] * pp.inputPort.volume * pp.outputPort.volume;
             }
+            
+            pp.inputPort.tempPeak = inbuf[nframes/2] * pp.inputPort.volume;
+            pp.outputPort.tempPeak = outbuf[nframes/2] * pp.outputPort.volume;
         
             //memcpy(outbuf, inbuf, nframes * sizeof(jack_default_audio_sample_t));
         }

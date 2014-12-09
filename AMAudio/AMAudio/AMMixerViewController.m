@@ -19,9 +19,6 @@
 @end
 
 @implementation AMMixerViewController
-{
-    float _volume;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +30,7 @@
 -(void)slider:(AMAudioSlider *)slider ValueChanged:(float)value
 {
     self.volume = value;
+    self.jackport.volume = value;
 }
 
 -(void)setChannName:(NSString *)channName
@@ -43,18 +41,6 @@
 
 -(NSString *)channName{
     return self.channNameField.stringValue;
-}
-
--(void)setVolume:(float)volume
-{
-    [self willChangeValueForKey:@"volume"];
-    _volume = volume;
-    [self didChangeValueForKey:@"volume"];
-}
-
--(float)volume
-{
-    return _volume;
 }
 
 -(void)setMeter:(float)meter
@@ -79,15 +65,16 @@
 
 - (IBAction)mute:(id)sender
 {
-//    AMAudioMuteButton *btn = (AMAudioMuteButton *)sender;
-//    if (btn.title isEqualToString:@"mute") {
-//        self.volSlider.val
-//    }
-//    
-//    
-//    self.volume = 0.0;
-//    
-//    [(AMAudioMuteButton *)sender setButtonOnState:YES];
+    AMAudioMuteButton *btn = (AMAudioMuteButton *)sender;
+    if ([btn.title isEqualToString:@"Mute"]) {
+        btn.title = @"Unmute";
+        [(AMAudioMuteButton *)sender setButtonOnState:YES];
+        self.jackport.volume = 0.0;
+    }else{
+        btn.title = @"Mute";
+        [(AMAudioMuteButton *)sender setButtonOnState:NO];
+        self.jackport.volume = self.volume;
+    }
 }
 
 

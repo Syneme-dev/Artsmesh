@@ -188,7 +188,7 @@
     //display test float panel
     
     //Create float panel controller + view
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(600, 300) andTitle:@"ARCHIVE" andTitleColor:UI_Text_Color_Gray];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(400, 300) andTitle:@"ARCHIVE" andTitleColor:UI_Text_Color_Gray];
     _floatPanelViewController = fpc;
     
     _archiveFloatWindow = fpc.containerWindow;
@@ -285,13 +285,13 @@
     
     if ( statusNetProfileURLString && [url hasPrefix:statusNetProfileURLString]) {
         [sender setPreferencesIdentifier:@"floatWindowPrefs"];
-        path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
+        path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
         sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
         
     }
     else if ( statusNetGroupURLString && [url hasPrefix:statusNetGroupURLString]) {
         [sender setPreferencesIdentifier:@"floatWindowPrefs"];
-        path=[path stringByAppendingString:@"/Contents/Resources/info.css"];
+        path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
         sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
         
     }

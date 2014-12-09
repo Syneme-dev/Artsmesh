@@ -186,11 +186,6 @@
     [self.mixerCollectionView removeAllItems];
     [self.outputMixerCollectionView removeAllItems];
     
-    for (NSString *channName in _mixerCtrls) {
-        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:channName];
-        [ctrl removeObserver:self forKeyPath:@"volume"];
-    }
-    
     [_mixerCtrls removeAllObjects];
 }
 

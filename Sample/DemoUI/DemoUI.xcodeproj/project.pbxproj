@@ -63,6 +63,7 @@
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
+		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
 		2DED40CD19CBED2D006F12FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DED40CC19CBED2D006F12FD /* CoreLocation.framework */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
@@ -363,6 +364,7 @@
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
+		2DE439C71A37C58700650692 /* new-event.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "new-event.css"; sourceTree = "<group>"; };
 		2DED40CC19CBED2D006F12FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -1053,6 +1055,7 @@
 		AFAEBD87196107B000B7FB51 /* css */ = {
 			isa = PBXGroup;
 			children = (
+				2DE439C71A37C58700650692 /* new-event.css */,
 				2DE439C51A37905A00650692 /* archive-popup-info.css */,
 				AFAEBDB919611AD900B7FB51 /* map.css */,
 				AFAEBD88196107BE00B7FB51 /* info.css */,
@@ -1276,6 +1279,7 @@
 				4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				CEC2FC57196588FD00AFD309 /* AMGroupPanelGroupCellController.xib in Resources */,
+				2DE439C81A37C58700650692 /* new-event.css in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,

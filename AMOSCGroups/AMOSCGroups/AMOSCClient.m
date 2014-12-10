@@ -9,17 +9,17 @@
 #import "AMOSCClient.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 #import "AMLogger/AMLogger.h"
-#import "OSCPacket.h"
+#import "AMOSCMonitor.h"
 
-@interface AMOSCClient()<GCDAsyncUdpSocketDelegate>
+@interface AMOSCClient()<AMOSCMonitorDelegate>
 @end
 
 
 @implementation AMOSCClient
 {
     NSTask* _task;
-    GCDAsyncUdpSocket* _monitorSocket;
-    dispatch_queue_t _monitorQueue;
+    AMOSCMonitor *_oscMonitor;
+    dispatch_queue_t _monitor_queue;
 }
 
 -(BOOL)startOscClient
@@ -27,21 +27,13 @@
     int m = system("killall -0 OscGroupClient >/dev/null");
     if (m != 0) {
         //Start Monitor
-        _monitorQueue = dispatch_queue_create("osc_monitor_thread", DISPATCH_QUEUE_PRIORITY_DEFAULT);
-        _monitorSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:_monitorQueue];
-        NSError *error = nil;
-        if (![_monitorSocket bindToPort:[self.monitorPort intValue] error:&error])
-        {
-            AMLog(kAMErrorLog, @"AMOscGroups", @"create udp socket failed in remote mesher when request public ip. Error:%@", error);
-            return NO;
-        }
+        _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
+        _oscMonitor.delegate = self;
         
-        if (![_monitorSocket beginReceiving:&error])
-        {
-            AMLog(kAMErrorLog, @"AMOscGroups", @"listening socket port failed in remote mesher when request public ip. Error:%@", error);
-            return NO;
-        }
-        
+        _monitor_queue = dispatch_queue_create("osc monitor thread", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+        dispatch_async(_monitor_queue, ^{
+            [_oscMonitor startListening];
+        });
         
         //Launch OSCGroupClient
         NSBundle* mainBundle = [NSBundle mainBundle];
@@ -70,53 +62,26 @@
         
         return  YES;
     }
-    
 }
 
 
 -(void)stopOscClient
 {
-    [_monitorSocket close];
-    _monitorSocket = nil;
+    [_oscMonitor stopListening];
+    _oscMonitor = nil;
     
     [_task terminate];
     _task = nil;
 }
 
-
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address
-withFilterContext:(id)filterContext
+-(void)receivedOscMsg:(NSData*)data
 {
-    //NSString* host = [GCDAsyncUdpSocket hostFromAddress:address];
-    int port = [GCDAsyncUdpSocket portFromAddress:address];
-    
-    id packet = [[OSCPacket alloc] initWithData:data];
-    [self printOSCPacket:packet];
-    
-    if (port == [self.remotePort intValue]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate oscMessageSent:packet];
-        });
-        
-    }else{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate oscMessageRecieved:packet];
-        });
-    }
+    NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
 }
 
--(void)printOSCPacket:(OSCPacket*) packet
+-(void)parsedOscMsg:(NSString *)msg withParameters:(NSArray *)params
 {
-    if(![packet isBundle]){
-        OSCMutableMessage* message = (OSCMutableMessage*)packet;
-        NSLog(@"osc message:%@", [message description]);
-    }else{
-        for (OSCPacket* pk in [packet childPackets]) {
-            [self printOSCPacket:pk];
-        }
-    }
+    NSLog(@"oscmessage receiced: %@", msg);
 }
-
 
 @end

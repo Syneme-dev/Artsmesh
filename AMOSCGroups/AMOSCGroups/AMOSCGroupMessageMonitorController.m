@@ -8,7 +8,7 @@
 
 #import "AMOSCGroupMessageMonitorController.h"
 #import "AMOSCClient.h"
-#import "OSCPacket.h"
+
 
 @interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate>
 @property (weak) IBOutlet NSTableView *oscMsgTable;
@@ -94,37 +94,37 @@
 }
 
 
--(void)printOSCPacket:(OSCPacket*) packet received:(BOOL)isRecv
-{
-    if(![packet isBundle]){
-        OSCMutableMessage* messages = (OSCMutableMessage*)packet;
-        
-        if (isRecv) {
-            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Received: %@", messages.address ];
-            [self addOscMessageLog:oscmsg];
-        }else{
-            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Sent: %@", messages.address ];
-            [self addOscMessageLog:oscmsg];
-        }
-        
-        return;
-    }else{
-        for (OSCPacket* pk in [packet childPackets]) {
-            [self printOSCPacket:pk received:isRecv];
-        }
-    }
-}
+//-(void)printOSCPacket:(OSCPacket*) packet received:(BOOL)isRecv
+//{
+//    if(![packet isBundle]){
+//        OSCMutableMessage* messages = (OSCMutableMessage*)packet;
+//        
+//        if (isRecv) {
+//            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Received: %@", messages.address ];
+//            [self addOscMessageLog:oscmsg];
+//        }else{
+//            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Sent: %@", messages.address ];
+//            [self addOscMessageLog:oscmsg];
+//        }
+//        
+//        return;
+//    }else{
+//        for (OSCPacket* pk in [packet childPackets]) {
+//            [self printOSCPacket:pk received:isRecv];
+//        }
+//    }
+//}
 
 
 -(void)oscMessageRecieved:(id)oscPacket{
-    [self printOSCPacket:oscPacket received:YES];
+    //[self printOSCPacket:oscPacket received:YES];
 
 }
 
 
 -(void)oscMessageSent:(id)oscPacket
 {
-    [self printOSCPacket:oscPacket received:NO];
+    //[self printOSCPacket:oscPacket received:NO];
 }
 
 @end

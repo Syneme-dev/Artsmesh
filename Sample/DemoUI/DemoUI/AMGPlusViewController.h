@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
 @interface AMGPlusViewController : NSViewController
+
+@property (weak) IBOutlet WebView *gplusWebView;
 
 @end

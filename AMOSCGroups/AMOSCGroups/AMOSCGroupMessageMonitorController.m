@@ -91,7 +91,7 @@
     self.oscMsgTable.dataSource = self;
     self.oscMsgTable.delegate = self;
     self.oscMsgTable.backgroundColor  = [NSColor colorWithCalibratedHue:0.15 saturation:0.15 brightness:0.15 alpha:0.0];
-    [self.oscMsgTable setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
+    [self.oscMsgTable setColumnAutoresizingStyle:NSTableViewNoColumnAutoresizing];
     
     self.timerDict =  [[NSMutableDictionary alloc] init];
 }
@@ -158,7 +158,7 @@
 
         OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
         textField.stringValue = pack.msg;
-        
+
         return cellView;
         
     }else if([tableColumn.identifier isEqualToString:@"osc_param_col"]){

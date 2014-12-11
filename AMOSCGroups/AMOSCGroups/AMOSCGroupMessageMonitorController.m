@@ -29,6 +29,8 @@
 
 -(void)startBlinking
 {
+    [_timer invalidate];
+    _timer = nil;
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(onBlinkingTimer:) userInfo:nil repeats:YES];
 }
 

@@ -43,6 +43,8 @@
 		016607A91A3827B1002AEEE7 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0166078A1A382726002AEEE7 /* OscPrintReceivedElements.cpp */; };
 		016607AA1A3827B8002AEEE7 /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0166078C1A382726002AEEE7 /* OscReceivedElements.cpp */; };
 		016607AB1A3827B8002AEEE7 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0166078E1A382727002AEEE7 /* OscTypes.cpp */; };
+		016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */; };
+		016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */; };
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
 		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
@@ -105,6 +107,8 @@
 		0166078D1A382727002AEEE7 /* OscReceivedElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscReceivedElements.h; sourceTree = "<group>"; };
 		0166078E1A382727002AEEE7 /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
 		0166078F1A382727002AEEE7 /* OscTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
+		016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOscMsgTableRow.h; sourceTree = "<group>"; };
+		016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOscMsgTableRow.m; sourceTree = "<group>"; };
 		4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCClient.h; sourceTree = "<group>"; };
 		4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCClient.m; sourceTree = "<group>"; };
 		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				0136BDDA1A14C1AF0009638F /* AMOSCGroupClientViewController.h */,
 				0136BDDB1A14C1AF0009638F /* AMOSCGroupClientViewController.m */,
 				0136BDDC1A14C1AF0009638F /* AMOSCGroupClientViewController.xib */,
+				016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */,
+				016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */,
 				4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */,
 				4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */,
 				4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */,
@@ -300,6 +306,7 @@
 				4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */,
 				0136BDDD1A14C1AF0009638F /* AMOSCGroupClientViewController.h in Headers */,
 				0166079E1A382727002AEEE7 /* OscPacketListener.h in Headers */,
+				016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */,
 				016607A41A382727002AEEE7 /* OscTypes.h in Headers */,
 				0166079B1A382727002AEEE7 /* OscHostEndianness.h in Headers */,
 				4A6D4B831A130DB400B5D26B /* AMOSCPrefViewController.h in Headers */,
@@ -418,6 +425,7 @@
 				4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */,
 				4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */,
 				4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */,
+				016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */,
 				016607951A382727002AEEE7 /* UdpSocket.cpp in Sources */,
 				4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */,
 				016607A11A382727002AEEE7 /* OscReceivedElements.cpp in Sources */,

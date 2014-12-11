@@ -14,6 +14,7 @@
 @property (weak) id<AMOSCMonitorDelegate>delegate;
 
 +(id)monitorWithPort:(int)port;
++(AMOSCMonitor *)shareMonitor;
 
 -(BOOL)startListening;
 -(void)stopListening;

@@ -8,7 +8,70 @@
 
 #import "AMOSCGroupMessageMonitorController.h"
 #import "AMOSCClient.h"
+#import "AMOscMsgTableRow.h"
 
+@implementation OSCMessagePack
+{
+    NSTimer *_timer;
+    BOOL _highlight;
+}
+
+-(instancetype)init
+{
+    if (self = [super init]) {
+        self.lightView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
+        self.lightView.image = [NSImage imageNamed:@"osc_msg_highlight"];
+        _highlight = YES;
+    }
+    
+    return self;
+}
+
+-(void)startBlinking
+{
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(onBlinkingTimer:) userInfo:nil repeats:YES];
+}
+
+-(void)onBlinkingTimer:(NSTimer*)timer
+{
+    static int blinkCount = 0;
+    
+    if (blinkCount >= 2) {
+        blinkCount = 0;
+        [self stopBlinking];
+        return;
+    }
+    
+    NSImage *image = nil;
+    if (_highlight) {
+        image = [NSImage imageNamed:@"osc_msg_normal"];
+        self.lightView.image = image;
+        _highlight = NO;
+    }else{
+        image = [NSImage imageNamed:@"osc_msg_highlight"];
+        self.lightView.image = image;
+        _highlight = YES;
+    }
+    
+    blinkCount++;
+    
+    [self.lightView setNeedsDisplay];
+}
+
+-(void)stopBlinking
+{
+    if (_highlight) {
+        NSImage *image = [NSImage imageNamed:@"osc_msg_normal"];
+        self.lightView.image = image;
+        _highlight = NO;
+        [self.lightView setNeedsDisplay];
+    }
+    
+    [_timer invalidate];
+    _timer = nil;
+}
+
+@end
 
 @interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate>
 @property (weak) IBOutlet NSTableView *oscMsgTable;
@@ -26,47 +89,9 @@
     self.oscMsgTable.dataSource = self;
     self.oscMsgTable.delegate = self;
     self.oscMsgTable.backgroundColor  = [NSColor colorWithCalibratedHue:0.15 saturation:0.15 brightness:0.15 alpha:0.0];
+    [self.oscMsgTable setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
     
     self.timerDict =  [[NSMutableDictionary alloc] init];
-    
-}
-
--(void)addOscMessageLog:(NSString*)msg
-{
-    NSUInteger index = [self.oscMessageLogs indexOfObject:msg];
-    if (index == NSNotFound) {
-        [self.oscMessageLogs addObject:msg];
-        [self.oscMsgTable reloadData];
-    }else{
-        [self blinkTableRow:index];
-    }
-}
-
-
--(void)blinkTableRow:(NSUInteger)row
-{
-    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                      target:self
-                                                    selector:@selector(onBlinkingTimer:)
-                                                    userInfo:[NSNumber numberWithUnsignedLong:row]
-                                                     repeats:NO];
-    
-    [self.timerDict setObject:timer forKey:[NSNumber numberWithUnsignedLong:row]];
-    
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:row];
-    [self.oscMsgTable selectRowIndexes:indexSet byExtendingSelection:NO];
-    [self.oscMsgTable setNeedsDisplay];
-}
-
--(void)onBlinkingTimer:(NSTimer*)timer
-{
-    NSNumber* row = timer.userInfo;
-    [self.oscMsgTable deselectRow:[row integerValue]];
-    [self.oscMsgTable setNeedsDisplay];
-    
-    NSTimer* t = (NSTimer*)[self.timerDict objectForKey:row];
-    [t invalidate];
-    t = nil;
 }
 
 
@@ -75,56 +100,168 @@
     return [self.oscMessageLogs count];
 }
 
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    return 30.0f;
+}
+
+
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    static NSString *cellIdentifier = @"OSCMessageCellView";
-    NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
-    
-    if (cellView == nil)
-    {
-        NSRect cellFrame = self.oscMsgTable.bounds;
-        cellFrame.size.height = 30;
+    if ([tableColumn.identifier isEqualToString:@"osc_light_col"]) {
+        static NSString *cellIdentifier = @"OSCMsgLightCell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
         
-        cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
-        [cellView setIdentifier:cellIdentifier];
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, 30, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        [cellView addSubview:pack.lightView];
+        
+        return cellView;
+        
+    }else if([tableColumn.identifier isEqualToString:@"osc_msg_col"]){
+        static NSString *cellIdentifier = @"OSCMsgPathCell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
+        
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, 100, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        for (NSView *view in [cellView subviews]) {
+            if(view.tag == 1002){
+                [view removeFromSuperview];
+            }
+        }
+        
+        NSRect textFrame = cellView.bounds;
+        textFrame.size.height -= 10;
+        NSTextField *textField = [[NSTextField alloc] initWithFrame:textFrame];
+        textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
+                                         size:12.0f];
+        textField.tag = 1002;
+        textField.bordered = NO;
+        textField.editable = NO;
+        textField.backgroundColor = [NSColor clearColor];
+        [textField setFocusRingType:NSFocusRingTypeNone];
+        [textField setTextColor:[NSColor grayColor]];
+        [cellView addSubview:textField];
+
+        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        textField.stringValue = pack.msg;
+        
+        return cellView;
+        
+    }else if([tableColumn.identifier isEqualToString:@"osc_param_col"]){
+        
+        static NSString *cellIdentifier = @"OSCMsgParamCell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
+        
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, self.view.bounds.size.width, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        for (NSView *view in [cellView subviews]) {
+            if(view.tag == 1002){
+                [view removeFromSuperview];
+            }
+        }
+        
+        NSRect textFrame = cellView.bounds;
+        textFrame.size.height -= 10;
+        NSTextField *textField = [[NSTextField alloc] initWithFrame:textFrame];
+        textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
+                                         size:12.0f];
+        textField.tag = 1002;
+        textField.bordered = NO;
+        textField.editable = NO;
+        textField.backgroundColor = [NSColor clearColor];
+        [textField setFocusRingType:NSFocusRingTypeNone];
+        [textField setTextColor:[NSColor grayColor]];
+        [cellView addSubview:textField];
+        
+        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        textField.stringValue = pack.params;
+        return cellView;
     }
     
-    cellView.textField.stringValue = [self.oscMessageLogs objectAtIndex:row];
-    return cellView;
+    return nil;
 }
 
-
-//-(void)printOSCPacket:(OSCPacket*) packet received:(BOOL)isRecv
-//{
-//    if(![packet isBundle]){
-//        OSCMutableMessage* messages = (OSCMutableMessage*)packet;
-//        
-//        if (isRecv) {
-//            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Received: %@", messages.address ];
-//            [self addOscMessageLog:oscmsg];
-//        }else{
-//            NSMutableString* oscmsg = [[NSMutableString alloc] initWithFormat:@"Sent: %@", messages.address ];
-//            [self addOscMessageLog:oscmsg];
-//        }
-//        
-//        return;
-//    }else{
-//        for (OSCPacket* pk in [packet childPackets]) {
-//            [self printOSCPacket:pk received:isRecv];
-//        }
-//    }
-//}
-
-
--(void)oscMessageRecieved:(id)oscPacket{
-    //[self printOSCPacket:oscPacket received:YES];
-
-}
-
-
--(void)oscMessageSent:(id)oscPacket
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row NS_AVAILABLE_MAC(10_7)
 {
-    //[self printOSCPacket:oscPacket received:NO];
+    AMOscMsgTableRow* tableRow = [[AMOscMsgTableRow alloc] init];
+    return tableRow;
 }
+
+-(void)oscMsgComming:(NSString *)msg parameters:(NSArray *)params
+{
+    NSMutableString *paramDetail = [[NSMutableString alloc] init];
+    
+    for (NSDictionary *dict in params) {
+        //only one key-value pair in dict
+        NSString *type = [[dict allKeys] firstObject];
+        id value = [dict objectForKey:type];
+        
+        if([type isEqualToString:@"BOOL"]){
+            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            
+        }else if([type isEqualToString:@"INT"]){
+            [paramDetail appendFormat:@"%@(%@), ", value, type];
+
+        }else if([type isEqualToString:@"LONG"]){
+            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            
+        }else if([type isEqualToString:@"FLOAT"]){
+            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            
+        }else if([type isEqualToString:@"STRING"]){
+            NSString *text = (NSString *)value;
+            if ([text length] > 12){
+                text = [text substringToIndex:12];
+                text = [NSString stringWithFormat:@"%@...", text];
+            }
+            [paramDetail appendFormat:@"%@(%@), ", text, type];
+            
+        }else if([type isEqualToString:@"BLOB"]){
+            [paramDetail appendFormat:@"...(%@), ", type];
+        
+        }
+    }
+    
+    NSLog(@"params = %@", paramDetail);
+    
+    for (OSCMessagePack *pack in self.oscMessageLogs) {
+        if ([pack.msg isEqualToString:msg]) {
+            pack.params = paramDetail;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.oscMsgTable reloadData];
+                [pack startBlinking];
+            });
+            return;
+        }
+    }
+    
+    OSCMessagePack *oscPack = [[OSCMessagePack alloc] init];
+    oscPack.msg = msg;
+    oscPack.params = paramDetail;
+    [self.oscMessageLogs addObject:oscPack];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+         [self.oscMsgTable reloadData];
+         [oscPack startBlinking];
+    });
+}
+
 
 @end

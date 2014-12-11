@@ -22,6 +22,17 @@
     dispatch_queue_t _monitor_queue;
 }
 
+-(instancetype)init
+{
+    if (self = [super init]) {
+        _monitor_queue = dispatch_queue_create("osc monitor thread", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+//        _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
+//        _oscMonitor.delegate = self;
+    }
+    
+    return self;
+}
+
 -(BOOL)startOscClient
 {
     int m = system("killall -0 OscGroupClient >/dev/null");
@@ -29,10 +40,8 @@
         //Start Monitor
         _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
         _oscMonitor.delegate = self;
-        
-        _monitor_queue = dispatch_queue_create("osc monitor thread", DISPATCH_QUEUE_PRIORITY_DEFAULT);
         dispatch_async(_monitor_queue, ^{
-            [_oscMonitor startListening];
+            [[AMOSCMonitor shareMonitor] startListening];
         });
         
         //Launch OSCGroupClient
@@ -67,11 +76,17 @@
 
 -(void)stopOscClient
 {
-    [_oscMonitor stopListening];
-    _oscMonitor = nil;
+    //dispatch_async(_monitor_queue, ^{
+    //    [_oscMonitor stopListening];
+    //});
+    
+    AMOSCMonitor *monitor = [AMOSCMonitor shareMonitor ];
+    [monitor stopListening];
     
     [_task terminate];
     _task = nil;
+    
+    system("killall OscGroupClient >/dev/null");
 }
 
 -(void)receivedOscMsg:(NSData*)data
@@ -82,6 +97,10 @@
 -(void)parsedOscMsg:(NSString *)msg withParameters:(NSArray *)params
 {
     NSLog(@"oscmessage receiced: %@", msg);
+    if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
+        [self.delegate oscMsgComming:msg parameters:params];
+    }
+    
 }
 
 @end

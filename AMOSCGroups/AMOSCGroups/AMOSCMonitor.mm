@@ -68,6 +68,22 @@ protected:
                     arg++; continue;
                 }
                 
+                if (arg->IsInt32()){
+                    int iVal = arg->AsInt32();
+                    NSDictionary* argDict = @{@"INT":[NSNumber numberWithFloat:iVal]};
+                    [argsArr addObject:argDict];
+                    
+                    arg++; continue;
+                }
+                
+                if (arg->IsInt64()){
+                    long lVal = arg->AsInt64();
+                    NSDictionary* argDict = @{@"LONG":[NSNumber numberWithFloat:lVal]};
+                    [argsArr addObject:argDict];
+                    
+                    arg++; continue;
+                }
+                
                 if(arg->IsFloat()){
                     float fVal = arg->AsFloat();
                     NSDictionary* argDict = @{@"FLOAT":[NSNumber numberWithFloat:fVal]};
@@ -149,6 +165,11 @@ protected:
     return g_OSCMonitor;
 }
 
++(AMOSCMonitor *)shareMonitor
+{
+    return g_OSCMonitor;
+}
+
 
 -(BOOL)startListening
 {
@@ -166,11 +187,17 @@ protected:
 
 -(void)stopListening
 {
-    _listenSocket->Break();
-    delete _listenSocket;
-    delete _oscParser;
-    _listenSocket = NULL;
-    _oscParser = NULL;
+    if(_listenSocket)
+    {
+        _listenSocket->Break();
+        delete _listenSocket;
+    }
+    
+    if(_oscParser){
+        delete _oscParser;
+        _oscParser = NULL;
+    }
+    
 }
 
 

@@ -8,6 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface OSCMessagePack : NSObject
+
+@property NSString *msg;
+@property NSString *params;
+@property NSImageView *lightView;
+
+-(void)startBlinking;
+
+@end
+
 @interface AMOSCGroupMessageMonitorController : NSViewController
 
 @end

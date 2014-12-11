@@ -57,9 +57,6 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    
-    NSLog(@"event webview finished loading..");
-    
     NSString *url= sender.mainFrameURL;
     sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
@@ -78,8 +75,6 @@
     
     if (!isLogin) {[self login:frame];}
     
-    NSLog(@"the gplus view height is: %f", self.view.frame.size.height);
-    NSLog(@"the webview height is: %f", self.gplusWebView.frame.size.height);
 }
 
 - (void)login:(WebFrame *)frame {
@@ -113,6 +108,9 @@
     //To avoid a error when closing
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     [self.gplusWebView.mainFrame stopLoading];
+    [self.gplusWebView setFrameLoadDelegate:nil];
+    [self.gplusWebView setPolicyDelegate:nil];
+    [self.gplusWebView setUIDelegate:nil];
 }
 
 

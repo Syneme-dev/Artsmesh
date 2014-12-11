@@ -94,6 +94,10 @@ typedef enum {
     //To avoid a error when closing
     [AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     [self.socialWebTab.mainFrame stopLoading];
+    
+    [self.socialWebTab setFrameLoadDelegate:nil];
+    [self.socialWebTab setPolicyDelegate:nil];
+    [self.socialWebTab setUIDelegate:nil];
 }
 
 

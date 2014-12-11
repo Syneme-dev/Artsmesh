@@ -191,6 +191,7 @@ protected:
     {
         _listenSocket->Break();
         delete _listenSocket;
+        _listenSocket = NULL;
     }
     
     if(_oscParser){

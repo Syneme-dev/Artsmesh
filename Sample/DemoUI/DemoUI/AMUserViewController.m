@@ -358,6 +358,9 @@
         myGroup.longitude = [NSString stringWithFormat:@"%f", lon];
         myGroup.latitude =  [NSString stringWithFormat:@"%f", lat];
         
+        double gmtOffset = [self getTimezoneFromLat:lat andLon:lon];
+        NSLog(@"found timezone offset is: %f", gmtOffset);
+        
         //NSLog(@"location data is: %@", topResult);
         //NSLog(@"saved lat/lon is: %f, %f", lat, lon);
         
@@ -370,35 +373,44 @@
     } else {
         //No result found
     }
+}
+
+-(double)getTimezoneFromLat:(double)latitude andLon:(double)longitude {
+    double gmtOffset = -100;
     
-    /**
-    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
-    [geoCoder geocodeAddressString:searchTerm
-                 completionHandler:^(NSArray* placemarks, NSError* error){
-                     if (error) {
-                         NSLog(@"%@", error);
-                         
-                     } else if (placemarks && placemarks.count > 0) {
-                         
-                         AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                         
-                         NSLog(@"top search result is %f, %f",topResult.location.coordinate.latitude, topResult.location.coordinate.longitude);
-                         
-                         myGroup.location = searchTerm;
-                         myGroup.longitude = [NSString stringWithFormat:@"%f", topResult.location.coordinate.longitude];
-                         myGroup.latitude =  [NSString stringWithFormat:@"%f", topResult.location.coordinate.latitude];
-                         
-                         [[AMMesher sharedAMMesher] updateGroup];
-                         
-                         [[AMPreferenceManager standardUserDefaults]
-                          setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
-                         [[AMPreferenceManager standardUserDefaults]
-                          setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
-                     }
-                 }
-     ];
-     **/
+    NSLog(@"test");
+    NSString *username = @"artsmesh";
+    
+    NSString *searchURL = [NSString stringWithFormat:@"%@%f%@%f%@%@",
+                           @"http://api.geonames.org/timezoneJSON?lat=",
+                           latitude,
+                           @"&lng=",
+                           longitude,
+                           @"&username=",
+                           username];
+    
+    NSString *searchUTF8 = [searchURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchUTF8]];
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request
+                                             returningResponse:nil error:nil];
+    
+    NSError *jsonParsingError = nil;
+    NSArray *timezoneData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    
+    if(jsonParsingError != nil){
+        NSLog(@"Timezone data parse JSON error:%@", jsonParsingError.description);
+    }
+    NSDictionary *results = (NSDictionary*)timezoneData;
+    if ( [results count] >= 1 ) {
+        gmtOffset = [[results valueForKey:@"gmtOffset"] doubleValue];
+        
+    } else {
+        //No result found
+    }
+    
+    return gmtOffset;
 }
 
 -(void)onChecked:(AMCheckBoxView*)sender

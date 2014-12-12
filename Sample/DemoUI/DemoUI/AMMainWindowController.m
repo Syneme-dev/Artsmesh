@@ -468,7 +468,9 @@
 }
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:UI_defaultPanelWidth*1.5 height:UI_defaultPanelHeight relatedView:view];
+    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
+    panelView.minSizeConstraint = panelView.frame.size;
     NSViewController *viewController = [[AMTimerViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;

@@ -31,12 +31,26 @@
 {
     _controller = [[AMOSCGroups sharedInstance] getOSCMonitorUI];
     if (_controller != nil) {
-        
+        NSView* contentView = _controller.view;
         [self.view addSubview:_controller.view];
         NSRect rect = self.view.bounds;
         
         rect.size.height -= 21;
         _controller.view.frame = rect;
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [self.view addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
+        [self.view addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
     }
 }
 

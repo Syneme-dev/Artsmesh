@@ -1,0 +1,16 @@
+#header, #footer, #content h1, #aside_primary, 
+#site_nav_local_views, #input_form_nav, #notices_primary, #input_form_status, #input_form_placeholder, .nav_next {
+	display: none!important;
+}
+
+#content{
+    width:100% !important;
+    padding:2px !important;
+}
+#aside_primary_wrapper,#core,#wrap{
+    width:100% !important;
+}
+
+#input_form_event {
+	display:block!important;
+}

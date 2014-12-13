@@ -124,6 +124,11 @@
     return [_jackManager startJack];
 }
 
+-(float)jackCpuUsage
+{
+    return [_jackClient cpuUsage];
+}
+
 -(void)stopJack
 {
     [_jackClient closeJackClient];

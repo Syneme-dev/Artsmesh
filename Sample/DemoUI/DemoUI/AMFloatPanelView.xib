@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMFloatPanelViewController">
@@ -12,7 +12,7 @@
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
                 <outlet property="panelContent" destination="5ZN-yI-QNy" id="8vL-Yl-hbr"/>
                 <outlet property="panelTop" destination="fvD-YA-Ec9" id="TUg-ie-6hF"/>
-                <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
+                <outlet property="titleTextField" destination="dZ9-KQ-hje" id="QBi-2Q-UJ4"/>
                 <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
             </connections>

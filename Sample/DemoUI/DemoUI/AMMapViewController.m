@@ -31,10 +31,12 @@
 #import "AMFloatPanelViewController.h"
 #import "AMFloatPanelView.h"
 
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
 
 @interface AMMapViewController ()
 {
     NSString* statusNetURLString;
+    NSString* statusNetGroupURLString;
     NSString* statusNetProfileURLString;
 }
 
@@ -186,7 +188,7 @@
     //display test float panel
     
     //Create float panel controller + view
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(600, 300) andTitle:@"ARCHIVE"];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(400, 300) andTitle:@"ARCHIVE" andTitleColor:UI_Text_Color_Gray];
     _floatPanelViewController = fpc;
     
     _archiveFloatWindow = fpc.containerWindow;
@@ -202,16 +204,51 @@
 }
 
 
+-(void) loadGroupWebView:(NSString *)groupName {
+    WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [group_webview setFrameLoadDelegate:self];
+    
+    [group_webview setDrawsBackground:NO];
+    _floatWindowWebView = group_webview;
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
+    NSURL *group_url = [NSURL URLWithString:
+                          [NSString stringWithFormat:@"%@/group/%@?fromMac=true",statusNetURLString ,groupName]];
+    [group_webview.mainFrame loadRequest:
+     [NSURLRequest requestWithURL:group_url]];
+    
+    [_floatPanelViewController.panelContent addSubview:group_webview];
+    
+    //set up constraints
+    
+    group_webview.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : group_webview}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : group_webview}];
+    
+    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
+    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+}
 
 -(void) loadProfileWebView:(NSString*)userName {
     WebView *profile_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [profile_webview setFrameLoadDelegate:self];
     
     [profile_webview setDrawsBackground:NO];
+    _floatWindowWebView = profile_webview;
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetProfileURLString = [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *profile_url = [NSURL URLWithString:
                           [NSString stringWithFormat:@"%@/%@?fromMac=true",statusNetURLString ,userName]];
+    statusNetProfileURLString = [profile_url absoluteString];
     [profile_webview.mainFrame loadRequest:
      [NSURLRequest requestWithURL:profile_url]];
     
@@ -240,21 +277,31 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    NSLog(@"webview finished loading frame");
+    
     NSString *url= sender.mainFrameURL;
-    self.archiveWebView.preferences.userStyleSheetEnabled = YES;
+    sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-   if([url hasPrefix:statusNetURLString]){
+    
+    
+    if ( statusNetProfileURLString && [url hasPrefix:statusNetProfileURLString]) {
+        [sender setPreferencesIdentifier:@"floatWindowPrefs"];
+        path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+        
+    }
+    else if ( statusNetGroupURLString && [url hasPrefix:statusNetGroupURLString]) {
+        [sender setPreferencesIdentifier:@"floatWindowPrefs"];
+        path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+        
+    }
+    else if([url hasPrefix:statusNetURLString]){
         path=[path stringByAppendingString:@"/Contents/Resources/map.css"];
+        sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
     }
-   else if([url hasPrefix:statusNetProfileURLString]) {
-        path=[path stringByAppendingString:@"/Contents/Resources/web.css"];
-   }
-    else{
-        self.archiveWebView.preferences.userStyleSheetEnabled = NO;
+    else {
+        sender.preferences.userStyleSheetEnabled = NO;
     }
-    [[self.archiveWebView windowScriptObject] setValue:self forKey:@"objcConnector"];
-    self.archiveWebView.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 }
 
 - (void)windowDidLoad{
@@ -272,7 +319,13 @@
 }
 
 -(void)groupClicked:(NSString *)groupName{
-    NSLog (groupName);
+    //NSLog (groupName);
+    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+    
+    [self loadGroupWebView:groupName];
+    
+    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
 }
 
 -(void)elementClicked:(NSString *)userName{
@@ -284,52 +337,6 @@
     
     [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
     [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
-    
-    //Create content view that will appear inside window
-    NSTextView *testContent = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 400, 300)];
-    
-    [testContent setString:@"Here's some content"];
-    
-    //Create float panel controller + view
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil];
-    AMFloatPanelViewController *_floatPanelViewController = fpc;
-    _floatPanelViewController.panelTitle = @"Test Window";
-    AMFloatPanelView *floatPanel = (AMFloatPanelView *) fpc.view;
-    
-    [fpc.panelContent addSubview:testContent];
-    
-    //Create window to hold everything
-    NSRect frame = NSMakeRect(self.view.frame.size.width/2, self.view.frame.size.height/2, testContent.frame.size.width, (testContent.frame.size.height + 41) + floatPanel.borderThickness);
-    NSWindow *_testWindow  = [[NSWindow alloc] initWithContentRect:frame
-                                               styleMask:NSBorderlessWindowMask
-                                                 backing:NSBackingStoreBuffered
-                                                   defer:NO];
-    fpc.containerWindow = _testWindow;
-    _testWindow.hasShadow = YES;
-    [_testWindow.contentView addSubview:floatPanel];
-    
-    [_testWindow.contentView setAutoresizesSubviews:YES];
-    [testContent setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    // Add sizing constraints to window
-    _floatPanelViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                                                           options:0
-                                                                           metrics:nil
-                                                                             views:@{@"subView" : _floatPanelViewController.view}];
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{@"subView" : _floatPanelViewController.view}];
-    [_testWindow.contentView addConstraints:verticalConstraints];
-    [_testWindow.contentView addConstraints:horizontalConstraints];
-    
-    [_testWindow.contentView setAutoresizesSubviews:YES];
-    [_floatPanelViewController.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    // Display test Window
-    [_testWindow setBackgroundColor:[NSColor blueColor]];
-    [_testWindow makeKeyAndOrderFront:self];
     
 }
 

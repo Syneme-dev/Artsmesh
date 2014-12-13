@@ -1,15 +1,15 @@
 //
-//  AMBigBlueButton.m
-//  UIFramework
+//  AMAudioMuteButton.m
+//  AMAudio
 //
-//  Created by wangwei on 2/12/14.
-//  Copyright (c) 2014 Artsmesh. All rights reserved.
+//  Created by 王为 on 9/12/14.
+//  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMBigBlueButton.h"
-#import "AMButtonHandler.h"
+#import "AMAudioMuteButton.h"
+#import "UIFramework/AMButtonHandler.h"
 
-@implementation AMBigBlueButton
+@implementation AMAudioMuteButton
 {
     BOOL _onState;
 }
@@ -21,7 +21,7 @@
     if (!_onState) {
         [UI_Color_blue set];
     }else{
-        [[NSColor colorWithCalibratedRed:20.0/255.0 green:150.0/255.0 blue:63.0/255.0 alpha:1] set];
+        [[NSColor redColor] set];
     }
     
     NSRect rect = self.bounds;

@@ -27,6 +27,9 @@
 #import "AMStaticGroupDataSource.h"
 #import "AMStatusNet/AMStatusNet.h"
 
+#define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
+
 @interface AMLiveMapView ()
 {
     NSPoint _center;
@@ -744,7 +747,7 @@ AMWorldMap *worldMap;
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
     
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(programW, programH) andTitle:@"LIVE"];
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(programW, programH) andTitle:@"LIVE" andTitleColor:[NSColor redColor]];
     _floatPanelViewController = fpc;
     _programWindow = fpc.containerWindow;
 
@@ -888,7 +891,7 @@ AMWorldMap *worldMap;
 
 - (void)formatTextView:(NSTextView *) theTextView withFont:(NSFont *)theFont {
     
-    [theTextView setTextColor:[NSColor whiteColor]];
+    [theTextView setTextColor:UI_Color_gray];
     [theTextView setFont:theFont];
     [theTextView setAlignment: NSCenterTextAlignment];
     

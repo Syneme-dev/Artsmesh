@@ -7,7 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <UIFramework/AMBlueButton.h>
+#import "AMTabPanelViewController.h"
 
-@interface AMTimerViewController : NSViewController
+@interface AMTimerViewController : AMTabPanelViewController
 
 @end

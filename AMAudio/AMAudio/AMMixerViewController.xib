@@ -20,13 +20,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="C84-eQ-Ez4" customClass="AMAudioSlider">
-                    <rect key="frame" x="40" y="55" width="24" height="242"/>
+                    <rect key="frame" x="40" y="69" width="24" height="242"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="XwA-ZC-5bs"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="wnN-sO-wGx" customClass="AMAudioMeter">
-                    <rect key="frame" x="29" y="55" width="3" height="242"/>
+                    <rect key="frame" x="29" y="69" width="3" height="242"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="3" id="nes-nC-fUS"/>
                     </constraints>
@@ -42,30 +42,33 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="t43-v9-7S5" customClass="AMBigBlueButton">
-                    <rect key="frame" x="25" y="7" width="36" height="36"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="t43-v9-7S5" customClass="AMAudioMuteButton">
+                    <rect key="frame" x="15" y="11" width="50" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="Xkj-pi-BEC"/>
-                        <constraint firstAttribute="width" constant="36" id="sdd-P1-LLY"/>
+                        <constraint firstAttribute="height" constant="50" id="Xkj-pi-BEC"/>
+                        <constraint firstAttribute="width" constant="50" id="sdd-P1-LLY"/>
                     </constraints>
                     <buttonCell key="cell" type="smallSquare" title="Mute" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="fsu-G2-j6L">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="mute:" target="-2" id="sYx-ew-YLu"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="C84-eQ-Ez4" secondAttribute="trailing" constant="16" id="887-gm-css"/>
-                <constraint firstAttribute="bottom" secondItem="wnN-sO-wGx" secondAttribute="bottom" constant="55" id="GCA-3e-WmH"/>
+                <constraint firstAttribute="bottom" secondItem="wnN-sO-wGx" secondAttribute="bottom" constant="69" id="GCA-3e-WmH"/>
                 <constraint firstItem="wnN-sO-wGx" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="29" id="HHV-BV-stK"/>
-                <constraint firstItem="t43-v9-7S5" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="UDz-8Z-X4U"/>
+                <constraint firstItem="t43-v9-7S5" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="15" id="UDz-8Z-X4U"/>
                 <constraint firstItem="x7M-7q-gkI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="2" id="Xqa-4m-hQS"/>
-                <constraint firstItem="C84-eQ-Ez4" firstAttribute="top" secondItem="x7M-7q-gkI" secondAttribute="bottom" constant="22" id="Y7T-ek-A3A"/>
-                <constraint firstAttribute="bottom" secondItem="t43-v9-7S5" secondAttribute="bottom" constant="7" id="jma-fe-f5e"/>
+                <constraint firstItem="C84-eQ-Ez4" firstAttribute="top" secondItem="x7M-7q-gkI" secondAttribute="bottom" constant="8" id="Y7T-ek-A3A"/>
+                <constraint firstAttribute="bottom" secondItem="t43-v9-7S5" secondAttribute="bottom" constant="11" id="jma-fe-f5e"/>
                 <constraint firstAttribute="trailing" secondItem="x7M-7q-gkI" secondAttribute="trailing" constant="7" id="lFd-7L-ePH"/>
-                <constraint firstItem="wnN-sO-wGx" firstAttribute="top" secondItem="x7M-7q-gkI" secondAttribute="bottom" constant="22" id="te5-wC-ckd"/>
+                <constraint firstItem="wnN-sO-wGx" firstAttribute="top" secondItem="x7M-7q-gkI" secondAttribute="bottom" constant="8" id="te5-wC-ckd"/>
                 <constraint firstItem="x7M-7q-gkI" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="v5L-vt-PcN"/>
-                <constraint firstAttribute="bottom" secondItem="C84-eQ-Ez4" secondAttribute="bottom" constant="55" id="yip-kS-Zp7"/>
+                <constraint firstAttribute="bottom" secondItem="C84-eQ-Ez4" secondAttribute="bottom" constant="69" id="yip-kS-Zp7"/>
             </constraints>
             <point key="canvasLocation" x="81" y="252"/>
         </customView>

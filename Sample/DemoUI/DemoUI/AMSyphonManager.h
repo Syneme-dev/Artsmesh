@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMSyphonTearOffController.h"
 #import "AMSyphonViewRouterController.h"
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"

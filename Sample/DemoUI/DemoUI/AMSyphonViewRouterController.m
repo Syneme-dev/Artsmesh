@@ -19,6 +19,8 @@
     SyphonClient*   _syClient;
     SyphonServer*   _syRouter;
     
+    NSDictionary*   _syCurrentServer;
+    
     NSMutableDictionary*  _syServers;
     NSMutableDictionary* _processCounter;
     
@@ -27,6 +29,11 @@
     NSUInteger FPS;
     NSUInteger frameWidth;
     NSUInteger frameHeight;
+}
+
+-(NSDictionary*) currentServer
+{
+    return _syCurrentServer;
 }
 
 - (void)viewDidLoad {
@@ -119,6 +126,8 @@
     fpsStart = [NSDate timeIntervalSinceReferenceDate];
     fpsCount = 0;
     FPS = 0;
+    
+    _syCurrentServer = serverDescript;
     
     _syClient = [[SyphonClient alloc] initWithServerDescription:serverDescript options:nil newFrameHandler:^(SyphonClient *client) {
         // This gets called whenever the client receives a new frame.

@@ -24,8 +24,8 @@
 @property NSString* monitorAddr;
 @property NSString* monitorPort;
 
-@property id<AMOSCClientDelegate> delegate;
-@property (weak) AMOSCGroupMessageMonitorController* monitorController;
+@property (weak) id<AMOSCClientDelegate> delegate;
+//@property (weak) AMOSCGroupMessageMonitorController* monitorController;
 
 -(BOOL)startOscClient;
 -(void)stopOscClient;
@@ -33,8 +33,7 @@
 @end
 
 @protocol AMOSCClientDelegate <NSObject>
-
--(void)oscMessageRecieved:(id)oscPacket;
--(void)oscMessageSent:(id)oscPacket;
+@optional
+-(void)oscMsgComming:(NSString *)msg parameters:(NSArray *)params;
 
 @end

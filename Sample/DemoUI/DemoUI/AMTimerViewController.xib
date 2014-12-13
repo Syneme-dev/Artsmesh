@@ -1,56 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
             <connections>
-                <outlet property="timerBtn" destination="8n2-ni-U11" id="CcC-EZ-lMe"/>
-                <outlet property="timerScreen" destination="Olv-Cc-6Sm" id="ITn-jQ-Wi0"/>
+                <outlet property="clockBtn" destination="Chv-Eg-hpW" id="YAH-1G-l87"/>
+                <outlet property="tabView" destination="h28-9m-GVK" id="OXD-vQ-czh"/>
+                <outlet property="timerBtn" destination="GJj-K0-zhz" id="d9n-Ho-FCN"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="450" height="435"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8n2-ni-U11">
-                    <rect key="frame" x="0.0" y="206" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_off" imagePosition="overlaps" alignment="center" alternateImage="play_on" imageScaling="proportionallyDown" inset="2" id="LXI-B5-6mk">
-                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="GJj-K0-zhz">
+                    <rect key="frame" x="331" y="418" width="50" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="EIM-Fe-dEl"/>
+                        <constraint firstAttribute="width" constant="50" id="J2t-hn-Kw9"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="TIMER" bezelStyle="inline" alignment="center" inset="2" id="ANb-kd-zyv">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
                     <connections>
-                        <action selector="timerBtnClicked:" target="-2" id="jcX-1g-hBb"/>
+                        <action selector="timerBtnClick:" target="-2" id="0Eg-a9-SOk"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Olv-Cc-6Sm" customClass="AMFoundryFontView">
-                    <rect key="frame" x="41" y="211" width="205" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" title="00  :  00  :  00  SEC" id="VxS-7H-w96">
-                        <font key="font" metaFont="system" size="20"/>
-                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upC-nT-h05" customClass="AMFoundryFontView">
-                    <rect key="frame" x="250" y="214" width="51" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="senconds" id="Uj7-hE-6aT">
-                        <font key="font" metaFont="miniSystem"/>
-                        <color key="textColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PpJ-aB-EKN">
+                    <rect key="frame" x="385" y="418" width="9" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="3Mj-2p-alZ"/>
+                        <constraint firstAttribute="width" constant="5" id="eS2-WY-0Yd"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="T7X-eb-M2e">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="h28-9m-GVK">
+                    <rect key="frame" x="0.0" y="0.0" width="450" height="417"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="Tab" identifier="1" id="Mos-rT-Lcy">
+                            <view key="view" identifier="timerTab" id="iap-nC-768">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="410"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXC-jx-fNU">
+                                        <rect key="frame" x="144" y="214" width="123" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Timer Tab" id="LTz-a9-qbm">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="View" identifier="2" id="M5E-b7-hQd">
+                            <view key="view" identifier="clockTab" id="bXQ-Lf-ElL">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="417"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JfA-4F-9Iu">
+                                        <rect key="frame" x="196" y="177" width="66" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clock Tab" id="Fxs-4h-Xs8">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Chv-Eg-hpW">
+                    <rect key="frame" x="396" y="418" width="54" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="kYm-Ju-CTE"/>
+                        <constraint firstAttribute="height" constant="14" id="qHs-gb-XTY"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="CLOCK" bezelStyle="inline" alignment="center" inset="2" id="Rby-TJ-bwc">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="clockBtnClick:" target="-2" id="oxX-if-UqI"/>
+                    </connections>
+                </button>
             </subviews>
+            <constraints>
+                <constraint firstItem="GJj-K0-zhz" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="01B-gi-Shb"/>
+                <constraint firstAttribute="bottom" secondItem="h28-9m-GVK" secondAttribute="bottom" id="8Hb-w4-J5E"/>
+                <constraint firstItem="Chv-Eg-hpW" firstAttribute="leading" secondItem="PpJ-aB-EKN" secondAttribute="trailing" constant="4" id="8nn-6i-sZX"/>
+                <constraint firstAttribute="trailing" secondItem="Chv-Eg-hpW" secondAttribute="trailing" id="FJC-d2-pSN"/>
+                <constraint firstItem="PpJ-aB-EKN" firstAttribute="leading" secondItem="GJj-K0-zhz" secondAttribute="trailing" constant="6" id="Hae-0d-xmR"/>
+                <constraint firstItem="PpJ-aB-EKN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Pqv-nh-qRL"/>
+                <constraint firstAttribute="trailing" secondItem="h28-9m-GVK" secondAttribute="trailing" id="Tlc-dX-HXf"/>
+                <constraint firstItem="h28-9m-GVK" firstAttribute="top" secondItem="PpJ-aB-EKN" secondAttribute="bottom" constant="1" id="jSV-pi-DIX"/>
+                <constraint firstItem="Chv-Eg-hpW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="tS9-Nf-Fs3"/>
+                <constraint firstItem="h28-9m-GVK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="uVh-Wb-05l"/>
+            </constraints>
+            <point key="canvasLocation" x="216" y="108.5"/>
         </customView>
     </objects>
-    <resources>
-        <image name="play_off" width="15" height="15"/>
-        <image name="play_on" width="15" height="15"/>
-    </resources>
 </document>

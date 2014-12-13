@@ -14,10 +14,11 @@
 #import "AMMixerViewController.h"
 #import "AMMixerView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMBigBlueButton.h"
 
 @interface AMAudioMixerViewController ()<AMJackClientDelegate>
 
-@property (weak) IBOutlet NSButton *startMixerBtn;
+@property (weak) IBOutlet AMBigBlueButton *startMixerBtn;
 @property (weak) IBOutlet NSTextField *bufferSize;
 @property (weak) IBOutlet NSTextField *sampleRate;
 @property (weak) IBOutlet AMCollectionView *mixerCollectionView;
@@ -31,7 +32,8 @@
     AMArtsmeshClient* _client;
     
     NSTimer* _jackInfoTimer;
-    NSMutableArray *_mixerControllers;
+    NSTimer *_meterTimer;
+    NSMutableDictionary *_mixerCtrls;
 }
 
 - (void)viewDidLoad {
@@ -40,6 +42,20 @@
 //    [self.mixerCollectionView setBackgroudColor:[NSColor redColor]];
 //    [self.outputMixerCollectionView setBackgroudColor:[NSColor blueColor]];
     self.mixerCollectionView.itemGap = 1;
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(jackStopped:)
+     name:AM_JACK_STOPPED_NOTIFICATION
+     object:nil];
+}
+
+-(void)jackStopped:(NSNotification*)notification
+{
+    if(_mixerStarted)
+    {
+        [self.startMixerBtn performClick:nil];
+    }
 }
 
 -(void)dealloc
@@ -53,10 +69,12 @@
     if (_mixerStarted){
         [self stopClient];
         self.startMixerBtn.title = @"Start" ;
+         [self.startMixerBtn setButtonOnState:NO];
         _mixerStarted = NO;
     }else{
         if ([self startClient]){
             self.startMixerBtn.title = @"Stop" ;
+            [self.startMixerBtn setButtonOnState:YES];
             _mixerStarted = YES;
         }
     }
@@ -86,7 +104,7 @@
         return NO;
     };
     
-    _mixerControllers = [[NSMutableArray alloc] init];
+    _mixerCtrls = [[NSMutableDictionary alloc] init];
     NSArray* ports = [_client allPorts];
     
     for (AMJackPort* p in ports) {
@@ -94,10 +112,8 @@
         if (p.portType == AMJackPort_Source) {
             
             AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
-            p.volume = mixerCtrl.volume;
-            
             [self.mixerCollectionView addViewItem:mixerCtrl.view];
-            [_mixerControllers addObject:mixerCtrl];
+            [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
     }
     
@@ -106,10 +122,8 @@
         if (p.portType == AMJackPort_Destination) {
             
             AMMixerViewController *mixerCtrl = [self createMixerByPort:p];
-            p.volume = mixerCtrl.volume;
-            
             [self.outputMixerCollectionView addViewItem:mixerCtrl.view];
-            [_mixerControllers addObject:mixerCtrl];
+            [_mixerCtrls setObject:mixerCtrl forKey:mixerCtrl.channName];
         }
     }
     
@@ -117,11 +131,27 @@
                                                       target:self
                                                     selector:@selector(updateJackInfo)
                                                     userInfo:nil repeats:YES];
+    _meterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                   target:self
+                                                 selector:@selector(updateChannelPeak)
+                                                 userInfo:nil
+                                                  repeats:YES];
     
     _client.delegate = self;
     
     return YES;
     
+}
+
+-(void)updateChannelPeak
+{
+    
+    NSArray* ports = [_client allPorts];
+    for (AMJackPort* p in ports) {
+        NSString *portName = [p.name uppercaseString];
+        AMMixerViewController* ctrl = [_mixerCtrls objectForKey:portName];
+        ctrl.meter = p.tempPeak * 100;
+    }
 }
 
 -(AMMixerViewController *)createMixerByPort:(AMJackPort *)p
@@ -132,42 +162,22 @@
     mixerCtrl.meter = 0.0;
     
     [mixerCtrl setVolumeRange:NSMakeRange(0, 1)];
-    mixerCtrl.volume = 0.0;
-    [(AMMixerView*)mixerCtrl.view setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
-    
+    mixerCtrl.volume = 0.5;
+    [(AMMixerView*)mixerCtrl.view
+     setBackgroundColor:[NSColor colorWithCalibratedRed:38.0/255 green:38.0/255 blue:38.0/255 alpha:1]];
+    mixerCtrl.jackport = p;
     mixerCtrl.channName = p.name;
-    [mixerCtrl addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew context:nil];
+    p.volume = mixerCtrl.volume;
     
     return mixerCtrl;
 }
 
 
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMMixerViewController class]]){
-        
-        AMMixerViewController* mixerCtrl = (AMMixerViewController*)object;
-        
-        if ([keyPath isEqualToString:@"volume"]){
-            NSArray* ports = [_client allPorts];
-            for (AMJackPort* p in ports) {
-                if ([p.name isEqualToString:mixerCtrl.channName]) {
-                
-                    p.volume = mixerCtrl.volume;
-                }
-            }
-        }
-    }
-}
-
-
 -(void)stopClient
 {
+    [_meterTimer invalidate];
+    _meterTimer = nil;
+    
     [_jackInfoTimer invalidate];
     _jackInfoTimer = nil;
     
@@ -176,11 +186,7 @@
     [self.mixerCollectionView removeAllItems];
     [self.outputMixerCollectionView removeAllItems];
     
-    for (AMMixerViewController* mixerCtrl in _mixerControllers) {
-        [mixerCtrl removeObserver:self forKeyPath:@"volume"];
-    }
-    
-    [_mixerControllers removeAllObjects];
+    [_mixerCtrls removeAllObjects];
 }
 
 
@@ -190,29 +196,8 @@
     NSString* strSampleRate = [NSString stringWithFormat:@"%d", [_client sampleRate]];
     self.bufferSize.stringValue = strBufSize;
     self.sampleRate.stringValue = strSampleRate;
-    
-    float cpuUsage = [_client cpuLoad];
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:AM_JACK_CPU_USAGE_NOTIFICATION
-     object:[NSNumber numberWithFloat:cpuUsage]];
 }
 
-
--(void)port:(AMJackPort *)port currentPeak:(float)peak
-{
-    for (AMMixerViewController* mc in _mixerControllers) {
-        
-        NSString *portName = [port.name uppercaseStringWithLocale:[NSLocale  currentLocale]];
-        if ([mc.channName isEqualToString:portName]){
-            mc.meter = peak;
-            break;
-        }
-    }
-}
-
--(void)jackShutDownClient:(AMArtsmeshClient *)client{
-
-}
 
 
 @end

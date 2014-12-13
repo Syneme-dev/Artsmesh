@@ -31,5 +31,6 @@
 @property AMFloatPanelViewController *floatPanelViewController;
 @property NSWindow *archiveFloatWindow;
 @property WebView *youTubeVideo;
+@property WebView *floatWindowWebView;
 
 @end

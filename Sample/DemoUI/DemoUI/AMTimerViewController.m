@@ -9,11 +9,12 @@
 #import "AMTimerViewController.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMTimer/AMTimer.h"
+#import <UIFramework/AMButtonHandler.h>
 
 @interface AMTimerViewController ()
+@property (weak) IBOutlet NSButton *clockBtn;
 @property (weak) IBOutlet NSButton *timerBtn;
-@property (weak) IBOutlet AMFoundryFontView *timerScreen;
-
+@property (weak) IBOutlet NSTabView *tabView;
 @end
 
 @implementation AMTimerViewController
@@ -29,55 +30,31 @@
 
 -(void)awakeFromNib
 {
-    [[AMTimer shareInstance] addTimerScreen:self.timerScreen];
-    
-    [[AMTimer shareInstance] addObserver:self
-                              forKeyPath:@"state"
-                                 options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                                 context:nil];
+    [super awakeFromNib];
+    [self.timerBtn performClick:nil];
 }
 
--(void)dealloc
+-(void)registerTabButtons{
+    super.tabs=self.tabView;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.clockBtn];
+    [self.tabButtons addObject:self.timerBtn];
+    self.showingTabsCount=2;
+    [AMButtonHandler changeTabTextColor:self.clockBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
+}
+
+
+- (IBAction)clockBtnClick:(id)sender
 {
-    [[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
+    [self pushDownButton:self.clockBtn];
+    [self.tabView selectTabViewItemAtIndex:1];
 }
 
-- (IBAction)timerBtnClicked:(NSButton *)sender
+- (IBAction)timerBtnClick:(id)sender
 {
-    if (sender.state == NSOnState) {
-        [[AMTimer shareInstance] start];
-    }
-    else {
-        
-        [[AMTimer shareInstance] pause];
-        [[AMTimer shareInstance] reset];
-    }
+    [self pushDownButton:self.timerBtn];
+    [self.tabView selectTabViewItemAtIndex:0];
 }
-
-
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMTimer class]]){
-        
-        if ([keyPath isEqualToString:@"state"]){
-            AMTimerState newState = [[change objectForKey:@"new"] intValue];
-            
-            switch (newState) {
-                case kAMTimerStart:
-                    [self.timerBtn setState:1];
-                    break;
-                default:
-                    [self.timerBtn setState:0];
-                    break;
-            }
-        }
-    }
-}
-
 
 @end

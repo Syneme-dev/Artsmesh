@@ -7,15 +7,71 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCMessageViewController">
             <connections>
+                <outlet property="clearBtn" destination="ccj-Z4-VOo" id="K1b-E6-P6F"/>
+                <outlet property="searchBtn" destination="COi-Rg-OcN" id="R4a-Cl-JJD"/>
+                <outlet property="searchField" destination="w2A-hT-f11" id="xpE-Hu-x8y"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="814" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="620" height="446"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <point key="canvasLocation" x="447" y="248"/>
+            <subviews>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="ccj-Z4-VOo" userLabel="videoTabButton">
+                    <rect key="frame" x="575" y="428" width="38" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="AwH-sc-U9n"/>
+                        <constraint firstAttribute="height" constant="13" id="e1B-wg-64R"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="CLEAR" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="GSs-9d-0Yb">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="clearBtnClick:" target="-2" id="3JR-1c-UBZ"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="COi-Rg-OcN" userLabel="videoTabButton">
+                    <rect key="frame" x="533" y="428" width="38" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="Ew2-mt-HxJ"/>
+                        <constraint firstAttribute="height" constant="13" id="Thc-vT-F4J"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="SEARCH" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="SQO-7h-IJr">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="searchBtnClick:" target="-2" id="u2A-IU-AyJ"/>
+                    </connections>
+                </button>
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w2A-hT-f11" customClass="AMFoundryFontView">
+                    <rect key="frame" x="413" y="429" width="112" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="112" id="abH-W1-gOl"/>
+                        <constraint firstAttribute="height" constant="16" id="s2N-cc-co3"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" drawsBackground="YES" id="grp-NB-VZo">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.1803921568627451" green="0.22745098039215686" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="filterEntered:" target="-2" id="v3b-DV-qoJ"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ccj-Z4-VOo" secondAttribute="trailing" constant="7" id="25c-qY-B4J"/>
+                <constraint firstItem="ccj-Z4-VOo" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="N6W-6r-Qhs"/>
+                <constraint firstItem="COi-Rg-OcN" firstAttribute="leading" secondItem="w2A-hT-f11" secondAttribute="trailing" constant="8" id="WOt-ZC-co3"/>
+                <constraint firstItem="w2A-hT-f11" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="hMY-If-a6V"/>
+                <constraint firstItem="ccj-Z4-VOo" firstAttribute="leading" secondItem="COi-Rg-OcN" secondAttribute="trailing" constant="4" id="jj6-Pd-pzC"/>
+                <constraint firstItem="COi-Rg-OcN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="yEc-2p-Ck5"/>
+            </constraints>
+            <point key="canvasLocation" x="330" y="76"/>
         </customView>
     </objects>
 </document>

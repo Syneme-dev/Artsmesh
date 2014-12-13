@@ -186,5 +186,10 @@
     return _isOSCClientStarted;
 }
 
+-(void)setOSCMessageSearchFilterString:(NSString*)filterStr
+{
+    [_oscMonitorController setOscMessageSearchFilterString:filterStr];
+}
+
 
 @end

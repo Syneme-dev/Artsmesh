@@ -192,6 +192,7 @@
     _floatPanelViewController = fpc;
     
     _archiveFloatWindow = fpc.containerWindow;
+    _archiveFloatWindow.level = NSFloatingWindowLevel;
 }
 
 - (WebView *)embedYouTube:(NSString *)urlString frame:(NSRect)frame {

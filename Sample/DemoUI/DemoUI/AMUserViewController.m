@@ -378,7 +378,6 @@
 -(double)getTimezoneFromLat:(double)latitude andLon:(double)longitude {
     double gmtOffset = -100;
     
-    NSLog(@"test");
     NSString *username = @"artsmesh";
     
     NSString *searchURL = [NSString stringWithFormat:@"%@%f%@%f%@%@",

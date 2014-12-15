@@ -452,7 +452,7 @@
 }
 
 - (AMPanelViewController *)loadOSCMessagePanel:(NSString *)panelId relatedView:(NSView*)view {
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC MESSAGE" width:UI_defaultPanelWidth*2 height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC CLIENT" width:UI_defaultPanelWidth*2 height:UI_defaultPanelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = panelView.frame.size;
     NSViewController *viewController = [[AMOSCMessageViewController alloc] initWithNibName:@"AMOSCMessageViewController" bundle:nil];

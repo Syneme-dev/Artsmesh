@@ -1057,6 +1057,8 @@
 		AFAEBD87196107B000B7FB51 /* css */ = {
 			isa = PBXGroup;
 			children = (
+				2DE439C71A37C58700650692 /* new-event.css */,
+				2DE439C51A37905A00650692 /* archive-popup-info.css */,
 				AF6DD87D1A3BD875006063CB /* archiveProfile.css */,
 				AFAEBDB919611AD900B7FB51 /* map.css */,
 				AFAEBD88196107BE00B7FB51 /* info.css */,

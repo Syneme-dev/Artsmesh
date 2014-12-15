@@ -282,12 +282,19 @@
     NSString *url= sender.mainFrameURL;
     sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-    
+    if([frame.DOMDocument.documentURI containsString:@"www.youtube.com/embed"])
+    {
+        return;
+    }
     
     if ( statusNetProfileURLString && [url hasPrefix:statusNetProfileURLString]) {
         [sender setPreferencesIdentifier:@"floatWindowPrefs"];
         path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
         sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+        
+        NSString *loginJs = @"$('<div class=\"section\" id=\"eventSection\"><h2>Event</h2></div>').appendTo('#aside_primary');$('.eventItem').appendTo('#eventSection');";
+        [frame.webView stringByEvaluatingJavaScriptFromString:
+         loginJs];
         
     }
     else if ( statusNetGroupURLString && [url hasPrefix:statusNetGroupURLString]) {
@@ -303,6 +310,7 @@
     else {
         sender.preferences.userStyleSheetEnabled = NO;
     }
+    //
 }
 
 - (void)windowDidLoad{

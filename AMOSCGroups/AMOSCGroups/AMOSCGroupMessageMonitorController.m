@@ -78,7 +78,9 @@
 @interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate>
 @property (weak) IBOutlet NSTableView *oscMsgTable;
 @property NSMutableArray* oscMessageLogs;
+@property NSMutableArray* oscMessageSearchResults;
 @property NSMutableDictionary* timerDict;
+@property NSString *searchString;
 
 @end
 
@@ -88,6 +90,8 @@
     [super viewDidLoad];
     // Do view setup here.
     self.oscMessageLogs = [[NSMutableArray alloc] init];
+    self.oscMessageSearchResults = [[NSMutableArray alloc] init];
+    
     self.oscMsgTable.dataSource = self;
     self.oscMsgTable.delegate = self;
     self.oscMsgTable.backgroundColor  = [NSColor colorWithCalibratedHue:0.15 saturation:0.15 brightness:0.15 alpha:0.0];
@@ -99,7 +103,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [self.oscMessageLogs count];
+    return [self.oscMessageSearchResults count];
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
@@ -121,7 +125,7 @@
             [cellView setIdentifier:cellIdentifier];
         }
         
-        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
         [cellView addSubview:pack.lightView];
         
         return cellView;
@@ -156,7 +160,7 @@
         [textField setTextColor:[NSColor grayColor]];
         [cellView addSubview:textField];
 
-        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
         textField.stringValue = pack.msg;
 
         return cellView;
@@ -192,7 +196,7 @@
         [textField setTextColor:[NSColor grayColor]];
         [cellView addSubview:textField];
         
-        OSCMessagePack* pack = [self.oscMessageLogs objectAtIndex:row];
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
         textField.stringValue = pack.params;
         return cellView;
     }
@@ -247,7 +251,7 @@
         if ([pack.msg isEqualToString:msg]) {
             pack.params = paramDetail;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.oscMsgTable reloadData];
+                [self setOscMessageSearchFilterString:self.searchString];
                 [pack startBlinking];
             });
             return;
@@ -260,9 +264,34 @@
     [self.oscMessageLogs addObject:oscPack];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-         [self.oscMsgTable reloadData];
+         [self setOscMessageSearchFilterString:self.searchString];
          [oscPack startBlinking];
     });
+}
+
+-(void)setOscMessageSearchFilterString:(NSString *)filterStr
+{
+    self.searchString = filterStr;
+    
+    if (filterStr == nil || [filterStr isEqualTo:@""]) {
+        self.oscMessageSearchResults = [NSMutableArray arrayWithArray:self.oscMessageLogs];
+        [self.oscMsgTable reloadData];
+        return;
+    }
+
+    self.oscMessageSearchResults = [[NSMutableArray alloc] init];
+    for (OSCMessagePack *pack in self.oscMessageLogs) {
+        
+        NSString* strLowerMsg = [pack.msg lowercaseString];
+        NSString* strLowerFilter = [filterStr lowercaseString];
+        if ([strLowerMsg rangeOfString:strLowerFilter].location == NSNotFound) {
+            continue;
+        }else{
+            [self.oscMessageSearchResults addObject:pack];
+        }
+    }
+    
+    [self.oscMsgTable reloadData];
 }
 
 

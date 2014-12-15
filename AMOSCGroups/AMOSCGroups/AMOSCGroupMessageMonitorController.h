@@ -20,4 +20,6 @@
 
 @interface AMOSCGroupMessageMonitorController : NSViewController
 
+-(void)setOscMessageSearchFilterString:(NSString *)filterStr;
+
 @end

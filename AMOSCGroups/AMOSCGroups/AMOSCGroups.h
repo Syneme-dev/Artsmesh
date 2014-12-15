@@ -25,6 +25,7 @@
 
 -(BOOL)startOSCGroupClient;
 -(void)stopOSCGroupClient;
+-(void)setOSCMessageSearchFilterString:(NSString*)filterStr;
 
 -(BOOL)isOSCGroupServerStarted;
 -(BOOL)isOSCGroupClientStarted;

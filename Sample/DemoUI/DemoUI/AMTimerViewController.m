@@ -10,11 +10,13 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMTimer/AMTimer.h"
 #import <UIFramework/AMButtonHandler.h>
+#import "AMTimerTabVC.h"
 
 @interface AMTimerViewController ()
 @property (weak) IBOutlet NSButton *clockBtn;
 @property (weak) IBOutlet NSButton *timerBtn;
 @property (weak) IBOutlet NSTabView *tabView;
+@property (nonatomic) NSMutableArray *viewControllers;
 @end
 
 @implementation AMTimerViewController
@@ -23,7 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+        _viewControllers = [NSMutableArray array];
     }
     return self;
 }
@@ -31,6 +33,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    [self addViewControllerFromNib:@"AMTimerTabVC" bundle:nil];
     [self.timerBtn performClick:nil];
 }
 
@@ -44,6 +47,25 @@
     [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 }
 
+- (void)addViewControllerFromNib:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    NSViewController *vc = [[NSViewController alloc] initWithNibName:nibName bundle:bundle];
+    NSView* contentView = vc.view;
+    [self.tabView addSubview:contentView];
+    
+    [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [self.tabView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [self.tabView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+}
 
 - (IBAction)clockBtnClick:(id)sender
 {

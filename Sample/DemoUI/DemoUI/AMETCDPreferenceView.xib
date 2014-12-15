@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMETCDPreferenceViewController">
@@ -30,98 +30,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
-                    <rect key="frame" x="0.0" y="780" width="600" height="20"/>
-                    <subviews>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
-                            <rect key="frame" x="351" y="2" width="81" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="81" id="8Gq-E1-bgK"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="OSC GROUP  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
-                            </connections>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv" userLabel="videoTab">
-                            <rect key="frame" x="435" y="2" width="47" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="47" id="qyc-gt-HjF"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="VIDEO  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="LOR-MN-C7f">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="audioTab">
-                            <rect key="frame" x="485" y="2" width="46" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="46" id="39N-XM-VVz"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="AUDIO  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
-                            <rect key="frame" x="534" y="2" width="60" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="60" id="f3v-9C-LuF"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
-                            </connections>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="268" y="2" width="75" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="75" id="buD-tv-Pnh"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="JACK SERVER  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
-                            </connections>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
-                            <rect key="frame" x="195" y="2" width="65" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="65" id="2gU-bV-q3Y"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="GENERAL  |" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="leading" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="3" id="BUi-Qg-RRs"/>
-                        <constraint firstItem="niJ-06-bEy" firstAttribute="leading" secondItem="fqL-QQ-Ulv" secondAttribute="trailing" constant="3" id="HVz-lQ-VWQ"/>
-                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="baseline" secondItem="niJ-06-bEy" secondAttribute="baseline" id="RCB-PT-xM2"/>
-                        <constraint firstItem="mvk-HX-fYa" firstAttribute="baseline" secondItem="YZd-cX-Ly4" secondAttribute="baseline" id="Zao-Yh-kMQ"/>
-                        <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="aff-26-PSf"/>
-                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="leading" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="3" id="ahV-t1-I3L"/>
-                        <constraint firstAttribute="height" constant="20" id="dD7-iQ-nPb"/>
-                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="baseline" secondItem="vtg-zK-Gic" secondAttribute="baseline" id="kMk-vx-Lct"/>
-                        <constraint firstItem="vtg-zK-Gic" firstAttribute="leading" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="8" symbolic="YES" id="q5S-lV-IAN"/>
-                        <constraint firstItem="vtg-zK-Gic" firstAttribute="baseline" secondItem="YZd-cX-Ly4" secondAttribute="baseline" id="tAb-M3-dhf"/>
-                        <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="6" id="vPY-l9-TDE"/>
-                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="leading" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="8" symbolic="YES" id="yM0-EA-Phe"/>
-                        <constraint firstItem="niJ-06-bEy" firstAttribute="baseline" secondItem="bOZ-dO-5oy" secondAttribute="baseline" id="ySR-et-Nfu"/>
-                    </constraints>
-                </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                     <font key="font" metaFont="system"/>
@@ -501,6 +409,98 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
+                    <rect key="frame" x="0.0" y="780" width="600" height="20"/>
+                    <subviews>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
+                            <rect key="frame" x="351" y="2" width="81" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="81" id="8Gq-E1-bgK"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="OSC GROUP  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv" userLabel="videoTab">
+                            <rect key="frame" x="435" y="2" width="47" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="47" id="qyc-gt-HjF"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="VIDEO  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="LOR-MN-C7f">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="audioTab">
+                            <rect key="frame" x="485" y="2" width="46" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="39N-XM-VVz"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="AUDIO  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
+                            <rect key="frame" x="534" y="2" width="60" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="f3v-9C-LuF"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
+                            <rect key="frame" x="268" y="2" width="75" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="75" id="buD-tv-Pnh"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="JACK SERVER  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onJackServerTabClick:" target="-2" id="azS-S0-ubi"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
+                            <rect key="frame" x="195" y="2" width="65" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="2gU-bV-q3Y"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="GENERAL  |" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="leading" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="3" id="BUi-Qg-RRs"/>
+                        <constraint firstItem="niJ-06-bEy" firstAttribute="leading" secondItem="fqL-QQ-Ulv" secondAttribute="trailing" constant="3" id="HVz-lQ-VWQ"/>
+                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="baseline" secondItem="niJ-06-bEy" secondAttribute="baseline" id="RCB-PT-xM2"/>
+                        <constraint firstItem="mvk-HX-fYa" firstAttribute="baseline" secondItem="YZd-cX-Ly4" secondAttribute="baseline" id="Zao-Yh-kMQ"/>
+                        <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="aff-26-PSf"/>
+                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="leading" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="3" id="ahV-t1-I3L"/>
+                        <constraint firstAttribute="height" constant="20" id="dD7-iQ-nPb"/>
+                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="baseline" secondItem="vtg-zK-Gic" secondAttribute="baseline" id="kMk-vx-Lct"/>
+                        <constraint firstItem="vtg-zK-Gic" firstAttribute="leading" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="8" symbolic="YES" id="q5S-lV-IAN"/>
+                        <constraint firstItem="vtg-zK-Gic" firstAttribute="baseline" secondItem="YZd-cX-Ly4" secondAttribute="baseline" id="tAb-M3-dhf"/>
+                        <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="6" id="vPY-l9-TDE"/>
+                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="leading" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="8" symbolic="YES" id="yM0-EA-Phe"/>
+                        <constraint firstItem="niJ-06-bEy" firstAttribute="baseline" secondItem="bOZ-dO-5oy" secondAttribute="baseline" id="ySR-et-Nfu"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Gtp-xq-sPX" secondAttribute="bottom" id="L5o-We-6LL"/>

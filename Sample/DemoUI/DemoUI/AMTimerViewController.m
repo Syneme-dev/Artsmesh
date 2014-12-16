@@ -23,7 +23,9 @@
 
 -(void)awakeFromNib
 {
-    [self addViewControllerFromNib:@"AMTimerTabVC" bundle:nil];
+    [self addViewController:[AMTimerTabVC class]
+                    fromNib:@"AMTimerTabVC"
+                     bundle:nil];
     [self.timerBtn performClick:nil];
 }
 
@@ -37,9 +39,11 @@
     [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 }
 
-- (void)addViewControllerFromNib:(NSString *)nibName bundle:(NSBundle *)bundle
+- (void)addViewController:(Class)aViewControllerClass
+                  fromNib:(NSString *)nibName
+                   bundle:(NSBundle *)bundle
 {
-    NSViewController *vc = [[AMTimerTabVC alloc] initWithNibName:nibName bundle:bundle];
+    NSViewController *vc = [[aViewControllerClass alloc] initWithNibName:nibName bundle:bundle];
     NSView* contentView = vc.view;
     NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
     [superView addSubview:contentView];

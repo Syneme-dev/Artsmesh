@@ -555,7 +555,7 @@
     float panelWidth = 570.0f; //UI_defaultPanelWidth;
     float panelHeight = UI_defaultPanelHeight; //340.0f;
     
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"G+"
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"EVENTS"
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);

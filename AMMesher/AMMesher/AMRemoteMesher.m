@@ -473,6 +473,7 @@
             NSDictionary* groupData = (NSDictionary*)groups[i];
             AMLiveGroup* newGroup = [self parseGroup:groupData];
             [groupList addObject:newGroup];
+        
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{

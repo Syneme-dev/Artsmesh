@@ -124,17 +124,21 @@
 
 -(void)stopOSCGroupServer
 {
-     _isOSCServerStarted = NO;
-    [_serverTask terminate];
-    _serverTask = nil;
+    _isOSCServerStarted = NO;
     
-    system("killall OscGroupServer >/dev/null");
-    NSNotification* notification = [[NSNotification alloc]
-                                    initWithName: AM_OSC_SRV_STOPPED_NOTIFICATION
-                                    object:nil
-                                    userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    AMLog(kAMInfoLog, @"AMOSCGroup", @"OSCGroupServer is stopped!");
+    if (_serverTask != nil) {
+        kill(_serverTask.processIdentifier, SIGINT);
+        _serverTask = nil;
+        
+        NSNotification* notification = [[NSNotification alloc]
+                                        initWithName: AM_OSC_SRV_STOPPED_NOTIFICATION
+                                        object:nil
+                                        userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        AMLog(kAMInfoLog, @"AMOSCGroup", @"OSCGroupServer is stopped!");
+    }
+
+
 }
 
 -(BOOL)startOSCGroupClient{

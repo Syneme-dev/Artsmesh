@@ -103,6 +103,7 @@
 		AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AF53F606199320BA0003DDC4 /* shot_audioMixing.png */; };
 		AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */; };
 		AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */; };
+		AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */ = {isa = PBXBuildFile; fileRef = AF6DD87D1A3BD875006063CB /* archiveProfile.css */; };
 		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
 		AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -414,6 +415,7 @@
 		AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelControlBarView.xib; sourceTree = "<group>"; };
 		AF621F1C197F59C8005F4F97 /* AMPanelControlBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMPanelControlBarViewController.h; path = Controllers/AMPanelControlBarViewController.h; sourceTree = "<group>"; };
 		AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMPanelControlBarViewController.m; path = Controllers/AMPanelControlBarViewController.m; sourceTree = "<group>"; };
+		AF6DD87D1A3BD875006063CB /* archiveProfile.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = archiveProfile.css; sourceTree = "<group>"; };
 		AF7242B2197E19CA0008799B /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Bold.otf"; sourceTree = "<group>"; };
@@ -1070,6 +1072,7 @@
 			children = (
 				2DE439C71A37C58700650692 /* new-event.css */,
 				2DE439C51A37905A00650692 /* archive-popup-info.css */,
+				AF6DD87D1A3BD875006063CB /* archiveProfile.css */,
 				AFAEBDB919611AD900B7FB51 /* map.css */,
 				AFAEBD88196107BE00B7FB51 /* info.css */,
 				AFAEBD89196107BE00B7FB51 /* web.css */,
@@ -1321,6 +1324,7 @@
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
+				AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */,
 				262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */,
 				2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */,
 				AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */,

@@ -12,9 +12,7 @@
 #import <UIFramework/AMFoundryFontView.h>
 #import "AMOSCGroups/AMOSCGroups.h"
 
-@interface AMOSCMessageViewController ()
-@property (weak) IBOutlet NSButton *clearBtn;
-@property (weak) IBOutlet NSButton *searchBtn;
+@interface AMOSCMessageViewController ()<NSTextFieldDelegate>
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 
 @end
@@ -35,9 +33,6 @@
 
 -(void)awakeFromNib
 {
-    [AMButtonHandler changeTabTextColor:self.clearBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.searchBtn toColor:UI_Color_blue];
-    
     _controller = [[AMOSCGroups sharedInstance] getOSCMonitorUI];
     if (_controller != nil) {
         NSView* contentView = _controller.view;
@@ -46,6 +41,8 @@
         
         rect.size.height -= 21;
         _controller.view.frame = rect;
+        
+        self.searchField.delegate = self;
         
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
@@ -63,27 +60,24 @@
     }
 }
 
-- (IBAction)clearBtnClick:(id)sender
+- (IBAction)searchTextChanged:(id)sender
 {
-    self.searchField.stringValue = @"";
-    [self.searchField resignFirstResponder];
-    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:@""];
+//    [self.searchField resignFirstResponder];
+//    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
 }
 
-- (IBAction)searchBtnClick:(id)sender
+
+-(void)controlTextDidChange:(NSNotification *)obj
 {
     [self.searchField resignFirstResponder];
     [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
 }
 
-- (IBAction)filterEntered:(id)sender
-{
-    [self.searchBtn performClick:nil];
-}
-
 -(void)cancelOperation:(id)sender
 {
-    [self.clearBtn performClick:nil];
+    self.searchField.stringValue = @"";
+    [self.searchField resignFirstResponder];
+    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:@""];
 }
 
 @end

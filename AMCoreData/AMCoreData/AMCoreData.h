@@ -44,6 +44,7 @@
 -(void)broadcastChanges:(NSString*)notificationName;
 
 -(AMLiveGroup*)mergedGroup;
+-(NSArray *)myMergedGroupsInFlat;
 
 @end
 

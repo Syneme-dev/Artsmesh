@@ -227,7 +227,7 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
-	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"]. "")
+	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	
 	fmt.Println("")
 	fmt.Println("register_group requst information ---------------------")
@@ -273,7 +273,7 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
-	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"])
+	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	
 	fmt.Println("")
 	fmt.Println("group_update requst information ---------------------")

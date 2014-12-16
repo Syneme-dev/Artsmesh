@@ -263,7 +263,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	existUser.userData.IsLeader = user.IsLeader
 	existUser.userData.IsOnline = user.IsOnline
 	existUser.userData.Busy = user.Busy
-	exisrUser.userData.OSCServer = user.OSCServer
+	existUser.userData.OSCServer = user.OSCServer
 	
 	updateUserTimestamp(existUser)
 	makeSnapShot()

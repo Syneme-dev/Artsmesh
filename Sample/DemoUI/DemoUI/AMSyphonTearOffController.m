@@ -7,10 +7,10 @@
 //
 
 #import "AMSyphonTearOffController.h"
-#import "AMSyphonView.h"
+#import "AMSyphonViewPopUp.h"
 
 @interface AMSyphonTearOffController ()
-@property (weak) IBOutlet AMSyphonView *glView;
+@property (weak) IBOutlet AMSyphonViewPopUp *glView;
 
 
 @end

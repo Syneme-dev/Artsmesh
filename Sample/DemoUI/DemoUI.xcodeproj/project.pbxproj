@@ -104,6 +104,7 @@
 		AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AF53F606199320BA0003DDC4 /* shot_audioMixing.png */; };
 		AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */; };
 		AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */; };
+		AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */ = {isa = PBXBuildFile; fileRef = AF6DD87D1A3BD875006063CB /* archiveProfile.css */; };
 		AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; };
 		AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF7242B2197E19CA0008799B /* AMCommonTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -185,6 +186,8 @@
 		CE486AAF1A280CB900D35B82 /* AMVideoMixerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE486AA51A280CB900D35B82 /* AMVideoMixerViewController.xib */; };
 		CE486AB31A28140900D35B82 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE486AB21A28140900D35B82 /* Syphon.framework */; };
 		CE486AB41A28143300D35B82 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE486AB21A28140900D35B82 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954831A3E821F00676D12 /* AMTimerTabVC.m */; };
+		CE5954861A3E821F00676D12 /* AMTimerTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */; };
 		CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6007781990615C00EF9220 /* AMNetworkToolsViewController.m */; };
 		CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */; };
 		CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7216CC19A19C9F00504E28 /* logo-02.png */; };
@@ -414,6 +417,7 @@
 		AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanelControlBarView.xib; sourceTree = "<group>"; };
 		AF621F1C197F59C8005F4F97 /* AMPanelControlBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMPanelControlBarViewController.h; path = Controllers/AMPanelControlBarViewController.h; sourceTree = "<group>"; };
 		AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMPanelControlBarViewController.m; path = Controllers/AMPanelControlBarViewController.m; sourceTree = "<group>"; };
+		AF6DD87D1A3BD875006063CB /* archiveProfile.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = archiveProfile.css; sourceTree = "<group>"; };
 		AF7242B2197E19CA0008799B /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		AF796F5B1900EE7D00C48C00 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AF82E340190CA81A0083487C /* FoundryMonoline-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FoundryMonoline-Bold.otf"; sourceTree = "<group>"; };
@@ -510,6 +514,9 @@
 		CE486AA41A280CB900D35B82 /* AMVideoMixerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoMixerViewController.m; sourceTree = "<group>"; };
 		CE486AA51A280CB900D35B82 /* AMVideoMixerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoMixerViewController.xib; sourceTree = "<group>"; };
 		CE486AB21A28140900D35B82 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
+		CE5954821A3E821F00676D12 /* AMTimerTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTabVC.h; sourceTree = "<group>"; };
+		CE5954831A3E821F00676D12 /* AMTimerTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerTabVC.m; sourceTree = "<group>"; };
+		CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTabVC.xib; sourceTree = "<group>"; };
 		CE6007771990615C00EF9220 /* AMNetworkToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkToolsViewController.h; sourceTree = "<group>"; };
 		CE6007781990615C00EF9220 /* AMNetworkToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkToolsViewController.m; sourceTree = "<group>"; };
 		CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMNetworkToolsViewController.xib; sourceTree = "<group>"; };
@@ -730,6 +737,9 @@
 				AFD34795195BEF620055043E /* AMTimerViewController.h */,
 				AFD34796195BEF620055043E /* AMTimerViewController.m */,
 				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
+				CE5954821A3E821F00676D12 /* AMTimerTabVC.h */,
+				CE5954831A3E821F00676D12 /* AMTimerTabVC.m */,
+				CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */,
 			);
 			name = TimerPanel;
 			sourceTree = "<group>";
@@ -1060,6 +1070,7 @@
 			children = (
 				2DE439C71A37C58700650692 /* new-event.css */,
 				2DE439C51A37905A00650692 /* archive-popup-info.css */,
+				AF6DD87D1A3BD875006063CB /* archiveProfile.css */,
 				AFAEBDB919611AD900B7FB51 /* map.css */,
 				AFAEBD88196107BE00B7FB51 /* info.css */,
 				AFAEBD89196107BE00B7FB51 /* web.css */,
@@ -1308,10 +1319,12 @@
 				AFAEBDB419610BEA00B7FB51 /* RepliesPost.png in Resources */,
 				AFD7575B195D048E0057976D /* shot_mixing.png in Resources */,
 				269F93681998F024006E19DD /* AMManualViewController.xib in Resources */,
+				CE5954861A3E821F00676D12 /* AMTimerTabVC.xib in Resources */,
 				2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */,
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
+				AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */,
 				262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */,
 				2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */,
 				AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */,
@@ -1395,6 +1408,7 @@
 				2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				CEC2FC5C196588FD00AFD309 /* AMGroupPanelUserCellController.m in Sources */,
+				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				266CE259197E428D00D8145B /* AMGroupPanelTableCellController.m in Sources */,
 				CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */,

@@ -117,4 +117,36 @@
     return NO;
 }
 
+-(NSArray *)groupsInFlat:(AMLiveGroup *)group
+{
+    NSMutableArray *groups = [[NSMutableArray alloc] init];
+    [groups addObject:group];
+    
+    if ([group.subGroups count] != 0) {
+        for (AMLiveGroup *g in group.subGroups) {
+            [groups addObjectsFromArray: [self groupsInFlat:g]];
+        }
+    }
+    
+    return groups;
+}
+
+
+-(NSArray *)myMergedGroupsInFlat;
+{
+    AMLiveGroup *myMergedGroup = nil;
+    for (AMLiveGroup *group in self.remoteLiveGroups) {
+        if ([self isMySelfIn:group]) {
+            myMergedGroup = group;
+        }
+    }
+    
+    if (myMergedGroup != nil) {
+        NSArray *groups = [self groupsInFlat:myMergedGroup];
+        return groups;
+    }
+    
+    return nil;
+}
+
 @end

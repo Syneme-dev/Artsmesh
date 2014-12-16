@@ -8,8 +8,12 @@
 
 #import "AMOSCMessageViewController.h"
 #import "AMOSCGroups/AMOSCGroups.h"
+#import <UIFramework/AMButtonHandler.h>
+#import <UIFramework/AMFoundryFontView.h>
+#import "AMOSCGroups/AMOSCGroups.h"
 
-@interface AMOSCMessageViewController ()
+@interface AMOSCMessageViewController ()<NSTextFieldDelegate>
+@property (weak) IBOutlet AMFoundryFontView *searchField;
 
 @end
 
@@ -38,6 +42,8 @@
         rect.size.height -= 21;
         _controller.view.frame = rect;
         
+        self.searchField.delegate = self;
+        
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
         NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
         [self.view addConstraints:
@@ -52,6 +58,26 @@
                                                  metrics:nil
                                                    views:views]];
     }
+}
+
+- (IBAction)searchTextChanged:(id)sender
+{
+//    [self.searchField resignFirstResponder];
+//    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
+}
+
+
+-(void)controlTextDidChange:(NSNotification *)obj
+{
+    [self.searchField resignFirstResponder];
+    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
+}
+
+-(void)cancelOperation:(id)sender
+{
+    self.searchField.stringValue = @"";
+    [self.searchField resignFirstResponder];
+    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:@""];
 }
 
 @end

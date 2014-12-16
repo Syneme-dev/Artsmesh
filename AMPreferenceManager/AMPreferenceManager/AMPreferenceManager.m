@@ -148,6 +148,8 @@
     localGroup.longitude = [defaults stringForKey:Preference_Key_Cluster_Longitude];
     localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];
     localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
+    localGroup.busy = NO;
+    localGroup.timezoneName = [NSTimeZone systemTimeZone].name;
     localGroup.password = @"";
 
     [AMCoreData shareInstance].myLocalLiveGroup= localGroup;

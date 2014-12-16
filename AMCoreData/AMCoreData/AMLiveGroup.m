@@ -27,6 +27,7 @@
     dict[@"location"] = self.location;
     dict[@"longitude"] = self.longitude;
     dict[@"latitude"] = self.latitude;
+    dict[@"timezoneName"] = self.timezoneName;
     
     if (self.busy) {
         [dict setObject:@"YES" forKey:@"busy"];
@@ -50,6 +51,7 @@
     group.longitude = dict[@"Longitude"];
     group.latitude = dict[@"Latitude"];
     group.busy = [dict[@"Busy"] boolValue];
+    group.timezoneName = dict[@"TimezoneName"];
     group.password = @"";
     return group;
 }

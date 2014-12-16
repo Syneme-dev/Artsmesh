@@ -745,11 +745,11 @@
     AMOSCGroups* oscGroups = [AMOSCGroups sharedInstance];
     if(![oscGroups isOSCGroupServerStarted]){
         [self.oscServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
-        if (![oscGroups startOSCGroupServer])
-        {
-            [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
-        }
-        
+        [oscGroups startOSCGroupServer];
+        [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+        [AMCoreData shareInstance].mySelf.oscServer = YES;
+        [[AMMesher sharedAMMesher] updateMySelf];
+
     }else{
         [oscGroups stopOSCGroupServer];
     }
@@ -798,11 +798,16 @@
 -(void)oscStarted:(NSNotification*)notification
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+    [AMCoreData shareInstance].mySelf.oscServer = YES;
+    [[AMMesher sharedAMMesher] updateMySelf];
+
 }
 
 -(void)oscStopped:(NSNotification*)notification
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+    [AMCoreData shareInstance].mySelf.oscServer = NO;
+    [[AMMesher sharedAMMesher] updateMySelf];
 }
 
 #pragma mark -

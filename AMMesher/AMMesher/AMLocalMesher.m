@@ -115,8 +115,6 @@
     
     [_lsTask launch];
     
-//    _mesherServerTask = [[AMShellTask alloc] initWithCommand:command];
-//    [_mesherServerTask launch];
 
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }

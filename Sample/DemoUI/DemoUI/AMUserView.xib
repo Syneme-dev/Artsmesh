@@ -32,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView ambiguous="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cg5-2P-EbE">
                     <rect key="frame" x="0.0" y="20" width="300" height="256"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
@@ -146,7 +146,7 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="qVc-j3-ELj">
-                            <view key="view" ambiguous="YES" id="UVa-w4-awA" customClass="AMTabItemView">
+                            <view key="view" id="UVa-w4-awA" customClass="AMTabItemView">
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-7e-QuP" customClass="AMCheckBoxView">
@@ -242,22 +242,28 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
-                <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqQ-Lu-DBr">
+                <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqQ-Lu-DBr">
                     <rect key="frame" x="232" y="283" width="10" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="|" id="9zh-bi-g48">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="6" id="FY6-NZ-H4h"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="|" id="9zh-bi-g48">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT">
-                    <rect key="frame" x="242" y="282" width="50" height="13"/>
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT">
+                    <rect key="frame" x="242" y="283" width="50" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="YVT-x7-zmk"/>
+                    </constraints>
                     <buttonCell key="cell" type="inline" title="PROFILE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QsY-QK-lQ6">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
                 </button>
-                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-LD-Hhp" userLabel="groupTabButton">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-LD-Hhp" userLabel="groupTabButton">
                     <rect key="frame" x="185" y="283" width="40" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="5Tf-ea-8Ch"/>
@@ -271,7 +277,7 @@
                         <action selector="onGroupTabClick:" target="-2" id="0BT-Ko-73A"/>
                     </connections>
                 </button>
-                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTb-fs-kgV" userLabel="usetTabButton">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTb-fs-kgV" userLabel="usetTabButton">
                     <rect key="frame" x="138" y="283" width="30" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="5ek-Xw-iEk"/>
@@ -286,7 +292,7 @@
                         <action selector="onUserTabClick:" target="-2" id="29j-iM-jUO"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOP-gG-W83">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOP-gG-W83">
                     <rect key="frame" x="171" y="283" width="10" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" | " id="FhZ-ZY-m3C">
                         <font key="font" metaFont="system"/>
@@ -301,9 +307,12 @@
                 <constraint firstItem="Cg5-2P-EbE" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="IRd-qY-7sF"/>
                 <constraint firstAttribute="bottom" secondItem="Cg5-2P-EbE" secondAttribute="bottom" constant="20" id="Ouh-Ev-u3W"/>
                 <constraint firstItem="Cg5-2P-EbE" firstAttribute="top" secondItem="WOP-gG-W83" secondAttribute="bottom" constant="7" id="V5e-EA-4rU"/>
+                <constraint firstItem="LqQ-Lu-DBr" firstAttribute="baseline" secondItem="xGv-LD-Hhp" secondAttribute="baseline" id="Yeu-es-gn2"/>
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="top" secondItem="1" secondAttribute="top" constant="4" id="a6H-64-iV6"/>
+                <constraint firstItem="m7h-Bt-qMT" firstAttribute="top" secondItem="1" secondAttribute="top" constant="5" id="c8C-ID-krG"/>
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="leading" secondItem="WOP-gG-W83" secondAttribute="trailing" constant="6" id="fax-El-rZ7"/>
                 <constraint firstItem="LqQ-Lu-DBr" firstAttribute="leading" secondItem="xGv-LD-Hhp" secondAttribute="trailing" constant="6" id="fwb-IT-Ozy"/>
+                <constraint firstItem="Cg5-2P-EbE" firstAttribute="top" secondItem="m7h-Bt-qMT" secondAttribute="bottom" constant="6" id="hXQ-Oo-uZt"/>
                 <constraint firstAttribute="trailing" secondItem="m7h-Bt-qMT" secondAttribute="trailing" constant="6" id="mIu-Pr-hSf"/>
                 <constraint firstItem="CTb-fs-kgV" firstAttribute="top" secondItem="1" secondAttribute="top" constant="4" id="qK2-ls-i6e"/>
                 <constraint firstItem="m7h-Bt-qMT" firstAttribute="leading" secondItem="LqQ-Lu-DBr" secondAttribute="trailing" constant="6" id="rP0-GT-dXa"/>

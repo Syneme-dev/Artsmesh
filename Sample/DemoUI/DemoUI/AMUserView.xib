@@ -17,6 +17,7 @@
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="locationField" destination="u2g-yj-0FH" id="vmL-Mb-ryH"/>
                 <outlet property="nickNameField" destination="jsc-N7-VSE" id="MjD-qB-dIx"/>
+                <outlet property="projectTabButton" destination="m7h-Bt-qMT" id="rcx-Xa-WcJ"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>
                 <outlet property="userAvatarView" destination="X62-yl-u4b" id="Kft-pI-phv"/>
@@ -253,15 +254,18 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT" userLabel="projectTabButton">
                     <rect key="frame" x="242" y="283" width="50" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="YVT-x7-zmk"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="PROFILE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QsY-QK-lQ6">
+                    <buttonCell key="cell" type="inline" title="PROJECT" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QsY-QK-lQ6">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="onProjectTabClick:" target="-2" id="Pcn-hR-XM2"/>
+                    </connections>
                 </button>
                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-LD-Hhp" userLabel="groupTabButton">
                     <rect key="frame" x="185" y="283" width="40" height="13"/>

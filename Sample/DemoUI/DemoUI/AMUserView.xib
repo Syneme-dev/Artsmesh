@@ -248,31 +248,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZNW-3Q-ngM" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="15" y="140" width="62" height="22"/>
-                                    </customView>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ryW-dS-can" userLabel="groupName" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="224" width="101" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="Hjo-RA-Syj"/>
-                                            <constraint firstAttribute="height" constant="22" id="lXd-1W-tXI"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Group Name" id="A5N-dT-lLf" customClass="AMTextFieldCell">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="groupNameEdited:" target="-2" id="EeH-ul-19M"/>
-                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Name" id="Be4-hI-CHS"/>
-                                        </connections>
-                                    </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hv0-Vr-033" userLabel="project" customClass="AMFoundryFontView">
                                         <rect key="frame" x="99" y="178" width="154" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="9Ae-eq-aAN"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Group URL" id="vTk-zZ-v8V" customClass="AMTextFieldCell">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Name" id="vTk-zZ-v8V" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
@@ -282,40 +263,19 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project" id="r2S-a5-MA1"/>
                                         </connections>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f3v-Uu-ily" userLabel="location" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="158" width="154" height="22"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="KGi-Wn-b9b" customClass="AMTextFieldCell">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="groupLocationEdited:" target="-2" id="3PX-Fj-slO"/>
-                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Location" id="3mF-Wf-C7V"/>
-                                        </connections>
-                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="496-lS-Xvd" userLabel="avatar">
                                         <rect key="frame" x="3" y="169" width="74" height="74"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="Id1-hZ-aDn"/>
                                             <constraint firstAttribute="width" constant="74" id="dJ6-2U-JeN"/>
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_user_h" id="BLf-bu-8Hc"/>
                                     </imageView>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="lNz-Kn-JLy" userLabel="groupSocial">
-                                        <rect key="frame" x="101" y="104" width="26" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="26" id="tQa-Je-NSC"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="Bka-tF-Vlv">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="groupSocialBtnClicked:" target="-2" id="EOH-fr-xof"/>
-                                        </connections>
-                                    </button>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4JL-U6-OrJ" userLabel="description" customClass="AMFoundryFontView">
                                         <rect key="frame" x="28" y="5" width="264" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="WVZ-xu-7gA"/>
+                                        </constraints>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Description" id="8SK-ct-PDK" customClass="AMTextFieldCell">
                                             <customFormatter key="formatter" id="abS-H9-ESP" customClass="AMProfileTextFieldFormatter">
                                                 <userDefinedRuntimeAttributes>
@@ -340,49 +300,18 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="s2Z-XL-cPs"/>
                                     </imageView>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Fw-4f-iQ7" userLabel="fullName" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="203" width="154" height="22"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="FullName" id="03g-7r-KsR" customClass="AMTextFieldCell">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="groupFullNameEdited:" target="-2" id="NBb-og-uKr"/>
-                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_FullName" id="0JL-z0-Z8a"/>
-                                        </connections>
-                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="4JL-U6-OrJ" firstAttribute="top" secondItem="lNz-Kn-JLy" secondAttribute="bottom" constant="24" id="2cl-Qn-Tju"/>
-                                    <constraint firstItem="4JL-U6-OrJ" firstAttribute="leading" secondItem="ND6-ou-PSa" secondAttribute="trailing" constant="12" id="6Bu-Oy-3w8"/>
-                                    <constraint firstAttribute="trailing" secondItem="6Fw-4f-iQ7" secondAttribute="trailing" constant="49" id="6gx-dq-iiO"/>
-                                    <constraint firstItem="496-lS-Xvd" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="13" id="99k-HT-upF"/>
-                                    <constraint firstItem="f3v-Uu-ily" firstAttribute="top" secondItem="6Fw-4f-iQ7" secondAttribute="bottom" constant="23" id="CMh-Mf-Awf"/>
-                                    <constraint firstItem="ND6-ou-PSa" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="8" id="CQo-y3-Rfp"/>
-                                    <constraint firstItem="lNz-Kn-JLy" firstAttribute="leading" secondItem="f3v-Uu-ily" secondAttribute="leading" id="Dzq-uf-uE9"/>
-                                    <constraint firstItem="ZNW-3Q-ngM" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="15" id="FcH-X3-UKM"/>
-                                    <constraint firstItem="6Fw-4f-iQ7" firstAttribute="leading" secondItem="ryW-dS-can" secondAttribute="leading" id="GTo-Lz-wLa"/>
-                                    <constraint firstItem="6Fw-4f-iQ7" firstAttribute="leading" secondItem="Hv0-Vr-033" secondAttribute="leading" id="Hhb-wz-IR4"/>
-                                    <constraint firstItem="6Fw-4f-iQ7" firstAttribute="trailing" secondItem="Hv0-Vr-033" secondAttribute="trailing" id="Jrb-xa-u7Z"/>
-                                    <constraint firstItem="ND6-ou-PSa" firstAttribute="top" secondItem="496-lS-Xvd" secondAttribute="bottom" constant="89" id="JwI-PF-Ijm"/>
-                                    <constraint firstItem="ND6-ou-PSa" firstAttribute="top" secondItem="4JL-U6-OrJ" secondAttribute="top" id="MV0-Bb-ATF"/>
-                                    <constraint firstItem="ryW-dS-can" firstAttribute="leading" secondItem="496-lS-Xvd" secondAttribute="trailing" constant="24" id="PEi-Z8-AMz"/>
-                                    <constraint firstAttribute="trailing" secondItem="4JL-U6-OrJ" secondAttribute="trailing" constant="10" id="Qfa-KL-pyU"/>
-                                    <constraint firstAttribute="bottom" secondItem="ND6-ou-PSa" secondAttribute="bottom" constant="70" id="RMp-vz-rPI"/>
-                                    <constraint firstItem="lNz-Kn-JLy" firstAttribute="top" secondItem="f3v-Uu-ily" secondAttribute="bottom" constant="28" id="V2m-7x-WRF"/>
-                                    <constraint firstItem="ZNW-3Q-ngM" firstAttribute="top" secondItem="496-lS-Xvd" secondAttribute="bottom" constant="7" id="avx-ab-IqS"/>
-                                    <constraint firstItem="6Fw-4f-iQ7" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="31" id="hyr-Vy-Y7a"/>
-                                    <constraint firstItem="Hv0-Vr-033" firstAttribute="top" secondItem="ryW-dS-can" secondAttribute="bottom" constant="24" id="iwn-n0-HFU"/>
-                                    <constraint firstItem="ryW-dS-can" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="10" id="jga-Z3-kUV"/>
-                                    <constraint firstItem="f3v-Uu-ily" firstAttribute="leading" secondItem="Hv0-Vr-033" secondAttribute="leading" id="knz-ly-CvC"/>
-                                    <constraint firstItem="lNz-Kn-JLy" firstAttribute="top" secondItem="Hv0-Vr-033" secondAttribute="bottom" constant="48" id="sk0-NO-xrk"/>
-                                    <constraint firstItem="ZNW-3Q-ngM" firstAttribute="trailing" secondItem="496-lS-Xvd" secondAttribute="trailing" id="tM1-hc-FgR"/>
-                                    <constraint firstAttribute="bottom" secondItem="4JL-U6-OrJ" secondAttribute="bottom" constant="5" id="ulT-IP-BTW"/>
-                                    <constraint firstItem="Hv0-Vr-033" firstAttribute="top" secondItem="6Fw-4f-iQ7" secondAttribute="bottom" constant="3" id="vUI-Ta-Ax5"/>
-                                    <constraint firstItem="Hv0-Vr-033" firstAttribute="trailing" secondItem="f3v-Uu-ily" secondAttribute="trailing" id="w5V-57-ZgX"/>
-                                    <constraint firstItem="496-lS-Xvd" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="3" id="yV3-Pq-chD"/>
-                                    <constraint firstItem="4JL-U6-OrJ" firstAttribute="top" secondItem="ZNW-3Q-ngM" secondAttribute="bottom" constant="60" id="zTc-VM-s8N"/>
+                                    <constraint firstItem="ND6-ou-PSa" firstAttribute="top" secondItem="4JL-U6-OrJ" secondAttribute="top" id="9R5-jU-zFM"/>
+                                    <constraint firstItem="ND6-ou-PSa" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="8" id="Ird-wL-iuy"/>
+                                    <constraint firstItem="4JL-U6-OrJ" firstAttribute="leading" secondItem="ND6-ou-PSa" secondAttribute="trailing" constant="12" id="LHs-dW-wvM"/>
+                                    <constraint firstItem="496-lS-Xvd" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="3" id="OAe-Rf-TjJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="4JL-U6-OrJ" secondAttribute="trailing" constant="10" id="P0z-AM-qQJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hv0-Vr-033" secondAttribute="trailing" constant="49" id="R1u-tT-ozI"/>
+                                    <constraint firstItem="Hv0-Vr-033" firstAttribute="leading" secondItem="496-lS-Xvd" secondAttribute="trailing" constant="24" id="RDS-Yf-SbY"/>
+                                    <constraint firstItem="4JL-U6-OrJ" firstAttribute="top" secondItem="Hv0-Vr-033" secondAttribute="bottom" constant="98" id="dBb-c5-7cn"/>
+                                    <constraint firstItem="Hv0-Vr-033" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="56" id="i3K-en-ttt"/>
+                                    <constraint firstItem="496-lS-Xvd" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="13" id="mkl-7T-FgQ"/>
                                 </constraints>
                             </view>
                         </tabViewItem>
@@ -466,7 +395,7 @@
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="baseline" secondItem="WOP-gG-W83" secondAttribute="baseline" id="naS-MX-3Ye"/>
                 <constraint firstItem="m7h-Bt-qMT" firstAttribute="leading" secondItem="LqQ-Lu-DBr" secondAttribute="trailing" constant="6" id="tx2-NJ-QkK"/>
             </constraints>
-            <point key="canvasLocation" x="-855" y="67.5"/>
+            <point key="canvasLocation" x="-855" y="67"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
         <textField verticalHuggingPriority="750" id="bzc-zf-E2u">

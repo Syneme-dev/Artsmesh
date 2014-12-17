@@ -1,12 +1,10 @@
 
-#header{
-display:none;
-}
-#footer{
+#header, #footer, #content, #entity_subscriptions, 
+#entity_subscribers, #entity_groups, #entity_lists, 
+#entity_statistics, #tagcloud, #export_data {
 display:none;
 }
 #content{
-display:none;
 width:300px !important;
 }
 

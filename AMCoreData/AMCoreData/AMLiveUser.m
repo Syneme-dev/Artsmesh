@@ -27,6 +27,7 @@
         self.chatPort = @"9033";
         self.publicChatPort = @"9033";
         self.isOnline = NO;
+        self.oscServer = NO;
     }
     
     return self;
@@ -66,6 +67,11 @@
         [dict setObject:@"NO" forKey:@"busy"];
     }
     
+    if (self.oscServer){
+        [dict setObject:@"YES" forKey:@"oscServer"];
+    }else{
+        [dict setObject:@"NO" forKey:@"oscServer"];
+    }
     
     return dict;
 }
@@ -86,6 +92,7 @@
     user.isOnline = [dict[@"IsOnline"] boolValue];
     user.description = dict[@"Description"];
     user.busy = [dict[@"Busy"] boolValue];
+    user.oscServer = [dict[@"OSCServer"] boolValue];
     return user;
 }
 

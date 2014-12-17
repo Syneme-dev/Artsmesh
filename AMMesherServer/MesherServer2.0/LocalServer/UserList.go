@@ -67,6 +67,7 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		g_store.groupData.Location = group.Location
 		g_store.groupData.Longitude = group.Longitude
 		g_store.groupData.Latitude = group.Latitude
+		g_store.groupData.TimezoneName = group.TimezoneName
 		g_store.groupData.Project = group.Project
 		g_store.groupData.Busy = group.Busy
 		
@@ -203,6 +204,7 @@ func makeSnapShot(){
 	newSnapShot.GroupData.Location = g_store.groupData.Location
 	newSnapShot.GroupData.Longitude = g_store.groupData.Longitude
 	newSnapShot.GroupData.Latitude = g_store.groupData.Latitude
+	newSnapShot.GroupData.TimezoneName = g_store.groupData.TimezoneName
 	newSnapShot.GroupData.Busy = g_store.groupData.Busy
 	
 		
@@ -223,6 +225,7 @@ func makeSnapShot(){
 		userData.ChatPort = v.userData.ChatPort
 		userData.PublicChatPort = v.userData.PublicChatPort
 		userData.Busy = v.userData.Busy
+		userData.OSCServer = v.userData.OSCServer
 		
 		newSnapShot.UsersData = append(newSnapShot.UsersData , userData)
 	}

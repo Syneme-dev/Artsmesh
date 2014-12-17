@@ -24,6 +24,7 @@
 @property (nonatomic) NSString* chatPort;
 @property (nonatomic) NSString* publicChatPort;
 @property (nonatomic) BOOL      busy;
+@property (nonatomic) BOOL      oscServer;
 
 -(NSMutableDictionary*)toDict;
 +(id)AMUserFromDict:(NSDictionary*)dict;

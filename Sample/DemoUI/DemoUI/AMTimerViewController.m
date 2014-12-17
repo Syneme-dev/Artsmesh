@@ -21,19 +21,11 @@
 
 @implementation AMTimerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _viewControllers = [NSMutableArray array];
-    }
-    return self;
-}
-
 -(void)awakeFromNib
 {
-    [super awakeFromNib];
-    [self addViewControllerFromNib:@"AMTimerTabVC" bundle:nil];
+    [self addViewController:[AMTimerTabVC class]
+                    fromNib:@"AMTimerTabVC"
+                     bundle:nil];
     [self.timerBtn performClick:nil];
 }
 
@@ -47,24 +39,36 @@
     [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 }
 
-- (void)addViewControllerFromNib:(NSString *)nibName bundle:(NSBundle *)bundle
+- (void)addViewController:(Class)aViewControllerClass
+                  fromNib:(NSString *)nibName
+                   bundle:(NSBundle *)bundle
 {
-    NSViewController *vc = [[NSViewController alloc] initWithNibName:nibName bundle:bundle];
+    NSViewController *vc = [[aViewControllerClass alloc] initWithNibName:nibName bundle:bundle];
     NSView* contentView = vc.view;
-    [self.tabView addSubview:contentView];
+    NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
+    [superView addSubview:contentView];
+    [self.viewControllers addObject:vc];
     
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-    [self.tabView addConstraints:
+    [superView addConstraints:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
                                              options:0
                                              metrics:nil
                                                views:views]];
-    [self.tabView addConstraints:
+    [superView addConstraints:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
                                              options:0
                                              metrics:nil
                                                views:views]];
+}
+
+- (NSMutableArray *)viewControllers
+{
+    if (!_viewControllers) {
+        _viewControllers = [NSMutableArray array];
+    }
+    return _viewControllers;
 }
 
 - (IBAction)clockBtnClick:(id)sender

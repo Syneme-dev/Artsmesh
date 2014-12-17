@@ -242,8 +242,23 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-LD-Hhp" userLabel="groupTabButton">
-                    <rect key="frame" x="129" y="284" width="40" height="13"/>
+                <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqQ-Lu-DBr">
+                    <rect key="frame" x="232" y="283" width="10" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="|" id="9zh-bi-g48">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT">
+                    <rect key="frame" x="242" y="282" width="50" height="13"/>
+                    <buttonCell key="cell" type="inline" title="PROFILE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QsY-QK-lQ6">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                </button>
+                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGv-LD-Hhp" userLabel="groupTabButton">
+                    <rect key="frame" x="185" y="283" width="40" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="5Tf-ea-8Ch"/>
                         <constraint firstAttribute="height" constant="13" id="EOK-ax-NSX"/>
@@ -256,8 +271,8 @@
                         <action selector="onGroupTabClick:" target="-2" id="0BT-Ko-73A"/>
                     </connections>
                 </button>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTb-fs-kgV" userLabel="usetTabButton">
-                    <rect key="frame" x="82" y="284" width="30" height="13"/>
+                <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTb-fs-kgV" userLabel="usetTabButton">
+                    <rect key="frame" x="138" y="283" width="30" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="5ek-Xw-iEk"/>
                         <constraint firstAttribute="width" constant="30" id="QSB-Kx-Wt8"/>
@@ -272,28 +287,13 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOP-gG-W83">
-                    <rect key="frame" x="115" y="284" width="10" height="17"/>
+                    <rect key="frame" x="171" y="283" width="10" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" | " id="FhZ-ZY-m3C">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LqQ-Lu-DBr">
-                    <rect key="frame" x="175" y="284" width="10" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="|" id="9zh-bi-g48">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7h-Bt-qMT">
-                    <rect key="frame" x="182" y="282" width="51" height="16"/>
-                    <buttonCell key="cell" type="inline" title="PROFILE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QsY-QK-lQ6">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="WOP-gG-W83" firstAttribute="leading" secondItem="CTb-fs-kgV" secondAttribute="trailing" constant="5" id="3tX-1P-5J9"/>
@@ -302,11 +302,13 @@
                 <constraint firstAttribute="bottom" secondItem="Cg5-2P-EbE" secondAttribute="bottom" constant="20" id="Ouh-Ev-u3W"/>
                 <constraint firstItem="Cg5-2P-EbE" firstAttribute="top" secondItem="WOP-gG-W83" secondAttribute="bottom" constant="7" id="V5e-EA-4rU"/>
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="top" secondItem="1" secondAttribute="top" constant="4" id="a6H-64-iV6"/>
-                <constraint firstAttribute="trailing" secondItem="xGv-LD-Hhp" secondAttribute="trailing" constant="5" id="dPi-dF-Rfa"/>
                 <constraint firstItem="xGv-LD-Hhp" firstAttribute="leading" secondItem="WOP-gG-W83" secondAttribute="trailing" constant="6" id="fax-El-rZ7"/>
+                <constraint firstItem="LqQ-Lu-DBr" firstAttribute="leading" secondItem="xGv-LD-Hhp" secondAttribute="trailing" constant="6" id="fwb-IT-Ozy"/>
+                <constraint firstAttribute="trailing" secondItem="m7h-Bt-qMT" secondAttribute="trailing" constant="6" id="mIu-Pr-hSf"/>
                 <constraint firstItem="CTb-fs-kgV" firstAttribute="top" secondItem="1" secondAttribute="top" constant="4" id="qK2-ls-i6e"/>
+                <constraint firstItem="m7h-Bt-qMT" firstAttribute="leading" secondItem="LqQ-Lu-DBr" secondAttribute="trailing" constant="6" id="rP0-GT-dXa"/>
             </constraints>
-            <point key="canvasLocation" x="-855" y="68"/>
+            <point key="canvasLocation" x="-855" y="67.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
         <textField verticalHuggingPriority="750" id="bzc-zf-E2u">

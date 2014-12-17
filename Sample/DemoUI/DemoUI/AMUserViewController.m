@@ -56,6 +56,7 @@
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.projectTabButton toColor:UI_Color_blue];
     self.groupBusyCheckbox.title = @"BUSY";
     self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
@@ -199,6 +200,12 @@
 {
     [self pushDownButton:self.groupTabButton];
     [self.tabs selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)onProjectTabClick:(id)sender
+{
+    [self pushDownButton:self.projectTabButton];
+    NSLog(@"Project tab clicked!");
 }
 
 - (IBAction)onGotoUserInfoClick:(id)sender {
@@ -594,6 +601,4 @@
     
 }
 
-- (IBAction)onProjectTabClick:(id)sender {
-}
 @end

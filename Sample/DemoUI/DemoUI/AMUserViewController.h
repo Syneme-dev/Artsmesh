@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
+#import "AMTextFieldView.h"
+#import "UIFramework/AMFoundryFontView.h"
 
 @interface AMUserViewController : AMTabPanelViewController
 @property (strong) IBOutlet NSTextField *statusMessageLabel;
@@ -21,5 +23,7 @@
 - (IBAction)onProjectTabClick:(id)sender;
 @property (weak) IBOutlet NSImageView *userAvatarView;
 @property (weak) IBOutlet NSImageView *groupAvatarView;
+
+@property (strong) IBOutlet AMFoundryFontView *projectDescriptionTextView;
 
 @end

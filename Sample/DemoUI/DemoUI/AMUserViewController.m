@@ -73,6 +73,8 @@
     [self loadUserAvatar];
     [self loadGroupAvatar];
     [self onUserTabClick:self.userTabButton];
+    
+    [self.projectDescriptionTextView setStringValue:@"Here's a project description.."];
 }
 
 -(void)dealloc
@@ -204,8 +206,9 @@
 
 - (IBAction)onProjectTabClick:(id)sender
 {
+    // Project Tab Clicked
     [self pushDownButton:self.projectTabButton];
-    NSLog(@"Project tab clicked!");
+    [self.tabs selectTabViewItemAtIndex:2];
 }
 
 - (IBAction)onGotoUserInfoClick:(id)sender {

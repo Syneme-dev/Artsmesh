@@ -62,6 +62,7 @@ func InitGroupList(){
 	rootGroup.groupData.Longitude = ""
 	rootGroup.groupData.Latitude = ""
 	rootGroup.groupData.Busy = "NO"
+	rootGroup.groupData.TimezoneName = ""
 	rootGroup.userData = nil;
 	rootGroup.subGroups = make(map[string]*GroupNode, 100)
 
@@ -111,6 +112,7 @@ func AddNewGroup(group *AMRequestGroup, superGroupId string)(string){
 	newGroup.groupData.Longitude = group.Longitude;
 	newGroup.groupData.Latitude = group.Latitude;
 	newGroup.groupData.Busy = group.Busy
+	newGroup.groupData.TimezoneName = group.TimezoneName
 	newGroup.userData = make(map[string]*UserNode, 100)
 	newGroup.subGroups = make(map[string]*GroupNode, 10)
 	
@@ -189,6 +191,7 @@ func UpdataGroup(ug *AMRequestGroup)(string){
 	group.groupData.Longitude = ug.Longitude;
 	group.groupData.Latitude = ug.Latitude;
 	group.groupData.Busy = ug.Busy;
+	group.groupData.TimezoneName = ug.TimezoneName
 	
 	makeSnapShot()
 	return "ok"
@@ -223,6 +226,7 @@ func AddNewUser(user *AMRequestUser, groupId string)(string){
 	newUser.userData.IsLeader = user.IsLeader
 	newUser.userData.IsOnline = user.IsOnline
 	newUser.userData.Busy = user.Busy
+	newUser.userData.OSCServer =user.OSCServer
 	
 	addUserToGroup(newUser, group)
 	makeUserIndex(newUser)
@@ -259,6 +263,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	existUser.userData.IsLeader = user.IsLeader
 	existUser.userData.IsOnline = user.IsOnline
 	existUser.userData.Busy = user.Busy
+	existUser.userData.OSCServer = user.OSCServer
 	
 	updateUserTimestamp(existUser)
 	makeSnapShot()
@@ -532,6 +537,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	dtoGroup.GroupData.Longitude = group.groupData.Longitude
 	dtoGroup.GroupData.Latitude = group.groupData.Latitude
 	dtoGroup.GroupData.Busy = group.groupData.Busy
+	dtoGroup.GroupData.TimezoneName = group.groupData.TimezoneName
 	
 	for _, v := range group.userData{
 		u := new(AMRequestUser)
@@ -548,6 +554,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 		u.IsLeader = v.userData.IsLeader
 		u.IsOnline = v.userData.IsOnline
 		u.Busy = v.userData.Busy
+		u.OSCServer = v.userData.OSCServer
 
 		dtoGroup.Users = append(dtoGroup.Users, u)
 	}

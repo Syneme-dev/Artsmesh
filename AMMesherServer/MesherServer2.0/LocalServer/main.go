@@ -30,38 +30,40 @@ type UserHeartbeatResposeDTO struct{
 }
 
 type AMRequestGroup struct{
-	GroupId 		string
+	GroupId 	string
 	GroupName 	string
 	FullName 	string
 	Project		string
-	Location		string
+	Location	string
 	Longitude	string
-	Latitude		string
-	Description 	string
+	Latitude	string
+	TimezoneName	string
+	Description	string
 	LeaderId 	string
-	Busy			string
+	Busy		string
 }
 
 type AMRequestUser struct{
 	UserId 		string
 	NickName 	string
-	FullName		string
+	FullName	string
 	Domain		string
 	Location  	string
-	Description 	string
+	Description	string
 	PrivateIp 	string
-	PublicIp		string
-	IsLeader		string
-	IsOnline		string
-	ChatPort		string
-	PublicChatPort string
-	Busy			string
+	PublicIp	string
+	IsLeader	string
+	IsOnline	string
+	ChatPort	string
+	PublicChatPort  string
+	Busy		string
+	OSCServer	string
 }
 
 type AMRequestChangePassword struct{
-	groupId 			string
+	groupId 		string
 	oldPassword  	string
-	newPassword 		string
+	newPassword 	string
 }
 
 type CommandAction int
@@ -77,10 +79,10 @@ const(
 )
 
 type GroupUserCommand struct{
-	action  			CommandAction
+	action  		CommandAction
 	group 			*AMRequestGroup
 	user 			*AMRequestUser
-	passworOper 		*AMRequestChangePassword
+	passworOper		*AMRequestChangePassword
 	response  		chan string
 }
 
@@ -313,6 +315,7 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.Location = strings.Join(r.Form["location"], "")
 	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
+	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
@@ -329,6 +332,7 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("location:", reqGroup.Location)
 	fmt.Println("longitude:", reqGroup.Longitude)
 	fmt.Println("latitude:", reqGroup.Latitude)
+	fmt.Println("timezoneName:", reqGroup.TimezoneName)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	
@@ -358,6 +362,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	reqUser.IsLeader = strings.Join(r.Form["isLeader"], "") 
 	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
 	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
+	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
 	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 	
@@ -379,6 +384,7 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("isLeader:", reqUser.IsLeader)
 	fmt.Println("isOnline:", reqUser.IsOnline)
 	fmt.Println("chatPort:", reqUser.ChatPort)
+	fmt.Println("oscServer:", reqUser.OSCServer)
 	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
 	fmt.Println("groupId:", reqGroup.GroupId)
 	fmt.Println("busy:", reqUser.Busy)
@@ -413,6 +419,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
 	reqUser.Busy = strings.Join(r.Form["busy"], "") 
+	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
 		
 	fmt.Println("")
 	fmt.Println("user_update requst information ---------------------")
@@ -431,6 +438,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	fmt.Println("chatPort:", reqUser.ChatPort)
 	fmt.Println("publicChatPort:", reqUser.PublicChatPort)
 	fmt.Println("busy:", reqUser.Busy)
+	fmt.Println("oscServer:", reqUser.OSCServer)
 	fmt.Println("end http requst information ---------------------")
 	
 	//check value
@@ -459,6 +467,7 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.Location = strings.Join(r.Form["location"], "")
 	reqGroup.Longitude = strings.Join(r.Form["longitude"], "")
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
+	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
 	fmt.Println("")
@@ -474,6 +483,7 @@ func update_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("location:", reqGroup.Location)
 	fmt.Println("longitude:", reqGroup.Longitude)
 	fmt.Println("latitude:", reqGroup.Latitude)
+	fmt.Println("timezoneName:", reqGroup.TimezoneName)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("end http requst information ---------------------")
 	

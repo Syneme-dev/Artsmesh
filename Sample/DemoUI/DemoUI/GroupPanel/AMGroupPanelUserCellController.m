@@ -15,7 +15,7 @@
 
 @interface AMGroupPanelUserCellController ()
 @property (weak) IBOutlet NSButton *leaderBtn;
-@property (weak) IBOutlet NSButton *zombieBtn;
+@property (weak) IBOutlet NSButton *oscBtn;
 @property (weak) IBOutlet NSButton *infoBtn;
 
 @end
@@ -48,10 +48,10 @@
         [self.leaderBtn setHidden:YES];
     }
     
-    if (self.user.isOnline && self.localUser) {
-        [self.zombieBtn setHidden:NO];
+    if (self.user.oscServer) {
+        [self.oscBtn setHidden:NO];
     }else{
-        [self.zombieBtn setHidden:YES];
+        [self.oscBtn setHidden:YES];
     }
     
     [self.infoBtn setHidden:YES];

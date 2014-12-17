@@ -16,14 +16,12 @@
 @property (nonatomic) NSString* groupName;
 @property (nonatomic) NSString* description;
 @property (nonatomic) NSString* leaderId;
-
 @property (nonatomic) NSString* fullName;
 @property (nonatomic) NSString* project;
 @property (nonatomic) NSString* location;
-
 @property (nonatomic) NSString* longitude;
 @property (nonatomic) NSString* latitude;
-
+@property (nonatomic) NSString* timezoneName;
 @property (nonatomic) BOOL busy;
 
 -(NSMutableDictionary*)dictWithoutUsers;

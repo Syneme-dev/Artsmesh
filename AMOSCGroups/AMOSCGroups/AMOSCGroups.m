@@ -110,15 +110,18 @@
         _isOSCServerStarted = YES;
         
         return YES;
-    }else{
-        NSNotification* notification = [[NSNotification alloc]
-                                        initWithName: AM_OSC_SRV_STARTED_NOTIFICATION
-                                        object:nil
-                                        userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-         _isOSCServerStarted = YES;
-        return NO;
     }
+    
+    return NO;
+//    else{
+//        NSNotification* notification = [[NSNotification alloc]
+//                                        initWithName: AM_OSC_SRV_STARTED_NOTIFICATION
+//                                        object:nil
+//                                        userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//         _isOSCServerStarted = YES;
+//        return NO;
+//    }
 }
 
 

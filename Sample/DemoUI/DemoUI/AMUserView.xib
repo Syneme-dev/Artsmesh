@@ -43,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
                                         <rect key="frame" x="98" y="224" width="154" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Pk6-Yh-nnY"/>
@@ -142,6 +142,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="X62-yl-u4b" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" id="Ggs-wT-cBU"/>
+                                    <constraint firstAttribute="trailing" secondItem="jsc-N7-VSE" secondAttribute="trailing" constant="50" id="k2t-NX-C3i"/>
                                     <constraint firstItem="X62-yl-u4b" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="lkc-OV-2tZ"/>
                                     <constraint firstItem="jsc-N7-VSE" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="zRO-d1-5ir"/>
                                 </constraints>

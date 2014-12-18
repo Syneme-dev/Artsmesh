@@ -88,26 +88,26 @@
 
 -(void)loadOSCRouterView:(NSView*)tabView
 {
-    _oscRouterViewController = [[AMOSCGroups sharedInstance] getOSCClientUI];
-    if (_oscRouterViewController) {
-        NSView* contentView = _oscRouterViewController.view;
-        contentView.frame = NSMakeRect(0, 0, 800, 600);
-        [tabView addSubview:contentView];
-        
-        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-        [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-        [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-        
-    }
+//    _oscRouterViewController = [[AMOSCGroups sharedInstance] getOSCClientUI];
+//    if (_oscRouterViewController) {
+//        NSView* contentView = _oscRouterViewController.view;
+//        contentView.frame = NSMakeRect(0, 0, 800, 600);
+//        [tabView addSubview:contentView];
+//        
+//        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+//        [tabView addConstraints:
+//         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+//                                                 options:0
+//                                                 metrics:nil
+//                                                   views:views]];
+//        [tabView addConstraints:
+//         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+//                                                 options:0
+//                                                 metrics:nil
+//                                                   views:views]];
+//        
+//    }
 }
 
 

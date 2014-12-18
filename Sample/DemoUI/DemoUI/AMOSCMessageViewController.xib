@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCMessageViewController">
             <connections>
+                <outlet property="oscOnOff" destination="6U1-Vs-NIj" id="DnC-X8-cOX"/>
+                <outlet property="oscServerPopup" destination="91C-e2-Ekk" id="oOj-jW-iwt"/>
+                <outlet property="pinToTop" destination="1qT-v5-XXs" id="VsP-ZY-E6e"/>
                 <outlet property="searchField" destination="w2A-hT-f11" id="xpE-Hu-x8y"/>
+                <outlet property="selfdefServer" destination="d3j-JH-cdX" id="LCX-1B-BRe"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -18,9 +21,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w2A-hT-f11" customClass="AMFoundryFontView">
-                    <rect key="frame" x="0.0" y="430" width="112" height="16"/>
+                    <rect key="frame" x="0.0" y="428" width="106" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="112" id="abH-W1-gOl"/>
+                        <constraint firstAttribute="width" constant="106" id="abH-W1-gOl"/>
                         <constraint firstAttribute="height" constant="16" id="s2N-cc-co3"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" placeholderString="SEARCH" drawsBackground="YES" id="grp-NB-VZo">
@@ -32,10 +35,39 @@
                         <action selector="searchTextChanged:" target="-2" id="t3L-Vv-S2O"/>
                     </connections>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a0K-Tk-iCV">
+                    <rect key="frame" x="222" y="429" width="48" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Server:" id="m1v-mm-UY3">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91C-e2-Ekk" customClass="AMPopUpView">
+                    <rect key="frame" x="276" y="429" width="125" height="16"/>
+                </customView>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qT-v5-XXs">
+                    <rect key="frame" x="535" y="427" width="65" height="14"/>
+                    <buttonCell key="cell" type="inline" title="On Top" bezelStyle="inline" alignment="center" inset="2" id="f0M-Cb-fR3">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                </button>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d3j-JH-cdX" customClass="AMFoundryFontView">
+                    <rect key="frame" x="401" y="428" width="129" height="16"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="9fL-hB-beL">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6U1-Vs-NIj" customClass="AMCheckBoxView">
+                    <rect key="frame" x="167" y="428" width="41" height="16"/>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="w2A-hT-f11" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="4Hp-x9-hBP"/>
-                <constraint firstItem="w2A-hT-f11" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="hMY-If-a6V"/>
+                <constraint firstItem="w2A-hT-f11" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="2" id="hMY-If-a6V"/>
             </constraints>
             <point key="canvasLocation" x="330" y="76"/>
         </customView>

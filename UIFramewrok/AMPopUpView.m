@@ -88,6 +88,10 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
+    if (!self.enabled) {
+        return;
+    }
+    
     NSView *popUpView = [self popUpMenuController].view;
     if (popUpView.superview) {
         [popUpView removeFromSuperview];

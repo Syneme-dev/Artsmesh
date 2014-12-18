@@ -76,7 +76,7 @@
         [self updateOSCServer];
         
         //set self define server
-        [self.selfdefServer setEnabled:NO];
+        [self.selfdefServer setHidden:YES];
         
         //Set OnTop Button
         [AMButtonHandler changeTabTextColor:self.pinToTop toColor:UI_Color_blue];
@@ -92,7 +92,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 -(void)updateOSCServer
 {
@@ -205,12 +204,9 @@
 -(void)itemSelected:(AMPopUpView *)sender
 {
     if ([self.oscServerPopup.stringValue isEqualToString:@"Self Define"]) {
-        [self.selfdefServer setEnabled:YES];
-        self.selfdefServer.stringValue = [[NSUserDefaults  standardUserDefaults]
-                                          stringForKey:Preference_OSC_Client_ServerAddr];
+        [self.selfdefServer setHidden:NO];
     }else{
-        [self.selfdefServer setEnabled:NO];
-        self.selfdefServer.stringValue = @"";
+        [self.selfdefServer setHidden:YES];
     }
 }
 

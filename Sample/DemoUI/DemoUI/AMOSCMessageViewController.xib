@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -57,9 +58,12 @@
                     <rect key="frame" x="401" y="428" width="129" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="9fL-hB-beL">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="uuf-lF-CFv" name="value" keyPath="values.Preference_OSC_Client_ServerAddr" id="Sl8-PH-0EO"/>
+                    </connections>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6U1-Vs-NIj" customClass="AMCheckBoxView">
                     <rect key="frame" x="167" y="428" width="41" height="16"/>
@@ -71,5 +75,6 @@
             </constraints>
             <point key="canvasLocation" x="330" y="76"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="uuf-lF-CFv"/>
     </objects>
 </document>

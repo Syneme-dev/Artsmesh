@@ -15,6 +15,7 @@
 static NSString * const PingCommandFormat =
     @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
 static NSString * const DummyGroupName = @"----------";
+static const NSInteger MaxNumberOfMetronomes = 10;
 
 @interface AMTimerTabVC () <NSTableViewDataSource, NSTableViewDelegate,
     NSComboBoxDataSource, NSComboBoxDelegate>
@@ -23,9 +24,17 @@ static NSString * const DummyGroupName = @"----------";
 @property (nonatomic) NSDate *timerStartDate;
 @property (nonatomic) BOOL isLocalGroup;
 @property (nonatomic) NSArray *groups;
+@property (weak) IBOutlet NSTableView *tableView;
+@property (nonatomic) NSInteger numberOfMetronomes;
+@property (nonatomic) NSMutableArray *cells;
 @end
 
 @implementation AMTimerTabVC
+
+- (void)viewDidLoad
+{
+    self.numberOfMetronomes = 2;
+}
 
 - (void)reloadGroups:(NSNotification *)notification
 {
@@ -96,9 +105,15 @@ static NSString * const DummyGroupName = @"----------";
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"avg ping time: %@", result);
             double delay = [result floatValue] * 0.5;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.delayLabel.stringValue = [NSString stringWithFormat:@"%.3f ms", delay];
-            });
+            if (delay > 0.0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.delayLabel.stringValue = [NSString stringWithFormat:@"%.3f ms", delay];
+                    if (delay > 0.001) {
+                        int bpm = 60000 / delay;
+                        cell.bpmLabel.stringValue = @(bpm).stringValue;
+                    }
+                });
+            }
         });
     }
 }
@@ -115,19 +130,42 @@ static NSString * const DummyGroupName = @"----------";
     [combox reloadData];
 }
 
+- (IBAction)addMetronome:(id)sender
+{
+    if (self.numberOfMetronomes < MaxNumberOfMetronomes) {
+        self.numberOfMetronomes++;
+        [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:self.numberOfMetronomes - 1]
+                              withAnimation:NSTableViewAnimationSlideUp];
+    }
+}
+
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return 2;
+    return self.numberOfMetronomes;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row
 {
-    AMTimerTableCellView *cell = [tableView makeViewWithIdentifier:@"AMTimerTableCellView" owner:self];
-    [cell.groupCombox selectItemAtIndex:0];
+    AMTimerTableCellView *cell = self.cells[row];
     return cell;
+}
+
+- (NSMutableArray *)cells
+{
+    if (!_cells) {
+        _cells = [NSMutableArray arrayWithCapacity:MaxNumberOfMetronomes];
+        for (NSInteger i = 0; i < MaxNumberOfMetronomes; i++) {
+            AMTimerTableCellView *cell = [self.tableView makeViewWithIdentifier:@"AMTimerTableCellView"
+                                                                          owner:self];
+            [cell.groupCombox selectItemAtIndex:0];
+            [cell.slowdownCombox selectItemAtIndex:0];
+            [_cells addObject:cell];
+        }
+    }
+    return _cells;
 }
 
 @end

@@ -11,7 +11,6 @@
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMOSCClient.h"
-#import "AMOSCGroupClientViewController.h"
 #import "AMOSCGroupMessageMonitorController.h"
 
 @implementation AMOSCGroups
@@ -19,7 +18,6 @@
     AMOSCClient* _oscClient;
     
     AMOSCPrefViewController* _oscPrefController;
-    AMOSCGroupClientViewController* _oscClientController;
     AMOSCGroupMessageMonitorController* _oscMonitorController;
     
     BOOL _isOSCServerStarted;
@@ -61,17 +59,6 @@
     return _oscPrefController;
 }
 
--(NSViewController*)getOSCClientUI
-{
-    if (_oscClientController == nil) {
-        
-        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.OSCGroupFramework"];
-        _oscClientController = [[AMOSCGroupClientViewController alloc] initWithNibName:@"AMOSCGroupClientViewController" bundle:myBundle];
-        
-    }
-    
-    return _oscClientController;
-}
 
 -(NSViewController*)getOSCMonitorUI
 {
@@ -144,11 +131,15 @@
 
 }
 
--(BOOL)startOSCGroupClient{
+-(BOOL)startOSCGroupClient:(NSString *)serverAddr
+{
     
     _oscClient = [[AMOSCClient alloc] init];
     
-    NSString* oscServerAddr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_ServerAddr];
+    NSString* oscServerAddr= serverAddr;
+    if (oscServerAddr == nil) {
+        oscServerAddr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_ServerAddr];
+    }
     NSString* oscServerPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_ServerPort];
     NSString* oscRemotePort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_RemotePort];
     NSString* oscTxPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_TxPort];

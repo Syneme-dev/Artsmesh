@@ -18,12 +18,11 @@
 +(id)sharedInstance;
 
 -(NSViewController*)getOSCPrefUI;
--(NSViewController*)getOSCClientUI;
 -(NSViewController*)getOSCMonitorUI;
 -(BOOL)startOSCGroupServer;
 -(void)stopOSCGroupServer;
 
--(BOOL)startOSCGroupClient;
+-(BOOL)startOSCGroupClient:(NSString *)serverAddr;
 -(void)stopOSCGroupClient;
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr;
 

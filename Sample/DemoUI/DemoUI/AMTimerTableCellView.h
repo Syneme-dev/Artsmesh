@@ -10,6 +10,8 @@
 
 @interface AMTimerTableCellView : NSTableCellView
 @property (weak, nonatomic) IBOutlet NSComboBox *groupCombox;
+@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
+
 @property (weak, nonatomic) IBOutlet NSTextField *metronomeLabel;
 @property (weak, nonatomic) IBOutlet NSTextField *bpmLabel;
 @property (weak, nonatomic) IBOutlet NSTextField *delayLabel;

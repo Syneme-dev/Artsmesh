@@ -56,6 +56,7 @@
     [self.statusMessageLabel setFont: [NSFont fontWithName: @"FoundryMonoline" size: self.statusMessageLabel.font.pointSize]];
     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.projectTabButton toColor:UI_Color_blue];
     self.groupBusyCheckbox.title = @"BUSY";
     self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
@@ -72,6 +73,8 @@
     [self loadUserAvatar];
     [self loadGroupAvatar];
     [self onUserTabClick:self.userTabButton];
+    
+    [self.projectDescriptionTextView setStringValue:@"Here's a project description.."];
 }
 
 -(void)dealloc
@@ -199,6 +202,13 @@
 {
     [self pushDownButton:self.groupTabButton];
     [self.tabs selectTabViewItemAtIndex:1];
+}
+
+- (IBAction)onProjectTabClick:(id)sender
+{
+    // Project Tab Clicked
+    [self pushDownButton:self.projectTabButton];
+    [self.tabs selectTabViewItemAtIndex:2];
 }
 
 - (IBAction)onGotoUserInfoClick:(id)sender {

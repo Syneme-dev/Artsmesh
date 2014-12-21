@@ -21,12 +21,49 @@
     return YES;
 }
 
+//-(void) viewDidMoveToWindow
+//{
+//    [super viewDidMoveToWindow];
+//    if ([self window] == nil)
+//        [[self openGLContext] clearDrawable];
+//}
+
+static void drawAnObject ()
+{
+    glColor3f(1.0f, 0.85f, 0.35f);
+    glBegin(GL_TRIANGLES);
+    {
+        glVertex3f(  0.0,  0.6, 0.0);
+        glVertex3f( -0.2, -0.3, 0.0);
+        glVertex3f(  0.2, -0.3 ,0.0);
+    }
+    glEnd();
+}
+
+-(BOOL)canDraw
+{
+    return YES;
+}
+
+
+- (void)lockFocus
+{
+    NSOpenGLContext* context = [self openGLContext];
+    
+    [super lockFocus];
+    if ([context view] != self) {
+        [context setView:self];
+    }
+    [context makeCurrentContext];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [[self openGLContext] makeCurrentContext];
-    
-    CGLContextObj cgl_ctx = [[self openGLContext] CGLContextObj];
-    
+//       [[NSColor redColor] set];
+//        [NSBezierPath fillRect:self.bounds];
+//       return;
+    [self lockFocus];
+
     NSRect frame = self.frame;
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -110,12 +147,11 @@
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     
-    [[self openGLContext] flushBuffer];
+    glFlush();
     
+    [self unlockFocus];
+    //[[self openGLContext] flushBuffer];
     
- //   [[NSColor redColor] set];
-//    [NSBezierPath fillRect:self.bounds];
- //   return;
 }
 
 @end

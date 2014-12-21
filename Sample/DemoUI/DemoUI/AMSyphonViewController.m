@@ -37,6 +37,25 @@ NSString* kNonServer = @"    --    ";
     // [super viewDidLoad];
     // Do view setup here
     
+    AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+    self.glView = subView;
+    [self.view addSubview:subView];
+    
+    [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSView *content = subView;
+    NSDictionary *views = NSDictionaryOfVariableBindings(content);
+    [self.view addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [self.view addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    
+
     [self updateServerList];
 }
 
@@ -212,8 +231,10 @@ if( ![servers isEqualToArray:serversNow]){
              self.glView.image = frame;
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             
+            [self.glView drawRect:self.glView.bounds];
+        
             
-            [self.glView setNeedsDisplay:YES];
+        
         }];
     }];
     

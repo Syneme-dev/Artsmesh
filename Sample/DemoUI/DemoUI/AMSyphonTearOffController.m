@@ -46,6 +46,7 @@
     fpsStart = [NSDate timeIntervalSinceReferenceDate];
     fpsCount = 0;
     FPS = 0;
+
     
     _syClient = [[SyphonClient alloc] initWithServerDescription:aServer options:nil newFrameHandler:^(SyphonClient *client) {
         // This gets called whenever the client receives a new frame.
@@ -69,8 +70,9 @@
             self.glView.image = frame;
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             
+            [self.glView drawRect:self.glView.bounds];
             
-            [self.glView setNeedsDisplay:YES];
+            //[self.glView setNeedsDisplay:YES];
         }];
     }];
     

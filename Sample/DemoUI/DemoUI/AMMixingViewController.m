@@ -10,6 +10,7 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMAudio/AMAudio.h"
 #import "AMVideo.h"
+#import "AMVideoMixerViewController.h"
 
 @interface AMMixingViewController ()
 
@@ -18,7 +19,7 @@
 @implementation AMMixingViewController
 {
      NSViewController* _audioMixerViewController;
-     NSViewController* _videoMixerViewController;
+     AMVideoMixerViewController* _videoMixerViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -61,6 +62,11 @@
 {
     [super awakeFromNib];
     [self loadTabViews];
+}
+
+-(void)viewWillDisappear
+{
+    [_videoMixerViewController.syphonManager stopAll];
 }
 
 -(void)loadTabViews

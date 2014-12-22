@@ -9,6 +9,9 @@
 #import "AMSyphonView.h"
 
 @implementation AMSyphonView
+{
+    BOOL canDraw;
+}
 
 -(void) awakeFromNib
 {
@@ -21,12 +24,17 @@
     return YES;
 }
 
-//-(void) viewDidMoveToWindow
-//{
-//    [super viewDidMoveToWindow];
-//    if ([self window] == nil)
-//        [[self openGLContext] clearDrawable];
-//}
+-(void) viewDidMoveToWindow
+{
+    [super viewDidMoveToWindow];
+    if ([self window] == nil){
+        canDraw = NO;
+        [[self openGLContext] clearDrawable];
+    }else{
+        canDraw  =YES;
+    }
+    
+}
 
 static void drawAnObject ()
 {
@@ -42,7 +50,7 @@ static void drawAnObject ()
 
 -(BOOL)canDraw
 {
-    return YES;
+    return canDraw;
 }
 
 
@@ -62,6 +70,10 @@ static void drawAnObject ()
 //       [[NSColor redColor] set];
 //        [NSBezierPath fillRect:self.bounds];
 //       return;
+    if (!canDraw) {
+        return;
+    }
+    
     [self lockFocus];
 
     NSRect frame = self.frame;

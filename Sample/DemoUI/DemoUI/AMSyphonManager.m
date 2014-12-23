@@ -113,6 +113,15 @@
     }
 }
 
+-(void)stopAll
+{
+    [_syServer stop];
+    [_syTearOff stop];
+    for (AMSyphonViewController* ctrl in _syClients) {
+        [ctrl stop];
+    }
+}
+
 
 -(BOOL)isSyphonServerStarted;
 {

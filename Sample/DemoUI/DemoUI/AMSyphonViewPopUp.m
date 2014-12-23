@@ -1,17 +1,14 @@
 //
-//  AMSyphonView.m
-//  SyphonDemo
+//  AMSyphonViewPopUp.m
+//  DemoUI
 //
-//  Created by WhiskyZed on 11/15/14.
-//  Copyright (c) 2014 WhiskyZed. All rights reserved.
+//  Created by whiskyzed on 12/16/14.
+//  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMSyphonView.h"
+#import "AMSyphonViewPopUp.h"
 
-@implementation AMSyphonView
-{
-    BOOL canDraw;
-}
+@implementation AMSyphonViewPopUp
 
 -(void) awakeFromNib
 {
@@ -24,58 +21,12 @@
     return YES;
 }
 
--(void) viewDidMoveToWindow
-{
-    [super viewDidMoveToWindow];
-    if ([self window] == nil){
-        canDraw = NO;
-        [[self openGLContext] clearDrawable];
-    }else{
-        canDraw  =YES;
-    }
-    
-}
-
-static void drawAnObject ()
-{
-    glColor3f(1.0f, 0.85f, 0.35f);
-    glBegin(GL_TRIANGLES);
-    {
-        glVertex3f(  0.0,  0.6, 0.0);
-        glVertex3f( -0.2, -0.3, 0.0);
-        glVertex3f(  0.2, -0.3 ,0.0);
-    }
-    glEnd();
-}
-
--(BOOL)canDraw
-{
-    return canDraw;
-}
-
-
-- (void)lockFocus
-{
-    NSOpenGLContext* context = [self openGLContext];
-    
-    [super lockFocus];
-    if ([context view] != self) {
-        [context setView:self];
-    }
-    [context makeCurrentContext];
-}
-
 - (void)drawRect:(NSRect)dirtyRect
 {
-//       [[NSColor redColor] set];
-//        [NSBezierPath fillRect:self.bounds];
-//       return;
-    if (!canDraw) {
-        return;
-    }
+    [[self openGLContext] makeCurrentContext];
     
-    [self lockFocus];
-
+    CGLContextObj cgl_ctx = [[self openGLContext] CGLContextObj];
+    
     NSRect frame = self.frame;
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -159,11 +110,12 @@ static void drawAnObject ()
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     
-    glFlush();
+    [[self openGLContext] flushBuffer];
     
-    [self unlockFocus];
-    //[[self openGLContext] flushBuffer];
     
+    //   [[NSColor redColor] set];
+    //    [NSBezierPath fillRect:self.bounds];
+    //   return;
 }
 
 @end

@@ -22,6 +22,7 @@
 -(void)selectClient:(int)index;
 -(BOOL)startRouter;
 -(void)stopRouter;
+-(void)stopAll;
 
 -(BOOL)isSyphonServerStarted;
 

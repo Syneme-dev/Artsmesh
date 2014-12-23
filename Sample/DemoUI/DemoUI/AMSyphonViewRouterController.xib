@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMSyphonViewRouterController">
             <connections>
-                <outlet property="glView" destination="AcQ-eU-3uc" id="AG8-GF-HXv"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,17 +15,6 @@
         <customView id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <openGLView colorSize="8bit_RGB_8bit_Alpha" depthSize="16bit" useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-eU-3uc" customClass="AMSyphonView">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
-                </openGLView>
-            </subviews>
-            <constraints>
-                <constraint firstItem="AcQ-eU-3uc" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="eTc-LY-hyJ"/>
-                <constraint firstItem="AcQ-eU-3uc" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="irK-Mz-bmp"/>
-                <constraint firstAttribute="trailing" secondItem="AcQ-eU-3uc" secondAttribute="trailing" id="jDS-1d-oh7"/>
-                <constraint firstAttribute="bottom" secondItem="AcQ-eU-3uc" secondAttribute="bottom" id="qha-lp-ZrD"/>
-            </constraints>
             <point key="canvasLocation" x="328" y="391"/>
         </customView>
     </objects>

@@ -78,6 +78,7 @@
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
+		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */; };
@@ -393,6 +394,8 @@
 		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
 		4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonTearOffController.m; sourceTree = "<group>"; };
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
+		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
+		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMenuItemView.xib; sourceTree = "<group>"; };
@@ -1117,6 +1120,8 @@
 				4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */,
 				4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */,
 				4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */,
+				4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */,
+				4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */,
 				CE486A971A280CB900D35B82 /* AMSyphonView.h */,
 				CE486A981A280CB900D35B82 /* AMSyphonView.m */,
 				CE486A991A280CB900D35B82 /* AMSyphonViewController.h */,
@@ -1425,6 +1430,7 @@
 				D46F5282196E77F500C48E5B /* AMStaticGroupDataSource.m in Sources */,
 				CEC2FC61196588FD00AFD309 /* AMGroupTextFieldFormatter.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
+				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				26AE28CC199DDADC00686E66 /* AMGroupOutlineView.m in Sources */,

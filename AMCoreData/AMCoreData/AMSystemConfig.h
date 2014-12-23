@@ -14,6 +14,7 @@
 @property NSString* artsmeshPort;
 
 @property NSHost*   localServerHost;
+@property NSArray*  localServerIps;
 @property NSString* localServerPort;
 
 @property NSString* remoteHeartbeatInterval;
@@ -26,5 +27,9 @@
 @property NSString* stunServerPort;
 @property NSString* internalChatPort;
 @property BOOL useIpv6;
+
+-(NSArray *)localServerIpv4s;
+-(NSArray *)localServerIpv6s;
+
 
 @end

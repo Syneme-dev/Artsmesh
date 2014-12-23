@@ -30,6 +30,10 @@
     
     int _heartbeatFailureCount;
     int _userlistVersion;
+    
+    BOOL _useLocalServerIp;
+    NSString *_validLocalServerIp;
+    int  _retryCount;
 }
 
 -(id)init
@@ -44,6 +48,7 @@
         _httpRequestQueue = [[NSOperationQueue alloc] init];
         _httpRequestQueue.name = @"LocalMesherQueue";
         _httpRequestQueue.maxConcurrentOperationCount = 1;
+        _retryCount = 0;
     }
     
     return self;
@@ -122,11 +127,6 @@
 
 -(void)stopLocalServer
 {
-//    if (_mesherServerTask != nil){
-//        [_mesherServerTask cancel];
-//        _mesherServerTask = nil;
-//    }
-    
     if (_lsTask) {
         [_lsTask terminate];
         _lsTask = nil;
@@ -239,6 +239,7 @@
             
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
+                _retryCount ++;
                 AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
                 sleep(1);
                 [self registerSelf];
@@ -275,8 +276,9 @@
 
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* localServerAddr = config.localServerHost.name;
+    NSString* localServerAddr = [self  validLocalServerIp];
     NSString* localServerPort = config.localServerPort;
+
     BOOL useIpv6 = config.useIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
@@ -469,13 +471,38 @@
     [_httpRequestQueue addOperation:req];
 }
 
-- (NSString *)httpBaseURL
+
+-(NSString *)validLocalServerIp
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerAddr = config.localServerHost.name;
+    if(_retryCount >= 3){
+        //we should not use domain name, use ip instead;
+        int ipRetry = _retryCount - 3;
+        long allIpCount = [config.localServerIps count];
+        NSArray *ipPool;
+        
+        if (config.useIpv6) {
+            ipPool = [config localServerIpv6s];
+        }else{
+            ipPool = [config localServerIpv4s];
+        }
+        
+        localServerAddr = [ipPool objectAtIndex: (ipRetry % allIpCount)];
+    }
+
+    return localServerAddr;
+}
+
+- (NSString *)httpBaseURL
+{
+    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    NSString* localServerAddr = [self validLocalServerIp];
     NSString* localServerPort = config.localServerPort;
+    NSString* httpUrl = [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
+    AMLog(kAMInfoLog, @"AMMesher", @"now used url is:%@", httpUrl);
     
-    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
+    return httpUrl;
 }
 
 

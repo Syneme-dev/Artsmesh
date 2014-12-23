@@ -8,5 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString * const AMTimerStartNotification;
+extern NSString * const AMTimerStopNotification;
+
 @interface AMTimerTabVC : NSViewController
 @end

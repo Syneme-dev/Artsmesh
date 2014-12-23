@@ -21,7 +21,7 @@
 - (NSTimeInterval)timeInterval
 {
     float timeUnit = self.bpmLabel.stringValue.floatValue / (1 << self.slowdownCombox.indexOfSelectedItem);
-    return 60.0 / timeUnit * self.lowNumber.floatValue;
+    return 60.0 / (timeUnit * self.lowNumber.floatValue);
 }
 
 - (IBAction)toogleLockState:(NSButton *)sender

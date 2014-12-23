@@ -94,7 +94,7 @@ static const NSInteger MaxNumberOfMetronomes = 10;
     NSComboBox *comboBox = (NSComboBox *)notification.object;
     AMTimerTableCellView *cell = (AMTimerTableCellView *)comboBox.superview;
     cell.delayLabel.stringValue = @"---- ms";
-    cell.bpmLabel.stringValue = @"600";
+    cell.bpmLabel.stringValue = @"60";
     NSInteger index = comboBox.indexOfSelectedItem;
     if (index == 0) {
         [cell updateMetronomeParameters];
@@ -118,7 +118,7 @@ static const NSInteger MaxNumberOfMetronomes = 10;
             if (delay > 0.0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     cell.delayLabel.stringValue = [NSString stringWithFormat:@"%.3f ms", delay];
-                    int bpm = MIN(600, 60000 / delay);
+                    int bpm = MIN(60, 60000 / delay);
                     cell.bpmLabel.stringValue = @(bpm).stringValue;
                     [cell updateMetronomeParameters];
                 });
@@ -170,7 +170,7 @@ static const NSInteger MaxNumberOfMetronomes = 10;
             AMTimerTableCellView *cell = [self.tableView makeViewWithIdentifier:@"AMTimerTableCellView"
                                                                           owner:self];
             [cell.groupCombox selectItemAtIndex:0];
-            [cell.slowdownCombox selectItemAtIndex:0];
+            [cell.slowdownCombox selectItemAtIndex:2];
             [_cells addObject:cell];
         }
     }

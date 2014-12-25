@@ -108,6 +108,16 @@
 
 #import <Foundation/Foundation.h>
 
+@interface AMPanelLocation : NSObject
+
+@property NSString *panelId;
+@property int row;
+@property int col;
+@property NSSize size;
+
+@end
+
+
 @interface AMPreferenceManager : NSObject
 
 +(AMPreferenceManager*)shareInstance;

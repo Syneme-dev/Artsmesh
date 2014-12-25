@@ -12,6 +12,9 @@
 #import "AMCommonTools/AMCommonTools.h"
 
 
+@implementation AMPanelLocation
+@end
+
 
 @implementation AMPreferenceManager
 
@@ -43,7 +46,6 @@
 
 - (void)registerPreference {
     NSMutableArray *openedPanel=[[NSMutableArray alloc] init];
-    [openedPanel addObject:@"User_Panel"];
     NSDictionary *registrationDomainDefaultsValues =
             [NSDictionary dictionaryWithObjectsAndKeys:
              Preference_General_ChatPort,        Preference_Key_General_ChatPort,

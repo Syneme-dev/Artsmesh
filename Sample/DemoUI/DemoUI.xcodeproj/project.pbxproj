@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01B96EFB1A4AB35D00DF40A5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B96EFA1A4AB35D00DF40A5 /* View.xib */; };
 		01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
@@ -282,6 +283,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01B96EFA1A4AB35D00DF40A5 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		01D059B91A2D6A5E00BC51E7 /* AMJackCPULoderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackCPULoderView.h; sourceTree = "<group>"; };
 		01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackCPULoderView.m; sourceTree = "<group>"; };
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */,
 				AF621F1C197F59C8005F4F97 /* AMPanelControlBarViewController.h */,
 				AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */,
+				01B96EFA1A4AB35D00DF40A5 /* View.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1272,6 +1275,7 @@
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
 				266CE25E197E550400D8145B /* AMGroupPanelStaticUserCellController.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
+				01B96EFB1A4AB35D00DF40A5 /* View.xib in Resources */,
 				CEC2FC63196588FD00AFD309 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,

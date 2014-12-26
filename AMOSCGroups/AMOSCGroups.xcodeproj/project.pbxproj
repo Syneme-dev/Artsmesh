@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0110B30C1A4D663F009DCB9C /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110B30B1A4D663F009DCB9C /* AMCoreData.framework */; };
 		013441751A14D71500ADD521 /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 013441711A14D71500ADD521 /* md5.h */; };
 		013441771A14D71500ADD521 /* OscGroupClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 013441731A14D71500ADD521 /* OscGroupClient.h */; };
 		013441781A14D75200ADD521 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 013441701A14D71500ADD521 /* md5.cpp */; };
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0110B30B1A4D663F009DCB9C /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
 		013441701A14D71500ADD521 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = md5.cpp; path = AMOSCGroups/md5.cpp; sourceTree = SOURCE_ROOT; };
 		013441711A14D71500ADD521 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = AMOSCGroups/md5.h; sourceTree = SOURCE_ROOT; };
 		013441721A14D71500ADD521 /* OscGroupClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscGroupClient.cpp; path = AMOSCGroups/OscGroupClient.cpp; sourceTree = SOURCE_ROOT; };
@@ -135,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0110B30C1A4D663F009DCB9C /* AMCoreData.framework in Frameworks */,
 				4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */,
 				4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */,
 				4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */,
@@ -264,6 +267,7 @@
 		4AED84101A134007004CE862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0110B30B1A4D663F009DCB9C /* AMCoreData.framework */,
 				4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */,
 				4AED84131A1369CD004CE862 /* AMLogger.framework */,
 				4AED84111A135C20004CE862 /* AMPreferenceManager.framework */,
@@ -536,7 +540,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/www1/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -555,7 +562,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "$(INSTALL_PATH)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/www1/src/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = AMOSCGroups/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";

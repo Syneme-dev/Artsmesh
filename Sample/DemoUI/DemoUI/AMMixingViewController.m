@@ -57,6 +57,9 @@
     [self loadTabViews];
     [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
+    
+    [self pushDownButton:self.audioTab];
+    [self pushDownButton:self.videoTab];
 }
 
 -(void)viewWillDisappear

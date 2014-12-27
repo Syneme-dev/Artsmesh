@@ -12,6 +12,9 @@
 #import "AMCoreData/AMLiveGroup.h"
 #import "AMCoreData/AMLiveUser.h"
 
+NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
+NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
+
 static NSString * const PingCommandFormat =
     @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
 static NSString * const DummyGroupName = @"----------";
@@ -45,6 +48,8 @@ static const NSInteger MaxNumberOfMetronomes = 10;
 {
     if (self.timer.valid) {
         [self.timer invalidate];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
+                                                            object:self];
     } else {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
@@ -53,6 +58,8 @@ static const NSInteger MaxNumberOfMetronomes = 10;
                                                      repeats:YES];
         self.timerStartDate = [NSDate date];
         [self.timer fire];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStartNotification
+                                                            object:self];
     }
 }
 
@@ -87,8 +94,11 @@ static const NSInteger MaxNumberOfMetronomes = 10;
     NSComboBox *comboBox = (NSComboBox *)notification.object;
     AMTimerTableCellView *cell = (AMTimerTableCellView *)comboBox.superview;
     cell.delayLabel.stringValue = @"---- ms";
+    cell.bpmLabel.stringValue = @"60";
     NSInteger index = comboBox.indexOfSelectedItem;
-    if (index != 0) {
+    if (index == 0) {
+        [cell updateMetronomeParameters];
+    } else {
         AMLiveGroup *group = self.groups[index - 1];
         AMLiveUser *user = [group.users lastObject];
         NSString *userIP = self.isLocalGroup ? user.privateIp : user.publicIp;
@@ -108,10 +118,9 @@ static const NSInteger MaxNumberOfMetronomes = 10;
             if (delay > 0.0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     cell.delayLabel.stringValue = [NSString stringWithFormat:@"%.3f ms", delay];
-                    if (delay > 0.001) {
-                        int bpm = 60000 / delay;
-                        cell.bpmLabel.stringValue = @(bpm).stringValue;
-                    }
+                    int bpm = MIN(60, 60000 / delay);
+                    cell.bpmLabel.stringValue = @(bpm).stringValue;
+                    [cell updateMetronomeParameters];
                 });
             }
         });
@@ -161,7 +170,7 @@ static const NSInteger MaxNumberOfMetronomes = 10;
             AMTimerTableCellView *cell = [self.tableView makeViewWithIdentifier:@"AMTimerTableCellView"
                                                                           owner:self];
             [cell.groupCombox selectItemAtIndex:0];
-            [cell.slowdownCombox selectItemAtIndex:0];
+            [cell.slowdownCombox selectItemAtIndex:2];
             [_cells addObject:cell];
         }
     }

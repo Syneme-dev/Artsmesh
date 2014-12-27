@@ -157,6 +157,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
     NSHost *host = [NSHost hostWithName:sender.hostName];
+    config.localServerIps = host.addresses;
     config.localServerHost = host;
     config.localServerPort = [NSString stringWithFormat:@"%ld", (long)sender.port];
     
@@ -188,9 +189,9 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
-
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     config.localServerHost = [NSHost currentHost];
+    config.localServerIps = config.localServerHost.addresses;
     config.localServerPort = [NSString stringWithFormat:@"%ld", sender.port];
     
     AMLog(kAMInfoLog, @"AMMesher", @"local server published, service name: %@, host name:%@, port:%@",

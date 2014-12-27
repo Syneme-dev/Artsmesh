@@ -10,6 +10,7 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMAudio/AMAudio.h"
 #import "AMVideo.h"
+#import "AMVideoMixerViewController.h"
 
 @interface AMMixingViewController ()
 
@@ -18,7 +19,7 @@
 @implementation AMMixingViewController
 {
      NSViewController* _audioMixerViewController;
-     NSViewController* _videoMixerViewController;
+     AMVideoMixerViewController* _videoMixerViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,16 +30,14 @@
     }
     return self;
 }
+
 -(void)registerTabButtons{
     super.tabs=self.tabs;
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.videoTab];
     [self.tabButtons addObject:self.audioTab];
-    [self.tabButtons addObject:self.outputTab];
-    self.showingTabsCount=3;
+    self.showingTabsCount=2;
     [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.outputTab toColor:UI_Color_blue];
     [self onVideoTabClick:self.videoTab];
 }
 
@@ -52,15 +51,20 @@
     [self.tabs selectTabViewItemAtIndex:0];
 }
 
-- (IBAction)onOutputTabClick:(id)sender {
-    [self pushDownButton:self.outputTab];
-    [self.tabs selectTabViewItemAtIndex:2];
-}
-
 -(void)awakeFromNib
 {
     [super awakeFromNib];
     [self loadTabViews];
+    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
+    
+    [self pushDownButton:self.audioTab];
+    [self pushDownButton:self.videoTab];
+}
+
+-(void)viewWillDisappear
+{
+    [_videoMixerViewController.syphonManager stopAll];
 }
 
 -(void)loadTabViews
@@ -103,10 +107,10 @@
 
 -(void)loadVideoMixerView:(NSView*)tabView
 {
-    _videoMixerViewController = [[AMVideo sharedInstance] getMixerUI];
+    _videoMixerViewController = (AMVideoMixerViewController*)[[AMVideo sharedInstance] getMixerUI];
     if (_videoMixerViewController) {
         NSView* contentView = _videoMixerViewController.view;
-        contentView.frame = NSMakeRect(0, 0, 800, 600);
+        //contentView.frame = NSMakeRect(0, 0, 800, 600);
         [tabView addSubview:contentView];
         
         [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];

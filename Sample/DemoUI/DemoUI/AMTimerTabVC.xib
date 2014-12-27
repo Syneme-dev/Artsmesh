@@ -90,19 +90,25 @@
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aAQ-Kp-2NL">
                                                         <rect key="frame" x="259" y="108" width="37" height="59"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="4" drawsBackground="YES" id="O05-tN-foi">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" title="4" drawsBackground="YES" id="O05-tN-foi">
                                                             <font key="font" metaFont="system" size="45"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="M7K-e5-YyN" id="dq7-aa-Gqn"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GmJ-Cr-7lj">
                                                         <rect key="frame" x="317" y="108" width="37" height="59"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="4" drawsBackground="YES" id="sL1-hV-pEd">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" title="4" drawsBackground="YES" id="sL1-hV-pEd">
                                                             <font key="font" metaFont="system" size="45"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="M7K-e5-YyN" id="2i0-9u-72A"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n1x-gt-4cg">
                                                         <rect key="frame" x="25" y="27" width="69" height="28"/>
@@ -114,7 +120,7 @@
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTu-Xm-bLR">
                                                         <rect key="frame" x="98" y="27" width="80" height="28"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="600" id="Xkq-Uf-iGh">
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="60" id="Xkq-Uf-iGh">
                                                             <font key="font" metaFont="system" size="20"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -154,10 +160,13 @@
                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system" size="30"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="toogleLockState:" target="M7K-e5-YyN" id="RDv-AB-bdg"/>
+                                                        </connections>
                                                     </button>
                                                     <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdR-tS-FhO">
                                                         <rect key="frame" x="137" y="65" width="99" height="26"/>
-                                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="DM6-m9-gON">
+                                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="DM6-m9-gON">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -170,6 +179,9 @@
                                                                 <string>1/32</string>
                                                             </objectValues>
                                                         </comboBoxCell>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="M7K-e5-YyN" id="Fdd-6F-VAJ"/>
+                                                        </connections>
                                                     </comboBox>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6v-cE-5fT">
                                                         <rect key="frame" x="18" y="63" width="102" height="27"/>
@@ -184,8 +196,11 @@
                                                     <outlet property="bpmLabel" destination="bTu-Xm-bLR" id="Qzp-zE-Bau"/>
                                                     <outlet property="delayLabel" destination="fLe-Pe-CUg" id="tle-eh-5Xp"/>
                                                     <outlet property="groupCombox" destination="nIZ-d8-Qoc" id="igG-nt-bHM"/>
+                                                    <outlet property="lockButton" destination="8yt-Mw-rTv" id="cal-YZ-hhl"/>
+                                                    <outlet property="lowNumber" destination="GmJ-Cr-7lj" id="YpN-5z-ANL"/>
                                                     <outlet property="metronomeLabel" destination="KoU-Dp-eyl" id="bCV-BV-nIe"/>
                                                     <outlet property="slowdownCombox" destination="BdR-tS-FhO" id="v8w-Vp-wwq"/>
+                                                    <outlet property="upperNumber" destination="aAQ-Kp-2NL" id="gBU-oi-a1l"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
@@ -218,14 +233,6 @@
                         <action selector="toggleTimer:" target="-2" id="vtH-r7-rAc"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dq3-dv-lFY">
-                    <rect key="frame" x="248" y="433" width="60" height="32"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SEC" id="RDW-c1-iQl">
-                        <font key="font" metaFont="system" size="24"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnh-Jy-i7f">
                     <rect key="frame" x="8" y="486" width="34" height="29"/>
                     <buttonCell key="cell" type="smallSquare" title="+" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="bSR-5h-qJ6">
@@ -236,6 +243,14 @@
                         <action selector="addMetronome:" target="-2" id="2kT-8k-aIw"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dq3-dv-lFY">
+                    <rect key="frame" x="248" y="433" width="60" height="32"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SEC" id="RDW-c1-iQl">
+                        <font key="font" metaFont="system" size="24"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ZrX-P9-JHy"/>

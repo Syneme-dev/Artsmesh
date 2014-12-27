@@ -105,17 +105,62 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
     
-        [[AMTimer shareInstance] addObserver:self
-                                  forKeyPath:@"state"
-                                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                                     context:nil];
+//        [[AMTimer shareInstance] addObserver:self
+//                                  forKeyPath:@"state"
+//                                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//                                     context:nil];
         
     }
     return self;
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
+    
+    [self archeivePanelLocation];
+    
+    //[[AMTimer shareInstance] removeObserver:self forKeyPath:@"state"];
+}
+
+
+-(void)archeivePanelLocation
+{
+    NSMutableArray *panelViewArcheive = [[NSMutableArray alloc] init];
+    for(int col = 0; col < [_containerView.subviews count]; col++){
+        
+        NSView * colView = [_containerView.subviews objectAtIndex:col];
+        NSMutableArray *rowViews = [[NSMutableArray alloc] init];
+        for (int row = 0; row < [colView.subviews count]; row ++) {
+
+            NSView *panelView = [colView.subviews objectAtIndex:row];
+            if ([panelView isKindOfClass:[AMPanelView class]]) {
+                AMPanelView *pView = (AMPanelView *)panelView;
+                
+                NSString *pId = @"";
+                if ([pView.panelViewController isKindOfClass:[AMPanelViewController class]]) {
+                    AMPanelViewController *controller = (AMPanelViewController*)pView.panelViewController;
+                    pId = controller.panelId;
+                }
+                
+                NSDictionary *locDict = @{
+                                          @"column" : [NSNumber numberWithInt:col],
+                                          @"row" :  [NSNumber numberWithInt:row],
+                                          @"width": [NSNumber numberWithFloat:panelView.frame.size.width],
+                                          @"height":[NSNumber numberWithFloat:panelView.frame.size.height],
+                                          @"panelId": pId
+                                        };
+                
+               // NSLog(@"%@", pId);
+                
+                [rowViews addObject:locDict];
+            }
+        }
+        
+        if([rowViews count] != 0){
+            [panelViewArcheive addObject:rowViews];
+        }
+    }
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:panelViewArcheive forKey:UserData_Key_OpenedPanel];
 }
 
 
@@ -240,25 +285,52 @@
     }
 }
 
-- (void)createDefaultPanelAndloadControlBarItemStatus {
+- (void)createDefaultPanelAndloadControlBarItemStatus
+{
     NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    for (NSString *openedPanelId in openedPanels) {
-        if ([openedPanelId rangeOfString:@"_PANEL"].location != NSNotFound) {
-            [self createPanelWithType:openedPanelId withId:openedPanelId];
-            NSString *sideItemId = [openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+    
+    for(NSMutableArray* col in openedPanels){
+        if (col != nil) {
+            [self addColumnWithPanels:col];
         }
     }
 }
 
-- (void)loadControlBarItemStatus {
-    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    for (NSString *openedPanelId in openedPanels) {
-        if ([openedPanelId rangeOfString:@"_PANEL"].location != NSNotFound) {
-            NSString *sideItemId = [openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-            [self setSideBarItemStatus:sideItemId withStatus:YES ];
-        }
+
+-(void)addColumnWithPanels:(NSArray*)panels
+{
+    NSRect rect = NSMakeRect(0, 0, 30, 30);
+   // AMBox *colBox = [[AMBox alloc] initWithFrame:rect sytle:AMBoxVertical];
+    
+    for (NSDictionary *dict in panels) {
+        NSString *panelId = [dict objectForKey:@"panelId"];
+        [self createPanelWithId:panelId];
+        
+        NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+        [self setSideBarItemStatus:sideItemId withStatus:YES ];
+       // [colBox addSubview:ctrl.view];
     }
+    
+   // [_containerView addSubview:colBox];
+
+}
+
+
+-(AMPanelViewController*)createPanelWithId:(NSString *)panelId
+{
+    AMPanelViewController* panelCtrl = [self createPanelWithType:panelId withId:panelId relatedView:nil];
+    return panelCtrl;
+}
+
+
+- (void)loadControlBarItemStatus {
+//    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
+//    for (NSString *openedPanelId in openedPanels) {
+//        if ([openedPanelId rangeOfString:@"_PANEL"].location != NSNotFound) {
+//            NSString *sideItemId = [openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+//            [self setSideBarItemStatus:sideItemId withStatus:YES ];
+//        }
+//    }
 }
 
 - (void)copyPanel:(NSButton *)sender {
@@ -340,7 +412,6 @@
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height {
     return [self createPanel:identifier withTitle:title width:width height:height relatedView:nil];
 }
-
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height relatedView:(NSView*)relatedView {
     AMPanelViewController *panelViewController =
             [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
@@ -350,7 +421,7 @@
     panelView.preferredSize = NSMakeSize(width, height);
     panelView.initialSize = panelView.preferredSize;
     [panelViewController setTitle:title];
-
+    
     NSView *firstPanel = nil;
     NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
     CGFloat x = [[scrollView contentView] documentVisibleRect].origin.x;
@@ -363,40 +434,37 @@
                             relativeTo:firstPanel];
         }
         else{
-        for (NSString *openedPanelId in self.panelControllers.allKeys) {
-            AMAppDelegate *appDelegate = [NSApp delegate];
-            AMPanelViewController *firstPanelViewController = appDelegate.mainWindowController.panelControllers[openedPanelId];
-            AMBoxItem *boxItem = (AMBoxItem *) firstPanelViewController.view;
-            AMBox *box = [boxItem hostingBox];
+            for (NSString *openedPanelId in self.panelControllers.allKeys) {
+                AMAppDelegate *appDelegate = [NSApp delegate];
+                AMPanelViewController *firstPanelViewController = appDelegate.mainWindowController.panelControllers[openedPanelId];
+                AMBoxItem *boxItem = (AMBoxItem *) firstPanelViewController.view;
+                AMBox *box = [boxItem hostingBox];
                 if (box.frame.origin.x > x && box.frame.origin.x - x - diffX < 0) {
-                diffX = box.frame.origin.x - x;
-                firstPanel = firstPanelViewController.view.superview;
+                    diffX = box.frame.origin.x - x;
+                    firstPanel = firstPanelViewController.view.superview;
                 }
             }
-             [_containerView addSubview:panelViewController.view positioned:NSWindowBelow relativeTo:firstPanel];
+            [_containerView addSubview:panelViewController.view positioned:NSWindowBelow relativeTo:firstPanel];
         }
-       
+        
     }
     else {
         [_containerView addSubview:panelViewController.view];
     }
     [self.panelControllers setObject:panelViewController forKey:identifier];
-    NSMutableArray *openedPanels = [[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
-    if (![openedPanels containsObject:identifier]) {
-        [openedPanels addObject:identifier];
-    }
+//    NSMutableArray *openedPanels = [[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+//    if (![openedPanels containsObject:identifier]) {
+//        [openedPanels addObject:identifier];
+//    }
 
-    [[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
+    //[[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;
 }
-
 - (void)removePanel:(NSString *)panelName {
     AMPanelViewController *panelViewController = self.panelControllers[panelName];
     [panelViewController closePanel:nil];
 
 }
-
-
 - (void)fillPanel:(AMPanelViewController *)panelController content:(NSViewController *)contentController {
     NSView *panelView = panelController.view;
     NSView *contentView = contentController.view;
@@ -422,7 +490,6 @@
 
     }
 }
-
 - (AMPanelViewController *)loadTestPanel {
     AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
     AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
@@ -534,8 +601,6 @@
     [preferenceViewController loadSystemInfo];
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
     return panelViewController;
-
-
 }
 
 - (AMPanelViewController *)loadChatPanel:(NSString *)panelId relatedView:(NSView*)view {
@@ -630,6 +695,7 @@
 
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId relatedView:(NSView*)relatedView{
     AMPanelViewController *panelViewController;
+    
     if ([panelType isEqualToString:UI_Panel_Key_User]) {
         panelViewController = [self loadProfilePanel:panelId relatedView:relatedView];
     }

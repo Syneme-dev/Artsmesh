@@ -7,6 +7,7 @@
 //
 
 #import "AMOSCPrefViewController.h"
+#import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 
 
@@ -147,7 +148,12 @@
     
     NSString* username = [[AMPreferenceManager standardUserDefaults]
                         stringForKey:Preference_OSC_Client_UserName];
+    if([username isEqualTo:@"default"]){
+        username = [AMCoreData shareInstance].mySelf.nickName;
+    }
+    
     self.oscClientUserName.stringValue = username;
+   
     
     NSString* userpwd = [[AMPreferenceManager standardUserDefaults]
                           stringForKey:Preference_OSC_Client_UserPwd];
@@ -155,8 +161,12 @@
 
     NSString* groupname = [[AMPreferenceManager standardUserDefaults]
                          stringForKey:Preference_OSC_Client_GroupName];
+    if ([groupname isEqualTo:@"default"]) {
+        groupname = [AMCoreData shareInstance].myLocalLiveGroup.groupName;
+    }
     self.oscClientGroupName.stringValue = groupname;
-    
+
+
     NSString* grouppwd = [[AMPreferenceManager standardUserDefaults]
                            stringForKey:Preference_OSC_Client_GroupPwd];
     self.oscClientGroupPwd.stringValue = grouppwd;
@@ -240,7 +250,7 @@
     NSString* username = self.oscClientUserName.stringValue;
     if ([username isEqualToString:@""]) {
         
-        return NO;
+        self.oscClientUserName.stringValue = [AMCoreData shareInstance].mySelf.nickName;
     }
     
     NSString* userpwd = self.oscClientUserPwd.stringValue;
@@ -251,8 +261,7 @@
     
     NSString* groupname = self.oscClientGroupName.stringValue;
     if([groupname isEqualToString:@""]){
-        
-        return NO;
+        self.oscClientGroupName.stringValue = [AMCoreData shareInstance].myLocalLiveGroup.groupName;
     }
     
     NSString* grouppwd = self.oscClientGroupPwd.stringValue;

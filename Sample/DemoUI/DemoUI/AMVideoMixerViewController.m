@@ -11,6 +11,7 @@
 #import "AMPanelViewController.h"
 #import "UIFrameWork/AMPanelView.h"
 #import "AMAppDelegate.h"
+#import "AMSyphonView.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -43,6 +44,9 @@
     self.bigView.contentView = [self.syphonManager outputView];
     
     for (int i = 0; i < self.smallViews.count; i++) {
+        
+        
+//        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
         AMVideoMixerBackgroundView *view = self.smallViews[i];
         view.contentView = [self.syphonManager clientViewByIndex:i];
     }

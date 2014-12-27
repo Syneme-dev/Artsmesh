@@ -14,5 +14,6 @@
 @property NSString* currentServerName;
 
 -(void)updateServerList;
+-(void)stop;
 
 @end

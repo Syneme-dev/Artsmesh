@@ -10,4 +10,5 @@
 
 @interface AMSyphonTearOffController : NSViewController
 - (void)selectNewServer:(NSDictionary *) aServer;
+-(void)stop;
 @end

@@ -165,7 +165,12 @@ typedef enum {
         self.socialWebTab.preferences.userStyleSheetEnabled = NO;
     }
     self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
+    [self.socialWebTab stringByEvaluatingJavaScriptFromString:
+     moveSearchJs];
 
+    
+    
     if (!isLogin) {[self login:frame];}
 }
 

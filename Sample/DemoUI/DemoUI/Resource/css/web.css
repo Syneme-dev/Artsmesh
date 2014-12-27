@@ -9,15 +9,44 @@
     width:100% !important;
     padding:2px !important;
 }
+/*#aside_primary{*/
+/*    display:none;*/
+/*}*/
+
 #aside_primary{
-    display:none;
+    
+    width:700px !important;
 }
-#site_nav_local_views{
-    display:none;
-}
+
 #aside_primary_wrapper,#core,#wrap{
     width:100% !important;
 }
 #content h1{
     display:none;
+}
+#site_nav_local_views{
+    position:relative !important;
+    float: left !important;
+    width: 1000px !important;
+    height: 40px  !important;
+    padding:4px !important;
+    
+}
+
+#site_nav_local_views li
+{
+    margin-right: 10px !important;
+    float: left  !important;
+}
+#site_nav_local_views .nav li
+{
+    margin-right: 1px !important;
+    
+}
+#site_nav_local_views .nav{
+    width:100%  !important;
+}
+#header-search{
+    margin-top:4px !important;
+    float:left !important;
 }

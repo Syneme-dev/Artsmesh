@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMCheckBoxView.h"
+#import "AMRatioButtonView.h"
 
-@interface AMCheckBoxView()
+@interface AMRatioButtonView()
 
 @end
 
-@implementation AMCheckBoxView
+@implementation AMRatioButtonView
 {
     BOOL _checked;
 }
@@ -62,13 +62,17 @@
     }
     
     NSSize fontSize = [self.title sizeWithAttributes:textAttributes];
-    NSPoint titleLocation = NSMakePoint(0, (self.bounds.size.height - fontSize.height) /2);
+    CGFloat btnFrameWidth = fontSize.height * 1.2;
+    CGFloat btnFrameGap = (self.bounds.size.height - btnFrameWidth) / 2;
+    
+    
+    NSPoint titleLocation = NSMakePoint(btnFrameWidth + btnFrameGap,
+                                        (self.bounds.size.height - fontSize.height) /2);
+    
     [self.title drawAtPoint:titleLocation withAttributes:textAttributes];
     
-    //Drawing check box
-    CGFloat btnFrameWidth = fontSize.height *1.2;
-    CGFloat btnFrameGap = (self.bounds.size.height - btnFrameWidth) / 2;
-    NSRect btnFrame = NSMakeRect(self.bounds.size.width - btnFrameGap - btnFrameWidth,
+     //Drawing check box
+    NSRect btnFrame = NSMakeRect(0,
                                  self.bounds.origin.y + btnFrameGap,
                                  btnFrameWidth,
                                  btnFrameWidth);
@@ -84,7 +88,7 @@
         [self.btnColor set];
         [btnPath fill];
     }
-   
+    
     [NSGraphicsContext restoreGraphicsState];
 }
 

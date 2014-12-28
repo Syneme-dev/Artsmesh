@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
             <connections>
-                <outlet property="errorLogButton" destination="Ao1-fG-5hX" id="KWL-z3-n47"/>
                 <outlet property="fullLogCheck" destination="vAt-up-KKp" id="kba-Xk-mjn"/>
-                <outlet property="infoLogButton" destination="k2z-mb-beO" id="8aH-OB-Oco"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
                 <outlet property="logFilePopUp" destination="h9L-Ma-tsd" id="eYK-3L-DK3"/>
@@ -17,12 +15,16 @@
                 <outlet property="pingButton" destination="P0v-P2-klr" id="lui-OM-kGD"/>
                 <outlet property="pingContentView" destination="WsA-3d-Df9" id="EBf-50-FW5"/>
                 <outlet property="pingTableView" destination="OFT-1T-5V9" id="rgu-bj-mPv"/>
+                <outlet property="ratioAMServer" destination="I3E-PX-phg" id="HIG-zE-Yg1"/>
+                <outlet property="ratioArtsmesh" destination="S7w-k2-tY0" id="YaQ-6r-jyE"/>
+                <outlet property="ratioJackAudio" destination="OAz-nO-ZWU" id="6P1-Fq-hFC"/>
+                <outlet property="ratioOSCClient" destination="Onw-ph-OMk" id="lFu-wL-w9k"/>
+                <outlet property="ratioOSCServer" destination="zUc-Ii-fmQ" id="1hS-JW-tgf"/>
                 <outlet property="tabView" destination="Iy7-e0-VXr" id="m7X-dW-gx0"/>
                 <outlet property="tracerouteButton" destination="dEP-VR-XJx" id="6vd-l0-dE7"/>
                 <outlet property="tracerouteContentView" destination="sbY-RD-sTE" id="vJA-2Z-1tA"/>
                 <outlet property="tracerouteTableView" destination="0yF-M2-mqS" id="I7w-UM-ySP"/>
                 <outlet property="view" destination="AXe-bk-9Ll" id="R57-qd-tKJ"/>
-                <outlet property="warningLogButton" destination="S1F-tM-lae" id="wL8-6y-Obg"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -367,50 +369,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ao1-fG-5hX">
-                                        <rect key="frame" x="18" y="421" width="112" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="112" id="3kr-3a-i2h"/>
-                                            <constraint firstAttribute="height" constant="28" id="o8G-sM-tSq"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" title="ERROR" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="RTP-HR-rog">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showErrorLog:" target="-2" id="kbW-hf-wc5"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-tM-lae">
-                                        <rect key="frame" x="18" y="383" width="112" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="g8w-UG-JLT"/>
-                                            <constraint firstAttribute="width" constant="112" id="ncX-eQ-XiB"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" title="WARNING" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="l3u-e6-g84">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showWarningLog:" target="-2" id="rU0-Rq-3mI"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-mb-beO">
-                                        <rect key="frame" x="18" y="339" width="112" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="h2w-iI-8Ox"/>
-                                            <constraint firstAttribute="width" constant="112" id="kfb-UO-u1p"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" title="INFO" bezelStyle="shadowlessSquare" imagePosition="left" alignment="left" inset="2" id="E3d-pl-Xb2">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showInfoLog:" target="-2" id="dJn-Vv-bTi"/>
-                                        </connections>
-                                    </button>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="18" y="281" width="148" height="28"/>
+                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="18" y="191" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="iOQ-oj-fM9"/>
                                             <constraint firstAttribute="width" constant="148" id="v3w-QO-X0Y"/>
@@ -445,8 +405,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
-                                        <rect key="frame" x="18" y="244" width="148" height="28"/>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUc-Ii-fmQ" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="420" width="148" height="30"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Onw-ph-OMk" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="377" width="148" height="30"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I3E-PX-phg" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="285" width="148" height="30"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7w-k2-tY0" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="241" width="148" height="30"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAz-nO-ZWU" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="334" width="148" height="30"/>
+                                    </customView>
+                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
+                                        <rect key="frame" x="18" y="59" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="148" id="Itu-hi-KCY"/>
                                             <constraint firstAttribute="height" constant="28" id="jvr-vo-vMT"/>
@@ -455,19 +430,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="leading" secondItem="h9L-Ma-tsd" secondAttribute="trailing" constant="12" id="KJf-1P-3oJ"/>
-                                    <constraint firstItem="Ao1-fG-5hX" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="M2x-6H-x6D"/>
-                                    <constraint firstItem="S1F-tM-lae" firstAttribute="top" secondItem="Ao1-fG-5hX" secondAttribute="bottom" constant="10" id="M30-W3-gjG"/>
                                     <constraint firstItem="h9L-Ma-tsd" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="MDl-8M-DoR"/>
-                                    <constraint firstItem="k2z-mb-beO" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="OR9-Ug-ZAY"/>
-                                    <constraint firstItem="k2z-mb-beO" firstAttribute="top" secondItem="S1F-tM-lae" secondAttribute="bottom" constant="16" id="VY5-CY-E6S"/>
-                                    <constraint firstItem="Ao1-fG-5hX" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" constant="20" id="aE8-LE-qvO"/>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" id="cie-Gd-kEe"/>
                                     <constraint firstAttribute="trailing" secondItem="7js-65-mVZ" secondAttribute="trailing" id="dyW-hZ-cTB"/>
                                     <constraint firstItem="h9L-Ma-tsd" firstAttribute="top" secondItem="vAt-up-KKp" secondAttribute="bottom" constant="9" id="ixb-U2-Ly5"/>
                                     <constraint firstAttribute="bottom" secondItem="7js-65-mVZ" secondAttribute="bottom" constant="20" id="mk9-Gb-xZi"/>
                                     <constraint firstItem="vAt-up-KKp" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="onI-NR-7Ee"/>
-                                    <constraint firstItem="S1F-tM-lae" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="uFW-8g-OwE"/>
-                                    <constraint firstItem="vAt-up-KKp" firstAttribute="top" secondItem="k2z-mb-beO" secondAttribute="bottom" constant="30" id="vQF-fR-ap9"/>
                                 </constraints>
                             </view>
                         </tabViewItem>

@@ -14,9 +14,6 @@
 @class AMLogReader;
 
 @interface AMNetworkToolsViewController : AMTabPanelViewController<NSTableViewDelegate, NSTableViewDataSource>
-- (IBAction)showErrorLog:(id)sender;
-- (IBAction)showWarningLog:(id)sender;
-- (IBAction)showInfoLog:(id)sender;
 
 @property (weak)                IBOutlet AMPopUpView*   logFilePopUp;
 @property (weak)                IBOutlet NSButton*      pingButton;

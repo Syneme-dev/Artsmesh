@@ -44,6 +44,10 @@
 		016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */; };
 		016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */; };
 		0166BA1D1A5103C900D66954 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0166BA1C1A5103C900D66954 /* UIFramework.framework */; };
+		0166BA201A514D3200D66954 /* AMOSCForwarder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0166BA1E1A514D3200D66954 /* AMOSCForwarder.h */; };
+		0166BA211A514D3200D66954 /* AMOSCForwarder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166BA1F1A514D3200D66954 /* AMOSCForwarder.m */; };
+		0166BA241A5155A800D66954 /* AMOSCView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0166BA221A5155A800D66954 /* AMOSCView.h */; };
+		0166BA251A5155A800D66954 /* AMOSCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166BA231A5155A800D66954 /* AMOSCView.m */; };
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
 		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
@@ -107,6 +111,10 @@
 		016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOscMsgTableRow.h; sourceTree = "<group>"; };
 		016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOscMsgTableRow.m; sourceTree = "<group>"; };
 		0166BA1C1A5103C900D66954 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
+		0166BA1E1A514D3200D66954 /* AMOSCForwarder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCForwarder.h; sourceTree = "<group>"; };
+		0166BA1F1A514D3200D66954 /* AMOSCForwarder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCForwarder.m; sourceTree = "<group>"; };
+		0166BA221A5155A800D66954 /* AMOSCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCView.h; sourceTree = "<group>"; };
+		0166BA231A5155A800D66954 /* AMOSCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCView.m; sourceTree = "<group>"; };
 		4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCClient.h; sourceTree = "<group>"; };
 		4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCClient.m; sourceTree = "<group>"; };
 		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
@@ -244,6 +252,8 @@
 				4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */,
 				016607441A382035002AEEE7 /* AMOSCMonitor.h */,
 				016607451A38204D002AEEE7 /* AMOSCMonitor.mm */,
+				0166BA1E1A514D3200D66954 /* AMOSCForwarder.h */,
+				0166BA1F1A514D3200D66954 /* AMOSCForwarder.m */,
 				4A6D4B801A130DB400B5D26B /* AMOSCPrefViewController.h */,
 				4A6D4B811A130DB400B5D26B /* AMOSCPrefViewController.m */,
 				4A6D4B821A130DB400B5D26B /* AMOSCPrefViewController.xib */,
@@ -251,6 +261,8 @@
 				4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */,
 				016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */,
 				016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */,
+				0166BA221A5155A800D66954 /* AMOSCView.h */,
+				0166BA231A5155A800D66954 /* AMOSCView.m */,
 				4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */,
 				4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */,
 				4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */,
@@ -294,6 +306,7 @@
 				013441751A14D71500ADD521 /* md5.h in Headers */,
 				0166079D1A382727002AEEE7 /* OscOutboundPacketStream.h in Headers */,
 				013441771A14D71500ADD521 /* OscGroupClient.h in Headers */,
+				0166BA201A514D3200D66954 /* AMOSCForwarder.h in Headers */,
 				016607911A382727002AEEE7 /* IpEndpointName.h in Headers */,
 				016607A21A382727002AEEE7 /* OscReceivedElements.h in Headers */,
 				4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */,
@@ -303,6 +316,7 @@
 				0166079A1A382727002AEEE7 /* OscException.h in Headers */,
 				016607A01A382727002AEEE7 /* OscPrintReceivedElements.h in Headers */,
 				4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */,
+				0166BA241A5155A800D66954 /* AMOSCView.h in Headers */,
 				0166079E1A382727002AEEE7 /* OscPacketListener.h in Headers */,
 				016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */,
 				016607A41A382727002AEEE7 /* OscTypes.h in Headers */,
@@ -422,7 +436,9 @@
 				4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */,
 				4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */,
 				4A6D4B841A130DB400B5D26B /* AMOSCPrefViewController.m in Sources */,
+				0166BA251A5155A800D66954 /* AMOSCView.m in Sources */,
 				016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */,
+				0166BA211A514D3200D66954 /* AMOSCForwarder.m in Sources */,
 				016607951A382727002AEEE7 /* UdpSocket.cpp in Sources */,
 				4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */,
 				016607A11A382727002AEEE7 /* OscReceivedElements.cpp in Sources */,

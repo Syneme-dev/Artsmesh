@@ -10,8 +10,10 @@
 
 @interface OSCMessagePack : NSObject
 
-@property NSString *msg;
-@property NSString *params;
+//@property NSString *msg;
+//@property NSString *params;
+@property NSTextField *msgFields;
+@property NSTextField *paramsFields;
 @property NSImageView *lightView;
 
 -(void)startBlinking;

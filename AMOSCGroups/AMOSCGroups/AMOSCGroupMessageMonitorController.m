@@ -28,6 +28,8 @@
     if (self = [super init]) {
         self.lightView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
         self.lightView.image = [NSImage imageNamed:@"osc_msg_highlight"];
+        self.msgFields = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
+        self.paramsFields = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
         _highlight = YES;
     }
     
@@ -97,6 +99,7 @@
 @property (weak) IBOutlet AMFoundryFontView *sendToDev;
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 @property (weak) IBOutlet NSButton *clearAllBtn;
+@property (weak) IBOutlet NSBox *seperaterLine;
 
 @end
 
@@ -118,7 +121,9 @@
     
     self.timerDict =  [[NSMutableDictionary alloc] init];
     
-    //
+    //seperatorLine
+    self.seperaterLine.borderColor = [NSColor redColor];
+    self.seperaterLine.fillColor = [NSColor redColor];
     
     //self define ip field
     [self.selfDefServer setHidden:YES];
@@ -212,6 +217,10 @@
         
         [self.serverSelector setEnabled:YES];
         [self.selfDefServer setEnabled:YES];
+        
+        [self.oscMessageLogs removeAllObjects];
+        [self.oscMessageSearchResults removeAllObjects];
+        [self.oscMsgTable reloadData];
     }
 }
 
@@ -273,6 +282,7 @@
 {
     [self.searchField resignFirstResponder];
     [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
+    [self.oscMsgTable reloadData];
 }
 
 -(void)cancelOperation:(id)sender
@@ -280,8 +290,15 @@
     self.searchField.stringValue = @"";
     [self.searchField resignFirstResponder];
     [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:@""];
+    [self.oscMsgTable reloadData];
 }
 
+- (IBAction)clearAll:(id)sender
+{
+    [self.oscMessageLogs removeAllObjects];
+    [self.oscMessageSearchResults removeAllObjects];
+    [self.oscMsgTable reloadData];
+}
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -313,6 +330,9 @@
         return cellView;
         
     }else if([tableColumn.identifier isEqualToString:@"osc_msg_col"]){
+        
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
+        
         static NSString *cellIdentifier = @"OSCMsgPathCell";
         NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
         
@@ -329,9 +349,14 @@
             }
         }
         
+        
+        
         NSRect textFrame = cellView.bounds;
         textFrame.size.height -= 10;
-        NSTextField *textField = [[NSTextField alloc] initWithFrame:textFrame];
+    
+        NSTextField *textField = pack.msgFields;
+        textField.frame = textFrame;
+        
         textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
                                          size:12.0f];
         textField.tag = 1002;
@@ -342,12 +367,10 @@
         [textField setTextColor:[NSColor grayColor]];
         [cellView addSubview:textField];
 
-        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
-        textField.stringValue = pack.msg;
-
         return cellView;
         
     }else if([tableColumn.identifier isEqualToString:@"osc_param_col"]){
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
         
         static NSString *cellIdentifier = @"OSCMsgParamCell";
         NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
@@ -367,7 +390,9 @@
         
         NSRect textFrame = cellView.bounds;
         textFrame.size.height -= 10;
-        NSTextField *textField = [[NSTextField alloc] initWithFrame:textFrame];
+        NSTextField *textField = pack.paramsFields;
+        textField.frame = textFrame;
+        
         textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
                                          size:12.0f];
         textField.tag = 1002;
@@ -378,8 +403,6 @@
         [textField setTextColor:[NSColor grayColor]];
         [cellView addSubview:textField];
         
-        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
-        textField.stringValue = pack.params;
         return cellView;
     }
     
@@ -430,8 +453,8 @@
     NSLog(@"params = %@", paramDetail);
     
     for (OSCMessagePack *pack in self.oscMessageLogs) {
-        if ([pack.msg isEqualToString:msg]) {
-            pack.params = paramDetail;
+        if ([pack.msgFields.stringValue isEqualToString:msg]) {
+            pack.paramsFields.stringValue = paramDetail;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self setOscMessageSearchFilterString:self.searchString];
                 [pack startBlinking];
@@ -441,12 +464,13 @@
     }
     
     OSCMessagePack *oscPack = [[OSCMessagePack alloc] init];
-    oscPack.msg = msg;
-    oscPack.params = paramDetail;
+    oscPack.msgFields.stringValue = msg;
+    oscPack.paramsFields.stringValue = paramDetail;
     [self.oscMessageLogs addObject:oscPack];
     
     dispatch_async(dispatch_get_main_queue(), ^{
          [self setOscMessageSearchFilterString:self.searchString];
+         [self.oscMsgTable reloadData];
          [oscPack startBlinking];
     });
 }
@@ -457,14 +481,13 @@
     
     if (filterStr == nil || [filterStr isEqualTo:@""]) {
         self.oscMessageSearchResults = [NSMutableArray arrayWithArray:self.oscMessageLogs];
-        [self.oscMsgTable reloadData];
         return;
     }
 
     self.oscMessageSearchResults = [[NSMutableArray alloc] init];
     for (OSCMessagePack *pack in self.oscMessageLogs) {
         
-        NSString* strLowerMsg = [pack.msg lowercaseString];
+        NSString* strLowerMsg = [pack.msgFields.stringValue lowercaseString];
         NSString* strLowerFilter = [filterStr lowercaseString];
         if ([strLowerMsg rangeOfString:strLowerFilter].location == NSNotFound) {
             continue;
@@ -472,8 +495,6 @@
             [self.oscMessageSearchResults addObject:pack];
         }
     }
-    
-    [self.oscMsgTable reloadData];
 }
 
 

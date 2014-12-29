@@ -9,6 +9,13 @@
 #import "AMOSCGroupMessageMonitorController.h"
 #import "AMOSCClient.h"
 #import "AMOscMsgTableRow.h"
+#import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMPopupView.h"
+#import "AMOSCGroups.h"
+#import "AMCoreData/AMCoreData.h"
+#import "UIFramework/AMFoundryFontView.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @implementation OSCMessagePack
 {
@@ -75,16 +82,28 @@
 
 @end
 
-@interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate>
+@interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate, AMCheckBoxDelegeate, AMPopUpViewDelegeate, NSTextFieldDelegate>
 @property (weak) IBOutlet NSTableView *oscMsgTable;
 @property NSMutableArray* oscMessageLogs;
 @property NSMutableArray* oscMessageSearchResults;
 @property NSMutableDictionary* timerDict;
 @property NSString *searchString;
+@property (weak) IBOutlet NSButton *topBtn;
+@property (weak) IBOutlet NSButton *pauseBtn;
+@property (weak) IBOutlet NSButton *thruBtn;
+@property (weak) IBOutlet AMCheckBoxView *onOffBox;
+@property (weak) IBOutlet AMPopUpView *serverSelector;
+@property (weak) IBOutlet AMFoundryFontView *selfDefServer;
+@property (weak) IBOutlet AMFoundryFontView *sendToDev;
+@property (weak) IBOutlet AMFoundryFontView *searchField;
+@property (weak) IBOutlet NSButton *clearAllBtn;
 
 @end
 
 @implementation AMOSCGroupMessageMonitorController
+{
+    NSMutableArray *_usersRunOscSrv;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,6 +117,167 @@
     [self.oscMsgTable setColumnAutoresizingStyle:NSTableViewNoColumnAutoresizing];
     
     self.timerDict =  [[NSMutableDictionary alloc] init];
+    
+    //self define ip field
+    [self.selfDefServer setHidden:YES];
+    
+    //Ser OnOff Checkbox
+    self.onOffBox.title = @"On";
+    self.onOffBox.delegate = self;
+    
+    //Set search field
+    self.searchField.delegate = self;
+    
+    //Set Server Selection
+    [self updateOSCServer];
+    
+    //Set Button Color
+    [AMButtonHandler changeTabTextColor:self.topBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.thruBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.pauseBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.clearAllBtn toColor:UI_Color_blue];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userGroupChanged:)
+                                                 name:AM_LIVE_GROUP_CHANDED
+                                               object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)userGroupChanged:(NSNotification *)notification
+{
+    [self updateOSCServer];
+}
+
+-(void)onChecked:(AMCheckBoxView *)sender
+{
+    if(self.onOffBox.checked == YES)
+    {
+        if (self.serverSelector.stringValue ) {
+            if ([self.serverSelector.stringValue isEqualToString:@""]) {
+                NSAlert *alert = [NSAlert alertWithMessageText:@"NO OSC Server"
+                                                 defaultButton:@"Ok"
+                                               alternateButton:nil
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@"Maybe the user running osc server quit, please select another one!"];
+                [alert runModal];
+                return;
+            }
+        }
+        
+        NSString *serverAddr;
+        if ([self.serverSelector.stringValue isEqualToString:@"Self Define"]) {
+            serverAddr = self.selfDefServer.stringValue;
+            
+        }else if ([self.serverSelector.stringValue isEqualToString:@"Artsmesh.io"]){
+            serverAddr = [[NSUserDefaults standardUserDefaults]
+                          stringForKey:Preference_Key_General_GlobalServerAddr];
+            
+        }else{
+            for (AMLiveUser *user in _usersRunOscSrv) {
+                if ([user.nickName isEqualToString:self.serverSelector.stringValue]) {
+                    
+                    AMLiveGroup *myCluster = [[AMCoreData shareInstance] myLocalLiveGroup];
+                    BOOL bFind = NO;
+                    for (AMLiveUser *localUser in myCluster.users) {
+                        if ([localUser.nickName isEqualToString:user.nickName]) {
+                            bFind = true;
+                        }
+                    }
+                    
+                    if (bFind) {
+                        serverAddr = user.privateIp;
+                    }else{
+                        serverAddr = user.publicIp;
+                    }
+                }
+            }
+        }
+        
+        [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr];
+        [self.serverSelector setEnabled:NO];
+        [self.selfDefServer setEnabled:NO];
+        
+        self.onOffBox.title = @"Off";
+    }else{
+        
+        [[AMOSCGroups sharedInstance] stopOSCGroupClient];
+        self.onOffBox.title = @"On";
+        
+        [self.serverSelector setEnabled:YES];
+        [self.selfDefServer setEnabled:YES];
+    }
+}
+
+
+-(void)updateOSCServer
+{
+    [self.serverSelector removeAllItems];
+    NSString *selectedServer = self.serverSelector.stringValue;
+    
+    _usersRunOscSrv = [[NSMutableArray alloc] init];
+    BOOL online = [AMCoreData shareInstance].mySelf.isOnline;
+    if (online) {
+        AMLiveGroup *myLiveGroup = [[AMCoreData shareInstance] mergedGroup];
+        NSArray *allUsers = [myLiveGroup usersIncludeSubGroup];
+        
+        for (AMLiveUser *user in allUsers) {
+            if (user.oscServer) {
+                [_usersRunOscSrv addObject:user];
+            }
+        }
+    }else{
+        AMLiveGroup *myLocalGroup = [[AMCoreData shareInstance] myLocalLiveGroup];
+        
+        for (AMLiveUser *user in myLocalGroup.users) {
+            if (user.oscServer) {
+                [_usersRunOscSrv addObject:user];
+            }
+        }
+    }
+    
+    self.serverSelector.textColor = [NSColor grayColor];
+    [self.serverSelector addItemWithTitle:@"Artsmesh.io"];
+    [self.serverSelector addItemWithTitle:@"Self Define"];
+    for (AMLiveUser *user in _usersRunOscSrv) {
+        [self.serverSelector addItemWithTitle:user.nickName];
+    }
+    
+    if (![selectedServer isEqualToString:@""]) {
+        [self.serverSelector selectItemWithTitle:selectedServer];
+    }else{
+        [self.serverSelector selectItemAtIndex:0];
+    }
+    
+    self.serverSelector.delegate = self;
+}
+
+
+-(void)itemSelected:(AMPopUpView *)sender
+{
+    if ([self.serverSelector.stringValue isEqualToString:@"Self Define"]) {
+        [self.selfDefServer setHidden:NO];
+    }else{
+        [self.selfDefServer setHidden:YES];
+    }
+}
+
+
+-(void)controlTextDidChange:(NSNotification *)obj
+{
+    [self.searchField resignFirstResponder];
+    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:self.searchField.stringValue];
+}
+
+-(void)cancelOperation:(id)sender
+{
+    self.searchField.stringValue = @"";
+    [self.searchField resignFirstResponder];
+    [[AMOSCGroups sharedInstance] setOSCMessageSearchFilterString:@""];
 }
 
 

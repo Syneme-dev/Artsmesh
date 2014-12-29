@@ -43,6 +43,7 @@
 		016607AB1A3827B8002AEEE7 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0166078E1A382727002AEEE7 /* OscTypes.cpp */; };
 		016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */; };
 		016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */; };
+		0166BA1D1A5103C900D66954 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0166BA1C1A5103C900D66954 /* UIFramework.framework */; };
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
 		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
@@ -105,6 +106,7 @@
 		0166078F1A382727002AEEE7 /* OscTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
 		016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOscMsgTableRow.h; sourceTree = "<group>"; };
 		016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOscMsgTableRow.m; sourceTree = "<group>"; };
+		0166BA1C1A5103C900D66954 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
 		4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCClient.h; sourceTree = "<group>"; };
 		4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCClient.m; sourceTree = "<group>"; };
 		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0166BA1D1A5103C900D66954 /* UIFramework.framework in Frameworks */,
 				0110B30C1A4D663F009DCB9C /* AMCoreData.framework in Frameworks */,
 				4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */,
 				4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */,
@@ -267,6 +270,7 @@
 		4AED84101A134007004CE862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0166BA1C1A5103C900D66954 /* UIFramework.framework */,
 				0110B30B1A4D663F009DCB9C /* AMCoreData.framework */,
 				4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */,
 				4AED84131A1369CD004CE862 /* AMLogger.framework */,

@@ -7,41 +7,33 @@
 //
 
 #import "AMTimerTabVC.h"
-#import "AMTimerTableCellView.h"
-#import "AMCoreData/AMCoreData.h"
-#import "AMCoreData/AMLiveGroup.h"
-#import "AMCoreData/AMLiveUser.h"
+#import "AMTimerTableCellVC.h"
 
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
 
-static NSString * const PingCommandFormat =
-    @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
-static NSString * const DummyGroupName = @"----------";
 static const NSInteger MaxNumberOfMetronomes = 10;
 
 @interface AMTimerTabVC () <NSTableViewDataSource, NSTableViewDelegate,
     NSComboBoxDataSource, NSComboBoxDelegate>
+@property (weak) IBOutlet NSButton *addButton;
 @property (weak) IBOutlet NSTextField *timerLabel;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSDate *timerStartDate;
-@property (nonatomic) BOOL isLocalGroup;
-@property (nonatomic) NSArray *groups;
 @property (weak) IBOutlet NSTableView *tableView;
-@property (nonatomic) NSInteger numberOfMetronomes;
-@property (nonatomic) NSMutableArray *cells;
+@property (nonatomic) NSMutableArray *tableCellControllers;
 @end
 
 @implementation AMTimerTabVC
 
 - (void)viewDidLoad
 {
-    self.numberOfMetronomes = 2;
-}
-
-- (void)reloadGroups:(NSNotification *)notification
-{
-    self.groups = [[AMCoreData shareInstance] myMergedGroupsInFlat];
+    [self addTableCellController:nil];
+    NSMutableAttributedString *attributedTitle = [self.addButton.attributedTitle mutableCopy];
+    [attributedTitle addAttribute:NSForegroundColorAttributeName
+                            value:[NSColor lightGrayColor]
+                            range:NSMakeRange(0, attributedTitle.length)];
+    self.addButton.attributedTitle = attributedTitle;
 }
 
 - (IBAction)toggleTimer:(id)sender
@@ -76,105 +68,31 @@ static const NSInteger MaxNumberOfMetronomes = 10;
     self.timerLabel.stringValue = text;
 }
 
-- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox
-{
-    return self.groups.count + 1;
-}
-
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
-{
-    if (index == 0)
-        return DummyGroupName;
-    else
-        return [self.groups[index - 1] groupName];
-}
-
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification
-{
-    NSComboBox *comboBox = (NSComboBox *)notification.object;
-    AMTimerTableCellView *cell = (AMTimerTableCellView *)comboBox.superview;
-    cell.delayLabel.stringValue = @"---- ms";
-    cell.bpmLabel.stringValue = @"60";
-    NSInteger index = comboBox.indexOfSelectedItem;
-    if (index == 0) {
-        [cell updateMetronomeParameters];
-    } else {
-        AMLiveGroup *group = self.groups[index - 1];
-        AMLiveUser *user = [group.users lastObject];
-        NSString *userIP = self.isLocalGroup ? user.privateIp : user.publicIp;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSTask *task = [[NSTask alloc] init];
-            task.launchPath = @"/bin/bash";
-            NSString *command = [NSString stringWithFormat:PingCommandFormat, userIP];
-            NSLog(@"ping command: %@", command);
-            task.arguments = @[@"-c", command];
-            NSPipe *pipe = [NSPipe pipe];
-            task.standardOutput = pipe;
-            [task launch];
-            NSData *data = [pipe.fileHandleForReading readDataToEndOfFile];
-            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSLog(@"avg ping time: %@", result);
-            double delay = [result floatValue] * 0.5;
-            if (delay > 0.0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.delayLabel.stringValue = [NSString stringWithFormat:@"%.3f ms", delay];
-                    int bpm = MIN(60, 60000 / delay);
-                    cell.bpmLabel.stringValue = @(bpm).stringValue;
-                    [cell updateMetronomeParameters];
-                });
-            }
-        });
-    }
-}
-
-- (void)comboBoxWillPopUp:(NSNotification *)notification
-{
-    self.groups = [[AMCoreData shareInstance] myMergedGroupsInFlat];
-    self.isLocalGroup = NO;
-    if (!self.groups) {
-        self.groups = @[ [[AMCoreData shareInstance] myLocalLiveGroup] ];
-        self.isLocalGroup = YES;
-    }
-    NSComboBox *combox = (NSComboBox *)notification.object;
-    [combox reloadData];
-}
-
-- (IBAction)addMetronome:(id)sender
-{
-    if (self.numberOfMetronomes < MaxNumberOfMetronomes) {
-        self.numberOfMetronomes++;
-        [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:self.numberOfMetronomes - 1]
-                              withAnimation:NSTableViewAnimationSlideUp];
-    }
-}
-
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.numberOfMetronomes;
+    return self.tableCellControllers.count;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row
 {
-    AMTimerTableCellView *cell = self.cells[row];
-    return cell;
+    return [self.tableCellControllers[row] view];
 }
 
-- (NSMutableArray *)cells
+- (NSMutableArray *)tableCellControllers
 {
-    if (!_cells) {
-        _cells = [NSMutableArray arrayWithCapacity:MaxNumberOfMetronomes];
-        for (NSInteger i = 0; i < MaxNumberOfMetronomes; i++) {
-            AMTimerTableCellView *cell = [self.tableView makeViewWithIdentifier:@"AMTimerTableCellView"
-                                                                          owner:self];
-            [cell.groupCombox selectItemAtIndex:0];
-            [cell.slowdownCombox selectItemAtIndex:2];
-            [_cells addObject:cell];
-        }
-    }
-    return _cells;
+    if (!_tableCellControllers)
+        _tableCellControllers = [NSMutableArray array];
+    return _tableCellControllers;
+}
+
+- (IBAction)addTableCellController:(id)sender
+{
+    AMTimerTableCellVC *vc = [[AMTimerTableCellVC alloc] initWithNibName:@"AMTimerTableCellVC" bundle:nil];
+    [self.tableCellControllers addObject:vc];
+    [self.tableView reloadData];
+    [self.tableView scrollRowToVisible:self.tableCellControllers.count - 1];
 }
 
 @end

@@ -55,6 +55,8 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
 //    return [self logReaderByType:kAMDebugLog];
 //}
 
+
+
 - (instancetype)initWithFileName:(NSString *)logFileName
 {
     self = [super init];
@@ -70,6 +72,15 @@ static const NSInteger kBufferSize = 4096 * 4;   // 16k
         _buffer = NULL;
     }
     return self;
+}
+
+- (Boolean) resetLog
+{
+    if(_logFile == nil)
+        return NO;
+    fseek(_logFile, 0, SEEK_SET);
+    
+    return YES;
 }
 
 - (instancetype)init

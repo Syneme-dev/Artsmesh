@@ -20,6 +20,8 @@
 		2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2658877619899ABA001DA266 /* AMPopUpMenuController.xib */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
+		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */; };
@@ -83,6 +85,8 @@
 		2658877619899ABA001DA266 /* AMPopUpMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPopUpMenuController.xib; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
+		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
+		4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRatioButtonView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AF00D43C18C9B5E6004DE9E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +179,8 @@
 				2658876C19899A97001DA266 /* AMPopupMenuButton */,
 				26CEAE8B197380F600DF285F /* AMCheckBoxView.h */,
 				26CEAE8C197380F600DF285F /* AMCheckBoxView.m */,
+				4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */,
+				4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */,
 				AFAC30C719382E71000FFC5F /* AMTextView.h */,
 				AFAC30C819382E71000FFC5F /* AMTextView.m */,
 				AFD344C6193EF82C0057F222 /* AMUIConst.h */,
@@ -286,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
+				4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */,
 				2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
 				AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */,
@@ -409,6 +416,7 @@
 				2658877D19899ABA001DA266 /* AMPopUpMenuItem.m in Sources */,
 				2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
+				4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */,
 				2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
 				CE25C51219775A08003A8B39 /* AMPanelView.m in Sources */,

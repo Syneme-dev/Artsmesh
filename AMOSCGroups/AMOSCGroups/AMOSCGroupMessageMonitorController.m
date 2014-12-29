@@ -228,7 +228,8 @@
 
 -(void)onTopChecked:(NSString *)msg checked:(BOOL)checked
 {
-    NSLog(@"on top checked");
+    [self sortByOnTop];
+    [self.oscMsgTable reloadData];
 }
 
 -(void)thruChecked:(NSString *)msg  checked:(BOOL)checked
@@ -584,20 +585,42 @@
     
     if (filterStr == nil || [filterStr isEqualTo:@""]) {
         self.oscMessageSearchResults = [NSMutableArray arrayWithArray:self.oscMessageLogs];
-        return;
-    }
-
-    self.oscMessageSearchResults = [[NSMutableArray alloc] init];
-    for (OSCMessagePack *pack in self.oscMessageLogs) {
+    }else{
         
-        NSString* strLowerMsg = [pack.msgFields.stringValue lowercaseString];
-        NSString* strLowerFilter = [filterStr lowercaseString];
-        if ([strLowerMsg rangeOfString:strLowerFilter].location == NSNotFound) {
-            continue;
-        }else{
-            [self.oscMessageSearchResults addObject:pack];
+        self.oscMessageSearchResults = [[NSMutableArray alloc] init];
+        for (OSCMessagePack *pack in self.oscMessageLogs) {
+            
+            NSString* strLowerMsg = [pack.msgFields.stringValue lowercaseString];
+            NSString* strLowerFilter = [filterStr lowercaseString];
+            if ([strLowerMsg rangeOfString:strLowerFilter].location == NSNotFound) {
+                continue;
+            }else{
+                [self.oscMessageSearchResults addObject:pack];
+            }
         }
     }
+    
+    [self sortByOnTop];
+}
+
+
+-(void)sortByOnTop
+{
+    NSMutableArray *sortedMsgs = [[NSMutableArray alloc] init];
+    
+    for (OSCMessagePack *pack in self.oscMessageSearchResults) {
+        if(pack.onTopBox.checked == YES){
+            [sortedMsgs addObject:pack];
+        }
+    }
+    
+    for (OSCMessagePack *pack in self.oscMessageSearchResults) {
+        if (pack.onTopBox.checked == NO) {
+            [sortedMsgs addObject:pack];
+        }
+    }
+    
+    self.oscMessageSearchResults = sortedMsgs;
 }
 
 

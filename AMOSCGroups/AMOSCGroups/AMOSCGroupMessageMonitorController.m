@@ -118,6 +118,8 @@
     
     self.timerDict =  [[NSMutableDictionary alloc] init];
     
+    //
+    
     //self define ip field
     [self.selfDefServer setHidden:YES];
     

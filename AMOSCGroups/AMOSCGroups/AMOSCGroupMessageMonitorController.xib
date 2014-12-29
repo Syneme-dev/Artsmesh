@@ -86,7 +86,7 @@
                         <color key="backgroundColor" red="0.1803921568627451" green="0.22745098039215686" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="Zcg-DX-5wM" name="value" keyPath="values.Preference_General_GlobalServerAddr" id="6Bg-38-k0L"/>
+                        <binding destination="Zcg-DX-5wM" name="value" keyPath="values.Preference_OSC_Client_ServerAddr" id="3fE-w0-qD6"/>
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-7G-b5U" customClass="AMFoundryFontView">

@@ -98,12 +98,12 @@
 {
     [_oscForwarder forwardMessage:data];
     
-    NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
+   // NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
 }
 
 -(void)parsedOscMsg:(NSString *)msg withParameters:(NSArray *)params
 {
-    NSLog(@"oscmessage receiced: %@", msg);
+   // NSLog(@"oscmessage receiced: %@", msg);
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
     }

@@ -160,7 +160,8 @@
     [self updateOSCServer];
 }
 
--(void)onChecked:(AMCheckBoxView *)sender
+
+-(void)onOffChecked
 {
     if(self.onOffBox.checked == YES)
     {
@@ -221,6 +222,37 @@
         [self.oscMessageLogs removeAllObjects];
         [self.oscMessageSearchResults removeAllObjects];
         [self.oscMsgTable reloadData];
+    }
+}
+
+
+-(void)onTopChecked:(NSString *)msg checked:(BOOL)checked
+{
+    NSLog(@"on top checked");
+}
+
+-(void)thruChecked:(NSString *)msg  checked:(BOOL)checked
+{
+    NSLog(@"thru checked");
+}
+
+
+-(void)onChecked:(AMCheckBoxView *)sender
+{
+    if([sender.identifier isEqualToString:@"oscMonitorOnOff"]){
+        [self onOffChecked];
+    }else if([sender.title isEqualToString:@"OnTop"]){
+        
+        NSString *msg = sender.identifier;
+        BOOL checked = sender.checked;
+        
+        [self onTopChecked:msg checked:checked];
+        
+    }else if([sender.title isEqualToString:@"Thru"]){
+        NSString *msg = sender.identifier;
+        BOOL checked = sender.checked;
+        
+        [self thruChecked:msg checked:checked];
     }
 }
 
@@ -487,7 +519,7 @@
         }
     }
     
-    NSLog(@"params = %@", paramDetail);
+   // NSLog(@"params = %@", paramDetail);
     
     for (OSCMessagePack *pack in self.oscMessageLogs) {
         if ([pack.msgFields.stringValue isEqualToString:msg]) {
@@ -505,6 +537,10 @@
     oscPack.paramsFields.stringValue = paramDetail;
     oscPack.onTopBox.title = @"OnTop";
     oscPack.thruBox.title = @"Thru";
+    oscPack.onTopBox.delegate = self;
+    oscPack.thruBox.delegate = self;
+    oscPack.onTopBox.identifier = msg;
+    oscPack.thruBox.identifier = msg;
     
     NSFont *font = [NSFont fontWithName:@"FoundryMonoline-Bold"
                                    size:12.0f];

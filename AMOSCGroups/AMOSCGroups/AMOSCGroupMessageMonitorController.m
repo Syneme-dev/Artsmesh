@@ -9,7 +9,6 @@
 #import "AMOSCGroupMessageMonitorController.h"
 #import "AMOSCClient.h"
 #import "AMOscMsgTableRow.h"
-#import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMPopupView.h"
 #import "AMOSCGroups.h"
 #import "AMCoreData/AMCoreData.h"
@@ -26,10 +25,17 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-        self.lightView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
+        NSRect commonRect = NSMakeRect(0, 0, 30, 30);
+        
+        self.lightView = [[NSImageView alloc] initWithFrame:commonRect];
         self.lightView.image = [NSImage imageNamed:@"osc_msg_highlight"];
-        self.msgFields = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
-        self.paramsFields = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 30, 30)];
+        self.msgFields = [[NSTextField alloc] initWithFrame:commonRect];
+      //  self.msgFields.usesSingleLineMode = YES;
+        self.paramsFields = [[NSTextField alloc] initWithFrame:commonRect];
+     //   self.paramsFields.usesSingleLineMode = YES;
+        self.onTopBox = [[AMCheckBoxView alloc] initWithFrame:commonRect];
+        self.thruBox = [[AMCheckBoxView alloc] initWithFrame:commonRect];
+        
         _highlight = YES;
     }
     
@@ -88,7 +94,6 @@
 @property (weak) IBOutlet NSTableView *oscMsgTable;
 @property NSMutableArray* oscMessageLogs;
 @property NSMutableArray* oscMessageSearchResults;
-@property NSMutableDictionary* timerDict;
 @property NSString *searchString;
 @property (weak) IBOutlet NSButton *topBtn;
 @property (weak) IBOutlet NSButton *pauseBtn;
@@ -99,7 +104,6 @@
 @property (weak) IBOutlet AMFoundryFontView *sendToDev;
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 @property (weak) IBOutlet NSButton *clearAllBtn;
-@property (weak) IBOutlet NSBox *seperaterLine;
 
 @end
 
@@ -114,16 +118,12 @@
     self.oscMessageLogs = [[NSMutableArray alloc] init];
     self.oscMessageSearchResults = [[NSMutableArray alloc] init];
     
+    //table
     self.oscMsgTable.dataSource = self;
     self.oscMsgTable.delegate = self;
     self.oscMsgTable.backgroundColor  = [NSColor colorWithCalibratedHue:0.15 saturation:0.15 brightness:0.15 alpha:0.0];
     [self.oscMsgTable setColumnAutoresizingStyle:NSTableViewNoColumnAutoresizing];
-    
-    self.timerDict =  [[NSMutableDictionary alloc] init];
-    
-    //seperatorLine
-    self.seperaterLine.borderColor = [NSColor redColor];
-    self.seperaterLine.fillColor = [NSColor redColor];
+
     
     //self define ip field
     [self.selfDefServer setHidden:YES];
@@ -300,16 +300,20 @@
     [self.oscMsgTable reloadData];
 }
 
+
+-(CGFloat)heightOfTextFieldWithString:(NSString *)string width:(CGFloat)width font:(NSFont *)font
+{
+    NSTextField *textField = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, width, 1000)];
+    textField.font = font;
+    textField.stringValue = string;
+    NSSize size = [textField.cell cellSizeForBounds:textField.frame];
+    return size.height;
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return [self.oscMessageSearchResults count];
 }
-
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-    return 30.0f;
-}
-
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
@@ -344,27 +348,13 @@
         }
         
         for (NSView *view in [cellView subviews]) {
-            if(view.tag == 1002){
+            if(view.tag == 1001){
                 [view removeFromSuperview];
             }
         }
         
-        
-        
-        NSRect textFrame = cellView.bounds;
-        textFrame.size.height -= 10;
-    
         NSTextField *textField = pack.msgFields;
-        textField.frame = textFrame;
-        
-        textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
-                                         size:12.0f];
-        textField.tag = 1002;
-        textField.bordered = NO;
-        textField.editable = NO;
-        textField.backgroundColor = [NSColor clearColor];
-        [textField setFocusRingType:NSFocusRingTypeNone];
-        [textField setTextColor:[NSColor grayColor]];
+        textField.tag = 1001;
         [cellView addSubview:textField];
 
         return cellView;
@@ -388,25 +378,72 @@
             }
         }
         
-        NSRect textFrame = cellView.bounds;
-        textFrame.size.height -= 10;
         NSTextField *textField = pack.paramsFields;
-        textField.frame = textFrame;
-        
-        textField.font = [NSFont fontWithName:@"FoundryMonoline-Bold"
-                                         size:12.0f];
         textField.tag = 1002;
-        textField.bordered = NO;
-        textField.editable = NO;
-        textField.backgroundColor = [NSColor clearColor];
-        [textField setFocusRingType:NSFocusRingTypeNone];
-        [textField setTextColor:[NSColor grayColor]];
         [cellView addSubview:textField];
         
         return cellView;
+        
+    }else if([tableColumn.identifier isEqualToString:@"osc_check_col"]){
+        OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
+        
+        static NSString *cellIdentifier = @"OSCMsgCheckCell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier owner:self];
+        
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, self.view.bounds.size.width, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        for (NSView *view in [cellView subviews]) {
+            if(view.tag == 1003 || view.tag == 1004){
+                [view removeFromSuperview];
+            }
+        }
+        
+        AMCheckBoxView* onTopBox = pack.onTopBox;
+        AMCheckBoxView* thruBox = pack.thruBox;
+        
+        NSRect frameRect = NSMakeRect(10, 0, 70, 30);
+        onTopBox.frame = frameRect;
+        
+        frameRect = NSMakeRect(85, 0, 70, 30);
+        thruBox.frame = frameRect;
+        
+        [cellView addSubview:onTopBox];
+        [cellView addSubview:thruBox];
+        
+        return cellView;
+    
     }
     
     return nil;
+}
+
+-(CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    OSCMessagePack* pack = [self.oscMessageSearchResults objectAtIndex:row];
+    CGFloat maxHeight = pack.msgFields.frame.size.height;
+    
+    if (pack.paramsFields.frame.size.height> maxHeight) {
+        maxHeight = pack.paramsFields.frame.size.height;
+    }
+    
+    if (pack.onTopBox.frame.size.height> maxHeight) {
+        maxHeight = pack.onTopBox.frame.size.height;
+    }
+    
+    if(pack.thruBox.frame.size.height> maxHeight){
+        maxHeight = pack.thruBox.frame.size.height;
+    }
+    
+    if(maxHeight < 30.0){
+        maxHeight = 30.0;
+    }
+    
+    return maxHeight;
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row NS_AVAILABLE_MAC(10_7)
@@ -466,6 +503,36 @@
     OSCMessagePack *oscPack = [[OSCMessagePack alloc] init];
     oscPack.msgFields.stringValue = msg;
     oscPack.paramsFields.stringValue = paramDetail;
+    oscPack.onTopBox.title = @"OnTop";
+    oscPack.thruBox.title = @"Thru";
+    
+    NSFont *font = [NSFont fontWithName:@"FoundryMonoline-Bold"
+                                   size:12.0f];
+    NSUInteger colIndex = [self.oscMsgTable columnWithIdentifier:@"osc_param_col"];
+    CGFloat width = [[[self.oscMsgTable tableColumns] objectAtIndex:colIndex] width];
+    CGFloat height = [self heightOfTextFieldWithString:oscPack.paramsFields.stringValue
+                                width:width font:font];
+    
+    oscPack.paramsFields.frame = NSMakeRect(0, 0, width, height);
+    oscPack.paramsFields.font = font;
+    oscPack.paramsFields.bordered = NO;
+    oscPack.paramsFields.editable = NO;
+    oscPack.paramsFields.backgroundColor = [NSColor clearColor];
+    [oscPack.paramsFields setFocusRingType:NSFocusRingTypeNone];
+    [oscPack.paramsFields setTextColor:[NSColor grayColor]];
+    
+    colIndex = [self.oscMsgTable columnWithIdentifier:@"osc_msg_col"];
+    width = [[[self.oscMsgTable tableColumns] objectAtIndex:colIndex] width];
+    height = [self heightOfTextFieldWithString:oscPack.msgFields.stringValue
+                                         width:width font:font];
+    oscPack.msgFields.frame = NSMakeRect(0, 0, width, height);
+    oscPack.msgFields.font = font;
+    oscPack.msgFields.bordered = NO;
+    oscPack.msgFields.editable = NO;
+    oscPack.msgFields.backgroundColor = [NSColor clearColor];
+    [oscPack.msgFields setFocusRingType:NSFocusRingTypeNone];
+    [oscPack.msgFields setTextColor:[NSColor grayColor]];
+    
     [self.oscMessageLogs addObject:oscPack];
     
     dispatch_async(dispatch_get_main_queue(), ^{

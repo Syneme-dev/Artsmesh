@@ -7,18 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMCheckBoxView.h"
 
 @interface OSCMessagePack : NSObject
 
-//@property NSString *msg;
-//@property NSString *params;
 @property NSTextField *msgFields;
 @property NSTextField *paramsFields;
 @property NSImageView *lightView;
+@property AMCheckBoxView *onTopBox;
+@property AMCheckBoxView *thruBox;
 
 -(void)startBlinking;
 
 @end
+
 
 @interface AMOSCGroupMessageMonitorController : NSViewController
 

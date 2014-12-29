@@ -10,6 +10,8 @@
 		01B96EFB1A4AB35D00DF40A5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B96EFA1A4AB35D00DF40A5 /* View.xib */; };
 		01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
+		2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */; };
+		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
 		2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2602038419809E2C0013687A /* AMUserLogonViewController.xib */; };
@@ -193,7 +195,6 @@
 		CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */; };
 		CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7216CC19A19C9F00504E28 /* logo-02.png */; };
 		CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */; };
-		CEC200341A3EAF08002BCF09 /* AMTimerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC200331A3EAF08002BCF09 /* AMTimerTableCellView.m */; };
 		CEC2FC54196588FD00AFD309 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */; };
 		CEC2FC55196588FD00AFD309 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */; };
 		CEC2FC56196588FD00AFD309 /* AMGroupPanelGroupCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC3C196588FD00AFD309 /* AMGroupPanelGroupCellController.m */; };
@@ -286,6 +287,9 @@
 		01B96EFA1A4AB35D00DF40A5 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		01D059B91A2D6A5E00BC51E7 /* AMJackCPULoderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackCPULoderView.h; sourceTree = "<group>"; };
 		01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackCPULoderView.m; sourceTree = "<group>"; };
+		2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTableCellVC.h; sourceTree = "<group>"; };
+		2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerTableCellVC.m; sourceTree = "<group>"; };
+		2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTableCellVC.xib; sourceTree = "<group>"; };
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
 		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
 		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
@@ -526,8 +530,6 @@
 		CE7216CC19A19C9F00504E28 /* logo-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-02.png"; sourceTree = "<group>"; };
 		CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkToolsCommand.h; sourceTree = "<group>"; };
 		CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkToolsCommand.m; sourceTree = "<group>"; };
-		CEC200321A3EAF08002BCF09 /* AMTimerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTableCellView.h; sourceTree = "<group>"; };
-		CEC200331A3EAF08002BCF09 /* AMTimerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerTableCellView.m; sourceTree = "<group>"; };
 		CEC2FC38196588FD00AFD309 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
 		CEC2FC39196588FD00AFD309 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
 		CEC2FC3A196588FD00AFD309 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -745,9 +747,10 @@
 				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
 				CE5954821A3E821F00676D12 /* AMTimerTabVC.h */,
 				CE5954831A3E821F00676D12 /* AMTimerTabVC.m */,
-				CEC200321A3EAF08002BCF09 /* AMTimerTableCellView.h */,
-				CEC200331A3EAF08002BCF09 /* AMTimerTableCellView.m */,
 				CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */,
+				2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */,
+				2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */,
+				2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */,
 			);
 			name = TimerPanel;
 			sourceTree = "<group>";
@@ -1273,6 +1276,7 @@
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
+				2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */,
 				266CE25E197E550400D8145B /* AMGroupPanelStaticUserCellController.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				01B96EFB1A4AB35D00DF40A5 /* View.xib in Resources */,
@@ -1411,6 +1415,7 @@
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
+				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				CEC2FC59196588FD00AFD309 /* AMGroupPanelLabelCellController.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				2D5CF7C91A1FD5960025C625 /* AMProfileTextFieldFormatter.m in Sources */,
@@ -1465,7 +1470,6 @@
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				D43B496619D849FB006D5252 /* AMUserNameFormatter.m in Sources */,
 				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
-				CEC200341A3EAF08002BCF09 /* AMTimerTableCellView.m in Sources */,
 				2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */,
 				CE486AAA1A280CB900D35B82 /* AMSyphonViewRouterController.m in Sources */,
 				262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */,

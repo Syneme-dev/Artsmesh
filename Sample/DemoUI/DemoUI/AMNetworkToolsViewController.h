@@ -35,7 +35,7 @@
 - (IBAction)log:(id)sender;
 
 
-
+-(void) writeToLogView:(NSString*) logItem;
 -(void) showLog;
 -(void) showLogFromTail;
 -(void) showFullLog;

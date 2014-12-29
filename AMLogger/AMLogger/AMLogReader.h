@@ -10,17 +10,14 @@
 
 @interface AMLogReader : NSObject
 
-+ (instancetype)errorLogReader;
-+ (instancetype)warningLogReader;
-+ (instancetype)infoLogReader;
-+ (instancetype)debugLogReader;
-
 @property(nonatomic, copy) BOOL (^filter)(NSString *line);
 
 // designated initializer
 - (instancetype)initWithFileName:(NSString *)logFileName;
 - (NSArray *)lastLogItmes;
 - (NSString *)nextLogItem;
+
+- (Boolean) resetLog;
 
 @end
 

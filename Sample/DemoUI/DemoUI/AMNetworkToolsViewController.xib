@@ -20,6 +20,7 @@
                 <outlet property="ratioJackAudio" destination="OAz-nO-ZWU" id="6P1-Fq-hFC"/>
                 <outlet property="ratioOSCClient" destination="Onw-ph-OMk" id="lFu-wL-w9k"/>
                 <outlet property="ratioOSCServer" destination="zUc-Ii-fmQ" id="1hS-JW-tgf"/>
+                <outlet property="searchWordTF" destination="8Gb-JB-ayS" id="7E8-gA-bxu"/>
                 <outlet property="tabView" destination="Iy7-e0-VXr" id="m7X-dW-gx0"/>
                 <outlet property="tracerouteButton" destination="dEP-VR-XJx" id="6vd-l0-dE7"/>
                 <outlet property="tracerouteContentView" destination="sbY-RD-sTE" id="vJA-2Z-1tA"/>
@@ -370,7 +371,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="18" y="191" width="148" height="28"/>
+                                        <rect key="frame" x="18" y="198" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="iOQ-oj-fM9"/>
                                             <constraint firstAttribute="width" constant="148" id="v3w-QO-X0Y"/>
@@ -388,10 +389,10 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="483" height="449"/>
-                                                    <size key="maxSize" width="542" height="10000000"/>
+                                                    <size key="maxSize" width="631" height="10000000"/>
                                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <size key="minSize" width="483" height="449"/>
-                                                    <size key="maxSize" width="542" height="10000000"/>
+                                                    <size key="maxSize" width="631" height="10000000"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -421,19 +422,35 @@
                                         <rect key="frame" x="18" y="334" width="148" height="30"/>
                                     </customView>
                                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
-                                        <rect key="frame" x="18" y="59" width="148" height="28"/>
+                                        <rect key="frame" x="18" y="157" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="148" id="Itu-hi-KCY"/>
-                                            <constraint firstAttribute="height" constant="28" id="jvr-vo-vMT"/>
                                         </constraints>
                                     </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Gb-JB-ayS">
+                                        <rect key="frame" x="18" y="110" width="69" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="SbD-Ma-tqK">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M19-6w-qbW">
+                                        <rect key="frame" x="84" y="104" width="86" height="32"/>
+                                        <buttonCell key="cell" type="push" title="SEARCH" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="12L-sn-rqO">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="search:" target="-2" id="hA5-Ne-VFt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="leading" secondItem="h9L-Ma-tsd" secondAttribute="trailing" constant="12" id="KJf-1P-3oJ"/>
                                     <constraint firstItem="h9L-Ma-tsd" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="MDl-8M-DoR"/>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" id="cie-Gd-kEe"/>
                                     <constraint firstAttribute="trailing" secondItem="7js-65-mVZ" secondAttribute="trailing" id="dyW-hZ-cTB"/>
-                                    <constraint firstItem="h9L-Ma-tsd" firstAttribute="top" secondItem="vAt-up-KKp" secondAttribute="bottom" constant="9" id="ixb-U2-Ly5"/>
                                     <constraint firstAttribute="bottom" secondItem="7js-65-mVZ" secondAttribute="bottom" constant="20" id="mk9-Gb-xZi"/>
                                     <constraint firstItem="vAt-up-KKp" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="onI-NR-7Ee"/>
                                 </constraints>

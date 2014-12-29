@@ -33,14 +33,16 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
                                             AMRatioButtonDelegeate>
 {
     NSArray *_users;
-    AMNetworkToolsCommand *_pingCommand;
-    AMNetworkToolsCommand *_tracerouteCommand;
+    AMNetworkToolsCommand *     _pingCommand;
+    AMNetworkToolsCommand *     _tracerouteCommand;
     
-    AMLogReader*            _logReader;
-    NSTimer*                _readTimer;
-    NSTimer*                _testTimer;
+    AMLogReader*                _logReader;
+    NSTimer*                    _readTimer;
+    NSTimer*                    _testTimer;
     
-    NSDictionary*            _titleMapLogFile;
+    NSDictionary*               _titleMapLogFile;
+    NSString*                   _searchWord;
+    Boolean                     _needSearch;
 }
 
 @property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
@@ -50,6 +52,7 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
 @property (weak) IBOutlet AMRatioButtonView *ratioJackAudio;
 @property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
+@property (weak) IBOutlet NSTextField *searchWordTF;
 
 @end
 
@@ -86,6 +89,24 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
     [self showLog];
 }
 
+- (IBAction)search:(id)sender {
+    _searchWord = self.searchWordTF.stringValue;
+    if([_searchWord length] == 0)
+    {
+        //如果已经搜索了，则需要重置内容，显示全部内容
+        if(_needSearch){
+            [_logReader resetLog];
+            [self showLog];
+        }
+        _needSearch = NO;
+        return;
+    }
+    
+    _needSearch  = YES;
+    
+    [_logReader resetLog];
+    [self showLog];
+}
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -268,6 +289,22 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
+
+
+//-------------Log---------------//
+- (void) writeToLogView:(NSString*) logItem
+{
+    if(_needSearch && [_searchWord length] > 0)
+    {
+        if([logItem rangeOfString:_searchWord].location == NSNotFound)
+            return;
+    }
+    
+    [[[self.logTextView textStorage] mutableString] appendString: logItem];
+    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+}
+
+
 -(void) handleNextLogTimer:(NSTimer*) timer
 {
     NSString*   logItem = nil;
@@ -277,8 +314,11 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         if(logArray){
             for (NSString* logItem in logArray) {
                  NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
+                [self writeToLogView:logItemEnter];
+                /*
                 [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
                 self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+                 */
             }
         }
         _appendStringCount = 0;
@@ -286,11 +326,13 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+            [self writeToLogView:logItemEnter];
+           /* [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
             _appendStringCount++;
     }
 }
+
 
 -(void) showLogFromTail
 {
@@ -299,8 +341,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     {
         for (NSString* logItem in logArray) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+            [self writeToLogView:logItemEnter];
+//            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+//            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
         }
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
@@ -318,8 +361,10 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSString* logItem = nil;
     while((logItem = [_logReader nextLogItem]) != nil){
         NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
+        [self writeToLogView:logItemEnter];
+        /*
         [[[self.logTextView textStorage] mutableString] appendString:logItemEnter];
-        self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+        self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
     }
     
 }

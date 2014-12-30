@@ -12,8 +12,6 @@
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
 
-static const NSInteger MaxNumberOfMetronomes = 10;
-
 @interface AMTimerTabVC () <NSTableViewDataSource, NSTableViewDelegate,
     NSComboBoxDataSource, NSComboBoxDelegate>
 @property (weak) IBOutlet NSButton *addButton;

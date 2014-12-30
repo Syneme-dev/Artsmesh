@@ -96,9 +96,8 @@
 
 -(void)receivedOscMsg:(NSData*)data
 {
-    [_oscForwarder forwardMessage:data];
-    
-   // NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
+    //[_oscForwarder forwardMessage:data];
+    // NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
 }
 
 -(void)parsedOscMsg:(NSString *)msg withParameters:(NSArray *)params

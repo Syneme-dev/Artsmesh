@@ -11,27 +11,103 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMLogger/AMLogReader.h"
 #import "AMLogger/AMLogger.h"
+
 #import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMRatioButtonView.h"
+
+NSString * const kAMOSCServerTitle  = @"OSC SERVER";
+NSString * const kAMOSCClientTitle  = @"OSC CLIENT";
+NSString * const kAMJackAudioTitle  = @"JACK AUDIO";
+NSString * const kAMAMServerTitle   = @"AMSERVER";
+NSString * const kAMArtsmeshTitle   = @"ARTSMESH";
 
 
-@interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate>
+NSString * const kAMOSCServerFile   = @"OSC Server.log";
+NSString * const kAMOSCClientFile   = @"OSC Client.log";
+NSString * const kAMJackAudioFile   = @"Jack Audio.log";
+NSString * const kAMAMServerFile    = @"AMServer.log";
+NSString * const kAMArtsmeshFile    = @"Artsmesh.log";
+NSString * const kAMJackTripFile    = @"Jack Trip";
+
+@interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
+                                            AMRatioButtonDelegeate>
 {
     NSArray *_users;
-    AMNetworkToolsCommand *_pingCommand;
-    AMNetworkToolsCommand *_tracerouteCommand;
+    AMNetworkToolsCommand *     _pingCommand;
+    AMNetworkToolsCommand *     _tracerouteCommand;
     
-    AMLogReader*            _logReader;
-    NSTimer*                _readTimer;
-    NSTimer*                _testTimer;
+    AMLogReader*                _logReader;
+    NSTimer*                    _readTimer;
+    NSTimer*                    _testTimer;
+    
+    NSDictionary*               _titleMapLogFile;
+    NSString*                   _searchWord;
+    Boolean                     _needSearch;
 }
-@property (weak) IBOutlet NSButton *errorLogButton;
-@property (weak) IBOutlet NSButton *warningLogButton;
-@property (weak) IBOutlet NSButton *infoLogButton;
-@property (weak) IBOutlet AMCheckBoxView *fullLogCheck;
+
+@property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
+
+@property (weak) IBOutlet AMRatioButtonView *ratioOSCServer;
+@property (weak) IBOutlet AMRatioButtonView *ratioOSCClient;
+@property (weak) IBOutlet AMRatioButtonView *ratioJackAudio;
+@property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
+@property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
+@property (weak) IBOutlet NSTextField *searchWordTF;
 
 @end
 
 @implementation AMNetworkToolsViewController
+
+- (void) onChecked:(AMRatioButtonView *)sender
+{
+    [self UncheckAllRatioButton];
+    [sender setChecked:YES];
+    
+    NSString* logFile = [_titleMapLogFile objectForKey:sender.title];
+    if(logFile == nil){
+        NSLog(@"when you push[%@], no %@ file in the Dictionary",
+                    sender.title,  logFile);
+    }
+    
+    _logReader = [[AMSystemLogReader alloc] initWithFileName:logFile];
+    [self showLog];
+}
+
+- (void) UncheckAllRatioButton
+{
+    [self.ratioOSCServer    setChecked:NO];
+    [self.ratioOSCClient    setChecked:NO];
+    [self.ratioJackAudio    setChecked:NO];
+    [self.ratioAMServer     setChecked:NO];
+    [self.ratioArtsmesh     setChecked:NO];
+}
+
+
+-(void) itemSelected:(AMPopUpView*)sender{
+    NSString* fileName = [self.logFilePopUp stringValue];
+    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
+    [self showLog];
+}
+
+- (IBAction)search:(id)sender {
+    _searchWord = self.searchWordTF.stringValue;
+    if([_searchWord length] == 0)
+    {
+        //如果已经搜索了，则需要重置内容，显示全部内容
+        if(_needSearch){
+            [_logReader resetLog];
+            [self showLog];
+        }
+        _needSearch = NO;
+        return;
+    }
+    
+    _needSearch  = YES;
+    
+    [_logReader resetLog];
+    [self showLog];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,13 +121,11 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [AMButtonHandler changeTabTextColor:self.pingButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.tracerouteButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.iperfButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.logButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.errorLogButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.warningLogButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.infoLogButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.pingButton         toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
+    
     
     _pingCommand = [[AMNetworkToolsCommand alloc] init];
     _pingCommand.contentView = self.pingContentView;
@@ -73,19 +147,47 @@
     
     NSArray *logs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:AMLogDirectory()
                                                                         error:nil];
+    
     logs = [logs pathsMatchingExtensions:@[ @"log" ]];
     [self.logFileCombo addItemsWithObjectValues:logs];
     self.logFileCombo.delegate = self;
     
-    [self.logFilePopUp addItemsWithTitles:logs];
+    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
+   for (NSString* logFile in logs) {
+        NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
+        if(searchResult.location != NSNotFound){
+            [jackTripFiles addObject:logFile];
+        }
+    }
     
+ /*    NSArray* jackTripFiles = [NSArray arrayWithArray:logs];*/
+    [self.logFilePopUp addItemsWithTitles:jackTripFiles];
+    [self.logButton performClick:jackTripFiles];
     
-    [self.logButton performClick:self];
-    [self.infoLogButton performClick:self];
     
     self.fullLogCheck.title = @"FULL LOG";
     
     self.logFilePopUp.delegate  = self;
+    
+    self.ratioOSCClient.delegate    = self;
+    self.ratioOSCServer.delegate    = self;
+    self.ratioJackAudio.delegate    = self;
+    self.ratioAMServer.delegate     = self;
+    self.ratioArtsmesh.delegate     = self;
+    
+    self.ratioOSCServer.title    = kAMOSCServerTitle;
+    self.ratioOSCClient.title    = kAMOSCClientTitle;
+    self.ratioJackAudio.title    = kAMJackAudioTitle;
+    self.ratioAMServer.title     = kAMAMServerTitle;
+    self.ratioArtsmesh.title     = kAMArtsmeshTitle;
+    
+    _titleMapLogFile             = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    kAMOSCServerFile,       kAMOSCServerTitle,
+                                    kAMOSCClientFile,       kAMOSCClientTitle,
+                                    kAMJackAudioFile,       kAMJackAudioTitle,
+                                    kAMAMServerFile,        kAMAMServerTitle,
+                                    kAMArtsmeshFile,        kAMArtsmeshTitle,
+                                    nil];
 }
 
 -(void)registerTabButtons
@@ -187,6 +289,22 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
 }
 
+
+
+//-------------Log---------------//
+- (void) writeToLogView:(NSString*) logItem
+{
+    if(_needSearch && [_searchWord length] > 0)
+    {
+        if([logItem rangeOfString:_searchWord].location == NSNotFound)
+            return;
+    }
+    
+    [[[self.logTextView textStorage] mutableString] appendString: logItem];
+    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+}
+
+
 -(void) handleNextLogTimer:(NSTimer*) timer
 {
     NSString*   logItem = nil;
@@ -196,8 +314,11 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         if(logArray){
             for (NSString* logItem in logArray) {
                  NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
+                [self writeToLogView:logItemEnter];
+                /*
                 [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
                 self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+                 */
             }
         }
         _appendStringCount = 0;
@@ -205,11 +326,13 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         
     while( (logItem = [_logReader nextLogItem]) != nil) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+            [self writeToLogView:logItemEnter];
+           /* [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
             _appendStringCount++;
     }
 }
+
 
 -(void) showLogFromTail
 {
@@ -218,8 +341,9 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     {
         for (NSString* logItem in logArray) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
-            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+            [self writeToLogView:logItemEnter];
+//            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
+//            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
         }
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
@@ -237,17 +361,12 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     NSString* logItem = nil;
     while((logItem = [_logReader nextLogItem]) != nil){
         NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
+        [self writeToLogView:logItemEnter];
+        /*
         [[[self.logTextView textStorage] mutableString] appendString:logItemEnter];
-        self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+        self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
     }
     
-}
-
--(void) clearAllButtonColor
-{
-    [AMButtonHandler changeTabTextColor:self.errorLogButton   toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.warningLogButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.infoLogButton    toColor:UI_Color_blue];
 }
 
 -(void) showLog
@@ -264,51 +383,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.logTextView scrollToEndOfDocument:self];
 }
 
-- (IBAction)showErrorLog:(id)sender
-{
-    _logReader = [AMLogReader errorLogReader];
-    [self showLog];
-    [self clearAllButtonColor];
-    [AMButtonHandler changeTabTextColor:self.errorLogButton     toColor:UI_Color_b7b7b7];
-}
-
-- (IBAction)showWarningLog:(id)sender {
-    _logReader = [AMLogReader warningLogReader];
-    [self showLog];
-    [self clearAllButtonColor];
-    [AMButtonHandler changeTabTextColor:self.warningLogButton   toColor:UI_Color_b7b7b7];
-}
-
-- (IBAction)showInfoLog:(id)sender
-{
-    _logReader = [AMLogReader infoLogReader];
-    [self showLog];
-    [self clearAllButtonColor];
-    [AMButtonHandler changeTabTextColor:self.infoLogButton      toColor:UI_Color_b7b7b7];
-}
-
-- (IBAction)logFileComboChanged:(id)sender
-{
-    NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
-    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-    [self showLog];
-}
-
-
-
--(void) itemSelected:(AMPopUpView*)sender{
-//    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//    NSString* myPrivateIP = [self.ipPopUpView stringValue];
-//    [defaults setObject:myPrivateIP forKey:Preference_Key_User_PrivateIp];
-    
-    NSString* fileName = [self.logFilePopUp stringValue];
-    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-    [self showLog];
-    
-//    NSString* fileName = [self.logFileCombo objectValueOfSelectedItem];
-//    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-//    [self showLog];
-}
 
 
 @end

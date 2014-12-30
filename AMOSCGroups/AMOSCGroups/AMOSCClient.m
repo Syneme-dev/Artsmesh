@@ -10,6 +10,7 @@
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 #import "AMLogger/AMLogger.h"
 #import "AMOSCMonitor.h"
+#import "AMOSCForwarder.h"
 
 @interface AMOSCClient()<AMOSCMonitorDelegate>
 @end
@@ -19,6 +20,7 @@
 {
     NSTask* _task;
     AMOSCMonitor *_oscMonitor;
+    AMOSCForwarder *_oscForwarder;
     dispatch_queue_t _monitor_queue;
 }
 
@@ -28,6 +30,8 @@
         _monitor_queue = dispatch_queue_create("osc monitor thread", DISPATCH_QUEUE_PRIORITY_DEFAULT);
 //        _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
 //        _oscMonitor.delegate = self;
+        
+        _oscForwarder = [[AMOSCForwarder alloc] init];
     }
     
     return self;
@@ -89,17 +93,34 @@
     system("killall OscGroupClient >/dev/null");
 }
 
+
 -(void)receivedOscMsg:(NSData*)data
 {
-    NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
+    //[_oscForwarder forwardMessage:data];
+    // NSLog(@"reveive osc messages, length:%lu", (unsigned long)[data length]);
 }
 
 -(void)parsedOscMsg:(NSString *)msg withParameters:(NSArray *)params
 {
-    NSLog(@"oscmessage receiced: %@", msg);
+   // NSLog(@"oscmessage receiced: %@", msg);
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
     }
+    
+}
+
+
+-(void)setForwardAddr:(NSString *)addr port:(NSString *)port
+{
+    _oscForwarder.forwardAddr = addr;
+    _oscForwarder.forwardPort = port;
+}
+
+
+-(void)clearForwardAddr
+{
+    _oscForwarder.forwardAddr = nil;
+    _oscForwarder.forwardPort = nil;
     
 }
 

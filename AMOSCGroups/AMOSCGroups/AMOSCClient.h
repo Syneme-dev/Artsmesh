@@ -30,6 +30,10 @@
 -(BOOL)startOscClient;
 -(void)stopOscClient;
 
+
+-(void)setForwardAddr:(NSString *)addr port:(NSString *)port;
+-(void)clearForwardAddr;
+
 @end
 
 @protocol AMOSCClientDelegate <NSObject>

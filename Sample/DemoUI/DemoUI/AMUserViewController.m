@@ -154,7 +154,8 @@
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.userTabButton];
     [self.tabButtons addObject:self.groupTabButton];
-    self.showingTabsCount=2;
+    [self.tabButtons addObject:self.projectTabButton];
+    self.showingTabsCount=3;
     
 }
 

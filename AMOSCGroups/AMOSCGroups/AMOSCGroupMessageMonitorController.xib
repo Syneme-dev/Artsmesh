@@ -245,6 +245,13 @@
                         <action selector="clearAll:" target="-2" id="600-ou-O46"/>
                     </connections>
                 </button>
+                <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
+                    <rect key="frame" x="426" y="514" width="151" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="151" id="66f-cB-TtJ"/>
+                        <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
+                    </constraints>
+                </customView>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMT-4l-9y5" customClass="AMFoundryFontView">
                     <rect key="frame" x="244" y="490" width="145" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PORT" drawsBackground="YES" id="yXM-4I-PKX">
@@ -253,13 +260,6 @@
                         <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                 </textField>
-                <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
-                    <rect key="frame" x="426" y="514" width="151" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="151" id="66f-cB-TtJ"/>
-                        <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
-                    </constraints>
-                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Tnw-wO-2aw" secondAttribute="trailing" constant="43" id="38L-GW-gMB"/>

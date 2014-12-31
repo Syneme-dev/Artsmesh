@@ -12,6 +12,7 @@
 #import "AMLogger/AMLogReader.h"
 #import "AMLogger/AMLogger.h"
 
+#import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 
@@ -46,13 +47,12 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
 }
 
 @property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
-
 @property (weak) IBOutlet AMRatioButtonView *ratioOSCServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioOSCClient;
 @property (weak) IBOutlet AMRatioButtonView *ratioJackAudio;
 @property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
-@property (weak) IBOutlet NSTextField *searchWordTF;
+@property (weak) IBOutlet AMFoundryFontView *searchField;
 
 @end
 
@@ -88,9 +88,8 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
     _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
     [self showLog];
 }
-
-- (IBAction)search:(id)sender {
-    _searchWord = self.searchWordTF.stringValue;
+- (IBAction)searchKeyWork:(id)sender {
+    _searchWord = self.searchField.stringValue;
     if([_searchWord length] == 0)
     {
         //如果已经搜索了，则需要重置内容，显示全部内容
@@ -107,7 +106,6 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
     [_logReader resetLog];
     [self showLog];
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -168,6 +166,7 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
     self.fullLogCheck.title = @"FULL LOG";
     
     self.logFilePopUp.delegate  = self;
+    self.searchField.delegate   = self;
     
     self.ratioOSCClient.delegate    = self;
     self.ratioOSCServer.delegate    = self;
@@ -188,6 +187,8 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
                                     kAMAMServerFile,        kAMAMServerTitle,
                                     kAMArtsmeshFile,        kAMArtsmeshTitle,
                                     nil];
+    
+    [self onChecked:self.ratioArtsmesh];
 }
 
 -(void)registerTabButtons
@@ -300,8 +301,14 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             return;
     }
     
-    [[[self.logTextView textStorage] mutableString] appendString: logItem];
-    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+   NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:logItem
+                                                                     attributes:attr];
+    [self.logTextView.textStorage appendAttributedString:attrString];
+    self.logTextView.needsDisplay = YES;
+    
+  /*   [[[self.logTextView textStorage] mutableString] appendString: logItem];
+    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
 }
 
 

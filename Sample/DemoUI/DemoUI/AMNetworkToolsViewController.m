@@ -166,6 +166,7 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
     self.fullLogCheck.title = @"FULL LOG";
     
     self.logFilePopUp.delegate  = self;
+    self.searchField.delegate   = self;
     
     self.ratioOSCClient.delegate    = self;
     self.ratioOSCServer.delegate    = self;
@@ -300,8 +301,14 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             return;
     }
     
-    [[[self.logTextView textStorage] mutableString] appendString: logItem];
-    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
+   NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:logItem
+                                                                     attributes:attr];
+    [self.logTextView.textStorage appendAttributedString:attrString];
+    self.logTextView.needsDisplay = YES;
+    
+  /*   [[[self.logTextView textStorage] mutableString] appendString: logItem];
+    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
 }
 
 

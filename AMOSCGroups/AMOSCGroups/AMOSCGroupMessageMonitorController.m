@@ -15,6 +15,7 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "AMOSCForwarder.h"
 
 @implementation OSCMessagePack
 {
@@ -104,12 +105,15 @@
 @property (weak) IBOutlet AMFoundryFontView *sendToDev;
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 @property (weak) IBOutlet NSButton *clearAllBtn;
+@property (weak) IBOutlet AMFoundryFontView *forwardDevPort;
 
 @end
 
 @implementation AMOSCGroupMessageMonitorController
 {
     NSMutableArray *_usersRunOscSrv;
+    NSMutableSet *_thruMsgSet;
+    AMOSCForwarder *_oscForwarder;
 }
 
 - (void)viewDidLoad {
@@ -209,6 +213,8 @@
         [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr];
         [self.serverSelector setEnabled:NO];
         [self.selfDefServer setEnabled:NO];
+        [self.sendToDev setEnabled:NO];
+        [self.forwardDevPort setEnabled:NO];
         
         self.onOffBox.title = @"Off";
     }else{
@@ -218,6 +224,8 @@
         
         [self.serverSelector setEnabled:YES];
         [self.selfDefServer setEnabled:YES];
+        [self.sendToDev setEnabled:YES];
+        [self.forwardDevPort setEnabled:YES];
         
         [self.oscMessageLogs removeAllObjects];
         [self.oscMessageSearchResults removeAllObjects];
@@ -235,6 +243,16 @@
 -(void)thruChecked:(NSString *)msg  checked:(BOOL)checked
 {
     NSLog(@"thru checked");
+    
+    if (_thruMsgSet == nil) {
+        _thruMsgSet = [[NSMutableSet alloc] init];
+    }
+    
+    if(checked){
+        [_thruMsgSet addObject:msg];
+    }else{
+        [_thruMsgSet removeObject:msg];
+    }
 }
 
 
@@ -330,6 +348,7 @@
 {
     [self.oscMessageLogs removeAllObjects];
     [self.oscMessageSearchResults removeAllObjects];
+    [_thruMsgSet removeAllObjects];
     [self.oscMsgTable reloadData];
 }
 
@@ -521,6 +540,15 @@
     }
     
    // NSLog(@"params = %@", paramDetail);
+    
+    
+    for (NSString *thruMsg in _thruMsgSet) {
+        if ([thruMsg isEqualTo:msg]) {
+            NSString* addr = self.sendToDev.stringValue;
+            NSString* port = self.forwardDevPort.stringValue;
+            [AMOSCForwarder forwardMsg:msg params:params toAddr:addr port:port];
+        }
+    }
     
     for (OSCMessagePack *pack in self.oscMessageLogs) {
         if ([pack.msgFields.stringValue isEqualToString:msg]) {

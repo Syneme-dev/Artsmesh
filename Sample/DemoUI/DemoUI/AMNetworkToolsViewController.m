@@ -188,6 +188,8 @@ NSString * const kAMJackTripFile    = @"Jack Trip";
                                     kAMArtsmeshFile,        kAMArtsmeshTitle,
                                     nil];
     
+   /* [self.logTextView setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.logTextView.font.pointSize]];*/
+
     [self onChecked:self.ratioArtsmesh];
 }
 
@@ -301,9 +303,15 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             return;
     }
     
-   NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
+    NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline-Medium" size:11];
+    NSDictionary* attr = @{NSForegroundColorAttributeName:  UI_Color_b7b7b7 ,
+                           NSFontAttributeName:textViewFont};
+    
+    
+ //  NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:logItem
                                                                      attributes:attr];
+   
     [self.logTextView.textStorage appendAttributedString:attrString];
     self.logTextView.needsDisplay = YES;
     

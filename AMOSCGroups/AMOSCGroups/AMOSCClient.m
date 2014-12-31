@@ -106,22 +106,6 @@
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
     }
-    
-}
-
-
--(void)setForwardAddr:(NSString *)addr port:(NSString *)port
-{
-    _oscForwarder.forwardAddr = addr;
-    _oscForwarder.forwardPort = port;
-}
-
-
--(void)clearForwardAddr
-{
-    _oscForwarder.forwardAddr = nil;
-    _oscForwarder.forwardPort = nil;
-    
 }
 
 @end

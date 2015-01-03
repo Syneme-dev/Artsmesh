@@ -270,6 +270,9 @@
     
     [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
     [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+    NSString *path= [[NSBundle mainBundle] bundlePath];
+    path=[path stringByAppendingString:@"/Contents/Resources/archive-popup-info.css"];
+     profile_webview.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 }
 
 
@@ -282,7 +285,8 @@
     NSString *url= sender.mainFrameURL;
     sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
-    if([frame.DOMDocument.documentURI containsString:@"www.youtube.com/embed"])
+    NSString *documentUI=frame.DOMDocument.documentURI ;
+    if([documentUI rangeOfString:@"www.youtube.com/embed"].length>0)
     {
         return;
     }
@@ -346,6 +350,7 @@
     
     [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
     [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
+
     
 }
 

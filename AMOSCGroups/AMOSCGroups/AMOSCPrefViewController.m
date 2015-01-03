@@ -9,6 +9,7 @@
 #import "AMOSCPrefViewController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "UIFramework/AMButtonHandler.h"
 
 
 @interface AMOSCPrefViewController ()
@@ -28,6 +29,9 @@
 @property (weak) IBOutlet NSTextField *oscClientMonitorAddr;
 @property (weak) IBOutlet NSTextField *oscClientMonitorPort;
 
+@property (weak) IBOutlet NSButton *cancelBtn;
+@property (weak) IBOutlet NSButton *saveBtn;
+
 @end
 
 @implementation AMOSCPrefViewController
@@ -35,6 +39,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    [AMButtonHandler  changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     
     [self restoreConfig:nil];
 }

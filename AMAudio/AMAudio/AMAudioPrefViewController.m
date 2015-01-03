@@ -138,16 +138,16 @@
     BOOL compensation = [[AMPreferenceManager standardUserDefaults] boolForKey:Preference_Jack_ClockDriftComp];
     BOOL midi = [[AMPreferenceManager standardUserDefaults] boolForKey:Preference_Jack_ActiveMIDI];
     
-    [self.hogModeCheck setTitle:@"Hog Mode:"];
+    [self.hogModeCheck setTitle:@"HOG MODE:"];
     [self.hogModeCheck setChecked:hogMode];
     
-    [self.compensationCheck setTitle:@"Clock Drift Compensation:"];
+    [self.compensationCheck setTitle:@"CLOCK DRIFT COMPENSAtiON:"];
     [self.compensationCheck setChecked:compensation];
     
-    [self.portMornitingCheck setTitle:@"System Port Monitoring:"];
+    [self.portMornitingCheck setTitle:@"SYSTEM PORT MORNITORING:"];
     [self.portMornitingCheck setChecked:portMoniting];
     
-    [self.midiCheck setTitle:@"Active MIDI:"];
+    [self.midiCheck setTitle:@"ACTIVE MIDI:"];
     [self.midiCheck setChecked:midi];
 }
 

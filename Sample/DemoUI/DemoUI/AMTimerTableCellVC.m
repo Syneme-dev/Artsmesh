@@ -144,13 +144,13 @@ static NSString * const PingCommandFormat =
 
 - (void)startMetronome:(NSNotification *)notification
 {
-    self.metronomeLabel.stringValue = @(0).stringValue;
+    self.metronomeLabel.stringValue = @(1).stringValue;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
                                                   target:self
                                                 selector:@selector(incrementMetronome)
                                                 userInfo:nil
                                                  repeats:YES];
-    [self.timer fire];
+    self.timer.fireDate = notification.userInfo[@"fireDate"];
     self.lockButton.enabled = NO;
 }
 

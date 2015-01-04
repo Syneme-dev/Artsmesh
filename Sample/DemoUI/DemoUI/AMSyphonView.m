@@ -153,6 +153,7 @@ static void drawAnObject ()
         // We are responsible for releasing the frame
         //       [image release];
     }
+    
    
     
     // Restore OpenGL states
@@ -162,17 +163,18 @@ static void drawAnObject ()
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     
-    if(drawTriangle){
-        glColor3f(0.2f, 0.2f, 1.0f);
+    if(!image && drawTriangle){
+        glColor3f(61/255.0, 75/255.0, 93/255.0);
         glBegin(GL_TRIANGLES);
         {
-            glVertex3f(  0.8,  -0.8, 0.0);
-            glVertex3f(  1,     -0.8, 0.0);
-            glVertex3f(  0.9,     -1 ,0.0);
+            glVertex3f(  1,  -0.8, 0.0);
+            glVertex3f(  1,     -1, 0.0);
+            glVertex3f(  0.8,     -1 ,0.0);
         }
         glEnd();
     }
 
+    
     glFlush();
     
     [self unlockFocus];

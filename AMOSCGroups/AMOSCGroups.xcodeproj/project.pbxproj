@@ -48,6 +48,7 @@
 		0166BA211A514D3200D66954 /* AMOSCForwarder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0166BA1F1A514D3200D66954 /* AMOSCForwarder.mm */; };
 		0166BA241A5155A800D66954 /* AMOSCView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0166BA221A5155A800D66954 /* AMOSCView.h */; };
 		0166BA251A5155A800D66954 /* AMOSCView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166BA231A5155A800D66954 /* AMOSCView.m */; };
+		01C893481A5908DA008C34FE /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C893471A5908DA008C34FE /* AMCommonTools.framework */; };
 		4A1D3F8B1A14858D00A1BF4D /* AMOSCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */; };
 		4A1D3F8C1A14858D00A1BF4D /* AMOSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */; };
 		4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */; };
@@ -115,6 +116,7 @@
 		0166BA1F1A514D3200D66954 /* AMOSCForwarder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMOSCForwarder.mm; sourceTree = "<group>"; };
 		0166BA221A5155A800D66954 /* AMOSCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCView.h; sourceTree = "<group>"; };
 		0166BA231A5155A800D66954 /* AMOSCView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCView.m; sourceTree = "<group>"; };
+		01C893471A5908DA008C34FE /* AMCommonTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCommonTools.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMCommonTools.framework; sourceTree = "<group>"; };
 		4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCClient.h; sourceTree = "<group>"; };
 		4A1D3F8A1A14858D00A1BF4D /* AMOSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCClient.m; sourceTree = "<group>"; };
 		4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C893481A5908DA008C34FE /* AMCommonTools.framework in Frameworks */,
 				0166BA1D1A5103C900D66954 /* UIFramework.framework in Frameworks */,
 				0110B30C1A4D663F009DCB9C /* AMCoreData.framework in Frameworks */,
 				4A56B5A21A15BC5C00D100D7 /* AMNetworkUtils.framework in Frameworks */,
@@ -282,6 +285,7 @@
 		4AED84101A134007004CE862 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01C893471A5908DA008C34FE /* AMCommonTools.framework */,
 				0166BA1C1A5103C900D66954 /* UIFramework.framework */,
 				0110B30B1A4D663F009DCB9C /* AMCoreData.framework */,
 				4A56B5A11A15BC5C00D100D7 /* AMNetworkUtils.framework */,

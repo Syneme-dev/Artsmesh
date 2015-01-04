@@ -29,7 +29,7 @@
         self.textColor = [NSColor grayColor];
         self.readOnly = NO;
         self.drawBackground = NO;
-        self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize];
+        self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: 13.0f];
     }
     
     return self;

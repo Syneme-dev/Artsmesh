@@ -16,6 +16,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMOSCForwarder.h"
+#import "AMCommonTools/AMCommonTools.h"
 
 @implementation OSCMessagePack
 {
@@ -176,6 +177,31 @@
                                                alternateButton:nil
                                                    otherButton:nil
                                      informativeTextWithFormat:@"Maybe the user running osc server quit, please select another one!"];
+                [alert runModal];
+                return;
+            }
+        }
+        
+        if([self.sendToDev.stringValue isNotEqualTo:@""] || [self.forwardDevPort.stringValue isNotEqualTo:@""]){
+            
+            NSString *forwardIp = self.sendToDev.stringValue;
+            if(![AMCommonTools isValidIpv4:forwardIp]){
+                NSAlert *alert = [NSAlert alertWithMessageText:@"forward address is invalid!"
+                                                 defaultButton:@"Ok"
+                                               alternateButton:nil
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@""];
+                [alert runModal];
+                return;
+            }
+            
+            int forwardPort = [self.forwardDevPort.stringValue intValue];
+            if(forwardPort < 1024 || forwardPort > 65535){
+                NSAlert *alert = [NSAlert alertWithMessageText:@"forward port is invalid!"
+                                                 defaultButton:@"Ok"
+                                               alternateButton:nil
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@""];
                 [alert runModal];
                 return;
             }

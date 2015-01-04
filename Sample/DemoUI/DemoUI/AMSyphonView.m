@@ -38,12 +38,12 @@
 
 static void drawAnObject ()
 {
-    glColor3f(1.0f, 0.85f, 0.35f);
+    glColor3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_TRIANGLES);
     {
-        glVertex3f(  0.0,  0.6, 0.0);
-        glVertex3f( -0.2, -0.3, 0.0);
-        glVertex3f(  0.2, -0.3 ,0.0);
+        glVertex3f(  0.8,  -0.8, 0.0);
+        glVertex3f(  1,     -0.8, 0.0);
+        glVertex3f(  0.9,     -1 ,0.0);
     }
     glEnd();
 }
@@ -158,6 +158,7 @@ static void drawAnObject ()
     
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
+    drawAnObject();
     
     glFlush();
     

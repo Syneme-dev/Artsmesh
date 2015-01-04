@@ -17,8 +17,8 @@
             <rect key="frame" x="0.0" y="0.0" width="244" height="233"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NWL-0I-TI7">
-                    <rect key="frame" x="18" y="-1" width="209" height="26"/>
+                <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NWL-0I-TI7">
+                    <rect key="frame" x="38" y="-3" width="209" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Ebl-0X-lgV"/>
                     </constraints>
@@ -39,8 +39,8 @@
                 </popUpButton>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="NWL-0I-TI7" secondAttribute="trailing" constant="20" id="Tyu-HV-R8x"/>
-                <constraint firstItem="NWL-0I-TI7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="cLI-X5-91n"/>
+                <constraint firstAttribute="trailing" secondItem="NWL-0I-TI7" secondAttribute="trailing" id="Tyu-HV-R8x"/>
+                <constraint firstItem="NWL-0I-TI7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="cLI-X5-91n"/>
                 <constraint firstAttribute="bottom" secondItem="NWL-0I-TI7" secondAttribute="bottom" constant="2" id="m8G-JJ-qxs"/>
             </constraints>
             <point key="canvasLocation" x="136" y="222.5"/>

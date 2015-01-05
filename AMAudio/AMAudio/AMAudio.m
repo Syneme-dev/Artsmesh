@@ -97,17 +97,17 @@
     return _routerController;
 }
 
--(NSViewController*)getJacktripPrefUI
-{
-    if (_jackTripController == nil) {
-        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-        _jackTripController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
-        _jackTripController.jacktripManager = _jacktripManager;
-        _jackTripController.jackManager = _jackManager;
-    }
-    
-    return _jackTripController;
-}
+//-(NSViewController*)getJacktripPrefUI
+//{
+//    if (_jackTripController == nil) {
+//        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+//        _jackTripController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+//        _jackTripController.jacktripManager = _jacktripManager;
+//        _jackTripController.jackManager = _jackManager;
+//    }
+//    
+//    return _jackTripController;
+//}
 
 -(NSViewController*)getMixerUI
 {

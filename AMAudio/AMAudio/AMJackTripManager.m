@@ -85,7 +85,7 @@
     
     NSString *systemLogPath = AMLogDirectory();
 
-    NSString* jacktripLogPath = [NSString stringWithFormat:@" > \"%@/jacktrip_%@.log\"", systemLogPath, cfgs.clientName];
+    NSString* jacktripLogPath = [NSString stringWithFormat:@" > \"%@/Jacktrip_%@.log\"", systemLogPath, cfgs.clientName];
     [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jacktripLogPath];
     AMLog(kAMInfoLog, @"AMAudio", @"jack trip command line is %@", commandline);
     

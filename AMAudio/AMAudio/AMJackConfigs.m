@@ -92,7 +92,7 @@
         strcat(stringa, " -m ");
     }
     
-    NSString *jackLog = [NSString stringWithFormat:@" > %@/Jackdmp.log", AMLogDirectory()];
+    NSString *jackLog = [NSString stringWithFormat:@" > %@/Jack_Audio.log", AMLogDirectory()];
     const char *szLogPath = [jackLog cStringUsingEncoding:NSUTF8StringEncoding];
     strcat(stringa, szLogPath);
     

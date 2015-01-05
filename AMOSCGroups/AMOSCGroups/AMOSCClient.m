@@ -61,7 +61,7 @@
          self.monitorPort];
         
         NSString *systemLogPath = AMLogDirectory();
-        [commandline appendFormat:@"%@ > %@/OSCClient.log", commandline, systemLogPath];
+        [commandline appendFormat:@"%@ > %@/OSC_Client.log", commandline, systemLogPath];
         
         [_task terminate];
         _task = [[NSTask alloc] init];

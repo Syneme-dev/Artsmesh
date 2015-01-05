@@ -291,6 +291,9 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
     AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+    
+    controller.jackManager = self.jackManager;
+    controller.jacktripManager = self.jacktripManager;
 
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];

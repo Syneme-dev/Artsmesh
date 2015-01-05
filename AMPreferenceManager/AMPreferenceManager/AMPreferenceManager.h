@@ -106,6 +106,18 @@
 #define Preference_OSC_Client_MonitorPort  @"Preference_OSC_Client_MonitorPort"
 
 
+//////////////////////////Jacktrip Default///////////////////////////////////
+#define Preference_Jacktrip_Role            @"Preference_Jacktrip_Role"
+#define Preference_Jacktrip_ChannelCount    @"Preference_Jacktrip_ChannelCount"
+#define Preference_Jacktrip_QBL             @"Preference_Jacktrip_QBL"
+#define Preference_Jacktrip_PR              @"Preference_Jacktrip_PR"
+#define Preference_Jacktrip_BRR             @"Preference_Jacktrip_BRR"
+#define Preference_Jacktrip_ZeroUnderRun    @"Preference_Jacktrip_ZeroUnderRun"
+#define Preference_Jacktrip_Loopback        @"Preference_Jacktrip_Loopback"
+#define Preference_Jacktrip_Jamlink         @"Preference_Jacktrip_Jamlink"
+#define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
+
+
 #import <Foundation/Foundation.h>
 
 @interface AMPanelLocation : NSObject

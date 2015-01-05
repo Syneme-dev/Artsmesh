@@ -305,11 +305,10 @@
 - (IBAction)saveConfig:(NSButton *)sender
 {
     if (self.jackManager == nil) {
-        NSException* exp = [[NSException alloc]
-                            initWithName:@"Code Bug!"
-                            reason:@"to save config, must set manager first"
-                            userInfo:nil];
-        [exp raise];
+        
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Code Bug!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"to save config, must set manager first!"];
+        [alert runModal];
+        return;
     }
     
     int virtualNum = [self.amVirtualChannsField.stringValue intValue];

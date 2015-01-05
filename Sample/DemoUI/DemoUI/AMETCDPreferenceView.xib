@@ -21,6 +21,7 @@
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
                 <outlet property="testStatusNetPost" destination="FE0-1F-GTL" id="F0y-vz-Hq1"/>
+                <outlet property="useIpv6" destination="Gtp-xq-sPX" id="rXm-VS-LU2"/>
                 <outlet property="videoTabButton" destination="fqL-QQ-Ulv" id="USk-ju-JX0"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
@@ -59,7 +60,7 @@
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                         </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="audioTab">
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="jacktripTab">
                             <rect key="frame" x="326" y="2" width="69" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="1Hi-BW-B1N"/>
@@ -70,6 +71,9 @@
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="onJackTripClick:" target="-2" id="hKP-n7-MwN"/>
+                            </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
                             <rect key="frame" x="523" y="2" width="64" height="13"/>
@@ -142,7 +146,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32K-V3-qm6" customClass="AMFoundryFontView">
                                         <rect key="frame" x="427" y="656" width="155" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="sig-Ye-f6j"/>
@@ -156,7 +160,7 @@
                                             <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_ChatPort" id="eWt-D6-xXb"/>
                                         </connections>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" userLabel="StunServerAddr" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muo-V0-R66" userLabel="StunServerAddr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="138" y="549" width="159" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="DqD-b7-RBl"/>
@@ -170,21 +174,7 @@
                                             <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerAddr" id="NjG-vl-Ywi"/>
                                         </connections>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" userLabel="StunServerPort" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="427" y="549" width="155" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="17" id="ELA-Ek-lgX"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="sNo-mW-eIN" customClass="AMTextFieldCell">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerPort" id="BDO-sM-tgo"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" userLabel="GlobalServerPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aw-tB-Mm1" userLabel="GlobalServerPort" customClass="AMFoundryFontView">
                                         <rect key="frame" x="427" y="585" width="155" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="TOf-7G-djj"/>
@@ -198,7 +188,7 @@
                                             <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_GlobalServerPort" id="94X-Dp-ZuD"/>
                                         </connections>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTE-sc-8gr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="338" y="656" width="85" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="81" id="D0R-tz-ezG"/>
@@ -246,7 +236,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-zS-tcK" customClass="AMFoundryFontView">
                                         <rect key="frame" x="338" y="585" width="68" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="Vq5-E1-JfS"/>
@@ -257,7 +247,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yiF-oi-4hZ" customClass="AMFoundryFontView">
                                         <rect key="frame" x="338" y="549" width="90" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="pGn-1m-CTt"/>
@@ -269,7 +259,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" userLabel="UseIPv6" customClass="AMCheckBoxView">
+                                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Tp-lO-ZpI" userLabel="UseIPv6" customClass="AMCheckBoxView">
                                         <rect key="frame" x="340" y="698" width="240" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Z21-lg-7Tr"/>
@@ -285,7 +275,7 @@
                                             <binding destination="pGe-YA-GCX" name="toolTip" keyPath="values.Preference_Key_General_TopControlBar" id="JDV-Ha-BHa"/>
                                         </connections>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-7Y-Wal" userLabel="PrivateIP" customClass="AMPopUpView">
+                                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-7Y-Wal" userLabel="PrivateIP" customClass="AMPopUpView">
                                         <rect key="frame" x="114" y="698" width="183" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="GW4-NZ-J8P"/>
@@ -331,7 +321,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qgb-xm-gRP"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S57-MC-AQT">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S57-MC-AQT">
                                         <rect key="frame" x="322" y="700" width="3" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="3" id="Hex-3S-ciF"/>
@@ -339,7 +329,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="mIK-Z1-rPH"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-vI-Rc0">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-vI-Rc0">
                                         <rect key="frame" x="322" y="656" width="3" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="6UE-kK-bbn"/>
@@ -347,7 +337,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="iNW-na-bd8"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="thp-NN-VCi">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="thp-NN-VCi">
                                         <rect key="frame" x="322" y="585" width="3" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="bZ8-f7-LHH"/>
@@ -379,7 +369,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="flM-p5-sXS"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t97-1L-R6M">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t97-1L-R6M">
                                         <rect key="frame" x="322" y="549" width="3" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="3" id="Wdh-yJ-El0"/>
@@ -427,7 +417,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="gxe-Ju-aJr"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" userLabel="GlobalServerAddr" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-iE-WuO" userLabel="GlobalServerAddr" customClass="AMFoundryFontView">
                                         <rect key="frame" x="112" y="585" width="185" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="p86-Pq-VJf"/>
@@ -441,7 +431,7 @@
                                             <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_GlobalServerAddr" id="Urz-cG-4ZF"/>
                                         </connections>
                                     </textField>
-                                    <box hidden="YES" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="F9I-Y8-Zgl">
+                                    <box hidden="YES" horizontalHuggingPriority="750" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="F9I-Y8-Zgl">
                                         <rect key="frame" x="304" y="288" width="5" height="480"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="PQh-1S-7tn"/>
@@ -451,7 +441,7 @@
                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <font key="titleFont" metaFont="system"/>
                                     </box>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" userLabel="LocalServerPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-Vy-bTy" userLabel="LocalServerPort" customClass="AMFoundryFontView">
                                         <rect key="frame" x="112" y="656" width="185" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="y97-df-3Nz"/>
@@ -463,6 +453,20 @@
                                         </textFieldCell>
                                         <connections>
                                             <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_LocalServerPort" id="XZs-2r-Vmq"/>
+                                        </connections>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGA-7j-dZK" userLabel="StunServerPort" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="427" y="549" width="155" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="ELA-Ek-lgX"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" id="sNo-mW-eIN" customClass="AMTextFieldCell">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="pGe-YA-GCX" name="value" keyPath="values.Preference_Key_General_StunServerPort" id="BDO-sM-tgo"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -549,13 +553,19 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="OSCGroups" identifier="2" id="ZCR-Ci-8sZ">
+                        <tabViewItem label="Jacktrip" identifier="2" id="qH2-Vo-PnD">
+                            <view key="view" identifier="jacktripTab" id="5CP-0D-iJt" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="OSCGroups" identifier="3" id="ZCR-Ci-8sZ">
                             <view key="view" identifier="oscGroupTab" id="XnP-jZ-xQz" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="StatusNet" identifier="6" id="GqN-Y7-qns">
+                        <tabViewItem label="StatusNet" identifier="5" id="GqN-Y7-qns">
                             <view key="view" identifier="statusNetTabView" id="343-FY-LyZ" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -679,14 +689,6 @@
             <point key="canvasLocation" x="263" y="395"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="pGe-YA-GCX"/>
-        <button verticalHuggingPriority="750" id="6BA-iL-rSy">
-            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TX7-5Y-Jnt">
-                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                <font key="font" metaFont="system"/>
-            </buttonCell>
-        </button>
     </objects>
     <resources>
         <image name="label_bar" width="6" height="30"/>

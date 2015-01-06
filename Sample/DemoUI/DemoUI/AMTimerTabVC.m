@@ -108,7 +108,19 @@ typedef enum : NSInteger {
                                                     selector:@selector(incrementTimerLabel)
                                                     userInfo:nil
                                                      repeats:YES];
-        NSDate *fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+        
+        time_t t = time(NULL);
+        struct tm loc = *localtime(&t);
+        loc.tm_hour = 0;
+        loc.tm_min = 0;
+        loc.tm_sec = 0;
+        t = mktime(&loc);
+        NSTimeInterval startTimeByAbsoluteSetting = t + _timeIntervalSettings[AMTimerAbsoluteMode];
+        NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval startTime = MAX(now, startTimeByAbsoluteSetting);
+        
+        NSDate *fireDate = [NSDate dateWithTimeIntervalSince1970:startTime];
+        NSLog(@"fireDate: %@", fireDate);
         self.timer.fireDate = fireDate;
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStartNotification
                                                             object:self

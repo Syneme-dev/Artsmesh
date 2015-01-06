@@ -16,6 +16,7 @@
 #import "AMAppDelegate.h"
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
+#import "AMJacktripSettings.h"
 
 
 
@@ -30,6 +31,7 @@
     dispatch_queue_t _preference_queue;
     NSViewController* _audioViewController;
     NSViewController* _oscGroupViewController;
+    NSViewController* _jacktripSettingViewController;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -90,7 +92,33 @@
             ;
         }else if([view.identifier isEqualTo:@"oscGroupTab"]){
             [self loadOSCGroupPrefView:view ];
+        }else if([view.identifier isEqualTo:@"jacktripTab"]){
+            [self loadJacktripTab:view ];
         }
+    }
+}
+
+
+-(void)loadJacktripTab:(NSView *)tabView
+{
+    _jacktripSettingViewController = [[AMJacktripSettings alloc] initWithNibName:@"AMJacktripSettings" bundle:nil];
+    if (_jacktripSettingViewController) {
+        NSView* contentView = _jacktripSettingViewController.view;
+        [tabView addSubview:contentView];
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        
+        [tabView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
     }
 }
 
@@ -159,11 +187,16 @@
 
 - (IBAction)onStatusNetClick:(id)sender {
     [self pushDownButton:self.statusnetTabButton];
-    [self.tabs selectTabViewItemWithIdentifier:@"6"];
+    [self.tabs selectTabViewItemWithIdentifier:@"5"];
 }
 
 - (IBAction)onOSCGroupClick:(id)sender {
     [self pushDownButton:self.oscGroupTabBtn];
+    [self.tabs selectTabViewItemWithIdentifier:@"3"];
+}
+
+- (IBAction)onJackTripClick:(id)sender {
+    [self pushDownButton:self.audioTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"2"];
 }
 

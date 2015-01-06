@@ -132,11 +132,35 @@
     p << osc::BeginMessage( szMsg );
     
     for (NSDictionary *dict in params) {
+        //only one key-value pair in dict
         NSString *type = [[dict allKeys] firstObject];
         id value = [dict objectForKey:type];
-        NSString *valStr = [NSString stringWithFormat:@"%@", value];
-        const char *szParam = [valStr cStringUsingEncoding:NSUTF8StringEncoding];
-        p << szParam;
+        
+        if([type isEqualToString:@"BOOL"]){
+            BOOL bVal = [value boolValue];
+            p << bVal;
+        }else if([type isEqualToString:@"INT"]){
+            int iVal = [value intValue];
+            p << iVal;
+            
+        }else if([type isEqualToString:@"LONG"]){
+            long lVal = [value longValue];
+            p << lVal;
+            
+        }else if([type isEqualToString:@"FLOAT"]){
+            float fVal = [value floatValue];
+            p << fVal;
+            
+        }else if([type isEqualToString:@"STRING"]){
+            NSString *valStr = [NSString stringWithFormat:@"%@", value];
+            const char *szParam = [valStr cStringUsingEncoding:NSUTF8StringEncoding];
+            p << szParam;
+        }else if([type isEqualToString:@"BLOB"]){
+            
+            NSData *data = (NSData *)value;
+            osc::Blob blobVal([data bytes], (int)data.length);
+            p << blobVal;
+        }
     }
     
     p<< osc::EndMessage;

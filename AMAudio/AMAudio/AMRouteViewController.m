@@ -289,31 +289,20 @@ shouldRemoveDevice:(NSString *)deviceID;
         self.myPopover.delegate = self;
     }
     
-    AMJackTripConfigController* controller = (AMJackTripConfigController*)[[AMAudio sharedInstance] getJacktripPrefUI];
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
+    AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+    
+    controller.jackManager = self.jackManager;
+    controller.jacktripManager = self.jacktripManager;
+
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
     self.myPopover.contentViewController = controller;
     controller.owner = self.myPopover;
 
-    [self.myPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+    NSRect rect = [sender bounds];
+    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
 }
-
-
-- (void)popoverWillShow:(NSNotification *)notification
-{
-    AMJackTripConfigController* controller = (AMJackTripConfigController*)self.myPopover.contentViewController;
-    if (controller) {
-        [controller initPortOffset];
-        [controller initParameters];
-    }
-}
-
--(void)popoverDidClose:(NSNotification *)notification
-{
-
-}
-
-
 
 
 @end

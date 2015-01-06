@@ -60,13 +60,16 @@
          self.groupPwd, self.monitorAddr,
          self.monitorPort];
         
+        NSString *systemLogPath = AMLogDirectory();
+        [commandline appendFormat:@"%@ > %@/OSC_Client.log", commandline, systemLogPath];
+        
         [_task terminate];
         _task = [[NSTask alloc] init];
         _task.launchPath = @"/bin/bash";
         _task.arguments = @[@"-c", [commandline copy]];
         
-        //AMLog(kAMInfoLog, @"AMOscGroups", commandline);
-        NSLog(@"start osc client command is : %@", commandline);
+        AMLog(kAMInfoLog, @"AMOscGroups", commandline);
+        //NSLog(@"start osc client command is : %@", commandline);
         
         [_task launch];
         

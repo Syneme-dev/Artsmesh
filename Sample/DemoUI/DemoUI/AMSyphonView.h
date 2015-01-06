@@ -13,5 +13,5 @@
 @interface AMSyphonView : NSOpenGLView
 
 @property SyphonImage *image;
-
+@property Boolean          drawTriangle;
 @end

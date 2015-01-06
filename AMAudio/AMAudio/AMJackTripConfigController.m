@@ -22,12 +22,10 @@
 @property (weak) IBOutlet AMFoundryFontView *peerAddress;
 @property (weak) IBOutlet AMFoundryFontView *peerName;
 @property (weak) IBOutlet AMPopUpView *portOffsetSelector;
-@property (weak) IBOutlet NSTextField *qCount;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
-@property (weak) IBOutlet AMCheckBoxView *jamlinkCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
@@ -51,67 +49,41 @@
 
 -(void)awakeFromNib
 {
-    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
-    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(jacktripChanged:)
      name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
      object:nil];
-}
-
-
--(void)itemSelected:(AMPopUpView*)sender
-{
-    if ([sender isEqual:self.peerSelecter]) {
-        [self peerSelectedChanged:sender];
-    }
-}
-
--(void)onChecked:(AMCheckBoxView*)sender
-{
     
+    [self setUpUI];
+    [self loadDefaultPref];
 }
 
-
--(void)initPortOffset
+-(void)setUpUI
 {
-    self.portOffsetSelector.delegate = self;
-    [self.portOffsetSelector removeAllItems];
+    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
     
-    for (NSUInteger i = 0; i <10; i++) {
-        
-        BOOL inUse = NO;
-        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
-            if(jacktrip.portOffset == i){
-                inUse = YES;
-                break;
-            }
-        }
-        
-        if(!inUse){
-            NSString* str = [NSString stringWithFormat:@"%lu", (unsigned long)i];
-            [self.portOffsetSelector addItemWithTitle:str];
-        }
-    }
-    
-    [self.portOffsetSelector selectItemAtIndex:0];
-}
-
-
--(void)initParameters
-{
-    //init Jacktrip role
-    self.roleSelecter.delegate = self;
-    [self.roleSelecter removeAllItems];
     [self.roleSelecter addItemWithTitle:@"Server"];
     [self.roleSelecter addItemWithTitle:@"Client"];
-    [self.roleSelecter selectItemAtIndex:0];
     
-    //init peers
+    [self.peerAddress setEnabled:NO];
+    [self.peerName setEnabled:NO];
+    
+    self.portOffsetSelector.delegate = self;
+    self.roleSelecter.delegate = self;
     self.peerSelecter.delegate = self;
-    [self.peerSelecter removeAllItems];
     
+    self.zerounderrunCheck.title = @"ZERO UNDER RUN";
+    self.loopbackCheck.title = @"LOOPBACK";
+    self.ipv6Check.title = @"USE IPV6";
+    
+    [self setPeerList];
+    [self initPortOffset];
+}
+    
+
+-(void)setPeerList
+{
     AMCoreData* dataStore = [AMCoreData shareInstance];
     AMLiveUser* mySelf = dataStore.mySelf;
     
@@ -148,7 +120,6 @@
     }
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
-    [self.peerSelecter selectItemAtIndex:0];
     
     if (firstIndexInUserlist == -1) {
         //no one add to list except ip address
@@ -174,43 +145,77 @@
         [self.peerName setEnabled:NO];
     }
     
-    //init channel count
-    self.channeCount.stringValue = @"2";
-    
-    //init port
-    [self.portOffsetSelector selectItemAtIndex:0];
-    
-    //init -q
-    self.qCount.stringValue = [NSString stringWithFormat:@"%d", 4];
-   
-    //init -r
-    self.rCount.stringValue = [NSString stringWithFormat:@"%d", 1];
-    
-    //init -b
-    self.bitRateRes.stringValue = [NSString stringWithFormat:@"%d", 16];
-    
-    //init -z
-    self.zerounderrunCheck.delegate = self;
-    self.zerounderrunCheck.title = @"Zerounderrun (-z)";
-    [self.zerounderrunCheck setChecked:NO];
-    
-    //init -I
-    self.loopbackCheck.delegate = self;
-    self.loopbackCheck.title = @"Loopback (-l)";
-    [self.loopbackCheck setChecked:NO];
-    
-    //init -j
-    self.jamlinkCheck.delegate = self;
-    self.jamlinkCheck.title = @"jamlink (-j)";
-    [self.jamlinkCheck setChecked:NO];
-    
-    //int -V
-    BOOL useIpv6 = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Key_General_UseIpv6] boolValue];
-    
-    self.ipv6Check.delegate = self;
-    self.ipv6Check.title = @"use Ipv6 (-V)";
-    [self.ipv6Check setChecked:useIpv6];
+    [self.peerSelecter selectItemAtIndex:0];
+}
 
+
+-(void)itemSelected:(AMPopUpView*)sender
+{
+    if ([sender isEqual:self.peerSelecter]) {
+        [self peerSelectedChanged:sender];
+    }
+}
+
+
+-(void)initPortOffset
+{
+    [self.portOffsetSelector removeAllItems];
+    
+    for (NSUInteger i = 0; i <10; i++) {
+        
+        BOOL inUse = NO;
+        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
+            if(jacktrip.portOffset == i){
+                inUse = YES;
+                break;
+            }
+        }
+        
+        if(!inUse){
+            NSString* str = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+            [self.portOffsetSelector addItemWithTitle:str];
+        }
+    }
+    
+    [self.portOffsetSelector selectItemAtIndex:0];
+}
+
+
+-(void)loadDefaultPref
+{
+    NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Role];
+    [self.roleSelecter selectItemWithTitle:roleStr];
+    
+    NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
+    self.channeCount.stringValue = chanCountStr;
+    
+    NSString *prStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_PR];
+    self.rCount.stringValue = prStr;
+    
+    NSString *brrStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_BRR];
+    self.bitRateRes.stringValue = brrStr;
+    
+    NSString *zeroStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ZeroUnderRun];
+    if ([zeroStr isEqualToString:@"YES"]) {
+        self.zerounderrunCheck.checked = YES;
+    }else{
+        self.zerounderrunCheck.checked = NO;
+    }
+    
+    NSString *loopStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Loopback];
+    if ([loopStr isEqualToString:@"YES"]) {
+        self.loopbackCheck.checked = YES;
+    }else{
+        self.loopbackCheck.checked = NO;
+    }
+    
+    NSString *useIpv6Str = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_UseIpv6];
+    if ([useIpv6Str isEqualToString:@"YES"]) {
+        self.ipv6Check.checked = YES;
+    }else{
+        self.ipv6Check.checked = NO;
+    }
+    
 }
 
 
@@ -249,6 +254,7 @@
     }
 }
 
+
 -(BOOL)checkouJacktripParams
 {
     if ([self.roleSelecter.stringValue isNotEqualTo:@"Server"] &&
@@ -277,12 +283,6 @@
     
     if ([self.channeCount.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"channel count parameter can not be less than zero"];
-        [alert runModal];
-        return NO;
-    }
-    
-    if([self.qCount.stringValue intValue] <= 0){
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"qcount parameter can not be less than zero"];
         [alert runModal];
         return NO;
     }
@@ -329,18 +329,21 @@
         return;
     }
     
+    NSString *qCount = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
+    NSString *jamLink = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Jamlink];
+    
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
     
     cfgs.role = self.roleSelecter.stringValue;
     cfgs.serverAddr = self.peerAddress.stringValue;
     cfgs.portOffset = self.portOffsetSelector.stringValue;
     cfgs.channelCount = self.channeCount.stringValue;
-    cfgs.qCount = self.qCount.stringValue;
+    cfgs.qCount = qCount;
     cfgs.rCount = self.rCount.stringValue;
     cfgs.bitrateRes = self.bitRateRes.stringValue;
     cfgs.zerounderrun = self.zerounderrunCheck.checked;
     cfgs.loopback = self.loopbackCheck.checked;
-    cfgs.jamlink = self.jamlinkCheck.checked;
+    cfgs.jamlink = [jamLink boolValue];
     cfgs.clientName = self.peerName.stringValue;
     cfgs.useIpv6 = self.ipv6Check.checked;
     
@@ -355,8 +358,7 @@
 
 -(void)jacktripChanged:(NSNotification*)notification
 {
-    [self initParameters];
-    [self initPortOffset];
+
 }
 
 - (IBAction)closeClicked:(NSButton *)sender

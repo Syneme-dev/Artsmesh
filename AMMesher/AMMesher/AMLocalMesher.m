@@ -101,12 +101,14 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
-    NSString *command = [NSString stringWithFormat:
-                         @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ >/dev/null 2>&1",
-                         lanchPath,
-                         port,
-                         port,
-                         userTimeout];
+
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ > %@/AMServer.log",
+                                lanchPath,
+                                port,
+                                port,
+                                userTimeout,
+                                AMLogDirectory()];
     AMLog(kAMInfoLog, @"AMMesher", @"local server command is:%@", command);
     
     _lsTask = [[NSTask alloc] init];

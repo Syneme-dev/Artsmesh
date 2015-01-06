@@ -85,6 +85,15 @@
              @"default", Preference_OSC_Client_GroupPwd,
              @"localhost", Preference_OSC_Client_MonitorAddr,
              @"22230", Preference_OSC_Client_MonitorPort,
+             @"Server", Preference_Jacktrip_Role,
+             @"2", Preference_Jacktrip_ChannelCount,
+             @"4",Preference_Jacktrip_QBL,
+             @"16", Preference_Jacktrip_BRR,
+             @"1", Preference_Jacktrip_PR,
+             @"NO", Preference_Jacktrip_ZeroUnderRun,
+             @"NO", Preference_Jacktrip_Loopback,
+             @"NO", Preference_Jacktrip_Jamlink,
+             @"NO", Preference_Jacktrip_UseIpv6,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];

@@ -60,6 +60,8 @@
     
     
     [self updateServerList];
+    
+    self.glView.drawTriangle = NO;
 }
 
 -(NSDictionary*)syphonServerDisctriptByName:(NSString*)name

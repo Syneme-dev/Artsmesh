@@ -84,7 +84,7 @@
         NSString* maxGroups = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_MaxGroups];
         NSString* timeout = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_Timeout];
         
-        NSString* logPath = [NSString stringWithFormat:@"%@/Library/Logs/Artsmesh/OscSrv.log", NSHomeDirectory()];
+        NSString* logPath = [NSString stringWithFormat:@"%@/OSC_Server.log", AMLogDirectory()];
         
         [commandline appendFormat:@" -p %@ -t %@ -u %@ -g %@ -l %@", port, timeout, maxUsers, maxGroups, logPath];
         AMLog(kAMInfoLog, @"AMOSCGroup", @"osc group server command line is %@", commandline);

@@ -23,12 +23,12 @@ NSString * const kAMAMServerTitle   = @"AMSERVER";
 NSString * const kAMArtsmeshTitle   = @"ARTSMESH";
 
 
-NSString * const kAMOSCServerFile   = @"OSC Server.log";
-NSString * const kAMOSCClientFile   = @"OSC Client.log";
-NSString * const kAMJackAudioFile   = @"Jack Audio.log";
+NSString * const kAMOSCServerFile   = @"OSC_Server.log";
+NSString * const kAMOSCClientFile   = @"OSC_Client.log";
+NSString * const kAMJackAudioFile   = @"Jack_Audio.log";
 NSString * const kAMAMServerFile    = @"AMServer.log";
 NSString * const kAMArtsmeshFile    = @"Artsmesh.log";
-NSString * const kAMJackTripFile    = @"Jack Trip";
+NSString * const kAMJackTripFile    = @"Jacktrip";
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>

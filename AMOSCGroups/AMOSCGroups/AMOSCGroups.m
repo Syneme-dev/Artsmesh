@@ -22,7 +22,6 @@
     AMOSCGroupMessageMonitorController* _oscMonitorController;
     
     BOOL _isOSCServerStarted;
-    BOOL _isOSCClientStarted;
     
     NSTask* _serverTask;
     NSTask* _clientTask;
@@ -176,15 +175,12 @@
     _oscClient.monitorAddr = oscMonitorAddr;
     _oscClient.monitorPort = oscMonitorPort;
     _oscClient.delegate = _oscMonitorController;
+    [_oscClient startOscClient];
 
-    if ([_oscClient startOscClient]){
-        _isOSCClientStarted = YES;
-    }
 }
 
 -(void)stopOSCGroupClient{
     [_oscClient stopOscClient];
-    _isOSCClientStarted = NO;
 }
 
 -(BOOL)isOSCGroupServerStarted{
@@ -192,7 +188,7 @@
 }
 
 -(BOOL)isOSCGroupClientStarted{
-    return _isOSCClientStarted;
+    return [_oscClient isStated];
 }
 
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr
@@ -203,7 +199,7 @@
 
 -(void)broadcastMessage:(NSString *)message  params:(NSArray *)params
 {
-    if(!_isOSCClientStarted ){
+    if(![self isOSCGroupClientStarted] ){
         return;
     }
     

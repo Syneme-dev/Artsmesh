@@ -38,62 +38,60 @@
     return self;
 }
 
--(BOOL)startOscClient
+
+-(void)performStartOscGroupClient
 {
-//    int m = system("killall -0 OscGroupClient >/dev/null");
-//    if (m != 0) {
+    //Start Monitor
+    _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
+    _oscMonitor.delegate = self;
+    dispatch_async(_monitor_queue, ^{
+        [[AMOSCMonitor shareMonitor] startListening];
+    });
     
-         system("killall OscGroupClient >/dev/null");
-        //Start Monitor
-        _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
-        _oscMonitor.delegate = self;
-        dispatch_async(_monitor_queue, ^{
-            [[AMOSCMonitor shareMonitor] startListening];
-        });
-        
-        //Launch OSCGroupClient
-        NSBundle* mainBundle = [NSBundle mainBundle];
-        NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
-        
-        [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
-         self.serverAddr, self.serverPort,
-         self.remotePort, self.txPort,
-         self.rxPort, self.userName,
-         self.userPwd, self.groupName,
-         self.groupPwd, self.monitorAddr,
-         self.monitorPort];
-        
-        NSString *systemLogPath = AMLogDirectory();
-        [commandline appendFormat:@" > %@/OSC_Client.log", systemLogPath];
-        
-        [_task terminate];
-        _task = [[NSTask alloc] init];
-        _task.launchPath = @"/bin/bash";
-        _task.arguments = @[@"-c", [commandline copy]];
-        
-        AMLog(kAMInfoLog, @"AMOscGroups", commandline);
-        //NSLog(@"start osc client command is : %@", commandline);
-        
-        [_task launch];
-        
-//        return YES;
-//    }else{
+    //Launch OSCGroupClient
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
     
-        return  YES;
-//    }
+    [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
+     self.serverAddr, self.serverPort,
+     self.remotePort, self.txPort,
+     self.rxPort, self.userName,
+     self.userPwd, self.groupName,
+     self.groupPwd, self.monitorAddr,
+     self.monitorPort];
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [commandline appendFormat:@" %@/OSC_Client.log", systemLogPath];
+    
+    [_task terminate];
+    _task = [[NSTask alloc] init];
+    _task.launchPath = @"/bin/bash";
+    _task.arguments = @[@"-c", [commandline copy]];
+    
+    AMLog(kAMInfoLog, @"AMOscGroups", commandline);
+    
+    [_task launch];
+}
+
+-(BOOL)isStated
+{
+    return [_task isRunning];
+}
+
+
+-(void)startOscClient
+{
+    system("killall OscGroupClient >/dev/null");
+    [self performSelector:@selector(performStartOscGroupClient) withObject:nil afterDelay:2.0];
 }
 
 
 -(void)stopOscClient
 {
-    //dispatch_async(_monitor_queue, ^{
-    //    [_oscMonitor stopListening];
-    //});
-    
     AMOSCMonitor *monitor = [AMOSCMonitor shareMonitor ];
     [monitor stopListening];
     
-    [_task terminate];
+    kill(_task.processIdentifier, SIGINT);
     _task = nil;
     
     system("killall OscGroupClient >/dev/null");

@@ -568,7 +568,7 @@
 }
 
 - (AMPanelViewController *)loadGroupsPanel:(NSString *)panelId relatedView:(NSView*)view {
-    float panelWidth = UI_defaultPanelWidth;
+    float panelWidth = UI_defaultPanelWidth*1.5;
     float panelHeight = 340.0f;
     AMPanelViewController *panelViewController = [self createPanel:panelId
                                                          withTitle:@"GROUPS"
@@ -576,7 +576,7 @@
                                                             height:panelHeight
                                                   relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
-    NSSize panelSize = NSMakeSize(300.0f, 220.0f);
+    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth *1.5, 220.0f);
     panelView.minSizeConstraint = panelSize;
     AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
     userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);

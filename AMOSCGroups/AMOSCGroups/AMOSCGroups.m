@@ -12,6 +12,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMOSCClient.h"
 #import "AMOSCGroupMessageMonitorController.h"
+#import "AMOSCForwarder.h"
 
 @implementation AMOSCGroups
 {
@@ -189,5 +190,15 @@
     [_oscMonitorController setOscMessageSearchFilterString:filterStr];
 }
 
+
+-(void)broadcastMessage:(NSString *)message  params:(NSArray *)params
+{
+    if(!_isOSCClientStarted ){
+        return;
+    }
+    
+    NSString* oscTxPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_TxPort];
+    [AMOSCForwarder forwardMsg:message params:params toAddr:@"127.0.0.1" port:oscTxPort];
+}
 
 @end

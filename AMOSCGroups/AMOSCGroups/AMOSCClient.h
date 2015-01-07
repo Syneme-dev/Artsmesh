@@ -30,7 +30,6 @@
 -(BOOL)startOscClient;
 -(void)stopOscClient;
 
-
 -(void)setForwardAddr:(NSString *)addr port:(NSString *)port;
 -(void)clearForwardAddr;
 

@@ -11,6 +11,7 @@
 #import "AMLogger/AMLogger.h"
 #import "AMOSCMonitor.h"
 #import "AMOSCForwarder.h"
+#import "AMOSCDefine.h"
 
 @interface AMOSCClient()<AMOSCMonitorDelegate>
 @end
@@ -108,6 +109,12 @@
    // NSLog(@"oscmessage receiced: %@", msg);
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
+        
+        if ([msg isEqualTo:@"AM_OSC_TIMER_START"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_TIMER_START_NOTIFICATION object:nil];
+        }else if([msg isEqualTo:@"AM_OSC_TIMER_STOP"]){
+            [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
+        }
     }
 }
 

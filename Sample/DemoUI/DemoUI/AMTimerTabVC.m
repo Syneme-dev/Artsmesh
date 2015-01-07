@@ -52,7 +52,7 @@ typedef enum : NSInteger {
                             value:[NSColor lightGrayColor]
                             range:NSMakeRange(0, attributedTitle.length)];
     self.addButton.attributedTitle = attributedTitle;
-    [self.modeComboBox selectItemAtIndex:0];
+    [self.modeComboBox selectItemAtIndex:1];
 }
 
 - (NSTimeInterval)timeInterval
@@ -89,12 +89,33 @@ typedef enum : NSInteger {
     _currentCountdownValue = _timeIntervalSettings[AMTimerCountdownMode];
     _arrowLabel.stringValue = @"↓";
     [self setTimerLabelByInterval:_currentCountdownValue];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                  target:self
-                                                selector:@selector(decrementTimerLabel)
-                                                userInfo:nil
-                                                 repeats:YES];
-    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+    
+    time_t t = time(NULL);
+    struct tm loc = *localtime(&t);
+    loc.tm_hour = 0;
+    loc.tm_min = 0;
+    loc.tm_sec = 0;
+    t = mktime(&loc);
+    NSTimeInterval startTimeByAbsoluteSetting = t + _timeIntervalSettings[AMTimerAbsoluteMode];
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+    
+    if (now <= startTimeByAbsoluteSetting) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(decrementTimerLabel)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        self.timer.fireDate = [NSDate dateWithTimeIntervalSince1970:startTimeByAbsoluteSetting + 1.0];
+    } else if (_currentCountdownValue > 0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(decrementTimerLabel)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+    } else {
+        [self startDurationTimer];
+    }
 }
 
 - (void)startDurationTimer
@@ -109,22 +130,13 @@ typedef enum : NSInteger {
                                                     userInfo:nil
                                                      repeats:YES];
         
-        time_t t = time(NULL);
-        struct tm loc = *localtime(&t);
-        loc.tm_hour = 0;
-        loc.tm_min = 0;
-        loc.tm_sec = 0;
-        t = mktime(&loc);
-        NSTimeInterval startTimeByAbsoluteSetting = t + _timeIntervalSettings[AMTimerAbsoluteMode];
-        NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
-        NSTimeInterval startTime = MAX(now, startTimeByAbsoluteSetting);
-        
-        NSDate *fireDate = [NSDate dateWithTimeIntervalSince1970:startTime];
-        NSLog(@"fireDate: %@", fireDate);
+        NSDate *fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
         self.timer.fireDate = fireDate;
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStartNotification
                                                             object:self
                                                           userInfo:@{ @"fireDate" : fireDate }];
+    } else {
+        self.playButton.state = NSOffState;
     }
 }
 
@@ -194,7 +206,8 @@ typedef enum : NSInteger {
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTimeInterval timeInterval = self.timeInterval;
-    _timeIntervalSettings[self.modeComboBox.indexOfSelectedItem] = timeInterval;
+    NSInteger mode = self.modeComboBox.indexOfSelectedItem;
+    _timeIntervalSettings[mode] = timeInterval;
     self.timeInterval = timeInterval;   // for text formatting
 }
 

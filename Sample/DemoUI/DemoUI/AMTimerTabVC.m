@@ -208,7 +208,6 @@ typedef enum : NSInteger {
     NSTimeInterval timeInterval = self.timeInterval;
     NSInteger mode = self.modeComboBox.indexOfSelectedItem;
     _timeIntervalSettings[mode] = timeInterval;
-    self.timeInterval = timeInterval;   // for text formatting
 }
 
 @end

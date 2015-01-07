@@ -126,7 +126,7 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <objectValues>
-                            <string>♩</string>
+                            <string>1</string>
                             <string>1/2</string>
                             <string>1/4</string>
                             <string>1/8</string>

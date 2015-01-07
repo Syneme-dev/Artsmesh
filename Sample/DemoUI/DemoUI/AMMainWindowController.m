@@ -668,7 +668,7 @@
 
 - (AMPanelViewController *)loadProfilePanel:(NSString *)panelId relatedView:(NSView*)view{
     float panelHeight = 300.0f;
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth height:panelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth*1.5 height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize minSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelWidth);
     panelView.minSizeConstraint = minSize;

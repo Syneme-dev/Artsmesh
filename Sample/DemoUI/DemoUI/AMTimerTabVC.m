@@ -65,9 +65,11 @@ typedef enum : NSInteger {
 {
     NSString *event = notification.userInfo[AM_OSC_EVENT_TYPE];
     if ([event isEqualToString:AM_OSC_TIMER_START] && self.playButton.state == NSOffState) {
-        [self.playButton performClick:self];
+        self.playButton.state = NSOnState;
+        [self toggleTimer:self];
     } else if ([event isEqualToString:AM_OSC_TIMER_STOP] && self.playButton.state == NSOnState) {
-        [self.playButton performClick:self];
+        self.playButton.state = NSOffState;
+        [self toggleTimer:self];
     }
 }
 

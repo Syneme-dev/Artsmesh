@@ -110,15 +110,17 @@
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
         
-        if ([msg isEqualTo:AM_OSC_TIMER_START]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
-                                                                object:self
-                                                              userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_START }];
-        }else if([msg isEqualTo:AM_OSC_TIMER_STOP]){
-            [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
-                                                                object:self
-                                                              userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_STOP }];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([msg isEqualTo:AM_OSC_TIMER_START]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_START }];
+            }else if([msg isEqualTo:AM_OSC_TIMER_STOP]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_STOP }];
+            }
+        });
     }
 }
 

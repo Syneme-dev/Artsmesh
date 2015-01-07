@@ -812,10 +812,6 @@
     if(![oscGroups isOSCGroupServerStarted]){
         [self.oscServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
         [oscGroups startOSCGroupServer];
-        [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
-        [AMCoreData shareInstance].mySelf.oscServer = YES;
-        [[AMMesher sharedAMMesher] updateMySelf];
-
     }else{
         [oscGroups stopOSCGroupServer];
     }

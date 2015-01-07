@@ -46,8 +46,7 @@
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsc-N7-VSE" userLabel="nickname" customClass="AMFoundryFontView">
                                         <rect key="frame" x="98" y="224" width="154" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="22" id="Pk6-Yh-nnY"/>
-                                            <constraint firstAttribute="width" constant="150" id="rJv-Dm-uTH"/>
+                                            <constraint firstAttribute="height" constant="22" id="yck-Rk-o2s"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="NickName" id="jcn-S8-NIr" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
@@ -59,7 +58,7 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_NickName" id="OcR-xw-1JL"/>
                                         </connections>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xza-bX-mVV" userLabel="fullname" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xza-bX-mVV" userLabel="fullname" customClass="AMFoundryFontView">
                                         <rect key="frame" x="98" y="203" width="154" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="FullName" id="13X-0n-HwG" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
@@ -71,8 +70,11 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_FullName" id="1le-nP-Dtl"/>
                                         </connections>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0SY-2D-fk2" userLabel="domain" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0SY-2D-fk2" userLabel="domain" customClass="AMFoundryFontView">
                                         <rect key="frame" x="99" y="178" width="154" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="jn2-UG-hpj"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Affiliation" id="rar-Fd-kzJ" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -83,8 +85,11 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Affiliation" id="8Qc-WX-j6Q"/>
                                         </connections>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2g-yj-0FH" userLabel="location" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u2g-yj-0FH" userLabel="location" customClass="AMFoundryFontView">
                                         <rect key="frame" x="98" y="158" width="154" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="6W1-72-BNU"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="fGa-3A-VhF" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -98,17 +103,25 @@
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X62-yl-u4b" userLabel="avatar">
                                         <rect key="frame" x="0.0" y="166" width="80" height="80"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="Czn-gZ-wlh"/>
-                                            <constraint firstAttribute="height" constant="80" id="evf-LT-KGg"/>
+                                            <constraint firstAttribute="height" constant="80" id="BAZ-6f-9bi"/>
+                                            <constraint firstAttribute="width" constant="80" id="HvA-Lt-YEE"/>
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SideBar_user_h" id="sc6-if-94S"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-44-mtN" userLabel="statusIcon">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-44-mtN" userLabel="statusIcon">
                                         <rect key="frame" x="10" y="70" width="10" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="V29-5O-Vyz"/>
+                                            <constraint firstAttribute="height" constant="10" id="WmQ-iX-wH7"/>
+                                        </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="user_unmeshed_icon" id="JHP-5W-JGn"/>
                                     </imageView>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="I77-4k-jsW" userLabel="gotoSocial">
                                         <rect key="frame" x="100" y="104" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="8iJ-ou-VtG"/>
+                                            <constraint firstAttribute="width" constant="26" id="uVe-ZM-hBc"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_Icon_FOAF" imagePosition="only" alignment="center" alternateImage="user_Icon_FOAF" imageScaling="proportionallyDown" inset="2" id="Kul-MC-1jE">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -117,8 +130,18 @@
                                             <action selector="onGotoUserInfoClick:" target="-2" id="pg5-R6-wdw"/>
                                         </connections>
                                     </button>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6" userLabel="description" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="28" y="5" width="264" height="75"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="LIb-SJ-ZZa" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="10" y="140" width="70" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="9sk-4d-FsN"/>
+                                            <constraint firstAttribute="width" constant="70" id="k5K-U0-16D"/>
+                                        </constraints>
+                                    </customView>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3aN-UA-Zm6" userLabel="description" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="26" y="5" width="264" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="eAR-tc-Zdt"/>
+                                        </constraints>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="" id="msF-DJ-hzo" customClass="AMTextFieldCell">
                                             <customFormatter key="formatter" id="XL8-Ul-PgY" customClass="AMProfileTextFieldFormatter">
                                                 <userDefinedRuntimeAttributes>
@@ -136,15 +159,31 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_User_Description" id="wLc-ha-G6R"/>
                                         </connections>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIb-SJ-ZZa" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="15" y="140" width="62" height="22"/>
-                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="X62-yl-u4b" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" id="Ggs-wT-cBU"/>
-                                    <constraint firstAttribute="trailing" secondItem="jsc-N7-VSE" secondAttribute="trailing" constant="50" id="k2t-NX-C3i"/>
-                                    <constraint firstItem="X62-yl-u4b" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="lkc-OV-2tZ"/>
-                                    <constraint firstItem="jsc-N7-VSE" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="zRO-d1-5ir"/>
+                                    <constraint firstAttribute="trailing" secondItem="0SY-2D-fk2" secondAttribute="trailing" constant="49" id="06q-8M-Kcl"/>
+                                    <constraint firstAttribute="trailing" secondItem="xza-bX-mVV" secondAttribute="trailing" constant="50" id="8DA-4I-f2f"/>
+                                    <constraint firstItem="jsc-N7-VSE" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="100" id="8wU-l2-C8P"/>
+                                    <constraint firstItem="X62-yl-u4b" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" id="9O0-ot-uaI"/>
+                                    <constraint firstItem="LIb-SJ-ZZa" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="10" id="AcO-CH-XIr"/>
+                                    <constraint firstItem="xza-bX-mVV" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="100" id="EVC-4g-xhR"/>
+                                    <constraint firstItem="X62-yl-u4b" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="FRV-Y5-0De"/>
+                                    <constraint firstItem="xaj-44-mtN" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="176" id="ILo-BF-FWk"/>
+                                    <constraint firstItem="3aN-UA-Zm6" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="28" id="Q7z-8y-GBW"/>
+                                    <constraint firstItem="I77-4k-jsW" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="126" id="QpQ-Y2-wua"/>
+                                    <constraint firstItem="xaj-44-mtN" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="10" id="Uhp-eU-D4v"/>
+                                    <constraint firstItem="I77-4k-jsW" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="100" id="VIb-CD-r1O"/>
+                                    <constraint firstItem="xza-bX-mVV" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="31" id="WrR-Kg-pHf"/>
+                                    <constraint firstItem="3aN-UA-Zm6" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="176" id="cij-ao-vYH"/>
+                                    <constraint firstAttribute="trailing" secondItem="jsc-N7-VSE" secondAttribute="trailing" constant="50" id="f0j-N5-bz9"/>
+                                    <constraint firstItem="jsc-N7-VSE" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="10" id="kQg-lk-EKf"/>
+                                    <constraint firstItem="u2g-yj-0FH" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="76" id="mHs-ZW-5kO"/>
+                                    <constraint firstAttribute="trailing" secondItem="u2g-yj-0FH" secondAttribute="trailing" constant="50" id="mPM-jb-CM4"/>
+                                    <constraint firstItem="0SY-2D-fk2" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="101" id="o9n-fo-wP2"/>
+                                    <constraint firstItem="0SY-2D-fk2" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="56" id="ujz-Cl-QG6"/>
+                                    <constraint firstItem="LIb-SJ-ZZa" firstAttribute="top" secondItem="09e-65-pFX" secondAttribute="top" constant="94" id="vf2-G7-IbE"/>
+                                    <constraint firstAttribute="trailing" secondItem="3aN-UA-Zm6" secondAttribute="trailing" constant="12" id="xTN-1g-6oE"/>
+                                    <constraint firstItem="u2g-yj-0FH" firstAttribute="leading" secondItem="09e-65-pFX" secondAttribute="leading" constant="100" id="yOQ-MH-rfg"/>
                                 </constraints>
                             </view>
                         </tabViewItem>

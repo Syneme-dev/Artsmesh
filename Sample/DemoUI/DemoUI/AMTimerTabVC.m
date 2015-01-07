@@ -97,14 +97,16 @@ typedef enum : NSInteger {
 - (IBAction)toggleTimer:(id)sender
 {
     if (self.timer.valid) {
-        [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_STOP
-                                                params:nil];
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_STOP
+                                                    params:nil];
         [self.timer invalidate];
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
                                                             object:self];
     } else {
-        [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
-                                                params:nil];
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
+                                                    params:nil];
         [self startCountdownTimer];
     }
 }

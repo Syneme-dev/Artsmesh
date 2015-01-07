@@ -13,6 +13,22 @@ NSString * const kAMDefaultLogFile = @"artsmesh.log";
 NSString * const kAMErrorLog = @"ERROR";
 NSString * const kAMWarningLog = @"WARN";
 NSString * const kAMInfoLog = @"INFO";
+
+
+NSString * const kAMOSCServerTitle  = @"OSC SERVER";
+NSString * const kAMOSCClientTitle  = @"OSC CLIENT";
+NSString * const kAMJackAudioTitle  = @"JACK AUDIO";
+NSString * const kAMAMServerTitle   = @"AMSERVER";
+NSString * const kAMArtsmeshTitle   = @"ARTSMESH";
+
+
+NSString * const kAMOSCServerFile   = @"OSC_Server.log";
+NSString * const kAMOSCClientFile   = @"OSC_Client.log";
+NSString * const kAMJackAudioFile   = @"Jack_Audio.log";
+NSString * const kAMAMServerFile    = @"AMServer.log";
+NSString * const kAMArtsmeshFile    = @"Artsmesh.log";
+NSString * const kAMJackTripFile    = @"Jacktrip";
+
 //NSString * const kAMDebugLog = @"DEBUG";
 
 static FILE *logFile;
@@ -42,6 +58,25 @@ AMLogInitialize(void)
     
     if (isDirectory) {
         NSString *logDirectory = AMLogDirectory();
+        
+        
+        //先将要创建log文件完整路径全部写到NSArray
+        NSMutableArray*  logFiles = [NSMutableArray arrayWithCapacity:4];
+        [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMOSCServerFile]];
+        [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMOSCClientFile]];
+        [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMJackAudioFile]];
+        [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMAMServerFile]];
+        
+        for (NSString* logPath in logFiles) {
+            if([fileManager fileExistsAtPath:logPath])
+            {
+                [fileManager createFileAtPath:logPath
+                                     contents:nil
+                                   attributes:nil];
+            }
+        }
+    
+        //再把Artsmesh.log更名为prev_Artsmesh.log文件
         NSString *prevLogFile = [NSString stringWithFormat:@"prev_%@", kAMDefaultLogFile];
         NSString *logFilePath = [logDirectory stringByAppendingPathComponent:kAMDefaultLogFile];
         NSString *previousLogFilePath = logFilePath;//[logFilePath stringByAppendingString:@"~previous"];

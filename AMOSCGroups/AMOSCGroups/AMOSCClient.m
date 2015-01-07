@@ -11,6 +11,7 @@
 #import "AMLogger/AMLogger.h"
 #import "AMOSCMonitor.h"
 #import "AMOSCForwarder.h"
+#import "AMOSCDefine.h"
 
 @interface AMOSCClient()<AMOSCMonitorDelegate>
 @end
@@ -60,8 +61,8 @@
          self.groupPwd, self.monitorAddr,
          self.monitorPort];
         
-        NSString *systemLogPath = AMLogDirectory();
-        [commandline appendFormat:@"%@ > %@/OSC_Client.log", commandline, systemLogPath];
+       // NSString *systemLogPath = AMLogDirectory();
+      //  [commandline appendFormat:@"%@ > %@/OSC_Client.log", commandline, systemLogPath];
         
         [_task terminate];
         _task = [[NSTask alloc] init];
@@ -108,6 +109,18 @@
    // NSLog(@"oscmessage receiced: %@", msg);
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([msg isEqualTo:AM_OSC_TIMER_START]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_START }];
+            }else if([msg isEqualTo:AM_OSC_TIMER_STOP]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_STOP }];
+            }
+        });
     }
 }
 

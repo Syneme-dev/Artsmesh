@@ -114,6 +114,7 @@
     AMLiveUser* mySelf = [[AMLiveUser alloc] init];
     mySelf.userid = [AMCommonTools creatUUID];
     mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
+    mySelf.fullName = [defaults stringForKey:Preference_Key_User_FullName];
     mySelf.domain= [defaults stringForKey:Preference_Key_User_Affiliation];
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];

@@ -8,6 +8,8 @@
 
 #import "AMTimerTabVC.h"
 #import "AMTimerTableCellVC.h"
+#import "AMOSCGroups/AMOSCGroups.h"
+#import "AMOSCGroups/AMOSCDefine.h"
 
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
@@ -52,7 +54,28 @@ typedef enum : NSInteger {
                             value:[NSColor lightGrayColor]
                             range:NSMakeRange(0, attributedTitle.length)];
     self.addButton.attributedTitle = attributedTitle;
-    [self.modeComboBox selectItemAtIndex:0];
+    [self.modeComboBox selectItemAtIndex:1];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleOSCMessage:)
+                                                 name:AM_OSC_NOTIFICATION
+                                               object:nil];
+}
+
+- (void)handleOSCMessage:(NSNotification *)notification
+{
+    NSString *event = notification.userInfo[AM_OSC_EVENT_TYPE];
+    if ([event isEqualToString:AM_OSC_TIMER_START] && self.playButton.state == NSOffState) {
+        self.playButton.state = NSOnState;
+        [self toggleTimer:self];
+    } else if ([event isEqualToString:AM_OSC_TIMER_STOP] && self.playButton.state == NSOnState) {
+        self.playButton.state = NSOffState;
+        [self toggleTimer:self];
+    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AM_OSC_NOTIFICATION object:nil];
 }
 
 - (NSTimeInterval)timeInterval
@@ -76,10 +99,16 @@ typedef enum : NSInteger {
 - (IBAction)toggleTimer:(id)sender
 {
     if (self.timer.valid) {
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_STOP
+                                                    params:nil];
         [self.timer invalidate];
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
                                                             object:self];
     } else {
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
+                                                    params:nil];
         [self startCountdownTimer];
     }
 }
@@ -89,12 +118,33 @@ typedef enum : NSInteger {
     _currentCountdownValue = _timeIntervalSettings[AMTimerCountdownMode];
     _arrowLabel.stringValue = @"↓";
     [self setTimerLabelByInterval:_currentCountdownValue];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                  target:self
-                                                selector:@selector(decrementTimerLabel)
-                                                userInfo:nil
-                                                 repeats:YES];
-    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+    
+    time_t t = time(NULL);
+    struct tm loc = *localtime(&t);
+    loc.tm_hour = 0;
+    loc.tm_min = 0;
+    loc.tm_sec = 0;
+    t = mktime(&loc);
+    NSTimeInterval startTimeByAbsoluteSetting = t + _timeIntervalSettings[AMTimerAbsoluteMode];
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+    
+    if (now <= startTimeByAbsoluteSetting) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(decrementTimerLabel)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        self.timer.fireDate = [NSDate dateWithTimeIntervalSince1970:startTimeByAbsoluteSetting + 1.0];
+    } else if (_currentCountdownValue > 0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(decrementTimerLabel)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+    } else {
+        [self startDurationTimer];
+    }
 }
 
 - (void)startDurationTimer
@@ -108,11 +158,14 @@ typedef enum : NSInteger {
                                                     selector:@selector(incrementTimerLabel)
                                                     userInfo:nil
                                                      repeats:YES];
+        
         NSDate *fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
         self.timer.fireDate = fireDate;
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStartNotification
                                                             object:self
                                                           userInfo:@{ @"fireDate" : fireDate }];
+    } else {
+        self.playButton.state = NSOffState;
     }
 }
 
@@ -182,8 +235,8 @@ typedef enum : NSInteger {
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTimeInterval timeInterval = self.timeInterval;
-    _timeIntervalSettings[self.modeComboBox.indexOfSelectedItem] = timeInterval;
-    self.timeInterval = timeInterval;   // for text formatting
+    NSInteger mode = self.modeComboBox.indexOfSelectedItem;
+    _timeIntervalSettings[mode] = timeInterval;
 }
 
 @end

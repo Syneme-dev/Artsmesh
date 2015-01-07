@@ -40,8 +40,10 @@
 
 -(BOOL)startOscClient
 {
-    int m = system("killall -0 OscGroupClient >/dev/null");
-    if (m != 0) {
+//    int m = system("killall -0 OscGroupClient >/dev/null");
+//    if (m != 0) {
+    
+         system("killall OscGroupClient >/dev/null");
         //Start Monitor
         _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
         _oscMonitor.delegate = self;
@@ -74,11 +76,11 @@
         
         [_task launch];
         
-        return YES;
-    }else{
-        
+//        return YES;
+//    }else{
+    
         return  YES;
-    }
+//    }
 }
 
 

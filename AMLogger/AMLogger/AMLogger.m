@@ -119,8 +119,13 @@ AMLog(NSString *level, NSString *module, NSString *format, ...)
         va_end(ap);
     }
     
+    NSDate *date = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    
     NSString *logRecord = [NSString stringWithFormat:@"%@:[%@]:[%@]:%@",
-                                level, [NSDate date], module, message];
+                                level, localeDate, module, message];
     fprintf(logFile, "%s\n", [logRecord cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 

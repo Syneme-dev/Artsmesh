@@ -20,6 +20,8 @@ type AMRequestGroup struct{
 	Latitude		string
 	Busy			string
 	TimezoneName	string
+	ProjectDescription string
+	HomePage	string
 }
 
 type AMRequestUser struct{
@@ -228,6 +230,8 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
+	reqGroup.ProjectDescription = strings.Join(r.Form["ProjectDescription"], "")
+	reqGroup.HomePage = strings.Join(r.Form["HomePage"], "")
 	
 	fmt.Println("")
 	fmt.Println("register_group requst information ---------------------")
@@ -244,6 +248,8 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	fmt.Println("latitude:", reqGroup.Latitude)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("timezoneName:", reqGroup.TimezoneName)
+	fmt.Println("ProjectDescription:", reqGroup.ProjectDescription)
+	fmt.Println("HomePage:", reqGroup.HomePage)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand
@@ -274,6 +280,8 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.Latitude = strings.Join(r.Form["latitude"], "")
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
+	reqGroup.ProjectDescription = strings.Join(r.Form["ProjectDescription"], "")
+	reqGroup.HomePage = strings.Join(r.Form["HomePage"], "")
 	
 	fmt.Println("")
 	fmt.Println("group_update requst information ---------------------")
@@ -290,6 +298,8 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	fmt.Println("latitude:", reqGroup.Latitude)
 	fmt.Println("busy:", reqGroup.Busy)
 	fmt.Println("timezoneName:", reqGroup.TimezoneName)
+	fmt.Println("ProjectDescription:", reqGroup.ProjectDescription)
+	fmt.Println("HomePage:", reqGroup.HomePage)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand

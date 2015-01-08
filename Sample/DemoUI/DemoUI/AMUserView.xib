@@ -410,7 +410,7 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project" id="r2S-a5-MA1"/>
                                         </connections>
                                     </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="496-lS-Xvd" userLabel="avatar">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="496-lS-Xvd" userLabel="avatar">
                                         <rect key="frame" x="8" y="263" width="74" height="74"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="74" id="1wV-f1-ukx"/>
@@ -418,7 +418,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="clipboard" id="BLf-bu-8Hc"/>
                                     </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ND6-ou-PSa" userLabel="statusIcon">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ND6-ou-PSa" userLabel="statusIcon">
                                         <rect key="frame" x="8" y="164" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="B6Y-E5-Egk"/>
@@ -426,7 +426,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="s2Z-XL-cPs"/>
                                     </imageView>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4JL-U6-OrJ" userLabel="description" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4JL-U6-OrJ" userLabel="description" customClass="AMFoundryFontView">
                                         <rect key="frame" x="39" y="0.0" width="404" height="184"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="184" id="MjG-mK-DRi"/>

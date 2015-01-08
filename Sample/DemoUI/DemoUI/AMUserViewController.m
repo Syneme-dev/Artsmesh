@@ -282,10 +282,16 @@
 - (IBAction)groupNameEdited:(NSTextField *)sender
 {
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:myGroup.groupName]) {
+    
+    if ([myGroup.groupName isEqualToString:sender.stringValue]) {
         return;
     }
     
+    if ([sender.stringValue isEqualToString:@""]) {
+        myGroup.groupName = [[AMPreferenceManager standardUserDefaults]
+         stringForKey:Preference_Key_Cluster_Name];
+    }
+
     myGroup.groupName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
@@ -381,7 +387,13 @@
         NSLog(@"Geo data parse JSON error:%@", jsonParsingError.description);
     }
     NSDictionary *results = (NSDictionary*)geoData;
-    NSDictionary *topResult = [[results valueForKey:@"geonames"] objectAtIndex:0];
+    NSArray *geoNames = [results valueForKey:@"geonames"];
+  
+    if (geoNames == nil || [geoNames count] == 0) {
+        return;
+    }
+    
+    NSDictionary *topResult = [geoNames objectAtIndex:0];
     
     if ( [topResult count] >= 1 ) {
         AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;

@@ -323,6 +323,30 @@
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
+- (IBAction)projectDesctriptionEdited:(NSTextField *)sender {
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.projectDescription]) {
+        return;
+    }
+    
+    group.projectDescription= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+
+- (IBAction)groupHomePageEdited:(NSTextField *)sender {
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.homePage]) {
+        return;
+    }
+    
+    group.homePage= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+
 - (IBAction)groupLocationEdited:(NSTextField *)sender
 {
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;

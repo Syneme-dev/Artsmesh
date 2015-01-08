@@ -17,7 +17,6 @@
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="locationField" destination="u2g-yj-0FH" id="vmL-Mb-ryH"/>
                 <outlet property="nickNameField" destination="jsc-N7-VSE" id="MjD-qB-dIx"/>
-                <outlet property="projectDescriptionTextView" destination="4JL-U6-OrJ" id="Pki-0I-EbU"/>
                 <outlet property="projectTabButton" destination="m7h-Bt-qMT" id="rcx-Xa-WcJ"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>
@@ -276,7 +275,7 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Name" id="PKd-dE-Nd4"/>
                                         </connections>
                                     </textField>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Z6-me-VkK" userLabel="project" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Z6-me-VkK" userLabel="homepage" customClass="AMFoundryFontView">
                                         <rect key="frame" x="99" y="272" width="333" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="hM2-ld-wPI"/>
@@ -287,8 +286,8 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="groupProjetctEdited:" target="-2" id="dXP-tW-sJR"/>
-                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project" id="2Dv-eG-FFT"/>
+                                            <action selector="groupHomePageEdited:" target="-2" id="XYu-Oo-rOT"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_HomePage" id="nW9-Jl-lEc"/>
                                         </connections>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-Eg-5uZ" userLabel="location" customClass="AMFoundryFontView">
@@ -357,19 +356,12 @@
                                             <constraint firstAttribute="height" constant="184" id="eSM-Dz-bqz"/>
                                         </constraints>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Description" id="F5q-NW-7Y9" customClass="AMTextFieldCell">
-                                            <customFormatter key="formatter" id="I4S-mS-9Uc" customClass="AMProfileTextFieldFormatter">
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                                        <integer key="value" value="175"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </customFormatter>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="groupDescriptionEdited:" target="-2" id="Pg6-Yz-YEg"/>
+                                            <action selector="groupDescriptionEdited:" target="-2" id="AdM-OX-zxR"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Description" id="GXv-VU-UGB"/>
                                         </connections>
                                     </textField>
@@ -414,7 +406,7 @@
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="groupProjetctEdited:" target="-2" id="EDn-kL-ofA"/>
+                                            <action selector="groupProjetctEdited:" target="-2" id="37E-BP-gSz"/>
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project" id="r2S-a5-MA1"/>
                                         </connections>
                                     </textField>
@@ -440,19 +432,13 @@
                                             <constraint firstAttribute="height" constant="184" id="MjG-mK-DRi"/>
                                         </constraints>
                                         <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Description" id="8SK-ct-PDK" customClass="AMTextFieldCell">
-                                            <customFormatter key="formatter" id="abS-H9-ESP" customClass="AMProfileTextFieldFormatter">
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
-                                                        <integer key="value" value="175"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </customFormatter>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="groupDescriptionEdited:" target="-2" id="8ab-yd-VJq"/>
+                                            <action selector="projectDesctriptionEdited:" target="-2" id="dBM-yd-gOW"/>
+                                            <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project_Descrition" id="7nF-hC-mAC"/>
                                         </connections>
                                     </textField>
                                 </subviews>

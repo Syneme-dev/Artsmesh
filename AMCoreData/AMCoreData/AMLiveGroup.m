@@ -19,22 +19,58 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     dict[@"groupId"] = self.groupId;
-    dict[@"groupName"] = self.groupName;
-    dict[@"description"] = self.description;
-    dict[@"leaderId"] = self.leaderId;
-    dict[@"fullName"] = self.fullName;
-    dict[@"project"] = self.project;
-    dict[@"location"] = self.location;
-    dict[@"longitude"] = self.longitude;
-    dict[@"latitude"] = self.latitude;
-    dict[@"timezoneName"] = self.timezoneName;
-    
-    if (self.busy) {
-        [dict setObject:@"YES" forKey:@"busy"];
-    }else{
-        [dict setObject:@"NO" forKey:@"busy"];
+
+    if (self.groupName) {
+        dict[@"groupName"] = self.groupName;
     }
     
+    if (self.description) {
+        dict[@"description"] = self.description;
+    }
+    
+    if(self.leaderId){
+        dict[@"leaderId"] = self.leaderId;
+    }
+    
+    if (self.fullName){
+         dict[@"fullName"] = self.fullName;
+    }
+    
+    
+    if (self.project) {
+        dict[@"project"] = self.project;
+    }
+    
+    if(self.location){
+        dict[@"location"] = self.location;
+    }
+    
+    if (self.longitude) {
+        dict[@"longitude"] = self.longitude;
+    }
+    
+    if (self.latitude) {
+        dict[@"latitude"] = self.latitude;
+    }
+    
+    if (self.timezoneName) {
+        dict[@"timezoneName"] = self.timezoneName;
+    }
+    
+    if (self.homePage){
+        dict[@"homepage"] = self.homePage;
+    }
+   
+    if (self.projectDescription) {
+        dict[@"projectDesctription"] = self.projectDescription;
+    }
+
+    if (self.busy) {
+        [dict setObject:@"YES" forKey:@"busy"];
+    }else if(self.busy == NO){
+        [dict setObject:@"NO" forKey:@"busy"];
+    }
+
     return dict;
 }
 
@@ -52,6 +88,8 @@
     group.latitude = dict[@"Latitude"];
     group.busy = [dict[@"Busy"] boolValue];
     group.timezoneName = dict[@"TimezoneName"];
+    group.homePage = dict[@"HomePage"];
+    group.projectDescription = dict[@"ProjectDescription"];
     group.password = @"";
     return group;
 }

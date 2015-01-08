@@ -16,10 +16,10 @@
 
 -(NSViewController*)getOSCPrefUI;
 -(NSViewController*)getOSCMonitorUI;
--(BOOL)startOSCGroupServer;
+-(void)startOSCGroupServer;
 -(void)stopOSCGroupServer;
 
--(BOOL)startOSCGroupClient:(NSString *)serverAddr;
+-(void)startOSCGroupClient:(NSString *)serverAddr;
 -(void)stopOSCGroupClient;
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr;
 

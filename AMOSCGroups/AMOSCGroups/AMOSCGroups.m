@@ -22,7 +22,6 @@
     AMOSCGroupMessageMonitorController* _oscMonitorController;
     
     BOOL _isOSCServerStarted;
-    BOOL _isOSCClientStarted;
     
     NSTask* _serverTask;
     NSTask* _clientTask;
@@ -73,43 +72,56 @@
     return _oscMonitorController;
 }
 
--(BOOL)startOSCGroupServer;
+
+-(void)checkOSCServerRunning
 {
-    int m = system("killall -0 OscGroupServer >/dev/null");
-    if (m != 0) {
-        NSBundle* mainBundle = [NSBundle mainBundle];
-        NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupServer"]];
-        
-        NSString* port = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_Port];
-        NSString* maxUsers = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_MaxUsers];
-        NSString* maxGroups = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_MaxGroups];
-        NSString* timeout = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_Timeout];
-        
-        NSString* logPath = [NSString stringWithFormat:@"%@/OSC_Server.log", AMLogDirectory()];
-        
-        [commandline appendFormat:@" -p %@ -t %@ -u %@ -g %@ -l %@", port, timeout, maxUsers, maxGroups, logPath];
-        AMLog(kAMInfoLog, @"AMOSCGroup", @"osc group server command line is %@", commandline);
-        
-        _serverTask = [[NSTask alloc] init];
-        _serverTask.launchPath = @"/bin/bash";
-        _serverTask.arguments = @[@"-c", [commandline copy]];
-        [_serverTask launch];
-        
-        _isOSCServerStarted = YES;
-        
-        return YES;
+    if(_serverTask && _serverTask.isRunning){
+         _isOSCServerStarted = YES;
+        NSNotification* notification = [[NSNotification alloc]
+                                        initWithName: AM_OSC_SRV_STARTED_NOTIFICATION
+                                        object:nil
+                                        userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }else{
+        _isOSCServerStarted = NO;
+        NSNotification* notification = [[NSNotification alloc]
+                                        initWithName: AM_OSC_SRV_STOPPED_NOTIFICATION
+                                        object:nil
+                                        userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
     }
+}
+
+
+-(void)performStartOscGroupServer
+{
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupServer"]];
     
-    return NO;
-//    else{
-//        NSNotification* notification = [[NSNotification alloc]
-//                                        initWithName: AM_OSC_SRV_STARTED_NOTIFICATION
-//                                        object:nil
-//                                        userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//         _isOSCServerStarted = YES;
-//        return NO;
-//    }
+    NSString* port = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_Port];
+    NSString* maxUsers = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_MaxUsers];
+    NSString* maxGroups = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_MaxGroups];
+    NSString* timeout = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Server_Timeout];
+    
+    NSString* logPath = [NSString stringWithFormat:@"%@/OSC_Server.log", AMLogDirectory()];
+    
+    [commandline appendFormat:@" -p %@ -t %@ -u %@ -g %@ -l %@", port, timeout, maxUsers, maxGroups, logPath];
+    AMLog(kAMInfoLog, @"AMOSCGroup", @"osc group server command line is %@", commandline);
+    
+    _serverTask = [[NSTask alloc] init];
+    _serverTask.launchPath = @"/bin/bash";
+    _serverTask.arguments = @[@"-c", [commandline copy]];
+    [_serverTask launch];
+    
+    [self performSelector:@selector(checkOSCServerRunning) withObject:nil afterDelay:2.0];
+
+}
+
+
+-(void)startOSCGroupServer
+{
+    system("killall OscGroupServer");
+    [self performSelector:@selector(performStartOscGroupServer) withObject:nil afterDelay:2.0];
 }
 
 
@@ -128,11 +140,10 @@
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         AMLog(kAMInfoLog, @"AMOSCGroup", @"OSCGroupServer is stopped!");
     }
-
-
 }
 
--(BOOL)startOSCGroupClient:(NSString *)serverAddr
+
+-(void)startOSCGroupClient:(NSString *)serverAddr
 {
     
     _oscClient = [[AMOSCClient alloc] init];
@@ -164,17 +175,12 @@
     _oscClient.monitorAddr = oscMonitorAddr;
     _oscClient.monitorPort = oscMonitorPort;
     _oscClient.delegate = _oscMonitorController;
+    [_oscClient startOscClient];
 
-    if ([_oscClient startOscClient]){
-        _isOSCClientStarted = YES;
-    }
-    
-    return _isOSCClientStarted;
 }
 
 -(void)stopOSCGroupClient{
     [_oscClient stopOscClient];
-    _isOSCClientStarted = NO;
 }
 
 -(BOOL)isOSCGroupServerStarted{
@@ -182,7 +188,7 @@
 }
 
 -(BOOL)isOSCGroupClientStarted{
-    return _isOSCClientStarted;
+    return [_oscClient isStated];
 }
 
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr
@@ -193,7 +199,7 @@
 
 -(void)broadcastMessage:(NSString *)message  params:(NSArray *)params
 {
-    if(!_isOSCClientStarted ){
+    if(![self isOSCGroupClientStarted] ){
         return;
     }
     

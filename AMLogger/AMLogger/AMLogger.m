@@ -68,7 +68,7 @@ AMLogInitialize(void)
         [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMAMServerFile]];
         
         for (NSString* logPath in logFiles) {
-            if([fileManager fileExistsAtPath:logPath])
+            if(![fileManager fileExistsAtPath:logPath])
             {
                 [fileManager createFileAtPath:logPath
                                      contents:nil

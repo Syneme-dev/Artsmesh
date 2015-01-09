@@ -10,6 +10,7 @@
 #import "AMTimerTableCellVC.h"
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMOSCGroups/AMOSCDefine.h"
+#import "UIFramework/AMPopUpView.h"
 
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
@@ -23,14 +24,14 @@ typedef enum : NSInteger {
 
 
 @interface AMTimerTabVC () <NSTableViewDataSource, NSTableViewDelegate,
-    NSComboBoxDelegate>
+    AMPopUpViewDelegeate>
 {
     NSTimeInterval _timeIntervalSettings[4];
     NSTimeInterval _currentCountdownValue;
     NSTimeInterval _currentDurationValue;
 }
 
-@property (weak) IBOutlet NSComboBox *modeComboBox;
+@property (weak) IBOutlet AMPopUpView *modePopup;
 @property (weak) IBOutlet NSTextField *hoursTextField;
 @property (weak) IBOutlet NSTextField *minutesTextField;
 @property (weak) IBOutlet NSTextField *secondsTextField;
@@ -54,7 +55,9 @@ typedef enum : NSInteger {
                             value:[NSColor lightGrayColor]
                             range:NSMakeRange(0, attributedTitle.length)];
     self.addButton.attributedTitle = attributedTitle;
-    [self.modeComboBox selectItemAtIndex:1];
+    self.modePopup.delegate = self;
+    [self.modePopup addItemsWithTitles:@[ @"Countdown", @"Duration", @"Relative", @"Absolute" ]];
+    [self.modePopup selectItemAtIndex:1];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleOSCMessage:)
                                                  name:AM_OSC_NOTIFICATION
@@ -227,15 +230,15 @@ typedef enum : NSInteger {
     [self.tableView scrollRowToVisible:self.tableCellControllers.count - 1];
 }
 
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification
+- (void)itemSelected:(AMPopUpView *)sender
 {
-    self.timeInterval = _timeIntervalSettings[self.modeComboBox.indexOfSelectedItem];
+    self.timeInterval = _timeIntervalSettings[self.modePopup.indexOfSelectedItem];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     NSTimeInterval timeInterval = self.timeInterval;
-    NSInteger mode = self.modeComboBox.indexOfSelectedItem;
+    NSInteger mode = self.modePopup.indexOfSelectedItem;
     _timeIntervalSettings[mode] = timeInterval;
 }
 

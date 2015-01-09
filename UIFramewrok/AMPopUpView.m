@@ -97,6 +97,7 @@
     if ([self.delegate respondsToSelector:@selector(popupViewWillPopup:)])
         [self.delegate popupViewWillPopup:self];
     
+    
     NSView *popUpView = [self popUpMenuController].view;
     if (popUpView.superview) {
         [popUpView removeFromSuperview];

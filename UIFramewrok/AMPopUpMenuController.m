@@ -8,6 +8,7 @@
 
 #import "AMPopUpMenuController.h"
 #import "AMPopUpMenuItem.h"
+#import "AMBackgroundView.h"
 
 @interface AMPopUpMenuController ()<AMPopUpMenuItemDelegeate>
 

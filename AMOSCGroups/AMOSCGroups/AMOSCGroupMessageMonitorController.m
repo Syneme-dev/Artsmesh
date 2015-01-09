@@ -263,7 +263,7 @@
             }
         }
         
-        [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr];
+        [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr groupName:self.groupNameField.stringValue];
         [self.serverSelector setEnabled:NO];
         [self.selfDefServer setEnabled:NO];
         [self.sendToDev setEnabled:NO];

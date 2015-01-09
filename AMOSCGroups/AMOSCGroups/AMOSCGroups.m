@@ -143,7 +143,7 @@
 }
 
 
--(void)startOSCGroupClient:(NSString *)serverAddr
+-(void)startOSCGroupClient:(NSString *)serverAddr groupName:(NSString *)groupName;
 {
     
     _oscClient = [[AMOSCClient alloc] init];
@@ -158,7 +158,12 @@
     NSString* oscRxPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_RxPort];
     NSString* oscUserName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_UserName];
     NSString* oscUserPwd = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_UserPwd];
+    
     NSString* oscGroupName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_GroupName];
+    if (groupName != nil) {
+        oscGroupName = groupName;
+    }
+    
     NSString* oscGroupPwd = [[AMPreferenceManager standardUserDefaults ] stringForKey:Preference_OSC_Client_GroupPwd];
     NSString* oscMonitorAddr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_MonitorAddr];
     NSString* oscMonitorPort = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_OSC_Client_MonitorPort];

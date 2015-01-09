@@ -19,7 +19,7 @@
 -(void)startOSCGroupServer;
 -(void)stopOSCGroupServer;
 
--(void)startOSCGroupClient:(NSString *)serverAddr;
+-(void)startOSCGroupClient:(NSString *)serverAddr groupName:(NSString *)groupName;
 -(void)stopOSCGroupClient;
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr;
 

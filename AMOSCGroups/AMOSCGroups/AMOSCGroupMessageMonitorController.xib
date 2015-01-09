@@ -9,12 +9,14 @@
             <connections>
                 <outlet property="clearAllBtn" destination="W3j-vS-ShE" id="ocV-7x-O68"/>
                 <outlet property="forwardDevPort" destination="OMT-4l-9y5" id="RvB-dg-xUo"/>
+                <outlet property="groupNameField" destination="w9z-7f-O0n" id="Pmy-JQ-Mtt"/>
                 <outlet property="onOffBox" destination="Rff-V1-Z3C" id="Ire-Jl-YFM"/>
                 <outlet property="oscMsgTable" destination="jND-YY-VOD" id="Aty-CZ-LTd"/>
                 <outlet property="searchField" destination="iub-DF-U7u" id="u2j-4q-NWQ"/>
                 <outlet property="selfDefServer" destination="ksZ-bf-Lbh" id="4JM-Gg-T5T"/>
                 <outlet property="sendToDev" destination="LN7-7G-b5U" id="yu3-Qo-6Mh"/>
                 <outlet property="serverSelector" destination="xWn-Gf-Gff" id="u7i-rV-byF"/>
+                <outlet property="userNameField" destination="aGH-7E-yLn" id="t21-PW-v3l"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -113,14 +115,11 @@
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9z-7f-O0n" customClass="AMFoundryFontView">
                     <rect key="frame" x="493" y="490" width="120" height="20"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SERVERIP" drawsBackground="YES" id="8bl-Rp-dny">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="GROUPNAME" drawsBackground="YES" id="8bl-Rp-dny">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
-                    <connections>
-                        <binding destination="Zcg-DX-5wM" name="value" keyPath="values.Preference_OSC_Client_ServerAddr" id="zw0-bW-JaR"/>
-                    </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-7G-b5U" customClass="AMFoundryFontView">
                     <rect key="frame" x="99" y="490" width="120" height="20"/>
@@ -247,14 +246,11 @@
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGH-7E-yLn" customClass="AMFoundryFontView">
                     <rect key="frame" x="493" y="517" width="120" height="20"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SERVERIP" drawsBackground="YES" id="J8O-TT-qpX">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="USERNAME" drawsBackground="YES" id="J8O-TT-qpX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
-                    <connections>
-                        <binding destination="Zcg-DX-5wM" name="value" keyPath="values.Preference_OSC_Client_ServerAddr" id="Z3s-dd-bTG"/>
-                    </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="W3j-vS-ShE">
                     <rect key="frame" x="624" y="450" width="84" height="14"/>

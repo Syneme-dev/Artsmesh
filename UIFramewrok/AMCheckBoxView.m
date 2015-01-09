@@ -91,7 +91,7 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
-    if (self.readOnly) {
+    if (self.readOnly || !self.enabled) {
         return;
     }
     self.checked = !self.checked;

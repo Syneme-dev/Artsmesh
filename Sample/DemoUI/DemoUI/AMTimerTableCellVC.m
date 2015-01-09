@@ -77,6 +77,7 @@ static NSString * const PingCommandFormat =
         NSMutableArray *groupNames = [NSMutableArray array];
         [groupNames addObject:@"----------"];
         [groupNames addObjectsFromArray:[self.groups valueForKeyPath:@"groupName"]];
+        [self.groupPopup addItemsWithTitles:groupNames];
     }
 }
 

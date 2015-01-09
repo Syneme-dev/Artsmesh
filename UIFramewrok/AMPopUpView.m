@@ -94,14 +94,14 @@
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(popupViewWillPopup:)])
+        [self.delegate popupViewWillPopup:self];
+    
     NSView *popUpView = [self popUpMenuController].view;
     if (popUpView.superview) {
         [popUpView removeFromSuperview];
         return;
     }
-    
-    if ([self.delegate respondsToSelector:@selector(popupViewWillPopup:)])
-        [self.delegate popupViewWillPopup:self];
     
     //CGFloat menuHeight = [self.popUpMenuController menuHeight];
     CGFloat menuHeight = popUpView.frame.size.height;

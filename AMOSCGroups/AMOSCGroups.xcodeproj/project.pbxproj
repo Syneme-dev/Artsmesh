@@ -12,6 +12,7 @@
 		013441771A14D71500ADD521 /* OscGroupClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 013441731A14D71500ADD521 /* OscGroupClient.h */; };
 		013441781A14D75200ADD521 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 013441701A14D71500ADD521 /* md5.cpp */; };
 		013441791A14D75200ADD521 /* OscGroupClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 013441721A14D71500ADD521 /* OscGroupClient.cpp */; };
+		013593741A5CEB9400760641 /* AMOSCDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 013593731A5CE51D00760641 /* AMOSCDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		016607461A38204D002AEEE7 /* AMOSCMonitor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 016607451A38204D002AEEE7 /* AMOSCMonitor.mm */; };
 		016607901A382727002AEEE7 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 016607791A382726002AEEE7 /* IpEndpointName.cpp */; };
 		016607911A382727002AEEE7 /* IpEndpointName.h in Headers */ = {isa = PBXBuildFile; fileRef = 0166077A1A382726002AEEE7 /* IpEndpointName.h */; };
@@ -85,6 +86,7 @@
 		013441711A14D71500ADD521 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = AMOSCGroups/md5.h; sourceTree = SOURCE_ROOT; };
 		013441721A14D71500ADD521 /* OscGroupClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscGroupClient.cpp; path = AMOSCGroups/OscGroupClient.cpp; sourceTree = SOURCE_ROOT; };
 		013441731A14D71500ADD521 /* OscGroupClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscGroupClient.h; path = AMOSCGroups/OscGroupClient.h; sourceTree = SOURCE_ROOT; };
+		013593731A5CE51D00760641 /* AMOSCDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMOSCDefine.h; sourceTree = "<group>"; };
 		0136BDC71A14BD010009638F /* OSCGroupClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSCGroupClient; sourceTree = BUILT_PRODUCTS_DIR; };
 		016607441A382035002AEEE7 /* AMOSCMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMOSCMonitor.h; sourceTree = "<group>"; };
 		016607451A38204D002AEEE7 /* AMOSCMonitor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMOSCMonitor.mm; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		4A57013A1A11B7AC00BF801E /* AMOSCGroups */ = {
 			isa = PBXGroup;
 			children = (
+				013593731A5CE51D00760641 /* AMOSCDefine.h */,
 				4A6D4B861A130F3000B5D26B /* AMOSCGroups.h */,
 				4A6D4B871A130F3000B5D26B /* AMOSCGroups.m */,
 				4A1D3F891A14858D00A1BF4D /* AMOSCClient.h */,
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016607971A382727002AEEE7 /* UdpSocket.h in Headers */,
+				013593741A5CEB9400760641 /* AMOSCDefine.h in Headers */,
 				016607991A382727002AEEE7 /* MessageMappingOscPacketListener.h in Headers */,
 				016607931A382727002AEEE7 /* PacketListener.h in Headers */,
 				016607921A382727002AEEE7 /* NetworkingUtils.h in Headers */,

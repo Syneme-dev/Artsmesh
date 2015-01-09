@@ -14,10 +14,12 @@
 //serialize properties
 @property (nonatomic) NSString* groupId;
 @property (nonatomic) NSString* groupName;
+@property (nonatomic) NSString* fullName;
 @property (nonatomic) NSString* description;
 @property (nonatomic) NSString* leaderId;
-@property (nonatomic) NSString* fullName;
 @property (nonatomic) NSString* project;
+@property (nonatomic) NSString* projectDescription;
+@property (nonatomic) NSString* homePage;
 @property (nonatomic) NSString* location;
 @property (nonatomic) NSString* longitude;
 @property (nonatomic) NSString* latitude;

@@ -463,6 +463,8 @@
             localGroup.project = group.project;
             localGroup.leaderId = group.leaderId;
             localGroup.users = users;
+            localGroup.projectDescription = group.projectDescription;
+            localGroup.homePage = group.homePage;
             
             _userlistVersion = [[result objectForKey:@"Version"] intValue];
             

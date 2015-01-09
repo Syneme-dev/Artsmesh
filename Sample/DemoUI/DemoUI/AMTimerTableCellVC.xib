@@ -9,11 +9,11 @@
             <connections>
                 <outlet property="bpmLabel" destination="Lcr-XV-Nxh" id="YYX-vi-cKU"/>
                 <outlet property="delayLabel" destination="ImV-Us-oPV" id="T5s-d2-ezN"/>
-                <outlet property="groupCombox" destination="AbQ-Aj-bMN" id="vzX-kd-Tap"/>
+                <outlet property="groupPopup" destination="CyS-Pa-GgU" id="GJu-rG-Y2q"/>
                 <outlet property="lockButton" destination="G0G-b6-5cz" id="RKG-fP-B8U"/>
                 <outlet property="lowNumber" destination="5yg-Qe-4QC" id="kGC-Ls-LIS"/>
                 <outlet property="metronomeLabel" destination="bhI-2o-zFy" id="Mqc-d6-KUQ"/>
-                <outlet property="slowdownCombox" destination="Uab-xE-XTI" id="TCd-o5-KGS"/>
+                <outlet property="slowdownPopup" destination="Kon-lH-z0L" id="zLs-pF-wkM"/>
                 <outlet property="upperNumber" destination="q56-CY-Q6Q" id="eqb-fC-Jav"/>
                 <outlet property="view" destination="6ZT-r2-Z7f" id="LqM-oe-Gbz"/>
             </connections>
@@ -41,8 +41,8 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhI-2o-zFy">
-                    <rect key="frame" x="262" y="94" width="112" height="108"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="2" id="2KS-c2-ggv">
+                    <rect key="frame" x="262" y="94" width="112" height="119"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="1" id="2KS-c2-ggv">
                         <font key="font" metaFont="system" size="100"/>
                         <color key="textColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +61,7 @@
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="right" title="4" drawsBackground="YES" id="kKA-gv-yH8">
                         <font key="font" metaFont="system" size="45"/>
                         <color key="textColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-Qe-4QC">
@@ -107,37 +107,6 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AbQ-Aj-bMN">
-                    <rect key="frame" x="240" y="220" width="140" height="28"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="sFY-Rs-o8p">
-                        <font key="font" metaFont="system" size="16"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </comboBoxCell>
-                    <connections>
-                        <outlet property="dataSource" destination="-2" id="s4V-a1-NzV"/>
-                        <outlet property="delegate" destination="-2" id="Ocp-hd-Um6"/>
-                    </connections>
-                </comboBox>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-xE-XTI">
-                    <rect key="frame" x="240" y="29" width="74" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="6" id="uq2-Ca-WU9">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>♩</string>
-                            <string>1/2</string>
-                            <string>1/4</string>
-                            <string>1/8</string>
-                            <string>1/16</string>
-                            <string>1/32</string>
-                        </objectValues>
-                    </comboBoxCell>
-                    <connections>
-                        <outlet property="delegate" destination="-2" id="Yt1-3X-wSP"/>
-                    </connections>
-                </comboBox>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G0G-b6-5cz">
                     <rect key="frame" x="145" y="109" width="36" height="36"/>
                     <buttonCell key="cell" type="smallSquare" title="🔓" alternateTitle="🔒" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="47V-EC-Yz9">
@@ -148,6 +117,12 @@
                         <action selector="toogleLockState:" target="-2" id="pvx-pb-of5"/>
                     </connections>
                 </button>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kon-lH-z0L" customClass="AMPopUpView">
+                    <rect key="frame" x="447" y="224" width="75" height="22"/>
+                </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CyS-Pa-GgU" customClass="AMPopUpView">
+                    <rect key="frame" x="178" y="224" width="158" height="22"/>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="336" y="335.5"/>
         </tableCellView>

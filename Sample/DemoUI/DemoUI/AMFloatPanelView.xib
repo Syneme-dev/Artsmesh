@@ -8,12 +8,10 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMFloatPanelViewController">
             <connections>
                 <outlet property="closeBtn" destination="PFq-T7-YMG" id="H6V-od-c08"/>
-                <outlet property="closePanel" destination="PFq-T7-YMG" id="MCS-9R-YsY"/>
-                <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
+                <outlet property="fullScreenBtn" destination="XMe-0f-woX" id="HCO-cz-GuR"/>
                 <outlet property="panelContent" destination="5ZN-yI-QNy" id="8vL-Yl-hbr"/>
                 <outlet property="panelTop" destination="fvD-YA-Ec9" id="TUg-ie-6hF"/>
                 <outlet property="titleTextField" destination="dZ9-KQ-hje" id="QBi-2Q-UJ4"/>
-                <outlet property="toolBarView" destination="fvD-YA-Ec9" id="5fP-b2-h70"/>
                 <outlet property="view" destination="1" id="WXf-WG-A9M"/>
             </connections>
         </customObject>

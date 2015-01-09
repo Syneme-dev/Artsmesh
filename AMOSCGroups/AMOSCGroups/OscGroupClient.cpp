@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <cstring>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <ctime>
 #include <string>
@@ -123,7 +124,6 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 #define ACTIVE_PING_PERIOD_SECONDS          30              // seconds between pings when the link is active
 
 #define ESTABLISHMENT_PING_PERIOD_COUNT     5               // 5 pings are always sent to all peer endpoints
-
 
 
 struct PeerEndpoint{
@@ -272,6 +272,7 @@ class ExternalCommunicationsSender : public TimerListener {
 		to.endpointName.AddressAndPortAsString( addressString );
          
         std::cout << "sending ping to " << addressString << "\n";
+        std::cout.flush();
 
         externalSocket_.SendTo( to.endpointName, pingBuffer_, pingSize_ );
         ++to.sentPingsCount;
@@ -505,10 +506,12 @@ class ExternalSocketListener : public osc::OscPacketListener {
             if( std::strcmp( status, "ok" ) == 0 ){
 
                 std::cout << "ok: user '" << userName << "' is registered with server\n";
+                std::cout.flush();
 
             }else{
                 std::cout << "user registration error: server returned status of '" << status
                         << "' for user '" << userName << "'\n";
+                std::cout.flush();
             }
         }
     }
@@ -536,11 +539,13 @@ class ExternalSocketListener : public osc::OscPacketListener {
             if( std::strcmp( status, "ok" ) == 0 ){
 
                 std::cout << "ok: user '" << userName << "' is a member of group '" << groupName << "'\n";
+                std::cout.flush();
 
             }else{
                 std::cout << "group membership error: server returned status of '" << status
                     << "' for user '" << userName
                     << "' membership of group '" << groupName << "'\n";
+                std::cout.flush();
             }
         }
     }
@@ -583,6 +588,7 @@ class ExternalSocketListener : public osc::OscPacketListener {
             << "private: " << privateAddressString
             << " public: " << publicAddressString
             << "\n";
+        std::cout.flush();
                 
         if( std::strcmp( userName, userName_ ) == 0 )
             return; // discard info referring to ourselves
@@ -671,6 +677,7 @@ class ExternalSocketListener : public osc::OscPacketListener {
        
         std::cout << "ping recieved from '" << userName << "' at "
                 << sourceAddressString  << "\n";
+        std::cout.flush();
 
         for( std::vector<Peer>::iterator i = peers_.begin(); i != peers_.end(); ++i ){
 
@@ -729,6 +736,7 @@ protected:
 
         }catch( osc::Exception& e ){
             std::cout << "error while parsing message: " << e.what() << "\n";
+            std::cout.flush();
         }
     }
 
@@ -902,10 +910,12 @@ void RunOscGroupClientUntilSigInt(
 
 	std::cout << "running...\n";
 	std::cout << "press ctrl-c to end\n";
+    std::cout.flush();
 
 	mux.RunUntilSigInt();
 
-	std::cout << "finishing.\n";	
+	std::cout << "finishing.\n";
+    std::cout.flush();
 }
 
 
@@ -914,11 +924,14 @@ int oscgroupclient_main(int argc, char* argv[])
     SanityCheckMd5();
     
     try{
-        if( argc != 12 ){
+        if( argc != 12  && argc != 13){
             std::cout << "usage: oscgroupclient serveraddress serverport localtoremoteport localtxport localrxport username password groupname grouppassword monitorAddr monitorPort\n";
             std::cout << "users should send data to localhost:localtxport and listen on localhost:localrxport\n";
+            std::cout.flush();
             return 0;
         }
+        
+        std::ofstream fs;
 
 		IpEndpointName serverRemoteEndpoint( argv[1], atoi( argv[2] ) );
         int localToRemotePort = std::atoi( argv[3] );
@@ -930,6 +943,13 @@ int oscgroupclient_main(int argc, char* argv[])
         const char *groupPassword = argv[9];
         const char *monitorAddr = argv[10];
         int monitorPort = std::atoi(argv[11]);
+        
+        if (argc == 13) {
+            const char *logfile = argv[12];
+            fs.open(logfile);
+    
+            std::cout.rdbuf(fs.rdbuf()) ;
+        }
 
 		char serverAddressString[ IpEndpointName::ADDRESS_AND_PORT_STRING_LENGTH ];
 		serverRemoteEndpoint.AddressAndPortAsString( serverAddressString );
@@ -940,12 +960,15 @@ int oscgroupclient_main(int argc, char* argv[])
                         << " with external traffic on local port " << localToRemotePort << "\n";
         std::cout << "--> send outbound traffic to localhost port " << localTxPort << "\n";
         std::cout << "<-- listen for inbound traffic on localhost port " << localRxPort << "\n";
+        
+        std::cout.flush();
 
         RunOscGroupClientUntilSigInt( serverRemoteEndpoint, localToRemotePort,
                 localTxPort, localRxPort, userName, userPassword, groupName, groupPassword, monitorAddr, monitorPort);
 
     }catch( std::exception& e ){
         std::cout << e.what() << std::endl;
+        std::cout.flush();
     }
     
     return 0;

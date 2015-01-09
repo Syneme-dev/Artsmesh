@@ -70,6 +70,8 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		g_store.groupData.TimezoneName = group.TimezoneName
 		g_store.groupData.Project = group.Project
 		g_store.groupData.Busy = group.Busy
+        g_store.groupData.ProjectDescription = group.ProjectDescription
+        g_store.groupData.HomePage = group.HomePage
 		
 		makeSnapShot()
 		return "ok"
@@ -206,6 +208,9 @@ func makeSnapShot(){
 	newSnapShot.GroupData.Latitude = g_store.groupData.Latitude
 	newSnapShot.GroupData.TimezoneName = g_store.groupData.TimezoneName
 	newSnapShot.GroupData.Busy = g_store.groupData.Busy
+    newSnapShot.GroupData.ProjectDescription = g_store.groupData.ProjectDescription
+    newSnapShot.GroupData.HomePage = g_store.groupData.HomePage
+
 	
 		
 	fmt.Println("-------------g_store.userStores count is:", len(g_store.userStores))

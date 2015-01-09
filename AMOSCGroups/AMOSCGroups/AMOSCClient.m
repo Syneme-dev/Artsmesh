@@ -11,6 +11,7 @@
 #import "AMLogger/AMLogger.h"
 #import "AMOSCMonitor.h"
 #import "AMOSCForwarder.h"
+#import "AMOSCDefine.h"
 
 @interface AMOSCClient()<AMOSCMonitorDelegate>
 @end
@@ -37,63 +38,71 @@
     return self;
 }
 
--(BOOL)startOscClient
+
+-(void)performStartOscGroupClient
 {
-    int m = system("killall -0 OscGroupClient >/dev/null");
-    if (m != 0) {
-        //Start Monitor
-        _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
-        _oscMonitor.delegate = self;
-        dispatch_async(_monitor_queue, ^{
-            [[AMOSCMonitor shareMonitor] startListening];
-        });
-        
-        //Launch OSCGroupClient
-        NSBundle* mainBundle = [NSBundle mainBundle];
-        NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
-        
-        [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
-         self.serverAddr, self.serverPort,
-         self.remotePort, self.txPort,
-         self.rxPort, self.userName,
-         self.userPwd, self.groupName,
-         self.groupPwd, self.monitorAddr,
-         self.monitorPort];
-        
-        NSString *systemLogPath = AMLogDirectory();
-        [commandline appendFormat:@"%@ > %@/OSC_Client.log", commandline, systemLogPath];
-        
-        [_task terminate];
-        _task = [[NSTask alloc] init];
-        _task.launchPath = @"/bin/bash";
-        _task.arguments = @[@"-c", [commandline copy]];
-        
-        AMLog(kAMInfoLog, @"AMOscGroups", commandline);
-        //NSLog(@"start osc client command is : %@", commandline);
-        
-        [_task launch];
-        
-        return YES;
-    }else{
-        
-        return  YES;
-    }
+    //Start Monitor
+    _oscMonitor = [AMOSCMonitor monitorWithPort:[self.monitorPort intValue]];
+    _oscMonitor.delegate = self;
+    dispatch_async(_monitor_queue, ^{
+        [[AMOSCMonitor shareMonitor] startListening];
+    });
+    
+    //Launch OSCGroupClient
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
+    
+    [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
+     self.serverAddr, self.serverPort,
+     self.remotePort, self.txPort,
+     self.rxPort, self.userName,
+     self.userPwd, self.groupName,
+     self.groupPwd, self.monitorAddr,
+     self.monitorPort];
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [commandline appendFormat:@" %@/OSC_Client.log", systemLogPath];
+    
+    [_task terminate];
+    _task = [[NSTask alloc] init];
+    _task.launchPath = @"/bin/bash";
+    _task.arguments = @[@"-c", [commandline copy]];
+    
+    AMLog(kAMInfoLog, @"AMOscGroups", commandline);
+    
+    [_task launch];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AM_OSC_CLIENT_STARTED_NOTIFICATION object:nil];
+}
+
+-(BOOL)isStated
+{
+    return [_task isRunning];
+}
+
+
+-(void)startOscClient
+{
+    system("killall OscGroupClient >/dev/null");
+    [self performSelector:@selector(performStartOscGroupClient) withObject:nil afterDelay:2.0];
 }
 
 
 -(void)stopOscClient
 {
-    //dispatch_async(_monitor_queue, ^{
-    //    [_oscMonitor stopListening];
-    //});
-    
     AMOSCMonitor *monitor = [AMOSCMonitor shareMonitor ];
     [monitor stopListening];
     
-    [_task terminate];
-    _task = nil;
+    if (_task != nil) {
+        kill(_task.processIdentifier, SIGINT);
+    }
     
+    _task = nil;
     system("killall OscGroupClient >/dev/null");
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AM_OSC_CLIENT_STOPPED_NOTIFICATION object:nil];
 }
 
 
@@ -108,6 +117,18 @@
    // NSLog(@"oscmessage receiced: %@", msg);
     if ([self.delegate respondsToSelector:@selector(oscMsgComming:parameters:)]){
         [self.delegate oscMsgComming:msg parameters:params];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([msg isEqualTo:AM_OSC_TIMER_START]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_START }];
+            }else if([msg isEqualTo:AM_OSC_TIMER_STOP]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_STOP }];
+            }
+        });
     }
 }
 

@@ -97,9 +97,6 @@
 @property NSMutableArray* oscMessageLogs;
 @property NSMutableArray* oscMessageSearchResults;
 @property NSString *searchString;
-@property (weak) IBOutlet NSButton *topBtn;
-@property (weak) IBOutlet NSButton *pauseBtn;
-@property (weak) IBOutlet NSButton *thruBtn;
 @property (weak) IBOutlet AMCheckBoxView *onOffBox;
 @property (weak) IBOutlet AMPopUpView *serverSelector;
 @property (weak) IBOutlet AMFoundryFontView *selfDefServer;
@@ -107,6 +104,8 @@
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 @property (weak) IBOutlet NSButton *clearAllBtn;
 @property (weak) IBOutlet AMFoundryFontView *forwardDevPort;
+@property (weak) IBOutlet AMFoundryFontView *userNameField;
+@property (weak) IBOutlet AMFoundryFontView *groupNameField;
 
 @end
 
@@ -143,16 +142,28 @@
     //Set Server Selection
     [self updateOSCServer];
     
+    //Set username and group name
+    AMLiveUser *myself = [AMCoreData shareInstance] .mySelf;
+    if(!myself.isOnline){
+        self.groupNameField.stringValue = [AMCoreData shareInstance].myLocalLiveGroup.groupName;
+    }else{
+        self.groupNameField.stringValue = [AMCoreData shareInstance].mergedGroup.groupName;
+    }
+    
+    self.userNameField.stringValue = myself.nickName;
+    
     //Set Button Color
-    [AMButtonHandler changeTabTextColor:self.topBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.thruBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.pauseBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.clearAllBtn toColor:UI_Color_blue];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userGroupChanged:)
                                                  name:AM_LIVE_GROUP_CHANDED
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(oscClientStated:)
+                                                 name:AM_OSC_CLIENT_STARTED_NOTIFICATION
+                                               object:nil];
+    
 }
 
 -(void)dealloc
@@ -162,7 +173,23 @@
 
 -(void)userGroupChanged:(NSNotification *)notification
 {
+    AMLiveUser *myself = [AMCoreData shareInstance].mySelf;
+    if (myself.isOnline && !self.onOffBox.checked) {
+        AMLiveGroup *group = [AMCoreData shareInstance].mergedGroup;
+        if (group != nil) {
+            self.groupNameField.stringValue = group.groupName;
+        }
+    }else{
+        AMLiveGroup *group = [AMCoreData shareInstance].myLocalLiveGroup;
+        self.groupNameField.stringValue = group.groupName;
+    }
+    
     [self updateOSCServer];
+}
+
+-(void)oscClientStated:(NSNotification *)notification
+{
+    [self.onOffBox setEnabled:YES];
 }
 
 
@@ -236,11 +263,14 @@
             }
         }
         
-        [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr];
+        [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr groupName:self.groupNameField.stringValue];
         [self.serverSelector setEnabled:NO];
         [self.selfDefServer setEnabled:NO];
         [self.sendToDev setEnabled:NO];
         [self.forwardDevPort setEnabled:NO];
+        [self.userNameField setEnabled:NO];
+        [self.groupNameField setEnabled:NO];
+        [self.onOffBox setEnabled:NO];
         
         self.onOffBox.title = @"Off";
     }else{
@@ -252,10 +282,19 @@
         [self.selfDefServer setEnabled:YES];
         [self.sendToDev setEnabled:YES];
         [self.forwardDevPort setEnabled:YES];
+        [self.userNameField setEnabled:YES];
+        [self.groupNameField setEnabled:YES];
         
         [self.oscMessageLogs removeAllObjects];
         [self.oscMessageSearchResults removeAllObjects];
         [self.oscMsgTable reloadData];
+        
+        AMLiveUser *myself = [AMCoreData shareInstance] .mySelf;
+        if(!myself.isOnline){
+            self.groupNameField.stringValue = [AMCoreData shareInstance].myLocalLiveGroup.groupName;
+        }else{
+            self.groupNameField.stringValue = [AMCoreData shareInstance].mergedGroup.groupName;
+        }
     }
 }
 
@@ -540,16 +579,16 @@
         id value = [dict objectForKey:type];
         
         if([type isEqualToString:@"BOOL"]){
-            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"INT"]){
-            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            [paramDetail appendFormat:@"%@ ", value];
 
         }else if([type isEqualToString:@"LONG"]){
-            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"FLOAT"]){
-            [paramDetail appendFormat:@"%@(%@), ", value, type];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"STRING"]){
             NSString *text = (NSString *)value;
@@ -557,10 +596,10 @@
                 text = [text substringToIndex:12];
                 text = [NSString stringWithFormat:@"%@...", text];
             }
-            [paramDetail appendFormat:@"%@(%@), ", text, type];
+            [paramDetail appendFormat:@"%@ ", text];
             
         }else if([type isEqualToString:@"BLOB"]){
-            [paramDetail appendFormat:@"...(%@), ", type];
+            [paramDetail appendFormat:@"...(%@) ", type];
         
         }
     }

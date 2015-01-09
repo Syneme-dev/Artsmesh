@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-
-#define AM_OSC_SRV_STARTED_NOTIFICATION @"AM_OSC_SRV_STARTED_NOTIFICATION"
-#define AM_OSC_SRV_STOPPED_NOTIFICATION @"AM_OSC_SRV_STOPPED_NOTIFICATION"
-
+#import "AMOSCDefine.h"
 
 @interface AMOSCGroups : NSObject
 
@@ -19,12 +16,14 @@
 
 -(NSViewController*)getOSCPrefUI;
 -(NSViewController*)getOSCMonitorUI;
--(BOOL)startOSCGroupServer;
+-(void)startOSCGroupServer;
 -(void)stopOSCGroupServer;
 
--(BOOL)startOSCGroupClient:(NSString *)serverAddr;
+-(void)startOSCGroupClient:(NSString *)serverAddr groupName:(NSString *)groupName;
 -(void)stopOSCGroupClient;
 -(void)setOSCMessageSearchFilterString:(NSString*)filterStr;
+
+-(void)broadcastMessage:(NSString *)message  params:(NSArray *)params;
 
 -(BOOL)isOSCGroupServerStarted;
 -(BOOL)isOSCGroupClientStarted;

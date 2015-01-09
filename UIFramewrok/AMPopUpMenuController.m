@@ -8,6 +8,7 @@
 
 #import "AMPopUpMenuController.h"
 #import "AMPopUpMenuItem.h"
+#import "AMBackgroundView.h"
 
 @interface AMPopUpMenuController ()<AMPopUpMenuItemDelegeate>
 
@@ -61,6 +62,8 @@
         index = maxIndex;
     }
     
+    newItem.index = index;
+    
     [[self menuItems] insertObject:newItem atIndex:index];
     [self.view addSubview:newItem];
     
@@ -70,7 +73,7 @@
     [self.view setFrame:menuRect];
     
     NSUInteger i = 0;
-    for (AMPopUpMenuItem* item in [self menuItems]){
+    for (AMPopUpMenuItem* item in [[self menuItems] reverseObjectEnumerator]) {
         NSRect itemRect = NSMakeRect(0, height*i, width, height);
         [item setFrame:itemRect];
         i++;
@@ -95,7 +98,7 @@
 
 -(void)itemSelected:(AMPopUpMenuItem *)sender
 {
-    [self.delegate itemSelected:sender.title];
+    [self.delegate itemSelected:sender];
 }
 
 -(void)selectItemAtInedex:(NSUInteger)index

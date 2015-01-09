@@ -138,7 +138,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSS-gi-ODN">
-                    <rect key="frame" x="105" y="7" width="100" height="30"/>
+                    <rect key="frame" x="198" y="7" width="100" height="30"/>
                     <buttonCell key="cell" type="square" title="Run" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="VJk-QO-VMs">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -180,7 +180,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wZM-is-OrT">
-                    <rect key="frame" x="198" y="7" width="100" height="30"/>
+                    <rect key="frame" x="117" y="7" width="100" height="30"/>
                     <buttonCell key="cell" type="square" title="Close" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="UME-P8-nEt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -190,7 +190,7 @@
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="343" y="-63"/>
+            <point key="canvasLocation" x="-62" y="-137"/>
         </customView>
     </objects>
     <resources>

@@ -125,6 +125,9 @@
     //To avoid a error when closing
     [self.archiveWebView.mainFrame stopLoading];
     
+    [self.archiveWebView setFrameLoadDelegate:nil];
+    [self.archiveWebView setPolicyDelegate:nil];
+    [self.archiveWebView setUIDelegate:nil];
 }
 
 -(void)webViewClose:(WebView *)sender

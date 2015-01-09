@@ -49,14 +49,10 @@
 
 -(void)awakeFromNib
 {
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(jacktripChanged:)
-     name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
-     object:nil];
-    
     [self setUpUI];
     [self loadDefaultPref];
 }
+
 
 -(void)setUpUI
 {
@@ -356,10 +352,10 @@
     [self.owner performClose:nil];
 }
 
--(void)jacktripChanged:(NSNotification*)notification
-{
-
-}
+//-(void)jacktripChanged:(NSNotification*)notification
+//{
+//
+//}
 
 - (IBAction)closeClicked:(NSButton *)sender
 {

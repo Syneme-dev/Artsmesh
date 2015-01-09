@@ -66,6 +66,8 @@
              Preference_Cluster_FullName,        Preference_Key_Cluster_FullName,
              Preference_Cluster_Location,        Preference_Key_Cluster_Location,
              Preference_Cluster_Project,         Preference_Key_Cluster_Project,
+             @"this is project description",     Preference_Key_Cluster_Project_Descrition,
+             @"http://www.artsmesh.io",          Preference_Key_Cluster_HomePage,
              Preference_StatusNet_URL,           Preference_Key_StatusNet_URL,
              Preference_Cluster_Latitude,        Preference_Key_Cluster_Latitude,
              Preference_Cluster_Longitude,       Preference_Key_Cluster_Longitude,
@@ -159,6 +161,8 @@
     localGroup.location = [defaults stringForKey:Preference_Key_Cluster_Location];
     localGroup.longitude = [defaults stringForKey:Preference_Key_Cluster_Longitude];
     localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];
+    localGroup.homePage = [defaults stringForKey:Preference_Key_Cluster_HomePage];
+    localGroup.projectDescription = [defaults stringForKey:Preference_Key_Cluster_Project_Descrition];
     localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
     localGroup.busy = NO;
     localGroup.timezoneName = [NSTimeZone systemTimeZone].name;

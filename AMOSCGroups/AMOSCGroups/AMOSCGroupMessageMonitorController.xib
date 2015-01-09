@@ -159,7 +159,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                     </tableColumn>
-                                    <tableColumn identifier="osc_msg_col" editable="NO" width="100" minWidth="100" maxWidth="150" id="6ui-WV-THJ">
+                                    <tableColumn identifier="osc_msg_col" editable="NO" width="250" minWidth="250" maxWidth="250" id="6ui-WV-THJ">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -185,7 +185,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                     </tableColumn>
-                                    <tableColumn identifier="osc_check_col" width="200" minWidth="200" maxWidth="200" id="ke7-zi-cEc">
+                                    <tableColumn identifier="osc_check_col" width="150" minWidth="150" maxWidth="150" id="ke7-zi-cEc">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -199,7 +199,7 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="VWq-z3-lsM">
-                                                <rect key="frame" x="590" y="1" width="200" height="17"/>
+                                                <rect key="frame" x="590" y="1" width="150" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bYy-ZC-9Jf">

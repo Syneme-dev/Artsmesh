@@ -579,16 +579,16 @@
         id value = [dict objectForKey:type];
         
         if([type isEqualToString:@"BOOL"]){
-            [paramDetail appendFormat:@"%@, ", value];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"INT"]){
-            [paramDetail appendFormat:@"%@, ", value];
+            [paramDetail appendFormat:@"%@ ", value];
 
         }else if([type isEqualToString:@"LONG"]){
-            [paramDetail appendFormat:@"%@, ", value];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"FLOAT"]){
-            [paramDetail appendFormat:@"%@, ", value];
+            [paramDetail appendFormat:@"%@ ", value];
             
         }else if([type isEqualToString:@"STRING"]){
             NSString *text = (NSString *)value;
@@ -596,10 +596,10 @@
                 text = [text substringToIndex:12];
                 text = [NSString stringWithFormat:@"%@...", text];
             }
-            [paramDetail appendFormat:@"%@, ", text];
+            [paramDetail appendFormat:@"%@ ", text];
             
         }else if([type isEqualToString:@"BLOB"]){
-            [paramDetail appendFormat:@"...(%@), ", type];
+            [paramDetail appendFormat:@"...(%@) ", type];
         
         }
     }

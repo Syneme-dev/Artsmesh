@@ -18,6 +18,7 @@
 @property NSColor* mouseOverColor;
 
 @property id<AMPopUpMenuItemDelegeate> delegate;
+@property (nonatomic) NSUInteger index;
 
 @end
 

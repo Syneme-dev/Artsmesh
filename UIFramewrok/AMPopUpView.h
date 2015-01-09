@@ -18,8 +18,8 @@
 @property CGFloat itemHeight;
 @property CGFloat itemWidth;
 
-@property id<AMPopUpViewDelegeate> delegate;
-
+@property(nonatomic, weak) id<AMPopUpViewDelegeate> delegate;
+@property(nonatomic, readonly) NSInteger indexOfSelectedItem;
 -(NSString*)stringValue;
 
 -(void)addItemWithTitle:(NSString*)title;
@@ -34,7 +34,8 @@
 @end
 
 @protocol AMPopUpViewDelegeate <NSObject>
-
+@optional
 -(void)itemSelected:(AMPopUpView*)sender;
+- (void)popupViewWillPopup:(AMPopUpView *)sender;
 
 @end

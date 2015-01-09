@@ -11,16 +11,18 @@
 #import "AMCoreData/AMLiveGroup.h"
 #import "AMCoreData/AMLiveUser.h"
 #import "AMTimerTabVC.h"
+#import "UIFramework/AMPopUpView.h"
 
 static NSString * const PingCommandFormat =
     @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
 
 
-@interface AMTimerTableCellVC ()
-@property (weak, nonatomic) IBOutlet NSComboBox *groupCombox;
+@interface AMTimerTableCellVC () <AMPopUpViewDelegeate>
+@property (weak) IBOutlet AMPopUpView *groupPopup;
 @property (weak, nonatomic) IBOutlet NSTextField *bpmLabel;
 @property (weak, nonatomic) IBOutlet NSTextField *delayLabel;
-@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
+@property (weak) IBOutlet AMPopUpView *slowdownPopup;
+//@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
 @property (weak, nonatomic) IBOutlet NSTextField *upperNumber;
 @property (weak, nonatomic) IBOutlet NSTextField *lowNumber;
 @property (weak, nonatomic) IBOutlet NSTextField *metronomeLabel;
@@ -37,8 +39,12 @@ static NSString * const PingCommandFormat =
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.groupCombox selectItemAtIndex:0];
-    [self.slowdownCombox selectItemAtIndex:2];
+    self.groupPopup.delegate = self;
+    [self.groupPopup addItemWithTitle:@"----------"];
+    [self.groupPopup selectItemAtIndex:0];
+    self.slowdownPopup.delegate = self;
+    [self.slowdownPopup addItemsWithTitles:@[ @"1", @"1/2", @"1/4", @"1/8", @"1/16", @"1/32" ]];
+    [self.slowdownPopup selectItemWithTitle:@"1/4"];
 }
 
 #pragma mark - NSCombofBoxDataSource
@@ -56,27 +62,30 @@ static NSString * const PingCommandFormat =
         return [self.groups[index - 1] groupName];
 }
 
-#pragma mark - NSComboBoxDelegate
+#pragma mark - AMPopupViewDelegate
 
-- (void)comboBoxWillPopUp:(NSNotification *)notification
+- (void)popupViewWillPopup:(AMPopUpView *)popupView
 {
-    if (notification.object == self.groupCombox) {
+    if (popupView == self.groupPopup) {
         self.groups = [[AMCoreData shareInstance] myMergedGroupsInFlat];
         self.isLocalGroup = NO;
         if (!self.groups) {
             self.groups = @[ [[AMCoreData shareInstance] myLocalLiveGroup] ];
             self.isLocalGroup = YES;
         }
-        [self.groupCombox reloadData];
+        [self.groupPopup removeAllItems];
+        NSMutableArray *groupNames = [NSMutableArray array];
+        [groupNames addObject:@"----------"];
+        [groupNames addObjectsFromArray:[self.groups valueForKeyPath:@"groupName"]];
     }
 }
 
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification
+- (void)itemSelected:(AMPopUpView *)popupView
 {
-    if (notification.object == self.slowdownCombox)
+    if (popupView == self.slowdownPopup)
         [self resetTimer];
-    else if (notification.object == self.groupCombox)
-        [self groupDidChange];
+//    else if (notification.object == self.groupCombox)
+//        [self groupDidChange];
 }
 
 - (void)groupDidChange
@@ -84,8 +93,8 @@ static NSString * const PingCommandFormat =
     self.delayLabel.stringValue = @"---- ms";
     self.bpmLabel.stringValue = @"60";
     [self resetTimer];
-    if (self.isOnLine && self.groupCombox.indexOfSelectedItem > 0) {
-        AMLiveGroup *group = self.groups[self.groupCombox.indexOfSelectedItem - 1];
+    if (self.isOnLine && self.groupPopup.indexOfSelectedItem > 0) {
+        AMLiveGroup *group = self.groups[self.groupPopup.indexOfSelectedItem - 1];
         if ([self groupIsLocal:group])
             return;
         AMLiveUser *user = [group.users lastObject];
@@ -188,7 +197,8 @@ static NSString * const PingCommandFormat =
 
 - (NSTimeInterval)metronomeTimeInterval
 {
-    float timeUnit = self.bpmLabel.stringValue.floatValue / (1 << self.slowdownCombox.indexOfSelectedItem);
+    NSInteger indexOfSelectedItem = self.slowdownPopup.indexOfSelectedItem;
+    float timeUnit = self.bpmLabel.stringValue.floatValue / (1 << self.slowdownPopup.indexOfSelectedItem);
     return 60.0 / (timeUnit * self.lowNumber.floatValue);
 }
 

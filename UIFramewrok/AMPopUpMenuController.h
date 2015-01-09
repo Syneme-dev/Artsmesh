@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMPopUpMenuItem.h"
+
 @protocol AMPopUpMenuDelegate;
 
 @interface AMPopUpMenuController : NSViewController
@@ -27,7 +29,7 @@
 
 @protocol AMPopUpMenuDelegate <NSObject>
 
--(void)itemSelected:(NSString*)itemTitle;
+-(void)itemSelected:(AMPopUpMenuItem *)item;
 -(CGFloat)popupItemWidth;
 -(CGFloat)popupItemHeight;
 

@@ -63,7 +63,7 @@
 #site_nav_global_primary{
     background: transparent !important;
     top:10px !important;
-    z-index: 1 !important;
+    z-index: 3 !important;
     width: 500px !important;
     right: 4px !important;
 }

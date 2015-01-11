@@ -27,9 +27,10 @@
 @property (weak) id<AMOSCClientDelegate> delegate;
 //@property (weak) AMOSCGroupMessageMonitorController* monitorController;
 
--(BOOL)startOscClient;
+-(void)startOscClient;
 -(void)stopOscClient;
 
+-(BOOL)isStated;
 
 -(void)setForwardAddr:(NSString *)addr port:(NSString *)port;
 -(void)clearForwardAddr;

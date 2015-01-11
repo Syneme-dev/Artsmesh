@@ -17,8 +17,5 @@
 @property (weak)NSPopover* owner;
 @property int maxChannels;
 
--(void)initParameters;
--(void)initPortOffset;
-
 
 @end

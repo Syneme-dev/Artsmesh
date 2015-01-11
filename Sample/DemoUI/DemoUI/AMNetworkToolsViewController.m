@@ -16,19 +16,7 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 
-NSString * const kAMOSCServerTitle  = @"OSC SERVER";
-NSString * const kAMOSCClientTitle  = @"OSC CLIENT";
-NSString * const kAMJackAudioTitle  = @"JACK AUDIO";
-NSString * const kAMAMServerTitle   = @"AMSERVER";
-NSString * const kAMArtsmeshTitle   = @"ARTSMESH";
 
-
-NSString * const kAMOSCServerFile   = @"OSC Server.log";
-NSString * const kAMOSCClientFile   = @"OSC Client.log";
-NSString * const kAMJackAudioFile   = @"Jack Audio.log";
-NSString * const kAMAMServerFile    = @"AMServer.log";
-NSString * const kAMArtsmeshFile    = @"Artsmesh.log";
-NSString * const kAMJackTripFile    = @"Jack Trip";
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>

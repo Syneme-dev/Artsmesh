@@ -13,10 +13,12 @@
     BOOL canDraw;
 }
 
+@synthesize drawTriangle;
 -(void) awakeFromNib
 {
     const GLint on = 1;
     [[self openGLContext] setValues:&on forParameter:NSOpenGLCPSwapInterval];
+    drawTriangle = YES;
 }
 
 - (BOOL)acceptsFirstResponder
@@ -38,12 +40,12 @@
 
 static void drawAnObject ()
 {
-    glColor3f(1.0f, 0.85f, 0.35f);
+    glColor3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_TRIANGLES);
     {
-        glVertex3f(  0.0,  0.6, 0.0);
-        glVertex3f( -0.2, -0.3, 0.0);
-        glVertex3f(  0.2, -0.3 ,0.0);
+        glVertex3f(  0.8,  -0.8, 0.0);
+        glVertex3f(  1,     -0.8, 0.0);
+        glVertex3f(  0.9,     -1 ,0.0);
     }
     glEnd();
 }
@@ -152,12 +154,26 @@ static void drawAnObject ()
         //       [image release];
     }
     
+   
+    
     // Restore OpenGL states
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
     
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
+    
+    if(!image && drawTriangle){
+        glColor3f(61/255.0, 75/255.0, 93/255.0);
+        glBegin(GL_TRIANGLES);
+        {
+            glVertex3f(  1,  -0.8, 0.0);
+            glVertex3f(  1,     -1, 0.0);
+            glVertex3f(  0.8,     -1 ,0.0);
+        }
+        glEnd();
+    }
+
     
     glFlush();
     

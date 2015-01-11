@@ -124,6 +124,10 @@
 -(void)dealloc{
     //To avoid a error when closing
     [self.archiveWebView.mainFrame stopLoading];
+    
+    [self.archiveWebView setFrameLoadDelegate:nil];
+    [self.archiveWebView setPolicyDelegate:nil];
+    [self.archiveWebView setUIDelegate:nil];
 }
 
 -(void)webViewClose:(WebView *)sender
@@ -177,7 +181,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *mapURL = [NSURL URLWithString:
-                     [NSString stringWithFormat:@"%@?fromMac=true",statusNetURLString ]];
+                     [NSString stringWithFormat:@"%@/app/archive-events.html?fromMac=true",statusNetURLString ]];
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
     
@@ -193,15 +197,6 @@
     
     _archiveFloatWindow = fpc.containerWindow;
     _archiveFloatWindow.level = NSFloatingWindowLevel;
-}
-
-- (WebView *)embedYouTube:(NSString *)urlString frame:(NSRect)frame {
-    
-    self.youTubeVideo = [[WebView alloc] initWithFrame:frame];
-    [[self.youTubeVideo mainFrame] loadRequest:[NSURLRequest requestWithURL: [NSURL URLWithString:urlString]]];
-    [self.youTubeVideo setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-    return self.youTubeVideo;
 }
 
 
@@ -343,8 +338,6 @@
 
 -(void)elementClicked:(NSString *)userName{
     [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
-    
-    //[_floatPanelViewController.panelContent addSubview:[self embedYouTube:@"https://www.youtube.com/embed/gm9a28J67E4" frame:NSMakeRect(0, 0, _floatPanelViewController.panelContent.frame.size.width, _floatPanelViewController.panelContent.frame.size.height)]];
     
     [self loadProfileWebView:userName];
     

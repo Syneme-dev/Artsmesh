@@ -8,6 +8,12 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerTabVC">
             <connections>
                 <outlet property="addButton" destination="dnh-Jy-i7f" id="xKy-f1-427"/>
+                <outlet property="arrowLabel" destination="OTx-Bq-7au" id="PER-jC-hfH"/>
+                <outlet property="hoursTextField" destination="2mo-G4-1aU" id="xGu-wj-zAt"/>
+                <outlet property="minutesTextField" destination="U9L-t6-zWC" id="hhe-u5-MN6"/>
+                <outlet property="modePopup" destination="iH4-LO-rUe" id="cQq-Y6-LV2"/>
+                <outlet property="playButton" destination="gn0-F7-0bE" id="2EF-5D-lOU"/>
+                <outlet property="secondsTextField" destination="Yyp-FS-8Ti" id="KeQ-Qy-4Ve"/>
                 <outlet property="tableView" destination="nRo-ag-ym2" id="vP4-UM-Uem"/>
                 <outlet property="timerLabel" destination="rxU-jt-d78" id="Imz-xQ-7Qz"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -51,52 +57,6 @@
                     <rect key="frame" x="233" y="580" width="60" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SEC" id="RDW-c1-iQl">
                         <font key="font" metaFont="system" size="24"/>
-                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTx-Bq-7au">
-                    <rect key="frame" x="297" y="580" width="24" height="32"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="↑" id="Lmr-CT-CXA">
-                        <font key="font" metaFont="system" size="24"/>
-                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FiO-Q7-op8">
-                    <rect key="frame" x="358" y="580" width="164" height="34"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="00 : 00 : 00" id="VIG-Nh-aXU">
-                        <font key="font" metaFont="system" size="28"/>
-                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-eB-GRW">
-                    <rect key="frame" x="526" y="580" width="141" height="32"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Countdown" id="Q0U-Nb-aBY">
-                        <font key="font" metaFont="system" size="24"/>
-                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N9T-Yo-RHb">
-                    <rect key="frame" x="528" y="639" width="99" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="nwM-kA-7SJ">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Countdown</string>
-                            <string>Duration</string>
-                            <string>Relative</string>
-                            <string>Absolute</string>
-                        </objectValues>
-                    </comboBoxCell>
-                </comboBox>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3G-2x-JqU">
-                    <rect key="frame" x="381" y="644" width="118" height="19"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mode:" id="L8M-1U-jUE">
-                        <font key="font" metaFont="system" size="16"/>
                         <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -145,6 +105,87 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTx-Bq-7au">
+                    <rect key="frame" x="297" y="580" width="24" height="32"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="↓" id="Lmr-CT-CXA">
+                        <font key="font" metaFont="system" size="24"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iH4-LO-rUe" customClass="AMPopUpView">
+                    <rect key="frame" x="539" y="640" width="117" height="26"/>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ekT-fR-OZ6">
+                    <rect key="frame" x="536" y="580" width="15" height="32"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="QE3-HZ-pxS">
+                        <font key="font" metaFont="system" size="24"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heA-UD-S4r">
+                    <rect key="frame" x="597" y="579" width="15" height="32"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="eXj-0M-dZZ">
+                        <font key="font" metaFont="system" size="24"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2mo-G4-1aU" customClass="AMFoundryFontView">
+                    <rect key="frame" x="490" y="580" width="42" height="34"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="center" title="00" id="aMi-Hi-89e">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" localizesFormat="NO" allowsFloats="NO" usesGroupingSeparator="NO" paddingCharacter="0" formatWidth="2" minimumIntegerDigits="0" maximumIntegerDigits="42" id="aHk-l4-nmh">
+                            <real key="minimum" value="0.0"/>
+                            <real key="maximum" value="24"/>
+                            <metadata>
+                                <real key="inspectorSampleValue" value="0.0"/>
+                            </metadata>
+                        </numberFormatter>
+                        <font key="font" metaFont="system" size="28"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="MxT-y7-Ak1"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U9L-t6-zWC" customClass="AMFoundryFontView">
+                    <rect key="frame" x="551" y="580" width="42" height="34"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="center" title="00" id="wXr-Yw-pHd">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" localizesFormat="NO" allowsFloats="NO" usesGroupingSeparator="NO" paddingCharacter="0" formatWidth="2" minimumIntegerDigits="0" maximumIntegerDigits="42" id="mLT-1I-gZC">
+                            <real key="minimum" value="0.0"/>
+                            <real key="maximum" value="60"/>
+                            <metadata>
+                                <real key="inspectorSampleValue" value="2"/>
+                            </metadata>
+                        </numberFormatter>
+                        <font key="font" metaFont="system" size="28"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="xyT-SP-OPW"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yyp-FS-8Ti" customClass="AMFoundryFontView">
+                    <rect key="frame" x="616" y="580" width="42" height="34"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="center" title="00" placeholderString="00" id="v5E-6m-JLA">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" localizesFormat="NO" allowsFloats="NO" usesGroupingSeparator="NO" paddingCharacter="0" formatWidth="2" minimumIntegerDigits="0" maximumIntegerDigits="42" id="5np-3l-WFN">
+                            <real key="minimum" value="0.0"/>
+                            <real key="maximum" value="60"/>
+                            <metadata>
+                                <real key="inspectorSampleValue" value="0.0"/>
+                            </metadata>
+                        </numberFormatter>
+                        <font key="font" metaFont="system" size="28"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="OiV-Db-egZ"/>
+                    </connections>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ZrX-P9-JHy"/>

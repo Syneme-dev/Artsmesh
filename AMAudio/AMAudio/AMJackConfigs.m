@@ -8,6 +8,7 @@
 
 #import "AMJackConfigs.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMLogger/AMLogger.h"
 
 @implementation AMJackConfigs
 
@@ -91,10 +92,9 @@
         strcat(stringa, " -m ");
     }
     
-    //strcat(stringa, " >/dev/null 2>&1");
-    //NSString* jackdmpLogPath = [NSString stringWithFormat:@" > \"%@/../../../jackdmp.log\"", [NSBundle mainBundle].resourcePath];
-    //const char* szJackdmpLogPath = [jackdmpLogPath cStringUsingEncoding:NSUTF8StringEncoding];
-    //strcat(stringa, szJackdmpLogPath);
+    NSString *jackLog = [NSString stringWithFormat:@" > %@/Jack_Audio.log", AMLogDirectory()];
+    const char *szLogPath = [jackLog cStringUsingEncoding:NSUTF8StringEncoding];
+    strcat(stringa, szLogPath);
     
     NSString* commandLine = [NSString stringWithFormat:@"%s", stringa];
     return commandLine;

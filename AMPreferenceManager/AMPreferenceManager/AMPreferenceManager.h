@@ -30,6 +30,8 @@
 #define Preference_Key_Cluster_Description      @"Preference_Key_Cluster_Description"
 #define Preference_Key_Cluster_FullName         @"Preference_Key_Cluster_FullName"
 #define Preference_Key_Cluster_Project          @"Preference_Key_Cluster_Project"
+#define Preference_Key_Cluster_Project_Descrition   @"Preference_Key_Cluster_Project_Descrition"
+#define Preference_Key_Cluster_HomePage          @"Preference_Key_Cluster_HomePage"
 #define Preference_Key_Cluster_Location         @"Preference_Key_Cluster_Location"
 #define Preference_Key_Cluster_Longitude        @"Preference_Key_Cluster_Longitude"
 #define Preference_Key_Cluster_Latitude         @"Preference_Key_Cluster_Latitude"
@@ -104,6 +106,18 @@
 #define Preference_OSC_Client_GroupPwd     @"Preference_OSC_Client_GroupPwd"
 #define Preference_OSC_Client_MonitorAddr  @"Preference_OSC_Client_MonitorAddr"
 #define Preference_OSC_Client_MonitorPort  @"Preference_OSC_Client_MonitorPort"
+
+
+//////////////////////////Jacktrip Default///////////////////////////////////
+#define Preference_Jacktrip_Role            @"Preference_Jacktrip_Role"
+#define Preference_Jacktrip_ChannelCount    @"Preference_Jacktrip_ChannelCount"
+#define Preference_Jacktrip_QBL             @"Preference_Jacktrip_QBL"
+#define Preference_Jacktrip_PR              @"Preference_Jacktrip_PR"
+#define Preference_Jacktrip_BRR             @"Preference_Jacktrip_BRR"
+#define Preference_Jacktrip_ZeroUnderRun    @"Preference_Jacktrip_ZeroUnderRun"
+#define Preference_Jacktrip_Loopback        @"Preference_Jacktrip_Loopback"
+#define Preference_Jacktrip_Jamlink         @"Preference_Jacktrip_Jamlink"
+#define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
 
 
 #import <Foundation/Foundation.h>

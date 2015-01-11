@@ -66,6 +66,8 @@
              Preference_Cluster_FullName,        Preference_Key_Cluster_FullName,
              Preference_Cluster_Location,        Preference_Key_Cluster_Location,
              Preference_Cluster_Project,         Preference_Key_Cluster_Project,
+             @"this is project description",     Preference_Key_Cluster_Project_Descrition,
+             @"http://www.artsmesh.io",          Preference_Key_Cluster_HomePage,
              Preference_StatusNet_URL,           Preference_Key_StatusNet_URL,
              Preference_Cluster_Latitude,        Preference_Key_Cluster_Latitude,
              Preference_Cluster_Longitude,       Preference_Key_Cluster_Longitude,
@@ -85,6 +87,15 @@
              @"default", Preference_OSC_Client_GroupPwd,
              @"localhost", Preference_OSC_Client_MonitorAddr,
              @"22230", Preference_OSC_Client_MonitorPort,
+             @"Server", Preference_Jacktrip_Role,
+             @"2", Preference_Jacktrip_ChannelCount,
+             @"4",Preference_Jacktrip_QBL,
+             @"16", Preference_Jacktrip_BRR,
+             @"1", Preference_Jacktrip_PR,
+             @"NO", Preference_Jacktrip_ZeroUnderRun,
+             @"NO", Preference_Jacktrip_Loopback,
+             @"NO", Preference_Jacktrip_Jamlink,
+             @"NO", Preference_Jacktrip_UseIpv6,
              @"YES",Preference_Key_General_TopControlBar,
             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
@@ -105,6 +116,7 @@
     AMLiveUser* mySelf = [[AMLiveUser alloc] init];
     mySelf.userid = [AMCommonTools creatUUID];
     mySelf.nickName = [defaults stringForKey:Preference_Key_User_NickName];
+    mySelf.fullName = [defaults stringForKey:Preference_Key_User_FullName];
     mySelf.domain= [defaults stringForKey:Preference_Key_User_Affiliation];
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
@@ -149,6 +161,8 @@
     localGroup.location = [defaults stringForKey:Preference_Key_Cluster_Location];
     localGroup.longitude = [defaults stringForKey:Preference_Key_Cluster_Longitude];
     localGroup.latitude = [defaults stringForKey:Preference_Key_Cluster_Latitude];
+    localGroup.homePage = [defaults stringForKey:Preference_Key_Cluster_HomePage];
+    localGroup.projectDescription = [defaults stringForKey:Preference_Key_Cluster_Project_Descrition];
     localGroup.project = [defaults stringForKey:Preference_Key_Cluster_Project];
     localGroup.busy = NO;
     localGroup.timezoneName = [NSTimeZone systemTimeZone].name;

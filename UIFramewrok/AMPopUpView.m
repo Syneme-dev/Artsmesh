@@ -12,6 +12,7 @@
 @interface AMPopUpView()<AMPopUpMenuDelegate>
 
 @property BOOL mouseEntered;
+@property(nonatomic) NSInteger indexOfSelectedItem;
 
 @end
 
@@ -38,6 +39,7 @@
                                                          blue:(30.0f/255.0f)
                                                         alpha:1];
         _title = @"";
+        _indexOfSelectedItem = -1;
         self.textColor = [NSColor whiteColor];
         self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize];
         
@@ -92,6 +94,10 @@
         return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(popupViewWillPopup:)])
+        [self.delegate popupViewWillPopup:self];
+    
+    
     NSView *popUpView = [self popUpMenuController].view;
     if (popUpView.superview) {
         [popUpView removeFromSuperview];
@@ -127,10 +133,11 @@
     return _popUpMenuController;
 }
 
--(void)itemSelected:(NSString *)itemTitle
+-(void)itemSelected:(AMPopUpMenuItem *)item
 {
     NSString* oldTitle = _title;
-    _title = itemTitle;
+    _title = item.title;
+    self.indexOfSelectedItem = item.index;
     [self removePopUpMenu];
     [self setNeedsDisplay:YES];
     

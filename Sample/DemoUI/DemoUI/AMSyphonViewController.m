@@ -57,6 +57,7 @@ NSString* kNonServer = @"    --    ";
     
 
     [self updateServerList];
+    self.glView.drawTriangle = YES;
 }
 
 -(void)updateServerList

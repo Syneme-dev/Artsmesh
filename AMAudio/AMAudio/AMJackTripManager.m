@@ -82,9 +82,11 @@
     if (cfgs.useIpv6) {
         [commandline appendFormat:@" -V"];
     }
+    
+    NSString *systemLogPath = AMLogDirectory();
 
-    NSString* jackdmpLogPath = [NSString stringWithFormat:@" > \"%@/../jacktrip_%@.log\"", [NSBundle mainBundle].bundlePath, cfgs.clientName];
-    [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jackdmpLogPath];
+    NSString* jacktripLogPath = [NSString stringWithFormat:@" > \"%@/Jacktrip_%@.log\"", systemLogPath, cfgs.clientName];
+    [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jacktripLogPath];
     AMLog(kAMInfoLog, @"AMAudio", @"jack trip command line is %@", commandline);
     
     NSTask* task = [[NSTask alloc] init];

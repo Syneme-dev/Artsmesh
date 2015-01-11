@@ -282,10 +282,17 @@
 - (IBAction)groupNameEdited:(NSTextField *)sender
 {
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:myGroup.groupName]) {
+    
+    if ([myGroup.groupName isEqualToString:sender.stringValue]) {
         return;
     }
     
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_Name];
+        myGroup.groupName = sender.stringValue;
+    }
+
     myGroup.groupName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
@@ -293,8 +300,15 @@
 - (IBAction)groupDescriptionEdited:(NSTextField *)sender
 {
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.description]) {
+    
+    if ([group.debugDescription isEqualToString:sender.stringValue]) {
         return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_Description];
+        group.groupName = sender.stringValue;
     }
     
     group.description = sender.stringValue;
@@ -304,8 +318,14 @@
 - (IBAction)groupFullNameEdited:(NSTextField *)sender
 {
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.fullName]) {
+    if ([group.fullName isEqualToString:sender.stringValue]) {
         return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_FullName];
+        group.fullName = sender.stringValue;
     }
     
     group.fullName = sender.stringValue;
@@ -315,19 +335,67 @@
 - (IBAction)groupProjetctEdited:(NSTextField *)sender
 {
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""] || [sender.stringValue isEqualTo:group.project]) {
+    if ([group.project isEqualToString:sender.stringValue]) {
         return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_Project];
+        group.project = sender.stringValue;
     }
     
     group.project= sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
 }
 
+- (IBAction)projectDesctriptionEdited:(NSTextField *)sender {
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([group.projectDescription isEqualToString:sender.stringValue]) {
+        return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_Project_Descrition];
+        group.projectDescription = sender.stringValue;
+    }
+    
+    group.projectDescription= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+
+- (IBAction)groupHomePageEdited:(NSTextField *)sender {
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([group.homePage isEqualToString:sender.stringValue]) {
+        return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_HomePage];
+        group.homePage = sender.stringValue;
+    }
+    
+    group.homePage= sender.stringValue;
+    [[AMMesher sharedAMMesher] updateGroup];
+}
+
+
 - (IBAction)groupLocationEdited:(NSTextField *)sender
 {
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    if ([sender.stringValue isEqualTo:@""]|| [sender.stringValue isEqualTo:myGroup.location]) {
+    if ([myGroup.location isEqualToString:sender.stringValue]) {
         return;
+    }
+    
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_Location];
+        myGroup.location = sender.stringValue;
     }
     
     [self getCoordinates: sender.stringValue];
@@ -357,7 +425,13 @@
         NSLog(@"Geo data parse JSON error:%@", jsonParsingError.description);
     }
     NSDictionary *results = (NSDictionary*)geoData;
-    NSDictionary *topResult = [[results valueForKey:@"geonames"] objectAtIndex:0];
+    NSArray *geoNames = [results valueForKey:@"geonames"];
+  
+    if (geoNames == nil || [geoNames count] == 0) {
+        return;
+    }
+    
+    NSDictionary *topResult = [geoNames objectAtIndex:0];
     
     if ( [topResult count] >= 1 ) {
         AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;

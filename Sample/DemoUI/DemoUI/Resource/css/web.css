@@ -1,11 +1,9 @@
 
-
 #header{
-/*    display:none;*/
-padding-top:0;
-margin-top:0;
-margin-left:0;
-margin-right:0;
+    padding-top:0 !important;
+    margin-top:0 !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
 }
 #footer{
     display:none;
@@ -31,6 +29,7 @@ margin-right:0;
     width: 600px !important;
     height: 40px  !important;
     padding:0px !important;
+    margin-left: 40px !important;
     
 }
 
@@ -49,8 +48,11 @@ margin-right:0;
 }
 
 #site_contact{
-/*    visibility:hidden;*/
-    display:none;
+    position: absolute !important;
+    margin: 0 !important;
+}
+#site_contact .fn.org{
+    display:none !important;
 }
 #core {
     padding-right: 0px !important;
@@ -60,7 +62,12 @@ margin-right:0;
 
 #site_nav_global_primary{
     background: transparent !important;
-    top:10px;
-    z-index: 1;
-    width: 1050px;
+    top:10px !important;
+    z-index: 1 !important;
+    width: 500px !important;
+    right: 4px !important;
+}
+
+#nav_doc_google{
+    display: none !important;
 }

@@ -551,7 +551,7 @@
 }
 
 - (AMPanelViewController *)loadFOAFPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SOCIAL" width:UI_defaultPanelWidth* 2.5 height:UI_defaultPanelHeight  relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SOCIAL" width:UI_defaultPanelWidth* 3.5 height:UI_defaultPanelHeight  relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth* 2, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;

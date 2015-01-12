@@ -181,7 +181,7 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *mapURL = [NSURL URLWithString:
-                     [NSString stringWithFormat:@"%@/app/archive-events.html?fromMac=true",statusNetURLString ]];
+                     [NSString stringWithFormat:@"%@/app/archive-events.php?fromMac=true",statusNetURLString ]];
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
     

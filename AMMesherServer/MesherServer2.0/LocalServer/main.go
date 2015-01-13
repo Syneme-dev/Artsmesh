@@ -43,6 +43,8 @@ type AMRequestGroup struct{
 	Busy		string
     ProjectDescription string
     HomePage    string
+    Broadcasting string
+    BroadcastingURL string
 }
 
 type AMRequestUser struct{
@@ -320,6 +322,8 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
     reqGroup.ProjectDescription = strings.Join(r.Form["projectDescription"], "")
     reqGroup.HomePage = strings.Join(r.Form["homepage"], "")
+    reqGroup.Broadcasting = strings.Join(r.Form["broadcasting"], "")
+    reqGroup.BroadcastingURL = strings.Join(r.Form["broadcastingURL"], "")
 	
 	reqGroup.Busy = strings.Join(r.Form["busy"], "")
 	
@@ -340,6 +344,8 @@ func register_group(w http.ResponseWriter, r *http.Request){
 	fmt.Println("busy:", reqGroup.Busy)
     fmt.Println("groupDescription", reqGroup.ProjectDescription)
     fmt.Println("homepage", reqGroup.HomePage)
+    fmt.Println("broadcasting", reqGroup.Broadcasting)
+    fmt.Println("broadcastingURL", reqGroup.BroadcastingURL)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand

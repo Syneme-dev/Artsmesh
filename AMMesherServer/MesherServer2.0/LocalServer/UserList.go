@@ -72,6 +72,8 @@ func UpdataGroup(group *AMRequestGroup)(string){
 		g_store.groupData.Busy = group.Busy
         g_store.groupData.ProjectDescription = group.ProjectDescription
         g_store.groupData.HomePage = group.HomePage
+        g_store.groupData.Broadcasting = group.Broadcasting
+        g_store.groupData.BroadcastingURL = group.BroadcastingURL
 		
 		makeSnapShot()
 		return "ok"
@@ -210,6 +212,8 @@ func makeSnapShot(){
 	newSnapShot.GroupData.Busy = g_store.groupData.Busy
     newSnapShot.GroupData.ProjectDescription = g_store.groupData.ProjectDescription
     newSnapShot.GroupData.HomePage = g_store.groupData.HomePage
+    newSnapShot.GroupData.Broadcasting = g_store.groupData.Broadcasting
+    newSnapShot.GroupData.BroadcastingURL = g_store.groupData.BroadcastingURL
 
 	
 		

@@ -70,6 +70,16 @@
     }else if(self.busy == NO){
         [dict setObject:@"NO" forKey:@"busy"];
     }
+    
+    if(self.broadcasting){
+        [dict setObject:@"YES" forKey:@"broadcasting"];
+    }else{
+        [dict setObject:@"NO" forKey:@"broadcasting"];
+    }
+    
+    if (self.broadcastingURL) {
+        dict[@"broadcastingURL"] = self.broadcastingURL;
+    }
 
     return dict;
 }
@@ -91,6 +101,8 @@
     group.homePage = dict[@"HomePage"];
     group.projectDescription = dict[@"ProjectDescription"];
     group.password = @"";
+    group.broadcasting = [dict[@"Broadcasting"] boolValue];
+    group.broadcastingURL = dict[@"BroadcastingURL"];
     return group;
 }
 

@@ -22,6 +22,8 @@ type AMRequestGroup struct{
 	TimezoneName	string
 	ProjectDescription string
 	HomePage	string
+	Broadcasting string
+	BroadcastingURL string
 }
 
 type AMRequestUser struct{
@@ -232,6 +234,8 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	reqGroup.ProjectDescription = strings.Join(r.Form["ProjectDescription"], "")
 	reqGroup.HomePage = strings.Join(r.Form["HomePage"], "")
+	reqGroup.Broadcasting = strings.Join(r.Form["Broadcasting"], "")
+	reqGroup.BroadcastingURL = strings.Join(r.Form["BroadcastingURL"], "")
 	
 	fmt.Println("")
 	fmt.Println("register_group requst information ---------------------")
@@ -250,6 +254,8 @@ func addGroup(w http.ResponseWriter, r *http.Request){
 	fmt.Println("timezoneName:", reqGroup.TimezoneName)
 	fmt.Println("ProjectDescription:", reqGroup.ProjectDescription)
 	fmt.Println("HomePage:", reqGroup.HomePage)
+	fmt.Println("Broadcasting:", reqGroup.Broadcasting)
+	fmt.Println("BroadcastingURL:", reqGroup.BroadcastingURL)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand
@@ -282,6 +288,8 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	reqGroup.TimezoneName = strings.Join(r.Form["timezoneName"], "")
 	reqGroup.ProjectDescription = strings.Join(r.Form["ProjectDescription"], "")
 	reqGroup.HomePage = strings.Join(r.Form["HomePage"], "")
+	reqGroup.Broadcasting = strings.Join(r.Form["Broadcasting"], "")
+	reqGroup.BroadcastingURL = strings.Join(r.Form["BroadcastingURL"], "")
 	
 	fmt.Println("")
 	fmt.Println("group_update requst information ---------------------")
@@ -300,6 +308,8 @@ func updateGroup(w http.ResponseWriter, r *http.Request){
 	fmt.Println("timezoneName:", reqGroup.TimezoneName)
 	fmt.Println("ProjectDescription:", reqGroup.ProjectDescription)
 	fmt.Println("HomePage:", reqGroup.HomePage)
+	fmt.Println("Broadcasting:", reqGroup.Broadcasting)
+	fmt.Println("BroadcastingURL:", reqGroup.BroadcastingURL)
 	fmt.Println("end http requst information ---------------------")
 	
 	var command GroupUserCommand

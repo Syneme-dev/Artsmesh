@@ -71,6 +71,9 @@
     AMLog(kAMInfoLog, @"AMOscGroups", commandline);
     
     [_task launch];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AM_OSC_CLIENT_STARTED_NOTIFICATION object:nil];
 }
 
 -(BOOL)isStated
@@ -91,10 +94,15 @@
     AMOSCMonitor *monitor = [AMOSCMonitor shareMonitor ];
     [monitor stopListening];
     
-    kill(_task.processIdentifier, SIGINT);
-    _task = nil;
+    if (_task != nil) {
+        kill(_task.processIdentifier, SIGINT);
+    }
     
+    _task = nil;
     system("killall OscGroupClient >/dev/null");
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AM_OSC_CLIENT_STOPPED_NOTIFICATION object:nil];
 }
 
 

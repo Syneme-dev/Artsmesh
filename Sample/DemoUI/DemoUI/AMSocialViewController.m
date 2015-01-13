@@ -148,26 +148,44 @@ typedef enum {
 }
 
 
+
+
+/*!
+ @method webView:didReceiveIcon:forFrame:
+ @abstract Notifies the delegate that a page icon image for a frame has been received
+ @param webView The WebView sending the message
+ @param image The icon image. Also known as a "favicon".
+ @param frame The frame for which a page icon has been received
+ */
+
+
+//- (void)webView:(WebView *)webView didCreateJavaScriptContext:(JSContext *)context forFrame:(WebFrame *)frame{
+//    NSString *moveSearchJs = @"$('#site_nav_global_primary').insertBefore('#site_nav_local_views')";
+//    [self.socialWebTab stringByEvaluatingJavaScriptFromString:
+//     moveSearchJs];
+//}
+
+
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     NSString *url = sender.mainFrameURL;
 
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 
-    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
-    {
-        path = [path stringByAppendingString:@"/Contents/Resources/info.css"];
-    }
-    else if ([url hasPrefix:statusNetURL]) {
+//    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
+//    {
+//        path = [path stringByAppendingString:@"/Contents/Resources/info.css"];
+//    }
+//    else if ([url hasPrefix:statusNetURL]) {
         path = [path stringByAppendingString:@"/Contents/Resources/web.css"];
-    }
-    else {
-        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
-    }
+//    }
+//    else {
+//        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
+//    }
     self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
-    [self.socialWebTab stringByEvaluatingJavaScriptFromString:
-     moveSearchJs];
+//    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
+    
+   
 
     
     

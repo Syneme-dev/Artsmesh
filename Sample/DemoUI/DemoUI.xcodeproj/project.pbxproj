@@ -14,6 +14,7 @@
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */; };
 		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
+		209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */; };
 		26015407196E340500045A55 /* AMLiveGroupDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26015406196E340500045A55 /* AMLiveGroupDataSource.m */; };
 		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
 		2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2602038419809E2C0013687A /* AMUserLogonViewController.xib */; };
@@ -295,6 +296,8 @@
 		2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTableCellVC.h; sourceTree = "<group>"; };
 		2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerTableCellVC.m; sourceTree = "<group>"; };
 		2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTableCellVC.xib; sourceTree = "<group>"; };
+		209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMetronomeBackgroundView.h; sourceTree = "<group>"; };
+		209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMetronomeBackgroundView.m; sourceTree = "<group>"; };
 		26015405196E340500045A55 /* AMLiveGroupDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupDataSource.h; sourceTree = "<group>"; };
 		26015406196E340500045A55 /* AMLiveGroupDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupDataSource.m; sourceTree = "<group>"; };
 		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
@@ -753,6 +756,8 @@
 				CE5954821A3E821F00676D12 /* AMTimerTabVC.h */,
 				CE5954831A3E821F00676D12 /* AMTimerTabVC.m */,
 				CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */,
+				209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */,
+				209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */,
 				2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */,
 				2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */,
 				2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */,
@@ -1455,6 +1460,7 @@
 				26AE28CC199DDADC00686E66 /* AMGroupOutlineView.m in Sources */,
 				2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */,
 				CE486AAE1A280CB900D35B82 /* AMVideoMixerViewController.m in Sources */,
+				209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */,
 				2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
 				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import <WebKit/WebKit.h>
 
 @interface AMLiveMapProgramContentView : NSView
 
@@ -18,7 +19,8 @@
 @property double indentMargin;
 
 @property NSRect curSize;
-
+ 
+@property WebView *liveVideoStream;
 @property NSMutableArray *allFields;
 
 - (void)fillContent:(AMLiveGroup *)theGroup;

@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMLiveMapProgramViewController">
             <connections>
+                <outlet property="liveIcon" destination="8YW-F7-KhP" id="FsV-Ol-hmj"/>
                 <outlet property="scrollView" destination="eaM-6q-iE6" id="V3M-dp-GhW"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>

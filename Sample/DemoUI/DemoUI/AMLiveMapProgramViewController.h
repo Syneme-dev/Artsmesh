@@ -15,6 +15,7 @@
 @property (strong) IBOutlet NSScrollView *descScrollView;
 
 @property (strong) IBOutlet NSScrollView *scrollView;
+@property (strong) IBOutlet NSImageView *liveIcon;
 
 @property AMLiveGroup *group;
 

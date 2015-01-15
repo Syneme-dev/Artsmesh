@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelGroupCellController">
             <connections>
+                <outlet property="broadcastingBtn" destination="Wdi-mF-1NZ" id="bDu-4G-vbF"/>
                 <outlet property="infoBtn" destination="1jr-fh-Ix4" id="g36-iE-JhT"/>
                 <outlet property="leaveBtn" destination="M05-DM-bnQ" id="4TM-12-WtP"/>
-                <outlet property="lockBtn" destination="Wdi-mF-1NZ" id="1mp-mg-1df"/>
                 <outlet property="mergeBtn" destination="apw-1e-TPG" id="hOb-94-JqT"/>
                 <outlet property="messageBtn" destination="zYQ-u4-bMc" id="kcF-r3-oSn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="MHe-mr-59q"/>
@@ -99,7 +99,7 @@
                         <constraint firstAttribute="width" constant="20" id="8pD-gU-Llc"/>
                         <constraint firstAttribute="height" constant="20" id="lz3-8T-iPf"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_lock" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="y5X-Aw-HvV">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="group_broadcast" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="y5X-Aw-HvV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -131,9 +131,9 @@
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="SideBar_group_h" width="40" height="40"/>
+        <image name="group_broadcast" width="10" height="10"/>
         <image name="group_chat" width="10" height="10"/>
         <image name="group_exit" width="10" height="10"/>
-        <image name="group_lock" width="10" height="10"/>
         <image name="usergroup_info" width="7" height="7"/>
     </resources>
 </document>

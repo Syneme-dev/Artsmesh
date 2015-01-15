@@ -65,6 +65,8 @@ func InitGroupList(){
 	rootGroup.groupData.TimezoneName = ""
 	rootGroup.groupData.ProjectDescription = ""
 	rootGroup.groupData.HomePage = ""
+	rootGroup.groupData.Broadcasting = ""
+	rootGroup.groupData.BroadcastingURL = ""
 	rootGroup.userData = nil;
 	rootGroup.subGroups = make(map[string]*GroupNode, 100)
 
@@ -117,6 +119,8 @@ func AddNewGroup(group *AMRequestGroup, superGroupId string)(string){
 	newGroup.groupData.TimezoneName = group.TimezoneName
 	newGroup.groupData.ProjectDescription = group.ProjectDescription
 	newGroup.groupData.HomePage = group.HomePage
+	newGroup.groupData.Broadcasting = group.Broadcasting
+	newGroup.groupData.BroadcastingURL = group.BroadcastingURL
 	newGroup.userData = make(map[string]*UserNode, 100)
 	newGroup.subGroups = make(map[string]*GroupNode, 10)
 	
@@ -198,6 +202,8 @@ func UpdataGroup(ug *AMRequestGroup)(string){
 	group.groupData.TimezoneName = ug.TimezoneName
 	group.groupData.ProjectDescription = ug.ProjectDescription
 	group.groupData.HomePage = ug.HomePage
+	group.groupData.Broadcasting = ug.Broadcasting
+	group.groupData.BroadcastingURL = ug.BroadcastingURL
 	
 	makeSnapShot()
 	return "ok"
@@ -546,6 +552,8 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 	dtoGroup.GroupData.TimezoneName = group.groupData.TimezoneName
 	dtoGroup.GroupData.ProjectDescription = group.groupData.ProjectDescription
 	dtoGroup.GroupData.HomePage = group.groupData.HomePage
+	dtoGroup.GroupData.Broadcasting = group.groupData.Broadcasting
+	dtoGroup.GroupData.BroadcastingURL = group.groupData.BroadcastingURL
 	
 	for _, v := range group.userData{
 		u := new(AMRequestUser)

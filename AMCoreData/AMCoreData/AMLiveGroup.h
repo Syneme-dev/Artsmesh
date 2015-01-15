@@ -25,6 +25,8 @@
 @property (nonatomic) NSString* latitude;
 @property (nonatomic) NSString* timezoneName;
 @property (nonatomic) BOOL busy;
+@property (nonatomic) BOOL broadcasting;
+@property (nonatomic) NSString *broadcastingURL;
 
 -(NSMutableDictionary*)dictWithoutUsers;
 +(id)AMGroupFromDict:(NSDictionary*)dict;

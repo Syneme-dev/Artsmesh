@@ -146,6 +146,14 @@ static NSString * const PingCommandFormat =
                                                  selector:@selector(stopMetronome:)
                                                      name:AMTimerStopNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pauseMetronome:)
+                                                     name:AMTimerPauseNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(resumeMetronome:)
+                                                     name:AMTimerResumeNotification
+                                                   object:nil];
     } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
@@ -170,6 +178,24 @@ static NSString * const PingCommandFormat =
 - (void)stopMetronome:(NSNotification *)notification
 {
     [self.timer invalidate];
+}
+
+- (void)pauseMetronome:(NSNotification *)notification
+{
+    [self.timer invalidate];
+}
+
+- (void)resumeMetronome:(NSNotification *)notification
+{
+    NSTimeInterval duration = [notification.userInfo[@"Duration"] floatValue];
+    NSInteger metronomeValue = ((NSInteger)duration) % self.upperNumber.intValue + 1;
+    self.metronomeLabel.stringValue = @(metronomeValue).stringValue;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
+                                                  target:self
+                                                selector:@selector(incrementMetronome)
+                                                userInfo:nil
+                                                 repeats:YES];
+    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
 }
 
 - (void)incrementMetronome

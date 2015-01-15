@@ -19,6 +19,7 @@
 #define AM_OSC_NOTIFICATION @"AM_OSC_NOTIFICATION"
 #define AM_OSC_TIMER_START @"/Artsmesh/Timer/Start"
 #define AM_OSC_TIMER_STOP  @"/Artsmesh/Timer/Stop"
-
+#define AM_OSC_TIMER_PAUSE  @"/Artsmesh/Timer/Pause"
+#define AM_OSC_TIMER_RESUME  @"/Artsmesh/Timer/Resume"
 
 #endif

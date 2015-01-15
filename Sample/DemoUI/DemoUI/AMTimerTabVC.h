@@ -10,6 +10,8 @@
 
 extern NSString * const AMTimerStartNotification;
 extern NSString * const AMTimerStopNotification;
+extern NSString * const AMTimerPauseNotification;
+extern NSString * const AMTimerResumeNotification;
 
 @interface AMTimerTabVC : NSViewController
 @end

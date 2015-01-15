@@ -14,6 +14,8 @@
 
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
+NSString * const AMTimerPauseNotification = @"AMTimerPauseNotification";
+NSString * const AMTimerResumeNotification = @"AMTimerResumeNotification";
 
 typedef enum : NSInteger {
     AMTimerCountdownMode,
@@ -21,6 +23,12 @@ typedef enum : NSInteger {
     AMTimerRelativeMode,
     AMTimerAbsoluteMode
 } AMTimerMode;
+
+typedef enum : NSInteger {
+    AMTimerStateStopped,
+    AMTimerStateRunning,
+    AMTimerStatePaused
+} AMTimerState;
 
 
 @interface AMTimerTabVC () <NSTableViewDataSource, NSTableViewDelegate,
@@ -32,16 +40,24 @@ typedef enum : NSInteger {
 }
 
 @property (weak) IBOutlet AMPopUpView *modePopup;
-@property (weak) IBOutlet NSTextField *hoursTextField;
-@property (weak) IBOutlet NSTextField *minutesTextField;
-@property (weak) IBOutlet NSTextField *secondsTextField;
-@property (nonatomic) NSTimeInterval timeInterval;
+
+@property (weak) IBOutlet NSTextField *leftHoursTF;
+@property (weak) IBOutlet NSTextField *leftMinutesTF;
+@property (weak) IBOutlet NSTextField *leftSecondsTF;
+@property (nonatomic) NSArray *leftTimeTFs;
+
+@property (weak) IBOutlet NSTextField *rightHoursTF;
+@property (weak) IBOutlet NSTextField *rightMinutesTF;
+@property (weak) IBOutlet NSTextField *rightSecondsTF;
+@property (nonatomic) NSArray *rightTimeTFs;
+
 @property (weak) IBOutlet NSButton *addButton;
-@property (weak) IBOutlet NSTextField *timerLabel;
 @property (nonatomic) NSTimer *timer;
+@property (nonatomic) AMTimerState timerState;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (nonatomic) NSMutableArray *tableCellControllers;
 @property (weak) IBOutlet NSButton *playButton;
+@property (weak) IBOutlet NSButton *stopButton;
 @property (weak) IBOutlet NSTextField *arrowLabel;
 @end
 
@@ -55,6 +71,7 @@ typedef enum : NSInteger {
                             value:[NSColor lightGrayColor]
                             range:NSMakeRange(0, attributedTitle.length)];
     self.addButton.attributedTitle = attributedTitle;
+    self.timerState = AMTimerStateStopped;
     self.modePopup.delegate = self;
     [self.modePopup addItemsWithTitles:@[ @"Countdown", @"Duration", @"Relative", @"Absolute" ]];
     [self.modePopup selectItemAtIndex:1];
@@ -67,12 +84,21 @@ typedef enum : NSInteger {
 - (void)handleOSCMessage:(NSNotification *)notification
 {
     NSString *event = notification.userInfo[AM_OSC_EVENT_TYPE];
-    if ([event isEqualToString:AM_OSC_TIMER_START] && self.playButton.state == NSOffState) {
-        self.playButton.state = NSOnState;
-        [self toggleTimer:self];
-    } else if ([event isEqualToString:AM_OSC_TIMER_STOP] && self.playButton.state == NSOnState) {
-        self.playButton.state = NSOffState;
-        [self toggleTimer:self];
+    
+    if ([event isEqualToString:AM_OSC_TIMER_STOP]) {
+        [self stopTimer:self];
+        return;
+    }
+    
+    NSDictionary *stateCheckingTable = @{
+         AM_OSC_TIMER_START :   @(AMTimerStateStopped),
+         AM_OSC_TIMER_PAUSE :   @(AMTimerStateRunning),
+         AM_OSC_TIMER_RESUME :  @(AMTimerStatePaused)
+    };
+    
+    NSNumber *requiredState = stateCheckingTable[event];
+    if (requiredState && requiredState.integerValue == self.timerState) {
+        [self nextTimerState:self];
     }
 }
 
@@ -81,38 +107,79 @@ typedef enum : NSInteger {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AM_OSC_NOTIFICATION object:nil];
 }
 
-- (NSTimeInterval)timeInterval
+- (NSTimeInterval)timeInterval:(NSArray *)tfs
 {
-    return self.hoursTextField.intValue * 3600.0 + self.minutesTextField.intValue * 60.0 +
-            self.secondsTextField.intValue;
+    return [tfs[0] intValue] * 3600.0 + [tfs[1] intValue] * 60.0 + [tfs[2] intValue];
 }
 
-- (void)setTimeInterval:(NSTimeInterval)timeInterval
+- (void)setTimeInterval:(NSTimeInterval)timeInterval to:(NSArray *)tfs
 {
     int hours = timeInterval / 3600.0;
-    self.hoursTextField.stringValue = [NSString stringWithFormat:@"%02d", hours];
+    [tfs[0] setStringValue:[NSString stringWithFormat:@"%02d", hours]];
     timeInterval -= hours * 3600.0;
     int minutes = timeInterval / 60.0;
-    self.minutesTextField.stringValue = [NSString stringWithFormat:@"%02d", minutes];
+    [tfs[1] setStringValue:[NSString stringWithFormat:@"%02d", minutes]];
     timeInterval -= minutes * 60.0;
     int seconds = (int)timeInterval;
-    self.secondsTextField.stringValue = [NSString stringWithFormat:@"%02d", seconds];
+    [tfs[2] setStringValue:[NSString stringWithFormat:@"%02d", seconds]];
 }
 
-- (IBAction)toggleTimer:(id)sender
+- (IBAction)stopTimer:(id)sender
 {
-    if (self.timer.valid) {
-        if (sender == self.playButton)
+    if (self.timer.valid) { // running or pause state
+        self.timerState = AMTimerStateStopped;
+        self.playButton.title = @"Start";
+        if (sender == self.stopButton)
             [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_STOP
                                                     params:nil];
         [self.timer invalidate];
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
                                                             object:self];
-    } else {
+    }
+}
+
+- (IBAction)nextTimerState:(id)sender
+{
+    switch (self.timerState) {
+    case AMTimerStateStopped:
+        self.timerState = AMTimerStateRunning;
+        self.playButton.title = @"Pause";
         if (sender == self.playButton)
             [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
                                                     params:nil];
         [self startCountdownTimer];
+        break;
+            
+    case AMTimerStateRunning:
+        self.timerState = AMTimerStatePaused;
+        self.playButton.title = @"Resume";
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_PAUSE
+                                                    params:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerPauseNotification
+                                                            object:self
+                                                          userInfo:nil];
+        [self.timer invalidate];
+        break;
+            
+    case AMTimerStatePaused:
+        self.timerState = AMTimerStateRunning;
+        self.playButton.title = @"Pause";
+        if (sender == self.playButton)
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_RESUME
+                                                    params:nil];
+            
+        _currentDurationValue = [self timeInterval:self.leftTimeTFs];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
+                                                            object:self
+                                                          userInfo:@{ @"Duration" : @(_currentDurationValue) }];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(incrementTimerLabel)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+        break;
     }
 }
 
@@ -120,7 +187,7 @@ typedef enum : NSInteger {
 {
     _currentCountdownValue = _timeIntervalSettings[AMTimerCountdownMode];
     _arrowLabel.stringValue = @"↓";
-    [self setTimerLabelByInterval:_currentCountdownValue];
+    [self setTimeInterval:_currentCountdownValue to:self.leftTimeTFs];
     
     time_t t = time(NULL);
     struct tm loc = *localtime(&t);
@@ -132,6 +199,7 @@ typedef enum : NSInteger {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     
     if (now <= startTimeByAbsoluteSetting) {
+        self.playButton.enabled = NO;
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
                                                     selector:@selector(decrementTimerLabel)
@@ -139,6 +207,7 @@ typedef enum : NSInteger {
                                                      repeats:YES];
         self.timer.fireDate = [NSDate dateWithTimeIntervalSince1970:startTimeByAbsoluteSetting + 1.0];
     } else if (_currentCountdownValue > 0) {
+        self.playButton.enabled = NO;
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
                                                     selector:@selector(decrementTimerLabel)
@@ -155,7 +224,7 @@ typedef enum : NSInteger {
     _currentDurationValue = 0.0;
     _arrowLabel.stringValue = @"↑";
     if (_timeIntervalSettings[AMTimerDurationMode] > 0.0) {
-        [self setTimerLabelByInterval:0.0];
+        [self setTimeInterval:0.0 to:self.leftTimeTFs];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
                                                     selector:@selector(incrementTimerLabel)
@@ -168,28 +237,18 @@ typedef enum : NSInteger {
                                                             object:self
                                                           userInfo:@{ @"fireDate" : fireDate }];
     } else {
-        self.playButton.state = NSOffState;
+        self.timerState = AMTimerStateStopped;
+        self.playButton.title = @"Start";
     }
-}
-
-- (void)setTimerLabelByInterval:(NSTimeInterval)timeInterval
-{
-    int hours = timeInterval / 3600.0;
-    timeInterval -= hours * 3600.0;
-    hours %= 100;
-    int minutes = timeInterval / 60.0;
-    timeInterval -= minutes * 60.0;
-    int seconds = (int)timeInterval;
-    NSString *text = [NSString stringWithFormat:@"%02d : %02d : %02d", hours, minutes, seconds];
-    self.timerLabel.stringValue = text;
 }
 
 - (void)decrementTimerLabel
 {
     _currentCountdownValue = MAX(_currentCountdownValue - 1.0, 0.0);
-    [self setTimerLabelByInterval:_currentCountdownValue];
+    [self setTimeInterval:_currentCountdownValue to:self.leftTimeTFs];
     if (_currentCountdownValue <= 0.0) {
         [self.timer invalidate];
+        self.playButton.enabled = YES;
         [self startDurationTimer];
     }
 }
@@ -197,9 +256,9 @@ typedef enum : NSInteger {
 - (void)incrementTimerLabel
 {
     _currentDurationValue += 1.0;
-    [self setTimerLabelByInterval:_currentDurationValue];
+    [self setTimeInterval:_currentDurationValue to:self.leftTimeTFs];
     if (_currentDurationValue >= _timeIntervalSettings[AMTimerDurationMode]) {
-        [self.playButton performClick:self];
+        [self stopTimer:self];
     }
 }
 
@@ -232,14 +291,33 @@ typedef enum : NSInteger {
 
 - (void)itemSelected:(AMPopUpView *)sender
 {
-    self.timeInterval = _timeIntervalSettings[self.modePopup.indexOfSelectedItem];
+    NSTimeInterval timeInterval = _timeIntervalSettings[self.modePopup.indexOfSelectedItem];
+    [self setTimeInterval:timeInterval to:self.rightTimeTFs];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification
 {
-    NSTimeInterval timeInterval = self.timeInterval;
-    NSInteger mode = self.modePopup.indexOfSelectedItem;
-    _timeIntervalSettings[mode] = timeInterval;
+    if ([self.rightTimeTFs indexOfObjectIdenticalTo:notification.object] != NSNotFound) {
+        NSTimeInterval timeInterval = [self timeInterval:self.rightTimeTFs];
+        NSInteger mode = self.modePopup.indexOfSelectedItem;
+        _timeIntervalSettings[mode] = timeInterval;
+    }
+}
+
+- (NSArray *)leftTimeTFs
+{
+    if (!_leftTimeTFs) {
+        _leftTimeTFs = @[ self.leftHoursTF, self.leftMinutesTF, self.leftSecondsTF ];
+    }
+    return _leftTimeTFs;
+}
+
+- (NSArray *)rightTimeTFs
+{
+    if (!_rightTimeTFs) {
+        _rightTimeTFs = @[ self.rightHoursTF, self.rightMinutesTF, self.rightSecondsTF ];
+    }
+    return _rightTimeTFs;
 }
 
 @end

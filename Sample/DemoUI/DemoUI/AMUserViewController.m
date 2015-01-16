@@ -114,6 +114,9 @@
     [[AMPreferenceManager standardUserDefaults]
      setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
     
+    self.broadcastingCheck.checked = localGroup.broadcasting;
+    self.broadcastingURLField.stringValue = localGroup.broadcastingURL;
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(mySelf.isOnline == YES) {
         return;

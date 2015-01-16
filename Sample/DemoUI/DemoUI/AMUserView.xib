@@ -397,11 +397,11 @@
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="yzF-S5-4GB" userLabel="projectTab">
                             <view key="view" id="g8Q-q0-s1T" customClass="AMTabItemView">
-                                <rect key="frame" x="0.0" y="0.0" width="461" height="360"/>
+                                <rect key="frame" x="0.0" y="0.0" width="461" height="350"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hv0-Vr-033" userLabel="project" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="272" width="333" height="22"/>
+                                        <rect key="frame" x="99" y="262" width="333" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Name" id="vTk-zZ-v8V" customClass="AMTextFieldCell">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -413,7 +413,7 @@
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="496-lS-Xvd" userLabel="avatar">
-                                        <rect key="frame" x="8" y="273" width="74" height="74"/>
+                                        <rect key="frame" x="8" y="263" width="74" height="74"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="74" id="1wV-f1-ukx"/>
                                             <constraint firstAttribute="height" constant="74" id="Ale-g3-Dgf"/>
@@ -421,7 +421,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="clipboard" id="BLf-bu-8Hc"/>
                                     </imageView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ND6-ou-PSa" userLabel="statusIcon">
-                                        <rect key="frame" x="8" y="174" width="10" height="10"/>
+                                        <rect key="frame" x="8" y="164" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="B6Y-E5-Egk"/>
                                             <constraint firstAttribute="height" constant="10" id="b1i-nN-trB"/>
@@ -429,7 +429,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="s2Z-XL-cPs"/>
                                     </imageView>
                                     <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4JL-U6-OrJ" userLabel="description" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="39" y="10" width="404" height="184"/>
+                                        <rect key="frame" x="39" y="0.0" width="404" height="184"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="184" id="MjG-mK-DRi"/>
                                         </constraints>
@@ -444,7 +444,7 @@
                                         </connections>
                                     </textField>
                                     <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1I-B8-azm" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="99" y="225" width="333" height="22"/>
+                                        <rect key="frame" x="99" y="215" width="333" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Broadcasting URL" id="Z4P-1y-Der">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -452,7 +452,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="yXO-le-4Vz" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="41" y="225" width="41" height="22"/>
+                                        <rect key="frame" x="41" y="215" width="41" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="R3T-KE-Plz"/>
                                             <constraint firstAttribute="width" constant="41" id="UJm-yK-ucB"/>

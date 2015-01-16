@@ -36,6 +36,7 @@
 @property (weak) IBOutlet AMFoundryFontView *biographyField;
 @property (weak) IBOutlet AMCheckBoxView *broadcastingCheck;
 @property (weak) IBOutlet AMFoundryFontView *broadcastingURLField;
+@property (weak) IBOutlet NSImageView *projectAvatar;
 
 @property NSPopover *myPopover;
 
@@ -113,6 +114,17 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
+    
+    self.broadcastingCheck.checked = localGroup.broadcasting;
+    self.broadcastingURLField.stringValue = localGroup.broadcastingURL;
+    
+    if (localGroup.broadcasting) {
+        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast"];
+        self.projectAvatar.image = broadcastIcon;
+    }else{
+        NSImage *clipIcon = [NSImage imageNamed:@"clipboard"];
+        self.projectAvatar.image = clipIcon;
+    }
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(mySelf.isOnline == YES) {

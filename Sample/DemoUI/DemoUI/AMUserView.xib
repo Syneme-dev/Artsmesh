@@ -19,6 +19,7 @@
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="locationField" destination="u2g-yj-0FH" id="vmL-Mb-ryH"/>
                 <outlet property="nickNameField" destination="jsc-N7-VSE" id="MjD-qB-dIx"/>
+                <outlet property="projectAvatar" destination="496-lS-Xvd" id="ZXF-cO-tmJ"/>
                 <outlet property="projectTabButton" destination="m7h-Bt-qMT" id="rcx-Xa-WcJ"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>

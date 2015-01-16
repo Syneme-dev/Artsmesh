@@ -79,10 +79,12 @@
     
     self.totalH = 0;
     
-    [self fakeLiveProgram:theGroup];
-    if (theGroup.broadcasting && theGroup.broadcastingURL) {
+    //[self fakeLiveProgram:theGroup];
+    if (theGroup.broadcasting && [theGroup.broadcastingURL length] != 0) {
         //Add the Video embed into the program view via webview
         [self addVideoStream:theGroup];
+    } else {
+        //conditions for video not met..
     }
 
     [self fillLiveGroup:theGroup];

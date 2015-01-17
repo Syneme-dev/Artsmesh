@@ -121,7 +121,13 @@
 
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {
     if (self.enclosingScrollView) {
+        // Add Group Name
+        if ([theGroup.fullName length] == 0 || [theGroup.fullName isEqualToString:@"Full Name"]){
+            NSLog(@"Group Full Name is: %@", theGroup.fullName);
         [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+        } else {
+            [self addTextView:theGroup.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+        }
         
         [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
         

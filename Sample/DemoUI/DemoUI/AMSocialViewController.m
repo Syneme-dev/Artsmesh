@@ -220,17 +220,28 @@ typedef enum {
 }
 
 - (IBAction)smallerButtonClick:(id)sender {
-    if(self.archiveScale<0.5f){
-        return;
-    }
-    self.archiveScale-=0.1f;
-    NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
-    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
+    if(self.archiveScale>0.1f){
+        self.archiveScale-=0.1f;}
+//self.socialWebTab.zone
+     [[[[[self.socialWebTab mainFrame] frameView] documentView] superview] scaleUnitSquareToSize:NSMakeSize(0.9f, 0.9f)];
+//    [self.socialWebTab makeTextSmaller:nil];
+//    if(self.archiveScale<0.5f){
+//        return;
+//    }
+//    self.archiveScale-=0.1f;
+//    NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
+//    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
 }
 - (IBAction)largerButtonClick:(id)sender {
+//    if(self.archiveScale>0.1f){
     self.archiveScale+=0.1f;
-     NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
-    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
+//    }
+    
+    [[[[[self.socialWebTab mainFrame] frameView] documentView] superview] scaleUnitSquareToSize:NSMakeSize(1.1f, 1.1f)];
+//    [self.socialWebTab makeTextLarger:nil];
+//    self.archiveScale+=0.1f;
+//     NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
+//    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
 }
 
 

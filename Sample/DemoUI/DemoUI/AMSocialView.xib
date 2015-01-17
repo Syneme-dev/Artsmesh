@@ -41,10 +41,10 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="smallerTab">
-                            <rect key="frame" x="27" y="3" width="16" height="13"/>
+                            <rect key="frame" x="31" y="3" width="16" height="13"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="13" id="2af-CJ-xhg"/>
-                                <constraint firstAttribute="width" constant="16" id="Wct-5n-pS8"/>
+                                <constraint firstAttribute="height" constant="13" id="nUt-b3-Ea8"/>
+                                <constraint firstAttribute="width" constant="16" id="wCZ-Eh-4ue"/>
                             </constraints>
                             <buttonCell key="cell" type="inline" title="-" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -93,20 +93,20 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Sly-pa-QQv" secondAttribute="bottom" constant="3" id="3MU-TL-mRp"/>
                         <constraint firstAttribute="height" constant="20" id="596-bz-avC"/>
                         <constraint firstItem="vc1-vp-YEP" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="5NS-h4-eYq"/>
+                        <constraint firstItem="Sly-pa-QQv" firstAttribute="leading" secondItem="ay8-XS-nLs" secondAttribute="trailing" constant="4" id="AbF-uh-dSs"/>
                         <constraint firstItem="ay8-XS-nLs" firstAttribute="leading" secondItem="vc1-vp-YEP" secondAttribute="trailing" constant="4" id="NVA-Bs-uwQ"/>
+                        <constraint firstItem="Sly-pa-QQv" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="Q04-TI-gbr"/>
                         <constraint firstAttribute="bottom" secondItem="ay8-XS-nLs" secondAttribute="bottom" constant="5" id="Tth-wr-3QT"/>
                         <constraint firstItem="aqN-KA-g0x" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="Ucc-ze-daN"/>
-                        <constraint firstItem="Sly-pa-QQv" firstAttribute="leading" secondItem="ay8-XS-nLs" secondAttribute="trailing" id="a5X-TG-0Iz"/>
                         <constraint firstItem="ay8-XS-nLs" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="5" id="bfe-bm-uMy"/>
                         <constraint firstItem="vc1-vp-YEP" firstAttribute="leading" secondItem="58Q-Tv-Pho" secondAttribute="leading" constant="6" id="cr3-mw-1fY"/>
+                        <constraint firstAttribute="bottom" secondItem="Sly-pa-QQv" secondAttribute="bottom" constant="3" id="hRD-v2-qvr"/>
                         <constraint firstItem="ay8-XS-nLs" firstAttribute="leading" secondItem="vc1-vp-YEP" secondAttribute="trailing" constant="4" id="p6w-Dw-s5n"/>
                         <constraint firstAttribute="bottom" secondItem="vc1-vp-YEP" secondAttribute="bottom" constant="3" id="pBS-Me-VA0"/>
                         <constraint firstAttribute="trailing" secondItem="aqN-KA-g0x" secondAttribute="trailing" constant="10" id="prp-a7-ynT"/>
                         <constraint firstAttribute="bottom" secondItem="aqN-KA-g0x" secondAttribute="bottom" constant="3" id="rlN-3y-ZTb"/>
-                        <constraint firstItem="Sly-pa-QQv" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="u0K-CD-rZ6"/>
                     </constraints>
                 </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="m8b-GU-d0s" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-tF-YMH">

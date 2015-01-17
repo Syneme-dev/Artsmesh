@@ -119,7 +119,7 @@
     self.broadcastingURLField.stringValue = localGroup.broadcastingURL;
     
     if (localGroup.broadcasting) {
-        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast"];
+        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast_med"];
         self.projectAvatar.image = broadcastIcon;
     }else{
         NSImage *clipIcon = [NSImage imageNamed:@"clipboard"];

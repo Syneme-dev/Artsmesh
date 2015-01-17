@@ -34,6 +34,9 @@
 @property (weak) IBOutlet AMFoundryFontView *locationField;
 @property (weak) IBOutlet AMFoundryFontView *affiliationField;
 @property (weak) IBOutlet AMFoundryFontView *biographyField;
+@property (weak) IBOutlet AMCheckBoxView *broadcastingCheck;
+@property (weak) IBOutlet AMFoundryFontView *broadcastingURLField;
+@property (weak) IBOutlet NSImageView *projectAvatar;
 
 @property NSPopover *myPopover;
 
@@ -61,6 +64,7 @@
     self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
     self.userBusyCheckBox.delegate = self;
+    self.broadcastingCheck.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanging) name:AM_MYGROUP_CHANGING_LOCAL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanged) name:AM_MYGROUP_CHANGED_LOCAL object:nil];
@@ -110,6 +114,17 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
+    
+    self.broadcastingCheck.checked = localGroup.broadcasting;
+    self.broadcastingURLField.stringValue = localGroup.broadcastingURL;
+    
+    if (localGroup.broadcasting) {
+        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast"];
+        self.projectAvatar.image = broadcastIcon;
+    }else{
+        NSImage *clipIcon = [NSImage imageNamed:@"clipboard"];
+        self.projectAvatar.image = clipIcon;
+    }
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     if(mySelf.isOnline == YES) {
@@ -499,19 +514,46 @@
 
 -(void)onChecked:(AMCheckBoxView*)sender
 {
-    if(sender.checked){
-        if(sender == self.groupBusyCheckbox){
-            [self setGroupBusy:YES];
-        }else if(sender == self.userBusyCheckBox){
-            [self setUserBusy:YES];
-        }
+    
+    if (sender == self.userBusyCheckBox) {
+        [self setUserBusy:sender.checked];
+        return;
+    }
+    
+    if (sender == self.groupBusyCheckbox) {
+        [self setGroupBusy:sender.checked];
+        return;
+    }
+    
+    if (sender == self.broadcastingCheck) {
+        [self setBroadcasting:self.broadcastingCheck.checked];
+        return;
+    }
+
+}
+
+
+-(void)setBroadcasting :(BOOL)broadcasting
+{
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    localGroup.broadcasting = broadcasting;
+    if (broadcasting) {
+        localGroup.broadcastingURL = self.broadcastingURLField.stringValue;
     }else{
-        if(sender == self.groupBusyCheckbox){
-            [self setGroupBusy:NO];
-        }else if(sender == self.userBusyCheckBox){
-            [self setUserBusy:NO];
+        localGroup.broadcastingURL = @"";
+    }
+    
+    if([AMCoreData shareInstance].mySelf.isOnline){
+        AMLiveGroup* remoteGroup = [[AMCoreData shareInstance] mergedGroup];
+        remoteGroup.broadcasting = broadcasting;
+        if (broadcasting) {
+            remoteGroup.broadcastingURL = self.broadcastingURLField.stringValue;
+        }else{
+            remoteGroup.broadcastingURL = @"";
         }
     }
+    
+    [[AMMesher sharedAMMesher] updateGroup];
 }
 
 -(void)setUserBusy:(BOOL)busy

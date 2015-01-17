@@ -12,12 +12,13 @@
 #import "AMCoreData/AMLiveUser.h"
 #import "AMTimerTabVC.h"
 #import "UIFramework/AMPopUpView.h"
+#import "UIFramework/AMCheckBoxView.h"
 
 static NSString * const PingCommandFormat =
     @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
 
 
-@interface AMTimerTableCellVC () <AMPopUpViewDelegeate>
+@interface AMTimerTableCellVC () <AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *groupPopup;
 @property (weak, nonatomic) IBOutlet NSTextField *bpmLabel;
 @property (weak, nonatomic) IBOutlet NSTextField *delayLabel;
@@ -25,8 +26,8 @@ static NSString * const PingCommandFormat =
 //@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
 @property (weak, nonatomic) IBOutlet NSTextField *upperNumber;
 @property (weak, nonatomic) IBOutlet NSTextField *lowNumber;
+@property (weak) IBOutlet AMCheckBoxView *connectCheckbox;
 @property (weak, nonatomic) IBOutlet NSTextField *metronomeLabel;
-@property (weak, nonatomic) IBOutlet NSButton *lockButton;
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, readonly) BOOL isOnLine;
 @property (nonatomic) BOOL isLocalGroup;
@@ -45,6 +46,9 @@ static NSString * const PingCommandFormat =
     self.slowdownPopup.delegate = self;
     [self.slowdownPopup addItemsWithTitles:@[ @"1", @"1/2", @"1/4", @"1/8", @"1/16", @"1/32" ]];
     [self.slowdownPopup selectItemWithTitle:@"1/4"];
+    [self.connectCheckbox setChecked:NO];
+    self.connectCheckbox.delegate = self;
+    
 }
 
 #pragma mark - NSCombofBoxDataSource
@@ -131,9 +135,9 @@ static NSString * const PingCommandFormat =
         [self resetTimer];
 }
 
-- (IBAction)toogleLockState:(NSButton *)sender
+- (void)onChecked:(AMCheckBoxView *)sender
 {
-    if (sender.state == NSOnState) {
+    if ([sender checked]) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(startMetronome:)
                                                      name:AMTimerStartNotification
@@ -141,6 +145,14 @@ static NSString * const PingCommandFormat =
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(stopMetronome:)
                                                      name:AMTimerStopNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pauseMetronome:)
+                                                     name:AMTimerPauseNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(resumeMetronome:)
+                                                     name:AMTimerResumeNotification
                                                    object:nil];
     } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -161,13 +173,29 @@ static NSString * const PingCommandFormat =
                                                 userInfo:nil
                                                  repeats:YES];
     self.timer.fireDate = notification.userInfo[@"fireDate"];
-    self.lockButton.enabled = NO;
 }
 
 - (void)stopMetronome:(NSNotification *)notification
 {
     [self.timer invalidate];
-    self.lockButton.enabled = YES;
+}
+
+- (void)pauseMetronome:(NSNotification *)notification
+{
+    [self.timer invalidate];
+}
+
+- (void)resumeMetronome:(NSNotification *)notification
+{
+    NSTimeInterval duration = [notification.userInfo[@"Duration"] floatValue];
+    NSInteger metronomeValue = ((NSInteger)duration) % self.upperNumber.intValue + 1;
+    self.metronomeLabel.stringValue = @(metronomeValue).stringValue;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
+                                                  target:self
+                                                selector:@selector(incrementMetronome)
+                                                userInfo:nil
+                                                 repeats:YES];
+    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
 }
 
 - (void)incrementMetronome
@@ -198,7 +226,6 @@ static NSString * const PingCommandFormat =
 
 - (NSTimeInterval)metronomeTimeInterval
 {
-    NSInteger indexOfSelectedItem = self.slowdownPopup.indexOfSelectedItem;
     float timeUnit = self.bpmLabel.stringValue.floatValue / (1 << self.slowdownPopup.indexOfSelectedItem);
     return 60.0 / (timeUnit * self.lowNumber.floatValue);
 }

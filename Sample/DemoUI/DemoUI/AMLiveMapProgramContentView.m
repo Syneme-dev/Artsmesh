@@ -21,6 +21,11 @@
         self.bottomMargin = 10;
         self.indentMargin = 15;
         self.allFields = [[NSMutableArray alloc] init];
+                
+        //Prep Video Stream Container
+        self.liveVideoStream = [[WebView alloc] initWithFrame:NSMakeRect(0, 0, self.frame.size.width, ((3*self.frame.size.width)/4))];
+        [self.liveVideoStream setFrameLoadDelegate:self];
+        [self.liveVideoStream setDrawsBackground:NO];
         
         NSFontManager *fontManager = [NSFontManager sharedFontManager];
         self.fonts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -39,15 +44,21 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
     // Drawing code here.
+}
+
+- (void) fakeLiveProgram:(AMLiveGroup *)theGroup {
+    theGroup.broadcasting = YES;
+    theGroup.broadcastingURL = @"https://www.youtube.com/embed/XxSOcc9qcsI";
+    
 }
 
 - (void)fillContent:(AMLiveGroup *)theGroup {
     
     //NSMutableArray *views = [[NSArray alloc] init];
     [self.allFields removeAllObjects];
-    
+
+    /**
     NSString *theString = theGroup.groupName;
     NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
     
@@ -59,14 +70,22 @@
     
     NSSize textViewRect = [theTextView intrinsicContentSize];
     
-    //NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
+    NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
     
     [theTextView setFrameSize:textViewRect];
     
     [self addSubview:theTextView];
-    
+     **/
     
     self.totalH = 0;
+    
+    //[self fakeLiveProgram:theGroup];
+    if (theGroup.broadcasting && [theGroup.broadcastingURL length] != 0) {
+        //Add the Video embed into the program view via webview
+        [self addVideoStream:theGroup];
+    } else {
+        //conditions for video not met..
+    }
 
     [self fillLiveGroup:theGroup];
     
@@ -77,9 +96,44 @@
     
 }
 
+- (void)addVideoStream:(AMLiveGroup *)theGroup {
+    if (theGroup.broadcasting && theGroup.broadcastingURL) {
+        //Add the Video embed into the program view via webview
+        [self.liveVideoStream setFrame:NSMakeRect(0, self.totalH, self.frame.size.width, ((3*self.frame.size.width)/4))];
+        [self addSubview:self.liveVideoStream];
+        
+        NSURL *stream_url = [NSURL URLWithString:
+                            [NSString stringWithFormat:@"%@",theGroup.broadcastingURL]];
+        [self.liveVideoStream.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:stream_url]];
+        
+        self.totalH += self.liveVideoStream.frame.size.height;
+        self.totalH += self.bottomMargin;
+        
+        // If the group project has a description, display it here
+        if ([theGroup.projectDescription length] > 0) {
+            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        }
+        //NSLog(@"the project description is: %@", theGroup.projectDescription);
+        
+        // Record the fields for later use
+        
+        NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
+        
+        [theField setObject:self.liveVideoStream forKey:@"object"];
+        [self.allFields addObject:theField];
+    }
+}
+
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {
     if (self.enclosingScrollView) {
+        // Add Group Name
+        if ([theGroup.fullName length] == 0 || [theGroup.fullName isEqualToString:@"Full Name"]){
+            NSLog(@"Group Full Name is: %@", theGroup.fullName);
         [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+        } else {
+            [self addTextView:theGroup.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+        }
         
         [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
         
@@ -153,6 +207,10 @@
                 double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
                 
                 [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent];
+            } else if ( [theObject isKindOfClass:[WebView class]] ) {
+                
+                WebView *curVideoStream = (WebView *) theObject;
+                [self updateWebView:curVideoStream];
             }
             
         }
@@ -161,6 +219,12 @@
         
         
     }
+}
+
+- (void) updateWebView:(WebView *)theWebView {
+    [theWebView setFrame:NSMakeRect(0, self.totalH, self.frame.size.width, ((3*self.frame.size.width)/4))];
+    
+    self.totalH = theWebView.frame.size.height + self.bottomMargin;
 }
 
 - (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent {

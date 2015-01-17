@@ -16,7 +16,7 @@
 #define MAX_GROUP_DESCRIPTION 64
 
 @interface AMGroupPanelGroupCellController ()<NSTextFieldDelegate>
-@property (weak) IBOutlet NSButton *lockBtn;
+@property (weak) IBOutlet NSButton *broadcastingBtn;
 @property (weak) IBOutlet NSButton *messageBtn;
 @property (weak) IBOutlet NSButton *mergeBtn;
 @property (weak) IBOutlet NSButton *leaveBtn;
@@ -39,16 +39,17 @@
     [cellView.imageView setHidden:YES];
     [cellView.textField setEditable:NO];
     
-    if ([self.group.password isEqualToString:@""]) {
-        [self.lockBtn setHidden:YES];
-    }else{
-        [self.lockBtn setHidden:NO];
-    }
     
     if ([[self.group messages] count] == 0) {
         [self.messageBtn setHidden:YES];
     }else{
         [self.messageBtn setHidden:NO];
+    }
+    
+    if (self.group.broadcasting) {
+        [self.broadcastingBtn setHidden:NO];
+    }else{
+        [self.broadcastingBtn setHidden:YES];
     }
 
     [self.infoBtn setHidden:YES];

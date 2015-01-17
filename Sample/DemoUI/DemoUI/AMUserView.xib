@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="affiliationField" destination="0SY-2D-fk2" id="o7S-hG-OIC"/>
                 <outlet property="biographyField" destination="3aN-UA-Zm6" id="vwD-Q3-uF7"/>
+                <outlet property="broadcastingCheck" destination="yXO-le-4Vz" id="Xeo-Vx-JxN"/>
+                <outlet property="broadcastingURLField" destination="F1I-B8-azm" id="tfR-DJ-wEd"/>
                 <outlet property="fullNameField" destination="xza-bX-mVV" id="I9y-Ne-YG3"/>
                 <outlet property="groupAvatarView" destination="zhD-wu-A9v" id="LlJ-2C-NWf"/>
                 <outlet property="groupBusyCheckbox" destination="SNl-7e-QuP" id="e0f-bN-mun"/>
@@ -17,6 +19,7 @@
                 <outlet property="groupTabButton" destination="xGv-LD-Hhp" id="5n1-Re-WVo"/>
                 <outlet property="locationField" destination="u2g-yj-0FH" id="vmL-Mb-ryH"/>
                 <outlet property="nickNameField" destination="jsc-N7-VSE" id="MjD-qB-dIx"/>
+                <outlet property="projectAvatar" destination="496-lS-Xvd" id="ZXF-cO-tmJ"/>
                 <outlet property="projectTabButton" destination="m7h-Bt-qMT" id="rcx-Xa-WcJ"/>
                 <outlet property="statusMessageLabel" destination="3aN-UA-Zm6" id="BYS-VN-h1s"/>
                 <outlet property="tabs" destination="Cg5-2P-EbE" id="c4w-e7-gdP"/>
@@ -441,9 +444,26 @@
                                             <binding destination="hJu-JO-Idf" name="value" keyPath="values.Preference_Key_Cluster_Project_Descrition" id="7nF-hC-mAC"/>
                                         </connections>
                                     </textField>
+                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1I-B8-azm" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="99" y="215" width="333" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Broadcasting URL" id="Z4P-1y-Der">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="yXO-le-4Vz" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="41" y="215" width="41" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="R3T-KE-Plz"/>
+                                            <constraint firstAttribute="width" constant="41" id="UJm-yK-ucB"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Hv0-Vr-033" secondAttribute="trailing" constant="31" id="0iO-hg-s6j"/>
+                                    <constraint firstItem="yXO-le-4Vz" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="113" id="2cU-on-N3L"/>
+                                    <constraint firstItem="F1I-B8-azm" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="101" id="2xW-dp-M5p"/>
                                     <constraint firstItem="ND6-ou-PSa" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="8" id="67g-P9-vxg"/>
                                     <constraint firstItem="4JL-U6-OrJ" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="166" id="Gxy-zt-U18"/>
                                     <constraint firstItem="Hv0-Vr-033" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="66" id="ISe-k0-Rx6"/>
@@ -451,7 +471,10 @@
                                     <constraint firstItem="Hv0-Vr-033" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="101" id="L2P-Ra-UJt"/>
                                     <constraint firstItem="496-lS-Xvd" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="8" id="LTT-Fq-Lra"/>
                                     <constraint firstItem="496-lS-Xvd" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="13" id="SBC-1Y-KZe"/>
+                                    <constraint firstAttribute="trailing" secondItem="F1I-B8-azm" secondAttribute="trailing" constant="31" id="Zut-T0-RJ0"/>
+                                    <constraint firstItem="F1I-B8-azm" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="113" id="kxT-nU-aje"/>
                                     <constraint firstItem="ND6-ou-PSa" firstAttribute="top" secondItem="g8Q-q0-s1T" secondAttribute="top" constant="176" id="uBh-b9-WOo"/>
+                                    <constraint firstItem="yXO-le-4Vz" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="41" id="ymB-VM-MHQ"/>
                                     <constraint firstItem="4JL-U6-OrJ" firstAttribute="leading" secondItem="g8Q-q0-s1T" secondAttribute="leading" constant="41" id="zMU-cQ-pFr"/>
                                 </constraints>
                             </view>
@@ -475,7 +498,7 @@
                 <constraint firstItem="Cg5-2P-EbE" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="uhj-Ot-Xdg"/>
                 <constraint firstAttribute="trailing" secondItem="xGv-LD-Hhp" secondAttribute="trailing" constant="76" id="x0Z-99-CkA"/>
             </constraints>
-            <point key="canvasLocation" x="-854.5" y="133"/>
+            <point key="canvasLocation" x="-708.5" y="27"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="hJu-JO-Idf"/>
     </objects>

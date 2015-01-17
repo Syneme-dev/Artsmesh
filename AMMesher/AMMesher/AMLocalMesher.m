@@ -465,6 +465,8 @@
             localGroup.users = users;
             localGroup.projectDescription = group.projectDescription;
             localGroup.homePage = group.homePage;
+            localGroup.broadcasting = group.broadcasting;
+            localGroup.broadcastingURL = group.broadcastingURL;
             
             _userlistVersion = [[result objectForKey:@"Version"] intValue];
             

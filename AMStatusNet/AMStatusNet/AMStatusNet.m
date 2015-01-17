@@ -87,7 +87,7 @@
         }
         
         //NSAssert(response, @"response should not be nil without error");
-        NSLog(@"get statusnet user goups return........................");
+        //NSLog(@"get statusnet user goups return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
@@ -151,7 +151,7 @@
         }
         
         //NSAssert(response, @"response should not be nil without error");
-        NSLog(@"get statusnet user goups return........................");
+        //NSLog(@"get statusnet user goups return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
@@ -358,7 +358,7 @@
         }
         
         //NSAssert(response, @"response should not be nil without error");
-        NSLog(@"get statusnet user goups return........................");
+        //NSLog(@"get statusnet user goups return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];
@@ -412,7 +412,7 @@
         }
         
         //NSAssert(response, @"response should not be nil without error");
-        NSLog(@"get statusnet user goups return........................");
+        //NSLog(@"get statusnet user goups return........................");
         
         NSError *err = nil;
         id objects = [NSJSONSerialization JSONObjectWithData:response options:0 error:&err];

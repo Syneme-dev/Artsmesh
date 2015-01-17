@@ -167,6 +167,8 @@
     localGroup.busy = NO;
     localGroup.timezoneName = [NSTimeZone systemTimeZone].name;
     localGroup.password = @"";
+    localGroup.broadcasting = NO;
+    localGroup.broadcastingURL = @"";
 
     [AMCoreData shareInstance].myLocalLiveGroup= localGroup;
 }

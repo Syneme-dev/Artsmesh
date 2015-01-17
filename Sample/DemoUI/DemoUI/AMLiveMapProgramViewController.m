@@ -19,11 +19,15 @@
 
 @implementation AMLiveMapProgramViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andWindow:(NSWindow *)theWindow
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andGroup:(AMLiveGroup *)theGroup
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        NSLog(@"live map program view initiated!");
         // Initialization code here.
+        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast"];
+        self.liveIcon.image = broadcastIcon;
+        NSLog(@"live icon is %@", self.liveIcon.image);
     }
     return self;
 }
@@ -33,6 +37,15 @@
     
 }
 
+-(void)checkIcon:(AMLiveGroup *)theGroup {
+    if (theGroup.broadcasting && [theGroup.broadcastingURL length] != 0) {
+        NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast_med"];
+        self.liveIcon.image = broadcastIcon;
+    } else {
+        NSImage *clipIcon = [NSImage imageNamed:@"clipboard"];
+        self.liveIcon.image = clipIcon;
+    }
+}
 
 
 @end

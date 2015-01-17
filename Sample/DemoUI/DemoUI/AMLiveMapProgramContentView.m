@@ -21,7 +21,7 @@
         self.bottomMargin = 10;
         self.indentMargin = 15;
         self.allFields = [[NSMutableArray alloc] init];
-        
+                
         //Prep Video Stream Container
         self.liveVideoStream = [[WebView alloc] initWithFrame:NSMakeRect(0, 0, self.frame.size.width, ((3*self.frame.size.width)/4))];
         [self.liveVideoStream setFrameLoadDelegate:self];

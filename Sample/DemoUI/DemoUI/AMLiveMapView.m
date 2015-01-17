@@ -773,6 +773,7 @@ AMWorldMap *worldMap;
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
     _programViewController.group = theGroup;
+    [_programViewController checkIcon:theGroup];
     
     // Configure & display the group/user fields
     

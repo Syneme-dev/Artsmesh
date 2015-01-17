@@ -19,4 +19,7 @@
 
 @property AMLiveGroup *group;
 
+
+-(void)checkIcon:(AMLiveGroup *)theGroup;
+
 @end

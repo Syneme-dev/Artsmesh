@@ -110,7 +110,13 @@
         self.totalH += self.liveVideoStream.frame.size.height;
         self.totalH += self.bottomMargin;
         
-        // Record the field for later user
+        // If the group project has a description, display it here
+        if ([theGroup.projectDescription length] > 0) {
+            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        }
+        //NSLog(@"the project description is: %@", theGroup.projectDescription);
+        
+        // Record the fields for later use
         
         NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
         

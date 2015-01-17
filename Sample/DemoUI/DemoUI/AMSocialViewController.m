@@ -53,6 +53,8 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:self];
     [self.socialWebTab setPolicyDelegate:self];
     [self.socialWebTab setUIDelegate:self];
+    ;
+    self.archiveScale=1;
 
 }
 
@@ -217,6 +219,20 @@ typedef enum {
     }
 }
 
+- (IBAction)smallerButtonClick:(id)sender {
+    if(self.archiveScale<0.5f){
+        return;
+    }
+    self.archiveScale-=0.1f;
+    NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
+    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
+}
+- (IBAction)largerButtonClick:(id)sender {
+    self.archiveScale+=0.1f;
+     NSString *scriptString=[NSString stringWithFormat:@"document.documentElement.style.zoom = \"%f\";$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";",self.archiveScale,self.archiveScale ];
+    [self.socialWebTab stringByEvaluatingJavaScriptFromString:scriptString];
+}
+
 
 - (IBAction)onBlogTabClick:(id)sender {
     isInfoPage = false;
@@ -247,7 +263,8 @@ typedef enum {
 
 }
 
-- (IBAction)onAddFieldButtonClick:(id)sender {
+- (IBAction)onBackButtonClick:(id)sender {
+    [self.socialWebTab goBack:nil];
 //    [self.socialWebTab makeTextLarger:nil];
 }
 

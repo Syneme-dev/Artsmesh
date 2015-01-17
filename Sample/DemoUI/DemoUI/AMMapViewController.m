@@ -67,19 +67,7 @@
     [AMButtonHandler changeTabTextColor:self.liveTab toColor:UI_Color_blue];
     [self liveTabClick:self.liveTab];
 }
-- (IBAction)smallerButtonClick:(id)sender {
-    if(self.archiveScale<0.5f){
-        return;
-    }
-    self.archiveScale-=0.1f;
-    NSString *scriptString=[NSString stringWithFormat:@"$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";document.documentElement.style.zoom = \"%f\"",self.archiveScale,self.archiveScale ];
-     [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
-}
-- (IBAction)largerButtonClick:(id)sender {
-    self.archiveScale+=0.1f;
-    NSString *scriptString=[NSString stringWithFormat:@"$('#circle')[0].contentDocument.documentElement.style.zoom = \"%f\";document.documentElement.style.zoom = \"%f\"",self.archiveScale,self.archiveScale ];
-    [self.archiveWebView stringByEvaluatingJavaScriptFromString:scriptString];
-}
+
 
 -(void)registerTabButtons{
     super.tabs=self.tabs;

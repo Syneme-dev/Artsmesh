@@ -26,43 +26,59 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="58Q-Tv-Pho">
                     <rect key="frame" x="0.0" y="280" width="600" height="20"/>
                     <subviews>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vp-YEP" userLabel="largerTab">
+                            <rect key="frame" x="6" y="3" width="16" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="mZW-7u-cZe"/>
+                                <constraint firstAttribute="height" constant="13" id="qpu-Ds-mE5"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="+" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="largerButtonClick:" target="-2" id="jyG-YK-0AT"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="smallerTab">
+                            <rect key="frame" x="27" y="3" width="16" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="2af-CJ-xhg"/>
+                                <constraint firstAttribute="width" constant="16" id="Wct-5n-pS8"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="-" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="smallerButtonClick:" target="-2" id="Gt4-qf-OBa"/>
+                            </connections>
+                        </button>
                         <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9r-uj-gVs" customClass="BlueBackgroundView">
                             <rect key="frame" x="539" y="5" width="1" height="10"/>
                         </customView>
                         <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjZ-94-DDK" customClass="BlueBackgroundView">
                             <rect key="frame" x="499" y="5" width="1" height="10"/>
                         </customView>
-                        <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay8-XS-nLs" customClass="BlueBackgroundView">
-                            <rect key="frame" x="459" y="5" width="1" height="10"/>
+                        <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay8-XS-nLs" customClass="BlueBackgroundView">
+                            <rect key="frame" x="26" y="5" width="1" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="1" id="Af9-Bo-AvR"/>
+                                <constraint firstAttribute="height" constant="10" id="wfW-Nt-pL1"/>
+                            </constraints>
                         </customView>
-                        <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-pa-QQv" userLabel="upTab">
-                            <rect key="frame" x="431" y="3" width="20" height="13"/>
-                            <buttonCell key="cell" type="inline" title="UP" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onUpButtonClick:" target="-2" id="CXM-03-1tJ"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqN-KA-g0x" userLabel="addFieldTab">
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="aqN-KA-g0x" userLabel="backTab">
                             <rect key="frame" x="540" y="3" width="50" height="13"/>
-                            <buttonCell key="cell" type="inline" title="SEARCH" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="4ON-r6-S0p"/>
+                                <constraint firstAttribute="height" constant="13" id="xBq-8z-A8c"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="Back" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
-                                <action selector="onAddFieldButtonClick:" target="-2" id="wq8-0q-zPx"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-vp-YEP" userLabel="foafTab">
-                            <rect key="frame" x="465" y="3" width="30" height="13"/>
-                            <buttonCell key="cell" type="inline" title="INFO" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
-                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onFOAFTabClick:" target="-2" id="XRD-iZ-lBn"/>
+                                <action selector="onBackButtonClick:" target="-2" id="z0j-HN-b5I"/>
                             </connections>
                         </button>
                         <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-Ok-SRS" userLabel="blogTab">
@@ -77,7 +93,20 @@
                         </button>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Sly-pa-QQv" secondAttribute="bottom" constant="3" id="3MU-TL-mRp"/>
                         <constraint firstAttribute="height" constant="20" id="596-bz-avC"/>
+                        <constraint firstItem="vc1-vp-YEP" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="5NS-h4-eYq"/>
+                        <constraint firstItem="ay8-XS-nLs" firstAttribute="leading" secondItem="vc1-vp-YEP" secondAttribute="trailing" constant="4" id="NVA-Bs-uwQ"/>
+                        <constraint firstAttribute="bottom" secondItem="ay8-XS-nLs" secondAttribute="bottom" constant="5" id="Tth-wr-3QT"/>
+                        <constraint firstItem="aqN-KA-g0x" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="Ucc-ze-daN"/>
+                        <constraint firstItem="Sly-pa-QQv" firstAttribute="leading" secondItem="ay8-XS-nLs" secondAttribute="trailing" id="a5X-TG-0Iz"/>
+                        <constraint firstItem="ay8-XS-nLs" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="5" id="bfe-bm-uMy"/>
+                        <constraint firstItem="vc1-vp-YEP" firstAttribute="leading" secondItem="58Q-Tv-Pho" secondAttribute="leading" constant="6" id="cr3-mw-1fY"/>
+                        <constraint firstItem="ay8-XS-nLs" firstAttribute="leading" secondItem="vc1-vp-YEP" secondAttribute="trailing" constant="4" id="p6w-Dw-s5n"/>
+                        <constraint firstAttribute="bottom" secondItem="vc1-vp-YEP" secondAttribute="bottom" constant="3" id="pBS-Me-VA0"/>
+                        <constraint firstAttribute="trailing" secondItem="aqN-KA-g0x" secondAttribute="trailing" constant="10" id="prp-a7-ynT"/>
+                        <constraint firstAttribute="bottom" secondItem="aqN-KA-g0x" secondAttribute="bottom" constant="3" id="rlN-3y-ZTb"/>
+                        <constraint firstItem="Sly-pa-QQv" firstAttribute="top" secondItem="58Q-Tv-Pho" secondAttribute="top" constant="4" id="u0K-CD-rZ6"/>
                     </constraints>
                 </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="m8b-GU-d0s" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-tF-YMH">

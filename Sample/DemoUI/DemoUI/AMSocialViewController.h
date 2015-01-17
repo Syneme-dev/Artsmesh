@@ -17,11 +17,15 @@
 - (IBAction)onFOAFTabClick:(id)sender;
 - (IBAction)onBlogTabClick:(id)sender;
 - (IBAction)onUpButtonClick:(id)sender;
-- (IBAction)onAddFieldButtonClick:(id)sender;
+- (IBAction)onBackButtonClick:(id)sender;
 -(void)loadPage;
+@property  float archiveScale;
 @property (strong) IBOutlet NSButton *upTabButton;
 @property (strong) IBOutlet NSButton *infoTabButton;
 @property (strong) IBOutlet NSButton *blogTabButton;
 @property (strong) IBOutlet NSButton *searchTabButton;
+
+- (IBAction)smallerButtonClick:(id)sender;
+- (IBAction)largerButtonClick:(id)sender ;
 
 @end

@@ -169,7 +169,12 @@ typedef enum {
 
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    
     NSString *url = sender.mainFrameURL;
+    
+    NSString *mapLinkJs = [NSString stringWithFormat:@"$('.url.home').attr('href','/?view=map');"];
+    [frame.webView stringByEvaluatingJavaScriptFromString:
+         mapLinkJs];
 
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];

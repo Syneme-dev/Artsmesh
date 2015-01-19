@@ -125,16 +125,16 @@
     }
     
     AMOutlineCellContentView *cellContentView = nil;
-//    if ([item isKindOfClass:[AMLiveUserItem class]]) {
-//        cellContentView = [[AMUserCellContentView alloc] initWithFrame:cellView.bounds];
-//        
-//    }else if ([item isKindOfClass:[AMLiveGroupItem class]]){
-//        cellContentView = [[AMLocalGroupCellContentView alloc] initWithFrame:cellView.bounds];
-//        
-//    }else if([item isKindOfClass:[AMOutlineItem class]]){
+    if ([item isKindOfClass:[AMLiveUserItem class]]) {
+        cellContentView = [[AMUserCellContentView alloc] initWithFrame:cellView.bounds];
+        
+    }else if ([item isKindOfClass:[AMLiveGroupItem class]]){
+        cellContentView = [[AMLocalGroupCellContentView alloc] initWithFrame:cellView.bounds];
+        
+    }else if([item isKindOfClass:[AMOutlineItem class]]){
         cellContentView = [[AMOutlineCellContentView alloc] initWithFrame:cellView.bounds];
         
-//    }
+    }
     
     if (cellView) {
         cellContentView.identifier = @"1001";

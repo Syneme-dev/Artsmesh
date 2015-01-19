@@ -14,31 +14,15 @@
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
+        self.infoBtn = [self setThirdBtnWithImage:
+                        [NSImage imageNamed:@"usergroup_info"]];
         
-        CGFloat height = self.titleField.frame.size.height;
-        CGFloat width = height;
-        CGFloat x = frameRect.origin.x + frameRect.size.width - width - 5;
-        CGFloat y = self.titleField.frame.origin.y;
+        [self.infoBtn setTarget:self];
+        [self.infoBtn setAction:@selector(infoBtnClicked:)];
         
-        NSRect infoBtnRect = NSMakeRect(x, y, width, height);
-        _infoBtn = [[NSButton alloc] initWithFrame:infoBtnRect];
-        _infoBtn.image = [NSImage imageNamed:@"usergroup_info"];
-        [_infoBtn setTarget:self];
-        [_infoBtn setAction:@selector(infoBtnClicked:)];
-        [self autoHideBtn:_infoBtn];
+        self.broadcastIcon = [self setFirstIconWithImage:
+                              [NSImage imageNamed:@"group_broadcast"]];
         
-        NSRect broadcastRect = infoBtnRect;
-        broadcastRect.origin.x -= infoBtnRect.size.width * 2;
-        _broadcastIcon = [[NSImageView alloc] initWithFrame:broadcastRect];
-        _broadcastIcon.imageAlignment = NSImageAlignCenter;
-        _broadcastIcon.image = [NSImage imageNamed:@"group_broadcast"];
-        
-        [self addSubview:_infoBtn];
-        [self addSubview:_broadcastIcon];
-        
-        NSRect titRect = self.titleField.frame;
-        titRect.size.width = _broadcastIcon.frame.origin.x - titRect.origin.x - 5;
-        self.titleField.frame = titRect;
     }
     
     return self;

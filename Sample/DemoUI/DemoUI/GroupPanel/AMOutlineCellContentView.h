@@ -16,9 +16,17 @@
 @property (weak)id dataSource;
 @property (weak)id delegate;
 
-//private
+//For subclass
 -(void)autoHideBtn:(NSButton *)btn;
 -(void)removeAutoHideBtn:(NSButton *)btn;
+-(NSButton *)setFirstBtnWithImage:(NSImage *)image;
+-(NSButton *)setSecondBtnWithImage:(NSImage *)image;
+-(NSButton *)setThirdBtnWithImage:(NSImage *)image;
+-(void)removeBtnAtPos:(int)pos;
+
+-(NSImageView *)setFirstIconWithImage:(NSImage *)image;
+-(NSImageView *)setSecondIconWithImage:(NSImage *)image;
+-(void)removeIconAtPos:(int)pos;
 
 @end
 

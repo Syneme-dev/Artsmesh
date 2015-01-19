@@ -11,9 +11,9 @@
 
 @interface AMOutlineCellContentView()
 
+@property NSImageView *iconView0;
 @property NSImageView *iconView1;
-@property NSImageView *iconView2;
-@property NSImageView *iconView3;
+@property NSButton *btn0;
 @property NSButton *btn1;
 @property NSButton *btn2;
 @property NSMutableArray *autoHideBtns;
@@ -85,6 +85,10 @@
                                      height:heigh
                                 bottomSpace:bottom];
         
+        [_btn2 setHidden:YES];
+        [_btn2 setBordered:NO];
+        
+        
         //Add btn1,
         trailing = 25*2;
         _btn1 = [[NSButton alloc] initWithFrame:tempRect];
@@ -95,42 +99,49 @@
                               trailingSpace:trailing
                                      height:heigh
                                 bottomSpace:bottom];
+        [_btn1 setHidden:YES];
+        [_btn1 setBordered:NO];
         
-        //Add Icon3,
+        //Add Btn0,
         trailing = 25*3;
-        _iconView3 = [[NSImageView alloc] initWithFrame:tempRect];
-        _iconView3.imageAlignment = NSImageAlignCenter;
-        _iconView3.image = [NSImage imageNamed:@"NSActionTemplate"];
+        _btn0 = [[NSButton alloc] initWithFrame:tempRect];
+        _btn0.image = [NSImage imageNamed:@"NSActionTemplate"];
         
-        [self addConstrainsToFixSizeSubview:_iconView3
+        [self addConstrainsToFixSizeSubview:_btn0
                                       width:width
                               trailingSpace:trailing
                                      height:heigh
                                 bottomSpace:bottom];
-        
-        //Add Icon2,
-        trailing = 25*4;
-        _iconView2 = [[NSImageView alloc] initWithFrame:tempRect];
-        _iconView2.imageAlignment = NSImageAlignCenter;
-        _iconView2.image = [NSImage imageNamed:@"NSActionTemplate"];
-        
-        [self addConstrainsToFixSizeSubview:_iconView2
-                                      width:width
-                              trailingSpace:trailing
-                                     height:heigh
-                                bottomSpace:bottom];
-        
+        [_btn0 setHidden:YES];
+        [_btn0 setBordered:NO];
         
         //Add Icon1,
-        trailing = 25*5;
+        trailing = 25*4;
         _iconView1 = [[NSImageView alloc] initWithFrame:tempRect];
         _iconView1.imageAlignment = NSImageAlignCenter;
         _iconView1.image = [NSImage imageNamed:@"NSActionTemplate"];
+        
         [self addConstrainsToFixSizeSubview:_iconView1
                                       width:width
                               trailingSpace:trailing
                                      height:heigh
                                 bottomSpace:bottom];
+        
+        [_iconView1 setHidden:YES];
+        
+        
+        //Add Icon0,
+        trailing = 25*5;
+        _iconView0 = [[NSImageView alloc] initWithFrame:tempRect];
+        _iconView0.imageAlignment = NSImageAlignCenter;
+        _iconView0.image = [NSImage imageNamed:@"NSActionTemplate"];
+        [self addConstrainsToFixSizeSubview:_iconView0
+                                      width:width
+                              trailingSpace:trailing
+                                     height:heigh
+                                bottomSpace:bottom];
+        
+        [_iconView0 setHidden:YES];
     }
     
     return self;
@@ -153,6 +164,86 @@
 {
     [self.autoHideBtns removeObject:btn];
 }
+
+
+-(NSButton *)setFirstBtnWithImage:(NSImage *)image
+{
+    self.btn0.image = image;
+    [self autoHideBtn:self.btn0];
+    
+    return self.btn0;
+}
+
+
+-(NSButton *)setSecondBtnWithImage:(NSImage *)image
+{
+    self.btn1.image = image;
+    [self autoHideBtn:self.btn1];
+    
+    return self.btn1;
+}
+
+
+-(NSButton *)setThirdBtnWithImage:(NSImage *)image
+{
+    self.btn2.image = image;
+    [self autoHideBtn:self.btn2];
+    
+    return self.btn2;
+}
+
+
+-(void)removeBtnAtPos:(int)pos
+{
+    switch (pos) {
+        case 0:
+            self.btn0.image = [NSImage imageNamed:@"NSActionTemplate"];
+            [self.btn0 setHidden:YES];
+            break;
+        case 1:
+            self.btn1.image = [NSImage imageNamed:@"NSActionTemplate"];
+            [self.btn1 setHidden:YES];
+            break;
+        case 2:
+            self.btn2.image = [NSImage imageNamed:@"NSActionTemplate"];
+            [self.btn2 setHidden:YES];
+            break;
+        default:
+            break;
+    }
+}
+
+
+-(NSImageView *)setFirstIconWithImage:(NSImage *)image
+{
+    self.iconView0.image = image;
+    return self.iconView0;
+}
+
+
+-(NSImageView *)setSecondIconWithImage:(NSImage *)image
+{
+    self.iconView1.image = image;
+    return self.iconView1;
+}
+
+
+-(void)removeIconAtPos:(int)pos
+{
+    switch (pos) {
+        case 0:
+            self.iconView0.image = [NSImage imageNamed:@"NSActionTemplate"];
+            [self.iconView0 setHidden:YES];
+            break;
+        case 1:
+            self.iconView1.image = [NSImage imageNamed:@"NSActionTemplate"];
+            [self.iconView1 setHidden:YES];
+            break;
+        default:
+            break;
+    }
+}
+
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
@@ -177,6 +268,7 @@
     }
 }
 
+
 +(NSImage *)loadBarByColor:(NSColor *)color{
     return nil;
 }
@@ -190,6 +282,7 @@
         [self handleDoubleClickEvent:event];
     }
 }
+
 
 -(void)handleDoubleClickEvent:(NSEvent *)event
 {
@@ -206,6 +299,7 @@
         [btn setHidden:NO];
     }
 }
+
 
 - (void)mouseExited:(NSEvent *)theEvent
 {

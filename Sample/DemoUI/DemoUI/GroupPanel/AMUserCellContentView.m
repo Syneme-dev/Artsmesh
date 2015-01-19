@@ -14,37 +14,18 @@
 {
     if (self = [super initWithFrame:frameRect]) {
         
-        CGFloat height = self.titleField.frame.size.height;
-        CGFloat width = height;
-        CGFloat x = frameRect.origin.x + frameRect.size.width - width - 5;
-        CGFloat y = self.titleField.frame.origin.y;
+        self.leaderIcon = [self setFirstIconWithImage:
+                           [NSImage imageNamed:@"group_leader"]];
         
-        NSRect infoBtnRect = NSMakeRect(x, y, width, height);
-        _infoBtn = [[NSButton alloc] initWithFrame:infoBtnRect];
-        _infoBtn.image = [NSImage imageNamed:@"usergroup_info"];
-        [_infoBtn setTarget:self];
-        [_infoBtn setAction:@selector(infoBtnClicked:)];
-        [self autoHideBtn:_infoBtn];
+        self.oscIcon = [self setSecondIconWithImage:
+                        [NSImage imageNamed:@"group_oscIcon"]];
         
-        NSRect oscRect = infoBtnRect;
-        oscRect.origin.x -= infoBtnRect.size.width * 2;
-        _oscIcon = [[NSImageView alloc] initWithFrame:oscRect];
-        _oscIcon.imageAlignment = NSImageAlignCenter;
-        _oscIcon.image = [NSImage imageNamed:@"group_broadcast"];
+        self.infoBtn = [self setThirdBtnWithImage:
+                        [NSImage imageNamed:@"usergroup_info"]];
         
-        NSRect leaderRect = oscRect;
-        leaderRect.origin.x -= leaderRect.size.width - 5;
-        _leaderIcon = [[NSImageView alloc] initWithFrame:leaderRect];
-        _leaderIcon.imageAlignment = NSImageAlignCenter;
-        _leaderIcon.image = [NSImage imageNamed:@"group_broadcast"];
+        [self.infoBtn setTarget:self];
+        [self.infoBtn setAction:@selector(infoBtnClicked:)];
         
-        [self addSubview:_infoBtn];
-        [self addSubview:_oscIcon];
-        [self addSubview:_leaderIcon];
-        
-        NSRect titRect = self.titleField.frame;
-        titRect.size.width = _leaderIcon.frame.origin.x - titRect.origin.x - 5;
-        self.titleField.frame = titRect;
     }
     
     return self;

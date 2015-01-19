@@ -20,4 +20,14 @@
     return item;
 }
 
+-(BOOL)isLeader
+{
+    return [self.userData isLeader];
+}
+
+-(BOOL)isRunningOSC
+{
+    return [self.userData oscServer];
+}
+
 @end

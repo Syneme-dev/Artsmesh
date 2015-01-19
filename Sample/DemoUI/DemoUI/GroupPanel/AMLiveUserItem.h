@@ -8,11 +8,14 @@
 
 #import "AMOutlineItem.h"
 #import "AMCoreData/AMCoreData.h"
+#import "AMUserCellContentView.h"
 
-@interface AMLiveUserItem : AMOutlineItem
+@interface AMLiveUserItem : AMOutlineItem<AMUserCellContentViewDataSource>
 
 +(AMLiveUserItem *)itemFromLiveUser:(AMLiveUser *)user;
-
 @property AMLiveUser *userData;
+
+-(BOOL)isLeader;
+-(BOOL)isRunningOSC;
 
 @end

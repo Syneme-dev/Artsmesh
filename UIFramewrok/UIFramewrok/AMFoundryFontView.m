@@ -15,10 +15,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        
+        [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
+        [self setFocusRingType:NSFocusRingTypeNone];
         // Initialization code here.
     }
     return self;
+}
+
+-(void)setFontSize:(CGFloat)size
+{
+    [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size:size]];
 }
 
 - (void)drawFocusRingMask {

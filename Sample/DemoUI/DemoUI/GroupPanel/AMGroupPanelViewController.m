@@ -7,32 +7,23 @@
 //
 
 #import "AMGroupPanelViewController.h"
-#import "AMCoreData/AMCoreData.h"
-#import "AMGroupPanelModel.h"
-#import "AMGroupDetailsViewController.h"
-#import "AMUserDetailsViewController.h"
-#import "AMStaticGroupDetailsViewController.h"
 #import "UIFramework/AMButtonHandler.h"
-#import "AMLiveGroupDataSource.h"
-#import "AMStaticGroupDataSource.h"
-#import "AMStatusNet/AMStatusNet.h"
-#import "AMStaticUserDetailsViewController.h"
+#import "NSView_Constrains.h"
+
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>
-@property (weak) IBOutlet NSOutlineView *outlineView;
-@property (weak) IBOutlet NSButton *staticGroupTab;
-@property (weak) IBOutlet NSButton *liveGroupTab;
-@property (weak) IBOutlet NSTabView *groupTabView;
-@property (weak) IBOutlet NSOutlineView *staticGroupOutlineView;
 
-@property (strong)AMLiveGroupDataSource* liveGroupDataSource;
-@property (strong)AMStaticGroupDataSource* staticGroupDataSource;
+@property (weak) IBOutlet NSButton *archiveBtn;
+@property (weak) IBOutlet NSButton *liveBtn;
+@property (weak) IBOutlet NSButton *localBtn;
+@property (weak) IBOutlet NSTabView *groupTabView;
 
 @end
 
 @implementation AMGroupPanelViewController
 {
     NSViewController* _detailViewController;
+    NSMutableArray *_tabControllers;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,228 +38,84 @@
 -(void) awakeFromNib
 {
     [super awakeFromNib];
-    [AMButtonHandler changeTabTextColor:self.staticGroupTab toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.liveGroupTab toColor:UI_Color_blue];
-    
-    self.liveGroupDataSource = [[AMLiveGroupDataSource alloc] init];
-    [self.liveGroupDataSource reloadGroups];
-    [self.outlineView reloadData];
-    self.outlineView.delegate = self.liveGroupDataSource;
-    self.outlineView.dataSource  = self.liveGroupDataSource;
-    [self.outlineView setTarget:self.liveGroupDataSource];
-    [self.outlineView setDoubleAction:@selector(doubleClickOutlineView:)];
-    
-    self.staticGroupDataSource = [[AMStaticGroupDataSource alloc] init];
-    [self.staticGroupDataSource reloadGroups];
-    [self.staticGroupOutlineView reloadData];
-    self.staticGroupOutlineView.delegate = self.staticGroupDataSource;
-    self.staticGroupOutlineView.dataSource = self.staticGroupDataSource;
-    [self.staticGroupOutlineView setTarget:self.staticGroupDataSource];
-    [self.staticGroupOutlineView setDoubleAction:@selector(doubleClickOutlineView:)];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLiveGroups) name:AM_LIVE_GROUP_CHANDED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshStaticGroups) name:AM_STATIC_GROUP_CHANGED object:nil];
-    
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    [model addObserver:self forKeyPath:@"detailPanelState" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    
-    [self liveGroupTabClick:self.liveGroupTab];
+    [AMButtonHandler changeTabTextColor:self.archiveBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.liveBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.localBtn toColor:UI_Color_blue];
 }
 
--(void)registerTabButtons{
-    super.tabs=self.tabs;
+-(void)registerTabButtons
+{
+    //super.tabs=self.tabs;
     self.tabButtons =[[NSMutableArray alloc]init];
-    [self.tabButtons addObject:self.liveGroupTab];
-    [self.tabButtons addObject:self.staticGroupTab];
-    self.showingTabsCount=2;
-    
+    [self.tabButtons addObject:self.localBtn];
+    [self.tabButtons addObject:self.liveBtn];
+    [self.tabButtons addObject:self.archiveBtn];
+    self.showingTabsCount=3;
 }
 
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[AMGroupPanelModel sharedGroupModel] removeObserver:self forKeyPath:@"detailPanelState"];
-}
-
--(void)reloadLiveGroups
+-(void)viewDidLoad
 {
-    [self.liveGroupDataSource reloadGroups];
-    [self.outlineView reloadData];
-    [self.outlineView expandItem:[self.outlineView itemAtRow:0] expandChildren:NO];
+    [self loadTabViews];
 }
 
--(void)hideDetailView
+-(void)loadTabViews
 {
-    if (_detailViewController) {
-        [_detailViewController.view removeFromSuperview];
-        _detailViewController = nil;
-    }
-}
-
--(void)showGroupDetails
-{
-    [self hideDetailView];
-    
-    AMGroupDetailsViewController* gdc = [[AMGroupDetailsViewController alloc] initWithNibName:@"AMGroupDetailsViewController" bundle:nil];
-    
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    gdc.group = model.selectedGroup;
-    [self.view addSubview:gdc.view];
-
-    NSRect rect = gdc.view.frame;
-    NSRect tabFrame = self.groupTabView.frame;
-    rect.origin.x = tabFrame.origin.x;
-    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
-    rect.size.width = tabFrame.size.width;
-    [gdc.view setFrame:rect];
-    
-    rect.origin.y -= rect.size.height;
-    [gdc.view.animator setFrame:rect];
-    
-    [gdc updateUI];
-    [self.view display];
-    
-    _detailViewController = gdc;
-}
-
--(void)showUserDetails
-{
-     [self hideDetailView];
-    
-    AMUserDetailsViewController* udc = [[AMUserDetailsViewController alloc] initWithNibName:@"AMUserDetailsViewController" bundle:nil];
-    
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    udc.user = model.selectedUser;
-    [self.view addSubview:udc.view];
-    
-    NSRect rect = udc.view.frame;
-    NSRect tabFrame = self.groupTabView.frame;
-    rect.origin.x = tabFrame.origin.x;
-    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
-    rect.size.width = tabFrame.size.width;
-    [udc.view setFrame:rect];
-    
-    rect.origin.y -= rect.size.height;
-    [udc.view.animator setFrame:rect];
-    
-    [udc updateUI];
-    [self.view display];
-    
-    _detailViewController = udc;
-}
-
--(void)showStaticGroupDetailView
-{
-    [self hideDetailView];
-    
-    AMStaticGroupDetailsViewController* sdc = [[AMStaticGroupDetailsViewController alloc] initWithNibName:@"AMStaticGroupDetailsViewController" bundle:nil];
-    
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    sdc.staticGroup = model.selectedStaticGroup;
-    [self.view addSubview:sdc.view];
-    
-    NSRect rect = sdc.view.frame;
-    NSRect tabFrame = self.groupTabView.frame;
-    rect.origin.x = tabFrame.origin.x;
-    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
-    rect.size.width = tabFrame.size.width;
-    [sdc.view setFrame:rect];
-    
-    rect.origin.y -= rect.size.height;
-    [sdc.view.animator setFrame:rect];
-    
-    [self.view display];
-    
-    _detailViewController = sdc;
-}
-
--(void)showStaticUserDetailView
-{
-    [self hideDetailView];
-    
-    AMStaticUserDetailsViewController* sudc = [[AMStaticUserDetailsViewController alloc] initWithNibName:@"AMStaticUserDetailsViewController" bundle:nil];
-    
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    sudc.staticUser = model.selectedStaticUser;
-    [self.view addSubview:sudc.view];
-    
-    NSRect rect = sudc.view.frame;
-    NSRect tabFrame = self.groupTabView.frame;
-    rect.origin.x = tabFrame.origin.x;
-    rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
-    rect.size.width = tabFrame.size.width;
-    [sudc.view setFrame:rect];
-    
-    rect.origin.y -= rect.size.height;
-    [sudc.view.animator setFrame:rect];
-    
-    [self.view display];
-    
-    _detailViewController = sudc;
-}
-
-#pragma mark -
-#pragma   mark KVO
-- (void) observeValueForKeyPath:(NSString *)keyPath
-                       ofObject:(id)object
-                         change:(NSDictionary *)change
-                        context:(void *)context
-{
-    if ([object isKindOfClass:[AMGroupPanelModel class]]){
+    for (NSTabViewItem* tabItem in [self.groupTabView tabViewItems]) {
         
-        if ([keyPath isEqualToString:@"detailPanelState"]){
+        /*Here we use the class name to load the controller so the
+        tab identifier must equal to the tabview's subview controller's name*/
+    
+        if (_tabControllers == nil) {
+            _tabControllers = [[NSMutableArray alloc] init];
+        }
+        
+        NSString *tabViewControllerName = tabItem.identifier;
+        id obj = [[NSClassFromString(tabViewControllerName) alloc] init];
+        if ([obj isKindOfClass:[NSViewController class]]) {
+            NSViewController *controller = (NSViewController *)obj;
             
-            DetailPanelState newState = [[change objectForKey:@"new"] intValue];
-            
-            if (newState == DetailPanelGroup) {
-                [self showGroupDetails];
-                return;
-            }
-            
-            if (newState == DetailPanelUser) {
-                [self showUserDetails];
-                return;
-            }
-            
-            if (newState == DetailPanelStaticGroup) {
-                [self showStaticGroupDetailView];
-                return;
-            }
-            
-            if (newState == DetailPanelStaticUser) {
-                [self showStaticUserDetailView];
-                return;
-            }
-            
-            if (newState == DetailPanelHide) {
-                [self hideDetailView];
-            }
+            [tabItem.view addFullConstrainsToSubview:controller.view];
+            [_tabControllers addObject:controller];
         }
     }
 }
 
-#pragma mark-
-#pragma StaticGroups
 
-- (IBAction)staticGroupTabClick:(NSButton *)sender
+- (IBAction)archiveBtnClick:(id)sender
 {
-    [self hideDetailView];
-    [self pushDownButton:self.staticGroupTab];
-    [self.groupTabView selectTabViewItemAtIndex:1];
+    [self.groupTabView selectTabViewItemWithIdentifier:@"AMArchiveGroupViewController"];
 }
 
-- (IBAction)liveGroupTabClick:(NSButton *)sender
+
+- (IBAction)liveBtnClick:(id)sender
 {
-    [self hideDetailView];
-    [self pushDownButton:self.liveGroupTab];
-    [self.groupTabView selectTabViewItemAtIndex:0];
+    [self.groupTabView selectTabViewItemWithIdentifier:@"AMLiveGroupViewController"];
 }
 
--(void)refreshStaticGroups
+
+- (IBAction)localBtnClick:(id)sender
 {
-    [self.staticGroupDataSource reloadGroups];
-    [self.staticGroupOutlineView reloadData];
-    //[self.staticGroupOutlineView expandItem:[self.staticGroupOutlineView itemAtRow:0] expandChildren:NO];
+    [self.groupTabView selectTabViewItemWithIdentifier:@"AMLocalGroupViewController"];
 }
+
+
+-(void)dealloc
+{
+
+}
+
+
+-(void)popDetailPanel:(NSViewController*)panelController
+{
+    
+}
+
+
+-(void)resignDetailPanel
+{
+    
+}
+
 
 
 @end

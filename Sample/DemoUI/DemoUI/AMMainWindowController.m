@@ -578,7 +578,7 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth *1.5, 220.0f);
     panelView.minSizeConstraint = panelSize;
-    AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMUserGroupView" bundle:nil];
+    AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMGroupPanelViewController" bundle:nil];
     userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
 
     [self fillPanel:panelViewController content:userGroupViewController];

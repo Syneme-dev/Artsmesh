@@ -10,5 +10,7 @@
 
 @interface AMFoundryFontView : NSTextField
 
+-(void)setFontSize:(CGFloat)size;
+
 
 @end

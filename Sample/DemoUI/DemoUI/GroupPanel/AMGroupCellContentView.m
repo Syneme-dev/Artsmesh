@@ -21,7 +21,7 @@
         [self.infoBtn setAction:@selector(infoBtnClicked:)];
         
         self.mergeBtn = [self setFirstBtnWithImage:
-                         [NSImage imageNamed:@"SideBar_group"]];
+                         [NSImage imageNamed:@"SideBar_group_h"]];
         [self.mergeBtn setTarget:self];
         [self.mergeBtn setAction:@selector(mergeBtnClicked:)];
         
@@ -82,12 +82,14 @@
     }
 }
 
+
 -(void)mergeBtnClicked:(NSButton *)sender
 {
     if([self.delegate respondsToSelector:@selector(mergeBtnClickOnContentCellView:)]){
         [self.delegate mergeBtnClickOnContentCellView:self];
     }
 }
+
 
 -(void)leaveBtnClicked:(NSButton *)sender
 {

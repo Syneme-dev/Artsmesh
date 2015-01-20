@@ -79,6 +79,11 @@
 		4AB4ACDA1A6D20B5003ECE24 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACD91A6D1E77003ECE24 /* NSView_Constrains.m */; };
 		4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACDC1A6E2DA6003ECE24 /* AMLiveGroupViewController.m */; };
 		4AB4ACDF1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4ACDD1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib */; };
+		4AB4ACE91A6E5D2F003ECE24 /* AMArchiveGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACE71A6E5D2F003ECE24 /* AMArchiveGroupViewController.m */; };
+		4AB4ACEA1A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4ACE81A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib */; };
+		4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */; };
+		4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */; };
+		4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
@@ -384,6 +389,15 @@
 		4AB4ACDB1A6E2DA6003ECE24 /* AMLiveGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupViewController.h; sourceTree = "<group>"; };
 		4AB4ACDC1A6E2DA6003ECE24 /* AMLiveGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupViewController.m; sourceTree = "<group>"; };
 		4AB4ACDD1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveGroupViewController.xib; sourceTree = "<group>"; };
+		4AB4ACE61A6E5D2F003ECE24 /* AMArchiveGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveGroupViewController.h; sourceTree = "<group>"; };
+		4AB4ACE71A6E5D2F003ECE24 /* AMArchiveGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveGroupViewController.m; sourceTree = "<group>"; };
+		4AB4ACE81A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMArchiveGroupViewController.xib; sourceTree = "<group>"; };
+		4AB4ACEB1A6E5FDF003ECE24 /* AMArchiveCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveCellContentView.h; sourceTree = "<group>"; };
+		4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveCellContentView.m; sourceTree = "<group>"; };
+		4AB4ACF11A6E641C003ECE24 /* AMArchiveGroupItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveGroupItem.h; sourceTree = "<group>"; };
+		4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveGroupItem.m; sourceTree = "<group>"; };
+		4AB4ACF41A6E6435003ECE24 /* AMArchiveUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveUserItem.h; sourceTree = "<group>"; };
+		4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveUserItem.m; sourceTree = "<group>"; };
 		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
 		4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonTearOffController.m; sourceTree = "<group>"; };
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
@@ -921,6 +935,8 @@
 				4AB4ACC51A6CC097003ECE24 /* AMGroupCellContentView.m */,
 				4AB4ACC71A6CC825003ECE24 /* AMUserCellContentView.h */,
 				4AB4ACC81A6CC825003ECE24 /* AMUserCellContentView.m */,
+				4AB4ACEB1A6E5FDF003ECE24 /* AMArchiveCellContentView.h */,
+				4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -934,6 +950,10 @@
 				4AB4ACD31A6CCD39003ECE24 /* AMGroupItem.m */,
 				4AB4ACD51A6CE03D003ECE24 /* AMLiveUserItem.h */,
 				4AB4ACD61A6CE03D003ECE24 /* AMLiveUserItem.m */,
+				4AB4ACF11A6E641C003ECE24 /* AMArchiveGroupItem.h */,
+				4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */,
+				4AB4ACF41A6E6435003ECE24 /* AMArchiveUserItem.h */,
+				4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */,
 			);
 			name = OutlineItems;
 			sourceTree = "<group>";
@@ -1099,6 +1119,9 @@
 				4AB4ACDB1A6E2DA6003ECE24 /* AMLiveGroupViewController.h */,
 				4AB4ACDC1A6E2DA6003ECE24 /* AMLiveGroupViewController.m */,
 				4AB4ACDD1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib */,
+				4AB4ACE61A6E5D2F003ECE24 /* AMArchiveGroupViewController.h */,
+				4AB4ACE71A6E5D2F003ECE24 /* AMArchiveGroupViewController.m */,
+				4AB4ACE81A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib */,
 				4AB4ACD81A6D1E64003ECE24 /* NSView_Constrains.h */,
 				4AB4ACD91A6D1E77003ECE24 /* NSView_Constrains.m */,
 				4AB4ACCB1A6CCA74003ECE24 /* OutlineItems */,
@@ -1221,6 +1244,7 @@
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
+				4AB4ACEA1A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib in Resources */,
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
@@ -1345,6 +1369,7 @@
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				AF1D4D47193F2CAE00C3B435 /* AMMouseOverButtonView.m in Sources */,
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
+				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
@@ -1359,6 +1384,7 @@
 				2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */,
+				4AB4ACE91A6E5D2F003ECE24 /* AMArchiveGroupViewController.m in Sources */,
 				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,
 				013A56EE1A5A64EE001D319F /* AMJacktripSettings.m in Sources */,
@@ -1385,7 +1411,9 @@
 				4AB4ACD41A6CCD39003ECE24 /* AMGroupItem.m in Sources */,
 				4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */,
 				2D6D76F719C16E3300201106 /* AMPixel.m in Sources */,
+				4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */,
 				AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */,
+				4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */,
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,

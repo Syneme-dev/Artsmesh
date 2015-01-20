@@ -102,9 +102,9 @@
 
 +(BOOL)isUser:(AMLiveUser *)user inGroup:(AMLiveGroup *)group
 {
-    for (AMLiveUser* user in group.users) {
+    for (AMLiveUser* u in group.users) {
         
-        if ([user.userid isEqualToString:user.userid]) {
+        if ([user.userid isEqualToString:u.userid]) {
             return YES;
         }
     }

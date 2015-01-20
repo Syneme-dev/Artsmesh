@@ -64,6 +64,7 @@
     return NO;
 }
 
+
 -(BOOL)canMerge
 {
     AMLiveGroup *localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -100,5 +101,6 @@
     
     return YES;
 }
+
 
 @end

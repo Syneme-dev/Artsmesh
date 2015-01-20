@@ -247,7 +247,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
+}
+
+
+-(void)updateUI
+{
 //    NSBezierPath *path = [NSBezierPath bezierPathWithRect:self.bounds];
 //    [[NSColor redColor] setFill];
 //    [path fill];
@@ -263,14 +267,9 @@
         self.titleField.stringValue = [self.dataSource title];
     }
     
-    if ([self.dataSource barColor]) {
-        self.barView.image = [AMOutlineCellContentView loadBarByColor:[self.dataSource barColor]];
+    if ([self.dataSource barImage]) {
+        self.barView.image = [self.dataSource barImage];
     }
-}
-
-
-+(NSImage *)loadBarByColor:(NSColor *)color{
-    return nil;
 }
 
 

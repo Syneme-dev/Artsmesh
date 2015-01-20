@@ -36,6 +36,12 @@
     [super drawRect:dirtyRect];
 
     // Drawing code here.
+}
+
+
+-(void)updateUI
+{
+    [super updateUI];
     
     if ([self.dataSource isLeader]) {
         [self.leaderIcon setHidden:NO];

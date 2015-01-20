@@ -33,6 +33,13 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    
+}
+
+-(void)updateUI
+{
+    [super updateUI];
+    
     if([self.dataSource isBroadcasting]){
         [self.broadcastIcon setHidden:NO];
     }else{

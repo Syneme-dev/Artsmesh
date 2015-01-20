@@ -16,7 +16,7 @@
 @property (nonatomic) NSArray *subItems;
 
 -(BOOL)hideBar;
--(NSColor *)barColor;
+-(NSImage *)barImage;
 
 +(AMOutlineItem *)itemFromLabel:(NSString *)title;
 

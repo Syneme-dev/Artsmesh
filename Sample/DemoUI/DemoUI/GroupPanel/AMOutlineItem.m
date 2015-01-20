@@ -17,9 +17,9 @@
 }
 
 
--(NSColor *)barColor
+-(NSImage *)barImage
 {
-    return [NSColor grayColor];
+    return nil;
 }
 
 

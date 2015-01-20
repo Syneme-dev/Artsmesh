@@ -141,12 +141,14 @@
         cellContentView.identifier = @"1001";
         cellContentView.dataSource = item;
         cellContentView.delegate = self;
+        [cellContentView updateUI];
         
         [cellView addFullConstrainsToSubview:cellContentView];
     }
 
     return cellView;
 }
+
 
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {

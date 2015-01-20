@@ -16,6 +16,8 @@
 @property (weak)id dataSource;
 @property (weak)id delegate;
 
+-(void)updateUI;
+
 //For subclass
 -(void)autoHideBtn:(NSButton *)btn;
 -(void)removeAutoHideBtn:(NSButton *)btn;
@@ -34,7 +36,7 @@
 @protocol AMOutlineCellContentViewDataSource <NSObject>
 
 -(BOOL)hideBar;
--(NSColor *)barColor;
+-(NSImage *)barImage;
 -(NSString *)title;
 
 @end

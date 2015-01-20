@@ -35,5 +35,14 @@
     return NO;
 }
 
+-(NSImage *)barImage
+{
+    if(self.userData.isOnline){
+        return [NSImage imageNamed:@"user_online"];
+    }else{
+        return [NSImage imageNamed:@"user_offline"];
+    }
+}
+
 
 @end

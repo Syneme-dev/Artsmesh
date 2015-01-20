@@ -23,13 +23,14 @@
 @implementation AMArchiveGroupViewController
 {
     AMOutlineItem *_rootItem;
+    NSMutableArray* _expanededNodes;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalGroup:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalGroup:) name:AM_STATIC_GROUP_CHANGED object:nil];
     
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
@@ -45,6 +46,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
 -(void)loadLocalGroup:(NSNotification *)notification
 {
     _rootItem = [AMOutlineItem itemFromLabel:@"ARCHIVE"];
@@ -57,6 +59,31 @@
     }
     
     [_outlineView reloadData];
+    [_outlineView expandItem:[self.outlineView itemAtRow:0] expandChildren:NO];
+}
+
+
+-(NSMutableArray*)expandedNodes
+{
+    if (_expanededNodes == nil) {
+        _expanededNodes = [[NSMutableArray alloc] init];
+    }
+    
+    return _expanededNodes;
+}
+
+
+-(BOOL)isMyGroup:(AMStaticGroup*)group
+{
+    NSArray* myGroups = [AMCoreData shareInstance].myStaticGroups;
+    for (AMStaticGroup* g in myGroups)
+    {
+        if ([g.g_id integerValue] == [group.g_id integerValue]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 
@@ -165,6 +192,26 @@
     }
     
     return rowView;
+}
+
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        //item.isExpanded = YES;
+        [[self expandedNodes] addObject:item.title];
+    }
+}
+
+
+-(void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        //item.isExpanded = NO;
+        [[self expandedNodes] removeObject:item.title];
+    }
 }
 
 

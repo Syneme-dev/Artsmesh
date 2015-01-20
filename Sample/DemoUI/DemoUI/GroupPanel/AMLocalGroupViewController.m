@@ -24,6 +24,7 @@
 @implementation AMLocalGroupViewController
 {
     AMOutlineItem *_rootItem;
+    NSMutableArray* _expanededNodes;
 }
 
 
@@ -50,13 +51,36 @@
     AMGroupItem *groupItem = [AMGroupItem itemFromLiveGroup:liveGroup];
     _rootItem = groupItem;
     
+    [self reloadData];
+}
+
+
+-(void)reloadData
+{
     [_outlineView reloadData];
+    for (int i = 0; i < [self.outlineView numberOfRows]; i++) {
+        id item = [self.outlineView itemAtRow:i];
+        
+        if ([_expanededNodes containsObject:[item title]]) {
+            [self.outlineView expandItem:item];
+        }
+    }
 }
 
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+-(NSMutableArray*)expandedNodes
+{
+    if (_expanededNodes == nil) {
+        _expanededNodes = [[NSMutableArray alloc] init];
+    }
+    
+    return _expanededNodes;
 }
 
 
@@ -146,6 +170,26 @@
     }
 
     return cellView;
+}
+
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        //item.isExpanded = YES;
+        [[self expandedNodes] addObject:item.title];
+    }
+}
+
+
+-(void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        //item.isExpanded = NO;
+        [[self expandedNodes] removeObject:item.title];
+    }
 }
 
 

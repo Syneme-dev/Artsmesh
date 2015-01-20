@@ -10,4 +10,9 @@
 
 @interface AMMusicScoreViewController : NSViewController
 
+- (IBAction) addMusicScoreItem:(id)sender;
+
+@end
+
+@interface AMMusicScoreBox : NSBox
 @end

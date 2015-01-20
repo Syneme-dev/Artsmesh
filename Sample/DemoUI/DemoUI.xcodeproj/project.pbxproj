@@ -639,6 +639,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013B2D6F1A6DAD7B0076981E /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
+				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
+			);
+			name = Rows;
+			sourceTree = "<group>";
+		};
 		0198A79D1A0F24B6009A36CA /* Mixer Panel */ = {
 			isa = PBXGroup;
 			children = (
@@ -965,6 +974,7 @@
 		4A5072031A6B5054006E09FC /* New */ = {
 			isa = PBXGroup;
 			children = (
+				013B2D6F1A6DAD7B0076981E /* Rows */,
 				4AB4ACCB1A6CCA74003ECE24 /* OutlineItems */,
 				4AB4ACCA1A6CCA5F003ECE24 /* Cells */,
 				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
@@ -1195,8 +1205,6 @@
 				26136C54196FB5B300D033BF /* AMStaticGroupDetailsViewController.m */,
 				266CE25F197E5F3A00D8145B /* AMStaticUserDetailsViewController.h */,
 				266CE260197E5F3A00D8145B /* AMStaticUserDetailsViewController.m */,
-				CEC2FC43196588FD00AFD309 /* AMGroupOutlineRowView.h */,
-				CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */,
 				266CE251197E406500D8145B /* AMGroupPanelDetailView.h */,
 				266CE252197E406500D8145B /* AMGroupPanelDetailView.m */,
 				266CE254197E41F700D8145B /* AMGroupPanelTableCellView.h */,

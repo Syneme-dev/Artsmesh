@@ -30,4 +30,10 @@
     return [self.userData oscServer];
 }
 
+-(BOOL)hideBar
+{
+    return NO;
+}
+
+
 @end

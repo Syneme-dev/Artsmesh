@@ -15,6 +15,7 @@
 #import "AMLiveGroupItem.h"
 #import "AMLiveUserItem.h"
 #import "NSView_Constrains.h"
+#import "AMGroupOutlineRowView.h"
 
 @interface AMLocalGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -147,10 +148,16 @@
     return cellView;
 }
 
-//- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
-//{
-//    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
-//    
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
+    
+    if ([item isKindOfClass:[AMLiveGroupItem class]]) {
+        rowView.headImage = [NSImage imageNamed:@"group_offline"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+        
+    }
+
 //    if ([item isKindOfClass:[AMGroupPanelLabelCellController class]]) {
 //        
 //        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
@@ -168,13 +175,12 @@
 //                rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
 //            }
 //        }else{
-//            rowView.headImage = [NSImage imageNamed:@"group_offline"];
-//            rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+//         
 //        }
 //    }
-//    
-//    return rowView;
-//}
+    
+    return rowView;
+}
 
 
 @end

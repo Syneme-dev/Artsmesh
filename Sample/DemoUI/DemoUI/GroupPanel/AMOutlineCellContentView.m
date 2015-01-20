@@ -295,7 +295,10 @@
 - (void)mouseEntered:(NSEvent *)theEvent
 {
     for (NSButton *btn in self.autoHideBtns) {
-        [btn setHidden:NO];
+        
+        if (btn.enabled) {
+            [btn setHidden:NO];
+        }
     }
 }
 

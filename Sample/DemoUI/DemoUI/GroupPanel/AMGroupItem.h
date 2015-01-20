@@ -7,15 +7,17 @@
 //
 
 #import "AMOutlineItem.h"
-#import "AMLocalGroupCellContentView.h"
+#import "AMGroupCellContentView.h"
 #import "AMCoreData/AMCoreData.h"
 
-@interface AMLiveGroupItem : AMOutlineItem<AMLocalGroupCellContentViewDataSource>
+@interface AMGroupItem : AMOutlineItem<AMGroupCellContentViewDataSource>
 
 @property (nonatomic) AMLiveGroup* groupData;
 
-+(AMLiveGroupItem *)itemFromLiveGroup:(AMLiveGroup *)group;
++(AMGroupItem *)itemFromLiveGroup:(AMLiveGroup *)group;
 
 -(BOOL)isBroadcasting;
+-(BOOL)canLeave;
+-(BOOL)canMerge;
 
 @end

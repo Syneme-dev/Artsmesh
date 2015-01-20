@@ -99,6 +99,26 @@
     return nil;
 }
 
+
++(BOOL)isUser:(AMLiveUser *)user inGroup:(AMLiveGroup *)group
+{
+    for (AMLiveUser* user in group.users) {
+        
+        if ([user.userid isEqualToString:user.userid]) {
+            return YES;
+        }
+    }
+    
+    for (AMLiveGroup* subgroup in group.subGroups) {
+        if ([AMCoreData isUser:user inGroup:subgroup]) {
+            return  YES;
+        }
+    }
+    
+    return NO;
+}
+
+
 -(BOOL)isMySelfIn:(AMLiveGroup*)group
 {
     for (AMLiveUser* user in group.users) {

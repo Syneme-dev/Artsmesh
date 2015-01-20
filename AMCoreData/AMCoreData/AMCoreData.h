@@ -50,6 +50,8 @@
 -(AMLiveGroup*)mergedGroup;
 -(NSArray *)myMergedGroupsInFlat;
 
++(BOOL)isUser:(AMLiveUser *)user inGroup:(AMLiveGroup *)group;
+
 @end
 
 

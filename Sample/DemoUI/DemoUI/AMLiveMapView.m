@@ -23,8 +23,8 @@
 #import "UIFramework/AMBorderView.h"
 
 
-#import "AMLiveGroupDataSource.h"
-#import "AMStaticGroupDataSource.h"
+//#import "AMLiveGroupDataSource.h"
+//#import "AMStaticGroupDataSource.h"
 #import "AMStatusNet/AMStatusNet.h"
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
@@ -61,7 +61,7 @@
 @property (nonatomic) BOOL isMeshed;
 @property (nonatomic) AMLiveGroup *myGroup;
 @property (nonatomic) AMLiveGroup *hovGroup;
-@property (strong)AMLiveGroupDataSource* liveGroupDataSource;
+//@property (strong)AMLiveGroupDataSource* liveGroupDataSource;
 
 @end
 

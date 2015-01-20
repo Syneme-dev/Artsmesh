@@ -1,31 +1,30 @@
 //
-//  AMLocalGroupViewController.m
+//  AMLiveGroupViewController.m
 //  DemoUI
 //
-//  Created by 王为 on 18/1/15.
+//  Created by 王为 on 20/1/15.
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMLocalGroupViewController.h"
+#import "AMLiveGroupViewController.h"
 #import "AMCoreData/AMCoreData.h"
-#import "AMOutlineCellContentView.h"
-#import "AMUserCellContentView.h"
-#import "AMGroupCellContentView.h"
 #import "AMOutlineItem.h"
-#import "AMGroupItem.h"
 #import "AMLiveUserItem.h"
+#import "AMOutlineCellContentView.h"
 #import "NSView_Constrains.h"
 #import "AMGroupOutlineRowView.h"
+#import "AMGroupCellContentView.h"
+#import "AMGroupItem.h"
 
-@interface AMLocalGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface AMLiveGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
+
 @end
 
-@implementation AMLocalGroupViewController
+@implementation AMLiveGroupViewController
 {
     AMOutlineItem *_rootItem;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,32 +36,45 @@
     self.outlineView.delegate = self;
 }
 
-
 -(void)viewWillAppear
 {
     [self loadLocalGroup:nil];
 }
-
-
--(void)loadLocalGroup:(NSNotification *)notification
-{
-    AMLiveGroup *liveGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    AMGroupItem *groupItem = [AMGroupItem itemFromLiveGroup:liveGroup];
-    _rootItem = groupItem;
-    
-    [_outlineView reloadData];
-}
-
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+-(void)loadLocalGroup:(NSNotification *)notification
+{
+
+    if (![AMCoreData shareInstance].mySelf.isOnline) {
+        _rootItem = nil;
+        [_outlineView reloadData];
+        return;
+    }
+    
+    _rootItem = [AMOutlineItem itemFromLabel:@"ARTSMESH"];
+    NSMutableArray *subItems = [[NSMutableArray alloc] init];
+    _rootItem.subItems = subItems;
+    
+    for (AMLiveGroup *liveGroup in [AMCoreData shareInstance].remoteLiveGroups) {
+        AMGroupItem *groupItem = [AMGroupItem itemFromLiveGroup:liveGroup];
+        [subItems addObject:groupItem];
+    }
+    
+    [_outlineView reloadData];
+}
+
 
 #pragma mark NSOutlineViewDataSource
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
+    if (_rootItem == nil) {
+        return 0;
+    }
+    
     if (item == nil) {
         return 1;
     }
@@ -144,7 +156,7 @@
         
         [cellView addFullConstrainsToSubview:cellContentView];
     }
-
+    
     return cellView;
 }
 
@@ -153,35 +165,16 @@
 {
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
-    if ([item isKindOfClass:[AMGroupItem class]]) {
-        rowView.headImage = [NSImage imageNamed:@"group_offline"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+    if ([item isKindOfClass:[AMGroupItem class]] ||
+        [item isKindOfClass:[AMOutlineItem class]]) {
+        rowView.headImage = [NSImage imageNamed:@"group_online"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
         
     }
-
-//    if ([item isKindOfClass:[AMGroupPanelLabelCellController class]]) {
-//        
-//        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
-//        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
-//        
-//    }else if([item isKindOfClass:[AMGroupPanelGroupCellController class]]){
-//        
-//        AMGroupPanelGroupCellController* groupController = (AMGroupPanelGroupCellController*)item;
-//        if ([groupController.group isMeshed]) {
-//            if (groupController.group.busy) {
-//                rowView.headImage = [NSImage imageNamed:@"live_group_busy_vertical"];
-//                rowView.alterHeadImage = [NSImage imageNamed:@"live_group_busy_horizen"];
-//            }else{
-//                rowView.headImage = [NSImage imageNamed:@"group_online"];
-//                rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-//            }
-//        }else{
-//         
-//        }
-//    }
     
     return rowView;
 }
+
 
 
 @end

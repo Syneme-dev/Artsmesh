@@ -62,7 +62,7 @@
     }
    
     if (self.projectDescription) {
-        dict[@"projectDesctription"] = self.projectDescription;
+        dict[@"projectDescription"] = self.projectDescription;
     }
 
     if (self.busy) {

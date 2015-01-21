@@ -114,6 +114,8 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:localGroup.description forKey:Preference_Key_Cluster_Description];
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:localGroup.projectDescription forKey:Preference_Key_Cluster_Project_Descrition];
     
     self.broadcastingCheck.checked = localGroup.broadcasting;
     self.broadcastingURLField.stringValue = localGroup.broadcastingURL;

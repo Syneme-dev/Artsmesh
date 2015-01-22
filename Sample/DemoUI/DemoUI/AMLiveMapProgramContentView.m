@@ -110,12 +110,6 @@
         self.totalH += self.liveVideoStream.frame.size.height;
         self.totalH += self.bottomMargin;
         
-        // If the group project has a description, display it here
-        if ([theGroup.projectDescription length] > 0) {
-            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
-        }
-        //NSLog(@"the project description is: %@", theGroup.projectDescription);
-        
         // Record the fields for later use
         
         NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
@@ -127,6 +121,12 @@
 
 - (void)fillLiveGroup:(AMLiveGroup *)theGroup {
     if (self.enclosingScrollView) {
+        // If the group project has a description, display it here
+        if ([theGroup.projectDescription length] > 0) {
+            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        }
+        //NSLog(@"the project description is: %@", theGroup.projectDescription);
+        
         // Add Group Name
         if ([theGroup.fullName length] == 0 || [theGroup.fullName isEqualToString:@"Full Name"]){
             NSLog(@"Group Full Name is: %@", theGroup.fullName);

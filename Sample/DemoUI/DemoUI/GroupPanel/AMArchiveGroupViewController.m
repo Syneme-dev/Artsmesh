@@ -14,6 +14,7 @@
 #import "AMArchiveGroupItem.h"
 #import "AMArchiveCellContentView.h"
 #import "NSView_Constrains.h"
+#import "AMStatusNet/AMStatusNet.h"
 
 @interface AMArchiveGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
 
@@ -30,15 +31,17 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalGroup:) name:AM_STATIC_GROUP_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadArchiveGroup:) name:AM_STATIC_GROUP_CHANGED object:nil];
     
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
+    
+    [[AMStatusNet shareInstance] loadGroups];
 }
 
 -(void)viewWillAppear
 {
-    [self loadLocalGroup:nil];
+    [self loadArchiveGroup:nil];
 }
 
 -(void)dealloc
@@ -47,19 +50,31 @@
 }
 
 
--(void)loadLocalGroup:(NSNotification *)notification
+-(void)loadArchiveGroup:(NSNotification *)notification
 {
-    _rootItem = [AMOutlineItem itemFromLabel:@"ARCHIVE"];
+    _rootItem = [AMOutlineItem itemFromLabel:@"Archive Group"];
     NSMutableArray *subItems = [[NSMutableArray alloc] init];
     _rootItem.subItems = subItems;
+    _rootItem.shouldExpanded = YES;
     
     for (AMStaticGroup *sGroup in [AMCoreData shareInstance].staticGroups) {
         AMArchiveGroupItem *groupItem = [AMArchiveGroupItem itemFromArchiveGroup:sGroup];
         [subItems addObject:groupItem];
     }
     
+    //setExpanded
+    //TODO:here if some group quit and never join again, its name will
+    //stay in the expandedNode array, if the panel never close, the memory
+    //wil contiuely growing. But if we have less than 1000 groups, we can ignore
+    //that now
+    for (AMOutlineItem *subItem in _rootItem.subItems) {
+        if ([[self expandedNodes] containsObject:[subItem title]]) {
+            subItem.shouldExpanded = YES;
+            continue;
+        }
+    }
+    
     [_outlineView reloadData];
-    [_outlineView expandItem:[self.outlineView itemAtRow:0] expandChildren:NO];
 }
 
 
@@ -70,20 +85,6 @@
     }
     
     return _expanededNodes;
-}
-
-
--(BOOL)isMyGroup:(AMStaticGroup*)group
-{
-    NSArray* myGroups = [AMCoreData shareInstance].myStaticGroups;
-    for (AMStaticGroup* g in myGroups)
-    {
-        if ([g.g_id integerValue] == [group.g_id integerValue]) {
-            return YES;
-        }
-    }
-    
-    return NO;
 }
 
 
@@ -199,7 +200,7 @@
 {
     AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
     if (item != nil){
-        //item.isExpanded = YES;
+        item.shouldExpanded = YES;
         [[self expandedNodes] addObject:item.title];
     }
 }
@@ -209,7 +210,7 @@
 {
     AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
     if (item != nil){
-        //item.isExpanded = NO;
+        item.shouldExpanded = NO;
         [[self expandedNodes] removeObject:item.title];
     }
 }

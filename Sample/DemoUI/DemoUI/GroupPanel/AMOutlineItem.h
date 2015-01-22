@@ -14,6 +14,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic) NSArray *subItems;
+@property (nonatomic) BOOL shouldExpanded;
 
 -(BOOL)hideBar;
 -(NSImage *)barImage;

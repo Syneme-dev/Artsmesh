@@ -24,29 +24,36 @@
 @implementation AMLiveGroupViewController
 {
     AMOutlineItem *_rootItem;
+    NSMutableArray* _expanededNodes;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLocalGroup:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRemoteGroup:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
+    
+    [self loadRemoteGroup:nil];
 }
+
 
 -(void)viewWillAppear
 {
-    [self loadLocalGroup:nil];
+    //[self loadLocalGroup:nil];
 }
+
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)loadLocalGroup:(NSNotification *)notification
+
+-(void)loadRemoteGroup:(NSNotification *)notification
 {
 
     if (![AMCoreData shareInstance].mySelf.isOnline) {
@@ -55,16 +62,49 @@
         return;
     }
     
-    _rootItem = [AMOutlineItem itemFromLabel:@"ARTSMESH"];
+    _rootItem = [AMOutlineItem itemFromLabel:@"Artsmesh"];
     NSMutableArray *subItems = [[NSMutableArray alloc] init];
     _rootItem.subItems = subItems;
+    _rootItem.shouldExpanded = YES;
     
     for (AMLiveGroup *liveGroup in [AMCoreData shareInstance].remoteLiveGroups) {
         AMGroupItem *groupItem = [AMGroupItem itemFromLiveGroup:liveGroup];
         [subItems addObject:groupItem];
     }
     
+    //setExpanded
+    //TODO:here if some group quit and never join again, its name will
+    //stay in the expandedNode array, if the panel never close, the memory
+    //wil contiuely growing. But if we have less than 1000 groups, we can ignore
+    //that now
+    for (AMOutlineItem *subItem in _rootItem.subItems) {
+        if ([[self expandedNodes] containsObject:[subItem title]]) {
+            subItem.shouldExpanded = YES;
+            continue;
+        }
+        
+        //Always expanded my group
+        AMLiveGroup *group = [AMCoreData shareInstance].myLocalLiveGroup;
+        if ([subItem isKindOfClass:[AMGroupItem class]]) {
+            if([[(AMGroupItem *)subItem groupData].groupId isEqualToString:group.groupId]){
+                //
+                subItem.shouldExpanded = YES;
+                continue;
+            }
+        }
+    }
+    
     [_outlineView reloadData];
+}
+
+
+-(NSMutableArray*)expandedNodes
+{
+    if (_expanededNodes == nil) {
+        _expanededNodes = [[NSMutableArray alloc] init];
+    }
+    
+    return _expanededNodes;
 }
 
 
@@ -173,6 +213,26 @@
     }
     
     return rowView;
+}
+
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        item.shouldExpanded = YES;
+        [[self expandedNodes] addObject:item.title];
+    }
+}
+
+
+-(void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+    AMOutlineItem* item = [[notification userInfo]valueForKey:@"NSObject"];
+    if (item != nil){
+        item.shouldExpanded = NO;
+        [[self expandedNodes] removeObject:item.title];
+    }
 }
 
 

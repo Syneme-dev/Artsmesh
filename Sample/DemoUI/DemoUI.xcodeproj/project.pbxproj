@@ -70,6 +70,7 @@
 		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
 		4AB4ACC31A6CB96E003ECE24 /* AMOutlineCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC21A6CB96E003ECE24 /* AMOutlineCellContentView.m */; };
 		4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC51A6CC097003ECE24 /* AMGroupCellContentView.m */; };
 		4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC81A6CC825003ECE24 /* AMUserCellContentView.m */; };
@@ -372,6 +373,8 @@
 		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
+		4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineView.h; sourceTree = "<group>"; };
+		4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineView.m; sourceTree = "<group>"; };
 		4AB4ACC11A6CB96E003ECE24 /* AMOutlineCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineCellContentView.h; sourceTree = "<group>"; };
 		4AB4ACC21A6CB96E003ECE24 /* AMOutlineCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineCellContentView.m; sourceTree = "<group>"; };
 		4AB4ACC41A6CC097003ECE24 /* AMGroupCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupCellContentView.h; sourceTree = "<group>"; };
@@ -1110,6 +1113,8 @@
 		CEC2FC37196588FD00AFD309 /* GroupPanel */ = {
 			isa = PBXGroup;
 			children = (
+				4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */,
+				4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */,
 				CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */,
 				CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */,
 				CEC2FC53196588FD00AFD309 /* AMGroupPanelViewController.xib */,
@@ -1409,6 +1414,7 @@
 				4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */,
 				CE486AA81A280CB900D35B82 /* AMSyphonViewController.m in Sources */,
 				4AB4ACD41A6CCD39003ECE24 /* AMGroupItem.m in Sources */,
+				4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */,
 				4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */,
 				2D6D76F719C16E3300201106 /* AMPixel.m in Sources */,
 				4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */,

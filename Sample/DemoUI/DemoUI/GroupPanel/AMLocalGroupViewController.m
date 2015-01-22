@@ -50,6 +50,7 @@
     AMLiveGroup *liveGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     AMGroupItem *groupItem = [AMGroupItem itemFromLiveGroup:liveGroup];
     _rootItem = groupItem;
+    _rootItem.shouldExpanded = YES;
     
     [self reloadData];
 }
@@ -58,13 +59,6 @@
 -(void)reloadData
 {
     [_outlineView reloadData];
-    for (int i = 0; i < [self.outlineView numberOfRows]; i++) {
-        id item = [self.outlineView itemAtRow:i];
-        
-        if ([_expanededNodes containsObject:[item title]]) {
-            [self.outlineView expandItem:item];
-        }
-    }
 }
 
 

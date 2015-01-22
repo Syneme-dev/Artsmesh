@@ -19,9 +19,9 @@
         [self.infoBtn setTarget:self];
         [self.infoBtn setAction:@selector(infoBtnClicked:)];
 
-        
         self.socialBtn = [self setSecondBtnWithImage:
                          [NSImage imageNamed:@"user_Icon_FOAF"]];
+        
         [self.socialBtn setTarget:self];
         [self.socialBtn setAction:@selector(socialBtnClicked:)];
         

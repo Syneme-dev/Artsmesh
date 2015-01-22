@@ -37,8 +37,8 @@
         CGFloat top = (frameRect.size.height - 20) / 2;
         CGFloat bottom = top;
         CGFloat leading = 5;
-        CGFloat heigh = 20;
-        CGFloat width = 20;
+        CGFloat heigh = 15;
+        CGFloat width = 15;
         
         NSRect tempRect = NSMakeRect(0, 0, 1, 1);
         _barView = [[NSImageView alloc] initWithFrame:tempRect];
@@ -48,7 +48,7 @@
         [self addConstrainsToFixSizeSubview:_barView
                                leadingSpace:leading
                                       width:width
-                                   topSpace:top
+                                   topSpace:top + 3
                                      height:heigh];
         
         
@@ -168,7 +168,8 @@
 
 -(NSButton *)setFirstBtnWithImage:(NSImage *)image
 {
-    self.btn0.image = image;
+    NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.btn0.image = btnImage;
     [self autoHideBtn:self.btn0];
     
     return self.btn0;
@@ -177,7 +178,8 @@
 
 -(NSButton *)setSecondBtnWithImage:(NSImage *)image
 {
-    self.btn1.image = image;
+    NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.btn1.image = btnImage;
     [self autoHideBtn:self.btn1];
     
     return self.btn1;
@@ -186,7 +188,8 @@
 
 -(NSButton *)setThirdBtnWithImage:(NSImage *)image
 {
-    self.btn2.image = image;
+    NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.btn2.image = btnImage;
     [self autoHideBtn:self.btn2];
     
     return self.btn2;
@@ -216,14 +219,16 @@
 
 -(NSImageView *)setFirstIconWithImage:(NSImage *)image
 {
-    self.iconView0.image = image;
+    NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.iconView0.image = iconImage;
     return self.iconView0;
 }
 
 
 -(NSImageView *)setSecondIconWithImage:(NSImage *)image
 {
-    self.iconView1.image = image;
+    NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.iconView1.image = iconImage;
     return self.iconView1;
 }
 
@@ -287,6 +292,25 @@
                                  userInfo:nil];
     [self addTrackingArea:trackArea];
     
+}
+
+- (NSImage*) resizeImage:(NSImage*)sourceImage size:(NSSize)size
+{
+    
+    NSRect targetFrame = NSMakeRect(0, 0, size.width, size.height);
+    NSImage* targetImage = nil;
+    NSImageRep *sourceImageRep =
+    [sourceImage bestRepresentationForRect:targetFrame
+                                   context:nil
+                                     hints:nil];
+    
+    targetImage = [[NSImage alloc] initWithSize:size];
+    
+    [targetImage lockFocus];
+    [sourceImageRep drawInRect: targetFrame];
+    [targetImage unlockFocus];
+    
+    return targetImage;
 }
 
 

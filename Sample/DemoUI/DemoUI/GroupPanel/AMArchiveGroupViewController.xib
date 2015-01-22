@@ -81,7 +81,7 @@
                         <constraint firstAttribute="height" constant="21" id="8OK-Tj-SBi"/>
                         <constraint firstAttribute="width" constant="23" id="xqg-ly-9KU"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="🔄" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="jWJ-BL-CKS">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="static_group_refresh" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="jWJ-BL-CKS">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -101,4 +101,7 @@
             <point key="canvasLocation" x="335.5" y="354"/>
         </customView>
     </objects>
+    <resources>
+        <image name="static_group_refresh" width="512" height="512"/>
+    </resources>
 </document>

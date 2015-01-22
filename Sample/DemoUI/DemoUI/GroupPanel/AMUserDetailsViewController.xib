@@ -293,7 +293,6 @@
                 <constraint firstAttribute="trailing" secondItem="JTo-8u-j9f" secondAttribute="trailing" constant="20" id="zVt-OP-m71"/>
             </constraints>
             <connections>
-                <outlet property="closeBtn" destination="hJQ-v6-N1M" id="6AH-Dv-c85"/>
                 <outlet property="emptyBtn" destination="lYL-at-Ltp" id="fgH-Tl-SfI"/>
             </connections>
             <point key="canvasLocation" x="308.5" y="199.5"/>

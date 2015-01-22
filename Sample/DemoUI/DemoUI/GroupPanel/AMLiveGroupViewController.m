@@ -60,11 +60,6 @@
 -(void)loadRemoteGroup:(NSNotification *)notification
 {
 
-    if (![AMCoreData shareInstance].mySelf.isOnline) {
-        _rootItem = nil;
-        [_outlineView reloadData];
-        return;
-    }
     
     _rootItem = [AMOutlineItem itemFromLabel:@"Artsmesh"];
     NSMutableArray *subItems = [[NSMutableArray alloc] init];

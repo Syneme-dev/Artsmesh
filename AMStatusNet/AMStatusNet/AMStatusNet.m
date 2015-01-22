@@ -124,6 +124,8 @@
     [self loadMyGroups:self.userName];
 }
 
+
+
 -(void)loadMyGroups:(NSString*)userName
 {
     if (self.homePage == nil || [self.homePage isEqualToString:@""]){

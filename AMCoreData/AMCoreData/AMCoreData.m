@@ -10,6 +10,9 @@
 
 @implementation AMCoreData
 
+@synthesize staticGroups = _staticGroups;
+@synthesize myStaticGroups = _myStaticGroups;
+
 +(AMCoreData*)shareInstance
 {
     static AMCoreData* sharedCoreData = nil;
@@ -168,5 +171,94 @@
     
     return nil;
 }
+
+
+-(NSArray *)myStaticGroups{
+    return _myStaticGroups;
+}
+
+
+-(void)setMyStaticGroups:(NSArray *)myStaticGroups
+{
+    _myStaticGroups = myStaticGroups;
+    [self sortStaticGroup];
+}
+
+
+-(NSArray *)staticGroups
+{
+    return _staticGroups;
+}
+
+
+-(void)setStaticGroups:(NSArray *)staticGroups
+{
+    _staticGroups = staticGroups;
+    [self sortStaticGroup];
+}
+
+
+-(void)sortStaticGroup
+{
+    NSMutableArray *newGroupArr = [[NSMutableArray alloc] init];
+    if (_staticGroups != nil) {
+        if (_myStaticGroups != nil) {
+            for(AMStaticGroup* myGroup in _myStaticGroups){
+                
+                BOOL inserted = NO;
+                
+                for (int i = 0; i < [newGroupArr count]; i++) {
+                    AMStaticGroup* g = newGroupArr[i];
+        
+                    if ([myGroup.users count] > [g.users count]) {
+                        [newGroupArr insertObject:myGroup atIndex:i];
+                        inserted = YES;
+                        break;
+                    }
+                }
+            
+                if (inserted == NO) {
+                    [newGroupArr addObject:myGroup];
+                }
+            }
+        }
+        
+        for(AMStaticGroup* sg in _staticGroups){
+            
+            BOOL isMyGroup = NO;
+            for (AMStaticGroup* myGroup in _myStaticGroups) {
+                if ([myGroup.g_id isEqualTo:sg.g_id]) {
+                    isMyGroup = YES;
+                    break;
+                }
+            }
+            
+            if (isMyGroup) {
+                continue;
+            }
+            
+            
+            BOOL inserted = NO;
+            for (long i = [_myStaticGroups count]; i < [newGroupArr count]; i++) {
+                
+                AMStaticGroup* currentGroup = newGroupArr[i];
+                
+                if ([sg.users count] > [currentGroup.users count]) {
+                    [newGroupArr insertObject:sg atIndex:i];
+                    inserted = YES;
+                    break;
+                }
+            }
+
+            if (inserted == NO) {
+                [newGroupArr addObject:sg];
+            }
+        }
+    }
+    
+    _staticGroups = newGroupArr;
+
+}
+
 
 @end

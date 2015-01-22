@@ -32,7 +32,7 @@
 @optional
 -(void)infoBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView;
 -(void)mergeBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView;
--(void)leaveBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView;;
+-(void)leaveBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView;
 
 
 @end

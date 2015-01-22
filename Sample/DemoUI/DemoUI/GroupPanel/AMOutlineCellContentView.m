@@ -272,6 +272,23 @@
     }
 }
 
+-(void)setFrame:(NSRect)frame
+{
+    [super setFrame:frame];
+    
+    for (NSTrackingArea *area in self.trackingAreas) {
+        [self removeTrackingArea:area];
+    }
+    
+    NSTrackingArea* trackArea = [[NSTrackingArea alloc]
+                                 initWithRect:frame
+                                 options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveInKeyWindow )
+                                 owner:self
+                                 userInfo:nil];
+    [self addTrackingArea:trackArea];
+    
+}
+
 
 #pragma mark Double Click
 - (void)mouseUp:(NSEvent *)event

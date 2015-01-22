@@ -15,8 +15,13 @@
 #import "AMArchiveCellContentView.h"
 #import "NSView_Constrains.h"
 #import "AMStatusNet/AMStatusNet.h"
+#import "AMStaticGroupDetailsViewController.h"
+#import "AMStaticUserDetailsViewController.h"
 
-@interface AMArchiveGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface AMArchiveGroupViewController ()<NSOutlineViewDataSource,
+NSOutlineViewDelegate,
+AMArchiveCellContentViewDelegate,
+AMGroupDetailViewDelegate>
 
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @end
@@ -25,6 +30,7 @@
 {
     AMOutlineItem *_rootItem;
     NSMutableArray* _expanededNodes;
+    NSViewController* _detailViewController;
 }
 
 - (void)viewDidLoad {
@@ -43,6 +49,7 @@
 {
     [self loadArchiveGroup:nil];
 }
+
 
 -(void)dealloc
 {
@@ -85,6 +92,75 @@
     }
     
     return _expanededNodes;
+}
+
+#pragma mark AMGroupDetailViewDelegate
+-(void)resignDetailView:(NSViewController *)detailVC
+{
+    [self hideDetailView];
+}
+
+
+#pragma mark AMArchiveCellContentViewDelegate
+
+-(void)infoBtnClickOnContentCellView:(AMArchiveCellContentView *)contentCellView
+{
+    [self hideDetailView];
+    
+    if ([contentCellView.dataSource isKindOfClass:[AMArchiveGroupItem class]]) {
+        
+        AMArchiveGroupItem * groupItem = contentCellView.dataSource;
+        if (groupItem) {
+            AMStaticGroupDetailsViewController* sdc = [[AMStaticGroupDetailsViewController alloc] init];
+            sdc.staticGroup = groupItem.archiveGroupData;
+            sdc.hostVC = self;
+            _detailViewController = sdc;
+        }
+        
+    }else if ([contentCellView.dataSource isKindOfClass:[AMArchiveUserItem class]]){
+        
+        AMArchiveUserItem * userItem = contentCellView.dataSource;
+        if (userItem) {
+            AMStaticUserDetailsViewController* sdc = [[AMStaticUserDetailsViewController alloc] init];
+            sdc.staticUser = userItem.userData;
+            sdc.hostVC = self;
+            _detailViewController = sdc;
+        }
+    }
+    
+    if (_detailViewController) {
+        [self.view addSubview:_detailViewController.view];
+        
+        _detailViewController.view.layer.backgroundColor = [[NSColor colorWithCalibratedRed:38.0/255.0 green:38.0/255.0 blue:38.0/255.0 alpha:0.95] CGColor];
+
+        NSRect rect = _detailViewController.view.frame;
+        NSRect tabFrame = self.view.frame;
+        rect.origin.x = tabFrame.origin.x;
+        rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+        rect.size.width = tabFrame.size.width;
+        [_detailViewController.view setFrame:rect];
+        
+        rect.origin.y -= rect.size.height;
+        [_detailViewController.view.animator setFrame:rect];
+        
+        [self.view display];
+
+    }
+}
+
+
+-(void)socialBtnClickOnContentCellView:(AMArchiveCellContentView *)contentCellView
+{
+    
+}
+
+
+-(void)hideDetailView
+{
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
 }
 
 

@@ -71,6 +71,14 @@
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
+		4A8C69E11A7092B800540694 /* AMStaticGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C69E01A7092B800540694 /* AMStaticGroupDetailsViewController.xib */; };
+		4A8C69E41A7092CD00540694 /* AMStaticGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69E31A7092CD00540694 /* AMStaticGroupDetailsViewController.m */; };
+		4A8C69E71A70939500540694 /* AMStaticUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69E61A70939500540694 /* AMStaticUserDetailsViewController.m */; };
+		4A8C69E91A7093A000540694 /* AMStaticUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C69E81A7093A000540694 /* AMStaticUserDetailsViewController.xib */; };
+		4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69F11A70A0E200540694 /* AMUserDetailsViewController.m */; };
+		4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69F31A70A0E200540694 /* AMGroupDetailsViewController.m */; };
+		4A8C69F81A70A0ED00540694 /* AMGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C69F61A70A0ED00540694 /* AMGroupDetailsViewController.xib */; };
+		4A8C69F91A70A0ED00540694 /* AMUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C69F71A70A0ED00540694 /* AMUserDetailsViewController.xib */; };
 		4AB4ACC31A6CB96E003ECE24 /* AMOutlineCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC21A6CB96E003ECE24 /* AMOutlineCellContentView.m */; };
 		4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC51A6CC097003ECE24 /* AMGroupCellContentView.m */; };
 		4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACC81A6CC825003ECE24 /* AMUserCellContentView.m */; };
@@ -375,6 +383,19 @@
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
 		4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineView.h; sourceTree = "<group>"; };
 		4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineView.m; sourceTree = "<group>"; };
+		4A8C69E01A7092B800540694 /* AMStaticGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticGroupDetailsViewController.xib; sourceTree = "<group>"; };
+		4A8C69E21A7092CD00540694 /* AMStaticGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticGroupDetailsViewController.h; sourceTree = "<group>"; };
+		4A8C69E31A7092CD00540694 /* AMStaticGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticGroupDetailsViewController.m; sourceTree = "<group>"; };
+		4A8C69E51A70939500540694 /* AMStaticUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStaticUserDetailsViewController.h; sourceTree = "<group>"; };
+		4A8C69E61A70939500540694 /* AMStaticUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStaticUserDetailsViewController.m; sourceTree = "<group>"; };
+		4A8C69E81A7093A000540694 /* AMStaticUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticUserDetailsViewController.xib; sourceTree = "<group>"; };
+		4A8C69ED1A7099A600540694 /* AMGroupDetailViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailViewDelegate.h; sourceTree = "<group>"; };
+		4A8C69F01A70A0E200540694 /* AMUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserDetailsViewController.h; sourceTree = "<group>"; };
+		4A8C69F11A70A0E200540694 /* AMUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserDetailsViewController.m; sourceTree = "<group>"; };
+		4A8C69F21A70A0E200540694 /* AMGroupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupDetailsViewController.h; sourceTree = "<group>"; };
+		4A8C69F31A70A0E200540694 /* AMGroupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupDetailsViewController.m; sourceTree = "<group>"; };
+		4A8C69F61A70A0ED00540694 /* AMGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupDetailsViewController.xib; sourceTree = "<group>"; };
+		4A8C69F71A70A0ED00540694 /* AMUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserDetailsViewController.xib; sourceTree = "<group>"; };
 		4AB4ACC11A6CB96E003ECE24 /* AMOutlineCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineCellContentView.h; sourceTree = "<group>"; };
 		4AB4ACC21A6CB96E003ECE24 /* AMOutlineCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineCellContentView.m; sourceTree = "<group>"; };
 		4AB4ACC41A6CC097003ECE24 /* AMGroupCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupCellContentView.h; sourceTree = "<group>"; };
@@ -919,6 +940,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4A8C69DF1A70901C00540694 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				4A8C69F01A70A0E200540694 /* AMUserDetailsViewController.h */,
+				4A8C69F11A70A0E200540694 /* AMUserDetailsViewController.m */,
+				4A8C69F71A70A0ED00540694 /* AMUserDetailsViewController.xib */,
+				4A8C69F21A70A0E200540694 /* AMGroupDetailsViewController.h */,
+				4A8C69F31A70A0E200540694 /* AMGroupDetailsViewController.m */,
+				4A8C69F61A70A0ED00540694 /* AMGroupDetailsViewController.xib */,
+				4A8C69E51A70939500540694 /* AMStaticUserDetailsViewController.h */,
+				4A8C69E61A70939500540694 /* AMStaticUserDetailsViewController.m */,
+				4A8C69E81A7093A000540694 /* AMStaticUserDetailsViewController.xib */,
+				4A8C69E21A7092CD00540694 /* AMStaticGroupDetailsViewController.h */,
+				4A8C69E31A7092CD00540694 /* AMStaticGroupDetailsViewController.m */,
+				4A8C69E01A7092B800540694 /* AMStaticGroupDetailsViewController.xib */,
+				4A8C69ED1A7099A600540694 /* AMGroupDetailViewDelegate.h */,
+			);
+			name = DetailViews;
+			sourceTree = "<group>";
+		};
 		4A8E05831A1C754400645840 /* OSCMonitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1132,6 +1173,7 @@
 				4AB4ACCB1A6CCA74003ECE24 /* OutlineItems */,
 				4AB4ACCA1A6CCA5F003ECE24 /* Cells */,
 				013B2D6F1A6DAD7B0076981E /* Rows */,
+				4A8C69DF1A70901C00540694 /* DetailViews */,
 			);
 			path = GroupPanel;
 			sourceTree = "<group>";
@@ -1278,12 +1320,14 @@
 				AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */,
 				AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */,
 				AFD7575D195D048E0057976D /* shot_oscMessage.png in Resources */,
+				4A8C69E11A7092B800540694 /* AMStaticGroupDetailsViewController.xib in Resources */,
 				AFAEBDB819610BEA00B7FB51 /* Users.png in Resources */,
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AFAEBD9B19610B8700B7FB51 /* OnlineDot.png in Resources */,
 				AFAEBDAB19610BEA00B7FB51 /* Attachement.png in Resources */,
 				AF1D4D41193F0EFF00C3B435 /* AMMenuItemView.xib in Resources */,
 				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
+				4A8C69F91A70A0ED00540694 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9C19610B8700B7FB51 /* QuitGroup.png in Resources */,
 				AF86600919401C83008DB7CA /* AMTestView.xib in Resources */,
 				CE486AA91A280CB900D35B82 /* AMSyphonViewController.xib in Resources */,
@@ -1294,6 +1338,7 @@
 				CE5954861A3E821F00676D12 /* AMTimerTabVC.xib in Resources */,
 				2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */,
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
+				4A8C69F81A70A0ED00540694 /* AMGroupDetailsViewController.xib in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
 				AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */,
@@ -1310,6 +1355,7 @@
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
 				AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */,
+				4A8C69E91A7093A000540694 /* AMStaticUserDetailsViewController.xib in Resources */,
 				AFAEBDB619610BEA00B7FB51 /* ShareLocation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1376,6 +1422,7 @@
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
+				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				2D5CF7C91A1FD5960025C625 /* AMProfileTextFieldFormatter.m in Sources */,
@@ -1409,6 +1456,7 @@
 				4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
+				4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */,
@@ -1419,6 +1467,7 @@
 				2D6D76F719C16E3300201106 /* AMPixel.m in Sources */,
 				4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */,
 				AFE5FC5F196A41270079B434 /* AMRestHelper.m in Sources */,
+				4A8C69E71A70939500540694 /* AMStaticUserDetailsViewController.m in Sources */,
 				4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */,
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
@@ -1433,6 +1482,7 @@
 				262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				2D016D5B1A0C05E50044F0E0 /* AMGroupPreviewPanelController.m in Sources */,
+				4A8C69E41A7092CD00540694 /* AMStaticGroupDetailsViewController.m in Sources */,
 				CE486AAC1A280CB900D35B82 /* AMVideo.m in Sources */,
 				2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,

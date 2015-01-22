@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMOutlineCellContentView.h"
+#import "AMOutlineCellContentView.h"  
 
 @interface AMArchiveCellContentView : AMOutlineCellContentView
 

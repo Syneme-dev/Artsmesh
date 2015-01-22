@@ -16,8 +16,11 @@
 #import "AMLiveUserItem.h"
 #import "NSView_Constrains.h"
 #import "AMGroupOutlineRowView.h"
+#import "AMGroupDetailViewDelegate.h"
+#import "AMGroupDetailsViewController.h"
+#import "AMUserDetailsViewController.h"
 
-@interface AMLocalGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface AMLocalGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate, AMGroupCellContentViewDelegate, AMGroupDetailViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
 @end
 
@@ -25,6 +28,7 @@
 {
     AMOutlineItem *_rootItem;
     NSMutableArray* _expanededNodes;
+    NSViewController* _detailViewController;
 }
 
 
@@ -75,6 +79,68 @@
     }
     
     return _expanededNodes;
+}
+
+#pragma mark AMGroupCellContentViewDelegate
+
+-(void)infoBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView
+{
+    [self hideDetailView];
+    
+    if ([contentCellView.dataSource isKindOfClass:[AMGroupItem class]]) {
+        
+        AMGroupItem * groupItem = contentCellView.dataSource;
+        if (groupItem) {
+            AMGroupDetailsViewController* sdc = [[AMGroupDetailsViewController alloc] init];
+            sdc.group = groupItem.groupData;
+            sdc.hostVC = self;
+            _detailViewController = sdc;
+        }
+        
+    }else if ([contentCellView.dataSource isKindOfClass:[AMLiveUserItem class]]){
+        
+        AMLiveUserItem * userItem = contentCellView.dataSource;
+        if (userItem) {
+            AMUserDetailsViewController* sdc = [[AMUserDetailsViewController alloc] init];
+            sdc.user = userItem.userData;
+            sdc.hostVC = self;
+            _detailViewController = sdc;
+        }
+    }
+    
+    if (_detailViewController) {
+        [self.view addSubview:_detailViewController.view];
+        
+        _detailViewController.view.layer.backgroundColor = [[NSColor colorWithCalibratedRed:38.0/255.0 green:38.0/255.0 blue:38.0/255.0 alpha:0.95] CGColor];
+        
+        NSRect rect = _detailViewController.view.frame;
+        NSRect tabFrame = self.view.frame;
+        rect.origin.x = tabFrame.origin.x;
+        rect.origin.y = tabFrame.origin.y + tabFrame.size.height;
+        rect.size.width = tabFrame.size.width;
+        [_detailViewController.view setFrame:rect];
+        
+        rect.origin.y -= rect.size.height;
+        [_detailViewController.view.animator setFrame:rect];
+        
+        [self.view display];
+        
+    }
+}
+
+-(void)hideDetailView
+{
+    if (_detailViewController) {
+        [_detailViewController.view removeFromSuperview];
+        _detailViewController = nil;
+    }
+}
+
+
+#pragma mark AMGroupDetailViewDelegate
+-(void)resignDetailView:(NSViewController *)detailVC
+{
+    [self hideDetailView];
 }
 
 

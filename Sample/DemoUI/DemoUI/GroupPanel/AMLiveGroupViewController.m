@@ -17,6 +17,7 @@
 #import "AMGroupItem.h"
 #import "AMGroupDetailsViewController.h"
 #import "AMUserDetailsViewController.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMLiveGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate, AMGroupCellContentViewDelegate, AMGroupDetailViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
@@ -161,13 +162,18 @@
 
 -(void)mergeBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView
 {
-    
+    if ([contentCellView.dataSource isKindOfClass:[AMGroupItem class]]) {
+        AMGroupItem *groupItem = (AMGroupItem *)contentCellView.dataSource;
+        if (groupItem) {
+            [[AMMesher sharedAMMesher] mergeGroup:groupItem.groupData.groupId];
+        }
+    }
 }
 
 
 -(void)leaveBtnClickOnContentCellView:(AMGroupCellContentView *)contentCellView
 {
-    
+    [[AMMesher sharedAMMesher] mergeGroup:@""];
 }
 
 -(void)hideDetailView

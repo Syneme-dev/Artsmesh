@@ -104,18 +104,4 @@
 
 }
 
-
--(void)popDetailPanel:(NSViewController*)panelController
-{
-    
-}
-
-
--(void)resignDetailPanel
-{
-    
-}
-
-
-
 @end

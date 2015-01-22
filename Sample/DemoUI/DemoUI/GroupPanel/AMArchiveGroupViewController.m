@@ -17,6 +17,7 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMStaticGroupDetailsViewController.h"
 #import "AMStaticUserDetailsViewController.h"
+#import "AMNotificationManager/AMNotificationManager.h"
 
 @interface AMArchiveGroupViewController ()<NSOutlineViewDataSource,
 NSOutlineViewDelegate,
@@ -94,6 +95,13 @@ AMGroupDetailViewDelegate>
     return _expanededNodes;
 }
 
+
+- (IBAction)refreshData:(id)sender
+{
+    [self loadArchiveGroup:nil];
+}
+
+
 #pragma mark AMGroupDetailViewDelegate
 -(void)resignDetailView:(NSViewController *)detailVC
 {
@@ -151,7 +159,27 @@ AMGroupDetailViewDelegate>
 
 -(void)socialBtnClickOnContentCellView:(AMArchiveCellContentView *)contentCellView
 {
-    
+    if ([contentCellView.dataSource isKindOfClass:[AMArchiveGroupItem class]]) {
+        
+        AMArchiveGroupItem * groupItem = contentCellView.dataSource;
+        if (groupItem) {
+            NSString* groupName = groupItem.archiveGroupData.nickname;
+            NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     groupName , @"GroupName", nil];
+            [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+        }
+        
+    }else if ([contentCellView.dataSource isKindOfClass:[AMArchiveUserItem class]]){
+        
+        AMArchiveUserItem * userItem = contentCellView.dataSource;
+        if (userItem) {
+   
+            NSString* url = userItem.userData.statusnet_profile_url;
+            NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     url , @"ProfileUrl", nil];
+            [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+        }
+    }
 }
 
 

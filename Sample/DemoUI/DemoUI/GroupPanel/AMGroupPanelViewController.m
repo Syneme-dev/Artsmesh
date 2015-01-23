@@ -41,6 +41,7 @@
     [AMButtonHandler changeTabTextColor:self.archiveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.liveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.localBtn toColor:UI_Color_blue];
+    [self.localBtn performClick:nil];
 }
 
 -(void)registerTabButtons
@@ -83,25 +84,23 @@
 
 - (IBAction)archiveBtnClick:(id)sender
 {
+    [self pushDownButton:self.archiveBtn];
     [self.groupTabView selectTabViewItemWithIdentifier:@"AMArchiveGroupViewController"];
 }
 
 
 - (IBAction)liveBtnClick:(id)sender
 {
+    [self pushDownButton:self.liveBtn];
     [self.groupTabView selectTabViewItemWithIdentifier:@"AMLiveGroupViewController"];
 }
 
 
 - (IBAction)localBtnClick:(id)sender
 {
+    [self pushDownButton:self.localBtn];
     [self.groupTabView selectTabViewItemWithIdentifier:@"AMLocalGroupViewController"];
 }
 
-
--(void)dealloc
-{
-
-}
 
 @end

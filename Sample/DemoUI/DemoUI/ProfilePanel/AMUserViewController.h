@@ -12,18 +12,13 @@
 #import "UIFramework/AMFoundryFontView.h"
 
 @interface AMUserViewController : AMTabPanelViewController
-@property (strong) IBOutlet NSTextField *statusMessageLabel;
+
 @property (strong) IBOutlet NSButton *userTabButton;
 @property (strong) IBOutlet NSButton *groupTabButton;
 @property (strong) IBOutlet NSButton *projectTabButton;
 @property (strong) IBOutlet NSTabView *tabs;
 - (IBAction)onUserTabClick:(id)sender;
 - (IBAction)onGroupTabClick:(id)sender;
-- (IBAction)onGotoUserInfoClick:(id)sender;
 - (IBAction)onProjectTabClick:(id)sender;
-@property (weak) IBOutlet NSImageView *userAvatarView;
-@property (weak) IBOutlet NSImageView *groupAvatarView;
-
-@property (strong) IBOutlet AMFoundryFontView *projectDescriptionTextView;
 
 @end

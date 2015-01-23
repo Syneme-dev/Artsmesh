@@ -317,10 +317,6 @@
 {
     AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server");
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
-    });
-    
     if([[AMMesher sharedAMMesher] clusterState] != kClusterStarted){
         return;
     }
@@ -344,12 +340,15 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            
             AMLog(kAMErrorLog, @"AMMesher", @"update self failed: %@", responseStr);
             return;
         }
         
         AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server finished");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:AM_MYSELF_CHANGED_LOCAL object:nil userInfo:nil];
+        });
     };
     
     [_httpRequestQueue addOperation:req];

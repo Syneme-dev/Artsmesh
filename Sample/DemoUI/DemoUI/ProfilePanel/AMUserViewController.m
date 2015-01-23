@@ -60,10 +60,12 @@
     [AMButtonHandler changeTabTextColor:self.userTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.groupTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.projectTabButton toColor:UI_Color_blue];
-    self.groupBusyCheckbox.title = @"BUSY";
+    self.groupBusyCheckbox.title = @"LOCK";
     self.groupBusyCheckbox.delegate = self;
     self.userBusyCheckBox.title = @"BUSY";
     self.userBusyCheckBox.delegate = self;
+    self.broadcastingCheck.title = @"BROADCAST";
+    self.broadcastingCheck.font  = [NSFont fontWithName: @"FoundryMonoline-Bold" size: 9.0f];
     self.broadcastingCheck.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localGroupChanging) name:AM_MYGROUP_CHANGING_LOCAL object:nil];
@@ -74,6 +76,7 @@
     
     self.userBusyCheckBox.checked = [AMCoreData shareInstance].mySelf.busy;
     self.groupBusyCheckbox.checked = [AMCoreData shareInstance].myLocalLiveGroup.busy;
+    //self.broadcastingCheck.checked = [AMCoreData shareInstance].
     [self loadUserAvatar];
     [self loadGroupAvatar];
     [self onUserTabClick:self.userTabButton];
@@ -523,7 +526,7 @@
     }
     
     if (sender == self.groupBusyCheckbox) {
-        [self setGroupBusy:sender.checked];
+        [self setGroupLock:sender.checked];
         return;
     }
     
@@ -531,7 +534,6 @@
         [self setBroadcasting:self.broadcastingCheck.checked];
         return;
     }
-
 }
 
 
@@ -570,7 +572,7 @@
 }
 
 
--(void)setGroupBusy:(BOOL)busy
+-(void)setGroupLock:(BOOL)busy
 {
     AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;

@@ -15,12 +15,8 @@
 		2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */; };
 		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
 		209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */; };
-		2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602038319809E2C0013687A /* AMUserLogonViewController.m */; };
-		2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2602038419809E2C0013687A /* AMUserLogonViewController.xib */; };
 		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
-		262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */; };
-		262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */; };
 		2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
@@ -45,7 +41,6 @@
 		2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */; };
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
-		2D5CF7C91A1FD5960025C625 /* AMProfileTextFieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5CF7C81A1FD5960025C625 /* AMProfileTextFieldFormatter.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -64,6 +59,15 @@
 		37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C23182187A8FFD00554AFD /* AMAppDelegate.m */; };
 		37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C23184187A8FFD00554AFD /* MainMenu.xib */; };
 		37C23188187A8FFD00554AFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C23187187A8FFD00554AFD /* Images.xcassets */; };
+		4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A0F81A7220B1006FEDD7 /* AMGroupCreateViewController.m */; };
+		4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A0F91A7220B1006FEDD7 /* AMGroupCreateViewController.xib */; };
+		4A32A1081A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A0FB1A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m */; };
+		4A32A1091A7220B1006FEDD7 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A0FD1A7220B1006FEDD7 /* AMTabItemView.m */; };
+		4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A0FF1A7220B1006FEDD7 /* AMUserLogonViewController.m */; };
+		4A32A10B1A7220B1006FEDD7 /* AMUserLogonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A1001A7220B1006FEDD7 /* AMUserLogonViewController.xib */; };
+		4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A1021A7220B1006FEDD7 /* AMUserNameFormatter.m */; };
+		4A32A10D1A7220B1006FEDD7 /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A1031A7220B1006FEDD7 /* AMUserView.xib */; };
+		4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A1051A7220B1006FEDD7 /* AMUserViewController.m */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
 		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -140,7 +144,6 @@
 		AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86600B19401F4D008DB7CA /* AMTestViewController.m */; };
 		AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */; };
 		AF9205421910B42D0051BE63 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; };
-		AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */; };
 		AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF9DC78018E963B40029DB97 /* AMPanelView.xib */; };
 		AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD831961075F00B7FB51 /* mapShot.png */; };
 		AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD841961075F00B7FB51 /* visualShot.png */; };
@@ -215,14 +218,11 @@
 		CEC2FC64196588FD00AFD309 /* AMGroupPanelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC53196588FD00AFD309 /* AMGroupPanelViewController.xib */; };
 		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
-		D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E818E9539B00C84092 /* AMUserViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
-		D43B496619D849FB006D5252 /* AMUserNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D43B496519D849FB006D5252 /* AMUserNameFormatter.m */; };
 		D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
 		D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A184D19F21296000A8CCB /* AMLogger.framework */; };
 		D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D47A184D19F21296000A8CCB /* AMLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -296,14 +296,8 @@
 		2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTableCellVC.xib; sourceTree = "<group>"; };
 		209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMetronomeBackgroundView.h; sourceTree = "<group>"; };
 		209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMetronomeBackgroundView.m; sourceTree = "<group>"; };
-		2602038219809E2C0013687A /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserLogonViewController.h; sourceTree = "<group>"; };
-		2602038319809E2C0013687A /* AMUserLogonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserLogonViewController.m; sourceTree = "<group>"; };
-		2602038419809E2C0013687A /* AMUserLogonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserLogonViewController.xib; sourceTree = "<group>"; };
 		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
-		262ABCA91990A4590098E232 /* AMGroupCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupCreateViewController.h; sourceTree = "<group>"; };
-		262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupCreateViewController.m; sourceTree = "<group>"; };
-		262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupCreateViewController.xib; sourceTree = "<group>"; };
 		2686C35C19DA4E9200352DFF /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		268DA7C3198B99A100F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTimer.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
@@ -340,8 +334,6 @@
 		2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelViewController.m; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
-		2D5CF7C71A1FD5960025C625 /* AMProfileTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMProfileTextFieldFormatter.h; sourceTree = "<group>"; };
-		2D5CF7C81A1FD5960025C625 /* AMProfileTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMProfileTextFieldFormatter.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
 		2D6D76F019C16B4400201106 /* AMWorldMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWorldMap.m; sourceTree = "<group>"; };
 		2D6D76F219C16C5100201106 /* AMLiveMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapView.h; sourceTree = "<group>"; };
@@ -376,6 +368,21 @@
 		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
 		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
+		4A32A0F71A7220B1006FEDD7 /* AMGroupCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMGroupCreateViewController.h; path = ProfilePanel/AMGroupCreateViewController.h; sourceTree = "<group>"; };
+		4A32A0F81A7220B1006FEDD7 /* AMGroupCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMGroupCreateViewController.m; path = ProfilePanel/AMGroupCreateViewController.m; sourceTree = "<group>"; };
+		4A32A0F91A7220B1006FEDD7 /* AMGroupCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMGroupCreateViewController.xib; path = ProfilePanel/AMGroupCreateViewController.xib; sourceTree = "<group>"; };
+		4A32A0FA1A7220B1006FEDD7 /* AMProfileTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMProfileTextFieldFormatter.h; path = ProfilePanel/AMProfileTextFieldFormatter.h; sourceTree = "<group>"; };
+		4A32A0FB1A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMProfileTextFieldFormatter.m; path = ProfilePanel/AMProfileTextFieldFormatter.m; sourceTree = "<group>"; };
+		4A32A0FC1A7220B1006FEDD7 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMTabItemView.h; path = ProfilePanel/AMTabItemView.h; sourceTree = "<group>"; };
+		4A32A0FD1A7220B1006FEDD7 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMTabItemView.m; path = ProfilePanel/AMTabItemView.m; sourceTree = "<group>"; };
+		4A32A0FE1A7220B1006FEDD7 /* AMUserLogonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMUserLogonViewController.h; path = ProfilePanel/AMUserLogonViewController.h; sourceTree = "<group>"; };
+		4A32A0FF1A7220B1006FEDD7 /* AMUserLogonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMUserLogonViewController.m; path = ProfilePanel/AMUserLogonViewController.m; sourceTree = "<group>"; };
+		4A32A1001A7220B1006FEDD7 /* AMUserLogonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMUserLogonViewController.xib; path = ProfilePanel/AMUserLogonViewController.xib; sourceTree = "<group>"; };
+		4A32A1011A7220B1006FEDD7 /* AMUserNameFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMUserNameFormatter.h; path = ProfilePanel/AMUserNameFormatter.h; sourceTree = "<group>"; };
+		4A32A1021A7220B1006FEDD7 /* AMUserNameFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMUserNameFormatter.m; path = ProfilePanel/AMUserNameFormatter.m; sourceTree = "<group>"; };
+		4A32A1031A7220B1006FEDD7 /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMUserView.xib; path = ProfilePanel/AMUserView.xib; sourceTree = "<group>"; };
+		4A32A1041A7220B1006FEDD7 /* AMUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMUserViewController.h; path = ProfilePanel/AMUserViewController.h; sourceTree = "<group>"; };
+		4A32A1051A7220B1006FEDD7 /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMUserViewController.m; path = ProfilePanel/AMUserViewController.m; sourceTree = "<group>"; };
 		4A5071FE1A6B49BE006E09FC /* AMLocalGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalGroupViewController.h; sourceTree = "<group>"; };
 		4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalGroupViewController.m; sourceTree = "<group>"; };
 		4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalGroupViewController.xib; sourceTree = "<group>"; };
@@ -469,7 +476,6 @@
 		AF86600B19401F4D008DB7CA /* AMTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTestViewController.m; sourceTree = "<group>"; };
 		AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerticalControlBarView.xib; sourceTree = "<group>"; };
 		AF9205411910B42D0051BE63 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
-		AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMUserView.xib; sourceTree = "<group>"; };
 		AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPanelViewController.h; sourceTree = "<group>"; };
 		AF9DC78018E963B40029DB97 /* AMPanelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPanelView.xib; sourceTree = "<group>"; };
 		AFAEBD831961075F00B7FB51 /* mapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapShot.png; sourceTree = "<group>"; };
@@ -566,17 +572,11 @@
 		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
 		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
-		D41155E718E9539B00C84092 /* AMUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserViewController.h; sourceTree = "<group>"; };
-		D41155E818E9539B00C84092 /* AMUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserViewController.m; sourceTree = "<group>"; };
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
-		D43B496419D849FB006D5252 /* AMUserNameFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserNameFormatter.h; sourceTree = "<group>"; };
-		D43B496519D849FB006D5252 /* AMUserNameFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserNameFormatter.m; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldConst.h; path = ../HelloWorldConst.h; sourceTree = "<group>"; };
 		D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UserGroupModuleConst.h; path = ../UserGroupModuleConst.h; sourceTree = "<group>"; };
 		D472934519A6E8F30034CC34 /* AMAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMAudio.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMAudio.framework; sourceTree = "<group>"; };
 		D47A184D19F21296000A8CCB /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
-		D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabItemView.h; sourceTree = "<group>"; };
-		D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabItemView.m; sourceTree = "<group>"; };
 		DFB17E0F797C4935AFFC1CF2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F353201534CF41128CA1E7AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1186,21 +1186,21 @@
 		D499651B196D1A2C00033761 /* ProfilePanel */ = {
 			isa = PBXGroup;
 			children = (
-				AF9B4E6E18C826ED00EEBD6C /* AMUserView.xib */,
-				D41155E718E9539B00C84092 /* AMUserViewController.h */,
-				D41155E818E9539B00C84092 /* AMUserViewController.m */,
-				D4CEDA7B197649F00080F6F4 /* AMTabItemView.h */,
-				D4CEDA7C197649F00080F6F4 /* AMTabItemView.m */,
-				2602038219809E2C0013687A /* AMUserLogonViewController.h */,
-				2602038319809E2C0013687A /* AMUserLogonViewController.m */,
-				2602038419809E2C0013687A /* AMUserLogonViewController.xib */,
-				262ABCA91990A4590098E232 /* AMGroupCreateViewController.h */,
-				262ABCAA1990A4590098E232 /* AMGroupCreateViewController.m */,
-				262ABCAB1990A4590098E232 /* AMGroupCreateViewController.xib */,
-				D43B496419D849FB006D5252 /* AMUserNameFormatter.h */,
-				D43B496519D849FB006D5252 /* AMUserNameFormatter.m */,
-				2D5CF7C71A1FD5960025C625 /* AMProfileTextFieldFormatter.h */,
-				2D5CF7C81A1FD5960025C625 /* AMProfileTextFieldFormatter.m */,
+				4A32A0F71A7220B1006FEDD7 /* AMGroupCreateViewController.h */,
+				4A32A0F81A7220B1006FEDD7 /* AMGroupCreateViewController.m */,
+				4A32A0F91A7220B1006FEDD7 /* AMGroupCreateViewController.xib */,
+				4A32A0FA1A7220B1006FEDD7 /* AMProfileTextFieldFormatter.h */,
+				4A32A0FB1A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m */,
+				4A32A0FC1A7220B1006FEDD7 /* AMTabItemView.h */,
+				4A32A0FD1A7220B1006FEDD7 /* AMTabItemView.m */,
+				4A32A0FE1A7220B1006FEDD7 /* AMUserLogonViewController.h */,
+				4A32A0FF1A7220B1006FEDD7 /* AMUserLogonViewController.m */,
+				4A32A1001A7220B1006FEDD7 /* AMUserLogonViewController.xib */,
+				4A32A1011A7220B1006FEDD7 /* AMUserNameFormatter.h */,
+				4A32A1021A7220B1006FEDD7 /* AMUserNameFormatter.m */,
+				4A32A1031A7220B1006FEDD7 /* AMUserView.xib */,
+				4A32A1041A7220B1006FEDD7 /* AMUserViewController.h */,
+				4A32A1051A7220B1006FEDD7 /* AMUserViewController.m */,
 			);
 			name = ProfilePanel;
 			sourceTree = "<group>";
@@ -1293,6 +1293,7 @@
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				269FB84E1998816E00355312 /* AMGPlusViewController.xib in Resources */,
+				4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
@@ -1301,7 +1302,6 @@
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				AFAEBD8A196107BE00B7FB51 /* info.css in Resources */,
-				AF9B4E6F18C826ED00EEBD6C /* AMUserView.xib in Resources */,
 				AFAEBDB519610BEA00B7FB51 /* Reply.png in Resources */,
 				AFAEBD9819610B8700B7FB51 /* GroupMessage.png in Resources */,
 				AF2890DC198A36BC00D05174 /* shot_osc.png in Resources */,
@@ -1312,7 +1312,6 @@
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
 				AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */,
 				2D77D2CE1A04A24800C30F13 /* AMFloatPanelView.xib in Resources */,
-				2602038619809E2C0013687A /* AMUserLogonViewController.xib in Resources */,
 				4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				2DE439C81A37C58700650692 /* new-event.css in Resources */,
@@ -1342,13 +1341,14 @@
 				269F93681998F024006E19DD /* AMManualViewController.xib in Resources */,
 				CE5954861A3E821F00676D12 /* AMTimerTabVC.xib in Resources */,
 				2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */,
+				4A32A10B1A7220B1006FEDD7 /* AMUserLogonViewController.xib in Resources */,
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				4A8C69F81A70A0ED00540694 /* AMGroupDetailsViewController.xib in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
+				4A32A10D1A7220B1006FEDD7 /* AMUserView.xib in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,
 				AF6DD87E1A3BD875006063CB /* archiveProfile.css in Resources */,
 				4AB4ACDF1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib in Resources */,
-				262ABCAD1990A4590098E232 /* AMGroupCreateViewController.xib in Resources */,
 				2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */,
 				AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */,
 				37C23180187A8FFD00554AFD /* Credits.rtf in Resources */,
@@ -1430,7 +1430,6 @@
 				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
-				2D5CF7C91A1FD5960025C625 /* AMProfileTextFieldFormatter.m in Sources */,
 				2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
@@ -1451,17 +1450,20 @@
 				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
 				26B4D06F191A233200F55CD3 /* AMPopupMenuItem.m in Sources */,
 				4F85434B1A6E434E008222BD /* AMMusicScoreItem.m in Sources */,
+				4A32A1091A7220B1006FEDD7 /* AMTabItemView.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */,
 				CE486AAE1A280CB900D35B82 /* AMVideoMixerViewController.m in Sources */,
 				209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */,
 				2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */,
 				AF86600C19401F4D008DB7CA /* AMTestViewController.m in Sources */,
-				D41155E918E9539B00C84092 /* AMUserViewController.m in Sources */,
+				4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */,
+				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
+				4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */,
 				4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
@@ -1478,20 +1480,18 @@
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
 				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
-				D4CEDA7D197649F00080F6F4 /* AMTabItemView.m in Sources */,
 				CE486AAD1A280CB900D35B82 /* AMVideoMixerBackgroundView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
-				D43B496619D849FB006D5252 /* AMUserNameFormatter.m in Sources */,
+				4A32A1081A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m in Sources */,
 				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
-				2602038519809E2C0013687A /* AMUserLogonViewController.m in Sources */,
 				CE486AAA1A280CB900D35B82 /* AMSyphonViewRouterController.m in Sources */,
-				262ABCAC1990A4590098E232 /* AMGroupCreateViewController.m in Sources */,
 				AF20064D1945861B008630C8 /* AMOSCRouteViewController.m in Sources */,
 				2D016D5B1A0C05E50044F0E0 /* AMGroupPreviewPanelController.m in Sources */,
 				4A8C69E41A7092CD00540694 /* AMStaticGroupDetailsViewController.m in Sources */,
 				CE486AAC1A280CB900D35B82 /* AMVideo.m in Sources */,
 				2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
+				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				26B4D072191A256200F55CD3 /* AMTextFieldView.m in Sources */,
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,

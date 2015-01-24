@@ -13,8 +13,10 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMMesher/AMMesher.h"
+#import "AMNotificationManager/AMNotificationManager.h"
+#import "AMUserLogonViewController.h"
 
-@interface AMUserProfielViewController ()<AMCheckBoxDelegeate>
+@interface AMUserProfielViewController ()<AMCheckBoxDelegeate,NSPopoverDelegate>
 @property (weak) IBOutlet NSImageView *userAvatar;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheck;
 @property (weak) IBOutlet AMFoundryFontView *nickNameField;
@@ -23,6 +25,8 @@
 @property (weak) IBOutlet AMFoundryFontView *localtionField;
 @property (weak) IBOutlet AMFoundryFontView *biographyField;
 @property (weak) IBOutlet NSImageView *userStatus;
+
+@property NSPopover *myPopover;
 
 @end
 
@@ -237,6 +241,54 @@
 
 - (IBAction)socialBtnClick:(id)sender
 {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString *myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
+    NSString *profileUrl = [NSString stringWithFormat:@"/%@", myUserName];
+    if (myUserName != nil && ![myUserName isEqualToString:@""]) {
+        NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 profileUrl, @"ProfileUrl", nil];
+        [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWUSERINFO source:self];
+    }else{
+        [self PopoverUserLogonView:sender];
+        
+    }
+}
+
+-(void)PopoverUserLogonView:(id)sender
+{
+    if (self.myPopover == nil) {
+        self.myPopover = [[NSPopover alloc] init];
+        
+        self.myPopover.animates = YES;
+        self.myPopover.behavior = NSPopoverBehaviorTransient;
+        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        self.myPopover.delegate = self;
+    }
+    
+    self.myPopover.contentViewController = [[AMUserLogonViewController alloc] initWithNibName:@"AMUserLogonViewController" bundle:nil];
+    
+    NSButton *targetButton = (NSButton*)sender;
+    NSRectEdge prefEdge = NSMaxXEdge;
+    [self.myPopover showRelativeToRect:[targetButton bounds] ofView:sender preferredEdge:prefEdge];
+}
+
+
+- (void)popoverWillShow:(NSNotification *)notification
+{
+    if ([self.myPopover.contentViewController isKindOfClass:[AMUserLogonViewController class]]) {
+        AMUserLogonViewController* popController = (AMUserLogonViewController*)self.myPopover.contentViewController;
+        if (popController != nil) {
+            
+            AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+            popController.nickName = mySelf.nickName;
+        }
+    }
+}
+
+
+-(void)popoverDidClose:(NSNotification *)notification
+{
+    [self loadAvatar];
 }
 
 @end

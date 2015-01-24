@@ -13,9 +13,11 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMMesher/AMMesher.h"
+#import "AMNotificationManager/AMNotificationManager.h"
+#import "AMGroupCreateViewController.h"
 
 
-@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate>
+@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
 @property (weak) IBOutlet NSImageView *groupAvatar;
 @property (weak) IBOutlet AMFoundryFontView *groupNameField;
 @property (weak) IBOutlet AMFoundryFontView *fullNameField;
@@ -25,6 +27,7 @@
 @property (weak) IBOutlet NSImageView *statusLight;
 @property (weak) IBOutlet AMFoundryFontView *descriptionField;
 
+@property NSPopover *myPopover;
 
 @end
 
@@ -272,7 +275,57 @@
     return [geoNames firstObject];
 }
 
-- (IBAction)socialBtnClicked:(id)sender {
+- (IBAction)socialBtnClicked:(id)sender
+{
+    NSString* groupName = self.groupNameField.stringValue;
+    
+    for (AMStaticGroup* sg in [AMCoreData shareInstance].staticGroups) {
+        if ([sg.nickname isEqualToString:groupName]) {
+            NSDictionary *userInfo= [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     groupName, @"GroupName", nil];
+            [AMN_NOTIFICATION_MANAGER postMessage:userInfo withTypeName:AMN_SHOWGROUPINFO source:self];
+            return;
+        }
+    }
+    
+    [self popoverGroupRegisterView:sender];
 }
+
+-(void)popoverGroupRegisterView:(id)sender
+{
+    if (self.myPopover == nil) {
+        self.myPopover = [[NSPopover alloc] init];
+        
+        self.myPopover.animates = YES;
+        self.myPopover.behavior = NSPopoverBehaviorTransient;
+        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        self.myPopover.delegate = self;
+    }
+    
+    self.myPopover.contentViewController = [[AMGroupCreateViewController alloc] initWithNibName:@"AMGroupCreateViewController" bundle:nil];
+    
+    NSButton *targetButton = (NSButton*)sender;
+    NSRectEdge prefEdge = NSMaxXEdge;
+    [self.myPopover showRelativeToRect:[targetButton bounds] ofView:sender preferredEdge:prefEdge];
+}
+
+- (void)popoverWillShow:(NSNotification *)notification
+{
+    if([self.myPopover.contentViewController isKindOfClass:[AMGroupCreateViewController class]]){
+        AMGroupCreateViewController* popController = (AMGroupCreateViewController*)self.myPopover.contentViewController;
+        if (popController != nil) {
+            
+            NSUserDefaults* defaults = [AMPreferenceManager standardUserDefaults];
+            NSString* groupname = [defaults stringForKey:Preference_Key_Cluster_Name];
+            popController.nickName = groupname;
+        }
+    }
+}
+
+-(void)popoverDidClose:(NSNotification *)notification
+{
+    [self loadAvatar];
+}
+
 
 @end

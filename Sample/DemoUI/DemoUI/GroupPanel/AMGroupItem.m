@@ -48,6 +48,10 @@
 -(BOOL)canLeave
 {
     AMLiveGroup *localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if (self.groupData.busy) {
+        return NO;
+    }
+    
     if ([localGroup.groupId isEqualToString:self.groupData.groupId]) {
         return NO;
     }
@@ -68,6 +72,10 @@
 -(BOOL)canMerge
 {
     AMLiveGroup *localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    if (self.groupData.busy) {
+        return NO;
+    }
+    
     if ([localGroup.groupId isEqualToString:self.groupData.groupId]) {
         return NO;
     }

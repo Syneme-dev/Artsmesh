@@ -37,11 +37,15 @@
 
 -(NSImage *)barImage
 {
+    if (self.userData.busy) {
+        return [NSImage imageNamed:@"user_busy"];
+    }
+    
     if(self.userData.isOnline){
         return [NSImage imageNamed:@"user_online"];
-    }else{
-        return [NSImage imageNamed:@"user_offline"];
     }
+    
+    return [NSImage imageNamed:@"user_offline"];
 }
 
 

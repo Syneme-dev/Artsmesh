@@ -59,8 +59,6 @@
 
 -(void)loadRemoteGroup:(NSNotification *)notification
 {
-
-    
     _rootItem = [AMOutlineItem itemFromLabel:@"Artsmesh"];
     NSMutableArray *subItems = [[NSMutableArray alloc] init];
     _rootItem.subItems = subItems;
@@ -80,6 +78,13 @@
         if ([[self expandedNodes] containsObject:[subItem title]]) {
             subItem.shouldExpanded = YES;
             continue;
+        }
+        
+        for (AMOutlineItem* subsubItem in subItem.subItems) {
+            if ([[self expandedNodes] containsObject:[subsubItem title]]) {
+                subsubItem.shouldExpanded = YES;
+                break;
+            }
         }
         
         //Always expanded my group
@@ -282,13 +287,22 @@
 
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
+    
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
-    if ([item isKindOfClass:[AMGroupItem class]] ||
-        [item isKindOfClass:[AMOutlineItem class]]) {
+    if ([item isKindOfClass:[AMGroupItem class]]) {
+        
+        AMGroupItem *groupItem = (AMGroupItem *)item;
+        if (groupItem.groupData.busy) {
+            rowView.headImage = [NSImage imageNamed:@"group_lock"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_lock_expanded"];
+        }else{
+            rowView.headImage = [NSImage imageNamed:@"group_online"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        }
+    }else if([[item title] isEqualTo:@"Artsmesh"]){
         rowView.headImage = [NSImage imageNamed:@"group_online"];
         rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-        
     }
     
     return rowView;

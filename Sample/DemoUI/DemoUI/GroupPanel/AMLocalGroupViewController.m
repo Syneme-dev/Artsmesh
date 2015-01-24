@@ -258,31 +258,16 @@
     AMGroupOutlineRowView* rowView = [[AMGroupOutlineRowView alloc] init];
     
     if ([item isKindOfClass:[AMGroupItem class]]) {
-        rowView.headImage = [NSImage imageNamed:@"group_offline"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
         
+        AMGroupItem *groupItem = (AMGroupItem *)item;
+        if (groupItem.groupData.busy) {
+            rowView.headImage = [NSImage imageNamed:@"group_lock"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_lock_expanded"];
+        }else{
+            rowView.headImage = [NSImage imageNamed:@"group_offline"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+        }
     }
-
-//    if ([item isKindOfClass:[AMGroupPanelLabelCellController class]]) {
-//        
-//        rowView.headImage = [NSImage imageNamed:@"artsmesh_bar"];
-//        rowView.alterHeadImage = [NSImage imageNamed:@"artsmesh_bar_expanded"];
-//        
-//    }else if([item isKindOfClass:[AMGroupPanelGroupCellController class]]){
-//        
-//        AMGroupPanelGroupCellController* groupController = (AMGroupPanelGroupCellController*)item;
-//        if ([groupController.group isMeshed]) {
-//            if (groupController.group.busy) {
-//                rowView.headImage = [NSImage imageNamed:@"live_group_busy_vertical"];
-//                rowView.alterHeadImage = [NSImage imageNamed:@"live_group_busy_horizen"];
-//            }else{
-//                rowView.headImage = [NSImage imageNamed:@"group_online"];
-//                rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
-//            }
-//        }else{
-//         
-//        }
-//    }
     
     return rowView;
 }

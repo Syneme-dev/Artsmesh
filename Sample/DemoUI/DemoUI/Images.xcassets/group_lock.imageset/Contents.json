@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "lock.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "group_Icon-01.png"
+      "filename" : "Screen Shot 2015-01-24 at 3.08.52 pm.png"
     },
     {
       "idiom" : "universal",

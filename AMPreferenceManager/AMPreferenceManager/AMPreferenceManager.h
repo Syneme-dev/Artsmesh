@@ -35,6 +35,7 @@
 #define Preference_Key_Cluster_Location         @"Preference_Key_Cluster_Location"
 #define Preference_Key_Cluster_Longitude        @"Preference_Key_Cluster_Longitude"
 #define Preference_Key_Cluster_Latitude         @"Preference_Key_Cluster_Latitude"
+#define Preference_Key_Cluster_BroadcastURL         @"Preference_Cluster_BroadcastURL"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"

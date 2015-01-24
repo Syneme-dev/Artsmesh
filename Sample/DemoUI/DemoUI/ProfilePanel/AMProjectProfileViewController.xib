@@ -7,6 +7,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMProjectProfileViewController">
             <connections>
+                <outlet property="broadcastBox" destination="EZY-Pm-RJD" id="zxj-3T-Rcb"/>
+                <outlet property="broadcastURLField" destination="VnF-19-2Bz" id="87Z-s6-JgS"/>
+                <outlet property="projectAvatar" destination="QEJ-bE-wdR" id="sQX-FC-gM0"/>
+                <outlet property="projectDescription" destination="1gr-y2-Nra" id="pVJ-zN-PzL"/>
+                <outlet property="projectNameField" destination="NRN-rs-aAl" id="TKk-6N-uKE"/>
+                <outlet property="statusLight" destination="zKm-Vz-Qwq" id="zWZ-Qx-E5d"/>
                 <outlet property="view" destination="Mbs-rX-Spg" id="pcp-CV-q55"/>
             </connections>
         </customObject>
@@ -31,14 +37,6 @@
                         <constraint firstAttribute="width" constant="70" id="rEB-l6-H8N"/>
                     </constraints>
                 </customView>
-                <textField focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NRN-rs-aAl" userLabel="project" customClass="AMFoundryFontView">
-                    <rect key="frame" x="100" y="330" width="330" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Name" id="fI9-S4-6It" customClass="AMTextFieldCell">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
-                </textField>
                 <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VnF-19-2Bz" customClass="AMFoundryFontView">
                     <rect key="frame" x="100" y="240" width="330" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Broadcasting URL" id="YpN-hN-Eqo">
@@ -46,6 +44,10 @@
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="broadcastURLChanged:" target="-2" id="3bV-bX-bxu"/>
+                        <binding destination="xvs-mg-p9E" name="value" keyPath="values.Preference_Key_Cluster_BroadcastURL" id="mcC-qT-AmH"/>
+                    </connections>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-Vz-Qwq" userLabel="statusIcon">
                     <rect key="frame" x="10" y="175" width="10" height="10"/>
@@ -65,6 +67,22 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="projectDesctiptionChanged:" target="-2" id="CHu-5B-kne"/>
+                        <binding destination="xvs-mg-p9E" name="value" keyPath="values.Preference_Key_Cluster_Project_Descrition" id="wsP-Pn-4KY"/>
+                    </connections>
+                </textField>
+                <textField focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NRN-rs-aAl" userLabel="project" customClass="AMFoundryFontView">
+                    <rect key="frame" x="100" y="299" width="330" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Project Name" id="fI9-S4-6It" customClass="AMTextFieldCell">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="projectNameChanged:" target="-2" id="BTZ-HN-MfW"/>
+                        <binding destination="xvs-mg-p9E" name="value" keyPath="values.Preference_Key_Cluster_Project" id="48E-IG-R8Z"/>
+                    </connections>
                 </textField>
             </subviews>
             <constraints>
@@ -74,7 +92,7 @@
                 <constraint firstItem="VnF-19-2Bz" firstAttribute="leading" secondItem="Mbs-rX-Spg" secondAttribute="leading" constant="102" id="Jj0-0V-tjk"/>
                 <constraint firstItem="QEJ-bE-wdR" firstAttribute="leading" secondItem="Mbs-rX-Spg" secondAttribute="leading" id="TED-OK-3oP"/>
                 <constraint firstAttribute="trailing" secondItem="1gr-y2-Nra" secondAttribute="trailing" constant="23" id="Whh-1J-YS0"/>
-                <constraint firstItem="NRN-rs-aAl" firstAttribute="top" secondItem="Mbs-rX-Spg" secondAttribute="top" constant="8" id="XIR-w9-P75"/>
+                <constraint firstItem="NRN-rs-aAl" firstAttribute="top" secondItem="Mbs-rX-Spg" secondAttribute="top" constant="39" id="XIR-w9-P75"/>
                 <constraint firstItem="VnF-19-2Bz" firstAttribute="top" secondItem="Mbs-rX-Spg" secondAttribute="top" constant="98" id="ZUa-09-d0G"/>
                 <constraint firstItem="zKm-Vz-Qwq" firstAttribute="leading" secondItem="Mbs-rX-Spg" secondAttribute="leading" constant="10" id="aUs-70-eeS"/>
                 <constraint firstItem="EZY-Pm-RJD" firstAttribute="leading" secondItem="Mbs-rX-Spg" secondAttribute="leading" constant="10" id="f15-Ml-7WV"/>
@@ -84,7 +102,9 @@
                 <constraint firstAttribute="trailing" secondItem="VnF-19-2Bz" secondAttribute="trailing" constant="33" id="tcj-so-mhp"/>
                 <constraint firstItem="1gr-y2-Nra" firstAttribute="top" secondItem="Mbs-rX-Spg" secondAttribute="top" constant="175" id="vCz-px-kQb"/>
             </constraints>
+            <point key="canvasLocation" x="456.5" y="321"/>
         </view>
+        <userDefaultsController representsSharedInstance="YES" id="xvs-mg-p9E"/>
     </objects>
     <resources>
         <image name="clipboard" width="39.840000152587891" height="39.840000152587891"/>

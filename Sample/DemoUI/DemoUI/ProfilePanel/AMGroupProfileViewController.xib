@@ -94,6 +94,9 @@
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="socialBtnClicked:" target="-2" id="lqP-Xh-cHu"/>
+                    </connections>
                 </button>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chG-jS-QMc" userLabel="statusIcon">
                     <rect key="frame" x="10" y="175" width="10" height="10"/>
@@ -104,7 +107,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="group_unmeshed_icon" id="ETG-Z9-56X"/>
                 </imageView>
                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQZ-zA-mvz" userLabel="description" customClass="AMFoundryFontView">
-                    <rect key="frame" x="40" y="0.0" width="400" height="175"/>
+                    <rect key="frame" x="40" y="10" width="400" height="175"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="175" id="VZO-Wx-Qls"/>
                     </constraints>
@@ -138,7 +141,7 @@
                 <constraint firstItem="suM-7j-TX5" firstAttribute="leading" secondItem="3r7-wM-uSJ" secondAttribute="leading" constant="102" id="0D8-0d-mfW"/>
                 <constraint firstItem="UXQ-Mg-WUY" firstAttribute="top" secondItem="3r7-wM-uSJ" secondAttribute="top" constant="134" id="0Xe-O6-sGb"/>
                 <constraint firstItem="h46-zJ-jsZ" firstAttribute="leading" secondItem="3r7-wM-uSJ" secondAttribute="leading" constant="102" id="0cn-Wp-Zkw"/>
-                <constraint firstItem="JQZ-zA-mvz" firstAttribute="top" secondItem="3r7-wM-uSJ" secondAttribute="top" constant="185" id="0x1-fE-B0c"/>
+                <constraint firstItem="JQZ-zA-mvz" firstAttribute="top" secondItem="3r7-wM-uSJ" secondAttribute="top" constant="175" id="0x1-fE-B0c"/>
                 <constraint firstAttribute="trailing" secondItem="suM-7j-TX5" secondAttribute="trailing" constant="33" id="7Yt-oj-iLj"/>
                 <constraint firstAttribute="trailing" secondItem="syR-wT-xkP" secondAttribute="trailing" constant="33" id="7zt-st-xUt"/>
                 <constraint firstItem="suM-7j-TX5" firstAttribute="top" secondItem="3r7-wM-uSJ" secondAttribute="top" constant="68" id="8DC-rM-0ur"/>

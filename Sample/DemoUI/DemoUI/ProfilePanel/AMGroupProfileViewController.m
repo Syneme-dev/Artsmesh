@@ -14,6 +14,7 @@
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMMesher/AMMesher.h"
 
+
 @interface AMGroupProfileViewController ()<AMCheckBoxDelegeate>
 @property (weak) IBOutlet NSImageView *groupAvatar;
 @property (weak) IBOutlet AMFoundryFontView *groupNameField;
@@ -32,11 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    [self loadAvatar];
-    [self setLockBox];
-    [self setStatus];
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
+    [self groupChanged:nil];
 }
 
 
@@ -91,6 +91,16 @@
     [self loadAvatar];
     [self setLockBox];
     [self setStatus];
+    
+    AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
+    [defaults setObject:myGroup.groupName forKey:Preference_Key_Cluster_Name];
+    [defaults setObject:myGroup.fullName forKey:Preference_Key_Cluster_FullName];
+    [defaults setObject:myGroup.description forKey:Preference_Key_Cluster_Description];
+    [defaults setObject:myGroup.homePage forKey:Preference_Key_Cluster_HomePage];
+    [defaults setObject:myGroup.location forKey:Preference_Key_Cluster_Location];
+    
+    [self setGroupLongitudeAndLatitude:myGroup.location];
 }
 
 
@@ -104,23 +114,19 @@
 }
 
 
-- (IBAction)groupNameChanged:(id)sender
+- (IBAction)groupNameChanged:(NSTextField *)sender
 {
-    NSString *newName = [sender stringValue];
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    
-    if ([myGroup.groupName isEqualToString:newName]) {
+    if ([myGroup.groupName isEqualToString:sender.stringValue]) {
         return;
     }
     
-    if ([newName isEqualToString:@""]) {
-        newName = [[AMPreferenceManager standardUserDefaults]
+    if ([sender.stringValue isEqualToString:@""]) {
+        sender.stringValue = [[AMPreferenceManager standardUserDefaults]
                               stringForKey:Preference_Key_Cluster_Name];
-        self.groupNameField.stringValue = newName;
-        
     }
     
-    myGroup.groupName = newName;
+    myGroup.groupName = sender.stringValue;
     [[AMMesher sharedAMMesher] updateGroup];
     
     [self startBlickingStatus];
@@ -175,10 +181,10 @@
     if ([sender.stringValue isEqualToString:@""]) {
         sender.stringValue = [[AMPreferenceManager standardUserDefaults]
                               stringForKey:Preference_Key_Cluster_Location];
-        myGroup.location = sender.stringValue;
     }
     
-    [self getCoordinates: sender.stringValue];
+    [self setGroupLongitudeAndLatitude: sender.stringValue];
+    [[AMMesher sharedAMMesher] updateGroup];
 }
 
 
@@ -210,7 +216,28 @@
 }
 
 
-- (void)getCoordinates:(NSString *)searchTerm
+-(void)setGroupLongitudeAndLatitude:(NSString *)location
+{
+    NSDictionary *geoInfo = [self getCoordinates: location];
+    if (geoInfo) {
+        AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+        
+        double lat = [[geoInfo valueForKey:@"lat"] doubleValue];
+        double lon = [[geoInfo valueForKey:@"lng"] doubleValue];
+        
+        myGroup.location = location;
+        myGroup.longitude = [NSString stringWithFormat:@"%f", lon];
+        myGroup.latitude =  [NSString stringWithFormat:@"%f", lat];
+        
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
+    }
+}
+
+
+- (NSDictionary *)getCoordinates:(NSString *)searchTerm
 {
     NSString *username = @"artsmesh";
     
@@ -232,39 +259,20 @@
     
     if(jsonParsingError != nil){
         NSLog(@"Geo data parse JSON error:%@", jsonParsingError.description);
+        return nil;
     }
+    
     NSDictionary *results = (NSDictionary*)geoData;
     NSArray *geoNames = [results valueForKey:@"geonames"];
     
     if (geoNames == nil || [geoNames count] == 0) {
-        return;
+        return nil;
     }
     
-    NSDictionary *topResult = [geoNames objectAtIndex:0];
-    
-    if ( [topResult count] >= 1 ) {
-        AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-        
-        double lat = [[topResult valueForKey:@"lat"] doubleValue];
-        double lon = [[topResult valueForKey:@"lng"] doubleValue];
-        
-        myGroup.location = searchTerm;
-        myGroup.longitude = [NSString stringWithFormat:@"%f", lon];
-        myGroup.latitude =  [NSString stringWithFormat:@"%f", lat];
-        
-        //NSLog(@"location data is: %@", topResult);
-        //NSLog(@"saved lat/lon is: %f, %f", lat, lon);
-        
-        [[AMMesher sharedAMMesher] updateGroup];
-        
-        [[AMPreferenceManager standardUserDefaults]
-         setObject:myGroup.longitude forKey:Preference_Key_Cluster_Longitude];
-        [[AMPreferenceManager standardUserDefaults]
-         setObject:myGroup.latitude forKey:Preference_Key_Cluster_Latitude];
-    } else {
-        //No result found
-    }
+    return [geoNames firstObject];
 }
 
+- (IBAction)socialBtnClicked:(id)sender {
+}
 
 @end

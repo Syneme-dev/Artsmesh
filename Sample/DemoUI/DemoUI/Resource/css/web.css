@@ -1,16 +1,30 @@
 
 #header{
+	/**
     padding-top:0 !important;
     margin-top:0 !important;
     margin-left:0 !important;
-    margin-right:0 !important;
+    margin-right:0 !important; **/
+    overflow:visible !important;
+}
+#header .logo.photo {
+	position: relative;
+	z-index: 99;
+}
+
+#aside_primary {
+	position: relative!important;
 }
 #footer{
     display:none;
 }
+#core {
+	bottom: 22px;
+}
 #content{
-    width:600px !important;
+    /*width:600px !important;
     padding: 2px 80px 2px 2px !important;
+	**/
 }
 
 #aside_primary_wrapper,#core,#wrap{
@@ -18,7 +32,7 @@
 }
 
 #aside_primary{
-    width:360px !important;
+    /**width:360px !important;**/
 }
 #content h1{
     display:none;
@@ -70,4 +84,16 @@
 
 #nav_doc_google{
     display: none !important;
+}
+
+@media (max-width: 1025px) {
+	#header .logo.photo {
+		top: 42px;
+	}
+	#public #header .logo.photo {
+		top: 0px;
+	}
+	#core {
+		top: 20px;
+	}
 }

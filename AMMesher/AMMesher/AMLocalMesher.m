@@ -358,7 +358,6 @@
 {
     AMLog(kAMInfoLog, @"AMMesher", @"updating group infomation in local server");
     
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_LOCAL];
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];

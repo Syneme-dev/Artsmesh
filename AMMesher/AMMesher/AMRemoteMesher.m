@@ -122,9 +122,6 @@
 -(void)registerGroup
 {
     AMLog(kAMInfoLog, @"AMMesher", @"will register group to global server");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
-    });
     
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
 
@@ -172,9 +169,6 @@
 -(void)registerSelf
 {
     AMLog(kAMInfoLog, @"AMMesher", @"start register self to global server");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
-    });
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     mySelf.isOnline = YES;
@@ -236,10 +230,6 @@
     
     AMLog(kAMInfoLog, @"AMMesher", @"Will update my self to global server");
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_REMOTE];
-    });
-    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSDictionary* dict = [mySelf toDict];
     
@@ -281,10 +271,6 @@
     }
     
     AMLog(kAMInfoLog, @"AMMesher", @"Will update group info to global server");
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_REMOTE];
-    });
 
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
@@ -390,10 +376,7 @@
             return;
         }
         AMLog(kAMInfoLog, @"AMMesher", @"merge group finished");
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[AMCoreData shareInstance] broadcastChanges:AM_MERGED_GROUPID_CHANGED];
-        });
+
     };
     
     [_httpRequestQueue addOperation:req];

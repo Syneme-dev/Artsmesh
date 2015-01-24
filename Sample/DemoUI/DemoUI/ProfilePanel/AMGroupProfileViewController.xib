@@ -7,6 +7,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupProfileViewController">
             <connections>
+                <outlet property="descriptionField" destination="JQZ-zA-mvz" id="g8x-RH-4q3"/>
+                <outlet property="fullNameField" destination="syR-wT-xkP" id="tY1-oa-wpn"/>
+                <outlet property="groupAvatar" destination="sNh-Rs-29p" id="JoK-Q2-mt4"/>
+                <outlet property="groupNameField" destination="h46-zJ-jsZ" id="PgG-5k-sk9"/>
+                <outlet property="homePageField" destination="suM-7j-TX5" id="dJ4-x9-EIY"/>
+                <outlet property="locationField" destination="pPs-dS-Y2V" id="70Q-Z7-CON"/>
+                <outlet property="lockBox" destination="C2V-vA-uNq" id="GTJ-L1-PWS"/>
+                <outlet property="statusLight" destination="chG-jS-QMc" id="VB0-va-Ue1"/>
                 <outlet property="view" destination="3r7-wM-uSJ" id="1wm-kz-paR"/>
             </connections>
         </customObject>
@@ -41,6 +49,10 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="groupNameChanged:" target="-2" id="Aq1-yn-FDb"/>
+                        <binding destination="I4K-SY-1g5" name="value" keyPath="values.Preference_Key_Cluster_Name" id="bT9-F1-KL1"/>
+                    </connections>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="syR-wT-xkP" userLabel="fullName" customClass="AMFoundryFontView">
                     <rect key="frame" x="100" y="300" width="330" height="22"/>
@@ -52,6 +64,10 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="fullNameChanged:" target="-2" id="Pu1-Cl-Wev"/>
+                        <binding destination="I4K-SY-1g5" name="value" keyPath="values.Preference_Key_Cluster_FullName" id="3U3-Sg-xcN"/>
+                    </connections>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="suM-7j-TX5" userLabel="homepage" customClass="AMFoundryFontView">
                     <rect key="frame" x="100" y="270" width="330" height="22"/>
@@ -63,17 +79,10 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
-                </textField>
-                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-dS-Y2V" userLabel="location" customClass="AMFoundryFontView">
-                    <rect key="frame" x="100" y="240" width="330" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="YR2-mC-wyv"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="7P5-rI-j5w" customClass="AMTextFieldCell">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
+                    <connections>
+                        <action selector="homePageChanged:" target="-2" id="qoE-nK-pf8"/>
+                        <binding destination="I4K-SY-1g5" name="value" keyPath="values.Preference_Key_Cluster_HomePage" id="lnv-pB-8av"/>
+                    </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="UXQ-Mg-WUY" userLabel="groupSocial">
                     <rect key="frame" x="100" y="200" width="26" height="26"/>
@@ -104,6 +113,25 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <action selector="descriptionChanged:" target="-2" id="2Um-ra-MbV"/>
+                        <binding destination="I4K-SY-1g5" name="value" keyPath="values.Preference_Key_Cluster_Description" id="sVb-BZ-BRk"/>
+                    </connections>
+                </textField>
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pPs-dS-Y2V" userLabel="location" customClass="AMFoundryFontView">
+                    <rect key="frame" x="100" y="240" width="330" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="YR2-mC-wyv"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" placeholderString="Location" id="7P5-rI-j5w" customClass="AMTextFieldCell">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="locationChanged:" target="-2" id="Pj7-T1-sTp"/>
+                        <binding destination="I4K-SY-1g5" name="value" keyPath="values.Preference_Key_Cluster_Location" id="cMx-S6-uHn"/>
+                    </connections>
                 </textField>
             </subviews>
             <constraints>
@@ -131,7 +159,9 @@
                 <constraint firstItem="C2V-vA-uNq" firstAttribute="top" secondItem="3r7-wM-uSJ" secondAttribute="top" constant="98" id="tCx-wD-RhU"/>
                 <constraint firstItem="UXQ-Mg-WUY" firstAttribute="leading" secondItem="3r7-wM-uSJ" secondAttribute="leading" constant="100" id="yo3-K7-ns1"/>
             </constraints>
+            <point key="canvasLocation" x="386.5" y="419"/>
         </view>
+        <userDefaultsController representsSharedInstance="YES" id="I4K-SY-1g5"/>
     </objects>
     <resources>
         <image name="SideBar_user_h" width="40" height="40"/>

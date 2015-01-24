@@ -46,6 +46,7 @@
 }
 
 
+
 -(void)loadAvatar
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -232,6 +233,10 @@
     [self setStatus];
     [self loadAvatar];
     [self setBusyBox];
+}
+
+- (IBAction)socialBtnClick:(id)sender
+{
 }
 
 @end

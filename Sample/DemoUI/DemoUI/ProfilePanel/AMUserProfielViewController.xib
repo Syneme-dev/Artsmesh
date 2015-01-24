@@ -117,6 +117,9 @@
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="socialBtnClick:" target="-2" id="y2e-Ln-tMa"/>
+                    </connections>
                 </button>
                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-vc-OBu" userLabel="description" customClass="AMFoundryFontView">
                     <rect key="frame" x="43" y="10" width="400" height="175"/>
@@ -159,6 +162,7 @@
                 <constraint firstAttribute="trailing" secondItem="IcX-X9-ybX" secondAttribute="trailing" constant="31" id="t8k-VD-Ozv"/>
                 <constraint firstAttribute="trailing" secondItem="WNs-MY-5Ko" secondAttribute="trailing" constant="33" id="yaj-RZ-QX4"/>
             </constraints>
+            <point key="canvasLocation" x="401.5" y="362"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="yYK-Lk-5Zy"/>
     </objects>

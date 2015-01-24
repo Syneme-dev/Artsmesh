@@ -151,5 +151,16 @@
     return allUsers;
 }
 
+-(BOOL)hasUserOnline
+{
+    for (AMLiveUser *user in self.users) {
+        if (user.isOnline) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 
 @end

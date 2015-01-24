@@ -110,10 +110,8 @@
 
 -(void)updateGroup
 {
-    if(self.clusterState == kClusterStarted){
-        [_localMesher updateGroupInfo];
-    }
-    
+    [_localMesher updateGroupInfo];
+
     if (self.mesherState == kMesherMeshed) {
         [_remoteMesher updateGroupInfo];
     }
@@ -121,9 +119,7 @@
 
 -(void)updateMySelf
 {
-    if(self.clusterState == kClusterStarted){
-        [_localMesher updateMyself];
-    }
+    [_localMesher updateMyself];
     
     if (self.mesherState == kMesherMeshed) {
         [_remoteMesher updateMyself];

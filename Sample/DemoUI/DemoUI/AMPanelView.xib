@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelViewController">
@@ -10,7 +10,6 @@
                 <outlet property="closeButton" destination="PFq-T7-YMG" id="Kfj-1e-0aK"/>
                 <outlet property="fullScreenButton" destination="diy-MI-ZVa" id="tvb-QH-1Ow"/>
                 <outlet property="maxSizeButton" destination="XMe-0f-woX" id="t4K-V6-fH0"/>
-                <outlet property="settingButton" destination="42T-8I-slY" id="4Sk-iJ-M2Z"/>
                 <outlet property="tabPanelButton" destination="OB6-Xz-G6O" id="wqh-bV-f9u"/>
                 <outlet property="tearOffButton" destination="W15-SQ-vxR" id="bXM-0x-G0W"/>
                 <outlet property="titleView" destination="dZ9-KQ-hje" id="llZ-ov-vcT"/>
@@ -27,17 +26,14 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ksy-Yh-CFv" customClass="BlueBackgroundView">
                     <rect key="frame" x="0.0" y="559" width="600" height="1"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="1N4-EQ-DLD"/>
+                        <constraint firstAttribute="height" constant="1" id="FxP-0v-nz5"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="fvD-YA-Ec9" userLabel="Top" customClass="BlueBackgroundView">
                     <rect key="frame" x="0.0" y="580" width="600" height="20"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZ9-KQ-hje">
                             <rect key="frame" x="10" y="2" width="180" height="17"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="176" id="wyr-qz-tC2"/>
-                            </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="title" id="cD7-bR-cVw">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -47,8 +43,8 @@
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-T7-YMG" userLabel="close">
                             <rect key="frame" x="580" y="2" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="16" id="mbC-zq-fMQ"/>
-                                <constraint firstAttribute="height" constant="16" id="mfq-Uw-HWT"/>
+                                <constraint firstAttribute="height" constant="16" id="qaP-q3-OBU"/>
+                                <constraint firstAttribute="width" constant="16" id="wVL-fQ-mR9"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_close" imagePosition="only" alignment="center" alternateImage="panel_close_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="1Cc-Fk-lBa">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -58,22 +54,11 @@
                                 <action selector="closePanel:" target="-2" id="910-zG-81m"/>
                             </connections>
                         </button>
-                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="fullscreen">
-                            <rect key="frame" x="450" y="2" width="16" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="TSQ-hv-P39"/>
-                                <constraint firstAttribute="width" constant="16" id="VBF-i6-gvG"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_fullScreen" imagePosition="only" alignment="center" alternateImage="panel_fullScreen_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
-                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-Xz-G6O" userLabel="copy">
                             <rect key="frame" x="554" y="2" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="16" id="QOS-vJ-yE2"/>
-                                <constraint firstAttribute="width" constant="16" id="hmN-Qg-gAa"/>
+                                <constraint firstAttribute="height" constant="16" id="NJH-ee-5R0"/>
+                                <constraint firstAttribute="width" constant="16" id="sGX-nw-ms4"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_copy" imagePosition="only" alignment="center" alternateImage="panel_copy_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ETH-2v-v8R">
                                 <behavior key="behavior" lightByContents="YES"/>
@@ -83,22 +68,11 @@
                                 <action selector="onCopyTabButtonClick:" target="-2" id="r9S-ZW-6xX"/>
                             </connections>
                         </button>
-                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="42T-8I-slY" userLabel="settings">
+                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="W15-SQ-vxR" userLabel="tear">
                             <rect key="frame" x="528" y="2" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="16" id="6IB-zO-ZHV"/>
-                                <constraint firstAttribute="width" constant="16" id="WhD-gs-7Ag"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_setting" imagePosition="only" alignment="center" alternateImage="panel_setting_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="QyP-Ov-VrK">
-                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
-                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="W15-SQ-vxR" userLabel="tear">
-                            <rect key="frame" x="502" y="2" width="16" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="16" id="Ltx-ur-kvI"/>
-                                <constraint firstAttribute="height" constant="16" id="e5O-As-6gv"/>
+                                <constraint firstAttribute="height" constant="16" id="Gwr-5e-fc0"/>
+                                <constraint firstAttribute="width" constant="16" id="O5d-SB-Gkb"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_tear" imagePosition="only" alignment="center" alternateImage="panel_tear_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="wy1-bq-6vy">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -109,10 +83,10 @@
                             </connections>
                         </button>
                         <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="diy-MI-ZVa" userLabel="extend">
-                            <rect key="frame" x="476" y="2" width="16" height="16"/>
+                            <rect key="frame" x="502" y="2" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="16" id="HmO-XA-46f"/>
-                                <constraint firstAttribute="height" constant="16" id="jy2-DK-xdm"/>
+                                <constraint firstAttribute="height" constant="16" id="8G8-n8-7Dd"/>
+                                <constraint firstAttribute="width" constant="16" id="Zea-9x-CF4"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_extend" imagePosition="only" alignment="center" alternateImage="panel_extend_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ulN-Zp-EUV">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -122,35 +96,40 @@
                                 <action selector="toggleFullScreen:" target="-2" id="qBE-hN-Ffx"/>
                             </connections>
                         </button>
+                        <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0f-woX" userLabel="fullscreen">
+                            <rect key="frame" x="475" y="2" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="lmo-X3-xiY"/>
+                                <constraint firstAttribute="width" constant="16" id="qak-7a-TIL"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_fullScreen" imagePosition="only" alignment="center" alternateImage="panel_fullScreen_h" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="VeQ-Qa-zqd">
+                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="42T-8I-slY" firstAttribute="leading" secondItem="W15-SQ-vxR" secondAttribute="trailing" constant="10" symbolic="YES" id="BkE-wX-XV3"/>
-                        <constraint firstAttribute="height" constant="20" id="Drv-GT-vZ1"/>
-                        <constraint firstItem="XMe-0f-woX" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="ERd-65-SXe"/>
-                        <constraint firstItem="diy-MI-ZVa" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="Hmh-CH-xQp"/>
-                        <constraint firstItem="diy-MI-ZVa" firstAttribute="leading" secondItem="XMe-0f-woX" secondAttribute="trailing" constant="10" id="Mtr-Bt-3uo"/>
-                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="42T-8I-slY" secondAttribute="top" id="Nqg-pH-RFK"/>
-                        <constraint firstItem="OB6-Xz-G6O" firstAttribute="leading" secondItem="42T-8I-slY" secondAttribute="trailing" constant="10" id="QVq-J0-pYe"/>
-                        <constraint firstItem="42T-8I-slY" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="UZR-bz-ruz"/>
-                        <constraint firstItem="PFq-T7-YMG" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="cBq-Mq-Dzy"/>
-                        <constraint firstItem="OB6-Xz-G6O" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="d0N-pp-NVu"/>
-                        <constraint firstItem="W15-SQ-vxR" firstAttribute="leading" secondItem="diy-MI-ZVa" secondAttribute="trailing" constant="10" id="dZP-bi-Ws2"/>
-                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="ebM-BO-8v7"/>
-                        <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="4" id="fUz-xV-zi7"/>
-                        <constraint firstItem="42T-8I-slY" firstAttribute="leading" secondItem="W15-SQ-vxR" secondAttribute="trailing" constant="10" id="fgq-c0-bDg"/>
-                        <constraint firstItem="PFq-T7-YMG" firstAttribute="leading" secondItem="OB6-Xz-G6O" secondAttribute="trailing" constant="10" id="n26-Ej-iX9"/>
-                        <constraint firstItem="dZ9-KQ-hje" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="1" id="nJS-za-g3e"/>
-                        <constraint firstItem="dZ9-KQ-hje" firstAttribute="leading" secondItem="fvD-YA-Ec9" secondAttribute="leading" constant="12" id="sO1-G2-RMk"/>
+                        <constraint firstAttribute="trailing" secondItem="XMe-0f-woX" secondAttribute="trailing" constant="109" id="3tR-yj-BJZ"/>
+                        <constraint firstItem="OB6-Xz-G6O" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="9dv-Dq-mXY"/>
+                        <constraint firstAttribute="trailing" secondItem="OB6-Xz-G6O" secondAttribute="trailing" constant="30" id="AVa-OK-ksn"/>
+                        <constraint firstAttribute="trailing" secondItem="PFq-T7-YMG" secondAttribute="trailing" constant="4" id="BNz-Dg-T7n"/>
+                        <constraint firstAttribute="trailing" secondItem="W15-SQ-vxR" secondAttribute="trailing" constant="56" id="DPe-CB-h0n"/>
+                        <constraint firstItem="diy-MI-ZVa" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="Fcr-EE-qHe"/>
+                        <constraint firstItem="XMe-0f-woX" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="Jsx-vl-ZNw"/>
+                        <constraint firstItem="PFq-T7-YMG" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="Map-MR-sa8"/>
+                        <constraint firstAttribute="trailing" secondItem="diy-MI-ZVa" secondAttribute="trailing" constant="82" id="Qbh-ax-Z65"/>
+                        <constraint firstItem="W15-SQ-vxR" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="top" constant="2" id="ogm-jv-eZS"/>
+                        <constraint firstAttribute="height" constant="20" id="qPP-mK-eRV"/>
                     </constraints>
                 </customView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="fvD-YA-Ec9" secondAttribute="trailing" id="1kz-FY-IF3"/>
-                <constraint firstAttribute="trailing" secondItem="Ksy-Yh-CFv" secondAttribute="trailing" id="SIG-Nz-Pu0"/>
-                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ZLC-p9-POz"/>
-                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="top" secondItem="fvD-YA-Ec9" secondAttribute="bottom" constant="20" id="cI4-dK-hIY"/>
-                <constraint firstItem="fvD-YA-Ec9" firstAttribute="top" secondItem="1" secondAttribute="top" id="kov-vW-jW2"/>
-                <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yp8-BK-kH4"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="06z-yL-X8Z"/>
+                <constraint firstItem="fvD-YA-Ec9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="M81-fB-mqZ"/>
+                <constraint firstAttribute="trailing" secondItem="fvD-YA-Ec9" secondAttribute="trailing" id="Mym-YN-fWZ"/>
+                <constraint firstItem="fvD-YA-Ec9" firstAttribute="top" secondItem="1" secondAttribute="top" id="PNw-rC-iEy"/>
+                <constraint firstItem="Ksy-Yh-CFv" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="ZD8-Jh-6KK"/>
+                <constraint firstAttribute="trailing" secondItem="Ksy-Yh-CFv" secondAttribute="trailing" id="w5H-WB-uD2"/>
             </constraints>
         </customView>
     </objects>
@@ -163,8 +142,6 @@
         <image name="panel_extend_h" width="15" height="15"/>
         <image name="panel_fullScreen" width="15" height="15"/>
         <image name="panel_fullScreen_h" width="15" height="15"/>
-        <image name="panel_setting" width="15" height="15"/>
-        <image name="panel_setting_h" width="15" height="15"/>
         <image name="panel_tear" width="15" height="15"/>
         <image name="panel_tear_h" width="15" height="15"/>
     </resources>

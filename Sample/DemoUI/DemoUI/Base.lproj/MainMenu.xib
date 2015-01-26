@@ -770,6 +770,10 @@
                     </button>
                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KD8-g0-Ew6">
                         <rect key="frame" x="876" y="733" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="0gM-NU-fDH"/>
+                            <constraint firstAttribute="height" constant="15" id="HMx-L4-7yx"/>
+                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="e63-MZ-myK">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -894,8 +898,8 @@
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
     <resources>
-        <image name="Server_off" width="15" height="15"/>
-        <image name="Server_on" width="15" height="15"/>
+        <image name="Server_off" width="58.064517974853516" height="58.064517974853516"/>
+        <image name="Server_on" width="58.064517974853516" height="58.064517974853516"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
         <image name="logo-02" width="256" height="256"/>

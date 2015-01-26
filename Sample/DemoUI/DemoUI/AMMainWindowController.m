@@ -38,6 +38,7 @@
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMVideo.h"
 #import "UIFramework/AMFoundryFontView.h"
+#import "AMCoreData/AMCoreData.h"
 
 
 #define UI_leftSidebarWidth 40.0f
@@ -200,7 +201,6 @@
 
 
 - (IBAction)mesh:(id)sender {
-
     AMMesher* mesher = [AMMesher sharedAMMesher];
     if ([mesher mesherState] == kMesherUnmeshed){
         [mesher goOnline];
@@ -898,6 +898,44 @@
             }
         }
     }
+}
+
+
+
+#pragma mark -
+#pragma mark error handler
+-(IBAction)sheetOKBtnClicked:(id)sender
+{
+    [self.containerView.window endSheet:self.errorHandleSheet];
+}
+
+
+-(void)onLocalMesherError:(NSNotification *)notification
+{
+    if (!self.errorHandleSheet) {
+        [NSBundle loadNibNamed:@"AMLocalMesherErrorSheet" owner:self];
+    }
+    
+    [self.containerView.window beginSheet:self.errorHandleSheet completionHandler:^(NSModalResponse returnCode) {
+        
+        NSMutableArray *ips= [[NSMutableArray alloc] init];
+        if ([self.localServerIpv4.stringValue isNotEqualTo:@""]) {
+            [ips addObject:self.localServerIpv4.stringValue];
+        }
+        
+        if ([self.localServerIpv6.stringValue isNotEqualTo:@""]) {
+            [ips addObject:self.localServerIpv6.stringValue];
+        }
+        
+        [AMCoreData shareInstance].systemConfig.localServerIps = ips;
+        
+        [[AMMesher sharedAMMesher] stopMesher];
+        [[AMMesher sharedAMMesher] startMesher];
+        
+        [self.errorHandleSheet close];
+        self.errorHandleSheet = nil;
+    }];
+    
 }
 
 

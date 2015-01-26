@@ -11,17 +11,5 @@
 #import "AMTabPanelViewController.h"
 
 @interface AMVisualViewController : AMTabPanelViewController
-- (IBAction)onVisualTabClick:(NSButton *)sender;
-- (IBAction)onOSCTabClick:(id)sender;
-- (IBAction)onAudioTabClick:(id)sender;
-- (IBAction)onVideoTabClick:(id)sender;
-@property (strong) IBOutlet NSTabView *tabView;
-@property (strong) IBOutlet NSButton *oscTab;
-@property (strong) IBOutlet NSButton *visualTab;
-
-@property (strong) IBOutlet NSButton *videoTab;
-
-@property (strong) IBOutlet NSButton *audioTab;
-
 
 @end

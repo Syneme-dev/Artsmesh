@@ -52,5 +52,6 @@
 @property (weak)IBOutlet NSTextField *localServerIpv6;
 
 -(IBAction)sheetOKBtnClicked:(id)sender;
+-(IBAction)sheetCancelBtnClicked:(id)sender;
 
 @end

@@ -105,6 +105,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onLocalMesherError:) name:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
     
 //        [[AMTimer shareInstance] addObserver:self
 //                                  forKeyPath:@"state"
@@ -935,8 +937,18 @@
         [self.errorHandleSheet close];
         self.errorHandleSheet = nil;
     }];
-    
 }
 
+
+-(IBAction)sheetCancelBtnClicked:(id)sender
+{
+    [self.errorHandleSheet close];
+    self.errorHandleSheet = nil;
+}
+
+- (IBAction)OnEditLocalServerIP:(id)sender
+{
+    [self onLocalMesherError:nil];
+}
 
 @end

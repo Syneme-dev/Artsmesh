@@ -175,7 +175,7 @@
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Find" id="218">
-                                <menu key="submenu" title="Find" id="220">
+                                <menu key="submenu" title="Find" autoenablesItems="NO" id="220">
                                     <items>
                                         <menuItem title="Find…" tag="1" keyEquivalent="f" id="209">
                                             <connections>
@@ -311,21 +311,10 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Speech" id="211">
-                                <menu key="submenu" title="Speech" id="212">
-                                    <items>
-                                        <menuItem title="Start Speaking" id="196">
-                                            <connections>
-                                                <action selector="startSpeaking:" target="-1" id="233"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Stop Speaking" id="195">
-                                            <connections>
-                                                <action selector="stopSpeaking:" target="-1" id="227"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                            <menuItem title="EditLocalServerIP" keyEquivalent="l" id="211">
+                                <connections>
+                                    <action selector="OnEditLocalServerIP:" target="B30-a9-ZW1" id="TM5-3a-FRW"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

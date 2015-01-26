@@ -15,6 +15,8 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 
+#define MAX_RETRY_COUNT 5
+
 
 @interface AMLocalMesher()<AMHeartBeatDelegate>
 @end
@@ -160,40 +162,57 @@
             return;
         }
         
-        if (error != nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",
-                  error.description);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                sleep(1);
-                [self registerLocalGroup];
-            });
-            return;
-        }
+        BOOL needRetry = NO;
         
-        if (response == nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"Fatal error, register group return value is nil");
-            return;
-        }
-        
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        do{
+            if (error != nil) {
+                AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",  error.description);
                 
-                AMLog(kAMInfoLog, @"AMMesher", @"register group succeeded. I'm leader now!");
-                mySelf.isLeader = YES;
-                [self registerSelf];
-            });
+                needRetry = YES;
+                break;
+            }
             
-        }else if([responseStr isEqualToString:@"group already exist"]){
+            if(response == nil){
+                AMLog(kAMErrorLog, @"AMMesher", @"Fatal error, register group return value is nil");
+                needRetry = YES;
+                break;
+            }
+            
+            NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if ([responseStr isEqualToString:@"ok"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    AMLog(kAMInfoLog, @"AMMesher", @"register group succeeded. I'm leader now!");
+                    mySelf.isLeader = YES;
+                    [self registerSelf];
+                });
+            }else if([responseStr isEqualToString:@"group already exist"]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    AMLog(kAMInfoLog, @"AMMesher", @"group already exist, will join.");
+                    mySelf.isLeader = NO;
+                    [self registerSelf];
+                });
+            }else{
+                AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
+                needRetry = YES;
+            }
+            
+        }while (NO);
+        
+        
+        if(needRetry){
+            sleep(1);
             dispatch_async(dispatch_get_main_queue(), ^{
-                AMLog(kAMInfoLog, @"AMMesher", @"group already exist, will join.");
-                mySelf.isLeader = NO;
-                [self registerSelf];
+                _retryCount ++;
+                if (_retryCount > MAX_RETRY_COUNT) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
+                    return;
+                }else{
+                    AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
+                    [self registerLocalGroup];
+                }
             });
-            
-        }else{
-            AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
         }
     };
     
@@ -219,32 +238,49 @@
             return;
         }
         
-        if (error != nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@",
-                  error.description);
-            return;
-        }
-        
-        if(response == nil){
-            AMLog(kAMErrorLog, @"AMMesher", @"response should not be nil without error");
-            return;
-        }
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL needRetry = NO;
+
+        do{
+            if (error != nil) {
+                AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@", error.description);
                 
-                AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
-                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
-                [self startHeartbeat];
-            });
+                needRetry = YES;
+                break;
+            }
             
-        }else{
+            if(response == nil){
+                AMLog(kAMErrorLog, @"AMMesher", @"response should not be nil without error");
+                needRetry = YES;
+                break;
+            }
+            
+            NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
+                    [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
+                    [self startHeartbeat];
+                });
+            }else{
+                needRetry = YES;
+                break;
+            }
+            
+        }while (NO);
+        
+        
+        if(needRetry){
+            sleep(1);
             dispatch_async(dispatch_get_main_queue(), ^{
                 _retryCount ++;
-                AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
-                sleep(1);
-                [self registerSelf];
+                if (_retryCount > MAX_RETRY_COUNT) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
+                    return;
+                }else{
+                    AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
+                    [self registerSelf];
+                }
             });
         }
     };

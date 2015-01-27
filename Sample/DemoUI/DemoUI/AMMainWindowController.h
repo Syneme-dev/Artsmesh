@@ -29,6 +29,9 @@
 @property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
+
+
+
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
@@ -41,5 +44,14 @@
 
 -(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title withPanelId:(NSString*)panelId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController;
 -(void)loadControlBarItemStatus;
+
+
+//Error handler
+@property (assign)IBOutlet NSWindow *errorHandleSheet;
+@property (weak) IBOutlet NSTextField *localServerIpv4;
+@property (weak)IBOutlet NSTextField *localServerIpv6;
+
+-(IBAction)sheetOKBtnClicked:(id)sender;
+-(IBAction)sheetCancelBtnClicked:(id)sender;
 
 @end

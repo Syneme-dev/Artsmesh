@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVisualViewController">
             <connections>
-                <outlet property="audioTab" destination="3oG-PF-XcP" id="2nV-yt-c04"/>
-                <outlet property="oscTab" destination="eSx-Fy-iSG" id="hQF-jb-2TU"/>
-                <outlet property="tabView" destination="dWM-ec-8XR" id="s9f-c2-LWP"/>
-                <outlet property="videoTab" destination="Mdd-Qr-R83" id="CW9-ZG-z8B"/>
+                <outlet property="contentView" destination="Hz6-mo-xeY" id="I1S-LT-XaE"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
-                <outlet property="visualTab" destination="6Jf-Ha-9LQ" id="fA1-Kz-NXU"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -21,135 +17,16 @@
             <rect key="frame" x="0.0" y="0.0" width="1273" height="1163"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="dWM-ec-8XR">
-                    <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                    <font key="font" metaFont="system"/>
-                    <tabViewItems>
-                        <tabViewItem label="VISUAL" identifier="1" id="tzC-a3-sCm">
-                            <view key="view" id="YGG-uz-g4x">
-                                <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="yeN-ys-0tm">
-                                        <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="shot_visual" id="yNJ-bA-CcP"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="yeN-ys-0tm" firstAttribute="leading" secondItem="YGG-uz-g4x" secondAttribute="leading" id="Hru-51-BFg"/>
-                                    <constraint firstAttribute="trailing" secondItem="yeN-ys-0tm" secondAttribute="trailing" id="PwY-58-a2D"/>
-                                    <constraint firstItem="yeN-ys-0tm" firstAttribute="top" secondItem="YGG-uz-g4x" secondAttribute="top" id="XWg-sL-th7"/>
-                                    <constraint firstAttribute="bottom" secondItem="yeN-ys-0tm" secondAttribute="bottom" id="zkV-dY-Ca5"/>
-                                </constraints>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="OSC" identifier="2" id="gf9-No-EmH">
-                            <view key="view" identifier="OSC Router" id="Mub-jV-tON">
-                                <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="AUDIO" identifier="" id="mGf-md-fIs">
-                            <view key="view" identifier="Audio Router" id="Rm2-Lg-bfO">
-                                <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="VIDEO" identifier="" id="4wb-Ka-rhz">
-                            <view key="view" id="KjN-Ib-5DT">
-                                <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="R4G-Eg-gyw">
-                                        <rect key="frame" x="0.0" y="0.0" width="1273" height="1142"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="shot_video" id="YzQ-Q4-Y3i"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="R4G-Eg-gyw" secondAttribute="trailing" id="DN2-Um-vdh"/>
-                                    <constraint firstItem="R4G-Eg-gyw" firstAttribute="top" secondItem="KjN-Ib-5DT" secondAttribute="top" id="Q9d-a8-lir"/>
-                                    <constraint firstAttribute="bottom" secondItem="R4G-Eg-gyw" secondAttribute="bottom" id="d7I-ks-hmK"/>
-                                    <constraint firstItem="R4G-Eg-gyw" firstAttribute="leading" secondItem="KjN-Ib-5DT" secondAttribute="leading" id="nL1-XY-38u"/>
-                                </constraints>
-                            </view>
-                        </tabViewItem>
-                    </tabViewItems>
-                </tabView>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="3oG-PF-XcP" userLabel="audioTabButton">
-                    <rect key="frame" x="1173" y="1146" width="40" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="GmN-QX-ZsE"/>
-                        <constraint firstAttribute="width" constant="40" id="OLi-5i-thU"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="YEi-xH-k2L">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="onAudioTabClick:" target="-2" id="xcE-Qj-sGa"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Mdd-Qr-R83" userLabel="videoTabButton">
-                    <rect key="frame" x="1221" y="1146" width="40" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="jFk-AP-GF5"/>
-                        <constraint firstAttribute="height" constant="13" id="lzP-bz-yut"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="y3X-Yn-ZGM">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="onVideoTabClick:" target="-2" id="ykb-3t-g8Y"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="eSx-Fy-iSG" userLabel="oscTabButton">
-                    <rect key="frame" x="1132" y="1146" width="33" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="4kC-di-bhr"/>
-                        <constraint firstAttribute="width" constant="33" id="hgi-K8-Q90"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="OSC" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Pfs-sT-KX5">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="onOSCTabClick:" target="-2" id="879-If-nMy"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="6Jf-Ha-9LQ" userLabel="visualTabButton">
-                    <rect key="frame" x="1042" y="1146" width="80" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="4o3-z2-2kQ"/>
-                        <constraint firstAttribute="width" constant="80" id="seg-Qk-VjD"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="VISUALISATION" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="ioe-kU-aia">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="10"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="onVisualTabClick:" target="-2" id="TRc-MK-WkL"/>
-                    </connections>
-                </button>
+                <view identifier="Audio Router" translatesAutoresizingMaskIntoConstraints="NO" id="3h8-Md-uST">
+                    <rect key="frame" x="0.0" y="10" width="1273" height="1133"/>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstItem="eSx-Fy-iSG" firstAttribute="leading" secondItem="6Jf-Ha-9LQ" secondAttribute="trailing" constant="10" id="38S-hY-lpV"/>
-                <constraint firstItem="6Jf-Ha-9LQ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="4Tc-m9-ejO"/>
-                <constraint firstItem="3oG-PF-XcP" firstAttribute="leading" secondItem="eSx-Fy-iSG" secondAttribute="trailing" constant="8" id="7Bb-pq-xnc"/>
-                <constraint firstAttribute="trailing" secondItem="dWM-ec-8XR" secondAttribute="trailing" id="7bI-cp-Qh7"/>
-                <constraint firstItem="Mdd-Qr-R83" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="HFw-GW-8Vp"/>
-                <constraint firstAttribute="trailing" secondItem="Mdd-Qr-R83" secondAttribute="trailing" constant="12" id="Wt1-XX-DAP"/>
-                <constraint firstItem="Mdd-Qr-R83" firstAttribute="leading" secondItem="3oG-PF-XcP" secondAttribute="trailing" constant="8" id="Z6m-e7-sOr"/>
-                <constraint firstItem="3oG-PF-XcP" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="d11-BQ-3I8"/>
-                <constraint firstItem="dWM-ec-8XR" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="mw1-TO-qZv"/>
-                <constraint firstItem="dWM-ec-8XR" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="nZe-3m-EPm"/>
-                <constraint firstItem="eSx-Fy-iSG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="t6E-ji-1Hr"/>
-                <constraint firstAttribute="bottom" secondItem="dWM-ec-8XR" secondAttribute="bottom" id="yN5-ro-VUC"/>
+                <constraint firstAttribute="trailing" secondItem="3h8-Md-uST" secondAttribute="trailing" id="9BA-Zv-9Bg"/>
+                <constraint firstItem="3h8-Md-uST" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Pbc-5W-jGN"/>
+                <constraint firstItem="3h8-Md-uST" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="aRI-pG-xmG"/>
+                <constraint firstAttribute="bottom" secondItem="3h8-Md-uST" secondAttribute="bottom" constant="10" id="fHC-Sl-u0w"/>
             </constraints>
         </customView>
     </objects>
-    <resources>
-        <image name="shot_video" width="1291" height="1169"/>
-        <image name="shot_visual" width="996" height="885"/>
-    </resources>
 </document>

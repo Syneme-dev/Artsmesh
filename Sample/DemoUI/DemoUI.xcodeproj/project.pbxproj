@@ -80,6 +80,7 @@
 		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A7CF6E71A765ECA00848AFC /* AMLocalMesherErrorSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7CF6E61A765ECA00848AFC /* AMLocalMesherErrorSheet.xib */; };
 		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
 		4A8C69E11A7092B800540694 /* AMStaticGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C69E01A7092B800540694 /* AMStaticGroupDetailsViewController.xib */; };
 		4A8C69E41A7092CD00540694 /* AMStaticGroupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69E31A7092CD00540694 /* AMStaticGroupDetailsViewController.m */; };
@@ -404,6 +405,7 @@
 		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
+		4A7CF6E61A765ECA00848AFC /* AMLocalMesherErrorSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalMesherErrorSheet.xib; sourceTree = "<group>"; };
 		4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineView.h; sourceTree = "<group>"; };
 		4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineView.m; sourceTree = "<group>"; };
 		4A8C69E01A7092B800540694 /* AMStaticGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStaticGroupDetailsViewController.xib; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				4A7CF6E51A765EAB00848AFC /* ErrorSheets */,
 				4A8E05831A1C754400645840 /* OSCMonitor */,
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
 				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
@@ -958,6 +961,14 @@
 				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A7CF6E51A765EAB00848AFC /* ErrorSheets */ = {
+			isa = PBXGroup;
+			children = (
+				4A7CF6E61A765ECA00848AFC /* AMLocalMesherErrorSheet.xib */,
+			);
+			name = ErrorSheets;
 			sourceTree = "<group>";
 		};
 		4A8C69DF1A70901C00540694 /* DetailViews */ = {
@@ -1382,6 +1393,7 @@
 				CEC2FC64196588FD00AFD309 /* AMGroupPanelViewController.xib in Resources */,
 				26E1E6A119023496000BF14C /* AMChatView.xib in Resources */,
 				AF20064E1945861B008630C8 /* AMOSCRouteViewController.xib in Resources */,
+				4A7CF6E71A765ECA00848AFC /* AMLocalMesherErrorSheet.xib in Resources */,
 				37C23186187A8FFD00554AFD /* MainMenu.xib in Resources */,
 				AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,

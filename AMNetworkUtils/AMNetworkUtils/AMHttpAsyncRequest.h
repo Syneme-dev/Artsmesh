@@ -20,6 +20,7 @@ extern NSString * const AMHttpAsyncRequestDomain;
 @property (nonatomic) int httpTimeout;
 @property (nonatomic) NSString* username;
 @property (nonatomic) NSString* password;
+@property (nonatomic) int delay;
 
 @property (nonatomic, strong) void(^requestCallback)(NSData* response, NSError* error, BOOL isCancel);
 

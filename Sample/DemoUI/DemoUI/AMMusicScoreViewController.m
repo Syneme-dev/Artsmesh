@@ -9,6 +9,8 @@
 #import "AMMusicScoreViewController.h"
 #import "AMMusicScoreItem.h"
 
+NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
+
 @interface AMMusicScoreViewController ()<NSCollectionViewDelegate>
 {
     NSMutableArray*  musicScoreItems;
@@ -22,9 +24,7 @@
 {
      self.collectionView.delegate = self;
     [self.collectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
-    
-    NSArray* types = [NSMutableArray arrayWithObject:NSPasteboardTypeTIFF];
-    [self.collectionView registerForDraggedTypes:types];
+    [self.collectionView registerForDraggedTypes:@[AMMusicScoreItemType]];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,12 +85,7 @@
 {
   
     NSData *indexData = [NSKeyedArchiver archivedDataWithRootObject:indexes];
-
-    //[pasteboard setDraggedTypes:@"my_drag_type_id"];
-//    NSArray* types = [self copyTypes];
-//    [pasteboard declareTypes:<#(NSArray *)#> owner:<#(id)#>]
-//    NSData* indexData=[NSKeyedArchiver archivedDataWithRootObject:indexes];
-    [pasteboard setData:indexData forType:@"my_drag_type_id"];
+    [pasteboard setData:indexData forType:AMMusicScoreItemType];
     // Here we temporarily store the index of the Cell,
     // being dragged to pasteboard.
     
@@ -99,21 +94,26 @@
 
 
 
-/* This method is used by the collection view to determine a valid drop target. Based on the mouse position, the collection view will suggest a proposed index and drop operation. These values are in/out parameters and can be changed by the delegate to retarget the drop operation. The collection view will propose NSCollectionViewDropOn when the dragging location is closer to the middle of the item than either of its edges. Otherwise, it will propose NSCollectionViewDropBefore. You may override this default behavior by changing proposedDropOperation or proposedDropIndex. This method must return a value that indicates which dragging operation the data source will perform. It must return something other than NSDragOperationNone to accept the drop.
+/* This method is used by the collection view to determine a valid drop target. Based on the mouse position, the collection view will suggest a proposed index and drop operation. These values are in/out parameters and can be changed by the delegate to retarget the drop operation. The collection view will propose NSCollectionViewDropOn when the dragging location is closer to the middle of the item than either of its edges. Otherwise, it will propose NSCollectionViewDropBefore. You may override this default behavior by changing proposedDropOperation or 0. This method must return a value that indicates which dragging operation the data source will perform. It must return something other than NSDragOperationNone to accept the drop.
  
- Note: to receive drag messages, you must first send -registerForDraggedTypes: to the collection view with the drag types you want to support (typically this is done in -awakeFromNib). You must implement this method for your collection view to be a drag destination.
- 
- Multi-image drag and drop: You can set draggingFormation, animatesToDestination, numberOfValidItemsForDrop within this method.
- */
+ Note: to receive drag messages, you must first send -registerForDraggedTypes: to the collection view with the drag types you want to support (typically this is done in -awakeFromNib). You must implement this method for your collection view to be a drag destination.*/
 - (NSDragOperation)collectionView:(NSCollectionView *)collectionView
                      validateDrop:(id <NSDraggingInfo>)draggingInfo
                     proposedIndex:(NSInteger *)proposedDropIndex
                     dropOperation:(NSCollectionViewDropOperation *)proposedDropOperation
 {
-    NSPoint p = [draggingInfo draggedImageLocation];
-    if(p.x > 0){
-        
+/*    
+    NSPasteboard *pBoard = [draggingInfo draggingPasteboard];
+    NSData *indexData = [pBoard dataForType:AMMusicScoreItemType];
+    NSIndexSet *indexes = [NSKeyedUnarchiver unarchiveObjectWithData:indexData];
+    NSInteger draggedCell = [indexes firstIndex];
+    
+    if(*proposedDropIndex == draggedCell)
+    {
+        return NSDragOperationNone;
     }
+ */
+    
     return NSDragOperationMove;
 }
 
@@ -132,18 +132,27 @@
          dropOperation:(NSCollectionViewDropOperation)dropOperation
 {
     NSPasteboard *pBoard = [draggingInfo draggingPasteboard];
-    NSData *indexData = [pBoard dataForType:@"my_drag_type_id"];
+    NSData *indexData = [pBoard dataForType:AMMusicScoreItemType];
     NSIndexSet *indexes = [NSKeyedUnarchiver unarchiveObjectWithData:indexData];
     NSInteger draggedCell = [indexes firstIndex];
     // Now we know the Original Index (draggedCell) and the
     // index of destination (index). Simply swap them in the collection view array.
+    if(draggedCell != index){
+        [musicScoreItems exchangeObjectAtIndex:index withObjectAtIndex:draggedCell];
+        [collectionView setContent:musicScoreItems];
+    }
     
     return YES;
 }
 
 
+/* Allows the delegate to construct a custom dragging image for the items being dragged. 'indexes' contains the indexes of the items being dragged. 'event' is a reference to the  mouse down event that began the drag. 'dragImageOffset' is an in/out parameter. This method will be called with dragImageOffset set to NSZeroPoint, but it can be modified to re-position the returned image. A dragImageOffset of NSZeroPoint will cause the image to be centered under the mouse. You can safely call -[NSCollectionView draggingImageForItemsAtIndexes:withEvent:offset:] from within this method. You do not need to implement this method for your collection view to be a drag source.
 
-
+- (NSImage *)collectionView:(NSCollectionView *)collectionView draggingImageForItemsAtIndexes:(NSIndexSet *)indexes withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset
+{
+    
+}
+ */
 
 // The return value indicates whether the collection view can attempt to initiate a drag for the given event and items.
 // If the delegate does not implement this method, the collection view will act as if it returned YES.
@@ -151,18 +160,6 @@
 {
     return YES;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end
 

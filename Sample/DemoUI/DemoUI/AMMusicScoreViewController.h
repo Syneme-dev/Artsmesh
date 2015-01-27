@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+
 @interface AMMusicScoreViewController : NSViewController
 
 - (IBAction) addMusicScoreItem:(id)sender;

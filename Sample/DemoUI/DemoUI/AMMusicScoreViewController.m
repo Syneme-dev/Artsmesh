@@ -13,8 +13,9 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 @interface AMMusicScoreViewController ()<NSCollectionViewDelegate>
 {
-    NSMutableArray*  musicScoreItems;
+    NSMutableArray*     musicScoreItems;
 }
+@property (weak) IBOutlet NSScrollView *scrollView;
 @property (weak) IBOutlet NSCollectionView* collectionView;
 @end
 
@@ -33,8 +34,6 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     if (self) {
         // Initialization code here.
         musicScoreItems = [[NSMutableArray alloc] init];
-       
-        
     }
     return self;
 }
@@ -54,19 +53,56 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                           AMMusicScoreItem *item = [[AMMusicScoreItem alloc] init];
                           item.image = image;
                           item.name = @" ";
-                          [musicScoreItems addObject:item];
-                          
-                          
-                          
+                          item.size = [image size];
+                          [musicScoreItems addObject:item];        
                       }
                       panel = nil;
                       
                       dispatch_async(dispatch_get_main_queue(), ^{
                           [_collectionView setContent:musicScoreItems];
+                          [self arrangeItems];
                       });
                   }];
-}
+    }
 
+- (void) arrangeItems
+{
+    NSArray* array = [_collectionView content];
+    int deltaX = 0;
+
+    for (int index = 0; index < [array count]; index++)
+    {
+        AMMusicScoreItem* msItem = [musicScoreItems  objectAtIndex:index];
+        NSCollectionViewItem* cvItem = [_collectionView itemAtIndex:index];
+        NSView* itemView = [cvItem view];
+        NSRect itemRect= [itemView frame];
+        itemRect.size.width  = msItem.size.width;
+        itemRect.size.height = msItem.size.height;
+        
+        itemRect.origin.x += deltaX;
+        
+        deltaX += msItem.size.width;
+        [itemView setFrame:itemRect];
+    }
+    
+    if([array count] > 0){
+        NSRect collectRect = [_collectionView frame];
+        collectRect.size.width = deltaX;
+       [self.scrollView.contentView setFrame:collectRect];
+        
+     /*
+        NSSize scrollViewSize = [NSScrollView frameSizeForContentSize:collectRect.size
+                                              horizontalScrollerClass:nil
+                                                verticalScrollerClass:nil
+                                                           borderType:_collectionView.enclosingScrollView.borderType
+                                                          controlSize:NSRegularControlSize
+                                                        scrollerStyle:_collectionView.enclosingScrollView.scrollerStyle];
+      */
+    }
+    
+   
+    
+}
 
 
 // This method is called after it has been determined that a drag should begin, but before the drag has been started.

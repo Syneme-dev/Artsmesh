@@ -11,6 +11,7 @@
 @implementation AMMusicScoreItem
 @synthesize name;
 @synthesize image;
+@synthesize size;
 
 - (NSString *)name
 {

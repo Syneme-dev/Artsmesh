@@ -7,6 +7,13 @@
 //
 
 #import "AMCollectionView.h"
+#define THUMBNAIL_HEIGHT 180.0 
+
+NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
+
+@interface AMCollectionView()<NSDraggingDestination>
+
+@end
 
 @implementation AMCollectionView
 {
@@ -15,6 +22,9 @@
     
     NSView * _docView;
     __weak NSScrollView* _scrollView;
+    
+    NSEvent*        mouseDownEvent;
+    int             mouseDownIndex;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -67,6 +77,11 @@
     scrollView.documentView = _docView;
     
     _viewItems = [[NSMutableArray alloc] init];
+    
+
+    
+    [self registerForDraggedTypes:@[AMMusicScoreItemType]];
+
 }
 
 -(void)setFrame:(NSRect)frame{
@@ -75,7 +90,8 @@
     NSRect rect = _docView.frame;
     rect.size.height = self.bounds.size.height;
     _docView.frame = rect;
-}
+    
+  }
 
 -(void)addViewItem:(NSView *)view
 {
@@ -130,6 +146,124 @@
 -(NSColor *)backgroudColor
 {
     return _bkColor;
+}
+
+- (NSDragOperation) draggingSourceOperationMaskForLocal:(BOOL)flag
+{
+    return NSDragOperationCopy;
+}
+
+- (void) mouseDown:(NSEvent *)theEvent
+{
+    mouseDownIndex = -1;
+    mouseDownEvent  = theEvent;
+    
+    NSPoint mouseDownPoint = [theEvent locationInWindow];
+    NSView* mouseDownView  = [self hitTest:mouseDownPoint];
+    
+    for (NSView* viewItem in _viewItems) {
+        if(mouseDownView == viewItem){
+            mouseDownIndex = [_viewItems indexOfObject:viewItem];
+        }
+    }
+}
+
+- (void) mouseDragged:(NSEvent *)theEvent
+{
+    if(mouseDownIndex < 0){
+        return;
+    }
+    
+    NSPoint downPoint = [mouseDownEvent locationInWindow];
+    NSPoint dragPoint = [theEvent       locationInWindow];
+    float distance = hypot(downPoint.x - dragPoint.x, downPoint.y - dragPoint.y);
+    if(distance < 3)
+        return;
+    
+    NSView* view = [_viewItems objectAtIndex:mouseDownIndex];
+    
+    if(view == nil)
+        return;
+    // generate semi-transparent thumbnail
+    NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:view.bounds];
+    
+ //   NSImage* draggingImage = [imageRep
+    
+   imageRep.size = view.bounds.size;
+    [view cacheDisplayInRect:view.bounds toBitmapImageRep:imageRep];
+    NSRect imageRect = NSZeroRect;
+    imageRect.size = view.frame.size;
+    NSImage* draggingImage = [[NSImage alloc] initWithSize:imageRect.size];
+    [draggingImage addRepresentation:imageRep];
+    [draggingImage lockFocus];
+    [[NSColor colorWithWhite:1.0 alpha:0.3] set];
+    [NSBezierPath fillRect:imageRect];
+    [draggingImage unlockFocus];//*/
+    
+    NSPoint p = [self convertPoint:downPoint fromView:nil];
+    p.x = p.x - draggingImage.size.width/2;
+    p.y = p.y - draggingImage.size.height/2;
+    
+    NSPasteboard* pb = [NSPasteboard pasteboardWithName:NSDragPboard];
+
+    
+    [self dragImage:draggingImage
+                 at:p
+             offset:NSZeroSize
+              event:mouseDownEvent
+         pasteboard:pb
+             source:self
+          slideBack:YES];
+    
+}
+
+- (NSView*) viewByHit:(NSPoint)down
+{
+    return nil;
+}
+
+NSImage* thumbnailImage(NSImage *image) {
+    NSSize imageSize = [image size];
+    CGFloat imageAspectRatio = imageSize.width / imageSize.height;
+    // Create a thumbnail image from this image (this part of the slow operation)
+    NSSize thumbnailSize = NSMakeSize(THUMBNAIL_HEIGHT * imageAspectRatio, THUMBNAIL_HEIGHT);
+    NSImage *thumbnail = [[NSImage alloc] initWithSize:thumbnailSize];
+    [thumbnail lockFocus];
+    [image drawInRect:NSMakeRect(0, 0, thumbnailSize.width, thumbnailSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    [thumbnail unlockFocus];
+    
+    return thumbnail;
+}
+
+- (NSDragOperation) draggingEntered:(id<NSDraggingInfo>)sender
+{
+    if ([sender draggingSource] == self) {
+        return NSDragOperationCopy;
+    }
+    return NSDragOperationCopy;
+}
+
+-(void) draggingExited:(id<NSDraggingInfo>)sender
+{
+    
+}
+
+- (BOOL) prepareForDragOperation:(id<NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (void) concludeDragOperation:(id<NSDraggingInfo>) sender
+{
+    NSLog(@"concludeDragOperation");
+}
+
+- (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSLog(@"performDragOperation");
+    NSPasteboard* pb = [sender draggingPasteboard];
+   // [self readFromPasteboard:pb];
+    return YES;
 }
 
 @end

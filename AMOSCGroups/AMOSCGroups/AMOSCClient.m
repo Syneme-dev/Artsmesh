@@ -127,6 +127,14 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
                                                                     object:self
                                                                   userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_STOP }];
+            }else if([msg isEqualTo:AM_OSC_TIMER_PAUSE]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_PAUSE }];
+            }else if([msg isEqualTo:AM_OSC_TIMER_RESUME]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_RESUME }];
             }
         });
     }

@@ -96,7 +96,6 @@
 		4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACD01A6CCB91003ECE24 /* AMOutlineItem.m */; };
 		4AB4ACD41A6CCD39003ECE24 /* AMGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACD31A6CCD39003ECE24 /* AMGroupItem.m */; };
 		4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACD61A6CE03D003ECE24 /* AMLiveUserItem.m */; };
-		4AB4ACDA1A6D20B5003ECE24 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACD91A6D1E77003ECE24 /* NSView_Constrains.m */; };
 		4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACDC1A6E2DA6003ECE24 /* AMLiveGroupViewController.m */; };
 		4AB4ACDF1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AB4ACDD1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib */; };
 		4AB4ACE91A6E5D2F003ECE24 /* AMArchiveGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACE71A6E5D2F003ECE24 /* AMArchiveGroupViewController.m */; };
@@ -433,8 +432,6 @@
 		4AB4ACD31A6CCD39003ECE24 /* AMGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupItem.m; sourceTree = "<group>"; };
 		4AB4ACD51A6CE03D003ECE24 /* AMLiveUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveUserItem.h; sourceTree = "<group>"; };
 		4AB4ACD61A6CE03D003ECE24 /* AMLiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveUserItem.m; sourceTree = "<group>"; };
-		4AB4ACD81A6D1E64003ECE24 /* NSView_Constrains.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSView_Constrains.h; sourceTree = "<group>"; };
-		4AB4ACD91A6D1E77003ECE24 /* NSView_Constrains.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSView_Constrains.m; sourceTree = "<group>"; };
 		4AB4ACDB1A6E2DA6003ECE24 /* AMLiveGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroupViewController.h; sourceTree = "<group>"; };
 		4AB4ACDC1A6E2DA6003ECE24 /* AMLiveGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroupViewController.m; sourceTree = "<group>"; };
 		4AB4ACDD1A6E2DA6003ECE24 /* AMLiveGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveGroupViewController.xib; sourceTree = "<group>"; };
@@ -1199,8 +1196,6 @@
 				4AB4ACE61A6E5D2F003ECE24 /* AMArchiveGroupViewController.h */,
 				4AB4ACE71A6E5D2F003ECE24 /* AMArchiveGroupViewController.m */,
 				4AB4ACE81A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib */,
-				4AB4ACD81A6D1E64003ECE24 /* NSView_Constrains.h */,
-				4AB4ACD91A6D1E77003ECE24 /* NSView_Constrains.m */,
 				4AB4ACCB1A6CCA74003ECE24 /* OutlineItems */,
 				4AB4ACCA1A6CCA5F003ECE24 /* Cells */,
 				013B2D6F1A6DAD7B0076981E /* Rows */,
@@ -1539,7 +1534,6 @@
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */,
-				4AB4ACDA1A6D20B5003ECE24 /* NSView_Constrains.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

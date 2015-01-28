@@ -13,7 +13,7 @@
 #import "AMArchiveUserItem.h"
 #import "AMArchiveGroupItem.h"
 #import "AMArchiveCellContentView.h"
-#import "NSView_Constrains.h"
+#import "UIFramework/NSView_Constrains.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMStaticGroupDetailsViewController.h"
 #import "AMStaticUserDetailsViewController.h"

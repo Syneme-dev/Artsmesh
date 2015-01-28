@@ -54,7 +54,7 @@
                     </scroller>
                 </scrollView>
             </subviews>
-            <point key="canvasLocation" x="428" y="318"/>
+            <point key="canvasLocation" x="-150" y="-186"/>
         </customView>
         <collectionViewItem id="lCU-Vx-Jcu">
             <connections>

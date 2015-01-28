@@ -11,7 +11,7 @@
 #import "AMOutlineItem.h"
 #import "AMLiveUserItem.h"
 #import "AMOutlineCellContentView.h"
-#import "NSView_Constrains.h"
+#import "UIFramework/NSView_Constrains.h"
 #import "AMGroupOutlineRowView.h"
 #import "AMGroupCellContentView.h"
 #import "AMGroupItem.h"

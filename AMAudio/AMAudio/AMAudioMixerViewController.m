@@ -10,7 +10,7 @@
 #import "AMArtsmeshClient.h"
 #import "AMAudio.h"
 #import "AMVolumeCtlView.h"
-#import "AMCollectionView.h"
+#import "UIFramework/AMCollectionView.h"
 #import "AMMixerViewController.h"
 #import "AMMixerView.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"

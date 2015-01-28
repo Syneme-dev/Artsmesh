@@ -8,7 +8,7 @@
 
 #import "AMGroupPanelViewController.h"
 #import "UIFramework/AMButtonHandler.h"
-#import "NSView_Constrains.h"
+#import "UIFramework/NSView_Constrains.h"
 
 
 @interface AMGroupPanelViewController ()<NSOutlineViewDelegate, NSOutlineViewDataSource>

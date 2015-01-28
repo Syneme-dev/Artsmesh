@@ -14,7 +14,7 @@
 #import "AMOutlineItem.h"
 #import "AMGroupItem.h"
 #import "AMLiveUserItem.h"
-#import "NSView_Constrains.h"
+#import "UIFramework/NSView_Constrains.h"
 #import "AMGroupOutlineRowView.h"
 #import "AMGroupDetailViewDelegate.h"
 #import "AMGroupDetailsViewController.h"

@@ -106,7 +106,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onLocalMesherError:) name:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onLocalMesherError:) name:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
     
 //        [[AMTimer shareInstance] addObserver:self
 //                                  forKeyPath:@"state"
@@ -906,49 +906,49 @@
 
 #pragma mark -
 #pragma mark error handler
--(IBAction)sheetOKBtnClicked:(id)sender
-{
-    [self.containerView.window endSheet:self.errorHandleSheet];
-}
-
-
--(void)onLocalMesherError:(NSNotification *)notification
-{
-    if (!self.errorHandleSheet) {
-        [NSBundle loadNibNamed:@"AMLocalMesherErrorSheet" owner:self];
-    }
-    
-    [self.containerView.window beginSheet:self.errorHandleSheet completionHandler:^(NSModalResponse returnCode) {
-        
-        NSMutableArray *ips= [[NSMutableArray alloc] init];
-        if ([self.localServerIpv4.stringValue isNotEqualTo:@""]) {
-            [ips addObject:self.localServerIpv4.stringValue];
-        }
-        
-        if ([self.localServerIpv6.stringValue isNotEqualTo:@""]) {
-            [ips addObject:self.localServerIpv6.stringValue];
-        }
-        
-        [AMCoreData shareInstance].systemConfig.localServerIps = ips;
-        
-        [[AMMesher sharedAMMesher] stopMesher];
-        [[AMMesher sharedAMMesher] startMesher];
-        
-        [self.errorHandleSheet close];
-        self.errorHandleSheet = nil;
-    }];
-}
-
-
--(IBAction)sheetCancelBtnClicked:(id)sender
-{
-    [self.errorHandleSheet close];
-    self.errorHandleSheet = nil;
-}
-
-- (IBAction)OnEditLocalServerIP:(id)sender
-{
-    [self onLocalMesherError:nil];
-}
+//-(IBAction)sheetOKBtnClicked:(id)sender
+//{
+//    [self.containerView.window endSheet:self.errorHandleSheet];
+//}
+//
+//
+//-(void)onLocalMesherError:(NSNotification *)notification
+//{
+//    if (!self.errorHandleSheet) {
+//        [NSBundle loadNibNamed:@"AMLocalMesherErrorSheet" owner:self];
+//    }
+//    
+//    [self.containerView.window beginSheet:self.errorHandleSheet completionHandler:^(NSModalResponse returnCode) {
+//        
+//        NSMutableArray *ips= [[NSMutableArray alloc] init];
+//        if ([self.localServerIpv4.stringValue isNotEqualTo:@""]) {
+//            [ips addObject:self.localServerIpv4.stringValue];
+//        }
+//        
+//        if ([self.localServerIpv6.stringValue isNotEqualTo:@""]) {
+//            [ips addObject:self.localServerIpv6.stringValue];
+//        }
+//        
+//        [AMCoreData shareInstance].systemConfig.localServerIps = ips;
+//        
+//        [[AMMesher sharedAMMesher] stopMesher];
+//        [[AMMesher sharedAMMesher] startMesher];
+//        
+//        [self.errorHandleSheet close];
+//        self.errorHandleSheet = nil;
+//    }];
+//}
+//
+//
+//-(IBAction)sheetCancelBtnClicked:(id)sender
+//{
+//    [self.errorHandleSheet close];
+//    self.errorHandleSheet = nil;
+//}
+//
+//- (IBAction)OnEditLocalServerIP:(id)sender
+//{
+//    [self onLocalMesherError:nil];
+//}
 
 @end

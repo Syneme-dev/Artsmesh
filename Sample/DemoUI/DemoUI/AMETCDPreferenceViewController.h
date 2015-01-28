@@ -15,8 +15,6 @@
 @interface AMETCDPreferenceViewController : AMTabPanelViewController
 @property (retain) IBOutlet NSTabView *tabs;
 
-@property  IBOutlet NSView *progressView;
-
 @property (weak) IBOutlet NSTextField *myMachineNameField;
 @property (weak) IBOutlet NSTextField *statusNetPostTestResult;
 @property (weak) IBOutlet NSButton *testStatusNetPost;
@@ -30,6 +28,7 @@
 @property (strong) IBOutlet NSButton *audioTabButton;
 @property (strong) IBOutlet NSButton *statusnetTabButton;
 @property (weak) IBOutlet NSButton *postStatusMessageButton;
+@property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
 
 - (IBAction)onJackServerTabClick:(id)sender;
 - (IBAction)onGeneralClick:(id)sender;

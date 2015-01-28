@@ -17,12 +17,17 @@
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMJacktripSettings.h"
+#import "UIFramework/AMFoundryFontView.h"
+#import "AMMesher/AMMesher.h"
+
 
 
 
 @interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
-@property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
+
 @property (weak) IBOutlet NSButton *statusNetPostMessage;
+@property (weak) IBOutlet AMCheckBoxView *forceLoalServerIpBox;
+@property (weak) IBOutlet AMFoundryFontView *forceLocalServerIpField;
 
 @end
 
@@ -74,6 +79,10 @@
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabButton];
+    
+    self.forceLoalServerIpBox.title = @"Use Local Server IP";
+    self.forceLoalServerIpBox.checked = NO;
+    self.forceLoalServerIpBox.delegate = self;
 }
 
 
@@ -357,8 +366,7 @@
         [appDelegate.mainWindowController initControlBar:sender.checked];
         [defaults setBool:sender.checked forKey:Preference_Key_General_TopControlBar];
         [appDelegate.mainWindowController loadControlBarItemStatus];
-    }
-    else{
+    }else if([sender.identifier isEqualToString:@"useIpv6"]){
         [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
         
         if(sender.checked){
@@ -367,6 +375,25 @@
         }else{
             [self loadIpv4];
             [self changeMesherServerToIpv6:NO];
+        }
+    }else if([sender.identifier isEqualToString:@"useLocalServerIP"]){
+        
+        if (sender.checked == YES) {
+            if (![self.forceLocalServerIpField.stringValue isEqualTo:@""]) {
+                AMSystemConfig * config = [AMCoreData shareInstance].systemConfig;
+                config.localServerIps = @[self.forceLocalServerIpField.stringValue];
+                
+                [[AMMesher sharedAMMesher] stopMesher];
+                [[AMMesher sharedAMMesher] startMesher];
+            }
+            
+        }else{
+            AMSystemConfig * config = [AMCoreData shareInstance].systemConfig;
+            config.localServerIps = nil;
+            
+            [[AMMesher sharedAMMesher] stopMesher];
+            [[AMMesher sharedAMMesher] startMesher];
+            
         }
     }
 }

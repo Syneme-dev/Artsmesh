@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVisualViewController">
             <connections>
+                <outlet property="audioBtn" destination="f7e-Ce-sA3" id="dmt-Lx-eN9"/>
                 <outlet property="contentView" destination="Hz6-mo-xeY" id="I1S-LT-XaE"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -20,13 +21,27 @@
                 <view identifier="Audio Router" translatesAutoresizingMaskIntoConstraints="NO" id="3h8-Md-uST">
                     <rect key="frame" x="0.0" y="10" width="1273" height="1133"/>
                 </view>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f7e-Ce-sA3">
+                    <rect key="frame" x="1216" y="1144" width="57" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="3zE-3r-nrY"/>
+                        <constraint firstAttribute="width" constant="57" id="Yj2-d4-APM"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="GEF-4R-0JS">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3h8-Md-uST" secondAttribute="trailing" id="9BA-Zv-9Bg"/>
+                <constraint firstItem="f7e-Ce-sA3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="Bfy-mR-PMw"/>
                 <constraint firstItem="3h8-Md-uST" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Pbc-5W-jGN"/>
                 <constraint firstItem="3h8-Md-uST" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="aRI-pG-xmG"/>
+                <constraint firstAttribute="trailing" secondItem="f7e-Ce-sA3" secondAttribute="trailing" id="dM9-XZ-Cz9"/>
                 <constraint firstAttribute="bottom" secondItem="3h8-Md-uST" secondAttribute="bottom" constant="10" id="fHC-Sl-u0w"/>
             </constraints>
+            <point key="canvasLocation" x="105.5" y="203.5"/>
         </customView>
     </objects>
 </document>

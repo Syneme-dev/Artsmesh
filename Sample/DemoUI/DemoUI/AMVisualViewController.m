@@ -14,6 +14,7 @@
 
 @interface AMVisualViewController ()
 @property (strong) IBOutlet NSView *contentView;
+@property (weak) IBOutlet NSButton *audioBtn;
 
 @end
 
@@ -34,6 +35,8 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    [AMButtonHandler changeTabTextColor:self.audioBtn toColor:UI_Color_b7b7b7];
+    
     [self loadAudioRouterView: self.contentView];
 }
 

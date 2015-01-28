@@ -17,11 +17,11 @@
             <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
                     <rect key="frame" x="664" y="912" width="89" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="y6I-1j-eZZ"/>
-                        <constraint firstAttribute="width" constant="82" id="ySu-4h-44j"/>
+                        <constraint firstAttribute="width" constant="89" id="ySu-4h-44j"/>
                     </constraints>
                     <buttonCell key="cell" type="inline" title="LOAD SCORE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="FKc-UC-UE7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

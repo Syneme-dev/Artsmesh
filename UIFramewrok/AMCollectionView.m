@@ -11,7 +11,7 @@
 
 NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
-@interface AMCollectionView()<NSDraggingDestination>
+@interface AMCollectionView()<NSDraggingDestination, NSDraggingSource>
 
 @end
 
@@ -80,8 +80,8 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
 
     
+   //old style [self registerForDraggedTypes:@[NSTIFFPboardType]];
     [self registerForDraggedTypes:@[AMMusicScoreItemType]];
-
 }
 
 -(void)setFrame:(NSRect)frame{
@@ -187,8 +187,6 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     // generate semi-transparent thumbnail
     NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:view.bounds];
     
- //   NSImage* draggingImage = [imageRep
-    
    imageRep.size = view.bounds.size;
     [view cacheDisplayInRect:view.bounds toBitmapImageRep:imageRep];
     NSRect imageRect = NSZeroRect;
@@ -204,16 +202,31 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     p.x = p.x - draggingImage.size.width/2;
     p.y = p.y - draggingImage.size.height/2;
     
-    NSPasteboard* pb = [NSPasteboard pasteboardWithName:NSDragPboard];
-
-    
-    [self dragImage:draggingImage
+  /*  old style
+   NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+   [pboard declareTypes:[NSArray arrayWithObject:NSTIFFPboardType]  owner:self];
+   [pboard setData:[draggingImage TIFFRepresentation] forType:NSTIFFPboardType];
+   
+   [self dragImage:draggingImage
                  at:p
              offset:NSZeroSize
               event:mouseDownEvent
          pasteboard:pb
              source:self
-          slideBack:YES];
+          slideBack:YES];*/
+    
+    NSPasteboardItem *pasteboardItem = [[NSPasteboardItem alloc] init];
+    [pasteboardItem setString:@"" forType:AMMusicScoreItemType];
+    
+    
+    NSDraggingItem *draggingItem = [[NSDraggingItem alloc]
+                                    initWithPasteboardWriter:pasteboardItem];
+    [draggingItem setDraggingFrame:imageRect contents:draggingImage];
+    
+    [self beginDraggingSessionWithItems:@[draggingItem]
+                                  event:mouseDownEvent
+                                 source:self];
+
     
 }
 
@@ -245,7 +258,7 @@ NSImage* thumbnailImage(NSImage *image) {
 
 -(void) draggingExited:(id<NSDraggingInfo>)sender
 {
-    
+    NSLog(@"Dragg Exit");
 }
 
 - (BOOL) prepareForDragOperation:(id<NSDraggingInfo>)sender
@@ -260,10 +273,31 @@ NSImage* thumbnailImage(NSImage *image) {
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
 {
-    NSLog(@"performDragOperation");
-    NSPasteboard* pb = [sender draggingPasteboard];
-   // [self readFromPasteboard:pb];
+    //destView 为何未nil?
+    NSPoint location    = [sender draggingLocation];
+    NSView* destView    = [self hitTest:location];
+    if(destView == nil || ![_viewItems containsObject:destView]) {
+        return NO;
+    }
+    NSView* sourceView  = [_viewItems objectAtIndex:mouseDownIndex];
+    
+    
+    
     return YES;
+}
+
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session
+sourceOperationMaskForDraggingContext:(NSDraggingContext)context
+{
+    switch (context) {
+        case NSDraggingContextOutsideApplication:
+            return NSDragOperationNone;
+            // by using this fall through pattern, we will remain compatible
+            // if the contexts get more precise in the future.
+        case NSDraggingContextWithinApplication:
+        default:
+            return NSDragOperationCopy;
+    }
 }
 
 @end

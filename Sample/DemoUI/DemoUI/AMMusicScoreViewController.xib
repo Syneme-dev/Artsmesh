@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMusicScoreViewController">
             <connections>
+                <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,17 +17,25 @@
             <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
-                    <rect key="frame" x="555" y="43" width="82" height="32"/>
-                    <buttonCell key="cell" type="push" title="ADD" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FKc-UC-UE7">
+                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
+                    <rect key="frame" x="664" y="912" width="89" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="y6I-1j-eZZ"/>
+                        <constraint firstAttribute="width" constant="82" id="ySu-4h-44j"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="LOAD SCORE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="FKc-UC-UE7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
                     <connections>
                         <action selector="addMusicScoreItem:" target="-2" id="aOa-P7-ulO"/>
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="tOL-jT-WuM" secondAttribute="trailing" constant="6" id="1Ol-KA-ydZ"/>
+                <constraint firstItem="tOL-jT-WuM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="KNh-Yh-5lP"/>
+            </constraints>
             <point key="canvasLocation" x="-142.5" y="87.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="kJh-Nd-a7P"/>

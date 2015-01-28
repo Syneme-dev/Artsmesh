@@ -10,6 +10,7 @@
 #import "AMMusicScoreItem.h"
 #import "UIFramework/AMCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"
+#import "UIFramework/AMButtonHandler.h"
 
 NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
@@ -25,6 +26,9 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 - (void) awakeFromNib
 {
+    
+    [AMButtonHandler changeTabTextColor:self.loadScoreBtn toColor:UI_Color_blue];
+    
     NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 480);
     _collectionView = [[AMCollectionView alloc] initWithFrame:rect];
     _collectionView.itemGap = 10;

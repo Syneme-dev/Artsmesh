@@ -14,7 +14,10 @@
 @property NSUInteger itemGap;
 
 -(void)addViewItem:(NSView *)view;
+-(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index;
 -(void)addViewItems:(NSArray *)views;
+-(void)removeViewItem:(NSView *)view;
+-(void)removeViewAtIndex:(NSUInteger)index;
 -(void)removeAllItems;
 
 @end

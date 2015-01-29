@@ -95,41 +95,65 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 -(void)addViewItem:(NSView *)view
 {
+    [_viewItems addObject:view];
+    [self reloadData];
+}
+
+
+-(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index
+{
+    [_viewItems insertObject:view atIndex:index];
+    [self reloadData];
+}
+
+
+-(void)reloadData
+{
+    [_docView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     int xPos = 0;
-    for (NSView *viewItem in _viewItems) {
-        xPos += viewItem.frame.size.width + self.itemGap;
+    for (NSView *subView in _viewItems) {
+        NSRect rect = NSMakeRect(xPos, 0, subView.frame.size.width, _docView.bounds.size.height);
+        subView.frame = rect;
+        xPos += subView.frame.size.width + self.itemGap;
+        
+        [_docView addSubview:subView];
     }
     
-    NSRect rect = NSMakeRect(xPos, 0, view.frame.size.width, _docView.bounds.size.height);
-    view.frame = rect;
-    
-    if (_docView.bounds.size.width < xPos + view.frame.size.width + self.itemGap) {
+    if (_docView.bounds.size.width < xPos) {
         NSRect rect = _docView.bounds;
-        rect.size.width = xPos + view.frame.size.width + self.itemGap;
+        rect.size.width = xPos;
         _docView.frame = rect;
     }
     
-    [_viewItems addObject:view];
-    [_docView addSubview:view];
     [self setNeedsDisplay:YES];
 }
+
 
 -(void)addViewItems:(NSArray *)views
 {
-    for (NSView *view in views) {
-        [self addSubview:view];
-    }
+    [_viewItems addObjectsFromArray:views];
+    [self reloadData];
 }
+
+-(void)removeViewAtIndex:(NSUInteger)index
+{
+    [_viewItems removeObjectAtIndex:index];
+    [self reloadData];
+}
+
+
+-(void)removeViewItem:(NSView *)view
+{
+    [_viewItems removeObject:view];
+    [self reloadData];
+}
+
 
 -(void)removeAllItems
 {
-    for (NSView *view in _viewItems) {
-        [view removeFromSuperview];
-    }
-    
     [_viewItems removeAllObjects];
-    
-    [self setNeedsDisplay:YES];
+    [self reloadData];
 }
 
 -(void)setBackgroudColor:(NSColor *)backgroudColor
@@ -143,15 +167,18 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     }
 }
 
+
 -(NSColor *)backgroudColor
 {
     return _bkColor;
 }
 
+
 - (NSDragOperation) draggingSourceOperationMaskForLocal:(BOOL)flag
 {
     return NSDragOperationCopy;
 }
+
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
@@ -273,16 +300,32 @@ NSImage* thumbnailImage(NSImage *image) {
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
 {
-    //destView 为何未nil?
+    NSView* sourceView  = [_viewItems objectAtIndex:mouseDownIndex];
     NSPoint location    = [sender draggingLocation];
     NSView* destView    = [self hitTest:location];
-    if(destView == nil || ![_viewItems containsObject:destView]) {
+    if(destView == nil || ![_viewItems containsObject:destView] || destView == sourceView) {
         return NO;
     }
-    NSView* sourceView  = [_viewItems objectAtIndex:mouseDownIndex];
     
+    NSPoint mouseDownPoint = [mouseDownEvent locationInWindow];
+    NSUInteger destIndex = [_viewItems indexOfObject:destView];
     
-    
+    //如果从左向右拖
+    if(mouseDownPoint.x < location.x){
+        
+        [_viewItems removeObject:sourceView];
+        [_viewItems insertObject:sourceView atIndex:destIndex];
+        [self reloadData];
+    }
+    else{
+        if (destIndex == 0){
+            destIndex = 1;
+        }
+        
+        [_viewItems removeObject:sourceView];
+        [_viewItems insertObject:sourceView atIndex:destIndex -1];
+    }
+    [self setNeedsDisplay:YES];
     return YES;
 }
 

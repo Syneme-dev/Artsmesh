@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5al-Ak-gVW">
-                    <rect key="frame" x="20" y="452" width="3" height="17"/>
+                    <rect key="frame" x="20" y="467" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="AdN-7N-UYh"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6l4-az-nZP">
@@ -35,15 +35,19 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="9zz-rR-jqe"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="puP-kH-v7I">
-                    <rect key="frame" x="381" y="517" width="3" height="17"/>
+                    <rect key="frame" x="381" y="492" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="tyc-UT-mNU"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sOL-wW-ENG">
+                    <rect key="frame" x="381" y="517" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="a9w-Qf-82I"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0y-hJ-AZ5">
                     <rect key="frame" x="20" y="492" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KKt-3g-F3q"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67N-Yl-oiD">
-                    <rect key="frame" x="381" y="492" width="3" height="17"/>
+                    <rect key="frame" x="381" y="467" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ytC-eL-jHX"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vMv-fl-3sU" customClass="AMFoundryFontView">
@@ -55,7 +59,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cla-gp-wMd" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="452" width="59" height="17"/>
+                    <rect key="frame" x="30" y="467" width="59" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SEARCH" id="zM9-5n-cxE">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -71,7 +75,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGV-Hq-Vwx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="395" y="519" width="80" height="17"/>
+                    <rect key="frame" x="395" y="492" width="80" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="USERNAME" id="8TJ-Lr-Ubf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -79,7 +83,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcT-xc-GnT" customClass="AMFoundryFontView">
-                    <rect key="frame" x="395" y="492" width="92" height="17"/>
+                    <rect key="frame" x="395" y="468" width="92" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUPNAME" id="3M3-Q2-mt7">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -95,7 +99,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iub-DF-U7u" customClass="AMFoundryFontView">
-                    <rect key="frame" x="99" y="450" width="120" height="20"/>
+                    <rect key="frame" x="99" y="465" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SEARCH" drawsBackground="YES" id="h2H-WU-cpM">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -114,7 +118,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9z-7f-O0n" customClass="AMFoundryFontView">
-                    <rect key="frame" x="493" y="490" width="120" height="20"/>
+                    <rect key="frame" x="493" y="465" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="GROUPNAME" drawsBackground="YES" id="8bl-Rp-dny">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -133,7 +137,7 @@
                     <rect key="frame" x="99" y="514" width="120" height="22"/>
                 </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5O-z6-uSk">
-                    <rect key="frame" x="0.0" y="0.0" width="728" height="442"/>
+                    <rect key="frame" x="0.0" y="0.0" width="728" height="461"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hdd-eq-SwM">
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,10 +233,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <customView identifier="oscMonitorOnOff" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
-                    <rect key="frame" x="624" y="515" width="82" height="22"/>
+                <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
+                    <rect key="frame" x="397" y="514" width="47" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="82" id="66f-cB-TtJ"/>
+                        <constraint firstAttribute="width" constant="47" id="66f-cB-TtJ"/>
                         <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
                     </constraints>
                 </customView>
@@ -245,7 +249,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGH-7E-yLn" customClass="AMFoundryFontView">
-                    <rect key="frame" x="493" y="517" width="120" height="20"/>
+                    <rect key="frame" x="493" y="490" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="USERNAME" drawsBackground="YES" id="J8O-TT-qpX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -253,7 +257,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="W3j-vS-ShE">
-                    <rect key="frame" x="624" y="450" width="84" height="14"/>
+                    <rect key="frame" x="634" y="469" width="84" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="84" id="WIz-a8-Rfv"/>
                         <constraint firstAttribute="height" constant="14" id="rOI-QI-t5c"/>
@@ -268,13 +272,14 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="Rff-V1-Z3C" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="29" id="0Hz-SZ-UHo"/>
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="C1K-Bb-BwB"/>
                 <constraint firstAttribute="trailing" secondItem="b5O-z6-uSk" secondAttribute="trailing" id="KhN-18-Gdb"/>
                 <constraint firstAttribute="bottom" secondItem="b5O-z6-uSk" secondAttribute="bottom" id="QIs-W8-84K"/>
-                <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="123" id="b59-nj-W7M"/>
-                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="20" id="fde-yV-26P"/>
-                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="22" id="xPB-RO-lJE"/>
-                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="101" id="zRk-fb-QxZ"/>
+                <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="104" id="b59-nj-W7M"/>
+                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="10" id="fde-yV-26P"/>
+                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="284" id="xPB-RO-lJE"/>
+                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="82" id="zRk-fb-QxZ"/>
             </constraints>
             <point key="canvasLocation" x="142" y="-94.5"/>
         </customView>

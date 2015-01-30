@@ -139,6 +139,11 @@ typedef enum : NSInteger {
         [self.timer invalidate];
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
                                                             object:self];
+        
+        self.leftHoursTF.stringValue = @"00";
+        self.leftMinutesTF.stringValue = @"00";
+        self.leftSecondsTF.stringValue = @"00";
+        self.playButton.enabled = YES;
     }
 }
 

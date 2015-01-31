@@ -79,6 +79,9 @@ typedef enum : NSInteger {
                                              selector:@selector(handleOSCMessage:)
                                                  name:AM_OSC_NOTIFICATION
                                                object:nil];
+    
+    self.stopButton.image = [NSImage imageNamed:@"timer_stop"];
+    self.playButton.image = [NSImage imageNamed:@"timer_start"];
 }
 
 - (void)handleOSCMessage:(NSNotification *)notification
@@ -128,58 +131,67 @@ typedef enum : NSInteger {
 {
     if (self.timer.valid) { // running or pause state
         self.timerState = AMTimerStateStopped;
-        self.playButton.title = @"Start";
+        //self.playButton.title = @"Start";
+        self.playButton.image = [NSImage imageNamed:@"timer_start"];
         if (sender == self.stopButton)
             [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_STOP
                                                     params:nil];
         [self.timer invalidate];
         [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerStopNotification
                                                             object:self];
+        
+        self.leftHoursTF.stringValue = @"00";
+        self.leftMinutesTF.stringValue = @"00";
+        self.leftSecondsTF.stringValue = @"00";
+        self.playButton.enabled = YES;
     }
 }
 
 - (IBAction)nextTimerState:(id)sender
 {
     switch (self.timerState) {
-    case AMTimerStateStopped:
-        self.timerState = AMTimerStateRunning;
-        self.playButton.title = @"Pause";
-        if (sender == self.playButton)
-            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
-                                                    params:nil];
-        [self startCountdownTimer];
-        break;
+        case AMTimerStateStopped:
+            self.timerState = AMTimerStateRunning;
+//            //self.playButton.title = @"Pause";
+            self.playButton.image = [NSImage imageNamed:@"timer_pause"];
+            if (sender == self.playButton)
+                [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_START
+                                                        params:nil];
+            [self startCountdownTimer];
+            break;
             
-    case AMTimerStateRunning:
-        self.timerState = AMTimerStatePaused;
-        self.playButton.title = @"Resume";
-        if (sender == self.playButton)
-            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_PAUSE
-                                                    params:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerPauseNotification
-                                                            object:self
-                                                          userInfo:nil];
-        [self.timer invalidate];
-        break;
+        case AMTimerStateRunning:
+            self.timerState = AMTimerStatePaused;
+            //self.playButton.title = @"Resume";
+            self.playButton.image = [NSImage imageNamed:@"timer_start"];
+            if (sender == self.playButton)
+                [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_PAUSE
+                                                        params:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerPauseNotification
+                                                                object:self
+                                                              userInfo:nil];
+            [self.timer invalidate];
+            break;
             
-    case AMTimerStatePaused:
-        self.timerState = AMTimerStateRunning;
-        self.playButton.title = @"Pause";
-        if (sender == self.playButton)
-            [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_RESUME
-                                                    params:nil];
+        case AMTimerStatePaused:
+            self.timerState = AMTimerStateRunning;
+            //self.playButton.title = @"Pause";
+            self.playButton.image = [NSImage imageNamed:@"timer_pause"];
+            if (sender == self.playButton)
+                [[AMOSCGroups sharedInstance] broadcastMessage:AM_OSC_TIMER_RESUME
+                                                        params:nil];
             
-        _currentDurationValue = [self timeInterval:self.leftTimeTFs];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
-                                                            object:self
-                                                          userInfo:@{ @"Duration" : @(_currentDurationValue) }];
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                      target:self
-                                                    selector:@selector(incrementTimerLabel)
-                                                    userInfo:nil
-                                                     repeats:YES];
-        self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
-        break;
+            _currentDurationValue = [self timeInterval:self.leftTimeTFs];
+            [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
+                                                                object:self
+                                                              userInfo:@{ @"Duration" : @(_currentDurationValue) }];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(incrementTimerLabel)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];
+            break;
     }
 }
 
@@ -238,7 +250,8 @@ typedef enum : NSInteger {
                                                           userInfo:@{ @"fireDate" : fireDate }];
     } else {
         self.timerState = AMTimerStateStopped;
-        self.playButton.title = @"Start";
+        //self.playButton.title = @"Start";
+        self.playButton.image = [NSImage imageNamed:@"timer_start"];
     }
 }
 

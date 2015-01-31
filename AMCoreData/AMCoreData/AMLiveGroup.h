@@ -40,5 +40,6 @@
 -(BOOL)isMeshed;
 -(AMLiveUser*)leader;
 -(NSArray*)usersIncludeSubGroup;
+-(BOOL)hasUserOnline;
 
 @end

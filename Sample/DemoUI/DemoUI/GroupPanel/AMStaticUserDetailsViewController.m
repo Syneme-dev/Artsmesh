@@ -8,7 +8,7 @@
 
 #import "AMStaticUserDetailsViewController.h"
 #import <UIFramework/AMFoundryFontView.h>
-#import "AMGroupPanelModel.h"
+
 #import "UIFramework/AMButtonHandler.h"
 #import "AMMesher/AMMesher.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
@@ -70,8 +70,9 @@
 
 - (IBAction)closeBtnClicked:(NSButton *)sender
 {
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    model.detailPanelState = DetailPanelHide;
+    if (self.hostVC) {
+        [self.hostVC resignDetailView:self];
+    }
 }
 
 - (IBAction)applyBtnClicked:(NSButton *)sender
@@ -86,8 +87,8 @@
     [defaults setObject:self.location.stringValue forKey:Preference_Key_User_Location];
     
     [[AMMesher sharedAMMesher] updateMySelf];
-    [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];
-
+    
+    [self.clostBtn performClick:nil];
 }
 
 @end

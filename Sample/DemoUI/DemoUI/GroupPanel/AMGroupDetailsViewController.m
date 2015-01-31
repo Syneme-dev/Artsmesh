@@ -8,8 +8,6 @@
 
 #import "AMGroupDetailsViewController.h"
 #import "UIFramework/AMFoundryFontView.h"
-#import "AMGroupPanelModel.h"
-#import "AMGroupPanelDetailView.h"
 #import "AMMesher/AMMesher.h"
 #import "UIFramework/AMButtonHandler.h"
 
@@ -70,8 +68,9 @@
 
 - (IBAction)cancelClick:(id)sender
 {
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    model.detailPanelState = DetailPanelHide;
+    if (self.hostVC) {
+        [self.hostVC resignDetailView:self];
+    }
 }
 
 @end

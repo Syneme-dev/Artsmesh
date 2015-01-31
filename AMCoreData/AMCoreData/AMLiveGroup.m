@@ -62,7 +62,7 @@
     }
    
     if (self.projectDescription) {
-        dict[@"projectDesctription"] = self.projectDescription;
+        dict[@"projectDescription"] = self.projectDescription;
     }
 
     if (self.busy) {
@@ -149,6 +149,17 @@
     }
     
     return allUsers;
+}
+
+-(BOOL)hasUserOnline
+{
+    for (AMLiveUser *user in self.users) {
+        if (user.isOnline) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 

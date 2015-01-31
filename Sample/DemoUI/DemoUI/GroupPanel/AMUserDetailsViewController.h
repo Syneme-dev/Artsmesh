@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "AMGroupDetailViewDelegate.h"
 
 @interface AMUserDetailsViewController : NSViewController
 
+@property id<AMGroupDetailViewDelegate> hostVC;
 @property AMLiveUser* user;
 
 -(void)updateUI;

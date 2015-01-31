@@ -169,8 +169,9 @@ typedef enum {
 
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    
     NSString *url = sender.mainFrameURL;
-
+    
     self.socialWebTab.preferences.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 

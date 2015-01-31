@@ -7,7 +7,6 @@
 //
 
 #import "AMUserDetailsViewController.h"
-#import "AMGroupPanelModel.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMButtonHandler.h"
 
@@ -47,8 +46,9 @@
 
 - (IBAction)closeClick:(id)sender
 {
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    model.detailPanelState = DetailPanelHide;
+    if (self.hostVC) {
+        [self.hostVC resignDetailView:self];
+    }
 }
 
 @end

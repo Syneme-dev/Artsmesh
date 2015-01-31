@@ -36,8 +36,6 @@
 		4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2541A105AB1006E534A /* AMJackPort.m */; };
 		4AC8A2591A105AF3006E534A /* AMJackHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2571A105AF3006E534A /* AMJackHelper.h */; };
 		4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2581A105AF3006E534A /* AMJackHelper.m */; };
-		4AF38F771A2631A1008FD2A3 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */; };
-		4AF38F781A2631A1008FD2A3 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */; };
 		4AF38F791A2631A1008FD2A3 /* AMMixerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */; };
 		4AF38F7A1A2631A1008FD2A3 /* AMMixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */; };
 		4AF38F7B1A2631A1008FD2A3 /* AMMixerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */; };
@@ -138,8 +136,6 @@
 		4AC8A2541A105AB1006E534A /* AMJackPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackPort.m; sourceTree = "<group>"; };
 		4AC8A2571A105AF3006E534A /* AMJackHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackHelper.h; sourceTree = "<group>"; };
 		4AC8A2581A105AF3006E534A /* AMJackHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackHelper.m; sourceTree = "<group>"; };
-		4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
-		4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionView.m; sourceTree = "<group>"; };
 		4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixerView.h; sourceTree = "<group>"; };
 		4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMixerView.m; sourceTree = "<group>"; };
 		4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMixerViewController.h; sourceTree = "<group>"; };
@@ -278,8 +274,6 @@
 				4AC8A2541A105AB1006E534A /* AMJackPort.m */,
 				4AC8A2571A105AF3006E534A /* AMJackHelper.h */,
 				4AC8A2581A105AF3006E534A /* AMJackHelper.m */,
-				4AF38F6C1A2631A1008FD2A3 /* AMCollectionView.h */,
-				4AF38F6D1A2631A1008FD2A3 /* AMCollectionView.m */,
 				4AF38F6E1A2631A1008FD2A3 /* AMMixerView.h */,
 				4AF38F6F1A2631A1008FD2A3 /* AMMixerView.m */,
 				4AF38F701A2631A1008FD2A3 /* AMMixerViewController.h */,
@@ -413,7 +407,6 @@
 				4AC8A2551A105AB1006E534A /* AMJackPort.h in Headers */,
 				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
-				4AF38F771A2631A1008FD2A3 /* AMCollectionView.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
 				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
 				CE151F2B19B01372002D2AD4 /* jslist.h in Headers */,
@@ -525,7 +518,6 @@
 				4AF38F7C1A2631A1008FD2A3 /* AMMixerViewController.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
-				4AF38F781A2631A1008FD2A3 /* AMCollectionView.m in Sources */,
 				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				0198A79B1A0F2264009A36CA /* AMAudioMixerViewController.m in Sources */,
 				4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */,

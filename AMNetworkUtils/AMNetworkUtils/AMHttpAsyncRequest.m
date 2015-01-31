@@ -16,6 +16,7 @@ NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
 -(id)init{
     if (self  = [super init]){
         self.httpTimeout = 30;
+        self.delay = 0;
     }
     
     return self;
@@ -27,6 +28,10 @@ NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
             self.requestCallback(nil, nil, YES);
         }
         return;
+    }
+    
+    if(self.delay != 0){
+        sleep(self.delay);
     }
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

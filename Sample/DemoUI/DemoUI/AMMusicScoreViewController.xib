@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMusicScoreViewController">
             <connections>
+                <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Oa-lF-ctc">
-                    <rect key="frame" x="-300" y="151" width="600" height="100"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
+                    <rect key="frame" x="664" y="912" width="89" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="600" id="Mmz-GT-qfH"/>
+                        <constraint firstAttribute="height" constant="16" id="y6I-1j-eZZ"/>
+                        <constraint firstAttribute="width" constant="89" id="ySu-4h-44j"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="shot_musicScore" id="YXT-Zt-AA0"/>
-                </imageView>
+                    <buttonCell key="cell" type="inline" title="LOAD SCORE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="FKc-UC-UE7">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="addMusicScoreItem:" target="-2" id="aOa-P7-ulO"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="6Oa-lF-ctc" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="Cd4-g3-VVp"/>
-                <constraint firstItem="6Oa-lF-ctc" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="M3I-wn-If2"/>
+                <constraint firstAttribute="trailing" secondItem="tOL-jT-WuM" secondAttribute="trailing" constant="6" id="1Ol-KA-ydZ"/>
+                <constraint firstItem="tOL-jT-WuM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="KNh-Yh-5lP"/>
             </constraints>
+            <point key="canvasLocation" x="-142.5" y="87.5"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="kJh-Nd-a7P"/>
     </objects>
-    <resources>
-        <image name="shot_musicScore" width="838" height="131"/>
-    </resources>
 </document>

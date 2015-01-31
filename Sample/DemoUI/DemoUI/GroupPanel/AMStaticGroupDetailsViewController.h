@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMCoreData/AMCoreData.h"
+#import "AMGroupDetailViewDelegate.h"
 
 
 @interface AMStaticGroupDetailsViewController : NSViewController
 
 @property AMStaticGroup* staticGroup;
+@property (weak)id<AMGroupDetailViewDelegate> hostVC;
 
 @end

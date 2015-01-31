@@ -30,7 +30,7 @@
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gn0-F7-0bE">
                     <rect key="frame" x="70" y="580" width="44" height="32"/>
-                    <buttonCell key="cell" type="smallSquare" title="Start" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RCb-Ya-xlW">
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RCb-Ya-xlW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -167,7 +167,7 @@
                 </textField>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-qD-vhy">
                     <rect key="frame" x="20" y="580" width="42" height="31"/>
-                    <buttonCell key="cell" type="square" title="Stop" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="2fn-td-FPo">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="2fn-td-FPo">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

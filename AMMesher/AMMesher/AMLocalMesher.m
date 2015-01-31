@@ -15,6 +15,8 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 
+#define MAX_RETRY_COUNT 3
+
 
 @interface AMLocalMesher()<AMHeartBeatDelegate>
 @end
@@ -31,9 +33,10 @@
     int _heartbeatFailureCount;
     int _userlistVersion;
     
-    BOOL _useLocalServerIp;
-    NSString *_validLocalServerIp;
     int  _retryCount;
+    
+    NSString *_tryLocalServerAddr;
+    NSString *_usedLocalServerAddr;
 }
 
 -(id)init
@@ -144,56 +147,93 @@
     [self registerLocalGroup];
 }
 
+
 -(void)registerLocalGroup
 {
+    AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
+    NSArray *lsIps = nil;
+    if (config.useIpv6) {
+        lsIps = [config localServerIpv6s];
+    }else{
+        lsIps = [config localServerIpv4s];
+    }
+    
+    if (_retryCount == 0) {
+        _tryLocalServerAddr = config.localServerHost.name;
+        
+    }else if(_retryCount < [lsIps count] + 1){
+        _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
+        
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
+        return;
+    }
+    
+    _retryCount ++;
+
+    //Start registing
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     myGroup.leaderId = mySelf.userid;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [self httpBaseURL];
+    req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];
     req.requestPath = @"/groups/register";
     req.httpMethod = @"POST";
+    req.delay = 2;
     req.formData = [myGroup dictWithoutUsers];
     req.requestCallback = ^(NSData* response, NSError* error, BOOL cancel){
         if (cancel == YES) {
             return;
         }
         
-        if (error != nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",
-                  error.description);
+        BOOL needRetry = NO;
+        
+        do{
+            if (error != nil) {
+                AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",  error.description);
+                
+                needRetry = YES;
+                break;
+            }
+            
+            if(response == nil){
+                AMLog(kAMErrorLog, @"AMMesher", @"Fatal error, register group return value is nil");
+                needRetry = YES;
+                break;
+            }
+            
+            NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if ([responseStr isEqualToString:@"ok"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    _usedLocalServerAddr = _tryLocalServerAddr;
+                    AMLog(kAMInfoLog, @"AMMesher", @"register group succeeded. I'm leader now!");
+                    mySelf.isLeader = YES;
+                    [self registerSelf];
+                });
+            }else if([responseStr isEqualToString:@"group already exist"]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    _usedLocalServerAddr = _tryLocalServerAddr;
+                    AMLog(kAMInfoLog, @"AMMesher", @"group already exist, will join.");
+                    mySelf.isLeader = NO;
+                    [self registerSelf];
+                });
+            }else{
+                AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
+                needRetry = YES;
+            }
+            
+        }while (NO);
+        
+        
+        if(needRetry){
+            sleep(1);
             dispatch_async(dispatch_get_main_queue(), ^{
-                sleep(1);
+                AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
                 [self registerLocalGroup];
             });
-            return;
-        }
-        
-        if (response == nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"Fatal error, register group return value is nil");
-            return;
-        }
-        
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                AMLog(kAMInfoLog, @"AMMesher", @"register group succeeded. I'm leader now!");
-                mySelf.isLeader = YES;
-                [self registerSelf];
-            });
-            
-        }else if([responseStr isEqualToString:@"group already exist"]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                AMLog(kAMInfoLog, @"AMMesher", @"group already exist, will join.");
-                mySelf.isLeader = NO;
-                [self registerSelf];
-            });
-            
-        }else{
-            AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
         }
     };
     
@@ -219,31 +259,42 @@
             return;
         }
         
-        if (error != nil) {
-            AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@",
-                  error.description);
-            return;
-        }
-        
-        if(response == nil){
-            AMLog(kAMErrorLog, @"AMMesher", @"response should not be nil without error");
-            return;
-        }
-        
-        NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL needRetry = NO;
+
+        do{
+            if (error != nil) {
+                AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@", error.description);
                 
-                AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
-                [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
-                [self startHeartbeat];
-            });
+                needRetry = YES;
+                break;
+            }
             
-        }else{
+            if(response == nil){
+                AMLog(kAMErrorLog, @"AMMesher", @"response should not be nil without error");
+                needRetry = YES;
+                break;
+            }
+            
+            NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if ([responseStr isEqualToString:@"ok"] || [responseStr isEqualToString:@"user already exist!"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _retryCount = 0;
+                    AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
+                    [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
+                    [self startHeartbeat];
+                });
+            }else{
+                needRetry = YES;
+                break;
+            }
+            
+        }while (NO);
+        
+        
+        if(needRetry){
+            sleep(1);
             dispatch_async(dispatch_get_main_queue(), ^{
-                _retryCount ++;
                 AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
-                sleep(1);
                 [self registerSelf];
             });
         }
@@ -277,15 +328,13 @@
     AMLog(kAMInfoLog, @"AMMesher", @"starting send heartbeat");
 
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    
-    NSString* localServerAddr = [self  validLocalServerIp];
     NSString* localServerPort = config.localServerPort;
 
     BOOL useIpv6 = config.useIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: localServerAddr port:localServerPort ipv6:useIpv6];
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: _usedLocalServerAddr port:localServerPort ipv6:useIpv6];
     _heartbeatThread.delegate = self;
     _heartbeatThread.timeInterval = HBTimeInterval;
     _heartbeatThread.receiveTimeout = HBReceiveTimeout;
@@ -317,10 +366,6 @@
 {
     AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server");
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGING_LOCAL];
-    });
-    
     if([[AMMesher sharedAMMesher] clusterState] != kClusterStarted){
         return;
     }
@@ -344,22 +389,25 @@
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
-            
             AMLog(kAMErrorLog, @"AMMesher", @"update self failed: %@", responseStr);
             return;
         }
         
         AMLog(kAMInfoLog, @"AMMesher", @"updating myself infomation in local server finished");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:AM_MYSELF_CHANGED_LOCAL object:nil userInfo:nil];
+        });
     };
     
     [_httpRequestQueue addOperation:req];
 }
 
+
 -(void)updateGroupInfo
 {
     AMLog(kAMInfoLog, @"AMMesher", @"updating group infomation in local server");
     
-    [[AMCoreData shareInstance] broadcastChanges:AM_MYGROUP_CHANGING_LOCAL];
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
@@ -478,34 +526,11 @@
 }
 
 
--(NSString *)validLocalServerIp
-{
-    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSString* localServerAddr = config.localServerHost.name;
-    if(_retryCount >= 3){
-        //we should not use domain name, use ip instead;
-        int ipRetry = _retryCount - 3;
-        long allIpCount = [config.localServerIps count];
-        NSArray *ipPool;
-        
-        if (config.useIpv6) {
-            ipPool = [config localServerIpv6s];
-        }else{
-            ipPool = [config localServerIpv4s];
-        }
-        
-        localServerAddr = [ipPool objectAtIndex: (ipRetry % allIpCount)];
-    }
-
-    return localServerAddr;
-}
-
 - (NSString *)httpBaseURL
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSString* localServerAddr = [self validLocalServerIp];
     NSString* localServerPort = config.localServerPort;
-    NSString* httpUrl = [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
+    NSString* httpUrl = [NSString stringWithFormat:@"http://%@:%@", _usedLocalServerAddr, localServerPort];
     AMLog(kAMInfoLog, @"AMMesher", @"now used url is:%@", httpUrl);
     
     return httpUrl;

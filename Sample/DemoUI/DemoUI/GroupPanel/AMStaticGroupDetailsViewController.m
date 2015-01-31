@@ -7,7 +7,6 @@
 //
 
 #import "AMStaticGroupDetailsViewController.h"
-#import "AMGroupPanelModel.h"
 #import "UIFramework/AMFoundryFontTextView.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "UIFramework/AMFoundryFontView.h"
@@ -38,8 +37,9 @@
 }
 
 - (IBAction)closeBtnClick:(NSButton *)sender {
-    AMGroupPanelModel* model = [AMGroupPanelModel sharedGroupModel];
-    model.detailPanelState = DetailPanelHide;
+    if (self.hostVC) {
+        [self.hostVC resignDetailView:self];
+    }
 }
 
 -(void)awakeFromNib
@@ -110,7 +110,7 @@
     }
     
     [[AMMesher sharedAMMesher] updateGroup];
-    [[AMGroupPanelModel sharedGroupModel] setDetailPanelState:DetailPanelHide];
+    [self.closeBtn performClick:nil];
 }
 
 

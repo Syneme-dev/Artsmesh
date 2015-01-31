@@ -32,8 +32,7 @@
 }
 
 #aside_primary{
-    width:360px !important;
-    margin-right: 0px !important;
+    /**width:360px !important;**/
 }
 #content h1{
     display:none;
@@ -85,7 +84,6 @@
 
 #nav_doc_google{
     display: none !important;
-}
 
 @media (max-width: 1025px) {
 	#header .logo.photo {
@@ -97,4 +95,5 @@
 	#core {
 		top: 20px;
 	}
+}
 }

@@ -28,6 +28,7 @@
 @property (weak) IBOutlet NSButton *statusNetPostMessage;
 @property (weak) IBOutlet AMCheckBoxView *forceLoalServerIpBox;
 @property (weak) IBOutlet AMFoundryFontView *forceLocalServerIpField;
+@property (weak) IBOutlet AMCheckBoxView *useOSCForChat;
 
 @end
 
@@ -80,9 +81,13 @@
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabButton];
     
-    self.forceLoalServerIpBox.title = @"Use Local Server IP";
+    self.forceLoalServerIpBox.title = @"USE LOCAL SERVER IP";
     self.forceLoalServerIpBox.checked = NO;
     self.forceLoalServerIpBox.delegate = self;
+    
+    self.useOSCForChat.title = @"USE OSC FOR CHAT";
+    self.useOSCForChat.checked = [[defaults stringForKey:Preference_Key_General_UseOSCForChat] boolValue];
+    self.useOSCForChat.delegate = self;
 }
 
 
@@ -153,10 +158,12 @@
     }
 }
 
+
 - (IBAction)onJackServerTabClick:(id)sender {
     [self pushDownButton:self.jackServerTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"1"];
 }
+
 
 -(void)registerTabButtons
 {
@@ -199,15 +206,18 @@
     [self.tabs selectTabViewItemWithIdentifier:@"5"];
 }
 
+
 - (IBAction)onOSCGroupClick:(id)sender {
     [self pushDownButton:self.oscGroupTabBtn];
     [self.tabs selectTabViewItemWithIdentifier:@"3"];
 }
 
+
 - (IBAction)onJackTripClick:(id)sender {
     [self pushDownButton:self.audioTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"2"];
 }
+
 
 -(void)loadIpv4
 {
@@ -394,6 +404,13 @@
             [[AMMesher sharedAMMesher] stopMesher];
             [[AMMesher sharedAMMesher] startMesher];
             
+        }
+    }else if([sender.identifier isEqualToString:@"useOSCForChat"]){
+        
+        if (sender.checked) {
+            [defaults setObject:@"YES" forKey:Preference_Key_General_UseOSCForChat];
+        }else{
+            [defaults setObject:@"NO" forKey:Preference_Key_General_UseOSCForChat];
         }
     }
 }

@@ -17,6 +17,7 @@
 #define Preference_Key_General_StunServerAddr       @"Preference_Key_General_StunServerAddr"
 #define Preference_Key_General_StunServerPort       @"Preference_Key_General_StunServerPort"
 #define Preference_Key_General_TopControlBar        @"Preference_Key_General_TopControlBar"
+#define Preference_Key_General_UseOSCForChat        @"Preference_Key_General_UseOSCForChat"
 
 //UserInfo
 #define Preference_Key_User_NickName            @"Preference_Key_User_NickName"

@@ -137,7 +137,7 @@
                     <rect key="frame" x="99" y="514" width="120" height="22"/>
                 </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5O-z6-uSk">
-                    <rect key="frame" x="0.0" y="0.0" width="728" height="461"/>
+                    <rect key="frame" x="0.0" y="0.0" width="728" height="437"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hdd-eq-SwM">
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,7 +276,7 @@
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="C1K-Bb-BwB"/>
                 <constraint firstAttribute="trailing" secondItem="b5O-z6-uSk" secondAttribute="trailing" id="KhN-18-Gdb"/>
                 <constraint firstAttribute="bottom" secondItem="b5O-z6-uSk" secondAttribute="bottom" id="QIs-W8-84K"/>
-                <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="104" id="b59-nj-W7M"/>
+                <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="128" id="b59-nj-W7M"/>
                 <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="10" id="fde-yV-26P"/>
                 <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="284" id="xPB-RO-lJE"/>
                 <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="82" id="zRk-fb-QxZ"/>

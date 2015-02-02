@@ -12,6 +12,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
 #import "AMLogger/AMLogger.h"
+#import "AMOSCGroups/AMOSCGroups.h"
 
 @interface AMChatViewController ()
 
@@ -64,15 +65,12 @@
     [self userGroupsChanged:nil];
     [self onlineStatusChanged:nil];
     
-    [_socket startHolePunching];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineStatusChanged:) name: AM_MYSELF_CHANGED_REMOTE object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageFromOSC:) name:AM_CHAT_MESSAGE object:nil];
 }
 
 -(void)dealloc{
-    
-    [_socket stopHolePunching];
     [_socket closeSocket];
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
@@ -80,13 +78,6 @@
 
 -(void)onlineStatusChanged:(NSNotification*) notification
 {
-//    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-//    NSAssert(mySelf, @"myself can not be nil");
-//    if (mySelf.isOnline == YES) {
-//        [_socket startHolePunching];
-//    }else{
-//        [_socket stopHolePunching];
-//    }
 }
 
 
@@ -170,6 +161,12 @@
 }
 
 
+-(void)chatMessageFromOSC:(NSNotification *)notification
+{
+    //notification.object
+}
+
+
 -(void)showNewCommers:(id)newCommers
 {
     for (AMLiveUser* newUser in newCommers) {
@@ -183,27 +180,38 @@
     }
 }
 
+
 - (IBAction)sendMsg:(id)sender
 {
     NSString* msg = [self.chatMsgField stringValue];
     if(msg == nil || [msg isEqualToString:@""]){
         return;
     }
-
+    
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    NSAssert(mySelf, @"myself can not be nil");
     NSString* nickName = mySelf.nickName;
-
+    
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
-                    @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
+                       @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
     
-    if (_socket) {
-        [_socket sendPacketToPeers:msgData];
+    BOOL useOSC = [[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_General_UseOSCForChat] boolValue];
+    if (useOSC) {
+        if(![[AMOSCGroups sharedInstance] isOSCGroupClientStarted]){
+            NSAlert *alert = [NSAlert alertWithMessageText:@"OSC Client hasn't Started!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+            [alert runModal];
+            return;
+        }else{
+            [[AMOSCGroups sharedInstance] broadcastMessage:AM_CHAT_MESSAGE params:@[@{@"BLOB":msgData}]];
+        }
+    }else{
+        if (_socket) {
+            [_socket sendPacketToPeers:msgData];
+        }
     }
-    
-   self.chatMsgField.stringValue = @"";
 
+   self.chatMsgField.stringValue = @"";
 }
+
 
 - (void)showChatRecord:(NSDictionary *)record
 {

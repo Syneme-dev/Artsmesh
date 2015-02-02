@@ -135,6 +135,10 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:AM_OSC_NOTIFICATION
                                                                     object:self
                                                                   userInfo:@{ AM_OSC_EVENT_TYPE : AM_OSC_TIMER_RESUME }];
+            }else if([msg isEqualTo:AM_CHAT_MESSAGE]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:AM_CHAT_NOTIFICATION
+                                                                    object:self
+                                                                  userInfo:@{ AM_CHAT_MESSAGE_PARAMS: params }];
             }
         });
     }

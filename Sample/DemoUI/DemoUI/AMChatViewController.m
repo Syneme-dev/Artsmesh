@@ -67,7 +67,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageFromOSC:) name:AM_CHAT_MESSAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageFromOSC:) name:AM_CHAT_NOTIFICATION object:nil];
 }
 
 -(void)dealloc{
@@ -163,7 +163,20 @@
 
 -(void)chatMessageFromOSC:(NSNotification *)notification
 {
-    //notification.object
+    NSDictionary *userInfo = (NSDictionary *)notification.object;
+    if (userInfo) {
+        NSArray *params = [userInfo objectForKey:AM_CHAT_MESSAGE_PARAMS];
+        if (params) {
+            
+            NSData *chatData = [[params firstObject] objectForKey:@"BLOB"];
+            if (chatData) {
+                NSDictionary *record = [self recordFromData:chatData];
+                if (record) {
+                    [self showChatRecord:record];
+                }
+            }
+        }
+    }
 }
 
 
@@ -222,21 +235,31 @@
 }
 
 
+-(NSDictionary *)recordFromData:(NSData *)data
+{
+    NSDictionary *chatRecord;
+    
+    @try {
+        chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    @catch ( NSException *exception) {
+        AMLog(kAMErrorLog, @"AMChat",@"An Error packets is send to Chat module: %@", exception.description);
+    }
+    @finally {
+        return chatRecord;
+    }
+}
+
+
 -(void)socket:(AMHolePunchingSocket *)socket didFailWithError:(NSError *)error{
     AMLog(kAMErrorLog, @"AMChat", @"chat socket failed: %@", error.description);
 }
 
 -(void)socket:(AMHolePunchingSocket *)socket didReceiveData:(NSData *)data{
     
-    @try {
-        NSDictionary *chatRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-         [self showChatRecord:chatRecord];
-    }
-    @catch ( NSException *exception) {
-        AMLog(kAMErrorLog, @"AMChat",@"An Error packets is send to Chat module: %@", exception.description);
-    }
-    @finally {
-        //do nothing;
+    NSDictionary *record = [self recordFromData:data];
+    if (record) {
+        [self showChatRecord:record];
     }
 }
 

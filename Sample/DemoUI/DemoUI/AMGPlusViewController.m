@@ -28,6 +28,7 @@
     NSString *publicBlogUrl;
     Boolean isInfoPage;
     NSString *loginURL;
+    NSString *eventURL;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,51 +58,17 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    NSString *url= sender.mainFrameURL;
-    sender.preferences.userStyleSheetEnabled = YES;
-    NSString *path= [[NSBundle mainBundle] bundlePath];
-    
-    [sender setPreferencesIdentifier:@"newEventPanelPrefs"];
-    path=[path stringByAppendingString:@"/Contents/Resources/new-event.css"];
-    sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-    
-    
-    if ( loginURL && [url hasPrefix:loginURL]) {
-        
-    }
-    else {
-        //sender.preferences.userStyleSheetEnabled = NO;
-    }
-    
-    if (!isLogin) {[self login:frame];}
-    
 }
 
-- (void)login:(WebFrame *)frame {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *password = [defaults stringForKey:Preference_Key_StatusNet_Password];
-    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    
-    NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
-    [frame.webView stringByEvaluatingJavaScriptFromString:
-     loginJs];
-    isLogin = YES;
-}
 
 - (void)loadPage {
-    isLogin = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
-    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    loginURL = [NSString stringWithFormat:@"%@/main/login?fromMac=true", statusNetURL];
-    infoUrl = [NSString stringWithFormat:@"%@/%@?fromMac=true", statusNetURL, myUserName];
-    myBlogUrl = [NSString stringWithFormat:@"%@/%@/all?fromMac=true", statusNetURL, myUserName];
-    publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?fromMac=true", statusNetURL];
-    //infoStatus = INFO_USER;
-    //isInfoPage = YES;
+    eventURL = [NSString stringWithFormat:@"%@/app/event/index.php?fromMac=true", statusNetURL];
+    
     [self.gplusWebView.mainFrame loadRequest:
      [NSURLRequest requestWithURL:[NSURL URLWithString:
-                                   loginURL]]];
+                                   eventURL]]];
 }
 
 - (void)dealloc {

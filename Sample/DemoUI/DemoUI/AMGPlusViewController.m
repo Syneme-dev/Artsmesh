@@ -29,6 +29,7 @@
     Boolean isInfoPage;
     NSString *loginURL;
     NSString *eventURL;
+    NSString *broadcastURL;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,7 +37,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-
     }
     return self;
 }
@@ -58,6 +58,14 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
+    NSString *script = @"document.getElementById('video-url').value";
+    NSString *output = [self.gplusWebView stringByEvaluatingJavaScriptFromString:script];
+    
+    if ( [output length] > 0 && ![output isEqualToString:broadcastURL]) {
+        broadcastURL = output;
+        NSLog(@"video id is: %@", broadcastURL);
+    }
+    
 }
 
 

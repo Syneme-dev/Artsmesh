@@ -10,6 +10,7 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMGPlusViewController ()
 @property (weak) IBOutlet NSButton *cancelBtn;
@@ -43,6 +44,8 @@
 
 -(void)awakeFromNib
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
     
@@ -63,7 +66,8 @@
     
     if ( [output length] > 0 && ![output isEqualToString:broadcastURL]) {
         broadcastURL = output;
-        NSLog(@"video id is: %@", broadcastURL);
+        
+        [self changeBroadcastURL:broadcastURL];
     }
     
 }
@@ -79,6 +83,42 @@
                                    eventURL]]];
 }
 
+- (void)changeBroadcastURL : (NSString *)newURL {
+    NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([group.broadcastingURL isEqualToString:newURL]) {
+        return;
+    }
+    
+    if ([newURL isEqualToString:@""]) {
+        newURL = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_BroadcastURL];
+    }
+    
+    group.broadcastingURL= newURL;
+    
+    //if (group.broadcasting) {
+    [[AMMesher sharedAMMesher] updateGroup];
+    //}
+    [defaults setObject:group.broadcastingURL forKey:Preference_Key_Cluster_BroadcastURL];
+    //[defaults synchronize];
+    
+}
+
+-(void)groupChanged:(NSNotification *)notification
+{
+    /**
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSLog(@"Group changed! New broadcastURL is: %@", group.broadcastingURL);
+    
+    NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
+    NSLog(@"broadcast url default prefs is: %@", [defaults objectForKey:Preference_Key_Cluster_BroadcastURL]);
+     **/
+    
+}
+
+
 - (void)dealloc {
     //To avoid a error when closing
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
@@ -86,6 +126,8 @@
     [self.gplusWebView setFrameLoadDelegate:nil];
     [self.gplusWebView setPolicyDelegate:nil];
     [self.gplusWebView setUIDelegate:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

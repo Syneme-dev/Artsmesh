@@ -10,6 +10,7 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMMesher/AMMesher.h"
 
 @interface AMGPlusViewController ()
 @property (weak) IBOutlet NSButton *cancelBtn;
@@ -28,6 +29,8 @@
     NSString *publicBlogUrl;
     Boolean isInfoPage;
     NSString *loginURL;
+    NSString *eventURL;
+    NSString *broadcastURL;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,13 +38,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-
     }
     return self;
 }
 
 -(void)awakeFromNib
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
     
@@ -57,52 +61,63 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    NSString *url= sender.mainFrameURL;
-    sender.preferences.userStyleSheetEnabled = YES;
-    NSString *path= [[NSBundle mainBundle] bundlePath];
+    NSString *script = @"document.getElementById('video-url').value";
+    NSString *output = [self.gplusWebView stringByEvaluatingJavaScriptFromString:script];
     
-    [sender setPreferencesIdentifier:@"newEventPanelPrefs"];
-    path=[path stringByAppendingString:@"/Contents/Resources/new-event.css"];
-    sender.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-    
-    
-    if ( loginURL && [url hasPrefix:loginURL]) {
+    if ( [output length] > 0 && ![output isEqualToString:broadcastURL]) {
+        broadcastURL = output;
         
+        [self changeBroadcastURL:broadcastURL];
     }
-    else {
-        //sender.preferences.userStyleSheetEnabled = NO;
-    }
-    
-    if (!isLogin) {[self login:frame];}
     
 }
 
-- (void)login:(WebFrame *)frame {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *password = [defaults stringForKey:Preference_Key_StatusNet_Password];
-    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    
-    NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
-    [frame.webView stringByEvaluatingJavaScriptFromString:
-     loginJs];
-    isLogin = YES;
-}
 
 - (void)loadPage {
-    isLogin = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
-    myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    loginURL = [NSString stringWithFormat:@"%@/main/login?fromMac=true", statusNetURL];
-    infoUrl = [NSString stringWithFormat:@"%@/%@?fromMac=true", statusNetURL, myUserName];
-    myBlogUrl = [NSString stringWithFormat:@"%@/%@/all?fromMac=true", statusNetURL, myUserName];
-    publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?fromMac=true", statusNetURL];
-    //infoStatus = INFO_USER;
-    //isInfoPage = YES;
+    eventURL = [NSString stringWithFormat:@"%@/app/event/index.php?fromMac=true", statusNetURL];
+    
     [self.gplusWebView.mainFrame loadRequest:
      [NSURLRequest requestWithURL:[NSURL URLWithString:
-                                   loginURL]]];
+                                   eventURL]]];
 }
+
+- (void)changeBroadcastURL : (NSString *)newURL {
+    NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
+    
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    if ([group.broadcastingURL isEqualToString:newURL]) {
+        return;
+    }
+    
+    if ([newURL isEqualToString:@""]) {
+        newURL = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Key_Cluster_BroadcastURL];
+    }
+    
+    group.broadcastingURL= newURL;
+    
+    //if (group.broadcasting) {
+    [[AMMesher sharedAMMesher] updateGroup];
+    //}
+    [defaults setObject:group.broadcastingURL forKey:Preference_Key_Cluster_BroadcastURL];
+    //[defaults synchronize];
+    
+}
+
+-(void)groupChanged:(NSNotification *)notification
+{
+    /**
+    AMLiveGroup* group = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSLog(@"Group changed! New broadcastURL is: %@", group.broadcastingURL);
+    
+    NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
+    NSLog(@"broadcast url default prefs is: %@", [defaults objectForKey:Preference_Key_Cluster_BroadcastURL]);
+     **/
+    
+}
+
 
 - (void)dealloc {
     //To avoid a error when closing
@@ -111,6 +126,8 @@
     [self.gplusWebView setFrameLoadDelegate:nil];
     [self.gplusWebView setPolicyDelegate:nil];
     [self.gplusWebView setUIDelegate:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

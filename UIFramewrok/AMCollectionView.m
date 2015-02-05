@@ -311,21 +311,15 @@ NSImage* thumbnailImage(NSImage *image) {
     NSUInteger destIndex = [_viewItems indexOfObject:destView];
     
     //如果从左向右拖
-    if(mouseDownPoint.x < location.x){
-        
-        [_viewItems removeObject:sourceView];
-        [_viewItems insertObject:sourceView atIndex:destIndex];
-        [self reloadData];
+    if(mouseDownPoint.x > location.x){
+        destIndex = (destIndex == 0)?  0 : destIndex - 1;
     }
-    else{
-        if (destIndex == 0){
-            destIndex = 1;
-        }
-        
-        [_viewItems removeObject:sourceView];
-        [_viewItems insertObject:sourceView atIndex:destIndex -1];
-    }
-    [self setNeedsDisplay:YES];
+    
+    [_viewItems removeObject:sourceView];
+    [_viewItems insertObject:sourceView atIndex:destIndex];
+    [self reloadData];
+    
+//    [self setNeedsDisplay:YES];
     return YES;
 }
 
@@ -334,12 +328,12 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
     switch (context) {
         case NSDraggingContextOutsideApplication:
-            return NSDragOperationNone;
+            return NSDragOperationDelete;
             // by using this fall through pattern, we will remain compatible
             // if the contexts get more precise in the future.
         case NSDraggingContextWithinApplication:
         default:
-            return NSDragOperationCopy;
+            return NSDragOperationMove;
     }
 }
 

@@ -317,6 +317,16 @@ typedef enum : NSInteger {
     }
 }
 
+-(void)controlTextDidEndEditing:(NSNotification *)obj
+{
+    if ([obj.object isKindOfClass:[NSTextField class]]){
+        NSTextField *txtField = (NSTextField *)obj.object;
+        if([txtField.stringValue isEqualToString:@""]){
+            txtField.stringValue = @"00";
+        }
+    }
+}
+
 - (NSArray *)leftTimeTFs
 {
     if (!_leftTimeTFs) {
@@ -332,5 +342,6 @@ typedef enum : NSInteger {
     }
     return _rightTimeTFs;
 }
+
 
 @end

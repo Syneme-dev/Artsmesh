@@ -746,14 +746,14 @@
 			name = "Manual Panel";
 			sourceTree = "<group>";
 		};
-		269FB8491998814600355312 /* G+Panel */ = {
+		269FB8491998814600355312 /* BroadCast Panel */ = {
 			isa = PBXGroup;
 			children = (
 				269FB84A1998816E00355312 /* AMGPlusViewController.h */,
 				269FB84B1998816E00355312 /* AMGPlusViewController.m */,
 				269FB84C1998816E00355312 /* AMGPlusViewController.xib */,
 			);
-			name = "G+Panel";
+			name = "BroadCast Panel";
 			sourceTree = "<group>";
 		};
 		26DA41B71909E77500DC0DCC /* Views */ = {
@@ -907,7 +907,7 @@
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
 				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
-				269FB8491998814600355312 /* G+Panel */,
+				269FB8491998814600355312 /* BroadCast Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
 				268DA743198B87A200F86EBB /* TimerPanel */,
 				269C3347197D00F000AF86AA /* PreferencePanel */,

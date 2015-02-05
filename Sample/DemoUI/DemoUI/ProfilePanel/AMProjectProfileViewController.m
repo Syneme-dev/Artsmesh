@@ -75,12 +75,22 @@
     }
 }
 
+-(void)setBroadcastURL
+{
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    
+    if ( [localGroup.broadcastingURL length] > 0 ) {
+        [self.broadcastURLField setStringValue:localGroup.broadcastingURL];
+    }
+}
+
 
 -(void)loadProject:(NSNotification *)notification
 {
     [self setStatus];
     [self loadAvatar];
     [self setBroadcastBox];
+    [self setBroadcastURL];
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
     [defaults setObject:myGroup.project forKey:Preference_Key_Cluster_Project];

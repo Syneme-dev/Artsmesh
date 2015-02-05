@@ -7,6 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+
+#define AMPopUpWillShowNotification @"AMPopUpWillShowNotification"
+
 @protocol AMPopUpViewDelegeate;
 
 @interface AMPopUpView : NSControl

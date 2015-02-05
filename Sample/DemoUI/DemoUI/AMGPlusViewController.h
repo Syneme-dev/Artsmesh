@@ -13,4 +13,6 @@
 
 @property (weak) IBOutlet WebView *gplusWebView;
 
+- (void)changeBroadcastURL : (NSString *)newURL;
+
 @end

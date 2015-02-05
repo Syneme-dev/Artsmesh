@@ -13,8 +13,10 @@
 #import "AMNetworkUtils/AMHolePunchingSocket.h"
 #import "AMLogger/AMLogger.h"
 #import "AMOSCGroups/AMOSCGroups.h"
+#import "AMChatTableCellView.h"
+#import "AMStatusNet/AMStatusNet.h"
 
-@interface AMChatViewController ()
+@interface AMChatViewController () <NSTextFieldDelegate>
 
 - (void)showChatRecord:(NSDictionary *)record;
 
@@ -62,12 +64,16 @@
     [_socket initSocket];
     _socket.delegate = self;
     
+    _chatMsgField.delegate = self;
+    
     [self userGroupsChanged:nil];
     [self onlineStatusChanged:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageFromOSC:) name:AM_CHAT_NOTIFICATION object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controlTextDidChange:) name:NSControlTextDidChangeNotification object:nil];
 }
 
 -(void)dealloc{
@@ -292,6 +298,63 @@
         [[AMMesher sharedAMMesher] updateMySelf];
     }
 
+}
+
+
+-(void)controlTextDidChange:(NSNotification *)obj
+{
+    if ([obj.object isKindOfClass:[NSTextField class]]) {
+        NSTextField *textField = (NSTextField *)obj.object;
+        
+        if ([textField.stringValue length] > 1000) {
+            
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Chat Message Length Should Less Than 1000 Characters!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+            [alert runModal];
+            
+            textField.stringValue = [textField.stringValue substringToIndex:10];
+            
+        }
+    }
+}
+
+
+- (BOOL)isCommandEnterEvent:(NSEvent *)e {
+    NSUInteger flags = (e.modifierFlags & NSDeviceIndependentModifierFlagsMask);
+    BOOL isCommand = (flags & NSCommandKeyMask) == NSCommandKeyMask;
+    BOOL isEnter = (e.keyCode == 0x24); // VK_RETURN
+    return (isCommand && isEnter);
+}
+
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView
+doCommandBySelector:(SEL)commandSelector {
+    if ([self isCommandEnterEvent:[NSApp currentEvent]]) {
+        [self handleCommandEnter];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)handleCommandEnter {
+    
+    if ([self.chatMsgField.stringValue isEqualToString:@""]) {
+        return;
+    }
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = kCFDateFormatterShortStyle;
+    formatter.timeStyle = kCFDateFormatterShortStyle;
+    formatter.locale = [NSLocale systemLocale];
+    
+    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+    
+    NSString* status = [NSString stringWithFormat:@"%@ said: %@ at %@ in group",
+                        [AMCoreData shareInstance].mySelf.nickName,
+                        self.chatMsgField.stringValue,
+                        dateStr];
+    [[AMStatusNet shareInstance] postMessageToStatusNet:status];
+    
+    [self sendMsg:self.chatMsgField];
 }
 
 @end

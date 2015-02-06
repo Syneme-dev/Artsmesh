@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMGPlusViewController.h"
+#import "AMBroadcastViewController.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMMesher/AMMesher.h"
 
-@interface AMGPlusViewController ()
+@interface AMBroadcastViewController ()
 @property (weak) IBOutlet NSButton *cancelBtn;
 @property (weak) IBOutlet NSButton *goBtn;
 
 @end
 
-@implementation AMGPlusViewController
+@implementation AMBroadcastViewController
 {
     NSString* statusNetEventURLString;
     Boolean isLogin;

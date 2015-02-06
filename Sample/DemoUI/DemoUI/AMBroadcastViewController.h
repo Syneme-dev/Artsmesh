@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-@interface AMGPlusViewController : NSViewController
+@interface AMBroadcastViewController : NSViewController
 
 @property (weak) IBOutlet WebView *gplusWebView;
 

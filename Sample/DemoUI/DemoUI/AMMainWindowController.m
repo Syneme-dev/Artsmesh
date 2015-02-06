@@ -85,9 +85,11 @@
     NSTimer *_jackCpuTimer;
 }
 
+
 - (NSView *)containerView {
     return _containerView;
 }
+
 
 - (id)initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
@@ -109,6 +111,7 @@
     }
     return self;
 }
+
 
 - (void)windowWillClose:(NSNotification *)notification {
     
@@ -206,6 +209,7 @@
     }
 }
 
+
 - (void)loadVersion {
     NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@", shortVersion]];
@@ -223,6 +227,7 @@
     [self createDefaultPanelAndloadControlBarItemStatus];
     isWindowLoading = NO;
 }
+
 
 - (void)initControlBar:(BOOL)isTop {
     if (controlBarController) {
@@ -280,6 +285,7 @@
     }
 }
 
+
 - (void)createDefaultPanelAndloadControlBarItemStatus
 {
     NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
@@ -328,6 +334,7 @@
 //    }
 }
 
+
 - (void)copyPanel:(NSButton *)sender {
     static int numberOfNetworkToolsPanel = 0;
 
@@ -346,6 +353,7 @@
         [newPanel scrollRectToVisible:newPanel.frame];
     }
 }
+
 
 - (void)createDefaultWindow {
     NSScreen *mainScreen = [NSScreen mainScreen];
@@ -404,9 +412,13 @@
     return viewController;
 
 }
+
+
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height {
     return [self createPanel:identifier withTitle:title width:width height:height relatedView:nil];
 }
+
+
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height relatedView:(NSView*)relatedView {
     AMPanelViewController *panelViewController =
             [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
@@ -455,11 +467,15 @@
     //[[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;
 }
+
+
 - (void)removePanel:(NSString *)panelName {
     AMPanelViewController *panelViewController = self.panelControllers[panelName];
     [panelViewController closePanel:nil];
 
 }
+
+
 - (void)fillPanel:(AMPanelViewController *)panelController content:(NSViewController *)contentController {
     NSView *panelView = panelController.view;
     NSView *contentView = contentController.view;
@@ -485,12 +501,15 @@
 
     }
 }
+
+
 - (AMPanelViewController *)loadTestPanel {
     AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
     AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
     [self fillPanel:panelViewController content:testViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadMapPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MAP" width:UI_defaultPanelWidth* 4.0 height:UI_defaultPanelHeight relatedView:view];
@@ -499,6 +518,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadMixingPanel:(NSString *)panelId  relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MIXING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMMixingViewController *mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
@@ -506,12 +526,14 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadRoutingPanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"ROUTING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMVisualViewController *visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [self fillPanel:panelViewController content:visualViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadOSCMessagePanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC CLIENT" width:UI_defaultPanelWidth*2.5 height:UI_defaultPanelHeight relatedView:view];
@@ -522,12 +544,14 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadMainOutputPanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Main Output" width:UI_defaultPanelWidth* 4 height:UI_defaultPanelHeight relatedView:view];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMainOutputViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:760 height:UI_defaultPanelHeight relatedView:view];
@@ -537,6 +561,7 @@
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
@@ -550,6 +575,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadFOAFPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SOCIAL" width:UI_defaultPanelWidth* 3.5 height:UI_defaultPanelHeight  relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
@@ -562,10 +588,12 @@
     return panelViewController;
 }
 
+
 - (void)initTimer {
     NSTextField *timerField = (NSTextField *) self.amTimer;
     [[AMTimer shareInstance] addTimerScreen:timerField];
 }
+
 
 - (AMPanelViewController *)loadGroupsPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = UI_defaultPanelWidth*1.5;
@@ -587,6 +615,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadPreferencePanel:(NSString *)panelId relatedView:(NSView*)view{
     float panelWidth = UI_defaultPanelWidth* 2;
     float panelHeight = UI_defaultPanelHeight;
@@ -603,6 +632,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadChatPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = 600.0f;
     float panelHeight = 720.0f;
@@ -615,6 +645,7 @@
     [self fillPanel:panelViewController content:chatViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadGPlusPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = 570.0f; //UI_defaultPanelWidth;
@@ -629,6 +660,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadManualPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = UI_defaultPanelWidth*2;
     float panelHeight = UI_defaultPanelHeight;
@@ -641,6 +673,7 @@
     [self fillPanel:panelViewController content:manualViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
                                                    withTitle:(NSString *)title
@@ -666,6 +699,7 @@
     return [self createNetworkToolsPanelController:panelId withTitle:@"NETWORK TOOLS"relatedView:view];
 }
 
+
 - (AMPanelViewController *)loadProfilePanel:(NSString *)panelId relatedView:(NSView*)view{
     float panelHeight = 300.0f;
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth*1.5 height:panelHeight relatedView:view];
@@ -679,6 +713,7 @@
     return panelViewController;
 }
 
+
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId =
             [[NSString stringWithFormat:@"%@_PANEL", sender.identifier] uppercaseString];
@@ -689,9 +724,12 @@
         [self removePanel:panelId];
     }
 }
+
+
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId {
    return  [self createPanelWithType:panelType withId:panelId relatedView:nil];
 }
+
 
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId relatedView:(NSView*)relatedView{
     AMPanelViewController *panelViewController;
@@ -748,6 +786,7 @@
 
 }
 
+
 - (void)createTabPanelWithType:(NSString *)panelType withTitle:(NSString *)title withPanelId:(NSString *)panelId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController *)fromController {
     AMPanelViewController *panelViewController = [self createPanelWithType:panelType withId:panelId relatedView:fromController.view];
     if (panelViewController.tabPanelViewController != nil) {
@@ -766,6 +805,7 @@
         [[AMTimer shareInstance] reset];
     }
 }
+
 
 - (void)setSideBarItemStatus:(NSString *)identifier withStatus:(Boolean)status {
     NSView *mainView = self.window.contentView;
@@ -791,6 +831,7 @@
     }
 }
 
+
 - (IBAction)jackServerToggled:(NSButton *)sender
 {
     AMAudio* audioModule = [AMAudio sharedInstance];
@@ -806,6 +847,7 @@
     }
 }
 
+
 - (IBAction)oscServerToggled:(id)sender
 {
     AMOSCGroups* oscGroups = [AMOSCGroups sharedInstance];
@@ -816,6 +858,7 @@
         [oscGroups stopOSCGroupServer];
     }
 }
+
 
 - (IBAction)syphonServerToggled:(id)sender
 {
@@ -831,6 +874,7 @@
     }
 }
 
+
 -(void)jackStarted:(NSNotification*)notification
 {
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
@@ -839,6 +883,7 @@
     
     _jackCpuTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(queryJackCpu) userInfo:nil repeats:YES];
 }
+
 
 -(void)jackStopped:(NSNotification*)notification
 {    
@@ -850,12 +895,14 @@
     _jackCpuTimer = nil;
 }
 
+
 -(void)queryJackCpu
 {
     float cpuUsage = [[AMAudio sharedInstance ] jackCpuUsage];
     [self.jackCPUUsageBar setCpuUsage:cpuUsage];
     self.jackCpuUageNum.stringValue = [NSString stringWithFormat:@"%.2f", cpuUsage];
 }
+
 
 -(void)oscStarted:(NSNotification*)notification
 {
@@ -865,12 +912,14 @@
 
 }
 
+
 -(void)oscStopped:(NSNotification*)notification
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     [AMCoreData shareInstance].mySelf.oscServer = NO;
     [[AMMesher sharedAMMesher] updateMySelf];
 }
+
 
 #pragma mark -
 #pragma   mark KVO

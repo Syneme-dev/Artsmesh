@@ -655,7 +655,7 @@
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);
-    AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMGPlusViewController" bundle:nil];
+    AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMBroadcastViewController" bundle:nil];
     [self fillPanel:panelViewController content:gPlusViewController];
     return panelViewController;
 }

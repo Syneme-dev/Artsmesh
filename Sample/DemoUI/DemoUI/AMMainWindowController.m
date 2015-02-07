@@ -79,7 +79,7 @@
 @implementation AMMainWindowController {
     AMBox *_containerView;
     //MZTimerLabel *amTimerControl;
-    AMPanelControlBarViewController *controlBarController;
+    AMPanelControlBarViewController *_controlBarVC;
     Boolean isWindowLoading;
 
     float containerWidth;
@@ -212,31 +212,34 @@
 }
 
 
-- (void)loadVersion {
-    NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
-    [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@", shortVersion]];
-}
-
 
 #pragma mark -
 #pragma Create Main Window
 
-#define Main_Window_Leading     10
-#define Main_Window_Trailing    10
-#define Main_Window_Top         40
-#define Main_Window_Bottom      40
+#define Main_Window_Leading     10.0f
+#define Main_Window_Trailing    10.0f
+#define Main_Window_Top         40.0f
+#define Main_Window_Bottom      40.0f
+
+#define Main_View_Top           60.0f
+
+#define TopBar_Leading          450.0f
+
+#define LeftBar_Leading         0.0f
+#define LeftBar_Top             (20.0f + Main_View_Top)
+
 
 - (void)showDefaultWindow {
     isWindowLoading = YES;
     
     [self createMainWindow];
+    [self createMainScrollView];
     [self createMainBox];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
-
-    [self initControlBar:isTopBar];
-    [self createDefaultPanelAndloadControlBarItemStatus];
+    [self loadVersion];
+    [self loadControlBar];
+    
+    [self loadLastOpenedPanels];
     
     isWindowLoading = NO;
 }
@@ -253,21 +256,24 @@
     [self.window setFrame:windowRect display:YES];
 }
 
-- (void)createMainBox {
+
+-(void)createMainScrollView
+{
     NSSize windowSize = [self.window.contentView frame].size;
-    NSScrollView *scrollView = self.mainScrollView;
+    self.mainScrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
+                                           0,
+                                           windowSize.width - UI_leftSidebarWidth,
+                                           windowSize.height - UI_topbarHeight- 20);
     
-    scrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
-                                  0,
-                                  windowSize.width - UI_leftSidebarWidth,
-                                  windowSize.height - UI_topbarHeight- 20);
-    
-    [scrollView setHorizontalLineScroll:100];
-    [scrollView  setNeedsDisplay:YES];
-    
-    
+    [self.mainScrollView setHorizontalLineScroll:100];
+    [self.mainScrollView setNeedsDisplay:YES];
+}
+
+
+- (void)createMainBox
+{
     _containerView = [AMBox hbox];
-    _containerView.frame = scrollView.bounds;
+    _containerView.frame = self.mainScrollView.bounds;
     _containerView.paddingLeft = 40;
     _containerView.paddingRight = 50;
     _containerView.allowBecomeEmpty = YES;
@@ -295,43 +301,56 @@
         [newBox addSubview:boxItem];
         return newBox;
     };
-    [scrollView setDocumentView:_containerView];
-    [self loadVersion];
     
+    [self.mainScrollView setDocumentView:_containerView];
     [self windowDidResize:nil];  // temporary resolution
 }
 
 
-#pragma Creat Main Window End
-#pragma mark-
+- (void)loadVersion
+{
+    NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@", shortVersion]];
+}
 
 
-- (void)initControlBar:(BOOL)isTop {
-    if (controlBarController) {
-        [controlBarController.view removeFromSuperview];
+-(void)loadControlBar
+{
+    [self createControlbar];
+    [self addContrainsToControlBar];
+    [self loadControlBarStatus];
+}
+
+
+-(void)createControlbar
+{
+    if (_controlBarVC) {
+        [_controlBarVC.view removeFromSuperview];
     }
+    
     NSSize windowSize = [self.window.contentView frame].size;
-    if (isTop) {
-        NSPoint point = NSMakePoint(450, windowSize.height - 60);
-        controlBarController = [[AMPanelControlBarViewController alloc] initWithNibName:@"PanelControlBarView" bundle:nil];
-        [controlBarController.view setFrameOrigin:point];
-        [self.window.contentView addSubview:controlBarController.view];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
+        NSPoint point = NSMakePoint(TopBar_Leading, windowSize.height - Main_View_Top);
+        _controlBarVC = [[AMPanelControlBarViewController alloc] initWithNibName:@"PanelControlBarView" bundle:nil];
+        [_controlBarVC.view setFrameOrigin:point];
     }
     else {
-
-        controlBarController = [[AMPanelControlBarViewController alloc] initWithNibName:@"VerticalControlBarView" bundle:nil];
-        NSPoint point = NSMakePoint(0, windowSize.height - 60 - 20 - controlBarController.view.frame.size.height);
-        [controlBarController.view setFrameOrigin:point];
-        [self.window.contentView addSubview:controlBarController.view];
-
+        
+        _controlBarVC = [[AMPanelControlBarViewController alloc] initWithNibName:@"VerticalControlBarView" bundle:nil];
+        NSPoint point = NSMakePoint(LeftBar_Leading, windowSize.height - LeftBar_Top - _controlBarVC.view.frame.size.height);
+        [_controlBarVC.view setFrameOrigin:point];
     }
+    
+    [self.window.contentView addSubview:_controlBarVC.view];
+}
+
+
+-(void)addContrainsToControlBar
+{
     NSView *contentView = [self.window contentView];
-    NSScrollView *scrollView = self.mainScrollView;
-    NSView *customView = scrollView;
+    NSView *customView = self.mainScrollView;
     [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    //    [contentView addSubview:customView];
-
+    
     NSDictionary *views = NSDictionaryOfVariableBindings(customView);
     NSArray *constraints50 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[customView]-10-|" options:0
                                                                      metrics:nil
@@ -343,72 +362,63 @@
     [itemFor10 setIdentifier:@"leftSideBarConstrainsId10"];
     NSLayoutConstraint *itemFor50 = constraints50[0];
     [itemFor50 setIdentifier:@"leftSideBarConstrainsId50"];
-
-
+    
+    
     NSArray *constrains = [contentView constraints];
     for (NSLayoutConstraint *item in constrains) {
         if ([item.identifier isEqualToString:@"leftSideBarConstrainsId10"]
-                || [item.identifier isEqualToString:@"leftSideBarConstrainsId50"]) {
+            || [item.identifier isEqualToString:@"leftSideBarConstrainsId50"]) {
             [contentView removeConstraint:item];
         }
     }
-    [scrollView removeConstraints:scrollView.constraints];
-    if (!isTop) {
+    [self.mainScrollView removeConstraints:self.mainScrollView.constraints];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
         [contentView addConstraints:constraints50];
     }
     else {
         [contentView addConstraints:constraints10];
-
     }
 }
 
 
-- (void)createDefaultPanelAndloadControlBarItemStatus
+-(void)loadControlBarStatus
 {
-    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    
-    for(NSMutableArray* col in openedPanels){
-        if (col != nil) {
-            [self addColumnWithPanels:col];
+    for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
+        if (panels != nil) {
+            for (NSDictionary *dict in panels) {
+                NSString *panelId = [dict objectForKey:@"panelId"];
+                //[self createPanelWithId:panelId];
+                
+                NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+                [self setSideBarItemStatus:sideItemId withStatus:YES ];
+            }
         }
     }
 }
 
 
--(void)addColumnWithPanels:(NSArray*)panels
+-(void)loadLastOpenedPanels
 {
-    NSRect rect = NSMakeRect(0, 0, 30, 30);
-   // AMBox *colBox = [[AMBox alloc] initWithFrame:rect sytle:AMBoxVertical];
-    
-    for (NSDictionary *dict in panels) {
-        NSString *panelId = [dict objectForKey:@"panelId"];
-        [self createPanelWithId:panelId];
-        
-        NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-        [self setSideBarItemStatus:sideItemId withStatus:YES ];
-       // [colBox addSubview:ctrl.view];
+    for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
+        if (panels != nil) {
+            for (NSDictionary *dict in panels) {
+                NSString *panelId = [dict objectForKey:@"panelId"];
+                [self createPanelWithId:panelId];
+            }
+        }
     }
-    
-   // [_containerView addSubview:colBox];
-
 }
+
+
+#pragma Creat Main Window End
+#pragma mark-
+
 
 
 -(AMPanelViewController*)createPanelWithId:(NSString *)panelId
 {
     AMPanelViewController* panelCtrl = [self createPanelWithType:panelId withId:panelId relatedView:nil];
     return panelCtrl;
-}
-
-
-- (void)loadControlBarItemStatus {
-//    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-//    for (NSString *openedPanelId in openedPanels) {
-//        if ([openedPanelId rangeOfString:@"_PANEL"].location != NSNotFound) {
-//            NSString *sideItemId = [openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-//            [self setSideBarItemStatus:sideItemId withStatus:YES ];
-//        }
-//    }
 }
 
 
@@ -430,8 +440,6 @@
         [newPanel scrollRectToVisible:newPanel.frame];
     }
 }
-
-
 
 
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title {

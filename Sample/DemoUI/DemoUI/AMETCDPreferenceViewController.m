@@ -372,10 +372,9 @@
 {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     if([sender.identifier isEqualToString:@"isTopControlBar"]){
-        AMAppDelegate *appDelegate=AM_APPDELEGATE;
-        [appDelegate.mainWindowController initControlBar:sender.checked];
         [defaults setBool:sender.checked forKey:Preference_Key_General_TopControlBar];
-        [appDelegate.mainWindowController loadControlBarItemStatus];
+        AMAppDelegate *appDelegate=AM_APPDELEGATE;
+        [appDelegate.mainWindowController loadControlBar];
     }else if([sender.identifier isEqualToString:@"useIpv6"]){
         [defaults setBool:sender.checked forKey:Preference_Key_General_UseIpv6];
         

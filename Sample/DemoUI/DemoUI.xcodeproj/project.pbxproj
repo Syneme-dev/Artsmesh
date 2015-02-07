@@ -650,13 +650,10 @@
 			children = (
 				AF200642194585F6008630C8 /* AMMapViewController.xib */,
 				AF20064C1945861B008630C8 /* AMOSCRouteViewController.xib */,
-				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AF9DC78018E963B40029DB97 /* AMPanelView.xib */,
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
-				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
-				AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -666,8 +663,6 @@
 			children = (
 				AF9B4E7318C829AE00EEBD6C /* AMPanelViewController.h */,
 				D41155E518E9534A00C84092 /* AMPanelViewController.m */,
-				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
-				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
 				AFC77F8C1900C91A003543CF /* AMSocialViewController.h */,
 				AFC77F8D1900C91A003543CF /* AMSocialViewController.m */,
 				AF86600A19401F4D008DB7CA /* AMTestViewController.h */,
@@ -902,6 +897,9 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
+				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
+				4A41F1EA1A8454AD0002018D /* MainWindow */,
 				4A7CF6E51A765EAB00848AFC /* ErrorSheets */,
 				4A8E05831A1C754400645840 /* OSCMonitor */,
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
@@ -916,8 +914,6 @@
 				2D86EDAE19FB082C00332371 /* MapPanel */,
 				D499651B196D1A2C00033761 /* ProfilePanel */,
 				AFE5FC5C196A40E00079B434 /* Classes */,
-				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
-				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				26DA41B71909E77500DC0DCC /* Views */,
 				262021F518EAE58400811E4E /* Controllers */,
 				262021F418EAE56200811E4E /* Panels */,
@@ -958,6 +954,18 @@
 				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A41F1EA1A8454AD0002018D /* MainWindow */ = {
+			isa = PBXGroup;
+			children = (
+				37C23184187A8FFD00554AFD /* MainMenu.xib */,
+				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
+				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
+				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
+				AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */,
+			);
+			name = MainWindow;
 			sourceTree = "<group>";
 		};
 		4A7CF6E51A765EAB00848AFC /* ErrorSheets */ = {

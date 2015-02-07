@@ -7,12 +7,8 @@
 //
 
 
-#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
-#import <AMPluginLoader/AMPluginProtocol.h>
-#import <AMNotificationManager/AMNotificationManager.h>
 #import <AMPreferenceManager/AMPreferenceManager.h>
-#import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMAudio/AMAudio.h"
@@ -30,6 +26,8 @@
     
     [self loadPreference];
     [self loadPanels];
+    
+    //TODO:the following two should not be here too
     [self loadArchieveGroups];
     [self loadLiveGroups];
 }

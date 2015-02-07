@@ -37,13 +37,12 @@
 - (IBAction)onTimerControlItemClick:(NSButton *)sender;
 - (IBAction)copyPanel:(id)sender;
 
--(void)initControlBar:(BOOL)isTop;
+-(void)loadControlBar;
 
 -(void)removePanel:(NSString *)panelName;
 -(AMPanelViewController *)createPanelWithType:(NSString*)panelType withId:(NSString*)panelId;
 
 -(void)createTabPanelWithType:(NSString*)panelType withTitle:(NSString*)title withPanelId:(NSString*)panelId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController*)fromController;
--(void)loadControlBarItemStatus;
 
 
 //Error handler

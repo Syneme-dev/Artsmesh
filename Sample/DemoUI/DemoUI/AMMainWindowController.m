@@ -71,13 +71,15 @@
 #define UI_Panel_Key_Manual @"MANUAL_PANEL"
 
 @interface AMMainWindowController ()
+@property (weak) IBOutlet NSView *mainContentView;
+@property (weak) IBOutlet NSScrollView *mainScrollView;
 
 @end
 
 @implementation AMMainWindowController {
     AMBox *_containerView;
     //MZTimerLabel *amTimerControl;
-    AMPanelControlBarViewController *controlBarController;
+    AMPanelControlBarViewController *_controlBarVC;
     Boolean isWindowLoading;
 
     float containerWidth;
@@ -85,9 +87,11 @@
     NSTimer *_jackCpuTimer;
 }
 
+
 - (NSView *)containerView {
     return _containerView;
 }
+
 
 - (id)initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
@@ -109,6 +113,7 @@
     }
     return self;
 }
+
 
 - (void)windowWillClose:(NSNotification *)notification {
     
@@ -170,7 +175,7 @@
         height = MAX(height, [box minContentHeight] + box.paddingTop + box.paddingBottom);
     }
     height += _containerView.paddingTop + _containerView.paddingBottom;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSScrollView *scrollView = self.mainScrollView;
     height = MAX(height, scrollView.frame.size.height);
     return height;
 }
@@ -206,50 +211,146 @@
     }
 }
 
-- (void)loadVersion {
+
+
+#pragma mark -
+#pragma Create Main Window
+
+#define Main_Window_Leading     10.0f
+#define Main_Window_Trailing    10.0f
+#define Main_Window_Top         40.0f
+#define Main_Window_Bottom      40.0f
+
+#define Main_View_Top           60.0f
+
+#define TopBar_Leading          450.0f
+
+#define LeftBar_Leading         0.0f
+#define LeftBar_Top             (20.0f + Main_View_Top)
+
+
+- (void)showDefaultWindow {
+    isWindowLoading = YES;
+    
+    [self createMainWindow];
+    [self createMainScrollView];
+    [self createMainBox];
+    
+    [self loadVersion];
+    [self loadControlBar];
+    
+    [self loadLastOpenedPanels];
+    
+    isWindowLoading = NO;
+}
+
+
+-(void)createMainWindow
+{
+    NSRect screenRect = [NSScreen mainScreen].frame;
+    NSRect windowRect = NSMakeRect(Main_Window_Leading,
+                                   Main_Window_Bottom,
+                                   screenRect.size.width - Main_Window_Leading - Main_Window_Trailing,
+                                   screenRect.size.height - Main_Window_Top - Main_Window_Bottom);
+    
+    [self.window setFrame:windowRect display:YES];
+}
+
+
+-(void)createMainScrollView
+{
+    NSSize windowSize = [self.window.contentView frame].size;
+    self.mainScrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
+                                           0,
+                                           windowSize.width - UI_leftSidebarWidth,
+                                           windowSize.height - UI_topbarHeight- 20);
+    
+    [self.mainScrollView setHorizontalLineScroll:100];
+    [self.mainScrollView setNeedsDisplay:YES];
+}
+
+
+- (void)createMainBox
+{
+    _containerView = [AMBox hbox];
+    _containerView.frame = self.mainScrollView.bounds;
+    _containerView.paddingLeft = 40;
+    _containerView.paddingRight = 50;
+    _containerView.allowBecomeEmpty = YES;
+    _containerView.gapBetweenItems = 50;
+    id __weak weakSelf = self;
+    _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
+        if ([boxItem isKindOfClass:[AMBox class]])
+            return (AMBox *) nil;
+        AMBox *newBox = [AMBox vbox];
+        newBox.paddingTop = 20;
+        newBox.paddingBottom = 40;
+        newBox.paddingLeft = 6;
+        newBox.paddingRight = 0;
+        newBox.gapBetweenItems = 40;
+        CGFloat width = boxItem.preferredSize.width + newBox.paddingLeft +
+        newBox.paddingRight;
+        CGFloat height = boxItem.minSizeConstraint.height + newBox.paddingTop + newBox.paddingBottom;
+        id strongSelf = weakSelf;
+        CGFloat containerHeight = [strongSelf calculateContainerHeight];
+        if (containerHeight < height)
+            [strongSelf resizeContainerHeightTo:height];
+        else
+            height = containerHeight;
+        [newBox setFrameSize:NSMakeSize(width, height)];
+        [newBox addSubview:boxItem];
+        return newBox;
+    };
+    
+    [self.mainScrollView setDocumentView:_containerView];
+    [self windowDidResize:nil];  // temporary resolution
+}
+
+
+- (void)loadVersion
+{
     NSString *shortVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
     [self.versionLabel setStringValue:[NSString stringWithFormat:@"%@", shortVersion]];
 }
 
 
-- (void)showDefaultWindow {
-    isWindowLoading = YES;
-    [self initTimer];
-    [self createDefaultWindow];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
-
-    [self initControlBar:isTopBar];
-    [self createDefaultPanelAndloadControlBarItemStatus];
-    isWindowLoading = NO;
+-(void)loadControlBar
+{
+    [self createControlbar];
+    [self addContrainsToControlBar];
+    [self loadControlBarStatus];
 }
 
-- (void)initControlBar:(BOOL)isTop {
-    if (controlBarController) {
-        [controlBarController.view removeFromSuperview];
+
+-(void)createControlbar
+{
+    if (_controlBarVC) {
+        [_controlBarVC.view removeFromSuperview];
     }
+    
     NSSize windowSize = [self.window.contentView frame].size;
-    if (isTop) {
-        NSPoint point = NSMakePoint(450, windowSize.height - 60);
-        controlBarController = [[AMPanelControlBarViewController alloc] initWithNibName:@"PanelControlBarView" bundle:nil];
-        [controlBarController.view setFrameOrigin:point];
-        [self.window.contentView addSubview:controlBarController.view];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
+        NSPoint point = NSMakePoint(TopBar_Leading, windowSize.height - Main_View_Top);
+        _controlBarVC = [[AMPanelControlBarViewController alloc] initWithNibName:@"PanelControlBarView" bundle:nil];
+        [_controlBarVC.view setFrameOrigin:point];
     }
     else {
-
-        controlBarController = [[AMPanelControlBarViewController alloc] initWithNibName:@"VerticalControlBarView" bundle:nil];
-        NSPoint point = NSMakePoint(0, windowSize.height - 60 - 20 - controlBarController.view.frame.size.height);
-        [controlBarController.view setFrameOrigin:point];
-        [self.window.contentView addSubview:controlBarController.view];
-
+        
+        _controlBarVC = [[AMPanelControlBarViewController alloc] initWithNibName:@"VerticalControlBarView" bundle:nil];
+        NSPoint point = NSMakePoint(LeftBar_Leading, windowSize.height - LeftBar_Top - _controlBarVC.view.frame.size.height);
+        [_controlBarVC.view setFrameOrigin:point];
     }
+    
+    [self.window.contentView addSubview:_controlBarVC.view];
+}
+
+
+-(void)addContrainsToControlBar
+{
     NSView *contentView = [self.window contentView];
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-    NSView *customView = scrollView;
+    NSView *customView = self.mainScrollView;
     [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    //    [contentView addSubview:customView];
-
+    
     NSDictionary *views = NSDictionaryOfVariableBindings(customView);
     NSArray *constraints50 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[customView]-10-|" options:0
                                                                      metrics:nil
@@ -261,54 +362,55 @@
     [itemFor10 setIdentifier:@"leftSideBarConstrainsId10"];
     NSLayoutConstraint *itemFor50 = constraints50[0];
     [itemFor50 setIdentifier:@"leftSideBarConstrainsId50"];
-
-
+    
+    
     NSArray *constrains = [contentView constraints];
     for (NSLayoutConstraint *item in constrains) {
         if ([item.identifier isEqualToString:@"leftSideBarConstrainsId10"]
-                || [item.identifier isEqualToString:@"leftSideBarConstrainsId50"]) {
+            || [item.identifier isEqualToString:@"leftSideBarConstrainsId50"]) {
             [contentView removeConstraint:item];
         }
     }
-    [scrollView removeConstraints:scrollView.constraints];
-    if (!isTop) {
+    [self.mainScrollView removeConstraints:self.mainScrollView.constraints];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
         [contentView addConstraints:constraints50];
     }
     else {
         [contentView addConstraints:constraints10];
-
     }
 }
 
-- (void)createDefaultPanelAndloadControlBarItemStatus
+
+-(void)loadControlBarStatus
 {
-    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-    
-    for(NSMutableArray* col in openedPanels){
-        if (col != nil) {
-            [self addColumnWithPanels:col];
+    for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
+        if (panels != nil) {
+            for (NSDictionary *dict in panels) {
+                NSString *panelId = [dict objectForKey:@"panelId"];
+                NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
+                [self setSideBarItemStatus:sideItemId withStatus:YES ];
+            }
         }
     }
 }
 
 
--(void)addColumnWithPanels:(NSArray*)panels
+-(void)loadLastOpenedPanels
 {
-    NSRect rect = NSMakeRect(0, 0, 30, 30);
-   // AMBox *colBox = [[AMBox alloc] initWithFrame:rect sytle:AMBoxVertical];
-    
-    for (NSDictionary *dict in panels) {
-        NSString *panelId = [dict objectForKey:@"panelId"];
-        [self createPanelWithId:panelId];
-        
-        NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-        [self setSideBarItemStatus:sideItemId withStatus:YES ];
-       // [colBox addSubview:ctrl.view];
+    for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
+        if (panels != nil) {
+            for (NSDictionary *dict in panels) {
+                NSString *panelId = [dict objectForKey:@"panelId"];
+                [self createPanelWithId:panelId];
+            }
+        }
     }
-    
-   // [_containerView addSubview:colBox];
-
 }
+
+
+#pragma Creat Main Window End
+#pragma mark-
+
 
 
 -(AMPanelViewController*)createPanelWithId:(NSString *)panelId
@@ -317,16 +419,6 @@
     return panelCtrl;
 }
 
-
-- (void)loadControlBarItemStatus {
-//    NSMutableArray *openedPanels = (NSMutableArray *) [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel];
-//    for (NSString *openedPanelId in openedPanels) {
-//        if ([openedPanelId rangeOfString:@"_PANEL"].location != NSNotFound) {
-//            NSString *sideItemId = [openedPanelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
-//            [self setSideBarItemStatus:sideItemId withStatus:YES ];
-//        }
-//    }
-}
 
 - (void)copyPanel:(NSButton *)sender {
     static int numberOfNetworkToolsPanel = 0;
@@ -347,56 +439,6 @@
     }
 }
 
-- (void)createDefaultWindow {
-    NSScreen *mainScreen = [NSScreen mainScreen];
-    [self.window setFrame:NSMakeRect(10, 40, mainScreen.frame.size.width - 80, mainScreen.frame.size.height - 80) display:YES];
-    NSSize windowSize = [self.window.contentView frame].size;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-
-    scrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
-            0,
-            windowSize.width - UI_leftSidebarWidth,
-            windowSize.height - UI_topbarHeight- 20);
-
-    [scrollView setHorizontalLineScroll:100];
-    [scrollView  setNeedsDisplay:YES];
-   
-
-    _containerView = [AMBox hbox];
-    _containerView.frame = scrollView.bounds;
-    _containerView.paddingLeft = 40;
-    _containerView.paddingRight = 50;
-    _containerView.allowBecomeEmpty = YES;
-    _containerView.gapBetweenItems = 50;
-    id __weak weakSelf = self;
-    _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
-        if ([boxItem isKindOfClass:[AMBox class]])
-            return (AMBox *) nil;
-        AMBox *newBox = [AMBox vbox];
-        newBox.paddingTop = 20;
-        newBox.paddingBottom = 40;
-        newBox.paddingLeft = 6;
-        newBox.paddingRight = 0;
-        newBox.gapBetweenItems = 40;
-        CGFloat width = boxItem.preferredSize.width + newBox.paddingLeft +
-                newBox.paddingRight;
-        CGFloat height = boxItem.minSizeConstraint.height + newBox.paddingTop + newBox.paddingBottom;
-        id strongSelf = weakSelf;
-        CGFloat containerHeight = [strongSelf calculateContainerHeight];
-        if (containerHeight < height)
-            [strongSelf resizeContainerHeightTo:height];
-        else
-            height = containerHeight;
-        [newBox setFrameSize:NSMakeSize(width, height)];
-        [newBox addSubview:boxItem];
-        return newBox;
-    };
-    [scrollView setDocumentView:_containerView];
-    [self loadVersion];
-
-    [self windowDidResize:nil];  // temporary resolution
-}
-
 
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title {
     AMPanelViewController *viewController =
@@ -404,9 +446,13 @@
     return viewController;
 
 }
+
+
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height {
     return [self createPanel:identifier withTitle:title width:width height:height relatedView:nil];
 }
+
+
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height relatedView:(NSView*)relatedView {
     AMPanelViewController *panelViewController =
             [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
@@ -418,7 +464,7 @@
     [panelViewController setTitle:title];
     
     NSView *firstPanel = nil;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSScrollView *scrollView = self.mainScrollView;
     CGFloat x = [[scrollView contentView] documentVisibleRect].origin.x;
     NSClipView *documentView = scrollView.contentView.documentView;
     CGFloat diffX = documentView.frame.size.width;
@@ -455,11 +501,15 @@
     //[[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;
 }
+
+
 - (void)removePanel:(NSString *)panelName {
     AMPanelViewController *panelViewController = self.panelControllers[panelName];
     [panelViewController closePanel:nil];
 
 }
+
+
 - (void)fillPanel:(AMPanelViewController *)panelController content:(NSViewController *)contentController {
     NSView *panelView = panelController.view;
     NSView *contentView = contentController.view;
@@ -485,12 +535,15 @@
 
     }
 }
+
+
 - (AMPanelViewController *)loadTestPanel {
     AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
     AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
     [self fillPanel:panelViewController content:testViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadMapPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MAP" width:UI_defaultPanelWidth* 4.0 height:UI_defaultPanelHeight relatedView:view];
@@ -499,6 +552,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadMixingPanel:(NSString *)panelId  relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MIXING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMMixingViewController *mixingViewController = [[AMMixingViewController alloc] initWithNibName:@"AMMixingViewController" bundle:nil];
@@ -506,12 +560,14 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadRoutingPanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"ROUTING" width:UI_defaultPanelWidth* 3.0 height:UI_defaultPanelHeight relatedView:view ];
     AMVisualViewController *visualViewController = [[AMVisualViewController alloc] initWithNibName:@"AMVisualViewController" bundle:nil];
     [self fillPanel:panelViewController content:visualViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadOSCMessagePanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSC CLIENT" width:UI_defaultPanelWidth*2.5 height:UI_defaultPanelHeight relatedView:view];
@@ -522,12 +578,14 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadMainOutputPanel:(NSString *)panelId relatedView:(NSView*)view {
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"Main Output" width:UI_defaultPanelWidth* 4 height:UI_defaultPanelHeight relatedView:view];
     NSViewController *viewController = [[AMVisualViewController alloc] initWithNibName:@"AMMainOutputViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:760 height:UI_defaultPanelHeight relatedView:view];
@@ -537,6 +595,7 @@
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
@@ -550,6 +609,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadFOAFPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SOCIAL" width:UI_defaultPanelWidth* 3.5 height:UI_defaultPanelHeight  relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
@@ -562,10 +622,12 @@
     return panelViewController;
 }
 
+
 - (void)initTimer {
     NSTextField *timerField = (NSTextField *) self.amTimer;
     [[AMTimer shareInstance] addTimerScreen:timerField];
 }
+
 
 - (AMPanelViewController *)loadGroupsPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = UI_defaultPanelWidth*1.5;
@@ -587,6 +649,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadPreferencePanel:(NSString *)panelId relatedView:(NSView*)view{
     float panelWidth = UI_defaultPanelWidth* 2;
     float panelHeight = UI_defaultPanelHeight;
@@ -603,6 +666,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadChatPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = 600.0f;
     float panelHeight = 720.0f;
@@ -616,6 +680,7 @@
     return panelViewController;
 }
 
+
 - (AMPanelViewController *)loadGPlusPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = 570.0f; //UI_defaultPanelWidth;
     float panelHeight = UI_defaultPanelHeight; //340.0f;
@@ -624,10 +689,11 @@
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);
-    AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMGPlusViewController" bundle:nil];
+    AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMBroadcastViewController" bundle:nil];
     [self fillPanel:panelViewController content:gPlusViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)loadManualPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = UI_defaultPanelWidth*2;
@@ -641,6 +707,7 @@
     [self fillPanel:panelViewController content:manualViewController];
     return panelViewController;
 }
+
 
 - (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
                                                    withTitle:(NSString *)title
@@ -666,6 +733,7 @@
     return [self createNetworkToolsPanelController:panelId withTitle:@"NETWORK TOOLS"relatedView:view];
 }
 
+
 - (AMPanelViewController *)loadProfilePanel:(NSString *)panelId relatedView:(NSView*)view{
     float panelHeight = 300.0f;
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"PROFILE" width:UI_defaultPanelWidth*1.5 height:panelHeight relatedView:view];
@@ -679,6 +747,7 @@
     return panelViewController;
 }
 
+
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId =
             [[NSString stringWithFormat:@"%@_PANEL", sender.identifier] uppercaseString];
@@ -689,9 +758,12 @@
         [self removePanel:panelId];
     }
 }
+
+
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId {
    return  [self createPanelWithType:panelType withId:panelId relatedView:nil];
 }
+
 
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId relatedView:(NSView*)relatedView{
     AMPanelViewController *panelViewController;
@@ -748,6 +820,7 @@
 
 }
 
+
 - (void)createTabPanelWithType:(NSString *)panelType withTitle:(NSString *)title withPanelId:(NSString *)panelId withTabIndex:(NSInteger)tabIndex from:(AMPanelViewController *)fromController {
     AMPanelViewController *panelViewController = [self createPanelWithType:panelType withId:panelId relatedView:fromController.view];
     if (panelViewController.tabPanelViewController != nil) {
@@ -766,6 +839,7 @@
         [[AMTimer shareInstance] reset];
     }
 }
+
 
 - (void)setSideBarItemStatus:(NSString *)identifier withStatus:(Boolean)status {
     NSView *mainView = self.window.contentView;
@@ -791,6 +865,7 @@
     }
 }
 
+
 - (IBAction)jackServerToggled:(NSButton *)sender
 {
     AMAudio* audioModule = [AMAudio sharedInstance];
@@ -806,6 +881,7 @@
     }
 }
 
+
 - (IBAction)oscServerToggled:(id)sender
 {
     AMOSCGroups* oscGroups = [AMOSCGroups sharedInstance];
@@ -816,6 +892,7 @@
         [oscGroups stopOSCGroupServer];
     }
 }
+
 
 - (IBAction)syphonServerToggled:(id)sender
 {
@@ -831,6 +908,7 @@
     }
 }
 
+
 -(void)jackStarted:(NSNotification*)notification
 {
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
@@ -839,6 +917,7 @@
     
     _jackCpuTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(queryJackCpu) userInfo:nil repeats:YES];
 }
+
 
 -(void)jackStopped:(NSNotification*)notification
 {    
@@ -850,12 +929,14 @@
     _jackCpuTimer = nil;
 }
 
+
 -(void)queryJackCpu
 {
     float cpuUsage = [[AMAudio sharedInstance ] jackCpuUsage];
     [self.jackCPUUsageBar setCpuUsage:cpuUsage];
     self.jackCpuUageNum.stringValue = [NSString stringWithFormat:@"%.2f", cpuUsage];
 }
+
 
 -(void)oscStarted:(NSNotification*)notification
 {
@@ -865,12 +946,14 @@
 
 }
 
+
 -(void)oscStopped:(NSNotification*)notification
 {
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     [AMCoreData shareInstance].mySelf.oscServer = NO;
     [[AMMesher sharedAMMesher] updateMySelf];
 }
+
 
 #pragma mark -
 #pragma   mark KVO

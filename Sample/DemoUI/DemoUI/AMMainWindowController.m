@@ -71,6 +71,8 @@
 #define UI_Panel_Key_Manual @"MANUAL_PANEL"
 
 @interface AMMainWindowController ()
+@property (weak) IBOutlet NSView *mainContentView;
+@property (weak) IBOutlet NSScrollView *mainScrollView;
 
 @end
 
@@ -173,7 +175,7 @@
         height = MAX(height, [box minContentHeight] + box.paddingTop + box.paddingBottom);
     }
     height += _containerView.paddingTop + _containerView.paddingBottom;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSScrollView *scrollView = self.mainScrollView;
     height = MAX(height, scrollView.frame.size.height);
     return height;
 }
@@ -216,17 +218,92 @@
 }
 
 
+#pragma mark -
+#pragma Create Main Window
+
+#define Main_Window_Leading     10
+#define Main_Window_Trailing    10
+#define Main_Window_Top         40
+#define Main_Window_Bottom      40
+
 - (void)showDefaultWindow {
     isWindowLoading = YES;
-    [self initTimer];
-    [self createDefaultWindow];
+    
+    [self createMainWindow];
+    [self createMainBox];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isTopBar = [defaults boolForKey:Preference_Key_General_TopControlBar];
 
     [self initControlBar:isTopBar];
     [self createDefaultPanelAndloadControlBarItemStatus];
+    
     isWindowLoading = NO;
 }
+
+
+-(void)createMainWindow
+{
+    NSRect screenRect = [NSScreen mainScreen].frame;
+    NSRect windowRect = NSMakeRect(Main_Window_Leading,
+                                   Main_Window_Bottom,
+                                   screenRect.size.width - Main_Window_Leading - Main_Window_Trailing,
+                                   screenRect.size.height - Main_Window_Top - Main_Window_Bottom);
+    
+    [self.window setFrame:windowRect display:YES];
+}
+
+- (void)createMainBox {
+    NSSize windowSize = [self.window.contentView frame].size;
+    NSScrollView *scrollView = self.mainScrollView;
+    
+    scrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
+                                  0,
+                                  windowSize.width - UI_leftSidebarWidth,
+                                  windowSize.height - UI_topbarHeight- 20);
+    
+    [scrollView setHorizontalLineScroll:100];
+    [scrollView  setNeedsDisplay:YES];
+    
+    
+    _containerView = [AMBox hbox];
+    _containerView.frame = scrollView.bounds;
+    _containerView.paddingLeft = 40;
+    _containerView.paddingRight = 50;
+    _containerView.allowBecomeEmpty = YES;
+    _containerView.gapBetweenItems = 50;
+    id __weak weakSelf = self;
+    _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
+        if ([boxItem isKindOfClass:[AMBox class]])
+            return (AMBox *) nil;
+        AMBox *newBox = [AMBox vbox];
+        newBox.paddingTop = 20;
+        newBox.paddingBottom = 40;
+        newBox.paddingLeft = 6;
+        newBox.paddingRight = 0;
+        newBox.gapBetweenItems = 40;
+        CGFloat width = boxItem.preferredSize.width + newBox.paddingLeft +
+        newBox.paddingRight;
+        CGFloat height = boxItem.minSizeConstraint.height + newBox.paddingTop + newBox.paddingBottom;
+        id strongSelf = weakSelf;
+        CGFloat containerHeight = [strongSelf calculateContainerHeight];
+        if (containerHeight < height)
+            [strongSelf resizeContainerHeightTo:height];
+        else
+            height = containerHeight;
+        [newBox setFrameSize:NSMakeSize(width, height)];
+        [newBox addSubview:boxItem];
+        return newBox;
+    };
+    [scrollView setDocumentView:_containerView];
+    [self loadVersion];
+    
+    [self windowDidResize:nil];  // temporary resolution
+}
+
+
+#pragma Creat Main Window End
+#pragma mark-
 
 
 - (void)initControlBar:(BOOL)isTop {
@@ -249,7 +326,7 @@
 
     }
     NSView *contentView = [self.window contentView];
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSScrollView *scrollView = self.mainScrollView;
     NSView *customView = scrollView;
     [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
@@ -355,55 +432,6 @@
 }
 
 
-- (void)createDefaultWindow {
-    NSScreen *mainScreen = [NSScreen mainScreen];
-    [self.window setFrame:NSMakeRect(10, 40, mainScreen.frame.size.width - 80, mainScreen.frame.size.height - 80) display:YES];
-    NSSize windowSize = [self.window.contentView frame].size;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
-
-    scrollView.frame = NSMakeRect(UI_leftSidebarWidth+ 10,
-            0,
-            windowSize.width - UI_leftSidebarWidth,
-            windowSize.height - UI_topbarHeight- 20);
-
-    [scrollView setHorizontalLineScroll:100];
-    [scrollView  setNeedsDisplay:YES];
-   
-
-    _containerView = [AMBox hbox];
-    _containerView.frame = scrollView.bounds;
-    _containerView.paddingLeft = 40;
-    _containerView.paddingRight = 50;
-    _containerView.allowBecomeEmpty = YES;
-    _containerView.gapBetweenItems = 50;
-    id __weak weakSelf = self;
-    _containerView.prepareForAdding = ^(AMBoxItem *boxItem) {
-        if ([boxItem isKindOfClass:[AMBox class]])
-            return (AMBox *) nil;
-        AMBox *newBox = [AMBox vbox];
-        newBox.paddingTop = 20;
-        newBox.paddingBottom = 40;
-        newBox.paddingLeft = 6;
-        newBox.paddingRight = 0;
-        newBox.gapBetweenItems = 40;
-        CGFloat width = boxItem.preferredSize.width + newBox.paddingLeft +
-                newBox.paddingRight;
-        CGFloat height = boxItem.minSizeConstraint.height + newBox.paddingTop + newBox.paddingBottom;
-        id strongSelf = weakSelf;
-        CGFloat containerHeight = [strongSelf calculateContainerHeight];
-        if (containerHeight < height)
-            [strongSelf resizeContainerHeightTo:height];
-        else
-            height = containerHeight;
-        [newBox setFrameSize:NSMakeSize(width, height)];
-        [newBox addSubview:boxItem];
-        return newBox;
-    };
-    [scrollView setDocumentView:_containerView];
-    [self loadVersion];
-
-    [self windowDidResize:nil];  // temporary resolution
-}
 
 
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title {
@@ -430,7 +458,7 @@
     [panelViewController setTitle:title];
     
     NSView *firstPanel = nil;
-    NSScrollView *scrollView = [[self.window.contentView subviews] objectAtIndex:0];
+    NSScrollView *scrollView = self.mainScrollView;
     CGFloat x = [[scrollView contentView] documentVisibleRect].origin.x;
     NSClipView *documentView = scrollView.contentView.documentView;
     CGFloat diffX = documentView.frame.size.width;

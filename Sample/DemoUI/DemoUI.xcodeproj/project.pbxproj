@@ -654,8 +654,6 @@
 				AFC77F8A1900C80A003543CF /* AMSocialView.xib */,
 				AF1D4D40193F0EFF00C3B435 /* AMMenuItemView.xib */,
 				AF86600819401C83008DB7CA /* AMTestView.xib */,
-				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
-				AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */,
 			);
 			name = Panels;
 			sourceTree = "<group>";
@@ -964,6 +962,8 @@
 				37C23184187A8FFD00554AFD /* MainMenu.xib */,
 				AFB95D4618FFB61E00853263 /* AMMainWindowController.h */,
 				AFB95D4718FFB61E00853263 /* AMMainWindowController.m */,
+				AF621F1A197F503A005F4F97 /* PanelControlBarView.xib */,
+				AF8EC7C01985F8570019D650 /* VerticalControlBarView.xib */,
 			);
 			name = MainWindow;
 			sourceTree = "<group>";

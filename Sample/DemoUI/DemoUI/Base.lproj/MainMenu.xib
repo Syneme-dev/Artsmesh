@@ -311,11 +311,7 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="EditLocalServerIP" enabled="NO" keyEquivalent="l" id="211">
-                                <connections>
-                                    <action selector="OnEditLocalServerIP:" target="B30-a9-ZW1" id="TM5-3a-FRW"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="EditLocalServerIP" enabled="NO" keyEquivalent="l" id="211"/>
                         </items>
                     </menu>
                 </menuItem>

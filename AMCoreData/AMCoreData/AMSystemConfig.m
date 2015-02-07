@@ -32,7 +32,7 @@
     NSMutableArray *validIpv6 = [[NSMutableArray alloc] init];
     
     for (NSString *ip in self.localServerIps) {
-        if ([AMCommonTools isValidIpv4:ip]) {
+        if ([AMCommonTools isValidIpv6:ip]) {
             if(![ip hasPrefix:@"::1"]){
                 [validIpv6 addObject:ip];
             }

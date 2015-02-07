@@ -387,8 +387,6 @@
         if (panels != nil) {
             for (NSDictionary *dict in panels) {
                 NSString *panelId = [dict objectForKey:@"panelId"];
-                //[self createPanelWithId:panelId];
-                
                 NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
                 [self setSideBarItemStatus:sideItemId withStatus:YES ];
             }

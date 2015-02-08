@@ -362,10 +362,10 @@
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		37C23173187A8FFD00554AFD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		37C23174187A8FFD00554AFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		37C23177187A8FFD00554AFD /* DemoUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUI-Info.plist"; sourceTree = "<group>"; };
+		37C23177187A8FFD00554AFD /* Artsmesh-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Artsmesh-Info.plist"; sourceTree = "<group>"; };
 		37C23179187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C2317B187A8FFD00554AFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		37C2317D187A8FFD00554AFD /* DemoUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DemoUI-Prefix.pch"; sourceTree = "<group>"; };
+		37C2317D187A8FFD00554AFD /* Artsmesh-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Artsmesh-Prefix.pch"; sourceTree = "<group>"; };
 		37C2317F187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		37C23181187A8FFD00554AFD /* AMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAppDelegate.h; sourceTree = "<group>"; };
 		37C23182187A8FFD00554AFD /* AMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAppDelegate.m; sourceTree = "<group>"; };
@@ -929,10 +929,10 @@
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				AFAEBD801961038F00B7FB51 /* Resource */,
-				37C23177187A8FFD00554AFD /* DemoUI-Info.plist */,
+				37C23177187A8FFD00554AFD /* Artsmesh-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
 				37C2317B187A8FFD00554AFD /* main.m */,
-				37C2317D187A8FFD00554AFD /* DemoUI-Prefix.pch */,
+				37C2317D187A8FFD00554AFD /* Artsmesh-Prefix.pch */,
 				37C2317E187A8FFD00554AFD /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -1289,7 +1289,7 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Artsmesh;
 			};
-			buildConfigurationList = 37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "DemoUI" */;
+			buildConfigurationList = 37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Artsmesh" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1663,9 +1663,9 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
+				GCC_PREFIX_HEADER = "DemoUI/Artsmesh-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";
+				INFOPLIST_FILE = "DemoUI/Artsmesh-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1682,9 +1682,9 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DemoUI/DemoUI-Prefix.pch";
+				GCC_PREFIX_HEADER = "DemoUI/Artsmesh-Prefix.pch";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "DemoUI/DemoUI-Info.plist";
+				INFOPLIST_FILE = "DemoUI/Artsmesh-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1693,7 +1693,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "DemoUI" */ = {
+		37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Artsmesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37C2319B187A8FFD00554AFD /* Debug */,

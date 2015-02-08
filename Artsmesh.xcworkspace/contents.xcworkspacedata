@@ -5,7 +5,7 @@
       location = "container:"
       name = "Artsmesh">
       <FileRef
-         location = "group:Sample/DemoUI/DemoUI.xcodeproj">
+         location = "group:Sample/DemoUI/Artsmesh.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">

@@ -10,23 +10,8 @@
 		268BE00D19780C4700B0035D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE00C19780C4700B0035D /* Cocoa.framework */; };
 		268BE01719780C4700B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BE01519780C4700B0035D /* InfoPlist.strings */; };
 		268BE01B19780C4700B0035D /* AMCommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BE01A19780C4700B0035D /* AMCommonTools.m */; };
-		268BE02219780C4700B0035D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE02119780C4700B0035D /* XCTest.framework */; };
-		268BE02319780C4700B0035D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE00C19780C4700B0035D /* Cocoa.framework */; };
-		268BE02619780C4700B0035D /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE00919780C4700B0035D /* AMCommonTools.framework */; };
-		268BE02C19780C4700B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BE02A19780C4700B0035D /* InfoPlist.strings */; };
-		268BE02E19780C4700B0035D /* AMCommonToolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BE02D19780C4700B0035D /* AMCommonToolsTests.m */; };
 		268BE03919780D2A00B0035D /* AMCommonTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BE01919780C4700B0035D /* AMCommonTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		268BE02419780C4700B0035D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 268BE00019780C4700B0035D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 268BE00819780C4700B0035D;
-			remoteInfo = AMCommonTools;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		268BE00919780C4700B0035D /* AMCommonTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMCommonTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,11 +24,7 @@
 		268BE01819780C4700B0035D /* AMCommonTools-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMCommonTools-Prefix.pch"; sourceTree = "<group>"; };
 		268BE01919780C4700B0035D /* AMCommonTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMCommonTools.h; sourceTree = "<group>"; };
 		268BE01A19780C4700B0035D /* AMCommonTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMCommonTools.m; sourceTree = "<group>"; };
-		268BE02019780C4700B0035D /* AMCommonToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMCommonToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BE02119780C4700B0035D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		268BE02919780C4700B0035D /* AMCommonToolsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMCommonToolsTests-Info.plist"; sourceTree = "<group>"; };
-		268BE02B19780C4700B0035D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		268BE02D19780C4700B0035D /* AMCommonToolsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMCommonToolsTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,16 +36,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		268BE01D19780C4700B0035D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BE02319780C4700B0035D /* Cocoa.framework in Frameworks */,
-				268BE02219780C4700B0035D /* XCTest.framework in Frameworks */,
-				268BE02619780C4700B0035D /* AMCommonTools.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -72,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				268BE01219780C4700B0035D /* AMCommonTools */,
-				268BE02719780C4700B0035D /* AMCommonToolsTests */,
 				268BE00B19780C4700B0035D /* Frameworks */,
 				268BE00A19780C4700B0035D /* Products */,
 			);
@@ -82,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				268BE00919780C4700B0035D /* AMCommonTools.framework */,
-				268BE02019780C4700B0035D /* AMCommonToolsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,24 +96,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		268BE02719780C4700B0035D /* AMCommonToolsTests */ = {
-			isa = PBXGroup;
-			children = (
-				268BE02D19780C4700B0035D /* AMCommonToolsTests.m */,
-				268BE02819780C4700B0035D /* Supporting Files */,
-			);
-			path = AMCommonToolsTests;
-			sourceTree = "<group>";
-		};
-		268BE02819780C4700B0035D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				268BE02919780C4700B0035D /* AMCommonToolsTests-Info.plist */,
-				268BE02A19780C4700B0035D /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -177,24 +128,6 @@
 			productReference = 268BE00919780C4700B0035D /* AMCommonTools.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		268BE01F19780C4700B0035D /* AMCommonToolsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 268BE03419780C4700B0035D /* Build configuration list for PBXNativeTarget "AMCommonToolsTests" */;
-			buildPhases = (
-				268BE01C19780C4700B0035D /* Sources */,
-				268BE01D19780C4700B0035D /* Frameworks */,
-				268BE01E19780C4700B0035D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				268BE02519780C4700B0035D /* PBXTargetDependency */,
-			);
-			name = AMCommonToolsTests;
-			productName = AMCommonToolsTests;
-			productReference = 268BE02019780C4700B0035D /* AMCommonToolsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,11 +136,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = AM;
-				TargetAttributes = {
-					268BE01F19780C4700B0035D = {
-						TestTargetID = 268BE00819780C4700B0035D;
-					};
-				};
 			};
 			buildConfigurationList = 268BE00319780C4700B0035D /* Build configuration list for PBXProject "AMCommonTools" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -222,7 +150,6 @@
 			projectRoot = "";
 			targets = (
 				268BE00819780C4700B0035D /* AMCommonTools */,
-				268BE01F19780C4700B0035D /* AMCommonToolsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,14 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				268BE01719780C4700B0035D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		268BE01E19780C4700B0035D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BE02C19780C4700B0035D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,37 +174,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		268BE01C19780C4700B0035D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BE02E19780C4700B0035D /* AMCommonToolsTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		268BE02519780C4700B0035D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 268BE00819780C4700B0035D /* AMCommonTools */;
-			targetProxy = 268BE02419780C4700B0035D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		268BE01519780C4700B0035D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				268BE01619780C4700B0035D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		268BE02A19780C4700B0035D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				268BE02B19780C4700B0035D /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -395,46 +290,6 @@
 			};
 			name = Release;
 		};
-		268BE03519780C4700B0035D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMCommonTools.framework/Versions/A/AMCommonTools";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMCommonTools/AMCommonTools-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMCommonToolsTests/AMCommonToolsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		268BE03619780C4700B0035D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMCommonTools.framework/Versions/A/AMCommonTools";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMCommonTools/AMCommonTools-Prefix.pch";
-				INFOPLIST_FILE = "AMCommonToolsTests/AMCommonToolsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -452,15 +307,6 @@
 			buildConfigurations = (
 				268BE03219780C4700B0035D /* Debug */,
 				268BE03319780C4700B0035D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		268BE03419780C4700B0035D /* Build configuration list for PBXNativeTarget "AMCommonToolsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				268BE03519780C4700B0035D /* Debug */,
-				268BE03619780C4700B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

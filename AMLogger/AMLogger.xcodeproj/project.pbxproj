@@ -13,8 +13,6 @@
 		37FCB9F718710F6300C1FD1B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9F618710F6300C1FD1B /* XCTest.framework */; };
 		37FCB9F818710F6300C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9E118710F6300C1FD1B /* Cocoa.framework */; };
 		37FCB9FB18710F6300C1FD1B /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9DE18710F6300C1FD1B /* AMLogger.framework */; };
-		37FCBA0118710F6300C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9FF18710F6300C1FD1B /* InfoPlist.strings */; };
-		37FCBA0318710F6300C1FD1B /* AMLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */; };
 		4FD5A6C419FA1EEC00BDD634 /* AMLogReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FD5A6C519FA1EEC00BDD634 /* AMLogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A6C319FA1EEC00BDD634 /* AMLogReader.m */; };
 		D47A184C19F21242000A8CCB /* AMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB9EE18710F6300C1FD1B /* AMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,9 +41,6 @@
 		37FCB9EF18710F6300C1FD1B /* AMLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMLogger.m; sourceTree = "<group>"; };
 		37FCB9F518710F6300C1FD1B /* AMLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB9F618710F6300C1FD1B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		37FCB9FE18710F6300C1FD1B /* AMLoggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMLoggerTests-Info.plist"; sourceTree = "<group>"; };
-		37FCBA0018710F6300C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMLoggerTests.m; sourceTree = "<group>"; };
 		4FD5A6C219FA1EEC00BDD634 /* AMLogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLogReader.h; sourceTree = "<group>"; };
 		4FD5A6C319FA1EEC00BDD634 /* AMLogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLogReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				37FCB9E718710F6300C1FD1B /* AMLogger */,
-				37FCB9FC18710F6300C1FD1B /* AMLoggerTests */,
 				37FCB9E018710F6300C1FD1B /* Frameworks */,
 				37FCB9DF18710F6300C1FD1B /* Products */,
 			);
@@ -129,24 +123,6 @@
 				37FCB9E918710F6300C1FD1B /* AMLogger-Info.plist */,
 				37FCB9EA18710F6300C1FD1B /* InfoPlist.strings */,
 				37FCB9ED18710F6300C1FD1B /* AMLogger-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		37FCB9FC18710F6300C1FD1B /* AMLoggerTests */ = {
-			isa = PBXGroup;
-			children = (
-				37FCBA0218710F6300C1FD1B /* AMLoggerTests.m */,
-				37FCB9FD18710F6300C1FD1B /* Supporting Files */,
-			);
-			path = AMLoggerTests;
-			sourceTree = "<group>";
-		};
-		37FCB9FD18710F6300C1FD1B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB9FE18710F6300C1FD1B /* AMLoggerTests-Info.plist */,
-				37FCB9FF18710F6300C1FD1B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -247,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37FCBA0118710F6300C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +242,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37FCBA0318710F6300C1FD1B /* AMLoggerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,14 +260,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				37FCB9EB18710F6300C1FD1B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		37FCB9FF18710F6300C1FD1B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37FCBA0018710F6300C1FD1B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

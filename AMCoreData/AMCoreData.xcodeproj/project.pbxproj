@@ -11,11 +11,6 @@
 		268BDF811977F60A00B0035D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF801977F60A00B0035D /* Cocoa.framework */; };
 		268BDF8B1977F60A00B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BDF891977F60A00B0035D /* InfoPlist.strings */; };
 		268BDF8F1977F60A00B0035D /* AMCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDF8E1977F60A00B0035D /* AMCoreData.m */; };
-		268BDF961977F60A00B0035D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF951977F60A00B0035D /* XCTest.framework */; };
-		268BDF971977F60A00B0035D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF801977F60A00B0035D /* Cocoa.framework */; };
-		268BDF9A1977F60A00B0035D /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BDF7D1977F60A00B0035D /* AMCoreData.framework */; };
-		268BDFA01977F60A00B0035D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 268BDF9E1977F60A00B0035D /* InfoPlist.strings */; };
-		268BDFA21977F60A00B0035D /* AMCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFA11977F60A00B0035D /* AMCoreDataTests.m */; };
 		268BDFAD1977F63B00B0035D /* AMLiveGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAB1977F63B00B0035D /* AMLiveGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		268BDFAE1977F63B00B0035D /* AMLiveGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BDFAC1977F63B00B0035D /* AMLiveGroup.m */; };
 		268BDFB11977F64600B0035D /* AMLiveUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 268BDFAF1977F64600B0035D /* AMLiveUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,16 +24,6 @@
 		268BE03B19780D6B00B0035D /* AMCommonTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268BE03A19780D6B00B0035D /* AMCommonTools.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		268BDF981977F60A00B0035D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 268BDF741977F60A00B0035D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 268BDF7C1977F60A00B0035D;
-			remoteInfo = AMCoreData;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		268BDF7D1977F60A00B0035D /* AMCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BDF801977F60A00B0035D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -50,11 +35,7 @@
 		268BDF8C1977F60A00B0035D /* AMCoreData-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMCoreData-Prefix.pch"; sourceTree = "<group>"; };
 		268BDF8D1977F60A00B0035D /* AMCoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMCoreData.h; sourceTree = "<group>"; };
 		268BDF8E1977F60A00B0035D /* AMCoreData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMCoreData.m; sourceTree = "<group>"; };
-		268BDF941977F60A00B0035D /* AMCoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMCoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BDF951977F60A00B0035D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		268BDF9D1977F60A00B0035D /* AMCoreDataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMCoreDataTests-Info.plist"; sourceTree = "<group>"; };
-		268BDF9F1977F60A00B0035D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		268BDFA11977F60A00B0035D /* AMCoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMCoreDataTests.m; sourceTree = "<group>"; };
 		268BDFAB1977F63B00B0035D /* AMLiveGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveGroup.h; sourceTree = "<group>"; };
 		268BDFAC1977F63B00B0035D /* AMLiveGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveGroup.m; sourceTree = "<group>"; };
 		268BDFAF1977F64600B0035D /* AMLiveUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveUser.h; sourceTree = "<group>"; };
@@ -78,16 +59,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		268BDF911977F60A00B0035D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BDF9A1977F60A00B0035D /* AMCoreData.framework in Frameworks */,
-				268BDF971977F60A00B0035D /* Cocoa.framework in Frameworks */,
-				268BDF961977F60A00B0035D /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				268BDF861977F60A00B0035D /* AMCoreData */,
-				268BDF9B1977F60A00B0035D /* AMCoreDataTests */,
 				268BDF7F1977F60A00B0035D /* Frameworks */,
 				268BDF7E1977F60A00B0035D /* Products */,
 			);
@@ -105,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				268BDF7D1977F60A00B0035D /* AMCoreData.framework */,
-				268BDF941977F60A00B0035D /* AMCoreDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,24 +130,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		268BDF9B1977F60A00B0035D /* AMCoreDataTests */ = {
-			isa = PBXGroup;
-			children = (
-				268BDFA11977F60A00B0035D /* AMCoreDataTests.m */,
-				268BDF9C1977F60A00B0035D /* Supporting Files */,
-			);
-			path = AMCoreDataTests;
-			sourceTree = "<group>";
-		};
-		268BDF9C1977F60A00B0035D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				268BDF9D1977F60A00B0035D /* AMCoreDataTests-Info.plist */,
-				268BDF9E1977F60A00B0035D /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -216,24 +167,6 @@
 			productReference = 268BDF7D1977F60A00B0035D /* AMCoreData.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		268BDF931977F60A00B0035D /* AMCoreDataTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 268BDFA81977F60A00B0035D /* Build configuration list for PBXNativeTarget "AMCoreDataTests" */;
-			buildPhases = (
-				268BDF901977F60A00B0035D /* Sources */,
-				268BDF911977F60A00B0035D /* Frameworks */,
-				268BDF921977F60A00B0035D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				268BDF991977F60A00B0035D /* PBXTargetDependency */,
-			);
-			name = AMCoreDataTests;
-			productName = AMCoreDataTests;
-			productReference = 268BDF941977F60A00B0035D /* AMCoreDataTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -242,11 +175,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = AM;
-				TargetAttributes = {
-					268BDF931977F60A00B0035D = {
-						TestTargetID = 268BDF7C1977F60A00B0035D;
-					};
-				};
 			};
 			buildConfigurationList = 268BDF771977F60A00B0035D /* Build configuration list for PBXProject "AMCoreData" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -261,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				268BDF7C1977F60A00B0035D /* AMCoreData */,
-				268BDF931977F60A00B0035D /* AMCoreDataTests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,14 +199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				268BDF8B1977F60A00B0035D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		268BDF921977F60A00B0035D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BDFA01977F60A00B0035D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,37 +218,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		268BDF901977F60A00B0035D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				268BDFA21977F60A00B0035D /* AMCoreDataTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		268BDF991977F60A00B0035D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 268BDF7C1977F60A00B0035D /* AMCoreData */;
-			targetProxy = 268BDF981977F60A00B0035D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		268BDF891977F60A00B0035D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				268BDF8A1977F60A00B0035D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		268BDF9E1977F60A00B0035D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				268BDF9F1977F60A00B0035D /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -441,46 +336,6 @@
 			};
 			name = Release;
 		};
-		268BDFA91977F60A00B0035D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMCoreData.framework/Versions/A/AMCoreData";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMCoreData/AMCoreData-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMCoreDataTests/AMCoreDataTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		268BDFAA1977F60A00B0035D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMCoreData.framework/Versions/A/AMCoreData";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMCoreData/AMCoreData-Prefix.pch";
-				INFOPLIST_FILE = "AMCoreDataTests/AMCoreDataTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -498,15 +353,6 @@
 			buildConfigurations = (
 				268BDFA61977F60A00B0035D /* Debug */,
 				268BDFA71977F60A00B0035D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		268BDFA81977F60A00B0035D /* Build configuration list for PBXNativeTarget "AMCoreDataTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				268BDFA91977F60A00B0035D /* Debug */,
-				268BDFAA1977F60A00B0035D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

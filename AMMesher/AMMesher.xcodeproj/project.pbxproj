@@ -17,12 +17,6 @@
 		26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4375194E9B3400117629 /* AMRemoteMesher.h */; };
 		26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4376194E9B3400117629 /* AMRemoteMesher.m */; };
 		26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
-		26BC15BD19321D280020AD2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15BB19321D280020AD2B /* InfoPlist.strings */; };
-		26BC15BF19321D280020AD2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15BE19321D280020AD2B /* main.m */; };
-		26BC15C319321D280020AD2B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15C119321D280020AD2B /* Credits.rtf */; };
-		26BC15C619321D280020AD2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15C519321D280020AD2B /* AppDelegate.m */; };
-		26BC15C919321D280020AD2B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15C719321D280020AD2B /* MainMenu.xib */; };
-		26BC15CB19321D280020AD2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26BC15CA19321D280020AD2B /* Images.xcassets */; };
 		26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5218D7C2A2006501C4 /* AMMesher.framework */; };
 		26BC15E51932E5860020AD2B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */; };
 		26CC6CD8193838980008E83E /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2630E02519163B390071260C /* AMNotificationManager.framework */; };
@@ -67,15 +61,6 @@
 		26AE4375194E9B3400117629 /* AMRemoteMesher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRemoteMesher.h; sourceTree = "<group>"; };
 		26AE4376194E9B3400117629 /* AMRemoteMesher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRemoteMesher.m; sourceTree = "<group>"; };
 		26BC15B619321D280020AD2B /* AMMesherTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMMesherTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		26BC15BA19321D280020AD2B /* AMMesherTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMMesherTest-Info.plist"; sourceTree = "<group>"; };
-		26BC15BC19321D280020AD2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		26BC15BE19321D280020AD2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		26BC15C019321D280020AD2B /* AMMesherTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMMesherTest-Prefix.pch"; sourceTree = "<group>"; };
-		26BC15C219321D280020AD2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		26BC15C419321D280020AD2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		26BC15C519321D280020AD2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		26BC15C819321D280020AD2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		26BC15CA19321D280020AD2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		26BC15E41932E5860020AD2B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
 		26F2BF4B18FCB61000DD04A6 /* AMLeaderElecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLeaderElecter.h; sourceTree = "<group>"; };
 		26F2BF4C18FCB61000DD04A6 /* AMLeaderElecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLeaderElecter.m; sourceTree = "<group>"; };
@@ -119,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				2692CD5B18D7C2A2006501C4 /* AMMesher */,
-				26BC15B819321D280020AD2B /* AMMesherTest */,
 				2692CD5418D7C2A2006501C4 /* Frameworks */,
 				2692CD5318D7C2A2006501C4 /* Products */,
 			);
@@ -185,30 +169,6 @@
 				2692CD8C18D7C325006501C4 /* InfoPlist.strings */,
 				2692CD8818D7C31B006501C4 /* AMMesher-Info.plist */,
 				2692CD8918D7C31B006501C4 /* AMMesher-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		26BC15B819321D280020AD2B /* AMMesherTest */ = {
-			isa = PBXGroup;
-			children = (
-				26BC15C419321D280020AD2B /* AppDelegate.h */,
-				26BC15C519321D280020AD2B /* AppDelegate.m */,
-				26BC15C719321D280020AD2B /* MainMenu.xib */,
-				26BC15CA19321D280020AD2B /* Images.xcassets */,
-				26BC15B919321D280020AD2B /* Supporting Files */,
-			);
-			path = AMMesherTest;
-			sourceTree = "<group>";
-		};
-		26BC15B919321D280020AD2B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				26BC15BA19321D280020AD2B /* AMMesherTest-Info.plist */,
-				26BC15BB19321D280020AD2B /* InfoPlist.strings */,
-				26BC15BE19321D280020AD2B /* main.m */,
-				26BC15C019321D280020AD2B /* AMMesherTest-Prefix.pch */,
-				26BC15C119321D280020AD2B /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -308,10 +268,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26BC15BD19321D280020AD2B /* InfoPlist.strings in Resources */,
-				26BC15CB19321D280020AD2B /* Images.xcassets in Resources */,
-				26BC15C319321D280020AD2B /* Credits.rtf in Resources */,
-				26BC15C919321D280020AD2B /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,8 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26BC15C619321D280020AD2B /* AppDelegate.m in Sources */,
-				26BC15BF19321D280020AD2B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,30 +302,6 @@
 				2692CD8D18D7C325006501C4 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		26BC15BB19321D280020AD2B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26BC15BC19321D280020AD2B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		26BC15C119321D280020AD2B /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26BC15C219321D280020AD2B /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		26BC15C719321D280020AD2B /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26BC15C819321D280020AD2B /* Base */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -10,11 +10,6 @@
 		2692CDF218D7CEC8006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CDF118D7CEC8006501C4 /* Cocoa.framework */; };
 		2692CDFC18D7CEC8006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CDFA18D7CEC8006501C4 /* InfoPlist.strings */; };
 		2692CE0018D7CEC8006501C4 /* AMNetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CDFF18D7CEC8006501C4 /* AMNetworkUtils.m */; };
-		2692CE0718D7CEC8006501C4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE0618D7CEC8006501C4 /* XCTest.framework */; };
-		2692CE0818D7CEC8006501C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CDF118D7CEC8006501C4 /* Cocoa.framework */; };
-		2692CE0B18D7CEC8006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CDEE18D7CEC8006501C4 /* AMNetworkUtils.framework */; };
-		2692CE1118D7CEC8006501C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */; };
-		2692CE1318D7CEC8006501C4 /* AMNetworkUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */; };
 		2692CE1E18D7CFEA006501C4 /* AMNetworkUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		269C3338197CE28900AF86AA /* AMHttpSyncRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 269C3334197CE28900AF86AA /* AMHttpSyncRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		269C3339197CE28900AF86AA /* AMHttpSyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 269C3335197CE28900AF86AA /* AMHttpSyncRequest.m */; };
@@ -32,16 +27,6 @@
 		26F07AC9198F85ED009C72D6 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F07AC7198F85ED009C72D6 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2692CE0918D7CEC8006501C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2692CDE518D7CEC7006501C4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2692CDED18D7CEC8006501C4;
-			remoteInfo = AMNetworkUtils;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2692CDEE18D7CEC8006501C4 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMNetworkUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CDF118D7CEC8006501C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -53,11 +38,7 @@
 		2692CDFD18D7CEC8006501C4 /* AMNetworkUtils-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMNetworkUtils-Prefix.pch"; sourceTree = "<group>"; };
 		2692CDFE18D7CEC8006501C4 /* AMNetworkUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMNetworkUtils.h; sourceTree = "<group>"; };
 		2692CDFF18D7CEC8006501C4 /* AMNetworkUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNetworkUtils.m; sourceTree = "<group>"; };
-		2692CE0518D7CEC8006501C4 /* AMNetworkUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMNetworkUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2692CE0618D7CEC8006501C4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2692CE0E18D7CEC8006501C4 /* AMNetworkUtilsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMNetworkUtilsTests-Info.plist"; sourceTree = "<group>"; };
-		2692CE1018D7CEC8006501C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNetworkUtilsTests.m; sourceTree = "<group>"; };
 		269C3334197CE28900AF86AA /* AMHttpSyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpSyncRequest.h; sourceTree = "<group>"; };
 		269C3335197CE28900AF86AA /* AMHttpSyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHttpSyncRequest.m; sourceTree = "<group>"; };
 		269C3336197CE28900AF86AA /* AMHttpAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHttpAsyncRequest.h; sourceTree = "<group>"; };
@@ -83,16 +64,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2692CE0218D7CEC8006501C4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2692CE0B18D7CEC8006501C4 /* AMNetworkUtils.framework in Frameworks */,
-				2692CE0818D7CEC8006501C4 /* Cocoa.framework in Frameworks */,
-				2692CE0718D7CEC8006501C4 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				2692CDF718D7CEC8006501C4 /* AMNetworkUtils */,
-				2692CE0C18D7CEC8006501C4 /* AMNetworkUtilsTests */,
 				2692CDF018D7CEC8006501C4 /* Frameworks */,
 				2692CDEF18D7CEC8006501C4 /* Products */,
 			);
@@ -110,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				2692CDEE18D7CEC8006501C4 /* AMNetworkUtils.framework */,
-				2692CE0518D7CEC8006501C4 /* AMNetworkUtilsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,24 +138,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2692CE0C18D7CEC8006501C4 /* AMNetworkUtilsTests */ = {
-			isa = PBXGroup;
-			children = (
-				2692CE1218D7CEC8006501C4 /* AMNetworkUtilsTests.m */,
-				2692CE0D18D7CEC8006501C4 /* Supporting Files */,
-			);
-			path = AMNetworkUtilsTests;
-			sourceTree = "<group>";
-		};
-		2692CE0D18D7CEC8006501C4 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2692CE0E18D7CEC8006501C4 /* AMNetworkUtilsTests-Info.plist */,
-				2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -226,24 +177,6 @@
 			productReference = 2692CDEE18D7CEC8006501C4 /* AMNetworkUtils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2692CE0418D7CEC8006501C4 /* AMNetworkUtilsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2692CE1918D7CEC8006501C4 /* Build configuration list for PBXNativeTarget "AMNetworkUtilsTests" */;
-			buildPhases = (
-				2692CE0118D7CEC8006501C4 /* Sources */,
-				2692CE0218D7CEC8006501C4 /* Frameworks */,
-				2692CE0318D7CEC8006501C4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2692CE0A18D7CEC8006501C4 /* PBXTargetDependency */,
-			);
-			name = AMNetworkUtilsTests;
-			productName = AMNetworkUtilsTests;
-			productReference = 2692CE0518D7CEC8006501C4 /* AMNetworkUtilsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -252,11 +185,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = AM;
-				TargetAttributes = {
-					2692CE0418D7CEC8006501C4 = {
-						TestTargetID = 2692CDED18D7CEC8006501C4;
-					};
-				};
 			};
 			buildConfigurationList = 2692CDE818D7CEC7006501C4 /* Build configuration list for PBXProject "AMNetworkUtils" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -271,7 +199,6 @@
 			projectRoot = "";
 			targets = (
 				2692CDED18D7CEC8006501C4 /* AMNetworkUtils */,
-				2692CE0418D7CEC8006501C4 /* AMNetworkUtilsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -282,14 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2692CDFC18D7CEC8006501C4 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2692CE0318D7CEC8006501C4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2692CE1118D7CEC8006501C4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,37 +230,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2692CE0118D7CEC8006501C4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2692CE1318D7CEC8006501C4 /* AMNetworkUtilsTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2692CE0A18D7CEC8006501C4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2692CDED18D7CEC8006501C4 /* AMNetworkUtils */;
-			targetProxy = 2692CE0918D7CEC8006501C4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2692CDFA18D7CEC8006501C4 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2692CDFB18D7CEC8006501C4 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2692CE0F18D7CEC8006501C4 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2692CE1018D7CEC8006501C4 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -457,46 +352,6 @@
 			};
 			name = Release;
 		};
-		2692CE1A18D7CEC8006501C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMNetworkUtils.framework/Versions/A/AMNetworkUtils";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMNetworkUtils/AMNetworkUtils-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMNetworkUtilsTests/AMNetworkUtilsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		2692CE1B18D7CEC8006501C4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMNetworkUtils.framework/Versions/A/AMNetworkUtils";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMNetworkUtils/AMNetworkUtils-Prefix.pch";
-				INFOPLIST_FILE = "AMNetworkUtilsTests/AMNetworkUtilsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -514,15 +369,6 @@
 			buildConfigurations = (
 				2692CE1718D7CEC8006501C4 /* Debug */,
 				2692CE1818D7CEC8006501C4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2692CE1918D7CEC8006501C4 /* Build configuration list for PBXNativeTarget "AMNetworkUtilsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2692CE1A18D7CEC8006501C4 /* Debug */,
-				2692CE1B18D7CEC8006501C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

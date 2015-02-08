@@ -368,9 +368,6 @@
 		37C23182187A8FFD00554AFD /* AMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAppDelegate.m; sourceTree = "<group>"; };
 		37C23185187A8FFD00554AFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		37C23187187A8FFD00554AFD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoUITests-Info.plist"; sourceTree = "<group>"; };
-		37C23197187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37C23199187A8FFD00554AFD /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		4A32A0F71A7220B1006FEDD7 /* AMGroupCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMGroupCreateViewController.h; path = ProfilePanel/AMGroupCreateViewController.h; sourceTree = "<group>"; };
 		4A32A0F81A7220B1006FEDD7 /* AMGroupCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMGroupCreateViewController.m; path = ProfilePanel/AMGroupCreateViewController.m; sourceTree = "<group>"; };
 		4A32A0F91A7220B1006FEDD7 /* AMGroupCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMGroupCreateViewController.xib; path = ProfilePanel/AMGroupCreateViewController.xib; sourceTree = "<group>"; };
@@ -831,7 +828,6 @@
 				2686C35C19DA4E9200352DFF /* LocalServer */,
 				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
-				37C23193187A8FFD00554AFD /* DemoUITests */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
 				37C2316D187A8FFD00554AFD /* Products */,
 				F353201534CF41128CA1E7AA /* Pods.xcconfig */,
@@ -922,24 +918,6 @@
 				37C2317B187A8FFD00554AFD /* main.m */,
 				37C2317D187A8FFD00554AFD /* Artsmesh-Prefix.pch */,
 				37C2317E187A8FFD00554AFD /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		37C23193187A8FFD00554AFD /* DemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				37C23199187A8FFD00554AFD /* DemoUITests.m */,
-				37C23194187A8FFD00554AFD /* Supporting Files */,
-			);
-			path = DemoUITests;
-			sourceTree = "<group>";
-		};
-		37C23194187A8FFD00554AFD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				37C23195187A8FFD00554AFD /* DemoUITests-Info.plist */,
-				37C23196187A8FFD00554AFD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1549,14 +1527,6 @@
 				37C23185187A8FFD00554AFD /* Base */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		37C23196187A8FFD00554AFD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37C23197187A8FFD00554AFD /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

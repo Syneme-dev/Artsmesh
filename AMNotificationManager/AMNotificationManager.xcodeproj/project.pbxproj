@@ -9,27 +9,11 @@
 /* Begin PBXBuildFile section */
 		37EF81851880CC0300FE7944 /* AMNotificationMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 37EF81831880CC0300FE7944 /* AMNotificationMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37EF81861880CC0300FE7944 /* AMNotificationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EF81841880CC0300FE7944 /* AMNotificationMessage.m */; };
-		37EF81871880CC0300FE7944 /* AMNotificationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EF81841880CC0300FE7944 /* AMNotificationMessage.m */; };
 		37EF81891880CE5F00FE7944 /* AMNotificationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37FCB97818710E8600C1FD1B /* AMNotificationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37FCB96C18710E8600C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB96B18710E8600C1FD1B /* Cocoa.framework */; };
 		37FCB97618710E8600C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB97418710E8600C1FD1B /* InfoPlist.strings */; };
 		37FCB97A18710E8600C1FD1B /* AMNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB97918710E8600C1FD1B /* AMNotificationManager.m */; };
-		37FCB98118710E8600C1FD1B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB98018710E8600C1FD1B /* XCTest.framework */; };
-		37FCB98218710E8600C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB96B18710E8600C1FD1B /* Cocoa.framework */; };
-		37FCB98518710E8600C1FD1B /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB96818710E8600C1FD1B /* AMNotificationManager.framework */; };
-		37FCB98B18710E8600C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB98918710E8600C1FD1B /* InfoPlist.strings */; };
-		37FCB98D18710E8600C1FD1B /* AMNotificationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB98C18710E8600C1FD1B /* AMNotificationManagerTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		37FCB98318710E8600C1FD1B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37FCB95F18710E8600C1FD1B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37FCB96718710E8600C1FD1B;
-			remoteInfo = AMNotificationManager;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		37EF81831880CC0300FE7944 /* AMNotificationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNotificationMessage.h; sourceTree = "<group>"; };
@@ -44,11 +28,7 @@
 		37FCB97718710E8600C1FD1B /* AMNotificationManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMNotificationManager-Prefix.pch"; sourceTree = "<group>"; };
 		37FCB97818710E8600C1FD1B /* AMNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMNotificationManager.h; sourceTree = "<group>"; };
 		37FCB97918710E8600C1FD1B /* AMNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNotificationManager.m; sourceTree = "<group>"; };
-		37FCB97F18710E8600C1FD1B /* AMNotificationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMNotificationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB98018710E8600C1FD1B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		37FCB98818710E8600C1FD1B /* AMNotificationManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMNotificationManagerTests-Info.plist"; sourceTree = "<group>"; };
-		37FCB98A18710E8600C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37FCB98C18710E8600C1FD1B /* AMNotificationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMNotificationManagerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,16 +40,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37FCB97C18710E8600C1FD1B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37FCB98218710E8600C1FD1B /* Cocoa.framework in Frameworks */,
-				37FCB98118710E8600C1FD1B /* XCTest.framework in Frameworks */,
-				37FCB98518710E8600C1FD1B /* AMNotificationManager.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -77,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				37FCB97118710E8600C1FD1B /* AMNotificationManager */,
-				37FCB98618710E8600C1FD1B /* AMNotificationManagerTests */,
 				37FCB96A18710E8600C1FD1B /* Frameworks */,
 				37FCB96918710E8600C1FD1B /* Products */,
 			);
@@ -87,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				37FCB96818710E8600C1FD1B /* AMNotificationManager.framework */,
-				37FCB97F18710E8600C1FD1B /* AMNotificationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,24 +102,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		37FCB98618710E8600C1FD1B /* AMNotificationManagerTests */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB98C18710E8600C1FD1B /* AMNotificationManagerTests.m */,
-				37FCB98718710E8600C1FD1B /* Supporting Files */,
-			);
-			path = AMNotificationManagerTests;
-			sourceTree = "<group>";
-		};
-		37FCB98718710E8600C1FD1B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB98818710E8600C1FD1B /* AMNotificationManagerTests-Info.plist */,
-				37FCB98918710E8600C1FD1B /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -185,24 +135,6 @@
 			productReference = 37FCB96818710E8600C1FD1B /* AMNotificationManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		37FCB97E18710E8600C1FD1B /* AMNotificationManagerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37FCB99318710E8600C1FD1B /* Build configuration list for PBXNativeTarget "AMNotificationManagerTests" */;
-			buildPhases = (
-				37FCB97B18710E8600C1FD1B /* Sources */,
-				37FCB97C18710E8600C1FD1B /* Frameworks */,
-				37FCB97D18710E8600C1FD1B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37FCB98418710E8600C1FD1B /* PBXTargetDependency */,
-			);
-			name = AMNotificationManagerTests;
-			productName = AMNotificationManagerTests;
-			productReference = 37FCB97F18710E8600C1FD1B /* AMNotificationManagerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,11 +143,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Artsmesh;
-				TargetAttributes = {
-					37FCB97E18710E8600C1FD1B = {
-						TestTargetID = 37FCB96718710E8600C1FD1B;
-					};
-				};
 			};
 			buildConfigurationList = 37FCB96218710E8600C1FD1B /* Build configuration list for PBXProject "AMNotificationManager" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -230,7 +157,6 @@
 			projectRoot = "";
 			targets = (
 				37FCB96718710E8600C1FD1B /* AMNotificationManager */,
-				37FCB97E18710E8600C1FD1B /* AMNotificationManagerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -241,14 +167,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB97618710E8600C1FD1B /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37FCB97D18710E8600C1FD1B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37FCB98B18710E8600C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,38 +182,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37FCB97B18710E8600C1FD1B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37EF81871880CC0300FE7944 /* AMNotificationMessage.m in Sources */,
-				37FCB98D18710E8600C1FD1B /* AMNotificationManagerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		37FCB98418710E8600C1FD1B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37FCB96718710E8600C1FD1B /* AMNotificationManager */;
-			targetProxy = 37FCB98318710E8600C1FD1B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		37FCB97418710E8600C1FD1B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37FCB97518710E8600C1FD1B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		37FCB98918710E8600C1FD1B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37FCB98A18710E8600C1FD1B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -404,46 +297,6 @@
 			};
 			name = Release;
 		};
-		37FCB99418710E8600C1FD1B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMNotificationManager.framework/Versions/A/AMNotificationManager";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMNotificationManager/AMNotificationManager-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMNotificationManagerTests/AMNotificationManagerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		37FCB99518710E8600C1FD1B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMNotificationManager.framework/Versions/A/AMNotificationManager";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMNotificationManager/AMNotificationManager-Prefix.pch";
-				INFOPLIST_FILE = "AMNotificationManagerTests/AMNotificationManagerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -461,15 +314,6 @@
 			buildConfigurations = (
 				37FCB99118710E8600C1FD1B /* Debug */,
 				37FCB99218710E8600C1FD1B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37FCB99318710E8600C1FD1B /* Build configuration list for PBXNativeTarget "AMNotificationManagerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37FCB99418710E8600C1FD1B /* Debug */,
-				37FCB99518710E8600C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

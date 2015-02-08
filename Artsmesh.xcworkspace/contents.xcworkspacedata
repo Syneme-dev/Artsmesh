@@ -20,9 +20,6 @@
          location = "group:AMAudio/AMAudio.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:AMTimer/AMTimer.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:AMStatusNet/AMStatusNet.xcodeproj">
       </FileRef>
       <FileRef

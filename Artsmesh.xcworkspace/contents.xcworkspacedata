@@ -3,21 +3,31 @@
    version = "1.0">
    <Group
       location = "container:"
-      name = "Sample">
-      <Group
-         location = "group:Sample/DemoUI/../.."
-         name = "Plugin">
-         <FileRef
-            location = "group:Sample/AMHelloWorldPlugin/AMHelloWorldPlugin.xcodeproj">
-         </FileRef>
-      </Group>
+      name = "Artsmesh">
       <FileRef
          location = "group:Sample/DemoUI/DemoUI.xcodeproj">
       </FileRef>
-   </Group>
-   <Group
-      location = "container:"
-      name = "Utilities">
+      <FileRef
+         location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMPreferenceManager/AMPreferenceManager.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMOSCGroups/AMOSCGroups.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMAudio/AMAudio.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMTimer/AMTimer.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMStatusNet/AMStatusNet.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:AMMesher/AMMesher.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:AMCommonTools/AMCommonTools.xcodeproj">
       </FileRef>
@@ -39,49 +49,6 @@
       <FileRef
          location = "group:AMNetworkUtils/AMNetworkUtils.xcodeproj">
       </FileRef>
-   </Group>
-   <Group
-      location = "container:"
-      name = "Plugins">
-      <Group
-         location = "container:"
-         name = "Module">
-         <FileRef
-            location = "group:AMOSCGroups/AMOSCGroups.xcodeproj">
-         </FileRef>
-         <FileRef
-            location = "group:AMAudio/AMAudio.xcodeproj">
-         </FileRef>
-         <FileRef
-            location = "group:AMTimer/AMTimer.xcodeproj">
-         </FileRef>
-         <FileRef
-            location = "group:AMStatusNet/AMStatusNet.xcodeproj">
-         </FileRef>
-         <FileRef
-            location = "group:AMMesher/AMMesher.xcodeproj">
-         </FileRef>
-      </Group>
-   </Group>
-   <Group
-      location = "container:"
-      name = "Core Service">
-      <FileRef
-         location = "group:AMNetworkService/AMNetworkService.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:AMPluginLoader/AMPluginLoader.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:AMPreferenceManager/AMPreferenceManager.xcodeproj">
-      </FileRef>
-   </Group>
-   <Group
-      location = "container:"
-      name = "Database">
       <FileRef
          location = "group:AMCoreData/AMCoreData.xcodeproj">
       </FileRef>

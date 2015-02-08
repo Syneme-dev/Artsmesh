@@ -729,6 +729,26 @@
     return panelViewController;
 }
 
+
+-(void)createPanel:(NSString *)panelId withTitle:(NSString *)title relateView:(NSView *)view size:(NSSize)panelSize minSize:(NSSize)minSize
+           maxSize: (NSSize) maxSize nibName:(NSString *)nibName
+{
+    AMPanelViewController *panelViewController = [self createPanel:panelId
+                                                         withTitle:title
+                                                             width:panelSize.width
+                                                            height:panelSize.height
+                                                       relatedView:view];
+    panelViewController.panelType = AMNetworkToolsPanelType;
+    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
+    panelView.minSizeConstraint = minSize;
+    NSViewController *viewController = [[NSViewController alloc] initWithNibName:nibName bundle:nil];
+    panelViewController.subViewController = viewController;
+    viewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 600, 380);
+    [panelView addSubview:viewController.view];
+    [self fillPanel:panelViewController content:viewController];
+}
+
+
 - (AMPanelViewController *)loadNetworkToolsPanel:(NSString *)panelId relatedView:(NSView*)view{
     return [self createNetworkToolsPanelController:panelId withTitle:@"NETWORK TOOLS"relatedView:view];
 }

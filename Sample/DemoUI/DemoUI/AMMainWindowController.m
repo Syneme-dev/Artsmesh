@@ -20,7 +20,6 @@
 #import "AMNetworkToolsViewController.h"
 #import "UIFramework/AMBox.h"
 #import "UIFramework/AMPanelView.h"
-#import "AMTestViewController.h"
 #import "AMMixingViewController.h"
 #import "AMVisualViewController.h"
 #import "AMMapViewController.h"
@@ -537,12 +536,12 @@
 }
 
 
-- (AMPanelViewController *)loadTestPanel {
-    AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
-    AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
-    [self fillPanel:panelViewController content:testViewController];
-    return panelViewController;
-}
+//- (AMPanelViewController *)loadTestPanel {
+//    AMPanelViewController *panelViewController = [self createPanel:@"TEST_PANEL" withTitle:@"test"];
+//    AMTestViewController *testViewController = [[AMTestViewController alloc] initWithNibName:@"AMTestView" bundle:nil];
+//    [self fillPanel:panelViewController content:testViewController];
+//    return panelViewController;
+//}
 
 
 - (AMPanelViewController *)loadMapPanel:(NSString *)panelId relatedView:(NSView*)view{

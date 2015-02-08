@@ -17,10 +17,6 @@
    </Group>
    <Group
       location = "container:"
-      name = "DocumentKit">
-   </Group>
-   <Group
-      location = "container:"
       name = "Utilities">
       <FileRef
          location = "group:AMCommonTools/AMCommonTools.xcodeproj">
@@ -46,18 +42,7 @@
    </Group>
    <Group
       location = "container:"
-      name = "UI">
-      <FileRef
-         location = "group:Artsmesh/Artsmesh.xcodeproj">
-      </FileRef>
-   </Group>
-   <Group
-      location = "container:"
       name = "Plugins">
-      <Group
-         location = "container:"
-         name = "Package">
-      </Group>
       <Group
          location = "container:"
          name = "Module">

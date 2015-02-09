@@ -45,6 +45,11 @@
     return [self.groupData broadcasting];
 }
 
+-(BOOL)isLocked
+{
+    return [self.groupData busy];
+}
+
 -(BOOL)canLeave
 {
     AMLiveGroup *localGroup = [AMCoreData shareInstance].myLocalLiveGroup;

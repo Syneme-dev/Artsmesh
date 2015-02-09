@@ -11,6 +11,7 @@
 @interface AMGroupCellContentView : AMOutlineCellContentView
 
 @property NSImageView *broadcastIcon;
+@property NSImageView *lockedIcon;
 @property NSButton *infoBtn;
 @property NSButton *mergeBtn;
 @property NSButton *leaveBtn;
@@ -21,6 +22,7 @@
 @protocol AMGroupCellContentViewDataSource <AMOutlineCellContentViewDataSource>
 
 -(BOOL)isBroadcasting;
+-(BOOL)isLocked;
 -(BOOL)canMerge;
 -(BOOL)canLeave;
 

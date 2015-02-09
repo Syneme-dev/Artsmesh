@@ -32,6 +32,8 @@
         
         self.broadcastIcon = [self setFirstIconWithImage:
                               [NSImage imageNamed:@"group_broadcast"]];
+        self.lockedIcon = [self setSecondIconWithImage:
+                           [NSImage imageNamed:@"group_lock_icon"]];
         
     }
     
@@ -55,6 +57,12 @@
         [self.broadcastIcon setHidden:NO];
     }else{
         [self.broadcastIcon setHidden:YES];
+    }
+    
+    if ([self.dataSource isLocked]) {
+        [self.lockedIcon setHidden:NO];
+    }else{
+        [self.lockedIcon setHidden:YES];
     }
     
     if ([self.dataSource canLeave]) {

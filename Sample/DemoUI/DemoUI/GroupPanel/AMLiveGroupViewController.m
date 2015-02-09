@@ -214,6 +214,10 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
+    if([[item title] isEqualTo:@"Artsmesh"]){
+        return YES;
+    }
+    
     long i =  [self outlineView:outlineView numberOfChildrenOfItem:item];
     return i > 0;
 }
@@ -301,8 +305,8 @@
             rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
         }
     }else if([[item title] isEqualTo:@"Artsmesh"]){
-        rowView.headImage = [NSImage imageNamed:@"group_online"];
-        rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+        rowView.headImage = [NSImage imageNamed:@"group_offline"];
+        rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
     }
     
     return rowView;

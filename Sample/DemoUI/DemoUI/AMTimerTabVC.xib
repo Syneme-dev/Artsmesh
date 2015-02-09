@@ -259,7 +259,7 @@
                     </connections>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iH4-LO-rUe" customClass="AMPopUpView">
-                    <rect key="frame" x="625" y="585" width="117" height="26"/>
+                    <rect key="frame" x="625" y="585" width="76" height="26"/>
                 </customView>
             </subviews>
             <constraints>

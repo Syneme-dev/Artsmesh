@@ -73,7 +73,7 @@ typedef enum : NSInteger {
     self.addButton.attributedTitle = attributedTitle;
     self.timerState = AMTimerStateStopped;
     self.modePopup.delegate = self;
-    [self.modePopup addItemsWithTitles:@[ @"Countdown", @"Duration", @"Relative", @"Absolute" ]];
+    [self.modePopup addItemsWithTitles:@[ @"CNT", @"DUR", @"REL", @"ABS" ]];
     [self.modePopup selectItemAtIndex:1];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleOSCMessage:)

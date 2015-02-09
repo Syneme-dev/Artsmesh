@@ -263,9 +263,15 @@
         if (groupItem.groupData.busy) {
             rowView.headImage = [NSImage imageNamed:@"group_lock"];
             rowView.alterHeadImage = [NSImage imageNamed:@"group_lock_expanded"];
-        }else{
+            
+        }else if(groupItem.groupData.isMeshed){
+            rowView.headImage = [NSImage imageNamed:@"group_online"];
+            rowView.alterHeadImage = [NSImage imageNamed:@"group_online_expanded"];
+            
+        }else {
             rowView.headImage = [NSImage imageNamed:@"group_offline"];
             rowView.alterHeadImage = [NSImage imageNamed:@"group_offline_expanded"];
+            
         }
     }
     

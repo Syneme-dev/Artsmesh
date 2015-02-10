@@ -69,6 +69,7 @@
 -(void)goOnline
 {
     if (self.clusterState != kClusterStarted) {
+        AMLog(kAMErrorLog, @"AMMehseh", @"Can not mesh, because local group failed!");
         return;
     }
     

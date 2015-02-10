@@ -258,6 +258,11 @@
                                              returningResponse:nil error:nil];
     
     NSError *jsonParsingError = nil;
+    
+    if (response == nil) {
+        return nil;
+    }
+    
     NSArray *geoData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
     
     if(jsonParsingError != nil){

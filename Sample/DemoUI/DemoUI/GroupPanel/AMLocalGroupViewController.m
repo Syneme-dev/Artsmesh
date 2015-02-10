@@ -144,7 +144,7 @@
 }
 
 
-#pragma mark NSOutlineViewDataSource
+#pragma mark NSOutlineViewDataSource & delegate
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
     if (item == nil) {

@@ -148,7 +148,7 @@
 }
 
 
--(void)autoHideBtn:(NSButton *)btn
+-(void)addAutoHideBtn:(NSButton *)btn
 {
     if (btn) {
         if (self.autoHideBtns == nil) {
@@ -170,7 +170,7 @@
 {
     NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
     self.btn0.image = btnImage;
-    [self autoHideBtn:self.btn0];
+    [self addAutoHideBtn:self.btn0];
     
     return self.btn0;
 }
@@ -180,7 +180,7 @@
 {
     NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
     self.btn1.image = btnImage;
-    [self autoHideBtn:self.btn1];
+    [self addAutoHideBtn:self.btn1];
     
     return self.btn1;
 }
@@ -190,7 +190,7 @@
 {
     NSImage *btnImage = [self resizeImage:image size:NSMakeSize(20, 20)];
     self.btn2.image = btnImage;
-    [self autoHideBtn:self.btn2];
+    [self addAutoHideBtn:self.btn2];
     
     return self.btn2;
 }

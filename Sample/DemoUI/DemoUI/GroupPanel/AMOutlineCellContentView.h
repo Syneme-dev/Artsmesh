@@ -19,7 +19,7 @@
 -(void)updateUI;
 
 //For subclass
--(void)autoHideBtn:(NSButton *)btn;
+-(void)addAutoHideBtn:(NSButton *)btn;
 -(void)removeAutoHideBtn:(NSButton *)btn;
 -(NSButton *)setFirstBtnWithImage:(NSImage *)image;
 -(NSButton *)setSecondBtnWithImage:(NSImage *)image;

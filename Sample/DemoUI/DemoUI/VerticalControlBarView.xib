@@ -210,7 +210,7 @@
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKV-FK-XmV" userLabel="G+" customClass="BlueBackgroundView">
                     <rect key="frame" x="0.0" y="56" width="40" height="40"/>
                     <subviews>
-                        <button identifier="GPLUS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LKX-kJ-TAm" userLabel="G+">
+                        <button identifier="BROADCAST" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LKX-kJ-TAm" userLabel="G+">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="menu_broadcast_icon" imagePosition="only" alignment="center" alternateImage="menu_broadcast_icon_h" imageScaling="proportionallyDown" inset="2" id="3qe-6s-Vmx">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>

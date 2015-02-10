@@ -66,7 +66,7 @@
 #define UI_Panel_Key_MusicScore @"MUSICSCORE_PANEL"
 #define UI_Panel_Key_MainOutput @"MAINOUTPUT_PANEL"
 
-#define UI_Panel_Key_GPlus @"GPLUS_PANEL"
+#define UI_Panel_Key_Broadcast @"BROADCAST_PANEL"
 #define UI_Panel_Key_Manual @"MANUAL_PANEL"
 
 @interface AMMainWindowController ()
@@ -823,9 +823,9 @@
     else if ([panelType isEqualToString:UI_Panel_Key_Timer]) {
         panelViewController = [self loadTimerPanel:panelId relatedView:relatedView];
     }
-    else if ([panelType isEqualToString:UI_Panel_Key_GPlus]) {
+    else if ([panelType isEqualToString:UI_Panel_Key_Broadcast]) {
         panelViewController = [self loadGPlusPanel:panelId relatedView:relatedView];
-        NSLog(@"UI_Panel_Key_GPlus");
+        NSLog(@"UI_Panel_Key_Broadcast");
     }
     else if ([panelType isEqualToString:UI_Panel_Key_Manual]) {
         panelViewController = [self loadManualPanel:panelId relatedView:relatedView];

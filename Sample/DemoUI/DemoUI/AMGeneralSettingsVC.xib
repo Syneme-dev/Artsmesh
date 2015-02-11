@@ -37,6 +37,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="sxY-kL-goD" name="value" keyPath="values.Preference_Key_General_ChatPort" id="wVQ-Kh-QaY"/>
+                    </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gHL-MM-mq4" userLabel="GlobalServerPort" customClass="AMFoundryFontView">
                     <rect key="frame" x="427" y="558" width="155" height="17"/>
@@ -48,6 +51,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="sxY-kL-goD" name="value" keyPath="values.Preference_Key_General_GlobalServerPort" id="yhc-KF-a5e"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2ig-gj-Xpi" customClass="AMFoundryFontView">
                     <rect key="frame" x="30" y="558" width="93" height="17"/>
@@ -259,6 +265,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="sxY-kL-goD" name="value" keyPath="values.Preference_Key_General_GlobalServerAddr" id="bFv-ye-Q4D"/>
+                    </connections>
                 </textField>
                 <box hidden="YES" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="3T0-KQ-1cP">
                     <rect key="frame" x="304" y="263" width="5" height="480"/>
@@ -280,6 +289,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="sxY-kL-goD" name="value" keyPath="values.Preference_Key_General_LocalServerPort" id="Vr2-a5-nOR"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="50M-UT-vqf" customClass="AMFoundryFontView">
                     <rect key="frame" x="30" y="480" width="85" height="17"/>
@@ -391,7 +403,9 @@
                 <constraint firstItem="n9h-WK-zPR" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="y5H-20-oW2"/>
                 <constraint firstItem="Qxa-1w-5iZ" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="ydW-fJ-xyo"/>
             </constraints>
+            <point key="canvasLocation" x="174" y="347"/>
         </view>
+        <userDefaultsController representsSharedInstance="YES" id="sxY-kL-goD"/>
     </objects>
     <resources>
         <image name="label_bar" width="6" height="30"/>

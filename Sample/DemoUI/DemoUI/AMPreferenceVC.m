@@ -7,19 +7,7 @@
 //
 
 #import "AMPreferenceVC.h"
-#import "AMNetworkUtils/AMNetworkUtils.h"
-#import "AMPreferenceManager/AMPreferenceManager.h"
-#import <UIFramework/AMButtonHandler.h>
-#import <UIFramework/AMCheckBoxView.h>
-#import <AMCommonTools/AMCommonTools.h>
-#import <AMStatusNet/AMStatusNet.h>
-#import "AMAppDelegate.h"
-#import "AMAudio/AMAudio.h"
-#import "AMOSCGroups/AMOSCGroups.h"
-#import "AMJacktripSettingsVC.h"
-#import "UIFramework/AMFoundryFontView.h"
-#import "AMMesher/AMMesher.h"
-
+#import "UIFramework/AMButtonHandler.h"
 #import "AMJackSettingsVC.h"
 #import "AMStatusNetSettingsVC.h"
 #import "AMOSCGroupSettingsVC.h"
@@ -28,7 +16,7 @@
 #import "UIFramework/NSView_Constrains.h"
 
 
-@interface AMPreferenceVC ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
+@interface AMPreferenceVC ()
 @end
 
 @implementation AMPreferenceVC
@@ -156,12 +144,6 @@
 -(void)registerTabButtons
 {
     super.tabs=self.tabs;
-//    self.tabButtons =[[NSMutableArray alloc]init];
-//    [self.tabButtons addObject:self.generalTabButton];
-//    [self.tabButtons addObject:self.postStatusMessageButton];
-//    self.showingTabsCount=2;
-    
-    super.tabs=self.tabs;
     self.tabButtons =[[NSMutableArray alloc]init];
     [self.tabButtons addObject:self.generalTabBtn];
     [self.tabButtons addObject:self.jackTabBtn];
@@ -198,11 +180,6 @@
     [self pushDownButton:self.statusnetTabButton];
     [self.tabs selectTabViewItemWithIdentifier:@"5"];
 }
-
-
-
-
-
 
 
 @end

@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMJacktripSettings : NSViewController
+@interface AMJacktripSettingsVC : NSViewController
 
 @end

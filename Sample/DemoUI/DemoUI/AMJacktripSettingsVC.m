@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMJacktripSettings.h"
+#import "AMJacktripSettingsVC.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMPopUpView.h"
@@ -14,7 +14,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 
 
-@interface AMJacktripSettings ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
+@interface AMJacktripSettingsVC ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet AMPopUpView *roleCombo;
 @property (weak) IBOutlet AMFoundryFontView *channelCountField;
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation AMJacktripSettings
+@implementation AMJacktripSettingsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -660,7 +660,6 @@
     AMPreferenceVC *preferenceViewController = [[AMPreferenceVC alloc] initWithNibName:@"AMPreferenceVC" bundle:nil];
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController content:preferenceViewController];
-    [preferenceViewController loadSystemInfo];
     [preferenceView setTranslatesAutoresizingMaskIntoConstraints:NO];
     return panelViewController;
 }

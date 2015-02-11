@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		013A56EE1A5A64EE001D319F /* AMJacktripSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 013A56EC1A5A64EE001D319F /* AMJacktripSettings.m */; };
-		013A56EF1A5A64EE001D319F /* AMJacktripSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013A56ED1A5A64EE001D319F /* AMJacktripSettings.xib */; };
+		013A56EE1A5A64EE001D319F /* AMJacktripSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 013A56EC1A5A64EE001D319F /* AMJacktripSettingsVC.m */; };
+		013A56EF1A5A64EE001D319F /* AMJacktripSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */; };
 		01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
 		2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */; };
@@ -74,6 +74,12 @@
 		4A32A12C1A7226B5006FEDD7 /* AMProjectProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A12A1A7226B5006FEDD7 /* AMProjectProfileViewController.xib */; };
 		4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */; };
 		4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */; };
+		4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */; };
+		4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */; };
+		4A45117F1A8B62E6001E7328 /* AMStatusNetSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */; };
+		4A4511801A8B62E6001E7328 /* AMStatusNetSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */; };
+		4A4511841A8B62FB001E7328 /* AMOSCGroupSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */; };
+		4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
 		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -283,9 +289,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		013A56EB1A5A64EE001D319F /* AMJacktripSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripSettings.h; sourceTree = "<group>"; };
-		013A56EC1A5A64EE001D319F /* AMJacktripSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJacktripSettings.m; sourceTree = "<group>"; };
-		013A56ED1A5A64EE001D319F /* AMJacktripSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJacktripSettings.xib; sourceTree = "<group>"; };
+		013A56EB1A5A64EE001D319F /* AMJacktripSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripSettingsVC.h; sourceTree = "<group>"; };
+		013A56EC1A5A64EE001D319F /* AMJacktripSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJacktripSettingsVC.m; sourceTree = "<group>"; };
+		013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJacktripSettingsVC.xib; sourceTree = "<group>"; };
 		01D059B91A2D6A5E00BC51E7 /* AMJackCPULoderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackCPULoderView.h; sourceTree = "<group>"; };
 		01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackCPULoderView.m; sourceTree = "<group>"; };
 		2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTableCellVC.h; sourceTree = "<group>"; };
@@ -387,6 +393,15 @@
 		4A4511721A8B5F62001E7328 /* AMJackSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackSettingsVC.h; sourceTree = "<group>"; };
 		4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackSettingsVC.m; sourceTree = "<group>"; };
 		4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackSettingsVC.xib; sourceTree = "<group>"; };
+		4A4511771A8B629D001E7328 /* AMGeneralSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGeneralSettingsVC.h; sourceTree = "<group>"; };
+		4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGeneralSettingsVC.m; sourceTree = "<group>"; };
+		4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGeneralSettingsVC.xib; sourceTree = "<group>"; };
+		4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatusNetSettingsVC.h; sourceTree = "<group>"; };
+		4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetSettingsVC.m; sourceTree = "<group>"; };
+		4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStatusNetSettingsVC.xib; sourceTree = "<group>"; };
+		4A4511811A8B62FB001E7328 /* AMOSCGroupSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupSettingsVC.h; sourceTree = "<group>"; };
+		4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupSettingsVC.m; sourceTree = "<group>"; };
+		4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCGroupSettingsVC.xib; sourceTree = "<group>"; };
 		4A5071FE1A6B49BE006E09FC /* AMLocalGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalGroupViewController.h; sourceTree = "<group>"; };
 		4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalGroupViewController.m; sourceTree = "<group>"; };
 		4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalGroupViewController.xib; sourceTree = "<group>"; };
@@ -658,12 +673,21 @@
 				D41155E218E9515700C84092 /* AMPreferenceVC.h */,
 				D41155E318E9515700C84092 /* AMPreferenceVC.m */,
 				2692DB8D18E9459600553924 /* AMPreferenceVC.xib */,
-				013A56EB1A5A64EE001D319F /* AMJacktripSettings.h */,
-				013A56EC1A5A64EE001D319F /* AMJacktripSettings.m */,
-				013A56ED1A5A64EE001D319F /* AMJacktripSettings.xib */,
+				013A56EB1A5A64EE001D319F /* AMJacktripSettingsVC.h */,
+				013A56EC1A5A64EE001D319F /* AMJacktripSettingsVC.m */,
+				013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */,
 				4A4511721A8B5F62001E7328 /* AMJackSettingsVC.h */,
 				4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */,
 				4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */,
+				4A4511771A8B629D001E7328 /* AMGeneralSettingsVC.h */,
+				4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */,
+				4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */,
+				4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */,
+				4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */,
+				4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */,
+				4A4511811A8B62FB001E7328 /* AMOSCGroupSettingsVC.h */,
+				4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */,
+				4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */,
 			);
 			name = PreferencePanel;
 			sourceTree = "<group>";
@@ -1251,6 +1275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
+				4A4511801A8B62E6001E7328 /* AMStatusNetSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
 				AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */,
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
@@ -1284,7 +1309,7 @@
 				AF2890DC198A36BC00D05174 /* shot_osc.png in Resources */,
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
 				CE486AAF1A280CB900D35B82 /* AMVideoMixerViewController.xib in Resources */,
-				013A56EF1A5A64EE001D319F /* AMJacktripSettings.xib in Resources */,
+				013A56EF1A5A64EE001D319F /* AMJacktripSettingsVC.xib in Resources */,
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
 				AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */,
@@ -1292,9 +1317,11 @@
 				4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				2DE439C81A37C58700650692 /* new-event.css in Resources */,
+				4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
+				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,
 				4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */,
@@ -1397,9 +1424,11 @@
 				269F93671998F024006E19DD /* AMManualViewController.m in Sources */,
 				4A32A1211A722683006FEDD7 /* AMUserProfielViewController.m in Sources */,
 				2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */,
+				4A4511841A8B62FB001E7328 /* AMOSCGroupSettingsVC.m in Sources */,
 				269FB84D1998816E00355312 /* AMBroadcastViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
+				4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */,
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
@@ -1420,7 +1449,7 @@
 				4AB4ACE91A6E5D2F003ECE24 /* AMArchiveGroupViewController.m in Sources */,
 				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,
-				013A56EE1A5A64EE001D319F /* AMJacktripSettings.m in Sources */,
+				013A56EE1A5A64EE001D319F /* AMJacktripSettingsVC.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
@@ -1440,6 +1469,7 @@
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
 				4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */,
 				4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */,
+				4A45117F1A8B62E6001E7328 /* AMStatusNetSettingsVC.m in Sources */,
 				4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,

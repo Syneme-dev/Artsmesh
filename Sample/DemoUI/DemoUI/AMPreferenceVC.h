@@ -15,29 +15,12 @@
 @interface AMPreferenceVC : AMTabPanelViewController
 @property (retain) IBOutlet NSTabView *tabs;
 
-@property (weak) IBOutlet NSTextField *myMachineNameField;
-@property (weak) IBOutlet NSTextField *statusNetPostTestResult;
-@property (weak) IBOutlet NSButton *testStatusNetPost;
-@property (weak) IBOutlet AMPopUpView *ipPopUpView;
-
-@property (strong) IBOutlet NSButton *generalTabButton;
-@property (strong) IBOutlet NSButton *jackServerTabButton;
+@property (strong) IBOutlet NSButton *generalTabBtn;
+@property (strong) IBOutlet NSButton *jackTabBtn;
+@property (strong) IBOutlet NSButton *jacktripTabBtn;
 @property (weak) IBOutlet NSButton *oscGroupTabBtn;
-
 @property (strong) IBOutlet NSButton *videoTabButton;
-@property (strong) IBOutlet NSButton *audioTabButton;
 @property (strong) IBOutlet NSButton *statusnetTabButton;
-@property (weak) IBOutlet NSButton *postStatusMessageButton;
-@property (weak) IBOutlet AMCheckBoxView *Ipv6checkBox;
-
-- (IBAction)onJackServerTabClick:(id)sender;
-- (IBAction)onGeneralClick:(id)sender;
-- (IBAction)onStatusNetClick:(id)sender;
-
-- (IBAction)statusNetTest:(id)sender;
-
-@property (strong) IBOutlet AMCheckBoxView *isTopControlBarCheckBox;
--(void)loadSystemInfo;
 
 
 @end

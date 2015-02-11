@@ -11,7 +11,7 @@
 #import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPreferenceManager/AMPreferenceManager.h>
-#import "AMETCDPreferenceViewController.h"
+#import "AMPreferenceVC.h"
 #import "AMUserViewController.h"
 #import "AMSocialViewController.h"
 #import <UIFramework/BlueBackgroundView.h>
@@ -657,7 +657,7 @@
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(600.0f, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
-    AMETCDPreferenceViewController *preferenceViewController = [[AMETCDPreferenceViewController alloc] initWithNibName:@"AMETCDPreferenceView" bundle:nil];
+    AMPreferenceVC *preferenceViewController = [[AMPreferenceVC alloc] initWithNibName:@"AMPreferenceVC" bundle:nil];
     NSView *preferenceView = preferenceViewController.view;
     [self fillPanel:panelViewController content:preferenceViewController];
     [preferenceViewController loadSystemInfo];

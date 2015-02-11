@@ -20,7 +20,7 @@
 		268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
-		2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */; };
+		2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMPreferenceVC.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
 		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		269F93671998F024006E19DD /* AMManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F93651998F024006E19DD /* AMManualViewController.m */; };
@@ -214,7 +214,7 @@
 		CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC44196588FD00AFD309 /* AMGroupOutlineRowView.m */; };
 		CEC2FC60196588FD00AFD309 /* AMGroupPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */; };
 		CEC2FC64196588FD00AFD309 /* AMGroupPanelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2FC53196588FD00AFD309 /* AMGroupPanelViewController.xib */; };
-		D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */; };
+		D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E318E9515700C84092 /* AMPreferenceVC.m */; };
 		D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41155E518E9534A00C84092 /* AMPanelViewController.m */; };
 		D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; };
 		D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D472934519A6E8F30034CC34 /* AMAudio.framework */; };
@@ -299,7 +299,7 @@
 		268DA7C3198B99A100F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTimer.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
-		2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMETCDPreferenceView.xib; sourceTree = "<group>"; };
+		2692DB8D18E9459600553924 /* AMPreferenceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPreferenceVC.xib; sourceTree = "<group>"; };
 		269D3430191B1EC40010B540 /* AMChatTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatTableCellView.h; sourceTree = "<group>"; };
 		269D3431191B1EC40010B540 /* AMChatTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatTableCellView.m; sourceTree = "<group>"; };
 		269F93641998F024006E19DD /* AMManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMManualViewController.h; sourceTree = "<group>"; };
@@ -560,8 +560,8 @@
 		CEC2FC4C196588FD00AFD309 /* AMGroupPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPanelViewController.h; sourceTree = "<group>"; };
 		CEC2FC4D196588FD00AFD309 /* AMGroupPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPanelViewController.m; sourceTree = "<group>"; };
 		CEC2FC53196588FD00AFD309 /* AMGroupPanelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGroupPanelViewController.xib; sourceTree = "<group>"; };
-		D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMETCDPreferenceViewController.h; sourceTree = "<group>"; };
-		D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMETCDPreferenceViewController.m; sourceTree = "<group>"; };
+		D41155E218E9515700C84092 /* AMPreferenceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPreferenceVC.h; sourceTree = "<group>"; };
+		D41155E318E9515700C84092 /* AMPreferenceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPreferenceVC.m; sourceTree = "<group>"; };
 		D41155E518E9534A00C84092 /* AMPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelViewController.m; sourceTree = "<group>"; };
 		D432037B1901142E009BDE67 /* AMNetworkUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNetworkUtils.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNetworkUtils.framework; sourceTree = "<group>"; };
 		D447827718CD6BEA00D72C9F /* HelloWorldConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldConst.h; path = ../HelloWorldConst.h; sourceTree = "<group>"; };
@@ -655,9 +655,9 @@
 		269C3347197D00F000AF86AA /* PreferencePanel */ = {
 			isa = PBXGroup;
 			children = (
-				D41155E218E9515700C84092 /* AMETCDPreferenceViewController.h */,
-				D41155E318E9515700C84092 /* AMETCDPreferenceViewController.m */,
-				2692DB8D18E9459600553924 /* AMETCDPreferenceView.xib */,
+				D41155E218E9515700C84092 /* AMPreferenceVC.h */,
+				D41155E318E9515700C84092 /* AMPreferenceVC.m */,
+				2692DB8D18E9459600553924 /* AMPreferenceVC.xib */,
 				013A56EB1A5A64EE001D319F /* AMJacktripSettings.h */,
 				013A56EC1A5A64EE001D319F /* AMJacktripSettings.m */,
 				013A56ED1A5A64EE001D319F /* AMJacktripSettings.xib */,
@@ -1263,7 +1263,7 @@
 				2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */,
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
-				2692DB8E18E9459600553924 /* AMETCDPreferenceView.xib in Resources */,
+				2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */,
 				2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
@@ -1455,7 +1455,7 @@
 				4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */,
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
-				D41155E418E9515700C84092 /* AMETCDPreferenceViewController.m in Sources */,
+				D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */,
 				4A32A12B1A7226B5006FEDD7 /* AMProjectProfileViewController.m in Sources */,
 				CE486AAD1A280CB900D35B82 /* AMVideoMixerBackgroundView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,

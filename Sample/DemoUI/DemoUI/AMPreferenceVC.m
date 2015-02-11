@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMETCDPreferenceViewController.h"
+#import "AMPreferenceVC.h"
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
@@ -25,7 +25,7 @@
 
 
 
-@interface AMETCDPreferenceViewController ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
+@interface AMPreferenceVC ()<AMCheckBoxDelegeate, AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet NSButton *statusNetPostMessage;
 @property (weak) IBOutlet AMCheckBoxView *forceLoalServerIpBox;
@@ -34,7 +34,7 @@
 
 @end
 
-@implementation AMETCDPreferenceViewController
+@implementation AMPreferenceVC
 {
     dispatch_queue_t _preference_queue;
     NSViewController* _oscGroupVC;

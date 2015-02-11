@@ -12,7 +12,7 @@
 #import "AMTabPanelViewController.h"
 
 
-@interface AMETCDPreferenceViewController : AMTabPanelViewController
+@interface AMPreferenceVC : AMTabPanelViewController
 @property (retain) IBOutlet NSTabView *tabs;
 
 @property (weak) IBOutlet NSTextField *myMachineNameField;

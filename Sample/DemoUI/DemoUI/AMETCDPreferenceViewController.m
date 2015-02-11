@@ -19,6 +19,8 @@
 #import "AMJacktripSettings.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMMesher/AMMesher.h"
+#import "AMJackSettingsVC.h"
+#import "UIFramework/NSView_Constrains.h"
 
 
 
@@ -35,9 +37,9 @@
 @implementation AMETCDPreferenceViewController
 {
     dispatch_queue_t _preference_queue;
-    NSViewController* _audioViewController;
-    NSViewController* _oscGroupViewController;
-    NSViewController* _jacktripSettingViewController;
+    NSViewController* _oscGroupVC;
+    NSViewController* _jacktripSettingVC;
+    NSViewController * _jackSettingsVC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,7 +103,7 @@
         if ([view.identifier isEqualTo:@"generalTab"]) {
             ;
         }else if([view.identifier isEqualTo:@"jackServerTab"]){
-            [self loadJackPref:view];
+            [self loadJackSettingsVC:view];
         }else if([view.identifier isEqualTo:@"statusNetTab"]){
             ;
         }else if([view.identifier isEqualTo:@"oscGroupTab"]){
@@ -115,46 +117,32 @@
 
 -(void)loadJacktripTab:(NSView *)tabView
 {
-    _jacktripSettingViewController = [[AMJacktripSettings alloc] initWithNibName:@"AMJacktripSettings" bundle:nil];
-    if (_jacktripSettingViewController) {
-        NSView* contentView = _jacktripSettingViewController.view;
-        [tabView addSubview:contentView];
+    _jacktripSettingVC = [[AMJacktripSettings alloc] initWithNibName:@"AMJacktripSettings" bundle:nil];
+    if (_jacktripSettingVC) {
         
-        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-        [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-        
-        [tabView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
+        [tabView addConstrainsToSubview:_jacktripSettingVC.view
+                           leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
 }
 
-
--(void)loadJackPref:(NSView*)tabView
+-(void)loadJackSettingsVC:(NSView *)tabView
 {
-    _audioViewController = [[AMAudio sharedInstance] getJackPrefUI];
-    if (_audioViewController) {
-        [tabView addSubview:_audioViewController.view];
-        NSRect rect = tabView.bounds;
-        [_audioViewController.view setFrame:rect];
+    if (_jackSettingsVC == nil) {
+        _jackSettingsVC = [[AMJackSettingsVC alloc] init];
+    }
+    
+    if (_jackSettingsVC) {
+        [tabView addConstrainsToSubview:_jackSettingsVC.view
+                           leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
 }
-
 
 -(void)loadOSCGroupPrefView:(NSView*)tabView
 {
-    _oscGroupViewController = [[AMOSCGroups sharedInstance] getOSCPrefUI];
-    if(_oscGroupViewController){
-        [tabView addSubview:_oscGroupViewController.view];
-        NSRect rect = tabView.bounds;
-        [_oscGroupViewController.view setFrame:rect];
+    _oscGroupVC = [[AMOSCGroups sharedInstance] getOSCPrefUI];
+    if(_oscGroupVC){
+        [tabView addConstrainsToSubview:_oscGroupVC.view
+                           leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
 }
 

@@ -72,6 +72,8 @@
 		4A32A1271A72269F006FEDD7 /* AMGroupProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A1251A72269F006FEDD7 /* AMGroupProfileViewController.xib */; };
 		4A32A12B1A7226B5006FEDD7 /* AMProjectProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A32A1291A7226B5006FEDD7 /* AMProjectProfileViewController.m */; };
 		4A32A12C1A7226B5006FEDD7 /* AMProjectProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A32A12A1A7226B5006FEDD7 /* AMProjectProfileViewController.xib */; };
+		4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */; };
+		4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
 		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -382,6 +384,9 @@
 		4A32A1281A7226B5006FEDD7 /* AMProjectProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMProjectProfileViewController.h; path = ProfilePanel/AMProjectProfileViewController.h; sourceTree = "<group>"; };
 		4A32A1291A7226B5006FEDD7 /* AMProjectProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMProjectProfileViewController.m; path = ProfilePanel/AMProjectProfileViewController.m; sourceTree = "<group>"; };
 		4A32A12A1A7226B5006FEDD7 /* AMProjectProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMProjectProfileViewController.xib; path = ProfilePanel/AMProjectProfileViewController.xib; sourceTree = "<group>"; };
+		4A4511721A8B5F62001E7328 /* AMJackSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackSettingsVC.h; sourceTree = "<group>"; };
+		4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackSettingsVC.m; sourceTree = "<group>"; };
+		4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackSettingsVC.xib; sourceTree = "<group>"; };
 		4A5071FE1A6B49BE006E09FC /* AMLocalGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalGroupViewController.h; sourceTree = "<group>"; };
 		4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalGroupViewController.m; sourceTree = "<group>"; };
 		4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalGroupViewController.xib; sourceTree = "<group>"; };
@@ -656,6 +661,9 @@
 				013A56EB1A5A64EE001D319F /* AMJacktripSettings.h */,
 				013A56EC1A5A64EE001D319F /* AMJacktripSettings.m */,
 				013A56ED1A5A64EE001D319F /* AMJacktripSettings.xib */,
+				4A4511721A8B5F62001E7328 /* AMJackSettingsVC.h */,
+				4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */,
+				4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */,
 			);
 			name = PreferencePanel;
 			sourceTree = "<group>";
@@ -1328,6 +1336,7 @@
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
 				AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */,
 				4A8C69E91A7093A000540694 /* AMStaticUserDetailsViewController.xib in Resources */,
+				4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */,
 				AFAEBDB619610BEA00B7FB51 /* ShareLocation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1431,6 +1440,7 @@
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
 				4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */,
 				4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */,
+				4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */,

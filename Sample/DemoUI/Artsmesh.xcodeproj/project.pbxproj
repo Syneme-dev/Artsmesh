@@ -850,7 +850,7 @@
 				4A41F1EA1A8454AD0002018D /* MainWindow */,
 				4A8E05831A1C754400645840 /* OSCMonitor */,
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
-				D4BBBD6219AF256B006BEE40 /* Visualization Panel */,
+				D4BBBD6219AF256B006BEE40 /* Audio Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* BroadCast Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
@@ -1205,14 +1205,14 @@
 			name = ProfilePanel;
 			sourceTree = "<group>";
 		};
-		D4BBBD6219AF256B006BEE40 /* Visualization Panel */ = {
+		D4BBBD6219AF256B006BEE40 /* Audio Panel */ = {
 			isa = PBXGroup;
 			children = (
 				AF20064519458604008630C8 /* AMVisualViewController.h */,
 				AF20064619458604008630C8 /* AMVisualViewController.m */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 			);
-			name = "Visualization Panel";
+			name = "Audio Panel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

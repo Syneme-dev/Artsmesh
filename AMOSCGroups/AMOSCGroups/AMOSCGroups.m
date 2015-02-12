@@ -7,7 +7,6 @@
 //
 
 #import "AMOSCGroups.h"
-#import "AMOSCPrefViewController.h"
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMOSCClient.h"
@@ -17,8 +16,6 @@
 @implementation AMOSCGroups
 {
     AMOSCClient* _oscClient;
-    
-    AMOSCPrefViewController* _oscPrefController;
     AMOSCGroupMessageMonitorController* _oscMonitorController;
     
     BOOL _isOSCServerStarted;
@@ -47,16 +44,6 @@
 {
     system("killall OscGroupClient >/dev/null");
     return self;
-}
-
--(NSViewController*)getOSCPrefUI
-{
-    if (_oscPrefController == nil) {
-        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.OSCGroupFramework"];
-        _oscPrefController = [[AMOSCPrefViewController alloc] initWithNibName:@"AMOSCPrefViewController" bundle:myBundle];
-    }
-    
-    return _oscPrefController;
 }
 
 

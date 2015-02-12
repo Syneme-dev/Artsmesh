@@ -700,7 +700,35 @@ AMWorldMap *worldMap;
             
             if ( [_myGroup isMeshed] ) {
                 // Check if group is parent or subgroup of a merge
-                BOOL isMerged = NO;
+                
+                NSMutableDictionary *mergedGroups = [[NSMutableDictionary alloc] init];
+                mergedGroups = [self checkGroupIsMerged:_hovGroup];
+                
+                if ( [mergedGroups count] > 0 ) {
+                    //Find the parent group in the merge and display program
+                    NSLog(@"Selected group is merged, time to find parent in merge");
+                    AMLiveGroup *parentGroup = _hovGroup;
+                    
+                    NSMutableDictionary *allGroupsCopy = [_allGroups copy];
+                    for (AMLiveGroup *curParentGroup in allGroupsCopy) {
+                        AMLiveGroup *curGroup = [_allGroups objectForKey:curParentGroup];
+                        for (AMLiveGroup *childGroup in curGroup.subGroups) {
+                            NSLog(@"Checking subgroup of group..%@", childGroup.groupName);
+                            if ( [childGroup.groupId isEqualToString:_hovGroup.groupId] ) {
+                                NSLog(@"Parent of hov group found!");
+                                parentGroup = curGroup;
+                            }
+                        }
+                    }
+                    
+                    [self displayProgram:parentGroup];
+                    
+                } else {
+                    //Group not merged
+                    [self displayProgram:_hovGroup];
+                }
+                
+                /**
                 for ( NSMutableDictionary *groups in _mergedLocations ) {
                     
                     NSMutableDictionary *theGroups = [_mergedLocations objectForKey:groups];
@@ -713,9 +741,7 @@ AMWorldMap *worldMap;
                         break;
                     }
                 }
-                if (!isMerged) {
-                    [self displayProgram:_hovGroup];
-                }
+                **/
                 
             } else {
                 // only worry about myGroup

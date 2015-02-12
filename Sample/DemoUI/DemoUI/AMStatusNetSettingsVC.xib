@@ -106,6 +106,7 @@
                     </subviews>
                 </customView>
             </subviews>
+            <point key="canvasLocation" x="227" y="203"/>
         </view>
     </objects>
     <resources>

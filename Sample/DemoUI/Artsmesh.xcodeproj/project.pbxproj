@@ -682,12 +682,12 @@
 				013A56EB1A5A64EE001D319F /* AMJacktripSettingsVC.h */,
 				013A56EC1A5A64EE001D319F /* AMJacktripSettingsVC.m */,
 				013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */,
-				4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */,
-				4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */,
-				4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */,
 				4A4511811A8B62FB001E7328 /* AMOSCGroupSettingsVC.h */,
 				4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */,
 				4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */,
+				4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */,
+				4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */,
+				4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */,
 			);
 			name = PreferencePanel;
 			sourceTree = "<group>";

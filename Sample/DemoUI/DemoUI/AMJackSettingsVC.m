@@ -392,12 +392,6 @@
 }
 
 
-
-- (void)popupViewWillPopup:(AMPopUpView *)sender
-{
-    
-}
-
 #pragma mark AMCheckBoxDelegeate
 -(void)onChecked:(AMCheckBoxView*)sender
 {

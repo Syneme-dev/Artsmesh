@@ -7,11 +7,8 @@
 //
 
 #import "AMAudio.h"
-#import "AMJackManager.h"
-#import "AMJackTripManager.h"
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
-#import "AMJackClient.h"
 #import "AMAudioMixerViewController.h"
 
 
@@ -48,9 +45,9 @@
 
 -(id)privateInit
 {
-    _jackManager = [[AMJackManager alloc] init];
-    _jacktripManager = [[AMJackTripManager alloc] init];
-    _jackClient = [[AMJackClient alloc] init];
+   
+    
+    
     
     return self;
 }
@@ -65,15 +62,45 @@
     return _audioDevManager;
 }
 
+-(AMJackClient *)audioJackClient
+{
+    if(_jackClient == nil){
+        _jackClient = [[AMJackClient alloc] init];
+    }
+    
+    return _jackClient;
+}
+
+
+-(AMJackTripManager *)audioJacktripManager
+{
+    if (_jacktripManager == nil) {
+        _jacktripManager = [[AMJackTripManager alloc] init];
+    }
+    
+    return _jacktripManager;
+}
+
+
+-(AMJackManager *)audioJackManager
+{
+    if (_jackManager == nil) {
+         _jackManager = [[AMJackManager alloc] init];
+    }
+    
+    return _jackManager;
+}
+
 
 -(void)releaseResources
 {
-    [_jacktripManager stopAllJacktrips];
-    [_jackManager stopJack];
+    [[self audioJacktripManager] stopAllJacktrips];
+    [[self audioJackManager] stopJack];
     
     _jackManager = nil;
     _jacktripManager = nil;
 }
+
 
 -(void)dealloc
 {
@@ -82,7 +109,7 @@
 
 -(BOOL)isJackStarted
 {
-    return _jackManager.jackState == JackState_Started;
+    return [self audioJackManager].jackState == JackState_Started;
 }
 
 
@@ -91,25 +118,11 @@
     if (_routerController == nil) {
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
         _routerController = [[AMRouteViewController alloc] initWithNibName:@"AMRouteViewController" bundle:myBundle];
-        _routerController.jackClient = _jackClient;
-        _routerController.jackManager = _jackManager;
-        _routerController.jacktripManager = _jacktripManager;
     }
     
     return _routerController;
 }
 
-//-(NSViewController*)getJacktripPrefUI
-//{
-//    if (_jackTripController == nil) {
-//        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-//        _jackTripController = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
-//        _jackTripController.jacktripManager = _jacktripManager;
-//        _jackTripController.jackManager = _jackManager;
-//    }
-//    
-//    return _jackTripController;
-//}
 
 -(NSViewController*)getMixerUI
 {
@@ -123,23 +136,23 @@
 
 -(BOOL)startJack
 {
-    return [_jackManager startJack];
+    return [[self audioJackManager] startJack];
 }
 
 -(float)jackCpuUsage
 {
-    return [_jackClient cpuUsage];
+    return [[self audioJackClient] cpuUsage];
 }
 
 -(void)stopJack
 {
-    [_jackClient closeJackClient];
-    [_jackManager stopJack];
+    [[self audioJackClient] closeJackClient];
+    [[self audioJackManager] stopJack];
 }
 
 -(void)stopJacktrips
 {
-    [_jacktripManager stopAllJacktrips];
+    [[self audioJacktripManager] stopAllJacktrips];
 }
 
 @end

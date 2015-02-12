@@ -9,6 +9,7 @@
 #import "AMJackManager.h"
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMAudio.h"
 
 @implementation AMJackManager
 {

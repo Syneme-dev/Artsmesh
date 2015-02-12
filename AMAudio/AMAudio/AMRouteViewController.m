@@ -8,14 +8,11 @@
 
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
-#import "AMJackClient.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"
 #import "AMRouteView.h"
 #import "AMAudio.h"
-#import "AMJackClient.h"
-#import "AMJackManager.h"
-#import "AMJackTripManager.h"
+
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 

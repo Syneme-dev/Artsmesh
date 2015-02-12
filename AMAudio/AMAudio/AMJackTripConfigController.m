@@ -353,10 +353,6 @@
     [self.owner performClose:nil];
 }
 
-//-(void)jacktripChanged:(NSNotification*)notification
-//{
-//
-//}
 
 - (IBAction)closeClicked:(NSButton *)sender
 {

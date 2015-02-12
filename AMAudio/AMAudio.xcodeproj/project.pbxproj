@@ -110,14 +110,14 @@
 		26624DC219C9261C008F3D6D /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		26A11B1D19C143A300796327 /* AMJackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackManager.h; path = AMAudio/AMJackManager.h; sourceTree = "<group>"; };
 		26A11B1E19C143A300796327 /* AMJackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackManager.m; path = AMAudio/AMJackManager.m; sourceTree = "<group>"; };
-		26A11B1F19C143A300796327 /* AMJacktripConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJacktripConfigs.h; path = AMAudio/AMJacktripConfigs.h; sourceTree = "<group>"; };
-		26A11B2019C143A300796327 /* AMJacktripConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJacktripConfigs.m; path = AMAudio/AMJacktripConfigs.m; sourceTree = "<group>"; };
+		26A11B1F19C143A300796327 /* AMJacktripConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJacktripConfigs.h; sourceTree = "<group>"; };
+		26A11B2019C143A300796327 /* AMJacktripConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJacktripConfigs.m; sourceTree = "<group>"; };
 		26A11B2119C143A300796327 /* AMJackTripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackTripManager.h; path = AMAudio/AMJackTripManager.h; sourceTree = "<group>"; };
 		26A11B2219C143A300796327 /* AMJackTripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackTripManager.m; path = AMAudio/AMJackTripManager.m; sourceTree = "<group>"; };
 		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
-		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackTripConfigController.h; path = AMAudio/AMJackTripConfigController.h; sourceTree = "<group>"; };
-		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackTripConfigController.m; path = AMAudio/AMJackTripConfigController.m; sourceTree = "<group>"; };
-		26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMJackTripConfigController.xib; path = AMAudio/AMJackTripConfigController.xib; sourceTree = "<group>"; };
+		26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripConfigController.h; sourceTree = "<group>"; };
+		26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfigController.m; sourceTree = "<group>"; };
+		26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackTripConfigController.xib; sourceTree = "<group>"; };
 		4A3D17431A36138600D19720 /* AMAudioMuteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMuteButton.h; sourceTree = "<group>"; };
 		4A3D17441A36138600D19720 /* AMAudioMuteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMuteButton.m; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
@@ -155,12 +155,12 @@
 		CE151F2519B01372002D2AD4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		CE151F2619B01372002D2AD4 /* weakjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakjack.h; sourceTree = "<group>"; };
 		CE151F2719B01372002D2AD4 /* weakmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weakmacros.h; sourceTree = "<group>"; };
-		CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+QuartzUtilities.h"; path = "AMAudio/NSBezierPath+QuartzUtilities.h"; sourceTree = "<group>"; };
-		CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+QuartzUtilities.m"; path = "AMAudio/NSBezierPath+QuartzUtilities.m"; sourceTree = "<group>"; };
-		CE68804F19B94EF20062211C /* AMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMChannel.h; path = AMAudio/AMChannel.h; sourceTree = "<group>"; };
-		CE68805019B94EF20062211C /* AMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMChannel.m; path = AMAudio/AMChannel.m; sourceTree = "<group>"; };
-		CE68805119B94EF20062211C /* AMRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMRouteView.h; path = AMAudio/AMRouteView.h; sourceTree = "<group>"; };
-		CE68805219B94EF20062211C /* AMRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMRouteView.m; path = AMAudio/AMRouteView.m; sourceTree = "<group>"; };
+		CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+QuartzUtilities.h"; sourceTree = "<group>"; };
+		CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+QuartzUtilities.m"; sourceTree = "<group>"; };
+		CE68804F19B94EF20062211C /* AMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChannel.h; sourceTree = "<group>"; };
+		CE68805019B94EF20062211C /* AMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChannel.m; sourceTree = "<group>"; };
+		CE68805119B94EF20062211C /* AMRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouteView.h; sourceTree = "<group>"; };
+		CE68805219B94EF20062211C /* AMRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouteView.m; sourceTree = "<group>"; };
 		CE68805719B94F2A0062211C /* AMRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouteViewController.h; sourceTree = "<group>"; };
 		CE68805819B94F2A0062211C /* AMRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouteViewController.m; sourceTree = "<group>"; };
 		D443717619AACED700F49705 /* AMJackClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackClient.h; path = AMAudio/AMJackClient.h; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioDeviceManager.h; path = AMAudio/AMAudioDeviceManager.h; sourceTree = "<group>"; };
 		D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAudioDeviceManager.m; path = AMAudio/AMAudioDeviceManager.m; sourceTree = "<group>"; };
 		D47A184919F21110000A8CCB /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
-		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackDevice.h; path = AMAudio/AMJackDevice.h; sourceTree = "<group>"; };
-		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackDevice.m; path = AMAudio/AMJackDevice.m; sourceTree = "<group>"; };
+		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackDevice.h; sourceTree = "<group>"; };
+		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackDevice.m; sourceTree = "<group>"; };
 		D4B57E4D19C69003009F7701 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
 		D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,21 +214,8 @@
 			children = (
 				26A11B1D19C143A300796327 /* AMJackManager.h */,
 				26A11B1E19C143A300796327 /* AMJackManager.m */,
-				26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */,
-				26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */,
-				26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */,
 				26A11B2119C143A300796327 /* AMJackTripManager.h */,
 				26A11B2219C143A300796327 /* AMJackTripManager.m */,
-				26A11B1F19C143A300796327 /* AMJacktripConfigs.h */,
-				26A11B2019C143A300796327 /* AMJacktripConfigs.m */,
-				CE68804F19B94EF20062211C /* AMChannel.h */,
-				CE68805019B94EF20062211C /* AMChannel.m */,
-				D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */,
-				D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */,
-				CE68805119B94EF20062211C /* AMRouteView.h */,
-				CE68805219B94EF20062211C /* AMRouteView.m */,
-				CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */,
-				CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */,
 				D472933C19A6E5460034CC34 /* AMAudioDevice.h */,
 				D472933D19A6E5460034CC34 /* AMAudioDevice.m */,
 				D443717619AACED700F49705 /* AMJackClient.h */,
@@ -277,6 +264,19 @@
 				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
 				CE68805719B94F2A0062211C /* AMRouteViewController.h */,
 				CE68805819B94F2A0062211C /* AMRouteViewController.m */,
+				26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */,
+				26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */,
+				26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */,
+				26A11B1F19C143A300796327 /* AMJacktripConfigs.h */,
+				26A11B2019C143A300796327 /* AMJacktripConfigs.m */,
+				D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */,
+				D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */,
+				CE68805119B94EF20062211C /* AMRouteView.h */,
+				CE68805219B94EF20062211C /* AMRouteView.m */,
+				CE68804F19B94EF20062211C /* AMChannel.h */,
+				CE68805019B94EF20062211C /* AMChannel.m */,
+				CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */,
+				CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */,
 			);
 			name = RouterPanel;
 			sourceTree = "<group>";

@@ -107,6 +107,7 @@
          AMPopUpWillShowNotification object:nil];
     }
     
+    [self.popWindow setFrame:frame display:YES];
     return self.popWindow;
 }
 
@@ -207,6 +208,7 @@
 
 -(void)removeAllItems
 {
+    _title = @"";
     [[self popUpMenuController] removeAllItems];
     _popUpMenuController = nil;
 }

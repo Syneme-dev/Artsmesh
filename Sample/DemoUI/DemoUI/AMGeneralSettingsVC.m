@@ -123,6 +123,7 @@
             [self.privateIpBox addItemsWithTitles:addresses];
             [self selectLastPrivateIp];
             [self storeUsedPrivateIp];
+            [self.privateIpBox setNeedsDisplay];
         });
     });
 }
@@ -237,13 +238,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
     }
 }
-
-
-- (void)popupViewWillPopup:(AMPopUpView *)sender
-{
-    
-}
-
 
 #pragma mark AMCheckBoxDelegeate
 -(void)onChecked:(AMCheckBoxView*)sender

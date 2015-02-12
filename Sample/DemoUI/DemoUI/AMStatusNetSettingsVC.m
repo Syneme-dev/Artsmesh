@@ -7,8 +7,12 @@
 //
 
 #import "AMStatusNetSettingsVC.h"
+#import "AMStatusNet/AMStatusNet.h"
+#import "UIFramework/AMButtonHandler.h"
 
 @interface AMStatusNetSettingsVC ()
+@property (weak) IBOutlet NSButton *postBtn;
+@property (weak) IBOutlet NSTextField *postResField;
 
 @end
 
@@ -17,6 +21,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [AMButtonHandler changeTabTextColor:self.postBtn toColor:UI_Color_blue];
+}
+
+
+- (IBAction)statusNetTest:(id)sender {
+    BOOL res = [[AMStatusNet shareInstance]
+                postMessageToStatusNet:@"This is a test message send from Artsmesh through API"];
+    if (res)
+    {
+        self.postResField.stringValue = @"Post Succeeded!";
+    }
+    else
+    {
+        self.postResField.stringValue = @"Post Failed!";
+    }
 }
 
 @end

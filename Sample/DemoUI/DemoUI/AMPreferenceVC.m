@@ -46,7 +46,6 @@
     [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.videoTabButton toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
     
     [self loadPrefViews];
@@ -138,9 +137,6 @@
     }
 }
 
-
-
-
 -(void)registerTabButtons
 {
     super.tabs=self.tabs;
@@ -155,30 +151,30 @@
 
 - (IBAction)onGeneralClick:(id)sender {
     [self pushDownButton:self.generalTabBtn];
-    [self.tabs selectTabViewItemWithIdentifier:@"0"];
+    [self.tabs selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)onJackClick:(id)sender {
     [self pushDownButton:self.jackTabBtn];
-    [self.tabs selectTabViewItemWithIdentifier:@"1"];
+    [self.tabs selectTabViewItemAtIndex:1];
 }
 
 
 - (IBAction)onJackTripClick:(id)sender {
     [self pushDownButton:self.jacktripTabBtn];
-    [self.tabs selectTabViewItemWithIdentifier:@"2"];
+    [self.tabs selectTabViewItemAtIndex:2];
 }
 
 
 - (IBAction)onOSCGroupClick:(id)sender {
     [self pushDownButton:self.oscGroupTabBtn];
-    [self.tabs selectTabViewItemWithIdentifier:@"3"];
+    [self.tabs selectTabViewItemAtIndex:3];
 }
 
 
 - (IBAction)onStatusNetClick:(id)sender {
     [self pushDownButton:self.statusnetTabButton];
-    [self.tabs selectTabViewItemWithIdentifier:@"5"];
+    [self.tabs selectTabViewItemAtIndex:4];
 }
 
 

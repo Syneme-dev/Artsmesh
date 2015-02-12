@@ -13,7 +13,6 @@
                 <outlet property="oscGroupTabBtn" destination="vtg-zK-Gic" id="PMt-YG-MFZ"/>
                 <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
-                <outlet property="videoTabButton" destination="fqL-QQ-Ulv" id="USk-ju-JX0"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
         </customObject>
@@ -27,7 +26,7 @@
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
                     <subviews>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
-                            <rect key="frame" x="394" y="2" width="80" height="13"/>
+                            <rect key="frame" x="442" y="2" width="80" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="Ivb-25-mpR"/>
                                 <constraint firstAttribute="width" constant="80" id="zX6-pt-rJB"/>
@@ -40,19 +39,8 @@
                                 <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
                             </connections>
                         </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="fqL-QQ-Ulv" userLabel="videoTab">
-                            <rect key="frame" x="474" y="2" width="47" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="47" id="9tV-Cm-VNO"/>
-                                <constraint firstAttribute="height" constant="13" id="D9G-vV-B7W"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="VIDEO  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="LOR-MN-C7f">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                        </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="jacktripTab">
-                            <rect key="frame" x="326" y="2" width="69" height="13"/>
+                            <rect key="frame" x="374" y="2" width="69" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="1Hi-BW-B1N"/>
                                 <constraint firstAttribute="height" constant="13" id="Pp7-WK-Y9H"/>
@@ -81,7 +69,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
-                            <rect key="frame" x="185" y="2" width="65" height="13"/>
+                            <rect key="frame" x="233" y="2" width="65" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="WNv-O0-wIa"/>
                                 <constraint firstAttribute="height" constant="13" id="fTs-qg-Pps"/>
@@ -95,7 +83,7 @@
                             </connections>
                         </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="246" y="2" width="84" height="13"/>
+                            <rect key="frame" x="294" y="2" width="84" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="tRv-Ju-JCE"/>
                                 <constraint firstAttribute="width" constant="84" id="xl2-x9-hwo"/>
@@ -111,16 +99,14 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="13" id="4HT-nq-uOs"/>
-                        <constraint firstItem="fqL-QQ-Ulv" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="H7e-GX-uRN"/>
                         <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="Hvs-mB-Vv7"/>
                         <constraint firstItem="niJ-06-bEy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="InJ-QO-awj"/>
-                        <constraint firstAttribute="trailing" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="270" id="MFR-y0-AIn"/>
-                        <constraint firstAttribute="trailing" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="126" id="PNx-mB-FtZ"/>
+                        <constraint firstAttribute="trailing" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="222" id="MFR-y0-AIn"/>
+                        <constraint firstAttribute="trailing" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="78" id="PNx-mB-FtZ"/>
                         <constraint firstAttribute="height" constant="20" id="UMt-jc-Gbh"/>
-                        <constraint firstAttribute="trailing" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="205" id="jWP-vM-Vid"/>
-                        <constraint firstAttribute="trailing" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="350" id="p2c-Q1-0MY"/>
+                        <constraint firstAttribute="trailing" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="157" id="jWP-vM-Vid"/>
+                        <constraint firstAttribute="trailing" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="302" id="p2c-Q1-0MY"/>
                         <constraint firstItem="bOZ-dO-5oy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="s77-CX-d9n"/>
-                        <constraint firstAttribute="trailing" secondItem="fqL-QQ-Ulv" secondAttribute="trailing" constant="79" id="u27-xH-wZA"/>
                         <constraint firstItem="vtg-zK-Gic" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="wZS-pK-d2p"/>
                         <constraint firstItem="YZd-cX-Ly4" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="yAd-J8-uU4"/>
                     </constraints>
@@ -153,8 +139,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="StatusNet" identifier="5" id="GqN-Y7-qns">
-                            <view key="view" identifier="statusNetTabView" id="343-FY-LyZ" customClass="AMTabItemView">
+                        <tabViewItem label="StatusNet" identifier="4" id="GqN-Y7-qns">
+                            <view key="view" identifier="statusNet" id="343-FY-LyZ" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

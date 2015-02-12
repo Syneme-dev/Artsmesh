@@ -28,9 +28,7 @@ typedef enum {
 -(AMAudioDeviceManager *)audioDeviceManager;
 
 
--(NSViewController*)getJackPrefUI;
 -(NSViewController*)getJackRouterUI;
-//-(NSViewController*)getJacktripPrefUI;
 -(NSViewController*)getMixerUI;
 
 -(float)jackCpuUsage;

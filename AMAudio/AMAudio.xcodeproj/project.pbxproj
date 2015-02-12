@@ -80,17 +80,12 @@
 		D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */; };
 		D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = D472931E19A6E5030034CC34 /* AMAudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934819A70D390034CC34 /* AMAudioPrefViewController.h */; };
-		D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934919A70D390034CC34 /* AMAudioPrefViewController.m */; };
-		D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */; };
 		D47A184A19F21110000A8CCB /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A184919F21110000A8CCB /* AMLogger.framework */; };
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
 		D4B57E4E19C69003009F7701 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; };
 		D4B57E4F19C69021009F7701 /* Jackmp.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4B57E4D19C69003009F7701 /* Jackmp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
-		D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */; };
-		D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -187,16 +182,11 @@
 		D472933D19A6E5460034CC34 /* AMAudioDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAudioDevice.m; path = AMAudio/AMAudioDevice.m; sourceTree = "<group>"; };
 		D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioDeviceManager.h; path = AMAudio/AMAudioDeviceManager.h; sourceTree = "<group>"; };
 		D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAudioDeviceManager.m; path = AMAudio/AMAudioDeviceManager.m; sourceTree = "<group>"; };
-		D472934819A70D390034CC34 /* AMAudioPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioPrefViewController.h; path = AMAudio/AMAudioPrefViewController.h; sourceTree = "<group>"; };
-		D472934919A70D390034CC34 /* AMAudioPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAudioPrefViewController.m; path = AMAudio/AMAudioPrefViewController.m; sourceTree = "<group>"; };
-		D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AMAudioPrefViewController.xib; path = AMAudio/AMAudioPrefViewController.xib; sourceTree = "<group>"; };
 		D47A184919F21110000A8CCB /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackDevice.h; path = AMAudio/AMJackDevice.h; sourceTree = "<group>"; };
 		D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackDevice.m; path = AMAudio/AMJackDevice.m; sourceTree = "<group>"; };
 		D4B57E4D19C69003009F7701 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jackmp.framework; sourceTree = "<group>"; };
 		D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTaskLauncher.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMTaskLauncher.framework; sourceTree = "<group>"; };
-		D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMJackConfigs.h; path = AMAudio/AMJackConfigs.h; sourceTree = "<group>"; };
-		D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMJackConfigs.m; path = AMAudio/AMJackConfigs.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,20 +212,15 @@
 		0198A7951A0F21CD009A36CA /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				D472934819A70D390034CC34 /* AMAudioPrefViewController.h */,
-				D472934919A70D390034CC34 /* AMAudioPrefViewController.m */,
-				D472934A19A70D390034CC34 /* AMAudioPrefViewController.xib */,
+				26A11B1D19C143A300796327 /* AMJackManager.h */,
+				26A11B1E19C143A300796327 /* AMJackManager.m */,
 				26F2C30B19B9FD61001261F0 /* AMJackTripConfigController.h */,
 				26F2C30C19B9FD61001261F0 /* AMJackTripConfigController.m */,
 				26F2C30D19B9FD61001261F0 /* AMJackTripConfigController.xib */,
-				26A11B1D19C143A300796327 /* AMJackManager.h */,
-				26A11B1E19C143A300796327 /* AMJackManager.m */,
 				26A11B2119C143A300796327 /* AMJackTripManager.h */,
 				26A11B2219C143A300796327 /* AMJackTripManager.m */,
 				26A11B1F19C143A300796327 /* AMJacktripConfigs.h */,
 				26A11B2019C143A300796327 /* AMJacktripConfigs.m */,
-				D4CE1D0819A73E20008F7D5F /* AMJackConfigs.h */,
-				D4CE1D0919A73E20008F7D5F /* AMJackConfigs.m */,
 				CE68804F19B94EF20062211C /* AMChannel.h */,
 				CE68805019B94EF20062211C /* AMChannel.m */,
 				D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */,
@@ -398,7 +383,6 @@
 				4AF38F7E1A2631A1008FD2A3 /* AMAudioSlider.h in Headers */,
 				4AC8A2511A1059AE006E534A /* AMArtsmeshClient.h in Headers */,
 				D472933E19A6E5460034CC34 /* AMAudioDevice.h in Headers */,
-				D472934B19A70D390034CC34 /* AMAudioPrefViewController.h in Headers */,
 				CE151F3219B01372002D2AD4 /* thread.h in Headers */,
 				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
 				4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */,
@@ -416,7 +400,6 @@
 				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */,
 				CE68805519B94EF20062211C /* AMRouteView.h in Headers */,
-				D4CE1D0A19A73E20008F7D5F /* AMJackConfigs.h in Headers */,
 				CE151F2B19B01372002D2AD4 /* jslist.h in Headers */,
 				CE151F2D19B01372002D2AD4 /* net.h in Headers */,
 				CE151F3619B01372002D2AD4 /* weakmacros.h in Headers */,
@@ -492,7 +475,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D472934D19A70D390034CC34 /* AMAudioPrefViewController.xib in Resources */,
 				26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */,
 				D472931C19A6E5030034CC34 /* InfoPlist.strings in Resources */,
 				4AF38F7D1A2631A1008FD2A3 /* AMMixerViewController.xib in Resources */,
@@ -511,7 +493,6 @@
 			files = (
 				D472933F19A6E5460034CC34 /* AMAudioDevice.m in Sources */,
 				D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */,
-				D472934C19A70D390034CC34 /* AMAudioPrefViewController.m in Sources */,
 				4AC8A2561A105AB1006E534A /* AMJackPort.m in Sources */,
 				D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */,
 				4AF38F7F1A2631A1008FD2A3 /* AMAudioSlider.m in Sources */,
@@ -529,7 +510,6 @@
 				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				0198A79B1A0F2264009A36CA /* AMAudioMixerViewController.m in Sources */,
 				4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */,
-				D4CE1D0B19A73E20008F7D5F /* AMJackConfigs.m in Sources */,
 				4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */,
 				4AF38F811A2631A1008FD2A3 /* AMAudioMeter.m in Sources */,
 				4AC8A25A1A105AF3006E534A /* AMJackHelper.m in Sources */,

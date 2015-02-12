@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMJackConfigs.h"
 #import "AMAudio.h"
 
 @interface AMJackManager : NSObject
 
 @property  JackState jackState;
-@property  AMJackConfigs* jackCfg;
 
 -(BOOL)startJack;
 -(void)stopJack;

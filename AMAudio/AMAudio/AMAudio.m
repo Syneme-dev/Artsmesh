@@ -9,7 +9,6 @@
 #import "AMAudio.h"
 #import "AMJackManager.h"
 #import "AMJackTripManager.h"
-#import "AMAudioPrefViewController.h"
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
 #import "AMJackClient.h"
@@ -24,7 +23,6 @@
     AMJackManager* _jackManager;
     AMJackTripManager* _jacktripManager;
     AMJackClient* _jackClient;
-    AMAudioPrefViewController* _prefController;
     AMRouteViewController* _routerController;
     AMJackTripConfigController* _jackTripController;
     AMAudioMixerViewController* _mixerViewController;
@@ -87,16 +85,6 @@
     return _jackManager.jackState == JackState_Started;
 }
 
--(NSViewController*)getJackPrefUI
-{
-    if (_prefController == nil) {
-       NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-        _prefController = [[AMAudioPrefViewController alloc] initWithNibName:@"AMAudioPrefViewController" bundle:myBundle];
-        _prefController.jackManager = _jackManager;
-    }
-    
-    return _prefController;
-}
 
 -(NSViewController*)getJackRouterUI
 {

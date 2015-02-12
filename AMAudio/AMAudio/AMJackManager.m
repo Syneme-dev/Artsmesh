@@ -8,6 +8,7 @@
 
 #import "AMJackManager.h"
 #import "AMLogger/AMLogger.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMJackManager
 {
@@ -17,7 +18,6 @@
 -(id)init
 {
     if (self = [super init]) {
-        self.jackCfg = [AMJackConfigs archivedJackConfig];
         registerJackStartStopNofification();
         
         [[NSNotificationCenter defaultCenter]
@@ -41,7 +41,7 @@
     int n = system("killall -0 jackd >/dev/null");
     int m = system("killall -0 jackdmp >/dev/null");
     if (n != 0 && m != 0) {
-        NSString* command =  [self.jackCfg formatCommandLine];
+        NSString* command =  [self jackLaunchingCommand];
         AMLog(kAMInfoLog, @"AMAudio", @"start jack commmand is: %@", command);
     
         _jackTask = [[NSTask alloc] init];
@@ -96,6 +96,126 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
      unregisterJackStartStopNofification();
 }
+
+
+-(NSString *)jackLaunchingCommand
+{
+    NSString *driver = [[AMPreferenceManager standardUserDefaults]
+                         stringForKey:Preference_Jack_Driver];
+    
+    NSString *inputDevUID = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jack_InputDevice];
+    
+    NSString *outputDevUID = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jack_OutputDevice];
+    
+    NSString *sampleRate = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Jack_SampleRate];
+    
+    NSString *bufferSize = [[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Jack_BufferSize];
+    
+    NSString *inChannCount = [[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Jack_InterfaceInChans];
+    
+    NSString *outChannCount = [[AMPreferenceManager standardUserDefaults]
+                               stringForKey:Preference_Jack_InterfaceOutChanns];
+    
+    BOOL hogMode = [[AMPreferenceManager standardUserDefaults]
+                      boolForKey:Preference_Jack_HogMode];
+    
+    BOOL clockCompensation = [[AMPreferenceManager standardUserDefaults]
+                               boolForKey:Preference_Jack_ClockDriftComp];
+    
+    BOOL monitoring = [[AMPreferenceManager standardUserDefaults]
+                               boolForKey:Preference_Jack_PortMoniting];
+    
+    BOOL midi =[[AMPreferenceManager standardUserDefaults]
+                boolForKey:Preference_Jack_ActiveMIDI];
+
+    
+    char stringa[512];
+    memset(stringa, 0, 512);
+    
+    SInt32 major;
+    SInt32 minor;
+    Gestalt(gestaltSystemVersionMajor, &major);
+    Gestalt(gestaltSystemVersionMinor, &minor);
+    
+    if (major == 10 && minor >= 5) {
+#if defined(__i386__)
+        strcpy(stringa,"/usr/local/bin/jackd -R");
+#elif defined(__x86_64__)
+        strcpy(stringa,"/usr/local/bin/jackd -R");
+#elif defined(__ppc__)
+        strcpy(stringa, "arch -ppc /usr/local/bin/jackdmp -R");
+#elif defined(__ppc64__)
+        strcpy(stringa,"/usr/local/bin/jackd -R");
+#endif
+    }else{
+        strcpy(stringa,"/usr/local/bin/jackd -R");
+    }
+
+    if (midi) {
+        strcat(stringa, " -X coremidi ");
+    }
+    
+    strcat(stringa, " -d ");
+    strcat(stringa, [driver cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    strcat(stringa, " -r ");
+    NSString* sampleRateStr = [NSString stringWithFormat:@"%@", sampleRate];
+    strcat(stringa, [sampleRateStr cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    strcat(stringa, " -p ");
+    NSString* bufferSizeStr = [NSString stringWithFormat:@"%@", bufferSize];
+    strcat(stringa, [bufferSizeStr cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    strcat(stringa, " -o ");
+    NSString* outchans = [NSString stringWithFormat:@"%@", outChannCount];
+    strcat(stringa, [outchans cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    strcat(stringa, " -i ");
+    NSString* inchans = [NSString stringWithFormat:@"%@", inChannCount];
+    strcat(stringa, [inchans cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    
+    if ([inputDevUID isEqualToString:outputDevUID]) {
+        strcat(stringa, " -d ");
+        strcat(stringa, "\"");
+        strcat(stringa, [inputDevUID cStringUsingEncoding:NSUTF8StringEncoding]);
+        strcat(stringa, "\"");
+    } else {
+        strcat(stringa, " -C ");
+        strcat(stringa, "\"");
+        strcat(stringa, [inputDevUID cStringUsingEncoding:NSUTF8StringEncoding]);
+        strcat(stringa, "\"");
+        strcat(stringa, " -P ");
+        strcat(stringa, "\"");
+        strcat(stringa, [outputDevUID  cStringUsingEncoding:NSUTF8StringEncoding]);
+        strcat(stringa, "\"");
+    }
+    
+    if (hogMode) {
+        strcat(stringa, " -H ");
+    }
+    
+    if (clockCompensation) {
+        strcat(stringa, " -s ");
+    }
+    
+    if (monitoring) {
+        strcat(stringa, " -m ");
+    }
+    
+    NSString *jackLog = [NSString stringWithFormat:@" > %@/Jack_Audio.log", AMLogDirectory()];
+    const char *szLogPath = [jackLog cStringUsingEncoding:NSUTF8StringEncoding];
+    strcat(stringa, szLogPath);
+    
+    NSString* commandLine = [NSString stringWithFormat:@"%s", stringa];
+    return commandLine;
+}
+
 
 static void registerJackStartStopNofification()
 {

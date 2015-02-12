@@ -22,7 +22,7 @@
 @property BOOL readOnly;
 @property BOOL drawBackground;
 
-@property id<AMCheckBoxDelegeate>delegate;
+@property (weak) IBOutlet id<AMCheckBoxDelegeate>delegate;
 
 -(void)setChecked:(BOOL)checked;
 -(BOOL)checked;

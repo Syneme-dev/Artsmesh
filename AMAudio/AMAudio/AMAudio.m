@@ -15,6 +15,7 @@
 #import "AMJackClient.h"
 #import "AMAudioMixerViewController.h"
 
+
 @interface AMAudio()
 @end
 
@@ -27,6 +28,8 @@
     AMRouteViewController* _routerController;
     AMJackTripConfigController* _jackTripController;
     AMAudioMixerViewController* _mixerViewController;
+    AMAudioDeviceManager *_audioDevManager;
+    
 }
 
 +(id)sharedInstance
@@ -53,6 +56,17 @@
     
     return self;
 }
+
+
+-(AMAudioDeviceManager *)audioDeviceManager
+{
+    if (_audioDevManager == nil) {
+        _audioDevManager = [[AMAudioDeviceManager alloc] init];
+    }
+    
+    return _audioDevManager;
+}
+
 
 -(void)releaseResources
 {

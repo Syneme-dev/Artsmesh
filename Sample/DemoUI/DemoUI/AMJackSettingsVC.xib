@@ -7,6 +7,20 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMJackSettingsVC">
             <connections>
+                <outlet property="amVirtualChannsField" destination="Det-K9-1HI" id="6ua-AZ-P4A"/>
+                <outlet property="bufferSizeBox" destination="2xT-4D-n1n" id="LIb-ZV-F6R"/>
+                <outlet property="cancelBtn" destination="hJg-c1-QdD" id="jwN-3g-zG6"/>
+                <outlet property="compensationCheck" destination="6s1-7C-Frx" id="YXg-5p-sX5"/>
+                <outlet property="driverBox" destination="kKq-OA-TRF" id="Y18-vu-8cF"/>
+                <outlet property="hogModeCheck" destination="qkg-VL-JZJ" id="T2j-os-eIm"/>
+                <outlet property="inputDevBox" destination="n35-Uk-YCU" id="G8E-tI-5wd"/>
+                <outlet property="interfaceInChansBox" destination="YJe-HC-VET" id="vRj-rH-hdL"/>
+                <outlet property="interfaceOutChansBox" destination="9wR-Y1-1ED" id="vMG-ew-4pD"/>
+                <outlet property="midiCheck" destination="lhe-K2-GfT" id="cKm-5b-YbZ"/>
+                <outlet property="outputDevBox" destination="D5x-AF-sQ4" id="oss-ge-U0r"/>
+                <outlet property="portMornitingCheck" destination="wxN-18-rsA" id="ZcD-e1-4x7"/>
+                <outlet property="sampleRateBox" destination="d7T-MQ-sDk" id="Vir-P6-jLm"/>
+                <outlet property="saveBtn" destination="VXR-lw-yED" id="3uF-0S-tDr"/>
                 <outlet property="view" destination="prV-Gl-ilF" id="FQI-MO-fP2"/>
             </connections>
         </customObject>
@@ -102,36 +116,63 @@
                 </box>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKq-OA-TRF" customClass="AMPopUpView">
                     <rect key="frame" x="164" y="525" width="307" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="l5Z-Fw-Hfl"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n35-Uk-YCU" customClass="AMPopUpView">
                     <rect key="frame" x="164" y="495" width="307" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="WSD-Wm-iFN"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5x-AF-sQ4" customClass="AMPopUpView">
                     <rect key="frame" x="164" y="465" width="307" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="C2v-Tz-nec"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7T-MQ-sDk" customClass="AMPopUpView">
                     <rect key="frame" x="285" y="435" width="186" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="d0P-eh-86K"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xT-4D-n1n" customClass="AMPopUpView">
                     <rect key="frame" x="285" y="405" width="186" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="xeW-Jk-DU0"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJe-HC-VET" customClass="AMPopUpView">
                     <rect key="frame" x="285" y="197" width="186" height="21"/>
-                </customView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wR-Y1-1ED" customClass="AMPopUpView">
-                    <rect key="frame" x="285" y="167" width="186" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="rMD-pG-IwP"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qkg-VL-JZJ" customClass="AMCheckBoxView">
                     <rect key="frame" x="45" y="363" width="426" height="25"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="nr2-Wy-fyW"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6s1-7C-Frx" customClass="AMCheckBoxView">
                     <rect key="frame" x="45" y="331" width="426" height="25"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="ibu-1K-2oJ"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-18-rsA" customClass="AMCheckBoxView">
                     <rect key="frame" x="45" y="299" width="426" height="25"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="hmL-UT-uYN"/>
+                    </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhe-K2-GfT" customClass="AMCheckBoxView">
                     <rect key="frame" x="45" y="266" width="427" height="25"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="7sd-Lx-aa8"/>
+                    </connections>
                 </customView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED">
                     <rect key="frame" x="391" y="26" width="80" height="25"/>
@@ -139,6 +180,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="saveConfig:" target="-2" id="N71-xL-3gj"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD">
                     <rect key="frame" x="302" y="26" width="79" height="25"/>
@@ -149,6 +193,9 @@
 Gw
 </string>
                     </buttonCell>
+                    <connections>
+                        <action selector="restoreConfig:" target="-2" id="Rhp-1o-1lx"/>
+                    </connections>
                 </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Det-K9-1HI" customClass="AMFoundryFontView">
                     <rect key="frame" x="377" y="75" width="96" height="22"/>
@@ -222,6 +269,12 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wR-Y1-1ED" customClass="AMPopUpView">
+                    <rect key="frame" x="285" y="167" width="186" height="21"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="eg2-6n-dLA"/>
+                    </connections>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="266" y="-30.5"/>
         </view>

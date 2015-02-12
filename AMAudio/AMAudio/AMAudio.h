@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMAudioDeviceManager.h"
 
 typedef enum {
     JackState_Stopped = 0,
@@ -22,6 +23,10 @@ typedef enum {
 @interface AMAudio : NSObject
 
 +(id)sharedInstance;
+
+
+-(AMAudioDeviceManager *)audioDeviceManager;
+
 
 -(NSViewController*)getJackPrefUI;
 -(NSViewController*)getJackRouterUI;

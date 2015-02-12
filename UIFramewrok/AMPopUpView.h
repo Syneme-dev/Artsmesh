@@ -21,7 +21,7 @@
 @property CGFloat itemHeight;
 @property CGFloat itemWidth;
 
-@property(nonatomic, weak) id<AMPopUpViewDelegeate> delegate;
+@property(nonatomic, weak) IBOutlet id<AMPopUpViewDelegeate> delegate;
 @property(nonatomic, readonly) NSInteger indexOfSelectedItem;
 -(NSString*)stringValue;
 

@@ -191,6 +191,7 @@
 
 -(void)loadGlobalServerAddr
 {
+    //TODO: because we didn't store the ipv6 url into core data or userdefaults, so maybe we stil use ipv4 later.
     NSString *globalServerAddr = [[NSUserDefaults standardUserDefaults]
                                   stringForKey:Preference_Key_General_GlobalServerAddr];
     if (self.ipv6Check.checked) {

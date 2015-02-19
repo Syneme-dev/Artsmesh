@@ -57,25 +57,6 @@
     
     //NSMutableArray *views = [[NSArray alloc] init];
     [self.allFields removeAllObjects];
-
-    /**
-    NSString *theString = theGroup.groupName;
-    NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:[self.fonts objectForKeyedSubscript:@"header"]};
-    
-    NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
-    
-    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] init];
-    
-    [[theTextView textStorage] setAttributedString:theAttrString];
-    
-    NSSize textViewRect = [theTextView intrinsicContentSize];
-    
-    NSLog(@"used rect for added text view is: %f, %f", textViewRect.width, textViewRect.height);
-    
-    [theTextView setFrameSize:textViewRect];
-    
-    [self addSubview:theTextView];
-     **/
     
     self.totalH = 0;
     

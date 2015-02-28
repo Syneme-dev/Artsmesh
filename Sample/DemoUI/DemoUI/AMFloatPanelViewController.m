@@ -95,7 +95,7 @@
     
 - (void)windowWillExitFullScreen:(NSNotification *)notification
 {
-    NSLog(@"window will exit full screen");
+    // Window will exit full screen.
     if (self.containerWindow) {
         AMFloatPanelView *panelView = (AMFloatPanelView *)self.view;
         panelView.inFullScreenMode = NO;

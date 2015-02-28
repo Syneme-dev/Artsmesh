@@ -773,7 +773,8 @@ AMWorldMap *worldMap;
     double programW = pvc.view.frame.size.width;
     double programH = pvc.view.frame.size.height;
     
-    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(programW, programH) andTitle:@"LIVE" andTitleColor:[NSColor redColor]];
+    
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(programW, programH) andTitle:@"LIVE" andTitleColor:UI_Text_Color_Gray];
     _floatPanelViewController = fpc;
     _programWindow = fpc.containerWindow;
 
@@ -798,6 +799,17 @@ AMWorldMap *worldMap;
 }
 
 - (void)displayProgram:(AMLiveGroup *)theGroup {
+    
+    if ( theGroup.broadcasting && [theGroup.broadcastingURL length] != 0 && _floatPanelViewController.panelTitleColor != [NSColor redColor]) {
+        _floatPanelViewController.panelTitleColor = [NSColor redColor];
+        [_floatPanelViewController.view setNeedsDisplay:YES];
+    } else {
+        if ( !theGroup.broadcasting && _floatPanelViewController.panelTitleColor != UI_Text_Color_Gray ) {
+            _floatPanelViewController.panelTitleColor = UI_Text_Color_Gray;
+            [_floatPanelViewController.view setNeedsDisplay:YES];
+        }
+    }
+    
     _programViewController.group = theGroup;
     [_programViewController checkIcon:theGroup];
     
@@ -818,6 +830,7 @@ AMWorldMap *worldMap;
 }
 
 - (void) displayGroupPreviewOverlay:(AMLiveGroup *)theGroup {
+    
     
     AMPixel *curPixel = [_allLiveGroupPixels objectForKey:theGroup.groupId];
     NSPoint hovPoint = [self getPortCenter:curPixel];

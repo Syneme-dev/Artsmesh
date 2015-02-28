@@ -59,8 +59,6 @@
 		4A8E05801A1C618700645840 /* AMOSCGroupMessageMonitorController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */; };
 		4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */; };
 		4A8E05821A1C618700645840 /* AMOSCGroupMessageMonitorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */; };
-		4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */; };
-		4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */; };
 		4AED84121A135C20004CE862 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84111A135C20004CE862 /* AMPreferenceManager.framework */; };
 		4AED84141A1369CD004CE862 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AED84131A1369CD004CE862 /* AMLogger.framework */; };
 /* End PBXBuildFile section */
@@ -127,8 +125,6 @@
 		4A8E057D1A1C618700645840 /* AMOSCGroupMessageMonitorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupMessageMonitorController.h; sourceTree = "<group>"; };
 		4A8E057E1A1C618700645840 /* AMOSCGroupMessageMonitorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupMessageMonitorController.m; sourceTree = "<group>"; };
 		4A8E057F1A1C618700645840 /* AMOSCGroupMessageMonitorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCGroupMessageMonitorController.xib; sourceTree = "<group>"; };
-		4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupClientConfig.h; sourceTree = "<group>"; };
-		4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupClientConfig.m; sourceTree = "<group>"; };
 		4AED84111A135C20004CE862 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		4AED84131A1369CD004CE862 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,8 +250,6 @@
 				016607451A38204D002AEEE7 /* AMOSCMonitor.mm */,
 				0166BA1E1A514D3200D66954 /* AMOSCForwarder.h */,
 				0166BA1F1A514D3200D66954 /* AMOSCForwarder.mm */,
-				4A8E05841A1C79DB00645840 /* AMOSCGroupClientConfig.h */,
-				4A8E05851A1C79DB00645840 /* AMOSCGroupClientConfig.m */,
 				016607B01A385ED7002AEEE7 /* AMOscMsgTableRow.h */,
 				016607B11A385ED7002AEEE7 /* AMOscMsgTableRow.m */,
 				0166BA221A5155A800D66954 /* AMOSCView.h */,
@@ -314,7 +308,6 @@
 				4A8E05801A1C618700645840 /* AMOSCGroupMessageMonitorController.h in Headers */,
 				0166079A1A382727002AEEE7 /* OscException.h in Headers */,
 				016607A01A382727002AEEE7 /* OscPrintReceivedElements.h in Headers */,
-				4A8E05861A1C79DB00645840 /* AMOSCGroupClientConfig.h in Headers */,
 				0166BA241A5155A800D66954 /* AMOSCView.h in Headers */,
 				0166079E1A382727002AEEE7 /* OscPacketListener.h in Headers */,
 				016607B21A385ED7002AEEE7 /* AMOscMsgTableRow.h in Headers */,
@@ -430,7 +423,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				016607461A38204D002AEEE7 /* AMOSCMonitor.mm in Sources */,
-				4A8E05871A1C79DB00645840 /* AMOSCGroupClientConfig.m in Sources */,
 				4A8E05811A1C618700645840 /* AMOSCGroupMessageMonitorController.m in Sources */,
 				0166BA251A5155A800D66954 /* AMOSCView.m in Sources */,
 				016607B31A385ED7002AEEE7 /* AMOscMsgTableRow.m in Sources */,

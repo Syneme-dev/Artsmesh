@@ -132,6 +132,8 @@
             self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
                                             privateIp];
         }else{
+            
+            //TODO: bug! if local groupmates meshed, can not use private ip
             self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
                                             publicIp];
         }

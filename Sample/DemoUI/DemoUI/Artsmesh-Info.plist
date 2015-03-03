@@ -17,15 +17,124 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>28C</string>
+	<string>28X 64-bit</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2014 Artsmesh. All rights reserved.</string>
+	<string>Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved. * Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
+
+* Syneme (Ken Fields):
+http://syneme.ccom.edu.cn
+
+* Detao Masters Academy is a Shanghai based Culture and Education Group
+http://www.detaoma.com
+</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

@@ -681,7 +681,7 @@
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msk-5o-YGT">
                                 <rect key="frame" x="10" y="6" width="29" height="28"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_white" id="Qtb-kn-nHX"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_grey" id="Qtb-kn-nHX"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -889,7 +889,7 @@
         <image name="Server_on" width="58.064517974853516" height="58.064517974853516"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
-        <image name="logo_white" width="329" height="329"/>
+        <image name="logo_grey" width="329" height="329"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>

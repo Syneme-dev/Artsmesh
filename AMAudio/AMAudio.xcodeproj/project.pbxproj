@@ -26,8 +26,6 @@
 		4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A3D17431A36138600D19720 /* AMAudioMuteButton.h */; };
 		4A3D17461A36138600D19720 /* AMAudioMuteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D17441A36138600D19720 /* AMAudioMuteButton.m */; };
 		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
-		4AC8A2491A1046BE006E534A /* AMVolumeBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A2471A1046BE006E534A /* AMVolumeBar.h */; };
-		4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A2481A1046BE006E534A /* AMVolumeBar.m */; };
 		4AC8A24D1A104E01006E534A /* AMVolumeCtlView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */; };
 		4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */; };
 		4AC8A2511A1059AE006E534A /* AMArtsmeshClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AC8A24F1A1059AE006E534A /* AMArtsmeshClient.h */; };
@@ -121,8 +119,6 @@
 		4A3D17431A36138600D19720 /* AMAudioMuteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMuteButton.h; sourceTree = "<group>"; };
 		4A3D17441A36138600D19720 /* AMAudioMuteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMuteButton.m; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
-		4AC8A2471A1046BE006E534A /* AMVolumeBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVolumeBar.h; sourceTree = "<group>"; };
-		4AC8A2481A1046BE006E534A /* AMVolumeBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVolumeBar.m; sourceTree = "<group>"; };
 		4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVolumeCtlView.h; sourceTree = "<group>"; };
 		4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVolumeCtlView.m; sourceTree = "<group>"; };
 		4AC8A24F1A1059AE006E534A /* AMArtsmeshClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArtsmeshClient.h; sourceTree = "<group>"; };
@@ -249,8 +245,6 @@
 				4AF38F761A2631A1008FD2A3 /* AMAudioMeter.m */,
 				4A3D17431A36138600D19720 /* AMAudioMuteButton.h */,
 				4A3D17441A36138600D19720 /* AMAudioMuteButton.m */,
-				4AC8A2471A1046BE006E534A /* AMVolumeBar.h */,
-				4AC8A2481A1046BE006E534A /* AMVolumeBar.m */,
 				4AC8A24B1A104E01006E534A /* AMVolumeCtlView.h */,
 				4AC8A24C1A104E01006E534A /* AMVolumeCtlView.m */,
 			);
@@ -417,7 +411,6 @@
 				CE151F2819B01372002D2AD4 /* control.h in Headers */,
 				CE151F3519B01372002D2AD4 /* weakjack.h in Headers */,
 				CE68805919B94F2A0062211C /* AMRouteViewController.h in Headers */,
-				4AC8A2491A1046BE006E534A /* AMVolumeBar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +495,6 @@
 				D443717919AACED700F49705 /* AMJackClient.m in Sources */,
 				26F2C30F19B9FD61001261F0 /* AMJackTripConfigController.m in Sources */,
 				CE68805419B94EF20062211C /* AMChannel.m in Sources */,
-				4AC8A24A1A1046BE006E534A /* AMVolumeBar.m in Sources */,
 				4AF38F7C1A2631A1008FD2A3 /* AMMixerViewController.m in Sources */,
 				D472932019A6E5030034CC34 /* AMAudio.m in Sources */,
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,

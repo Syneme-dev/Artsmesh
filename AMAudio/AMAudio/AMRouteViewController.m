@@ -160,7 +160,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSArray* allChann = [[[AMAudio sharedInstance] audioJackClient] allChannels];
     
     //Remove device not exist any more
-    NSMutableArray* removedDevices = [[NSMutableArray alloc] init];
+    NSMutableArray* toRemoveDevices = [[NSMutableArray alloc] init];
     for (AMChannel* channShow in [routeView allChannels])
     {
         if (channShow.type == AMPlaceholderChannel) {
@@ -175,13 +175,13 @@ shouldRemoveDevice:(NSString *)deviceID;
         }
         if (!bFind) {
             
-            if (![removedDevices containsObject:channShow.deviceID]) {
-                [removedDevices addObject:channShow.deviceID];
+            if (![toRemoveDevices containsObject:channShow.deviceID]) {
+                [toRemoveDevices addObject:channShow.deviceID];
             }
         }
     }
     
-    for (NSString* devId in removedDevices ) {
+    for (NSString* devId in toRemoveDevices ) {
         [routeView removeDevice:devId];
     }
     

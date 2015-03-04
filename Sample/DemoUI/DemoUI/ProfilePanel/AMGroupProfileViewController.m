@@ -80,7 +80,7 @@
 {
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     if (localGroup.busy) {
-        [self.statusLight setImage:[NSImage imageNamed:@"groupuser_busy"]];
+        [self.statusLight setImage:[NSImage imageNamed:@"group_lock_dot"]];
     }else if([localGroup hasUserOnline]){
         [self.statusLight setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
     }else{

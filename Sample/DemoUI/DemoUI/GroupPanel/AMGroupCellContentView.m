@@ -33,7 +33,7 @@
         self.broadcastIcon = [self setFirstIconWithImage:
                               [NSImage imageNamed:@"group_broadcast"]];
         self.lockedIcon = [self setSecondIconWithImage:
-                           [NSImage imageNamed:@"group_lock_icon"]];
+                           [NSImage imageNamed:@"group_lock_icon_grey"]];
         
     }
     

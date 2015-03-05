@@ -31,10 +31,10 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="clipboard" id="yro-cU-7ag"/>
                 </imageView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="EZY-Pm-RJD" customClass="AMCheckBoxView">
-                    <rect key="frame" x="10" y="240" width="70" height="22"/>
+                    <rect key="frame" x="10" y="240" width="77" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="fIL-an-vrT"/>
-                        <constraint firstAttribute="width" constant="70" id="rEB-l6-H8N"/>
+                        <constraint firstAttribute="width" constant="77" id="rEB-l6-H8N"/>
                     </constraints>
                 </customView>
                 <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VnF-19-2Bz" customClass="AMFoundryFontView">

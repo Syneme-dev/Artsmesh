@@ -69,7 +69,7 @@
 {
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     if (localGroup.broadcasting) {
-        [self.statusLight setImage:[NSImage imageNamed:@"groupuser_busy"]];
+        [self.statusLight setImage:[NSImage imageNamed:@"project_broadcast"]];
     }else{
         [self.statusLight setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
     }

@@ -17,6 +17,9 @@
 #import "AMUserLogonViewController.h"
 
 @interface AMUserProfielViewController ()<AMCheckBoxDelegeate,NSPopoverDelegate>
+{
+    NSTimer* _blinkTimer;
+}
 @property (weak) IBOutlet NSImageView *userAvatar;
 @property (weak) IBOutlet AMCheckBoxView *userBusyCheck;
 @property (weak) IBOutlet AMFoundryFontView *nickNameField;
@@ -227,10 +230,40 @@
 
 -(void)startBlickingStatus
 {
-    [self.userStatus setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+/*    [self.userStatus setImage:[NSImage imageNamed:@"synchronizing_icon"]];
     [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];
+ */
+    [_blinkTimer invalidate];
+    _blinkTimer = nil;
+    _blinkTimer = [NSTimer scheduledTimerWithTimeInterval:0.2
+                                                   target:self
+                                                 selector:@selector(onBlinkTimer:)
+                                                 userInfo:nil
+                                                  repeats:YES];
+    
 }
 
+- (void) onBlinkTimer:(NSTimer*) timer
+{
+    static int blinkCount = 0;
+    if (blinkCount >= 5) {
+        [_blinkTimer invalidate];
+        _blinkTimer = nil;
+        blinkCount = 0;
+        
+        [self setStatus];
+        [self.userStatus setNeedsDisplay];
+        return;
+    }
+    blinkCount++;
+    
+    if (blinkCount % 2 == 0)
+        [self.userStatus setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+    else
+        [self.userStatus setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    
+    [self.userStatus setNeedsDisplay];
+}
 
 -(void)mySelfChanged:(NSNotification *)notification
 {

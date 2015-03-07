@@ -33,7 +33,7 @@
     // Do view setup here.
     
     [self loadProject:nil];
-    self.statusLight.delegate = self;
+    self.statusLight.blinkDelegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadProject:) name:AM_LIVE_GROUP_CHANDED object:nil];
 }
 

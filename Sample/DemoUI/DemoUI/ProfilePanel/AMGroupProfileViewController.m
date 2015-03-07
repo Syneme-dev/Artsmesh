@@ -9,6 +9,7 @@
 #import "AMGroupProfileViewController.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMFoundryFontView.h"
+#import "UIFramework/AMBlinkView.h"
 #import "AMCoreData/AMCoredata.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNet/AMStatusNet.h"
@@ -17,15 +18,16 @@
 #import "AMGroupCreateViewController.h"
 
 
-@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
+@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate,
+                                            AMBlinkViewDelegate>
 @property (weak) IBOutlet NSImageView *groupAvatar;
-@property (weak) IBOutlet AMFoundryFontView *groupNameField;
-@property (weak) IBOutlet AMFoundryFontView *fullNameField;
-@property (weak) IBOutlet AMFoundryFontView *homePageField;
-@property (weak) IBOutlet AMFoundryFontView *locationField;
-@property (weak) IBOutlet AMCheckBoxView *lockBox;
-@property (weak) IBOutlet NSImageView *statusLight;
-@property (weak) IBOutlet AMFoundryFontView *descriptionField;
+@property (weak) IBOutlet AMFoundryFontView *   groupNameField;
+@property (weak) IBOutlet AMFoundryFontView *   fullNameField;
+@property (weak) IBOutlet AMFoundryFontView *   homePageField;
+@property (weak) IBOutlet AMFoundryFontView *   locationField;
+@property (weak) IBOutlet AMCheckBoxView *      lockBox;
+@property (weak) IBOutlet AMBlinkView*          statusLight;
+@property (weak) IBOutlet AMFoundryFontView *   descriptionField;
 
 @property NSPopover *myPopover;
 
@@ -37,6 +39,7 @@
     [super viewDidLoad];
     // Do view setup here.
     
+ //   self.statusLight.delegate = self;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     [self groupChanged:nil];
@@ -211,12 +214,21 @@
     [self startBlickingStatus];
 }
 
-
+#pragma mark  -
+#pragma mark  blink-start
 -(void)startBlickingStatus
 {
-    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
-    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];
+/*    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];*/
+    [self.statusLight startBlink];
 }
+
+- (void) afterStopBlink
+{
+    [self setStatus];
+    [self.statusLight setNeedsDisplay:YES];
+}
+#pragma mark  -
 
 
 -(void)setGroupLongitudeAndLatitude:(NSString *)location

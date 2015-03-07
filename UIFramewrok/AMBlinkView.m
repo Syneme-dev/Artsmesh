@@ -50,9 +50,9 @@
     }
     _count = 0;
     
-    if ([self.delegate respondsToSelector:@selector(afterStopBlink)])
+    if ([self.blinkDelegate respondsToSelector:@selector(afterStopBlink)])
     {
-        [self.delegate afterStopBlink];
+        [self.blinkDelegate afterStopBlink];
     }
 
 }
@@ -62,9 +62,10 @@
     _count++;
     
     if(_count >= _maxCount ||
-       ([self.delegate respondsToSelector:@selector(shouldStop)] && [self.delegate shouldStop])) {
-        [self stopBlink];
-        return;
+       ([self.blinkDelegate respondsToSelector:@selector(shouldStop)] &&
+        [self.blinkDelegate shouldStop])) {
+           [self stopBlink];
+           return;
     }
     [self blink];
 }

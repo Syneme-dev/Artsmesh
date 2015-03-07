@@ -21,7 +21,7 @@
 
 - (void) startBlink;
 
-@property id<AMBlinkViewDelegate> delegate;
+@property id<AMBlinkViewDelegate> blinkDelegate;
 @end
 
 

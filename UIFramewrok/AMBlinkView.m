@@ -29,9 +29,12 @@
 
 - (void) startBlink
 {
-    [_blinkTimer invalidate];
-    _blinkTimer = nil;
-    _count      = 0;
+    if (_blinkTimer) {
+        [_blinkTimer invalidate];
+        _blinkTimer = nil;
+    }
+    
+    _count = 0;
     _blinkTimer = [NSTimer scheduledTimerWithTimeInterval:_interval
                                                    target:self
                                                  selector:@selector(onBlinkingTimer:)
@@ -41,8 +44,10 @@
 
 - (void) stopBlink
 {
-    [_blinkTimer invalidate];
-    _blinkTimer = nil;
+    if (_blinkTimer) {
+        [_blinkTimer invalidate];
+        _blinkTimer = nil;
+    }
     _count = 0;
     
     if ([self.delegate respondsToSelector:@selector(afterStopBlink)])
@@ -59,6 +64,7 @@
     if(_count >= _maxCount ||
        ([self.delegate respondsToSelector:@selector(shouldStop)] && [self.delegate shouldStop])) {
         [self stopBlink];
+        return;
     }
     [self blink];
 }
@@ -70,7 +76,7 @@
     else
         self.image = _blinkImage;
     
-    [self setNeedsDisplay];
+    [self setNeedsDisplay:YES];
 }
 
 - (instancetype) initWithFrame:(NSRect)frameRect

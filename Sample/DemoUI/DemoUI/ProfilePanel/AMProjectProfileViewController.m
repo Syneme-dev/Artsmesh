@@ -33,7 +33,7 @@
     // Do view setup here.
     
     [self loadProject:nil];
-    
+    self.statusLight.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadProject:) name:AM_LIVE_GROUP_CHANDED object:nil];
 }
 
@@ -74,7 +74,6 @@
     }else{
         [self.statusLight setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
     }
-    [self.statusLight setNeedsDisplay];
 }
 
 -(void)setBroadcastURL
@@ -177,6 +176,7 @@
 - (void) afterStopBlink
 {
     [self setStatus];
+    [self.statusLight setNeedsDisplay:YES];
 }
 
 @end

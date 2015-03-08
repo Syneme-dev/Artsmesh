@@ -39,10 +39,10 @@
     [super viewDidLoad];
     // Do view setup here.
     
- //   self.statusLight.delegate = self;
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [self groupChanged:nil];
+    self.statusLight.blinkDelegate = self;
 }
 
 

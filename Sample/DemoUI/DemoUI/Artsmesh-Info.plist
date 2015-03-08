@@ -25,115 +25,16 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved. * Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
+	<string>Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved. 
 
 * Syneme (Ken Fields):
 http://syneme.ccom.edu.cn
 
 * Detao Masters Academy is a Shanghai based Culture and Education Group
 http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
 
 * Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com
-Copyright 2015 Jointly by Syneme and Detao Masters Academy. All rights reserved.
-
-* Syneme (Ken Fields):
-http://syneme.ccom.edu.cn
-
-* Detao Masters Academy is a Shanghai based Culture and Education Group
-http://www.detaoma.com</string>
+http://syneme.ccom.edu.cn</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

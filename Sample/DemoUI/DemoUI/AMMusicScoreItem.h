@@ -10,6 +10,7 @@
 
 @interface AMMusicScoreItem : NSObject
 
+@property (nonatomic, assign)   BOOL        selected;
 @property (nonatomic, retain)   NSImage*    image;
 @property (nonatomic, copy)     NSString*   name;
 @property (nonatomic)           NSSize      size;

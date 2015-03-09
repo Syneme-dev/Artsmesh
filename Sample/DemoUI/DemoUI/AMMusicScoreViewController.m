@@ -7,7 +7,7 @@
 //
 
 #import "AMMusicScoreViewController.h"
-#import "AMMusicScoreItem.h"
+#import "UIFramework/AMCollectionViewCell.h"
 #import "UIFramework/AMCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"
 #import "UIFramework/AMButtonHandler.h"
@@ -19,7 +19,6 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     NSMutableArray*     musicScoreItems;
     AMCollectionView    *_collectionView;
 }
-
 @end
 
 @implementation AMMusicScoreViewController
@@ -86,10 +85,10 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                           [_collectionView removeAllItems];
                           
                           for (NSImage *image in musicScoreItems) {
-                              NSImageView *imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, image.size.width, image.size.height)];
-                              imageView.image = image;
-                              imageView.imageScaling = NSImageScaleNone;
-                              [_collectionView addViewItem:imageView];
+                              AMCollectionViewCell *imageCell = [[AMCollectionViewCell alloc] initWithFrame:NSMakeRect(0, 0, image.size.width, image.size.height)];
+                              imageCell.image = image;
+                              imageCell.imageScaling = NSImageScaleNone;
+                              [_collectionView addViewItem:imageCell];
                           }
                       });
                   }];

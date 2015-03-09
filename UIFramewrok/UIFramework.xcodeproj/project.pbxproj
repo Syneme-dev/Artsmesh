@@ -26,7 +26,7 @@
 		4A776D251A7886FB00281F46 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D231A7886FB00281F46 /* AMCollectionView.m */; };
 		4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D261A78873300281F46 /* NSView_Constrains.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D271A78873300281F46 /* NSView_Constrains.m */; };
-		4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */; };
+		4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F4CE9071AAD3D1400D9344A /* AMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */; };
 		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
@@ -274,6 +274,8 @@
 			files = (
 				4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */,
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
+				4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */,
+				4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */,
 				4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */,
 				2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */,
 				AF9DC78418E9643E0029DB97 /* BlueBackgroundView.h in Headers */,
@@ -282,7 +284,6 @@
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
-				4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
@@ -291,7 +292,6 @@
 				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
-				4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */,
 				01D059B31A2D5A3600BC51E7 /* AMBigBlueButton.h in Headers */,
 				4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */,
 				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,

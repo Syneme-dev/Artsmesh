@@ -26,6 +26,8 @@
 		4A776D251A7886FB00281F46 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D231A7886FB00281F46 /* AMCollectionView.m */; };
 		4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D261A78873300281F46 /* NSView_Constrains.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D271A78873300281F46 /* NSView_Constrains.m */; };
+		4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */; };
+		4F4CE9071AAD3D1400D9344A /* AMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */; };
 		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
 		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -84,6 +86,8 @@
 		4A776D231A7886FB00281F46 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionView.m; sourceTree = "<group>"; };
 		4A776D261A78873300281F46 /* NSView_Constrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSView_Constrains.h; sourceTree = "<group>"; };
 		4A776D271A78873300281F46 /* NSView_Constrains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSView_Constrains.m; sourceTree = "<group>"; };
+		4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionViewCell.h; sourceTree = "<group>"; };
+		4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionViewCell.m; sourceTree = "<group>"; };
 		4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlinkView.h; sourceTree = "<group>"; };
 		4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlinkView.m; sourceTree = "<group>"; };
 		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */,
+				4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */,
 				4A776D221A7886FB00281F46 /* AMCollectionView.h */,
 				4A776D231A7886FB00281F46 /* AMCollectionView.m */,
 				4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */,
@@ -276,6 +282,7 @@
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
+				4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
@@ -373,6 +380,7 @@
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */,
 				4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */,
+				4F4CE9071AAD3D1400D9344A /* AMCollectionViewCell.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,

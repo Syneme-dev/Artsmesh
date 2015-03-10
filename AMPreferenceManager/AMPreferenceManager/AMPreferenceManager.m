@@ -97,7 +97,8 @@
              @"NO", Preference_Jacktrip_Jamlink,
              @"NO", Preference_Jacktrip_UseIpv6,
              @"YES",Preference_Key_General_TopControlBar,
-            nil];
+             @"NO", Preference_Key_General_UseOSCForChat,
+             nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
 
 }

@@ -83,8 +83,12 @@
 -(void)removeAllItems
 {
     for (AMPopUpMenuItem* item in [self menuItems]) {
-        [item removeFromSuperview];
+        [item performSelector:@selector(removeFromSuperview) withObject:nil];
     }
+    
+    NSRect frame = self.view.frame;
+    frame.size.height = 0;
+    self.view.frame = frame;
     
     [[self menuItems] removeAllObjects];
 }

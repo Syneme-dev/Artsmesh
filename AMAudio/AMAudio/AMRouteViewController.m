@@ -8,11 +8,11 @@
 
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
-#import "AMJackClient.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"
 #import "AMRouteView.h"
 #import "AMAudio.h"
+
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
@@ -48,7 +48,7 @@ shouldConnectChannel:(AMChannel *)channel1
         srcChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
     }
     
-    return [self.jackClient connectSrc:srcChannName toDest:destChannName];
+    return [[[AMAudio sharedInstance] audioJackClient] connectSrc:srcChannName toDest:destChannName];
 }
 
 - (BOOL)routeView:(AMRouteView *)routeView
@@ -73,7 +73,7 @@ disconnectChannel:(AMChannel *)channel1
         srcChannName = [NSString stringWithFormat:@"%@:%@", channel2.deviceID, channel2.channelName];
     }
     
-    return [self.jackClient disconnectChannel:srcChannName fromDest:destChannName];
+    return [[[AMAudio sharedInstance] audioJackClient] disconnectChannel:srcChannName fromDest:destChannName];
 }
 
 - (BOOL)routeView:(AMRouteView *)routeView
@@ -89,7 +89,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
-    [self.jacktripManager stopJacktripByName:deviceID];
+    [[[AMAudio sharedInstance] audioJacktripManager] stopJacktripByName:deviceID];
     return YES;
 }
 
@@ -129,7 +129,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)jackStarted:(NSNotification*)notification
 {
-    [self.jackClient openJackClient];
+    [[[AMAudio sharedInstance] audioJackClient] openJackClient];
     [self reloadAudioChannel:nil];
 }
 
@@ -138,7 +138,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMRouteView* routerView = (AMRouteView*)self.view;
     [routerView removeALLDevice];
     
-    [self.jacktripManager stopAllJacktrips];
+    [[[AMAudio sharedInstance] audioJacktripManager] stopAllJacktrips];
 }
 
 -(void)dealloc
@@ -150,17 +150,17 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)reloadAudioChannel:(NSNotification*)notify
 {
-    if (![self.jackClient isOpen]) {
+    if (![[[AMAudio sharedInstance] audioJackClient] isOpen]) {
         return;
     }
     
     AMRouteView* routeView = (AMRouteView*)self.view;
     
     //Read all channels from system
-    NSArray* allChann = [self.jackClient allChannels];
+    NSArray* allChann = [[[AMAudio sharedInstance] audioJackClient] allChannels];
     
     //Remove device not exist any more
-    NSMutableArray* removedDevices = [[NSMutableArray alloc] init];
+    NSMutableArray* toRemoveDevices = [[NSMutableArray alloc] init];
     for (AMChannel* channShow in [routeView allChannels])
     {
         if (channShow.type == AMPlaceholderChannel) {
@@ -175,13 +175,13 @@ shouldRemoveDevice:(NSString *)deviceID;
         }
         if (!bFind) {
             
-            if (![removedDevices containsObject:channShow.deviceID]) {
-                [removedDevices addObject:channShow.deviceID];
+            if (![toRemoveDevices containsObject:channShow.deviceID]) {
+                [toRemoveDevices addObject:channShow.deviceID];
             }
         }
     }
     
-    for (NSString* devId in removedDevices ) {
+    for (NSString* devId in toRemoveDevices ) {
         [routeView removeDevice:devId];
     }
     
@@ -237,8 +237,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         
         //add new device to router view
         BOOL removable = NO;
-        for (int i = 0; i < [self.jacktripManager.jackTripInstances count]; i++) {
-            AMJacktripInstance* jacktrip = self.jacktripManager.jackTripInstances[i];
+        for (int i = 0; i < [[[AMAudio sharedInstance] audioJacktripManager].jackTripInstances count]; i++) {
+            AMJacktripInstance* jacktrip = [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances[i];
             if ([jacktrip.instanceName isEqualToString:deviceID]) {
                 removable = YES;
                 break;
@@ -255,7 +255,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSArray* channelsOnView = [routeView allChannels];
     for (AMChannel* chann in channelsOnView) {
         NSString* fullName = [chann channelFullName];
-        NSArray* conns = [self.jackClient connectionForPort:fullName];
+        NSArray* conns = [[[AMAudio sharedInstance] audioJackClient] connectionForPort:fullName];
         for (NSString* conn in conns ) {
             for (AMChannel* peerChann in channelsOnView) {
                 NSString* peerFullName = [peerChann channelFullName];
@@ -269,11 +269,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 - (IBAction)startJackTrip:(NSButton *)sender
 {
-    if (self.jackManager == nil) {
-        return;
-    }
-    
-    if (self.jackManager.jackState == JackState_Stopped) {
+    if ([[AMAudio sharedInstance] audioJackManager].jackState == JackState_Stopped) {
         
         NSAlert *alert = [NSAlert alertWithMessageText:@"Jack is not running" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"To start jacktrip you must start JACK first!"];
         [alert runModal];
@@ -292,9 +288,6 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
     AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
     
-    controller.jackManager = self.jackManager;
-    controller.jacktripManager = self.jacktripManager;
-
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
     self.myPopover.contentViewController = controller;

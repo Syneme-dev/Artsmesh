@@ -9,24 +9,9 @@
 /* Begin PBXBuildFile section */
 		37FCB9A818710F2A00C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9A718710F2A00C1FD1B /* Cocoa.framework */; };
 		37FCB9B218710F2A00C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9B018710F2A00C1FD1B /* InfoPlist.strings */; };
-		37FCB9BD18710F2A00C1FD1B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9BC18710F2A00C1FD1B /* XCTest.framework */; };
-		37FCB9BE18710F2A00C1FD1B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9A718710F2A00C1FD1B /* Cocoa.framework */; };
-		37FCB9C118710F2A00C1FD1B /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37FCB9A418710F2A00C1FD1B /* AMTaskLauncher.framework */; };
-		37FCB9C718710F2A00C1FD1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FCB9C518710F2A00C1FD1B /* InfoPlist.strings */; };
-		37FCB9C918710F2A00C1FD1B /* AMTaskLauncherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FCB9C818710F2A00C1FD1B /* AMTaskLauncherTests.m */; };
 		CE153B03191E5C7200E53250 /* AMShellTask.m in Sources */ = {isa = PBXBuildFile; fileRef = CE153B02191E5C7200E53250 /* AMShellTask.m */; };
 		CE4A728A192066D8007E0E96 /* AMShellTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CE153AFE191E5C2300E53250 /* AMShellTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		37FCB9BF18710F2A00C1FD1B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37FCB99B18710F2A00C1FD1B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37FCB9A318710F2A00C1FD1B;
-			remoteInfo = AMTaskLauncher;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		37FCB9A418710F2A00C1FD1B /* AMTaskLauncher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AMTaskLauncher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,11 +22,7 @@
 		37FCB9AF18710F2A00C1FD1B /* AMTaskLauncher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMTaskLauncher-Info.plist"; sourceTree = "<group>"; };
 		37FCB9B118710F2A00C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FCB9B318710F2A00C1FD1B /* AMTaskLauncher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMTaskLauncher-Prefix.pch"; sourceTree = "<group>"; };
-		37FCB9BB18710F2A00C1FD1B /* AMTaskLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AMTaskLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCB9BC18710F2A00C1FD1B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		37FCB9C418710F2A00C1FD1B /* AMTaskLauncherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMTaskLauncherTests-Info.plist"; sourceTree = "<group>"; };
-		37FCB9C618710F2A00C1FD1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		37FCB9C818710F2A00C1FD1B /* AMTaskLauncherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMTaskLauncherTests.m; sourceTree = "<group>"; };
 		CE153AFE191E5C2300E53250 /* AMShellTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMShellTask.h; sourceTree = "<group>"; };
 		CE153B02191E5C7200E53250 /* AMShellTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMShellTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,16 +36,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37FCB9B818710F2A00C1FD1B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37FCB9BE18710F2A00C1FD1B /* Cocoa.framework in Frameworks */,
-				37FCB9C118710F2A00C1FD1B /* AMTaskLauncher.framework in Frameworks */,
-				37FCB9BD18710F2A00C1FD1B /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -72,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				37FCB9AD18710F2A00C1FD1B /* AMTaskLauncher */,
-				37FCB9C218710F2A00C1FD1B /* AMTaskLauncherTests */,
 				37FCB9A618710F2A00C1FD1B /* Frameworks */,
 				37FCB9A518710F2A00C1FD1B /* Products */,
 			);
@@ -82,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				37FCB9A418710F2A00C1FD1B /* AMTaskLauncher.framework */,
-				37FCB9BB18710F2A00C1FD1B /* AMTaskLauncherTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,24 +96,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		37FCB9C218710F2A00C1FD1B /* AMTaskLauncherTests */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB9C818710F2A00C1FD1B /* AMTaskLauncherTests.m */,
-				37FCB9C318710F2A00C1FD1B /* Supporting Files */,
-			);
-			path = AMTaskLauncherTests;
-			sourceTree = "<group>";
-		};
-		37FCB9C318710F2A00C1FD1B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				37FCB9C418710F2A00C1FD1B /* AMTaskLauncherTests-Info.plist */,
-				37FCB9C518710F2A00C1FD1B /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -177,24 +128,6 @@
 			productReference = 37FCB9A418710F2A00C1FD1B /* AMTaskLauncher.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		37FCB9BA18710F2A00C1FD1B /* AMTaskLauncherTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37FCB9CF18710F2A00C1FD1B /* Build configuration list for PBXNativeTarget "AMTaskLauncherTests" */;
-			buildPhases = (
-				37FCB9B718710F2A00C1FD1B /* Sources */,
-				37FCB9B818710F2A00C1FD1B /* Frameworks */,
-				37FCB9B918710F2A00C1FD1B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				37FCB9C018710F2A00C1FD1B /* PBXTargetDependency */,
-			);
-			name = AMTaskLauncherTests;
-			productName = AMTaskLauncherTests;
-			productReference = 37FCB9BB18710F2A00C1FD1B /* AMTaskLauncherTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,11 +136,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Artsmesh;
-				TargetAttributes = {
-					37FCB9BA18710F2A00C1FD1B = {
-						TestTargetID = 37FCB9A318710F2A00C1FD1B;
-					};
-				};
 			};
 			buildConfigurationList = 37FCB99E18710F2A00C1FD1B /* Build configuration list for PBXProject "AMTaskLauncher" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -222,7 +150,6 @@
 			projectRoot = "";
 			targets = (
 				37FCB9A318710F2A00C1FD1B /* AMTaskLauncher */,
-				37FCB9BA18710F2A00C1FD1B /* AMTaskLauncherTests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,14 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FCB9B218710F2A00C1FD1B /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37FCB9B918710F2A00C1FD1B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37FCB9C718710F2A00C1FD1B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,37 +174,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		37FCB9B718710F2A00C1FD1B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37FCB9C918710F2A00C1FD1B /* AMTaskLauncherTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		37FCB9C018710F2A00C1FD1B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37FCB9A318710F2A00C1FD1B /* AMTaskLauncher */;
-			targetProxy = 37FCB9BF18710F2A00C1FD1B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		37FCB9B018710F2A00C1FD1B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37FCB9B118710F2A00C1FD1B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		37FCB9C518710F2A00C1FD1B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37FCB9C618710F2A00C1FD1B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -393,46 +288,6 @@
 			};
 			name = Release;
 		};
-		37FCB9D018710F2A00C1FD1B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMTaskLauncher.framework/Versions/A/AMTaskLauncher";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMTaskLauncher/AMTaskLauncher-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AMTaskLauncherTests/AMTaskLauncherTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		37FCB9D118710F2A00C1FD1B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AMTaskLauncher.framework/Versions/A/AMTaskLauncher";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AMTaskLauncher/AMTaskLauncher-Prefix.pch";
-				INFOPLIST_FILE = "AMTaskLauncherTests/AMTaskLauncherTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -450,15 +305,6 @@
 			buildConfigurations = (
 				37FCB9CD18710F2A00C1FD1B /* Debug */,
 				37FCB9CE18710F2A00C1FD1B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37FCB9CF18710F2A00C1FD1B /* Build configuration list for PBXNativeTarget "AMTaskLauncherTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37FCB9D018710F2A00C1FD1B /* Debug */,
-				37FCB9D118710F2A00C1FD1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

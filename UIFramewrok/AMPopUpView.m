@@ -8,11 +8,14 @@
 
 #import "AMPopUpView.h"
 #import "AMPopUpMenuController.h"
+#import "NSView_Constrains.h"
 
-@interface AMPopUpView()<AMPopUpMenuDelegate>
+@interface AMPopUpView()<AMPopUpMenuDelegate, NSWindowDelegate>
 
 @property BOOL mouseEntered;
 @property(nonatomic) NSInteger indexOfSelectedItem;
+
+@property NSWindow *popWindow;
 
 @end
 
@@ -27,9 +30,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-//        self.backgroupColor = [NSColor colorWithCalibratedRed:(51.0f/255.0f) green:(51.0f/255.0f) blue:(51.0f/255.0f) alpha:1];
-//        self.mouseOverColor = [NSColor colorWithCalibratedRed:(45.0f/255.0f) green:(45.0f/255.0f)  blue:(45.0f/255.0f)  alpha:1];
-        
         self.backgroupColor = [NSColor colorWithCalibratedRed:(38.0f/255.0f)
                                                         green:(38.0f/255.0f)
                                                          blue:(38.0f/255.0f)
@@ -50,6 +50,7 @@
     }
     return self;
 }
+
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -88,6 +89,44 @@
     
 }
 
+
+-(NSWindow *)getPopWindow:(NSRect)frame
+{
+    if (self.popWindow == nil) {
+        self.popWindow = [[NSWindow alloc] initWithContentRect:frame
+                                                           styleMask:NSBorderlessWindowMask
+                                                             backing:NSBackingStoreBuffered
+                                                            defer:NO];
+        self.popWindow.hasShadow = NO;
+        self.popWindow.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
+         NSWindowDidResignKeyNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpWillShow:) name:
+         AMPopUpWillShowNotification object:nil];
+    }
+    
+    [self.popWindow setFrame:frame display:YES];
+    return self.popWindow;
+}
+
+-(void)popUpWillShow:(NSNotification *)notification
+{
+    if([notification.object isNotEqualTo:self]){
+        [self removePopUpMenu];
+    }
+}
+
+
+-(void)popUpResignKeyWindow:(NSNotification *)notification
+{
+    if([notification.object isEqualTo:self.popWindow]){
+        [self removePopUpMenu];
+    }
+}
+
+
 -(void)mouseDown:(NSEvent *)theEvent
 {
     if (!self.enabled) {
@@ -99,21 +138,20 @@
     
     
     NSView *popUpView = [self popUpMenuController].view;
-    if (popUpView.superview) {
-        [popUpView removeFromSuperview];
-        return;
-    }
+    NSWindow *popupWindow = [self getPopWindow:popUpView.bounds];
+    [popupWindow.contentView addConstrainsToSubview:popUpView leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     
-    //CGFloat menuHeight = [self.popUpMenuController menuHeight];
-    CGFloat menuHeight = popUpView.frame.size.height;
     
     NSRect rect = self.frame;
-    rect.origin.y = rect.origin.y - menuHeight;
-    rect.size.height = menuHeight;
-
-    [self.superview addSubview:popUpView];
-    [popUpView setFrame:rect];
-    [self.superview setNeedsDisplay:YES];
+    rect.origin.y = rect.origin.y - popupWindow.frame.size.height;
+    rect.size.height = popupWindow.frame.size.height;
+    rect = [self.superview convertRect:rect toView:nil];
+    NSRect screenRect = [self.window convertRectToScreen:rect];
+    [popupWindow setFrameOrigin:screenRect.origin];
+    popupWindow.isVisible = YES;
+    [popupWindow makeKeyAndOrderFront:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AMPopUpWillShowNotification object:self];
 }
 
 
@@ -170,6 +208,7 @@
 
 -(void)removeAllItems
 {
+    _title = @"";
     [[self popUpMenuController] removeAllItems];
     _popUpMenuController = nil;
 }
@@ -189,7 +228,7 @@
 
 -(void)removePopUpMenu
 {
-    [self.popUpMenuController.view removeFromSuperview];
+    self.popWindow.isVisible = NO;
 }
 
 
@@ -225,6 +264,12 @@
 {
     return [[self popUpMenuController] itemCount];
 }
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 
 @end

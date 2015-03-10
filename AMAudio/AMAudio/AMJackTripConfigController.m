@@ -15,6 +15,7 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "AMAudio/AMAudio.h"
 
 @interface AMJackTripConfigController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
@@ -98,7 +99,7 @@
         
         //Two User at most have one connection
         BOOL alreadyConnect = NO;
-        for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
+        for(AMJacktripInstance* jacktrip in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
             if ([user.nickName isEqualToString:jacktrip.instanceName]){
                 alreadyConnect = YES;
                 break;
@@ -131,6 +132,8 @@
             self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
                                             privateIp];
         }else{
+            
+            //TODO: bug! if local groupmates meshed, can not use private ip
             self.peerAddress.stringValue = [self.allUsers[firstIndexInUserlist]
                                             publicIp];
         }
@@ -160,7 +163,7 @@
     for (NSUInteger i = 0; i <10; i++) {
         
         BOOL inUse = NO;
-        for (AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances) {
+        for (AMJacktripInstance* jacktrip in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances) {
             if(jacktrip.portOffset == i){
                 inUse = YES;
                 break;
@@ -295,7 +298,7 @@
         return NO;
     }
     
-    for(AMJacktripInstance* jacktrip in self.jacktripManager.jackTripInstances){
+    for(AMJacktripInstance* jacktrip in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
         if([jacktrip.instanceName isEqualToString:self.peerName.stringValue]){
             
             NSAlert *alert = [NSAlert alertWithMessageText:@"duplicate user!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Already have one jacktrip connection with that user."];
@@ -306,7 +309,7 @@
     
     //check channel count;
     int totalChannels = 0;
-    for (AMJacktripInstance* instance in self.jacktripManager.jackTripInstances){
+    for (AMJacktripInstance* instance in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
         totalChannels += instance.channelCount;
     }
     
@@ -343,7 +346,7 @@
     cfgs.clientName = self.peerName.stringValue;
     cfgs.useIpv6 = self.ipv6Check.checked;
     
-    if(![self.jacktripManager startJacktrip:cfgs]){
+    if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
        
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
         [alert runModal];
@@ -352,10 +355,6 @@
     [self.owner performClose:nil];
 }
 
-//-(void)jacktripChanged:(NSNotification*)notification
-//{
-//
-//}
 
 - (IBAction)closeClicked:(NSButton *)sender
 {

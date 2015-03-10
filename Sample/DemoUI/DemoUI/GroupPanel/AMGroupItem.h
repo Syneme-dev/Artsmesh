@@ -16,6 +16,7 @@
 
 +(AMGroupItem *)itemFromLiveGroup:(AMLiveGroup *)group;
 
+-(BOOL)isLocked;
 -(BOOL)isBroadcasting;
 -(BOOL)canLeave;
 -(BOOL)canMerge;

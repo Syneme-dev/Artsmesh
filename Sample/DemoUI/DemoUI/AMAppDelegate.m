@@ -7,12 +7,8 @@
 //
 
 
-#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
-#import <AMPluginLoader/AMPluginProtocol.h>
-#import <AMNotificationManager/AMNotificationManager.h>
 #import <AMPreferenceManager/AMPreferenceManager.h>
-#import "UserGroupModuleConst.h"
 #import "AMMesher/AMMesher.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMAudio/AMAudio.h"
@@ -20,111 +16,61 @@
 #import "AMOscGroups/AMOSCGroups.h"
 
 
-static NSMutableDictionary *allPlugins = nil;
-
-@interface AMAppDelegate () <AMPluginAppDelegate>
-@end
-
-
 @implementation AMAppDelegate
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-
-    BOOL bRet = AMLogInitialize();
-    if (!bRet) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Init Log Module Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Can not open log file!"];
-        [alert runModal];
-        
-        return;
-    }
+    
+    NSAssert(AMLogInitialize(), @"Initialize Log Error!");
     
     AMLog(kAMInfoLog, @"Main", @"Artsmesh is Starting...");
-    allPlugins = [self loadPlugins];
     
-    [[AMPreferenceManager shareInstance] initPreference];
-    AMLog(kAMInfoLog, @"Main", @"Preference is initialized.");
+    [self loadPreference];
+    [self loadPanels];
     
-    [[AMStatusNet shareInstance] loadGroups];
-    [self.mainWindowController showDefaultWindow];
-    AMLog(kAMInfoLog, @"Main", @"Default Panels are initialized.");
-    
-    BOOL isPreferenceCompleted = [self checkRequirementPreferenceCompleted];
-    if (!isPreferenceCompleted) {
-        [self showPreferencePanel];
-    }
-    
-    [self startMesher];
-    [self writePluginDataToMesher];
-    
+    //TODO:the following two should not be here too
+    [self loadArchieveGroups];
+    [self loadLiveGroups];
 }
 
+
+-(void)loadPreference
+{
+    [[AMPreferenceManager shareInstance] initPreference];
+    AMLog(kAMInfoLog, @"Main", @"Preference is initialized.");
+}
+
+
+-(void)loadPanels
+{
+    [self.mainWindowController showDefaultWindow];
+    AMLog(kAMInfoLog, @"Main", @"Panels loaded!");
+}
+
+
+-(void)loadArchieveGroups
+{
+    [[AMStatusNet shareInstance] loadGroups];
+    AMLog(kAMInfoLog, @"Main", @"Loading archieve groups.");
+}
+
+
+-(void)loadLiveGroups
+{
+    [[AMMesher sharedAMMesher] startMesher];
+    AMLog(kAMInfoLog, @"Main", @"Loading live groups.");
+}
+
+
 - (void)applicationWillTerminate:(NSNotification *)notification {
-    id userPluginClass = allPlugins[UserGroupPluginName];
-    [userPluginClass canQuit];
+
+    //TODO: Here we should not use osc or audio directly, we should send quit notifications, then
+    //the panel itself will release the resource
     [[AMMesher sharedAMMesher] stopMesher];
-    
     [[AMAudio sharedInstance] releaseResources];
     [[AMOSCGroups sharedInstance] stopOSCGroupClient];
     [[AMOSCGroups sharedInstance] stopOSCGroupServer];
     
-    
     AMLogClose();
 }
-
-- (void)connectMesher {
-    //TODO:
-}
-
-- (void)startMesher {
-    //TODO:
-    [[AMMesher sharedAMMesher] startMesher];
-}
-
-- (void)showPreferencePanel {
-    //TODO:
-}
-
-- (BOOL)checkRequirementPreferenceCompleted {
-    //TODO:
-    return NO;
-}
-
-- (void)writePluginDataToMesher {
-    //TODO:
-
-}
-
-
-- (NSMutableDictionary *)loadPlugins {
-    NSBundle *main = [NSBundle mainBundle];
-    NSArray *allPlugins = [main pathsForResourcesOfType:@"bundle" inDirectory:@"../PlugIns"];
-    NSMutableDictionary *availablePlugins = [NSMutableDictionary dictionaryWithCapacity:10];
-    id plugin = nil;
-    NSString *pluginName = nil;
-    NSBundle *pluginBundle = nil;
-    for (NSString *path in allPlugins) {
-        pluginBundle = [NSBundle bundleWithPath:path];
-        [pluginBundle load];
-        Class principalClass = [pluginBundle principalClass];
-        pluginName = [[principalClass alloc] displayName];
-        plugin = [[principalClass alloc] init:self bundle:pluginBundle];
-        [availablePlugins setObject:plugin forKey:pluginName];
-        pluginName = nil;
-        plugin = nil;
-        pluginBundle = nil;
-    }
-    return availablePlugins;
-}
-
-- (AMNotificationManager *)sharedNotificationManager {
-    return [AMNotificationManager defaultShared];
-}
-
-- (AMPreferenceManager *)sharedPreferenceManger {
-    return [AMPreferenceManager shareInstance];
-}
-
-
 
 @end

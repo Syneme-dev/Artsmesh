@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMJackConfigs.h"
-#import "AMAudio.h"
+
+typedef enum {
+    JackState_Stopped = 0,
+    JackState_Started,
+}JackState;
 
 @interface AMJackManager : NSObject
 
 @property  JackState jackState;
-@property  AMJackConfigs* jackCfg;
 
 -(BOOL)startJack;
 -(void)stopJack;

@@ -9,6 +9,7 @@
 #import "AMGroupProfileViewController.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMFoundryFontView.h"
+#import "UIFramework/AMBlinkView.h"
 #import "AMCoreData/AMCoredata.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNet/AMStatusNet.h"
@@ -17,15 +18,16 @@
 #import "AMGroupCreateViewController.h"
 
 
-@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate>
+@interface AMGroupProfileViewController ()<AMCheckBoxDelegeate, NSPopoverDelegate,
+                                            AMBlinkViewDelegate>
 @property (weak) IBOutlet NSImageView *groupAvatar;
-@property (weak) IBOutlet AMFoundryFontView *groupNameField;
-@property (weak) IBOutlet AMFoundryFontView *fullNameField;
-@property (weak) IBOutlet AMFoundryFontView *homePageField;
-@property (weak) IBOutlet AMFoundryFontView *locationField;
-@property (weak) IBOutlet AMCheckBoxView *lockBox;
-@property (weak) IBOutlet NSImageView *statusLight;
-@property (weak) IBOutlet AMFoundryFontView *descriptionField;
+@property (weak) IBOutlet AMFoundryFontView *   groupNameField;
+@property (weak) IBOutlet AMFoundryFontView *   fullNameField;
+@property (weak) IBOutlet AMFoundryFontView *   homePageField;
+@property (weak) IBOutlet AMFoundryFontView *   locationField;
+@property (weak) IBOutlet AMCheckBoxView *      lockBox;
+@property (weak) IBOutlet AMBlinkView*          statusLight;
+@property (weak) IBOutlet AMFoundryFontView *   descriptionField;
 
 @property NSPopover *myPopover;
 
@@ -37,9 +39,10 @@
     [super viewDidLoad];
     // Do view setup here.
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [self groupChanged:nil];
+    self.statusLight.blinkDelegate = self;
 }
 
 
@@ -80,7 +83,7 @@
 {
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     if (localGroup.busy) {
-        [self.statusLight setImage:[NSImage imageNamed:@"groupuser_busy"]];
+        [self.statusLight setImage:[NSImage imageNamed:@"group_lock_dot"]];
     }else if([localGroup hasUserOnline]){
         [self.statusLight setImage:[NSImage imageNamed:@"groupuser_meshed_icon"]];
     }else{
@@ -211,12 +214,21 @@
     [self startBlickingStatus];
 }
 
-
+#pragma mark  -
+#pragma mark  blink-start
 -(void)startBlickingStatus
 {
-    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
-    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];
+/*    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];*/
+    [self.statusLight startBlink];
 }
+
+- (void) afterStopBlink
+{
+    [self setStatus];
+    [self.statusLight setNeedsDisplay:YES];
+}
+#pragma mark  -
 
 
 -(void)setGroupLongitudeAndLatitude:(NSString *)location
@@ -258,6 +270,11 @@
                                              returningResponse:nil error:nil];
     
     NSError *jsonParsingError = nil;
+    
+    if (response == nil) {
+        return nil;
+    }
+    
     NSArray *geoData = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
     
     if(jsonParsingError != nil){

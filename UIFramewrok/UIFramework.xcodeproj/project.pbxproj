@@ -13,27 +13,28 @@
 		26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */; };
 		2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877019899ABA001DA266 /* AMPopUpView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877119899ABA001DA266 /* AMPopUpView.m */; };
-		2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877219899ABA001DA266 /* AMPopUpMenuItem.h */; };
+		2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877219899ABA001DA266 /* AMPopUpMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2658877D19899ABA001DA266 /* AMPopUpMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877319899ABA001DA266 /* AMPopUpMenuItem.m */; };
 		2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2658877419899ABA001DA266 /* AMPopUpMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658877519899ABA001DA266 /* AMPopUpMenuController.m */; };
 		2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2658877619899ABA001DA266 /* AMPopUpMenuController.xib */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
+		4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */; };
 		4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D221A7886FB00281F46 /* AMCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A776D251A7886FB00281F46 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D231A7886FB00281F46 /* AMCollectionView.m */; };
 		4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D261A78873300281F46 /* NSView_Constrains.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D271A78873300281F46 /* NSView_Constrains.m */; };
+		4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */; };
+		4F4CE9071AAD3D1400D9344A /* AMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */; };
+		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
 		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */; };
-		AF00D44F18C9B5E6004DE9E6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D44E18C9B5E6004DE9E6 /* XCTest.framework */; };
-		AF00D45018C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
-		AF00D45318C9B5E6004DE9E6 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */; };
-		AF00D45918C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */; };
-		AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */; };
 		AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AF2890DE198A398A00D05174 /* AMBlueButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2890DF198A398A00D05174 /* AMBlueButton.m */; };
 		AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -61,19 +62,9 @@
 		CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE883167192C52EA00DA17CE /* AMPanelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC231731A00D5B300AC7B7F /* AMBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC231741A00D5B300AC7B7F /* AMBackgroundView.m */; };
-		CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC27F091993877E0023163F /* AMTextFieldCell.h */; };
+		CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC27F091993877E0023163F /* AMTextFieldCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC27F0A1993877E0023163F /* AMTextFieldCell.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AF00D45118C9B5E6004DE9E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AF00D42D18C9B5E6004DE9E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AF00D43518C9B5E6004DE9E6;
-			remoteInfo = UIFramewrok;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01D059B11A2D5A3600BC51E7 /* AMBigBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBigBlueButton.h; sourceTree = "<group>"; };
@@ -89,10 +80,16 @@
 		2658877619899ABA001DA266 /* AMPopUpMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPopUpMenuController.xib; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
+		4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
+		4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		4A776D221A7886FB00281F46 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
 		4A776D231A7886FB00281F46 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionView.m; sourceTree = "<group>"; };
 		4A776D261A78873300281F46 /* NSView_Constrains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSView_Constrains.h; sourceTree = "<group>"; };
 		4A776D271A78873300281F46 /* NSView_Constrains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSView_Constrains.m; sourceTree = "<group>"; };
+		4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionViewCell.h; sourceTree = "<group>"; };
+		4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCollectionViewCell.m; sourceTree = "<group>"; };
+		4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlinkView.h; sourceTree = "<group>"; };
+		4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlinkView.m; sourceTree = "<group>"; };
 		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
 		4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRatioButtonView.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,11 +102,7 @@
 		AF00D44518C9B5E6004DE9E6 /* UIFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFramework-Prefix.pch"; sourceTree = "<group>"; };
 		AF00D44618C9B5E6004DE9E6 /* UIFramewrok.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIFramewrok.h; sourceTree = "<group>"; };
 		AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIFramewrok.m; sourceTree = "<group>"; };
-		AF00D44D18C9B5E6004DE9E6 /* UIFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF00D44E18C9B5E6004DE9E6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		AF00D45618C9B5E6004DE9E6 /* UIFrameworkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIFrameworkTests-Info.plist"; sourceTree = "<group>"; };
-		AF00D45818C9B5E6004DE9E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIFramewrokTests.m; sourceTree = "<group>"; };
 		AF2890DE198A398A00D05174 /* AMBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlueButton.h; sourceTree = "<group>"; };
 		AF2890DF198A398A00D05174 /* AMBlueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlueButton.m; sourceTree = "<group>"; };
 		AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMDragDropView.h; path = UIFramewrok/AMDragDropView.h; sourceTree = "<group>"; };
@@ -150,16 +143,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF00D44A18C9B5E6004DE9E6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF00D45018C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */,
-				AF00D45318C9B5E6004DE9E6 /* UIFramework.framework in Frameworks */,
-				AF00D44F18C9B5E6004DE9E6 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -180,12 +163,26 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
-				4A776D261A78873300281F46 /* NSView_Constrains.h */,
-				4A776D271A78873300281F46 /* NSView_Constrains.m */,
+				4F4CE9041AAD3D1400D9344A /* AMCollectionViewCell.h */,
+				4F4CE9051AAD3D1400D9344A /* AMCollectionViewCell.m */,
+				4A776D221A7886FB00281F46 /* AMCollectionView.h */,
+				4A776D231A7886FB00281F46 /* AMCollectionView.m */,
+				4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */,
+				4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */,
+				CE88315F192C44B800DA17CE /* AMBoxItem.h */,
+				CE883160192C44B800DA17CE /* AMBoxItem.m */,
+				CE883161192C44B800DA17CE /* AMBox.h */,
+				CE883162192C44B800DA17CE /* AMBox.m */,
+				CE25C50D19775960003A8B39 /* AMBorderView.h */,
+				CE25C50E19775960003A8B39 /* AMBorderView.m */,
 				01D059B11A2D5A3600BC51E7 /* AMBigBlueButton.h */,
 				01D059B21A2D5A3600BC51E7 /* AMBigBlueButton.m */,
 				AF2890DE198A398A00D05174 /* AMBlueButton.h */,
 				AF2890DF198A398A00D05174 /* AMBlueButton.m */,
+				4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */,
+				4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */,
+				4A776D261A78873300281F46 /* NSView_Constrains.h */,
+				4A776D271A78873300281F46 /* NSView_Constrains.m */,
 				2658876C19899A97001DA266 /* AMPopupMenuButton */,
 				26CEAE8B197380F600DF285F /* AMCheckBoxView.h */,
 				26CEAE8C197380F600DF285F /* AMCheckBoxView.m */,
@@ -196,12 +193,6 @@
 				AFD344C6193EF82C0057F222 /* AMUIConst.h */,
 				CE883167192C52EA00DA17CE /* AMPanelView.h */,
 				CE25C51119775A08003A8B39 /* AMPanelView.m */,
-				CE88315F192C44B800DA17CE /* AMBoxItem.h */,
-				CE883160192C44B800DA17CE /* AMBoxItem.m */,
-				CE883161192C44B800DA17CE /* AMBox.h */,
-				CE883162192C44B800DA17CE /* AMBox.m */,
-				CE25C50D19775960003A8B39 /* AMBorderView.h */,
-				CE25C50E19775960003A8B39 /* AMBorderView.m */,
 				CEC27F091993877E0023163F /* AMTextFieldCell.h */,
 				CEC27F0A1993877E0023163F /* AMTextFieldCell.m */,
 				AF82E352190CA9680083487C /* AMFoundryFontView.h */,
@@ -210,8 +201,6 @@
 				26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */,
 				AFB34F6819065C1400092E33 /* AMButtonHandler.h */,
 				AFB34F6919065C1400092E33 /* AMButtonHandler.m */,
-				4A776D221A7886FB00281F46 /* AMCollectionView.h */,
-				4A776D231A7886FB00281F46 /* AMCollectionView.m */,
 				AF7DF6E51904C26E00554E6F /* AMMaxSizeView.h */,
 				AF7DF6E61904C26E00554E6F /* AMMaxSizeView.m */,
 				AFAA502218EC1375009286F4 /* AMMovableWindow.h */,
@@ -223,7 +212,6 @@
 				AF3A729118C9B6B100DB7BA1 /* AMDragDropView.h */,
 				AF3A729218C9B6B100DB7BA1 /* AMDragDropView.m */,
 				AF00D43F18C9B5E6004DE9E6 /* UIFramewrok */,
-				AF00D45418C9B5E6004DE9E6 /* UIFramewrokTests */,
 				AF00D43818C9B5E6004DE9E6 /* Frameworks */,
 				AF00D43718C9B5E6004DE9E6 /* Products */,
 			);
@@ -233,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */,
-				AF00D44D18C9B5E6004DE9E6 /* UIFrameworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -278,24 +265,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AF00D45418C9B5E6004DE9E6 /* UIFramewrokTests */ = {
-			isa = PBXGroup;
-			children = (
-				AF00D45A18C9B5E6004DE9E6 /* UIFramewrokTests.m */,
-				AF00D45518C9B5E6004DE9E6 /* Supporting Files */,
-			);
-			path = UIFramewrokTests;
-			sourceTree = "<group>";
-		};
-		AF00D45518C9B5E6004DE9E6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AF00D45618C9B5E6004DE9E6 /* UIFrameworkTests-Info.plist */,
-				AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -303,6 +272,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */,
 				26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */,
 				4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */,
 				2658877E19899ABA001DA266 /* AMPopUpMenuController.h in Headers */,
@@ -312,20 +282,22 @@
 				CE883165192C44B900DA17CE /* AMBox.h in Headers */,
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
+				4F4CE9061AAD3D1400D9344A /* AMCollectionViewCell.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
 				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
-				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
 				4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */,
 				01D059B31A2D5A3600BC51E7 /* AMBigBlueButton.h in Headers */,
 				4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */,
-				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
+				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
+				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
+				4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,24 +323,6 @@
 			productReference = AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AF00D44C18C9B5E6004DE9E6 /* UIFrameworkTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AF00D46118C9B5E6004DE9E6 /* Build configuration list for PBXNativeTarget "UIFrameworkTests" */;
-			buildPhases = (
-				AF00D44918C9B5E6004DE9E6 /* Sources */,
-				AF00D44A18C9B5E6004DE9E6 /* Frameworks */,
-				AF00D44B18C9B5E6004DE9E6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AF00D45218C9B5E6004DE9E6 /* PBXTargetDependency */,
-			);
-			name = UIFrameworkTests;
-			productName = UIFramewrokTests;
-			productReference = AF00D44D18C9B5E6004DE9E6 /* UIFrameworkTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -377,11 +331,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Artsmesh;
-				TargetAttributes = {
-					AF00D44C18C9B5E6004DE9E6 = {
-						TestTargetID = AF00D43518C9B5E6004DE9E6;
-					};
-				};
 			};
 			buildConfigurationList = AF00D43018C9B5E6004DE9E6 /* Build configuration list for PBXProject "UIFramework" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -396,7 +345,6 @@
 			projectRoot = "";
 			targets = (
 				AF00D43518C9B5E6004DE9E6 /* UIFramework */,
-				AF00D44C18C9B5E6004DE9E6 /* UIFrameworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -408,14 +356,6 @@
 			files = (
 				2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */,
 				AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AF00D44B18C9B5E6004DE9E6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF00D45918C9B5E6004DE9E6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +379,8 @@
 				26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */,
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */,
+				4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */,
+				4F4CE9071AAD3D1400D9344A /* AMCollectionViewCell.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,
@@ -450,40 +392,17 @@
 				4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */,
 				01D059B41A2D5A3600BC51E7 /* AMBigBlueButton.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AF00D44918C9B5E6004DE9E6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF00D45B18C9B5E6004DE9E6 /* UIFramewrokTests.m in Sources */,
+				4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AF00D45218C9B5E6004DE9E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AF00D43518C9B5E6004DE9E6 /* UIFramework */;
-			targetProxy = AF00D45118C9B5E6004DE9E6 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AF00D44318C9B5E6004DE9E6 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AF00D45718C9B5E6004DE9E6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AF00D45818C9B5E6004DE9E6 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -591,46 +510,6 @@
 			};
 			name = Release;
 		};
-		AF00D46218C9B5E6004DE9E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UIFramewrok.framework/Versions/A/UIFramewrok";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UIFramewrok/UIFramewrok-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "UIFramewrokTests/UIFrameworkTests-Info.plist";
-				PRODUCT_NAME = UIFrameworkTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		AF00D46318C9B5E6004DE9E6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UIFramewrok.framework/Versions/A/UIFramewrok";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UIFramewrok/UIFramewrok-Prefix.pch";
-				INFOPLIST_FILE = "UIFramewrokTests/UIFrameworkTests-Info.plist";
-				PRODUCT_NAME = UIFrameworkTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -648,15 +527,6 @@
 			buildConfigurations = (
 				AF00D45F18C9B5E6004DE9E6 /* Debug */,
 				AF00D46018C9B5E6004DE9E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AF00D46118C9B5E6004DE9E6 /* Build configuration list for PBXNativeTarget "UIFrameworkTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AF00D46218C9B5E6004DE9E6 /* Debug */,
-				AF00D46318C9B5E6004DE9E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

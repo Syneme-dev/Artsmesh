@@ -176,7 +176,10 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 - (NSDragOperation) draggingSourceOperationMaskForLocal:(BOOL)flag
 {
-    return NSDragOperationCopy;
+    if (flag) {
+        return NSDragOperationMove;
+    }
+    return NSDragOperationDelete;
 }
 
 
@@ -225,9 +228,16 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     [NSBezierPath fillRect:imageRect];
     [draggingImage unlockFocus];//*/
     
+    
+    NSRect  thumbRect = NSZeroRect;
+    thumbRect.size = [self thumbnailSize:draggingImage];
     NSPoint p = [self convertPoint:downPoint fromView:nil];
-    p.x = p.x - draggingImage.size.width/2;
-    p.y = p.y - draggingImage.size.height/2;
+    p.x = p.x - thumbRect.size.width/2;
+    p.y = p.y - thumbRect.size.height/2;
+    
+    thumbRect.origin.x = p.x;
+    thumbRect.origin.y = p.y;
+
     
   /*  old style
    NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
@@ -248,7 +258,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     NSDraggingItem *draggingItem = [[NSDraggingItem alloc]
                                     initWithPasteboardWriter:pasteboardItem];
-    [draggingItem setDraggingFrame:imageRect contents:draggingImage];
+    [draggingItem setDraggingFrame:thumbRect contents:draggingImage];
     
     [self beginDraggingSessionWithItems:@[draggingItem]
                                   event:mouseDownEvent
@@ -262,30 +272,28 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     return nil;
 }
 
-NSImage* thumbnailImage(NSImage *image) {
+-(NSSize) thumbnailSize : (NSImage*) image
+{
     NSSize imageSize = [image size];
     CGFloat imageAspectRatio = imageSize.width / imageSize.height;
     // Create a thumbnail image from this image (this part of the slow operation)
     NSSize thumbnailSize = NSMakeSize(THUMBNAIL_HEIGHT * imageAspectRatio, THUMBNAIL_HEIGHT);
-    NSImage *thumbnail = [[NSImage alloc] initWithSize:thumbnailSize];
-    [thumbnail lockFocus];
-    [image drawInRect:NSMakeRect(0, 0, thumbnailSize.width, thumbnailSize.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
-    [thumbnail unlockFocus];
     
-    return thumbnail;
+    return thumbnailSize;
 }
 
 - (NSDragOperation) draggingEntered:(id<NSDraggingInfo>)sender
 {
+    
+    
     if ([sender draggingSource] == self) {
-        return NSDragOperationCopy;
+        return NSDragOperationMove;
     }
-    return NSDragOperationCopy;
+    return NSDragOperationDelete;
 }
 
 -(void) draggingExited:(id<NSDraggingInfo>)sender
 {
-    NSLog(@"Dragg Exit");
 }
 
 - (BOOL) prepareForDragOperation:(id<NSDraggingInfo>)sender
@@ -300,6 +308,11 @@ NSImage* thumbnailImage(NSImage *image) {
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
 {
+    if([sender draggingSourceOperationMask] & NSDragOperationDelete > 0)
+    {
+        NSLog(@"Just Delete");
+    }
+    
     NSView* sourceView  = [_viewItems objectAtIndex:mouseDownIndex];
     NSPoint location    = [sender draggingLocation];
     NSView* destView    = [self hitTest:location];
@@ -310,22 +323,10 @@ NSImage* thumbnailImage(NSImage *image) {
     NSPoint mouseDownPoint = [mouseDownEvent locationInWindow];
     NSUInteger destIndex = [_viewItems indexOfObject:destView];
     
-    //如果从左向右拖
-    if(mouseDownPoint.x < location.x){
-        
-        [_viewItems removeObject:sourceView];
-        [_viewItems insertObject:sourceView atIndex:destIndex];
-        [self reloadData];
-    }
-    else{
-        if (destIndex == 0){
-            destIndex = 1;
-        }
-        
-        [_viewItems removeObject:sourceView];
-        [_viewItems insertObject:sourceView atIndex:destIndex -1];
-    }
-    [self setNeedsDisplay:YES];
+    [_viewItems removeObject:sourceView];
+    [_viewItems insertObject:sourceView atIndex:destIndex];
+    [self reloadData];
+    
     return YES;
 }
 
@@ -334,12 +335,12 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
     switch (context) {
         case NSDraggingContextOutsideApplication:
-            return NSDragOperationNone;
+            return NSDragOperationDelete;
             // by using this fall through pattern, we will remain compatible
             // if the contexts get more precise in the future.
         case NSDraggingContextWithinApplication:
         default:
-            return NSDragOperationCopy;
+            return NSDragOperationMove;
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
-#import "AMTextFieldView.h"
+#import "UIFramework/AMTextFieldView.h"
 #import "UIFramework/AMFoundryFontView.h"
 
 @interface AMUserViewController : AMTabPanelViewController

@@ -8,14 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMRouteView.h"
-#import "AMJackClient.h"
-#import "AMJackManager.h"
-#import "AMJackTripManager.h"
 
 @interface AMRouteViewController : NSViewController<AMRouterViewDelegate>
-
-@property (weak)AMJackClient* jackClient;
-@property (weak)AMJackManager* jackManager;
-@property (weak)AMJackTripManager* jacktripManager;
 
 @end

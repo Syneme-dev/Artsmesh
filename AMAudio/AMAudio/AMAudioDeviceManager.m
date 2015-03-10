@@ -7,6 +7,7 @@
 //
 
 #import "AMAudioDeviceManager.h"
+#import "AMLogger/AMLogger.h"
 
 typedef	UInt8 CAAudioHardwareDeviceSectionID;
 #define	kAudioDeviceSectionGlobal	((CAAudioHardwareDeviceSectionID)0x00)
@@ -133,7 +134,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
 
 - (void)loadDevices
 {
-    NSLog(@"GetDevNames");
+    AMLog(kAMInfoLog, @"AMAudio", @"GetDevNames");
     
     UInt32 size;
     Boolean isWritable;
@@ -144,7 +145,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
     }
     
     int numberOfDevs = size/sizeof(AudioDeviceID);
-	NSLog(@"Number of audio devices = %d", numberOfDevs);
+	AMLog(kAMInfoLog, @"AMAudio", @"Number of audio devices = %d", numberOfDevs);
     
     AudioDeviceID allDevices[numberOfDevs];
     err = AudioHardwareGetProperty(kAudioHardwarePropertyDevices, &size, allDevices);
@@ -164,7 +165,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
         }
         
 		CFStringGetCString(nameRef, name, 256, kCFStringEncodingMacRoman);
-		NSLog(@"Checking device = %s\n", name);
+		AMLog(kAMInfoLog, @"AMAudio", @"Checking device = %s\n", name);
 		
         //don't add JackRouter and iSight to device list
      	if (strcmp(name,"JackRouter") != 0 && strcmp(name,"iSight") != 0) {
@@ -174,7 +175,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
                 continue;
             }
             
-            NSLog(@"Adding device = %s\n", name);
+            AMLog(kAMInfoLog, @"AMAudio", @"Adding device = %s\n", name);
             
             NSString* devName = [NSString stringWithCString:name encoding:NSMacOSRomanStringEncoding];
             
@@ -300,7 +301,7 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
 
 -(BOOL)isAggregateDevice:(AudioDeviceID) devId
 {
-    NSLog(@"isAggregateDevice\n");
+    //NSLog(@"isAggregateDevice\n");
     
     UInt32 deviceType, outSize = sizeof(UInt32);
     OSStatus err = AudioDeviceGetProperty(devId, 0, kAudioDeviceSectionGlobal, kAudioDevicePropertyTransportType, &outSize, &deviceType);
@@ -321,8 +322,8 @@ static OSStatus getTotalChannels(AudioDeviceID device, UInt32* channelCount, Boo
     AudioBufferList*	bufferList = 0;
 	unsigned int i;
     
-    NSLog(@"getTotalChannels\n");
-	
+    AMLog(kAMInfoLog, @"AMAudio", @"get total channels");
+    
 	*channelCount = 0;
     err = AudioDeviceGetPropertyInfo(device, 0, isInput, kAudioDevicePropertyStreamConfiguration, &outSize, &outWritable);
     if (err == noErr) {
@@ -332,12 +333,12 @@ static OSStatus getTotalChannels(AudioDeviceID device, UInt32* channelCount, Boo
             for (i = 0; i < bufferList->mNumberBuffers; i++)
                 *channelCount += bufferList->mBuffers[i].mNumberChannels;
         } else {
-            NSLog(@"getTotalChannels : AudioDeviceGetProperty error\n");
+            AMLog(kAMErrorLog, @"AMAudio", @"getTotalChannels : AudioDeviceGetProperty error\n");
         }
 		if (bufferList)
 			free(bufferList);
     } else {
-        NSLog(@"getTotalChannels : AudioDeviceGetPropertyInfo error\n");
+        AMLog(kAMErrorLog, @"AMAudio", @"getTotalChannels : AudioDeviceGetPropertyInfo error\n");
     }
 	return (err);
 }
@@ -346,28 +347,28 @@ static bool getDeviceBufferRange(AudioDeviceID devId, bool inputDevice, UInt32* 
 {
     OSStatus err = AudioDeviceGetProperty(devId, 0, inputDevice, kAudioDevicePropertyBufferFrameSizeRange, size, range);
     if (err != noErr) {
-        NSLog(@"Cannot get buffer size range for input\n");
+        AMLog(kAMErrorLog, @"AMAudio", @"Cannot get buffer size range for input\n");
         return false;
     } else {
-        NSLog(@"Get buffer size range for input min = %d max = %d\n", (int)(range->mMinimum), (int)(range->mMaximum));
+        AMLog(kAMInfoLog, @"AMAudio", @"Get buffer size range for input min = %d max = %d\n", (int)(range->mMinimum), (int)(range->mMaximum));
         return true;
     }
 }
 
 static OSStatus getDeviceUIDFromID(AudioDeviceID id, char* name)
 {
-    NSLog(@"getDeviceUIDFromID\n");
+    AMLog(kAMInfoLog, @"AMAudio", @"getDeviceUIDFromID\n");
     
     UInt32 size = sizeof(CFStringRef);
 	CFStringRef UI;
     OSStatus res = AudioDeviceGetProperty(id, 0, false, kAudioDevicePropertyDeviceUID, &size, &UI);
 	if (res == noErr) {
 		CFStringGetCString(UI, name, 128, CFStringGetSystemEncoding());
-		NSLog(@"getDeviceUIDFromID: name = %s\n", name);
+		AMLog(kAMInfoLog, @"AMAudio", @"getDeviceUIDFromID: name = %s\n", name);
 		CFRelease(UI);
 	} else {
         name[0] = 0;
-		NSLog(@"getDeviceUIDFromID: error name = %s\n", name);
+		AMLog(kAMErrorLog, @"AMAudio", @"getDeviceUIDFromID: error name = %s\n", name);
 	}
     return res;
 }

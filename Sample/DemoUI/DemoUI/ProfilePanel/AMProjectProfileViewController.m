@@ -9,19 +9,20 @@
 #import "AMProjectProfileViewController.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMFoundryFontView.h"
+#import "UIFramework/AMBlinkView.h"
 #import "AMCoreData/AMCoredata.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "AMMesher/AMMesher.h"
 
-@interface AMProjectProfileViewController ()<AMCheckBoxDelegeate>
+@interface AMProjectProfileViewController ()<AMCheckBoxDelegeate, AMBlinkViewDelegate>
 
 @property (weak) IBOutlet AMFoundryFontView *projectNameField;
 @property (weak) IBOutlet NSImageView *projectAvatar;
 @property (weak) IBOutlet AMCheckBoxView *broadcastBox;
 @property (weak) IBOutlet AMFoundryFontView *broadcastURLField;
 @property (weak) IBOutlet AMFoundryFontView *projectDescription;
-@property (weak) IBOutlet NSImageView *statusLight;
+@property (weak) IBOutlet AMBlinkView*      statusLight;
 
 @end
 
@@ -32,7 +33,7 @@
     // Do view setup here.
     
     [self loadProject:nil];
-    
+    self.statusLight.blinkDelegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadProject:) name:AM_LIVE_GROUP_CHANDED object:nil];
 }
 
@@ -69,9 +70,18 @@
 {
     AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     if (localGroup.broadcasting) {
-        [self.statusLight setImage:[NSImage imageNamed:@"groupuser_busy"]];
+        [self.statusLight setImage:[NSImage imageNamed:@"project_broadcast"]];
     }else{
         [self.statusLight setImage:[NSImage imageNamed:@"group_unmeshed_icon"]];
+    }
+}
+
+-(void)setBroadcastURL
+{
+    AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    
+    if ( [localGroup.broadcastingURL length] > 0 ) {
+        [self.broadcastURLField setStringValue:localGroup.broadcastingURL];
     }
 }
 
@@ -81,6 +91,7 @@
     [self setStatus];
     [self loadAvatar];
     [self setBroadcastBox];
+    [self setBroadcastURL];
     AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
     [defaults setObject:myGroup.project forKey:Preference_Key_Cluster_Project];
@@ -156,9 +167,16 @@
 
 -(void)startBlickingStatus
 {
-    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
-    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];
+/*    [self.statusLight setImage:[NSImage imageNamed:@"synchronizing_icon"]];
+    [self performSelector:@selector(setStatus) withObject:nil afterDelay:1];*/
+    [self.statusLight startBlink];
 }
 
+
+- (void) afterStopBlink
+{
+    [self setStatus];
+    [self.statusLight setNeedsDisplay:YES];
+}
 
 @end

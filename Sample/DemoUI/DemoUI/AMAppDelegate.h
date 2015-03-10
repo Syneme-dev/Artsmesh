@@ -10,9 +10,8 @@
 #import "AMMainWindowController.h"
 
 #define AM_APPDELEGATE (AMAppDelegate*)[NSApp delegate]
-@interface AMAppDelegate : NSObject <NSApplicationDelegate>
 
-//@property (assign) IBOutlet NSWindow *window;
+@interface AMAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (weak) IBOutlet AMMainWindowController *mainWindowController;
 

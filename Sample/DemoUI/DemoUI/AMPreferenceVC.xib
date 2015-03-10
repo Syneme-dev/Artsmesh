@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMPreferenceVC">
+            <connections>
+                <outlet property="generalTabBtn" destination="mvk-HX-fYa" id="S7s-F2-Hzt"/>
+                <outlet property="jackTabBtn" destination="YZd-cX-Ly4" id="YBa-oL-eq4"/>
+                <outlet property="jacktripTabBtn" destination="niJ-06-bEy" id="5lO-XK-8ND"/>
+                <outlet property="oscGroupTabBtn" destination="vtg-zK-Gic" id="PMt-YG-MFZ"/>
+                <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
+                <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
+                <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
+                    <rect key="frame" x="0.0" y="780" width="600" height="20"/>
+                    <subviews>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
+                            <rect key="frame" x="442" y="2" width="80" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="Ivb-25-mpR"/>
+                                <constraint firstAttribute="width" constant="80" id="zX6-pt-rJB"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="OSC GROUP  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="jacktripTab">
+                            <rect key="frame" x="374" y="2" width="69" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="1Hi-BW-B1N"/>
+                                <constraint firstAttribute="height" constant="13" id="Pp7-WK-Y9H"/>
+                                <constraint firstAttribute="width" constant="69" id="Yr8-Dy-Afh"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="JACKTRIP |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onJackTripClick:" target="-2" id="hKP-n7-MwN"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
+                            <rect key="frame" x="523" y="2" width="64" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="3gc-Nl-39S"/>
+                                <constraint firstAttribute="height" constant="13" id="9uo-BN-Dpb"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
+                            <rect key="frame" x="233" y="2" width="65" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="WNv-O0-wIa"/>
+                                <constraint firstAttribute="height" constant="13" id="fTs-qg-Pps"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="GENERAL  |" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
+                            </connections>
+                        </button>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
+                            <rect key="frame" x="294" y="2" width="84" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="tRv-Ju-JCE"/>
+                                <constraint firstAttribute="width" constant="84" id="xl2-x9-hwo"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="JACK SERVER  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system" size="10"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onJackClick:" target="-2" id="TXb-H0-nDy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="13" id="4HT-nq-uOs"/>
+                        <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="Hvs-mB-Vv7"/>
+                        <constraint firstItem="niJ-06-bEy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="InJ-QO-awj"/>
+                        <constraint firstAttribute="trailing" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="222" id="MFR-y0-AIn"/>
+                        <constraint firstAttribute="trailing" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="78" id="PNx-mB-FtZ"/>
+                        <constraint firstAttribute="height" constant="20" id="UMt-jc-Gbh"/>
+                        <constraint firstAttribute="trailing" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="157" id="jWP-vM-Vid"/>
+                        <constraint firstAttribute="trailing" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="302" id="p2c-Q1-0MY"/>
+                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="s77-CX-d9n"/>
+                        <constraint firstItem="vtg-zK-Gic" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="wZS-pK-d2p"/>
+                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="yAd-J8-uU4"/>
+                    </constraints>
+                </customView>
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="GENERAL" identifier="0" id="Gpk-uP-4vN">
+                            <view key="view" identifier="general" id="Mp1-oa-ElH" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="JackServer" identifier="1" id="Uhs-af-iDr">
+                            <view key="view" identifier="jack" id="Dwd-l8-aCe" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Jacktrip" identifier="2" id="qH2-Vo-PnD">
+                            <view key="view" identifier="jacktrip" id="5CP-0D-iJt" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="OSCGroups" identifier="3" id="ZCR-Ci-8sZ">
+                            <view key="view" identifier="oscGroups" id="XnP-jZ-xQz" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="StatusNet" identifier="4" id="GqN-Y7-qns">
+                            <view key="view" identifier="statusNet" id="343-FY-LyZ" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Gtp-xq-sPX" secondAttribute="bottom" id="Agh-22-kuH"/>
+                <constraint firstAttribute="trailing" secondItem="KTe-DO-Scm" secondAttribute="trailing" id="Nea-LI-9TH"/>
+                <constraint firstItem="Gtp-xq-sPX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="VI0-vb-yfp"/>
+                <constraint firstAttribute="trailing" secondItem="Gtp-xq-sPX" secondAttribute="trailing" id="Y2t-mj-fns"/>
+                <constraint firstItem="KTe-DO-Scm" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="Y8R-yq-H7T"/>
+                <constraint firstItem="Gtp-xq-sPX" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="bottom" id="f39-br-xud"/>
+                <constraint firstItem="KTe-DO-Scm" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="nuJ-pG-VhW"/>
+            </constraints>
+            <point key="canvasLocation" x="263" y="395"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="pGe-YA-GCX"/>
+    </objects>
+</document>

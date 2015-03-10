@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMAudioDeviceManager.h"
+#import "AMJackManager.h"
+#import "AMJackTripManager.h"
+#import "AMJackClient.h"
 
-typedef enum {
-    JackState_Stopped = 0,
-    JackState_Started,
-}JackState;
 
 #define AM_JACK_STARTED_NOTIFICATION @"Jack started notification"
 #define AM_JACK_STOPPED_NOTIFICATION @"Jack stopped notification"
@@ -23,9 +23,13 @@ typedef enum {
 
 +(id)sharedInstance;
 
--(NSViewController*)getJackPrefUI;
+-(AMAudioDeviceManager *)audioDeviceManager;
+-(AMJackClient *)audioJackClient;
+-(AMJackTripManager *)audioJacktripManager;
+-(AMJackManager *)audioJackManager;
+
+
 -(NSViewController*)getJackRouterUI;
-//-(NSViewController*)getJacktripPrefUI;
 -(NSViewController*)getMixerUI;
 
 -(float)jackCpuUsage;

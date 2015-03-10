@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -14,10 +14,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
-                <menuItem title="DemoUI" id="56">
-                    <menu key="submenu" title="DemoUI" systemMenu="apple" id="57">
+                <menuItem title="Artsmesh" id="56">
+                    <menu key="submenu" title="Artsmesh" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About DemoUI" id="58">
+                            <menuItem title="About Artsmesh" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
@@ -36,7 +36,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide DemoUI" keyEquivalent="h" id="134">
+                            <menuItem title="Hide Artsmesh" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
@@ -55,7 +55,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit DemoUI" keyEquivalent="q" id="136">
+                            <menuItem title="Quit Artsmesh" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>
@@ -311,11 +311,7 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="EditLocalServerIP" enabled="NO" keyEquivalent="l" id="211">
-                                <connections>
-                                    <action selector="OnEditLocalServerIP:" target="B30-a9-ZW1" id="TM5-3a-FRW"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="EditLocalServerIP" enabled="NO" keyEquivalent="l" id="211"/>
                         </items>
                     </menu>
                 </menuItem>
@@ -626,7 +622,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="DemoUI Help" keyEquivalent="?" id="492">
+                            <menuItem title="Artsmesh Help" keyEquivalent="?" id="492">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="493"/>
                                 </connections>
@@ -639,7 +635,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -685,7 +681,7 @@
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msk-5o-YGT">
                                 <rect key="frame" x="10" y="6" width="29" height="28"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo-02" id="Qtb-kn-nHX"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_grey" id="Qtb-kn-nHX"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -877,6 +873,8 @@
                 <outlet property="jackCPUUsageBar" destination="eIW-oc-qXb" id="tJq-vx-dkn"/>
                 <outlet property="jackCpuUageNum" destination="DZl-dT-72j" id="Era-v4-O0m"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>
+                <outlet property="mainContentView" destination="372" id="Jon-GL-hFd"/>
+                <outlet property="mainScrollView" destination="zEs-xu-vmU" id="2mp-iF-jly"/>
                 <outlet property="meshBtn" destination="kwj-11-GIT" id="XSi-kI-oZ0"/>
                 <outlet property="oscServerBtn" destination="PQH-zt-t50" id="2Y7-b8-stK"/>
                 <outlet property="syphonServerBtn" destination="KD8-g0-Ew6" id="361-Qg-VGl"/>
@@ -891,7 +889,7 @@
         <image name="Server_on" width="58.064517974853516" height="58.064517974853516"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
-        <image name="logo-02" width="256" height="256"/>
+        <image name="logo_grey" width="329" height="329"/>
         <image name="play_off" width="15" height="15"/>
         <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>

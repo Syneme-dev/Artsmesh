@@ -15,7 +15,6 @@
 @interface AMBroadcastViewController ()
 @property (weak) IBOutlet NSButton *cancelBtn;
 @property (weak) IBOutlet NSButton *goBtn;
-
 @end
 
 @implementation AMBroadcastViewController

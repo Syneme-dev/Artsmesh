@@ -73,6 +73,12 @@
 @property (weak) IBOutlet NSView *mainContentView;
 @property (weak) IBOutlet NSScrollView *mainScrollView;
 
+
+
+@property (weak) IBOutlet AMFoundryFontView *topHourTF;
+@property (weak) IBOutlet AMFoundryFontView *topMinTF;
+@property (weak) IBOutlet AMFoundryFontView *topSecTF;
+
 @end
 
 @implementation AMMainWindowController {

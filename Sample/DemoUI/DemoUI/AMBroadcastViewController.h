@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
+#import "GTMOAuth2WindowController.h"
 
 @interface AMBroadcastViewController : NSViewController
 

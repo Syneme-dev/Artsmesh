@@ -31,6 +31,10 @@
     NSString *loginURL;
     NSString *eventURL;
     NSString *broadcastURL;
+    
+    NSString *scope;
+    NSString *kMyClientID;
+    NSString *kMylientSecret;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,12 +55,35 @@
     
     
     // Load in the event webview
+    
     [self.gplusWebView setFrameLoadDelegate:self];
     [self.gplusWebView setPolicyDelegate:self];
     [self.gplusWebView setUIDelegate:self];
     [self.gplusWebView setDrawsBackground:NO];
     
     [self loadPage];
+    
+    [self testOAuth];
+}
+
+- (void)testOAuth {
+    NSApplication *myApp = [NSApplication sharedApplication];
+    NSWindow *curWindow = [myApp keyWindow];
+    
+    scope = @"https://www.googleapis.com/auth/youtube";
+    kMyClientID = @"998042950112-nf0sggo2f56tvt8bcord9kn0qe528mqv.apps.googleusercontent.com";
+    kMylientSecret = @"P1QKHOBVo-1RTzpz9sOde4JP";
+    
+    GTMOAuth2WindowController *windowController;
+    windowController = [[GTMOAuth2WindowController alloc] initWithScope:scope
+                                                               clientID:kMyClientID
+                                                           clientSecret:kMylientSecret
+                                                       keychainItemName:nil
+                                                         resourceBundle:nil];
+    
+    [windowController signInSheetModalForWindow:curWindow
+                                       delegate:self
+                               finishedSelector:@selector(windowController:finishedWithAuth:error:)];
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
@@ -136,6 +163,12 @@
     [self.gplusWebView cancelOperation:nil];
     
     [super webViewClose:sender];
+}
+
+
+- (void)windowController:(GTMOAuth2WindowController *)windowController
+        finishedWithAuth:(GTMOAuth2Authentication *)auth
+                   error:(NSError *)error {
 }
 
 @end

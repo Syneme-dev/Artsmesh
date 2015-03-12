@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -703,14 +703,6 @@
                             </button>
                         </subviews>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTH-N1-xDZ" customClass="AMFoundryFontView">
-                        <rect key="frame" x="301" y="732" width="160" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="00  :  00  :  00  SEC" id="hA5-yY-yxD">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
                         <rect key="frame" x="906" y="731" width="56" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SYPHON" id="j3Z-Wm-3C7">
@@ -781,16 +773,6 @@
                             <action selector="jackServerToggled:" target="B30-a9-ZW1" id="hdO-bj-jF4"/>
                         </connections>
                     </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1S-Xf-hwP">
-                        <rect key="frame" x="274" y="732" width="16" height="16"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_off" imagePosition="only" alignment="center" alternateImage="play_on" imageScaling="proportionallyDown" inset="2" id="mbk-Xg-bLU">
-                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="onTimerControlItemClick:" target="B30-a9-ZW1" id="rfT-kA-FcW"/>
-                        </connections>
-                    </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="PQH-zt-t50">
                         <rect key="frame" x="1079" y="731" width="16" height="16"/>
                         <constraints>
@@ -832,6 +814,22 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6SP-kJ-ZV3">
+                        <rect key="frame" x="581" y="375" width="38" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="xKg-If-QsS">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="leE-VP-qR4" customClass="AMFoundryFontView">
+                        <rect key="frame" x="281" y="725" width="25" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" state="on" alignment="center" title="00" id="zOf-52-AeA">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="2Iq-Md-vEu"/>
@@ -860,6 +858,7 @@
             <connections>
                 <outlet property="delegate" destination="B30-a9-ZW1" id="mFb-A4-cJr"/>
             </connections>
+            <point key="canvasLocation" x="141" y="307"/>
         </window>
         <customObject id="494" customClass="AMAppDelegate">
             <connections>
@@ -868,8 +867,6 @@
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
             <connections>
-                <outlet property="amTimer" destination="iTH-N1-xDZ" id="Z0c-ym-5cQ"/>
-                <outlet property="amTimerBtn" destination="F1S-Xf-hwP" id="RHz-Ul-Ctr"/>
                 <outlet property="jackCPUUsageBar" destination="eIW-oc-qXb" id="tJq-vx-dkn"/>
                 <outlet property="jackCpuUageNum" destination="DZl-dT-72j" id="Era-v4-O0m"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>
@@ -890,8 +887,6 @@
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
         <image name="logo_grey" width="329" height="329"/>
-        <image name="play_off" width="15" height="15"/>
-        <image name="play_on" width="15" height="15"/>
         <image name="topbar_mesh" width="25" height="25"/>
         <image name="topbar_mesh_offline" width="25" height="25"/>
     </resources>

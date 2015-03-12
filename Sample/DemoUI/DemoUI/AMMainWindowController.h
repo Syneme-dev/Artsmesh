@@ -22,7 +22,6 @@
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
 @property (weak) IBOutlet AMFoundryFontView *amTimer;
 @property(nonatomic, readonly) NSView *containerView;
-@property (weak) IBOutlet NSButton *amTimerBtn;
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
 @property (weak) IBOutlet NSButton *syphonServerBtn;

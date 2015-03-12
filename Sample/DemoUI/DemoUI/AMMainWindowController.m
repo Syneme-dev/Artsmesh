@@ -38,7 +38,7 @@
 #import "AMVideo.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMCoreData/AMCoreData.h"
-
+#import "AMTimerTabVC.h"
 
 #define UI_leftSidebarWidth 40.0f
 #define UI_panelSpacing 30.0f
@@ -108,7 +108,25 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
+     
         
+        //Add for top bar timer
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(startTopTimer:)
+                                                     name:AMTimerStartNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(stopTopTimer:)
+                                                     name:AMTimerStopNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pauseTopTimer:)
+                                                     name:AMTimerPauseNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(resumeTopTimer:)
+                                                     name:AMTimerResumeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -974,25 +992,8 @@
 
 
 #pragma mark -
-#pragma   mark KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    if ([object isKindOfClass:[AMTimer class]]) {
+#pragma mark Top bar timer
 
-        if ([keyPath isEqualToString:@"state"]) {
-            AMTimerState newState = [[change objectForKey:@"new"] intValue];
 
-            switch (newState) {
-                case kAMTimerStart:
-                    [self.amTimerBtn setState:1];
-                    break;
-                default:
-                    [self.amTimerBtn setState:0];
-                    break;
-            }
-        }
-    }
-}
+
 @end

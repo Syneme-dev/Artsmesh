@@ -46,6 +46,12 @@
 		2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */; };
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
+		2DD0EBDB1AB14DA6008077C6 /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0EBD11AB14DA6008077C6 /* GTMOAuth2WindowController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DD0EBDC1AB14DA6008077C6 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0EBD31AB14DA6008077C6 /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DD0EBDD1AB14DA6008077C6 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0EBD51AB14DA6008077C6 /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DD0EBDE1AB14DA6008077C6 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0EBD71AB14DA6008077C6 /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DD0EBDF1AB14DA6008077C6 /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0EBD91AB14DA6008077C6 /* GTMHTTPFetchHistory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DD0EBE01AB14DA6008077C6 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0EBDA1AB14DA6008077C6 /* GTMOAuth2Window.xib */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
 		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
 		2DED40CD19CBED2D006F12FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DED40CC19CBED2D006F12FD /* CoreLocation.framework */; };
@@ -347,6 +353,17 @@
 		2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveMapProgramViewController.xib; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
+		2DD0EBD01AB14DA6008077C6 /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2WindowController.h; sourceTree = "<group>"; };
+		2DD0EBD11AB14DA6008077C6 /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2WindowController.m; sourceTree = "<group>"; };
+		2DD0EBD21AB14DA6008077C6 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		2DD0EBD31AB14DA6008077C6 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
+		2DD0EBD41AB14DA6008077C6 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		2DD0EBD51AB14DA6008077C6 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2SignIn.m; sourceTree = "<group>"; };
+		2DD0EBD61AB14DA6008077C6 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		2DD0EBD71AB14DA6008077C6 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcher.m; sourceTree = "<group>"; };
+		2DD0EBD81AB14DA6008077C6 /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
+		2DD0EBD91AB14DA6008077C6 /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetchHistory.m; sourceTree = "<group>"; };
+		2DD0EBDA1AB14DA6008077C6 /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2Window.xib; sourceTree = "<group>"; };
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
 		2DE439C71A37C58700650692 /* new-event.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "new-event.css"; sourceTree = "<group>"; };
 		2DED40CC19CBED2D006F12FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
@@ -783,6 +800,24 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		2DD0EBCF1AB14D8C008077C6 /* OAuth Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2DD0EBD01AB14DA6008077C6 /* GTMOAuth2WindowController.h */,
+				2DD0EBD11AB14DA6008077C6 /* GTMOAuth2WindowController.m */,
+				2DD0EBD21AB14DA6008077C6 /* GTMOAuth2Authentication.h */,
+				2DD0EBD31AB14DA6008077C6 /* GTMOAuth2Authentication.m */,
+				2DD0EBD41AB14DA6008077C6 /* GTMOAuth2SignIn.h */,
+				2DD0EBD51AB14DA6008077C6 /* GTMOAuth2SignIn.m */,
+				2DD0EBD61AB14DA6008077C6 /* GTMHTTPFetcher.h */,
+				2DD0EBD71AB14DA6008077C6 /* GTMHTTPFetcher.m */,
+				2DD0EBD81AB14DA6008077C6 /* GTMHTTPFetchHistory.h */,
+				2DD0EBD91AB14DA6008077C6 /* GTMHTTPFetchHistory.m */,
+				2DD0EBDA1AB14DA6008077C6 /* GTMOAuth2Window.xib */,
+			);
+			name = "OAuth Sources";
+			sourceTree = "<group>";
+		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +843,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2DD0EBCF1AB14D8C008077C6 /* OAuth Sources */,
 				CE486AB21A28140900D35B82 /* Syphon.framework */,
 				4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */,
 				D47A184D19F21296000A8CCB /* AMLogger.framework */,
@@ -1333,6 +1369,7 @@
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AFAEBD9B19610B8700B7FB51 /* OnlineDot.png in Resources */,
 				AFAEBDAB19610BEA00B7FB51 /* Attachement.png in Resources */,
+				2DD0EBE01AB14DA6008077C6 /* GTMOAuth2Window.xib in Resources */,
 				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
 				4A8C69F91A70A0ED00540694 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9C19610B8700B7FB51 /* QuitGroup.png in Resources */,
@@ -1460,6 +1497,7 @@
 				2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */,
 				CE486AAE1A280CB900D35B82 /* AMVideoMixerViewController.m in Sources */,
 				209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */,
+				2DD0EBDC1AB14DA6008077C6 /* GTMOAuth2Authentication.m in Sources */,
 				2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */,
 				4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */,
 				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
@@ -1472,6 +1510,7 @@
 				4A45117F1A8B62E6001E7328 /* AMStatusNetSettingsVC.m in Sources */,
 				4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */,
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
+				2DD0EBDD1AB14DA6008077C6 /* GTMOAuth2SignIn.m in Sources */,
 				AFDA79A51945864A0002873B /* AMMixingViewController.m in Sources */,
 				4AB4ACDE1A6E2DA6003ECE24 /* AMLiveGroupViewController.m in Sources */,
 				4A32A1261A72269F006FEDD7 /* AMGroupProfileViewController.m in Sources */,
@@ -1483,7 +1522,10 @@
 				4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */,
 				4A8C69E71A70939500540694 /* AMStaticUserDetailsViewController.m in Sources */,
 				4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */,
+				2DD0EBDE1AB14DA6008077C6 /* GTMHTTPFetcher.m in Sources */,
+				2DD0EBDB1AB14DA6008077C6 /* GTMOAuth2WindowController.m in Sources */,
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
+				2DD0EBDF1AB14DA6008077C6 /* GTMHTTPFetchHistory.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
 				D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */,
 				4A32A12B1A7226B5006FEDD7 /* AMProjectProfileViewController.m in Sources */,

@@ -78,7 +78,8 @@
 @property (weak) IBOutlet AMFoundryFontView *topHourTF;
 @property (weak) IBOutlet AMFoundryFontView *topMinTF;
 @property (weak) IBOutlet AMFoundryFontView *topSecTF;
-
+@property (nonatomic) NSTimer* topTimer;
+@property (nonatomic) double   totalSecond;
 @end
 
 @implementation AMMainWindowController {
@@ -92,11 +93,9 @@
     NSTimer *_jackCpuTimer;
 }
 
-
 - (NSView *)containerView {
     return _containerView;
 }
-
 
 - (id)initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
@@ -265,6 +264,9 @@
     [self loadLastOpenedPanels];
     
     isWindowLoading = NO;
+    
+  //  NSTimeInterval* interval = [ NSTimeIntervalSince1970];
+    [self displayTopTimer:(3600*3+60*2+44)];
 }
 
 
@@ -999,6 +1001,65 @@
 
 #pragma mark -
 #pragma mark Top bar timer
+
+- (void) displayTopTimer:(NSTimeInterval) timeInterval
+{
+    int hours = timeInterval / 3600.0;
+    [self.topHourTF setStringValue:[NSString stringWithFormat:@"%02d", hours]];
+    timeInterval -= hours * 3600.0;
+    
+    int minutes = timeInterval / 60.0;
+    [self.topMinTF setStringValue:[NSString stringWithFormat:@"%02d", minutes]];
+    timeInterval -= minutes * 60.0;
+    
+    int seconds = (int)timeInterval;
+    [self.topSecTF setStringValue:[NSString stringWithFormat:@"%02d", seconds]];
+}
+
+- (void) increaseSecond
+{
+    self.totalSecond++;
+    [self displayTopTimer:self.totalSecond];
+}
+
+- (void) startTopTimer:(NSNotification*) notification
+{
+    static  NSTimeInterval interval = 1;
+    self.topTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                     target:self
+                                                   selector:@selector(increaseSecond)
+                                                   userInfo:nil
+                                                    repeats:YES];
+}
+
+- (void)stopTopTimer:(NSNotification *)notification
+{
+    [self.topTimer invalidate];
+    self.totalSecond = 0.0;
+    
+    [self displayTopTimer:self.totalSecond];
+}
+
+- (void)pauseTopTimer:(NSNotification *)notification
+{
+    [self.topTimer invalidate];
+}
+
+
+- (void)resumeTopTimer:(NSNotification *)notification
+{
+    NSTimeInterval duration = [notification.userInfo[@"Duration"] floatValue];
+    self.totalSecond = duration;
+    [self startTopTimer:notification];
+/*    NSInteger metronomeValue = ((NSInteger)duration) % self.upperNumber.intValue + 1;
+    self.metronomeLabel.stringValue = @(metronomeValue).stringValue;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
+                                                  target:self
+                                                selector:@selector(incrementMetronome)
+                                                userInfo:nil
+                                                 repeats:YES];
+    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
+}
 
 
 

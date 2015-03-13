@@ -29,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gn0-F7-0bE">
-                    <rect key="frame" x="70" y="580" width="44" height="32"/>
+                    <rect key="frame" x="81" y="581" width="24" height="32"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RCb-Ya-xlW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -49,7 +49,7 @@
                     </connections>
                 </button>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="357" horizontalPageScroll="10" verticalLineScroll="357" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-Fi-Oqn">
-                    <rect key="frame" x="20" y="25" width="730" height="514"/>
+                    <rect key="frame" x="20" y="22" width="730" height="517"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="kXl-nd-6hv">
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,16 +162,6 @@
                         <outlet property="delegate" destination="-2" id="OiV-Db-egZ"/>
                     </connections>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-qD-vhy">
-                    <rect key="frame" x="20" y="580" width="42" height="31"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="2fn-td-FPo">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="stopTimer:" target="-2" id="88U-bh-uk1"/>
-                    </connections>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dq3-dv-lFY">
                     <rect key="frame" x="297" y="580" width="60" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SEC" id="RDW-c1-iQl">
@@ -261,12 +251,22 @@
                         <outlet property="delegate" destination="-2" id="Ig5-gc-BOp"/>
                     </connections>
                 </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7S-qD-vhy">
+                    <rect key="frame" x="35" y="584" width="24" height="24"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="2fn-td-FPo">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="stopTimer:" target="-2" id="88U-bh-uk1"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ZrX-P9-JHy"/>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="147" id="dAM-mF-J9n"/>
                 <constraint firstAttribute="trailing" secondItem="hnd-Fi-Oqn" secondAttribute="trailing" constant="20" id="gPL-Iz-oCT"/>
-                <constraint firstAttribute="bottom" secondItem="hnd-Fi-Oqn" secondAttribute="bottom" constant="25" id="vgy-w4-H75"/>
+                <constraint firstAttribute="bottom" secondItem="hnd-Fi-Oqn" secondAttribute="bottom" constant="22" id="vgy-w4-H75"/>
             </constraints>
             <point key="canvasLocation" x="489" y="391"/>
         </customView>

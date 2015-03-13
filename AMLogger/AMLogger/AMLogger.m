@@ -79,12 +79,13 @@ AMLogInitialize(void)
         //再把Artsmesh.log更名为prev_Artsmesh.log文件
         NSString *prevLogFile = [NSString stringWithFormat:@"prev_%@", kAMDefaultLogFile];
         NSString *logFilePath = [logDirectory stringByAppendingPathComponent:kAMDefaultLogFile];
-        NSString *previousLogFilePath = logFilePath;//[logFilePath stringByAppendingString:@"~previous"];
+        NSString *prevLogPath = [logDirectory stringByAppendingPathComponent:prevLogFile];
         if ([fileManager fileExistsAtPath:logFilePath]) {
             [fileManager moveItemAtPath:logFilePath
-                                 toPath:previousLogFilePath
+                                 toPath:prevLogPath
                                   error:nil];
         }
+
         if ([fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
             logFile = fopen([logFilePath cStringUsingEncoding:NSUTF8StringEncoding], "a");
             setvbuf(logFile, NULL, _IOLBF, 0);

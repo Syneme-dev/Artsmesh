@@ -815,14 +815,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6SP-kJ-ZV3">
-                        <rect key="frame" x="581" y="375" width="38" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="xKg-If-QsS">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOu-jT-RnE" customClass="AMFoundryFontView">
                         <rect key="frame" x="306" y="726" width="14" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" state="on" alignment="center" title=":" id="L0Y-3T-NjQ">

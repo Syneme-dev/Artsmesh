@@ -11,6 +11,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMMesher/AMMesher.h"
+#import "UIFramework/NSView_Constrains.h"
 
 @interface AMBroadcastViewController ()
 @property (weak) IBOutlet NSButton *cancelBtn;
@@ -35,6 +36,9 @@
     NSString *scope;
     NSString *kMyClientID;
     NSString *kMylientSecret;
+    
+    NSViewController* _detailViewController;
+    NSMutableArray *_tabControllers;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -61,9 +65,46 @@
     [self.gplusWebView setUIDelegate:self];
     [self.gplusWebView setDrawsBackground:NO];
     
-    [self loadPage];
+    [self.groupTabView setAutoresizesSubviews:YES];
+    [AMButtonHandler changeTabTextColor:self.youtubeBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.settingsBtn toColor:UI_Color_blue];
     
-    [self testOAuth];
+    [self loadPage];
+}
+
+-(void)registerTabButtons
+{
+    super.tabs=self.groupTabView;
+    self.tabButtons =[[NSMutableArray alloc]init];
+    [self.tabButtons addObject:self.youtubeBtn];
+    [self.tabButtons addObject:self.settingsBtn];
+    self.showingTabsCount=2;
+}
+
+-(void)viewDidLoad
+{
+    [self loadTabViews];
+}
+
+-(void)loadTabViews
+{
+    for (NSTabViewItem* tabItem in [self.groupTabView tabViewItems]) {
+        
+        /*Here we use the class name to load the controller so the
+         tab identifier must equal to the tabview's subview controller's name*/
+        if (_tabControllers == nil) {
+            _tabControllers = [[NSMutableArray alloc] init];
+        }
+        
+        NSString *tabViewControllerName = tabItem.identifier;
+        id obj = [[NSClassFromString(tabViewControllerName) alloc] init];
+        if ([obj isKindOfClass:[NSViewController class]]) {
+            NSViewController *controller = (NSViewController *)obj;
+            
+            [tabItem.view addFullConstrainsToSubview:controller.view];
+            [_tabControllers addObject:controller];
+        }
+    }
 }
 
 - (void)testOAuth {
@@ -133,6 +174,20 @@
     
 }
 
+- (IBAction)youtubeBtnClick:(id)sender {
+    [self pushDownButton:self.youtubeBtn];
+    
+    [self.groupTabView selectTabViewItemAtIndex:0];
+}
+
+- (IBAction)settingsBtnClick:(id)sender {
+    [self pushDownButton:self.settingsBtn];
+    
+    [self.groupTabView selectTabViewItemAtIndex:1];
+    
+    [self testOAuth];
+}
+
 -(void)groupChanged:(NSNotification *)notification
 {
     /**
@@ -170,5 +225,7 @@
         finishedWithAuth:(GTMOAuth2Authentication *)auth
                    error:(NSError *)error {
 }
+
+
 
 @end

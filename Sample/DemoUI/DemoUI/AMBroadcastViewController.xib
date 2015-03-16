@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="570" height="658"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView fixedFrame="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Gb-iXG">
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Gb-iXG">
                     <rect key="frame" x="7" y="36" width="556" height="622"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
@@ -45,26 +45,19 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3mq-0Q-Zof">
-                    <rect key="frame" x="507" y="642" width="70" height="13"/>
-                    <buttonCell key="cell" type="inline" title="SETTINGS" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="qjv-u6-qws">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="smallSystemBold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="settingsBtnClick:" target="-2" id="A6V-VC-0qa"/>
-                    </connections>
-                </button>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8g-Wp-0Uu" userLabel=" |">
-                    <rect key="frame" x="498" y="641" width="12" height="17"/>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8g-Wp-0Uu" userLabel=" |">
+                    <rect key="frame" x="502" y="641" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="|" id="dbe-gk-vE0">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQB-MZ-pFk">
-                    <rect key="frame" x="435" y="641" width="59" height="14"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="UQB-MZ-pFk">
+                    <rect key="frame" x="447" y="641" width="54" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="WFU-Ho-isl"/>
+                    </constraints>
                     <buttonCell key="cell" type="inline" title="YOUTUBE " bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="TzF-zh-LKr">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -73,7 +66,33 @@
                         </connections>
                     </buttonCell>
                 </button>
+                <button horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="3mq-0Q-Zof">
+                    <rect key="frame" x="512" y="641" width="58" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="58" id="7vs-pZ-o9m"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="SETTINGS" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="qjv-u6-qws">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="settingsBtnClick:" target="-2" id="A6V-VC-0qa"/>
+                    </connections>
+                </button>
             </subviews>
+            <constraints>
+                <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
+                <constraint firstItem="UQB-MZ-pFk" firstAttribute="baseline" secondItem="F8g-Wp-0Uu" secondAttribute="baseline" id="LzJ-dQ-gEL"/>
+                <constraint firstItem="3mq-0Q-Zof" firstAttribute="leading" secondItem="F8g-Wp-0Uu" secondAttribute="trailing" constant="3" id="X8g-Pj-ctx"/>
+                <constraint firstItem="F8g-Wp-0Uu" firstAttribute="baseline" secondItem="3mq-0Q-Zof" secondAttribute="baseline" id="Y6g-M7-8rN"/>
+                <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" constant="36" id="YO7-cn-8AR"/>
+                <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="69" id="aYu-R3-jXF"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="cA0-HM-Qnu"/>
+                <constraint firstAttribute="trailing" secondItem="3mq-0Q-Zof" secondAttribute="trailing" id="nVr-8H-0Cc"/>
+                <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="npR-HL-thf"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="rsL-eP-4DH"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="wow-0f-id7"/>
+            </constraints>
         </customView>
     </objects>
 </document>

@@ -19,9 +19,18 @@
 
 
 - (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+   [super drawRect:dirtyRect];
+    if (self.selected) {
+        NSRect bounds = [self bounds];
+        [[NSColor keyboardFocusIndicatorColor] set];
+        [NSBezierPath setDefaultLineWidth:4.0];
+        [NSBezierPath strokeRect:bounds];
+        
+    }
     
-    // Drawing code here.
+    
+
+    /*
     NSRect imageRect = NSMakeRect(5,5,self.frame.size.width -10,self.frame.size.height -10);
     
     NSBezierPath* imageRoundedRectanglePath = [NSBezierPath bezierPathWithRoundedRect:imageRect xRadius: 4 yRadius: 4];
@@ -45,11 +54,12 @@
     [strokeColor setStroke];
     
     [super drawRect:dirtyRect];
+     */
 }
 
 - (instancetype) initWithFrame:(NSRect)frameRect{
     if (self = [super initWithFrame:frameRect]) {
-    //    selected = YES;
+//        selected = YES;
     }
     return self;
 }

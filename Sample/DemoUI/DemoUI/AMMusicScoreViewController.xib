@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMusicScoreViewController">
             <connections>
                 <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
+                <outlet property="removeScoreBtn" destination="8pZ-tm-D4t" id="qQw-2Q-NZb"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -17,6 +18,20 @@
             <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pZ-tm-D4t">
+                    <rect key="frame" x="541" y="912" width="115" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="115" id="UVF-dR-UX4"/>
+                        <constraint firstAttribute="height" constant="16" id="Uw4-MC-ffI"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="REMOVE SCORE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="MEq-lp-oqL">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeMusicScoreItem:" target="-2" id="wFP-Gv-ggh"/>
+                    </connections>
+                </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tOL-jT-WuM">
                     <rect key="frame" x="664" y="912" width="89" height="16"/>
                     <constraints>
@@ -35,6 +50,8 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tOL-jT-WuM" secondAttribute="trailing" constant="6" id="1Ol-KA-ydZ"/>
                 <constraint firstItem="tOL-jT-WuM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="KNh-Yh-5lP"/>
+                <constraint firstItem="tOL-jT-WuM" firstAttribute="leading" secondItem="8pZ-tm-D4t" secondAttribute="trailing" constant="6" id="Z65-gu-qHv"/>
+                <constraint firstItem="8pZ-tm-D4t" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="m3S-cT-obA"/>
             </constraints>
             <point key="canvasLocation" x="-142.5" y="87.5"/>
         </customView>

@@ -12,7 +12,9 @@
 
 @interface AMMusicScoreViewController : NSViewController
 @property (weak) IBOutlet NSButton *loadScoreBtn;
+@property (weak) IBOutlet NSButton *removeScoreBtn;
 
 - (IBAction) addMusicScoreItem:(id)sender;
+@property (weak) IBOutlet NSButton *removeMusicScoreItem;
 
 @end

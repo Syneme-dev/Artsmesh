@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMCollectionView : NSView
-
 @property NSColor *backgroudColor;
 @property NSUInteger itemGap;
+@property NSUInteger selectable;
 
+
+- (void) removeSelectedItem;
 -(void)addViewItem:(NSView *)view;
 -(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index;
 -(void)addViewItems:(NSArray *)views;

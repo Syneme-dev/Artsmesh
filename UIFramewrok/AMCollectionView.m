@@ -7,12 +7,12 @@
 //
 
 #import "AMCollectionView.h"
+#import "AMCollectionViewCell.h"
 #define THUMBNAIL_HEIGHT 180.0 
 
 NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 @interface AMCollectionView()<NSDraggingDestination, NSDraggingSource>
-
 @end
 
 @implementation AMCollectionView
@@ -22,9 +22,12 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     NSView * _docView;
     __weak NSScrollView* _scrollView;
+    __weak  AMCollectionViewCell* _selectedView;
     
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
+    
+   
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -79,6 +82,8 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     _viewItems = [[NSMutableArray alloc] init];
     
 
+    _selectable = NO;
+    _selectedView = nil;
     
    //old style [self registerForDraggedTypes:@[NSTIFFPboardType]];
     [self registerForDraggedTypes:@[AMMusicScoreItemType]];
@@ -145,7 +150,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 -(void)removeViewItem:(NSView *)view
 {
-    [_viewItems removeObject:view];
+    [_viewItems removeObjectIdenticalTo:view];
     [self reloadData];
 }
 
@@ -182,6 +187,15 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     return NSDragOperationDelete;
 }
 
+- (void) removeSelectedItem
+{
+    if (!_selectable && _selectedView == nil)
+        return;
+    
+    [self removeViewItem:_selectedView];
+ //   [self reloadData];
+    _selectedView = nil;
+}
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
@@ -189,13 +203,30 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     mouseDownEvent  = theEvent;
     
     NSPoint mouseDownPoint = [theEvent locationInWindow];
-    NSView* mouseDownView  = [self hitTest:mouseDownPoint];
+    AMCollectionViewCell* mouseDownView  = [self hitTest:mouseDownPoint];
     
-    for (NSView* viewItem in _viewItems) {
+    for (AMCollectionViewCell* viewItem in _viewItems) {
         if(mouseDownView == viewItem){
             mouseDownIndex = [_viewItems indexOfObject:viewItem];
         }
     }
+    
+    if (_selectable) {
+        if (_selectedView == nil) {
+            [mouseDownView setSelected:YES];
+            _selectedView = mouseDownView;
+        }
+        else if(_selectedView == mouseDownView){
+            [_selectedView setSelected:NO];
+            _selectedView = nil;
+        }
+        else {
+            [_selectedView setSelected:NO];
+            [mouseDownView setSelected:YES];
+            _selectedView = mouseDownView;
+        }
+    }
+    
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent

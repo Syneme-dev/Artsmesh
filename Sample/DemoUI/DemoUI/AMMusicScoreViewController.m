@@ -25,12 +25,13 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 - (void) awakeFromNib
 {
-    
+    [AMButtonHandler changeTabTextColor:self.removeScoreBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.loadScoreBtn toColor:UI_Color_blue];
     
     NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 480);
     _collectionView = [[AMCollectionView alloc] initWithFrame:rect];
     _collectionView.itemGap = 10;
+    _collectionView.selectable = YES;
     
     [self.view addSubview:_collectionView];
     
@@ -63,6 +64,9 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     return self;
 }
 
+- (IBAction)removeMusicScoreItem:(id)sender {
+    [_collectionView removeSelectedItem];
+}
 
 - (IBAction)addMusicScoreItem:(id)sender
 {
@@ -89,6 +93,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                               imageCell.image = image;
                               imageCell.imageScaling = NSImageScaleNone;
                               [_collectionView addViewItem:imageCell];
+                              imageCell = nil;
                           }
                       });
                   }];

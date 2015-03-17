@@ -8,12 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
+#import "AMTabPanelViewController.h"
 #import "GTMOAuth2WindowController.h"
 
-@interface AMBroadcastViewController : NSViewController
+@interface AMBroadcastViewController : AMTabPanelViewController
+
+@property (strong) IBOutlet NSButton *settingsBtn;
+
+@property (strong) IBOutlet NSButton *youtubeBtn;
 
 @property (weak) IBOutlet WebView *gplusWebView;
 
+@property (strong) IBOutlet NSTabView *groupTabView;
+
 - (void)changeBroadcastURL : (NSString *)newURL;
+- (IBAction)youtubeBtnClick:(id)sender;
+- (IBAction)settingsBtnClick:(id)sender;
 
 @end

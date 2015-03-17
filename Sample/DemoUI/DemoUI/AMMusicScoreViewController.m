@@ -17,7 +17,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 @interface AMMusicScoreViewController ()
 {
     NSMutableArray*     musicScoreItems;
-    AMCollectionView    *_collectionView;
+    AMCollectionView*   _collectionView;
 }
 @end
 

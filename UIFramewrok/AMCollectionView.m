@@ -117,6 +117,10 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     [_docView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     int xPos = 0;
+    NSRect rect = _docView.bounds;
+    rect.size.width = xPos;
+    _docView.frame = rect;
+
     for (NSView *subView in _viewItems) {
         NSRect rect = NSMakeRect(xPos, 0, subView.frame.size.width, _docView.bounds.size.height);
         subView.frame = rect;

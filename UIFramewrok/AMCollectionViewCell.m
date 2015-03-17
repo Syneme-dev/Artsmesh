@@ -22,7 +22,9 @@
    [super drawRect:dirtyRect];
     if (self.selected) {
         NSRect bounds = [self bounds];
-        [[NSColor keyboardFocusIndicatorColor] set];
+        [[NSColor colorWithCalibratedRed:0.176 green:0.23 blue:0.298 alpha:1.0] set];
+       // [bgColor ];
+//        [[NSColor keyboardFocusIndicatorColor] set];
         [NSBezierPath setDefaultLineWidth:4.0];
         [NSBezierPath strokeRect:bounds];
         

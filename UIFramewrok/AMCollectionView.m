@@ -150,7 +150,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 -(void)removeViewItem:(NSView *)view
 {
-    [_viewItems removeObjectIdenticalTo:view];
+    [_viewItems removeObject:view];
     [self reloadData];
 }
 
@@ -193,7 +193,6 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
         return;
     
     [self removeViewItem:_selectedView];
- //   [self reloadData];
     _selectedView = nil;
 }
 

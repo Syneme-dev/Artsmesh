@@ -86,15 +86,16 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                       panel = nil;
                       dispatch_async(dispatch_get_main_queue(), ^{
                           
-                          [_collectionView removeAllItems];
-                          
-                          for (NSImage *image in musicScoreItems) {
+                            for (NSImage *image in musicScoreItems)
+                            {
                               AMCollectionViewCell *imageCell = [[AMCollectionViewCell alloc] initWithFrame:NSMakeRect(0, 0, image.size.width, image.size.height)];
                               imageCell.image = image;
                               imageCell.imageScaling = NSImageScaleNone;
                               [_collectionView addViewItem:imageCell];
                               imageCell = nil;
                           }
+                          
+                          [musicScoreItems removeAllObjects];
                       });
                   }];
 }

@@ -265,8 +265,6 @@
     
     isWindowLoading = NO;
     
-  //  NSTimeInterval* interval = [ NSTimeIntervalSince1970];
-    [self displayTopTimer:(3600*3+60*2+44)];
 }
 
 

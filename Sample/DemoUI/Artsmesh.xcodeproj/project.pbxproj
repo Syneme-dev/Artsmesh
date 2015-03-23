@@ -117,6 +117,9 @@
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
+		4F8322971ABFABDB00EF6D4A /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8322961ABFABDB00EF6D4A /* AMScoreView.m */; };
+		4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */; };
+		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
@@ -468,6 +471,12 @@
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
+		4F8322951ABFABDB00EF6D4A /* AMScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreView.h; sourceTree = "<group>"; };
+		4F8322961ABFABDB00EF6D4A /* AMScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreView.m; sourceTree = "<group>"; };
+		4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNowBarView.h; sourceTree = "<group>"; };
+		4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNowBarView.m; sourceTree = "<group>"; };
+		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
+		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF200640194585F6008630C8 /* AMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMapViewController.h; sourceTree = "<group>"; };
@@ -934,6 +943,12 @@
 				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
 				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
 				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
+				4F8322951ABFABDB00EF6D4A /* AMScoreView.h */,
+				4F8322961ABFABDB00EF6D4A /* AMScoreView.m */,
+				4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */,
+				4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */,
+				4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */,
+				4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */,
 			);
 			name = ScorePanel;
 			sourceTree = "<group>";
@@ -1464,11 +1479,13 @@
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
+				4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */,
 				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
+				4F8322971ABFABDB00EF6D4A /* AMScoreView.m in Sources */,
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */,
@@ -1534,6 +1551,7 @@
 				2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,
+				4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,

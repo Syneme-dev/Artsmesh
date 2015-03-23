@@ -8,7 +8,7 @@
 
 #import "AMMusicScoreViewController.h"
 #import "UIFramework/AMCollectionViewCell.h"
-#import "UIFramework/AMCollectionView.h"
+#import "AMScoreCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"
 #import "UIFramework/AMButtonHandler.h"
 
@@ -16,8 +16,8 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 @interface AMMusicScoreViewController ()
 {
-    NSMutableArray*     musicScoreItems;
-    AMCollectionView*   _collectionView;
+    NSMutableArray*             musicScoreItems;
+    AMScoreCollectionView*      _collectionView;
 }
 @end
 
@@ -29,7 +29,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     [AMButtonHandler changeTabTextColor:self.loadScoreBtn toColor:UI_Color_blue];
     
     NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 480);
-    _collectionView = [[AMCollectionView alloc] initWithFrame:rect];
+    _collectionView = [[AMScoreCollectionView alloc] initWithFrame:rect];
     _collectionView.itemGap = 10;
     _collectionView.selectable = YES;
     

@@ -8,7 +8,7 @@
 
 #import "AMCollectionView.h"
 #import "AMCollectionViewCell.h"
-//#import "AMNowBarForegroundView.h"
+#import "AMNowBarForegroundView.h"
 
 #define THUMBNAIL_HEIGHT 180.0 
 
@@ -29,7 +29,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
     
- //   AMNowBarForegroundView*  _nowBarView;
+    AMNowBarForegroundView*  _nowBarView;
    
 }
 
@@ -92,12 +92,51 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     [self registerForDraggedTypes:@[AMMusicScoreItemType]];
     
 //    NSRect nowBarFrame = [self frame];
-//    _nowBarView = [[AMNowBarForegroundView alloc] initWithFrame:self.bounds];
-//    [self addSubview:_nowBarView];
+    _nowBarView = [[AMNowBarForegroundView alloc] initWithFrame:self.bounds];
+    [self addSubview:_nowBarView];
     
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStartTimer:)
+                                                 name:AMTimerStartNotification
+                                               object:nil];
     
-   }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStopTimer:)
+                                                 name:AMTimerStopNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter]  addObserver:self
+                                              selector:@selector(onPauseTimer:)
+                                                  name:AMTimerPauseNotification
+                                                object:nil];
+    [[NSNotificationCenter  defaultCenter]   addObserver:self
+                                                selector:@selector(onResumeTimer:)
+                                                    name:AMTimerResumeNotification
+                                                  object:nil];
+     */
+}
 
+- (void) dealloc
+{
+    /*
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AMTimerStartNotification
+                                                  object:nil];
+    
+     [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                     name:AMTimerStopNotification
+                                                   object:nil];
+    
+     [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                     name:AMTimerPauseNotification
+                                                   object:nil];
+    
+     [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                     name:AMTimerResumeNotification
+                                                   object:nil];
+     */
+}
 
 -(void)setFrame:(NSRect)frame{
     [super setFrame:frame];
@@ -392,5 +431,35 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     }
 }
 
+
+#pragma mark -
+#pragma mark AMTimerNotificatio 
+- (void) onStartTimer : (NSNotification*) notfication
+{
+   // [_docView move]
+//    [_docView scro]
+}
+
+- (void) onStopTimer : (NSNotification*) notfication
+{
+    
+}
+
+- (void) onPauseTimer : (NSNotification*) notfication
+{
+    
+}
+
+- (void) onResumeTimer : (NSNotification*) notfication
+{
+    
+}
+
+- (void) startScrollScore
+{
+    NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
+    currentScrollPosition.x += 100;
+    [[_scrollView documentView] scrollPoint:currentScrollPosition];
+}
 
 @end

@@ -1,23 +1,26 @@
 //
-//  AMCollectionView.m
-//  AMCollectionViewTest
+//  AMScoreCollectionView.m
+//  Artsmesh
 //
-//  Created by wangwei on 26/11/14.
-//  Copyright (c) 2014 wangwei. All rights reserved.
+//  Created by whiskyzed on 3/23/15.
+//  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMCollectionView.h"
-#import "AMCollectionViewCell.h"
-//#import "AMNowBarForegroundView.h"
+#import "AMScoreCollectionView.h"
 
-#define THUMBNAIL_HEIGHT 180.0 
+#import "AMTimerTabVC.h"
 
-NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
+#import "UIFramework/AMCollectionViewCell.h"
+#import "AMNowBarView.h"
 
-@interface AMCollectionView()<NSDraggingDestination, NSDraggingSource>
+#define THUMBNAIL_HEIGHT 180.0
+
+NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
+
+@interface AMScoreCollectionView()<NSDraggingDestination, NSDraggingSource>
 @end
 
-@implementation AMCollectionView
+@implementation AMScoreCollectionView
 {
     NSMutableArray *_viewItems;
     NSColor* _bkColor;
@@ -29,8 +32,9 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
     
- //   AMNowBarForegroundView*  _nowBarView;
-   
+    NSTimer*        _scrollTimer;
+    AMNowBarView*   _nowBarView;
+    
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -51,8 +55,8 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
-//    [[NSColor blueColor] set];
-//    [[NSBezierPath bezierPathWithRect:self.bounds] fill];
+    //    [[NSColor blueColor] set];
+    //    [[NSBezierPath bezierPathWithRect:self.bounds] fill];
 }
 
 -(void) doInit
@@ -84,19 +88,63 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     _viewItems = [[NSMutableArray alloc] init];
     
-
+    
     _selectable = NO;
     _selectedView = nil;
     
-   //old style [self registerForDraggedTypes:@[NSTIFFPboardType]];
-    [self registerForDraggedTypes:@[AMMusicScoreItemType]];
+    //old style [self registerForDraggedTypes:@[NSTIFFPboardType]];
+    [self registerForDraggedTypes:@[AMMusicScoreType]];
     
-//    NSRect nowBarFrame = [self frame];
-//    _nowBarView = [[AMNowBarForegroundView alloc] initWithFrame:self.bounds];
-//    [self addSubview:_nowBarView];
+    NSRect rect = [self bounds];
+    NSRect nowBarFrame = NSMakeRect(rect.size.width /3, 0, 3, rect.size.height);
+    _nowBarView = [[AMNowBarView alloc] initWithFrame:nowBarFrame];
+    [self addSubview:_nowBarView];
     
     
-   }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStartTimer:)
+                                                 name:AMTimerStartNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onStopTimer:)
+                                                 name:AMTimerStopNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter]  addObserver:self
+                                              selector:@selector(onPauseTimer:)
+                                                  name:AMTimerPauseNotification
+                                                object:nil];
+    
+    [[NSNotificationCenter  defaultCenter]   addObserver:self
+                                                selector:@selector(onResumeTimer:)
+                                                    name:AMTimerResumeNotification
+                                                  object:nil];
+
+    
+}
+
+- (void) dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AMTimerStartNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AMTimerStopNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AMTimerPauseNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AMTimerResumeNotification
+                                                  object:nil];
+    
+}
+
 
 
 -(void)setFrame:(NSRect)frame{
@@ -106,7 +154,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     rect.size.height = self.bounds.size.height;
     _docView.frame = rect;
     
-  }
+}
 
 -(void)addViewItem:(NSView *)view
 {
@@ -130,7 +178,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     NSRect rect = _docView.bounds;
     rect.size.width = xPos;
     _docView.frame = rect;
-
+    
     for (NSView *subView in _viewItems) {
         NSRect rect = NSMakeRect(xPos, 0, subView.frame.size.width, _docView.bounds.size.height);
         subView.frame = rect;
@@ -144,7 +192,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
         rect.size.width = xPos;
         _docView.frame = rect;
     }
-//    [_docView addSubview:_nowBarView];
+    //    [_docView addSubview:_nowBarView];
     
     [self setNeedsDisplay:YES];
 }
@@ -265,7 +313,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     // generate semi-transparent thumbnail
     NSBitmapImageRep *imageRep = [view bitmapImageRepForCachingDisplayInRect:view.bounds];
     
-   imageRep.size = view.bounds.size;
+    imageRep.size = view.bounds.size;
     [view cacheDisplayInRect:view.bounds toBitmapImageRep:imageRep];
     NSRect imageRect = NSZeroRect;
     imageRect.size = view.frame.size;
@@ -285,23 +333,23 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     thumbRect.origin.x = p.x;
     thumbRect.origin.y = p.y;
-
     
-  /*  old style
-   NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
-   [pboard declareTypes:[NSArray arrayWithObject:NSTIFFPboardType]  owner:self];
-   [pboard setData:[draggingImage TIFFRepresentation] forType:NSTIFFPboardType];
-   
-   [self dragImage:draggingImage
-                 at:p
-             offset:NSZeroSize
-              event:mouseDownEvent
-         pasteboard:pb
-             source:self
-          slideBack:YES];*/
+    
+    /*  old style
+     NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+     [pboard declareTypes:[NSArray arrayWithObject:NSTIFFPboardType]  owner:self];
+     [pboard setData:[draggingImage TIFFRepresentation] forType:NSTIFFPboardType];
+     
+     [self dragImage:draggingImage
+     at:p
+     offset:NSZeroSize
+     event:mouseDownEvent
+     pasteboard:pb
+     source:self
+     slideBack:YES];*/
     
     NSPasteboardItem *pasteboardItem = [[NSPasteboardItem alloc] init];
-    [pasteboardItem setString:@"" forType:AMMusicScoreItemType];
+    [pasteboardItem setString:@"" forType:AMMusicScoreType];
     
     
     NSDraggingItem *draggingItem = [[NSDraggingItem alloc]
@@ -311,7 +359,7 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     [self beginDraggingSessionWithItems:@[draggingItem]
                                   event:mouseDownEvent
                                  source:self];
-
+    
     
 }
 
@@ -390,6 +438,47 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
         default:
             return NSDragOperationMove;
     }
+}
+
+
+
+#pragma mark -
+#pragma mark AMTimerNotificatio
+- (void) onStartTimer : (NSNotification*) notfication
+{
+    // [_docView move]
+    //    [_docView scro]
+    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                    target:self
+                                                  selector:@selector(startScrollScore)
+                                                  userInfo:nil
+                                                   repeats:YES];
+}
+
+- (void) onStopTimer : (NSNotification*) notfication
+{
+    [_scrollTimer invalidate];
+    
+    NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
+    currentScrollPosition.x = 0;
+    [[_scrollView documentView] scrollPoint:currentScrollPosition];
+}
+
+- (void) onPauseTimer : (NSNotification*) notfication
+{
+    [_scrollTimer invalidate];
+}
+
+- (void) onResumeTimer : (NSNotification*) notfication
+{
+    [self onStartTimer:notfication];
+}
+
+- (void) startScrollScore
+{
+    NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
+     currentScrollPosition.x += 100;
+     [[_scrollView documentView] scrollPoint:currentScrollPosition];
 }
 
 

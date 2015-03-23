@@ -1,14 +1,15 @@
 //
-//  AMCollectionView.h
-//  AMCollectionViewTest
+//  AMScoreCollectionView.h
+//  Artsmesh
 //
-//  Created by wangwei on 26/11/14.
-//  Copyright (c) 2014 wangwei. All rights reserved.
+//  Created by whiskyzed on 3/23/15.
+//  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMCollectionView : NSView
+@interface AMScoreCollectionView : NSView
+
 @property NSColor *backgroudColor;
 @property NSUInteger itemGap;
 @property NSUInteger selectable;
@@ -23,5 +24,3 @@
 -(void)removeAllItems;
 
 @end
-
-

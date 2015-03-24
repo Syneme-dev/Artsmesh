@@ -23,9 +23,12 @@
 
 @property (strong) IBOutlet NSTabView *groupTabView;
 
+@property (strong) IBOutlet NSButton *oAuthSignInBtn;
+
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;
 - (IBAction)settingsBtnClick:(id)sender;
+- (IBAction)oAuthSignInBtnClick:(id)sender;
 
 - (BOOL)isSignedIn;
 

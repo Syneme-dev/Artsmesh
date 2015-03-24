@@ -68,8 +68,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
+    [self updateUI];
+    
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
     
     
     // Load in the event webview
@@ -194,9 +197,12 @@
     [self pushDownButton:self.settingsBtn];
     
     [self.groupTabView selectTabViewItemAtIndex:1];
-    
-    NSLog(@"current oAuth sign-in status: %hhu", [self isSignedIn]);
-    if (![self isSignedIn]) {
+}
+
+- (IBAction)oAuthSignInBtnClick:(id)sender {
+    if ([self isSignedIn]) {
+        [self signOut];
+    } else {
         [self loadOAuthWindow];
     }
 }
@@ -245,6 +251,7 @@
         // Authentication succeeded
         NSLog(@"Google authentication succeeded!");
         [self setAuthentication:auth];
+        [self updateUI];
     }
 }
 
@@ -252,9 +259,40 @@
     mAuth = auth;
 }
 
+- (void)checkSignedInBtn {
+    if ( [self isSignedIn] ) {
+        [self.oAuthSignInBtn setTitle:@"SIGN OUT"];
+    } else {
+        [self.oAuthSignInBtn setTitle:@"SIGN IN"];
+    }
+    
+    [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
+    [self.view setNeedsDisplay:TRUE];
+}
+
 - (BOOL)isSignedIn {
     BOOL isSignedIn = mAuth.canAuthorize;
     return isSignedIn;
+}
+
+- (void)signOut {
+    if ([mAuth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+        // Remove the token from Google's servers
+        [GTMOAuth2WindowController revokeTokenForGoogleAuthentication:mAuth];
+    }
+    
+    // Remove the stored Google authentication from the keychain, if any
+    [GTMOAuth2WindowController removeAuthFromKeychainForName:kKeychainItemName];
+    
+    // Discard our retained authentication object
+    [self setAuthentication:nil];
+    
+    [self updateUI];
+    
+}
+
+-(void) updateUI {
+    [self checkSignedInBtn];
 }
 
 

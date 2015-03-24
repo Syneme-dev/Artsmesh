@@ -11,7 +11,9 @@
 #import "AMTabPanelViewController.h"
 #import "GTMOAuth2WindowController.h"
 
-@interface AMBroadcastViewController : AMTabPanelViewController
+@interface AMBroadcastViewController : AMTabPanelViewController {
+    @private GTMOAuth2Authentication *mAuth;
+}
 
 @property (strong) IBOutlet NSButton *settingsBtn;
 
@@ -24,5 +26,7 @@
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;
 - (IBAction)settingsBtnClick:(id)sender;
+
+- (BOOL)isSignedIn;
 
 @end

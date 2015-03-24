@@ -32,9 +32,10 @@
     NSString *eventURL;
     NSString *broadcastURL;
     
+    NSString *kKeychainItemName;
     NSString *scope;
     NSString *kMyClientID;
-    NSString *kMylientSecret;
+    NSString *kMyClientSecret;
     
     NSViewController* _detailViewController;
     NSMutableArray *_tabControllers;
@@ -51,6 +52,20 @@
 
 -(void)awakeFromNib
 {
+    kKeychainItemName = @"ArtsMesh: YouTube";
+    
+    scope = @"https://www.googleapis.com/auth/youtube";
+    kMyClientID = @"998042950112-nf0sggo2f56tvt8bcord9kn0qe528mqv.apps.googleusercontent.com";
+    kMyClientSecret = @"P1QKHOBVo-1RTzpz9sOde4JP";
+    
+    // Get the saved authentication, if any, from the keychain.
+    GTMOAuth2Authentication *auth;
+    auth = [GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
+                                                                 clientID:kMyClientID
+                                                             clientSecret:kMyClientSecret];
+    
+    [self setAuthentication:auth];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
@@ -106,19 +121,15 @@
     }
 }
 
-- (void)testOAuth {
+- (void)loadOAuthWindow {
     NSApplication *myApp = [NSApplication sharedApplication];
     NSWindow *curWindow = [myApp keyWindow];
-    
-    scope = @"https://www.googleapis.com/auth/youtube";
-    kMyClientID = @"998042950112-nf0sggo2f56tvt8bcord9kn0qe528mqv.apps.googleusercontent.com";
-    kMylientSecret = @"P1QKHOBVo-1RTzpz9sOde4JP";
     
     GTMOAuth2WindowController *windowController;
     windowController = [[GTMOAuth2WindowController alloc] initWithScope:scope
                                                                clientID:kMyClientID
-                                                           clientSecret:kMylientSecret
-                                                       keychainItemName:nil
+                                                           clientSecret:kMyClientSecret
+                                                       keychainItemName:kKeychainItemName
                                                          resourceBundle:nil];
     
     [windowController signInSheetModalForWindow:curWindow
@@ -184,7 +195,10 @@
     
     [self.groupTabView selectTabViewItemAtIndex:1];
     
-    [self testOAuth];
+    NSLog(@"current oAuth sign-in status: %hhu", [self isSignedIn]);
+    if (![self isSignedIn]) {
+        [self loadOAuthWindow];
+    }
 }
 
 -(void)groupChanged:(NSNotification *)notification
@@ -223,8 +237,25 @@
 - (void)windowController:(GTMOAuth2WindowController *)windowController
         finishedWithAuth:(GTMOAuth2Authentication *)auth
                    error:(NSError *)error {
+    if (error != nil) {
+        // Authentication failed
+        NSLog(@"Google authentication Failed..");
+        [self setAuthentication:nil];
+    } else {
+        // Authentication succeeded
+        NSLog(@"Google authentication succeeded!");
+        [self setAuthentication:auth];
+    }
 }
 
+- (void)setAuthentication:(GTMOAuth2Authentication *)auth {
+    mAuth = auth;
+}
+
+- (BOOL)isSignedIn {
+    BOOL isSignedIn = mAuth.canAuthorize;
+    return isSignedIn;
+}
 
 
 @end

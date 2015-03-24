@@ -8,7 +8,7 @@
 
 
 #import "AMMainWindowController.h"
-#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
+//#import <AMPluginLoader/AMPluginAppDelegateProtocol.h>
 #import "AMAppDelegate.h"
 #import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMPreferenceVC.h"
@@ -27,7 +27,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMPanelControlBarViewController.h"
-#import "AMTimer/AMTimer.h"
+//#import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
 #import "AMMusicScoreViewController.h"
 #import "AMOSCMessageViewController.h"
@@ -645,11 +645,11 @@
     return panelViewController;
 }
 
-
+/*
 - (void)initTimer {
     NSTextField *timerField = (NSTextField *) self.amTimer;
     [[AMTimer shareInstance] addTimerScreen:timerField];
-}
+}*/
 
 
 - (AMPanelViewController *)loadGroupsPanel:(NSString *)panelId relatedView:(NSView*)view {
@@ -871,7 +871,7 @@
     panelViewController.movedFromController = fromController;
 }
 
-
+/*
 - (IBAction)onTimerControlItemClick:(NSButton *)sender {
     if (sender.state == NSOnState) {
         [[AMTimer shareInstance] start];
@@ -881,7 +881,7 @@
         [[AMTimer shareInstance] reset];
     }
 }
-
+*/
 
 - (void)setSideBarItemStatus:(NSString *)identifier withStatus:(Boolean)status {
     NSView *mainView = self.window.contentView;

@@ -8,7 +8,7 @@
 
 #import "AMTimerViewController.h"
 #import "UIFramework/AMFoundryFontView.h"
-#import "AMTimer/AMTimer.h"
+//#import "AMTimer/AMTimer.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMTimerTabVC.h"
 

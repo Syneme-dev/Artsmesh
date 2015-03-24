@@ -11,18 +11,16 @@
 		013A56EF1A5A64EE001D319F /* AMJacktripSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */; };
 		01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */; };
 		0CC5020A67934F638E94E9F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB17E0F797C4935AFFC1CF2 /* libPods.a */; };
+		1376BDDB1AC12E1400762C08 /* AMScoreCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1376BDDA1AC12E1400762C08 /* AMScoreCollectionCell.m */; };
 		2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */; };
 		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
 		209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */; };
-		2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; };
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
 		2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMPreferenceVC.xib */; };
 		269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 269D3431191B1EC40010B540 /* AMChatTableCellView.m */; };
-		269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268DA7C3198B99A100F86EBB /* AMTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		269F93671998F024006E19DD /* AMManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269F93651998F024006E19DD /* AMManualViewController.m */; };
 		269F93681998F024006E19DD /* AMManualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269F93661998F024006E19DD /* AMManualViewController.xib */; };
 		269FB84D1998816E00355312 /* AMBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FB84B1998816E00355312 /* AMBroadcastViewController.m */; };
@@ -117,7 +115,6 @@
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
-		4F8322971ABFABDB00EF6D4A /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8322961ABFABDB00EF6D4A /* AMScoreView.m */; };
 		4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -135,7 +132,6 @@
 		AF4542A319553C6C00CCD862 /* UIFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AF9205411910B42D0051BE63 /* UIFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF4542A419553C6C00CCD862 /* AMNetworkUtils.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D432037B1901142E009BDE67 /* AMNetworkUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF53F607199320BA0003DDC4 /* shot_audioMixing.png in Resources */ = {isa = PBXBuildFile; fileRef = AF53F606199320BA0003DDC4 /* shot_audioMixing.png */; };
@@ -259,7 +255,6 @@
 			files = (
 				4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */,
 				D47A184F19F2199B000A8CCB /* AMLogger.framework in CopyFiles */,
-				269F93221998A840006E19DD /* AMTimer.framework in CopyFiles */,
 				AF7242B4197E19F30008799B /* AMCommonTools.framework in CopyFiles */,
 				AF7242B1197E178E0008799B /* AMCoreData.framework in CopyFiles */,
 				AF4542A019553C6C00CCD862 /* AMStatusNet.framework in CopyFiles */,
@@ -268,7 +263,6 @@
 				AF4542A319553C6C00CCD862 /* UIFramework.framework in CopyFiles */,
 				AF4542A419553C6C00CCD862 /* AMNetworkUtils.framework in CopyFiles */,
 				AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */,
-				AF4542A619553C6C00CCD862 /* AMPluginLoader.framework in CopyFiles */,
 				AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */,
 				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
@@ -302,6 +296,8 @@
 		013A56ED1A5A64EE001D319F /* AMJacktripSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJacktripSettingsVC.xib; sourceTree = "<group>"; };
 		01D059B91A2D6A5E00BC51E7 /* AMJackCPULoderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackCPULoderView.h; sourceTree = "<group>"; };
 		01D059BA1A2D6A5E00BC51E7 /* AMJackCPULoderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackCPULoderView.m; sourceTree = "<group>"; };
+		1376BDD91AC12E1400762C08 /* AMScoreCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionCell.h; sourceTree = "<group>"; };
+		1376BDDA1AC12E1400762C08 /* AMScoreCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionCell.m; sourceTree = "<group>"; };
 		2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerTableCellVC.h; sourceTree = "<group>"; };
 		2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerTableCellVC.m; sourceTree = "<group>"; };
 		2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTableCellVC.xib; sourceTree = "<group>"; };
@@ -471,8 +467,6 @@
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
-		4F8322951ABFABDB00EF6D4A /* AMScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreView.h; sourceTree = "<group>"; };
-		4F8322961ABFABDB00EF6D4A /* AMScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreView.m; sourceTree = "<group>"; };
 		4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNowBarView.h; sourceTree = "<group>"; };
 		4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNowBarView.m; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
@@ -618,7 +612,6 @@
 				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
-				268DA7C4198B99A100F86EBB /* AMTimer.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				CE486AB31A28140900D35B82 /* Syphon.framework in Frameworks */,
@@ -629,7 +622,6 @@
 				D432037C1901142E009BDE67 /* AMNetworkUtils.framework in Frameworks */,
 				AF796F5C1900EE7D00C48C00 /* WebKit.framework in Frameworks */,
 				26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */,
-				2611399E18D2E8A800CDCF8F /* AMPluginLoader.framework in Frameworks */,
 				268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */,
 				268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */,
 				37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */,
@@ -943,12 +935,12 @@
 				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
 				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
 				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
-				4F8322951ABFABDB00EF6D4A /* AMScoreView.h */,
-				4F8322961ABFABDB00EF6D4A /* AMScoreView.m */,
 				4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */,
 				4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */,
 				4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */,
 				4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */,
+				1376BDD91AC12E1400762C08 /* AMScoreCollectionCell.h */,
+				1376BDDA1AC12E1400762C08 /* AMScoreCollectionCell.m */,
 			);
 			name = ScorePanel;
 			sourceTree = "<group>";
@@ -1473,6 +1465,7 @@
 				2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */,
 				4A4511841A8B62FB001E7328 /* AMOSCGroupSettingsVC.m in Sources */,
 				269FB84D1998816E00355312 /* AMBroadcastViewController.m in Sources */,
+				1376BDDB1AC12E1400762C08 /* AMScoreCollectionCell.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
 				4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */,
@@ -1485,7 +1478,6 @@
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
 				2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */,
 				AF200643194585F6008630C8 /* AMMapViewController.m in Sources */,
-				4F8322971ABFABDB00EF6D4A /* AMScoreView.m in Sources */,
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				CE60077A1990615C00EF9220 /* AMNetworkToolsViewController.m in Sources */,

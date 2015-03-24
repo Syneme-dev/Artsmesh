@@ -20,7 +20,6 @@
 @property NSMutableDictionary *panelControllers;
 @property (weak) IBOutlet NSTextField *versionLabel;
 - (IBAction)onSidebarItemClick:(NSButton *)sender;
-@property (weak) IBOutlet AMFoundryFontView *amTimer;
 @property(nonatomic, readonly) NSView *containerView;
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
@@ -33,7 +32,6 @@
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 
-- (IBAction)onTimerControlItemClick:(NSButton *)sender;
 - (IBAction)copyPanel:(id)sender;
 
 -(void)loadControlBar;

@@ -7,7 +7,7 @@
 //
 
 #import "AMCollectionView.h"
-#import "AMCollectionViewCell.h"
+
 //#import "AMNowBarForegroundView.h"
 
 #define THUMBNAIL_HEIGHT 180.0 
@@ -24,13 +24,9 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     NSView * _docView;
     __weak NSScrollView* _scrollView;
-    __weak  AMCollectionViewCell* _selectedView;
     
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
-    
- //   AMNowBarForegroundView*  _nowBarView;
-   
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -84,9 +80,6 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     
     _viewItems = [[NSMutableArray alloc] init];
     
-
-    _selectable = NO;
-    _selectedView = nil;
     
    //old style [self registerForDraggedTypes:@[NSTIFFPboardType]];
     [self registerForDraggedTypes:@[AMMusicScoreItemType]];
@@ -202,46 +195,19 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     return NSDragOperationDelete;
 }
 
-- (void) removeSelectedItem
-{
-    // get the current scroll position of the document view
-    if (!_selectable && _selectedView == nil)
-        return;
-    
-    [self removeViewItem:_selectedView];
-    _selectedView = nil;
-}
-
 - (void) mouseDown:(NSEvent *)theEvent
 {
     mouseDownIndex = -1;
     mouseDownEvent  = theEvent;
     
     NSPoint mouseDownPoint = [theEvent locationInWindow];
-    AMCollectionViewCell* mouseDownView  = [self hitTest:mouseDownPoint];
+    NSImageView* mouseDownView  = [self hitTest:mouseDownPoint];
     
-    for (AMCollectionViewCell* viewItem in _viewItems) {
+    for (NSImageView* viewItem in _viewItems) {
         if(mouseDownView == viewItem){
             mouseDownIndex = [_viewItems indexOfObject:viewItem];
         }
     }
-    
-    if (_selectable) {
-        if (_selectedView == nil) {
-            [mouseDownView setSelected:YES];
-            _selectedView = mouseDownView;
-        }
-        else if(_selectedView == mouseDownView){
-            [_selectedView setSelected:NO];
-            _selectedView = nil;
-        }
-        else {
-            [_selectedView setSelected:NO];
-            [mouseDownView setSelected:YES];
-            _selectedView = mouseDownView;
-        }
-    }
-    
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent

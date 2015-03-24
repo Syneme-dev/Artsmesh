@@ -5,12 +5,9 @@
 //  Created by whiskyzed on 3/23/15.
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
-
-#import "AMScoreCollectionView.h"
-
 #import "AMTimerTabVC.h"
-
-#import "UIFramework/AMCollectionViewCell.h"
+#import "AMScoreCollectionView.h"
+#import "AMScoreCollectionCell.h"
 #import "AMNowBarView.h"
 
 #define THUMBNAIL_HEIGHT 180.0
@@ -27,7 +24,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     
     NSView * _docView;
     __weak NSScrollView* _scrollView;
-    __weak  AMCollectionViewCell* _selectedView;
+    __weak  AMScoreCollectionCell* _selectedView;
     
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
@@ -266,9 +263,9 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     mouseDownEvent  = theEvent;
     
     NSPoint mouseDownPoint = [theEvent locationInWindow];
-    AMCollectionViewCell* mouseDownView  = [self hitTest:mouseDownPoint];
+    AMScoreCollectionCell* mouseDownView  = [self hitTest:mouseDownPoint];
     
-    for (AMCollectionViewCell* viewItem in _viewItems) {
+    for (AMScoreCollectionCell* viewItem in _viewItems) {
         if(mouseDownView == viewItem){
             mouseDownIndex = [_viewItems indexOfObject:viewItem];
         }

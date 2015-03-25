@@ -23,10 +23,33 @@
     [path lineToPoint:nowBarEnd];     
     [path fill];
     */
+    // To draw two triangles both in the front and below end
+    CGFloat width  = [self bounds].size.width;
+    CGFloat height = [self bounds].size.height;
     
     NSColor *fgColor = [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.5];
-    [fgColor setFill];
-    NSRectFill(self.bounds);
+    [fgColor set];
+    
+    NSBezierPath* midBar = [NSBezierPath bezierPath];
+    [midBar setLineWidth:2];
+    [midBar moveToPoint:NSMakePoint(width/2, height-width+1)];
+    [midBar lineToPoint:NSMakePoint(width/2, width)];
+    [midBar stroke];
+    
+    NSBezierPath* upperTriangle = [NSBezierPath bezierPath];
+    [upperTriangle moveToPoint:NSMakePoint(0, height)];
+    [upperTriangle lineToPoint:NSMakePoint(width, height)];
+    [upperTriangle lineToPoint:NSMakePoint(width/2, height-width)];
+    [upperTriangle fill];
+   
+    
+    NSBezierPath* lowerTriangle = [NSBezierPath bezierPath];
+    [lowerTriangle moveToPoint:NSMakePoint(0, 0)];
+    [lowerTriangle lineToPoint:NSMakePoint(width, 0)];
+    [lowerTriangle lineToPoint:NSMakePoint(width/2, width+1)];
+    [lowerTriangle fill];
+
+//    NSRectFill(self.bounds);
 }
 
 

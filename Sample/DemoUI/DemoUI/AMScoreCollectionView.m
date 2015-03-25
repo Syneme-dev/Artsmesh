@@ -93,7 +93,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     [self registerForDraggedTypes:@[AMMusicScoreType]];
     
     NSRect rect = [self bounds];
-    NSRect nowBarFrame = NSMakeRect(rect.size.width /3, 0, 3, rect.size.height);
+    NSRect nowBarFrame = NSMakeRect(rect.size.width /3, 0, 8, rect.size.height);
     _nowBarView = [[AMNowBarView alloc] initWithFrame:nowBarFrame];
     [self addSubview:_nowBarView];
     
@@ -261,7 +261,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
 {
     mouseDownIndex = -1;
     mouseDownEvent  = theEvent;
-    
+ 
     NSPoint mouseDownPoint = [theEvent locationInWindow];
     AMScoreCollectionCell* mouseDownView  = [self hitTest:mouseDownPoint];
     
@@ -270,6 +270,19 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
             mouseDownIndex = [_viewItems indexOfObject:viewItem];
         }
     }
+}
+
+- (void) mouseUp:(NSEvent *)theEvent
+{
+    NSPoint mouseDownPoint = [mouseDownEvent locationInWindow];
+    AMScoreCollectionCell* mouseDownView  = [self hitTest:mouseDownPoint];
+    
+    /*
+    for (AMScoreCollectionCell* viewItem in _viewItems) {
+        if(mouseDownView == viewItem){
+            mouseDownIndex = [_viewItems indexOfObject:viewItem];
+        }
+    }*/
     
     if (_selectable) {
         if (_selectedView == nil) {
@@ -286,7 +299,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
             _selectedView = mouseDownView;
         }
     }
-    
+
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent
@@ -445,7 +458,8 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 {
     // [_docView move]
     //    [_docView scro]
-    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:1
+    [self onStopTimer:notfication];
+    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                     target:self
                                                   selector:@selector(startScrollScore)
                                                   userInfo:nil
@@ -468,13 +482,17 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 
 - (void) onResumeTimer : (NSNotification*) notfication
 {
-    [self onStartTimer:notfication];
+    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                    target:self
+                                                  selector:@selector(startScrollScore)
+                                                  userInfo:nil
+                                                   repeats:YES];
 }
 
 - (void) startScrollScore
 {
     NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
-     currentScrollPosition.x += 100;
+     currentScrollPosition.x += 1;
      [[_scrollView documentView] scrollPoint:currentScrollPosition];
 }
 

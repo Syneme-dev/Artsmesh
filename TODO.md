@@ -1,6 +1,6 @@
 #### In-Progress
 ---
-* The YouTube Live Event creator isn't native
+* The YouTube Live Event creator isn't native (Brad)
   - [ ] Remove webview from display in the broadcast panel
   - [ ] Investigate required format for URL request to establish live event (existing code on ArtsMesh.io events is the place to start)
   - [ ] Construct basic UI xib file for testing purposes

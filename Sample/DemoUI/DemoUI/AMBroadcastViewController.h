@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "AMTabPanelViewController.h"
-#import "GTMOAuth2WindowController.h"
+#import <GTL/GTMOAuth2WindowController.h>
 
 @interface AMBroadcastViewController : AMTabPanelViewController {
     @private GTMOAuth2Authentication *mAuth;

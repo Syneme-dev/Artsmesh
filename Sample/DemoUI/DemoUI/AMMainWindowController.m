@@ -87,7 +87,7 @@
     //MZTimerLabel *amTimerControl;
     AMPanelControlBarViewController *_controlBarVC;
     Boolean isWindowLoading;
-
+    
     float containerWidth;
     
     NSTimer *_jackCpuTimer;
@@ -101,7 +101,7 @@
     self = [super initWithWindow:window];
     if (self) {
         _panelControllers = [[NSMutableDictionary alloc] init];
-
+        
         AMAppDelegate *appDelegate = [NSApp delegate];
         self.window.restorable = YES;
         self.window.restorationClass = [appDelegate class];
@@ -113,7 +113,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
-     
+        
         
         //Add for top bar timer
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -151,7 +151,7 @@
         NSView * colView = [_containerView.subviews objectAtIndex:col];
         NSMutableArray *rowViews = [[NSMutableArray alloc] init];
         for (int row = 0; row < [colView.subviews count]; row ++) {
-
+            
             NSView *panelView = [colView.subviews objectAtIndex:row];
             if ([panelView isKindOfClass:[AMPanelView class]]) {
                 AMPanelView *pView = (AMPanelView *)panelView;
@@ -168,9 +168,9 @@
                                           @"width": [NSNumber numberWithFloat:panelView.frame.size.width],
                                           @"height":[NSNumber numberWithFloat:panelView.frame.size.height],
                                           @"panelId": pId
-                                        };
+                                          };
                 
-               // NSLog(@"%@", pId);
+                // NSLog(@"%@", pId);
                 
                 [rowViews addObject:locDict];
             }
@@ -445,16 +445,16 @@
 
 - (void)copyPanel:(NSButton *)sender {
     static int numberOfNetworkToolsPanel = 0;
-
+    
     AMPanelView *panelView = (AMPanelView *) sender.superview.superview;
     AMPanelViewController *controller = (AMPanelViewController *) panelView.panelViewController;
-
+    
     if (controller.panelType == AMNetworkToolsPanelType) {
         NSString *newId = [NSString stringWithFormat:@"%@_%d", controller.panelId,
-                                                     ++numberOfNetworkToolsPanel];
+                           ++numberOfNetworkToolsPanel];
         NSString *newTitle = [NSString stringWithFormat:@"NETWORK TOOLS - %d", numberOfNetworkToolsPanel];
         AMPanelViewController *newController =
-                [self createNetworkToolsPanelController:newId withTitle:newTitle relatedView:nil];
+        [self createNetworkToolsPanelController:newId withTitle:newTitle relatedView:nil];
         AMPanelView *newPanel = (AMPanelView *) newController.view;
         [newController.view removeFromSuperview];
         [_containerView addSubview:newPanel positioned:NSWindowAbove relativeTo:panelView.hostingBox];
@@ -465,9 +465,9 @@
 
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title {
     AMPanelViewController *viewController =
-            [self createPanel:identifier withTitle:title width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:nil];
+    [self createPanel:identifier withTitle:title width:UI_defaultPanelWidth height:UI_defaultPanelHeight relatedView:nil];
     return viewController;
-
+    
 }
 
 
@@ -478,7 +478,7 @@
 
 - (AMPanelViewController *)createPanel:(NSString *)identifier withTitle:(NSString *)title width:(float)width height:(float)height relatedView:(NSView*)relatedView {
     AMPanelViewController *panelViewController =
-            [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+    [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
     panelViewController.panelId = identifier;
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.panelViewController = panelViewController;
@@ -516,11 +516,11 @@
         [_containerView addSubview:panelViewController.view];
     }
     [self.panelControllers setObject:panelViewController forKey:identifier];
-//    NSMutableArray *openedPanels = [[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
-//    if (![openedPanels containsObject:identifier]) {
-//        [openedPanels addObject:identifier];
-//    }
-
+    //    NSMutableArray *openedPanels = [[[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel] mutableCopy];
+    //    if (![openedPanels containsObject:identifier]) {
+    //        [openedPanels addObject:identifier];
+    //    }
+    
     //[[AMPreferenceManager standardUserDefaults] setObject:openedPanels forKey:UserData_Key_OpenedPanel];
     return panelViewController;
 }
@@ -529,7 +529,7 @@
 - (void)removePanel:(NSString *)panelName {
     AMPanelViewController *panelViewController = self.panelControllers[panelName];
     [panelViewController closePanel:nil];
-
+    
 }
 
 
@@ -543,19 +543,19 @@
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
     [panelView addConstraints:
-            [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|"
-                                                    options:0
-                                                    metrics:nil
-                                                      views:views]];
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
     [panelView addConstraints:
-            [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]-21-|"
-                                                    options:0
-                                                    metrics:nil
-                                                      views:views]];
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-21-[contentView]-21-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
     if ([contentController isKindOfClass:[AMTabPanelViewController class]]) {
         AMTabPanelViewController *tabPanelController = (AMTabPanelViewController *) contentController;
         panelController.tabPanelViewController = tabPanelController;
-
+        
     }
 }
 
@@ -612,8 +612,8 @@
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:760 height:UI_defaultPanelHeight relatedView:view];
-//    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
-//    panelView.minSizeConstraint = panelView.frame.size;
+    //    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
+    //    panelView.minSizeConstraint = panelView.frame.size;
     NSViewController *viewController = [[AMTimerViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
@@ -622,7 +622,7 @@
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId relatedView:(NSView*)view{
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
-   
+    
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth* 4, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
@@ -645,6 +645,12 @@
     return panelViewController;
 }
 
+/*
+ - (void)initTimer {
+ NSTextField *timerField = (NSTextField *) self.amTimer;
+ [[AMTimer shareInstance] addTimerScreen:timerField];
+ }*/
+
 
 - (AMPanelViewController *)loadGroupsPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = UI_defaultPanelWidth*1.5;
@@ -653,13 +659,13 @@
                                                          withTitle:@"GROUPS"
                                                              width:panelWidth
                                                             height:panelHeight
-                                                  relatedView:view];
+                                                       relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth *1.5, 220.0f);
     panelView.minSizeConstraint = panelSize;
     AMGroupPanelViewController *userGroupViewController = [[AMGroupPanelViewController alloc] initWithNibName:@"AMGroupPanelViewController" bundle:nil];
     userGroupViewController.view.frame = NSMakeRect(0, UI_panelTitlebarHeight, 300, 380);
-
+    
     [self fillPanel:panelViewController content:userGroupViewController];
     NSView *groupView = userGroupViewController.view;
     [groupView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -686,7 +692,7 @@
 - (AMPanelViewController *)loadChatPanel:(NSString *)panelId relatedView:(NSView*)view {
     float panelWidth = 600.0f;
     float panelHeight = 720.0f;
-
+    
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CHAT"
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
@@ -727,7 +733,7 @@
 
 - (AMPanelViewController *)createNetworkToolsPanelController:(NSString *)ident
                                                    withTitle:(NSString *)title
-                                                relatedView:(NSView*)view{
+                                                 relatedView:(NSView*)view{
     float panelWidth = 600.0f;
     float panelHeight = 720.0f;
     AMPanelViewController *panelViewController = [self createPanel:ident withTitle:title width:panelWidth height:panelHeight relatedView:view];
@@ -786,7 +792,7 @@
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
     NSString *panelId =
-            [[NSString stringWithFormat:@"%@_PANEL", sender.identifier] uppercaseString];
+    [[NSString stringWithFormat:@"%@_PANEL", sender.identifier] uppercaseString];
     if (sender.state == NSOnState) {
         [self createPanelWithType:panelId withId:panelId];
     }
@@ -797,7 +803,7 @@
 
 
 - (AMPanelViewController *)createPanelWithType:(NSString *)panelType withId:(NSString *)panelId {
-   return  [self createPanelWithType:panelType withId:panelId relatedView:nil];
+    return  [self createPanelWithType:panelType withId:panelId relatedView:nil];
 }
 
 
@@ -853,7 +859,7 @@
         // panelViewController=   [self createPanel:panelType withTitle:panelId];
     }
     return panelViewController;
-
+    
 }
 
 
@@ -865,7 +871,17 @@
     panelViewController.movedFromController = fromController;
 }
 
-
+/*
+ - (IBAction)onTimerControlItemClick:(NSButton *)sender {
+ if (sender.state == NSOnState) {
+ [[AMTimer shareInstance] start];
+ }
+ else {
+ [[AMTimer shareInstance] pause];
+ [[AMTimer shareInstance] reset];
+ }
+ }
+ */
 
 - (void)setSideBarItemStatus:(NSString *)identifier withStatus:(Boolean)status {
     NSView *mainView = self.window.contentView;
@@ -946,7 +962,7 @@
 
 
 -(void)jackStopped:(NSNotification*)notification
-{    
+{
     [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     self.jackCPUUsageBar.hidden = YES;
     self.jackCpuUageNum.hidden = YES;
@@ -969,7 +985,7 @@
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
     [AMCoreData shareInstance].mySelf.oscServer = YES;
     [[AMMesher sharedAMMesher] updateMySelf];
-
+    
 }
 
 
@@ -1033,14 +1049,14 @@
     NSTimeInterval duration = [notification.userInfo[@"Duration"] floatValue];
     self.totalSecond = duration;
     [self startTopTimer:notification];
-/*    NSInteger metronomeValue = ((NSInteger)duration) % self.upperNumber.intValue + 1;
-    self.metronomeLabel.stringValue = @(metronomeValue).stringValue;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
-                                                  target:self
-                                                selector:@selector(incrementMetronome)
-                                                userInfo:nil
-                                                 repeats:YES];
-    self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
+    /*    NSInteger metronomeValue = ((NSInteger)duration) % self.upperNumber.intValue + 1;
+     self.metronomeLabel.stringValue = @(metronomeValue).stringValue;
+     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.metronomeTimeInterval
+     target:self
+     selector:@selector(incrementMetronome)
+     userInfo:nil
+     repeats:YES];
+     self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
 }
 
 

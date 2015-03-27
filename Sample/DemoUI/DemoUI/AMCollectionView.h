@@ -14,6 +14,14 @@
 @property NSUInteger selectable;
 @property BOOL       nowBar;
 
+
+extern NSString * const AMTimerStartNotification;
+extern NSString * const AMTimerStopNotification;
+extern NSString * const AMTimerPauseNotification;
+extern NSString * const AMTimerResumeNotification;
+
+
+
 -(void) removeSelectedItem;
 -(void)addViewItem:(NSView *)view;
 -(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index;

@@ -7,8 +7,9 @@
 //
 
 #import "AMMusicScoreViewController.h"
-#import "UIFramework/AMCollectionViewCell.h"
-#import "UIFramework/AMCollectionView.h"
+//#import "UIFramework/AMCollectionViewCell.h"
+#import "AMScoreCollectionCell.h"
+#import "AMScoreCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"
 #import "UIFramework/AMButtonHandler.h"
 
@@ -16,8 +17,8 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 @interface AMMusicScoreViewController ()
 {
-    NSMutableArray*     musicScoreItems;
-    AMCollectionView    *_collectionView;
+    NSMutableArray*             musicScoreItems;
+    AMScoreCollectionView*      _collectionView;
 }
 @end
 
@@ -25,12 +26,13 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 - (void) awakeFromNib
 {
-    
+    [AMButtonHandler changeTabTextColor:self.removeScoreBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.loadScoreBtn toColor:UI_Color_blue];
     
     NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 480);
-    _collectionView = [[AMCollectionView alloc] initWithFrame:rect];
+    _collectionView = [[AMScoreCollectionView alloc] initWithFrame:rect];
     _collectionView.itemGap = 10;
+    _collectionView.selectable = YES;
     
     [self.view addSubview:_collectionView];
     
@@ -63,6 +65,9 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     return self;
 }
 
+- (IBAction)removeMusicScoreItem:(id)sender {
+    [_collectionView removeSelectedItem];
+}
 
 - (IBAction)addMusicScoreItem:(id)sender
 {
@@ -82,14 +87,16 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                       panel = nil;
                       dispatch_async(dispatch_get_main_queue(), ^{
                           
-                          [_collectionView removeAllItems];
-                          
-                          for (NSImage *image in musicScoreItems) {
-                              AMCollectionViewCell *imageCell = [[AMCollectionViewCell alloc] initWithFrame:NSMakeRect(0, 0, image.size.width, image.size.height)];
+                            for (NSImage *image in musicScoreItems)
+                            {
+                              AMScoreCollectionCell *imageCell = [[AMScoreCollectionCell alloc] initWithFrame:NSMakeRect(0, 0, image.size.width, image.size.height)];
                               imageCell.image = image;
                               imageCell.imageScaling = NSImageScaleNone;
                               [_collectionView addViewItem:imageCell];
+                              imageCell = nil;
                           }
+                          
+                          [musicScoreItems removeAllObjects];
                       });
                   }];
 }

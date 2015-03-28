@@ -74,19 +74,10 @@
     [AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
     
-    
-    // Load in the event webview
-    
-    [self.gplusWebView setFrameLoadDelegate:self];
-    [self.gplusWebView setPolicyDelegate:self];
-    [self.gplusWebView setUIDelegate:self];
-    [self.gplusWebView setDrawsBackground:NO];
-    
     [self.groupTabView setAutoresizesSubviews:YES];
     [AMButtonHandler changeTabTextColor:self.youtubeBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.settingsBtn toColor:UI_Color_blue];
     
-    [self loadPage];
 }
 
 -(void)registerTabButtons
@@ -142,27 +133,9 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-    NSString *script = @"document.getElementById('video-url').value";
-    NSString *output = [self.gplusWebView stringByEvaluatingJavaScriptFromString:script];
-    
-    if ( [output length] > 0 && ![output isEqualToString:broadcastURL]) {
-        broadcastURL = output;
-        
-        [self changeBroadcastURL:broadcastURL];
-    }
     
 }
 
-
-- (void)loadPage {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
-    eventURL = [NSString stringWithFormat:@"%@/app/event/index.php?fromMac=true", statusNetURL];
-    
-    [self.gplusWebView.mainFrame loadRequest:
-     [NSURLRequest requestWithURL:[NSURL URLWithString:
-                                   eventURL]]];
-}
 
 - (void)changeBroadcastURL : (NSString *)newURL {
     NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
@@ -223,18 +196,12 @@
 - (void)dealloc {
     //To avoid a error when closing
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
-    [self.gplusWebView.mainFrame stopLoading];
-    [self.gplusWebView setFrameLoadDelegate:nil];
-    [self.gplusWebView setPolicyDelegate:nil];
-    [self.gplusWebView setUIDelegate:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
 - (void)webViewClose:(WebView *)sender {
-    [self.gplusWebView.mainFrame stopLoading];
-    [self.gplusWebView cancelOperation:nil];
     
     [super webViewClose:sender];
 }

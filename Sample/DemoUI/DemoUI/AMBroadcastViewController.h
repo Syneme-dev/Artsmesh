@@ -16,13 +16,8 @@
 }
 
 @property (strong) IBOutlet NSButton *settingsBtn;
-
 @property (strong) IBOutlet NSButton *youtubeBtn;
-
-@property (weak) IBOutlet WebView *gplusWebView;
-
 @property (strong) IBOutlet NSTabView *groupTabView;
-
 @property (strong) IBOutlet NSButton *oAuthSignInBtn;
 
 - (void)changeBroadcastURL : (NSString *)newURL;

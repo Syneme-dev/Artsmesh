@@ -13,12 +13,12 @@
 #import "AMMesher/AMMesher.h"
 #import "UIFramework/NSView_Constrains.h"
 
-@interface AMBroadcastViewController ()
+@interface AMBroadcastViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet NSButton *cancelBtn;
 @property (weak) IBOutlet NSButton *goBtn;
 @end
 
-@implementation AMBroadcastViewController
+@implementation AMBroadcastViewController 
 {
     NSString* statusNetEventURLString;
     Boolean isLogin;
@@ -92,6 +92,12 @@
 -(void)viewDidLoad
 {
     [self loadTabViews];
+    
+    self.eventStartTimeDropDown.delegate = self;
+    self.eventEndTimeDropDown.delegate = self;
+    
+    [self loadEventTimes];
+    
 }
 
 -(void)loadTabViews
@@ -131,9 +137,20 @@
                                finishedSelector:@selector(windowController:finishedWithAuth:error:)];
 }
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
-{
+- (void)loadEventTimes {
+    NSArray *times = @[@"12:00am", @"1:00am", @"2:00am", @"3:00am", @"4:00am", @"5:00am", @"6:00am", @"7:00am", @"8:00am", @"9:00am", @"10:00am", @"11:00am", @"12:00pm", @"1:00pm", @"2:00pm", @"3:00pm", @"4:00pm", @"5:00pm", @"6:00pm", @"7:00pm", @"8:00pm", @"9:00pm", @"10:00pm", @"11:00pm"];
     
+    [self.eventStartTimeDropDown removeAllItems];
+    [self.eventStartTimeDropDown addItemsWithTitles: times];
+    
+    [self.eventEndTimeDropDown removeAllItems];
+    [self.eventEndTimeDropDown addItemsWithTitles: times];
+    
+    [self.eventStartTimeDropDown selectItemAtIndex:0];
+    [self.eventEndTimeDropDown selectItemAtIndex:0];
+    
+    [self.eventStartTimeDropDown setNeedsDisplay];
+    [self.eventEndTimeDropDown setNeedsDisplay];
 }
 
 
@@ -261,6 +278,17 @@
 -(void) updateUI {
     [self checkSignedInBtn];
 }
+
+
+#pragma mark AMPopUpViewDelegeate
+-(void)itemSelected:(AMPopUpView*)sender {
+}
+
+
+#pragma mark AMCheckBoxDelegeate
+-(void)onChecked:(AMCheckBoxView*)sender {
+}
+
 
 
 @end

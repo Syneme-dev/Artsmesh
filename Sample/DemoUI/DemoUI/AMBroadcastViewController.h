@@ -28,6 +28,9 @@
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
 @property (strong) IBOutlet NSButton *oAuthSignInBtn;
+@property (strong) IBOutlet AMPopUpView *eventStartTimeDropDown;
+@property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
+
 
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;

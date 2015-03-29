@@ -7,6 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
+                <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
+                <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
@@ -109,6 +111,9 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rj0-If-Bes" userLabel="START EDIT" customClass="AMPopUpView">
+                                        <rect key="frame" x="409" y="486" width="147" height="20"/>
+                                    </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BVE-xU-OcW" userLabel="| ">
                                         <rect key="frame" x="0.0" y="490" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="sCa-3n-trE"/>
@@ -153,6 +158,9 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oba-iS-KDU" userLabel="START EDIT" customClass="AMPopUpView">
+                                        <rect key="frame" x="409" y="456" width="147" height="20"/>
+                                    </customView>
                                 </subviews>
                             </view>
                         </tabViewItem>

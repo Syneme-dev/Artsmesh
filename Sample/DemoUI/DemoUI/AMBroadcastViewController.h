@@ -11,6 +11,15 @@
 #import "AMTabPanelViewController.h"
 #import <GTL/GTMOAuth2WindowController.h>
 
+#import "AMGeneralSettingsVC.h"
+#import "UIFramework/AMPopUpView.h"
+#import "UIFramework/AMCheckBoxView.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMCommonTools/AMCommonTools.h"
+#import "AMCoreData/AMCoreData.h"
+#import "AMAppDelegate.h"
+
+
 @interface AMBroadcastViewController : AMTabPanelViewController {
     @private GTMOAuth2Authentication *mAuth;
 }

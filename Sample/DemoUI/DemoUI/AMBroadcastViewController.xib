@@ -11,6 +11,7 @@
                 <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
+                <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="youtubeBtn" destination="UQB-MZ-pFk" id="MF0-mP-pYA"/>
@@ -22,11 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="570" height="658"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Gb-iXG">
+                <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="pco-Gb-iXG" userLabel="Tabs Views">
                     <rect key="frame" x="7" y="26" width="556" height="632"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
-                        <tabViewItem label="Tab" identifier="1" id="5a8-YA-9f1">
+                        <tabViewItem label="Tab" identifier="1" id="5a8-YA-9f1" userLabel="YouTube Tab">
                             <view key="view" id="2R7-HU-dPY">
                                 <rect key="frame" x="0.0" y="0.0" width="556" height="632"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +73,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R0E-lO-cNf" userLabel="DESC EDIT">
-                                        <rect key="frame" x="150" y="508" width="408" height="24"/>
+                                        <rect key="frame" x="150" y="520" width="408" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="YOUR BROADCAST DESCRIPTION" id="Dds-yA-g9s">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -146,25 +147,20 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oba-iS-KDU" userLabel="END EDIT" customClass="AMPopUpView">
+                                        <rect key="frame" x="409" y="456" width="147" height="20"/>
+                                    </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-ac-qwL" userLabel="| ">
                                         <rect key="frame" x="0.0" y="430" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="3R2-pQ-SUz"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z2X-Jn-T7D">
-                                        <rect key="frame" x="18" y="430" width="100" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="PRIVATE" id="VlX-Eo-cE8">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oba-iS-KDU" userLabel="START EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="409" y="456" width="147" height="20"/>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0A-Xm-MAU" customClass="AMCheckBoxView">
+                                        <rect key="frame" x="20" y="426" width="150" height="20"/>
                                     </customView>
                                 </subviews>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="View" identifier="2" id="vwm-kC-PEb">
+                        <tabViewItem label="View" identifier="2" id="vwm-kC-PEb" userLabel="Settings Tab">
                             <view key="view" id="1C0-rd-XT6">
                                 <rect key="frame" x="0.0" y="0.0" width="556" height="632"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -30,6 +30,7 @@
 @property (strong) IBOutlet NSButton *oAuthSignInBtn;
 @property (strong) IBOutlet AMPopUpView *eventStartTimeDropDown;
 @property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
+@property (strong) IBOutlet AMCheckBoxView *privateCheck;
 
 
 - (void)changeBroadcastURL : (NSString *)newURL;

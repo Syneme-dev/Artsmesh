@@ -96,6 +96,9 @@
     self.eventStartTimeDropDown.delegate = self;
     self.eventEndTimeDropDown.delegate = self;
     
+    self.privateCheck.delegate = self;
+    self.privateCheck.title = @"PRIVATE";
+    
     [self loadEventTimes];
     
 }

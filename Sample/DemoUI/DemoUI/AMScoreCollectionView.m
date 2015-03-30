@@ -32,6 +32,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     NSTimer*        _scrollTimer;
     AMNowBarView*   _nowBarView;
     
+    NSInteger        _curPageNumber;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -118,7 +119,9 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
                                                     name:AMTimerResumeNotification
                                                   object:nil];
 
-    
+    [self setMode:0];
+    _scrollDelta = 180;
+    _timeInterval = 10;
 }
 
 - (void) dealloc
@@ -459,11 +462,24 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     // [_docView move]
     //    [_docView scro]
     [self onStopTimer:notfication];
-    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                    target:self
-                                                  selector:@selector(startScrollScore)
-                                                  userInfo:nil
-                                                   repeats:YES];
+    if (self.mode == 0) {
+       // [self onStopTimer:notfication];
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                        target:self
+                                                      selector:@selector(startScrollScore)
+                                                      userInfo:nil
+                                                       repeats:YES];
+
+    }
+    else{
+        
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval
+                                                        target:self
+                                                      selector:@selector(turnPageScore)
+                                                      userInfo:nil
+                                                       repeats:YES];
+        
+    }
 }
 
 - (void) onStopTimer : (NSNotification*) notfication
@@ -473,6 +489,10 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
     currentScrollPosition.x = 0;
     [[_scrollView documentView] scrollPoint:currentScrollPosition];
+    
+     if (self.mode == 1) {
+         _curPageNumber = 0;
+     }
 }
 
 - (void) onPauseTimer : (NSNotification*) notfication
@@ -482,19 +502,42 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 
 - (void) onResumeTimer : (NSNotification*) notfication
 {
-    _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                    target:self
-                                                  selector:@selector(startScrollScore)
-                                                  userInfo:nil
-                                                   repeats:YES];
+    if (self.mode == 0) {
+        // [self onStopTimer:notfication];
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                        target:self
+                                                      selector:@selector(startScrollScore)
+                                                      userInfo:nil
+                                                       repeats:YES];
+        
+    }
+    else{
+        
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval
+                                                        target:self
+                                                      selector:@selector(turnPageScore)
+                                                      userInfo:nil
+                                                       repeats:YES];
+        
+    }
 }
 
 - (void) startScrollScore
 {
     NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
-     currentScrollPosition.x += 1;
+     currentScrollPosition.x += _scrollDelta*0.01;
      [[_scrollView documentView] scrollPoint:currentScrollPosition];
 }
 
+- (void) turnPageScore
+{
+    NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
+    NSView* view = [_viewItems objectAtIndex:_curPageNumber];
+    CGFloat pageWidth = [view bounds].size.width + _itemGap;
+    
+    currentScrollPosition.x += pageWidth;
+    [[_scrollView documentView] scrollPoint:currentScrollPosition];
+    _curPageNumber++;
+}
 
 @end

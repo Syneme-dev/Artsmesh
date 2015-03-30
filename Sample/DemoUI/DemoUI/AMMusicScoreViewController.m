@@ -12,14 +12,21 @@
 #import "AMScoreCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMFoundryFontView.h"
 
 NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
-@interface AMMusicScoreViewController ()
+@interface AMMusicScoreViewController () <AMCheckBoxDelegeate, NSTextFieldDelegate>
 {
     NSMutableArray*             musicScoreItems;
     AMScoreCollectionView*      _collectionView;
 }
+@property (weak) IBOutlet AMCheckBoxView *pageModeCheck;
+@property (weak) IBOutlet AMCheckBoxView *scrollModeCheck;
+@property (weak) IBOutlet AMFoundryFontView *ppsField;
+
+
 @end
 
 @implementation AMMusicScoreViewController
@@ -52,6 +59,20 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                                              options:0
                                              metrics:nil
                                                views:views]];
+    
+    
+
+    self.pageModeCheck.delegate = self;
+    [self.pageModeCheck setChecked:NO];
+    [self.pageModeCheck setTitle:@"Page Mode"];
+    
+    self.scrollModeCheck.delegate = self;
+    [self.scrollModeCheck setChecked:YES];
+    [self.scrollModeCheck setTitle:@"Scroll Mode"];
+    
+    self.ppsField.delegate = self;
+    
+    [self onChecked:self.scrollModeCheck];
 }
 
 
@@ -100,6 +121,43 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                       });
                   }];
 }
+
+//Don't allow pageMode and scrollMode CheckBox both on at the same time.
+- (void) onChecked:(AMCheckBoxView *)sender
+{
+    if(sender == self.scrollModeCheck)
+    {
+        if ([self.pageModeCheck checked]) {
+            [self.pageModeCheck setChecked:NO];
+        }
+        if ([sender checked]) {
+            [_collectionView setMode:0];
+            self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
+                                         _collectionView.scrollDelta];
+        }
+    }
+    else if (sender == self.pageModeCheck) {
+        if ([self.scrollModeCheck checked]) {
+            [self.scrollModeCheck setChecked:NO];
+        }
+        if ([sender checked]) {
+            [_collectionView setMode:1];
+            self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
+                                         _collectionView.timeInterval];
+        }
+    }
+}
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    if ([self.scrollModeCheck checked]) {
+        _collectionView.scrollDelta = [self.ppsField intValue];
+    }
+    else if([self.pageModeCheck checked]){
+        _collectionView.timeInterval = [self.ppsField intValue];
+    }
+}
+
 
 
 

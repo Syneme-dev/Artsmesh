@@ -15,6 +15,10 @@
 @property NSUInteger selectable;
 @property BOOL       nowBar;
 
+@property NSUInteger        mode;
+@property  NSTimeInterval   timeInterval;
+@property    CGFloat         scrollDelta;
+
 -(void) removeSelectedItem;
 -(void)addViewItem:(NSView *)view;
 -(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index;

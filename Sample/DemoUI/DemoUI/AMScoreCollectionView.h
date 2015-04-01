@@ -8,6 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+//It's a state pattern to implement the scroll mode or page mode.
+@protocol TurningState <NSObject>
+-(void) startTurning;
+-(void) stopTurning;
+-(void) pauseTurning;
+-(void) resumeTurning;
+@end
+
+@interface scrollState:NSObject<TurningState>
+@end
+
+@interface pageState:NSObject<TurningState>
+@end
+
 @interface AMScoreCollectionView : NSView
 
 @property NSColor *backgroudColor;

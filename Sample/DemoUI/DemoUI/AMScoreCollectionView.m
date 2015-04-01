@@ -52,9 +52,6 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    
-    //    [[NSColor blueColor] set];
-    //    [[NSBezierPath bezierPathWithRect:self.bounds] fill];
 }
 
 -(void) doInit

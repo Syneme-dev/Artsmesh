@@ -37,6 +37,20 @@
 		2D19A8F41AC4B9C800C9F8F5 /* GTL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */; };
 		2D19A8F61AC4B9E700C9F8F5 /* GTL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
+		2D5A01DC1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01C91ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.m */; };
+		2D5A01DD1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01CB1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.m */; };
+		2D5A01DE1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01CD1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.m */; };
+		2D5A01DF1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01CF1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.m */; };
+		2D5A01E01ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01D11ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.m */; };
+		2D5A01E11ACB8E5700D28FE5 /* GTLYouTubeLiveStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01D31ACB8E5700D28FE5 /* GTLYouTubeLiveStream.m */; };
+		2D5A01E21ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01D51ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.m */; };
+		2D5A01E31ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01D71ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.m */; };
+		2D5A01E41ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01D91ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.m */; };
+		2D5A01E51ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01DB1ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.m */; };
+		2D5A01E81ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01E71ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.m */; };
+		2D5A01EB1ACB8EFC00D28FE5 /* GTLYouTubePageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01EA1ACB8EFC00D28FE5 /* GTLYouTubePageInfo.m */; };
+		2D5A01EE1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01ED1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.m */; };
+		2D5A01F11ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5A01F01ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -339,6 +353,34 @@
 		2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTL.framework; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
+		2D5A01C81ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveBroadcast.h; sourceTree = "<group>"; };
+		2D5A01C91ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveBroadcast.m; sourceTree = "<group>"; };
+		2D5A01CA1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveBroadcastContentDetails.h; sourceTree = "<group>"; };
+		2D5A01CB1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveBroadcastContentDetails.m; sourceTree = "<group>"; };
+		2D5A01CC1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveBroadcastListResponse.h; sourceTree = "<group>"; };
+		2D5A01CD1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveBroadcastListResponse.m; sourceTree = "<group>"; };
+		2D5A01CE1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveBroadcastSnippet.h; sourceTree = "<group>"; };
+		2D5A01CF1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveBroadcastSnippet.m; sourceTree = "<group>"; };
+		2D5A01D01ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveBroadcastStatus.h; sourceTree = "<group>"; };
+		2D5A01D11ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveBroadcastStatus.m; sourceTree = "<group>"; };
+		2D5A01D21ACB8E5700D28FE5 /* GTLYouTubeLiveStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveStream.h; sourceTree = "<group>"; };
+		2D5A01D31ACB8E5700D28FE5 /* GTLYouTubeLiveStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveStream.m; sourceTree = "<group>"; };
+		2D5A01D41ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveStreamContentDetails.h; sourceTree = "<group>"; };
+		2D5A01D51ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveStreamContentDetails.m; sourceTree = "<group>"; };
+		2D5A01D61ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveStreamListResponse.h; sourceTree = "<group>"; };
+		2D5A01D71ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveStreamListResponse.m; sourceTree = "<group>"; };
+		2D5A01D81ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveStreamSnippet.h; sourceTree = "<group>"; };
+		2D5A01D91ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveStreamSnippet.m; sourceTree = "<group>"; };
+		2D5A01DA1ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeLiveStreamStatus.h; sourceTree = "<group>"; };
+		2D5A01DB1ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeLiveStreamStatus.m; sourceTree = "<group>"; };
+		2D5A01E61ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeMonitorStreamInfo.h; sourceTree = "<group>"; };
+		2D5A01E71ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeMonitorStreamInfo.m; sourceTree = "<group>"; };
+		2D5A01E91ACB8EFC00D28FE5 /* GTLYouTubePageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubePageInfo.h; sourceTree = "<group>"; };
+		2D5A01EA1ACB8EFC00D28FE5 /* GTLYouTubePageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubePageInfo.m; sourceTree = "<group>"; };
+		2D5A01EC1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeTokenPagination.h; sourceTree = "<group>"; };
+		2D5A01ED1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeTokenPagination.m; sourceTree = "<group>"; };
+		2D5A01EF1ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLYouTubeThumbnailDetails.h; sourceTree = "<group>"; };
+		2D5A01F01ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeThumbnailDetails.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
 		2D6D76F019C16B4400201106 /* AMWorldMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWorldMap.m; sourceTree = "<group>"; };
 		2D6D76F219C16C5100201106 /* AMLiveMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapView.h; sourceTree = "<group>"; };
@@ -715,6 +757,42 @@
 			name = "BroadCast Panel";
 			sourceTree = "<group>";
 		};
+		2D5A01BD1ACB8C3500D28FE5 /* Google Services */ = {
+			isa = PBXGroup;
+			children = (
+				2D5A01EF1ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.h */,
+				2D5A01F01ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.m */,
+				2D5A01EC1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.h */,
+				2D5A01ED1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.m */,
+				2D5A01E91ACB8EFC00D28FE5 /* GTLYouTubePageInfo.h */,
+				2D5A01EA1ACB8EFC00D28FE5 /* GTLYouTubePageInfo.m */,
+				2D5A01E61ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.h */,
+				2D5A01E71ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.m */,
+				2D5A01C81ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.h */,
+				2D5A01C91ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.m */,
+				2D5A01CA1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.h */,
+				2D5A01CB1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.m */,
+				2D5A01CC1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.h */,
+				2D5A01CD1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.m */,
+				2D5A01CE1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.h */,
+				2D5A01CF1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.m */,
+				2D5A01D01ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.h */,
+				2D5A01D11ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.m */,
+				2D5A01D21ACB8E5700D28FE5 /* GTLYouTubeLiveStream.h */,
+				2D5A01D31ACB8E5700D28FE5 /* GTLYouTubeLiveStream.m */,
+				2D5A01D41ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.h */,
+				2D5A01D51ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.m */,
+				2D5A01D61ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.h */,
+				2D5A01D71ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.m */,
+				2D5A01D81ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.h */,
+				2D5A01D91ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.m */,
+				2D5A01DA1ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.h */,
+				2D5A01DB1ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.m */,
+				2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */,
+			);
+			name = "Google Services";
+			sourceTree = "<group>";
+		};
 		2D77D2CC1A04A17100C30F13 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,7 +889,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */,
+				2D5A01BD1ACB8C3500D28FE5 /* Google Services */,
 				CE486AB21A28140900D35B82 /* Syphon.framework */,
 				4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */,
 				D47A184D19F21296000A8CCB /* AMLogger.framework */,
@@ -1431,10 +1509,12 @@
 				269FB84D1998816E00355312 /* AMBroadcastViewController.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
 				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
+				2D5A01E01ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastStatus.m in Sources */,
 				4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */,
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
+				2D5A01DD1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastContentDetails.m in Sources */,
 				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
 				269D3432191B1EC40010B540 /* AMChatTableCellView.m in Sources */,
@@ -1449,6 +1529,7 @@
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				4A207A781A875E0A006F4FA2 /* AMRestHelper.m in Sources */,
 				CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */,
+				2D5A01DC1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcast.m in Sources */,
 				4AB4ACE91A6E5D2F003ECE24 /* AMArchiveGroupViewController.m in Sources */,
 				2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */,
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,
@@ -1457,15 +1538,19 @@
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
 				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
+				2D5A01E31ACB8E5700D28FE5 /* GTLYouTubeLiveStreamListResponse.m in Sources */,
 				4A32A1091A7220B1006FEDD7 /* AMTabItemView.m in Sources */,
 				D41155E618E9534A00C84092 /* AMPanelViewController.m in Sources */,
 				2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */,
 				CE486AAE1A280CB900D35B82 /* AMVideoMixerViewController.m in Sources */,
+				2D5A01E21ACB8E5700D28FE5 /* GTLYouTubeLiveStreamContentDetails.m in Sources */,
+				2D5A01F11ACB8F4200D28FE5 /* GTLYouTubeThumbnailDetails.m in Sources */,
 				209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */,
 				2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */,
 				4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */,
 				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
+				2D5A01E41ACB8E5700D28FE5 /* GTLYouTubeLiveStreamSnippet.m in Sources */,
 				4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
@@ -1485,6 +1570,10 @@
 				4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */,
 				4A8C69E71A70939500540694 /* AMStaticUserDetailsViewController.m in Sources */,
 				4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */,
+				2D5A01EE1ACB8F0C00D28FE5 /* GTLYouTubeTokenPagination.m in Sources */,
+				2D5A01EB1ACB8EFC00D28FE5 /* GTLYouTubePageInfo.m in Sources */,
+				2D5A01E51ACB8E5700D28FE5 /* GTLYouTubeLiveStreamStatus.m in Sources */,
+				2D5A01E81ACB8ED000D28FE5 /* GTLYouTubeMonitorStreamInfo.m in Sources */,
 				CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
 				D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */,
@@ -1492,6 +1581,7 @@
 				CE486AAD1A280CB900D35B82 /* AMVideoMixerBackgroundView.m in Sources */,
 				37C2317C187A8FFD00554AFD /* main.m in Sources */,
 				4A32A1081A7220B1006FEDD7 /* AMProfileTextFieldFormatter.m in Sources */,
+				2D5A01DE1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastListResponse.m in Sources */,
 				AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */,
 				CE486AAA1A280CB900D35B82 /* AMSyphonViewRouterController.m in Sources */,
 				2D016D5B1A0C05E50044F0E0 /* AMGroupPreviewPanelController.m in Sources */,
@@ -1501,6 +1591,8 @@
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
+				2D5A01DF1ACB8E5700D28FE5 /* GTLYouTubeLiveBroadcastSnippet.m in Sources */,
+				2D5A01E11ACB8E5700D28FE5 /* GTLYouTubeLiveStream.m in Sources */,
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
 				2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */,

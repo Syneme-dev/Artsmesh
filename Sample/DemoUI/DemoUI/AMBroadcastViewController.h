@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "AMTabPanelViewController.h"
-#import <GTL/GTMOAuth2WindowController.h>
 
 #import "AMGeneralSettingsVC.h"
 #import "UIFramework/AMPopUpView.h"
@@ -18,6 +17,9 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMAppDelegate.h"
+
+
+#import <GTL/GTMOAuth2WindowController.h>
 
 
 @interface AMBroadcastViewController : AMTabPanelViewController {

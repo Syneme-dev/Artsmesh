@@ -218,6 +218,8 @@
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    NSLog(@"make sure window is closed..");
 }
 
 

@@ -330,12 +330,14 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
-    self.myPopover.contentViewController = controller;
+ //   self.myPopover.contentViewController = controller;
 //    controller.owner = self.myPopover;
 
    
     
 //    _configWindow.contentView = controller.view;
+    
+    _configController.maxChannels = (int)[[routerView allChannels] count];
         [_configController showWindow:self];
 /*
     NSRect rect = [sender bounds];

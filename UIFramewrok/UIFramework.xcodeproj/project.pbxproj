@@ -28,6 +28,8 @@
 		4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D271A78873300281F46 /* NSView_Constrains.m */; };
 		4F15723E1AB195B700945397 /* AMTimerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F15723C1AB195B700945397 /* AMTimerView.h */; };
 		4F15723F1AB195B700945397 /* AMTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15723D1AB195B700945397 /* AMTimerView.m */; };
+		4F809F581ACECA7D009AC0E6 /* AMWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F809F561ACECA7D009AC0E6 /* AMWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F809F591ACECA7D009AC0E6 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F809F571ACECA7D009AC0E6 /* AMWindow.m */; };
 		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
 		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,6 +90,8 @@
 		4A776D271A78873300281F46 /* NSView_Constrains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSView_Constrains.m; sourceTree = "<group>"; };
 		4F15723C1AB195B700945397 /* AMTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerView.h; sourceTree = "<group>"; };
 		4F15723D1AB195B700945397 /* AMTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerView.m; sourceTree = "<group>"; };
+		4F809F561ACECA7D009AC0E6 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
+		4F809F571ACECA7D009AC0E6 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
 		4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlinkView.h; sourceTree = "<group>"; };
 		4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlinkView.m; sourceTree = "<group>"; };
 		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				4F809F561ACECA7D009AC0E6 /* AMWindow.h */,
+				4F809F571ACECA7D009AC0E6 /* AMWindow.m */,
 				4F15723C1AB195B700945397 /* AMTimerView.h */,
 				4F15723D1AB195B700945397 /* AMTimerView.m */,
 				4A776D221A7886FB00281F46 /* AMCollectionView.h */,
@@ -293,6 +299,7 @@
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
 				01D059B31A2D5A3600BC51E7 /* AMBigBlueButton.h in Headers */,
+				4F809F581ACECA7D009AC0E6 /* AMWindow.h in Headers */,
 				4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */,
 				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
@@ -381,6 +388,7 @@
 				AFAA502518EC1375009286F4 /* AMMovableWindow.m in Sources */,
 				CEC231761A00D5B300AC7B7F /* AMBackgroundView.m in Sources */,
 				4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */,
+				4F809F591ACECA7D009AC0E6 /* AMWindow.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
+#import "AMJackTripConfig.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"
 #import "AMRouteView.h"
@@ -41,6 +42,8 @@
 {
     NSTimer*    _deviceTimer;
     AMWindow*   _configWindow;
+    
+    AMJackTripConfig* _configController;
 }
 
 
@@ -136,6 +139,25 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self reloadAudioChannel:nil];
     
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
+    
+    
+    [self initJackTripConfig];
+}
+
+- (void) initJackTripConfig
+{
+    _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
+    
+    
+    _configController.window.styleMask = NSBorderlessWindowMask;
+    _configController.window.level = NSNormalWindowLevel;
+    _configController.window.hasShadow = YES;
+    _configController.window.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
+                                                                         green:38.0/255
+                                                                          blue:38.0/255
+                                                                         alpha:1];
+    
+    _configController.window.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
 }
 
 -(void)refreshDevices
@@ -311,6 +333,11 @@ shouldRemoveDevice:(NSString *)deviceID;
     self.myPopover.contentViewController = controller;
 //    controller.owner = self.myPopover;
 
+   
+    
+//    _configWindow.contentView = controller.view;
+        [_configController showWindow:self];
+/*
     NSRect rect = [sender bounds];
 //    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
  
@@ -354,6 +381,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     }else{
       //  [_configWindow ];
     }
+ */
 }
 
 @end

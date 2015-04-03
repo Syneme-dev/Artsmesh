@@ -12,7 +12,7 @@
 
 @interface AMJackTripConfigController : NSViewController
 
-@property (weak)NSPopover* owner;
+@property (weak)NSWindow* winOwner;
 @property int maxChannels;
 
 

@@ -352,13 +352,15 @@
         [alert runModal];
     }
     
-    [self.owner performClose:nil];
+    [self.winOwner close];
+//    [self.owner performClose:nil];
 }
 
 
 - (IBAction)closeClicked:(NSButton *)sender
 {
-    [self.owner performClose:nil];
+//    [self.owner performClose:nil];
+    [self.winOwner close];
 }
 
 @end

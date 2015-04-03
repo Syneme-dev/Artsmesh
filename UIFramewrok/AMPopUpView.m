@@ -138,7 +138,7 @@
     
     
     NSView *popUpView = [self popUpMenuController].view;
-    NSWindow *popupWindow = [self getPopWindow:popUpView.bounds];
+    NSWindow *popupWindow = [self getPopWindow:popUpView.frame];
     [popupWindow.contentView addConstrainsToSubview:popUpView leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     
     

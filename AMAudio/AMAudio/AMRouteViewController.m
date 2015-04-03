@@ -14,15 +14,33 @@
 #import "AMAudio.h"
 
 
+@interface AMWindow : NSWindow
+
+@end
+
+@implementation AMWindow
+
+- (BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
+
+@end
+
+
+
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
 @property NSPopover *myPopover;
 
 @end
 
+
+
 @implementation AMRouteViewController
 {
-    NSTimer* _deviceTimer;
+    NSTimer*    _deviceTimer;
+    AMWindow*   _configWindow;
 }
 
 
@@ -291,11 +309,51 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
     self.myPopover.contentViewController = controller;
-    controller.owner = self.myPopover;
+//    controller.owner = self.myPopover;
 
     NSRect rect = [sender bounds];
-    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
+//    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
+ 
+    //NSView* configView = controller.view;
+    NSRect rectClick = [sender frame];
+    
+    NSPoint p = [self.view convertPoint:NSMakePoint(rectClick.origin.x + 100,
+                                                    rectClick.origin.y-100)
+                                 toView:nil];
+    
+    NSRect rectTmp = NSMakeRect(p.x, p.y, 0, 0);
+    rectTmp = [self.view.window convertRectToScreen:rectTmp];
+    NSPoint windowOrigin = rectTmp.origin;
+    
+    if (_configWindow == nil) {
+        _configWindow = [[AMWindow alloc] initWithContentRect:controller.view.frame
+                                                    styleMask:NSBorderlessWindowMask
+                                                      backing:NSBackingStoreBuffered
+                                                        defer:NO];
+        _configWindow.contentView = controller.view;
+        _configWindow.level = NSNormalWindowLevel;
+        _configWindow.hasShadow = YES;
+        _configWindow.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
+                                                                  green:38.0/255
+                                                                   blue:38.0/255
+                                                                  alpha:1];
+        
+        _configWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
+        _configWindow.delegate = self;
+        [_configWindow setFrameOrigin:windowOrigin];
+        
+        NSSize screenSize = self.view.window.screen.frame.size;
+        NSRect windowFrame = controller.view.frame;
+        windowFrame.origin.x = (screenSize.width - windowFrame.size.width) / 2;
+        windowFrame.origin.y = screenSize.height - windowFrame.size.height - 80;
+        [_configWindow.animator setFrame:windowFrame display:NO];
+        
+        [_configWindow makeKeyAndOrderFront:self];
+        
+        controller.winOwner = _configWindow;
+    }else{
+      //  [_configWindow ];
+    }
 }
-
 
 @end

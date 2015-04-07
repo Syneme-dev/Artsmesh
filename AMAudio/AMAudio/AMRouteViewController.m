@@ -336,24 +336,24 @@ shouldRemoveDevice:(NSString *)deviceID;
     }*/
     
     _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
-    _configController.window.styleMask = NSBorderlessWindowMask;
-    _configController.window.level = NSNormalWindowLevel;
-    _configController.window.hasShadow = YES;
-    _configController.window.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
-                                                                         green:38.0/255
-                                                                          blue:38.0/255
-                                                                         alpha:1];
+    NSWindow* win = _configController.window;
+    [win setStyleMask:NSBorderlessWindowMask];
+    [win setLevel:NSFloatingWindowLevel];
+    [win setHasShadow:YES];
+    [win setBackgroundColor : [NSColor colorWithCalibratedRed:38.0/255
+                                                        green:38.0/255
+                                                         blue:38.0/255
+                                                        alpha:1]];
+  
     
- //   _configController.window.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
-    NSRect winRect = [_configController.window frame];
+    NSRect winRect   = [win frame];
     NSRect plusFrame = [sender frame];
     NSPoint tmpPoint = NSMakePoint(plusFrame.origin.x + plusFrame.size.width + 20,
                                    plusFrame.origin.y - winRect.size.height + 120);
-    NSPoint origin = [self.view convertPoint:tmpPoint toView:nil];
-    winRect.origin = origin;
-    [_configController.window  setFrame:winRect display:NO];
- //   [_configController.window setFrameOrigin:origin];
-}
+  
+    winRect.origin = [self.view convertPoint:tmpPoint toView:nil];;
+    [win  setFrame:winRect display:NO];
+ }
 
 
 @end

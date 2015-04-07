@@ -99,6 +99,7 @@
                                                             defer:NO];
         self.popWindow.hasShadow = NO;
         self.popWindow.delegate = self;
+        self.popWindow.level     = NSPopUpMenuWindowLevel;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
          NSWindowDidResignKeyNotification object:nil];

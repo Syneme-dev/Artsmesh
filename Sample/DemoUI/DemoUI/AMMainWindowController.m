@@ -624,7 +624,7 @@
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
    
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
-    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth* 4, UI_defaultPanelHeight);
+    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     
     NSViewController *viewController = [[AMMusicScoreViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];

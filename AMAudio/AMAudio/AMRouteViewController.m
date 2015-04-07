@@ -141,23 +141,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
     
     
-    [self initJackTripConfig];
-}
-
-- (void) initJackTripConfig
-{
-    _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
     
-    
-    _configController.window.styleMask = NSBorderlessWindowMask;
-    _configController.window.level = NSNormalWindowLevel;
-    _configController.window.hasShadow = YES;
-    _configController.window.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
-                                                                         green:38.0/255
-                                                                          blue:38.0/255
-                                                                         alpha:1];
-    
-    _configController.window.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
 }
 
 -(void)refreshDevices
@@ -307,6 +291,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
 }
 
+//The commentary part is old verison of NSPopover. Somehow it doesn't work. When you select in
+// the Pop-Up view, the whole NSPopover window disappear. So change it to window implentation.
 - (IBAction)startJackTrip:(NSButton *)sender
 {
     if ([[AMAudio sharedInstance] audioJackManager].jackState == JackState_Stopped) {
@@ -315,7 +301,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         [alert runModal];
         return;
     }
-    
+ 
+   /*
     if (self.myPopover == nil) {
         self.myPopover = [[NSPopover alloc] init];
         
@@ -323,67 +310,50 @@ shouldRemoveDevice:(NSString *)deviceID;
         self.myPopover.behavior = NSPopoverBehaviorTransient;
         self.myPopover.appearance = NSPopoverAppearanceHUD;
         self.myPopover.delegate = self;
-    }
-    
-    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
-    AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+    }*/
     
     AMRouteView* routerView = (AMRouteView*)self.view;
-    controller.maxChannels = (int)[[routerView allChannels] count];
- //   self.myPopover.contentViewController = controller;
-//    controller.owner = self.myPopover;
-
-   
+    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
     
+//    AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
+//  controller.maxChannels = (int)[[routerView allChannels] count];
+//  self.myPopover.contentViewController = controller;
+//  controller.owner = self.myPopover;
+//  NSRect rect = [sender bounds];
+//  [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
 //    _configWindow.contentView = controller.view;
     
+    [self initJackTripConfig:sender];
+   
     _configController.maxChannels = (int)[[routerView allChannels] count];
-        [_configController showWindow:self];
-/*
-    NSRect rect = [sender bounds];
-//    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
- 
-    //NSView* configView = controller.view;
-    NSRect rectClick = [sender frame];
-    
-    NSPoint p = [self.view convertPoint:NSMakePoint(rectClick.origin.x + 100,
-                                                    rectClick.origin.y-100)
-                                 toView:nil];
-    
-    NSRect rectTmp = NSMakeRect(p.x, p.y, 0, 0);
-    rectTmp = [self.view.window convertRectToScreen:rectTmp];
-    NSPoint windowOrigin = rectTmp.origin;
-    
-    if (_configWindow == nil) {
-        _configWindow = [[AMWindow alloc] initWithContentRect:controller.view.frame
-                                                    styleMask:NSBorderlessWindowMask
-                                                      backing:NSBackingStoreBuffered
-                                                        defer:NO];
-        _configWindow.contentView = controller.view;
-        _configWindow.level = NSNormalWindowLevel;
-        _configWindow.hasShadow = YES;
-        _configWindow.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
-                                                                  green:38.0/255
-                                                                   blue:38.0/255
-                                                                  alpha:1];
-        
-        _configWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
-        _configWindow.delegate = self;
-        [_configWindow setFrameOrigin:windowOrigin];
-        
-        NSSize screenSize = self.view.window.screen.frame.size;
-        NSRect windowFrame = controller.view.frame;
-        windowFrame.origin.x = (screenSize.width - windowFrame.size.width) / 2;
-        windowFrame.origin.y = screenSize.height - windowFrame.size.height - 80;
-        [_configWindow.animator setFrame:windowFrame display:NO];
-        
-        [_configWindow makeKeyAndOrderFront:self];
-        
-        controller.winOwner = _configWindow;
-    }else{
-      //  [_configWindow ];
-    }
- */
+    [_configController showWindow:self];
 }
+
+- (void) initJackTripConfig : (NSButton *)sender
+{
+ /*   if (_configController != nil) {
+        return;
+    }*/
+    
+    _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
+    _configController.window.styleMask = NSBorderlessWindowMask;
+    _configController.window.level = NSNormalWindowLevel;
+    _configController.window.hasShadow = YES;
+    _configController.window.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
+                                                                         green:38.0/255
+                                                                          blue:38.0/255
+                                                                         alpha:1];
+    
+ //   _configController.window.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
+    NSRect winRect = [_configController.window frame];
+    NSRect plusFrame = [sender frame];
+    NSPoint tmpPoint = NSMakePoint(plusFrame.origin.x + plusFrame.size.width + 20,
+                                   plusFrame.origin.y - winRect.size.height + 120);
+    NSPoint origin = [self.view convertPoint:tmpPoint toView:nil];
+    winRect.origin = origin;
+    [_configController.window  setFrame:winRect display:NO];
+ //   [_configController.window setFrameOrigin:origin];
+}
+
 
 @end

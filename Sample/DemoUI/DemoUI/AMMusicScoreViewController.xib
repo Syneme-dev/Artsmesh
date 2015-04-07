@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -8,18 +8,21 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMMusicScoreViewController">
             <connections>
                 <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
+                <outlet property="pageModeCheck" destination="hLF-6J-9BO" id="D4G-7R-hzC"/>
+                <outlet property="ppsField" destination="p57-r5-9jm" id="F5I-oR-Z0T"/>
                 <outlet property="removeScoreBtn" destination="8pZ-tm-D4t" id="qQw-2Q-NZb"/>
+                <outlet property="scrollModeCheck" destination="9NV-pX-X7W" id="27v-FD-t21"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView id="Hz6-mo-xeY" customClass="AMTabItemView">
             <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pZ-tm-D4t">
-                    <rect key="frame" x="541" y="912" width="115" height="16"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8pZ-tm-D4t">
+                    <rect key="frame" x="543" y="912" width="115" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="115" id="UVF-dR-UX4"/>
                         <constraint firstAttribute="height" constant="16" id="Uw4-MC-ffI"/>
@@ -46,12 +49,44 @@
                         <action selector="addMusicScoreItem:" target="-2" id="aOa-P7-ulO"/>
                     </connections>
                 </button>
+                <customView identifier="pageMode" translatesAutoresizingMaskIntoConstraints="NO" id="hLF-6J-9BO" customClass="AMCheckBoxView">
+                    <rect key="frame" x="150" y="912" width="90" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="A4s-9a-zfE"/>
+                        <constraint firstAttribute="height" constant="16" id="Kc9-na-fQS"/>
+                    </constraints>
+                </customView>
+                <customView identifier="scrollMode" translatesAutoresizingMaskIntoConstraints="NO" id="9NV-pX-X7W" customClass="AMCheckBoxView">
+                    <rect key="frame" x="20" y="912" width="90" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="8XV-xB-v5X"/>
+                        <constraint firstAttribute="width" constant="90" id="Yf1-0w-oMg"/>
+                    </constraints>
+                </customView>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p57-r5-9jm" customClass="AMFoundryFontView">
+                    <rect key="frame" x="278" y="912" width="80" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="73j-QN-zCr"/>
+                        <constraint firstAttribute="width" constant="76" id="cI1-KX-uMk"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="PPS" id="xyA-QI-GpI">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tOL-jT-WuM" secondAttribute="trailing" constant="6" id="1Ol-KA-ydZ"/>
+                <constraint firstItem="p57-r5-9jm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="59n-i3-2KM"/>
+                <constraint firstItem="p57-r5-9jm" firstAttribute="leading" secondItem="hLF-6J-9BO" secondAttribute="trailing" constant="40" id="8hM-Oc-10N"/>
+                <constraint firstItem="9NV-pX-X7W" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="CLY-WW-dVe"/>
                 <constraint firstItem="tOL-jT-WuM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="KNh-Yh-5lP"/>
+                <constraint firstItem="9NV-pX-X7W" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="P1u-e6-dHk"/>
                 <constraint firstItem="tOL-jT-WuM" firstAttribute="leading" secondItem="8pZ-tm-D4t" secondAttribute="trailing" constant="6" id="Z65-gu-qHv"/>
                 <constraint firstItem="8pZ-tm-D4t" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="m3S-cT-obA"/>
+                <constraint firstItem="hLF-6J-9BO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="xRK-mj-mu6"/>
+                <constraint firstItem="hLF-6J-9BO" firstAttribute="leading" secondItem="9NV-pX-X7W" secondAttribute="trailing" constant="40" id="xZY-Hb-hi1"/>
             </constraints>
             <point key="canvasLocation" x="-142.5" y="87.5"/>
         </customView>

@@ -8,10 +8,26 @@
 
 #import "AMRouteViewController.h"
 #import "AMJackTripConfigController.h"
+#import "AMJackTripConfig.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"
 #import "AMRouteView.h"
 #import "AMAudio.h"
+
+
+@interface AMWindow : NSWindow
+
+@end
+
+@implementation AMWindow
+
+- (BOOL)canBecomeKeyWindow
+{
+    return YES;
+}
+
+@end
+
 
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
@@ -20,9 +36,14 @@
 
 @end
 
+
+
 @implementation AMRouteViewController
 {
-    NSTimer* _deviceTimer;
+    NSTimer*    _deviceTimer;
+    AMWindow*   _configWindow;
+    
+    AMJackTripConfig* _configController;
 }
 
 
@@ -118,6 +139,25 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self reloadAudioChannel:nil];
     
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
+    
+    
+    [self initJackTripConfig];
+}
+
+- (void) initJackTripConfig
+{
+    _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
+    
+    
+    _configController.window.styleMask = NSBorderlessWindowMask;
+    _configController.window.level = NSNormalWindowLevel;
+    _configController.window.hasShadow = YES;
+    _configController.window.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
+                                                                         green:38.0/255
+                                                                          blue:38.0/255
+                                                                         alpha:1];
+    
+    _configController.window.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
 }
 
 -(void)refreshDevices
@@ -290,12 +330,60 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMRouteView* routerView = (AMRouteView*)self.view;
     controller.maxChannels = (int)[[routerView allChannels] count];
-    self.myPopover.contentViewController = controller;
-    controller.owner = self.myPopover;
+ //   self.myPopover.contentViewController = controller;
+//    controller.owner = self.myPopover;
 
+   
+    
+//    _configWindow.contentView = controller.view;
+    
+    _configController.maxChannels = (int)[[routerView allChannels] count];
+        [_configController showWindow:self];
+/*
     NSRect rect = [sender bounds];
-    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
+//    [self.myPopover showRelativeToRect:rect ofView:sender preferredEdge:NSMaxXEdge];
+ 
+    //NSView* configView = controller.view;
+    NSRect rectClick = [sender frame];
+    
+    NSPoint p = [self.view convertPoint:NSMakePoint(rectClick.origin.x + 100,
+                                                    rectClick.origin.y-100)
+                                 toView:nil];
+    
+    NSRect rectTmp = NSMakeRect(p.x, p.y, 0, 0);
+    rectTmp = [self.view.window convertRectToScreen:rectTmp];
+    NSPoint windowOrigin = rectTmp.origin;
+    
+    if (_configWindow == nil) {
+        _configWindow = [[AMWindow alloc] initWithContentRect:controller.view.frame
+                                                    styleMask:NSBorderlessWindowMask
+                                                      backing:NSBackingStoreBuffered
+                                                        defer:NO];
+        _configWindow.contentView = controller.view;
+        _configWindow.level = NSNormalWindowLevel;
+        _configWindow.hasShadow = YES;
+        _configWindow.backgroundColor = [NSColor colorWithCalibratedRed:38.0/255
+                                                                  green:38.0/255
+                                                                   blue:38.0/255
+                                                                  alpha:1];
+        
+        _configWindow.collectionBehavior |= NSWindowCollectionBehaviorFullScreenPrimary;
+        _configWindow.delegate = self;
+        [_configWindow setFrameOrigin:windowOrigin];
+        
+        NSSize screenSize = self.view.window.screen.frame.size;
+        NSRect windowFrame = controller.view.frame;
+        windowFrame.origin.x = (screenSize.width - windowFrame.size.width) / 2;
+        windowFrame.origin.y = screenSize.height - windowFrame.size.height - 80;
+        [_configWindow.animator setFrame:windowFrame display:NO];
+        
+        [_configWindow makeKeyAndOrderFront:self];
+        
+        controller.winOwner = _configWindow;
+    }else{
+      //  [_configWindow ];
+    }
+ */
 }
-
 
 @end

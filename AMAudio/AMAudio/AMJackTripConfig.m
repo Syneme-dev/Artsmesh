@@ -1,10 +1,12 @@
 //
-//  AMJackTripConfigController.m
+//  AMJackTripConfig.m
 //  AMAudio
 //
-//  Created by Wei Wang on 9/5/14.
-//  Copyright (c) 2014 AM. All rights reserved.
+//  Created by whiskyzed on 4/3/15.
+//  Copyright (c) 2015 AM. All rights reserved.
 //
+
+#import "AMJackTripConfig.h"
 
 #import "AMJackTripConfigController.h"
 #import "AMCoreData/AMCoreData.h"
@@ -16,8 +18,11 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMAudio/AMAudio.h"
+#import "UIFramework/AMWindow.h"
 
-@interface AMJackTripConfigController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
+
+@interface AMJackTripConfig ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
+
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
 @property (weak) IBOutlet AMPopUpView *peerSelecter;
 @property (weak) IBOutlet AMFoundryFontView *peerAddress;
@@ -31,27 +36,25 @@
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
 @property (weak) IBOutlet NSButton *closeBtn;
-
 @property NSArray* allUsers;
 
 @end
 
-@implementation AMJackTripConfigController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
-    return self;
+@implementation AMJackTripConfig
+
+- (void)windowDidLoad {
+    [super windowDidLoad];
+    
+    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    [self setUpUI];
+    [self loadDefaultPref];
 }
-
 
 -(void)awakeFromNib
 {
-    [self setUpUI];
-    [self loadDefaultPref];
+//    [self setUpUI];
+//    [self loadDefaultPref];
 }
 
 
@@ -77,7 +80,7 @@
     [self setPeerList];
     [self initPortOffset];
 }
-    
+
 
 -(void)setPeerList
 {
@@ -276,7 +279,7 @@
             return NO;
         }
     }
-
+    
     //check illegal ip address
     //TODO:
     
@@ -318,7 +321,7 @@
         [alert runModal];
         return NO;
     }
-
+    
     return YES;
 }
 
@@ -347,20 +350,19 @@
     cfgs.useIpv6 = self.ipv6Check.checked;
     
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
-       
+        
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
         [alert runModal];
     }
     
-    [self.winOwner close];
-//    [self.owner performClose:nil];
+    [self.window close];
 }
 
 
 - (IBAction)closeClicked:(NSButton *)sender
 {
-//    [self.owner performClose:nil];
-    [self.winOwner close];
+    [self.window close];
 }
+
 
 @end

@@ -15,21 +15,6 @@
 #import "AMAudio.h"
 
 
-@interface AMWindow : NSWindow
-
-@end
-
-@implementation AMWindow
-
-- (BOOL)canBecomeKeyWindow
-{
-    return YES;
-}
-
-@end
-
-
-
 @interface AMRouteViewController ()  <NSPopoverDelegate>
 
 @property NSPopover *myPopover;
@@ -41,8 +26,7 @@
 @implementation AMRouteViewController
 {
     NSTimer*    _deviceTimer;
-    AMWindow*   _configWindow;
-    
+   
     AMJackTripConfig* _configController;
 }
 
@@ -312,7 +296,6 @@ shouldRemoveDevice:(NSString *)deviceID;
         self.myPopover.delegate = self;
     }*/
     
-    AMRouteView* routerView = (AMRouteView*)self.view;
     NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
     
 //    AMJackTripConfigController* controller = [[AMJackTripConfigController alloc] initWithNibName:@"AMJackTripConfigController" bundle:myBundle];
@@ -325,16 +308,11 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     [self initJackTripConfig:sender];
    
-    _configController.maxChannels = (int)[[routerView allChannels] count];
-    [_configController showWindow:self];
+        [_configController showWindow:self];
 }
 
 - (void) initJackTripConfig : (NSButton *)sender
 {
- /*   if (_configController != nil) {
-        return;
-    }*/
-    
     _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
     NSWindow* win = _configController.window;
     [win setStyleMask:NSBorderlessWindowMask];
@@ -345,7 +323,6 @@ shouldRemoveDevice:(NSString *)deviceID;
                                                          blue:38.0/255
                                                         alpha:1]];
   
-    
     NSRect winRect   = [win frame];
     NSRect plusFrame = [sender frame];
     NSPoint tmpPoint = NSMakePoint(plusFrame.origin.x + plusFrame.size.width + 20,
@@ -353,6 +330,9 @@ shouldRemoveDevice:(NSString *)deviceID;
   
     winRect.origin = [self.view convertPoint:tmpPoint toView:nil];;
     [win  setFrame:winRect display:NO];
+    
+    AMRouteView* routerView = (AMRouteView*)self.view;
+    _configController.maxChannels = (int)[[routerView allChannels] count];
  }
 
 

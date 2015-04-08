@@ -43,11 +43,11 @@
 
 
 //Error handler
-@property (assign)IBOutlet NSWindow *errorHandleSheet;
-@property (weak) IBOutlet NSTextField *localServerIpv4;
-@property (weak)IBOutlet NSTextField *localServerIpv6;
+//@property (assign)IBOutlet NSWindow *errorHandleSheet;
+//@property (weak) IBOutlet NSTextField *localServerIpv4;
+//@property (weak)IBOutlet NSTextField *localServerIpv6;
 
--(IBAction)sheetOKBtnClicked:(id)sender;
--(IBAction)sheetCancelBtnClicked:(id)sender;
+//-(IBAction)sheetOKBtnClicked:(id)sender;
+//-(IBAction)sheetCancelBtnClicked:(id)sender;
 
 @end

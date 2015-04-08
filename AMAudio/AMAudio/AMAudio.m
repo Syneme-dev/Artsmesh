@@ -8,7 +8,7 @@
 
 #import "AMAudio.h"
 #import "AMRouteViewController.h"
-#import "AMJackTripConfigController.h"
+#import "AMJackTripConfig.h"
 #import "AMAudioMixerViewController.h"
 
 
@@ -21,7 +21,7 @@
     AMJackTripManager* _jacktripManager;
     AMJackClient* _jackClient;
     AMRouteViewController* _routerController;
-    AMJackTripConfigController* _jackTripController;
+    AMJackTripConfig* _jackTripController;
     AMAudioMixerViewController* _mixerViewController;
     AMAudioDeviceManager *_audioDevManager;
     

@@ -317,15 +317,11 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
 
 - (void) concludeDragOperation:(id<NSDraggingInfo>) sender
 {
-    NSLog(@"concludeDragOperation");
+    
 }
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
 {
-    if([sender draggingSourceOperationMask] & NSDragOperationDelete > 0)
-    {
-        NSLog(@"Just Delete");
-    }
     
     NSView* sourceView  = [_viewItems objectAtIndex:mouseDownIndex];
     NSPoint location    = [sender draggingLocation];

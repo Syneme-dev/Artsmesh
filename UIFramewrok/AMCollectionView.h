@@ -14,7 +14,7 @@
 @property NSUInteger selectable;
 @property BOOL       nowBar;
 
--(void) removeSelectedItem;
+
 -(void)addViewItem:(NSView *)view;
 -(void)addViewItem:(NSView *)view atIndex:(NSUInteger)index;
 -(void)addViewItems:(NSArray *)views;

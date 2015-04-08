@@ -11,7 +11,7 @@
 
 @interface AMBlinkView : NSImageView
 
-- (instancetype) init;
+//- (instancetype) init;
 
 - (BOOL)  setBlinkImage :  (NSImage*) image
          alternateImage :  (NSImage*) alterImage;

@@ -7,7 +7,6 @@
 //
 
 #import "AMRouteViewController.h"
-#import "AMJackTripConfigController.h"
 #import "AMJackTripConfig.h"
 #import "AMChannel.h"
 #import "AMJackDevice.h"

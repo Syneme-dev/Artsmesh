@@ -8,7 +8,7 @@
 
 #import "AMJackTripConfig.h"
 
-#import "AMJackTripConfigController.h"
+//#import "AMJackTripConfigController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMRouteViewController.h"
 #import "AMJacktripConfigs.h"
@@ -364,5 +364,8 @@
     [self.window close];
 }
 
-
+- (void) onChecked:(AMCheckBoxView *)sender
+{
+    
+}
 @end

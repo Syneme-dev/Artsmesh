@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Artsmesh. All rights reserved.
 //
 
-#import "AMMusicScoreViewController.h"
+#import "AMScoreViewController.h"
 //#import "UIFramework/AMCollectionViewCell.h"
 #import "AMScoreCollectionCell.h"
 #import "AMScoreCollectionView.h"
@@ -18,7 +18,7 @@
 
 NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
-@interface AMMusicScoreViewController () <AMRatioButtonDelegeate, NSTextFieldDelegate>
+@interface AMScoreViewController () <AMRatioButtonDelegeate, NSTextFieldDelegate>
 {
     NSMutableArray*             musicScoreItems;
     AMScoreCollectionView*      _collectionView;
@@ -30,7 +30,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 
 @end
 
-@implementation AMMusicScoreViewController
+@implementation AMScoreViewController
 
 - (void) awakeFromNib
 {

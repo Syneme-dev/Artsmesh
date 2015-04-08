@@ -112,6 +112,7 @@
 		4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */; };
 		4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */; };
 		4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */; };
+		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
@@ -187,8 +188,8 @@
 		AFC77F8B1900C80A003543CF /* AMSocialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC77F8A1900C80A003543CF /* AMSocialView.xib */; };
 		AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC77F8D1900C91A003543CF /* AMSocialViewController.m */; };
 		AFCC3C1C196D098C00518552 /* AMTabPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */; };
-		AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */; };
-		AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */; };
+		AFD34793195BEE1B0055043E /* AMScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34791195BEE1B0055043E /* AMScoreViewController.m */; };
+		AFD34794195BEE1B0055043E /* AMScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34792195BEE1B0055043E /* AMScoreViewController.xib */; };
 		AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD34796195BEF620055043E /* AMTimerViewController.m */; };
 		AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFD34797195BEF620055043E /* AMTimerViewController.xib */; };
 		AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3479B195BEF720055043E /* AMMainOutputViewController.m */; };
@@ -462,6 +463,8 @@
 		4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveGroupItem.m; sourceTree = "<group>"; };
 		4AB4ACF41A6E6435003ECE24 /* AMArchiveUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveUserItem.h; sourceTree = "<group>"; };
 		4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveUserItem.m; sourceTree = "<group>"; };
+		4F0CE37E1AD5659C005699D7 /* AMScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreView.h; sourceTree = "<group>"; };
+		4F0CE37F1AD5659C005699D7 /* AMScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreView.m; sourceTree = "<group>"; };
 		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
 		4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonTearOffController.m; sourceTree = "<group>"; };
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
@@ -540,9 +543,9 @@
 		AFC77F8D1900C91A003543CF /* AMSocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSocialViewController.m; sourceTree = "<group>"; };
 		AFCC3C1A196D098C00518552 /* AMTabPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTabPanelViewController.h; sourceTree = "<group>"; };
 		AFCC3C1B196D098C00518552 /* AMTabPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTabPanelViewController.m; sourceTree = "<group>"; };
-		AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicScoreViewController.h; sourceTree = "<group>"; };
-		AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicScoreViewController.m; sourceTree = "<group>"; };
-		AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMMusicScoreViewController.xib; sourceTree = "<group>"; };
+		AFD34790195BEE1B0055043E /* AMScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreViewController.h; sourceTree = "<group>"; };
+		AFD34791195BEE1B0055043E /* AMScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreViewController.m; sourceTree = "<group>"; };
+		AFD34792195BEE1B0055043E /* AMScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMScoreViewController.xib; sourceTree = "<group>"; };
 		AFD34795195BEF620055043E /* AMTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerViewController.h; sourceTree = "<group>"; };
 		AFD34796195BEF620055043E /* AMTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerViewController.m; sourceTree = "<group>"; };
 		AFD34797195BEF620055043E /* AMTimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerViewController.xib; sourceTree = "<group>"; };
@@ -932,9 +935,11 @@
 		4A207A6B1A875D2F006F4FA2 /* ScorePanel */ = {
 			isa = PBXGroup;
 			children = (
-				AFD34790195BEE1B0055043E /* AMMusicScoreViewController.h */,
-				AFD34791195BEE1B0055043E /* AMMusicScoreViewController.m */,
-				AFD34792195BEE1B0055043E /* AMMusicScoreViewController.xib */,
+				4F0CE37E1AD5659C005699D7 /* AMScoreView.h */,
+				4F0CE37F1AD5659C005699D7 /* AMScoreView.m */,
+				AFD34790195BEE1B0055043E /* AMScoreViewController.h */,
+				AFD34791195BEE1B0055043E /* AMScoreViewController.m */,
+				AFD34792195BEE1B0055043E /* AMScoreViewController.xib */,
 				4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */,
 				4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */,
 				4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */,
@@ -1372,7 +1377,7 @@
 				AFAEBD9B19610B8700B7FB51 /* OnlineDot.png in Resources */,
 				AFAEBDAB19610BEA00B7FB51 /* Attachement.png in Resources */,
 				2DD0EBE01AB14DA6008077C6 /* GTMOAuth2Window.xib in Resources */,
-				AFD34794195BEE1B0055043E /* AMMusicScoreViewController.xib in Resources */,
+				AFD34794195BEE1B0055043E /* AMScoreViewController.xib in Resources */,
 				4A8C69F91A70A0ED00540694 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9C19610B8700B7FB51 /* QuitGroup.png in Resources */,
 				4A32A1271A72269F006FEDD7 /* AMGroupProfileViewController.xib in Resources */,
@@ -1467,7 +1472,7 @@
 				269FB84D1998816E00355312 /* AMBroadcastViewController.m in Sources */,
 				1376BDDB1AC12E1400762C08 /* AMScoreCollectionCell.m in Sources */,
 				AF621F1E197F59C8005F4F97 /* AMPanelControlBarViewController.m in Sources */,
-				AFD34793195BEE1B0055043E /* AMMusicScoreViewController.m in Sources */,
+				AFD34793195BEE1B0055043E /* AMScoreViewController.m in Sources */,
 				4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */,
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
@@ -1503,6 +1508,7 @@
 				2DD0EBDC1AB14DA6008077C6 /* GTMOAuth2Authentication.m in Sources */,
 				2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */,
 				4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */,
+				4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */,
 				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */,

@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMMusicScoreViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMScoreViewController">
             <connections>
                 <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
                 <outlet property="pageModeCheck" destination="hLF-6J-9BO" id="D4G-7R-hzC"/>
@@ -17,7 +17,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY" customClass="AMTabItemView">
+        <customView id="Hz6-mo-xeY" customClass="AMScoreView">
             <rect key="frame" x="0.0" y="0.0" width="759" height="933"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -56,11 +56,11 @@
                         <constraint firstAttribute="width" constant="90" id="ylQ-J4-IfK"/>
                     </constraints>
                 </customView>
-                <customView identifier="scrollMode" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NV-pX-X7W" customClass="AMRatioButtonView">
+                <customView identifier="scrollMode" translatesAutoresizingMaskIntoConstraints="NO" id="9NV-pX-X7W" customClass="AMRatioButtonView">
                     <rect key="frame" x="20" y="20" width="90" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="KcI-Qx-og2"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Y3d-jZ-iZW"/>
+                        <constraint firstAttribute="height" constant="30" id="Y3d-jZ-iZW"/>
                         <constraint firstAttribute="width" constant="90" id="Yf1-0w-oMg"/>
                     </constraints>
                 </customView>

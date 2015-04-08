@@ -29,7 +29,7 @@
 #import "AMPanelControlBarViewController.h"
 //#import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
-#import "AMMusicScoreViewController.h"
+#import "AMScoreViewController.h"
 #import "AMOSCMessageViewController.h"
 #import "AMBroadcastViewController.h"
 #import "AMManualViewController.h"
@@ -627,7 +627,7 @@
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelHeight);
     panelView.minSizeConstraint = panelSize;
     
-    NSViewController *viewController = [[AMMusicScoreViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
+    NSViewController *viewController = [[AMScoreViewController alloc] initWithNibName:@"AMMusicScoreViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
 }

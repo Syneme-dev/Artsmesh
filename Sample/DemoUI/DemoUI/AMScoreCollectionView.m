@@ -459,7 +459,7 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     // [_docView move]
     //    [_docView scro]
     [self onStopTimer:notfication];
-    if (self.mode == 0) {
+    if (self.mode == 0 && _scrollDelta > 0) {
        // [self onStopTimer:notfication];
         _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                         target:self
@@ -468,7 +468,7 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
                                                        repeats:YES];
 
     }
-    else{
+    else if(self.mode == 0 && _timeInterval > 0){
         
         _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval
                                                         target:self

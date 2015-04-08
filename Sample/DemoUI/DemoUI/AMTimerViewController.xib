@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
@@ -19,20 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="463" height="542"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="GJj-K0-zhz">
-                    <rect key="frame" x="344" y="525" width="50" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="14" id="EIM-Fe-dEl"/>
-                        <constraint firstAttribute="width" constant="50" id="J2t-hn-Kw9"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="TIMER" bezelStyle="inline" alignment="center" inset="2" id="ANb-kd-zyv">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="smallSystemBold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="timerBtnClick:" target="-2" id="0Eg-a9-SOk"/>
-                    </connections>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PpJ-aB-EKN">
                     <rect key="frame" x="398" y="525" width="9" height="17"/>
                     <constraints>
@@ -85,6 +71,20 @@
                     </buttonCell>
                     <connections>
                         <action selector="clockBtnClick:" target="-2" id="oxX-if-UqI"/>
+                    </connections>
+                </button>
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GJj-K0-zhz">
+                    <rect key="frame" x="342" y="525" width="50" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="EIM-Fe-dEl"/>
+                        <constraint firstAttribute="width" constant="50" id="J2t-hn-Kw9"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="TIMER" bezelStyle="inline" alignment="center" inset="2" id="ANb-kd-zyv">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="timerBtnClick:" target="-2" id="0Eg-a9-SOk"/>
                     </connections>
                 </button>
             </subviews>

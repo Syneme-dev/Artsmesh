@@ -621,7 +621,7 @@
 
 
 - (AMPanelViewController *)loadMusicScorePanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"MUSIC SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
    
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelHeight);

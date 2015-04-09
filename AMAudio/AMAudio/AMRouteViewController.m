@@ -15,8 +15,9 @@
 
 
 @interface AMRouteViewController ()  <NSPopoverDelegate>
+@property (weak) IBOutlet NSButton *plusButton;
 
-@property NSPopover *myPopover;
+//@property NSPopover *myPopover;
 
 @end
 
@@ -122,7 +123,6 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self reloadAudioChannel:nil];
     
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
-    
     
     
 }
@@ -286,11 +286,11 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
 //    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
 
-    [self initJackTripConfig:sender];
+    [self initJackTripConfig];
     [_configController showWindow:self];
 }
 
-- (void) initJackTripConfig : (NSButton *)sender
+- (void) initJackTripConfig
 {
     _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
     NSWindow* win = _configController.window;
@@ -303,7 +303,7 @@ shouldRemoveDevice:(NSString *)deviceID;
                                                         alpha:1]];
   
     NSRect winRect   = [win frame];
-    NSRect plusFrame = [sender frame];
+    NSRect plusFrame = [_plusButton frame];
     NSPoint tmpPoint = NSMakePoint(plusFrame.origin.x + plusFrame.size.width + 20,
                                    plusFrame.origin.y - winRect.size.height + 120);
   

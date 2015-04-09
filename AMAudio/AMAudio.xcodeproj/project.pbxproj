@@ -208,9 +208,9 @@
 		4A4511711A8B5E65001E7328 /* RouterUI */ = {
 			isa = PBXGroup;
 			children = (
-				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
 				CE68805719B94F2A0062211C /* AMRouteViewController.h */,
 				CE68805819B94F2A0062211C /* AMRouteViewController.m */,
+				26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */,
 				4FC0ED351ACE763300ED06AF /* AMJackTripConfig.h */,
 				4FC0ED361ACE763300ED06AF /* AMJackTripConfig.m */,
 				4FC0ED371ACE763300ED06AF /* AMJackTripConfig.xib */,

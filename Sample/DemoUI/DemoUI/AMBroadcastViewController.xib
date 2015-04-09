@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
+                <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
                 <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
                 <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
@@ -157,6 +158,16 @@
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0A-Xm-MAU" customClass="AMCheckBoxView">
                                         <rect key="frame" x="20" y="426" width="150" height="20"/>
                                     </customView>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
+                                        <rect key="frame" x="2" y="306" width="70" height="21"/>
+                                        <buttonCell key="cell" type="bevel" title="CREATE" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="z6c-S9-Ut4">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                         </tabViewItem>

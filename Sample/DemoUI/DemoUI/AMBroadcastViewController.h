@@ -30,6 +30,8 @@
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
 @property (strong) IBOutlet NSButton *oAuthSignInBtn;
+@property (strong) IBOutlet NSButton *createEventBtn;
+
 @property (strong) IBOutlet AMPopUpView *eventStartTimeDropDown;
 @property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;

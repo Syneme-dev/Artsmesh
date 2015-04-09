@@ -51,13 +51,6 @@
     [self loadDefaultPref];
 }
 
--(void)awakeFromNib
-{
-//    [self setUpUI];
-//    [self loadDefaultPref];
-}
-
-
 -(void)setUpUI
 {
     [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
@@ -364,6 +357,8 @@
     [self.window close];
 }
 
+//Even we do nothing in onChecked, without function defination, it'll cause a warning to not
+//implement the protocal.
 - (void) onChecked:(AMCheckBoxView *)sender
 {
     

@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMJackTripConfig : NSWindowController
-@property (weak)NSWindow* winOwner;
+//@property (weak)NSWindow* winOwner;
 @property int maxChannels;
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -680,7 +680,7 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msk-5o-YGT">
-                                <rect key="frame" x="10" y="6" width="29" height="28"/>
+                                <rect key="frame" x="1" y="-2" width="45" height="45"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_grey" id="Qtb-kn-nHX"/>
                             </imageView>
                         </subviews>
@@ -921,7 +921,7 @@
         <image name="Server_on" width="58.064517974853516" height="58.064517974853516"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
-        <image name="logo_grey" width="329" height="329"/>
+        <image name="logo_grey" width="61.439998626708984" height="61.439998626708984"/>
         <image name="topbar_mesh" width="25" height="25"/>
         <image name="topbar_mesh_offline" width="25" height="25"/>
     </resources>

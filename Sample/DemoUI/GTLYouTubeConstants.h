@@ -28,15 +28,11 @@
 
 #import <Foundation/Foundation.h>
 
-/**
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLDefines.h"
 #else
   #import "GTLDefines.h"
 #endif
-**/
-
-#import <GTL/GTLDefines.h>
 
 // Authorization scope
 // Manage your YouTube account

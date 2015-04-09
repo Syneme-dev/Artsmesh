@@ -28,15 +28,11 @@
 // Classes:
 //   GTLYouTubeLiveStreamListResponse (0 custom class methods, 9 custom properties)
 
-/**
 #if GTL_BUILT_AS_FRAMEWORK
   #import "GTL/GTLObject.h"
 #else
   #import "GTLObject.h"
 #endif
-**/
-
-#import <GTL/GTLObject.h>
 
 @class GTLYouTubeLiveStream;
 @class GTLYouTubePageInfo;

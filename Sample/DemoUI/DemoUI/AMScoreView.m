@@ -14,7 +14,7 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
-    NSRect lineRect = NSMakeRect(0, 60, self.bounds.size.width, 3);
+    NSRect lineRect = NSMakeRect(0, 60, self.bounds.size.width, 1);
     NSBezierPath* path = [NSBezierPath bezierPathWithRect:lineRect];
     [[NSColor colorWithCalibratedRed:(46)/255.0f
                                green:(58)/255.0f

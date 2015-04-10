@@ -147,9 +147,18 @@ typedef enum {
     publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?fromMac=true", statusNetURL];
     infoStatus = INFO_USER;
     isInfoPage = YES;
-    [self.socialWebTab.mainFrame loadRequest:
-            [NSURLRequest requestWithURL:[NSURL URLWithString:
-                    loginURL]]];
+    
+    if ([myUserName length] > 0) {
+        //Username provided, try logging in
+        [self.socialWebTab.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:[NSURL URLWithString:
+                                       loginURL]]];
+    } else {
+        //Username not given, take to front page
+        [self.socialWebTab.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:[NSURL URLWithString:
+                                       statusNetURL]]];
+    }
 }
 
 - (void)gotoUsersPage {
@@ -220,6 +229,10 @@ typedef enum {
     NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
     [frame.webView stringByEvaluatingJavaScriptFromString:
             loginJs];
+    
+    NSLog(@"username is : %@", myUserName);
+    NSLog(@"pass is : %@", password);
+    
     isLogin = YES;
 }
 

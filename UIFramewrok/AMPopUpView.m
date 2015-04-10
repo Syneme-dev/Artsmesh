@@ -108,7 +108,7 @@
          AMPopUpWillShowNotification object:nil];
     }
     
-    [self.popWindow setFrame:frame display:YES];
+    [self.popWindow setFrame:frame display:NO];
     return self.popWindow;
 }
 

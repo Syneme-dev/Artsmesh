@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -664,23 +664,15 @@
                         <rect key="frame" x="0.0" y="718" width="160" height="40"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
-                                <rect key="frame" x="45" y="12" width="71" height="17"/>
+                                <rect key="frame" x="70" y="12" width="71" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH" id="eNi-as-Uyj">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bQ-eS-vUf" customClass="AMFoundryFontView">
-                                <rect key="frame" x="117" y="12" width="25" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2.1" id="DZC-sX-GBB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msk-5o-YGT">
-                                <rect key="frame" x="1" y="-2" width="45" height="45"/>
+                                <rect key="frame" x="18" y="-2" width="45" height="45"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="logo_grey" id="Qtb-kn-nHX"/>
                             </imageView>
                         </subviews>
@@ -910,7 +902,6 @@
                 <outlet property="topHourTF" destination="leE-VP-qR4" id="iMB-pI-K0C"/>
                 <outlet property="topMinTF" destination="r2k-KX-ngq" id="5qM-xj-qwb"/>
                 <outlet property="topSecTF" destination="Zga-ap-ATV" id="E5n-C0-TtZ"/>
-                <outlet property="versionLabel" destination="2bQ-eS-vUf" id="46h-jo-WII"/>
                 <outlet property="window" destination="371" id="BOz-Gb-G7x"/>
             </connections>
         </customObject>

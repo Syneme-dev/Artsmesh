@@ -85,7 +85,7 @@
     NSRect rect = NSMakeRect(contentRect.origin.x + contentRect.size.width - 20 - imageSize, contentRect.origin.y + 5, imageSize, imageSize);
     
     NSImage* triangle = [NSImage imageNamed:@"popUpTriangle"];
-    [triangle drawAtPoint:rect.origin fromRect:NSZeroRect operation:NSCompositeHighlight fraction:1.0];
+    [triangle drawAtPoint:rect.origin fromRect:NSZeroRect operation:NSCompositePlusLighter fraction:1.0];
     
 }
 

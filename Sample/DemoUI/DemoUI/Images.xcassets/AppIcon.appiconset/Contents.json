@@ -37,9 +37,8 @@
       "scale" : "1x"
     },
     {
-      "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "logo256-1.png",
+      "size" : "256x256",
       "scale" : "2x"
     },
     {

@@ -186,9 +186,9 @@
                                    if (error == nil) {
                                        if ([[channelList items] count] > 0) {
                                            GTLYouTubeChannel *channel = channelList[0];
-                                           self.channelId = channel.snippet;
+                                           self.channelId = channel.identifier;
                                            
-                                           NSLog(@"channel snippet is: %@", self.channelId);
+                                           NSLog(@"channel id is: %@", self.channelId);
                                        }
                                    } else {
                                        NSLog(@"Error: %@", error.description);
@@ -347,7 +347,8 @@
     [self checkSignedInBtn];
 }
 
-- (BOOL)initYoutubeService {
+- (void)initYoutubeService {
+    /** This function gets us authenticated with YouTube to make some queries! **/
     
     self.youTubeService = [[GTLServiceYouTube alloc] init];
     //_youTubeService.shouldFetchNextPages = YES;
@@ -357,8 +358,6 @@
         _youTubeService.authorizer = mAuth;
         
     }
-    
-    return YES;
 }
 
 #pragma mark AMPopUpViewDelegeate

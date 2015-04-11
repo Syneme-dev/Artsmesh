@@ -142,6 +142,28 @@
 
 - (void)createYouTubeLiveEvent {
     NSLog(@"Create the Live Event, now!");
+    
+    /** Grab the relevant data from the form **/
+    
+    // Broadcast Scheduled Start/End Times
+    
+    NSDate *broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
+
+    // Get channel id
+    
+    
+}
+
+- (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    //[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    NSDate *date = [dateFormatter dateFromString: dateString];
+    
+    NSLog(@"The date is %@", date);
+    
+    return date;
 }
 
 - (void)loadEventTimes {

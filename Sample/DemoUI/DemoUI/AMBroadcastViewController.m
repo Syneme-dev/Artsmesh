@@ -352,10 +352,14 @@
     self.youTubeService = [[GTLServiceYouTube alloc] init];
     //_youTubeService.shouldFetchNextPages = YES;
     _youTubeService.retryEnabled = YES;
+    if ([self isSignedIn]) {
+        
+        _youTubeService.authorizer = mAuth;
+        
+    }
     
     return YES;
 }
-
 
 #pragma mark AMPopUpViewDelegeate
 -(void)itemSelected:(AMPopUpView*)sender {

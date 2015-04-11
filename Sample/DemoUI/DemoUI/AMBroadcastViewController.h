@@ -18,9 +18,8 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMAppDelegate.h"
 
-
-#import "GTLYouTube.h"
 #import <GTL/GTMOAuth2WindowController.h>
+#import "GTLYouTube.h"
 
 
 @interface AMBroadcastViewController : AMTabPanelViewController {

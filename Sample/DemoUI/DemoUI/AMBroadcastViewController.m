@@ -14,8 +14,11 @@
 #import "UIFramework/NSView_Constrains.h"
 
 @interface AMBroadcastViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
-@property (weak) IBOutlet NSButton *cancelBtn;
-@property (weak) IBOutlet NSButton *goBtn;
+
+@property (strong) GTLServiceYouTube *youTubeService;
+@property (strong) GTLServiceTicket *channelIdTicket;
+@property (strong) NSString *channelId;
+
 @end
 
 @implementation AMBroadcastViewController 
@@ -65,13 +68,14 @@
                                                              clientSecret:kMyClientSecret];
     
     [self setAuthentication:auth];
+    [self initYoutubeService];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     [self updateUI];
     
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
+    //[AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    //[AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
     
     [self.groupTabView setAutoresizesSubviews:YES];
@@ -150,8 +154,10 @@
     NSDate *broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
 
-    // Get channel id
     
+    // Get channelID
+    
+    [self getYouTubeChannelId];
     
 }
 
@@ -164,6 +170,32 @@
     NSLog(@"The date is %@", date);
     
     return date;
+}
+
+- (void)getYouTubeChannelId {
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    GTLQueryYouTube *query = [GTLQueryYouTube queryForChannelsListWithPart:@"snippet"];
+    query.mine = YES;
+    query.maxResults = 1;
+    
+    self.channelIdTicket = [service executeQuery:query
+                               completionHandler:^(GTLServiceTicket *ticket,
+                                                   GTLYouTubeChannelListResponse *channelList,
+                                                   NSError *error) {
+                                   if (error == nil) {
+                                       if ([[channelList items] count] > 0) {
+                                           GTLYouTubeChannel *channel = channelList[0];
+                                           self.channelId = channel.snippet;
+                                           
+                                           NSLog(@"channel snippet is: %@", self.channelId);
+                                       }
+                                   } else {
+                                       NSLog(@"Error: %@", error.description);
+                                   }
+                                   NSLog(@"finished..");
+                                   
+                               }];
 }
 
 - (void)loadEventTimes {
@@ -313,6 +345,15 @@
 
 -(void) updateUI {
     [self checkSignedInBtn];
+}
+
+- (BOOL)initYoutubeService {
+    
+    self.youTubeService = [[GTLServiceYouTube alloc] init];
+    //_youTubeService.shouldFetchNextPages = YES;
+    _youTubeService.retryEnabled = YES;
+    
+    return YES;
 }
 
 

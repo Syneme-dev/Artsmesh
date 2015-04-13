@@ -17,9 +17,12 @@
 
 @property (strong) GTLServiceYouTube *youTubeService;
 @property (strong) GTLServiceTicket *channelIdTicket;
+@property (strong) GTLServiceTicket *broadcastTicket;
 @property (strong) NSString *channelId;
 @property (strong) NSString *broadcastTitle;
 @property (strong) NSString *broadcastDesc;
+@property (strong) NSDate *broadcastSchedStart;
+@property (strong) NSDate *broadcastSchedEnd;
 
 @end
 
@@ -156,13 +159,13 @@
     
     
     // Broadcast Description
-    self.broadcastDesc = @"Here's my live event!"
+    self.broadcastDesc = @"Here's my live event!";
     
     
     // Broadcast Scheduled Start/End Times
     
-    NSDate *broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
     // Get channelID
@@ -172,27 +175,6 @@
     if ([self.channelId length] > 0) {
         // All set, let's create an event!
         
-        // Create an object for the liveBroadcast resource's snippet. Specify values
-        // for the snippet's title, scheduled start time, and scheduled end time.
-        GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
-        newBroadcastSnippet.title = self.broadcastTitle;
-        newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:broadcastSchedStart timeZone:nil];
-        newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:broadcastSchedEnd timeZone:nil];
-        
-        // Create an object for the liveBroadcast resource's status, and set the
-        // broadcast's status to "private".
-        GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
-        newBroadcastStatus.privacyStatus = @"private";
-        
-        // Create the API request that inserts the liveBroadcast resource.
-        GTLYouTubeLiveBroadcast *newBroadcast = [[GTLYouTubeLiveBroadcast alloc] init];
-        newBroadcast.snippet = newBroadcastSnippet;
-        newBroadcast.status = newBroadcastStatus;
-        newBroadcast.kind = @"youtube#liveBroadcast";
-        
-        // Execute the request and return an object that contains information
-        // about the new broadcast.
-        GTLQueryYouTube *createEventQuery = [GTLQueryYouTube queryForLiveBroadcastsInsertWithObject:newBroadcast part:@"snippet,status"];
         
     }
 }
@@ -219,12 +201,15 @@
                                completionHandler:^(GTLServiceTicket *ticket,
                                                    GTLYouTubeChannelListResponse *channelList,
                                                    NSError *error) {
+                                   _channelIdTicket = nil;
                                    if (error == nil) {
                                        if ([[channelList items] count] > 0) {
                                            GTLYouTubeChannel *channel = channelList[0];
                                            self.channelId = channel.identifier;
                                            
                                            NSLog(@"channel id is: %@", self.channelId);
+                                           // Create the Broadcast now
+                                           [self insertLiveYouTubeBroadcast];
                                        }
                                    } else {
                                        NSLog(@"Error: %@", error.description);
@@ -232,6 +217,48 @@
                                    NSLog(@"finished..");
                                    
                                }];
+}
+
+- (void)insertLiveYouTubeBroadcast {
+    // Create an object for the liveBroadcast resource's snippet. Specify values
+    // for the snippet's title, scheduled start time, and scheduled end time.
+    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
+    newBroadcastSnippet.title = self.broadcastTitle;
+    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:nil];
+    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:nil];
+    
+    // Create an object for the liveBroadcast resource's status, and set the
+    // broadcast's status to "private".
+    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
+    newBroadcastStatus.privacyStatus = @"private";
+    
+    // Create the API request that inserts the liveBroadcast resource.
+    GTLYouTubeLiveBroadcast *newBroadcast = [[GTLYouTubeLiveBroadcast alloc] init];
+    newBroadcast.identifier = self.channelId;
+    newBroadcast.snippet = newBroadcastSnippet;
+    newBroadcast.status = newBroadcastStatus;
+    newBroadcast.kind = @"youtube#liveBroadcast";
+    
+    // Execute the request and return an object that contains information
+    // about the new broadcast.
+    GTLQueryYouTube *createEventQuery = [GTLQueryYouTube queryForLiveBroadcastsInsertWithObject:newBroadcast part:@"snippet,status"];
+    createEventQuery.mine = YES;
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    self.broadcastTicket = [service executeQuery:createEventQuery
+                               completionHandler:^(GTLServiceTicket *ticket,
+                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
+                                                   NSError *error) {
+                                   // Callback
+                                   _broadcastTicket = nil;
+                                   if (error == nil) {
+                                       NSLog(@"Live event created! %@", liveBroadcast.snippet.title);
+                                   } else {
+                                       NSLog(@"Error: %@", error.description);
+                                   }
+                               }];
+
 }
 
 - (void)loadEventTimes {

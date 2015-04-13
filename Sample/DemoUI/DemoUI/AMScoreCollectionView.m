@@ -9,7 +9,7 @@
 #import "AMScoreCollectionView.h"
 #import "AMScoreCollectionCell.h"
 #import "AMNowBarView.h"
-
+#import "UIFramework/NSView_Constrains.h"
 #define THUMBNAIL_HEIGHT 180.0
 
 NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
@@ -94,6 +94,25 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     NSRect nowBarFrame = NSMakeRect(rect.size.width /3, 0, 8, rect.size.height);
     _nowBarView = [[AMNowBarView alloc] initWithFrame:nowBarFrame];
     [self addSubview:_nowBarView];
+    
+   // [NSView addConstrains:_nowBarView toSubview:_scrollView leadingSpace:0 width:480 topSpace:0 height:]
+    NSString *hConstrain = [NSString stringWithFormat:@"H:|-400-[_nowBarView(==%f)]",8.0];
+    NSString *vConstrain = [NSString stringWithFormat:@"V:|-0-[_nowBarView]-0-|"];
+    [_nowBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *barViews = NSDictionaryOfVariableBindings(_nowBarView);
+    
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:hConstrain
+                                             options:0
+                                             metrics:nil
+                                               views:barViews]];
+    
+    [self addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:vConstrain
+                                             options:0
+                                             metrics:nil
+                                               views:barViews]];
+    
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self

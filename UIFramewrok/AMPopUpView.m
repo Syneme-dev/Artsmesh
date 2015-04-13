@@ -14,12 +14,12 @@
 @end
 
 @implementation AMPopUpWindow
-/*
--(BOOL)resignFirstResponder
-{
-    return YES;
-}
-*/
+
+ -(BOOL)resignFirstResponder
+ {
+     return YES;
+ }
+ 
 - (BOOL)canBecomeKeyWindow;
 {
     return YES;
@@ -64,7 +64,7 @@
         
         self.itemWidth = 0;
         self.itemHeight = 30;
-    
+        
         [self addTrackingRect:self.bounds owner:self userData:nil assumeInside:NO];
     }
     return self;
@@ -113,9 +113,9 @@
 {
     if (self.popWindow == nil) {
         self.popWindow = [[AMPopUpWindow alloc] initWithContentRect:frame
-                                                           styleMask:NSBorderlessWindowMask
-                                                             backing:NSBackingStoreBuffered
-                                                            defer:NO];
+                                                          styleMask:NSBorderlessWindowMask
+                                                            backing:NSBackingStoreBuffered
+                                                              defer:NO];
         self.popWindow.hasShadow = NO;
         self.popWindow.delegate  = self;
         self.popWindow.level     = NSPopUpMenuWindowLevel;
@@ -177,7 +177,7 @@
 
 -(NSString*)stringValue
 {
-     return _title;
+    return _title;
 }
 
 -(AMPopUpMenuController*)popUpMenuController

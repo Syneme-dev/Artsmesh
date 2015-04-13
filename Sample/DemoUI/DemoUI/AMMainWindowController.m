@@ -624,12 +624,13 @@
     AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"SCORE" width:UI_defaultPanelWidth*4 height:UI_defaultPanelHeight relatedView:view];
    
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
-    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelHeight);
+    NSSize panelSize = NSMakeSize(UI_defaultPanelWidth, UI_defaultPanelWidth);
     panelView.minSizeConstraint = panelSize;
     
     NSViewController *viewController = [[AMScoreViewController alloc] initWithNibName:@"AMScoreViewController" bundle:nil];
     [self fillPanel:panelViewController content:viewController];
     return panelViewController;
+    
 }
 
 

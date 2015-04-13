@@ -13,11 +13,15 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
 
-    
     CGFloat width  = [self bounds].size.width;
     CGFloat height = [self bounds].size.height;
+   
+    NSColor *fgColor = [NSColor colorWithCalibratedRed:237/255.0
+                                                 green: 28/255.0
+                                                  blue: 36/255.0
+                                                 alpha:      0.5];
     
-    NSColor *fgColor = [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.5];
+ //   NSColor *fgColor = [NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.5];
     [fgColor set];
     
     //Be careful about the midBar height and triangle height.

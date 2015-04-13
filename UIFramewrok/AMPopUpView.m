@@ -10,12 +10,31 @@
 #import "AMPopUpMenuController.h"
 #import "NSView_Constrains.h"
 
+@interface AMPopUpWindow : NSWindow
+@end
+
+@implementation AMPopUpWindow
+/*
+-(BOOL)resignFirstResponder
+{
+    return YES;
+}
+*/
+- (BOOL)canBecomeKeyWindow;
+{
+    return YES;
+}
+
+@end
+
+
+
 @interface AMPopUpView()<AMPopUpMenuDelegate, NSWindowDelegate>
 
 @property BOOL mouseEntered;
 @property(nonatomic) NSInteger indexOfSelectedItem;
 
-@property NSWindow *popWindow;
+@property AMPopUpWindow *popWindow;
 
 @end
 
@@ -90,15 +109,15 @@
 }
 
 
--(NSWindow *)getPopWindow:(NSRect)frame
+-(AMPopUpWindow *)getPopWindow:(NSRect)frame
 {
     if (self.popWindow == nil) {
-        self.popWindow = [[NSWindow alloc] initWithContentRect:frame
+        self.popWindow = [[AMPopUpWindow alloc] initWithContentRect:frame
                                                            styleMask:NSBorderlessWindowMask
                                                              backing:NSBackingStoreBuffered
                                                             defer:NO];
         self.popWindow.hasShadow = NO;
-        self.popWindow.delegate = self;
+        self.popWindow.delegate  = self;
         self.popWindow.level     = NSPopUpMenuWindowLevel;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
@@ -139,7 +158,7 @@
     
     
     NSView *popUpView = [self popUpMenuController].view;
-    NSWindow *popupWindow = [self getPopWindow:popUpView.frame];
+    AMPopUpWindow *popupWindow = [self getPopWindow:popUpView.frame];
     [popupWindow.contentView addConstrainsToSubview:popUpView leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     
     

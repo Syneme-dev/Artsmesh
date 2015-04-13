@@ -456,9 +456,12 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 #pragma mark AMTimerNotificatio
 - (void) onStartTimer : (NSNotification*) notfication
 {
-    // [_docView move]
-    //    [_docView scro]
-    [self onStopTimer:notfication];
+    [_scrollTimer invalidate];
+    
+    if (self.mode == 1) {
+        _curPageNumber = 0;
+    }
+    
     if (self.mode == 0 && _scrollDelta > 0) {
        // [self onStopTimer:notfication];
         _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
@@ -468,9 +471,9 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
                                                        repeats:YES];
 
     }
-    else if(self.mode == 0 && _timeInterval > 0){
+    else if(self.mode == 1 && _timeInterval > 0){
         
-        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval
                                                         target:self
                                                       selector:@selector(turnPageScore)
                                                       userInfo:nil
@@ -529,12 +532,16 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 - (void) turnPageScore
 {
     NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
+    currentScrollPosition.x += [_scrollView bounds].size.width;
+    [[_scrollView documentView] scrollPoint:currentScrollPosition];
+    
+/*    NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
     NSView* view = [_viewItems objectAtIndex:_curPageNumber];
     CGFloat pageWidth = [view bounds].size.width + _itemGap;
     
     currentScrollPosition.x += pageWidth;
     [[_scrollView documentView] scrollPoint:currentScrollPosition];
-    _curPageNumber++;
+    _curPageNumber++;*/
 }
 
 @end

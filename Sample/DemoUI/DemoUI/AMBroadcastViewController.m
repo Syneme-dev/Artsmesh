@@ -18,6 +18,8 @@
 @property (strong) GTLServiceYouTube *youTubeService;
 @property (strong) GTLServiceTicket *channelIdTicket;
 @property (strong) NSString *channelId;
+@property (strong) NSString *broadcastTitle;
+@property (strong) NSString *broadcastDesc;
 
 @end
 
@@ -149,16 +151,50 @@
     
     /** Grab the relevant data from the form **/
     
+    // Broadcast Title
+    self.broadcastTitle = @"Test Event from ArtsMesh App";
+    
+    
+    // Broadcast Description
+    self.broadcastDesc = @"Here's my live event!"
+    
+    
     // Broadcast Scheduled Start/End Times
     
     NSDate *broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
-
+    
     
     // Get channelID
     
     [self getYouTubeChannelId];
     
+    if ([self.channelId length] > 0) {
+        // All set, let's create an event!
+        
+        // Create an object for the liveBroadcast resource's snippet. Specify values
+        // for the snippet's title, scheduled start time, and scheduled end time.
+        GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
+        newBroadcastSnippet.title = self.broadcastTitle;
+        newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:broadcastSchedStart timeZone:nil];
+        newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:broadcastSchedEnd timeZone:nil];
+        
+        // Create an object for the liveBroadcast resource's status, and set the
+        // broadcast's status to "private".
+        GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
+        newBroadcastStatus.privacyStatus = @"private";
+        
+        // Create the API request that inserts the liveBroadcast resource.
+        GTLYouTubeLiveBroadcast *newBroadcast = [[GTLYouTubeLiveBroadcast alloc] init];
+        newBroadcast.snippet = newBroadcastSnippet;
+        newBroadcast.status = newBroadcastStatus;
+        newBroadcast.kind = @"youtube#liveBroadcast";
+        
+        // Execute the request and return an object that contains information
+        // about the new broadcast.
+        GTLQueryYouTube *createEventQuery = [GTLQueryYouTube queryForLiveBroadcastsInsertWithObject:newBroadcast part:@"snippet,status"];
+        
+    }
 }
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {

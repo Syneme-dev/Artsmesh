@@ -44,9 +44,8 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     
     [self.view addSubview:_collectionView];
     
-    NSString *hConstrain = [NSString stringWithFormat:@"H:|-0-[_collectionView]-0-|"];
+    NSString *hConstrain = [NSString stringWithFormat:@"H:|-20-[_collectionView]-20-|"];
     NSString *vConstrain = [NSString stringWithFormat:@"V:|-40-[_collectionView(==%f)]", 480.0];
-//    NSString *vConstrain = [NSString stringWithFormat:@"V:|-0-[_collectionView]-0-|"];
     [_collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView);
     [self.view addConstraints:

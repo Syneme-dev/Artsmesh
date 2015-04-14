@@ -22,6 +22,7 @@
 @property (strong) NSString *broadcastTitle;
 @property (strong) NSString *broadcastDesc;
 @property (strong) NSString *broadcastURL;
+@property (strong) NSString *broadcastPrivacy;
 @property (strong) NSDate *broadcastSchedStart;
 @property (strong) NSDate *broadcastSchedEnd;
 
@@ -173,11 +174,6 @@
     
     [self getYouTubeChannelId];
     
-    if ([self.channelId length] > 0) {
-        // All set, let's create an event!
-        
-        
-    }
 }
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
@@ -231,7 +227,8 @@
     // Create an object for the liveBroadcast resource's status, and set the
     // broadcast's status to "private".
     GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
-    newBroadcastStatus.privacyStatus = @"private";
+    if ( self.privateCheck.checked ) { self.broadcastPrivacy = @"private"; } else { self.broadcastPrivacy = @"public"; }
+    newBroadcastStatus.privacyStatus = self.broadcastPrivacy;
     
     // Create the API request that inserts the liveBroadcast resource.
     GTLYouTubeLiveBroadcast *newBroadcast = [[GTLYouTubeLiveBroadcast alloc] init];

@@ -21,6 +21,7 @@
 @property (strong) NSString *channelId;
 @property (strong) NSString *broadcastTitle;
 @property (strong) NSString *broadcastDesc;
+@property (strong) NSString *broadcastURL;
 @property (strong) NSDate *broadcastSchedStart;
 @property (strong) NSDate *broadcastSchedEnd;
 
@@ -253,7 +254,10 @@
                                    // Callback
                                    _broadcastTicket = nil;
                                    if (error == nil) {
-                                       NSLog(@"Live event created! %@", liveBroadcast.snippet.title);
+                                       NSLog(@"Live event created! %@ with details of: %@", liveBroadcast.snippet, liveBroadcast.identifier);
+                                       
+                                       self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
+                                       [self changeBroadcastURL:self.broadcastURL];
                                    } else {
                                        NSLog(@"Error: %@", error.description);
                                    }

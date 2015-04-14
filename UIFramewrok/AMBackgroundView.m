@@ -33,4 +33,11 @@
     [self setNeedsDisplay:YES];
 }
 
+
+-(BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+
 @end

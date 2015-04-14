@@ -7,7 +7,6 @@
 //
 #import "AMScoreView.h"
 #import "AMScoreViewController.h"
-//#import "UIFramework/AMCollectionViewCell.h"
 #import "AMScoreCollectionCell.h"
 #import "AMScoreCollectionView.h"
 #import "UIFramework/NSView_Constrains.h"

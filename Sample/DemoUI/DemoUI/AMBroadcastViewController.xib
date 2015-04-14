@@ -7,6 +7,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
+                <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
+                <outlet property="broadcastEndTimeField" destination="Oba-iS-KDU" id="qgm-8h-gqc"/>
+                <outlet property="broadcastStartTimeField" destination="rj0-If-Bes" id="SPJ-mx-evV"/>
+                <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
                 <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
                 <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>

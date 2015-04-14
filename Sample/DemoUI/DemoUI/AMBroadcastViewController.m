@@ -157,11 +157,12 @@
     /** Grab the relevant data from the form **/
     
     // Broadcast Title
-    self.broadcastTitle = @"Test Event from ArtsMesh App";
+    self.broadcastTitle = [self.broadcastTItleField stringValue];
     
     
     // Broadcast Description
-    self.broadcastDesc = @"Here's my live event!";
+    //self.broadcastDesc = @"Here's my live event!";
+    self.broadcastDesc = [self.broadcastDescField stringValue];
     
     
     // Broadcast Scheduled Start/End Times
@@ -221,6 +222,7 @@
     // for the snippet's title, scheduled start time, and scheduled end time.
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
     newBroadcastSnippet.title = self.broadcastTitle;
+    newBroadcastSnippet.descriptionProperty = self.broadcastDesc;
     newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:nil];
     newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:nil];
     

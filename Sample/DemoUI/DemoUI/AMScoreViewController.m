@@ -98,8 +98,9 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
                       if(result == NSOKButton){
                           NSImage* image = [[NSImage alloc]
                                             initWithContentsOfURL:[panel URL]];
+                          NSImage* scoreImage = GetScoreImage(image);
                           
-                          [musicScoreItems addObject:image];
+                          [musicScoreItems addObject:scoreImage];
                           
                       }
                       
@@ -151,6 +152,23 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     else if([self.pageModeCheck checked]){
         _collectionView.timeInterval = [self.ppsField intValue];
     }
+}
+
+#define SCORE_HEIGHT 480
+static NSImage *GetScoreImage(NSImage *image) {
+    NSSize imageSize = [image size];
+    CGFloat imageAspectRatio = imageSize.width / imageSize.height;
+    // Create a thumbnail image from this image (this part of the slow operation)
+    NSSize scoreSize = NSMakeSize(SCORE_HEIGHT * imageAspectRatio, SCORE_HEIGHT);
+    NSImage *scoreImage = [[NSImage alloc] initWithSize:scoreSize];
+    [scoreImage lockFocus];
+    [image drawInRect:NSMakeRect(0, 0, scoreSize.width, scoreSize.height)
+             fromRect:NSZeroRect
+            operation:NSCompositeSourceOver
+             fraction:1.0];
+    [scoreImage unlockFocus];
+    
+    return scoreImage;
 }
 
 

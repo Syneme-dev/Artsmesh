@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define SCORE_HEIGHT 480
 //It's a state pattern to implement the scroll mode or page mode.
 @protocol TurningState <NSObject>
 -(void) startTurning;
@@ -32,6 +33,8 @@
 @property NSUInteger        mode;
 @property  NSTimeInterval   timeInterval;
 @property    CGFloat         scrollDelta;
+
+-(void) setNowBarPosition:(int)pos;
 
 -(void) removeSelectedItem;
 -(void)addViewItem:(NSView *)view;

@@ -95,7 +95,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     _nowBarView = [[AMNowBarView alloc] initWithFrame:nowBarFrame];
     [self addSubview:_nowBarView];
     
-   // [NSView addConstrains:_nowBarView toSubview:_scrollView leadingSpace:0 width:480 topSpace:0 height:]
+
     NSString *hConstrain = [NSString stringWithFormat:@"H:|-400-[_nowBarView(==%f)]",8.0];
     NSString *vConstrain = [NSString stringWithFormat:@"V:|-0-[_nowBarView]-0-|"];
     [_nowBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -136,8 +136,8 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
                                                   object:nil];
 
     [self setMode:0];
-    _scrollDelta = 180;
-    _timeInterval = 10;
+    _scrollDelta = 100;
+    _timeInterval = 2;
 }
 
 - (void) dealloc
@@ -561,6 +561,20 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     currentScrollPosition.x += pageWidth;
     [[_scrollView documentView] scrollPoint:currentScrollPosition];
     _curPageNumber++;*/
+}
+
+- (void) setNowBarPosition:(int)pos
+{
+    if (pos > 100 && pos < 0) {
+        return;
+    }
+    int collLength = [self bounds].size.width - [_nowBarView bounds].size.width;
+    int position  = pos / 100.0 * collLength;
+    
+    NSRect barRect = [_nowBarView frame];
+    barRect.origin.x = position;
+    [_nowBarView setFrame:barRect];
+
 }
 
 @end

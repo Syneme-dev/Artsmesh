@@ -25,6 +25,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 @property (weak) IBOutlet AMRatioButtonView *pageModeCheck;
 @property (weak) IBOutlet AMRatioButtonView *scrollModeCheck;
 @property (weak) IBOutlet AMRatioButtonView *ppsField;
+@property (weak) IBOutlet AMFoundryFontView *nbpField;
 
 
 @end
@@ -36,7 +37,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     [AMButtonHandler changeTabTextColor:self.removeScoreBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.loadScoreBtn toColor:UI_Color_blue];
     
-    NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 480);
+    NSRect rect = NSMakeRect(0, 0, self.view.bounds.size.width, 720);
     _collectionView = [[AMScoreCollectionView alloc] initWithFrame:rect];
     _collectionView.itemGap = 10;
     _collectionView.selectable = YES;
@@ -44,7 +45,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     [self.view addSubview:_collectionView];
     
     NSString *hConstrain = [NSString stringWithFormat:@"H:|-20-[_collectionView]-20-|"];
-    NSString *vConstrain = [NSString stringWithFormat:@"V:|-40-[_collectionView(==%f)]", 480.0];
+    NSString *vConstrain = [NSString stringWithFormat:@"V:|-40-[_collectionView(==%d)]", 480];
     [_collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView);
     [self.view addConstraints:
@@ -68,8 +69,11 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     [self.scrollModeCheck setTitle:@"Scroll Mode"];
     
     self.ppsField.delegate = self;
+    self.nbpField.delegate = self;
     
     [self onChecked:self.scrollModeCheck];
+    
+    self.nbpField.stringValue = @"30";
 }
 
 
@@ -143,17 +147,27 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     
 }
 
-- (void)controlTextDidChange:(NSNotification *)notification
+- (void)controlTextDidChange:(NSNotification *)notif
 {
-    if ([self.scrollModeCheck checked]) {
-        _collectionView.scrollDelta = [self.ppsField intValue];
+    if (![notif.object isKindOfClass:[NSTextField class]])
+        return;
+    
+    
+    if ([notif.object isEqualTo:self.ppsField]) {
+        if ([self.scrollModeCheck checked]) {
+            _collectionView.scrollDelta = [self.ppsField intValue];
+        }
+        else if([self.pageModeCheck checked]){
+            _collectionView.timeInterval = [self.ppsField intValue];
+        }
     }
-    else if([self.pageModeCheck checked]){
-        _collectionView.timeInterval = [self.ppsField intValue];
+    else if ([notif.object isEqualTo:self.nbpField])
+    {
+        [_collectionView setNowBarPosition:[self.nbpField intValue]];
     }
 }
 
-#define SCORE_HEIGHT 480
+
 static NSImage *GetScoreImage(NSImage *image) {
     NSSize imageSize = [image size];
     CGFloat imageAspectRatio = imageSize.width / imageSize.height;

@@ -28,6 +28,8 @@
 		4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A776D271A78873300281F46 /* NSView_Constrains.m */; };
 		4F15723E1AB195B700945397 /* AMTimerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F15723C1AB195B700945397 /* AMTimerView.h */; };
 		4F15723F1AB195B700945397 /* AMTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15723D1AB195B700945397 /* AMTimerView.m */; };
+		4F5F13F31ADE542B00E12613 /* AMTableCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F5F13F11ADE542B00E12613 /* AMTableCellView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F5F13F41ADE542B00E12613 /* AMTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F13F21ADE542B00E12613 /* AMTableCellView.m */; };
 		4F809F581ACECA7D009AC0E6 /* AMWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F809F561ACECA7D009AC0E6 /* AMWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F809F591ACECA7D009AC0E6 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F809F571ACECA7D009AC0E6 /* AMWindow.m */; };
 		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -90,6 +92,8 @@
 		4A776D271A78873300281F46 /* NSView_Constrains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSView_Constrains.m; sourceTree = "<group>"; };
 		4F15723C1AB195B700945397 /* AMTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTimerView.h; sourceTree = "<group>"; };
 		4F15723D1AB195B700945397 /* AMTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTimerView.m; sourceTree = "<group>"; };
+		4F5F13F11ADE542B00E12613 /* AMTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTableCellView.h; sourceTree = "<group>"; };
+		4F5F13F21ADE542B00E12613 /* AMTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTableCellView.m; sourceTree = "<group>"; };
 		4F809F561ACECA7D009AC0E6 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
 		4F809F571ACECA7D009AC0E6 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
 		4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlinkView.h; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				4F5F13F11ADE542B00E12613 /* AMTableCellView.h */,
+				4F5F13F21ADE542B00E12613 /* AMTableCellView.m */,
 				4F809F561ACECA7D009AC0E6 /* AMWindow.h */,
 				4F809F571ACECA7D009AC0E6 /* AMWindow.m */,
 				4F15723C1AB195B700945397 /* AMTimerView.h */,
@@ -295,6 +301,7 @@
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
+				4F5F13F31ADE542B00E12613 /* AMTableCellView.h in Headers */,
 				2658877A19899ABA001DA266 /* AMPopUpView.h in Headers */,
 				AFAC30C919382E71000FFC5F /* AMTextView.h in Headers */,
 				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
@@ -392,6 +399,7 @@
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,
+				4F5F13F41ADE542B00E12613 /* AMTableCellView.m in Sources */,
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,
 				AFAC30CA19382E71000FFC5F /* AMTextView.m in Sources */,
 				AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */,

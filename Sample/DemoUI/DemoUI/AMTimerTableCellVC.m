@@ -13,21 +13,22 @@
 #import "AMTimerTabVC.h"
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMFoundryFontView.h"
+#import "UIFramework/AMTableCellView.h"
 
 static NSString * const PingCommandFormat =
     @"ping -c 3 -q %@ | tail -1 | awk '{ print $4 }' | awk -F'/' '{ print $2 }'";
 
 
 @interface AMTimerTableCellVC () <AMPopUpViewDelegeate, AMCheckBoxDelegeate>
-@property (weak) IBOutlet AMPopUpView *groupPopup;
-@property (weak, nonatomic) IBOutlet AMPopUpView *bpmLabel;
-@property (weak, nonatomic) IBOutlet AMPopUpView *delayLabel;
-@property (weak) IBOutlet AMPopUpView *slowdownPopup;
-//@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
-@property (weak, nonatomic) IBOutlet NSTextField *upperNumber;
-@property (weak, nonatomic) IBOutlet NSTextField *lowNumber;
-@property (weak) IBOutlet AMCheckBoxView *connectCheckbox;
-@property (weak, nonatomic) IBOutlet NSTextField *metronomeLabel;
+@property (weak)            IBOutlet AMPopUpView*       groupPopup;
+@property (weak, nonatomic) IBOutlet AMFoundryFontView* bpmLabel;
+@property (weak, nonatomic) IBOutlet AMPopUpView*       delayLabel;
+@property (weak)            IBOutlet AMPopUpView*       slowdownPopup;
+@property (weak, nonatomic) IBOutlet AMFoundryFontView* upperNumber;
+@property (weak, nonatomic) IBOutlet AMFoundryFontView* lowNumber;
+@property (weak)            IBOutlet AMCheckBoxView*    connectCheckbox;
+@property (weak, nonatomic) IBOutlet AMFoundryFontView* metronomeLabel;
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, readonly) BOOL isOnLine;
 @property (nonatomic) BOOL isLocalGroup;

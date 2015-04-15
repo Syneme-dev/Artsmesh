@@ -20,8 +20,8 @@ static NSString * const PingCommandFormat =
 
 @interface AMTimerTableCellVC () <AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *groupPopup;
-@property (weak, nonatomic) IBOutlet NSTextField *bpmLabel;
-@property (weak, nonatomic) IBOutlet NSTextField *delayLabel;
+@property (weak, nonatomic) IBOutlet AMPopUpView *bpmLabel;
+@property (weak, nonatomic) IBOutlet AMPopUpView *delayLabel;
 @property (weak) IBOutlet AMPopUpView *slowdownPopup;
 //@property (weak, nonatomic) IBOutlet NSComboBox *slowdownCombox;
 @property (weak, nonatomic) IBOutlet NSTextField *upperNumber;

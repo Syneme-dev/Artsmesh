@@ -11,6 +11,7 @@
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMOSCGroups/AMOSCDefine.h"
 #import "UIFramework/AMPopUpView.h"
+#import "UIFramework/AMFoundryFontView.h"
 
 NSString * const AMTimerStartNotification = @"AMTimerStartNotification";
 NSString * const AMTimerStopNotification = @"AMTimerStopNotification";
@@ -41,14 +42,14 @@ typedef enum : NSInteger {
 
 @property (weak) IBOutlet AMPopUpView *modePopup;
 
-@property (weak) IBOutlet NSTextField *leftHoursTF;
-@property (weak) IBOutlet NSTextField *leftMinutesTF;
-@property (weak) IBOutlet NSTextField *leftSecondsTF;
+@property (weak) IBOutlet AMFoundryFontView* leftHoursTF;
+@property (weak) IBOutlet AMFoundryFontView* leftMinutesTF;
+@property (weak) IBOutlet AMFoundryFontView* leftSecondsTF;
 @property (nonatomic) NSArray *leftTimeTFs;
 
-@property (weak) IBOutlet NSTextField *rightHoursTF;
-@property (weak) IBOutlet NSTextField *rightMinutesTF;
-@property (weak) IBOutlet NSTextField *rightSecondsTF;
+@property (weak) IBOutlet AMFoundryFontView* rightHoursTF;
+@property (weak) IBOutlet AMFoundryFontView* rightMinutesTF;
+@property (weak) IBOutlet AMFoundryFontView* rightSecondsTF;
 @property (nonatomic) NSArray *rightTimeTFs;
 
 @property (weak) IBOutlet NSButton *addButton;
@@ -58,7 +59,7 @@ typedef enum : NSInteger {
 @property (nonatomic) NSMutableArray *tableCellControllers;
 @property (weak) IBOutlet NSButton *playButton;
 @property (weak) IBOutlet NSButton *stopButton;
-@property (weak) IBOutlet NSTextField *arrowLabel;
+@property (weak) IBOutlet AMFoundryFontView* arrowLabel;
 @end
 
 @implementation AMTimerTabVC

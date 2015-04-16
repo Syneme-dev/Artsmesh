@@ -11,6 +11,7 @@
 //#import "AMTimer/AMTimer.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMTimerTabVC.h"
+#import "AMClockTabVC.h"
 
 @interface AMTimerViewController ()
 @property (weak) IBOutlet NSButton *clockBtn;
@@ -23,9 +24,19 @@
 
 -(void)awakeFromNib
 {
+    [self addViewController:[AMClockTabVC class]
+                    fromNib:@"AMClockTabVC"
+                     bundle:nil];
+    
     [self addViewController:[AMTimerTabVC class]
                     fromNib:@"AMTimerTabVC"
                      bundle:nil];
+    
+    
+    
+    [AMButtonHandler changeTabTextColor:self.clockBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
+
     [self.timerBtn performClick:nil];
 }
 
@@ -35,8 +46,6 @@
     [self.tabButtons addObject:self.clockBtn];
     [self.tabButtons addObject:self.timerBtn];
     self.showingTabsCount=2;
-    [AMButtonHandler changeTabTextColor:self.clockBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 }
 
 - (void)addViewController:(Class)aViewControllerClass
@@ -74,13 +83,13 @@
 - (IBAction)clockBtnClick:(id)sender
 {
     [self pushDownButton:self.clockBtn];
-    [self.tabView selectTabViewItemAtIndex:1];
+    [self.tabView selectTabViewItemAtIndex:0];
 }
 
 - (IBAction)timerBtnClick:(id)sender
 {
     [self pushDownButton:self.timerBtn];
-    [self.tabView selectTabViewItemAtIndex:0];
+    [self.tabView selectTabViewItemAtIndex:1];
 }
 
 @end

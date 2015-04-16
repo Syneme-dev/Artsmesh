@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
@@ -32,29 +32,19 @@
                     </textFieldCell>
                 </textField>
                 <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="h28-9m-GVK">
-                    <rect key="frame" x="0.0" y="0.0" width="463" height="524"/>
+                    <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="TimerTab" identifier="1" id="Mos-rT-Lcy">
                             <view key="view" identifier="timerTab" id="iap-nC-768">
-                                <rect key="frame" x="0.0" y="0.0" width="463" height="524"/>
+                                <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="ClockTab" identifier="2" id="M5E-b7-hQd">
                             <view key="view" identifier="clockTab" id="bXQ-Lf-ElL">
-                                <rect key="frame" x="0.0" y="0.0" width="463" height="524"/>
+                                <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JfA-4F-9Iu">
-                                        <rect key="frame" x="196" y="284" width="66" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clock Tab" id="Fxs-4h-Xs8">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -73,8 +63,8 @@
                         <action selector="clockBtnClick:" target="-2" id="oxX-if-UqI"/>
                     </connections>
                 </button>
-                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GJj-K0-zhz">
-                    <rect key="frame" x="342" y="525" width="50" height="14"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="GJj-K0-zhz">
+                    <rect key="frame" x="344" y="525" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="EIM-Fe-dEl"/>
                         <constraint firstAttribute="width" constant="50" id="J2t-hn-Kw9"/>
@@ -96,7 +86,7 @@
                 <constraint firstItem="PpJ-aB-EKN" firstAttribute="leading" secondItem="GJj-K0-zhz" secondAttribute="trailing" constant="6" id="Hae-0d-xmR"/>
                 <constraint firstItem="PpJ-aB-EKN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Pqv-nh-qRL"/>
                 <constraint firstAttribute="trailing" secondItem="h28-9m-GVK" secondAttribute="trailing" id="Tlc-dX-HXf"/>
-                <constraint firstItem="h28-9m-GVK" firstAttribute="top" secondItem="PpJ-aB-EKN" secondAttribute="bottom" constant="1" id="jSV-pi-DIX"/>
+                <constraint firstItem="h28-9m-GVK" firstAttribute="top" secondItem="PpJ-aB-EKN" secondAttribute="bottom" constant="3" id="jSV-pi-DIX"/>
                 <constraint firstItem="Chv-Eg-hpW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="tS9-Nf-Fs3"/>
                 <constraint firstItem="h28-9m-GVK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="uVh-Wb-05l"/>
             </constraints>

@@ -32,7 +32,10 @@
 
 @property NSUInteger        mode;
 @property  NSTimeInterval   timeInterval;
-@property    CGFloat         scrollDelta;
+//@property    CGFloat         scrollDelta;
+
+-(CGFloat)  pixelsPerSecond;
+-(void)     setPixelsPerSecond:(CGFloat)pps;
 
 -(void) setNowBarPosition:(int)pos;
 

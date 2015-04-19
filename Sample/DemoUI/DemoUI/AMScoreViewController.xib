@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMScoreViewController">
             <connections>
                 <outlet property="loadScoreBtn" destination="tOL-jT-WuM" id="ehr-B1-wPY"/>
+                <outlet property="modeTitle" destination="tHP-vj-eUZ" id="zGr-q5-zpw"/>
+                <outlet property="nbpField" destination="oa3-bE-qx8" id="FXk-Pc-30Z"/>
                 <outlet property="pageModeCheck" destination="hLF-6J-9BO" id="D4G-7R-hzC"/>
                 <outlet property="ppsField" destination="p57-r5-9jm" id="F5I-oR-Z0T"/>
                 <outlet property="removeScoreBtn" destination="8pZ-tm-D4t" id="qQw-2Q-NZb"/>
@@ -73,19 +75,19 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="667-QA-vxZ"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p57-r5-9jm" customClass="AMFoundryFontView">
-                    <rect key="frame" x="390" y="17" width="40" height="20"/>
+                    <rect key="frame" x="389" y="17" width="40" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="cI1-KX-uMk"/>
                         <constraint firstAttribute="height" constant="20" id="zKs-Vg-YiJ"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="PPS" id="xyA-QI-GpI">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" title="PPS" id="xyA-QI-GpI">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oa3-bE-qx8" customClass="AMFoundryFontView">
-                    <rect key="frame" x="577" y="17" width="44" height="20"/>
+                    <rect key="frame" x="572" y="17" width="44" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="7qV-T4-9jl"/>
                         <constraint firstAttribute="width" constant="40" id="ceP-sZ-caW"/>
@@ -109,19 +111,19 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-vj-eUZ" customClass="AMFoundryFontView">
-                    <rect key="frame" x="304" y="20" width="85" height="17"/>
+                    <rect key="frame" x="304" y="20" width="84" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="ezo-vi-j7C"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ucD-Nt-kAt"/>
+                        <constraint firstAttribute="width" constant="80" id="ucD-Nt-kAt"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="PIXELS SEC:" id="dOJ-zb-jFr">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PIXELS SEC:" id="dOJ-zb-jFr">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rRW-jL-gt8">
-                    <rect key="frame" x="478" y="20" width="3" height="17"/>
+                    <rect key="frame" x="477" y="20" width="3" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="3" id="0h5-kP-EkD"/>
                         <constraint firstAttribute="height" constant="17" id="WLg-5b-Akk"/>
@@ -129,7 +131,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ogg-Bo-mPq"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sUK-aS-eh7" customClass="AMFoundryFontView">
-                    <rect key="frame" x="499" y="20" width="77" height="17"/>
+                    <rect key="frame" x="498" y="20" width="77" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="73" id="Mij-2Q-gjD"/>
                         <constraint firstAttribute="height" constant="17" id="pBn-ua-fw2"/>
@@ -163,7 +165,7 @@
                 <constraint firstItem="tHP-vj-eUZ" firstAttribute="leading" secondItem="K4q-0c-LqW" secondAttribute="trailing" constant="20" id="XRj-eK-zeE"/>
                 <constraint firstAttribute="bottom" secondItem="sUK-aS-eh7" secondAttribute="bottom" constant="20" id="aqr-cE-OgN"/>
                 <constraint firstItem="tOL-jT-WuM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="ayH-Az-sLJ"/>
-                <constraint firstItem="oa3-bE-qx8" firstAttribute="leading" secondItem="sUK-aS-eh7" secondAttribute="trailing" constant="5" id="e6Z-Hf-ATZ"/>
+                <constraint firstItem="oa3-bE-qx8" firstAttribute="leading" secondItem="sUK-aS-eh7" secondAttribute="trailing" constant="1" id="e6Z-Hf-ATZ"/>
                 <constraint firstAttribute="bottom" secondItem="rRW-jL-gt8" secondAttribute="bottom" constant="20" id="i5I-xr-LxM"/>
                 <constraint firstAttribute="bottom" secondItem="K4q-0c-LqW" secondAttribute="bottom" constant="20" id="jfU-MI-E5g"/>
                 <constraint firstItem="hLF-6J-9BO" firstAttribute="leading" secondItem="9NV-pX-X7W" secondAttribute="trailing" constant="10" id="jmt-pz-0b7"/>

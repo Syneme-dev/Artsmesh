@@ -1,4 +1,7 @@
-
+html {
+	overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}
 #header{
 	/**
     padding-top:0 !important;

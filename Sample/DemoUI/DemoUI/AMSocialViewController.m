@@ -53,7 +53,8 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:self];
     [self.socialWebTab setPolicyDelegate:self];
     [self.socialWebTab setUIDelegate:self];
-    ;
+    [self.socialWebTab setWantsLayer:YES];
+    
     self.archiveScale=1;
 
 }
@@ -229,9 +230,6 @@ typedef enum {
     NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
     [frame.webView stringByEvaluatingJavaScriptFromString:
             loginJs];
-    
-    NSLog(@"username is : %@", myUserName);
-    NSLog(@"pass is : %@", password);
     
     isLogin = YES;
 }

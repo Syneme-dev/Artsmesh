@@ -52,10 +52,10 @@
                     </connections>
                 </button>
                 <customView identifier="scrollMode" translatesAutoresizingMaskIntoConstraints="NO" id="9NV-pX-X7W" customClass="AMRatioButtonView">
-                    <rect key="frame" x="43" y="15" width="90" height="25"/>
+                    <rect key="frame" x="93" y="15" width="70" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Y3d-jZ-iZW"/>
-                        <constraint firstAttribute="width" constant="90" id="Yf1-0w-oMg"/>
+                        <constraint firstAttribute="width" constant="70" id="Yf1-0w-oMg"/>
                     </constraints>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DaC-QY-dQd">
@@ -67,7 +67,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="fsc-iT-ue0"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K4q-0c-LqW">
-                    <rect key="frame" x="283" y="20" width="3" height="17"/>
+                    <rect key="frame" x="288" y="20" width="3" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="3" id="2vO-bB-8oi"/>
                         <constraint firstAttribute="height" constant="17" id="CLw-wS-o1u"/>
@@ -75,7 +75,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="667-QA-vxZ"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p57-r5-9jm" customClass="AMFoundryFontView">
-                    <rect key="frame" x="389" y="17" width="40" height="20"/>
+                    <rect key="frame" x="394" y="17" width="40" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="cI1-KX-uMk"/>
                         <constraint firstAttribute="height" constant="20" id="zKs-Vg-YiJ"/>
@@ -87,7 +87,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oa3-bE-qx8" customClass="AMFoundryFontView">
-                    <rect key="frame" x="572" y="17" width="44" height="20"/>
+                    <rect key="frame" x="577" y="17" width="44" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="7qV-T4-9jl"/>
                         <constraint firstAttribute="width" constant="40" id="ceP-sZ-caW"/>
@@ -111,7 +111,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-vj-eUZ" customClass="AMFoundryFontView">
-                    <rect key="frame" x="304" y="20" width="84" height="17"/>
+                    <rect key="frame" x="309" y="20" width="84" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="ezo-vi-j7C"/>
                         <constraint firstAttribute="width" constant="80" id="ucD-Nt-kAt"/>
@@ -123,7 +123,7 @@
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rRW-jL-gt8">
-                    <rect key="frame" x="477" y="20" width="3" height="17"/>
+                    <rect key="frame" x="482" y="20" width="3" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="3" id="0h5-kP-EkD"/>
                         <constraint firstAttribute="height" constant="17" id="WLg-5b-Akk"/>
@@ -131,7 +131,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ogg-Bo-mPq"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sUK-aS-eh7" customClass="AMFoundryFontView">
-                    <rect key="frame" x="498" y="20" width="77" height="17"/>
+                    <rect key="frame" x="503" y="20" width="77" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="73" id="Mij-2Q-gjD"/>
                         <constraint firstAttribute="height" constant="17" id="pBn-ua-fw2"/>
@@ -143,18 +143,30 @@
                     </textFieldCell>
                 </textField>
                 <customView identifier="pageMode" translatesAutoresizingMaskIntoConstraints="NO" id="hLF-6J-9BO" customClass="AMRatioButtonView">
-                    <rect key="frame" x="143" y="15" width="90" height="25"/>
+                    <rect key="frame" x="168" y="15" width="70" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="01x-EH-BqT"/>
-                        <constraint firstAttribute="width" constant="90" id="ylQ-J4-IfK"/>
+                        <constraint firstAttribute="width" constant="70" id="ylQ-J4-IfK"/>
                     </constraints>
                 </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nz4-jn-TMN" customClass="AMFoundryFontView">
+                    <rect key="frame" x="41" y="20" width="54" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="e4K-P9-LrR"/>
+                        <constraint firstAttribute="height" constant="17" id="xjC-X6-81H"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MODE:" id="4nP-lo-z5u">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="DaC-QY-dQd" secondAttribute="bottom" constant="20" id="7RG-JX-y7d"/>
+                <constraint firstAttribute="bottom" secondItem="Nz4-jn-TMN" secondAttribute="bottom" constant="20" id="COk-3w-Ru7"/>
                 <constraint firstItem="rRW-jL-gt8" firstAttribute="leading" secondItem="p57-r5-9jm" secondAttribute="trailing" constant="50" id="ENa-UY-DmZ"/>
                 <constraint firstItem="jpz-db-UON" firstAttribute="leading" secondItem="8pZ-tm-D4t" secondAttribute="trailing" constant="5" id="EUM-PB-xfb"/>
-                <constraint firstItem="9NV-pX-X7W" firstAttribute="leading" secondItem="DaC-QY-dQd" secondAttribute="trailing" constant="20" id="KED-9e-fh2"/>
                 <constraint firstItem="8pZ-tm-D4t" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="KKr-Kp-IGx"/>
                 <constraint firstItem="jpz-db-UON" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="NFF-yq-5a7"/>
                 <constraint firstItem="K4q-0c-LqW" firstAttribute="leading" secondItem="hLF-6J-9BO" secondAttribute="trailing" constant="50" id="OVF-S5-B1O"/>
@@ -168,11 +180,13 @@
                 <constraint firstItem="oa3-bE-qx8" firstAttribute="leading" secondItem="sUK-aS-eh7" secondAttribute="trailing" constant="1" id="e6Z-Hf-ATZ"/>
                 <constraint firstAttribute="bottom" secondItem="rRW-jL-gt8" secondAttribute="bottom" constant="20" id="i5I-xr-LxM"/>
                 <constraint firstAttribute="bottom" secondItem="K4q-0c-LqW" secondAttribute="bottom" constant="20" id="jfU-MI-E5g"/>
-                <constraint firstItem="hLF-6J-9BO" firstAttribute="leading" secondItem="9NV-pX-X7W" secondAttribute="trailing" constant="10" id="jmt-pz-0b7"/>
+                <constraint firstItem="hLF-6J-9BO" firstAttribute="leading" secondItem="9NV-pX-X7W" secondAttribute="trailing" constant="5" id="jmt-pz-0b7"/>
                 <constraint firstItem="sUK-aS-eh7" firstAttribute="leading" secondItem="rRW-jL-gt8" secondAttribute="trailing" constant="20" id="kAp-Vx-BY4"/>
+                <constraint firstItem="Nz4-jn-TMN" firstAttribute="leading" secondItem="DaC-QY-dQd" secondAttribute="trailing" constant="20" id="meO-tH-4zP"/>
                 <constraint firstAttribute="bottom" secondItem="9NV-pX-X7W" secondAttribute="bottom" constant="15" id="nYb-4m-IIn"/>
                 <constraint firstAttribute="bottom" secondItem="p57-r5-9jm" secondAttribute="bottom" constant="17" id="oK2-CI-sZV"/>
                 <constraint firstAttribute="trailing" secondItem="tOL-jT-WuM" secondAttribute="trailing" constant="13" id="t1Y-UE-1AY"/>
+                <constraint firstItem="9NV-pX-X7W" firstAttribute="leading" secondItem="Nz4-jn-TMN" secondAttribute="trailing" id="ukk-JG-df7"/>
                 <constraint firstItem="p57-r5-9jm" firstAttribute="leading" secondItem="tHP-vj-eUZ" secondAttribute="trailing" constant="5" id="ulr-Of-uPw"/>
                 <constraint firstAttribute="bottom" secondItem="tHP-vj-eUZ" secondAttribute="bottom" constant="20" id="x2h-tH-bCe"/>
             </constraints>

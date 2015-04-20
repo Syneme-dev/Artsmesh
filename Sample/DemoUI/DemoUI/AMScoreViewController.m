@@ -64,10 +64,10 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     
 
     self.pageModeCheck.delegate = self;
-    [self.pageModeCheck setTitle:@"Page Mode"];
+    [self.pageModeCheck setTitle:@"PAGE MODE"];
     
     self.scrollModeCheck.delegate = self;
-    [self.scrollModeCheck setTitle:@"Scroll Mode"];
+    [self.scrollModeCheck setTitle:@"SCROLL MODE"];
     
     self.ppsField.delegate = self;
     self.nbpField.delegate = self;

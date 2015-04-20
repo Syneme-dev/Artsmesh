@@ -14,6 +14,50 @@
 
 NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
 
+@interface AMScrollSpeedCtrl : NSObject
+{
+    CGFloat            _pixelsPerSecond;
+    CGFloat           _scrollDelta;
+    NSTimeInterval    _timeInterval;
+    //setDelta;
+}
+@end
+@implementation AMScrollSpeedCtrl
+
+-(void) setPixelsPerSecond:(CGFloat)pps
+{
+    if (pps <= 0) {
+        return;
+    }
+    
+    _pixelsPerSecond = pps;
+    if (_pixelsPerSecond >= 100) {
+        _timeInterval = 0.01;
+        _scrollDelta  = _pixelsPerSecond/100.0;
+    }
+    else{
+        _timeInterval = 1.0 / _pixelsPerSecond;
+        _scrollDelta  = 1;
+    }
+}
+
+- (CGFloat) pixelsPerSecond
+{
+    return _pixelsPerSecond;
+}
+
+- (CGFloat) scrollDelta
+{
+    return _scrollDelta;
+}
+
+- (NSTimeInterval) timeInterval
+{
+    return _timeInterval;
+}
+
+@end
+
 @interface AMScoreCollectionView()<NSDraggingDestination, NSDraggingSource>
 @end
 
@@ -29,10 +73,12 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     NSEvent*        mouseDownEvent;
     int             mouseDownIndex;
     
-    NSTimer*        _scrollTimer;
-    AMNowBarView*   _nowBarView;
+    NSTimer*            _scrollTimer;
+    AMNowBarView*       _nowBarView;
     
-    NSInteger        _curPageNumber;
+    NSInteger           _curPageNumber;
+    
+    AMScrollSpeedCtrl*  _scrollSpeedCtrl;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -136,8 +182,11 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
                                                   object:nil];
 
     [self setMode:0];
-    _scrollDelta = 100;
+//    _scrollDelta = 100;
     _timeInterval = 2;
+    
+    _scrollSpeedCtrl = [[AMScrollSpeedCtrl alloc] init];
+    [_scrollSpeedCtrl setPixelsPerSecond:100];
 }
 
 - (void) dealloc
@@ -481,9 +530,9 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
         _curPageNumber = 0;
     }
     
-    if (self.mode == 0 && _scrollDelta > 0) {
+    if (self.mode == 0 && [_scrollSpeedCtrl pixelsPerSecond] > 0) {
        // [self onStopTimer:notfication];
-        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:[_scrollSpeedCtrl timeInterval]
                                                         target:self
                                                       selector:@selector(startScrollScore)
                                                       userInfo:nil
@@ -521,9 +570,9 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 
 - (void) onResumeTimer : (NSNotification*) notfication
 {
-    if (self.mode == 0) {
+    if (self.mode == 0 && [_scrollSpeedCtrl pixelsPerSecond] > 0) {
         // [self onStopTimer:notfication];
-        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+        _scrollTimer = [NSTimer scheduledTimerWithTimeInterval:[_scrollSpeedCtrl timeInterval]
                                                         target:self
                                                       selector:@selector(startScrollScore)
                                                       userInfo:nil
@@ -544,7 +593,8 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
 - (void) startScrollScore
 {
     NSPoint currentScrollPosition=[[_scrollView contentView] bounds].origin;
-     currentScrollPosition.x += _scrollDelta*0.01;
+    // currentScrollPosition.x += _scrollDelta*0.01;
+    currentScrollPosition.x += [_scrollSpeedCtrl scrollDelta];
      [[_scrollView documentView] scrollPoint:currentScrollPosition];
 }
 
@@ -562,6 +612,18 @@ sourceOperationMaskForDraggingContext:(NSDraggingContext)context
     [[_scrollView documentView] scrollPoint:currentScrollPosition];
     _curPageNumber++;*/
 }
+
+-(CGFloat)  pixelsPerSecond
+{
+    return [_scrollSpeedCtrl pixelsPerSecond];
+}
+
+-(void) setPixelsPerSecond:(CGFloat)pps
+{
+    [_scrollSpeedCtrl setPixelsPerSecond:pps];
+}
+
+
 
 - (void) setNowBarPosition:(int)pos
 {

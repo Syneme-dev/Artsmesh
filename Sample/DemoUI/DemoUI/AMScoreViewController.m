@@ -26,6 +26,7 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
 @property (weak) IBOutlet AMRatioButtonView *scrollModeCheck;
 @property (weak) IBOutlet AMRatioButtonView *ppsField;
 @property (weak) IBOutlet AMFoundryFontView *nbpField;
+@property (weak) IBOutlet AMFoundryFontView *modeTitle;
 
 
 @end
@@ -131,20 +132,12 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     [self.pageModeCheck     setChecked:NO];
     [sender setChecked:YES];
     
-    if(sender == self.scrollModeCheck)
-    {
-        [_collectionView setMode:0];
-        self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
-                                         _collectionView.scrollDelta];
+    if(sender == self.scrollModeCheck){
+        [self setScrollState];
     }
     else if (sender == self.pageModeCheck) {
-        
-        [_collectionView setMode:1];
-        self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
-                                         _collectionView.timeInterval];
+        [self setPageState];
     }
-    
-    
 }
 
 - (void)controlTextDidChange:(NSNotification *)notif
@@ -152,13 +145,12 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
     if (![notif.object isKindOfClass:[NSTextField class]])
         return;
     
-    
     if ([notif.object isEqualTo:self.ppsField]) {
         if ([self.scrollModeCheck checked]) {
-            _collectionView.scrollDelta = [self.ppsField intValue];
+            [_collectionView setPixelsPerSecond:[self.ppsField intValue]];
         }
         else if([self.pageModeCheck checked]){
-            _collectionView.timeInterval = [self.ppsField intValue];
+             _collectionView.timeInterval = [self.ppsField intValue];
         }
     }
     else if ([notif.object isEqualTo:self.nbpField])
@@ -166,6 +158,24 @@ NSString * const AMMusicScoreItemType = @"com.artmesh.musicscore";
         [_collectionView setNowBarPosition:[self.nbpField intValue]];
     }
 }
+
+-(void) setScrollState
+{
+    [self.modeTitle setStringValue:@"PIXELS SEC:"];
+    [_collectionView setMode:0];
+    self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
+                                 [_collectionView pixelsPerSecond]];
+    
+}
+
+- (void) setPageState
+{
+    [self.modeTitle setStringValue:@"PAGE TIME:"];
+    [_collectionView setMode:1];
+    self.ppsField.stringValue = [NSString stringWithFormat:@"%.0f",
+                                 _collectionView.timeInterval];
+}
+
 
 
 static NSImage *GetScoreImage(NSImage *image) {

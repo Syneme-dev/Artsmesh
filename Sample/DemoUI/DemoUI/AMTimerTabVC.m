@@ -130,7 +130,7 @@ typedef enum : NSInteger {
 
 - (IBAction)stopTimer:(id)sender
 {
-    if (self.timer.valid) { // running or pause state
+    if (self.timerState == AMTimerStatePaused || self.timerState == AMTimerStateRunning) { // running or pause state
         self.timerState = AMTimerStateStopped;
         //self.playButton.title = @"Start";
         self.playButton.image = [NSImage imageNamed:@"timer_start"];

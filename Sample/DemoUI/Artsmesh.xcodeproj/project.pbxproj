@@ -117,6 +117,8 @@
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
 		4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */; };
+		4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9677761ADF8D200037BB64 /* AMClockTabVC.m */; };
+		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
@@ -472,6 +474,9 @@
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
 		4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNowBarView.h; sourceTree = "<group>"; };
 		4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNowBarView.m; sourceTree = "<group>"; };
+		4F9677751ADF8D200037BB64 /* AMClockTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMClockTabVC.h; sourceTree = "<group>"; };
+		4F9677761ADF8D200037BB64 /* AMClockTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMClockTabVC.m; sourceTree = "<group>"; };
+		4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMClockTabVC.xib; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
@@ -661,14 +666,8 @@
 				AFD34795195BEF620055043E /* AMTimerViewController.h */,
 				AFD34796195BEF620055043E /* AMTimerViewController.m */,
 				AFD34797195BEF620055043E /* AMTimerViewController.xib */,
-				CE5954821A3E821F00676D12 /* AMTimerTabVC.h */,
-				CE5954831A3E821F00676D12 /* AMTimerTabVC.m */,
-				CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */,
-				209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */,
-				209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */,
-				2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */,
-				2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */,
-				2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */,
+				4F9677741ADF8B540037BB64 /* ClockTab */,
+				4F9677731ADF8B2A0037BB64 /* TimerTab */,
 			);
 			name = TimerPanel;
 			sourceTree = "<group>";
@@ -1049,6 +1048,31 @@
 			name = OutlineItems;
 			sourceTree = "<group>";
 		};
+		4F9677731ADF8B2A0037BB64 /* TimerTab */ = {
+			isa = PBXGroup;
+			children = (
+				CE5954821A3E821F00676D12 /* AMTimerTabVC.h */,
+				CE5954831A3E821F00676D12 /* AMTimerTabVC.m */,
+				CE5954841A3E821F00676D12 /* AMTimerTabVC.xib */,
+				209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */,
+				209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */,
+				2023E8E81A50F1970034FB68 /* AMTimerTableCellVC.h */,
+				2023E8E91A50F1970034FB68 /* AMTimerTableCellVC.m */,
+				2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */,
+			);
+			name = TimerTab;
+			sourceTree = "<group>";
+		};
+		4F9677741ADF8B540037BB64 /* ClockTab */ = {
+			isa = PBXGroup;
+			children = (
+				4F9677751ADF8D200037BB64 /* AMClockTabVC.h */,
+				4F9677761ADF8D200037BB64 /* AMClockTabVC.m */,
+				4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */,
+			);
+			name = ClockTab;
+			sourceTree = "<group>";
+		};
 		AF82E33F190CA7FC0083487C /* font */ = {
 			isa = PBXGroup;
 			children = (
@@ -1338,6 +1362,7 @@
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				269FB84E1998816E00355312 /* AMBroadcastViewController.xib in Resources */,
 				4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */,
+				4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
@@ -1498,6 +1523,7 @@
 				013A56EE1A5A64EE001D319F /* AMJacktripSettingsVC.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
+				4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
 				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
 				4A32A1091A7220B1006FEDD7 /* AMTabItemView.m in Sources */,

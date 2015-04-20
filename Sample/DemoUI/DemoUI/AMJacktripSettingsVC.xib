@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMJacktripSettingsVC">
@@ -137,18 +138,6 @@
                         <constraint firstAttribute="width" constant="118" id="Zco-ji-umY"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CHANNEL COUNT:" id="rkN-xf-RCX">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hcy-2O-cf2" customClass="AMFoundryFontView">
-                    <rect key="frame" x="42" y="625" width="169" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="17" id="JgZ-o8-nKe"/>
-                        <constraint firstAttribute="width" constant="165" id="geX-4g-BuJ"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="QUEUE BUFFER LENGTH:" id="qKl-ln-d9Z">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -307,6 +296,18 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcy-2O-cf2" customClass="AMFoundryFontView">
+                    <rect key="frame" x="43" y="625" width="169" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="JgZ-o8-nKe"/>
+                        <constraint firstAttribute="width" constant="165" id="geX-4g-BuJ"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="QUEUE BUFFER LENGTH:" id="qKl-ln-d9Z">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="OTQ-85-mH8" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="167" id="0t6-GI-COP"/>

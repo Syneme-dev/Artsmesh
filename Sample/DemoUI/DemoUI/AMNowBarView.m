@@ -8,6 +8,9 @@
 
 #import "AMNowBarView.h"
 
+NSString* const AMNowBarType = @"com.artsmesh.nowbar";
+
+
 @implementation AMNowBarView
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -46,6 +49,34 @@
     [bottomTriangle lineToPoint:NSMakePoint(width/2, width+1)];
     [bottomTriangle fill];
 }
+
+- (void) mouseDragged:(NSEvent *)theEvent
+{
+    NSPoint dragPoint = [theEvent       locationInWindow];
+    
+    NSRect  dragRect = [self frame];
+    NSPoint p = [self convertPoint:dragPoint fromView:nil];
+    
+    dragRect.origin.x = p.x;
+    dragRect.origin.y = p.y;
+
+    
+    NSPasteboardItem *pasteboardItem = [[NSPasteboardItem alloc] init];
+    [pasteboardItem setString:@"" forType:AMNowBarType];
+    
+    NSImage* dragImage = [[NSImage alloc] initWithData:[self dataWithPDFInsideRect:[self bounds]]];
+    
+    NSDraggingItem *draggingItem = [[NSDraggingItem alloc]
+                                    initWithPasteboardWriter:pasteboardItem];
+    [draggingItem setDraggingFrame:dragRect contents:dragImage];
+    
+    [self beginDraggingSessionWithItems:@[draggingItem]
+                                  event:theEvent
+                                 source:self];
+    
+    
+}
+
 
 
 

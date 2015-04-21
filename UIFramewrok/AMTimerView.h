@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMTimerView : NSImageView
+@interface AMTimerView : NSView
 
 @end

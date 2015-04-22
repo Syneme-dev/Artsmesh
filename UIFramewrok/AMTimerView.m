@@ -17,6 +17,8 @@
     AMFoundryFontView* second;
     AMFoundryFontView* firstColon;
     AMFoundryFontView* secColon;
+    
+    NSTimer* _clock;
 }
 
 @end
@@ -32,16 +34,16 @@
 - (id) initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect]) {
-        [self initTimeArea];
+ //       [self initTimeArea];
     }
     return self;
 }
 
 /*
  init Time UI presence.
- |margin 00:00:00 margin|
- magin = 1/10 width, the witdh of '0' is equal to ':'
- so '00' is 1/5 width
+ | margin 00:00:00 margin |
+ magin = 1/10 width, the witdh of '0' is equal to ':' with 1/10 width, 
+ then so '00' is 1/5 width
  
  */
 - (void) initTimeArea
@@ -83,15 +85,80 @@
     [self setBasicFoundryStyle:second];
 }
 
-- (void) setBasicFoundryStyle : (AMFoundryFontView*) foundryFont
-{
-    [foundryFont setLineBreakMode:NSLineBreakByClipping];
-    [foundryFont setAlignment:NSCenterTextAlignment];
-    [foundryFont setBordered:NO];
-    [foundryFont setTextColor:UI_Color_b7b7b7];
-    [foundryFont setDrawsBackground:NO];
-    [foundryFont setFontSize:28];
 
+- (void) awakeFromNib
+{
+    [self initTimeArea];
+    [self updateClock:nil];
+    [self startTime];
 }
+
+- (void) setBasicFoundryStyle : (AMFoundryFontView*) foundryFontView
+{
+    [foundryFontView setLineBreakMode:NSLineBreakByClipping];
+    [foundryFontView setAlignment:NSCenterTextAlignment];
+    [foundryFontView setBordered:NO];
+    [foundryFontView setTextColor:UI_Color_b7b7b7];
+    [foundryFontView setDrawsBackground:NO];
+    CGFloat fontSize = [self properFontSize:foundryFontView];
+    [foundryFontView setFontSize:fontSize];
+}
+
+
+- (CGFloat) properFontSize : (AMFoundryFontView*) foundryFontView
+{
+    //@"00"
+    if ([foundryFontView stringValue].length == 2) {
+        return 28;
+    }
+    else
+        return 28 - 2;
+}
+
+- (void) initTimeZone : (NSTimeZone*) zone
+{
+    if (zone == nil)
+        zone = [NSTimeZone systemTimeZone];
+
+    
+}
+
+- (void) startTime
+{
+    NSTimeInterval interval =  (int)[NSDate timeIntervalSinceReferenceDate] + 1;
+    NSDate* fireDate = [NSDate dateWithTimeIntervalSinceReferenceDate:interval];
+    
+    NSTimer *timer = [[NSTimer alloc] initWithFireDate:fireDate
+                                              interval:1
+                                                target:self
+                                              selector:@selector(updateClock:)
+                                              userInfo:nil
+                                               repeats:YES];
+    
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void) updateClock : (NSNotification*) notfication
+{
+    NSDate*     date = [NSDate date];
+
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *timeComps =
+            [gregorian components:(NSHourCalendarUnit   | NSMinuteCalendarUnit |
+                                   NSSecondCalendarUnit | NSTimeZoneCalendarUnit)
+                         fromDate:date];
+    
+    [hour   setStringValue: [NSString stringWithFormat:@"%02ld",[timeComps hour]]];
+    [minute setStringValue: [NSString stringWithFormat:@"%02ld",[timeComps minute]]];
+    [second setStringValue: [NSString stringWithFormat:@"%02ld",[timeComps second]]];
+    
+    if (YES) {
+        NSTimeZone* zone = [timeComps timeZone];
+        NSLog(@"%@", [zone abbreviationForDate:date]);
+    }
+}
+
 
 @end

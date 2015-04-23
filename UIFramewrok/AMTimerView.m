@@ -19,6 +19,7 @@
     AMFoundryFontView* secColon;
     
     NSTimer* _clock;
+    BOOL        _hasTheTimeZone;
 }
 
 @end
@@ -44,8 +45,7 @@
  | margin 00:00:00 margin |
  magin = 1/10 width, the witdh of '0' is equal to ':' with 1/10 width, 
  then so '00' is 1/5 width
- 
- */
+*/
 - (void) initTimeArea
 {
     NSRect bounds  = [self bounds];
@@ -53,23 +53,23 @@
     int     height = bounds.size.height;
     
     hour  = [[AMFoundryFontView alloc]
-             initWithFrame:NSMakeRect(width/10, 0, width/5, height)];
+                    initWithFrame:NSMakeRect(width/10,   0, width/5,  height)];
     [hour setStringValue:@"00"];
 
     firstColon = [[AMFoundryFontView alloc]
-                  initWithFrame:NSMakeRect(width*3/10, 0, width/10, height)];
+                    initWithFrame:NSMakeRect(width*3/10, 0, width/10, height)];
     [firstColon setStringValue:@":"];
     
     minute  = [[AMFoundryFontView alloc]
-             initWithFrame:NSMakeRect(width*2/5, 0, width/5, height)];
+                    initWithFrame:NSMakeRect(width*2/5,  0, width/5,  height)];
     [minute setStringValue:@"00"];
     
     secColon = [[AMFoundryFontView alloc]
-                  initWithFrame:NSMakeRect(width*3/5, 0, width/10, height)];
+                    initWithFrame:NSMakeRect(width*3/5,  0, width/10, height)];
     [secColon setStringValue:@":"];
     
     second  = [[AMFoundryFontView alloc]
-               initWithFrame:NSMakeRect(width*7/10, 0, width/5, height)];
+                    initWithFrame:NSMakeRect(width*7/10, 0, width/5,  height)];
     [second setStringValue:@"00"];
     
     [self addSubview:hour];
@@ -85,6 +85,10 @@
     [self setBasicFoundryStyle:second];
 }
 
+- (void) initTimeZoneArea
+{
+    
+}
 
 - (void) awakeFromNib
 {
@@ -125,7 +129,7 @@
 
 - (void) startTime
 {
-    NSTimeInterval interval =  (int)[NSDate timeIntervalSinceReferenceDate] + 1;
+    NSTimeInterval interval = ((int)[NSDate timeIntervalSinceReferenceDate]) + 1.001;
     NSDate* fireDate = [NSDate dateWithTimeIntervalSinceReferenceDate:interval];
     
     NSTimer *timer = [[NSTimer alloc] initWithFireDate:fireDate

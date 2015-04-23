@@ -129,7 +129,7 @@
 
 - (void) startTime
 {
-    NSTimeInterval interval = ((int)[NSDate timeIntervalSinceReferenceDate]) + 1.001;
+    NSTimeInterval interval = ((int)[NSDate timeIntervalSinceReferenceDate]) + 1.01;
     NSDate* fireDate = [NSDate dateWithTimeIntervalSinceReferenceDate:interval];
     
     NSTimer *timer = [[NSTimer alloc] initWithFireDate:fireDate

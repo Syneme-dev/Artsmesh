@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
@@ -36,16 +36,6 @@
                     </buttonCell>
                     <connections>
                         <action selector="nextTimerState:" target="-2" id="1ui-Fd-CMm"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnh-Jy-i7f">
-                    <rect key="frame" x="8" y="648" width="34" height="29"/>
-                    <buttonCell key="cell" type="smallSquare" title="+" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="bSR-5h-qJ6">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="30"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addTableCellController:" target="-2" id="SZF-kg-emA"/>
                     </connections>
                 </button>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="357" horizontalPageScroll="10" verticalLineScroll="357" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-Fi-Oqn">
@@ -262,14 +252,36 @@
                         <action selector="stopTimer:" target="-2" id="88U-bh-uk1"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCb-v1-EJQ">
+                    <rect key="frame" x="20" y="607" width="52" height="52"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="add_plus" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="yhz-b3-BV8">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnh-Jy-i7f">
+                    <rect key="frame" x="211" y="642" width="34" height="29"/>
+                    <buttonCell key="cell" type="smallSquare" title="+" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="bSR-5h-qJ6">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="30"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="addTableCellController:" target="-2" id="SZF-kg-emA"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ZrX-P9-JHy"/>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="147" id="dAM-mF-J9n"/>
                 <constraint firstAttribute="trailing" secondItem="hnd-Fi-Oqn" secondAttribute="trailing" constant="20" id="gPL-Iz-oCT"/>
+                <constraint firstItem="zCb-v1-EJQ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="hbD-pT-Pjp"/>
                 <constraint firstAttribute="bottom" secondItem="hnd-Fi-Oqn" secondAttribute="bottom" constant="22" id="vgy-w4-H75"/>
+                <constraint firstItem="zCb-v1-EJQ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="27" id="zpS-gy-DNh"/>
             </constraints>
             <point key="canvasLocation" x="489" y="391"/>
         </customView>
     </objects>
+    <resources>
+        <image name="add_plus" width="52" height="52"/>
+    </resources>
 </document>

@@ -32,6 +32,7 @@
 {
     NSString* statusNetEventURLString;
     Boolean isLogin;
+    Boolean needsToConfirmEvent;
     NSString *statusNetURL;
     NSString *myUserName;
     NSString *infoUrl;
@@ -40,7 +41,6 @@
     Boolean isInfoPage;
     NSString *loginURL;
     NSString *eventURL;
-    NSString *broadcastURL;
     
     NSString *kKeychainItemName;
     NSString *scope;
@@ -76,6 +76,8 @@
     
     [self setAuthentication:auth];
     [self initYoutubeService];
+    
+    needsToConfirmEvent = FALSE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     

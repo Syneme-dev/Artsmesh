@@ -130,11 +130,11 @@
                                         <rect key="frame" x="184" y="446" width="65" height="20"/>
                                     </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Moe-eh-nnf" userLabel="| ">
-                                        <rect key="frame" x="264" y="450" width="10" height="10"/>
+                                        <rect key="frame" x="263" y="450" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qgp-0k-nNn"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rd6-g5-1H1">
-                                        <rect key="frame" x="280" y="450" width="43" height="12"/>
+                                        <rect key="frame" x="279" y="450" width="43" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="YEAR" id="2Ut-Wo-jq9">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -142,7 +142,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ctz-sS-bD8" userLabel="YEAR EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="329" y="446" width="65" height="20"/>
+                                        <rect key="frame" x="319" y="446" width="75" height="20"/>
                                     </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3YS-oG-0Sx" userLabel="| ">
                                         <rect key="frame" x="408" y="450" width="10" height="10"/>
@@ -198,11 +198,11 @@
                                         <rect key="frame" x="184" y="376" width="65" height="20"/>
                                     </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="svJ-gE-Vdo" userLabel="| ">
-                                        <rect key="frame" x="264" y="380" width="10" height="10"/>
+                                        <rect key="frame" x="263" y="380" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="tPb-5P-x3w"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIE-z4-xh2">
-                                        <rect key="frame" x="280" y="380" width="43" height="12"/>
+                                        <rect key="frame" x="279" y="380" width="43" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="YEAR" id="Evu-ar-TKv">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -210,7 +210,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcq-S9-gNB" userLabel="YEAR EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="329" y="376" width="65" height="20"/>
+                                        <rect key="frame" x="319" y="376" width="75" height="20"/>
                                     </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q9J-P2-Guk" userLabel="| ">
                                         <rect key="frame" x="408" y="380" width="10" height="10"/>

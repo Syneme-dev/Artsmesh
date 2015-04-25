@@ -268,17 +268,66 @@
 
 - (void)loadEventTimes {
     NSArray *times = @[@"12:00am", @"1:00am", @"2:00am", @"3:00am", @"4:00am", @"5:00am", @"6:00am", @"7:00am", @"8:00am", @"9:00am", @"10:00am", @"11:00am", @"12:00pm", @"1:00pm", @"2:00pm", @"3:00pm", @"4:00pm", @"5:00pm", @"6:00pm", @"7:00pm", @"8:00pm", @"9:00pm", @"10:00pm", @"11:00pm"];
+    NSMutableArray *days = [NSMutableArray array];
+    for (NSInteger d = 1; d <= 31; d++) {
+        [days addObject:[NSString stringWithFormat:@"%ld", (long)d]];
+    }
     
+    NSMutableArray *months = [NSMutableArray array];
+    for (NSInteger m = 1; m <= 12; m++) {
+        [months addObject:[NSString stringWithFormat:@"%ld", (long)m]];
+    }
+    
+    NSMutableArray *years = [NSMutableArray array];
+    for (NSInteger y = 0; y<=2; y++) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy"];
+        NSDate *curYear = [NSDate date];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        [dateComponents setYear:y];
+        NSDate *targetDate = [gregorian dateByAddingComponents:dateComponents toDate:curYear  options:0];
+
+        [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
+    }
+    
+    [self.eventStartDayDropDown removeAllItems];
+    [self.eventStartDayDropDown addItemsWithTitles:days];
+    [self.eventStartMonthDropDown removeAllItems];
+    [self.eventStartMonthDropDown addItemsWithTitles:months];
+    [self.eventStartYearDropDown removeAllItems];
+    [self.eventStartYearDropDown addItemsWithTitles:years];
     [self.eventStartTimeDropDown removeAllItems];
     [self.eventStartTimeDropDown addItemsWithTitles: times];
     
+    
+    [self.eventEndDayDropDown removeAllItems];
+    [self.eventEndDayDropDown addItemsWithTitles:days];
+    [self.eventEndMonthDropDown removeAllItems];
+    [self.eventEndMonthDropDown addItemsWithTitles:months];
+    [self.eventEndYearDropDown removeAllItems];
+    [self.eventEndYearDropDown addItemsWithTitles:years];
     [self.eventEndTimeDropDown removeAllItems];
     [self.eventEndTimeDropDown addItemsWithTitles: times];
     
+    
+    [self.eventStartDayDropDown selectItemAtIndex:0];
+    [self.eventStartMonthDropDown selectItemAtIndex:0];
     [self.eventStartTimeDropDown selectItemAtIndex:0];
+    [self.eventStartYearDropDown selectItemAtIndex:0];
+    [self.eventEndDayDropDown selectItemAtIndex:0];
+    [self.eventEndMonthDropDown selectItemAtIndex:0];
+    [self.eventEndYearDropDown selectItemAtIndex:0];
     [self.eventEndTimeDropDown selectItemAtIndex:0];
     
+    
+    [self.eventStartDayDropDown setNeedsDisplay];
+    [self.eventStartMonthDropDown setNeedsDisplay];
+    [self.eventStartYearDropDown setNeedsDisplay];
     [self.eventStartTimeDropDown setNeedsDisplay];
+    [self.eventEndDayDropDown setNeedsDisplay];
+    [self.eventEndMonthDropDown setNeedsDisplay];
+    [self.eventEndYearDropDown setNeedsDisplay];
     [self.eventEndTimeDropDown setNeedsDisplay];
 }
 

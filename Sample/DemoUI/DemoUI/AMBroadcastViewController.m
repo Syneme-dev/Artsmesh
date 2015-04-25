@@ -168,9 +168,17 @@
     
     
     // Broadcast Scheduled Start/End Times
+    NSString *selectedStartDay = self.eventStartDayDropDown.stringValue;
+    NSString *selectedStartMonth = self.eventStartMonthDropDown.stringValue;
+    NSString *selectedStartYear = self.eventStartYearDropDown.stringValue;
+    NSString *selectedEndDay = self.eventEndDayDropDown.stringValue;
+    NSString *selectedEndMonth = self.eventEndMonthDropDown.stringValue;
+    NSString *selectedEndYear = self.eventEndYearDropDown.stringValue;
     
-    self.broadcastSchedStart = [self getDate:@"2016-01-02 19:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.broadcastSchedEnd = [self getDate:@"2016-01-02 20:59:59" withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //2016-01-02 19:59:59
+    //NSSTring *selectedStartDay = [self.eventStartDayDropDown];
+    self.broadcastSchedStart = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedStartYear, selectedStartMonth, selectedStartDay, @"12:00:00"] withFormat:@"yyyy-m-d HH:mm:ss"];
+    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedEndYear, selectedEndMonth, selectedEndDay, @"12:00:00"] withFormat:@"yyyy-m-d HH:mm:ss"];
     
     
     // Get channelID

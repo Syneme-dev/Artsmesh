@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMClockTabVC : NSViewController
-
+- (IBAction)addTableCell:(id)sender;
 @end

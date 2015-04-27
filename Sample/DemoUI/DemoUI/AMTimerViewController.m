@@ -14,10 +14,12 @@
 #import "AMClockTabVC.h"
 
 @interface AMTimerViewController ()
+@property (weak) IBOutlet NSButton *addNewOne;
 @property (weak) IBOutlet NSButton *clockBtn;
 @property (weak) IBOutlet NSButton *timerBtn;
 @property (weak) IBOutlet NSTabView *tabView;
 @property (nonatomic) NSMutableArray *viewControllers;
+@property (nonatomic) NSInteger         index;
 @end
 
 @implementation AMTimerViewController
@@ -37,7 +39,11 @@
     [AMButtonHandler changeTabTextColor:self.clockBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 
-    [self.timerBtn performClick:nil];
+    [AMButtonHandler changeTabTextColor:self.addNewOne toColor:UI_Color_blue];
+
+    
+    [self.clockBtn performClick:nil];
+    [self.addNewOne performClick:nil];
 }
 
 -(void)registerTabButtons{
@@ -82,14 +88,27 @@
 
 - (IBAction)clockBtnClick:(id)sender
 {
+    _index = 0;
     [self pushDownButton:self.clockBtn];
-    [self.tabView selectTabViewItemAtIndex:0];
+    [self.tabView selectTabViewItemAtIndex:_index];
 }
 
 - (IBAction)timerBtnClick:(id)sender
 {
+    _index = 1;
     [self pushDownButton:self.timerBtn];
-    [self.tabView selectTabViewItemAtIndex:1];
+    [self.tabView selectTabViewItemAtIndex:_index];
+}
+- (IBAction)addNewTableCell:(id)sender {
+    if (_index == 0) {
+        AMClockTabVC* clockVC = [_viewControllers objectAtIndex:_index];
+        [clockVC addTableCell:nil];
+    }
+    else if(_index == 1){
+        AMTimerTabVC* timerVC = [_viewControllers objectAtIndex:_index];
+        [timerVC addTableCellController:nil];
+    }
+    
 }
 
 @end

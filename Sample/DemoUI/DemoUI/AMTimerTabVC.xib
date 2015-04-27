@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerTabVC">
             <connections>
-                <outlet property="addButton" destination="dnh-Jy-i7f" id="xKy-f1-427"/>
                 <outlet property="arrowLabel" destination="OTx-Bq-7au" id="PER-jC-hfH"/>
                 <outlet property="leftHoursTF" destination="303-8Y-cIE" id="o5m-5Z-QLW"/>
                 <outlet property="leftMinutesTF" destination="XDy-YH-pcV" id="CQc-Rr-Nbg"/>
@@ -252,36 +251,14 @@
                         <action selector="stopTimer:" target="-2" id="88U-bh-uk1"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCb-v1-EJQ">
-                    <rect key="frame" x="20" y="607" width="52" height="52"/>
-                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="add_plus" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="yhz-b3-BV8">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dnh-Jy-i7f">
-                    <rect key="frame" x="211" y="642" width="34" height="29"/>
-                    <buttonCell key="cell" type="smallSquare" title="+" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="bSR-5h-qJ6">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system" size="30"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addTableCellController:" target="-2" id="SZF-kg-emA"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ZrX-P9-JHy"/>
                 <constraint firstItem="hnd-Fi-Oqn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="147" id="dAM-mF-J9n"/>
                 <constraint firstAttribute="trailing" secondItem="hnd-Fi-Oqn" secondAttribute="trailing" constant="20" id="gPL-Iz-oCT"/>
-                <constraint firstItem="zCb-v1-EJQ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="hbD-pT-Pjp"/>
                 <constraint firstAttribute="bottom" secondItem="hnd-Fi-Oqn" secondAttribute="bottom" constant="22" id="vgy-w4-H75"/>
-                <constraint firstItem="zCb-v1-EJQ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="27" id="zpS-gy-DNh"/>
             </constraints>
             <point key="canvasLocation" x="489" y="391"/>
         </customView>
     </objects>
-    <resources>
-        <image name="add_plus" width="52" height="52"/>
-    </resources>
 </document>

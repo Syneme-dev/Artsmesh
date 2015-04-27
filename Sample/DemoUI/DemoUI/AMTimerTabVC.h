@@ -14,4 +14,5 @@ extern NSString * const AMTimerPauseNotification;
 extern NSString * const AMTimerResumeNotification;
 
 @interface AMTimerTabVC : NSViewController
+- (IBAction)addTableCellController:(id)sender;
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
             <connections>
+                <outlet property="addNewOne" destination="E33-DQ-cp6" id="gVq-kr-YFF"/>
                 <outlet property="clockBtn" destination="Chv-Eg-hpW" id="YAH-1G-l87"/>
                 <outlet property="tabView" destination="h28-9m-GVK" id="OXD-vQ-czh"/>
                 <outlet property="timerBtn" destination="GJj-K0-zhz" id="d9n-Ho-FCN"/>
@@ -77,6 +78,20 @@
                         <action selector="timerBtnClick:" target="-2" id="0Eg-a9-SOk"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="E33-DQ-cp6">
+                    <rect key="frame" x="0.0" y="525" width="77" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="77" id="vsc-W4-q8E"/>
+                        <constraint firstAttribute="height" constant="14" id="wRv-P6-bpP"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="ADD NEW" bezelStyle="inline" alignment="center" inset="2" id="jhg-mq-Tci">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="addNewTableCell:" target="-2" id="8iQ-sX-rjA"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="GJj-K0-zhz" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="01B-gi-Shb"/>
@@ -84,9 +99,11 @@
                 <constraint firstItem="Chv-Eg-hpW" firstAttribute="leading" secondItem="PpJ-aB-EKN" secondAttribute="trailing" constant="4" id="8nn-6i-sZX"/>
                 <constraint firstAttribute="trailing" secondItem="Chv-Eg-hpW" secondAttribute="trailing" id="FJC-d2-pSN"/>
                 <constraint firstItem="PpJ-aB-EKN" firstAttribute="leading" secondItem="GJj-K0-zhz" secondAttribute="trailing" constant="6" id="Hae-0d-xmR"/>
+                <constraint firstItem="E33-DQ-cp6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="IpS-ro-CM0"/>
                 <constraint firstItem="PpJ-aB-EKN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Pqv-nh-qRL"/>
                 <constraint firstAttribute="trailing" secondItem="h28-9m-GVK" secondAttribute="trailing" id="Tlc-dX-HXf"/>
                 <constraint firstItem="h28-9m-GVK" firstAttribute="top" secondItem="PpJ-aB-EKN" secondAttribute="bottom" constant="3" id="jSV-pi-DIX"/>
+                <constraint firstItem="E33-DQ-cp6" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="s6n-Pe-BP8"/>
                 <constraint firstItem="Chv-Eg-hpW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="tS9-Nf-Fs3"/>
                 <constraint firstItem="h28-9m-GVK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="uVh-Wb-05l"/>
             </constraints>

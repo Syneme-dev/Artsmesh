@@ -315,6 +315,7 @@
         [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
     }
     
+    /**
     [self.eventStartDayDropDown removeAllItems];
     [self.eventStartDayDropDown addItemsWithTitles:days];
     [self.eventStartMonthDropDown removeAllItems];
@@ -353,6 +354,7 @@
     [self.eventEndMonthDropDown setNeedsDisplay];
     [self.eventEndYearDropDown setNeedsDisplay];
     [self.eventEndTimeDropDown setNeedsDisplay];
+    **/
 }
 
 

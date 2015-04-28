@@ -178,6 +178,7 @@
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
 		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
 		2DED40CD19CBED2D006F12FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DED40CC19CBED2D006F12FD /* CoreLocation.framework */; };
+		2DF407BC1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF407BB1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.m */; };
 		37C23170187A8FFD00554AFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C2316F187A8FFD00554AFD /* Cocoa.framework */; };
 		37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C23178187A8FFD00554AFD /* InfoPlist.strings */; };
 		37C2317C187A8FFD00554AFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C2317B187A8FFD00554AFD /* main.m */; };
@@ -747,6 +748,8 @@
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
 		2DE439C71A37C58700650692 /* new-event.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "new-event.css"; sourceTree = "<group>"; };
 		2DED40CC19CBED2D006F12FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
+		2DF407BA1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldNumberFormatter.h; sourceTree = "<group>"; };
+		2DF407BB1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldNumberFormatter.m; sourceTree = "<group>"; };
 		37C2316C187A8FFD00554AFD /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -1102,6 +1105,8 @@
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
 				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
+				2DF407BA1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.h */,
+				2DF407BB1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.m */,
 			);
 			name = "BroadCast Panel";
 			sourceTree = "<group>";
@@ -2163,6 +2168,7 @@
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
 				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
+				2DF407BC1AEF2813001AB4D5 /* AMTextFieldNumberFormatter.m in Sources */,
 				2D08FE041AD661FF00A9D257 /* GTLYouTubeVideoSnippet.m in Sources */,
 				2D08FDBD1AD661FF00A9D257 /* GTLYouTubeIngestionInfo.m in Sources */,
 				4A32A1091A7220B1006FEDD7 /* AMTabItemView.m in Sources */,

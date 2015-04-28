@@ -38,15 +38,9 @@
 
 
 
-@property (strong) IBOutlet AMPopUpView *eventStartDayDropDown;
-@property (strong) IBOutlet AMPopUpView *eventStartMonthDropDown;
-@property (strong) IBOutlet AMPopUpView *eventStartYearDropDown;
 @property (strong) IBOutlet AMPopUpView *eventStartTimeDropDown;
 
 
-@property (strong) IBOutlet AMPopUpView *eventEndDayDropDown;
-@property (strong) IBOutlet AMPopUpView *eventEndMonthDropDown;
-@property (strong) IBOutlet AMPopUpView *eventEndYearDropDown;
 @property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
 

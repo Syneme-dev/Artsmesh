@@ -12,14 +12,8 @@
                 <outlet property="broadcastStartTimeField" destination="rj0-If-Bes" id="SPJ-mx-evV"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
-                <outlet property="eventEndDayDropDown" destination="xhU-eX-rAn" id="6c8-oi-Xeh"/>
-                <outlet property="eventEndMonthDropDown" destination="MCG-9g-T12" id="7tX-Yb-IfX"/>
                 <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
-                <outlet property="eventEndYearDropDown" destination="gcq-S9-gNB" id="Unr-c2-GrJ"/>
-                <outlet property="eventStartDayDropDown" destination="0HC-9t-llc" id="xre-BE-tzb"/>
-                <outlet property="eventStartMonthDropDown" destination="mLq-mg-3cE" id="fwC-qX-E1x"/>
                 <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
-                <outlet property="eventStartYearDropDown" destination="ctz-sS-bD8" id="UyV-Xp-eLz"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
                 <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>
@@ -111,9 +105,22 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0HC-9t-llc" userLabel="DAY EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="46" y="446" width="65" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blQ-Yc-8CB" userLabel="DAY EDIT">
+                                        <rect key="frame" x="49" y="450" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1" id="jKg-1H-G7y">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o42-L4-uid" userLabel="MONTH EDIT">
+                                        <rect key="frame" x="182" y="450" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1" id="6N8-Py-eYU">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4IR-Cx-fdS" userLabel="| ">
                                         <rect key="frame" x="119" y="450" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="gkI-un-U42"/>
@@ -126,9 +133,6 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLq-mg-3cE" userLabel="MONTH EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="184" y="446" width="65" height="20"/>
-                                    </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Moe-eh-nnf" userLabel="| ">
                                         <rect key="frame" x="263" y="450" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qgp-0k-nNn"/>
@@ -141,9 +145,14 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ctz-sS-bD8" userLabel="YEAR EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="319" y="446" width="75" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XxN-bD-K7m" userLabel="YEAR EDIT">
+                                        <rect key="frame" x="321" y="450" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="2015" id="mDT-gd-Prm">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3YS-oG-0Sx" userLabel="| ">
                                         <rect key="frame" x="408" y="450" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="YpC-dW-V0m"/>
@@ -179,9 +188,14 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-eX-rAn" userLabel="DAY EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="46" y="376" width="65" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8kX-52-CDK" userLabel="DAY EDIT">
+                                        <rect key="frame" x="49" y="380" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1" id="79j-pk-HIh">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Sl-Hf-9Mz" userLabel="| ">
                                         <rect key="frame" x="119" y="380" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="bab-cV-QfJ"/>
@@ -194,9 +208,14 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCG-9g-T12" userLabel="MONTH EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="184" y="376" width="65" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j01-wz-Qqe" userLabel="MONTH EDIT">
+                                        <rect key="frame" x="182" y="380" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1" id="AM4-Kh-DoA">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="svJ-gE-Vdo" userLabel="| ">
                                         <rect key="frame" x="263" y="380" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="tPb-5P-x3w"/>
@@ -209,9 +228,14 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcq-S9-gNB" userLabel="YEAR EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="319" y="376" width="75" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AwM-Hh-bfA" userLabel="YEAR EDIT">
+                                        <rect key="frame" x="321" y="380" width="66" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="2015" id="F5k-9R-Zfr">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q9J-P2-Guk" userLabel="| ">
                                         <rect key="frame" x="408" y="380" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="eEc-kx-Y8T"/>

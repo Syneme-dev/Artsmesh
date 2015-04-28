@@ -40,8 +40,9 @@
     [AMButtonHandler changeTabTextColor:self.timerBtn toColor:UI_Color_blue];
 
     [AMButtonHandler changeTabTextColor:self.addNewOne toColor:UI_Color_blue];
-
     
+    [self registerTabButtons];
+
     [self.clockBtn performClick:nil];
     [self.addNewOne performClick:nil];
 }

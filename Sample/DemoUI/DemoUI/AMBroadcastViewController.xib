@@ -12,8 +12,14 @@
                 <outlet property="broadcastStartTimeField" destination="rj0-If-Bes" id="SPJ-mx-evV"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
+                <outlet property="eventEndDayTextField" destination="8kX-52-CDK" id="wg5-lC-SMV"/>
+                <outlet property="eventEndMonthTextField" destination="j01-wz-Qqe" id="TcJ-rW-wOr"/>
                 <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
+                <outlet property="eventEndYearTextField" destination="AwM-Hh-bfA" id="Scg-B4-792"/>
+                <outlet property="eventStartDayTextField" destination="blQ-Yc-8CB" id="jet-8s-9zO"/>
+                <outlet property="eventStartMonthTextField" destination="o42-L4-uid" id="ea8-h7-8TB"/>
                 <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
+                <outlet property="eventStartYearTextField" destination="XxN-bD-K7m" id="Yie-dq-7fA"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
                 <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>

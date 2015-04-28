@@ -168,12 +168,14 @@
     
     
     // Broadcast Scheduled Start/End Times
-    NSString *selectedStartDay = self.eventStartDayDropDown.stringValue;
-    NSString *selectedStartMonth = self.eventStartMonthDropDown.stringValue;
-    NSString *selectedStartYear = self.eventStartYearDropDown.stringValue;
-    NSString *selectedEndDay = self.eventEndDayDropDown.stringValue;
-    NSString *selectedEndMonth = self.eventEndMonthDropDown.stringValue;
-    NSString *selectedEndYear = self.eventEndYearDropDown.stringValue;
+
+    NSString *selectedStartDay = self.eventStartDayTextField.stringValue;
+    NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
+    NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
+    NSString *selectedEndDay = self.eventEndDayTextField.stringValue;
+    NSString *selectedEndMonth = self.eventEndMonthTextField.stringValue;
+    NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
+
     
     //2016-01-02 19:59:59
     //NSSTring *selectedStartDay = [self.eventStartDayDropDown];
@@ -314,6 +316,33 @@
 
         [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
     }
+    
+    NSNumberFormatter *dayNumberFormatter = [[NSNumberFormatter alloc] init];
+    dayNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    dayNumberFormatter.maximum = [NSNumber numberWithInteger:31];
+    [self.eventStartDayTextField setFormatter:dayNumberFormatter];
+    [self.eventEndDayTextField setFormatter:dayNumberFormatter];
+    
+    NSNumberFormatter *monthNumberFormatter = [[NSNumberFormatter alloc] init];
+    monthNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    monthNumberFormatter.maximum = [NSNumber numberWithInteger:12];
+    [self.eventStartMonthTextField setFormatter:monthNumberFormatter];
+    [self.eventEndMonthTextField setFormatter:monthNumberFormatter];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
+    yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
+    yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
+    
+    self.eventStartDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
+    self.eventEndDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
+    
+    self.eventStartMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
+    self.eventEndMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
+    
+    self.eventStartYearTextField.stringValue = [years objectAtIndex:0];
+    self.eventEndYearTextField.stringValue = [years objectAtIndex:0];
     
     /**
     [self.eventStartDayDropDown removeAllItems];

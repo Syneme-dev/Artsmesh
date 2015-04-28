@@ -37,10 +37,15 @@
 @property (strong) IBOutlet AMPopUpView *broadcastEndTimeField;
 
 
-
+@property (strong) IBOutlet NSTextField *eventStartDayTextField;
+@property (strong) IBOutlet NSTextField *eventStartMonthTextField;
+@property (strong) IBOutlet NSTextField *eventStartYearTextField;
 @property (strong) IBOutlet AMPopUpView *eventStartTimeDropDown;
 
 
+@property (strong) IBOutlet NSTextField *eventEndDayTextField;
+@property (strong) IBOutlet NSTextField *eventEndMonthTextField;
+@property (strong) IBOutlet NSTextField *eventEndYearTextField;
 @property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
 

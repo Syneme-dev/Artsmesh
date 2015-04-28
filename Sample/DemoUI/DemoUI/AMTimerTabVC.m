@@ -67,11 +67,11 @@ typedef enum : NSInteger {
 - (void)viewDidLoad
 {
     [self addTableCellController:nil];
-    NSMutableAttributedString *attributedTitle = [self.addButton.attributedTitle mutableCopy];
-    [attributedTitle addAttribute:NSForegroundColorAttributeName
-                            value:[NSColor lightGrayColor]
-                            range:NSMakeRange(0, attributedTitle.length)];
-    self.addButton.attributedTitle = attributedTitle;
+//    NSMutableAttributedString *attributedTitle = [self.addButton.attributedTitle mutableCopy];
+//    [attributedTitle addAttribute:NSForegroundColorAttributeName
+//                            value:[NSColor lightGrayColor]
+//                            range:NSMakeRange(0, attributedTitle.length)];
+//    self.addButton.attributedTitle = attributedTitle;
     self.timerState = AMTimerStateStopped;
     self.modePopup.delegate = self;
     [self.modePopup addItemsWithTitles:@[ @"CNT", @"DUR", @"REL", @"ABS" ]];

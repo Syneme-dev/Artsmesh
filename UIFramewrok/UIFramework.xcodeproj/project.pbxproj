@@ -32,6 +32,7 @@
 		4F5F13F41ADE542B00E12613 /* AMTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F13F21ADE542B00E12613 /* AMTableCellView.m */; };
 		4F809F581ACECA7D009AC0E6 /* AMWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F809F561ACECA7D009AC0E6 /* AMWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F809F591ACECA7D009AC0E6 /* AMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F809F571ACECA7D009AC0E6 /* AMWindow.m */; };
+		4FA59E411AEF3EE000405112 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA59E401AEF3EE000405112 /* AMLogger.framework */; };
 		4FAA9B3E1AAACC8100D9266E /* AMBlinkView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
 		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,6 +97,7 @@
 		4F5F13F21ADE542B00E12613 /* AMTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTableCellView.m; sourceTree = "<group>"; };
 		4F809F561ACECA7D009AC0E6 /* AMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWindow.h; sourceTree = "<group>"; };
 		4F809F571ACECA7D009AC0E6 /* AMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWindow.m; sourceTree = "<group>"; };
+		4FA59E401AEF3EE000405112 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		4FAA9B3C1AAACC8100D9266E /* AMBlinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlinkView.h; sourceTree = "<group>"; };
 		4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlinkView.m; sourceTree = "<group>"; };
 		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA59E411AEF3EE000405112 /* AMLogger.framework in Frameworks */,
 				AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +243,7 @@
 		AF00D43818C9B5E6004DE9E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FA59E401AEF3EE000405112 /* AMLogger.framework */,
 				AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */,
 				AF00D44E18C9B5E6004DE9E6 /* XCTest.framework */,
 				AF00D43B18C9B5E6004DE9E6 /* Other Frameworks */,
@@ -500,6 +504,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/whisky/Work/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";
@@ -516,6 +524,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/whisky/Work/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";

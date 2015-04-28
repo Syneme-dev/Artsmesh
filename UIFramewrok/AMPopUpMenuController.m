@@ -9,6 +9,7 @@
 #import "AMPopUpMenuController.h"
 #import "AMPopUpMenuItem.h"
 #import "AMBackgroundView.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMPopUpMenuController ()<AMPopUpMenuItemDelegeate>
 
@@ -107,6 +108,11 @@
 
 -(void)selectItemAtInedex:(NSUInteger)index
 {
+    if (index >= [self.menuItems count]) {
+        AMLog(kAMErrorLog, @"AMPopUpMenuController.m", @"index=%d beyond bounds", index);
+        return;
+    }
+    
     AMPopUpMenuItem* item = [[self menuItems] objectAtIndex:index];
     if (item != nil) {
         [item performSelector:@selector(mouseDown:) withObject:nil];

@@ -205,7 +205,6 @@
     if ([sender.stringValue isEqualToString:@""]) {
         sender.stringValue = [[AMPreferenceManager standardUserDefaults]
                               stringForKey:Preference_Key_Cluster_Description];
-        group.groupName = sender.stringValue;
     }
     
     group.description = sender.stringValue;

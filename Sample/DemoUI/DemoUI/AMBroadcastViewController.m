@@ -106,9 +106,6 @@
 {
     [self loadTabViews];
     
-    self.eventStartTimeDropDown.delegate = self;
-    self.eventEndTimeDropDown.delegate = self;
-    
     self.privateCheck.delegate = self;
     self.privateCheck.title = @"PRIVATE";
     
@@ -317,6 +314,7 @@
         [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
     }
     
+    //Add Number Formatters to the Text Fields
     NSNumberFormatter *dayNumberFormatter = [[NSNumberFormatter alloc] init];
     dayNumberFormatter.minimum = [NSNumber numberWithInteger:1];
     dayNumberFormatter.maximum = [NSNumber numberWithInteger:31];
@@ -334,6 +332,30 @@
     NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
     yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
     yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
+    NSDate *curHour = [NSDate date];
+    NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
+    [dateComponentsHour setHour:1];
+    NSDateFormatter *hourDateFormatter = [[NSDateFormatter alloc] init];
+    [hourDateFormatter setDateFormat:@"HH"];
+    NSDate *targetHour = [gregorianHour dateByAddingComponents:dateComponentsHour toDate:curHour options:0];
+    
+    
+    NSDate *curMinute = [NSDate date];
+    NSDateFormatter *minuteDateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *gregorianMinute = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [minuteDateFormatter setDateFormat:@"mm"];
+    NSDate *targetMinute = [gregorianMinute dateByAddingComponents:dateComponentsHour toDate:curMinute options:0];
+    
+    NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
+    hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    hourNumberFormatter.maximum = [NSNumber numberWithInteger:24];
+    
+    NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
+    minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    minuteNumberFormatter.maximum = [NSNumber numberWithInteger:59];
+    
+    
     
     self.eventStartDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
     self.eventEndDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
@@ -344,6 +366,10 @@
     self.eventStartYearTextField.stringValue = [years objectAtIndex:0];
     self.eventEndYearTextField.stringValue = [years objectAtIndex:0];
     
+    self.eventStartHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
+    self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
+    self.eventStartMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
+    self.eventEndMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
     /**
     [self.eventStartDayDropDown removeAllItems];
     [self.eventStartDayDropDown addItemsWithTitles:days];

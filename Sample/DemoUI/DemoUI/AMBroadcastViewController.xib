@@ -8,17 +8,17 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
                 <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
-                <outlet property="broadcastEndTimeField" destination="Oba-iS-KDU" id="qgm-8h-gqc"/>
-                <outlet property="broadcastStartTimeField" destination="rj0-If-Bes" id="SPJ-mx-evV"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
                 <outlet property="eventEndDayTextField" destination="8kX-52-CDK" id="wg5-lC-SMV"/>
+                <outlet property="eventEndHourTextField" destination="2g2-hs-kih" id="225-ZS-0jI"/>
+                <outlet property="eventEndMinuteTextField" destination="ujn-yZ-XYS" id="cJz-ch-CXE"/>
                 <outlet property="eventEndMonthTextField" destination="j01-wz-Qqe" id="TcJ-rW-wOr"/>
-                <outlet property="eventEndTimeDropDown" destination="Oba-iS-KDU" id="wqc-39-dZU"/>
                 <outlet property="eventEndYearTextField" destination="AwM-Hh-bfA" id="Scg-B4-792"/>
                 <outlet property="eventStartDayTextField" destination="blQ-Yc-8CB" id="jet-8s-9zO"/>
+                <outlet property="eventStartHourTextField" destination="F6g-Xc-vhr" id="59z-bm-V7X"/>
+                <outlet property="eventStartMinuteTextField" destination="TiM-RE-0II" id="X27-pA-cqG"/>
                 <outlet property="eventStartMonthTextField" destination="o42-L4-uid" id="ea8-h7-8TB"/>
-                <outlet property="eventStartTimeDropDown" destination="rj0-If-Bes" id="i7v-Oo-XSV"/>
                 <outlet property="eventStartYearTextField" destination="XxN-bD-K7m" id="Yie-dq-7fA"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
@@ -171,9 +171,30 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rj0-If-Bes" userLabel="START EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="466" y="446" width="90" height="20"/>
-                                    </customView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F6g-Xc-vhr" userLabel="HOUR EDIT">
+                                        <rect key="frame" x="464" y="450" width="21" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="12" id="2hJ-vb-m8R">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-AK-IY2">
+                                        <rect key="frame" x="481" y="450" width="6" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title=":" id="k88-5v-jGT">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TiM-RE-0II" userLabel="MINUTE EDIT">
+                                        <rect key="frame" x="489" y="450" width="21" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="59" id="7mD-eZ-1kq">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qtY-wj-B5k" userLabel="END DATE" customClass="AMFoundryFontView">
                                         <rect key="frame" x="0.0" y="410" width="556" height="14"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="END DATE" id="pXM-uF-2pH">
@@ -254,10 +275,31 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oba-iS-KDU" userLabel="END EDIT" customClass="AMPopUpView">
-                                        <rect key="frame" x="466" y="376" width="90" height="20"/>
-                                    </customView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8W-Pr-JIW" userLabel="END DATE" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2g2-hs-kih" userLabel="HOUR EDIT">
+                                        <rect key="frame" x="464" y="380" width="21" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="12" id="mZR-qm-ATo">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pP3-BW-lgw">
+                                        <rect key="frame" x="481" y="380" width="6" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title=":" id="nRS-RT-5MQ">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujn-yZ-XYS" userLabel="MINUTE EDIT">
+                                        <rect key="frame" x="489" y="380" width="21" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="59" id="sTF-Mr-y7V">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8W-Pr-JIW" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
                                         <rect key="frame" x="-2" y="340" width="556" height="14"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="ADDITIONAL DETAILS" id="dBY-9u-iSe">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>

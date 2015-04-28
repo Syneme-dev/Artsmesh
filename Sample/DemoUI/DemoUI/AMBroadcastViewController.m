@@ -165,7 +165,7 @@
     
     
     // Broadcast Scheduled Start/End Times
-
+    
     NSString *selectedStartDay = self.eventStartDayTextField.stringValue;
     NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
     NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
@@ -277,8 +277,6 @@
     NSInteger *selectDay = 0;
     NSInteger *selectMonth = 0;
     
-    NSArray *times = @[@"12:00am", @"1:00am", @"2:00am", @"3:00am", @"4:00am", @"5:00am", @"6:00am", @"7:00am", @"8:00am", @"9:00am", @"10:00am", @"11:00am", @"12:00pm", @"1:00pm", @"2:00pm", @"3:00pm", @"4:00pm", @"5:00pm", @"6:00pm", @"7:00pm", @"8:00pm", @"9:00pm", @"10:00pm", @"11:00pm"];
-    
     // Set up days
     NSMutableArray *days = [NSMutableArray array];
     for (NSInteger d = 1; d <= 31; d++) {
@@ -336,9 +334,15 @@
     NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
     [dateComponentsHour setHour:1];
+    
     NSDateFormatter *hourDateFormatter = [[NSDateFormatter alloc] init];
     [hourDateFormatter setDateFormat:@"HH"];
     NSDate *targetHour = [gregorianHour dateByAddingComponents:dateComponentsHour toDate:curHour options:0];
+    
+    
+    NSDateComponents *dateComponentsEndHour = [[NSDateComponents alloc] init];
+    [dateComponentsEndHour setHour:2];
+    NSDate *targetEndHour = [gregorianHour dateByAddingComponents:dateComponentsEndHour toDate:curHour options:0];
     
     
     NSDate *curMinute = [NSDate date];
@@ -367,49 +371,9 @@
     self.eventEndYearTextField.stringValue = [years objectAtIndex:0];
     
     self.eventStartHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
-    self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
+    self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetEndHour];
     self.eventStartMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
     self.eventEndMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
-    /**
-    [self.eventStartDayDropDown removeAllItems];
-    [self.eventStartDayDropDown addItemsWithTitles:days];
-    [self.eventStartMonthDropDown removeAllItems];
-    [self.eventStartMonthDropDown addItemsWithTitles:months];
-    [self.eventStartYearDropDown removeAllItems];
-    [self.eventStartYearDropDown addItemsWithTitles:years];
-    [self.eventStartTimeDropDown removeAllItems];
-    [self.eventStartTimeDropDown addItemsWithTitles: times];
-    
-    
-    [self.eventEndDayDropDown removeAllItems];
-    [self.eventEndDayDropDown addItemsWithTitles:days];
-    [self.eventEndMonthDropDown removeAllItems];
-    [self.eventEndMonthDropDown addItemsWithTitles:months];
-    [self.eventEndYearDropDown removeAllItems];
-    [self.eventEndYearDropDown addItemsWithTitles:years];
-    [self.eventEndTimeDropDown removeAllItems];
-    [self.eventEndTimeDropDown addItemsWithTitles: times];
-    
-    
-    [self.eventStartDayDropDown selectItemAtIndex:((NSUInteger)selectDay - 1)];
-    [self.eventStartMonthDropDown selectItemAtIndex:((NSUInteger)selectMonth - 1)];
-    [self.eventStartTimeDropDown selectItemAtIndex:0];
-    [self.eventStartYearDropDown selectItemAtIndex:0];
-    [self.eventEndDayDropDown selectItemAtIndex:((NSUInteger)selectDay - 1)];
-    [self.eventEndMonthDropDown selectItemAtIndex:((NSUInteger)selectMonth - 1)];
-    [self.eventEndYearDropDown selectItemAtIndex:0];
-    [self.eventEndTimeDropDown selectItemAtIndex:0];
-    
-    
-    [self.eventStartDayDropDown setNeedsDisplay];
-    [self.eventStartMonthDropDown setNeedsDisplay];
-    [self.eventStartYearDropDown setNeedsDisplay];
-    [self.eventStartTimeDropDown setNeedsDisplay];
-    [self.eventEndDayDropDown setNeedsDisplay];
-    [self.eventEndMonthDropDown setNeedsDisplay];
-    [self.eventEndYearDropDown setNeedsDisplay];
-    [self.eventEndTimeDropDown setNeedsDisplay];
-    **/
 }
 
 

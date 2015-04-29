@@ -177,7 +177,7 @@
     //2016-01-02 19:59:59
     //NSSTring *selectedStartDay = [self.eventStartDayDropDown];
     self.broadcastSchedStart = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedStartYear, selectedStartMonth, selectedStartDay, @"12:00:00"] withFormat:@"yyyy-m-d HH:mm:ss"];
-    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedEndYear, selectedEndMonth, selectedEndDay, @"12:00:00"] withFormat:@"yyyy-m-d HH:mm:ss"];
+    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedEndYear, selectedEndMonth, selectedEndDay, @"13:00:00"] withFormat:@"yyyy-m-d HH:mm:ss"];
     
     
     // Get channelID
@@ -187,12 +187,16 @@
 }
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:dateFormat];
+    NSDateFormatter *getDateFormatter = [[NSDateFormatter alloc] init];
+    [getDateFormatter setDateFormat:dateFormat];
     //[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
-    NSDate *date = [dateFormatter dateFromString: dateString];
+    NSDate *date = [getDateFormatter dateFromString: dateString];
     
+    NSLog(@"Supplied Date string is: %@", dateString);
+    NSLog(@"Supplied date format is: %@", dateFormat);
     NSLog(@"The date is %@", date);
+    
+    NSLog(@"Test date from string: %@", [getDateFormatter dateFromString:@"2015-04-28 13:00:00"]);
     
     return date;
 }

@@ -15,6 +15,7 @@
                 <outlet property="eventEndMinuteTextField" destination="ujn-yZ-XYS" id="cJz-ch-CXE"/>
                 <outlet property="eventEndMonthTextField" destination="j01-wz-Qqe" id="TcJ-rW-wOr"/>
                 <outlet property="eventEndYearTextField" destination="AwM-Hh-bfA" id="Scg-B4-792"/>
+                <outlet property="eventFeedbackTextField" destination="fHX-fM-hdR" id="ThQ-AW-GZ9"/>
                 <outlet property="eventStartDayTextField" destination="blQ-Yc-8CB" id="jet-8s-9zO"/>
                 <outlet property="eventStartHourTextField" destination="F6g-Xc-vhr" id="59z-bm-V7X"/>
                 <outlet property="eventStartMinuteTextField" destination="TiM-RE-0II" id="X27-pA-cqG"/>
@@ -324,6 +325,14 @@
                                             <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHX-fM-hdR" userLabel="FEEDBACK">
+                                        <rect key="frame" x="12" y="200" width="546" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="ki8-Av-l5q">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                             </view>
                         </tabViewItem>

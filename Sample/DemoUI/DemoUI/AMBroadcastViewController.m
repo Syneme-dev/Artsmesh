@@ -269,8 +269,14 @@
                                        
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
+                                       
+                                       NSString *successText = [NSString stringWithFormat:@"Event created! URL: https://www.youtube.com/embed?v=%@", liveBroadcast.identifier];
+                                       self.eventFeedbackTextField.stringValue = successText;
+                                       
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       
+                                       self.eventFeedbackTextField.stringValue = error.description;
                                    }
                                }];
 

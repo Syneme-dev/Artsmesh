@@ -169,14 +169,18 @@
     NSString *selectedStartDay = self.eventStartDayTextField.stringValue;
     NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
     NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
+    NSString *selectedStartHour = self.eventStartHourTextField.stringValue;
+    NSString *selectedStartMinute = self.eventStartMinuteTextField.stringValue;
     NSString *selectedEndDay = self.eventEndDayTextField.stringValue;
     NSString *selectedEndMonth = self.eventEndMonthTextField.stringValue;
     NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
+    NSString *selectedEndHour = self.eventEndHourTextField.stringValue;
+    NSString *selectedEndMinute = self.eventEndMinuteTextField.stringValue;
     
     //2016-01-02 19:59:59
     //NSSTring *selectedStartDay = [self.eventStartDayDropDown];
-    self.broadcastSchedStart = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedStartYear, selectedStartMonth, selectedStartDay, @"12:00:00"] withFormat:@"yyyy-M-d HH:mm:ss"];
-    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@", selectedEndYear, selectedEndMonth, selectedEndDay, @"13:00:00"] withFormat:@"yyyy-M-d HH:mm:ss"];
+    self.broadcastSchedStart = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@", selectedStartYear, selectedStartMonth, selectedStartDay, selectedStartHour, selectedStartMinute, @"00"] withFormat:@"yyyy-M-d HH:mm:ss"];
+    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@", selectedEndYear, selectedEndMonth, selectedEndDay, selectedEndHour, selectedEndMinute, @"00"] withFormat:@"yyyy-M-d HH:mm:ss"];
     
     
     // Get channelID

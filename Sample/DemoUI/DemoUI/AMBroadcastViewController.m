@@ -31,7 +31,6 @@
 @implementation AMBroadcastViewController 
 {
     NSString* statusNetEventURLString;
-    Boolean isLogin;
     Boolean needsToConfirmEvent;
     NSString *statusNetURL;
     NSString *myUserName;
@@ -77,7 +76,7 @@
     [self setAuthentication:auth];
     [self initYoutubeService];
     
-    needsToConfirmEvent = FALSE;
+    needsToConfirmEvent = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
@@ -277,6 +276,8 @@
                                        NSString *successText = [NSString stringWithFormat:@"Event created! URL: https://www.youtube.com/embed?v=%@", liveBroadcast.identifier];
                                        self.eventFeedbackTextField.stringValue = successText;
                                        
+                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       
                                    } else {
                                        NSLog(@"Error: %@", error.description);
                                        
@@ -419,10 +420,18 @@
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
 - (IBAction)createEventBtnClick:(id)sender {
-    if ( [self isSignedIn] ) {
-        [self createYouTubeLiveEvent];
+    if (needsToConfirmEvent == FALSE) {
+        if ( [self isSignedIn] ) {
+            [self createYouTubeLiveEvent];
+        } else {
+            self.eventFeedbackTextField.stringValue = @"Sign In to Google to create a Live Event.";
+        }
+        
+        needsToConfirmEvent = TRUE;
     } else {
-        NSLog(@"Oops, sign in to YouTube first!");
+        [self.createEventBtn setTitle:@"CONFIRM"];
+        
+        needsToConfirmEvent = FALSE;
     }
 }
 

@@ -33,8 +33,6 @@
 @property (strong) IBOutlet NSButton *createEventBtn;
 @property (strong) IBOutlet NSTextField *broadcastTItleField;
 @property (strong) IBOutlet NSTextField *broadcastDescField;
-@property (strong) IBOutlet AMPopUpView *broadcastStartTimeField;
-@property (strong) IBOutlet AMPopUpView *broadcastEndTimeField;
 
 
 @property (strong) IBOutlet NSTextField *eventStartDayTextField;

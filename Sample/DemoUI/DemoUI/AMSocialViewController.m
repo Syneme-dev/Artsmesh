@@ -199,9 +199,11 @@ typedef enum {
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     
-    NSString *url = sender.mainFrameURL;
+    //NSString *url = sender.mainFrameURL;
+
+    WebPreferences *socialTabPrefs = [self.socialWebTab preferences];
     
-    self.socialWebTab.preferences.userStyleSheetEnabled = YES;
+    socialTabPrefs.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 
 //    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
@@ -214,7 +216,7 @@ typedef enum {
 //    else {
 //        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
 //    }
-    self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+    socialTabPrefs.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 //    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
     
    

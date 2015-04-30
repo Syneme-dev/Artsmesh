@@ -1,4 +1,10 @@
-
+html {
+	overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}
+#site_contact {
+    top: 14px;
+}
 #header{
 	/**
     padding-top:0 !important;

@@ -53,7 +53,8 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:self];
     [self.socialWebTab setPolicyDelegate:self];
     [self.socialWebTab setUIDelegate:self];
-    ;
+    [self.socialWebTab setWantsLayer:YES];
+    
     self.archiveScale=1;
 
 }
@@ -147,9 +148,18 @@ typedef enum {
     publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?fromMac=true", statusNetURL];
     infoStatus = INFO_USER;
     isInfoPage = YES;
-    [self.socialWebTab.mainFrame loadRequest:
-            [NSURLRequest requestWithURL:[NSURL URLWithString:
-                    loginURL]]];
+    
+    if ([myUserName length] > 0) {
+        //Username provided, try logging in
+        [self.socialWebTab.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:[NSURL URLWithString:
+                                       loginURL]]];
+    } else {
+        //Username not given, take to front page
+        [self.socialWebTab.mainFrame loadRequest:
+         [NSURLRequest requestWithURL:[NSURL URLWithString:
+                                       statusNetURL]]];
+    }
 }
 
 - (void)gotoUsersPage {
@@ -189,9 +199,11 @@ typedef enum {
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     
-    NSString *url = sender.mainFrameURL;
+    //NSString *url = sender.mainFrameURL;
+
+    WebPreferences *socialTabPrefs = [self.socialWebTab preferences];
     
-    self.socialWebTab.preferences.userStyleSheetEnabled = YES;
+    socialTabPrefs.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 
 //    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
@@ -204,7 +216,7 @@ typedef enum {
 //    else {
 //        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
 //    }
-    self.socialWebTab.preferences.userStyleSheetLocation = [NSURL fileURLWithPath:path];
+    socialTabPrefs.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 //    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
     
    
@@ -220,6 +232,7 @@ typedef enum {
     NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
     [frame.webView stringByEvaluatingJavaScriptFromString:
             loginJs];
+    
     isLogin = YES;
 }
 

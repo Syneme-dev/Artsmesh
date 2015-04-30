@@ -79,6 +79,7 @@
     }
     [self.view removeFromSuperview];
     if (_floatingWindow)
+        _floatingWindow.isVisible = NO;
         _floatingWindow = nil;
 //    [self.view setHidden:YES];
     AMAppDelegate *appDelegate=[NSApp delegate];

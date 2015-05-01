@@ -70,7 +70,7 @@ html {
 #site_contact{
     position: absolute !important;
     margin: 0 !important;
-    margin-top:2px !important;
+    /** margin-top:2px !important; **/
 }
 #site_contact .fn.org{
     display:none !important;

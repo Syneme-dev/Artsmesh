@@ -175,6 +175,7 @@
 		2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0519FF6FDC0000F18A /* AMLiveMapProgramView.m */; };
 		2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */; };
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
+		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
 		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
@@ -752,6 +753,7 @@
 		2D7BCE0719FF70470000F18A /* AMLiveMapProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramViewController.h; sourceTree = "<group>"; };
 		2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramViewController.m; sourceTree = "<group>"; };
 		2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveMapProgramViewController.xib; sourceTree = "<group>"; };
+		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
@@ -1465,6 +1467,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */,
 				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
@@ -2049,7 +2052,6 @@
 				AFD3479E195BEF720055043E /* AMMainOutputViewController.xib in Resources */,
 				AFAEBD9B19610B8700B7FB51 /* OnlineDot.png in Resources */,
 				AFAEBDAB19610BEA00B7FB51 /* Attachement.png in Resources */,
-				2DD0EBE01AB14DA6008077C6 /* GTMOAuth2Window.xib in Resources */,
 				AFD34794195BEE1B0055043E /* AMScoreViewController.xib in Resources */,
 				4A8C69F91A70A0ED00540694 /* AMUserDetailsViewController.xib in Resources */,
 				AFAEBD9C19610B8700B7FB51 /* QuitGroup.png in Resources */,
@@ -2083,6 +2085,7 @@
 				4A8C69E91A7093A000540694 /* AMStaticUserDetailsViewController.xib in Resources */,
 				4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */,
 				AFAEBDB619610BEA00B7FB51 /* ShareLocation.png in Resources */,
+				2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

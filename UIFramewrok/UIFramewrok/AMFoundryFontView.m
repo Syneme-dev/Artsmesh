@@ -10,6 +10,12 @@
 
 @implementation AMFoundryFontView
 
+- (void)awakeFromNib
+{
+    [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
+    [self setFocusRingType:NSFocusRingTypeNone];
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -54,12 +60,6 @@
     [super drawRect:rect];
 }
 
-
-- (void)awakeFromNib
-{
-    [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
-    [self setFocusRingType:NSFocusRingTypeNone];
-}
 
 
 @end

@@ -116,7 +116,7 @@
         return 28;
     }
     else
-        return 28 - 2;
+        return 28 - 4;
 }
 
 - (void) initTimeZone : (NSTimeZone*) zone

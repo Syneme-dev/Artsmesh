@@ -160,7 +160,7 @@
     
     if (YES) {
         NSTimeZone* zone = [timeComps timeZone];
-        NSLog(@"%@", [zone abbreviationForDate:date]);
+     //   NSLog(@"%@", [zone abbreviationForDate:date]);
     }
 }
 

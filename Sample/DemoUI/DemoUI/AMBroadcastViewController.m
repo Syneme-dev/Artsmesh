@@ -204,6 +204,7 @@
 }
 
 - (void)getYouTubeChannelId {
+    NSLog(@"time to find channel id to insert");
     GTLServiceYouTube *service = self.youTubeService;
     
     GTLQueryYouTube *query = [GTLQueryYouTube queryForChannelsListWithPart:@"snippet"];
@@ -448,6 +449,27 @@
         [self loadOAuthWindow];
     }
 }
+
+
+/*** Notifications **/
+- (void)controlTextDidChange:(NSNotification *)notification {
+    if ([notification object] == self.eventStartDayTextField && [self.eventStartDayTextField.stringValue length] > 0 ) {
+        self.eventEndDayTextField.stringValue = self.eventStartDayTextField.stringValue;
+    }
+    else if ([notification object] == self.eventStartMonthTextField && [self.eventStartMonthTextField.stringValue length] > 0 ) {
+        self.eventEndMonthTextField.stringValue = self.eventStartMonthTextField.stringValue;
+    }
+    else if ([notification object] == self.eventStartYearTextField && [self.eventStartYearTextField.stringValue length] > 0 ) {
+        self.eventEndYearTextField.stringValue = self.eventStartYearTextField.stringValue;
+    }
+    else if ([notification object] == self.eventStartHourTextField && [self.eventStartHourTextField.stringValue length] > 0 ) {
+        self.eventEndHourTextField.stringValue = self.eventStartHourTextField.stringValue;
+    }
+    else if ([notification object] == self.eventStartMinuteTextField && [self.eventStartMinuteTextField.stringValue length] > 0 ) {
+        self.eventEndMinuteTextField.stringValue = self.eventStartMinuteTextField.stringValue;
+    }
+}
+
 
 -(void)groupChanged:(NSNotification *)notification
 {

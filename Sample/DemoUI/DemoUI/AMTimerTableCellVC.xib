@@ -25,80 +25,80 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kon-lH-z0L" customClass="AMPopUpView">
-                    <rect key="frame" x="530" y="132" width="158" height="22"/>
+                    <rect key="frame" x="530" y="143" width="158" height="22"/>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CyS-Pa-GgU" customClass="AMPopUpView">
-                    <rect key="frame" x="530" y="235" width="158" height="22"/>
+                    <rect key="frame" x="530" y="226" width="158" height="22"/>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="78f-1N-qQr" customClass="AMCheckBoxView">
-                    <rect key="frame" x="530" y="283" width="25" height="25"/>
+                    <rect key="frame" x="530" y="264" width="25" height="25"/>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zFe-Ro-MWw">
-                    <rect key="frame" x="358" y="187" width="3" height="17"/>
+                    <rect key="frame" x="358" y="188" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="t5d-nn-L9i"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qhe-nG-aD6">
-                    <rect key="frame" x="375" y="184" width="111" height="19"/>
+                    <rect key="frame" x="375" y="185" width="111" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="METER" id="Jr2-yZ-mnj">
-                        <font key="font" size="12" name="FoundryMonoline-Medium"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="294-BQ-bIj">
-                    <rect key="frame" x="358" y="287" width="3" height="17"/>
+                    <rect key="frame" x="358" y="268" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ILp-cH-Hxu"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jkj-qo-bJn">
-                    <rect key="frame" x="375" y="284" width="121" height="19"/>
+                    <rect key="frame" x="375" y="263" width="121" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="METRONOME" id="PdQ-EA-eEq">
-                        <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qon-Wg-lsg">
-                    <rect key="frame" x="358" y="237" width="3" height="17"/>
+                    <rect key="frame" x="358" y="228" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ete-KX-g7y"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Wp-7g-zch">
-                    <rect key="frame" x="358" y="137" width="3" height="17"/>
+                    <rect key="frame" x="358" y="148" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="nmX-pl-lEo"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UFz-Lr-UtG">
-                    <rect key="frame" x="375" y="134" width="102" height="19"/>
+                    <rect key="frame" x="375" y="145" width="102" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BEAT VALUE" id="ZqL-AE-8B8">
-                        <font key="font" size="12" name="FoundryMonoline-Regular"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZAq-q0-BJ3">
-                    <rect key="frame" x="358" y="87" width="3" height="17"/>
+                    <rect key="frame" x="358" y="108" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="IjL-nm-EQA"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1cm-3I-j9t" customClass="AMFoundryFontView">
-                    <rect key="frame" x="375" y="84" width="102" height="19"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1cm-3I-j9t">
+                    <rect key="frame" x="375" y="105" width="102" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BPM" id="fPt-XE-rEE">
-                        <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-mm-Fnr">
-                    <rect key="frame" x="358" y="40" width="3" height="17"/>
+                    <rect key="frame" x="358" y="68" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="C0g-Cq-ArH"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U4X-Ee-frv" customClass="AMFoundryFontView">
-                    <rect key="frame" x="375" y="38" width="102" height="19"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U4X-Ee-frv">
+                    <rect key="frame" x="375" y="66" width="102" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DELAY" id="Qss-p9-tXG">
-                        <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iqx-Ak-rUX" customClass="AMFoundryFontView">
-                    <rect key="frame" x="591" y="180" width="23" height="25"/>
+                    <rect key="frame" x="591" y="181" width="23" height="25"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="/" id="JFn-TE-wES">
                         <font key="font" metaFont="system" size="14"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,7 +106,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q56-CY-Q6Q" customClass="AMFoundryFontView">
-                    <rect key="frame" x="530" y="180" width="32" height="25"/>
+                    <rect key="frame" x="530" y="181" width="32" height="25"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="left" title="4" drawsBackground="YES" id="kKA-gv-yH8">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -114,7 +114,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-Qe-4QC" customClass="AMFoundryFontView">
-                    <rect key="frame" x="643" y="180" width="32" height="25"/>
+                    <rect key="frame" x="643" y="181" width="32" height="25"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" alignment="left" title="4" drawsBackground="YES" id="BeA-jz-8QL">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -138,25 +138,25 @@
                     </subviews>
                 </customView>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwH-e8-al0" customClass="AMFoundryFontView">
-                    <rect key="frame" x="530" y="82" width="75" height="22"/>
+                    <rect key="frame" x="530" y="97" width="75" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" title="60" id="LFF-sA-K0V">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" size="12" name="FoundryMonoline-Regular"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ImV-Us-oPV" customClass="AMFoundryFontView">
-                    <rect key="frame" x="530" y="38" width="151" height="23"/>
+                    <rect key="frame" x="530" y="64" width="151" height="23"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ms" id="m9b-bv-v17">
-                        <font key="font" metaFont="system" size="18"/>
+                        <font key="font" size="12" name="FoundryMonoline-Regular"/>
                         <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1aB-0I-1Jh">
-                    <rect key="frame" x="375" y="235" width="100" height="19"/>
+                    <rect key="frame" x="375" y="226" width="100" height="19"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUP" id="txU-dx-fyL">
-                        <font key="font" size="12" name="FoundryMonoline-Light"/>
+                        <font key="font" size="10" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

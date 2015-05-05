@@ -15,6 +15,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 
+
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
 @end
 
@@ -533,15 +534,20 @@
     }
     return allusers;
 }
-
+#define Preference_Key_General_GlobalServerAddr     @"Preference_Key_General_GlobalServerAddr"
 - (NSString *)httpBaseURL
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
-    NSString* localServerAddr = config.artsmeshAddr;
+   
+    NSString *globalServerAddr = [[NSUserDefaults standardUserDefaults]
+                                  stringForKey:Preference_Key_General_GlobalServerAddr];
+   
+    globalServerAddr = [NSString stringWithFormat:@"ipv6.%@", globalServerAddr];
+    // NSString* localServerAddr = config.artsmeshAddr;
     NSString* localServerPort = config.artsmeshPort;
     
-    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
+    return [NSString stringWithFormat:@"http://%@:%@", globalServerAddr, localServerPort];
 }
 
 

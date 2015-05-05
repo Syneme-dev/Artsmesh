@@ -15,7 +15,6 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 
-
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
 @end
 
@@ -39,8 +38,8 @@
     if (self = [super init]) {
         
         [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"mesherState"
-                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                     context:nil];
+                                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                       context:nil];
         
         _httpRequestQueue = [[NSOperationQueue alloc] init];
         _httpRequestQueue.name = @"RemoteMesherQueue";
@@ -101,7 +100,7 @@
     if (![_udpSocket bindToPort:0 error:&error])
     {
         AMLog(kAMErrorLog, @"AMMesher", @"create udp socket failed in remote mesher when request public ip. Error:%@",
-                 error);
+              error);
         return;
     }
     
@@ -125,7 +124,7 @@
     AMLog(kAMInfoLog, @"AMMesher", @"will register group to global server");
     
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-
+    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
     req.requestPath = @"/groups/add";
@@ -177,7 +176,7 @@
     
     NSMutableDictionary* dict = [mySelf toDict];
     dict[@"groupId"] = myGroup.groupId;
-
+    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL ];
     req.requestPath = @"/users/add";
@@ -261,7 +260,7 @@
         
         AMLog(kAMInfoLog, @"AMMesher", @"update myself to global server finished");
     };
-
+    
     [_httpRequestQueue addOperation:req];
 }
 
@@ -272,7 +271,7 @@
     }
     
     AMLog(kAMInfoLog, @"AMMesher", @"Will update group info to global server");
-
+    
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     NSDictionary* dict = [myGroup dictWithoutUsers];
     
@@ -315,7 +314,7 @@
     
     if (_heartbeatThread){
         [_heartbeatThread cancel];
-         _heartbeatThread = nil;
+        _heartbeatThread = nil;
     }
     
     if (_httpRequestQueue) {
@@ -377,7 +376,7 @@
             return;
         }
         AMLog(kAMInfoLog, @"AMMesher", @"merge group finished");
-
+        
     };
     
     [_httpRequestQueue addOperation:req];
@@ -395,7 +394,7 @@
     }
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-
+    
     NSString* remoteServerAddr = config.artsmeshAddr;
     NSString* remoteServerPort = config.artsmeshPort;
     BOOL useIpv6 = config.useIpv6;
@@ -457,7 +456,7 @@
             NSDictionary* groupData = (NSDictionary*)groups[i];
             AMLiveGroup* newGroup = [self parseGroup:groupData];
             [groupList addObject:newGroup];
-        
+            
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -486,7 +485,7 @@
         }
     }
     newGroup.users = users;
-
+    
     //parse subgroups
     NSMutableArray* subgroups = [[NSMutableArray alloc] init];
     NSArray* subGroupsData = groupData[@"SubGroups"];
@@ -534,20 +533,15 @@
     }
     return allusers;
 }
-#define Preference_Key_General_GlobalServerAddr     @"Preference_Key_General_GlobalServerAddr"
+
 - (NSString *)httpBaseURL
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
-   
-    NSString *globalServerAddr = [[NSUserDefaults standardUserDefaults]
-                                  stringForKey:Preference_Key_General_GlobalServerAddr];
-   
-    globalServerAddr = [NSString stringWithFormat:@"ipv6.%@", globalServerAddr];
-    // NSString* localServerAddr = config.artsmeshAddr;
+    NSString* localServerAddr = config.artsmeshAddr;
     NSString* localServerPort = config.artsmeshPort;
     
-    return [NSString stringWithFormat:@"http://%@:%@", globalServerAddr, localServerPort];
+    return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
 }
 
 
@@ -584,7 +578,7 @@
     if (hasMessage) {
         //Send quest message request
     }
-
+    
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data

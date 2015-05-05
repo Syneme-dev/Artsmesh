@@ -395,15 +395,18 @@
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* remoteServerAddr = config.artsmeshAddr;
+ //   NSString* remoteServerAddr = config.artsmeshAddr;
+    NSString* remoteServerAddrFake = @"Artsmesh.io";
     NSString* remoteServerPort = config.artsmeshPort;
-    BOOL useIpv6 = config.useIpv6;
+    BOOL useIpv6 = NO;//config.useIpv6;
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
     _heartbeatFailureCount = 0;
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost: remoteServerAddr port:remoteServerPort ipv6:useIpv6];
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost:remoteServerAddrFake
+                                                    port:remoteServerPort
+                                                    ipv6:useIpv6];
     _heartbeatThread.delegate = self;
     _heartbeatThread.timeInterval = HBTimeInterval;
     _heartbeatThread.receiveTimeout = HBReceiveTimeout;

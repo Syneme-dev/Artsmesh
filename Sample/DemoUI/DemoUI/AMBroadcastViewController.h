@@ -52,6 +52,8 @@
 
 @property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
+@property (strong) IBOutlet AMCheckBoxView *schedStartPMCheck;
+@property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;
 
 
 - (void)changeBroadcastURL : (NSString *)newURL;

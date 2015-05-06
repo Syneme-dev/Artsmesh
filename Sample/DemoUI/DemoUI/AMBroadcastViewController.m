@@ -108,6 +108,12 @@
     self.privateCheck.delegate = self;
     self.privateCheck.title = @"PRIVATE";
     
+    self.schedStartPMCheck.delegate = self;
+    self.schedStartPMCheck.title = @"PM";
+    
+    self.schedEndPMCheck.delegate = self;
+    self.schedEndPMCheck.title = @"PM";
+    
     [self loadEventTimes];
     
 }
@@ -551,6 +557,8 @@
 }
 
 -(void) updateUI {
+    [self.schedStartPMCheck setFontSize:10.0f];
+    [self.schedEndPMCheck setFontSize:10.0f];
     [self.privateCheck setFontSize:10.0f];
     
     [self checkSignedInBtn];

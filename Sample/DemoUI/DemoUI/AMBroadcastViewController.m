@@ -190,21 +190,21 @@
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
     NSDateFormatter *getDateFormatter = [[NSDateFormatter alloc] init];
+    
     [getDateFormatter setDateFormat:dateFormat];
-    //[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    
     NSDate *date = [getDateFormatter dateFromString: dateString];
     
     NSLog(@"Supplied Date string is: %@", dateString);
     NSLog(@"Supplied date format is: %@", dateFormat);
     NSLog(@"The date is %@", date);
     
-    NSLog(@"Test date from string: %@", [getDateFormatter dateFromString:@"2015-04-28 13:00:00"]);
-    
     return date;
 }
 
 - (void)getYouTubeChannelId {
-    NSLog(@"time to find channel id to insert");
+    //This function grabs the YouTube channel that we need to work with
+    
     GTLServiceYouTube *service = self.youTubeService;
     
     GTLQueryYouTube *query = [GTLQueryYouTube queryForChannelsListWithPart:@"snippet"];
@@ -236,11 +236,12 @@
 - (void)insertLiveYouTubeBroadcast {
     // Create an object for the liveBroadcast resource's snippet. Specify values
     // for the snippet's title, scheduled start time, and scheduled end time.
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
     newBroadcastSnippet.title = self.broadcastTitle;
     newBroadcastSnippet.descriptionProperty = self.broadcastDesc;
-    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:nil];
-    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:nil];
+    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:timeZone];
+    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
     
     // Create an object for the liveBroadcast resource's status, and set the
     // broadcast's status to "private".

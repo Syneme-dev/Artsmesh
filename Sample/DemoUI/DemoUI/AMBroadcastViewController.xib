@@ -343,7 +343,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="3R2-pQ-SUz"/>
                                     </imageView>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0A-Xm-MAU" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="20" y="306" width="150" height="20"/>
+                                        <rect key="frame" x="19" y="306" width="150" height="20"/>
                                     </customView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
                                         <rect key="frame" x="2" y="250" width="70" height="21"/>

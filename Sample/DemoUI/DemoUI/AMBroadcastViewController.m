@@ -551,6 +551,8 @@
 }
 
 -(void) updateUI {
+    [self.privateCheck setFontSize:10.0f];
+    
     [self checkSignedInBtn];
 }
 

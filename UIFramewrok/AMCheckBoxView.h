@@ -24,6 +24,7 @@
 
 @property (weak) IBOutlet id<AMCheckBoxDelegeate>delegate;
 
+-(void)setFontSize:(float)newSize;
 -(void)setChecked:(BOOL)checked;
 -(BOOL)checked;
 

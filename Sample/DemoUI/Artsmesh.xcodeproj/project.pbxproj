@@ -1117,6 +1117,7 @@
 		269FB8491998814600355312 /* BroadCast Panel */ = {
 			isa = PBXGroup;
 			children = (
+				2D93E6DD1AF9D4AB0055D625 /* Classes */,
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
 				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
@@ -1460,6 +1461,13 @@
 				2D6D76F619C16E3300201106 /* AMPixel.m */,
 				2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */,
 				2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		2D93E6DD1AF9D4AB0055D625 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Classes;
 			sourceTree = "<group>";

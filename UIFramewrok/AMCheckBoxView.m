@@ -102,6 +102,11 @@
     }
 }
 
+-(void)setFontSize:(float)newSize {
+    NSColor *lightGrey = [NSColor colorWithCalibratedRed:(187.0/255.0) green:(187.0/255.0) blue:(187.0/255.0) alpha:1];
+    self.textColor = lightGrey;
+    self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: newSize];
+}
 
 -(void)setChecked:(BOOL)checked
 {

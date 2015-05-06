@@ -175,11 +175,19 @@
     NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
     NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
     NSString *selectedStartHour = self.eventStartHourTextField.stringValue;
+    if (self.schedStartPMCheck.checked) {
+        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
+        selectedStartHour = [NSString stringWithFormat:@"%ld", baseHour];
+    }
     NSString *selectedStartMinute = self.eventStartMinuteTextField.stringValue;
     NSString *selectedEndDay = self.eventEndDayTextField.stringValue;
     NSString *selectedEndMonth = self.eventEndMonthTextField.stringValue;
     NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
     NSString *selectedEndHour = self.eventEndHourTextField.stringValue;
+    if (self.schedEndPMCheck.checked) {
+        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
+        selectedEndHour = [NSString stringWithFormat:@"%ld", baseHour];
+    }
     NSString *selectedEndMinute = self.eventEndMinuteTextField.stringValue;
     
     //2016-01-02 19:59:59
@@ -375,7 +383,7 @@
     
     NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
     hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    hourNumberFormatter.maximum = [NSNumber numberWithInteger:24];
+    hourNumberFormatter.maximum = [NSNumber numberWithInteger:12];
     
     NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
     minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];

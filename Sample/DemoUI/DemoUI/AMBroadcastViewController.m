@@ -108,6 +108,12 @@
     self.privateCheck.delegate = self;
     self.privateCheck.title = @"PRIVATE";
     
+    self.schedStartPMCheck.delegate = self;
+    self.schedStartPMCheck.title = @"PM";
+    
+    self.schedEndPMCheck.delegate = self;
+    self.schedEndPMCheck.title = @"PM";
+    
     [self loadEventTimes];
     
 }
@@ -169,11 +175,19 @@
     NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
     NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
     NSString *selectedStartHour = self.eventStartHourTextField.stringValue;
+    if (self.schedStartPMCheck.checked) {
+        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
+        selectedStartHour = [NSString stringWithFormat:@"%ld", baseHour];
+    }
     NSString *selectedStartMinute = self.eventStartMinuteTextField.stringValue;
     NSString *selectedEndDay = self.eventEndDayTextField.stringValue;
     NSString *selectedEndMonth = self.eventEndMonthTextField.stringValue;
     NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
     NSString *selectedEndHour = self.eventEndHourTextField.stringValue;
+    if (self.schedEndPMCheck.checked) {
+        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
+        selectedEndHour = [NSString stringWithFormat:@"%ld", baseHour];
+    }
     NSString *selectedEndMinute = self.eventEndMinuteTextField.stringValue;
     
     //2016-01-02 19:59:59
@@ -190,21 +204,21 @@
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
     NSDateFormatter *getDateFormatter = [[NSDateFormatter alloc] init];
+    
     [getDateFormatter setDateFormat:dateFormat];
-    //[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    
     NSDate *date = [getDateFormatter dateFromString: dateString];
     
     NSLog(@"Supplied Date string is: %@", dateString);
     NSLog(@"Supplied date format is: %@", dateFormat);
     NSLog(@"The date is %@", date);
     
-    NSLog(@"Test date from string: %@", [getDateFormatter dateFromString:@"2015-04-28 13:00:00"]);
-    
     return date;
 }
 
 - (void)getYouTubeChannelId {
-    NSLog(@"time to find channel id to insert");
+    //This function grabs the YouTube channel that we need to work with
+    
     GTLServiceYouTube *service = self.youTubeService;
     
     GTLQueryYouTube *query = [GTLQueryYouTube queryForChannelsListWithPart:@"snippet"];
@@ -236,11 +250,12 @@
 - (void)insertLiveYouTubeBroadcast {
     // Create an object for the liveBroadcast resource's snippet. Specify values
     // for the snippet's title, scheduled start time, and scheduled end time.
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
     newBroadcastSnippet.title = self.broadcastTitle;
     newBroadcastSnippet.descriptionProperty = self.broadcastDesc;
-    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:nil];
-    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:nil];
+    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:timeZone];
+    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
     
     // Create an object for the liveBroadcast resource's status, and set the
     // broadcast's status to "private".
@@ -368,7 +383,7 @@
     
     NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
     hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    hourNumberFormatter.maximum = [NSNumber numberWithInteger:24];
+    hourNumberFormatter.maximum = [NSNumber numberWithInteger:12];
     
     NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
     minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];
@@ -550,6 +565,10 @@
 }
 
 -(void) updateUI {
+    [self.schedStartPMCheck setFontSize:10.0f];
+    [self.schedEndPMCheck setFontSize:10.0f];
+    [self.privateCheck setFontSize:10.0f];
+    
     [self checkSignedInBtn];
 }
 

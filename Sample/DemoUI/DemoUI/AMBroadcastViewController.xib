@@ -20,6 +20,7 @@
                 <outlet property="eventStartMinuteTextField" destination="TiM-RE-0II" id="X27-pA-cqG"/>
                 <outlet property="eventStartMonthTextField" destination="o42-L4-uid" id="ea8-h7-8TB"/>
                 <outlet property="eventStartYearTextField" destination="XxN-bD-K7m" id="Yie-dq-7fA"/>
+                <outlet property="eventsManagerView" destination="e2o-vu-ZRF" id="tGu-RU-kQh"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
                 <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
                 <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>
@@ -370,7 +371,7 @@
                                             <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
                                         </connections>
                                     </button>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF" customClass="AMEventsManagerView">
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                                         <rect key="frame" x="0.0" y="0.0" width="554" height="230"/>
                                     </customView>
                                 </subviews>

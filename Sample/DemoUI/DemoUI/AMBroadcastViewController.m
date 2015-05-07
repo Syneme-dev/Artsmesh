@@ -62,6 +62,12 @@
 
 -(void)awakeFromNib
 {
+    //Set up Events Manager SubView and View Controller
+    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
+    NSView *view = [viewController view];
+    [self.eventsManagerView addSubview:view];
+    
+    //Set up YouTube/oAuth stuff
     kKeychainItemName = @"ArtsMesh: YouTube";
     
     scope = @"https://www.googleapis.com/auth/youtube";
@@ -83,8 +89,6 @@
     
     [self updateUI];
     
-    //[AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    //[AMButtonHandler changeTabTextColor:self.goBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
     
     [self.groupTabView setAutoresizesSubviews:YES];

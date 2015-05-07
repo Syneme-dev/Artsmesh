@@ -1127,6 +1127,7 @@
 			children = (
 				2D813F701AFC10E3006C063D /* Views */,
 				2D813F6F1AFC10CE006C063D /* Controllers */,
+				2D813F751AFC21D6006C063D /* Nibs */,
 			);
 			name = "BroadCast Panel";
 			sourceTree = "<group>";
@@ -1431,10 +1432,8 @@
 			children = (
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
-				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
 				2D813F6A1AFC10C5006C063D /* AMEventsManagerViewController.h */,
 				2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */,
-				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1446,6 +1445,15 @@
 				2D813F721AFC1147006C063D /* AMEventsManagerView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2D813F751AFC21D6006C063D /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
+				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
+			);
+			name = Nibs;
 			sourceTree = "<group>";
 		};
 		2D86EDAE19FB082C00332371 /* MapPanel */ = {

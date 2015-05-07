@@ -17,6 +17,7 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMAppDelegate.h"
+#import "AMEventsManagerViewController.h"
 
 #import <GTL/GTMOAuth2WindowController.h>
 #import "GTLYouTube.h"
@@ -52,6 +53,9 @@
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedStartPMCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;
+
+
+@property (strong) IBOutlet NSView *eventsManagerView;
 
 
 - (void)changeBroadcastURL : (NSString *)newURL;

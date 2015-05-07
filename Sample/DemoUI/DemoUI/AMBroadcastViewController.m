@@ -17,6 +17,7 @@
 
 @property (strong) GTLServiceYouTube *youTubeService;
 @property (strong) GTLServiceTicket *channelIdTicket;
+@property (strong) GTLServiceTicket *channelCurrentEventsTicket;
 @property (strong) GTLServiceTicket *broadcastTicket;
 @property (strong) NSString *channelId;
 @property (strong) NSString *broadcastTitle;
@@ -216,6 +217,9 @@
     return date;
 }
 
+
+/***** YouTube Query Functions ******/
+
 - (void)getYouTubeChannelId {
     //This function grabs the YouTube channel that we need to work with
     
@@ -246,6 +250,37 @@
                                    
                                }];
 }
+
+
+- (void)getExistingYouTubeLiveEvents {
+    NSLog(@"Find existing events, if they exist.");
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet"];
+    query.mine = YES;
+    
+    self.channelCurrentEventsTicket = [service executeQuery:query
+                                          completionHandler:^(GTLServiceTicket *ticket,
+                                                              GTLYouTubeChannelListResponse *liveEventsList,
+                                                              NSError *error) {
+                                              _channelCurrentEventsTicket = nil;
+                                              if (error == nil) {
+                                                  if ([[liveEventsList items] count] > 0) {
+                                                      NSLog(@"Live Events List is as follows:");
+                                                      NSLog(@"%@", liveEventsList);
+                                                      
+                                                  }
+                                              } else {
+                                                  NSLog(@"No Live Events found..");
+                                                  NSLog(@"Error: %@", error.description);
+                                              }
+                                              NSLog(@"finished..");
+                                              
+                                          }];
+    
+}
+
 
 - (void)insertLiveYouTubeBroadcast {
     // Create an object for the liveBroadcast resource's snippet. Specify values
@@ -302,6 +337,7 @@
                                }];
 
 }
+
 
 - (void)loadEventTimes {
     NSInteger *selectDay = 0;
@@ -568,6 +604,9 @@
     [self.schedStartPMCheck setFontSize:10.0f];
     [self.schedEndPMCheck setFontSize:10.0f];
     [self.privateCheck setFontSize:10.0f];
+    
+    // Test pull current live events list
+    if ([self isSignedIn]) { [self getExistingYouTubeLiveEvents]; }
     
     [self checkSignedInBtn];
 }

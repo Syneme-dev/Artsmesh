@@ -175,6 +175,9 @@
 		2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0519FF6FDC0000F18A /* AMLiveMapProgramView.m */; };
 		2D7BCE0A19FF70470000F18A /* AMLiveMapProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */; };
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
+		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
+		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
+		2D813F731AFC1147006C063D /* AMEventsManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F721AFC1147006C063D /* AMEventsManagerView.m */; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
@@ -753,6 +756,11 @@
 		2D7BCE0719FF70470000F18A /* AMLiveMapProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramViewController.h; sourceTree = "<group>"; };
 		2D7BCE0819FF70470000F18A /* AMLiveMapProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramViewController.m; sourceTree = "<group>"; };
 		2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLiveMapProgramViewController.xib; sourceTree = "<group>"; };
+		2D813F6A1AFC10C5006C063D /* AMEventsManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerViewController.h; sourceTree = "<group>"; };
+		2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerViewController.m; sourceTree = "<group>"; };
+		2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerViewController.xib; sourceTree = "<group>"; };
+		2D813F711AFC1147006C063D /* AMEventsManagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerView.h; sourceTree = "<group>"; };
+		2D813F721AFC1147006C063D /* AMEventsManagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerView.m; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
@@ -1117,10 +1125,8 @@
 		269FB8491998814600355312 /* BroadCast Panel */ = {
 			isa = PBXGroup;
 			children = (
-				2D93E6DD1AF9D4AB0055D625 /* Classes */,
-				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
-				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
-				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
+				2D813F701AFC10E3006C063D /* Views */,
+				2D813F6F1AFC10CE006C063D /* Controllers */,
 			);
 			name = "BroadCast Panel";
 			sourceTree = "<group>";
@@ -1420,6 +1426,28 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		2D813F6F1AFC10CE006C063D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
+				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
+				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
+				2D813F6A1AFC10C5006C063D /* AMEventsManagerViewController.h */,
+				2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */,
+				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2D813F701AFC10E3006C063D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D813F711AFC1147006C063D /* AMEventsManagerView.h */,
+				2D813F721AFC1147006C063D /* AMEventsManagerView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		2D86EDAE19FB082C00332371 /* MapPanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1461,13 +1489,6 @@
 				2D6D76F619C16E3300201106 /* AMPixel.m */,
 				2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */,
 				2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		2D93E6DD1AF9D4AB0055D625 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2005,6 +2026,7 @@
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
 				AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */,
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
+				2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */,
 				AFAEBDB319610BEA00B7FB51 /* RecentTags.png in Resources */,
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				4A32A1221A722683006FEDD7 /* AMUserProfielViewController.xib in Resources */,
@@ -2171,6 +2193,7 @@
 				2D08FD991AD661FF00A9D257 /* GTLYouTubeActivityListResponse.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				2D08FE061AD661FF00A9D257 /* GTLYouTubeVideoStatus.m in Sources */,
+				2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */,
 				2D08FD9B1AD661FF00A9D257 /* GTLYouTubeCdnSettings.m in Sources */,
 				2D08FDB41AD661FF00A9D257 /* GTLYouTubeGuideCategoryListResponse.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
@@ -2196,6 +2219,7 @@
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				2D08FDAB1AD661FF00A9D257 /* GTLYouTubeChannelSettings.m in Sources */,
 				2D08FDFB1AD661FF00A9D257 /* GTLYouTubeVideoLiveStreamingDetails.m in Sources */,
+				2D813F731AFC1147006C063D /* AMEventsManagerView.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				2D08FDAD1AD661FF00A9D257 /* GTLYouTubeChannelStatistics.m in Sources */,
 				2D08FDB21AD661FF00A9D257 /* GTLYouTubeGeoPoint.m in Sources */,

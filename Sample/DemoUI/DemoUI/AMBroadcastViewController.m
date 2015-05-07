@@ -324,15 +324,12 @@
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
                                        
-                                       NSString *successText = [NSString stringWithFormat:@"Event created! URL: https://www.youtube.com/embed?v=%@", liveBroadcast.identifier];
-                                       self.eventFeedbackTextField.stringValue = successText;
+                                       /** NSString *successText = [NSString stringWithFormat:@"Event created! URL: https://www.youtube.com/embed?v=%@", liveBroadcast.identifier]; **/
                                        
                                        [self.createEventBtn setTitle:@"CREATE"];
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);
-                                       
-                                       self.eventFeedbackTextField.stringValue = error.description;
                                    }
                                }];
 
@@ -476,7 +473,7 @@
         if ( [self isSignedIn] ) {
             [self createYouTubeLiveEvent];
         } else {
-            self.eventFeedbackTextField.stringValue = @"Sign In to Google to create a Live Event.";
+            //Notify user to sign in to Google to create a Live Event
         }
         
         needsToConfirmEvent = TRUE;

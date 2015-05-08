@@ -20,10 +20,13 @@
 @property (weak) IBOutlet NSTextField *machineNameField;
 @property (weak) IBOutlet AMPopUpView *privateIpBox;
 @property (weak) IBOutlet NSTextField *localServerPortField;
-@property (weak) IBOutlet AMCheckBoxView *ipv6Check;
+@property (weak) IBOutlet AMCheckBoxView*  meshUseIpv6Check;
+@property (weak) IBOutlet AMCheckBoxView*  heartbeatUseIpv6Check;
+
 @property (weak) IBOutlet AMCheckBoxView *assignedLocalServerCheck;
 @property (weak) IBOutlet NSTextField *assignedLocalServerField;
-@property (weak) IBOutlet NSTextField *globalServerAddrField;
+@property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv4;
+@property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv6;
 @property (weak) IBOutlet NSTextField *globalServerPortField;
 @property (weak) IBOutlet NSTextField *chatPortField;
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
@@ -43,8 +46,10 @@
     
     self.privateIpBox.delegate = self;
     
-    self.ipv6Check.delegate = self;
-    self.ipv6Check.title = @"USE IPV6";
+    self.meshUseIpv6Check.delegate      = self;
+    self.meshUseIpv6Check.title         = @"MESH USE IPV6";
+    self.heartbeatUseIpv6Check.delegate = self;
+    self.heartbeatUseIpv6Check.title    = @"HEART BEAT USE IPV6";
     
     self.assignedLocalServerCheck.delegate = self;
     self.assignedLocalServerCheck.title = @"USE LOCAL SERVER IP";
@@ -98,12 +103,14 @@
 
 -(void)loadUseIpv6
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_UseIpv6]) {
-        self.ipv6Check.checked = YES;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_GlobalServerAddrIpv4]) {
+        self.meshUseIpv6Check.checked = YES;
         
     }else{
-        self.ipv6Check.checked = NO;
+        self.meshUseIpv6Check.checked = NO;
     }
+    
+    if([NSUserDefaults ])
 }
 
 

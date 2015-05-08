@@ -57,8 +57,11 @@
              Preference_User_PrivateIp,          Preference_Key_User_PrivateIp,
              Preference_General_StunServerAddr,  Preference_Key_General_StunServerAddr,
              Preference_General_StunServerPort,  Preference_Key_General_StunServerPort,
-             Preference_General_GlobalServerAddr,Preference_Key_General_GlobalServerAddr,
+             
+             Preference_General_GlobalServerAddrIpv4, Preference_Key_General_GlobalServerAddrIpv4,
+             Preference_General_GlobalServerAddrIpv6, Preference_Key_General_GlobalServerAddrIpv6,
              Preference_General_GlobalServerPort,Preference_Key_General_GlobalServerPort,
+             
              Preference_General_LocalServerPort, Preference_Key_General_LocalServerPort,
              openedPanel,UserData_Key_OpenedPanel,
              Preference_Cluster_Name,            Preference_Key_Cluster_Name,
@@ -133,7 +136,10 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     AMSystemConfig* config = [[AMSystemConfig alloc] init];
     
-    config.artsmeshAddr = [defaults stringForKey:Preference_Key_General_GlobalServerAddr];
+    config.artsmeshAddrIpv4 = [defaults stringForKey:
+                               Preference_Key_General_GlobalServerAddrIpv4];
+    config.artsmeshAddrIpv6 = [defaults stringForKey:
+                               Preference_Key_General_GlobalServerAddrIpv6];
     config.artsmeshPort =  [defaults stringForKey:Preference_Key_General_GlobalServerPort];
     config.localServerHost = nil;
     config.localServerIps = nil;
@@ -147,7 +153,10 @@
     config.stunServerAddr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     config.stunServerPort = [defaults stringForKey:Preference_Key_General_StunServerPort];
     config.internalChatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
-    config.useIpv6 =  [[defaults stringForKey:Preference_Key_General_UseIpv6] boolValue];
+    config.meshUseIpv6 =  [[defaults stringForKey:
+                            Preference_Key_General_MeshUseIpv6] boolValue];
+    config.heartbeatUseIpv6 = [[defaults stringForKey:
+                                Preference_Key_General_HeartbeatUseIpv6] boolValue];
 
     [AMCoreData shareInstance].systemConfig = config;
 }

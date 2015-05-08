@@ -395,8 +395,17 @@
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* remoteServerAddr = config.heartbeatUseIpv6 ?
-                            config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    NSString* tmp1 = config.heartbeatUseIpv6 ?
+    config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    NSString* remoteServerAddr = nil;
+    if (config.heartbeatUseIpv6) {
+        NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+        remoteServerAddr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    }else{
+        remoteServerAddr = tmp1;
+    }
+
+    
     NSString* remoteServerPort = config.artsmeshPort;
 
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];

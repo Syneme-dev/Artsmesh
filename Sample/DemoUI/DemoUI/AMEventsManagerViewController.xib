@@ -7,6 +7,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMEventsManagerViewController">
             <connections>
+                <outlet property="eventsListScrollView" destination="5Mw-lD-G7h" id="CTR-BV-1qX"/>
+                <outlet property="feedbackTitle" destination="idS-RQ-PCd" id="Xa0-PJ-LHa"/>
+                <outlet property="feedbackTitleTextField" destination="idS-RQ-PCd" id="3Gf-CI-3cV"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -17,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="idS-RQ-PCd">
-                    <rect key="frame" x="0.0" y="188" width="554" height="22"/>
+                    <rect key="frame" x="0.0" y="189" width="554" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="CF7-Wx-ywg">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>

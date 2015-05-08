@@ -14,9 +14,16 @@
 
 @implementation AMEventsManagerViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
+}
+
+- (void)setTitle:(NSString *)theTitle {
+    [self.feedbackTitleTextField setStringValue:theTitle];
 }
 
 @end

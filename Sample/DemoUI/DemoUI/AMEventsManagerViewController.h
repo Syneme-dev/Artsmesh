@@ -10,4 +10,9 @@
 
 @interface AMEventsManagerViewController : NSViewController
 
+@property (strong) IBOutlet NSTextField *feedbackTitleTextField;
+@property (strong) IBOutlet NSScrollView *eventsListScrollView;
+
+- (void)setTitle:(NSString *)title;
+
 @end

@@ -49,6 +49,8 @@
     
     NSViewController* _detailViewController;
     NSMutableArray *_tabControllers;
+    
+    AMEventsManagerViewController *eventsManagerVC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -63,8 +65,8 @@
 -(void)awakeFromNib
 {
     //Set up Events Manager SubView and View Controller
-    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
-    NSView *view = [viewController view];
+    eventsManagerVC = [[AMEventsManagerViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
+    NSView *view = [eventsManagerVC view];
     [self.eventsManagerView addSubview:view];
     
     //Set up YouTube/oAuth stuff
@@ -328,7 +330,7 @@
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
                                        
-                                       /** NSString *successText = [NSString stringWithFormat:@"Event created! URL: https://www.youtube.com/embed?v=%@", liveBroadcast.identifier]; **/
+                                       [eventsManagerVC setTitle:@"Events"];
                                        
                                        [self.createEventBtn setTitle:@"CREATE"];
                                        
@@ -437,8 +439,20 @@
     self.eventStartYearTextField.stringValue = [years objectAtIndex:0];
     self.eventEndYearTextField.stringValue = [years objectAtIndex:0];
     
-    self.eventStartHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
-    self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetEndHour];
+    if ( [[hourDateFormatter stringFromDate:targetHour] intValue] <= 12 ) {
+        self.eventStartHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
+    } else {
+        int twelveHour = [[hourDateFormatter stringFromDate:targetHour] intValue] - 12;
+        self.eventStartHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
+        [self.schedStartPMCheck setChecked:YES];
+    }
+    if ( [[hourDateFormatter stringFromDate:targetEndHour] intValue] <= 12 ) {
+        self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetEndHour];
+    } else {
+        int twelveHour = [[hourDateFormatter stringFromDate:targetEndHour] intValue] - 12;
+        self.eventEndHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
+        [self.schedEndPMCheck setChecked:YES];
+    }
     self.eventStartMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
     self.eventEndMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
 }

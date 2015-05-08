@@ -177,7 +177,6 @@
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
 		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
-		2D813F731AFC1147006C063D /* AMEventsManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F721AFC1147006C063D /* AMEventsManagerView.m */; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
@@ -759,8 +758,6 @@
 		2D813F6A1AFC10C5006C063D /* AMEventsManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerViewController.h; sourceTree = "<group>"; };
 		2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerViewController.m; sourceTree = "<group>"; };
 		2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerViewController.xib; sourceTree = "<group>"; };
-		2D813F711AFC1147006C063D /* AMEventsManagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerView.h; sourceTree = "<group>"; };
-		2D813F721AFC1147006C063D /* AMEventsManagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerView.m; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
@@ -1441,8 +1438,6 @@
 		2D813F701AFC10E3006C063D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2D813F711AFC1147006C063D /* AMEventsManagerView.h */,
-				2D813F721AFC1147006C063D /* AMEventsManagerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2227,7 +2222,6 @@
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				2D08FDAB1AD661FF00A9D257 /* GTLYouTubeChannelSettings.m in Sources */,
 				2D08FDFB1AD661FF00A9D257 /* GTLYouTubeVideoLiveStreamingDetails.m in Sources */,
-				2D813F731AFC1147006C063D /* AMEventsManagerView.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				2D08FDAD1AD661FF00A9D257 /* GTLYouTubeChannelStatistics.m in Sources */,
 				2D08FDB21AD661FF00A9D257 /* GTLYouTubeGeoPoint.m in Sources */,

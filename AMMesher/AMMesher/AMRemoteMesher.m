@@ -395,7 +395,7 @@
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* remoteServerAddr = config.meshUseIpv6 ?
+    NSString* remoteServerAddr = config.heartbeatUseIpv6 ?
                             config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
     NSString* remoteServerPort = config.artsmeshPort;
 

@@ -330,7 +330,8 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
 
-    BOOL useIpv6 = config.heartbeatUseIpv6;
+    //always use ipv4 in local, because no ipv6 localserver address
+    BOOL useIpv6 = NO;//config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;

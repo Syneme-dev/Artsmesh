@@ -152,7 +152,7 @@
 {
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
     NSArray *lsIps = nil;
-    if (config.useIpv6) {
+    if (config.meshUseIpv6) {
         lsIps = [config localServerIpv6s];
     }else{
         lsIps = [config localServerIpv4s];
@@ -330,7 +330,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
 
-    BOOL useIpv6 = config.useIpv6;
+    BOOL useIpv6 = config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;

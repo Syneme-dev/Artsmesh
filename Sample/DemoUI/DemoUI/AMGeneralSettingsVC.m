@@ -49,7 +49,7 @@
     self.meshUseIpv6Check.delegate      = self;
     self.meshUseIpv6Check.title         = @"MESH USE IPV6";
     self.heartbeatUseIpv6Check.delegate = self;
-    self.heartbeatUseIpv6Check.title    = @"HEART BEAT USE IPV6";
+    self.heartbeatUseIpv6Check.title    = @"HEARTBEAT USE IPV6";
     
     self.assignedLocalServerCheck.delegate = self;
     self.assignedLocalServerCheck.title = @"USE LOCAL SERVER IP";
@@ -259,6 +259,7 @@
     if (sender == self.meshUseIpv6Check) {
         [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
                                                 forKey:Preference_Key_General_MeshUseIpv6];
+        [AMCoreData shareInstance].systemConfig.meshUseIpv6 = self.meshUseIpv6Check.checked;
         [self loadPrivateIp];
         [self loadGlobalServerAddr];
         
@@ -267,6 +268,9 @@
     if (sender == self.heartbeatUseIpv6Check) {
         [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
                                                 forKey:Preference_Key_General_HeartbeatUseIpv6];
+        
+        [AMCoreData shareInstance].systemConfig.heartbeatUseIpv6
+                                = self.heartbeatUseIpv6Check.checked;
         return;
     }
     

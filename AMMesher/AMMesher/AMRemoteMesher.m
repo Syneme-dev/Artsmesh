@@ -395,9 +395,10 @@
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    NSString* remoteServerAddr = config.artsmeshAddrIpv4;
+    NSString* remoteServerAddr = config.meshUseIpv6 ?
+                            config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
     NSString* remoteServerPort = config.artsmeshPort;
-//    BOOL useIpv6 = config.useIpv6;
+
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
@@ -541,7 +542,8 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
     NSString* localServerAddr = config.meshUseIpv6 ?
-                                         config.artsmeshAddrIpv4 : config.artsmeshAddrIpv6;
+                                         config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    
     NSString* localServerPort = config.artsmeshPort;
     
     return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];

@@ -73,7 +73,7 @@
 #define Preference_General_StunServerPort   @"22250"
 //#define Preference_General_GlobalServerAddr   @"Artsmesh.io"
 #define Preference_General_GlobalServerAddrIpv4   @"106.187.39.20"
-#define Preference_General_GlobalServerAddrIpv6   @"2400:8900::f03c:91ff:fedb:76fd"
+#define Preference_General_GlobalServerAddrIpv6   @"[2400:8900::f03c:91ff:fedb:76fd]"
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"9090"
 #define Preference_General_TopControlBar   @"YES"

@@ -103,14 +103,20 @@
 
 -(void)loadUseIpv6
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_GlobalServerAddrIpv4]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:
+         Preference_Key_General_MeshUseIpv6]) {
         self.meshUseIpv6Check.checked = YES;
         
     }else{
         self.meshUseIpv6Check.checked = NO;
     }
     
-    if([NSUserDefaults ])
+    if([[NSUserDefaults standardUserDefaults] boolForKey:
+        Preference_Key_General_HeartbeatUseIpv6]){
+        self.heartbeatUseIpv6Check.checked = YES;
+    }else{
+        self.heartbeatUseIpv6Check.checked = NO;
+    }
 }
 
 
@@ -119,7 +125,7 @@
     dispatch_async([self loadingQueue], ^{
         
         NSArray *addresses;
-        if (!self.ipv6Check.checked) {
+        if (!self.meshUseIpv6Check.checked) {
             addresses = [self myIpv4Addr];
         }else{
             addresses = [self myIpv6Addr];
@@ -198,14 +204,13 @@
 
 -(void)loadGlobalServerAddr
 {
-    //TODO: because we didn't store the ipv6 url into core data or userdefaults, so maybe we stil use ipv4 later.
+    self.globalServerAddrFieldIpv4.stringValue =
+                    [[NSUserDefaults standardUserDefaults]
+                        stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
  
-    NSString *globalServerAddr = [[NSUserDefaults standardUserDefaults]
-                                  stringForKey:Preference_Key_General_GlobalServerAddr];
-/*    if (self.ipv6Check.checked) {
-        globalServerAddr = [NSString stringWithFormat:@"ipv6.%@", globalServerAddr];
-    }*/
-    self.globalServerAddrField.stringValue = globalServerAddr;
+    self.globalServerAddrFieldIpv6.stringValue =
+                    [[NSUserDefaults standardUserDefaults]
+                        stringForKey:Preference_Key_General_GlobalServerAddrIpv6];
 }
 
 -(void)loadGlobalServerPort
@@ -251,11 +256,17 @@
 #pragma mark AMCheckBoxDelegeate
 -(void)onChecked:(AMCheckBoxView*)sender
 {
-    if (sender == self.ipv6Check) {
-        [[NSUserDefaults standardUserDefaults] setBool:self.ipv6Check.checked forKey:Preference_Key_General_UseIpv6];
+    if (sender == self.meshUseIpv6Check) {
+        [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
+                                                forKey:Preference_Key_General_MeshUseIpv6];
         [self loadPrivateIp];
         [self loadGlobalServerAddr];
         
+        return;
+    }
+    if (sender == self.heartbeatUseIpv6Check) {
+        [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
+                                                forKey:Preference_Key_General_HeartbeatUseIpv6];
         return;
     }
     

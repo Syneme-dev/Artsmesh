@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMEventsManagerRowViewController.h"
+#import "AMEventsManagerScrollDocumentView.h"
 #import "GTLYouTube.h"
 
 @interface AMEventsManagerViewController : NSViewController

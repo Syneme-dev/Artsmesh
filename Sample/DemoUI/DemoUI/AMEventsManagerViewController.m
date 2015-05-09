@@ -22,6 +22,21 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    //NSView *scrollViewDocumentView = [[NSView alloc] initWithFrame:NSMakeRect(0, 180.0, 554.0, 180.0)];
+    //[self.eventsListScrollView setDocumentView:scrollViewDocumentView];
+    
+    /**
+    [self.eventsListScrollView setHasVerticalScroller:YES];
+    [self.eventsListScrollView.documentView setFrameSize:NSMakeSize(554.0, 180.0)];
+    **/
+    
+    AMEventsManagerScrollDocumentView *eventsDocumentView = [[AMEventsManagerScrollDocumentView alloc] initWithFrame:NSMakeRect(0, self.eventsListScrollView.frame.size.height, self.eventsListScrollView.frame.size.width, self.eventsListScrollView.frame.size.height)];
+    
+    [self.eventsListScrollView setDocumentView:eventsDocumentView];
+    
+}
+
 - (void)setTitle:(NSString *)theTitle {
     [self.feedbackTitleTextField setStringValue:theTitle];
 }
@@ -42,9 +57,10 @@
         
         
         //Add a new row to the scroll view
-        [self.eventsListScrollView addSubview:rowView];
+        [self.eventsListScrollView.documentView addRow:liveEvent];
         
         NSLog(@"Insert this event now: %@", liveEvent.snippet.title);
+        
         
     }
 }

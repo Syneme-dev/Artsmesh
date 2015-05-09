@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMEventsManagerRowViewController.h"
+#import "UIFramework/AMCheckBoxView.h"
 #import "AMFlippedView.h"
 #import "GTLYouTube.h"
 

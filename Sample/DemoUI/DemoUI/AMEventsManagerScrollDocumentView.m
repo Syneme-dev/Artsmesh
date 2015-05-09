@@ -42,7 +42,8 @@
     NSView *rowView = [eventsVC view];
     [self.eventsRows setObject:eventsVC forKey:theLiveEvent.identifier];
     
-     
+    [eventsVC.eventTitleTextView setStringValue:theLiveEvent.snippet.title];
+    
     [self addSubview:rowView];
     
 }

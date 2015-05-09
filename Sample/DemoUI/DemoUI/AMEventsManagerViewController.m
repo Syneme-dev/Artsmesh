@@ -27,8 +27,6 @@
     AMEventsManagerScrollDocumentView *eventsDocumentView = [[AMEventsManagerScrollDocumentView alloc] initWithFrame:NSMakeRect(0, self.eventsListScrollView.frame.size.height, self.eventsListScrollView.frame.size.width, self.eventsListScrollView.frame.size.height)];
     
     [self.eventsListScrollView setDocumentView:eventsDocumentView];
-    [self.eventsListScrollView setHasHorizontalScroller:NO];
-    
 }
 
 - (void)setTitle:(NSString *)theTitle {

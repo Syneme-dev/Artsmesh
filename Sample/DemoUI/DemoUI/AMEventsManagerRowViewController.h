@@ -7,7 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMCheckBoxView.h"
 
 @interface AMEventsManagerRowViewController : NSViewController
+
+@property (strong) IBOutlet NSTextField *eventTitleTextView;
+@property (strong) IBOutlet AMCheckBoxView *eventEditCheckBox;
+@property (strong) IBOutlet AMCheckBoxView *eventDeleteCheckBox;
 
 @end

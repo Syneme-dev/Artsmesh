@@ -17,6 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [self.eventEditCheckBox setDelegate:(id)self];
+    [self.eventEditCheckBox setFontSize:10.0];
+    self.eventEditCheckBox.title = @"EDIT";
+    
+    [self.eventDeleteCheckBox setDelegate:(id)self];
+    [self.eventDeleteCheckBox setFontSize:10.0];
+    self.eventDeleteCheckBox.title = @"DELETE";
 }
 
 @end

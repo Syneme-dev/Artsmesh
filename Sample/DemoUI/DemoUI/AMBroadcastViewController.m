@@ -11,6 +11,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMMesher/AMMesher.h"
+#import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/NSView_Constrains.h"
 
 @interface AMBroadcastViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
@@ -88,6 +89,7 @@
     needsToConfirmEvent = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkboxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -548,6 +550,12 @@
     NSUserDefaults *defaults = [AMPreferenceManager standardUserDefaults];
     NSLog(@"broadcast url default prefs is: %@", [defaults objectForKey:Preference_Key_Cluster_BroadcastURL]);
      **/
+    
+}
+
+-(void)checkboxChanged:(NSNotification *)notification
+{
+    //Checkbox has been changed, iterate through stored curEvents and see if any edits are selected
     
 }
 

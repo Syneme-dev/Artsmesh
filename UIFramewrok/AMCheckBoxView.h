@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define AM_CHECKBOX_CHANGED @"AM_CHECKBOX_CHANGED"
+
 @protocol AMCheckBoxDelegeate;
 
 @interface AMCheckBoxView : NSControl

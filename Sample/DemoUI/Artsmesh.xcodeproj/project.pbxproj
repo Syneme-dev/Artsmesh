@@ -167,6 +167,8 @@
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
 		2D19A8F41AC4B9C800C9F8F5 /* GTL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */; };
 		2D19A8F61AC4B9E700C9F8F5 /* GTL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2D31E6621AFDAEED001E0985 /* AMEventsManagerRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6601AFDAEED001E0985 /* AMEventsManagerRowViewController.m */; };
+		2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
@@ -741,6 +743,9 @@
 		2D18D8C41A04AC5B005BC1A7 /* AMFloatPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelViewController.h; sourceTree = "<group>"; };
 		2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelViewController.m; sourceTree = "<group>"; };
 		2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTL.framework; sourceTree = "<group>"; };
+		2D31E65F1AFDAEED001E0985 /* AMEventsManagerRowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerRowViewController.h; sourceTree = "<group>"; };
+		2D31E6601AFDAEED001E0985 /* AMEventsManagerRowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerRowViewController.m; sourceTree = "<group>"; };
+		2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerRowViewController.xib; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -1429,6 +1434,8 @@
 			children = (
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
+				2D31E65F1AFDAEED001E0985 /* AMEventsManagerRowViewController.h */,
+				2D31E6601AFDAEED001E0985 /* AMEventsManagerRowViewController.m */,
 				2D813F6A1AFC10C5006C063D /* AMEventsManagerViewController.h */,
 				2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */,
 			);
@@ -1445,6 +1452,7 @@
 		2D813F751AFC21D6006C063D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */,
 				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
 				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
 			);
@@ -2034,6 +2042,7 @@
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				4A32A1221A722683006FEDD7 /* AMUserProfielViewController.xib in Resources */,
 				AFAEBDB019610BEA00B7FB51 /* IncomingTopic.png in Resources */,
+				2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */,
 				2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */,
@@ -2221,6 +2230,7 @@
 				2D08FE001AD661FF00A9D257 /* GTLYouTubeVideoProcessingDetailsProcessingProgress.m in Sources */,
 				CE5954851A3E821F00676D12 /* AMTimerTabVC.m in Sources */,
 				2D08FDAB1AD661FF00A9D257 /* GTLYouTubeChannelSettings.m in Sources */,
+				2D31E6621AFDAEED001E0985 /* AMEventsManagerRowViewController.m in Sources */,
 				2D08FDFB1AD661FF00A9D257 /* GTLYouTubeVideoLiveStreamingDetails.m in Sources */,
 				AFD3479D195BEF720055043E /* AMMainOutputViewController.m in Sources */,
 				2D08FDAD1AD661FF00A9D257 /* GTLYouTubeChannelStatistics.m in Sources */,

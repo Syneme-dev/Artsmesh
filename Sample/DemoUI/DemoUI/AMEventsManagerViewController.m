@@ -26,4 +26,27 @@
     [self.feedbackTitleTextField setStringValue:theTitle];
 }
 
+- (void)insertEvents:(GTLYouTubeChannelListResponse *)eventsList {
+    [self.curLiveEvents removeAllObjects];
+    [self.eventsRows removeAllObjects];
+    
+    for (GTLYouTubeLiveBroadcast *liveEvent in eventsList.items) {
+        //Store Live Broadcast for later use
+        [self.curLiveEvents setObject: liveEvent forKey:liveEvent.identifier];
+        
+        
+        //Store Row View Controller for later use
+        AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
+        NSView *rowView = [eventsVC view];
+        [self.eventsRows setObject:eventsVC forKey:liveEvent.identifier];
+        
+        
+        //Add a new row to the scroll view
+        [self.eventsListScrollView addSubview:rowView];
+        
+        NSLog(@"Insert this event now: %@", liveEvent.snippet.title);
+        
+    }
+}
+
 @end

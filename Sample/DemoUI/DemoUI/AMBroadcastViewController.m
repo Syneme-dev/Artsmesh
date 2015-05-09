@@ -89,6 +89,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     
+    [self getExistingYouTubeLiveEvents];
     [self updateUI];
     
     [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
@@ -259,7 +260,7 @@
 
 
 - (void)getExistingYouTubeLiveEvents {
-    NSLog(@"Find existing events, if they exist.");
+    //Find existing YouTube Live Events, if they exist
     
     GTLServiceYouTube *service = self.youTubeService;
     
@@ -273,9 +274,12 @@
                                               _channelCurrentEventsTicket = nil;
                                               if (error == nil) {
                                                   if ([[liveEventsList items] count] > 0) {
+                                                      // Live Events found!
                                                       NSLog(@"Live Events List is as follows:");
                                                       NSLog(@"%@", liveEventsList);
                                                       
+                                                      [eventsManagerVC setTitle:@"Events"];
+                                                      [eventsManagerVC insertEvents:liveEventsList];
                                                   }
                                               } else {
                                                   NSLog(@"No Live Events found..");
@@ -330,7 +334,7 @@
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
                                        
-                                       [eventsManagerVC setTitle:@"Events"];
+                                       [self getExistingYouTubeLiveEvents];
                                        
                                        [self.createEventBtn setTitle:@"CREATE"];
                                        

@@ -276,7 +276,7 @@
                                                   if ([[liveEventsList items] count] > 0) {
                                                       // Live Events found!
                                                       
-                                                      [eventsManagerVC setTitle:@"Events"];
+                                                      [eventsManagerVC setTitle:@"EVENTS"];
                                                       [eventsManagerVC insertEvents:liveEventsList];
                                                   }
                                               } else {

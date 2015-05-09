@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMEventsManagerRowViewController.h"
+#import "AMFlippedView.h"
 #import "GTLYouTube.h"
 
-@interface AMEventsManagerScrollDocumentView : NSView
+@interface AMEventsManagerScrollDocumentView : AMFlippedView
 
 @property (strong) NSMutableDictionary *eventsRows;
 

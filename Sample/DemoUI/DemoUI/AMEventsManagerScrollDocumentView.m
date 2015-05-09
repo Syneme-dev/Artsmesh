@@ -8,7 +8,9 @@
 
 #import "AMEventsManagerScrollDocumentView.h"
 
-@implementation AMEventsManagerScrollDocumentView
+@implementation AMEventsManagerScrollDocumentView {
+    double curHeight;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -16,6 +18,7 @@
     if (self) {
         
         //NSLog(@"scroll view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
+        curHeight = 0;
     }
     
     return self;
@@ -40,12 +43,14 @@
     
     AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
     NSView *rowView = [eventsVC view];
+    [rowView setFrameOrigin:NSMakePoint(0, curHeight)];
     [self.eventsRows setObject:eventsVC forKey:theLiveEvent.identifier];
     
     [eventsVC.eventTitleTextView setStringValue:theLiveEvent.snippet.title];
     
     [self addSubview:rowView];
     
+    curHeight += rowView.frame.size.height;
 }
 
 - (void)removeAllRows {

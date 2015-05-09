@@ -23,17 +23,11 @@
 }
 
 - (void)awakeFromNib {
-    //NSView *scrollViewDocumentView = [[NSView alloc] initWithFrame:NSMakeRect(0, 180.0, 554.0, 180.0)];
-    //[self.eventsListScrollView setDocumentView:scrollViewDocumentView];
-    
-    /**
-    [self.eventsListScrollView setHasVerticalScroller:YES];
-    [self.eventsListScrollView.documentView setFrameSize:NSMakeSize(554.0, 180.0)];
-    **/
     
     AMEventsManagerScrollDocumentView *eventsDocumentView = [[AMEventsManagerScrollDocumentView alloc] initWithFrame:NSMakeRect(0, self.eventsListScrollView.frame.size.height, self.eventsListScrollView.frame.size.width, self.eventsListScrollView.frame.size.height)];
     
     [self.eventsListScrollView setDocumentView:eventsDocumentView];
+    [self.eventsListScrollView setHasHorizontalScroller:NO];
     
 }
 
@@ -43,24 +37,14 @@
 
 - (void)insertEvents:(GTLYouTubeChannelListResponse *)eventsList {
     [self.curLiveEvents removeAllObjects];
-    [self.eventsRows removeAllObjects];
+    [self.eventsListScrollView.documentView removeAllRows];
     
     for (GTLYouTubeLiveBroadcast *liveEvent in eventsList.items) {
         //Store Live Broadcast for later use
         [self.curLiveEvents setObject: liveEvent forKey:liveEvent.identifier];
         
-        
-        //Store Row View Controller for later use
-        AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
-        NSView *rowView = [eventsVC view];
-        [self.eventsRows setObject:eventsVC forKey:liveEvent.identifier];
-        
-        
         //Add a new row to the scroll view
         [self.eventsListScrollView.documentView addRow:liveEvent];
-        
-        NSLog(@"Insert this event now: %@", liveEvent.snippet.title);
-        
         
     }
 }

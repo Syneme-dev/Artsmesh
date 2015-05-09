@@ -15,5 +15,6 @@
 @property (strong) NSMutableDictionary *eventsRows;
 
 - (void)addRow: (GTLYouTubeLiveBroadcast *)theLiveEvent;
+- (void)removeAllRows;
 
 @end

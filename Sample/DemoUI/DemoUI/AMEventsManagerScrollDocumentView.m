@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        NSLog(@"scroll view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
+        //NSLog(@"scroll view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
     }
     
     return self;
@@ -36,7 +36,7 @@
 }
 
 - (void)addRow:(GTLYouTubeLiveBroadcast *)theLiveEvent {
-    NSLog(@"Add row view now..");
+    //Add new Row to the Scroller Document View
     
     AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
     NSView *rowView = [eventsVC view];
@@ -45,6 +45,11 @@
      
     [self addSubview:rowView];
     
+}
+
+- (void)removeAllRows {
+    [self.eventsRows removeAllObjects];
+    [self setSubviews:[NSArray array]];
 }
 
 @end

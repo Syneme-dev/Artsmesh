@@ -275,17 +275,15 @@
                                               if (error == nil) {
                                                   if ([[liveEventsList items] count] > 0) {
                                                       // Live Events found!
-                                                      NSLog(@"Live Events List is as follows:");
-                                                      NSLog(@"%@", liveEventsList);
                                                       
                                                       [eventsManagerVC setTitle:@"Events"];
                                                       [eventsManagerVC insertEvents:liveEventsList];
                                                   }
                                               } else {
+                                                  //No Live Events found or error
                                                   NSLog(@"No Live Events found..");
                                                   NSLog(@"Error: %@", error.description);
                                               }
-                                              NSLog(@"finished..");
                                               
                                           }];
     

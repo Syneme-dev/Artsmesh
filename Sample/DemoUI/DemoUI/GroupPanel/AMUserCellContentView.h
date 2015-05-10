@@ -12,6 +12,7 @@
 
 @property NSImageView *leaderIcon;
 @property NSImageView *oscIcon;
+@property NSImageView *ipv6Icon;
 @property NSButton *infoBtn;
 
 @end

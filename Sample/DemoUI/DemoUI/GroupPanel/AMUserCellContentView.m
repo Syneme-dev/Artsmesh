@@ -22,6 +22,8 @@
         
         self.infoBtn = [self setThirdBtnWithImage:
                         [NSImage imageNamed:@"usergroup_info"]];
+        self.ipv6Icon = [self setThirdIconWithImage:
+                         [NSImage imageNamed:@"ipv6"]];
         
         [self.infoBtn setTarget:self];
         [self.infoBtn setAction:@selector(infoBtnClicked:)];
@@ -53,6 +55,13 @@
         [self.oscIcon setHidden:NO];
     }else{
         [self.oscIcon setHidden:YES];
+    }
+        //TODO:uncomment the following code when the AMLiveUser has a field ipv4/6 .
+//        if ([self.dataSource isIPv6]) {
+    if (true) {
+        [self.ipv6Icon setHidden:NO];
+    }else{
+        [self.ipv6Icon setHidden:YES];
     }
 }
 

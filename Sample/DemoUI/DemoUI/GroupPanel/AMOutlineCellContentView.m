@@ -13,6 +13,7 @@
 
 @property NSImageView *iconView0;
 @property NSImageView *iconView1;
+@property NSImageView *iconView2;
 @property NSButton *btn0;
 @property NSButton *btn1;
 @property NSButton *btn2;
@@ -142,6 +143,20 @@
                                 bottomSpace:bottom];
         
         [_iconView0 setHidden:YES];
+        
+
+        trailing = 25*4;
+        _iconView2 = [[NSImageView alloc] initWithFrame:tempRect];
+        _iconView2.imageAlignment = NSImageAlignCenter;
+        _iconView2.image = [NSImage imageNamed:@"NSActionTemplate"];
+        [self addConstrainsToFixSizeSubview:_iconView2
+                                      width:width
+                              trailingSpace:trailing
+                                     height:heigh
+                                bottomSpace:bottom];
+        
+        [_iconView2 setHidden:YES];
+        
     }
     
     return self;
@@ -230,6 +245,13 @@
     NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
     self.iconView1.image = iconImage;
     return self.iconView1;
+}
+
+-(NSImageView *)setThirdIconWithImage:(NSImage *)image
+{
+    NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
+    self.iconView2.image = iconImage;
+    return self.iconView2;
 }
 
 

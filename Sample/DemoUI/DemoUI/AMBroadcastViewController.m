@@ -563,23 +563,18 @@
     if ([notification.object isKindOfClass:[AMLiveEventCheckBoxView class]]) {
         AMLiveEventCheckBoxView *theCheckedBoxView = notification.object;
         
-        if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"EDIT"]) {
+        if (theCheckedBoxView.checked && ([theCheckedBoxView.title isEqualToString:@"EDIT"] || [theCheckedBoxView.title isEqualToString:@"DELETE"])) {
             //Event EDIT checkbox has been checked
-            //NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
-            [self createEditFormFromLiveEvent:theCheckedBoxView.liveBroadcast];
+            NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            [self setBroadcastFormMode:theCheckedBoxView.title];
+            [self loadBrodcastIntoEventForm:theCheckedBoxView.liveBroadcast];
             
-        } else if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"DELETE"]) {
-            [self setBroadcastFormMode:@"DELETE"];
-        
         } else if (!theCheckedBoxView.checked) {
+            [self removeBroadcastFromEventForm];
             [self setBroadcastFormMode:@"CREATE"];
         }
         
     }
-}
-
-- (void)createEditFormFromLiveEvent:(GTLYouTubeLiveBroadcast *)theBroadcast {
-    [self setBroadcastFormMode:@"EDIT"];
 }
 
 - (void)setBroadcastFormMode:(NSString *)formMode {
@@ -587,6 +582,16 @@
     
     broadcastFormMode = formMode;
     [self.createEventBtn setTitle:formMode];
+}
+
+- (void)loadBrodcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
+    [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
+    [self.broadcastDescField setStringValue:theBroadcast.snippet.descriptionProperty];
+}
+
+- (void)removeBroadcastFromEventForm {
+    [self.broadcastTItleField setStringValue:@"YOUR BROADCAST TITLE"];
+    [self.broadcastDescField setStringValue:@"YOUR BROADCAST DESCRIPTION"];
 }
 
 - (void)dealloc {

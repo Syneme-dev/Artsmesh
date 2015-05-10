@@ -372,7 +372,7 @@
                                         </connections>
                                     </button>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
-                                        <rect key="frame" x="0.0" y="0.0" width="554" height="230"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="556" height="230"/>
                                     </customView>
                                 </subviews>
                             </view>

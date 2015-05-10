@@ -348,6 +348,35 @@
 
 }
 
+- (void)editLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBraoadcast {
+
+    
+}
+
+- (void)deleteLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBroadcast {
+
+    GTLQueryYouTube *deleteEventQuery = [GTLQueryYouTube queryForLiveBroadcastsDeleteWithIdentifier:theLiveBroadcast.identifier];
+    deleteEventQuery.mine = YES;
+
+    GTLServiceYouTube *service = self.youTubeService;
+
+    self.broadcastTicket = [service executeQuery:deleteEventQuery
+                               completionHandler:^(GTLServiceTicket *ticket,
+                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
+                                                   NSError *error) {
+                                   //Callback
+                                   _broadcastTicket = nil;
+                                   if (error == nil) {
+                                       //Event successfully deleted
+                                       [self getExistingYouTubeLiveEvents];
+                                       
+                                   } else {
+                                       NSLog(@"Error: %@", error.description);
+                                   }
+                               
+                               }];
+}
+
 
 - (void)loadEventTimes {
     NSInteger *selectDay = 0;
@@ -496,7 +525,14 @@
 - (IBAction)createEventBtnClick:(id)sender {
     if (needsToConfirmEvent == FALSE) {
         if ( [self isSignedIn] ) {
-            [self createYouTubeLiveEvent];
+            if ( [broadcastFormMode isEqualToString:@"CREATE"] ) {
+                // Create new Live YouTube Broadcast
+                [self createYouTubeLiveEvent];
+            } else if ( [broadcastFormMode isEqualToString:@"EDIT"] ) {
+                // Edit existing Live YouTube Broadcast
+            } else if ([broadcastFormMode isEqualToString:@"DELETE"]) {
+                // Delete existing Live YouTube Broadcast
+            }
         } else {
             //Notify user to sign in to Google to create a Live Event
         }

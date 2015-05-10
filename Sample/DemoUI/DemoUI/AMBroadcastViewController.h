@@ -27,6 +27,8 @@
     @private GTMOAuth2Authentication *mAuth;
 }
 
+@property (strong) GTLYouTubeLiveBroadcast *selectedBroadcast;
+
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
@@ -56,7 +58,6 @@
 
 
 @property (strong) IBOutlet NSView *eventsManagerView;
-
 
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;

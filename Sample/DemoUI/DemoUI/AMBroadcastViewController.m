@@ -88,7 +88,7 @@
     [self setAuthentication:auth];
     [self initYoutubeService];
     
-    broadcastFormMode = @"NEW";
+    [self setBroadcastFormMode:@"CREATE"];
     needsToConfirmEvent = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
@@ -566,13 +566,28 @@
         if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"EDIT"]) {
             //Event EDIT checkbox has been checked
             //NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            [self createEditFormFromLiveEvent:theCheckedBoxView.liveBroadcast];
             
-            
+        } else if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"DELETE"]) {
+            [self setBroadcastFormMode:@"DELETE"];
+        
+        } else if (!theCheckedBoxView.checked) {
+            [self setBroadcastFormMode:@"CREATE"];
         }
         
     }
 }
 
+- (void)createEditFormFromLiveEvent:(GTLYouTubeLiveBroadcast *)theBroadcast {
+    [self setBroadcastFormMode:@"EDIT"];
+}
+
+- (void)setBroadcastFormMode:(NSString *)formMode {
+    NSLog(@"Set broadcast form mode called.");
+    
+    broadcastFormMode = formMode;
+    [self.createEventBtn setTitle:formMode];
+}
 
 - (void)dealloc {
     //To avoid a error when closing

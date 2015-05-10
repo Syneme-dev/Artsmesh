@@ -51,10 +51,8 @@
     
     curHeight += rowView.frame.size.height;
     
-    NSLog(@"Current Height is: %f, Doc View Height is: %f", curHeight, self.frame.size.height);
-    
     if (curHeight > self.frame.size.height) {
-        NSLog(@"need to make the document view taller to fit all the items.");
+        //Need to make the document View taller to scroll and display all returned events
         NSSize newSize = NSMakeSize(self.enclosingScrollView.frame.size.width, (curHeight));
         [self setFrameSize:newSize];
     }

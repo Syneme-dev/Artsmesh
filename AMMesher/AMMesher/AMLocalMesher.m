@@ -106,7 +106,7 @@
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ > %@/AMServer.log",
+                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ ipv6 > %@/AMServer.log",
                                 lanchPath,
                                 port,
                                 port,
@@ -281,6 +281,7 @@
                     _retryCount = 0;
                     AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
                     [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
+                    [self requestUserList];
                     [self startHeartbeat];
                 });
             }else{
@@ -331,7 +332,7 @@
     NSString* localServerPort = config.localServerPort;
 
     //always use ipv4 in local, because no ipv6 localserver address
-    BOOL useIpv6 = NO;//config.heartbeatUseIpv6;
+    BOOL useIpv6 = config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;
@@ -584,6 +585,8 @@
     
     if (_heartbeatFailureCount > 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server continue fail more than 5 times");
+        
+        [self requestUserList];
     }
 }
 

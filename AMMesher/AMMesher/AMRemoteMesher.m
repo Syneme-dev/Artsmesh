@@ -208,6 +208,7 @@
                 [[AMMesher sharedAMMesher] updateMySelf];
                 
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
+                [self requestUserList];
             });
             
         }else{
@@ -606,6 +607,7 @@
     _heartbeatFailureCount ++;
     if (_heartbeatFailureCount > 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
+        [self requestUserList];
     }
 }
 

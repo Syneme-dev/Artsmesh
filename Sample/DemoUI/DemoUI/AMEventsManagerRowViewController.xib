@@ -19,28 +19,32 @@
             <rect key="frame" x="0.0" y="0.0" width="552" height="25"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5z-Gd-Sjz" userLabel="Event Title" customClass="AMFoundryFontView">
-                    <rect key="frame" x="16" y="0.0" width="260" height="25"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="Event Title" id="cXS-9w-Rxs">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yUT-zl-qU6" userLabel="|">
                     <rect key="frame" x="298" y="7" width="10" height="10"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KLL-Ar-1Sh"/>
                 </imageView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mC3-83-6zb" userLabel="Edit Checkbox" customClass="AMCheckBoxView">
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mC3-83-6zb" userLabel="Edit Checkbox" customClass="AMLiveEventCheckBoxView">
                     <rect key="frame" x="314" y="0.0" width="94" height="25"/>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcv-bB-aqr" userLabel="|">
                     <rect key="frame" x="428" y="7" width="10" height="10"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="xff-u9-RhG"/>
                 </imageView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TqD-qd-cog" userLabel="Delete Checkbox" customClass="AMCheckBoxView">
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TqD-qd-cog" userLabel="Delete Checkbox" customClass="AMLiveEventCheckBoxView">
                     <rect key="frame" x="444" y="0.0" width="94" height="25"/>
                 </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14y-lH-Lll" userLabel="|">
+                    <rect key="frame" x="0.0" y="7" width="10" height="10"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="bSZ-yp-UKj"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5z-Gd-Sjz" userLabel="Event Title" customClass="AMFoundryFontView">
+                    <rect key="frame" x="16" y="4" width="260" height="15"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="Event Title" id="cXS-9w-Rxs">
+                        <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <point key="canvasLocation" x="367" y="225.5"/>
         </customView>

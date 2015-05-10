@@ -8,15 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMEventsManagerRowViewController.h"
+#import "AMLiveEventCheckBoxView.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "AMFlippedView.h"
 #import "GTLYouTube.h"
 
-@interface AMEventsManagerScrollDocumentView : AMFlippedView
 
-@property (strong) NSMutableDictionary *eventsRows;
+@interface AMEventsManagerScrollDocumentView : AMFlippedView
 
 - (void)addRow: (GTLYouTubeLiveBroadcast *)theLiveEvent;
 - (void)removeAllRows;
+- (void)resetHeight;
 
 @end

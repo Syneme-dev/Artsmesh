@@ -18,7 +18,6 @@
     if (self) {
         
         //NSLog(@"scroll view frame size is: %f, %f", self.frame.size.width, self.frame.size.height);
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
         
         curHeight = 0;
     }
@@ -28,12 +27,9 @@
 
 - (void)awakeFromNib
 {
-
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    [[NSColor redColor] setFill];
-    NSRectFill(dirtyRect);
     
     [super drawRect:dirtyRect];
     
@@ -45,8 +41,8 @@
     
     AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
     NSView *rowView = [eventsVC view];
+    eventsVC.eventEditCheckBox.liveBroadcast = theLiveEvent;
     [rowView setFrameOrigin:NSMakePoint(0, curHeight)];
-    [self.eventsRows setObject:eventsVC forKey:theLiveEvent.identifier];
     
     [eventsVC.eventTitleTextView setStringValue:theLiveEvent.snippet.title];
     
@@ -56,18 +52,11 @@
 }
 
 - (void)removeAllRows {
-    [self.eventsRows removeAllObjects];
     [self setSubviews:[NSArray array]];
 }
 
-- (void)checkBoxChanged:(NSNotification *)notification
-{
-    AMCheckBoxView *changedCheckboxView = notification.object;
-    
-    if (changedCheckboxView.checked && [changedCheckboxView.title isEqualToString:@"EDIT"]) {
-        //Event EDIT checkbox has been checked
-        NSLog(@"Event EDIT selected!");
-    }
+- (void)resetHeight {
+    curHeight = 0;
 }
 
 - (void)dealloc {

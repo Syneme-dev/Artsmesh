@@ -34,6 +34,8 @@
 }
 
 - (void)insertEvents:(GTLYouTubeChannelListResponse *)eventsList {
+    [self.eventsListScrollView.documentView resetHeight];
+    
     [self.curLiveEvents removeAllObjects];
     [self.eventsListScrollView.documentView removeAllRows];
     

@@ -89,6 +89,7 @@
     needsToConfirmEvent = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -276,7 +277,6 @@
                                               if (error == nil) {
                                                   if ([[liveEventsList items] count] > 0) {
                                                       // Live Events found!
-                                                      
                                                       [eventsManagerVC setTitle:@"EVENTS"];
                                                       [eventsManagerVC insertEvents:liveEventsList];
                                                   }
@@ -550,6 +550,22 @@
     NSLog(@"broadcast url default prefs is: %@", [defaults objectForKey:Preference_Key_Cluster_BroadcastURL]);
      **/
     
+}
+
+- (void)checkBoxChanged:(NSNotification *)notification
+{
+    //AMCheckBoxView *changedCheckboxView = notification.object;
+    
+    if ([notification.object isKindOfClass:[AMLiveEventCheckBoxView class]]) {
+        AMLiveEventCheckBoxView *theCheckedBoxView = notification.object;
+        
+        if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"EDIT"]) {
+            //Event EDIT checkbox has been checked
+            NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            
+        }
+        
+    }
 }
 
 

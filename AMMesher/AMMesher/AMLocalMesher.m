@@ -42,10 +42,10 @@
 -(id)init
 {
     if (self = [super init]) {
-
+        
         [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
-                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                     context:nil];
+                                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                       context:nil];
         
         //init NSOperationQueue
         _httpRequestQueue = [[NSOperationQueue alloc] init];
@@ -100,13 +100,13 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* port = config.localServerPort;
     NSString* userTimeout = config.serverHeartbeatTimeout;
-
+    
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
-
+    
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ ipv6 > %@/AMServer.log",
+                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ > %@/AMServer.log",
                                 lanchPath,
                                 port,
                                 port,
@@ -125,7 +125,7 @@
     
     [_lsTask launch];
     
-
+    
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
 }
 
@@ -170,7 +170,7 @@
     }
     
     _retryCount ++;
-
+    
     //Start registing
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
@@ -260,7 +260,7 @@
         }
         
         BOOL needRetry = NO;
-
+        
         do{
             if (error != nil) {
                 AMLog(kAMErrorLog, @"AMMesher", @"error happened when register self:%@", error.description);
@@ -281,7 +281,6 @@
                     _retryCount = 0;
                     AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
                     [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
-                    [self requestUserList];
                     [self startHeartbeat];
                 });
             }else{
@@ -315,7 +314,7 @@
     unregReq.requestPath = @"/users/unregister";
     unregReq.httpMethod = @"POST";
     unregReq.formData = @{@"userId": mySelf.userid};
-
+    
     [unregReq sendRequest];
 }
 
@@ -327,12 +326,12 @@
     }
     
     AMLog(kAMInfoLog, @"AMMesher", @"starting send heartbeat");
-
+    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
-
+    
     //always use ipv4 in local, because no ipv6 localserver address
-    BOOL useIpv6 = config.heartbeatUseIpv6;
+    BOOL useIpv6 = NO;//config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;
@@ -432,7 +431,7 @@
             AMLog(kAMErrorLog, @"AMMesher", @"update group return nil");
             return;
         }
-
+        
         
         NSString* responseStr = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
         if (![responseStr isEqualToString:@"ok"]) {
@@ -442,7 +441,7 @@
         }
         
         AMLog(kAMInfoLog, @"AMMesher", @"updating group infomation in local server finished");
-
+        
     };
     
     [_httpRequestQueue addOperation:req];
@@ -478,7 +477,7 @@
         }
         
         NSDictionary* result = (NSDictionary*)objects;
-
+        
         NSDictionary* groupData = (NSDictionary*)result[@"GroupData"];
         if([groupData isEqual:[NSNull null]]){
             AMLog(kAMErrorLog, @"AMMesher", @"group returned from local server is null");
@@ -500,7 +499,7 @@
             AMLiveUser* user = [AMLiveUser AMUserFromDict:userDict];
             [users addObject:user];
         }
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             AMLiveGroup* localGroup = [AMCoreData shareInstance].myLocalLiveGroup;
             localGroup.groupId = group.groupId;
@@ -523,7 +522,7 @@
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
         });
     };
-
+    
     [_httpRequestQueue addOperation:req];
 }
 
@@ -585,8 +584,6 @@
     
     if (_heartbeatFailureCount > 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server continue fail more than 5 times");
-        
-        [self requestUserList];
     }
 }
 

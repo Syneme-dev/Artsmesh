@@ -208,7 +208,6 @@
                 [[AMMesher sharedAMMesher] updateMySelf];
                 
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
-                [self requestUserList];
             });
             
         }else{
@@ -405,10 +404,10 @@
     }else{
         remoteServerAddr = tmp1;
     }
-
+    
     
     NSString* remoteServerPort = config.artsmeshPort;
-
+    
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
@@ -552,7 +551,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
     NSString* localServerAddr = config.meshUseIpv6 ?
-                                         config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
     
     NSString* localServerPort = config.artsmeshPort;
     
@@ -607,7 +606,6 @@
     _heartbeatFailureCount ++;
     if (_heartbeatFailureCount > 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
-        [self requestUserList];
     }
 }
 

@@ -106,7 +106,7 @@
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ > %@/AMServer.log",
+                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ ipv6 > %@/AMServer.log",
                                 lanchPath,
                                 port,
                                 port,
@@ -331,7 +331,7 @@
     NSString* localServerPort = config.localServerPort;
 
     //always use ipv4 in local, because no ipv6 localserver address
-    BOOL useIpv6 = NO;//config.heartbeatUseIpv6;
+    BOOL useIpv6 = config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;

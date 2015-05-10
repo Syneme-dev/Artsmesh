@@ -32,7 +32,9 @@
 
 @implementation AMBroadcastViewController 
 {
-    NSString* statusNetEventURLString;
+    NSString *broadcastFormMode;
+    
+    NSString *statusNetEventURLString;
     Boolean needsToConfirmEvent;
     NSString *statusNetURL;
     NSString *myUserName;
@@ -86,6 +88,7 @@
     [self setAuthentication:auth];
     [self initYoutubeService];
     
+    broadcastFormMode = @"NEW";
     needsToConfirmEvent = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
@@ -268,6 +271,7 @@
     
     GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet"];
     query.mine = YES;
+    query.maxResults = 50;
     
     self.channelCurrentEventsTicket = [service executeQuery:query
                                           completionHandler:^(GTLServiceTicket *ticket,
@@ -561,7 +565,8 @@
         
         if (theCheckedBoxView.checked && [theCheckedBoxView.title isEqualToString:@"EDIT"]) {
             //Event EDIT checkbox has been checked
-            NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            //NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            
             
         }
         

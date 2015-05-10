@@ -281,6 +281,7 @@
                     _retryCount = 0;
                     AMLog(kAMInfoLog, @"AMMesher", @"register self to local server succeeded!");
                     [[AMMesher sharedAMMesher] setClusterState:kClusterStarted];
+                    [self requestUserList];
                     [self startHeartbeat];
                 });
             }else{
@@ -584,6 +585,8 @@
     
     if (_heartbeatFailureCount > 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server continue fail more than 5 times");
+        
+        [self requestUserList];
     }
 }
 

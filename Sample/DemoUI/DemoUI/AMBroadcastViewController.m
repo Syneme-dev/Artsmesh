@@ -266,6 +266,7 @@
 
 - (void)getExistingYouTubeLiveEvents {
     //Find existing YouTube Live Events, if they exist
+    NSLog(@"Get existing YouTube Events called..");
     
     GTLServiceYouTube *service = self.youTubeService;
     
@@ -281,12 +282,16 @@
                                               if (error == nil) {
                                                   if ([[liveEventsList items] count] > 0) {
                                                       // Live Events found!
+                                                      NSLog(@"Live Events found!");
                                                       [eventsManagerVC setTitle:@"EVENTS"];
                                                       [eventsManagerVC insertEvents:liveEventsList];
+                                                  } else {
+                                                      // No Live Events found..
+                                                      NSLog(@"No Live Events found..");
+                                                      [eventsManagerVC.eventsListScrollView.documentView removeAllRows];
                                                   }
                                               } else {
                                                   //No Live Events found or error
-                                                  NSLog(@"No Live Events found..");
                                                   NSLog(@"Error: %@", error.description);
                                               }
                                               
@@ -354,7 +359,7 @@
 }
 
 - (void)deleteLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBroadcast {
-
+    
     GTLQueryYouTube *deleteEventQuery = [GTLQueryYouTube queryForLiveBroadcastsDeleteWithIdentifier:theLiveBroadcast.identifier];
     deleteEventQuery.mine = YES;
 
@@ -532,6 +537,7 @@
                 // Edit existing Live YouTube Broadcast
             } else if ([broadcastFormMode isEqualToString:@"DELETE"]) {
                 // Delete existing Live YouTube Broadcast
+                [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
             }
         } else {
             //Notify user to sign in to Google to create a Live Event
@@ -602,10 +608,12 @@
         if (theCheckedBoxView.checked && ([theCheckedBoxView.title isEqualToString:@"EDIT"] || [theCheckedBoxView.title isEqualToString:@"DELETE"])) {
             //Event EDIT checkbox has been checked
             NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
+            self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
             [self setBroadcastFormMode:theCheckedBoxView.title];
             [self loadBrodcastIntoEventForm:theCheckedBoxView.liveBroadcast];
             
         } else if (!theCheckedBoxView.checked) {
+            self.selectedBroadcast = nil;
             [self removeBroadcastFromEventForm];
             [self setBroadcastFormMode:@"CREATE"];
         }

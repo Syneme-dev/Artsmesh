@@ -127,7 +127,11 @@
     self.schedEndPMCheck.delegate = self;
     self.schedEndPMCheck.title = @"PM";
     
-    [self loadEventTimes];
+    NSDate *curDate = [NSDate date];
+    //[self loadEventTimes:curDate];
+    [self loadEventTime:curDate andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
+    [self loadEventTime:curDate andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
+    
     
 }
 
@@ -282,12 +286,10 @@
                                               if (error == nil) {
                                                   if ([[liveEventsList items] count] > 0) {
                                                       // Live Events found!
-                                                      NSLog(@"Live Events found!");
                                                       [eventsManagerVC setTitle:@"EVENTS"];
                                                       [eventsManagerVC insertEvents:liveEventsList];
                                                   } else {
                                                       // No Live Events found..
-                                                      NSLog(@"No Live Events found..");
                                                       [eventsManagerVC.eventsListScrollView.documentView removeAllRows];
                                                   }
                                               } else {
@@ -383,7 +385,8 @@
 }
 
 
-- (void)loadEventTimes {
+/**
+- (void)loadEventTimes: (NSDate *)theDate {
     NSInteger *selectDay = 0;
     NSInteger *selectMonth = 0;
     
@@ -394,7 +397,7 @@
     }
     NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
     [dayFormatter setDateFormat:@"d"];
-    NSDate *curDay = [NSDate date];
+    NSDate *curDay = theDate;
     selectDay = (NSInteger *)[[NSString stringWithFormat:@"%@", [dayFormatter stringFromDate:curDay]] integerValue];
     
     // Set up months
@@ -404,7 +407,7 @@
     }
     NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
     [monthFormatter setDateFormat:@"M"];
-    NSDate *curMonth = [NSDate date];
+    NSDate *curMonth = theDate;
     selectMonth = (NSInteger *)[[NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:curMonth]] integerValue];
     
     
@@ -413,7 +416,7 @@
     for (NSInteger y = 0; y<=2; y++) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy"];
-        NSDate *curYear = [NSDate date];
+        NSDate *curYear = theDate;
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
         [dateComponents setYear:y];
@@ -440,7 +443,7 @@
     NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
     yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
     yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
-    NSDate *curHour = [NSDate date];
+    NSDate *curHour = theDate;
     NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
     [dateComponentsHour setHour:1];
@@ -455,7 +458,7 @@
     NSDate *targetEndHour = [gregorianHour dateByAddingComponents:dateComponentsEndHour toDate:curHour options:0];
     
     
-    NSDate *curMinute = [NSDate date];
+    NSDate *curMinute = theDate;
     NSDateFormatter *minuteDateFormatter = [[NSDateFormatter alloc] init];
     NSCalendar *gregorianMinute = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     [minuteDateFormatter setDateFormat:@"mm"];
@@ -496,6 +499,125 @@
     }
     self.eventStartMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
     self.eventEndMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
+}
+**/
+
+
+- (void)loadEventTime: (NSDate *)theDate andDayTextField: (NSTextField *)theDayTextField andMonthTextField: (NSTextField *)theMonthTextField andYearTextField: (NSTextField *)theYearTextField andHourTextField: (NSTextField *)theHourTextField andMinuteTextField: (NSTextField *)theMinuteTextField andPMCHeck: (AMCheckBoxView *)thePMCheck {
+    
+    NSInteger *selectDay = 0;
+    NSInteger *selectMonth = 0;
+    
+    // Set up days
+    NSMutableArray *days = [NSMutableArray array];
+    for (NSInteger d = 1; d <= 31; d++) {
+        [days addObject:[NSString stringWithFormat:@"%ld", (long)d]];
+    }
+    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
+    [dayFormatter setDateFormat:@"d"];
+    NSDate *curDay = theDate;
+    selectDay = (NSInteger *)[[NSString stringWithFormat:@"%@", [dayFormatter stringFromDate:curDay]] integerValue];
+    
+    // Set up months
+    NSMutableArray *months = [NSMutableArray array];
+    for (NSInteger m = 1; m <= 12; m++) {
+        [months addObject:[NSString stringWithFormat:@"%ld", (long)m]];
+    }
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    [monthFormatter setDateFormat:@"M"];
+    NSDate *curMonth = theDate;
+    selectMonth = (NSInteger *)[[NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:curMonth]] integerValue];
+    
+    
+    // Set up years
+    NSMutableArray *years = [NSMutableArray array];
+    for (NSInteger y = 0; y<=2; y++) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy"];
+        NSDate *curYear = theDate;
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        [dateComponents setYear:y];
+        NSDate *targetDate = [gregorian dateByAddingComponents:dateComponents toDate:curYear  options:0];
+        
+        [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
+    }
+    
+    //Add Number Formatters to the Text Fields
+    NSNumberFormatter *dayNumberFormatter = [[NSNumberFormatter alloc] init];
+    dayNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    dayNumberFormatter.maximum = [NSNumber numberWithInteger:31];
+    [theDayTextField setFormatter:dayNumberFormatter];
+    
+    NSNumberFormatter *monthNumberFormatter = [[NSNumberFormatter alloc] init];
+    monthNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    monthNumberFormatter.maximum = [NSNumber numberWithInteger:12];
+    [theMonthTextField setFormatter:monthNumberFormatter];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
+    yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
+    yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
+    NSDate *curHour = theDate;
+    
+    
+    NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
+    [dateComponentsHour setHour:1];
+    
+    NSDateFormatter *hourDateFormatter = [[NSDateFormatter alloc] init];
+    [hourDateFormatter setDateFormat:@"HH"];
+    NSDate *targetHour = [gregorianHour dateByAddingComponents:dateComponentsHour toDate:curHour options:0];
+    
+    
+    NSDateComponents *dateComponentsEndHour = [[NSDateComponents alloc] init];
+    [dateComponentsEndHour setHour:2];
+    NSDate *targetEndHour = [gregorianHour dateByAddingComponents:dateComponentsEndHour toDate:curHour options:0];
+    
+    
+    NSDate *curMinute = theDate;
+    NSDateFormatter *minuteDateFormatter = [[NSDateFormatter alloc] init];
+    [minuteDateFormatter setDateFormat:@"mm"];
+    
+    NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
+    hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    hourNumberFormatter.maximum = [NSNumber numberWithInteger:12];
+    
+    NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
+    minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];
+    minuteNumberFormatter.maximum = [NSNumber numberWithInteger:59];
+    
+    
+    
+    theDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
+    
+    theMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
+    
+    theYearTextField.stringValue = [years objectAtIndex:0];
+    
+    NSDate *finalHour = [[NSDate alloc] init];
+    
+    if ([broadcastFormMode isEqualToString:@"CREATE"]) {
+        if ([theHourTextField isEqualTo:self.eventStartHourTextField]) {
+            finalHour = targetHour;
+        } else if ([theHourTextField isEqualTo:self.eventEndHourTextField]) {
+            finalHour = targetEndHour;
+        }
+    } else {
+        finalHour = curHour;
+    }
+    
+    if ( [[hourDateFormatter stringFromDate:finalHour] intValue] <= 12 ) {
+        theHourTextField.stringValue = [hourDateFormatter stringFromDate:finalHour];
+    } else {
+        int twelveHour = [[hourDateFormatter stringFromDate:finalHour] intValue] - 12;
+        theHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
+        [self.schedStartPMCheck setChecked:YES];
+    }
+    
+    theMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:curMinute];
+    
 }
 
 
@@ -622,15 +744,19 @@
 }
 
 - (void)setBroadcastFormMode:(NSString *)formMode {
-    NSLog(@"Set broadcast form mode called.");
-    
     broadcastFormMode = formMode;
     [self.createEventBtn setTitle:formMode];
 }
 
 - (void)loadBrodcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
+    // This function loads in a given YouTube Live Event into the Event Form.
+    
     [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
     [self.broadcastDescField setStringValue:theBroadcast.snippet.descriptionProperty];
+    
+    [self loadEventTime:theBroadcast.snippet.scheduledStartTime.date andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
+    [self loadEventTime:theBroadcast.snippet.scheduledEndTime.date andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
+    
 }
 
 - (void)removeBroadcastFromEventForm {
@@ -657,11 +783,9 @@
                    error:(NSError *)error {
     if (error != nil) {
         // Authentication failed
-        NSLog(@"Google authentication Failed..");
         [self setAuthentication:nil];
     } else {
         // Authentication succeeded
-        NSLog(@"Google authentication succeeded!");
         [self setAuthentication:auth];
         [self updateUI];
     }

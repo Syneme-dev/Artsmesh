@@ -253,8 +253,12 @@
                                            self.channelId = channel.identifier;
                                            
                                            // Create the Broadcast now
-                                           [self insertLiveYouTubeBroadcast];
-                                       }
+                                           if ( [broadcastFormMode isEqualToString:@"CREATE"] ) {
+                                               [self insertLiveYouTubeBroadcast];
+                                           } else if ( [broadcastFormMode isEqualToString:@"EDIT"] ) {
+                                               [self editLiveYouTubeBroadcast:self.selectedBroadcast];
+                                           }
+                                        }
                                    } else {
                                        NSLog(@"Error: %@", error.description);
                                    }
@@ -298,14 +302,7 @@
 
 
 - (void)insertLiveYouTubeBroadcast {
-    // Create an object for the liveBroadcast resource's snippet. Specify values
-    // for the snippet's title, scheduled start time, and scheduled end time.
-    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
-    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
-    newBroadcastSnippet.title = self.broadcastTitle;
-    newBroadcastSnippet.descriptionProperty = self.broadcastDesc;
-    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:timeZone];
-    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
+    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
     
     // Create an object for the liveBroadcast resource's status, and set the
     // broadcast's status to "private".
@@ -351,7 +348,46 @@
 }
 
 - (void)editLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBraoadcast {
-    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:theLiveBraoadcast.snippet];
+    /****** TO-DO *******
+    
+    * Currently only 'snippet' is editable
+    * Need to also enable update of 'status' for public/private switches
+    * Also look into CDN part to see if this is necessary
+     
+    * Also need to update the create/edit/delete Event form to reflect changes
+     
+    ********************/
+    
+    
+    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
+    
+    theLiveBraoadcast.snippet.title = newBroadcastSnippet.title;
+    theLiveBraoadcast.snippet.descriptionProperty = newBroadcastSnippet.descriptionProperty;
+    theLiveBraoadcast.snippet.scheduledStartTime = newBroadcastSnippet.scheduledStartTime;
+    theLiveBraoadcast.snippet.scheduledEndTime = newBroadcastSnippet.scheduledEndTime;
+
+    
+    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:@"snippet"];
+    editEventQuery.mine = YES;
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    self.broadcastTicket = [service executeQuery:editEventQuery
+                               completionHandler:^(GTLServiceTicket *ticket,
+                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
+                                                   NSError *error) {
+                                   //Callback
+                                   _broadcastTicket = nil;
+                                   if (error == nil) {
+                                       //Event successfully edited
+                                       NSLog(@"Event successfully edited!");
+                                       [self getExistingYouTubeLiveEvents];
+            
+                                   } else {
+                                       NSLog(@"Error: %@", error.description);
+                                   }
+        
+                               }];
     
 }
 
@@ -377,6 +413,20 @@
                                    }
                                
                                }];
+}
+
+-(GTLYouTubeLiveBroadcastSnippet *)createLiveBroadcastSnippet {
+    // Create an object for the liveBroadcast resource's snippet. Specify values
+    // for the snippet's title, scheduled start time, and scheduled end time.
+    
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [[GTLYouTubeLiveBroadcastSnippet alloc] init];
+    newBroadcastSnippet.title = self.broadcastTitle;
+    newBroadcastSnippet.descriptionProperty = self.broadcastDesc;
+    newBroadcastSnippet.scheduledStartTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedStart timeZone:timeZone];
+    newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
+    
+    return newBroadcastSnippet;
 }
 
 
@@ -534,6 +584,7 @@
                 [self createYouTubeLiveEvent];
             } else if ( [broadcastFormMode isEqualToString:@"EDIT"] ) {
                 // Edit existing Live YouTube Broadcast
+                [self createYouTubeLiveEvent];
             } else if ([broadcastFormMode isEqualToString:@"DELETE"]) {
                 // Delete existing Live YouTube Broadcast
                 [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];

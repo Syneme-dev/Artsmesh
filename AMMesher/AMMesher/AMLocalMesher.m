@@ -106,7 +106,7 @@
     lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ > %@/AMServer.log",
+                                @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ ipv6 > %@/AMServer.log",
                                 lanchPath,
                                 port,
                                 port,

@@ -173,7 +173,8 @@
 }
 
 - (void)createYouTubeLiveEvent {
-    NSLog(@"Create the Live Event, now!");
+    // Create the Live Event now!
+    
     
     /** Grab the relevant data from the form **/
     
@@ -202,7 +203,7 @@
     NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
     NSString *selectedEndHour = self.eventEndHourTextField.stringValue;
     if (self.schedEndPMCheck.checked) {
-        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
+        NSInteger baseHour = [self.eventEndHourTextField.stringValue integerValue] + 12;
         selectedEndHour = [NSString stringWithFormat:@"%ld", baseHour];
     }
     NSString *selectedEndMinute = self.eventEndMinuteTextField.stringValue;
@@ -225,10 +226,6 @@
     [getDateFormatter setDateFormat:dateFormat];
     
     NSDate *date = [getDateFormatter dateFromString: dateString];
-    
-    NSLog(@"Supplied Date string is: %@", dateString);
-    NSLog(@"Supplied date format is: %@", dateFormat);
-    NSLog(@"The date is %@", date);
     
     return date;
 }
@@ -255,14 +252,13 @@
                                            GTLYouTubeChannel *channel = channelList[0];
                                            self.channelId = channel.identifier;
                                            
-                                           NSLog(@"channel id is: %@", self.channelId);
                                            // Create the Broadcast now
                                            [self insertLiveYouTubeBroadcast];
                                        }
                                    } else {
                                        NSLog(@"Error: %@", error.description);
                                    }
-                                   NSLog(@"finished..");
+                                   // Query Finished
                                    
                                }];
 }
@@ -270,7 +266,6 @@
 
 - (void)getExistingYouTubeLiveEvents {
     //Find existing YouTube Live Events, if they exist
-    NSLog(@"Get existing YouTube Events called..");
     
     GTLServiceYouTube *service = self.youTubeService;
     
@@ -339,8 +334,8 @@
                                    // Callback
                                    _broadcastTicket = nil;
                                    if (error == nil) {
-                                       NSLog(@"Live event created! %@ with details of: %@", liveBroadcast.snippet, liveBroadcast.identifier);
-                                       
+                                       // Live broadcast successfully created!
+                                
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
                                        
@@ -383,124 +378,6 @@
                                
                                }];
 }
-
-
-/**
-- (void)loadEventTimes: (NSDate *)theDate {
-    NSInteger *selectDay = 0;
-    NSInteger *selectMonth = 0;
-    
-    // Set up days
-    NSMutableArray *days = [NSMutableArray array];
-    for (NSInteger d = 1; d <= 31; d++) {
-        [days addObject:[NSString stringWithFormat:@"%ld", (long)d]];
-    }
-    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
-    [dayFormatter setDateFormat:@"d"];
-    NSDate *curDay = theDate;
-    selectDay = (NSInteger *)[[NSString stringWithFormat:@"%@", [dayFormatter stringFromDate:curDay]] integerValue];
-    
-    // Set up months
-    NSMutableArray *months = [NSMutableArray array];
-    for (NSInteger m = 1; m <= 12; m++) {
-        [months addObject:[NSString stringWithFormat:@"%ld", (long)m]];
-    }
-    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-    [monthFormatter setDateFormat:@"M"];
-    NSDate *curMonth = theDate;
-    selectMonth = (NSInteger *)[[NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:curMonth]] integerValue];
-    
-    
-    // Set up years
-    NSMutableArray *years = [NSMutableArray array];
-    for (NSInteger y = 0; y<=2; y++) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy"];
-        NSDate *curYear = theDate;
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setYear:y];
-        NSDate *targetDate = [gregorian dateByAddingComponents:dateComponents toDate:curYear  options:0];
-
-        [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
-    }
-    
-    //Add Number Formatters to the Text Fields
-    NSNumberFormatter *dayNumberFormatter = [[NSNumberFormatter alloc] init];
-    dayNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    dayNumberFormatter.maximum = [NSNumber numberWithInteger:31];
-    [self.eventStartDayTextField setFormatter:dayNumberFormatter];
-    [self.eventEndDayTextField setFormatter:dayNumberFormatter];
-    
-    NSNumberFormatter *monthNumberFormatter = [[NSNumberFormatter alloc] init];
-    monthNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    monthNumberFormatter.maximum = [NSNumber numberWithInteger:12];
-    [self.eventStartMonthTextField setFormatter:monthNumberFormatter];
-    [self.eventEndMonthTextField setFormatter:monthNumberFormatter];
-    
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
-    yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
-    yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
-    NSDate *curHour = theDate;
-    NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
-    [dateComponentsHour setHour:1];
-    
-    NSDateFormatter *hourDateFormatter = [[NSDateFormatter alloc] init];
-    [hourDateFormatter setDateFormat:@"HH"];
-    NSDate *targetHour = [gregorianHour dateByAddingComponents:dateComponentsHour toDate:curHour options:0];
-    
-    
-    NSDateComponents *dateComponentsEndHour = [[NSDateComponents alloc] init];
-    [dateComponentsEndHour setHour:2];
-    NSDate *targetEndHour = [gregorianHour dateByAddingComponents:dateComponentsEndHour toDate:curHour options:0];
-    
-    
-    NSDate *curMinute = theDate;
-    NSDateFormatter *minuteDateFormatter = [[NSDateFormatter alloc] init];
-    NSCalendar *gregorianMinute = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    [minuteDateFormatter setDateFormat:@"mm"];
-    NSDate *targetMinute = [gregorianMinute dateByAddingComponents:dateComponentsHour toDate:curMinute options:0];
-    
-    NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
-    hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    hourNumberFormatter.maximum = [NSNumber numberWithInteger:12];
-    
-    NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
-    minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    minuteNumberFormatter.maximum = [NSNumber numberWithInteger:59];
-    
-    
-    
-    self.eventStartDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
-    self.eventEndDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
-    
-    self.eventStartMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
-    self.eventEndMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
-    
-    self.eventStartYearTextField.stringValue = [years objectAtIndex:0];
-    self.eventEndYearTextField.stringValue = [years objectAtIndex:0];
-    
-    if ( [[hourDateFormatter stringFromDate:targetHour] intValue] <= 12 ) {
-        self.eventStartHourTextField.stringValue = [hourDateFormatter stringFromDate:targetHour];
-    } else {
-        int twelveHour = [[hourDateFormatter stringFromDate:targetHour] intValue] - 12;
-        self.eventStartHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
-        [self.schedStartPMCheck setChecked:YES];
-    }
-    if ( [[hourDateFormatter stringFromDate:targetEndHour] intValue] <= 12 ) {
-        self.eventEndHourTextField.stringValue = [hourDateFormatter stringFromDate:targetEndHour];
-    } else {
-        int twelveHour = [[hourDateFormatter stringFromDate:targetEndHour] intValue] - 12;
-        self.eventEndHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
-        [self.schedEndPMCheck setChecked:YES];
-    }
-    self.eventStartMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
-    self.eventEndMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:targetMinute];
-}
-**/
 
 
 - (void)loadEventTime: (NSDate *)theDate andDayTextField: (NSTextField *)theDayTextField andMonthTextField: (NSTextField *)theMonthTextField andYearTextField: (NSTextField *)theYearTextField andHourTextField: (NSTextField *)theHourTextField andMinuteTextField: (NSTextField *)theMinuteTextField andPMCHeck: (AMCheckBoxView *)thePMCheck {
@@ -729,7 +606,6 @@
         
         if (theCheckedBoxView.checked && ([theCheckedBoxView.title isEqualToString:@"EDIT"] || [theCheckedBoxView.title isEqualToString:@"DELETE"])) {
             //Event EDIT checkbox has been checked
-            NSLog(@"Live Event to add to form is: %@", theCheckedBoxView.liveBroadcast);
             self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
             [self setBroadcastFormMode:theCheckedBoxView.title];
             [self loadBrodcastIntoEventForm:theCheckedBoxView.liveBroadcast];
@@ -750,8 +626,6 @@
 
 - (void)loadBrodcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function loads in a given YouTube Live Event into the Event Form.
-    NSLog(@"The selected broadcast start time is: %@", theBroadcast.snippet.scheduledStartTime);
-    NSLog(@"The selected broadcast end time is: %@", theBroadcast.snippet.scheduledEndTime);
     
     [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
     [self.broadcastDescField setStringValue:theBroadcast.snippet.descriptionProperty];

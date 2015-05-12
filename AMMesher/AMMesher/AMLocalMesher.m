@@ -74,7 +74,7 @@
                 case kClusterServerStarting:
                     [self startLocalServer];
                     break;
-                case kClusterClientRegisting:
+                case kClusterClientRegistering:
                     [self startLocalClient];
                     break;
                 case kClusterStopping:
@@ -126,7 +126,7 @@
     [_lsTask launch];
     
     
-    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegistering];
 }
 
 
@@ -171,7 +171,7 @@
     
     _retryCount ++;
     
-    //Start registing
+    //Start registering
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     myGroup.leaderId = mySelf.userid;
@@ -237,14 +237,14 @@
         }
     };
     
-    AMLog(kAMInfoLog, @"AMMesher", @"registing group url is:%@",req.baseURL);
+    AMLog(kAMInfoLog, @"AMMesher", @"registering group url is:%@",req.baseURL);
     [_httpRequestQueue addOperation:req];
 }
 
 
 -(void)registerSelf
 {
-    AMLog(kAMInfoLog, @"AMMesher", @"registing self to local group");
+    AMLog(kAMInfoLog, @"AMMesher", @"registering self to local group");
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     NSMutableDictionary* dict = [mySelf toDict];
@@ -306,7 +306,7 @@
 
 -(void)unregisterSelf{
     
-    AMLog(kAMInfoLog, @"AMMesher", @"unregisting self from local server");
+    AMLog(kAMInfoLog, @"AMMesher", @"unregistering self from local server");
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
     AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];

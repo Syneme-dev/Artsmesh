@@ -351,7 +351,7 @@
 }
 
 - (void)editLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBraoadcast {
-
+    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:theLiveBraoadcast.snippet];
     
 }
 

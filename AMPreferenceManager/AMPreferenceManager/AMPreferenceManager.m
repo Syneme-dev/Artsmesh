@@ -58,8 +58,8 @@
              Preference_General_StunServerAddr,  Preference_Key_General_StunServerAddr,
              Preference_General_StunServerPort,  Preference_Key_General_StunServerPort,
              
-             @"NO",     Preference_Key_General_GlobalServerAddrIpv4,
-             @"NO",     Preference_Key_General_GlobalServerAddrIpv6,
+             @"NO",     Preference_Key_General_MeshUseIpv6,
+             @"NO",     Preference_Key_General_HeartbeatUseIpv6,
              
              Preference_General_GlobalServerAddrIpv4, Preference_Key_General_GlobalServerAddrIpv4,
              Preference_General_GlobalServerAddrIpv6, Preference_Key_General_GlobalServerAddrIpv6,

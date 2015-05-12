@@ -613,7 +613,7 @@
     } else {
         int twelveHour = [[hourDateFormatter stringFromDate:finalHour] intValue] - 12;
         theHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
-        [self.schedStartPMCheck setChecked:YES];
+        [thePMCheck setChecked:YES];
     }
     
     theMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:curMinute];
@@ -750,6 +750,8 @@
 
 - (void)loadBrodcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function loads in a given YouTube Live Event into the Event Form.
+    NSLog(@"The selected broadcast start time is: %@", theBroadcast.snippet.scheduledStartTime);
+    NSLog(@"The selected broadcast end time is: %@", theBroadcast.snippet.scheduledEndTime);
     
     [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
     [self.broadcastDescField setStringValue:theBroadcast.snippet.descriptionProperty];

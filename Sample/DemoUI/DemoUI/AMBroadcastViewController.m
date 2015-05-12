@@ -302,6 +302,12 @@
 
 
 - (void)insertLiveYouTubeBroadcast {
+    /****** TO-DO *******
+     
+     * Need reset button after Event created.
+     
+     ********************/
+    
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
     
     // Create an object for the liveBroadcast resource's status, and set the
@@ -354,7 +360,7 @@
     * Need to also enable update of 'status' for public/private switches
     * Also look into CDN part to see if this is necessary
      
-    * Also need to update the create/edit/delete Event form to reflect changes
+    * Need to reset 'CONFIRM' button after Event successfully edited.
      
     ********************/
     

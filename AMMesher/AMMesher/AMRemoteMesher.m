@@ -475,6 +475,7 @@
             AMLog(kAMInfoLog, @"AMMesher", @"query userlist from global server finished");
             [AMCoreData shareInstance].remoteLiveGroups = groupList;
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            
         });
     };
     
@@ -603,9 +604,14 @@
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
     AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to global server failed. %@", error);
-    _heartbeatFailureCount ++;
-    if (_heartbeatFailureCount > 5) {
+    _heartbeatFailureCount++;
+    if (_heartbeatFailureCount >= 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
+        // Now we request user list every 5 times, without making
+        // _heartbeatFailureCount=0 in requestUserList
+        if (_heartbeatFailureCount % 5 == 0) {
+            [self requestUserList];
+        }
     }
 }
 

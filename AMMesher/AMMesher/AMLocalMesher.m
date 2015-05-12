@@ -582,9 +582,12 @@
     AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to local server failed! %@", error.description);
     _heartbeatFailureCount ++;
     
-    if (_heartbeatFailureCount > 5) {
-        AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server continue fail more than 5 times");
-        [self requestUserList];
+    if (_heartbeatFailureCount >= 5) {
+        AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server"
+                            "continue fail more than 5 times");
+        if (_heartbeatFailureCount % 5 == 0) {
+            [self requestUserList];
+        }
     }
 }
 

@@ -426,10 +426,18 @@
 -(void)requestUserList
 {
     AMLog(kAMInfoLog, @"AMMesher", @"will request userlist from global server");
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSMutableDictionary* dict = [mySelf toDict];
+    dict[@"groupId"] = myGroup.groupId;
+    dict[@"userId"] =mySelf.userid;
+    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/getall";
-    req.httpMethod = @"GET";
+    req.httpMethod = @"POST";
+    req.formData = dict;
     req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
         if (isCancel == YES) {
             return;

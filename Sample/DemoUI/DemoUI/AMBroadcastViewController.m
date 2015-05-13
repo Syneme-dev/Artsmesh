@@ -273,7 +273,7 @@
     
     GTLServiceYouTube *service = self.youTubeService;
     
-    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet"];
+    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet, status"];
     query.mine = YES;
     query.maxResults = 50;
     
@@ -341,9 +341,10 @@
                                 
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
-                                       
                                        [self getExistingYouTubeLiveEvents];
                                        
+                                       [self removeBroadcastFromEventForm];
+                                       broadcastFormMode = @"CREATE";
                                        [self.createEventBtn setTitle:@"CREATE"];
                                        
                                    } else {
@@ -356,9 +357,8 @@
 - (void)editLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBraoadcast {
     /****** TO-DO *******
     
-    * Currently only 'snippet' is editable
-    * Need to also enable update of 'status' for public/private switches
-    * Also look into CDN part to see if this is necessary
+    * Currently only 'snippet' and 'status' are editable
+    * Look into CDN part to see if this is necessary
      
     * Need to reset 'CONFIRM' button after Event successfully edited.
      
@@ -391,7 +391,11 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully edited
-                                       NSLog(@"Event successfully edited!");
+                                       broadcastFormMode = @"CREATE";
+                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       
+                                       [self removeBroadcastFromEventForm];
+                                       
                                        [self getExistingYouTubeLiveEvents];
             
                                    } else {
@@ -418,6 +422,10 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully deleted
+                                       broadcastFormMode = @"CREATE";
+                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       [self removeBroadcastFromEventForm];
+                                       
                                        [self getExistingYouTubeLiveEvents];
                                        
                                    } else {
@@ -707,11 +715,19 @@
     [self loadEventTime:theBroadcast.snippet.scheduledStartTime.date andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
     [self loadEventTime:theBroadcast.snippet.scheduledEndTime.date andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
     
+    NSString *curEventPrivacyStatus = [NSString stringWithFormat:@"%@", theBroadcast.status.privacyStatus];
+    
+    if ([curEventPrivacyStatus isEqualToString:@"public"]) { [self.privateCheck setChecked:FALSE]; } else { [self.privateCheck setChecked:TRUE]; }
 }
 
 - (void)removeBroadcastFromEventForm {
     [self.broadcastTItleField setStringValue:@"YOUR BROADCAST TITLE"];
     [self.broadcastDescField setStringValue:@"YOUR BROADCAST DESCRIPTION"];
+    
+    NSDate *curDate = [NSDate date];
+    [self loadEventTime:curDate andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
+    [self loadEventTime:curDate andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
+    [self.privateCheck setChecked:NO];
 }
 
 - (void)dealloc {

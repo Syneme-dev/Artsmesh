@@ -51,7 +51,6 @@
 @property (strong) IBOutlet NSTextField *eventEndHourTextField;
 @property (strong) IBOutlet NSTextField *eventEndMinuteTextField;
 
-@property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedStartPMCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;

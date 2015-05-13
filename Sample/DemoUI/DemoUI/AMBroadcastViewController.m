@@ -364,7 +364,7 @@
      
     ********************/
     
-    
+    // Create a new broadcast snippet
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
     
     theLiveBraoadcast.snippet.title = newBroadcastSnippet.title;
@@ -372,8 +372,13 @@
     theLiveBraoadcast.snippet.scheduledStartTime = newBroadcastSnippet.scheduledStartTime;
     theLiveBraoadcast.snippet.scheduledEndTime = newBroadcastSnippet.scheduledEndTime;
 
+    // Create a new broadcast status;
+    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [self createLiveBroadcastStatus];
+    newBroadcastStatus.lifeCycleStatus = theLiveBraoadcast.status.lifeCycleStatus;
+    newBroadcastStatus.recordingStatus = theLiveBraoadcast.status.recordingStatus;
+    theLiveBraoadcast.status = newBroadcastStatus;
     
-    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:@"snippet"];
+    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:@"snippet, status"];
     editEventQuery.mine = YES;
     
     GTLServiceYouTube *service = self.youTubeService;
@@ -396,6 +401,7 @@
                                }];
     
 }
+
 
 - (void)deleteLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBroadcast {
     
@@ -433,6 +439,17 @@
     newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
     
     return newBroadcastSnippet;
+}
+
+-(GTLYouTubeLiveBroadcastStatus *)createLiveBroadcastStatus {
+    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
+    
+    NSString *curEventPrivacy = @"public";
+    
+    if ( self.privateCheck.checked ) { curEventPrivacy = @"private"; }
+    newBroadcastStatus.privacyStatus = curEventPrivacy;
+    
+    return newBroadcastStatus;
 }
 
 

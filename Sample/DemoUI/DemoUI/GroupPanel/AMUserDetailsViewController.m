@@ -36,6 +36,9 @@
     self.isMeshed.readOnly = YES;
     
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    [self.closeBtn.layer setBorderWidth:1.0];
+    [self.closeBtn.layer setBorderColor: UI_Color_blue.CGColor];
+    [self updateUI];
 }
 
 -(void)updateUI

@@ -79,7 +79,7 @@
 -(void)startRemoteClient
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    if (!config.useIpv6) {
+    if (!config.meshUseIpv6) {
         [self requestPublicIp];
     }
     
@@ -395,18 +395,27 @@
     
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
- //   NSString* remoteServerAddr = config.artsmeshAddr;
-    NSString* remoteServerAddrFake = @"Artsmesh.io";
+    NSString* tmp1 = config.heartbeatUseIpv6 ?
+    config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    NSString* remoteServerAddr = nil;
+    if (config.heartbeatUseIpv6) {
+        NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+        remoteServerAddr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    }else{
+        remoteServerAddr = tmp1;
+    }
+    
+    
     NSString* remoteServerPort = config.artsmeshPort;
-    BOOL useIpv6 = NO;//config.useIpv6;
+    
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
     _heartbeatFailureCount = 0;
     
-    _heartbeatThread = [[AMHeartBeat alloc] initWithHost:remoteServerAddrFake
+    _heartbeatThread = [[AMHeartBeat alloc] initWithHost:remoteServerAddr
                                                     port:remoteServerPort
-                                                    ipv6:useIpv6];
+                                                    ipv6:config.heartbeatUseIpv6];
     _heartbeatThread.delegate = self;
     _heartbeatThread.timeInterval = HBTimeInterval;
     _heartbeatThread.receiveTimeout = HBReceiveTimeout;
@@ -466,6 +475,7 @@
             AMLog(kAMInfoLog, @"AMMesher", @"query userlist from global server finished");
             [AMCoreData shareInstance].remoteLiveGroups = groupList;
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            
         });
     };
     
@@ -541,7 +551,9 @@
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
-    NSString* localServerAddr = config.artsmeshAddr;
+    NSString* localServerAddr = config.meshUseIpv6 ?
+    config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    
     NSString* localServerPort = config.artsmeshPort;
     
     return [NSString stringWithFormat:@"http://%@:%@", localServerAddr, localServerPort];
@@ -592,9 +604,14 @@
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
     AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to global server failed. %@", error);
-    _heartbeatFailureCount ++;
-    if (_heartbeatFailureCount > 5) {
+    _heartbeatFailureCount++;
+    if (_heartbeatFailureCount >= 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
+        // Now we request user list every 5 times, without making
+        // _heartbeatFailureCount=0 in requestUserList
+        if (_heartbeatFailureCount % 5 == 0) {
+            [self requestUserList];
+        }
     }
 }
 

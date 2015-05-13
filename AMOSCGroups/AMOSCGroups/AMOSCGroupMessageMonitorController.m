@@ -240,7 +240,7 @@
             
         }else if ([self.serverSelector.stringValue isEqualToString:@"Artsmesh.io"]){
             serverAddr = [[NSUserDefaults standardUserDefaults]
-                          stringForKey:Preference_Key_General_GlobalServerAddr];
+                          stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
             
         }else{
             for (AMLiveUser *user in _usersRunOscSrv) {

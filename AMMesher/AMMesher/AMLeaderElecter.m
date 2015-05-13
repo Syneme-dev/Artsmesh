@@ -166,7 +166,7 @@
     AMLog(kAMInfoLog, @"AMMesher", @"local service resolved, hostname:%@, port:%d",
           sender.hostName, sender.port);
     
-    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegisting];
+    [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegistering];
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict

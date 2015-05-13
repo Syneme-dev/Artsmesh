@@ -8,11 +8,16 @@
 
 
 //General
-#define Preference_Key_General_UseIpv6              @"Preference_Key_General_UseIpv6"
+#define Preference_Key_General_MeshUseIpv6        @"Preference_Key_General_MeshUseIpv6"
+#define Preference_Key_General_HeartbeatUseIpv6   @"Preference_Key_General_HeartbeatUseIpv6"
+
 #define Preference_Key_General_MachineName          @"Preference_Key_General_MachineName"
 #define Preference_Key_General_LocalServerPort      @"Preference_Key_General_LocalServerPort"
-#define Preference_Key_General_GlobalServerAddr     @"Preference_Key_General_GlobalServerAddr"
+
+#define Preference_Key_General_GlobalServerAddrIpv4    @"Preference_Key_General_GlobalServerAddrIpv4"
+#define Preference_Key_General_GlobalServerAddrIpv6    @"Preference_Key_General_GlobalServerAddrIpv6"
 #define Preference_Key_General_GlobalServerPort     @"Preference_Key_General_GlobalServerPort"
+
 #define Preference_Key_General_ChatPort             @"Preference_Key_General_ChatPort"
 #define Preference_Key_General_StunServerAddr       @"Preference_Key_General_StunServerAddr"
 #define Preference_Key_General_StunServerPort       @"Preference_Key_General_StunServerPort"
@@ -66,7 +71,9 @@
 
 #define Preference_General_StunServerAddr   @"Artsmesh.io"
 #define Preference_General_StunServerPort   @"22250"
-#define Preference_General_GlobalServerAddr   @"Artsmesh.io"
+//#define Preference_General_GlobalServerAddr   @"Artsmesh.io"
+#define Preference_General_GlobalServerAddrIpv4   @"106.187.39.20"
+#define Preference_General_GlobalServerAddrIpv6   @"[2400:8900::f03c:91ff:fedb:76fd]"
 #define Preference_General_GlobalServerPort   @"8080"
 #define Preference_General_LocalServerPort    @"9090"
 #define Preference_General_TopControlBar   @"YES"

@@ -10,7 +10,8 @@
 
 @interface AMSystemConfig : NSObject
 
-@property NSString* artsmeshAddr;
+@property NSString* artsmeshAddrIpv4;
+@property NSString* artsmeshAddrIpv6;
 @property NSString* artsmeshPort;
 
 @property NSHost*   localServerHost;
@@ -26,7 +27,8 @@
 @property NSString* stunServerAddr;
 @property NSString* stunServerPort;
 @property NSString* internalChatPort;
-@property BOOL useIpv6;
+@property BOOL meshUseIpv6;
+@property BOOL heartbeatUseIpv6;
 
 -(NSArray *)localServerIpv4s;
 -(NSArray *)localServerIpv6s;

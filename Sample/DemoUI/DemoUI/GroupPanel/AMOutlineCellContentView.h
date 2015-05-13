@@ -28,6 +28,7 @@
 
 -(NSImageView *)setFirstIconWithImage:(NSImage *)image;
 -(NSImageView *)setSecondIconWithImage:(NSImage *)image;
+-(NSImageView *)setThirdIconWithImage:(NSImage *)image;
 -(void)removeIconAtPos:(int)pos;
 
 @end

@@ -17,6 +17,7 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMAppDelegate.h"
+#import "AMEventsManagerViewController.h"
 
 #import <GTL/GTMOAuth2WindowController.h>
 #import "GTLYouTube.h"
@@ -25,6 +26,8 @@
 @interface AMBroadcastViewController : AMTabPanelViewController {
     @private GTMOAuth2Authentication *mAuth;
 }
+
+@property (strong) GTLYouTubeLiveBroadcast *selectedBroadcast;
 
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
@@ -48,13 +51,12 @@
 @property (strong) IBOutlet NSTextField *eventEndHourTextField;
 @property (strong) IBOutlet NSTextField *eventEndMinuteTextField;
 
-@property (strong) IBOutlet NSTextField *eventFeedbackTextField;
-
-@property (strong) IBOutlet AMPopUpView *eventEndTimeDropDown;
 @property (strong) IBOutlet AMCheckBoxView *privateCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedStartPMCheck;
 @property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;
 
+
+@property (strong) IBOutlet NSView *eventsManagerView;
 
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;

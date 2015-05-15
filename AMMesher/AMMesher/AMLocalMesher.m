@@ -450,10 +450,12 @@
 
 -(void)requestUserList
 {
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/getall";
-    req.httpMethod = @"GET";
+    req.formData = @{@"userId": mySelf.userid};
+    req.httpMethod = @"POST";
     req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
         if (isCancel == YES) {
             return;

@@ -572,6 +572,15 @@ func change_group_password(w http.ResponseWriter, r *http.Request){
 }
 
 func getAllUsers(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+
+	reqUser := new(AMRequestUser)
+	reqUser.UserId = strings.Join(r.Form["userId"], "") 
+	var command GroupUserCommand
+	command.action = user_heartbeat
+	command.user = reqUser
+	g_command_pipe<- command
+
 	RLockSnapShot()
 	userData, err := json.Marshal(snapShot)
 	if err != nil{

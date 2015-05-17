@@ -116,7 +116,7 @@
         [_btn0 setHidden:YES];
         [_btn0 setBordered:NO];
         
-        //Add Icon1,
+        //Add third left one .
         trailing = 25*4;
         _iconView1 = [[NSImageView alloc] initWithFrame:tempRect];
         _iconView1.imageAlignment = NSImageAlignCenter;
@@ -131,7 +131,7 @@
         [_iconView1 setHidden:YES];
         
         
-        //Add Icon0,
+        //Add second left one.
         trailing = 25*5;
         _iconView0 = [[NSImageView alloc] initWithFrame:tempRect];
         _iconView0.imageAlignment = NSImageAlignCenter;
@@ -144,8 +144,8 @@
         
         [_iconView0 setHidden:YES];
         
-
-        trailing = 25*4;
+        //Add the first left one.
+        trailing = 25*6;
         _iconView2 = [[NSImageView alloc] initWithFrame:tempRect];
         _iconView2.imageAlignment = NSImageAlignCenter;
         _iconView2.image = [NSImage imageNamed:@"NSActionTemplate"];
@@ -235,23 +235,23 @@
 -(NSImageView *)setFirstIconWithImage:(NSImage *)image
 {
     NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
-    self.iconView0.image = iconImage;
-    return self.iconView0;
+    self.iconView2.image = iconImage;
+    return self.iconView2;
 }
 
 
 -(NSImageView *)setSecondIconWithImage:(NSImage *)image
 {
     NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
-    self.iconView1.image = iconImage;
-    return self.iconView1;
+    self.iconView0.image = iconImage;
+    return self.iconView0;
 }
 
 -(NSImageView *)setThirdIconWithImage:(NSImage *)image
 {
     NSImage *iconImage = [self resizeImage:image size:NSMakeSize(20, 20)];
-    self.iconView2.image = iconImage;
-    return self.iconView2;
+    self.iconView1.image = iconImage;
+    return self.iconView1;
 }
 
 

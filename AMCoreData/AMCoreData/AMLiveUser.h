@@ -25,6 +25,7 @@
 @property (nonatomic) NSString* publicChatPort;
 @property (nonatomic) BOOL      busy;
 @property (nonatomic) BOOL      oscServer;
+@property (nonatomic) BOOL      isIPV6;
 
 -(NSMutableDictionary*)toDict;
 +(id)AMUserFromDict:(NSDictionary*)dict;

@@ -230,6 +230,7 @@ func makeSnapShot(){
 		userData.IsOnline = v.userData.IsOnline
 		userData.IsLeader = v.userData.IsLeader
 		userData.PrivateIp = v.userData.PrivateIp
+		userData.Ipv6Address = v.userData.Ipv6Address
 		userData.PublicIp = v.userData.PublicIp
 		userData.ChatPort = v.userData.ChatPort
 		userData.PublicChatPort = v.userData.PublicChatPort

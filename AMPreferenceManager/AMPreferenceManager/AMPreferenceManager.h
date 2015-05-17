@@ -31,6 +31,7 @@
 #define Preference_Key_User_FullName            @"Preference_Key_User_FullName"
 #define Preference_Key_User_Description         @"Preference_Key_User_Description"
 #define Preference_Key_User_PrivateIp           @"Preference_Key_User_PrivateIp"
+#define Preference_Key_User_Ipv6Address         @"Preference_Key_User_Ipv6Address"
 
 #define Preference_Key_Cluster_Name                 @"Preference_Key_Cluster_Name"
 #define Preference_Key_Cluster_Description          @"Preference_Key_Cluster_Description"
@@ -59,6 +60,7 @@
 
 #define Preference_General_ChatPort         @"22260"
 #define Preference_User_PrivateIp           @""
+#define Preference_User_Ipv6Address         @""
 #define Preference_User_PublicIp            @""
 #define Preference_User_LocalLeader         @""
 #define Preference_Cluster_Name             @"LocalGroup"

@@ -65,6 +65,7 @@
     [self loadMachineName];
     [self loadUseIpv6];
     [self loadPrivateIp];
+    [self loadIpv6];
     [self loadLocalServerPort];
     [self loadGlobalServerAddr];
     [self loadGlobalServerPort];
@@ -138,12 +139,25 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.privateIpBox removeAllItems];
-            [self.privateIpv6Box removeAllItems];
             [self.privateIpBox addItemsWithTitles:addresses];
-            [self.privateIpv6Box addItemsWithTitles:[self myIpv6Addr]];
             [self selectLastPrivateIp];
             [self storeUsedPrivateIp];
             [self.privateIpBox setNeedsDisplay];
+        });
+    });
+}
+
+-(void) loadIpv6 {
+    dispatch_async([self loadingQueue], ^{
+        
+        NSArray *addresses;
+        addresses = [self myIpv6Addr];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.privateIpv6Box removeAllItems];
+            [self.privateIpv6Box addItemsWithTitles:[self myIpv6Addr]];
+            [self selectLastIpv6];
+            [self storeUsedIpv6];
             [self.privateIpv6Box setNeedsDisplay];
         });
     });
@@ -197,10 +211,24 @@
     }
 }
 
+-(void)selectLastIpv6 {
+    NSString* lastUsedIpv6 = [[NSUserDefaults standardUserDefaults]
+                            stringForKey:Preference_Key_User_Ipv6Address];
+    
+    [self.privateIpBox selectItemWithTitle:lastUsedIpv6];
+    if ([self.privateIpv6Box.stringValue isEqualTo:@""] && self.privateIpv6Box.itemCount > 0) {
+        [self.privateIpv6Box selectItemAtIndex:0];
+    }
+}
+
 
 -(void)storeUsedPrivateIp
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
+}
+
+-(void)storeUsedIpv6 {
+    [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
 }
 
 
@@ -258,6 +286,8 @@
 {
     if (sender == self.privateIpBox) {
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
+    } else if (sender == self.privateIpv6Box) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
     }
 }
 

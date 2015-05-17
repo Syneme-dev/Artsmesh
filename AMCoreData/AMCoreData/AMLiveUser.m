@@ -20,6 +20,7 @@
         self.fullName = @"FullName";
         self.location = @"Local";
         self.privateIp = @"127.0.0.1";
+        self.ipv6Address = @"";
         self.publicIp = @"127.0.0.1";
         self.isLeader = NO;
         self.nickName = @"default";
@@ -43,6 +44,7 @@
     [dict setObject:self.domain forKey:@"domain"];
     [dict setObject:self.location forKey:@"location"];
     [dict setObject:self.privateIp forKey:@"privateIp"];
+    [dict setObject:self.ipv6Address forKey:@"ipv6Address"];
     [dict setObject:self.publicIp forKey:@"publicIp"];
     [dict setObject:self.description forKey:@"description"];
     
@@ -86,6 +88,7 @@
     user.location = dict[@"Location"];
     user.isLeader = [dict[@"IsLeader"] boolValue];
     user.privateIp = dict[@"PrivateIp"];
+    user.privateIp = dict[@"Ipv6Address"];
     user.publicIp = dict[@"PublicIp"];
     user.chatPort = dict[@"ChatPort"];
     user.publicChatPort = dict[@"PublicChatPort"];

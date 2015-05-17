@@ -150,6 +150,10 @@
 
 -(void)registerLocalGroup
 {
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    myGroup.leaderId = mySelf.userid;
+    
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
     NSArray *lsIps = nil;
     if (config.meshUseIpv6) {
@@ -160,6 +164,11 @@
     
     if (_retryCount == 0) {
         _tryLocalServerAddr = config.localServerHost.name;
+        
+        // Always use PrivateIp Address to mesh locally, for now
+        if ([mySelf.privateIp length] > 0) {
+            _tryLocalServerAddr = mySelf.privateIp;
+        }
         
     }else if(_retryCount < [lsIps count] + 1){
         _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
@@ -172,9 +181,6 @@
     _retryCount ++;
     
     //Start registering
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
-    myGroup.leaderId = mySelf.userid;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];

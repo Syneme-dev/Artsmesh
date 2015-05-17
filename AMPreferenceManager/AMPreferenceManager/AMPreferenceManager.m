@@ -55,6 +55,7 @@
              Preference_User_NickName,           Preference_Key_User_NickName,
              Preference_User_FullName,           Preference_Key_User_FullName,
              Preference_User_PrivateIp,          Preference_Key_User_PrivateIp,
+             Preference_User_Ipv6Address,        Preference_Key_User_Ipv6Address,
              Preference_General_StunServerAddr,  Preference_Key_General_StunServerAddr,
              Preference_General_StunServerPort,  Preference_Key_General_StunServerPort,
              
@@ -128,6 +129,7 @@
     mySelf.location = [defaults stringForKey:Preference_Key_User_Location];
     mySelf.description = [defaults stringForKey:Preference_Key_User_Description];
     mySelf.privateIp = [defaults stringForKey:Preference_Key_User_PrivateIp];
+    mySelf.ipv6Address = [defaults stringForKey:Preference_Key_User_Ipv6Address];
     mySelf.publicIp = mySelf.privateIp;
     mySelf.chatPort = [defaults stringForKey:Preference_Key_General_ChatPort];
     

@@ -88,7 +88,7 @@
     user.location = dict[@"Location"];
     user.isLeader = [dict[@"IsLeader"] boolValue];
     user.privateIp = dict[@"PrivateIp"];
-    user.privateIp = dict[@"Ipv6Address"];
+    user.ipv6Address = dict[@"Ipv6Address"];
     user.publicIp = dict[@"PublicIp"];
     user.chatPort = dict[@"ChatPort"];
     user.publicChatPort = dict[@"PublicChatPort"];

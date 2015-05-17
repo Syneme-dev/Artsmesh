@@ -268,6 +268,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
                                                 forKey:Preference_Key_General_MeshUseIpv6];
         [AMCoreData shareInstance].systemConfig.meshUseIpv6 = self.meshUseIpv6Check.checked;
+        [AMCoreData shareInstance].mySelf.isIPV6 = self.meshUseIpv6Check.checked;
         [self loadPrivateIp];
         [self loadGlobalServerAddr];
         

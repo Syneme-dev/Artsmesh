@@ -376,7 +376,8 @@ func register_user(w http.ResponseWriter, r *http.Request){
 	reqUser.ChatPort = strings.Join(r.Form["chatPort"], "") 
 	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
-	reqUser.Busy = strings.Join(r.Form["busy"], "") 
+	reqUser.Busy = strings.Join(r.Form["busy"], "")
+	reqUser.isIPV6 = strings.Join(r.Form["isIPV6"], "")
 	
 	reqGroup := new(AMRequestGroup)
 	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 
@@ -432,6 +433,7 @@ func update_user(w http.ResponseWriter, r *http.Request){
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
 	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
+	reqUser.isIPV6 = strings.Join(r.Form["isIPV6"], "")
 		
 	fmt.Println("")
 	fmt.Println("user_update requst information ---------------------")

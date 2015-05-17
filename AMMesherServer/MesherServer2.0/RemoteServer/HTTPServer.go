@@ -78,6 +78,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
 	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
+	reqUser.isIPV6 = strings.Join(r.Form["isIPV6"], "")
 	
 	
 	reqGroup := new(AMRequestGroup)
@@ -162,6 +163,7 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 	reqUser.PublicChatPort = strings.Join(r.Form["publicChatPort"], "") 
 	reqUser.Busy = strings.Join(r.Form["busy"], "") 
 	reqUser.OSCServer = strings.Join(r.Form["oscServer"], "")
+	reqUser.isIPV6 = strings.Join(r.Form["isIPV6"], "")
 	
 	reqGroup := new(AMRequestGroup)
 	reqGroup.GroupId = strings.Join(r.Form["groupId"], "") 

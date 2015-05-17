@@ -19,6 +19,7 @@
 
 @property (weak) IBOutlet NSTextField *machineNameField;
 @property (weak) IBOutlet AMPopUpView *privateIpBox;
+@property (weak) IBOutlet AMPopUpView *privateIpv6Box;
 @property (weak) IBOutlet NSTextField *localServerPortField;
 @property (weak) IBOutlet AMCheckBoxView*  meshUseIpv6Check;
 @property (weak) IBOutlet AMCheckBoxView*  heartbeatUseIpv6Check;
@@ -45,6 +46,7 @@
     // Do view setup here.
     
     self.privateIpBox.delegate = self;
+    self.privateIpv6Box.delegate = self;
     
     self.meshUseIpv6Check.delegate      = self;
     self.meshUseIpv6Check.title         = @"MESH USE IPV6";
@@ -128,15 +130,21 @@
         if (!self.meshUseIpv6Check.checked) {
             addresses = [self myIpv4Addr];
         }else{
-            addresses = [self myIpv6Addr];
+            /** commented out to make way for independent IPV6 field 
+             *addresses = [self myIpv6Addr];
+             **/
+            addresses = [self myIpv4Addr];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.privateIpBox removeAllItems];
+            [self.privateIpv6Box removeAllItems];
             [self.privateIpBox addItemsWithTitles:addresses];
+            [self.privateIpv6Box addItemsWithTitles:[self myIpv6Addr]];
             [self selectLastPrivateIp];
             [self storeUsedPrivateIp];
             [self.privateIpBox setNeedsDisplay];
+            [self.privateIpv6Box setNeedsDisplay];
         });
     });
 }

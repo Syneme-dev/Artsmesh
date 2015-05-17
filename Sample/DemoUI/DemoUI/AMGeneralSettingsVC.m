@@ -148,6 +148,7 @@
 }
 
 -(void) loadIpv6 {
+    NSLog(@"loadIpv6 called..");
     dispatch_async([self loadingQueue], ^{
         
         NSArray *addresses;
@@ -214,9 +215,11 @@
 -(void)selectLastIpv6 {
     NSString* lastUsedIpv6 = [[NSUserDefaults standardUserDefaults]
                             stringForKey:Preference_Key_User_Ipv6Address];
+    NSLog(@"Last used ipv6 is: %@", [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_User_Ipv6Address] );
     
     [self.privateIpBox selectItemWithTitle:lastUsedIpv6];
     if ([self.privateIpv6Box.stringValue isEqualTo:@""] && self.privateIpv6Box.itemCount > 0) {
+        NSLog(@"No stored default ipv6, defaulting to last ipv6 found");
         [self.privateIpv6Box selectItemAtIndex:0];
     }
 }
@@ -287,7 +290,10 @@
     if (sender == self.privateIpBox) {
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
     } else if (sender == self.privateIpv6Box) {
+        NSLog(@"old ipv6 stored default address is: %@", [[NSUserDefaults standardUserDefaults] objectForKey:Preference_Key_User_Ipv6Address]);
+        NSLog(@"Store ipv6 Address now!");
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
+        NSLog(@"default set to: %@", [[NSUserDefaults standardUserDefaults] objectForKey:Preference_Key_User_Ipv6Address]);
     }
 }
 
@@ -300,6 +306,7 @@
         [AMCoreData shareInstance].systemConfig.meshUseIpv6 = self.meshUseIpv6Check.checked;
         [AMCoreData shareInstance].mySelf.isIPV6 = self.meshUseIpv6Check.checked;
         [self loadPrivateIp];
+        [self loadIpv6];
         [self loadGlobalServerAddr];
         
         return;

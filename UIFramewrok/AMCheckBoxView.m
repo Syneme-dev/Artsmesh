@@ -111,6 +111,8 @@
 -(void)setChecked:(BOOL)checked
 {
     _checked = checked;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AM_CHECKBOX_CHANGED object:self];
     [self setNeedsDisplay];
 }
 

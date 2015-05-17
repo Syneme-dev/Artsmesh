@@ -208,7 +208,6 @@
                 [[AMMesher sharedAMMesher] updateMySelf];
                 
                 [[AMCoreData shareInstance] broadcastChanges:AM_MYSELF_CHANGED_REMOTE];
-                [self requestUserList];
             });
             
         }else{
@@ -405,10 +404,10 @@
     }else{
         remoteServerAddr = tmp1;
     }
-
+    
     
     NSString* remoteServerPort = config.artsmeshPort;
-
+    
     int HBTimeInterval = [config.remoteHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.remoteHeartbeatRecvTimeout intValue];
     
@@ -427,10 +426,18 @@
 -(void)requestUserList
 {
     AMLog(kAMInfoLog, @"AMMesher", @"will request userlist from global server");
+    
+    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    NSMutableDictionary* dict = [mySelf toDict];
+    dict[@"groupId"] = myGroup.groupId;
+    dict[@"userId"] =mySelf.userid;
+    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     req.baseURL = [self httpBaseURL];
     req.requestPath = @"/users/getall";
-    req.httpMethod = @"GET";
+    req.httpMethod = @"POST";
+    req.formData = dict;
     req.requestCallback = ^(NSData* response, NSError* error, BOOL isCancel){
         if (isCancel == YES) {
             return;
@@ -476,6 +483,7 @@
             AMLog(kAMInfoLog, @"AMMesher", @"query userlist from global server finished");
             [AMCoreData shareInstance].remoteLiveGroups = groupList;
             [[AMCoreData shareInstance] broadcastChanges:AM_LIVE_GROUP_CHANDED];
+            
         });
     };
     
@@ -552,7 +560,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSAssert(config, @"system config can not be nil!");
     NSString* localServerAddr = config.meshUseIpv6 ?
-                                         config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
+    config.artsmeshAddrIpv6 : config.artsmeshAddrIpv4;
     
     NSString* localServerPort = config.artsmeshPort;
     
@@ -604,10 +612,14 @@
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
 {
     AMLog(kAMWarningLog, @"AMMesher", @"heartbeat to global server failed. %@", error);
-    _heartbeatFailureCount ++;
-    if (_heartbeatFailureCount > 5) {
+    _heartbeatFailureCount++;
+    if (_heartbeatFailureCount >= 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to global server continue failed 5 times");
-        [self requestUserList];
+        // Now we request user list every 5 times, without making
+        // _heartbeatFailureCount=0 in requestUserList
+        if (_heartbeatFailureCount % 5 == 0) {
+            [self requestUserList];
+        }
     }
 }
 

@@ -266,7 +266,7 @@
         return;
     }
     if (sender == self.heartbeatUseIpv6Check) {
-        [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
+        [[NSUserDefaults standardUserDefaults] setBool:self.heartbeatUseIpv6Check.checked
                                                 forKey:Preference_Key_General_HeartbeatUseIpv6];
         
         [AMCoreData shareInstance].systemConfig.heartbeatUseIpv6

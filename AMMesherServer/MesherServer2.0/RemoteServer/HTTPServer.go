@@ -117,6 +117,20 @@ func addUser(w http.ResponseWriter, r *http.Request){
 }
 
 func getAllUsers(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+
+	var command GroupUserCommand
+	command.action = user_heartbeat
+	command.user = new(AMRequestUser)
+	command.user.UserId = strings.Join(r.Form["userId"], "") 
+	command.group = new(AMRequestGroup)
+	command.group.GroupId = strings.Join(r.Form["groupId"], "")
+	command.response = make(chan string)
+
+	g_command_pipe<- command
+	response := <-command.response
+	fmt.Println(response)
+
 	ss := RLockSnapShot()
 	userData, err := json.Marshal(ss)
 	if err != nil{

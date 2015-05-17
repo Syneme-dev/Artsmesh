@@ -12,7 +12,7 @@ typedef enum {
     kClusterStopped = 0,
     kClusterAutoDiscovering,
     kClusterServerStarting,
-    kClusterClientRegisting,
+    kClusterClientRegistering,
     kClusterStarted,
     kClusterStopping,
 }AMClusterState;

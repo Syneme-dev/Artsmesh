@@ -38,8 +38,8 @@
         CGFloat top = (frameRect.size.height - 20) / 2;
         CGFloat bottom = top;
         CGFloat leading = 5;
-        CGFloat heigh = 15;
-        CGFloat width = 15;
+        CGFloat heigh = 20;
+        CGFloat width = 20;
         
         NSRect tempRect = NSMakeRect(0, 0, 1, 1);
         _barView = [[NSImageView alloc] initWithFrame:tempRect];

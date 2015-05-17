@@ -21,12 +21,12 @@
         [self.infoBtn setAction:@selector(infoBtnClicked:)];
         
         self.mergeBtn = [self setFirstBtnWithImage:
-                         [NSImage imageNamed:@"SideBar_group_h"]];
+                         [NSImage imageNamed:@"group_enter"]];
         [self.mergeBtn setTarget:self];
         [self.mergeBtn setAction:@selector(mergeBtnClicked:)];
         
         self.leaveBtn = [self setSecondBtnWithImage:
-                         [NSImage imageNamed:@"group_exit"]];
+                         [NSImage imageNamed:@"group_quit"]];
         [self.leaveBtn setTarget:self];
         [self.leaveBtn setAction:@selector(leaveBtnClicked:)];
         

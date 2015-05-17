@@ -57,6 +57,8 @@
 		AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = AFB34F6819065C1400092E33 /* AMButtonHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB34F6919065C1400092E33 /* AMButtonHandler.m */; };
 		AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AFD344C6193EF82C0057F222 /* AMUIConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */; };
+		AFF6054C1B08699F00B835B9 /* AMBlueBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF6054A1B08699F00B835B9 /* AMBlueBorderButton.m */; };
 		CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE25C50D19775960003A8B39 /* AMBorderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE25C51019775960003A8B39 /* AMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE25C50E19775960003A8B39 /* AMBorderView.m */; };
 		CE25C51219775A08003A8B39 /* AMPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE25C51119775A08003A8B39 /* AMPanelView.m */; };
@@ -130,6 +132,8 @@
 		AFB34F6819065C1400092E33 /* AMButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMButtonHandler.h; sourceTree = "<group>"; };
 		AFB34F6919065C1400092E33 /* AMButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMButtonHandler.m; sourceTree = "<group>"; };
 		AFD344C6193EF82C0057F222 /* AMUIConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUIConst.h; sourceTree = "<group>"; };
+		AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlueBorderButton.h; sourceTree = "<group>"; };
+		AFF6054A1B08699F00B835B9 /* AMBlueBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlueBorderButton.m; sourceTree = "<group>"; };
 		CE25C50D19775960003A8B39 /* AMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBorderView.h; sourceTree = "<group>"; };
 		CE25C50E19775960003A8B39 /* AMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBorderView.m; sourceTree = "<group>"; };
 		CE25C51119775A08003A8B39 /* AMPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPanelView.m; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */,
+				AFF6054A1B08699F00B835B9 /* AMBlueBorderButton.m */,
 				4F5F13F11ADE542B00E12613 /* AMTableCellView.h */,
 				4F5F13F21ADE542B00E12613 /* AMTableCellView.m */,
 				4F809F561ACECA7D009AC0E6 /* AMWindow.h */,
@@ -302,6 +308,7 @@
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
+				AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
 				AF2890E0198A398A00D05174 /* AMBlueButton.h in Headers */,
@@ -393,6 +400,7 @@
 				4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */,
 				2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
+				AFF6054C1B08699F00B835B9 /* AMBlueBorderButton.m in Sources */,
 				CE25C51219775A08003A8B39 /* AMPanelView.m in Sources */,
 				CE25C51019775960003A8B39 /* AMBorderView.m in Sources */,
 				26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */,

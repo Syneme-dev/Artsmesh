@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupDetailsViewController">
@@ -27,7 +27,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="NICK NAME:" id="g9H-hz-2IC">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -39,7 +39,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FULL NAME:" id="ZLx-hD-znj">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -51,7 +51,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DESCRIPTION:" id="vJ2-KR-dcB">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -63,7 +63,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LOCATION:" id="9jg-k0-AF7">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -75,7 +75,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LONGITUDE：" id="ReR-O0-YdW">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -87,7 +87,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TIMEZONE:" id="AeR-gW-6cS">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -99,7 +99,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LATITUDE：" id="EJG-sT-30a">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -111,11 +111,11 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PROJECT:" id="Zph-8f-Baq">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.49411767719999999" green="0.58039218189999997" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-CK-gOS">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-CK-gOS" customClass="AMBlueBorderButton">
                     <rect key="frame" x="0.0" y="0.0" width="189" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="0dh-hj-CM0"/>
@@ -129,7 +129,7 @@
                         <action selector="joinGroup:" target="-2" id="Xut-P3-ToJ"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-E3-LdX">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-E3-LdX" customClass="AMBlueBorderButton">
                     <rect key="frame" x="210" y="0.0" width="193" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="HYd-co-kuH"/>

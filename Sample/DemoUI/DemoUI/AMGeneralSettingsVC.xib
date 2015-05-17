@@ -18,6 +18,7 @@
                 <outlet property="machineNameField" destination="Biq-u9-hjz" id="dVd-kR-D0a"/>
                 <outlet property="meshUseIpv6Check" destination="as1-Ho-sNS" id="KFy-35-qJ3"/>
                 <outlet property="privateIpBox" destination="0rC-Kj-mKX" id="eqZ-If-3CQ"/>
+                <outlet property="privateIpv6Box" destination="55x-ZB-goc" id="m2W-8L-2DL"/>
                 <outlet property="topBarCheck" destination="LCG-Yg-5zT" id="Gh0-NF-aIg"/>
                 <outlet property="useOSCForChatCheck" destination="9Qo-r8-3eW" id="siU-Eh-ekk"/>
                 <outlet property="view" destination="fhR-YM-gdp" id="Z0V-JZ-StJ"/>

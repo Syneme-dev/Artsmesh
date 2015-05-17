@@ -233,6 +233,7 @@ func AddNewUser(user *AMRequestUser, groupId string)(string){
 	newUser.userData.Description = user.Description
 	newUser.userData.PublicIp = user.PublicIp
 	newUser.userData.PrivateIp = user.PrivateIp
+	newUser.userData.Ipv6Address = user.Ipv6Address
 	newUser.userData.ChatPort = user.ChatPort
 	newUser.userData.PublicChatPort = user.PublicChatPort
 	newUser.userData.IsLeader = user.IsLeader
@@ -271,6 +272,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	existUser.userData.PublicChatPort = user.PublicChatPort
 	existUser.userData.PublicIp = user.PublicIp
 	existUser.userData.PrivateIp = user.PrivateIp
+	existUser.userData.Ipv6Address = user.Ipv6Address
 	existUser.userData.ChatPort = user.ChatPort
 	existUser.userData.IsLeader = user.IsLeader
 	existUser.userData.IsOnline = user.IsOnline
@@ -565,6 +567,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 		u.Domain = v.userData.Domain
 		u.PublicIp = v.userData.PublicIp
 		u.PrivateIp = v.userData.PrivateIp
+		u.Ipv6Address = v.userData.Ipv6Address
 		u.PublicChatPort = v.userData.PublicChatPort
 		u.ChatPort = v.userData.ChatPort
 		u.IsLeader = v.userData.IsLeader

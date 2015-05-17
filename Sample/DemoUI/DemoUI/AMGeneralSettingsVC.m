@@ -215,7 +215,7 @@
     NSString* lastUsedIpv6 = [[NSUserDefaults standardUserDefaults]
                             stringForKey:Preference_Key_User_Ipv6Address];
     
-    [self.privateIpBox selectItemWithTitle:lastUsedIpv6];
+    [self.privateIpv6Box selectItemWithTitle:lastUsedIpv6];
     if ([self.privateIpv6Box.stringValue isEqualTo:@""] && self.privateIpv6Box.itemCount > 0) {
         [self.privateIpv6Box selectItemAtIndex:0];
     }

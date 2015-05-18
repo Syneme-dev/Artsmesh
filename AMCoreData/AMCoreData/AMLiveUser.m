@@ -45,6 +45,13 @@
     [dict setObject:self.location forKey:@"location"];
     [dict setObject:self.privateIp forKey:@"privateIp"];
     [dict setObject:self.ipv6Address forKey:@"ipv6Address"];
+    
+    if ( [AMCommonTools isValidGlobalIpv6:self.ipv6Address]) {
+        [dict setObject:@"YES" forKey:@"isIPV6"];
+    }else{
+        [dict setObject:@"NO" forKey:@"isIPV6"];
+    }
+    
     [dict setObject:self.publicIp forKey:@"publicIp"];
     [dict setObject:self.description forKey:@"description"];
     

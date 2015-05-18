@@ -102,12 +102,12 @@
     NSString* userTimeout = config.serverHeartbeatTimeout;
     
     NSBundle* mainBundle = [NSBundle mainBundle];
-    NSString* lanchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
-    lanchPath = [NSString stringWithFormat:@"\"%@\"",lanchPath];
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -rest_port %@ -heartbeat_port %@ -user_timeout %@ ipv6 > %@/AMServer.log",
-                                lanchPath,
+                                launchPath,
                                 port,
                                 port,
                                 userTimeout,

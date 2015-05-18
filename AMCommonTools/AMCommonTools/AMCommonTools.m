@@ -33,6 +33,19 @@
     return (success == 1);
 }
 
++ (BOOL) isValidGlobalIpv6:(NSString*)ipv6
+{
+    if(![self isValidIpv6:ipv6])
+        return NO;
+    
+    if([ipv6 hasPrefix:@"::1"]    || [ipv6 hasPrefix:@"[::1"]  ||
+       [ipv6 hasPrefix:@"fe80::"] || [ipv6 hasPrefix:@"[fe80::"]){
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)isValidIpv6:(NSString *)ip {
     const char *utf8 = [ip UTF8String];
 

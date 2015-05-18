@@ -20,6 +20,11 @@
     return item;
 }
 
+-(BOOL)isIPV6
+{
+    return [self.userData isIPV6];
+}
+
 -(BOOL)isLeader
 {
     return [self.userData isLeader];

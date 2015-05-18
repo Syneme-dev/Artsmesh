@@ -82,11 +82,11 @@
         [dict setObject:@"NO" forKey:@"oscServer"];
     }
     
-    if (self.isIPV6){
-        [dict setObject:@"YES" forKey:@"isIPV6"];
-    }else{
-        [dict setObject:@"NO" forKey:@"isIPV6"];
-    }
+//    if (self.isIPV6){
+//        [dict setObject:@"YES" forKey:@"isIPV6"];
+//    }else{
+//        [dict setObject:@"NO" forKey:@"isIPV6"];
+//    }
     
     return dict;
 }
@@ -109,7 +109,7 @@
     user.description = dict[@"Description"];
     user.busy = [dict[@"Busy"] boolValue];
     user.oscServer = [dict[@"OSCServer"] boolValue];
-    user.isIPV6= [dict[@"isIPV6"] boolValue];
+    user.isIPV6= [AMCommonTools isValidGlobalIpv6:user.ipv6Address];
     return user;
 }
 

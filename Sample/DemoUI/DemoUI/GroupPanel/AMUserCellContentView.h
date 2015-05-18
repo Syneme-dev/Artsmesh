@@ -22,6 +22,7 @@
 
 -(BOOL)isLeader;
 -(BOOL)isRunningOSC;
+-(BOOL)isIPV6;
 
 @end
 

@@ -57,8 +57,7 @@
         [self.oscIcon setHidden:YES];
     }
         //TODO:uncomment the following code when the AMLiveUser has a field ipv4/6 .
-//        if ([self.dataSource isIPv6]) {
-    if (true) {
+    if ([self.dataSource isIPV6]) {
         [self.ipv6Icon setHidden:NO];
     }else{
         [self.ipv6Icon setHidden:YES];

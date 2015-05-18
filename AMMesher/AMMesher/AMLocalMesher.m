@@ -586,7 +586,7 @@
     
     if (_heartbeatFailureCount >= 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server"
-                            "continue fail more than 5 times");
+              "continue fail more than 5 times");
         if (_heartbeatFailureCount % 5 == 0) {
             [self requestUserList];
         }

@@ -18,6 +18,7 @@
 @property (nonatomic) NSString* location;
 @property (nonatomic) NSString* description;
 @property (nonatomic) NSString* privateIp;
+@property (nonatomic) NSString* ipv6Address;
 @property (nonatomic) NSString* publicIp;
 @property (nonatomic) BOOL      isLeader;
 @property (nonatomic) BOOL      isOnline;

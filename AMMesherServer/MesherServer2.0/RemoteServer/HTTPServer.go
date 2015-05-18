@@ -34,6 +34,7 @@ type AMRequestUser struct{
 	Location  	string
 	Description 	string
 	PrivateIp 	string
+	Ipv6Address string
 	PublicIp		string
 	IsLeader		string
 	IsOnline		string
@@ -71,6 +72,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	reqUser.Location = strings.Join(r.Form["location"], "") 
 	reqUser.Description = strings.Join(r.Form["description"], "") 
 	reqUser.PrivateIp = strings.Join(r.Form["privateIp"], "") 
+	reqUser.Ipv6Address = strings.Join(r.Form["ipv6Address"], "")
 	reqUser.PublicIp = strings.Join(r.Form["publicIp"], "") 
 	reqUser.IsLeader = strings.Join(r.Form["isLeader"], "") 
 	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
@@ -95,6 +97,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 	fmt.Println("location:", reqUser.Location)
 	fmt.Println("description:", reqUser.Description)
 	fmt.Println("privateIp:", reqUser.PrivateIp)
+	fmt.Println("ipv6Address", reqUser.Ipv6Address)
 	fmt.Println("publicIp:", reqUser.PublicIp)
 	fmt.Println("isLeader:", reqUser.IsLeader)
 	fmt.Println("isOnline:", reqUser.IsOnline)
@@ -156,6 +159,7 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 	reqUser.Location = strings.Join(r.Form["location"], "") 
 	reqUser.Description = strings.Join(r.Form["description"], "") 
 	reqUser.PrivateIp = strings.Join(r.Form["privateIp"], "") 
+	reqUser.Ipv6Address = strings.Join(r.Form["ipv6Address"], "")
 	reqUser.PublicIp = strings.Join(r.Form["publicIp"], "") 
 	reqUser.IsLeader = strings.Join(r.Form["isLeader"], "") 
 	reqUser.IsOnline = strings.Join(r.Form["isOnline"], "") 
@@ -179,6 +183,7 @@ func updateUser(w http.ResponseWriter, r *http.Request){
 	fmt.Println("location:", reqUser.Location)
 	fmt.Println("description:", reqUser.Description)
 	fmt.Println("privateIp:", reqUser.PrivateIp)
+	fmt.Println("ipv6Address:", reqUser.Ipv6Address)
 	fmt.Println("publicIp:", reqUser.PublicIp)
 	fmt.Println("isLeader:", reqUser.IsLeader)
 	fmt.Println("isOnline:", reqUser.IsOnline)

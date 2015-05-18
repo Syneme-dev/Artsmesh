@@ -37,7 +37,7 @@
 @property (weak) IBOutlet NSTextField *channeCount;
 @property (weak) IBOutlet NSButton *closeBtn;
 @property NSArray* allUsers;
-
+@property  AMLiveUser* curPeer;
 @end
 
 
@@ -49,12 +49,19 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     [self setUpUI];
     [self loadDefaultPref];
+    [self setPeerList];
+    [self initPortOffset];
 }
 
 -(void)setUpUI
 {
     [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
+    [self.createBtn.layer setBorderWidth:1.0];
+    [self.createBtn.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.closeBtn.layer  setBorderWidth:1.0];
+    [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
+
     
     [self.roleSelecter addItemWithTitle:@"Server"];
     [self.roleSelecter addItemWithTitle:@"Client"];
@@ -69,9 +76,7 @@
     self.zerounderrunCheck.title = @"ZERO UNDER RUN";
     self.loopbackCheck.title = @"LOOPBACK";
     self.ipv6Check.title = @"USE IPV6";
-    
-    [self setPeerList];
-    [self initPortOffset];
+    self.ipv6Check.delegate = self;
 }
 
 
@@ -234,11 +239,15 @@
         for (AMLiveUser* user in self.allUsers) {
             
             if([user.nickName isEqualToString:self.peerSelecter.stringValue]){
-                
-                if(!mySelf.isOnline){
-                    self.peerAddress.stringValue = user.privateIp;
-                }else{
-                    self.peerAddress.stringValue = user.publicIp;
+                // We just distingush the private/public ip on ipv4
+                if (!self.ipv6Check.checked) {
+                    if(!mySelf.isOnline){
+                        self.peerAddress.stringValue = user.privateIp;
+                    }else{
+                        self.peerAddress.stringValue = user.publicIp;
+                    }
+                }else{ //when the ipv6 checked, we just use
+                    self.peerAddress.stringValue = user.ipv6Address;
                 }
                 
                 break;
@@ -357,10 +366,11 @@
     [self.window close];
 }
 
-//Even we do nothing in onChecked, without function defination, it'll cause a warning to not
-//implement the protocal.
+
 - (void) onChecked:(AMCheckBoxView *)sender
 {
-    
+    if (sender == self.ipv6Check) {
+        [self peerSelectedChanged:self.peerSelecter];
+    }
 }
 @end

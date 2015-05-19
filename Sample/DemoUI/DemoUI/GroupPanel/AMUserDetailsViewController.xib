@@ -39,7 +39,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZKH-F6-Mj7" userLabel="Nick Name Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="28" y="443" width="435" height="22"/>
+                    <rect key="frame" x="159" y="462" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="eLm-gQ-3M6"/>
                     </constraints>
@@ -52,11 +52,8 @@
                         <binding destination="-2" name="value" keyPath="self.user.nickName" id="jXu-fW-e0w"/>
                     </connections>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ade-v1-z2G" userLabel="| ">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ade-v1-z2G" userLabel="| ">
                     <rect key="frame" x="10" y="421" width="10" height="10"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="TXk-OE-wlB"/>
-                    </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="0SE-Rh-EBk"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wI0-WK-Uj1" customClass="AMFoundryFontView">
@@ -72,7 +69,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Fi-FB-aoq" userLabel="Full Name Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="28" y="395" width="435" height="22"/>
+                    <rect key="frame" x="159" y="415" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="1AK-iO-Snf"/>
                     </constraints>
@@ -85,7 +82,7 @@
                         <binding destination="-2" name="value" keyPath="self.user.fullName" id="HvY-os-3E2"/>
                     </connections>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T2w-Zm-LUY" userLabel="| ">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T2w-Zm-LUY" userLabel="| ">
                     <rect key="frame" x="10" y="373" width="10" height="10"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="4tg-pF-oxo"/>
@@ -105,7 +102,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gsP-M0-Wda" userLabel="Affiliation Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="347" width="433" height="22"/>
+                    <rect key="frame" x="159" y="367" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="Ear-XI-57h"/>
                     </constraints>
@@ -118,19 +115,12 @@
                         <binding destination="-2" name="value" keyPath="self.user.domain" id="EkL-gV-LaF"/>
                     </connections>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUh-XL-fwb" userLabel="| ">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zUh-XL-fwb" userLabel="| ">
                     <rect key="frame" x="10" y="335" width="10" height="10"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="hGg-4p-j1j"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="a48-Y5-eSq"/>
-                </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30Z-xo-bjM" userLabel="| ">
-                    <rect key="frame" x="10" y="280" width="10" height="10"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="7zQ-wD-oOr"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="RU2-Xi-I9V"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kdH-oV-aI3" customClass="AMFoundryFontView">
                     <rect key="frame" x="26" y="332" width="82" height="17"/>
@@ -145,7 +135,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FpD-Zw-33Q" userLabel="Location Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="302" width="433" height="22"/>
+                    <rect key="frame" x="159" y="329" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="2Gp-UY-H4r"/>
                     </constraints>
@@ -158,6 +148,13 @@
                         <binding destination="-2" name="value" keyPath="self.user.location" id="crg-V2-zR1"/>
                     </connections>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="30Z-xo-bjM" userLabel="| ">
+                    <rect key="frame" x="10" y="280" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="7zQ-wD-oOr"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="RU2-Xi-I9V"/>
+                </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xOv-0G-yrO" customClass="AMFoundryFontView">
                     <rect key="frame" x="26" y="277" width="67" height="17"/>
                     <constraints>
@@ -171,7 +168,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dbP-wD-OCe" userLabel="Public IP Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="255" width="433" height="22"/>
+                    <rect key="frame" x="159" y="274" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="EvN-6U-lD2"/>
                     </constraints>
@@ -184,8 +181,18 @@
                         <binding destination="-2" name="value" keyPath="self.user.publicIp" id="5rV-7W-fpP"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rh7-HT-p7f" customClass="AMFoundryFontView">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nlG-PJ-mcm" userLabel="| ">
+                    <rect key="frame" x="10" y="233" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="6Qz-Rm-FME"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="pjJ-o1-I2O"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rh7-HT-p7f" customClass="AMFoundryFontView">
                     <rect key="frame" x="26" y="230" width="74" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="Wet-Fe-5de"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PRIVATE IP:" id="LUr-Kg-kYU">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -193,7 +200,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OQV-Fc-ww2" userLabel="Private IP Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="206" width="433" height="22"/>
+                    <rect key="frame" x="159" y="227" width="304" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="dLf-gC-sd3"/>
                     </constraints>
@@ -206,12 +213,33 @@
                         <binding destination="-2" name="value" keyPath="self.user.privateIp" id="oFK-9e-MWX"/>
                     </connections>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GlZ-SU-aWS" userLabel="| ">
+                    <rect key="frame" x="20" y="177" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="fB5-B4-TpF"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="1Gk-8r-Zkz"/>
+                </imageView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NMP-Qd-fsO" userLabel="LEADER Box View" customClass="AMCheckBoxView">
                     <rect key="frame" x="40" y="167" width="421" height="31"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="0CK-cY-6Ne"/>
                     </constraints>
                 </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZR8-b6-HD3" userLabel="| ">
+                    <rect key="frame" x="20" y="147" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="1Ck-rx-yxv"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="VOq-yv-6q0"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cL3-C2-GXO" userLabel="| ">
+                    <rect key="frame" x="10" y="115" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="ilk-3v-fS2"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="V2W-gP-dDT"/>
+                </imageView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Jhr-b7-aYH" userLabel="MESHED Box View" customClass="AMCheckBoxView">
                     <rect key="frame" x="40" y="137" width="421" height="31"/>
                     <constraints>
@@ -229,20 +257,6 @@
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JTo-8u-j9f" userLabel="Biography Value" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="65" width="433" height="47"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="47" id="ENc-5r-mG5"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="WXn-rA-9uX" customClass="AMTextFieldCell">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="self.user.description" id="aU2-kg-2dO"/>
-                    </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="lYL-at-Ltp">
                     <rect key="frame" x="20" y="7" width="205" height="35"/>
@@ -277,9 +291,26 @@
                         <action selector="closeClick:" target="-2" id="84d-St-5tq"/>
                     </connections>
                 </button>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JTo-8u-j9f" userLabel="Biography Value" customClass="AMFoundryFontView">
+                    <rect key="frame" x="159" y="78" width="304" height="47"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="47" id="ENc-5r-mG5"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="WXn-rA-9uX" customClass="AMTextFieldCell">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.user.description" id="aU2-kg-2dO"/>
+                    </connections>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="gsP-M0-Wda" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="2sa-Uq-Ymh"/>
+                <constraint firstItem="ade-v1-z2G" firstAttribute="top" secondItem="pUT-Gg-R3A" secondAttribute="bottom" constant="37" id="0gx-vt-CrG"/>
+                <constraint firstItem="GlZ-SU-aWS" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="308" id="2q5-DA-k5E"/>
+                <constraint firstItem="gsP-M0-Wda" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="2sa-Uq-Ymh"/>
+                <constraint firstItem="cL3-C2-GXO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="370" id="3Ds-GP-5Zc"/>
                 <constraint firstItem="H5y-tH-IYN" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="366" id="3WU-iT-nuL"/>
                 <constraint firstItem="ZW4-Tv-axK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="13" id="55h-KC-2ej"/>
                 <constraint firstItem="kdH-oV-aI3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="146" id="6Mu-JB-r3H"/>
@@ -290,43 +321,67 @@
                 <constraint firstItem="wI0-WK-Uj1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="60" id="ADk-Ll-3Kn"/>
                 <constraint firstItem="pUT-Gg-R3A" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="17" id="BGd-IJ-kRq"/>
                 <constraint firstItem="lYL-at-Ltp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="BQX-61-DPv"/>
-                <constraint firstItem="dbP-wD-OCe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="218" id="EOP-4G-x77"/>
+                <constraint firstItem="H5y-tH-IYN" firstAttribute="leading" secondItem="cL3-C2-GXO" secondAttribute="trailing" constant="8" id="CNC-Sm-0t0"/>
+                <constraint firstItem="wI0-WK-Uj1" firstAttribute="leading" secondItem="ade-v1-z2G" secondAttribute="trailing" constant="8" symbolic="YES" id="ECh-yN-bp2"/>
+                <constraint firstItem="Rh7-HT-p7f" firstAttribute="leading" secondItem="nlG-PJ-mcm" secondAttribute="trailing" constant="8" id="EFo-MN-Lqf"/>
+                <constraint firstItem="dbP-wD-OCe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="199" id="EOP-4G-x77"/>
                 <constraint firstAttribute="trailing" secondItem="OQV-Fc-ww2" secondAttribute="trailing" constant="20" id="FrX-tK-lQZ"/>
+                <constraint firstItem="NMP-Qd-fsO" firstAttribute="leading" secondItem="GlZ-SU-aWS" secondAttribute="trailing" constant="10" id="GHM-37-S3H"/>
                 <constraint firstItem="Jhr-b7-aYH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="I2Q-v4-oZf"/>
+                <constraint firstItem="T2w-Zm-LUY" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="J8H-zo-3QL"/>
                 <constraint firstItem="ZW4-Tv-axK" firstAttribute="leading" secondItem="pUT-Gg-R3A" secondAttribute="trailing" constant="8" symbolic="YES" id="JoU-Ds-irI"/>
-                <constraint firstItem="dbP-wD-OCe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="JwA-N3-heh"/>
+                <constraint firstItem="dbP-wD-OCe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="JwA-N3-heh"/>
                 <constraint firstAttribute="bottom" secondItem="lYL-at-Ltp" secondAttribute="bottom" constant="7" id="KQh-MD-jnA"/>
-                <constraint firstItem="FpD-Zw-33Q" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="L6i-hQ-jBN"/>
+                <constraint firstItem="kdH-oV-aI3" firstAttribute="leading" secondItem="zUh-XL-fwb" secondAttribute="trailing" constant="8" id="KnS-Hd-dpf"/>
+                <constraint firstItem="FpD-Zw-33Q" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="L6i-hQ-jBN"/>
+                <constraint firstItem="Rh7-HT-p7f" firstAttribute="leading" secondItem="xOv-0G-yrO" secondAttribute="leading" id="LHe-EO-Zcr"/>
                 <constraint firstItem="H5y-tH-IYN" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="NE8-3S-j5A"/>
-                <constraint firstItem="OQV-Fc-ww2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="Q1y-uD-Uc4"/>
-                <constraint firstItem="8Fi-FB-aoq" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="78" id="TqD-F7-D07"/>
+                <constraint firstItem="30Z-xo-bjM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="OJt-dT-z46"/>
+                <constraint firstItem="zUh-XL-fwb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="PwP-NU-hku"/>
+                <constraint firstItem="OQV-Fc-ww2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="Q1y-uD-Uc4"/>
+                <constraint firstItem="zUh-XL-fwb" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="150" id="QYw-vO-ded"/>
+                <constraint firstItem="T2w-Zm-LUY" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="112" id="TNu-Fv-2oR"/>
+                <constraint firstItem="8Fi-FB-aoq" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="58" id="TqD-F7-D07"/>
                 <constraint firstItem="KB5-dO-D1s" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="108" id="UGp-7P-ii6"/>
+                <constraint firstItem="nlG-PJ-mcm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="Vl6-4g-Ad2"/>
+                <constraint firstItem="ZR8-b6-HD3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="338" id="Vn2-7y-IWP"/>
                 <constraint firstAttribute="trailing" secondItem="Jhr-b7-aYH" secondAttribute="trailing" constant="20" id="XWn-Nz-hN0"/>
                 <constraint firstItem="kdH-oV-aI3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="Xfo-6R-Dmi"/>
+                <constraint firstItem="Rh7-HT-p7f" firstAttribute="top" secondItem="dbP-wD-OCe" secondAttribute="bottom" constant="27" id="Xzc-fl-3te"/>
                 <constraint firstItem="xOv-0G-yrO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="YPV-O6-78i"/>
-                <constraint firstItem="FpD-Zw-33Q" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="171" id="Yfa-lf-fd7"/>
-                <constraint firstItem="ZKH-F6-Mj7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="30" id="Yzb-uR-JIr"/>
+                <constraint firstItem="FpD-Zw-33Q" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="144" id="Yfa-lf-fd7"/>
+                <constraint firstItem="ZKH-F6-Mj7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="Yzb-uR-JIr"/>
                 <constraint firstAttribute="bottom" secondItem="hJQ-v6-N1M" secondAttribute="bottom" constant="2" id="Zoq-lp-Web"/>
                 <constraint firstItem="hJQ-v6-N1M" firstAttribute="leading" secondItem="RiU-cY-hjq" secondAttribute="trailing" constant="22" id="Ztc-Hb-Ez9"/>
+                <constraint firstItem="ZR8-b6-HD3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="aGk-hT-nCN"/>
                 <constraint firstItem="pUT-Gg-R3A" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="azx-D6-Zyc"/>
-                <constraint firstItem="gsP-M0-Wda" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="126" id="bUA-ap-dDp"/>
-                <constraint firstItem="JTo-8u-j9f" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="cnM-3W-xbi"/>
+                <constraint firstItem="gsP-M0-Wda" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="106" id="bUA-ap-dDp"/>
+                <constraint firstItem="JTo-8u-j9f" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="cnM-3W-xbi"/>
+                <constraint firstItem="nlG-PJ-mcm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="252" id="d53-gi-rm0"/>
                 <constraint firstAttribute="trailing" secondItem="FpD-Zw-33Q" secondAttribute="trailing" constant="20" id="dIf-2k-hMf"/>
-                <constraint firstItem="OQV-Fc-ww2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="267" id="fDS-md-3AW"/>
-                <constraint firstItem="ZKH-F6-Mj7" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="hwP-Jd-b1I"/>
+                <constraint firstItem="OQV-Fc-ww2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="246" id="fDS-md-3AW"/>
+                <constraint firstItem="Jhr-b7-aYH" firstAttribute="leading" secondItem="ZR8-b6-HD3" secondAttribute="trailing" constant="10" id="gqW-7g-ucP"/>
+                <constraint firstItem="ade-v1-z2G" firstAttribute="leading" secondItem="pUT-Gg-R3A" secondAttribute="leading" id="hlD-Ju-GIz"/>
+                <constraint firstItem="ZKH-F6-Mj7" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="11" id="hwP-Jd-b1I"/>
                 <constraint firstItem="KB5-dO-D1s" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="kCe-e0-oT7"/>
+                <constraint firstItem="cL3-C2-GXO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="keD-p4-EVS"/>
                 <constraint firstAttribute="bottom" secondItem="RiU-cY-hjq" secondAttribute="bottom" id="kwh-u2-OrH"/>
                 <constraint firstAttribute="trailing" secondItem="hJQ-v6-N1M" secondAttribute="trailing" constant="7" id="m9P-lX-qeF"/>
                 <constraint firstItem="Jhr-b7-aYH" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="327" id="oNi-Jd-rig"/>
                 <constraint firstItem="wI0-WK-Uj1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="pAx-cg-hDP"/>
                 <constraint firstItem="NMP-Qd-fsO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="pr8-yi-sUQ"/>
                 <constraint firstAttribute="trailing" secondItem="ZKH-F6-Mj7" secondAttribute="trailing" constant="20" id="rRE-Xm-4zf"/>
+                <constraint firstItem="xOv-0G-yrO" firstAttribute="leading" secondItem="30Z-xo-bjM" secondAttribute="trailing" constant="8" id="rgx-uk-ew8"/>
                 <constraint firstItem="NMP-Qd-fsO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="297" id="ri3-bc-jTv"/>
                 <constraint firstAttribute="trailing" secondItem="NMP-Qd-fsO" secondAttribute="trailing" constant="20" id="sTk-2D-XCq"/>
+                <constraint firstItem="KB5-dO-D1s" firstAttribute="leading" secondItem="T2w-Zm-LUY" secondAttribute="trailing" constant="8" id="u3P-q8-M1n"/>
                 <constraint firstItem="xOv-0G-yrO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="201" id="uI8-CW-3ld"/>
-                <constraint firstItem="8Fi-FB-aoq" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="30" id="uwH-6P-aWa"/>
-                <constraint firstItem="JTo-8u-j9f" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="383" id="uxs-hE-68h"/>
+                <constraint firstItem="8Fi-FB-aoq" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="uwH-6P-aWa"/>
+                <constraint firstItem="JTo-8u-j9f" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="370" id="uxs-hE-68h"/>
                 <constraint firstAttribute="trailing" secondItem="dbP-wD-OCe" secondAttribute="trailing" constant="20" id="v5r-j0-1q9"/>
+                <constraint firstItem="30Z-xo-bjM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="205" id="vUF-ji-hhH"/>
+                <constraint firstItem="ade-v1-z2G" firstAttribute="centerY" secondItem="wI0-WK-Uj1" secondAttribute="centerY" id="yAh-Ud-Ns7"/>
+                <constraint firstItem="GlZ-SU-aWS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="ymB-q5-rCH"/>
                 <constraint firstAttribute="centerX" secondItem="RiU-cY-hjq" secondAttribute="centerX" constant="-7" id="zKI-e6-bO8"/>
                 <constraint firstAttribute="trailing" secondItem="JTo-8u-j9f" secondAttribute="trailing" constant="20" id="zVt-OP-m71"/>
             </constraints>

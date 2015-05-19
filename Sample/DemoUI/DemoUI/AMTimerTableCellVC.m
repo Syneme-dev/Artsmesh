@@ -42,8 +42,10 @@ static NSString * const PingCommandFormat =
 {
     [super viewDidLoad];
     self.groupPopup.delegate = self;
-    [self.groupPopup addItemWithTitle:@"----------"];
-    [self.groupPopup selectItemAtIndex:0];
+ //   [self.groupPopup addItemWithTitle:@"----------"];
+    [self popupViewWillPopup:self.groupPopup];
+    [self.groupPopup selectItemWithTitle:
+                [[AMCoreData shareInstance] myLocalLiveGroup].groupName];
     self.slowdownPopup.delegate = self;
     [self.slowdownPopup addItemsWithTitles:@[ @"1", @"1/2", @"1/4", @"1/8", @"1/16", @"1/32" ]];
     [self.slowdownPopup selectItemWithTitle:@"1/4"];

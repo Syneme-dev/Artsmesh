@@ -163,8 +163,8 @@
         
     }else **/
     //if(_retryCount < [lsIps count] + 1){
-    if(_retryCount <= [lsIps count]) {
-        _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
+    if(_retryCount < [lsIps count]) {
+        _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount];
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
         return;

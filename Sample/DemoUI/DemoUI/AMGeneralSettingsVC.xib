@@ -370,12 +370,12 @@
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4cM-tM-iQ4" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="679" width="84" height="17"/>
+                    <rect key="frame" x="30" y="679" width="99" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="80" id="N5P-EI-gPY"/>
+                        <constraint firstAttribute="width" constant="95" id="N5P-EI-gPY"/>
                         <constraint firstAttribute="height" constant="17" id="hVt-4u-dbu"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PRIVATE IPV6::" id="Dex-Vz-o2S">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IPV6 ADDRESS:" id="Dex-Vz-o2S">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

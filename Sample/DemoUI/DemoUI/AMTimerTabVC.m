@@ -92,7 +92,19 @@ typedef enum : NSInteger {
     if ([event isEqualToString:AM_OSC_TIMER_STOP]) {
         [self stopTimer:self];
         return;
+    }else if ([event isEqualToString:AM_OSC_TIMER_START]) {
+        [self nextTimerState:self];
+        return;
+    }else if([event isEqualToString:AM_OSC_TIMER_PAUSE]){
+        [self nextTimerState:self];
+        return;
     }
+    else if([event isEqualToString:AM_OSC_TIMER_RESUME]){
+        [self nextTimerState:self];
+        return;
+    }
+    
+    
     
     NSDictionary *stateCheckingTable = @{
          AM_OSC_TIMER_START :   @(AMTimerStateStopped),

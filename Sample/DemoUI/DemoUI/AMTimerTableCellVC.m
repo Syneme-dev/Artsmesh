@@ -90,8 +90,8 @@ static NSString * const PingCommandFormat =
 {
     if (popupView == self.slowdownPopup)
         [self resetTimer];
-//    else if (notification.object == self.groupCombox)
-//        [self groupDidChange];
+    else if (popupView == self.groupPopup)
+        [self groupDidChange];
 }
 
 - (void)groupDidChange

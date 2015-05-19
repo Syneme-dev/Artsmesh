@@ -163,7 +163,7 @@
         
     }else **/
     //if(_retryCount < [lsIps count] + 1){
-    if(_retryCount < [lsIps count]) {
+    if(_retryCount <= [lsIps count]) {
         //_tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
         _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount];
     }else{

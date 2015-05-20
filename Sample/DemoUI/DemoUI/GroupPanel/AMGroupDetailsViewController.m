@@ -35,6 +35,8 @@
 {
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.joinBtn toColor:UI_Color_blue];
+    
+    [self updateUI];
 }
 
 -(void)updateUI
@@ -52,6 +54,7 @@
     }
     
     if (![self.group.description isEqualToString:@""]) {
+        
         NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: 13];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};

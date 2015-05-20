@@ -33,7 +33,7 @@
                         <constraint firstAttribute="width" constant="99" id="In3-z6-nEP"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="NICK NAME:" id="g9H-hz-2IC">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -44,7 +44,7 @@
                         <constraint firstAttribute="height" constant="22" id="hL4-cD-0OJ"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="oif-Xw-RFl" customClass="AMTextFieldCell">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>

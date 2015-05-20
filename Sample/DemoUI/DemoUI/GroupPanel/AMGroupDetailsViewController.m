@@ -55,7 +55,9 @@
     
     if (![self.group.description isEqualToString:@""]) {
         
-        NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: 13];
+        NSFontManager *fontManager = [NSFontManager sharedFontManager];
+        //NSFont* textViewFont =  [NSFont fontWithName: @"FoundryMonoline" size: 13];
+        NSFont *textViewFont = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSBoldFontMask weight:0 size:13];
         NSDictionary* attr = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                NSFontAttributeName:textViewFont};
         NSAttributedString* attrStr = [[NSAttributedString alloc] initWithString:self.group.description attributes:attr];

@@ -158,21 +158,12 @@
         lsIps = [config localServerIpv4s];
     }
     
-    /**
     if (_retryCount == 0) {
         _tryLocalServerAddr = config.localServerHost.name;
         
     }else if(_retryCount < [lsIps count] + 1){
         _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
         
-    }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
-        return;
-    }
-    **/
-    
-    if(_retryCount < [lsIps count]) {
-        _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount];
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
         return;

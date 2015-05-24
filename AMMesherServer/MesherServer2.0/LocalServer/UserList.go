@@ -236,6 +236,7 @@ func makeSnapShot(){
 		userData.PublicChatPort = v.userData.PublicChatPort
 		userData.Busy = v.userData.Busy
 		userData.OSCServer = v.userData.OSCServer
+		userData.isIPV6=userData.isIPV6
 		
 		newSnapShot.UsersData = append(newSnapShot.UsersData , userData)
 	}

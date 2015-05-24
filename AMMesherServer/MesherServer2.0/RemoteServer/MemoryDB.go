@@ -239,8 +239,10 @@ func AddNewUser(user *AMRequestUser, groupId string)(string){
 	newUser.userData.IsLeader = user.IsLeader
 	newUser.userData.IsOnline = user.IsOnline
 	newUser.userData.Busy = user.Busy
+
 	newUser.userData.OSCServer =user.OSCServer
-	
+
+	newUser.userData.isIPV6 =user.isIPV6
 	addUserToGroup(newUser, group)
 	makeUserIndex(newUser)
 	updateUserTimestamp(newUser)
@@ -278,6 +280,7 @@ func UpdataUser(user *AMRequestUser, groupId string)(string){
 	existUser.userData.IsOnline = user.IsOnline
 	existUser.userData.Busy = user.Busy
 	existUser.userData.OSCServer = user.OSCServer
+	existUser.userData.isIPV6 = user.isIPV6
 	
 	updateUserTimestamp(existUser)
 	makeSnapShot()
@@ -574,6 +577,7 @@ func copyGroupToDTO(group *GroupNode)(*DTOGroup){
 		u.IsOnline = v.userData.IsOnline
 		u.Busy = v.userData.Busy
 		u.OSCServer = v.userData.OSCServer
+		u.isIPV6 = v.userData.isIPV6
 
 		dtoGroup.Users = append(dtoGroup.Users, u)
 	}

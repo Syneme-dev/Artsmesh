@@ -42,6 +42,7 @@ type AMRequestUser struct{
 	PublicChatPort string
 	Busy			string
 	OSCServer	string
+	isIPV6 		string
 }
 
 type AMRequestChangePassword struct{

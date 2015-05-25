@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMTimerView : NSView
-
+@property NSTimeZone* timeZone;
 @end

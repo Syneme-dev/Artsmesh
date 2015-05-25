@@ -92,6 +92,7 @@
 
 - (void) awakeFromNib
 {
+    self.timeZone = [NSTimeZone systemTimeZone];
     [self initTimeArea];
     [self updateClock:nil];
     [self startTime];
@@ -149,6 +150,7 @@
 
     NSCalendar *gregorian = [[NSCalendar alloc]
                              initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setTimeZone:self.timeZone];
     NSDateComponents *timeComps =
             [gregorian components:(NSHourCalendarUnit   | NSMinuteCalendarUnit |
                                    NSSecondCalendarUnit | NSTimeZoneCalendarUnit)

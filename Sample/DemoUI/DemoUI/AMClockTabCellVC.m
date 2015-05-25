@@ -15,8 +15,10 @@
 
 
 #import "UIFramework/AMTableCellView.h"
+#import "UIFramework/AMTimerView.h"
 
 @interface AMClockTabCellVC ()<AMPopUpViewDelegeate>
+@property (weak) IBOutlet AMTimerView *timerView;
 @property (weak) IBOutlet NSTextField *timeZoneAbbreviation;
 @property (weak) IBOutlet   AMPopUpView*    groupPopup;
 @property (nonatomic)       NSArray*        groups;
@@ -63,6 +65,8 @@
         NSString* timeZoneName = group.timezoneName;
         NSTimeZone* zone = [NSTimeZone timeZoneWithName:timeZoneName];
         self.timeZoneAbbreviation.stringValue =[zone abbreviation];
+        
+        self.timerView.timeZone = zone;
     }
 }
 

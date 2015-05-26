@@ -1060,6 +1060,19 @@
     self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
 }
 
+#pragma mark -
+#pragma mark Heartbeat Monitor Blink
+
+- (void) heartbeatBlinkYellow
+{
+    
+}
+
+- (void) heartbeatBlinkRed
+{
+    
+}
+
 
 
 @end

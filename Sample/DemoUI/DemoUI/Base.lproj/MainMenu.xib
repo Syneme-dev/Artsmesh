@@ -763,9 +763,6 @@
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
-                        <connections>
-                            <action selector="syphonServerToggled:" target="B30-a9-ZW1" id="vmu-a7-aSj"/>
-                        </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="qme-pL-mB7">
                         <rect key="frame" x="983" y="732" width="16" height="16"/>
@@ -909,6 +906,7 @@
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
             <connections>
+                <outlet property="heartbeatMonitor" destination="p6U-XZ-4p3" id="ujS-uS-qDg"/>
                 <outlet property="jackCPUUsageBar" destination="eIW-oc-qXb" id="tJq-vx-dkn"/>
                 <outlet property="jackCpuUageNum" destination="DZl-dT-72j" id="Era-v4-O0m"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>

@@ -15,6 +15,10 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 
+NSString * const AMHeartbeatFailNotification        = @"AMHeartbeatFailNotification";
+NSString * const AMHeartbeatDisconnectNotification  = @"AMHeartbeatDisconnectNotification";
+
+
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
 @end
 
@@ -620,6 +624,18 @@
         if (_heartbeatFailureCount % 5 == 0) {
             [self requestUserList];
         }
+    }
+    
+    //Just for sending notification
+    if (_heartbeatFailureCount < 5) {
+        [[NSNotificationCenter defaultCenter]
+                                        postNotificationName:AMHeartbeatFailNotification
+                                                    object:self];
+    }else{
+        [[NSNotificationCenter defaultCenter]
+                                postNotificationName:AMHeartbeatDisconnectNotification
+                                                object:self];
+
     }
 }
 

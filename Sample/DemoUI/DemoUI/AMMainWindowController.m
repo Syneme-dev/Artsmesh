@@ -26,6 +26,7 @@
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
+#import "AMMesher/AMRemoteMesher.h"
 #import "AMPanelControlBarViewController.h"
 //#import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
@@ -72,6 +73,7 @@
 @interface AMMainWindowController ()
 @property (weak) IBOutlet NSView *mainContentView;
 @property (weak) IBOutlet NSScrollView *mainScrollView;
+@property (weak) IBOutlet NSButton *heartbeatMonitor;
 
 
 
@@ -79,6 +81,7 @@
 @property (weak) IBOutlet AMFoundryFontView *topMinTF;
 @property (weak) IBOutlet AMFoundryFontView *topSecTF;
 @property (nonatomic) NSTimer* topTimer;
+@property (nonatomic) NSTimer* blinkBackTimer;
 @property (nonatomic) double   totalSecond;
 @end
 
@@ -114,6 +117,17 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
      
+        //Notification for the Heartbeat Monitor
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(heartbeatBlinkYellow:) name:AMHeartbeatFailNotification object:nil];
+        
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(heartbeatBlinkRed:) name:AMHeartbeatDisconnectNotification object:nil];
+        
+
         
         //Add for top bar timer
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1063,16 +1077,40 @@
 #pragma mark -
 #pragma mark Heartbeat Monitor Blink
 
-- (void) heartbeatBlinkYellow
+- (void) heartbeatBlinkYellow : (NSNotification*) notfication
 {
+    //Now just
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
     
+    self.blinkBackTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                     target:self
+                                                   selector:@selector(blinkBack)
+                                                   userInfo:nil
+                                                    repeats:YES];
+
 }
 
-- (void) heartbeatBlinkRed
+
+- (void) blinkBack
 {
-    
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+    [self.blinkBackTimer invalidate];
 }
 
 
+- (void) heartbeatBlinkRed : (NSNotification*) notfication
+
+{
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"server_starting"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+    
+    self.blinkBackTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                   target:self
+                                                 selector:@selector(blinkBack)
+                                                 userInfo:nil
+                                                  repeats:NO];
+}
 
 @end

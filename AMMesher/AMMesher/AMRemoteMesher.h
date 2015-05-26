@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+extern NSString * const AMHeartbeatFailNotification;
+extern NSString * const AMHeartbeatDisconnectNotification;
 
 @interface AMRemoteMesher : NSObject
 

@@ -81,7 +81,7 @@
 @property (weak) IBOutlet AMFoundryFontView *topMinTF;
 @property (weak) IBOutlet AMFoundryFontView *topSecTF;
 @property (nonatomic) NSTimer* topTimer;
-@property (nonatomic) NSTimer* blinkBackTimer;
+
 @property (nonatomic) double   totalSecond;
 @end
 
@@ -1083,12 +1083,9 @@
     [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
-    self.blinkBackTimer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                     target:self
-                                                   selector:@selector(blinkBack)
-                                                   userInfo:nil
-                                                    repeats:YES];
-
+    [NSThread sleepForTimeInterval:0.2];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
 }
 
 
@@ -1101,16 +1098,12 @@
 
 
 - (void) heartbeatBlinkRed : (NSNotification*) notfication
-
 {
     [self.heartbeatMonitor setImage:[NSImage imageNamed:@"server_starting"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
-    self.blinkBackTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                   target:self
-                                                 selector:@selector(blinkBack)
-                                                 userInfo:nil
-                                                  repeats:NO];
+    [NSThread sleepForTimeInterval:0.2];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
 }
-
 @end

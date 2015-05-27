@@ -28,7 +28,7 @@
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
 
-
+@property (nonatomic) NSTimer* blinkBackTimer;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

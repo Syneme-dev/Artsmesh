@@ -58,6 +58,14 @@
 
 @property (strong) IBOutlet NSView *eventsManagerView;
 
+// Settings Tab IBOutlets
+@property (weak) IBOutlet NSTextField *streamNameTextField;
+@property (weak) IBOutlet NSTextField *streamAddressTextField;
+@property (weak) IBOutlet NSTextField *streamBackupTextField;
+@property (weak) IBOutlet NSTextField *streamFormatTextField;
+@property (weak) IBOutlet NSTextField *streamStatusTextField;
+
+
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;
 - (IBAction)settingsBtnClick:(id)sender;

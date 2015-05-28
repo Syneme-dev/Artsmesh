@@ -632,10 +632,18 @@
     }
 }
 
+
 - (IBAction)settingsBtnClick:(id)sender {
     [self pushDownButton:self.settingsBtn];
     
     [self.groupTabView selectTabViewItemAtIndex:1];
+    
+    if ( [self isSignedIn] && self.selectedBroadcast != nil ) {
+        NSLog(@"Event selected! Load CDN Settings into fields now..");
+        NSLog(@"Current broadcast is: %@", self.selectedBroadcast);
+    } else {
+        NSLog(@"No event selected, blank..");
+    }
 }
 
 - (IBAction)oAuthSignInBtnClick:(id)sender {

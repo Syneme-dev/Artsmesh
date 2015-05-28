@@ -27,6 +27,11 @@
                 <outlet property="schedEndPMCheck" destination="LJM-zO-aFL" id="0M1-wP-Gbc"/>
                 <outlet property="schedStartPMCheck" destination="zar-IV-heM" id="cxQ-ha-gwc"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
+                <outlet property="streamAddressTextField" destination="cw2-44-q7f" id="IA0-TI-jZm"/>
+                <outlet property="streamBackupTextField" destination="ljm-4f-PZx" id="U7n-88-wg9"/>
+                <outlet property="streamFormatTextField" destination="hX4-5d-2RS" id="gUb-BC-WZB"/>
+                <outlet property="streamNameTextField" destination="Cg8-es-miE" id="Xeg-5u-OJz"/>
+                <outlet property="streamStatusTextField" destination="U0l-yy-6Pq" id="pPb-tf-mMg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="youtubeBtn" destination="UQB-MZ-pFk" id="MF0-mP-pYA"/>
             </connections>
@@ -404,7 +409,7 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-es-miE" userLabel="NAME VALUE">
                                         <rect key="frame" x="148" y="550" width="408" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="yYf-uT-mvQ">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="NO EVENT SELECTED" id="yYf-uT-mvQ">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -491,7 +496,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-qF-eYX" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="2" y="368" width="556" height="14"/>
+                                        <rect key="frame" x="2" y="360" width="556" height="14"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="GOOGLE ACCOUNT" id="sYk-Zj-60O">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -499,7 +504,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a85-rH-kEj">
-                                        <rect key="frame" x="2" y="338" width="80" height="25"/>
+                                        <rect key="frame" x="2" y="310" width="80" height="25"/>
                                         <buttonCell key="cell" type="square" title="SIGN IN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="ggv-Gd-wNi">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>

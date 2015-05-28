@@ -1118,7 +1118,7 @@
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
     [NSThread sleepForTimeInterval:0.2];
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"black_dot"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
 }
 @end

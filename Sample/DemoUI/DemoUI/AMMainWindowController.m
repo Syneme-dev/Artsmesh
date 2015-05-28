@@ -118,14 +118,23 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
      
         //Notification for the Heartbeat Monitor
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatNotification
+                                        object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(heartbeatBlinkYellow:) name:AMHeartbeatFailNotification object:nil];
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatFailNotification
+                                         object:nil];
         
-        
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(heartbeatBlinkRed:) name:AMHeartbeatDisconnectNotification object:nil];
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatDisconnectNotification
+                                        object:nil];
         
 
         
@@ -1088,22 +1097,28 @@
     [self.heartbeatMonitor setNeedsDisplay:YES];
 }
 
-
-- (void) blinkBack
+- (void) heartbeatBlink : (NSNotification*) notfication
 {
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
-    [self.heartbeatMonitor setNeedsDisplay:YES];
-    [self.blinkBackTimer invalidate];
-}
-
-
-- (void) heartbeatBlinkRed : (NSNotification*) notfication
-{
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"server_starting"]];
+    if([notfication.name
+        isEqualToString:AMHeartbeatNotification]) {
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }else if([notfication.name
+              isEqualToString:AMHeartbeatFailNotification]){
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"groupuser_busy"]];
+    }else if([notfication.name
+              isEqualToString:AMHeartbeatDisconnectNotification]){
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"project_broadcast"]];
+    }else{
+        return;
+    }
+    
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
     [NSThread sleepForTimeInterval:0.2];
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"user_unmeshed_icon"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
 }
 @end

@@ -752,14 +752,12 @@
                         </connections>
                     </button>
                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
-                        <rect key="frame" x="829" y="733" width="15" height="15"/>
+                        <rect key="frame" x="829" y="735" width="8" height="8"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="4pk-2q-nQE"/>
-                            <constraint firstAttribute="width" constant="15" id="NgY-mz-6Iz"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="cX7-fx-zUb"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="kQS-M3-NeS"/>
+                            <constraint firstAttribute="height" constant="8" id="4pk-2q-nQE"/>
+                            <constraint firstAttribute="width" constant="8" id="NgY-mz-6Iz"/>
                         </constraints>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="Mcb-NS-EX8">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="user_unmeshed_icon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Mcb-NS-EX8">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -873,8 +871,8 @@
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
-                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="32" id="A8x-LG-5jD"/>
-                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="p6U-XZ-4p3" secondAttribute="bottom" constant="25" id="Des-zp-BeV"/>
+                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="39" id="A8x-LG-5jD"/>
+                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="p6U-XZ-4p3" secondAttribute="bottom" constant="27" id="Des-zp-BeV"/>
                     <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
@@ -931,5 +929,6 @@
         <image name="logo_grey" width="61.439998626708984" height="61.439998626708984"/>
         <image name="topbar_mesh" width="25" height="25"/>
         <image name="topbar_mesh_offline" width="25" height="25"/>
+        <image name="user_unmeshed_icon" width="44" height="44"/>
     </resources>
 </document>

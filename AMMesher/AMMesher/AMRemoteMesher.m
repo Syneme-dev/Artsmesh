@@ -17,6 +17,8 @@
 
 NSString * const AMHeartbeatFailNotification        = @"AMHeartbeatFailNotification";
 NSString * const AMHeartbeatDisconnectNotification  = @"AMHeartbeatDisconnectNotification";
+NSString * const AMHeartbeatNotification            =
+    @"AMHeartbeatNotification";
 
 
 @interface AMRemoteMesher()<AMHeartBeatDelegate>
@@ -611,6 +613,9 @@ NSString * const AMHeartbeatDisconnectNotification  = @"AMHeartbeatDisconnectNot
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
     _heartbeatFailureCount = 0;
+    [[NSNotificationCenter defaultCenter]
+                  postNotificationName:AMHeartbeatNotification
+                                object:self];
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error

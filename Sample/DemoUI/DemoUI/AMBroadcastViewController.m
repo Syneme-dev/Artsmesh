@@ -20,6 +20,8 @@
 @property (strong) GTLServiceTicket *channelIdTicket;
 @property (strong) GTLServiceTicket *channelCurrentEventsTicket;
 @property (strong) GTLServiceTicket *broadcastTicket;
+@property (strong) GTLServiceTicket *liveStreamTicket;
+@property (strong) GTLServiceTicket *broadcastBindTicket;
 @property (strong) NSString *channelId;
 @property (strong) NSString *broadcastTitle;
 @property (strong) NSString *broadcastDesc;
@@ -338,6 +340,10 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        // Live broadcast successfully created!
+                                       
+                                       NSLog(@"Live Broadcast created!");
+                                       NSLog(@"Creating Live Stream next..");
+                                       [self insertLiveStream:liveBroadcast];
                                 
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
                                        [self changeBroadcastURL:self.broadcastURL];
@@ -460,6 +466,72 @@
     return newBroadcastStatus;
 }
 
+- (void)insertLiveStream: (GTLYouTubeLiveBroadcast *)theBroadcast {
+    // This function takes a given YouTube Live Broadcast & establishes a Live Stream to pair with it
+    GTLYouTubeLiveStreamSnippet *newLiveStreamSnippet = [[GTLYouTubeLiveStreamSnippet alloc] init];
+    [newLiveStreamSnippet setTitle:@"Test Live Stream"];
+    
+    GTLYouTubeCdnSettings *newCdnSettings = [[GTLYouTubeCdnSettings alloc] init];
+    [newCdnSettings setFormat:@"720p"];
+    [newCdnSettings setIngestionType:@"rtmp"];
+    
+    GTLYouTubeLiveStream *newLiveStream = [[GTLYouTubeLiveStream alloc] init];
+    [newLiveStream setKind:@"youtube#liveStream"];
+    [newLiveStream setSnippet:newLiveStreamSnippet];
+    [newLiveStream setCdn:newCdnSettings];
+
+
+    // Execute the request and return an object that contains information
+    // about the new live stream.
+    GTLQueryYouTube *insertLiveStreamQuery = [GTLQueryYouTube queryForLiveStreamsInsertWithObject:newLiveStream part:@"snippet, cdn"];
+    insertLiveStreamQuery.mine = YES;
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    self.liveStreamTicket = [service executeQuery:insertLiveStreamQuery
+                               completionHandler:^(GTLServiceTicket *ticket,
+                                                   GTLYouTubeLiveStream *liveStream,
+                                                   NSError *error) {
+                                   // Callback
+                                   _liveStreamTicket = nil;
+                                   if (error == nil) {
+                                       // Live Stream successfully created!
+                                       // Need to pair the stream with the live event now
+                                       NSLog(@"Live Stream created!");
+                                       NSLog(@"Binding new Live Stream to new Live Broadcast..");
+                                       
+                                       [self bindLiveStream:liveStream withBroadcast:theBroadcast];
+                                       
+                                   } else {
+                                       NSLog(@"Error: %@", error.description);
+                                   }
+                               }];
+}
+
+- (void)bindLiveStream: (GTLYouTubeLiveStream *)theLiveStream withBroadcast:(GTLYouTubeLiveBroadcast *)theBroadcast {
+    NSString *broadcastId = theBroadcast.identifier;
+    NSString *liveStreamId = theLiveStream.identifier;
+    
+    GTLQueryYouTube *bindLiveBroadcastQuery = [GTLQueryYouTube queryForLiveBroadcastsBindWithIdentifier:broadcastId part:@"id, contentDetails"];
+    [bindLiveBroadcastQuery setStreamId:liveStreamId];
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    self.broadcastBindTicket = [service executeQuery:bindLiveBroadcastQuery
+                                completionHandler:^(GTLServiceTicket *ticket,
+                                                    GTLYouTubeLiveBroadcast *liveBroadcast,
+                                                    NSError *error) {
+                                    // Callback
+                                    _broadcastBindTicket = nil;
+                                    if (error == nil) {
+                                        // Live Stream successfully bound to YouTube Broadcast!
+                                        NSLog(@"Binding successful! Bound Stream details are: %@", theLiveStream);
+                                    } else {
+                                        NSLog(@"Error: %@", error.description);
+                                    }
+                                }];
+    
+}
 
 - (void)loadEventTime: (NSDate *)theDate andDayTextField: (NSTextField *)theDayTextField andMonthTextField: (NSTextField *)theMonthTextField andYearTextField: (NSTextField *)theYearTextField andHourTextField: (NSTextField *)theHourTextField andMinuteTextField: (NSTextField *)theMinuteTextField andPMCHeck: (AMCheckBoxView *)thePMCheck {
     

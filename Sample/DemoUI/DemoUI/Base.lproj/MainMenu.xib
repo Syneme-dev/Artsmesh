@@ -635,7 +635,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -740,7 +740,7 @@
                         </connections>
                     </button>
                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
-                        <rect key="frame" x="829" y="735" width="8" height="12"/>
+                        <rect key="frame" x="673" y="735" width="8" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="4pk-2q-nQE"/>
                             <constraint firstAttribute="width" constant="8" id="NgY-mz-6Iz"/>
@@ -871,7 +871,7 @@
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
-                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="400" id="A8x-LG-5jD"/>
+                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="195" id="A8x-LG-5jD"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="p6U-XZ-4p3" secondAttribute="bottom" constant="27" id="Des-zp-BeV"/>
                     <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>

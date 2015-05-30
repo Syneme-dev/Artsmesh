@@ -841,6 +841,16 @@
     [self loadEventTime:curDate andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
     [self loadEventTime:curDate andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
     [self.privateCheck setChecked:NO];
+    
+    [self removeLiveStreamFromEventForm];
+}
+
+- (void)removeLiveStreamFromEventForm {
+    [self.streamNameTextField setStringValue:@"NEW STREAM NAME"];
+    [self.streamFormatTextField setStringValue:@"720p"];
+    [self.streamAddressTextField setStringValue:@""];
+    [self.streamIdTextField setStringValue:@""];
+    [self.streamStatusTextField setStringValue:@""];
 }
 
 - (void)dealloc {

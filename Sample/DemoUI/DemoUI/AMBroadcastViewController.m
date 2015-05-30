@@ -275,7 +275,7 @@
     
     GTLServiceYouTube *service = self.youTubeService;
     
-    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet, status"];
+    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet, status, contentDetails"];
     query.mine = YES;
     query.maxResults = 50;
     
@@ -770,7 +770,8 @@
             //Event EDIT checkbox has been checked
             self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
             [self setBroadcastFormMode:theCheckedBoxView.title];
-            [self loadBrodcastIntoEventForm:theCheckedBoxView.liveBroadcast];
+            [self loadBroadcastIntoEventForm:theCheckedBoxView.liveBroadcast];
+            [self loadLiveStreamIntoEventForm:theCheckedBoxView.liveBroadcast.contentDetails.boundStreamId];
             
         } else if (!theCheckedBoxView.checked) {
             self.selectedBroadcast = nil;
@@ -786,7 +787,7 @@
     [self.createEventBtn setTitle:formMode];
 }
 
-- (void)loadBrodcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
+- (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function loads in a given YouTube Live Event into the Event Form.
     
     [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
@@ -798,6 +799,38 @@
     NSString *curEventPrivacyStatus = [NSString stringWithFormat:@"%@", theBroadcast.status.privacyStatus];
     
     if ([curEventPrivacyStatus isEqualToString:@"public"]) { [self.privateCheck setChecked:FALSE]; } else { [self.privateCheck setChecked:TRUE]; }
+}
+
+- (void)loadLiveStreamIntoEventForm:(NSString *)streamId {
+    GTLQueryYouTube *getStreamQuery = [GTLQueryYouTube queryForLiveStreamsListWithPart:@"snippet, cdn, status"];
+    [getStreamQuery setMine:TRUE];
+    [getStreamQuery setStreamId:streamId];
+    [getStreamQuery setMaxResults:(NSUInteger)1];
+    
+    GTLServiceYouTube *service = self.youTubeService;
+    
+    self.liveStreamTicket = [service executeQuery:getStreamQuery
+                                   completionHandler:^(GTLServiceTicket *ticket,
+                                                       GTLYouTubeLiveStreamListResponse *liveStreamList,
+                                                       NSError *error) {
+                                       // Callback
+                                       _liveStreamTicket = nil;
+                                       if (error == nil) {
+                                           // Live Stream found, populate event fields now
+                                           
+                                           NSLog(@"Live Stream found: %@", liveStreamList);
+                                           if ([liveStreamList.items count] > 0) {
+                                               GTLYouTubeLiveStream *foundStream = [liveStreamList.items objectAtIndex:0];
+                                               [self.streamNameTextField setStringValue:foundStream.snippet.title];
+                                               [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
+                                               [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
+                                               [self.streamIdTextField setStringValue:foundStream.identifier];
+                                               [self.streamFormatTextField setStringValue:foundStream.cdn.format];
+                                           }
+                                       } else {
+                                           NSLog(@"Error: %@", error.description);
+                                       }
+                                   }];
 }
 
 - (void)removeBroadcastFromEventForm {

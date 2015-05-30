@@ -27,10 +27,12 @@
                 <outlet property="schedEndPMCheck" destination="LJM-zO-aFL" id="0M1-wP-Gbc"/>
                 <outlet property="schedStartPMCheck" destination="zar-IV-heM" id="cxQ-ha-gwc"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
-                <outlet property="streamAddressTextField" destination="cw2-44-q7f" id="IA0-TI-jZm"/>
+                <outlet property="streamAddressTextField" destination="Kbj-gT-PAQ" id="f2L-TE-MVr"/>
                 <outlet property="streamBackupTextField" destination="ljm-4f-PZx" id="U7n-88-wg9"/>
-                <outlet property="streamFormatTextField" destination="hX4-5d-2RS" id="gUb-BC-WZB"/>
-                <outlet property="streamStatusTextField" destination="U0l-yy-6Pq" id="pPb-tf-mMg"/>
+                <outlet property="streamFormatTextField" destination="tDf-8N-HNp" id="tJA-XE-e7A"/>
+                <outlet property="streamIdTextField" destination="4Ua-MT-bmJ" id="ylr-1K-QKn"/>
+                <outlet property="streamNameTextField" destination="xC2-ac-rpw" id="SSV-Tq-6An"/>
+                <outlet property="streamStatusTextField" destination="9nM-Jj-bNd" id="hMW-OU-bN9"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="youtubeBtn" destination="UQB-MZ-pFk" id="MF0-mP-pYA"/>
             </connections>

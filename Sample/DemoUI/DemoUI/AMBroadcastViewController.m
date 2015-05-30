@@ -469,10 +469,10 @@
 - (void)insertLiveStream: (GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function takes a given YouTube Live Broadcast & establishes a Live Stream to pair with it
     GTLYouTubeLiveStreamSnippet *newLiveStreamSnippet = [[GTLYouTubeLiveStreamSnippet alloc] init];
-    [newLiveStreamSnippet setTitle:@"Test Live Stream"];
+    [newLiveStreamSnippet setTitle:[self.streamNameTextField stringValue]];
     
     GTLYouTubeCdnSettings *newCdnSettings = [[GTLYouTubeCdnSettings alloc] init];
-    [newCdnSettings setFormat:@"720p"];
+    [newCdnSettings setFormat:[self.streamFormatTextField stringValue]];
     [newCdnSettings setIngestionType:@"rtmp"];
     
     GTLYouTubeLiveStream *newLiveStream = [[GTLYouTubeLiveStream alloc] init];

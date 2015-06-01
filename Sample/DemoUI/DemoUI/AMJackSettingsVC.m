@@ -9,6 +9,7 @@
 #import "AMJackSettingsVC.h"
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMCheckBoxView.h"
+#import "UIFramework/AMFoundryFontView.h"
 #import "AMAudio/AMAudio.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
@@ -28,6 +29,9 @@
 @property (weak) IBOutlet NSButton *saveBtn;
 @property (weak) IBOutlet NSButton *cancelBtn;
 @property (weak) IBOutlet NSTextField *amVirtualChannsField;
+@property (weak) IBOutlet AMFoundryFontView *virtualInputChannelsField;
+@property (weak) IBOutlet AMFoundryFontView *virtualOutputChannelsField;
+@property (weak) IBOutlet AMCheckBoxView *autoConnectCheck;
 
 @end
 
@@ -41,6 +45,7 @@
     [self.compensationCheck setTitle:@"CLOCK DRIFT COMPENSATION:"];
     [self.portMornitingCheck setTitle:@"SYSTEM PORT MORNITORING:"];
     [self.midiCheck setTitle:@"ACTIVE MIDI:"];
+    [self.autoConnectCheck setTitle:@"AUTO CONNECT WITH PHYSICAL PORTS"];
     
     [self loadDriver];
     [self loadInputAndOutputDevice];
@@ -49,8 +54,10 @@
     [self loadMidi];
     [self loadMonitoring];
     [self loadVirtualChannels];
+    [self loadAutoConnect];
     [self saveConfig:nil];
     
+    [self loadAutoConnect];
     [self setButtons];
     
     [[NSNotificationCenter defaultCenter]
@@ -258,10 +265,19 @@
     self.midiCheck.checked = [[NSUserDefaults standardUserDefaults] boolForKey:Preference_Jack_ActiveMIDI];
 }
 
+-(void)loadAutoConnect
+{
+    self.autoConnectCheck.checked = [[NSUserDefaults standardUserDefaults] boolForKey:Preference_Jack_AutoConnect];
+}
+
 
 -(void)loadVirtualChannels
 {
     self.amVirtualChannsField.stringValue = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_RouterVirtualChanns];
+    
+    self.virtualInputChannelsField.stringValue = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_VirtualInChannels];
+    
+     self.virtualOutputChannelsField.stringValue = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_VirtualOutChannels];
 }
 
 
@@ -312,6 +328,12 @@
      setObject:self.amVirtualChannsField.stringValue forKey:Preference_Jack_RouterVirtualChanns];
     
     [[AMPreferenceManager standardUserDefaults]
+     setObject:self.virtualInputChannelsField.stringValue forKey:Preference_Jack_VirtualInChannels];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.virtualOutputChannelsField.stringValue forKey:Preference_Jack_VirtualOutChannels];
+    
+    [[AMPreferenceManager standardUserDefaults]
      setBool:self.hogModeCheck.checked forKey:Preference_Jack_HogMode];
     
     [[AMPreferenceManager standardUserDefaults]
@@ -322,6 +344,9 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setBool:self.midiCheck.checked forKey:Preference_Jack_ActiveMIDI];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setBool:self.autoConnectCheck.checked forKey:Preference_Jack_AutoConnect];
 }
 
 
@@ -349,6 +374,12 @@
     
     self.amVirtualChannsField.stringValue = [[AMPreferenceManager standardUserDefaults]
                                              stringForKey:Preference_Jack_RouterVirtualChanns];
+   
+    self.virtualInputChannelsField.stringValue =[[AMPreferenceManager standardUserDefaults]
+                                stringForKey:Preference_Jack_VirtualInChannels];
+    
+    self.virtualOutputChannelsField.stringValue=[[AMPreferenceManager standardUserDefaults]
+                                stringForKey:Preference_Jack_VirtualOutChannels];
     
     [self.hogModeCheck setChecked:[[AMPreferenceManager standardUserDefaults]
                                    boolForKey:Preference_Jack_HogMode]];
@@ -361,6 +392,11 @@
     
     [self.midiCheck setChecked:[[AMPreferenceManager standardUserDefaults]
                                 boolForKey:Preference_Jack_ActiveMIDI]];
+    
+    
+    [self.autoConnectCheck setChecked:[[AMPreferenceManager standardUserDefaults]
+                                boolForKey:Preference_Jack_AutoConnect]];
+
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

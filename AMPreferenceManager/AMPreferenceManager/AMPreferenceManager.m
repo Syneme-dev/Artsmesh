@@ -79,6 +79,8 @@
              Preference_Cluster_Latitude,        Preference_Key_Cluster_Latitude,
              Preference_Cluster_Longitude,       Preference_Key_Cluster_Longitude,
              @"2", Preference_Jack_RouterVirtualChanns,
+             @"2", Preference_Jack_VirtualInChannels,
+             @"2", Preference_Jack_VirtualOutChannels,
              @"22242", Preference_OSC_Server_Port,
              @"30", Preference_OSC_Server_Timeout,
              @"50", Preference_OSC_Server_MaxGroups,

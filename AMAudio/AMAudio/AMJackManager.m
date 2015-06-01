@@ -135,6 +135,9 @@
                 boolForKey:Preference_Jack_ActiveMIDI];
 
     
+    BOOL autoConnect =[[AMPreferenceManager standardUserDefaults]
+                       boolForKey:Preference_Jack_AutoConnect];
+    
     char stringa[512];
     memset(stringa, 0, 512);
     

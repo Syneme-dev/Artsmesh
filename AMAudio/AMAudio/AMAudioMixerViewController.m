@@ -98,6 +98,19 @@
         virtualChanns = 2;
     }
     
+    //Check virtual input or output channels
+    int virtualInChannels = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Jack_VirtualInChannels] intValue];
+    int virtualOutChannels = [[[AMPreferenceManager standardUserDefaults] valueForKey:Preference_Jack_VirtualOutChannels] intValue];
+    
+    if(virtualInChannels  < 0 || virtualInChannels  > 8 ||
+       virtualOutChannels < 0 || virtualOutChannels > 8){
+        NSLog(@"virtual input or output channels is not in range, set to 2, current value:%d", virtualChanns);
+        virtualInChannels  = 2;
+        virtualOutChannels = 2;
+    }
+
+    
+    
     _client = [[AMArtsmeshClient alloc] initWithChannelCounts:virtualChanns];
     if (![_client registerClient])
     {

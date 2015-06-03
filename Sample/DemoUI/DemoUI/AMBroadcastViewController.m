@@ -821,10 +821,10 @@
                                            NSLog(@"Live Stream found: %@", liveStreamList);
                                            if ([liveStreamList.items count] > 0) {
                                                GTLYouTubeLiveStream *foundStream = [liveStreamList.items objectAtIndex:0];
-                                               [self.streamNameTextField setStringValue:foundStream.snippet.title];
+                                               [self.streamTitleTextField setStringValue:foundStream.snippet.title];
                                                [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
                                                [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
-                                               [self.streamIdTextField setStringValue:foundStream.identifier];
+                                               [self.streamNameTextField setStringValue:foundStream.cdn.ingestionInfo.streamName];
                                                [self.streamFormatTextField setStringValue:foundStream.cdn.format];
                                            }
                                        } else {
@@ -846,10 +846,10 @@
 }
 
 - (void)removeLiveStreamFromEventForm {
-    [self.streamNameTextField setStringValue:@"NEW STREAM NAME"];
+    [self.streamTitleTextField setStringValue:@"NEW STREAM NAME"];
     [self.streamFormatTextField setStringValue:@"720p"];
     [self.streamAddressTextField setStringValue:@""];
-    [self.streamIdTextField setStringValue:@""];
+    [self.streamNameTextField setStringValue:@""];
     [self.streamStatusTextField setStringValue:@""];
 }
 

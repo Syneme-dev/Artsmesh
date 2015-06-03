@@ -60,10 +60,10 @@
 @property (strong) IBOutlet NSView *eventsManagerView;
 
 // Stream Settings IBOutlets
-@property (strong) IBOutlet NSTextField *streamNameTextField;
+@property (strong) IBOutlet NSTextField *streamTitleTextField;
 @property (strong) IBOutlet NSTextField *streamFormatTextField;
 @property (strong) IBOutlet NSTextField *streamAddressTextField;
-@property (strong) IBOutlet NSTextField *streamIdTextField;
+@property (strong) IBOutlet NSTextField *streamNameTextField;
 @property (strong) IBOutlet NSTextField *streamStatusTextField;
 
 

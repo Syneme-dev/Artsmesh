@@ -13,6 +13,8 @@
 #import "AMAudio/AMAudio.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "AMLogger/AMLogReader.h"
+#import "AMLogger/AMLogger.h"
 
 @interface AMJackSettingsVC ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 @property (weak) IBOutlet AMPopUpView *driverBox;
@@ -347,6 +349,54 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setBool:self.autoConnectCheck.checked forKey:Preference_Jack_AutoConnect];
+    
+    [self saveJackRouterPreference];
+}
+
+- (void) saveJackRouterPreference
+{
+    NSString *homePath = NSHomeDirectory();
+    char szHomePath[255] = {0} ;
+    [homePath getCString:szHomePath];
+    
+    FILE *prefFile;
+    char *path;
+    char driverIn[128];
+    char driverOut[128];
+    path = (char*)alloca(256*sizeof(char));
+    sprintf(path,"%s/Library/Preferences/JAS.jpil",szHomePath);
+    
+    if ((prefFile = fopen(path, "wt")) == NULL) {
+        AMLog(kAMErrorLog, @"AMJackSettingsVC.m", @"can't open %s file", path);
+        return;
+    }
+    
+    int    inch = 2;
+    int    outch = 2;
+    int    autoc = 1;
+    int    defInput = FALSE;
+    int    defOutput = FALSE;
+    int    defSystem = FALSE;
+    int    verboseLevel = 0;
+    int    hogmode = 0;
+    int    clockmode = 0;
+    int    monitormode = 0;
+    int    MIDImode = 0;
+    int     nullo;
+    
+    fscanf(prefFile,"\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d",
+               &inch,&nullo,&outch,&nullo,&autoc,&nullo,&defInput,&nullo,&defOutput,&nullo,&defSystem,&nullo,&verboseLevel,&nullo,driverIn, &nullo, driverOut, &nullo, &hogmode, &nullo, &clockmode, &nullo, &monitormode, &nullo, &MIDImode);
+    
+    inch  = self.virtualInputChannelsField.integerValue;
+    outch = self.virtualOutputChannelsField.integerValue;
+    autoc = self.autoConnectCheck.checked ? 1 : 0;
+    
+    fprintf(prefFile,"\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d",
+        inch, -1, outch, -1, autoc, -1, defInput, -1, defOutput, -1, defSystem, -1, verboseLevel, -1, driverIn, -1, driverOut, -1, hogmode, -1, clockmode, -1, monitormode, -1, MIDImode);
+    
+    fclose(prefFile);
+    
+    return;
 }
 
 
@@ -438,9 +488,12 @@
 - (void)textDidChange:(NSNotification *)aNotification
 {
     NSTextField *sender=[aNotification object];
-    if ([sender isEqualTo:self.amVirtualChannsField]) {
-        [self.saveBtn setEnabled:YES];
-        [self.cancelBtn setEnabled:YES];
+    if ([sender isEqual:self.amVirtualChannsField] ||
+        [sender isEqual:self.virtualInputChannelsField] ||
+        [sender isEqual:self.virtualOutputChannelsField])
+    {
+            [self.saveBtn setEnabled:YES];
+            [self.cancelBtn setEnabled:YES];
     }
 }
 

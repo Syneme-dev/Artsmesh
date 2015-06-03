@@ -430,7 +430,7 @@
 -(void)loadControlBarStatus
 {
     for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
-        if (panels != nil) {
+        if (panels != nil && [panels isKindOfClass:[NSMutableArray class]]) {
             for (NSDictionary *dict in panels) {
                 NSString *panelId = [dict objectForKey:@"panelId"];
                 NSString *sideItemId = [panelId stringByReplacingOccurrencesOfString:@"_PANEL" withString:@""];
@@ -444,7 +444,7 @@
 -(void)loadLastOpenedPanels
 {
     for(NSMutableArray* panels in [[AMPreferenceManager standardUserDefaults] objectForKey:UserData_Key_OpenedPanel]){
-        if (panels != nil) {
+        if (panels != nil && [panels isKindOfClass:[NSMutableArray class]]) {
             for (NSDictionary *dict in panels) {
                 NSString *panelId = [dict objectForKey:@"panelId"];
                 [self createPanelWithId:panelId];

@@ -188,7 +188,11 @@
     myGroup.leaderId = mySelf.userid;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];
+    if (config.meshUseIpv6) {
+        req.baseURL = [NSString stringWithFormat:@"http://[%@]:%@", _tryLocalServerAddr, config.localServerPort];
+    } else {
+        req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];
+    }
     req.requestPath = @"/groups/register";
     req.httpMethod = @"POST";
     req.delay = 2;
@@ -544,7 +548,12 @@
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
-    NSString* httpUrl = [NSString stringWithFormat:@"http://%@:%@", _usedLocalServerAddr, localServerPort];
+    NSString *httpUrl = [[NSString alloc] init];
+    if (config.meshUseIpv6){
+        httpUrl = [NSString stringWithFormat:@"http://[%@]:%@", _usedLocalServerAddr, localServerPort];
+    } else {
+        httpUrl = [NSString stringWithFormat:@"http://%@:%@", _usedLocalServerAddr, localServerPort];
+    }
     AMLog(kAMInfoLog, @"AMMesher", @"now used url is:%@", httpUrl);
     
     return httpUrl;

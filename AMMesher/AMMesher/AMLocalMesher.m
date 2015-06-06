@@ -150,18 +150,31 @@
 
 -(void)registerLocalGroup
 {
+    // Load in user Config Options
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
-    NSArray *lsIps = nil;
-    if (config.meshUseIpv6) {
-        lsIps = [config localServerIpv6s];
-    }else{
-        lsIps = [config localServerIpv4s];
+    
+    // Find IPV4 or IPV6 Addresses for found Bonjour Service, depending on user preference
+    NSArray *localServerIps = [[NSArray alloc] initWithArray:[config.localServerHost addresses]];
+    NSMutableArray *localServerIpv4s = [[NSMutableArray alloc] init];
+    NSMutableArray *localServerIpv6s = [[NSMutableArray alloc] init];
+    for (NSString *IpAddress in localServerIps) {
+        if ([AMCommonTools isValidGlobalIpv6:IpAddress]) {
+            [localServerIpv6s addObject:IpAddress];
+        } else if ([AMCommonTools isValidIpv4:IpAddress]) {
+            [localServerIpv4s addObject:IpAddress];
+        }
+    }
+    NSMutableArray *preferredIps = [[NSMutableArray alloc] initWithArray:localServerIpv4s];
+    if (config.meshUseIpv6 && [localServerIpv6s count] > 0) {
+        [preferredIps removeAllObjects];
+        preferredIps = localServerIpv6s;
     }
     
-    if(_retryCount < [[config.localServerHost addresses] count]){
-        NSLog(@"localServerHost addresses are: %@", [config.localServerHost addresses]);
-        _tryLocalServerAddr = [[config.localServerHost addresses] objectAtIndex:_retryCount];
-    
+    // Determine an IP Address to try for group registration
+    if(_retryCount < [preferredIps count]){
+        NSLog(@"localServerHost addresses are: %@", preferredIps);
+        _tryLocalServerAddr = [preferredIps objectAtIndex:_retryCount];
+        
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
         return;

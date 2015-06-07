@@ -99,7 +99,9 @@
 #define Preference_Jack_InterfaceInChans  @"Preference_Jack_InterfaceChans"
 #define Preference_Jack_InterfaceOutChanns @"Preference_Jack_InterfaceOutChanns"
 #define Preference_Jack_RouterVirtualChanns @"Preference_Jack_RouterVirtualChanns"
-
+#define Preference_Jack_VirtualInChannels  @"Preference_Jack_VirtualInChannels"
+#define Preference_Jack_VirtualOutChannels @"Preference_Jack_VirtualOutChannels"
+#define Preference_Jack_AutoConnect      @"Preference_Jack_AutoConnect"
 
 
 /////////////////////////////OSC Groups////////////////////////////////////////

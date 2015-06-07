@@ -14,7 +14,7 @@
 		2692CE2318D7D024006501C4 /* AMNetworkUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CE2218D7D024006501C4 /* AMNetworkUtils.framework */; };
 		26AE4373194E89C500117629 /* AMLocalMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4371194E89C500117629 /* AMLocalMesher.h */; };
 		26AE4374194E89C500117629 /* AMLocalMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4372194E89C500117629 /* AMLocalMesher.m */; };
-		26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4375194E9B3400117629 /* AMRemoteMesher.h */; };
+		26AE4377194E9B3400117629 /* AMRemoteMesher.h in Headers */ = {isa = PBXBuildFile; fileRef = 26AE4375194E9B3400117629 /* AMRemoteMesher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26AE4378194E9B3400117629 /* AMRemoteMesher.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AE4376194E9B3400117629 /* AMRemoteMesher.m */; };
 		26BC15B719321D280020AD2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5518D7C2A2006501C4 /* Cocoa.framework */; };
 		26BC15E319321D3A0020AD2B /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2692CD5218D7C2A2006501C4 /* AMMesher.framework */; };

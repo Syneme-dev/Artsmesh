@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -715,18 +715,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0y6-Or-7Ha" customClass="AMFoundryFontView">
-                        <rect key="frame" x="1112" y="731" width="60" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="6pG-JZ-yH6"/>
-                            <constraint firstAttribute="width" constant="56" id="Ln2-y4-dPy"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OSC" id="mb4-bR-hfc">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
                         <rect key="frame" x="181" y="725" width="30" height="30"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
@@ -750,6 +738,17 @@
                         <connections>
                             <action selector="syphonServerToggled:" target="B30-a9-ZW1" id="RZl-iE-aua"/>
                         </connections>
+                    </button>
+                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
+                        <rect key="frame" x="673" y="735" width="8" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="4pk-2q-nQE"/>
+                            <constraint firstAttribute="width" constant="8" id="NgY-mz-6Iz"/>
+                        </constraints>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="black_dot" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Mcb-NS-EX8">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="qme-pL-mB7">
                         <rect key="frame" x="983" y="732" width="16" height="16"/>
@@ -781,7 +780,7 @@
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
                         <rect key="frame" x="221" y="731" width="38" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mesh" id="YtJ-b7-urv">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MESH" id="YtJ-b7-urv">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -854,12 +853,26 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0y6-Or-7Ha" customClass="AMFoundryFontView">
+                        <rect key="frame" x="1112" y="731" width="60" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="6pG-JZ-yH6"/>
+                            <constraint firstAttribute="width" constant="56" id="Ln2-y4-dPy"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OSC" id="mb4-bR-hfc">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="2Iq-Md-vEu"/>
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
+                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="195" id="A8x-LG-5jD"/>
+                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="p6U-XZ-4p3" secondAttribute="bottom" constant="27" id="Des-zp-BeV"/>
                     <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
@@ -891,6 +904,7 @@
         </customObject>
         <customObject id="B30-a9-ZW1" customClass="AMMainWindowController">
             <connections>
+                <outlet property="heartbeatMonitor" destination="p6U-XZ-4p3" id="ujS-uS-qDg"/>
                 <outlet property="jackCPUUsageBar" destination="eIW-oc-qXb" id="tJq-vx-dkn"/>
                 <outlet property="jackCpuUageNum" destination="DZl-dT-72j" id="Era-v4-O0m"/>
                 <outlet property="jackServerBtn" destination="qme-pL-mB7" id="uAv-TF-Sva"/>
@@ -912,6 +926,7 @@
         <image name="Server_on" width="58.064517974853516" height="58.064517974853516"/>
         <image name="SideBar_askKen" width="40" height="40"/>
         <image name="SideBar_askKen_h" width="40" height="40"/>
+        <image name="black_dot" width="44" height="44"/>
         <image name="logo_grey" width="61.439998626708984" height="61.439998626708984"/>
         <image name="topbar_mesh" width="25" height="25"/>
         <image name="topbar_mesh_offline" width="25" height="25"/>

@@ -30,7 +30,7 @@
 @property (weak) IBOutlet NSScrollView *mainScrollView;
 
 
-
+@property (nonatomic) NSTimer* blinkBackTimer;
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

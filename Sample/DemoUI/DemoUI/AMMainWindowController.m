@@ -26,6 +26,7 @@
 #import "AMGroupPanelViewController.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
+#import "AMMesher/AMRemoteMesher.h"
 #import "AMPanelControlBarViewController.h"
 //#import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
@@ -78,6 +79,7 @@
 @property (weak) IBOutlet AMFoundryFontView *topMinTF;
 @property (weak) IBOutlet AMFoundryFontView *topSecTF;
 @property (nonatomic) NSTimer* topTimer;
+
 @property (nonatomic) double   totalSecond;
 @end
 
@@ -113,6 +115,26 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
      
+        //Notification for the Heartbeat Monitor
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatNotification
+                                        object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatFailNotification
+                                         object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(heartbeatBlink:)
+                                        name:AMHeartbeatDisconnectNotification
+                                        object:nil];
+        
+
         
         //Add for top bar timer
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1059,6 +1081,42 @@
     self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
 }
 
+#pragma mark -
+#pragma mark Heartbeat Monitor Blink
 
+- (void) heartbeatBlinkYellow : (NSNotification*) notfication
+{
+    //Now just
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+    
+    [NSThread sleepForTimeInterval:0.2];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+}
 
+- (void) heartbeatBlink : (NSNotification*) notfication
+{
+    if([notfication.name
+        isEqualToString:AMHeartbeatNotification]) {
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }else if([notfication.name
+              isEqualToString:AMHeartbeatFailNotification]){
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"groupuser_busy"]];
+    }else if([notfication.name
+              isEqualToString:AMHeartbeatDisconnectNotification]){
+        [self.heartbeatMonitor setImage:
+                [NSImage imageNamed:@"project_broadcast"]];
+    }else{
+        return;
+    }
+    
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+    
+    [NSThread sleepForTimeInterval:0.2];
+    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"black_dot"]];
+    [self.heartbeatMonitor setNeedsDisplay:YES];
+}
 @end

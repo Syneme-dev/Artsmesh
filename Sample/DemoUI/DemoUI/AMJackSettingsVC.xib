@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMJackSettingsVC">
             <connections>
                 <outlet property="amVirtualChannsField" destination="Det-K9-1HI" id="6ua-AZ-P4A"/>
+                <outlet property="autoConnectCheck" destination="JdM-7s-DMf" id="D25-OO-TVQ"/>
                 <outlet property="bufferSizeBox" destination="2xT-4D-n1n" id="LIb-ZV-F6R"/>
                 <outlet property="cancelBtn" destination="hJg-c1-QdD" id="jwN-3g-zG6"/>
                 <outlet property="compensationCheck" destination="6s1-7C-Frx" id="YXg-5p-sX5"/>
@@ -22,6 +23,8 @@
                 <outlet property="sampleRateBox" destination="d7T-MQ-sDk" id="Vir-P6-jLm"/>
                 <outlet property="saveBtn" destination="VXR-lw-yED" id="3uF-0S-tDr"/>
                 <outlet property="view" destination="prV-Gl-ilF" id="FQI-MO-fP2"/>
+                <outlet property="virtualInputChannelsField" destination="hbo-3q-9U9" id="l1u-We-qEO"/>
+                <outlet property="virtualOutputChannelsField" destination="gFL-FN-b5K" id="ts6-kn-6q5"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -31,7 +34,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IO8-e2-aBL" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="562" width="108" height="17"/>
+                    <rect key="frame" x="43" y="567" width="108" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACK SERVER: " id="Ndz-fy-6Qe">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -39,7 +42,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFz-xT-aUl" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="108" width="136" height="17"/>
+                    <rect key="frame" x="43" y="176" width="136" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH CLIENT:" id="xcl-KT-aB8">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -47,7 +50,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dry-gY-P8i" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="527" width="57" height="17"/>
+                    <rect key="frame" x="43" y="537" width="57" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DRIVER:" id="pce-1F-kN6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -55,7 +58,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8c0-gd-MwU" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="497" width="100" height="17"/>
+                    <rect key="frame" x="43" y="508" width="100" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INPUT DEVICE:" id="rKB-4H-3wC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -63,7 +66,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqO-LD-5cR" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="467" width="115" height="17"/>
+                    <rect key="frame" x="43" y="479" width="115" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OUTPUT DEVICE:" id="R9n-z8-k4A">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -71,23 +74,15 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDS-wR-KZB" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="407" width="94" height="17"/>
+                    <rect key="frame" x="43" y="412" width="94" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BUFFER SIZE:" id="uMI-QS-BzD">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oh8-WE-oxW" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="199" width="202" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INTERFACE INPUT CHANNELS:" id="GG2-0m-vhB">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFP-QG-4pz" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="75" width="320" height="17"/>
+                    <rect key="frame" x="43" y="152" width="320" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ARTSMESH CLIENT INPUT &amp;OUTPUT CHANNELS:" id="4pp-S1-QfU">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -95,7 +90,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ykb-vk-fjx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="169" width="217" height="17"/>
+                    <rect key="frame" x="43" y="215" width="217" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INTERFACE OUTPUT CHANNELS:" id="J99-yC-mr0">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -103,79 +98,79 @@
                     </textFieldCell>
                 </textField>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="u4R-OW-Uat">
-                    <rect key="frame" x="20" y="239" width="546" height="5"/>
+                    <rect key="frame" x="20" y="137" width="546" height="5"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="yD2-lp-gGR">
-                    <rect key="frame" x="20" y="131" width="546" height="5"/>
+                    <rect key="frame" x="20" y="199" width="546" height="5"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKq-OA-TRF" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="525" width="307" height="21"/>
+                    <rect key="frame" x="164" y="535" width="307" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="l5Z-Fw-Hfl"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n35-Uk-YCU" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="495" width="307" height="21"/>
+                    <rect key="frame" x="164" y="506" width="307" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="WSD-Wm-iFN"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5x-AF-sQ4" customClass="AMPopUpView">
-                    <rect key="frame" x="164" y="465" width="307" height="21"/>
+                    <rect key="frame" x="164" y="477" width="307" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="C2v-Tz-nec"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7T-MQ-sDk" customClass="AMPopUpView">
-                    <rect key="frame" x="285" y="435" width="186" height="21"/>
+                    <rect key="frame" x="285" y="443" width="186" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="d0P-eh-86K"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xT-4D-n1n" customClass="AMPopUpView">
-                    <rect key="frame" x="285" y="405" width="186" height="21"/>
+                    <rect key="frame" x="285" y="410" width="186" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="xeW-Jk-DU0"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJe-HC-VET" customClass="AMPopUpView">
-                    <rect key="frame" x="285" y="197" width="186" height="21"/>
+                    <rect key="frame" x="285" y="240" width="186" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="rMD-pG-IwP"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qkg-VL-JZJ" customClass="AMCheckBoxView">
-                    <rect key="frame" x="45" y="363" width="426" height="25"/>
+                    <rect key="frame" x="45" y="372" width="426" height="25"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="nr2-Wy-fyW"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6s1-7C-Frx" customClass="AMCheckBoxView">
-                    <rect key="frame" x="45" y="331" width="426" height="25"/>
+                    <rect key="frame" x="45" y="338" width="426" height="25"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="ibu-1K-2oJ"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-18-rsA" customClass="AMCheckBoxView">
-                    <rect key="frame" x="45" y="299" width="426" height="25"/>
+                    <rect key="frame" x="45" y="303" width="426" height="25"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="hmL-UT-uYN"/>
                     </connections>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhe-K2-GfT" customClass="AMCheckBoxView">
-                    <rect key="frame" x="45" y="266" width="427" height="25"/>
+                    <rect key="frame" x="45" y="270" width="427" height="25"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="7sd-Lx-aa8"/>
                     </connections>
                 </customView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED">
-                    <rect key="frame" x="391" y="26" width="80" height="25"/>
+                    <rect key="frame" x="391" y="-1" width="80" height="25"/>
                     <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JPa-Wc-0kP">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -185,7 +180,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD">
-                    <rect key="frame" x="302" y="26" width="79" height="25"/>
+                    <rect key="frame" x="302" y="-1" width="79" height="25"/>
                     <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="642-7q-QIt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -198,71 +193,99 @@ Gw
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Det-K9-1HI" customClass="AMFoundryFontView">
-                    <rect key="frame" x="377" y="75" width="96" height="22"/>
+                    <rect key="frame" x="377" y="149" width="96" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="V9p-PJ-1au">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbo-3q-9U9" customClass="AMFoundryFontView">
+                    <rect key="frame" x="387" y="89" width="96" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="h9P-Dg-CT1">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gFL-FN-b5K" customClass="AMFoundryFontView">
+                    <rect key="frame" x="387" y="66" width="96" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="A8Y-nn-jX6">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8L4-zo-VzF">
-                    <rect key="frame" x="20" y="562" width="3" height="17"/>
+                    <rect key="frame" x="20" y="567" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="i7a-Ox-IJv"/>
                 </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wl9-5G-B2q" customClass="AMFoundryFontView">
+                    <rect key="frame" x="43" y="113" width="108" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACK ROUTER: " id="f2Y-5L-9X5">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgB-Jv-XSk">
+                    <rect key="frame" x="20" y="113" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="44M-cr-pxV"/>
+                </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-NP-KQY">
-                    <rect key="frame" x="20" y="527" width="3" height="17"/>
+                    <rect key="frame" x="20" y="537" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Nrh-KD-Tpy"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uds-Uy-SpF">
-                    <rect key="frame" x="20" y="497" width="3" height="17"/>
+                    <rect key="frame" x="20" y="508" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="JEu-vo-3b0"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4W-ta-Ngx">
-                    <rect key="frame" x="20" y="467" width="3" height="17"/>
+                    <rect key="frame" x="20" y="479" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="IRl-aj-nVp"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="txu-Cr-Shk">
-                    <rect key="frame" x="20" y="437" width="3" height="17"/>
+                    <rect key="frame" x="20" y="445" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="DXB-OV-iw9"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Num-Fa-viE">
-                    <rect key="frame" x="20" y="407" width="3" height="17"/>
+                    <rect key="frame" x="20" y="411" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="9IG-ne-rAu"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJb-PG-rCC">
-                    <rect key="frame" x="20" y="367" width="3" height="17"/>
+                    <rect key="frame" x="20" y="376" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Vjz-B2-Hky"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEE-jW-V4Z">
-                    <rect key="frame" x="20" y="335" width="3" height="17"/>
+                    <rect key="frame" x="20" y="342" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="bnJ-A6-Nfj"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KlK-fr-zJR">
-                    <rect key="frame" x="20" y="303" width="3" height="17"/>
+                    <rect key="frame" x="20" y="307" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="vv0-XD-mnl"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-qz-xf1">
-                    <rect key="frame" x="20" y="270" width="3" height="17"/>
+                    <rect key="frame" x="20" y="274" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="zck-uM-n0b"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lCy-6D-eIn">
-                    <rect key="frame" x="20" y="199" width="3" height="17"/>
+                    <rect key="frame" x="20" y="242" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="tDa-yF-inI"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gGm-Xm-VMT">
-                    <rect key="frame" x="20" y="169" width="3" height="17"/>
+                    <rect key="frame" x="20" y="215" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Wjn-ul-ic6"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SGT-8c-fbw">
-                    <rect key="frame" x="20" y="108" width="3" height="17"/>
+                    <rect key="frame" x="20" y="176" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="XPi-xb-oTD"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWL-r4-CJG">
-                    <rect key="frame" x="20" y="75" width="3" height="17"/>
+                    <rect key="frame" x="20" y="152" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="1EY-WG-6cd"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="igi-y1-tKH" customClass="AMFoundryFontView">
-                    <rect key="frame" x="43" y="437" width="100" height="17"/>
+                    <rect key="frame" x="43" y="445" width="100" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SAMPLE RATE:" id="WP1-kg-kdw">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -270,13 +293,55 @@ Gw
                     </textFieldCell>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wR-Y1-1ED" customClass="AMPopUpView">
-                    <rect key="frame" x="285" y="167" width="186" height="21"/>
+                    <rect key="frame" x="285" y="213" width="186" height="21"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="eg2-6n-dLA"/>
                     </connections>
                 </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRJ-ib-qT4" customClass="AMFoundryFontView">
+                    <rect key="frame" x="43" y="89" width="202" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="VIRTUAL INPUT CHANNELS:" id="kvy-9C-BT3">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IZI-eB-REf" customClass="AMFoundryFontView">
+                    <rect key="frame" x="43" y="66" width="217" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="VIRTUAL OUTPUT CHANNELS:" id="txJ-Hy-3bQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huj-Mw-iQr">
+                    <rect key="frame" x="20" y="89" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="uFm-jZ-HrI"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lfw-cr-0tZ">
+                    <rect key="frame" x="20" y="66" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="DOB-d2-VxX"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6a-4I-KvO">
+                    <rect key="frame" x="20" y="39" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="wUC-wG-HyS"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oh8-WE-oxW" customClass="AMFoundryFontView">
+                    <rect key="frame" x="43" y="242" width="202" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INTERFACE INPUT CHANNELS:" id="GG2-0m-vhB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JdM-7s-DMf" customClass="AMCheckBoxView">
+                    <rect key="frame" x="45" y="32" width="426" height="25"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="dyy-ny-u8a"/>
+                    </connections>
+                </customView>
             </subviews>
-            <point key="canvasLocation" x="266" y="-30.5"/>
+            <point key="canvasLocation" x="363" y="-28.5"/>
         </view>
     </objects>
     <resources>

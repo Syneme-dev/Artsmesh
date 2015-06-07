@@ -19,9 +19,20 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+              // Initialization code here.
     }
     return self;
+}
+
+
+- (IBAction)onSidebarDoubleClick:(NSButton *)sender {
+     AMAppDelegate *appDelegate=AM_APPDELEGATE;
+    NSString *panelId=
+    [[NSString stringWithFormat:@"%@_PANEL",sender.identifier ] uppercaseString];
+    AMPanelViewController *panelViewController = appDelegate.mainWindowController.panelControllers [panelId];
+    if(panelViewController!=nil){
+        [appDelegate.mainWindowController.mainScrollView.contentView scrollToPoint:panelViewController.view.frame.origin];
+    }
 }
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender {
@@ -35,6 +46,7 @@
     }
     else
     {
+       
         [appDelegate.mainWindowController  removePanel:panelId];
     }
 }

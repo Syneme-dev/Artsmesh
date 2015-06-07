@@ -27,6 +27,8 @@
 @property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
+@property (weak) IBOutlet NSScrollView *mainScrollView;
+
 
 
 

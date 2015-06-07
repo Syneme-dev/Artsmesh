@@ -71,7 +71,6 @@
 
 @interface AMMainWindowController ()
 @property (weak) IBOutlet NSView *mainContentView;
-@property (weak) IBOutlet NSScrollView *mainScrollView;
 
 
 

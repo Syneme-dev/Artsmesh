@@ -11,4 +11,7 @@
 @interface AMPanelControlBarViewController : NSViewController
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender ;
+
+
+- (IBAction)onSidebarDoubleClick:(NSButton *)sender ;
 @end

@@ -160,7 +160,7 @@
     for (NSString *IpAddress in localServerIps) {
         if ([AMCommonTools isValidGlobalIpv6:IpAddress]) {
             [localServerIpv6s addObject:IpAddress];
-        } else if ([AMCommonTools isValidIpv4:IpAddress] && ![IpAddress isEqualToString:@"127.0.0.1"]) {
+        } else if ([AMCommonTools isValidIpv4:IpAddress]) {
             [localServerIpv4s addObject:IpAddress];
         }
     }

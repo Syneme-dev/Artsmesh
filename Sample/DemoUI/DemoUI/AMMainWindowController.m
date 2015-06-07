@@ -1084,39 +1084,40 @@
 #pragma mark -
 #pragma mark Heartbeat Monitor Blink
 
-- (void) heartbeatBlinkYellow : (NSNotification*) notfication
-{
-    //Now just
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
-    [self.heartbeatMonitor setNeedsDisplay:YES];
-    
-    [NSThread sleepForTimeInterval:0.2];
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
-    [self.heartbeatMonitor setNeedsDisplay:YES];
-}
-
-- (void) heartbeatBlink : (NSNotification*) notfication
-{
-    if([notfication.name
-        isEqualToString:AMHeartbeatNotification]) {
-        [self.heartbeatMonitor setImage:
-                [NSImage imageNamed:@"groupuser_meshed_icon"]];
-    }else if([notfication.name
-              isEqualToString:AMHeartbeatFailNotification]){
-        [self.heartbeatMonitor setImage:
-                [NSImage imageNamed:@"groupuser_busy"]];
-    }else if([notfication.name
-              isEqualToString:AMHeartbeatDisconnectNotification]){
-        [self.heartbeatMonitor setImage:
-                [NSImage imageNamed:@"project_broadcast"]];
-    }else{
-        return;
-    }
-    
-    [self.heartbeatMonitor setNeedsDisplay:YES];
-    
-    [NSThread sleepForTimeInterval:0.2];
-    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"black_dot"]];
-    [self.heartbeatMonitor setNeedsDisplay:YES];
-}
+//Note:xujian comment the following code. 
+//- (void) heartbeatBlinkYellow : (NSNotification*) notfication
+//{
+//    //Now just
+//    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
+//    [self.heartbeatMonitor setNeedsDisplay:YES];
+//    
+//    [NSThread sleepForTimeInterval:0.2];
+//    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_off"]];
+//    [self.heartbeatMonitor setNeedsDisplay:YES];
+//}
+//
+//- (void) heartbeatBlink : (NSNotification*) notfication
+//{
+//    if([notfication.name
+//        isEqualToString:AMHeartbeatNotification]) {
+//        [self.heartbeatMonitor setImage:
+//                [NSImage imageNamed:@"groupuser_meshed_icon"]];
+//    }else if([notfication.name
+//              isEqualToString:AMHeartbeatFailNotification]){
+//        [self.heartbeatMonitor setImage:
+//                [NSImage imageNamed:@"groupuser_busy"]];
+//    }else if([notfication.name
+//              isEqualToString:AMHeartbeatDisconnectNotification]){
+//        [self.heartbeatMonitor setImage:
+//                [NSImage imageNamed:@"project_broadcast"]];
+//    }else{
+//        return;
+//    }
+//    
+//    [self.heartbeatMonitor setNeedsDisplay:YES];
+//    
+//    [NSThread sleepForTimeInterval:0.2];
+//    [self.heartbeatMonitor setImage:[NSImage imageNamed:@"black_dot"]];
+//    [self.heartbeatMonitor setNeedsDisplay:YES];
+//}
 @end

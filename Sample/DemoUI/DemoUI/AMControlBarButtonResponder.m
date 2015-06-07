@@ -108,7 +108,7 @@
                                          owner:self
                                          userInfo:nil];
             [self addTrackingArea:trackArea];
-    [self addCursorRect:self.frame cursor:[NSCursor openHandCursor]];
+//    [self addCursorRect:self.frame cursor:[NSCursor openHandCursor]];
 
 }
 

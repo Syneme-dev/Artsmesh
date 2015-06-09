@@ -115,6 +115,11 @@
         return;
     }
     
+    if ( browseTimer != nil ) {
+        [browseTimer invalidate];
+        browseTimer = nil;
+    }
+    
     [_mesherServiceBrowser stop];
     _mesherServiceBrowser = nil;
     
@@ -156,9 +161,6 @@
     
     AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
     
-    [self stopBrowser];
-    _mesherServiceBrowser = nil;
-    
     [self resolveLocalMesher];
 }
 
@@ -190,6 +192,8 @@
     
     AMLog(kAMInfoLog, @"AMMesher", @"local service resolved, hostname:%@, port:%d",
           sender.hostName, sender.port);
+    
+    [self stopBrowser];
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegistering];
 }

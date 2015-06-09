@@ -20,6 +20,8 @@
     NSNetServiceBrowser*  _mesherServiceBrowser;
     NSNetService* _myMesherService;
     NSMutableArray* _allMesherServices;
+    
+    NSTimer *browseTimer;
 }
 
 - (id)init
@@ -39,7 +41,11 @@
 -(void)kickoffElectProcess
 {
     AMLog(kAMInfoLog, @"AMMesher", @"kickoff local server elector process!");
-    [self publishLocalMesher];
+    
+    browseTimer = nil;
+    [self browseLocalMesher];
+    
+    //[self publishLocalMesher];
 }
 
 
@@ -48,6 +54,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
     int port = [config.localServerPort intValue];
+    
  	_myMesherService = [[NSNetService alloc] initWithDomain:@""
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
@@ -67,12 +74,20 @@
 
 -(void)browseLocalMesher
 {
+    browseTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(onSearchTimeout:) userInfo:nil repeats:NO];
+    
     _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
     _mesherServiceBrowser.delegate = self;
    
     [_mesherServiceBrowser searchForServicesOfType:MESHER_SERVICE_TYPE inDomain:@""];
 }
 
+-(void)onSearchTimeout:(NSTimer *)theTimer {
+    AMLog(kAMInfoLog, @"AMMesher", @"No Bonjour service found");
+    
+    [self stopBrowser];
+    [self publishLocalMesher];
+}
 
 -(void)resolveLocalMesher{
     
@@ -82,7 +97,7 @@
     
     NSNetService* service = [_allMesherServices objectAtIndex:0];
     service.delegate  = self;
-    [service resolveWithTimeout:10.0];
+    [service resolveWithTimeout:5.0];
     
 }
 
@@ -141,6 +156,9 @@
     
     AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
     
+    [self stopBrowser];
+    _mesherServiceBrowser = nil;
+    
     [self resolveLocalMesher];
 }
 
@@ -194,6 +212,8 @@
     }
     
     AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, maybe already exist, will try to find one");
+    
+    browseTimer = nil;
     [self browseLocalMesher];
 }
 

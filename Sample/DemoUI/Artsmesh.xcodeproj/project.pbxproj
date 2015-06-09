@@ -249,6 +249,10 @@
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
+		4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251221B25790F00224513 /* AMIPerfTabVC.m */; };
+		4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251231B25790F00224513 /* AMIPerfTabVC.xib */; };
+		4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251271B257E2D00224513 /* AMPingTabVC.m */; };
+		4F82512A1B257E2D00224513 /* AMPingTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251281B257E2D00224513 /* AMPingTabVC.xib */; };
 		4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */; };
 		4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9677761ADF8D200037BB64 /* AMClockTabVC.m */; };
 		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
@@ -880,6 +884,12 @@
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
+		4F8251211B25790F00224513 /* AMIPerfTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfTabVC.h; sourceTree = "<group>"; };
+		4F8251221B25790F00224513 /* AMIPerfTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfTabVC.m; sourceTree = "<group>"; };
+		4F8251231B25790F00224513 /* AMIPerfTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMIPerfTabVC.xib; sourceTree = "<group>"; };
+		4F8251261B257E2D00224513 /* AMPingTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingTabVC.h; sourceTree = "<group>"; };
+		4F8251271B257E2D00224513 /* AMPingTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingTabVC.m; sourceTree = "<group>"; };
+		4F8251281B257E2D00224513 /* AMPingTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingTabVC.xib; sourceTree = "<group>"; };
 		4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNowBarView.h; sourceTree = "<group>"; };
 		4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNowBarView.m; sourceTree = "<group>"; };
 		4F9677751ADF8D200037BB64 /* AMClockTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMClockTabVC.h; sourceTree = "<group>"; };
@@ -1917,6 +1927,12 @@
 				CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */,
 				CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */,
 				CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */,
+				4F8251261B257E2D00224513 /* AMPingTabVC.h */,
+				4F8251271B257E2D00224513 /* AMPingTabVC.m */,
+				4F8251281B257E2D00224513 /* AMPingTabVC.xib */,
+				4F8251211B25790F00224513 /* AMIPerfTabVC.h */,
+				4F8251221B25790F00224513 /* AMIPerfTabVC.m */,
+				4F8251231B25790F00224513 /* AMIPerfTabVC.xib */,
 			);
 			name = NetworkToolsPanel;
 			sourceTree = "<group>";
@@ -2063,6 +2079,7 @@
 				2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */,
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
+				4F82512A1B257E2D00224513 /* AMPingTabVC.xib in Resources */,
 				2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */,
 				2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
@@ -2078,6 +2095,7 @@
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
 				4A32A12C1A7226B5006FEDD7 /* AMProjectProfileViewController.xib in Resources */,
+				4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				AFAEBD8A196107BE00B7FB51 /* info.css in Resources */,
 				AFAEBDB519610BEA00B7FB51 /* Reply.png in Resources */,
@@ -2283,6 +2301,7 @@
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
+				4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */,
 				4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */,
 				2D08FE041AD661FF00A9D257 /* GTLYouTubeVideoSnippet.m in Sources */,
 				2D08FDBD1AD661FF00A9D257 /* GTLYouTubeIngestionInfo.m in Sources */,
@@ -2325,6 +2344,7 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				2D08FD8D1AD661FF00A9D257 /* GTLYouTubeActivityContentDetails.m in Sources */,
 				2D08FDF61AD661FF00A9D257 /* GTLYouTubeVideoFileDetails.m in Sources */,
+				4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */,
 				2D08FDE61AD661FF00A9D257 /* GTLYouTubeSubscriptionListResponse.m in Sources */,
 				2D08FD881AD661FF00A9D257 /* GTLQueryYouTube.m in Sources */,
 				2D08FDAF1AD661FF00A9D257 /* GTLYouTubeChannelTopicDetails.m in Sources */,

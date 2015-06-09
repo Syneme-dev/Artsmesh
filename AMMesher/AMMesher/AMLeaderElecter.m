@@ -172,7 +172,9 @@
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
+    NSString *errorCode = [NSString stringWithFormat:@"Bonjour service resolve error code: %@", [errorDict objectForKey:@"NSNetServicesErrorCode"]];
     AMLog(kAMWarningLog, @"AMMesher", @"local service didn't be resolved, try to publish one");
+    AMLog(kAMWarningLog, @"AMMesher", errorCode);
     [self publishLocalMesher];
 }
 

@@ -117,6 +117,12 @@
 }
 
 
+// Search for Bonjour Services is starting..
+- (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
+    AMLog(kAMErrorLog, @"AMMesher", @"Searching for existing Bonjour services..");
+    return;
+}
+
 #pragma mark -
 #pragma mark NSNetServiceBrowser Delegate Method Implementations
 

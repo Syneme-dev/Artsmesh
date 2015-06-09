@@ -345,7 +345,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
     
-    BOOL useIpv6 = config.heartbeatUseIpv6;//config.heartbeatUseIpv6;
+    BOOL useIpv6 = config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;

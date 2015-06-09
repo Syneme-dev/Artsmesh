@@ -82,7 +82,8 @@
     
     NSNetService* service = [_allMesherServices objectAtIndex:0];
     service.delegate  = self;
-    [service resolveWithTimeout:5.0];
+    [service resolveWithTimeout:10.0];
+    
 }
 
 

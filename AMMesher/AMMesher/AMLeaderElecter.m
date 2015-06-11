@@ -155,6 +155,10 @@
         [_allMesherServices addObject:netService];
     }
     
+    if (![[netService name] isEqualToString:MESHER_SERVICE_NAME]) {
+        return;
+    }
+    
     if ( moreServicesComing ){
         return;
     }

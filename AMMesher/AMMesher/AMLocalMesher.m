@@ -237,6 +237,7 @@
                 });
             }else{
                 AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
+                AMLog(kAMErrorLog, @"AMMesher", @"wrong returned value is %@", responseStr);
                 needRetry = YES;
             }
             

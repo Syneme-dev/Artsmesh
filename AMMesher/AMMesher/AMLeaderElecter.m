@@ -83,10 +83,18 @@
 }
 
 -(void)onSearchTimeout:(NSTimer *)theTimer {
-    AMLog(kAMInfoLog, @"AMMesher", @"No Bonjour service found");
+    AMLog(kAMInfoLog, @"AMMesher", @"Done searching for Bonjour Services.");
     
-    [self stopBrowser];
-    [self publishLocalMesher];
+    if ([_allMesherServices count] == 0){
+        AMLog(kAMInfoLog, @"AMMesher", @"AM Mesher Service, not found. Let's publish one.");
+        
+        [self stopBrowser];
+        [self publishLocalMesher];
+        
+        return;
+    } else {
+        return;
+    }
 }
 
 -(void)resolveLocalMesher{
@@ -151,14 +159,13 @@
             didFindService:(NSNetService *)netService
                 moreComing:(BOOL)moreServicesComing
 {
-    AMLog(kAMInfoLog, @"AMMesher", @"Bonjour Service found, name is: %@", [netService name]);
-    
-    if ( ![_allMesherServices containsObject:netService]){
-        [_allMesherServices addObject:netService];
-    }
     
     if ([[netService name] isEqualToString:MESHER_SERVICE_NAME]) {
         AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
+        if ( ![_allMesherServices containsObject:netService]){
+            [_allMesherServices addObject:netService];
+        }
+        
         [self resolveLocalMesher];
         
     } else if ( moreServicesComing ){

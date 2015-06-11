@@ -55,7 +55,7 @@
     
     int port = [config.localServerPort intValue];
     
- 	_myMesherService = [[NSNetService alloc] initWithDomain:@""
+ 	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
                                                        type:MESHER_SERVICE_TYPE
                                                        name:MESHER_SERVICE_NAME
                                                        port:port];
@@ -160,7 +160,7 @@
                 moreComing:(BOOL)moreServicesComing
 {
     
-    if ([[netService name] isEqualToString:MESHER_SERVICE_NAME]) {
+    if ([[netService name] isEqualToString:MESHER_SERVICE_NAME] && [netService.domain isEqualToString:@"local."]) {
         AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
         if ( ![_allMesherServices containsObject:netService]){
             [_allMesherServices addObject:netService];

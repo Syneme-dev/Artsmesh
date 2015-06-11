@@ -151,7 +151,7 @@
             didFindService:(NSNetService *)netService
                 moreComing:(BOOL)moreServicesComing
 {
-    if ( ![_allMesherServices containsObject:netService] ){
+    if ( ![_allMesherServices containsObject:netService]){
         [_allMesherServices addObject:netService];
     }
     

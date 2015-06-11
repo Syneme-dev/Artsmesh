@@ -151,21 +151,20 @@
             didFindService:(NSNetService *)netService
                 moreComing:(BOOL)moreServicesComing
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"Bonjour Service found, name is: %@", [netService name]);
+    
     if ( ![_allMesherServices containsObject:netService]){
         [_allMesherServices addObject:netService];
     }
     
-    if (![[netService name] isEqualToString:MESHER_SERVICE_NAME]) {
+    if ([[netService name] isEqualToString:MESHER_SERVICE_NAME]) {
+        AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
+        [self resolveLocalMesher];
+        
+    } else if ( moreServicesComing ){
         return;
     }
-    
-    if ( moreServicesComing ){
-        return;
-    }
-    
-    AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
-    
-    [self resolveLocalMesher];
+
 }
 
 

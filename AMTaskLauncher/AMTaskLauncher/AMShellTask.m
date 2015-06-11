@@ -70,4 +70,9 @@
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
+- (void) waitForDataAndNotify
+{
+    [_pipe.fileHandleForReading  waitForDataInBackgroundAndNotify];
+}
+
 @end

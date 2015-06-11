@@ -18,4 +18,6 @@
 // utility method
 - (NSString *)readAllDataAsString;
 
+- (void) waitForDataAndNotify;
+
 @end

@@ -62,6 +62,6 @@
     [self.contentView.textStorage appendAttributedString:attrString];
     self.contentView.needsDisplay = YES;
     
-   
+   [_task waitForDataAndNotify];
 }
 @end

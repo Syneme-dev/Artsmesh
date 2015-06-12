@@ -716,7 +716,7 @@
                         </textFieldCell>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
-                        <rect key="frame" x="181" y="725" width="30" height="30"/>
+                        <rect key="frame" x="196" y="725" width="30" height="30"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -768,7 +768,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
-                        <rect key="frame" x="221" y="731" width="38" height="17"/>
+                        <rect key="frame" x="236" y="731" width="38" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MESH" id="YtJ-b7-urv">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -854,8 +854,8 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
-                        <rect key="frame" x="673" y="735" width="8" height="12"/>
+                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
+                        <rect key="frame" x="159" y="730" width="9" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="4pk-2q-nQE"/>
                             <constraint firstAttribute="width" constant="8" id="NgY-mz-6Iz"/>
@@ -871,8 +871,6 @@
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
-                    <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="p6U-XZ-4p3" secondAttribute="trailing" constant="195" id="A8x-LG-5jD"/>
-                    <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="p6U-XZ-4p3" secondAttribute="bottom" constant="27" id="Des-zp-BeV"/>
                     <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="50" id="JyE-hi-7yD"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>

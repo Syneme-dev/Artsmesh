@@ -151,7 +151,7 @@
                     </connections>
                 </textField>
                 <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="Sid-nr-NSC" customClass="AMCheckBoxView">
-                    <rect key="frame" x="11" y="23" width="87" height="20"/>
+                    <rect key="frame" x="246" y="23" width="87" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="GwI-MD-D1p"/>
                         <constraint firstAttribute="width" constant="87" id="V7c-s9-npN"/>
@@ -162,7 +162,7 @@
             <constraints>
                 <constraint firstItem="bwT-52-Io9" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" constant="11" id="5rH-ed-XbL"/>
                 <constraint firstItem="bwT-52-Io9" firstAttribute="top" secondItem="Sid-nr-NSC" secondAttribute="bottom" constant="-85" id="8mA-25-OZy"/>
-                <constraint firstItem="Sid-nr-NSC" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" constant="11" id="Bbw-jJ-IVj"/>
+                <constraint firstItem="Sid-nr-NSC" firstAttribute="leading" secondItem="QHJ-JV-rbK" secondAttribute="leading" constant="246" id="Bbw-jJ-IVj"/>
                 <constraint firstAttribute="bottom" secondItem="bwT-52-Io9" secondAttribute="bottom" constant="48" id="ITe-zN-hft"/>
                 <constraint firstItem="bwT-52-Io9" firstAttribute="top" secondItem="YNy-8i-vKH" secondAttribute="bottom" constant="4" id="ZzZ-eW-2JX"/>
                 <constraint firstAttribute="trailing" secondItem="YNy-8i-vKH" secondAttribute="trailing" constant="10" id="dIH-nb-hKV"/>

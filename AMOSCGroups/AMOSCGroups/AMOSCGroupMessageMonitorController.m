@@ -133,7 +133,7 @@
     [self.selfDefServer setHidden:YES];
     
     //Ser OnOff Checkbox
-    self.onOffBox.title = @"On";
+    self.onOffBox.title = @"ON";
     self.onOffBox.delegate = self;
     
     //Set search field

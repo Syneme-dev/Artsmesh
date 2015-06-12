@@ -855,7 +855,7 @@
                         </textFieldCell>
                     </textField>
                     <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
-                        <rect key="frame" x="146" y="730" width="8" height="12"/>
+                        <rect key="frame" x="146" y="731" width="8" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="4pk-2q-nQE"/>
                             <constraint firstAttribute="width" constant="8" id="NgY-mz-6Iz"/>

@@ -27,8 +27,11 @@
 @property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
+@property (weak) IBOutlet NSScrollView *mainScrollView;
 
 @property (nonatomic) NSTimer* blinkBackTimer;
+
+
 
 -(void)setSideBarItemStatus:(NSString *) identifier withStatus:(Boolean)status;
 

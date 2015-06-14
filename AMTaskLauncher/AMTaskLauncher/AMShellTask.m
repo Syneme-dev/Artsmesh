@@ -32,6 +32,7 @@
         _task.arguments = @[@"-c", [command copy]];
         
         _pipe = [NSPipe pipe];
+        [[_pipe fileHandleForReading] waitForDataInBackgroundAndNotify];
         _task.standardOutput = _pipe;
         _task.standardError = _pipe;
         AMShellTask * __weak weakSelf = self;
@@ -39,7 +40,6 @@
             [weakSelf cancel];
         };
     }
-    
     return self;
 }
 
@@ -70,6 +70,9 @@
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-
+- (void) waitForDataAndNotify
+{
+    [_pipe.fileHandleForReading  waitForDataInBackgroundAndNotify];
+}
 
 @end

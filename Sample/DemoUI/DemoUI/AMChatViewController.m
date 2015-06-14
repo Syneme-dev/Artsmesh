@@ -15,8 +15,10 @@
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMChatTableCellView.h"
 #import "AMStatusNet/AMStatusNet.h"
+#import "UIFramework/AMCheckBoxView.h"
 
-@interface AMChatViewController () <NSTextFieldDelegate>
+@interface AMChatViewController () <NSTextFieldDelegate, AMCheckBoxDelegeate>
+@property (weak) IBOutlet AMCheckBoxView *useOSC;
 
 - (void)showChatRecord:(NSDictionary *)record;
 
@@ -68,6 +70,16 @@
     
     [self userGroupsChanged:nil];
     [self onlineStatusChanged:nil];
+    
+    
+    self.useOSC.delegate = self;
+    self.useOSC.title = @"USE OSC";
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_UseOSCForChat]) {
+        self.useOSC.checked = YES;
+    }else{
+        self.useOSC.checked = NO;
+    }
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
     
@@ -356,5 +368,22 @@ doCommandBySelector:(SEL)commandSelector {
     
     [self sendMsg:self.chatMsgField];
 }
+
+#pragma mark AMCheckBoxDelegeate
+-(void)onChecked:(AMCheckBoxView*)sender
+{
+    if (sender == self.useOSC) {
+        
+        if (self.useOSC.checked) {
+            [[NSUserDefaults standardUserDefaults]
+             setObject:@"YES" forKey:Preference_Key_General_UseOSCForChat];
+        }else{
+            [[NSUserDefaults standardUserDefaults]
+             setObject:@"NO" forKey:Preference_Key_General_UseOSCForChat];
+        }
+    }
+    return;
+}
+
 
 @end

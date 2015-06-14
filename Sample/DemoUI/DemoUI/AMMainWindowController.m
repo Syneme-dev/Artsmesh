@@ -72,9 +72,8 @@
 
 @interface AMMainWindowController ()
 @property (weak) IBOutlet NSView *mainContentView;
-@property (weak) IBOutlet NSScrollView *mainScrollView;
-@property (weak) IBOutlet NSButton *heartbeatMonitor;
 
+@property (weak) IBOutlet NSButton *heartbeatMonitor;
 
 
 @property (weak) IBOutlet AMFoundryFontView *topHourTF;
@@ -1086,9 +1085,10 @@
 #pragma mark -
 #pragma mark Heartbeat Monitor Blink
 
+
 - (void) heartbeatBlinkYellow : (NSNotification*) notfication
 {
-    //Now just
+//    //Now just
     [self.heartbeatMonitor setImage:[NSImage imageNamed:@"Server_on"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
@@ -1114,7 +1114,7 @@
     }else{
         return;
     }
-    
+   
     [self.heartbeatMonitor setNeedsDisplay:YES];
     
     [NSThread sleepForTimeInterval:0.2];

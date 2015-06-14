@@ -54,9 +54,6 @@
 
 -(void)publishLocalMesher
 {
-    AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    
-    //int port = [config.localServerPort intValue];
     int port = [[[NSUserDefaults standardUserDefaults]
                 stringForKey:Preference_Key_General_LocalServerPort] intValue];
     

@@ -57,8 +57,12 @@
 //    else {
 //        [self performSelector:@selector(showHidePanel) withObject:nil afterDelay:0.5];
 //    }
+    if(theEvent.modifierFlags&NSCommandKeyMask){
+        [self scrollToPanel];
+    }
+    else{
     [self showHidePanel];
-    
+    }
 }
 
 

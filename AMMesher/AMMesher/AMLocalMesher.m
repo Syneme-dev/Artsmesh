@@ -47,14 +47,18 @@
                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                                        context:nil];
         
-        //init NSOperationQueue
-        _httpRequestQueue = [[NSOperationQueue alloc] init];
-        _httpRequestQueue.name = @"LocalMesherQueue";
-        _httpRequestQueue.maxConcurrentOperationCount = 1;
-        _retryCount = 0;
+        [self initNSOperationQueue];
     }
     
     return self;
+}
+
+-(void)initNSOperationQueue {
+    //init NSOperationQueue
+    _httpRequestQueue = [[NSOperationQueue alloc] init];
+    _httpRequestQueue.name = @"LocalMesherQueue";
+    _httpRequestQueue.maxConcurrentOperationCount = 1;
+    _retryCount = 0;
 }
 
 
@@ -187,6 +191,9 @@
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     myGroup.leaderId = mySelf.userid;
     
+    AMLog(kAMErrorLog, @"AMMesher", @"mySelf looks like: %@",  mySelf);
+    AMLog(kAMErrorLog, @"AMMesher", @"myGroup looks like: %@",  myGroup);
+    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     if (config.meshUseIpv6) {
         req.baseURL = [NSString stringWithFormat:@"http://[%@]:%@", _tryLocalServerAddr, config.localServerPort];
@@ -198,6 +205,7 @@
     req.delay = 2;
     req.formData = [myGroup dictWithoutUsers];
     req.requestCallback = ^(NSData* response, NSError* error, BOOL cancel){
+        AMLog(kAMErrorLog, @"AMMesher", @"callback fired..");
         if (cancel == YES) {
             return;
         }
@@ -254,7 +262,12 @@
     };
     
     AMLog(kAMInfoLog, @"AMMesher", @"registering group url is:%@",req.baseURL);
+    
+    if (![_httpRequestQueue.name isEqualToString:@"LocalMesherQueue"]) {
+        [self initNSOperationQueue];
+    }
     [_httpRequestQueue addOperation:req];
+    
 }
 
 

@@ -42,6 +42,7 @@ NSString * const AMHttpAsyncRequestDomain = @"AMHttpAsyncRequest";
     [request setTimeoutInterval:self.httpTimeout];
     
     if ([self.httpMethod isEqualToString:@"POST"]){
+        NSLog(@"request has POST http method..");
         NSString* headerfield = @"application/x-www-form-urlencoded";
         NSMutableDictionary* headerDictionary = [[NSMutableDictionary alloc] init];
         

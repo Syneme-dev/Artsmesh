@@ -101,8 +101,23 @@
     [[NSString stringWithFormat:@"%@_PANEL",self.identifier ] uppercaseString];
     AMPanelViewController *panelViewController = appDelegate.mainWindowController.panelControllers [panelId];
     if(panelViewController!=nil){
-        [appDelegate.mainWindowController.mainScrollView.animator.contentView scrollToPoint:panelViewController.view.superview.frame.origin];
+//        [appDelegate.mainWindowController.mainScrollView.animator.contentView scrollToPoint:panelViewController.view.superview.frame.origin];
+        [self scrollToXPosition:panelViewController.view.superview.frame.origin.x];
     }
+}
+
+- (void)scrollToXPosition:(float)xCoord {
+    AMAppDelegate *appDelegate=AM_APPDELEGATE;
+
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:1.0];
+    NSClipView* clipView =
+    appDelegate.mainWindowController.mainScrollView.contentView ;
+    NSPoint newOrigin = [clipView bounds].origin;
+    newOrigin.x = xCoord;
+    [[clipView animator] setBoundsOrigin:newOrigin];
+    [appDelegate.mainWindowController.mainScrollView reflectScrolledClipView: [appDelegate.mainWindowController.mainScrollView contentView]]; // may not bee necessary
+    [NSAnimationContext endGrouping];
 }
 
 -(void)resetCursorRects{

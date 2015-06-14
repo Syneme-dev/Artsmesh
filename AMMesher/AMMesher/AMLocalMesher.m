@@ -478,6 +478,11 @@
         
         if (error != nil) {
             AMLog(kAMErrorLog, @"AMMesher", @"error happened when request userlist:%@", error.description);
+            
+            [[AMMesher sharedAMMesher] stopMesher];
+            [[AMMesher sharedAMMesher] startMesher];
+            AMLog(kAMInfoLog, @"Main", @"Loading live groups.");
+            
             return;
         }
         
@@ -596,7 +601,7 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-    _heartbeatFailureCount = 0;
+    //_heartbeatFailureCount = 0;
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error

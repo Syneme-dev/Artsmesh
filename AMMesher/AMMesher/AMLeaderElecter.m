@@ -11,6 +11,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
 #import "AMCommonTools/AMCommonTools.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 #define MESHER_SERVICE_TYPE @"_http._tcp."
 #define MESHER_SERVICE_NAME @"am-mesher-service"
@@ -22,6 +23,7 @@
     NSMutableArray* _allMesherServices;
     
     NSTimer *browseTimer;
+    BOOL locallyMeshed;
 }
 
 - (id)init
@@ -43,6 +45,7 @@
     AMLog(kAMInfoLog, @"AMMesher", @"kickoff local server elector process!");
     
     browseTimer = nil;
+    locallyMeshed = NO;
     [self browseLocalMesher];
     
     //[self publishLocalMesher];
@@ -53,7 +56,9 @@
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
-    int port = [config.localServerPort intValue];
+    //int port = [config.localServerPort intValue];
+    int port = [[[NSUserDefaults standardUserDefaults]
+                stringForKey:Preference_Key_General_LocalServerPort] intValue];
     
  	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
                                                        type:MESHER_SERVICE_TYPE
@@ -74,7 +79,6 @@
 
 -(void)browseLocalMesher
 {
-    browseTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(onSearchTimeout:) userInfo:nil repeats:NO];
     
     _mesherServiceBrowser = [[NSNetServiceBrowser alloc] init];
     _mesherServiceBrowser.delegate = self;
@@ -83,17 +87,21 @@
 }
 
 -(void)onSearchTimeout:(NSTimer *)theTimer {
-    AMLog(kAMInfoLog, @"AMMesher", @"Done searching for Bonjour Services.");
+    if (!locallyMeshed) {
+        AMLog(kAMInfoLog, @"AMMesher", @"Done searching for Bonjour Services.");
     
-    if ([_allMesherServices count] == 0){
-        AMLog(kAMInfoLog, @"AMMesher", @"AM Mesher Service, not found. Let's publish one.");
+        if ([_allMesherServices count] == 0){
+            AMLog(kAMInfoLog, @"AMMesher", @"AM Mesher Service, not found. Let's publish one.");
         
-        [self stopBrowser];
-        [self publishLocalMesher];
+            [self stopBrowser];
+            [self publishLocalMesher];
         
-        return;
-    } else {
-        return;
+            return;
+        } else {
+            return;
+        }
+        } else {
+            return;
     }
 }
 
@@ -123,11 +131,6 @@
         return;
     }
     
-    if ( browseTimer != nil ) {
-        [browseTimer invalidate];
-        browseTimer = nil;
-    }
-    
     [_mesherServiceBrowser stop];
     _mesherServiceBrowser = nil;
     
@@ -147,6 +150,8 @@
 
 // Search for Bonjour Services is starting..
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
+    browseTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(onSearchTimeout:) userInfo:nil repeats:YES];
+    
     AMLog(kAMErrorLog, @"AMMesher", @"Searching for existing Bonjour services..");
     return;
 }
@@ -191,6 +196,8 @@
 // Called when net service has been successfully resolved
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 {
+    locallyMeshed = YES;
+    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     
     NSHost *host = [NSHost hostWithName:sender.hostName];
@@ -234,6 +241,8 @@
 
 - (void) netServiceDidPublish:(NSNetService *)sender
 {
+    locallyMeshed = YES;
+    
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     config.localServerHost = [NSHost currentHost];
     

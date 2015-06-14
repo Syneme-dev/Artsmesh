@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AMCommonTools/AMCommonTools.h>
 
 @protocol AMHeartBeatDelegate;
 

@@ -28,6 +28,7 @@
 }
 
 @property (strong) GTLYouTubeLiveBroadcast *selectedBroadcast;
+@property (strong) GTLYouTubeLiveStream *selectedStream;
 
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
@@ -57,6 +58,17 @@
 
 
 @property (strong) IBOutlet NSView *eventsManagerView;
+
+// Stream Settings IBOutlets
+@property (strong) IBOutlet NSTextField *streamTitleTextField;
+@property (strong) IBOutlet NSTextField *streamFormatTextField;
+@property (strong) IBOutlet NSTextField *streamAddressTextField;
+@property (strong) IBOutlet NSTextField *streamNameTextField;
+@property (strong) IBOutlet NSTextField *streamStatusTextField;
+
+
+// Settings Tab IBOutlets
+
 
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;

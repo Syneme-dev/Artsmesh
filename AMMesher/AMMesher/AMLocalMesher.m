@@ -150,19 +150,30 @@
 
 -(void)registerLocalGroup
 {
+    // Load in user Config Options
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
-    NSArray *lsIps = nil;
-    if (config.meshUseIpv6) {
-        lsIps = [config localServerIpv6s];
-    }else{
-        lsIps = [config localServerIpv4s];
+    
+    // Find IPV4 or IPV6 Addresses for found Bonjour Service, depending on user preference
+    NSArray *localServerIps = [[NSArray alloc] initWithArray:[config.localServerHost addresses]];
+    NSMutableArray *localServerIpv4s = [[NSMutableArray alloc] init];
+    NSMutableArray *localServerIpv6s = [[NSMutableArray alloc] init];
+    for (NSString *IpAddress in localServerIps) {
+        if ([AMCommonTools isValidGlobalIpv6:IpAddress]) {
+            [localServerIpv6s addObject:IpAddress];
+        } else if ([AMCommonTools isValidIpv4:IpAddress]) {
+            [localServerIpv4s addObject:IpAddress];
+        }
+    }
+    NSMutableArray *preferredIps = [[NSMutableArray alloc] initWithArray:localServerIpv4s];
+    if (config.meshUseIpv6 && [localServerIpv6s count] > 0) {
+        [preferredIps removeAllObjects];
+        preferredIps = localServerIpv6s;
     }
     
-    if (_retryCount == 0) {
-        _tryLocalServerAddr = config.localServerHost.name;
-        
-    }else if(_retryCount < [lsIps count] + 1){
-        _tryLocalServerAddr = [lsIps objectAtIndex:_retryCount - 1];
+    // Determine an IP Address to try for group registration
+    if(_retryCount < [preferredIps count]){
+        NSLog(@"localServerHost addresses are: %@", preferredIps);
+        _tryLocalServerAddr = [preferredIps objectAtIndex:_retryCount];
         
     }else{
         [[NSNotificationCenter defaultCenter] postNotificationName:AM_LOCAL_SERVER_CONNECTION_ERROR object:nil];
@@ -177,7 +188,11 @@
     myGroup.leaderId = mySelf.userid;
     
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
-    req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];
+    if (config.meshUseIpv6) {
+        req.baseURL = [NSString stringWithFormat:@"http://[%@]:%@", _tryLocalServerAddr, config.localServerPort];
+    } else {
+        req.baseURL = [NSString stringWithFormat:@"http://%@:%@", _tryLocalServerAddr, config.localServerPort];
+    }
     req.requestPath = @"/groups/register";
     req.httpMethod = @"POST";
     req.delay = 2;
@@ -222,6 +237,7 @@
                 });
             }else{
                 AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
+                AMLog(kAMErrorLog, @"AMMesher", @"wrong returned value is %@", responseStr);
                 needRetry = YES;
             }
             
@@ -330,8 +346,7 @@
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
     
-    //always use ipv4 in local, because no ipv6 localserver address
-    BOOL useIpv6 = NO;//config.heartbeatUseIpv6;
+    BOOL useIpv6 = config.heartbeatUseIpv6;
     int HBTimeInterval = [config.localHeartbeatInterval intValue];
     int HBReceiveTimeout = [config.localHeartbeatRecvTimeout intValue];
     _heartbeatFailureCount = 0;
@@ -463,6 +478,11 @@
         
         if (error != nil) {
             AMLog(kAMErrorLog, @"AMMesher", @"error happened when request userlist:%@", error.description);
+            
+            [[AMMesher sharedAMMesher] stopMesher];
+            [[AMMesher sharedAMMesher] startMesher];
+            AMLog(kAMInfoLog, @"Main", @"Loading live groups.");
+            
             return;
         }
         
@@ -533,7 +553,12 @@
 {
     AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSString* localServerPort = config.localServerPort;
-    NSString* httpUrl = [NSString stringWithFormat:@"http://%@:%@", _usedLocalServerAddr, localServerPort];
+    NSString *httpUrl = [[NSString alloc] init];
+    if (config.meshUseIpv6){
+        httpUrl = [NSString stringWithFormat:@"http://[%@]:%@", _usedLocalServerAddr, localServerPort];
+    } else {
+        httpUrl = [NSString stringWithFormat:@"http://%@:%@", _usedLocalServerAddr, localServerPort];
+    }
     AMLog(kAMInfoLog, @"AMMesher", @"now used url is:%@", httpUrl);
     
     return httpUrl;
@@ -576,7 +601,7 @@
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
-    _heartbeatFailureCount = 0;
+    //_heartbeatFailureCount = 0;
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error

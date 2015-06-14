@@ -16,6 +16,8 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 
+#import "AMIPerfTabVC.h"
+#import "AMPingTabVC.h"
 
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
@@ -41,6 +43,11 @@
 @property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
 @property (weak) IBOutlet AMFoundryFontView *searchField;
+
+
+@property (nonatomic) NSMutableArray *viewControllers;
+@property (nonatomic) NSInteger         index;
+
 
 @end
 
@@ -111,26 +118,7 @@
     [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
-    
-    
-    _pingCommand = [[AMNetworkToolsCommand alloc] init];
-    _pingCommand.contentView = self.pingContentView;
-    
-    _tracerouteCommand = [[AMNetworkToolsCommand alloc] init];
-    _tracerouteCommand.contentView = self.tracerouteContentView;
-    
-    [[NSNotificationCenter defaultCenter]
-        addObserver:self
-        selector:@selector(userGroupsChanged:)
-        name: AM_LIVE_GROUP_CHANDED
-        object:nil];
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if (mySelf.isOnline) {
-        [self userGroupsChanged:nil];
-    }
-    [self ping:self.pingButton];
-    
+  
     NSArray *logs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:AMLogDirectory()
                                                                         error:nil];
     
@@ -179,6 +167,13 @@
    /* [self.logTextView setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.logTextView.font.pointSize]];*/
 
     [self onChecked:self.ratioArtsmesh];
+    
+    [self addViewController:[AMPingTabVC class]
+                    fromNib:@"AMPingTabVC"
+                     bundle:nil];
+    
+    [self registerTabButtons];
+
 }
 
 -(void)registerTabButtons
@@ -209,58 +204,14 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return [_users count];
 }
-
-- (id)tableView:(NSTableView *)tableView
-viewForTableColumn:(NSTableColumn *)tableColumn
-            row:(NSInteger)row
-{
-    
-    NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier
-                                                          owner:nil];
-    AMLiveUser* user = _users[row];
-    [result.textField setStringValue:user.nickName];
-    return result;
-}
-
-- (void)tableViewSelectionDidChange:(NSNotification *)notification
-{
-    NSTableView *tableView = notification.object;
-    if (tableView.selectedRow == -1)
-        return;
-    AMLiveUser* user = _users[tableView.selectedRow];
-    NSString* ip = user.publicIp;
-    if (tableView == self.pingTableView) {
-        NSString *command;
-        
-        if ([AMCommonTools isValidIpv4:ip]){
-            command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
-        }else{
-            command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
-        }
-        
-        [_pingCommand stop];
-        _pingCommand.command = command;
-        [_pingCommand run];
-    } else if (tableView == self.tracerouteTableView) {
-        
-        NSString *command;
-        
-        if ([AMCommonTools isValidIpv4:ip]){
-            command = [NSString stringWithFormat:@"/usr/sbin/traceroute %@", ip];
-        }else{
-            command = [NSString stringWithFormat:@"/usr/sbin/traceroute6 %@", ip];
-        }
-
-        [_tracerouteCommand stop];
-        _tracerouteCommand.command = command;
-        [_tracerouteCommand run];
-    }
-}
-
 - (IBAction)ping:(id)sender
 {
+    /*
     [self pushDownButton:self.pingButton];
-    [self.tabView selectTabViewItemWithIdentifier:@"pingTab"];
+    [self.tabView selectTabViewItemWithIdentifier:@"pingTab"];*/
+    [self pushDownButton:self.pingButton];
+    [self.tabView selectTabViewItemAtIndex:0];
+
 }
 
 - (IBAction)traceroute:(id)sender
@@ -386,6 +337,35 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [self.logTextView scrollToEndOfDocument:self];
 }
 
+- (void)addViewController:(Class)aViewControllerClass
+                  fromNib:(NSString *)nibName
+                   bundle:(NSBundle *)bundle
+{
+    NSViewController *vc = [[aViewControllerClass alloc] initWithNibName:nibName bundle:bundle];
+    NSView* contentView = vc.view;
+    NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
+    [superView addSubview:contentView];
+    [self.viewControllers addObject:vc];
+    
+    [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [superView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[contentView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [superView addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+}
 
-
+- (NSMutableArray *)viewControllers
+{
+    if (!_viewControllers) {
+        _viewControllers = [NSMutableArray array];
+    }
+    return _viewControllers;
+}
 @end

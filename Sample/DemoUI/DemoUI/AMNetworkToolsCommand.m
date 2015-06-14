@@ -16,6 +16,23 @@
     AMShellTask *_task;
 }
 
+- (id) init
+{
+    if (self = [super init]) {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(handleReadingData:)
+                   name:NSFileHandleDataAvailableNotification
+                 object:nil];
+    }
+    return self;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)stop
 {
     if (_task) {
@@ -32,17 +49,19 @@
     
     _task = [[AMShellTask alloc] initWithCommand:_command];
     [_task launch];
-    NSFileHandle *inputStream = [_task fileHandlerForReading];
-    inputStream.readabilityHandler = ^ (NSFileHandle *fh) {
-        NSData *data = [fh availableData];
-        NSString *string = [[NSString alloc] initWithData:data
-                                                 encoding:NSUTF8StringEncoding];
-        NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
-        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:string
-                                                                         attributes:attr];
-        [self.contentView.textStorage appendAttributedString:attrString];
-        self.contentView.needsDisplay = YES;
-    };
 }
 
+- (void) handleReadingData : (NSNotification*)noti
+{
+    NSData* data = [[_task fileHandlerForReading] availableData];
+    NSString *string = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+    NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:string
+                                                                         attributes:attr];
+    [self.contentView.textStorage appendAttributedString:attrString];
+    self.contentView.needsDisplay = YES;
+    
+   [_task waitForDataAndNotify];
+}
 @end

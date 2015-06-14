@@ -13,7 +13,7 @@
 
 @class AMLogReader;
 
-@interface AMNetworkToolsViewController : AMTabPanelViewController<NSTableViewDelegate, NSTableViewDataSource>
+@interface AMNetworkToolsViewController : AMTabPanelViewController
 
 @property (weak)                IBOutlet AMPopUpView*   logFilePopUp;
 @property (weak)                IBOutlet NSButton*      pingButton;

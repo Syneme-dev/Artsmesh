@@ -1027,10 +1027,12 @@
 
 -(void)localMesherMeshed:(NSNotification *)notification {
     //User locally meshed successfully
+    [self.localMesherBtn setImage:[NSImage imageNamed:@"Server_on"]];
 }
 
 -(void)mesherStopped:(NSNotification *)notification {
     //Mesher service has stopped.
+    [self.localMesherBtn setImage:[NSImage imageNamed:@"Server_off"]];
 }
 
 

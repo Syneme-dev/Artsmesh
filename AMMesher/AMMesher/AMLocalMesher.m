@@ -191,9 +191,6 @@
     AMLiveGroup* myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     myGroup.leaderId = mySelf.userid;
     
-    AMLog(kAMErrorLog, @"AMMesher", @"mySelf looks like: %@",  mySelf);
-    AMLog(kAMErrorLog, @"AMMesher", @"myGroup looks like: %@",  myGroup);
-    
     AMHttpAsyncRequest* req = [[AMHttpAsyncRequest alloc] init];
     if (config.meshUseIpv6) {
         req.baseURL = [NSString stringWithFormat:@"http://[%@]:%@", _tryLocalServerAddr, config.localServerPort];
@@ -205,7 +202,6 @@
     req.delay = 2;
     req.formData = [myGroup dictWithoutUsers];
     req.requestCallback = ^(NSData* response, NSError* error, BOOL cancel){
-        AMLog(kAMErrorLog, @"AMMesher", @"callback fired..");
         if (cancel == YES) {
             return;
         }

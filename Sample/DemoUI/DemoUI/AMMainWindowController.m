@@ -115,6 +115,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStarted:) name:AM_OSC_SRV_STARTED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(oscStopped:) name:AM_OSC_SRV_STOPPED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localMesherMeshed:) name:AM_LOCAL_MESHER_MESHED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mesherStopped:) name:AM_MESHER_STOPPED_NOTIFICATION object:nil];
      
         //Notification for the Heartbeat Monitor
         [[NSNotificationCenter defaultCenter]
@@ -1021,6 +1023,14 @@
     [self.oscServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     [AMCoreData shareInstance].mySelf.oscServer = NO;
     [[AMMesher sharedAMMesher] updateMySelf];
+}
+
+-(void)localMesherMeshed:(NSNotification *)notification {
+    //User locally meshed successfully
+}
+
+-(void)mesherStopped:(NSNotification *)notification {
+    //Mesher service has stopped.
 }
 
 

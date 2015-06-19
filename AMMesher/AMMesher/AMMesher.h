@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #define AM_MESHER_STARTED_NOTIFICATION @"Mesher started notification"
+#define AM_MESHER_STARTING_NOTIFICATION @"Mesher starting notification"
 #define AM_MESHER_STOPPED_NOTIFICATION @"Mesher stopped notification"
 
 typedef enum {

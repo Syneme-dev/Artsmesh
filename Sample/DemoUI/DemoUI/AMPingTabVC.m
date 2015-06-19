@@ -48,6 +48,14 @@
 
 @implementation AMPingTabVC
 
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+            _userList = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
@@ -67,8 +75,6 @@
     {
         [self userGroupsChangedPing:nil];
     }
-    
-    _userList = [[NSMutableArray alloc] init];
 }
 
 
@@ -98,7 +104,6 @@
     field.backgroundColor = [NSColor clearColor];
     [field setFocusRingType:NSFocusRingTypeNone];
     [field setTextColor:LIGHT_GRAY];
-    [field setStringValue:name];
     
     return field;
 }
@@ -113,7 +118,7 @@
         item.user = liveUser;
         item.checkbox.delegate = self;
         item.nickNameTF = [self newNameTextField:liveUser.nickName];
-        
+        item.nickNameTF.stringValue = liveUser.nickName;
         [_userList addObject:item];
     }
     

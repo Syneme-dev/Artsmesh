@@ -42,6 +42,12 @@
 
 -(void)kickoffElectProcess
 {
+    NSNotification* notification = [[NSNotification alloc]
+                                    initWithName: AM_LOCAL_MESHER_MESHING_NOTIFICATION
+                                    object:nil
+                                    userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
     AMLog(kAMInfoLog, @"AMMesher", @"kickoff local server elector process!");
     
     browseTimer = nil;

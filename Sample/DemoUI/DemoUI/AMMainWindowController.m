@@ -977,6 +977,20 @@
 
 - (IBAction)localMesherToggled:(id)sender {
     // Time to Start/Stop the Local Mesher process
+
+    AMMesher *curMesher = [AMMesher sharedAMMesher];
+    switch (curMesher.clusterState) {
+        case kClusterStarted:
+            NSLog(@"Local Mesher state is: Mesher Started");
+            [curMesher stopMesher];
+            break;
+        case kClusterStopped:
+            NSLog(@"Mesher state is: Mesher stopped.");
+            [curMesher startMesher];
+            break;
+        default:
+            break;
+    }
 }
 
 

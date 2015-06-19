@@ -7,6 +7,9 @@
 //
 #import <Foundation/Foundation.h>
 
+#define AM_MESHER_STARTED_NOTIFICATION @"Mesher started notification"
+#define AM_MESHER_STOPPED_NOTIFICATION @"Mesher stopped notification"
+
 typedef enum {
     kClusterError = -1,
     kClusterStopped = 0,

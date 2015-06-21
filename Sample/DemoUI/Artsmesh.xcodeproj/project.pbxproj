@@ -265,6 +265,7 @@
 		AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF200642194585F6008630C8 /* AMMapViewController.xib */; };
 		AF20064819458604008630C8 /* AMVisualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF20064619458604008630C8 /* AMVisualViewController.m */; };
 		AF20064919458604008630C8 /* AMVisualViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF20064719458604008630C8 /* AMVisualViewController.xib */; };
+		AF2213271B367F6F003320D9 /* AMVerticalScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2213261B367F6F003320D9 /* AMVerticalScrollView.m */; };
 		AF2890DC198A36BC00D05174 /* shot_osc.png in Resources */ = {isa = PBXBuildFile; fileRef = AF2890DA198A36BC00D05174 /* shot_osc.png */; };
 		AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */ = {isa = PBXBuildFile; fileRef = AF2890DB198A36BC00D05174 /* shot_visual.png */; };
 		AF4155C51B1C083C000CB925 /* AMControlBarButtonResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4155C41B1C083C000CB925 /* AMControlBarButtonResponder.m */; };
@@ -908,6 +909,8 @@
 		AF20064519458604008630C8 /* AMVisualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVisualViewController.h; sourceTree = "<group>"; };
 		AF20064619458604008630C8 /* AMVisualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVisualViewController.m; sourceTree = "<group>"; };
 		AF20064719458604008630C8 /* AMVisualViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVisualViewController.xib; sourceTree = "<group>"; };
+		AF2213251B367F6F003320D9 /* AMVerticalScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVerticalScrollView.h; sourceTree = "<group>"; };
+		AF2213261B367F6F003320D9 /* AMVerticalScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVerticalScrollView.m; sourceTree = "<group>"; };
 		AF2890DA198A36BC00D05174 /* shot_osc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_osc.png; sourceTree = "<group>"; };
 		AF2890DB198A36BC00D05174 /* shot_visual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_visual.png; sourceTree = "<group>"; };
 		AF4155C31B1C083C000CB925 /* AMControlBarButtonResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMControlBarButtonResponder.h; sourceTree = "<group>"; };
@@ -1694,6 +1697,8 @@
 				AF621F1D197F59C8005F4F97 /* AMPanelControlBarViewController.m */,
 				AF4155C31B1C083C000CB925 /* AMControlBarButtonResponder.h */,
 				AF4155C41B1C083C000CB925 /* AMControlBarButtonResponder.m */,
+				AF2213251B367F6F003320D9 /* AMVerticalScrollView.h */,
+				AF2213261B367F6F003320D9 /* AMVerticalScrollView.m */,
 			);
 			name = MainWindow;
 			sourceTree = "<group>";
@@ -2281,6 +2286,7 @@
 				2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */,
 				2D08FDD91AD661FF00A9D257 /* GTLYouTubePlaylistLocalization.m in Sources */,
 				2D08FD8F1AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsChannelItem.m in Sources */,
+				AF2213271B367F6F003320D9 /* AMVerticalScrollView.m in Sources */,
 				2D08FD8C1AD661FF00A9D257 /* GTLYouTubeActivity.m in Sources */,
 				2D08FDAC1AD661FF00A9D257 /* GTLYouTubeChannelSnippet.m in Sources */,
 				CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */,

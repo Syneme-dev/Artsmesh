@@ -28,6 +28,10 @@
     const char *utf8 = [ip UTF8String];
     
     // Check valid IPv4.
+    if ([ip hasPrefix:@"127"]) {
+        return NO;
+    }
+    
     struct in_addr dst;
     int success = inet_pton(AF_INET, utf8, &(dst.s_addr));
     return (success == 1);

@@ -10,6 +10,7 @@
 #import "AMScoreCollectionCell.h"
 #import "AMNowBarView.h"
 #import "UIFramework/NSView_Constrains.h"
+#import "AMVerticalScrollView.h"
 #define THUMBNAIL_HEIGHT 180.0
 
 NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
@@ -67,7 +68,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     NSColor* _bkColor;
     
     NSView * _docView;
-    __weak NSScrollView* _scrollView;
+    __weak AMVerticalScrollView* _scrollView;
     __weak  AMScoreCollectionCell* _selectedView;
     
     NSEvent*        mouseDownEvent;
@@ -102,7 +103,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
 
 -(void) doInit
 {
-    NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame: self.bounds];
+    AMVerticalScrollView *scrollView = [[AMVerticalScrollView alloc] initWithFrame: self.bounds];
     scrollView.hasHorizontalScroller = YES;
     scrollView.autohidesScrollers = YES;
     scrollView.drawsBackground = NO;

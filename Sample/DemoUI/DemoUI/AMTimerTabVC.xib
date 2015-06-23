@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerTabVC">
@@ -40,7 +40,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ekT-fR-OZ6">
                     <rect key="frame" x="474" y="631" width="15" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="QE3-HZ-pxS">
-                        <font key="font" size="24" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -48,7 +48,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heA-UD-S4r">
                     <rect key="frame" x="535" y="631" width="15" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="eXj-0M-dZZ">
-                        <font key="font" size="24" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -63,7 +63,7 @@
                                 <real key="inspectorSampleValue" value="0.0"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -81,7 +81,7 @@
                                 <real key="inspectorSampleValue" value="2"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -99,7 +99,7 @@
                                 <real key="inspectorSampleValue" value="0.0"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -110,7 +110,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dq3-dv-lFY">
                     <rect key="frame" x="297" y="629" width="60" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="SEC" id="RDW-c1-iQl">
-                        <font key="font" size="24" name="FoundryMonoline-Medium"/>
+                        <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -126,7 +126,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-zQ-7Ig">
                     <rect key="frame" x="171" y="631" width="15" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="qOZ-wF-hBu">
-                        <font key="font" size="24" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -134,7 +134,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogf-Xf-SoL">
                     <rect key="frame" x="232" y="631" width="15" height="32"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title=":" id="Te7-Oa-0kT">
-                        <font key="font" size="24" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -149,7 +149,7 @@
                                 <real key="inspectorSampleValue" value="2"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -167,7 +167,7 @@
                                 <real key="inspectorSampleValue" value="0.0"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -188,7 +188,7 @@
                                 <real key="inspectorSampleValue" value="0.0"/>
                             </metadata>
                         </numberFormatter>
-                        <font key="font" size="28" name="FoundryMonoline-Regular"/>
+                        <font key="font" metaFont="system" size="28"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -206,14 +206,13 @@
                         <action selector="stopTimer:" target="-2" id="88U-bh-uk1"/>
                     </connections>
                 </button>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="357" horizontalPageScroll="10" verticalLineScroll="357" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-Fi-Oqn">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="357" horizontalPageScroll="10" verticalLineScroll="357" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-Fi-Oqn" customClass="AMVerticalScrollView">
                     <rect key="frame" x="20" y="20" width="730" height="586"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="kXl-nd-6hv">
                         <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" enabled="NO" rowHeight="355" viewBased="YES" id="nRo-ag-ym2">
-                                <rect key="frame" x="0.0" y="0.0" width="730" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>

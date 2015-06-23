@@ -7,7 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMCheckBoxView.h"
+#import "AMCoreData/AMCoreData.h"
 
 @interface AMPingTabVC : NSViewController 
 
 @end
+
+
+
+@interface AMUserListItem : NSObject
+@property AMLiveUser*       user;
+@property NSTextField*      nickNameTF;
+@property AMCheckBoxView*   checkbox;
+@end
+

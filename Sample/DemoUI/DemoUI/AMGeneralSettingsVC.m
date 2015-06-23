@@ -26,6 +26,11 @@
 
 @property (weak) IBOutlet AMCheckBoxView *assignedLocalServerCheck;
 @property (weak) IBOutlet NSTextField *assignedLocalServerField;
+
+
+@property (weak) IBOutlet AMPopUpView *localServerConfigDrop;
+
+
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv4;
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv6;
 @property (weak) IBOutlet NSTextField *globalServerPortField;
@@ -56,6 +61,8 @@
     self.assignedLocalServerCheck.delegate = self;
     self.assignedLocalServerCheck.title = @"USE LOCAL SERVER IP";
     
+    self.localServerConfigDrop.delegate = self;
+    
     self.useOSCForChatCheck.delegate = self;
     self.useOSCForChatCheck.title = @"USE OSC FOR CHAT";
     
@@ -66,6 +73,7 @@
     [self loadUseIpv6];
     [self loadPrivateIp];
     [self loadIpv6];
+    [self loadLSConfig];
     [self loadLocalServerPort];
     [self loadGlobalServerAddr];
     [self loadGlobalServerPort];
@@ -122,6 +130,18 @@
     }
 }
 
+-(void)loadLSConfig {
+    dispatch_async([self loadingQueue], ^{
+        NSMutableArray *configOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+        [configOptions addObjectsFromArray:[self myIpv4Addr]];
+        [configOptions addObjectsFromArray:[self myGlobalIpv6Addr]];
+        
+        [self.localServerConfigDrop removeAllItems];
+        [self.localServerConfigDrop addItemsWithTitles:configOptions];
+        
+        [self.localServerConfigDrop setNeedsDisplay];
+    });
+}
 
 -(void)loadPrivateIp
 {
@@ -189,6 +209,24 @@
     {
         NSString* ipStr = [addresses objectAtIndex:i];
         if ([AMCommonTools isValidIpv6:ipStr])
+        {
+            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
+            [ipv6s addObject:ipStr];
+        }
+    }
+    
+    return ipv6s;
+}
+
+-(NSArray *)myGlobalIpv6Addr
+{
+    NSArray* addresses = [NSHost currentHost].addresses;
+    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMCommonTools isValidGlobalIpv6:ipStr])
         {
             NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
             ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];

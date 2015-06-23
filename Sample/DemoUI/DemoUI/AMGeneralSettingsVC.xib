@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGeneralSettingsVC">
@@ -94,9 +94,9 @@
                     </textFieldCell>
                 </textField>
                 <customView identifier="isTopControlBar" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-Yg-5zT" customClass="AMCheckBoxView">
-                    <rect key="frame" x="32" y="310" width="280" height="20"/>
+                    <rect key="frame" x="32" y="310" width="405" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="280" id="AMs-Ff-751"/>
+                        <constraint firstAttribute="width" constant="405" id="AMs-Ff-751"/>
                         <constraint firstAttribute="height" constant="20" id="bCw-EF-8h7"/>
                     </constraints>
                 </customView>
@@ -328,16 +328,16 @@
                     </constraints>
                 </customView>
                 <customView identifier="meshUseIpv6" translatesAutoresizingMaskIntoConstraints="NO" id="as1-Ho-sNS" userLabel="UseIPv6" customClass="AMCheckBoxView">
-                    <rect key="frame" x="31" y="641" width="156" height="20"/>
+                    <rect key="frame" x="31" y="641" width="406" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="OEx-Q6-uyE"/>
-                        <constraint firstAttribute="width" constant="156" id="hxt-hZ-Rur"/>
+                        <constraint firstAttribute="width" constant="406" id="hxt-hZ-Rur"/>
                     </constraints>
                 </customView>
                 <customView identifier="heartbeatUseIpv6" translatesAutoresizingMaskIntoConstraints="NO" id="31s-gl-VoN" userLabel="UseIPv6" customClass="AMCheckBoxView">
-                    <rect key="frame" x="31" y="607" width="156" height="20"/>
+                    <rect key="frame" x="31" y="607" width="406" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="156" id="C3T-zg-D4J"/>
+                        <constraint firstAttribute="width" constant="406" id="C3T-zg-D4J"/>
                         <constraint firstAttribute="height" constant="20" id="QLE-Rw-qgF"/>
                     </constraints>
                 </customView>
@@ -350,7 +350,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Sno-2Q-EMO"/>
                 </imageView>
                 <customView identifier="useOSCForChat" translatesAutoresizingMaskIntoConstraints="NO" id="9Qo-r8-3eW" customClass="AMCheckBoxView">
-                    <rect key="frame" x="31" y="339" width="156" height="20"/>
+                    <rect key="frame" x="31" y="339" width="406" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="LUz-Ct-rT9"/>
                     </constraints>
@@ -477,7 +477,7 @@
                 <constraint firstItem="9Qo-r8-3eW" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="421" id="tJB-Uh-l3M"/>
                 <constraint firstItem="N7A-Hc-61W" firstAttribute="top" secondItem="gHL-MM-mq4" secondAttribute="bottom" constant="-54" id="tKn-Kc-YoO"/>
                 <constraint firstItem="7gx-08-u1C" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="165" id="tpy-Sl-ev3"/>
-                <constraint firstAttribute="trailing" secondItem="9Qo-r8-3eW" secondAttribute="trailing" constant="413" id="ub7-eF-4A3"/>
+                <constraint firstAttribute="trailing" secondItem="9Qo-r8-3eW" secondAttribute="trailing" constant="163" id="ub7-eF-4A3"/>
                 <constraint firstItem="55x-ZB-goc" firstAttribute="trailing" secondItem="0rC-Kj-mKX" secondAttribute="trailing" id="vcM-BV-A1y"/>
                 <constraint firstItem="VnS-HU-qXH" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="vgN-HM-7Ee"/>
                 <constraint firstAttribute="trailing" secondItem="7gx-08-u1C" secondAttribute="trailing" constant="284" id="wAJ-IX-2Aw"/>

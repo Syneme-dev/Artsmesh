@@ -86,6 +86,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatMessageFromOSC:) name:AM_CHAT_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controlTextDidChange:) name:NSControlTextDidChangeNotification object:nil];
+    
 }
 
 -(void)dealloc{

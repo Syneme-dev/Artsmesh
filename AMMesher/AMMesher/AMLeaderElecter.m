@@ -42,6 +42,8 @@
 
 -(void)kickoffElectProcess
 {
+    NSString *LSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+    
     NSNotification* notification = [[NSNotification alloc]
                                     initWithName: AM_LOCAL_MESHER_MESHING_NOTIFICATION
                                     object:nil
@@ -52,9 +54,12 @@
     
     browseTimer = nil;
     locallyMeshed = NO;
-    [self browseLocalMesher];
     
-    //[self publishLocalMesher];
+    if ([LSConfig isEqualToString:@"DISCOVER"]) {
+        [self browseLocalMesher];
+    } else if ([LSConfig isEqualToString:@"SELF"]) {
+        [self publishLocalMesher];
+    }
 }
 
 

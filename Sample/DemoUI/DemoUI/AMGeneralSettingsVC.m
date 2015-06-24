@@ -133,11 +133,10 @@
 -(void)loadLSConfig {
     dispatch_async([self loadingQueue], ^{
         NSMutableArray *configOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
-        [configOptions addObjectsFromArray:[self myIpv4Addr]];
-        [configOptions addObjectsFromArray:[self myGlobalIpv6Addr]];
         
         [self.localServerConfigDrop removeAllItems];
         [self.localServerConfigDrop addItemsWithTitles:configOptions];
+        [self selectLastLSConfig];
         
         [self.localServerConfigDrop setNeedsDisplay];
     });
@@ -257,6 +256,16 @@
     if ([self.privateIpv6Box.stringValue isEqualTo:@""] && self.privateIpv6Box.itemCount > 0) {
         [self.privateIpv6Box selectItemAtIndex:0];
     }
+}
+
+-(void)selectLastLSConfig {
+    NSString *lastLSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+
+    [self.localServerConfigDrop selectItemWithTitle:lastLSConfig];
+    if ([self.localServerConfigDrop.stringValue isEqualTo:@""] && self.localServerConfigDrop.itemCount > 0) {
+        [self.localServerConfigDrop selectItemAtIndex:0];
+    }
+    
 }
 
 

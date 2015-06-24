@@ -44,6 +44,7 @@
 #define Preference_Key_Cluster_Latitude             @"Preference_Key_Cluster_Latitude"
 #define Preference_Key_Cluster_BroadcastURL         @"Preference_Cluster_BroadcastURL"
 #define Preference_Key_Cluster_LastLocalServerIP    @"Preference_Key_Cluster_LastLocalServerIP"
+#define Preference_Key_Cluster_LSConfig             @"Preference_Key_Cluster_LSConfig"
 
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"

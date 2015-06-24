@@ -137,6 +137,7 @@
         [self.localServerConfigDrop removeAllItems];
         [self.localServerConfigDrop addItemsWithTitles:configOptions];
         [self selectLastLSConfig];
+        [self storeSelectedLSConfig];
         
         [self.localServerConfigDrop setNeedsDisplay];
     });
@@ -278,6 +279,10 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
 }
 
+-(void)storeSelectedLSConfig {
+    [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
+}
+
 
 -(void)loadLocalServerPort
 {
@@ -335,6 +340,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
     } else if (sender == self.privateIpv6Box) {
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
+    } else if (sender == self.localServerConfigDrop) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
     }
 }
 

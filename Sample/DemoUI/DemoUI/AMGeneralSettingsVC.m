@@ -26,6 +26,11 @@
 
 @property (weak) IBOutlet AMCheckBoxView *assignedLocalServerCheck;
 @property (weak) IBOutlet NSTextField *assignedLocalServerField;
+
+
+@property (weak) IBOutlet AMPopUpView *localServerConfigDrop;
+
+
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv4;
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv6;
 @property (weak) IBOutlet NSTextField *globalServerPortField;
@@ -56,6 +61,8 @@
     self.assignedLocalServerCheck.delegate = self;
     self.assignedLocalServerCheck.title = @"USE LOCAL SERVER IP";
     
+    self.localServerConfigDrop.delegate = self;
+    
     self.useOSCForChatCheck.delegate = self;
     self.useOSCForChatCheck.title = @"USE OSC FOR CHAT";
     
@@ -66,6 +73,7 @@
     [self loadUseIpv6];
     [self loadPrivateIp];
     [self loadIpv6];
+    [self loadLSConfig];
     [self loadLocalServerPort];
     [self loadGlobalServerAddr];
     [self loadGlobalServerPort];
@@ -122,6 +130,18 @@
     }
 }
 
+-(void)loadLSConfig {
+    dispatch_async([self loadingQueue], ^{
+        NSMutableArray *configOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+        
+        [self.localServerConfigDrop removeAllItems];
+        [self.localServerConfigDrop addItemsWithTitles:configOptions];
+        [self selectLastLSConfig];
+        [self storeSelectedLSConfig];
+        
+        [self.localServerConfigDrop setNeedsDisplay];
+    });
+}
 
 -(void)loadPrivateIp
 {
@@ -199,6 +219,24 @@
     return ipv6s;
 }
 
+-(NSArray *)myGlobalIpv6Addr
+{
+    NSArray* addresses = [NSHost currentHost].addresses;
+    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMCommonTools isValidGlobalIpv6:ipStr])
+        {
+            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
+            [ipv6s addObject:ipStr];
+        }
+    }
+    
+    return ipv6s;
+}
+
 
 -(void)selectLastPrivateIp
 {
@@ -221,6 +259,16 @@
     }
 }
 
+-(void)selectLastLSConfig {
+    NSString *lastLSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+
+    [self.localServerConfigDrop selectItemWithTitle:lastLSConfig];
+    if ([self.localServerConfigDrop.stringValue isEqualTo:@""] && self.localServerConfigDrop.itemCount > 0) {
+        [self.localServerConfigDrop selectItemAtIndex:0];
+    }
+    
+}
+
 
 -(void)storeUsedPrivateIp
 {
@@ -229,6 +277,10 @@
 
 -(void)storeUsedIpv6 {
     [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
+}
+
+-(void)storeSelectedLSConfig {
+    [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
 }
 
 
@@ -288,6 +340,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
     } else if (sender == self.privateIpv6Box) {
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
+    } else if (sender == self.localServerConfigDrop) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
     }
 }
 

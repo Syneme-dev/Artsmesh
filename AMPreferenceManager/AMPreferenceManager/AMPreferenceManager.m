@@ -78,6 +78,7 @@
              Preference_StatusNet_URL,           Preference_Key_StatusNet_URL,
              Preference_Cluster_Latitude,        Preference_Key_Cluster_Latitude,
              Preference_Cluster_Longitude,       Preference_Key_Cluster_Longitude,
+             @"DISCOVER", Preference_Key_Cluster_LSConfig,
              @"2", Preference_Jack_RouterVirtualChanns,
              @"2", Preference_Jack_VirtualInChannels,
              @"2", Preference_Jack_VirtualOutChannels,

@@ -137,8 +137,15 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)userGroupsChangedPing:(NSNotification*)notification
 {
-    AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
-    NSArray* users = [mergedGroup usersIncludeSubGroup];
+     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSArray* users;
+    if (mySelf.isOnline) {
+        AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
+        users = [mergedGroup usersIncludeSubGroup];
+    }else{
+         AMLiveGroup *liveGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+         users = [liveGroup usersIncludeSubGroup];
+    }
     [_userList removeAllObjects];
     for (AMLiveUser* liveUser in users) {
         AMUserListItem* item = [[AMUserListItem alloc] init];
@@ -165,7 +172,13 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     
     for (AMUserListItem* userItem in self.userList) {
         if([userItem.checkbox isEqual:sender]){
-            NSString* ip = userItem.user.publicIp;
+            NSString* ip;
+            if ([userItem.user isOnline]){
+                ip= userItem.user.publicIp;
+            }else{
+                ip= userItem.user.privateIp;
+            }
+            
             NSString *command;
             
             if ([AMCommonTools isValidIpv4:ip]){
@@ -212,20 +225,17 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     userList.pingCommand = [[AMNetworkToolsCommand alloc] init];
     userList.pingCommand.contentView = self.pingContentView;
     
-    
-    
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if (mySelf.isOnline)
+//   AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+//    if (mySelf.isOnline)
     {
         [userList userGroupsChangedPing:nil];
     }
-
 }
 
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
+    
 }
 
 

@@ -24,11 +24,15 @@
     
     NSTimer *browseTimer;
     BOOL locallyMeshed;
+    
+    int mesherServiceCount;
 }
 
 - (id)init
 {
     if (self = [super init]) {
+        mesherServiceCount = 0;
+        
         [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:nil];
@@ -65,12 +69,17 @@
 
 -(void)publishLocalMesher
 {
+    NSString *serviceName = MESHER_SERVICE_NAME;
+    if (mesherServiceCount > 0) {
+        serviceName = [NSString stringWithFormat:@"%@-%i", MESHER_SERVICE_NAME, mesherServiceCount];
+    }
+    
     int port = [[[NSUserDefaults standardUserDefaults]
                 stringForKey:Preference_Key_General_LocalServerPort] intValue];
     
  	_myMesherService = [[NSNetService alloc] initWithDomain:@"local."
                                                        type:MESHER_SERVICE_TYPE
-                                                       name:MESHER_SERVICE_NAME
+                                                       name:serviceName
                                                        port:port];
     if (_myMesherService == nil) {
         AMLog(kAMErrorLog, @"AMMesher", @"create bonjour service failed");
@@ -173,7 +182,7 @@
                 moreComing:(BOOL)moreServicesComing
 {
     
-    if ([[netService name] isEqualToString:MESHER_SERVICE_NAME] && [netService.domain isEqualToString:@"local."]) {
+    if ([[netService name] hasPrefix:MESHER_SERVICE_NAME] && [netService.domain isEqualToString:@"local."]) {
         AMLog(kAMInfoLog, @"AMMesher", @"found a local mesher service, will resolve it.");
         if ( ![_allMesherServices containsObject:netService]){
             [_allMesherServices addObject:netService];
@@ -240,7 +249,13 @@
         return;
     }
     
-    AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, maybe already exist, will try to find one");
+    NSString *LSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+    
+    if ([LSConfig isEqualToString: @"DISCOVER"]) {
+        AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, maybe already exist, will try to find one");
+    } else if ([LSConfig isEqualToString:@"SELF"]) {
+        AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, service with same name already exists, will try publishing under a modified name.");
+    }
     
     browseTimer = nil;
     [self browseLocalMesher];

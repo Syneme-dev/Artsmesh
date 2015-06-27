@@ -31,7 +31,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        mesherServiceCount = 0;
+        mesherServiceCount = 1;
         
         [[AMMesher sharedAMMesher] addObserver:self forKeyPath:@"clusterState"
                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -70,7 +70,7 @@
 -(void)publishLocalMesher
 {
     NSString *serviceName = MESHER_SERVICE_NAME;
-    if (mesherServiceCount > 0) {
+    if (mesherServiceCount > 1) {
         serviceName = [NSString stringWithFormat:@"%@-%i", MESHER_SERVICE_NAME, mesherServiceCount];
     }
     

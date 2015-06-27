@@ -253,12 +253,14 @@
     
     if ([LSConfig isEqualToString: @"DISCOVER"]) {
         AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, maybe already exist, will try to find one");
+        browseTimer = nil;
+        [self browseLocalMesher];
     } else if ([LSConfig isEqualToString:@"SELF"]) {
         AMLog(kAMWarningLog, @"AMMesher", @"local server publish failed, service with same name already exists, will try publishing under a modified name.");
+        mesherServiceCount++;
+        [self publishLocalMesher];
     }
     
-    browseTimer = nil;
-    [self browseLocalMesher];
 }
 
 

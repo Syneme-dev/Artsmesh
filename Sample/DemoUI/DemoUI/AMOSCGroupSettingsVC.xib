@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCGroupSettingsVC">
@@ -342,13 +342,13 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="81W-e0-IYH">
-                    <rect key="frame" x="360" y="15" width="80" height="39"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="81W-e0-IYH" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="448" y="31" width="80" height="23"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="39" id="1Ie-dT-ZUF"/>
+                        <constraint firstAttribute="height" constant="23" id="1Ie-dT-ZUF"/>
                         <constraint firstAttribute="width" constant="80" id="Tiy-H5-HcA"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="mJU-Mw-OSu">
+                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="mJU-Mw-OSu">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -556,7 +556,7 @@
                     <rect key="frame" x="10" y="-58" width="48" height="48"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="boC-RW-i4b"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Rl-P4-L0T">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rl-P4-L0T">
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="tqz-99-K05"/>
                 </imageView>
                 <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Y8h-uF-Uoj">
@@ -592,11 +592,11 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="kS9-ra-aSE">
-                    <rect key="frame" x="448" y="15" width="80" height="39"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="kS9-ra-aSE" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="360" y="31" width="80" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="3yd-Li-0Fv"/>
-                        <constraint firstAttribute="height" constant="39" id="wGy-wD-b43"/>
+                        <constraint firstAttribute="height" constant="23" id="wGy-wD-b43"/>
                     </constraints>
                     <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="yAR-63-xj5">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -655,7 +655,7 @@
                 <constraint firstItem="SVa-Eg-3vh" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="405" id="Pe9-t6-vQ8"/>
                 <constraint firstItem="RsJ-xG-kOA" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="296" id="QAY-nl-xae"/>
                 <constraint firstItem="RsJ-xG-kOA" firstAttribute="top" secondItem="oFs-xC-EpY" secondAttribute="top" constant="55" id="SED-lT-wmC"/>
-                <constraint firstAttribute="trailing" secondItem="kS9-ra-aSE" secondAttribute="trailing" constant="20" id="SFg-rP-GtL"/>
+                <constraint firstAttribute="trailing" secondItem="kS9-ra-aSE" secondAttribute="trailing" constant="108" id="SFg-rP-GtL"/>
                 <constraint firstItem="puk-cc-RR7" firstAttribute="top" secondItem="oFs-xC-EpY" secondAttribute="top" constant="151" id="TP1-TG-37x"/>
                 <constraint firstItem="bf8-GH-O2G" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="20" id="UsG-9n-Wpb"/>
                 <constraint firstItem="zZw-h6-jfi" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="142" id="Usw-dO-D0J"/>
@@ -676,7 +676,7 @@
                 <constraint firstItem="kS9-ra-aSE" firstAttribute="top" secondItem="Y8h-uF-Uoj" secondAttribute="bottom" constant="27" id="cmr-Sw-hXs"/>
                 <constraint firstItem="Z2r-6y-ezz" firstAttribute="top" secondItem="oFs-xC-EpY" secondAttribute="top" constant="346" id="eFv-gs-Ap6"/>
                 <constraint firstItem="ZZa-8R-NTA" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="43" id="fgY-E6-0ZC"/>
-                <constraint firstAttribute="trailing" secondItem="81W-e0-IYH" secondAttribute="trailing" constant="108" id="fxn-Xh-I8O"/>
+                <constraint firstAttribute="trailing" secondItem="81W-e0-IYH" secondAttribute="trailing" constant="20" id="fxn-Xh-I8O"/>
                 <constraint firstItem="bY8-NB-TZp" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="155" id="gqp-v3-N7Y"/>
                 <constraint firstItem="8to-Rb-No7" firstAttribute="top" secondItem="oFs-xC-EpY" secondAttribute="top" constant="85" id="h1k-Sb-UdK"/>
                 <constraint firstItem="85E-Ot-DRx" firstAttribute="leading" secondItem="oFs-xC-EpY" secondAttribute="leading" constant="43" id="hif-h4-waZ"/>

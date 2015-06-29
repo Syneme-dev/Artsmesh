@@ -41,11 +41,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
+
     
     [self.hogModeCheck setTitle:@"HOG MODE:"];
     [self.compensationCheck setTitle:@"CLOCK DRIFT COMPENSATION:"];
-    [self.portMornitingCheck setTitle:@"SYSTEM PORT MORNITORING:"];
+    [self.portMornitingCheck setTitle:@"SYSTEM PORT MONITORING:"];
     [self.midiCheck setTitle:@"ACTIVE MIDI:"];
     [self.autoConnectCheck setTitle:@"AUTO CONNECT WITH PHYSICAL PORTS"];
     
@@ -176,7 +176,7 @@
     
     if (inputDev || outputDev) {
         
-        //Sample Rate
+
         NSArray* sampleRateSupportIn = [inputDev sampleRates];
         NSArray* sampleRateSupportOut = [outputDev sampleRates];
         NSMutableArray* commonSampleRate = [[NSMutableArray alloc] init];
@@ -196,7 +196,7 @@
         NSString* prefSampleRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_SampleRate];
         [self.sampleRateBox selectItemWithTitle:prefSampleRate];
         
-        //Buffer Size
+
         NSArray* bufSizeSupportIn = [inputDev bufferSizes];
         NSArray* bufSizeSupportOut = [outputDev bufferSizes];
         NSMutableArray* commonBufSize = [[NSMutableArray alloc] init];
@@ -285,11 +285,12 @@
 
 -(void)setButtons
 {
-    [self.saveBtn setEnabled:NO];
-    [self.cancelBtn setEnabled:NO];
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    
+    [self.saveBtn setEnabled:NO];
+    [self.cancelBtn setEnabled:NO];
 }
 
 
@@ -304,7 +305,7 @@
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
     
-    //save preferecces
+
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.driverBox.stringValue forKey:Preference_Jack_Driver];
     

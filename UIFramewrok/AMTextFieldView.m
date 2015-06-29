@@ -51,7 +51,6 @@
     {
         [[self attributedStringValue] drawInRect:rect];
     }
-    
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -86,10 +85,6 @@
         [path fill];
         [NSGraphicsContext restoreGraphicsState];
     }
-
-
-
-   
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "UIFramework/AMBlueBorderButton.h"
 
 @interface AMOSCGroupSettingsVC ()
 
@@ -40,8 +41,13 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    [AMButtonHandler  changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
+  //  [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
+    //[AMButtonHandler  changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
+    
+    
+//    [AMButtonHandler changeTabTextColor:self toColor:UI_Color_blue];
+    [self.saveBtn.layer setBorderWidth:1.0];
+    [self.saveBtn.layer setBorderColor: UI_Color_blue.CGColor];
     
     [self restoreConfig:nil];
 }

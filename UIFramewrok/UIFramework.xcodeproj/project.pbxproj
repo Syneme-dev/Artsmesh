@@ -57,7 +57,7 @@
 		AFB34F6A19065C1400092E33 /* AMButtonHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = AFB34F6819065C1400092E33 /* AMButtonHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB34F6919065C1400092E33 /* AMButtonHandler.m */; };
 		AFD344C7193EF82C0057F222 /* AMUIConst.h in Headers */ = {isa = PBXBuildFile; fileRef = AFD344C6193EF82C0057F222 /* AMUIConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */; };
+		AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFF6054C1B08699F00B835B9 /* AMBlueBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF6054A1B08699F00B835B9 /* AMBlueBorderButton.m */; };
 		CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = CE25C50D19775960003A8B39 /* AMBorderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE25C51019775960003A8B39 /* AMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE25C50E19775960003A8B39 /* AMBorderView.m */; };
@@ -307,7 +307,6 @@
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
-				AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				4F15723E1AB195B700945397 /* AMTimerView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
@@ -322,6 +321,7 @@
 				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
 				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
+				AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */,
 				4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);

@@ -18,7 +18,7 @@
 
 #import "AMIPerfTabVC.h"
 #import "AMPingTabVC.h"
-
+#import "AMTraceRouteTabVC.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -172,6 +172,10 @@
                     fromNib:@"AMPingTabVC"
                      bundle:nil];
     
+    [self addViewController:[AMTraceRouteTabVC class]
+                    fromNib:@"AMTraceRouteTabVC"
+                     bundle:nil];
+    
     [self registerTabButtons];
 
 }
@@ -216,8 +220,10 @@
 
 - (IBAction)traceroute:(id)sender
 {
+  //  [self pushDownButton:self.tracerouteButton];
+  //  [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
     [self pushDownButton:self.tracerouteButton];
-    [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
+    [self.tabView selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)iperf:(id)sender

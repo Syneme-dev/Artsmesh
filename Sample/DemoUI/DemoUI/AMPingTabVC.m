@@ -15,7 +15,7 @@
 #import "UIFramework/AMRatioButtonView.h"
 #import "UIFramework/AMUIConst.h"
 
-@interface AMPingTabVC () <AMCheckBoxDelegeate>
+@interface AMPingTabVC () <AMCheckBoxDelegeate,AMUserListDelegate>
 {
     AMUserList* userList;
 }
@@ -44,6 +44,7 @@
     if (self = [super init]) {
         _tableView = tv;
          _userList = [[NSMutableArray alloc] init];
+        
         [[NSNotificationCenter defaultCenter]
                                      addObserver:self
                                         selector:@selector(userGroupsChangedPing:)
@@ -178,14 +179,12 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             }else{
                 ip= userItem.user.privateIp;
             }
-            
-            NSString *command;
-            
-            if ([AMCommonTools isValidIpv4:ip]){
-                command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
-            }else{
-                command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+            if (ip == nil) {
+                ip= userItem.user.publicIp;
             }
+            
+            NSString *command = [self.delegate formatCommand:ip];
+            
             
             [self.pingCommand stop];
             self.pingCommand.command = command;
@@ -217,6 +216,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [super awakeFromNib];
     
     userList = [[AMUserList alloc] init:self.tableView];
+    userList.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -230,6 +230,24 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     {
         [userList userGroupsChangedPing:nil];
     }
+}
+
+-(void) outputString:(NSString*) output
+{
+    
+}
+
+-(NSString*) formatCommand:(NSString*) ip
+{
+    NSString* command;
+    
+    if ([AMCommonTools isValidIpv4:ip]){
+        command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+    }else{
+        command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+    }
+
+    return command;
 }
 
 

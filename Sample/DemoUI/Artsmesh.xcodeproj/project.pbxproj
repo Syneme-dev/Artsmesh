@@ -258,6 +258,8 @@
 		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
 		4FCA92901AE4EF32002D3CAE /* AMClockTabCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA928E1AE4EF32002D3CAE /* AMClockTabCellVC.m */; };
 		4FCA92911AE4EF32002D3CAE /* AMClockTabCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA928F1AE4EF32002D3CAE /* AMClockTabCellVC.xib */; };
+		4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */; };
+		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
@@ -899,6 +901,9 @@
 		4FCA928D1AE4EF32002D3CAE /* AMClockTabCellVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMClockTabCellVC.h; sourceTree = "<group>"; };
 		4FCA928E1AE4EF32002D3CAE /* AMClockTabCellVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMClockTabCellVC.m; sourceTree = "<group>"; };
 		4FCA928F1AE4EF32002D3CAE /* AMClockTabCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMClockTabCellVC.xib; sourceTree = "<group>"; };
+		4FD372791B416ABF006566A6 /* AMTraceRouteTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTraceRouteTabVC.h; sourceTree = "<group>"; };
+		4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTraceRouteTabVC.m; sourceTree = "<group>"; };
+		4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTraceRouteTabVC.xib; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
@@ -1938,6 +1943,9 @@
 				4F8251211B25790F00224513 /* AMIPerfTabVC.h */,
 				4F8251221B25790F00224513 /* AMIPerfTabVC.m */,
 				4F8251231B25790F00224513 /* AMIPerfTabVC.xib */,
+				4FD372791B416ABF006566A6 /* AMTraceRouteTabVC.h */,
+				4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */,
+				4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */,
 			);
 			name = NetworkToolsPanel;
 			sourceTree = "<group>";
@@ -2071,6 +2079,7 @@
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
 				4A4511801A8B62E6001E7328 /* AMStatusNetSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
+				4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */,
 				AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */,
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
 				2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */,
@@ -2332,6 +2341,7 @@
 				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				4FCA92901AE4EF32002D3CAE /* AMClockTabCellVC.m in Sources */,
+				4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */,
 				2D08FDC61AD661FF00A9D257 /* GTLYouTubeLiveBroadcastSnippet.m in Sources */,
 				4AB4ACD11A6CCB91003ECE24 /* AMOutlineItem.m in Sources */,
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,

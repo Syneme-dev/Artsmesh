@@ -23,7 +23,7 @@
 @end
 
 @protocol AMUserListDelegate <NSObject>
--(void) outputString:(NSString*) output;
+//-(void) outputString:(NSString*) output;
 -(NSString*) formatCommand:(NSString*) ip;
 @end
 

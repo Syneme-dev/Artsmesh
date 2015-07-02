@@ -10,7 +10,5 @@
 #import "AMPingTabVC.h"
 
 @interface AMTraceRouteTabVC : NSViewController
-{
-     AMUserList* userList;
-}
+
 @end

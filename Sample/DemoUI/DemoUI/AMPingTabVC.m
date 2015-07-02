@@ -42,8 +42,9 @@
 - (instancetype) init:(NSTableView*) tv
 {
     if (self = [super init]) {
-        _tableView = tv;
-         _userList = [[NSMutableArray alloc] init];
+        self.tableView   = tv;
+        self.userList    = [[NSMutableArray alloc] init];
+        self.pingCommand = [[AMNetworkToolsCommand alloc] init];
         
         [[NSNotificationCenter defaultCenter]
                                      addObserver:self
@@ -222,19 +223,8 @@ viewForTableColumn:(NSTableColumn *)tableColumn
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    userList.pingCommand = [[AMNetworkToolsCommand alloc] init];
     userList.pingCommand.contentView = self.pingContentView;
-    
-//   AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-//    if (mySelf.isOnline)
-    {
-        [userList userGroupsChangedPing:nil];
-    }
-}
-
--(void) outputString:(NSString*) output
-{
-    
+    [userList userGroupsChangedPing:nil];
 }
 
 -(NSString*) formatCommand:(NSString*) ip

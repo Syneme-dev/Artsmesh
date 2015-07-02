@@ -13,6 +13,10 @@
 #import "UIFramework/AMUIConst.h"
 
 @interface AMTraceRouteTabVC ()<AMUserListDelegate>
+{
+    AMUserList* userList;
+}
+
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *traceContentView;
 
@@ -32,28 +36,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    userList.pingCommand = [[AMNetworkToolsCommand alloc] init];
     userList.pingCommand.contentView = self.traceContentView;
-    
-    //   AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    //    if (mySelf.isOnline)
-    {
-        [userList userGroupsChangedPing:nil];
-    }
-}
-
--(void) outputString:(NSString*) output
-{
-    
+    [userList userGroupsChangedPing:nil];
 }
 
 -(NSString*) formatCommand:(NSString*) ip
 {
     NSString* command;
     
-    if ([AMCommonTools isValidIpv4:ip]){
-        command = [NSString stringWithFormat:@"traceroute %@", ip];
-    }else{
+    if ([AMCommonTools isValidIpv4:ip] || [AMCommonTools isValidIpv6:ip]){
         command = [NSString stringWithFormat:@"traceroute %@", ip];
     }
     

@@ -10,7 +10,7 @@
                 <outlet property="iperfContentView" destination="No2-D9-cH4" id="9Cy-AB-htm"/>
                 <outlet property="settingButton" destination="ygR-O6-hPH" id="QoM-tF-Dn3"/>
                 <outlet property="tableView" destination="yqx-UN-V4W" id="3iu-1i-fwe"/>
-                <outlet property="useIPV4" destination="XKn-zK-nLy" id="ctr-le-CNA"/>
+                <outlet property="useIPV6" destination="XKn-zK-nLy" id="pJw-op-ZNn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -30,6 +30,9 @@
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="setParameters:" target="-2" id="8f0-BA-CuQ"/>
+                    </connections>
                 </button>
                 <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-zK-nLy" customClass="AMCheckBoxView">
                     <rect key="frame" x="123" y="66" width="86" height="20"/>
@@ -173,6 +176,7 @@
                 <constraint firstItem="ygR-O6-hPH" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="bottom" constant="5" id="UCx-35-37y"/>
                 <constraint firstAttribute="bottom" secondItem="XKn-zK-nLy" secondAttribute="bottom" constant="66" id="ld4-9a-5Rt"/>
             </constraints>
+            <point key="canvasLocation" x="242.5" y="305"/>
         </customView>
     </objects>
     <resources>

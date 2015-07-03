@@ -11,14 +11,15 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 #import "AMPingTabVC.h"
-
+#import "AMIPerfConfig.h"
 
 @interface AMIPerfTabVC ()<AMUserListDelegate>
 {
     AMUserList* userList;
+    AMIPerfConfig* _configController;
 }
 @property (weak) IBOutlet NSButton *settingButton;
-@property (weak) IBOutlet AMCheckBoxView *useIPV4;
+@property (weak) IBOutlet AMCheckBoxView *useIPV6;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *iperfContentView;
 
@@ -37,7 +38,7 @@
     [userList userGroupsChangedPing:nil];
     
     //self.useIPV4.delegate = self;
-    self.useIPV4.title = @"USE IPV4";
+    self.useIPV6.title = @"USE IPV6";
 }
 
 - (void)viewDidLoad {
@@ -49,14 +50,39 @@
 
 -(NSString*) formatCommand:(NSString*) ip
 {
-    NSString* command;
+    NSMutableString* command;
     
     if ([AMCommonTools isValidIpv4:ip]){
-        command = [NSString stringWithFormat:@" iperf -c  %@ -u -V -b10M", ip];
-    }
+       NSBundle* mainBundle = [NSBundle mainBundle];
+        command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
+                                 [mainBundle pathForAuxiliaryExecutable:@"iperf"]];
     
+        [command appendFormat:@" -c"];
+        [command appendFormat:@" %@", ip];
+        [command appendFormat:@"-u -V -b10M"];
+    }
     return command;
 }
+- (IBAction)setParameters:(id)sender {
 
+    _configController = [[AMIPerfConfig alloc] initWithWindowNibName:@"AMIPerfConfig"];
+    NSWindow* win = _configController.window;
+    [win setStyleMask:NSBorderlessWindowMask];
+    [win setLevel:NSFloatingWindowLevel];
+    [win setHasShadow:YES];
+    [win setBackgroundColor : [NSColor colorWithCalibratedRed:38.0/255
+                                                        green:38.0/255
+                                                         blue:38.0/255
+                                                        alpha:1]];
+    
+    NSRect winRect   = [win frame];
+//    NSRect frame = [self.settingButton frame];
+//    NSPoint tmpPoint = NSMakePoint(frame.origin.x + frame.size.width + 20,
+  //                                 frame.origin.y - winRect.size.height + 120);
+    
+//    winRect.origin = [self.view convertPoint:tmpPoint toView:nil];;
+ //   [win  setFrame:winRect display:YES];
+    [win makeKeyAndOrderFront:self];
+}
 
 @end

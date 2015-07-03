@@ -285,6 +285,18 @@
 -(void)selectLastLSConfig {
     NSString *lastLSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
 
+    NSLog(@"last used ls config is: %@", lastLSConfig);
+    if (![lastLSConfig isEqualToString:@"DISCOVER"] && ![lastLSConfig isEqualToString:@"SELF"] && ([lastLSConfig length] > 0)) {
+        NSLog(@"config is set to manual IP, need to add it to options");
+        //LS Config is set to manual IP connect, need to add it to options and set it as selected option
+        NSMutableArray *lsConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+        
+        [lsConfigOptions addObject:lastLSConfig];
+        
+        [self.localServerConfigDrop removeAllItems];
+        [self.localServerConfigDrop addItemsWithTitles:lsConfigOptions];
+    }
+
     [self.localServerConfigDrop selectItemWithTitle:lastLSConfig];
     if ([self.localServerConfigDrop.stringValue isEqualTo:@""] && self.localServerConfigDrop.itemCount > 0) {
         [self.localServerConfigDrop selectItemAtIndex:0];

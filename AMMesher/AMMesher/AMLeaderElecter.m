@@ -63,6 +63,9 @@
         [self browseLocalMesher];
     } else if ([LSConfig isEqualToString:@"SELF"]) {
         [self publishLocalMesher];
+    } else {
+        //Manual IP is selected, carry on with client registration and skip Bonjour
+        [[AMMesher sharedAMMesher] setClusterState:kClusterClientRegistering];
     }
 }
 

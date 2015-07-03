@@ -14,6 +14,7 @@
 #import "AMNetworkUtils/AMNetworkUtils.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMLogger/AMLogger.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 #define MAX_RETRY_COUNT 3
 
@@ -157,6 +158,11 @@
     // Load in user Config Options
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
     
+    NSString *LSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+    _tryLocalServerAddr = LSConfig;
+    
+    if ([_tryLocalServerAddr isEqualToString:@"SELF"] || [_tryLocalServerAddr isEqualToString:@"DISCOVER"]) {
+        
     // Find IPV4 or IPV6 Addresses for found Bonjour Service, depending on user preference
     NSArray *localServerIps = [[NSArray alloc] initWithArray:[config.localServerHost addresses]];
     NSMutableArray *localServerIpv4s = [[NSMutableArray alloc] init];
@@ -185,6 +191,8 @@
     }
     
     _retryCount ++;
+    
+    }
     
     //Start registering
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;

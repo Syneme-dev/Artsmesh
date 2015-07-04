@@ -155,6 +155,8 @@
 
 -(void)registerLocalGroup
 {
+    AMLog(kAMInfoLog, @"AMMesher", @"registering group to local server.");
+    
     // Load in user Config Options
     AMSystemConfig *config = [AMCoreData shareInstance].systemConfig;
     
@@ -218,9 +220,13 @@
         
         do{
             if (error != nil) {
-                AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",  error.description);
-                
                 needRetry = YES;
+                if ([self checkLSConfigIsManual]) {
+                    needRetry = NO;
+                } else {
+                    AMLog(kAMErrorLog, @"AMMesher", @"error happened when register group:%@. will try again",  error.description);
+                }
+                
                 break;
             }
             
@@ -249,7 +255,6 @@
                 });
             }else{
                 AMLog(kAMErrorLog, @"AMMesher", @"register group return wrong value");
-                AMLog(kAMErrorLog, @"AMMesher", @"wrong returned value is %@", responseStr);
                 needRetry = YES;
             }
             
@@ -261,6 +266,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 AMLog(kAMErrorLog, @"AMMesher", @"register self to local server failed! will retry");
                 [self registerLocalGroup];
+
             });
         }
     };
@@ -277,6 +283,7 @@
 
 -(void)registerSelf
 {
+    
     AMLog(kAMInfoLog, @"AMMesher", @"registering self to local group");
     
     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
@@ -339,16 +346,18 @@
 
 -(void)unregisterSelf{
     
-    AMLog(kAMInfoLog, @"AMMesher", @"unregistering self from local server");
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    if ([_usedLocalServerAddr length] > 0) {
+        AMLog(kAMInfoLog, @"AMMesher", @"unregistering self from local server");
+        AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
     
-    AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];
-    unregReq.baseURL = [self httpBaseURL];
-    unregReq.requestPath = @"/users/unregister";
-    unregReq.httpMethod = @"POST";
-    unregReq.formData = @{@"userId": mySelf.userid};
+        AMHttpSyncRequest* unregReq = [[AMHttpSyncRequest alloc] init];
+        unregReq.baseURL = [self httpBaseURL];
+        unregReq.requestPath = @"/users/unregister";
+        unregReq.httpMethod = @"POST";
+        unregReq.formData = @{@"userId": mySelf.userid};
     
-    [unregReq sendRequest];
+        [unregReq sendRequest];
+    }
 }
 
 
@@ -392,6 +401,7 @@
     
     if (_httpRequestQueue) {
         [_httpRequestQueue  cancelAllOperations];
+        
         [self unregisterSelf];
     }
     
@@ -592,6 +602,30 @@
     AMLog(kAMInfoLog, @"AMMesher", @"now used url is:%@", httpUrl);
     
     return httpUrl;
+}
+
+
+-(BOOL)checkLSConfigIsManual {
+    
+    BOOL LSConfigIsManual = false;
+    
+    //AMMesher *curMesher = [AMMesher sharedAMMesher];
+    NSString *LSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+    _tryLocalServerAddr = LSConfig;
+    
+    if (![LSConfig isEqualToString:@"SELF"] && ![LSConfig isEqualToString:@"DISCOVER"]) {
+        LSConfigIsManual = true;
+        
+        AMLog(kAMErrorLog, @"AMMesher", @"Could not connect to manually selected IP. User is either not meshed or is meshed on a different port.");
+        AMLog(kAMErrorLog, @"AMMesher", @"If problems persist, switch to Discover mode, and try again.");
+        
+        //[[NSUserDefaults standardUserDefaults] setObject:@"DISCOVER" forKey:Preference_Key_Cluster_LSConfig];
+        [self stopLocalClient];
+        //[curMesher stopMesher];
+        //[curMesher startMesher];
+    }
+    
+    return LSConfigIsManual;
 }
 
 

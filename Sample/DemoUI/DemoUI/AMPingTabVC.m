@@ -15,7 +15,7 @@
 #import "UIFramework/AMRatioButtonView.h"
 #import "UIFramework/AMUIConst.h"
 
-@interface AMPingTabVC () <AMCheckBoxDelegeate>
+@interface AMPingTabVC () <AMCheckBoxDelegeate,AMUserListDelegate>
 {
     AMUserList* userList;
 }
@@ -42,8 +42,10 @@
 - (instancetype) init:(NSTableView*) tv
 {
     if (self = [super init]) {
-        _tableView = tv;
-         _userList = [[NSMutableArray alloc] init];
+        self.tableView   = tv;
+        self.userList    = [[NSMutableArray alloc] init];
+        self.pingCommand = [[AMNetworkToolsCommand alloc] init];
+        
         [[NSNotificationCenter defaultCenter]
                                      addObserver:self
                                         selector:@selector(userGroupsChangedPing:)
@@ -178,14 +180,12 @@ viewForTableColumn:(NSTableColumn *)tableColumn
             }else{
                 ip= userItem.user.privateIp;
             }
-            
-            NSString *command;
-            
-            if ([AMCommonTools isValidIpv4:ip]){
-                command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
-            }else{
-                command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+            if (ip == nil) {
+                ip= userItem.user.publicIp;
             }
+            
+            NSString *command = [self.delegate formatCommand:ip];
+            
             
             [self.pingCommand stop];
             self.pingCommand.command = command;
@@ -217,19 +217,27 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     [super awakeFromNib];
     
     userList = [[AMUserList alloc] init:self.tableView];
+    userList.delegate = self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    userList.pingCommand = [[AMNetworkToolsCommand alloc] init];
     userList.pingCommand.contentView = self.pingContentView;
+    [userList userGroupsChangedPing:nil];
+}
+
+-(NSString*) formatCommand:(NSString*) ip
+{
+    NSString* command;
     
-//   AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-//    if (mySelf.isOnline)
-    {
-        [userList userGroupsChangedPing:nil];
+    if ([AMCommonTools isValidIpv4:ip]){
+        command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+    }else{
+        command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
     }
+
+    return command;
 }
 
 

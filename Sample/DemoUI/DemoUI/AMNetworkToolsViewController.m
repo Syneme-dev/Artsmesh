@@ -18,7 +18,7 @@
 
 #import "AMIPerfTabVC.h"
 #import "AMPingTabVC.h"
-
+#import "AMTraceRouteTabVC.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -172,6 +172,15 @@
                     fromNib:@"AMPingTabVC"
                      bundle:nil];
     
+    [self addViewController:[AMTraceRouteTabVC class]
+                    fromNib:@"AMTraceRouteTabVC"
+                     bundle:nil];
+    
+    [self addViewController:[AMIPerfTabVC class]
+                    fromNib:@"AMIPerfTabVC"
+                     bundle:nil];
+
+    
     [self registerTabButtons];
 
 }
@@ -192,18 +201,6 @@
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
--(void)userGroupsChanged:(NSNotification*)notification
-{
-    AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
-    _users = [mergedGroup usersIncludeSubGroup];
-    
-    [self.pingTableView reloadData];
-    [self.tracerouteTableView reloadData];
-}
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [_users count];
-}
 - (IBAction)ping:(id)sender
 {
     /*
@@ -216,14 +213,18 @@
 
 - (IBAction)traceroute:(id)sender
 {
+  //  [self pushDownButton:self.tracerouteButton];
+  //  [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
     [self pushDownButton:self.tracerouteButton];
-    [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
+    [self.tabView selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)iperf:(id)sender
 {
+ //   [self pushDownButton:self.iperfButton];
+ //   [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
     [self pushDownButton:self.iperfButton];
-    [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
+    [self.tabView selectTabViewItemAtIndex:2];
 }
 
 - (IBAction)log:(id)sender {

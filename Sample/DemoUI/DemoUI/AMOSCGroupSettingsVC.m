@@ -36,18 +36,18 @@
 @end
 
 @implementation AMOSCGroupSettingsVC
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-  //  [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    //[AMButtonHandler  changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
-    
-    
-//    [AMButtonHandler changeTabTextColor:self toColor:UI_Color_blue];
-    [self.saveBtn.layer setBorderWidth:1.0];
-    [self.saveBtn.layer setBorderColor: UI_Color_blue.CGColor];
     
     [self restoreConfig:nil];
 }

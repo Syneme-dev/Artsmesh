@@ -32,10 +32,7 @@
 
 
 -(void)awakeFromNib
-{
-    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.joinBtn toColor:UI_Color_blue];
-    
+{   
     [self updateUI];
 }
 
@@ -49,6 +46,8 @@
     
     if ( isMyGroup || isMyMergedGroup) {
         [self.joinBtn  setEnabled:NO];
+
+       
     }else{
         [self.joinBtn setEnabled:YES];
     }

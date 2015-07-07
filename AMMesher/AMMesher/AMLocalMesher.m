@@ -364,6 +364,13 @@
     _heartbeatThread.timeInterval = HBTimeInterval;
     _heartbeatThread.receiveTimeout = HBReceiveTimeout;
     [_heartbeatThread start];
+    
+    //At this point, we're locally meshed, so let the rest of the Application know
+    NSNotification* notification = [[NSNotification alloc]
+                                    initWithName: AM_LOCAL_MESHER_MESHED_NOTIFICATION
+                                    object:nil
+                                    userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 
@@ -384,6 +391,12 @@
     _heartbeatThread = nil;
     
     [[AMMesher sharedAMMesher] setClusterState:kClusterStopped];
+    
+    NSNotification* notification = [[NSNotification alloc]
+                                    initWithName: AM_MESHER_STOPPED_NOTIFICATION
+                                    object:nil
+                                    userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 

@@ -10,6 +10,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "UIFramework/AMBlueBorderButton.h"
 
 @interface AMOSCGroupSettingsVC ()
 
@@ -35,13 +36,18 @@
 @end
 
 @implementation AMOSCGroupSettingsVC
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-    [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
-    [AMButtonHandler  changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     
     [self restoreConfig:nil];
 }

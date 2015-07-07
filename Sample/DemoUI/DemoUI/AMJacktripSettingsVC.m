@@ -11,7 +11,10 @@
 #import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMButtonHandler.h"
+#import "UIFramework/AMBlueBorderButton.h"
+
 #import "AMPreferenceManager/AMPreferenceManager.h"
+
 
 
 @interface AMJacktripSettingsVC ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
@@ -25,8 +28,8 @@
 @property (weak) IBOutlet AMCheckBoxView *loopBackCheck;
 @property (weak) IBOutlet AMCheckBoxView *jumLink;
 @property (weak) IBOutlet AMCheckBoxView *useIPv6Check;
-@property (weak) IBOutlet NSButton *saveBtn;
-@property (weak) IBOutlet NSButton *cancelBtn;
+@property (weak) IBOutlet AMBlueBorderButton *saveBtn;
+@property (weak) IBOutlet AMBlueBorderButton *cancelBtn;
 
 
 @end

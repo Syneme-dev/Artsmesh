@@ -9,23 +9,15 @@
 #import "AMPingTabVC.h"
 
 
-#import "AMNetworkToolsCommand.h"
-#import "AMCommonTools/AMCommonTools.h"
 
 #import "UIFramework/AMFoundryFontView.h"
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 #import "UIFramework/AMUIConst.h"
 
-@interface AMPingTabVC () <NSTableViewDataSource, NSTableViewDelegate,
-                            AMCheckBoxDelegeate>
+@interface AMPingTabVC () <AMCheckBoxDelegeate,AMUserListDelegate>
 {
-    AMNetworkToolsCommand *     _pingCommand;
-    
-    //for user list
-    NSMutableArray*     _userList;
-    NSInteger           _selectedIndex;
-    NSString*           _lastName;
+    AMUserList* userList;
 }
 
 @property (weak)                IBOutlet NSTableView*   tableView;
@@ -45,36 +37,72 @@
 
 @end
 
+@implementation AMUserList
 
-@implementation AMPingTabVC
-
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) init:(NSTableView*) tv
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-            _userList = [[NSMutableArray alloc] init];
+    if (self = [super init]) {
+        self.tableView   = tv;
+        self.userList    = [[NSMutableArray alloc] init];
+        self.pingCommand = [[AMNetworkToolsCommand alloc] init];
+        
+        [[NSNotificationCenter defaultCenter]
+                                     addObserver:self
+                                        selector:@selector(userGroupsChangedPing:)
+                                            name: AM_LIVE_GROUP_CHANDED
+                                          object:nil];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-    
-    _pingCommand = [[AMNetworkToolsCommand alloc] init];
-    _pingCommand.contentView = self.pingContentView;
-    
-    
-     [[NSNotificationCenter defaultCenter]
-                                addObserver:self
-                                selector:@selector(userGroupsChangedPing:)
-                                name: AM_LIVE_GROUP_CHANDED
-                                object:nil];
-    
-    AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
-    if (mySelf.isOnline)
-    {
-        [self userGroupsChangedPing:nil];
+
+- (id)tableView:(NSTableView *)tableView
+viewForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row
+{
+    if ([tableColumn.identifier isEqualToString:@"userName"]) {
+        static NSString *cellIdentifier = @"name_cell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier
+                                                                owner:self];
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, 100, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        AMUserListItem* item = [self.userList objectAtIndex:row];
+        AMLiveUser* user = item.user;
+        [cellView addSubview:item.nickNameTF];
+        
+        return cellView;
+        
+    }else{
+        static NSString *cellIdentifier = @"check_cell";
+        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier
+                                                                owner:self];
+        
+        if (cellView == nil)
+        {
+            NSRect cellFrame = NSMakeRect(0, 0, 30, 30);
+            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
+            [cellView setIdentifier:cellIdentifier];
+        }
+        
+        AMUserListItem* userItem = [_userList objectAtIndex:row];
+        AMCheckBoxView* check = userItem.checkbox;
+        
+        NSRect frameRect = NSMakeRect(0, 0, 30, 30);
+        check.frame = frameRect;
+        
+        [cellView addSubview:check];
+        
+        return cellView;
     }
+    
+    return nil;
 }
 
 
@@ -108,10 +136,18 @@
     return field;
 }
 
+
 -(void)userGroupsChangedPing:(NSNotification*)notification
 {
-    AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
-    NSArray* users = [mergedGroup usersIncludeSubGroup];
+     AMLiveUser* mySelf = [AMCoreData shareInstance].mySelf;
+    NSArray* users;
+    if (mySelf.isOnline) {
+        AMLiveGroup* mergedGroup = [[AMCoreData shareInstance] mergedGroup];
+        users = [mergedGroup usersIncludeSubGroup];
+    }else{
+         AMLiveGroup *liveGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+         users = [liveGroup usersIncludeSubGroup];
+    }
     [_userList removeAllObjects];
     for (AMLiveUser* liveUser in users) {
         AMUserListItem* item = [[AMUserListItem alloc] init];
@@ -130,82 +166,84 @@
     return _userList.count;
 }
 
-- (id)tableView:(NSTableView *)tableView
-viewForTableColumn:(NSTableColumn *)tableColumn
-            row:(NSInteger)row
-{
-    if ([tableColumn.identifier isEqualToString:@"userName"]) {
-        static NSString *cellIdentifier = @"name_cell";
-        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier
-                                                                owner:self];
-        if (cellView == nil)
-        {
-            NSRect cellFrame = NSMakeRect(0, 0, 100, 30);
-            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
-            [cellView setIdentifier:cellIdentifier];
-        }
-        
-        AMUserListItem* item = [_userList objectAtIndex:row];
-        AMLiveUser* user = item.user;
-        [cellView addSubview:item.nickNameTF];
-        
-        return cellView;
-        
-    }else{
-        static NSString *cellIdentifier = @"check_cell";
-        NSTableCellView *cellView = [tableView makeViewWithIdentifier:cellIdentifier
-                                                                owner:self];
-        
-        if (cellView == nil)
-        {
-            NSRect cellFrame = NSMakeRect(0, 0, 30, 30);
-            cellView = [[NSTableCellView alloc] initWithFrame:cellFrame];
-            [cellView setIdentifier:cellIdentifier];
-        }
-        
-        AMUserListItem* userItem = [_userList objectAtIndex:row];
-        AMCheckBoxView* check = userItem.checkbox;
-        
-        NSRect frameRect = NSMakeRect(0, 0, 30, 30);
-        check.frame = frameRect;
-        
-        [cellView addSubview:check];
-
-        return cellView;
-    }
-    
-    return nil;
-}
-
 - (void) onChecked:(AMCheckBoxView *)sender
 {
     if (sender.checked == NO) {
         sender.checked = YES;
     }
     
-    for (AMUserListItem* userItem in _userList) {
+    for (AMUserListItem* userItem in self.userList) {
         if([userItem.checkbox isEqual:sender]){
-            NSString* ip = userItem.user.publicIp;
-            NSString *command;
-            
-            if ([AMCommonTools isValidIpv4:ip]){
-                command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+            NSString* ip;
+            if ([userItem.user isOnline]){
+                ip= userItem.user.publicIp;
             }else{
-                command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+                ip= userItem.user.privateIp;
+            }
+            if (ip == nil) {
+                ip= userItem.user.publicIp;
             }
             
-            [_pingCommand stop];
-            _pingCommand.command = command;
-            [_pingCommand run];
+            NSString *command = [self.delegate formatCommand:ip];
+            
+            
+            [self.pingCommand stop];
+            self.pingCommand.command = command;
+            [self.pingCommand run];
         }else{
             userItem.checkbox.checked = NO;
         }
-            
+        
     }
 }
 
+
+@end
+
+
+@implementation AMPingTabVC
+
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+         //
+        
+    }
+    return self;
+}
+
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    
+    userList = [[AMUserList alloc] init:self.tableView];
+    userList.delegate = self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do view setup here.
+    userList.pingCommand.contentView = self.pingContentView;
+    [userList userGroupsChangedPing:nil];
+}
+
+-(NSString*) formatCommand:(NSString*) ip
+{
+    NSString* command;
+    
+    if ([AMCommonTools isValidIpv4:ip]){
+        command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
+    }else{
+        command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+    }
+
+    return command;
+}
+
+
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
+    
 }
 
 

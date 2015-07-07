@@ -24,6 +24,9 @@
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
 @property (weak) IBOutlet NSButton *syphonServerBtn;
+@property (weak) IBOutlet NSButton *localMesherBtn;
+
+
 @property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 

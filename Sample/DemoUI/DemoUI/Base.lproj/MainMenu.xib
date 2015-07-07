@@ -635,7 +635,7 @@
         <window title="DemoUI" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="371" customClass="AMMovableWindow">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="1200" height="768"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" autoresizesSubviews="NO" id="372" customClass="AMMaxSizeView">
                 <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -880,7 +880,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wsz-oa-ViC">
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="wsz-oa-ViC">
                         <rect key="frame" x="776" y="733" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="9Fm-On-AZW"/>
@@ -894,14 +894,28 @@
                             <action selector="localMesherToggled:" target="B30-a9-ZW1" id="78f-Do-mtb"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y31-97-Rvb" customClass="AMFoundryFontView">
+                        <rect key="frame" x="769" y="718" width="30" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="x0V-X5-PH5"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" id="DFD-kX-7VK">
+                            <font key="font" size="10" name="FoundryMonoline-Regular"/>
+                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0y6-Or-7Ha" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="2Iq-Md-vEu"/>
                     <constraint firstItem="qme-pL-mB7" firstAttribute="leading" secondItem="iv2-ru-op1" secondAttribute="trailing" constant="23" id="2SB-n6-QVW"/>
+                    <constraint firstItem="Y31-97-Rvb" firstAttribute="baseline" secondItem="DZl-dT-72j" secondAttribute="baseline" id="3pU-kQ-CbH"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="7Mk-cd-1FJ"/>
                     <constraint firstAttribute="bottom" secondItem="zEs-xu-vmU" secondAttribute="bottom" id="9A6-9W-YcO"/>
                     <constraint firstAttribute="trailing" secondItem="DZl-dT-72j" secondAttribute="trailing" constant="195" id="FV9-WT-ebD"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="50" id="JyE-hi-7yD"/>
+                    <constraint firstItem="Y31-97-Rvb" firstAttribute="top" secondItem="DZl-dT-72j" secondAttribute="top" id="Mfr-Ci-N4O"/>
+                    <constraint firstItem="Y31-97-Rvb" firstAttribute="top" secondItem="wsz-oa-ViC" secondAttribute="bottom" constant="3" id="R5m-bC-D7H"/>
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="top" secondItem="372" secondAttribute="top" constant="10" id="RJU-9y-PiD"/>
                     <constraint firstAttribute="trailing" secondItem="0y6-Or-7Ha" secondAttribute="trailing" constant="30" id="TMQ-dd-zFb"/>
                     <constraint firstItem="KD8-g0-Ew6" firstAttribute="top" secondItem="372" secondAttribute="top" constant="20" id="UV4-FM-aGm"/>
@@ -915,6 +929,7 @@
                     <constraint firstItem="KD8-g0-Ew6" firstAttribute="leading" secondItem="JcB-Q1-HgG" secondAttribute="trailing" constant="23" id="fYt-Py-9OC"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="top" secondItem="372" secondAttribute="top" constant="60" id="fdf-eJ-kAU"/>
                     <constraint firstItem="DZl-dT-72j" firstAttribute="top" secondItem="qme-pL-mB7" secondAttribute="bottom" constant="2" id="fq0-U2-OVd"/>
+                    <constraint firstItem="Y31-97-Rvb" firstAttribute="leading" secondItem="wsz-oa-ViC" secondAttribute="leading" constant="-5" id="k1E-Ri-LS3"/>
                     <constraint firstItem="eIW-oc-qXb" firstAttribute="top" secondItem="m4w-q8-NcC" secondAttribute="bottom" constant="6" id="mJ6-KE-Qdw"/>
                     <constraint firstItem="PQH-zt-t50" firstAttribute="top" secondItem="372" secondAttribute="top" constant="21" id="n1q-6l-Kee"/>
                     <constraint firstItem="JcB-Q1-HgG" firstAttribute="leading" secondItem="wsz-oa-ViC" secondAttribute="trailing" constant="16" id="oht-Yi-nI7"/>
@@ -945,6 +960,7 @@
                 <outlet property="mainContentView" destination="372" id="Jon-GL-hFd"/>
                 <outlet property="mainScrollView" destination="zEs-xu-vmU" id="2mp-iF-jly"/>
                 <outlet property="meshBtn" destination="kwj-11-GIT" id="XSi-kI-oZ0"/>
+                <outlet property="meshUseIpv6TextField" destination="Y31-97-Rvb" id="kpA-th-yuT"/>
                 <outlet property="oscServerBtn" destination="PQH-zt-t50" id="2Y7-b8-stK"/>
                 <outlet property="syphonServerBtn" destination="KD8-g0-Ew6" id="361-Qg-VGl"/>
                 <outlet property="topHourTF" destination="leE-VP-qR4" id="iMB-pI-K0C"/>

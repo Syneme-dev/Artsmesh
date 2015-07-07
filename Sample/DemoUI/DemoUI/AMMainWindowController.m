@@ -982,11 +982,11 @@
     AMMesher *curMesher = [AMMesher sharedAMMesher];
     switch (curMesher.clusterState) {
         case kClusterStarted:
-            NSLog(@"Local Mesher state is: Mesher Started");
+            // Mesher currently started - need to stop
             [curMesher stopMesher];
             break;
         case kClusterStopped:
-            NSLog(@"Mesher state is: Mesher stopped.");
+            // Mesher currently stopped - need to start it up!
             [curMesher startMesher];
             break;
         default:
@@ -1047,11 +1047,21 @@
 -(void)localMesherMeshed:(NSNotification *)notification {
     //User locally meshed successfully
     [self.localMesherBtn setImage:[NSImage imageNamed:@"Server_on"]];
+    
+    //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    AMLiveUser *mySelf = [AMCoreData shareInstance].mySelf;
+    
+    if (mySelf.isLeader && [[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_MeshUseIpv6]) {
+        [self.meshUseIpv6TextField setStringValue:@"6"];
+    }
+    
 }
 
 -(void)mesherStopped:(NSNotification *)notification {
     //Mesher service has stopped.
     [self.localMesherBtn setImage:[NSImage imageNamed:@"Server_off"]];
+    
+    [self.meshUseIpv6TextField setStringValue:@""];
 }
 
 

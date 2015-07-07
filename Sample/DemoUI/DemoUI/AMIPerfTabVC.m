@@ -11,12 +11,12 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 #import "AMPingTabVC.h"
-#import "AMIPerfConfig.h"
+#import "AMIPerfConfigWC.h"
 
 @interface AMIPerfTabVC ()<AMUserListDelegate>
 {
     AMUserList* userList;
-    AMIPerfConfig* _configController;
+    AMIPerfConfigWC* _configController;
 }
 @property (weak) IBOutlet NSButton *settingButton;
 @property (weak) IBOutlet AMCheckBoxView *useIPV6;
@@ -56,16 +56,46 @@
        NSBundle* mainBundle = [NSBundle mainBundle];
         command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
                                  [mainBundle pathForAuxiliaryExecutable:@"iperf"]];
-    
-        [command appendFormat:@" -c"];
+        
+        AMIPerfConfig* cfg = _configController.iperfConfig;
+        if (cfg.serverRole)
+            [command appendFormat:@" -s"];
+        else
+            [command appendFormat:@" -c"];
+       
         [command appendFormat:@" %@", ip];
-        [command appendFormat:@"-u -V -b10M"];
+        
+        if (cfg.useUDP) {
+            [command appendFormat:@" -u"];
+        }
+        
+        if (cfg.port > 0) {
+            [command appendFormat:@" -p"];
+        }
+        
+        //Client
+        if (cfg.dualtest) {
+            [command appendFormat:@" -d"];
+        }
+        
+        if (cfg.tradeoff) {
+            [command appendFormat:@" -r"];
+        }
+        
+        if (self.useIPV6) {
+            [command appendFormat:@" -V"];
+        }
+        
+        if (cfg.bandwith > 0) {
+            [command appendFormat:@" -b%dM", (int)cfg.bandwith];
+        }
     }
     return command;
 }
+
 - (IBAction)setParameters:(id)sender {
 
-    _configController = [[AMIPerfConfig alloc] initWithWindowNibName:@"AMIPerfConfig"];
+    _configController = [[AMIPerfConfigWC alloc] initWithWindowNibName:@"AMIPerfConfigWC"];
     NSWindow* win = _configController.window;
     [win setStyleMask:NSBorderlessWindowMask];
     [win setLevel:NSFloatingWindowLevel];

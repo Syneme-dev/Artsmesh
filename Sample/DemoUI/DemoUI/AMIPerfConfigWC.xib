@@ -5,12 +5,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfConfig">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfConfigWC">
             <connections>
                 <outlet property="bandwith" destination="5HQ-pd-kmP" id="Sou-Ke-NqI"/>
+                <outlet property="cancelButton" destination="5K0-E9-hMp" id="skV-kx-4wO"/>
                 <outlet property="dualtest" destination="xru-AA-yLI" id="qTT-Kl-orZ"/>
                 <outlet property="port" destination="cmX-pP-YII" id="eFt-Os-2sK"/>
                 <outlet property="roleSelector" destination="C9F-uy-qCw" id="Tae-EO-CAj"/>
+                <outlet property="saveButton" destination="o4d-kq-sm5" id="rDi-Ry-UBN"/>
                 <outlet property="tradeoff" destination="BTv-wj-Z6F" id="AP7-49-89f"/>
                 <outlet property="useUDP" destination="YEq-wm-86G" id="99P-lD-hYP"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -36,7 +38,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HQ-pd-kmP" customClass="AMFoundryFontView">
-                        <rect key="frame" x="171" y="92" width="88" height="20"/>
+                        <rect key="frame" x="160" y="92" width="82" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="BANDWITH" drawsBackground="YES" id="Yga-W0-HPy">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,7 +85,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmX-pP-YII" customClass="AMFoundryFontView">
-                        <rect key="frame" x="171" y="199" width="82" height="20"/>
+                        <rect key="frame" x="160" y="199" width="82" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PORT" drawsBackground="YES" id="WYX-5W-l9E">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,7 +98,7 @@
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-E9-hMp" customClass="AMBlueBorderButton">
                         <rect key="frame" x="12" y="-1" width="130" height="35"/>
-                        <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="Jl5-fL-wz0">
+                        <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="Jl5-fL-wz0">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -127,7 +129,7 @@
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4d-kq-sm5" customClass="AMBlueBorderButton">
                         <rect key="frame" x="155" y="0.0" width="130" height="35"/>
-                        <buttonCell key="cell" type="square" title="RUN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="4Zm-B3-RrN">
+                        <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="4Zm-B3-RrN">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>

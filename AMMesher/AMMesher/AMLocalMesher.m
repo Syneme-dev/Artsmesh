@@ -176,7 +176,6 @@
     
     // Determine an IP Address to try for group registration
     if(_retryCount < [preferredIps count]){
-        NSLog(@"localServerHost addresses are: %@", preferredIps);
         _tryLocalServerAddr = [preferredIps objectAtIndex:_retryCount];
         
     }else{

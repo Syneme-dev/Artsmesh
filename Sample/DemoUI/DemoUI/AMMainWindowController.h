@@ -30,6 +30,8 @@
 @property (weak) IBOutlet AMJackCPULoderView *jackCPUUsageBar;
 @property (weak) IBOutlet AMFoundryFontView *jackCpuUageNum;
 
+@property (weak) IBOutlet AMFoundryFontView *meshUseIpv6TextField;
+
 @property (weak) IBOutlet NSScrollView *mainScrollView;
 
 @property (nonatomic) NSTimer* blinkBackTimer;

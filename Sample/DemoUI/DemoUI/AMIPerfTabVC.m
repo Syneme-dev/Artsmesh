@@ -54,7 +54,7 @@
 {
     NSMutableString* command;
     NSBundle* mainBundle = [NSBundle mainBundle];
-    command = [[NSMutableString alloc] initWithFormat:@"%@/",
+    command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
                                  [mainBundle pathForAuxiliaryExecutable:@"iperf"]];
         
     AMIPerfConfig* cfg = _configController.iperfConfig;
@@ -63,7 +63,8 @@
         [command appendFormat:@" -s"];
         
         
-        if (cfg.useUDP) {
+  //      if (cfg.useUDP)
+        {
             [command appendFormat:@" -u"];
         }
         
@@ -146,7 +147,8 @@
     if ([sender isEqual:self.serverCheck] &&
             self.serverCheck.checked == YES) {
 
-        [self formatCommand:nil];
+        NSString* command = [self formatCommand:nil];
+        [userList executeCommand:command];
 //        self.serverCommand = [serverCommand stop];
 //        self.serverCommand.command = command;
 //        [self.serverCommand run];

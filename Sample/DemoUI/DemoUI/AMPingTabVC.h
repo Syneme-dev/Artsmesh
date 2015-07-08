@@ -36,7 +36,7 @@
     NSString*           _lastName;
 }
 @property id<AMUserListDelegate> delegate;
-
+-(void)executeCommand : (NSString*) command;
 - (instancetype) init:(NSTableView*) tv;
 
 @property (weak)         NSTableView*   tableView;

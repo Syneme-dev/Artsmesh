@@ -197,6 +197,12 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     }
 }
 
+-(void)executeCommand : (NSString*) command
+{
+    [self.pingCommand stop];
+    self.pingCommand.command = command;
+    [self.pingCommand run];
+}
 
 @end
 

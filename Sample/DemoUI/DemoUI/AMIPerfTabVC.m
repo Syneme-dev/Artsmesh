@@ -69,7 +69,7 @@
         }
         
         if (cfg.port > 0) {
-            [command appendFormat:@" -p"];
+            [command appendFormat:@" -p %d", (int)cfg.port];
         }
         
         
@@ -94,7 +94,7 @@
         }
         
         if (cfg.port > 0) {
-            [command appendFormat:@" -p"];
+            [command appendFormat:@" -p %d", (int)cfg.port];
         }
         
         if (self.useIPV6.checked) {

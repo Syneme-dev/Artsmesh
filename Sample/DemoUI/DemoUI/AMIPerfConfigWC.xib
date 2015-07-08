@@ -84,10 +84,11 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmX-pP-YII" customClass="AMFoundryFontView">
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmX-pP-YII">
                         <rect key="frame" x="160" y="199" width="82" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PORT" drawsBackground="YES" id="WYX-5W-l9E">
-                            <font key="font" metaFont="system"/>
+                            <dateFormatter key="formatter" dateStyle="long" id="VTL-iy-arL"/>
+                            <font key="font" size="13" name="FoundryMonoline-Bold"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>

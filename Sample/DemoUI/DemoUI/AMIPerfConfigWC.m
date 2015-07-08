@@ -72,7 +72,8 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     [self.roleSelector addItemWithTitle:@"CLIENT"];
     [self.roleSelector selectItemWithTitle:@"SERVER"];
    
-    [self.port setIntegerValue:5001];
+    
+    self.port.stringValue = @"5001";
     
     self.useUDP.title = @"UDP";
     self.tradeoff.title = @"TRADEOFF";

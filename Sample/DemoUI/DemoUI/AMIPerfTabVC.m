@@ -63,7 +63,7 @@
         [command appendFormat:@" -s"];
         
         
-  //      if (cfg.useUDP)
+        if (cfg.useUDP)
         {
             [command appendFormat:@" -u"];
         }
@@ -109,8 +109,6 @@
         if (cfg.tradeoff) {
             [command appendFormat:@" -r"];
         }
-        
-       
         
         if (cfg.bandwith > 0) {
             [command appendFormat:@" -b%dM", (int)cfg.bandwith];

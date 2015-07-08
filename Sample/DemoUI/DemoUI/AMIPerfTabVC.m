@@ -54,7 +54,7 @@
 {
     NSMutableString* command;
     NSBundle* mainBundle = [NSBundle mainBundle];
-    command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
+    command = [[NSMutableString alloc] initWithFormat:@"%@/",
                                  [mainBundle pathForAuxiliaryExecutable:@"iperf"]];
         
     AMIPerfConfig* cfg = _configController.iperfConfig;

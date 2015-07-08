@@ -59,7 +59,7 @@
         
     AMIPerfConfig* cfg = _configController.iperfConfig;
     
-    if ([ip isEqual:nil]) {
+    if (ip == nil) {
         if (cfg.serverRole)
             [command appendFormat:@" -s"];
         
@@ -73,7 +73,7 @@
         }
         
         
-        if (self.useIPV6) {
+        if (self.useIPV6.checked) {
             [command appendFormat:@" -V"];
         }
         
@@ -97,7 +97,7 @@
             [command appendFormat:@" -p"];
         }
         
-        if (self.useIPV6) {
+        if (self.useIPV6.checked) {
             [command appendFormat:@" -V"];
         }
         

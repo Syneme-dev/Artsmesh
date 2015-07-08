@@ -60,8 +60,7 @@
     AMIPerfConfig* cfg = _configController.iperfConfig;
     
     if (ip == nil) {
-        if (cfg.serverRole)
-            [command appendFormat:@" -s"];
+        [command appendFormat:@" -s"];
         
         
         if (cfg.useUDP) {

@@ -14,6 +14,8 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "UIFramework/AMBlueBorderButton.h"
 
+NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification";
+
 @interface AMIPerfConfigWC ()<AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet AMBlueBorderButton *cancelButton;
@@ -44,10 +46,11 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
-- (void)peerSelectedChanged:(AMPopUpView*)sender
+- (void)itemSelected:(AMPopUpView*)sender
 {
     if (sender == self.roleSelector) {
         BOOL clientEnable = [self.roleSelector.stringValue isEqualToString:@"CLIENT"];
+        
         [self.tradeoff setEnabled:clientEnable];
         [self.dualtest setEnabled:clientEnable];
     }
@@ -64,10 +67,13 @@
     [self.cancelButton.layer    setBorderWidth:1.0];
     [self.cancelButton.layer    setBorderColor:UI_Color_blue.CGColor];
     
-    
+    self.roleSelector.delegate = self;
     [self.roleSelector addItemWithTitle:@"SERVER"];
     [self.roleSelector addItemWithTitle:@"CLIENT"];
+    [self.roleSelector selectItemWithTitle:@"SERVER"];
    
+    [self.port setIntegerValue:5001];
+    
     self.useUDP.title = @"UDP";
     self.tradeoff.title = @"TRADEOFF";
     self.dualtest.title = @"DUAL TEST";
@@ -102,6 +108,9 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateIPerfConfig];
+    if (_iperfConfig.serverRole == YES) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMIPerfServerStartNotification object:nil];
+    }
     
     [self.window close];
 }

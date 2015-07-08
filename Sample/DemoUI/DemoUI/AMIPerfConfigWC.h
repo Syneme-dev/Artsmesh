@@ -8,6 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString * const AMIPerfServerStartNotification;
+
+
 @interface AMIPerfConfig : NSObject
 @property (nonatomic)  BOOL serverRole;
 @property (nonatomic)  BOOL useUDP;

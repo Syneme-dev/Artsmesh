@@ -13,7 +13,7 @@
 #import "AMPingTabVC.h"
 #import "AMIPerfConfigWC.h"
 
-@interface AMIPerfTabVC ()<AMUserListDelegate>
+@interface AMIPerfTabVC ()<AMUserListDelegate,AMCheckBoxDelegeate>
 {
     AMUserList* userList;
     AMIPerfConfigWC* _configController;
@@ -22,6 +22,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useIPV6;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *iperfContentView;
+@property (weak) IBOutlet AMCheckBoxView *serverCheck;
 
 @end
 
@@ -37,6 +38,7 @@
     
     [userList userGroupsChangedPing:nil];
     
+    self.serverCheck.delegate = self;
     //self.useIPV4.delegate = self;
     self.useIPV6.title = @"USE IPV6";
 }
@@ -51,17 +53,39 @@
 -(NSString*) formatCommand:(NSString*) ip
 {
     NSMutableString* command;
-    
-    if ([AMCommonTools isValidIpv4:ip]){
-       NSBundle* mainBundle = [NSBundle mainBundle];
-        command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    command = [[NSMutableString alloc] initWithFormat:@"\"%@\"",
                                  [mainBundle pathForAuxiliaryExecutable:@"iperf"]];
         
-        AMIPerfConfig* cfg = _configController.iperfConfig;
+    AMIPerfConfig* cfg = _configController.iperfConfig;
+    
+    if ([ip isEqual:nil]) {
         if (cfg.serverRole)
             [command appendFormat:@" -s"];
-        else
-            [command appendFormat:@" -c"];
+        
+        
+        if (cfg.useUDP) {
+            [command appendFormat:@" -u"];
+        }
+        
+        if (cfg.port > 0) {
+            [command appendFormat:@" -p"];
+        }
+        
+        
+        if (self.useIPV6) {
+            [command appendFormat:@" -V"];
+        }
+        
+        return command;
+    }
+
+    
+    
+    if ([AMCommonTools isValidIpv4:ip] ||
+        [AMCommonTools isValidIpv6:ip]){
+        
+        [command appendFormat:@" -c"];
        
         [command appendFormat:@" %@", ip];
         
@@ -73,6 +97,10 @@
             [command appendFormat:@" -p"];
         }
         
+        if (self.useIPV6) {
+            [command appendFormat:@" -V"];
+        }
+        
         //Client
         if (cfg.dualtest) {
             [command appendFormat:@" -d"];
@@ -82,9 +110,7 @@
             [command appendFormat:@" -r"];
         }
         
-        if (self.useIPV6) {
-            [command appendFormat:@" -V"];
-        }
+       
         
         if (cfg.bandwith > 0) {
             [command appendFormat:@" -b%dM", (int)cfg.bandwith];
@@ -114,5 +140,19 @@
  //   [win  setFrame:winRect display:YES];
     [win makeKeyAndOrderFront:self];
 }
+
+
+-(void) onChecked:(AMCheckBoxView *)sender
+{
+    if ([sender isEqual:self.serverCheck] &&
+            self.serverCheck.checked == YES) {
+
+        [self formatCommand:nil];
+//        self.serverCommand = [serverCommand stop];
+//        self.serverCommand.command = command;
+//        [self.serverCommand run];
+    }
+}
+
 
 @end

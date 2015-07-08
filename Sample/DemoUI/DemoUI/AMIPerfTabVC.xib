@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfTabVC">
             <connections>
                 <outlet property="iperfContentView" destination="No2-D9-cH4" id="9Cy-AB-htm"/>
+                <outlet property="serverCheck" destination="xl8-8F-JXm" id="nE8-a2-5Be"/>
                 <outlet property="settingButton" destination="ygR-O6-hPH" id="QoM-tF-Dn3"/>
                 <outlet property="tableView" destination="yqx-UN-V4W" id="3iu-1i-fwe"/>
                 <outlet property="useIPV6" destination="XKn-zK-nLy" id="pJw-op-ZNn"/>
@@ -21,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ygR-O6-hPH">
-                    <rect key="frame" x="257" y="63" width="25" height="24"/>
+                    <rect key="frame" x="549" y="63" width="25" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="9wM-rq-OrE"/>
                         <constraint firstAttribute="height" constant="24" id="F6W-7y-n4g"/>
@@ -35,7 +36,7 @@
                     </connections>
                 </button>
                 <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="XKn-zK-nLy" customClass="AMCheckBoxView">
-                    <rect key="frame" x="123" y="66" width="86" height="20"/>
+                    <rect key="frame" x="32" y="66" width="86" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="AEN-LS-T7Q"/>
                         <constraint firstAttribute="height" constant="20" id="I2X-rE-m6L"/>
@@ -162,6 +163,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="xl8-8F-JXm" customClass="AMCheckBoxView">
+                    <rect key="frame" x="490" y="64" width="34" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="VfJ-EW-Xwi"/>
+                        <constraint firstAttribute="width" constant="34" id="fcP-8a-J6u"/>
+                        <constraint firstAttribute="height" constant="20" id="g6a-hx-YMO"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="0w3-Xy-ZWl" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="top" id="0AV-aQ-nzt"/>
@@ -169,11 +178,13 @@
                 <constraint firstAttribute="trailing" secondItem="blc-uH-2x5" secondAttribute="trailing" id="4lI-vW-UI0"/>
                 <constraint firstItem="blc-uH-2x5" firstAttribute="leading" secondItem="0w3-Xy-ZWl" secondAttribute="trailing" id="5I3-3v-5QW"/>
                 <constraint firstItem="XKn-zK-nLy" firstAttribute="centerY" secondItem="ygR-O6-hPH" secondAttribute="centerY" constant="-1" id="AU8-AI-kU3"/>
-                <constraint firstItem="XKn-zK-nLy" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="123" id="E3M-9F-iS0"/>
+                <constraint firstItem="xl8-8F-JXm" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="bottom" constant="8" symbolic="YES" id="CQy-w8-qf2"/>
+                <constraint firstItem="XKn-zK-nLy" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="E3M-9F-iS0"/>
                 <constraint firstItem="blc-uH-2x5" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="178" id="GQk-30-PWy"/>
                 <constraint firstItem="blc-uH-2x5" firstAttribute="bottom" secondItem="0w3-Xy-ZWl" secondAttribute="bottom" id="H6x-PX-KE0"/>
-                <constraint firstItem="ygR-O6-hPH" firstAttribute="leading" secondItem="XKn-zK-nLy" secondAttribute="trailing" constant="48" id="TKy-40-gz5"/>
+                <constraint firstItem="ygR-O6-hPH" firstAttribute="leading" secondItem="XKn-zK-nLy" secondAttribute="trailing" constant="431" id="TKy-40-gz5"/>
                 <constraint firstItem="ygR-O6-hPH" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="bottom" constant="5" id="UCx-35-37y"/>
+                <constraint firstItem="ygR-O6-hPH" firstAttribute="leading" secondItem="xl8-8F-JXm" secondAttribute="trailing" constant="25" id="Xvs-X0-4xC"/>
                 <constraint firstAttribute="bottom" secondItem="XKn-zK-nLy" secondAttribute="bottom" constant="66" id="ld4-9a-5Rt"/>
             </constraints>
             <point key="canvasLocation" x="242.5" y="305"/>

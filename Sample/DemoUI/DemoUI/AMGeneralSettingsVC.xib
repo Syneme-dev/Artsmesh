@@ -396,6 +396,28 @@
                         <binding destination="sxY-kL-goD" name="value" keyPath="values.Preference_Key_General_ChatPort" id="wVQ-Kh-QaY"/>
                     </connections>
                 </textField>
+                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2q-0x-38q" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="300" y="260" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="7oV-Ep-wR4"/>
+                        <constraint firstAttribute="height" constant="40" id="hwQ-we-X9Q"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="YBd-ps-RUm">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kZ-XT-5cb" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="0.0" y="260" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="ca7-Ut-GIA"/>
+                        <constraint firstAttribute="width" constant="300" id="uml-22-Zb3"/>
+                    </constraints>
+                    <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="GbR-gh-ECe">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ECH-8d-idm" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="256" id="0Mn-hu-eK6"/>
@@ -436,6 +458,8 @@
                 <constraint firstItem="zEi-cf-fu3" firstAttribute="leading" secondItem="3T0-KQ-1cP" secondAttribute="trailing" constant="-380" id="Ouh-Z5-9nV"/>
                 <constraint firstItem="yTq-ZE-wff" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="347" id="OzF-Pe-LEk"/>
                 <constraint firstItem="UtO-VI-44u" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="221" id="P4w-SM-T5H"/>
+                <constraint firstItem="7kZ-XT-5cb" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" id="QpA-qh-3CZ"/>
+                <constraint firstItem="7kZ-XT-5cb" firstAttribute="baseline" secondItem="h2q-0x-38q" secondAttribute="baseline" id="S2F-Ur-7YQ"/>
                 <constraint firstItem="gHL-MM-mq4" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="347" id="SgG-Sr-Cms"/>
                 <constraint firstItem="4cM-tM-iQ4" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="32" id="TDW-Jg-stT"/>
                 <constraint firstItem="Biq-u9-hjz" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="199" id="V5Y-RD-eWV"/>
@@ -469,6 +493,7 @@
                 <constraint firstItem="Sls-e8-GOP" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="pLx-9K-mFb"/>
                 <constraint firstItem="fUl-rK-LPs" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="193" id="pdL-gu-T7b"/>
                 <constraint firstItem="oi8-DQ-rme" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="qPQ-AM-PXt"/>
+                <constraint firstItem="h2q-0x-38q" firstAttribute="leading" secondItem="7kZ-XT-5cb" secondAttribute="trailing" id="qXn-2o-Ac8"/>
                 <constraint firstItem="paT-xg-mL2" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="199" id="qdb-rR-uU3"/>
                 <constraint firstItem="as1-Ho-sNS" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="119" id="quZ-Q0-21j"/>
                 <constraint firstItem="0rC-Kj-mKX" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="49" id="rUv-8v-bby"/>
@@ -477,6 +502,7 @@
                 <constraint firstItem="N7A-Hc-61W" firstAttribute="top" secondItem="gHL-MM-mq4" secondAttribute="bottom" constant="-53" id="tKn-Kc-YoO"/>
                 <constraint firstItem="7gx-08-u1C" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="199" id="tpy-Sl-ev3"/>
                 <constraint firstAttribute="trailing" secondItem="9Qo-r8-3eW" secondAttribute="trailing" constant="163" id="ub7-eF-4A3"/>
+                <constraint firstItem="7kZ-XT-5cb" firstAttribute="top" secondItem="LCG-Yg-5zT" secondAttribute="bottom" constant="10" id="ubS-WN-3qD"/>
                 <constraint firstItem="55x-ZB-goc" firstAttribute="trailing" secondItem="0rC-Kj-mKX" secondAttribute="trailing" id="vcM-BV-A1y"/>
                 <constraint firstItem="VnS-HU-qXH" firstAttribute="leading" secondItem="fhR-YM-gdp" secondAttribute="leading" constant="13" id="vgN-HM-7Ee"/>
                 <constraint firstAttribute="trailing" secondItem="7gx-08-u1C" secondAttribute="trailing" constant="250" id="wAJ-IX-2Aw"/>

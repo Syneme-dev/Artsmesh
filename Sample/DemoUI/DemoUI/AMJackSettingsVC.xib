@@ -109,14 +109,14 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
-                <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DSp-8p-uZJ">
+                <box hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DSp-8p-uZJ">
                     <rect key="frame" x="20" y="120" width="546" height="5"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="F1Q-aN-Okn">
-                    <rect key="frame" x="-2" y="94" width="4" height="5"/>
+                    <rect key="frame" x="-4" y="96" width="4" height="1"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
@@ -182,7 +182,7 @@
                     </connections>
                 </customView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="108" y="82" width="79" height="25"/>
+                    <rect key="frame" x="0.0" y="74" width="300" height="40"/>
                     <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="642-7q-QIt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -343,7 +343,7 @@ Gw
                     </connections>
                 </customView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="20" y="82" width="80" height="25"/>
+                    <rect key="frame" x="301" y="74" width="300" height="40"/>
                     <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JPa-Wc-0kP">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>

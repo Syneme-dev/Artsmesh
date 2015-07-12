@@ -97,8 +97,8 @@
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EjM-ag-Utu" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="20" y="628" width="153" height="21"/>
-                    <buttonCell key="cell" type="square" title="POST TEST MESSAGE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uWV-rG-bZc">
+                    <rect key="frame" x="20" y="628" width="300" height="40"/>
+                    <buttonCell key="cell" type="square" title="LOGIN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uWV-rG-bZc">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

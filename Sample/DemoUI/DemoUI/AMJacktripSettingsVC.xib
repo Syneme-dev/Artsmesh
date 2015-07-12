@@ -250,20 +250,6 @@
                         <constraint firstAttribute="height" constant="20" id="wvC-Te-lqy"/>
                     </constraints>
                 </customView>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="0.0" y="444" width="300" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="300" id="boT-qX-UqN"/>
-                        <constraint firstAttribute="height" constant="40" id="fOI-ci-Acg"/>
-                    </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="2ur-8O-vfh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="savePref:" target="-2" id="JaJ-9b-beY"/>
-                    </connections>
-                </button>
                 <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xEW-J7-OxY">
                     <rect key="frame" x="20" y="657" width="560" height="5"/>
                     <constraints>
@@ -295,7 +281,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="ZYy-PC-fBl" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="301" y="444" width="300" height="40"/>
+                    <rect key="frame" x="5" y="444" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="IB2-iN-C2U"/>
                         <constraint firstAttribute="height" constant="40" id="RDi-Nb-Xet"/>
@@ -308,10 +294,25 @@
                         <action selector="cancelPref:" target="-2" id="1cY-pV-u8F"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="306" y="444" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="boT-qX-UqN"/>
+                        <constraint firstAttribute="height" constant="40" id="fOI-ci-Acg"/>
+                    </constraints>
+                    <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="2ur-8O-vfh">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="savePref:" target="-2" id="JaJ-9b-beY"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="OTQ-85-mH8" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="167" id="0t6-GI-COP"/>
                 <constraint firstItem="aJy-Bn-boT" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="80" id="23h-f9-Uc8"/>
+                <constraint firstItem="ZYy-PC-fBl" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="5" id="2Q6-su-cQA"/>
                 <constraint firstAttribute="trailing" secondItem="xEW-J7-OxY" secondAttribute="trailing" constant="20" id="3hD-lj-Dcg"/>
                 <constraint firstItem="RuW-53-gdS" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="278" id="4Or-oA-tb0"/>
                 <constraint firstItem="ya2-ye-TVY" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="167" id="4Q5-yj-0Dg"/>
@@ -327,6 +328,7 @@
                 <constraint firstItem="Rzr-Pb-jXz" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="GfM-Ai-cJV"/>
                 <constraint firstItem="4Y8-WF-PEp" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="196" id="HKV-Qo-TeP"/>
                 <constraint firstItem="vch-iU-wWM" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="255" id="HmA-gs-gcX"/>
+                <constraint firstItem="Eom-gc-NhV" firstAttribute="leading" secondItem="ZYy-PC-fBl" secondAttribute="trailing" constant="1" id="JWi-DV-KLT"/>
                 <constraint firstItem="yq9-Fb-d7T" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Jv9-Ce-YNV"/>
                 <constraint firstItem="d2a-V7-mke" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Lmv-va-D6M"/>
                 <constraint firstItem="ya2-ye-TVY" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="Lsv-8d-06O"/>
@@ -345,11 +347,9 @@
                 <constraint firstItem="aJy-Bn-boT" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="278" id="TxP-ae-3tk"/>
                 <constraint firstItem="h9L-6z-MYA" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="414" id="V8w-Vn-HN1"/>
                 <constraint firstItem="znq-4b-0JE" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Xbl-38-LlU"/>
-                <constraint firstItem="Eom-gc-NhV" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" id="Yre-yd-h11"/>
                 <constraint firstItem="Hcy-2O-cf2" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="ZQH-vl-jSV"/>
                 <constraint firstItem="znq-4b-0JE" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="80" id="aYt-7H-YDE"/>
                 <constraint firstItem="Usf-64-TXk" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="aZa-eU-4vk"/>
-                <constraint firstItem="ZYy-PC-fBl" firstAttribute="leading" secondItem="Eom-gc-NhV" secondAttribute="trailing" constant="1" id="clM-Lf-6Ql"/>
                 <constraint firstItem="4Y8-WF-PEp" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="dE2-9j-1ht"/>
                 <constraint firstItem="kht-NW-CPy" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="dtX-H2-ooP"/>
                 <constraint firstItem="VGO-6c-hB7" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="eDg-iL-fw2"/>

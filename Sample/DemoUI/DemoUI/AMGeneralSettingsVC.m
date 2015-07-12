@@ -38,6 +38,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
 
+@property (strong) NSMutableArray *LSConfigOptions;
 
 @end
 
@@ -49,6 +50,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLSConfigIps) name:AM_LIVE_GROUP_CHANDED object:nil];
+    
+    _LSConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+    
     
     self.privateIpBox.delegate = self;
     self.privateIpv6Box.delegate = self;
@@ -73,7 +78,7 @@
     [self loadUseIpv6];
     [self loadPrivateIp];
     [self loadIpv6];
-    [self loadLSConfig];
+    [self loadLSConfig:_LSConfigOptions];
     [self loadLocalServerPort];
     [self loadGlobalServerAddr];
     [self loadGlobalServerPort];
@@ -130,17 +135,35 @@
     }
 }
 
--(void)loadLSConfig {
+-(void)loadLSConfig:(NSMutableArray *)options {
     dispatch_async([self loadingQueue], ^{
-        NSMutableArray *configOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
-        
+                
         [self.localServerConfigDrop removeAllItems];
-        [self.localServerConfigDrop addItemsWithTitles:configOptions];
+        [self.localServerConfigDrop addItemsWithTitles:options];
         [self selectLastLSConfig];
         [self storeSelectedLSConfig];
         
         [self.localServerConfigDrop setNeedsDisplay];
     });
+}
+
+-(void)loadLSConfigIps {
+    [_LSConfigOptions removeAllObjects];
+    [_LSConfigOptions addObject:@"DISCOVER"];
+    [_LSConfigOptions addObject:@"SELF"];
+    
+    AMLiveUser *mySelf = [AMCoreData shareInstance].mySelf;
+    AMLiveGroup *myLiveGroup = [AMCoreData shareInstance].myLocalLiveGroup;
+    
+    for (AMLiveUser *curUser in myLiveGroup.users) {
+        if (!self.meshUseIpv6Check.checked && ![curUser.privateIp isEqualToString:mySelf.privateIp]) {
+            [_LSConfigOptions addObject:curUser.privateIp];
+        } else if (![curUser.ipv6Address isEqualToString:mySelf.ipv6Address]) {
+            [_LSConfigOptions addObject:curUser.ipv6Address];
+        }
+    }
+    
+    [self loadLSConfig:_LSConfigOptions];
 }
 
 -(void)loadPrivateIp
@@ -261,6 +284,18 @@
 
 -(void)selectLastLSConfig {
     NSString *lastLSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
+
+    NSLog(@"last used ls config is: %@", lastLSConfig);
+    if (![lastLSConfig isEqualToString:@"DISCOVER"] && ![lastLSConfig isEqualToString:@"SELF"] && ([lastLSConfig length] > 0)) {
+        NSLog(@"config is set to manual IP, need to add it to options");
+        //LS Config is set to manual IP connect, need to add it to options and set it as selected option
+        NSMutableArray *lsConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+        
+        [lsConfigOptions addObject:lastLSConfig];
+        
+        [self.localServerConfigDrop removeAllItems];
+        [self.localServerConfigDrop addItemsWithTitles:lsConfigOptions];
+    }
 
     [self.localServerConfigDrop selectItemWithTitle:lastLSConfig];
     if ([self.localServerConfigDrop.stringValue isEqualTo:@""] && self.localServerConfigDrop.itemCount > 0) {

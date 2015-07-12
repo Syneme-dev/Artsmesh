@@ -16,6 +16,11 @@
 #import "AMLogger/AMLogger.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
 
+NSString * const AMLocalHeartbeatFailNotification        = @"AMLocalHeartbeatFailNotification";
+NSString * const AMLocalHeartbeatDisconnectNotification  = @"AMLocalHeartbeatDisconnectNotification";
+NSString * const AMLocalHeartbeatNotification            =
+@"AMLocalHeartbeatNotification";
+
 #define MAX_RETRY_COUNT 3
 
 
@@ -666,6 +671,10 @@
 - (void)heartBeat:(AMHeartBeat *)heartBeat didSendData:(NSData *)data
 {
     //_heartbeatFailureCount = 0;
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:AMLocalHeartbeatNotification
+     object:self];
 }
 
 - (void)heartBeat:(AMHeartBeat *)heartBeat didFailWithError:(NSError *)error
@@ -676,10 +685,19 @@
     if (_heartbeatFailureCount >= 5) {
         AMLog(kAMErrorLog, @"AMMesher", @"heartbeat to local server"
               "continue fail more than 5 times");
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:AMLocalHeartbeatDisconnectNotification
+         object:self];
+        
         if (_heartbeatFailureCount % 5 == 0) {
             [self requestUserList];
         }
+    } else {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:AMLocalHeartbeatFailNotification
+         object:self];
     }
+    
 }
 
 

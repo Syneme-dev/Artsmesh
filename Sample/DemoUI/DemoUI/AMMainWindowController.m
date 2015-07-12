@@ -27,6 +27,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMMesher/AMRemoteMesher.h"
+#import "AMMesher/AMLocalMesher.h"
 #import "AMPanelControlBarViewController.h"
 //#import "AMTimer/AMTimer.h"
 #import "AMTimerViewController.h"
@@ -136,6 +137,22 @@
                                     addObserver:self
                                         selector:@selector(heartbeatBlink:)
                                         name:AMHeartbeatDisconnectNotification
+                                        object:nil];
+        
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(localHeartbeatBlink:)
+                                        name:AMLocalHeartbeatNotification
+                                        object:nil];
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(localHeartbeatBlink:)
+                                        name:AMLocalHeartbeatFailNotification
+                                        object:nil];
+        [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                        selector:@selector(localHeartbeatBlink:)
+                                        name:AMLocalHeartbeatDisconnectNotification
                                         object:nil];
         
 
@@ -1120,7 +1137,6 @@
 #pragma mark -
 #pragma mark Heartbeat Monitor Blink
 
-
 - (void) heartbeatBlinkYellow : (NSNotification*) notfication
 {
 //    //Now just
@@ -1146,7 +1162,7 @@
               isEqualToString:AMHeartbeatDisconnectNotification]){
         [self.heartbeatMonitor setImage:
                 [NSImage imageNamed:@"project_broadcast"]];
-    }else{
+    }else {
         return;
     }
    
@@ -1155,5 +1171,32 @@
     [NSThread sleepForTimeInterval:0.2];
     [self.heartbeatMonitor setImage:[NSImage imageNamed:@"black_dot"]];
     [self.heartbeatMonitor setNeedsDisplay:YES];
+}
+
+- (void) localHeartbeatBlink : (NSNotification *) notification {
+    
+    AMMesher *curMesher = [AMMesher sharedAMMesher];
+    switch (curMesher.clusterState) {
+        case kClusterStarted:
+            if ([notification.name isEqualToString:AMLocalHeartbeatFailNotification]) {
+                // Heartbeat failed while meshed, notify user
+                
+                [self.localMesherBtn setImage:[NSImage imageNamed:@"server_starting"]];
+                
+                [self.localMesherBtn setNeedsDisplay:YES];
+                
+                
+            }
+            
+            [NSThread sleepForTimeInterval:0.2];
+            
+            [self.localMesherBtn setImage:[NSImage imageNamed:@"Server_on"]];
+            [self.localMesherBtn setNeedsDisplay:YES];
+            
+            break;
+        default:
+            break;
+    }
+
 }
 @end

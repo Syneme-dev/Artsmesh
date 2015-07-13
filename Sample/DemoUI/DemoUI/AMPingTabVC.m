@@ -19,6 +19,7 @@
 {
     AMUserList* userList;
 }
+@property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 
 @property (weak)                IBOutlet NSTableView*   tableView;
 @property (unsafe_unretained)   IBOutlet NSTextView *   pingContentView;
@@ -224,6 +225,7 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     
     userList = [[AMUserList alloc] init:self.tableView];
     userList.delegate = self;
+    self.useIPV6Check.title = @"USE IPV6";
 }
 
 - (void)viewDidLoad {
@@ -232,6 +234,12 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     userList.pingCommand.contentView = self.pingContentView;
     [userList userGroupsChangedPing:nil];
 }
+
+- (BOOL) useIPV6
+{
+    return self.useIPV6Check.checked;
+}
+
 
 -(NSString*) formatCommand:(NSString*) ip
 {

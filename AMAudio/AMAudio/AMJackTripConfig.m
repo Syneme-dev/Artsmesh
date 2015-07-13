@@ -63,8 +63,8 @@
     [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
 
     
-    [self.roleSelecter addItemWithTitle:@"Server"];
-    [self.roleSelecter addItemWithTitle:@"Client"];
+    [self.roleSelecter addItemWithTitle:@"SERVER"];
+    [self.roleSelecter addItemWithTitle:@"CLIENT"];
     
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
@@ -261,19 +261,19 @@
 
 -(BOOL)checkouJacktripParams
 {
-    if ([self.roleSelecter.stringValue isNotEqualTo:@"Server"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"Client"]) {
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
         return NO;
     }
     
-    if ([self.roleSelecter.stringValue isEqualTo:@"Server"]){
+    if ([self.roleSelecter.stringValue isEqualTo:@"SERVER"]){
         if ([self.peerName.stringValue isEqualTo:@""]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
             [alert runModal];
             return NO;
         }
         
-    }else if([self.roleSelecter.stringValue isEqualTo:@"Client"]||
+    }else if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
              [self.peerAddress.stringValue isEqualTo:@""]){
         if([self.peerName.stringValue isEqualTo:@""]){
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];

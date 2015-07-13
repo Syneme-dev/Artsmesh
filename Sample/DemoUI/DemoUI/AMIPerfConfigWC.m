@@ -13,6 +13,7 @@
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "UIFramework/AMBlueBorderButton.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification";
 
@@ -22,28 +23,91 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
 @property (weak) IBOutlet AMBlueBorderButton *saveButton;
 
 @property (weak) IBOutlet AMPopUpView *roleSelector;
-@property (weak) IBOutlet AMCheckBoxView *useUDP;
-@property (weak) IBOutlet NSTextField *port;
-@property (weak) IBOutlet NSTextField *bandwith;
-@property (weak) IBOutlet AMCheckBoxView *tradeoff;
-@property (weak) IBOutlet AMCheckBoxView *dualtest;
+@property (weak) IBOutlet AMCheckBoxView* useUDPCheck;
+@property (weak) IBOutlet NSTextField *portTF;
+@property (weak) IBOutlet NSTextField *bandwithTF;
+@property (weak) IBOutlet AMCheckBoxView *tradeoffCheck;
+@property (weak) IBOutlet AMCheckBoxView *dualtestCheck;
 @end
 
 @implementation AMIPerfConfig
 
 @end
 
-
 @implementation AMIPerfConfigWC
+
+- (void) saveDefaultPreference
+{
+    NSString* boolStr;
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:_roleSelector.stringValue
+                                                   forKey:Preference_Jacktrip_Role];
+
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:[self checkBoolString:_useUDPCheck]
+     forKey:Preference_iPerf_UseUDP];
+    
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:_portTF.stringValue
+                                                   forKey:Preference_iPerf_Port];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:_bandwithTF.stringValue
+                                                   forKey:Preference_iPerf_Bandwith];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:[self checkBoolString:_tradeoffCheck]
+     forKey:Preference_iPerf_Tradeoff];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:[self checkBoolString:_dualtestCheck]
+     forKey:Preference_iPerf_Dualtest];
+}
+
+- (NSString*) checkBoolString : (AMCheckBoxView*) check
+{
+    return check.checked ? @"YES" : @"NO";
+}
+
+- (void) loadDefaultPreference
+{
+    NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Role];
+    [_roleSelector selectItemWithTitle:roleStr];
+    
+    NSString* useUDPStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_UseUDP];
+    if ([useUDPStr isEqualToString:@"YES"]) {
+        _useUDPCheck.checked = YES;
+    }else{
+        _useUDPCheck.checked = NO;
+    }
+    
+    NSString* portStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Port];
+    [_portTF setStringValue:portStr];
+    
+    NSString* bandwithStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Bandwith];
+    [_bandwithTF setStringValue:bandwithStr];
+    
+    NSString* tradeoffStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Tradeoff];
+    if ([tradeoffStr isEqualToString:@"YES"]) {
+        _tradeoffCheck.checked = YES;
+    }else{
+        _tradeoffCheck.checked = NO;
+    }
+
+    NSString* dualtestStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Dualtest];
+    if ([dualtestStr isEqualToString:@"YES"]) {
+        _dualtestCheck.checked = YES;
+    }else{
+        _dualtestCheck.checked = NO;
+    }
+}
+
+
 
 - (void)windowDidLoad {
     [super windowDidLoad];
     
     _iperfConfig = [[AMIPerfConfig alloc] init];
     [self setupUI];
-   
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (void)itemSelected:(AMPopUpView*)sender
@@ -51,8 +115,8 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     if (sender == self.roleSelector) {
         BOOL clientEnable = [self.roleSelector.stringValue isEqualToString:@"CLIENT"];
         
-        [self.tradeoff setEnabled:clientEnable];
-        [self.dualtest setEnabled:clientEnable];
+        [_tradeoffCheck setEnabled:clientEnable];
+        [_dualtestCheck setEnabled:clientEnable];
     }
 }
 
@@ -70,14 +134,15 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     self.roleSelector.delegate = self;
     [self.roleSelector addItemWithTitle:@"SERVER"];
     [self.roleSelector addItemWithTitle:@"CLIENT"];
-    [self.roleSelector selectItemWithTitle:@"SERVER"];
-   
     
-    self.port.stringValue = @"5001";
+    _useUDPCheck.title = @"UDP";
+    _tradeoffCheck.title = @"TRADEOFF";
+    _dualtestCheck.title = @"DUAL TEST";
     
-    self.useUDP.title = @"UDP";
-    self.tradeoff.title = @"TRADEOFF";
-    self.dualtest.title = @"DUAL TEST";
+    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    
+    
+    [self loadDefaultPreference];
 
 }
 
@@ -88,22 +153,22 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
 - (void) updateIPerfConfig
 {
     _iperfConfig.serverRole = [self.roleSelector.stringValue isEqualTo:@"SERVER"];
-    _iperfConfig.useUDP =[self.useUDP checked];
+    _iperfConfig.useUDP =[_useUDPCheck checked];
     
-    if ([self.port integerValue] > 0) {
-        _iperfConfig.port = [self.port integerValue];
+    if ([_portTF integerValue] > 0) {
+        _iperfConfig.port = [_portTF integerValue];
     }
     
-    if ([self.bandwith integerValue] > 0) {
-        _iperfConfig.bandwith = [self.bandwith integerValue];
+    if ([self.bandwithTF integerValue] > 0) {
+        _iperfConfig.bandwith = [self.bandwithTF integerValue];
     }
     
     if ([self.roleSelector.stringValue isEqualTo:@"SERVER"]) {
         _iperfConfig.tradeoff = NO;
         _iperfConfig.dualtest = NO;
     }else{
-        _iperfConfig.tradeoff = [self.tradeoff checked];
-        _iperfConfig.dualtest = [self.dualtest checked];
+        _iperfConfig.tradeoff = [_tradeoffCheck checked];
+        _iperfConfig.dualtest = [_dualtestCheck checked];
     }
 }
 
@@ -112,7 +177,7 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     if (_iperfConfig.serverRole == YES) {
         [[NSNotificationCenter defaultCenter] postNotificationName:AMIPerfServerStartNotification object:nil];
     }
-    
+    [self saveDefaultPreference];
     [self.window close];
 }
 

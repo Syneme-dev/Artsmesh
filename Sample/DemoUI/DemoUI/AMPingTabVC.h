@@ -24,6 +24,7 @@
 
 @protocol AMUserListDelegate <NSObject>
 //-(void) outputString:(NSString*) output;
+- (BOOL) useIPV6;
 -(NSString*) formatCommand:(NSString*) ip;
 @end
 

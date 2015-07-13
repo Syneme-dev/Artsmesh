@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
@@ -9,17 +8,18 @@
             <connections>
                 <outlet property="pingContentView" destination="Ptz-iv-fGi" id="yWy-TM-Gnz"/>
                 <outlet property="tableView" destination="Yzk-qz-Uuc" id="1QN-m7-BvW"/>
+                <outlet property="useIPV6Check" destination="bJA-5t-kXS" id="ib4-X2-d2c"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView identifier="pingTab" id="Hz6-mo-xeY">
+        <customView identifier="pingTab" id="Hz6-mo-xeY" customClass="AMBackgroundView">
             <rect key="frame" x="0.0" y="12" width="661" height="532"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjL-Yh-oqa">
-                    <rect key="frame" x="0.0" y="0.0" width="178" height="532"/>
+                    <rect key="frame" x="0.0" y="92" width="178" height="439"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="MKy-2R-F1N">
                         <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +112,7 @@
                     </scroller>
                 </scrollView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ET9-sI-9Qn">
-                    <rect key="frame" x="178" y="-7" width="483" height="539"/>
+                    <rect key="frame" x="178" y="92" width="483" height="439"/>
                     <clipView key="contentView" copiesOnScroll="NO" id="Bnl-pW-oct">
                         <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,10 +121,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="415" height="539"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.1764705926" green="0.1764705926" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                                <size key="minSize" width="483" height="539"/>
+                                <size key="minSize" width="483" height="439"/>
                                 <size key="maxSize" width="483" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="483" height="539"/>
+                                <size key="minSize" width="483" height="439"/>
                                 <size key="maxSize" width="483" height="10000000"/>
                             </textView>
                         </subviews>
@@ -138,14 +138,24 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="bJA-5t-kXS" customClass="AMCheckBoxView">
+                    <rect key="frame" x="32" y="66" width="86" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="HBp-RZ-OKi"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Lgn-WC-AUn"/>
+                        <constraint firstAttribute="width" constant="86" id="lvB-da-zLd"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ET9-sI-9Qn" secondAttribute="trailing" id="Tvv-se-Y9q"/>
                 <constraint firstItem="ET9-sI-9Qn" firstAttribute="leading" secondItem="IjL-Yh-oqa" secondAttribute="trailing" id="UAe-XP-6D6"/>
-                <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="sds-mC-euP"/>
+                <constraint firstItem="bJA-5t-kXS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="X6x-YZ-i5M"/>
+                <constraint firstItem="bJA-5t-kXS" firstAttribute="top" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="6" id="XVW-L8-jxx"/>
+                <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="sds-mC-euP"/>
                 <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="ET9-sI-9Qn" secondAttribute="top" id="vwf-JO-3BI"/>
-                <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" id="xbw-F7-7gl"/>
-                <constraint firstAttribute="bottom" secondItem="ET9-sI-9Qn" secondAttribute="bottom" constant="-7" id="xla-Ko-4cv"/>
+                <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="92" id="xbw-F7-7gl"/>
+                <constraint firstAttribute="bottom" secondItem="ET9-sI-9Qn" secondAttribute="bottom" constant="92" id="xla-Ko-4cv"/>
                 <constraint firstItem="IjL-Yh-oqa" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="ylY-Ss-aDl"/>
             </constraints>
             <point key="canvasLocation" x="297.5" y="259"/>

@@ -7,14 +7,14 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfConfigWC">
             <connections>
-                <outlet property="bandwith" destination="5HQ-pd-kmP" id="Sou-Ke-NqI"/>
+                <outlet property="bandwithTF" destination="5HQ-pd-kmP" id="0Hj-Eu-jQX"/>
                 <outlet property="cancelButton" destination="5K0-E9-hMp" id="skV-kx-4wO"/>
-                <outlet property="dualtest" destination="xru-AA-yLI" id="qTT-Kl-orZ"/>
-                <outlet property="port" destination="cmX-pP-YII" id="eFt-Os-2sK"/>
+                <outlet property="dualtestCheck" destination="xru-AA-yLI" id="6jg-NF-bVv"/>
+                <outlet property="portTF" destination="cmX-pP-YII" id="VIg-rD-dkt"/>
                 <outlet property="roleSelector" destination="C9F-uy-qCw" id="Tae-EO-CAj"/>
                 <outlet property="saveButton" destination="o4d-kq-sm5" id="rDi-Ry-UBN"/>
-                <outlet property="tradeoff" destination="BTv-wj-Z6F" id="AP7-49-89f"/>
-                <outlet property="useUDP" destination="YEq-wm-86G" id="99P-lD-hYP"/>
+                <outlet property="tradeoffCheck" destination="BTv-wj-Z6F" id="QxU-LU-55j"/>
+                <outlet property="useUDPCheck" destination="YEq-wm-86G" id="BWT-7f-AJW"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -35,14 +35,6 @@
                             <font key="font" size="13" name="FoundryMonoline-Bold"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HQ-pd-kmP" customClass="AMFoundryFontView">
-                        <rect key="frame" x="160" y="92" width="82" height="20"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="BANDWITH" drawsBackground="YES" id="Yga-W0-HPy">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>
                     </textField>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C9F-uy-qCw" customClass="AMPopUpView">
@@ -137,6 +129,14 @@
                             <action selector="saveClicked:" target="-2" id="s2p-WZ-5p5"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HQ-pd-kmP" customClass="AMFoundryFontView">
+                        <rect key="frame" x="160" y="92" width="82" height="20"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="BANDWITH" drawsBackground="YES" id="Yga-W0-HPy">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>

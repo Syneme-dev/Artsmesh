@@ -134,6 +134,13 @@
 #define Preference_Jacktrip_Jamlink         @"Preference_Jacktrip_Jamlink"
 #define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
 
+/////////////////////////iPerf Default/////////////////////////
+#define Preference_iPerf_Role               @"Preference_iPerf_Role"
+#define Preference_iPerf_UseUDP             @"Preference_iPerf_UseUDP"
+#define Preference_iPerf_Port               @"Preference_iPerf_Port"
+#define Preference_iPerf_Bandwith           @"Preference_iPerf_Bandwith"
+#define Preference_iPerf_Tradeoff           @"Preference_iPerf_Tradeoff"
+#define Preference_iPerf_Dualtest           @"Preference_iPerf_Dualtest"
 
 #import <Foundation/Foundation.h>
 

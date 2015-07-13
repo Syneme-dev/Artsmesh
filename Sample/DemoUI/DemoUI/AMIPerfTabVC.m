@@ -19,7 +19,7 @@
     AMIPerfConfigWC* _configController;
 }
 @property (weak) IBOutlet NSButton *settingButton;
-@property (weak) IBOutlet AMCheckBoxView *useIPV6;
+@property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *iperfContentView;
 @property (weak) IBOutlet AMCheckBoxView *serverCheck;
@@ -39,15 +39,17 @@
     [userList userGroupsChangedPing:nil];
     
     self.serverCheck.delegate = self;
-    //self.useIPV4.delegate = self;
-    self.useIPV6.title = @"USE IPV6";
+    self.useIPV6Check.title = @"USE IPV6";
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-    
+}
+
+- (BOOL) useIPV6
+{
+    return self.useIPV6Check.checked;
 }
 
 -(NSString*) formatCommand:(NSString*) ip
@@ -73,7 +75,7 @@
         }
         
         
-        if (self.useIPV6.checked) {
+        if (self.useIPV6Check.checked) {
             [command appendFormat:@" -V"];
         }
         
@@ -97,7 +99,7 @@
             [command appendFormat:@" -p %d", (int)cfg.port];
         }
         
-        if (self.useIPV6.checked) {
+        if (self.useIPV6Check.checked) {
             [command appendFormat:@" -V"];
         }
         

@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <AMCommonTools/AMCommonTools.h>
 
+extern NSString * const AMLocalHeartbeatFailNotification;
+extern NSString * const AMLocalHeartbeatDisconnectNotification;
+extern NSString * const AMLocalHeartbeatNotification;
+
 @protocol AMHeartBeatDelegate;
 
 @interface AMLocalMesher : NSObject

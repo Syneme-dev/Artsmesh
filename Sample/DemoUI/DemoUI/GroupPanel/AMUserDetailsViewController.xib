@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMUserDetailsViewController">
@@ -33,7 +33,7 @@
                         <constraint firstAttribute="height" constant="17" id="ukc-hZ-fLV"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="NICK NAME:" id="IWS-LJ-mRd">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -44,7 +44,7 @@
                         <constraint firstAttribute="height" constant="22" id="eLm-gQ-3M6"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="tFe-ak-41r" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -63,7 +63,7 @@
                         <constraint firstAttribute="width" constant="75" id="BDe-vw-7mJ"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FULL NAME:" id="ma0-5C-zZG">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -74,7 +74,7 @@
                         <constraint firstAttribute="height" constant="22" id="1AK-iO-Snf"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="dTg-J3-AM4" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -96,7 +96,7 @@
                         <constraint firstAttribute="width" constant="81" id="IVk-OJ-3Ru"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AFFILIATION:" id="mb1-6l-vll">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -107,7 +107,7 @@
                         <constraint firstAttribute="height" constant="22" id="Ear-XI-57h"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="4Gg-ls-odc" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -129,7 +129,7 @@
                         <constraint firstAttribute="width" constant="78" id="w4t-pl-LAo"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LOCATION:" id="9dJ-08-Unv">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -140,7 +140,7 @@
                         <constraint firstAttribute="height" constant="22" id="2Gp-UY-H4r"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="uzs-UT-oGk" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -162,7 +162,7 @@
                         <constraint firstAttribute="height" constant="17" id="YPt-4w-F7S"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PUBLIC IP:" id="G6P-ub-10g">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -173,7 +173,7 @@
                         <constraint firstAttribute="height" constant="22" id="EvN-6U-lD2"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="E4g-pR-QwC" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -194,7 +194,7 @@
                         <constraint firstAttribute="width" constant="70" id="Wet-Fe-5de"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PRIVATE IP:" id="LUr-Kg-kYU">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -205,7 +205,7 @@
                         <constraint firstAttribute="height" constant="22" id="dLf-gC-sd3"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="u2f-PX-I4v" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -247,7 +247,7 @@
                         <constraint firstAttribute="width" constant="150" id="lZB-k6-AZW"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BIOGRAPHY:" id="bJh-6l-M5n">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -258,7 +258,7 @@
                         <constraint firstAttribute="height" constant="129" id="ENc-5r-mG5"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="WXn-rA-9uX" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -286,8 +286,8 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="hJQ-v6-N1M">
-                    <rect key="frame" x="270" y="2" width="204" height="35"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="hJQ-v6-N1M" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="0.0" y="2" width="474" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="FkV-7r-tON"/>
                     </constraints>
@@ -309,7 +309,7 @@
                         <constraint firstAttribute="width" constant="91" id="M14-XQ-l5j"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IPV6 ADDRESS:" id="EQ9-Bs-2BN">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -320,7 +320,7 @@
                         <constraint firstAttribute="height" constant="22" id="zPP-pl-gKv"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="UWO-8U-9bW" customClass="AMTextFieldCell">
-                        <font key="font" size="13" name="FoundryMonoline-Bold"/>
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                     </textFieldCell>
@@ -386,7 +386,6 @@
                 <constraint firstItem="FpD-Zw-33Q" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="108" id="Yfa-lf-fd7"/>
                 <constraint firstItem="ZKH-F6-Mj7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="161" id="Yzb-uR-JIr"/>
                 <constraint firstAttribute="bottom" secondItem="hJQ-v6-N1M" secondAttribute="bottom" constant="2" id="Zoq-lp-Web"/>
-                <constraint firstItem="hJQ-v6-N1M" firstAttribute="leading" secondItem="RiU-cY-hjq" secondAttribute="trailing" constant="22" id="Ztc-Hb-Ez9"/>
                 <constraint firstItem="ZR8-b6-HD3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="14" id="aGk-hT-nCN"/>
                 <constraint firstItem="pUT-Gg-R3A" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="14" id="azx-D6-Zyc"/>
                 <constraint firstItem="gsP-M0-Wda" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="78" id="bUA-ap-dDp"/>
@@ -415,6 +414,7 @@
                 <constraint firstItem="JTo-8u-j9f" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="288" id="uxs-hE-68h"/>
                 <constraint firstAttribute="trailing" secondItem="dbP-wD-OCe" secondAttribute="trailing" constant="20" id="v5r-j0-1q9"/>
                 <constraint firstItem="30Z-xo-bjM" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="138" id="vUF-ji-hhH"/>
+                <constraint firstItem="hJQ-v6-N1M" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="xAk-Vw-c14"/>
                 <constraint firstItem="ade-v1-z2G" firstAttribute="centerY" secondItem="wI0-WK-Uj1" secondAttribute="centerY" id="yAh-Ud-Ns7"/>
                 <constraint firstItem="j5o-wr-5tK" firstAttribute="top" secondItem="kad-mE-AqX" secondAttribute="top" id="yhX-b5-4M7"/>
                 <constraint firstItem="GlZ-SU-aWS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="14" id="ymB-q5-rCH"/>

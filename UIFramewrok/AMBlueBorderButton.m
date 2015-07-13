@@ -26,7 +26,7 @@
 {
 
 //    [self.layer setBorderWidth:1.0];
-    [self.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.layer setBorderColor: UI_Color_b7b7b7.CGColor];
     
     // Drawing code here.
     if(!self.enabled){
@@ -39,7 +39,7 @@
         [self.layer setBorderWidth:1.0];
 //        [self.cell setBackgroundColor:[NSColor whiteColor]];
     }
-     [AMButtonHandler changeTabTextColor:self toColor:UI_Color_blue];
+     [AMButtonHandler changeTabTextColor:self toColor:UI_Color_b7b7b7];
     
 }
 //

@@ -167,6 +167,17 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     return _userList.count;
 }
 
+/*
+if you want to test with ipv6 address, it will try its best to (local, remote or public).
+test with local group ipv4, you have to use the local private ipv4.
+test with remote group on ipv4, you have to use their public IPv4 (can’t use private ipv4).
+ 
+How to determine someone is local or remote?
+  just check myself whether meshed or unmeshed.
+	1. If my computer is unmeshed, there is no doubt that everyone I see is local, so they should only have private ip.
+	2. If my computer is meshed, everyone I see most likely have a public ip. If someone don’t have public ip, that means he is my local group which connected by private ip.
+ */
+
 - (void) onChecked:(AMCheckBoxView *)sender
 {
     if (sender.checked == NO) {
@@ -176,17 +187,18 @@ viewForTableColumn:(NSTableColumn *)tableColumn
     for (AMUserListItem* userItem in self.userList) {
         if([userItem.checkbox isEqual:sender]){
             NSString* ip;
-            if ([userItem.user isOnline]){
-                ip= userItem.user.publicIp;
-            }else{
-                ip= userItem.user.privateIp;
-            }
-            if (ip == nil) {
-                ip= userItem.user.publicIp;
-            }
             
+            
+            if([_delegate useIPV6] && userItem.user.ipv6Address){
+                ip = userItem.user.ipv6Address;
+            }else{// below is ipv4
+                if ([userItem.user isOnline] && userItem.user.publicIp){
+                    ip= userItem.user.publicIp;
+                }else{
+                    ip= userItem.user.privateIp;
+                }
+            }
             NSString *command = [self.delegate formatCommand:ip];
-            
             
             [self.pingCommand stop];
             self.pingCommand.command = command;

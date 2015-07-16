@@ -20,6 +20,7 @@
     AMUserList* userList;
 }
 @property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
+@property (weak) IBOutlet NSView *inputField;
 
 @property (weak)                IBOutlet NSTableView*   tableView;
 @property (unsafe_unretained)   IBOutlet NSTextView *   pingContentView;
@@ -40,7 +41,10 @@
 
 @implementation AMUserList
 
+
+
 - (instancetype) init:(NSTableView*) tv
+           inputField:(NSView*) view
 {
     if (self = [super init]) {
         self.tableView   = tv;
@@ -54,10 +58,71 @@
                                           object:nil];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        
+        [self addInputField:tv FatherView:view];
     }
     return self;
 }
 
+- (instancetype) init:(NSTableView*) tv
+{
+    if (self = [super init]) {
+        self.tableView   = tv;
+        self.userList    = [[NSMutableArray alloc] init];
+        self.pingCommand = [[AMNetworkToolsCommand alloc] init];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(userGroupsChangedPing:)
+         name: AM_LIVE_GROUP_CHANDED
+         object:nil];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        
+    }
+    return self;
+}
+
+-(void) addInputField:(NSTableView*) refView FatherView:(NSView*) fview
+{
+    NSRect tableFrame = [refView frame];
+    NSInteger height = 30;
+    NSInteger width  = tableFrame.size.width;
+    NSInteger xStart = tableFrame.origin.x;
+    NSInteger yStart = tableFrame.origin.y + 6;
+    
+    NSRect  rectFrame = NSMakeRect(xStart, yStart, width, height);
+   [fview setFrame:rectFrame];
+    
+    //Add a checkbox
+    NSRect rectCheck = NSMakeRect(0, 0, 30, 30);
+    AMCheckBoxView* checkbox = [[AMCheckBoxView alloc] initWithFrame:rectCheck];
+    
+    //Add a text field
+    NSFont *font = [NSFont fontWithName:@"FoundryMonoline"
+                                   size:12.0f];
+    
+    CGFloat fieldHeight = [self heightOfTextFieldWithString:@"255.255.255.255"
+                                                 width:width-40 font:font];
+    NSTextField* field = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 2, 130, fieldHeight)];
+    
+    field.font = font;
+    field.bordered = NO;
+    field.editable = YES;
+    field.backgroundColor = [NSColor clearColor];
+    [field setFocusRingType:NSFocusRingTypeNone];
+    [field setTextColor:LIGHT_GRAY];
+    
+
+    field.stringValue = @"10.0.0.3";
+    NSRect rectTF = field.frame;
+    rectTF.origin.x += 40;
+    [field setFrame:rectTF];
+    
+    
+    [fview addSubview:checkbox];
+    [fview addSubview:field];
+}
 
 - (id)tableView:(NSTableView *)tableView
 viewForTableColumn:(NSTableColumn *)tableColumn
@@ -232,7 +297,8 @@ How to determine someone is local or remote? Check whether someone is online. If
 {
     [super awakeFromNib];
     
-    userList = [[AMUserList alloc] init:self.tableView];
+    userList = [[AMUserList alloc] init:self.tableView
+                inputField:_inputField];
     userList.delegate = self;
     self.useIPV6Check.title = @"USE IPV6";
 }

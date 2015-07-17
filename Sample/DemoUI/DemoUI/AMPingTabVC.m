@@ -14,6 +14,7 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 #import "UIFramework/AMUIConst.h"
+#import "AMCommonTools/AMCommonTools.h"
 
 @interface AMPingTabVC () <AMCheckBoxDelegeate,AMUserListDelegate>
 {
@@ -95,8 +96,9 @@
    [fview setFrame:rectFrame];
     
     //Add a checkbox
-    NSRect rectCheck = NSMakeRect(0, 0, 30, 30);
-    AMCheckBoxView* checkbox = [[AMCheckBoxView alloc] initWithFrame:rectCheck];
+    NSRect rectCheck = NSMakeRect(1, 0, 30, 30);
+    _userDefinedCheck = [[AMCheckBoxView alloc] initWithFrame:rectCheck];
+    _userDefinedCheck.delegate = self;
     
     //Add a text field
     NSFont *font = [NSFont fontWithName:@"FoundryMonoline"
@@ -104,24 +106,25 @@
     
     CGFloat fieldHeight = [self heightOfTextFieldWithString:@"255.255.255.255"
                                                  width:width-40 font:font];
-    NSTextField* field = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 2, 130, fieldHeight)];
+    _userDefinedTF = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 4, 130, fieldHeight)];
     
-    field.font = font;
-    field.bordered = NO;
-    field.editable = YES;
-    field.backgroundColor = [NSColor clearColor];
-    [field setFocusRingType:NSFocusRingTypeNone];
-    [field setTextColor:LIGHT_GRAY];
+    _userDefinedTF.font = font;
+    _userDefinedTF.bordered = NO;
+    _userDefinedTF.editable = YES;
+    _userDefinedTF.backgroundColor = UI_Color_3c4b5d;
+    _userDefinedTF.drawsBackground = YES;
+    [_userDefinedTF setFocusRingType:NSFocusRingTypeNone];
+    [_userDefinedTF setTextColor:LIGHT_GRAY];
     
 
-    field.stringValue = @"10.0.0.3";
-    NSRect rectTF = field.frame;
+    _userDefinedTF.stringValue = @"10.0.1.13";
+    NSRect rectTF = _userDefinedTF.frame;
     rectTF.origin.x += 40;
-    [field setFrame:rectTF];
+    [_userDefinedTF setFrame:rectTF];
     
     
-    [fview addSubview:checkbox];
-    [fview addSubview:field];
+    [fview addSubview:_userDefinedCheck];
+    [fview addSubview:_userDefinedTF];
 }
 
 - (id)tableView:(NSTableView *)tableView
@@ -242,15 +245,32 @@ How to determine someone is local or remote? Check whether someone is online. If
 
 - (void) onChecked:(AMCheckBoxView *)sender
 {
+    //If the user defined checkbox, you must make sure the ip is valid
+    if ([sender isEqual:_userDefinedCheck]) {
+        NSString* userIP = _userDefinedTF.stringValue;
+        if (![AMCommonTools isValidIpv4:userIP] &&
+            ![AMCommonTools isValidIpv6:userIP]) {
+            sender.checked = !sender.checked;
+            return;
+        }
+        for (AMUserListItem* userItem in self.userList) {
+            userItem.checkbox.checked = NO;
+        }
+        NSString *command = [self.delegate formatCommand:userIP];
+                
+        [self.pingCommand stop];
+        self.pingCommand.command = command;
+        [self.pingCommand run];
+        
+        return;
+    }
+    
     if (sender.checked == NO) {
         sender.checked = YES;
     }
-    
     for (AMUserListItem* userItem in self.userList) {
         if([userItem.checkbox isEqual:sender]){
             NSString* ip;
-            
-            
             if([_delegate useIPV6] && userItem.user.ipv6Address){
                 ip = userItem.user.ipv6Address;
             }else{// below is ipv4
@@ -268,8 +288,9 @@ How to determine someone is local or remote? Check whether someone is online. If
         }else{
             userItem.checkbox.checked = NO;
         }
-        
     }
+    
+    _userDefinedCheck.checked = NO;
 }
 
 -(void)executeCommand : (NSString*) command

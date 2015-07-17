@@ -35,6 +35,10 @@
     //for user list
     NSInteger           _selectedIndex;
     NSString*           _lastName;
+    
+    //User defined checkbox and TextField
+    AMCheckBoxView*     _userDefinedCheck;
+    NSTextField*        _userDefinedTF;
 }
 @property id<AMUserListDelegate> delegate;
 -(void)executeCommand : (NSString*) command;

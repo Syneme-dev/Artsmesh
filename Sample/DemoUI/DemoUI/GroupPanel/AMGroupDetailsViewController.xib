@@ -295,7 +295,7 @@
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-CK-gOS" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="200" y="0.0" width="200" height="40"/>
+                    <rect key="frame" x="202" y="0.0" width="201" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Sl2-3I-vUT"/>
                     </constraints>
@@ -308,9 +308,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ohb-E3-LdX" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="202" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="2Ur-hn-t7e"/>
                         <constraint firstAttribute="height" constant="40" id="HYd-co-kuH"/>
                     </constraints>
                     <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="gsx-If-MIM" customClass="AMBlueBorderButtonCell">
@@ -347,6 +346,7 @@ Gw
                 <constraint firstItem="fH2-bF-0r7" firstAttribute="leading" secondItem="mnf-kZ-lHp" secondAttribute="leading" id="Hsi-JB-CFg"/>
                 <constraint firstItem="lmy-Bl-QYv" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="43" id="I9N-Pg-b8l"/>
                 <constraint firstItem="lXE-X0-FOn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="193" id="JeL-wI-Ojt"/>
+                <constraint firstAttribute="trailing" secondItem="Yyg-CK-gOS" secondAttribute="trailing" id="KlL-lE-nX5"/>
                 <constraint firstItem="fH2-bF-0r7" firstAttribute="top" secondItem="mnf-kZ-lHp" secondAttribute="bottom" constant="8" symbolic="YES" id="L4X-Lo-V6f"/>
                 <constraint firstItem="G8N-rX-Ehd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="223" id="Lao-7P-BYE"/>
                 <constraint firstItem="mnf-kZ-lHp" firstAttribute="top" secondItem="zfD-96-zVr" secondAttribute="top" id="LlW-1E-cRT"/>

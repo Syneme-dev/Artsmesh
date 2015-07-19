@@ -90,12 +90,6 @@
                     <rect key="frame" x="20" y="698" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Oha-Hb-0x0"/>
                 </imageView>
-                <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="KqI-CG-33j">
-                    <rect key="frame" x="20" y="670" width="560" height="5"/>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
-                </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EjM-ag-Utu" customClass="AMBlueBorderButton">
                     <rect key="frame" x="20" y="628" width="300" height="40"/>
                     <buttonCell key="cell" type="square" title="LOGIN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uWV-rG-bZc">

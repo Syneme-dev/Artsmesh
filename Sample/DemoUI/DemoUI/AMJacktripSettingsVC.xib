@@ -23,7 +23,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <view id="SgO-GO-2jg">
+        <view wantsLayer="YES" id="SgO-GO-2jg">
             <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -280,7 +280,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYy-PC-fBl" customClass="AMBlueBorderButton">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="ZYy-PC-fBl" customClass="AMBlueBorderButton">
                     <rect key="frame" x="5" y="444" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="IB2-iN-C2U"/>
@@ -294,7 +294,7 @@
                         <action selector="cancelPref:" target="-2" id="1cY-pV-u8F"/>
                     </connections>
                 </button>
-                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
                     <rect key="frame" x="305" y="444" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="boT-qX-UqN"/>

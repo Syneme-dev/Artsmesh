@@ -347,7 +347,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="1Ie-dT-ZUF"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="mJU-Mw-OSu">
+                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="mJU-Mw-OSu" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -593,7 +593,7 @@
                         <constraint firstAttribute="width" constant="300" id="W8z-D6-Kju"/>
                         <constraint firstAttribute="height" constant="40" id="wGy-wD-b43"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="yAR-63-xj5">
+                    <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="yAR-63-xj5" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

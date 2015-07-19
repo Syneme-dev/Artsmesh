@@ -280,13 +280,13 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="ZYy-PC-fBl" customClass="AMBlueBorderButton">
+                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYy-PC-fBl" customClass="AMBlueBorderButton">
                     <rect key="frame" x="5" y="444" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="IB2-iN-C2U"/>
                         <constraint firstAttribute="height" constant="40" id="RDi-Nb-Xet"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7LE-iB-0CF">
+                    <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7LE-iB-0CF" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -294,13 +294,13 @@
                         <action selector="cancelPref:" target="-2" id="1cY-pV-u8F"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="306" y="444" width="300" height="40"/>
+                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-gc-NhV" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="305" y="444" width="300" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="boT-qX-UqN"/>
                         <constraint firstAttribute="height" constant="40" id="fOI-ci-Acg"/>
                     </constraints>
-                    <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="2ur-8O-vfh">
+                    <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="2ur-8O-vfh" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -328,7 +328,7 @@
                 <constraint firstItem="Rzr-Pb-jXz" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="GfM-Ai-cJV"/>
                 <constraint firstItem="4Y8-WF-PEp" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="196" id="HKV-Qo-TeP"/>
                 <constraint firstItem="vch-iU-wWM" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="255" id="HmA-gs-gcX"/>
-                <constraint firstItem="Eom-gc-NhV" firstAttribute="leading" secondItem="ZYy-PC-fBl" secondAttribute="trailing" constant="1" id="JWi-DV-KLT"/>
+                <constraint firstItem="Eom-gc-NhV" firstAttribute="leading" secondItem="ZYy-PC-fBl" secondAttribute="trailing" id="JWi-DV-KLT"/>
                 <constraint firstItem="yq9-Fb-d7T" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Jv9-Ce-YNV"/>
                 <constraint firstItem="d2a-V7-mke" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Lmv-va-D6M"/>
                 <constraint firstItem="ya2-ye-TVY" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="Lsv-8d-06O"/>

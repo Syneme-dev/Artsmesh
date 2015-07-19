@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticGroupDetailsViewController">
@@ -123,12 +123,12 @@
                         <binding destination="-2" name="value" keyPath="self.staticGroup.modified" id="wGs-JR-bmr"/>
                     </connections>
                 </textField>
-                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xr-aO-LvL">
+                <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xr-aO-LvL" customClass="AMBlueBorderButton">
                     <rect key="frame" x="244" y="0.0" width="182" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="est-YU-3AG"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="4dm-c1-UZU">
+                    <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="4dm-c1-UZU" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -210,12 +210,12 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v" customClass="AMBlueBorderButton">
                     <rect key="frame" x="18" y="0.0" width="191" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="9u9-qb-Dlr"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="APPLY TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS">
+                    <buttonCell key="cell" type="square" title="APPLY TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

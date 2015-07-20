@@ -29,7 +29,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <view id="prV-Gl-ilF" customClass="AMTabItemView">
+        <view wantsLayer="YES" id="prV-Gl-ilF" customClass="AMTabItemView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="707"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -116,7 +116,7 @@
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="F1Q-aN-Okn">
-                    <rect key="frame" x="-4" y="96" width="4" height="1"/>
+                    <rect key="frame" x="-6" y="98" width="4" height="1"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
@@ -181,9 +181,12 @@
                         <outlet property="delegate" destination="-2" id="7sd-Lx-aa8"/>
                     </connections>
                 </customView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="0.0" y="74" width="300" height="40"/>
-                    <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="642-7q-QIt">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="0.0" y="20" width="301" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Mp8-Ih-pJr"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="642-7q-QIt" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
@@ -342,9 +345,12 @@ Gw
                         <outlet property="delegate" destination="-2" id="dyy-ny-u8a"/>
                     </connections>
                 </customView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED" customClass="AMBlueBorderButton">
-                    <rect key="frame" x="301" y="74" width="300" height="40"/>
-                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JPa-Wc-0kP">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="300" y="20" width="300" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="dfb-K4-Q1c"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JPa-Wc-0kP" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -353,6 +359,14 @@ Gw
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstItem="hJg-c1-QdD" firstAttribute="width" secondItem="VXR-lw-yED" secondAttribute="width" id="VZf-aI-zeQ"/>
+                <constraint firstItem="hJg-c1-QdD" firstAttribute="centerY" secondItem="VXR-lw-yED" secondAttribute="centerY" id="aZP-kE-ZjR"/>
+                <constraint firstItem="hJg-c1-QdD" firstAttribute="leading" secondItem="prV-Gl-ilF" secondAttribute="leading" id="bYV-Lp-Lc8"/>
+                <constraint firstItem="VXR-lw-yED" firstAttribute="leading" secondItem="hJg-c1-QdD" secondAttribute="trailing" constant="-1" id="fJB-e2-8VX"/>
+                <constraint firstAttribute="trailing" secondItem="VXR-lw-yED" secondAttribute="trailing" id="h0j-mk-f4x"/>
+                <constraint firstAttribute="bottom" secondItem="hJg-c1-QdD" secondAttribute="bottom" constant="20" id="yeJ-da-B6T"/>
+            </constraints>
             <point key="canvasLocation" x="341" y="-0.5"/>
         </view>
     </objects>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticUserDetailsViewController">
@@ -190,35 +190,25 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="gBV-X7-L5C">
-                    <rect key="frame" x="206" y="1" width="147" height="35"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="gBV-X7-L5C" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="mTX-6Q-ax4"/>
+                        <constraint firstAttribute="height" constant="40" id="mTX-6Q-ax4"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="NFf-xA-Cmr">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                    <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="NFf-xA-Cmr" customClass="AMBlueBorderButtonCell">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="closeBtnClicked:" target="-2" id="hw3-Km-CKC"/>
                     </connections>
                 </button>
-                <box hidden="YES" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="r7g-pO-mAq">
-                    <rect key="frame" x="175" y="10" width="4" height="40"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="FY4-sE-1Hv" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="186" y="0.0" width="187" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="e1t-AU-ePM"/>
-                        <constraint firstAttribute="width" id="tbb-al-XTs"/>
+                        <constraint firstAttribute="height" constant="40" id="EWp-XL-oel"/>
                     </constraints>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" metaFont="system"/>
-                </box>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="FY4-sE-1Hv">
-                    <rect key="frame" x="20" y="1" width="136" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="EWp-XL-oel"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" title="APPLY TO LIVEUSER" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="b0i-Zc-3jL">
+                    <buttonCell key="cell" type="square" title="APPLY TO LIVEUSER" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="b0i-Zc-3jL" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -231,34 +221,34 @@
                 <constraint firstAttribute="trailing" secondItem="kMz-rn-L2o" secondAttribute="trailing" constant="20" id="1kO-rv-Bpx"/>
                 <constraint firstItem="3mc-a1-LsP" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="45" id="3fA-5r-nfQ"/>
                 <constraint firstItem="g8M-VH-2fX" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="47" id="4KA-EJ-AGF"/>
-                <constraint firstAttribute="bottom" secondItem="FY4-sE-1Hv" secondAttribute="bottom" constant="1" id="8mw-6r-Vy6"/>
+                <constraint firstAttribute="bottom" secondItem="FY4-sE-1Hv" secondAttribute="bottom" id="8mw-6r-Vy6"/>
                 <constraint firstItem="3mc-a1-LsP" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="47" id="9TY-Fd-tWj"/>
-                <constraint firstAttribute="trailing" secondItem="gBV-X7-L5C" secondAttribute="trailing" constant="20" id="AMQ-3G-kGO"/>
+                <constraint firstItem="gBV-X7-L5C" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="AX1-Vi-oSO"/>
                 <constraint firstItem="1e6-rb-wn7" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="286" id="C6F-0m-5bq"/>
                 <constraint firstItem="Lgc-2X-4li" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="Dmc-So-zp1"/>
+                <constraint firstItem="FY4-sE-1Hv" firstAttribute="width" secondItem="gBV-X7-L5C" secondAttribute="width" id="Esl-WO-uEc"/>
                 <constraint firstItem="Ai3-Zs-8Bf" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="Ft6-vr-z9f"/>
                 <constraint firstItem="Ai3-Zs-8Bf" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="75" id="Gu6-T4-LpX"/>
-                <constraint firstAttribute="bottom" secondItem="r7g-pO-mAq" secondAttribute="bottom" constant="10" id="IYD-0D-Ls4"/>
                 <constraint firstAttribute="trailing" secondItem="1e6-rb-wn7" secondAttribute="trailing" constant="20" id="Il9-e9-zgQ"/>
                 <constraint firstItem="Q9g-Ta-yHq" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="261" id="NR8-Gt-OyD"/>
                 <constraint firstItem="pvA-8i-8Jp" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="106" id="Pfm-u3-FhM"/>
+                <constraint firstItem="FY4-sE-1Hv" firstAttribute="leading" secondItem="gBV-X7-L5C" secondAttribute="trailing" constant="-1" id="Qnc-ds-VGt"/>
+                <constraint firstAttribute="trailing" secondItem="FY4-sE-1Hv" secondAttribute="trailing" id="R4L-LH-qlb"/>
                 <constraint firstItem="1e6-rb-wn7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="47" id="TRA-Ay-8jX"/>
-                <constraint firstItem="gBV-X7-L5C" firstAttribute="leading" secondItem="r7g-pO-mAq" secondAttribute="trailing" constant="29" id="UUw-R5-Xfc"/>
-                <constraint firstAttribute="centerX" secondItem="r7g-pO-mAq" secondAttribute="centerX" constant="9.5" id="UhH-Oi-6yG"/>
                 <constraint firstAttribute="trailing" secondItem="g8M-VH-2fX" secondAttribute="trailing" constant="20" id="Uv2-tp-DPi"/>
+                <constraint firstItem="FY4-sE-1Hv" firstAttribute="height" secondItem="gBV-X7-L5C" secondAttribute="height" id="VMS-oa-Ney"/>
                 <constraint firstItem="kMz-rn-L2o" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="47" id="Xsi-90-ZOQ"/>
-                <constraint firstItem="FY4-sE-1Hv" firstAttribute="top" secondItem="r7g-pO-mAq" secondAttribute="bottom" constant="-26" id="b2H-cY-F4d"/>
                 <constraint firstItem="WWZ-MF-BJS" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="130" id="cwi-DW-bDO"/>
-                <constraint firstItem="FY4-sE-1Hv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="fbS-QQ-4vn"/>
                 <constraint firstItem="Q9g-Ta-yHq" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="hgh-zm-IWB"/>
                 <constraint firstItem="Lgc-2X-4li" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="idL-XU-QH0"/>
                 <constraint firstItem="g8M-VH-2fX" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="155" id="ix0-Zu-xXY"/>
-                <constraint firstAttribute="bottom" secondItem="gBV-X7-L5C" secondAttribute="bottom" constant="1" id="n9X-fz-yZg"/>
+                <constraint firstAttribute="bottom" secondItem="gBV-X7-L5C" secondAttribute="bottom" id="n9X-fz-yZg"/>
                 <constraint firstItem="WWZ-MF-BJS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="oDL-zL-38f"/>
                 <constraint firstAttribute="trailing" secondItem="pvA-8i-8Jp" secondAttribute="trailing" constant="20" id="q14-gL-8ZZ"/>
                 <constraint firstItem="tkt-W6-d28" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="35" id="sft-QC-CLl"/>
                 <constraint firstItem="pvA-8i-8Jp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="47" id="t3B-YH-pBc"/>
                 <constraint firstItem="tkt-W6-d28" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="190" id="vz7-Lm-BvA"/>
+                <constraint firstItem="FY4-sE-1Hv" firstAttribute="centerY" secondItem="gBV-X7-L5C" secondAttribute="centerY" id="wUV-yO-X9K"/>
                 <constraint firstItem="kMz-rn-L2o" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="215" id="ysv-IR-A8I"/>
             </constraints>
             <point key="canvasLocation" x="248.5" y="311"/>

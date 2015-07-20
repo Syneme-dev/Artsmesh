@@ -17,6 +17,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        [AMButtonHandler changeTabTextColor:self toColor:[NSColor whiteColor]];
+        [self.cell setImageDimsWhenDisabled:NO];
            }
     return self;
 }
@@ -25,21 +28,20 @@
 -(void)viewWillDraw
 {
 
-//    [self.layer setBorderWidth:1.0];
+    [self.layer setBorderWidth:1.0];
     [self.layer setBorderColor: UI_Color_b7b7b7.CGColor];
+ [AMButtonHandler changeTabTextColor:self toColor:UI_Color_b7b7b7];
     
     // Drawing code here.
     if(!self.enabled){
-      //  [self.layer setBorderWidth:1.0] ;
-        // [self.layer setBorderColor: UI_Color_b7b7b7_Disable.CGColor];
-          [self.cell setBackgroundColor:UI_Color_b7b7b7_Disable];
+//        [self.layer setBorderWidth:1.0] ;
+//         [self.layer setBorderColor: UI_Color_b7b7b7_Disable.CGColor];
+//                  [self.cell setBackgroundColor:UI_Color_b7b7b7_Disable];
     }
     else{
-        
         [self.layer setBorderWidth:1.0];
-//        [self.cell setBackgroundColor:[NSColor whiteColor]];
+//        [AMButtonHandler changeTabTextColor:self toColor:UI_Color_b7b7b7];
     }
-     [AMButtonHandler changeTabTextColor:self toColor:UI_Color_b7b7b7];
     
 }
 //
@@ -50,7 +52,6 @@
 -(void)drawRect:(NSRect)dirtyRect{
     [super drawRect:dirtyRect];
 }
-
 
 
 

@@ -161,7 +161,6 @@
     [second setStringValue: [NSString stringWithFormat:@"%02ld",[timeComps second]]];
     
     if (YES) {
-        NSTimeZone* zone = [timeComps timeZone];
      //   NSLog(@"%@", [zone abbreviationForDate:date]);
     }
 }

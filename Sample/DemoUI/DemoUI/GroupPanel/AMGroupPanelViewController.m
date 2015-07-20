@@ -76,6 +76,7 @@
             NSViewController *controller = (NSViewController *)obj;
             
             [tabItem.view addFullConstrainsToSubview:controller.view];
+            
             [_tabControllers addObject:controller];
         }
     }

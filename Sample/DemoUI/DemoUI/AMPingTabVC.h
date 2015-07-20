@@ -28,7 +28,7 @@
 -(NSString*) formatCommand:(NSString*) ip;
 @end
 
-@interface AMUserList : NSObject<NSTableViewDataSource, NSTableViewDelegate>
+@interface AMUserList : NSObject<NSTableViewDataSource, NSTableViewDelegate, AMCheckBoxDelegeate>
 {
   //  NSTableView*   tableView;
     

@@ -16,7 +16,7 @@
 #import "UIFramework/AMUIConst.h"
 #import "AMCommonTools/AMCommonTools.h"
 
-@interface AMPingTabVC () <AMCheckBoxDelegeate,AMUserListDelegate>
+@interface AMPingTabVC () <AMUserListDelegate>
 {
     AMUserList* userList;
 }
@@ -248,11 +248,14 @@ How to determine someone is local or remote? Check whether someone is online. If
     //If the user defined checkbox, you must make sure the ip is valid
     if ([sender isEqual:_userDefinedCheck]) {
         NSString* userIP = _userDefinedTF.stringValue;
+        
+        /*
         if (![AMCommonTools isValidIpv4:userIP] &&
             ![AMCommonTools isValidIpv6:userIP]) {
             sender.checked = !sender.checked;
             return;
-        }
+        }*/
+        
         for (AMUserListItem* userItem in self.userList) {
             userItem.checkbox.checked = NO;
         }
@@ -341,10 +344,10 @@ How to determine someone is local or remote? Check whether someone is online. If
 {
     NSString* command;
     
-    if ([AMCommonTools isValidIpv4:ip]){
-        command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
-    }else{
+    if ([self useIPV6]){
         command = [NSString stringWithFormat:@"ping6 -c 5 %@", ip];
+    }else{
+        command = [NSString stringWithFormat:@"ping -c 5 %@", ip];
     }
 
     return command;

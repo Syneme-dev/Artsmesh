@@ -15,6 +15,16 @@
         <customView id="Hz6-mo-xeY" customClass="AMTabItemView">
             <rect key="frame" x="0.0" y="0.0" width="596" height="704"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STj-3B-StY">
+                    <rect key="frame" x="13" y="667" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Y2k-q3-xK5"/>
+                </imageView>
+            </subviews>
         </customView>
+        <userDefaultsController id="Lsk-XJ-FQg"/>
     </objects>
+    <resources>
+        <image name="label_bar" width="6" height="30"/>
+    </resources>
 </document>

@@ -14,6 +14,7 @@
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
 #import "UIFramework/NSView_Constrains.h"
+#import "AMGoogleSettingsVC.h"
 
 
 @interface AMPreferenceVC ()
@@ -28,6 +29,7 @@
     NSViewController    *_jacktripSettingVC;
     NSViewController    *_jackSettingsVC;
     NSViewController    *_statusNetSettingsVC;
+    NSViewController    *_googleSettingsVC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -62,7 +64,7 @@
         NSView* view = item.view;
         
         if ([view.identifier isEqualTo:@"general"]) {
-            [self loadGeneralPage:view];;
+            [self loadGeneralPage:view];
         }else if([view.identifier isEqualTo:@"jack"]){
             [self loadJackPage:view];
         }else if([view.identifier isEqualTo:@"jacktrip"]){
@@ -71,6 +73,8 @@
             [self loadOSCGroupPage:view ];
         }else if([view.identifier isEqualTo:@"statusNet"]){
             [self loadStatusNetPage:view ];
+        }else if([view.identifier isEqualTo:@"google"]){
+            [self loadGooglePage:view ];
         }
     }
 }
@@ -138,6 +142,18 @@
     }
 }
 
+-(void)loadGooglePage:(NSView*)tabView
+{
+    if (_googleSettingsVC == nil) {
+        _googleSettingsVC = [[AMGoogleSettingsVC alloc] init];
+    }
+    
+    if(_googleSettingsVC){
+        [tabView addConstrainsToSubview:_googleSettingsVC.view
+                           leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
+    }
+}
+
 -(void)registerTabButtons
 {
     super.tabs=self.tabs;
@@ -181,6 +197,9 @@
 
 - (IBAction)onGoogleClick:(id)sender {
     [self pushDownButton:self.googleTabBtn];
+    [self.tabs selectTabViewItemAtIndex:5];
 }
+
+
 
 @end

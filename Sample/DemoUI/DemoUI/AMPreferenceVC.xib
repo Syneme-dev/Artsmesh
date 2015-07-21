@@ -157,14 +157,14 @@
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="Rd6-Hi-Nl6">
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="Rd6-Hi-Nl6" userLabel="googleTab">
                             <rect key="frame" x="539" y="4" width="51" height="13"/>
                             <buttonCell key="cell" type="inline" title="GOOGLE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="16W-EW-czb">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
                             <connections>
-                                <action selector="onGoogleClick:" target="-2" id="Ukp-gm-vs8"/>
+                                <action selector="onGoogleClick:" target="-2" id="lZ0-3p-jUA"/>
                             </connections>
                         </button>
                     </subviews>
@@ -232,6 +232,12 @@
                         </tabViewItem>
                         <tabViewItem label="StatusNet" identifier="4" id="GqN-Y7-qns">
                             <view key="view" identifier="statusNet" id="343-FY-LyZ" customClass="AMTabItemView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Google" identifier="5" id="1oe-t3-Kev">
+                            <view key="view" identifier="google" id="0pp-jc-TK2" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

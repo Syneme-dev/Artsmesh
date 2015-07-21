@@ -47,6 +47,7 @@
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.googleTabBtn toColor:UI_Color_blue];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -177,5 +178,8 @@
     [self.tabs selectTabViewItemAtIndex:4];
 }
 
+- (IBAction)onGoogleClick:(id)sender {
+    [self pushDownButton:self.googleTabBtn];
+}
 
 @end

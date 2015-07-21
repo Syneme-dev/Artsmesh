@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMPreferenceVC">
             <connections>
                 <outlet property="generalTabBtn" destination="mvk-HX-fYa" id="S7s-F2-Hzt"/>
+                <outlet property="googleTabBtn" destination="Rd6-Hi-Nl6" id="JJV-dn-pcb"/>
                 <outlet property="jackTabBtn" destination="YZd-cX-Ly4" id="YBa-oL-eq4"/>
                 <outlet property="jacktripTabBtn" destination="niJ-06-bEy" id="5lO-XK-8ND"/>
                 <outlet property="oscGroupTabBtn" destination="vtg-zK-Gic" id="PMt-YG-MFZ"/>
@@ -111,7 +112,7 @@
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="13" id="fIY-3L-FUI"/>
                             </constraints>
                             <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
                             <connections>
@@ -159,9 +160,12 @@
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Rd6-Hi-Nl6">
                             <rect key="frame" x="539" y="4" width="51" height="13"/>
                             <buttonCell key="cell" type="inline" title="GOOGLE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="16W-EW-czb">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="onGoogleClick:" target="-2" id="Ukp-gm-vs8"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>

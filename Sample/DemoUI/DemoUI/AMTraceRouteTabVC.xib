@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTraceRouteTabVC">
             <connections>
+                <outlet property="inputField" destination="D56-cB-7hb" id="EaH-rK-t4w"/>
                 <outlet property="tableView" destination="ODJ-pd-jHJ" id="UGk-Zh-bpP"/>
                 <outlet property="traceContentView" destination="LpY-BQ-zcV" id="DDh-5A-OXe"/>
                 <outlet property="useIPV6Check" destination="ffZ-Ft-8aL" id="PFw-eg-OO7"/>
@@ -19,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5e-IY-tra">
-                    <rect key="frame" x="0.0" y="92" width="178" height="439"/>
+                    <rect key="frame" x="0.0" y="92" width="178" height="390"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Kxh-kT-AW6">
                         <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +148,9 @@
                         <constraint firstAttribute="height" constant="20" id="JXI-Sa-7ub"/>
                     </constraints>
                 </customView>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D56-cB-7hb">
+                    <rect key="frame" x="0.0" y="480" width="178" height="51"/>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="ffZ-Ft-8aL" firstAttribute="top" secondItem="x5e-IY-tra" secondAttribute="bottom" constant="6" id="0s7-7L-M5V"/>
@@ -154,7 +159,7 @@
                 <constraint firstAttribute="bottom" secondItem="ffZ-Ft-8aL" secondAttribute="bottom" constant="66" id="bqo-zE-mCt"/>
                 <constraint firstItem="jPg-hi-xbE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="erg-fD-F3V"/>
                 <constraint firstAttribute="trailing" secondItem="jPg-hi-xbE" secondAttribute="trailing" id="fwF-KI-FTL"/>
-                <constraint firstItem="x5e-IY-tra" firstAttribute="top" secondItem="jPg-hi-xbE" secondAttribute="top" id="fwf-yf-Bip"/>
+                <constraint firstItem="x5e-IY-tra" firstAttribute="top" secondItem="jPg-hi-xbE" secondAttribute="top" constant="49" id="fwf-yf-Bip"/>
                 <constraint firstItem="ffZ-Ft-8aL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="mbX-qg-N2b"/>
                 <constraint firstItem="jPg-hi-xbE" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="178" id="nim-Fb-CP8"/>
             </constraints>

@@ -12,6 +12,7 @@
 #import "UIFramework/AMRatioButtonView.h"
 #import "AMPingTabVC.h"
 #import "AMIPerfConfigWC.h"
+#import "AMUserList.h"
 
 @interface AMIPerfTabVC ()<AMUserListDelegate,AMCheckBoxDelegeate>
 {
@@ -22,6 +23,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *iperfContentView;
+@property (weak) IBOutlet NSView *inputField;
 @property (weak) IBOutlet AMCheckBoxView *serverCheck;
 
 @end
@@ -32,7 +34,8 @@
 {
     [super awakeFromNib];
     
-    userList = [[AMUserList alloc] init:self.tableView];
+    userList = [[AMUserList alloc] init:self.tableView
+                             inputField:_inputField];
     userList.delegate = self;
     userList.pingCommand.contentView = self.iperfContentView;
     

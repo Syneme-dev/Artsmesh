@@ -163,6 +163,8 @@
 		2D08FE091AD661FF00A9D257 /* GTLYouTubeVideoTopicDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08FD851AD661FF00A9D257 /* GTLYouTubeVideoTopicDetails.m */; };
 		2D08FE0A1AD661FF00A9D257 /* GTLYouTubeWatchSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D08FD871AD661FF00A9D257 /* GTLYouTubeWatchSettings.m */; };
 		2D0A7B901A11678B00202C3E /* AMLiveMapProgramContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */; };
+		2D115C641B5E00C9005E28C1 /* AMGoogleSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D115C621B5E00C9005E28C1 /* AMGoogleSettingsVC.m */; };
+		2D115C651B5E00C9005E28C1 /* AMGoogleSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D115C631B5E00C9005E28C1 /* AMGoogleSettingsVC.xib */; };
 		2D18D8C01A04A456005BC1A7 /* AMFloatPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */; };
 		2D18D8C61A04AC5B005BC1A7 /* AMFloatPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18D8C51A04AC5B005BC1A7 /* AMFloatPanelViewController.m */; };
 		2D19A8F41AC4B9C800C9F8F5 /* GTL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D19A8F31AC4B9C800C9F8F5 /* GTL.framework */; };
@@ -753,6 +755,9 @@
 		2D08FD871AD661FF00A9D257 /* GTLYouTubeWatchSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLYouTubeWatchSettings.m; sourceTree = "<group>"; };
 		2D0A7B8E1A11678B00202C3E /* AMLiveMapProgramContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramContentView.h; sourceTree = "<group>"; };
 		2D0A7B8F1A11678B00202C3E /* AMLiveMapProgramContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramContentView.m; sourceTree = "<group>"; };
+		2D115C611B5E00C9005E28C1 /* AMGoogleSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGoogleSettingsVC.h; sourceTree = "<group>"; };
+		2D115C621B5E00C9005E28C1 /* AMGoogleSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGoogleSettingsVC.m; sourceTree = "<group>"; };
+		2D115C631B5E00C9005E28C1 /* AMGoogleSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGoogleSettingsVC.xib; sourceTree = "<group>"; };
 		2D18D8BE1A04A456005BC1A7 /* AMFloatPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelView.h; sourceTree = "<group>"; };
 		2D18D8BF1A04A456005BC1A7 /* AMFloatPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFloatPanelView.m; sourceTree = "<group>"; };
 		2D18D8C41A04AC5B005BC1A7 /* AMFloatPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFloatPanelViewController.h; sourceTree = "<group>"; };
@@ -1134,6 +1139,9 @@
 				4A4511771A8B629D001E7328 /* AMGeneralSettingsVC.h */,
 				4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */,
 				4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */,
+				2D115C611B5E00C9005E28C1 /* AMGoogleSettingsVC.h */,
+				2D115C621B5E00C9005E28C1 /* AMGoogleSettingsVC.m */,
+				2D115C631B5E00C9005E28C1 /* AMGoogleSettingsVC.xib */,
 				4A4511721A8B5F62001E7328 /* AMJackSettingsVC.h */,
 				4A4511731A8B5F62001E7328 /* AMJackSettingsVC.m */,
 				4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */,
@@ -2097,6 +2105,7 @@
 				AFAEBDB219610BEA00B7FB51 /* PublicTimeline.png in Resources */,
 				2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */,
 				AFAEBDB319610BEA00B7FB51 /* RecentTags.png in Resources */,
+				2D115C651B5E00C9005E28C1 /* AMGoogleSettingsVC.xib in Resources */,
 				37C2317A187A8FFD00554AFD /* InfoPlist.strings in Resources */,
 				4A32A1221A722683006FEDD7 /* AMUserProfielViewController.xib in Resources */,
 				AFAEBDB019610BEA00B7FB51 /* IncomingTopic.png in Resources */,
@@ -2354,6 +2363,7 @@
 				AF4155C51B1C083C000CB925 /* AMControlBarButtonResponder.m in Sources */,
 				4A32A10E1A7220B1006FEDD7 /* AMUserViewController.m in Sources */,
 				4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */,
+				2D115C641B5E00C9005E28C1 /* AMGoogleSettingsVC.m in Sources */,
 				4A32A10A1A7220B1006FEDD7 /* AMUserLogonViewController.m in Sources */,
 				26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */,
 				4FCA92901AE4EF32002D3CAE /* AMClockTabCellVC.m in Sources */,

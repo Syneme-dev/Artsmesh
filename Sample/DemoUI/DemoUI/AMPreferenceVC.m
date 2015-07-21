@@ -147,7 +147,8 @@
     [self.tabButtons addObject:self.jacktripTabBtn];
     [self.tabButtons addObject:self.oscGroupTabBtn];
     [self.tabButtons addObject:self.statusnetTabButton];
-    self.showingTabsCount=5;
+    [self.tabButtons addObject:self.googleTabBtn];
+    self.showingTabsCount=6;
 }
 
 - (IBAction)onGeneralClick:(id)sender {

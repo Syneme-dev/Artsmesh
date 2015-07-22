@@ -44,7 +44,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="5" id="kJl-1B-RC7"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="uvc-xq-Xws">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="uvc-xq-Xws">
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -70,7 +70,7 @@
                                 <constraint firstAttribute="height" constant="13" id="E6P-YA-qOI"/>
                                 <constraint firstAttribute="width" constant="5" id="Vhy-R2-6ag"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="RLD-Ww-3Tv">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="RLD-Ww-3Tv">
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -96,7 +96,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="QEV-3v-Y9Y"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="sYT-6D-rI0">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="sYT-6D-rI0">
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -122,7 +122,7 @@
                                 <constraint firstAttribute="width" constant="5" id="7gd-Lh-aqg"/>
                                 <constraint firstAttribute="height" constant="13" id="cm2-fe-5kg"/>
                             </constraints>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="e3s-Qd-UDQ">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="e3s-Qd-UDQ">
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

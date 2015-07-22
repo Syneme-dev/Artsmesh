@@ -213,8 +213,8 @@
 		4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511741A8B5F62001E7328 /* AMJackSettingsVC.xib */; };
 		4A45117A1A8B629D001E7328 /* AMGeneralSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */; };
 		4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */; };
-		4A45117F1A8B62E6001E7328 /* AMStatusNetSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */; };
-		4A4511801A8B62E6001E7328 /* AMStatusNetSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */; };
+		4A45117F1A8B62E6001E7328 /* AMAccountSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45117D1A8B62E6001E7328 /* AMAccountSettingsVC.m */; };
+		4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A45117E1A8B62E6001E7328 /* AMAccountSettingsVC.xib */; };
 		4A4511841A8B62FB001E7328 /* AMOSCGroupSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */; };
 		4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
@@ -834,9 +834,9 @@
 		4A4511771A8B629D001E7328 /* AMGeneralSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGeneralSettingsVC.h; sourceTree = "<group>"; };
 		4A4511781A8B629D001E7328 /* AMGeneralSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGeneralSettingsVC.m; sourceTree = "<group>"; };
 		4A4511791A8B629D001E7328 /* AMGeneralSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMGeneralSettingsVC.xib; sourceTree = "<group>"; };
-		4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatusNetSettingsVC.h; sourceTree = "<group>"; };
-		4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatusNetSettingsVC.m; sourceTree = "<group>"; };
-		4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStatusNetSettingsVC.xib; sourceTree = "<group>"; };
+		4A45117C1A8B62E6001E7328 /* AMAccountSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAccountSettingsVC.h; sourceTree = "<group>"; };
+		4A45117D1A8B62E6001E7328 /* AMAccountSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAccountSettingsVC.m; sourceTree = "<group>"; };
+		4A45117E1A8B62E6001E7328 /* AMAccountSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMAccountSettingsVC.xib; sourceTree = "<group>"; };
 		4A4511811A8B62FB001E7328 /* AMOSCGroupSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOSCGroupSettingsVC.h; sourceTree = "<group>"; };
 		4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOSCGroupSettingsVC.m; sourceTree = "<group>"; };
 		4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMOSCGroupSettingsVC.xib; sourceTree = "<group>"; };
@@ -1143,9 +1143,9 @@
 				4A4511811A8B62FB001E7328 /* AMOSCGroupSettingsVC.h */,
 				4A4511821A8B62FB001E7328 /* AMOSCGroupSettingsVC.m */,
 				4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */,
-				4A45117C1A8B62E6001E7328 /* AMStatusNetSettingsVC.h */,
-				4A45117D1A8B62E6001E7328 /* AMStatusNetSettingsVC.m */,
-				4A45117E1A8B62E6001E7328 /* AMStatusNetSettingsVC.xib */,
+				4A45117C1A8B62E6001E7328 /* AMAccountSettingsVC.h */,
+				4A45117D1A8B62E6001E7328 /* AMAccountSettingsVC.m */,
+				4A45117E1A8B62E6001E7328 /* AMAccountSettingsVC.xib */,
 			);
 			name = PreferencePanel;
 			sourceTree = "<group>";
@@ -2090,7 +2090,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
-				4A4511801A8B62E6001E7328 /* AMStatusNetSettingsVC.xib in Resources */,
+				4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
 				4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */,
 				AF621F1B197F503A005F4F97 /* PanelControlBarView.xib in Resources */,
@@ -2367,7 +2367,7 @@
 				2D08FDDF1AD661FF00A9D257 /* GTLYouTubePropertyValue.m in Sources */,
 				2D08FDFE1AD661FF00A9D257 /* GTLYouTubeVideoPlayer.m in Sources */,
 				4A8C69F41A70A0E200540694 /* AMUserDetailsViewController.m in Sources */,
-				4A45117F1A8B62E6001E7328 /* AMStatusNetSettingsVC.m in Sources */,
+				4A45117F1A8B62E6001E7328 /* AMAccountSettingsVC.m in Sources */,
 				4A4511751A8B5F62001E7328 /* AMJackSettingsVC.m in Sources */,
 				2D08FDBE1AD661FF00A9D257 /* GTLYouTubeInvideoBranding.m in Sources */,
 				2D08FE081AD661FF00A9D257 /* GTLYouTubeVideoSuggestionsTagSuggestion.m in Sources */,

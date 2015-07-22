@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMStatusNetSettingsVC.h"
+#import "AMAccountSettingsVC.h"
 #import "AMStatusNet/AMStatusNet.h"
 #import "UIFramework/AMButtonHandler.h"
 
-@interface AMStatusNetSettingsVC ()
+@interface AMAccountSettingsVC ()
 @property (weak) IBOutlet NSButton *postBtn;
 @property (weak) IBOutlet NSTextField *postResField;
 
 @end
 
-@implementation AMStatusNetSettingsVC
+@implementation AMAccountSettingsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

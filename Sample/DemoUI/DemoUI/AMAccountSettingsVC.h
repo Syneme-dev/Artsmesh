@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AMStatusNetSettingsVC : NSViewController
+@interface AMAccountSettingsVC : NSViewController
 
 @end

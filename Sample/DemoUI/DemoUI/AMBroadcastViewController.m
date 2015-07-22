@@ -105,6 +105,8 @@
     [AMButtonHandler changeTabTextColor:self.youtubeBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.settingsBtn toColor:UI_Color_blue];
     
+    [self.youtubeBtn performClick:nil];
+    
 }
 
 -(void)registerTabButtons

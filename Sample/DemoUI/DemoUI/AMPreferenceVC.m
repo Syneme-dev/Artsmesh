@@ -14,7 +14,6 @@
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
 #import "UIFramework/NSView_Constrains.h"
-#import "AMGoogleSettingsVC.h"
 
 
 @interface AMPreferenceVC ()
@@ -29,7 +28,6 @@
     NSViewController    *_jacktripSettingVC;
     NSViewController    *_jackSettingsVC;
     NSViewController    *_statusNetSettingsVC;
-    NSViewController    *_googleSettingsVC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +47,6 @@
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.googleTabBtn toColor:UI_Color_blue];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -73,8 +70,6 @@
             [self loadOSCGroupPage:view ];
         }else if([view.identifier isEqualTo:@"statusNet"]){
             [self loadStatusNetPage:view ];
-        }else if([view.identifier isEqualTo:@"google"]){
-            [self loadGooglePage:view ];
         }
     }
 }
@@ -142,17 +137,6 @@
     }
 }
 
--(void)loadGooglePage:(NSView*)tabView
-{
-    if (_googleSettingsVC == nil) {
-        _googleSettingsVC = [[AMGoogleSettingsVC alloc] init];
-    }
-    
-    if(_googleSettingsVC){
-        [tabView addConstrainsToSubview:_googleSettingsVC.view
-                           leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
-    }
-}
 
 -(void)registerTabButtons
 {
@@ -163,8 +147,7 @@
     [self.tabButtons addObject:self.jacktripTabBtn];
     [self.tabButtons addObject:self.oscGroupTabBtn];
     [self.tabButtons addObject:self.statusnetTabButton];
-    [self.tabButtons addObject:self.googleTabBtn];
-    self.showingTabsCount=6;
+    self.showingTabsCount=5;
 }
 
 - (IBAction)onGeneralClick:(id)sender {
@@ -193,11 +176,6 @@
 - (IBAction)onStatusNetClick:(id)sender {
     [self pushDownButton:self.statusnetTabButton];
     [self.tabs selectTabViewItemAtIndex:4];
-}
-
-- (IBAction)onGoogleClick:(id)sender {
-    [self pushDownButton:self.googleTabBtn];
-    [self.tabs selectTabViewItemAtIndex:5];
 }
 
 

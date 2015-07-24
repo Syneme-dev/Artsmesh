@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPreferenceVC">
@@ -25,90 +25,145 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="KTe-DO-Scm">
                     <rect key="frame" x="0.0" y="780" width="600" height="20"/>
                     <subviews>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
-                            <rect key="frame" x="442" y="2" width="80" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="13" id="Ivb-25-mpR"/>
-                                <constraint firstAttribute="width" constant="80" id="zX6-pt-rJB"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="OSC GROUP  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
-                            </connections>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="jacktripTab">
-                            <rect key="frame" x="374" y="2" width="69" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="1Hi-BW-B1N"/>
-                                <constraint firstAttribute="height" constant="13" id="Pp7-WK-Y9H"/>
-                                <constraint firstAttribute="width" constant="69" id="Yr8-Dy-Afh"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="JACKTRIP |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
-                                <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onJackTripClick:" target="-2" id="hKP-n7-MwN"/>
-                            </connections>
-                        </button>
-                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
-                            <rect key="frame" x="523" y="2" width="64" height="13"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="64" id="3gc-Nl-39S"/>
-                                <constraint firstAttribute="height" constant="13" id="9uo-BN-Dpb"/>
-                            </constraints>
-                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
-                            </connections>
-                        </button>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="mvk-HX-fYa" userLabel="generalTab">
-                            <rect key="frame" x="233" y="2" width="65" height="13"/>
+                            <rect key="frame" x="212" y="4" width="52" height="13"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="65" id="WNv-O0-wIa"/>
+                                <constraint firstAttribute="width" constant="52" id="WNv-O0-wIa"/>
                                 <constraint firstAttribute="height" constant="13" id="fTs-qg-Pps"/>
                             </constraints>
-                            <buttonCell key="cell" type="inline" title="GENERAL  |" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
+                            <buttonCell key="cell" type="inline" title="GENERAL" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
                             </connections>
                         </button>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vk1-CY-0kN" customClass="AMFoundryFontView">
+                            <rect key="frame" x="268" y="4" width="9" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="5" id="kJl-1B-RC7"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="uvc-xq-Xws">
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="YZd-cX-Ly4" userLabel="jackServerTab">
-                            <rect key="frame" x="294" y="2" width="84" height="13"/>
+                            <rect key="frame" x="280" y="4" width="72" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="13" id="tRv-Ju-JCE"/>
-                                <constraint firstAttribute="width" constant="84" id="xl2-x9-hwo"/>
+                                <constraint firstAttribute="width" constant="72" id="xl2-x9-hwo"/>
                             </constraints>
-                            <buttonCell key="cell" type="inline" title="JACK SERVER  |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
+                            <buttonCell key="cell" type="inline" title="JACK SERVER" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="10"/>
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onJackClick:" target="-2" id="TXb-H0-nDy"/>
                             </connections>
                         </button>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MgR-Ft-foO" customClass="AMFoundryFontView">
+                            <rect key="frame" x="355" y="4" width="9" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="E6P-YA-qOI"/>
+                                <constraint firstAttribute="width" constant="5" id="Vhy-R2-6ag"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="RLD-Ww-3Tv">
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="niJ-06-bEy" userLabel="jacktripTab">
+                            <rect key="frame" x="367" y="4" width="57" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="1Hi-BW-B1N"/>
+                                <constraint firstAttribute="height" constant="13" id="Pp7-WK-Y9H"/>
+                                <constraint firstAttribute="width" constant="57" id="Yr8-Dy-Afh"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="JACKTRIP" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onJackTripClick:" target="-2" id="hKP-n7-MwN"/>
+                            </connections>
+                        </button>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vLU-bv-KC0" customClass="AMFoundryFontView">
+                            <rect key="frame" x="509" y="4" width="9" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="QEV-3v-Y9Y"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="sYT-6D-rI0">
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bOZ-dO-5oy" userLabel="statusnetTab">
+                            <rect key="frame" x="523" y="4" width="64" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="Hp6-hJ-KvV"/>
+                                <constraint firstAttribute="height" constant="13" id="Q8F-59-g6b"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
+                            </connections>
+                        </button>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXP-JL-24c" customClass="AMFoundryFontView">
+                            <rect key="frame" x="427" y="4" width="9" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="5" id="7gd-Lh-aqg"/>
+                                <constraint firstAttribute="height" constant="13" id="cm2-fe-5kg"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="e3s-Qd-UDQ">
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="vtg-zK-Gic" userLabel="OSCGroup">
+                            <rect key="frame" x="440" y="4" width="67" height="13"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="13" id="LQL-nl-70X"/>
+                                <constraint firstAttribute="width" constant="67" id="zpg-qS-cHh"/>
+                            </constraints>
+                            <buttonCell key="cell" type="inline" title="OSC GROUP " bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="13" id="4HT-nq-uOs"/>
-                        <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="Hvs-mB-Vv7"/>
-                        <constraint firstItem="niJ-06-bEy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="InJ-QO-awj"/>
-                        <constraint firstAttribute="trailing" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="222" id="MFR-y0-AIn"/>
-                        <constraint firstAttribute="trailing" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="78" id="PNx-mB-FtZ"/>
+                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="leading" secondItem="vLU-bv-KC0" secondAttribute="trailing" constant="7" id="61D-f1-jXy"/>
+                        <constraint firstAttribute="trailing" secondItem="vk1-CY-0kN" secondAttribute="trailing" constant="325" id="655-3o-qLS"/>
+                        <constraint firstAttribute="trailing" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="93" id="AFh-zQ-qNx"/>
+                        <constraint firstItem="mvk-HX-fYa" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="Hvs-mB-Vv7"/>
+                        <constraint firstItem="niJ-06-bEy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="InJ-QO-awj"/>
+                        <constraint firstAttribute="trailing" secondItem="YZd-cX-Ly4" secondAttribute="trailing" constant="248" id="MFR-y0-AIn"/>
+                        <constraint firstAttribute="trailing" secondItem="MgR-Ft-foO" secondAttribute="trailing" constant="238" id="Rtb-Wt-7tD"/>
                         <constraint firstAttribute="height" constant="20" id="UMt-jc-Gbh"/>
-                        <constraint firstAttribute="trailing" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="157" id="jWP-vM-Vid"/>
-                        <constraint firstAttribute="trailing" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="302" id="p2c-Q1-0MY"/>
-                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="s77-CX-d9n"/>
-                        <constraint firstItem="vtg-zK-Gic" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="wZS-pK-d2p"/>
-                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="5" id="yAd-J8-uU4"/>
+                        <constraint firstItem="bOZ-dO-5oy" firstAttribute="baseline" secondItem="vLU-bv-KC0" secondAttribute="baseline" id="ZHX-db-1Bu"/>
+                        <constraint firstItem="vk1-CY-0kN" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="fET-YT-3Ag"/>
+                        <constraint firstItem="vXP-JL-24c" firstAttribute="leading" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="5" id="gj1-WQ-Ged"/>
+                        <constraint firstAttribute="trailing" secondItem="niJ-06-bEy" secondAttribute="trailing" constant="176" id="jWP-vM-Vid"/>
+                        <constraint firstItem="vXP-JL-24c" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="kN9-5T-vWx"/>
+                        <constraint firstAttribute="trailing" secondItem="bOZ-dO-5oy" secondAttribute="trailing" constant="13" id="kj7-ys-xg6"/>
+                        <constraint firstItem="vtg-zK-Gic" firstAttribute="baseline" secondItem="vXP-JL-24c" secondAttribute="baseline" id="nU4-yK-waG"/>
+                        <constraint firstAttribute="trailing" secondItem="mvk-HX-fYa" secondAttribute="trailing" constant="336" id="p2c-Q1-0MY"/>
+                        <constraint firstItem="vtg-zK-Gic" firstAttribute="baseline" secondItem="vLU-bv-KC0" secondAttribute="baseline" id="wbO-ov-s25"/>
+                        <constraint firstItem="vLU-bv-KC0" firstAttribute="leading" secondItem="vtg-zK-Gic" secondAttribute="trailing" constant="4" id="wtH-x1-vMh"/>
+                        <constraint firstItem="YZd-cX-Ly4" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="yAd-J8-uU4"/>
+                        <constraint firstItem="MgR-Ft-foO" firstAttribute="top" secondItem="KTe-DO-Scm" secondAttribute="top" constant="3" id="yvh-xr-40X"/>
                     </constraints>
                 </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Gtp-xq-sPX">

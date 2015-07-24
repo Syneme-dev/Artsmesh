@@ -61,7 +61,7 @@
         NSView* view = item.view;
         
         if ([view.identifier isEqualTo:@"general"]) {
-            [self loadGeneralPage:view];;
+            [self loadGeneralPage:view];
         }else if([view.identifier isEqualTo:@"jack"]){
             [self loadJackPage:view];
         }else if([view.identifier isEqualTo:@"jacktrip"]){
@@ -137,6 +137,7 @@
     }
 }
 
+
 -(void)registerTabButtons
 {
     super.tabs=self.tabs;
@@ -176,6 +177,7 @@
     [self pushDownButton:self.statusnetTabButton];
     [self.tabs selectTabViewItemAtIndex:4];
 }
+
 
 
 @end

@@ -52,12 +52,18 @@
         pushedDownButtonColor = [NSColor lightGrayColor];
     }
     
+    // Set font alignment
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setAlignment:NSCenterTextAlignment];
+    
+    
     if (self.currentPushedDownButton == button)
         return;
     
     NSDictionary *attributes = @{
         NSFontAttributeName : buttonFont,
-        NSForegroundColorAttributeName : buttonColor
+        NSForegroundColorAttributeName : buttonColor,
+        NSParagraphStyleAttributeName : paragraphStyle
     };
     
     if (self.currentPushedDownButton) {
@@ -76,6 +82,7 @@
                             value:pushedDownButtonColor
                             range:[self calculateTextRange:button.title]];
     button.attributedTitle = attributedTitle;
+    
 }
 
 - (NSRange)calculateTextRange:(NSString *)title

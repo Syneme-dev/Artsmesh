@@ -10,4 +10,9 @@
 
 @interface AMGeneralSettingsVC : NSViewController
 
+
+
+- (IBAction)restoreConfig:(NSButton *)sender;
+- (IBAction)saveConfig:(NSButton *)sender;
+
 @end

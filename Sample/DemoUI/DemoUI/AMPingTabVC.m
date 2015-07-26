@@ -143,7 +143,6 @@ viewForTableColumn:(NSTableColumn *)tableColumn
         }
         
         AMUserListItem* item = [self.userList objectAtIndex:row];
-        AMLiveUser* user = item.user;
         [cellView addSubview:item.nickNameTF];
         
         return cellView;

@@ -577,12 +577,6 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qoa-RW-bpZ"/>
                                     </imageView>
-                                    <box horizontalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DiR-Gj-sMS">
-                                        <rect key="frame" x="19" y="113" width="5" height="194"/>
-                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <font key="titleFont" metaFont="system"/>
-                                    </box>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FwS-k1-oaq" userLabel="text_timeOut" customClass="AMFoundryFontView">
                                         <rect key="frame" x="180" y="707" width="127" height="22"/>
                                         <constraints>
@@ -595,10 +589,20 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <box verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="kAQ-6q-g1m">
+                                        <rect key="frame" x="6" y="633" width="590" height="5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Nxl-Br-ZiR"/>
+                                        </constraints>
+                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <font key="titleFont" metaFont="system"/>
+                                    </box>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="FwS-k1-oaq" firstAttribute="leading" secondItem="EZg-a7-2Zo" secondAttribute="leading" id="2sg-h0-SLf"/>
                                     <constraint firstItem="NfW-Dn-Une" firstAttribute="leading" secondItem="85E-Ot-DRx" secondAttribute="leading" id="3g6-tq-3zU"/>
+                                    <constraint firstAttribute="trailing" secondItem="kAQ-6q-g1m" secondAttribute="trailing" constant="10" id="5Mc-Hx-C1x"/>
                                     <constraint firstItem="NfW-Dn-Une" firstAttribute="leading" secondItem="pOR-IZ-a3Z" secondAttribute="leading" id="9Cv-T8-bn1"/>
                                     <constraint firstItem="FwS-k1-oaq" firstAttribute="leading" secondItem="0Be-lw-Bm2" secondAttribute="leading" id="AkY-uo-Tfv"/>
                                     <constraint firstItem="Y3G-dT-UQC" firstAttribute="top" secondItem="04l-5I-Dgw" secondAttribute="bottom" constant="18" id="EXF-jt-WbU"/>
@@ -612,6 +616,7 @@
                                     <constraint firstItem="NfW-Dn-Une" firstAttribute="top" secondItem="ZZa-8R-NTA" secondAttribute="bottom" constant="13" id="M2R-0h-cJy"/>
                                     <constraint firstItem="NST-1U-VVY" firstAttribute="leading" secondItem="eAv-PW-JHb" secondAttribute="leading" id="OgJ-fU-58f"/>
                                     <constraint firstItem="75x-Y4-7Xf" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="80" id="OjL-Fc-vR6"/>
+                                    <constraint firstItem="kAQ-6q-g1m" firstAttribute="leading" secondItem="LHM-PT-jGr" secondAttribute="leading" constant="10" id="Pwq-9U-wfP"/>
                                     <constraint firstItem="KrW-hb-qYt" firstAttribute="leading" secondItem="ZZa-8R-NTA" secondAttribute="leading" id="QuF-Kq-VoW"/>
                                     <constraint firstItem="uaB-nF-5II" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="50" id="Xoz-kN-RuL"/>
                                     <constraint firstItem="NfW-Dn-Une" firstAttribute="leading" secondItem="8D2-YV-dUh" secondAttribute="leading" id="XrW-iG-ElJ"/>
@@ -636,6 +641,7 @@
                                     <constraint firstItem="fT9-cN-6c9" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="360" id="kIf-jB-s58"/>
                                     <constraint firstItem="eEo-uu-vc9" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="390" id="kZ5-k1-7dp"/>
                                     <constraint firstItem="jW3-E6-n5K" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="450" id="loE-AB-msS"/>
+                                    <constraint firstItem="kAQ-6q-g1m" firstAttribute="top" secondItem="04l-5I-Dgw" secondAttribute="bottom" constant="11" id="n0R-x3-eva"/>
                                     <constraint firstItem="KrW-hb-qYt" firstAttribute="leading" secondItem="8cK-d7-fNg" secondAttribute="trailing" constant="20" id="oDp-1H-1C2"/>
                                     <constraint firstItem="KrW-hb-qYt" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="20" id="pai-uo-4iz"/>
                                     <constraint firstItem="3td-ow-ql1" firstAttribute="top" secondItem="LHM-PT-jGr" secondAttribute="top" constant="510" id="pxB-94-a91"/>

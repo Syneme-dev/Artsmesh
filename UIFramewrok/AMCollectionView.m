@@ -201,11 +201,11 @@ NSString* const AMMusicScoreItemType = @"com.artsmesh.musicscoreitem";
     mouseDownEvent  = theEvent;
     
     NSPoint mouseDownPoint = [theEvent locationInWindow];
-    NSImageView* mouseDownView  = [self hitTest:mouseDownPoint];
+    NSImageView* mouseDownView  =(NSImageView*) [self hitTest:mouseDownPoint];
     
     for (NSImageView* viewItem in _viewItems) {
         if(mouseDownView == viewItem){
-            mouseDownIndex = [_viewItems indexOfObject:viewItem];
+            mouseDownIndex =(int) [_viewItems indexOfObject:viewItem];
         }
     }
 }

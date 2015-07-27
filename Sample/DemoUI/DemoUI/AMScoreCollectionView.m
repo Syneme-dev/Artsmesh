@@ -332,11 +332,11 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
     mouseDownEvent  = theEvent;
  
     NSPoint mouseDownPoint = [theEvent locationInWindow];
-    AMScoreCollectionCell* mouseDownView  = [self hitTest:mouseDownPoint];
+    AMScoreCollectionCell* mouseDownView  = (AMScoreCollectionCell*)[self hitTest:mouseDownPoint];
     
     for (AMScoreCollectionCell* viewItem in _viewItems) {
         if(mouseDownView == viewItem){
-            mouseDownIndex = [_viewItems indexOfObject:viewItem];
+            mouseDownIndex =(int) [_viewItems indexOfObject:viewItem];
         }
     }
 }
@@ -344,7 +344,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
 - (void) mouseUp:(NSEvent *)theEvent
 {
     NSPoint mouseDownPoint = [mouseDownEvent locationInWindow];
-    AMScoreCollectionCell* mouseDownView  = [self hitTest:mouseDownPoint];
+    AMScoreCollectionCell* mouseDownView  =(AMScoreCollectionCell*) [self hitTest:mouseDownPoint];
     
     /*
     for (AMScoreCollectionCell* viewItem in _viewItems) {
@@ -495,7 +495,7 @@ NSString* const AMMusicScoreType = @"com.artsmesh.musicscore";
         return NO;
     }
     
-    NSPoint mouseDownPoint = [mouseDownEvent locationInWindow];
+    [mouseDownEvent locationInWindow];
     NSUInteger destIndex = [_viewItems indexOfObject:destView];
     
     [_viewItems removeObject:sourceView];

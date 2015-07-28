@@ -156,7 +156,10 @@
 //        self.serverCommand.command = command;
 //        [self.serverCommand run];
     }
-    if (self.serverCheck.checked) {
+    
+    //When you unselected the server checkbox, should stop iperf command
+    if ([sender isEqual:self.serverCheck] &&
+        self.serverCheck.checked == NO) {
         [self stopiPerf];
     }
 }

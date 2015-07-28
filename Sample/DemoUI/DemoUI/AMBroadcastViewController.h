@@ -33,7 +33,6 @@
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
-@property (strong) IBOutlet NSButton *oAuthSignInBtn;
 @property (strong) IBOutlet NSButton *createEventBtn;
 @property (strong) IBOutlet NSTextField *broadcastTItleField;
 @property (strong) IBOutlet NSTextField *broadcastDescField;
@@ -73,7 +72,6 @@
 - (void)changeBroadcastURL : (NSString *)newURL;
 - (IBAction)youtubeBtnClick:(id)sender;
 - (IBAction)settingsBtnClick:(id)sender;
-- (IBAction)oAuthSignInBtnClick:(id)sender;
 
 - (BOOL)isSignedIn;
 

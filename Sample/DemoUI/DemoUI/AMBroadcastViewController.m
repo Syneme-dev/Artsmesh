@@ -99,8 +99,6 @@
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
     
-    [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
-    
     [self.groupTabView setAutoresizesSubviews:YES];
     [AMButtonHandler changeTabTextColor:self.youtubeBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.settingsBtn toColor:UI_Color_blue];
@@ -160,21 +158,6 @@
     }
 }
 
-- (void)loadOAuthWindow {
-    NSApplication *myApp = [NSApplication sharedApplication];
-    NSWindow *curWindow = [myApp keyWindow];
-    
-    GTMOAuth2WindowController *windowController;
-    windowController = [[GTMOAuth2WindowController alloc] initWithScope:scope
-                                                               clientID:kMyClientID
-                                                           clientSecret:kMyClientSecret
-                                                       keychainItemName:kKeychainItemName
-                                                         resourceBundle:nil];
-    
-    [windowController signInSheetModalForWindow:curWindow
-                                       delegate:self
-                               finishedSelector:@selector(windowController:finishedWithAuth:error:)];
-}
 
 - (void)createYouTubeLiveEvent {
     // Create the Live Event now!
@@ -720,14 +703,6 @@
     }
 }
 
-- (IBAction)oAuthSignInBtnClick:(id)sender {
-    if ([self isSignedIn]) {
-        [self signOut];
-    } else {
-        [self loadOAuthWindow];
-    }
-}
-
 
 /*** Notifications **/
 - (void)controlTextDidChange:(NSNotification *)notification {
@@ -868,54 +843,13 @@
     [super webViewClose:sender];
 }
 
-
-- (void)windowController:(GTMOAuth2WindowController *)windowController
-        finishedWithAuth:(GTMOAuth2Authentication *)auth
-                   error:(NSError *)error {
-    if (error != nil) {
-        // Authentication failed
-        [self setAuthentication:nil];
-    } else {
-        // Authentication succeeded
-        [self setAuthentication:auth];
-        [self updateUI];
-    }
-}
-
 - (void)setAuthentication:(GTMOAuth2Authentication *)auth {
     mAuth = auth;
-}
-
-- (void)checkSignedInBtn {
-    if ( [self isSignedIn] ) {
-        [self.oAuthSignInBtn setTitle:@"SIGN OUT"];
-    } else {
-        [self.oAuthSignInBtn setTitle:@"SIGN IN"];
-    }
-    
-    [AMButtonHandler changeTabTextColor:self.oAuthSignInBtn toColor:UI_Color_blue];
-    [self.view setNeedsDisplay:TRUE];
 }
 
 - (BOOL)isSignedIn {
     BOOL isSignedIn = mAuth.canAuthorize;
     return isSignedIn;
-}
-
-- (void)signOut {
-    if ([mAuth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
-        // Remove the token from Google's servers
-        [GTMOAuth2WindowController revokeTokenForGoogleAuthentication:mAuth];
-    }
-    
-    // Remove the stored Google authentication from the keychain, if any
-    [GTMOAuth2WindowController removeAuthFromKeychainForName:kKeychainItemName];
-    
-    // Discard our retained authentication object
-    [self setAuthentication:nil];
-    
-    [self updateUI];
-    
 }
 
 -(void) updateUI {
@@ -926,7 +860,6 @@
     // Test pull current live events list
     if ([self isSignedIn]) { [self getExistingYouTubeLiveEvents]; }
     
-    [self checkSignedInBtn];
 }
 
 - (void)initYoutubeService {

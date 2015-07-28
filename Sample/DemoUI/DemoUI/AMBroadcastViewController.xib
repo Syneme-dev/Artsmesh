@@ -22,13 +22,11 @@
                 <outlet property="eventStartYearTextField" destination="XxN-bD-K7m" id="Yie-dq-7fA"/>
                 <outlet property="eventsManagerView" destination="e2o-vu-ZRF" id="tGu-RU-kQh"/>
                 <outlet property="groupTabView" destination="pco-Gb-iXG" id="Z6V-Oj-WEy"/>
-                <outlet property="oAuthSignInBtn" destination="a85-rH-kEj" id="mRY-hJ-yi0"/>
                 <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>
                 <outlet property="schedEndPMCheck" destination="LJM-zO-aFL" id="0M1-wP-Gbc"/>
                 <outlet property="schedStartPMCheck" destination="zar-IV-heM" id="cxQ-ha-gwc"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
                 <outlet property="streamAddressTextField" destination="Kbj-gT-PAQ" id="f2L-TE-MVr"/>
-                <outlet property="streamBackupTextField" destination="ljm-4f-PZx" id="U7n-88-wg9"/>
                 <outlet property="streamFormatTextField" destination="tDf-8N-HNp" id="tJA-XE-e7A"/>
                 <outlet property="streamIdTextField" destination="4Ua-MT-bmJ" id="ylr-1K-QKn"/>
                 <outlet property="streamNameTextField" destination="4Ua-MT-bmJ" id="lxD-Fm-oRR"/>
@@ -476,12 +474,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
                                         <rect key="frame" x="0.0" y="228" width="70" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="kil-ZN-B1r"/>
-                                            <constraint firstAttribute="height" constant="21" id="nyh-5e-FwO"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" title="CREATE" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="z6c-S9-Ut4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -490,69 +484,16 @@
                                             <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
                                         </connections>
                                     </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
+                                        <rect key="frame" x="-4" y="29" width="556" height="180"/>
+                                    </customView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="mFF-A1-0BN" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="541" id="aGG-nN-3As"/>
-                                    <constraint firstAttribute="trailing" secondItem="mFF-A1-0BN" secondAttribute="trailing" constant="486" id="ttG-Pf-II3"/>
-                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="vwm-kC-PEb" userLabel="Settings Tab">
                             <view key="view" id="1C0-rd-XT6">
                                 <rect key="frame" x="0.0" y="0.0" width="556" height="790"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cw2-44-q7f" userLabel="ADDRESS VALUE">
-                                        <rect key="frame" x="148" y="678" width="408" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="1cZ-Oc-XYV">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljm-4f-PZx" userLabel="BACKUP VALUE">
-                                        <rect key="frame" x="148" y="648" width="408" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="5sa-Vi-C0W">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-5d-2RS" userLabel="FORMAT VALUE">
-                                        <rect key="frame" x="148" y="618" width="408" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="9tO-n1-tMk">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U0l-yy-6Pq" userLabel="STATUS VALUE">
-                                        <rect key="frame" x="148" y="588" width="408" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="RDu-bu-dLn">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQP-qF-eYX" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="0.0" y="748" width="556" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="GOOGLE ACCOUNT" id="sYk-Zj-60O">
-                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a85-rH-kEj">
-                                        <rect key="frame" x="0.0" y="698" width="80" height="25"/>
-                                        <buttonCell key="cell" type="square" title="SIGN IN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="ggv-Gd-wNi">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="oAuthSignInBtnClick:" target="-2" id="zea-lH-Dlf"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -594,26 +535,18 @@
                         <action selector="settingsBtnClick:" target="-2" id="A6V-VC-0qa"/>
                     </connections>
                 </button>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
-                    <rect key="frame" x="7" y="20" width="556" height="180"/>
-                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" id="2Fh-oN-1fj"/>
-                <constraint firstAttribute="bottom" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="20" symbolic="YES" id="DBj-j9-rnC"/>
-                <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="mFF-A1-0BN" secondAttribute="bottom" constant="28" id="GtQ-Zq-Hat"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="baseline" secondItem="F8g-Wp-0Uu" secondAttribute="baseline" id="LzJ-dQ-gEL"/>
-                <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="mFF-A1-0BN" secondAttribute="bottom" constant="28" id="MSA-rL-Mxz"/>
-                <constraint firstItem="pco-Gb-iXG" firstAttribute="leading" secondItem="e2o-vu-ZRF" secondAttribute="leading" id="PZq-wD-PoG"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="TnJ-v1-r76"/>
                 <constraint firstItem="3mq-0Q-Zof" firstAttribute="leading" secondItem="F8g-Wp-0Uu" secondAttribute="trailing" constant="3" id="X8g-Pj-ctx"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="baseline" secondItem="3mq-0Q-Zof" secondAttribute="baseline" id="Y6g-M7-8rN"/>
                 <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="76" id="aYu-R3-jXF"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="F8g-Wp-0Uu" secondAttribute="top" id="caS-Lj-XKL"/>
-                <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="7" id="gsY-Ir-bQc"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="npR-HL-thf"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="trailing" secondItem="3mq-0Q-Zof" secondAttribute="trailing" id="uej-UK-Vco"/>
-                <constraint firstItem="e2o-vu-ZRF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="wcv-8N-yA8"/>
             </constraints>
             <point key="canvasLocation" x="468" y="289"/>
         </customView>

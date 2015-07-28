@@ -23,21 +23,15 @@
 @property (weak) IBOutlet NSTextField *localServerPortField;
 @property (weak) IBOutlet AMCheckBoxView*  meshUseIpv6Check;
 @property (weak) IBOutlet AMCheckBoxView*  heartbeatUseIpv6Check;
-
 @property (weak) IBOutlet AMCheckBoxView *assignedLocalServerCheck;
 @property (weak) IBOutlet NSTextField *assignedLocalServerField;
-
-
 @property (weak) IBOutlet AMPopUpView *localServerConfigDrop;
-
-
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv4;
 @property (weak) IBOutlet NSTextField *globalServerAddrFieldIpv6;
 @property (weak) IBOutlet NSTextField *globalServerPortField;
 @property (weak) IBOutlet NSTextField *chatPortField;
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
-
 @property (strong) NSMutableArray *LSConfigOptions;
 
 @end
@@ -47,6 +41,53 @@
     dispatch_queue_t _loading_queue;
 }
 
+-(NSArray *)myIpv4Addr{
+    NSArray* addresses = [NSHost currentHost].addresses;
+    NSMutableArray* ipv4s = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMCommonTools isValidIpv4:ipStr])
+        {
+            [ipv4s addObject:ipStr];
+        }
+    }
+    
+    return ipv4s;
+}
+-(NSArray *)myIpv6Addr{
+    NSArray* addresses = [NSHost currentHost].addresses;
+    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMCommonTools isValidIpv6:ipStr])
+        {
+            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
+            [ipv6s addObject:ipStr];
+        }
+    }
+    
+    return ipv6s;
+}
+-(NSArray *)myGlobalIpv6Addr{
+    NSArray* addresses = [NSHost currentHost].addresses;
+    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [addresses count]; i++)
+    {
+        NSString* ipStr = [addresses objectAtIndex:i];
+        if ([AMCommonTools isValidGlobalIpv6:ipStr])
+        {
+            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
+            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
+            [ipv6s addObject:ipStr];
+        }
+    }
+    
+    return ipv6s;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
@@ -54,61 +95,37 @@
     
     _LSConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
     
+//    self.privateIpBox.delegate = self;
+//    self.privateIpv6Box.delegate = self;
+//    self.meshUseIpv6Check.delegate      = self;
+//    self.heartbeatUseIpv6Check.delegate = self;
+//    self.assignedLocalServerCheck.delegate = self;
+//    self.localServerConfigDrop.delegate = self;
+//    self.useOSCForChatCheck.delegate = self;
+//    self.topBarCheck.delegate = self;
     
-    self.privateIpBox.delegate = self;
-    self.privateIpv6Box.delegate = self;
-    
-    self.meshUseIpv6Check.delegate      = self;
-    self.meshUseIpv6Check.title         = @"MESH USE IPV6";
-    self.heartbeatUseIpv6Check.delegate = self;
     self.heartbeatUseIpv6Check.title    = @"HEARTBEAT USE IPV6";
-    
-    self.assignedLocalServerCheck.delegate = self;
     self.assignedLocalServerCheck.title = @"USE LOCAL SERVER IP";
-    
-    self.localServerConfigDrop.delegate = self;
-    
-    self.useOSCForChatCheck.delegate = self;
     self.useOSCForChatCheck.title = @"USE OSC FOR CHAT";
-    
-    self.topBarCheck.delegate = self;
+    self.meshUseIpv6Check.title         = @"MESH USE IPV6";
     self.topBarCheck.title = @"CONTROL BAR TOP";
     
-    [self loadMachineName];
-    [self loadUseIpv6];
-    [self loadPrivateIp];
-    [self loadIpv6];
-    [self loadLSConfig:_LSConfigOptions];
-    [self loadLocalServerPort];
-    [self loadGlobalServerAddr];
-    [self loadGlobalServerPort];
-    [self loadChatPort];
-    [self loadUseOscForChat];
-    [self loadTopBarCheck];
+    [self reloadSettings];
 }
 
-
--(void)loadMachineName
-{
+-(void)loadMachineName{
     dispatch_async([self loadingQueue], ^{
         
         NSHost* host = [NSHost currentHost];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateMachineName:host.name];
+            self.machineNameField.stringValue = host.name;
+            [[NSUserDefaults standardUserDefaults] setObject:host.name forKey:Preference_Key_General_MachineName];
         });
     });
 }
 
 
--(void)updateMachineName:(NSString *)name
-{
-    self.machineNameField.stringValue = name;
-    [[NSUserDefaults standardUserDefaults] setObject:name forKey:Preference_Key_General_MachineName];
-}
-
-
--(dispatch_queue_t)loadingQueue
-{
+-(dispatch_queue_t)loadingQueue{
     if (_loading_queue == nil) {
         _loading_queue = dispatch_queue_create("_loading_queue", DISPATCH_QUEUE_SERIAL);
     }
@@ -116,9 +133,7 @@
     return _loading_queue;
 }
 
-
--(void)loadUseIpv6
-{
+-(void)loadUseIpv6{
     if ([[NSUserDefaults standardUserDefaults] boolForKey:
          Preference_Key_General_MeshUseIpv6]) {
         self.meshUseIpv6Check.checked = YES;
@@ -135,14 +150,12 @@
     }
 }
 
--(void)loadLSConfig:(NSMutableArray *)options {
+-(void)drawLocalServerOptions:(NSMutableArray *)options {
     dispatch_async([self loadingQueue], ^{
-                
         [self.localServerConfigDrop removeAllItems];
         [self.localServerConfigDrop addItemsWithTitles:options];
         [self selectLastLSConfig];
         [self storeSelectedLSConfig];
-        
         [self.localServerConfigDrop setNeedsDisplay];
     });
 }
@@ -163,20 +176,17 @@
         }
     }
     
-    [self loadLSConfig:_LSConfigOptions];
+    [self drawLocalServerOptions:_LSConfigOptions];
 }
 
--(void)loadPrivateIp
-{
+-(void)loadPrivateIp{
     dispatch_async([self loadingQueue], ^{
         
         NSArray *addresses;
         if (!self.meshUseIpv6Check.checked) {
             addresses = [self myIpv4Addr];
         }else{
-            /** commented out to make way for independent IPV6 field 
-             *addresses = [self myIpv6Addr];
-             **/
+           
             addresses = [self myIpv4Addr];
         }
         
@@ -189,12 +199,10 @@
         });
     });
 }
-
 -(void) loadIpv6 {
     dispatch_async([self loadingQueue], ^{
         
-        NSArray *addresses;
-        addresses = [self myIpv6Addr];
+//        NSArray *addresses = [self myIpv6Addr];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.privateIpv6Box removeAllItems];
@@ -206,63 +214,7 @@
     });
 }
 
-
--(NSArray *)myIpv4Addr
-{
-    NSArray* addresses = [NSHost currentHost].addresses;
-    NSMutableArray* ipv4s = [[NSMutableArray alloc]init];
-    for (int i = 0; i < [addresses count]; i++)
-    {
-        NSString* ipStr = [addresses objectAtIndex:i];
-        if ([AMCommonTools isValidIpv4:ipStr])
-        {
-            [ipv4s addObject:ipStr];
-        }
-    }
-    
-    return ipv4s;
-}
-
-
--(NSArray *)myIpv6Addr
-{
-    NSArray* addresses = [NSHost currentHost].addresses;
-    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
-    for (int i = 0; i < [addresses count]; i++)
-    {
-        NSString* ipStr = [addresses objectAtIndex:i];
-        if ([AMCommonTools isValidIpv6:ipStr])
-        {
-            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
-            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
-            [ipv6s addObject:ipStr];
-        }
-    }
-    
-    return ipv6s;
-}
-
--(NSArray *)myGlobalIpv6Addr
-{
-    NSArray* addresses = [NSHost currentHost].addresses;
-    NSMutableArray* ipv6s = [[NSMutableArray alloc]init];
-    for (int i = 0; i < [addresses count]; i++)
-    {
-        NSString* ipStr = [addresses objectAtIndex:i];
-        if ([AMCommonTools isValidGlobalIpv6:ipStr])
-        {
-            NSArray* ipStrComponents = [ipStr componentsSeparatedByString:@"%"];
-            ipStr = [NSString stringWithFormat:@"%@", [ipStrComponents objectAtIndex:0]];
-            [ipv6s addObject:ipStr];
-        }
-    }
-    
-    return ipv6s;
-}
-
-
--(void)selectLastPrivateIp
-{
+-(void)selectLastPrivateIp{
     NSString* lastUsedIp = [[NSUserDefaults standardUserDefaults]
                             stringForKey:Preference_Key_User_PrivateIp];
     
@@ -274,7 +226,7 @@
 
 -(void)selectLastIpv6 {
     NSString* lastUsedIpv6 = [[NSUserDefaults standardUserDefaults]
-                            stringForKey:Preference_Key_User_Ipv6Address];
+                              stringForKey:Preference_Key_User_Ipv6Address];
     
     [self.privateIpv6Box selectItemWithTitle:lastUsedIpv6];
     if ([self.privateIpv6Box.stringValue isEqualTo:@""] && self.privateIpv6Box.itemCount > 0) {
@@ -284,7 +236,7 @@
 
 -(void)selectLastLSConfig {
     NSString *lastLSConfig = [[NSUserDefaults standardUserDefaults] stringForKey:Preference_Key_Cluster_LSConfig];
-
+    
     NSLog(@"last used ls config is: %@", lastLSConfig);
     if (![lastLSConfig isEqualToString:@"DISCOVER"] && ![lastLSConfig isEqualToString:@"SELF"] && ([lastLSConfig length] > 0)) {
         NSLog(@"config is set to manual IP, need to add it to options");
@@ -296,7 +248,7 @@
         [self.localServerConfigDrop removeAllItems];
         [self.localServerConfigDrop addItemsWithTitles:lsConfigOptions];
     }
-
+    
     [self.localServerConfigDrop selectItemWithTitle:lastLSConfig];
     if ([self.localServerConfigDrop.stringValue isEqualTo:@""] && self.localServerConfigDrop.itemCount > 0) {
         [self.localServerConfigDrop selectItemAtIndex:0];
@@ -304,73 +256,28 @@
     
 }
 
-
--(void)storeUsedPrivateIp
-{
+-(void)storeUsedPrivateIp{
     [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
 }
-
 -(void)storeUsedIpv6 {
     [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
 }
-
 -(void)storeSelectedLSConfig {
     [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
 }
 
-
--(void)loadLocalServerPort
-{
-    self.localServerPortField.stringValue = [[NSUserDefaults standardUserDefaults]
-                                             stringForKey:Preference_Key_General_LocalServerPort];
-}
-
--(void)loadGlobalServerAddr
-{
+-(void)loadGlobalServerAddr{
     self.globalServerAddrFieldIpv4.stringValue =
-                    [[NSUserDefaults standardUserDefaults]
-                        stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
- 
+    [[NSUserDefaults standardUserDefaults]
+     stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
+    
     self.globalServerAddrFieldIpv6.stringValue =
-                    [[NSUserDefaults standardUserDefaults]
-                        stringForKey:Preference_Key_General_GlobalServerAddrIpv6];
+    [[NSUserDefaults standardUserDefaults]
+     stringForKey:Preference_Key_General_GlobalServerAddrIpv6];
 }
-
--(void)loadGlobalServerPort
-{
-    self.globalServerPortField.stringValue = [[NSUserDefaults standardUserDefaults]
-                                              stringForKey:Preference_Key_General_GlobalServerPort];
-}
-
-
--(void)loadChatPort
-{
-    self.chatPortField.stringValue = [[NSUserDefaults standardUserDefaults]
-                                      stringForKey:Preference_Key_General_ChatPort];
-}
-
--(void)loadUseOscForChat
-{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_UseOSCForChat]) {
-        self.useOSCForChatCheck.checked = YES;
-    }else{
-        self.useOSCForChatCheck.checked = NO;
-    }
-}
-
--(void)loadTopBarCheck
-{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
-        self.topBarCheck.checked = YES;
-    }else{
-        self.topBarCheck.checked = NO;
-    }
-}
-
 
 #pragma mark AMPopUpViewDelegeate
--(void)itemSelected:(AMPopUpView*)sender
-{
+-(void)itemSelected:(AMPopUpView*)sender{
     if (sender == self.privateIpBox) {
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpBox.stringValue forKey:Preference_Key_User_PrivateIp];
     } else if (sender == self.privateIpv6Box) {
@@ -381,8 +288,7 @@
 }
 
 #pragma mark AMCheckBoxDelegeate
--(void)onChecked:(AMCheckBoxView*)sender
-{
+-(void)onChecked:(AMCheckBoxView*)sender{
     if (sender == self.meshUseIpv6Check) {
         [[NSUserDefaults standardUserDefaults] setBool:self.meshUseIpv6Check.checked
                                                 forKey:Preference_Key_General_MeshUseIpv6];
@@ -398,7 +304,7 @@
                                                 forKey:Preference_Key_General_HeartbeatUseIpv6];
         
         [AMCoreData shareInstance].systemConfig.heartbeatUseIpv6
-                                = self.heartbeatUseIpv6Check.checked;
+        = self.heartbeatUseIpv6Check.checked;
         return;
     }
     
@@ -421,7 +327,7 @@
     }
     
     if (sender == self.useOSCForChatCheck) {
-    
+        
         if (self.useOSCForChatCheck.checked) {
             [[NSUserDefaults standardUserDefaults]
              setObject:@"YES" forKey:Preference_Key_General_UseOSCForChat];
@@ -441,6 +347,72 @@
         
         return;
     }
+}
+
+- (IBAction)saveConfig:(NSButton *)sender{
+    [self itemSelected:self.privateIpv6Box];
+    [self itemSelected:self.privateIpBox];
+    [self itemSelected:self.localServerConfigDrop];
+    [self onChecked:self.meshUseIpv6Check];
+    [self onChecked:self.heartbeatUseIpv6Check];
+    [self onChecked:self.useOSCForChatCheck];
+    [self onChecked:self.topBarCheck];
+    
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.localServerPortField.stringValue
+     forKey:Preference_Key_General_LocalServerPort];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.globalServerAddrFieldIpv4.stringValue
+     forKey:Preference_Key_General_GlobalServerAddrIpv4];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.globalServerAddrFieldIpv6.stringValue
+     forKey:Preference_Key_General_GlobalServerAddrIpv6];
+    
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.globalServerPortField.stringValue
+     forKey:Preference_Key_General_GlobalServerPort];
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.chatPortField.stringValue
+     forKey:Preference_Key_General_ChatPort];
+    
+    
+}
+
+
+-(void) reloadSettings{
+    [self loadMachineName];
+    [self loadUseIpv6];
+    [self loadPrivateIp];
+    [self loadIpv6];
+    [self drawLocalServerOptions:_LSConfigOptions];
+    [self loadGlobalServerAddr];
+    self.localServerPortField.stringValue = [[NSUserDefaults standardUserDefaults]
+                                             stringForKey:Preference_Key_General_LocalServerPort];
+    
+    self.globalServerPortField.stringValue = [[NSUserDefaults standardUserDefaults]
+                                              stringForKey:Preference_Key_General_GlobalServerPort];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_TopControlBar]) {
+        self.topBarCheck.checked = YES;
+    }else{
+        self.topBarCheck.checked = NO;
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_UseOSCForChat]) {
+        self.useOSCForChatCheck.checked = YES;
+    }else{
+        self.useOSCForChatCheck.checked = NO;
+    }
+    self.chatPortField.stringValue = [[NSUserDefaults standardUserDefaults]
+                                      stringForKey:Preference_Key_General_ChatPort];
+    
+}
+
+- (IBAction)restoreConfig:(NSButton *)sender{
+    [self reloadSettings];
+    
 }
 
 

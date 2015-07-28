@@ -11,6 +11,7 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/AMRatioButtonView.h"
 #import "UIFramework/AMUIConst.h"
+#import "AMUserList.h"
 
 @interface AMTraceRouteTabVC ()<AMUserListDelegate>
 {
@@ -20,6 +21,7 @@
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *traceContentView;
 @property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
+@property (weak) IBOutlet NSView *inputField;
 
 @end
 
@@ -30,7 +32,8 @@
 {
     [super awakeFromNib];
     
-    userList = [[AMUserList alloc] init:self.tableView];
+    userList = [[AMUserList alloc] init:self.tableView
+                             inputField:_inputField];
     userList.delegate = self;
     self.useIPV6Check.title = @"USE IPV6";
 }
@@ -50,11 +53,13 @@
 -(NSString*) formatCommand:(NSString*) ip
 {
     NSString* command;
-    
-    if ([AMCommonTools isValidIpv4:ip] || [AMCommonTools isValidIpv6:ip]){
+   
+    if ([self useIPV6] && [AMCommonTools isValidIpv6:ip]) {
+        command = [NSString stringWithFormat:@"traceroute6 %@", ip];
+    }else{
         command = [NSString stringWithFormat:@"traceroute %@", ip];
     }
-    
+
     return command;
 }
 

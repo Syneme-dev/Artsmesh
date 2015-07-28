@@ -12,6 +12,7 @@
 #import "UIFramework/AMRatioButtonView.h"
 #import "AMPingTabVC.h"
 #import "AMIPerfConfigWC.h"
+#import "AMUserList.h"
 
 @interface AMIPerfTabVC ()<AMUserListDelegate,AMCheckBoxDelegeate>
 {
@@ -22,6 +23,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *iperfContentView;
+@property (weak) IBOutlet NSView *inputField;
 @property (weak) IBOutlet AMCheckBoxView *serverCheck;
 
 @end
@@ -32,7 +34,8 @@
 {
     [super awakeFromNib];
     
-    userList = [[AMUserList alloc] init:self.tableView];
+    userList = [[AMUserList alloc] init:self.tableView
+                             inputField:_inputField];
     userList.delegate = self;
     userList.pingCommand.contentView = self.iperfContentView;
     
@@ -144,15 +147,22 @@
 
 -(void) onChecked:(AMCheckBoxView *)sender
 {
-    if ([sender isEqual:self.serverCheck] &&
-            self.serverCheck.checked == YES) {
+    if ([sender isEqual:self.serverCheck]){
+        if(self.serverCheck.checked == YES) {
 
-        NSString* command = [self formatCommand:nil];
-        [userList executeCommand:command];
-//        self.serverCommand = [serverCommand stop];
-//        self.serverCommand.command = command;
-//        [self.serverCommand run];
+            NSString* command = [self formatCommand:nil];
+            [userList executeCommand:command];
+        }else{
+            //When you unselected the server checkbox, should stop iperf command
+            [self stopiPerf];
+        }
     }
+}
+
+-(void)stopiPerf
+{
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
 }
 
 

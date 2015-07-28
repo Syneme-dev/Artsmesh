@@ -245,6 +245,7 @@
 		4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */; };
 		4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */; };
 		4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */; };
+		4F0C2D0F1B5E2C4500EC6823 /* AMUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */; };
 		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
@@ -885,6 +886,8 @@
 		4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveGroupItem.m; sourceTree = "<group>"; };
 		4AB4ACF41A6E6435003ECE24 /* AMArchiveUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveUserItem.h; sourceTree = "<group>"; };
 		4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveUserItem.m; sourceTree = "<group>"; };
+		4F0C2D0D1B5E2C4500EC6823 /* AMUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserList.h; sourceTree = "<group>"; };
+		4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserList.m; sourceTree = "<group>"; };
 		4F0CE37E1AD5659C005699D7 /* AMScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreView.h; sourceTree = "<group>"; };
 		4F0CE37F1AD5659C005699D7 /* AMScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreView.m; sourceTree = "<group>"; };
 		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
@@ -1959,6 +1962,8 @@
 				4FC6316B1B46781C00BD02AB /* AMIPerfConfigWC.h */,
 				4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */,
 				4FC6316D1B46781C00BD02AB /* AMIPerfConfigWC.xib */,
+				4F0C2D0D1B5E2C4500EC6823 /* AMUserList.h */,
+				4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */,
 			);
 			name = NetworkToolsPanel;
 			sourceTree = "<group>";
@@ -2278,6 +2283,7 @@
 				2D08FDC41AD661FF00A9D257 /* GTLYouTubeLiveBroadcastContentDetails.m in Sources */,
 				2D08FDA51AD661FF00A9D257 /* GTLYouTubeChannelLocalization.m in Sources */,
 				4AB4ACC91A6CC825003ECE24 /* AMUserCellContentView.m in Sources */,
+				4F0C2D0F1B5E2C4500EC6823 /* AMUserList.m in Sources */,
 				2D08FD9A1AD661FF00A9D257 /* GTLYouTubeActivitySnippet.m in Sources */,
 				2D08FDDC1AD661FF00A9D257 /* GTLYouTubePlaylistStatus.m in Sources */,
 				2D08FDFC1AD661FF00A9D257 /* GTLYouTubeVideoLocalization.m in Sources */,

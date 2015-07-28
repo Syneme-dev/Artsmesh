@@ -53,11 +53,13 @@
 -(NSString*) formatCommand:(NSString*) ip
 {
     NSString* command;
-    
-    if ([AMCommonTools isValidIpv4:ip] || [AMCommonTools isValidIpv6:ip]){
+   
+    if ([self useIPV6] && [AMCommonTools isValidIpv6:ip]) {
+        command = [NSString stringWithFormat:@"traceroute6 %@", ip];
+    }else{
         command = [NSString stringWithFormat:@"traceroute %@", ip];
     }
-    
+
     return command;
 }
 

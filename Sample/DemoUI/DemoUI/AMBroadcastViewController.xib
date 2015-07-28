@@ -476,8 +476,12 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
                                         <rect key="frame" x="0.0" y="202" width="70" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="kil-ZN-B1r"/>
+                                            <constraint firstAttribute="height" constant="21" id="nyh-5e-FwO"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="bevel" title="CREATE" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="z6c-S9-Ut4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -487,6 +491,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="mFF-A1-0BN" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="541" id="aGG-nN-3As"/>
+                                    <constraint firstAttribute="trailing" secondItem="mFF-A1-0BN" secondAttribute="trailing" constant="486" id="ttG-Pf-II3"/>
+                                </constraints>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="View" identifier="2" id="vwm-kC-PEb" userLabel="Settings Tab">
@@ -586,11 +594,13 @@
                         <action selector="settingsBtnClick:" target="-2" id="A6V-VC-0qa"/>
                     </connections>
                 </button>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                     <rect key="frame" x="7" y="20" width="556" height="180"/>
                 </customView>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="20" id="AXq-Gk-fkG"/>
+                <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="mFF-A1-0BN" secondAttribute="bottom" constant="28" id="GtQ-Zq-Hat"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="baseline" secondItem="F8g-Wp-0Uu" secondAttribute="baseline" id="LzJ-dQ-gEL"/>
                 <constraint firstItem="3mq-0Q-Zof" firstAttribute="leading" secondItem="F8g-Wp-0Uu" secondAttribute="trailing" constant="3" id="X8g-Pj-ctx"/>
@@ -598,8 +608,10 @@
                 <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" constant="158" id="YO7-cn-8AR"/>
                 <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="76" id="aYu-R3-jXF"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="cA0-HM-Qnu"/>
+                <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="7" id="gsY-Ir-bQc"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="npR-HL-thf"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="rsL-eP-4DH"/>
+                <constraint firstItem="e2o-vu-ZRF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="wcv-8N-yA8"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="wow-0f-id7"/>
             </constraints>
             <point key="canvasLocation" x="468" y="289"/>

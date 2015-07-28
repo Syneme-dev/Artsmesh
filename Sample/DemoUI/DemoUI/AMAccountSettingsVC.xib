@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMAccountSettingsVC">
             <connections>
+                <outlet property="googleBtn" destination="vIR-fc-twO" id="QPI-au-Pzn"/>
                 <outlet property="postBtn" destination="EjM-ag-Utu" id="sHO-vB-npO"/>
                 <outlet property="postResField" destination="WNa-k6-lR6" id="Z3F-YL-3q6"/>
                 <outlet property="view" destination="Ndw-Yy-mVp" id="pPb-zc-X0X"/>
@@ -116,6 +117,24 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yIz-tR-6G5">
+                    <rect key="frame" x="12" y="551" width="578" height="14"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="GOOGLE" id="Ei5-b6-Dmf">
+                        <font key="font" size="12" name="FoundryMonoline-Medium"/>
+                        <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vIR-fc-twO" customClass="AMBlueBorderButton">
+                    <rect key="frame" x="15" y="481" width="300" height="40"/>
+                    <buttonCell key="cell" type="bevel" title="LOGIN" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="vSB-2z-bWD">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="googleBtnClick:" target="-2" id="qoc-5n-oVg"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="563" y="191.5"/>
         </customView>

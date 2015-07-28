@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <GTL/GTMOAuth2WindowController.h>
+#import "GTLYouTube.h"
 
-@interface AMAccountSettingsVC : NSViewController
+@interface AMAccountSettingsVC : NSViewController {
+    @private GTMOAuth2Authentication *mAuth;
+}
 
 @end

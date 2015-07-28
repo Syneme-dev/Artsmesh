@@ -147,20 +147,15 @@
 
 -(void) onChecked:(AMCheckBoxView *)sender
 {
-    if ([sender isEqual:self.serverCheck] &&
-            self.serverCheck.checked == YES) {
+    if ([sender isEqual:self.serverCheck]){
+        if(self.serverCheck.checked == YES) {
 
-        NSString* command = [self formatCommand:nil];
-        [userList executeCommand:command];
-//        self.serverCommand = [serverCommand stop];
-//        self.serverCommand.command = command;
-//        [self.serverCommand run];
-    }
-    
-    //When you unselected the server checkbox, should stop iperf command
-    if ([sender isEqual:self.serverCheck] &&
-        self.serverCheck.checked == NO) {
-        [self stopiPerf];
+            NSString* command = [self formatCommand:nil];
+            [userList executeCommand:command];
+        }else{
+            //When you unselected the server checkbox, should stop iperf command
+            [self stopiPerf];
+        }
     }
 }
 

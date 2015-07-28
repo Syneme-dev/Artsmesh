@@ -156,6 +156,15 @@
 //        self.serverCommand.command = command;
 //        [self.serverCommand run];
     }
+    if (self.serverCheck.checked) {
+        [self stopiPerf];
+    }
+}
+
+-(void)stopiPerf
+{
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
 }
 
 

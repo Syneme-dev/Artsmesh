@@ -14,6 +14,7 @@
 #import "UIFramework/AMCheckBoxView.h"
 #import "UIFramework/NSView_Constrains.h"
 
+
 @interface AMBroadcastViewController ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 
 @property (strong) GTLServiceYouTube *youTubeService;
@@ -29,6 +30,7 @@
 @property (strong) NSString *broadcastPrivacy;
 @property (strong) NSDate *broadcastSchedStart;
 @property (strong) NSDate *broadcastSchedEnd;
+
 
 @end
 
@@ -95,6 +97,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleSignedIn:) name:AM_GOOGLE_SIGNED_IN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleSignedOut:) name:AM_GOOGLE_SIGNED_OUT object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -705,6 +709,13 @@
 
 
 /*** Notifications **/
+- (void)googleSignedIn:(NSNotification *)notification {
+    NSLog(@"signed in event triggered!");
+}
+- (void)googleSignedOut:(NSNotification *)notification {
+    NSLog(@"signed out event triggered!");
+}
+
 - (void)controlTextDidChange:(NSNotification *)notification {
     if ([notification object] == self.eventStartDayTextField && [self.eventStartDayTextField.stringValue length] > 0 ) {
         self.eventEndDayTextField.stringValue = self.eventStartDayTextField.stringValue;

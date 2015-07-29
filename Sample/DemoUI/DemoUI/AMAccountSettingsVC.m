@@ -11,6 +11,10 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "UIFramework/AMBlueBorderButton.h"
 
+NSString * const AMGoogleSignOutNotification        = @"AMGoogleSignOutNotification";
+NSString * const AMGoogleSignInNotification         =
+    @"AMGoogleSignInNotification";
+
 @interface AMAccountSettingsVC ()
 @property (weak) IBOutlet NSButton *postBtn;
 @property (weak) IBOutlet AMBlueBorderButton *googleBtn;
@@ -59,6 +63,9 @@
     } else {
         // Authentication succeeded
         [self setAuthentication:auth];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMGoogleSignInNotification object:self];
+        
         [self updateUI];
     }
 }
@@ -124,6 +131,8 @@
     
     // Discard our retained authentication object
     [self setAuthentication:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AMGoogleSignOutNotification object:self];
     
     [self updateUI];
     

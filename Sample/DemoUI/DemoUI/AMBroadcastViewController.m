@@ -76,20 +76,7 @@
     NSView *view = [eventsManagerVC view];
     [self.eventsManagerView addSubview:view];
     
-    //Set up YouTube/oAuth stuff
-    kKeychainItemName = @"ArtsMesh: YouTube";
-    
-    scope = @"https://www.googleapis.com/auth/youtube";
-    kMyClientID = @"998042950112-nf0sggo2f56tvt8bcord9kn0qe528mqv.apps.googleusercontent.com";
-    kMyClientSecret = @"P1QKHOBVo-1RTzpz9sOde4JP";
-    
-    // Get the saved authentication, if any, from the keychain.
-    GTMOAuth2Authentication *auth;
-    auth = [GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
-                                                                 clientID:kMyClientID
-                                                             clientSecret:kMyClientSecret];
-    
-    [self setAuthentication:auth];
+    [self establishYouTubeVars];
     [self initYoutubeService];
     
     [self setBroadcastFormMode:@"CREATE"];
@@ -330,8 +317,6 @@
                                    if (error == nil) {
                                        // Live broadcast successfully created!
                                        
-                                       NSLog(@"Live Broadcast created!");
-                                       NSLog(@"Creating Live Stream next..");
                                        [self insertLiveStream:liveBroadcast];
                                 
                                        self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
@@ -486,8 +471,6 @@
                                    if (error == nil) {
                                        // Live Stream successfully created!
                                        // Need to pair the stream with the live event now
-                                       NSLog(@"Live Stream created!");
-                                       NSLog(@"Binding new Live Stream to new Live Broadcast..");
                                        
                                        [self bindLiveStream:liveStream withBroadcast:theBroadcast];
                                        
@@ -514,7 +497,6 @@
                                     _broadcastBindTicket = nil;
                                     if (error == nil) {
                                         // Live Stream successfully bound to YouTube Broadcast!
-                                        NSLog(@"Binding successful! Bound Stream details are: %@", theLiveStream);
                                     } else {
                                         NSLog(@"Error: %@", error.description);
                                     }
@@ -700,20 +682,26 @@
     [self.groupTabView selectTabViewItemAtIndex:1];
     
     if ( [self isSignedIn] && self.selectedBroadcast != nil ) {
-        NSLog(@"Event selected! Load CDN Settings into fields now..");
-        NSLog(@"Current broadcast is: %@", self.selectedBroadcast);
+        // Event selected - Load CDN Settings into fields now
+        // NSLog(@"Current broadcast is: %@", self.selectedBroadcast);
     } else {
-        NSLog(@"No event selected, blank..");
+        // No event selected, blank..
     }
 }
 
 
 /*** Notifications **/
 - (void)googleSignedIn:(NSNotification *)notification {
-    NSLog(@"signed in event triggered!");
+    GTMOAuth2Authentication *auth = notification.object;
+
+    [self setAuthentication:auth];
+    [self initYoutubeService];
+    
+    [self updateUI];
 }
 - (void)googleSignedOut:(NSNotification *)notification {
-    NSLog(@"signed out event triggered!");
+    [self setAuthentication:nil];
+    [self updateUI];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {
@@ -806,7 +794,6 @@
                                        if (error == nil) {
                                            // Live Stream found, populate event fields now
                                            
-                                           NSLog(@"Live Stream found: %@", liveStreamList);
                                            if ([liveStreamList.items count] > 0) {
                                                GTLYouTubeLiveStream *foundStream = [liveStreamList.items objectAtIndex:0];
                                                [self.streamTitleTextField setStringValue:foundStream.snippet.title];
@@ -854,6 +841,22 @@
     [super webViewClose:sender];
 }
 
+- (void)establishYouTubeVars {
+    kKeychainItemName = @"ArtsMesh: YouTube";
+    
+    scope = @"https://www.googleapis.com/auth/youtube";
+    kMyClientID = @"998042950112-nf0sggo2f56tvt8bcord9kn0qe528mqv.apps.googleusercontent.com";
+    kMyClientSecret = @"P1QKHOBVo-1RTzpz9sOde4JP";
+    
+    // Get the saved authentication, if any, from the keychain.
+    GTMOAuth2Authentication *auth;
+    auth = [GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
+                                                              clientID:kMyClientID
+                                                          clientSecret:kMyClientSecret];
+    
+    [self setAuthentication:auth];
+}
+
 - (void)setAuthentication:(GTMOAuth2Authentication *)auth {
     mAuth = auth;
 }
@@ -869,7 +872,12 @@
     [self.privateCheck setFontSize:10.0f];
     
     // Test pull current live events list
-    if ([self isSignedIn]) { [self getExistingYouTubeLiveEvents]; }
+    if ([self isSignedIn]) {
+        [self getExistingYouTubeLiveEvents];
+    } else {
+        [eventsManagerVC.eventsListScrollView.documentView removeAllRows];
+    }
+    [self.view setNeedsDisplay:true];
     
 }
 

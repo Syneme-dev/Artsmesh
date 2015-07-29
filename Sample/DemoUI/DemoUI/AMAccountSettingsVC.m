@@ -61,7 +61,7 @@
         // Authentication succeeded
         [self setAuthentication:auth];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_SIGNED_IN object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_SIGNED_IN object:auth];
         
         [self updateUI];
     }
@@ -89,7 +89,7 @@
 }
 
 - (IBAction)googleBtnClick:(id)sender {
-    NSLog(@"google button pressed!");
+    // Fires when Google Login/Logout button is clicked
     if ([self isSignedIn]) {
         [self signOut];
     } else {

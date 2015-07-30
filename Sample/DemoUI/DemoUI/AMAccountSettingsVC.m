@@ -61,7 +61,7 @@
         // Authentication succeeded
         [self setAuthentication:auth];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_SIGNED_IN object:auth];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_ACCOUNT_CHANGED object:auth];
         
         [self updateUI];
     }
@@ -129,7 +129,7 @@
     // Discard our retained authentication object
     [self setAuthentication:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_SIGNED_OUT object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AM_GOOGLE_ACCOUNT_CHANGED object:nil];
     
     [self updateUI];
     

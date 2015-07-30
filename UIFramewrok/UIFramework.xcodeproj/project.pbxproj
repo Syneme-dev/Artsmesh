@@ -37,6 +37,8 @@
 		4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */; };
 		4FBBCB151A4FE43600DF4C3E /* AMRatioButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */; };
+		4FD498C61B6A16BA00427866 /* AMFakeBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD498C41B6A16BA00427866 /* AMFakeBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4FD498C71B6A16BA00427866 /* AMFakeBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD498C51B6A16BA00427866 /* AMFakeBox.m */; };
 		AF00D43A18C9B5E6004DE9E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */; };
 		AF00D44418C9B5E6004DE9E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF00D44218C9B5E6004DE9E6 /* InfoPlist.strings */; };
 		AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */ = {isa = PBXBuildFile; fileRef = AF00D44718C9B5E6004DE9E6 /* UIFramewrok.m */; };
@@ -106,6 +108,8 @@
 		4FAA9B3D1AAACC8100D9266E /* AMBlinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlinkView.m; sourceTree = "<group>"; };
 		4FBBCB131A4FE43600DF4C3E /* AMRatioButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRatioButtonView.h; sourceTree = "<group>"; };
 		4FBBCB141A4FE43600DF4C3E /* AMRatioButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRatioButtonView.m; sourceTree = "<group>"; };
+		4FD498C41B6A16BA00427866 /* AMFakeBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFakeBox.h; sourceTree = "<group>"; };
+		4FD498C51B6A16BA00427866 /* AMFakeBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFakeBox.m; sourceTree = "<group>"; };
 		AF00D43618C9B5E6004DE9E6 /* UIFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF00D43918C9B5E6004DE9E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AF00D43C18C9B5E6004DE9E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -182,6 +186,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				4FD498C41B6A16BA00427866 /* AMFakeBox.h */,
+				4FD498C51B6A16BA00427866 /* AMFakeBox.m */,
 				AFF79DB91B5B823E000A95DF /* AMBlueBorderButtonCell.h */,
 				AFF79DBA1B5B823E000A95DF /* AMBlueBorderButtonCell.m */,
 				AFF605491B08699F00B835B9 /* AMBlueBorderButton.h */,
@@ -324,6 +330,7 @@
 				CEC231751A00D5B300AC7B7F /* AMBackgroundView.h in Headers */,
 				01D059B31A2D5A3600BC51E7 /* AMBigBlueButton.h in Headers */,
 				4F809F581ACECA7D009AC0E6 /* AMWindow.h in Headers */,
+				4FD498C61B6A16BA00427866 /* AMFakeBox.h in Headers */,
 				4A776D291A78873300281F46 /* NSView_Constrains.h in Headers */,
 				CEC27F0B1993877E0023163F /* AMTextFieldCell.h in Headers */,
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
@@ -418,6 +425,7 @@
 				4F809F591ACECA7D009AC0E6 /* AMWindow.m in Sources */,
 				AF00D44818C9B5E6004DE9E6 /* UIFramewrok.m in Sources */,
 				AF9DC78518E9643E0029DB97 /* BlueBackgroundView.m in Sources */,
+				4FD498C71B6A16BA00427866 /* AMFakeBox.m in Sources */,
 				CEC27F0C1993877E0023163F /* AMTextFieldCell.m in Sources */,
 				4F5F13F41ADE542B00E12613 /* AMTableCellView.m in Sources */,
 				CE883164192C44B900DA17CE /* AMBoxItem.m in Sources */,

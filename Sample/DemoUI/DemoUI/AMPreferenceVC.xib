@@ -7,11 +7,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPreferenceVC">
             <connections>
+                <outlet property="accountTabBtn" destination="bOZ-dO-5oy" id="B0v-Pd-gqk"/>
                 <outlet property="generalTabBtn" destination="mvk-HX-fYa" id="S7s-F2-Hzt"/>
                 <outlet property="jackTabBtn" destination="YZd-cX-Ly4" id="YBa-oL-eq4"/>
                 <outlet property="jacktripTabBtn" destination="niJ-06-bEy" id="5lO-XK-8ND"/>
                 <outlet property="oscGroupTabBtn" destination="vtg-zK-Gic" id="PMt-YG-MFZ"/>
-                <outlet property="statusnetTabButton" destination="bOZ-dO-5oy" id="HUh-sM-X1x"/>
                 <outlet property="tabs" destination="Gtp-xq-sPX" id="pcv-9U-Xnc"/>
                 <outlet property="view" destination="c22-O7-iKe" id="7RR-Ni-VDM"/>
             </connections>
@@ -108,12 +108,12 @@
                                 <constraint firstAttribute="width" constant="64" id="Hp6-hJ-KvV"/>
                                 <constraint firstAttribute="height" constant="13" id="Q8F-59-g6b"/>
                             </constraints>
-                            <buttonCell key="cell" type="inline" title="STATUSNET" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
+                            <buttonCell key="cell" type="inline" title="ACCOUNTS" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" size="10" name="FoundryMonoline-Bold"/>
                             </buttonCell>
                             <connections>
-                                <action selector="onStatusNetClick:" target="-2" id="gB7-Uw-bNH"/>
+                                <action selector="onAccountClick:" target="-2" id="qt5-fM-LEj"/>
                             </connections>
                         </button>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXP-JL-24c" customClass="AMFoundryFontView">
@@ -194,7 +194,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="StatusNet" identifier="4" id="GqN-Y7-qns">
+                        <tabViewItem label="Accounts" identifier="4" id="GqN-Y7-qns">
                             <view key="view" identifier="statusNet" id="343-FY-LyZ" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

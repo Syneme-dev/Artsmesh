@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfTabVC">
             <connections>
+                <outlet property="inputField" destination="GCI-Xo-K6x" id="oFG-d8-ws9"/>
                 <outlet property="iperfContentView" destination="No2-D9-cH4" id="9Cy-AB-htm"/>
                 <outlet property="serverCheck" destination="xl8-8F-JXm" id="nE8-a2-5Be"/>
                 <outlet property="settingButton" destination="ygR-O6-hPH" id="QoM-tF-Dn3"/>
@@ -42,8 +44,43 @@
                         <constraint firstAttribute="width" constant="86" id="y3Z-uR-RgQ"/>
                     </constraints>
                 </customView>
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blc-uH-2x5">
+                    <rect key="frame" x="178" y="92" width="483" height="439"/>
+                    <clipView key="contentView" copiesOnScroll="NO" id="AUk-yN-AUp">
+                        <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" spellingCorrection="YES" id="No2-D9-cH4" customClass="AMFoundryFontTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="539"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.1764705926" green="0.1764705926" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                <size key="minSize" width="483" height="439"/>
+                                <size key="maxSize" width="496" height="10000000"/>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="483" height="439"/>
+                                <size key="maxSize" width="496" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="9Lj-UE-e3M">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jJu-Tp-auH">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="xl8-8F-JXm" customClass="AMCheckBoxView">
+                    <rect key="frame" x="490" y="64" width="34" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="VfJ-EW-Xwi"/>
+                        <constraint firstAttribute="width" constant="34" id="fcP-8a-J6u"/>
+                        <constraint firstAttribute="height" constant="20" id="g6a-hx-YMO"/>
+                    </constraints>
+                </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0w3-Xy-ZWl">
-                    <rect key="frame" x="0.0" y="92" width="178" height="439"/>
+                    <rect key="frame" x="0.0" y="92" width="178" height="390"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="FbO-4h-EVJ">
                         <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,44 +172,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blc-uH-2x5">
-                    <rect key="frame" x="178" y="92" width="483" height="439"/>
-                    <clipView key="contentView" copiesOnScroll="NO" id="AUk-yN-AUp">
-                        <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" spellingCorrection="YES" id="No2-D9-cH4" customClass="AMFoundryFontTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="415" height="539"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.1764705926" green="0.1764705926" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                                <size key="minSize" width="483" height="439"/>
-                                <size key="maxSize" width="496" height="10000000"/>
-                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="483" height="439"/>
-                                <size key="maxSize" width="496" height="10000000"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                    </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="9Lj-UE-e3M">
-                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jJu-Tp-auH">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
-                <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="xl8-8F-JXm" customClass="AMCheckBoxView">
-                    <rect key="frame" x="490" y="64" width="34" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="VfJ-EW-Xwi"/>
-                        <constraint firstAttribute="width" constant="34" id="fcP-8a-J6u"/>
-                        <constraint firstAttribute="height" constant="20" id="g6a-hx-YMO"/>
-                    </constraints>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCI-Xo-K6x">
+                    <rect key="frame" x="0.0" y="480" width="178" height="51"/>
                 </customView>
             </subviews>
             <constraints>
-                <constraint firstItem="0w3-Xy-ZWl" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="top" id="0AV-aQ-nzt"/>
+                <constraint firstItem="0w3-Xy-ZWl" firstAttribute="top" secondItem="blc-uH-2x5" secondAttribute="top" constant="49" id="0AV-aQ-nzt"/>
                 <constraint firstItem="blc-uH-2x5" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="10j-LD-71J"/>
                 <constraint firstAttribute="trailing" secondItem="blc-uH-2x5" secondAttribute="trailing" id="4lI-vW-UI0"/>
                 <constraint firstItem="blc-uH-2x5" firstAttribute="leading" secondItem="0w3-Xy-ZWl" secondAttribute="trailing" id="5I3-3v-5QW"/>

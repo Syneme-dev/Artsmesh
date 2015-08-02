@@ -9,7 +9,7 @@
 #import "AMPreferenceVC.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMJackSettingsVC.h"
-#import "AMStatusNetSettingsVC.h"
+#import "AMAccountSettingsVC.h"
 #import "AMOSCGroupSettingsVC.h"
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
@@ -27,7 +27,7 @@
     NSViewController    *_oscGroupSettingsVC;
     NSViewController    *_jacktripSettingVC;
     NSViewController    *_jackSettingsVC;
-    NSViewController    *_statusNetSettingsVC;
+    NSViewController    *_accountSettingsVC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,7 +46,7 @@
     [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.statusnetTabButton toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.accountTabBtn toColor:UI_Color_blue];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -69,7 +69,7 @@
         }else if([view.identifier isEqualTo:@"oscGroups"]){
             [self loadOSCGroupPage:view ];
         }else if([view.identifier isEqualTo:@"statusNet"]){
-            [self loadStatusNetPage:view ];
+            [self loadAccountPage:view ];
         }
     }
 }
@@ -125,14 +125,14 @@
 }
 
 
--(void)loadStatusNetPage:(NSView*)tabView
+-(void)loadAccountPage:(NSView*)tabView
 {
-    if (_statusNetSettingsVC == nil) {
-        _statusNetSettingsVC = [[AMStatusNetSettingsVC alloc] init];
+    if (_accountSettingsVC == nil) {
+        _accountSettingsVC = [[AMAccountSettingsVC alloc] init];
     }
     
-    if(_statusNetSettingsVC){
-        [tabView addConstrainsToSubview:_statusNetSettingsVC.view
+    if(_accountSettingsVC){
+        [tabView addConstrainsToSubview:_accountSettingsVC.view
                            leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
 }
@@ -146,7 +146,7 @@
     [self.tabButtons addObject:self.jackTabBtn];
     [self.tabButtons addObject:self.jacktripTabBtn];
     [self.tabButtons addObject:self.oscGroupTabBtn];
-    [self.tabButtons addObject:self.statusnetTabButton];
+    [self.tabButtons addObject:self.accountTabBtn];
     self.showingTabsCount=5;
 }
 
@@ -172,9 +172,8 @@
     [self.tabs selectTabViewItemAtIndex:3];
 }
 
-
-- (IBAction)onStatusNetClick:(id)sender {
-    [self pushDownButton:self.statusnetTabButton];
+- (IBAction)onAccountClick:(id)sender {
+    [self pushDownButton:self.accountTabBtn];
     [self.tabs selectTabViewItemAtIndex:4];
 }
 

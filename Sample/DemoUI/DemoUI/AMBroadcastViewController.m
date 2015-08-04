@@ -84,8 +84,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleSignedIn:) name:AM_GOOGLE_SIGNED_IN object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleSignedOut:) name:AM_GOOGLE_SIGNED_OUT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleAccountChanged:) name:AM_GOOGLE_ACCOUNT_CHANGED object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -691,17 +690,20 @@
 
 
 /*** Notifications **/
-- (void)googleSignedIn:(NSNotification *)notification {
-    GTMOAuth2Authentication *auth = notification.object;
-
-    [self setAuthentication:auth];
-    [self initYoutubeService];
-    
-    [self updateUI];
-}
-- (void)googleSignedOut:(NSNotification *)notification {
-    [self setAuthentication:nil];
-    [self updateUI];
+- (void)googleAccountChanged:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[GTMOAuth2Authentication class]]){
+        // User just signed in, let's handle business
+        GTMOAuth2Authentication *auth = notification.object;
+        
+        [self setAuthentication:auth];
+        [self initYoutubeService];
+        
+        [self updateUI];
+    } else {
+        // User just signed out, let's update YouTube Tab display and clear out
+        [self setAuthentication:nil];
+        [self updateUI];
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {

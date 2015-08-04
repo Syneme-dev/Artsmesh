@@ -19,6 +19,9 @@
 @implementation AMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"WebKitDeveloperExtras"]];
+     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"IncludeDebugMenu"]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSAssert(AMLogInitialize(), @"Initialize Log Error!");
     

@@ -38,12 +38,12 @@
 {
     NSRect rect  = [self bounds];
     CGSize size = rect.size;
-    return NSMakeRect(size.width - 80, 5, 16, 16);
+    return NSMakeRect(size.width - 80, 0, 16, 16);
 }
 
 - (NSRect)knobRectLeft
 {
-    return NSMakeRect(0, 5, 16, 16);
+    return NSMakeRect(0, 0, 16, 16);
 }
 
 

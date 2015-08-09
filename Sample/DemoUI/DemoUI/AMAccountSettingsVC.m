@@ -76,16 +76,16 @@
 
 
 - (IBAction)statusNetTest:(id)sender {
-    BOOL res = [[AMStatusNet shareInstance]
-                postMessageToStatusNet:@"This is a test message send from Artsmesh through API"];
-    if (res)
-    {
-        self.postResField.stringValue = @"Post Succeeded!";
-    }
-    else
-    {
-        self.postResField.stringValue = @"Post Failed!";
-    }
+//    BOOL res = [[AMStatusNet shareInstance]
+//                postMessageToStatusNet:@"This is a test message send from Artsmesh through API"];
+//    if (res)
+//    {
+//        self.postResField.stringValue = @"Post Succeeded!";
+//    }
+//    else
+//    {
+//        self.postResField.stringValue = @"Post Failed!";
+//    }
 }
 
 - (IBAction)googleBtnClick:(id)sender {

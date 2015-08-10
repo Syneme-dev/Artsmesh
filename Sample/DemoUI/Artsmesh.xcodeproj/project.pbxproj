@@ -245,6 +245,12 @@
 		4AB4ACED1A6E5FDF003ECE24 /* AMArchiveCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACEC1A6E5FDF003ECE24 /* AMArchiveCellContentView.m */; };
 		4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */; };
 		4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */; };
+		4F08E2E81B78A75D00578AB5 /* QTKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */; };
+		4F08E2E91B78A75D00578AB5 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */; };
+		4F08E2EA1B78A75D00578AB5 /* SyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E71B78A75D00578AB5 /* SyphonSender.m */; };
+		4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */; };
+		4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */; };
+		4F08E2F01B78AA0F00578AB5 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2EF1B78AA0F00578AB5 /* QTKit.framework */; };
 		4F0C2D0F1B5E2C4500EC6823 /* AMUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */; };
 		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
@@ -887,6 +893,15 @@
 		4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveGroupItem.m; sourceTree = "<group>"; };
 		4AB4ACF41A6E6435003ECE24 /* AMArchiveUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMArchiveUserItem.h; sourceTree = "<group>"; };
 		4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveUserItem.m; sourceTree = "<group>"; };
+		4F08E2E21B78A75D00578AB5 /* QTKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QTKitHelper.h; path = SyphonCamera/QTKitHelper.h; sourceTree = "<group>"; };
+		4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QTKitHelper.m; path = SyphonCamera/QTKitHelper.m; sourceTree = "<group>"; };
+		4F08E2E41B78A75D00578AB5 /* SCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCAppDelegate.h; path = SyphonCamera/SCAppDelegate.h; sourceTree = "<group>"; };
+		4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCAppDelegate.m; path = SyphonCamera/SCAppDelegate.m; sourceTree = "<group>"; };
+		4F08E2E61B78A75D00578AB5 /* SyphonSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyphonSender.h; path = SyphonCamera/SyphonSender.h; sourceTree = "<group>"; };
+		4F08E2E71B78A75D00578AB5 /* SyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyphonSender.m; path = SyphonCamera/SyphonSender.m; sourceTree = "<group>"; };
+		4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		4F08E2EF1B78AA0F00578AB5 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		4F0C2D0D1B5E2C4500EC6823 /* AMUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMUserList.h; sourceTree = "<group>"; };
 		4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMUserList.m; sourceTree = "<group>"; };
 		4F0CE37E1AD5659C005699D7 /* AMScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreView.h; sourceTree = "<group>"; };
@@ -1063,6 +1078,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F08E2F01B78AA0F00578AB5 /* QTKit.framework in Frameworks */,
+				4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */,
+				4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */,
 				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
@@ -1099,6 +1117,7 @@
 		0198A79D1A0F24B6009A36CA /* Mixer Panel */ = {
 			isa = PBXGroup;
 			children = (
+				4F08E2E11B78A44B00578AB5 /* FaceTimeCamera */,
 				CE486A941A280C9A00D35B82 /* video */,
 				AFDA79A21945864A0002873B /* AMMixingViewController.h */,
 				AFDA79A31945864A0002873B /* AMMixingViewController.m */,
@@ -1577,6 +1596,9 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F08E2EF1B78AA0F00578AB5 /* QTKit.framework */,
+				4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */,
+				4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */,
 				2D5A01BD1ACB8C3500D28FE5 /* Google Services */,
 				CE486AB21A28140900D35B82 /* Syphon.framework */,
 				4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */,
@@ -1784,6 +1806,19 @@
 				4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */,
 			);
 			name = OutlineItems;
+			sourceTree = "<group>";
+		};
+		4F08E2E11B78A44B00578AB5 /* FaceTimeCamera */ = {
+			isa = PBXGroup;
+			children = (
+				4F08E2E21B78A75D00578AB5 /* QTKitHelper.h */,
+				4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */,
+				4F08E2E41B78A75D00578AB5 /* SCAppDelegate.h */,
+				4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */,
+				4F08E2E61B78A75D00578AB5 /* SyphonSender.h */,
+				4F08E2E71B78A75D00578AB5 /* SyphonSender.m */,
+			);
+			name = FaceTimeCamera;
 			sourceTree = "<group>";
 		};
 		4F9677731ADF8B2A0037BB64 /* TimerTab */ = {
@@ -2275,10 +2310,12 @@
 				2D08FDA91AD661FF00A9D257 /* GTLYouTubeChannelSectionLocalization.m in Sources */,
 				2023E8EB1A50F1970034FB68 /* AMTimerTableCellVC.m in Sources */,
 				2D08FD991AD661FF00A9D257 /* GTLYouTubeActivityListResponse.m in Sources */,
+				4F08E2EA1B78A75D00578AB5 /* SyphonSender.m in Sources */,
 				4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */,
 				2D08FE061AD661FF00A9D257 /* GTLYouTubeVideoStatus.m in Sources */,
 				2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */,
 				2D08FD9B1AD661FF00A9D257 /* GTLYouTubeCdnSettings.m in Sources */,
+				4F08E2E81B78A75D00578AB5 /* QTKitHelper.m in Sources */,
 				2D08FDB41AD661FF00A9D257 /* GTLYouTubeGuideCategoryListResponse.m in Sources */,
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
 				4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */,
@@ -2324,6 +2361,7 @@
 				AF2213271B367F6F003320D9 /* AMVerticalScrollView.m in Sources */,
 				2D08FD8C1AD661FF00A9D257 /* GTLYouTubeActivity.m in Sources */,
 				2D08FDAC1AD661FF00A9D257 /* GTLYouTubeChannelSnippet.m in Sources */,
+				4F08E2E91B78A75D00578AB5 /* SCAppDelegate.m in Sources */,
 				CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */,
 				2D08FDCB1AD661FF00A9D257 /* GTLYouTubeLiveStreamSnippet.m in Sources */,
 				2D08FDB61AD661FF00A9D257 /* GTLYouTubeI18nLanguage.m in Sources */,

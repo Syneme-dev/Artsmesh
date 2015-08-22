@@ -494,6 +494,46 @@
                             <view key="view" id="1C0-rd-XT6">
                                 <rect key="frame" x="0.0" y="0.0" width="556" height="790"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-8W-2y6" userLabel="VIDEO" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="0.0" y="738" width="556" height="14"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="VIDEO" id="qn9-np-cms">
+                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gsz-ba-f2L" userLabel="| ">
+                                        <rect key="frame" x="0.0" y="708" width="10" height="10"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Yby-n6-GVh"/>
+                                    </imageView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxi-47-BGp" userLabel="DEVICE" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="16" y="708" width="114" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="DEVICE" id="mVs-io-PsS">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4f-iL-FzX" userLabel="DEVICE POPUP" customClass="AMPopUpView">
+                                        <rect key="frame" x="146" y="703" width="408" height="20"/>
+                                    </customView>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ut9-As-N0n" userLabel="| ">
+                                        <rect key="frame" x="0.0" y="678" width="10" height="10"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="mMx-Em-FAc"/>
+                                    </imageView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-rj-0xk" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="16" y="678" width="114" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="INPUT SIZE" id="9b5-lN-dAe">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHE-QI-PjX" userLabel="IN SIZE POPUP" customClass="AMPopUpView">
+                                        <rect key="frame" x="146" y="673" width="408" height="20"/>
+                                    </customView>
+                                </subviews>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -503,7 +543,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="iUd-tH-8uC"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="|" id="dbe-gk-vE0">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="|" id="dbe-gk-vE0">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.23137254901960785" green="0.29411764705882354" blue="0.35686274509803922" alpha="1" colorSpace="deviceRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

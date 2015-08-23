@@ -53,7 +53,7 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:self];
     [self.socialWebTab setPolicyDelegate:self];
     [self.socialWebTab setUIDelegate:self];
-    [self.socialWebTab setWantsLayer:YES];
+//    [self.socialWebTab setWantsLayer:NO];
     
     self.archiveScale=1;
 

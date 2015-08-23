@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPreferenceVC">
@@ -33,7 +33,7 @@
                             </constraints>
                             <buttonCell key="cell" type="inline" title="GENERAL" bezelStyle="inline" alignment="center" inset="2" id="dbP-tn-JPE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onGeneralClick:" target="-2" id="LR0-3o-sHb"/>
@@ -45,7 +45,7 @@
                                 <constraint firstAttribute="width" constant="5" id="kJl-1B-RC7"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="uvc-xq-Xws">
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -58,7 +58,7 @@
                             </constraints>
                             <buttonCell key="cell" type="inline" title="JACK SERVER" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="938-Tj-VQz">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onJackClick:" target="-2" id="TXb-H0-nDy"/>
@@ -71,7 +71,7 @@
                                 <constraint firstAttribute="width" constant="5" id="Vhy-R2-6ag"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="RLD-Ww-3Tv">
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -85,7 +85,7 @@
                             </constraints>
                             <buttonCell key="cell" type="inline" title="JACKTRIP" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="mfE-1n-2Hn">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onJackTripClick:" target="-2" id="hKP-n7-MwN"/>
@@ -97,7 +97,7 @@
                                 <constraint firstAttribute="height" constant="13" id="QEV-3v-Y9Y"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="sYT-6D-rI0">
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -110,7 +110,7 @@
                             </constraints>
                             <buttonCell key="cell" type="inline" title="ACCOUNTS" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="PQV-df-m3b">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onAccountClick:" target="-2" id="qt5-fM-LEj"/>
@@ -123,7 +123,7 @@
                                 <constraint firstAttribute="height" constant="13" id="cm2-fe-5kg"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="|" id="e3s-Qd-UDQ">
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                                 <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -136,7 +136,7 @@
                             </constraints>
                             <buttonCell key="cell" type="inline" title="OSC GROUP " bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Gf7-AX-FcM">
                                 <behavior key="behavior" lightByContents="YES"/>
-                                <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="system" size="10"/>
                             </buttonCell>
                             <connections>
                                 <action selector="onOSCGroupClick:" target="-2" id="e7H-pO-sSW"/>

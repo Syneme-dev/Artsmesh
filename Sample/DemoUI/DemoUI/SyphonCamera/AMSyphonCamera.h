@@ -10,20 +10,15 @@
 #import "QTKitHelper.h"
 #import "SyphonSender.h"
 
-@interface SCAppDelegate : NSObject <NSApplicationDelegate>{
-//    NSWindow *_window;
+@interface AMSyphonCamera : NSObject {
+    
     NSInteger _selectedDevice;
     NSString *selectedDeviceName;
     NSMutableDictionary *runningDevices;
 }
 
-//show main window
-- (IBAction)showWindow:(id)sendr;
-
-@property (nonatomic, assign) IBOutlet NSWindow *window;
-//set/get capture state of the currently selected video device
-@property (nonatomic) BOOL deviceEnabled;
-//index of the currently selected video device
+- (void) initializeDevices;
+- (void) startDevice:(NSString*)name;
 @property (nonatomic, assign) NSIndexSet *selectedDevice;
 
 @end

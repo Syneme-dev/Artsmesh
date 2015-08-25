@@ -12,6 +12,7 @@
 #import "UIFrameWork/AMPanelView.h"
 #import "AMAppDelegate.h"
 #import "AMSyphonView.h"
+#import "AMSyphonCamera.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -27,6 +28,8 @@
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView9;
 @property (strong, nonatomic, readonly) NSArray *smallViews;
 @property (weak, nonatomic) AMVideoMixerBackgroundView *selected;
+
+@property  (nonatomic) AMSyphonCamera* syCamera;
 @end
 
 @implementation AMVideoMixerViewController
@@ -36,6 +39,10 @@
 {
     [super viewDidLoad];
     [self setup];
+    
+    _syCamera = [[AMSyphonCamera alloc] init];
+    [_syCamera initializeDevices];
+   // [_syCamera startDevice:nil];
 }
 
 - (void)setup

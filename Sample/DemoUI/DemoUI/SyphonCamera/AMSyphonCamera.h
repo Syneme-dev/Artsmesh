@@ -17,8 +17,6 @@
     NSMutableDictionary *runningDevices;
 }
 
-- (void) initializeDevices;
-- (void) startDevice:(NSString*)name;
-@property (nonatomic, assign) NSIndexSet *selectedDevice;
+- (void) initializeDevice;
 
 @end

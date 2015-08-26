@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -7,6 +7,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
+                <outlet property="audioBitRatePopupView" destination="krz-G2-CKH" id="Bkq-4d-oAl"/>
+                <outlet property="audioDevicePopupView" destination="pKg-Nd-B2U" id="5hB-8P-DHr"/>
+                <outlet property="audioFormatPopupView" destination="P9K-PL-lsh" id="M7E-UE-RsY"/>
+                <outlet property="audioSampleRatePopupView" destination="jeV-pS-uRh" id="35C-j0-JZ8"/>
                 <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
@@ -32,6 +36,13 @@
                 <outlet property="streamNameTextField" destination="4Ua-MT-bmJ" id="lxD-Fm-oRR"/>
                 <outlet property="streamStatusTextField" destination="9nM-Jj-bNd" id="hMW-OU-bN9"/>
                 <outlet property="streamTitleTextField" destination="xC2-ac-rpw" id="VmT-pD-bcZ"/>
+                <outlet property="videoBitRatePopupView" destination="Lzu-Ds-zGf" id="8te-HF-8u6"/>
+                <outlet property="videoDevicePopupView" destination="i4f-iL-FzX" id="aRH-NG-us0"/>
+                <outlet property="videoFormatPopupView" destination="kT4-0D-8hP" id="sPK-NP-Wu6"/>
+                <outlet property="videoFrameRatePopupView" destination="N4W-X3-lkM" id="i40-eg-R5O"/>
+                <outlet property="videoInputSizePopupView" destination="FHE-QI-PjX" id="Pa7-iu-PV2"/>
+                <outlet property="videoOutputSizeHeightTextField" destination="xKr-gt-Pec" id="kcb-gp-xGm"/>
+                <outlet property="videoOutputSizeWidthTextField" destination="P9O-mo-6If" id="zaJ-Yp-OIs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="youtubeBtn" destination="UQB-MZ-pFk" id="MF0-mP-pYA"/>
             </connections>

@@ -10,6 +10,8 @@
 #import "QTKitHelper.h"
 #import "SyphonSender.h"
 
+extern NSString* faceTimeCamera;
+
 @interface AMSyphonCamera : NSObject {
     
     NSInteger _selectedDevice;

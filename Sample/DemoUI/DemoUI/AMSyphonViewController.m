@@ -8,7 +8,7 @@
 
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
-
+#import "AMSyphonCamera.h"
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()
@@ -80,7 +80,8 @@ NSString* kNonServer = @"    --    ";
         NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
         NSString* title     = [NSString stringWithString:appName];
         
-        if([appName isEqualToString:@"Artsmesh"])
+        if([appName isEqualToString:@"Artsmesh"] &&
+           ![name isEqualToString:faceTimeCamera])
         {
             //filter self server
             continue;

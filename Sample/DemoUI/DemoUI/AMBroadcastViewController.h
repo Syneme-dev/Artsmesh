@@ -70,11 +70,16 @@
 // Settings Tab IBOutlets
 @property (strong) IBOutlet AMPopUpView *videoDevicePopupView;
 @property (strong) IBOutlet AMPopUpView *videoInputSizePopupView;
+@property (strong) IBOutlet AMFoundryFontView *videoInputCustomWidthTextField;
+@property (strong) IBOutlet AMFoundryFontView *videoInputCustomHeightTextField;
+@property (strong) IBOutlet AMCheckBoxView *videoInputCustomCheckBox;
+@property (strong) IBOutlet AMPopUpView *videoOutputSizePopupView;
 @property (strong) IBOutlet NSTextField *videoOutputSizeWidthTextField;
 @property (strong) IBOutlet NSTextField *videoOutputSizeHeightTextField;
 @property (strong) IBOutlet AMPopUpView *videoFormatPopupView;
 @property (strong) IBOutlet AMPopUpView *videoFrameRatePopupView;
-@property (strong) IBOutlet AMPopUpView *videoBitRatePopupView;
+@property (strong) IBOutlet AMFoundryFontView *videoBitRateTextField;
+
 
 @property (strong) IBOutlet AMPopUpView *audioDevicePopupView;
 @property (strong) IBOutlet AMPopUpView *audioFormatPopupView;

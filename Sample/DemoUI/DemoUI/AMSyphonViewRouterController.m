@@ -9,6 +9,7 @@
 #import "AMSyphonViewRouterController.h"
 #import "AMSyphonView.h"
 #import "Syphon/Syphon.h"
+#import "AMSyphonCamera.h"
 
 @interface AMSyphonViewRouterController ()
 @property (weak) IBOutlet AMSyphonView *glView;
@@ -85,7 +86,8 @@
         NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
         NSString* title     = [NSString stringWithString:appName];
         
-        if([appName isEqualToString:@"Artsmesh"])
+        if([appName isEqualToString:@"Artsmesh"] &&
+           ![name isEqualToString:faceTimeCamera])
         {
             //filter self server
             continue;

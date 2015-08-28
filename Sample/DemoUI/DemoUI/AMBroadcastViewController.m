@@ -932,6 +932,7 @@
     
     
     [self.videoInputSizePopupView addItemsWithTitles:videoInputSizes];
+    [self.videoOutputSizePopupView addItemsWithTitles:videoOutputSizes];
     [self.videoFrameRatePopupView addItemsWithTitles:videoFrameRates];
     [self.videoFormatPopupView addItemsWithTitles:videoFormats];
     
@@ -939,7 +940,8 @@
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
     
-    [self.videoInputSizePopupView selectItemAtIndex:7];
+    [self.videoInputSizePopupView selectItemAtIndex:0];
+    [self.videoOutputSizePopupView selectItemAtIndex:0];
     [self.videoFrameRatePopupView selectItemAtIndex:2];
     [self.videoFormatPopupView selectItemAtIndex:0];
     

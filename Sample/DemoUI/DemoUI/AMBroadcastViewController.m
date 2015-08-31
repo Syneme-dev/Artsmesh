@@ -63,8 +63,8 @@
     NSArray *videoDevices;
     NSArray *videoFrameRates;
     NSArray *videoInputSizes;
+    NSArray *videoOutputSizes;
     NSArray *videoFormats;
-    NSArray *videoBitRates;
     NSArray *audioFormats;
     NSArray *audioBitRates;
     NSArray *audioSampleRates;
@@ -922,28 +922,28 @@
 -(void)setupSettingsTab {
     // Configure Settings Tab Options
     //[videoInputSizes initWithObjects:@"1280x720",@"1280x1080", nil];
-    videoInputSizes = [[NSArray alloc] initWithObjects:@"320x240",@"480x360",@"640x480",@"720x480",@"768x576",@"1024x768",@"1024x1080",@"1280x720",@"1280x1080",@"1920x1080", nil];
-    videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00",@"14.98",@"12.00",@"10.00",@"8.00",@"6.00",@"5.00",@"4.00",@"1.00", nil];
+    videoInputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
+    videoOutputSizes = [[NSArray alloc] initWithArray:videoInputSizes];
+    videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
     videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"VP6", nil];
-    videoBitRates = [[NSArray alloc] initWithObjects:@"50", @"100", @"200", @"350", @"500", @"650", @"800", @"950", @"1000", @"1200", @"1500", @"1800", @"2000", @"2500", @"4000", @"50000", nil];
     audioFormats = [[NSArray alloc] initWithObjects:@"MP3", @"AAC", nil];
-    audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", @"32000", @"22050", @"11025", @"8000", nil];
-    audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", @"112", @"96", @"80", @"64", @"56", @"48", @"40", @"32", @"28", @"24", @"20", @"16", nil];
+    audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", nil];
+    audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", nil];
     
     
     [self.videoInputSizePopupView addItemsWithTitles:videoInputSizes];
+    [self.videoOutputSizePopupView addItemsWithTitles:videoOutputSizes];
     [self.videoFrameRatePopupView addItemsWithTitles:videoFrameRates];
     [self.videoFormatPopupView addItemsWithTitles:videoFormats];
-    [self.videoBitRatePopupView addItemsWithTitles:videoBitRates];
     
     [self.audioFormatPopupView addItemsWithTitles:audioFormats];
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
     
-    [self.videoInputSizePopupView selectItemAtIndex:7];
+    [self.videoInputSizePopupView selectItemAtIndex:0];
+    [self.videoOutputSizePopupView selectItemAtIndex:0];
     [self.videoFrameRatePopupView selectItemAtIndex:2];
     [self.videoFormatPopupView selectItemAtIndex:0];
-    [self.videoBitRatePopupView selectItemAtIndex:14];
     
     [self.audioFormatPopupView selectItemAtIndex:1];
     [self.audioSampleRatePopupView selectItemAtIndex:1];

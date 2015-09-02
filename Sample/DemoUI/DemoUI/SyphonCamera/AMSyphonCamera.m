@@ -7,8 +7,8 @@
 //
 
 #import "AMSyphonCamera.h"
+#import "AMSyphonManager.h"
 
-NSString* faceTimeCamera = @"FaceTime HD Camera";
 @implementation AMSyphonCamera
 
 - (id)init
@@ -46,7 +46,7 @@ NSString* faceTimeCamera = @"FaceTime HD Camera";
     
     for (NSInteger i=0; i < devices.count; i++) {
         QTCaptureDevice *mydevice = [devices objectAtIndex:i];
-        if([mydevice.description isEqualToString:faceTimeCamera]){
+        if([AMSyphonName isSyphonCamera:mydevice.description]){
             [self startDevice:mydevice.description];
         }
     }

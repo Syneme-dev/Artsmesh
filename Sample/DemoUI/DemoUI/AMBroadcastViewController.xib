@@ -490,7 +490,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
-                                        <rect key="frame" x="0.0" y="218" width="199" height="40"/>
+                                        <rect key="frame" x="0.0" y="218" width="185" height="40"/>
                                         <buttonCell key="cell" type="smallSquare" title="CREATE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="z6c-S9-Ut4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -499,6 +499,12 @@
                                             <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
                                         </connections>
                                     </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStatesBorderButton">
+                                        <rect key="frame" x="185" y="218" width="185" height="40"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbx-fT-JiJ" userLabel="LIVE BUTTON" customClass="AMStatesBorderButton">
+                                        <rect key="frame" x="367" y="218" width="185" height="40"/>
+                                    </customView>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                                         <rect key="frame" x="-4" y="29" width="556" height="180"/>
                                     </customView>

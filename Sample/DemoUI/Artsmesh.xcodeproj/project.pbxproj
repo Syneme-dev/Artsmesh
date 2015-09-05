@@ -1501,8 +1501,6 @@
 		2D813F6F1AFC10CE006C063D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */,
-				2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */,
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
 				2D31E65F1AFDAEED001E0985 /* AMEventsManagerRowViewController.h */,
@@ -1516,8 +1514,6 @@
 		2D813F701AFC10E3006C063D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2D4555A01B9B98BC00C6853B /* AMStatesBorderButton.h */,
-				2D4555A11B9B98BC00C6853B /* AMStatesBorderButton.m */,
 				2D31E6641AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.h */,
 				2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */,
 				2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */,
@@ -1529,7 +1525,6 @@
 		2D813F751AFC21D6006C063D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */,
 				2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */,
 				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
 				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
@@ -1580,6 +1575,50 @@
 				2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		2DC54D751B9BB51700FEC93B /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D761B9BB53200FEC93B /* AMStatesBorderButton */,
+			);
+			name = "UI Elements";
+			sourceTree = "<group>";
+		};
+		2DC54D761B9BB53200FEC93B /* AMStatesBorderButton */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D771B9BB54400FEC93B /* Views */,
+				2DC54D781B9BB55100FEC93B /* Controllers */,
+				2DC54D791B9BB56200FEC93B /* Nibs */,
+			);
+			name = AMStatesBorderButton;
+			sourceTree = "<group>";
+		};
+		2DC54D771B9BB54400FEC93B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A01B9B98BC00C6853B /* AMStatesBorderButton.h */,
+				2D4555A11B9B98BC00C6853B /* AMStatesBorderButton.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2DC54D781B9BB55100FEC93B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */,
+				2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2DC54D791B9BB56200FEC93B /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */,
+			);
+			name = Nibs;
 			sourceTree = "<group>";
 		};
 		37C23163187A8FFD00554AFD = {
@@ -1650,6 +1689,7 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				2DC54D751B9BB51700FEC93B /* UI Elements */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				4A41F1EA1A8454AD0002018D /* MainWindow */,

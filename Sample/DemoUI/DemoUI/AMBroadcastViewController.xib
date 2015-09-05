@@ -502,9 +502,6 @@
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStatesBorderButton">
                                         <rect key="frame" x="185" y="218" width="185" height="40"/>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbx-fT-JiJ" userLabel="LIVE BUTTON" customClass="AMStatesBorderButton">
-                                        <rect key="frame" x="367" y="218" width="185" height="40"/>
-                                    </customView>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                                         <rect key="frame" x="-4" y="29" width="556" height="180"/>
                                     </customView>

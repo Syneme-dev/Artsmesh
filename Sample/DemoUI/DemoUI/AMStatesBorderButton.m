@@ -14,8 +14,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        AMStatesBorderButtonViewController *vc = [[AMStatesBorderButtonViewController alloc] initWithNibName:@"AMStatesBorderButtonViewController" bundle:nil];
-        NSView *vcView = [vc view];
+        self.buttonVC = [[AMStatesBorderButtonViewController alloc] initWithNibName:@"AMStatesBorderButtonViewController" bundle:nil];
+        NSView *vcView = [self.buttonVC view];
         
         [self setAutoresizesSubviews:TRUE];
         vcView.autoresizingMask = NSViewWidthSizable |  NSViewHeightSizable;
@@ -24,7 +24,7 @@
         
         [vcView setFrameSize:newSize];
         
-        [self addSubview:[vc view]];
+        [self addSubview:vcView];
     }
     
     return self;
@@ -39,6 +39,12 @@
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+}
+
+- (void)setButtonTitle:(NSString *)buttonTitle {
+    [self.buttonVC.buttonTitleTextField setStringValue:buttonTitle];
+    
+    [self setNeedsDisplay:true];
 }
 
 @end

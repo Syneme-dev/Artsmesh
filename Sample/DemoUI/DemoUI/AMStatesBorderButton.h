@@ -11,4 +11,6 @@
 
 @interface AMStatesBorderButton : NSView
 
+@property (strong) AMStatesBorderButtonViewController *buttonVC;
+
 @end

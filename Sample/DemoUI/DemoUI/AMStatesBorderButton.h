@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMStatesBorderButtonViewController.h"
 
 @interface AMStatesBorderButton : NSView
 

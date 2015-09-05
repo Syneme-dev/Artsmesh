@@ -170,6 +170,9 @@
 		2D31E6621AFDAEED001E0985 /* AMEventsManagerRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6601AFDAEED001E0985 /* AMEventsManagerRowViewController.m */; };
 		2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */; };
 		2D31E6661AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */; };
+		2D4555A21B9B98BC00C6853B /* AMStatesBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A11B9B98BC00C6853B /* AMStatesBorderButton.m */; };
+		2D4555A51B9B98CA00C6853B /* AMStatesBorderButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */; };
+		2D4555A71B9B98D700C6853B /* AMStatesBorderButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
@@ -771,6 +774,11 @@
 		2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerRowViewController.xib; sourceTree = "<group>"; };
 		2D31E6641AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerScrollDocumentView.h; sourceTree = "<group>"; };
 		2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerScrollDocumentView.m; sourceTree = "<group>"; };
+		2D4555A01B9B98BC00C6853B /* AMStatesBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatesBorderButton.h; sourceTree = "<group>"; };
+		2D4555A11B9B98BC00C6853B /* AMStatesBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatesBorderButton.m; sourceTree = "<group>"; };
+		2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatesBorderButtonViewController.h; sourceTree = "<group>"; };
+		2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatesBorderButtonViewController.m; sourceTree = "<group>"; };
+		2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStatesBorderButtonViewController.xib; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -1493,6 +1501,8 @@
 		2D813F6F1AFC10CE006C063D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */,
+				2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */,
 				269FB84A1998816E00355312 /* AMBroadcastViewController.h */,
 				269FB84B1998816E00355312 /* AMBroadcastViewController.m */,
 				2D31E65F1AFDAEED001E0985 /* AMEventsManagerRowViewController.h */,
@@ -1506,6 +1516,8 @@
 		2D813F701AFC10E3006C063D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D4555A01B9B98BC00C6853B /* AMStatesBorderButton.h */,
+				2D4555A11B9B98BC00C6853B /* AMStatesBorderButton.m */,
 				2D31E6641AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.h */,
 				2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */,
 				2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */,
@@ -1517,6 +1529,7 @@
 		2D813F751AFC21D6006C063D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */,
 				2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */,
 				269FB84C1998816E00355312 /* AMBroadcastViewController.xib */,
 				2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */,
@@ -2188,6 +2201,7 @@
 				4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
+				2D4555A71B9B98D700C6853B /* AMStatesBorderButtonViewController.xib in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
 				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
@@ -2320,6 +2334,7 @@
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
 				4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */,
 				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
+				2D4555A21B9B98BC00C6853B /* AMStatesBorderButton.m in Sources */,
 				2D08FDC81AD661FF00A9D257 /* GTLYouTubeLiveStream.m in Sources */,
 				2D08FDB51AD661FF00A9D257 /* GTLYouTubeGuideCategorySnippet.m in Sources */,
 				2D08FDC41AD661FF00A9D257 /* GTLYouTubeLiveBroadcastContentDetails.m in Sources */,
@@ -2352,6 +2367,7 @@
 				2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */,
 				2D08FDF41AD661FF00A9D257 /* GTLYouTubeVideoConversionPing.m in Sources */,
 				2D08FDD31AD661FF00A9D257 /* GTLYouTubePlaylistItem.m in Sources */,
+				2D4555A51B9B98CA00C6853B /* AMStatesBorderButtonViewController.m in Sources */,
 				2D08FDA31AD661FF00A9D257 /* GTLYouTubeChannelConversionPings.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				4A207A781A875E0A006F4FA2 /* AMRestHelper.m in Sources */,

@@ -20,8 +20,6 @@
 		2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2658877619899ABA001DA266 /* AMPopUpMenuController.xib */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
-		2D4555981B9B500300C6853B /* AMStatesBorderButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D4555961B9B500300C6853B /* AMStatesBorderButton.h */; };
-		2D4555991B9B500300C6853B /* AMStatesBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555971B9B500300C6853B /* AMStatesBorderButton.m */; };
 		4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */; };
 		4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D221A7886FB00281F46 /* AMCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,8 +91,6 @@
 		2658877619899ABA001DA266 /* AMPopUpMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPopUpMenuController.xib; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
-		2D4555961B9B500300C6853B /* AMStatesBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatesBorderButton.h; sourceTree = "<group>"; };
-		2D4555971B9B500300C6853B /* AMStatesBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatesBorderButton.m; sourceTree = "<group>"; };
 		4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		4A776D221A7886FB00281F46 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
@@ -190,8 +186,6 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
-				2D4555961B9B500300C6853B /* AMStatesBorderButton.h */,
-				2D4555971B9B500300C6853B /* AMStatesBorderButton.m */,
 				4FD498C41B6A16BA00427866 /* AMFakeBox.h */,
 				4FD498C51B6A16BA00427866 /* AMFakeBox.m */,
 				AFF79DB91B5B823E000A95DF /* AMBlueBorderButtonCell.h */,
@@ -324,7 +318,6 @@
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
-				2D4555981B9B500300C6853B /* AMStatesBorderButton.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				4F15723E1AB195B700945397 /* AMTimerView.h in Headers */,
@@ -416,7 +409,6 @@
 				2658877D19899ABA001DA266 /* AMPopUpMenuItem.m in Sources */,
 				4F15723F1AB195B700945397 /* AMTimerView.m in Sources */,
 				4A776D251A7886FB00281F46 /* AMCollectionView.m in Sources */,
-				2D4555991B9B500300C6853B /* AMStatesBorderButton.m in Sources */,
 				2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
 				4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */,

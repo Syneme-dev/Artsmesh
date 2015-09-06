@@ -7,6 +7,27 @@
 //
 
 #import "AMSyphonManager.h"
+
+@implementation AMSyphonName
+
++(NSString*) AMRouterName
+{
+    return @"AMSyphonRouter";
+}
+
++(BOOL) isSyphonCamera:(NSString*)name
+{
+    
+    return [name rangeOfString:@"FaceTime"].location != NSNotFound;
+}
+
++(BOOL) isSyphonRouter:(NSString*)name
+{
+    return  [name rangeOfString:@"AMSyphonRouter"].location != NSNotFound;
+}
+
+@end
+
 @implementation AMSyphonManager
 {
     NSMutableArray* _syClients;

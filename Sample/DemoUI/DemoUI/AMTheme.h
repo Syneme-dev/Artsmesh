@@ -13,6 +13,8 @@
 #define UI_Color_Light_Grey  [NSColor colorWithCalibratedRed:(168)/255.0f green:(168)/255.0f blue:(168)/255.0f alpha:1.0f]
 #define UI_Color_Disabled  [NSColor colorWithCalibratedRed:(84)/255.0f green:(84)/255.0f blue:(84)/255.0f alpha:1.0f]
 #define UI_Color_Blue [NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f]
+#define UI_Color_Red [NSColor colorWithCalibratedRed:(255)/255.0f green:(0)/255.0f blue:(0)/255.0f alpha:1.0f]
+#define UI_Color_Yellow [NSColor colorWithCalibratedRed:(255)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
 
 @interface AMTheme : NSObject
 

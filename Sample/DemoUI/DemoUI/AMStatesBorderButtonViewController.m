@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    NSColor *buttonColor = [self.currentTheme.themeColors objectForKey:@"defaultBackground"];
+    NSColor *buttonColor = [self.currentTheme.themeColors objectForKey:@"background"];
     
     [self.contentView changeBackgroundColor:buttonColor];
 

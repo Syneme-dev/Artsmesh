@@ -17,8 +17,11 @@
     {
         // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
         self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            UI_Color_Gray, @"defaultBackground",
-                            UI_Color_Light_Grey, @"defaultTextColor",
+                            UI_Color_Gray, @"background",
+                            UI_Color_Light_Grey, @"textDefault",
+                            UI_Color_Yellow, @"alert",
+                            UI_Color_Red, @"warning",
+                            UI_Color_Blue, @"hoverDefault",
                             nil];
         
         NSFontManager *fontManager = [NSFontManager sharedFontManager];

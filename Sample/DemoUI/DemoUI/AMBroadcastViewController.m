@@ -81,6 +81,10 @@
 
 -(void)awakeFromNib
 {
+    //Set up UI Elements and theme stuff
+    [self.eventDeleteButton setButtonTitle:@"DELETE"];
+    [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
+    
     //Set up Events Manager SubView and View Controller
     eventsManagerVC = [[AMEventsManagerViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
     NSView *view = [eventsManagerVC view];

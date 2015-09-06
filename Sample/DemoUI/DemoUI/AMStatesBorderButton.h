@@ -15,4 +15,6 @@
 @property (strong) AMStatesBorderButtonViewController *buttonVC;
 @property (strong) AMTheme *currentTheme;
 
+- (void)setButtonTitle:(NSString *)buttonTitle;
+
 @end

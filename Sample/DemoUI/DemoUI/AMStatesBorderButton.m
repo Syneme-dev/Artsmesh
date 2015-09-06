@@ -36,7 +36,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     
-    [[NSColor whiteColor] setFill];
+    [[self.currentTheme.themeColors objectForKey:@"defaultTextColor"] setFill];
     NSRectFill(dirtyRect);
     
     [super drawRect:dirtyRect];
@@ -45,7 +45,12 @@
 }
 
 - (void)setButtonTitle:(NSString *)buttonTitle {
+    NSFont *themeFont = [self.currentTheme.themeFonts objectForKey:@"standard"];
+    NSColor *fontColor = [self.currentTheme.themeColors objectForKey:@"defaultTextColor"];
+    
     [self.buttonVC.buttonTitleTextField setStringValue:buttonTitle];
+    [self.buttonVC.buttonTitleTextField setFont:themeFont];
+    [self.buttonVC.buttonTitleTextField setTextColor:fontColor];
     
     [self setNeedsDisplay:true];
 }

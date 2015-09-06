@@ -17,8 +17,17 @@
     {
         // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
         self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            UI_Color_gray, @"defaultBackground",
+                            UI_Color_Gray, @"defaultBackground",
+                            UI_Color_Light_Grey, @"defaultTextColor",
                             nil];
+        
+        NSFontManager *fontManager = [NSFontManager sharedFontManager];
+        self.themeFonts = [[NSDictionary alloc] initWithObjectsAndKeys:
+                      [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:12.0], @"header",
+                      [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0], @"header-italic",
+                      [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0], @"standard",
+                      [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0], @"standard-italic",
+                      nil];
     }
     return self;
 }

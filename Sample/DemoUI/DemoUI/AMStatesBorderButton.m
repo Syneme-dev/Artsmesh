@@ -14,6 +14,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.currentTheme = [[AMTheme alloc] init];
+        
         self.buttonVC = [[AMStatesBorderButtonViewController alloc] initWithNibName:@"AMStatesBorderButtonViewController" bundle:nil];
         NSView *vcView = [self.buttonVC view];
         

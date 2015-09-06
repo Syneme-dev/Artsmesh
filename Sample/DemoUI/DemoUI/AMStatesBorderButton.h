@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTheme.h"
 #import "AMStatesBorderButtonViewController.h"
 
 @interface AMStatesBorderButton : NSView
 
 @property (strong) AMStatesBorderButtonViewController *buttonVC;
+@property (strong) AMTheme *currentTheme;
 
 @end

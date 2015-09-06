@@ -185,6 +185,7 @@
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
+		2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
 		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
@@ -799,6 +800,8 @@
 		2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveEventCheckBoxView.h; sourceTree = "<group>"; };
 		2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveEventCheckBoxView.m; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
+		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
+		2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
@@ -1580,6 +1583,7 @@
 		2DC54D751B9BB51700FEC93B /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				2DC54D7A1B9BB8B000FEC93B /* Themes */,
 				2DC54D761B9BB53200FEC93B /* AMStatesBorderButton */,
 			);
 			name = "UI Elements";
@@ -1619,6 +1623,15 @@
 				2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */,
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		2DC54D7A1B9BB8B000FEC93B /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */,
+				2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */,
+			);
+			name = Themes;
 			sourceTree = "<group>";
 		};
 		37C23163187A8FFD00554AFD = {
@@ -1689,7 +1702,6 @@
 		37C23175187A8FFD00554AFD /* DemoUI */ = {
 			isa = PBXGroup;
 			children = (
-				2DC54D751B9BB51700FEC93B /* UI Elements */,
 				37C23181187A8FFD00554AFD /* AMAppDelegate.h */,
 				37C23182187A8FFD00554AFD /* AMAppDelegate.m */,
 				4A41F1EA1A8454AD0002018D /* MainWindow */,
@@ -1709,6 +1721,7 @@
 				4A207A6C1A875D7A006F4FA2 /* JackCPUView */,
 				4A207A6B1A875D2F006F4FA2 /* ScorePanel */,
 				4A207A751A875DFE006F4FA2 /* Others */,
+				2DC54D751B9BB51700FEC93B /* UI Elements */,
 				37C23187187A8FFD00554AFD /* Images.xcassets */,
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 			);
@@ -2481,6 +2494,7 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				2D08FD8D1AD661FF00A9D257 /* GTLYouTubeActivityContentDetails.m in Sources */,
 				2D08FDF61AD661FF00A9D257 /* GTLYouTubeVideoFileDetails.m in Sources */,
+				2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */,
 				4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */,
 				2D08FDE61AD661FF00A9D257 /* GTLYouTubeSubscriptionListResponse.m in Sources */,
 				2D08FD881AD661FF00A9D257 /* GTLQueryYouTube.m in Sources */,

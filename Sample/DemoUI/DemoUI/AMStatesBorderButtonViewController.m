@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        
+        self.currentTheme = [[AMTheme alloc] init];
     }
     
     return self;
@@ -28,8 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    NSColor *buttonColor = [self.currentTheme.themeColors objectForKey:@"defaultBackground"];
+    NSLog(@"button color is: %@", buttonColor);
     
-    [self.contentView changeBackgroundColor:[NSColor redColor]];
+    [self.contentView changeBackgroundColor:[self.currentTheme.themeColors objectForKey:@"defaultBackground"]];
 
 }
 

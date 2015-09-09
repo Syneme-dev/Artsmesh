@@ -14,7 +14,10 @@
 
 @property (strong) AMStatesBorderButtonViewController *buttonVC;
 @property (strong) AMTheme *currentTheme;
+@property (strong) NSArray *states;
+@property (strong) NSString *type;
 
 - (void)setButtonTitle:(NSString *)buttonTitle;
+- (void)changeState:(NSString *)theState;
 
 @end

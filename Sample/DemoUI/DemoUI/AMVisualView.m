@@ -50,7 +50,7 @@ static const int Bottom = 0;
     [self drawHorizontalAuxiliary:width YStart:0 YEnd:midHPosition withCount:2];
     [self drawHorizontalAuxiliary:width YStart:midHPosition YEnd:height withCount:2];
  
-    [self drawVerticalAuxiliary:height XStart:0 XEnd:width withCount:4];
+    [self drawVerticalAuxiliary:height XStart:0 XEnd:width-Up withCount:4];
 }
 
 
@@ -89,8 +89,8 @@ static const int Bottom = 0;
         
         NSBezierPath *auxiliaryLine = [NSBezierPath bezierPath];
         
-        NSPoint startPoint = NSMakePoint(width, 0);
-        NSPoint endPoint   = NSMakePoint(width, height);
+        NSPoint startPoint = NSMakePoint(width, Bottom+2);
+        NSPoint endPoint   = NSMakePoint(width, height-Up);
         [auxiliaryLine moveToPoint:startPoint];
         [auxiliaryLine lineToPoint:endPoint];
         auxiliaryLine.lineWidth = 1.0;

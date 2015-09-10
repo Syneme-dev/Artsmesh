@@ -21,4 +21,32 @@
 @property (strong) NSDictionary *themeFonts;
 @property (strong) NSDictionary *themeColors;
 
+// Color Properties
+@property (strong) NSColor *colorAlert;
+@property (strong) NSColor *colorError;
+@property (strong) NSColor *success;
+
+@property (strong) NSColor *colorText;
+@property (strong) NSColor *colorTextAlert;
+@property (strong) NSColor *colorTextError;
+@property (strong) NSColor *colorTextSuccess;
+
+@property (strong) NSColor *colorBorder;
+@property (strong) NSColor *colorBorderAlert;
+@property (strong) NSColor *colorBorderError;
+@property (strong) NSColor *colorBorderSuccess;
+
+@property (strong) NSColor *colorBackground;
+@property (strong) NSColor *colorBackgroundAlert;
+@property (strong) NSColor *colorBackgroundError;
+@property (strong) NSColor *colorBackgroundSuccess;
+
+
+// Font Properties
+@property (strong) NSFont *fontStandard;
+@property (strong) NSFont *fontStandardItalic;
+
+@property (strong) NSFont *fontHeader;
+@property (strong) NSFont *fontHeaderItalic;
+
 @end

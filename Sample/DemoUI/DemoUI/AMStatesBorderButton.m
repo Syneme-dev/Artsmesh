@@ -58,15 +58,16 @@
 - (void)drawRect:(NSRect)dirtyRect {
     // Drawing code here
     
-    [[self.currentTheme.themeColors objectForKey:@"textDefault"] setFill];
+    [self.currentTheme.colorText setFill];
     NSRectFill(dirtyRect);
     
     [super drawRect:dirtyRect];
 }
 
 - (void)setButtonTitle:(NSString *)buttonTitle {
-    NSFont *themeFont = [self.currentTheme.themeFonts objectForKey:@"standard"];
-    NSColor *fontColor = [self.currentTheme.themeColors objectForKey:@"textDefault"];
+    
+    NSFont *themeFont = self.currentTheme.fontStandard;
+    NSColor *fontColor = self.currentTheme.colorText;
     
     [self.buttonVC.buttonTitleTextField setStringValue:buttonTitle];
     [self.buttonVC.buttonTitleTextField setFont:themeFont];
@@ -76,11 +77,13 @@
 }
 
 -(void) updateButtonColors {
+    
     NSColor *currentButtonBackground = self.buttonVC.contentView.backgroundColor;
-    NSColor *defaultColor = [self.currentTheme.themeColors objectForKey:@"background"];
-    NSColor *hoverColor = [self.currentTheme.themeColors objectForKey:@"hoverDefault"];
-    NSColor *lightGrey = [self.currentTheme.themeColors objectForKey:@"textDefault"];
+    NSColor *defaultColor = self.currentTheme.colorBackground;
+    NSColor *hoverColor = self.currentTheme.colorBackgroundHover;
+    NSColor *lightGrey = self.currentTheme.colorText;
     NSColor *currentTextColor = lightGrey;
+    
     
     if (isHovering && !isPressing) {
         switch (cur_state) {

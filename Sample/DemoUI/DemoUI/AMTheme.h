@@ -15,6 +15,7 @@
 #define UI_Color_Blue [NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f]
 #define UI_Color_Red [NSColor colorWithCalibratedRed:(255)/255.0f green:(0)/255.0f blue:(0)/255.0f alpha:1.0f]
 #define UI_Color_Yellow [NSColor colorWithCalibratedRed:(255)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
+#define UI_Color_Green [NSColor colorWithCalibratedRed:(0)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
 
 @interface AMTheme : NSObject
 
@@ -24,7 +25,7 @@
 // Color Properties
 @property (strong) NSColor *colorAlert;
 @property (strong) NSColor *colorError;
-@property (strong) NSColor *success;
+@property (strong) NSColor *colorSuccess;
 
 @property (strong) NSColor *colorText;
 @property (strong) NSColor *colorTextAlert;
@@ -40,6 +41,7 @@
 @property (strong) NSColor *colorBackgroundAlert;
 @property (strong) NSColor *colorBackgroundError;
 @property (strong) NSColor *colorBackgroundSuccess;
+@property (strong) NSColor *colorBackgroundHover;
 
 
 // Font Properties
@@ -48,5 +50,9 @@
 
 @property (strong) NSFont *fontHeader;
 @property (strong) NSFont *fontHeaderItalic;
+
+
+// Methods
+-(void) setTheme: (NSString *)themeName;
 
 @end

@@ -41,7 +41,7 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
     
 	//double lineLength = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
 	CGFloat prevHalfWidth = glyphArcInfo[0].width / 2.0;
-	glyphArcInfo[0].angle = prevHalfWidth / radius;
+	glyphArcInfo[0] .angle = prevHalfWidth / radius;
 	for (CFIndex lineGlyphIndex = 1; lineGlyphIndex < glyphCount; lineGlyphIndex++) {
 		CGFloat halfWidth = glyphArcInfo[lineGlyphIndex].width / 2.0;
 		CGFloat prevCenterToCenter = prevHalfWidth + halfWidth;

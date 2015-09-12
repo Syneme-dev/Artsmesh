@@ -10,6 +10,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import <UIFramework/AMButtonHandler.h>
 #import <AMNotificationManager/AMNotificationManager.h>
+#import "AMFloatPanelViewController.h"
 
 typedef enum {
     INFO_USER,
@@ -56,7 +57,8 @@ typedef enum {
 //    [self.socialWebTab setWantsLayer:NO];
     
     self.archiveScale=1;
-
+     [self createArchiveFloatWindow];
+   
 }
 
 - (void)onShowUserInfo:(NSNotification *)notification {
@@ -198,8 +200,11 @@ typedef enum {
 
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    id win = [self.socialWebTab windowScriptObject];
+    [win setValue:self forKey:@"socialViewController"];
     
-    //NSString *url = sender.mainFrameURL;
+
+       //NSString *url = sender.mainFrameURL;
 
     WebPreferences *socialTabPrefs = [self.socialWebTab preferences];
     
@@ -312,5 +317,79 @@ typedef enum {
 //    [self.socialWebTab makeTextLarger:nil];
 }
 
+/// Full screen pop up video.
+///
+
+#define UI_Text_Color_Gray [NSColor colorWithCalibratedRed:(152/255.0f) green:(152/255.0f) blue:(152/255.0f) alpha:1]
+
+-(void)createArchiveFloatWindow {
+    
+    //Create float panel controller + view
+    AMFloatPanelViewController *fpc = [[AMFloatPanelViewController alloc] initWithNibName:@"AMFloatPanelView" bundle:nil andSize:NSMakeSize(400, 300) andTitle:@"ARCHIVE" andTitleColor:UI_Text_Color_Gray];
+    _floatPanelViewController = fpc;
+    
+    _archiveFloatWindow = fpc.containerWindow;
+    _archiveFloatWindow.level = NSFloatingWindowLevel;
+    //using the code here to have a preview the part.
+    //[self showVideoPopUp:@"https://www.youtube.com/embed/0JjfyOZemxk" ];
+    //TODO: using the following  js code to show url.
+    //sample Code:
+    //socialViewController.showVideoPopUp_('https://www.youtube.com/embed/0JjfyOZemxk')
+
+    
+}
+
+-(void) showVideoPopUp:(NSString *)youtubeUrl{
+        [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+        [self loadVideoWebPupupView:youtubeUrl];
+        [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+        [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
+}
+
+-(void) loadVideoWebPupupView:(NSString *)youtubeUrl {
+    WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [group_webview setFrameLoadDelegate:self];
+    [group_webview setDrawsBackground:NO];
+    _floatWindowWebView = group_webview;
+    NSURL *group_url = [NSURL URLWithString:youtubeUrl];
+    [group_webview.mainFrame loadRequest:
+     [NSURLRequest requestWithURL:group_url]];
+    [_floatPanelViewController.panelContent addSubview:group_webview];
+    
+    //set up constraints
+    
+    group_webview.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : group_webview}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : group_webview}];
+    
+    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
+    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+}
+
++ (NSString *) webScriptNameForSelector:(SEL)sel
+{
+    NSString *name=@"";
+    if (sel == @selector(loadVideoWebPupupView:))
+        name = @"loadVideoWebPupupView";
+    else if (sel == @selector(showVideoPopUp:))
+        name = @"showVideoPopUp";
+    
+    return name;
+}
+
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
+{
+    if (aSelector == @selector(loadVideoWebPupupView:)) return NO;
+    if (aSelector == @selector(showVideoPopUp:)) return NO;
+
+    return YES;
+}
 
 @end

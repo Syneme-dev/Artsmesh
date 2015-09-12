@@ -146,8 +146,24 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
                         </scrollView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="leading" secondItem="IjL-Yh-oqa" secondAttribute="trailing" id="2wL-dS-HPX"/>
+                        <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="48" id="558-pT-LMK"/>
+                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="Eme-Xm-Q3Y"/>
+                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="centerY" secondItem="j8v-rV-XmL" secondAttribute="centerY" constant="-23" id="bTi-v4-cnz"/>
+                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="2" id="d3l-1t-maq"/>
+                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="dbx-wg-Td1"/>
+                        <constraint firstAttribute="trailing" secondItem="IjL-Yh-oqa" secondAttribute="trailing" constant="483" id="mT4-h9-YPg"/>
+                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="leading" secondItem="j8v-rV-XmL" secondAttribute="leading" id="uHH-ZV-HCX"/>
+                        <constraint firstAttribute="trailing" secondItem="ET9-sI-9Qn" secondAttribute="trailing" id="vKe-nP-MOf"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="o6u-cN-021" customClass="AMVisualView">
+                    <rect key="frame" x="0.0" y="0.0" width="661" height="151"/>
+                    <subviews>
                         <customView identifier="useIPV6" translatesAutoresizingMaskIntoConstraints="NO" id="bJA-5t-kXS" customClass="AMCheckBoxView">
-                            <rect key="frame" x="84" y="20" width="86" height="20"/>
+                            <rect key="frame" x="31" y="124" width="86" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="HBp-RZ-OKi"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Lgn-WC-AUn"/>
@@ -156,22 +172,10 @@
                         </customView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="leading" secondItem="IjL-Yh-oqa" secondAttribute="trailing" id="2wL-dS-HPX"/>
-                        <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="48" id="558-pT-LMK"/>
-                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="Eme-Xm-Q3Y"/>
-                        <constraint firstItem="bJA-5t-kXS" firstAttribute="centerX" secondItem="j8v-rV-XmL" secondAttribute="centerX" constant="-203.5" id="GBd-kY-OCw"/>
-                        <constraint firstItem="bJA-5t-kXS" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="341" id="N93-m5-mzK"/>
-                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="centerY" secondItem="j8v-rV-XmL" secondAttribute="centerY" constant="-23" id="bTi-v4-cnz"/>
-                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="2" id="d3l-1t-maq"/>
-                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="dbx-wg-Td1"/>
-                        <constraint firstAttribute="trailing" secondItem="IjL-Yh-oqa" secondAttribute="trailing" constant="483" id="mT4-h9-YPg"/>
-                        <constraint firstItem="IjL-Yh-oqa" firstAttribute="leading" secondItem="j8v-rV-XmL" secondAttribute="leading" id="uHH-ZV-HCX"/>
-                        <constraint firstAttribute="trailing" secondItem="ET9-sI-9Qn" secondAttribute="trailing" id="vKe-nP-MOf"/>
-                        <constraint firstItem="bJA-5t-kXS" firstAttribute="centerY" secondItem="j8v-rV-XmL" secondAttribute="centerY" constant="160.5" id="vLt-ep-YvG"/>
+                        <constraint firstItem="bJA-5t-kXS" firstAttribute="top" secondItem="o6u-cN-021" secondAttribute="top" constant="7" id="3Et-ve-3hM"/>
+                        <constraint firstAttribute="bottom" secondItem="bJA-5t-kXS" secondAttribute="bottom" constant="124" id="4qA-PC-GlM"/>
+                        <constraint firstItem="bJA-5t-kXS" firstAttribute="leading" secondItem="o6u-cN-021" secondAttribute="leading" constant="31" id="hu0-Tj-xUg"/>
                     </constraints>
-                </customView>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="o6u-cN-021" customClass="AMVisualView">
-                    <rect key="frame" x="0.0" y="0.0" width="661" height="151"/>
                 </customView>
             </subviews>
             <constraints>

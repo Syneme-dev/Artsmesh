@@ -33,4 +33,6 @@
 @property WebView *youTubeVideo;
 @property WebView *floatWindowWebView;
 
+-(void) loadVideoWebPupupView:(NSString *)youtubeUrl;
+
 @end

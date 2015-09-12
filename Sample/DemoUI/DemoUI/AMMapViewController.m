@@ -173,7 +173,6 @@
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
     
-    [self createArchiveFloatWindow];
 }
 
 -(void)createArchiveFloatWindow {
@@ -185,6 +184,8 @@
     
     _archiveFloatWindow = fpc.containerWindow;
     _archiveFloatWindow.level = NSFloatingWindowLevel;
+    
+    //[self showVideoPopUp:@"https://www.youtube.com/embed/0JjfyOZemxk" ];
 }
 
 
@@ -264,6 +265,8 @@
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
+    id win = [self.archiveWebView windowScriptObject];
+    [win setValue:self forKey:@"mapViewController"];
     
     NSString *url= sender.mainFrameURL;
     sender.preferences.userStyleSheetEnabled = YES;
@@ -305,6 +308,10 @@
 }
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector{
     if (aSelector == @selector(elementClicked:)) return NO;
+    
+    if (aSelector == @selector(loadVideoWebPupupView:)) return NO;
+    if (aSelector == @selector(showVideoPopUp:)) return NO;
+    
     return YES;
 }
 + (BOOL)isKeyExcludedFromWebScript:(const char *)name{
@@ -335,7 +342,53 @@
     
 }
 
++ (NSString *) webScriptNameForSelector:(SEL)sel
+{
+    NSString *name=@"";
+    if (sel == @selector(loadVideoWebPupupView:))
+        name = @"loadVideoWebPupupView";
+    else if (sel == @selector(showVideoPopUp:))
+        name = @"showVideoPopUp";
+    
+    return name;
+}
 
+-(void) showVideoPopUp:(NSString *)youtubeUrl{
+    [self createArchiveFloatWindow];
+    
+    [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+    [self loadVideoWebPupupView:youtubeUrl];
+    [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+    [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
+}
+
+-(void) loadVideoWebPupupView:(NSString *)youtubeUrl {
+    NSLog(@"loadVideoWebPopupView called..");
+    WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
+    [group_webview setFrameLoadDelegate:self];
+    [group_webview setDrawsBackground:NO];
+    _floatWindowWebView = group_webview;
+    NSURL *group_url = [NSURL URLWithString:youtubeUrl];
+    [group_webview.mainFrame loadRequest:
+     [NSURLRequest requestWithURL:group_url]];
+    [_floatPanelViewController.panelContent addSubview:group_webview];
+    
+    //set up constraints
+    
+    group_webview.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"subView" : group_webview}];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"subView" : group_webview}];
+    
+    [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
+    [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+}
 
 
 - (IBAction)onStaticTabClick:(id)sender {

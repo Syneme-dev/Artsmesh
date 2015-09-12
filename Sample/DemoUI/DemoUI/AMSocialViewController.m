@@ -58,7 +58,7 @@ typedef enum {
     
     self.archiveScale=1;
      [self createArchiveFloatWindow];
-
+   
 }
 
 - (void)onShowUserInfo:(NSNotification *)notification {
@@ -200,8 +200,11 @@ typedef enum {
 
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    id win = [self.socialWebTab windowScriptObject];
+    [win setValue:self forKey:@"socialViewController"];
     
-    //NSString *url = sender.mainFrameURL;
+
+       //NSString *url = sender.mainFrameURL;
 
     WebPreferences *socialTabPrefs = [self.socialWebTab preferences];
     
@@ -327,22 +330,30 @@ typedef enum {
     
     _archiveFloatWindow = fpc.containerWindow;
     _archiveFloatWindow.level = NSFloatingWindowLevel;
+    //using the code here to have a preview the part.
+    //[self showVideoPopUp:@"https://www.youtube.com/embed/0JjfyOZemxk" ];
+    //TODO: using the following  js code to show url.
+    //sample Code:
+    //socialViewController.showVideoPopUp_('https://www.youtube.com/embed/0JjfyOZemxk')
+
+    
 }
 
+-(void) showVideoPopUp:(NSString *)youtubeUrl{
+        [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
+        [self loadVideoWebPupupView:youtubeUrl];
+        [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
+        [_archiveFloatWindow makeKeyAndOrderFront:NSApp];
+}
 
 -(void) loadVideoWebPupupView:(NSString *)youtubeUrl {
     WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
     [group_webview setFrameLoadDelegate:self];
-    
     [group_webview setDrawsBackground:NO];
     _floatWindowWebView = group_webview;
-    
-
-
     NSURL *group_url = [NSURL URLWithString:youtubeUrl];
     [group_webview.mainFrame loadRequest:
      [NSURLRequest requestWithURL:group_url]];
-    
     [_floatPanelViewController.panelContent addSubview:group_webview];
     
     //set up constraints
@@ -362,5 +373,23 @@ typedef enum {
     [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
 }
 
++ (NSString *) webScriptNameForSelector:(SEL)sel
+{
+    NSString *name=@"";
+    if (sel == @selector(loadVideoWebPupupView:))
+        name = @"loadVideoWebPupupView";
+    else if (sel == @selector(showVideoPopUp:))
+        name = @"showVideoPopUp";
+    
+    return name;
+}
+
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector
+{
+    if (aSelector == @selector(loadVideoWebPupupView:)) return NO;
+    if (aSelector == @selector(showVideoPopUp:)) return NO;
+
+    return YES;
+}
 
 @end

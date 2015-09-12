@@ -29,6 +29,8 @@
 - (IBAction)smallerButtonClick:(id)sender;
 - (IBAction)largerButtonClick:(id)sender ;
 
+-(void) loadVideoWebPupupView:(NSString *)youtubeUrl ;
+
 @property AMFloatPanelViewController *floatPanelViewController;
 @property NSWindow *archiveFloatWindow;
 @property WebView *floatWindowWebView;

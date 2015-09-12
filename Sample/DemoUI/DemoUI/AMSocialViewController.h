@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import <WebKit/WebFrameLoadDelegate.h>
+#import "AMFloatPanelViewController.h"
 
 @interface AMSocialViewController : NSViewController
 
@@ -27,5 +28,9 @@
 
 - (IBAction)smallerButtonClick:(id)sender;
 - (IBAction)largerButtonClick:(id)sender ;
+
+@property AMFloatPanelViewController *floatPanelViewController;
+@property NSWindow *archiveFloatWindow;
+@property WebView *floatWindowWebView;
 
 @end

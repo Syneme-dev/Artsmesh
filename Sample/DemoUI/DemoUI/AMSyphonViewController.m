@@ -8,7 +8,8 @@
 
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
-
+#import "AMSyphonCamera.h"
+#import "AMSyphonManager.h"
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()
@@ -80,9 +81,7 @@ NSString* kNonServer = @"    --    ";
         NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
         NSString* title     = [NSString stringWithString:appName];
         
-        if([appName isEqualToString:@"Artsmesh"])
-        {
-            //filter self server
+        if ([AMSyphonName isSyphonRouter:name]) {
             continue;
         }
         

@@ -12,6 +12,7 @@
 #import "UIFrameWork/AMPanelView.h"
 #import "AMAppDelegate.h"
 #import "AMSyphonView.h"
+#import "AMSyphonCamera.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -27,6 +28,8 @@
 @property (weak) IBOutlet AMVideoMixerBackgroundView *smallView9;
 @property (strong, nonatomic, readonly) NSArray *smallViews;
 @property (weak, nonatomic) AMVideoMixerBackgroundView *selected;
+
+@property  (nonatomic) AMSyphonCamera* syCamera;
 @end
 
 @implementation AMVideoMixerViewController
@@ -36,6 +39,9 @@
 {
     [super viewDidLoad];
     [self setup];
+    
+    _syCamera = [[AMSyphonCamera alloc] init];
+    [_syCamera initializeDevice];
 }
 
 - (void)setup
@@ -138,31 +144,5 @@
         popupController.maxSizeButton.hidden = YES;
     }
 }
-
-
-/*
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    NSPoint point = [self.view convertPoint:theEvent.locationInWindow
-                                   fromView:nil];
-    NSView *hitView = [self.view hitTest:point];
-    NSView *smallView = hitView.superview.superview;
-
-    if ([self.smallViews indexOfObjectIdenticalTo:smallView] != NSNotFound) {
-        AMVideoMixerBackgroundView *theView = (AMVideoMixerBackgroundView *)smallView;
-        if (!theView.hasBorder) {
-            for (AMVideoMixerBackgroundView *view in self.smallViews) {
-                if (view.hasBorder)
-                    view.hasBorder = NO;
-            }
-            
-            theView.hasBorder = YES;
-        }
-        
-        NSUInteger index = [self.smallViews indexOfObjectIdenticalTo:smallView];
-        [self.syphonManager selectClient:index];
-    }
-}
- */
 
 @end

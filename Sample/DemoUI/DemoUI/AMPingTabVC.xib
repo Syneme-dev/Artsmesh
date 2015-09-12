@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -20,14 +20,6 @@
             <rect key="frame" x="0.0" y="12" width="661" height="532"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView identifier="useOSC" translatesAutoresizingMaskIntoConstraints="NO" id="bJA-5t-kXS" customClass="AMCheckBoxView">
-                    <rect key="frame" x="32" y="198" width="86" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="HBp-RZ-OKi"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Lgn-WC-AUn"/>
-                        <constraint firstAttribute="width" constant="86" id="lvB-da-zLd"/>
-                    </constraints>
-                </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="j8v-rV-XmL" customClass="AMFakeBox">
                     <rect key="frame" x="0.0" y="151" width="661" height="381"/>
                     <subviews>
@@ -35,7 +27,7 @@
                             <rect key="frame" x="0.0" y="329" width="178" height="51"/>
                         </customView>
                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ET9-sI-9Qn">
-                            <rect key="frame" x="178" y="91" width="483" height="288"/>
+                            <rect key="frame" x="178" y="48" width="483" height="331"/>
                             <clipView key="contentView" copiesOnScroll="NO" id="Bnl-pW-oct">
                                 <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,10 +36,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="415" height="539"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.1764705926" green="0.1764705926" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                                        <size key="minSize" width="483" height="288"/>
+                                        <size key="minSize" width="483" height="331"/>
                                         <size key="maxSize" width="483" height="10000000"/>
                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <size key="minSize" width="483" height="288"/>
+                                        <size key="minSize" width="483" height="331"/>
                                         <size key="maxSize" width="483" height="10000000"/>
                                     </textView>
                                 </subviews>
@@ -62,7 +54,7 @@
                             </scroller>
                         </scrollView>
                         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjL-Yh-oqa">
-                            <rect key="frame" x="0.0" y="91" width="178" height="240"/>
+                            <rect key="frame" x="0.0" y="48" width="178" height="283"/>
                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="MKy-2R-F1N">
                                 <rect key="frame" x="0.0" y="0.0" width="178" height="324"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,9 +149,9 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="ET9-sI-9Qn" firstAttribute="leading" secondItem="IjL-Yh-oqa" secondAttribute="trailing" id="2wL-dS-HPX"/>
-                        <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="91" id="558-pT-LMK"/>
+                        <constraint firstAttribute="bottom" secondItem="IjL-Yh-oqa" secondAttribute="bottom" constant="48" id="558-pT-LMK"/>
                         <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="Eme-Xm-Q3Y"/>
-                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="centerY" secondItem="j8v-rV-XmL" secondAttribute="centerY" constant="-44.5" id="bTi-v4-cnz"/>
+                        <constraint firstItem="ET9-sI-9Qn" firstAttribute="centerY" secondItem="j8v-rV-XmL" secondAttribute="centerY" constant="-23" id="bTi-v4-cnz"/>
                         <constraint firstItem="ET9-sI-9Qn" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="2" id="d3l-1t-maq"/>
                         <constraint firstItem="IjL-Yh-oqa" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="top" constant="50" id="dbx-wg-Td1"/>
                         <constraint firstAttribute="trailing" secondItem="IjL-Yh-oqa" secondAttribute="trailing" constant="483" id="mT4-h9-YPg"/>
@@ -169,6 +161,21 @@
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="o6u-cN-021" customClass="AMVisualView">
                     <rect key="frame" x="0.0" y="0.0" width="661" height="151"/>
+                    <subviews>
+                        <customView identifier="useIPV6" translatesAutoresizingMaskIntoConstraints="NO" id="bJA-5t-kXS" customClass="AMCheckBoxView">
+                            <rect key="frame" x="31" y="124" width="86" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="HBp-RZ-OKi"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Lgn-WC-AUn"/>
+                                <constraint firstAttribute="width" constant="86" id="lvB-da-zLd"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bJA-5t-kXS" firstAttribute="top" secondItem="o6u-cN-021" secondAttribute="top" constant="7" id="3Et-ve-3hM"/>
+                        <constraint firstAttribute="bottom" secondItem="bJA-5t-kXS" secondAttribute="bottom" constant="124" id="4qA-PC-GlM"/>
+                        <constraint firstItem="bJA-5t-kXS" firstAttribute="leading" secondItem="o6u-cN-021" secondAttribute="leading" constant="31" id="hu0-Tj-xUg"/>
+                    </constraints>
                 </customView>
             </subviews>
             <constraints>
@@ -176,9 +183,6 @@
                 <constraint firstItem="j8v-rV-XmL" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="B5G-H3-MC6"/>
                 <constraint firstItem="j8v-rV-XmL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="LAX-1A-jwF"/>
                 <constraint firstAttribute="trailing" secondItem="o6u-cN-021" secondAttribute="trailing" id="OVG-sY-7vY"/>
-                <constraint firstItem="bJA-5t-kXS" firstAttribute="top" secondItem="j8v-rV-XmL" secondAttribute="bottom" constant="-67" id="SeT-ji-2zK"/>
-                <constraint firstAttribute="bottom" secondItem="bJA-5t-kXS" secondAttribute="bottom" constant="198" id="UUt-jc-mJ8"/>
-                <constraint firstItem="bJA-5t-kXS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="X6x-YZ-i5M"/>
                 <constraint firstItem="o6u-cN-021" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="cx1-9t-9ao"/>
                 <constraint firstAttribute="bottom" secondItem="o6u-cN-021" secondAttribute="bottom" id="xYg-Tk-TBY"/>
             </constraints>

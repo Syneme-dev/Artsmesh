@@ -9,6 +9,8 @@
 #import "AMSyphonViewRouterController.h"
 #import "AMSyphonView.h"
 #import "Syphon/Syphon.h"
+#import "AMSyphonCamera.h"
+#import "AMSyphonManager.h"
 
 @interface AMSyphonViewRouterController ()
 @property (weak) IBOutlet AMSyphonView *glView;
@@ -85,7 +87,7 @@
         NSString* name      = [dict objectForKey:SyphonServerDescriptionNameKey];
         NSString* title     = [NSString stringWithString:appName];
         
-        if([appName isEqualToString:@"Artsmesh"])
+       if ([AMSyphonName isSyphonRouter:name])
         {
             //filter self server
             continue;
@@ -213,8 +215,10 @@
 
 - (BOOL) startRouter
 {
+    NSString* routerName = [AMSyphonName AMRouterName];
+    
     CGLContextObj context = [[self.glView openGLContext] CGLContextObj];
-    _syRouter = [[SyphonServer alloc] initWithName:@"AMSyphonRouter" context:context options:nil];
+    _syRouter = [[SyphonServer alloc] initWithName:routerName context:context options:nil];
     self.routing= YES;
     
     return YES;

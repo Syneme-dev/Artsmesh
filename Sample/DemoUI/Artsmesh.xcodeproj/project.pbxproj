@@ -246,7 +246,7 @@
 		4AB4ACF31A6E641C003ECE24 /* AMArchiveGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF21A6E641C003ECE24 /* AMArchiveGroupItem.m */; };
 		4AB4ACF61A6E6435003ECE24 /* AMArchiveUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */; };
 		4F08E2E81B78A75D00578AB5 /* QTKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */; };
-		4F08E2E91B78A75D00578AB5 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */; };
+		4F08E2E91B78A75D00578AB5 /* AMSyphonCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E51B78A75D00578AB5 /* AMSyphonCamera.m */; };
 		4F08E2EA1B78A75D00578AB5 /* SyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F08E2E71B78A75D00578AB5 /* SyphonSender.m */; };
 		4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */; };
 		4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */; };
@@ -895,8 +895,8 @@
 		4AB4ACF51A6E6435003ECE24 /* AMArchiveUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMArchiveUserItem.m; sourceTree = "<group>"; };
 		4F08E2E21B78A75D00578AB5 /* QTKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QTKitHelper.h; path = SyphonCamera/QTKitHelper.h; sourceTree = "<group>"; };
 		4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QTKitHelper.m; path = SyphonCamera/QTKitHelper.m; sourceTree = "<group>"; };
-		4F08E2E41B78A75D00578AB5 /* SCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCAppDelegate.h; path = SyphonCamera/SCAppDelegate.h; sourceTree = "<group>"; };
-		4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCAppDelegate.m; path = SyphonCamera/SCAppDelegate.m; sourceTree = "<group>"; };
+		4F08E2E41B78A75D00578AB5 /* AMSyphonCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMSyphonCamera.h; path = SyphonCamera/AMSyphonCamera.h; sourceTree = "<group>"; };
+		4F08E2E51B78A75D00578AB5 /* AMSyphonCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMSyphonCamera.m; path = SyphonCamera/AMSyphonCamera.m; sourceTree = "<group>"; };
 		4F08E2E61B78A75D00578AB5 /* SyphonSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyphonSender.h; path = SyphonCamera/SyphonSender.h; sourceTree = "<group>"; };
 		4F08E2E71B78A75D00578AB5 /* SyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyphonSender.m; path = SyphonCamera/SyphonSender.m; sourceTree = "<group>"; };
 		4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -1813,8 +1813,8 @@
 			children = (
 				4F08E2E21B78A75D00578AB5 /* QTKitHelper.h */,
 				4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */,
-				4F08E2E41B78A75D00578AB5 /* SCAppDelegate.h */,
-				4F08E2E51B78A75D00578AB5 /* SCAppDelegate.m */,
+				4F08E2E41B78A75D00578AB5 /* AMSyphonCamera.h */,
+				4F08E2E51B78A75D00578AB5 /* AMSyphonCamera.m */,
 				4F08E2E61B78A75D00578AB5 /* SyphonSender.h */,
 				4F08E2E71B78A75D00578AB5 /* SyphonSender.m */,
 			);
@@ -2361,7 +2361,7 @@
 				AF2213271B367F6F003320D9 /* AMVerticalScrollView.m in Sources */,
 				2D08FD8C1AD661FF00A9D257 /* GTLYouTubeActivity.m in Sources */,
 				2D08FDAC1AD661FF00A9D257 /* GTLYouTubeChannelSnippet.m in Sources */,
-				4F08E2E91B78A75D00578AB5 /* SCAppDelegate.m in Sources */,
+				4F08E2E91B78A75D00578AB5 /* AMSyphonCamera.m in Sources */,
 				CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */,
 				2D08FDCB1AD661FF00A9D257 /* GTLYouTubeLiveStreamSnippet.m in Sources */,
 				2D08FDB61AD661FF00A9D257 /* GTLYouTubeI18nLanguage.m in Sources */,

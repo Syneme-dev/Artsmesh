@@ -12,7 +12,15 @@
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
 
+@interface AMSyphonName : NSObject
++(NSString*) AMRouterName;
++(BOOL)      isSyphonCamera:(NSString*)name;
++(BOOL)     isSyphonRouter:(NSString*)name;
+@end
+
 @interface AMSyphonManager : NSObject
+
+
 
 -(id)initWithClientCount:(int) cnt;
 

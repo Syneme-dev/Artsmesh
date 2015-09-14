@@ -340,6 +340,8 @@ typedef enum {
 }
 
 -(void) showVideoPopUp:(NSString *)youtubeUrl{
+        [_floatPanelViewController setFloatPanelTitle:@"EVENT VIDEO"];
+    
         [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
         [self loadVideoWebPupupView:youtubeUrl];
         [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];

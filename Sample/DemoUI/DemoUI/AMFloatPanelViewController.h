@@ -33,5 +33,7 @@
 - (IBAction)closePanel:(id)sender;
 - (IBAction)toggleFullScreen:(id)sender;
 
+- (void)setFloatPanelTitle:(NSString *)panelTitle;
+
 
 @end

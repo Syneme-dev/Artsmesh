@@ -168,7 +168,8 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [self.floatPanelViewController.titleTextField setTextColor:self.floatPanelViewController.panelTitleColor];
-    
+    [self.floatPanelViewController.titleTextField setStringValue:self.floatPanelViewController.panelTitle];
+        
     [self.backgroundColor set];
     [NSBezierPath fillRect:self.bounds];
     [_knobColor set];

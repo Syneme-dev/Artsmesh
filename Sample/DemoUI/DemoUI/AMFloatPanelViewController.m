@@ -103,4 +103,11 @@
     }
 }
 
+- (void)setFloatPanelTitle:(NSString *)panelTitle {
+    self.panelTitle = panelTitle;
+    [self.titleTextField setStringValue:panelTitle];
+    
+    [self.view setNeedsDisplay:YES];
+}
+
 @end

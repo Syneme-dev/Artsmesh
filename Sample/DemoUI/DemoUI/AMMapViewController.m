@@ -355,7 +355,9 @@
     return name;
 }
 
--(void) showVideoPopUp:(NSString *)youtubeUrl{
+-(void) showVideoPopUp:(NSString *)youtubeUrl {
+    [_floatPanelViewController setFloatPanelTitle:@"ARCHIVE EVENT VIDEO"];
+    
     [_floatPanelViewController.panelContent setSubviews: [NSArray array]];
     [self loadVideoWebPupupView:youtubeUrl];
     [_archiveFloatWindow setBackgroundColor:[NSColor blueColor]];
@@ -363,7 +365,6 @@
 }
 
 -(void) loadVideoWebPupupView:(NSString *)youtubeUrl {
-    NSLog(@"loadVideoWebPopupView called..");
     WebView *group_webview = [[WebView alloc] initWithFrame:NSMakeRect(0, 16, _floatPanelViewController.panelContent.frame.size.width -20, _floatPanelViewController.panelContent.frame.size.height-20)];
     [group_webview setFrameLoadDelegate:self];
     [group_webview setDrawsBackground:NO];

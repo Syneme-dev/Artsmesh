@@ -10,7 +10,7 @@
 #import "AMTheme.h"
 #import "AMStatesBorderButtonViewController.h"
 
-@interface AMStatesBorderButton : NSView
+@interface AMStandardButton : NSView
 
 @property (strong) AMStatesBorderButtonViewController *buttonVC;
 @property (strong) AMTheme *currentTheme;

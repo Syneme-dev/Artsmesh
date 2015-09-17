@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "AMTabPanelViewController.h"
 
-#import "AMStatesBorderButton.h"
+#import "AMStandardButton.h"
 #import "AMGeneralSettingsVC.h"
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMCheckBoxView.h"
@@ -36,8 +36,8 @@
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
 @property (strong) IBOutlet NSButton *createEventBtn;
-@property (strong) IBOutlet AMStatesBorderButton *eventDeleteButton;
-@property (strong) IBOutlet AMStatesBorderButton *eventGoLiveButton;
+@property (strong) IBOutlet AMStandardButton *eventDeleteButton;
+@property (strong) IBOutlet AMStandardButton *eventGoLiveButton;
 
 @property (strong) IBOutlet NSTextField *broadcastTItleField;
 @property (strong) IBOutlet NSTextField *broadcastDescField;

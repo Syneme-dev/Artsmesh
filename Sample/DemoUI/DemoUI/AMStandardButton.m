@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMStatesBorderButton.h"
+#import "AMStandardButton.h"
 
-@implementation AMStatesBorderButton {
+@implementation AMStandardButton {
     BOOL isHovering;
     BOOL isPressing;
     NSInteger cur_state;
@@ -223,7 +223,7 @@
     [self updateBtn:self];
 }
 
-- (void)updateBtn:(AMStatesBorderButton *)theBtn {
+- (void)updateBtn:(AMStandardButton *)theBtn {
     // updates the look of the button based on changes in state
     [self updateButtonColors];
 }

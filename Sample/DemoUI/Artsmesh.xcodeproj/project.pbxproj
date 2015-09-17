@@ -171,8 +171,8 @@
 		2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */; };
 		2D31E6661AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */; };
 		2D4555A21B9B98BC00C6853B /* AMStandardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A11B9B98BC00C6853B /* AMStandardButton.m */; };
-		2D4555A51B9B98CA00C6853B /* AMStatesBorderButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */; };
-		2D4555A71B9B98D700C6853B /* AMStatesBorderButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */; };
+		2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */; };
+		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
@@ -777,9 +777,9 @@
 		2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerScrollDocumentView.m; sourceTree = "<group>"; };
 		2D4555A01B9B98BC00C6853B /* AMStandardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButton.h; sourceTree = "<group>"; };
 		2D4555A11B9B98BC00C6853B /* AMStandardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButton.m; sourceTree = "<group>"; };
-		2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStatesBorderButtonViewController.h; sourceTree = "<group>"; };
-		2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStatesBorderButtonViewController.m; sourceTree = "<group>"; };
-		2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStatesBorderButtonViewController.xib; sourceTree = "<group>"; };
+		2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButtonViewController.h; sourceTree = "<group>"; };
+		2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButtonViewController.m; sourceTree = "<group>"; };
+		2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStandardButtonViewController.xib; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -1611,8 +1611,8 @@
 		2DC54D781B9BB55100FEC93B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2D4555A31B9B98CA00C6853B /* AMStatesBorderButtonViewController.h */,
-				2D4555A41B9B98CA00C6853B /* AMStatesBorderButtonViewController.m */,
+				2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */,
+				2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1620,7 +1620,7 @@
 		2DC54D791B9BB56200FEC93B /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				2D4555A61B9B98D700C6853B /* AMStatesBorderButtonViewController.xib */,
+				2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -2254,7 +2254,7 @@
 				4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
-				2D4555A71B9B98D700C6853B /* AMStatesBorderButtonViewController.xib in Resources */,
+				2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
 				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
@@ -2420,7 +2420,7 @@
 				2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */,
 				2D08FDF41AD661FF00A9D257 /* GTLYouTubeVideoConversionPing.m in Sources */,
 				2D08FDD31AD661FF00A9D257 /* GTLYouTubePlaylistItem.m in Sources */,
-				2D4555A51B9B98CA00C6853B /* AMStatesBorderButtonViewController.m in Sources */,
+				2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */,
 				2D08FDA31AD661FF00A9D257 /* GTLYouTubeChannelConversionPings.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				4A207A781A875E0A006F4FA2 /* AMRestHelper.m in Sources */,

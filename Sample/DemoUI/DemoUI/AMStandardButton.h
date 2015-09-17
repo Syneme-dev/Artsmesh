@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTheme.h"
-#import "AMStatesBorderButtonViewController.h"
+#import "AMStandardButtonViewController.h"
 
 @interface AMStandardButton : NSView
 
-@property (strong) AMStatesBorderButtonViewController *buttonVC;
+@property (strong) AMStandardButtonViewController *buttonVC;
 @property (strong) AMTheme *currentTheme;
 @property (strong) NSArray *states;
 @property (strong) NSString *type;

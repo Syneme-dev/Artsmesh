@@ -10,7 +10,7 @@
 #import "AMFlippedView.h"
 #import "AMTheme.h"
 
-@interface AMStatesBorderButtonViewController : NSViewController
+@interface AMStandardButtonViewController : NSViewController
 
 @property (strong) AMTheme *currentTheme;
 @property (strong) IBOutlet AMFlippedView *borderView;

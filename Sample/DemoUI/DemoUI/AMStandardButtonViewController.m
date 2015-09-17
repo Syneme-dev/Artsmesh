@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Artsmesh. All rights reserved.
 //
 
-#import "AMStatesBorderButtonViewController.h"
+#import "AMStandardButtonViewController.h"
 
-@interface AMStatesBorderButtonViewController ()
+@interface AMStandardButtonViewController ()
 
 @end
 
-@implementation AMStatesBorderButtonViewController
+@implementation AMStandardButtonViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

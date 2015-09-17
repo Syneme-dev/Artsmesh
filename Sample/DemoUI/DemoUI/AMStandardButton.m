@@ -9,8 +9,6 @@
 #import "AMStandardButton.h"
 
 @implementation AMStandardButton {
-    BOOL isHovering;
-    BOOL isPressing;
     NSInteger cur_state;
 }
 
@@ -19,8 +17,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        isHovering = NO;
-        isPressing = NO;
+        self.isHovering = NO;
+        self.isPressing = NO;
         self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"confirm", @"success", @"fail", nil];
         cur_state = 1; // Set initially to Active state
         
@@ -85,7 +83,7 @@
     NSColor *currentTextColor = lightGrey;
     
     
-    if (isHovering && !isPressing) {
+    if (self.isHovering && !self.isPressing) {
         switch (cur_state) {
             case 0: //disabled
                 break;
@@ -127,7 +125,7 @@
 // Events
 - (void)mouseEntered:(NSEvent *)theEvent {
     // Mouse has entered button bounds
-    isHovering = YES;
+    self.isHovering = YES;
     
     [self updateButtonColors];
     [[NSCursor pointingHandCursor] set];
@@ -135,7 +133,7 @@
 
 - (void)mouseMoved:(NSEvent *)theEvent {
     // Mouse has moved inside of button bounds
-    isHovering = YES;
+    self.isHovering = YES;
     
     [self updateButtonColors];
     [[NSCursor pointingHandCursor] set];
@@ -143,7 +141,7 @@
 
 - (void)mouseExited:(NSEvent *)theEvent {
     // Mouse has exited button bounds
-    isHovering = NO;
+    self.isHovering = NO;
     
     [self updateButtonColors];
     [[NSCursor arrowCursor] set];
@@ -151,7 +149,8 @@
 
 - (void)mouseDown:(NSEvent *)theEvent {
     // Mouse has been pressed down
-    isPressing = YES;
+    self.isPressing = YES;
+    self.triggerPressed = NO;
     
     switch (cur_state) {
         case 0:
@@ -176,11 +175,15 @@
         default:
             break;
     }
+    
+    [super mouseDown:theEvent];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
+    NSLog(@"mouse up on button");
     // Mouse has been released
-    isPressing = NO;
+    self.isPressing = NO;
+    self.triggerPressed = YES;
     
     switch (cur_state) {
         case 0:
@@ -205,6 +208,10 @@
         default:
             break;
     }
+    
+    [super mouseUp:theEvent];
+    
+    self.triggerPressed = NO;
 }
 
 // Custom functions

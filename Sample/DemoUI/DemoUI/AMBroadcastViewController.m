@@ -921,6 +921,20 @@
 -(void)onChecked:(AMCheckBoxView*)sender {
 }
 
+// Mouse Events (mainly for buttons)
+- (void)mouseDown:(NSEvent *)theEvent {
+}
+- (void)mouseUp:(NSEvent *)theEvent {
+    if (self.eventDeleteButton.triggerPressed == YES) {
+        // Delete event button pressed
+        NSLog(@"Delete Event now!!");
+    } else if (self.eventGoLiveButton.triggerPressed == YES) {
+        // Go Live event button pressed
+        NSLog(@"Go Live now!!");
+    }
+}
+
+
 
 // Settings Tab Functions
 -(void)setupSettingsTab {

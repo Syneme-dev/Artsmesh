@@ -16,6 +16,9 @@
 @property (strong) AMTheme *currentTheme;
 @property (strong) NSArray *states;
 @property (strong) NSString *type;
+@property BOOL triggerPressed;
+@property BOOL isPressing;
+@property BOOL isHovering;
 
 - (void)setButtonTitle:(NSString *)buttonTitle;
 - (void)changeState:(NSString *)theState;

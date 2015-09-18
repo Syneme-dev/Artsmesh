@@ -180,7 +180,6 @@
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-    NSLog(@"mouse up on button");
     // Mouse has been released
     self.isPressing = NO;
     self.triggerPressed = YES;

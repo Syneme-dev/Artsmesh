@@ -836,6 +836,8 @@
     [self.privateCheck setChecked:NO];
     
     [self removeLiveStreamFromEventForm];
+    
+    self.selectedBroadcast = nil;
 }
 
 - (void)removeLiveStreamFromEventForm {
@@ -925,12 +927,16 @@
 - (void)mouseDown:(NSEvent *)theEvent {
 }
 - (void)mouseUp:(NSEvent *)theEvent {
+    // TO-DO: Add confirm button state for actions
+    
     if (self.eventDeleteButton.triggerPressed == YES) {
         // Delete event button pressed
-        NSLog(@"Delete Event now!!");
+        if (self.selectedBroadcast != nil) {
+            // Delete existing Live YouTube Broadcast
+            [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
+        }
     } else if (self.eventGoLiveButton.triggerPressed == YES) {
         // Go Live event button pressed
-        NSLog(@"Go Live now!!");
     }
 }
 

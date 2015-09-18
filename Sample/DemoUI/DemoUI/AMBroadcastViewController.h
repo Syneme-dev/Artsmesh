@@ -35,9 +35,10 @@
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
-@property (strong) IBOutlet NSButton *createEventBtn;
+//@property (strong) IBOutlet NSButton *createEventBtn;
 @property (strong) IBOutlet AMStandardButton *eventDeleteButton;
 @property (strong) IBOutlet AMStandardButton *eventGoLiveButton;
+@property (strong) IBOutlet AMStandardButton *eventCreateButton;
 
 @property (strong) IBOutlet NSTextField *broadcastTItleField;
 @property (strong) IBOutlet NSTextField *broadcastDescField;

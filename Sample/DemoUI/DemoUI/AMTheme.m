@@ -103,8 +103,8 @@
         newColorSuccess = UI_Color_Green;
         
         newColorBackground = UI_Color_Gray;
-        newColorBackgroundAlert = UI_Color_Red;
-        newColorBackgroundError = UI_Color_Yellow;
+        newColorBackgroundAlert = UI_Color_Yellow;
+        newColorBackgroundError = UI_Color_Red;
         newColorBackgroundSuccess = UI_Color_Green;
         newColorBackgroundHover = UI_Color_Blue;
         
@@ -114,8 +114,8 @@
         newColorBorderSuccess = UI_Color_Green;
         
         newColorText = UI_Color_Light_Grey;
-        newColorTextAlert = UI_Color_Red;
-        newColorTextError = UI_Color_Yellow;
+        newColorTextAlert = UI_Color_Yellow;
+        newColorTextError = UI_Color_Red;
         newColorTextSuccess = UI_Color_Green;
         
         newFontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];

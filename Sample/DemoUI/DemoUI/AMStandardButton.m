@@ -19,7 +19,7 @@
         
         self.isHovering = NO;
         self.isPressing = NO;
-        self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"confirm", @"success", @"fail", nil];
+        self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"alert", @"success", @"fail", nil];
         cur_state = 1; // Set initially to Active state
         
         self.currentTheme = [[AMTheme alloc] init];
@@ -93,6 +93,9 @@
                 break;
             case 2: //pressed
                 break;
+            case 3: //alert
+                currentTextColor = self.currentTheme.colorTextAlert;
+                currentButtonBackground = hoverColor;
             default:
                 break;
         }
@@ -111,6 +114,12 @@
                 currentTextColor = defaultColor;
                 currentButtonBackground = lightGrey;
                 break;
+            case 3: //alert
+                currentTextColor = self.currentTheme.colorTextAlert;
+                currentButtonBackground = defaultColor;
+            case 5: //fail
+                currentTextColor = self.currentTheme.colorTextError;
+                currentButtonBackground = defaultColor;
             default:
                 currentButtonBackground = defaultColor;
                 break;
@@ -125,10 +134,12 @@
 // Events
 - (void)mouseEntered:(NSEvent *)theEvent {
     // Mouse has entered button bounds
-    self.isHovering = YES;
-    
-    [self updateButtonColors];
-    [[NSCursor pointingHandCursor] set];
+    if (cur_state > 0) {
+        self.isHovering = YES;
+        
+        [self updateButtonColors];
+        [[NSCursor pointingHandCursor] set];
+    }
 }
 
 - (void)mouseMoved:(NSEvent *)theEvent {
@@ -165,6 +176,7 @@
             break;
         case 3:
             // confirm
+            [self changeState:@"pressed"];
             break;
         case 4:
             // success
@@ -227,6 +239,23 @@
     cur_state = new_state;
     
     [self updateBtn:self];
+}
+
+- (void)setDisabledStateWithText:(NSString *)theText {
+    [self setButtonTitle:theText];
+    [self changeState:@"disabled"];
+}
+- (void)setActiveStateWithText:(NSString *)theText {
+    [self setButtonTitle:theText];
+    [self changeState:@"active"];
+}
+- (void)setAlertStateWithText:(NSString *)theText {
+    [self setButtonTitle:theText];
+    [self changeState:@"alert"];
+}
+- (void)setErrorStateWithText:(NSString *)theText {
+    [self setButtonTitle:theText];
+    [self changeState:@"error"];
 }
 
 - (void)updateBtn:(AMStandardButton *)theBtn {

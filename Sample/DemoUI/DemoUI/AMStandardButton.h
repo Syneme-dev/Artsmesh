@@ -22,5 +22,9 @@
 
 - (void)setButtonTitle:(NSString *)buttonTitle;
 - (void)changeState:(NSString *)theState;
+- (void)setDisabledStateWithText:(NSString *)theText;
+- (void)setActiveStateWithText:(NSString *)theText;
+- (void)setAlertStateWithText:(NSString *)theText;
+- (void)setErrorStateWithText:(NSString *)theText;
 
 @end

@@ -124,7 +124,9 @@
 {
     [self.archiveWebView.mainFrame stopLoading];
     [self.archiveWebView cancelOperation:nil];
-    [super webViewClose:sender];
+    
+    //[super webViewClose:sender];
+    [sender close];
 }
 
 //Note:working for enable to open external link with new web browser.

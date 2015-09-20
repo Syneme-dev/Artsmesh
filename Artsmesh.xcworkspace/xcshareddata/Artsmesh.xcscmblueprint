@@ -1,0 +1,53 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2064E8D1261CDB1F80D47648FA8D284A968D2C3B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "052f66bb-8366-e9ed-b056-95094e25c79e++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "052f66bb-8366-e9ed-b056-95094e25c79e++505" : 0,
+    "c149197c-92b2-435d-9462-ce57b7db7bff++3047" : 0,
+    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : 0,
+    "2064E8D1261CDB1F80D47648FA8D284A968D2C3B" : 0,
+    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9F2BD218-94B2-4180-A2AC-DBFBF11D56CE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "052f66bb-8366-e9ed-b056-95094e25c79e++505" : "frameworks\/google-api-objectivec-client-read-only",
+    "c149197c-92b2-435d-9462-ce57b7db7bff++3047" : "Artsmesh\/Sample\/DemoUI\/Source\/JSON",
+    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : "Artsmesh\/Sample\/DemoUI\/Source\/HTTPFetcher",
+    "2064E8D1261CDB1F80D47648FA8D284A968D2C3B" : "Artsmesh",
+    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : "Artsmesh\/Sample\/DemoUI\/Source\/OAuth2"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Artsmesh",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Artsmesh.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/google-api-objectivec-client.googlecode.com\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "052f66bb-8366-e9ed-b056-95094e25c79e++505"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Syneme-dev\/Artsmesh.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2064E8D1261CDB1F80D47648FA8D284A968D2C3B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/gtm-oauth2.googlecode.com\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "22754eea-fc93-e339-b032-c1f495b90c16++2896"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/gtm-http-fetcher.googlecode.com\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "b3aa69f0-f65c-a609-0a27-78855af037c1++2896"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/stig\/json-framework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "c149197c-92b2-435d-9462-ce57b7db7bff++3047"
+    }
+  ]
+}

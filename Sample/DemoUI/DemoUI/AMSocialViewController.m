@@ -110,7 +110,8 @@ typedef enum {
     [self.socialWebTab.mainFrame stopLoading];
     [self.socialWebTab cancelOperation:nil];
 
-    [super webViewClose:sender];
+    //[super webViewClose:sender];
+    [sender close];
 }
 
 //Note:working for enable to open external link with new web browser.

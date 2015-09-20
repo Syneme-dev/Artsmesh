@@ -851,8 +851,9 @@
 
 
 - (void)webViewClose:(WebView *)sender {
+    //[super webViewClose:sender];
     
-    [super webViewClose:sender];
+    [sender close];
 }
 
 - (void)establishYouTubeVars {

@@ -12,4 +12,6 @@
 
 @property (nonatomic) NSColor *backgroundColor;
 
+- (void)changeBackgroundColor:(NSColor *)backgroundColor;
+
 @end

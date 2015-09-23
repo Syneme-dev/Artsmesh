@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AMStandardButtonViewController">
+            <connections>
+                <outlet property="borderView" destination="Hz6-mo-xeY" id="8gU-B5-du0"/>
+                <outlet property="buttonTitleTextField" destination="Y8s-bV-iMl" id="6zX-Gg-Fiq"/>
+                <outlet property="contentView" destination="3N7-96-zqe" id="bNP-w8-yyA"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY" userLabel="Border Button Frame View" customClass="AMFlippedView">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="3N7-96-zqe" userLabel="Content View" customClass="AMFlippedView">
+                    <rect key="frame" x="1" y="1" width="198" height="38"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y8s-bV-iMl">
+                            <rect key="frame" x="2" y="12" width="196" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="IdF-AP-mGx"/>
+                            </constraints>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" title="SAVE" id="h01-aj-emu">
+                                <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="Y8s-bV-iMl" secondAttribute="centerX" constant="-1" id="47i-uj-2Ei"/>
+                        <constraint firstItem="Y8s-bV-iMl" firstAttribute="centerY" secondItem="3N7-96-zqe" secondAttribute="centerY" id="NrW-1a-0Pe"/>
+                        <constraint firstAttribute="trailing" secondItem="Y8s-bV-iMl" secondAttribute="trailing" constant="2" id="hVI-fp-uLa"/>
+                        <constraint firstItem="Y8s-bV-iMl" firstAttribute="leading" secondItem="3N7-96-zqe" secondAttribute="leading" constant="4" id="r2K-CX-SJG"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="3N7-96-zqe" secondAttribute="bottom" constant="1" id="0Qf-kL-kBe"/>
+                <constraint firstItem="3N7-96-zqe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="1" id="Mpm-up-yVN"/>
+                <constraint firstAttribute="trailing" secondItem="3N7-96-zqe" secondAttribute="trailing" constant="1" id="WbW-cQ-iM0"/>
+                <constraint firstItem="3N7-96-zqe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="rlf-Dc-2Cn"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>

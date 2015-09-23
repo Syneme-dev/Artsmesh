@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "AMTabPanelViewController.h"
 
+#import "AMStandardButton.h"
 #import "AMGeneralSettingsVC.h"
 #import "UIFramework/AMPopUpView.h"
 #import "UIFramework/AMCheckBoxView.h"
@@ -34,7 +35,11 @@
 @property (strong) IBOutlet NSButton *settingsBtn;
 @property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
-@property (strong) IBOutlet NSButton *createEventBtn;
+//@property (strong) IBOutlet NSButton *createEventBtn;
+@property (strong) IBOutlet AMStandardButton *eventDeleteButton;
+@property (strong) IBOutlet AMStandardButton *eventGoLiveButton;
+@property (strong) IBOutlet AMStandardButton *eventCreateButton;
+
 @property (strong) IBOutlet NSTextField *broadcastTItleField;
 @property (strong) IBOutlet NSTextField *broadcastDescField;
 
@@ -57,6 +62,8 @@
 @property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;
 
 
+
+
 @property (strong) IBOutlet NSView *eventsManagerView;
 
 // Stream Settings IBOutlets
@@ -65,6 +72,7 @@
 @property (strong) IBOutlet NSTextField *streamAddressTextField;
 @property (strong) IBOutlet NSTextField *streamNameTextField;
 @property (strong) IBOutlet NSTextField *streamStatusTextField;
+
 
 
 // Settings Tab IBOutlets

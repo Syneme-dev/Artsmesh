@@ -49,6 +49,7 @@
         self.colorBorderSuccess = UI_Color_Green;
         
         self.colorText = UI_Color_Light_Grey;
+        self.colorTextDisabled = UI_Color_Disabled;
         self.colorTextAlert = UI_Color_Red;
         self.colorTextError = UI_Color_Yellow;
         self.colorTextSuccess = UI_Color_Green;

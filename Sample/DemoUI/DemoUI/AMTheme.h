@@ -28,6 +28,7 @@
 @property (strong) NSColor *colorSuccess;
 
 @property (strong) NSColor *colorText;
+@property (strong) NSColor *colorTextDisabled;
 @property (strong) NSColor *colorTextAlert;
 @property (strong) NSColor *colorTextError;
 @property (strong) NSColor *colorTextSuccess;

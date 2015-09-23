@@ -82,7 +82,6 @@
     NSColor *lightGrey = self.currentTheme.colorText;
     NSColor *currentTextColor = lightGrey;
     
-    
     if (self.isHovering && !self.isPressing) {
         switch (cur_state) {
             case 0: //disabled
@@ -128,6 +127,7 @@
     [self.buttonVC.buttonTitleTextField setTextColor:currentTextColor];
     [self.buttonVC.contentView changeBackgroundColor:currentButtonBackground];
     [self.buttonVC.contentView setNeedsDisplay:YES];
+
 }
 
 
@@ -144,26 +144,32 @@
 
 - (void)mouseMoved:(NSEvent *)theEvent {
     // Mouse has moved inside of button bounds
-    self.isHovering = YES;
-    
-    [self updateButtonColors];
-    [[NSCursor pointingHandCursor] set];
+    if (cur_state > 0) {
+        self.isHovering = YES;
+        
+        [self updateButtonColors];
+        [[NSCursor pointingHandCursor] set];
+    }
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
     // Mouse has exited button bounds
-    self.isHovering = NO;
+    if (cur_state > 0) {
+        self.isHovering = NO;
     
-    [self updateButtonColors];
-    [[NSCursor arrowCursor] set];
+        [self updateButtonColors];
+        [[NSCursor arrowCursor] set];
+    }
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
     // Mouse has been pressed down
-    self.isPressing = YES;
-    self.triggerPressed = NO;
+    if (cur_state > 0) {
+        
+        self.isPressing = YES;
+        self.triggerPressed = NO;
     
-    switch (cur_state) {
+        switch (cur_state) {
         case 0:
             // disabled
             break;
@@ -186,17 +192,20 @@
             break;
         default:
             break;
-    }
+        }
     
-    [super mouseDown:theEvent];
+        [super mouseDown:theEvent];
+    }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
     // Mouse has been released
-    self.isPressing = NO;
-    self.triggerPressed = YES;
+    if (cur_state > 0) {
     
-    switch (cur_state) {
+        self.isPressing = NO;
+        self.triggerPressed = YES;
+    
+        switch (cur_state) {
         case 0:
             // disabled
             break;
@@ -218,11 +227,13 @@
             break;
         default:
             break;
+        }
+    
+        [super mouseUp:theEvent];
+    
+        self.triggerPressed = NO;
+
     }
-    
-    [super mouseUp:theEvent];
-    
-    self.triggerPressed = NO;
 }
 
 // Custom functions
@@ -260,7 +271,13 @@
 
 - (void)updateBtn:(AMStandardButton *)theBtn {
     // updates the look of the button based on changes in state
-    [self updateButtonColors];
+    if (cur_state > 0) {
+        [self updateButtonColors];
+    } else {
+        [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextDisabled];
+        [self.buttonVC.contentView changeBackgroundColor:self.currentTheme.colorBackground];
+        [self.buttonVC.contentView setNeedsDisplay:YES];
+    }
 }
 
 @end

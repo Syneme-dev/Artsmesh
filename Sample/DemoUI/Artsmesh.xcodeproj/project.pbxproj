@@ -264,9 +264,9 @@
 		4F90AEF01B70879100C5B3CA /* AMVisualView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F90AEEF1B70879100C5B3CA /* AMVisualView.m */; };
 		4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9677761ADF8D200037BB64 /* AMClockTabVC.m */; };
 		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
-		4FA52CCA1BB249420075D02B /* AMAVFSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CC71BB249420075D02B /* AMAVFSyphonSender.m */; settings = {ASSET_TAGS = (); }; };
-		4FA52CCB1BB249420075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CC91BB249420075D02B /* AVFWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */; };
+		4FA52CD21BB24B090075D02B /* AMAVFSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CCF1BB24B090075D02B /* AMAVFSyphonSender.m */; settings = {ASSET_TAGS = (); }; };
+		4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CD11BB24B090075D02B /* AVFWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
 		4FC6316A1B46635200BD02AB /* iperf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC6316E1B46781C00BD02AB /* AMIPerfConfigWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */; };
@@ -927,11 +927,11 @@
 		4F9677751ADF8D200037BB64 /* AMClockTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMClockTabVC.h; sourceTree = "<group>"; };
 		4F9677761ADF8D200037BB64 /* AMClockTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMClockTabVC.m; sourceTree = "<group>"; };
 		4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMClockTabVC.xib; sourceTree = "<group>"; };
-		4FA52CC61BB249420075D02B /* AMAVFSyphonSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAVFSyphonSender.h; path = ../../../../AVSyphonCamera/AVSyphonCamera/AMAVFSyphonSender.h; sourceTree = "<group>"; };
-		4FA52CC71BB249420075D02B /* AMAVFSyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMAVFSyphonSender.m; path = ../../../../AVSyphonCamera/AVSyphonCamera/AMAVFSyphonSender.m; sourceTree = "<group>"; };
-		4FA52CC81BB249420075D02B /* AVFWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVFWrapper.h; path = ../../../../AVSyphonCamera/AVSyphonCamera/AVFWrapper.h; sourceTree = "<group>"; };
-		4FA52CC91BB249420075D02B /* AVFWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVFWrapper.m; path = ../../../../AVSyphonCamera/AVSyphonCamera/AVFWrapper.m; sourceTree = "<group>"; };
 		4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4FA52CCE1BB24B090075D02B /* AMAVFSyphonSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAVFSyphonSender.h; sourceTree = "<group>"; };
+		4FA52CCF1BB24B090075D02B /* AMAVFSyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAVFSyphonSender.m; sourceTree = "<group>"; };
+		4FA52CD01BB24B090075D02B /* AVFWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVFWrapper.h; sourceTree = "<group>"; };
+		4FA52CD11BB24B090075D02B /* AVFWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFWrapper.m; sourceTree = "<group>"; };
 		4FC631681B465D6000BD02AB /* iperf */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iperf; sourceTree = "<group>"; };
 		4FC6316B1B46781C00BD02AB /* AMIPerfConfigWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfConfigWC.h; sourceTree = "<group>"; };
 		4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfConfigWC.m; sourceTree = "<group>"; };
@@ -1821,10 +1821,10 @@
 		4F08E2E11B78A44B00578AB5 /* FaceTimeCamera */ = {
 			isa = PBXGroup;
 			children = (
-				4FA52CC61BB249420075D02B /* AMAVFSyphonSender.h */,
-				4FA52CC71BB249420075D02B /* AMAVFSyphonSender.m */,
-				4FA52CC81BB249420075D02B /* AVFWrapper.h */,
-				4FA52CC91BB249420075D02B /* AVFWrapper.m */,
+				4FA52CCE1BB24B090075D02B /* AMAVFSyphonSender.h */,
+				4FA52CCF1BB24B090075D02B /* AMAVFSyphonSender.m */,
+				4FA52CD01BB24B090075D02B /* AVFWrapper.h */,
+				4FA52CD11BB24B090075D02B /* AVFWrapper.m */,
 				4F08E2E21B78A75D00578AB5 /* QTKitHelper.h */,
 				4F08E2E31B78A75D00578AB5 /* QTKitHelper.m */,
 				4F08E2E41B78A75D00578AB5 /* AMSyphonCamera.h */,
@@ -2443,7 +2443,7 @@
 				2D08FDE61AD661FF00A9D257 /* GTLYouTubeSubscriptionListResponse.m in Sources */,
 				2D08FD881AD661FF00A9D257 /* GTLQueryYouTube.m in Sources */,
 				2D08FDAF1AD661FF00A9D257 /* GTLYouTubeChannelTopicDetails.m in Sources */,
-				4FA52CCA1BB249420075D02B /* AMAVFSyphonSender.m in Sources */,
+				4FA52CD21BB24B090075D02B /* AMAVFSyphonSender.m in Sources */,
 				2D08FD971AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsSubscription.m in Sources */,
 				2D08FDF31AD661FF00A9D257 /* GTLYouTubeVideoContentDetailsRegionRestriction.m in Sources */,
 				2D08FDDD1AD661FF00A9D257 /* GTLYouTubePromotedItem.m in Sources */,
@@ -2538,7 +2538,7 @@
 				2D08FDEB1AD661FF00A9D257 /* GTLYouTubeThumbnailSetResponse.m in Sources */,
 				2D08FD8E1AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsBulletin.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
-				4FA52CCB1BB249420075D02B /* AVFWrapper.m in Sources */,
+				4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 
 @implementation AMStandardButton {
     NSInteger cur_state;
+    NSString *resetText;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -19,7 +20,7 @@
         
         self.isHovering = NO;
         self.isPressing = NO;
-        self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"alert", @"success", @"fail", nil];
+        self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"alert", @"success", @"error", nil];
         cur_state = 1; // Set initially to Active state
         
         self.currentTheme = [[AMTheme alloc] init];
@@ -96,7 +97,7 @@
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = hoverColor;
                 break;
-            case 5: //fail
+            case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
             default:
@@ -121,7 +122,7 @@
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = defaultColor;
                 break;
-            case 5: //fail
+            case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
                 break;
@@ -270,7 +271,9 @@
     [self setButtonTitle:theText];
     [self changeState:@"alert"];
 }
-- (void)setErrorStateWithText:(NSString *)theText {
+- (void)setErrorStateWithText:(NSString *)theText andResetText:(NSString *)theResetText {
+    resetText = theResetText;
+    
     [self setButtonTitle:theText];
     [self changeState:@"error"];
     
@@ -280,15 +283,20 @@
 }
 
 - (void)resetBtn {
+    [self setButtonTitle:resetText];
     [self changeState:@"active"];
 }
 
 - (void)updateBtn:(AMStandardButton *)theBtn {
     // updates the look of the button based on changes in state
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state != 5) {
         [self updateButtonColors];
     } else {
-        [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextDisabled];
+        if (cur_state == 0) {
+            [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextDisabled];
+        } else if (cur_state == 5) {
+            [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextError];
+        }
         [self.buttonVC.contentView changeBackgroundColor:self.currentTheme.colorBackground];
         [self.buttonVC.contentView setNeedsDisplay:YES];
     }

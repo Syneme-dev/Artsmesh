@@ -399,6 +399,7 @@
             
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"EDIT"];
                                    }
         
                                }];
@@ -494,6 +495,7 @@
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
                                    }
                                }];
 }
@@ -517,6 +519,7 @@
                                         // Live Stream successfully bound to YouTube Broadcast!
                                     } else {
                                         NSLog(@"Error: %@", error.description);
+                                        [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
                                     }
                                 }];
     

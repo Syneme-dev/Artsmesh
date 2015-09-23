@@ -82,8 +82,6 @@
     NSColor *lightGrey = self.currentTheme.colorText;
     NSColor *currentTextColor = lightGrey;
     
-    NSLog(@"cur state is: %ld", (long)cur_state);
-    
     if (self.isHovering && !self.isPressing) {
         switch (cur_state) {
             case 0: //disabled
@@ -98,6 +96,9 @@
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = hoverColor;
                 break;
+            case 5: //fail
+                currentTextColor = self.currentTheme.colorTextError;
+                currentButtonBackground = defaultColor;
             default:
                 break;
         }
@@ -139,7 +140,7 @@
 // Events
 - (void)mouseEntered:(NSEvent *)theEvent {
     // Mouse has entered button bounds
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state !=5) {
         self.isHovering = YES;
         
         [self updateButtonColors];
@@ -149,7 +150,7 @@
 
 - (void)mouseMoved:(NSEvent *)theEvent {
     // Mouse has moved inside of button bounds
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state != 5) {
         self.isHovering = YES;
         
         [self updateButtonColors];
@@ -159,7 +160,7 @@
 
 - (void)mouseExited:(NSEvent *)theEvent {
     // Mouse has exited button bounds
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state != 5) {
         self.isHovering = NO;
     
         [self updateButtonColors];
@@ -169,7 +170,7 @@
 
 - (void)mouseDown:(NSEvent *)theEvent {
     // Mouse has been pressed down
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state != 5) {
         
         self.isPressing = YES;
         self.triggerPressed = NO;
@@ -205,7 +206,7 @@
 
 - (void)mouseUp:(NSEvent *)theEvent {
     // Mouse has been released
-    if (cur_state > 0) {
+    if (cur_state > 0 && cur_state != 5) {
     
         self.isPressing = NO;
         self.triggerPressed = YES;
@@ -272,6 +273,14 @@
 - (void)setErrorStateWithText:(NSString *)theText {
     [self setButtonTitle:theText];
     [self changeState:@"error"];
+    
+    [self performSelector:@selector(resetBtn)
+               withObject:(self)
+               afterDelay:(3.0)];
+}
+
+- (void)resetBtn {
+    [self changeState:@"active"];
 }
 
 - (void)updateBtn:(AMStandardButton *)theBtn {

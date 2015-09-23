@@ -82,6 +82,8 @@
     NSColor *lightGrey = self.currentTheme.colorText;
     NSColor *currentTextColor = lightGrey;
     
+    NSLog(@"cur state is: %ld", (long)cur_state);
+    
     if (self.isHovering && !self.isPressing) {
         switch (cur_state) {
             case 0: //disabled
@@ -95,6 +97,7 @@
             case 3: //alert
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = hoverColor;
+                break;
             default:
                 break;
         }
@@ -116,9 +119,11 @@
             case 3: //alert
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = defaultColor;
+                break;
             case 5: //fail
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
+                break;
             default:
                 currentButtonBackground = defaultColor;
                 break;

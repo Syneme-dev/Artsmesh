@@ -86,6 +86,7 @@
     [self.eventDeleteButton setButtonTitle:@"DELETE"];
     [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
     [self.eventCreateButton setButtonTitle:@"CREATE"];
+    [self updateAMStandardButtons];
     
     //Set up Events Manager SubView and View Controller
     eventsManagerVC = [[AMEventsManagerViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
@@ -752,6 +753,16 @@
 }
 
 
+- (void)updateAMStandardButtons {
+    if (self.selectedBroadcast == nil ) {
+        [self.eventDeleteButton setDisabledStateWithText:@"DELETE"];
+        [self.eventGoLiveButton setDisabledStateWithText:@"GO LIVE"];
+    } else {
+        [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
+        [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
+    }
+}
+
 - (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function loads in a given YouTube Live Event into the Event Form.
     
@@ -813,6 +824,8 @@
     needsToConfirmCreate = TRUE; [self.eventCreateButton setActiveStateWithText:@"CREATE"];
     needsToConfirmDelete = TRUE; [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
     needsToConfirmGoLive = TRUE; [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
+    
+    [self updateAMStandardButtons];
 }
 
 - (void)removeLiveStreamFromEventForm {

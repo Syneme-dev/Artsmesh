@@ -25,7 +25,7 @@
         
         self.currentTheme = [[AMTheme alloc] init];
         
-        self.buttonVC = [[AMStandardButtonViewController alloc] initWithNibName:@"AMStatesBorderButtonViewController" bundle:nil];
+        self.buttonVC = [[AMStandardButtonViewController alloc] initWithNibName:@"AMStandardButtonViewController" bundle:nil];
         NSView *vcView = [self.buttonVC view];
         
         [self setAutoresizesSubviews:TRUE];

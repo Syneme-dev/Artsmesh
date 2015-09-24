@@ -14,15 +14,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [NSColor blueColor];
+        //self.backgroundColor = [NSColor blueColor];
+        self.backgroundColor = nil;
     }
     return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+    if ( self.backgroundColor != nil ) {
+        [self.backgroundColor setFill];
+        NSRectFill(dirtyRect);
+    }
     [super drawRect:dirtyRect];
     
     // Drawing code here.
+    
+}
+
+- (void)changeBackgroundColor:(NSColor *)backgroundColor {
+    
+    self.backgroundColor = backgroundColor;
     
 }
 

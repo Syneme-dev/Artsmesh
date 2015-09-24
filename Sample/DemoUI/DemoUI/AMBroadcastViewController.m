@@ -36,10 +36,11 @@
 
 @implementation AMBroadcastViewController 
 {
-    NSString *broadcastFormMode;
-    
     NSString *statusNetEventURLString;
-    Boolean needsToConfirmEvent;
+    Boolean needsToConfirmCreate;
+    Boolean needsToConfirmDelete;
+    Boolean needsToConfirmEdit;
+    Boolean needsToConfirmGoLive;
     NSString *statusNetURL;
     NSString *myUserName;
     NSString *infoUrl;
@@ -81,6 +82,12 @@
 
 -(void)awakeFromNib
 {
+    //Set up UI Elements and theme stuff
+    [self.eventDeleteButton setButtonTitle:@"DELETE"];
+    [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
+    [self.eventCreateButton setButtonTitle:@"CREATE"];
+    [self updateAMStandardButtons];
+    
     //Set up Events Manager SubView and View Controller
     eventsManagerVC = [[AMEventsManagerViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
     NSView *view = [eventsManagerVC view];
@@ -89,8 +96,10 @@
     [self establishYouTubeVars];
     [self initYoutubeService];
     
-    [self setBroadcastFormMode:@"CREATE"];
-    needsToConfirmEvent = TRUE;
+    needsToConfirmCreate = TRUE;
+    needsToConfirmDelete = TRUE;
+    needsToConfirmEdit = TRUE;
+    needsToConfirmGoLive = TRUE;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
@@ -242,11 +251,12 @@
                                            self.channelId = channel.identifier;
                                            
                                            // Create the Broadcast now
-                                           if ( [broadcastFormMode isEqualToString:@"CREATE"] ) {
+                                           if ( self.selectedBroadcast == nil ) {
                                                [self insertLiveYouTubeBroadcast];
-                                           } else if ( [broadcastFormMode isEqualToString:@"EDIT"] ) {
+                                           } else {
                                                [self editLiveYouTubeBroadcast:self.selectedBroadcast];
                                            }
+                                
                                         }
                                    } else {
                                        NSLog(@"Error: %@", error.description);
@@ -335,8 +345,7 @@
                                        [self getExistingYouTubeLiveEvents];
                                        
                                        [self removeBroadcastFromEventForm];
-                                       broadcastFormMode = @"CREATE";
-                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);
@@ -382,8 +391,7 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully edited
-                                       broadcastFormMode = @"CREATE";
-                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
                                        
                                        [self removeBroadcastFromEventForm];
                                        
@@ -391,6 +399,7 @@
             
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"EDIT"];
                                    }
         
                                }];
@@ -413,8 +422,7 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully deleted
-                                       broadcastFormMode = @"CREATE";
-                                       [self.createEventBtn setTitle:@"CREATE"];
+                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
                                        [self removeBroadcastFromEventForm];
                                        
                                        [self getExistingYouTubeLiveEvents];
@@ -487,6 +495,7 @@
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
                                    }
                                }];
 }
@@ -510,6 +519,7 @@
                                         // Live Stream successfully bound to YouTube Broadcast!
                                     } else {
                                         NSLog(@"Error: %@", error.description);
+                                        [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
                                     }
                                 }];
     
@@ -610,7 +620,7 @@
     
     NSDate *finalHour = [[NSDate alloc] init];
     
-    if ([broadcastFormMode isEqualToString:@"CREATE"]) {
+    if (self.selectedBroadcast == nil) {
         if ([theHourTextField isEqualTo:self.eventStartHourTextField]) {
             finalHour = targetHour;
         } else if ([theHourTextField isEqualTo:self.eventEndHourTextField]) {
@@ -661,31 +671,6 @@
     
     [self.groupTabView selectTabViewItemAtIndex:0];
 }
-- (IBAction)createEventBtnClick:(id)sender {
-    if (needsToConfirmEvent == FALSE) {
-        if ( [self isSignedIn] ) {
-            if ( [broadcastFormMode isEqualToString:@"CREATE"] ) {
-                // Create new Live YouTube Broadcast
-                [self createYouTubeLiveEvent];
-            } else if ( [broadcastFormMode isEqualToString:@"EDIT"] ) {
-                // Edit existing Live YouTube Broadcast
-                [self createYouTubeLiveEvent];
-            } else if ([broadcastFormMode isEqualToString:@"DELETE"]) {
-                // Delete existing Live YouTube Broadcast
-                [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
-            }
-        } else {
-            //Notify user to sign in to Google to create a Live Event
-        }
-        
-        needsToConfirmEvent = TRUE;
-    } else {
-        [self.createEventBtn setTitle:@"CONFIRM"];
-        
-        needsToConfirmEvent = FALSE;
-    }
-}
-
 
 - (IBAction)settingsBtnClick:(id)sender {
     [self pushDownButton:self.settingsBtn];
@@ -759,22 +744,26 @@
         if (theCheckedBoxView.checked && ([theCheckedBoxView.title isEqualToString:@"EDIT"] || [theCheckedBoxView.title isEqualToString:@"DELETE"])) {
             //Event EDIT checkbox has been checked
             self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
-            [self setBroadcastFormMode:theCheckedBoxView.title];
             [self loadBroadcastIntoEventForm:theCheckedBoxView.liveBroadcast];
             [self loadLiveStreamIntoEventForm:theCheckedBoxView.liveBroadcast.contentDetails.boundStreamId];
-            
+            [self.eventCreateButton setActiveStateWithText:@"EDIT"];
         } else if (!theCheckedBoxView.checked) {
             self.selectedBroadcast = nil;
             [self removeBroadcastFromEventForm];
-            [self setBroadcastFormMode:@"CREATE"];
         }
         
     }
 }
 
-- (void)setBroadcastFormMode:(NSString *)formMode {
-    broadcastFormMode = formMode;
-    [self.createEventBtn setTitle:formMode];
+
+- (void)updateAMStandardButtons {
+    if (self.selectedBroadcast == nil ) {
+        [self.eventDeleteButton setDisabledStateWithText:@"DELETE"];
+        [self.eventGoLiveButton setDisabledStateWithText:@"GO LIVE"];
+    } else {
+        [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
+        [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
+    }
 }
 
 - (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
@@ -832,6 +821,14 @@
     [self.privateCheck setChecked:NO];
     
     [self removeLiveStreamFromEventForm];
+    
+    self.selectedBroadcast = nil;
+    needsToConfirmEdit = TRUE;
+    needsToConfirmCreate = TRUE; [self.eventCreateButton setActiveStateWithText:@"CREATE"];
+    needsToConfirmDelete = TRUE; [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
+    needsToConfirmGoLive = TRUE; [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
+    
+    [self updateAMStandardButtons];
 }
 
 - (void)removeLiveStreamFromEventForm {
@@ -917,6 +914,46 @@
 #pragma mark AMCheckBoxDelegeate
 -(void)onChecked:(AMCheckBoxView*)sender {
 }
+
+// Mouse Events (mainly for buttons)
+- (void)mouseDown:(NSEvent *)theEvent {
+}
+- (void)mouseUp:(NSEvent *)theEvent {
+    // TO-DO: Add confirm button state for actions
+    
+    if (self.eventDeleteButton.triggerPressed == YES) {
+        // Delete event button pressed
+        if (self.selectedBroadcast != nil) {
+            // Delete existing Live YouTube Broadcast
+            if (needsToConfirmDelete == FALSE) {
+                [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
+            } else {
+                [self.eventDeleteButton setAlertStateWithText:@"CONFIRM"];
+            }
+        }
+    } else if (self.eventGoLiveButton.triggerPressed == YES) {
+        // Go Live event button pressed
+    } else if (self.eventCreateButton.triggerPressed == YES) {
+        // CREATE/EDIT button pressed
+        if (self.selectedBroadcast != nil) {
+            if (needsToConfirmEdit == FALSE) {
+                [self createYouTubeLiveEvent];
+            } else {
+                [self.eventCreateButton setAlertStateWithText:@"CONFIRM"];
+                needsToConfirmEdit = FALSE;
+            }
+        } else {
+            if (needsToConfirmCreate == FALSE) {
+                [self createYouTubeLiveEvent];
+            } else {
+                [self.eventCreateButton setAlertStateWithText:@"CONFIRM"];
+                needsToConfirmCreate = FALSE;
+            }
+        }
+    }
+    
+}
+
 
 
 // Settings Tab Functions

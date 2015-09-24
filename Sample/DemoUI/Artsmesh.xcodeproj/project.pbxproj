@@ -170,6 +170,9 @@
 		2D31E6621AFDAEED001E0985 /* AMEventsManagerRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6601AFDAEED001E0985 /* AMEventsManagerRowViewController.m */; };
 		2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */; };
 		2D31E6661AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */; };
+		2D4555A21B9B98BC00C6853B /* AMStandardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A11B9B98BC00C6853B /* AMStandardButton.m */; };
+		2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */; };
+		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
@@ -182,6 +185,7 @@
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
+		2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DE439C61A37905A00650692 /* archive-popup-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C51A37905A00650692 /* archive-popup-info.css */; };
 		2DE439C81A37C58700650692 /* new-event.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DE439C71A37C58700650692 /* new-event.css */; };
@@ -772,6 +776,11 @@
 		2D31E6611AFDAEED001E0985 /* AMEventsManagerRowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerRowViewController.xib; sourceTree = "<group>"; };
 		2D31E6641AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMEventsManagerScrollDocumentView.h; sourceTree = "<group>"; };
 		2D31E6651AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMEventsManagerScrollDocumentView.m; sourceTree = "<group>"; };
+		2D4555A01B9B98BC00C6853B /* AMStandardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButton.h; sourceTree = "<group>"; };
+		2D4555A11B9B98BC00C6853B /* AMStandardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButton.m; sourceTree = "<group>"; };
+		2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButtonViewController.h; sourceTree = "<group>"; };
+		2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButtonViewController.m; sourceTree = "<group>"; };
+		2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStandardButtonViewController.xib; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -792,6 +801,8 @@
 		2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveEventCheckBoxView.h; sourceTree = "<group>"; };
 		2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveEventCheckBoxView.m; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
+		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
+		2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DE439C51A37905A00650692 /* archive-popup-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "archive-popup-info.css"; sourceTree = "<group>"; };
@@ -1573,6 +1584,60 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		2DC54D751B9BB51700FEC93B /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D7A1B9BB8B000FEC93B /* Themes */,
+				2DC54D761B9BB53200FEC93B /* AMStandardButton */,
+			);
+			name = "UI Elements";
+			sourceTree = "<group>";
+		};
+		2DC54D761B9BB53200FEC93B /* AMStandardButton */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D771B9BB54400FEC93B /* Views */,
+				2DC54D781B9BB55100FEC93B /* Controllers */,
+				2DC54D791B9BB56200FEC93B /* Nibs */,
+			);
+			name = AMStandardButton;
+			sourceTree = "<group>";
+		};
+		2DC54D771B9BB54400FEC93B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A01B9B98BC00C6853B /* AMStandardButton.h */,
+				2D4555A11B9B98BC00C6853B /* AMStandardButton.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2DC54D781B9BB55100FEC93B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */,
+				2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2DC54D791B9BB56200FEC93B /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
+		2DC54D7A1B9BB8B000FEC93B /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */,
+				2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
@@ -1662,6 +1727,7 @@
 				4A207A6C1A875D7A006F4FA2 /* JackCPUView */,
 				4A207A6B1A875D2F006F4FA2 /* ScorePanel */,
 				4A207A751A875DFE006F4FA2 /* Others */,
+				2DC54D751B9BB51700FEC93B /* UI Elements */,
 				37C23187187A8FFD00554AFD /* Images.xcassets */,
 				37C23176187A8FFD00554AFD /* Supporting Files */,
 			);
@@ -2194,6 +2260,7 @@
 				4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
+				2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
 				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
@@ -2324,6 +2391,7 @@
 				4AB4ACD71A6CE03D003ECE24 /* AMLiveUserItem.m in Sources */,
 				4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */,
 				4A8C69F51A70A0E200540694 /* AMGroupDetailsViewController.m in Sources */,
+				2D4555A21B9B98BC00C6853B /* AMStandardButton.m in Sources */,
 				2D08FDC81AD661FF00A9D257 /* GTLYouTubeLiveStream.m in Sources */,
 				2D08FDB51AD661FF00A9D257 /* GTLYouTubeGuideCategorySnippet.m in Sources */,
 				2D08FDC41AD661FF00A9D257 /* GTLYouTubeLiveBroadcastContentDetails.m in Sources */,
@@ -2356,6 +2424,7 @@
 				2D0289BC1A0984BC0020968E /* AMFloatControlView.m in Sources */,
 				2D08FDF41AD661FF00A9D257 /* GTLYouTubeVideoConversionPing.m in Sources */,
 				2D08FDD31AD661FF00A9D257 /* GTLYouTubePlaylistItem.m in Sources */,
+				2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */,
 				2D08FDA31AD661FF00A9D257 /* GTLYouTubeChannelConversionPings.m in Sources */,
 				AFB95D4818FFB61E00853263 /* AMMainWindowController.m in Sources */,
 				4A207A781A875E0A006F4FA2 /* AMRestHelper.m in Sources */,
@@ -2429,6 +2498,7 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				2D08FD8D1AD661FF00A9D257 /* GTLYouTubeActivityContentDetails.m in Sources */,
 				2D08FDF61AD661FF00A9D257 /* GTLYouTubeVideoFileDetails.m in Sources */,
+				2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */,
 				4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */,
 				2D08FDE61AD661FF00A9D257 /* GTLYouTubeSubscriptionListResponse.m in Sources */,
 				2D08FD881AD661FF00A9D257 /* GTLQueryYouTube.m in Sources */,

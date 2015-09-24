@@ -13,12 +13,14 @@
                 <outlet property="audioSampleRatePopupView" destination="jeV-pS-uRh" id="35C-j0-JZ8"/>
                 <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
-                <outlet property="createEventBtn" destination="mFF-A1-0BN" id="K5e-zI-f0u"/>
+                <outlet property="eventCreateButton" destination="aTe-ah-6HM" id="di0-4F-Neg"/>
+                <outlet property="eventDeleteButton" destination="PCR-bB-871" id="cDp-Qd-zMW"/>
                 <outlet property="eventEndDayTextField" destination="8kX-52-CDK" id="wg5-lC-SMV"/>
                 <outlet property="eventEndHourTextField" destination="2g2-hs-kih" id="225-ZS-0jI"/>
                 <outlet property="eventEndMinuteTextField" destination="ujn-yZ-XYS" id="cJz-ch-CXE"/>
                 <outlet property="eventEndMonthTextField" destination="j01-wz-Qqe" id="TcJ-rW-wOr"/>
                 <outlet property="eventEndYearTextField" destination="AwM-Hh-bfA" id="Scg-B4-792"/>
+                <outlet property="eventGoLiveButton" destination="Tqp-95-c0c" id="Qwu-QT-i3i"/>
                 <outlet property="eventStartDayTextField" destination="blQ-Yc-8CB" id="jet-8s-9zO"/>
                 <outlet property="eventStartHourTextField" destination="F6g-Xc-vhr" id="59z-bm-V7X"/>
                 <outlet property="eventStartMinuteTextField" destination="TiM-RE-0II" id="X27-pA-cqG"/>
@@ -489,18 +491,17 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-A1-0BN">
-                                        <rect key="frame" x="0.0" y="228" width="70" height="21"/>
-                                        <buttonCell key="cell" type="bevel" title="CREATE" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="z6c-S9-Ut4">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="createEventBtnClick:" target="-2" id="nUU-F5-JSr"/>
-                                        </connections>
-                                    </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStandardButton">
+                                        <rect key="frame" x="183" y="218" width="186" height="40"/>
+                                    </customView>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                                         <rect key="frame" x="-4" y="29" width="556" height="180"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-95-c0c" userLabel="DELETE BUTTON" customClass="AMStandardButton">
+                                        <rect key="frame" x="367" y="218" width="185" height="40"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTe-ah-6HM" userLabel="CREATE BUTTON" customClass="AMStandardButton">
+                                        <rect key="frame" x="0.0" y="218" width="185" height="40"/>
                                     </customView>
                                 </subviews>
                             </view>

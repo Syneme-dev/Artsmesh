@@ -1,45 +1,40 @@
-//
-//  SyphonSender.m
-//  SyphonCamera
-//
-//  Created by Normen Hansen on 19.05.12.
-//  Copyright (c) 2012 Normen Hansen. Released under New BSD license.
-//
+//  AMAVFSyphonSender.h
+//  AMAVFSyphonSender
+//  Created by WhiskyZed on 2015.09.24
 
-#import "SyphonSender.h"
+
+#import "AMSyphonSender.h"
 #import <OpenGL/CGLMacro.h>
 
-@implementation SyphonSender
+@implementation AMSyphonSender
 
 @synthesize deviceName = _deviceName;
 
-- (id)init {
-    self = [super init];
-    if(self){
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-												 selector:@selector(_devicesDidChange:) 
-													 name:QTCaptureDeviceWasConnectedNotification 
-												   object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-												 selector:@selector(_devicesDidChange:) 
-													 name:QTCaptureDeviceWasDisconnectedNotification 
-												   object:nil];
+- (id) init {
+    if(self=[super init]){
+        
+        NSNotificationCenter* notifCenter = [NSNotificationCenter defaultCenter];
+		[notifCenter addObserver:self
+                        selector:@selector(_devicesDidChange:)
+                            name:AVCaptureDeviceWasConnectedNotification
+                          object:nil];
+        
+		[notifCenter addObserver:self
+                        selector:@selector(_devicesDidChange:)
+                            name:AVCaptureDeviceWasDisconnectedNotification
+                          object:nil];
     }
     return self;
 }
 
 - (void)dealloc{
-//    [_deviceName release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [super dealloc];
 }
 
 - (void) cleanupGLContext{
-//    [glContext release];
     glContext = nil;
     if(server != nil){
         [server removeObserver:self forKeyPath:@"hasClients"];
-//        [server release];
         server = nil;
     }
 }
@@ -51,15 +46,8 @@
     };
     NSOpenGLPixelFormat *format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
     glContext = [[NSOpenGLContext alloc] initWithFormat:format shareContext:nil];
-//    [format release];
+    
     cgl_ctx = [glContext CGLContextObj];
-// Enable GL multithreading
-//    CGLError err = 0;
-//    CGLContextObj ctx = CGLGetCurrentContext();
-//    err =  CGLEnable( ctx, kCGLCEMPEngine);
-//    if (err != kCGLNoError ) {
-//        NSLog(@"Could not enable MP OpenGL");
-//    }
     
     server = [[SyphonServer alloc] initWithName:_deviceName context:cgl_ctx options:nil];
     [server addObserver:self forKeyPath:@"hasClients" options:NSKeyValueObservingOptionNew context:nil];
@@ -102,80 +90,58 @@
 - (void)startCaptureSession{
 	if ( !mCaptureSession || _currentDevice != self.deviceName){
         NSError *error = nil;
-        BOOL success;
 		
-        QTCaptureDevice *device = [QTKitHelper getVideoDeviceWithName:self.deviceName];
+        AVCaptureDevice* cameraDevice = [AVFWrapper getAVVideoDeviceWithName:self.deviceName];
         
-        if(device == nil){
+        if(cameraDevice == nil){
             NSLog(@"Could not open device %@", _deviceName);
             return;
         }
         
-        server.name = device.description;
-        success = [device open:&error];
-        if (!success) {
-            NSLog(@"Could not open device %@", device);
-            return;
-        } 
-        NSLog(@"Opened device successfully");
+        server.name = cameraDevice.localizedName;
+        
+        mCaptureSession = [[AVCaptureSession alloc] init];
 		
-//        [mCaptureSession release];
-        mCaptureSession = [[QTCaptureSession alloc] init];
+        mCaptureDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:cameraDevice
+                                                                     error:&error];
+        
+        if ([mCaptureSession canSetSessionPreset:AVCaptureSessionPresetMedium]) {
+            mCaptureSession.sessionPreset = AVCaptureSessionPresetMedium;
+        }
+        else {
+            NSLog(@"Can't Preset properly");
+        }
+        
+        
+        [AVFWrapper disableAVAudioForInput:mCaptureDeviceInput];
 		
-//        [mCaptureDeviceInput release];
-        mCaptureDeviceInput = [[QTCaptureDeviceInput alloc] initWithDevice:device];
+        if([mCaptureSession canAddInput:mCaptureDeviceInput]){
+            [mCaptureSession addInput:mCaptureDeviceInput];
+        }else{
+            NSLog(@"Can't add input device:%@", mCaptureDeviceInput);
+        }
+       
+           
+        //Create an output,
+        AVCaptureVideoDataOutput* videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
 
-        [QTKitHelper disableAudioForInput:mCaptureDeviceInput];
-		
-        success = [mCaptureSession addInput:mCaptureDeviceInput error:&error];
-		
-        if (!success) {
-            NSLog(@"Failed to add Input");
-            if (mCaptureSession) {
-//                [mCaptureSession release];
-                mCaptureSession= nil;
-            }
-            if (mCaptureDeviceInput) {
-//                [mCaptureDeviceInput release];
-                mCaptureDeviceInput= nil;
-				
-            }
-            return;
+        videoDataOutput.videoSettings =
+            @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+        
+        dispatch_queue_t queue = dispatch_queue_create("VideoDataOutputQueue", NULL);
+        [videoDataOutput setSampleBufferDelegate:self queue:queue];
+        
+        
+        if ([mCaptureSession canAddOutput:videoDataOutput]) {
+            [mCaptureSession addOutput:videoDataOutput];
         }
-		
-        NSLog(@"Adding output");
-		
-//        [mCaptureDecompressedVideoOutput release];
-        mCaptureDecompressedVideoOutput = [[QTCaptureDecompressedVideoOutput alloc] init];
-		
-        [mCaptureDecompressedVideoOutput setPixelBufferAttributes:
-         //TODO: allow resizing of cam image
-         [NSDictionary dictionaryWithObjectsAndKeys:
-          [NSNumber numberWithBool:YES], kCVPixelBufferOpenGLCompatibilityKey,
-          [NSNumber numberWithLong:k32BGRAPixelFormat], kCVPixelBufferPixelFormatTypeKey, nil]];
-        //		  [NSNumber numberWithUnsignedInt: self.inputWidth], kCVPixelBufferWidthKey,
-        //		  [NSNumber numberWithUnsignedInt: self.inputHeight], kCVPixelBufferHeightKey,
-		
-        [mCaptureDecompressedVideoOutput setDelegate:self];
-        success = [mCaptureSession addOutput:mCaptureDecompressedVideoOutput error:&error];
-		
-        if (!success) {
-            NSLog(@"Failed to add output");
-            if (mCaptureSession) {
-//                [mCaptureSession release];
-                mCaptureSession= nil;
-            }
-            if (mCaptureDeviceInput) {
-//                [mCaptureDeviceInput release];
-                mCaptureDeviceInput= nil;
-            }
-            if (mCaptureDecompressedVideoOutput) {
-//                [mCaptureDecompressedVideoOutput release];
-                mCaptureDecompressedVideoOutput= nil;
-            }
-            return;
+        else {
+            NSLog(@"Can't add output");
         }
-		if(server.hasClients || [[[NSUserDefaults standardUserDefaults] valueForKey:@"KeepCamsHot"] boolValue])
+
+        NSLog(@"Successfully Initialized");
+
+        if(server.hasClients)
             [mCaptureSession startRunning];
         _currentDevice = self.deviceName;
     } else if(![mCaptureSession isRunning] && server.hasClients){
@@ -186,17 +152,13 @@
 - (void)stopCaptureSession{
     if (mCaptureSession) {
         [mCaptureSession stopRunning];
-//        [mCaptureSession release];
+       
         mCaptureSession= nil;
     }
     if (mCaptureDeviceInput) {
-//        [mCaptureDeviceInput release];
         mCaptureDeviceInput= nil;
     }
-    if (mCaptureDecompressedVideoOutput) {
- //       [mCaptureDecompressedVideoOutput release];
-        mCaptureDecompressedVideoOutput= nil;
-    }
+
     [self cleanupOffScreenRenderer];
 }
 
@@ -204,8 +166,13 @@
     [mCaptureSession stopRunning];
 }
 
-- (void)captureOutput:(QTCaptureOutput *)captureOutput  didOutputVideoFrame:(CVImageBufferRef)videoFrame 
-     withSampleBuffer:(QTSampleBuffer *)sampleBuffer fromConnection:(QTCaptureConnection *)connection{    
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+       fromConnection:(AVCaptureConnection *)connection
+{
+    // Get a CMSampleBuffer's Core Video image buffer for the media data
+    CVImageBufferRef videoFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
     size_t imageWidth = CVPixelBufferGetWidth(videoFrame);
     size_t imageHeight = CVPixelBufferGetHeight(videoFrame);
     

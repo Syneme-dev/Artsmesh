@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "QTKitHelper.h"
-#import "SyphonSender.h"
+#import "AVFWrapper.h"
+#import "AMSyphonSender.h"
 
 @interface AMSyphonCamera : NSObject {
     

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMEventsManagerRowViewController">
             <connections>
                 <outlet property="eventDeleteCheckBox" destination="TqD-qd-cog" id="WCO-kg-dN8"/>
-                <outlet property="eventEditCheckBox" destination="mC3-83-6zb" id="Hf7-do-WRQ"/>
                 <outlet property="eventTitleTextView" destination="w5z-Gd-Sjz" id="KfW-CG-JCm"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -30,17 +29,6 @@
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14y-lH-Lll" userLabel="|">
                     <rect key="frame" x="0.0" y="7" width="10" height="10"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="bSZ-yp-UKj"/>
-                </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yUT-zl-qU6" userLabel="|">
-                    <rect key="frame" x="312" y="7" width="10" height="10"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KLL-Ar-1Sh"/>
-                </imageView>
-                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mC3-83-6zb" userLabel="Edit Checkbox" customClass="AMLiveEventCheckBoxView">
-                    <rect key="frame" x="328" y="0.0" width="94" height="25"/>
-                </customView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcv-bB-aqr" userLabel="|">
-                    <rect key="frame" x="442" y="7" width="10" height="10"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="xff-u9-RhG"/>
                 </imageView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TqD-qd-cog" userLabel="Delete Checkbox" customClass="AMLiveEventCheckBoxView">
                     <rect key="frame" x="458" y="0.0" width="94" height="25"/>

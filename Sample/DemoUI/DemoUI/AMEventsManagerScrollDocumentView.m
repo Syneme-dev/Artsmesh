@@ -42,7 +42,6 @@
     
     AMEventsManagerRowViewController *eventsVC = [[AMEventsManagerRowViewController alloc] initWithNibName:@"AMEventsManagerRowViewController" bundle:nil];
     NSView *rowView = [eventsVC view];
-    eventsVC.eventEditCheckBox.liveBroadcast = theLiveEvent;
     eventsVC.eventDeleteCheckBox.liveBroadcast = theLiveEvent;
     [rowView setFrameOrigin:NSMakePoint(0, curHeight)];
     

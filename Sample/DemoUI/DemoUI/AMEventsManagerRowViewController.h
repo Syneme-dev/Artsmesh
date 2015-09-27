@@ -13,7 +13,6 @@
 @interface AMEventsManagerRowViewController : NSViewController
 
 @property (strong) IBOutlet NSTextField *eventTitleTextView;
-@property (strong) IBOutlet AMLiveEventCheckBoxView *eventEditCheckBox;
 @property (strong) IBOutlet AMLiveEventCheckBoxView *eventDeleteCheckBox;
 
 @end

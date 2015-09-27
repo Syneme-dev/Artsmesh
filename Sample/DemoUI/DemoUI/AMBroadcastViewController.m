@@ -422,7 +422,6 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully deleted
-                                       NSLog(@"Event successfully deleted!");
                                        [self.eventCreateButton setSuccessStateWithText:@"SUCCESS" andResetText:@"CREATE"];
                                        [self removeBroadcastFromEventForm];
                                        
@@ -491,10 +490,9 @@
                                    if (error == nil) {
                                        // Live Stream successfully created!
                                        // Need to pair the stream with the live event now
-                                       NSLog(@"Live stream successfully created!");
                                        
                                        [self bindLiveStream:liveStream withBroadcast:theBroadcast];
-                                       [self.eventCreateButton setErrorStateWithText:@"SUCCESS" andResetText:@"CREATE"];
+                                       [self.eventCreateButton setSuccessStateWithText:@"SUCCESS" andResetText:@"CREATE"];
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);

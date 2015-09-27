@@ -100,6 +100,7 @@
             case 4: //success
                 currentTextColor = self.currentTheme.colorTextSuccess;
                 currentTextColor = defaultColor;
+                break;
             case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
@@ -128,6 +129,7 @@
             case 4: //success
                 currentTextColor = self.currentTheme.colorTextSuccess;
                 currentButtonBackground = defaultColor;
+                break;
             case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
@@ -147,7 +149,7 @@
 // Events
 - (void)mouseEntered:(NSEvent *)theEvent {
     // Mouse has entered button bounds
-    if (cur_state > 0 && cur_state !=5) {
+    if (cur_state > 0 && cur_state != 4 && cur_state != 5) {
         self.isHovering = YES;
         
         [self updateButtonColors];
@@ -157,7 +159,7 @@
 
 - (void)mouseMoved:(NSEvent *)theEvent {
     // Mouse has moved inside of button bounds
-    if (cur_state > 0 && cur_state != 5) {
+    if (cur_state > 0 && cur_state != 4 && cur_state != 5) {
         self.isHovering = YES;
         
         [self updateButtonColors];
@@ -311,6 +313,8 @@
     } else {
         if (cur_state == 0) {
             [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextDisabled];
+        } else if (cur_state == 4) {
+            [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextSuccess];
         } else if (cur_state == 5) {
             [self.buttonVC.buttonTitleTextField setTextColor:self.currentTheme.colorTextError];
         }

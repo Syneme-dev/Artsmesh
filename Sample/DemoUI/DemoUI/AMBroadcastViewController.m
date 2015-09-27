@@ -741,15 +741,17 @@
     if ([notification.object isKindOfClass:[AMLiveEventCheckBoxView class]]) {
         AMLiveEventCheckBoxView *theCheckedBoxView = notification.object;
         
-        if (theCheckedBoxView.checked && ([theCheckedBoxView.title isEqualToString:@"EDIT"] || [theCheckedBoxView.title isEqualToString:@"DELETE"])) {
-            //Event EDIT checkbox has been checked
+        if (theCheckedBoxView.checked) {
+            //Event checkbox has been checked
             self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
             [self loadBroadcastIntoEventForm:theCheckedBoxView.liveBroadcast];
             [self loadLiveStreamIntoEventForm:theCheckedBoxView.liveBroadcast.contentDetails.boundStreamId];
             [self.eventCreateButton setActiveStateWithText:@"EDIT"];
+            [self updateAMStandardButtons];
         } else if (!theCheckedBoxView.checked) {
             self.selectedBroadcast = nil;
             [self removeBroadcastFromEventForm];
+            [self updateAMStandardButtons];
         }
         
     }
@@ -925,10 +927,14 @@
         // Delete event button pressed
         if (self.selectedBroadcast != nil) {
             // Delete existing Live YouTube Broadcast
+            NSLog(@"delete pressed..testing if needs to confirm");
             if (needsToConfirmDelete == FALSE) {
+                NSLog(@"doesn't need to confirm, go now!");
                 [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
             } else {
+                NSLog(@"needs to confirm still..");
                 [self.eventDeleteButton setAlertStateWithText:@"CONFIRM"];
+                needsToConfirmDelete = FALSE;
             }
         }
     } else if (self.eventGoLiveButton.triggerPressed == YES) {

@@ -97,6 +97,9 @@
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = hoverColor;
                 break;
+            case 4: //success
+                currentTextColor = self.currentTheme.colorTextSuccess;
+                currentTextColor = defaultColor;
             case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
@@ -122,6 +125,9 @@
                 currentTextColor = self.currentTheme.colorTextAlert;
                 currentButtonBackground = defaultColor;
                 break;
+            case 4: //success
+                currentTextColor = self.currentTheme.colorTextSuccess;
+                currentButtonBackground = defaultColor;
             case 5: //error
                 currentTextColor = self.currentTheme.colorTextError;
                 currentButtonBackground = defaultColor;
@@ -171,7 +177,7 @@
 
 - (void)mouseDown:(NSEvent *)theEvent {
     // Mouse has been pressed down
-    if (cur_state > 0 && cur_state != 5) {
+    if (cur_state > 0 && cur_state != 4 && cur_state != 5) {
         
         self.isPressing = YES;
         self.triggerPressed = NO;
@@ -207,7 +213,7 @@
 
 - (void)mouseUp:(NSEvent *)theEvent {
     // Mouse has been released
-    if (cur_state > 0 && cur_state != 5) {
+    if (cur_state > 0 && cur_state != 4 && cur_state != 5) {
     
         self.isPressing = NO;
         self.triggerPressed = YES;
@@ -282,6 +288,17 @@
                afterDelay:(3.0)];
 }
 
+- (void)setSuccessStateWithText:(NSString *)theText andResetText:(NSString *)theResetText {
+    resetText = theResetText;
+    
+    [self setButtonTitle:theText];
+    [self changeState:@"success"];
+    
+    [self performSelector:@selector(resetBtn)
+               withObject:(self)
+               afterDelay:(3.0)];
+}
+
 - (void)resetBtn {
     [self setButtonTitle:resetText];
     [self changeState:@"active"];
@@ -289,7 +306,7 @@
 
 - (void)updateBtn:(AMStandardButton *)theBtn {
     // updates the look of the button based on changes in state
-    if (cur_state > 0 && cur_state != 5) {
+    if (cur_state > 0 && cur_state != 4 && cur_state != 5) {
         [self updateButtonColors];
     } else {
         if (cur_state == 0) {

@@ -422,7 +422,8 @@
                                    _broadcastTicket = nil;
                                    if (error == nil) {
                                        //Event successfully deleted
-                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
+                                       NSLog(@"Event successfully deleted!");
+                                       [self.eventCreateButton setSuccessStateWithText:@"SUCCESS" andResetText:@"CREATE"];
                                        [self removeBroadcastFromEventForm];
                                        
                                        [self getExistingYouTubeLiveEvents];
@@ -462,7 +463,7 @@
 - (void)insertLiveStream: (GTLYouTubeLiveBroadcast *)theBroadcast {
     // This function takes a given YouTube Live Broadcast & establishes a Live Stream to pair with it
     GTLYouTubeLiveStreamSnippet *newLiveStreamSnippet = [[GTLYouTubeLiveStreamSnippet alloc] init];
-    [newLiveStreamSnippet setTitle:[self.streamNameTextField stringValue]];
+    [newLiveStreamSnippet setTitle:[self.streamTitleTextField stringValue]];
     
     GTLYouTubeCdnSettings *newCdnSettings = [[GTLYouTubeCdnSettings alloc] init];
     [newCdnSettings setFormat:[self.streamFormatTextField stringValue]];
@@ -490,8 +491,10 @@
                                    if (error == nil) {
                                        // Live Stream successfully created!
                                        // Need to pair the stream with the live event now
+                                       NSLog(@"Live stream successfully created!");
                                        
                                        [self bindLiveStream:liveStream withBroadcast:theBroadcast];
+                                       [self.eventCreateButton setErrorStateWithText:@"SUCCESS" andResetText:@"CREATE"];
                                        
                                    } else {
                                        NSLog(@"Error: %@", error.description);
@@ -927,12 +930,9 @@
         // Delete event button pressed
         if (self.selectedBroadcast != nil) {
             // Delete existing Live YouTube Broadcast
-            NSLog(@"delete pressed..testing if needs to confirm");
             if (needsToConfirmDelete == FALSE) {
-                NSLog(@"doesn't need to confirm, go now!");
                 [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
             } else {
-                NSLog(@"needs to confirm still..");
                 [self.eventDeleteButton setAlertStateWithText:@"CONFIRM"];
                 needsToConfirmDelete = FALSE;
             }

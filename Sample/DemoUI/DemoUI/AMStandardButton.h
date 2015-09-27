@@ -26,5 +26,6 @@
 - (void)setActiveStateWithText:(NSString *)theText;
 - (void)setAlertStateWithText:(NSString *)theText;
 - (void)setErrorStateWithText:(NSString *)theText andResetText:(NSString *)theResetText;
+- (void)setSuccessStateWithText:(NSString *)theText andResetText:(NSString *)theResetText;
 
 @end

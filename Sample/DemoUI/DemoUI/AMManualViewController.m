@@ -32,7 +32,7 @@
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
     if (item == nil) {
-        return  3;
+        return 1;
     }else{
         return 0;
     }
@@ -49,7 +49,7 @@
     NSString* str;
     if (item == nil) {
         if (index == 0) {
-            str = @"Artsmesh Over View";
+            str = @"QUICK START";
         }else if(index == 1){
             str = @"Live Group Over View";
         }else if(index == 2){

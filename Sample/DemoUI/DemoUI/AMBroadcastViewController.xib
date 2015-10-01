@@ -492,13 +492,13 @@
                                         </textFieldCell>
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStandardButton">
-                                        <rect key="frame" x="183" y="29" width="186" height="40"/>
+                                        <rect key="frame" x="184" y="29" width="185" height="40"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-95-c0c" userLabel="DELETE BUTTON" customClass="AMStandardButton">
                                         <rect key="frame" x="367" y="29" width="185" height="40"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aTe-ah-6HM" userLabel="CREATE BUTTON" customClass="AMStandardButton">
-                                        <rect key="frame" x="0.0" y="29" width="185" height="40"/>
+                                        <rect key="frame" x="0.0" y="29" width="186" height="40"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF">
                                         <rect key="frame" x="0.0" y="77" width="552" height="150"/>
@@ -506,14 +506,20 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PCR-bB-871" secondAttribute="bottom" constant="29" id="4WK-Ym-DMZ"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="7Je-qj-tk7"/>
+                                    <constraint firstItem="Tqp-95-c0c" firstAttribute="width" secondItem="PCR-bB-871" secondAttribute="width" id="8NP-K1-Cds"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="DCs-1p-h8G"/>
                                     <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="563" id="QI7-Pa-dLD"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="S6u-8R-t9l"/>
                                     <constraint firstItem="aTe-ah-6HM" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="8" id="WKF-eF-6Zc"/>
                                     <constraint firstAttribute="bottom" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="77" id="a8w-Cx-jaj"/>
                                     <constraint firstAttribute="bottom" secondItem="aTe-ah-6HM" secondAttribute="bottom" constant="29" id="cjK-m0-OgF"/>
+                                    <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="PCR-bB-871" secondAttribute="trailing" constant="-2" id="e1b-cS-cEh"/>
                                     <constraint firstItem="Tqp-95-c0c" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="8" id="e8d-qd-D5a"/>
-                                    <constraint firstAttribute="trailing" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="371" id="nIa-tB-o26"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="8" id="pfN-at-84q"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="width" secondItem="aTe-ah-6HM" secondAttribute="width" id="r9S-zK-Jd5"/>
                                     <constraint firstAttribute="bottom" secondItem="Tqp-95-c0c" secondAttribute="bottom" constant="29" id="rE3-JY-2CK"/>
+                                    <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="PCR-bB-871" secondAttribute="trailing" constant="-2" id="zTN-rE-rX5"/>
                                 </constraints>
                             </view>
                         </tabViewItem>
@@ -831,10 +837,8 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="374" id="1zl-jz-2sV"/>
                 <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="11" id="21O-kv-dUV"/>
                 <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" id="2Fh-oN-1fj"/>
-                <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="190" id="A9S-Xv-dmn"/>
                 <constraint firstAttribute="trailing" secondItem="Tqp-95-c0c" secondAttribute="trailing" constant="11" id="GBf-eK-uuq"/>
                 <constraint firstItem="e2o-vu-ZRF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="JNH-eH-Yhy"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
@@ -847,7 +851,6 @@
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="npR-HL-thf"/>
                 <constraint firstItem="aTe-ah-6HM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="oPs-Z9-agJ"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="trailing" secondItem="3mq-0Q-Zof" secondAttribute="trailing" id="uej-UK-Vco"/>
-                <constraint firstAttribute="trailing" secondItem="PCR-bB-871" secondAttribute="trailing" constant="194" id="xpO-qI-Xzp"/>
             </constraints>
             <point key="canvasLocation" x="468" y="289"/>
         </customView>

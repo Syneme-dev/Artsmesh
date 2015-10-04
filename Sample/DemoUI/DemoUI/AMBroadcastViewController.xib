@@ -72,7 +72,7 @@
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kvK-ma-cat" customClass="AMFoundryFontView">
                                         <rect key="frame" x="0.0" y="738" width="556" height="14"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="wE9-fo-MXM"/>
+                                            <constraint firstAttribute="height" constant="14" id="JeV-Sb-7Db"/>
                                         </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="YOUTUBE" id="g89-qB-ayf">
@@ -127,11 +127,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="rjh-Kb-mgY"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ga-Yp-wbl" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ga-Yp-wbl" customClass="AMFoundryFontView">
                                         <rect key="frame" x="0.0" y="638" width="556" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="Aqf-sG-3L8"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="START DATE" id="ph7-Bd-5pk">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>
@@ -273,11 +270,8 @@
                                         <rect key="frame" x="466" y="604" width="88" height="20"/>
                                         <animations/>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qtY-wj-B5k" userLabel="END DATE" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qtY-wj-B5k" userLabel="END DATE" customClass="AMFoundryFontView">
                                         <rect key="frame" x="0.0" y="568" width="556" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="ENf-Tu-nNn"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="END DATE" id="pXM-uF-2pH">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>
@@ -419,11 +413,8 @@
                                         <rect key="frame" x="466" y="534" width="88" height="20"/>
                                         <animations/>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L8W-Pr-JIW" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8W-Pr-JIW" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
                                         <rect key="frame" x="-2" y="498" width="556" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="C30-C1-Qu0"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="ADDITIONAL DETAILS" id="dBY-9u-iSe">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>
@@ -440,11 +431,8 @@
                                         <rect key="frame" x="19" y="464" width="150" height="20"/>
                                         <animations/>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fns-5F-h6F" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fns-5F-h6F" customClass="AMFoundryFontView">
                                         <rect key="frame" x="-2" y="428" width="556" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="RQf-cd-BPO"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="STREAM DETAILS" id="5eN-5K-1Fc">
                                             <font key="font" size="12" name="FoundryMonoline-Bold"/>
@@ -457,12 +445,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="jua-zN-jBf"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sHX-Eh-4O9" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sHX-Eh-4O9" customClass="AMFoundryFontView">
                                         <rect key="frame" x="16" y="398" width="114" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="7cj-gQ-sGf"/>
-                                            <constraint firstAttribute="height" constant="12" id="uf3-AH-fr2"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="TITLE" id="0lg-Az-TqB">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -470,11 +454,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xC2-ac-rpw" userLabel="NAME EDIT">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xC2-ac-rpw" userLabel="NAME EDIT">
                                         <rect key="frame" x="150" y="398" width="408" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="FFM-Y3-I59"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="NEW STREAM NAME" id="kKe-7o-yTk">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -487,12 +468,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="NdE-vy-Nvl"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FlK-Qn-EvD" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FlK-Qn-EvD" customClass="AMFoundryFontView">
                                         <rect key="frame" x="16" y="368" width="114" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="EHX-rx-8u7"/>
-                                            <constraint firstAttribute="width" constant="110" id="mMQ-xb-D1S"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="FORMAT" id="aBC-Ix-d01">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -500,11 +477,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tDf-8N-HNp" userLabel="FORMAT EDIT">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDf-8N-HNp" userLabel="FORMAT EDIT">
                                         <rect key="frame" x="150" y="368" width="408" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="s2i-eX-3Vn"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="720p" id="mMl-5Z-xXK">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -517,12 +491,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="RD7-eF-dWx"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZFY-7I-60F" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZFY-7I-60F" customClass="AMFoundryFontView">
                                         <rect key="frame" x="16" y="338" width="114" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="dKy-iO-F4G"/>
-                                            <constraint firstAttribute="width" constant="110" id="djV-jP-7A3"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="ADDRESS" id="D4M-yG-3c4">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -530,11 +500,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kbj-gT-PAQ" userLabel="ADDR EDIT">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kbj-gT-PAQ" userLabel="ADDR EDIT">
                                         <rect key="frame" x="150" y="338" width="408" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="dMy-L3-MMw"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PROVIDED BY YOUTUBE" id="qMi-HZ-oX8">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -547,12 +514,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="a06-rY-zWb"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cax-OS-hgW" userLabel="NAME" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cax-OS-hgW" userLabel="NAME" customClass="AMFoundryFontView">
                                         <rect key="frame" x="16" y="308" width="114" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="jox-Xz-yZ0"/>
-                                            <constraint firstAttribute="height" constant="12" id="tY1-4z-VFh"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="STREAM NAME" id="ISg-68-QlP">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -560,11 +523,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ua-MT-bmJ" userLabel="NAME VALUE">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ua-MT-bmJ" userLabel="NAME VALUE">
                                         <rect key="frame" x="150" y="306" width="408" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="kYp-AQ-1Kv"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PROVIDED BY YOUTUBE" id="OkD-BA-hO9">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -577,12 +537,8 @@
                                         <animations/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Px2-7T-Kcw"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ia0-Kf-cog" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia0-Kf-cog" customClass="AMFoundryFontView">
                                         <rect key="frame" x="16" y="278" width="114" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="PVk-bw-ZAx"/>
-                                            <constraint firstAttribute="height" constant="12" id="bg1-4k-h9I"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="STATUS" id="bf2-2h-bZY">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -590,11 +546,8 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9nM-Jj-bNd" userLabel="STATUS VALUE">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9nM-Jj-bNd" userLabel="STATUS VALUE">
                                         <rect key="frame" x="150" y="278" width="408" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="hSB-0K-0FK"/>
-                                        </constraints>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PROVIDED BY YOUTUBE" id="VlR-SE-HmA">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
@@ -602,67 +555,52 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStandardButton">
-                                        <rect key="frame" x="183" y="29" width="186" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="INg-eh-pHW"/>
-                                        </constraints>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF" customClass="AMFlippedView">
+                                        <rect key="frame" x="0.0" y="77" width="552" height="150"/>
                                         <animations/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-95-c0c" userLabel="DELETE BUTTON" customClass="AMStandardButton">
-                                        <rect key="frame" x="367" y="29" width="185" height="40"/>
+                                        <rect key="frame" x="367" y="20" width="185" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="5IL-9u-LnU"/>
                                         </constraints>
                                         <animations/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aTe-ah-6HM" userLabel="CREATE BUTTON" customClass="AMStandardButton">
-                                        <rect key="frame" x="0.0" y="29" width="185" height="40"/>
+                                        <rect key="frame" x="0.0" y="20" width="185" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="V8m-JB-gdL"/>
                                             <constraint firstAttribute="height" constant="40" id="wDW-oD-g2M"/>
                                         </constraints>
                                         <animations/>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="e2o-vu-ZRF" customClass="AMFlippedView">
-                                        <rect key="frame" x="0.0" y="77" width="552" height="150"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="PCR-bB-871" userLabel="DELETE BUTTON" customClass="AMStandardButton">
+                                        <rect key="frame" x="183" y="20" width="186" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="INg-eh-pHW"/>
+                                        </constraints>
                                         <animations/>
                                     </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Kbj-gT-PAQ" firstAttribute="leading" secondItem="ZFY-7I-60F" secondAttribute="trailing" constant="24" id="01u-6U-9rs"/>
-                                    <constraint firstItem="PCR-bB-871" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="8" id="19d-cF-kDf"/>
-                                    <constraint firstItem="9nM-Jj-bNd" firstAttribute="leading" secondItem="Ia0-Kf-cog" secondAttribute="trailing" constant="24" id="2gf-nv-ffg"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fns-5F-h6F" secondAttribute="trailing" constant="4" id="3mU-y7-lxV"/>
-                                    <constraint firstItem="qtY-wj-B5k" firstAttribute="top" secondItem="4Ga-Yp-wbl" secondAttribute="bottom" constant="56" id="4B9-du-wtu"/>
-                                    <constraint firstAttribute="bottom" secondItem="PCR-bB-871" secondAttribute="bottom" constant="29" id="4WK-Ym-DMZ"/>
+                                    <constraint firstItem="kvK-ma-cat" firstAttribute="leading" secondItem="2R7-HU-dPY" secondAttribute="leading" constant="2" id="0cN-ul-REV"/>
+                                    <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="563" id="1gb-kY-uy0"/>
+                                    <constraint firstItem="kvK-ma-cat" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="38" id="2Qj-Us-NyS"/>
+                                    <constraint firstAttribute="trailing" secondItem="kvK-ma-cat" secondAttribute="trailing" constant="2" id="3iK-G9-EUn"/>
+                                    <constraint firstAttribute="bottom" secondItem="PCR-bB-871" secondAttribute="bottom" constant="20" id="4WK-Ym-DMZ"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="7Je-qj-tk7"/>
-                                    <constraint firstItem="Kbj-gT-PAQ" firstAttribute="top" secondItem="tDf-8N-HNp" secondAttribute="bottom" constant="18" id="891-On-ILJ"/>
-                                    <constraint firstItem="Tqp-95-c0c" firstAttribute="width" secondItem="PCR-bB-871" secondAttribute="width" id="8NP-K1-Cds"/>
-                                    <constraint firstItem="4Ua-MT-bmJ" firstAttribute="top" secondItem="Kbj-gT-PAQ" secondAttribute="bottom" constant="20" id="BAp-Vk-DZf"/>
+                                    <constraint firstItem="Tqp-95-c0c" firstAttribute="width" secondItem="PCR-bB-871" secondAttribute="width" constant="-1" id="8NP-K1-Cds"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="DCs-1p-h8G"/>
-                                    <constraint firstItem="ZFY-7I-60F" firstAttribute="top" secondItem="FlK-Qn-EvD" secondAttribute="bottom" constant="18" id="GQX-5b-Mhc"/>
-                                    <constraint firstItem="e2o-vu-ZRF" firstAttribute="top" secondItem="9nM-Jj-bNd" secondAttribute="bottom" constant="51" id="KyK-2U-9c9"/>
-                                    <constraint firstItem="xC2-ac-rpw" firstAttribute="leading" secondItem="sHX-Eh-4O9" secondAttribute="trailing" constant="24" id="O47-FD-GzR"/>
-                                    <constraint firstItem="tDf-8N-HNp" firstAttribute="top" secondItem="xC2-ac-rpw" secondAttribute="bottom" constant="18" id="Q5b-ae-Vzb"/>
-                                    <constraint firstItem="sHX-Eh-4O9" firstAttribute="top" secondItem="Fns-5F-h6F" secondAttribute="bottom" constant="18" id="Qn6-Wh-DQH"/>
-                                    <constraint firstItem="kvK-ma-cat" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="38" id="RZy-u0-g2B"/>
+                                    <constraint firstItem="aTe-ah-6HM" firstAttribute="leading" secondItem="2R7-HU-dPY" secondAttribute="leading" id="GjF-w9-Ida"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="17" id="JwZ-bp-1q1"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="S6u-8R-t9l"/>
-                                    <constraint firstItem="4Ua-MT-bmJ" firstAttribute="leading" secondItem="cax-OS-hgW" secondAttribute="trailing" constant="24" id="W9x-NP-PNL"/>
-                                    <constraint firstItem="Fns-5F-h6F" firstAttribute="top" secondItem="L8W-Pr-JIW" secondAttribute="bottom" constant="56" id="WCj-Ef-l9A"/>
-                                    <constraint firstItem="cax-OS-hgW" firstAttribute="top" secondItem="ZFY-7I-60F" secondAttribute="bottom" constant="18" id="YLU-x4-GSt"/>
-                                    <constraint firstItem="xC2-ac-rpw" firstAttribute="top" secondItem="Fns-5F-h6F" secondAttribute="bottom" constant="18" id="a24-VF-Cpo"/>
-                                    <constraint firstItem="L8W-Pr-JIW" firstAttribute="top" secondItem="qtY-wj-B5k" secondAttribute="bottom" constant="56" id="aTM-nH-ASt"/>
-                                    <constraint firstAttribute="bottom" secondItem="aTe-ah-6HM" secondAttribute="bottom" constant="29" id="cjK-m0-OgF"/>
+                                    <constraint firstAttribute="bottom" secondItem="aTe-ah-6HM" secondAttribute="bottom" constant="20" id="cjK-m0-OgF"/>
                                     <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="PCR-bB-871" secondAttribute="trailing" constant="-2" id="e1b-cS-cEh"/>
-                                    <constraint firstItem="4Ga-Yp-wbl" firstAttribute="top" secondItem="kvK-ma-cat" secondAttribute="bottom" constant="86" id="jom-yY-kzp"/>
-                                    <constraint firstItem="9nM-Jj-bNd" firstAttribute="top" secondItem="4Ua-MT-bmJ" secondAttribute="bottom" constant="16" id="l5w-n7-oZ2"/>
-                                    <constraint firstItem="PCR-bB-871" firstAttribute="width" secondItem="aTe-ah-6HM" secondAttribute="width" id="r9S-zK-Jd5"/>
-                                    <constraint firstAttribute="bottom" secondItem="Tqp-95-c0c" secondAttribute="bottom" constant="29" id="rE3-JY-2CK"/>
-                                    <constraint firstItem="Ia0-Kf-cog" firstAttribute="top" secondItem="cax-OS-hgW" secondAttribute="bottom" constant="18" id="uoo-6J-aUw"/>
-                                    <constraint firstAttribute="trailing" secondItem="L8W-Pr-JIW" secondAttribute="trailing" constant="4" id="vIQ-DD-qf1"/>
-                                    <constraint firstItem="tDf-8N-HNp" firstAttribute="leading" secondItem="FlK-Qn-EvD" secondAttribute="trailing" constant="24" id="x7W-AJ-tzA"/>
-                                    <constraint firstItem="FlK-Qn-EvD" firstAttribute="top" secondItem="sHX-Eh-4O9" secondAttribute="bottom" constant="18" id="xCZ-py-hFB"/>
+                                    <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="4" id="fS2-gT-CJY"/>
+                                    <constraint firstItem="e2o-vu-ZRF" firstAttribute="leading" secondItem="2R7-HU-dPY" secondAttribute="leading" id="j4a-wz-Pt1"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tqp-95-c0c" secondAttribute="trailing" constant="4" id="pPP-2M-ezF"/>
+                                    <constraint firstItem="PCR-bB-871" firstAttribute="width" secondItem="aTe-ah-6HM" secondAttribute="width" constant="1" id="r9S-zK-Jd5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tqp-95-c0c" secondAttribute="bottom" constant="20" id="rE3-JY-2CK"/>
                                     <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="PCR-bB-871" secondAttribute="trailing" constant="-2" id="zTN-rE-rX5"/>
                                 </constraints>
                                 <animations/>
@@ -1029,38 +967,18 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="4Ua-MT-bmJ" secondAttribute="trailing" constant="7" id="2Do-b4-o2g"/>
                 <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" id="2Fh-oN-1fj"/>
-                <constraint firstItem="e2o-vu-ZRF" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="6NX-hb-3rN"/>
-                <constraint firstAttribute="trailing" secondItem="tDf-8N-HNp" secondAttribute="trailing" constant="7" id="AF3-QB-phq"/>
-                <constraint firstItem="qtY-wj-B5k" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="9" id="B0K-w7-Aya"/>
                 <constraint firstAttribute="trailing" secondItem="Tqp-95-c0c" secondAttribute="trailing" constant="11" id="GBf-eK-uuq"/>
-                <constraint firstItem="cax-OS-hgW" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="J2l-5r-8ZK"/>
-                <constraint firstAttribute="trailing" secondItem="qtY-wj-B5k" secondAttribute="trailing" constant="9" id="Kie-Vc-1X9"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="baseline" secondItem="F8g-Wp-0Uu" secondAttribute="baseline" id="LzJ-dQ-gEL"/>
-                <constraint firstItem="FlK-Qn-EvD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="SaQ-rg-xPg"/>
-                <constraint firstItem="kvK-ma-cat" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="9" id="Tma-Yk-XWQ"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="TnJ-v1-r76"/>
-                <constraint firstAttribute="trailing" secondItem="Kbj-gT-PAQ" secondAttribute="trailing" constant="7" id="WKL-NU-HxS"/>
-                <constraint firstItem="Ia0-Kf-cog" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="Wo9-GA-M1a"/>
                 <constraint firstItem="3mq-0Q-Zof" firstAttribute="leading" secondItem="F8g-Wp-0Uu" secondAttribute="trailing" constant="3" id="X8g-Pj-ctx"/>
-                <constraint firstAttribute="trailing" secondItem="9nM-Jj-bNd" secondAttribute="trailing" constant="7" id="XyG-pW-Nat"/>
                 <constraint firstItem="F8g-Wp-0Uu" firstAttribute="baseline" secondItem="3mq-0Q-Zof" secondAttribute="baseline" id="Y6g-M7-8rN"/>
-                <constraint firstItem="sHX-Eh-4O9" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="ZxN-k3-eDJ"/>
-                <constraint firstItem="Fns-5F-h6F" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="a64-hy-df5"/>
                 <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="76" id="aYu-R3-jXF"/>
-                <constraint firstItem="L8W-Pr-JIW" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="bf2-pZ-dda"/>
-                <constraint firstAttribute="trailing" secondItem="kvK-ma-cat" secondAttribute="trailing" constant="9" id="bsm-8B-yBT"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="F8g-Wp-0Uu" secondAttribute="top" id="caS-Lj-XKL"/>
-                <constraint firstItem="4Ga-Yp-wbl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="9" id="hB6-OJ-p75"/>
-                <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="11" id="lAL-Jc-Edb"/>
-                <constraint firstAttribute="trailing" secondItem="xC2-ac-rpw" secondAttribute="trailing" constant="7" id="lI4-RV-Cqi"/>
-                <constraint firstAttribute="trailing" secondItem="4Ga-Yp-wbl" secondAttribute="trailing" constant="9" id="lV1-Nj-Y13"/>
                 <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="npR-HL-thf"/>
                 <constraint firstItem="aTe-ah-6HM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="oPs-Z9-agJ"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="trailing" secondItem="3mq-0Q-Zof" secondAttribute="trailing" id="uej-UK-Vco"/>
-                <constraint firstItem="ZFY-7I-60F" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="25" id="wiS-RG-YnU"/>
             </constraints>
             <animations/>
             <point key="canvasLocation" x="468" y="289"/>

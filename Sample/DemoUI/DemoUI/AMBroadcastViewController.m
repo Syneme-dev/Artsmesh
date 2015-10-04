@@ -686,6 +686,10 @@
     [self pushDownButton:self.youtubeBtn];
     
     [self.groupTabView selectTabViewItemAtIndex:0];
+    
+    NSLog(@"youtube parent view dimensions are: %f, %f", self.groupTabView.selectedTabViewItem.view.frame.size.width, self.groupTabView.selectedTabViewItem.view.frame.size.height);
+    [self.groupTabView.selectedTabViewItem.view setNeedsLayout:YES];
+    [self.groupTabView.selectedTabViewItem.view setNeedsDisplay:YES];
 }
 
 - (IBAction)settingsBtnClick:(id)sender {

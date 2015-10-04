@@ -93,6 +93,21 @@
     NSView *view = [eventsManagerVC view];
     [self.eventsManagerView addSubview:view];
     
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
+                                            options:0
+                                            metrics:nil
+                                            views:@{@"subView" : view}];
+    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
+                                            options:0
+                                            metrics:nil
+                                            views:@{@"subView" : view}];
+    [self.eventsManagerView addConstraints:verticalConstraints1];
+    [self.eventsManagerView addConstraints:horizontalConstraints1];
+    [self.eventsManagerView setAutoresizesSubviews:YES];
+    [view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+    
     [self establishYouTubeVars];
     [self initYoutubeService];
     

@@ -55,9 +55,8 @@
         //Need to make the document View taller to scroll and display all returned events
         NSSize newSize = NSMakeSize(self.enclosingScrollView.frame.size.width, (curHeight));
         [self setFrameSize:newSize];
-        NSLog(@"resize document scroll view now.");
     } else {
-        NSLog(@"no need to resize document scroll view");
+        // No need to resize document scroll view
     }
 }
 

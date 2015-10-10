@@ -23,6 +23,8 @@
 
 #include <jack/systemdeps.h>
 
+typedef uint64_t jack_uuid_t;
+
 typedef int32_t jack_shmsize_t;
 
 /**
@@ -259,6 +261,7 @@ typedef void (*JackLatencyCallback)(jack_latency_callback_mode_t mode, void *arg
 /**
  * the new latency API operates on Ranges.
  */
+PRE_PACKED_STRUCTURE
 struct _jack_latency_range
 {
     /**
@@ -269,7 +272,7 @@ struct _jack_latency_range
      * maximum latency
      */
     jack_nframes_t max;
-};
+} POST_PACKED_STRUCTURE;
 
 typedef struct _jack_latency_range jack_latency_range_t;
 
@@ -368,7 +371,7 @@ typedef int (*JackSampleRateCallback)(jack_nframes_t nframes, void *arg);
  * @param register non-zero if the port is being registered,
  *                     zero if the port is being unregistered
  */
-typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int register, void *arg);
+typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int /* register */, void *arg);
 
 /**
  * Prototype for the client supplied function that is called
@@ -379,7 +382,7 @@ typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int register, 
  *                     zero if the client is being unregistered
  * @param arg pointer to a client supplied structure
  */
-typedef void (*JackClientRegistrationCallback)(const char* name, int register, void *arg);
+typedef void (*JackClientRegistrationCallback)(const char* name, int /* register */, void *arg);
 
 /**
  * Prototype for the client supplied function that is called
@@ -400,10 +403,8 @@ typedef void (*JackPortConnectCallback)(jack_port_id_t a, jack_port_id_t b, int 
  * @param port the port that has been renamed
  * @param new_name the new name
  * @param arg pointer to a client supplied structure
- *
- * @return zero on success, non-zero on error
  */
-typedef int (*JackPortRenameCallback)(jack_port_id_t port, const char* old_name, const char* new_name, void *arg);
+typedef void (*JackPortRenameCallback)(jack_port_id_t port, const char* old_name, const char* new_name, void *arg);
 
 /**
  * Prototype for the client supplied function that is called
@@ -437,7 +438,8 @@ typedef void (*JackShutdownCallback)(void *arg);
  * the callback context.
 
  * @param code a status word, formed by OR-ing together the relevant @ref JackStatus bits.
- * @param reason a string describing the shutdown reason (backend failure, server crash... etc...)
+ * @param reason a string describing the shutdown reason (backend failure, server crash... etc...). 
+ * Note that this string will not be available anymore after the callback returns, so possibly copy it.
  * @param arg pointer to a client supplied structure
  */
 typedef void (*JackInfoShutdownCallback)(jack_status_t code, const char* reason, void *arg);
@@ -548,7 +550,8 @@ typedef enum {
 #define JACK_POSITION_MASK (JackPositionBBT|JackPositionTimecode)
 #define EXTENDED_TIME_INFO
 
-typedef struct {
+PRE_PACKED_STRUCTURE
+struct _jack_position {
 
     /* these four cannot be set from clients: the server sets them */
     jack_unique_t       unique_1;       /**< unique ID */
@@ -614,7 +617,9 @@ typedef struct {
     /* When (unique_1 == unique_2) the contents are consistent. */
     jack_unique_t       unique_2;       /**< unique ID */
 
-} jack_position_t;
+} POST_PACKED_STRUCTURE;
+
+typedef struct _jack_position jack_position_t;
 
 /**
     * Prototype for the @a sync_callback defined by slow-sync clients.

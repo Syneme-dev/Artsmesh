@@ -172,7 +172,6 @@
 		D472931D19A6E5030034CC34 /* AMAudio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMAudio-Prefix.pch"; sourceTree = "<group>"; };
 		D472931E19A6E5030034CC34 /* AMAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAudio.h; sourceTree = "<group>"; };
 		D472931F19A6E5030034CC34 /* AMAudio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAudio.m; sourceTree = "<group>"; };
-		D472932619A6E5030034CC34 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D472933C19A6E5460034CC34 /* AMAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioDevice.h; sourceTree = "<group>"; };
 		D472933D19A6E5460034CC34 /* AMAudioDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioDevice.m; sourceTree = "<group>"; };
 		D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioDeviceManager.h; sourceTree = "<group>"; };
@@ -323,7 +322,6 @@
 				D443717A19AACF6300F49705 /* AudioToolbox.framework */,
 				D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */,
 				D472931119A6E5030034CC34 /* Cocoa.framework */,
-				D472932619A6E5030034CC34 /* XCTest.framework */,
 				D472931319A6E5030034CC34 /* Other Frameworks */,
 			);
 			name = Frameworks;

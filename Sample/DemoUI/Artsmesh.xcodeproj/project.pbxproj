@@ -477,10 +477,8 @@
 		2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTimerTableCellVC.xib; sourceTree = "<group>"; };
 		209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMetronomeBackgroundView.h; sourceTree = "<group>"; };
 		209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMetronomeBackgroundView.m; sourceTree = "<group>"; };
-		2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPluginLoader.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPluginLoader.framework; sourceTree = "<group>"; };
 		2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
 		2686C35C19DA4E9200352DFF /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
-		268DA7C3198B99A100F86EBB /* AMTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMTimer.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMTimer.framework; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMPreferenceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPreferenceVC.xib; sourceTree = "<group>"; };
@@ -1676,7 +1674,6 @@
 				D47A184D19F21296000A8CCB /* AMLogger.framework */,
 				2DED40CC19CBED2D006F12FD /* CoreLocation.framework */,
 				D472934519A6E8F30034CC34 /* AMAudio.framework */,
-				268DA7C3198B99A100F86EBB /* AMTimer.framework */,
 				AF7242B2197E19CA0008799B /* AMCommonTools.framework */,
 				2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */,
 				AF45429C19553C2200CCD862 /* AMStatusNet.framework */,
@@ -1684,7 +1681,6 @@
 				AF9205411910B42D0051BE63 /* UIFramework.framework */,
 				D432037B1901142E009BDE67 /* AMNetworkUtils.framework */,
 				26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */,
-				2611399D18D2E8A800CDCF8F /* AMPluginLoader.framework */,
 				268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */,
 				268E7DD818D1861000B0F710 /* AMNotificationManager.framework */,
 				37C2316F187A8FFD00554AFD /* Cocoa.framework */,

@@ -42,7 +42,7 @@
     NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
     
     //-s or -c
-    if([cfgs.role isEqualToString:@"Server"]){
+    if([cfgs.role isEqualToString:@"SERVER"]){
         [commandline appendFormat:@" -s"];
     }else{
         [commandline appendFormat:@" -c %@", cfgs.serverAddr];

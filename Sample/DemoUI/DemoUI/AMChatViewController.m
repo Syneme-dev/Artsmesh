@@ -18,6 +18,9 @@
 #import "UIFramework/AMCheckBoxView.h"
 
 @interface AMChatViewController () <NSTextFieldDelegate, AMCheckBoxDelegeate>
+{
+    BOOL _useIPV6;
+}
 @property (weak) IBOutlet AMCheckBoxView *useOSC;
 
 - (void)showChatRecord:(NSDictionary *)record;
@@ -59,6 +62,8 @@
     NSString* addr = [defaults stringForKey:Preference_Key_General_StunServerAddr];
     NSString* port = [defaults stringForKey:Preference_Key_General_StunServerPort];
     _myInternalPort = [defaults stringForKey:Preference_Key_General_ChatPort];
+    
+    _useIPV6 = [[defaults stringForKey:Preference_Key_General_MeshUseIpv6] boolValue];
     
     _socket = [[AMHolePunchingSocket alloc] initWithServer: addr serverPort:port clientPort: _myInternalPort];
     _socket.useIpv6 = [[defaults stringForKey:Preference_Key_General_MeshUseIpv6] boolValue];
@@ -167,7 +172,12 @@
     for (NSString* ruKey in _remotePeerSet) {
         AMLiveUser* ru = [_remotePeerSet objectForKey:ruKey];
         AMHolePunchingPeer* rPeer = [[AMHolePunchingPeer alloc] init];
-        rPeer.ip = ru.publicIp;
+        if (_useIPV6 && ru.isIPV6) {
+            rPeer.ip = ru.ipv6Address;
+        }else{
+            rPeer.ip = ru.publicIp;
+        }
+        
         rPeer.port = ru.publicChatPort;
         [socketRemotePeers addObject:rPeer];
     }

@@ -954,6 +954,8 @@
 - (IBAction)jackServerToggled:(NSButton *)sender
 {
     AMAudio* audioModule = [AMAudio sharedInstance];
+    AMJackClient* client = [audioModule audioJackClient];
+    
     if(![audioModule isJackStarted]){
         [self.jackServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
         if (![audioModule startJack])
@@ -961,7 +963,9 @@
             [self.jackServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
         }
         
+        [client openJackClient];
     }else{
+        [client closeJackClient];
         [audioModule stopJack];
     }
 }

@@ -69,6 +69,8 @@
     NSArray *audioFormats;
     NSArray *audioBitRates;
     NSArray *audioSampleRates;
+    
+    NSTask *_ffmpegTask;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -316,11 +318,6 @@
 
 
 - (void)insertLiveYouTubeBroadcast {
-    /****** TO-DO *******
-     
-     * Need reset button after Event created.
-     
-     ********************/
     
     GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
     
@@ -414,6 +411,8 @@
             
                                    } else {
                                        NSLog(@"Error: %@", error.description);
+                                       GTLErrorObject* const errorObject = error.userInfo[kGTLStructuredErrorKey];
+                                       NSLog(@"error from YouTube API: %@", errorObject.data);
                                        [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"EDIT"];
                                    }
         
@@ -937,6 +936,36 @@
 -(void)onChecked:(AMCheckBoxView*)sender {
 }
 
+-(void)stopLive {
+    if (_ffmpegTask) {
+        [_ffmpegTask terminate];
+        _ffmpegTask = nil;
+    }
+    
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"ffmpeg", nil]];
+}
+
+-(void)goLive {
+    //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
+    //NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"/usr/local/bin/ffmpeg -f avfoundation -r 30 -i \"0:0\" -s 1280x720 -vcodec libx264 -preset fast -pix_fmt uyvy422 -s 1280x720 -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                [self.streamNameTextField stringValue]];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+}
+
 // Mouse Events (mainly for buttons)
 - (void)mouseDown:(NSEvent *)theEvent {
 }
@@ -956,6 +985,15 @@
         }
     } else if (self.eventGoLiveButton.triggerPressed == YES) {
         // Go Live event button pressed
+        if (self.selectedBroadcast != nil) {
+            if (needsToConfirmGoLive == FALSE) {
+                [self goLive];
+            } else {
+                [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM"];
+                needsToConfirmGoLive = FALSE;
+            }
+        }
+        
     } else if (self.eventCreateButton.triggerPressed == YES) {
         // CREATE/EDIT button pressed
         if (self.selectedBroadcast != nil) {

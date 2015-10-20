@@ -174,6 +174,8 @@
 		2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */; };
 		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
+		2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; };
+		2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -403,6 +405,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */,
 				4FC6316A1B46635200BD02AB /* iperf in CopyFiles */,
 				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */,
 				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */,
@@ -779,6 +782,7 @@
 		2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButtonViewController.h; sourceTree = "<group>"; };
 		2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButtonViewController.m; sourceTree = "<group>"; };
 		2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStandardButtonViewController.xib; sourceTree = "<group>"; };
+		2D47C87F1BD602BA00575B6E /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -1640,6 +1644,7 @@
 			isa = PBXGroup;
 			children = (
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
+				2D47C87F1BD602BA00575B6E /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
 				4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */,
 				4A5701541A11BAEA00BF801E /* OscGroupServer */,
@@ -2202,6 +2207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */,
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
 				4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,

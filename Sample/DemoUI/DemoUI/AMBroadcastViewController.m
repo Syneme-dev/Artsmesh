@@ -948,11 +948,15 @@
 
 -(void)goLive {
     //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    //NSBundle* mainBundle = [NSBundle mainBundle];
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"/usr/local/bin/ffmpeg -f avfoundation -r 30 -i \"0:0\" -s 1280x720 -vcodec libx264 -preset fast -pix_fmt uyvy422 -s 1280x720 -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                @"%@ -f avfoundation -r 30 -i \"0:0\" -s 1280x720 -vcodec libx264 -preset fast -pix_fmt uyvy422 -s 1280x720 -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                launchPath,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);
     _ffmpegTask = [[NSTask alloc] init];

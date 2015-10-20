@@ -173,8 +173,9 @@
 		2D4555A21B9B98BC00C6853B /* AMStandardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A11B9B98BC00C6853B /* AMStandardButton.m */; };
 		2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */; };
 		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
-		2D47C8801BD602BA00575B6E /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ASSET_TAGS = (); }; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
+		2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; };
+		2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -404,6 +405,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */,
 				4FC6316A1B46635200BD02AB /* iperf in CopyFiles */,
 				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */,
 				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */,
@@ -2209,6 +2211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */,
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
 				4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
@@ -2265,7 +2268,6 @@
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
-				2D47C8801BD602BA00575B6E /* ffmpeg in Resources */,
 				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,

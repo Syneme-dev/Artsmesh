@@ -950,7 +950,7 @@
     //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSBundle* mainBundle = [NSBundle mainBundle];
     
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"LocalServer"];
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     

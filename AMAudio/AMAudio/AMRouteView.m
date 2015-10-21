@@ -455,7 +455,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSPoint)centerOfChannel:(AMChannel *)channel
 {
     CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfChannels;
-    return NSMakePoint(_radius * cos(radian) + _center.x,
+    return NSMakePoint(-_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
 }
 
@@ -516,13 +516,13 @@ static CGFloat kCloseButtonRadius = 6.0;
         
         // draw cd line
         NSBezierPath *cdLine = [NSBezierPath bezierPath];
-        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(startAngle) + _center.x,
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * -cos(startAngle) + _center.x,
                                         (radius - 8.0) * sin(startAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(startAngle) + _center.x,
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * -cos(startAngle) + _center.x,
                                         (radius + 16.0) * sin(startAngle) + _center.y)];
-        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(endAngle) + _center.x,
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * -cos(endAngle) + _center.x,
                                         (radius - 8.0) * sin(endAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(endAngle) + _center.x,
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * -cos(endAngle) + _center.x,
                                         (radius + 16.0) * sin(endAngle) + _center.y)];
         cdLine.lineWidth = 1.0;
         [_deviceCircleColor set];

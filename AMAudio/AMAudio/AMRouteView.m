@@ -455,7 +455,8 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSPoint)centerOfChannel:(AMChannel *)channel
 {
     CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfChannels;
-    return NSMakePoint(-_radius * cos(radian) + _center.x,
+    radian = (M_PI - radian) < -2.0*M_PI ?  (3.0*M_PI - radian) : (M_PI - radian);
+    return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
 }
 
@@ -513,22 +514,29 @@ static CGFloat kCloseButtonRadius = 6.0;
         NSInteger endIndex = startIndex + indexRange.length;
         CGFloat startAngle = (startIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
         CGFloat endAngle = (endIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
+        // draw lable
+        
+        CGFloat temp = startAngle ;
+        startAngle = M_PI - endAngle;
+        endAngle   = M_PI - temp;
         
         // draw cd line
         NSBezierPath *cdLine = [NSBezierPath bezierPath];
-        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * -cos(startAngle) + _center.x,
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(startAngle) + _center.x,
                                         (radius - 8.0) * sin(startAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * -cos(startAngle) + _center.x,
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(startAngle) + _center.x,
                                         (radius + 16.0) * sin(startAngle) + _center.y)];
-        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * -cos(endAngle) + _center.x,
+        [cdLine moveToPoint:NSMakePoint((radius - 8.0) * cos(endAngle) + _center.x,
                                         (radius - 8.0) * sin(endAngle) + _center.y)];
-        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * -cos(endAngle) + _center.x,
+        [cdLine lineToPoint:NSMakePoint((radius + 16.0) * cos(endAngle) + _center.x,
                                         (radius + 16.0) * sin(endAngle) + _center.y)];
         cdLine.lineWidth = 1.0;
         [_deviceCircleColor set];
         [cdLine stroke];
         
-        // draw lable
+        
+        
+
         CGFloat arcLength = radius * (endAngle - startAngle);
         // 18: |- 6 - devcie lable - 6 - close button - 6 - |
         CGFloat closeButtonRadius = (device.removable) ? kCloseButtonRadius : 0.0;
@@ -688,13 +696,14 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     NSPoint p = [self convertPoint:mouseUpEvent.locationInWindow
                           fromView:nil];
-    CGFloat r = hypot(p.x - _center.x, p.y - _center.y);
+    CGFloat r = hypot(-p.x + _center.x, p.y - _center.y);
     if (fabs(r - _radius) >= kChannelRadius)
         return nil;
-    CGFloat theta = atan2(p.y - _center.y, p.x - _center.x);
+    CGFloat theta = atan2(p.y - _center.y, -p.x + _center.x);
     if (theta < 0)
         theta += 2 * M_PI;
     int channelIndex = (int)(theta * kNumberOfChannels / (2.0 * M_PI) + 0.5) % kNumberOfChannels;
+    channelIndex -= 1;
     AMChannel *channel = [self channelAtIndex:channelIndex];
     NSPoint channelCenter = [self centerOfChannel:channel];
     r = hypot(p.x - channelCenter.x, p.y - channelCenter.y);

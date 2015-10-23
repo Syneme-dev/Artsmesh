@@ -703,7 +703,6 @@ static CGFloat kCloseButtonRadius = 6.0;
     if (theta < 0)
         theta += 2 * M_PI;
     int channelIndex = (int)(theta * kNumberOfChannels / (2.0 * M_PI) + 0.5) % kNumberOfChannels;
-    channelIndex -= 1;
     AMChannel *channel = [self channelAtIndex:channelIndex];
     NSPoint channelCenter = [self centerOfChannel:channel];
     r = hypot(p.x - channelCenter.x, p.y - channelCenter.y);

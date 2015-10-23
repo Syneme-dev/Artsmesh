@@ -114,6 +114,17 @@
              @"NO",     Preference_iPerf_Dualtest,
              @"YES",Preference_Key_General_TopControlBar,
              @"NO", Preference_Key_General_UseOSCForChat,
+             Preference_ffmpeg_Video_In_Device, Preference_Key_ffmpeg_Video_In_Device,
+             Preference_ffmpeg_Video_In_Size, Preference_Key_ffmpeg_Video_In_Size,
+             Preference_ffmpeg_Video_Out_Size, Preference_Key_ffmpeg_Video_Out_Size,
+             Preference_ffmpeg_Video_Format, Preference_Key_ffmpeg_Video_Format,
+             Preference_ffmpeg_Video_Frame_Rate, Preference_Key_ffmpeg_Video_Frame_Rate,
+             Preference_ffmpeg_Video_Bit_Rate, Preference_Key_ffmpeg_Video_Bit_Rate,
+             Preference_ffmpeg_Audio_In_Device, Preference_Key_ffmpeg_Audio_In_Device,
+             Preference_ffmpeg_Audio_Format, Preference_Key_ffmpeg_Audio_Format,
+             Preference_ffmpeg_Audio_Sample_Rate, Preference_Key_ffmpeg_Audio_Sample_Rate,
+             Preference_ffmpeg_Audio_Bit_Rate, Preference_Key_ffmpeg_Audio_Bit_Rate,
+             Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url,
              nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
 

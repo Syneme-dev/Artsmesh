@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
@@ -11,6 +11,7 @@
                 <outlet property="audioDevicePopupView" destination="pKg-Nd-B2U" id="5hB-8P-DHr"/>
                 <outlet property="audioFormatPopupView" destination="P9K-PL-lsh" id="M7E-UE-RsY"/>
                 <outlet property="audioSampleRatePopupView" destination="jeV-pS-uRh" id="35C-j0-JZ8"/>
+                <outlet property="baseUrlTextField" destination="1d6-Km-h9q" id="2vX-VO-bhq"/>
                 <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="eventCreateButton" destination="aTe-ah-6HM" id="di0-4F-Neg"/>
@@ -916,6 +917,41 @@
                                         </textFieldCell>
                                         <connections>
                                             <outlet property="delegate" destination="-2" id="DQX-Ar-yEB"/>
+                                        </connections>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Q-0n-jOK" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="-2" y="288" width="556" height="14"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="ADDITIONAL DETAILS" id="kZh-b6-QVa">
+                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVE-cC-4RZ" userLabel="| ">
+                                        <rect key="frame" x="0.0" y="258" width="10" height="10"/>
+                                        <animations/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Lwf-bB-jBV"/>
+                                    </imageView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poQ-xb-nYR" userLabel="DEVICE" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="18" y="257" width="114" height="12"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BASE URL" id="KmF-vl-Fvz">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-Km-h9q" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="144" y="257" width="264" height="12"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="rtmp://a.rtmp.youtube.com/live2" id="eUx-3a-RCu">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="Hf5-mB-YV3"/>
                                         </connections>
                                     </textField>
                                 </subviews>

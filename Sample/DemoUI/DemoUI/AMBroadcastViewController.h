@@ -93,6 +93,7 @@
 @property (strong) IBOutlet AMPopUpView *audioFormatPopupView;
 @property (strong) IBOutlet AMPopUpView *audioSampleRatePopupView;
 @property (strong) IBOutlet AMPopUpView *audioBitRatePopupView;
+@property (strong) IBOutlet AMFoundryFontView *baseUrlTextField;
 
 
 

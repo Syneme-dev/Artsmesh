@@ -142,6 +142,19 @@
 #define Preference_iPerf_Tradeoff           @"Preference_iPerf_Tradeoff"
 #define Preference_iPerf_Dualtest           @"Preference_iPerf_Dualtest"
 
+///////////////////////// FFMPEG/Broadcast Settings /////////////////////////
+#define Preference_ffmpeg_Video_In_Device @"Preference_ffmpeg_Device_Video_In_Device"
+#define Preference_ffmpeg_Video_In_Size @"Preference_ffmpeg_Video_In_Size"
+#define Preference_ffmpeg_Video_Out_Size @"Preference_ffmpeg_Video_Out_Size"
+#define Preference_ffmpeg_Video_Format @"Preference_ffmpeg_Video_Format"
+#define Preference_ffmpeg_Video_Frame_Rate @"Preference_ffmpeg_Video_Frame_Rate"
+#define Preference_ffmpeg_Video_Bit_Rate @"Preference_ffmpeg_Video_Bit_Rate"
+#define Preference_ffmpeg_Audio_In @"Preference_ffmpeg_Audio_In_Device"
+#define Preference_ffmpeg_Audio_Format @"Preference_ffmpeg_Audio_Format"
+#define Preference_ffmpeg_Audio_Sample_Rate @"Preference_ffmpeg_Audio_Sample_Rate"
+#define Preference_ffmpeg_Audio_Bit_Rate @"Preference_ffmpeg_Audio_Bit_Rate"
+#define Preference_ffmpeg_Base_Url @"Preference_ffmpeg_Base_Url"
+
 #import <Foundation/Foundation.h>
 
 @interface AMPanelLocation : NSObject

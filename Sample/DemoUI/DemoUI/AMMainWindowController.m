@@ -975,9 +975,11 @@
 {
     AMAudio*        audioModule = [AMAudio sharedInstance];
     AMJackClient*   client      = [audioModule audioJackClient];
-    
-    [client closeJackClient];
-    [audioModule stopJack];
+  
+    if([audioModule isJackStarted]){
+        [client closeJackClient];
+        [audioModule stopJack];
+    }
 }
 
 - (IBAction)oscServerToggled:(id)sender

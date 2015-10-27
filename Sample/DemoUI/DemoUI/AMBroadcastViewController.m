@@ -88,6 +88,10 @@
     [self.eventDeleteButton setButtonTitle:@"DELETE"];
     [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
     [self.eventCreateButton setButtonTitle:@"CREATE"];
+    
+    [self.settingsCancelBtn setButtonTitle:@"CANCEL"];
+    [self.settingsSaveBtn setButtonTitle:@"SAVE"];
+    
     [self updateAMStandardButtons];
     
     //Set up Events Manager SubView and View Controller
@@ -785,6 +789,9 @@
         [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
         [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
     }
+    
+    [self.settingsSaveBtn setActiveStateWithText:@"SAVE"];
+    [self.settingsCancelBtn setActiveStateWithText:@"CANCEL"];
 }
 
 - (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {

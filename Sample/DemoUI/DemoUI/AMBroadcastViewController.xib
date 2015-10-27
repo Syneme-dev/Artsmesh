@@ -33,6 +33,8 @@
                 <outlet property="schedEndPMCheck" destination="LJM-zO-aFL" id="0M1-wP-Gbc"/>
                 <outlet property="schedStartPMCheck" destination="zar-IV-heM" id="cxQ-ha-gwc"/>
                 <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
+                <outlet property="settingsCancelBtn" destination="I4g-z5-UPE" id="dGt-Dm-ScQ"/>
+                <outlet property="settingsSaveBtn" destination="16t-C4-EfM" id="dBa-40-mfV"/>
                 <outlet property="streamAddressTextField" destination="Kbj-gT-PAQ" id="f2L-TE-MVr"/>
                 <outlet property="streamFormatTextField" destination="tDf-8N-HNp" id="tJA-XE-e7A"/>
                 <outlet property="streamNameTextField" destination="4Ua-MT-bmJ" id="lxD-Fm-oRR"/>
@@ -954,6 +956,14 @@
                                             <outlet property="delegate" destination="-2" id="Hf5-mB-YV3"/>
                                         </connections>
                                     </textField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16t-C4-EfM" userLabel="SAVE BTN" customClass="AMStandardButton">
+                                        <rect key="frame" x="276" y="163" width="278" height="40"/>
+                                        <animations/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I4g-z5-UPE" userLabel="CANCEL BTN" customClass="AMStandardButton">
+                                        <rect key="frame" x="0.0" y="163" width="279" height="40"/>
+                                        <animations/>
+                                    </customView>
                                 </subviews>
                                 <animations/>
                             </view>

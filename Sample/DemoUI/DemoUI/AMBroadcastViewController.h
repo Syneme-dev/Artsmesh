@@ -95,6 +95,9 @@
 @property (strong) IBOutlet AMPopUpView *audioBitRatePopupView;
 @property (strong) IBOutlet AMFoundryFontView *baseUrlTextField;
 
+@property (strong) IBOutlet AMStandardButton *settingsCancelBtn;
+@property (strong) IBOutlet AMStandardButton *settingsSaveBtn;
+
 
 
 

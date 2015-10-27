@@ -214,7 +214,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     NSDictionary *attributes = @{ NSForegroundColorAttributeName : _deviceLableColor,
                                 NSFontAttributeName : [NSFont fontWithName:@"FoundryMonoline"
                                                                       size:13.0]};
-    NSAttributedString *sourceLabel = [[NSAttributedString alloc] initWithString:@"Source"
+    NSAttributedString *sourceLabel = [[NSAttributedString alloc] initWithString:@"SEND"
                                                                 attributes:attributes];
     NSPoint ptLabelSource = NSMakePoint(38, 12);
     [sourceLabel drawAtPoint:(ptLabelSource)];
@@ -223,7 +223,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self drawChannel:AMDestinationChannel withPosition:ptDest];
 
    
-    NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"Destination"
+    NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"RECEIVE"
                                                                 attributes:attributes];
     NSPoint ptLabelDestination = NSMakePoint(138, 12);
     [destLabel drawAtPoint:(ptLabelDestination)];

@@ -981,7 +981,6 @@
 - (void)mouseDown:(NSEvent *)theEvent {
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    // TO-DO: Add confirm button state for actions
     
     if (self.eventDeleteButton.triggerPressed == YES) {
         // Delete event button pressed
@@ -1022,6 +1021,13 @@
                 needsToConfirmCreate = FALSE;
             }
         }
+    } else if (self.settingsCancelBtn.triggerPressed == YES) {
+        //SETTINGS CANCEL BUTTON PRESSED
+        [self setupSettingsTab];
+        [self saveSettings];
+    } else if (self.settingsSaveBtn.triggerPressed == YES) {
+        //SETTINGS SAVE BUTTON PRESSED
+        [self saveSettings];
     }
     
 }
@@ -1040,14 +1046,20 @@
     audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", nil];
     audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", nil];
     
-    
+    [self.videoInputSizePopupView removeAllItems];
     [self.videoInputSizePopupView addItemsWithTitles:videoInputSizes];
+    [self.videoOutputSizePopupView removeAllItems];
     [self.videoOutputSizePopupView addItemsWithTitles:videoOutputSizes];
+    [self.videoFrameRatePopupView removeAllItems];
     [self.videoFrameRatePopupView addItemsWithTitles:videoFrameRates];
+    [self.videoFormatPopupView removeAllItems];
     [self.videoFormatPopupView addItemsWithTitles:videoFormats];
     
+    [self.audioFormatPopupView removeAllItems];
     [self.audioFormatPopupView addItemsWithTitles:audioFormats];
+    [self.audioSampleRatePopupView removeAllItems];
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
+    [self.audioBitRatePopupView removeAllItems];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
     
     [self.videoInputSizePopupView selectItemAtIndex:0];
@@ -1059,8 +1071,17 @@
     [self.audioSampleRatePopupView selectItemAtIndex:1];
     [self.audioBitRatePopupView selectItemAtIndex:5];
     
+    [self.videoInputCustomCheckBox setChecked:NO];
+    [self.videoOutputCustomCheckBox setChecked:NO];
+    
+    [self.videoBitRateTextField setStringValue:@"4000"];
+    [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
     
     [self.videoInputSizePopupView setNeedsDisplay:true];
+    
+}
+
+-(void)saveSettings {
     
 }
 

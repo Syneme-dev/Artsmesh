@@ -48,6 +48,7 @@
                 <outlet property="videoInputCustomHeightTextField" destination="IcO-nf-qeN" id="YYj-Ty-sOq"/>
                 <outlet property="videoInputCustomWidthTextField" destination="eBT-VS-5p0" id="vVk-Ny-yae"/>
                 <outlet property="videoInputSizePopupView" destination="FHE-QI-PjX" id="Pa7-iu-PV2"/>
+                <outlet property="videoOutputCustomCheckBox" destination="S5A-Ck-inm" id="WmY-Co-Beu"/>
                 <outlet property="videoOutputSizeHeightTextField" destination="xKr-gt-Pec" id="kcb-gp-xGm"/>
                 <outlet property="videoOutputSizePopupView" destination="Prw-ZP-wDH" id="d9P-3G-NeH"/>
                 <outlet property="videoOutputSizeWidthTextField" destination="P9O-mo-6If" id="zaJ-Yp-OIs"/>
@@ -762,7 +763,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9It-5g-ZWe" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9It-5g-ZWe" userLabel="VBR TEXT FIELD">
                                         <rect key="frame" x="144" y="528" width="45" height="12"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="4000" id="OL6-kA-5g1">
@@ -944,7 +945,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-Km-h9q" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-Km-h9q" userLabel="VBR TEXT FIELD">
                                         <rect key="frame" x="144" y="257" width="264" height="12"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="rtmp://a.rtmp.youtube.com/live2" id="eUx-3a-RCu">

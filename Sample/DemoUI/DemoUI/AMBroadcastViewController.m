@@ -1082,7 +1082,24 @@
 }
 
 -(void)saveSettings {
+    // Save Video Settings
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputSizePopupView.stringValue forKey:Preference_ffmpeg_Video_In_Size];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizePopupView.stringValue forKey:Preference_ffmpeg_Video_Out_Size];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFormatPopupView.stringValue forKey:Preference_ffmpeg_Video_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFrameRatePopupView.stringValue forKey:Preference_ffmpeg_Video_Frame_Rate];
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.videoBitRateTextField.stringValue
+     forKey:Preference_ffmpeg_Video_Bit_Rate];
     
+    //Save Audio Settings
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioFormatPopupView.stringValue forKey:Preference_ffmpeg_Audio_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioSampleRatePopupView.stringValue forKey:Preference_ffmpeg_Audio_Sample_Rate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioBitRatePopupView forKey:Preference_ffmpeg_Audio_Bit_Rate];
+    
+    //Save Additional Details
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.baseUrlTextField.stringValue
+     forKey:Preference_ffmpeg_Base_Url];
 }
 
 

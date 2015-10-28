@@ -149,6 +149,7 @@
     
     
     // Configure Settings Stuff
+    
     [self setupSettingsTab];
 }
 
@@ -885,6 +886,7 @@
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 
@@ -964,6 +966,36 @@
     
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
                              arguments:[NSArray arrayWithObjects:@"-c", @"ffmpeg", nil]];
+}
+
+-(void)populateDevicesList {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSPipe *pipe = [NSPipe pipe];
+    NSFileHandle *file = pipe.fileHandleForReading;
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -f avfoundation -list_devices true -i \"\"",
+                                launchPath];
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    
+    [_ffmpegTask setStandardOutput:pipe];
+    [_ffmpegTask setStandardError: [_ffmpegTask standardOutput]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotDeviceList:) name:NSFileHandleDataAvailableNotification object:file];
+    
+    
+    [_ffmpegTask launch];
+
+    [file waitForDataInBackgroundAndNotify];
 }
 
 -(void)goLive {
@@ -1062,6 +1094,7 @@
 }
 
 -(void)loadSettingsValues {
+    [self populateDevicesList];
     
     videoInputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
     videoOutputSizes = [[NSArray alloc] initWithArray:videoInputSizes];
@@ -1193,6 +1226,20 @@
      forKey:Preference_Key_ffmpeg_Base_Url];
     
     [self updateSettingsVars];
+}
+
+- (void) gotDeviceList : (NSNotification*)notification
+{
+    
+    NSFileHandle *outputFile = (NSFileHandle *) [notification object];
+    NSData *data = [outputFile availableData];
+    
+    if([data length]) {
+        NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Here: %@", temp);
+    
+        [outputFile waitForDataInBackgroundAndNotify];
+    }
 }
 
 

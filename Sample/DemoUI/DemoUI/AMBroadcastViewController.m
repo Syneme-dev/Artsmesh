@@ -70,6 +70,18 @@
     NSArray *audioBitRates;
     NSArray *audioSampleRates;
     
+    NSString *vidInSizePref;
+    NSString *vidOutSizePref;
+    NSString *vidDevicePref;
+    NSString *vidFormatPref;
+    NSString *vidFrameRatePref;
+    NSString *vidBitRatePref;
+    NSString *audDevicePref;
+    NSString *audFormatPref;
+    NSString *audSampleRatePref;
+    NSString *audBitRatePref;
+    NSString *baseUrlPref;
+    
     NSTask *_ffmpegTask;
 }
 
@@ -136,6 +148,7 @@
     [self.youtubeBtn performClick:nil];
     
     
+    // Configure Settings Stuff
     [self setupSettingsTab];
 }
 
@@ -1023,8 +1036,7 @@
         }
     } else if (self.settingsCancelBtn.triggerPressed == YES) {
         //SETTINGS CANCEL BUTTON PRESSED
-        [self setupSettingsTab];
-        [self saveSettings];
+        [self resetSettingsTab];
     } else if (self.settingsSaveBtn.triggerPressed == YES) {
         //SETTINGS SAVE BUTTON PRESSED
         [self saveSettings];
@@ -1035,9 +1047,22 @@
 
 
 // Settings Tab Functions
--(void)setupSettingsTab {
-    // Configure Settings Tab Options
-    //[videoInputSizes initWithObjects:@"1280x720",@"1280x1080", nil];
+-(void)updateSettingsVars {
+    vidInSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size];
+    vidOutSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size];
+    vidFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format];
+    vidFrameRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate];
+    vidBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate];
+    
+    audFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
+    audSampleRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+    audBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+    
+    baseUrlPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url];
+}
+
+-(void)loadSettingsValues {
+    
     videoInputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
     videoOutputSizes = [[NSArray alloc] initWithArray:videoInputSizes];
     videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
@@ -1061,6 +1086,10 @@
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
     [self.audioBitRatePopupView removeAllItems];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
+}
+-(void)resetSettingsTab {
+    //Reset Settings Tab and store default values
+    [self loadSettingsValues];
     
     [self.videoInputSizePopupView selectItemAtIndex:0];
     [self.videoOutputSizePopupView selectItemAtIndex:0];
@@ -1077,29 +1106,93 @@
     [self.videoBitRateTextField setStringValue:@"4000"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
     
+    [self saveSettings];
+    
+    [self.videoInputSizePopupView setNeedsDisplay:true];
+}
+-(void)setupSettingsTab {
+    // Configure Settings Tab Options
+    [self updateSettingsVars];
+    [self loadSettingsValues];
+    
+    if( [vidInSizePref length] != 0 ) {
+        [self.videoInputSizePopupView selectItemWithTitle:vidInSizePref];
+    } else {
+        [self.videoInputSizePopupView selectItemAtIndex:0]; }
+    
+    if ( [vidOutSizePref length] != 0 ) {
+        [self.videoOutputSizePopupView selectItemWithTitle:vidOutSizePref];
+    } else {
+        [self.videoOutputSizePopupView selectItemAtIndex:0]; }
+    
+    if ( [vidFrameRatePref length] != 0 ) {
+        [self.videoFrameRatePopupView selectItemWithTitle:vidFrameRatePref];
+    } else {
+        [self.videoFrameRatePopupView selectItemAtIndex:2]; }
+    
+    if ( [vidFormatPref length] != 0 ) {
+        [self.videoFrameRatePopupView selectItemWithTitle:vidFormatPref];
+    } else {
+        [self.videoFormatPopupView selectItemAtIndex:0]; }
+    
+    if ( [audFormatPref length] != 0 ) {
+        [self.audioFormatPopupView selectItemWithTitle:audFormatPref];
+    } else {
+        [self.audioFormatPopupView selectItemAtIndex:1]; }
+    
+    if ( [audSampleRatePref length] != 0 ) {
+        [self.audioSampleRatePopupView selectItemWithTitle:audSampleRatePref];
+    } else {
+        [self.audioSampleRatePopupView selectItemAtIndex:1]; }
+    
+    if ( [audBitRatePref length] != 0 ) {
+        [self.audioBitRatePopupView selectItemWithTitle:audBitRatePref];
+    } else {
+        [self.audioBitRatePopupView selectItemAtIndex:5]; }
+    
+    [self.videoInputCustomCheckBox setChecked:NO];
+    [self.videoOutputCustomCheckBox setChecked:NO];
+    
+    if ( [vidBitRatePref length] != 0 ) {
+        [self.videoBitRateTextField setStringValue:vidBitRatePref];
+    } else {
+        [self.videoBitRateTextField setStringValue:@"4000"]; }
+    
+    if ([baseUrlPref length] != 0) {
+        [self.baseUrlTextField setStringValue:baseUrlPref];
+    } else {
+        [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
+    }
+    
     [self.videoInputSizePopupView setNeedsDisplay:true];
     
 }
 
 -(void)saveSettings {
     // Save Video Settings
-    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputSizePopupView.stringValue forKey:Preference_ffmpeg_Video_In_Size];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizePopupView.stringValue forKey:Preference_ffmpeg_Video_Out_Size];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFormatPopupView.stringValue forKey:Preference_ffmpeg_Video_Format];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFrameRatePopupView.stringValue forKey:Preference_ffmpeg_Video_Frame_Rate];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFrameRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Frame_Rate];
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.videoBitRateTextField.stringValue
-     forKey:Preference_ffmpeg_Video_Bit_Rate];
+     forKey:Preference_Key_ffmpeg_Video_Bit_Rate];
     
     //Save Audio Settings
-    [[AMPreferenceManager standardUserDefaults] setObject:self.audioFormatPopupView.stringValue forKey:Preference_ffmpeg_Audio_Format];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.audioSampleRatePopupView.stringValue forKey:Preference_ffmpeg_Audio_Sample_Rate];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.audioBitRatePopupView forKey:Preference_ffmpeg_Audio_Bit_Rate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioSampleRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioBitRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+    
     
     //Save Additional Details
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
-     forKey:Preference_ffmpeg_Base_Url];
+     forKey:Preference_Key_ffmpeg_Base_Url];
+    
+    [self updateSettingsVars];
 }
 
 

@@ -223,7 +223,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     [self drawChannel:AMDestinationChannel withPosition:ptDest];
 
    
-    NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"RECEIVE"
+    NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"RECEIVE "
                                                                 attributes:attributes];
     NSPoint ptLabelDestination = NSMakePoint(138, 12);
     [destLabel drawAtPoint:(ptLabelDestination)];

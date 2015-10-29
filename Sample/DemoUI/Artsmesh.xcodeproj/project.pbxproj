@@ -16,7 +16,7 @@
 		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
 		209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */; };
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
-		2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2686C35D19DA4E9200352DFF /* LocalServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMPreferenceVC.xib */; };
@@ -175,7 +175,7 @@
 		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
 		2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; };
-		2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2D51DC671BD6074300333FD3 /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -225,8 +225,8 @@
 		4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
-		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
@@ -260,6 +260,9 @@
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
+		4F748F9F1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F748F9E1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework */; };
+		4F748FA01BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F748F9E1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F748FA21BE1D62A00C35245 /* libturbojpeg.0.dylib in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F748FA11BE1D60B00C35245 /* libturbojpeg.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251221B25790F00224513 /* AMIPerfTabVC.m */; };
 		4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251231B25790F00224513 /* AMIPerfTabVC.xib */; };
 		4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251271B257E2D00224513 /* AMPingTabVC.m */; };
@@ -272,7 +275,7 @@
 		4FA52CD21BB24B090075D02B /* AMSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */; };
 		4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CD11BB24B090075D02B /* AVFWrapper.m */; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
-		4FC6316A1B46635200BD02AB /* iperf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC6316E1B46781C00BD02AB /* AMIPerfConfigWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */; };
 		4FC6316F1B46781C00BD02AB /* AMIPerfConfigWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC6316D1B46781C00BD02AB /* AMIPerfConfigWC.xib */; };
 		4FCA92901AE4EF32002D3CAE /* AMClockTabCellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FCA928E1AE4EF32002D3CAE /* AMClockTabCellVC.m */; };
@@ -280,7 +283,7 @@
 		4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */; };
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
-		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
 		AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF200642194585F6008630C8 /* AMMapViewController.xib */; };
@@ -399,19 +402,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2692DB8718E91D1900553924 /* CopyFiles */ = {
+		2692DB8718E91D1900553924 /* Copy Files (7 items) */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				2D51DC671BD6074300333FD3 /* ffmpeg in CopyFiles */,
-				4FC6316A1B46635200BD02AB /* iperf in CopyFiles */,
-				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in CopyFiles */,
-				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in CopyFiles */,
-				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in CopyFiles */,
-				2686C35D19DA4E9200352DFF /* LocalServer in CopyFiles */,
+				4F748FA21BE1D62A00C35245 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
+				2D51DC671BD6074300333FD3 /* ffmpeg in Copy Files (7 items) */,
+				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
+				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */,
+				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */,
+				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */,
+				2686C35D19DA4E9200352DFF /* LocalServer in Copy Files (7 items) */,
 			);
+			name = "Copy Files (7 items)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		26F2BF7618FCC2BF00DD04A6 /* CopyFiles */ = {
@@ -432,6 +437,7 @@
 				AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */,
 				AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */,
 				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
+				4F748FA01BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,6 +927,8 @@
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
+		4F748F9E1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TL_TCPSyphonSDK.framework; sourceTree = "<group>"; };
+		4F748FA11BE1D60B00C35245 /* libturbojpeg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libturbojpeg.0.dylib; sourceTree = "<group>"; };
 		4F8251211B25790F00224513 /* AMIPerfTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfTabVC.h; sourceTree = "<group>"; };
 		4F8251221B25790F00224513 /* AMIPerfTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfTabVC.m; sourceTree = "<group>"; };
 		4F8251231B25790F00224513 /* AMIPerfTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMIPerfTabVC.xib; sourceTree = "<group>"; };
@@ -1098,6 +1106,7 @@
 				4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */,
 				4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */,
 				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
+				4F748F9F1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
@@ -1642,6 +1651,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				4F748FA11BE1D60B00C35245 /* libturbojpeg.0.dylib */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2D47C87F1BD602BA00575B6E /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
@@ -1667,6 +1677,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F748F9E1BE1D5DE00C35245 /* TL_TCPSyphonSDK.framework */,
 				4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */,
 				4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */,
 				4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */,
@@ -2157,7 +2168,7 @@
 				37C23169187A8FFD00554AFD /* Frameworks */,
 				37C2316A187A8FFD00554AFD /* Resources */,
 				376E047C187A9B1E0081DBA6 /* Copy Files */,
-				2692DB8718E91D1900553924 /* CopyFiles */,
+				2692DB8718E91D1900553924 /* Copy Files (7 items) */,
 				26F2BF7618FCC2BF00DD04A6 /* CopyFiles */,
 				AF7DF6E01904BFCA00554E6F /* ShellScript */,
 				4A1B39A38F584E569BB90DFD /* Copy Pods Resources */,

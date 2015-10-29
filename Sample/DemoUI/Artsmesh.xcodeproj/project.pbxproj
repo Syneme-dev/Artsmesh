@@ -260,6 +260,9 @@
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
+		4F7E661B1BE1E297006606D0 /* TL_TCPSyphonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7E661A1BE1E297006606D0 /* TL_TCPSyphonSDK.framework */; };
+		4F7E661C1BE1E297006606D0 /* TL_TCPSyphonSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F7E661A1BE1E297006606D0 /* TL_TCPSyphonSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251221B25790F00224513 /* AMIPerfTabVC.m */; };
 		4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251231B25790F00224513 /* AMIPerfTabVC.xib */; };
 		4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251271B257E2D00224513 /* AMPingTabVC.m */; };
@@ -405,6 +408,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
 				2D51DC671BD6074300333FD3 /* ffmpeg in Copy Files (7 items) */,
 				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
 				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */,
@@ -433,6 +437,7 @@
 				AF4542A519553C6C00CCD862 /* AMMesher.framework in CopyFiles */,
 				AF4542A719553C6C00CCD862 /* AMPreferenceManager.framework in CopyFiles */,
 				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
+				4F7E661C1BE1E297006606D0 /* TL_TCPSyphonSDK.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,6 +927,8 @@
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
+		4F7E661A1BE1E297006606D0 /* TL_TCPSyphonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TL_TCPSyphonSDK.framework; sourceTree = "<group>"; };
+		4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libturbojpeg.0.dylib; sourceTree = "<group>"; };
 		4F8251211B25790F00224513 /* AMIPerfTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfTabVC.h; sourceTree = "<group>"; };
 		4F8251221B25790F00224513 /* AMIPerfTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfTabVC.m; sourceTree = "<group>"; };
 		4F8251231B25790F00224513 /* AMIPerfTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMIPerfTabVC.xib; sourceTree = "<group>"; };
@@ -1099,6 +1106,7 @@
 				4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */,
 				4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */,
 				4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */,
+				4F7E661B1BE1E297006606D0 /* TL_TCPSyphonSDK.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
@@ -1643,6 +1651,7 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
+				4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2D47C87F1BD602BA00575B6E /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
@@ -1668,6 +1677,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F7E661A1BE1E297006606D0 /* TL_TCPSyphonSDK.framework */,
 				4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */,
 				4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */,
 				4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */,

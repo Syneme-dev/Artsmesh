@@ -1127,11 +1127,13 @@
     //Reset Settings Tab and store default values
     [self loadSettingsValues];
     
+    [self.videoDevicePopupView selectItemAtIndex:0];
     [self.videoInputSizePopupView selectItemAtIndex:0];
     [self.videoOutputSizePopupView selectItemAtIndex:0];
     [self.videoFrameRatePopupView selectItemAtIndex:2];
     [self.videoFormatPopupView selectItemAtIndex:0];
     
+    [self.audioDevicePopupView selectItemAtIndex:0];
     [self.audioFormatPopupView selectItemAtIndex:1];
     [self.audioSampleRatePopupView selectItemAtIndex:1];
     [self.audioBitRatePopupView selectItemAtIndex:5];
@@ -1243,8 +1245,9 @@
     NSData *data = [outputFile availableData];
     
     if([data length]) {
-        [videoDevices removeAllObjects];
-        [audioDevices removeAllObjects];
+        NSLog(@"oh yah!");
+        NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
+        NSMutableArray *tempAudioDevices = [[NSMutableArray alloc] init];
         
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"Here: %@", temp);
@@ -1263,13 +1266,13 @@
                     //Handle the video device string
                     NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
                     
-                    [videoDevices addObject:deviceString];
+                    [tempVidDevices addObject:deviceString];
                     
                 } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
                     //Handle the audio device string
                     NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
                     
-                    [audioDevices addObject:deviceString];
+                    [tempAudioDevices addObject:deviceString];
                 }
                 
                 //Find video device line
@@ -1285,16 +1288,24 @@
             }
         }
         
-        NSArray *videoDevicesToInsert = [videoDevices copy];
-        NSArray *audioDevicesToInsert = [audioDevices copy];
+        if ([tempVidDevices count] > 0) {
+            NSArray *videoDevicesToInsert = [tempVidDevices copy];
         
-        [self.videoDevicePopupView removeAllItems];
-        [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
-        [self.audioDevicePopupView removeAllItems];
-        [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
+            [self.videoDevicePopupView removeAllItems];
+            [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
+            
+            [self.videoDevicePopupView selectItemAtIndex:0];
+        }
         
-        [self.videoDevicePopupView selectItemAtIndex:0];
-        [self.audioDevicePopupView selectItemAtIndex:0];
+        if ([tempAudioDevices count] > 0) {
+            NSArray *audioDevicesToInsert = [tempAudioDevices copy];
+            
+            [self.audioDevicePopupView removeAllItems];
+            [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
+            
+            [self.audioDevicePopupView selectItemAtIndex:0];
+        }
+        
         
         [outputFile waitForDataInBackgroundAndNotify];
     }

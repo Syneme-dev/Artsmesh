@@ -982,6 +982,7 @@
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -f avfoundation -list_devices true -i \"\"",
                                 launchPath];
+    NSLog(@"Launching task: %@", command);
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
     _ffmpegTask.arguments = @[@"-c", [command copy]];
@@ -1245,12 +1246,12 @@
     NSData *data = [outputFile availableData];
     
     if([data length]) {
-        NSLog(@"oh yah!");
         NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
         NSMutableArray *tempAudioDevices = [[NSMutableArray alloc] init];
         
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"Here: %@", temp);
+        NSLog(@"ffmpeg device data returned: %@", temp);
         
         NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[.\\] "

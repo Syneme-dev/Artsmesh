@@ -61,11 +61,12 @@
     AMEventsManagerViewController *eventsManagerVC;
     
     // Settings Tab Initial Variables
-    NSArray *videoDevices;
+    NSMutableArray *videoDevices;
     NSArray *videoFrameRates;
     NSArray *videoInputSizes;
     NSArray *videoOutputSizes;
     NSArray *videoFormats;
+    NSMutableArray *audioDevices;
     NSArray *audioFormats;
     NSArray *audioBitRates;
     NSArray *audioSampleRates;
@@ -81,6 +82,7 @@
     NSString *audSampleRatePref;
     NSString *audBitRatePref;
     NSString *baseUrlPref;
+    
     
     NSTask *_ffmpegTask;
 }
@@ -1121,6 +1123,7 @@
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
 }
 -(void)resetSettingsTab {
+    
     //Reset Settings Tab and store default values
     [self loadSettingsValues];
     
@@ -1144,6 +1147,9 @@
     [self.videoInputSizePopupView setNeedsDisplay:true];
 }
 -(void)setupSettingsTab {
+    videoDevices = [[NSMutableArray alloc] init];
+    audioDevices = [[NSMutableArray alloc] init];
+    
     // Configure Settings Tab Options
     [self updateSettingsVars];
     [self loadSettingsValues];
@@ -1230,26 +1236,40 @@
 
 - (void) gotDeviceList : (NSNotification*)notification
 {
+    //We have data from ffmpeg devices_list command
+    //Need to pull out the relevant devices & populate the dropdowns
     
     NSFileHandle *outputFile = (NSFileHandle *) [notification object];
     NSData *data = [outputFile availableData];
     
     if([data length]) {
+        [videoDevices removeAllObjects];
+        [audioDevices removeAllObjects];
+        
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"Here: %@", temp);
         
         NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[.\\] "
+                                                                                        options:NSRegularExpressionCaseInsensitive error:nil];
         BOOL isVideoDeviceLine = NO;
         BOOL isAudioDeviceLine = NO;
         
         for (NSString *line in brokenByLines) {
             
             if ([line rangeOfString:@"[AVFoundation input device"].location != NSNotFound) {
+                NSString *modifiedString = [regex stringByReplacingMatchesInString:line options:0 range:NSMakeRange(0, [line length]) withTemplate:@"||"];
                 if(isVideoDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
                     //Handle the video device string
-                    NSLog(@"video device line: %@", line);
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [videoDevices addObject:deviceString];
+                    
                 } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
-                    NSLog(@"audio deviec line: %@", line);
+                    //Handle the audio device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [audioDevices addObject:deviceString];
                 }
                 
                 //Find video device line
@@ -1264,6 +1284,17 @@
                 }
             }
         }
+        
+        NSArray *videoDevicesToInsert = [videoDevices copy];
+        NSArray *audioDevicesToInsert = [audioDevices copy];
+        
+        [self.videoDevicePopupView removeAllItems];
+        [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
+        [self.audioDevicePopupView removeAllItems];
+        [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
+        
+        [self.videoDevicePopupView selectItemAtIndex:0];
+        [self.audioDevicePopupView selectItemAtIndex:0];
         
         [outputFile waitForDataInBackgroundAndNotify];
     }

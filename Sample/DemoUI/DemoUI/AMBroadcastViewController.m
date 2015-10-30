@@ -1236,8 +1236,35 @@
     
     if([data length]) {
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"Here: %@", temp);
-    
+        //NSLog(@"Here: %@", temp);
+        
+        NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
+        BOOL isVideoDeviceLine = NO;
+        BOOL isAudioDeviceLine = NO;
+        
+        for (NSString *line in brokenByLines) {
+            
+            if ([line rangeOfString:@"[AVFoundation input device"].location != NSNotFound) {
+                if(isVideoDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the video device string
+                    NSLog(@"video device line: %@", line);
+                } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    NSLog(@"audio deviec line: %@", line);
+                }
+                
+                //Find video device line
+                if ([line rangeOfString:@"video devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = YES;
+                    isAudioDeviceLine = NO;
+                }
+                //Find audio device line
+                if ([line rangeOfString:@"audio devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = NO;
+                    isAudioDeviceLine = YES;
+                }
+            }
+        }
+        
         [outputFile waitForDataInBackgroundAndNotify];
     }
 }

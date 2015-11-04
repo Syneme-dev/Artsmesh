@@ -141,6 +141,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleAccountChanged:) name:AM_GOOGLE_ACCOUNT_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
+     NSWindowDidResignKeyNotification object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -728,6 +730,15 @@
 
 
 /*** Notifications **/
+- (void)popUpResignKeyWindow:(NSNotification *)notification {
+    
+    //Grab currently selected device from video input list & store
+    vidSelectedDeviceIndexPref = (int) self.videoDevicePopupView.indexOfSelectedItem;
+    
+    //Grab currently selected device from video input list & store
+    audSelectedDeviceIndexPref = (int) self.audioDevicePopupView.indexOfSelectedItem;
+}
+                                                                               
 - (void)googleAccountChanged:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[GTMOAuth2Authentication class]]){
         // User just signed in, let's handle business

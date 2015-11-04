@@ -1010,7 +1010,10 @@
     
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r 30 -i \"0:0\" -s 1280x720 -vcodec libx264 -preset fast -pix_fmt uyvy422 -s 1280x720 -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"0:0\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                vidFrameRatePref,
+                                videoInputSizes,
+                                vidOutSizePref,
                                 launchPath,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);

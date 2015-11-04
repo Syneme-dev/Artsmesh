@@ -83,6 +83,8 @@
     NSString *audBitRatePref;
     NSString *baseUrlPref;
     
+    int vidSelectedDeviceIndexPref;
+    int audSelectedDeviceIndexPref;
     
     NSTask *_ffmpegTask;
 }
@@ -982,7 +984,6 @@
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -f avfoundation -list_devices true -i \"\"",
                                 launchPath];
-    NSLog(@"Launching task: %@", command);
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
     _ffmpegTask.arguments = @[@"-c", [command copy]];
@@ -1010,11 +1011,13 @@
     
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"0:0\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
-                                vidFrameRatePref,
-                                videoInputSizes,
-                                vidOutSizePref,
+                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
                                 launchPath,
+                                vidFrameRatePref,
+                                vidSelectedDeviceIndexPref,
+                                audSelectedDeviceIndexPref,
+                                vidOutSizePref,
+                                vidOutSizePref,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);
     _ffmpegTask = [[NSTask alloc] init];
@@ -1254,7 +1257,7 @@
         
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"Here: %@", temp);
-        NSLog(@"ffmpeg device data returned: %@", temp);
+        //NSLog(@"ffmpeg device data returned: %@", temp);
         
         NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[.\\] "
@@ -1298,7 +1301,8 @@
             [self.videoDevicePopupView removeAllItems];
             [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
             
-            [self.videoDevicePopupView selectItemAtIndex:0];
+            vidSelectedDeviceIndexPref = 0;
+            [self.videoDevicePopupView selectItemAtIndex:vidSelectedDeviceIndexPref];
         }
         
         if ([tempAudioDevices count] > 0) {
@@ -1307,7 +1311,8 @@
             [self.audioDevicePopupView removeAllItems];
             [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
             
-            [self.audioDevicePopupView selectItemAtIndex:0];
+            audSelectedDeviceIndexPref = 0;
+            [self.audioDevicePopupView selectItemAtIndex:audSelectedDeviceIndexPref];
         }
         
         

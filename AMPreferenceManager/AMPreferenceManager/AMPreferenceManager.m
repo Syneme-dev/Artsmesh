@@ -124,7 +124,7 @@
              Preference_ffmpeg_Audio_Format, Preference_Key_ffmpeg_Audio_Format,
              Preference_ffmpeg_Audio_Sample_Rate, Preference_Key_ffmpeg_Audio_Sample_Rate,
              Preference_ffmpeg_Audio_Bit_Rate, Preference_Key_ffmpeg_Audio_Bit_Rate,
-             Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url,
+             Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url, Preference_ffmpeg_Cur_Stream, Preference_Key_ffmpeg_Cur_Stream,
              nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
 

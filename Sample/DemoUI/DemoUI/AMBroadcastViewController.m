@@ -1022,13 +1022,14 @@
     
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 vidFrameRatePref,
                                 vidSelectedDeviceIndexPref,
                                 audSelectedDeviceIndexPref,
                                 vidOutSizePref,
                                 vidOutSizePref,
+                                baseUrlPref,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);
     _ffmpegTask = [[NSTask alloc] init];
@@ -1098,7 +1099,6 @@
                 needsToConfirmGoLive = FALSE;
             }
         }
-        NSLog(@"go live title is: %@", self.eventGoLiveButton.buttonVC.buttonTitleTextField.stringValue);
         
     } else if (self.eventCreateButton.triggerPressed == YES) {
         // CREATE/EDIT button pressed

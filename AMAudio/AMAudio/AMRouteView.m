@@ -172,6 +172,62 @@ static CGFloat kCloseButtonRadius = 6.0;
     
     for (AMChannel *channel in self.allChannels)
         [self drawChannel:channel WithCenterAt:[self centerOfChannel:channel]];
+    
+    [self drawTip];
+}
+
+- (void) drawChannel : (AMChannelType) type
+        withPosition : (NSPoint) p
+{
+    NSColor *color = nil;
+    if (type == AMSourceChannel)
+        color = _sourceChannelColor;
+    else
+        color = _destinationChannelColor;
+    
+    // draw outer circle
+    NSBezierPath *outerCircle = [NSBezierPath bezierPath];
+    [outerCircle appendBezierPathWithArcWithCenter:p
+                                            radius:kChannelRadius
+                                        startAngle:0
+                                          endAngle:360];
+    [_backgroundColor setFill];
+    [outerCircle fill];
+    outerCircle.lineWidth = 2.0;
+    [color setStroke];
+    [outerCircle stroke];
+    
+    // draw inner circle
+    NSBezierPath *innerCircle = [NSBezierPath bezierPath];
+    [innerCircle appendBezierPathWithArcWithCenter:p
+                                            radius:kChannelRadius - 4.0
+                                        startAngle:0
+                                          endAngle:360];
+    innerCircle.lineWidth = 1.0;
+    [innerCircle stroke];
+}
+
+- (void) drawTip
+{
+    NSPoint ptSource = NSMakePoint(20, 20);
+    [self drawChannel:AMSourceChannel withPosition:ptSource];
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : _deviceLableColor,
+                                NSFontAttributeName : [NSFont fontWithName:@"FoundryMonoline"
+                                                                      size:13.0]};
+    NSAttributedString *sourceLabel = [[NSAttributedString alloc] initWithString:@"SEND"
+                                                                attributes:attributes];
+    NSPoint ptLabelSource = NSMakePoint(38, 12);
+    [sourceLabel drawAtPoint:(ptLabelSource)];
+    
+    NSPoint ptDest   = NSMakePoint(120, 20);
+    [self drawChannel:AMDestinationChannel withPosition:ptDest];
+
+   
+    NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"RECEIVE "
+                                                                attributes:attributes];
+    NSPoint ptLabelDestination = NSMakePoint(138, 12);
+    [destLabel drawAtPoint:(ptLabelDestination)];
+
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -455,6 +511,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSPoint)centerOfChannel:(AMChannel *)channel
 {
     CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfChannels;
+    radian = (M_PI - radian) < -2.0*M_PI ?  (3.0*M_PI - radian) : (M_PI - radian);
     return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
 }
@@ -513,6 +570,11 @@ static CGFloat kCloseButtonRadius = 6.0;
         NSInteger endIndex = startIndex + indexRange.length;
         CGFloat startAngle = (startIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
         CGFloat endAngle = (endIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
+        // draw lable
+        
+        CGFloat temp = startAngle ;
+        startAngle = M_PI - endAngle;
+        endAngle   = M_PI - temp;
         
         // draw cd line
         NSBezierPath *cdLine = [NSBezierPath bezierPath];
@@ -528,7 +590,9 @@ static CGFloat kCloseButtonRadius = 6.0;
         [_deviceCircleColor set];
         [cdLine stroke];
         
-        // draw lable
+        
+        
+
         CGFloat arcLength = radius * (endAngle - startAngle);
         // 18: |- 6 - devcie lable - 6 - close button - 6 - |
         CGFloat closeButtonRadius = (device.removable) ? kCloseButtonRadius : 0.0;
@@ -688,10 +752,10 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     NSPoint p = [self convertPoint:mouseUpEvent.locationInWindow
                           fromView:nil];
-    CGFloat r = hypot(p.x - _center.x, p.y - _center.y);
+    CGFloat r = hypot(-p.x + _center.x, p.y - _center.y);
     if (fabs(r - _radius) >= kChannelRadius)
         return nil;
-    CGFloat theta = atan2(p.y - _center.y, p.x - _center.x);
+    CGFloat theta = atan2(p.y - _center.y, -p.x + _center.x);
     if (theta < 0)
         theta += 2 * M_PI;
     int channelIndex = (int)(theta * kNumberOfChannels / (2.0 * M_PI) + 0.5) % kNumberOfChannels;

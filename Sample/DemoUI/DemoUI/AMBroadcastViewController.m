@@ -1040,6 +1040,25 @@
     sleep(2);
     
     [_ffmpegTask launch];
+    [self.eventGoLiveButton setSuccessStateWithText:@"SENDING" andResetText:@"STOP"];
+}
+
+- (void)endLive {
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"killall ffmpeg"];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    [self.eventGoLiveButton setSuccessStateWithText:@"STOPPED" andResetText:@"GO LIVE"];
 }
 
 // Mouse Events (mainly for buttons)
@@ -1060,14 +1079,26 @@
         }
     } else if (self.eventGoLiveButton.triggerPressed == YES) {
         // Go Live event button pressed
-        if (self.selectedBroadcast != nil) {
+        NSString *curBtnTitle = self.eventGoLiveButton.buttonVC.buttonTitleTextField.stringValue;
+        
+        if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"GO LIVE"] || [curBtnTitle isEqualTo:@"CONFIRM"])) {
             if (needsToConfirmGoLive == FALSE) {
+                needsToConfirmGoLive = TRUE;
                 [self goLive];
             } else {
                 [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM"];
                 needsToConfirmGoLive = FALSE;
             }
+        } else if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"STOP"] || [curBtnTitle isEqualTo:@"CONFIRM STOP"])) {
+            if (needsToConfirmGoLive == FALSE) {
+                needsToConfirmGoLive = TRUE;
+                [self endLive];
+            } else {
+                [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM STOP"];
+                needsToConfirmGoLive = FALSE;
+            }
         }
+        NSLog(@"go live title is: %@", self.eventGoLiveButton.buttonVC.buttonTitleTextField.stringValue);
         
     } else if (self.eventCreateButton.triggerPressed == YES) {
         // CREATE/EDIT button pressed

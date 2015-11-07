@@ -182,6 +182,8 @@
 - (void)windowWillClose:(NSNotification *)notification {
     
     [self archeivePanelLocation];
+    
+    [self closeJackClient];
 }
 
 
@@ -953,8 +955,8 @@
 
 - (IBAction)jackServerToggled:(NSButton *)sender
 {
-    AMAudio* audioModule = [AMAudio sharedInstance];
-    AMJackClient* client = [audioModule audioJackClient];
+    AMAudio*        audioModule = [AMAudio sharedInstance];
+    AMJackClient*   client      = [audioModule audioJackClient];
     
     if(![audioModule isJackStarted]){
         [self.jackServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
@@ -965,11 +967,20 @@
         
         [client openJackClient];
     }else{
+        [self closeJackClient];
+    }
+}
+
+- (void) closeJackClient
+{
+    AMAudio*        audioModule = [AMAudio sharedInstance];
+    AMJackClient*   client      = [audioModule audioJackClient];
+  
+    if([audioModule isJackStarted]){
         [client closeJackClient];
         [audioModule stopJack];
     }
 }
-
 
 - (IBAction)oscServerToggled:(id)sender
 {

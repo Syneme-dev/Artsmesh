@@ -1223,7 +1223,7 @@
         [self.videoFrameRatePopupView selectItemAtIndex:2]; }
     
     if ( [vidFormatPref length] != 0 ) {
-        [self.videoFrameRatePopupView selectItemWithTitle:vidFormatPref];
+        [self.videoFormatPopupView selectItemWithTitle:vidFormatPref];
     } else {
         [self.videoFormatPopupView selectItemAtIndex:0]; }
     

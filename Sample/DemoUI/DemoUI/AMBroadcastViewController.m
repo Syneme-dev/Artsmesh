@@ -734,9 +734,11 @@
     
     //Grab currently selected device from video input list & store
     vidSelectedDeviceIndexPref = (int) self.videoDevicePopupView.indexOfSelectedItem;
+    [[AMPreferenceManager standardUserDefaults] setObject:[self.videoDevicePopupView stringValue] forKey:Preference_Key_ffmpeg_Video_In_Device];
     
     //Grab currently selected device from video input list & store
     audSelectedDeviceIndexPref = (int) self.audioDevicePopupView.indexOfSelectedItem;
+    [[AMPreferenceManager standardUserDefaults] setObject:[self.audioDevicePopupView stringValue] forKey:Preference_Key_ffmpeg_Audio_In_Device];
 }
                                                                                
 - (void)googleAccountChanged:(NSNotification *)notification {
@@ -1343,8 +1345,11 @@
             [self.videoDevicePopupView removeAllItems];
             [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
             
+            /**
             vidSelectedDeviceIndexPref = 0;
             [self.videoDevicePopupView selectItemAtIndex:vidSelectedDeviceIndexPref];
+            **/
+            [self selectDevice:self.videoDevicePopupView :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Device]];
         }
         
         if ([tempAudioDevices count] > 0) {
@@ -1353,13 +1358,18 @@
             [self.audioDevicePopupView removeAllItems];
             [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
             
-            audSelectedDeviceIndexPref = 0;
-            [self.audioDevicePopupView selectItemAtIndex:audSelectedDeviceIndexPref];
+            [self selectDevice:self.audioDevicePopupView :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_In_Device]];
         }
         
         
         [outputFile waitForDataInBackgroundAndNotify];
     }
+}
+
+-(void) selectDevice :(AMPopUpView *)theDropDown :(NSString *)deviceName {
+    [theDropDown selectItemAtIndex:0];
+    
+    [theDropDown selectItemWithTitle:deviceName];
 }
 
 

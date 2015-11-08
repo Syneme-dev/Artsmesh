@@ -862,6 +862,11 @@
                                                [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
                                                [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
                                                [self.streamNameTextField setStringValue:foundStream.cdn.ingestionInfo.streamName];
+                                               NSLog(@"found stream name: %@", foundStream.cdn.ingestionInfo.streamName);
+                                               NSLog(@"cur ffmpeg streaming name: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]);
+                                               if ([foundStream.cdn.ingestionInfo.streamName isEqualToString:[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]]) {
+                                                   [self.eventGoLiveButton setActiveStateWithText:@"STOP"];
+                                               }
                                                [self.streamFormatTextField setStringValue:foundStream.cdn.format];
                                            }
                                        } else {
@@ -975,16 +980,6 @@
 -(void)onChecked:(AMCheckBoxView*)sender {
 }
 
--(void)stopLive {
-    if (_ffmpegTask) {
-        [_ffmpegTask terminate];
-        _ffmpegTask = nil;
-    }
-    
-    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"ffmpeg", nil]];
-}
-
 -(void)populateDevicesList {
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSPipe *pipe = [NSPipe pipe];
@@ -1016,6 +1011,8 @@
 }
 
 -(void)goLive {
+    [[AMPreferenceManager standardUserDefaults] setObject:self.streamNameTextField.stringValue forKey:Preference_Key_ffmpeg_Cur_Stream];
+    
     //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSBundle* mainBundle = [NSBundle mainBundle];
     
@@ -1047,6 +1044,8 @@
 }
 
 - (void)endLive {
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_Stream];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"killall ffmpeg"];

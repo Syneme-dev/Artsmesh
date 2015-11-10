@@ -107,6 +107,7 @@
     
     [self.settingsCancelBtn setButtonTitle:@"CANCEL"];
     [self.settingsSaveBtn setButtonTitle:@"SAVE"];
+    [self.settingsRefreshBtn setButtonTitle:@"REFRESH"];
     
     [self updateAMStandardButtons];
     
@@ -395,9 +396,7 @@
     
     * Currently only 'snippet' and 'status' are editable
     * Look into CDN part to see if this is necessary
-     
-    * Need to reset 'CONFIRM' button after Event successfully edited.
-     
+          
     ********************/
     
     // Create a new broadcast snippet
@@ -823,6 +822,7 @@
     
     [self.settingsSaveBtn setActiveStateWithText:@"SAVE"];
     [self.settingsCancelBtn setActiveStateWithText:@"CANCEL"];
+    [self.settingsRefreshBtn setActiveStateWithText:@"REFRESH"];
 }
 
 - (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
@@ -1124,6 +1124,8 @@
     } else if (self.settingsSaveBtn.triggerPressed == YES) {
         //SETTINGS SAVE BUTTON PRESSED
         [self saveSettings];
+    } else if (self.settingsRefreshBtn.triggerPressed == YES) {
+        //SETTINGS REFRESH BUTTON PRESSED
     }
     
 }

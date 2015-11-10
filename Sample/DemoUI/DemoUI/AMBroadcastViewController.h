@@ -99,6 +99,7 @@
 
 @property (strong) IBOutlet AMStandardButton *settingsCancelBtn;
 @property (strong) IBOutlet AMStandardButton *settingsSaveBtn;
+@property (strong) IBOutlet AMStandardButton *settingsRefreshBtn;
 
 
 

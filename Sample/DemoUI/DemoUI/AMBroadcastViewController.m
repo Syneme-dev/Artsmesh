@@ -1126,6 +1126,7 @@
         [self saveSettings];
     } else if (self.settingsRefreshBtn.triggerPressed == YES) {
         //SETTINGS REFRESH BUTTON PRESSED
+        [self refreshSettings];
     }
     
 }
@@ -1286,6 +1287,11 @@
      forKey:Preference_Key_ffmpeg_Base_Url];
     
     [self updateSettingsVars];
+}
+
+- (void) refreshSettings {
+    // Refresh Devices dropdowns
+    [self populateDevicesList];
 }
 
 - (void) gotDeviceList : (NSNotification*)notification

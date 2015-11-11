@@ -61,14 +61,30 @@
     AMEventsManagerViewController *eventsManagerVC;
     
     // Settings Tab Initial Variables
-    NSArray *videoDevices;
+    NSMutableArray *videoDevices;
     NSArray *videoFrameRates;
     NSArray *videoInputSizes;
     NSArray *videoOutputSizes;
     NSArray *videoFormats;
+    NSMutableArray *audioDevices;
     NSArray *audioFormats;
     NSArray *audioBitRates;
     NSArray *audioSampleRates;
+    
+    NSString *vidInSizePref;
+    NSString *vidOutSizePref;
+    NSString *vidDevicePref;
+    NSString *vidFormatPref;
+    NSString *vidFrameRatePref;
+    NSString *vidBitRatePref;
+    NSString *audDevicePref;
+    NSString *audFormatPref;
+    NSString *audSampleRatePref;
+    NSString *audBitRatePref;
+    NSString *baseUrlPref;
+    
+    int vidSelectedDeviceIndexPref;
+    int audSelectedDeviceIndexPref;
     
     NSTask *_ffmpegTask;
 }
@@ -88,6 +104,11 @@
     [self.eventDeleteButton setButtonTitle:@"DELETE"];
     [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
     [self.eventCreateButton setButtonTitle:@"CREATE"];
+    
+    [self.settingsCancelBtn setButtonTitle:@"CANCEL"];
+    [self.settingsSaveBtn setButtonTitle:@"SAVE"];
+    [self.settingsRefreshBtn setButtonTitle:@"REFRESH"];
+    
     [self updateAMStandardButtons];
     
     //Set up Events Manager SubView and View Controller
@@ -121,6 +142,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:AM_LIVE_GROUP_CHANDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBoxChanged:) name:AM_CHECKBOX_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(googleAccountChanged:) name:AM_GOOGLE_ACCOUNT_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
+     NSWindowDidResignKeyNotification object:nil];
     
     [self getExistingYouTubeLiveEvents];
     [self updateUI];
@@ -131,6 +154,8 @@
     
     [self.youtubeBtn performClick:nil];
     
+    
+    // Configure Settings Stuff
     
     [self setupSettingsTab];
 }
@@ -371,9 +396,7 @@
     
     * Currently only 'snippet' and 'status' are editable
     * Look into CDN part to see if this is necessary
-     
-    * Need to reset 'CONFIRM' button after Event successfully edited.
-     
+          
     ********************/
     
     // Create a new broadcast snippet
@@ -706,6 +729,17 @@
 
 
 /*** Notifications **/
+- (void)popUpResignKeyWindow:(NSNotification *)notification {
+    
+    //Grab currently selected device from video input list & store
+    vidSelectedDeviceIndexPref = (int) self.videoDevicePopupView.indexOfSelectedItem;
+    [[AMPreferenceManager standardUserDefaults] setObject:[self.videoDevicePopupView stringValue] forKey:Preference_Key_ffmpeg_Video_In_Device];
+    
+    //Grab currently selected device from video input list & store
+    audSelectedDeviceIndexPref = (int) self.audioDevicePopupView.indexOfSelectedItem;
+    [[AMPreferenceManager standardUserDefaults] setObject:[self.audioDevicePopupView stringValue] forKey:Preference_Key_ffmpeg_Audio_In_Device];
+}
+                                                                               
 - (void)googleAccountChanged:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[GTMOAuth2Authentication class]]){
         // User just signed in, let's handle business
@@ -785,6 +819,10 @@
         [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
         [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
     }
+    
+    [self.settingsSaveBtn setActiveStateWithText:@"SAVE"];
+    [self.settingsCancelBtn setActiveStateWithText:@"CANCEL"];
+    [self.settingsRefreshBtn setActiveStateWithText:@"REFRESH"];
 }
 
 - (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
@@ -824,6 +862,11 @@
                                                [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
                                                [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
                                                [self.streamNameTextField setStringValue:foundStream.cdn.ingestionInfo.streamName];
+                                               NSLog(@"found stream name: %@", foundStream.cdn.ingestionInfo.streamName);
+                                               NSLog(@"cur ffmpeg streaming name: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]);
+                                               if ([foundStream.cdn.ingestionInfo.streamName isEqualToString:[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]]) {
+                                                   [self.eventGoLiveButton setActiveStateWithText:@"STOP"];
+                                               }
                                                [self.streamFormatTextField setStringValue:foundStream.cdn.format];
                                            }
                                        } else {
@@ -865,6 +908,7 @@
     //[AMN_NOTIFICATION_MANAGER unlistenMessageType:self];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 
@@ -936,17 +980,39 @@
 -(void)onChecked:(AMCheckBoxView*)sender {
 }
 
--(void)stopLive {
-    if (_ffmpegTask) {
-        [_ffmpegTask terminate];
-        _ffmpegTask = nil;
-    }
+-(void)populateDevicesList {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSPipe *pipe = [NSPipe pipe];
+    NSFileHandle *file = pipe.fileHandleForReading;
     
-    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"ffmpeg", nil]];
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -f avfoundation -list_devices true -i \"\"",
+                                launchPath];
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    
+    [_ffmpegTask setStandardOutput:pipe];
+    [_ffmpegTask setStandardError: [_ffmpegTask standardOutput]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotDeviceList:) name:NSFileHandleDataAvailableNotification object:file];
+    
+    
+    [_ffmpegTask launch];
+
+    [file waitForDataInBackgroundAndNotify];
 }
 
 -(void)goLive {
+    [[AMPreferenceManager standardUserDefaults] setObject:self.streamNameTextField.stringValue forKey:Preference_Key_ffmpeg_Cur_Stream];
+    
     //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
     NSBundle* mainBundle = [NSBundle mainBundle];
     
@@ -955,8 +1021,14 @@
     
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r 30 -i \"0:0\" -s 1280x720 -vcodec libx264 -preset fast -pix_fmt uyvy422 -s 1280x720 -threads 0 -f flv \"rtmp://a.rtmp.youtube.com/live2/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
+                                vidFrameRatePref,
+                                vidSelectedDeviceIndexPref,
+                                audSelectedDeviceIndexPref,
+                                vidOutSizePref,
+                                vidOutSizePref,
+                                baseUrlPref,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);
     _ffmpegTask = [[NSTask alloc] init];
@@ -968,13 +1040,33 @@
     sleep(2);
     
     [_ffmpegTask launch];
+    [self.eventGoLiveButton setSuccessStateWithText:@"SENDING" andResetText:@"STOP"];
+}
+
+- (void)endLive {
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_Stream];
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"killall ffmpeg"];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    [self.eventGoLiveButton setSuccessStateWithText:@"STOPPED" andResetText:@"GO LIVE"];
 }
 
 // Mouse Events (mainly for buttons)
 - (void)mouseDown:(NSEvent *)theEvent {
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    // TO-DO: Add confirm button state for actions
     
     if (self.eventDeleteButton.triggerPressed == YES) {
         // Delete event button pressed
@@ -989,11 +1081,22 @@
         }
     } else if (self.eventGoLiveButton.triggerPressed == YES) {
         // Go Live event button pressed
-        if (self.selectedBroadcast != nil) {
+        NSString *curBtnTitle = self.eventGoLiveButton.buttonVC.buttonTitleTextField.stringValue;
+        
+        if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"GO LIVE"] || [curBtnTitle isEqualTo:@"CONFIRM"])) {
             if (needsToConfirmGoLive == FALSE) {
+                needsToConfirmGoLive = TRUE;
                 [self goLive];
             } else {
                 [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM"];
+                needsToConfirmGoLive = FALSE;
+            }
+        } else if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"STOP"] || [curBtnTitle isEqualTo:@"CONFIRM STOP"])) {
+            if (needsToConfirmGoLive == FALSE) {
+                needsToConfirmGoLive = TRUE;
+                [self endLive];
+            } else {
+                [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM STOP"];
                 needsToConfirmGoLive = FALSE;
             }
         }
@@ -1015,6 +1118,15 @@
                 needsToConfirmCreate = FALSE;
             }
         }
+    } else if (self.settingsCancelBtn.triggerPressed == YES) {
+        //SETTINGS CANCEL BUTTON PRESSED
+        [self resetSettingsTab];
+    } else if (self.settingsSaveBtn.triggerPressed == YES) {
+        //SETTINGS SAVE BUTTON PRESSED
+        [self saveSettings];
+    } else if (self.settingsRefreshBtn.triggerPressed == YES) {
+        //SETTINGS REFRESH BUTTON PRESSED
+        [self refreshSettings];
     }
     
 }
@@ -1022,9 +1134,23 @@
 
 
 // Settings Tab Functions
--(void)setupSettingsTab {
-    // Configure Settings Tab Options
-    //[videoInputSizes initWithObjects:@"1280x720",@"1280x1080", nil];
+-(void)updateSettingsVars {
+    vidInSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size];
+    vidOutSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size];
+    vidFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format];
+    vidFrameRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate];
+    vidBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate];
+    
+    audFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
+    audSampleRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+    audBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+    
+    baseUrlPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url];
+}
+
+-(void)loadSettingsValues {
+    [self populateDevicesList];
+    
     videoInputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
     videoOutputSizes = [[NSArray alloc] initWithArray:videoInputSizes];
     videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
@@ -1033,28 +1159,224 @@
     audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", nil];
     audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", nil];
     
-    
+    [self.videoInputSizePopupView removeAllItems];
     [self.videoInputSizePopupView addItemsWithTitles:videoInputSizes];
+    [self.videoOutputSizePopupView removeAllItems];
     [self.videoOutputSizePopupView addItemsWithTitles:videoOutputSizes];
+    [self.videoFrameRatePopupView removeAllItems];
     [self.videoFrameRatePopupView addItemsWithTitles:videoFrameRates];
+    [self.videoFormatPopupView removeAllItems];
     [self.videoFormatPopupView addItemsWithTitles:videoFormats];
     
+    [self.audioFormatPopupView removeAllItems];
     [self.audioFormatPopupView addItemsWithTitles:audioFormats];
+    [self.audioSampleRatePopupView removeAllItems];
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
+    [self.audioBitRatePopupView removeAllItems];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
+}
+-(void)resetSettingsTab {
     
+    //Reset Settings Tab and store default values
+    [self loadSettingsValues];
+    
+    [self.videoDevicePopupView selectItemAtIndex:0];
     [self.videoInputSizePopupView selectItemAtIndex:0];
     [self.videoOutputSizePopupView selectItemAtIndex:0];
     [self.videoFrameRatePopupView selectItemAtIndex:2];
     [self.videoFormatPopupView selectItemAtIndex:0];
     
+    [self.audioDevicePopupView selectItemAtIndex:0];
     [self.audioFormatPopupView selectItemAtIndex:1];
     [self.audioSampleRatePopupView selectItemAtIndex:1];
     [self.audioBitRatePopupView selectItemAtIndex:5];
     
+    [self.videoInputCustomCheckBox setChecked:NO];
+    [self.videoOutputCustomCheckBox setChecked:NO];
+    
+    [self.videoBitRateTextField setStringValue:@"4000"];
+    [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
+    
+    [self saveSettings];
+    
+    [self.videoInputSizePopupView setNeedsDisplay:true];
+}
+-(void)setupSettingsTab {
+    videoDevices = [[NSMutableArray alloc] init];
+    audioDevices = [[NSMutableArray alloc] init];
+    
+    // Configure Settings Tab Options
+    [self updateSettingsVars];
+    [self loadSettingsValues];
+    
+    if( [vidInSizePref length] != 0 ) {
+        [self.videoInputSizePopupView selectItemWithTitle:vidInSizePref];
+    } else {
+        [self.videoInputSizePopupView selectItemAtIndex:0]; }
+    
+    if ( [vidOutSizePref length] != 0 ) {
+        [self.videoOutputSizePopupView selectItemWithTitle:vidOutSizePref];
+    } else {
+        [self.videoOutputSizePopupView selectItemAtIndex:0]; }
+    
+    if ( [vidFrameRatePref length] != 0 ) {
+        [self.videoFrameRatePopupView selectItemWithTitle:vidFrameRatePref];
+    } else {
+        [self.videoFrameRatePopupView selectItemAtIndex:2]; }
+    
+    if ( [vidFormatPref length] != 0 ) {
+        [self.videoFormatPopupView selectItemWithTitle:vidFormatPref];
+    } else {
+        [self.videoFormatPopupView selectItemAtIndex:0]; }
+    
+    if ( [audFormatPref length] != 0 ) {
+        [self.audioFormatPopupView selectItemWithTitle:audFormatPref];
+    } else {
+        [self.audioFormatPopupView selectItemAtIndex:1]; }
+    
+    if ( [audSampleRatePref length] != 0 ) {
+        [self.audioSampleRatePopupView selectItemWithTitle:audSampleRatePref];
+    } else {
+        [self.audioSampleRatePopupView selectItemAtIndex:1]; }
+    
+    if ( [audBitRatePref length] != 0 ) {
+        [self.audioBitRatePopupView selectItemWithTitle:audBitRatePref];
+    } else {
+        [self.audioBitRatePopupView selectItemAtIndex:5]; }
+    
+    [self.videoInputCustomCheckBox setChecked:NO];
+    [self.videoOutputCustomCheckBox setChecked:NO];
+    
+    if ( [vidBitRatePref length] != 0 ) {
+        [self.videoBitRateTextField setStringValue:vidBitRatePref];
+    } else {
+        [self.videoBitRateTextField setStringValue:@"4000"]; }
+    
+    if ([baseUrlPref length] != 0) {
+        [self.baseUrlTextField setStringValue:baseUrlPref];
+    } else {
+        [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
+    }
     
     [self.videoInputSizePopupView setNeedsDisplay:true];
     
+}
+
+-(void)saveSettings {
+    // Save Video Settings
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoFrameRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Frame_Rate];
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.videoBitRateTextField.stringValue
+     forKey:Preference_Key_ffmpeg_Video_Bit_Rate];
+    
+    //Save Audio Settings
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Format];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioSampleRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.audioBitRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+    
+    
+    //Save Additional Details
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.baseUrlTextField.stringValue
+     forKey:Preference_Key_ffmpeg_Base_Url];
+    
+    [self updateSettingsVars];
+}
+
+- (void) refreshSettings {
+    // Refresh Devices dropdowns
+    [self populateDevicesList];
+}
+
+- (void) gotDeviceList : (NSNotification*)notification
+{
+    //We have data from ffmpeg devices_list command
+    //Need to pull out the relevant devices & populate the dropdowns
+    
+    NSFileHandle *outputFile = (NSFileHandle *) [notification object];
+    NSData *data = [outputFile availableData];
+    
+    if([data length]) {
+        NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
+        NSMutableArray *tempAudioDevices = [[NSMutableArray alloc] init];
+        
+        NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"Here: %@", temp);
+        //NSLog(@"ffmpeg device data returned: %@", temp);
+        
+        NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[.\\] "
+                                                                                        options:NSRegularExpressionCaseInsensitive error:nil];
+        BOOL isVideoDeviceLine = NO;
+        BOOL isAudioDeviceLine = NO;
+        
+        for (NSString *line in brokenByLines) {
+            
+            if ([line rangeOfString:@"[AVFoundation input device"].location != NSNotFound) {
+                NSString *modifiedString = [regex stringByReplacingMatchesInString:line options:0 range:NSMakeRange(0, [line length]) withTemplate:@"||"];
+                if(isVideoDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the video device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [tempVidDevices addObject:deviceString];
+                    
+                } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the audio device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [tempAudioDevices addObject:deviceString];
+                }
+                
+                //Find video device line
+                if ([line rangeOfString:@"video devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = YES;
+                    isAudioDeviceLine = NO;
+                }
+                //Find audio device line
+                if ([line rangeOfString:@"audio devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = NO;
+                    isAudioDeviceLine = YES;
+                }
+            }
+        }
+        
+        if ([tempVidDevices count] > 0) {
+            NSArray *videoDevicesToInsert = [tempVidDevices copy];
+        
+            [self.videoDevicePopupView removeAllItems];
+            [self.videoDevicePopupView addItemsWithTitles:videoDevicesToInsert];
+            
+            /**
+            vidSelectedDeviceIndexPref = 0;
+            [self.videoDevicePopupView selectItemAtIndex:vidSelectedDeviceIndexPref];
+            **/
+            [self selectDevice:self.videoDevicePopupView :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Device]];
+        }
+        
+        if ([tempAudioDevices count] > 0) {
+            NSArray *audioDevicesToInsert = [tempAudioDevices copy];
+            
+            [self.audioDevicePopupView removeAllItems];
+            [self.audioDevicePopupView addItemsWithTitles:audioDevicesToInsert];
+            
+            [self selectDevice:self.audioDevicePopupView :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_In_Device]];
+        }
+        
+        
+        [outputFile waitForDataInBackgroundAndNotify];
+    }
+}
+
+-(void) selectDevice :(AMPopUpView *)theDropDown :(NSString *)deviceName {
+    [theDropDown selectItemAtIndex:0];
+    
+    [theDropDown selectItemWithTitle:deviceName];
 }
 
 

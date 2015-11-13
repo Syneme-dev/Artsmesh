@@ -186,6 +186,8 @@
 		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
+		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
+		2DAB319D1BE856CB00C1BD5A /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
 		2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
@@ -412,7 +414,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
-				2D51DC671BD6074300333FD3 /* ffmpeg in Copy Files (7 items) */,
+				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,
 				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
 				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */,
 				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */,
@@ -791,7 +793,6 @@
 		2D4555A31B9B98CA00C6853B /* AMStandardButtonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardButtonViewController.h; sourceTree = "<group>"; };
 		2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardButtonViewController.m; sourceTree = "<group>"; };
 		2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMStandardButtonViewController.xib; sourceTree = "<group>"; };
-		2D47C87F1BD602BA00575B6E /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2D49102B1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveMapProgramPanelTextView.h; sourceTree = "<group>"; };
 		2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveMapProgramPanelTextView.m; sourceTree = "<group>"; };
 		2D6D76EF19C16B4400201106 /* AMWorldMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWorldMap.h; sourceTree = "<group>"; };
@@ -811,6 +812,7 @@
 		2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerViewController.xib; sourceTree = "<group>"; };
 		2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveEventCheckBoxView.h; sourceTree = "<group>"; };
 		2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveEventCheckBoxView.m; sourceTree = "<group>"; };
+		2DAB319B1BE8569C00C1BD5A /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
 		2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
@@ -1663,7 +1665,7 @@
 			children = (
 				4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
-				2D47C87F1BD602BA00575B6E /* ffmpeg */,
+				2DAB319B1BE8569C00C1BD5A /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
 				4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */,
 				4A5701541A11BAEA00BF801E /* OscGroupServer */,
@@ -2239,7 +2241,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */,
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
 				4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
@@ -2296,6 +2297,7 @@
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,
 				2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */,
 				AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */,
+				2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */,
 				4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */,
 				CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */,
 				AF8EC7C11985F8570019D650 /* VerticalControlBarView.xib in Resources */,

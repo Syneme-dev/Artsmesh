@@ -142,6 +142,33 @@
 #define Preference_iPerf_Tradeoff           @"Preference_iPerf_Tradeoff"
 #define Preference_iPerf_Dualtest           @"Preference_iPerf_Dualtest"
 
+///////////////////////// FFMPEG/Broadcast Settings /////////////////////////
+#define Preference_Key_ffmpeg_Video_In_Device @"Preference_Key_ffmpeg_Video_In_Device"
+#define Preference_Key_ffmpeg_Video_In_Size @"Preference_Key_ffmpeg_Video_In_Size"
+#define Preference_Key_ffmpeg_Video_Out_Size @"Preference_Key_ffmpeg_Video_Out_Size"
+#define Preference_Key_ffmpeg_Video_Format @"Preference_Key_ffmpeg_Video_Format"
+#define Preference_Key_ffmpeg_Video_Frame_Rate @"Preference_Key_ffmpeg_Video_Frame_Rate"
+#define Preference_Key_ffmpeg_Video_Bit_Rate @"Preference_Key_ffmpeg_Video_Bit_Rate"
+#define Preference_Key_ffmpeg_Audio_In_Device @"Preference_Key_ffmpeg_Audio_In_Device"
+#define Preference_Key_ffmpeg_Audio_Format @"Preference_Key_ffmpeg_Audio_Format"
+#define Preference_Key_ffmpeg_Audio_Sample_Rate @"Preference_Key_ffmpeg_Audio_Sample_Rate"
+#define Preference_Key_ffmpeg_Audio_Bit_Rate @"Preference_Key_ffmpeg_Audio_Bit_Rate"
+#define Preference_Key_ffmpeg_Base_Url @"Preference_Key_ffmpeg_Base_Url"
+#define Preference_Key_ffmpeg_Cur_Stream @"Preference_Key_ffmpeg_Cur_Stream"
+
+#define Preference_ffmpeg_Video_In_Device @"0"
+#define Preference_ffmpeg_Video_In_Size @"0"
+#define Preference_ffmpeg_Video_Out_Size @"0"
+#define Preference_ffmpeg_Video_Format @"0"
+#define Preference_ffmpeg_Video_Frame_Rate @"2"
+#define Preference_ffmpeg_Video_Bit_Rate @"4000"
+#define Preference_ffmpeg_Audio_In_Device @"0"
+#define Preference_ffmpeg_Audio_Format @"1"
+#define Preference_ffmpeg_Audio_Sample_Rate @"1"
+#define Preference_ffmpeg_Audio_Bit_Rate @"5"
+#define Preference_ffmpeg_Base_Url @"rtmp://a.rtmp.youtube.com/live2"
+#define Preference_ffmpeg_Cur_Stream @""
+
 #import <Foundation/Foundation.h>
 
 @interface AMPanelLocation : NSObject

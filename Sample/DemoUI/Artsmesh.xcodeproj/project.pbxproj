@@ -285,6 +285,7 @@
 		4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */; };
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
+		4FEA73C61BF5E3E600E819B1 /* AMTcpSyphonView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA73C51BF5E3E600E819B1 /* AMTcpSyphonView.mm */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
@@ -375,7 +376,7 @@
 		AFF9BE7C19945A5F00B137BC /* shot_audioMixing2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFF9BE7B19945A5F00B137BC /* shot_audioMixing2.png */; };
 		CE486AA61A280CB900D35B82 /* AMSyphonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486A961A280CB900D35B82 /* AMSyphonManager.m */; };
 		CE486AA71A280CB900D35B82 /* AMSyphonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486A981A280CB900D35B82 /* AMSyphonView.m */; };
-		CE486AA81A280CB900D35B82 /* AMSyphonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486A9A1A280CB900D35B82 /* AMSyphonViewController.m */; };
+		CE486AA81A280CB900D35B82 /* AMSyphonViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE486A9A1A280CB900D35B82 /* AMSyphonViewController.mm */; };
 		CE486AA91A280CB900D35B82 /* AMSyphonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE486A9B1A280CB900D35B82 /* AMSyphonViewController.xib */; };
 		CE486AAA1A280CB900D35B82 /* AMSyphonViewRouterController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE486A9D1A280CB900D35B82 /* AMSyphonViewRouterController.m */; };
 		CE486AAB1A280CB900D35B82 /* AMSyphonViewRouterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE486A9E1A280CB900D35B82 /* AMSyphonViewRouterController.xib */; };
@@ -965,6 +966,8 @@
 		4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTraceRouteTabVC.xib; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
+		4FEA73C41BF5E3E600E819B1 /* AMTcpSyphonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTcpSyphonView.h; sourceTree = "<group>"; };
+		4FEA73C51BF5E3E600E819B1 /* AMTcpSyphonView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMTcpSyphonView.mm; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF200640194585F6008630C8 /* AMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMapViewController.h; sourceTree = "<group>"; };
@@ -1063,7 +1066,7 @@
 		CE486A971A280CB900D35B82 /* AMSyphonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonView.h; sourceTree = "<group>"; };
 		CE486A981A280CB900D35B82 /* AMSyphonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonView.m; sourceTree = "<group>"; };
 		CE486A991A280CB900D35B82 /* AMSyphonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewController.h; sourceTree = "<group>"; };
-		CE486A9A1A280CB900D35B82 /* AMSyphonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewController.m; sourceTree = "<group>"; };
+		CE486A9A1A280CB900D35B82 /* AMSyphonViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMSyphonViewController.mm; sourceTree = "<group>"; };
 		CE486A9B1A280CB900D35B82 /* AMSyphonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonViewController.xib; sourceTree = "<group>"; };
 		CE486A9C1A280CB900D35B82 /* AMSyphonViewRouterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewRouterController.h; sourceTree = "<group>"; };
 		CE486A9D1A280CB900D35B82 /* AMSyphonViewRouterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewRouterController.m; sourceTree = "<group>"; };
@@ -2061,10 +2064,12 @@
 				4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */,
 				4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */,
 				4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */,
+				4FEA73C41BF5E3E600E819B1 /* AMTcpSyphonView.h */,
+				4FEA73C51BF5E3E600E819B1 /* AMTcpSyphonView.mm */,
 				CE486A971A280CB900D35B82 /* AMSyphonView.h */,
 				CE486A981A280CB900D35B82 /* AMSyphonView.m */,
 				CE486A991A280CB900D35B82 /* AMSyphonViewController.h */,
-				CE486A9A1A280CB900D35B82 /* AMSyphonViewController.m */,
+				CE486A9A1A280CB900D35B82 /* AMSyphonViewController.mm */,
 				CE486A9B1A280CB900D35B82 /* AMSyphonViewController.xib */,
 				CE486A9C1A280CB900D35B82 /* AMSyphonViewRouterController.h */,
 				CE486A9D1A280CB900D35B82 /* AMSyphonViewRouterController.m */,
@@ -2548,7 +2553,7 @@
 				2D08FD931AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsPlaylistItem.m in Sources */,
 				4A32A1261A72269F006FEDD7 /* AMGroupProfileViewController.m in Sources */,
 				2D08FD901AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsComment.m in Sources */,
-				CE486AA81A280CB900D35B82 /* AMSyphonViewController.m in Sources */,
+				CE486AA81A280CB900D35B82 /* AMSyphonViewController.mm in Sources */,
 				4AB4ACD41A6CCD39003ECE24 /* AMGroupItem.m in Sources */,
 				2D08FDDE1AD661FF00A9D257 /* GTLYouTubePromotedItemId.m in Sources */,
 				2D31E6661AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m in Sources */,
@@ -2614,6 +2619,7 @@
 				2D016D5F1A0C9FC80044F0E0 /* AMGroupPreviewPanelView.m in Sources */,
 				CEC2FC5B196588FD00AFD309 /* AMGroupOutlineRowView.m in Sources */,
 				2D08FDB81AD661FF00A9D257 /* GTLYouTubeI18nLanguageSnippet.m in Sources */,
+				4FEA73C61BF5E3E600E819B1 /* AMTcpSyphonView.mm in Sources */,
 				2D08FE051AD661FF00A9D257 /* GTLYouTubeVideoStatistics.m in Sources */,
 				2D08FDE21AD661FF00A9D257 /* GTLYouTubeSearchResult.m in Sources */,
 				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,

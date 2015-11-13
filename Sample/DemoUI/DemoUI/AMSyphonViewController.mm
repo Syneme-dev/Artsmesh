@@ -7,13 +7,13 @@
 //
 
 #import "AMSyphonViewController.h"
-#import "AMSyphonView.h"
+#import "AMTcpSyphonView.h"
 #import "AMSyphonCamera.h"
 #import "AMSyphonManager.h"
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()
-@property (weak) IBOutlet AMSyphonView *glView;
+@property (weak) IBOutlet AMTcpSyphonView *glView;
 @property (weak) IBOutlet NSPopUpButton *serverNamePopUpButton;
 
 @end
@@ -38,7 +38,7 @@ NSString* kNonServer = @"    --    ";
     // [super viewDidLoad];
     // Do view setup here
     
-    AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+    AMTcpSyphonView *subView = [[AMTcpSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
     [self.view addSubview:subView];
     
@@ -59,7 +59,29 @@ NSString* kNonServer = @"    --    ";
 
     [self updateServerList];
     self.glView.drawTriangle = YES;
+
+    //Setup for NSNotification
+    NSNotificationCenter*	nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(updateServerList) name:TL_TCPSyphonSDK_ChangeTCPSyphonServerListNotification object:nil];
+    
+    [_glView setup];
 }
+
+-(NSArray*) tcpSyphonServerList
+{
+    NSMutableArray* serverNames = [[NSMutableArray alloc] init];
+    TL_TCPSyphonSDK*    sdk = [_glView GetTCPSyphonSDK];
+    
+
+    NSArray*    servers = [sdk GetTCPSyphonServerInformation];
+    for (NSDictionary* info in servers)
+    {
+        [serverNames addObject:[info objectForKey:@"Name"]];
+    }
+    
+    return serverNames;
+}
+
 
 -(void)updateServerList
 {
@@ -67,6 +89,9 @@ NSString* kNonServer = @"    --    ";
     [self.serverNamePopUpButton addItemWithTitle:kNonServer];
     
     [self.serverNamePopUpButton addItemsWithTitles:[self syphonServerNames]];
+    
+    [self.serverNamePopUpButton addItemsWithTitles:[self tcpSyphonServerList]];
+    
     [self.serverNamePopUpButton selectItemWithTitle: _currentServerName];
 }
 

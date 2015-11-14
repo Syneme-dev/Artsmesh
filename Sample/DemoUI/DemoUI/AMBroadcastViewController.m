@@ -1029,6 +1029,11 @@
     if ([audFormatPref isEqualToString:@"AAC"]) {
         audioCodecFlag = @"libvo_aacenc";
     }
+    NSString *ffmpegVidOutDimensions = vidOutSizePref;
+    NSString *vidCustomOutDimensions = [NSString stringWithFormat:@"%@x%@", self.videoOutputSizeWidthTextField.stringValue, self.videoOutputSizeHeightTextField.stringValue];
+    if ([vidOutSizeUseCustomPref isEqualToString:@"YES"]) {
+        ffmpegVidOutDimensions = vidCustomOutDimensions;
+    }
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -f avfoundation -r %@ -i \"%d:%d\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
@@ -1040,7 +1045,7 @@
                                 audioCodecFlag,
                                 audBitRatePref,
                                 audSampleRatePref,
-                                vidOutSizePref,
+                                ffmpegVidOutDimensions,
                                 baseUrlPref,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);

@@ -1195,6 +1195,7 @@
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
     [self.audioBitRatePopupView removeAllItems];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
+    
 }
 -(void)resetSettingsTab {
     
@@ -1214,6 +1215,10 @@
     
     [self.videoInputCustomCheckBox setChecked:NO];
     [self.videoOutputCustomCheckBox setChecked:NO];
+    [self.videoInputCustomWidthTextField setStringValue:@"1280"];
+    [self.videoInputCustomHeightTextField setStringValue:@"1080"];
+    [self.videoOutputSizeWidthTextField setStringValue:@"1280"];
+    [self.videoOutputSizeHeightTextField setStringValue:@"1080"];
     
     [self.videoBitRateTextField setStringValue:@"4000"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
@@ -1265,6 +1270,29 @@
     } else {
         [self.audioBitRatePopupView selectItemAtIndex:5]; }
     
+    /** Custom Dimensions Section **/
+    
+    if ( [vidInSizeCustomWPref length] != 0 ) {
+        [self.videoInputCustomWidthTextField setStringValue:vidInSizeCustomWPref];
+    } else {
+        [self.videoInputCustomWidthTextField setStringValue:@"1280"];
+    }
+    if ( [vidInSizeCustomHPref length] != 0 ) {
+        [self.videoInputCustomHeightTextField setStringValue:vidInSizeCustomHPref];
+    } else {
+        [self.videoInputCustomHeightTextField setStringValue:@"1080"];
+    }
+    if ( [vidOutSizeCustomWPref length] != 0 ) {
+        [self.videoOutputSizeWidthTextField setStringValue:vidOutSizeCustomWPref];
+    } else {
+        [self.videoOutputSizeWidthTextField setStringValue:@"1280"];
+    }
+    if ( [vidOutSizeCustomHPref length] != 0 ) {
+        [self.videoOutputSizeHeightTextField setStringValue:vidOutSizeCustomHPref];
+    } else {
+        [self.videoOutputSizeHeightTextField setStringValue:@"1080"];
+    }
+    
     if ( [vidInSizeUseCustomPref isEqualToString:@"NO"] ) {
         [self.videoInputCustomCheckBox setChecked:NO];
     } else { [self.videoInputCustomCheckBox setChecked:YES]; }
@@ -1272,6 +1300,8 @@
     if ( [vidOutSizeUseCustomPref isEqualToString:@"NO"] ) {
         [self.videoOutputCustomCheckBox setChecked:NO];
     } else { [self.videoOutputCustomCheckBox setChecked:YES]; }
+    
+    /** Custom Dimensions Section: END **/
     
     if ( [vidBitRatePref length] != 0 ) {
         [self.videoBitRateTextField setStringValue:vidBitRatePref];
@@ -1313,6 +1343,11 @@
      forKey:Preference_Key_ffmpeg_Base_Url];
     
     //Save Custom Dimension Prefs
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputCustomWidthTextField.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size_Custom_W];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputCustomHeightTextField.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size_Custom_H];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizeWidthTextField.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_W];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizeHeightTextField.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_H];
+    
     if (self.videoInputCustomCheckBox.checked) {
         vidInSizeUseCustomPref = @"YES";
     } else { vidInSizeUseCustomPref = @"NO"; }

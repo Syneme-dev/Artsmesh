@@ -1265,8 +1265,13 @@
     } else {
         [self.audioBitRatePopupView selectItemAtIndex:5]; }
     
-    [self.videoInputCustomCheckBox setChecked:NO];
-    [self.videoOutputCustomCheckBox setChecked:NO];
+    if ( [vidInSizeUseCustomPref isEqualToString:@"NO"] ) {
+        [self.videoInputCustomCheckBox setChecked:NO];
+    } else { [self.videoInputCustomCheckBox setChecked:YES]; }
+    
+    if ( [vidOutSizeUseCustomPref isEqualToString:@"NO"] ) {
+        [self.videoOutputCustomCheckBox setChecked:NO];
+    } else { [self.videoOutputCustomCheckBox setChecked:YES]; }
     
     if ( [vidBitRatePref length] != 0 ) {
         [self.videoBitRateTextField setStringValue:vidBitRatePref];
@@ -1306,6 +1311,18 @@
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];
+    
+    //Save Custom Dimension Prefs
+    if (self.videoInputCustomCheckBox.checked) {
+        vidInSizeUseCustomPref = @"YES";
+    } else { vidInSizeUseCustomPref = @"NO"; }
+    if (self.videoOutputCustomCheckBox.checked) {
+        vidOutSizeUseCustomPref = @"YES";
+    } else {
+        vidOutSizeUseCustomPref = @"NO";
+    }
+    [[AMPreferenceManager standardUserDefaults] setObject:vidInSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_In];
+    [[AMPreferenceManager standardUserDefaults] setObject:vidOutSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_Out];
     
     [self updateSettingsVars];
 }

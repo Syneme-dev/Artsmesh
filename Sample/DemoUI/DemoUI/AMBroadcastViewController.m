@@ -72,7 +72,13 @@
     NSArray *audioSampleRates;
     
     NSString *vidInSizePref;
+    NSString *vidInSizeCustomWPref;
+    NSString *vidInSizeCustomHPref;
+    NSString *vidInSizeUseCustomPref;
     NSString *vidOutSizePref;
+    NSString *vidOutSizeCustomWPref;
+    NSString *vidOutSizeCustomHPref;
+    NSString *vidOutSizeUseCustomPref;
     NSString *vidDevicePref;
     NSString *vidFormatPref;
     NSString *vidFrameRatePref;
@@ -1143,7 +1149,15 @@
 // Settings Tab Functions
 -(void)updateSettingsVars {
     vidInSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size];
+    vidInSizeCustomWPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size_Custom_W];
+    vidInSizeCustomHPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size_Custom_H];
+    vidInSizeUseCustomPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Use_Custom_In];
+    
     vidOutSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size];
+    vidOutSizeCustomWPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_W];
+    vidOutSizeCustomHPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_H];
+    vidOutSizeUseCustomPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Use_Custom_Out];
+    
     vidFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format];
     vidFrameRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate];
     vidBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate];

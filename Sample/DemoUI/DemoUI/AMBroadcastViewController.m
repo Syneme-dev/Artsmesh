@@ -1019,14 +1019,21 @@
     NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
+    NSString *audioCodecFlag = @"libmp3lame";
+    if ([audFormatPref isEqualToString:@"AAC"]) {
+        audioCodecFlag = @"libvo_aacenc";
+    }
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -s %@ -vcodec libx264 -preset fast -pix_fmt uyvy422 -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 vidFrameRatePref,
                                 vidSelectedDeviceIndexPref,
                                 audSelectedDeviceIndexPref,
-                                vidOutSizePref,
+                                vidBitRatePref,
+                                audioCodecFlag,
+                                audBitRatePref,
+                                audSampleRatePref,
                                 vidOutSizePref,
                                 baseUrlPref,
                                 [self.streamNameTextField stringValue]];

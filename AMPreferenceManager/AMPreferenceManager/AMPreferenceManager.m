@@ -124,7 +124,7 @@
              Preference_ffmpeg_Audio_Format, Preference_Key_ffmpeg_Audio_Format,
              Preference_ffmpeg_Audio_Sample_Rate, Preference_Key_ffmpeg_Audio_Sample_Rate,
              Preference_ffmpeg_Audio_Bit_Rate, Preference_Key_ffmpeg_Audio_Bit_Rate,
-             Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url, Preference_ffmpeg_Cur_Stream, Preference_Key_ffmpeg_Cur_Stream,
+             Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url, Preference_ffmpeg_Cur_Stream, Preference_Key_ffmpeg_Cur_Stream, Preference_ffmpeg_Video_Use_Custom_In,Preference_Key_ffmpeg_Video_Use_Custom_In, Preference_ffmpeg_Video_Use_Custom_Out, Preference_Key_ffmpeg_Video_Use_Custom_Out, Preference_ffmpeg_Video_In_Size_Custom_W, Preference_Key_ffmpeg_Video_In_Size_Custom_W, Preference_ffmpeg_Video_In_Size_Custom_H, Preference_Key_ffmpeg_Video_In_Size_Custom_H, Preference_ffmpeg_Video_Out_Size_Custom_W, Preference_Key_ffmpeg_Video_Out_Size_Custom_W, Preference_ffmpeg_Video_Out_Size_Custom_H, Preference_Key_ffmpeg_Video_Out_Size_Custom_H,
              nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:registrationDomainDefaultsValues];
 

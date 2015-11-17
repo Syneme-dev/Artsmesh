@@ -72,7 +72,13 @@
     NSArray *audioSampleRates;
     
     NSString *vidInSizePref;
+    NSString *vidInSizeCustomWPref;
+    NSString *vidInSizeCustomHPref;
+    NSString *vidInSizeUseCustomPref;
     NSString *vidOutSizePref;
+    NSString *vidOutSizeCustomWPref;
+    NSString *vidOutSizeCustomHPref;
+    NSString *vidOutSizeUseCustomPref;
     NSString *vidDevicePref;
     NSString *vidFormatPref;
     NSString *vidFrameRatePref;
@@ -1023,6 +1029,11 @@
     if ([audFormatPref isEqualToString:@"AAC"]) {
         audioCodecFlag = @"libvo_aacenc";
     }
+    NSString *ffmpegVidOutDimensions = vidOutSizePref;
+    NSString *vidCustomOutDimensions = [NSString stringWithFormat:@"%@x%@", self.videoOutputSizeWidthTextField.stringValue, self.videoOutputSizeHeightTextField.stringValue];
+    if ([vidOutSizeUseCustomPref isEqualToString:@"YES"]) {
+        ffmpegVidOutDimensions = vidCustomOutDimensions;
+    }
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -f avfoundation -r %@ -i \"%d:%d\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
@@ -1034,7 +1045,7 @@
                                 audioCodecFlag,
                                 audBitRatePref,
                                 audSampleRatePref,
-                                vidOutSizePref,
+                                ffmpegVidOutDimensions,
                                 baseUrlPref,
                                 [self.streamNameTextField stringValue]];
     NSLog(@"%@", command);
@@ -1143,7 +1154,15 @@
 // Settings Tab Functions
 -(void)updateSettingsVars {
     vidInSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size];
+    vidInSizeCustomWPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size_Custom_W];
+    vidInSizeCustomHPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Size_Custom_H];
+    vidInSizeUseCustomPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Use_Custom_In];
+    
     vidOutSizePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size];
+    vidOutSizeCustomWPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_W];
+    vidOutSizeCustomHPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_H];
+    vidOutSizeUseCustomPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Use_Custom_Out];
+    
     vidFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format];
     vidFrameRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate];
     vidBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate];
@@ -1181,6 +1200,7 @@
     [self.audioSampleRatePopupView addItemsWithTitles:audioSampleRates];
     [self.audioBitRatePopupView removeAllItems];
     [self.audioBitRatePopupView addItemsWithTitles:audioBitRates];
+    
 }
 -(void)resetSettingsTab {
     
@@ -1200,6 +1220,10 @@
     
     [self.videoInputCustomCheckBox setChecked:NO];
     [self.videoOutputCustomCheckBox setChecked:NO];
+    [self.videoInputCustomWidthTextField setStringValue:@"1280"];
+    [self.videoInputCustomHeightTextField setStringValue:@"1080"];
+    [self.videoOutputSizeWidthTextField setStringValue:@"1280"];
+    [self.videoOutputSizeHeightTextField setStringValue:@"1080"];
     
     [self.videoBitRateTextField setStringValue:@"4000"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
@@ -1251,8 +1275,38 @@
     } else {
         [self.audioBitRatePopupView selectItemAtIndex:5]; }
     
-    [self.videoInputCustomCheckBox setChecked:NO];
-    [self.videoOutputCustomCheckBox setChecked:NO];
+    /** Custom Dimensions Section **/
+    
+    if ( [vidInSizeCustomWPref length] != 0 ) {
+        [self.videoInputCustomWidthTextField setStringValue:vidInSizeCustomWPref];
+    } else {
+        [self.videoInputCustomWidthTextField setStringValue:@"1280"];
+    }
+    if ( [vidInSizeCustomHPref length] != 0 ) {
+        [self.videoInputCustomHeightTextField setStringValue:vidInSizeCustomHPref];
+    } else {
+        [self.videoInputCustomHeightTextField setStringValue:@"1080"];
+    }
+    if ( [vidOutSizeCustomWPref length] != 0 ) {
+        [self.videoOutputSizeWidthTextField setStringValue:vidOutSizeCustomWPref];
+    } else {
+        [self.videoOutputSizeWidthTextField setStringValue:@"1280"];
+    }
+    if ( [vidOutSizeCustomHPref length] != 0 ) {
+        [self.videoOutputSizeHeightTextField setStringValue:vidOutSizeCustomHPref];
+    } else {
+        [self.videoOutputSizeHeightTextField setStringValue:@"1080"];
+    }
+    
+    if ( [vidInSizeUseCustomPref isEqualToString:@"NO"] ) {
+        [self.videoInputCustomCheckBox setChecked:NO];
+    } else { [self.videoInputCustomCheckBox setChecked:YES]; }
+    
+    if ( [vidOutSizeUseCustomPref isEqualToString:@"NO"] ) {
+        [self.videoOutputCustomCheckBox setChecked:NO];
+    } else { [self.videoOutputCustomCheckBox setChecked:YES]; }
+    
+    /** Custom Dimensions Section: END **/
     
     if ( [vidBitRatePref length] != 0 ) {
         [self.videoBitRateTextField setStringValue:vidBitRatePref];
@@ -1292,6 +1346,23 @@
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];
+    
+    //Save Custom Dimension Prefs
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputCustomWidthTextField.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size_Custom_W];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputCustomHeightTextField.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size_Custom_H];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizeWidthTextField.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_W];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizeHeightTextField.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size_Custom_H];
+    
+    if (self.videoInputCustomCheckBox.checked) {
+        vidInSizeUseCustomPref = @"YES";
+    } else { vidInSizeUseCustomPref = @"NO"; }
+    if (self.videoOutputCustomCheckBox.checked) {
+        vidOutSizeUseCustomPref = @"YES";
+    } else {
+        vidOutSizeUseCustomPref = @"NO";
+    }
+    [[AMPreferenceManager standardUserDefaults] setObject:vidInSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_In];
+    [[AMPreferenceManager standardUserDefaults] setObject:vidOutSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_Out];
     
     [self updateSettingsVars];
 }

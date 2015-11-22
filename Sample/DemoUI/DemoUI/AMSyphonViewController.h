@@ -10,7 +10,9 @@
 #import <Syphon/Syphon.h>
 
 @interface AMSyphonViewController : NSViewController
-
+{
+    CVDisplayLinkRef			displayLink;
+}
 @property NSString* currentServerName;
 
 -(void)updateServerList;

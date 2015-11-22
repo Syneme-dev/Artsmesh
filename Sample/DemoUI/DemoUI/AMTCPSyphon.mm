@@ -148,18 +148,3 @@ CVReturn displayLinkCallback(CVDisplayLinkRef displayLink,
 
 
 @end
-
-
-
-CVReturn displayLinkCallback(CVDisplayLinkRef displayLink,
-                             const CVTimeStamp *inNow,
-                             const CVTimeStamp *inOutputTime,
-                             CVOptionFlags flagsIn,
-                             CVOptionFlags *flagsOut,
-                             void *displayLinkContext)
-{
-   // NSAutoreleasePool		*pool =[[NSAutoreleasePool alloc] init];
-//    [(AMTCPSyphon *)displayLinkContext renderCallback];
-    //[pool release];
-    return kCVReturnSuccess;
-}

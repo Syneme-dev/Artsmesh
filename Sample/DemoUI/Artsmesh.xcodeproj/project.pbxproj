@@ -174,8 +174,6 @@
 		2D4555A51B9B98CA00C6853B /* AMStandardButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4555A41B9B98CA00C6853B /* AMStandardButtonViewController.m */; };
 		2D4555A71B9B98D700C6853B /* AMStandardButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D4555A61B9B98D700C6853B /* AMStandardButtonViewController.xib */; };
 		2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D49102C1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m */; };
-		2D51DC661BD6069E00333FD3 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; };
-		2D51DC671BD6074300333FD3 /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2D47C87F1BD602BA00575B6E /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F019C16B4400201106 /* AMWorldMap.m */; };
 		2D6D76F419C16C5100201106 /* AMLiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F319C16C5100201106 /* AMLiveMapView.m */; };
 		2D6D76F719C16E3300201106 /* AMPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D76F619C16E3300201106 /* AMPixel.m */; };
@@ -187,7 +185,7 @@
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
 		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
-		2DAB319D1BE856CB00C1BD5A /* ffmpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
 		2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
@@ -275,6 +273,9 @@
 		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
 		4FA048581BF1D7B500941EA6 /* AMGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FA048551BF1D7B500941EA6 /* AMGLView.mm */; };
 		4FA048591BF1D7B500941EA6 /* AMTCPSyphon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FA048571BF1D7B500941EA6 /* AMTCPSyphon.mm */; };
+		4FA1E69F1C00959D0007E33C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA1E69E1C00959D0007E33C /* CoreVideo.framework */; };
+		4FA1E6A01C0095AA0007E33C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA1E69E1C00959D0007E33C /* CoreVideo.framework */; };
+		4FA1E6A11C0095AA0007E33C /* CoreVideo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4FA1E69E1C00959D0007E33C /* CoreVideo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */; };
 		4FA52CD21BB24B090075D02B /* AMSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */; };
 		4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CD11BB24B090075D02B /* AVFWrapper.m */; };
@@ -444,6 +445,7 @@
 				D472934719A6EB320034CC34 /* AMAudio.framework in CopyFiles */,
 				4F7E663C1BE200FA006606D0 /* TL_TCPSyphonSDK.framework in CopyFiles */,
 				AF4542A819553C6C00CCD862 /* AMNotificationManager.framework in CopyFiles */,
+				4FA1E6A11C0095AA0007E33C /* CoreVideo.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +953,7 @@
 		4FA048551BF1D7B500941EA6 /* AMGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMGLView.mm; sourceTree = "<group>"; };
 		4FA048561BF1D7B500941EA6 /* AMTCPSyphon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTCPSyphon.h; sourceTree = "<group>"; };
 		4FA048571BF1D7B500941EA6 /* AMTCPSyphon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMTCPSyphon.mm; sourceTree = "<group>"; };
+		4FA1E69E1C00959D0007E33C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4FA52CCE1BB24B090075D02B /* AMSyphonSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonSender.h; sourceTree = "<group>"; };
 		4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonSender.m; sourceTree = "<group>"; };
@@ -1112,6 +1115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA1E69F1C00959D0007E33C /* CoreVideo.framework in Frameworks */,
 				4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */,
 				4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */,
 				4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */,
@@ -1120,6 +1124,7 @@
 				4F7E663B1BE200FA006606D0 /* TL_TCPSyphonSDK.framework in Frameworks */,
 				D47A184E19F21296000A8CCB /* AMLogger.framework in Frameworks */,
 				D472934619A6E8F30034CC34 /* AMAudio.framework in Frameworks */,
+				4FA1E6A01C0095AA0007E33C /* CoreVideo.framework in Frameworks */,
 				AF7242B3197E19CA0008799B /* AMCommonTools.framework in Frameworks */,
 				2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */,
 				CE486AB31A28140900D35B82 /* Syphon.framework in Frameworks */,
@@ -1689,6 +1694,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FA1E69E1C00959D0007E33C /* CoreVideo.framework */,
 				4F7E663A1BE200FA006606D0 /* TL_TCPSyphonSDK.framework */,
 				4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */,
 				4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */,

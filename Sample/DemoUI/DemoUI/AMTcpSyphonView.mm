@@ -202,6 +202,8 @@
 
 -(void)draw
 {
+    return;  //Disable for now.
+    
     GLuint  texture;
     NSSize  texturesize;
     GLenum  texturetarget;

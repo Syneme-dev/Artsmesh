@@ -5,11 +5,19 @@
 //  Created by WhiskyZed on 11/16/14.
 //  Copyright (c) 2014 WhiskyZed. All rights reserved.
 //
-
+#import <OpenGL/CGLMacro.h>
 #import "AMSyphonViewController.h"
 #import "AMTcpSyphonView.h"
 #import "AMSyphonCamera.h"
 #import "AMSyphonManager.h"
+
+CVReturn displayLinkCallback(CVDisplayLinkRef displayLink,
+                             const CVTimeStamp *inNow,
+                             const CVTimeStamp *inOutputTime,
+                             CVOptionFlags flagsIn,
+                             CVOptionFlags *flagsOut,
+                             void *displayLinkContext);
+
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()
@@ -32,6 +40,9 @@ NSString* kNonServer = @"    --    ";
     NSUInteger FPS;
     NSUInteger frameWidth;
     NSUInteger frameHeight;
+    
+//    CVDisplayLinkRef	displayLink;
+    NSOpenGLContext*    sharedContext;
 }
 
 - (void)viewDidLoad {
@@ -61,12 +72,63 @@ NSString* kNonServer = @"    --    ";
     self.glView.drawTriangle = YES;
 
     //Setup for NSNotification
+    displayLink = NULL;
+    sharedContext = [[NSOpenGLContext alloc]
+                     initWithFormat:[self createGLPixelFormat] shareContext:nil];
+    
+    
     NSNotificationCenter*	nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(updateServerList) name:TL_TCPSyphonSDK_ChangeTCPSyphonServerListNotification object:nil];
     
+    NSOpenGLContext		*newCtx = [[NSOpenGLContext alloc] initWithFormat:[self createGLPixelFormat] shareContext:sharedContext] ;
+    [_glView setOpenGLContext:newCtx];
+    [newCtx setView:_glView];
     [_glView setup];
+    [_glView reshape];
+    
+
+    
+    CVReturn				err = kCVReturnSuccess;
+    CGOpenGLDisplayMask		totalDisplayMask = 0;
+    GLint					virtualScreen = 0;
+    GLint					displayMask = 0;
+    NSOpenGLPixelFormat		*format = [self createGLPixelFormat];
+    
+    for (virtualScreen=0; virtualScreen<[format numberOfVirtualScreens]; ++virtualScreen)	{
+        [format getValues:&displayMask forAttribute:NSOpenGLPFAScreenMask forVirtualScreen:virtualScreen];
+        totalDisplayMask |= displayMask;
+    }
+    err = CVDisplayLinkCreateWithOpenGLDisplayMask(totalDisplayMask, &displayLink);
+    if (err)	{
+        NSLog(@"\t\terr %d creating display link in %s",err,__func__);
+        displayLink = NULL;
+    }
+    else{
+        CVDisplayLinkSetOutputCallback(displayLink, displayLinkCallback, (__bridge void *)self);
+        CVDisplayLinkStart(displayLink);
+    }
+
 }
 
+- (NSOpenGLPixelFormat *) createGLPixelFormat	{
+    GLuint				glDisplayMaskForAllScreens = 0;
+    CGDirectDisplayID	displays[10];
+    CGDisplayCount		count = 0;
+    if (CGGetActiveDisplayList(10,displays,&count)==kCGErrorSuccess)	{
+        for (int i=0; i<count; ++i)
+            glDisplayMaskForAllScreens |= CGDisplayIDToOpenGLDisplayMask(displays[i]);
+    }
+    
+    NSOpenGLPixelFormatAttribute	attrs[] = {
+        NSOpenGLPFAAccelerated,
+        NSOpenGLPFAScreenMask,glDisplayMaskForAllScreens,
+        NSOpenGLPFANoRecovery,
+        NSOpenGLPFAAllowOfflineRenderers,
+        0};
+    return [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+}
+
+//For tcpSyphon
 -(NSArray*) tcpSyphonServerList
 {
     NSMutableArray* serverNames = [[NSMutableArray alloc] init];
@@ -151,56 +213,6 @@ NSString* kNonServer = @"    --    ";
     return serverNames;
 }
 
-/*
-NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
-
-if( ![servers isEqualToArray:serversNow]){
-    
-    servers = serversNow;
-    
-    NSString* name      = nil;
-    
-    NSString* appName   = nil;
-    
-    NSString* title     = nil;
-    
-    
-    
-    [self.serverNamePopUpButton removeAllItems];
-    
-    [serversByTitle removeAllObjects];
-    
-    
-    
-    for (NSDictionary* serverInfo in servers) {
-        
-        name    = [serverInfo objectForKey:SyphonServerDescriptionNameKey];
-        
-        appName = [serverInfo objectForKey:SyphonServerDescriptionAppNameKey];
-        
-        title   = [NSString stringWithString:appName];
-        
-        
-        
-        // A server may not have a name (usually if it is the only server in an application)
-        
-        if([name length] > 0) {
-            
-            title = [name stringByAppendingFormat:@" - %@", title, nil];
-            
-        }
-        
-        
-        
-        [self.serverNamePopUpButton addItemWithTitle:title];
-        
-        [serversByTitle setObject:serverInfo forKey:title];
-        
-    }
-    
-}
-*/
-
 
 -(NSDictionary*)syphonServerDisctriptByName:(NSString*) selectedName
 {
@@ -215,6 +227,11 @@ if( ![servers isEqualToArray:serversNow]){
     _syClient = nil;
 }
 
+- (void) renderCallback	{
+    [_glView draw];
+}
+
+
 - (IBAction)serverSelected:(NSPopUpButton *)sender
 {
     [self stop ];
@@ -223,6 +240,21 @@ if( ![servers isEqualToArray:serversNow]){
     if ([sender.selectedItem.title isEqualToString:kNonServer]) {
         return;
     }
+    
+    ///11---------------Here for tcp syphon
+    NSString*   selectedname = [sender titleOfSelectedItem];
+    if ([selectedname rangeOfString:@"TCPSyphon"].location != NSNotFound) {
+        TL_TCPSyphonSDK*    sdk = [_glView GetTCPSyphonSDK];
+        [sdk ConnectToTCPSyphonServerByName:selectedname];
+        
+        return;
+    }
+    
+    /////11-------
+    
+    
+    
+    
     
     NSDictionary* serverDesctipt = [self syphonServerDisctriptByName:sender.selectedItem.title];
     if (!serverDesctipt) {
@@ -276,3 +308,17 @@ if( ![servers isEqualToArray:serversNow]){
 
 
 @end
+
+CVReturn displayLinkCallback(CVDisplayLinkRef displayLink,
+                             const CVTimeStamp *inNow,
+                             const CVTimeStamp *inOutputTime,
+                             CVOptionFlags flagsIn,
+                             CVOptionFlags *flagsOut,
+                             void *displayLinkContext)
+{
+    // NSAutoreleasePool		*pool =[[NSAutoreleasePool alloc] init];
+    [(__bridge AMSyphonViewController*)displayLinkContext renderCallback];
+    //[pool release];
+    return kCVReturnSuccess;
+}
+

@@ -56,7 +56,7 @@ NSString* kNonServer = @"    --    ";
                                              metrics:nil
                                                views:views]];
     
-
+    
     [self updateServerList];
     self.glView.drawTriangle = YES;
 }
@@ -100,7 +100,7 @@ NSString* kNonServer = @"    --    ";
         if([name length] > 0) {
             title = [name stringByAppendingFormat:@"-%@", title, nil];
         }
-    
+        
         if ([_syServers objectForKey:title] != nil) {
             
             NSArray* paths = [title componentsSeparatedByString:@"-"];
@@ -127,54 +127,54 @@ NSString* kNonServer = @"    --    ";
 }
 
 /*
-NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
-
-if( ![servers isEqualToArray:serversNow]){
-    
-    servers = serversNow;
-    
-    NSString* name      = nil;
-    
-    NSString* appName   = nil;
-    
-    NSString* title     = nil;
-    
-    
-    
-    [self.serverNamePopUpButton removeAllItems];
-    
-    [serversByTitle removeAllObjects];
-    
-    
-    
-    for (NSDictionary* serverInfo in servers) {
-        
-        name    = [serverInfo objectForKey:SyphonServerDescriptionNameKey];
-        
-        appName = [serverInfo objectForKey:SyphonServerDescriptionAppNameKey];
-        
-        title   = [NSString stringWithString:appName];
-        
-        
-        
-        // A server may not have a name (usually if it is the only server in an application)
-        
-        if([name length] > 0) {
-            
-            title = [name stringByAppendingFormat:@" - %@", title, nil];
-            
-        }
-        
-        
-        
-        [self.serverNamePopUpButton addItemWithTitle:title];
-        
-        [serversByTitle setObject:serverInfo forKey:title];
-        
-    }
-    
-}
-*/
+ NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
+ 
+ if( ![servers isEqualToArray:serversNow]){
+ 
+ servers = serversNow;
+ 
+ NSString* name      = nil;
+ 
+ NSString* appName   = nil;
+ 
+ NSString* title     = nil;
+ 
+ 
+ 
+ [self.serverNamePopUpButton removeAllItems];
+ 
+ [serversByTitle removeAllObjects];
+ 
+ 
+ 
+ for (NSDictionary* serverInfo in servers) {
+ 
+ name    = [serverInfo objectForKey:SyphonServerDescriptionNameKey];
+ 
+ appName = [serverInfo objectForKey:SyphonServerDescriptionAppNameKey];
+ 
+ title   = [NSString stringWithString:appName];
+ 
+ 
+ 
+ // A server may not have a name (usually if it is the only server in an application)
+ 
+ if([name length] > 0) {
+ 
+ title = [name stringByAppendingFormat:@" - %@", title, nil];
+ 
+ }
+ 
+ 
+ 
+ [self.serverNamePopUpButton addItemWithTitle:title];
+ 
+ [serversByTitle setObject:serverInfo forKey:title];
+ 
+ }
+ 
+ }
+ */
 
 
 -(NSDictionary*)syphonServerDisctriptByName:(NSString*) selectedName
@@ -194,7 +194,7 @@ if( ![servers isEqualToArray:serversNow]){
 {
     [self stop ];
     _currSelection = sender.selectedItem.title;
-                      
+    
     if ([sender.selectedItem.title isEqualToString:kNonServer]) {
         return;
     }
@@ -228,13 +228,13 @@ if( ![servers isEqualToArray:serversNow]){
             // ...then we check to see if our dimensions display or window shape needs to be updated
             SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
             
-             self.glView.image = frame;
+            self.glView.image = frame;
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             
             [self.glView drawRect:self.glView.bounds];
-        
             
-        
+            
+            
         }];
     }];
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMScoreViewController">
@@ -29,6 +29,7 @@
                         <constraint firstAttribute="width" constant="60" id="1kj-4C-4O4"/>
                         <constraint firstAttribute="height" constant="13" id="54M-o8-s8h"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="REMOVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="MEq-lp-oqL">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -43,6 +44,7 @@
                         <constraint firstAttribute="width" constant="50" id="dfX-85-jAr"/>
                         <constraint firstAttribute="height" constant="13" id="idq-TH-uLr"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="LOAD" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="FKc-UC-UE7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -57,6 +59,7 @@
                         <constraint firstAttribute="height" constant="25" id="Y3d-jZ-iZW"/>
                         <constraint firstAttribute="width" constant="70" id="Yf1-0w-oMg"/>
                     </constraints>
+                    <animations/>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DaC-QY-dQd">
                     <rect key="frame" x="20" y="20" width="3" height="17"/>
@@ -64,6 +67,7 @@
                         <constraint firstAttribute="height" constant="17" id="cT0-KK-2pd"/>
                         <constraint firstAttribute="width" constant="3" id="cyK-MU-cMy"/>
                     </constraints>
+                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="fsc-iT-ue0"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K4q-0c-LqW">
@@ -72,6 +76,7 @@
                         <constraint firstAttribute="width" constant="3" id="2vO-bB-8oi"/>
                         <constraint firstAttribute="height" constant="17" id="CLw-wS-o1u"/>
                     </constraints>
+                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="667-QA-vxZ"/>
                 </imageView>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p57-r5-9jm" customClass="AMFoundryFontView">
@@ -80,6 +85,7 @@
                         <constraint firstAttribute="width" constant="36" id="cI1-KX-uMk"/>
                         <constraint firstAttribute="height" constant="20" id="zKs-Vg-YiJ"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="left" title="PPS" id="xyA-QI-GpI">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -92,6 +98,7 @@
                         <constraint firstAttribute="height" constant="20" id="7qV-T4-9jl"/>
                         <constraint firstAttribute="width" constant="40" id="ceP-sZ-caW"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="BAR" id="awW-YT-LEs">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -104,6 +111,7 @@
                         <constraint firstAttribute="height" constant="17" id="OZs-sZ-b5J"/>
                         <constraint firstAttribute="width" constant="4" id="RpJ-Pa-0Si"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="rMN-6n-Ci2">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -116,6 +124,7 @@
                         <constraint firstAttribute="height" constant="17" id="ezo-vi-j7C"/>
                         <constraint firstAttribute="width" constant="80" id="ucD-Nt-kAt"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PIXELS SEC:" id="dOJ-zb-jFr">
                         <font key="font" size="12" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,6 +137,7 @@
                         <constraint firstAttribute="width" constant="3" id="0h5-kP-EkD"/>
                         <constraint firstAttribute="height" constant="17" id="WLg-5b-Akk"/>
                     </constraints>
+                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ogg-Bo-mPq"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sUK-aS-eh7">
@@ -136,6 +146,7 @@
                         <constraint firstAttribute="width" constant="73" id="Mij-2Q-gjD"/>
                         <constraint firstAttribute="height" constant="17" id="pBn-ua-fw2"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="NOW BAR:" id="9qz-eh-WoG">
                         <font key="font" size="12" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -148,6 +159,7 @@
                         <constraint firstAttribute="height" constant="25" id="01x-EH-BqT"/>
                         <constraint firstAttribute="width" constant="70" id="ylQ-J4-IfK"/>
                     </constraints>
+                    <animations/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nz4-jn-TMN">
                     <rect key="frame" x="33" y="18" width="54" height="17"/>
@@ -155,6 +167,7 @@
                         <constraint firstAttribute="width" constant="50" id="e4K-P9-LrR"/>
                         <constraint firstAttribute="height" constant="17" id="xjC-X6-81H"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MODE:" id="4nP-lo-z5u">
                         <font key="font" size="12" name="FoundryMonoline-Regular"/>
                         <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -190,6 +203,7 @@
                 <constraint firstItem="p57-r5-9jm" firstAttribute="leading" secondItem="tHP-vj-eUZ" secondAttribute="trailing" constant="14" id="ulr-Of-uPw"/>
                 <constraint firstAttribute="bottom" secondItem="tHP-vj-eUZ" secondAttribute="bottom" constant="18" id="x2h-tH-bCe"/>
             </constraints>
+            <animations/>
             <point key="canvasLocation" x="-142.5" y="87.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="kJh-Nd-a7P"/>

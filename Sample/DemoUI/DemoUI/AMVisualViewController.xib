@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVisualViewController">
@@ -18,29 +18,61 @@
             <rect key="frame" x="0.0" y="0.0" width="1273" height="1163"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <view identifier="Audio Router" translatesAutoresizingMaskIntoConstraints="NO" id="3h8-Md-uST">
-                    <rect key="frame" x="0.0" y="10" width="1273" height="1133"/>
-                </view>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f7e-Ce-sA3">
-                    <rect key="frame" x="1216" y="1144" width="57" height="16"/>
+                    <rect key="frame" x="1160" y="1143" width="56" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="3zE-3r-nrY"/>
-                        <constraint firstAttribute="width" constant="57" id="Yj2-d4-APM"/>
+                        <constraint firstAttribute="width" constant="56" id="Yj2-d4-APM"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="GEF-4R-0JS">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RSv-kW-1qz" userLabel="Video Btn">
+                    <rect key="frame" x="1218" y="1145" width="50" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="A8G-Nu-Ii5"/>
+                        <constraint firstAttribute="width" constant="50" id="qcu-n1-4zM"/>
+                    </constraints>
+                    <animations/>
+                    <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="HJM-o5-eAT">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KU2-1S-kxf">
+                    <rect key="frame" x="1212" y="1144" width="8" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="4mA-Zh-rUc"/>
+                        <constraint firstAttribute="width" constant="4" id="mJw-CV-LA8"/>
+                    </constraints>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="0mB-cV-gTS">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <view identifier="Audio Router" translatesAutoresizingMaskIntoConstraints="NO" id="3h8-Md-uST">
+                    <rect key="frame" x="0.0" y="10" width="1273" height="1133"/>
+                    <animations/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3h8-Md-uST" secondAttribute="trailing" id="9BA-Zv-9Bg"/>
-                <constraint firstItem="f7e-Ce-sA3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="Bfy-mR-PMw"/>
+                <constraint firstItem="f7e-Ce-sA3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="Bfy-mR-PMw"/>
+                <constraint firstItem="KU2-1S-kxf" firstAttribute="leading" secondItem="f7e-Ce-sA3" secondAttribute="trailing" constant="-2" id="NWp-Ge-K6s"/>
                 <constraint firstItem="3h8-Md-uST" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Pbc-5W-jGN"/>
+                <constraint firstItem="RSv-kW-1qz" firstAttribute="leading" secondItem="KU2-1S-kxf" secondAttribute="trailing" id="TYV-MK-h6L"/>
+                <constraint firstItem="RSv-kW-1qz" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="Tp3-l5-U1z"/>
                 <constraint firstItem="3h8-Md-uST" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="aRI-pG-xmG"/>
-                <constraint firstAttribute="trailing" secondItem="f7e-Ce-sA3" secondAttribute="trailing" id="dM9-XZ-Cz9"/>
+                <constraint firstAttribute="trailing" secondItem="f7e-Ce-sA3" secondAttribute="trailing" constant="57" id="dM9-XZ-Cz9"/>
                 <constraint firstAttribute="bottom" secondItem="3h8-Md-uST" secondAttribute="bottom" constant="10" id="fHC-Sl-u0w"/>
+                <constraint firstItem="KU2-1S-kxf" firstAttribute="baseline" secondItem="f7e-Ce-sA3" secondAttribute="baseline" constant="-1" id="zhK-Cm-XGS"/>
             </constraints>
+            <animations/>
             <point key="canvasLocation" x="105.5" y="203.5"/>
         </customView>
     </objects>

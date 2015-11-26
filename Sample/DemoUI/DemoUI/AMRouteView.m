@@ -173,7 +173,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     for (AMChannel *channel in self.allChannels)
         [self drawChannel:channel WithCenterAt:[self centerOfChannel:channel]];
     
-    [self drawTip];
+//    [self drawTip];
 }
 
 - (void) drawChannel : (AMChannelType) type

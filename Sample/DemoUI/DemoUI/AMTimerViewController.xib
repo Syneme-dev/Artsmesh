@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMTimerViewController">
@@ -26,6 +26,7 @@
                         <constraint firstAttribute="height" constant="17" id="3Mj-2p-alZ"/>
                         <constraint firstAttribute="width" constant="5" id="eS2-WY-0Yd"/>
                     </constraints>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="T7X-eb-M2e">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
@@ -34,18 +35,21 @@
                 </textField>
                 <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="h28-9m-GVK">
                     <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
+                    <animations/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="TimerTab" identifier="1" id="Mos-rT-Lcy">
                             <view key="view" identifier="timerTab" id="iap-nC-768">
                                 <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="ClockTab" identifier="2" id="M5E-b7-hQd">
                             <view key="view" identifier="clockTab" id="bXQ-Lf-ElL">
                                 <rect key="frame" x="0.0" y="0.0" width="463" height="522"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -56,6 +60,7 @@
                         <constraint firstAttribute="width" constant="54" id="kYm-Ju-CTE"/>
                         <constraint firstAttribute="height" constant="14" id="qHs-gb-XTY"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="CLOCK" bezelStyle="inline" alignment="center" inset="2" id="Rby-TJ-bwc">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -70,6 +75,7 @@
                         <constraint firstAttribute="height" constant="14" id="EIM-Fe-dEl"/>
                         <constraint firstAttribute="width" constant="50" id="J2t-hn-Kw9"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="TIMER" bezelStyle="inline" alignment="center" inset="2" id="ANb-kd-zyv">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -84,6 +90,7 @@
                         <constraint firstAttribute="width" constant="77" id="vsc-W4-q8E"/>
                         <constraint firstAttribute="height" constant="14" id="wRv-P6-bpP"/>
                     </constraints>
+                    <animations/>
                     <buttonCell key="cell" type="inline" title="ADD NEW" bezelStyle="inline" alignment="center" inset="2" id="jhg-mq-Tci">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -107,6 +114,7 @@
                 <constraint firstItem="Chv-Eg-hpW" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="3" id="tS9-Nf-Fs3"/>
                 <constraint firstItem="h28-9m-GVK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="uVh-Wb-05l"/>
             </constraints>
+            <animations/>
             <point key="canvasLocation" x="222.5" y="162"/>
         </customView>
     </objects>

@@ -1745,7 +1745,7 @@
 				4A41F1EA1A8454AD0002018D /* MainWindow */,
 				4A8E05831A1C754400645840 /* OSCMonitor */,
 				0198A79D1A0F24B6009A36CA /* Mixer Panel */,
-				D4BBBD6219AF256B006BEE40 /* Audio Panel */,
+				D4BBBD6219AF256B006BEE40 /* Routing Panel */,
 				269F93631998EFF8006E19DD /* Manual Panel */,
 				269FB8491998814600355312 /* BroadCast Panel */,
 				CE60077C1990696700EF9220 /* NetworkToolsPanel */,
@@ -1951,6 +1951,22 @@
 				4FCA928F1AE4EF32002D3CAE /* AMClockTabCellVC.xib */,
 			);
 			name = ClockTab;
+			sourceTree = "<group>";
+		};
+		4FCD4D041C070A63007D94E5 /* Video Routing */ = {
+			isa = PBXGroup;
+			children = (
+				4FBE6A841C0444C800C854EA /* AMChannel.h */,
+				4FBE6A851C0444C800C854EA /* AMChannel.m */,
+				4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */,
+				4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */,
+				4FBE6A7C1C04447500C854EA /* AMRouteViewController.h */,
+				4FBE6A7D1C04447500C854EA /* AMRouteViewController.m */,
+				4FBE6A7E1C04447500C854EA /* AMRouteViewController.xib */,
+				4FBE6A811C0444A100C854EA /* AMRouteView.h */,
+				4FBE6A821C0444A100C854EA /* AMRouteView.m */,
+			);
+			name = "Video Routing";
 			sourceTree = "<group>";
 		};
 		AF82E33F190CA7FC0083487C /* font */ = {
@@ -2168,23 +2184,15 @@
 			name = ProfilePanel;
 			sourceTree = "<group>";
 		};
-		D4BBBD6219AF256B006BEE40 /* Audio Panel */ = {
+		D4BBBD6219AF256B006BEE40 /* Routing Panel */ = {
 			isa = PBXGroup;
 			children = (
-				4FBE6A841C0444C800C854EA /* AMChannel.h */,
-				4FBE6A851C0444C800C854EA /* AMChannel.m */,
-				4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */,
-				4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */,
-				4FBE6A7C1C04447500C854EA /* AMRouteViewController.h */,
-				4FBE6A7D1C04447500C854EA /* AMRouteViewController.m */,
-				4FBE6A7E1C04447500C854EA /* AMRouteViewController.xib */,
-				4FBE6A811C0444A100C854EA /* AMRouteView.h */,
-				4FBE6A821C0444A100C854EA /* AMRouteView.m */,
+				4FCD4D041C070A63007D94E5 /* Video Routing */,
 				AF20064519458604008630C8 /* AMVisualViewController.h */,
 				AF20064619458604008630C8 /* AMVisualViewController.m */,
 				AF20064719458604008630C8 /* AMVisualViewController.xib */,
 			);
-			name = "Audio Panel";
+			name = "Routing Panel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

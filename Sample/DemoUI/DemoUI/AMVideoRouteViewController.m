@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 AM. All rights reserved.
 //
 
-#import "AMRouteViewController.h"
+#import "AMVideoRouteViewController.h"
 //#import "AMJackTripConfig.h"
 #import "AMChannel.h"
 //#import "AMJackDevice.h"
-#import "AMRouteView.h"
+#import "AMVideoRouteView.h"
 //#import "AMAudio.h"
 
 
-@interface AMRouteViewController ()  <NSPopoverDelegate>
+@interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
 
 //@property NSPopover *myPopover;
@@ -23,7 +23,7 @@
 
 
 
-@implementation AMRouteViewController
+@implementation AMVideoRouteViewController
 {
     NSTimer*    _deviceTimer;
    
@@ -31,14 +31,14 @@
 }
 
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
     return YES;
 }
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
@@ -60,14 +60,14 @@ shouldConnectChannel:(AMChannel *)channel1
      */
 }
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldDisonnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
     return YES;
 }
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
@@ -87,7 +87,7 @@ disconnectChannel:(AMChannel *)channel1
     return [[[AMAudio sharedInstance] audioJackClient] disconnectChannel:srcChannName fromDest:destChannName];*/
 }
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldRemoveDevice:(NSString *)deviceID;
 {
     /*
@@ -98,7 +98,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     return YES;
 }
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
  //   [[[AMAudio sharedInstance] audioJacktripManager] stopJacktripByName:deviceID];
@@ -125,14 +125,15 @@ shouldRemoveDevice:(NSString *)deviceID;
      name:AM_JACK_STOPPED_NOTIFICATION
      object:nil];
     
-    AMRouteView* view = (AMRouteView*)self.view;
-    view.delegate = self;
     
-    [self reloadAudioChannel:nil];
     
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
     
     */
+    AMVideoRouteView* view = (AMVideoRouteView*)self.view;
+    view.delegate = self;
+    
+    [self reloadAudioChannel:nil];
 }
 
 -(void)refreshDevices

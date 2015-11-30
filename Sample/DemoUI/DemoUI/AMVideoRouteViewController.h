@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMRouteView.h"
+#import "AMVideoRouteView.h"
 
-@interface AMRouteViewController : NSViewController<AMRouterViewDelegate>
+@interface AMVideoRouteViewController : NSViewController<AMVideoRouterViewDelegate>
 
 @end

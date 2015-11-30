@@ -10,7 +10,7 @@
 #import "AMAudio/AMAudio.h"
 #import <UIFramework/AMButtonHandler.h>
 #import "AMOSCGroups/AMOSCGroups.h"
-#import "AMRouteViewController.h"
+#import "AMVideoRouteViewController.h"
 
 
 @interface AMVisualViewController ()
@@ -34,11 +34,11 @@
 {
     [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_b7b7b7];
- //   [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_b7b7b7];
+  //  [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_b7b7b7];
 
     [self loadAudioRouterView];
     [self loadVideoRouterView];
-   // [self registerTabButtons];
+    [self registerTabButtons];
    
     [self pushDownButton:self.audioTab];
 }
@@ -51,13 +51,11 @@
 -(void)registerTabButtons{
     super.tabs=self.tabs;
     self.tabButtons =[[NSMutableArray alloc]init];
-    [self.tabButtons addObject:self.videoTab];
+    
     [self.tabButtons addObject:self.audioTab];
+    [self.tabButtons addObject:self.videoTab];
     self.showingTabsCount=2;
-    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_blue];
-    [self onAudioTabClick:self.audioTab];
-}
+  }
 
 - (IBAction)onAudioTabClick:(id)sender {
     [self pushDownButton:self.audioTab];
@@ -100,8 +98,8 @@
 
 -(void)loadVideoRouterView
 {
-    _videoRouterVC = [[AMRouteViewController alloc]
-                            initWithNibName:@"AMRouteViewController"
+    _videoRouterVC = [[AMVideoRouteViewController alloc]
+                            initWithNibName:@"AMVideoRouteViewController"
                                      bundle:nil];
     
     if (_videoRouterVC) {

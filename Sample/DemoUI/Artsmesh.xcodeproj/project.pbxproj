@@ -277,9 +277,9 @@
 		4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */; };
 		4FA52CD21BB24B090075D02B /* AMSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */; };
 		4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CD11BB24B090075D02B /* AVFWrapper.m */; };
-		4FBE6A7F1C04447500C854EA /* AMRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7D1C04447500C854EA /* AMRouteViewController.m */; };
-		4FBE6A801C04447500C854EA /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7E1C04447500C854EA /* AMRouteViewController.xib */; };
-		4FBE6A831C0444A100C854EA /* AMRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A821C0444A100C854EA /* AMRouteView.m */; };
+		4FBE6A7F1C04447500C854EA /* AMVideoRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7D1C04447500C854EA /* AMVideoRouteViewController.m */; };
+		4FBE6A801C04447500C854EA /* AMVideoRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */; };
+		4FBE6A831C0444A100C854EA /* AMVideoRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */; };
 		4FBE6A881C0444C800C854EA /* AMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A851C0444C800C854EA /* AMChannel.m */; };
 		4FBE6A891C0444C800C854EA /* NSBezierPath+QuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
@@ -957,11 +957,11 @@
 		4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonSender.m; sourceTree = "<group>"; };
 		4FA52CD01BB24B090075D02B /* AVFWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVFWrapper.h; sourceTree = "<group>"; };
 		4FA52CD11BB24B090075D02B /* AVFWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFWrapper.m; sourceTree = "<group>"; };
-		4FBE6A7C1C04447500C854EA /* AMRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouteViewController.h; sourceTree = "<group>"; };
-		4FBE6A7D1C04447500C854EA /* AMRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouteViewController.m; sourceTree = "<group>"; };
-		4FBE6A7E1C04447500C854EA /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
-		4FBE6A811C0444A100C854EA /* AMRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouteView.h; sourceTree = "<group>"; };
-		4FBE6A821C0444A100C854EA /* AMRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouteView.m; sourceTree = "<group>"; };
+		4FBE6A7C1C04447500C854EA /* AMVideoRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoRouteViewController.h; sourceTree = "<group>"; };
+		4FBE6A7D1C04447500C854EA /* AMVideoRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoRouteViewController.m; sourceTree = "<group>"; };
+		4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoRouteViewController.xib; sourceTree = "<group>"; };
+		4FBE6A811C0444A100C854EA /* AMVideoRouteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoRouteView.h; sourceTree = "<group>"; };
+		4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoRouteView.m; sourceTree = "<group>"; };
 		4FBE6A841C0444C800C854EA /* AMChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChannel.h; sourceTree = "<group>"; };
 		4FBE6A851C0444C800C854EA /* AMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChannel.m; sourceTree = "<group>"; };
 		4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+QuartzUtilities.h"; sourceTree = "<group>"; };
@@ -1960,11 +1960,11 @@
 				4FBE6A851C0444C800C854EA /* AMChannel.m */,
 				4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */,
 				4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */,
-				4FBE6A7C1C04447500C854EA /* AMRouteViewController.h */,
-				4FBE6A7D1C04447500C854EA /* AMRouteViewController.m */,
-				4FBE6A7E1C04447500C854EA /* AMRouteViewController.xib */,
-				4FBE6A811C0444A100C854EA /* AMRouteView.h */,
-				4FBE6A821C0444A100C854EA /* AMRouteView.m */,
+				4FBE6A7C1C04447500C854EA /* AMVideoRouteViewController.h */,
+				4FBE6A7D1C04447500C854EA /* AMVideoRouteViewController.m */,
+				4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */,
+				4FBE6A811C0444A100C854EA /* AMVideoRouteView.h */,
+				4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */,
 			);
 			name = "Video Routing";
 			sourceTree = "<group>";
@@ -2269,7 +2269,7 @@
 				2D31E6631AFDAEED001E0985 /* AMEventsManagerRowViewController.xib in Resources */,
 				AF9DC78118E963B40029DB97 /* AMPanelView.xib in Resources */,
 				CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */,
-				4FBE6A801C04447500C854EA /* AMRouteViewController.xib in Resources */,
+				4FBE6A801C04447500C854EA /* AMVideoRouteViewController.xib in Resources */,
 				2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */,
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
@@ -2502,7 +2502,7 @@
 				2D7BCE0619FF6FDC0000F18A /* AMLiveMapProgramView.m in Sources */,
 				013A56EE1A5A64EE001D319F /* AMJacktripSettingsVC.m in Sources */,
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
-				4FBE6A7F1C04447500C854EA /* AMRouteViewController.m in Sources */,
+				4FBE6A7F1C04447500C854EA /* AMVideoRouteViewController.m in Sources */,
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
 				4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
@@ -2580,7 +2580,7 @@
 				4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */,
 				2D08FDC91AD661FF00A9D257 /* GTLYouTubeLiveStreamContentDetails.m in Sources */,
 				2D08FDA11AD661FF00A9D257 /* GTLYouTubeChannelContentOwnerDetails.m in Sources */,
-				4FBE6A831C0444A100C854EA /* AMRouteView.m in Sources */,
+				4FBE6A831C0444A100C854EA /* AMVideoRouteView.m in Sources */,
 				2D08FD941AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsPromotedItem.m in Sources */,
 				2D08FDF01AD661FF00A9D257 /* GTLYouTubeVideoCategoryListResponse.m in Sources */,
 				2D08FDAE1AD661FF00A9D257 /* GTLYouTubeChannelStatus.m in Sources */,

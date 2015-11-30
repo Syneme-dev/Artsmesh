@@ -8,9 +8,9 @@
 //
 
 
-#import "AMRouteView.h"
+#import "AMVideoRouteView.h"
 #import "AMChannel.h"
-#import "AMRouteViewController.h"
+#import "AMVideoRouteViewController.h"
 #import "NSBezierPath+QuartzUtilities.h"
 
 typedef struct GlyphArcInfo {
@@ -76,7 +76,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 @end
 
 
-@interface AMRouteView ()
+@interface AMVideoRouteView ()
 {
     NSColor *_backgroundColor;
     NSColor *_placeholderChannelColor;
@@ -101,7 +101,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 @end
 
 
-@implementation AMRouteView
+@implementation AMVideoRouteView
 
 #pragma mark - Overridden Methods
 
@@ -118,13 +118,13 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     [self doInit];
     
-    //self.delegate = [[AMRouteViewController alloc] init];
-//  NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-//  for (int i = 0; i < 4; i++) {
-//      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//      channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-//      channels[i] = channel;
-//  }
+    self.delegate = [[AMVideoRouteViewController alloc] init];
+    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
+    for (int i = 0; i < 4; i++) {
+      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+      channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+      channels[i] = channel;
+  }
 //  [self associateChannels:channels
 //               withDevice:@"Device1"
 //                     name:@"abcdefghijklmnopqrstuvwxyz"

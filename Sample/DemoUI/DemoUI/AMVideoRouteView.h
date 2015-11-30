@@ -8,35 +8,35 @@
 
 #import <Cocoa/Cocoa.h>
 @class AMChannel;
-@class AMRouteView;
+@class AMVideoRouteView;
 
-@protocol AMRouterViewDelegate
+@protocol AMVideoRouterViewDelegate
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2;
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2;
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldDisonnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2;
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2;
 
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldRemoveDevice:(NSString *)deviceID;
-- (BOOL)routeView:(AMRouteView *)routeView
+- (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID;
 
 @end
 
 
-@interface AMRouteView : NSView
+@interface AMVideoRouteView : NSView
 
-@property(nonatomic) id<AMRouterViewDelegate> delegate;
+@property(nonatomic) id<AMVideoRouterViewDelegate> delegate;
 @property(nonatomic, readonly) NSArray *allChannels;
 
 - (void)associateChannels:(NSArray *)channels

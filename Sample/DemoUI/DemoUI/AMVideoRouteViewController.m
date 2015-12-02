@@ -7,7 +7,7 @@
 //
 
 #import "AMVideoRouteViewController.h"
-//#import "AMJackTripConfig.h"
+#import "AMVideoConfig.h"
 #import "AMChannel.h"
 //#import "AMJackDevice.h"
 #import "AMVideoRouteView.h"
@@ -27,7 +27,7 @@
 {
     NSTimer*    _deviceTimer;
    
- //   AMJackTripConfig* _configController;
+    AMVideoConfig* _configController;
 }
 
 
@@ -289,11 +289,9 @@ shouldRemoveDevice:(NSString *)deviceID;
     [_configController showWindow:self];
      */
 }
+- (IBAction)initVideoConfig:(id)sender {
 
-- (void) initJackTripConfig
-{
-    /*
-    _configController = [[AMJackTripConfig alloc] initWithWindowNibName:@"AMJackTripConfig"];
+    _configController = [[AMVideoConfig alloc] initWithWindowNibName:@"AMVideoConfig"];
     NSWindow* win = _configController.window;
     [win setStyleMask:NSBorderlessWindowMask];
     [win setLevel:NSFloatingWindowLevel];
@@ -311,9 +309,10 @@ shouldRemoveDevice:(NSString *)deviceID;
     winRect.origin = [self.view convertPoint:tmpPoint toView:nil];;
     [win  setFrame:winRect display:NO];
     
-    AMRouteView* routerView = (AMRouteView*)self.view;
+    AMVideoRouteView* routerView = (AMVideoRouteView*)self.view;
     _configController.maxChannels = (int)[[routerView allChannels] count];
-     */
+    
+    [_configController showWindow:self];
  }
 
 

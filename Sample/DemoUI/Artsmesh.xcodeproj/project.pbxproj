@@ -258,6 +258,8 @@
 		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
+		4F2E48D71C0DA29000B48708 /* AMVideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E48D51C0DA29000B48708 /* AMVideoConfig.m */; };
+		4F2E48D81C0DA29000B48708 /* AMVideoConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E48D61C0DA29000B48708 /* AMVideoConfig.xib */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
 		4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -933,6 +935,9 @@
 		4F2C4D2E1A34260D004DF021 /* AMSyphonTearOffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonTearOffController.h; sourceTree = "<group>"; };
 		4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonTearOffController.m; sourceTree = "<group>"; };
 		4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMSyphonTearOffController.xib; sourceTree = "<group>"; };
+		4F2E48D41C0DA29000B48708 /* AMVideoConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoConfig.h; sourceTree = "<group>"; };
+		4F2E48D51C0DA29000B48708 /* AMVideoConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoConfig.m; sourceTree = "<group>"; };
+		4F2E48D61C0DA29000B48708 /* AMVideoConfig.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoConfig.xib; sourceTree = "<group>"; };
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
@@ -1956,6 +1961,9 @@
 		4FCD4D041C070A63007D94E5 /* Video Routing */ = {
 			isa = PBXGroup;
 			children = (
+				4F2E48D41C0DA29000B48708 /* AMVideoConfig.h */,
+				4F2E48D51C0DA29000B48708 /* AMVideoConfig.m */,
+				4F2E48D61C0DA29000B48708 /* AMVideoConfig.xib */,
 				4FBE6A841C0444C800C854EA /* AMChannel.h */,
 				4FBE6A851C0444C800C854EA /* AMChannel.m */,
 				4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */,
@@ -2282,6 +2290,7 @@
 				269FB84E1998816E00355312 /* AMBroadcastViewController.xib in Resources */,
 				4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */,
 				4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */,
+				4F2E48D81C0DA29000B48708 /* AMVideoConfig.xib in Resources */,
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
@@ -2600,6 +2609,7 @@
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
 				D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */,
 				4A32A12B1A7226B5006FEDD7 /* AMProjectProfileViewController.m in Sources */,
+				4F2E48D71C0DA29000B48708 /* AMVideoConfig.m in Sources */,
 				4F90AEF01B70879100C5B3CA /* AMVisualView.m in Sources */,
 				2D08FDE11AD661FF00A9D257 /* GTLYouTubeSearchListResponse.m in Sources */,
 				CE486AAD1A280CB900D35B82 /* AMVideoMixerBackgroundView.m in Sources */,

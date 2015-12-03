@@ -7,7 +7,7 @@
 //
 
 #import "AMVideoRouteViewController.h"
-#import "AMVideoConfig.h"
+#import "AMVideoConfigWindow.h"
 #import "AMChannel.h"
 //#import "AMJackDevice.h"
 #import "AMVideoRouteView.h"
@@ -27,7 +27,7 @@
 {
     NSTimer*    _deviceTimer;
    
-    AMVideoConfig* _configController;
+    AMVideoConfigWindow* _configController;
 }
 
 
@@ -291,7 +291,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 }
 - (IBAction)initVideoConfig:(id)sender {
 
-    _configController = [[AMVideoConfig alloc] initWithWindowNibName:@"AMVideoConfig"];
+    _configController = [[AMVideoConfigWindow alloc] initWithWindowNibName:@"AMVideoConfigWindow"];
     NSWindow* win = _configController.window;
     [win setStyleMask:NSBorderlessWindowMask];
     [win setLevel:NSFloatingWindowLevel];

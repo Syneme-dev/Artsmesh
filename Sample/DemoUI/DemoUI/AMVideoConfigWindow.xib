@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AMVideoConfig">
+        <customObject id="-2" userLabel="File's Owner" customClass="AMVideoConfigWindow">
             <connections>
                 <outlet property="channeCount" destination="Jxl-4F-R3e" id="vKK-dP-YKC"/>
                 <outlet property="closeBtn" destination="cAJ-wD-Xnh" id="TPh-Pb-Ig7"/>

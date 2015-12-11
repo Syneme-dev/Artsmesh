@@ -43,22 +43,23 @@
 		4FC0ED381ACE763300ED06AF /* AMJackTripConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC0ED351ACE763300ED06AF /* AMJackTripConfig.h */; };
 		4FC0ED391ACE763300ED06AF /* AMJackTripConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0ED361ACE763300ED06AF /* AMJackTripConfig.m */; };
 		4FC0ED3A1ACE763300ED06AF /* AMJackTripConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC0ED371ACE763300ED06AF /* AMJackTripConfig.xib */; };
-		4FDD11E81BC8B24D003D7896 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDD11E71BC8B24D003D7896 /* Jackmp.framework */; settings = {ASSET_TAGS = (); }; };
-		4FDD11F81BC8B312003D7896 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11E91BC8B312003D7896 /* control.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11F91BC8B312003D7896 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EA1BC8B312003D7896 /* intclient.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FA1BC8B312003D7896 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EB1BC8B312003D7896 /* jack.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FB1BC8B312003D7896 /* jslist.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EC1BC8B312003D7896 /* jslist.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FC1BC8B312003D7896 /* midiport.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11ED1BC8B312003D7896 /* midiport.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FD1BC8B312003D7896 /* net.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EE1BC8B312003D7896 /* net.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FE1BC8B312003D7896 /* ringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EF1BC8B312003D7896 /* ringbuffer.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD11FF1BC8B312003D7896 /* session.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F01BC8B312003D7896 /* session.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12001BC8B312003D7896 /* statistics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F11BC8B312003D7896 /* statistics.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12011BC8B312003D7896 /* systemdeps.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F21BC8B312003D7896 /* systemdeps.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12021BC8B312003D7896 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F31BC8B312003D7896 /* thread.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12031BC8B312003D7896 /* transport.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F41BC8B312003D7896 /* transport.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12041BC8B312003D7896 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F51BC8B312003D7896 /* types.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12051BC8B312003D7896 /* weakjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F61BC8B312003D7896 /* weakjack.h */; settings = {ASSET_TAGS = (); }; };
-		4FDD12061BC8B312003D7896 /* weakmacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F71BC8B312003D7896 /* weakmacros.h */; settings = {ASSET_TAGS = (); }; };
+		4FD451EA1C1A82CC00679E26 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD451E91C1A82CC00679E26 /* AMLogger.framework */; };
+		4FDD11E81BC8B24D003D7896 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDD11E71BC8B24D003D7896 /* Jackmp.framework */; };
+		4FDD11F81BC8B312003D7896 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11E91BC8B312003D7896 /* control.h */; };
+		4FDD11F91BC8B312003D7896 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EA1BC8B312003D7896 /* intclient.h */; };
+		4FDD11FA1BC8B312003D7896 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EB1BC8B312003D7896 /* jack.h */; };
+		4FDD11FB1BC8B312003D7896 /* jslist.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EC1BC8B312003D7896 /* jslist.h */; };
+		4FDD11FC1BC8B312003D7896 /* midiport.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11ED1BC8B312003D7896 /* midiport.h */; };
+		4FDD11FD1BC8B312003D7896 /* net.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EE1BC8B312003D7896 /* net.h */; };
+		4FDD11FE1BC8B312003D7896 /* ringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EF1BC8B312003D7896 /* ringbuffer.h */; };
+		4FDD11FF1BC8B312003D7896 /* session.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F01BC8B312003D7896 /* session.h */; };
+		4FDD12001BC8B312003D7896 /* statistics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F11BC8B312003D7896 /* statistics.h */; };
+		4FDD12011BC8B312003D7896 /* systemdeps.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F21BC8B312003D7896 /* systemdeps.h */; };
+		4FDD12021BC8B312003D7896 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F31BC8B312003D7896 /* thread.h */; };
+		4FDD12031BC8B312003D7896 /* transport.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F41BC8B312003D7896 /* transport.h */; };
+		4FDD12041BC8B312003D7896 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F51BC8B312003D7896 /* types.h */; };
+		4FDD12051BC8B312003D7896 /* weakjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F61BC8B312003D7896 /* weakjack.h */; };
+		4FDD12061BC8B312003D7896 /* weakmacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11F71BC8B312003D7896 /* weakmacros.h */; };
 		CE29B4E319BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */; };
 		CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */; };
 		CE68805319B94EF20062211C /* AMChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = CE68804F19B94EF20062211C /* AMChannel.h */; };
@@ -79,7 +80,6 @@
 		D472934219A6E5A10034CC34 /* AMAudioDeviceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D472934019A6E5A10034CC34 /* AMAudioDeviceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D472934319A6E5A10034CC34 /* AMAudioDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D472934119A6E5A10034CC34 /* AMAudioDeviceManager.m */; };
 		D472934419A6E7CE0034CC34 /* AMAudio.h in Headers */ = {isa = PBXBuildFile; fileRef = D472931E19A6E5030034CC34 /* AMAudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D47A184A19F21110000A8CCB /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A184919F21110000A8CCB /* AMLogger.framework */; };
 		D47E6CE619BDD6BC0000ACCD /* AMJackDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6CE419BDD6BC0000ACCD /* AMJackDevice.h */; };
 		D47E6CE719BDD6BC0000ACCD /* AMJackDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D47E6CE519BDD6BC0000ACCD /* AMJackDevice.m */; };
 		D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BB010919AA2E9E00295C54 /* AMTaskLauncher.framework */; };
@@ -134,6 +134,7 @@
 		4FC0ED351ACE763300ED06AF /* AMJackTripConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripConfig.h; sourceTree = "<group>"; };
 		4FC0ED361ACE763300ED06AF /* AMJackTripConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfig.m; sourceTree = "<group>"; };
 		4FC0ED371ACE763300ED06AF /* AMJackTripConfig.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackTripConfig.xib; sourceTree = "<group>"; };
+		4FD451E91C1A82CC00679E26 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
 		4FDD11E71BC8B24D003D7896 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jackmp.framework; path = ../Jackmp.framework; sourceTree = "<group>"; };
 		4FDD11E91BC8B312003D7896 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		4FDD11EA1BC8B312003D7896 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
@@ -187,7 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D47A184A19F21110000A8CCB /* AMLogger.framework in Frameworks */,
+				4FD451EA1C1A82CC00679E26 /* AMLogger.framework in Frameworks */,
 				4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */,
 				26624DC319C9261C008F3D6D /* AMPreferenceManager.framework in Frameworks */,
 				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
@@ -314,6 +315,7 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FD451E91C1A82CC00679E26 /* AMLogger.framework */,
 				D47A184919F21110000A8CCB /* AMLogger.framework */,
 				4A58332319EBB14E00BFB468 /* UIFramework.framework */,
 				26624DC219C9261C008F3D6D /* AMPreferenceManager.framework */,

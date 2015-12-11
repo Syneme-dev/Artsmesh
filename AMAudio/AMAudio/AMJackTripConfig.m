@@ -295,6 +295,12 @@
         return NO;
     }
     
+    if ([self.queueBufferLen.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"queue buffer parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
     if ([self.rCount.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
         [alert runModal];
@@ -336,8 +342,7 @@
     if (![self checkouJacktripParams]) {
         return;
     }
-    
-    NSString *qCount = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
+
     NSString *jamLink = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Jamlink];
     
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
@@ -346,7 +351,7 @@
     cfgs.serverAddr = self.peerAddress.stringValue;
     cfgs.portOffset = self.portOffsetSelector.stringValue;
     cfgs.channelCount = self.channeCount.stringValue;
-    cfgs.qCount = qCount;
+    cfgs.qBufferLen = self.queueBufferLen.stringValue;
     cfgs.rCount = self.rCount.stringValue;
     cfgs.bitrateRes = self.bitRateRes.stringValue;
     cfgs.zerounderrun = self.zerounderrunCheck.checked;

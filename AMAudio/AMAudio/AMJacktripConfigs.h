@@ -24,7 +24,7 @@
 @property NSString* channelCount;
 
 //-q, --queue       # (1 or more)          Queue Buffer Length, in Packet Size (default 4)
-@property NSString* qCount;
+@property NSString* qBufferLen;
 
 //-r, --redundancy  # (1 or more)          Packet Redundancy to avoid glitches with packet losses (defaul 1)
 @property NSString* rCount;

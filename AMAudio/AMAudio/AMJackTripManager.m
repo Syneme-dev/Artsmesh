@@ -55,7 +55,7 @@
     [commandline appendFormat:@" -n %@", cfgs.channelCount];
 
     //-q
-    [commandline appendFormat:@" -q %@", cfgs.qCount];
+    [commandline appendFormat:@" -q %@", cfgs.qBufferLen];
 
     //-r
     [commandline appendFormat:@" -r %@", cfgs.rCount];

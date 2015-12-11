@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMJacktripSettingsVC">
@@ -33,7 +33,6 @@
                         <constraint firstAttribute="height" constant="17" id="hq3-5f-2Wa"/>
                         <constraint firstAttribute="width" constant="3" id="wjS-nz-cLk"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Y0J-25-bAb"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kht-NW-CPy">
@@ -42,7 +41,6 @@
                         <constraint firstAttribute="height" constant="17" id="UpS-OL-BKY"/>
                         <constraint firstAttribute="width" constant="3" id="nOd-qH-jPT"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="us8-IE-ufJ"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VGO-6c-hB7">
@@ -51,7 +49,6 @@
                         <constraint firstAttribute="height" constant="17" id="071-2s-mQS"/>
                         <constraint firstAttribute="width" constant="3" id="bTb-zb-wUn"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="m5e-Fi-NgI"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TeI-KU-ZPa">
@@ -60,7 +57,6 @@
                         <constraint firstAttribute="height" constant="17" id="Dp5-i7-k5n"/>
                         <constraint firstAttribute="width" constant="3" id="SG5-xO-kpt"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="7dv-cT-DdI"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ya2-ye-TVY">
@@ -69,7 +65,6 @@
                         <constraint firstAttribute="height" constant="17" id="mIS-kb-BaG"/>
                         <constraint firstAttribute="width" constant="3" id="p8I-pC-XMU"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="kDN-a2-WsR"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tlE-u8-nru">
@@ -78,7 +73,6 @@
                         <constraint firstAttribute="height" constant="17" id="1p2-Bh-RwE"/>
                         <constraint firstAttribute="width" constant="3" id="fpF-vd-7Vc"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KPY-Oj-zwy"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dbH-kz-zxK">
@@ -87,7 +81,6 @@
                         <constraint firstAttribute="height" constant="17" id="7Kn-3L-xEe"/>
                         <constraint firstAttribute="width" constant="3" id="O0N-LP-VOU"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="YEq-mL-dAV"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-NN-3Kk">
@@ -96,7 +89,6 @@
                         <constraint firstAttribute="height" constant="17" id="EWV-H9-PAm"/>
                         <constraint firstAttribute="width" constant="3" id="f9s-Ch-Rhc"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="3nD-3Y-lQw"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bzB-DR-fs8">
@@ -105,7 +97,6 @@
                         <constraint firstAttribute="height" constant="17" id="flD-XV-MKA"/>
                         <constraint firstAttribute="width" constant="3" id="scE-vv-NpG"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="iZc-7H-Fa2"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C9l-0g-mUk">
@@ -114,7 +105,6 @@
                         <constraint firstAttribute="height" constant="17" id="xY5-MC-Drd"/>
                         <constraint firstAttribute="width" constant="3" id="zbw-ud-eAw"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="rsQ-Fx-Or8"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Usf-64-TXk" customClass="AMFoundryFontView">
@@ -123,7 +113,6 @@
                         <constraint firstAttribute="height" constant="17" id="3SX-Df-C1E"/>
                         <constraint firstAttribute="width" constant="40" id="dNQ-1m-XHZ"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ROLE:" id="Nm1-xc-eAf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -136,7 +125,6 @@
                         <constraint firstAttribute="height" constant="17" id="V2v-Qg-BOF"/>
                         <constraint firstAttribute="width" constant="200" id="q6F-CE-Rxv"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACKTRIP DEFAULT SETTINGS:" id="Icz-NP-NHt">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -149,7 +137,6 @@
                         <constraint firstAttribute="height" constant="17" id="YZk-wW-paA"/>
                         <constraint firstAttribute="width" constant="118" id="Zco-ji-umY"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CHANNEL COUNT:" id="rkN-xf-RCX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -162,7 +149,6 @@
                         <constraint firstAttribute="height" constant="17" id="Esd-sw-9cM"/>
                         <constraint firstAttribute="width" constant="153" id="Eu0-JC-RPu"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PACKET REDUNDANCY:" id="RWu-Ve-GXW">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -175,7 +161,6 @@
                         <constraint firstAttribute="width" constant="161" id="8Wk-iK-AvR"/>
                         <constraint firstAttribute="height" constant="17" id="PfM-zr-nlD"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BIT RATE RESOLUTIONS:" id="naO-Zo-ljO">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -188,7 +173,6 @@
                         <constraint firstAttribute="width" constant="166" id="28z-hY-yIS"/>
                         <constraint firstAttribute="height" constant="20" id="K2d-8l-ZEa"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="BvV-lO-EhB" customClass="AMCheckBoxView">
                     <rect key="frame" x="44" y="242" width="166" height="20"/>
@@ -196,7 +180,6 @@
                         <constraint firstAttribute="width" constant="166" id="Tok-Lp-gfh"/>
                         <constraint firstAttribute="height" constant="20" id="am0-vO-QQY"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="qYF-YM-VDL" customClass="AMCheckBoxView">
                     <rect key="frame" x="414" y="246" width="166" height="20"/>
@@ -204,7 +187,6 @@
                         <constraint firstAttribute="width" constant="166" id="Fjz-3Z-PmH"/>
                         <constraint firstAttribute="height" constant="20" id="KAS-Kp-SYf"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="h9L-6z-MYA" customClass="AMCheckBoxView">
                     <rect key="frame" x="414" y="218" width="166" height="20"/>
@@ -212,7 +194,6 @@
                         <constraint firstAttribute="width" constant="166" id="bQy-Ld-Yy0"/>
                         <constraint firstAttribute="height" constant="20" id="eJi-tZ-2yf"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aJy-Bn-boT" customClass="AMFoundryFontView">
                     <rect key="frame" x="276" y="390" width="170" height="19"/>
@@ -220,7 +201,6 @@
                         <constraint firstAttribute="width" constant="166" id="PLu-fV-cTM"/>
                         <constraint firstAttribute="height" constant="19" id="Rib-QI-l8T"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="zOg-Hc-gXa">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -233,7 +213,6 @@
                         <constraint firstAttribute="width" constant="166" id="07F-rV-egb"/>
                         <constraint firstAttribute="height" constant="19" id="PdJ-dF-T2k"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="I7Z-Iz-3t0">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -246,7 +225,6 @@
                         <constraint firstAttribute="height" constant="19" id="fZj-DN-sBI"/>
                         <constraint firstAttribute="width" constant="166" id="k0x-e4-0CG"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="bbp-OI-5hd">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,7 +237,6 @@
                         <constraint firstAttribute="width" constant="166" id="9mC-sF-vYi"/>
                         <constraint firstAttribute="height" constant="19" id="HY9-yT-JmY"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="xBX-3P-gQQ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -272,14 +249,12 @@
                         <constraint firstAttribute="width" constant="166" id="RPT-rJ-zpJ"/>
                         <constraint firstAttribute="height" constant="20" id="wvC-Te-lqy"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="xEW-J7-OxY">
                     <rect key="frame" x="20" y="366" width="553" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="wyh-6l-6Ml"/>
                     </constraints>
-                    <animations/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
@@ -289,7 +264,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="3Gy-X5-fJV"/>
                     </constraints>
-                    <animations/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
@@ -300,7 +274,6 @@
                         <constraint firstAttribute="height" constant="17" id="JgZ-o8-nKe"/>
                         <constraint firstAttribute="width" constant="165" id="geX-4g-BuJ"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="QUEUE BUFFER LENGTH:" id="qKl-ln-d9Z">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -312,7 +285,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="RDi-Nb-Xet"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="smallSquare" title="CANCEL" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7LE-iB-0CF" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -326,7 +298,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="fOI-ci-Acg"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="smallSquare" title="SAVE" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="2ur-8O-vfh" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -400,7 +371,6 @@
                 <constraint firstItem="ZYy-PC-fBl" firstAttribute="centerY" secondItem="Eom-gc-NhV" secondAttribute="centerY" id="xmI-sz-PnJ"/>
                 <constraint firstItem="kht-NW-CPy" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="20" id="ylC-Pp-stb"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="887.5" y="352.5"/>
         </view>
     </objects>

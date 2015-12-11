@@ -30,6 +30,7 @@
 @property (weak) IBOutlet AMPopUpView *portOffsetSelector;
 @property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
+@property (weak) IBOutlet NSTextField *queueBufferLen;
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
@@ -188,6 +189,9 @@
     
     NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
     self.channeCount.stringValue = chanCountStr;
+    
+    NSString *qblStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
+    self.queueBufferLen.stringValue = qblStr;
     
     NSString *prStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_PR];
     self.rCount.stringValue = prStr;

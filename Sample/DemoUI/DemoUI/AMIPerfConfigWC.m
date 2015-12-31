@@ -18,10 +18,11 @@
 NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification";
 
 @interface AMIPerfConfigWC ()<AMPopUpViewDelegeate>
-
+//@property (nonatomic)  NSInteger    tcpBufferLen;
+//@property (nonatomic)  NSInteger    udpBufferLen;
 @property (weak) IBOutlet AMBlueBorderButton *cancelButton;
 @property (weak) IBOutlet AMBlueBorderButton *saveButton;
-
+@property (weak) IBOutlet NSTextField *bufferLenTF;
 @property (weak) IBOutlet AMPopUpView *roleSelector;
 @property (weak) IBOutlet AMCheckBoxView* useUDPCheck;
 @property (weak) IBOutlet NSTextField *portTF;
@@ -38,15 +39,13 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
 
 - (void) saveDefaultPreference
 {
-    NSString* boolStr;
+
     
     [[AMPreferenceManager standardUserDefaults] setObject:_roleSelector.stringValue
-                                                   forKey:Preference_Jacktrip_Role];
+                                                   forKey:Preference_iPerf_Role];
 
-    [[AMPreferenceManager standardUserDefaults]
-     setObject:[self checkBoolString:_useUDPCheck]
-     forKey:Preference_iPerf_UseUDP];
-    
+    [[AMPreferenceManager standardUserDefaults] setObject:[self checkBoolString:_useUDPCheck]
+                                                   forKey:Preference_iPerf_UseUDP];
     
     [[AMPreferenceManager standardUserDefaults] setObject:_portTF.stringValue
                                                    forKey:Preference_iPerf_Port];
@@ -54,13 +53,14 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     [[AMPreferenceManager standardUserDefaults] setObject:_bandwithTF.stringValue
                                                    forKey:Preference_iPerf_Bandwith];
     
-    [[AMPreferenceManager standardUserDefaults]
-     setObject:[self checkBoolString:_tradeoffCheck]
-     forKey:Preference_iPerf_Tradeoff];
+    [[AMPreferenceManager standardUserDefaults] setObject:_bufferLenTF.stringValue
+                                                   forKey:Preference_iPerf_BufferLen];
     
-    [[AMPreferenceManager standardUserDefaults]
-     setObject:[self checkBoolString:_dualtestCheck]
-     forKey:Preference_iPerf_Dualtest];
+    [[AMPreferenceManager standardUserDefaults] setObject:[self checkBoolString:_tradeoffCheck]
+                                                   forKey:Preference_iPerf_Tradeoff];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:[self checkBoolString:_dualtestCheck]
+                                                   forKey:Preference_iPerf_Dualtest];
 }
 
 - (NSString*) checkBoolString : (AMCheckBoxView*) check
@@ -83,8 +83,11 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     NSString* portStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Port];
     [_portTF setStringValue:portStr];
     
-    NSString* bandwithStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Bandwith];
-    [_bandwithTF setStringValue:bandwithStr];
+    NSString* bandwithStr  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Bandwith];
+    [_bandwithTF   setStringValue:bandwithStr];
+    
+    NSString* bufferLenStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_BufferLen];
+    [_bufferLenTF  setStringValue:bufferLenStr];
     
     NSString* tradeoffStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_iPerf_Tradeoff];
     if ([tradeoffStr isEqualToString:@"YES"]) {
@@ -121,7 +124,6 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
 }
 
 
-
 - (void) setupUI
 {
     [AMButtonHandler changeTabTextColor:self.saveButton toColor:UI_Color_blue];
@@ -141,9 +143,7 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     
-    
     [self loadDefaultPreference];
-
 }
 
 - (IBAction)closeClicked:(id)sender {
@@ -161,6 +161,10 @@ NSString* const AMIPerfServerStartNotification = @"IPerfStartServerNotification"
     
     if ([self.bandwithTF integerValue] > 0) {
         _iperfConfig.bandwith = [self.bandwithTF integerValue];
+    }
+
+    if ([self.bufferLenTF integerValue] > 0) {
+        _iperfConfig.len = [self.bufferLenTF integerValue];
     }
     
     if ([self.roleSelector.stringValue isEqualTo:@"SERVER"]) {

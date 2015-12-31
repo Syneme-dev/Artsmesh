@@ -139,6 +139,7 @@
 #define Preference_iPerf_UseUDP             @"Preference_iPerf_UseUDP"
 #define Preference_iPerf_Port               @"Preference_iPerf_Port"
 #define Preference_iPerf_Bandwith           @"Preference_iPerf_Bandwith"
+#define Preference_iPerf_BufferLen          @"Preference_iPerf_BufferLen"
 #define Preference_iPerf_Tradeoff           @"Preference_iPerf_Tradeoff"
 #define Preference_iPerf_Dualtest           @"Preference_iPerf_Dualtest"
 

@@ -110,6 +110,7 @@
              @"YES",    Preference_iPerf_UseUDP,
              @"5001",   Preference_iPerf_Port,
              @"10",     Preference_iPerf_Bandwith,
+             @"10",     Preference_iPerf_BufferLen,
              @"NO",     Preference_iPerf_Tradeoff,
              @"NO",     Preference_iPerf_Dualtest,
              @"YES",Preference_Key_General_TopControlBar,

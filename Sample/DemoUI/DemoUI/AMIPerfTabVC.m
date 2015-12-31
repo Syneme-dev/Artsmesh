@@ -98,6 +98,10 @@
             [command appendFormat:@" -u"];
         }
         
+        if (cfg.len > 0) {
+            [command appendFormat:@" -l %dK", (int)cfg.len];
+        }
+        
         if (cfg.port > 0) {
             [command appendFormat:@" -p %d", (int)cfg.port];
         }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMIPerfConfigWC">
             <connections>
                 <outlet property="bandwithTF" destination="5HQ-pd-kmP" id="0Hj-Eu-jQX"/>
+                <outlet property="bufferLenTF" destination="vRf-Fr-PR2" id="1A5-0W-sS4"/>
                 <outlet property="cancelButton" destination="5K0-E9-hMp" id="skV-kx-4wO"/>
                 <outlet property="dualtestCheck" destination="xru-AA-yLI" id="6jg-NF-bVv"/>
                 <outlet property="portTF" destination="cmX-pP-YII" id="VIg-rD-dkt"/>
@@ -30,7 +31,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yq-Zk-Jby">
-                        <rect key="frame" x="36" y="94" width="108" height="17"/>
+                        <rect key="frame" x="36" y="95" width="108" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BANDWITH(MB):" id="dnZ-N8-oWa">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -41,7 +42,7 @@
                         <rect key="frame" x="120" y="268" width="124" height="20"/>
                     </customView>
                     <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JeD-f6-T8M">
-                        <rect key="frame" x="12" y="123" width="305" height="5"/>
+                        <rect key="frame" x="12" y="151" width="305" height="5"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
@@ -132,6 +133,26 @@
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5HQ-pd-kmP" customClass="AMFoundryFontView">
                         <rect key="frame" x="160" y="92" width="82" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="BANDWITH" drawsBackground="YES" id="Yga-W0-HPy">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EeO-LZ-JOo">
+                        <rect key="frame" x="36" y="120" width="111" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BUFFER LEN(KB):" id="IA5-4v-HCj">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5g-HB-5Qd">
+                        <rect key="frame" x="25" y="119" width="3" height="17"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="OAz-r8-vsH"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vRf-Fr-PR2" customClass="AMFoundryFontView">
+                        <rect key="frame" x="160" y="118" width="82" height="20"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="LEN" drawsBackground="YES" id="vif-WS-3bo">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>

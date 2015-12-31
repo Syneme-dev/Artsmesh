@@ -12,13 +12,14 @@ extern NSString * const AMIPerfServerStartNotification;
 
 
 @interface AMIPerfConfig : NSObject
-@property (nonatomic)  BOOL serverRole;
-@property (nonatomic)  BOOL useUDP;
-@property (nonatomic)  NSInteger port;
-@property (nonatomic)  NSInteger  bandwith;
-@property (nonatomic)  BOOL tradeoff;
-@property (nonatomic)  BOOL dualtest;
-@property (nonatomic)  BOOL useIPV6;
+@property (nonatomic)  BOOL         serverRole;
+@property (nonatomic)  BOOL         useUDP;
+@property (nonatomic)  NSInteger    port;
+@property (nonatomic)  NSInteger    bandwith;
+@property (nonatomic)  BOOL         tradeoff;
+@property (nonatomic)  BOOL         dualtest;
+@property (nonatomic)  BOOL         useIPV6;
+@property (nonatomic)  NSInteger    len;            //length for buffer.
 @end
 
 

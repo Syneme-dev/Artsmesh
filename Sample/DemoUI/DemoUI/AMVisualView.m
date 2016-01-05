@@ -61,7 +61,7 @@ static NSInteger halfBarWidth = 4; //Real white bar widht is halfBarWidth*2+1;pl
  
     [self drawVerticalAuxiliary:height XStart:0 XEnd:width-Up withCount:4];
     
-    [self drawWhiteBarsCount:5];
+//    [self drawWhiteBarsCount:5];
 }
 
 

@@ -293,6 +293,7 @@
 		4FCA92911AE4EF32002D3CAE /* AMClockTabCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCA928F1AE4EF32002D3CAE /* AMClockTabCellVC.xib */; };
 		4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */; };
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
+		4FDB99A01C3F973400D89619 /* AMNetworkingToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
@@ -984,6 +985,8 @@
 		4FD372791B416ABF006566A6 /* AMTraceRouteTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTraceRouteTabVC.h; sourceTree = "<group>"; };
 		4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTraceRouteTabVC.m; sourceTree = "<group>"; };
 		4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTraceRouteTabVC.xib; sourceTree = "<group>"; };
+		4FDB999E1C3F973400D89619 /* AMNetworkingToolVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkingToolVC.h; sourceTree = "<group>"; };
+		4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkingToolVC.m; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
@@ -2121,6 +2124,8 @@
 				CE6007791990615C00EF9220 /* AMNetworkToolsViewController.xib */,
 				CE73C48D1990E8C4007A32C2 /* AMNetworkToolsCommand.h */,
 				CE73C48E1990E8C4007A32C2 /* AMNetworkToolsCommand.m */,
+				4FDB999E1C3F973400D89619 /* AMNetworkingToolVC.h */,
+				4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */,
 				4F8251261B257E2D00224513 /* AMPingTabVC.h */,
 				4F8251271B257E2D00224513 /* AMPingTabVC.m */,
 				4F8251281B257E2D00224513 /* AMPingTabVC.xib */,
@@ -2590,6 +2595,7 @@
 				CE486AA81A280CB900D35B82 /* AMSyphonViewController.m in Sources */,
 				4AB4ACD41A6CCD39003ECE24 /* AMGroupItem.m in Sources */,
 				2D08FDDE1AD661FF00A9D257 /* GTLYouTubePromotedItemId.m in Sources */,
+				4FDB99A01C3F973400D89619 /* AMNetworkingToolVC.m in Sources */,
 				2D31E6661AFDCA57001E0985 /* AMEventsManagerScrollDocumentView.m in Sources */,
 				2D08FD961AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsSocial.m in Sources */,
 				4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */,

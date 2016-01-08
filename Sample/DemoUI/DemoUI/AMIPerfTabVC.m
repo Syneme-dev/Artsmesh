@@ -13,6 +13,7 @@
 #import "AMPingTabVC.h"
 #import "AMIPerfConfigWC.h"
 #import "AMUserList.h"
+#import "AMNetworkingToolVC.h"
 
 @interface AMIPerfTabVC ()<AMUserListDelegate,AMCheckBoxDelegeate>
 {
@@ -43,6 +44,7 @@
     
     self.serverCheck.delegate = self;
     self.useIPV6Check.title = @"USE IPV6";
+    self.useIPV6Check.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -160,7 +162,15 @@
             //When you unselected the server checkbox, should stop iperf command
             [self stopiPerf];
         }
+    }else if ([sender isEqual:self.useIPV6Check]) {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        if (self.useIPV6Check.checked) {
+            [nc postNotificationName:AMIPV6CHECKTRUENotification object:nil];
+        }else
+            [nc postNotificationName:AMIPV6CHECKFALSENotification object:nil];
+        
     }
+
 }
 
 -(void)stopiPerf
@@ -169,5 +179,12 @@
                              arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
 }
 
+
+-(void) ipv6Checked : (Boolean) checked
+{
+    if (self.useIPV6Check.checked != checked) {
+        [self.useIPV6Check setChecked:checked];
+    }
+}
 
 @end

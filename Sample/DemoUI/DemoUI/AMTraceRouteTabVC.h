@@ -10,5 +10,5 @@
 #import "AMPingTabVC.h"
 
 @interface AMTraceRouteTabVC : NSViewController
-
+-(void) ipv6Checked : (Boolean) checked;
 @end

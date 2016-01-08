@@ -17,8 +17,10 @@
 #import "AMCommonTools/AMCommonTools.h"
 #import "AMUserList.h"
 
+#import "AMNetworkingToolVC.h"
 
-@interface AMPingTabVC () <AMUserListDelegate>
+
+@interface AMPingTabVC () <AMUserListDelegate, AMCheckBoxDelegeate>
 {
     AMUserList* userList;
 }
@@ -48,6 +50,7 @@
                 inputField:_inputField];
     userList.delegate = self;
     self.useIPV6Check.title = @"USE IPV6";
+    self.useIPV6Check.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -55,6 +58,19 @@
     // Do view setup here.
     userList.pingCommand.contentView = self.pingContentView;
     [userList userGroupsChangedPing:nil];
+}
+
+
+-(void)onChecked:(AMCheckBoxView*)sender
+{
+    if ([sender isEqual:self.useIPV6Check]) {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        if (self.useIPV6Check.checked) {
+            [nc postNotificationName:AMIPV6CHECKTRUENotification object:nil];
+        }else
+            [nc postNotificationName:AMIPV6CHECKFALSENotification object:nil];
+        
+    }
 }
 
 - (BOOL) useIPV6
@@ -82,7 +98,12 @@
     
 }
 
-
+-(void) ipv6Checked : (Boolean) checked
+{
+    if (self.useIPV6Check.checked != checked) {
+        [self.useIPV6Check setChecked:checked];
+    }
+}
 
 
 @end

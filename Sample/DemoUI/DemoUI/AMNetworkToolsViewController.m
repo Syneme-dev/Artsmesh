@@ -19,6 +19,7 @@
 #import "AMIPerfTabVC.h"
 #import "AMPingTabVC.h"
 #import "AMTraceRouteTabVC.h"
+#import "AMNetworkingToolVC.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -34,6 +35,7 @@
     NSDictionary*               _titleMapLogFile;
     NSString*                   _searchWord;
     Boolean                     _needSearch;
+    Boolean                     _ipv6Checked;
 }
 
 @property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
@@ -107,6 +109,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        
     }
     return self;
 }
@@ -114,6 +117,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+ //   _ipv6Checked = FALSE;
     [AMButtonHandler changeTabTextColor:self.pingButton         toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
@@ -180,7 +184,16 @@
                     fromNib:@"AMIPerfTabVC"
                      bundle:nil];
 
-    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(ipv6CheckedT:)
+               name:AMIPV6CHECKTRUENotification
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(ipv6CheckedF:)
+               name:AMIPV6CHECKFALSENotification
+             object:nil];
+
     [self registerTabButtons];
 
 }
@@ -201,6 +214,16 @@
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
+- (void)ipv6CheckedT:(NSNotification *)notification
+{
+    _ipv6Checked = TRUE;
+}
+
+- (void)ipv6CheckedF:(NSNotification *)notification
+{
+    _ipv6Checked = FALSE;
+}
+
 - (IBAction)ping:(id)sender
 {
     /*
@@ -208,7 +231,9 @@
     [self.tabView selectTabViewItemWithIdentifier:@"pingTab"];*/
     [self pushDownButton:self.pingButton];
     [self.tabView selectTabViewItemAtIndex:0];
-
+    
+    AMPingTabVC* tabVC = [_viewControllers objectAtIndex:0];
+    [tabVC ipv6Checked:_ipv6Checked];
 }
 
 - (IBAction)traceroute:(id)sender
@@ -217,6 +242,9 @@
   //  [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
     [self pushDownButton:self.tracerouteButton];
     [self.tabView selectTabViewItemAtIndex:1];
+    
+    AMTraceRouteTabVC* tabVC = [_viewControllers objectAtIndex:1];
+    [tabVC ipv6Checked:_ipv6Checked];
 }
 
 - (IBAction)iperf:(id)sender
@@ -225,6 +253,9 @@
  //   [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
     [self pushDownButton:self.iperfButton];
     [self.tabView selectTabViewItemAtIndex:2];
+    
+    AMIPerfTabVC* tabVC = [_viewControllers objectAtIndex:2];
+    [tabVC ipv6Checked:_ipv6Checked];
 }
 
 - (IBAction)log:(id)sender {

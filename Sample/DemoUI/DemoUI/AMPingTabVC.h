@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface AMPingTabVC : NSViewController 
-
+@interface AMPingTabVC : NSViewController
+-(void) ipv6Checked : (Boolean) checked;
 @end
 
 

@@ -498,7 +498,7 @@
         
     } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
         // Run FFPLAY on local machine to capture sent UDP video
-    
+        [self receiveP2P];
     }
 }
 

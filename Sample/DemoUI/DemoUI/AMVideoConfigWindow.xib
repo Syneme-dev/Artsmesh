@@ -16,6 +16,9 @@
                 <outlet property="peerSelecter" destination="uTj-y8-znb" id="rv4-om-7vw"/>
                 <outlet property="portOffsetSelector" destination="Gjb-kV-dLt" id="4gi-jI-Wdm"/>
                 <outlet property="roleSelecter" destination="AXl-vt-9Jv" id="BBg-Pd-GiM"/>
+                <outlet property="vidBitRateTextField" destination="0eo-2o-6Uu" id="B1w-ab-Yj2"/>
+                <outlet property="vidFrameRateTextField" destination="qTZ-ZY-JeX" id="EPN-vl-FVR"/>
+                <outlet property="vidOutSizeTextField" destination="PlM-e9-CEs" id="RMA-li-a7A"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -60,14 +63,6 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Co4-hN-h6h" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="163" width="88" height="20"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="1280x720" drawsBackground="YES" id="wTs-lt-hp3">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jxl-4F-R3e" customClass="AMFoundryFontView">
@@ -149,32 +144,20 @@
                         <rect key="frame" x="20" y="195" width="3" height="17"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="NUc-s5-qSv"/>
                     </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Owi-mc-NZb">
-                        <rect key="frame" x="20" y="165" width="3" height="17"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="vwW-M8-Bt5"/>
-                    </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q52-zE-8eC">
-                        <rect key="frame" x="20" y="132" width="3" height="20"/>
+                        <rect key="frame" x="20" y="162" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Lxl-Yr-3Rj"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xPo-hR-vjF">
-                        <rect key="frame" x="20" y="101" width="3" height="20"/>
+                        <rect key="frame" x="20" y="131" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="E67-cE-mJJ"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uu5-gI-ZnZ">
-                        <rect key="frame" x="20" y="72" width="3" height="20"/>
+                        <rect key="frame" x="20" y="102" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="EXm-Vo-3Ai"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkA-zd-WGj">
-                        <rect key="frame" x="42" y="165" width="99" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INPUT SIZE:" id="GI5-vf-fkZ">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-e9-CEs" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="132" width="88" height="20"/>
+                        <rect key="frame" x="210" y="162" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="720x480" drawsBackground="YES" id="qNC-xB-kS1">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,7 +165,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vbO-ZO-MrR">
-                        <rect key="frame" x="42" y="134" width="99" height="17"/>
+                        <rect key="frame" x="42" y="164" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OUTPUT SIZE:" id="cHw-si-AKq">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -190,7 +173,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-ZY-JeX" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="101" width="88" height="20"/>
+                        <rect key="frame" x="210" y="131" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="30" drawsBackground="YES" id="OWA-iW-IGz">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -198,7 +181,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBX-fQ-MYU">
-                        <rect key="frame" x="42" y="103" width="99" height="17"/>
+                        <rect key="frame" x="42" y="133" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FRAME RATE:" id="xwy-3q-VKz">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -226,7 +209,7 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-2o-6Uu" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="72" width="88" height="20"/>
+                        <rect key="frame" x="210" y="102" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="800 kbps" drawsBackground="YES" id="T9T-wl-pIx">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -234,7 +217,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SRv-JM-JcI">
-                        <rect key="frame" x="42" y="74" width="99" height="17"/>
+                        <rect key="frame" x="42" y="104" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BIT RATE:" id="6sa-sy-kOh">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>

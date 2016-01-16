@@ -33,6 +33,12 @@
 @property (weak) IBOutlet NSButton *closeBtn;
 @property NSArray* allUsers;
 @property  AMLiveUser* curPeer;
+
+@property (weak) IBOutlet AMFoundryFontView *vidOutSizeTextField;
+@property (weak) IBOutlet AMFoundryFontView *vidFrameRateTextField;
+@property (weak) IBOutlet AMFoundryFontView *vidBitRateTextField;
+
+
 @end
 
 
@@ -121,6 +127,7 @@
     }
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
+    [self.peerSelecter addItemWithTitle:@"self"];
     
     if (firstIndexInUserlist == -1) {
         //no one add to list except ip address
@@ -299,6 +306,53 @@
     [theDropDown selectItemWithTitle:deviceName];
 }
 
+// Send video to a second machine using FFMPEG
+-(void)sendP2P {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
+    if ([vidOutSize length] < 1) {
+        vidOutSize = @"1280x720";
+    }
+    NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
+    if ([vidFrameRate length] < 1) {
+        vidFrameRate = @"30";
+    }
+    NSString *vidBitRate = [self.vidBitRateTextField stringValue];
+    if ([vidBitRate length] < 1) {
+        vidBitRate = @"800k";
+    }
+    int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
+    NSString *peerAddr = [self.peerAddress stringValue];
+    int portOffset = [[self.portOffsetSelector stringValue] integerValue];
+    int port = 4464 + portOffset;
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec mpeg2video -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",
+                                launchPath,
+                                vidOutSize,
+                                vidFrameRate,
+                                selectedVidDevice,
+                                vidBitRate,
+                                peerAddr,
+                                port];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    [self.window close];
+}
+
 
 /** End FFMPEG Related Functions **/
 
@@ -312,7 +366,7 @@
         self.peerAddress.stringValue = @"";
         self.peerName.stringValue = @"";
         
-    }else{
+    }else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
         [self.peerAddress setEnabled:NO];
         [self.peerName setEnabled:NO];
         
@@ -326,17 +380,28 @@
                 if(!mySelf.isOnline){
                     self.peerAddress.stringValue = user.privateIp;
                 }else{
-                    self.peerAddress.stringValue = user.publicIp;
+                    //self.peerAddress.stringValue = user.publicIp;
+                    self.peerAddress.stringValue = user.privateIp;
                 }
                 break;
             }
         }
         
         self.peerName.stringValue = self.peerSelecter.stringValue;
+    } else {
+        //self selected
+        AMCoreData* sharedStore = [AMCoreData shareInstance];
+        AMLiveUser* mySelf = sharedStore.mySelf;
+        
+        [self.peerAddress setEnabled:NO];
+        [self.peerName setEnabled:NO];
+        
+        self.peerName.stringValue = mySelf.nickName;
+        self.peerAddress.stringValue = mySelf.privateIp;
     }
 }
 
-
+/**
 -(BOOL)checkouJacktripParams
 {
     if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
@@ -365,21 +430,29 @@
         [alert runModal];
         return NO;
     }
-    
-    /**
-    if ([self.rCount.stringValue intValue] <= 0) {
+ 
+    //if ([self.rCount.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
-        [alert runModal];
-        return NO;
-    }**/
+        //[alert runModal];
+        //return NO;
+    //}
     
     return YES;
 }
+**/
 
 - (BOOL)checkP2PVideoParams {
-    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"SENDER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"]) {
         return NO;
+    }
+    if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
+       [self.peerAddress.stringValue isEqualTo:@""]){
+        if([self.peerName.stringValue isEqualTo:@""]){
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a P2P video client role you must enter an IP Address"];
+            [alert runModal];
+            return NO;
+        }
     }
     
     return YES;
@@ -390,7 +463,14 @@
         return;
     }
     
-    [self.window close];
+    if ([self.roleSelecter.stringValue isEqualTo:@"SENDER"]) {
+        // Run FFMPEG to a second machine, given set params
+        [self sendP2P];
+        
+    } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
+        // Run FFPLAY on local machine to capture sent UDP video
+    
+    }
 }
 
 

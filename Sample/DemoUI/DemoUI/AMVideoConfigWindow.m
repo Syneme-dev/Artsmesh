@@ -25,6 +25,8 @@
 @property (weak) IBOutlet AMFoundryFontView *peerName;
 @property (weak) IBOutlet AMPopUpView *portOffsetSelector;
 //@property (weak) IBOutlet NSTextField *rCount;
+
+@property (weak) IBOutlet AMPopUpView *deviceSelector;
 @property (weak) IBOutlet NSTextField *bitRateRes;
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
@@ -34,7 +36,9 @@
 @end
 
 
-@implementation AMVideoConfigWindow
+@implementation AMVideoConfigWindow {
+    NSTask *_ffmpegTask;
+}
 
 -(instancetype) init{
     if (self = [super init]) {
@@ -53,6 +57,7 @@
     [self loadDefaultPref];
     [self setPeerList];
     [self initPortOffset];
+    [self populateDevicesList];
 }
 
 -(void)setUpUI
@@ -72,6 +77,7 @@
     [self.peerName setEnabled:NO];
     
     self.portOffsetSelector.delegate = self;
+    self.deviceSelector.delegate = self;
     self.roleSelecter.delegate = self;
     self.peerSelecter.delegate = self;
 }
@@ -192,6 +198,99 @@
     NSString *brrStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_BRR];
     self.bitRateRes.stringValue = brrStr;
     
+}
+
+-(void)populateDevicesList {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    NSPipe *pipe = [NSPipe pipe];
+    NSFileHandle *file = pipe.fileHandleForReading;
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -f avfoundation -list_devices true -i \"\"",
+                                launchPath];
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    
+    [_ffmpegTask setStandardOutput:pipe];
+    [_ffmpegTask setStandardError: [_ffmpegTask standardOutput]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotDeviceList:) name:NSFileHandleDataAvailableNotification object:file];
+    
+    
+    [_ffmpegTask launch];
+    
+    [file waitForDataInBackgroundAndNotify];
+}
+
+- (void) gotDeviceList : (NSNotification*)notification
+{
+    //We have data from ffmpeg devices_list command
+    //Need to pull out the relevant devices & populate the device dropdown
+    
+    NSFileHandle *outputFile = (NSFileHandle *) [notification object];
+    NSData *data = [outputFile availableData];
+    
+    if([data length]) {
+        NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
+        
+        NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSArray *brokenByLines=[temp componentsSeparatedByString:@"\n"];
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[.\\] "
+                                                                               options:NSRegularExpressionCaseInsensitive error:nil];
+        BOOL isVideoDeviceLine = NO;
+        BOOL isAudioDeviceLine = NO;
+        
+        for (NSString *line in brokenByLines) {
+            
+            if ([line rangeOfString:@"[AVFoundation input device"].location != NSNotFound) {
+                NSString *modifiedString = [regex stringByReplacingMatchesInString:line options:0 range:NSMakeRange(0, [line length]) withTemplate:@"||"];
+                if(isVideoDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the video device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [tempVidDevices addObject:deviceString];
+                    
+                }
+                
+                //Find video device line
+                if ([line rangeOfString:@"video devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = YES;
+                    isAudioDeviceLine = NO;
+                }
+                //Find audio device line
+                if ([line rangeOfString:@"audio devices:"].location != NSNotFound) {
+                    isVideoDeviceLine = NO;
+                    isAudioDeviceLine = YES;
+                }
+            }
+        }
+        
+        if ([tempVidDevices count] > 0) {
+            NSArray *videoDevicesToInsert = [tempVidDevices copy];
+            
+            [self.deviceSelector removeAllItems];
+            [self.deviceSelector addItemsWithTitles:videoDevicesToInsert];
+            
+            [self selectDevice:self.deviceSelector :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Device]];
+        }
+        
+        [outputFile waitForDataInBackgroundAndNotify];
+    }
+}
+
+-(void) selectDevice :(AMPopUpView *)theDropDown :(NSString *)deviceName {
+    [theDropDown selectItemAtIndex:0];
+    
+    [theDropDown selectItemWithTitle:deviceName];
 }
 
 

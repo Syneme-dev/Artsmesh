@@ -10,6 +10,7 @@
                 <outlet property="channeCount" destination="Jxl-4F-R3e" id="vKK-dP-YKC"/>
                 <outlet property="closeBtn" destination="cAJ-wD-Xnh" id="TPh-Pb-Ig7"/>
                 <outlet property="createBtn" destination="xkw-jy-sxB" id="Wyy-RD-AiM"/>
+                <outlet property="deviceSelector" destination="KIT-oi-dKo" id="6oU-3T-4vR"/>
                 <outlet property="peerAddress" destination="ghe-F9-1Fp" id="oL7-Ps-mDX"/>
                 <outlet property="peerName" destination="v2h-Tb-Mj3" id="bZh-ZE-Jlu"/>
                 <outlet property="peerSelecter" destination="uTj-y8-znb" id="rv4-om-7vw"/>

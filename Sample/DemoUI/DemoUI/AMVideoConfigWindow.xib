@@ -222,7 +222,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="startJacktrip:" target="-2" id="2pF-Wv-mIx"/>
+                            <action selector="startP2PVideo:" target="-2" id="BIc-NG-IIb"/>
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-2o-6Uu" customClass="AMFoundryFontView">

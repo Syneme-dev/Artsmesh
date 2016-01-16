@@ -70,8 +70,8 @@
     [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
 
     
-    [self.roleSelecter addItemWithTitle:@"SERVER"];
-    [self.roleSelecter addItemWithTitle:@"CLIENT"];
+    [self.roleSelecter addItemWithTitle:@"SENDER"];
+    [self.roleSelecter addItemWithTitle:@"RECEIVER"];
     
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
@@ -200,6 +200,9 @@
     
 }
 
+/** Start FFMPEG Related Functions **/
+
+// Make FFMPEG call to find AVFoundation Devices on machine
 -(void)populateDevicesList {
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSPipe *pipe = [NSPipe pipe];
@@ -230,6 +233,8 @@
     [file waitForDataInBackgroundAndNotify];
 }
 
+// Devices list returned from FFMPEG
+// Now throw the video options in the device dropdown
 - (void) gotDeviceList : (NSNotification*)notification
 {
     //We have data from ffmpeg devices_list command
@@ -287,12 +292,15 @@
     }
 }
 
+// Select a new device option
 -(void) selectDevice :(AMPopUpView *)theDropDown :(NSString *)deviceName {
     [theDropDown selectItemAtIndex:0];
     
     [theDropDown selectItemWithTitle:deviceName];
 }
 
+
+/** End FFMPEG Related Functions **/
 
 - (void)peerSelectedChanged:(AMPopUpView *)sender
 {
@@ -368,9 +376,17 @@
     return YES;
 }
 
-- (IBAction)startJacktrip:(NSButton *)sender
-{
-    if (![self checkouJacktripParams]) {
+- (BOOL)checkP2PVideoParams {
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (IBAction)startP2PVideo:(NSButton *)sender {
+    if (![self checkP2PVideoParams]) {
         return;
     }
     

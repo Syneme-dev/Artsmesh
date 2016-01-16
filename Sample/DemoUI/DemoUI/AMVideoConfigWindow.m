@@ -24,7 +24,7 @@
 @property (weak) IBOutlet AMFoundryFontView *peerAddress;
 @property (weak) IBOutlet AMFoundryFontView *peerName;
 @property (weak) IBOutlet AMPopUpView *portOffsetSelector;
-@property (weak) IBOutlet NSTextField *rCount;
+//@property (weak) IBOutlet NSTextField *rCount;
 @property (weak) IBOutlet NSTextField *bitRateRes;
 @property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
@@ -186,8 +186,8 @@
     NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
     self.channeCount.stringValue = chanCountStr;
     
-    NSString *prStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_PR];
-    self.rCount.stringValue = prStr;
+    //NSString *prStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_PR];
+    //self.rCount.stringValue = prStr;
     
     NSString *brrStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_BRR];
     self.bitRateRes.stringValue = brrStr;
@@ -259,11 +259,12 @@
         return NO;
     }
     
+    /**
     if ([self.rCount.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
         [alert runModal];
         return NO;
-    }
+    }**/
     
     return YES;
 }

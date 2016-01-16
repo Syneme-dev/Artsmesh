@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVisualViewController">
@@ -22,20 +22,17 @@
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="8pw-EZ-98P">
                     <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
-                    <animations/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="AUDIO" identifier="2" id="FQx-VS-ZDD">
                             <view key="view" identifier="Audio Mixer" id="nMI-a8-B9I">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="VIDEO" identifier="1" id="i1g-sZ-YNA">
                             <view key="view" identifier="Video Mixer" id="3O3-mQ-QFL">
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -46,7 +43,6 @@
                         <constraint firstAttribute="height" constant="17" id="U6E-PF-KdE"/>
                         <constraint firstAttribute="width" constant="4" id="gHn-qq-P4f"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="E3C-R3-Y8Y">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -59,7 +55,6 @@
                         <constraint firstAttribute="height" constant="13" id="g6P-E1-tC4"/>
                         <constraint firstAttribute="width" constant="40" id="qMB-H8-R7W"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="CYQ-Mv-q5D">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -74,7 +69,6 @@
                         <constraint firstAttribute="width" constant="38" id="M3S-Y5-smp"/>
                         <constraint firstAttribute="height" constant="13" id="czF-Y5-pLV"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="NBw-2a-GJb">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -96,7 +90,6 @@
                 <constraint firstAttribute="bottom" secondItem="8pw-EZ-98P" secondAttribute="bottom" id="miY-iz-7fa"/>
                 <constraint firstAttribute="trailing" secondItem="8pw-EZ-98P" secondAttribute="trailing" id="otn-zw-Rlz"/>
             </constraints>
-            <animations/>
         </customView>
     </objects>
 </document>

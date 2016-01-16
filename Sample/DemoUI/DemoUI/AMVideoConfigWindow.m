@@ -327,7 +327,7 @@
     }
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
-    int portOffset = [[self.portOffsetSelector stringValue] integerValue];
+    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
     int port = 4464 + portOffset;
     
     NSMutableString *command = [NSMutableString stringWithFormat:
@@ -353,6 +353,35 @@
     [self.window close];
 }
 
+// Receive sent p2p video from ffmpeg via ffplay (potentially mplayer also)
+- (void)receiveP2P {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffplay"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    NSString *peerAddr = [self.peerAddress stringValue];
+    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
+    int port = 4464 + portOffset;
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ udp://%@:%d",
+                                launchPath,
+                                peerAddr,
+                                port];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    [self.window close];
+}
 
 /** End FFMPEG Related Functions **/
 

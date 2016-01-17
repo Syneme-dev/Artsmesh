@@ -328,7 +328,7 @@
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 4464 + portOffset;
+    int port = 5564 + portOffset;
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec mpeg2video -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",

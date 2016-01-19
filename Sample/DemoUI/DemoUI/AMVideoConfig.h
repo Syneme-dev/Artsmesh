@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMCoreData/AMCoreData.h"
+
+extern NSString* const AMVideoDeviceNotification;
 
 @interface AMVideoConfig : NSObject
+@property NSArray*      receiver;
+@property NSString*     receiverName;
+@property AMLiveUser*   myself;
+// AMUser
 
 //-s, --server                             Run in Server Mode
 //-c, --client      <peer_host_IP_number>  Run in Client Mode

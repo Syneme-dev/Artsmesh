@@ -8,6 +8,8 @@
 
 #import "AMVideoConfig.h"
 
+NSString* const AMVideoDeviceNotification = @"AMVideoDeviceNotification";
+
 @implementation AMVideoConfig
 
 @end

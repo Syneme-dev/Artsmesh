@@ -430,45 +430,21 @@
     }
 }
 
-/**
--(BOOL)checkouJacktripParams
+
+-(void)saveVideoConfig
 {
-    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
-        return NO;
-    }
-    
-    if ([self.roleSelecter.stringValue isEqualTo:@"SERVER"]){
-        if ([self.peerName.stringValue isEqualTo:@""]) {
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
-            [alert runModal];
-            return NO;
-        }
-        
-    }else if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
-             [self.peerAddress.stringValue isEqualTo:@""]){
-        if([self.peerName.stringValue isEqualTo:@""]){
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];
-            [alert runModal];
-            return NO;
-        }
-    }
-    
-    if ([self.channeCount.stringValue intValue] <= 0) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"channel count parameter can not be less than zero"];
-        [alert runModal];
-        return NO;
-    }
+    AMCoreData* sharedStore = [AMCoreData shareInstance];
+    _videoConfig.myself = sharedStore.mySelf;
  
-    //if ([self.rCount.stringValue intValue] <= 0) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"rcount parameter can not be less than zero"];
-        //[alert runModal];
-        //return NO;
-    //}
+    NSString *peerAddr = [self.peerAddress stringValue];
+    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
+    int port = 5564 + portOffset;
     
-    return YES;
+    _videoConfig.receiverName = [NSMutableString stringWithFormat: @"%@:%d", peerAddr,  port];
+    _videoConfig.role = self.roleSelecter.stringValue;
+    return;
 }
-**/
+
 
 - (BOOL)checkP2PVideoParams {
     if ([self.roleSelecter.stringValue isNotEqualTo:@"SENDER"] &&

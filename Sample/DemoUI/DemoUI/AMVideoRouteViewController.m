@@ -27,7 +27,8 @@
 {
     NSTimer*    _deviceTimer;
    
-    AMVideoConfigWindow* _configController;
+    AMVideoConfigWindow*    _configController;
+    NSMutableArray*         _videoChannels;
 }
 
 
@@ -107,12 +108,14 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    /*
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(reloadAudioChannel:)
-     name:AM_RELOAD_JACK_CHANNEL_NOTIFICATION
-     object:nil];
+            addObserver:self
+            selector:@selector(reloadVideoChannel:)
+                                        name:AMVideoDeviceNotification
+                                        object:nil];
     
+    _videoChannels = [[NSMutableArray alloc] init];
+    /*
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(jackStarted:)
@@ -133,13 +136,13 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
     view.delegate = self;
     
-    [self reloadAudioChannel:nil];
+    [self reloadVideoChannel:nil];
 }
 
 -(void)refreshDevices
 {
     //if([self.jacktripManager.jackTripInstances count] != 0){
-        [self reloadAudioChannel:nil];
+        [self reloadVideoChannel:nil];
     //}
 }
 
@@ -149,10 +152,16 @@ shouldRemoveDevice:(NSString *)deviceID;
      removeObserver:self];
 }
 
-
+-(void) reloadVideoChannel:(NSNotification*) notif
+{
+    AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
+    
+    
+}
+   /*
 -(void)reloadAudioChannel:(NSNotification*)notify
 {
-    /*
+ 
     if (![[[AMAudio sharedInstance] audioJackClient] isOpen]) {
         return;
     }
@@ -268,8 +277,8 @@ shouldRemoveDevice:(NSString *)deviceID;
             }
         }
     }
-     */
-}
+    
+}*/
 
 //The commentary part is old verison of NSPopover. Somehow it doesn't work. When you select in
 // the Pop-Up view, the whole NSPopover window disappear. So change it to window implentation.
@@ -314,6 +323,38 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     [_configController showWindow:self];
  }
+@end
 
+
+@implementation AMVideoDevice
+
+-(void)sortChannels
+{
+    NSMutableArray* sortedChannels = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.channels count]; i++) {
+        
+        AMChannel* chann = self.channels[i];
+        if (chann.type == AMDestinationChannel) {
+            [sortedChannels addObject:chann];
+        }else{
+            
+            BOOL bFind = NO;
+            for (int j = 0; j < [sortedChannels count]; j++) {
+                AMChannel* existCh = sortedChannels[j];
+                if (existCh.type == AMDestinationChannel) {
+                    [sortedChannels insertObject:chann atIndex:j];
+                    bFind = YES;
+                    break;
+                }
+            }
+            
+            if (!bFind) {
+                [sortedChannels addObject:chann];
+            }
+        }
+    }
+    
+    self.channels = sortedChannels;
+}
 
 @end

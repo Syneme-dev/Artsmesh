@@ -12,8 +12,9 @@
 extern NSString* const AMVideoDeviceNotification;
 
 @interface AMVideoConfig : NSObject
-@property NSArray*      receiver;
-@property NSString*     receiverName;
+@property NSArray*      peer;
+@property NSString*     peerIP;
+@property int           peerPort;
 @property AMLiveUser*   myself;
 // AMUser
 

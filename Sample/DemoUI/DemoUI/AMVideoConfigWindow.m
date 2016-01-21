@@ -457,11 +457,10 @@
     AMCoreData* sharedStore = [AMCoreData shareInstance];
     _videoConfig.myself = sharedStore.mySelf;
  
-    NSString *peerAddr = [self.peerAddress stringValue];
+    _videoConfig.peerIP   = [self.peerAddress stringValue];
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 5564 + portOffset;
+    _videoConfig.peerPort = 5564 + portOffset;
     
-    _videoConfig.receiverName = [NSMutableString stringWithFormat: @"%@:%d", peerAddr,  port];
     _videoConfig.role = self.roleSelecter.stringValue;
     return;
 }
@@ -497,6 +496,9 @@
         // Run FFPLAY on local machine to capture sent UDP video
         [self receiveP2P];
     }
+    
+    [self saveVideoConfig];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AMVideoDeviceNotification object:nil];
 }
 
 

@@ -137,6 +137,11 @@ shouldRemoveDevice:(NSString *)deviceID;
     view.delegate = self;
     
     [self reloadVideoChannel:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadVideoChannel:)
+                                                 name:AMVideoDeviceNotification
+                                               object:nil];
+
 }
 
 -(void)refreshDevices
@@ -156,7 +161,74 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
     
+    if(_configController.videoConfig.myself == nil)
+        return;
     
+    //NSString* myselfIP  = _configController.videoConfig.myself.privateIp;
+    NSString* peerIP    = _configController.videoConfig.peerIP;
+    NSString* peerPort  = [NSString stringWithFormat:@"%d",_configController.videoConfig.peerPort];
+    BOOL      isSender  = [_configController.videoConfig.role isEqualToString:@"SENDER"];
+   
+    AMChannel* myChannel    = nil;
+    AMChannel* peerChannel  = nil;
+    
+    BOOL bFind = NO;
+    for( AMChannel *channel in _videoChannels){
+        if ([channel.deviceID isEqualToString:@"myself"]) {
+            bFind = YES;
+            myChannel =channel;
+            break;
+        }
+    }
+    
+    //No myself channel
+    if (bFind == NO) {
+        myChannel = [[AMChannel alloc] init];
+        myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
+        myChannel.deviceID     = @"myself";
+        myChannel.channelName  = @"myself";
+        myChannel.index = 0;
+        NSMutableArray* channels = [[NSMutableArray alloc] init];
+        [channels addObject:myChannel];
+        
+        [_videoChannels addObject:myChannel];
+        
+        [routeView associateChannels:channels
+                          withDevice:myChannel.deviceID
+                                name:myChannel.channelName
+                           removable:NO];
+    }
+    
+    
+    bFind = NO;
+    for( AMChannel *channel in _videoChannels){
+        if ([channel.deviceID isEqualToString:peerIP]) {
+            bFind = YES;
+            peerChannel = channel;
+            break;
+        }
+    }
+    //peer channel
+    if (bFind == NO) {
+        peerChannel = [[AMChannel alloc] init];
+        peerChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
+        peerChannel.deviceID     = peerIP;
+        peerChannel.channelName  = peerPort;
+        peerChannel.index = 0;
+        NSMutableArray* channels = [[NSMutableArray alloc] init];
+        [channels addObject:peerChannel];
+        
+        [_videoChannels addObject:peerChannel];
+        
+        [routeView associateChannels:channels
+                          withDevice:peerChannel.deviceID
+                                name:peerChannel.channelName
+                           removable:NO];
+    }
+
+    
+    
+    [routeView connectChannel:myChannel toChannel:peerChannel];
 }
    /*
 -(void)reloadAudioChannel:(NSNotification*)notify

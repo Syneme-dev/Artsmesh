@@ -37,6 +37,8 @@
 @property (weak) IBOutlet AMFoundryFontView *vidOutSizeTextField;
 @property (weak) IBOutlet AMFoundryFontView *vidFrameRateTextField;
 @property (weak) IBOutlet AMFoundryFontView *vidBitRateTextField;
+@property (weak) IBOutlet AMPopUpView *vidCodec;
+
 
 
 @end
@@ -79,6 +81,10 @@
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
     
+    [self.vidCodec addItemWithTitle:@"h.264"];
+    [self.vidCodec addItemWithTitle:@"mpeg2"];
+    [self.vidCodec selectItemWithTitle:@"h.264"];
+    
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
     
@@ -86,6 +92,7 @@
     self.deviceSelector.delegate = self;
     self.roleSelecter.delegate = self;
     self.peerSelecter.delegate = self;
+    self.vidCodec.delegate = self;
 }
 
 

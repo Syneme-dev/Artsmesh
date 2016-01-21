@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
@@ -17,6 +17,7 @@
                 <outlet property="portOffsetSelector" destination="Gjb-kV-dLt" id="4gi-jI-Wdm"/>
                 <outlet property="roleSelecter" destination="AXl-vt-9Jv" id="BBg-Pd-GiM"/>
                 <outlet property="vidBitRateTextField" destination="0eo-2o-6Uu" id="B1w-ab-Yj2"/>
+                <outlet property="vidCodec" destination="wlR-hD-mGP" id="fns-Hr-W5R"/>
                 <outlet property="vidFrameRateTextField" destination="qTZ-ZY-JeX" id="EPN-vl-FVR"/>
                 <outlet property="vidOutSizeTextField" destination="PlM-e9-CEs" id="RMA-li-a7A"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -28,7 +29,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="318" height="421"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="-5" width="318" height="421"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -145,19 +146,19 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="NUc-s5-qSv"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q52-zE-8eC">
-                        <rect key="frame" x="20" y="162" width="3" height="20"/>
+                        <rect key="frame" x="20" y="132" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Lxl-Yr-3Rj"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xPo-hR-vjF">
-                        <rect key="frame" x="20" y="131" width="3" height="20"/>
+                        <rect key="frame" x="20" y="101" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="E67-cE-mJJ"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uu5-gI-ZnZ">
-                        <rect key="frame" x="20" y="102" width="3" height="20"/>
+                        <rect key="frame" x="20" y="72" width="3" height="20"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="EXm-Vo-3Ai"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PlM-e9-CEs" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="162" width="88" height="20"/>
+                        <rect key="frame" x="210" y="132" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="720x480" drawsBackground="YES" id="qNC-xB-kS1">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,7 +166,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vbO-ZO-MrR">
-                        <rect key="frame" x="42" y="164" width="99" height="17"/>
+                        <rect key="frame" x="42" y="134" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OUTPUT SIZE:" id="cHw-si-AKq">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -173,7 +174,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-ZY-JeX" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="131" width="88" height="20"/>
+                        <rect key="frame" x="210" y="101" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="30" drawsBackground="YES" id="OWA-iW-IGz">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,7 +182,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBX-fQ-MYU">
-                        <rect key="frame" x="42" y="133" width="99" height="17"/>
+                        <rect key="frame" x="42" y="103" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FRAME RATE:" id="xwy-3q-VKz">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -209,7 +210,7 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eo-2o-6Uu" customClass="AMFoundryFontView">
-                        <rect key="frame" x="210" y="102" width="88" height="20"/>
+                        <rect key="frame" x="210" y="72" width="88" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="800k" drawsBackground="YES" id="T9T-wl-pIx">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -217,7 +218,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SRv-JM-JcI">
-                        <rect key="frame" x="42" y="104" width="99" height="17"/>
+                        <rect key="frame" x="42" y="74" width="99" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BIT RATE:" id="6sa-sy-kOh">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -226,6 +227,21 @@
                     </textField>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-oi-dKo" customClass="AMPopUpView">
                         <rect key="frame" x="144" y="195" width="154" height="20"/>
+                    </customView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AxM-Qr-Oao">
+                        <rect key="frame" x="42" y="163" width="157" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CODEC:" id="b1a-V5-6V5">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7Y-8L-RPL">
+                        <rect key="frame" x="20" y="163" width="3" height="17"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="63c-Jp-uVI"/>
+                    </imageView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wlR-hD-mGP" customClass="AMPopUpView">
+                        <rect key="frame" x="144" y="163" width="154" height="20"/>
                     </customView>
                 </subviews>
             </view>

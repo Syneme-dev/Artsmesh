@@ -383,7 +383,7 @@
     
     NSString *peerAddr = [self.peerAddress stringValue];
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 4464 + portOffset;
+    int port = 5564 + portOffset;
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ udp://%@:%d",

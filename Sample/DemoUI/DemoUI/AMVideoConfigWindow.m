@@ -315,15 +315,12 @@
 
 // Send video to a second machine using FFMPEG
 -(void)sendP2P {
+    /** TO-DO either add buffsize as a selectable field **/
     NSBundle* mainBundle = [NSBundle mainBundle];
     
     NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
-    NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
-    if ([vidOutSize length] < 1) {
-        vidOutSize = @"1280x720";
-    }
     NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
     if ([vidFrameRate length] < 1) {
         vidFrameRate = @"30";
@@ -332,17 +329,34 @@
     if ([vidBitRate length] < 1) {
         vidBitRate = @"800k";
     }
+    int frameRateInt = (int) [vidFrameRate integerValue];
+    int maxRateInt = frameRateInt * 100;
+    int maxSizeInt = frameRateInt * 50;
+    int bufSizeInt = maxRateInt / frameRateInt;
+    
+    NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
+    NSString *selectedCodec = self.vidCodec.stringValue;
+    if ([selectedCodec isEqualToString:@"mpeg2"]) {
+        vCodec = @"mpeg2video";
+    }
+    
+    NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
+    if ([vidOutSize length] < 1) {
+        vidOutSize = @"1280x720";
+    }
+
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
     int port = 5564 + portOffset;
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec mpeg2video -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",
+                                @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",
                                 launchPath,
                                 vidOutSize,
                                 vidFrameRate,
                                 selectedVidDevice,
+                                vCodec,
                                 vidBitRate,
                                 peerAddr,
                                 port];

@@ -350,6 +350,9 @@
 
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
+    if (self.useIpv6CheckboxView.checked) {
+        peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
+    }
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
     int port = 5564 + portOffset;
     
@@ -437,7 +440,7 @@
                     self.peerAddress.stringValue = user.privateIp;
                   }
                 }else{ //when the ipv6 checked, we just use
-                    self.peerAddress.stringValue = [NSString stringWithFormat:@"[%@]", user.ipv6Address];
+                    self.peerAddress.stringValue = user.ipv6Address;
                 }
                 break;
             }
@@ -457,7 +460,7 @@
         if (!self.useIpv6CheckboxView.checked) {
             self.peerAddress.stringValue = mySelf.privateIp;
         } else {
-            self.peerAddress.stringValue = [NSString stringWithFormat:@"[%@]", mySelf.ipv6Address];
+            self.peerAddress.stringValue = mySelf.ipv6Address;
         }
     }
 }

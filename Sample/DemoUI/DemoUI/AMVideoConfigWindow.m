@@ -388,6 +388,10 @@
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSString *peerAddr = [self.peerAddress stringValue];
+    if (self.useIpv6CheckboxView.checked) {
+        peerAddr = [NSString stringWithFormat:@"[%@]", [self.peerAddress stringValue]];
+    }
+    
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
     int port = 5564 + portOffset;
     

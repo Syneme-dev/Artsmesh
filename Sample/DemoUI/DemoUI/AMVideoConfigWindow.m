@@ -29,7 +29,6 @@
 @property (weak) IBOutlet AMPopUpView *deviceSelector;
 @property (weak) IBOutlet NSTextField *bitRateRes;
 @property (weak) IBOutlet NSButton *createBtn;
-@property (weak) IBOutlet NSTextField *channeCount;
 @property (weak) IBOutlet NSButton *closeBtn;
 @property NSArray* allUsers;
 @property  AMLiveUser* curPeer;
@@ -38,6 +37,7 @@
 @property (weak) IBOutlet AMFoundryFontView *vidFrameRateTextField;
 @property (weak) IBOutlet AMFoundryFontView *vidBitRateTextField;
 @property (weak) IBOutlet AMPopUpView *vidCodec;
+@property (strong) IBOutlet AMCheckBoxView *useIpv6CheckboxView;
 
 
 
@@ -93,6 +93,9 @@
     self.roleSelecter.delegate = self;
     self.peerSelecter.delegate = self;
     self.vidCodec.delegate = self;
+    
+    self.useIpv6CheckboxView.title = @"USE IPV6";
+    self.useIpv6CheckboxView.delegate = self;
 }
 
 
@@ -203,8 +206,8 @@
     NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Role];
     [self.roleSelecter selectItemWithTitle:roleStr];
     
-    NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
-    self.channeCount.stringValue = chanCountStr;
+    //NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
+    //self.channeCount.stringValue = chanCountStr;
     
     //NSString *prStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_PR];
     //self.rCount.stringValue = prStr;
@@ -424,14 +427,17 @@
         AMLiveUser* mySelf = sharedStore.mySelf;
         
         for (AMLiveUser* user in self.allUsers) {
-            
             if([user.nickName isEqualToString:self.peerSelecter.stringValue]){
               // We just distingush the private/public ip on ipv4
-                if(!mySelf.isOnline){
+              if (!self.useIpv6CheckboxView.checked) {
+                  if(!mySelf.isOnline){
                     self.peerAddress.stringValue = user.privateIp;
-                }else{
+                  }else{
                     //self.peerAddress.stringValue = user.publicIp;
                     self.peerAddress.stringValue = user.privateIp;
+                  }
+                }else{ //when the ipv6 checked, we just use
+                    self.peerAddress.stringValue = user.ipv6Address;
                 }
                 break;
             }
@@ -511,5 +517,8 @@
 - (void) onChecked:(AMCheckBoxView *)sender
 {
     
+    if (sender == self.useIpv6CheckboxView) {
+        [self peerSelectedChanged:self.peerSelecter];
+    }
 }
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVideoConfigWindow">
             <connections>
-                <outlet property="channeCount" destination="Jxl-4F-R3e" id="vKK-dP-YKC"/>
                 <outlet property="closeBtn" destination="cAJ-wD-Xnh" id="TPh-Pb-Ig7"/>
                 <outlet property="createBtn" destination="xkw-jy-sxB" id="Wyy-RD-AiM"/>
                 <outlet property="deviceSelector" destination="KIT-oi-dKo" id="6oU-3T-4vR"/>
@@ -16,6 +15,7 @@
                 <outlet property="peerSelecter" destination="uTj-y8-znb" id="rv4-om-7vw"/>
                 <outlet property="portOffsetSelector" destination="Gjb-kV-dLt" id="4gi-jI-Wdm"/>
                 <outlet property="roleSelecter" destination="AXl-vt-9Jv" id="BBg-Pd-GiM"/>
+                <outlet property="useIpv6CheckboxView" destination="zp5-OY-9Gy" id="gRB-Ti-Wxe"/>
                 <outlet property="vidBitRateTextField" destination="0eo-2o-6Uu" id="B1w-ab-Yj2"/>
                 <outlet property="vidCodec" destination="wlR-hD-mGP" id="fns-Hr-W5R"/>
                 <outlet property="vidFrameRateTextField" destination="qTZ-ZY-JeX" id="EPN-vl-FVR"/>
@@ -29,7 +29,7 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="318" height="421"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="-5" width="318" height="421"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -66,18 +66,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jxl-4F-R3e" customClass="AMFoundryFontView">
-                        <rect key="frame" x="174" y="273" width="124" height="20"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="1 or more" drawsBackground="YES" id="xXC-bl-Yki">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="8t4-UB-pnl">
-                                <real key="minimum" value="1"/>
-                                <real key="maximum" value="32"/>
-                            </numberFormatter>
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </textFieldCell>
-                    </textField>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXl-vt-9Jv" customClass="AMPopUpView">
                         <rect key="frame" x="174" y="388" width="124" height="20"/>
                     </customView>
@@ -109,14 +97,6 @@
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Nw-04-cmI">
-                        <rect key="frame" x="42" y="273" width="122" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CHANNEL COUNT:" id="UnR-on-gJx">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TN3-0g-Eho">
                         <rect key="frame" x="20" y="390" width="3" height="17"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="TON-6T-uy0"/>
@@ -242,6 +222,9 @@
                     </imageView>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wlR-hD-mGP" customClass="AMPopUpView">
                         <rect key="frame" x="144" y="163" width="154" height="20"/>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zp5-OY-9Gy" customClass="AMCheckBoxView">
+                        <rect key="frame" x="44" y="271" width="142" height="20"/>
                     </customView>
                 </subviews>
             </view>

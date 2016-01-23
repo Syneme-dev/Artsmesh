@@ -437,7 +437,7 @@
                     self.peerAddress.stringValue = user.privateIp;
                   }
                 }else{ //when the ipv6 checked, we just use
-                    self.peerAddress.stringValue = user.ipv6Address;
+                    self.peerAddress.stringValue = [NSString stringWithFormat:@"[%@]", user.ipv6Address];
                 }
                 break;
             }
@@ -453,7 +453,12 @@
         [self.peerName setEnabled:NO];
         
         self.peerName.stringValue = mySelf.nickName;
-        self.peerAddress.stringValue = mySelf.privateIp;
+        
+        if (!self.useIpv6CheckboxView.checked) {
+            self.peerAddress.stringValue = mySelf.privateIp;
+        } else {
+            self.peerAddress.stringValue = [NSString stringWithFormat:@"[%@]", mySelf.ipv6Address];
+        }
     }
 }
 

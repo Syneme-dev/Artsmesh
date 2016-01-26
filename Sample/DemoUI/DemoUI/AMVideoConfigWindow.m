@@ -50,7 +50,7 @@
 
 -(instancetype) init{
     if (self = [super init]) {
-        _videoConfig = [[AMVideoConfig alloc] init];
+
     }
     
     return self;
@@ -66,6 +66,8 @@
     [self setPeerList];
     [self initPortOffset];
     [self populateDevicesList];
+    
+    _videoConfig = [[AMVideoConfig alloc] init];
 }
 
 -(void)setUpUI

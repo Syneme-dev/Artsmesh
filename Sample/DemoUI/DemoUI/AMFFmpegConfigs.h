@@ -32,8 +32,11 @@
 // -r 30                            Sets frame rate for video data
 @property NSString *videoFrameRate;
 // -b:v 800k                        Sets bit rate for video data
+/** Properties relating to latency and key-framing **/
 @property NSString *videoBitRate;
-
+@property NSString *videoMaxRate;
+@property NSString *videoBufSize;
+@property NSString *videoMaxSize;
 
 /** Audio Settings **/
 // -i "0:1"                         Sets audio input source - "[video]:[audio]" will be an integer value

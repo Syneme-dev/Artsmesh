@@ -15,6 +15,8 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMAudio/AMAudio.h"
 #import "UIFramework/AMWindow.h"
+#import "AMFFmpegConfigs.h"
+#import "AMFFmpeg.m"
 
 
 @interface AMVideoConfigWindow ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
@@ -320,6 +322,7 @@
 
 // Send video to a second machine using FFMPEG
 -(void)sendP2P {
+    
     /** TO-DO either add buffsize as a selectable field **/
     NSBundle* mainBundle = [NSBundle mainBundle];
     
@@ -378,6 +381,15 @@
     sleep(2);
     
     [_ffmpegTask launch];
+    
+    /** Set up ffmpeg configs **/
+    AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    cfgs.videoFrameRate = [NSString stringWithFormat:@"%d", frameRateInt];
+    cfgs.videoBitRate = vidBitRate;
+    cfgs.videoMaxRate = [NSString stringWithFormat:@"%d", maxRateInt];
+    cfgs.videoMaxSize = [NSString stringWithFormat:@"%d", maxSizeInt];
+    cfgs.videoBufSize = [NSString stringWithFormat:@"%d", bufSizeInt];
+    cfgs.portOffset = [NSString stringWithFormat:@"%d", portOffset];
     
     [self.window close];
 }

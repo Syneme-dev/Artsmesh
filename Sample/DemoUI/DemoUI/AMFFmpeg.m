@@ -36,7 +36,7 @@
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,
-                                cfgs.videoCodec,
+                                [self getCodec:cfgs],
                                 cfgs.videoBitRate,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
@@ -59,6 +59,21 @@
     int port = 5564 + portOffset;
     
     return [NSString stringWithFormat:@"%d", port];
+}
+
+-(NSString *)getCodec:(AMFFmpegConfigs *)cfgs {
+    int frameRateInt = (int) [cfgs.videoFrameRate integerValue];
+    int maxRateInt = frameRateInt * 100;
+    int maxSizeInt = frameRateInt * 50;
+    int bufSizeInt = maxRateInt / frameRateInt;
+    
+    NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
+    NSString *selectedCodec = cfgs.videoCodec;
+    if ([selectedCodec isEqualToString:@"mpeg2"]) {
+        vCodec = @"mpeg2video";
+    }
+    
+    return vCodec;
 }
 
 @end

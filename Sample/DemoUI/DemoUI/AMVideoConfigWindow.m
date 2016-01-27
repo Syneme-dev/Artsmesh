@@ -333,22 +333,13 @@
     if ([vidBitRate length] < 1) {
         vidBitRate = @"800k";
     }
-    int frameRateInt = (int) [vidFrameRate integerValue];
-    int maxRateInt = frameRateInt * 100;
-    int maxSizeInt = frameRateInt * 50;
-    int bufSizeInt = maxRateInt / frameRateInt;
-    
-    NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
-    NSString *selectedCodec = self.vidCodec.stringValue;
-    if ([selectedCodec isEqualToString:@"mpeg2"]) {
-        vCodec = @"mpeg2video";
-    }
     
     NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
     if ([vidOutSize length] < 1) {
         vidOutSize = @"1280x720";
     }
 
+    //Check Address for ipv6 & convert to that format, if desired
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
     if (self.useIpv6CheckboxView.checked) {
@@ -358,14 +349,11 @@
     //Set up ffmpeg configs
     AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
     cfgs.videoOutSize = vidOutSize;
-    cfgs.videoFrameRate = [NSString stringWithFormat:@"%d", frameRateInt];
+    cfgs.videoFrameRate = vidFrameRate;
     cfgs.videoBitRate = vidBitRate;
-    cfgs.videoMaxRate = [NSString stringWithFormat:@"%d", maxRateInt];
-    cfgs.videoMaxSize = [NSString stringWithFormat:@"%d", maxSizeInt];
-    cfgs.videoBufSize = [NSString stringWithFormat:@"%d", bufSizeInt];
     cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
     cfgs.portOffset = self.portOffsetSelector.stringValue;
-    cfgs.videoCodec = vCodec;
+    cfgs.videoCodec = self.vidCodec.stringValue;
     cfgs.serverAddr = peerAddr;
     
     AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];

@@ -16,7 +16,7 @@
 #import "AMAudio/AMAudio.h"
 #import "UIFramework/AMWindow.h"
 #import "AMFFmpegConfigs.h"
-#import "AMFFmpeg.m"
+#import "AMFFmpeg.h"
 
 
 @interface AMVideoConfigWindow ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
@@ -324,10 +324,6 @@
 -(void)sendP2P {
     
     /** TO-DO either add buffsize as a selectable field **/
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
-    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
     if ([vidFrameRate length] < 1) {
@@ -358,39 +354,27 @@
     if (self.useIpv6CheckboxView.checked) {
         peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
     }
-    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 5564 + portOffset;
     
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",
-                                launchPath,
-                                vidOutSize,
-                                vidFrameRate,
-                                selectedVidDevice,
-                                vCodec,
-                                vidBitRate,
-                                peerAddr,
-                                port];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
-    };
-    sleep(2);
-    
-    [_ffmpegTask launch];
-    
-    /** Set up ffmpeg configs **/
+    //Set up ffmpeg configs
     AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    cfgs.videoOutSize = vidOutSize;
     cfgs.videoFrameRate = [NSString stringWithFormat:@"%d", frameRateInt];
     cfgs.videoBitRate = vidBitRate;
     cfgs.videoMaxRate = [NSString stringWithFormat:@"%d", maxRateInt];
     cfgs.videoMaxSize = [NSString stringWithFormat:@"%d", maxSizeInt];
     cfgs.videoBufSize = [NSString stringWithFormat:@"%d", bufSizeInt];
-    cfgs.portOffset = [NSString stringWithFormat:@"%d", portOffset];
+    cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
+    cfgs.portOffset = self.portOffsetSelector.stringValue;
+    cfgs.videoCodec = vCodec;
+    cfgs.serverAddr = peerAddr;
     
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    
+    if(![ffmpeg sendP2P:cfgs]){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"ffmpeg stream failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
+        [alert runModal];
+    };
+     
     [self.window close];
 }
 

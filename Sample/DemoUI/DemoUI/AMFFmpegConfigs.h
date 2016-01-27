@@ -37,6 +37,7 @@
 @property NSString *videoMaxRate;
 @property NSString *videoBufSize;
 @property NSString *videoMaxSize;
+@property NSString *videoCodec;
 
 /** Audio Settings **/
 // -i "0:1"                         Sets audio input source - "[video]:[audio]" will be an integer value

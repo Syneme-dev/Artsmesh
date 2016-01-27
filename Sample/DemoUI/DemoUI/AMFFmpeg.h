@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMFFmpegConfigs.h"
 
 @interface AMFFmpeg : NSObject
+
+-(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs;
 
 @end

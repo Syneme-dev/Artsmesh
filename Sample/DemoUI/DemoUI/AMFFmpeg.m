@@ -54,6 +54,25 @@
     return YES;
 }
 
+-(BOOL)stopFFmpeg {
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"killall ffmpeg"];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    return YES;
+}
+
+/** Internal Class Functions **/
 -(NSString *)getPort:(NSString *)thePortOffset {
     int portOffset = (int) [thePortOffset integerValue];
     int port = 5564 + portOffset;

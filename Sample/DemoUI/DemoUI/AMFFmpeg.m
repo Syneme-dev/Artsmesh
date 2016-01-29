@@ -45,20 +45,14 @@
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
     NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
-    };
-    sleep(2);
     
-    [_ffmpegTask launch];
-    
-    return YES;
+    if (![self launchTask:command]) {
+        return NO;
+    } else { return YES; }
 }
 
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {
+    [self setLaunchPath:cfgs];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ udp://%@:%@",
@@ -66,9 +60,17 @@
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
     NSLog(@"%@", command);
+    
+    if (![self launchTask:command]) {
+        return NO;
+    } else { return YES; }
+}
+
+-(BOOL)launchTask:(NSString *)theCommand {
+    
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.arguments = @[@"-c", [theCommand copy]];
     _ffmpegTask.terminationHandler = ^(NSTask* t){
         
     };

@@ -12,6 +12,7 @@
 @interface AMFFmpeg : NSObject
 
 -(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs;
+-(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs;
 -(BOOL)stopFFmpeg;
 
 @end

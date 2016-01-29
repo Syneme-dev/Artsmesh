@@ -20,15 +20,19 @@
         //Set up initial configs here
         _mainBundle = [NSBundle mainBundle];
         
-        _launchPath =[_mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
-        _launchPath = [NSString stringWithFormat:@"\"%@\"",_launchPath];
-        
     }
 
     return self;
 }
+-(void)setLaunchPath:(AMFFmpegConfigs *)cfgs {
+    NSString *program = @"ffmpeg";
+    if (!cfgs.sending) { program = @"ffplay"; }
+    _launchPath =[_mainBundle pathForAuxiliaryExecutable:program];
+    _launchPath = [NSString stringWithFormat:@"\"%@\"",_launchPath];
+}
 
 -(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs {
+    [self setLaunchPath:cfgs];
 
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -s %@ -f avfoundation -r %@ -i \"%@:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
@@ -38,6 +42,27 @@
                                 cfgs.videoDevice,
                                 [self getCodec:cfgs],
                                 cfgs.videoBitRate,
+                                cfgs.serverAddr,
+                                [self getPort:cfgs.portOffset]];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    return YES;
+}
+
+-(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ udp://%@:%@",
+                                _launchPath,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
     NSLog(@"%@", command);

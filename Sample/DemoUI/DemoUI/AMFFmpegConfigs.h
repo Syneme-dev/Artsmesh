@@ -49,4 +49,6 @@
 // -b:v 64k                         Sets the audio bit rate for audio data
 @property NSString *audioBitRate;
 
+@property (nonatomic, assign) BOOL sending;
+
 @end

@@ -167,6 +167,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     //NSString* myselfIP  = _configController.videoConfig.myself.privateIp;
     NSString* peerIP    = _configController.videoConfig.peerIP;
     NSString* peerPort  = [NSString stringWithFormat:@"%d",_configController.videoConfig.peerPort];
+    NSString* peerIPPort  = [NSString stringWithFormat:@"%@:%d",
+                                            peerIP, _configController.videoConfig.peerPort];
     BOOL      isSender  = [_configController.videoConfig.role isEqualToString:@"SENDER"];
    
     AMChannel* myChannel    = nil;
@@ -174,7 +176,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     BOOL bFind = NO;
     for( AMChannel *channel in _videoChannels){
-        if ([channel.deviceID isEqualToString:@"myself"]) {
+        if ([channel.deviceID isEqualToString:@"MYSELF"]) {
             bFind = YES;
             myChannel =channel;
             break;
@@ -185,10 +187,15 @@ shouldRemoveDevice:(NSString *)deviceID;
     if (bFind == NO) {
         myChannel = [[AMChannel alloc] init];
         myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
-        myChannel.deviceID     = @"myself";
-        myChannel.channelName  = @"myself";
+        myChannel.deviceID     = @"MYSELF";
+        myChannel.channelName  = @"MYSELF";
         myChannel.index = 0;
         NSMutableArray* channels = [[NSMutableArray alloc] init];
+        [channels addObject:myChannel];
+        [channels addObject:myChannel];
+        [channels addObject:myChannel];
+        [channels addObject:myChannel];
+        [channels addObject:myChannel];
         [channels addObject:myChannel];
         
         [_videoChannels addObject:myChannel];
@@ -213,12 +220,18 @@ shouldRemoveDevice:(NSString *)deviceID;
         peerChannel = [[AMChannel alloc] init];
         peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
         peerChannel.deviceID     = peerIP;
-        peerChannel.channelName  = peerPort;
+        peerChannel.channelName  = peerIPPort;
         peerChannel.index = 18;
         [_videoChannels addObject:peerChannel];
         
         NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
         [peerChannels addObject:peerChannel];
+        [peerChannels addObject:peerChannel];
+        [peerChannels addObject:peerChannel];
+        [peerChannels addObject:peerChannel];
+        [peerChannels addObject:peerChannel];
+        [peerChannels addObject:peerChannel];
+        
         [routeView associateChannels:peerChannels
                           withDevice:peerChannel.deviceID
                                 name:peerChannel.channelName

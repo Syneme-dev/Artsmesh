@@ -477,7 +477,10 @@
     AMCoreData* sharedStore = [AMCoreData shareInstance];
     _videoConfig.myself = sharedStore.mySelf;
  
-    _videoConfig.peerIP   = [self.peerAddress stringValue];
+    _videoConfig.peerIP = [self.peerAddress stringValue];
+    if (self.useIpv6CheckboxView.checked) {
+        _videoConfig.peerIP = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
+    }
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
     _videoConfig.peerPort = 5564 + portOffset;
     

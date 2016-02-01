@@ -15,6 +15,8 @@
 #import "UIFramework/AMButtonHandler.h"
 #import "AMAudio/AMAudio.h"
 #import "UIFramework/AMWindow.h"
+#import "AMFFmpegConfigs.h"
+#import "AMFFmpeg.h"
 
 
 @interface AMVideoConfigWindow ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
@@ -320,11 +322,8 @@
 
 // Send video to a second machine using FFMPEG
 -(void)sendP2P {
-    /** TO-DO either add buffsize as a selectable field **/
-    NSBundle* mainBundle = [NSBundle mainBundle];
     
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
-    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    /** TO-DO either add buffsize as a selectable field **/
     
     NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
     if ([vidFrameRate length] < 1) {
@@ -334,84 +333,60 @@
     if ([vidBitRate length] < 1) {
         vidBitRate = @"800k";
     }
-    int frameRateInt = (int) [vidFrameRate integerValue];
-    int maxRateInt = frameRateInt * 100;
-    int maxSizeInt = frameRateInt * 50;
-    int bufSizeInt = maxRateInt / frameRateInt;
-    
-    NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
-    NSString *selectedCodec = self.vidCodec.stringValue;
-    if ([selectedCodec isEqualToString:@"mpeg2"]) {
-        vCodec = @"mpeg2video";
-    }
     
     NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
     if ([vidOutSize length] < 1) {
         vidOutSize = @"1280x720";
     }
 
+    //Check Address for ipv6 & convert to that format, if desired
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
     NSString *peerAddr = [self.peerAddress stringValue];
     if (self.useIpv6CheckboxView.checked) {
         peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
     }
-    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 5564 + portOffset;
     
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%d:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%d",
-                                launchPath,
-                                vidOutSize,
-                                vidFrameRate,
-                                selectedVidDevice,
-                                vCodec,
-                                vidBitRate,
-                                peerAddr,
-                                port];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
+    //Set up ffmpeg configs
+    AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    [cfgs setSending:YES];
+    cfgs.videoOutSize = vidOutSize;
+    cfgs.videoFrameRate = vidFrameRate;
+    cfgs.videoBitRate = vidBitRate;
+    cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
+    cfgs.portOffset = self.portOffsetSelector.stringValue;
+    cfgs.videoCodec = self.vidCodec.stringValue;
+    cfgs.serverAddr = peerAddr;
+    
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    
+    if(![ffmpeg sendP2P:cfgs]){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"ffmpeg stream failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
+        [alert runModal];
     };
-    sleep(2);
-    
-    [_ffmpegTask launch];
-    
+     
     [self.window close];
 }
 
 // Receive sent p2p video from ffmpeg via ffplay (potentially mplayer also)
 - (void)receiveP2P {
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffplay"];
-    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSString *peerAddr = [self.peerAddress stringValue];
     if (self.useIpv6CheckboxView.checked) {
         peerAddr = [NSString stringWithFormat:@"[%@]", [self.peerAddress stringValue]];
     }
     
-    int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];
-    int port = 5564 + portOffset;
+    //Set up ffmpeg configs
+    AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    [cfgs setSending:NO];
+    cfgs.serverAddr = peerAddr;
+    cfgs.portOffset = [self.portOffsetSelector stringValue];
     
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ udp://%@:%d",
-                                launchPath,
-                                peerAddr,
-                                port];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    
+    if(![ffmpeg receiveP2P:cfgs]){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"ffplay failed to play stream!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
+        [alert runModal];
     };
-    sleep(2);
-    
-    [_ffmpegTask launch];
     
     [self.window close];
 }

@@ -20,8 +20,6 @@
 		26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B2119C143A300796327 /* AMJackTripManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B2219C143A300796327 /* AMJackTripManager.m */; };
 		26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */; };
-		2D55BA4A1C4DB60D00480F90 /* AMFFmpegConfigs.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D55BA481C4DB60D00480F90 /* AMFFmpegConfigs.h */; };
-		2D55BA4B1C4DB60D00480F90 /* AMFFmpegConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D55BA491C4DB60D00480F90 /* AMFFmpegConfigs.m */; };
 		4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A3D17431A36138600D19720 /* AMAudioMuteButton.h */; };
 		4A3D17461A36138600D19720 /* AMAudioMuteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D17441A36138600D19720 /* AMAudioMuteButton.m */; };
 		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
@@ -113,8 +111,6 @@
 		26A11B2119C143A300796327 /* AMJackTripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripManager.h; sourceTree = "<group>"; };
 		26A11B2219C143A300796327 /* AMJackTripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripManager.m; sourceTree = "<group>"; };
 		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
-		2D55BA481C4DB60D00480F90 /* AMFFmpegConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFFmpegConfigs.h; sourceTree = "<group>"; };
-		2D55BA491C4DB60D00480F90 /* AMFFmpegConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFFmpegConfigs.m; sourceTree = "<group>"; };
 		4A3D17431A36138600D19720 /* AMAudioMuteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMuteButton.h; sourceTree = "<group>"; };
 		4A3D17441A36138600D19720 /* AMAudioMuteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMuteButton.m; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
@@ -226,8 +222,6 @@
 				CE68805019B94EF20062211C /* AMChannel.m */,
 				CE29B4E119BEDCC800F93967 /* NSBezierPath+QuartzUtilities.h */,
 				CE29B4E219BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m */,
-				2D55BA481C4DB60D00480F90 /* AMFFmpegConfigs.h */,
-				2D55BA491C4DB60D00480F90 /* AMFFmpegConfigs.m */,
 			);
 			name = RouterUI;
 			sourceTree = "<group>";
@@ -387,7 +381,6 @@
 				4FDD12051BC8B312003D7896 /* weakjack.h in Headers */,
 				26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */,
 				26A11B2519C143A300796327 /* AMJacktripConfigs.h in Headers */,
-				2D55BA4A1C4DB60D00480F90 /* AMFFmpegConfigs.h in Headers */,
 				D443717819AACED700F49705 /* AMJackClient.h in Headers */,
 				4FDD12061BC8B312003D7896 /* weakmacros.h in Headers */,
 				4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */,
@@ -504,7 +497,6 @@
 				CE29B4E419BEDCC800F93967 /* NSBezierPath+QuartzUtilities.m in Sources */,
 				26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */,
 				0198A79B1A0F2264009A36CA /* AMAudioMixerViewController.m in Sources */,
-				2D55BA4B1C4DB60D00480F90 /* AMFFmpegConfigs.m in Sources */,
 				4FC0ED391ACE763300ED06AF /* AMJackTripConfig.m in Sources */,
 				4AC8A2521A1059AE006E534A /* AMArtsmeshClient.m in Sources */,
 				4AC8A24E1A104E01006E534A /* AMVolumeCtlView.m in Sources */,

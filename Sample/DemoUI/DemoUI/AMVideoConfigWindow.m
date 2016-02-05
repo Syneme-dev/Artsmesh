@@ -225,31 +225,10 @@
 
 // Make FFMPEG call to find AVFoundation Devices on machine
 -(void)populateDevicesList {
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    NSPipe *pipe = [NSPipe pipe];
-    NSFileHandle *file = pipe.fileHandleForReading;
-    
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
-    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
-    
-    
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -list_devices true -i \"\"",
-                                launchPath];
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
-    };
-    
-    [_ffmpegTask setStandardOutput:pipe];
-    [_ffmpegTask setStandardError: [_ffmpegTask standardOutput]];
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    NSFileHandle *file = [ffmpeg populateDevicesList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotDeviceList:) name:NSFileHandleDataAvailableNotification object:file];
-    
-    
-    [_ffmpegTask launch];
     
     [file waitForDataInBackgroundAndNotify];
 }

@@ -19,6 +19,8 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMAppDelegate.h"
 #import "AMEventsManagerViewController.h"
+#import "AMFFMpegConfigs.h"
+#import "AMFFMpeg.h"
 
 #import <GTL/GTMOAuth2WindowController.h>
 #import "GTLYouTube.h"

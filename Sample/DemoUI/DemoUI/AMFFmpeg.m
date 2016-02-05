@@ -127,6 +127,39 @@
     return file;
 }
 
+-(BOOL)streamToYouTube:(AMFFmpegConfigs *)cfgs {
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
+    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                launchPath,
+                                cfgs.videoFrameRate,
+                                cfgs.videoDevice,
+                                cfgs.audioDevice,
+                                cfgs.videoBitRate,
+                                cfgs.audioCodec,
+                                cfgs.audioBitRate,
+                                cfgs.audioSampleRate,
+                                cfgs.videoOutSize,
+                                cfgs.serverAddr,
+                                cfgs.streamName];
+    NSLog(@"%@", command);
+    _ffmpegTask = [[NSTask alloc] init];
+    _ffmpegTask.launchPath = @"/bin/bash";
+    _ffmpegTask.arguments = @[@"-c", [command copy]];
+    _ffmpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_ffmpegTask launch];
+    
+    return YES;
+}
+
 /** Internal Class Functions **/
 -(NSString *)getPort:(NSString *)thePortOffset {
     int portOffset = (int) [thePortOffset integerValue];

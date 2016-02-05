@@ -36,6 +36,9 @@
 
 @implementation AMBroadcastViewController 
 {
+    AMFFmpeg *ffmpeg;
+    AMFFmpegConfigs *cfgs;
+    
     NSString *statusNetEventURLString;
     Boolean needsToConfirmCreate;
     Boolean needsToConfirmDelete;
@@ -106,6 +109,9 @@
 
 -(void)awakeFromNib
 {
+    ffmpeg = [[AMFFmpeg alloc] init];
+    cfgs = [[AMFFmpegConfigs alloc] init];
+    
     //Set up UI Elements and theme stuff
     [self.eventDeleteButton setButtonTitle:@"DELETE"];
     [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
@@ -868,8 +874,8 @@
                                                [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
                                                [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
                                                [self.streamNameTextField setStringValue:foundStream.cdn.ingestionInfo.streamName];
-                                               NSLog(@"found stream name: %@", foundStream.cdn.ingestionInfo.streamName);
-                                               NSLog(@"cur ffmpeg streaming name: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]);
+                                               //NSLog(@"found stream name: %@", foundStream.cdn.ingestionInfo.streamName);
+                                               //NSLog(@"cur ffmpeg streaming name: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]);
                                                if ([foundStream.cdn.ingestionInfo.streamName isEqualToString:[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]]) {
                                                    [self.eventGoLiveButton setActiveStateWithText:@"STOP"];
                                                }
@@ -999,11 +1005,7 @@
 -(void)goLive {
     [[AMPreferenceManager standardUserDefaults] setObject:self.streamNameTextField.stringValue forKey:Preference_Key_ffmpeg_Cur_Stream];
     
-    //AMSystemConfig* config = [AMCoreData shareInstance].systemConfig;
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    
-    NSString* launchPath =[mainBundle pathForAuxiliaryExecutable:@"ffmpeg"];
-    launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
+    //Set up ffmpeg configs
     
     NSString *audioCodecFlag = @"libmp3lame";
     if ([audFormatPref isEqualToString:@"AAC"]) {
@@ -1015,29 +1017,20 @@
         ffmpegVidOutDimensions = vidCustomOutDimensions;
     }
     
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%d:%d\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
-                                launchPath,
-                                vidFrameRatePref,
-                                vidSelectedDeviceIndexPref,
-                                audSelectedDeviceIndexPref,
-                                vidBitRatePref,
-                                audioCodecFlag,
-                                audBitRatePref,
-                                audSampleRatePref,
-                                ffmpegVidOutDimensions,
-                                baseUrlPref,
-                                [self.streamNameTextField stringValue]];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
-    };
-    sleep(2);
+    cfgs.videoFrameRate = vidFrameRatePref;
+    cfgs.videoDevice = [NSString stringWithFormat:@"%d", vidSelectedDeviceIndexPref];
+    cfgs.audioDevice = [NSString stringWithFormat:@"%d", audSelectedDeviceIndexPref];
+    cfgs.videoBitRate = vidBitRatePref;
+    cfgs.audioCodec = audioCodecFlag;
+    cfgs.audioBitRate = audBitRatePref;
+    cfgs.audioSampleRate = audSampleRatePref;
+    cfgs.videoOutSize = ffmpegVidOutDimensions;
+    cfgs.serverAddr = baseUrlPref;
+    cfgs.streamName = [self.streamNameTextField stringValue];
     
-    [_ffmpegTask launch];
+    [ffmpeg streamToYouTube:cfgs];
+    
+    
     [self.eventGoLiveButton setSuccessStateWithText:@"SENDING" andResetText:@"STOP"];
 }
 
@@ -1045,18 +1038,7 @@
     
     [[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_Stream];
     
-    NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"killall ffmpeg"];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
-        
-    };
-    sleep(2);
-    
-    [_ffmpegTask launch];
+    [ffmpeg stopFFmpeg];
     
     [self.eventGoLiveButton setSuccessStateWithText:@"STOPPED" andResetText:@"GO LIVE"];
 }

@@ -16,6 +16,7 @@
 
 //                                  if client ip address
 @property NSString *serverAddr;
+@property NSString *streamName;     // Sets stream name for YouTube streaming
 
 //                                  Receiving port offset from base port 5564
 @property NSString *portOffset;
@@ -48,6 +49,7 @@
 @property NSString *audioSampleRate;
 // -b:v 64k                         Sets the audio bit rate for audio data
 @property NSString *audioBitRate;
+@property NSString *audioCodec;
 
 @property (nonatomic, assign) BOOL sending;
 

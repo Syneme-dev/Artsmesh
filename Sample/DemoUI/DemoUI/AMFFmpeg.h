@@ -13,6 +13,7 @@
 
 -(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs;
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs;
+-(BOOL)streamToYouTube:(AMFFmpegConfigs *)cfgs;
 -(NSFileHandle *)populateDevicesList;
 -(BOOL)stopFFmpeg;
 

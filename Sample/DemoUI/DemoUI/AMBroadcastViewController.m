@@ -994,8 +994,8 @@
 
 -(void)populateDevicesList {
     
-    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
-    NSFileHandle *file = [ffmpeg populateDevicesList];
+    AMFFmpeg *ffmpegInstance = [[AMFFmpeg alloc] init];
+    NSFileHandle *file = [ffmpegInstance populateDevicesList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotDeviceList:) name:NSFileHandleDataAvailableNotification object:file];
     

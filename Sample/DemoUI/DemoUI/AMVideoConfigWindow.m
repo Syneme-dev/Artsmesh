@@ -343,7 +343,7 @@
         [alert runModal];
     };
      
-    [self.window close];
+    //[self.window close];
 }
 
 // Receive sent p2p video from ffmpeg via ffplay (potentially mplayer also)
@@ -486,6 +486,9 @@
 
 - (IBAction)closeClicked:(NSButton *)sender
 {
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    [ffmpeg stopFFmpeg];
+    
     [self.window close];
 }
 

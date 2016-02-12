@@ -162,6 +162,7 @@
 #define Preference_Key_ffmpeg_Video_Out_Size_Custom_H @"Preference_Key_ffmpeg_Video_Out_Size_Custom_H"
 #define Preference_Key_ffmpeg_Video_Use_Custom_In @"Preference_Key_ffmpeg_Video_Use_Custom_In"
 #define Preference_Key_ffmpeg_Video_Use_Custom_Out @"Preference_Key_ffmpeg_Video_Use_Custom_Out"
+#define Preference_Key_ffmpeg_Cur_P2P @"Preference_Key_ffmpeg_Cur_P2P"
 
 #define Preference_ffmpeg_Video_In_Device @"0"
 #define Preference_ffmpeg_Video_In_Size @"0"
@@ -181,6 +182,7 @@
 #define Preference_ffmpeg_Video_Out_Size_Custom_H @"1080"
 #define Preference_ffmpeg_Video_Use_Custom_In @"NO"
 #define Preference_ffmpeg_Video_Use_Custom_Out @"NO"
+#define Preference_ffmpeg_Cur_P2P @{}
 
 #import <Foundation/Foundation.h>
 

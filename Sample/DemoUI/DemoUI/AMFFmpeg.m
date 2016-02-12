@@ -7,11 +7,15 @@
 //
 
 #import "AMFFmpeg.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
 
 @implementation AMFFmpeg {
     NSTask *_ffmpegTask;
+    NSTask *_pidTask;
+    NSTask *_stopFFMpegTask;
     NSBundle *_mainBundle;
     NSString *_launchPath;
+    AMFFmpegConfigs *_configs;
     
 }
 
@@ -33,6 +37,7 @@
 
 -(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs {
     [self setLaunchPath:cfgs];
+    _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ -s %@ -f avfoundation -r %@ -i \"%@:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
@@ -44,29 +49,30 @@
                                 cfgs.videoBitRate,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
-    NSLog(@"%@", command);
+    //NSLog(@"%@", command);
     
-    if (![self launchTask:command]) {
+    if (![self launchTask:command andLogPID:YES]) {
         return NO;
     } else { return YES; }
 }
 
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {
     [self setLaunchPath:cfgs];
+    _configs = cfgs;
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"%@ udp://%@:%@",
                                 _launchPath,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
-    NSLog(@"%@", command);
+    //NSLog(@"%@", command);
     
-    if (![self launchTask:command]) {
+    if (![self launchTask:command andLogPID:YES]) {
         return NO;
     } else { return YES; }
 }
 
--(BOOL)launchTask:(NSString *)theCommand {
+-(BOOL)launchTask:(NSString *)theCommand andLogPID:(BOOL)logPID{
     
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
@@ -75,26 +81,88 @@
         
     };
     sleep(2);
+    [_ffmpegTask setStandardInput:[NSPipe pipe]];
     
     [_ffmpegTask launch];
+    
+    if (logPID) {
+        [self getTaskPID:@"ffmpeg"];
+    }
     
     return YES;
 }
 
+-(void)getTaskPID : (NSString *)label {
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSFileHandle *file = pipe.fileHandleForReading;
+    [file waitForDataInBackgroundAndNotify];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotTaskPID:) name:NSFileHandleDataAvailableNotification object:file];
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"pgrep -n %@", label];
+    _pidTask = [[NSTask alloc] init];
+    _pidTask.launchPath = @"/bin/bash";
+    _pidTask.arguments = @[@"-c", [command copy]];
+    _pidTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    //sleep(2);
+    
+    [_pidTask setStandardOutput:pipe];
+    [_pidTask setStandardError: [_pidTask standardOutput]];
+    
+    [_pidTask launch];
+    [_pidTask waitUntilExit];
+    
+}
+
+-(void)gotTaskPID : (NSNotification *)notification {
+    NSLog(@"got task PID!");
+    
+    NSFileHandle *outputFile = (NSFileHandle *) [notification object];
+    NSData *data = [outputFile availableData];
+        
+    if([data length]) {
+        //PID Returned, grab it and store in standard default
+        //Parse PID from returned data
+        NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSArray *pidLines=[temp componentsSeparatedByString:@"\n"];
+        //NSLog(@"Storing PID %@", tempPID);
+        
+        //Load up current streams from preferences
+        NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
+        NSLog(@"existing connections preferences: %@", currentStreams);
+        
+        //Insert new IP & PID into the dictionary
+        NSString *serverAddr = _configs.serverAddr;
+        [currentStreams setObject:pidLines[0] forKey:serverAddr];
+        
+        //Store the updated dictionary
+        [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
+        
+    }
+}
+
 -(BOOL)stopFFmpeg {
+    //[[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_P2P];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"killall ffmpeg"];
-    NSLog(@"%@", command);
-    _ffmpegTask = [[NSTask alloc] init];
-    _ffmpegTask.launchPath = @"/bin/bash";
-    _ffmpegTask.arguments = @[@"-c", [command copy]];
-    _ffmpegTask.terminationHandler = ^(NSTask* t){
+    _stopFFMpegTask = [[NSTask alloc] init];
+    _stopFFMpegTask.launchPath = @"/bin/bash";
+    _stopFFMpegTask.arguments = @[@"-c", [command copy]];
+    _stopFFMpegTask.terminationHandler = ^(NSTask* t){
         
     };
     sleep(2);
     
-    [_ffmpegTask launch];
+    [_stopFFMpegTask launch];
     
     return YES;
 }
@@ -146,7 +214,7 @@
                                 cfgs.videoOutSize,
                                 cfgs.serverAddr,
                                 cfgs.streamName];
-    NSLog(@"%@", command);
+    //NSLog(@"%@", command);
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
     _ffmpegTask.arguments = @[@"-c", [command copy]];

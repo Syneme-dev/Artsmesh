@@ -22,6 +22,7 @@
         _index = index;
         _type = AMPlaceholderChannel;
         _deviceID = nil;
+        _processID = nil;
         _channelName = nil;
         _peerIndexes = [[NSMutableIndexSet alloc] init];
     }

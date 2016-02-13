@@ -137,7 +137,8 @@
         
         //Insert new IP & PID into the dictionary
         NSString *serverAddr = _configs.serverAddr;
-        [currentStreams setObject:pidLines[0] forKey:serverAddr];
+        NSString *fullAddr = [NSString stringWithFormat:@"%@:%@", serverAddr, [self getPort:_configs.portOffset]];
+        [currentStreams setObject:fullAddr forKey:pidLines[0]];
         
         //Store the updated dictionary
         [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
@@ -149,11 +150,37 @@
     }
 }
 
+-(BOOL)stopFFmpegInstance: (NSString *)processID {
+    /** Execute the NSTask to kill the specific ffmpeg instance by PID **/
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"kill %@",processID];
+    _stopFFMpegTask = nil;
+    _stopFFMpegTask = [[NSTask alloc] init];
+    _stopFFMpegTask.launchPath = @"/bin/bash";
+    _stopFFMpegTask.arguments = @[@"-c", [command copy]];
+    _stopFFMpegTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    sleep(2);
+    
+    [_stopFFMpegTask launch];
+    
+    /** Update stored prefs to remove said instance using the PID key **/
+    NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
+    [currentStreams removeObjectForKey:processID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
+    
+    return YES;
+}
+
 -(BOOL)stopFFmpeg {
-    //[[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_P2P];
+    [[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_P2P];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"killall ffmpeg"];
+    _stopFFMpegTask = nil;
     _stopFFMpegTask = [[NSTask alloc] init];
     _stopFFMpegTask.launchPath = @"/bin/bash";
     _stopFFMpegTask.arguments = @[@"-c", [command copy]];

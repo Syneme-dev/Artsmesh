@@ -16,5 +16,6 @@
 -(BOOL)streamToYouTube:(AMFFmpegConfigs *)cfgs;
 -(NSFileHandle *)populateDevicesList;
 -(BOOL)stopFFmpeg;
+-(BOOL)stopFFmpegInstance: (NSString *)processID;
 
 @end

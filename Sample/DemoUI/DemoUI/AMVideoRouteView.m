@@ -12,6 +12,8 @@
 #import "AMChannel.h"
 #import "AMVideoRouteViewController.h"
 #import "NSBezierPath+QuartzUtilities.h"
+#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMFFmpeg.h"
 
 typedef struct GlyphArcInfo {
 	CGFloat	width;
@@ -323,9 +325,21 @@ static CGFloat kCloseButtonRadius = 6.0;
 
 - (void)connectChannel:(AMChannel *)channel1 toChannel:(AMChannel *)channel2
 {
+    /** Set processID for channel 2 **/
+    NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
+    NSString *knownObject = channel2.channelName;
+    NSArray *temp = [currStreams allKeysForObject:knownObject];
+    NSString *key = [temp lastObject];
+    
+    channel2.processID = key;
+    
     [channel1.peerIndexes addIndex:channel2.index];
     [channel2.peerIndexes addIndex:channel1.index];
     self.needsDisplay = YES;
+    
+    NSLog(@"chennel 1: %@, full name: %@", channel1.channelName, channel1.channelFullName);
+    NSLog(@"channel 2: %@, full name: %@", channel2.channelName, channel2.channelFullName);
+    NSLog(@"channel 2 process id: %@", channel2.processID);
 }
 
 - (void)disconnectChannel:(AMChannel *)channel1 fromChannel:(AMChannel *)channel2
@@ -337,6 +351,7 @@ static CGFloat kCloseButtonRadius = 6.0;
         _selectedConnection[0] = NSNotFound;
         _selectedConnection[1] = NSNotFound;
     }
+    
     self.needsDisplay = YES;
 }
 
@@ -353,6 +368,7 @@ static CGFloat kCloseButtonRadius = 6.0;
             disableMenuItem = YES;
         }
         AMChannel *channel = [self channelAtIndex:start];
+        if ([channel.channelName isNotEqualTo:NULL]) { [self stopChannelFFmpegProcess:channel]; }
         if (channel == _selectedChannel) {
             _selectedChannel = nil;
             _targetChannel = nil;
@@ -371,6 +387,12 @@ static CGFloat kCloseButtonRadius = 6.0;
     
     [self.devices removeObjectForKey:deviceID];
     self.needsDisplay = YES;
+}
+
+- (void)stopChannelFFmpegProcess: (AMChannel *)theChannel {
+    /** Kill ffmpeg connection by process id **/
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    [ffmpeg stopFFmpegInstance:theChannel.processID];
 }
 
 - (void)removeALLDevice

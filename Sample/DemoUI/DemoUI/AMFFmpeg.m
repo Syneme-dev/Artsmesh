@@ -119,17 +119,16 @@
 }
 
 -(void)gotTaskPID : (NSNotification *)notification {
-    NSLog(@"got task PID!");
+    // Got PID from ffmpeg task
+    // Next, parse the data, pull it out and store
     
     NSFileHandle *outputFile = (NSFileHandle *) [notification object];
     NSData *data = [outputFile availableData];
         
     if([data length]) {
-        //PID Returned, grab it and store in standard default
-        //Parse PID from returned data
+        //Parsing PID from returned data
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSArray *pidLines=[temp componentsSeparatedByString:@"\n"];
-        //NSLog(@"Storing PID %@", tempPID);
         
         //Load up current streams from preferences
         NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
@@ -161,16 +160,19 @@
     _stopFFMpegTask.terminationHandler = ^(NSTask* t){
         
     };
-    sleep(2);
+    //sleep(2);
     
     [_stopFFMpegTask launch];
     
     /** Update stored prefs to remove said instance using the PID key **/
     NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
+    
     [currentStreams removeObjectForKey:processID];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
+    //NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
     
     return YES;
 }

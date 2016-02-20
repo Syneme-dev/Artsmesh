@@ -120,6 +120,9 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     [self doInit];
     
+    AMFFmpeg *ffmpegInit = [[AMFFmpeg alloc] init];
+    [ffmpegInit checkExistingPIDs];
+    
     self.delegate = [[AMVideoRouteViewController alloc] init];
     NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
     for (int i = 0; i < 4; i++) {

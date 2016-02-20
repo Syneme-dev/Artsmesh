@@ -486,8 +486,8 @@
 
 - (IBAction)closeClicked:(NSButton *)sender
 {
-    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
-    [ffmpeg stopFFmpeg];
+    //AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    //[ffmpeg stopFFmpeg];
     
     [self.window close];
 }

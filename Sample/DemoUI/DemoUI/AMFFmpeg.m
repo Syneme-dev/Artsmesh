@@ -17,6 +17,7 @@
     NSString *_launchPath;
     AMFFmpegConfigs *_configs;
     
+    NSString *_curPidCheck;
 }
 
 -(id)init {
@@ -92,6 +93,18 @@
     return YES;
 }
 
+-(void)checkExistingPIDs {
+    //NSLog(@"checking existing PIDs now.");
+    _curPidCheck = nil;
+    
+    // This function will check if stored PIDs are still in use & clear out the dead
+    NSDictionary *currentStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
+    
+    for (NSString *PID in currentStreams) {
+        [self executePIDCheck:PID];
+    }
+}
+
 -(void)getTaskPID : (NSString *)label {
     NSPipe *pipe = [NSPipe pipe];
     
@@ -132,7 +145,7 @@
         
         //Load up current streams from preferences
         NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
-        NSLog(@"existing connections preferences: %@", currentStreams);
+        //NSLog(@"existing connections preferences: %@", currentStreams);
         
         //Insert new IP & PID into the dictionary
         NSString *serverAddr = _configs.serverAddr;
@@ -144,7 +157,7 @@
         
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
+        //NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
         
     }
 }
@@ -165,14 +178,7 @@
     [_stopFFMpegTask launch];
     
     /** Update stored prefs to remove said instance using the PID key **/
-    NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
-    
-    [currentStreams removeObjectForKey:processID];
-    
-    [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    //NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
+    [self removeProcessFromPrefs:processID];
     
     return YES;
 }
@@ -278,6 +284,71 @@
     }
     
     return vCodec;
+}
+
+//PID Check Stuff
+-(void)executePIDCheck: (NSString *)PID {
+    //NSLog(@"executing PID check for process: %@", PID);
+    _curPidCheck = PID;
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSFileHandle *file = pipe.fileHandleForReading;
+    [file waitForDataInBackgroundAndNotify];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pidCheckResults:) name:NSFileHandleDataAvailableNotification object:file];
+    
+    NSMutableString *command = [NSMutableString stringWithFormat:
+                                @"ps -p %@", PID];
+    _pidTask = [[NSTask alloc] init];
+    _pidTask.launchPath = @"/bin/bash";
+    _pidTask.arguments = @[@"-c", [command copy]];
+    _pidTask.terminationHandler = ^(NSTask* t){
+        
+    };
+    
+    [_pidTask setStandardOutput:pipe];
+    [_pidTask setStandardError: [_pidTask standardOutput]];
+    
+    [_pidTask launch];
+    [_pidTask waitUntilExit];
+}
+-(void)pidCheckResults : (NSNotification *)notification {
+    //NSLog(@"Got results from PID check!");
+    //PID NSTask returned results, check if data exists and update prefs as necessary
+    //NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
+    
+    NSFileHandle *outputFile = (NSFileHandle *) [notification object];
+    NSData *data = [outputFile availableData];
+    
+    if([data length]) {
+        //parse data to look for current PID we're checking
+        NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        if ([temp rangeOfString:_curPidCheck].location == NSNotFound) {
+            //process no longer running, kill it from prefs
+            NSLog(@"Need to remove stored PID: %@", _curPidCheck);
+            [self removeProcessFromPrefs:_curPidCheck];
+        } else {
+            //process found!
+            NSLog(@"Process still running! Do nothing to prefs!");
+        }
+    }
+}
+
+-(void)removeProcessFromPrefs: (NSString *)PID {
+    NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
+    
+    [currentStreams removeObjectForKey:_curPidCheck];
+    
+    [self updateCurStreamPrefs:currentStreams];
+}
+-(void)updateCurStreamPrefs: (NSMutableDictionary *)currentStreams {
+    //Store the updated dictionary
+    [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Updated connections preferences: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P]);
 }
 
 @end

@@ -15,6 +15,7 @@
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs;
 -(BOOL)streamToYouTube:(AMFFmpegConfigs *)cfgs;
 -(NSFileHandle *)populateDevicesList;
+-(void)checkExistingPIDs;
 -(BOOL)stopFFmpeg;
 -(BOOL)stopFFmpegInstance: (NSString *)processID;
 

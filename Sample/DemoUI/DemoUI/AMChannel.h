@@ -30,3 +30,17 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 -(NSString*)channelFullName;
 
 @end
+
+#define START_INDEX     18
+#define LAST_INDEX      48
+#define INDEX_INTERVAL  6
+
+@interface AMVideoDevice : NSObject
+
+@property NSString* deviceID;
+@property NSString* deviceName;
+@property NSMutableArray* channels;
+@property int               index;
+-(void)sortChannels;
+
+@end

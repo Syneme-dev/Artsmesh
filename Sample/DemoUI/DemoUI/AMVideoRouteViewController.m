@@ -29,6 +29,8 @@
    
     AMVideoConfigWindow*    _configController;
     NSMutableArray*         _videoChannels;
+    NSMutableArray*         _videoDevices;
+    AMVideoDevice*          _myselfDevice;
 }
 
 
@@ -65,6 +67,24 @@ shouldConnectChannel:(AMChannel *)channel1
 shouldDisonnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
+    if(_configController.videoConfig.myself == nil)
+        return NO;
+    
+    //NSString* myselfIP  = _configController.videoConfig.myself.privateIp;
+    
+    NSString* peerIPPort  = [NSString stringWithFormat:@"%@:%d",
+                             _configController.videoConfig.peerIP,
+                             _configController.videoConfig.peerPort];
+    
+    for( AMVideoDevice* device in _videoDevices){
+        if ([device.deviceID isEqualToString:peerIPPort]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Already have the ip:port" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please with different port"];
+            [alert runModal];
+        
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
@@ -72,6 +92,10 @@ shouldDisonnectChannel:(AMChannel *)channel1
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
+    AMChannel* peerChannel = [channel1.deviceID isEqualToString:@"MYSELF"] ? channel2 : channel1;
+    
+//   [_videoChannels removeObject:peerChannel];
+
     return YES;
     /*
     NSString* srcChannName;
@@ -108,13 +132,9 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    [[NSNotificationCenter defaultCenter]
-            addObserver:self
-            selector:@selector(reloadVideoChannel:)
-                                        name:AMVideoDeviceNotification
-                                        object:nil];
-    
     _videoChannels = [[NSMutableArray alloc] init];
+    _videoDevices  = [[NSMutableArray alloc] init];
+    _myselfDevice  = [[AMVideoDevice  alloc] init];
     /*
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -136,18 +156,17 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
     view.delegate = self;
     
-    [self reloadVideoChannel:nil];
+   // [self reloadVideoChannel:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadVideoChannel:)
                                                  name:AMVideoDeviceNotification
                                                object:nil];
-
 }
 
 -(void)refreshDevices
 {
     //if([self.jacktripManager.jackTripInstances count] != 0){
-        [self reloadVideoChannel:nil];
+   //     [self reloadVideoChannel:nil];
     //}
 }
 
@@ -171,78 +190,90 @@ shouldRemoveDevice:(NSString *)deviceID;
                                             peerIP, _configController.videoConfig.peerPort];
     BOOL      isSender  = [_configController.videoConfig.role isEqualToString:@"SENDER"];
    
-    AMChannel* myChannel    = nil;
-    AMChannel* peerChannel  = nil;
+   
+    AMVideoDevice* peerDevice  = nil;
     
-    BOOL bFind = NO;
-    for( AMChannel *channel in _videoChannels){
-        if ([channel.deviceID isEqualToString:@"MYSELF"]) {
-            bFind = YES;
-            myChannel =channel;
-            break;
-        }
-    }
+    int firstIndex = [self findFirstIndex];
     
     //No myself channel
-    if (bFind == NO) {
-        myChannel = [[AMChannel alloc] init];
-        myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
-        myChannel.deviceID     = @"MYSELF";
-        myChannel.channelName  = @"MYSELF";
-        myChannel.index = 0;
-        NSMutableArray* channels = [[NSMutableArray alloc] init];
-        [channels addObject:myChannel];
-        [channels addObject:myChannel];
-        [channels addObject:myChannel];
-        [channels addObject:myChannel];
-        [channels addObject:myChannel];
-        [channels addObject:myChannel];
+    
+    AMChannel* myChannel = [[AMChannel alloc] init];
+    myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
+    myChannel.deviceID     = @"MYSELF";
+    myChannel.channelName  = @"MYSELF";
+    myChannel.index = (firstIndex - START_INDEX) / INDEX_INTERVAL;
         
-        [_videoChannels addObject:myChannel];
+    NSMutableArray* channels = [[NSMutableArray alloc] init];
+    [channels addObject:myChannel];
+    [channels addObject:myChannel];
+    [channels addObject:myChannel];
+    [channels addObject:myChannel];
+    [channels addObject:myChannel];
+    [channels addObject:myChannel];
+        
+    
         
         [routeView associateChannels:channels
                           withDevice:myChannel.deviceID
                                 name:myChannel.channelName
                            removable:YES];
-    }
     
     
-    bFind = NO;
-    for( AMChannel *channel in _videoChannels){
-        if ([channel.deviceID isEqualToString:peerIP]) {
-            bFind = YES;
-            peerChannel = channel;
-            break;
-        }
-    }
-    //peer channel
-    if (bFind == NO) {
-        peerChannel = [[AMChannel alloc] init];
-        peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
-        peerChannel.deviceID     = peerIP;
-        peerChannel.channelName  = peerIPPort;
-        peerChannel.index = 18;
-        [_videoChannels addObject:peerChannel];
-        
-        NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
-        [peerChannels addObject:peerChannel];
-        [peerChannels addObject:peerChannel];
-        [peerChannels addObject:peerChannel];
-        [peerChannels addObject:peerChannel];
-        [peerChannels addObject:peerChannel];
-        [peerChannels addObject:peerChannel];
-        
-        [routeView associateChannels:peerChannels
-                          withDevice:peerChannel.deviceID
-                                name:peerChannel.channelName
-                           removable:YES];
-    }
+    
 
     
+    peerDevice = [[AMVideoDevice alloc] init];
+    peerDevice.index =firstIndex;
+    peerDevice.deviceID = peerIPPort;
     
+    AMChannel* peerChannel = [[AMChannel alloc] init];
+    peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
+    peerChannel.deviceID     = peerIP;
+    peerChannel.channelName  = peerIPPort;
+    peerChannel.index = firstIndex;
+    [_videoChannels addObject:peerChannel];
+        
+    NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
+    [peerChannels addObject:peerChannel];
+    [peerChannels addObject:peerChannel];
+    [peerChannels addObject:peerChannel];
+    [peerChannels addObject:peerChannel];
+    [peerChannels addObject:peerChannel];
+    [peerChannels addObject:peerChannel];
+    
+    peerDevice.channels = peerChannels;
+    
+    [_videoDevices addObject:peerDevice];
+    
+    [routeView associateChannels:peerChannels
+                      withDevice:peerChannel.deviceID
+                            name:peerChannel.channelName
+                       removable:YES];
+    
+
     [routeView connectChannel:myChannel toChannel:peerChannel];
 }
 
+
+-(int) findFirstIndex
+{
+    BOOL find;
+    
+    for (int index = START_INDEX; index <= LAST_INDEX; index += INDEX_INTERVAL) {
+        find = NO;
+        for (AMVideoDevice* device in _videoDevices) {
+            if (device.index == index) {
+                find = YES;
+                break;
+            }
+        }
+        if (find == NO) {
+            return index;
+        }
+    }
+    
+    return -1;
+}
 
 
 //The commentary part is old verison of NSPopover. Somehow it doesn't work. When you select in
@@ -277,38 +308,4 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     [_configController showWindow:self];
  }
-@end
-
-
-@implementation AMVideoDevice
-
--(void)sortChannels
-{
-    NSMutableArray* sortedChannels = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [self.channels count]; i++) {
-        
-        AMChannel* chann = self.channels[i];
-        if (chann.type == AMDestinationChannel) {
-            [sortedChannels addObject:chann];
-        }else{
-            
-            BOOL bFind = NO;
-            for (int j = 0; j < [sortedChannels count]; j++) {
-                AMChannel* existCh = sortedChannels[j];
-                if (existCh.type == AMDestinationChannel) {
-                    [sortedChannels insertObject:chann atIndex:j];
-                    bFind = YES;
-                    break;
-                }
-            }
-            
-            if (!bFind) {
-                [sortedChannels addObject:chann];
-            }
-        }
-    }
-    
-    self.channels = sortedChannels;
-}
-
 @end

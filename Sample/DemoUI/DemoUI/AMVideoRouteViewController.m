@@ -12,7 +12,8 @@
 //#import "AMJackDevice.h"
 #import "AMVideoRouteView.h"
 //#import "AMAudio.h"
-
+#import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMFFmpeg.h"
 
 @interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
@@ -29,7 +30,7 @@
    
     AMVideoConfigWindow*    _configController;
     NSMutableArray*         _videoChannels;
-    NSMutableArray*         _videoDevices;
+    NSMutableArray*         _peerDevices;
     AMVideoDevice*          _myselfDevice;
 }
 
@@ -45,6 +46,16 @@ shouldConnectChannel:(AMChannel *)channel1
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    
+    /** Set processID for channel 2 **/
+    NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
+    NSString *knownObject = channel2.channelName;
+    NSArray *temp = [currStreams allKeysForObject:knownObject];
+    NSString *key = [temp lastObject];
+    
+    channel2.processID = key;
+    
+    
     return YES;
     
     /*
@@ -76,7 +87,7 @@ shouldDisonnectChannel:(AMChannel *)channel1
                              _configController.videoConfig.peerIP,
                              _configController.videoConfig.peerPort];
     
-    for( AMVideoDevice* device in _videoDevices){
+    for( AMVideoDevice* device in _peerDevices){
         if ([device.deviceID isEqualToString:peerIPPort]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Already have the ip:port" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please with different port"];
             [alert runModal];
@@ -94,8 +105,10 @@ disconnectChannel:(AMChannel *)channel1
 {
     AMChannel* peerChannel = [channel1.deviceID isEqualToString:@"MYSELF"] ? channel2 : channel1;
     
-//   [_videoChannels removeObject:peerChannel];
+   [_videoChannels removeObject:peerChannel];
 
+    [self stopChannelFFmpegProcess:peerChannel];
+    
     return YES;
     /*
     NSString* srcChannName;
@@ -111,6 +124,15 @@ disconnectChannel:(AMChannel *)channel1
     
     return [[[AMAudio sharedInstance] audioJackClient] disconnectChannel:srcChannName fromDest:destChannName];*/
 }
+
+
+- (void)stopChannelFFmpegProcess: (AMChannel *)theChannel {
+    /** Kill ffmpeg connection by process id **/
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    [ffmpeg stopFFmpegInstance:theChannel.processID];
+}
+
+
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldRemoveDevice:(NSString *)deviceID;
@@ -133,8 +155,48 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void)awakeFromNib
 {
     _videoChannels = [[NSMutableArray alloc] init];
-    _videoDevices  = [[NSMutableArray alloc] init];
+    _peerDevices   = [[NSMutableArray alloc] init];
     _myselfDevice  = [[AMVideoDevice  alloc] init];
+    NSMutableArray* channels = [[NSMutableArray alloc] init];
+    
+    AMChannel* myChannel = [[AMChannel alloc] init];
+ //   myChannel.type =  AMSourceChannel;
+    myChannel.deviceID     = @"MYSELF";
+    myChannel.channelName  = @"MYSELF";
+    
+    myChannel.index = 0;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 1;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 2;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 3;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 4;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 5;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 6;
+    [channels addObject:myChannel];
+
+    myChannel.index = 7;
+    [channels addObject:myChannel];
+    
+    myChannel.index = 8;
+    [channels addObject:myChannel];
+    
+    _myselfDevice.channels   = channels;
+    
+    
+    AMFFmpeg *ffmpegInit = [[AMFFmpeg alloc] init];
+    [ffmpegInit checkExistingPIDs];
+    
     /*
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -148,11 +210,9 @@ shouldRemoveDevice:(NSString *)deviceID;
      name:AM_JACK_STOPPED_NOTIFICATION
      object:nil];
     
-    
-    
     _deviceTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshDevices) userInfo:nil repeats:YES];
-    
     */
+    
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
     view.delegate = self;
     
@@ -195,28 +255,19 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     int firstIndex = [self findFirstIndex];
     
-    //No myself channel
-    
+    //myself channel
+
     AMChannel* myChannel = [[AMChannel alloc] init];
     myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
     myChannel.deviceID     = @"MYSELF";
     myChannel.channelName  = @"MYSELF";
     myChannel.index = (firstIndex - START_INDEX) / INDEX_INTERVAL;
+    [_myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
         
-    NSMutableArray* channels = [[NSMutableArray alloc] init];
-    [channels addObject:myChannel];
-    [channels addObject:myChannel];
-    [channels addObject:myChannel];
-    [channels addObject:myChannel];
-    [channels addObject:myChannel];
-    [channels addObject:myChannel];
-        
-    
-        
-        [routeView associateChannels:channels
-                          withDevice:myChannel.deviceID
-                                name:myChannel.channelName
-                           removable:YES];
+    [routeView associateChannels:_myselfDevice.channels
+                      withDevice:myChannel.deviceID
+                            name:myChannel.channelName
+                       removable:YES];
     
     
     
@@ -243,7 +294,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     peerDevice.channels = peerChannels;
     
-    [_videoDevices addObject:peerDevice];
+    [_peerDevices addObject:peerDevice];
     
     [routeView associateChannels:peerChannels
                       withDevice:peerChannel.deviceID
@@ -261,7 +312,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     for (int index = START_INDEX; index <= LAST_INDEX; index += INDEX_INTERVAL) {
         find = NO;
-        for (AMVideoDevice* device in _videoDevices) {
+        for (AMVideoDevice* device in _peerDevices) {
             if (device.index == index) {
                 find = YES;
                 break;

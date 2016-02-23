@@ -12,12 +12,10 @@
 #import "AMChannel.h"
 #import "AMVideoRouteViewController.h"
 #import "NSBezierPath+QuartzUtilities.h"
-#import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMFFmpeg.h"
 
 typedef struct GlyphArcInfo {
-	CGFloat	width;
-	CGFloat	angle;	// in radians
+    CGFloat	width;
+    CGFloat	angle;	// in radians
 } GlyphArcInfo;
 
 static GlyphArcInfo *
@@ -26,30 +24,30 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
     CFIndex glyphCount = CTLineGetGlyphCount(line);
     GlyphArcInfo *glyphArcInfo = (GlyphArcInfo *)calloc(glyphCount, sizeof(GlyphArcInfo));
     
-	NSArray *runArray = (__bridge NSArray *)CTLineGetGlyphRuns(line);
-	CFIndex glyphOffset = 0;
-	for (id run in runArray) {
-		CFIndex runGlyphCount = CTRunGetGlyphCount((__bridge CTRunRef)run);
+    NSArray *runArray = (__bridge NSArray *)CTLineGetGlyphRuns(line);
+    CFIndex glyphOffset = 0;
+    for (id run in runArray) {
+        CFIndex runGlyphCount = CTRunGetGlyphCount((__bridge CTRunRef)run);
         CGGlyph glyphs[runGlyphCount];
         CTRunGetGlyphs((__bridge CTRunRef)run, CFRangeMake(0, 0), glyphs);
-		for (CFIndex runGlyphIndex = 0; runGlyphIndex < runGlyphCount; runGlyphIndex++) {
+        for (CFIndex runGlyphIndex = 0; runGlyphIndex < runGlyphCount; runGlyphIndex++) {
             CFIndex index = glyphOffset + runGlyphIndex;
-			glyphArcInfo[index].width = CTRunGetTypographicBounds((__bridge CTRunRef)run,
-                                            CFRangeMake(runGlyphIndex, 1), NULL, NULL, NULL);
-		}
+            glyphArcInfo[index].width = CTRunGetTypographicBounds((__bridge CTRunRef)run,
+                                                                  CFRangeMake(runGlyphIndex, 1), NULL, NULL, NULL);
+        }
         
-		glyphOffset += runGlyphCount;
-	}
+        glyphOffset += runGlyphCount;
+    }
     
-	//double lineLength = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
-	CGFloat prevHalfWidth = glyphArcInfo[0].width / 2.0;
-	glyphArcInfo[0] .angle = prevHalfWidth / radius;
-	for (CFIndex lineGlyphIndex = 1; lineGlyphIndex < glyphCount; lineGlyphIndex++) {
-		CGFloat halfWidth = glyphArcInfo[lineGlyphIndex].width / 2.0;
-		CGFloat prevCenterToCenter = prevHalfWidth + halfWidth;
-		glyphArcInfo[lineGlyphIndex].angle = prevCenterToCenter / radius;
-		prevHalfWidth = halfWidth;
-	}
+    //double lineLength = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+    CGFloat prevHalfWidth = glyphArcInfo[0].width / 2.0;
+    glyphArcInfo[0] .angle = prevHalfWidth / radius;
+    for (CFIndex lineGlyphIndex = 1; lineGlyphIndex < glyphCount; lineGlyphIndex++) {
+        CGFloat halfWidth = glyphArcInfo[lineGlyphIndex].width / 2.0;
+        CGFloat prevCenterToCenter = prevHalfWidth + halfWidth;
+        glyphArcInfo[lineGlyphIndex].angle = prevCenterToCenter / radius;
+        prevHalfWidth = halfWidth;
+    }
     
     return glyphArcInfo;
 }
@@ -120,33 +118,30 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     [self doInit];
     
-    AMFFmpeg *ffmpegInit = [[AMFFmpeg alloc] init];
-    [ffmpegInit checkExistingPIDs];
-    
     self.delegate = [[AMVideoRouteViewController alloc] init];
     NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
     for (int i = 0; i < 4; i++) {
-      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-      channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-      channels[i] = channel;
-  }
-//  [self associateChannels:channels
-//               withDevice:@"Device1"
-//                     name:@"abcdefghijklmnopqrstuvwxyz"
-//                removable:NO];
-//  
-//  NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-//  for (int i = 8; i < 12; i++) {
-//      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-//      channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-//      channels2[i - 8] = channel;
-//  }
-//  [self associateChannels:channels2
-//               withDevice:@"Device2"
-//                     name:@"GarageBand"
-//                removable:YES];
-//   
-//   [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
+        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
+        channels[i] = channel;
+    }
+    //  [self associateChannels:channels
+    //               withDevice:@"Device1"
+    //                     name:@"abcdefghijklmnopqrstuvwxyz"
+    //                removable:NO];
+    //
+    //  NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
+    //  for (int i = 8; i < 12; i++) {
+    //      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
+    //      channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
+    //      channels2[i - 8] = channel;
+    //  }
+    //  [self associateChannels:channels2
+    //               withDevice:@"Device2"
+    //                     name:@"GarageBand"
+    //                removable:YES];
+    //
+    //   [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -178,7 +173,7 @@ static CGFloat kCloseButtonRadius = 6.0;
     for (AMChannel *channel in self.allChannels)
         [self drawChannel:channel WithCenterAt:[self centerOfChannel:channel]];
     
-//    [self drawTip];
+    //    [self drawTip];
 }
 
 - (void) drawChannel : (AMChannelType) type
@@ -217,22 +212,22 @@ static CGFloat kCloseButtonRadius = 6.0;
     NSPoint ptSource = NSMakePoint(20, 20);
     [self drawChannel:AMSourceChannel withPosition:ptSource];
     NSDictionary *attributes = @{ NSForegroundColorAttributeName : _deviceLableColor,
-                                NSFontAttributeName : [NSFont fontWithName:@"FoundryMonoline"
-                                                                      size:13.0]};
+                                  NSFontAttributeName : [NSFont fontWithName:@"FoundryMonoline"
+                                                                        size:13.0]};
     NSAttributedString *sourceLabel = [[NSAttributedString alloc] initWithString:@"SEND"
-                                                                attributes:attributes];
+                                                                      attributes:attributes];
     NSPoint ptLabelSource = NSMakePoint(38, 12);
     [sourceLabel drawAtPoint:(ptLabelSource)];
     
     NSPoint ptDest   = NSMakePoint(120, 20);
     [self drawChannel:AMDestinationChannel withPosition:ptDest];
-
-   
+    
+    
     NSAttributedString *destLabel = [[NSAttributedString alloc] initWithString:@"RECEIVE "
-                                                                attributes:attributes];
+                                                                    attributes:attributes];
     NSPoint ptLabelDestination = NSMakePoint(138, 12);
     [destLabel drawAtPoint:(ptLabelDestination)];
-
+    
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -328,14 +323,6 @@ static CGFloat kCloseButtonRadius = 6.0;
 
 - (void)connectChannel:(AMChannel *)channel1 toChannel:(AMChannel *)channel2
 {
-    /** Set processID for channel 2 **/
-    NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
-    NSString *knownObject = channel2.channelName;
-    NSArray *temp = [currStreams allKeysForObject:knownObject];
-    NSString *key = [temp lastObject];
-    
-    channel2.processID = key;
-    
     [channel1.peerIndexes addIndex:channel2.index];
     [channel2.peerIndexes addIndex:channel1.index];
     self.needsDisplay = YES;
@@ -350,7 +337,6 @@ static CGFloat kCloseButtonRadius = 6.0;
         _selectedConnection[0] = NSNotFound;
         _selectedConnection[1] = NSNotFound;
     }
-    
     self.needsDisplay = YES;
 }
 
@@ -367,7 +353,6 @@ static CGFloat kCloseButtonRadius = 6.0;
             disableMenuItem = YES;
         }
         AMChannel *channel = [self channelAtIndex:start];
-        if ([channel.channelName isNotEqualTo:NULL]) { [self stopChannelFFmpegProcess:channel]; }
         if (channel == _selectedChannel) {
             _selectedChannel = nil;
             _targetChannel = nil;
@@ -386,12 +371,6 @@ static CGFloat kCloseButtonRadius = 6.0;
     
     [self.devices removeObjectForKey:deviceID];
     self.needsDisplay = YES;
-}
-
-- (void)stopChannelFFmpegProcess: (AMChannel *)theChannel {
-    /** Kill ffmpeg connection by process id **/
-    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
-    [ffmpeg stopFFmpegInstance:theChannel.processID];
 }
 
 - (void)removeALLDevice
@@ -613,7 +592,7 @@ static CGFloat kCloseButtonRadius = 6.0;
         
         
         
-
+        
         CGFloat arcLength = radius * (endAngle - startAngle);
         // 18: |- 6 - devcie lable - 6 - close button - 6 - |
         CGFloat closeButtonRadius = (device.removable) ? kCloseButtonRadius : 0.0;
@@ -624,22 +603,22 @@ static CGFloat kCloseButtonRadius = 6.0;
         }
         
         NSDictionary *attributes = @{
-            NSForegroundColorAttributeName : _deviceLableColor,
-            NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:13.0]
-        };
+                                     NSForegroundColorAttributeName : _deviceLableColor,
+                                     NSFontAttributeName : [NSFont fontWithName:@"HelveticaNeue" size:13.0]
+                                     };
         NSAttributedString *label =
-            [[NSAttributedString alloc] initWithString:device.deviceName
-                                            attributes:attributes];
+        [[NSAttributedString alloc] initWithString:device.deviceName
+                                        attributes:attributes];
         CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)label);
         CGFloat textWidth = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
         if (textWidth > maxTextWidth) {
             NSAttributedString *truncationTokenString =
-                [[NSAttributedString alloc] initWithString:@"…"
+            [[NSAttributedString alloc] initWithString:@"…"
                                             attributes:attributes];
             CTLineRef truncationToken = CTLineCreateWithAttributedString(
-                            (__bridge CFAttributedStringRef)truncationTokenString);
+                                                                         (__bridge CFAttributedStringRef)truncationTokenString);
             CTLineRef truncatedLine = CTLineCreateTruncatedLine(line, maxTextWidth,
-                                            kCTLineTruncationEnd, truncationToken);
+                                                                kCTLineTruncationEnd, truncationToken);
             CFRelease(line);
             line = truncatedLine;
             CFRelease(truncationToken);
@@ -654,9 +633,9 @@ static CGFloat kCloseButtonRadius = 6.0;
         NSBezierPath *textPath = [NSBezierPath bezierPath];
         CGFloat startAngleOffset = 2.0 * closeButtonRadius + 4.0 + ((device.removable) ? 6.0 : 0.0);
         [textPath appendBezierPathWithArcWithCenter:_center
-                    radius:radius
-                startAngle:todegree(startAngle - startAngleOffset / radius)
-                  endAngle:todegree(endAngle + 4.0 / radius)];
+                                             radius:radius
+                                         startAngle:todegree(startAngle - startAngleOffset / radius)
+                                           endAngle:todegree(endAngle + 4.0 / radius)];
         textPath.lineWidth = 10.0;
         [_backgroundColor set];
         [textPath stroke];
@@ -665,8 +644,8 @@ static CGFloat kCloseButtonRadius = 6.0;
             // draw close button
             CGFloat closeButtonCenterAngle = startAngle - (8.0 + closeButtonRadius) / radius;
             NSPoint closeButtonCenterPosition = NSMakePoint(
-                    (radius + 4.0) * cos(closeButtonCenterAngle) + _center.x,
-                    (radius + 4.0) * sin(closeButtonCenterAngle) + _center.y);
+                                                            (radius + 4.0) * cos(closeButtonCenterAngle) + _center.x,
+                                                            (radius + 4.0) * sin(closeButtonCenterAngle) + _center.y);
             device.closeButtonCenter = closeButtonCenterPosition;
             NSBezierPath *closeButtonCircle = [NSBezierPath bezierPath];
             [closeButtonCircle appendBezierPathWithArcWithCenter:closeButtonCenterPosition
@@ -717,7 +696,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                 CTRunDraw((__bridge CTRunRef)run, context, glyphRange);
             }
         }
- 
+        
         CFRelease(line);
         free(glyphArcInfo);
         CGContextRestoreGState(context);
@@ -800,7 +779,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                              toChannel:peerChannle];
                 CGPathRef quartzBezierPath = [bezierPath quartzPath:NO];
                 CGPathRef hitTestArea = CGPathCreateCopyByStrokingPath(quartzBezierPath,
-                                NULL, 6.0, kCGLineCapRound, kCGLineJoinRound, 10.0);
+                                                                       NULL, 6.0, kCGLineCapRound, kCGLineJoinRound, 10.0);
                 CGPathRelease(quartzBezierPath);
                 if (CGPathContainsPoint(hitTestArea, NULL, p, false)) {
                     _selectedConnection[0] = channel.index;
@@ -820,7 +799,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 - (NSString *)testClickOccuredOnCloseDeviceButton:(NSEvent *)mouseUpEvent
 {
     NSPoint p1 = [self convertPoint:[mouseUpEvent locationInWindow]
-                          fromView:nil];
+                           fromView:nil];
     
     for (NSString *deviceID in self.devices) {
         AMDevice *device = self.devices[deviceID];

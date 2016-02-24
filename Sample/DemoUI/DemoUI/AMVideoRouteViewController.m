@@ -47,15 +47,6 @@ shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
     
-    /** Set processID for channel 2 **/
-    NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
-    NSString *knownObject = channel2.channelName;
-    NSArray *temp = [currStreams allKeysForObject:knownObject];
-    NSString *key = [temp lastObject];
-    
-    channel2.processID = key;
-    
-    
     return YES;
     
     /*
@@ -103,11 +94,7 @@ shouldDisonnectChannel:(AMChannel *)channel1
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
-    AMChannel* peerChannel = [channel1.deviceID isEqualToString:@"MYSELF"] ? channel2 : channel1;
-    
-   [_videoChannels removeObject:peerChannel];
-
-    [self stopChannelFFmpegProcess:peerChannel];
+   
     
     return YES;
     /*
@@ -126,10 +113,10 @@ disconnectChannel:(AMChannel *)channel1
 }
 
 
-- (void)stopChannelFFmpegProcess: (AMChannel *)theChannel {
+- (void)stopChannelFFmpegProcess: (NSString*) processID {
     /** Kill ffmpeg connection by process id **/
     AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
-    [ffmpeg stopFFmpegInstance:theChannel.processID];
+    [ffmpeg stopFFmpegInstance:processID];
 }
 
 
@@ -148,7 +135,14 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
- //   [[[AMAudio sharedInstance] audioJacktripManager] stopJacktripByName:deviceID];
+     for (AMVideoDevice* device in _peerDevices) {
+        if ([device.deviceID isEqualToString:deviceID]) {
+            [self stopChannelFFmpegProcess:device.processID];
+            [_peerDevices removeObject:device];
+        }
+        
+    }
+     
     return YES;
 }
 
@@ -279,7 +273,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMChannel* peerChannel = [[AMChannel alloc] init];
     peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
-    peerChannel.deviceID     = peerIP;
+    peerChannel.deviceID     = peerIPPort;
     peerChannel.channelName  = peerIPPort;
     peerChannel.index = firstIndex;
     [_videoChannels addObject:peerChannel];
@@ -293,7 +287,14 @@ shouldRemoveDevice:(NSString *)deviceID;
     [peerChannels addObject:peerChannel];
     
     peerDevice.channels = peerChannels;
-    
+
+    /** Set processID for channel 2 **/
+    NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults]
+                                    objectForKey:Preference_Key_ffmpeg_Cur_P2P];
+    NSArray *temp = [currStreams allKeysForObject:peerChannel.channelName];
+    peerDevice.processID = [temp lastObject];
+
+
     [_peerDevices addObject:peerDevice];
     
     [routeView associateChannels:peerChannels
@@ -301,7 +302,7 @@ shouldRemoveDevice:(NSString *)deviceID;
                             name:peerChannel.channelName
                        removable:YES];
     
-
+    
     [routeView connectChannel:myChannel toChannel:peerChannel];
 }
 

@@ -173,7 +173,7 @@
     _stopFFMpegTask.terminationHandler = ^(NSTask* t){
         
     };
-    //sleep(2);
+    sleep(2);
     
     [_stopFFMpegTask launch];
     

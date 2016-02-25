@@ -291,8 +291,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     /** Set processID for channel 2 **/
     NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults]
                                     objectForKey:Preference_Key_ffmpeg_Cur_P2P];
-    NSArray *temp = [currStreams allKeysForObject:peerChannel.channelName];
-    peerDevice.processID = [temp lastObject];
+    peerDevice.processID = [currStreams objectForKey:peerChannel.channelName];
 
 
     [_peerDevices addObject:peerDevice];

@@ -101,7 +101,7 @@
     NSDictionary *currentStreams = [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P];
     
     for (NSString *PID in currentStreams) {
-        [self executePIDCheck:PID];
+        [self executePIDCheck:[currentStreams objectForKey:PID]];
     }
 }
 
@@ -150,7 +150,8 @@
         //Insert new IP & PID into the dictionary
         NSString *serverAddr = _configs.serverAddr;
         NSString *fullAddr = [NSString stringWithFormat:@"%@:%@", serverAddr, [self getPort:_configs.portOffset]];
-        [currentStreams setObject:fullAddr forKey:pidLines[0]];
+        //[currentStreams setObject:fullAddr forKey:pidLines[0]];
+        [currentStreams setObject:pidLines[0] forKey:fullAddr];
         
         //Store the updated dictionary
         [[AMPreferenceManager standardUserDefaults] setObject:currentStreams forKey:Preference_Key_ffmpeg_Cur_P2P];
@@ -163,6 +164,7 @@
 }
 
 -(BOOL)stopFFmpegInstance: (NSString *)processID {
+    NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
     /** Execute the NSTask to kill the specific ffmpeg instance by PID **/
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"kill %@",processID];
@@ -323,8 +325,10 @@
     if([data length]) {
         //parse data to look for current PID we're checking
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *errorMsg = @"Invalid process id";
         
-        if ([temp rangeOfString:_curPidCheck].location == NSNotFound) {
+        // If PID isn't found in response or an error message is found, remove that pref
+        if ([temp rangeOfString:_curPidCheck].location == NSNotFound || [temp rangeOfString:errorMsg].location != NSNotFound) {
             //process no longer running, kill it from prefs
             NSLog(@"Need to remove stored PID: %@", _curPidCheck);
             [self removeProcessFromPrefs:_curPidCheck];
@@ -338,7 +342,12 @@
 -(void)removeProcessFromPrefs: (NSString *)PID {
     NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
     
-    [currentStreams removeObjectForKey:_curPidCheck];
+    //[currentStreams removeObjectForKey:_curPidCheck];
+    NSArray *processesToRemove = [currentStreams allKeysForObject:PID];
+    for (NSString *processKey in processesToRemove) {
+        NSLog(@"removing process with key: %@", processKey);
+        [currentStreams removeObjectForKey:processKey];
+    }
     
     [self updateCurStreamPrefs:currentStreams];
 }

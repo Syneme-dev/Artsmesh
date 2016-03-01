@@ -28,6 +28,7 @@
 //    NSMutableArray*         _peerDevices;
 //    AMVideoDevice*          _myselfDevice;
     AMVideoDeviceManager*   _videoManager;
+    AMFFmpeg*               _ffmpegManager;
 }
 
 
@@ -77,8 +78,7 @@ disconnectChannel:(AMChannel *)channel1
 
 - (void)stopChannelFFmpegProcess: (NSString*) processID {
     /** Kill ffmpeg connection by process id **/
-    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
-    [ffmpeg stopFFmpegInstance:processID];
+    [_ffmpegManager stopFFmpegInstance:processID];
 }
 
 
@@ -105,56 +105,32 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    _videoManager = [AMVideoDeviceManager sharedInstance];
     
-    NSMutableArray* channels = [[NSMutableArray alloc] init];
+    _ffmpegManager = [[AMFFmpeg alloc] init];
+    [_ffmpegManager checkExistingPIDs];
+    
+    _videoManager  = [AMVideoDeviceManager sharedInstance];
     
     AMChannel* myChannel = [[AMChannel alloc] init];
     myChannel.deviceID     = @"MYSELF";
     myChannel.channelName  = @"MYSELF";
     
-    myChannel.index = 0;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
+    for(int i = 0; i < 9; i++){
+        myChannel.index = i;
+        [_videoManager.myselfDevice.channels addObject:myChannel];
+    }
     
-    myChannel.index = 1;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-    myChannel.index = 2;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-   
-    myChannel.index = 3;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-    myChannel.index = 4;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-    myChannel.index = 5;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-    myChannel.index = 6;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-
-    myChannel.index = 7;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-    myChannel.index = 8;
-    [_videoManager.myselfDevice.channels addObject:myChannel];
-    
-  //  _videoManager.myselfDevice.channels   = channels;
-    
-    AMFFmpeg *ffmpegInit = [[AMFFmpeg alloc] init];
-    [ffmpegInit checkExistingPIDs];
     
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
     view.delegate = self;
     
-   
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadVideoChannel:)
+                                             selector:@selector(addVideoChannel:)
                                                  name:AMVideoDeviceNotification
                                                object:nil];
+    
+    [self reloadAudioChannel];
 }
 
 -(void)refreshDevices
@@ -170,135 +146,83 @@ shouldRemoveDevice:(NSString *)deviceID;
      removeObserver:self];
 }
 
-/*
- 
- 
- 
 
-
--(void)reloadAudioChannel:(NSNotification*)notify
+//1st: Rearrange _videoManager.peerDevices to represent current state of ffmpeg processes
+//2nd: Make a copy for the devices which hasn't shown in UI yet.
+//3rd: Show those devices.
+-(void)reloadAudioChannel
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
  
-    if(_configController.videoConfig.myself == nil)
+    //1st step.
+    
+    /*
+    BOOL bFind = NO;
+    for(AMVideoDevice* device in _videoManager.peerDevices) {
+  
+        //Check whether that ffmpeg instance exists or not.
+        NSString* pid = device.processID;
+        [_ffmpegManager checkExistingPIDs:]
+        if(){
+            [_videoManager.peerDevices removeObject];
+        }
+        bFind = YES;
+    }
+    */
+    
+    //2nd step
+    if(routeView == nil || _videoManager.peerDevices == nil || [_videoManager.peerDevices count] == 0)
         return;
- 
-    NSString* peerIP        = _configController.videoConfig.peerIP;
-    NSString* peerIPPort    = [NSString stringWithFormat:@"%@:%d",
-                                                    peerIP, _configController.videoConfig.peerPort];
-    BOOL      isSender      = [_configController.videoConfig.role isEqualToString:@"SENDER"];
- 
- 
-    //Remove device not exist any more
-    NSMutableArray* toRemoveDevices = [[NSMutableArray alloc] init];
-    for (AMChannel* channShow in [routeView allChannels])
-    {
-        if (channShow.type == AMPlaceholderChannel) {
-            continue;
-        }
-        
-        BOOL bFind = NO;
-        for (AMChannel* channAct in allChann) {
-            if ([channShow.deviceID isEqualToString:channAct.deviceID]) {
-                bFind = YES;
-            }
-        }
-        if (!bFind) {
-            
-            if (![toRemoveDevices containsObject:channShow.deviceID]) {
-                [toRemoveDevices addObject:channShow.deviceID];
-            }
-        }
-    }
-    
-    for (NSString* devId in toRemoveDevices ) {
-        [routeView removeDevice:devId];
-    }
-    
+   
     //Calculate new device to add
-    NSMutableDictionary* devicesToAdd = [[NSMutableDictionary alloc] init];
-    for( AMChannel *channAct in allChann){
+    NSMutableArray* devicesToAdd = [[NSMutableArray alloc] init];
+    for(AMVideoDevice* device in _videoManager.peerDevices){
         BOOL bFind = NO;
         for (AMChannel* channShow in [routeView allChannels]){
             if (channShow.type == AMPlaceholderChannel) {
                 continue;
             }
-            
-            if ([channAct.deviceID isEqualToString:channShow.deviceID]) {
+            if ([device.deviceID isEqualToString:channShow.deviceID]) {
                 bFind = YES;
                 break;
             }
         }
         
         if (!bFind){
-            AMJackDevice* device = devicesToAdd[channAct.deviceID];
-            if(device == nil){
-                //if device not exsit, create one
-                device = [[AMJackDevice alloc] init];
-                device.deviceID = channAct.deviceID;
-                device.deviceName = channAct.deviceID;
-                device.channels = [[NSMutableArray alloc] init];
-                
-                devicesToAdd[channAct.deviceID] = device;
-            }
-            
-            [device.channels addObject:channAct];
+            [devicesToAdd addObject:device];
         }
     }
     
-    //Index new device channel
-    int maxIndex = 0;
-    for(AMChannel* channShow in [routeView allChannels]){
-        if (channShow.type == AMPlaceholderChannel) {
-            continue;
-        }
+    //3rd step
+    for (AMVideoDevice* device in devicesToAdd) {
+       
+        AMChannel* peerChannel = [device.channels objectAtIndex:0];
         
-        maxIndex = (maxIndex > channShow.index) ? maxIndex : channShow.index;
-    }
-    
-    int j = maxIndex + 1;
-    for(NSString* deviceID in devicesToAdd){
-        AMJackDevice* device = devicesToAdd[deviceID];
-        [device sortChannels];
+        AMChannel* myChannel = [[AMChannel alloc] init];
+        myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+        myChannel.deviceID     = @"MYSELF";
+        myChannel.channelName  = @"MYSELF";
+        myChannel.index = (device.index - START_INDEX) / INDEX_INTERVAL;;
+        [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
         
-        for (AMChannel* chann  in device.channels) {
-            chann.index = j++;
-        }
+        [routeView associateChannels:_videoManager.myselfDevice.channels
+                          withDevice:myChannel.deviceID
+                                name:myChannel.channelName
+                           removable:YES];
         
-        //add new device to router view
-        BOOL removable = NO;
-        for (int i = 0; i < [[[AMAudio sharedInstance] audioJacktripManager].jackTripInstances count]; i++) {
-            AMJacktripInstance* jacktrip = [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances[i];
-            if ([jacktrip.instanceName isEqualToString:deviceID]) {
-                removable = YES;
-                break;
-            }
-        }
         
         [routeView associateChannels:device.channels
                           withDevice:device.deviceID
-                                name:device.deviceName
-                           removable:removable];
-    }
-    
-    //set connections
-    NSArray* channelsOnView = [routeView allChannels];
-    for (AMChannel* chann in channelsOnView) {
-        NSString* fullName = [chann channelFullName];
-        NSArray* conns = [[[AMAudio sharedInstance] audioJackClient] connectionForPort:fullName];
-        for (NSString* conn in conns ) {
-            for (AMChannel* peerChann in channelsOnView) {
-                NSString* peerFullName = [peerChann channelFullName];
-                if ([conn isEqualTo:peerFullName]) {
-                    [routeView connectChannel:chann toChannel:peerChann];
-                }
-            }
-        }
+                                name:peerChannel.channelName
+                           removable:YES];
+        
+        
+        [routeView connectChannel:myChannel toChannel:peerChannel];
     }
 }
-*/
 
--(void) reloadVideoChannel:(NSNotification*) notif
+
+-(void) addVideoChannel:(NSNotification*) notif
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
     

@@ -315,10 +315,7 @@
     [_pidTask waitUntilExit];
 }
 -(void)pidCheckResults : (NSNotification *)notification {
-    //NSLog(@"Got results from PID check!");
-    //PID NSTask returned results, check if data exists and update prefs as necessary
-    //NSMutableDictionary *currentStreams = [[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_P2P] mutableCopy];
-    
+    //Got results from PID check
     NSFileHandle *outputFile = (NSFileHandle *) [notification object];
     NSData *data = [outputFile availableData];
     
@@ -330,11 +327,9 @@
         // If PID isn't found in response or an error message is found, remove that pref
         if ([temp rangeOfString:_curPidCheck].location == NSNotFound || [temp rangeOfString:errorMsg].location != NSNotFound) {
             //process no longer running, kill it from prefs
-            NSLog(@"Need to remove stored PID: %@", _curPidCheck);
             [self removeProcessFromPrefs:_curPidCheck];
         } else {
             //process found!
-            NSLog(@"Process still running! Do nothing to prefs!");
         }
     }
 }
@@ -345,7 +340,6 @@
     //[currentStreams removeObjectForKey:_curPidCheck];
     NSArray *processesToRemove = [currentStreams allKeysForObject:PID];
     for (NSString *processKey in processesToRemove) {
-        NSLog(@"removing process with key: %@", processKey);
         [currentStreams removeObjectForKey:processKey];
     }
     

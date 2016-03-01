@@ -289,6 +289,7 @@
 		4FBE6A831C0444A100C854EA /* AMVideoRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */; };
 		4FBE6A881C0444C800C854EA /* AMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A851C0444C800C854EA /* AMChannel.m */; };
 		4FBE6A891C0444C800C854EA /* NSBezierPath+QuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */; };
+		4FBF9E3D1C806BA70011161F /* AMVideoDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
 		4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC6316E1B46781C00BD02AB /* AMIPerfConfigWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */; };
@@ -985,6 +986,8 @@
 		4FBE6A851C0444C800C854EA /* AMChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChannel.m; sourceTree = "<group>"; };
 		4FBE6A861C0444C800C854EA /* NSBezierPath+QuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+QuartzUtilities.h"; sourceTree = "<group>"; };
 		4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+QuartzUtilities.m"; sourceTree = "<group>"; };
+		4FBF9E3B1C806BA70011161F /* AMVideoDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoDeviceManager.h; sourceTree = "<group>"; };
+		4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoDeviceManager.m; sourceTree = "<group>"; };
 		4FC631681B465D6000BD02AB /* iperf */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iperf; sourceTree = "<group>"; };
 		4FC6316B1B46781C00BD02AB /* AMIPerfConfigWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfConfigWC.h; sourceTree = "<group>"; };
 		4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfConfigWC.m; sourceTree = "<group>"; };
@@ -2004,6 +2007,8 @@
 				4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */,
 				4FBE6A811C0444A100C854EA /* AMVideoRouteView.h */,
 				4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */,
+				4FBF9E3B1C806BA70011161F /* AMVideoDeviceManager.h */,
+				4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */,
 			);
 			name = "Video Routing";
 			sourceTree = "<group>";
@@ -2694,6 +2699,7 @@
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				2D08FDDA1AD661FF00A9D257 /* GTLYouTubePlaylistPlayer.m in Sources */,
 				AFBDCCB9195AD41400653C18 /* AMOSCMessageViewController.m in Sources */,
+				4FBF9E3D1C806BA70011161F /* AMVideoDeviceManager.m in Sources */,
 				2D49102D1A11DCA9008D1A27 /* AMLiveMapProgramPanelTextView.m in Sources */,
 				2D08FDA81AD661FF00A9D257 /* GTLYouTubeChannelSectionListResponse.m in Sources */,
 				2D08FD9E1AD661FF00A9D257 /* GTLYouTubeChannelBannerResource.m in Sources */,

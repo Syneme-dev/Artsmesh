@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 @property(nonatomic) AMChannelType type;
 @property(nonatomic) NSString *deviceID;
 @property(nonatomic) NSString *channelName;
-@property(nonatomic) NSUInteger index;
+@property(nonatomic) int        index;
 @property(nonatomic) NSMutableIndexSet *peerIndexes;
 
 // designated initializer

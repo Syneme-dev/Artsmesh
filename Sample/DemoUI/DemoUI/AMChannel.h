@@ -40,7 +40,6 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 @property   NSString*           deviceID;
 @property   NSString*           deviceName;
 @property   NSMutableArray*     channels;
-@property   int                 index;
--(void)sortChannels;
+@property   NSUInteger          index;
 
 @end

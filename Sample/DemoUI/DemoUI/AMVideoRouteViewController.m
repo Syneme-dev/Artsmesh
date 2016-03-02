@@ -111,14 +111,17 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     _videoManager  = [AMVideoDeviceManager sharedInstance];
     
+    NSMutableArray* channels = [[NSMutableArray alloc] init];
     AMChannel* myChannel = [[AMChannel alloc] init];
     myChannel.deviceID     = @"MYSELF";
     myChannel.channelName  = @"MYSELF";
     
     for(int i = 0; i < 9; i++){
         myChannel.index = i;
-        [_videoManager.myselfDevice.channels addObject:myChannel];
+        [channels addObject:myChannel];
     }
+    
+    _videoManager.myselfDevice.channels = channels;
     
     
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
@@ -198,12 +201,15 @@ shouldRemoveDevice:(NSString *)deviceID;
        
         AMChannel* peerChannel = [device.channels objectAtIndex:0];
         
-        AMChannel* myChannel = [[AMChannel alloc] init];
-        myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+        unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL;
+        AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
         myChannel.deviceID     = @"MYSELF";
         myChannel.channelName  = @"MYSELF";
-        myChannel.index = (device.index - START_INDEX) / INDEX_INTERVAL;;
         [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
+       
+        myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+     
+        
         
         [routeView associateChannels:_videoManager.myselfDevice.channels
                           withDevice:myChannel.deviceID
@@ -226,7 +232,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
     
-    if(_configController.videoConfig.myself == nil)
+    if(routeView == nil || _configController.videoConfig.myself == nil)
         return;
     
     
@@ -239,21 +245,6 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMVideoDevice* peerDevice  = nil;
     
     int firstIndex = [self findFirstIndex];
-    
-    //myself channel
-
-    AMChannel* myChannel = [[AMChannel alloc] init];
-    myChannel.type = isSender ? AMSourceChannel : AMDestinationChannel;
-    myChannel.deviceID     = @"MYSELF";
-    myChannel.channelName  = @"MYSELF";
-    myChannel.index = (firstIndex - START_INDEX) / INDEX_INTERVAL;
-    [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
-        
-    [routeView associateChannels:_videoManager.myselfDevice.channels
-                      withDevice:myChannel.deviceID
-                            name:myChannel.channelName
-                       removable:YES];
-    
     peerDevice = [[AMVideoDevice alloc] init];
     peerDevice.index =firstIndex;
     peerDevice.deviceID = peerIPPort;
@@ -263,8 +254,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     peerChannel.deviceID     = peerIPPort;
     peerChannel.channelName  = peerIPPort;
     peerChannel.index = firstIndex;
-  //  [_videoManager.videoChannels addObject:peerChannel];
-        
+    
     NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
     [peerChannels addObject:peerChannel];
     [peerChannels addObject:peerChannel];
@@ -285,13 +275,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
     [_videoManager.peerDevices addObject:peerDevice];
     
-    [routeView associateChannels:peerChannels
-                      withDevice:peerChannel.deviceID
-                            name:peerChannel.channelName
-                       removable:YES];
-    
-    
-    [routeView connectChannel:myChannel toChannel:peerChannel];
+    [self reloadAudioChannel];
 }
 
 -(int) findFirstIndex

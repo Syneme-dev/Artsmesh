@@ -82,6 +82,7 @@
     
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
+    [self.roleSelecter addItemWithTitle:@"DUAL"];
     
     [self.vidCodec addItemWithTitle:@"h.264"];
     [self.vidCodec addItemWithTitle:@"mpeg2"];
@@ -358,6 +359,12 @@
     cfgs.serverAddr = peerAddr;
     cfgs.portOffset = [self.portOffsetSelector stringValue];
     
+    if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        //Iterate portOffset by +1 to avoid conflict with concurrent P2P send command
+        int newPortOffset = (int)[[self.portOffsetSelector stringValue] integerValue] + 1;
+        cfgs.portOffset = [NSString stringWithFormat:@"%d", newPortOffset];
+    }
+    
     AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
     
     if(![ffmpeg receiveP2P:cfgs]){
@@ -448,7 +455,8 @@
 
 - (BOOL)checkP2PVideoParams {
     if ([self.roleSelecter.stringValue isNotEqualTo:@"SENDER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"]) {
+        [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"DUAL"]) {
         return NO;
     }
     if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
@@ -474,6 +482,10 @@
         
     } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
         // Run FFPLAY on local machine to capture sent UDP video
+        [self receiveP2P];
+    } else if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        // Do both!
+        [self sendP2P];
         [self receiveP2P];
     }
     

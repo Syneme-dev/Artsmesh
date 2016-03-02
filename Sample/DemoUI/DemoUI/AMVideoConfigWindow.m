@@ -363,6 +363,27 @@
         //Iterate portOffset by +1 to avoid conflict with concurrent P2P send command
         int newPortOffset = (int)[[self.portOffsetSelector stringValue] integerValue] + 1;
         cfgs.portOffset = [NSString stringWithFormat:@"%d", newPortOffset];
+        
+        //Address needs to be myself, if dual selected
+        AMCoreData* sharedStore = [AMCoreData shareInstance];
+        AMLiveUser* mySelf = sharedStore.mySelf;
+        
+        for (AMLiveUser* user in self.allUsers) {
+            if([user.nickName isEqualToString:self.peerSelecter.stringValue]){
+                // We just distingush the private/public ip on ipv4
+                if (!self.useIpv6CheckboxView.checked) {
+                    if(!mySelf.isOnline){
+                        cfgs.serverAddr = user.privateIp;
+                    }else{
+                        //self.peerAddress.stringValue = user.publicIp;
+                        cfgs.serverAddr = user.privateIp;
+                    }
+                }else{ //when the ipv6 checked, we just use
+                    cfgs.serverAddr = user.ipv6Address;
+                }
+                break;
+            }
+        }
     }
     
     AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];

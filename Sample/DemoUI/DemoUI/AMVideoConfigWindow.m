@@ -361,8 +361,10 @@
     
     if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
         //Iterate portOffset by +1 to avoid conflict with concurrent P2P send command
+        /** Not sure this is necessary
         int newPortOffset = (int)[[self.portOffsetSelector stringValue] integerValue] + 1;
         cfgs.portOffset = [NSString stringWithFormat:@"%d", newPortOffset];
+        **/
         
         //Address needs to be myself, if dual selected
         AMCoreData* sharedStore = [AMCoreData shareInstance];

@@ -362,10 +362,6 @@
     if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
         //Iterate portOffset by +1 to avoid conflict with concurrent P2P
         //send command, if sending to self
-        /**
-        int newPortOffset = (int)[[self.portOffsetSelector stringValue] integerValue] + 1;
-        cfgs.portOffset = [NSString stringWithFormat:@"%d", newPortOffset];
-        **/
          
         //Address needs to be myself, if dual selected
         AMCoreData* sharedStore = [AMCoreData shareInstance];
@@ -478,6 +474,7 @@
 
 
 - (BOOL)checkP2PVideoParams {
+    AMCoreData* sharedStore = [AMCoreData shareInstance];
     if ([self.roleSelecter.stringValue isNotEqualTo:@"SENDER"] &&
         [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"] &&
         [self.roleSelecter.stringValue isNotEqualTo:@"DUAL"]) {
@@ -487,6 +484,13 @@
        [self.peerAddress.stringValue isEqualTo:@""]){
         if([self.peerName.stringValue isEqualTo:@""]){
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a P2P video client role you must enter an IP Address"];
+            [alert runModal];
+            return NO;
+        }
+    }
+    if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        if([self.peerName.stringValue isEqualTo:sharedStore.mySelf.nickName]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Dual mode cannot be utilized on self."];
             [alert runModal];
             return NO;
         }

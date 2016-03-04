@@ -82,6 +82,7 @@
     
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
+    [self.roleSelecter addItemWithTitle:@"DUAL"];
     
     [self.vidCodec addItemWithTitle:@"h.264"];
     [self.vidCodec addItemWithTitle:@"mpeg2"];
@@ -358,6 +359,32 @@
     cfgs.serverAddr = peerAddr;
     cfgs.portOffset = [self.portOffsetSelector stringValue];
     
+    if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        //Iterate portOffset by +1 to avoid conflict with concurrent P2P
+        //send command, if sending to self
+         
+        //Address needs to be myself, if dual selected
+        AMCoreData* sharedStore = [AMCoreData shareInstance];
+        AMLiveUser* mySelf = sharedStore.mySelf;
+        
+        for (AMLiveUser* user in self.allUsers) {
+            if([user.nickName isEqualToString:self.peerSelecter.stringValue]){
+                // We just distingush the private/public ip on ipv4
+                if (!self.useIpv6CheckboxView.checked) {
+                    if(!mySelf.isOnline){
+                        cfgs.serverAddr = user.privateIp;
+                    }else{
+                        //self.peerAddress.stringValue = user.publicIp;
+                        cfgs.serverAddr = user.privateIp;
+                    }
+                }else{ //when the ipv6 checked, we just use
+                    cfgs.serverAddr = user.ipv6Address;
+                }
+                break;
+            }
+        }
+    }
+    
     AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
     
     if(![ffmpeg receiveP2P:cfgs]){
@@ -447,14 +474,23 @@
 
 
 - (BOOL)checkP2PVideoParams {
+    AMCoreData* sharedStore = [AMCoreData shareInstance];
     if ([self.roleSelecter.stringValue isNotEqualTo:@"SENDER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"]) {
+        [self.roleSelecter.stringValue isNotEqualTo:@"RECEIVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"DUAL"]) {
         return NO;
     }
     if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
        [self.peerAddress.stringValue isEqualTo:@""]){
         if([self.peerName.stringValue isEqualTo:@""]){
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a P2P video client role you must enter an IP Address"];
+            [alert runModal];
+            return NO;
+        }
+    }
+    if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        if([self.peerName.stringValue isEqualTo:sharedStore.mySelf.nickName]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Dual mode cannot be utilized on self."];
             [alert runModal];
             return NO;
         }
@@ -474,6 +510,10 @@
         
     } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
         // Run FFPLAY on local machine to capture sent UDP video
+        [self receiveP2P];
+    } else if ([self.roleSelecter.stringValue isEqualTo:@"DUAL"]) {
+        // Do both!
+        [self sendP2P];
         [self receiveP2P];
     }
     

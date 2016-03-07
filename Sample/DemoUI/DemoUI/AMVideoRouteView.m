@@ -500,7 +500,12 @@ static CGFloat kCloseButtonRadius = 6.0;
 
 - (void)tryToCloseDevice:(NSString *)deviceID
 {
-    if ([self.delegate routeView:self shouldRemoveDevice:deviceID]) {
+    //If click the close button on Myself, then close all devices
+    if (deviceID == kAMMyself) {
+        if ([self.delegate routeView:self removeAllDevice:YES]) {
+            [self removeALLDevice];
+        }
+    }else if ([self.delegate routeView:self shouldRemoveDevice:deviceID]) {
         if ([self.delegate routeView:self removeDevice:deviceID]) {
             [self removeDevice:deviceID];
         }

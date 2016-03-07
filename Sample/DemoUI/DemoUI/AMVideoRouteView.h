@@ -31,6 +31,9 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID;
 
+- (BOOL)routeView:(AMVideoRouteView *)routeView
+  removeAllDevice:(BOOL)bCheck;
+
 @end
 
 

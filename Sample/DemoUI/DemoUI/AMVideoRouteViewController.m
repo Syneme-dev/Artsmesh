@@ -14,6 +14,8 @@
 #import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
 
+NSString* kAMMyself = @"MYSELF";
+
 @interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
 @end
@@ -90,6 +92,19 @@ shouldRemoveDevice:(NSString *)deviceID;
 }
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
+     removeAllDevice:(BOOL)check
+{
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
+       
+        [self stopChannelFFmpegProcess:device.processID];
+            [_videoManager.peerDevices removeObject:device];
+    }
+    
+    return YES;
+}
+
+
+- (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
      for (AMVideoDevice* device in _videoManager.peerDevices) {
@@ -113,8 +128,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     NSMutableArray* channels = [[NSMutableArray alloc] init];
     AMChannel* myChannel = [[AMChannel alloc] init];
-    myChannel.deviceID     = @"MYSELF";
-    myChannel.channelName  = @"MYSELF";
+    myChannel.deviceID     = kAMMyself;
+    myChannel.channelName  = kAMMyself;
     
     for(int i = 0; i < 9; i++){
         myChannel.index = i;
@@ -203,8 +218,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         
         unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL;
         AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
-        myChannel.deviceID     = @"MYSELF";
-        myChannel.channelName  = @"MYSELF";
+        myChannel.deviceID     = kAMMyself;
+        myChannel.channelName  = kAMMyself;
         [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
        
         myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;

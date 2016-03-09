@@ -162,6 +162,41 @@
         
     }
 }
+- (BOOL) stopAllFFmpegInstances:(NSArray*) processes{
+    if ([processes count] <= 0) {
+        return NO;
+    }
+    NSMutableString* command = nil;
+    for(int i = 0; i < [processes count]; i++){
+        if (i == 0) {
+            command = [NSMutableString stringWithFormat:
+                                        @"kill %@ ", [processes objectAtIndex:i]];
+        }
+        [command appendFormat:@"%@ ",[processes objectAtIndex:i]];
+    }
+    
+    NSLog(@"Stopping ffmpeg instance with PID of %@", command);
+    
+    /** Execute the NSTask to kill the specific ffmpeg instance by PID*/
+
+    
+    _stopFFMpegTask = nil;
+    _stopFFMpegTask = [[NSTask alloc] init];
+    _stopFFMpegTask.launchPath = @"/bin/bash";
+    _stopFFMpegTask.arguments = @[@"-c", [command copy]];
+    _stopFFMpegTask.terminationHandler = ^(NSTask* t){
+    };
+    //   sleep(2);
+    
+    [_stopFFMpegTask launch];
+    
+    /** Update stored prefs to remove said instance using the PID key **/
+    for (NSString* processID in processes) {
+        [self removeProcessFromPrefs:processID];
+    }
+    
+     return YES;
+}
 
 -(BOOL)stopFFmpegInstance: (NSString *)processID {
     NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
@@ -175,7 +210,7 @@
     _stopFFMpegTask.terminationHandler = ^(NSTask* t){
         
     };
-    sleep(2);
+ //   sleep(2);
     
     [_stopFFMpegTask launch];
     

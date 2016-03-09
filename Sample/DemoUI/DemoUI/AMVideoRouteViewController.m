@@ -23,12 +23,7 @@ NSString* kAMMyself = @"MYSELF";
 
 @implementation AMVideoRouteViewController
 {
-    NSTimer*    _deviceTimer;
-   
     AMVideoConfigWindow*    _configController;
-//    NSMutableArray*         _videoChannels;
-//    NSMutableArray*         _peerDevices;
-//    AMVideoDevice*          _myselfDevice;
     AMVideoDeviceManager*   _videoManager;
     AMFFmpeg*               _ffmpegManager;
 }
@@ -83,6 +78,16 @@ disconnectChannel:(AMChannel *)channel1
     [_ffmpegManager stopFFmpegInstance:processID];
 }
 
+- (void)stopAllChannelProcesses {
+    /** Kill all processes by process id **/
+    NSMutableArray* processes = [[NSMutableArray alloc] init];
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
+        [processes addObject:device.processID];
+    }
+    
+    [_ffmpegManager stopAllFFmpegInstances:processes];
+    [_videoManager.peerDevices removeAllObjects];
+}
 
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
@@ -94,12 +99,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeAllDevice:(BOOL)check
 {
-    for (AMVideoDevice* device in _videoManager.peerDevices) {
-       
-        [self stopChannelFFmpegProcess:device.processID];
-            [_videoManager.peerDevices removeObject:device];
-    }
-    
+    [self stopAllChannelProcesses];
     return YES;
 }
 

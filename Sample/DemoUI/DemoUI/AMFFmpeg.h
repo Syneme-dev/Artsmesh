@@ -18,5 +18,6 @@
 -(void)checkExistingPIDs;
 -(BOOL)stopFFmpeg;
 -(BOOL)stopFFmpegInstance: (NSString *)processID;
+-(BOOL)stopAllFFmpegInstances:(NSArray*) prcocesses;
 
 @end

@@ -41,5 +41,5 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 @property   NSString*           deviceName;
 @property   NSMutableArray*     channels;
 @property   NSUInteger          index;
-
+@property   NSString*           role;
 @end

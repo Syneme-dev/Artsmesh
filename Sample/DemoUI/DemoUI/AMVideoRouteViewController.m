@@ -222,10 +222,10 @@ shouldRemoveDevice:(NSString *)deviceID;
         myChannel.channelName  = kAMMyself;
         [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
        
-        myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
-     
+        AMChannelType myChannelType = peerChannel.type == AMSourceChannel ?
+                                            AMDestinationChannel : AMSourceChannel;
         
-        
+        myChannel.type = myChannelType;
         [routeView associateChannels:_videoManager.myselfDevice.channels
                           withDevice:myChannel.deviceID
                                 name:myChannel.channelName
@@ -239,6 +239,38 @@ shouldRemoveDevice:(NSString *)deviceID;
         
         
         [routeView connectChannel:myChannel toChannel:peerChannel];
+        
+        if ([device.role isEqualToString:@"DUAL"]) {
+            index++;
+            
+            AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
+            myChannel.deviceID     = kAMMyself;
+            myChannel.channelName  = kAMMyself;
+            myChannel.type = myChannelType == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+            
+            [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
+            
+            
+            AMChannel* tmpChannel = [[AMChannel alloc] initWithIndex:peerChannel.index+1];
+            tmpChannel.deviceID     = peerChannel.deviceID;
+            tmpChannel.channelName  = peerChannel.channelName;
+            tmpChannel.type = myChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+            
+            [device.channels replaceObjectAtIndex:1 withObject:tmpChannel];
+            
+            [routeView associateChannels:_videoManager.myselfDevice.channels
+                              withDevice:myChannel.deviceID
+                                    name:myChannel.channelName
+                               removable:YES];
+            
+            
+            [routeView associateChannels:device.channels
+                              withDevice:device.deviceID
+                                    name:peerChannel.channelName
+                               removable:YES];
+            
+            [routeView connectChannel:myChannel toChannel:tmpChannel];
+        }
     }
 }
 
@@ -263,6 +295,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     peerDevice = [[AMVideoDevice alloc] init];
     peerDevice.index =firstIndex;
     peerDevice.deviceID = peerIPPort;
+    peerDevice.role     = _configController.videoConfig.role;
     
     AMChannel* peerChannel = [[AMChannel alloc] init];
     peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;

@@ -458,11 +458,7 @@
  
     _videoConfig.peerIP = [self.peerAddress stringValue];
     
-  /*  if ([_videoConfig.peerIP length] == 0 &&
-        [self.peerSelecter.stringValue isEqualToString:@"self"]) {
-        _videoConfig.peerIP = @"127.0.0.1";
-    }
-    else*/ if (self.useIpv6CheckboxView.checked) {
+    if (self.useIpv6CheckboxView.checked) {
         _videoConfig.peerIP = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
     }
     int portOffset = (int) [[self.portOffsetSelector stringValue] integerValue];

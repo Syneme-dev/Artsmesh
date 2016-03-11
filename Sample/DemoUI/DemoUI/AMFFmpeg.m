@@ -41,7 +41,7 @@
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:none\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,

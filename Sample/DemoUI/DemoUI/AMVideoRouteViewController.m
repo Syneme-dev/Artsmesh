@@ -213,50 +213,16 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     //3rd step
     for (AMVideoDevice* device in devicesToAdd) {
-       
-        AMChannel* peerChannel = [device.channels objectAtIndex:0];
-        
-        unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL;
-        AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
-        myChannel.deviceID     = kAMMyself;
-        myChannel.channelName  = kAMMyself;
-        [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
-       
-        AMChannelType myChannelType = peerChannel.type == AMSourceChannel ?
-                                            AMDestinationChannel : AMSourceChannel;
-        
-        myChannel.type = myChannelType;
-        [routeView associateChannels:_videoManager.myselfDevice.channels
-                          withDevice:myChannel.deviceID
-                                name:myChannel.channelName
-                           removable:YES];
-        
-        
-        [routeView associateChannels:device.channels
-                          withDevice:device.deviceID
-                                name:peerChannel.channelName
-                           removable:YES];
-        
-        
-        [routeView connectChannel:myChannel toChannel:peerChannel];
-        
-        if ([device.role isEqualToString:@"DUAL"]) {
-            index++;
+        for (NSUInteger i = 0; i < device.validCount; i++) {
+            AMChannel* peerChannel = [device.channels objectAtIndex:i];
             
+            unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL + i;
             AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
             myChannel.deviceID     = kAMMyself;
             myChannel.channelName  = kAMMyself;
-            myChannel.type = myChannelType == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
-            
             [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
             
-            
-            AMChannel* tmpChannel = [[AMChannel alloc] initWithIndex:peerChannel.index+1];
-            tmpChannel.deviceID     = peerChannel.deviceID;
-            tmpChannel.channelName  = peerChannel.channelName;
-            tmpChannel.type = myChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
-            
-            [device.channels replaceObjectAtIndex:1 withObject:tmpChannel];
+            myChannel.type =  peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
             
             [routeView associateChannels:_videoManager.myselfDevice.channels
                               withDevice:myChannel.deviceID
@@ -269,7 +235,8 @@ shouldRemoveDevice:(NSString *)deviceID;
                                     name:peerChannel.channelName
                                removable:YES];
             
-            [routeView connectChannel:myChannel toChannel:tmpChannel];
+            
+            [routeView connectChannel:myChannel toChannel:peerChannel];
         }
     }
 }
@@ -286,30 +253,52 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSString* peerIP    = _configController.videoConfig.peerIP;
     NSString* peerIPPort  = [NSString stringWithFormat:@"%@:%d",
                                             peerIP, _configController.videoConfig.peerPort];
-    BOOL      isSender  = [_configController.videoConfig.role isEqualToString:@"SENDER"];
-   
-   
-    AMVideoDevice* peerDevice  = nil;
+
     
     int firstIndex = [self findFirstIndex];
-    peerDevice = [[AMVideoDevice alloc] init];
+    
+    AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
     peerDevice.index =firstIndex;
     peerDevice.deviceID = peerIPPort;
     peerDevice.role     = _configController.videoConfig.role;
     
-    AMChannel* peerChannel = [[AMChannel alloc] init];
-    peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
-    peerChannel.deviceID     = peerIPPort;
-    peerChannel.channelName  = peerIPPort;
-    peerChannel.index = firstIndex;
+    if ([_configController.videoConfig.role isEqualToString:@"DUAL"]) {
+        peerDevice.validCount = 2;
+    }else{
+        peerDevice.validCount = 1;
+    }
     
+    AMChannel* peerChannel = nil;
     NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
+    
+    //In DUAL mode,peerDevice.validCount is 2, then add two channel in one device.
+    for (int i = 0; i < peerDevice.validCount; i++) {
+        peerChannel = [[AMChannel alloc] init];
+
+        //Set channel type
+        if ([_configController.videoConfig.role isEqualToString:@"SENDER"]) {
+            peerChannel.type = AMSourceChannel;
+        }else if([_configController.videoConfig.role isEqualToString:@"RECEIVER"]){
+            peerChannel.type = AMDestinationChannel;
+        }else if ([_configController.videoConfig.role isEqualToString:@"DUAL"]){
+            //In peer device, first sender, then receiver.
+            if (i == 0) {
+                peerChannel.type = AMSourceChannel;
+            }else{
+                 peerChannel.type = AMDestinationChannel;
+            }
+        }
+        
+        peerChannel.deviceID     = peerIPPort;
+        peerChannel.channelName  = peerIPPort;
+        peerChannel.index = firstIndex + i;
+        [peerChannels addObject:peerChannel];
+    }
+    
+    //add pseudo channels to make enough room for displaying.
+    for (NSUInteger i = peerDevice.validCount; i < INDEX_INTERVAL; i++) {
+        [peerChannels addObject:peerChannel];
+    }
     
     peerDevice.channels = peerChannels;
 

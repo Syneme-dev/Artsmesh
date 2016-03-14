@@ -42,4 +42,5 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 @property   NSMutableArray*     channels;
 @property   NSUInteger          index;
 @property   NSString*           role;
+@property   NSUInteger          validCount;
 @end

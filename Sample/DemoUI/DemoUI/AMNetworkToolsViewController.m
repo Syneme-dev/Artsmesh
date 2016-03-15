@@ -79,6 +79,7 @@
     [self.ratioJackAudio    setChecked:NO];
     [self.ratioAMServer     setChecked:NO];
     [self.ratioArtsmesh     setChecked:NO];
+    [self.ratioVideo        setChecked:NO];
 }
 
 
@@ -155,12 +156,15 @@
     self.ratioJackAudio.delegate    = self;
     self.ratioAMServer.delegate     = self;
     self.ratioArtsmesh.delegate     = self;
+    self.ratioVideo.delegate        = self;
     
     self.ratioOSCServer.title    = kAMOSCServerTitle;
     self.ratioOSCClient.title    = kAMOSCClientTitle;
     self.ratioJackAudio.title    = kAMJackAudioTitle;
     self.ratioAMServer.title     = kAMAMServerTitle;
     self.ratioArtsmesh.title     = kAMArtsmeshTitle;
+    self.ratioVideo.title        = kVideoTitle;
+    
     
     _titleMapLogFile             = [NSDictionary dictionaryWithObjectsAndKeys:
                                     kAMOSCServerFile,       kAMOSCServerTitle,
@@ -168,6 +172,8 @@
                                     kAMJackAudioFile,       kAMJackAudioTitle,
                                     kAMAMServerFile,        kAMAMServerTitle,
                                     kAMArtsmeshFile,        kAMArtsmeshTitle,
+                                    kVideoFile,
+                                        kVideoTitle,
                                     nil];
     
    /* [self.logTextView setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.logTextView.font.pointSize]];*/

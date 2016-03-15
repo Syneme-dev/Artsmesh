@@ -44,6 +44,8 @@
 @property (weak) IBOutlet AMRatioButtonView *ratioJackAudio;
 @property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
+@property (weak) IBOutlet AMRatioButtonView *ratioVideo;
+
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 
 

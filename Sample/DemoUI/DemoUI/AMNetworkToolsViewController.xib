@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
@@ -18,6 +18,7 @@
                 <outlet property="ratioJackAudio" destination="OAz-nO-ZWU" id="6P1-Fq-hFC"/>
                 <outlet property="ratioOSCClient" destination="Onw-ph-OMk" id="lFu-wL-w9k"/>
                 <outlet property="ratioOSCServer" destination="zUc-Ii-fmQ" id="1hS-JW-tgf"/>
+                <outlet property="ratioVideo" destination="9Ss-ec-mhZ" id="w3O-lE-AgH"/>
                 <outlet property="searchField" destination="F8o-y9-ppv" id="YuN-9u-YGy"/>
                 <outlet property="tabView" destination="Iy7-e0-VXr" id="m7X-dW-gx0"/>
                 <outlet property="tracerouteButton" destination="dEP-VR-XJx" id="6vd-l0-dE7"/>
@@ -266,7 +267,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="18" y="198" width="148" height="28"/>
+                                        <rect key="frame" x="18" y="153" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="iOQ-oj-fM9"/>
                                             <constraint firstAttribute="width" constant="148" id="v3w-QO-X0Y"/>
@@ -286,10 +287,10 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
-                                                    <size key="minSize" width="483" height="449"/>
+                                                    <size key="minSize" width="223" height="449"/>
                                                     <size key="maxSize" width="631" height="10000000"/>
                                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <size key="minSize" width="483" height="449"/>
+                                                    <size key="minSize" width="223" height="449"/>
                                                     <size key="maxSize" width="631" height="10000000"/>
                                                 </textView>
                                             </subviews>
@@ -319,14 +320,17 @@
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAz-nO-ZWU" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="334" width="148" height="30"/>
                                     </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-ec-mhZ" userLabel="Ratio Video View" customClass="AMRatioButtonView">
+                                        <rect key="frame" x="18" y="196" width="148" height="30"/>
+                                    </customView>
                                     <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
-                                        <rect key="frame" x="18" y="154" width="148" height="28"/>
+                                        <rect key="frame" x="18" y="109" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="148" id="Itu-hi-KCY"/>
                                         </constraints>
                                     </customView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-y9-ppv" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="20" y="112" width="146" height="22"/>
+                                        <rect key="frame" x="20" y="67" width="146" height="22"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SEARCH" drawsBackground="YES" id="sDD-7F-BhV">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

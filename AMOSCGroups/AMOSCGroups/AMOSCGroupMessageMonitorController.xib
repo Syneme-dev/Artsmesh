@@ -16,6 +16,7 @@
                 <outlet property="selfDefServer" destination="ksZ-bf-Lbh" id="4JM-Gg-T5T"/>
                 <outlet property="sendToDev" destination="LN7-7G-b5U" id="yu3-Qo-6Mh"/>
                 <outlet property="serverSelector" destination="xWn-Gf-Gff" id="u7i-rV-byF"/>
+                <outlet property="useIPV6Check" destination="d5i-JM-PXu" id="jnZ-19-NQZ"/>
                 <outlet property="userNameField" destination="aGH-7E-yLn" id="t21-PW-v3l"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -226,7 +227,7 @@
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Sh6-zg-dGx">
-                        <rect key="frame" x="1" y="119" width="223" height="15"/>
+                        <rect key="frame" x="0.0" y="421" width="728" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="65J-Tv-szG">
@@ -271,6 +272,14 @@
                         <action selector="clearAll:" target="-2" id="600-ou-O46"/>
                     </connections>
                 </button>
+                <customView identifier="useIPV6" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5i-JM-PXu" customClass="AMCheckBoxView">
+                    <rect key="frame" x="493" y="515" width="46" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4sI-Jt-wIK"/>
+                        <constraint firstAttribute="width" constant="86" id="5Ha-5L-CBi"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Eha-6G-Z0H"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="Rff-V1-Z3C" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="29" id="0Hz-SZ-UHo"/>

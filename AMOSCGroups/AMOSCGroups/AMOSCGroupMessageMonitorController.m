@@ -93,6 +93,7 @@
 @end
 
 @interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate, AMCheckBoxDelegeate, AMPopUpViewDelegeate, NSTextFieldDelegate>
+@property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 @property (weak) IBOutlet NSTableView *oscMsgTable;
 @property NSMutableArray* oscMessageLogs;
 @property NSMutableArray* oscMessageSearchResults;
@@ -132,9 +133,13 @@
     //self define ip field
     [self.selfDefServer setHidden:YES];
     
-    //Ser OnOff Checkbox
+    //Set OnOff Checkbox
     self.onOffBox.title = @"ON";
     self.onOffBox.delegate = self;
+    
+    //Set IPV6 checkbox
+    self.useIPV6Check.title     = @"IPV6";
+    self.useIPV6Check.delegate  = self;
     
     //Set search field
     self.searchField.delegate = self;
@@ -272,11 +277,11 @@
         [self.groupNameField setEnabled:NO];
         [self.onOffBox setEnabled:NO];
         
-        self.onOffBox.title = @"Off";
+        //self.onOffBox.title = @"Off";
     }else{
         
         [[AMOSCGroups sharedInstance] stopOSCGroupClient];
-        self.onOffBox.title = @"On";
+        self.onOffBox.title = @"ON";
         
         [self.serverSelector setEnabled:YES];
         [self.selfDefServer setEnabled:YES];

@@ -376,7 +376,13 @@
     [self.serverSelector addItemWithTitle:@"Artsmesh.io"];
     [self.serverSelector addItemWithTitle:@"Self Define"];
     for (AMLiveUser *user in _usersRunOscSrv) {
-        [self.serverSelector addItemWithTitle:user.nickName];
+        if(self.useIPV6Check.checked) { // IPV6 checkbox is on
+            if(user.isIPV6){    //Make sure the user is a valid ipv6
+                [self.serverSelector addItemWithTitle:user.nickName];
+            }
+        }else{ //ipv4
+            [self.serverSelector addItemWithTitle:user.nickName];
+        }
     }
     
     if (![selectedServer isEqualToString:@""]) {

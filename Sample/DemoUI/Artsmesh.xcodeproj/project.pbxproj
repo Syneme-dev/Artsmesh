@@ -258,6 +258,8 @@
 		4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */; };
 		4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */; };
 		4F0C2D0F1B5E2C4500EC6823 /* AMUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */; };
+		4F0C515F1C995F2C00879576 /* OscGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8F09B11C9906E7007244AE /* OscGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F0C51601C995F2C00879576 /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8F09B21C9906E7007244AE /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
@@ -425,6 +427,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				4F0C515F1C995F2C00879576 /* OscGroupClient in Copy Files (7 items) */,
+				4F0C51601C995F2C00879576 /* OscGroupServer in Copy Files (7 items) */,
 				2DD36DF01C49958C00C43CB6 /* ffplay in Copy Files (7 items) */,
 				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
 				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,

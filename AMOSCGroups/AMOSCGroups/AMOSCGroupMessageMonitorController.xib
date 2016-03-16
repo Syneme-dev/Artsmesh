@@ -236,9 +236,9 @@
                     </scroller>
                 </scrollView>
                 <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
-                    <rect key="frame" x="375" y="514" width="50" height="22"/>
+                    <rect key="frame" x="375" y="514" width="79" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="66f-cB-TtJ"/>
+                        <constraint firstAttribute="width" constant="79" id="66f-cB-TtJ"/>
                         <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
                     </constraints>
                 </customView>
@@ -259,7 +259,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="W3j-vS-ShE">
-                    <rect key="frame" x="634" y="469" width="84" height="14"/>
+                    <rect key="frame" x="207" y="466" width="84" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="84" id="WIz-a8-Rfv"/>
                         <constraint firstAttribute="height" constant="14" id="rOI-QI-t5c"/>
@@ -273,10 +273,10 @@
                     </connections>
                 </button>
                 <customView identifier="useIPV6" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5i-JM-PXu" customClass="AMCheckBoxView">
-                    <rect key="frame" x="493" y="515" width="46" height="20"/>
+                    <rect key="frame" x="493" y="515" width="111" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="4sI-Jt-wIK"/>
-                        <constraint firstAttribute="width" constant="86" id="5Ha-5L-CBi"/>
+                        <constraint firstAttribute="width" constant="111" id="5Ha-5L-CBi"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Eha-6G-Z0H"/>
                     </constraints>
                 </customView>
@@ -287,9 +287,9 @@
                 <constraint firstAttribute="trailing" secondItem="b5O-z6-uSk" secondAttribute="trailing" id="KhN-18-Gdb"/>
                 <constraint firstAttribute="bottom" secondItem="b5O-z6-uSk" secondAttribute="bottom" id="QIs-W8-84K"/>
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="128" id="b59-nj-W7M"/>
-                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="10" id="fde-yV-26P"/>
-                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="303" id="xPB-RO-lJE"/>
-                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="82" id="zRk-fb-QxZ"/>
+                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="437" id="fde-yV-26P"/>
+                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="274" id="xPB-RO-lJE"/>
+                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="85" id="zRk-fb-QxZ"/>
             </constraints>
             <point key="canvasLocation" x="142" y="-94.5"/>
         </customView>

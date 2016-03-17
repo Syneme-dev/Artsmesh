@@ -10,6 +10,8 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMLogger/AMLogger.h"
 
+NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
+
 @implementation AMFFmpeg {
     NSTask *_ffmpegTask;
     NSTask *_pidTask;
@@ -60,7 +62,10 @@
     
     if (![self launchTask:command andLogPID:YES]) {
         return NO;
-    } else { return YES; }
+    } else {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:AMVIDEOP2PNotification object:nil];
+        return YES; }
 }
 
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {

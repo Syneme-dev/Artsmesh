@@ -20,6 +20,7 @@
 #import "AMPingTabVC.h"
 #import "AMTraceRouteTabVC.h"
 #import "AMNetworkingToolVC.h"
+#import "AMFFmpeg.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -201,6 +202,10 @@
            selector:@selector(ipv6CheckedF:)
                name:AMIPV6CHECKFALSENotification
              object:nil];
+    [nc addObserver:self
+           selector:@selector(refreshVideoLog:)
+               name:AMVIDEOP2PNotification
+             object:nil];
 
     [self registerTabButtons];
 
@@ -230,6 +235,12 @@
 - (void)ipv6CheckedF:(NSNotification *)notification
 {
     _ipv6Checked = FALSE;
+}
+
+- (void)refreshVideoLog:(NSNotification *)notification
+{
+    [self onChecked:self.ratioVideo];
+    self.logTextView.needsDisplay = YES;
 }
 
 - (IBAction)ping:(id)sender

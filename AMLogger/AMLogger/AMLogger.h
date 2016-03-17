@@ -26,6 +26,7 @@ extern NSString * const kAMOSCClientTitle;
 extern NSString * const kAMJackAudioTitle;
 extern NSString * const kAMAMServerTitle;
 extern NSString * const kAMArtsmeshTitle;
+extern NSString * const kVideoTitle;
 
 
 extern NSString * const kAMOSCServerFile;
@@ -34,3 +35,4 @@ extern NSString * const kAMJackAudioFile;
 extern NSString * const kAMAMServerFile;
 extern NSString * const kAMArtsmeshFile;
 extern NSString * const kAMJackTripFile;
+extern NSString * const kVideoFile;

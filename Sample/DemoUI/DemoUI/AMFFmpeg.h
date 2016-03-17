@@ -11,6 +11,8 @@
 
 @interface AMFFmpeg : NSObject
 
+extern NSString * const AMVIDEOP2PNotification;
+
 -(BOOL)sendP2P:(AMFFmpegConfigs *)cfgs;
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs;
 -(BOOL)streamToYouTube:(AMFFmpegConfigs *)cfgs;

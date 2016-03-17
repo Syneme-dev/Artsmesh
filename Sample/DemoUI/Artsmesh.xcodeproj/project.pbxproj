@@ -258,8 +258,6 @@
 		4F08E2EC1B78A9EF00578AB5 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2EB1B78A9EF00578AB5 /* Quartz.framework */; };
 		4F08E2EE1B78AA0000578AB5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F08E2ED1B78AA0000578AB5 /* OpenGL.framework */; };
 		4F0C2D0F1B5E2C4500EC6823 /* AMUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C2D0E1B5E2C4500EC6823 /* AMUserList.m */; };
-		4F0C515F1C995F2C00879576 /* OscGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8F09B11C9906E7007244AE /* OscGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4F0C51601C995F2C00879576 /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8F09B21C9906E7007244AE /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F0CE3801AD5659C005699D7 /* AMScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CE37F1AD5659C005699D7 /* AMScoreView.m */; };
 		4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C4D2F1A34260D004DF021 /* AMSyphonTearOffController.m */; };
 		4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2C4D301A34260D004DF021 /* AMSyphonTearOffController.xib */; };
@@ -275,9 +273,11 @@
 		4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251231B25790F00224513 /* AMIPerfTabVC.xib */; };
 		4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8251271B257E2D00224513 /* AMPingTabVC.m */; };
 		4F82512A1B257E2D00224513 /* AMPingTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8251281B257E2D00224513 /* AMPingTabVC.xib */; };
+		4F8299D31C9A94100085481A /* OscGroupClient in Resources */ = {isa = PBXBuildFile; fileRef = 4F8299D11C9A94100085481A /* OscGroupClient */; };
+		4F8299D41C9A94100085481A /* OscGroupServer in Resources */ = {isa = PBXBuildFile; fileRef = 4F8299D21C9A94100085481A /* OscGroupServer */; };
+		4F8299D51C9A941F0085481A /* OscGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8299D11C9A94100085481A /* OscGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4F8299D61C9A941F0085481A /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F8299D21C9A94100085481A /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F83229C1AC019DC00EF6D4A /* AMNowBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */; };
-		4F8F09B31C9906E7007244AE /* OscGroupClient in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F09B11C9906E7007244AE /* OscGroupClient */; };
-		4F8F09B41C9906E7007244AE /* OscGroupServer in Resources */ = {isa = PBXBuildFile; fileRef = 4F8F09B21C9906E7007244AE /* OscGroupServer */; };
 		4F90AEF01B70879100C5B3CA /* AMVisualView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F90AEEF1B70879100C5B3CA /* AMVisualView.m */; };
 		4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9677761ADF8D200037BB64 /* AMClockTabVC.m */; };
 		4F9677791ADF8D200037BB64 /* AMClockTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F9677771ADF8D200037BB64 /* AMClockTabVC.xib */; };
@@ -427,8 +427,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				4F0C515F1C995F2C00879576 /* OscGroupClient in Copy Files (7 items) */,
-				4F0C51601C995F2C00879576 /* OscGroupServer in Copy Files (7 items) */,
+				4F8299D51C9A941F0085481A /* OscGroupClient in Copy Files (7 items) */,
+				4F8299D61C9A941F0085481A /* OscGroupServer in Copy Files (7 items) */,
 				2DD36DF01C49958C00C43CB6 /* ffplay in Copy Files (7 items) */,
 				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
 				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,
@@ -965,10 +965,10 @@
 		4F8251261B257E2D00224513 /* AMPingTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPingTabVC.h; sourceTree = "<group>"; };
 		4F8251271B257E2D00224513 /* AMPingTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPingTabVC.m; sourceTree = "<group>"; };
 		4F8251281B257E2D00224513 /* AMPingTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPingTabVC.xib; sourceTree = "<group>"; };
+		4F8299D11C9A94100085481A /* OscGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupClient; sourceTree = "<group>"; };
+		4F8299D21C9A94100085481A /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4F83229A1AC019DC00EF6D4A /* AMNowBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNowBarView.h; sourceTree = "<group>"; };
 		4F83229B1AC019DC00EF6D4A /* AMNowBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNowBarView.m; sourceTree = "<group>"; };
-		4F8F09B11C9906E7007244AE /* OscGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupClient; sourceTree = "<group>"; };
-		4F8F09B21C9906E7007244AE /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4F90AEEE1B70879100C5B3CA /* AMVisualView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVisualView.h; sourceTree = "<group>"; };
 		4F90AEEF1B70879100C5B3CA /* AMVisualView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVisualView.m; sourceTree = "<group>"; };
 		4F9677751ADF8D200037BB64 /* AMClockTabVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMClockTabVC.h; sourceTree = "<group>"; };
@@ -1709,8 +1709,8 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				4F8F09B11C9906E7007244AE /* OscGroupClient */,
-				4F8F09B21C9906E7007244AE /* OscGroupServer */,
+				4F8299D11C9A94100085481A /* OscGroupClient */,
+				4F8299D21C9A94100085481A /* OscGroupServer */,
 				4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2DD36DEE1C49955700C43CB6 /* ffplay */,
@@ -2334,7 +2334,7 @@
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
-				4F8F09B41C9906E7007244AE /* OscGroupServer in Resources */,
+				4F8299D41C9A94100085481A /* OscGroupServer in Resources */,
 				4AB4ACEA1A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib in Resources */,
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
@@ -2343,7 +2343,7 @@
 				4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
 				4FC631691B465D6000BD02AB /* iperf in Resources */,
-				4F8F09B31C9906E7007244AE /* OscGroupClient in Resources */,
+				4F8299D31C9A94100085481A /* OscGroupClient in Resources */,
 				AFAEBD8A196107BE00B7FB51 /* info.css in Resources */,
 				2DD36DEF1C49955700C43CB6 /* ffplay in Resources */,
 				AFAEBDB519610BEA00B7FB51 /* Reply.png in Resources */,

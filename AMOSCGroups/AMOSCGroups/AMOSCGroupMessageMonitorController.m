@@ -239,14 +239,25 @@
             }
         }
         
+        bool tryIPV6 = self.useIPV6Check.checked ? YES : NO;
+
+            
         NSString *serverAddr;
         if ([self.serverSelector.stringValue isEqualToString:@"Self Define"]) {
             serverAddr = self.selfDefServer.stringValue;
             
         }else if ([self.serverSelector.stringValue isEqualToString:@"Artsmesh.io"]){
-            serverAddr = [[NSUserDefaults standardUserDefaults]
-                          stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
-            
+            if (tryIPV6) {
+                NSString* tmp1 = [[NSUserDefaults standardUserDefaults]
+                                  stringForKey:Preference_Key_General_GlobalServerAddrIpv6];
+                NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+                
+                serverAddr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+                
+            }else{
+                serverAddr = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
+            }
         }else{
             for (AMLiveUser *user in _usersRunOscSrv) {
                 if ([user.nickName isEqualToString:self.serverSelector.stringValue]) {
@@ -259,14 +270,32 @@
                         }
                     }
                     
+                    //Add for ipv6 checkbox
+                    NSString* userIPV6Addr = nil;
+                    if (tryIPV6 &&  user.isIPV6) {
+                        NSString* tmp1 = user.ipv6Address;;
+                        NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+                        
+                        userIPV6Addr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+                    }
                     if (bFind) {
-                        serverAddr = user.privateIp;
+                        if (tryIPV6 && user.isIPV6) {
+                            serverAddr = userIPV6Addr;
+                        }else{
+                            serverAddr = user.privateIp;
+                        }
                     }else{
-                        serverAddr = user.publicIp;
+                        if (tryIPV6 && user.isIPV6) {
+                            serverAddr = userIPV6Addr;
+                        }else{
+                            serverAddr = user.publicIp;
+                        }
                     }
                 }
             }
         }
+        
+        
         
         [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr groupName:self.groupNameField.stringValue];
         [self.serverSelector setEnabled:NO];

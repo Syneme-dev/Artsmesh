@@ -272,20 +272,20 @@
                     
                     //Add for ipv6 checkbox
                     NSString* userIPV6Addr = nil;
-                    if (tryIPV6 &&  user.isIPV6) {
-                        NSString* tmp1 = user.ipv6Address;;
+                    if (tryIPV6 &&  user.isIPV6 &&  [user.ipv6Address length] > 1) {
+                        NSString* tmp1 = user.ipv6Address;
                         NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
                         
                         userIPV6Addr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
                     }
                     if (bFind) {
-                        if (tryIPV6 && user.isIPV6) {
+                        if (tryIPV6 && user.isIPV6 && userIPV6Addr != nil) {
                             serverAddr = userIPV6Addr;
                         }else{
                             serverAddr = user.privateIp;
                         }
                     }else{
-                        if (tryIPV6 && user.isIPV6) {
+                        if (tryIPV6 && user.isIPV6 && userIPV6Addr != nil) {
                             serverAddr = userIPV6Addr;
                         }else{
                             serverAddr = user.publicIp;

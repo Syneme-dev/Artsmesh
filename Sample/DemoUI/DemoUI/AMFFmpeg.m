@@ -8,6 +8,9 @@
 
 #import "AMFFmpeg.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMLogger/AMLogger.h"
+
+NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
 
 @implementation AMFFmpeg {
     NSTask *_ffmpegTask;
@@ -52,9 +55,17 @@
                                 [self getPort:cfgs.portOffset]];
     //NSLog(@"%@", command);
     
+    AMLog(kAMInfoLog, @"AMVideo", @"starting ffmpeg p2p send..");
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [command appendFormat:@" > %@/Video.log 2>&1", systemLogPath];
+    
     if (![self launchTask:command andLogPID:YES]) {
         return NO;
-    } else { return YES; }
+    } else {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:AMVIDEOP2PNotification object:nil];
+        return YES; }
 }
 
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {
@@ -175,7 +186,8 @@
         [command appendFormat:@"%@ ",[processes objectAtIndex:i]];
     }
     
-    NSLog(@"Stopping ffmpeg instance with PID of %@", command);
+    AMLog(kAMInfoLog, @"AMVideo", @"Stopping all ffmpeg instances..");
+    //NSLog(@"Stopping ffmpeg instance with PID of %@", command);
     
     /** Execute the NSTask to kill the specific ffmpeg instance by PID*/
 
@@ -199,7 +211,7 @@
 }
 
 -(BOOL)stopFFmpegInstance: (NSString *)processID {
-    NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
+    //NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
     /** Execute the NSTask to kill the specific ffmpeg instance by PID **/
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"kill %@",processID];
@@ -211,6 +223,8 @@
         
     };
  //   sleep(2);
+    
+    AMLog(kAMInfoLog, @"AMVideo", [NSString stringWithFormat:@"Stopping ffmpeg instance with PID of %@", processID]);
     
     [_stopFFMpegTask launch];
     

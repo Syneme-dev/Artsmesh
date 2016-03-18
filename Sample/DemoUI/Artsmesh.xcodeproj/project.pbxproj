@@ -1709,8 +1709,8 @@
 		37C23163187A8FFD00554AFD = {
 			isa = PBXGroup;
 			children = (
-				4FC080231C9B9F5F0072559B /* OscGroupServer */,
 				4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */,
+				4FC080231C9B9F5F0072559B /* OscGroupServer */,
 				4FC080281C9B9FB30072559B /* OscGroupClient */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2DD36DEE1C49955700C43CB6 /* ffplay */,

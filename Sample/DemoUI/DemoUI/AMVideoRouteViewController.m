@@ -216,7 +216,13 @@ shouldRemoveDevice:(NSString *)deviceID;
         for (NSUInteger i = 0; i < device.validCount; i++) {
             AMChannel* peerChannel = [device.channels objectAtIndex:i];
             
-            unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL + i;
+            //unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL + i;
+            unsigned long index = [_videoManager findFirstMyselfIndex:device];
+            if (device.validCount == 2) {
+                if (i == 0) {
+                    index = index + 1;
+                }
+            }
             AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
             myChannel.deviceID     = kAMMyself;
             myChannel.channelName  = kAMMyself;
@@ -255,7 +261,7 @@ shouldRemoveDevice:(NSString *)deviceID;
                                             peerIP, _configController.videoConfig.peerPort];
 
     
-    int firstIndex = [self findFirstIndex];
+    int firstIndex = [self findFirstGlobalIndex];
     
     AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
     peerDevice.index =firstIndex;
@@ -315,7 +321,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self reloadAudioChannel];
 }
 
--(int) findFirstIndex
+//Notice:Index from START_INDEX to LAST_INDEX.
+-(int) findFirstGlobalIndex
 {
     BOOL find;
     

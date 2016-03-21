@@ -18,5 +18,5 @@
 +(id)sharedInstance;
 
 -(int) findFirstIndex;
-
+-(NSInteger) findFirstMyselfIndex :(AMVideoDevice*) v;
 @end

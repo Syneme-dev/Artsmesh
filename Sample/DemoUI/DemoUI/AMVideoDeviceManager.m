@@ -59,6 +59,20 @@
     return -1;
 }
 
-
+-(NSInteger) findFirstMyselfIndex :(AMVideoDevice*) v
+{
+    if ([_peerDevices indexOfObject:v] == NSNotFound) {
+        return NSNotFound;
+    }
+    
+    NSUInteger accumulativeIndex = 0;
+    for (int i = 0 ; i < [_peerDevices count]; i++) {
+        AMVideoDevice* device = [_peerDevices objectAtIndex:i];
+        if(![device isEqual:v] && device.index < v.index){
+            accumulativeIndex += device.validCount;
+        }
+    }
+    return accumulativeIndex;
+}
 
 @end

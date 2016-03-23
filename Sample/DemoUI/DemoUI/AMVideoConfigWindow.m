@@ -120,19 +120,6 @@
         
         AMLiveUser* user = self.allUsers[i];
         
-        //Two User at most have one connection
-        BOOL alreadyConnect = NO;
-        for(AMJacktripInstance* jacktrip in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
-            if ([user.nickName isEqualToString:jacktrip.instanceName]){
-                alreadyConnect = YES;
-                break;
-            }
-        }
-        
-        if (alreadyConnect) {
-            continue;
-        }
-        
         if([user.userid isNotEqualTo:mySelf.userid]){
             [self.peerSelecter addItemWithTitle:user.nickName];
             firstIndexInUserlist = (firstIndexInUserlist == -1)?i:firstIndexInUserlist;

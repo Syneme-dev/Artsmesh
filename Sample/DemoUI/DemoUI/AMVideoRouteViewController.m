@@ -111,6 +111,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         if ([device.deviceID isEqualToString:deviceID]) {
             [self stopChannelFFmpegProcess:device.processID];
             [_videoManager.peerDevices removeObject:device];
+            
+            //int index = ;
         }
         
     }
@@ -126,17 +128,6 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     _videoManager  = [AMVideoDeviceManager sharedInstance];
     
-    NSMutableArray* channels = [[NSMutableArray alloc] init];
-    AMChannel* myChannel = [[AMChannel alloc] init];
-    myChannel.deviceID     = kAMMyself;
-    myChannel.channelName  = kAMMyself;
-    
-    for(int i = 0; i < 9; i++){
-        myChannel.index = i;
-        [channels addObject:myChannel];
-    }
-    
-    _videoManager.myselfDevice.channels = channels;
     
     
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
@@ -144,7 +135,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(addVideoChannel:)
+                                             selector:@selector(addVideoDevice:)
                                                  name:AMVideoDeviceNotification
                                                object:nil];
     
@@ -166,7 +157,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 
 //1st: Rearrange _videoManager.peerDevices to represent current state of ffmpeg processes
-//2nd: Make a copy for the devices which hasn't shown in UI yet.
+//2nd: Find the devices which hasn't shown in UI yet.
 //3rd: Show those devices.
 -(void)reloadAudioChannel
 {
@@ -207,7 +198,9 @@ shouldRemoveDevice:(NSString *)deviceID;
         }
         
         if (!bFind){
-            [devicesToAdd addObject:device];
+            if([devicesToAdd indexOfObject:device] == NSNotFound){
+                [devicesToAdd addObject:device];
+            }
         }
     }
     
@@ -248,7 +241,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 }
 
 
--(void) addVideoChannel:(NSNotification*) notif
+-(void) addVideoDevice:(NSNotification*) notif
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
     
@@ -261,18 +254,19 @@ shouldRemoveDevice:(NSString *)deviceID;
                                             peerIP, _configController.videoConfig.peerPort];
 
     
-    int firstIndex = [self findFirstGlobalIndex];
-    
     AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
-    peerDevice.index =firstIndex;
-    peerDevice.deviceID = peerIPPort;
-    peerDevice.role     = _configController.videoConfig.role;
     
     if ([_configController.videoConfig.role isEqualToString:@"DUAL"]) {
         peerDevice.validCount = 2;
     }else{
         peerDevice.validCount = 1;
     }
+    
+    int firstIndex = [self findFirstGlobalIndex:peerDevice.validCount];
+    peerDevice.index = firstIndex;
+    
+    peerDevice.deviceID = peerIPPort;
+    peerDevice.role     = _configController.videoConfig.role;
     
     AMChannel* peerChannel = nil;
     NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
@@ -299,6 +293,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         peerChannel.channelName  = peerIPPort;
         peerChannel.index = firstIndex + i;
         [peerChannels addObject:peerChannel];
+        
+        
     }
     
     //add pseudo channels to make enough room for displaying.
@@ -308,6 +304,12 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     peerDevice.channels = peerChannels;
 
+    
+    [_videoManager.peerDevices addObject:peerDevice];
+    if(peerDevice.validCount == 2){
+        [_videoManager.peerDevices addObject:peerDevice];
+    }
+    
     /** Set processID for channel 2 **/
     NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults]
                                     objectForKey:Preference_Key_ffmpeg_Cur_P2P];
@@ -316,20 +318,23 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 
 
-    [_videoManager.peerDevices addObject:peerDevice];
+    
     
     [self reloadAudioChannel];
 }
 
 //Notice:Index from START_INDEX to LAST_INDEX.
--(int) findFirstGlobalIndex
+-(int) findFirstGlobalIndex : (NSInteger) count
 {
     BOOL find;
     
     for (int index = START_INDEX; index <= LAST_INDEX; index += INDEX_INTERVAL) {
         find = NO;
         for (AMVideoDevice* device in _videoManager.peerDevices) {
-            if (device.index == index) {
+            if (count == 1 && device.index == index) {
+                find = YES;
+                break;
+            }else if(count == 2 && (device.index == index || device.index == index+INDEX_INTERVAL)){
                 find = YES;
                 break;
             }

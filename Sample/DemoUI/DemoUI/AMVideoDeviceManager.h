@@ -14,6 +14,7 @@
 @property NSMutableArray*     videoChannels;
 @property NSMutableArray*     peerDevices;
 @property AMVideoDevice*      myselfDevice;
+@property AMChannel*          nilChannel;
 
 +(id)sharedInstance;
 

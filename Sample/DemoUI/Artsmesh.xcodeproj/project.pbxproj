@@ -293,6 +293,8 @@
 		4FC080271C9B9F760072559B /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC080231C9B9F5F0072559B /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC080291C9B9FB30072559B /* OscGroupClient in Resources */ = {isa = PBXBuildFile; fileRef = 4FC080281C9B9FB30072559B /* OscGroupClient */; };
 		4FC0802A1C9B9FCE0072559B /* OscGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC080281C9B9FB30072559B /* OscGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4FC399631CA3D61000BB164B /* AMP2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC399611CA3D61000BB164B /* AMP2PViewController.m */; };
+		4FC399641CA3D61000BB164B /* AMP2PViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC399621CA3D61000BB164B /* AMP2PViewController.xib */; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
 		4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC6316E1B46781C00BD02AB /* AMIPerfConfigWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */; };
@@ -991,6 +993,9 @@
 		4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoDeviceManager.m; sourceTree = "<group>"; };
 		4FC080231C9B9F5F0072559B /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4FC080281C9B9FB30072559B /* OscGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupClient; sourceTree = "<group>"; };
+		4FC399601CA3D61000BB164B /* AMP2PViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMP2PViewController.h; sourceTree = "<group>"; };
+		4FC399611CA3D61000BB164B /* AMP2PViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMP2PViewController.m; sourceTree = "<group>"; };
+		4FC399621CA3D61000BB164B /* AMP2PViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMP2PViewController.xib; sourceTree = "<group>"; };
 		4FC631681B465D6000BD02AB /* iperf */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iperf; sourceTree = "<group>"; };
 		4FC6316B1B46781C00BD02AB /* AMIPerfConfigWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfConfigWC.h; sourceTree = "<group>"; };
 		4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfConfigWC.m; sourceTree = "<group>"; };
@@ -2129,6 +2134,9 @@
 				4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */,
 				CE486A971A280CB900D35B82 /* AMSyphonView.h */,
 				CE486A981A280CB900D35B82 /* AMSyphonView.m */,
+				4FC399601CA3D61000BB164B /* AMP2PViewController.h */,
+				4FC399611CA3D61000BB164B /* AMP2PViewController.m */,
+				4FC399621CA3D61000BB164B /* AMP2PViewController.xib */,
 				CE486A991A280CB900D35B82 /* AMSyphonViewController.h */,
 				CE486A9A1A280CB900D35B82 /* AMSyphonViewController.m */,
 				CE486A9B1A280CB900D35B82 /* AMSyphonViewController.xib */,
@@ -2339,6 +2347,7 @@
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
 				4A32A12C1A7226B5006FEDD7 /* AMProjectProfileViewController.xib in Resources */,
+				4FC399641CA3D61000BB164B /* AMP2PViewController.xib in Resources */,
 				4FC6316F1B46781C00BD02AB /* AMIPerfConfigWC.xib in Resources */,
 				4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
@@ -2592,6 +2601,7 @@
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
 				2D08FDCA1AD661FF00A9D257 /* GTLYouTubeLiveStreamListResponse.m in Sources */,
+				4FC399631CA3D61000BB164B /* AMP2PViewController.m in Sources */,
 				4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */,
 				2D08FDDF1AD661FF00A9D257 /* GTLYouTubePropertyValue.m in Sources */,
 				2D08FDFE1AD661FF00A9D257 /* GTLYouTubeVideoPlayer.m in Sources */,

@@ -79,6 +79,9 @@
             [command appendFormat:@" -p %d", (int)cfg.port];
         }
         
+        if (cfg.len > 0) {
+            [command appendFormat:@" -l %dK", (int)cfg.len];
+        }
         
         if (self.useIPV6Check.checked) {
             [command appendFormat:@" -V"];

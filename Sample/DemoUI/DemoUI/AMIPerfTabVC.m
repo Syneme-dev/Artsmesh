@@ -176,6 +176,10 @@
 
 }
 
+- (void)viewWillDisappear{
+    [self stopiPerf];
+}
+
 -(void)stopiPerf
 {
     [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"

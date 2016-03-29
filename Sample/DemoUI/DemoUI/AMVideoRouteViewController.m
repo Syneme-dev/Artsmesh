@@ -256,7 +256,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
     
-    if ([_configController.videoConfig.role isEqualToString:@"DUAL"]) {
+    if ([_configController.videoConfig.role isEqualToString:kDualRole]) {
         peerDevice.validCount = 2;
     }else{
         peerDevice.validCount = 1;
@@ -276,11 +276,11 @@ shouldRemoveDevice:(NSString *)deviceID;
         peerChannel = [[AMChannel alloc] init];
 
         //Set channel type
-        if ([_configController.videoConfig.role isEqualToString:@"SENDER"]) {
+        if ([_configController.videoConfig.role isEqualToString:kSenderRole]) {
             peerChannel.type = AMSourceChannel;
-        }else if([_configController.videoConfig.role isEqualToString:@"RECEIVER"]){
+        }else if([_configController.videoConfig.role isEqualToString:kReceiverRole]){
             peerChannel.type = AMDestinationChannel;
-        }else if ([_configController.videoConfig.role isEqualToString:@"DUAL"]){
+        }else if ([_configController.videoConfig.role isEqualToString:kDualRole]){
             //In peer device, first sender, then receiver.
             if (i == 0) {
                 peerChannel.type = AMSourceChannel;

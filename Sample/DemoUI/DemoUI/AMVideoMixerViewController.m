@@ -49,12 +49,19 @@
     self.bigView.hasBorder = YES;
     self.bigView.contentView = [self.syphonManager outputView];
     
-    for (int i = 0; i < self.smallViews.count; i++) {
-        
-        
+
+    for (int i = 0; i < self.smallViews.count/2; i++) {
+      //    for (int i = 0; i < self.smallViews.count; i++) {
 //        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
         AMVideoMixerBackgroundView *view = self.smallViews[i];
         view.contentView = [self.syphonManager clientViewByIndex:i];
+    }
+    
+    for (NSUInteger j = self.smallViews.count / 2; j < self.smallViews.count; j++) {
+        
+        //        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+        AMVideoMixerBackgroundView *view = self.smallViews[j];
+        view.contentView = [self.syphonManager clientViewByIndex:j];
     }
 }
 

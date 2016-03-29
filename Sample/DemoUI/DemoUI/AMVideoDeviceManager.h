@@ -20,4 +20,6 @@
 
 -(int) findFirstIndex;
 -(NSInteger) findFirstMyselfIndex :(AMVideoDevice*) v;
+
+-(NSArray*)  allServerDevices;
 @end

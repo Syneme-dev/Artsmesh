@@ -35,7 +35,7 @@
     AMSyphonTearOffController*      _syTearOff;
 }
 
-- (id) initWithClientCount : (int) cnt
+- (id) initWithClientCount : (NSUInteger) cnt
 {
     if(self = [super init]){
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
@@ -82,7 +82,7 @@
     }
 }
 
--(NSView*)clientViewByIndex:(int)index
+-(NSView*)clientViewByIndex:(NSUInteger)index
 {
     if(index >= [_syClients count]){
         return nil;
@@ -113,7 +113,7 @@
     [_syServer  stopRouter];
 }
 
--(void)selectClient:(int)index
+-(void)selectClient:(NSUInteger)index
 {
     if(index >= [_syClients count]){
         return;

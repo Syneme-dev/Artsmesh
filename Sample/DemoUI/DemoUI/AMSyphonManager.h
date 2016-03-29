@@ -12,6 +12,10 @@
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
 
+@interface AMP2PViewManager : NSObject
+
+@end
+
 @interface AMSyphonName : NSObject
 +(NSString*) AMRouterName;
 +(BOOL)      isSyphonCamera:(NSString*)name;
@@ -20,14 +24,12 @@
 
 @interface AMSyphonManager : NSObject
 
+-(id)initWithClientCount:(NSUInteger) cnt;
 
-
--(id)initWithClientCount:(int) cnt;
-
--(NSView*)clientViewByIndex:(int)index;
+-(NSView*)clientViewByIndex:(NSUInteger)index;
 -(NSView*)outputView;
 -(NSView*)tearOffView;
--(void)selectClient:(int)index;
+-(void)selectClient:(NSUInteger)index;
 -(BOOL)startRouter;
 -(void)stopRouter;
 -(void)stopAll;

@@ -100,4 +100,19 @@
     return accumulativeIndex;
 }
 
+-(NSArray*)  allServerDevices
+{
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    for (AMVideoDevice* device in _peerDevices) {
+        if ([device.role isEqualToString:kReceiverRole] ||
+            [device.role isEqualToString:kDualRole]) {
+            [array addObject:device];
+        }
+    }
+    
+    
+    return array;
+    
+}
+
 @end

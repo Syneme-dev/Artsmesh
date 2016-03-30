@@ -7,11 +7,13 @@
 //
 
 #import "AMP2PViewController.h"
-//#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AMVideoDeviceManager.h"
+#import "AMSyphonView.h"
 
 @interface AMP2PViewController ()
+
+@property (weak) IBOutlet AMSyphonView *glView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 @end
 
@@ -23,12 +25,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+    self.glView = subView;
+    [self.view addSubview:subView];
+    
+    [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSView *content = subView;
+    NSDictionary *views = NSDictionaryOfVariableBindings(content);
+    [self.view addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    [self.view addConstraints:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[content]-0-|"
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
+    self.glView.drawTriangle = YES;
+
+    
     [self updateServerTitle];
 }
 
 -(void)initAV{
     NSURL *url = nil;
-    AVURLAsset *anAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
+    _currentAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
 }
 
 -(void) updateServerTitle

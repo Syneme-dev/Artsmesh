@@ -10,10 +10,15 @@
 #import "AMSyphonTearOffController.h"
 #import "AMSyphonViewRouterController.h"
 #import "AMSyphonViewController.h"
+#import "AMP2PViewController.h"
 #import "AMSyphonView.h"
 
 @interface AMP2PViewManager : NSObject
-
+-(id)initWithClientCount:(NSUInteger) cnt;
+-(NSView*)clientViewByIndex:(NSUInteger)index;
+-(BOOL)startRouter;
+-(void)stopRouter;
+-(void)stopAll;
 @end
 
 @interface AMSyphonName : NSObject

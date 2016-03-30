@@ -61,17 +61,27 @@
         
         //        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
         AMVideoMixerBackgroundView *view = self.smallViews[j];
-        view.contentView = [self.syphonManager clientViewByIndex:j];
+        view.contentView = [self.p2pViewManager clientViewByIndex:(j-self.smallViews.count / 2)];
     }
 }
 
 - (AMSyphonManager *)syphonManager
 {
     if (!_syphonManager) {
-        _syphonManager = [[AMSyphonManager alloc] initWithClientCount:(int)self.smallViews.count];
+        _syphonManager = [[AMSyphonManager alloc] initWithClientCount:(int)self.smallViews.count/2];
     }
     return _syphonManager;
 }
+
+- (AMP2PViewManager *)p2pViewManager
+{
+    if (!_p2pViewManager) {
+        _p2pViewManager = [[AMP2PViewManager alloc] initWithClientCount:(int)self.smallViews.count/2];
+    }
+    return _p2pViewManager;
+}
+
+
 
 - (NSArray *)smallViews
 {

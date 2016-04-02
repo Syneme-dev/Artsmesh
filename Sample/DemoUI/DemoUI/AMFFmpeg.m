@@ -11,6 +11,7 @@
 #import "AMLogger/AMLogger.h"
 
 NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
+NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotification";
 
 @implementation AMFFmpeg {
     NSTask *_ffmpegTask;
@@ -239,6 +240,9 @@ NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"killall ffmpeg"];
+    
+    AMLog(kAMInfoLog, @"AMVideo", @"Stopping all ffmpeg instances..");
+    
     _stopFFMpegTask = nil;
     _stopFFMpegTask = [[NSTask alloc] init];
     _stopFFMpegTask.launchPath = @"/bin/bash";
@@ -301,6 +305,15 @@ NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
                                 cfgs.serverAddr,
                                 cfgs.streamName];
     //NSLog(@"%@", command);
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:AMVIDEOYouTubeStreamNotification object:nil];
+    
+    AMLog(kAMInfoLog, @"AMVideo", @"starting ffmpeg YouTube send..");
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [command appendFormat:@" > %@/Video.log 2>&1", systemLogPath];
+    
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
     _ffmpegTask.arguments = @[@"-c", [command copy]];

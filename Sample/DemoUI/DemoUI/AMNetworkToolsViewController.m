@@ -206,6 +206,10 @@
            selector:@selector(refreshVideoLog:)
                name:AMVIDEOP2PNotification
              object:nil];
+    [nc addObserver:self
+           selector:@selector(refreshVideoLog:)
+               name:AMVIDEOYouTubeStreamNotification
+             object:nil];
 
     [self registerTabButtons];
 
@@ -239,6 +243,7 @@
 
 - (void)refreshVideoLog:(NSNotification *)notification
 {
+    NSLog(@"refresh network view..");
     [self onChecked:self.ratioVideo];
     self.logTextView.needsDisplay = YES;
 }

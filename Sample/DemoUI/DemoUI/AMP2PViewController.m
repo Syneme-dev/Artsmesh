@@ -11,6 +11,8 @@
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonView.h"
 
+NSString *const AMP2PVideoReceiverChanged;
+
 @interface AMP2PViewController ()
 
 @property (weak) IBOutlet AMSyphonView *glView;
@@ -20,6 +22,9 @@
 @implementation AMP2PViewController
 {
     AVURLAsset* _currentAsset;
+}
+
+- (void) dealloc{
 }
 
 - (void)viewDidLoad {
@@ -46,6 +51,12 @@
 
     
     [self updateServerTitle];
+    NSNotificationCenter* defaultNC = [NSNotificationCenter defaultCenter];
+    [defaultNC addObserver:self
+                  selector:@selector(updateServerTitle)
+                      name:AMP2PVideoReceiverChanged
+                    object:nil];
+
 }
 
 -(void)initAV{

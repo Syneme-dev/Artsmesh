@@ -15,6 +15,7 @@
 #import "AMVideoDeviceManager.h"
 
 NSString* kAMMyself = @"MYSELF";
+NSString *const AMP2PVideoReceiverChanged = @"AMP2PVideoReceiverChanged";
 
 @interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
@@ -100,6 +101,19 @@ shouldRemoveDevice:(NSString *)deviceID;
      removeAllDevice:(BOOL)check
 {
     [self stopAllChannelProcesses];
+    
+    BOOL hasReceiver = NO;
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
+        if ([device.role isEqualToString:kReceiverRole] ||
+            [device.role isEqualToString:kDualRole]){
+                hasReceiver = YES;
+        }
+       
+    }
+    if (hasReceiver) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
+    
     return YES;
 }
 
@@ -107,16 +121,23 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
-     for (AMVideoDevice* device in _videoManager.peerDevices) {
+    BOOL hasReceiver = NO;
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
         if ([device.deviceID isEqualToString:deviceID]) {
             [self stopChannelFFmpegProcess:device.processID];
             [_videoManager.peerDevices removeObject:device];
             
+            if ([device.role isEqualToString:kReceiverRole] ||
+                [device.role isEqualToString:kDualRole]){
+                hasReceiver = YES;
+            }
             //int index = ;
         }
         
     }
-     
+    if (hasReceiver) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
     return YES;
 }
 
@@ -321,6 +342,13 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     
     [self reloadAudioChannel];
+    
+    //Send notification for video mixer
+    if ([peerDevice.role isEqualToString:kDualRole] ||
+        [peerDevice.role isEqualToString:kReceiverRole]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
+        
 }
 
 //Notice:Index from START_INDEX to LAST_INDEX.

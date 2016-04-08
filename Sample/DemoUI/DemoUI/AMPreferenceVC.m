@@ -47,6 +47,7 @@
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.accountTabBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.videoTabBtn toColor:UI_Color_blue];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -147,7 +148,8 @@
     [self.tabButtons addObject:self.jacktripTabBtn];
     [self.tabButtons addObject:self.oscGroupTabBtn];
     [self.tabButtons addObject:self.accountTabBtn];
-    self.showingTabsCount=5;
+    [self.tabButtons addObject:self.videoTabBtn];
+    self.showingTabsCount=6;
 }
 
 - (IBAction)onGeneralClick:(id)sender {
@@ -166,15 +168,19 @@
     [self.tabs selectTabViewItemAtIndex:2];
 }
 
+- (IBAction)onVideoClick:(id)sender {
+    [self pushDownButton:self.videoTabBtn];
+    [self.tabs selectTabViewItemAtIndex:3];
+}
 
 - (IBAction)onOSCGroupClick:(id)sender {
     [self pushDownButton:self.oscGroupTabBtn];
-    [self.tabs selectTabViewItemAtIndex:3];
+    [self.tabs selectTabViewItemAtIndex:4];
 }
 
 - (IBAction)onAccountClick:(id)sender {
     [self pushDownButton:self.accountTabBtn];
-    [self.tabs selectTabViewItemAtIndex:4];
+    [self.tabs selectTabViewItemAtIndex:5];
 }
 
 

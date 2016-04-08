@@ -8,6 +8,7 @@
 
 #import "AMP2PViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonView.h"
 
@@ -15,16 +16,52 @@ NSString *const AMP2PVideoReceiverChanged;
 
 @interface AMP2PViewController ()
 
-@property (weak) IBOutlet AMSyphonView *glView;
+@property (weak) IBOutlet AMSyphonView* glView;
+//@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 @end
 
 @implementation AMP2PViewController
 {
-    AVURLAsset* _currentAsset;
+    AVPlayer*       _player;
 }
 
 - (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (IBAction)serverSelected:(NSPopUpButton*)sender {
+    NSString* serverURL = [NSString stringWithFormat:@"udp://%@", sender.selectedItem.title];
+    serverURL = @"http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
+    NSURL *url = [NSURL URLWithString:serverURL];
+    
+    // You may find a test stream at <http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8>.
+  /*  AVPlayerItem*  playerItem = [AVPlayerItem playerItemWithURL:url];
+    [playerItem addObserver:self forKeyPath:@"status" options:0 context:nil];
+    _player = [AVPlayer playerWithPlayerItem:playerItem];*/
+    
+    if (_player != nil) {
+        [_player removeObserver:self forKeyPath:@"status"];
+    }
+    
+    _player = [AVPlayer playerWithURL:url];
+    [_player addObserver:self forKeyPath:@"status" options:0 context:nil];
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context{
+    if ([keyPath isEqualToString:@"status"]){
+        AVPlayerStatus new = (AVPlayerStatus)change[NSKeyValueChangeNewKey];
+//      AVPlayerStatus old = (AVPlayerStatus)change[NSKeyValueChangeOldKey];
+//      if((old == AVPlayerStatusUnknown || old == AVPlayerStatusUnknown) && new == AVPlayerStatusReadyToPlay) {
+        if(new == AVPlayerStatusReadyToPlay){
+            [_player play];
+        }
+    }else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 - (void)viewDidLoad {
@@ -59,10 +96,8 @@ NSString *const AMP2PVideoReceiverChanged;
 
 }
 
--(void)initAV{
-    NSURL *url = nil;
-    _currentAsset = [[AVURLAsset alloc] initWithURL:url options:nil];
-}
+
+
 
 -(void) updateServerTitle
 {

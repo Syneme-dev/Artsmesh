@@ -33,6 +33,9 @@
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <action selector="serverSelected:" target="-2" id="ZAu-S0-ddl"/>
+                    </connections>
                 </popUpButton>
             </subviews>
             <constraints>

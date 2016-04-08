@@ -217,7 +217,7 @@
                             </view>
                         </tabViewItem>
                         <tabViewItem label="VIDEO" identifier="" id="N55-zI-fSd" userLabel="Video">
-                            <view key="view" id="9v9-0Q-dJ6">
+                            <view key="view" identifier="video" id="9v9-0Q-dJ6" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="780"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

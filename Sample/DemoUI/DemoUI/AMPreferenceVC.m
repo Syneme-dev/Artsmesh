@@ -13,6 +13,7 @@
 #import "AMOSCGroupSettingsVC.h"
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
+#import "AMVideoSettingsVC.h"
 #import "UIFramework/NSView_Constrains.h"
 
 
@@ -26,6 +27,7 @@
     NSViewController    *_generalSettingsVC;
     NSViewController    *_oscGroupSettingsVC;
     NSViewController    *_jacktripSettingVC;
+    NSViewController    *_videoSettingsVC;
     NSViewController    *_jackSettingsVC;
     NSViewController    *_accountSettingsVC;
 }
@@ -71,6 +73,8 @@
             [self loadOSCGroupPage:view ];
         }else if([view.identifier isEqualTo:@"statusNet"]){
             [self loadAccountPage:view ];
+        }else if([view.identifier isEqualTo:@"video"]) {
+            [self loadVideoPage:view];
         }
     }
 }
@@ -109,6 +113,14 @@
         
         [tabView addConstrainsToSubview:_jacktripSettingVC.view
                            leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
+    }
+}
+
+-(void)loadVideoPage:(NSView *)tabView
+{
+    _videoSettingsVC = [[AMVideoSettingsVC alloc] init];
+    if (_videoSettingsVC) {
+        [tabView addConstrainsToSubview:_videoSettingsVC.view leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
 }
 

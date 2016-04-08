@@ -184,6 +184,8 @@
 		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
+		2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */; };
+		2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */; };
 		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
 		2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
@@ -830,6 +832,9 @@
 		2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerViewController.xib; sourceTree = "<group>"; };
 		2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveEventCheckBoxView.h; sourceTree = "<group>"; };
 		2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveEventCheckBoxView.m; sourceTree = "<group>"; };
+		2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoSettingsVC.xib; sourceTree = "<group>"; };
+		2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoSettingsVC.m; sourceTree = "<group>"; };
+		2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoSettingsVC.h; sourceTree = "<group>"; };
 		2DAB319B1BE8569C00C1BD5A /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
@@ -1230,6 +1235,9 @@
 		269C3347197D00F000AF86AA /* PreferencePanel */ = {
 			isa = PBXGroup;
 			children = (
+				2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */,
+				2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */,
+				2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */,
 				D41155E218E9515700C84092 /* AMPreferenceVC.h */,
 				D41155E318E9515700C84092 /* AMPreferenceVC.m */,
 				2692DB8D18E9459600553924 /* AMPreferenceVC.xib */,
@@ -2334,6 +2342,7 @@
 				2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
+				2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				269FB84E1998816E00355312 /* AMBroadcastViewController.xib in Resources */,
 				4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */,
@@ -2709,6 +2718,7 @@
 				2D08FDE21AD661FF00A9D257 /* GTLYouTubeSearchResult.m in Sources */,
 				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,
 				4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */,
+				2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				2D08FDDA1AD661FF00A9D257 /* GTLYouTubePlaylistPlayer.m in Sources */,

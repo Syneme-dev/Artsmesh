@@ -50,7 +50,7 @@
 @property (strong) IBOutlet AMPopUpView *audioSampleRatePopupView;
 @property (strong) IBOutlet AMPopUpView *audioBitRatePopupView;
 @property (strong) IBOutlet NSTextField *baseUrlTextField;
-@property (strong) IBOutlet NSTextField *streamKey;
+@property (strong) IBOutlet NSTextField *streamKeyTextField;
 
 @property (strong) IBOutlet AMStandardButton *settingsCancelBtn;
 @property (strong) IBOutlet AMStandardButton *settingsSaveBtn;

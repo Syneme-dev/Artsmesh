@@ -91,6 +91,7 @@
     NSString *audSampleRatePref;
     NSString *audBitRatePref;
     NSString *baseUrlPref;
+    NSString *streamKeyPref;
     
     int vidSelectedDeviceIndexPref;
     int audSelectedDeviceIndexPref;
@@ -414,7 +415,7 @@
     cfgs.audioSampleRate = audSampleRatePref;
     cfgs.videoOutSize = ffmpegVidOutDimensions;
     cfgs.serverAddr = baseUrlPref;
-    //cfgs.streamName = [self.streamNameTextField stringValue];
+    cfgs.streamName = streamKeyPref;
     
     [ffmpeg streamToYouTube:cfgs];
     
@@ -470,6 +471,7 @@
     audBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
     
     baseUrlPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url];
+    streamKeyPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Stream_Key];
 }
 
 -(void)loadSettingsValues {
@@ -515,6 +517,7 @@
     
     [self.videoBitRateTextField setStringValue:@"4000"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
+    [self.streamKeyTextField setStringValue:@""];
     
     [self saveSettings];
     
@@ -569,6 +572,12 @@
         [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
     }
     
+    if ([streamKeyPref length] != 0) {
+        [self.streamKeyTextField setStringValue:streamKeyPref];
+    } else {
+        [self.streamKeyTextField setStringValue:@""];
+    }
+    
     [self.videoInputSizePopupView setNeedsDisplay:true];
     
 }
@@ -590,13 +599,12 @@
     [[AMPreferenceManager standardUserDefaults] setObject:self.audioBitRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
     
     
-    //Save Additional Details
+    //Save YouTube Details
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];
     
-    [[AMPreferenceManager standardUserDefaults] setObject:vidInSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_In];
-    [[AMPreferenceManager standardUserDefaults] setObject:vidOutSizeUseCustomPref forKey:Preference_Key_ffmpeg_Video_Use_Custom_Out];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.streamKeyTextField.stringValue forKey:Preference_Key_ffmpeg_Stream_Key];
     
     [self updateSettingsVars];
 }

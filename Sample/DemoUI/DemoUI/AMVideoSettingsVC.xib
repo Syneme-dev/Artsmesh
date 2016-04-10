@@ -16,7 +16,7 @@
                 <outlet property="settingsCancelBtn" destination="I4g-z5-UPE" id="dGt-Dm-ScQ"/>
                 <outlet property="settingsRefreshBtn" destination="9U4-zo-q9d" id="4h7-OJ-U59"/>
                 <outlet property="settingsSaveBtn" destination="16t-C4-EfM" id="dBa-40-mfV"/>
-                <outlet property="streamKey" destination="Ffm-j2-fYd" id="mDx-eV-Jc4"/>
+                <outlet property="streamKeyTextField" destination="Ffm-j2-fYd" id="FMZ-BO-IJQ"/>
                 <outlet property="videoBitRateTextField" destination="9It-5g-ZWe" id="4uq-bY-75k"/>
                 <outlet property="videoDevicePopupView" destination="i4f-iL-FzX" id="aRH-NG-us0"/>
                 <outlet property="videoFormatPopupView" destination="kT4-0D-8hP" id="sPK-NP-Wu6"/>

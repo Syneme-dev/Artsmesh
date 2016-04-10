@@ -113,34 +113,12 @@
     cfgs = [[AMFFmpegConfigs alloc] init];
     
     //Set up UI Elements and theme stuff
-    [self.eventDeleteButton setButtonTitle:@"DELETE"];
-    [self.eventGoLiveButton setButtonTitle:@"GO LIVE"];
-    [self.eventCreateButton setButtonTitle:@"CREATE"];
     
     [self.settingsCancelBtn setButtonTitle:@"CANCEL"];
     [self.settingsSaveBtn setButtonTitle:@"SAVE"];
     [self.settingsRefreshBtn setButtonTitle:@"REFRESH"];
     
     [self updateAMStandardButtons];
-    
-    //Set up Events Manager SubView and View Controller
-    eventsManagerVC = [[AMEventsManagerViewController alloc] initWithNibName:@"AMEventsManagerViewController" bundle:nil];
-    NSView *view = [eventsManagerVC view];
-    [self.eventsManagerView addSubview:view];
-    
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    NSArray *verticalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subView]|"
-                                            options:0
-                                            metrics:nil
-                                            views:@{@"subView" : view}];
-    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subView]|"
-                                            options:0
-                                            metrics:nil
-                                            views:@{@"subView" : view}];
-    [self.eventsManagerView addConstraints:verticalConstraints1];
-    [self.eventsManagerView addConstraints:horizontalConstraints1];
-    [self.eventsManagerView setAutoresizesSubviews:YES];
-    [view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     
     
     [self establishYouTubeVars];
@@ -157,14 +135,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popUpResignKeyWindow:) name:
      NSWindowDidResignKeyNotification object:nil];
     
-    [self getExistingYouTubeLiveEvents];
     [self updateUI];
-    
-    [self.groupTabView setAutoresizesSubviews:YES];
-    [AMButtonHandler changeTabTextColor:self.youtubeBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.settingsBtn toColor:UI_Color_blue];
-    
-    [self.youtubeBtn performClick:nil];
     
     
     // Configure Settings Stuff
@@ -176,30 +147,12 @@
 {
     super.tabs=self.groupTabView;
     self.tabButtons =[[NSMutableArray alloc]init];
-    [self.tabButtons addObject:self.youtubeBtn];
-    [self.tabButtons addObject:self.settingsBtn];
-    self.showingTabsCount=2;
+    self.showingTabsCount=1;
 }
 
 -(void)viewDidLoad
 {
     [self loadTabViews];
-    
-    self.privateCheck.delegate = self;
-    self.privateCheck.title = @"PRIVATE";
-    
-    self.schedStartPMCheck.delegate = self;
-    self.schedStartPMCheck.title = @"PM";
-    
-    self.schedEndPMCheck.delegate = self;
-    self.schedEndPMCheck.title = @"PM";
-    
-    NSDate *curDate = [NSDate date];
-    //[self loadEventTimes:curDate];
-    [self loadEventTime:curDate andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
-    [self loadEventTime:curDate andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
-    
-    
 }
 
 -(void)loadTabViews
@@ -223,54 +176,6 @@
     }
 }
 
-
-- (void)createYouTubeLiveEvent {
-    // Create the Live Event now!
-    
-    
-    /** Grab the relevant data from the form **/
-    
-    // Broadcast Title
-    self.broadcastTitle = [self.broadcastTItleField stringValue];
-    
-    
-    // Broadcast Description
-    //self.broadcastDesc = @"Here's my live event!";
-    self.broadcastDesc = [self.broadcastDescField stringValue];
-    
-    
-    // Broadcast Scheduled Start/End Times
-    
-    NSString *selectedStartDay = self.eventStartDayTextField.stringValue;
-    NSString *selectedStartMonth = self.eventStartMonthTextField.stringValue;
-    NSString *selectedStartYear = self.eventStartYearTextField.stringValue;
-    NSString *selectedStartHour = self.eventStartHourTextField.stringValue;
-    if (self.schedStartPMCheck.checked) {
-        NSInteger baseHour = [self.eventStartHourTextField.stringValue integerValue] + 12;
-        selectedStartHour = [NSString stringWithFormat:@"%ld", baseHour];
-    }
-    NSString *selectedStartMinute = self.eventStartMinuteTextField.stringValue;
-    NSString *selectedEndDay = self.eventEndDayTextField.stringValue;
-    NSString *selectedEndMonth = self.eventEndMonthTextField.stringValue;
-    NSString *selectedEndYear = self.eventEndYearTextField.stringValue;
-    NSString *selectedEndHour = self.eventEndHourTextField.stringValue;
-    if (self.schedEndPMCheck.checked) {
-        NSInteger baseHour = [self.eventEndHourTextField.stringValue integerValue] + 12;
-        selectedEndHour = [NSString stringWithFormat:@"%ld", baseHour];
-    }
-    NSString *selectedEndMinute = self.eventEndMinuteTextField.stringValue;
-    
-    //2016-01-02 19:59:59
-    //NSSTring *selectedStartDay = [self.eventStartDayDropDown];
-    self.broadcastSchedStart = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@", selectedStartYear, selectedStartMonth, selectedStartDay, selectedStartHour, selectedStartMinute, @"00"] withFormat:@"yyyy-M-d HH:mm:ss"];
-    self.broadcastSchedEnd = [self getDate:[NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@", selectedEndYear, selectedEndMonth, selectedEndDay, selectedEndHour, selectedEndMinute, @"00"] withFormat:@"yyyy-M-d HH:mm:ss"];
-    
-    
-    // Get channelID
-    
-    [self getYouTubeChannelId];
-    
-}
 
 - (NSDate *)getDate : (NSString *)dateString withFormat : (NSString *)dateFormat {
     NSDateFormatter *getDateFormatter = [[NSDateFormatter alloc] init];
@@ -306,9 +211,9 @@
                                            
                                            // Create the Broadcast now
                                            if ( self.selectedBroadcast == nil ) {
-                                               [self insertLiveYouTubeBroadcast];
+                                               //[self insertLiveYouTubeBroadcast];
                                            } else {
-                                               [self editLiveYouTubeBroadcast:self.selectedBroadcast];
+                                               //[self editLiveYouTubeBroadcast:self.selectedBroadcast];
                                            }
                                 
                                         }
@@ -320,168 +225,6 @@
                                }];
 }
 
-
-- (void)getExistingYouTubeLiveEvents {
-    //Find existing YouTube Live Events, if they exist
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    GTLQueryYouTube *query = [GTLQueryYouTube queryForLiveBroadcastsListWithPart:@"snippet, status, contentDetails"];
-    query.mine = YES;
-    query.maxResults = 50;
-    
-    self.channelCurrentEventsTicket = [service executeQuery:query
-                                          completionHandler:^(GTLServiceTicket *ticket,
-                                                              GTLYouTubeChannelListResponse *liveEventsList,
-                                                              NSError *error) {
-                                              _channelCurrentEventsTicket = nil;
-                                              if (error == nil) {
-                                                  if ([[liveEventsList items] count] > 0) {
-                                                      // Live Events found!
-                                                      [eventsManagerVC setTitle:@"EVENTS"];
-                                                      [eventsManagerVC insertEvents:liveEventsList];
-                                                  } else {
-                                                      // No Live Events found..
-                                                      [eventsManagerVC.eventsListScrollView.documentView removeAllRows];
-                                                  }
-                                              } else {
-                                                  //No Live Events found or error
-                                                  NSLog(@"Error: %@", error.description);
-                                              }
-                                              
-                                          }];
-    
-}
-
-
-- (void)insertLiveYouTubeBroadcast {
-    
-    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
-    
-    // Create an object for the liveBroadcast resource's status, and set the
-    // broadcast's status to "private".
-    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
-    if ( self.privateCheck.checked ) { self.broadcastPrivacy = @"private"; } else { self.broadcastPrivacy = @"public"; }
-    newBroadcastStatus.privacyStatus = self.broadcastPrivacy;
-    
-    // Create the API request that inserts the liveBroadcast resource.
-    GTLYouTubeLiveBroadcast *newBroadcast = [[GTLYouTubeLiveBroadcast alloc] init];
-    newBroadcast.identifier = self.channelId;
-    newBroadcast.snippet = newBroadcastSnippet;
-    newBroadcast.status = newBroadcastStatus;
-    newBroadcast.kind = @"youtube#liveBroadcast";
-    
-    // Execute the request and return an object that contains information
-    // about the new broadcast.
-    GTLQueryYouTube *createEventQuery = [GTLQueryYouTube queryForLiveBroadcastsInsertWithObject:newBroadcast part:@"snippet,status"];
-    createEventQuery.mine = YES;
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    self.broadcastTicket = [service executeQuery:createEventQuery
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
-                                                   NSError *error) {
-                                   // Callback
-                                   _broadcastTicket = nil;
-                                   if (error == nil) {
-                                       // Live broadcast successfully created!
-                                       
-                                       [self insertLiveStream:liveBroadcast];
-                                
-                                       self.broadcastURL = [NSString stringWithFormat:@"%@%@", @"https://www.youtube.com/embed?v=", liveBroadcast.identifier];
-                                       [self changeBroadcastURL:self.broadcastURL];
-                                       [self getExistingYouTubeLiveEvents];
-                                       
-                                       [self removeBroadcastFromEventForm];
-                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
-                                       
-                                   } else {
-                                       NSLog(@"Error: %@", error.description);
-                                   }
-                               }];
-
-}
-
-- (void)editLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBraoadcast {
-    /****** TO-DO *******
-    
-    * Currently only 'snippet' and 'status' are editable
-    * Look into CDN part to see if this is necessary
-          
-    ********************/
-    
-    // Create a new broadcast snippet
-    GTLYouTubeLiveBroadcastSnippet *newBroadcastSnippet = [self createLiveBroadcastSnippet];
-    
-    theLiveBraoadcast.snippet.title = newBroadcastSnippet.title;
-    theLiveBraoadcast.snippet.descriptionProperty = newBroadcastSnippet.descriptionProperty;
-    theLiveBraoadcast.snippet.scheduledStartTime = newBroadcastSnippet.scheduledStartTime;
-    theLiveBraoadcast.snippet.scheduledEndTime = newBroadcastSnippet.scheduledEndTime;
-
-    // Create a new broadcast status;
-    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [self createLiveBroadcastStatus];
-    newBroadcastStatus.lifeCycleStatus = theLiveBraoadcast.status.lifeCycleStatus;
-    newBroadcastStatus.recordingStatus = theLiveBraoadcast.status.recordingStatus;
-    theLiveBraoadcast.status = newBroadcastStatus;
-    
-    GTLQueryYouTube *editEventQuery = [GTLQueryYouTube queryForLiveBroadcastsUpdateWithObject:theLiveBraoadcast part:@"snippet, status"];
-    editEventQuery.mine = YES;
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    self.broadcastTicket = [service executeQuery:editEventQuery
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
-                                                   NSError *error) {
-                                   //Callback
-                                   _broadcastTicket = nil;
-                                   if (error == nil) {
-                                       //Event successfully edited
-                                       [self.eventCreateButton setButtonTitle:@"CREATE"];
-                                       
-                                       [self removeBroadcastFromEventForm];
-                                       
-                                       [self getExistingYouTubeLiveEvents];
-            
-                                   } else {
-                                       NSLog(@"Error: %@", error.description);
-                                       GTLErrorObject* const errorObject = error.userInfo[kGTLStructuredErrorKey];
-                                       NSLog(@"error from YouTube API: %@", errorObject.data);
-                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"EDIT"];
-                                   }
-        
-                               }];
-    
-}
-
-
-- (void)deleteLiveYouTubeBroadcast: (GTLYouTubeLiveBroadcast *)theLiveBroadcast {
-    
-    GTLQueryYouTube *deleteEventQuery = [GTLQueryYouTube queryForLiveBroadcastsDeleteWithIdentifier:theLiveBroadcast.identifier];
-    deleteEventQuery.mine = YES;
-
-    GTLServiceYouTube *service = self.youTubeService;
-
-    self.broadcastTicket = [service executeQuery:deleteEventQuery
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   GTLYouTubeLiveBroadcast *liveBroadcast,
-                                                   NSError *error) {
-                                   //Callback
-                                   _broadcastTicket = nil;
-                                   if (error == nil) {
-                                       //Event successfully deleted
-                                       [self.eventCreateButton setSuccessStateWithText:@"SUCCESS" andResetText:@"CREATE"];
-                                       [self removeBroadcastFromEventForm];
-                                       
-                                       [self getExistingYouTubeLiveEvents];
-                                       
-                                   } else {
-                                       NSLog(@"Error: %@", error.description);
-                                   }
-                               
-                               }];
-}
 
 -(GTLYouTubeLiveBroadcastSnippet *)createLiveBroadcastSnippet {
     // Create an object for the liveBroadcast resource's snippet. Specify values
@@ -495,201 +238,6 @@
     newBroadcastSnippet.scheduledEndTime = [GTLDateTime dateTimeWithDate:self.broadcastSchedEnd timeZone:timeZone];
     
     return newBroadcastSnippet;
-}
-
--(GTLYouTubeLiveBroadcastStatus *)createLiveBroadcastStatus {
-    GTLYouTubeLiveBroadcastStatus *newBroadcastStatus = [[GTLYouTubeLiveBroadcastStatus alloc] init];
-    
-    NSString *curEventPrivacy = @"public";
-    
-    if ( self.privateCheck.checked ) { curEventPrivacy = @"private"; }
-    newBroadcastStatus.privacyStatus = curEventPrivacy;
-    
-    return newBroadcastStatus;
-}
-
-- (void)insertLiveStream: (GTLYouTubeLiveBroadcast *)theBroadcast {
-    // This function takes a given YouTube Live Broadcast & establishes a Live Stream to pair with it
-    GTLYouTubeLiveStreamSnippet *newLiveStreamSnippet = [[GTLYouTubeLiveStreamSnippet alloc] init];
-    [newLiveStreamSnippet setTitle:[self.streamTitleTextField stringValue]];
-    
-    GTLYouTubeCdnSettings *newCdnSettings = [[GTLYouTubeCdnSettings alloc] init];
-    [newCdnSettings setFormat:[self.streamFormatTextField stringValue]];
-    [newCdnSettings setIngestionType:@"rtmp"];
-    
-    GTLYouTubeLiveStream *newLiveStream = [[GTLYouTubeLiveStream alloc] init];
-    [newLiveStream setKind:@"youtube#liveStream"];
-    [newLiveStream setSnippet:newLiveStreamSnippet];
-    [newLiveStream setCdn:newCdnSettings];
-
-
-    // Execute the request and return an object that contains information
-    // about the new live stream.
-    GTLQueryYouTube *insertLiveStreamQuery = [GTLQueryYouTube queryForLiveStreamsInsertWithObject:newLiveStream part:@"snippet, cdn"];
-    insertLiveStreamQuery.mine = YES;
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    self.liveStreamTicket = [service executeQuery:insertLiveStreamQuery
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   GTLYouTubeLiveStream *liveStream,
-                                                   NSError *error) {
-                                   // Callback
-                                   _liveStreamTicket = nil;
-                                   if (error == nil) {
-                                       // Live Stream successfully created!
-                                       // Need to pair the stream with the live event now
-                                       
-                                       [self bindLiveStream:liveStream withBroadcast:theBroadcast];
-                                       [self.eventCreateButton setSuccessStateWithText:@"SUCCESS" andResetText:@"CREATE"];
-                                       
-                                   } else {
-                                       NSLog(@"Error: %@", error.description);
-                                       [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
-                                   }
-                               }];
-}
-
-- (void)bindLiveStream: (GTLYouTubeLiveStream *)theLiveStream withBroadcast:(GTLYouTubeLiveBroadcast *)theBroadcast {
-    NSString *broadcastId = theBroadcast.identifier;
-    NSString *liveStreamId = theLiveStream.identifier;
-    
-    GTLQueryYouTube *bindLiveBroadcastQuery = [GTLQueryYouTube queryForLiveBroadcastsBindWithIdentifier:broadcastId part:@"id, contentDetails"];
-    [bindLiveBroadcastQuery setStreamId:liveStreamId];
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    self.broadcastBindTicket = [service executeQuery:bindLiveBroadcastQuery
-                                completionHandler:^(GTLServiceTicket *ticket,
-                                                    GTLYouTubeLiveBroadcast *liveBroadcast,
-                                                    NSError *error) {
-                                    // Callback
-                                    _broadcastBindTicket = nil;
-                                    if (error == nil) {
-                                        // Live Stream successfully bound to YouTube Broadcast!
-                                    } else {
-                                        NSLog(@"Error: %@", error.description);
-                                        [self.eventCreateButton setErrorStateWithText:@"FAILED" andResetText:@"CREATE"];
-                                    }
-                                }];
-    
-}
-
-- (void)loadEventTime: (NSDate *)theDate andDayTextField: (NSTextField *)theDayTextField andMonthTextField: (NSTextField *)theMonthTextField andYearTextField: (NSTextField *)theYearTextField andHourTextField: (NSTextField *)theHourTextField andMinuteTextField: (NSTextField *)theMinuteTextField andPMCHeck: (AMCheckBoxView *)thePMCheck {
-    
-    NSInteger *selectDay = 0;
-    NSInteger *selectMonth = 0;
-    
-    // Set up days
-    NSMutableArray *days = [NSMutableArray array];
-    for (NSInteger d = 1; d <= 31; d++) {
-        [days addObject:[NSString stringWithFormat:@"%ld", (long)d]];
-    }
-    NSDateFormatter *dayFormatter = [[NSDateFormatter alloc] init];
-    [dayFormatter setDateFormat:@"d"];
-    NSDate *curDay = theDate;
-    selectDay = (NSInteger *)[[NSString stringWithFormat:@"%@", [dayFormatter stringFromDate:curDay]] integerValue];
-    
-    // Set up months
-    NSMutableArray *months = [NSMutableArray array];
-    for (NSInteger m = 1; m <= 12; m++) {
-        [months addObject:[NSString stringWithFormat:@"%ld", (long)m]];
-    }
-    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-    [monthFormatter setDateFormat:@"M"];
-    NSDate *curMonth = theDate;
-    selectMonth = (NSInteger *)[[NSString stringWithFormat:@"%@", [monthFormatter stringFromDate:curMonth]] integerValue];
-    
-    
-    // Set up years
-    NSMutableArray *years = [NSMutableArray array];
-    for (NSInteger y = 0; y<=2; y++) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy"];
-        NSDate *curYear = theDate;
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setYear:y];
-        NSDate *targetDate = [gregorian dateByAddingComponents:dateComponents toDate:curYear  options:0];
-        
-        [years addObject:[NSString stringWithFormat:@"%@", [formatter stringFromDate:targetDate]]];
-    }
-    
-    //Add Number Formatters to the Text Fields
-    NSNumberFormatter *dayNumberFormatter = [[NSNumberFormatter alloc] init];
-    dayNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    dayNumberFormatter.maximum = [NSNumber numberWithInteger:31];
-    [theDayTextField setFormatter:dayNumberFormatter];
-    
-    NSNumberFormatter *monthNumberFormatter = [[NSNumberFormatter alloc] init];
-    monthNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    monthNumberFormatter.maximum = [NSNumber numberWithInteger:12];
-    [theMonthTextField setFormatter:monthNumberFormatter];
-    
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumberFormatter *yearNumberFormatter = [[NSNumberFormatter alloc] init];
-    yearNumberFormatter.minimum = [f numberFromString:[years objectAtIndex:0]];
-    yearNumberFormatter.maximum = [f numberFromString:[years objectAtIndex:2]];
-    NSDate *curHour = theDate;
-    
-    
-    NSCalendar *gregorianHour = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *dateComponentsHour = [[NSDateComponents alloc] init];
-    [dateComponentsHour setHour:1];
-    
-    NSDateFormatter *hourDateFormatter = [[NSDateFormatter alloc] init];
-    [hourDateFormatter setDateFormat:@"HH"];
-    NSDate *targetHour = [gregorianHour dateByAddingComponents:dateComponentsHour toDate:curHour options:0];
-    
-    
-    NSDateComponents *dateComponentsEndHour = [[NSDateComponents alloc] init];
-    [dateComponentsEndHour setHour:2];
-    NSDate *targetEndHour = [gregorianHour dateByAddingComponents:dateComponentsEndHour toDate:curHour options:0];
-    
-    
-    NSDate *curMinute = theDate;
-    NSDateFormatter *minuteDateFormatter = [[NSDateFormatter alloc] init];
-    [minuteDateFormatter setDateFormat:@"mm"];
-    
-    NSNumberFormatter *hourNumberFormatter = [[NSNumberFormatter alloc] init];
-    hourNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    hourNumberFormatter.maximum = [NSNumber numberWithInteger:12];
-    
-    NSNumberFormatter *minuteNumberFormatter = [[NSNumberFormatter alloc] init];
-    minuteNumberFormatter.minimum = [NSNumber numberWithInteger:1];
-    minuteNumberFormatter.maximum = [NSNumber numberWithInteger:59];
-    
-    
-    
-    theDayTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectDay];
-    
-    theMonthTextField.stringValue = [NSString stringWithFormat:@"%ld", (long)selectMonth];
-    
-    theYearTextField.stringValue = [years objectAtIndex:0];
-    
-    NSDate *finalHour = [[NSDate alloc] init];
-    
-    if (self.selectedBroadcast == nil) {
-        if ([theHourTextField isEqualTo:self.eventStartHourTextField]) {
-            finalHour = targetHour;
-        } else if ([theHourTextField isEqualTo:self.eventEndHourTextField]) {
-            finalHour = targetEndHour;
-        }
-    } else {
-        finalHour = curHour;
-    }
-    
-    if ( [[hourDateFormatter stringFromDate:finalHour] intValue] <= 12 ) {
-        theHourTextField.stringValue = [hourDateFormatter stringFromDate:finalHour];
-    } else {
-        int twelveHour = [[hourDateFormatter stringFromDate:finalHour] intValue] - 12;
-        theHourTextField.stringValue = [NSString stringWithFormat:@"%i", twelveHour];
-        [thePMCheck setChecked:YES];
-    }
-    
-    theMinuteTextField.stringValue = [minuteDateFormatter stringFromDate:curMinute];
-    
 }
 
 
@@ -714,29 +262,6 @@
     [defaults setObject:group.broadcastingURL forKey:Preference_Key_Cluster_BroadcastURL];
     //[defaults synchronize];
     
-}
-
-- (IBAction)youtubeBtnClick:(id)sender {
-    [self pushDownButton:self.youtubeBtn];
-    
-    [self.groupTabView selectTabViewItemAtIndex:0];
-    
-    //NSLog(@"youtube parent view dimensions are: %f, %f", self.groupTabView.selectedTabViewItem.view.frame.size.width, self.groupTabView.selectedTabViewItem.view.frame.size.height);
-    [self.groupTabView.selectedTabViewItem.view setNeedsLayout:YES];
-    [self.groupTabView.selectedTabViewItem.view setNeedsDisplay:YES];
-}
-
-- (IBAction)settingsBtnClick:(id)sender {
-    [self pushDownButton:self.settingsBtn];
-    
-    [self.groupTabView selectTabViewItemAtIndex:1];
-    
-    if ( [self isSignedIn] && self.selectedBroadcast != nil ) {
-        // Event selected - Load CDN Settings into fields now
-        // NSLog(@"Current broadcast is: %@", self.selectedBroadcast);
-    } else {
-        // No event selected, blank..
-    }
 }
 
 
@@ -768,24 +293,6 @@
     }
 }
 
-- (void)controlTextDidChange:(NSNotification *)notification {
-    if ([notification object] == self.eventStartDayTextField && [self.eventStartDayTextField.stringValue length] > 0 ) {
-        self.eventEndDayTextField.stringValue = self.eventStartDayTextField.stringValue;
-    }
-    else if ([notification object] == self.eventStartMonthTextField && [self.eventStartMonthTextField.stringValue length] > 0 ) {
-        self.eventEndMonthTextField.stringValue = self.eventStartMonthTextField.stringValue;
-    }
-    else if ([notification object] == self.eventStartYearTextField && [self.eventStartYearTextField.stringValue length] > 0 ) {
-        self.eventEndYearTextField.stringValue = self.eventStartYearTextField.stringValue;
-    }
-    else if ([notification object] == self.eventStartHourTextField && [self.eventStartHourTextField.stringValue length] > 0 ) {
-        self.eventEndHourTextField.stringValue = self.eventStartHourTextField.stringValue;
-    }
-    else if ([notification object] == self.eventStartMinuteTextField && [self.eventStartMinuteTextField.stringValue length] > 0 ) {
-        self.eventEndMinuteTextField.stringValue = self.eventStartMinuteTextField.stringValue;
-    }
-}
-
 
 -(void)groupChanged:(NSNotification *)notification
 {
@@ -801,119 +308,15 @@
 
 - (void)checkBoxChanged:(NSNotification *)notification
 {
-    //AMCheckBoxView *changedCheckboxView = notification.object;
-    
-    if ([notification.object isKindOfClass:[AMLiveEventCheckBoxView class]]) {
-        AMLiveEventCheckBoxView *theCheckedBoxView = notification.object;
-        
-        if (theCheckedBoxView.checked) {
-            //Event checkbox has been checked
-            self.selectedBroadcast = theCheckedBoxView.liveBroadcast;
-            [self loadBroadcastIntoEventForm:theCheckedBoxView.liveBroadcast];
-            [self loadLiveStreamIntoEventForm:theCheckedBoxView.liveBroadcast.contentDetails.boundStreamId];
-            [self.eventCreateButton setActiveStateWithText:@"EDIT"];
-            [self updateAMStandardButtons];
-        } else if (!theCheckedBoxView.checked) {
-            self.selectedBroadcast = nil;
-            [self removeBroadcastFromEventForm];
-            [self updateAMStandardButtons];
-        }
-        
-    }
 }
 
 
 - (void)updateAMStandardButtons {
-    if (self.selectedBroadcast == nil ) {
-        [self.eventDeleteButton setDisabledStateWithText:@"DELETE"];
-        [self.eventGoLiveButton setDisabledStateWithText:@"GO LIVE"];
-    } else {
-        [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
-        [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
-    }
-    
     [self.settingsSaveBtn setActiveStateWithText:@"SAVE"];
     [self.settingsCancelBtn setActiveStateWithText:@"CANCEL"];
     [self.settingsRefreshBtn setActiveStateWithText:@"REFRESH"];
 }
 
-- (void)loadBroadcastIntoEventForm:(GTLYouTubeLiveBroadcast *)theBroadcast {
-    // This function loads in a given YouTube Live Event into the Event Form.
-    
-    [self.broadcastTItleField setStringValue:theBroadcast.snippet.title];
-    [self.broadcastDescField setStringValue:theBroadcast.snippet.descriptionProperty];
-    
-    [self loadEventTime:theBroadcast.snippet.scheduledStartTime.date andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
-    [self loadEventTime:theBroadcast.snippet.scheduledEndTime.date andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
-    
-    NSString *curEventPrivacyStatus = [NSString stringWithFormat:@"%@", theBroadcast.status.privacyStatus];
-    
-    if ([curEventPrivacyStatus isEqualToString:@"public"]) { [self.privateCheck setChecked:FALSE]; } else { [self.privateCheck setChecked:TRUE]; }
-}
-
-- (void)loadLiveStreamIntoEventForm:(NSString *)streamId {
-    GTLQueryYouTube *getStreamQuery = [GTLQueryYouTube queryForLiveStreamsListWithPart:@"snippet, cdn, status"];
-    [getStreamQuery setMine:TRUE];
-    [getStreamQuery setStreamId:streamId];
-    [getStreamQuery setMaxResults:(NSUInteger)1];
-    
-    GTLServiceYouTube *service = self.youTubeService;
-    
-    self.liveStreamTicket = [service executeQuery:getStreamQuery
-                                   completionHandler:^(GTLServiceTicket *ticket,
-                                                       GTLYouTubeLiveStreamListResponse *liveStreamList,
-                                                       NSError *error) {
-                                       // Callback
-                                       _liveStreamTicket = nil;
-                                       if (error == nil) {
-                                           // Live Stream found, populate event fields now
-                                           
-                                           if ([liveStreamList.items count] > 0) {
-                                               GTLYouTubeLiveStream *foundStream = [liveStreamList.items objectAtIndex:0];
-                                               [self.streamTitleTextField setStringValue:foundStream.snippet.title];
-                                               [self.streamAddressTextField setStringValue:foundStream.cdn.ingestionInfo.ingestionAddress];
-                                               [self.streamStatusTextField setStringValue:foundStream.status.streamStatus];
-                                               [self.streamNameTextField setStringValue:foundStream.cdn.ingestionInfo.streamName];
-                                               //NSLog(@"found stream name: %@", foundStream.cdn.ingestionInfo.streamName);
-                                               //NSLog(@"cur ffmpeg streaming name: %@", [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]);
-                                               if ([foundStream.cdn.ingestionInfo.streamName isEqualToString:[[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Cur_Stream]]) {
-                                                   [self.eventGoLiveButton setActiveStateWithText:@"STOP"];
-                                               }
-                                               [self.streamFormatTextField setStringValue:foundStream.cdn.format];
-                                           }
-                                       } else {
-                                           NSLog(@"Error: %@", error.description);
-                                       }
-                                   }];
-}
-
-- (void)removeBroadcastFromEventForm {
-    [self.broadcastTItleField setStringValue:@"YOUR BROADCAST TITLE"];
-    [self.broadcastDescField setStringValue:@"YOUR BROADCAST DESCRIPTION"];
-    
-    NSDate *curDate = [NSDate date];
-    [self loadEventTime:curDate andDayTextField:self.eventStartDayTextField andMonthTextField:self.eventStartMonthTextField andYearTextField:self.eventStartYearTextField andHourTextField:self.eventStartHourTextField andMinuteTextField:self.eventStartMinuteTextField andPMCHeck:self.schedStartPMCheck];
-    [self loadEventTime:curDate andDayTextField:self.eventEndDayTextField andMonthTextField:self.eventEndMonthTextField andYearTextField:self.eventEndYearTextField andHourTextField:self.eventEndHourTextField andMinuteTextField:self.eventEndMinuteTextField andPMCHeck:self.schedEndPMCheck];
-    [self.privateCheck setChecked:NO];
-    
-    [self removeLiveStreamFromEventForm];
-    
-    self.selectedBroadcast = nil;
-    needsToConfirmEdit = TRUE;
-    needsToConfirmCreate = TRUE; [self.eventCreateButton setActiveStateWithText:@"CREATE"];
-    needsToConfirmDelete = TRUE; [self.eventDeleteButton setActiveStateWithText:@"DELETE"];
-    needsToConfirmGoLive = TRUE; [self.eventGoLiveButton setActiveStateWithText:@"GO LIVE"];
-    
-    [self updateAMStandardButtons];
-}
-
-- (void)removeLiveStreamFromEventForm {
-    [self.streamTitleTextField setStringValue:@"NEW STREAM NAME"];
-    [self.streamFormatTextField setStringValue:@"720p"];
-    [self.streamAddressTextField setStringValue:@""];
-    [self.streamNameTextField setStringValue:@""];
-    [self.streamStatusTextField setStringValue:@""];
-}
 
 - (void)dealloc {
     //To avoid a error when closing
@@ -956,18 +359,7 @@
 }
 
 -(void) updateUI {
-    [self.schedStartPMCheck setFontSize:10.0f];
-    [self.schedEndPMCheck setFontSize:10.0f];
-    [self.privateCheck setFontSize:10.0f];
-    
-    // Test pull current live events list
-    if ([self isSignedIn]) {
-        [self getExistingYouTubeLiveEvents];
-    } else {
-        [eventsManagerVC.eventsListScrollView.documentView removeAllRows];
-    }
     [self.view setNeedsDisplay:true];
-    
 }
 
 - (void)initYoutubeService {
@@ -1003,7 +395,7 @@
 }
 
 -(void)goLive {
-    [[AMPreferenceManager standardUserDefaults] setObject:self.streamNameTextField.stringValue forKey:Preference_Key_ffmpeg_Cur_Stream];
+    //[[AMPreferenceManager standardUserDefaults] setObject:self.streamNameTextField.stringValue forKey:Preference_Key_ffmpeg_Cur_Stream];
     
     //Set up ffmpeg configs
     
@@ -1026,12 +418,12 @@
     cfgs.audioSampleRate = audSampleRatePref;
     cfgs.videoOutSize = ffmpegVidOutDimensions;
     cfgs.serverAddr = baseUrlPref;
-    cfgs.streamName = [self.streamNameTextField stringValue];
+    //cfgs.streamName = [self.streamNameTextField stringValue];
     
     [ffmpeg streamToYouTube:cfgs];
     
     
-    [self.eventGoLiveButton setSuccessStateWithText:@"SENDING" andResetText:@"STOP"];
+    //[self.eventGoLiveButton setSuccessStateWithText:@"SENDING" andResetText:@"STOP"];
 }
 
 - (void)endLive {
@@ -1039,66 +431,14 @@
     [[AMPreferenceManager standardUserDefaults] setObject:nil forKey:Preference_Key_ffmpeg_Cur_Stream];
     
     [ffmpeg stopFFmpeg];
-    
-    [self.eventGoLiveButton setSuccessStateWithText:@"STOPPED" andResetText:@"GO LIVE"];
 }
 
 // Mouse Events (mainly for buttons)
 - (void)mouseDown:(NSEvent *)theEvent {
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    
-    if (self.eventDeleteButton.triggerPressed == YES) {
-        // Delete event button pressed
-        if (self.selectedBroadcast != nil) {
-            // Delete existing Live YouTube Broadcast
-            if (needsToConfirmDelete == FALSE) {
-                [self deleteLiveYouTubeBroadcast:self.selectedBroadcast];
-            } else {
-                [self.eventDeleteButton setAlertStateWithText:@"CONFIRM"];
-                needsToConfirmDelete = FALSE;
-            }
-        }
-    } else if (self.eventGoLiveButton.triggerPressed == YES) {
-        // Go Live event button pressed
-        NSString *curBtnTitle = self.eventGoLiveButton.buttonVC.buttonTitleTextField.stringValue;
-        
-        if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"GO LIVE"] || [curBtnTitle isEqualTo:@"CONFIRM"])) {
-            if (needsToConfirmGoLive == FALSE) {
-                needsToConfirmGoLive = TRUE;
-                [self goLive];
-            } else {
-                [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM"];
-                needsToConfirmGoLive = FALSE;
-            }
-        } else if (self.selectedBroadcast != nil && ([curBtnTitle isEqualTo:@"STOP"] || [curBtnTitle isEqualTo:@"CONFIRM STOP"])) {
-            if (needsToConfirmGoLive == FALSE) {
-                needsToConfirmGoLive = TRUE;
-                [self endLive];
-            } else {
-                [self.eventGoLiveButton setAlertStateWithText:@"CONFIRM STOP"];
-                needsToConfirmGoLive = FALSE;
-            }
-        }
-        
-    } else if (self.eventCreateButton.triggerPressed == YES) {
-        // CREATE/EDIT button pressed
-        if (self.selectedBroadcast != nil) {
-            if (needsToConfirmEdit == FALSE) {
-                [self createYouTubeLiveEvent];
-            } else {
-                [self.eventCreateButton setAlertStateWithText:@"CONFIRM"];
-                needsToConfirmEdit = FALSE;
-            }
-        } else {
-            if (needsToConfirmCreate == FALSE) {
-                [self createYouTubeLiveEvent];
-            } else {
-                [self.eventCreateButton setAlertStateWithText:@"CONFIRM"];
-                needsToConfirmCreate = FALSE;
-            }
-        }
-    } else if (self.settingsCancelBtn.triggerPressed == YES) {
+
+    if (self.settingsCancelBtn.triggerPressed == YES) {
         //SETTINGS CANCEL BUTTON PRESSED
         [self resetSettingsTab];
     } else if (self.settingsSaveBtn.triggerPressed == YES) {

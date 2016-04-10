@@ -34,47 +34,7 @@
 @property (strong) GTLYouTubeLiveStream *selectedStream;
 
 // YouTube Tab IBOutlets
-@property (strong) IBOutlet NSButton *settingsBtn;
-@property (strong) IBOutlet NSButton *youtubeBtn;
 @property (strong) IBOutlet NSTabView *groupTabView;
-//@property (strong) IBOutlet NSButton *createEventBtn;
-@property (strong) IBOutlet AMStandardButton *eventDeleteButton;
-@property (strong) IBOutlet AMStandardButton *eventGoLiveButton;
-@property (strong) IBOutlet AMStandardButton *eventCreateButton;
-
-@property (strong) IBOutlet NSTextField *broadcastTItleField;
-@property (strong) IBOutlet NSTextField *broadcastDescField;
-
-
-@property (strong) IBOutlet NSTextField *eventStartDayTextField;
-@property (strong) IBOutlet NSTextField *eventStartMonthTextField;
-@property (strong) IBOutlet NSTextField *eventStartYearTextField;
-@property (strong) IBOutlet NSTextField *eventStartHourTextField;
-@property (strong) IBOutlet NSTextField *eventStartMinuteTextField;
-
-
-@property (strong) IBOutlet NSTextField *eventEndDayTextField;
-@property (strong) IBOutlet NSTextField *eventEndMonthTextField;
-@property (strong) IBOutlet NSTextField *eventEndYearTextField;
-@property (strong) IBOutlet NSTextField *eventEndHourTextField;
-@property (strong) IBOutlet NSTextField *eventEndMinuteTextField;
-
-@property (strong) IBOutlet AMCheckBoxView *privateCheck;
-@property (strong) IBOutlet AMCheckBoxView *schedStartPMCheck;
-@property (strong) IBOutlet AMCheckBoxView *schedEndPMCheck;
-
-
-
-
-@property (strong) IBOutlet NSView *eventsManagerView;
-
-// Stream Settings IBOutlets
-@property (strong) IBOutlet NSTextField *streamTitleTextField;
-@property (strong) IBOutlet NSTextField *streamFormatTextField;
-@property (strong) IBOutlet NSTextField *streamAddressTextField;
-@property (strong) IBOutlet NSTextField *streamNameTextField;
-@property (strong) IBOutlet NSTextField *streamStatusTextField;
-
 
 
 // Settings Tab IBOutlets
@@ -107,9 +67,6 @@
 
 
 // Global IBActions
-
-- (IBAction)youtubeBtnClick:(id)sender;
-- (IBAction)settingsBtnClick:(id)sender;
 
 - (BOOL)isSignedIn;
 

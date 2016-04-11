@@ -477,16 +477,16 @@
 -(void)loadSettingsValues {
     [self populateDevicesList];
     
-    videoInputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
-    videoOutputSizes = [[NSArray alloc] initWithArray:videoInputSizes];
+    videoOutputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
+    videoOutputSizes = [[NSArray alloc] initWithArray:videoOutputSizes];
     videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
-    videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"VP6", nil];
+    videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"MPEG2", @"VP6", nil];
     audioFormats = [[NSArray alloc] initWithObjects:@"MP3", @"AAC", nil];
     audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", nil];
     audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", nil];
     
-    [self.videoInputSizePopupView removeAllItems];
-    [self.videoInputSizePopupView addItemsWithTitles:videoInputSizes];
+    [self.videoOutputSizePopupView removeAllItems];
+    [self.videoOutputSizePopupView addItemsWithTitles:videoOutputSizes];
     [self.videoFrameRatePopupView removeAllItems];
     [self.videoFrameRatePopupView addItemsWithTitles:videoFrameRates];
     [self.videoFormatPopupView removeAllItems];
@@ -506,7 +506,7 @@
     [self loadSettingsValues];
     
     [self.videoDevicePopupView selectItemAtIndex:0];
-    [self.videoInputSizePopupView selectItemAtIndex:0];
+    [self.videoOutputSizePopupView selectItemAtIndex:0];
     [self.videoFrameRatePopupView selectItemAtIndex:2];
     [self.videoFormatPopupView selectItemAtIndex:0];
     
@@ -521,7 +521,7 @@
     
     [self saveSettings];
     
-    [self.videoInputSizePopupView setNeedsDisplay:true];
+    [self.videoOutputSizePopupView setNeedsDisplay:true];
 }
 -(void)setupSettingsTab {
     videoDevices = [[NSMutableArray alloc] init];
@@ -531,10 +531,10 @@
     [self updateSettingsVars];
     [self loadSettingsValues];
     
-    if( [vidInSizePref length] != 0 ) {
-        [self.videoInputSizePopupView selectItemWithTitle:vidInSizePref];
+    if( [vidOutSizePref length] != 0 ) {
+        [self.videoOutputSizePopupView selectItemWithTitle:vidInSizePref];
     } else {
-        [self.videoInputSizePopupView selectItemAtIndex:0]; }
+        [self.videoOutputSizePopupView selectItemAtIndex:0]; }
     
     if ( [vidFrameRatePref length] != 0 ) {
         [self.videoFrameRatePopupView selectItemWithTitle:vidFrameRatePref];
@@ -578,14 +578,14 @@
         [self.streamKeyTextField setStringValue:@""];
     }
     
-    [self.videoInputSizePopupView setNeedsDisplay:true];
+    [self.videoOutputSizePopupView setNeedsDisplay:true];
     
 }
 
 -(void)saveSettings {
     // Save Video Settings
     
-    [[AMPreferenceManager standardUserDefaults] setObject:self.videoInputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_In_Size];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoOutputSizePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Out_Size];
     
     [[AMPreferenceManager standardUserDefaults] setObject:self.videoFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Format];
     [[AMPreferenceManager standardUserDefaults] setObject:self.videoFrameRatePopupView.stringValue forKey:Preference_Key_ffmpeg_Video_Frame_Rate];

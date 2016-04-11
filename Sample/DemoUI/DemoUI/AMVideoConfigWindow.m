@@ -443,6 +443,7 @@
 }
 
 - (void)loadVidSettingsValues {
+    [self.vidOutSizeTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size]];
     [self.vidFrameRateTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate]];
     [self.vidBitRateTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate]];
     [self.vidCodec selectItemWithTitle:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format]];

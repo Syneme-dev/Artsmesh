@@ -21,7 +21,7 @@
                 <outlet property="videoDevicePopupView" destination="i4f-iL-FzX" id="aRH-NG-us0"/>
                 <outlet property="videoFormatPopupView" destination="kT4-0D-8hP" id="sPK-NP-Wu6"/>
                 <outlet property="videoFrameRatePopupView" destination="N4W-X3-lkM" id="i40-eg-R5O"/>
-                <outlet property="videoInputSizePopupView" destination="FHE-QI-PjX" id="Pa7-iu-PV2"/>
+                <outlet property="videoOutputSizePopupView" destination="FHE-QI-PjX" id="DwI-yz-mMO"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -77,9 +77,9 @@
                                         <rect key="frame" x="-2" y="725" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="mMx-Em-FAc"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-rj-0xk" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-rj-0xk" userLabel="OUTPUT SIZE" customClass="AMFoundryFontView">
                                         <rect key="frame" x="14" y="725" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="INPUT SIZE" id="9b5-lN-dAe">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="OUTPUT SIZE" id="9b5-lN-dAe">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

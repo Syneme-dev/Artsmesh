@@ -39,10 +39,11 @@
 
 // Settings Tab IBOutlets
 @property (strong) IBOutlet AMPopUpView *videoDevicePopupView;
-@property (strong) IBOutlet AMPopUpView *videoInputSizePopupView;
+//@property (strong) IBOutlet AMPopUpView *videoInputSizePopupView;
 @property (strong) IBOutlet AMPopUpView *videoFormatPopupView;
 @property (strong) IBOutlet AMPopUpView *videoFrameRatePopupView;
 @property (strong) IBOutlet NSTextField *videoBitRateTextField;
+@property (strong) IBOutlet AMPopUpView *videoOutputSizePopupView;
 
 
 @property (strong) IBOutlet AMPopUpView *audioDevicePopupView;

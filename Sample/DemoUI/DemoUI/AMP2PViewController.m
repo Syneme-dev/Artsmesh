@@ -46,6 +46,12 @@ NSString *const AMP2PVideoReceiverChanged;
     
     _player = [AVPlayer playerWithURL:url];
     [_player addObserver:self forKeyPath:@"status" options:0 context:nil];
+    
+    
+   // AVPlayer *player = A configured AVPlayer ojbect;
+    CALayer *superlayer = [_glView layer];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+    [superlayer addSublayer:playerLayer];
 }
 
 -(void) observeValueForKeyPath:(NSString *)keyPath
@@ -53,14 +59,9 @@ NSString *const AMP2PVideoReceiverChanged;
                         change:(NSDictionary *)change
                        context:(void *)context{
     if ([keyPath isEqualToString:@"status"]){
-        AVPlayerStatus new = (AVPlayerStatus)change[NSKeyValueChangeNewKey];
-//      AVPlayerStatus old = (AVPlayerStatus)change[NSKeyValueChangeOldKey];
-//      if((old == AVPlayerStatusUnknown || old == AVPlayerStatusUnknown) && new == AVPlayerStatusReadyToPlay) {
-        if(new == AVPlayerStatusReadyToPlay){
-            [_player play];
-        }
+        [_player play];
     }else {
-            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
@@ -105,7 +106,6 @@ NSString *const AMP2PVideoReceiverChanged;
     
     NSArray* serverTitles = [self getP2PServerNames];
     [_serverTitlePopUpButton addItemsWithTitles:serverTitles];
-
 }
 
 -(NSArray*)getP2PServerNames
@@ -120,6 +120,8 @@ NSString *const AMP2PVideoReceiverChanged;
         
     return serverNames;
 }
+
+
 
 
 @end

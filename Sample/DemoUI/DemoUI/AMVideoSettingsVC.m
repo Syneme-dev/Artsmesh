@@ -532,7 +532,7 @@
     [self loadSettingsValues];
     
     if( [vidOutSizePref length] != 0 ) {
-        [self.videoOutputSizePopupView selectItemWithTitle:vidInSizePref];
+        [self.videoOutputSizePopupView selectItemWithTitle:vidOutSizePref];
     } else {
         [self.videoOutputSizePopupView selectItemAtIndex:0]; }
     

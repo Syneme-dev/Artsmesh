@@ -343,7 +343,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     
     NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
     NSString *selectedCodec = cfgs.videoCodec;
-    if ([selectedCodec isEqualToString:@"mpeg2"]) {
+    if ([selectedCodec isEqualToString:@"MPEG2"]) {
         vCodec = @"mpeg2video";
     }
     

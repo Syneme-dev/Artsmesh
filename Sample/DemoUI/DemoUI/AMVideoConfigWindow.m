@@ -83,10 +83,13 @@
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
     [self.roleSelecter addItemWithTitle:@"DUAL"];
+    [self.roleSelecter addItemWithTitle:@"YOUTUBE"];
+    [self.roleSelecter selectItemWithTitle:@"SENDER"];
     
-    [self.vidCodec addItemWithTitle:@"h.264"];
-    [self.vidCodec addItemWithTitle:@"mpeg2"];
-    [self.vidCodec selectItemWithTitle:@"h.264"];
+    [self.vidCodec addItemWithTitle:@"H.264"];
+    [self.vidCodec addItemWithTitle:@"MPEG2"];
+    [self.vidCodec addItemWithTitle:@"VP6"];
+    [self.vidCodec selectItemWithTitle:@"H.264"];
     
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
@@ -99,6 +102,8 @@
     
     self.useIpv6CheckboxView.title = @"USE IPV6";
     self.useIpv6CheckboxView.delegate = self;
+    
+    [self loadVidSettingsValues];
 }
 
 
@@ -435,6 +440,13 @@
             self.peerAddress.stringValue = mySelf.ipv6Address;
         }
     }
+}
+
+- (void)loadVidSettingsValues {
+    [self.vidOutSizeTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Out_Size]];
+    [self.vidFrameRateTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate]];
+    [self.vidBitRateTextField setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate]];
+    [self.vidCodec selectItemWithTitle:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format]];
 }
 
 

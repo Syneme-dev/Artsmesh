@@ -83,7 +83,6 @@
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
     [self.roleSelecter addItemWithTitle:@"DUAL"];
-    [self.roleSelecter addItemWithTitle:@"YOUTUBE"];
     [self.roleSelecter selectItemWithTitle:@"SENDER"];
     
     [self.vidCodec addItemWithTitle:@"H.264"];
@@ -133,6 +132,7 @@
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
     [self.peerSelecter addItemWithTitle:@"self"];
+    [self.peerSelecter addItemWithTitle:@"YouTube"];
     
     if (firstIndexInUserlist == -1) {
         //no one add to list except ip address
@@ -399,7 +399,14 @@
         self.peerAddress.stringValue = @"";
         self.peerName.stringValue = @"";
         
-    }else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
+    } else if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        [self.peerAddress setEnabled:NO];
+        [self.peerName setEnabled:NO];
+        
+        [self.peerAddress setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url]];
+        [self.peerName setStringValue:@"YouTube"];
+        
+    } else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
         [self.peerAddress setEnabled:NO];
         [self.peerName setEnabled:NO];
         

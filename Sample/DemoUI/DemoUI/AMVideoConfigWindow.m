@@ -290,6 +290,20 @@
     [theDropDown selectItemWithTitle:deviceName];
 }
 
+// Send video to YouTube using FFMPEG
+-(void)sendYouTube {
+    AMFFmpegConfigs *cfgs = [self getConfigs];
+    
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    
+    if(![ffmpeg streamToYouTube:cfgs]){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"ffmpeg YouTube stream failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"check your stream key and base url video preferences."];
+        [alert runModal];
+    }
+    
+    [self.window close];
+}
+
 // Send video to a second machine using FFMPEG
 -(void)sendP2P {
     
@@ -474,6 +488,59 @@
     return;
 }
 
+-(AMFFmpegConfigs *)getConfigs {
+    NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
+    if ([vidFrameRate length] < 1) {
+        vidFrameRate = @"30";
+    }
+    NSString *vidBitRate = [self.vidBitRateTextField stringValue];
+    if ([vidBitRate length] < 1) {
+        vidBitRate = @"800k";
+    }
+    
+    NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
+    if ([vidOutSize length] < 1) {
+        vidOutSize = @"1280x720";
+    }
+    
+    int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
+    
+    //Check Address for ipv6 & convert to that format, if desired
+    NSString *peerAddr = [self.peerAddress stringValue];
+    if (self.useIpv6CheckboxView.checked && ![self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
+    }
+    
+    //Set up ffmpeg configs
+    AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    
+    //YouTube-specific configs here
+    if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        //PROBLEM: Not currently storing integer value of selected audio preference from vid settings dropdown.  Need to find a way to grab that.
+        //int selectedAudioDevice = (int) [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Audio_In_Device];s
+        cfgs.audioDevice = @"0";
+        cfgs.audioCodec = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
+        cfgs.audioBitRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+        cfgs.audioSampleRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+        cfgs.streamName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Stream_Key];
+        cfgs.audioCodec = @"libmp3lame";
+        if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
+            cfgs.audioCodec = @"libvo_aacenc";
+        }
+    }
+    
+    [cfgs setSending:YES];
+    cfgs.videoOutSize = vidOutSize;
+    cfgs.videoFrameRate = vidFrameRate;
+    cfgs.videoBitRate = vidBitRate;
+    cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
+    cfgs.portOffset = self.portOffsetSelector.stringValue;
+    cfgs.videoCodec = self.vidCodec.stringValue;
+    cfgs.serverAddr = peerAddr;
+    
+    return cfgs;
+}
+
 
 - (BOOL)checkP2PVideoParams {
     AMCoreData* sharedStore = [AMCoreData shareInstance];
@@ -507,8 +574,13 @@
     }
     
     if ([self.roleSelecter.stringValue isEqualTo:@"SENDER"]) {
-        // Run FFMPEG to a second machine, given set params
-        [self sendP2P];
+        if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+            // Run FFMPEG to a second machine, given set params
+            [self sendYouTube];
+        } else {
+            // Run FFMPEG to a second machine, given set params
+            [self sendP2P];
+        }
         
     } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
         // Run FFPLAY on local machine to capture sent UDP video

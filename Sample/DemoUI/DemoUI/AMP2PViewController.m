@@ -16,7 +16,7 @@ NSString *const AMP2PVideoReceiverChanged;
 
 @interface AMP2PViewController ()
 
-@property (weak) IBOutlet AMSyphonView* glView;
+@property (weak) IBOutlet NSView* glView;
 //@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 @end
@@ -49,9 +49,8 @@ NSString *const AMP2PVideoReceiverChanged;
     
     
    // AVPlayer *player = A configured AVPlayer ojbect;
-    CALayer *superlayer = [_glView layer];
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-    [superlayer addSublayer:playerLayer];
+    [_glView setLayer:playerLayer];
 }
 
 -(void) observeValueForKeyPath:(NSString *)keyPath
@@ -68,7 +67,7 @@ NSString *const AMP2PVideoReceiverChanged;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
+    NSView *subView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
     [self.view addSubview:subView];
     
@@ -85,7 +84,7 @@ NSString *const AMP2PVideoReceiverChanged;
                                              options:0
                                              metrics:nil
                                                views:views]];
-    self.glView.drawTriangle = YES;
+//    self.glView.drawTriangle = YES;
 
     
     [self updateServerTitle];

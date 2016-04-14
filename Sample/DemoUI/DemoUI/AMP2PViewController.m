@@ -32,7 +32,7 @@ NSString *const AMP2PVideoReceiverChanged;
 
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
     NSString* serverURL = [NSString stringWithFormat:@"udp://%@", sender.selectedItem.title];
-    serverURL = @"http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
+//    serverURL = @"http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
     NSURL *url = [NSURL URLWithString:serverURL];
     
     // You may find a test stream at <http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8>.

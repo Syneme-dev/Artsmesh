@@ -377,12 +377,12 @@
         }
     }
     
-    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+/*    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
     
     if(![ffmpeg receiveP2P:cfgs]){
         NSAlert *alert = [NSAlert alertWithMessageText:@"ffplay failed to play stream!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];
         [alert runModal];
-    };
+    };*/
     
     [self.window close];
 }

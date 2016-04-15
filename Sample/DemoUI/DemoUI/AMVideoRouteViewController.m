@@ -121,19 +121,33 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
+    NSLog(@"remove device with ID: %@", deviceID);
+    NSLog(@"peerDevices are: %@", _videoManager.peerDevices);
     BOOL hasReceiver = NO;
+    BOOL isYouTube = NO;
     for (AMVideoDevice* device in _videoManager.peerDevices) {
+        NSLog(@"device id is: %@", device.deviceID);
+        NSLog(@"device id is: %@", device.processID);
+        NSLog(@"device role is: %@", device.role);
         if ([device.deviceID isEqualToString:deviceID]) {
-            [self stopChannelFFmpegProcess:device.processID];
-            [_videoManager.peerDevices removeObject:device];
-            
-            if ([device.role isEqualToString:kReceiverRole] ||
-                [device.role isEqualToString:kDualRole]){
-                hasReceiver = YES;
+            if ([device.processID length] != 0) {
+                if ([device.role isEqualToString:kReceiverRole] ||
+                    [device.role isEqualToString:kDualRole]){
+                    hasReceiver = YES;
+                }
+                [self stopChannelFFmpegProcess:device.processID];
+                [_videoManager.peerDevices removeObject:device];
+            } else {
+                //YouTube or (null) connection
+                isYouTube = YES;
             }
             //int index = ;
         }
         
+    }
+    if (isYouTube) {
+        [_ffmpegManager stopFFmpeg];
+        [_videoManager.peerDevices removeAllObjects];
     }
     if (hasReceiver) {
         [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];

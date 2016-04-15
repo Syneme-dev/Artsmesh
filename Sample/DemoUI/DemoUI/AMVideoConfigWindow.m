@@ -46,6 +46,8 @@
 
 @implementation AMVideoConfigWindow {
     NSTask *_ffmpegTask;
+    NSMutableArray *_audioDevices;
+    NSInteger _selectedAudioDevice;
 }
 
 -(instancetype) init{
@@ -72,6 +74,7 @@
 
 -(void)setUpUI
 {
+    _audioDevices = [[NSMutableArray alloc] init];
     [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
     [self.createBtn.layer setBorderWidth:1.0];
@@ -236,6 +239,7 @@
     
     if([data length]) {
         NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
+        NSMutableArray *tempAudioDevices = [[NSMutableArray alloc] init];
         
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
@@ -255,6 +259,11 @@
                     
                     [tempVidDevices addObject:deviceString];
                     
+                } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the audio device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [tempAudioDevices addObject:deviceString];
                 }
                 
                 //Find video device line
@@ -277,6 +286,14 @@
             [self.deviceSelector addItemsWithTitles:videoDevicesToInsert];
             
             [self selectDevice:self.deviceSelector :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Device]];
+        }
+        if ([tempAudioDevices count] > 0) {
+            NSArray *audioDevicesToInsert = [tempAudioDevices copy];
+            
+            [_audioDevices removeAllObjects];
+            [_audioDevices addObjectsFromArray:audioDevicesToInsert];
+            
+            _selectedAudioDevice = [_audioDevices indexOfObject:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_In_Device]];
         }
         
         [outputFile waitForDataInBackgroundAndNotify];
@@ -504,6 +521,11 @@
     }
     
     int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
+    int selectedAudioDevice = (int) _selectedAudioDevice;
+    
+    if (selectedAudioDevice < 0) {
+        selectedAudioDevice = 0;
+    }
     
     //Check Address for ipv6 & convert to that format, if desired
     NSString *peerAddr = [self.peerAddress stringValue];
@@ -518,7 +540,7 @@
     if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
         //PROBLEM: Not currently storing integer value of selected audio preference from vid settings dropdown.  Need to find a way to grab that.
         //int selectedAudioDevice = (int) [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Audio_In_Device];s
-        cfgs.audioDevice = @"0";
+        cfgs.audioDevice = [NSString stringWithFormat:@"%d",selectedAudioDevice];
         cfgs.audioCodec = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
         cfgs.audioBitRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
         cfgs.audioSampleRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];

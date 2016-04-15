@@ -121,15 +121,21 @@ shouldRemoveDevice:(NSString *)deviceID;
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
+    NSLog(@"remove device with ID: %@", deviceID);
     BOOL hasReceiver = NO;
     for (AMVideoDevice* device in _videoManager.peerDevices) {
         if ([device.deviceID isEqualToString:deviceID]) {
+            if ([device.processID length] != 0) {
             [self stopChannelFFmpegProcess:device.processID];
             [_videoManager.peerDevices removeObject:device];
             
             if ([device.role isEqualToString:kReceiverRole] ||
                 [device.role isEqualToString:kDualRole]){
                 hasReceiver = YES;
+            }
+            } else {
+                //YouTube connection, kill all ffmpeg streams
+                [_ffmpegManager stopFFmpeg];
             }
             //int index = ;
         }

@@ -304,7 +304,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
                                 cfgs.videoOutSize,
                                 cfgs.serverAddr,
                                 cfgs.streamName];
-    //NSLog(@"%@", command);
+    NSLog(@"%@", command);
     
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:AMVIDEOYouTubeStreamNotification object:nil];

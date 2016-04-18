@@ -46,6 +46,8 @@
 
 @implementation AMVideoConfigWindow {
     NSTask *_ffmpegTask;
+    NSMutableArray *_audioDevices;
+    NSInteger _selectedAudioDevice;
 }
 
 -(instancetype) init{
@@ -72,6 +74,7 @@
 
 -(void)setUpUI
 {
+    _audioDevices = [[NSMutableArray alloc] init];
     [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
     [self.createBtn.layer setBorderWidth:1.0];
@@ -83,7 +86,6 @@
     [self.roleSelecter addItemWithTitle:@"SENDER"];
     [self.roleSelecter addItemWithTitle:@"RECEIVER"];
     [self.roleSelecter addItemWithTitle:@"DUAL"];
-    [self.roleSelecter addItemWithTitle:@"YOUTUBE"];
     [self.roleSelecter selectItemWithTitle:@"SENDER"];
     
     [self.vidCodec addItemWithTitle:@"H.264"];
@@ -133,6 +135,7 @@
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
     [self.peerSelecter addItemWithTitle:@"self"];
+    [self.peerSelecter addItemWithTitle:@"YouTube"];
     
     if (firstIndexInUserlist == -1) {
         //no one add to list except ip address
@@ -236,6 +239,7 @@
     
     if([data length]) {
         NSMutableArray *tempVidDevices = [[NSMutableArray alloc] init];
+        NSMutableArray *tempAudioDevices = [[NSMutableArray alloc] init];
         
         NSString *temp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
@@ -255,6 +259,11 @@
                     
                     [tempVidDevices addObject:deviceString];
                     
+                } else if (isAudioDeviceLine == YES && [line rangeOfString:@"devices:"].location == NSNotFound) {
+                    //Handle the audio device string
+                    NSString *deviceString = [[modifiedString componentsSeparatedByString:@"||"] lastObject];
+                    
+                    [tempAudioDevices addObject:deviceString];
                 }
                 
                 //Find video device line
@@ -278,6 +287,14 @@
             
             [self selectDevice:self.deviceSelector :[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_In_Device]];
         }
+        if ([tempAudioDevices count] > 0) {
+            NSArray *audioDevicesToInsert = [tempAudioDevices copy];
+            
+            [_audioDevices removeAllObjects];
+            [_audioDevices addObjectsFromArray:audioDevicesToInsert];
+            
+            _selectedAudioDevice = [_audioDevices indexOfObject:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_In_Device]];
+        }
         
         [outputFile waitForDataInBackgroundAndNotify];
     }
@@ -288,6 +305,20 @@
     [theDropDown selectItemAtIndex:0];
     
     [theDropDown selectItemWithTitle:deviceName];
+}
+
+// Send video to YouTube using FFMPEG
+-(void)sendYouTube {
+    AMFFmpegConfigs *cfgs = [self getConfigs];
+    
+    AMFFmpeg *ffmpeg = [[AMFFmpeg alloc] init];
+    
+    if(![ffmpeg streamToYouTube:cfgs]){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"ffmpeg YouTube stream failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"check your stream key and base url video preferences."];
+        [alert runModal];
+    }
+    
+    [self.window close];
 }
 
 // Send video to a second machine using FFMPEG
@@ -399,7 +430,14 @@
         self.peerAddress.stringValue = @"";
         self.peerName.stringValue = @"";
         
-    }else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
+    } else if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        [self.peerAddress setEnabled:NO];
+        [self.peerName setEnabled:NO];
+        
+        [self.peerAddress setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url]];
+        [self.peerName setStringValue:@"YouTube"];
+        
+    } else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
         [self.peerAddress setEnabled:NO];
         [self.peerName setEnabled:NO];
         
@@ -467,6 +505,64 @@
     return;
 }
 
+-(AMFFmpegConfigs *)getConfigs {
+    NSString *vidFrameRate = [self.vidFrameRateTextField stringValue];
+    if ([vidFrameRate length] < 1) {
+        vidFrameRate = @"30";
+    }
+    NSString *vidBitRate = [self.vidBitRateTextField stringValue];
+    if ([vidBitRate length] < 1) {
+        vidBitRate = @"800k";
+    }
+    
+    NSString *vidOutSize = [self.vidOutSizeTextField stringValue];
+    if ([vidOutSize length] < 1) {
+        vidOutSize = @"1280x720";
+    }
+    
+    int selectedVidDevice = (int) self.deviceSelector.indexOfSelectedItem;
+    int selectedAudioDevice = (int) _selectedAudioDevice;
+    
+    if (selectedAudioDevice < 0) {
+        selectedAudioDevice = 0;
+    }
+    
+    //Check Address for ipv6 & convert to that format, if desired
+    NSString *peerAddr = [self.peerAddress stringValue];
+    if (self.useIpv6CheckboxView.checked && ![self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
+    }
+    
+    //Set up ffmpeg configs
+    AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
+    
+    //YouTube-specific configs here
+    if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        //PROBLEM: Not currently storing integer value of selected audio preference from vid settings dropdown.  Need to find a way to grab that.
+        //int selectedAudioDevice = (int) [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Audio_In_Device];s
+        cfgs.audioDevice = [NSString stringWithFormat:@"%d",selectedAudioDevice];
+        cfgs.audioCodec = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
+        cfgs.audioBitRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
+        cfgs.audioSampleRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
+        cfgs.streamName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Stream_Key];
+        cfgs.audioCodec = @"libmp3lame";
+        if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
+            cfgs.audioCodec = @"libvo_aacenc";
+        }
+    }
+    
+    [cfgs setSending:YES];
+    cfgs.videoOutSize = vidOutSize;
+    cfgs.videoFrameRate = vidFrameRate;
+    cfgs.videoBitRate = vidBitRate;
+    cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
+    cfgs.portOffset = self.portOffsetSelector.stringValue;
+    cfgs.videoCodec = self.vidCodec.stringValue;
+    cfgs.serverAddr = peerAddr;
+    
+    return cfgs;
+}
+
 
 - (BOOL)checkP2PVideoParams {
     AMCoreData* sharedStore = [AMCoreData shareInstance];
@@ -500,8 +596,13 @@
     }
     
     if ([self.roleSelecter.stringValue isEqualTo:@"SENDER"]) {
-        // Run FFMPEG to a second machine, given set params
-        [self sendP2P];
+        if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+            // Run FFMPEG to a second machine, given set params
+            [self sendYouTube];
+        } else {
+            // Run FFMPEG to a second machine, given set params
+            [self sendP2P];
+        }
         
     } else if ([self.roleSelecter.stringValue isEqualTo:@"RECEIVER"]) {
         // Run FFPLAY on local machine to capture sent UDP video

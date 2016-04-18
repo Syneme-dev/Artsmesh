@@ -268,6 +268,7 @@
 		4F2E48D81C0DA29000B48708 /* AMVideoConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */; };
 		4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61FF6F1CB6688900D11143 /* AVKit.framework */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
+		4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
 		4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F7E663B1BE200FA006606D0 /* TL_TCPSyphonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7E663A1BE200FA006606D0 /* TL_TCPSyphonSDK.framework */; };
@@ -964,6 +965,7 @@
 		4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoConfigWindow.xib; sourceTree = "<group>"; };
 		4F61FF6F1CB6688900D11143 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
 		4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libturbojpeg.0.dylib; sourceTree = "<group>"; };
@@ -1158,6 +1160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */,
 				4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */,
 				4FA1E69F1C00959D0007E33C /* CoreVideo.framework in Frameworks */,
 				4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */,
@@ -1752,6 +1755,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */,
 				4F61FF6F1CB6688900D11143 /* AVKit.framework */,
 				4FA1E69E1C00959D0007E33C /* CoreVideo.framework */,
 				4F7E663A1BE200FA006606D0 /* TL_TCPSyphonSDK.framework */,

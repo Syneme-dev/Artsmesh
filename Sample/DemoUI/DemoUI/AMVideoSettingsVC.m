@@ -480,7 +480,7 @@
     videoOutputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
     videoOutputSizes = [[NSArray alloc] initWithArray:videoOutputSizes];
     videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
-    videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"MPEG2", @"VP6", nil];
+    videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"MPEG2", nil];
     audioFormats = [[NSArray alloc] initWithObjects:@"MP3", @"AAC", nil];
     audioSampleRates = [[NSArray alloc] initWithObjects:@"48000", @"44100", nil];
     audioBitRates = [[NSArray alloc] initWithObjects:@"320", @"256", @"224", @"192", @"160", @"128", nil];

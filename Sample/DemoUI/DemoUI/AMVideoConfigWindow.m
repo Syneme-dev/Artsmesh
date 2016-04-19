@@ -90,7 +90,6 @@
     
     [self.vidCodec addItemWithTitle:@"H.264"];
     [self.vidCodec addItemWithTitle:@"MPEG2"];
-    [self.vidCodec addItemWithTitle:@"VP6"];
     [self.vidCodec selectItemWithTitle:@"H.264"];
     
     [self.peerAddress setEnabled:NO];
@@ -557,7 +556,10 @@
     cfgs.videoBitRate = vidBitRate;
     cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
     cfgs.portOffset = self.portOffsetSelector.stringValue;
-    cfgs.videoCodec = self.vidCodec.stringValue;
+    cfgs.videoCodec = @"libx264";
+    if ( [self.vidCodec.stringValue isEqualToString:@"MPEG2"] ) {
+        cfgs.videoCodec = @"mpeg2video";
+    }
     cfgs.serverAddr = peerAddr;
     
     return cfgs;

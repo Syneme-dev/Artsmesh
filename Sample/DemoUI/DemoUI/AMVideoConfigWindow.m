@@ -90,7 +90,6 @@
     
     [self.vidCodec addItemWithTitle:@"H.264"];
     [self.vidCodec addItemWithTitle:@"MPEG2"];
-    [self.vidCodec addItemWithTitle:@"VP6"];
     [self.vidCodec selectItemWithTitle:@"H.264"];
     
     [self.peerAddress setEnabled:NO];
@@ -423,6 +422,7 @@
 - (void)peerSelectedChanged:(AMPopUpView *)sender
 {
     if ([self.peerSelecter.stringValue isEqualToString:@"ip address"]) {
+        [self resetVidCodecs];
         
         [self.peerAddress setEnabled:YES];
         [self.peerName setEnabled:YES];
@@ -437,7 +437,14 @@
         [self.peerAddress setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url]];
         [self.peerName setStringValue:@"YouTube"];
         
+        // Make sure only viable YouTube video options are selectable as output formats
+        [self.vidCodec removeAllItems];
+        [self.vidCodec addItemWithTitle:@"H.264"];
+        [self.vidCodec selectItemWithTitle:@"H.264"];
+        
     } else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
+        [self resetVidCodecs];
+        
         [self.peerAddress setEnabled:NO];
         [self.peerName setEnabled:NO];
         
@@ -464,6 +471,8 @@
         self.peerName.stringValue = self.peerSelecter.stringValue;
     } else {
         //self selected
+        [self resetVidCodecs];
+        
         AMCoreData* sharedStore = [AMCoreData shareInstance];
         AMLiveUser* mySelf = sharedStore.mySelf;
         
@@ -478,6 +487,14 @@
             self.peerAddress.stringValue = mySelf.ipv6Address;
         }
     }
+}
+
+- (void)resetVidCodecs {
+    [self.vidCodec removeAllItems];
+    
+    [self.vidCodec addItemWithTitle:@"H.264"];
+    [self.vidCodec addItemWithTitle:@"MPEG2"];
+    [self.vidCodec selectItemWithTitle:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format]];
 }
 
 - (void)loadVidSettingsValues {
@@ -557,7 +574,10 @@
     cfgs.videoBitRate = vidBitRate;
     cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
     cfgs.portOffset = self.portOffsetSelector.stringValue;
-    cfgs.videoCodec = self.vidCodec.stringValue;
+    cfgs.videoCodec = @"libx264";
+    if ( [self.vidCodec.stringValue isEqualToString:@"MPEG2"] ) {
+        cfgs.videoCodec = @"mpeg2video";
+    }
     cfgs.serverAddr = peerAddr;
     
     return cfgs;

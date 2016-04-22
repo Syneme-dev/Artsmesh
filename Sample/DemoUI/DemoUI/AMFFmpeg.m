@@ -45,7 +45,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:none\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:none\" -c:v %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
@@ -292,7 +292,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -vcodec %@ -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,

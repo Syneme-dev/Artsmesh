@@ -88,6 +88,9 @@ html {
     width: 500px !important;
     right: 4px !important;
 }
+#nav_timeline_personal{
+    display:none;
+}
 
 #nav_doc_google{
     display: none !important;

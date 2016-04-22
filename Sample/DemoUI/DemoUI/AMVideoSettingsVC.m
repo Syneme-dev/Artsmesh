@@ -477,7 +477,7 @@
 -(void)loadSettingsValues {
     [self populateDevicesList];
     
-    videoOutputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"720x480",@"480x360", nil];
+    videoOutputSizes = [[NSArray alloc] initWithObjects:@"1920x1080",@"1280x720",@"854x480",@"640x360",@"426x240", nil];
     videoOutputSizes = [[NSArray alloc] initWithArray:videoOutputSizes];
     videoFrameRates = [[NSArray alloc] initWithObjects:@"60.00",@"59.94",@"30.00",@"29.97",@"25.00",@"24.00",@"20.00",@"15.00", nil];
     videoFormats = [[NSArray alloc] initWithObjects:@"H.264", @"MPEG2", nil];

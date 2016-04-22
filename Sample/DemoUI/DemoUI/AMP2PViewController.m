@@ -66,11 +66,13 @@ NSString *const naluTypesStrings[] =
 @property (nonatomic, assign) int                           ppsSize;
 
 
+
 @end
 
 @implementation AMP2PViewController
 {
-    AVPlayer*       _player;
+    AVPlayer*                       _player;
+    AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
 }
 
 - (void) dealloc{
@@ -110,9 +112,24 @@ NSString *const naluTypesStrings[] =
     }
 }
 
+
+- (void) render:(CMSampleBufferRef)sampleBuffer
+{
+    // [_avDisplayLayer enqueueSampleBuffer:sampleBuffer];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+   
+    
+    
+
+    
+    
     NSView *subView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
     [self.view addSubview:subView];
@@ -139,6 +156,25 @@ NSString *const naluTypesStrings[] =
                   selector:@selector(updateServerTitle)
                       name:AMP2PVideoReceiverChanged
                     object:nil];
+    
+    
+    // Since we're using AVSampleBufferDisplayLayer, init the layer like this:
+    // create our AVSampleBufferDisplayLayer and add it to the view
+    _avsbDisplayLayer = [[AVSampleBufferDisplayLayer alloc] init];
+    _avsbDisplayLayer.frame = self.view.frame;
+    _avsbDisplayLayer.bounds = self.view.bounds;
+    _avsbDisplayLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    
+    // set Timebase, you may need this if you need to display frames at specific times
+    // Maybe not working, since I haven't verified wheterh the timebase is working
+    CMTimebaseRef controlTimebase;
+    CMTimebaseCreateWithMasterClock(CFAllocatorGetDefault(), CMClockGetHostTimeClock(), &controlTimebase);
+    
+    //videoLayer.controlTimebase = controlTimebase;
+    CMTimebaseSetTime(self.videoLayer.controlTimebase, kCMTimeZero);
+    CMTimebaseSetRate(self.videoLayer.controlTimebase, 1.0);
+    
+    [self.glView setLayer:_avsbDisplayLayer];
 
 }
 

@@ -402,7 +402,7 @@
     
     NSString *audioCodecFlag = @"libmp3lame";
     if ([audFormatPref isEqualToString:@"AAC"]) {
-        audioCodecFlag = @"libvo_aacenc";
+        audioCodecFlag = @"aac";
     }
     NSString *ffmpegVidOutDimensions = vidOutSizePref;
     

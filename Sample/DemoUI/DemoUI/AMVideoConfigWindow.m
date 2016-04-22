@@ -564,7 +564,7 @@
         cfgs.streamName = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Stream_Key];
         cfgs.audioCodec = @"libmp3lame";
         if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
-            cfgs.audioCodec = @"libvo_aacenc";
+            cfgs.audioCodec = @"aac";
         }
     }
     

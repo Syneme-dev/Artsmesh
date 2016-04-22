@@ -8,6 +8,10 @@
 
 #import "AMFFmpeg.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
+#import "AMLogger/AMLogger.h"
+
+NSString * const AMVIDEOP2PNotification = @"AMVIDEOP2PNotification";
+NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotification";
 
 @implementation AMFFmpeg {
     NSTask *_ffmpegTask;
@@ -41,7 +45,7 @@
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:0\" -vcodec %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:none\" -c:v %@ -b:v %@ -an -f mpegts -threads 8 udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
@@ -52,9 +56,17 @@
                                 [self getPort:cfgs.portOffset]];
     //NSLog(@"%@", command);
     
+    AMLog(kAMInfoLog, @"AMVideo", @"starting ffmpeg p2p send..");
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [command appendFormat:@" > %@/Video.log 2>&1", systemLogPath];
+    
     if (![self launchTask:command andLogPID:YES]) {
         return NO;
-    } else { return YES; }
+    } else {
+        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:AMVIDEOP2PNotification object:nil];
+        return YES; }
 }
 
 -(BOOL)receiveP2P:(AMFFmpegConfigs *)cfgs {
@@ -162,9 +174,45 @@
         
     }
 }
+- (BOOL) stopAllFFmpegInstances:(NSArray*) processes{
+    if ([processes count] <= 0) {
+        return NO;
+    }
+    NSMutableString* command = nil;
+    for(int i = 0; i < [processes count]; i++){
+        if (i == 0) {
+            command = [NSMutableString stringWithFormat:
+                                        @"kill %@ ", [processes objectAtIndex:i]];
+        }
+        [command appendFormat:@"%@ ",[processes objectAtIndex:i]];
+    }
+    
+    AMLog(kAMInfoLog, @"AMVideo", @"Stopping all ffmpeg instances..");
+    //NSLog(@"Stopping ffmpeg instance with PID of %@", command);
+    
+    /** Execute the NSTask to kill the specific ffmpeg instance by PID*/
+
+    
+    _stopFFMpegTask = nil;
+    _stopFFMpegTask = [[NSTask alloc] init];
+    _stopFFMpegTask.launchPath = @"/bin/bash";
+    _stopFFMpegTask.arguments = @[@"-c", [command copy]];
+    _stopFFMpegTask.terminationHandler = ^(NSTask* t){
+    };
+    //   sleep(2);
+    
+    [_stopFFMpegTask launch];
+    
+    /** Update stored prefs to remove said instance using the PID key **/
+    for (NSString* processID in processes) {
+        [self removeProcessFromPrefs:processID];
+    }
+    
+     return YES;
+}
 
 -(BOOL)stopFFmpegInstance: (NSString *)processID {
-    NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
+    //NSLog(@"Stopping ffmpeg instance with PID of %@", processID);
     /** Execute the NSTask to kill the specific ffmpeg instance by PID **/
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"kill %@",processID];
@@ -175,7 +223,9 @@
     _stopFFMpegTask.terminationHandler = ^(NSTask* t){
         
     };
-    sleep(2);
+ //   sleep(2);
+    
+    AMLog(kAMInfoLog, @"AMVideo", [NSString stringWithFormat:@"Stopping ffmpeg instance with PID of %@", processID]);
     
     [_stopFFMpegTask launch];
     
@@ -190,6 +240,9 @@
     
     NSMutableString *command = [NSMutableString stringWithFormat:
                                 @"killall ffmpeg"];
+    
+    AMLog(kAMInfoLog, @"AMVideo", @"Stopping all ffmpeg instances..");
+    
     _stopFFMpegTask = nil;
     _stopFFMpegTask = [[NSTask alloc] init];
     _stopFFMpegTask.launchPath = @"/bin/bash";
@@ -239,11 +292,12 @@
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -vcodec libx264 -b:v %@k -preset fast -acodec %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,
                                 cfgs.audioDevice,
+                                cfgs.videoCodec,
                                 cfgs.videoBitRate,
                                 cfgs.audioCodec,
                                 cfgs.audioBitRate,
@@ -251,7 +305,16 @@
                                 cfgs.videoOutSize,
                                 cfgs.serverAddr,
                                 cfgs.streamName];
-    //NSLog(@"%@", command);
+    NSLog(@"%@", command);
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:AMVIDEOYouTubeStreamNotification object:nil];
+    
+    AMLog(kAMInfoLog, @"AMVideo", @"starting ffmpeg YouTube send..");
+    
+    NSString *systemLogPath = AMLogDirectory();
+    [command appendFormat:@" > %@/Video.log 2>&1", systemLogPath];
+    
     _ffmpegTask = [[NSTask alloc] init];
     _ffmpegTask.launchPath = @"/bin/bash";
     _ffmpegTask.arguments = @[@"-c", [command copy]];
@@ -281,7 +344,7 @@
     
     NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
     NSString *selectedCodec = cfgs.videoCodec;
-    if ([selectedCodec isEqualToString:@"mpeg2"]) {
+    if ([selectedCodec isEqualToString:@"MPEG2"]) {
         vCodec = @"mpeg2video";
     }
     

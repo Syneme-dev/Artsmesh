@@ -8,6 +8,10 @@
 
 #import "AMChannel.h"
 
+ NSString* kSenderRole     = @"SENDER";
+ NSString* kReceiverRole   = @"RECEIVER";
+ NSString* kDualRole       = @"DUAL";
+
 @implementation AMChannel
 
 - (instancetype)init

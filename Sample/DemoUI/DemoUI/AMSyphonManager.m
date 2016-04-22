@@ -8,6 +8,9 @@
 
 #import "AMSyphonManager.h"
 
+#pragma mark -
+#pragma   mark AMSyphonName implementation
+
 @implementation AMSyphonName
 
 +(NSString*) AMRouterName
@@ -28,6 +31,9 @@
 
 @end
 
+
+#pragma mark -
+#pragma   mark AMSyphonManager implementation
 @implementation AMSyphonManager
 {
     NSMutableArray* _syClients;
@@ -35,7 +41,7 @@
     AMSyphonTearOffController*      _syTearOff;
 }
 
-- (id) initWithClientCount : (int) cnt
+- (id) initWithClientCount : (NSUInteger) cnt
 {
     if(self = [super init]){
         NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
@@ -64,9 +70,6 @@
 }
 
 
-
-#pragma mark -
-#pragma   mark KVO
 - (void) observeValueForKeyPath:(NSString *)keyPath
                        ofObject:(id)object
                          change:(NSDictionary *)change
@@ -82,7 +85,7 @@
     }
 }
 
--(NSView*)clientViewByIndex:(int)index
+-(NSView*)clientViewByIndex:(NSUInteger)index
 {
     if(index >= [_syClients count]){
         return nil;
@@ -113,7 +116,7 @@
     [_syServer  stopRouter];
 }
 
--(void)selectClient:(int)index
+-(void)selectClient:(NSUInteger)index
 {
     if(index >= [_syClients count]){
         return;
@@ -148,5 +151,57 @@
 {
     return [_syServer routing];
 }
+
+@end
+
+
+#pragma mark -
+#pragma mark AMP2PViewManager implementation
+@implementation AMP2PViewManager
+{
+    NSMutableArray*                 _p2pClients;
+}
+
+- (id) initWithClientCount : (NSUInteger) cnt
+{
+    if(self = [super init]){
+        NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.videoFramework"];
+        
+        _p2pClients = [[NSMutableArray alloc] init];
+        for(int i = 0; i < cnt; i++){
+            AMP2PViewController* p2pContorller =  [[AMP2PViewController alloc]
+                                                      initWithNibName:@"AMP2PViewController" bundle:myBundle];
+            [_p2pClients addObject:p2pContorller];
+        }
+    }
+    
+    return self;
+}
+
+
+-(NSView*)clientViewByIndex:(NSUInteger)index
+{
+    
+    if(index >= [_p2pClients count]){
+        return nil;
+    }
+    
+    AMP2PViewController* p2pContorller = [_p2pClients objectAtIndex:index];
+    return p2pContorller.view;
+}
+
+-(BOOL)startRouter{
+    
+    return YES;
+}
+
+-(void)stopRouter{
+    
+}
+
+-(void)stopAll{
+    
+}
+
 
 @end

@@ -15,8 +15,7 @@
 @property (strong) IBOutlet NSButton *generalTabBtn;
 @property (strong) IBOutlet NSButton *jackTabBtn;
 @property (strong) IBOutlet NSButton *jacktripTabBtn;
-
-
+@property (strong) IBOutlet NSButton *videoTabBtn;
 @property (weak) IBOutlet NSButton *oscGroupTabBtn;
 @property (strong) IBOutlet NSButton *accountTabBtn;
 

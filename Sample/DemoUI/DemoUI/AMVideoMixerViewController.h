@@ -11,6 +11,7 @@
 
 @interface AMVideoMixerViewController : NSViewController
 
-@property (strong, nonatomic) AMSyphonManager *syphonManager;
+@property (strong, nonatomic) AMSyphonManager*  syphonManager;
+@property (strong, nonatomic) AMP2PViewManager* p2pViewManager;
 
 @end

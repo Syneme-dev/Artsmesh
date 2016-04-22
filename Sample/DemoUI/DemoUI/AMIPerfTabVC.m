@@ -79,6 +79,9 @@
             [command appendFormat:@" -p %d", (int)cfg.port];
         }
         
+        if (cfg.len > 0) {
+            [command appendFormat:@" -l %d", (int)cfg.len];
+        }
         
         if (self.useIPV6Check.checked) {
             [command appendFormat:@" -V"];
@@ -101,7 +104,7 @@
         }
         
         if (cfg.len > 0) {
-            [command appendFormat:@" -l %dK", (int)cfg.len];
+            [command appendFormat:@" -l %d", (int)cfg.len];
         }
         
         if (cfg.port > 0) {
@@ -171,6 +174,10 @@
         
     }
 
+}
+
+- (void)viewWillDisappear{
+    [self stopiPerf];
 }
 
 -(void)stopiPerf

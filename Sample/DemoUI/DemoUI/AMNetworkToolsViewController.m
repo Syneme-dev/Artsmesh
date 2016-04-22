@@ -20,6 +20,7 @@
 #import "AMPingTabVC.h"
 #import "AMTraceRouteTabVC.h"
 #import "AMNetworkingToolVC.h"
+#import "AMFFmpeg.h"
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -44,6 +45,8 @@
 @property (weak) IBOutlet AMRatioButtonView *ratioJackAudio;
 @property (weak) IBOutlet AMRatioButtonView *ratioAMServer;
 @property (weak) IBOutlet AMRatioButtonView *ratioArtsmesh;
+@property (weak) IBOutlet AMRatioButtonView *ratioVideo;
+
 @property (weak) IBOutlet AMFoundryFontView *searchField;
 
 
@@ -77,6 +80,7 @@
     [self.ratioJackAudio    setChecked:NO];
     [self.ratioAMServer     setChecked:NO];
     [self.ratioArtsmesh     setChecked:NO];
+    [self.ratioVideo        setChecked:NO];
 }
 
 
@@ -153,12 +157,15 @@
     self.ratioJackAudio.delegate    = self;
     self.ratioAMServer.delegate     = self;
     self.ratioArtsmesh.delegate     = self;
+    self.ratioVideo.delegate        = self;
     
     self.ratioOSCServer.title    = kAMOSCServerTitle;
     self.ratioOSCClient.title    = kAMOSCClientTitle;
     self.ratioJackAudio.title    = kAMJackAudioTitle;
     self.ratioAMServer.title     = kAMAMServerTitle;
     self.ratioArtsmesh.title     = kAMArtsmeshTitle;
+    self.ratioVideo.title        = kVideoTitle;
+    
     
     _titleMapLogFile             = [NSDictionary dictionaryWithObjectsAndKeys:
                                     kAMOSCServerFile,       kAMOSCServerTitle,
@@ -166,6 +173,8 @@
                                     kAMJackAudioFile,       kAMJackAudioTitle,
                                     kAMAMServerFile,        kAMAMServerTitle,
                                     kAMArtsmeshFile,        kAMArtsmeshTitle,
+                                    kVideoFile,
+                                        kVideoTitle,
                                     nil];
     
    /* [self.logTextView setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.logTextView.font.pointSize]];*/
@@ -192,6 +201,14 @@
     [nc addObserver:self
            selector:@selector(ipv6CheckedF:)
                name:AMIPV6CHECKFALSENotification
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(refreshVideoLog:)
+               name:AMVIDEOP2PNotification
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(refreshVideoLog:)
+               name:AMVIDEOYouTubeStreamNotification
              object:nil];
 
     [self registerTabButtons];
@@ -222,6 +239,13 @@
 - (void)ipv6CheckedF:(NSNotification *)notification
 {
     _ipv6Checked = FALSE;
+}
+
+- (void)refreshVideoLog:(NSNotification *)notification
+{
+    NSLog(@"refresh network view..");
+    [self onChecked:self.ratioVideo];
+    self.logTextView.needsDisplay = YES;
 }
 
 - (IBAction)ping:(id)sender

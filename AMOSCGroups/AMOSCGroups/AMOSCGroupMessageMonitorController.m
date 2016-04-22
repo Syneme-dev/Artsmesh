@@ -93,6 +93,7 @@
 @end
 
 @interface AMOSCGroupMessageMonitorController ()<NSTableViewDataSource, NSTableViewDelegate, AMOSCClientDelegate, AMCheckBoxDelegeate, AMPopUpViewDelegeate, NSTextFieldDelegate>
+@property (weak) IBOutlet AMCheckBoxView *useIPV6Check;
 @property (weak) IBOutlet NSTableView *oscMsgTable;
 @property NSMutableArray* oscMessageLogs;
 @property NSMutableArray* oscMessageSearchResults;
@@ -132,9 +133,13 @@
     //self define ip field
     [self.selfDefServer setHidden:YES];
     
-    //Ser OnOff Checkbox
+    //Set OnOff Checkbox
     self.onOffBox.title = @"ON";
     self.onOffBox.delegate = self;
+    
+    //Set IPV6 checkbox
+    self.useIPV6Check.title     = @"IPV6";
+    self.useIPV6Check.delegate  = self;
     
     //Set search field
     self.searchField.delegate = self;
@@ -234,14 +239,25 @@
             }
         }
         
+        bool tryIPV6 = self.useIPV6Check.checked ? YES : NO;
+
+            
         NSString *serverAddr;
         if ([self.serverSelector.stringValue isEqualToString:@"Self Define"]) {
             serverAddr = self.selfDefServer.stringValue;
             
         }else if ([self.serverSelector.stringValue isEqualToString:@"Artsmesh.io"]){
-            serverAddr = [[NSUserDefaults standardUserDefaults]
-                          stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
-            
+            if (tryIPV6) {
+                NSString* tmp1 = [[NSUserDefaults standardUserDefaults]
+                                  stringForKey:Preference_Key_General_GlobalServerAddrIpv6];
+                NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+                
+                serverAddr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+                
+            }else{
+                serverAddr = [[NSUserDefaults standardUserDefaults]
+                              stringForKey:Preference_Key_General_GlobalServerAddrIpv4];
+            }
         }else{
             for (AMLiveUser *user in _usersRunOscSrv) {
                 if ([user.nickName isEqualToString:self.serverSelector.stringValue]) {
@@ -254,14 +270,32 @@
                         }
                     }
                     
+                    //Add for ipv6 checkbox
+                    NSString* userIPV6Addr = nil;
+                    if (tryIPV6 &&  user.isIPV6 &&  [user.ipv6Address length] > 1) {
+                        NSString* tmp1 = user.ipv6Address;
+                        NSString* tmp2  = [tmp1 stringByReplacingOccurrencesOfString:@"[" withString:@""];
+                        
+                        userIPV6Addr = [tmp2 stringByReplacingOccurrencesOfString:@"]" withString:@""];
+                    }
                     if (bFind) {
-                        serverAddr = user.privateIp;
+                        if (tryIPV6 && user.isIPV6 && userIPV6Addr != nil) {
+                            serverAddr = userIPV6Addr;
+                        }else{
+                            serverAddr = user.privateIp;
+                        }
                     }else{
-                        serverAddr = user.publicIp;
+                        if (tryIPV6 && user.isIPV6 && userIPV6Addr != nil) {
+                            serverAddr = userIPV6Addr;
+                        }else{
+                            serverAddr = user.publicIp;
+                        }
                     }
                 }
             }
         }
+        
+        
         
         [[AMOSCGroups sharedInstance] startOSCGroupClient:serverAddr groupName:self.groupNameField.stringValue];
         [self.serverSelector setEnabled:NO];
@@ -272,11 +306,11 @@
         [self.groupNameField setEnabled:NO];
         [self.onOffBox setEnabled:NO];
         
-        self.onOffBox.title = @"Off";
+        //self.onOffBox.title = @"Off";
     }else{
         
         [[AMOSCGroups sharedInstance] stopOSCGroupClient];
-        self.onOffBox.title = @"On";
+        self.onOffBox.title = @"ON";
         
         [self.serverSelector setEnabled:YES];
         [self.selfDefServer setEnabled:YES];
@@ -371,7 +405,13 @@
     [self.serverSelector addItemWithTitle:@"Artsmesh.io"];
     [self.serverSelector addItemWithTitle:@"Self Define"];
     for (AMLiveUser *user in _usersRunOscSrv) {
-        [self.serverSelector addItemWithTitle:user.nickName];
+        if(self.useIPV6Check.checked) { // IPV6 checkbox is on
+            if(user.isIPV6){    //Make sure the user is a valid ipv6
+                [self.serverSelector addItemWithTitle:user.nickName];
+            }
+        }else{ //ipv4
+            [self.serverSelector addItemWithTitle:user.nickName];
+        }
     }
     
     if (![selectedServer isEqualToString:@""]) {

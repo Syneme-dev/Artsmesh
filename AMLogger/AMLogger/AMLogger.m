@@ -20,6 +20,7 @@ NSString * const kAMOSCClientTitle  = @"OSC CLIENT";
 NSString * const kAMJackAudioTitle  = @"JACK AUDIO";
 NSString * const kAMAMServerTitle   = @"AMSERVER";
 NSString * const kAMArtsmeshTitle   = @"ARTSMESH";
+NSString * const kVideoTitle        = @"VIDEO";
 
 
 NSString * const kAMOSCServerFile   = @"OSC_Server.log";
@@ -28,6 +29,7 @@ NSString * const kAMJackAudioFile   = @"Jack_Audio.log";
 NSString * const kAMAMServerFile    = @"AMServer.log";
 NSString * const kAMArtsmeshFile    = @"Artsmesh.log";
 NSString * const kAMJackTripFile    = @"Jacktrip";
+NSString * const kVideoFile         = @"Video.log";
 
 //NSString * const kAMDebugLog = @"DEBUG";
 

@@ -14,9 +14,12 @@
 @property NSMutableArray*     videoChannels;
 @property NSMutableArray*     peerDevices;
 @property AMVideoDevice*      myselfDevice;
+@property AMChannel*          nilChannel;
 
 +(id)sharedInstance;
 
 -(int) findFirstIndex;
+-(NSInteger) findFirstMyselfIndex :(AMVideoDevice*) v;
 
+-(NSArray*)  allServerDevices;
 @end

@@ -14,6 +14,9 @@
 #import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
 
+NSString* kAMMyself = @"MYSELF";
+NSString *const AMP2PVideoReceiverChanged = @"AMP2PVideoReceiverChanged";
+
 @interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
 @end
@@ -21,12 +24,7 @@
 
 @implementation AMVideoRouteViewController
 {
-    NSTimer*    _deviceTimer;
-   
     AMVideoConfigWindow*    _configController;
-//    NSMutableArray*         _videoChannels;
-//    NSMutableArray*         _peerDevices;
-//    AMVideoDevice*          _myselfDevice;
     AMVideoDeviceManager*   _videoManager;
     AMFFmpeg*               _ffmpegManager;
 }
@@ -81,6 +79,16 @@ disconnectChannel:(AMChannel *)channel1
     [_ffmpegManager stopFFmpegInstance:processID];
 }
 
+- (void)stopAllChannelProcesses {
+    /** Kill all processes by process id **/
+    NSMutableArray* processes = [[NSMutableArray alloc] init];
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
+        [processes addObject:device.processID];
+    }
+    
+    [_ffmpegManager stopAllFFmpegInstances:processes];
+    [_videoManager.peerDevices removeAllObjects];
+}
 
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
@@ -90,16 +98,55 @@ shouldRemoveDevice:(NSString *)deviceID;
 }
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
+     removeAllDevice:(BOOL)check
+{
+    [self stopAllChannelProcesses];
+    
+    BOOL hasReceiver = NO;
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
+        if ([device.role isEqualToString:kReceiverRole] ||
+            [device.role isEqualToString:kDualRole]){
+                hasReceiver = YES;
+        }
+       
+    }
+    if (hasReceiver) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
+    
+    return YES;
+}
+
+
+- (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
-     for (AMVideoDevice* device in _videoManager.peerDevices) {
+    BOOL hasReceiver = NO;
+    BOOL isYouTube = NO;
+    for (AMVideoDevice* device in _videoManager.peerDevices) {
         if ([device.deviceID isEqualToString:deviceID]) {
-            [self stopChannelFFmpegProcess:device.processID];
-            [_videoManager.peerDevices removeObject:device];
+            if ([device.processID length] != 0) {
+                if ([device.role isEqualToString:kReceiverRole] ||
+                    [device.role isEqualToString:kDualRole]){
+                    hasReceiver = YES;
+                }
+                [self stopChannelFFmpegProcess:device.processID];
+                [_videoManager.peerDevices removeObject:device];
+            } else {
+                //YouTube or (null) connection
+                isYouTube = YES;
+            }
+            //int index = ;
         }
         
     }
-     
+    if (isYouTube) {
+        [_ffmpegManager stopFFmpeg];
+        [_videoManager.peerDevices removeAllObjects];
+    }
+    if (hasReceiver) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
     return YES;
 }
 
@@ -111,17 +158,6 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     _videoManager  = [AMVideoDeviceManager sharedInstance];
     
-    NSMutableArray* channels = [[NSMutableArray alloc] init];
-    AMChannel* myChannel = [[AMChannel alloc] init];
-    myChannel.deviceID     = @"MYSELF";
-    myChannel.channelName  = @"MYSELF";
-    
-    for(int i = 0; i < 9; i++){
-        myChannel.index = i;
-        [channels addObject:myChannel];
-    }
-    
-    _videoManager.myselfDevice.channels = channels;
     
     
     AMVideoRouteView* view = (AMVideoRouteView*)self.view;
@@ -129,7 +165,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(addVideoChannel:)
+                                             selector:@selector(addVideoDevice:)
                                                  name:AMVideoDeviceNotification
                                                object:nil];
     
@@ -151,7 +187,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 
 //1st: Rearrange _videoManager.peerDevices to represent current state of ffmpeg processes
-//2nd: Make a copy for the devices which hasn't shown in UI yet.
+//2nd: Find the devices which hasn't shown in UI yet.
 //3rd: Show those devices.
 -(void)reloadAudioChannel
 {
@@ -192,43 +228,50 @@ shouldRemoveDevice:(NSString *)deviceID;
         }
         
         if (!bFind){
-            [devicesToAdd addObject:device];
+            if([devicesToAdd indexOfObject:device] == NSNotFound){
+                [devicesToAdd addObject:device];
+            }
         }
     }
     
     //3rd step
     for (AMVideoDevice* device in devicesToAdd) {
-       
-        AMChannel* peerChannel = [device.channels objectAtIndex:0];
-        
-        unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL;
-        AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
-        myChannel.deviceID     = @"MYSELF";
-        myChannel.channelName  = @"MYSELF";
-        [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
-       
-        myChannel.type = peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
-     
-        
-        
-        [routeView associateChannels:_videoManager.myselfDevice.channels
-                          withDevice:myChannel.deviceID
-                                name:myChannel.channelName
-                           removable:YES];
-        
-        
-        [routeView associateChannels:device.channels
-                          withDevice:device.deviceID
-                                name:peerChannel.channelName
-                           removable:YES];
-        
-        
-        [routeView connectChannel:myChannel toChannel:peerChannel];
+        for (NSUInteger i = 0; i < device.validCount; i++) {
+            AMChannel* peerChannel = [device.channels objectAtIndex:i];
+            
+            //unsigned long index = (device.index - START_INDEX) / INDEX_INTERVAL + i;
+            unsigned long index = [_videoManager findFirstMyselfIndex:device];
+            if (device.validCount == 2) {
+                if (i == 0) {
+                    index = index + 1;
+                }
+            }
+            AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
+            myChannel.deviceID     = kAMMyself;
+            myChannel.channelName  = kAMMyself;
+            [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
+            
+            myChannel.type =  peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+            
+            [routeView associateChannels:_videoManager.myselfDevice.channels
+                              withDevice:myChannel.deviceID
+                                    name:myChannel.channelName
+                               removable:YES];
+            
+            
+            [routeView associateChannels:device.channels
+                              withDevice:device.deviceID
+                                    name:peerChannel.channelName
+                               removable:YES];
+            
+            
+            [routeView connectChannel:myChannel toChannel:peerChannel];
+        }
     }
 }
 
 
--(void) addVideoChannel:(NSNotification*) notif
+-(void) addVideoDevice:(NSNotification*) notif
 {
     AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
     
@@ -239,32 +282,64 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSString* peerIP    = _configController.videoConfig.peerIP;
     NSString* peerIPPort  = [NSString stringWithFormat:@"%@:%d",
                                             peerIP, _configController.videoConfig.peerPort];
-    BOOL      isSender  = [_configController.videoConfig.role isEqualToString:@"SENDER"];
-   
-   
-    AMVideoDevice* peerDevice  = nil;
+
     
-    int firstIndex = [self findFirstIndex];
-    peerDevice = [[AMVideoDevice alloc] init];
-    peerDevice.index =firstIndex;
+    AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
+    
+    if ([_configController.videoConfig.role isEqualToString:kDualRole]) {
+        peerDevice.validCount = 2;
+    }else{
+        peerDevice.validCount = 1;
+    }
+    
+    int firstIndex = [self findFirstGlobalIndex:peerDevice.validCount];
+    peerDevice.index = firstIndex;
+    
     peerDevice.deviceID = peerIPPort;
+    peerDevice.role     = _configController.videoConfig.role;
     
-    AMChannel* peerChannel = [[AMChannel alloc] init];
-    peerChannel.type = isSender ?  AMDestinationChannel : AMSourceChannel;
-    peerChannel.deviceID     = peerIPPort;
-    peerChannel.channelName  = peerIPPort;
-    peerChannel.index = firstIndex;
-    
+    AMChannel* peerChannel = nil;
     NSMutableArray* peerChannels = [[NSMutableArray alloc] init];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
-    [peerChannels addObject:peerChannel];
+    
+    //In DUAL mode,peerDevice.validCount is 2, then add two channel in one device.
+    for (int i = 0; i < peerDevice.validCount; i++) {
+        peerChannel = [[AMChannel alloc] init];
+
+        //Set channel type
+        if ([_configController.videoConfig.role isEqualToString:kSenderRole]) {
+            peerChannel.type = AMSourceChannel;
+        }else if([_configController.videoConfig.role isEqualToString:kReceiverRole]){
+            peerChannel.type = AMDestinationChannel;
+        }else if ([_configController.videoConfig.role isEqualToString:kDualRole]){
+            //In peer device, first sender, then receiver.
+            if (i == 0) {
+                peerChannel.type = AMSourceChannel;
+            }else{
+                 peerChannel.type = AMDestinationChannel;
+            }
+        }
+        
+        peerChannel.deviceID     = peerIPPort;
+        peerChannel.channelName  = peerIPPort;
+        peerChannel.index = firstIndex + i;
+        [peerChannels addObject:peerChannel];
+        
+        
+    }
+    
+    //add pseudo channels to make enough room for displaying.
+    for (NSUInteger i = peerDevice.validCount; i < INDEX_INTERVAL; i++) {
+        [peerChannels addObject:peerChannel];
+    }
     
     peerDevice.channels = peerChannels;
 
+    
+    [_videoManager.peerDevices addObject:peerDevice];
+    if(peerDevice.validCount == 2){
+        [_videoManager.peerDevices addObject:peerDevice];
+    }
+    
     /** Set processID for channel 2 **/
     NSDictionary *currStreams = [[AMPreferenceManager standardUserDefaults]
                                     objectForKey:Preference_Key_ffmpeg_Cur_P2P];
@@ -273,19 +348,30 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 
 
-    [_videoManager.peerDevices addObject:peerDevice];
+    
     
     [self reloadAudioChannel];
+    
+    //Send notification for video mixer
+    if ([peerDevice.role isEqualToString:kDualRole] ||
+        [peerDevice.role isEqualToString:kReceiverRole]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:AMP2PVideoReceiverChanged object:nil];
+    }
+        
 }
 
--(int) findFirstIndex
+//Notice:Index from START_INDEX to LAST_INDEX.
+-(int) findFirstGlobalIndex : (NSInteger) count
 {
     BOOL find;
     
     for (int index = START_INDEX; index <= LAST_INDEX; index += INDEX_INTERVAL) {
         find = NO;
         for (AMVideoDevice* device in _videoManager.peerDevices) {
-            if (device.index == index) {
+            if (count == 1 && device.index == index) {
+                find = YES;
+                break;
+            }else if(count == 2 && (device.index == index || device.index == index+INDEX_INTERVAL)){
                 find = YES;
                 break;
             }

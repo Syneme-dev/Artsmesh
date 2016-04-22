@@ -32,7 +32,18 @@
         _videoChannels = [[NSMutableArray alloc] init];
         _peerDevices   = [[NSMutableArray alloc] init];
         _myselfDevice  = [[AMVideoDevice  alloc] init];
-
+        
+        NSMutableArray* channels = [[NSMutableArray alloc] init];
+        _nilChannel = [[AMChannel alloc] init];
+        _nilChannel.deviceID     = @"";
+        _nilChannel.channelName  = @"";
+        
+        for(int i = 0; i < 9; i++){
+            _nilChannel.index = i;
+            [channels addObject:_nilChannel];
+        }
+        
+        _myselfDevice.channels = channels;
     }
     
     return self;
@@ -59,6 +70,49 @@
     return -1;
 }
 
+-(NSInteger) findFirstMyselfIndex :(AMVideoDevice*) v
+{
+    if ([_peerDevices indexOfObject:v] == NSNotFound) {
+        return NSNotFound;
+    }
+    
+    NSUInteger accumulativeIndex = 0;
+    for (int i = 0 ; i < [_peerDevices count]; i++) {
+        AMVideoDevice* device = [_peerDevices objectAtIndex:i];
+        if(![device isEqual:v] && device.index < v.index){
+            accumulativeIndex++;
+        }
+    }
+    for (int index = START_INDEX; index <= v.index; index += INDEX_INTERVAL) {
+        bool find = NO;
+        for (AMVideoDevice* device in _peerDevices) {
+            if (device.index == index) {
+                find = YES;
+                break;
+            }
+        }
+        if (find == NO) {
+             accumulativeIndex++;
+        }
+    }
 
+    
+    return accumulativeIndex;
+}
+
+-(NSArray*)  allServerDevices
+{
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    for (AMVideoDevice* device in _peerDevices) {
+        if ([device.role isEqualToString:kReceiverRole] ||
+            [device.role isEqualToString:kDualRole]) {
+            [array addObject:device];
+        }
+    }
+    
+    
+    return array;
+    
+}
 
 @end

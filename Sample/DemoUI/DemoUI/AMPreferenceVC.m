@@ -13,6 +13,7 @@
 #import "AMOSCGroupSettingsVC.h"
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
+#import "AMVideoSettingsVC.h"
 #import "UIFramework/NSView_Constrains.h"
 
 
@@ -26,6 +27,7 @@
     NSViewController    *_generalSettingsVC;
     NSViewController    *_oscGroupSettingsVC;
     NSViewController    *_jacktripSettingVC;
+    NSViewController    *_videoSettingsVC;
     NSViewController    *_jackSettingsVC;
     NSViewController    *_accountSettingsVC;
 }
@@ -47,6 +49,7 @@
     [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.accountTabBtn toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.videoTabBtn toColor:UI_Color_blue];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -70,6 +73,8 @@
             [self loadOSCGroupPage:view ];
         }else if([view.identifier isEqualTo:@"statusNet"]){
             [self loadAccountPage:view ];
+        }else if([view.identifier isEqualTo:@"video"]) {
+            [self loadVideoPage:view];
         }
     }
 }
@@ -111,6 +116,14 @@
     }
 }
 
+-(void)loadVideoPage:(NSView *)tabView
+{
+    _videoSettingsVC = [[AMVideoSettingsVC alloc] init];
+    if (_videoSettingsVC) {
+        [tabView addConstrainsToSubview:_videoSettingsVC.view leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
+    }
+}
+
 
 -(void)loadOSCGroupPage:(NSView*)tabView
 {
@@ -147,7 +160,8 @@
     [self.tabButtons addObject:self.jacktripTabBtn];
     [self.tabButtons addObject:self.oscGroupTabBtn];
     [self.tabButtons addObject:self.accountTabBtn];
-    self.showingTabsCount=5;
+    [self.tabButtons addObject:self.videoTabBtn];
+    self.showingTabsCount=6;
 }
 
 - (IBAction)onGeneralClick:(id)sender {
@@ -166,15 +180,19 @@
     [self.tabs selectTabViewItemAtIndex:2];
 }
 
+- (IBAction)onVideoClick:(id)sender {
+    [self pushDownButton:self.videoTabBtn];
+    [self.tabs selectTabViewItemAtIndex:3];
+}
 
 - (IBAction)onOSCGroupClick:(id)sender {
     [self pushDownButton:self.oscGroupTabBtn];
-    [self.tabs selectTabViewItemAtIndex:3];
+    [self.tabs selectTabViewItemAtIndex:4];
 }
 
 - (IBAction)onAccountClick:(id)sender {
     [self pushDownButton:self.accountTabBtn];
-    [self.tabs selectTabViewItemAtIndex:4];
+    [self.tabs selectTabViewItemAtIndex:5];
 }
 
 

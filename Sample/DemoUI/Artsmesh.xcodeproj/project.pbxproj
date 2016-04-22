@@ -184,6 +184,8 @@
 		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
+		2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */; };
+		2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */; };
 		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
 		2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
@@ -230,7 +232,6 @@
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
 		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4A5701541A11BAEA00BF801E /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
@@ -265,7 +266,9 @@
 		4F2D8D801C0FEBB000C8F41B /* AMVideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D8D7F1C0FEBB000C8F41B /* AMVideoConfig.m */; };
 		4F2E48D71C0DA29000B48708 /* AMVideoConfigWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E48D51C0DA29000B48708 /* AMVideoConfigWindow.m */; };
 		4F2E48D81C0DA29000B48708 /* AMVideoConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */; };
+		4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61FF6F1CB6688900D11143 /* AVKit.framework */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
+		4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */; };
 		4F6ED2CC1A3FE6BC00832E2D /* AMSyphonViewPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */; };
 		4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4F7E663B1BE200FA006606D0 /* TL_TCPSyphonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7E663A1BE200FA006606D0 /* TL_TCPSyphonSDK.framework */; };
@@ -290,6 +293,12 @@
 		4FBE6A881C0444C800C854EA /* AMChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A851C0444C800C854EA /* AMChannel.m */; };
 		4FBE6A891C0444C800C854EA /* NSBezierPath+QuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */; };
 		4FBF9E3D1C806BA70011161F /* AMVideoDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */; };
+		4FC080251C9B9F5F0072559B /* OscGroupServer in Resources */ = {isa = PBXBuildFile; fileRef = 4FC080231C9B9F5F0072559B /* OscGroupServer */; };
+		4FC080271C9B9F760072559B /* OscGroupServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC080231C9B9F5F0072559B /* OscGroupServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4FC080291C9B9FB30072559B /* OscGroupClient in Resources */ = {isa = PBXBuildFile; fileRef = 4FC080281C9B9FB30072559B /* OscGroupClient */; };
+		4FC0802A1C9B9FCE0072559B /* OscGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC080281C9B9FB30072559B /* OscGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4FC399631CA3D61000BB164B /* AMP2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC399611CA3D61000BB164B /* AMP2PViewController.m */; };
+		4FC399641CA3D61000BB164B /* AMP2PViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC399621CA3D61000BB164B /* AMP2PViewController.xib */; };
 		4FC631691B465D6000BD02AB /* iperf in Resources */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; };
 		4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FC631681B465D6000BD02AB /* iperf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FC6316E1B46781C00BD02AB /* AMIPerfConfigWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */; };
@@ -300,7 +309,6 @@
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FDB99A01C3F973400D89619 /* AMNetworkingToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
-		4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
 		AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF200642194585F6008630C8 /* AMMapViewController.xib */; };
@@ -421,16 +429,16 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		2692DB8718E91D1900553924 /* Copy Files (7 items) */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				4FC0802A1C9B9FCE0072559B /* OscGroupClient in Copy Files (7 items) */,
+				4FC080271C9B9F760072559B /* OscGroupServer in Copy Files (7 items) */,
 				2DD36DF01C49958C00C43CB6 /* ffplay in Copy Files (7 items) */,
 				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
 				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,
 				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
-				4A6D4B7B1A12F8F000B5D26B /* OscGroupServer in Copy Files (7 items) */,
-				4FFD1E431A1D8ADC00F798E0 /* OSCGroupClient in Copy Files (7 items) */,
 				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */,
 				2686C35D19DA4E9200352DFF /* LocalServer in Copy Files (7 items) */,
 			);
@@ -826,6 +834,9 @@
 		2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMEventsManagerViewController.xib; sourceTree = "<group>"; };
 		2D8D7B4A1AFF125300FF26FE /* AMLiveEventCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLiveEventCheckBoxView.h; sourceTree = "<group>"; };
 		2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLiveEventCheckBoxView.m; sourceTree = "<group>"; };
+		2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoSettingsVC.xib; sourceTree = "<group>"; };
+		2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoSettingsVC.m; sourceTree = "<group>"; };
+		2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoSettingsVC.h; sourceTree = "<group>"; };
 		2DAB319B1BE8569C00C1BD5A /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
@@ -895,7 +906,6 @@
 		4A5071FE1A6B49BE006E09FC /* AMLocalGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalGroupViewController.h; sourceTree = "<group>"; };
 		4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalGroupViewController.m; sourceTree = "<group>"; };
 		4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalGroupViewController.xib; sourceTree = "<group>"; };
-		4A5701541A11BAEA00BF801E /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
 		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
 		4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineView.h; sourceTree = "<group>"; };
@@ -953,7 +963,9 @@
 		4F2E48D41C0DA29000B48708 /* AMVideoConfigWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoConfigWindow.h; sourceTree = "<group>"; };
 		4F2E48D51C0DA29000B48708 /* AMVideoConfigWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoConfigWindow.m; sourceTree = "<group>"; };
 		4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoConfigWindow.xib; sourceTree = "<group>"; };
+		4F61FF6F1CB6688900D11143 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		4F6ED2CA1A3FE6BC00832E2D /* AMSyphonViewPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonViewPopUp.h; sourceTree = "<group>"; };
 		4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonViewPopUp.m; sourceTree = "<group>"; };
 		4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libturbojpeg.0.dylib; sourceTree = "<group>"; };
@@ -988,6 +1000,11 @@
 		4FBE6A871C0444C800C854EA /* NSBezierPath+QuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+QuartzUtilities.m"; sourceTree = "<group>"; };
 		4FBF9E3B1C806BA70011161F /* AMVideoDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoDeviceManager.h; sourceTree = "<group>"; };
 		4FBF9E3C1C806BA70011161F /* AMVideoDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoDeviceManager.m; sourceTree = "<group>"; };
+		4FC080231C9B9F5F0072559B /* OscGroupServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupServer; sourceTree = "<group>"; };
+		4FC080281C9B9FB30072559B /* OscGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OscGroupClient; sourceTree = "<group>"; };
+		4FC399601CA3D61000BB164B /* AMP2PViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMP2PViewController.h; sourceTree = "<group>"; };
+		4FC399611CA3D61000BB164B /* AMP2PViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMP2PViewController.m; sourceTree = "<group>"; };
+		4FC399621CA3D61000BB164B /* AMP2PViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMP2PViewController.xib; sourceTree = "<group>"; };
 		4FC631681B465D6000BD02AB /* iperf */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iperf; sourceTree = "<group>"; };
 		4FC6316B1B46781C00BD02AB /* AMIPerfConfigWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMIPerfConfigWC.h; sourceTree = "<group>"; };
 		4FC6316C1B46781C00BD02AB /* AMIPerfConfigWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMIPerfConfigWC.m; sourceTree = "<group>"; };
@@ -1002,7 +1019,6 @@
 		4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkingToolVC.m; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
-		4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = OSCGroupClient; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
 		AF200640194585F6008630C8 /* AMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMapViewController.h; sourceTree = "<group>"; };
 		AF200641194585F6008630C8 /* AMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMapViewController.m; sourceTree = "<group>"; };
@@ -1144,6 +1160,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */,
+				4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */,
 				4FA1E69F1C00959D0007E33C /* CoreVideo.framework in Frameworks */,
 				4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */,
 				4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */,
@@ -1223,6 +1241,9 @@
 		269C3347197D00F000AF86AA /* PreferencePanel */ = {
 			isa = PBXGroup;
 			children = (
+				2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */,
+				2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */,
+				2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */,
 				D41155E218E9515700C84092 /* AMPreferenceVC.h */,
 				D41155E318E9515700C84092 /* AMPreferenceVC.m */,
 				2692DB8D18E9459600553924 /* AMPreferenceVC.xib */,
@@ -1708,12 +1729,12 @@
 			isa = PBXGroup;
 			children = (
 				4F7E661D1BE1E2F2006606D0 /* libturbojpeg.0.dylib */,
+				4FC080231C9B9F5F0072559B /* OscGroupServer */,
+				4FC080281C9B9FB30072559B /* OscGroupClient */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2DD36DEE1C49955700C43CB6 /* ffplay */,
 				2DAB319B1BE8569C00C1BD5A /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
-				4FFD1E421A1D8ADC00F798E0 /* OSCGroupClient */,
-				4A5701541A11BAEA00BF801E /* OscGroupServer */,
 				2686C35C19DA4E9200352DFF /* LocalServer */,
 				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
@@ -1734,6 +1755,8 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */,
+				4F61FF6F1CB6688900D11143 /* AVKit.framework */,
 				4FA1E69E1C00959D0007E33C /* CoreVideo.framework */,
 				4F7E663A1BE200FA006606D0 /* TL_TCPSyphonSDK.framework */,
 				4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */,
@@ -2127,6 +2150,9 @@
 				4F6ED2CB1A3FE6BC00832E2D /* AMSyphonViewPopUp.m */,
 				CE486A971A280CB900D35B82 /* AMSyphonView.h */,
 				CE486A981A280CB900D35B82 /* AMSyphonView.m */,
+				4FC399601CA3D61000BB164B /* AMP2PViewController.h */,
+				4FC399611CA3D61000BB164B /* AMP2PViewController.m */,
+				4FC399621CA3D61000BB164B /* AMP2PViewController.xib */,
 				CE486A991A280CB900D35B82 /* AMSyphonViewController.h */,
 				CE486A9A1A280CB900D35B82 /* AMSyphonViewController.m */,
 				CE486A9B1A280CB900D35B82 /* AMSyphonViewController.xib */,
@@ -2324,6 +2350,7 @@
 				2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */,
 				AFAEBDAF19610BEA00B7FB51 /* Home.png in Resources */,
 				AFAEBD9A19610B8700B7FB51 /* logo.png in Resources */,
+				2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */,
 				AFAEBD851961075F00B7FB51 /* mapShot.png in Resources */,
 				269FB84E1998816E00355312 /* AMBroadcastViewController.xib in Resources */,
 				4A32A1071A7220B1006FEDD7 /* AMGroupCreateViewController.xib in Resources */,
@@ -2332,10 +2359,12 @@
 				AFD7575E195D048E0057976D /* shot_timer.png in Resources */,
 				AF200644194585F6008630C8 /* AMMapViewController.xib in Resources */,
 				AFAEBD8B196107BE00B7FB51 /* web.css in Resources */,
+				4FC080251C9B9F5F0072559B /* OscGroupServer in Resources */,
 				4AB4ACEA1A6E5D2F003ECE24 /* AMArchiveGroupViewController.xib in Resources */,
 				AFAEBDAD19610BEA00B7FB51 /* Favorite.png in Resources */,
 				AFAEBDAC19610BEA00B7FB51 /* Edit.png in Resources */,
 				4A32A12C1A7226B5006FEDD7 /* AMProjectProfileViewController.xib in Resources */,
+				4FC399641CA3D61000BB164B /* AMP2PViewController.xib in Resources */,
 				4FC6316F1B46781C00BD02AB /* AMIPerfConfigWC.xib in Resources */,
 				4F8251251B25790F00224513 /* AMIPerfTabVC.xib in Resources */,
 				37C23188187A8FFD00554AFD /* Images.xcassets in Resources */,
@@ -2347,6 +2376,7 @@
 				AF2890DC198A36BC00D05174 /* shot_osc.png in Resources */,
 				AFBDCCBA195AD41400653C18 /* AMOSCMessageViewController.xib in Resources */,
 				CE486AAF1A280CB900D35B82 /* AMVideoMixerViewController.xib in Resources */,
+				4FC080291C9B9FB30072559B /* OscGroupClient in Resources */,
 				013A56EF1A5A64EE001D319F /* AMJacktripSettingsVC.xib in Resources */,
 				AFD7575F195D048E0057976D /* shot_video.png in Resources */,
 				AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */,
@@ -2588,6 +2618,7 @@
 				AFD34798195BEF620055043E /* AMTimerViewController.m in Sources */,
 				4AB4ACC61A6CC097003ECE24 /* AMGroupCellContentView.m in Sources */,
 				2D08FDCA1AD661FF00A9D257 /* GTLYouTubeLiveStreamListResponse.m in Sources */,
+				4FC399631CA3D61000BB164B /* AMP2PViewController.m in Sources */,
 				4A32A10C1A7220B1006FEDD7 /* AMUserNameFormatter.m in Sources */,
 				2D08FDDF1AD661FF00A9D257 /* GTLYouTubePropertyValue.m in Sources */,
 				2D08FDFE1AD661FF00A9D257 /* GTLYouTubeVideoPlayer.m in Sources */,
@@ -2695,6 +2726,7 @@
 				2D08FDE21AD661FF00A9D257 /* GTLYouTubeSearchResult.m in Sources */,
 				4A32A1061A7220B1006FEDD7 /* AMGroupCreateViewController.m in Sources */,
 				4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */,
+				2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */,
 				CE73C48F1990E8C4007A32C2 /* AMNetworkToolsCommand.m in Sources */,
 				4F2C4D311A34260D004DF021 /* AMSyphonTearOffController.m in Sources */,
 				2D08FDDA1AD661FF00A9D257 /* GTLYouTubePlaylistPlayer.m in Sources */,

@@ -126,57 +126,6 @@ NSString* kNonServer = @"    --    ";
     return serverNames;
 }
 
-/*
- NSArray* serversNow = [[SyphonServerDirectory sharedDirectory] servers];
- 
- if( ![servers isEqualToArray:serversNow]){
- 
- servers = serversNow;
- 
- NSString* name      = nil;
- 
- NSString* appName   = nil;
- 
- NSString* title     = nil;
- 
- 
- 
- [self.serverNamePopUpButton removeAllItems];
- 
- [serversByTitle removeAllObjects];
- 
- 
- 
- for (NSDictionary* serverInfo in servers) {
- 
- name    = [serverInfo objectForKey:SyphonServerDescriptionNameKey];
- 
- appName = [serverInfo objectForKey:SyphonServerDescriptionAppNameKey];
- 
- title   = [NSString stringWithString:appName];
- 
- 
- 
- // A server may not have a name (usually if it is the only server in an application)
- 
- if([name length] > 0) {
- 
- title = [name stringByAppendingFormat:@" - %@", title, nil];
- 
- }
- 
- 
- 
- [self.serverNamePopUpButton addItemWithTitle:title];
- 
- [serversByTitle setObject:serverInfo forKey:title];
- 
- }
- 
- }
- */
-
-
 -(NSDictionary*)syphonServerDisctriptByName:(NSString*) selectedName
 {
     return [_syServers objectForKey:selectedName];

@@ -14,7 +14,9 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
     AMDestinationChannel
 };
 
-
+ NSString* kSenderRole;
+ NSString* kReceiverRole;
+ NSString* kDualRole;
 @interface AMChannel : NSObject
 
 @property(nonatomic) AMChannelType type;
@@ -41,5 +43,6 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 @property   NSString*           deviceName;
 @property   NSMutableArray*     channels;
 @property   NSUInteger          index;
-
+@property   NSString*           role;
+@property   NSUInteger          validCount;
 @end

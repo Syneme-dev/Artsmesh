@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCGroupMessageMonitorController">
@@ -16,6 +16,7 @@
                 <outlet property="selfDefServer" destination="ksZ-bf-Lbh" id="4JM-Gg-T5T"/>
                 <outlet property="sendToDev" destination="LN7-7G-b5U" id="yu3-Qo-6Mh"/>
                 <outlet property="serverSelector" destination="xWn-Gf-Gff" id="u7i-rV-byF"/>
+                <outlet property="useIPV6Check" destination="d5i-JM-PXu" id="jnZ-19-NQZ"/>
                 <outlet property="userNameField" destination="aGH-7E-yLn" id="t21-PW-v3l"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -143,6 +144,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="jND-YY-VOD">
+                                <rect key="frame" x="0.0" y="0.0" width="742" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
@@ -225,7 +227,7 @@
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Sh6-zg-dGx">
-                        <rect key="frame" x="1" y="119" width="223" height="15"/>
+                        <rect key="frame" x="0.0" y="421" width="728" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="65J-Tv-szG">
@@ -234,9 +236,9 @@
                     </scroller>
                 </scrollView>
                 <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
-                    <rect key="frame" x="375" y="514" width="50" height="22"/>
+                    <rect key="frame" x="375" y="514" width="79" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="66f-cB-TtJ"/>
+                        <constraint firstAttribute="width" constant="79" id="66f-cB-TtJ"/>
                         <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
                     </constraints>
                 </customView>
@@ -257,7 +259,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="W3j-vS-ShE">
-                    <rect key="frame" x="634" y="469" width="84" height="14"/>
+                    <rect key="frame" x="207" y="466" width="84" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="84" id="WIz-a8-Rfv"/>
                         <constraint firstAttribute="height" constant="14" id="rOI-QI-t5c"/>
@@ -270,6 +272,14 @@
                         <action selector="clearAll:" target="-2" id="600-ou-O46"/>
                     </connections>
                 </button>
+                <customView identifier="useIPV6" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5i-JM-PXu" customClass="AMCheckBoxView">
+                    <rect key="frame" x="493" y="515" width="111" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4sI-Jt-wIK"/>
+                        <constraint firstAttribute="width" constant="111" id="5Ha-5L-CBi"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Eha-6G-Z0H"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="Rff-V1-Z3C" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="29" id="0Hz-SZ-UHo"/>
@@ -277,9 +287,9 @@
                 <constraint firstAttribute="trailing" secondItem="b5O-z6-uSk" secondAttribute="trailing" id="KhN-18-Gdb"/>
                 <constraint firstAttribute="bottom" secondItem="b5O-z6-uSk" secondAttribute="bottom" id="QIs-W8-84K"/>
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="128" id="b59-nj-W7M"/>
-                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="10" id="fde-yV-26P"/>
-                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="303" id="xPB-RO-lJE"/>
-                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="82" id="zRk-fb-QxZ"/>
+                <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="437" id="fde-yV-26P"/>
+                <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="274" id="xPB-RO-lJE"/>
+                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="85" id="zRk-fb-QxZ"/>
             </constraints>
             <point key="canvasLocation" x="142" y="-94.5"/>
         </customView>

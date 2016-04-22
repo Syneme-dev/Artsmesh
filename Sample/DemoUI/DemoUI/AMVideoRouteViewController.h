@@ -10,6 +10,8 @@
 #import "AMVideoRouteView.h"
 #import "AMChannel.h"
 
+NSString* kAMMyself;
+NSString *const AMP2PVideoReceiverChanged;
 
 @interface AMVideoRouteViewController : NSViewController<AMVideoRouterViewDelegate>
 

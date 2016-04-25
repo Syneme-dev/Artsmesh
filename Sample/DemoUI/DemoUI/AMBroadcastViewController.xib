@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMBroadcastViewController">
             <connections>
-                <outlet property="audioBitRatePopupView" destination="krz-G2-CKH" id="Bkq-4d-oAl"/>
-                <outlet property="audioDevicePopupView" destination="pKg-Nd-B2U" id="5hB-8P-DHr"/>
-                <outlet property="audioFormatPopupView" destination="P9K-PL-lsh" id="M7E-UE-RsY"/>
-                <outlet property="audioSampleRatePopupView" destination="jeV-pS-uRh" id="35C-j0-JZ8"/>
-                <outlet property="baseUrlTextField" destination="1d6-Km-h9q" id="2vX-VO-bhq"/>
                 <outlet property="broadcastDescField" destination="R0E-lO-cNf" id="kTm-rw-7tA"/>
                 <outlet property="broadcastTItleField" destination="GYF-Tu-WvZ" id="5a3-VB-Unk"/>
                 <outlet property="eventCreateButton" destination="aTe-ah-6HM" id="di0-4F-Neg"/>
@@ -32,27 +27,11 @@
                 <outlet property="privateCheck" destination="P0A-Xm-MAU" id="oIA-nx-ua6"/>
                 <outlet property="schedEndPMCheck" destination="LJM-zO-aFL" id="0M1-wP-Gbc"/>
                 <outlet property="schedStartPMCheck" destination="zar-IV-heM" id="cxQ-ha-gwc"/>
-                <outlet property="settingsBtn" destination="3mq-0Q-Zof" id="g56-RA-Ewk"/>
-                <outlet property="settingsCancelBtn" destination="I4g-z5-UPE" id="dGt-Dm-ScQ"/>
-                <outlet property="settingsRefreshBtn" destination="9U4-zo-q9d" id="4h7-OJ-U59"/>
-                <outlet property="settingsSaveBtn" destination="16t-C4-EfM" id="dBa-40-mfV"/>
                 <outlet property="streamAddressTextField" destination="Kbj-gT-PAQ" id="f2L-TE-MVr"/>
                 <outlet property="streamFormatTextField" destination="tDf-8N-HNp" id="tJA-XE-e7A"/>
                 <outlet property="streamNameTextField" destination="4Ua-MT-bmJ" id="lxD-Fm-oRR"/>
                 <outlet property="streamStatusTextField" destination="9nM-Jj-bNd" id="hMW-OU-bN9"/>
                 <outlet property="streamTitleTextField" destination="xC2-ac-rpw" id="VmT-pD-bcZ"/>
-                <outlet property="videoBitRateTextField" destination="9It-5g-ZWe" id="4uq-bY-75k"/>
-                <outlet property="videoDevicePopupView" destination="i4f-iL-FzX" id="aRH-NG-us0"/>
-                <outlet property="videoFormatPopupView" destination="kT4-0D-8hP" id="sPK-NP-Wu6"/>
-                <outlet property="videoFrameRatePopupView" destination="N4W-X3-lkM" id="i40-eg-R5O"/>
-                <outlet property="videoInputCustomCheckBox" destination="yZW-HY-nxW" id="c4W-Km-Plm"/>
-                <outlet property="videoInputCustomHeightTextField" destination="IcO-nf-qeN" id="YYj-Ty-sOq"/>
-                <outlet property="videoInputCustomWidthTextField" destination="eBT-VS-5p0" id="vVk-Ny-yae"/>
-                <outlet property="videoInputSizePopupView" destination="FHE-QI-PjX" id="Pa7-iu-PV2"/>
-                <outlet property="videoOutputCustomCheckBox" destination="S5A-Ck-inm" id="WmY-Co-Beu"/>
-                <outlet property="videoOutputSizeHeightTextField" destination="xKr-gt-Pec" id="kcb-gp-xGm"/>
-                <outlet property="videoOutputSizePopupView" destination="Prw-ZP-wDH" id="d9P-3G-NeH"/>
-                <outlet property="videoOutputSizeWidthTextField" destination="P9O-mo-6If" id="zaJ-Yp-OIs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
                 <outlet property="youtubeBtn" destination="UQB-MZ-pFk" id="MF0-mP-pYA"/>
             </connections>
@@ -520,6 +499,19 @@
                                             <constraint firstAttribute="height" constant="40" id="INg-eh-pHW"/>
                                         </constraints>
                                     </customView>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="UQB-MZ-pFk">
+                                        <rect key="frame" x="505" y="773" width="54" height="13"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="WFU-Ho-isl"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="inline" title="YOUTUBE " bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="TzF-zh-LKr">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <connections>
+                                                <action selector="youtubeBtnClick:" target="-2" id="HVw-iW-TLw"/>
+                                            </connections>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="kvK-ma-cat" firstAttribute="leading" secondItem="2R7-HU-dPY" secondAttribute="leading" constant="2" id="0cN-ul-REV"/>
@@ -533,6 +525,7 @@
                                     <constraint firstItem="aTe-ah-6HM" firstAttribute="leading" secondItem="2R7-HU-dPY" secondAttribute="leading" id="GjF-w9-Ida"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="top" secondItem="e2o-vu-ZRF" secondAttribute="bottom" constant="17" id="JwZ-bp-1q1"/>
                                     <constraint firstItem="PCR-bB-871" firstAttribute="leading" secondItem="aTe-ah-6HM" secondAttribute="trailing" constant="-2" id="S6u-8R-t9l"/>
+                                    <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="2R7-HU-dPY" secondAttribute="top" constant="4" id="XFY-If-gWe"/>
                                     <constraint firstAttribute="bottom" secondItem="aTe-ah-6HM" secondAttribute="bottom" constant="20" id="cjK-m0-OgF"/>
                                     <constraint firstItem="Tqp-95-c0c" firstAttribute="leading" secondItem="PCR-bB-871" secondAttribute="trailing" constant="-2" id="e1b-cS-cEh"/>
                                     <constraint firstAttribute="trailing" secondItem="e2o-vu-ZRF" secondAttribute="trailing" constant="4" id="fS2-gT-CJY"/>
@@ -544,393 +537,20 @@
                                 </constraints>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="View" identifier="2" id="vwm-kC-PEb" userLabel="Settings Tab">
-                            <view key="view" id="1C0-rd-XT6">
-                                <rect key="frame" x="0.0" y="0.0" width="556" height="790"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-8W-2y6" userLabel="VIDEO" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="0.0" y="738" width="556" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="VIDEO" id="qn9-np-cms">
-                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gsz-ba-f2L" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="708" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Yby-n6-GVh"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxi-47-BGp" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="708" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="DEVICE" id="mVs-io-PsS">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4f-iL-FzX" userLabel="DEVICE POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="703" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ut9-As-N0n" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="678" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="mMx-Em-FAc"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-rj-0xk" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="678" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="INPUT SIZE" id="9b5-lN-dAe">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHE-QI-PjX" userLabel="IN SIZE POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="673" width="264" height="20"/>
-                                    </customView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBT-VS-5p0" userLabel="IN WIDTH TEXT FIELD">
-                                        <rect key="frame" x="444" y="678" width="30" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1280" id="Bed-bu-Seb">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="oPQ-vE-9Ag"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CxR-WS-EUp">
-                                        <rect key="frame" x="478" y="678" width="11" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="X" id="HHH-si-Lp9">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="gLp-TE-1Ru"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IcO-nf-qeN" userLabel="IN HEIGHT TEXT FIELD">
-                                        <rect key="frame" x="495" y="678" width="30" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1080" id="wRd-OH-GZu">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="LdV-UL-Fed"/>
-                                        </connections>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjC-dI-KnZ" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="618" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="D7g-GZ-Ars"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QeL-6e-raf" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="618" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="OUTPUT SIZE" id="ziS-rX-PgV">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Prw-ZP-wDH" userLabel="OUT SIZE POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="613" width="264" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PGb-Fu-24g" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="588" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="gAu-GJ-Iwt"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XBP-tK-emV" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="588" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="FORMAT" id="G4N-dL-9SH">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kT4-0D-8hP" userLabel="FORMAT POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="583" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gg5-qD-nmf" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="558" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="dcp-ny-nCh"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05R-z5-7f8" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="558" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="FRAME RATE" id="s1U-Fu-yOO">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4W-X3-lkM" userLabel="FR POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="553" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hyr-2n-Tdm" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="528" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Z2N-CV-JvB"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aDk-TO-5EC" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="528" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BIT RATE" id="aHo-Na-3CT">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9It-5g-ZWe" userLabel="VBR TEXT FIELD">
-                                        <rect key="frame" x="144" y="528" width="45" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="4000" id="OL6-kA-5g1">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="Wgf-su-T6G"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wh7-1p-3ra" userLabel="AUDIO" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="0.0" y="468" width="556" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="AUDIO" id="Xcr-Ee-dZO">
-                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lE7-T1-K55" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="438" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="oBr-PB-C8K"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ib-J5-zQL" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="438" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="DEVICE" id="fwi-hh-qAY">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKg-Nd-B2U" userLabel="DEVICE POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="433" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MOp-Ks-l9H" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="408" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="R4N-IW-XOQ"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Izx-m8-Mjs" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="408" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="FORMAT" id="50M-Jc-a83">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9K-PL-lsh" userLabel="FORMAT POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="403" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HZj-Zq-zRx" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="378" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="uMU-xH-0hz"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8W-jZ-yIs" userLabel="SAMPLE RATE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="378" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="SAMPLE RATE" id="l7Q-KP-bQc">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeV-pS-uRh" userLabel="SPL RATE POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="373" width="408" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M9g-NU-Ubk" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="348" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="OZZ-La-eqj"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ikm-0G-5aE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="348" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BIT RATE" id="PuQ-KE-tre">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krz-G2-CKH" userLabel="BR POPUP" customClass="AMPopUpView">
-                                        <rect key="frame" x="146" y="343" width="408" height="20"/>
-                                    </customView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B18-uG-CpW">
-                                        <rect key="frame" x="479" y="618" width="11" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="X" id="Tvu-lZ-gXo">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="oAu-qC-yEg"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xKr-gt-Pec" userLabel="OUT HEIGHT TEXT FIELD">
-                                        <rect key="frame" x="496" y="618" width="30" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1080" id="cfK-B3-4gV">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="fKj-gK-d59"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5eZ-LI-V0h" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="195" y="528" width="45" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="KBPS" id="AV2-LF-FQN">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="AGq-qN-flO"/>
-                                        </connections>
-                                    </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yZW-HY-nxW" userLabel="CUSTOM CHECKBOX VIEW" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="533" y="673" width="20" height="20"/>
-                                    </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5A-Ck-inm" userLabel="CUSTOM CHECKBOX VIEW" customClass="AMCheckBoxView">
-                                        <rect key="frame" x="533" y="614" width="20" height="20"/>
-                                    </customView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LhH-gz-RhU" userLabel="| ">
-                                        <rect key="frame" x="428" y="678" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="4Yv-nd-f1J"/>
-                                    </imageView>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4oH-9s-rs3" userLabel="| ">
-                                        <rect key="frame" x="428" y="618" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Nm2-z9-3jG"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9O-mo-6If" userLabel="OUT WIDTH TEXT FIELD">
-                                        <rect key="frame" x="445" y="618" width="30" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="1280" id="SL7-5W-1cD">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="DQX-Ar-yEB"/>
-                                        </connections>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Q-0n-jOK" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="-2" y="288" width="556" height="14"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="ADDITIONAL DETAILS" id="kZh-b6-QVa">
-                                            <font key="font" size="12" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVE-cC-4RZ" userLabel="| ">
-                                        <rect key="frame" x="0.0" y="258" width="10" height="10"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Lwf-bB-jBV"/>
-                                    </imageView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poQ-xb-nYR" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="18" y="257" width="114" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BASE URL" id="KmF-vl-Fvz">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-Km-h9q" userLabel="VBR TEXT FIELD">
-                                        <rect key="frame" x="144" y="257" width="264" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="rtmp://a.rtmp.youtube.com/live2" id="eUx-3a-RCu">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="Hf5-mB-YV3"/>
-                                        </connections>
-                                    </textField>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="16t-C4-EfM" userLabel="SAVE BTN" customClass="AMStandardButton">
-                                        <rect key="frame" x="367" y="20" width="185" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="RXI-3g-fqL"/>
-                                        </constraints>
-                                    </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="I4g-z5-UPE" userLabel="CANCEL BTN" customClass="AMStandardButton">
-                                        <rect key="frame" x="183" y="20" width="185" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="uEl-Fv-huI"/>
-                                        </constraints>
-                                    </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="9U4-zo-q9d" userLabel="REFRESH BTN" customClass="AMStandardButton">
-                                        <rect key="frame" x="0.0" y="20" width="185" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="yFa-cf-dte"/>
-                                        </constraints>
-                                    </customView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="16t-C4-EfM" secondAttribute="trailing" constant="4" id="14F-Dk-lwX"/>
-                                    <constraint firstAttribute="bottom" secondItem="9U4-zo-q9d" secondAttribute="bottom" constant="20" id="4wK-Ub-HLu"/>
-                                    <constraint firstItem="9U4-zo-q9d" firstAttribute="leading" secondItem="1C0-rd-XT6" secondAttribute="leading" id="Bzs-iY-MN8"/>
-                                    <constraint firstAttribute="bottom" secondItem="16t-C4-EfM" secondAttribute="bottom" constant="20" id="Kvy-96-T7R"/>
-                                    <constraint firstItem="I4g-z5-UPE" firstAttribute="leading" secondItem="9U4-zo-q9d" secondAttribute="trailing" constant="-2" id="PUa-0q-iVk"/>
-                                    <constraint firstItem="9U4-zo-q9d" firstAttribute="width" secondItem="I4g-z5-UPE" secondAttribute="width" id="S9Z-lW-Pc1"/>
-                                    <constraint firstItem="16t-C4-EfM" firstAttribute="leading" secondItem="I4g-z5-UPE" secondAttribute="trailing" constant="-1" id="Vgn-RQ-5oM"/>
-                                    <constraint firstItem="16t-C4-EfM" firstAttribute="width" secondItem="I4g-z5-UPE" secondAttribute="width" id="hu4-5T-YLV"/>
-                                    <constraint firstAttribute="bottom" secondItem="I4g-z5-UPE" secondAttribute="bottom" constant="20" id="k2r-tn-L7e"/>
-                                </constraints>
-                            </view>
-                        </tabViewItem>
                     </tabViewItems>
                 </tabView>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8g-Wp-0Uu" userLabel=" |">
-                    <rect key="frame" x="495" y="773" width="9" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="5" id="iUd-tH-8uC"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="|" id="dbe-gk-vE0">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.23137254901960785" green="0.29411764705882354" blue="0.35686274509803922" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="UQB-MZ-pFk">
-                    <rect key="frame" x="440" y="773" width="54" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="54" id="WFU-Ho-isl"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="YOUTUBE " bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="TzF-zh-LKr">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                        <connections>
-                            <action selector="youtubeBtnClick:" target="-2" id="HVw-iW-TLw"/>
-                        </connections>
-                    </buttonCell>
-                </button>
-                <button horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="3mq-0Q-Zof">
-                    <rect key="frame" x="505" y="773" width="58" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="58" id="7vs-pZ-o9m"/>
-                    </constraints>
-                    <buttonCell key="cell" type="inline" title="SETTINGS" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="qjv-u6-qws">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="settingsBtnClick:" target="-2" id="A6V-VC-0qa"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" id="2Fh-oN-1fj"/>
-                <constraint firstItem="9U4-zo-q9d" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="5Ub-Gj-yg4"/>
+                <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="4" id="FxK-rk-dIu"/>
                 <constraint firstAttribute="trailing" secondItem="Tqp-95-c0c" secondAttribute="trailing" constant="11" id="GBf-eK-uuq"/>
-                <constraint firstItem="F8g-Wp-0Uu" firstAttribute="leading" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="3" id="Lsk-ak-U7F"/>
-                <constraint firstItem="UQB-MZ-pFk" firstAttribute="baseline" secondItem="F8g-Wp-0Uu" secondAttribute="baseline" id="LzJ-dQ-gEL"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="Ljc-kU-fwu"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="PBw-hC-NFW"/>
                 <constraint firstItem="pco-Gb-iXG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="TnJ-v1-r76"/>
-                <constraint firstItem="3mq-0Q-Zof" firstAttribute="leading" secondItem="F8g-Wp-0Uu" secondAttribute="trailing" constant="3" id="X8g-Pj-ctx"/>
-                <constraint firstItem="F8g-Wp-0Uu" firstAttribute="baseline" secondItem="3mq-0Q-Zof" secondAttribute="baseline" id="Y6g-M7-8rN"/>
-                <constraint firstAttribute="trailing" secondItem="UQB-MZ-pFk" secondAttribute="trailing" constant="76" id="aYu-R3-jXF"/>
-                <constraint firstItem="pco-Gb-iXG" firstAttribute="top" secondItem="F8g-Wp-0Uu" secondAttribute="top" id="caS-Lj-XKL"/>
-                <constraint firstItem="UQB-MZ-pFk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="4" id="npR-HL-thf"/>
+                <constraint firstItem="pco-Gb-iXG" firstAttribute="height" secondItem="Hz6-mo-xeY" secondAttribute="height" id="V9H-sp-kTy"/>
+                <constraint firstAttribute="trailing" secondItem="pco-Gb-iXG" secondAttribute="trailing" constant="7" id="bD3-Gt-j0v"/>
+                <constraint firstAttribute="bottom" secondItem="pco-Gb-iXG" secondAttribute="bottom" id="ba6-de-mgD"/>
                 <constraint firstItem="aTe-ah-6HM" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="7" id="oPs-Z9-agJ"/>
-                <constraint firstItem="pco-Gb-iXG" firstAttribute="trailing" secondItem="3mq-0Q-Zof" secondAttribute="trailing" id="uej-UK-Vco"/>
             </constraints>
             <point key="canvasLocation" x="468" y="289"/>
         </customView>

@@ -13,6 +13,19 @@
 #import "AMSyphonView.h"
 #import <VideoToolbox/VideoToolbox.h>
 
+
+#include "AMLogger/AMLogger.h"
+#include <stdio.h>      /* standard C i/o facilities */
+#include <stdlib.h>     /* needed for atoi() */
+#include <unistd.h>     /* defines STDIN_FILENO, system calls,etc */
+#include <sys/types.h>  /* system data type definitions */
+#include <sys/socket.h> /* socket specific definitions */
+#include <netinet/in.h> /* INET constants and stuff */
+#include <arpa/inet.h>  /* IP address conversion stuff */
+#include <netdb.h>      /* gethostbyname */
+// this routine echos any messages (UDP datagrams) received
+#define MAXBUF 1024*1024
+
 NSString *const AMP2PVideoReceiverChanged;
 
 NSString *const naluTypesStrings[] =
@@ -86,7 +99,7 @@ NSString *const naluTypesStrings[] =
     // You may find a test stream at <http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8>.
   /*  AVPlayerItem*  playerItem = [AVPlayerItem playerItemWithURL:url];
     [playerItem addObserver:self forKeyPath:@"status" options:0 context:nil];
-    _player = [AVPlayer playerWithPlayerItem:playerItem];*/
+    _player = [AVPlayer playerWithPlayerItem:playerItem];
     
     if (_player != nil) {
         [_player removeObserver:self forKeyPath:@"status"];
@@ -99,7 +112,120 @@ NSString *const naluTypesStrings[] =
    // AVPlayer *player = A configured AVPlayer ojbect;
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     [_glView setLayer:playerLayer];
+    */
+   
+    
+    NSString* strURL = sender.selectedItem.title;
+    //[strURL rangeOfString:];
+    NSUInteger commaPosition =[strURL rangeOfString:@":"].location;
+    if(commaPosition != NSNotFound){
+        NSString* strPort = [strURL substringFromIndex:commaPosition+1];
+        int ld =[self initUDPConfig:[strPort integerValue]];
+        if(ld != -1){
+            [self writeH264NALToFile:ld];
+        }
+    }
+   
+
 }
+
+
+
+- (void) writeH264NALToFile: (int) sd
+{
+    int len,n;
+    char bufin[MAXBUF];
+    struct sockaddr_in remote;
+    
+    // need to know how big address struct is, len must be set before the call to recvfrom!!!    
+    len = sizeof(remote);
+    int fileIndex = 0;
+
+    ///////
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *directory = AMLogDirectory();
+    BOOL isDirectory;
+    
+    if (![fileManager fileExistsAtPath:directory isDirectory:&isDirectory]) {
+        isDirectory = [fileManager createDirectoryAtPath:directory
+                             withIntermediateDirectories:NO
+                                              attributes:nil
+                                                   error:nil];
+    }
+    /////////
+    
+    while (fileIndex <= 1000) {
+        /// read a datagram from the socket (put result in bufin)
+        n=recvfrom(sd,bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
+        if (n == 0)
+            continue;
+        
+        // print out the address of the sender
+        NSLog(@"Got a datagram from %s port %d\n",
+              inet_ntoa(remote.sin_addr), ntohs(remote.sin_port));
+        
+        if(n<0) {
+            NSLog(@"Error receiving data");
+        } else {
+            NSLog(@"GOT %d BYTES\n",n);
+            // Got something, just send it back
+            n = snprintf(bufin, sizeof(bufin), "%s:%d",
+                         inet_ntoa(remote.sin_addr), ntohs(remote.sin_port));
+            
+            
+            fileIndex++;
+            NSData* recvData = [[NSData alloc] initWithBytes:bufin length:len];
+            NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",fileIndex];
+            [fileManager createFileAtPath:nalFilePath contents:recvData attributes:nil];
+            
+        }
+    }
+}
+
+
+-(int) initUDPConfig:(NSUInteger)nPort {
+    
+    int ld;
+    struct sockaddr_in skaddr;
+    int length;
+    
+    // create a socket IP protocol family (PF_INET) UDP protocol (SOCK_DGRAM)
+    
+    
+    if ((ld = socket( PF_INET, SOCK_DGRAM, 0 )) < 0) {
+        NSLog(@"Problem creating socket\n");
+        return -1;
+    }
+    
+    // establish our address address family is AF_INET our IP address is INADDR_ANY
+    // (any of our IP addresses) the port number is assigned by the kernel
+    
+    skaddr.sin_family = AF_INET;
+    skaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    skaddr.sin_port = htons(nPort);
+    
+    if (bind(ld, (struct sockaddr *) &skaddr, sizeof(skaddr))<0) {
+        NSLog(@"Problem binding\n");
+        return -1;
+    }
+    
+    // find out what port we were assigned and print it out
+    length = sizeof( skaddr );
+    if (getsockname(ld, (struct sockaddr *) &skaddr, &length)<0) {
+        NSLog(@"Error getsockname\n");
+        return -1;
+    }
+    
+    // port number's are network byte order, we have to convert to
+    // host byte order before printing !
+    NSLog(@"The server UDP port number is %d\n",ntohs(skaddr.sin_port));
+    
+    // Go echo every datagram we get
+    
+    return ld;
+}
+
+
 
 -(void) observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -123,12 +249,6 @@ NSString *const naluTypesStrings[] =
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
-    
-   
-    
-    
-
-    
     
     NSView *subView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
@@ -175,7 +295,6 @@ NSString *const naluTypesStrings[] =
     CMTimebaseSetRate(self.videoLayer.controlTimebase, 1.0);
     
     [self.glView setLayer:_avsbDisplayLayer];
-
 }
 
 

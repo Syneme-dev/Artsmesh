@@ -91,6 +91,7 @@
     NSString *audSampleRatePref;
     NSString *audBitRatePref;
     NSString *baseUrlPref;
+    NSString *base6UrlPref;
     NSString *streamKeyPref;
     
     int vidSelectedDeviceIndexPref;
@@ -415,6 +416,7 @@
     cfgs.audioSampleRate = audSampleRatePref;
     cfgs.videoOutSize = ffmpegVidOutDimensions;
     cfgs.serverAddr = baseUrlPref;
+    cfgs.ipv6Addr = base6UrlPref;
     cfgs.streamName = streamKeyPref;
     
     [ffmpeg streamToYouTube:cfgs];
@@ -471,6 +473,7 @@
     audBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
     
     baseUrlPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url];
+    base6UrlPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base6_Url];
     streamKeyPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Stream_Key];
 }
 
@@ -517,6 +520,7 @@
     
     [self.videoBitRateTextField setStringValue:@"4000"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
+    [self.base6UrlTextField setStringValue:@""];
     [self.streamKeyTextField setStringValue:@""];
     
     [self saveSettings];
@@ -572,6 +576,12 @@
         [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
     }
     
+    if ([base6UrlPref length] != 0) {
+        [self.base6UrlTextField setStringValue:base6UrlPref];
+    } else {
+        [self.baseUrlTextField setStringValue:@""];
+    }
+    
     if ([streamKeyPref length] != 0) {
         [self.streamKeyTextField setStringValue:streamKeyPref];
     } else {
@@ -603,6 +613,9 @@
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];
+    [[AMPreferenceManager standardUserDefaults]
+     setObject:self.base6UrlTextField.stringValue
+     forKey:Preference_Key_ffmpeg_Base6_Url];
     
     [[AMPreferenceManager standardUserDefaults] setObject:self.streamKeyTextField.stringValue forKey:Preference_Key_ffmpeg_Stream_Key];
     

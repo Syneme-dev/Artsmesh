@@ -16,6 +16,7 @@
 
 //                                  if client ip address
 @property NSString *serverAddr;
+@property NSString *ipv6Addr;
 @property NSString *streamName;     // Sets stream name for YouTube streaming
 
 //                                  Receiving port offset from base port 5564

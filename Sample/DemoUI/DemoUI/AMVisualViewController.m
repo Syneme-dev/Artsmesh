@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_b7b7b7];
-  //  [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
 
     [self loadAudioRouterView];
     [self loadVideoRouterView];

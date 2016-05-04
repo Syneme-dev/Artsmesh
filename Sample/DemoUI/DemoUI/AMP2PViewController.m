@@ -122,14 +122,85 @@ NSString *const naluTypesStrings[] =
         NSString* strPort = [strURL substringFromIndex:commaPosition+1];
         int ld =[self initUDPConfig:[strPort integerValue]];
         if(ld != -1){
-            [self writeH264NALToFile:ld];
+            [self parseH264NAL:ld];
         }
+        close(ld);
     }
    
 
 }
 
+- (void) parseH264NAL:(int) sd{
+    int len,n;
+    char bufin[MAXBUF];
+    struct sockaddr_in remote;
+    
+    // need to know how big address struct is, len must be set before the call to recvfrom!!!
+    len = sizeof(remote);
+    int index = 0;
+    
+    UInt8 tmpStartCode[3];
+    
+    tmpStartCode[0] = 0x00;
+    tmpStartCode[1] = 0x00;
+    tmpStartCode[2] = 0x01;
+    
+    NSData *startCode = [NSData dataWithBytes:&tmpStartCode length:3];
+    NSMutableData* lastNALUData = nil;
+    
+    while (index < 300) { // 30 seconds
+        /// read a datagram from the socket (put result in bufin)
+        n=recvfrom(sd,bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
+        if (n == 0)
+            continue;
+        
+        
+        index++;
+        NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
+        
+        bool findHeader = NO;
+        NSRange range;
+        
+        range = [recvData rangeOfData:startCode options:nil
+                                        range:NSMakeRange(0, [recvData length])];
+        
+        while(range.location != NSNotFound){
+            if (range.location != NSNotFound) {
+                if(lastNALUData != nil && range.location != 0){
+                    if(lastNALUData == nil){ //the first time to receive
+                        lastNALUData = [[NSMutableData alloc] initWithBytes:(uint8_t*)recvData.bytes
+                                                          length:range.length];
+                    }else{
+                        [lastNALUData appendBytes:(uint8_t*)recvData.bytes
+                                           length:range.length-1];
+                    
+                        [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
+                                           withSize:[lastNALUData length]
+                                           isIFrame:1];
+                    
+                            lastNALUData = [[NSMutableData alloc]
+                                                initWithBytes:(uint8_t*)recvData.bytes + range.length
+                                                length:range.length];
+                    }
+                    
+                    range = [recvData rangeOfData:startCode
+                                          options:nil
+                                            range:NSMakeRange(range.location+1, [recvData length]-range.length)];
+                    continue;
+                }
+            }else{ //Not found
+                if(lastNALUData != nil)
+                    [lastNALUData appendData:recvData];
+                break;
+            }
+            
+        }
+        
+        
+    }
 
+    
+}
 
 - (void) writeH264NALToFile: (int) sd
 {
@@ -160,25 +231,18 @@ NSString *const naluTypesStrings[] =
         if (n == 0)
             continue;
         
-        // print out the address of the sender
-        NSLog(@"Got a datagram from %s port %d\n",
-              inet_ntoa(remote.sin_addr), ntohs(remote.sin_port));
         
         if(n<0) {
             NSLog(@"Error receiving data");
-        } else {
-            NSLog(@"GOT %d BYTES\n",n);
-            // Got something, just send it back
-            n = snprintf(bufin, sizeof(bufin), "%s:%d",
-                         inet_ntoa(remote.sin_addr), ntohs(remote.sin_port));
-            
-            
-            fileIndex++;
-            NSData* recvData = [[NSData alloc] initWithBytes:bufin length:len];
-            NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",fileIndex];
-            [fileManager createFileAtPath:nalFilePath contents:recvData attributes:nil];
-            
+            continue;
         }
+        
+        
+        fileIndex++;
+        NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
+        NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",fileIndex];
+        
+        [fileManager createFileAtPath:nalFilePath contents:recvData attributes:nil];
     }
 }
 
@@ -322,9 +386,6 @@ NSString *const naluTypesStrings[] =
 }
  
 
-//use Video Tookit for h.264
-
-
 //First, add the base of the function which deals with H.264 from the network
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(uint32_t)frameSize isIFrame:(int)isIFrame
 {
@@ -361,11 +422,11 @@ NSString *const naluTypesStrings[] =
     // NALU type 7 is the SPS parameter NALU
     if (nalu_type == 7)
     {
-        // Find where the second PPS start code begins, (the 0x00 00 00 01 code)
+        // Find where the second PPS start code begins, (the 0x00 00 01 code)
         // from which we also get the length of the first SPS code
         for (int i = startCodeIndex + 4; i < startCodeIndex + 40; i++)
         {
-            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x00 && frame[i+3] == 0x01)
+            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x01)
             {
                 secondStartCodeIndex = i;
                 _spsSize = secondStartCodeIndex;   // includes the header in the size
@@ -374,7 +435,7 @@ NSString *const naluTypesStrings[] =
         }
         
         // Find what the second NALU type is
-        nalu_type = (frame[secondStartCodeIndex + 4] & 0x1F);
+        nalu_type = (frame[secondStartCodeIndex + 3] & 0x1F);
         NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
     }
     

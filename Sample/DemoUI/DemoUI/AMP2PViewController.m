@@ -131,12 +131,18 @@ NSString *const naluTypesStrings[] =
 }
 
 - (void) parseH264NAL:(int) sd{
-    int len,n;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *directory = AMLogDirectory();
+    BOOL isDirectory;
+    
+    ///
+    int n;
     char bufin[MAXBUF];
     struct sockaddr_in remote;
     
     // need to know how big address struct is, len must be set before the call to recvfrom!!!
-    len = sizeof(remote);
+    unsigned int len = sizeof(remote);
     int index = 0;
     
     UInt8 tmpStartCode[3];
@@ -146,60 +152,72 @@ NSString *const naluTypesStrings[] =
     tmpStartCode[2] = 0x01;
     
     NSData *startCode = [NSData dataWithBytes:&tmpStartCode length:3];
-    NSMutableData* lastNALUData = nil;
+    NSMutableData* lastNALUData = [[NSMutableData alloc] init];
     
+    int udpIndex = 0;
     while (index < 300) { // 30 seconds
         /// read a datagram from the socket (put result in bufin)
-        n=recvfrom(sd,bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
+        n=recvfrom(sd, bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
         if (n == 0)
             continue;
         
         
-        index++;
         NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
         
-        bool findHeader = NO;
-        NSRange range;
-        
-        range = [recvData rangeOfData:startCode options:nil
+        NSRange prevRange = NSMakeRange(NSNotFound, 0);
+        NSRange nextRange = [recvData rangeOfData:startCode
+                                          options:0
                                         range:NSMakeRange(0, [recvData length])];
+       //~~~~
+        NSString* nalFilePath = [NSString stringWithFormat:@"udp_%d",udpIndex++];
+        [fileManager createFileAtPath:nalFilePath
+                             contents:recvData
+                           attributes:nil];
+
+        //~~~~
         
-        while(range.location != NSNotFound){
-            if (range.location != NSNotFound) {
-                if(lastNALUData != nil && range.location != 0){
-                    if(lastNALUData == nil){ //the first time to receive
-                        lastNALUData = [[NSMutableData alloc] initWithBytes:(uint8_t*)recvData.bytes
-                                                          length:range.length];
-                    }else{
-                        [lastNALUData appendBytes:(uint8_t*)recvData.bytes
-                                           length:range.length-1];
-                    
-                        [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
-                                           withSize:[lastNALUData length]
-                                           isIFrame:1];
-                    
-                            lastNALUData = [[NSMutableData alloc]
-                                                initWithBytes:(uint8_t*)recvData.bytes + range.length
-                                                length:range.length];
+        
+        
+        if(nextRange.location != NSNotFound){
+             while(nextRange.location != NSNotFound) {
+                if(prevRange.location == NSNotFound){ //first time find the start code.){
+                    prevRange.location = 0;
+                    if((nextRange.location - prevRange.location) > 0){
+                        [lastNALUData appendBytes:(uint8_t*)recvData.bytes + prevRange.location
+                                           length:nextRange.location - prevRange.location];
                     }
                     
-                    range = [recvData rangeOfData:startCode
-                                          options:nil
-                                            range:NSMakeRange(range.location+1, [recvData length]-range.length)];
-                    continue;
+                    
+                }else{// Multiple times find start code in a single udp packet.
+                    lastNALUData = [[NSMutableData alloc]
+                                    initWithBytes:(uint8_t*)recvData.bytes+prevRange.location
+                                           length:nextRange.location - prevRange.location];
                 }
-            }else{ //Not found
-                if(lastNALUData != nil)
-                    [lastNALUData appendData:recvData];
-                break;
-            }
-            
+                 /*
+                  [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
+                  withSize:[lastNALUData length]
+                  isIFrame:1];
+                  */
+                 //~~~~~~~
+                 NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",index++];
+                 [fileManager createFileAtPath:nalFilePath
+                                      contents:lastNALUData
+                                    attributes:nil];
+                 //~~~~~~~
+
+                 
+                prevRange = nextRange;
+                nextRange = [recvData rangeOfData:startCode
+                                          options:nil
+                                            range:NSMakeRange(prevRange.location+3,
+                                                            [recvData length]-prevRange.location-3)];
+             }
+        }else{ //Not found
+            [lastNALUData appendData:recvData];
         }
         
-        
+        //index++;
     }
-
-    
 }
 
 - (void) writeH264NALToFile: (int) sd

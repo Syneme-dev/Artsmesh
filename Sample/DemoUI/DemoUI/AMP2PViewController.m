@@ -12,6 +12,8 @@
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonView.h"
 #import <VideoToolbox/VideoToolbox.h>
+#import "AMNetworkUtils/JSONKit.h"
+#import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 
 
 #include "AMLogger/AMLogger.h"
@@ -77,8 +79,8 @@ NSString *const naluTypesStrings[] =
 @property (nonatomic, retain) AVSampleBufferDisplayLayer*   videoLayer;
 @property (nonatomic, assign) int                           spsSize;
 @property (nonatomic, assign) int                           ppsSize;
-
-
+@property (nonatomic, strong) NSData*                       spsData;
+@property (nonatomic, strong) NSData*                       ppsData;
 
 @end
 
@@ -86,6 +88,7 @@ NSString *const naluTypesStrings[] =
 {
     AVPlayer*                       _player;
     AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
+    GCDAsyncUdpSocket*              _udpSocket;
 }
 
 - (void) dealloc{
@@ -149,18 +152,19 @@ NSString *const naluTypesStrings[] =
     
     tmpStartCode[0] = 0x00;
     tmpStartCode[1] = 0x00;
-    tmpStartCode[2] = 0x01;
+    tmpStartCode[2] = 0x00;
+    tmpStartCode[3] = 0x01;
+    int tmpStartCodeLen = 4;
     
-    NSData *startCode = [NSData dataWithBytes:&tmpStartCode length:3];
+    NSData *startCode = [NSData dataWithBytes:&tmpStartCode length:tmpStartCodeLen];
     NSMutableData* lastNALUData = [[NSMutableData alloc] init];
     
     int udpIndex = 0;
     while (index < 300) { // 30 seconds
         /// read a datagram from the socket (put result in bufin)
-        n=recvfrom(sd, bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
+        n=recvfrom(sd, bufin, MAXBUF, 0, (struct sockaddr*)&remote, &len);
         if (n == 0)
             continue;
-        
         
         NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
         
@@ -175,8 +179,7 @@ NSString *const naluTypesStrings[] =
                            attributes:nil];
 
         //~~~~
-        
-        
+
         
         if(nextRange.location != NSNotFound){
              while(nextRange.location != NSNotFound) {
@@ -190,77 +193,38 @@ NSString *const naluTypesStrings[] =
                     
                 }else{// Multiple times find start code in a single udp packet.
                     lastNALUData = [[NSMutableData alloc]
-                                    initWithBytes:(uint8_t*)recvData.bytes+prevRange.location
+                                    initWithBytes:bufin+prevRange.location
                                            length:nextRange.location - prevRange.location];
                 }
-                 /*
-                  [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
-                  withSize:[lastNALUData length]
-                  isIFrame:1];
-                  */
+                 
+                [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
+                  withSize:[lastNALUData length]];
+                 
                  //~~~~~~~
-                 NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",index++];
+                 
+                  NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",index++];
                  [fileManager createFileAtPath:nalFilePath
                                       contents:lastNALUData
                                     attributes:nil];
-                 //~~~~~~~
+                 
+                  //~~~~~~~
 
                  
                 prevRange = nextRange;
                 nextRange = [recvData rangeOfData:startCode
                                           options:nil
-                                            range:NSMakeRange(prevRange.location+3,
-                                                            [recvData length]-prevRange.location-3)];
+                                            range:NSMakeRange(prevRange.location+[startCode length],
+                                                            [recvData length]-prevRange.location-[startCode length])];
              }
+            //When find no other start code, just store the rest.
+            lastNALUData = [[NSMutableData alloc]
+                                    initWithBytes:bufin + prevRange.location
+                                           length:[recvData length] - prevRange.location];
         }else{ //Not found
             [lastNALUData appendData:recvData];
         }
         
         //index++;
-    }
-}
-
-- (void) writeH264NALToFile: (int) sd
-{
-    int len,n;
-    char bufin[MAXBUF];
-    struct sockaddr_in remote;
-    
-    // need to know how big address struct is, len must be set before the call to recvfrom!!!    
-    len = sizeof(remote);
-    int fileIndex = 0;
-
-    ///////
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *directory = AMLogDirectory();
-    BOOL isDirectory;
-    
-    if (![fileManager fileExistsAtPath:directory isDirectory:&isDirectory]) {
-        isDirectory = [fileManager createDirectoryAtPath:directory
-                             withIntermediateDirectories:NO
-                                              attributes:nil
-                                                   error:nil];
-    }
-    /////////
-    
-    while (fileIndex <= 1000) {
-        /// read a datagram from the socket (put result in bufin)
-        n=recvfrom(sd,bufin, MAXBUF, 0, (struct sockaddr *)&remote, &len);
-        if (n == 0)
-            continue;
-        
-        
-        if(n<0) {
-            NSLog(@"Error receiving data");
-            continue;
-        }
-        
-        
-        fileIndex++;
-        NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
-        NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",fileIndex];
-        
-        [fileManager createFileAtPath:nalFilePath contents:recvData attributes:nil];
     }
 }
 
@@ -405,7 +369,7 @@ NSString *const naluTypesStrings[] =
  
 
 //First, add the base of the function which deals with H.264 from the network
--(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(uint32_t)frameSize isIFrame:(int)isIFrame
+-(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(uint32_t)frameSize
 {
     OSStatus status;
     
@@ -413,38 +377,71 @@ NSString *const naluTypesStrings[] =
     uint8_t *pps = NULL;
     uint8_t *sps = NULL;
     
-    // For our example of H.264 data source's NALUs, the start-code index should be always 0.
-    // If you don't know where it starts, you can use a for loop similar to
-    // how i find the 2nd and 3rd start codes.
-    
     int startCodeIndex = 0;
     int secondStartCodeIndex = 0;
     int thirdStartCodeIndex = 0;
     
     long blockLength = 0;
     
-    CMSampleBufferRef sampleBuffer = NULL;
-    CMBlockBufferRef blockBuffer = NULL;
+    CMSampleBufferRef   sampleBuffer = NULL;
+    CMBlockBufferRef    blockBuffer = NULL;
     
     int nalu_type = (frame[startCodeIndex + 4] & 0x1F);
-    NSLog(@"Later AMLog: Received NALU Type \"%@\" ", naluTypesStrings[nalu_type]);
+    NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
     
-    // If we haven't already set up our format description with our SPS PPS parameters,
-    // we can't process any frames except type 7 that has our parameters
-    if (nalu_type != 7 && _formatDesc == NULL)
+    // if we havent already set up our format description with our SPS PPS parameters, we
+    // can't process any frames except type 7 that has our parameters
+    /*if (nalu_type != 7 && _formatDesc == NULL)
     {
-        NSLog(@"Later AMLog video error: Frame is not an I Frame and format description is null");
+        NSLog(@"Video error: Frame is not an I Frame and format description is null");
         return;
+    }*/
+    
+    if (nalu_type == 7 || nalu_type == 8)
+    {
+        // find what the second NALU type is
+        nalu_type = (frame[secondStartCodeIndex + 4] & 0x1F);
+        NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
+        
+        if(nalu_type == 7){
+            _spsData = [[NSData alloc] initWithBytes:frame+4  length:frameSize-4];
+            _spsSize = frameSize - 4;
+        }
+        else{
+            _ppsData = [[NSData alloc] initWithBytes:frame+4  length:frameSize-4];
+            _ppsSize = frameSize - 4;
+        }
+        
+        // now we set our H264 parameters
+        if (_spsData != nil && _ppsData != nil) {
+            const uint8_t * const parameterSetPointers[2] = {
+                (const uint8_t *) _spsData.bytes,
+                (const uint8_t *) _ppsData.bytes
+            };
+            
+            const size_t parameterSetSizes[2] = {
+                _spsData.length,
+                _ppsData.length
+            };
+
+            status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
+                                                        (const uint8_t *const*)parameterSetPointers,
+                                                                         parameterSetSizes, 4,
+                                                                         &_formatDesc);
+            NSLog(@"\t Update CMVideoFormatDescription:%@", (status == noErr) ? @"success" : @"fail");
+            if(status != noErr) NSLog(@"\t Format Description ERROR type: %d", (int)status);
+        }
     }
     
+    /*
     // NALU type 7 is the SPS parameter NALU
     if (nalu_type == 7)
     {
-        // Find where the second PPS start code begins, (the 0x00 00 01 code)
+        // find where the second PPS start code begins, (the 0x00 00 00 01 code)
         // from which we also get the length of the first SPS code
         for (int i = startCodeIndex + 4; i < startCodeIndex + 40; i++)
         {
-            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x01)
+            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x00 && frame[i+3] == 0x01)
             {
                 secondStartCodeIndex = i;
                 _spsSize = secondStartCodeIndex;   // includes the header in the size
@@ -452,15 +449,15 @@ NSString *const naluTypesStrings[] =
             }
         }
         
-        // Find what the second NALU type is
-        nalu_type = (frame[secondStartCodeIndex + 3] & 0x1F);
+        // find what the second NALU type is
+        nalu_type = (frame[secondStartCodeIndex + 4] & 0x1F);
         NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
     }
     
     // type 8 is the PPS parameter NALU
     if(nalu_type == 8)
     {
-        // Find where the NALU after this one starts so we know how long the PPS parameter is
+        // find where the NALU after this one starts so we know how long the PPS parameter is
         for (int i = _spsSize + 4; i < _spsSize + 30; i++)
         {
             if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x00 && frame[i+3] == 0x01)
@@ -470,8 +467,9 @@ NSString *const naluTypesStrings[] =
                 break;
             }
         }
+       
         
-        // Allocate enough data to fit the SPS and PPS parameters into our data objects.
+        // allocate enough data to fit the SPS and PPS parameters into our data objects.
         // VTD doesn't want you to include the start code header (4 bytes long) so we add the - 4 here
         sps = malloc(_spsSize - 4);
         pps = malloc(_ppsSize - 4);
@@ -492,40 +490,29 @@ NSString *const naluTypesStrings[] =
         NSLog(@"\t\t Creation of CMVideoFormatDescription: %@", (status == noErr) ? @"successful!" : @"failed...");
         if(status != noErr) NSLog(@"\t\t Format Description ERROR type: %d", (int)status);
         
-        // See if decomp session can convert from previous format description
-        // to the new one, if not we need to remake the decomp session.
-        // This snippet was not necessary for my applications but it could be for yours
-        /*BOOL needNewDecompSession = (VTDecompressionSessionCanAcceptFormatDescription(_decompressionSession, _formatDesc) == NO);
-         if(needNewDecompSession)
-         {
-         [self createDecompSession];
-         }*/
         
         // now lets handle the IDR frame that (should) come after the parameter sets
         // I say "should" because that's how I expect my H264 stream to work, YMMV
         nalu_type = (frame[thirdStartCodeIndex + 4] & 0x1F);
-        NSLog(@"Later AMLog:Received NALU Type \"%@\" ", naluTypesStrings[nalu_type]);
-    }
-    
-  
-    
-    // Type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
-    // (or IFrame) NALU.
+        NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
+    }*/
+      
+    // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR (or IFrame) NALU, as far as I know
     if(nalu_type == 5)
     {
-        // Find the offset, or where the SPS and PPS NALUs end and the IDR frame NALU begins
+        // find the offset, or where the SPS and PPS NALUs end and the IDR frame NALU begins
         int offset = _spsSize + _ppsSize;
         blockLength = frameSize - offset;
         data = malloc(blockLength);
         data = memcpy(data, &frame[offset], blockLength);
         
-        // Replace the start code header on this NALU with its size.
+        // replace the start code header on this NALU with its size.
         // AVCC format requires that you do this.
         // htonl converts the unsigned int from host to network byte order
         uint32_t dataLength32 = htonl (blockLength - 4);
         memcpy (data, &dataLength32, sizeof (uint32_t));
         
-        // Create a block buffer from the IDR NALU
+        // create a block buffer from the IDR NALU
         status = CMBlockBufferCreateWithMemoryBlock(NULL, data,  // memoryBlock to hold buffered data
                                                     blockLength,  // block length of the mem block in bytes.
                                                     kCFAllocatorNull, NULL,
@@ -549,27 +536,30 @@ NSString *const naluTypesStrings[] =
         uint32_t dataLength32 = htonl (blockLength - 4);
         memcpy (data, &dataLength32, sizeof (uint32_t));
         
-        status = CMBlockBufferCreateWithMemoryBlock(NULL, data,  // memoryBlock to hold data. If NULL, block will be alloc when needed
-                                                    blockLength,  // overall length of the mem block in bytes
+        status = CMBlockBufferCreateWithMemoryBlock(NULL, data,
+                        // memoryBlock to hold data. If NULL, block will be alloc when needed
+                                                    blockLength,
+                        // overall length of the mem block in bytes
                                                     kCFAllocatorNull, NULL,
                                                     0,     // offsetToData
-                                                    blockLength,  // dataLength of relevant data bytes, starting at offsetToData
+                                                    blockLength,
+                        // dataLength of relevant data bytes, starting at offsetToData
                                                     0, &blockBuffer);
         
-        NSLog(@"\t\t BlockBufferCreation: \t %@", (status == kCMBlockBufferNoErr) ? @"successful!" : @"failed...");
+        NSLog(@"\t BlockBufferCreation:%@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
     }
     
     // now create our sample buffer from the block buffer,
     if(status == noErr)
     {
-        // here I'm not bothering with any timing specifics since in my case we displayed all frames immediately
+    // Don't bother with timing specifics since now we just display all frames immediately
         const size_t sampleSize = blockLength;
         status = CMSampleBufferCreate(kCFAllocatorDefault,
                                       blockBuffer, true, NULL, NULL,
                                       _formatDesc, 1, 0, NULL, 1,
                                       &sampleSize, &sampleBuffer);
         
-        NSLog(@"\t\t SampleBufferCreate: \t %@", (status == noErr) ? @"successful!" : @"failed...");
+        NSLog(@"\t SampleBufferCreate:%@", (status == noErr) ? @"success" : @"fail");
     }
     
     if(status == noErr)
@@ -579,8 +569,12 @@ NSString *const naluTypesStrings[] =
         CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
         CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
         
-        // Later send the samplebuffer to to an AVSampleBufferDisplayLayer
-        //[self render:sampleBuffer];
+        //send the samplebuffer to an AVSampleBufferDisplayLayer
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            [_avsbDisplayLayer enqueueSampleBuffer:sampleBuffer];
+            [_avsbDisplayLayer setNeedsDisplay];
+        });
     }
     
     // free memory to avoid a memory leak, do the same for sps, pps and blockbuffer
@@ -590,6 +584,7 @@ NSString *const naluTypesStrings[] =
         data = NULL;
     }
 }
+
 
 
 

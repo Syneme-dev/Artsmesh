@@ -73,15 +73,6 @@ NSString *const naluTypesStrings[] =
 //@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 
-//VT for deocde h.264
-@property (nonatomic, assign) CMVideoFormatDescriptionRef   formatDesc;
-@property (nonatomic, assign) VTDecompressionSessionRef     decompressionSession;
-@property (nonatomic, retain) AVSampleBufferDisplayLayer*   videoLayer;
-@property (nonatomic, assign) int                           spsSize;
-@property (nonatomic, assign) int                           ppsSize;
-@property (nonatomic, strong) NSData*                       spsData;
-@property (nonatomic, strong) NSData*                       ppsData;
-
 @end
 
 @implementation AMP2PViewController
@@ -89,6 +80,11 @@ NSString *const naluTypesStrings[] =
     AVPlayer*                       _player;
     AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
     GCDAsyncUdpSocket*              _udpSocket;
+    CMVideoFormatDescriptionRef     _formatDesc;
+    NSData*                         _spsData;
+    NSData*                         _ppsData;
+    int                             _ppsSize;
+    int                             _spsSize;
 }
 
 - (void) dealloc{
@@ -337,8 +333,8 @@ NSString *const naluTypesStrings[] =
     CMTimebaseCreateWithMasterClock(CFAllocatorGetDefault(), CMClockGetHostTimeClock(), &controlTimebase);
     
     //videoLayer.controlTimebase = controlTimebase;
-    CMTimebaseSetTime(self.videoLayer.controlTimebase, kCMTimeZero);
-    CMTimebaseSetRate(self.videoLayer.controlTimebase, 1.0);
+    CMTimebaseSetTime(_avsbDisplayLayer.controlTimebase, kCMTimeZero);
+    CMTimebaseSetRate(_avsbDisplayLayer.controlTimebase, 1.0);
     
     [self.glView setLayer:_avsbDisplayLayer];
 }
@@ -423,11 +419,13 @@ NSString *const naluTypesStrings[] =
                 _spsData.length,
                 _ppsData.length
             };
-
+            
+            CMVideoFormatDescriptionRef videoFormatDescr;
             status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
                                                         (const uint8_t *const*)parameterSetPointers,
                                                                          parameterSetSizes, 4,
-                                                                         &_formatDesc);
+                                                                         &videoFormatDescr);
+            _formatDesc = videoFormatDescr;
             NSLog(@"\t Update CMVideoFormatDescription:%@", (status == noErr) ? @"success" : @"fail");
             if(status != noErr) NSLog(@"\t Format Description ERROR type: %d", (int)status);
         }
@@ -520,7 +518,7 @@ NSString *const naluTypesStrings[] =
                                                     blockLength,   // dataLength of relevant bytes, starting at offsetToData
                                                     0, &blockBuffer);
         
-        NSLog(@"\t\t BlockBufferCreation: \t %@", (status == kCMBlockBufferNoErr) ? @"successful!" : @"failed...");
+        NSLog(@"\t BlockBufferCreation: \t %@", (status == kCMBlockBufferNoErr) ? @"successful!" : @"failed...");
     }
     
     // NALU type 1 is non-IDR (or PFrame) picture

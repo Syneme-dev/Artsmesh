@@ -16,6 +16,7 @@
 
 NSString* kAMMyself = @"MYSELF";
 NSString *const AMP2PVideoReceiverChanged = @"AMP2PVideoReceiverChanged";
+NSString *ytAddr = @"rtmp://a.rtmp.youtube.com/live2";
 
 @interface AMVideoRouteViewController ()  <NSPopoverDelegate>
 @property (weak) IBOutlet NSButton *plusButton;
@@ -282,6 +283,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     NSString* peerIP    = _configController.videoConfig.peerIP;
     NSString* peerIPPort  = [NSString stringWithFormat:@"%@:%d",
                                             peerIP, _configController.videoConfig.peerPort];
+    NSString *peerName = [NSString stringWithFormat:@"%@", _configController.videoConfig.peerName];
 
     
     AMVideoDevice* peerDevice = [[AMVideoDevice alloc] init];
@@ -320,7 +322,8 @@ shouldRemoveDevice:(NSString *)deviceID;
         }
         
         peerChannel.deviceID     = peerIPPort;
-        peerChannel.channelName  = peerIPPort;
+        //peerChannel.channelName  = peerIPPort;
+        peerChannel.channelName = peerName;
         peerChannel.index = firstIndex + i;
         [peerChannels addObject:peerChannel];
         

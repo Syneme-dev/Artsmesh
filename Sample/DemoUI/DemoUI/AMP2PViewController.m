@@ -72,19 +72,23 @@ NSString *const naluTypesStrings[] =
 @property (weak) IBOutlet NSView* glView;
 //@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
-
+@property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
 @end
 
 @implementation AMP2PViewController
 {
     AVPlayer*                       _player;
-    AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
+   // AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
     GCDAsyncUdpSocket*              _udpSocket;
     CMVideoFormatDescriptionRef     _formatDesc;
     NSData*                         _spsData;
     NSData*                         _ppsData;
     int                             _ppsSize;
     int                             _spsSize;
+    
+    int                             _fileIndex;
+    int                             _udpIndex;
+    NSMutableData*                  _lastNALUData;
 }
 
 - (void) dealloc{
@@ -92,8 +96,37 @@ NSString *const naluTypesStrings[] =
 }
 
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
-    NSString* serverURL = [NSString stringWithFormat:@"udp://%@", sender.selectedItem.title];
-    NSURL *url = [NSURL URLWithString:serverURL];
+    int port = 0;
+    NSString* url = sender.selectedItem.title;
+    NSUInteger commaPosition =[url rangeOfString:@":"].location;
+    if(commaPosition != NSNotFound){
+        NSString* strPort = [url substringFromIndex:commaPosition+1];
+        port =[strPort integerValue];
+    }
+    if(port <= 0){
+        AMLog(kAMErrorLog, @"Video Mixer", @"Parse port error");
+        return;
+    }
+    
+    _udpSocket = [[GCDAsyncUdpSocket alloc]
+                  initWithDelegate:self
+                  delegateQueue:dispatch_get_main_queue()];
+    NSError *error = nil;
+    
+    if (![_udpSocket bindToPort:port error:&error])
+    {
+        AMLog(kAMErrorLog, @"Video Mixer", @"Create udp socket failed in the port[%d].Error:%@",
+                                   port, error);
+        return;
+    }
+    
+    if (![_udpSocket beginReceiving:&error])
+    {
+        [_udpSocket close];
+        AMLog(kAMErrorLog, @"Video Mixer", @"Listening socket port failed. Error:%@", error);
+        return;
+    }
+    
     
     // You may find a test stream at <http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8>.
   /*  AVPlayerItem*  playerItem = [AVPlayerItem playerItemWithURL:url];
@@ -112,8 +145,9 @@ NSString *const naluTypesStrings[] =
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     [_glView setLayer:playerLayer];
     */
-   
     
+   
+    /*
     NSString* strURL = sender.selectedItem.title;
     //[strURL rangeOfString:];
     NSUInteger commaPosition =[strURL rangeOfString:@":"].location;
@@ -125,7 +159,7 @@ NSString *const naluTypesStrings[] =
         }
         close(ld);
     }
-   
+    */
 
 }
 
@@ -144,7 +178,7 @@ NSString *const naluTypesStrings[] =
     unsigned int len = sizeof(remote);
     int index = 0;
     
-    UInt8 tmpStartCode[3];
+    UInt8 tmpStartCode[4];
     
     tmpStartCode[0] = 0x00;
     tmpStartCode[1] = 0x00;
@@ -224,6 +258,88 @@ NSString *const naluTypesStrings[] =
     }
 }
 
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+   didReceiveData:(NSData *)data
+      fromAddress:(NSData *)address
+withFilterContext:(id)filterContext
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *directory = AMLogDirectory();
+    BOOL isDirectory;
+    
+    
+    UInt8 tmpStartCode[4];
+    tmpStartCode[0] = 0x00;
+    tmpStartCode[1] = 0x00;
+    tmpStartCode[2] = 0x00;
+    tmpStartCode[3] = 0x01;
+    int tmpStartCodeLen = 4;
+    
+    NSData* startCode = [NSData dataWithBytes:&tmpStartCode length:tmpStartCodeLen];
+
+    NSData* recvData = data;
+    const char* bufin = (const char*)[recvData bytes];
+    
+    NSRange prevRange = NSMakeRange(NSNotFound, 0);
+    NSRange nextRange = [recvData rangeOfData:startCode
+                                      options:0
+                                        range:NSMakeRange(0, [recvData length])];
+    
+    //~~~~
+    if(_udpIndex <= 300){
+        NSString* nalFilePath = [NSString stringWithFormat:@"udp_%d",_udpIndex++];
+        [fileManager createFileAtPath:nalFilePath
+                             contents:recvData
+                           attributes:nil];
+    }
+    //~~~~
+        
+        
+    if(nextRange.location != NSNotFound){
+        while(nextRange.location != NSNotFound) {
+            if(prevRange.location == NSNotFound){ //first time find the start code.){
+                prevRange.location = 0;
+                if((nextRange.location - prevRange.location) > 0){
+                    [_lastNALUData appendBytes:(uint8_t*)recvData.bytes + prevRange.location
+                                        length:nextRange.location - prevRange.location];
+                }
+            }else{// Multiple times find start code in a single udp packet.
+                _lastNALUData = [[NSMutableData alloc]
+                                    initWithBytes:bufin+prevRange.location
+                                    length:nextRange.location - prevRange.location];
+            }
+            
+            if([_lastNALUData length] > 0){
+                [self receivedRawVideoFrame:(uint8_t*)_lastNALUData.bytes
+                                   withSize:[_lastNALUData length]];
+                
+            //~~~~~~~
+                if(_fileIndex <= 300){
+                    NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",_fileIndex++];
+                    [fileManager createFileAtPath:nalFilePath
+                                         contents:_lastNALUData
+                                       attributes:nil];
+                }
+            //~~~~~~~
+            }
+            
+            prevRange = nextRange;
+            nextRange = [recvData rangeOfData:startCode
+                                      options:0
+                                        range:NSMakeRange(prevRange.location+[startCode length],
+                                                [recvData length]-prevRange.location-[startCode length])];
+        }
+        
+        //When find no other start code, just store the rest.
+        _lastNALUData = [[NSMutableData alloc]
+                                        initWithBytes:bufin + prevRange.location
+                                               length:[recvData length] - prevRange.location];
+    }else{ //Not found
+        [_lastNALUData appendData:recvData];
+    }
+}
+
+
 
 -(int) initUDPConfig:(NSUInteger)nPort {
     
@@ -294,7 +410,7 @@ NSString *const naluTypesStrings[] =
     
     NSView *subView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
-    [self.view addSubview:subView];
+    [self.view addSubview:self.glView];
     
     [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSView *content = subView;
@@ -323,20 +439,23 @@ NSString *const naluTypesStrings[] =
     // Since we're using AVSampleBufferDisplayLayer, init the layer like this:
     // create our AVSampleBufferDisplayLayer and add it to the view
     _avsbDisplayLayer = [[AVSampleBufferDisplayLayer alloc] init];
-    _avsbDisplayLayer.frame = self.view.frame;
-    _avsbDisplayLayer.bounds = self.view.bounds;
+    _avsbDisplayLayer.frame = self.glView.frame;
+    _avsbDisplayLayer.bounds = self.glView.bounds;
     _avsbDisplayLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     
-    // set Timebase, you may need this if you need to display frames at specific times
-    // Maybe not working, since I haven't verified wheterh the timebase is working
+    // set Timebase
     CMTimebaseRef controlTimebase;
     CMTimebaseCreateWithMasterClock(CFAllocatorGetDefault(), CMClockGetHostTimeClock(), &controlTimebase);
     
-    //videoLayer.controlTimebase = controlTimebase;
+    _avsbDisplayLayer.controlTimebase = controlTimebase;
     CMTimebaseSetTime(_avsbDisplayLayer.controlTimebase, kCMTimeZero);
     CMTimebaseSetRate(_avsbDisplayLayer.controlTimebase, 1.0);
     
     [self.glView setLayer:_avsbDisplayLayer];
+    
+    
+    
+    _lastNALUData = [[NSMutableData alloc] init];
 }
 
 
@@ -365,24 +484,17 @@ NSString *const naluTypesStrings[] =
  
 
 //First, add the base of the function which deals with H.264 from the network
--(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(uint32_t)frameSize
+-(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
 {
     OSStatus status;
     
     uint8_t *data = NULL;
-    uint8_t *pps = NULL;
-    uint8_t *sps = NULL;
-    
-    int startCodeIndex = 0;
-    int secondStartCodeIndex = 0;
-    int thirdStartCodeIndex = 0;
-    
+   
     long blockLength = 0;
+    CMSampleBufferRef   sampleBuffer;
+    CMBlockBufferRef    blockBuffer;
     
-    CMSampleBufferRef   sampleBuffer = NULL;
-    CMBlockBufferRef    blockBuffer = NULL;
-    
-    int nalu_type = (frame[startCodeIndex + 4] & 0x1F);
+    int nalu_type = (frame[4] & 0x1F);
     NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
     
     // if we havent already set up our format description with our SPS PPS parameters, we
@@ -396,7 +508,7 @@ NSString *const naluTypesStrings[] =
     if (nalu_type == 7 || nalu_type == 8)
     {
         // find what the second NALU type is
-        nalu_type = (frame[secondStartCodeIndex + 4] & 0x1F);
+        nalu_type = (frame[4] & 0x1F);
         NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
         
         if(nalu_type == 7){
@@ -430,156 +542,87 @@ NSString *const naluTypesStrings[] =
             if(status != noErr) NSLog(@"\t Format Description ERROR type: %d", (int)status);
         }
     }
-    
-    /*
-    // NALU type 7 is the SPS parameter NALU
-    if (nalu_type == 7)
-    {
-        // find where the second PPS start code begins, (the 0x00 00 00 01 code)
-        // from which we also get the length of the first SPS code
-        for (int i = startCodeIndex + 4; i < startCodeIndex + 40; i++)
+    if(nalu_type == 5 || nalu_type == 1)
+    { // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
+        if(nalu_type == 5)
         {
-            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x00 && frame[i+3] == 0x01)
-            {
-                secondStartCodeIndex = i;
-                _spsSize = secondStartCodeIndex;   // includes the header in the size
-                break;
-            }
-        }
+            blockLength = frameSize;
+            data = malloc(blockLength);
+            memcpy(data, frame, blockLength);
         
-        // find what the second NALU type is
-        nalu_type = (frame[secondStartCodeIndex + 4] & 0x1F);
-        NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
-    }
+            // replace the start code header on this NALU with its size, which AVCC format requires.
+            // htonl converts the unsigned int from host to network byte order
+            uint32_t dataLength32 = htonl (blockLength - 4);
+            memcpy (data, &dataLength32, sizeof (uint32_t));
+        
+            // create a block buffer from the IDR NALU
+            status = CMBlockBufferCreateWithMemoryBlock(NULL, data,  // memoryBlock to hold buffered data
+                                                        blockLength,
+                                                        kCFAllocatorNull, NULL,
+                                                        0, // offsetToData
+                                                        blockLength,   // dataLength of relevant bytes, starting at offsetToData
+                                                        0, &blockBuffer);
+        
+            NSLog(@"\t BlockBufferCreation:%@", (status == kCMBlockBufferNoErr)?@"success" : @"fail");
+        }
     
-    // type 8 is the PPS parameter NALU
-    if(nalu_type == 8)
-    {
-        // find where the NALU after this one starts so we know how long the PPS parameter is
-        for (int i = _spsSize + 4; i < _spsSize + 30; i++)
+        // NALU type 1 is non-IDR (or PFrame) picture
+        if (nalu_type == 1)
         {
-            if (frame[i] == 0x00 && frame[i+1] == 0x00 && frame[i+2] == 0x00 && frame[i+3] == 0x01)
-            {
-                thirdStartCodeIndex = i;
-                _ppsSize = thirdStartCodeIndex - _spsSize;
-                break;
-            }
-        }
-       
+            // non-IDR frames do not have an offset due to SPS and PSS, so the approach
+            // is similar to the IDR frames just without the offset
+            blockLength = frameSize;
+            data = malloc(blockLength);
+            memcpy(data, frame, blockLength);
         
-        // allocate enough data to fit the SPS and PPS parameters into our data objects.
-        // VTD doesn't want you to include the start code header (4 bytes long) so we add the - 4 here
-        sps = malloc(_spsSize - 4);
-        pps = malloc(_ppsSize - 4);
+            // again, replace the start header with the size of the NALU
+            uint32_t dataLength32 = htonl (blockLength - 4);
+            memcpy (data, &dataLength32, sizeof (uint32_t));
         
-        // copy in the actual sps and pps values, again ignoring the 4 byte header
-        memcpy (sps, &frame[4], _spsSize-4);
-        memcpy (pps, &frame[_spsSize+4], _ppsSize-4);
-        
-        // now we set our H264 parameters
-        uint8_t*  parameterSetPointers[2] = {sps, pps};
-        size_t parameterSetSizes[2] = {_spsSize-4, _ppsSize-4};
-        
-        status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
-                                                                     (const uint8_t *const*)parameterSetPointers,
-                                                                     parameterSetSizes, 4,
-                                                                     &_formatDesc);
-        
-        NSLog(@"\t\t Creation of CMVideoFormatDescription: %@", (status == noErr) ? @"successful!" : @"failed...");
-        if(status != noErr) NSLog(@"\t\t Format Description ERROR type: %d", (int)status);
-        
-        
-        // now lets handle the IDR frame that (should) come after the parameter sets
-        // I say "should" because that's how I expect my H264 stream to work, YMMV
-        nalu_type = (frame[thirdStartCodeIndex + 4] & 0x1F);
-        NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
-    }*/
-      
-    // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR (or IFrame) NALU, as far as I know
-    if(nalu_type == 5)
-    {
-        // find the offset, or where the SPS and PPS NALUs end and the IDR frame NALU begins
-        int offset = _spsSize + _ppsSize;
-        blockLength = frameSize - offset;
-        data = malloc(blockLength);
-        data = memcpy(data, &frame[offset], blockLength);
-        
-        // replace the start code header on this NALU with its size.
-        // AVCC format requires that you do this.
-        // htonl converts the unsigned int from host to network byte order
-        uint32_t dataLength32 = htonl (blockLength - 4);
-        memcpy (data, &dataLength32, sizeof (uint32_t));
-        
-        // create a block buffer from the IDR NALU
-        status = CMBlockBufferCreateWithMemoryBlock(NULL, data,  // memoryBlock to hold buffered data
-                                                    blockLength,  // block length of the mem block in bytes.
-                                                    kCFAllocatorNull, NULL,
-                                                    0, // offsetToData
-                                                    blockLength,   // dataLength of relevant bytes, starting at offsetToData
-                                                    0, &blockBuffer);
-        
-        NSLog(@"\t BlockBufferCreation: \t %@", (status == kCMBlockBufferNoErr) ? @"successful!" : @"failed...");
-    }
-    
-    // NALU type 1 is non-IDR (or PFrame) picture
-    if (nalu_type == 1)
-    {
-        // non-IDR frames do not have an offset due to SPS and PSS, so the approach
-        // is similar to the IDR frames just without the offset
-        blockLength = frameSize;
-        data = malloc(blockLength);
-        data = memcpy(data, &frame[0], blockLength);
-        
-        // again, replace the start header with the size of the NALU
-        uint32_t dataLength32 = htonl (blockLength - 4);
-        memcpy (data, &dataLength32, sizeof (uint32_t));
-        
-        status = CMBlockBufferCreateWithMemoryBlock(NULL, data,
-                        // memoryBlock to hold data. If NULL, block will be alloc when needed
+            status = CMBlockBufferCreateWithMemoryBlock(NULL, data,
                                                     blockLength,
-                        // overall length of the mem block in bytes
                                                     kCFAllocatorNull, NULL,
                                                     0,     // offsetToData
                                                     blockLength,
-                        // dataLength of relevant data bytes, starting at offsetToData
                                                     0, &blockBuffer);
         
-        NSLog(@"\t BlockBufferCreation:%@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
-    }
+            NSLog(@"\t BlockBufferCreation:%@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
+        }
     
-    // now create our sample buffer from the block buffer,
-    if(status == noErr)
-    {
-    // Don't bother with timing specifics since now we just display all frames immediately
-        const size_t sampleSize = blockLength;
-        status = CMSampleBufferCreate(kCFAllocatorDefault,
+        // now create our sample buffer from the block buffer,
+        if(status == noErr)
+        {
+            // Don't bother with timing specifics since now we just display all frames immediately
+            const size_t sampleSize = blockLength;
+            status = CMSampleBufferCreate(kCFAllocatorDefault,
                                       blockBuffer, true, NULL, NULL,
                                       _formatDesc, 1, 0, NULL, 1,
                                       &sampleSize, &sampleBuffer);
         
-        NSLog(@"\t SampleBufferCreate:%@", (status == noErr) ? @"success" : @"fail");
-    }
+            NSLog(@"\t SampleBufferCreate:%@", (status == noErr) ? @"success" : @"fail");
+        }
     
-    if(status == noErr)
-    {
-        // set some values of the sample buffer's attachments
-        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, YES);
-        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
-        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
+        if(status == noErr)
+        {
+            // set some values of the sample buffer's attachments
+            CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, YES);
+            CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
+            CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
         
-        //send the samplebuffer to an AVSampleBufferDisplayLayer
+            //send the samplebuffer to an AVSampleBufferDisplayLayer
         
-        dispatch_async(dispatch_get_main_queue(),^{
-            [_avsbDisplayLayer enqueueSampleBuffer:sampleBuffer];
-            [_avsbDisplayLayer setNeedsDisplay];
-        });
-    }
+            dispatch_async(dispatch_get_main_queue(),^{
+                [_avsbDisplayLayer enqueueSampleBuffer:sampleBuffer];
+                [_avsbDisplayLayer setNeedsDisplay];
+            });
+        }
     
-    // free memory to avoid a memory leak, do the same for sps, pps and blockbuffer
-    if (NULL != data)
-    {
-        free (data);
-        data = NULL;
+        // free memory to avoid a memory leak, do the same for sps, pps and blockbuffer
+        if (NULL != data)
+        {
+            free (data);
+            data = NULL;
+        }
     }
 }
 

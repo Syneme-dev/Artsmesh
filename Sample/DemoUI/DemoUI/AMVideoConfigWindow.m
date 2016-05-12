@@ -515,6 +515,7 @@
     _videoConfig.myself = sharedStore.mySelf;
  
     _videoConfig.peerIP = [self.peerAddress stringValue];
+    _videoConfig.peerName = [self.peerName stringValue];
     
     if (self.useIpv6CheckboxView.checked) {
         _videoConfig.peerIP = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];

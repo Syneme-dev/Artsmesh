@@ -25,7 +25,8 @@
 #include <netinet/in.h> /* INET constants and stuff */
 #include <arpa/inet.h>  /* IP address conversion stuff */
 #include <netdb.h>      /* gethostbyname */
-// this routine echos any messages (UDP datagrams) received
+#include "VideoView.h"
+
 #define MAXBUF 1024*1024
 
 NSString *const AMP2PVideoReceiverChanged;
@@ -66,10 +67,22 @@ NSString *const naluTypesStrings[] =
     @"31: Unspecified (non-VCL)",
 };
 
+typedef enum {
+    NALUTypeSliceNoneIDR = 1,
+    NALUTypeSliceIDR = 5,
+    NALUTypeSPS = 7,
+    NALUTypePPS = 8
+} NALUType;
 
 @interface AMP2PViewController ()
+@property (weak) IBOutlet VideoView *videoView;
 
-@property (weak) IBOutlet NSView* glView;
+@property (nonatomic, strong) NSData * spsData;
+@property (nonatomic, strong) NSData * ppsData;
+@property (nonatomic) CMVideoFormatDescriptionRef videoFormatDescr;
+@property (nonatomic) BOOL videoFormatDescriptionAvailable;
+
+@property (nonatomic, retain) IBOutlet NSView* glView;
 //@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
@@ -77,15 +90,9 @@ NSString *const naluTypesStrings[] =
 
 @implementation AMP2PViewController
 {
-    AVPlayer*                       _player;
-   // AVSampleBufferDisplayLayer*     _avsbDisplayLayer;
     GCDAsyncUdpSocket*              _udpSocket;
     CMVideoFormatDescriptionRef     _formatDesc;
-    NSData*                         _spsData;
-    NSData*                         _ppsData;
-    int                             _ppsSize;
-    int                             _spsSize;
-    
+    int                             _index;
     int                             _fileIndex;
     int                             _udpIndex;
     NSMutableData*                  _lastNALUData;
@@ -95,7 +102,167 @@ NSString *const naluTypesStrings[] =
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+
+//Tmp ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- (int)getNALUType:(NSData *)NALU {
+    uint8_t * bytes = (uint8_t *) NALU.bytes;
+    return bytes[0] & 0x1F;
+}
+
+
+
+- (void)handleSlice:(NSData *)NALU {
+    if (self.videoFormatDescriptionAvailable) {
+        /* The length of the NALU in big endian */
+        const uint32_t NALUlengthInBigEndian = CFSwapInt32HostToBig((uint32_t) NALU.length);
+        
+        /* Create the slice */
+        NSMutableData * slice = [[NSMutableData alloc] initWithBytes:&NALUlengthInBigEndian length:4];
+        
+        /* Append the contents of the NALU */
+        [slice appendData:NALU];
+        
+        /* Create the video block */
+        CMBlockBufferRef videoBlock = NULL;
+        
+        OSStatus status;
+        
+        status =
+        CMBlockBufferCreateWithMemoryBlock
+        (
+         NULL,
+         (void *) slice.bytes,
+         slice.length,
+         kCFAllocatorNull,
+         NULL,
+         0,
+         slice.length,
+         0,
+         & videoBlock
+         );
+        
+        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"successfully." : @"failed.");
+        
+        /* Create the CMSampleBuffer */
+        CMSampleBufferRef sbRef = NULL;
+        
+        const size_t sampleSizeArray[] = { slice.length };
+        
+        status =
+        CMSampleBufferCreate
+        (
+         kCFAllocatorDefault,
+         videoBlock,
+         true,
+         NULL,
+         NULL,
+         _videoFormatDescr,
+         1,
+         0,
+         NULL,
+         1,
+         sampleSizeArray,
+         & sbRef
+         );
+        
+        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"successfully." : @"failed.");
+        
+        /* Enqueue the CMSampleBuffer in the AVSampleBufferDisplayLayer */
+        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
+        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
+        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
+        
+        NSLog(@"Error: %@, Status: %@",
+              self.videoView.videoLayer.error,
+              (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
+              ? @"unknown"
+              : (
+                 (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
+                 ? @"rendering"
+                 :@"failed"
+                 )
+              );
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            if([self.videoView.videoLayer isReadyForMoreMediaData]){
+                [self.videoView.videoLayer enqueueSampleBuffer:sbRef];
+                [self.videoView.videoLayer setNeedsDisplay];
+            }
+        });
+        
+        NSLog(@" ");
+    }
+}
+
+
+
+
+- (void)handleSPS:(NSData *)NALU {
+    _spsData = [NALU copy];
+}
+
+- (void)handlePPS:(NSData *)NALU {
+    _ppsData = [NALU copy];
+}
+
+- (void)updateFormatDescriptionIfPossible {
+    if (_spsData != nil && _ppsData != nil) {
+        const uint8_t * const parameterSetPointers[2] = {
+            (const uint8_t *) _spsData.bytes,
+            (const uint8_t *) _ppsData.bytes
+        };
+        
+        const size_t parameterSetSizes[2] = {
+            _spsData.length,
+            _ppsData.length
+        };
+        
+        OSStatus status =
+        CMVideoFormatDescriptionCreateFromH264ParameterSets
+        (
+         kCFAllocatorDefault,
+         2,
+         parameterSetPointers,
+         parameterSetSizes,
+         4,
+         & _videoFormatDescr
+         );
+        
+        _videoFormatDescriptionAvailable = YES;
+        
+        NSLog(@"Updated CMVideoFormatDescription. Creation: %@.", (status == noErr) ? @"successfully." : @"failed.");
+    }
+}
+
+- (void)parseNALU:(NSData *)NALU {
+    int type = [self getNALUType: NALU];
+    
+    NSLog(@"NALU with Type \"%@\" received.", naluTypesStrings[type]);
+    
+    switch (type)
+    {
+        case NALUTypeSliceNoneIDR:
+        case NALUTypeSliceIDR:
+            [self handleSlice:NALU];
+            break;
+        case NALUTypeSPS:
+            [self handleSPS:NALU];
+            [self updateFormatDescriptionIfPossible];
+            break;
+        case NALUTypePPS:
+            [self handlePPS:NALU];
+            [self updateFormatDescriptionIfPossible];
+            break;
+        default:
+            break;
+    }
+}
+
+
+
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
+    NSError *error = nil;
     int port = 0;
     NSString* url = sender.selectedItem.title;
     NSUInteger commaPosition =[url rangeOfString:@":"].location;
@@ -111,8 +278,7 @@ NSString *const naluTypesStrings[] =
     _udpSocket = [[GCDAsyncUdpSocket alloc]
                   initWithDelegate:self
                   delegateQueue:dispatch_get_main_queue()];
-    NSError *error = nil;
-    
+   
     if (![_udpSocket bindToPort:port error:&error])
     {
         AMLog(kAMErrorLog, @"Video Mixer", @"Create udp socket failed in the port[%d].Error:%@",
@@ -126,136 +292,8 @@ NSString *const naluTypesStrings[] =
         AMLog(kAMErrorLog, @"Video Mixer", @"Listening socket port failed. Error:%@", error);
         return;
     }
-    
-    
-    // You may find a test stream at <http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8>.
-  /*  AVPlayerItem*  playerItem = [AVPlayerItem playerItemWithURL:url];
-    [playerItem addObserver:self forKeyPath:@"status" options:0 context:nil];
-    _player = [AVPlayer playerWithPlayerItem:playerItem];
-    
-    if (_player != nil) {
-        [_player removeObserver:self forKeyPath:@"status"];
-    }
-    
-    _player = [AVPlayer playerWithURL:url];
-    [_player addObserver:self forKeyPath:@"status" options:0 context:nil];
-    
-    
-   // AVPlayer *player = A configured AVPlayer ojbect;
-    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-    [_glView setLayer:playerLayer];
-    */
-    
-   
-    /*
-    NSString* strURL = sender.selectedItem.title;
-    //[strURL rangeOfString:];
-    NSUInteger commaPosition =[strURL rangeOfString:@":"].location;
-    if(commaPosition != NSNotFound){
-        NSString* strPort = [strURL substringFromIndex:commaPosition+1];
-        int ld =[self initUDPConfig:[strPort integerValue]];
-        if(ld != -1){
-            [self parseH264NAL:ld];
-        }
-        close(ld);
-    }
-    */
-
-}
-
-- (void) parseH264NAL:(int) sd{
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *directory = AMLogDirectory();
-    BOOL isDirectory;
-    
-    ///
-    int n;
-    char bufin[MAXBUF];
-    struct sockaddr_in remote;
-    
-    // need to know how big address struct is, len must be set before the call to recvfrom!!!
-    unsigned int len = sizeof(remote);
-    int index = 0;
-    
-    UInt8 tmpStartCode[4];
-    
-    tmpStartCode[0] = 0x00;
-    tmpStartCode[1] = 0x00;
-    tmpStartCode[2] = 0x00;
-    tmpStartCode[3] = 0x01;
-    int tmpStartCodeLen = 4;
-    
-    NSData *startCode = [NSData dataWithBytes:&tmpStartCode length:tmpStartCodeLen];
-    NSMutableData* lastNALUData = [[NSMutableData alloc] init];
-    
-    int udpIndex = 0;
-    while (index < 300) { // 30 seconds
-        /// read a datagram from the socket (put result in bufin)
-        n=recvfrom(sd, bufin, MAXBUF, 0, (struct sockaddr*)&remote, &len);
-        if (n == 0)
-            continue;
-        
-        NSData* recvData = [[NSData alloc] initWithBytes:bufin length:n];
-        
-        NSRange prevRange = NSMakeRange(NSNotFound, 0);
-        NSRange nextRange = [recvData rangeOfData:startCode
-                                          options:0
-                                        range:NSMakeRange(0, [recvData length])];
-       //~~~~
-        NSString* nalFilePath = [NSString stringWithFormat:@"udp_%d",udpIndex++];
-        [fileManager createFileAtPath:nalFilePath
-                             contents:recvData
-                           attributes:nil];
-
-        //~~~~
-
-        
-        if(nextRange.location != NSNotFound){
-             while(nextRange.location != NSNotFound) {
-                if(prevRange.location == NSNotFound){ //first time find the start code.){
-                    prevRange.location = 0;
-                    if((nextRange.location - prevRange.location) > 0){
-                        [lastNALUData appendBytes:(uint8_t*)recvData.bytes + prevRange.location
-                                           length:nextRange.location - prevRange.location];
-                    }
-                    
-                    
-                }else{// Multiple times find start code in a single udp packet.
-                    lastNALUData = [[NSMutableData alloc]
-                                    initWithBytes:bufin+prevRange.location
-                                           length:nextRange.location - prevRange.location];
-                }
-                 
-                [self receivedRawVideoFrame:(uint8_t*)lastNALUData.bytes
-                  withSize:[lastNALUData length]];
-                 
-                 //~~~~~~~
-                 
-                  NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",index++];
-                 [fileManager createFileAtPath:nalFilePath
-                                      contents:lastNALUData
-                                    attributes:nil];
-                 
-                  //~~~~~~~
-
-                 
-                prevRange = nextRange;
-                nextRange = [recvData rangeOfData:startCode
-                                          options:nil
-                                            range:NSMakeRange(prevRange.location+[startCode length],
-                                                            [recvData length]-prevRange.location-[startCode length])];
-             }
-            //When find no other start code, just store the rest.
-            lastNALUData = [[NSMutableData alloc]
-                                    initWithBytes:bufin + prevRange.location
-                                           length:[recvData length] - prevRange.location];
-        }else{ //Not found
-            [lastNALUData appendData:recvData];
-        }
-        
-        //index++;
-    }
+  
+    return;
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -263,9 +301,16 @@ NSString *const naluTypesStrings[] =
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *directory = AMLogDirectory();
-    BOOL isDirectory;
+    NSBundle * mainBundle = [NSBundle mainBundle];
+    if(_index < 1000) {
+        NSString * resource = [NSString stringWithFormat:@"nalu_%03d", _index];
+        NSString * path = [mainBundle pathForResource:resource ofType:@"bin"];
+        NSData * NALU = [NSData dataWithContentsOfFile:path];
+        [self parseNALU:NALU];
+        
+        _index = (_index + 1) % 1000;
+    }
+    return;
     
     
     UInt8 tmpStartCode[4];
@@ -285,6 +330,7 @@ withFilterContext:(id)filterContext
                                       options:0
                                         range:NSMakeRange(0, [recvData length])];
     
+    /*
     //~~~~
     if(_udpIndex <= 300){
         NSString* nalFilePath = [NSString stringWithFormat:@"udp_%d",_udpIndex++];
@@ -292,7 +338,7 @@ withFilterContext:(id)filterContext
                              contents:recvData
                            attributes:nil];
     }
-    //~~~~
+    //~~~~*/
         
         
     if(nextRange.location != NSNotFound){
@@ -310,17 +356,23 @@ withFilterContext:(id)filterContext
             }
             
             if([_lastNALUData length] > 0){
-                [self receivedRawVideoFrame:(uint8_t*)_lastNALUData.bytes
-                                   withSize:[_lastNALUData length]];
-                
             //~~~~~~~
-                if(_fileIndex <= 300){
+               /* if(_fileIndex <= 300){
                     NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",_fileIndex++];
                     [fileManager createFileAtPath:nalFilePath
                                          contents:_lastNALUData
                                        attributes:nil];
                 }
+                */
+                
+                uint8_t* nh = (uint8_t*)[_lastNALUData bytes] + 4;
+                NSData* noheader = [[NSData alloc ] initWithBytes:nh length:[_lastNALUData length] -4];
+                
+                [self parseNALU:noheader];
             //~~~~~~~
+                
+                //[self receivedRawVideoFrame:(uint8_t*)_lastNALUData.bytes
+                //                   withSize:[_lastNALUData length]];
             }
             
             prevRange = nextRange;
@@ -341,65 +393,15 @@ withFilterContext:(id)filterContext
 
 
 
--(int) initUDPConfig:(NSUInteger)nPort {
-    
-    int ld;
-    struct sockaddr_in skaddr;
-    int length;
-    
-    // create a socket IP protocol family (PF_INET) UDP protocol (SOCK_DGRAM)
-    
-    
-    if ((ld = socket( PF_INET, SOCK_DGRAM, 0 )) < 0) {
-        NSLog(@"Problem creating socket\n");
-        return -1;
-    }
-    
-    // establish our address address family is AF_INET our IP address is INADDR_ANY
-    // (any of our IP addresses) the port number is assigned by the kernel
-    
-    skaddr.sin_family = AF_INET;
-    skaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    skaddr.sin_port = htons(nPort);
-    
-    if (bind(ld, (struct sockaddr *) &skaddr, sizeof(skaddr))<0) {
-        NSLog(@"Problem binding\n");
-        return -1;
-    }
-    
-    // find out what port we were assigned and print it out
-    length = sizeof( skaddr );
-    if (getsockname(ld, (struct sockaddr *) &skaddr, &length)<0) {
-        NSLog(@"Error getsockname\n");
-        return -1;
-    }
-    
-    // port number's are network byte order, we have to convert to
-    // host byte order before printing !
-    NSLog(@"The server UDP port number is %d\n",ntohs(skaddr.sin_port));
-    
-    // Go echo every datagram we get
-    
-    return ld;
-}
-
-
-
 -(void) observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context{
     if ([keyPath isEqualToString:@"status"]){
-        [_player play];
+//        [_player play];
     }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
-}
-
-
-- (void) render:(CMSampleBufferRef)sampleBuffer
-{
-    // [_avDisplayLayer enqueueSampleBuffer:sampleBuffer];
 }
 
 
@@ -408,53 +410,12 @@ withFilterContext:(id)filterContext
     [super viewDidLoad];
     // Do view setup here.
     
-    NSView *subView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
-    self.glView = subView;
-    [self.view addSubview:self.glView];
-    
-    [subView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSView *content = subView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(content);
-    [self.view addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[content]-0-|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-    [self.view addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[content]-0-|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
-//    self.glView.drawTriangle = YES;
-
-    
     [self updateServerTitle];
     NSNotificationCenter* defaultNC = [NSNotificationCenter defaultCenter];
     [defaultNC addObserver:self
                   selector:@selector(updateServerTitle)
                       name:AMP2PVideoReceiverChanged
                     object:nil];
-    
-    
-    // Since we're using AVSampleBufferDisplayLayer, init the layer like this:
-    // create our AVSampleBufferDisplayLayer and add it to the view
-    _avsbDisplayLayer = [[AVSampleBufferDisplayLayer alloc] init];
-    _avsbDisplayLayer.frame = self.glView.frame;
-    _avsbDisplayLayer.bounds = self.glView.bounds;
-    _avsbDisplayLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-    
-    // set Timebase
-    CMTimebaseRef controlTimebase;
-    CMTimebaseCreateWithMasterClock(CFAllocatorGetDefault(), CMClockGetHostTimeClock(), &controlTimebase);
-    
-    _avsbDisplayLayer.controlTimebase = controlTimebase;
-    CMTimebaseSetTime(_avsbDisplayLayer.controlTimebase, kCMTimeZero);
-    CMTimebaseSetRate(_avsbDisplayLayer.controlTimebase, 1.0);
-    
-    [self.glView setLayer:_avsbDisplayLayer];
-    
-    
-    
     _lastNALUData = [[NSMutableData alloc] init];
 }
 
@@ -486,6 +447,7 @@ withFilterContext:(id)filterContext
 //First, add the base of the function which deals with H.264 from the network
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
 {
+    return;
     OSStatus status;
     
     uint8_t *data = NULL;
@@ -513,11 +475,11 @@ withFilterContext:(id)filterContext
         
         if(nalu_type == 7){
             _spsData = [[NSData alloc] initWithBytes:frame+4  length:frameSize-4];
-            _spsSize = frameSize - 4;
+//            _spsSize = frameSize - 4;
         }
         else{
             _ppsData = [[NSData alloc] initWithBytes:frame+4  length:frameSize-4];
-            _ppsSize = frameSize - 4;
+//            _ppsSize = frameSize - 4;
         }
         
         // now we set our H264 parameters
@@ -552,6 +514,7 @@ withFilterContext:(id)filterContext
         
             // replace the start code header on this NALU with its size, which AVCC format requires.
             // htonl converts the unsigned int from host to network byte order
+            
             uint32_t dataLength32 = htonl (blockLength - 4);
             memcpy (data, &dataLength32, sizeof (uint32_t));
         
@@ -610,10 +573,20 @@ withFilterContext:(id)filterContext
             CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
         
             //send the samplebuffer to an AVSampleBufferDisplayLayer
-        
+            NSLog(@"Error: %@, Status: %@",
+                  _avsbDisplayLayer.error,
+                  (_avsbDisplayLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
+                  ? @"unknown"
+                  : (
+                     (_avsbDisplayLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
+                     ? @"rendering"
+                     :@"failed"
+                     )
+                  );
+            
             dispatch_async(dispatch_get_main_queue(),^{
-                [_avsbDisplayLayer enqueueSampleBuffer:sampleBuffer];
-                [_avsbDisplayLayer setNeedsDisplay];
+                [self.videoView.videoLayer enqueueSampleBuffer:sampleBuffer];
+                [self.videoView.videoLayer setNeedsDisplay];
             });
         }
     

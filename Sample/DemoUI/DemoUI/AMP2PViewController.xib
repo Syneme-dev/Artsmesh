@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMP2PViewController">
             <connections>
                 <outlet property="serverTitlePopUpButton" destination="36s-fW-yLs" id="m2Q-fI-olw"/>
+                <outlet property="videoView" destination="lXZ-HE-nQm" id="at5-UB-Ydk"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -37,11 +38,18 @@
                         <action selector="serverSelected:" target="-2" id="ZAu-S0-ddl"/>
                     </connections>
                 </popUpButton>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="lXZ-HE-nQm" customClass="VideoView">
+                    <rect key="frame" x="0.0" y="31" width="244" height="202"/>
+                </customView>
             </subviews>
             <constraints>
+                <constraint firstItem="lXZ-HE-nQm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="MWK-Ih-myd"/>
                 <constraint firstAttribute="trailing" secondItem="QqQ-ab-4kj" secondAttribute="trailing" id="Mbf-XJ-uxl"/>
+                <constraint firstItem="QqQ-ab-4kj" firstAttribute="top" secondItem="lXZ-HE-nQm" secondAttribute="bottom" constant="8" id="SLZ-o3-6bP"/>
+                <constraint firstItem="lXZ-HE-nQm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="d7x-gX-FwX"/>
                 <constraint firstAttribute="bottom" secondItem="QqQ-ab-4kj" secondAttribute="bottom" constant="2" id="dNV-f4-2vj"/>
                 <constraint firstItem="QqQ-ab-4kj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="i17-RO-LHf"/>
+                <constraint firstAttribute="trailing" secondItem="lXZ-HE-nQm" secondAttribute="trailing" id="r7g-G1-HWG"/>
             </constraints>
         </customView>
     </objects>

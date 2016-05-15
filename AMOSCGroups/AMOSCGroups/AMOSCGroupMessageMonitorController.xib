@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCGroupMessageMonitorController">
@@ -27,48 +27,32 @@
             <rect key="frame" x="0.0" y="0.0" width="728" height="565"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5al-Ak-gVW">
-                    <rect key="frame" x="20" y="467" width="3" height="17"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="AdN-7N-UYh"/>
-                </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6l4-az-nZP">
-                    <rect key="frame" x="20" y="517" width="3" height="17"/>
+                    <rect key="frame" x="20" y="526" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="9zz-rR-jqe"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="puP-kH-v7I">
-                    <rect key="frame" x="381" y="492" width="3" height="17"/>
+                    <rect key="frame" x="381" y="501" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="tyc-UT-mNU"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sOL-wW-ENG">
-                    <rect key="frame" x="381" y="517" width="3" height="17"/>
+                    <rect key="frame" x="381" y="526" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="a9w-Qf-82I"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0y-hJ-AZ5">
-                    <rect key="frame" x="20" y="492" width="3" height="17"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KKt-3g-F3q"/>
-                </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67N-Yl-oiD">
-                    <rect key="frame" x="381" y="467" width="3" height="17"/>
+                    <rect key="frame" x="381" y="476" width="3" height="17"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="ytC-eL-jHX"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vMv-fl-3sU" customClass="AMFoundryFontView">
                     <rect key="frame" x="18" y="544" width="128" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="OSC CONTROLLER" id="brv-Fu-gB5">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cla-gp-wMd" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="467" width="59" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SEARCH" id="zM9-5n-cxE">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="brv-Fu-gB5">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3nM-H6-yLp" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="517" width="57" height="17"/>
+                    <rect key="frame" x="30" y="526" width="57" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SERVER" id="Tze-nl-zxi">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -76,7 +60,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGV-Hq-Vwx" customClass="AMFoundryFontView">
-                    <rect key="frame" x="395" y="492" width="80" height="17"/>
+                    <rect key="frame" x="395" y="501" width="80" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="USERNAME" id="8TJ-Lr-Ubf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
@@ -84,31 +68,15 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcT-xc-GnT" customClass="AMFoundryFontView">
-                    <rect key="frame" x="395" y="468" width="92" height="17"/>
+                    <rect key="frame" x="395" y="477" width="92" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUPNAME" id="3M3-Q2-mt7">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQh-O7-1dL" customClass="AMFoundryFontView">
-                    <rect key="frame" x="30" y="492" width="59" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SENDTO" id="hAY-Ob-Fc6">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iub-DF-U7u" customClass="AMFoundryFontView">
-                    <rect key="frame" x="99" y="465" width="120" height="20"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SEARCH" drawsBackground="YES" id="h2H-WU-cpM">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </textFieldCell>
-                </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ksZ-bf-Lbh" customClass="AMFoundryFontView">
-                    <rect key="frame" x="244" y="514" width="120" height="20"/>
+                    <rect key="frame" x="244" y="523" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SERVERIP" drawsBackground="YES" id="pcc-JV-MkN">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -119,23 +87,15 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9z-7f-O0n" customClass="AMFoundryFontView">
-                    <rect key="frame" x="493" y="465" width="120" height="20"/>
+                    <rect key="frame" x="493" y="474" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="GROUPNAME" drawsBackground="YES" id="8bl-Rp-dny">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-7G-b5U" customClass="AMFoundryFontView">
-                    <rect key="frame" x="99" y="490" width="120" height="20"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="DEVICEIP" drawsBackground="YES" id="McK-m6-beX">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </textFieldCell>
-                </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWn-Gf-Gff" customClass="AMPopUpView">
-                    <rect key="frame" x="99" y="514" width="120" height="22"/>
+                    <rect key="frame" x="99" y="523" width="120" height="22"/>
                 </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5O-z6-uSk" customClass="AMVerticalScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="728" height="437"/>
@@ -236,14 +196,14 @@
                     </scroller>
                 </scrollView>
                 <customView identifier="oscMonitorOnOff" translatesAutoresizingMaskIntoConstraints="NO" id="Rff-V1-Z3C" customClass="AMCheckBoxView">
-                    <rect key="frame" x="375" y="514" width="79" height="22"/>
+                    <rect key="frame" x="375" y="523" width="79" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="79" id="66f-cB-TtJ"/>
                         <constraint firstAttribute="height" constant="22" id="vsh-kA-Ty6"/>
                     </constraints>
                 </customView>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMT-4l-9y5" customClass="AMFoundryFontView">
-                    <rect key="frame" x="244" y="490" width="120" height="20"/>
+                    <rect key="frame" x="244" y="499" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="PORT" drawsBackground="YES" id="yXM-4I-PKX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -251,15 +211,63 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGH-7E-yLn" customClass="AMFoundryFontView">
-                    <rect key="frame" x="493" y="490" width="120" height="20"/>
+                    <rect key="frame" x="493" y="499" width="120" height="20"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="USERNAME" drawsBackground="YES" id="J8O-TT-qpX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                     </textFieldCell>
                 </textField>
+                <customView identifier="useIPV6" translatesAutoresizingMaskIntoConstraints="NO" id="d5i-JM-PXu" customClass="AMCheckBoxView">
+                    <rect key="frame" x="493" y="524" width="111" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4sI-Jt-wIK"/>
+                        <constraint firstAttribute="width" constant="111" id="5Ha-5L-CBi"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Eha-6G-Z0H"/>
+                    </constraints>
+                </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5al-Ak-gVW">
+                    <rect key="frame" x="20" y="476" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="AdN-7N-UYh"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0y-hJ-AZ5">
+                    <rect key="frame" x="20" y="501" width="3" height="17"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="KKt-3g-F3q"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cla-gp-wMd" customClass="AMFoundryFontView">
+                    <rect key="frame" x="30" y="476" width="59" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SEARCH" id="zM9-5n-cxE">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQh-O7-1dL" customClass="AMFoundryFontView">
+                    <rect key="frame" x="30" y="501" width="59" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SENDTO" id="hAY-Ob-Fc6">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iub-DF-U7u" customClass="AMFoundryFontView">
+                    <rect key="frame" x="99" y="474" width="120" height="20"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SEARCH" drawsBackground="YES" id="h2H-WU-cpM">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LN7-7G-b5U" customClass="AMFoundryFontView">
+                    <rect key="frame" x="99" y="499" width="120" height="20"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="DEVICEIP" drawsBackground="YES" id="McK-m6-beX">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </textFieldCell>
+                </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="W3j-vS-ShE">
-                    <rect key="frame" x="207" y="466" width="84" height="14"/>
+                    <rect key="frame" x="207" y="475" width="84" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="84" id="WIz-a8-Rfv"/>
                         <constraint firstAttribute="height" constant="14" id="rOI-QI-t5c"/>
@@ -272,24 +280,18 @@
                         <action selector="clearAll:" target="-2" id="600-ou-O46"/>
                     </connections>
                 </button>
-                <customView identifier="useIPV6" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5i-JM-PXu" customClass="AMCheckBoxView">
-                    <rect key="frame" x="493" y="515" width="111" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="4sI-Jt-wIK"/>
-                        <constraint firstAttribute="width" constant="111" id="5Ha-5L-CBi"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Eha-6G-Z0H"/>
-                    </constraints>
-                </customView>
             </subviews>
             <constraints>
-                <constraint firstItem="Rff-V1-Z3C" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="29" id="0Hz-SZ-UHo"/>
+                <constraint firstItem="Rff-V1-Z3C" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="0Hz-SZ-UHo"/>
+                <constraint firstAttribute="trailing" secondItem="d5i-JM-PXu" secondAttribute="trailing" constant="124" id="B0Z-9B-FFN"/>
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="C1K-Bb-BwB"/>
                 <constraint firstAttribute="trailing" secondItem="b5O-z6-uSk" secondAttribute="trailing" id="KhN-18-Gdb"/>
                 <constraint firstAttribute="bottom" secondItem="b5O-z6-uSk" secondAttribute="bottom" id="QIs-W8-84K"/>
                 <constraint firstItem="b5O-z6-uSk" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="128" id="b59-nj-W7M"/>
                 <constraint firstAttribute="trailing" secondItem="W3j-vS-ShE" secondAttribute="trailing" constant="437" id="fde-yV-26P"/>
+                <constraint firstItem="d5i-JM-PXu" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="se6-l0-oyQ"/>
                 <constraint firstAttribute="trailing" secondItem="Rff-V1-Z3C" secondAttribute="trailing" constant="274" id="xPB-RO-lJE"/>
-                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="85" id="zRk-fb-QxZ"/>
+                <constraint firstItem="W3j-vS-ShE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="76" id="zRk-fb-QxZ"/>
             </constraints>
             <point key="canvasLocation" x="142" y="-94.5"/>
         </customView>

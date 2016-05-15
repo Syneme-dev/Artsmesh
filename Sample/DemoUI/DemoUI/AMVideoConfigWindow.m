@@ -442,6 +442,10 @@
         [self.vidCodec addItemWithTitle:@"H.264"];
         [self.vidCodec selectItemWithTitle:@"H.264"];
         
+        if (self.useIpv6CheckboxView.checked && ![[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base6_Url] isEqualToString:@""]) {
+            [self.peerAddress setStringValue: [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base6_Url]];
+        }
+        
     } else if (![self.peerSelecter.stringValue isEqualToString:@"self"]) {
         [self resetVidCodecs];
         
@@ -511,6 +515,7 @@
     _videoConfig.myself = sharedStore.mySelf;
  
     _videoConfig.peerIP = [self.peerAddress stringValue];
+    _videoConfig.peerName = [self.peerName stringValue];
     
     if (self.useIpv6CheckboxView.checked) {
         _videoConfig.peerIP = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
@@ -552,11 +557,9 @@
     
     //Set up ffmpeg configs
     AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
-    
+
     //YouTube-specific configs here
     if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
-        //PROBLEM: Not currently storing integer value of selected audio preference from vid settings dropdown.  Need to find a way to grab that.
-        //int selectedAudioDevice = (int) [[AMPreferenceManager standardUserDefaults] objectForKey:Preference_Key_ffmpeg_Audio_In_Device];s
         cfgs.audioDevice = [NSString stringWithFormat:@"%d",selectedAudioDevice];
         cfgs.audioCodec = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
         cfgs.audioBitRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
@@ -566,6 +569,7 @@
         if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
             cfgs.audioCodec = @"aac";
         }
+        peerAddr = self.peerAddress.stringValue;
     }
     
     [cfgs setSending:YES];

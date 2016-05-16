@@ -79,7 +79,9 @@ html {
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
-
+#nav_local_default{
+    padding :0 20px !important;
+}
 
 #site_nav_global_primary{
     background: transparent !important;

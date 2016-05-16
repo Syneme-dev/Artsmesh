@@ -128,45 +128,21 @@ typedef enum {
         
         OSStatus status;
         
-        status =
-        CMBlockBufferCreateWithMemoryBlock
-        (
-         NULL,
-         (void *) slice.bytes,
-         slice.length,
-         kCFAllocatorNull,
-         NULL,
-         0,
-         slice.length,
-         0,
-         & videoBlock
-         );
+        status = CMBlockBufferCreateWithMemoryBlock(NULL, (void*)slice.bytes, slice.length,
+                                                    kCFAllocatorNull, NULL, 0, slice.length,
+                                                    0, &videoBlock);
         
-        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"successfully." : @"failed.");
+        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
         
         /* Create the CMSampleBuffer */
         CMSampleBufferRef sbRef = NULL;
         
         const size_t sampleSizeArray[] = { slice.length };
         
-        status =
-        CMSampleBufferCreate
-        (
-         kCFAllocatorDefault,
-         videoBlock,
-         true,
-         NULL,
-         NULL,
-         _videoFormatDescr,
-         1,
-         0,
-         NULL,
-         1,
-         sampleSizeArray,
-         & sbRef
-         );
+        status = CMSampleBufferCreate(kCFAllocatorDefault, videoBlock, true, NULL, NULL,
+                                      _videoFormatDescr, 1, 0, NULL, 1, sampleSizeArray, &sbRef);
         
-        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"successfully." : @"failed.");
+        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"success" : @"failed");
         
         /* Enqueue the CMSampleBuffer in the AVSampleBufferDisplayLayer */
         CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
@@ -190,8 +166,6 @@ typedef enum {
                 [self.videoView.videoLayer setNeedsDisplay];
             }
         });
-        
-        NSLog(@" ");
     }
 }
 
@@ -218,20 +192,12 @@ typedef enum {
             _ppsData.length
         };
         
-        OSStatus status =
-        CMVideoFormatDescriptionCreateFromH264ParameterSets
-        (
-         kCFAllocatorDefault,
-         2,
-         parameterSetPointers,
-         parameterSetSizes,
-         4,
-         & _videoFormatDescr
-         );
+        OSStatus status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
+         parameterSetPointers, parameterSetSizes, 4, &_videoFormatDescr);
         
         _videoFormatDescriptionAvailable = YES;
         
-        NSLog(@"Updated CMVideoFormatDescription. Creation: %@.", (status == noErr) ? @"successfully." : @"failed.");
+        NSLog(@"Updated CMVideoFormatDescription %@.", (status == noErr) ? @"success" : @"fail");
     }
 }
 
@@ -301,18 +267,7 @@ typedef enum {
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSBundle * mainBundle = [NSBundle mainBundle];
-    if(_index < 1000) {
-        NSString * resource = [NSString stringWithFormat:@"nalu_%03d", _index];
-        NSString * path = [mainBundle pathForResource:resource ofType:@"bin"];
-        NSData * NALU = [NSData dataWithContentsOfFile:path];
-        [self parseNALU:NALU];
-        
-        _index = (_index + 1) % 1000;
-    }
-    return;
-    
-    
+
     UInt8 tmpStartCode[4];
     tmpStartCode[0] = 0x00;
     tmpStartCode[1] = 0x00;
@@ -389,6 +344,19 @@ withFilterContext:(id)filterContext
     }else{ //Not found
         [_lastNALUData appendData:recvData];
     }
+    
+    /*
+    NSBundle * mainBundle = [NSBundle mainBundle];
+    if(_index < 1000) {
+        NSString * resource = [NSString stringWithFormat:@"nalu_%03d", _index];
+        NSString * path = [mainBundle pathForResource:resource ofType:@"bin"];
+        NSData * NALU = [NSData dataWithContentsOfFile:path];
+        [self parseNALU:NALU];
+        
+        _index = (_index + 1) % 1000;
+    }
+    return;
+    */
 }
 
 

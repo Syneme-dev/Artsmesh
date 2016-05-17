@@ -721,9 +721,9 @@ static CGFloat kCloseButtonRadius = 6.0;
     } else {
         NSColor *color = nil;
         if (channel.type == AMSourceChannel)
-            color = _sourceChannelColor;
-        else
             color = _destinationChannelColor;
+        else
+            color = _sourceChannelColor;
         
         // draw outer circle
         NSBezierPath *outerCircle = [NSBezierPath bezierPath];

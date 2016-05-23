@@ -88,6 +88,74 @@ typedef enum {
 @property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
 @end
 
+/*
+@Purpose : Parse a NAL from byte stream format.
+@pseudocode:
+    byte_stream_nal_unit(NumBytesInNalunit){
+        while(next_bits(24) != 0x000001)
+            zero_byte
+        if(more_data_in_byte_stream()){
+            start_code_prefix_one_3bytes // equal 0x000001
+            nal_unit(NumBytesInNALunit)
+        }
+    }
+ */
+int AnnexBGetNALUnit(uint8 *bitstream, uint8 **nal_unit, int *size)
+{
+    int i, j, FoundStartCode = 0;
+    int end;
+    
+    i = 0;
+    while (bitstream[i] == 0 && i < *size)
+    {
+        i++;
+    }
+    if (i >= *size)
+    {
+        *nal_unit = bitstream;
+        return -1; /* cannot find any start_code_prefix. */
+    }
+    else if (bitstream[i] != 0x1)
+    {
+        i = -1;  /* start_code_prefix is not at the beginning, continue */
+    }
+    
+    i++;
+    *nal_unit = bitstream + i; /* point to the beginning of the NAL unit */
+    
+    j = end = i;
+    while (!FoundStartCode)
+    {
+        while ((j + 1 < *size) && (bitstream[j] != 0 || bitstream[j+1] != 0))  /* see 2 consecutive zero bytes */
+        {
+            j++;
+        }
+        end = j;   /* stop and check for start code */
+        while (j + 2 < *size && bitstream[j+2] == 0) /* keep reading for zero byte */
+        {
+            j++;
+        }
+        if (j + 2 >= *size)
+        {
+            *size -= i;
+            return -2;  /* cannot find the second start_code_prefix */
+        }
+        if (bitstream[j+2] == 0x1)
+        {
+            FoundStartCode = 1;
+        }
+        else
+        {
+            /* could be emulation code 0x3 */
+            j += 2; /* continue the search */
+        }
+    }
+    
+    *size = end - i;
+    
+    return 0;
+}
+
 @implementation AMP2PViewController
 {
     GCDAsyncUdpSocket*              _udpSocket;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="9046"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMSocialViewController">
@@ -32,6 +32,7 @@
                                 <constraint firstAttribute="width" constant="16" id="mZW-7u-cZe"/>
                                 <constraint firstAttribute="height" constant="13" id="qpu-Ds-mE5"/>
                             </constraints>
+                            <animations/>
                             <buttonCell key="cell" type="inline" title="+" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="Jep-IC-97R">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
@@ -46,6 +47,7 @@
                                 <constraint firstAttribute="height" constant="13" id="nUt-b3-Ea8"/>
                                 <constraint firstAttribute="width" constant="16" id="wCZ-Eh-4ue"/>
                             </constraints>
+                            <animations/>
                             <buttonCell key="cell" type="inline" title="-" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="rPB-Iy-SWK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
@@ -56,9 +58,11 @@
                         </button>
                         <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9r-uj-gVs" customClass="BlueBackgroundView">
                             <rect key="frame" x="539" y="5" width="1" height="10"/>
+                            <animations/>
                         </customView>
                         <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjZ-94-DDK" customClass="BlueBackgroundView">
                             <rect key="frame" x="499" y="5" width="1" height="10"/>
+                            <animations/>
                         </customView>
                         <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay8-XS-nLs" customClass="BlueBackgroundView">
                             <rect key="frame" x="26" y="5" width="1" height="10"/>
@@ -66,6 +70,7 @@
                                 <constraint firstAttribute="width" constant="1" id="Af9-Bo-AvR"/>
                                 <constraint firstAttribute="height" constant="10" id="wfW-Nt-pL1"/>
                             </constraints>
+                            <animations/>
                         </customView>
                         <button translatesAutoresizingMaskIntoConstraints="NO" id="aqN-KA-g0x" userLabel="backTab">
                             <rect key="frame" x="540" y="3" width="50" height="13"/>
@@ -73,6 +78,7 @@
                                 <constraint firstAttribute="width" constant="50" id="4ON-r6-S0p"/>
                                 <constraint firstAttribute="height" constant="13" id="xBq-8z-A8c"/>
                             </constraints>
+                            <animations/>
                             <buttonCell key="cell" type="inline" title="Back" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="jxE-cY-drK">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
@@ -83,6 +89,7 @@
                         </button>
                         <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ol-Ok-SRS" userLabel="blogTab">
                             <rect key="frame" x="503" y="3" width="30" height="13"/>
+                            <animations/>
                             <buttonCell key="cell" type="inline" title="BLOG" bezelStyle="inline" alignment="right" imageScaling="proportionallyDown" inset="2" id="nWI-6M-Rzz">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="10"/>
@@ -108,15 +115,18 @@
                         <constraint firstAttribute="trailing" secondItem="aqN-KA-g0x" secondAttribute="trailing" constant="10" id="prp-a7-ynT"/>
                         <constraint firstAttribute="bottom" secondItem="aqN-KA-g0x" secondAttribute="bottom" constant="3" id="rlN-3y-ZTb"/>
                     </constraints>
+                    <animations/>
                 </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="m8b-GU-d0s" translatesAutoresizingMaskIntoConstraints="NO" id="Teu-tF-YMH">
                     <rect key="frame" x="0.0" y="20" width="600" height="260"/>
+                    <animations/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="FOAF" identifier="1" id="cpT-dg-QgQ">
                             <view key="view" id="faL-kg-rFO">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="BLOGS" identifier="2" id="m8b-GU-d0s">
@@ -126,6 +136,7 @@
                                 <subviews>
                                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="DgC-PZ-wvC">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="260"/>
+                                        <animations/>
                                         <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                             <nil key="identifier"/>
                                         </webPreferences>
@@ -137,6 +148,7 @@
                                     <constraint firstItem="DgC-PZ-wvC" firstAttribute="leading" secondItem="Q8z-19-Cbe" secondAttribute="leading" id="m1O-aJ-H8Q"/>
                                     <constraint firstItem="DgC-PZ-wvC" firstAttribute="top" secondItem="Q8z-19-Cbe" secondAttribute="top" id="mx0-tm-JTu"/>
                                 </constraints>
+                                <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -146,6 +158,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="13N-tm-uc6"/>
                     </constraints>
+                    <animations/>
                 </customView>
             </subviews>
             <constraints>
@@ -160,6 +173,7 @@
                 <constraint firstItem="Teu-tF-YMH" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="yNS-CS-cKL"/>
                 <constraint firstItem="58Q-Tv-Pho" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ymb-xU-Zfe"/>
             </constraints>
+            <animations/>
         </customView>
     </objects>
 </document>

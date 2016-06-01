@@ -10,7 +10,6 @@
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.149 green:0.149 blue:0.149 alpha:1]
 
-
 @implementation AMMaxSizeView
 {
     NSRect _oldWindowFrame;
@@ -48,12 +47,23 @@
     return self;
 }
 
+-(void)awakeFromNib{
+  if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
+    {
+        self.color=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    }
+  else{
+      self.color=UI_Color_gray;
+  }
+}
+
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     //Color RBG:333333
     
 
-    [UI_Color_gray set];
+    [self.color set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 }

@@ -10,6 +10,7 @@
 
 @implementation BlueBackgroundView
 
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -30,11 +31,24 @@
     [self.superview mouseDragged:theEvent];
 }
  */
+-(void)awakeFromNib{
+    //if([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
+    //{
+        self.color=[NSColor colorWithCalibratedRed:0.177 green:0.227 blue:0.307 alpha:1];
+    //}
+    //else
+    //{
+    //self.color=[NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f];
+    //    self.color=[NSColor lightGrayColor];
+   // }
+    
+}
+
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSColor *color= [NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f] ;
-    [color set];
+   
+    [self.color set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 	

@@ -88,75 +88,6 @@ typedef enum {
 @property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
 @end
 
-/*
-@Purpose : Parse a NAL from byte stream format.
-@pseudocode:
-    byte_stream_nal_unit(NumBytesInNalunit){
-        while(next_bits(24) != 0x000001)
-            zero_byte
-        if(more_data_in_byte_stream()){
-            start_code_prefix_one_3bytes // equal 0x000001
-            nal_unit(NumBytesInNALunit)
-        }
-    }
- */
-int AnnexBGetNALUnit(uint8 *bitstream, uint8 **nal_unit, int *size)
-{
-    int i, j, FoundStartCode = 0;
-    int end;
-    
-    i = 0;
-    while (bitstream[i] == 0 && i < *size)
-    {
-        i++;
-    }
-    if (i >= *size)
-    {
-        *nal_unit = bitstream;
-        return -1; // cannot find any start_code_prefix.
-    }
-    else if (bitstream[i] != 0x1 /*add by me || i == 0 */)
-    {
-        i = -1;  // start_code_prefix is not at the beginning, continue
-    }
-    
-    i++;
-    *nal_unit = bitstream + i; // point to the beginning of the NAL unit
-    
-    j = end = i;
-    while (!FoundStartCode)
-    {
-        //see 2 consecutive zero bytes
-        while ((j + 1 < *size) && (bitstream[j] != 0 || bitstream[j+1] != 0))
-        {
-            j++;
-        }
-        end = j;   // stop and check for start code
-        while (j + 2 < *size && bitstream[j+2] == 0) // keep reading for zero byte
-        {
-            j++;
-        }
-        if (j + 2 >= *size)
-        {
-            *size -= i;
-            return -2;  /* cannot find the second start_code_prefix */
-        }
-        if (bitstream[j+2] == 0x1)
-        {
-            FoundStartCode = 1;
-        }
-        else
-        {
-            // could be emulation code 0x3
-            j += 2; // continue the search
-        }
-    }
-    
-    *size = end - i;
-    
-    return 0;
-}
-
 @implementation AMP2PViewController
 {
     GCDAsyncUdpSocket*              _udpSocket;
@@ -166,6 +97,7 @@ int AnnexBGetNALUnit(uint8 *bitstream, uint8 **nal_unit, int *size)
     int                             _udpIndex;
     NSMutableData*                  _lastNALUData;
     BOOL                            _searchForSPSAndPPS;
+    BOOL                            _ableToDecodeFrame;
 }
 
 - (void) dealloc{
@@ -414,7 +346,7 @@ int AnnexBGetNALUnit(uint8 *bitstream, uint8 **nal_unit, int *size)
     }
     
     //!
-    
+    _ableToDecodeFrame = FALSE;
     
     _udpSocket = [[GCDAsyncUdpSocket alloc]
                   initWithDelegate:self
@@ -502,13 +434,14 @@ withFilterContext:(id)filterContext
                                          contents:_lastNALUData
                                        attributes:nil];
                 }
-                [self receivedRawVideoFrame:[_lastNALUData bytes] withSize:[_lastNALUData length]];
+                [self receivedRawVideoFrame:(uint8_t*)[_lastNALUData bytes]
+                                   withSize:[_lastNALUData length]];
  
           //     [self new_sample:_lastNALUData];
-         //      uint8_t* nh = (uint8_t*)[_lastNALUData bytes] + scLen;
-          //     NSData* noheader = [[NSData alloc ] initWithBytes:nh length:[_lastNALUData length] -scLen];
+           //    uint8_t* nh = (uint8_t*)[_lastNALUData bytes] + scLen;
+           //    NSData* noheader = [[NSData alloc ] initWithBytes:nh length:[_lastNALUData length] -scLen];
                 
-          //       [self parseNALU:noheader];
+           //      [self parseNALU:noheader];
                 //~~~~~~~
                 //[self receivedRawVideoFrame:(uint8_t*)_lastNALUData.bytes
                 //                   withSize:[_lastNALUData length]];
@@ -650,11 +583,16 @@ withFilterContext:(id)filterContext
                                                                          &videoFormatDescr);
             _formatDesc = videoFormatDescr;
             NSLog(@"\t Update CMVideoFormatDescription:%@", (status == noErr) ? @"success" : @"fail");
-            if(status != noErr) NSLog(@"\t Format Description ERROR type: %d", (int)status);
+            
+            if(status != noErr){
+                NSLog(@"\t Format Description ERROR type: %d", (int)status);
+            }else{
+                _ableToDecodeFrame = TRUE;
+            }
         }
     }
     
-    if(nalu_type == 5 || nalu_type == 1)
+    if(_ableToDecodeFrame && ( nalu_type == 5 || nalu_type == 1))
     { // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
         
         blockLength = frameSize+1;

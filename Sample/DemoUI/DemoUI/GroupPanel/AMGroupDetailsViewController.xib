@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupDetailsViewController">
@@ -24,7 +24,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="sZY-Ox-ZBy"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="paN-by-tQX"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GQ2-TC-oLs" customClass="AMFoundryFontView">
@@ -33,7 +32,6 @@
                         <constraint firstAttribute="height" constant="17" id="15q-sw-CZy"/>
                         <constraint firstAttribute="width" constant="99" id="In3-z6-nEP"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="NICK NAME:" id="g9H-hz-2IC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -45,7 +43,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="hL4-cD-0OJ"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="oif-Xw-RFl" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,7 +57,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="Lng-kp-wNf"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="h7A-AS-i2z"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lmy-Bl-QYv" customClass="AMFoundryFontView">
@@ -69,7 +65,6 @@
                         <constraint firstAttribute="height" constant="17" id="iBb-K7-6fT"/>
                         <constraint firstAttribute="width" constant="116" id="pLL-S7-Mgd"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FULL NAME:" id="ZLx-hD-znj">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -81,7 +76,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="Wjx-p1-zbN"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="8rs-I7-PDY" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,7 +90,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="OAt-YJ-lbB"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="kWz-Qa-4wM"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M1C-uq-B32" customClass="AMFoundryFontView">
@@ -105,7 +98,6 @@
                         <constraint firstAttribute="height" constant="17" id="4pg-zH-GPX"/>
                         <constraint firstAttribute="width" constant="88" id="MI3-t6-qa6"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PROJECT:" id="Zph-8f-Baq">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -117,7 +109,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="e4U-Cy-ACy"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="q98-FM-OqT" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,7 +123,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="kgU-ub-Pji"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="rO8-Yd-4Ws"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR3-Ry-AAX" customClass="AMFoundryFontView">
@@ -141,7 +131,6 @@
                         <constraint firstAttribute="width" constant="88" id="FBa-KX-0bp"/>
                         <constraint firstAttribute="height" constant="17" id="HGy-x2-Fm4"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LOCATION:" id="9jg-k0-AF7">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -153,7 +142,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="AEm-AI-JuH"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="D1Q-oM-xdQ" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -168,7 +156,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="CRL-33-18w"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="elk-VE-8Ta"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zfD-96-zVr" customClass="AMFoundryFontView">
@@ -177,7 +164,6 @@
                         <constraint firstAttribute="width" constant="88" id="3sk-N5-8W9"/>
                         <constraint firstAttribute="height" constant="17" id="cAW-cW-LgV"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LONGITUDE：" id="ReR-O0-YdW">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -186,7 +172,6 @@
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mnf-kZ-lHp" userLabel="LONGITUDE VALUE" customClass="AMFoundryFontView">
                     <rect key="frame" x="125" y="445" width="260" height="22"/>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="NT9-wx-tpn" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +186,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="xUf-3e-Jbs"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="c6q-eT-fig"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cr1-G9-fbr" customClass="AMFoundryFontView">
@@ -209,7 +193,6 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="88" id="08y-6R-QX1"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="LATITUDE：" id="EJG-sT-30a">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -218,7 +201,6 @@
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fH2-bF-0r7" userLabel="LATITUDE VALUE" customClass="AMFoundryFontView">
                     <rect key="frame" x="125" y="415" width="260" height="22"/>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="P10-vc-m2P" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -233,7 +215,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="UDX-43-KyV"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="mcl-My-UDc"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCM-vP-Xmj" customClass="AMFoundryFontView">
@@ -242,7 +223,6 @@
                         <constraint firstAttribute="height" constant="17" id="1bI-lf-Y1n"/>
                         <constraint firstAttribute="width" constant="88" id="7eQ-Ga-vZS"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TIMEZONE:" id="AeR-gW-6cS">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -254,7 +234,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="CHR-CG-nwQ"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="IJi-1Z-Wnw" customClass="AMTextFieldCell">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -269,7 +248,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="2jf-aR-qzn"/>
                     </constraints>
-                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Wa7-lN-qF6"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G8N-rX-Ehd" customClass="AMFoundryFontView">
@@ -278,7 +256,6 @@
                         <constraint firstAttribute="height" constant="17" id="Az4-X0-NbI"/>
                         <constraint firstAttribute="width" constant="88" id="Um0-4X-QNG"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DESCRIPTION:" id="vJ2-KR-dcB">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -294,7 +271,6 @@
                             <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="tm1-z8-td8">
                                 <rect key="frame" x="0.0" y="0.0" width="255" height="234"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="backgroundColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
                                 <size key="minSize" width="244" height="234"/>
@@ -304,22 +280,18 @@
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.23529413339999999" green="0.2941176593" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="height" constant="234" id="xdg-nD-yb2"/>
                     </constraints>
-                    <animations/>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1bv-IN-btD">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="vb7-Yv-ikF">
                         <rect key="frame" x="-100" y="-100" width="15" height="86"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-CK-gOS" customClass="AMBlueBorderButton">
@@ -327,7 +299,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Sl2-3I-vUT"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="square" title="JOIN" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="DbG-bp-eIr" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -341,7 +312,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="HYd-co-kuH"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="gsx-If-MIM" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -428,7 +398,6 @@ Gw
                 <constraint firstItem="M1C-uq-B32" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="28" id="yOR-Cf-3U2"/>
                 <constraint firstItem="RRk-qq-f14" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="43" id="ysJ-uU-nsj"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="333.5" y="366"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IDS-gn-h0d"/>

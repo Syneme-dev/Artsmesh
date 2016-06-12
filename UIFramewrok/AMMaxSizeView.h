@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMMaxSizeView : NSView
-@property NSColor *color;
+
 @end

@@ -40,12 +40,6 @@
     
     self.outlineView.dataSource = self;
     self.outlineView.delegate = self;
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
-    {
-        self.outlineView.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
-    }
-
 }
 
 

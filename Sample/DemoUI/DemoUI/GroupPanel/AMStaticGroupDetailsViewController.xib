@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStaticGroupDetailsViewController">
@@ -27,7 +27,6 @@
                         <constraint firstAttribute="height" constant="17" id="Za9-qV-Jnb"/>
                         <constraint firstAttribute="width" constant="94" id="tWY-5F-AJQ"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="GROUP NAME:" id="cr1-ky-Dst">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -40,7 +39,6 @@
                         <constraint firstAttribute="width" constant="94" id="aFD-Mg-VJP"/>
                         <constraint firstAttribute="height" constant="17" id="zg7-iR-I4N"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="HOME PAGE:" id="GNU-MF-duh">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -53,7 +51,6 @@
                         <constraint firstAttribute="width" constant="94" id="hMT-Sd-td6"/>
                         <constraint firstAttribute="height" constant="17" id="nSH-hx-VzK"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DESCRIPTION:" id="rSf-qr-pTU">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -66,7 +63,6 @@
                         <constraint firstAttribute="width" constant="96" id="LJS-9B-NpZ"/>
                         <constraint firstAttribute="height" constant="17" id="UY2-Kg-O9L"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="CREATED TIME:" id="EMf-DV-FfN">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -79,7 +75,6 @@
                         <constraint firstAttribute="width" constant="101" id="QST-p2-ecl"/>
                         <constraint firstAttribute="height" constant="17" id="ezm-Dg-F9a"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MODIFIED TIME:" id="sMr-Uh-r7a">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
@@ -91,7 +86,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="oXl-iq-b3u"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="ScV-KN-MoA" customClass="AMTextFieldCell">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,7 +100,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="QCU-JP-4Xh"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="BpC-AV-UqS" customClass="AMTextFieldCell">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,7 +114,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="KYY-D1-Sbp"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" id="v0T-1U-bBC" customClass="AMTextFieldCell">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +132,6 @@
                             <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" id="Jfy-4y-lnk">
                                 <rect key="frame" x="0.0" y="0.0" width="223" height="28"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="394" height="28"/>
@@ -150,22 +141,18 @@
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="zOx-gx-DV6"/>
                     </constraints>
-                    <animations/>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="sHU-4N-Ruw">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="E3N-fg-def">
                         <rect key="frame" x="-100" y="-100" width="15" height="45"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
                 <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-2y-x6B">
@@ -177,7 +164,6 @@
                             <textView editable="NO" drawsBackground="NO" importsGraphics="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="L2H-zT-dxJ">
                                 <rect key="frame" x="0.0" y="0.0" width="223" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="394" height="45"/>
@@ -187,22 +173,18 @@
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="IwZ-Mu-Yxm"/>
                     </constraints>
-                    <animations/>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="jGJ-zb-dXn">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="x5w-l8-8Rs">
                         <rect key="frame" x="-100" y="-100" width="15" height="45"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Lji-lN-j3v" customClass="AMBlueBorderButton">
@@ -210,7 +192,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="9u9-qb-Dlr"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="square" title="APPLY TO LIVE GROUP" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="btY-Py-9QS" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -224,7 +205,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="est-YU-3AG"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="square" title="CLOSE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="4dm-c1-UZU" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -267,7 +247,6 @@
                 <constraint firstItem="RU7-g0-n7F" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="131" id="wgh-8q-hNh"/>
                 <constraint firstItem="F61-wU-GGJ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="32" id="x4R-hG-xJv"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="254" y="326"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="l2q-aa-bZt"/>

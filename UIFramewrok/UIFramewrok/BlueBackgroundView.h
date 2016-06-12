@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface BlueBackgroundView : NSView
-@property NSColor *color;
+
 @end

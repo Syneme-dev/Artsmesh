@@ -44,10 +44,6 @@ AMGroupDetailViewDelegate>
     self.outlineView.delegate = self;
     
     [[AMStatusNet shareInstance] loadGroups];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
-    {
-        self.outlineView.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
-    }
 }
 
 -(void)viewWillAppear

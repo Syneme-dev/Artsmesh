@@ -34,7 +34,6 @@
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
 @property (strong) NSMutableArray *LSConfigOptions;
 
-@property IBOutlet NSMatrix *backgroundColorMatrix;
 @end
 
 @implementation AMGeneralSettingsVC
@@ -91,10 +90,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
-    {
-        [self.backgroundColorMatrix selectCellWithTag:0];
-    }
     // Do view setup here.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLSConfigIps) name:AM_LIVE_GROUP_CHANDED object:nil];
     
@@ -420,12 +415,6 @@
     
 }
 
--(IBAction)onClickBackgroundColorMatrix:(id)sender{
-    NSString *matrixTitle=[self.backgroundColorMatrix.selectedCell title];
-    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:matrixTitle forKey:@"backgroundColor"];
-    [userDefaults synchronize];
-}
 
 
 @end

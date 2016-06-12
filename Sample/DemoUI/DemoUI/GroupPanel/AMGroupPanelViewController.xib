@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGroupPanelViewController">
@@ -22,7 +22,6 @@
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="iFe-Pp-Jnt">
                     <rect key="frame" x="0.0" y="26" width="478" height="537"/>
-                    <animations/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Local" identifier="AMLocalGroupViewController" id="WtE-WW-nL0">
@@ -32,7 +31,6 @@
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ft1-CI-xb6">
                                         <rect key="frame" x="208" y="341" width="38" height="17"/>
-                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Local" id="dCe-Jd-jWD">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -40,7 +38,6 @@
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
-                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Live" identifier="AMLiveGroupViewController" id="ZNW-qg-zwo">
@@ -50,7 +47,6 @@
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVe-Vh-zKO">
                                         <rect key="frame" x="220" y="260" width="25" height="17"/>
-                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="live" id="bgX-KR-wbG">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -58,7 +54,6 @@
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
-                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Archive" identifier="AMArchiveGroupViewController" id="FUg-pt-tLS">
@@ -68,7 +63,6 @@
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5p-t3-0Vn">
                                         <rect key="frame" x="220" y="260" width="50" height="17"/>
-                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Archive" id="8Yt-cz-1Na">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -76,7 +70,6 @@
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
-                                <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -87,7 +80,6 @@
                         <constraint firstAttribute="height" constant="13" id="EPM-hd-hPf"/>
                         <constraint firstAttribute="width" constant="46" id="WSv-lf-R2M"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="LIVE   |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Hn8-IA-OZu">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -102,7 +94,6 @@
                         <constraint firstAttribute="width" constant="59" id="adB-3P-fTl"/>
                         <constraint firstAttribute="height" constant="13" id="bid-OJ-coU"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="LOCAL   |" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="4Mo-WY-kA0">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -117,7 +108,6 @@
                         <constraint firstAttribute="width" constant="50" id="gef-O5-PxU"/>
                         <constraint firstAttribute="height" constant="13" id="wcv-Lr-cgh"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="ARCHIVE" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="dtE-9E-eHj">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -139,7 +129,6 @@
                 <constraint firstItem="iFe-Pp-Jnt" firstAttribute="leading" secondItem="5d4-5O-feO" secondAttribute="leading" id="gLE-a9-8Am"/>
                 <constraint firstAttribute="trailing" secondItem="JhF-3o-4wl" secondAttribute="trailing" constant="12" id="hf4-k4-kCp"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="470" y="272"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="2hJ-v3-lcb"/>

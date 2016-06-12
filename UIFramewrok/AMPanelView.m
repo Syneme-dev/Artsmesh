@@ -49,10 +49,6 @@
 
 - (void)awakeFromNib
 {
- if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
-    {
-        self.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
-    }
 
     _knobColor = [NSColor colorWithCalibratedRed:(46)/255.0f
                                            green:(58)/255.0f

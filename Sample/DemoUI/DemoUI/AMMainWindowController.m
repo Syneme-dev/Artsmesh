@@ -289,7 +289,7 @@
 
 #define Main_View_Top           60.0f
 
-#define TopBar_Leading          410.0f
+#define TopBar_Leading          450.0f
 
 #define LeftBar_Leading         0.0f
 #define LeftBar_Top             (20.0f + Main_View_Top)

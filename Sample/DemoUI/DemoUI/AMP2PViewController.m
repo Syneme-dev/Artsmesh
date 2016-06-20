@@ -106,12 +106,6 @@ typedef enum {
 
 
 
-//Tmp ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- (int)getNALUType:(NSData *)NALU {
-    uint8_t * bytes = (uint8_t *) NALU.bytes;
-    return bytes[0] & 0x1F;
-}
-
 
 
 - (void)handleSlice:(NSData *)NALU {
@@ -203,132 +197,6 @@ typedef enum {
     }
 }
 
--(void) new_sample:(NSData*) sample
-{
-   // GstMemory *memory = gst_buffer_get_all_memory(buffer);
-    uint8_t*    info     = (uint8_t*)[sample bytes];
-    NSUInteger  infoSize = [sample length];
-    
-    int startCodeIndex = 0;
-    for (int i = 0; i < 5; i++) {
-        if (info[i] == 0x01) {
-            startCodeIndex = i;
-            break;
-        }
-    }
-    
-    int nalu_type = info[startCodeIndex + 1] & 0x1F;
-    NSLog(@"NALU with Type \"%@\" received.", naluTypesStrings[nalu_type]);
-    if (nalu_type == 7 || nalu_type == 8) {
-        _searchForSPSAndPPS = true;
-    }
-    
-    if(_searchForSPSAndPPS)
-    {
-        if (nalu_type == 7)
-            _spsData = [NSData dataWithBytes:&(info[startCodeIndex + 1]) length: infoSize - 3];
-        
-        if (nalu_type == 8)
-            _ppsData = [NSData dataWithBytes:&(info[startCodeIndex + 1]) length: infoSize - 3];
-        
-        if (_spsData != nil && _ppsData != nil) {
-            const uint8_t* const parameterSetPointers[2] = {(const uint8_t*)[_spsData bytes],
-                                                            (const uint8_t*)[_ppsData bytes] };
-           
-            const size_t parameterSetSizes[2] = { [_spsData length], [_ppsData length] };
-            
-            CMVideoFormatDescriptionRef videoFormatDescr;
-            OSStatus status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2, parameterSetPointers, parameterSetSizes, 4, &videoFormatDescr);
-            
-            _videoFormatDescr = videoFormatDescr;
-            _searchForSPSAndPPS = false;
-            NSLog(@"Creation CMVideoFormatDescription: %@.", (status == noErr) ? @"success" : @"fail");
-        }
-    }
-    if (nalu_type == 1 || nalu_type == 5) {
-        CMBlockBufferRef videoBlock = NULL;
-        infoSize += 1;
-        
-        uint8_t zero[2] = {0};
-        NSMutableData* newInfo = [[NSMutableData alloc] initWithBytes:zero length:1];
-        [newInfo appendBytes:info+3 length:infoSize-4];
-        
-        OSStatus status = CMBlockBufferCreateWithMemoryBlock(NULL, (uint8_t*)[newInfo bytes],infoSize,
-                                                             kCFAllocatorNull, NULL, 0,      infoSize,
-                                                             0, &videoBlock);
-        
-        NSLog(@"BlockBufferCreation: %@",(status == kCMBlockBufferNoErr) ? @"success" : @"fail");
-        const uint8_t sourceBytes[] = { (uint8_t)(infoSize >> 24), (uint8_t)(infoSize >> 16),
-                                        (uint8_t)(infoSize >> 8),  (uint8_t)infoSize};
-        status = CMBlockBufferReplaceDataBytes(sourceBytes, videoBlock, 0, 4);
-        NSLog(@"BlockBufferReplace: %@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
-        
-        CMSampleBufferRef sbRef = NULL;
-        const size_t sampleSizeArray[] = {infoSize};
-        
-        status = CMSampleBufferCreate(kCFAllocatorDefault, videoBlock, true, NULL, NULL,
-                                      _videoFormatDescr, 1, 0, NULL, 1, sampleSizeArray, &sbRef);
-        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"successfully." : @"failed.");
-        
-        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
-        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
-        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
-        
-        NSLog(@"Error: %@, Status: %@",
-              self.videoView.videoLayer.error,
-              (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
-              ? @"unknown"
-              : (
-                 (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
-                 ? @"rendering"
-                 :@"failed"
-                 )
-              );
-        
-        dispatch_async(dispatch_get_main_queue(),^{
-            if([self.videoView.videoLayer isReadyForMoreMediaData]){
-                [self.videoView.videoLayer enqueueSampleBuffer:sbRef];
-                [self.videoView.videoLayer setNeedsDisplay];
-            }
-        });
-
- /*       NSLog(@"Error: %@, Status:%@", backend.displayLayer.error, (backend.displayLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)?@"unknown":((backend.displayLayer.status == AVQueuedSampleBufferRenderingStatusRendering)?@"rendering":@"failed"));
-        dispatch_async(dispatch_get_main_queue(),^{
-            [backend.displayLayer enqueueSampleBuffer:sbRef];
-            [backend.displayLayer setNeedsDisplay];
-
-        });
-        */
-    }
-    
-    return;
-}
-
-
-- (void)parseNALU:(NSData *)NALU {
-    int type = [self getNALUType: NALU];
-    
-    NSLog(@"NALU with Type \"%@\" received.", naluTypesStrings[type]);
-    
-    switch (type)
-    {
-        case NALUTypeSliceNoneIDR:
-        case NALUTypeSliceIDR:
-            [self handleSlice:NALU];
-            break;
-        case NALUTypeSPS:
-            [self handleSPS:NALU];
-            [self updateFormatDescriptionIfPossible];
-            break;
-        case NALUTypePPS:
-            [self handlePPS:NALU];
-            [self updateFormatDescriptionIfPossible];
-            break;
-        default:
-            break;
-    }
-}
-
 
 
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
@@ -394,16 +262,6 @@ withFilterContext:(id)filterContext
                                         range:NSMakeRange(0, [recvData length])];
     
 
-    //~~~~
-    NSFileManager* fileManager= [NSFileManager defaultManager];
-    if(_udpIndex <= 300){
-        NSString* nalFilePath = [NSString stringWithFormat:@"udp_%d",_udpIndex++];
-        [fileManager createFileAtPath:nalFilePath
-                             contents:recvData
-                           attributes:nil];
-    }
-       /* //~~~~*/
-        
         
     if(nextRange.location != NSNotFound){
         while(nextRange.location != NSNotFound) {
@@ -426,25 +284,9 @@ withFilterContext:(id)filterContext
                                                                        length:[_lastNALUData length]-1];
                     _lastNALUData = tmp;
                 }
-                
-                //~~~~~~~
-                if(_fileIndex <= 300){
-                    NSString* nalFilePath = [NSString stringWithFormat:@"nal_%d",_fileIndex++];
-                    [fileManager createFileAtPath:nalFilePath
-                                         contents:_lastNALUData
-                                       attributes:nil];
-                }
+               
                 [self receivedRawVideoFrame:(uint8_t*)[_lastNALUData bytes]
                                    withSize:[_lastNALUData length]];
- 
-          //     [self new_sample:_lastNALUData];
-           //    uint8_t* nh = (uint8_t*)[_lastNALUData bytes] + scLen;
-           //    NSData* noheader = [[NSData alloc ] initWithBytes:nh length:[_lastNALUData length] -scLen];
-                
-           //      [self parseNALU:noheader];
-                //~~~~~~~
-                //[self receivedRawVideoFrame:(uint8_t*)_lastNALUData.bytes
-                //                   withSize:[_lastNALUData length]];
             }
             
             prevRange = nextRange;
@@ -461,33 +303,9 @@ withFilterContext:(id)filterContext
     }else{ //Not found
         [_lastNALUData appendData:recvData];
     }
-    
-    /*
-    NSBundle * mainBundle = [NSBundle mainBundle];
-    if(_index < 1000) {
-        NSString * resource = [NSString stringWithFormat:@"nalu_%03d", _index];
-        NSString * path = [mainBundle pathForResource:resource ofType:@"bin"];
-        NSData * NALU = [NSData dataWithContentsOfFile:path];
-        [self parseNALU:NALU];
-        
-        _index = (_index + 1) % 1000;
-    }
-    return;
-    */
 }
 
 
-
--(void) observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context{
-    if ([keyPath isEqualToString:@"status"]){
-//        [_player play];
-    }else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
 
 
 
@@ -532,9 +350,8 @@ withFilterContext:(id)filterContext
 //First, add the base of the function which deals with H.264 from the network
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
 {
-    OSStatus status;
-    
-    uint8_t *data = NULL;
+    OSStatus  status;
+    uint8_t*  data = NULL;
    
     long blockLength = 0;
     CMSampleBufferRef   sampleBuffer;
@@ -593,7 +410,63 @@ withFilterContext:(id)filterContext
     }
     
     if(_ableToDecodeFrame && ( nalu_type == 5 || nalu_type == 1))
-    { // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
+    {
+        const uint32_t NALUlengthInBigEndian = CFSwapInt32HostToBig(frameSize-3);
+        
+        /* Create the slice */
+        NSMutableData * slice = [[NSMutableData alloc] initWithBytes:&NALUlengthInBigEndian length:4];
+        
+        /* Append the contents of the NALU */
+        [slice appendBytes:frame+3 length:frameSize-3];
+        
+        /* Create the video block */
+        CMBlockBufferRef videoBlock = NULL;
+        
+        status = CMBlockBufferCreateWithMemoryBlock(NULL, (void*)slice.bytes, slice.length,
+                                                    kCFAllocatorNull, NULL, 0, slice.length,
+                                                    0, &videoBlock);
+        
+        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
+        
+        /* Create the CMSampleBuffer */
+        CMSampleBufferRef sbRef = NULL;
+        
+        const size_t sampleSizeArray[] = { slice.length };
+        
+        status = CMSampleBufferCreate(kCFAllocatorDefault, videoBlock, true, NULL, NULL,
+                                      _formatDesc, 1, 0, NULL, 1, sampleSizeArray, &sbRef);
+        
+        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"success" : @"failed");
+        
+        /* Enqueue the CMSampleBuffer in the AVSampleBufferDisplayLayer */
+        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
+        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
+        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
+        
+        NSLog(@"Error: %@, Status: %@",
+              self.videoView.videoLayer.error,
+              (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
+              ? @"unknown"
+              : (
+                 (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
+                 ? @"rendering"
+                 :@"failed"
+                 )
+              );
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            if([self.videoView.videoLayer isReadyForMoreMediaData]){
+                [self.videoView.videoLayer enqueueSampleBuffer:sbRef];
+                [self.videoView.videoLayer setNeedsDisplay];
+            }
+        });
+        
+        
+        
+        return;
+
+        
+        // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
         
         blockLength = frameSize+1;
         data = malloc(blockLength);

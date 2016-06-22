@@ -45,7 +45,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -r %@ -i \"%@:none\" -c:v %@ -pix_fmt yuv420p -force_key_frames 'expr:gte(t,n_forced*1)' -b:v %@ -an -f h264 -threads 8 udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -pix_fmt yuv420p -force_key_frames 'expr:gte(t,n_forced*1)' -b:v %@ -f h264 udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
@@ -54,7 +54,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
                                 cfgs.videoBitRate,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
-    //NSLog(@"%@", command);
+    NSLog(@"%@", command);
     
     AMLog(kAMInfoLog, @"AMVideo", @"starting ffmpeg p2p send..");
     
@@ -337,12 +337,17 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
 }
 
 -(NSString *)getCodec:(AMFFmpegConfigs *)cfgs {
-    int frameRateInt = (int) [cfgs.videoFrameRate integerValue];
-    int maxRateInt = frameRateInt * 100;
-    int maxSizeInt = frameRateInt * 50;
-    int bufSizeInt = maxRateInt / frameRateInt;
+    /** Comment out complex libx264 latency settings for now
+        Compatibility is primary focus **/
+    //int frameRateInt = (int) [cfgs.videoFrameRate integerValue];
+    //int maxRateInt = frameRateInt * 100;
+    //int maxSizeInt = frameRateInt * 50;
+    //int bufSizeInt = maxRateInt / frameRateInt;
     
+    /**
     NSString *vCodec = [NSString stringWithFormat:@"libx264 -preset ultrafast -tune zerolatency -x264opts crf=20:vbv-maxrate=%d:vbv-bufsize=%d:intra-refresh=1:slice-max-size=%d:keyint=%d:ref=1", maxRateInt, bufSizeInt, maxSizeInt, frameRateInt];
+    **/
+    NSString *vCodec = @"libx264";
     NSString *selectedCodec = cfgs.videoCodec;
     if ([selectedCodec isEqualToString:@"MPEG2"]) {
         vCodec = @"mpeg2video";

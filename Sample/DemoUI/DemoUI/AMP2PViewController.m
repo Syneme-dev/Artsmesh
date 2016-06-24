@@ -277,16 +277,15 @@ withFilterContext:(id)filterContext
                                     length:nextRange.location - prevRange.location];
             }
             
-            if([_lastNALUData length] > 2){
+            if([_lastNALUData length] > 4){
+                int startCodeAppendLen = 0;
                 uint8_t* dataBytes = (uint8_t*)[_lastNALUData bytes];
                 if( dataBytes[[_lastNALUData length] - 1] == 0){
-                    NSMutableData* tmp = [[NSMutableData alloc] initWithBytes:[_lastNALUData bytes]
-                                                                       length:[_lastNALUData length]-1];
-                    _lastNALUData = tmp;
+                    startCodeAppendLen = 1;
                 }
                
                 [self receivedRawVideoFrame:(uint8_t*)[_lastNALUData bytes]
-                                   withSize:[_lastNALUData length]];
+                                   withSize:[_lastNALUData length] - startCodeAppendLen];
             }
             
             prevRange = nextRange;
@@ -345,7 +344,8 @@ withFilterContext:(id)filterContext
         
     return serverNames;
 }
- 
+
+ //33214101
 
 //First, add the base of the function which deals with H.264 from the network
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
@@ -359,15 +359,7 @@ withFilterContext:(id)filterContext
     
     int nalu_type = (frame[3] & 0x1F);
     NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
-    
-    // if we havent already set up our format description with our SPS PPS parameters,
-    // we can't process any frames except type 7 that has our parameters
-    /*if (nalu_type != 7 && _formatDesc == NULL)
-    {
-        NSLog(@"Video error: Frame is not an I Frame and format description is null");
-        return;
-    }*/
-    
+
     if (nalu_type == 7 || nalu_type == 8)
     {
         // find what the second NALU type is
@@ -411,66 +403,10 @@ withFilterContext:(id)filterContext
     
     if(_ableToDecodeFrame && ( nalu_type == 5 || nalu_type == 1))
     {
-        const uint32_t NALUlengthInBigEndian = CFSwapInt32HostToBig(frameSize-3);
-        
-        /* Create the slice */
-        NSMutableData * slice = [[NSMutableData alloc] initWithBytes:&NALUlengthInBigEndian length:4];
-        
-        /* Append the contents of the NALU */
-        [slice appendBytes:frame+3 length:frameSize-3];
-        
-        /* Create the video block */
-        CMBlockBufferRef videoBlock = NULL;
-        
-        status = CMBlockBufferCreateWithMemoryBlock(NULL, (void*)slice.bytes, slice.length,
-                                                    kCFAllocatorNull, NULL, 0, slice.length,
-                                                    0, &videoBlock);
-        
-        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
-        
-        /* Create the CMSampleBuffer */
-        CMSampleBufferRef sbRef = NULL;
-        
-        const size_t sampleSizeArray[] = { slice.length };
-        
-        status = CMSampleBufferCreate(kCFAllocatorDefault, videoBlock, true, NULL, NULL,
-                                      _formatDesc, 1, 0, NULL, 1, sampleSizeArray, &sbRef);
-        
-        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"success" : @"failed");
-        
-        /* Enqueue the CMSampleBuffer in the AVSampleBufferDisplayLayer */
-        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
-        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
-        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
-        
-        NSLog(@"Error: %@, Status: %@",
-              self.videoView.videoLayer.error,
-              (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
-              ? @"unknown"
-              : (
-                 (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
-                 ? @"rendering"
-                 :@"failed"
-                 )
-              );
-        
-        dispatch_async(dispatch_get_main_queue(),^{
-            if([self.videoView.videoLayer isReadyForMoreMediaData]){
-                [self.videoView.videoLayer enqueueSampleBuffer:sbRef];
-                [self.videoView.videoLayer setNeedsDisplay];
-            }
-        });
-        
-        
-        
-        return;
-
-        
         // type 5 is an IDR frame NALU.  The SPS and PPS NALUs should always be followed by an IDR
-        
         blockLength = frameSize+1;
         data = malloc(blockLength);
-        memcpy(data+1, frame, blockLength);
+        memcpy(data+1, frame, blockLength-1);
         
         // again, replace the start header with the size of the NALU
         uint32_t dataLength32 = CFSwapInt32HostToBig(blockLength-4);

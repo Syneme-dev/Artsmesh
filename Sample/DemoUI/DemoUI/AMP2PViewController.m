@@ -242,8 +242,6 @@ typedef enum {
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    if([data length] <= 64)
-        return;   //It should be the ICMP datagram.
 
     UInt8 tmpStartCode[3];
     tmpStartCode[0] = 0x00;
@@ -277,7 +275,7 @@ withFilterContext:(id)filterContext
                                     length:nextRange.location - prevRange.location];
             }
             
-            if([_lastNALUData length] > 4){
+            if([_lastNALUData length] > 3){
                 int startCodeAppendLen = 0;
                 uint8_t* dataBytes = (uint8_t*)[_lastNALUData bytes];
                 if( dataBytes[[_lastNALUData length] - 1] == 0){

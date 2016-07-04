@@ -1,6 +1,6 @@
-#import "VideoView.h"
+#import "AMP2PVideoView.h"
 
-@implementation VideoView
+@implementation AMP2PVideoView
 
 - (void)setupVideoLayer {
     self.videoLayer = [AVSampleBufferDisplayLayer new];

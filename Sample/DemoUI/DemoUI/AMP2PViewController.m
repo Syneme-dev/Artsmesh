@@ -25,7 +25,8 @@
 #include <netinet/in.h> /* INET constants and stuff */
 #include <arpa/inet.h>  /* IP address conversion stuff */
 #include <netdb.h>      /* gethostbyname */
-#include "VideoView.h"
+#include "AMP2PVideoView.h"
+#import "AMP2PVideoCommon.h"
 
 #define MAXBUF 1024*1024
 
@@ -75,15 +76,10 @@ typedef enum {
 } NALUType;
 
 @interface AMP2PViewController ()
-@property (weak) IBOutlet VideoView *videoView;
-
+@property (weak) IBOutlet AMP2PVideoView *videoView;
 @property (nonatomic, strong) NSData * spsData;
 @property (nonatomic, strong) NSData * ppsData;
 @property (nonatomic) CMVideoFormatDescriptionRef videoFormatDescr;
-@property (nonatomic) BOOL videoFormatDescriptionAvailable;
-
-@property (nonatomic, retain) IBOutlet NSView* glView;
-//@property (weak) IBOutlet AVPlayerView* playerView;
 @property (weak) IBOutlet NSPopUpButtonCell *serverTitlePopUpButton;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
 @end
@@ -104,98 +100,6 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
-
-
-
-- (void)handleSlice:(NSData *)NALU {
-    if (self.videoFormatDescriptionAvailable) {
-        /* The length of the NALU in big endian */
-        const uint32_t NALUlengthInBigEndian = CFSwapInt32HostToBig(((uint32_t) NALU.length));
-        
-        /* Create the slice */
-        NSMutableData * slice = [[NSMutableData alloc] initWithBytes:&NALUlengthInBigEndian length:4];
-        
-        /* Append the contents of the NALU */
-        [slice appendData:NALU];
-        
-        /* Create the video block */
-        CMBlockBufferRef videoBlock = NULL;
-        
-        OSStatus status;
-        
-        status = CMBlockBufferCreateWithMemoryBlock(NULL, (void*)slice.bytes, slice.length,
-                                                    kCFAllocatorNull, NULL, 0, slice.length,
-                                                    0, &videoBlock);
-        
-        NSLog(@"BlockBufferCreation: %@", (status == kCMBlockBufferNoErr) ? @"success" : @"fail");
-        
-        /* Create the CMSampleBuffer */
-        CMSampleBufferRef sbRef = NULL;
-        
-        const size_t sampleSizeArray[] = { slice.length };
-        
-        status = CMSampleBufferCreate(kCFAllocatorDefault, videoBlock, true, NULL, NULL,
-                                      _videoFormatDescr, 1, 0, NULL, 1, sampleSizeArray, &sbRef);
-        
-        NSLog(@"SampleBufferCreate: %@", (status == noErr) ? @"success" : @"failed");
-        
-        /* Enqueue the CMSampleBuffer in the AVSampleBufferDisplayLayer */
-        CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sbRef, YES);
-        CFMutableDictionaryRef dict = (CFMutableDictionaryRef)CFArrayGetValueAtIndex(attachments, 0);
-        CFDictionarySetValue(dict, kCMSampleAttachmentKey_DisplayImmediately, kCFBooleanTrue);
-        
-        NSLog(@"Error: %@, Status: %@",
-              self.videoView.videoLayer.error,
-              (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusUnknown)
-              ? @"unknown"
-              : (
-                 (self.videoView.videoLayer.status == AVQueuedSampleBufferRenderingStatusRendering)
-                 ? @"rendering"
-                 :@"failed"
-                 )
-              );
-        
-        dispatch_async(dispatch_get_main_queue(),^{
-            if([self.videoView.videoLayer isReadyForMoreMediaData]){
-                [self.videoView.videoLayer enqueueSampleBuffer:sbRef];
-                [self.videoView.videoLayer setNeedsDisplay];
-            }
-        });
-    }
-}
-
-
-
-
-- (void)handleSPS:(NSData *)NALU {
-    _spsData = [NALU copy];
-}
-
-- (void)handlePPS:(NSData *)NALU {
-    _ppsData = [NALU copy];
-}
-
-- (void)updateFormatDescriptionIfPossible {
-    if (_spsData != nil && _ppsData != nil) {
-        const uint8_t * const parameterSetPointers[2] = {
-            (const uint8_t *) _spsData.bytes,
-            (const uint8_t *) _ppsData.bytes
-        };
-        
-        const size_t parameterSetSizes[2] = {
-            _spsData.length,
-            _ppsData.length
-        };
-        
-        OSStatus status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
-         parameterSetPointers, parameterSetSizes, 4, &_videoFormatDescr);
-        
-        _videoFormatDescriptionAvailable = YES;
-        
-        NSLog(@"Updated CMVideoFormatDescription %@.", (status == noErr) ? @"success" : @"fail");
-    }
-}
 
 
 
@@ -316,11 +220,19 @@ withFilterContext:(id)filterContext
                   selector:@selector(updateServerTitle)
                       name:AMP2PVideoReceiverChanged
                     object:nil];
+    
+    [defaultNC addObserver:self
+                  selector:@selector(stopP2PVideo)
+                      name:AMP2PVideoStopNotification
+                    object:nil];
     _lastNALUData = [[NSMutableData alloc] init];
 }
 
 
-
+-(void) stopP2PVideo
+{
+    [_udpSocket close];
+}
 
 -(void) updateServerTitle
 {

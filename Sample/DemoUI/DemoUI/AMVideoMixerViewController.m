@@ -13,7 +13,8 @@
 #import "AMAppDelegate.h"
 #import "AMSyphonView.h"
 #import "AMSyphonCamera.h"
-#import "VideoView.h"
+#import "AMP2PVideoView.h"
+#import "AMP2PVideoCommon.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -52,15 +53,11 @@
     
 
     for (int i = 0; i < self.smallViews.count/2; i++) {
-      //    for (int i = 0; i < self.smallViews.count; i++) {
-//        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
         AMVideoMixerBackgroundView *view = self.smallViews[i];
         view.contentView = [self.syphonManager clientViewByIndex:i];
     }
     
     for (NSUInteger j = self.smallViews.count / 2; j < self.smallViews.count; j++) {
-        
-        //        AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
         AMVideoMixerBackgroundView *view = self.smallViews[j];
         view.contentView = [self.p2pViewManager clientViewByIndex:(j-self.smallViews.count / 2)];
     }
@@ -115,6 +112,8 @@
         
         //if([self.sender ])
         {
+            NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+            [nc postNotificationName:AMP2PVideoStopNotification object:nil];
             [self popupP2PVideoMixingWindow];
         }
     }else {
@@ -145,7 +144,7 @@
         panelView.preferredSize = NSMakeSize(800, 600);
         panelView.initialSize = panelView.preferredSize;
         
-        NSView *subview = [[VideoView alloc] init];
+        NSView *subview = [[AMP2PVideoView alloc] init];
         subview.frame = NSMakeRect(0, 20, panelView.bounds.size.width, panelView.bounds.size.height - 16);
         [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
         [panelView addSubview:subview];

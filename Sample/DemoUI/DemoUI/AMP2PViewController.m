@@ -31,7 +31,7 @@
 #define MAXBUF 1024*1024
 
 NSString *const AMP2PVideoReceiverChanged;
-
+/*
 NSString *const naluTypesStrings[] =
 {
     @"0: Unspecified (non-VCL)",
@@ -74,6 +74,7 @@ typedef enum {
     NALUTypeSPS = 7,
     NALUTypePPS = 8
 } NALUType;
+ */
 
 @interface AMP2PViewController ()
 @property (weak) IBOutlet AMP2PVideoView *videoView;
@@ -88,9 +89,6 @@ typedef enum {
 {
     GCDAsyncUdpSocket*              _udpSocket;
     CMVideoFormatDescriptionRef     _formatDesc;
-    int                             _index;
-    int                             _fileIndex;
-    int                             _udpIndex;
     NSMutableData*                  _lastNALUData;
     BOOL                            _searchForSPSAndPPS;
     BOOL                            _ableToDecodeFrame;
@@ -232,7 +230,22 @@ withFilterContext:(id)filterContext
 -(void) stopP2PVideo
 {
     [_udpSocket close];
+    
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[@"port"] = @"5564";
+    
+    /*
+     [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
+     object:self
+     userInfo:@{@"port" : @"5564"}];
+     */
+    NSNotificationCenter* defaultNC = [NSNotificationCenter defaultCenter];
+    [defaultNC postNotificationName:AMP2PVideoInfoNotification
+                             object:nil
+                           userInfo:userInfo];
 }
+
 
 -(void) updateServerTitle
 {

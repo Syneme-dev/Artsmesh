@@ -9,6 +9,13 @@
 #ifndef AMP2PVideoCommon_h
 #define AMP2PVideoCommon_h
 
+NSString *const naluTypesStrings[];
+
+typedef NS_ENUM(NSUInteger, AMP2PVideoState){
+    AMP2PVideoStart,
+    AMP2PVideoStop,
+};
+
 extern NSString* const AMP2PVideoStartNotification;
 extern NSString* const AMP2PVideoStopNotification;
 extern NSString* const AMP2PVideoInfoNotification;

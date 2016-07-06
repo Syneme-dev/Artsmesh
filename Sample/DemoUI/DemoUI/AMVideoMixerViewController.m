@@ -13,11 +13,13 @@
 #import "AMAppDelegate.h"
 #import "AMSyphonView.h"
 #import "AMSyphonCamera.h"
+
 #import "AMP2PVideoView.h"
 #import "AMP2PVideoCommon.h"
 #import <VideoToolbox/VideoToolbox.h>
 #import "AMNetworkUtils/JSONKit.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
+#include "AMLogger/AMLogger.h"
 
 @interface AMVideoMixerViewController ()
 @property (weak) IBOutlet AMVideoMixerBackgroundView *bigView;
@@ -65,6 +67,10 @@
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
+    if(_lastNALUData == nil){
+        _lastNALUData = [[NSMutableData alloc] init];
+    }
+        
     
     UInt8 tmpStartCode[3];
     tmpStartCode[0] = 0x00;
@@ -256,8 +262,6 @@ withFilterContext:(id)filterContext
                 }
             });
         }
-        
-        // free memory to avoid a memory leak, do the same for sps, pps and blockbuffer
     }
 }
 
@@ -282,7 +286,29 @@ withFilterContext:(id)filterContext
 
 -(void) getP2PInfo:(NSNotification*)notification
 {
+    NSError *error = nil;
     int port = [notification.userInfo[@"port"] intValue];
+    _ableToDecodeFrame = FALSE;
+    
+    _udpSocket = [[GCDAsyncUdpSocket alloc]
+                  initWithDelegate:self
+                  delegateQueue:dispatch_get_main_queue()];
+    
+    if (![_udpSocket bindToPort:port error:&error])
+    {
+        AMLog(kAMErrorLog, @"Video Mixer", @"Create udp socket failed in the port[%d].Error:%@",
+              port, error);
+        return;
+    }
+    
+    if (![_udpSocket beginReceiving:&error])
+    {
+        [_udpSocket close];
+        AMLog(kAMErrorLog, @"Video Mixer", @"Listening socket port failed. Error:%@", error);
+        return;
+    }
+    
+    return;
     
 }
 
@@ -384,7 +410,8 @@ withFilterContext:(id)filterContext
         panelView.preferredSize = NSMakeSize(800, 600);
         panelView.initialSize = panelView.preferredSize;
         
-        NSView *subview = [[AMP2PVideoView alloc] init];
+        AMP2PVideoView *subview = [[AMP2PVideoView alloc] init];
+        self.videoView = subview;
         subview.frame = NSMakeRect(0, 20, panelView.bounds.size.width, panelView.bounds.size.height - 16);
         [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
         [panelView addSubview:subview];

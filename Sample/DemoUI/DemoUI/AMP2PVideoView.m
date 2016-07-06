@@ -31,4 +31,15 @@
     return self;
 }
 
+- (instancetype)init{
+    self = [super init];
+    
+    if (self) {
+        [self setupVideoLayer];
+    }
+    
+    return self;
+}
+
+
 @end

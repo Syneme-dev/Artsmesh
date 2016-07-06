@@ -89,7 +89,7 @@
     [self.roleSelecter selectItemWithTitle:@"SENDER"];
     
     [self.vidCodec addItemWithTitle:@"H.264"];
-    [self.vidCodec addItemWithTitle:@"MPEG2"];
+    //[self.vidCodec addItemWithTitle:@"MPEG2"];
     [self.vidCodec selectItemWithTitle:@"H.264"];
     
     [self.peerAddress setEnabled:NO];
@@ -497,7 +497,7 @@
     [self.vidCodec removeAllItems];
     
     [self.vidCodec addItemWithTitle:@"H.264"];
-    [self.vidCodec addItemWithTitle:@"MPEG2"];
+    //[self.vidCodec addItemWithTitle:@"MPEG2"];
     [self.vidCodec selectItemWithTitle:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format]];
 }
 
@@ -579,9 +579,12 @@
     cfgs.videoDevice = [NSString stringWithFormat:@"%d", selectedVidDevice];
     cfgs.portOffset = self.portOffsetSelector.stringValue;
     cfgs.videoCodec = @"libx264";
+    /**
+    Remove use of other video codecs, for now
     if ( [self.vidCodec.stringValue isEqualToString:@"MPEG2"] ) {
         cfgs.videoCodec = @"mpeg2video";
     }
+    **/
     cfgs.serverAddr = peerAddr;
     
     return cfgs;

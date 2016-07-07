@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconfont-radio-copy-2.png",
+      "filename" : "SideBar_GPlus_01_Red.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "SideBar_GPlus_02_Red.png",
       "scale" : "2x"
     },
     {

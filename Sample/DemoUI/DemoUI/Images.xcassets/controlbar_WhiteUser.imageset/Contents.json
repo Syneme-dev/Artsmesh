@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconfont-user-copy-copy.png",
+      "filename" : "SideBar_user_01_White.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "SideBar_user_02_White.png",
       "scale" : "2x"
     },
     {

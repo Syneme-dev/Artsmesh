@@ -53,11 +53,66 @@
 
 -(void)awakeFromNib
 {
-        [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToWhiteColor:) name:@"WhiteTheme" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToBlackColor:) name:@"BlackTheme" object:nil];
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"backgroundColor"] isEqualToString:@"White"]) {
+        [self ChangeToWhiteColor];
+    }
+    
+    [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
     [self.fullScreenButton setHidden:YES];
     [self.maxSizeButton setHidden:YES];
-
 }
+-(void)ChangeToWhiteColor{
+    NSImage *grayCopyImage = [NSImage imageNamed:@"panelView_WhiteCopy"];
+    NSImage *redCopyImage = [NSImage imageNamed:@"panelView_RedCopy"];
+    NSImage *redFullScreen=[NSImage imageNamed:@"panelView_Redfullscreen"];
+    NSImage *whiteFullScreen=[NSImage imageNamed:@"panelView_Whitefullscreen"];
+    NSImage *whiteExtend=[NSImage imageNamed:@"panelView_WhiteExtend"];
+    NSImage *redExtend=[NSImage imageNamed:@"panelView_RedExtend"];
+    NSImage *whiteClose=[NSImage imageNamed:@"panelView_WhiteClose"];
+    NSImage *redClose=[NSImage imageNamed:@"panelView_RedClose"];
+    NSImage *whiteTearOff=[NSImage imageNamed:@"panelView_WhiteTearOff"];
+    NSImage *redTearOff=[NSImage imageNamed:@"panelView_RedTearOff"];
+    [self.tearOffButton setImage:grayCopyImage];
+    [self.tearOffButton setAlternateImage:redCopyImage];
+    [self.maxSizeButton setImage:whiteFullScreen];
+    [self.maxSizeButton setAlternateImage:redFullScreen];
+    [self.fullScreenButton setImage:whiteExtend];
+    [self.fullScreenButton setAlternateImage:redExtend];
+    [self.closeButton setImage:whiteClose];
+    [self.closeButton setAlternateImage:redClose];
+    [self.tabPanelButton setImage:whiteTearOff];
+    [self.tabPanelButton setAlternateImage:redTearOff];
+    self.titleView.textColor=[NSColor whiteColor];
+}
+-(void)changeToWhiteColor:(NSNotification *)notification{
+    [self ChangeToWhiteColor];
+}
+-(void)changeToBlackColor:(NSNotification *)notification{
+    NSImage *blackCopyImage = [NSImage imageNamed:@"panel_tear"];
+    NSImage *lightCopyImage = [NSImage imageNamed:@"panel_tear_h"];
+    NSImage *blackFullScreen=[NSImage imageNamed:@"panel_fullScreen"];
+    NSImage *lightFullScreen=[NSImage imageNamed:@"panel_fullScreen_h"];
+    NSImage *blackExtend=[NSImage imageNamed:@"panel_extend"];
+    NSImage *lightExtend=[NSImage imageNamed:@"panel_extend_h"];
+    NSImage *blackClose=[NSImage imageNamed:@"panel_close"];
+    NSImage *lightClose=[NSImage imageNamed:@"panel_close_h"];
+    NSImage *blackTearOff=[NSImage imageNamed:@"panel_copy"];
+    NSImage *lightTearOff=[NSImage imageNamed:@"panel_copy_h"];
+    [self.tearOffButton setImage:blackCopyImage];
+    [self.tearOffButton setAlternateImage:lightCopyImage];
+    [self.maxSizeButton setImage:blackFullScreen];
+    [self.maxSizeButton setAlternateImage:lightFullScreen];
+    [self.fullScreenButton setImage:blackExtend];
+    [self.fullScreenButton setAlternateImage:lightExtend];
+    [self.closeButton setImage:blackClose];
+    [self.closeButton setAlternateImage:lightClose];
+    [self.tabPanelButton setImage:blackTearOff];
+    [self.tabPanelButton setAlternateImage:lightTearOff];
+    self.titleView.textColor=[NSColor headerColor];
+}
+//end
 
 -(void)setTitle:(NSString *)title{
     [self.titleView setStringValue:title];

@@ -35,26 +35,34 @@
     
 
 }
-- (id)initWithFrame:(NSRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-//        [self setAcceptsTouchEvents:YES];
-         self.backgroundColor = UI_Color_gray;
-//        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
-        
-    }
-    return self;
-}
 
+//Theme
 - (void)awakeFromNib
 {
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToWhiteColor:) name:@"WhiteTheme" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToBlackColor:) name:@"BlackTheme" object:nil];
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"backgroundColor"] isEqualToString:@"White"]) {
+        self.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    }
+    else {
+        self.backgroundColor = UI_Color_gray;
+    }
+    
     _knobColor = [NSColor colorWithCalibratedRed:(46)/255.0f
                                            green:(58)/255.0f
                                             blue:(75)/255.0f
                                            alpha:1.0f];
 }
+
+-(void)changeToWhiteColor:(NSNotification *)notification{
+    self.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    [self setNeedsDisplay:YES];
+}
+-(void)changeToBlackColor:(NSNotification *)notification{
+    self.backgroundColor=UI_Color_gray;
+    [self setNeedsDisplay:YES];
+}
+//end
 
 - (NSRect)knobRectRight
 {
@@ -154,7 +162,8 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     [self.backgroundColor set];
-    [NSBezierPath fillRect:self.bounds];
+    NSRectFill(self.bounds);
+    //[NSBezierPath fillRect:self.bounds];
     [_knobColor set];
     [NSBezierPath fillRect:self.knobRectLeft];
     [NSBezierPath fillRect:self.knobRectRight];

@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconfont-socialchromeoutline-copy-2.png",
+      "filename" : "SideBar_social_01_Red.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "SideBar_social_02_Red.png",
       "scale" : "2x"
     },
     {

@@ -49,7 +49,14 @@
                                                 green:(58)/255.0f
                                                  blue:(75)/255.0f
                                                 alpha:1.0f];
-        pushedDownButtonColor = [NSColor lightGrayColor];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
+        {
+            pushedDownButtonColor = [NSColor redColor];
+        }
+        else
+        {
+            pushedDownButtonColor = [NSColor lightGrayColor];
+        }
     }
     
     // Set font alignment

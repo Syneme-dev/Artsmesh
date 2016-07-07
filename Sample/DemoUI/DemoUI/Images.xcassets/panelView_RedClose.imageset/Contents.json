@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconfont-close-copy-copy-2.png",
+      "filename" : "panel_close_01_Red.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "panel_close_02_Red.png",
       "scale" : "2x"
     },
     {

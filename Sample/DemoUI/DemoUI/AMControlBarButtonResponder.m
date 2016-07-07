@@ -74,17 +74,18 @@
     if(self.state==NSOffState)
     {
         [appDelegate.mainWindowController createPanelWithType:panelId withId:panelId];
-        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"backgroundColor"] isEqual:@"White"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"WhiteTheme" object:self];
+        }
         [self setState:NSOnState];
     }
     else
     {
         [appDelegate.mainWindowController  removePanel:panelId];
-        
         [self setState:NSOffState];
-
     }
 }
+
 -(void)superShowHidePanel:(NSEvent *)theEvent{
     [super mouseDown:theEvent];
 

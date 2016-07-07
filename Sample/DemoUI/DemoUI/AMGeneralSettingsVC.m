@@ -33,7 +33,8 @@
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
 @property (strong) NSMutableArray *LSConfigOptions;
-
+@property IBOutlet NSButton *blackBackgroundBtn;
+@property IBOutlet NSButton *whiteBackgroundBtn;
 @end
 
 @implementation AMGeneralSettingsVC
@@ -111,6 +112,14 @@
     self.topBarCheck.title = @"CONTROL BAR TOP";
     
     [self reloadSettings];
+    [self loadThemeBtnState];
+}
+
+-(void)loadThemeBtnState{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"backgroundColor"] isEqualToString:@"White"]) {
+        self.whiteBackgroundBtn.state=NSOnState;
+        self.blackBackgroundBtn.state=NSOffState;
+    }
 }
 
 -(void)loadMachineName{
@@ -415,6 +424,21 @@
     
 }
 
+-(IBAction)onClickWhiteBackgroundColorBtn:(id)sender{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"WhiteTheme" object:self];
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"White" forKey:@"backgroundColor"];
+    self.whiteBackgroundBtn.state=NSOnState;
+    self.blackBackgroundBtn.state=NSOffState;
+}
+
+-(IBAction)onClickBlackBackgroundColorBtn:(id)sender{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BlackTheme" object:self];
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"Black" forKey:@"backgroundColor"];
+    self.whiteBackgroundBtn.state=NSOffState;
+    self.blackBackgroundBtn.state=NSOnState;
+}
 
 
 @end

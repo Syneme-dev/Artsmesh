@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconfont-shikebiaoicon-copy-2.png",
+      "filename" : "SideBar_clock_01_Red.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "SideBar_clock_02_Red.png",
       "scale" : "2x"
     },
     {

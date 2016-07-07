@@ -18,7 +18,7 @@
 #import "AMGroupDetailsViewController.h"
 #import "AMUserDetailsViewController.h"
 #import "AMMesher/AMMesher.h"
-
+#define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 @interface AMLiveGroupViewController ()<NSOutlineViewDataSource, NSOutlineViewDelegate, AMGroupCellContentViewDelegate, AMGroupDetailViewDelegate>
 @property (weak) IBOutlet NSOutlineView *outlineView;
 
@@ -42,7 +42,29 @@
     self.outlineView.delegate = self;
     
     [self loadRemoteGroup:nil];
+    
+    [self loadRemoteGroup:nil];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
+    {
+        self.outlineView.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    }
+    else {
+        self.outlineView.backgroundColor=UI_Color_gray;
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToWhiteColor:) name:@"WhiteTheme" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToBlackColor:) name:@"BlackTheme" object:nil];
+    
 }
+
+-(void)changeToWhiteColor:(NSNotification *)notification{
+    self.outlineView.backgroundColor=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    [self.outlineView setNeedsDisplay:YES];
+}
+-(void)changeToBlackColor:(NSNotification *)notification{
+    self.outlineView.backgroundColor=UI_Color_gray;
+    [self.outlineView setNeedsDisplay:YES];
+}
+
 
 
 -(void)viewWillAppear

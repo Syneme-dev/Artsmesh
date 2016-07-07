@@ -47,13 +47,35 @@
     }
     return self;
 }
+-(void)awakeFromNib{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToWhiteTheme:) name:@"WhiteTheme" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeToBlackTheme:) name:@"BlackTheme" object:nil];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] isEqualToString:@"White"])
+    {
+        self.color=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    }
+    else{
+        self.color=UI_Color_gray;
+    }
+}
+
+-(void)changeToWhiteTheme:(NSNotification *)notification{
+    self.color=[NSColor colorWithCalibratedRed:0.863 green:0.867 blue:0.871 alpha:1];
+    [self setNeedsDisplay:YES];
+}
+-(void)changeToBlackTheme:(NSNotification *)notification{
+    self.color=UI_Color_gray;
+    [self setNeedsDisplay:YES];
+}
+
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     //Color RBG:333333
     
 
-    [UI_Color_gray set];
+    [self.color set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 }

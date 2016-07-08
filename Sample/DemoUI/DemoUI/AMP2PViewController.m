@@ -59,11 +59,13 @@ NSString *const AMP2PVideoReceiverChanged;
 
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
     NSError *error = nil;
-    int port = 0;
+    NSInteger port = 0;
     NSString* url = sender.selectedItem.title;
-    NSUInteger commaPosition =[url rangeOfString:@":"].location;
+    NSUInteger commaPosition =[url rangeOfString:@":"
+                                         options:NSBackwardsSearch].location;
     if(commaPosition != NSNotFound){
         _port = [url substringFromIndex:commaPosition+1];
+        AMLog(kAMInfoLog, @"Video Mixer", @"port=[%@]", _port);
         port =[_port integerValue];
     }
     if(port <= 0){

@@ -56,7 +56,6 @@ NSString *const AMP2PVideoReceiverChanged;
 
 
 
-
 - (IBAction)serverSelected:(NSPopUpButton*)sender {
     NSError *error = nil;
     NSInteger port = 0;
@@ -185,23 +184,25 @@ withFilterContext:(id)filterContext
 }
 
 
--(void) stopP2PVideo
+-(NSInteger) stopP2PVideo
 {
     [_udpSocket close];
     
-    
+    /*
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     userInfo[@"port"] = _port;
-    
-    /*
-     [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:AMTimerResumeNotification
      object:self
      userInfo:@{@"port" : @"5564"}];
-     */
+    
     NSNotificationCenter* defaultNC = [NSNotificationCenter defaultCenter];
     [defaultNC postNotificationName:AMP2PVideoInfoNotification
                              object:nil
                            userInfo:userInfo];
+     */
+    
+    return [_port integerValue];
 }
 
 

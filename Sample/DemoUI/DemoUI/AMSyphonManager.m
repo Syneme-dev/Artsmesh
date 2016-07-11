@@ -178,6 +178,15 @@
     return self;
 }
 
+-(AMP2PViewController*) clientViewControllerByIndex:(NSUInteger)index
+{
+    if(index >= [_p2pClients count]){
+        return nil;
+    }
+    
+    AMP2PViewController* p2pContorller = [_p2pClients objectAtIndex:index];
+    return p2pContorller;
+}
 
 -(NSView*)clientViewByIndex:(NSUInteger)index
 {

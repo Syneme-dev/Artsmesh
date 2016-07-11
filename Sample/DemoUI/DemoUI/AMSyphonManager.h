@@ -15,6 +15,7 @@
 
 @interface AMP2PViewManager : NSObject
 -(id)initWithClientCount:(NSUInteger) cnt;
+-(AMP2PViewController*) clientViewControllerByIndex:(NSUInteger)index;
 -(NSView*)clientViewByIndex:(NSUInteger)index;
 -(BOOL)startRouter;
 -(void)stopRouter;

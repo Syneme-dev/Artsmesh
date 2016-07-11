@@ -57,6 +57,7 @@
     NSMutableData*                  _lastNALUData;
     BOOL                            _searchForSPSAndPPS;
     BOOL                            _ableToDecodeFrame;
+    NSInteger                       _port;
 }
 
 @synthesize smallViews = _smallViews;
@@ -284,20 +285,22 @@ withFilterContext:(id)filterContext
 
 }
 
--(void) getP2PInfo:(NSNotification*)notification
+-(void) startP2PVideo;
 {
+    if(_port <= 0)
+        return;
     NSError *error = nil;
-    int port = [notification.userInfo[@"port"] intValue];
+    /*int port = [notification.userInfo[@"port"] intValue];*/
     _ableToDecodeFrame = FALSE;
     
     _udpSocket = [[GCDAsyncUdpSocket alloc]
                   initWithDelegate:self
                   delegateQueue:dispatch_get_main_queue()];
     
-    if (![_udpSocket bindToPort:port error:&error])
+    if (![_udpSocket bindToPort:_port error:&error])
     {
         AMLog(kAMErrorLog, @"Video Mixer", @"Create udp socket failed in the port[%d].Error:%@",
-              port, error);
+              _port, error);
         return;
     }
     
@@ -309,7 +312,6 @@ withFilterContext:(id)filterContext
     }
     
     return;
-    
 }
 
 - (void)setup
@@ -378,9 +380,18 @@ withFilterContext:(id)filterContext
         
         //if([self.sender ])
         {
-            NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-            [nc postNotificationName:AMP2PVideoStopNotification object:nil];
-            [self popupP2PVideoMixingWindow];
+            int index = (int)[self.smallViews indexOfObjectIdenticalTo:self.selected];
+            AMP2PViewController* viewCtrl = [self.p2pViewManager clientViewControllerByIndex:(index-5)];
+            _port = [viewCtrl stopP2PVideo];
+            
+            if (_port > 0) {
+                [self popupP2PVideoMixingWindow];
+                [self startP2PVideo];
+            }
+            //NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+            //[nc postNotificationName:AMP2PVideoStopNotification object:viewCtrl];
+            
+            //int port = [viewCtrl ];
         }
     }else {
         if (sender.clickCount == 1 && sender != self.selected) {
@@ -392,7 +403,6 @@ withFilterContext:(id)filterContext
         }
     }
 }
-
 -(void) popupP2PVideoMixingWindow
 {
     static NSString *panelId = @"AMP2PVideoMixingWindow";

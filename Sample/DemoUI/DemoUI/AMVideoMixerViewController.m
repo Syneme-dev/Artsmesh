@@ -8,7 +8,7 @@
 
 #import "AMVideoMixerViewController.h"
 #import "AMVideoMixerBackgroundView.h"
-#import "AMPanelViewController.h"
+
 #import "UIFrameWork/AMPanelView.h"
 #import "AMAppDelegate.h"
 #import "AMSyphonView.h"
@@ -267,7 +267,13 @@ withFilterContext:(id)filterContext
 }
 
 
+
 ////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+-(void) closeAction
+{
+    [_udpSocket close];
+}
 
 - (void)viewDidLoad
 {
@@ -413,6 +419,7 @@ withFilterContext:(id)filterContext
     if (!panelControllers[panelId]) {
         AMPanelViewController *popupController =
         [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
+        popupController.amActionDelegate = self;
         popupController.panelId = panelId;
         panelControllers[panelId] = popupController;
         AMPanelView *panelView = (AMPanelView *)popupController.view;

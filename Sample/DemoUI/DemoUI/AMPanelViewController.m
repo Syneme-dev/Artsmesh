@@ -53,10 +53,9 @@
 
 -(void)awakeFromNib
 {
-        [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
+    [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
     [self.fullScreenButton setHidden:YES];
     [self.maxSizeButton setHidden:YES];
-
 }
 
 -(void)setTitle:(NSString *)title{
@@ -70,6 +69,13 @@
 //-()
 
 - (IBAction)closePanel:(id)sender {
+    //Now:callback delegate for notification.
+    if([self.amActionDelegate respondsToSelector:@selector(closeAction)]){
+        [self.amActionDelegate closeAction];
+    }
+
+    
+    
     self.contentPanelViewController=nil;
     if(self.movedFromController!=nil)
     {

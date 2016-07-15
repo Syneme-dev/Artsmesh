@@ -289,6 +289,7 @@
 		4FA52CCD1BB2499E0075D02B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA52CCC1BB2499E0075D02B /* AVFoundation.framework */; };
 		4FA52CD21BB24B090075D02B /* AMSyphonSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */; };
 		4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA52CD11BB24B090075D02B /* AVFWrapper.m */; };
+		4FB427B31D38853B000CF242 /* AMP2PVideoReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB427B21D38853B000CF242 /* AMP2PVideoReceiver.m */; };
 		4FBE6A7F1C04447500C854EA /* AMVideoRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7D1C04447500C854EA /* AMVideoRouteViewController.m */; };
 		4FBE6A801C04447500C854EA /* AMVideoRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */; };
 		4FBE6A831C0444A100C854EA /* AMVideoRouteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FBE6A821C0444A100C854EA /* AMVideoRouteView.m */; };
@@ -995,6 +996,8 @@
 		4FA52CCF1BB24B090075D02B /* AMSyphonSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonSender.m; sourceTree = "<group>"; };
 		4FA52CD01BB24B090075D02B /* AVFWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVFWrapper.h; sourceTree = "<group>"; };
 		4FA52CD11BB24B090075D02B /* AVFWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFWrapper.m; sourceTree = "<group>"; };
+		4FB427B11D38853B000CF242 /* AMP2PVideoReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMP2PVideoReceiver.h; sourceTree = "<group>"; };
+		4FB427B21D38853B000CF242 /* AMP2PVideoReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMP2PVideoReceiver.m; sourceTree = "<group>"; };
 		4FBE6A7C1C04447500C854EA /* AMVideoRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoRouteViewController.h; sourceTree = "<group>"; };
 		4FBE6A7D1C04447500C854EA /* AMVideoRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoRouteViewController.m; sourceTree = "<group>"; };
 		4FBE6A7E1C04447500C854EA /* AMVideoRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoRouteViewController.xib; sourceTree = "<group>"; };
@@ -2001,6 +2004,8 @@
 				4FC399621CA3D61000BB164B /* AMP2PViewController.xib */,
 				4F12A2BA1D2A3F0F008713F5 /* AMP2PVideoCommon.h */,
 				4F12A2BB1D2A3F27008713F5 /* AMP2PVideoCommon.m */,
+				4FB427B11D38853B000CF242 /* AMP2PVideoReceiver.h */,
+				4FB427B21D38853B000CF242 /* AMP2PVideoReceiver.m */,
 			);
 			name = P2PVideo;
 			sourceTree = "<group>";
@@ -2708,6 +2713,7 @@
 				2D08FD8B1AD661FF00A9D257 /* GTLYouTubeAccessPolicy.m in Sources */,
 				2D08FDA61AD661FF00A9D257 /* GTLYouTubeChannelSection.m in Sources */,
 				01D059BB1A2D6A5E00BC51E7 /* AMJackCPULoderView.m in Sources */,
+				4FB427B31D38853B000CF242 /* AMP2PVideoReceiver.m in Sources */,
 				D41155E418E9515700C84092 /* AMPreferenceVC.m in Sources */,
 				4A32A12B1A7226B5006FEDD7 /* AMProjectProfileViewController.m in Sources */,
 				4F2E48D71C0DA29000B48708 /* AMVideoConfigWindow.m in Sources */,

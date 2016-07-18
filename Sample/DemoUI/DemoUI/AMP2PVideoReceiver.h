@@ -12,8 +12,10 @@
 @interface AMP2PVideoReceiver : NSObject
 
 -(BOOL) registerP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
-                     withPort:(NSString*) port;
+                     withPort:(NSInteger) port;
 
 
+-(BOOL) unregisterP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
+                     withPort: (NSInteger) port;
 
 @end

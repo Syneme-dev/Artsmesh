@@ -12,10 +12,11 @@
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"
 //#import "AMP2PVideoView.h"
 #import "AMP2PVideoCommon.h"
+#include "AMLogger/AMLogger.h"
 
 @interface AMP2PVideoReceiver ()
 @property (strong, nonatomic) NSMutableData*  lastNALUData;
-@property (nonatomic, retain) AVSampleBufferDisplayLayer* videoLayer;
+@property (nonatomic, weak) AVSampleBufferDisplayLayer* videoLayer;
 @property (nonatomic, strong) NSData * spsData;
 @property (nonatomic, strong) NSData * ppsData;
 @property (nonatomic) CMVideoFormatDescriptionRef videoFormatDescr;
@@ -33,6 +34,48 @@
     NSInteger                       _port;
 }
 
+-(BOOL) registerP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
+                     withPort:(NSInteger) port
+{
+    self.videoLayer = layer;
+    _port = port;
+    
+   
+    if(_port <= 0)
+        return NO;
+    
+    NSError *error = nil;
+        /*int port = [notification.userInfo[@"port"] intValue];*/
+    _ableToDecodeFrame = FALSE;
+        
+    _udpSocket = [[GCDAsyncUdpSocket alloc]
+                    initWithDelegate:self
+                    delegateQueue:dispatch_get_main_queue()];
+        
+    if (![_udpSocket bindToPort:_port error:&error])
+    {
+        AMLog(kAMErrorLog, @"Video Mixer", @"Create udp socket failed in the port[%d].Error:%@",
+                    _port, error);
+        return NO;
+    }
+        
+    if (![_udpSocket beginReceiving:&error])
+    {
+        [_udpSocket close];
+        AMLog(kAMErrorLog, @"Video Mixer", @"Listening socket port failed. Error:%@", error);
+        return NO;
+    }
+    
+
+    return YES;
+}
+
+-(BOOL) unregisterP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
+                       withPort:(NSInteger) port
+{
+    [_udpSocket close];
+    return true;
+}
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
    didReceiveData:(NSData *)data
@@ -102,6 +145,8 @@ withFilterContext:(id)filterContext
         [_lastNALUData appendData:recvData];
     }
 }
+
+
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
 {
     OSStatus  status;

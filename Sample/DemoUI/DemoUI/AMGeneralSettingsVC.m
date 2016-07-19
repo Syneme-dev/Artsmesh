@@ -20,6 +20,8 @@
 @property (weak) IBOutlet NSTextField *machineNameField;
 @property (weak) IBOutlet AMPopUpView *privateIpBox;
 @property (weak) IBOutlet AMPopUpView *privateIpv6Box;
+@property (weak) IBOutlet AMPopUpView *themeDrop;
+
 @property (weak) IBOutlet NSTextField *localServerPortField;
 @property (weak) IBOutlet AMCheckBoxView*  meshUseIpv6Check;
 @property (weak) IBOutlet AMCheckBoxView*  heartbeatUseIpv6Check;
@@ -33,6 +35,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
 @property (strong) NSMutableArray *LSConfigOptions;
+@property (strong) NSArray *themes;
 
 @end
 
@@ -94,6 +97,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLSConfigIps) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     _LSConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+    _themes = [[NSArray alloc] initWithObjects:@"dark",@"light", nil];
+    
+    for (NSString *themeName in _themes) {
+        [self.themeDrop addItemWithTitle:themeName];
+    }
+    [self.themeDrop selectItemWithTitle:[[NSUserDefaults standardUserDefaults] stringForKey: Preference_Key_Active_Theme]];
     
 //    self.privateIpBox.delegate = self;
 //    self.privateIpv6Box.delegate = self;

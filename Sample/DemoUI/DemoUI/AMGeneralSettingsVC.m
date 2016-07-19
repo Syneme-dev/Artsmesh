@@ -293,6 +293,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
     } else if (sender == self.localServerConfigDrop) {
         [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
+    } else if (sender == self.themeDrop) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.themeDrop.stringValue forKey:Preference_Key_Active_Theme];
     }
 }
 
@@ -362,6 +364,7 @@
     [self itemSelected:self.privateIpv6Box];
     [self itemSelected:self.privateIpBox];
     [self itemSelected:self.localServerConfigDrop];
+    [self itemSelected:self.themeDrop];
     [self onChecked:self.meshUseIpv6Check];
     [self onChecked:self.heartbeatUseIpv6Check];
     [self onChecked:self.useOSCForChatCheck];

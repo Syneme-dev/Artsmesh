@@ -28,6 +28,8 @@
     if (self = [super init])
     {
         // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
+        NSString *curTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"Preference_Key_Active_Theme"];
+        
         self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
                             UI_Color_Gray, @"background",
                             UI_Color_Light_Grey, @"textDefault",
@@ -72,9 +74,11 @@
         self.fontStandard = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0];
         self.fontStandardItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0];
         
-        
-        [self setTheme:@"default"];
-        
+        if (![curTheme isEqualToString: @"dark"]) {
+            [self setTheme:curTheme];
+        } else {
+            [self setTheme:@"default"];
+        }
     }
     return self;
 }
@@ -109,6 +113,7 @@
     
     if ( [themeName isEqualToString:@"light"] ) {
         // Configure variables to match light theme
+        newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
     } else {
         // If no theme matches one called, go with default colors
         newColorAlert = UI_Color_Yellow;
@@ -147,6 +152,7 @@
     self.colorBackgroundAlert = newColorBackgroundAlert;
     self.colorBackgroundError = newColorBackgroundError;
     self.colorBackgroundSuccess = newColorBackgroundSuccess;
+    self.colorBackgroundHover = newColorBackgroundHover;
     
     self.colorBorder = newColorBorder;
     self.colorBorderAlert = newColorBorderAlert;
@@ -163,6 +169,9 @@
     self.fontHeaderItalic = newFontHeaderItalic;
     self.fontStandard = newFontStandard;
     self.fontStandardItalic = newFontStandardItalic;
+    
+    // Shout it out to the world!
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AMThemeChanged" object:self];
 }
 
 @end

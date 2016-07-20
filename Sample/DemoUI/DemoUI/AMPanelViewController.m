@@ -12,6 +12,7 @@
 #import <AMPreferenceManager/AMPreferenceManager.h>
 #import "AMTabPanelViewController.h"
 #import "UIFramework/AMBorderView.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMFloatingWindow : NSWindow
 
@@ -56,6 +57,11 @@
     [self.titleView setFont: [NSFont fontWithName: @"FoundryMonoline-Medium" size: self.titleView.font.pointSize]];
     [self.fullScreenButton setHidden:YES];
     [self.maxSizeButton setHidden:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
 }
 
 -(void)setTitle:(NSString *)title{
@@ -250,4 +256,17 @@
      [self.view setNeedsDisplay:YES];
     [self.tabPanelViewController selectTabIndex:tabIndex];
 }
+
+- (void) changeTheme:(NSNotification *) notification {
+    [self.view setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    // If you don't remove yourself as an observer, the Notification Center
+    // will continue to try and send notification objects to the deallocated
+    // object.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

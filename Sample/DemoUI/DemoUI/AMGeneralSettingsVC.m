@@ -14,7 +14,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMAppDelegate.h"
-#import "AMTheme.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMGeneralSettingsVC ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 

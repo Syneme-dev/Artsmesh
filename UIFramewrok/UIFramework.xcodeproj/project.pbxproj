@@ -20,6 +20,8 @@
 		2658878019899ABA001DA266 /* AMPopUpMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2658877619899ABA001DA266 /* AMPopUpMenuController.xib */; };
 		26CEAE8D197380F600DF285F /* AMCheckBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26CEAE8B197380F600DF285F /* AMCheckBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
+		2D9B7F331D3F2F650018580A /* AMTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D9B7F311D3F2F650018580A /* AMTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2D9B7F341D3F2F650018580A /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B7F321D3F2F650018580A /* AMTheme.m */; };
 		4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */; };
 		4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D221A7886FB00281F46 /* AMCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,6 +93,8 @@
 		2658877619899ABA001DA266 /* AMPopUpMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPopUpMenuController.xib; sourceTree = "<group>"; };
 		26CEAE8B197380F600DF285F /* AMCheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCheckBoxView.h; sourceTree = "<group>"; };
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
+		2D9B7F311D3F2F650018580A /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
+		2D9B7F321D3F2F650018580A /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
 		4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		4A776D221A7886FB00281F46 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				2D9B7F311D3F2F650018580A /* AMTheme.h */,
+				2D9B7F321D3F2F650018580A /* AMTheme.m */,
 				4FD498C41B6A16BA00427866 /* AMFakeBox.h */,
 				4FD498C51B6A16BA00427866 /* AMFakeBox.m */,
 				AFF79DB91B5B823E000A95DF /* AMBlueBorderButtonCell.h */,
@@ -336,6 +342,7 @@
 				AF7DF6E91904C26E00554E6F /* AMMaxSizeView.h in Headers */,
 				2658877C19899ABA001DA266 /* AMPopUpMenuItem.h in Headers */,
 				AFF6054B1B08699F00B835B9 /* AMBlueBorderButton.h in Headers */,
+				2D9B7F331D3F2F650018580A /* AMTheme.h in Headers */,
 				4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */,
 				CE883163192C44B800DA17CE /* AMBoxItem.h in Headers */,
 			);
@@ -436,6 +443,7 @@
 				4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */,
 				01D059B41A2D5A3600BC51E7 /* AMBigBlueButton.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
+				2D9B7F341D3F2F650018580A /* AMTheme.m in Sources */,
 				4FAA9B3F1AAACC8100D9266E /* AMBlinkView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +539,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/whisky/Work/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(SRCROOT)/**",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -551,6 +560,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/whisky/Work/Artsmesh/DerivedData/Artsmesh/Build/Products/Debug,
+					"$(SRCROOT)/**",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

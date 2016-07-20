@@ -11,6 +11,18 @@
 
 @implementation AMTheme
 
++ (AMTheme *) sharedInstance
+{
+    static dispatch_once_t shared_initialized;
+    static AMTheme *shared_instance = nil;
+    
+    dispatch_once(&shared_initialized, ^ {
+        shared_instance = [[AMTheme alloc] init];
+    });
+    
+    return shared_instance;
+}
+
 - (id) init
 {
     if (self = [super init])

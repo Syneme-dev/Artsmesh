@@ -54,6 +54,7 @@
 
 
 // Methods
++ (AMTheme *) sharedInstance;
 -(void) setTheme: (NSString *)themeName;
 
 @end

@@ -14,6 +14,7 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMAppDelegate.h"
+#import "AMTheme.h"
 
 @interface AMGeneralSettingsVC ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 
@@ -295,6 +296,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
     } else if (sender == self.themeDrop) {
         [[NSUserDefaults standardUserDefaults] setObject:self.themeDrop.stringValue forKey:Preference_Key_Active_Theme];
+        [[AMTheme sharedInstance] setTheme:self.themeDrop.stringValue];
     }
 }
 

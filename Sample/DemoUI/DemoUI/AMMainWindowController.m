@@ -174,6 +174,10 @@
                                                  selector:@selector(resumeTopTimer:)
                                                      name:AMTimerResumeNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTheme:)
+                                                     name:@"AMThemeChanged"
+                                                   object:nil];
     }
     return self;
 }
@@ -1224,4 +1228,14 @@
     }
 
 }
+
+- (void) changeTheme:(NSNotification *) notification {
+    [self.window.contentView setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

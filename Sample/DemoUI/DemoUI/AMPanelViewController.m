@@ -263,9 +263,6 @@
 
 - (void) dealloc
 {
-    // If you don't remove yourself as an observer, the Notification Center
-    // will continue to try and send notification objects to the deallocated
-    // object.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

@@ -53,7 +53,9 @@
     //Color RBG:333333
     
 
-    [UI_Color_gray set];
+    //[UI_Color_gray set];
+    
+    [[AMTheme sharedInstance].colorBackground set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];
 }

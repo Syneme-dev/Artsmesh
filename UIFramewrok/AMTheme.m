@@ -89,6 +89,7 @@
     NSColor *newColorSuccess;
     
     NSColor *newColorBackground;
+    NSColor *newColorBackgroundPrimary;
     NSColor *newColorBackgroundAlert;
     NSColor *newColorBackgroundError;
     NSColor *newColorBackgroundSuccess;
@@ -113,6 +114,7 @@
     
     if ( [themeName isEqualToString:@"light"] ) {
         // Configure variables to match light theme
+        newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
         newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
     } else {
         // If no theme matches one called, go with default colors

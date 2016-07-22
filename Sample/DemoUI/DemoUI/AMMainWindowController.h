@@ -33,6 +33,7 @@
 @property (weak) IBOutlet AMFoundryFontView *meshUseIpv6TextField;
 
 @property (weak) IBOutlet NSScrollView *mainScrollView;
+@property (weak) IBOutlet NSClipView *mainScrollClipView;
 
 @property (nonatomic) NSTimer* blinkBackTimer;
 

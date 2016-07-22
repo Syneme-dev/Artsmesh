@@ -337,6 +337,7 @@
                                            windowSize.height - UI_topbarHeight- 20);
     
     [self.mainScrollView setHorizontalLineScroll:100];
+    [self.mainScrollView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
     [self.mainScrollView setNeedsDisplay:YES];
 }
 
@@ -1230,6 +1231,7 @@
 }
 
 - (void) changeTheme:(NSNotification *) notification {
+    //[self.mainScrollView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
     [self.window.contentView setNeedsDisplay:YES];
 }
 

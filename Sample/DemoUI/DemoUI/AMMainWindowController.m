@@ -1235,6 +1235,8 @@
 - (void) changeTheme:(NSNotification *) notification {
     //[self.mainScrollView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
     [self.window.contentView setNeedsDisplay:YES];
+    
+    //Update main scroll view background color
     [self.mainScrollView setBackgroundColor:_curTheme.colorBackground];
     [self.mainScrollView setNeedsDisplay:YES];
 }

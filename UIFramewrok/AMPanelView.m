@@ -157,6 +157,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    self.backgroundColor = [AMTheme sharedInstance].colorBackground;
     [self.backgroundColor set];
     [NSBezierPath fillRect:self.bounds];
     [_knobColor set];

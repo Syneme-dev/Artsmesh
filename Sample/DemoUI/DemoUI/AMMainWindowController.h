@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "AMPanelViewController.h"
 #import "AMJackCPULoderView.h"
+#import "UIFramework/AMTheme.h"
 
 @class AMFoundryFontView;
 
@@ -36,6 +37,8 @@
 @property (weak) IBOutlet NSClipView *mainScrollClipView;
 
 @property (nonatomic) NSTimer* blinkBackTimer;
+
+@property (strong) AMTheme *curTheme;
 
 
 

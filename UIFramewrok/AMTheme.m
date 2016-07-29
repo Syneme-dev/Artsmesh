@@ -13,24 +13,23 @@
 
 + (AMTheme *) sharedInstance
 {
-    static dispatch_once_t shared_initialized;
-    static AMTheme *shared_instance = nil;
-    
-    dispatch_once(&shared_initialized, ^ {
-        shared_instance = [[AMTheme alloc] init];
-    });
-    
-    return shared_instance;
+    NSLog(@"test share instance init");
+    static AMTheme* sharedTheme = nil;
+    @synchronized(self){
+        if (sharedTheme == nil){
+            sharedTheme = [[self alloc] privateInit];
+        }
+    }
+    return sharedTheme;
 }
 
-- (id) init
+- (instancetype)privateInit
 {
-    if (self = [super init])
-    {
-        // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
-        NSString *curTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"Preference_Key_Active_Theme"];
+    NSLog(@"private init");
+    // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
+    NSString *curTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"Preference_Key_Active_Theme"];
         
-        self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
+    self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
                             UI_Color_Gray, @"background",
                             UI_Color_Light_Grey, @"textDefault",
                             UI_Color_Yellow, @"alert",
@@ -38,49 +37,49 @@
                             UI_Color_Blue, @"hoverDefault",
                             nil];
         
-        NSFontManager *fontManager = [NSFontManager sharedFontManager];
-        self.themeFonts = [[NSDictionary alloc] initWithObjectsAndKeys:
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    self.themeFonts = [[NSDictionary alloc] initWithObjectsAndKeys:
                       [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:12.0], @"header",
                       [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0], @"header-italic",
                       [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0], @"standard",
                       [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0], @"standard-italic",
                       nil];
         
-        // Set default theme colors
-        self.colorAlert = UI_Color_Yellow;
-        self.colorError = UI_Color_Red;
-        self.colorSuccess = UI_Color_Green;
+    // Set default theme colors
+    self.colorAlert = UI_Color_Yellow;
+    self.colorError = UI_Color_Red;
+    self.colorSuccess = UI_Color_Green;
         
-        self.colorBackground = UI_Color_Gray;
-        self.colorBackgroundAlert = UI_Color_Red;
-        self.colorBackgroundError = UI_Color_Yellow;
-        self.colorBackgroundSuccess = UI_Color_Green;
-        self.colorBackgroundHover = UI_Color_Blue;
+    self.colorBackground = UI_Color_Gray;
+    self.colorBackgroundAlert = UI_Color_Red;
+    self.colorBackgroundError = UI_Color_Yellow;
+    self.colorBackgroundSuccess = UI_Color_Green;
+    self.colorBackgroundHover = UI_Color_Blue;
         
-        self.colorBorder = UI_Color_Light_Grey;
-        self.colorBorderAlert = UI_Color_Red;
-        self.colorBorderError = UI_Color_Yellow;
-        self.colorBorderSuccess = UI_Color_Green;
+    self.colorBorder = UI_Color_Light_Grey;
+    self.colorBorderAlert = UI_Color_Red;
+    self.colorBorderError = UI_Color_Yellow;
+    self.colorBorderSuccess = UI_Color_Green;
         
-        self.colorText = UI_Color_Light_Grey;
-        self.colorTextDisabled = UI_Color_Disabled;
-        self.colorTextAlert = UI_Color_Red;
-        self.colorTextError = UI_Color_Yellow;
-        self.colorTextSuccess = UI_Color_Green;
+    self.colorText = UI_Color_Light_Grey;
+    self.colorTextDisabled = UI_Color_Disabled;
+    self.colorTextAlert = UI_Color_Red;
+    self.colorTextError = UI_Color_Yellow;
+    self.colorTextSuccess = UI_Color_Green;
     
-        // Set default theme fonts
-        self.fontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
-        self.fontHeaderItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
-        self.fontStandard = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0];
-        self.fontStandardItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0];
+    // Set default theme fonts
+    self.fontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
+    self.fontHeaderItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
+    self.fontStandard = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0];
+    self.fontStandardItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0];
         
-        if (![curTheme isEqualToString: @"dark"]) {
-            [self setTheme:curTheme];
-        } else {
-            [self setTheme:@"default"];
-        }
+    if (![curTheme isEqualToString: @"dark"]) {
+        [self setTheme:curTheme];
+    } else {
+        [self setTheme:@"default"];
     }
-    return self;
+    
+    return [super init];
 }
 
 -(void) setTheme: (NSString *)themeName {

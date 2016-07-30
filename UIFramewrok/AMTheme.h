@@ -18,6 +18,8 @@
 #define UI_Color_Yellow [NSColor colorWithCalibratedRed:(255)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
 #define UI_Color_Green [NSColor colorWithCalibratedRed:(0)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
 
+#define Preference_Key_Color_Background @"Preference_Key_Color_Background"
+
 @interface AMTheme : NSObject
 
 @property (strong) NSDictionary *themeFonts;

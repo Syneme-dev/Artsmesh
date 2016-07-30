@@ -13,7 +13,6 @@
 
 + (AMTheme *) sharedInstance
 {
-    NSLog(@"test share instance init");
     static AMTheme* sharedTheme = nil;
     @synchronized(self){
         if (sharedTheme == nil){
@@ -25,8 +24,6 @@
 
 - (instancetype)privateInit
 {
-    NSLog(@"private init");
-    // TO-DO: Check for global preference on theme & instantiate theme colors based on user's selected theme (dark, light, etc)
     NSString *curTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"Preference_Key_Active_Theme"];
         
     self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -170,6 +167,9 @@
     self.fontHeaderItalic = newFontHeaderItalic;
     self.fontStandard = newFontStandard;
     self.fontStandardItalic = newFontStandardItalic;
+    
+    NSData *backgroundColorData=[NSArchiver archivedDataWithRootObject:self.colorBackground];
+    [[NSUserDefaults standardUserDefaults] setObject:backgroundColorData forKey:Preference_Key_Color_Background];
     
     // Shout it out to the world!
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AMThemeChanged" object:self];

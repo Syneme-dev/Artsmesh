@@ -419,6 +419,13 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                  green:0.15
                                                   blue:0.15
                                                  alpha:1.0];
+    NSColor *storedBgColor =nil;
+    NSData *storedBgData=[[NSUserDefaults standardUserDefaults] dataForKey:@"Preference_Key_Color_Background"];
+    if (storedBgData != nil) {
+        storedBgColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:storedBgData];
+        _backgroundColor = storedBgColor;
+    }
+    
     _placeholderChannelColor = [NSColor grayColor];
     _sourceChannelColor = [NSColor grayColor];
     _destinationChannelColor = [NSColor colorWithCalibratedRed:0.27

@@ -23,7 +23,7 @@
         self.states = [[NSArray alloc] initWithObjects:@"disabled", @"active", @"pressed", @"alert", @"success", @"error", nil];
         cur_state = 1; // Set initially to Active state
         
-        self.currentTheme = [[AMTheme alloc] init];
+        self.currentTheme = [AMTheme sharedInstance];
         
         self.buttonVC = [[AMStandardButtonViewController alloc] initWithNibName:@"AMStandardButtonViewController" bundle:nil];
         NSView *vcView = [self.buttonVC view];

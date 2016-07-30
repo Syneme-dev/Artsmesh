@@ -107,32 +107,34 @@
     NSFont *newFontStandard;
     NSFont *newFontStandardItalic;
     
+    // If no theme matches one called, go with default colors
+    newColorAlert = UI_Color_Yellow;
+    newColorError = UI_Color_Red;
+    newColorSuccess = UI_Color_Green;
+    
+    newColorBackground = UI_Color_Gray;
+    newColorBackgroundAlert = UI_Color_Yellow;
+    newColorBackgroundError = UI_Color_Red;
+    newColorBackgroundSuccess = UI_Color_Green;
+    newColorBackgroundHover = UI_Color_Blue;
+    
+    newColorBorder = UI_Color_Light_Grey;
+    newColorBorderAlert = UI_Color_Red;
+    newColorBorderError = UI_Color_Yellow;
+    newColorBorderSuccess = UI_Color_Green;
+    
+    newColorText = UI_Color_Light_Grey;
+    newColorTextAlert = UI_Color_Yellow;
+    newColorTextError = UI_Color_Red;
+    newColorTextSuccess = UI_Color_Green;
+    
     
     if ( [themeName isEqualToString:@"light"] ) {
         // Configure variables to match light theme
         newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
         newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
+        
     } else {
-        // If no theme matches one called, go with default colors
-        newColorAlert = UI_Color_Yellow;
-        newColorError = UI_Color_Red;
-        newColorSuccess = UI_Color_Green;
-        
-        newColorBackground = UI_Color_Gray;
-        newColorBackgroundAlert = UI_Color_Yellow;
-        newColorBackgroundError = UI_Color_Red;
-        newColorBackgroundSuccess = UI_Color_Green;
-        newColorBackgroundHover = UI_Color_Blue;
-        
-        newColorBorder = UI_Color_Light_Grey;
-        newColorBorderAlert = UI_Color_Red;
-        newColorBorderError = UI_Color_Yellow;
-        newColorBorderSuccess = UI_Color_Green;
-        
-        newColorText = UI_Color_Light_Grey;
-        newColorTextAlert = UI_Color_Yellow;
-        newColorTextError = UI_Color_Red;
-        newColorTextSuccess = UI_Color_Green;
         
         newFontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
         newFontHeaderItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];

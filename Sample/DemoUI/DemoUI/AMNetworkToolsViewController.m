@@ -210,10 +210,7 @@
            selector:@selector(refreshVideoLog:)
                name:AMVIDEOYouTubeStreamNotification
              object:nil];
-    [nc addObserver:self
-           selector:@selector(changeTheme:)
-               name:@"AMThemeChanged"
-             object:nil];
+
 
     [self registerTabButtons];
     
@@ -230,17 +227,6 @@
     [self.tabButtons addObject:self.iperfButton];
     [self.tabButtons addObject:self.logButton];
     self.showingTabsCount=4;
-}
-
-
-- (void) changeTheme:(NSNotification *) notification {
-    [self.logTabVerticalScrollView.documentView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
-    [self.view setNeedsDisplay:YES];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
 - (void)ipv6CheckedT:(NSNotification *)notification

@@ -30,8 +30,8 @@
 @property (unsafe_unretained)   IBOutlet NSTextView *   pingContentView;
 @property (weak)                IBOutlet NSTableView*   tracerouteTableView;
 @property (unsafe_unretained)   IBOutlet NSTextView*    tracerouteContentView;
-
 @property (weak) IBOutlet AMVerticalScrollView *logTabVerticalScrollView;
+
 
 
 - (IBAction)ping:(id)sender;

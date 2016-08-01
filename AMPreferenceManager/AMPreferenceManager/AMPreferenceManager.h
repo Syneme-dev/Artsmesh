@@ -46,6 +46,10 @@
 #define Preference_Key_Cluster_LastLocalServerIP    @"Preference_Key_Cluster_LastLocalServerIP"
 #define Preference_Key_Cluster_LSConfig             @"Preference_Key_Cluster_LSConfig"
 
+//Theme
+#define Preference_Key_Active_Theme                 @"Preference_Key_Active_Theme"
+#define Preference_Active_Theme                     @"dark"
+
 //StatusNest
 #define Preference_Key_StatusNet_URL            @"Preference_Key_StatusNet_URL"
 #define Preference_Key_StatusNet_UserName       @"Preference_Key_StatusNet_UserName"

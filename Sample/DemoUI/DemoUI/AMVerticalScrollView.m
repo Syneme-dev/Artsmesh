@@ -11,6 +11,8 @@
 @implementation AMVerticalScrollView
 
 - (void)drawRect:(NSRect)dirtyRect {
+    [self.documentView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
+    
     [super drawRect:dirtyRect];
     
     // Drawing code here.

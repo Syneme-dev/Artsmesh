@@ -174,6 +174,12 @@
                                                  selector:@selector(resumeTopTimer:)
                                                      name:AMTimerResumeNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTheme:)
+                                                     name:@"AMThemeChanged"
+                                                   object:nil];
+        
+        _curTheme = [AMTheme sharedInstance];
     }
     return self;
 }
@@ -333,6 +339,7 @@
                                            windowSize.height - UI_topbarHeight- 20);
     
     [self.mainScrollView setHorizontalLineScroll:100];
+    [self.mainScrollView setBackgroundColor:_curTheme.colorBackground];
     [self.mainScrollView setNeedsDisplay:YES];
 }
 
@@ -1224,4 +1231,19 @@
     }
 
 }
+
+- (void) changeTheme:(NSNotification *) notification {
+    //[self.mainScrollView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
+    [self.window.contentView setNeedsDisplay:YES];
+    
+    //Update main scroll view background color
+    [self.mainScrollView setBackgroundColor:_curTheme.colorBackground];
+    [self.mainScrollView setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

@@ -14,12 +14,15 @@
 #import "AMCoreData/AMCoreData.h"
 #import "AMMesher/AMMesher.h"
 #import "AMAppDelegate.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMGeneralSettingsVC ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 
 @property (weak) IBOutlet NSTextField *machineNameField;
 @property (weak) IBOutlet AMPopUpView *privateIpBox;
 @property (weak) IBOutlet AMPopUpView *privateIpv6Box;
+@property (weak) IBOutlet AMPopUpView *themeDrop;
+
 @property (weak) IBOutlet NSTextField *localServerPortField;
 @property (weak) IBOutlet AMCheckBoxView*  meshUseIpv6Check;
 @property (weak) IBOutlet AMCheckBoxView*  heartbeatUseIpv6Check;
@@ -33,6 +36,7 @@
 @property (weak) IBOutlet AMCheckBoxView *useOSCForChatCheck;
 @property (weak) IBOutlet AMCheckBoxView *topBarCheck;
 @property (strong) NSMutableArray *LSConfigOptions;
+@property (strong) NSArray *themes;
 
 @end
 
@@ -94,6 +98,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadLSConfigIps) name:AM_LIVE_GROUP_CHANDED object:nil];
     
     _LSConfigOptions = [[NSMutableArray alloc] initWithObjects:@"DISCOVER",@"SELF", nil];
+    _themes = [[NSArray alloc] initWithObjects:@"dark",@"light", nil];
+    
+    for (NSString *themeName in _themes) {
+        [self.themeDrop addItemWithTitle:themeName];
+    }
+    [self.themeDrop selectItemWithTitle:[[NSUserDefaults standardUserDefaults] stringForKey: Preference_Key_Active_Theme]];
     
 //    self.privateIpBox.delegate = self;
 //    self.privateIpv6Box.delegate = self;
@@ -284,6 +294,9 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.privateIpv6Box.stringValue forKey:Preference_Key_User_Ipv6Address];
     } else if (sender == self.localServerConfigDrop) {
         [[NSUserDefaults standardUserDefaults] setObject:self.localServerConfigDrop.stringValue forKey:Preference_Key_Cluster_LSConfig];
+    } else if (sender == self.themeDrop) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.themeDrop.stringValue forKey:Preference_Key_Active_Theme];
+        [[AMTheme sharedInstance] setTheme:self.themeDrop.stringValue];
     }
 }
 
@@ -353,6 +366,7 @@
     [self itemSelected:self.privateIpv6Box];
     [self itemSelected:self.privateIpBox];
     [self itemSelected:self.localServerConfigDrop];
+    [self itemSelected:self.themeDrop];
     [self onChecked:self.meshUseIpv6Check];
     [self onChecked:self.heartbeatUseIpv6Check];
     [self onChecked:self.useOSCForChatCheck];

@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMFlippedView.h"
-#import "AMTheme.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMStandardButtonViewController : NSViewController
 

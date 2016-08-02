@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
 #import "UIFramework/AMPopUpView.h"
+#import "AMVerticalScrollView.h"
+#import "UIFramework/AMTheme.h"
 
 
 @class AMLogReader;
@@ -28,6 +30,9 @@
 @property (unsafe_unretained)   IBOutlet NSTextView *   pingContentView;
 @property (weak)                IBOutlet NSTableView*   tracerouteTableView;
 @property (unsafe_unretained)   IBOutlet NSTextView*    tracerouteContentView;
+@property (weak) IBOutlet AMVerticalScrollView *logTabVerticalScrollView;
+
+
 
 - (IBAction)ping:(id)sender;
 - (IBAction)traceroute:(id)sender;

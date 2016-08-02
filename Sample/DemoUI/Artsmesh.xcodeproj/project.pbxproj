@@ -189,7 +189,6 @@
 		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
 		2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
-		2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */; };
 		2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */; };
 		2DD36DEF1C49955700C43CB6 /* ffplay in Resources */ = {isa = PBXBuildFile; fileRef = 2DD36DEE1C49955700C43CB6 /* ffplay */; };
 		2DD36DF01C49958C00C43CB6 /* ffplay in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DD36DEE1C49955700C43CB6 /* ffplay */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -842,8 +841,6 @@
 		2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoSettingsVC.h; sourceTree = "<group>"; };
 		2DAB319B1BE8569C00C1BD5A /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
-		2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
-		2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
 		2DCA33F21A15DEC7003CA372 /* AMFlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFlippedView.m; sourceTree = "<group>"; };
 		2DD36DEE1C49955700C43CB6 /* ffplay */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffplay; sourceTree = "<group>"; };
@@ -1717,8 +1714,6 @@
 		2DC54D7A1B9BB8B000FEC93B /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				2DC54D7B1B9BB91C00FEC93B /* AMTheme.h */,
-				2DC54D7C1B9BB91C00FEC93B /* AMTheme.m */,
 			);
 			name = Themes;
 			sourceTree = "<group>";
@@ -2664,7 +2659,6 @@
 				37C23183187A8FFD00554AFD /* AMAppDelegate.m in Sources */,
 				2D08FD8D1AD661FF00A9D257 /* GTLYouTubeActivityContentDetails.m in Sources */,
 				2D08FDF61AD661FF00A9D257 /* GTLYouTubeVideoFileDetails.m in Sources */,
-				2DC54D7D1B9BB91C00FEC93B /* AMTheme.m in Sources */,
 				4F8251241B25790F00224513 /* AMIPerfTabVC.m in Sources */,
 				2D08FDE61AD661FF00A9D257 /* GTLYouTubeSubscriptionListResponse.m in Sources */,
 				2D08FD881AD661FF00A9D257 /* GTLQueryYouTube.m in Sources */,

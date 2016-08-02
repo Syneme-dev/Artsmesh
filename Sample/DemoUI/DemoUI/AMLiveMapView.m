@@ -191,7 +191,7 @@ AMWorldMap *worldMap;
 {
     //AMLiveGroup *myGroup = [AMCoreData shareInstance].myLocalLiveGroup;
     
-    [self.backgroundColor set];
+    [[AMTheme sharedInstance].colorBackground set];
     NSRectFill(self.bounds);
     
     NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
@@ -498,10 +498,7 @@ AMWorldMap *worldMap;
     _mergedLocations = [[NSMutableDictionary alloc] init];
     _allLiveGroupPixels = [[NSMutableDictionary alloc] init];
     
-    _backgroundColor = [NSColor colorWithCalibratedRed:0.15
-                                                 green:0.15
-                                                  blue:0.15
-                                                 alpha:1.0];
+    _backgroundColor = [AMTheme sharedInstance].colorBackground;
     
     _isMeshed = NO;
     _portW = self.bounds.size.width / (long)worldMap.mapWidth;

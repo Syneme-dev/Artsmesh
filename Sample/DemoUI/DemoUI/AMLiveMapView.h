@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMTheme.h"
 
 @interface AMLiveMapView : NSView
 

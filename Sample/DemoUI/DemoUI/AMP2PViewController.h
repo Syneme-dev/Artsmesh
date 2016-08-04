@@ -9,5 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AMP2PViewController : NSViewController
+-(Boolean) resumeP2PVideo;
 -(NSInteger) stopP2PVideo;
 @end

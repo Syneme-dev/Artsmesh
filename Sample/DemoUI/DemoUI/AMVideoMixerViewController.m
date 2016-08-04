@@ -50,6 +50,7 @@
 {
     NSInteger                       _port;
     AMP2PVideoReceiver*             _receiver;
+    AMP2PViewController*            _lastController;
 }
 
 @synthesize smallViews = _smallViews;
@@ -57,6 +58,8 @@
 -(void) closeAction
 {
     [_receiver unregisterP2PVideoLayer:self.videoView.videoLayer withPort:_port];
+    sleep(1);
+    [_lastController resumeP2PVideo];
 }
 
 - (void)viewDidLoad
@@ -154,6 +157,7 @@
             _port = [viewCtrl stopP2PVideo];
             
             if (_port > 0) {
+                _lastController = viewCtrl;
                 [self popupP2PVideoMixingWindow];
                 [self startP2PVideo];
             }

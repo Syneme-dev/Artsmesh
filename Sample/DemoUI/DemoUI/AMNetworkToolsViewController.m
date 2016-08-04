@@ -211,7 +211,10 @@
                name:AMVIDEOYouTubeStreamNotification
              object:nil];
 
+
     [self registerTabButtons];
+    
+    [self.logTabVerticalScrollView.documentView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
 
 }
 
@@ -224,11 +227,6 @@
     [self.tabButtons addObject:self.iperfButton];
     [self.tabButtons addObject:self.logButton];
     self.showingTabsCount=4;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 }
 
 - (void)ipv6CheckedT:(NSNotification *)notification
@@ -426,4 +424,5 @@
     }
     return _viewControllers;
 }
+
 @end

@@ -33,7 +33,8 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    NSColor *color= [NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f] ;
+    NSColor *color= [AMTheme sharedInstance].colorBackgroundHover;
+    //NSColor *color= [NSColor colorWithCalibratedRed:(46)/255.0f green:(58)/255.0f blue:(75)/255.0f alpha:1.0f];
     [color set];
     NSRectFill([self bounds]);
 	[super drawRect:dirtyRect];

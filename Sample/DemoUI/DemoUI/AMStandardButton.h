@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMTheme.h"
+#import "UIFramework/AMTheme.h"
 #import "AMStandardButtonViewController.h"
 
 @interface AMStandardButton : NSView

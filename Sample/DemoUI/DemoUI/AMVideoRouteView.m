@@ -142,6 +142,11 @@ static CGFloat kCloseButtonRadius = 6.0;
     //                removable:YES];
     //
     //   [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -419,6 +424,7 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                  green:0.15
                                                   blue:0.15
                                                  alpha:1.0];
+    _backgroundColor = [AMTheme sharedInstance].colorBackground;
     _placeholderChannelColor = [NSColor grayColor];
     _sourceChannelColor = [NSColor grayColor];
     _destinationChannelColor = [NSColor colorWithCalibratedRed:0.27
@@ -824,6 +830,19 @@ static CGFloat kCloseButtonRadius = 6.0;
 +(NSUInteger)maxChannels
 {
     return kNumberOfChannels;
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    //[self.mainScrollView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
+    //_backgroundColor = [AMTheme sharedInstance].colorBackground;
+    
+    [self doInit];
+    
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

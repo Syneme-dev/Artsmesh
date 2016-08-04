@@ -146,6 +146,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    _backgroundColor = [self getBgColor];
     [_backgroundColor set];
     NSRectFill(self.bounds);
     
@@ -415,10 +416,8 @@ static CGFloat kCloseButtonRadius = 6.0;
                                                  name:NSViewFrameDidChangeNotification
                                                object:self];
     
-    _backgroundColor = [NSColor colorWithCalibratedRed:0.15
-                                                 green:0.15
-                                                  blue:0.15
-                                                 alpha:1.0];
+    _backgroundColor = [self getBgColor];
+    
     _placeholderChannelColor = [NSColor grayColor];
     _sourceChannelColor = [NSColor grayColor];
     _destinationChannelColor = [NSColor colorWithCalibratedRed:0.27
@@ -819,6 +818,21 @@ static CGFloat kCloseButtonRadius = 6.0;
 +(NSUInteger)maxChannels
 {
     return kNumberOfChannels;
+}
+
+-(NSColor *)getBgColor {
+    NSColor *storedBgColor =nil;
+    NSData *storedBgData=[[NSUserDefaults standardUserDefaults] dataForKey:@"Preference_Key_Color_Background"];
+    if (storedBgData != nil) {
+        storedBgColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:storedBgData];
+    } else {
+        storedBgColor = [NSColor colorWithCalibratedRed:0.15
+                                                  green:0.15
+                                                   blue:0.15
+                                                  alpha:1.0];
+    }
+    
+    return storedBgColor;
 }
 
 @end

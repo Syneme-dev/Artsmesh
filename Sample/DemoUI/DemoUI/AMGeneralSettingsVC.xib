@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMGeneralSettingsVC">
@@ -18,6 +18,7 @@
                 <outlet property="meshUseIpv6Check" destination="as1-Ho-sNS" id="KFy-35-qJ3"/>
                 <outlet property="privateIpBox" destination="0rC-Kj-mKX" id="eqZ-If-3CQ"/>
                 <outlet property="privateIpv6Box" destination="55x-ZB-goc" id="m2W-8L-2DL"/>
+                <outlet property="themeDrop" destination="cS2-7s-fv2" id="Uav-fL-WaS"/>
                 <outlet property="topBarCheck" destination="LCG-Yg-5zT" id="Gh0-NF-aIg"/>
                 <outlet property="useOSCForChatCheck" destination="9Qo-r8-3eW" id="siU-Eh-ekk"/>
                 <outlet property="view" destination="fhR-YM-gdp" id="Z0V-JZ-StJ"/>
@@ -409,6 +410,33 @@
                         <action selector="restoreConfig:" target="-2" id="4pn-gw-6ZE"/>
                     </connections>
                 </button>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hj0-0Y-hAj" userLabel="|">
+                    <rect key="frame" x="13" y="206" width="3" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="3" id="Q4J-Sz-AI5"/>
+                        <constraint firstAttribute="height" constant="17" id="U1F-iM-1Jz"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="JNP-L9-nCa"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpT-ip-01K" userLabel="Theme" customClass="AMFoundryFontView">
+                    <rect key="frame" x="30" y="206" width="164" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="BlL-pk-Q7r"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="pQI-O4-ey1"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="THEME:" id="31f-Ch-GLZ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cS2-7s-fv2" userLabel="Them Dropdown" customClass="AMPopUpView">
+                    <rect key="frame" x="199" y="203" width="238" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="238" id="R3T-ks-86Z"/>
+                        <constraint firstAttribute="height" constant="20" id="Y6E-zV-0HV"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="ECH-8d-idm" firstAttribute="top" secondItem="fhR-YM-gdp" secondAttribute="top" constant="256" id="0Mn-hu-eK6"/>

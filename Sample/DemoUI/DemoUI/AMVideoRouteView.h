@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UIFramework/AMTheme.h"
+
 @class AMChannel;
 @class AMVideoRouteView;
 

@@ -9,6 +9,8 @@
 #import "AMPanelView.h"
 #import "AMBox.h"
 #import "AMBorderView.h"
+#import "AMTheme.h"
+
 
 #define UI_Color_gray [NSColor colorWithCalibratedRed:0.152 green:0.152 blue:0.152 alpha:1]
 
@@ -39,8 +41,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        AMTheme *curTheme = [AMTheme sharedInstance];
 //        [self setAcceptsTouchEvents:YES];
-         self.backgroundColor = UI_Color_gray;
+        //self.backgroundColor = UI_Color_gray;
+        self.backgroundColor = curTheme.colorBackground;
 //        self.backgroundColor=[NSColor colorWithWhite:0.22 alpha:1.0];
         
     }
@@ -153,6 +157,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    self.backgroundColor = [AMTheme sharedInstance].colorBackground;
     [self.backgroundColor set];
     [NSBezierPath fillRect:self.bounds];
     [_knobColor set];
@@ -171,7 +176,6 @@
     self.backgroundColor = UI_Color_gray;
       [self setNeedsDisplay:YES];
 }
-
 
 
 @end

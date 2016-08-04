@@ -12,12 +12,15 @@
 @synthesize backgroundColor = _backgroundColor;
 
 - (void)drawRect:(NSRect)dirtyRect {
+    self.backgroundColor = [AMTheme sharedInstance].colorBackground;
+    
     [self.backgroundColor setFill];
     NSRectFill(self.bounds);
 }
 
 - (NSColor *)backgroundColor
 {
+    
     if (!_backgroundColor) {
         _backgroundColor = [NSColor colorWithCalibratedRed:0.15
                                                      green:0.15

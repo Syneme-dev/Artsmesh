@@ -292,7 +292,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -force_key_frames 'expr:gte(t, n_forced*4)' -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,

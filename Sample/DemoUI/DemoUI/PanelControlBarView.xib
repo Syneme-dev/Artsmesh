@@ -158,7 +158,7 @@
                     <rect key="frame" x="123" y="10" width="40" height="40"/>
                     <subviews>
                         <button identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWQ-z1-q6I" userLabel="social" customClass="AMControlBarButtonResponder">
-                            <rect key="frame" x="0.0" y="-3" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_social" imagePosition="only" alignment="center" alternateImage="SideBar_social_h" imageScaling="proportionallyDown" inset="2" id="EAq-TE-eEb">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>

@@ -205,8 +205,8 @@
         newImagePanelBtnChatAlt = [NSImage imageNamed:@"Sidebar_Chat_Light_Red"];
         newImagePanelBtnSocial = [NSImage imageNamed:@"Sidebar_Social_Light_Grey"];
         newImagePanelBtnSocialAlt = [NSImage imageNamed:@"Sidebar_Social_Light_Red"];
-        newImagePanelBtnMap = [NSImage imageNamed:@"Sidebar_mapView_Light_Grey"];
-        newImagePanelBtnMapAlt = [NSImage imageNamed:@"Sidebar_mapView_Light_Red"];
+        newImagePanelBtnMap = [NSImage imageNamed:@"Sidebar_MapView_Light_Grey"];
+        newImagePanelBtnMapAlt = [NSImage imageNamed:@"Sidebar_MapView_Light_Red"];
         newImagePanelBtnRoute = [NSImage imageNamed:@"Sidebar_Route_Light_Grey"];
         newImagePanelBtnRouteAlt = [NSImage imageNamed:@"Sidebar_Route_Light_Red"];
         newImagePanelBtnVideo = [NSImage imageNamed:@"Sidebar_Video_Light_Grey"];
@@ -287,6 +287,8 @@
     self.imagePanelBtnOSCAlt = newImagePanelBtnOSCAlt;
     self.imagePanelBtnTerminal = newImagePanelBtnTerminal;
     self.imagePanelBtnTerminalAlt = newImagePanelBtnTerminalAlt;
+    self.imagePanelBtnSettings = newImagePanelBtnSettings;
+    self.imagePanelBtnSettingsAlt = newImagePanelBtnSettingsAlt;
     self.imagePanelBtnBroadcast = newImagePanelBtnBroadcast;
     self.imagePanelBtnBroadcastAlt = newImagePanelBtnBroadcastAlt;
     

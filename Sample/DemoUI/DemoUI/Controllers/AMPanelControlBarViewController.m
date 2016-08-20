@@ -60,6 +60,30 @@
     
     [self.panelHelpBtn setImage:theme.imagePanelBtnManual];
     [self.panelHelpBtn setAlternateImage:theme.imagePanelBtnManualAlt];
+    [self.panelUserBtn setImage:theme.imagePanelBtnUser];
+    [self.panelUserBtn setAlternateImage:theme.imagePanelBtnUserAlt];
+    [self.panelGroupBtn setImage:theme.imagePanelBtnGroup];
+    [self.panelGroupBtn setAlternateImage:theme.imagePanelBtnGroupAlt];
+    [self.panelChatBtn setImage:theme.imagePanelBtnChat];
+    [self.panelChatBtn setAlternateImage:theme.imagePanelBtnChatAlt];
+    [self.panelSocialBtn setImage:theme.imagePanelBtnSocial];
+    [self.panelSocialBtn setAlternateImage:theme.imagePanelBtnSocialAlt];
+    [self.panelMapBtn setImage:theme.imagePanelBtnMap];
+    [self.panelMapBtn setAlternateImage:theme.imagePanelBtnMapAlt];
+    [self.panelRouteBtn setImage:theme.imagePanelBtnRoute];
+    [self.panelRouteBtn setAlternateImage:theme.imagePanelBtnRouteAlt];
+    [self.panelVideoBtn setImage:theme.imagePanelBtnVideo];
+    [self.panelVideoBtn setAlternateImage:theme.imagePanelBtnVideoAlt];
+    [self.panelMusicBtn setImage:theme.imagePanelBtnMusic];
+    [self.panelMusicBtn setAlternateImage:theme.imagePanelBtnMusicAlt];
+    [self.panelClockBtn setImage:theme.imagePanelBtnClock];
+    [self.panelClockBtn setAlternateImage:theme.imagePanelBtnClockAlt];
+    [self.panelOSCBtn setImage:theme.imagePanelBtnOSC];
+    [self.panelOSCBtn setAlternateImage:theme.imagePanelBtnOSCAlt];
+    [self.panelSettingsBtn setImage:theme.imagePanelBtnSettings];
+    [self.panelSettingsBtn setAlternateImage:theme.imagePanelBtnSettingsAlt];
+    [self.panelBroadcastBtn setImage:theme.imagePanelBtnBroadcast];
+    [self.panelBroadcastBtn setImage:theme.imagePanelBtnBroadcastAlt];
 }
 
 @end

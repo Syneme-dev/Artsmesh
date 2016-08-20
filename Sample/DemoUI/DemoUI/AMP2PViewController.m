@@ -104,6 +104,19 @@ NSString *const AMP2PVideoReceiverChanged;
     return [_port integerValue];
 }
 
+-(Boolean) resumeP2PVideo
+{
+    int port =[_port integerValue];
+    if(port <= 0){
+        AMLog(kAMErrorLog, @"Video Mixer", @"resumeP2PVideo port error");
+        return NO;
+    }
+    _receiver = [[AMP2PVideoReceiver alloc] init];
+    [_receiver registerP2PVideoLayer:self.videoView.videoLayer withPort:port];
+    
+    return YES;
+}
+
 
 -(void) updateServerTitle
 {

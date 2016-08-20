@@ -19,11 +19,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-              // Initialization code here.
+        // Initialization code here.
     }
     return self;
 }
 
+-(void)awakeFromNib
+{
+    _curTheme = [AMTheme sharedInstance];
+    [self setButtonImages:_curTheme];
+}
 
 - (IBAction)onSidebarDoubleClick:(NSButton *)sender {
      AMAppDelegate *appDelegate=AM_APPDELEGATE;
@@ -49,6 +54,12 @@
        
         [appDelegate.mainWindowController  removePanel:panelId];
     }
+}
+
+- (void)setButtonImages:(AMTheme *)theme {
+    
+    [self.panelHelpBtn setImage:theme.imagePanelBtnManual];
+    [self.panelHelpBtn setAlternateImage:theme.imagePanelBtnManualAlt];
 }
 
 @end

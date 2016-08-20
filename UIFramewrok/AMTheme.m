@@ -69,7 +69,12 @@
     self.fontHeaderItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
     self.fontStandard = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSUnitalicFontMask weight:8 size:10.0];
     self.fontStandardItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:10.0];
-        
+    
+    // set default theme images
+    self.imagePanelBtnManual = [NSImage imageNamed:UI_Image_Panel_Btn_Manual];
+    self.imagePanelBtnManualAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Manual_Alt];
+    
+    
     if (![curTheme isEqualToString: @"dark"]) {
         [self setTheme:curTheme];
     } else {
@@ -107,6 +112,9 @@
     NSFont *newFontStandard;
     NSFont *newFontStandardItalic;
     
+    NSImage *newImagePanelBtnManual;
+    NSImage *newImagePanelBtnManualAlt;
+    
     // If no theme matches one called, go with default colors
     newColorAlert = UI_Color_Yellow;
     newColorError = UI_Color_Red;
@@ -133,6 +141,10 @@
         // Configure variables to match light theme
         newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
         newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
+        
+        // Define light theme images
+        newImagePanelBtnManual = [NSImage imageNamed:@"Sidebar_Manual_Light_Grey"];
+        newImagePanelBtnManualAlt = [NSImage imageNamed:@"Sidebar_Manual_Light_Red"];
         
     } else {
         
@@ -172,6 +184,10 @@
     
     NSData *backgroundColorData=[NSArchiver archivedDataWithRootObject:self.colorBackground];
     [[NSUserDefaults standardUserDefaults] setObject:backgroundColorData forKey:Preference_Key_Color_Background];
+    
+    // Set theme images
+    self.imagePanelBtnManual = newImagePanelBtnManual;
+    self.imagePanelBtnManualAlt = newImagePanelBtnManualAlt;
     
     // Shout it out to the world!
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AMThemeChanged" object:self];

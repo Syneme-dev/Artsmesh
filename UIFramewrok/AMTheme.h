@@ -20,6 +20,9 @@
 
 #define Preference_Key_Color_Background @"Preference_Key_Color_Background"
 
+#define UI_Image_Panel_Btn_Manual @"Sidebar_Manual"
+#define UI_Image_Panel_Btn_Manual_Alt @"sidebar_Manual_h"
+
 @interface AMTheme : NSObject
 
 @property (strong) NSDictionary *themeFonts;
@@ -55,6 +58,9 @@
 @property (strong) NSFont *fontHeader;
 @property (strong) NSFont *fontHeaderItalic;
 
+// Images
+@property (strong) NSImage *imagePanelBtnManual;
+@property (strong) NSImage *imagePanelBtnManualAlt;
 
 // Methods
 + (AMTheme *) sharedInstance;

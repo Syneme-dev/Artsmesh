@@ -7,8 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMControlBarButtonResponder.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMPanelControlBarViewController : NSViewController
+
+@property (strong) IBOutlet AMControlBarButtonResponder *panelHelpBtn;
+@property AMTheme *curTheme;
 
 - (IBAction)onSidebarItemClick:(NSButton *)sender ;
 

@@ -102,7 +102,7 @@
                     <rect key="frame" x="410" y="10" width="40" height="40"/>
                     <subviews>
                         <button identifier="NETWORKTOOLS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJm-A2-ATv" userLabel="NETWORK TOOLS" customClass="AMControlBarButtonResponder">
-                            <rect key="frame" x="0.0" y="-2" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_terminal" imagePosition="only" alignment="center" alternateImage="SideBar_terminal_h" imageScaling="proportionallyDown" inset="2" id="ASt-f9-TQp">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>

@@ -7,6 +7,20 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelControlBarViewController">
             <connections>
+                <outlet property="panelBroadcastBtnSidebar" destination="LKX-kJ-TAm" id="gqU-a0-KKD"/>
+                <outlet property="panelChatBtnSidebar" destination="lKS-0W-EV3" id="E44-AE-Tuk"/>
+                <outlet property="panelClockBtnSidebar" destination="E2A-U8-2QT" id="f3z-QJ-5wN"/>
+                <outlet property="panelGroupBtnSidebar" destination="Ubp-Al-LNH" id="lSF-TU-m0a"/>
+                <outlet property="panelHelpBtnSidebar" destination="tY2-nX-q2e" id="eTq-MR-M1g"/>
+                <outlet property="panelMapBtnSidebar" destination="4lt-fi-yyl" id="tbn-s2-Qe9"/>
+                <outlet property="panelMusicBtnSidebar" destination="fmu-cu-uXW" id="98V-CX-QDg"/>
+                <outlet property="panelOSCBtnSidebar" destination="czm-6C-e4y" id="2FL-93-clH"/>
+                <outlet property="panelRouteBtnSidebar" destination="qhJ-Vj-Jer" id="xHl-9y-2GW"/>
+                <outlet property="panelSettingsBtnSidebar" destination="K4P-qL-2DK" id="V4P-ek-Qh7"/>
+                <outlet property="panelSocialBtnSidebar" destination="bEP-bz-Q68" id="LJf-Kq-GZc"/>
+                <outlet property="panelTerminalBtnSidebar" destination="edm-h7-2fZ" id="R4c-ae-4ox"/>
+                <outlet property="panelUserBtnSidebar" destination="bxv-Xf-4e9" id="RT8-gW-H0i"/>
+                <outlet property="panelVideoBtnSidebar" destination="KcA-UH-tEW" id="47S-uC-McZ"/>
                 <outlet property="view" destination="5oK-Xd-QQt" id="Qf0-s5-bE5"/>
             </connections>
         </customObject>

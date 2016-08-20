@@ -7,7 +7,20 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelControlBarViewController">
             <connections>
+                <outlet property="panelBroadcastBtn" destination="5MP-3C-G7W" id="qKS-aO-Dy6"/>
+                <outlet property="panelChatBtn" destination="dqv-vT-etE" id="oh9-E3-hmO"/>
+                <outlet property="panelClockBtn" destination="erw-xl-c4Q" id="RmV-PS-Zf9"/>
+                <outlet property="panelGroupBtn" destination="PEv-bz-cuA" id="2k1-x0-5VF"/>
                 <outlet property="panelHelpBtn" destination="Qo8-t8-EPg" id="CGs-9d-kgJ"/>
+                <outlet property="panelMapBtn" destination="OCf-o3-Qwz" id="vyX-AU-ip1"/>
+                <outlet property="panelMusicBtn" destination="QU2-8b-AkP" id="Inu-rd-w0l"/>
+                <outlet property="panelOSCBtn" destination="IIn-6q-228" id="LXV-QK-KUq"/>
+                <outlet property="panelRouteBtn" destination="PVk-24-SVN" id="OWa-yO-v7H"/>
+                <outlet property="panelSettingsBtn" destination="l4M-XS-sB5" id="858-tm-Fz7"/>
+                <outlet property="panelSocialBtn" destination="UWQ-z1-q6I" id="b7h-WW-3se"/>
+                <outlet property="panelTerminalBtn" destination="oJm-A2-ATv" id="2ni-76-C4Q"/>
+                <outlet property="panelUserBtn" destination="cL1-0P-jZQ" id="3vF-Z3-hZX"/>
+                <outlet property="panelVideoBtn" destination="VZj-Kr-niS" id="zLd-Dj-kI6"/>
                 <outlet property="view" destination="c22-O7-iKe" id="BaW-F4-eMT"/>
             </connections>
         </customObject>
@@ -89,7 +102,7 @@
                     <rect key="frame" x="410" y="10" width="40" height="40"/>
                     <subviews>
                         <button identifier="NETWORKTOOLS" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJm-A2-ATv" userLabel="NETWORK TOOLS" customClass="AMControlBarButtonResponder">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="-2" width="40" height="40"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_terminal" imagePosition="only" alignment="center" alternateImage="SideBar_terminal_h" imageScaling="proportionallyDown" inset="2" id="ASt-f9-TQp">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -145,7 +158,7 @@
                     <rect key="frame" x="123" y="10" width="40" height="40"/>
                     <subviews>
                         <button identifier="SOCIAL" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWQ-z1-q6I" userLabel="social" customClass="AMControlBarButtonResponder">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="-3" width="40" height="40"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="SideBar_social" imagePosition="only" alignment="center" alternateImage="SideBar_social_h" imageScaling="proportionallyDown" inset="2" id="EAq-TE-eEb">
                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>

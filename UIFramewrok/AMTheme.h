@@ -20,8 +20,37 @@
 
 #define Preference_Key_Color_Background @"Preference_Key_Color_Background"
 
+// Default UI Panel Image Names
 #define UI_Image_Panel_Btn_Manual @"Sidebar_Manual"
 #define UI_Image_Panel_Btn_Manual_Alt @"sidebar_Manual_h"
+#define UI_Image_Panel_Btn_User @"Sidebar_user"
+#define UI_Image_Panel_Btn_User_Alt @"Sidebar_user_h"
+#define UI_Image_Panel_Btn_Group @"Sidebar_group"
+#define UI_Image_Panel_Btn_Group_Alt @"Sidebar_group_h"
+#define UI_Image_Panel_Btn_Chat @"Sidebar_chat"
+#define UI_Image_Panel_Btn_Chat_Alt @"Sidebar_chat_h"
+#define UI_Image_Panel_Btn_Social @"Sidebar_social"
+#define UI_Image_Panel_Btn_Social_Alt @"Sidebar_social_h"
+#define UI_Image_Panel_Btn_User @"Sidebar_user"
+#define UI_Image_Panel_Btn_User_Alt @"Sidebar_user_h"
+#define UI_Image_Panel_Btn_Map @"Sidebar_mapView"
+#define UI_Image_Panel_Btn_Map_Alt @"Sidebar_mapView_h"
+#define UI_Image_Panel_Btn_Route @"Sidebar_route"
+#define UI_Image_Panel_Btn_Route_Alt @"Sidebar_route_h"
+#define UI_Image_Panel_Btn_Video @"Sidebar_video"
+#define UI_Image_Panel_Btn_Video_Alt @"Sidebar_video_h"
+#define UI_Image_Panel_Btn_Music @"Sidebar_musicScore"
+#define UI_Image_Panel_Btn_Music_Alt @"Sidebar_musicScore_h"
+#define UI_Image_Panel_Btn_Clock @"Sidebar_clock"
+#define UI_Image_Panel_Btn_Clock_Alt @"Sidebar_clock_h"
+#define UI_Image_Panel_Btn_OSC @"Sidebar_osc"
+#define UI_Image_Panel_Btn_OSC_Alt @"Sidebar_osc_h"
+#define UI_Image_Panel_Btn_Terminal @"Sidebar_terminal"
+#define UI_Image_Panel_Btn_Terminal_Alt @"Sidebar_terminal_h"
+#define UI_Image_Panel_Btn_Settings @"Sidebar_setting"
+#define UI_Image_Panel_Btn_Settings_Alt @"Sidebar_setting_h"
+#define UI_Image_Panel_Btn_Broadcast @"Sidebar_broadcast"
+#define UI_Image_Panel_Btn_Broadcast_Alt @"Sidebar_broadcast_h"
 
 @interface AMTheme : NSObject
 
@@ -61,6 +90,32 @@
 // Images
 @property (strong) NSImage *imagePanelBtnManual;
 @property (strong) NSImage *imagePanelBtnManualAlt;
+@property (strong) NSImage *imagePanelBtnUser;
+@property (strong) NSImage *imagePanelBtnUserAlt;
+@property (strong) NSImage *imagePanelBtnGroup;
+@property (strong) NSImage *imagePanelBtnGroupAlt;
+@property (strong) NSImage *imagePanelBtnChat;
+@property (strong) NSImage *imagePanelBtnChatAlt;
+@property (strong) NSImage *imagePanelBtnSocial;
+@property (strong) NSImage *imagePanelBtnSocialAlt;
+@property (strong) NSImage *imagePanelBtnMap;
+@property (strong) NSImage *imagePanelBtnMapAlt;
+@property (strong) NSImage *imagePanelBtnRoute;
+@property (strong) NSImage *imagePanelBtnRouteAlt;
+@property (strong) NSImage *imagePanelBtnVideo;
+@property (strong) NSImage *imagePanelBtnVideoAlt;
+@property (strong) NSImage *imagePanelBtnMusic;
+@property (strong) NSImage *imagePanelBtnMusicAlt;
+@property (strong) NSImage *imagePanelBtnClock;
+@property (strong) NSImage *imagePanelBtnClockAlt;
+@property (strong) NSImage *imagePanelBtnOSC;
+@property (strong) NSImage *imagePanelBtnOSCAlt;
+@property (strong) NSImage *imagePanelBtnTerminal;
+@property (strong) NSImage *imagePanelBtnTerminalAlt;
+@property (strong) NSImage *imagePanelBtnSettings;
+@property (strong) NSImage *imagePanelBtnSettingsAlt;
+@property (strong) NSImage *imagePanelBtnBroadcast;
+@property (strong) NSImage *imagePanelBtnBroadcastAlt;
 
 // Methods
 + (AMTheme *) sharedInstance;

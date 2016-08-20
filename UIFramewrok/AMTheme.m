@@ -138,10 +138,10 @@
     NSFont *newFontStandard;
     NSFont *newFontStandardItalic;
     
-    NSImage *newImagePanelBtnManual;
-    NSImage *newImagePanelBtnManualAlt;
-    NSImage *newImagePanelBtnUser;
-    NSImage *newImagePanelBtnUserAlt;
+    NSImage *newImagePanelBtnManual = self.imagePanelBtnManual;
+    NSImage *newImagePanelBtnManualAlt = self.imagePanelBtnManualAlt;
+    NSImage *newImagePanelBtnUser = self.imagePanelBtnUser;
+    NSImage *newImagePanelBtnUserAlt = self.imagePanelBtnUserAlt;
     NSImage *newImagePanelBtnGroup;
     NSImage *newImagePanelBtnGroupAlt;
     NSImage *newImagePanelBtnChat;

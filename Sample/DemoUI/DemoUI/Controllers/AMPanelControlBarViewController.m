@@ -28,6 +28,11 @@
 {
     _curTheme = [AMTheme sharedInstance];
     [self setButtonImages:_curTheme];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
 }
 
 - (IBAction)onSidebarDoubleClick:(NSButton *)sender {
@@ -82,8 +87,19 @@
     [self.panelOSCBtn setAlternateImage:theme.imagePanelBtnOSCAlt];
     [self.panelSettingsBtn setImage:theme.imagePanelBtnSettings];
     [self.panelSettingsBtn setAlternateImage:theme.imagePanelBtnSettingsAlt];
+    [self.panelTerminalBtn setImage:theme.imagePanelBtnTerminal];
+    [self.panelTerminalBtn setAlternateImage:theme.imagePanelBtnTerminalAlt];
     [self.panelBroadcastBtn setImage:theme.imagePanelBtnBroadcast];
-    [self.panelBroadcastBtn setImage:theme.imagePanelBtnBroadcastAlt];
+    [self.panelBroadcastBtn setAlternateImage:theme.imagePanelBtnBroadcastAlt];
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    [self.view setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

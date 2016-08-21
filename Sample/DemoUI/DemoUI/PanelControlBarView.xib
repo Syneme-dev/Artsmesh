@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMPanelControlBarViewController">
             <connections>
+                <outlet property="panelBroadcastBtn" destination="5MP-3C-G7W" id="qKS-aO-Dy6"/>
+                <outlet property="panelChatBtn" destination="dqv-vT-etE" id="oh9-E3-hmO"/>
+                <outlet property="panelClockBtn" destination="erw-xl-c4Q" id="RmV-PS-Zf9"/>
+                <outlet property="panelGroupBtn" destination="PEv-bz-cuA" id="2k1-x0-5VF"/>
+                <outlet property="panelHelpBtn" destination="Qo8-t8-EPg" id="CGs-9d-kgJ"/>
+                <outlet property="panelMapBtn" destination="OCf-o3-Qwz" id="vyX-AU-ip1"/>
+                <outlet property="panelMusicBtn" destination="QU2-8b-AkP" id="Inu-rd-w0l"/>
+                <outlet property="panelOSCBtn" destination="IIn-6q-228" id="LXV-QK-KUq"/>
+                <outlet property="panelRouteBtn" destination="PVk-24-SVN" id="OWa-yO-v7H"/>
+                <outlet property="panelSettingsBtn" destination="l4M-XS-sB5" id="858-tm-Fz7"/>
+                <outlet property="panelSocialBtn" destination="UWQ-z1-q6I" id="b7h-WW-3se"/>
+                <outlet property="panelTerminalBtn" destination="oJm-A2-ATv" id="2ni-76-C4Q"/>
+                <outlet property="panelUserBtn" destination="cL1-0P-jZQ" id="3vF-Z3-hZX"/>
+                <outlet property="panelVideoBtn" destination="VZj-Kr-niS" id="zLd-Dj-kI6"/>
                 <outlet property="view" destination="c22-O7-iKe" id="BaW-F4-eMT"/>
             </connections>
         </customObject>

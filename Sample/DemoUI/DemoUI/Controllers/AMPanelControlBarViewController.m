@@ -84,8 +84,8 @@
     //Chat Buttons
     [self.panelChatBtn setImage:theme.imagePanelBtnChat];
     [self.panelChatBtn setAlternateImage:theme.imagePanelBtnChatAlt];
-    [self.panelChatBtnSidebar setImage:theme.imagePanelBtnGroup];
-    [self.panelChatBtnSidebar setAlternateImage:theme.imagePanelBtnGroupAlt];
+    [self.panelChatBtnSidebar setImage:theme.imagePanelBtnChat];
+    [self.panelChatBtnSidebar setAlternateImage:theme.imagePanelBtnChatAlt];
     
     //Social Buttons
     [self.panelSocialBtn setImage:theme.imagePanelBtnSocial];

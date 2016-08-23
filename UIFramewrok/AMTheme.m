@@ -196,33 +196,33 @@
         
         // Define light theme images
         newImagePanelBtnManual = [NSImage imageNamed:@"Sidebar_Manual_Light_Grey"];
-        newImagePanelBtnManualAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Manual_Alt];
+        newImagePanelBtnManualAlt = [NSImage imageNamed:@"Sidebar_Manual_White"];
         newImagePanelBtnUser = [NSImage imageNamed:@"Sidebar_User_Light_Grey"];
-        newImagePanelBtnUserAlt = [NSImage imageNamed:UI_Image_Panel_Btn_User_Alt];
+        newImagePanelBtnUserAlt = [NSImage imageNamed:@"Sidebar_User_White"];
         newImagePanelBtnGroup = [NSImage imageNamed:@"Sidebar_Group_Light_Grey"];
-        newImagePanelBtnGroupAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Group_Alt];
+        newImagePanelBtnGroupAlt = [NSImage imageNamed:@"Sidebar_Group_White"];
         newImagePanelBtnChat = [NSImage imageNamed:@"Sidebar_Chat_Light_Grey"];
-        newImagePanelBtnChatAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Chat_Alt];
+        newImagePanelBtnChatAlt = [NSImage imageNamed:@"Sidebar_Chat_White"];
         newImagePanelBtnSocial = [NSImage imageNamed:@"Sidebar_Social_Light_Grey"];
-        newImagePanelBtnSocialAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Social_Alt];
+        newImagePanelBtnSocialAlt = [NSImage imageNamed:@"Sidebar_Social_White"];
         newImagePanelBtnMap = [NSImage imageNamed:@"Sidebar_MapView_Light_Grey"];
-        newImagePanelBtnMapAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Map_Alt];
+        newImagePanelBtnMapAlt = [NSImage imageNamed:@"Sidebar_Map_White"];
         newImagePanelBtnRoute = [NSImage imageNamed:@"Sidebar_Route_Light_Grey"];
-        newImagePanelBtnRouteAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Route_Alt];
+        newImagePanelBtnRouteAlt = [NSImage imageNamed:@"Sidebar_Route_White"];
         newImagePanelBtnVideo = [NSImage imageNamed:@"Sidebar_Video_Light_Grey"];
-        newImagePanelBtnVideoAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Video_Alt];
+        newImagePanelBtnVideoAlt = [NSImage imageNamed:@"Sidebar_Video_White"];
         newImagePanelBtnMusic = [NSImage imageNamed:@"Sidebar_Music_Light_Grey"];
-        newImagePanelBtnMusicAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Music_Alt];
+        newImagePanelBtnMusicAlt = [NSImage imageNamed:@"Sidebar_Music_White"];
         newImagePanelBtnClock = [NSImage imageNamed:@"Sidebar_Clock_Light_Grey"];
-        newImagePanelBtnClockAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Clock_Alt];
+        newImagePanelBtnClockAlt = [NSImage imageNamed:@"Sidebar_Clock_White"];
         newImagePanelBtnOSC = [NSImage imageNamed:@"Sidebar_OSC_Light_Grey"];
-        newImagePanelBtnOSCAlt = [NSImage imageNamed:UI_Image_Panel_Btn_OSC_Alt];
+        newImagePanelBtnOSCAlt = [NSImage imageNamed:@"Sidebar_OSC_White"];
         newImagePanelBtnTerminal = [NSImage imageNamed:@"Sidebar_Terminal_Light_Grey"];
-        newImagePanelBtnTerminalAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Terminal_Alt];
+        newImagePanelBtnTerminalAlt = [NSImage imageNamed:@"Sidebar_Terminal_White"];
         newImagePanelBtnSettings = [NSImage imageNamed:@"Sidebar_Settings_Light_Grey"];
-        newImagePanelBtnSettingsAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Settings_Alt];
+        newImagePanelBtnSettingsAlt = [NSImage imageNamed:@"Sidebar_Settings_White"];
         newImagePanelBtnBroadcast = [NSImage imageNamed:@"Sidebar_Broadcast_Light_Grey"];
-        newImagePanelBtnBroadcastAlt = [NSImage imageNamed:UI_Image_Panel_Btn_Broadcast_Alt];
+        newImagePanelBtnBroadcastAlt = [NSImage imageNamed:@"Sidebar_Broadcast_White"];
     } else {
         
         newFontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];

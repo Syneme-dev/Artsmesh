@@ -17,6 +17,7 @@
 @property double totalH;
 @property double bottomMargin;
 @property double indentMargin;
+@property double labelWidth;
 
 @property NSRect curSize;
  

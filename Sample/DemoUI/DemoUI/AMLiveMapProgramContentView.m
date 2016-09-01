@@ -148,18 +148,21 @@
 - (void)addTextView:(NSString *)theString withIndent:(double) theIndent andFont:(NSFont *)theFont andLabel:(NSString *)theLabel {
     double totalIndent = _labelWidth + theIndent;
     
+    NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
+    
     NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:theFont};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
-    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize((self.enclosingScrollView.bounds.size.width - totalIndent), 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
     if ([theLabel length] > 0) {
-        NSLog(@"Yep!");
         NSMutableAttributedString *theLabelAttrString = [[NSMutableAttributedString alloc] initWithString:theLabel attributes:theFontAttr];
         
         AMLiveMapProgramPanelTextView *theLabelTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0, self.totalH, totalIndent, theStringH)];
         [[theLabelTextView textStorage] setAttributedString:theLabelAttrString];
         [self addSubview:theLabelTextView];
+        
+        [theField setObject:theLabelTextView forKey:@"label"];
     }
     
     AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(totalIndent, self.totalH, (self.enclosingScrollView.bounds.size.width - totalIndent), theStringH)];
@@ -174,8 +177,6 @@
     
     
     // Record the field for later user
-    
-    NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
     
     [theField setObject:theTextView forKey:@"object"];
     [theField setObject:theFontAttr forKey:@"theFontAttr"];
@@ -201,17 +202,21 @@
         for (NSMutableDictionary *curObject in self.allFields) {
             
             NSObject *theObject = [curObject objectForKey:@"object"];
+            NSDictionary *theFontAttr = [curObject objectForKey:@"theFontAttr"];
+            double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
+            
+            if ([curObject objectForKey:@"label"]) {
+                AMLiveMapProgramPanelTextView *theLabelTextView = (AMLiveMapProgramPanelTextView *) [curObject objectForKey:@"label"];
+                [self updateTextView:theLabelTextView withFontAttr:theFontAttr andIndent:0 andIsLabel:YES];
+            }
             
             if ( [theObject isKindOfClass:[AMLiveMapProgramPanelTextView class]] ) {
                 // current object is a flex text view, resize accordingly
     
                 AMLiveMapProgramPanelTextView *theTextView = (AMLiveMapProgramPanelTextView *) theObject;
-                NSDictionary *theFontAttr = [curObject objectForKey:@"theFontAttr"];
-                double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
                 
-                [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent];
+                [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent andIsLabel:NO];
             } else if ( [theObject isKindOfClass:[WebView class]] ) {
-                
                 WebView *curVideoStream = (WebView *) theObject;
                 [self updateWebView:curVideoStream];
             }
@@ -230,22 +235,32 @@
     self.totalH = theWebView.frame.size.height + self.bottomMargin;
 }
 
-- (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent {
+- (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent andIsLabel:(BOOL)isLabel {
     
     //Get the string from the textview
     NSString *curString = [[theTextView textStorage] string];
     
     NSAttributedString *theAttrString = [[NSAttributedString alloc] initWithString:curString attributes:theFontAttr];
     
-    double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    if (!isLabel) {
+        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height + [theTextView textContainerInset].height;
     
-    NSSize newTextViewSize = NSMakeSize(self.bounds.size.width, newStringH);
-    NSPoint newTextViewOrigin = NSMakePoint(_labelWidth + theIndent, self.totalH);
+        NSSize newTextViewSize = NSMakeSize(self.bounds.size.width - (theIndent + _labelWidth), newStringH);
+        NSPoint newTextViewOrigin = NSMakePoint(_labelWidth + theIndent, self.totalH);
     
-    [theTextView setFrameSize:newTextViewSize];
-    [theTextView setFrameOrigin:newTextViewOrigin];
+        [theTextView setFrameSize:newTextViewSize];
+        [theTextView setFrameOrigin:newTextViewOrigin];
     
-    self.totalH += (newStringH + self.bottomMargin);
+        self.totalH += (newStringH + self.bottomMargin);
+    } else {
+        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(_labelWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+        NSSize newTextViewSize = NSMakeSize(_labelWidth, newStringH);
+        
+        NSPoint newTextViewOrigin = NSMakePoint(0, self.totalH);
+        
+        [theTextView setFrameSize:newTextViewSize];
+        [theTextView setFrameOrigin:newTextViewOrigin];
+    }
     
 }
 

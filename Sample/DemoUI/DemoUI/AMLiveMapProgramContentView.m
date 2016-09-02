@@ -243,7 +243,8 @@
     NSAttributedString *theAttrString = [[NSAttributedString alloc] initWithString:curString attributes:theFontAttr];
     
     if (!isLabel) {
-        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height + [theTextView textContainerInset].height;
+        
+        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize((self.enclosingScrollView.bounds.size.width - (_labelWidth + theIndent)), 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
         NSSize newTextViewSize = NSMakeSize(self.bounds.size.width - (theIndent + _labelWidth), newStringH);
         NSPoint newTextViewOrigin = NSMakePoint(_labelWidth + theIndent, self.totalH);

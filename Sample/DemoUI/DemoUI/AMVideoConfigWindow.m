@@ -569,6 +569,7 @@
         if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
             cfgs.audioCodec = @"aac";
         }
+        cfgs.videoKeyframeRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Keyframe_Rate];
         peerAddr = self.peerAddress.stringValue;
     }
     

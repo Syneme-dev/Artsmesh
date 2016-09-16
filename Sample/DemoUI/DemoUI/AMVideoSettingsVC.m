@@ -580,7 +580,7 @@
     if ([base6UrlPref length] != 0) {
         [self.base6UrlTextField setStringValue:base6UrlPref];
     } else {
-        [self.baseUrlTextField setStringValue:@""];
+        [self.base6UrlTextField setStringValue:@""];
     }
     
     if ([streamKeyPref length] != 0) {
@@ -611,6 +611,7 @@
     
     
     //Save YouTube Details
+    NSLog(@"base url text field is: %@",self.baseUrlTextField.stringValue);
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];

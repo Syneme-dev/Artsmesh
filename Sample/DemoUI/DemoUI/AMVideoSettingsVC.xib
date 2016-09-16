@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVideoSettingsVC">
@@ -142,6 +142,17 @@
                                             <outlet property="delegate" destination="-2" id="Wgf-su-T6G"/>
                                         </connections>
                                     </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5eZ-LI-V0h" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="193" y="637" width="45" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="KBPS" id="AV2-LF-FQN">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="AGq-qN-flO"/>
+                                        </connections>
+                                    </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lE7-T1-K55" userLabel="| ">
                                         <rect key="frame" x="-2" y="547" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="oBr-PB-C8K"/>
@@ -202,17 +213,6 @@
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krz-G2-CKH" userLabel="BR POPUP" customClass="AMPopUpView">
                                         <rect key="frame" x="144" y="452" width="408" height="20"/>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5eZ-LI-V0h" userLabel="VBR TEXT FIELD" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="193" y="637" width="45" height="12"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="KBPS" id="AV2-LF-FQN">
-                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
-                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <outlet property="delegate" destination="-2" id="AGq-qN-flO"/>
-                                        </connections>
-                                    </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2Q-0n-jOK" userLabel="ADD DETAILS" customClass="AMFoundryFontView">
                                         <rect key="frame" x="-2" y="577" width="556" height="14"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="YOUTUBE DETAILS" id="kZh-b6-QVa">
@@ -222,11 +222,11 @@
                                         </textFieldCell>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVE-cC-4RZ" userLabel="| ">
-                                        <rect key="frame" x="-2" y="427" width="10" height="10"/>
+                                        <rect key="frame" x="-2" y="397" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Lwf-bB-jBV"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poQ-xb-nYR" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="427" width="114" height="12"/>
+                                        <rect key="frame" x="16" y="397" width="114" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BASE URL" id="KmF-vl-Fvz">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,7 +234,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-Km-h9q" userLabel="VBR TEXT FIELD">
-                                        <rect key="frame" x="142" y="427" width="264" height="12"/>
+                                        <rect key="frame" x="142" y="397" width="264" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="rtmp://a.rtmp.youtube.com/live2" id="eUx-3a-RCu">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,11 +245,11 @@
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWr-qD-KAt" userLabel="| ">
-                                        <rect key="frame" x="-2" y="367" width="10" height="10"/>
+                                        <rect key="frame" x="-2" y="337" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qyA-u4-R2N"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pk0-nL-uhU" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="367" width="114" height="12"/>
+                                        <rect key="frame" x="16" y="337" width="114" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="STREAM NAME/KEY" id="E6i-vN-JTl">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -257,7 +257,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ffm-j2-fYd" userLabel="VBR TEXT FIELD">
-                                        <rect key="frame" x="142" y="367" width="264" height="12"/>
+                                        <rect key="frame" x="142" y="337" width="264" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Your unique YouTube Stream Now name" id="kle-9y-hEV">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -268,11 +268,11 @@
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXh-rK-2pD" userLabel="| ">
-                                        <rect key="frame" x="-2" y="397" width="10" height="10"/>
+                                        <rect key="frame" x="-2" y="367" width="10" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="dng-A2-Uze"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7l-a2-i0i" userLabel="DEVICE" customClass="AMFoundryFontView">
-                                        <rect key="frame" x="16" y="397" width="114" height="12"/>
+                                        <rect key="frame" x="16" y="367" width="114" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="BASE6 URL" id="YkP-qq-dNU">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -280,7 +280,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6A-kB-erp" userLabel="VBR TEXT FIELD">
-                                        <rect key="frame" x="142" y="397" width="264" height="12"/>
+                                        <rect key="frame" x="142" y="367" width="264" height="12"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Enter IPV6 Address here" id="Dr8-Ae-eim">
                                             <font key="font" size="10" name="FoundryMonoline-Bold"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -288,6 +288,40 @@
                                         </textFieldCell>
                                         <connections>
                                             <outlet property="delegate" destination="-2" id="ksX-ys-r8Q"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsx-5f-VMC" userLabel="| ">
+                                        <rect key="frame" x="-2" y="427" width="10" height="10"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="CfU-KU-O53"/>
+                                    </imageView>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wau-Jt-Ksz" userLabel="KEYFRAME RATE" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="16" y="427" width="114" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="KEYFRAME RATE" id="nCo-cn-ocR">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucd-Y4-vxH" userLabel="KEYFRAME RATE TEXT FIELD">
+                                        <rect key="frame" x="142" y="427" width="45" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="2" id="yK9-gv-4eO">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="y78-eg-CKC"/>
+                                        </connections>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ta5-DL-x35" customClass="AMFoundryFontView">
+                                        <rect key="frame" x="193" y="427" width="50" height="12"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" title="SECONDS" id="hjE-5z-tPA">
+                                            <font key="font" size="10" name="FoundryMonoline-Bold"/>
+                                            <color key="textColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="-2" id="JMl-ah-p6q"/>
                                         </connections>
                                     </textField>
                                 </subviews>

@@ -44,6 +44,7 @@
 @property (strong) IBOutlet AMPopUpView *videoFrameRatePopupView;
 @property (strong) IBOutlet NSTextField *videoBitRateTextField;
 @property (strong) IBOutlet AMPopUpView *videoOutputSizePopupView;
+@property (strong) IBOutlet NSTextField *videoKeyframeRateTextField;
 
 
 @property (strong) IBOutlet AMPopUpView *audioDevicePopupView;

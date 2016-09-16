@@ -86,6 +86,7 @@
     NSString *vidFormatPref;
     NSString *vidFrameRatePref;
     NSString *vidBitRatePref;
+    NSString *vidKeyframeRatePref;
     NSString *audDevicePref;
     NSString *audFormatPref;
     NSString *audSampleRatePref;
@@ -411,6 +412,7 @@
     cfgs.videoDevice = [NSString stringWithFormat:@"%d", vidSelectedDeviceIndexPref];
     cfgs.audioDevice = [NSString stringWithFormat:@"%d", audSelectedDeviceIndexPref];
     cfgs.videoBitRate = vidBitRatePref;
+    cfgs.videoKeyframeRate = vidKeyframeRatePref;
     cfgs.audioCodec = audioCodecFlag;
     cfgs.audioBitRate = audBitRatePref;
     cfgs.audioSampleRate = audSampleRatePref;
@@ -467,6 +469,7 @@
     vidFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Format];
     vidFrameRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Frame_Rate];
     vidBitRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Bit_Rate];
+    vidKeyframeRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Keyframe_Rate];
     
     audFormatPref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
     audSampleRatePref = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Sample_Rate];
@@ -520,6 +523,7 @@
     [self.audioBitRatePopupView selectItemAtIndex:5];
     
     [self.videoBitRateTextField setStringValue:@"4000"];
+    [self.videoKeyframeRateTextField setStringValue:@"2"];
     [self.baseUrlTextField setStringValue:@"rtmp://a.rtmp.youtube.com/live2"];
     [self.base6UrlTextField setStringValue:@""];
     [self.streamKeyTextField setStringValue:@""];
@@ -571,6 +575,11 @@
     } else {
         [self.videoBitRateTextField setStringValue:@"4000"]; }
     
+    if ( [vidKeyframeRatePref length] != 0 ) {
+        [self.videoKeyframeRateTextField setStringValue:vidKeyframeRatePref];
+    } else {
+        [self.videoKeyframeRateTextField setStringValue:@"2"]; }
+    
     if ([baseUrlPref length] != 0) {
         [self.baseUrlTextField setStringValue:baseUrlPref];
     } else {
@@ -603,6 +612,7 @@
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.videoBitRateTextField.stringValue
      forKey:Preference_Key_ffmpeg_Video_Bit_Rate];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.videoKeyframeRateTextField.stringValue forKey:Preference_Key_ffmpeg_Video_Keyframe_Rate];
     
     //Save Audio Settings
     [[AMPreferenceManager standardUserDefaults] setObject:self.audioFormatPopupView.stringValue forKey:Preference_Key_ffmpeg_Audio_Format];
@@ -611,7 +621,6 @@
     
     
     //Save YouTube Details
-    NSLog(@"base url text field is: %@",self.baseUrlTextField.stringValue);
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.baseUrlTextField.stringValue
      forKey:Preference_Key_ffmpeg_Base_Url];

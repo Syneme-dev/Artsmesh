@@ -22,6 +22,7 @@
                 <outlet property="videoDevicePopupView" destination="i4f-iL-FzX" id="aRH-NG-us0"/>
                 <outlet property="videoFormatPopupView" destination="kT4-0D-8hP" id="sPK-NP-Wu6"/>
                 <outlet property="videoFrameRatePopupView" destination="N4W-X3-lkM" id="i40-eg-R5O"/>
+                <outlet property="videoKeyframeRateTextField" destination="ucd-Y4-vxH" id="6EP-qO-ziq"/>
                 <outlet property="videoOutputSizePopupView" destination="FHE-QI-PjX" id="DwI-yz-mMO"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>

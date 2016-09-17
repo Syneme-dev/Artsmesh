@@ -45,7 +45,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -profile:v baseline -level 3.0 -pix_fmt yuv420p -b:v %@k -f h264 -tune      fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -profile:v baseline -level 3.0 -pix_fmt yuv420p -b:v %@k -f h264 -tune fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,

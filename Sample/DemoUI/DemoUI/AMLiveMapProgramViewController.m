@@ -23,11 +23,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSLog(@"live map program view initiated!");
+        //NSLog(@"live map program view initiated!");
         // Initialization code here.
         NSImage *broadcastIcon = [NSImage imageNamed:@"group_broadcast"];
         self.liveIcon.image = broadcastIcon;
-        NSLog(@"live icon is %@", self.liveIcon.image);
+        //NSLog(@"live icon is %@", self.liveIcon.image);
     }
     return self;
 }

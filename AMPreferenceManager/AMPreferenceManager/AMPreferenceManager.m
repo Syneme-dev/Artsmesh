@@ -126,6 +126,7 @@
              Preference_ffmpeg_Audio_Format, Preference_Key_ffmpeg_Audio_Format,
              Preference_ffmpeg_Audio_Sample_Rate, Preference_Key_ffmpeg_Audio_Sample_Rate,
              Preference_ffmpeg_Audio_Bit_Rate, Preference_Key_ffmpeg_Audio_Bit_Rate,
+             Preference_ffmpeg_Video_Keyframe_Rate, Preference_Key_ffmpeg_Video_Keyframe_Rate,
              Preference_ffmpeg_Base_Url, Preference_Key_ffmpeg_Base_Url,
              Preference_ffmpeg_Base6_Url,
                  Preference_Key_ffmpeg_Base6_Url,

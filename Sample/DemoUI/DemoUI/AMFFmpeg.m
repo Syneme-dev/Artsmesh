@@ -45,7 +45,7 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -profile:v baseline -level 3.0 -pix_fmt yuv420p -b:v %@k -f h264 -tune      fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
+                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -profile:v baseline -level 3.0 -pix_fmt yuv420p -b:v %@k -f h264 -tune fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
                                 _launchPath,
                                 cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
@@ -292,12 +292,13 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -force_key_frames 'expr:gte(t, n_forced*4)' -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -force_key_frames 'expr:gte(t, n_forced*%@)' -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
                                 launchPath,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,
                                 cfgs.audioDevice,
                                 cfgs.videoCodec,
+                                cfgs.videoKeyframeRate,
                                 cfgs.videoBitRate,
                                 cfgs.audioCodec,
                                 cfgs.audioBitRate,

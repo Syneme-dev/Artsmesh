@@ -134,7 +134,7 @@
     
     [self.peerSelecter addItemWithTitle:@"ip address"];
     [self.peerSelecter addItemWithTitle:@"self"];
-    [self.peerSelecter addItemWithTitle:@"YouTube"];
+    [self.peerSelecter addItemWithTitle:@"Broadcast"];
     
     if (firstIndexInUserlist == -1) {
         //no one add to list except ip address
@@ -430,12 +430,12 @@
         self.peerAddress.stringValue = @"";
         self.peerName.stringValue = @"";
         
-    } else if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+    } else if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"] || [self.peerSelecter.stringValue isEqualToString:@"Broadcast"]) {
         [self.peerAddress setEnabled:NO];
         [self.peerName setEnabled:NO];
         
         [self.peerAddress setStringValue:[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Base_Url]];
-        [self.peerName setStringValue:@"YouTube"];
+        [self.peerName setStringValue:@"Broadcast"];
         
         // Make sure only viable YouTube video options are selectable as output formats
         [self.vidCodec removeAllItems];
@@ -551,7 +551,7 @@
     
     //Check Address for ipv6 & convert to that format, if desired
     NSString *peerAddr = [self.peerAddress stringValue];
-    if (self.useIpv6CheckboxView.checked && ![self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+    if (self.useIpv6CheckboxView.checked && ![self.peerSelecter.stringValue isEqualToString:@"YouTube"] && ![self.peerSelecter.stringValue isEqualToString:@"Broadcast"]) {
         peerAddr = [NSString stringWithFormat:@"[%@]", self.peerAddress.stringValue];
     }
     
@@ -559,7 +559,7 @@
     AMFFmpegConfigs *cfgs = [[AMFFmpegConfigs alloc] init];
 
     //YouTube-specific configs here
-    if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+    if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"] || [self.peerSelecter.stringValue isEqualToString:@"Broadcast"]) {
         cfgs.audioDevice = [NSString stringWithFormat:@"%d",selectedAudioDevice];
         cfgs.audioCodec = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format];
         cfgs.audioBitRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Bit_Rate];
@@ -569,6 +569,7 @@
         if ([[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Audio_Format] isEqualToString:@"AAC"]) {
             cfgs.audioCodec = @"aac";
         }
+        cfgs.videoKeyframeRate = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_ffmpeg_Video_Keyframe_Rate];
         peerAddr = self.peerAddress.stringValue;
     }
     
@@ -623,7 +624,7 @@
     }
     
     if ([self.roleSelecter.stringValue isEqualTo:@"SENDER"]) {
-        if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"]) {
+        if ([self.peerSelecter.stringValue isEqualToString:@"YouTube"] || [self.peerSelecter.stringValue isEqualToString:@"Broadcast"]) {
             // Run FFMPEG to a second machine, given set params
             [self sendYouTube];
         } else {

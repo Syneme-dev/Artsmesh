@@ -20,6 +20,7 @@
     if (self) {
         self.bottomMargin = 10;
         self.indentMargin = 15;
+        self.labelWidth = 110;
         self.allFields = [[NSMutableArray alloc] init];
                 
         //Prep Video Stream Container
@@ -104,29 +105,39 @@
     if (self.enclosingScrollView) {
         // If the group project has a description, display it here
         if ([theGroup.projectDescription length] > 0) {
-            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+            [self addTextView:theGroup.projectDescription withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@"DESCRIPTION:"];
         }
         //NSLog(@"the project description is: %@", theGroup.projectDescription);
         
         // Add Group Name
         if ([theGroup.fullName length] == 0 || [theGroup.fullName isEqualToString:@"Full Name"]){
-            NSLog(@"Group Full Name is: %@", theGroup.fullName);
-        [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+            //NSLog(@"Group Full Name is: %@", theGroup.fullName);
+        [self addTextView:theGroup.groupName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@"GROUP INFO:"];
         } else {
-            [self addTextView:theGroup.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"header"]];
+            [self addTextView:theGroup.fullName withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@"GROUP INFO:"];
         }
         
-        [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+        [self addTextView:theGroup.description withIndent:0.0 andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@""];
         
+        NSUInteger count = 0;
         for ( AMLiveUser *theUser in theGroup.users) {
             if ([theUser.fullName length] > 0 && ![theUser.fullName isEqualToString:@"FullName"]){
-                [self addTextView:theUser.fullName withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                if (count >0) {
+                    [self addTextView:theUser.fullName withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@""];
+                } else {
+                    [self addTextView:theUser.fullName withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@"USERS INFO:"];
+                }
             } else {
-                [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                if (count > 0) {
+                    [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@""];
+                } else {
+                    [self addTextView:@"Full Name" withIndent:self.indentMargin andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@"USERS INFO:"];
+                }
             }
             if ( [theUser.description length] > 0 ) {
-                [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body"]];
+                [self addTextView:theUser.description withIndent:(self.indentMargin) andFont:[self.fonts objectForKeyedSubscript:@"body"] andLabel:@""];
             }
+            count++;
             
         }
         
@@ -134,13 +145,27 @@
     }
 }
 
-- (void)addTextView:(NSString *)theString withIndent:(double) theIndent andFont:(NSFont *)theFont {
+- (void)addTextView:(NSString *)theString withIndent:(double) theIndent andFont:(NSFont *)theFont andLabel:(NSString *)theLabel {
+    double totalIndent = _labelWidth + theIndent;
+    
+    NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
+    
     NSDictionary* theFontAttr = @{NSForegroundColorAttributeName: UI_Text_Color_Gray, NSFontAttributeName:theFont};
     
     NSMutableAttributedString* theAttrString = [[NSMutableAttributedString alloc] initWithString:theString attributes:theFontAttr];
-    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.enclosingScrollView.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    double theStringH = [theAttrString boundingRectWithSize:NSMakeSize((self.enclosingScrollView.bounds.size.width - totalIndent), 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
-    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0 + theIndent, self.totalH, self.enclosingScrollView.bounds.size.width - theIndent, theStringH)];
+    if ([theLabel length] > 0) {
+        NSMutableAttributedString *theLabelAttrString = [[NSMutableAttributedString alloc] initWithString:theLabel attributes:theFontAttr];
+        
+        AMLiveMapProgramPanelTextView *theLabelTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(0, self.totalH, totalIndent, theStringH)];
+        [[theLabelTextView textStorage] setAttributedString:theLabelAttrString];
+        [self addSubview:theLabelTextView];
+        
+        [theField setObject:theLabelTextView forKey:@"label"];
+    }
+    
+    AMLiveMapProgramPanelTextView *theTextView = [[AMLiveMapProgramPanelTextView alloc] initWithFrame:NSMakeRect(totalIndent, self.totalH, (self.enclosingScrollView.bounds.size.width - totalIndent), theStringH)];
     [[theTextView textStorage] setAttributedString:theAttrString];
     
     self.totalH += theStringH;
@@ -152,8 +177,6 @@
     
     
     // Record the field for later user
-    
-    NSMutableDictionary *theField = [[NSMutableDictionary alloc] init];
     
     [theField setObject:theTextView forKey:@"object"];
     [theField setObject:theFontAttr forKey:@"theFontAttr"];
@@ -179,17 +202,21 @@
         for (NSMutableDictionary *curObject in self.allFields) {
             
             NSObject *theObject = [curObject objectForKey:@"object"];
+            NSDictionary *theFontAttr = [curObject objectForKey:@"theFontAttr"];
+            double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
+            
+            if ([curObject objectForKey:@"label"]) {
+                AMLiveMapProgramPanelTextView *theLabelTextView = (AMLiveMapProgramPanelTextView *) [curObject objectForKey:@"label"];
+                [self updateTextView:theLabelTextView withFontAttr:theFontAttr andIndent:0 andIsLabel:YES];
+            }
             
             if ( [theObject isKindOfClass:[AMLiveMapProgramPanelTextView class]] ) {
                 // current object is a flex text view, resize accordingly
     
                 AMLiveMapProgramPanelTextView *theTextView = (AMLiveMapProgramPanelTextView *) theObject;
-                NSDictionary *theFontAttr = [curObject objectForKey:@"theFontAttr"];
-                double theIndent = [[curObject objectForKey:@"indent"] doubleValue];
                 
-                [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent];
+                [self updateTextView:theTextView withFontAttr:theFontAttr andIndent:theIndent andIsLabel:NO];
             } else if ( [theObject isKindOfClass:[WebView class]] ) {
-                
                 WebView *curVideoStream = (WebView *) theObject;
                 [self updateWebView:curVideoStream];
             }
@@ -208,22 +235,33 @@
     self.totalH = theWebView.frame.size.height + self.bottomMargin;
 }
 
-- (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent {
+- (void) updateTextView:(AMLiveMapProgramPanelTextView *)theTextView withFontAttr:(NSDictionary *)theFontAttr andIndent:(double)theIndent andIsLabel:(BOOL)isLabel {
     
     //Get the string from the textview
     NSString *curString = [[theTextView textStorage] string];
     
     NSAttributedString *theAttrString = [[NSAttributedString alloc] initWithString:curString attributes:theFontAttr];
     
-    double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(self.bounds.size.width, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+    if (!isLabel) {
+        
+        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize((self.enclosingScrollView.bounds.size.width - (_labelWidth + theIndent)), 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
     
-    NSSize newTextViewSize = NSMakeSize(self.bounds.size.width, newStringH);
-    NSPoint newTextViewOrigin = NSMakePoint(0 + theIndent, self.totalH);
+        NSSize newTextViewSize = NSMakeSize(self.bounds.size.width - (theIndent + _labelWidth), newStringH);
+        NSPoint newTextViewOrigin = NSMakePoint(_labelWidth + theIndent, self.totalH);
     
-    [theTextView setFrameSize:newTextViewSize];
-    [theTextView setFrameOrigin:newTextViewOrigin];
+        [theTextView setFrameSize:newTextViewSize];
+        [theTextView setFrameOrigin:newTextViewOrigin];
     
-    self.totalH += (newStringH + self.bottomMargin);
+        self.totalH += (newStringH + self.bottomMargin);
+    } else {
+        double newStringH = [theAttrString boundingRectWithSize:NSMakeSize(_labelWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading].size.height;
+        NSSize newTextViewSize = NSMakeSize(_labelWidth, newStringH);
+        
+        NSPoint newTextViewOrigin = NSMakePoint(0, self.totalH);
+        
+        [theTextView setFrameSize:newTextViewSize];
+        [theTextView setFrameOrigin:newTextViewOrigin];
+    }
     
 }
 

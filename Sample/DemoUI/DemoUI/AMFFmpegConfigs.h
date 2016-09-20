@@ -36,6 +36,7 @@
 // -b:v 800k                        Sets bit rate for video data
 /** Properties relating to latency and key-framing **/
 @property NSString *videoBitRate;
+@property NSString *videoKeyframeRate;
 @property NSString *videoMaxRate;
 @property NSString *videoBufSize;
 @property NSString *videoMaxSize;

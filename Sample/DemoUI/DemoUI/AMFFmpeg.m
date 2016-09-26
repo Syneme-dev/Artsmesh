@@ -45,12 +45,12 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     _configs = cfgs;
 
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -s %@ -f avfoundation -framerate %@ -i \"%@:none\" -c:v %@ -profile:v baseline -level 3.0 -pix_fmt yuv420p -b:v %@k -f h264 -tune fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
+                                @"%@ -f avfoundation -r %@ -i \"%@:none\" -pix_fmt yuv420p -c:v %@ -s %@ -b:v %@k -profile:v baseline -level 3.0 -f h264 -tune fastdecode -preset ultrafast -x264opts opencl udp://%@:%@",
                                 _launchPath,
-                                cfgs.videoOutSize,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,
                                 [self getCodec:cfgs],
+                                cfgs.videoOutSize,
                                 cfgs.videoBitRate,
                                 cfgs.serverAddr,
                                 [self getPort:cfgs.portOffset]];
@@ -292,18 +292,21 @@ NSString * const AMVIDEOYouTubeStreamNotification = @"AMVIDEOYouTubeStreamNotifi
     launchPath = [NSString stringWithFormat:@"\"%@\"",launchPath];
     
     NSMutableString *command = [NSMutableString stringWithFormat:
-                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuyv422 -c:v %@ -force_key_frames 'expr:gte(t, n_forced*%@)' -b:v %@k -preset fast -c:a %@ -b:a %@k -ar %@ -s %@ -threads 0 -f flv \"%@/%@\"",
+                                @"%@ -f avfoundation -r %@ -i \"%@:%@\" -pix_fmt yuv420p -c:v %@ -s %@ -threads 0 -b:v %@k -bufsize %@k -maxrate %@k -minrate %@k -preset veryfast -force_key_frames 'expr:gte(t, n_forced*%@)' -profile:v baseline -tune film -g 60 -c:a %@ -b:a %@k -ac 2 -ar %@ -af \"aresample=async=1:min_hard_comp=0.100000:first_pts=0\" -map_metadata -1 -f flv \"%@/%@\"",
                                 launchPath,
                                 cfgs.videoFrameRate,
                                 cfgs.videoDevice,
                                 cfgs.audioDevice,
                                 cfgs.videoCodec,
-                                cfgs.videoKeyframeRate,
+                                cfgs.videoOutSize,
                                 cfgs.videoBitRate,
+                                cfgs.videoBitRate,
+                                cfgs.videoBitRate,
+                                cfgs.videoBitRate,
+                                cfgs.videoKeyframeRate,
                                 cfgs.audioCodec,
                                 cfgs.audioBitRate,
                                 cfgs.audioSampleRate,
-                                cfgs.videoOutSize,
                                 cfgs.serverAddr,
                                 cfgs.streamName];
     NSLog(@"%@", command);

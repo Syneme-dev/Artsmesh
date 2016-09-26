@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 
 #define START_INDEX     18
 #define LAST_INDEX      48
-#define INDEX_INTERVAL  6
+#define INDEX_INTERVAL  2
 
 @interface AMVideoDevice : NSObject
 @property   NSString*           processID;

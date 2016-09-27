@@ -55,15 +55,10 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 
 #define todegree(radius)  ((radius) * 360.0 / (2.0 * M_PI))
 
-static NSUInteger kNumberOfChannels = 60;
-static CGFloat kChannelRadius = 10.0;
-static CGFloat kPlaceholderChannelRadius = 6.0;
+static NSUInteger kNumberOfChannels = 60;           // 72;
+static CGFloat kChannelRadius = 9.0;                // 10.0
+static CGFloat kPlaceholderChannelRadius = 4.0;     // 5.0;
 static CGFloat kCloseButtonRadius = 6.0;
-
-//static NSUInteger kNumberOfChannels = 72;
-//static CGFloat kChannelRadius = 10.0;
-//static CGFloat kPlaceholderChannelRadius = 5.0;
-///static CGFloat kCloseButtonRadius = 6.0;
 
 @interface AMDevice : NSObject
 

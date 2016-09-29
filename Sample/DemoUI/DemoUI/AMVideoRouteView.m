@@ -59,6 +59,7 @@ static NSUInteger kNumberOfChannels = 60;           // 72;
 static CGFloat kChannelRadius = 9.0;                // 10.0
 static CGFloat kPlaceholderChannelRadius = 4.0;     // 5.0;
 static CGFloat kCloseButtonRadius = 6.0;
+static CGFloat kCircleMargin = 4.0;
 
 @interface AMDevice : NSObject
 
@@ -435,7 +436,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                               NSHeight(self.bounds) / 16.0);
-    _radius = MIN(NSWidth(rect) / 2.0, NSHeight(rect) / 2.0);
+    _radius = MIN(NSWidth(rect) / 2.0 - kCircleMargin, NSHeight(rect) / 2.0 - kCircleMargin);
     _center = NSMakePoint(NSMidX(rect), NSMidY(rect));
 }
 

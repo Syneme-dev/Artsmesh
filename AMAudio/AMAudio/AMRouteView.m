@@ -57,7 +57,7 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 
 static NSUInteger kNumberOfChannels = 72;
 static CGFloat kChannelRadius = 10.0;
-static CGFloat kPlaceholderChannelRadius = 5.0;
+static CGFloat kPlaceholderChannelRadius = 4.0;
 static CGFloat kCloseButtonRadius = 6.0;
 
 @interface AMDevice : NSObject

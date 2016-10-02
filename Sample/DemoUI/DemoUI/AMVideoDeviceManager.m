@@ -38,7 +38,8 @@
         _nilChannel.deviceID     = @"";
         _nilChannel.channelName  = @"";
         
-        for(int i = 0; i < 9; i++){
+        //SELF Area of placeholder.
+        for(int i = 0; i < 16; i++){
             _nilChannel.index = i;
             [channels addObject:_nilChannel];
         }

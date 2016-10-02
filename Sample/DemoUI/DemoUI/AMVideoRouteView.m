@@ -55,10 +55,11 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 
 #define todegree(radius)  ((radius) * 360.0 / (2.0 * M_PI))
 
-static NSUInteger kNumberOfChannels = 72;
-static CGFloat kChannelRadius = 10.0;
-static CGFloat kPlaceholderChannelRadius = 5.0;
+static NSUInteger kNumberOfChannels = 60;           // 72;
+static CGFloat kChannelRadius = 9.0;                // 10.0
+static CGFloat kPlaceholderChannelRadius = 4.0;     // 5.0;
 static CGFloat kCloseButtonRadius = 6.0;
+static CGFloat kCircleMargin = 4.0;
 
 @interface AMDevice : NSObject
 
@@ -125,24 +126,7 @@ static CGFloat kCloseButtonRadius = 6.0;
         channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
         channels[i] = channel;
     }
-    //  [self associateChannels:channels
-    //               withDevice:@"Device1"
-    //                     name:@"abcdefghijklmnopqrstuvwxyz"
-    //                removable:NO];
-    //
-    //  NSMutableArray* channels2 = [NSMutableArray arrayWithCapacity:4];
-    //  for (int i = 8; i < 12; i++) {
-    //      AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-    //      channel.type = (i < 10) ? AMSourceChannel : AMDestinationChannel;
-    //      channels2[i - 8] = channel;
-    //  }
-    //  [self associateChannels:channels2
-    //               withDevice:@"Device2"
-    //                     name:@"GarageBand"
-    //                removable:YES];
-    //
-    //   [self connectChannel:self.allChannels[0] toChannel:self.allChannels[11]];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeTheme:)
                                                  name:@"AMThemeChanged"
@@ -178,8 +162,9 @@ static CGFloat kCloseButtonRadius = 6.0;
     for (AMChannel *channel in self.allChannels)
         [self drawChannel:channel WithCenterAt:[self centerOfChannel:channel]];
     
-    //    [self drawTip];
+    [self drawTip];
 }
+
 
 - (void) drawChannel : (AMChannelType) type
         withPosition : (NSPoint) p
@@ -451,7 +436,7 @@ static CGFloat kCloseButtonRadius = 6.0;
 {
     NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                               NSHeight(self.bounds) / 16.0);
-    _radius = MIN(NSWidth(rect) / 2.0, NSHeight(rect) / 2.0);
+    _radius = MIN(NSWidth(rect) / 2.0 - kCircleMargin, NSHeight(rect) / 2.0 - kCircleMargin);
     _center = NSMakePoint(NSMidX(rect), NSMidY(rect));
 }
 

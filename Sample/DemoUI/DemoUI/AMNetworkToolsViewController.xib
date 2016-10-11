@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMNetworkToolsViewController">
@@ -65,8 +65,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
-                    <rect key="frame" x="612" y="501" width="8" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
+                    <rect key="frame" x="611" y="501" width="9" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
@@ -105,7 +105,7 @@
                     <tabViewItems>
                         <tabViewItem label="pingTab" identifier="pingTab" id="Jjd-Ru-VJF">
                             <view key="view" id="oYb-Pc-Jvr" customClass="AMTabItemView">
-                                <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
@@ -117,11 +117,11 @@
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKf-ym-2xE">
                                         <rect key="frame" x="0.0" y="0.0" width="178" height="469"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vxG-9Q-AvD">
-                                            <rect key="frame" x="0.0" y="0.0" width="178" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="178" height="469"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="0yF-M2-mqS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="469"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
@@ -147,6 +147,7 @@
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chR-Jm-aSk" customClass="AMFoundryFontView">
                                                                             <rect key="frame" x="0.0" y="0.0" width="175" height="17"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="7he-JL-h2F">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -167,7 +168,6 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="178" id="qrU-bE-Stx"/>
@@ -183,18 +183,16 @@
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSk-LP-9QE">
                                         <rect key="frame" x="178" y="0.0" width="483" height="469"/>
                                         <clipView key="contentView" copiesOnScroll="NO" id="zHY-l0-jTe">
-                                            <rect key="frame" x="0.0" y="0.0" width="415" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="483" height="469"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" verticallyResizable="YES" spellingCorrection="YES" id="sbY-RD-sTE" customClass="AMFoundryFontTextView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="469"/>
+                                                <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" findStyle="panel" spellingCorrection="YES" id="sbY-RD-sTE" customClass="AMFoundryFontTextView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="483" height="469"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.18823531269999999" green="0.18823531269999999" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="483" height="469"/>
                                                     <size key="maxSize" width="483" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="483" height="469"/>
-                                                    <size key="maxSize" width="483" height="10000000"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
@@ -227,18 +225,16 @@
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o94-5B-aLv">
                                         <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                         <clipView key="contentView" id="wgl-K9-QiN">
-                                            <rect key="frame" x="0.0" y="0.0" width="593" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView editable="NO" selectable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nd1-0G-VZC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="593" height="469"/>
+                                                <textView editable="NO" selectable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nd1-0G-VZC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <size key="minSize" width="661" height="469"/>
                                                     <size key="maxSize" width="661" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="661" height="469"/>
-                                                    <size key="maxSize" width="661" height="10000000"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
@@ -266,7 +262,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="vAt-up-KKp" customClass="AMCheckBoxView">
                                         <rect key="frame" x="18" y="153" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="iOQ-oj-fM9"/>
@@ -279,19 +275,17 @@
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7js-65-mVZ" customClass="AMVerticalScrollView">
                                         <rect key="frame" x="178" y="20" width="483" height="449"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6AD-Ox-imv">
-                                            <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="483" height="449"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView focusRingType="none" editable="NO" importsGraphics="NO" findStyle="panel" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="l4w-D1-cZA" customClass="AMFoundryFontTextView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="223" height="468"/>
+                                                <textView focusRingType="none" editable="NO" importsGraphics="NO" findStyle="panel" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="l4w-D1-cZA" customClass="AMFoundryFontTextView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="483" height="449"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="backgroundColor" red="0.20000001788139343" green="0.20000001788139343" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
-                                                    <size key="minSize" width="223" height="449"/>
+                                                    <size key="minSize" width="483" height="449"/>
                                                     <size key="maxSize" width="631" height="10000000"/>
                                                     <color key="insertionPointColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <size key="minSize" width="223" height="449"/>
-                                                    <size key="maxSize" width="631" height="10000000"/>
                                                 </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -305,32 +299,60 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUc-Ii-fmQ" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="zUc-Ii-fmQ" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="420" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="148" id="Q4k-2c-cfL"/>
+                                            <constraint firstAttribute="height" constant="30" id="eku-Rf-pT1"/>
+                                        </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Onw-ph-OMk" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Onw-ph-OMk" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="377" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="148" id="X92-SN-pbz"/>
+                                            <constraint firstAttribute="height" constant="30" id="iDJ-4X-YBI"/>
+                                        </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I3E-PX-phg" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="I3E-PX-phg" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="285" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="148" id="rG3-Se-Pfq"/>
+                                            <constraint firstAttribute="height" constant="30" id="tzP-sA-dEi"/>
+                                        </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7w-k2-tY0" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="S7w-k2-tY0" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="241" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="148" id="VOt-AQ-5FP"/>
+                                            <constraint firstAttribute="height" constant="30" id="zPO-VD-bhq"/>
+                                        </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAz-nO-ZWU" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="OAz-nO-ZWU" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="334" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="kEv-Kz-Dpv"/>
+                                            <constraint firstAttribute="width" constant="148" id="pmC-79-BY3"/>
+                                        </constraints>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-ec-mhZ" userLabel="Ratio Video View" customClass="AMRatioButtonView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-ec-mhZ" userLabel="Ratio Video View" customClass="AMRatioButtonView">
                                         <rect key="frame" x="18" y="196" width="148" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="AC2-4j-zuy"/>
+                                            <constraint firstAttribute="width" constant="148" id="r9T-FC-dz6"/>
+                                        </constraints>
                                     </customView>
-                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="h9L-Ma-tsd" customClass="AMPopUpView">
                                         <rect key="frame" x="18" y="109" width="148" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="148" id="Itu-hi-KCY"/>
+                                            <constraint firstAttribute="height" constant="28" id="a0P-BH-wBk"/>
                                         </constraints>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-y9-ppv" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-y9-ppv" customClass="AMFoundryFontView">
                                         <rect key="frame" x="20" y="67" width="146" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="DYS-9V-zYG"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="SEARCH" drawsBackground="YES" id="sDD-7F-BhV">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -342,12 +364,31 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="l4w-D1-cZA" firstAttribute="leading" secondItem="F8o-y9-ppv" secondAttribute="trailing" constant="12" id="4fV-ba-VGL"/>
+                                    <constraint firstItem="S7w-k2-tY0" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="71a-3l-qdc"/>
+                                    <constraint firstItem="zUc-Ii-fmQ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" constant="19" id="9Dg-fk-P3T"/>
+                                    <constraint firstItem="l4w-D1-cZA" firstAttribute="leading" secondItem="Onw-ph-OMk" secondAttribute="trailing" constant="12" id="9ev-YO-Fc1"/>
+                                    <constraint firstItem="F8o-y9-ppv" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="20" id="Bb7-Hw-kgn"/>
+                                    <constraint firstItem="OAz-nO-ZWU" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="Gza-wc-QJq"/>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="leading" secondItem="h9L-Ma-tsd" secondAttribute="trailing" constant="12" id="KJf-1P-3oJ"/>
+                                    <constraint firstItem="S7w-k2-tY0" firstAttribute="top" secondItem="I3E-PX-phg" secondAttribute="bottom" constant="14" id="KvK-XG-mQg"/>
                                     <constraint firstItem="h9L-Ma-tsd" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="MDl-8M-DoR"/>
+                                    <constraint firstItem="Onw-ph-OMk" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="NQg-hV-GkZ"/>
+                                    <constraint firstItem="F8o-y9-ppv" firstAttribute="top" secondItem="h9L-Ma-tsd" secondAttribute="bottom" constant="20" id="T7k-fQ-ATV"/>
+                                    <constraint firstItem="Onw-ph-OMk" firstAttribute="top" secondItem="zUc-Ii-fmQ" secondAttribute="bottom" constant="13" id="U94-gK-SBx"/>
+                                    <constraint firstItem="zUc-Ii-fmQ" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="Yna-A3-jet"/>
                                     <constraint firstItem="7js-65-mVZ" firstAttribute="top" secondItem="CxZ-C6-UB6" secondAttribute="top" id="cie-Gd-kEe"/>
+                                    <constraint firstItem="9Ss-ec-mhZ" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="dNt-Ne-BgP"/>
                                     <constraint firstAttribute="trailing" secondItem="7js-65-mVZ" secondAttribute="trailing" id="dyW-hZ-cTB"/>
+                                    <constraint firstItem="OAz-nO-ZWU" firstAttribute="top" secondItem="Onw-ph-OMk" secondAttribute="bottom" constant="13" id="gGO-Nn-RcL"/>
+                                    <constraint firstItem="l4w-D1-cZA" firstAttribute="leading" secondItem="zUc-Ii-fmQ" secondAttribute="trailing" constant="12" id="gnL-uA-CxJ"/>
+                                    <constraint firstItem="h9L-Ma-tsd" firstAttribute="top" secondItem="vAt-up-KKp" secondAttribute="bottom" constant="16" id="i5r-IJ-8dy"/>
+                                    <constraint firstItem="vAt-up-KKp" firstAttribute="top" secondItem="9Ss-ec-mhZ" secondAttribute="bottom" constant="15" id="kNu-Sg-9Lv"/>
                                     <constraint firstAttribute="bottom" secondItem="7js-65-mVZ" secondAttribute="bottom" constant="20" id="mk9-Gb-xZi"/>
+                                    <constraint firstItem="9Ss-ec-mhZ" firstAttribute="top" secondItem="S7w-k2-tY0" secondAttribute="bottom" constant="15" id="nYT-4w-qeA"/>
                                     <constraint firstItem="vAt-up-KKp" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="onI-NR-7Ee"/>
+                                    <constraint firstItem="I3E-PX-phg" firstAttribute="top" secondItem="OAz-nO-ZWU" secondAttribute="bottom" constant="19" id="tkr-Nc-n8h"/>
+                                    <constraint firstItem="I3E-PX-phg" firstAttribute="leading" secondItem="CxZ-C6-UB6" secondAttribute="leading" constant="18" id="v8L-Nk-gux"/>
                                 </constraints>
                             </view>
                         </tabViewItem>

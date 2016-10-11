@@ -39,7 +39,7 @@
         _nilChannel.channelName  = @"";
         
         //SELF Area of placeholder.
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < SELF_COUNT; i++){
             _nilChannel.index = i;
             [channels addObject:_nilChannel];
         }

@@ -33,8 +33,9 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 
 @end
 
-#define START_INDEX     18
-#define LAST_INDEX      48
+#define SELF_COUNT      11  // The count of dots in SELF area.
+#define START_INDEX     12  // Beside SELF, the first index can be used.
+#define LAST_INDEX      48  // Beside SELF, the last  index can be used.
 #define INDEX_INTERVAL  2
 
 @interface AMVideoDevice : NSObject

@@ -55,11 +55,11 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 
 #define todegree(radius)  ((radius) * 360.0 / (2.0 * M_PI))
 
-static NSUInteger kNumberOfChannels = 60;           // 72;
+static NSUInteger kNumberOfChannels = 48;           // 72;
 static CGFloat kChannelRadius = 9.0;                // 10.0
 static CGFloat kPlaceholderChannelRadius = 4.0;     // 5.0;
 static CGFloat kCloseButtonRadius = 6.0;
-static CGFloat kCircleMargin = 4.0;
+static CGFloat kCircleMargin = 24.0;
 
 @interface AMDevice : NSObject
 
@@ -120,13 +120,7 @@ static CGFloat kCircleMargin = 4.0;
     [self doInit];
     
     self.delegate = [[AMVideoRouteViewController alloc] init];
-    NSMutableArray *channels = [NSMutableArray arrayWithCapacity:4];
-    for (int i = 0; i < 4; i++) {
-        AMChannel *channel = [[AMChannel alloc] initWithIndex:i];
-        channel.type = (i < 2) ? AMSourceChannel : AMDestinationChannel;
-        channels[i] = channel;
-    }
-        
+           
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeTheme:)
                                                  name:@"AMThemeChanged"

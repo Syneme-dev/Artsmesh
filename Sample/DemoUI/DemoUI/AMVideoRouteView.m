@@ -55,7 +55,8 @@ CreateGlyphArcInfo(CTLineRef line, CGFloat radius)
 
 #define todegree(radius)  ((radius) * 360.0 / (2.0 * M_PI))
 
-static NSUInteger kNumberOfChannels = 48;           // 72;
+static NSUInteger kNumberOfAudioChannels = 72;
+static NSUInteger kNumberOfVideoChannels = 48;           // 72;
 static CGFloat kChannelRadius = 9.0;                // 10.0
 static CGFloat kPlaceholderChannelRadius = 4.0;     // 5.0;
 static CGFloat kCloseButtonRadius = 6.0;
@@ -282,7 +283,7 @@ static CGFloat kCircleMargin = 24.0;
     device.removable = removable;
     NSUInteger minIndex = NSUIntegerMax;
     for (AMChannel *channel in channels) {
-        NSAssert(channel.index < kNumberOfChannels, @"channel index out of bound");
+        NSAssert(channel.index < kNumberOfVideoChannels, @"channel index out of bound");
         minIndex = MIN(minIndex, channel.index);
         _allChannels[channel.index] = channel;
     }
@@ -369,8 +370,8 @@ static CGFloat kCircleMargin = 24.0;
 
 - (void)doInit
 {
-    _allChannels = [NSMutableArray arrayWithCapacity:kNumberOfChannels];
-    for (int i = 0; i < kNumberOfChannels; i++)
+    _allChannels = [NSMutableArray arrayWithCapacity:kNumberOfVideoChannels];
+    for (int i = 0; i < kNumberOfVideoChannels; i++)
         _allChannels[i] = [[AMChannel alloc] initWithIndex:i];
     
     _devices = [NSMutableDictionary dictionary];
@@ -430,7 +431,18 @@ static CGFloat kCircleMargin = 24.0;
 {
     NSRect rect = NSInsetRect(self.bounds, NSWidth(self.bounds) / 16.0,
                               NSHeight(self.bounds) / 16.0);
-    _radius = MIN(NSWidth(rect) / 2.0 - kCircleMargin, NSHeight(rect) / 2.0 - kCircleMargin);
+    
+    //The distance between two dots in video circle should be equal to the distance in auido circle.
+    // If audio has 72 dots, video has 48 dots. That means:
+    // distanceAV * 72 = circumferenceAudio = 2*pi*radiusAudio
+    // distanceAV * 48 = circumferenceVideo = 2*pi*radiusVideo
+    // =>  distanceAV = (2*pi*radiusAudio) / 72 = (2*pi*radiusAudio) / 48
+    // =>  radiusAudio/72 = radiusVideo/48
+    // =>  radiusVideo = radiusAudio * 48/72
+    CGFloat radiusAudio = MIN(NSWidth(rect) / 2.0, NSHeight(rect) / 2.0);
+    CGFloat radiusVideo = (radiusAudio * kNumberOfVideoChannels) / kNumberOfAudioChannels;
+   _radius = radiusVideo;
+   // _radius = MIN(NSWidth(rect) / 2.0 - kCircleMargin, NSHeight(rect) / 2.0 - kCircleMargin);
     _center = NSMakePoint(NSMidX(rect), NSMidY(rect));
 }
 
@@ -500,7 +512,7 @@ static CGFloat kCircleMargin = 24.0;
 
 - (NSPoint)centerOfChannel:(AMChannel *)channel
 {
-    CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfChannels;
+    CGFloat radian = channel.index * 2.0 * M_PI / kNumberOfVideoChannels;
     radian = (M_PI - radian) < -2.0*M_PI ?  (3.0*M_PI - radian) : (M_PI - radian);
     return NSMakePoint(_radius * cos(radian) + _center.x,
                        _radius * sin(radian) + _center.y);
@@ -544,7 +556,7 @@ static CGFloat kCircleMargin = 24.0;
                                      endAngle:363.75];
     CGFloat lineDash[2];
     lineDash[0] = 0.8 * kChannelRadius;
-    lineDash[1] = radius * 2.0 * M_PI / kNumberOfChannels - lineDash[0];
+    lineDash[1] = radius * 2.0 * M_PI / kNumberOfVideoChannels - lineDash[0];
     [circle setLineDash:lineDash
                   count:sizeof(lineDash) / sizeof(lineDash[0])
                   phase:0.0];
@@ -558,8 +570,8 @@ static CGFloat kCircleMargin = 24.0;
         NSRange indexRange = device.channelIndexRange;
         NSInteger startIndex = indexRange.location;
         NSInteger endIndex = startIndex + indexRange.length;
-        CGFloat startAngle = (startIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
-        CGFloat endAngle = (endIndex - 0.5) * 2.0 * M_PI / kNumberOfChannels;
+        CGFloat startAngle = (startIndex - 0.5) * 2.0 * M_PI / kNumberOfVideoChannels;
+        CGFloat endAngle = (endIndex - 0.5) * 2.0 * M_PI / kNumberOfVideoChannels;
         // draw lable
         
         CGFloat temp = startAngle ;
@@ -748,7 +760,7 @@ static CGFloat kCircleMargin = 24.0;
     CGFloat theta = atan2(p.y - _center.y, -p.x + _center.x);
     if (theta < 0)
         theta += 2 * M_PI;
-    int channelIndex = (int)(theta * kNumberOfChannels / (2.0 * M_PI) + 0.5) % kNumberOfChannels;
+    int channelIndex = (int)(theta * kNumberOfVideoChannels / (2.0 * M_PI) + 0.5) % kNumberOfVideoChannels;
     AMChannel *channel = [self channelAtIndex:channelIndex];
     NSPoint channelCenter = [self centerOfChannel:channel];
     r = hypot(p.x - channelCenter.x, p.y - channelCenter.y);
@@ -808,7 +820,7 @@ static CGFloat kCircleMargin = 24.0;
 
 +(NSUInteger)maxChannels
 {
-    return kNumberOfChannels;
+    return kNumberOfVideoChannels;
 }
 
 - (void) changeTheme:(NSNotification *) notification {

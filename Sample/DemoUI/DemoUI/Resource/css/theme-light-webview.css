@@ -1,0 +1,28 @@
+/******************************
+ LIGHT VERSION STYLES
+ ******************************/
+
+html, body,
+html #wrap,
+html #aside_primary_wrapper, html #content,
+html #site_nav_local_views_wrapper,
+html #content_wrapper,
+html #site_nav_global_primary,
+html #footer, html #pagination,
+html .threaded-replies {
+    background-color: #dddddd!important;
+}
+
+body, a, p,
+#nav_login a {
+    color: #3c4b5f!important;
+}
+
+a:hover, #nav_login a:hover {
+    color: #ed1c24!important;
+}
+
+html {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}

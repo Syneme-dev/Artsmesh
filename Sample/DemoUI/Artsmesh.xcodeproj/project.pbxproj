@@ -187,6 +187,7 @@
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
 		2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */; };
 		2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */; };
+		2DA987461DCC5E0A0073518B /* theme-light-webview.css in Resources */ = {isa = PBXBuildFile; fileRef = 2DA987451DCC5E0A0073518B /* theme-light-webview.css */; };
 		2DAB319C1BE8569C00C1BD5A /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; };
 		2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2DAB319B1BE8569C00C1BD5A /* ffmpeg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2DB5337B1AF3085A00CC61B6 /* GTMOAuth2Window.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */; };
@@ -840,6 +841,7 @@
 		2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoSettingsVC.xib; sourceTree = "<group>"; };
 		2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoSettingsVC.m; sourceTree = "<group>"; };
 		2D9D73431CB7590F0042EC40 /* AMVideoSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoSettingsVC.h; sourceTree = "<group>"; };
+		2DA987451DCC5E0A0073518B /* theme-light-webview.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "theme-light-webview.css"; sourceTree = "<group>"; };
 		2DAB319B1BE8569C00C1BD5A /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GTMOAuth2Window.nib; sourceTree = "<group>"; };
 		2DCA33F11A15DEC7003CA372 /* AMFlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFlippedView.h; sourceTree = "<group>"; };
@@ -2150,6 +2152,7 @@
 		AFAEBD87196107B000B7FB51 /* css */ = {
 			isa = PBXGroup;
 			children = (
+				2DA987451DCC5E0A0073518B /* theme-light-webview.css */,
 				2DE439C71A37C58700650692 /* new-event.css */,
 				2DE439C51A37905A00650692 /* archive-popup-info.css */,
 				AF6DD87D1A3BD875006063CB /* archiveProfile.css */,
@@ -2446,6 +2449,7 @@
 				AFAEBDAE19610BEA00B7FB51 /* Favorites.png in Resources */,
 				4A8C69F81A70A0ED00540694 /* AMGroupDetailsViewController.xib in Resources */,
 				AFD7575C195D048E0057976D /* shot_musicScore.png in Resources */,
+				2DA987461DCC5E0A0073518B /* theme-light-webview.css in Resources */,
 				4A32A10D1A7220B1006FEDD7 /* AMUserView.xib in Resources */,
 				4FCA92911AE4EF32002D3CAE /* AMClockTabCellVC.xib in Resources */,
 				AFAEBDB719610BEA00B7FB51 /* Trash.png in Resources */,

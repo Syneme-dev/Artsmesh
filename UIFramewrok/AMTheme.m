@@ -25,7 +25,7 @@
 - (instancetype)privateInit
 {
     NSString *curTheme = [[NSUserDefaults standardUserDefaults] stringForKey:@"Preference_Key_Active_Theme"];
-        
+    
     self.themeColors = [[NSDictionary alloc] initWithObjectsAndKeys:
                             UI_Color_Gray, @"background",
                             UI_Color_Light_Grey, @"textDefault",
@@ -190,6 +190,8 @@
     
     
     if ( [themeName isEqualToString:@"light"] ) {
+        self.themeType = themeName;
+        
         // Configure variables to match light theme
         newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
         newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
@@ -224,6 +226,7 @@
         newImagePanelBtnBroadcast = [NSImage imageNamed:UI_Image_Panel_Btn_Broadcast];
         newImagePanelBtnBroadcastAlt = [NSImage imageNamed:@"Sidebar_Broadcast_White"];
     } else {
+        self.themeType = @"dark";
         
         newFontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
         newFontHeaderItalic = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];

@@ -2,15 +2,18 @@
  LIGHT VERSION STYLES
  ******************************/
 
-html, body,
+html, body {
+    background-color: #dddddd!important;
+}
+
 html #wrap,
 html #aside_primary_wrapper, html #content,
 html #site_nav_local_views_wrapper,
 html #content_wrapper,
 html #site_nav_global_primary,
 html #footer, html #pagination,
-html .threaded-replies {
-    background-color: #dddddd!important;
+html .threaded-replies{
+    background-color: transparent!important;
 }
 
 body, a, p,
@@ -25,4 +28,117 @@ a:hover, #nav_login a:hover {
 html {
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
+}
+
+/** Web Styles **/
+
+html {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}
+#site_contact {
+    top: 14px;
+}
+#header{
+    /**
+     padding-top:0 !important;
+     margin-top:0 !important;
+     margin-left:0 !important;
+     margin-right:0 !important; **/
+    overflow:visible !important;
+}
+#header .logo.photo {
+    position: relative;
+    z-index: 99;
+}
+
+#aside_primary {
+    position: relative!important;
+}
+#footer{
+    display:none;
+}
+#core {
+    bottom: 22px;
+}
+#content{
+    /*width:600px !important;
+     padding: 2px 80px 2px 2px !important;
+     **/
+}
+
+#aside_primary_wrapper,#core,#wrap{
+    width:100% !important;
+}
+
+#aside_primary{
+    /**width:360px !important;**/
+}
+#content h1{
+    display:none;
+}
+#site_nav_local_views{
+    position:relative !important;
+    float: left !important;
+    height: 40px  !important;
+    padding:0px !important;
+    margin-left: 40px !important;
+    
+}
+
+#site_nav_local_views li
+{
+    margin-right: 10px !important;
+    float: left  !important;
+}
+#site_nav_local_views .nav li
+{
+    margin-right: 1px !important;
+    
+}
+#site_nav_local_views .nav{
+    width:100%  !important;
+}
+
+#site_contact{
+    position: absolute !important;
+    margin: 0 !important;
+    /** margin-top:2px !important; **/
+}
+#site_contact .fn.org{
+    display:none !important;
+}
+#core {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+#nav_local_default{
+    padding :0 20px !important;
+}
+
+#site_nav_global_primary{
+    background: transparent !important;
+    top:10px !important;
+    z-index: 3 !important;
+    width: 500px !important;
+    right: 4px !important;
+}
+#nav_timeline_personal{
+    display:none;
+}
+
+#nav_doc_google{
+    display: none !important;
+    
+    @media (max-width: 1025px) {
+        #header .logo.photo {
+            top: 42px;
+        }
+        #public #header .logo.photo {
+            top: 0px;
+        }
+        #core {
+            top: 20px;
+        }
+    }
 }

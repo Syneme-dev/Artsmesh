@@ -2,11 +2,7 @@
  LIGHT VERSION STYLES
  ******************************/
 
-html, body {
-    background-color: #dddddd!important;
-}
-
-html #wrap,
+html, body, html #wrap, html .input_forms,
 html #aside_primary_wrapper, html #content,
 html #site_nav_local_views_wrapper,
 html #content_wrapper,
@@ -21,7 +17,16 @@ body, a, p,
     color: #3c4b5f!important;
 }
 
-a:hover, #nav_login a:hover {
+#input_form_nav li:not(.current) a {
+    color: #b7b7b7!important;
+}
+
+#input_form_nav li a {
+    border: 0px none!important;
+}
+
+#input_form_nav li a:hover,
+.theme-light a:hover, .theme-light #nav_login a:hover {
     color: #ed1c24!important;
 }
 

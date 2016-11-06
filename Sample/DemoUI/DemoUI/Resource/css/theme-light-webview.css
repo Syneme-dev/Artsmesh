@@ -21,6 +21,8 @@ body, a, p,
     color: #b7b7b7!important;
 }
 
+.entity_actions a,
+.account_profile_block .entity_actions a,
 #input_form_nav li a {
     border: 0px none!important;
 }
@@ -37,19 +39,15 @@ html {
 
 /** Web Styles **/
 
+
 html {
-    overflow-y: scroll; /* has to be scroll, not auto */
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
 #site_contact {
     top: 14px;
 }
 #header{
-    /**
-     padding-top:0 !important;
-     margin-top:0 !important;
-     margin-left:0 !important;
-     margin-right:0 !important; **/
     overflow:visible !important;
 }
 #header .logo.photo {
@@ -66,19 +64,11 @@ html {
 #core {
     bottom: 22px;
 }
-#content{
-    /*width:600px !important;
-     padding: 2px 80px 2px 2px !important;
-     **/
-}
 
 #aside_primary_wrapper,#core,#wrap{
     width:100% !important;
 }
 
-#aside_primary{
-    /**width:360px !important;**/
-}
 #content h1{
     display:none;
 }
@@ -108,7 +98,6 @@ html {
 #site_contact{
     position: absolute !important;
     margin: 0 !important;
-    /** margin-top:2px !important; **/
 }
 #site_contact .fn.org{
     display:none !important;

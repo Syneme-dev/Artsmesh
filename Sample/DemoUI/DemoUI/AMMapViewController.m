@@ -55,6 +55,8 @@
 }
 -(void)awakeFromNib{
     [super awakeFromNib];
+    
+    _curTheme = [AMTheme sharedInstance];
     self.archiveScale=1;
     [self.tabs setAutoresizesSubviews:YES];
     [self.archiveWebView setFrameLoadDelegate:self];
@@ -68,6 +70,13 @@
     [self liveTabClick:self.liveTab];
     
     [self createArchiveFloatWindow];
+    
+    _curTheme = [AMTheme sharedInstance];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
 }
 
 
@@ -118,6 +127,8 @@
     [self.archiveWebView setFrameLoadDelegate:nil];
     [self.archiveWebView setPolicyDelegate:nil];
     [self.archiveWebView setUIDelegate:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)webViewClose:(WebView *)sender
@@ -174,6 +185,11 @@
     statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *mapURL = [NSURL URLWithString:
                      [NSString stringWithFormat:@"%@/app/archive-events.php?fromMac=true",statusNetURLString ]];
+    if ([_curTheme.themeType isEqualToString:@"light"]) {
+        mapURL = [NSURL URLWithString:
+                  [NSString stringWithFormat:@"%@/app/archive-events.php?fromMac=true&curTheme=light",statusNetURLString ]];
+    }
+    
     [self.archiveWebView.mainFrame loadRequest:
     [NSURLRequest requestWithURL:mapURL]];
     
@@ -276,6 +292,8 @@
     sender.preferences.userStyleSheetEnabled = YES;
     NSString *path= [[NSBundle mainBundle] bundlePath];
     NSString *documentUI=frame.DOMDocument.documentURI ;
+    
+    
     if([documentUI rangeOfString:@"www.youtube.com/embed"].length>0)
     {
         return;
@@ -304,7 +322,6 @@
     else {
         sender.preferences.userStyleSheetEnabled = NO;
     }
-    //
 }
 
 - (void)windowDidLoad{
@@ -391,6 +408,10 @@
     
     [_archiveFloatWindow.contentView addConstraints:verticalConstraints];
     [_archiveFloatWindow.contentView addConstraints:horizontalConstraints];
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    [self loadArchivePage];
 }
 
 

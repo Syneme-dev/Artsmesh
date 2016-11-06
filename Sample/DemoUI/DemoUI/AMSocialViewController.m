@@ -61,6 +61,11 @@ typedef enum {
     
     _curTheme = [AMTheme sharedInstance];
    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
+    
     _urlVars = @"fromMac=true";
     if (![_curTheme.themeType isEqualToString:@"dark"]) {
         _urlVars = [NSString stringWithFormat:@"fromMac=true&curTheme=%@", _curTheme.themeType];
@@ -110,6 +115,8 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:nil];
     [self.socialWebTab setPolicyDelegate:nil];
     [self.socialWebTab setUIDelegate:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -219,23 +226,14 @@ typedef enum {
     socialTabPrefs.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 
-//    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
-//    {
-//        path = [path stringByAppendingString:@"/Contents/Resources/info.css"];
-//    }
-//    else if ([url hasPrefix:statusNetURL]) {
     if ([_curTheme.themeType isEqualToString:@"light"]) {
         path = [path stringByAppendingString:@"/Contents/Resources/theme-light-webview.css"];
     } else {
         path = [path stringByAppendingString:@"/Contents/Resources/web.css"];
     }
     
-//    }
-//    else {
-//        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
-//    }
     socialTabPrefs.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-//    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
+
     
     // Add custom css according to current theme we're using.
     NSString *cssString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
@@ -414,6 +412,9 @@ typedef enum {
     if (aSelector == @selector(showVideoPopUp:)) return NO;
 
     return YES;
+}
+- (void) changeTheme:(NSNotification *) notification {
+    [self loadPage];
 }
 
 @end

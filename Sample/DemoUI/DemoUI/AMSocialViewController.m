@@ -58,12 +58,24 @@ typedef enum {
     
     self.archiveScale=1;
      [self createArchiveFloatWindow];
+    
+    _curTheme = [AMTheme sharedInstance];
    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
+    
+    _urlVars = @"fromMac=true";
+    if (![_curTheme.themeType isEqualToString:@"dark"]) {
+        _urlVars = [NSString stringWithFormat:@"fromMac=true&curTheme=%@", _curTheme.themeType];
+    }
 }
 
 - (void)onShowUserInfo:(NSNotification *)notification {
     NSString* profileUrl = [[notification userInfo] objectForKey:@"ProfileUrl"];
-    infoUrl = [NSString stringWithFormat:@"%@%@?fromMac=true", statusNetURL, profileUrl];
+    infoUrl = [NSString stringWithFormat:@"%@%@?%@", statusNetURL, profileUrl, _urlVars];
+
     NSURL *userInfoURL = [NSURL URLWithString:infoUrl];
     infoStatus = INFO_USER;
     isInfoPage = YES;
@@ -75,7 +87,7 @@ typedef enum {
 
 - (void)onShowGroupInfo:(NSNotification *)notification {
     NSString *groupName = [[notification userInfo] objectForKey:@"GroupName"];
-    infoUrl = [NSString stringWithFormat:@"%@/group/%@?fromMac=true", statusNetURL, groupName];
+    infoUrl = [NSString stringWithFormat:@"%@/group/%@?%@", statusNetURL, groupName, _urlVars];
     infoStatus = INFO_GROUP;
     isInfoPage = YES;
     NSURL *groupInfoURL = [NSURL URLWithString:infoUrl];
@@ -103,6 +115,8 @@ typedef enum {
     [self.socialWebTab setFrameLoadDelegate:nil];
     [self.socialWebTab setPolicyDelegate:nil];
     [self.socialWebTab setUIDelegate:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -145,10 +159,10 @@ typedef enum {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     statusNetURL = [defaults stringForKey:Preference_Key_StatusNet_URL];
     myUserName = [defaults stringForKey:Preference_Key_StatusNet_UserName];
-    loginURL = [NSString stringWithFormat:@"%@/main/login?fromMac=true", statusNetURL];
-    infoUrl = [NSString stringWithFormat:@"%@/%@?fromMac=true", statusNetURL, myUserName];
-    myBlogUrl = [NSString stringWithFormat:@"%@/%@/all?fromMac=true", statusNetURL, myUserName];
-    publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?fromMac=true", statusNetURL];
+    loginURL = [NSString stringWithFormat:@"%@/main/login?%@", statusNetURL, _urlVars];
+    infoUrl = [NSString stringWithFormat:@"%@/%@?%@", statusNetURL, myUserName, _urlVars];
+    myBlogUrl = [NSString stringWithFormat:@"%@/%@/all?%@", statusNetURL, myUserName, _urlVars];
+    publicBlogUrl = [NSString stringWithFormat:@"%@/blogs?%@", statusNetURL, _urlVars];
     infoStatus = INFO_USER;
     isInfoPage = YES;
     
@@ -168,7 +182,7 @@ typedef enum {
 - (void)gotoUsersPage {
     NSURL *baseURL =
             [NSURL URLWithString:
-                    [NSString stringWithFormat:@"%@/directory/users?fromMac=true", statusNetURL]];
+                    [NSString stringWithFormat:@"%@/directory/users?%@", statusNetURL, _urlVars]];
     [self.socialWebTab.mainFrame loadRequest:
             [NSURLRequest requestWithURL:baseURL]];
 }
@@ -176,7 +190,7 @@ typedef enum {
 - (void)gotoGroupsPage {
     NSURL *baseURL =
             [NSURL URLWithString:
-                    [NSString stringWithFormat:@"%@/groups?fromMac=true", statusNetURL]];
+                    [NSString stringWithFormat:@"%@/groups?%@", statusNetURL, _urlVars]];
     [self.socialWebTab.mainFrame loadRequest:
             [NSURLRequest requestWithURL:baseURL]];
 }
@@ -212,27 +226,32 @@ typedef enum {
     socialTabPrefs.userStyleSheetEnabled = YES;
     NSString *path = [[NSBundle mainBundle] bundlePath];
 
-//    if (isInfoPage && ([url isEqual:loginURL] || [url isEqual:infoUrl]))
-//    {
-//        path = [path stringByAppendingString:@"/Contents/Resources/info.css"];
-//    }
-//    else if ([url hasPrefix:statusNetURL]) {
+    if ([_curTheme.themeType isEqualToString:@"light"]) {
+        path = [path stringByAppendingString:@"/Contents/Resources/theme-light-webview.css"];
+    } else {
         path = [path stringByAppendingString:@"/Contents/Resources/web.css"];
-//    }
-//    else {
-//        self.socialWebTab.preferences.userStyleSheetEnabled = NO;
-//    }
-    socialTabPrefs.userStyleSheetLocation = [NSURL fileURLWithPath:path];
-//    NSString *moveSearchJs = @"$('#header-search').insertAfter('#nav_local_default');";
+    }
     
-   
+    socialTabPrefs.userStyleSheetLocation = [NSURL fileURLWithPath:path];
 
     
+    // Add custom css according to current theme we're using.
+    NSString *cssString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     
+    NSString *javascriptString = @"var style = document.createElement('style'); style.innerHTML = '%@'; document.head.appendChild(style)"; // 2 
+    NSString *javascriptWithCSSString = [NSString stringWithFormat:javascriptString, cssString]; // 3
+    [self.socialWebTab stringByEvaluatingJavaScriptFromString:javascriptWithCSSString]; // 4
+    
+    //NSLog(@"%@", javascriptWithCSSString);
+    NSLog(@"%@", [self.socialWebTab stringByEvaluatingJavaScriptFromString:javascriptWithCSSString]);
+
+     
     if (!isLogin) {[self login:frame];}
 }
 
+
 - (void)login:(WebFrame *)frame {
+    NSLog(@"login now..");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *password = [defaults stringForKey:Preference_Key_StatusNet_Password];
     NSString *loginJs = [NSString stringWithFormat:@"$('#nickname').val('%@');$('#password').val('%@');$('#submit').click();", myUserName, password];
@@ -393,6 +412,9 @@ typedef enum {
     if (aSelector == @selector(showVideoPopUp:)) return NO;
 
     return YES;
+}
+- (void) changeTheme:(NSNotification *) notification {
+    [self loadPage];
 }
 
 @end

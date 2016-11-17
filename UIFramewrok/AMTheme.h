@@ -52,6 +52,7 @@
 
 @interface AMTheme : NSObject
 
+@property (strong) NSString *themeType;
 @property (strong) NSDictionary *themeFonts;
 @property (strong) NSDictionary *themeColors;
 

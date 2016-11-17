@@ -1,0 +1,138 @@
+/******************************
+ LIGHT VERSION STYLES
+ ******************************/
+
+html, body, html #wrap, html .input_forms,
+html #aside_primary_wrapper, html #content,
+html #site_nav_local_views_wrapper,
+html #content_wrapper,
+html #site_nav_global_primary,
+html #footer, html #pagination,
+html .threaded-replies{
+    background-color: transparent!important;
+}
+
+body, a, p,
+#nav_login a {
+    color: #3c4b5f!important;
+}
+
+#input_form_nav li:not(.current) a {
+    color: #b7b7b7!important;
+}
+
+.entity_actions a,
+.account_profile_block .entity_actions a,
+#input_form_nav li a {
+    border: 0px none!important;
+}
+
+#input_form_nav li a:hover,
+.theme-light a:hover, .theme-light #nav_login a:hover {
+    color: #ed1c24!important;
+}
+
+html {
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}
+
+/** Web Styles **/
+
+
+html {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+#site_contact {
+    top: 14px;
+}
+#header{
+    overflow:visible !important;
+}
+#header .logo.photo {
+    position: relative;
+    z-index: 99;
+}
+
+#aside_primary {
+    position: relative!important;
+}
+#footer{
+    display:none;
+}
+#core {
+    bottom: 22px;
+}
+
+#aside_primary_wrapper,#core,#wrap{
+    width:100% !important;
+}
+
+#content h1{
+    display:none;
+}
+#site_nav_local_views{
+    position:relative !important;
+    float: left !important;
+    height: 40px  !important;
+    padding:0px !important;
+    margin-left: 40px !important;
+    
+}
+
+#site_nav_local_views li
+{
+    margin-right: 10px !important;
+    float: left  !important;
+}
+#site_nav_local_views .nav li
+{
+    margin-right: 1px !important;
+    
+}
+#site_nav_local_views .nav{
+    width:100%  !important;
+}
+
+#site_contact{
+    position: absolute !important;
+    margin: 0 !important;
+}
+#site_contact .fn.org{
+    display:none !important;
+}
+#core {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+#nav_local_default{
+    padding :0 20px !important;
+}
+
+#site_nav_global_primary{
+    background: transparent !important;
+    top:10px !important;
+    z-index: 3 !important;
+    width: 500px !important;
+    right: 4px !important;
+}
+#nav_timeline_personal{
+    display:none;
+}
+
+#nav_doc_google{
+    display: none !important;
+    
+    @media (max-width: 1025px) {
+        #header .logo.photo {
+            top: 42px;
+        }
+        #public #header .logo.photo {
+            top: 0px;
+        }
+        #core {
+            top: 20px;
+        }
+    }
+}

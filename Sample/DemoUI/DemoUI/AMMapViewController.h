@@ -15,6 +15,7 @@
 
 #import <UIFramework/AMBlueButton.h>
 #import <WebKit/WebFrameLoadDelegate.h>
+#import "UIFramework/AMTheme.h"
 
 @interface AMMapViewController : AMTabPanelViewController
 @property (weak) IBOutlet NSScrollView *testView;
@@ -27,6 +28,7 @@
 @property (strong) IBOutlet NSButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;
 @property  float archiveScale;
+@property AMTheme *curTheme;
 
 @property AMFloatPanelViewController *floatPanelViewController;
 @property NSWindow *archiveFloatWindow;

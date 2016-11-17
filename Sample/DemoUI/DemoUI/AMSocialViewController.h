@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import <WebKit/WebFrameLoadDelegate.h>
 #import "AMFloatPanelViewController.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMSocialViewController : NSViewController
 
@@ -25,6 +26,8 @@
 @property (strong) IBOutlet NSButton *infoTabButton;
 @property (strong) IBOutlet NSButton *blogTabButton;
 @property (strong) IBOutlet NSButton *searchTabButton;
+@property (strong) AMTheme *curTheme;
+@property (strong) NSString *urlVars;
 
 - (IBAction)smallerButtonClick:(id)sender;
 - (IBAction)largerButtonClick:(id)sender ;

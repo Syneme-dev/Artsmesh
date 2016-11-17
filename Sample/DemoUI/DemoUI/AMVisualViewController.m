@@ -11,14 +11,17 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMVideoRouteViewController.h"
+#import "AMSyphonRouterViewController.h"
 
 
 @interface AMVisualViewController ()
 @property (weak) IBOutlet NSTabView*    tabView;
 @property (weak) IBOutlet NSButton*     audioTab;
 @property (weak) IBOutlet NSButton*     videoTab;
-- (IBAction)onAudioTabClick:(id)sender;
-- (IBAction)onVideoTabClick:(id)sender;
+@property (weak) IBOutlet NSButton*     syphonTab;
+- (IBAction)onAudioTabClick: (id)sender;
+- (IBAction)onVideoTabClick: (id)sender;
+- (IBAction)onSyphonTabClick:(id)sender;
 
 @property (nonatomic) NSMutableArray *viewControllers;
 @end
@@ -27,17 +30,22 @@
 {
     NSViewController* _audioRouterVC;
     NSViewController* _videoRouterVC;
+    NSViewController* _syphonRouterVC;
 }
 
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    [AMButtonHandler changeTabTextColor:self.audioTab toColor:UI_Color_b7b7b7];
-    [AMButtonHandler changeTabTextColor:self.videoTab toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.audioTab   toColor:UI_Color_b7b7b7];
+    [AMButtonHandler changeTabTextColor:self.videoTab   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.syphonTab  toColor:UI_Color_blue];
+
 
     [self loadAudioRouterView];
-    [self loadVideoRouterView];
+//    [self loadVideoRouterView];
+    [self loadSyphonRouterView];
+    
     [self registerTabButtons];
    
     [self pushDownButton:self.audioTab];
@@ -54,7 +62,9 @@
     
     [self.tabButtons addObject:self.audioTab];
     [self.tabButtons addObject:self.videoTab];
-    self.showingTabsCount=2;
+//    [self.tabButtons addObject:self.syphonTab];
+    
+    self.showingTabsCount=3;
   }
 
 - (IBAction)onAudioTabClick:(id)sender {
@@ -67,6 +77,10 @@
     [self.tabs selectTabViewItemAtIndex:1];
 }
 
+- (IBAction)onSyphonTabClick:(id)sender {
+    [self pushDownButton:self.syphonTab];
+    [self.tabs selectTabViewItemAtIndex:2];
+}
 
 -(void)loadAudioRouterView
 {
@@ -125,6 +139,68 @@
                                                    views:views]];
     }
 }
+
+-(void)loadSyphonRouterView
+{
+    
+    _syphonRouterVC = [[AMVideoRouteViewController alloc]
+                      initWithNibName:@"AMVideoRouteViewController"
+                      bundle:nil];
+    
+    if (_syphonRouterVC) {
+        NSView* contentView = _syphonRouterVC.view;
+        contentView.frame = NSMakeRect(0, 0, 800, 600);
+        
+        NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
+        [superView addSubview:contentView];
+        [self.viewControllers addObject:_syphonRouterVC];
+        
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [superView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [superView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+    }
+
+    
+    /*
+    _syphonRouterVC = [[AMSyphonRouterViewController alloc]
+                      initWithNibName:@"AMSyphonRouterViewController"
+                      bundle:nil];
+    
+    if (_syphonRouterVC) {
+        NSView* contentView = _syphonRouterVC.view;
+        contentView.frame = NSMakeRect(0, 0, 800, 600);
+        
+        NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
+        [superView addSubview:contentView];
+        [self.viewControllers addObject:_syphonRouterVC];
+        
+        
+        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+        [superView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+        [superView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+    }
+    */
+}
+
 
 
 - (NSMutableArray *)viewControllers

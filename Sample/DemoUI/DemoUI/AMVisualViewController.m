@@ -53,7 +53,18 @@
 
 -(void)loadTabViews
 {
-
+    /*
+    NSArray* tabItems = [self.tabs tabViewItems];
+    
+    for (NSTabViewItem* item in tabItems) {
+        NSView* view = item.view;
+        if ([view.identifier isEqualTo:@"Audio Mixer"]) {
+            [self loadAudioMixerView: view];
+        } else if ([view.identifier isEqualTo:@"Video Mixer"]) {
+            [self loadVideoMixerView:view];
+        }
+    }
+     */
 }
 
 -(void)registerTabButtons{

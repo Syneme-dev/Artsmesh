@@ -43,7 +43,7 @@
 
 
     [self loadAudioRouterView];
-//    [self loadVideoRouterView];
+    [self loadVideoRouterView];
     [self loadSyphonRouterView];
     
     [self registerTabButtons];
@@ -58,12 +58,15 @@
     
     for (NSTabViewItem* item in tabItems) {
         NSView* view = item.view;
-        if ([view.identifier isEqualTo:@"Audio Mixer"]) {
-            [self loadAudioMixerView: view];
-        } else if ([view.identifier isEqualTo:@"Video Mixer"]) {
-            [self loadVideoMixerView:view];
+        if([view.identifier isEqualTo:@"AUDIO ROUTER"]){
+            [self loadAudioRouterView:view];
+        }else if([view.identifier isEqualTo:@"FFMPEG ROUTER"]){
+            [self loadVideoRouterView:view];
+        }else if([view.identifier isEqualTo:@"SYPHON ROUTER"]){
+            [self loadSyphonRouterView:view];
         }
     }
+
      */
 }
 
@@ -73,7 +76,7 @@
     
     [self.tabButtons addObject:self.audioTab];
     [self.tabButtons addObject:self.videoTab];
-//    [self.tabButtons addObject:self.syphonTab];
+    [self.tabButtons addObject:self.syphonTab];
     
     self.showingTabsCount=3;
   }
@@ -155,35 +158,6 @@
 {
     
     _syphonRouterVC = [[AMVideoRouteViewController alloc]
-                      initWithNibName:@"AMVideoRouteViewController"
-                      bundle:nil];
-    
-    if (_syphonRouterVC) {
-        NSView* contentView = _syphonRouterVC.view;
-        contentView.frame = NSMakeRect(0, 0, 800, 600);
-        
-        NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
-        [superView addSubview:contentView];
-        [self.viewControllers addObject:_syphonRouterVC];
-        
-        
-        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-        [superView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-        [superView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-    }
-
-    
-    /*
-    _syphonRouterVC = [[AMSyphonRouterViewController alloc]
                       initWithNibName:@"AMSyphonRouterViewController"
                       bundle:nil];
     
@@ -209,7 +183,7 @@
                                                  metrics:nil
                                                    views:views]];
     }
-    */
+
 }
 
 

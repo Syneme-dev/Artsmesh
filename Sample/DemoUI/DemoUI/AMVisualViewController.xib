@@ -26,13 +26,19 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="AUDIO" identifier="2" id="FQx-VS-ZDD">
-                            <view key="view" identifier="Audio Mixer" id="nMI-a8-B9I">
+                            <view key="view" identifier="AUDIO ROUTER" id="nMI-a8-B9I">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="VIDEO" identifier="1" id="i1g-sZ-YNA">
-                            <view key="view" identifier="Video Mixer" id="3O3-mQ-QFL">
+                        <tabViewItem label="VIDEO" identifier="1" id="i1g-sZ-YNA" userLabel="FFMPEG">
+                            <view key="view" identifier="FFMPEG ROUTER" id="3O3-mQ-QFL">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="VIDEO" identifier="1" id="Oqy-IQ-iFF" userLabel="SYPHON">
+                            <view key="view" identifier="SYPHON ROUTER" id="l8J-GH-kqH">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
@@ -65,7 +71,7 @@
                         <action selector="onAudioTabClick:" target="-2" id="Nuk-rS-xlb"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="hhf-o8-OjH" userLabel="videoTabButton">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="hhf-o8-OjH" userLabel="FFMpegTabButton">
                     <rect key="frame" x="994" y="919" width="46" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="M3S-Y5-smp"/>
@@ -91,7 +97,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="WIO-zR-dzw" userLabel="videoTabButton">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="WIO-zR-dzw" userLabel="SyphonTabButton">
                     <rect key="frame" x="1051" y="919" width="47" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="47" id="d8J-ur-icb"/>

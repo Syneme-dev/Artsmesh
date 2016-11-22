@@ -51,25 +51,6 @@
     [self pushDownButton:self.audioTab];
 }
 
--(void)loadTabViews
-{
-    /*
-    NSArray* tabItems = [self.tabs tabViewItems];
-    
-    for (NSTabViewItem* item in tabItems) {
-        NSView* view = item.view;
-        if([view.identifier isEqualTo:@"AUDIO ROUTER"]){
-            [self loadAudioRouterView:view];
-        }else if([view.identifier isEqualTo:@"FFMPEG ROUTER"]){
-            [self loadVideoRouterView:view];
-        }else if([view.identifier isEqualTo:@"SYPHON ROUTER"]){
-            [self loadSyphonRouterView:view];
-        }
-    }
-
-     */
-}
-
 -(void)registerTabButtons{
     super.tabs=self.tabs;
     self.tabButtons =[[NSMutableArray alloc]init];

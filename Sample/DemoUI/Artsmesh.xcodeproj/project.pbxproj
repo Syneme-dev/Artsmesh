@@ -315,6 +315,7 @@
 		4FD3727C1B416ABF006566A6 /* AMTraceRouteTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3727A1B416ABF006566A6 /* AMTraceRouteTabVC.m */; };
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FDB99A01C3F973400D89619 /* AMNetworkingToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */; };
+		4FE1DD3D1DE83D9400B91AF4 /* AMSyphonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE1DD3C1DE83D9400B91AF4 /* AMSyphonUtility.m */; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
@@ -1034,6 +1035,8 @@
 		4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMTraceRouteTabVC.xib; sourceTree = "<group>"; };
 		4FDB999E1C3F973400D89619 /* AMNetworkingToolVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMNetworkingToolVC.h; sourceTree = "<group>"; };
 		4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkingToolVC.m; sourceTree = "<group>"; };
+		4FE1DD3B1DE83D9400B91AF4 /* AMSyphonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonUtility.h; sourceTree = "<group>"; };
+		4FE1DD3C1DE83D9400B91AF4 /* AMSyphonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonUtility.m; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
@@ -2103,6 +2106,15 @@
 			name = "Video Routing";
 			sourceTree = "<group>";
 		};
+		4FE1DD381DE83CCF00B91AF4 /* Syphon Utility */ = {
+			isa = PBXGroup;
+			children = (
+				4FE1DD3B1DE83D9400B91AF4 /* AMSyphonUtility.h */,
+				4FE1DD3C1DE83D9400B91AF4 /* AMSyphonUtility.m */,
+			);
+			name = "Syphon Utility";
+			sourceTree = "<group>";
+		};
 		AF82E33F190CA7FC0083487C /* font */ = {
 			isa = PBXGroup;
 			children = (
@@ -2309,6 +2321,7 @@
 		D4BBBD6219AF256B006BEE40 /* Routing Panel */ = {
 			isa = PBXGroup;
 			children = (
+				4FE1DD381DE83CCF00B91AF4 /* Syphon Utility */,
 				4F23E6B31DDDB48B003ECD3E /* Syphon Routing */,
 				4FCD4D041C070A63007D94E5 /* Video Routing */,
 				AF20064519458604008630C8 /* AMVisualViewController.h */,
@@ -2798,6 +2811,7 @@
 				2D08FD8E1AD661FF00A9D257 /* GTLYouTubeActivityContentDetailsBulletin.m in Sources */,
 				AF20064819458604008630C8 /* AMVisualViewController.m in Sources */,
 				4FA52CD31BB24B090075D02B /* AVFWrapper.m in Sources */,
+				4FE1DD3D1DE83D9400B91AF4 /* AMSyphonUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

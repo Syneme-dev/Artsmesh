@@ -138,7 +138,7 @@
 -(void)loadSyphonRouterView
 {
     
-    _syphonRouterVC = [[AMVideoRouteViewController alloc]
+    _syphonRouterVC = [[AMSyphonRouterViewController alloc]
                       initWithNibName:@"AMSyphonRouterViewController"
                       bundle:nil];
     

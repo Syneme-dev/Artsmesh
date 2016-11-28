@@ -12,6 +12,7 @@
 #import "AMPreferenceManager/AMPreferenceManager.h"
 #import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
+#import "AMSyphonUtility.h"
 
 
 @interface AMSyphonRouterViewController ()  <NSPopoverDelegate>
@@ -20,7 +21,7 @@
 
 @implementation AMSyphonRouterViewController
 {
-
+    NSTimer*    _timer;
 }
 
 
@@ -84,11 +85,44 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                              target:self
+                                            selector:@selector(refreshSyphonDevices)
+                                            userInfo:nil
+                                             repeats:NO];
 }
 
--(void)refreshDevices
+
+-(void) refreshSyphonDevices
 {
+    NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
+    if([devices count] <= 0)
+        return;
+    
+    AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
+    
+    
+    for (NSUInteger i = 0; i < [devices count]; i++) {
+        
+        NSString* syphonName = [devices objectAtIndex:i];
+        
+        int channelIndex = START_INDEX + i* INDEX_INTERVAL;
+      
+        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:2];
+        for (int j = 0; j < 2; j++) {
+            AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
+                channel.type =  AMSourceChannel;
+                channel.deviceID     = syphonName;
+                channel.channelName  = syphonName;
+                channels[i] = channel;
+        }
+        
+        [routeView associateChannels:channels
+                          withDevice:syphonName
+                                name:syphonName
+                            removable:YES];
+        
+    }
 
 
 }

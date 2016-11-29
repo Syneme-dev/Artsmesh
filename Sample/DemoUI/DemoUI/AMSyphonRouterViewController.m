@@ -95,6 +95,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void) refreshSyphonDevices
 {
+    int interval = 4;
     NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
     if([devices count] <= 0)
         return;
@@ -106,15 +107,15 @@ shouldRemoveDevice:(NSString *)deviceID;
         
         NSString* syphonName = [devices objectAtIndex:i];
         
-        int channelIndex = START_INDEX + i* INDEX_INTERVAL;
+        int channelIndex = START_INDEX + i* interval;
       
-        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:2];
-        for (int j = 0; j < 2; j++) {
+        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:interval];
+        for (int j = 0; j < interval; j++) {
             AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
-                channel.type =  AMSourceChannel;
+                channel.type    =  AMDestinationChannel;
                 channel.deviceID     = syphonName;
                 channel.channelName  = syphonName;
-                channels[i] = channel;
+                channels[j] = channel;
         }
         
         [routeView associateChannels:channels

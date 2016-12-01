@@ -21,6 +21,7 @@
 
 @implementation AMSyphonRouterViewController
 {
+    AMVideoDeviceManager*   _syphonServers;
     NSTimer*    _timer;
 }
 
@@ -85,11 +86,13 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:10.0
+    _timer = [NSTimer scheduledTimerWithTimeInterval:4.0
                                               target:self
                                             selector:@selector(refreshSyphonDevices)
                                             userInfo:nil
-                                             repeats:NO];
+                                             repeats:YES];
+    
+    _syphonServers = [[AMVideoDeviceManager alloc] init];
 }
 
 
@@ -97,19 +100,23 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     int interval = 4;
     NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
-    if([devices count] <= 0)
-        return;
+//    if([devices count] <= 0)
+//        return;
     
-    AMVideoRouteView* routeView = (AMVideoRouteView*)self.view;
+    AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
+    
+    //1st step: Remove deleted devices from device manager.
+    [routeView removeALLDevice];
     
     
+    //2nd step: Add all syphon servers.
     for (NSUInteger i = 0; i < [devices count]; i++) {
         
         NSString* syphonName = [devices objectAtIndex:i];
         
         int channelIndex = START_INDEX + i* interval;
       
-        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:interval];
+        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:interval  ];
         for (int j = 0; j < interval; j++) {
             AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
                 channel.type    =  AMDestinationChannel;
@@ -124,9 +131,18 @@ shouldRemoveDevice:(NSString *)deviceID;
                             removable:YES];
         
     }
-
-
 }
+
+-(void) addRemoveObjectsInStringArray:(NSArray*) newArray
+{
+    //remove Objects which aren't in the new array.
+    for(NSString* name in newArray) {
+        //
+        
+    }
+}
+
+
 
 -(void)dealloc
 {

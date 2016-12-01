@@ -69,7 +69,7 @@
     //Update text properties
     _curTheme = [AMTheme sharedInstance];
     
-    _curFontTextColor = _curTheme.colorText;
+    _curTextColor = _curTheme.colorText;
 }
 
 - (void) dealloc

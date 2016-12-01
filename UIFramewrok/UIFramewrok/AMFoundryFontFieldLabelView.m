@@ -18,8 +18,8 @@
     //_curFontTextColor = _curTheme.colorTextFieldLabel;
     
     //[self setTextColor:_curFontTextColor];
-    self.curFontTextColor = [AMTheme sharedInstance].colorTextFieldLabel;
-    [self setTextColor:self.curFontTextColor];
+    self.curTextColor = [AMTheme sharedInstance].colorTextFieldLabel;
+    [self setTextColor:self.curTextColor];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -34,8 +34,8 @@
     //Update text properties
     [super changeTheme:notification];
     
-    self.curFontTextColor = self.curTheme.colorTextFieldLabel;
-    [self setTextColor:self.curFontTextColor];
+    self.curTextColor = self.curTheme.colorTextFieldLabel;
+    [self setTextColor:self.curTextColor];
     [self setNeedsDisplay:YES];
 }
 

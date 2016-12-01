@@ -11,7 +11,7 @@
 
 @interface AMFoundryFontView : NSTextField
 
-@property (strong) NSColor *curFontTextColor;
+@property (strong) NSColor *curTextColor;
 @property (strong) AMTheme *curTheme;
 
 -(void)setFontSize:(CGFloat)size;

@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMVisualViewController">
             <connections>
                 <outlet property="audioTab" destination="Vc3-Ly-cdX" id="nBU-Lh-UyP"/>
+                <outlet property="syphonTab" destination="WIO-zR-dzw" id="ZGB-jN-8SV"/>
                 <outlet property="tabView" destination="8pw-EZ-98P" id="Kn8-Jq-pK1"/>
                 <outlet property="tabs" destination="8pw-EZ-98P" id="xbl-XS-Zsu"/>
                 <outlet property="videoTab" destination="hhf-o8-OjH" id="j1B-r5-AlQ"/>
@@ -25,20 +26,27 @@
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="AUDIO" identifier="2" id="FQx-VS-ZDD">
-                            <view key="view" identifier="Audio Mixer" id="nMI-a8-B9I">
+                            <view key="view" identifier="AUDIO ROUTER" id="nMI-a8-B9I">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="VIDEO" identifier="1" id="i1g-sZ-YNA">
-                            <view key="view" identifier="Video Mixer" id="3O3-mQ-QFL">
+                        <tabViewItem label="VIDEO" identifier="1" id="i1g-sZ-YNA" userLabel="FFMPEG">
+                            <view key="view" identifier="FFMPEG ROUTER" id="3O3-mQ-QFL">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="VIDEO" identifier="1" id="Oqy-IQ-iFF" userLabel="SYPHON">
+                            <view key="view" identifier="SYPHON ROUTER" id="l8J-GH-kqH">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fly-Ob-EsC">
-                    <rect key="frame" x="1047" y="919" width="8" height="17"/>
+                    <rect key="frame" x="984" y="919" width="8" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="U6E-PF-KdE"/>
                         <constraint firstAttribute="width" constant="4" id="gHn-qq-P4f"/>
@@ -50,7 +58,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Vc3-Ly-cdX" userLabel="audioTabButton">
-                    <rect key="frame" x="1003" y="919" width="40" height="13"/>
+                    <rect key="frame" x="943" y="919" width="40" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="g6P-E1-tC4"/>
                         <constraint firstAttribute="width" constant="40" id="qMB-H8-R7W"/>
@@ -63,13 +71,13 @@
                         <action selector="onAudioTabClick:" target="-2" id="Nuk-rS-xlb"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="hhf-o8-OjH" userLabel="videoTabButton">
-                    <rect key="frame" x="1059" y="919" width="38" height="13"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="hhf-o8-OjH" userLabel="FFMpegTabButton">
+                    <rect key="frame" x="994" y="919" width="46" height="13"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="38" id="M3S-Y5-smp"/>
+                        <constraint firstAttribute="width" constant="46" id="M3S-Y5-smp"/>
                         <constraint firstAttribute="height" constant="13" id="czF-Y5-pLV"/>
                     </constraints>
-                    <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="NBw-2a-GJb">
+                    <buttonCell key="cell" type="inline" title="FFMPEG" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="NBw-2a-GJb">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
@@ -77,19 +85,50 @@
                         <action selector="onVideoTabClick:" target="-2" id="pew-TD-Opk"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s2S-rY-AQ9">
+                    <rect key="frame" x="1041" y="919" width="8" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="4" id="fSb-fk-1gK"/>
+                        <constraint firstAttribute="height" constant="17" id="pef-38-GpR"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="QWa-eK-OxQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="WIO-zR-dzw" userLabel="SyphonTabButton">
+                    <rect key="frame" x="1051" y="919" width="47" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="47" id="d8J-ur-icb"/>
+                        <constraint firstAttribute="height" constant="13" id="dhE-Io-hJe"/>
+                    </constraints>
+                    <buttonCell key="cell" type="inline" title="SYPHON" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="Sql-0e-8EE">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="10"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onSyphonTabClick:" target="-2" id="w9g-Bf-0dD"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="s2S-rY-AQ9" firstAttribute="leading" secondItem="WIO-zR-dzw" secondAttribute="trailing" constant="-55" id="2D1-Wr-NAp"/>
                 <constraint firstItem="Fly-Ob-EsC" firstAttribute="top" secondItem="jKq-33-7lc" secondAttribute="top" id="4oi-jm-e3J"/>
                 <constraint firstItem="Vc3-Ly-cdX" firstAttribute="top" secondItem="jKq-33-7lc" secondAttribute="top" constant="4" id="B48-Mw-qjf"/>
-                <constraint firstAttribute="trailing" secondItem="Vc3-Ly-cdX" secondAttribute="trailing" constant="64" id="FR4-ch-9Qi"/>
-                <constraint firstItem="Vc3-Ly-cdX" firstAttribute="leading" secondItem="Fly-Ob-EsC" secondAttribute="trailing" constant="-50" id="MBg-0J-93C"/>
+                <constraint firstAttribute="trailing" secondItem="Vc3-Ly-cdX" secondAttribute="trailing" constant="124" id="FR4-ch-9Qi"/>
+                <constraint firstItem="Vc3-Ly-cdX" firstAttribute="leading" secondItem="Fly-Ob-EsC" secondAttribute="trailing" constant="-47" id="MBg-0J-93C"/>
+                <constraint firstAttribute="trailing" secondItem="WIO-zR-dzw" secondAttribute="trailing" constant="9" id="VIZ-tW-toN"/>
                 <constraint firstItem="8pw-EZ-98P" firstAttribute="leading" secondItem="jKq-33-7lc" secondAttribute="leading" id="XXA-zI-9zz"/>
                 <constraint firstItem="8pw-EZ-98P" firstAttribute="top" secondItem="Vc3-Ly-cdX" secondAttribute="bottom" constant="4" id="ajy-Od-JSe"/>
-                <constraint firstItem="Fly-Ob-EsC" firstAttribute="leading" secondItem="hhf-o8-OjH" secondAttribute="trailing" constant="-48" id="fdO-ss-fuu"/>
+                <constraint firstItem="Fly-Ob-EsC" firstAttribute="leading" secondItem="hhf-o8-OjH" secondAttribute="trailing" constant="-54" id="fdO-ss-fuu"/>
                 <constraint firstItem="hhf-o8-OjH" firstAttribute="top" secondItem="jKq-33-7lc" secondAttribute="top" constant="4" id="ffj-mK-C7E"/>
+                <constraint firstItem="WIO-zR-dzw" firstAttribute="baseline" secondItem="hhf-o8-OjH" secondAttribute="baseline" id="h2e-ub-Lit"/>
                 <constraint firstAttribute="bottom" secondItem="8pw-EZ-98P" secondAttribute="bottom" id="miY-iz-7fa"/>
                 <constraint firstAttribute="trailing" secondItem="8pw-EZ-98P" secondAttribute="trailing" id="otn-zw-Rlz"/>
+                <constraint firstItem="WIO-zR-dzw" firstAttribute="baseline" secondItem="s2S-rY-AQ9" secondAttribute="baseline" id="ynL-af-KEH"/>
             </constraints>
+            <point key="canvasLocation" x="131.5" y="154"/>
         </customView>
     </objects>
 </document>

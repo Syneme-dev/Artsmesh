@@ -7,10 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTheme.h"
 
 @interface AMFoundryFontView : NSTextField
 
+@property (strong) NSColor *curFontTextColor;
+@property (strong) AMTheme *curTheme;
+
 -(void)setFontSize:(CGFloat)size;
+-(void)changeTheme:(NSNotification *)notification;
 
 
 @end

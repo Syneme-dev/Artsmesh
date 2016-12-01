@@ -14,6 +14,11 @@
 {
     [self setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize]];
     [self setFocusRingType:NSFocusRingTypeNone];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -58,6 +63,18 @@
         [NSGraphicsContext restoreGraphicsState];
     }
     [super drawRect:rect];
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    //Update text properties
+    _curTheme = [AMTheme sharedInstance];
+    
+    _curFontTextColor = _curTheme.colorText;
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

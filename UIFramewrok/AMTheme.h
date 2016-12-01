@@ -66,6 +66,7 @@
 @property (strong) NSColor *colorTextAlert;
 @property (strong) NSColor *colorTextError;
 @property (strong) NSColor *colorTextSuccess;
+@property (strong) NSColor *colorTextFieldLabel;
 
 @property (strong) NSColor *colorBorder;
 @property (strong) NSColor *colorBorderAlert;

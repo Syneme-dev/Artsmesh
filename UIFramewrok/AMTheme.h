@@ -17,6 +17,8 @@
 #define UI_Color_Red [NSColor colorWithCalibratedRed:(255)/255.0f green:(0)/255.0f blue:(0)/255.0f alpha:1.0f]
 #define UI_Color_Yellow [NSColor colorWithCalibratedRed:(255)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
 #define UI_Color_Green [NSColor colorWithCalibratedRed:(0)/255.0f green:(255)/255.0f blue:(0)/255.0f alpha:1.0f]
+#define UI_Color_White [NSColor colorWithCalibratedRed:(255)/255.0f green:(255)/255.0f blue:(255)/255.0f alpha:1.0f]
+#define UI_Color_Black [NSColor colorWithCalibratedRed:(0)/255.0f green:(0)/255.0f blue:(0)/255.0f alpha:1.0f]
 
 #define Preference_Key_Color_Background @"Preference_Key_Color_Background"
 
@@ -66,6 +68,7 @@
 @property (strong) NSColor *colorTextAlert;
 @property (strong) NSColor *colorTextError;
 @property (strong) NSColor *colorTextSuccess;
+@property (strong) NSColor *colorTextField;
 @property (strong) NSColor *colorTextFieldLabel;
 
 @property (strong) NSColor *colorBorder;

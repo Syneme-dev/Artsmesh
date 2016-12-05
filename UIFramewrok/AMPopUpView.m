@@ -49,6 +49,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+        self.curTheme = [AMTheme sharedInstance];
         self.backgroupColor = [NSColor colorWithCalibratedRed:(38.0f/255.0f)
                                                         green:(38.0f/255.0f)
                                                          blue:(38.0f/255.0f)
@@ -66,6 +67,7 @@
         self.itemHeight = 30;
         
         [self addTrackingRect:self.bounds owner:self userData:nil assumeInside:NO];
+        
     }
     return self;
 }

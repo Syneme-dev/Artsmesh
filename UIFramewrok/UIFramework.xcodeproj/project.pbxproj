@@ -24,6 +24,8 @@
 		2D9B7F341D3F2F650018580A /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B7F321D3F2F650018580A /* AMTheme.m */; };
 		2DA43CCD1DEF9A630096373F /* AMFoundryFontFieldLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA43CCB1DEF9A630096373F /* AMFoundryFontFieldLabelView.h */; };
 		2DA43CCE1DEF9A630096373F /* AMFoundryFontFieldLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA43CCC1DEF9A630096373F /* AMFoundryFontFieldLabelView.m */; };
+		2DC1B6561DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */; };
+		2DC1B6571DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */; };
 		4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */; };
 		4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D221A7886FB00281F46 /* AMCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,6 +101,8 @@
 		2D9B7F321D3F2F650018580A /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
 		2DA43CCB1DEF9A630096373F /* AMFoundryFontFieldLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontFieldLabelView.h; path = UIFramewrok/AMFoundryFontFieldLabelView.h; sourceTree = "<group>"; };
 		2DA43CCC1DEF9A630096373F /* AMFoundryFontFieldLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontFieldLabelView.m; path = UIFramewrok/AMFoundryFontFieldLabelView.m; sourceTree = "<group>"; };
+		2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFoundryFontFieldTextView.h; sourceTree = "<group>"; };
+		2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFoundryFontFieldTextView.m; sourceTree = "<group>"; };
 		4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		4A776D221A7886FB00281F46 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */,
+				2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */,
 				2D9B7F311D3F2F650018580A /* AMTheme.h */,
 				2D9B7F321D3F2F650018580A /* AMTheme.m */,
 				4FD498C41B6A16BA00427866 /* AMFakeBox.h */,
@@ -332,6 +338,7 @@
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
 				2DA43CCD1DEF9A630096373F /* AMFoundryFontFieldLabelView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
+				2DC1B6561DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				4F15723E1AB195B700945397 /* AMTimerView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
@@ -453,6 +460,7 @@
 				AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */,
 				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
+				2DC1B6571DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m in Sources */,
 				4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */,
 				01D059B41A2D5A3600BC51E7 /* AMBigBlueButton.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,

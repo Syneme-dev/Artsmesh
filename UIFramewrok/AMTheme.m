@@ -201,9 +201,10 @@
         // Configure variables to match light theme
         newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
         newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
-        newColorText = UI_Color_Gray;
+        newColorText = UI_Color_Grey_Primary;
         newColorTextFieldLabel = UI_Color_Gray;
         newColorTextField = UI_Color_Black;
+        newColorBorder = UI_Color_Gray;
         
         // Define light theme images
         newImagePanelBtnManual = [NSImage imageNamed:UI_Image_Panel_Btn_Manual];

@@ -17,7 +17,6 @@
     self.curTextColor = [AMTheme sharedInstance].colorTextField;
     [self setTextColor:self.curTextColor];
     
-    NSLog(@"curtext color: %@", self.curTextColor);
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMTheme.h"
 
 @interface AMBlueBorderButton : NSButton
+
+@property (strong) AMTheme *curTheme;
+@property (strong) NSColor *textColor;
 
 @end

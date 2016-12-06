@@ -178,7 +178,7 @@
                         <constraint firstAttribute="height" constant="1" id="Pzd-rX-DD1"/>
                     </constraints>
                 </box>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Biq-u9-hjz" userLabel="MachineName" customClass="AMFoundryFontView">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Biq-u9-hjz" userLabel="MachineName" customClass="AMFoundryFontFieldTextView">
                     <rect key="frame" x="197" y="667" width="453" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="wqk-fR-dzi"/>

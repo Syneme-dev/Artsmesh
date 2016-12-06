@@ -60,11 +60,17 @@
                                                         alpha:1];
         _title = @"";
         _indexOfSelectedItem = -1;
-        self.textColor = [NSColor whiteColor];
+        //self.textColor = [NSColor whiteColor];
+        self.textColor = self.curTheme.colorTextField;
         self.font = [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.font.pointSize];
         
         self.itemWidth = 0;
         self.itemHeight = 30;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTheme:)
+                                                     name:@"AMThemeChanged"
+                                                   object:nil];
         
         [self addTrackingRect:self.bounds owner:self userData:nil assumeInside:NO];
         
@@ -285,6 +291,15 @@
 -(NSUInteger)itemCount
 {
     return [[self popUpMenuController] itemCount];
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    //Update text properties
+    _curTheme = [AMTheme sharedInstance];
+    
+    self.textColor = _curTheme.colorTextField;
+    
+    [self setNeedsDisplay:YES];
 }
 
 -(void)dealloc

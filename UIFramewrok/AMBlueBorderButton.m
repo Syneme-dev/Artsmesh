@@ -17,6 +17,13 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTheme:)
+                                                     name:@"AMThemeChanged"
+                                                   object:nil];
+        
+        self.curTheme = [AMTheme sharedInstance];
+        self.textColor = self.curTheme.colorText;
         
         [AMButtonHandler changeTabTextColor:self toColor:[NSColor whiteColor]];
         [self.cell setImageDimsWhenDisabled:NO];
@@ -53,6 +60,18 @@
     [super drawRect:dirtyRect];
 }
 
+- (void) changeTheme:(NSNotification *) notification {
+    //Update text properties
+    self.curTheme = [AMTheme sharedInstance];
+    
+    self.textColor = _curTheme.colorText;
+    [self setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 @end

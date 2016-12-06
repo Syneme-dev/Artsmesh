@@ -39,6 +39,8 @@
     NSMutableArray* _syClients;
     AMSyphonViewRouterController*   _syServer;
     AMSyphonTearOffController*      _syTearOff;
+    
+    Boolean                         _running;
 }
 
 - (id) initWithClientCount : (NSUInteger) cnt
@@ -144,6 +146,8 @@
     for (AMSyphonViewController* ctrl in _syClients) {
         [ctrl stop];
     }
+    
+    _running = NO;
 }
 
 
@@ -202,14 +206,6 @@
 -(BOOL)startRouter{
     
     return YES;
-}
-
--(void)stopRouter{
-    
-}
-
--(void)stopAll{
-    
 }
 
 

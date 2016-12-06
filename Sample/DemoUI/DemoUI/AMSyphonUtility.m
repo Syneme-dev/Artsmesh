@@ -8,6 +8,10 @@
 
 #import "AMSyphonUtility.h"
 
+
+NSString* AMSyphonMixerClientChange = @"AMSyphonMixerClientChange";
+
+
 @implementation AMSyphonUtility
 
 +(NSArray *) getSyphonDeviceList
@@ -58,6 +62,14 @@
     }
         
     return serverNames;
+}
+
++(NSArray *) getSyphonClientsList
+{
+    NSMutableArray* syphonClients = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    
+    return syphonClients;
 }
 
 @end

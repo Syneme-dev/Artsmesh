@@ -198,5 +198,9 @@ NSString* kNonServer = @"    --    ";
     self.currentServerName = sender.selectedItem.title;
 }
 
+-(NSString*) selectedSyphonServerName
+{
+    return _currSelection;
+}
 
 @end

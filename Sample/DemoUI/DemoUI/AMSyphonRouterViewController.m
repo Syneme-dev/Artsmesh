@@ -86,17 +86,27 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:4.0
-                                              target:self
-                                            selector:@selector(refreshSyphonDevices)
-                                            userInfo:nil
-                                             repeats:YES];
-    
     _syphonServers = [[AMVideoDeviceManager alloc] init];
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(syphonClientChanging)
+               name:AMSyphonMixerClientChange
+             object:nil];
+    
+    [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 
--(void) refreshSyphonDevices
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
+{
+    [self refreshSyphonServers];
+}
+
+-(void) refreshSyphonServers
 {
     int interval = 4;
     NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
@@ -142,6 +152,10 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
 }
 
+-(void) syphonClientChanging
+{
+    
+}
 
 
 -(void)dealloc

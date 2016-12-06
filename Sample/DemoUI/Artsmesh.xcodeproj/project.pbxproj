@@ -2006,6 +2006,11 @@
 		4F12A2B81D2A3CDA008713F5 /* P2PVideo */ = {
 			isa = PBXGroup;
 			children = (
+				AFD3479A195BEF720055043E /* AMMainOutputViewController.h */,
+				AFD3479B195BEF720055043E /* AMMainOutputViewController.m */,
+				AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */,
+				CE486AA11A280CB900D35B82 /* AMVideoMixerBackgroundView.h */,
+				CE486AA21A280CB900D35B82 /* AMVideoMixerBackgroundView.m */,
 				4F987E7F1CE1B9A8006960FB /* AMP2PVideoView.h */,
 				4F987E801CE1B9A8006960FB /* AMP2PVideoView.m */,
 				4FC399601CA3D61000BB164B /* AMP2PViewController.h */,
@@ -2218,16 +2223,11 @@
 		CE486A941A280C9A00D35B82 /* video */ = {
 			isa = PBXGroup;
 			children = (
-				4F12A2B91D2A3CE7008713F5 /* SyphonVideo */,
-				4F12A2B81D2A3CDA008713F5 /* P2PVideo */,
-				AFD3479A195BEF720055043E /* AMMainOutputViewController.h */,
-				AFD3479B195BEF720055043E /* AMMainOutputViewController.m */,
-				AFD3479C195BEF720055043E /* AMMainOutputViewController.xib */,
-				CE486AA11A280CB900D35B82 /* AMVideoMixerBackgroundView.h */,
-				CE486AA21A280CB900D35B82 /* AMVideoMixerBackgroundView.m */,
 				CE486AA31A280CB900D35B82 /* AMVideoMixerViewController.h */,
 				CE486AA41A280CB900D35B82 /* AMVideoMixerViewController.m */,
 				CE486AA51A280CB900D35B82 /* AMVideoMixerViewController.xib */,
+				4F12A2B91D2A3CE7008713F5 /* SyphonVideo */,
+				4F12A2B81D2A3CDA008713F5 /* P2PVideo */,
 			);
 			name = video;
 			sourceTree = "<group>";

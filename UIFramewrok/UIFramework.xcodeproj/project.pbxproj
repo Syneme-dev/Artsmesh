@@ -22,6 +22,10 @@
 		26CEAE8E197380F600DF285F /* AMCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CEAE8C197380F600DF285F /* AMCheckBoxView.m */; };
 		2D9B7F331D3F2F650018580A /* AMTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D9B7F311D3F2F650018580A /* AMTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D9B7F341D3F2F650018580A /* AMTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9B7F321D3F2F650018580A /* AMTheme.m */; };
+		2DA43CCD1DEF9A630096373F /* AMFoundryFontFieldLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA43CCB1DEF9A630096373F /* AMFoundryFontFieldLabelView.h */; };
+		2DA43CCE1DEF9A630096373F /* AMFoundryFontFieldLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA43CCC1DEF9A630096373F /* AMFoundryFontFieldLabelView.m */; };
+		2DC1B6561DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */; };
+		2DC1B6571DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */; };
 		4A207A6F1A875D8E006F4FA2 /* AMTextFieldView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A207A701A875D8E006F4FA2 /* AMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */; };
 		4A776D241A7886FB00281F46 /* AMCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A776D221A7886FB00281F46 /* AMCollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,6 +99,10 @@
 		26CEAE8C197380F600DF285F /* AMCheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMCheckBoxView.m; sourceTree = "<group>"; };
 		2D9B7F311D3F2F650018580A /* AMTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTheme.h; sourceTree = "<group>"; };
 		2D9B7F321D3F2F650018580A /* AMTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTheme.m; sourceTree = "<group>"; };
+		2DA43CCB1DEF9A630096373F /* AMFoundryFontFieldLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMFoundryFontFieldLabelView.h; path = UIFramewrok/AMFoundryFontFieldLabelView.h; sourceTree = "<group>"; };
+		2DA43CCC1DEF9A630096373F /* AMFoundryFontFieldLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMFoundryFontFieldLabelView.m; path = UIFramewrok/AMFoundryFontFieldLabelView.m; sourceTree = "<group>"; };
+		2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFoundryFontFieldTextView.h; sourceTree = "<group>"; };
+		2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFoundryFontFieldTextView.m; sourceTree = "<group>"; };
 		4A207A6D1A875D8E006F4FA2 /* AMTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTextFieldView.h; sourceTree = "<group>"; };
 		4A207A6E1A875D8E006F4FA2 /* AMTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTextFieldView.m; sourceTree = "<group>"; };
 		4A776D221A7886FB00281F46 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMCollectionView.h; sourceTree = "<group>"; };
@@ -190,6 +198,8 @@
 		AF00D42C18C9B5E6004DE9E6 = {
 			isa = PBXGroup;
 			children = (
+				2DC1B6541DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h */,
+				2DC1B6551DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m */,
 				2D9B7F311D3F2F650018580A /* AMTheme.h */,
 				2D9B7F321D3F2F650018580A /* AMTheme.m */,
 				4FD498C41B6A16BA00427866 /* AMFakeBox.h */,
@@ -236,6 +246,8 @@
 				CEC27F0A1993877E0023163F /* AMTextFieldCell.m */,
 				AF82E352190CA9680083487C /* AMFoundryFontView.h */,
 				AF82E353190CA9680083487C /* AMFoundryFontView.m */,
+				2DA43CCB1DEF9A630096373F /* AMFoundryFontFieldLabelView.h */,
+				2DA43CCC1DEF9A630096373F /* AMFoundryFontFieldLabelView.m */,
 				26253DD0193C24B100AFFC83 /* AMFoundryFontTextView.h */,
 				26253DD1193C24B100AFFC83 /* AMFoundryFontTextView.m */,
 				AFB34F6819065C1400092E33 /* AMButtonHandler.h */,
@@ -324,7 +336,9 @@
 				CE883169192C52EA00DA17CE /* AMPanelView.h in Headers */,
 				26253DD2193C24B100AFFC83 /* AMFoundryFontTextView.h in Headers */,
 				AF82E354190CA9680083487C /* AMFoundryFontView.h in Headers */,
+				2DA43CCD1DEF9A630096373F /* AMFoundryFontFieldLabelView.h in Headers */,
 				AF3A729318C9B6B100DB7BA1 /* AMDragDropView.h in Headers */,
+				2DC1B6561DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.h in Headers */,
 				CE25C50F19775960003A8B39 /* AMBorderView.h in Headers */,
 				4F15723E1AB195B700945397 /* AMTimerView.h in Headers */,
 				AFAA502418EC1375009286F4 /* AMMovableWindow.h in Headers */,
@@ -377,6 +391,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Artsmesh;
+				TargetAttributes = {
+					AF00D43518C9B5E6004DE9E6 = {
+						LastSwiftMigration = 0810;
+					};
+				};
 			};
 			buildConfigurationList = AF00D43018C9B5E6004DE9E6 /* Build configuration list for PBXProject "UIFramework" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -419,6 +438,7 @@
 				2658877B19899ABA001DA266 /* AMPopUpView.m in Sources */,
 				26253DD3193C24B100AFFC83 /* AMFoundryFontTextView.m in Sources */,
 				4FBBCB161A4FE43600DF4C3E /* AMRatioButtonView.m in Sources */,
+				2DA43CCE1DEF9A630096373F /* AMFoundryFontFieldLabelView.m in Sources */,
 				2658877F19899ABA001DA266 /* AMPopUpMenuController.m in Sources */,
 				AFF79DBC1B5B823E000A95DF /* AMBlueBorderButtonCell.m in Sources */,
 				AFB34F6B19065C1400092E33 /* AMButtonHandler.m in Sources */,
@@ -440,6 +460,7 @@
 				AF2890E1198A398A00D05174 /* AMBlueButton.m in Sources */,
 				AF82E355190CA9680083487C /* AMFoundryFontView.m in Sources */,
 				AF3A729418C9B6B100DB7BA1 /* AMDragDropView.m in Sources */,
+				2DC1B6571DF4DFF4007AA0ED /* AMFoundryFontFieldTextView.m in Sources */,
 				4A776D2A1A78873300281F46 /* NSView_Constrains.m in Sources */,
 				01D059B41A2D5A3600BC51E7 /* AMBigBlueButton.m in Sources */,
 				AF7DF6EA1904C26E00554E6F /* AMMaxSizeView.m in Sources */,
@@ -533,7 +554,9 @@
 		AF00D45F18C9B5E6004DE9E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -546,7 +569,10 @@
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";
 				INFOPLIST_FILE = "UIFramewrok/UIFramework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = UIFramework;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -554,7 +580,9 @@
 		AF00D46018C9B5E6004DE9E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -567,7 +595,9 @@
 				GCC_PREFIX_HEADER = "UIFramewrok/UIFramework-Prefix.pch";
 				INFOPLIST_FILE = "UIFramewrok/UIFramework-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = UIFramework;
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

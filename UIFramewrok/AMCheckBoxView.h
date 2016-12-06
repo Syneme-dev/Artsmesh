@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTheme.h"
 
 #define AM_CHECKBOX_CHANGED @"AM_CHECKBOX_CHANGED"
 
@@ -23,6 +24,9 @@
 @property NSColor* btnColor;
 @property BOOL readOnly;
 @property BOOL drawBackground;
+
+@property (strong) AMTheme *curTheme;
+@property (strong) NSColor *curTextColor;
 
 @property (weak) IBOutlet id<AMCheckBoxDelegeate>delegate;
 

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMTheme.h"
 
 #define AMPopUpWillShowNotification @"AMPopUpWillShowNotification"
 
@@ -21,6 +22,7 @@
 @property CGFloat itemHeight;
 @property CGFloat itemWidth;
 
+@property (strong) AMTheme *curTheme;
 @property(nonatomic, weak) IBOutlet id<AMPopUpViewDelegeate> delegate;
 @property(nonatomic, readonly) NSInteger indexOfSelectedItem;
 -(NSString*)stringValue;

@@ -26,6 +26,14 @@
 }
 
 -(void)awakeFromNib{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTheme:)
+                                                 name:@"AMThemeChanged"
+                                               object:nil];
+    
+    self.curTheme = [AMTheme sharedInstance];
+    self.textColor = self.curTheme.colorTextPanelTab;
+    self.textColorSelected = self.curTheme.colorTextPanelTabSelected;
     [self registerTabButtons];
 }
 
@@ -38,6 +46,7 @@
 
 - (void)pushDownButton:(NSButton *)button
 {
+    
     static NSFont *buttonFont = nil;
     static NSColor *buttonColor = nil;
     static NSColor *pushedDownButtonColor = nil;
@@ -45,11 +54,15 @@
     if (!buttonFont) {
         buttonFont = [NSFont fontWithName: @"FoundryMonoline-Medium"
                                      size: button.font.pointSize];
+        /**
         buttonColor = [NSColor colorWithCalibratedRed:(46)/255.0f
                                                 green:(58)/255.0f
                                                  blue:(75)/255.0f
                                                 alpha:1.0f];
-        pushedDownButtonColor = [NSColor lightGrayColor];
+        **/
+        //pushedDownButtonColor = [NSColor lightGrayColor];
+        buttonColor = self.textColor;
+        pushedDownButtonColor = self.textColorSelected;
     }
     
     // Set font alignment
@@ -83,6 +96,7 @@
                             range:[self calculateTextRange:button.title]];
     button.attributedTitle = attributedTitle;
     
+    [self.currentPushedDownButton setNeedsDisplay:YES];
 }
 
 - (NSRange)calculateTextRange:(NSString *)title
@@ -103,6 +117,23 @@
         }
     }
     return range;
+}
+
+- (void) changeTheme:(NSNotification *) notification {
+    //Update text properties
+    _curTheme = [AMTheme sharedInstance];
+    
+    _textColor = _curTheme.colorTextPanelTab;
+    _textColorSelected = _curTheme.colorTextPanelTabSelected;
+    
+    [self pushDownButton:self.currentPushedDownButton];
+    
+    [self.view setNeedsDisplay:YES];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

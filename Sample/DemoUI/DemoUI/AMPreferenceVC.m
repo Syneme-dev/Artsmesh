@@ -44,12 +44,17 @@
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-    [AMButtonHandler changeTabTextColor:self.generalTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.accountTabBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.videoTabBtn toColor:UI_Color_blue];
+    
+    self.curTheme = [AMTheme sharedInstance];
+    self.textColor = self.curTheme.colorTextPanelTab;
+    self.textColorSelected = self.curTheme.colorTextPanelTabSelected;
+    
+    [AMButtonHandler changeTabTextColor:self.generalTabBtn toColor:self.textColor];
+    [AMButtonHandler changeTabTextColor:self.oscGroupTabBtn  toColor:self.textColor];
+    [AMButtonHandler changeTabTextColor:self.jackTabBtn toColor:self.textColor];
+    [AMButtonHandler changeTabTextColor:self.jacktripTabBtn toColor:self.textColor];
+    [AMButtonHandler changeTabTextColor:self.accountTabBtn toColor:self.textColor];
+    [AMButtonHandler changeTabTextColor:self.videoTabBtn toColor:self.textColor];
     
     [self loadPrefViews];
     [self onGeneralClick:self.generalTabBtn];
@@ -195,6 +200,15 @@
     [self.tabs selectTabViewItemAtIndex:5];
 }
 
-
+- (void) changeTheme:(NSNotification *) notification {
+    
+    [super changeTheme:notification];
+    
+    //Update text properties
+    self.curTheme = [AMTheme sharedInstance];
+    
+    self.textColor = self.curTheme.colorTextPanelTab;
+    self.textColorSelected = self.curTheme.colorTextPanelTabSelected;
+}
 
 @end

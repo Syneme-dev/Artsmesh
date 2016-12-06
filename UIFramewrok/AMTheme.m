@@ -65,6 +65,8 @@
     self.colorTextSuccess = UI_Color_Green;
     self.colorTextField = UI_Color_White;
     self.colorTextFieldLabel = UI_Color_Light_Grey;
+    self.colorTextPanelTab = UI_Color_Blue;
+    self.colorTextPanelTabSelected = UI_Color_Light_Grey;
     
     // Set default theme fonts
     self.fontHeader = [fontManager fontWithFamily:@"FoundryMonoline" traits:NSItalicFontMask weight:8 size:12.0];
@@ -135,6 +137,8 @@
     NSColor *newColorTextSuccess;
     NSColor *newColorTextField;
     NSColor *newColorTextFieldLabel;
+    NSColor *newColorTextPanelTab;
+    NSColor *newColorTextPanelTabSelected;
     
     NSFontManager *fontManager = [NSFontManager sharedFontManager];
     NSFont *newFontHeader;
@@ -193,18 +197,27 @@
     newColorTextSuccess = UI_Color_Green;
     newColorTextField = UI_Color_White;
     newColorTextFieldLabel = UI_Color_Light_Grey;
+    newColorTextPanelTab = UI_Color_Blue;
+    newColorTextPanelTabSelected = UI_Color_Light_Grey;
     
     
     if ( [themeName isEqualToString:@"light"] ) {
         self.themeType = themeName;
         
         // Configure variables to match light theme
-        newColorBackground = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
-        newColorBackgroundHover = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
+        NSColor *lightGrey = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
+        NSColor *lightBlue = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
+        NSColor *lightRed = [NSColor colorWithCalibratedRed:(237)/255.0f green:(28)/255.0f blue:(36)/255.0f alpha:1.0f];
+        
+        newColorBackground = lightGrey;
+        newColorBackgroundHover = lightBlue;
+        
         newColorText = UI_Color_Grey_Primary;
         newColorTextFieldLabel = UI_Color_Gray;
         newColorTextField = UI_Color_Black;
         newColorBorder = UI_Color_Gray;
+        newColorTextPanelTab = lightBlue;
+        newColorTextPanelTabSelected = lightRed;
         
         // Define light theme images
         newImagePanelBtnManual = [NSImage imageNamed:UI_Image_Panel_Btn_Manual];
@@ -267,6 +280,8 @@
     self.colorTextSuccess = newColorTextSuccess;
     self.colorTextField = newColorTextField;
     self.colorTextFieldLabel = newColorTextFieldLabel;
+    self.colorTextPanelTab = newColorTextPanelTab;
+    self.colorTextPanelTabSelected = newColorTextPanelTabSelected;
     
     // Set theme fonts
     self.fontHeader = newFontHeader;

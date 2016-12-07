@@ -9,7 +9,7 @@
 #import "AMSyphonUtility.h"
 
 
-NSString* AMSyphonMixerClientChange = @"AMSyphonMixerClientChange";
+
 
 
 @implementation AMSyphonUtility

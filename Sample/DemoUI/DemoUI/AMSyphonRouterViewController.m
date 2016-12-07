@@ -13,6 +13,7 @@
 #import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonUtility.h"
+#import "AMSyphonClientsManager.h"
 
 
 @interface AMSyphonRouterViewController ()  <NSPopoverDelegate>

@@ -9,7 +9,7 @@
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
 #import "AMSyphonCamera.h"
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()

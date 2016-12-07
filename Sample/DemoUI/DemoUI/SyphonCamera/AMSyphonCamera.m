@@ -7,7 +7,7 @@
 //
 
 #import "AMSyphonCamera.h"
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
 
 @implementation AMSyphonCamera
 

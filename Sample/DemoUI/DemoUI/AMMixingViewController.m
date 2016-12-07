@@ -64,7 +64,7 @@
 
 -(void)viewWillDisappear
 {
-    [_videoMixerViewController.syphonManager stopAll];
+    [_videoMixerViewController.syphonClientsManager stopAll];
 }
 
 -(void)loadTabViews

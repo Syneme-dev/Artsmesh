@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 WhiskyZed. All rights reserved.
 //
 
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
+
+NSString* AMSyphonMixerClientChange = @"AMSyphonMixerClientChange";
 
 #pragma mark -
 #pragma   mark AMSyphonName implementation
@@ -34,13 +36,30 @@
 
 #pragma mark -
 #pragma   mark AMSyphonManager implementation
-@implementation AMSyphonManager
+@implementation AMSyphonClientsManager
 {
     NSMutableArray* _syClients;
     AMSyphonViewRouterController*   _syServer;
     AMSyphonTearOffController*      _syTearOff;
-    
     Boolean                         _running;
+}
+
+static id sharedInstance = nil;
+
++(Boolean) hasBeenInitialized
+{
+    return sharedInstance == nil;
+}
+
++(instancetype) sharedInstance : (NSUInteger) cnt{
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[AMSyphonClientsManager alloc] initWithClientCount:cnt];
+    });
+    
+    return sharedInstance;
 }
 
 - (id) initWithClientCount : (NSUInteger) cnt
@@ -104,7 +123,6 @@
 
 - (NSView*) tearOffView
 {
-    
     return _syTearOff.view;
 }
 
@@ -134,8 +152,6 @@
         
         //tearOff
         [_syTearOff selectNewServer:[_syServer currentServer]];
-  //      _syTearOff.currentServerName = serverName;
-  //      [_syTearOff start];
     }
 }
 
@@ -155,6 +171,27 @@
 {
     return [_syServer routing];
 }
+
+-(void) syphonClientsName : (NSMutableArray*) array
+{
+    for (AMSyphonViewController* viewCtrl in _syClients) {
+        [array addObject:[viewCtrl selectedSyphonServerName]];
+    }
+}
+
++(NSArray*) syphonClientsName
+{
+    if(![AMSyphonClientsManager hasBeenInitialized])
+        return nil;
+    
+    NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    AMSyphonClientsManager* syphonClients =  sharedInstance;
+    [syphonClients syphonClientsName:names];
+    
+    return names;
+}
+
 
 @end
 
@@ -207,6 +244,5 @@
     
     return YES;
 }
-
 
 @end

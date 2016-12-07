@@ -34,14 +34,17 @@
 
 -(void)viewWillDraw
 {
-
+    self.curTheme = [AMTheme sharedInstance];
+    self.textColor = self.curTheme.colorBorder;
+    
     [self.layer setBorderWidth:1.0];
+    /**
     [self.layer setBorderColor: UI_Color_b7b7b7.CGColor];
  [AMButtonHandler changeTabTextColor:self toColor:UI_Color_b7b7b7];
-    /**
+    NSLog(@"btn border color: %@",self.textColor.CGColor);
+    **/
     [self.layer setBorderColor:self.textColor.CGColor];
     [AMButtonHandler changeTabTextColor:self toColor:self.textColor];
-     **/
     // Drawing code here.
     if(!self.enabled){
 //        [self.layer setBorderWidth:1.0] ;

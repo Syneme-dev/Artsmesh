@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMOSCGroupSettingsVC">
@@ -78,7 +79,7 @@
                                         </textFieldCell>
                                         <accessibility description="MaxUserEditor"/>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Be-lw-Bm2" userLabel="Text_Username" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Be-lw-Bm2" userLabel="Text_Username" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="427" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="1yL-7s-oca"/>
@@ -90,7 +91,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zZw-h6-jfi" userLabel="Text_ServerAddr" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zZw-h6-jfi" userLabel="Text_ServerAddr" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="180" y="577" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="396" id="DFj-Sm-KKD"/>
@@ -102,7 +103,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NST-1U-VVY" userLabel="Text_LocalPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NST-1U-VVY" userLabel="Text_LocalPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="517" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Era-9v-R1Z"/>
@@ -114,7 +115,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-PW-JHb" userLabel="text_serverPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-PW-JHb" userLabel="text_serverPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="737" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="UBQ-OK-tbb"/>
@@ -126,7 +127,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wz2-7W-A7S" userLabel="Text_listenPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wz2-7W-A7S" userLabel="Text_listenPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="457" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="123" id="XfH-hb-o31"/>
@@ -138,7 +139,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTZ-fO-b26" userLabel="text_groupname" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTZ-fO-b26" userLabel="text_groupname" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="367" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="396" id="JBx-X8-CuN"/>
@@ -150,7 +151,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YfY-eF-kib" userLabel="text_sendPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YfY-eF-kib" userLabel="text_sendPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="487" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="QHR-YM-bbr"/>
@@ -162,7 +163,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="748-Mh-GGA" userLabel="text_password" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="748-Mh-GGA" userLabel="text_password" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="397" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="XXh-Sz-s2a"/>
@@ -174,7 +175,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-a7-2Zo" userLabel="text_serverPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-a7-2Zo" userLabel="text_serverPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="547" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="123" id="JuU-AF-N8T"/>
@@ -186,7 +187,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="04l-5I-Dgw" userLabel="text_maxGroup" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="04l-5I-Dgw" userLabel="text_maxGroup" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="647" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="QWx-ta-TPl"/>
@@ -198,7 +199,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dny-zN-ZGQ" userLabel="text_groupPassword" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dny-zN-ZGQ" userLabel="text_groupPassword" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="337" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="uMw-QC-JvJ"/>
@@ -210,7 +211,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SVa-Eg-3vh" userLabel="text_clientMonitorPort" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SVa-Eg-3vh" userLabel="text_clientMonitorPort" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="277" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="123" id="NqC-qo-6kf"/>
@@ -222,7 +223,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bY8-NB-TZp" userLabel="text_monitorAddr" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bY8-NB-TZp" userLabel="text_monitorAddr" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="307" width="400" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="396" id="9Pg-m6-nfG"/>
@@ -234,7 +235,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pOR-IZ-a3Z" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pOR-IZ-a3Z" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="650" width="99" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="95" id="ASu-QD-odR"/>
@@ -246,7 +247,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsJ-xG-kOA" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RsJ-xG-kOA" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="680" width="86" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="82" id="2pg-Ey-O2K"/>
@@ -258,7 +259,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NfW-Dn-Une" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NfW-Dn-Une" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="710" width="71" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="iUV-Tq-XfJ"/>
@@ -270,7 +271,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-hb-qYt" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-hb-qYt" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="770" width="163" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="159" id="HoD-DT-Oyb"/>
@@ -282,7 +283,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uAf-qv-Lwt" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uAf-qv-Lwt" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="520" width="91" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="87" id="0f2-I6-mMM"/>
@@ -294,7 +295,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="85E-Ot-DRx" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="85E-Ot-DRx" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="340" width="137" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="133" id="GHH-W8-Vqo"/>
@@ -306,7 +307,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZZa-8R-NTA" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZZa-8R-NTA" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="740" width="43" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="39" id="Aff-Rn-IBG"/>
@@ -318,7 +319,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y3G-dT-UQC">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y3G-dT-UQC" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="610" width="220" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="216" id="Kth-I9-ksF"/>
@@ -330,7 +331,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJQ-tm-O4z" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJQ-tm-O4z" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="580" width="102" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="sKA-As-4O9"/>
@@ -342,7 +343,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8D2-YV-dUh" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8D2-YV-dUh" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="550" width="99" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="hYX-17-D5M"/>
@@ -354,7 +355,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PSW-T3-LO5" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PSW-T3-LO5" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="490" width="83" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="Zjb-Yx-ECL"/>
@@ -366,7 +367,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g3f-mD-DpU" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g3f-mD-DpU" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="460" width="93" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="Ara-nC-6PH"/>
@@ -378,7 +379,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zFA-6Y-xXB" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zFA-6Y-xXB" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="430" width="87" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="83" id="XDk-Kz-lqp"/>
@@ -390,7 +391,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z2r-6y-ezz" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z2r-6y-ezz" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="370" width="100" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="EZg-O6-BZ5"/>
@@ -402,7 +403,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LLB-wS-heU" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LLB-wS-heU" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="310" width="113" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="I15-OJ-ceV"/>
@@ -414,7 +415,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DHw-LH-2Et" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DHw-LH-2Et" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="280" width="110" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="106" id="ECN-Oj-l36"/>
@@ -426,7 +427,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="omB-YG-D2o" customClass="AMFoundryFontView">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="omB-YG-D2o" customClass="AMFoundryFontFieldLabelView">
                                         <rect key="frame" x="42" y="400" width="125" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="1sr-bO-N0A"/>
@@ -578,7 +579,7 @@
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="qoa-RW-bpZ"/>
                                     </imageView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FwS-k1-oaq" userLabel="text_timeOut" customClass="AMFoundryFontView">
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FwS-k1-oaq" userLabel="text_timeOut" customClass="AMFoundryFontFieldTextView">
                                         <rect key="frame" x="181" y="707" width="127" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="123" id="ZFt-LU-vhS"/>
@@ -715,7 +716,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="oDf-E6-dMX">
-                        <rect key="frame" x="608" y="0.0" width="15" height="807"/>
+                        <rect key="frame" x="607" y="0.0" width="16" height="807"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

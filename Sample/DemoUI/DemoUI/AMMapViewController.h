@@ -28,7 +28,6 @@
 @property (strong) IBOutlet NSButton *liveTab;
 - (IBAction)liveTabClick:(id)sender;
 @property  float archiveScale;
-@property AMTheme *curTheme;
 
 @property AMFloatPanelViewController *floatPanelViewController;
 @property NSWindow *archiveFloatWindow;

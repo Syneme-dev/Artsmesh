@@ -70,6 +70,8 @@
 @property (strong) NSColor *colorTextSuccess;
 @property (strong) NSColor *colorTextField;
 @property (strong) NSColor *colorTextFieldLabel;
+@property (strong) NSColor *colorTextPanelTab;
+@property (strong) NSColor *colorTextPanelTabSelected;
 
 @property (strong) NSColor *colorBorder;
 @property (strong) NSColor *colorBorderAlert;

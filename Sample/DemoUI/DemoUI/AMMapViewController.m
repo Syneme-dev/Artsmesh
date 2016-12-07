@@ -56,7 +56,7 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     
-    _curTheme = [AMTheme sharedInstance];
+    self.curTheme = [AMTheme sharedInstance];
     self.archiveScale=1;
     [self.tabs setAutoresizesSubviews:YES];
     [self.archiveWebView setFrameLoadDelegate:self];
@@ -71,7 +71,7 @@
     
     [self createArchiveFloatWindow];
     
-    _curTheme = [AMTheme sharedInstance];
+    self.curTheme = [AMTheme sharedInstance];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeTheme:)
@@ -185,7 +185,7 @@
     statusNetURLString= [defaults stringForKey:Preference_Key_StatusNet_URL];
     NSURL *mapURL = [NSURL URLWithString:
                      [NSString stringWithFormat:@"%@/app/archive-events.php?fromMac=true",statusNetURLString ]];
-    if ([_curTheme.themeType isEqualToString:@"light"]) {
+    if ([self.curTheme.themeType isEqualToString:@"light"]) {
         mapURL = [NSURL URLWithString:
                   [NSString stringWithFormat:@"%@/app/archive-events.php?fromMac=true&curTheme=light",statusNetURLString ]];
     }

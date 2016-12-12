@@ -143,13 +143,9 @@ shouldRemoveDevice:(NSString *)deviceID;
         [routeView associateChannels:channels
                           withDevice:syphonName
                                 name:syphonName
-                            removable:YES];
+                            removable:NO];
     }
     
-    
-    //3rd step: add clients and add connections.
-    _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
-    [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
     
     
     //4th step:
@@ -159,8 +155,29 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void) syphonClientChanged
 {
+    AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
     
- 
+    // step: add clients and add connections.
+    _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
+    [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
+    
+    NSMutableArray* clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
+
+    
+    //SELF Area of placeholder.
+    for(int i = 0; i < 5; i++){
+        AMChannel* _nilChannel = [[AMChannel alloc] init];
+        _nilChannel.deviceID     = @"";
+        _nilChannel.channelName  = @"";
+        _nilChannel.index = i;
+        [clientChannels addObject:_nilChannel];
+    }
+    
+    [routeView associateChannels:clientChannels
+                      withDevice:@"Mixer Channel"
+                            name:@"Mixer Channel"
+                       removable:NO];
+
     
 }
 

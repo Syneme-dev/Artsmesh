@@ -24,6 +24,8 @@
 {
     AMVideoDeviceManager*   _syphonServers;
     NSTimer*    _timer;
+    NSArray*        _serverNames;
+    NSArray*        _selectedNamesByClients;
 }
 
 
@@ -91,11 +93,14 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
-           selector:@selector(syphonClientChanging)
-               name:AMSyphonMixerClientChange
+           selector:@selector(syphonClientChanged)
+               name:AMSyphonMixerClientChanged
              object:nil];
     
-    [[SyphonServerDirectory sharedDirectory] addObserver:self forKeyPath:@"servers" options:NSKeyValueObservingOptionNew context:nil];
+    [[SyphonServerDirectory sharedDirectory] addObserver:self
+                                              forKeyPath:@"servers"
+                                                 options:NSKeyValueObservingOptionNew
+                                                 context:nil];
 }
 
 
@@ -110,9 +115,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void) refreshSyphonServers
 {
     int interval = 4;
-    NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
-//    if([devices count] <= 0)
-//        return;
+    _serverNames = [AMSyphonUtility getSyphonDeviceList];
     
     AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
     
@@ -121,9 +124,9 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     
     //2nd step: Add all syphon servers.
-    for (NSUInteger i = 0; i < [devices count]; i++) {
+    for (NSUInteger i = 0; i < [_serverNames count]; i++) {
         
-        NSString* syphonName = [devices objectAtIndex:i];
+        NSString* syphonName = [_serverNames objectAtIndex:i];
         
         int channelIndex = START_INDEX + i* interval;
       
@@ -142,19 +145,24 @@ shouldRemoveDevice:(NSString *)deviceID;
                             removable:YES];
         
     }
-}
-
--(void) addRemoveObjectsInStringArray:(NSArray*) newArray
-{
-    //remove Objects which aren't in the new array.
-    for(NSString* name in newArray) {
-        //
+    
+    //3rd step: add clients and add connections.
+    _selectedNamesByClients = [AMSyphonClientsManager selectedSyphonServerNames];
+    
+ 
+    for (NSString* selectedName in _selectedNamesByClients) {
         
     }
+    
+    //4th step:
+    
 }
 
--(void) syphonClientChanging
+
+-(void) syphonClientChanged
 {
+    
+ 
     
 }
 

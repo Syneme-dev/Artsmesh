@@ -8,7 +8,7 @@
 
 #import "AMSyphonClientsManager.h"
 
-NSString* AMSyphonMixerClientChange = @"AMSyphonMixerClientChange";
+NSString* AMSyphonMixerClientChanged = @"AMSyphonMixerClientChanged";
 
 #pragma mark -
 #pragma   mark AMSyphonName implementation
@@ -48,7 +48,20 @@ static id sharedInstance = nil;
 
 +(Boolean) hasBeenInitialized
 {
-    return sharedInstance == nil;
+    return (sharedInstance == nil);
+}
+
++(NSArray*) selectedSyphonServerNames
+{
+    if(sharedInstance == nil)
+        return nil;
+    
+    NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    AMSyphonClientsManager* syphonClients =  sharedInstance;
+    [syphonClients syphonClientsName:names];
+    
+    return names;
 }
 
 +(instancetype) sharedInstance : (NSUInteger) cnt{
@@ -179,18 +192,7 @@ static id sharedInstance = nil;
     }
 }
 
-+(NSArray*) syphonClientsName
-{
-    if(![AMSyphonClientsManager hasBeenInitialized])
-        return nil;
-    
-    NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:10];
-    
-    AMSyphonClientsManager* syphonClients =  sharedInstance;
-    [syphonClients syphonClientsName:names];
-    
-    return names;
-}
+
 
 
 @end

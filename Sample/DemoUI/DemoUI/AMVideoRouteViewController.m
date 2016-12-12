@@ -250,9 +250,11 @@ shouldRemoveDevice:(NSString *)deviceID;
             AMChannel* myChannel = [[AMChannel alloc] initWithIndex:index];
             myChannel.deviceID     = kAMMyself;
             myChannel.channelName  = kAMMyself;
-            [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index withObject:myChannel];
+            [_videoManager.myselfDevice.channels replaceObjectAtIndex:myChannel.index
+                                                           withObject:myChannel];
             
-            myChannel.type =  peerChannel.type == AMSourceChannel ? AMDestinationChannel : AMSourceChannel;
+            myChannel.type =  peerChannel.type == AMSourceChannel ?
+                                                    AMDestinationChannel : AMSourceChannel;
             
             [routeView associateChannels:_videoManager.myselfDevice.channels
                               withDevice:myChannel.deviceID

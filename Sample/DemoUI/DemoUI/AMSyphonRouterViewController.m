@@ -24,8 +24,8 @@
 {
     AMVideoDeviceManager*   _syphonServers;
     NSTimer*    _timer;
-    NSArray*        _serverNames;
-    NSArray*        _selectedNamesByClients;
+    NSMutableArray*        _serverNames;
+    NSMutableArray*        _selectedNamesByClients;
 }
 
 
@@ -115,7 +115,8 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void) refreshSyphonServers
 {
     int interval = 4;
-    _serverNames = [AMSyphonUtility getSyphonDeviceList];
+    _serverNames = [[NSMutableArray alloc] initWithCapacity:10];
+    [AMSyphonUtility getSyphonDeviceList:_serverNames];
     
     AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
     
@@ -125,12 +126,12 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     //2nd step: Add all syphon servers.
     for (NSUInteger i = 0; i < [_serverNames count]; i++) {
+        NSMutableArray *channels = [[NSMutableArray alloc] initWithCapacity:interval];
         
         NSString* syphonName = [_serverNames objectAtIndex:i];
         
         int channelIndex = START_INDEX + i* interval;
-      
-        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:interval  ];
+        
         for (int j = 0; j < interval; j++) {
             AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
                 channel.type    =  AMDestinationChannel;
@@ -143,16 +144,13 @@ shouldRemoveDevice:(NSString *)deviceID;
                           withDevice:syphonName
                                 name:syphonName
                             removable:YES];
-        
     }
+    
     
     //3rd step: add clients and add connections.
-    _selectedNamesByClients = [AMSyphonClientsManager selectedSyphonServerNames];
+    _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
+    [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
     
- 
-    for (NSString* selectedName in _selectedNamesByClients) {
-        
-    }
     
     //4th step:
     

@@ -51,17 +51,18 @@ static id sharedInstance = nil;
     return (sharedInstance == nil);
 }
 
-+(NSArray*) selectedSyphonServerNames
++(void) selectedSyphonServerNames : (NSMutableArray*) names
 {
     if(sharedInstance == nil)
-        return nil;
+        return;
     
-    NSMutableArray* names = [[NSMutableArray alloc] initWithCapacity:10];
+    //names = [[NSMutableArray alloc] initWithCapacity:10];
+    [names removeAllObjects];
     
     AMSyphonClientsManager* syphonClients =  sharedInstance;
     [syphonClients syphonClientsName:names];
     
-    return names;
+    return;
 }
 
 +(instancetype) sharedInstance : (NSUInteger) cnt{
@@ -185,10 +186,14 @@ static id sharedInstance = nil;
     return [_syServer routing];
 }
 
--(void) syphonClientsName : (NSMutableArray*) array
+-(void) syphonClientsName : (NSMutableArray*) names
 {
     for (AMSyphonViewController* viewCtrl in _syClients) {
-        [array addObject:[viewCtrl selectedSyphonServerName]];
+        NSString* name = [viewCtrl selectedSyphonServerName];
+        if(name == nil)
+            [names addObject:@""];
+        else
+            [names addObject:name];
     }
 }
 

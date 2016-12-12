@@ -33,7 +33,7 @@ extern NSString* AMSyphonMixerClientChanged;
 @interface AMSyphonClientsManager : NSObject
 +(instancetype) sharedInstance : (NSUInteger) cnt;
 +(Boolean) hasBeenInitialized;
-+(NSArray*) selectedSyphonServerNames;
++(void) selectedSyphonServerNames : (NSMutableArray*) names;
 
 -(id)initWithClientCount:(NSUInteger) cnt;
 

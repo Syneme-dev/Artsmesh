@@ -24,8 +24,9 @@
 {
     AMVideoDeviceManager*   _syphonServers;
     NSTimer*    _timer;
-    NSMutableArray*        _serverNames;
-    NSMutableArray*        _selectedNamesByClients;
+    NSMutableArray*         _serverNames;
+    NSMutableArray*         _selectedNamesByClients;
+    NSMutableDictionary*    _serverNamesChannels;
 }
 
 
@@ -112,8 +113,12 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self refreshSyphonServers];
 }
 
+
+
 -(void) refreshSyphonServers
 {
+    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
     int interval = 4;
     _serverNames = [[NSMutableArray alloc] initWithCapacity:10];
     [AMSyphonUtility getSyphonDeviceList:_serverNames];
@@ -122,6 +127,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     //1st step: Remove deleted devices from device manager.
     [routeView removeALLDevice];
+    [_serverNamesChannels removeAllObjects];
     
     
     //2nd step: Add all syphon servers.
@@ -144,12 +150,12 @@ shouldRemoveDevice:(NSString *)deviceID;
                           withDevice:syphonName
                                 name:syphonName
                             removable:NO];
+        
+        //???
+        [_serverNamesChannels setObject:channels forKey:syphonName];
     }
     
-    
-    
-    //4th step:
-    
+    [self syphonClientChanged];
 }
 
 
@@ -165,27 +171,34 @@ shouldRemoveDevice:(NSString *)deviceID;
 
     
     //SELF Area of placeholder.
-    for(int i = 0; i < 5; i++){
-        AMChannel* _nilChannel = [[AMChannel alloc] init];
-        _nilChannel.deviceID     = @"";
-        _nilChannel.channelName  = @"";
-        _nilChannel.index = i;
-        [clientChannels addObject:_nilChannel];
+    for(int i = 0; i < [_selectedNamesByClients count]; i++){
+        
+        AMChannel* clientChannel  = [[AMChannel alloc] init];
+        clientChannel.index       = i;
+        
+        NSString* serverName = [_selectedNamesByClients objectAtIndex:i];
+        if([serverName isEqualToString:@""]){
+            clientChannel.deviceID     = @"";
+            clientChannel.channelName  = @"";
+        }
+        else{
+            clientChannel.deviceID     = serverName;
+            clientChannel.channelName  = serverName;
+            clientChannel.type         = AMSourceChannel;
+        }
+        [clientChannels addObject:clientChannel];
     }
     
     [routeView associateChannels:clientChannels
                       withDevice:@"Mixer Channel"
                             name:@"Mixer Channel"
                        removable:NO];
-
-    
 }
 
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

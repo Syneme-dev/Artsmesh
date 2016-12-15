@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <Syphon/Syphon.h>
+
+
+
 @interface AMSyphonUtility : NSObject
 //Get a array of all syphon devices' name
-+(NSArray *) getSyphonDeviceList;
++(void) getSyphonDeviceList : (NSMutableArray*) serverNames;
 
 @end

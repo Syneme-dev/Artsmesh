@@ -9,7 +9,7 @@
 #import "AMSyphonViewController.h"
 #import "AMSyphonView.h"
 #import "AMSyphonCamera.h"
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
 NSString* kNonServer = @"    --    ";
 
 @interface AMSyphonViewController ()
@@ -144,6 +144,11 @@ NSString* kNonServer = @"    --    ";
     [self stop ];
     _currSelection = sender.selectedItem.title;
     
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonMixerClientChanged
+                                                          object:nil
+                                                        userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
+    
     if ([sender.selectedItem.title isEqualToString:kNonServer]) {
         return;
     }
@@ -196,7 +201,17 @@ NSString* kNonServer = @"    --    ";
     }
     
     self.currentServerName = sender.selectedItem.title;
+    
+    //[notifCenter ]
+    
 }
 
+-(NSString*) selectedSyphonServerName
+{
+    if([_currSelection isEqualToString:kNonServer])
+        return nil;
+    else
+        return _currSelection;
+}
 
 @end

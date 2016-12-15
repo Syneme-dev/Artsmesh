@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AMTabPanelViewController.h"
+#import "UIFramework/AMTheme.h"
 
 @interface AMPreferenceVC : AMTabPanelViewController
 @property (retain) IBOutlet NSTabView *tabs;

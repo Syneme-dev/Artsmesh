@@ -8,11 +8,15 @@
 
 #import "AMSyphonUtility.h"
 
+
+
+
+
 @implementation AMSyphonUtility
 
-+(NSArray *) getSyphonDeviceList
++(void) getSyphonDeviceList : (NSMutableArray*) serverNames
 {
-    NSMutableArray*         serverNames     = [[NSMutableArray alloc] init];
+   // NSMutableArray*         serverNames     = [[NSMutableArray alloc] init];
     NSMutableDictionary*    _syServers      = [[NSMutableDictionary alloc] init];
     NSMutableDictionary*    _processCounter = [[NSMutableDictionary alloc] init];
         
@@ -57,7 +61,15 @@
         [serverNames addObject:title];
     }
         
-    return serverNames;
+    return;
+}
+
++(NSArray *) getSyphonClientsList
+{
+    NSMutableArray* syphonClients = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    
+    return syphonClients;
 }
 
 @end

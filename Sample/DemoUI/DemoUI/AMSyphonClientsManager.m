@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 WhiskyZed. All rights reserved.
 //
 
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
+
+NSString* AMSyphonMixerClientChanged = @"AMSyphonMixerClientChanged";
 
 #pragma mark -
 #pragma   mark AMSyphonName implementation
@@ -34,11 +36,44 @@
 
 #pragma mark -
 #pragma   mark AMSyphonManager implementation
-@implementation AMSyphonManager
+@implementation AMSyphonClientsManager
 {
     NSMutableArray* _syClients;
     AMSyphonViewRouterController*   _syServer;
     AMSyphonTearOffController*      _syTearOff;
+    Boolean                         _running;
+}
+
+static id sharedInstance = nil;
+
++(Boolean) hasBeenInitialized
+{
+    return (sharedInstance == nil);
+}
+
++(void) selectedSyphonServerNames : (NSMutableArray*) names
+{
+    if(sharedInstance == nil)
+        return;
+    
+    //names = [[NSMutableArray alloc] initWithCapacity:10];
+    [names removeAllObjects];
+    
+    AMSyphonClientsManager* syphonClients =  sharedInstance;
+    [syphonClients syphonClientsName:names];
+    
+    return;
+}
+
++(instancetype) sharedInstance : (NSUInteger) cnt{
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[AMSyphonClientsManager alloc] initWithClientCount:cnt];
+    });
+    
+    return sharedInstance;
 }
 
 - (id) initWithClientCount : (NSUInteger) cnt
@@ -102,7 +137,6 @@
 
 - (NSView*) tearOffView
 {
-    
     return _syTearOff.view;
 }
 
@@ -132,8 +166,6 @@
         
         //tearOff
         [_syTearOff selectNewServer:[_syServer currentServer]];
-  //      _syTearOff.currentServerName = serverName;
-  //      [_syTearOff start];
     }
 }
 
@@ -144,6 +176,8 @@
     for (AMSyphonViewController* ctrl in _syClients) {
         [ctrl stop];
     }
+    
+    _running = NO;
 }
 
 
@@ -151,6 +185,20 @@
 {
     return [_syServer routing];
 }
+
+-(void) syphonClientsName : (NSMutableArray*) names
+{
+    for (AMSyphonViewController* viewCtrl in _syClients) {
+        NSString* name = [viewCtrl selectedSyphonServerName];
+        if(name == nil)
+            [names addObject:@""];
+        else
+            [names addObject:name];
+    }
+}
+
+
+
 
 @end
 
@@ -203,14 +251,5 @@
     
     return YES;
 }
-
--(void)stopRouter{
-    
-}
-
--(void)stopAll{
-    
-}
-
 
 @end

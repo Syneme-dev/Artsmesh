@@ -103,12 +103,12 @@
     }
 }
 
-- (AMSyphonManager *)syphonManager
+- (AMSyphonClientsManager *)syphonManager
 {
-    if (!_syphonManager) {
-        _syphonManager = [[AMSyphonManager alloc] initWithClientCount:(int)self.smallViews.count/2];
+    if (!_syphonClientsManager) {
+        _syphonClientsManager = [AMSyphonClientsManager sharedInstance:(int)self.smallViews.count/2];
     }
-    return _syphonManager;
+    return _syphonClientsManager;
 }
 
 - (AMP2PViewManager *)p2pViewManager

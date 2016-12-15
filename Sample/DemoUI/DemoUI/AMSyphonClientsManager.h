@@ -13,6 +13,8 @@
 #import "AMP2PViewController.h"
 #import "AMSyphonView.h"
 
+extern NSString* AMSyphonMixerClientChanged;
+
 @interface AMP2PViewManager : NSObject
 -(id)initWithClientCount:(NSUInteger) cnt;
 -(AMP2PViewController*) clientViewControllerByIndex:(NSUInteger)index;
@@ -28,7 +30,10 @@
 +(BOOL)     isSyphonRouter:(NSString*)name;
 @end
 
-@interface AMSyphonManager : NSObject
+@interface AMSyphonClientsManager : NSObject
++(instancetype) sharedInstance : (NSUInteger) cnt;
++(Boolean) hasBeenInitialized;
++(void) selectedSyphonServerNames : (NSMutableArray*) names;
 
 -(id)initWithClientCount:(NSUInteger) cnt;
 
@@ -42,4 +47,6 @@
 
 -(BOOL)isSyphonServerStarted;
 
+//Get syphon clients' name
+-(void) syphonClientsName : (NSMutableArray*) array;
 @end

@@ -13,6 +13,7 @@
 #import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonUtility.h"
+#import "AMSyphonClientsManager.h"
 
 
 @interface AMSyphonRouterViewController ()  <NSPopoverDelegate>
@@ -23,6 +24,9 @@
 {
     AMVideoDeviceManager*   _syphonServers;
     NSTimer*    _timer;
+    NSMutableArray*         _serverNames;
+    NSMutableArray*         _selectedNamesByClients;
+    NSMutableDictionary*    _serverNamesChannels;
 }
 
 
@@ -86,37 +90,54 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void)awakeFromNib
 {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:4.0
-                                              target:self
-                                            selector:@selector(refreshSyphonDevices)
-                                            userInfo:nil
-                                             repeats:YES];
-    
     _syphonServers = [[AMVideoDeviceManager alloc] init];
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(syphonClientChanged)
+               name:AMSyphonMixerClientChanged
+             object:nil];
+    
+    [[SyphonServerDirectory sharedDirectory] addObserver:self
+                                              forKeyPath:@"servers"
+                                                 options:NSKeyValueObservingOptionNew
+                                                 context:nil];
 }
 
 
--(void) refreshSyphonDevices
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context
 {
+    [self refreshSyphonServers];
+}
+
+
+
+-(void) refreshSyphonServers
+{
+    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
     int interval = 4;
-    NSArray* devices = [AMSyphonUtility getSyphonDeviceList];
-//    if([devices count] <= 0)
-//        return;
+    _serverNames = [[NSMutableArray alloc] initWithCapacity:10];
+    [AMSyphonUtility getSyphonDeviceList:_serverNames];
     
     AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
     
     //1st step: Remove deleted devices from device manager.
     [routeView removeALLDevice];
+    [_serverNamesChannels removeAllObjects];
     
     
     //2nd step: Add all syphon servers.
-    for (NSUInteger i = 0; i < [devices count]; i++) {
+    for (NSUInteger i = 0; i < [_serverNames count]; i++) {
+        NSMutableArray *channels = [[NSMutableArray alloc] initWithCapacity:interval];
         
-        NSString* syphonName = [devices objectAtIndex:i];
+        NSString* syphonName = [_serverNames objectAtIndex:i];
         
         int channelIndex = START_INDEX + i* interval;
-      
-        NSMutableArray *channels = [NSMutableArray arrayWithCapacity:interval  ];
+        
         for (int j = 0; j < interval; j++) {
             AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
                 channel.type    =  AMDestinationChannel;
@@ -128,26 +149,56 @@ shouldRemoveDevice:(NSString *)deviceID;
         [routeView associateChannels:channels
                           withDevice:syphonName
                                 name:syphonName
-                            removable:YES];
+                            removable:NO];
         
+        //???
+        [_serverNamesChannels setObject:channels forKey:syphonName];
     }
+    
+    [self syphonClientChanged];
 }
 
--(void) addRemoveObjectsInStringArray:(NSArray*) newArray
+
+-(void) syphonClientChanged
 {
-    //remove Objects which aren't in the new array.
-    for(NSString* name in newArray) {
-        //
-        
-    }
-}
+    AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
+    
+    // step: add clients and add connections.
+    _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
+    [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
+    
+    NSMutableArray* clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
 
+    
+    //SELF Area of placeholder.
+    for(int i = 0; i < [_selectedNamesByClients count]; i++){
+        
+        AMChannel* clientChannel  = [[AMChannel alloc] init];
+        clientChannel.index       = i;
+        
+        NSString* serverName = [_selectedNamesByClients objectAtIndex:i];
+        if([serverName isEqualToString:@""]){
+            clientChannel.deviceID     = @"";
+            clientChannel.channelName  = @"";
+        }
+        else{
+            clientChannel.deviceID     = serverName;
+            clientChannel.channelName  = serverName;
+            clientChannel.type         = AMSourceChannel;
+        }
+        [clientChannels addObject:clientChannel];
+    }
+    
+    [routeView associateChannels:clientChannels
+                      withDevice:@"Mixer Channel"
+                            name:@"Mixer Channel"
+                       removable:NO];
+}
 
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

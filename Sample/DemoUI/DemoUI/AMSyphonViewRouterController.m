@@ -10,7 +10,7 @@
 #import "AMSyphonView.h"
 #import "Syphon/Syphon.h"
 #import "AMSyphonCamera.h"
-#import "AMSyphonManager.h"
+#import "AMSyphonClientsManager.h"
 
 @interface AMSyphonViewRouterController ()
 @property (weak) IBOutlet AMSyphonView *glView;
